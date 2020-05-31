@@ -20,7 +20,7 @@ const _SocialPageTopicsBlock: React.FC<Props> = ({ topics }) => {
         <h2>{t("Hot topics")}</h2>
       </Row>
       <Row large onlyOffset className={styles["social-page-topics"]}>
-        {topics.map(({ hashTag, impressionsCount, discussCount }) => (
+        {topics.map(({ hashTag, impressionsCount, discussCount }, index) => (
           <>
             <Row>
               <SocialPageTopicsItem
@@ -29,9 +29,11 @@ const _SocialPageTopicsBlock: React.FC<Props> = ({ topics }) => {
                 discussCount={discussCount}
               />
             </Row>
-            <Row>
-              <Separator />
-            </Row>
+            {index !== topics.length - 1 && (
+              <Row>
+                <Separator />
+              </Row>
+            )}
           </>
         ))}
       </Row>
