@@ -18,7 +18,7 @@ import {
   transformExecutionReport,
   transformKline,
   transformOutboundAccountInfo
-} from "./binance-ws.helpers";
+} from "./binance-spot-ws.helpers";
 
 export const BINANCE_WS_API_URL = "wss://stream.binance.com:9443";
 

@@ -1,10 +1,3 @@
-import {
-  depthSocket,
-  getUserStreamSocket,
-  klineSocket,
-  marketTicketsSocket,
-  tradeSocket
-} from "pages/trades/binance-trade-page/services/spot/binance-ws.service";
 import { ITerminalMethods } from "pages/trades/binance-trade-page/trading/trading.types";
 
 import {
@@ -20,7 +13,14 @@ import {
   getTrades,
   getUserStreamKey,
   tradeRequest
-} from "./binance-http.service";
+} from "./binance-spot-http.service";
+import {
+  depthSocket,
+  getUserStreamSocket,
+  klineSocket,
+  marketTicketsSocket,
+  tradeSocket
+} from "./binance-spot-ws.service";
 
 export const BinanceSpotTerminalMethods: ITerminalMethods = {
   getExchangeInfo,
