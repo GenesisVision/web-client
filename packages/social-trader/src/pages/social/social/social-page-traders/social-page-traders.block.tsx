@@ -17,11 +17,14 @@ const _SocialPageTradersBlock: React.FC<Props> = ({ assets }) => {
   return (
     <DefaultBlock wide solid>
       <Row>
-        <h2>{t("Top traders")}</h2>
+        <h2>{t("Top strategies")}</h2>
       </Row>
       <Row large onlyOffset className={styles["social-page-traders"]}>
         {assets.map(
-          ({ id, investorsCount, profitPercent, url, logoUrl, title }) => (
+          (
+            { id, investorsCount, profitPercent, url, logoUrl, title },
+            index
+          ) => (
             <>
               <Row>
                 <SocialPageTradersItem
@@ -33,9 +36,11 @@ const _SocialPageTradersBlock: React.FC<Props> = ({ assets }) => {
                   title={title}
                 />
               </Row>
-              <Row>
-                <Separator />
-              </Row>
+              {index !== assets.length - 1 && (
+                <Row>
+                  <Separator />
+                </Row>
+              )}
             </>
           )
         )}
