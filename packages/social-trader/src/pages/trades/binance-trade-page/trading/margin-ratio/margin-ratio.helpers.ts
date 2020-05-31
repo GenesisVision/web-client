@@ -23,9 +23,10 @@ export const getMarginRatioLoaderData = (): FuturesAsset => ({
 export const getMarginInfo = (
   balances: AssetBalance[],
   currency: TradeCurrency
-): FuturesAsset =>
-  safeGetElemFromArray(balances, ({ asset }) => asset === currency)
-    .futuresAsset as FuturesAsset;
+): FuturesAsset => {
+  const balance = balances.find(({ asset }) => asset === currency);
+  return balance?.futuresAsset || ({} as FuturesAsset);
+};
 
 export const getMarginRatioColor = (ratio: number): ColoredTextColor => {
   if (ratio <= 50) return "green";
