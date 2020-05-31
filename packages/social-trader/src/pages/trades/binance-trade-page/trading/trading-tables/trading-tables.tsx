@@ -8,7 +8,7 @@ import { FundsContainer } from "pages/trades/binance-trade-page/trading/trading-
 import { OpenOrdersContainer } from "pages/trades/binance-trade-page/trading/trading-tables/open-orders/open-orders.container";
 import { OrderHistoryContainer } from "pages/trades/binance-trade-page/trading/trading-tables/order-history/order-history.container";
 import { PositionsContainer } from "pages/trades/binance-trade-page/trading/trading-tables/positions/positions.container";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import styles from "./trading-tables.module.scss";
@@ -28,6 +28,10 @@ const _TradingTables: React.FC<Props> = () => {
   const isFutures = terminalType === "futures";
   const [t] = useTranslation();
   const { tab, setTab } = useTab<TABS>(TABS.OPEN_ORDERS);
+
+  useEffect(() => {
+    setTab(null, TABS.OPEN_ORDERS);
+  }, [terminalType]);
   return (
     <DefaultBlock
       size={SIZES.SMALL}
