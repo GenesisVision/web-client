@@ -18,6 +18,7 @@ import uuid from "uuid";
 const getTagLoaderData = (): PostTag => ({
   title: "",
   event: {
+    logoUrl: "",
     amount: 0,
     changeState: "NotChanged",
     currency: "GVT",

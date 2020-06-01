@@ -15,7 +15,6 @@ interface Props extends ISimpleUserListProps {
 }
 
 const _SimpleUserList: React.FC<Props> = ({ items, title }) => {
-  console.log(items);
   return (
     <>
       <DialogTop title={title} />
