@@ -44,7 +44,7 @@ const _MarginRatio: React.FC<Props> = ({
         <MarginRatioItem
           label={t("Margin ratio")}
           value={
-            <Text color={getMarginRatioColor(+marginRatio)}>
+            <Text wrap={false} color={getMarginRatioColor(+marginRatio)}>
               <h4>{marginRatio.toFixed(2)} %</h4>
             </Text>
           }
