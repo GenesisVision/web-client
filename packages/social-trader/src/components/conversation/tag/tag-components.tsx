@@ -165,7 +165,14 @@ export const ProgramLink = React.memo(_ProgramLink);
 
 const _AssetTagCard: React.FC<IAssetTagProps & { url: ToType | string }> = ({
   url,
-  assetDetails: { changeState, price, change24Percent, logoUrl, title }
+  assetDetails: {
+    color: assetColor,
+    changeState,
+    price,
+    change24Percent,
+    logoUrl,
+    title
+  }
 }) => {
   const color = getAssetTagTextColor(changeState);
   return (
@@ -174,7 +181,12 @@ const _AssetTagCard: React.FC<IAssetTagProps & { url: ToType | string }> = ({
         size={"small"}
         avatar={
           <Link to={url}>
-            <AssetAvatar size={"xsmall"} url={logoUrl} alt={title} />
+            <AssetAvatar
+              color={assetColor}
+              size={"xsmall"}
+              url={logoUrl}
+              alt={title}
+            />
           </Link>
         }
         name={
