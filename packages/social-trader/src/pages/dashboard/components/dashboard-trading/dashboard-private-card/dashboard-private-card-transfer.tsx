@@ -24,7 +24,7 @@ const _DashboardPrivateCardTransfer: React.FC<Props> = ({
     : mapAccountToTransferItemType(asset);
   return (
     <>
-      {asset.actions.canTransferMoney && (
+      {asset?.actions?.canTransferMoney && (
         <>
           <DepositTransferButton
             fixedSelects={isExchangeAccount}
