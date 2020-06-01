@@ -126,7 +126,7 @@ const _EventTag: React.FC<IEventTagProps> = ({
     </div>
   );
 };
-export const EventTag = React.memo(_EventTag);
+export const EventTag = Crashable(React.memo(_EventTag));
 
 const _AnyTag: React.FC<IAnyTagProps> = ({ name }) => {
   return <>{name}</>;
