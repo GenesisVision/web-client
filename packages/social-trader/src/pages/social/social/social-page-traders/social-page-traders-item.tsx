@@ -10,6 +10,7 @@ import { useTranslation } from "react-i18next";
 import styles from "./social-page-traders.module.scss";
 
 interface Props {
+  color: string;
   id: string;
   investorsCount: number;
   profit: number;
@@ -19,6 +20,7 @@ interface Props {
 }
 
 const _SocialPageTradersItem: React.FC<Props> = ({
+  color,
   id,
   investorsCount,
   profit,
@@ -41,7 +43,14 @@ const _SocialPageTradersItem: React.FC<Props> = ({
         <AvatarWithName
           className={styles["social-page-traders__avatar-name"]}
           onClick={handleClick}
-          avatar={<AssetAvatar size={"xsmall"} url={logoUrl} alt={title} />}
+          avatar={
+            <AssetAvatar
+              color={color}
+              size={"xsmall"}
+              url={logoUrl}
+              alt={title}
+            />
+          }
           name={title}
         />
       </Row>
