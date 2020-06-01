@@ -92,7 +92,7 @@ const _TransferForm: React.FC<Props> = ({
             </StatisticItemInner>
           </Row>
           <Row small>
-            <Text muted>
+            <Text wrap={false} muted>
               {getMaxValueForFuturesTransfer({ type, asset, balances: data })}{" "}
               {asset}
             </Text>
@@ -129,7 +129,7 @@ const _TransferForm: React.FC<Props> = ({
             </StatisticItemInner>
           </Row>
           <Row small>
-            <Text muted>
+            <Text wrap={false} muted>
               {" "}
               {getMaxValueForFuturesTransfer({
                 type: type === 1 ? 2 : 1,
