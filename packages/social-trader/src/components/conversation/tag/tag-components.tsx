@@ -11,6 +11,7 @@ import { RepostTagContainer } from "components/conversation/tag/repost-tag-conta
 import styles from "components/conversation/tag/tag-components.module.scss";
 import { TagBlock } from "components/conversation/tag/tag.block";
 import { CurrencyItem } from "components/currency-item/currency-item";
+import PortfolioEventLogo from "components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
 import Link, { ToType } from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import { MutedText } from "components/muted-text/muted-text";
@@ -34,7 +35,7 @@ import { managerToPathCreator } from "routes/manager.routes";
 import { composeAssetDetailsUrl } from "utils/compose-url";
 
 export interface IEventTagProps {
-  data: PostEvent;
+  data: { event: PostEvent; assetDetails: PostAssetDetailsWithPrices };
 }
 
 export interface IPlatformAssetTagProps {
@@ -105,16 +106,28 @@ const _RepostTagComponent: React.FC<IRepostTagProps> = ({
 export const RepostTagComponent = React.memo(_RepostTagComponent);
 
 const _EventTag: React.FC<IEventTagProps> = ({
-  data: { title, amount, currency, percent, changeState }
+  data: {
+    assetDetails,
+    event: { logoUrl, title, amount, currency, percent, changeState }
+  }
 }) => {
   const [t] = useTranslation();
   const color = getAssetTagTextColor(changeState);
   return (
     <div>
       <Row>
-        <RowItem>{title}</RowItem>
+        <RowItem small>
+          <PortfolioEventLogo
+            withAsset={true}
+            assetDetails={assetDetails}
+            icon={logoUrl}
+          />
+        </RowItem>
+        <RowItem>
+          <Center>{title}</Center>
+        </RowItem>
       </Row>
-      <Row>
+      <Row large>
         <RowItem>
           <StatisticItemInner label={t("Amount")}>
             <ColoredText color={color}>

@@ -14,7 +14,7 @@ export const managerLoaderData: ProfilePublic = {
 export const ownerLoaderData: ProfilePublicShort = {
   personalDetails: {
     canCommentPosts: false,
-    canFollow: false,
+    allowFollow: false,
     canWritePost: false,
     isFollow: false
   },

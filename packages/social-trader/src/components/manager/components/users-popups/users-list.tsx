@@ -45,6 +45,7 @@ export const UsersListItem: React.FC<IUsersListItemProps> = React.memo(
         {personalDetails && (
           <RowItem>
             <FollowUserButton
+              disabled={!personalDetails.allowFollow}
               size={GV_BTN_SIZE.SMALL}
               id={id}
               value={personalDetails.isFollow}
