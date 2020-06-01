@@ -1,5 +1,5 @@
 import GVButton, { GV_BTN_SIZE } from "components/gv-button";
-import { MutedText } from "components/muted-text/muted-text";
+import { Text } from "components/text/text";
 import useApiRequest from "hooks/api-request.hook";
 import { TradeTable } from "pages/trades/binance-trade-page/trading/components/trade-table/trade-table";
 import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
@@ -63,7 +63,7 @@ export const OpenOrders: React.FC<Props> = ({ items }) => {
               ""
             )
           ) : (
-            <MutedText>{t(`${name}`)}</MutedText>
+            <Text muted>{t(`${name}`)}</Text>
           )}
         </th>
       )}

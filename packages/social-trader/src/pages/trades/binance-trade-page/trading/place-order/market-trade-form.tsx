@@ -1,10 +1,10 @@
 import { isAllow } from "components/deposit/components/deposit.helpers";
 import HookFormAmountField from "components/input-amount-field/hook-form-amount-field";
-import { MutedText } from "components/muted-text/muted-text";
 import { Slider } from "components/range/range";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import StatisticItemInner from "components/statistic-item/statistic-item-inner";
+import { Text } from "components/text/text";
 import { API_REQUEST_STATUS } from "hooks/api-request.hook";
 import { ReduceOnlyField } from "pages/trades/binance-trade-page/trading/place-order/place-order-settings/reduce-only-field/reduce-only-field";
 import { PlaceOrderSubmitButton } from "pages/trades/binance-trade-page/trading/place-order/place-order-submit-button";
@@ -125,7 +125,7 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
         />
       </Row>
       <StatisticItemInner label={t("Price")}>
-        {t("Market price")} <MutedText>(≈ {outerPrice})</MutedText>
+        {t("Market price")} <Text muted>(≈ {outerPrice})</Text>
       </StatisticItemInner>
       <Row>
         <HookFormAmountField

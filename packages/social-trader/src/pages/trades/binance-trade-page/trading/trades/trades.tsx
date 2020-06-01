@@ -1,4 +1,4 @@
-import { MutedText } from "components/muted-text/muted-text";
+import { Text } from "components/text/text";
 import { TradesRow } from "pages/trades/binance-trade-page/trading/trades/trades-row";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { Trade } from "pages/trades/binance-trade-page/trading/trading.types";
@@ -20,13 +20,19 @@ const _Trades: React.FC<Props> = ({ items }) => {
         <table className={styles["trades__table"]}>
           <thead>
             <th>
-              <MutedText small>Price ({baseAsset})</MutedText>
+              <Text muted size={"small"}>
+                Price ({baseAsset})
+              </Text>
             </th>
             <th>
-              <MutedText small>Amount ({quoteAsset})</MutedText>
+              <Text muted size={"small"}>
+                Amount ({quoteAsset})
+              </Text>
             </th>
             <th>
-              <MutedText small>Time</MutedText>
+              <Text muted size={"small"}>
+                Time
+              </Text>
             </th>
           </thead>
         </table>

@@ -3,13 +3,13 @@ import ImageBase from "components/avatar/image-base";
 import { CurrencyItem } from "components/currency-item/currency-item";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import HookFormAmountField from "components/input-amount-field/hook-form-amount-field";
-import { MutedText } from "components/muted-text/muted-text";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import Select from "components/select/select";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
 import StatisticItemInner from "components/statistic-item/statistic-item-inner";
 import { SubmitButton } from "components/submit-button/submit-button";
+import { Text } from "components/text/text";
 import {
   BalancesForTransfer,
   TradeCurrency
@@ -92,10 +92,10 @@ const _TransferForm: React.FC<Props> = ({
             </StatisticItemInner>
           </Row>
           <Row small>
-            <MutedText>
+            <Text muted>
               {getMaxValueForFuturesTransfer({ type, asset, balances: data })}{" "}
               {asset}
-            </MutedText>
+            </Text>
           </Row>
         </div>
         <div
@@ -129,7 +129,7 @@ const _TransferForm: React.FC<Props> = ({
             </StatisticItemInner>
           </Row>
           <Row small>
-            <MutedText>
+            <Text muted>
               {" "}
               {getMaxValueForFuturesTransfer({
                 type: type === 1 ? 2 : 1,
@@ -137,7 +137,7 @@ const _TransferForm: React.FC<Props> = ({
                 balances: data
               })}{" "}
               {asset}
-            </MutedText>
+            </Text>
           </Row>
         </div>
       </Row>

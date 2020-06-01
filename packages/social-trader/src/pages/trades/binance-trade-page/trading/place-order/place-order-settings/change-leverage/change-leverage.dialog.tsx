@@ -2,10 +2,10 @@ import Dialog, { IDialogOuterProps } from "components/dialog/dialog";
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogTop } from "components/dialog/dialog-top";
 import GVButton from "components/gv-button";
-import { MutedText } from "components/muted-text/muted-text";
 import { Slider } from "components/range/range";
 import Regulator from "components/regulator/regulator";
 import { Row } from "components/row/row";
+import { Text } from "components/text/text";
 import { TerminalPlaceOrderContext } from "pages/trades/binance-trade-page/trading/terminal-place-order.context";
 import { LeverageBracket } from "pages/trades/binance-trade-page/trading/trading.types";
 import React, { useCallback, useContext, useEffect, useState } from "react";
@@ -115,12 +115,12 @@ const ChangeLeverageDialogContent: React.FC<Props> = ({
           />
         </Row>
         <Row>
-          <MutedText noWrap={false}>
+          <Text muted>
             {t(
               `Maximum position at current leverage ${bracket?.notionalCap ||
                 0} USDT`
             )}
-          </MutedText>
+          </Text>
         </Row>
         <Row>
           <GVButton

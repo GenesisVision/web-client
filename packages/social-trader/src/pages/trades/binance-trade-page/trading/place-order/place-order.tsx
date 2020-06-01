@@ -5,9 +5,9 @@ import { GV_BTN_SIZE } from "components/gv-button";
 import GVTabs from "components/gv-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
 import { WalletIcon } from "components/icon/wallet-icon";
-import { MutedText } from "components/muted-text/muted-text";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { Text } from "components/text/text";
 import { SIZES } from "constants/constants";
 import useApiRequest from "hooks/api-request.hook";
 import useTab from "hooks/tab.hook";
@@ -100,9 +100,9 @@ const _PlaceOrder: React.FC = () => {
             </Center>
           </RowItem>
           <RowItem>
-            <MutedText>
+            <Text muted>
               {balance} {walletAsset}
-            </MutedText>
+            </Text>
           </RowItem>
         </Row>
       )}

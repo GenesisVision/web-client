@@ -1,4 +1,4 @@
-import { ColoredText } from "components/colored-text/colored-text";
+import { Text } from "components/text/text";
 import { terminalMoneyFormat } from "pages/trades/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { getTextColor } from "pages/trades/binance-trade-page/trading/trading.helpers";
@@ -25,11 +25,9 @@ const _TradesRow: React.FC<Props> = ({ prevPrice, price, amount, time }) => {
   return (
     <tr>
       <td>
-        <ColoredText
-          color={getTextColor(+price - +(prevPrice ? prevPrice : price))}
-        >
+        <Text color={getTextColor(+price - +(prevPrice ? prevPrice : price))}>
           {formattedPrice}
-        </ColoredText>
+        </Text>
       </td>
       <td>{formattedAmount}</td>
       <td>{formatTime(time)}</td>
