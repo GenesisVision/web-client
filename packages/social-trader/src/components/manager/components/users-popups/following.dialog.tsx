@@ -19,7 +19,11 @@ export const FollowingDialog: React.FC<IFollowingDialogProps> = ({
       open={open}
       onClose={onClose}
     >
-      <SimpleUserList title={t("manager-page.following")} items={items} />
+      <SimpleUserList
+        onClick={onClose}
+        title={t("manager-page.following")}
+        items={items}
+      />
     </Dialog>
   );
 };
