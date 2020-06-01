@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import styles from "components/details/details-description-section/details-statistic-section/details-history/trades.module.scss";
+import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import TableContainer from "components/table/components/table-container";
 import {
   GetItemsFuncActionType,
@@ -38,7 +39,7 @@ const _ProgramOpenPositions: React.FC<Props> = ({
     <span
       className={classNames(
         styles["details-trades__head-cell"],
-        styles[`program-details-trades__cell--${column.name}`]
+        styles[`program-details-trades__cell--${name}`]
       )}
     >
       {t(`program-details-page.history.open-positions.${name}`)}

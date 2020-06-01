@@ -1,6 +1,7 @@
+import "components/details/details-description-section/details-statistic-section/details-history/trades.scss";
+
 import classNames from "classnames";
 import styles from "components/details/details-description-section/details-statistic-section/details-history/trades.module.scss";
-import "components/details/details-description-section/details-statistic-section/details-history/trades.scss";
 import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import { Row } from "components/row/row";
 import DateRangeFilter from "components/table/components/filtering/date-range-filter/date-range-filter";
@@ -48,7 +49,7 @@ const _ProgramTrades: React.FC<Props> = ({
     <span
       className={classNames(
         styles[`details-trades__head-cell`],
-        styles[`program-details-trades__cell--${column.name}`]
+        styles[`program-details-trades__cell--${name}`]
       )}
     >
       {t(`program-details-page.history.trades.${name}`)}

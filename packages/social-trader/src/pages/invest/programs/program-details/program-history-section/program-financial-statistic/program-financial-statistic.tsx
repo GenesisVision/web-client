@@ -40,7 +40,7 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
     <span
       className={classNames(
         styles["details-trades__head-cell"],
-        styles[`program-details-trades__cell--${column.name}`]
+        styles[`program-details-trades__cell--${name}`]
       )}
     >
       {t(`program-details-page.history.financial-statistic.${name}`)}
