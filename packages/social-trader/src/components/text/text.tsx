@@ -25,7 +25,7 @@ export const Text: React.FC<Props> = ({
 }) => {
   return (
     <span
-      className={classNames({
+      className={classNames(styles["text"], {
         [styles["text--thin"]]: weight === "thin",
         [styles["text--normal"]]: weight === "normal",
         [styles["text--bold"]]: weight === "bold",
