@@ -2,10 +2,12 @@ import classNames from "classnames";
 import { MutedText } from "components/muted-text/muted-text";
 import * as React from "react";
 import { useCallback, useRef } from "react";
+import { SizesType } from "utils/types";
 
 import styles from "./gv-checkbox.module.scss";
 
 const _GVCheckbox: React.FC<IGVCheckboxProps> = ({
+  size = "middle",
   setFieldValue,
   touched,
   error,
@@ -34,13 +36,21 @@ const _GVCheckbox: React.FC<IGVCheckboxProps> = ({
     <div className={styles["gv-checkbox-wrapper"]} onClick={handleBlockClick}>
       <div
         className={classNames(styles["gv-checkbox"], className, {
+          [styles["gv-checkbox--small"]]: size === "small",
+          [styles["gv-checkbox--middle"]]: size === "middle",
           [styles["gv-checkbox--checked"]]: value,
           [styles["gv-checkbox--primary"]]: color === "primary",
           [styles["gv-checkbox--secondary"]]: color === "secondary",
           [styles["gv-checkbox--disabled"]]: disabled
         })}
       >
-        <div className={styles["gv-checkbox__input-wrapper"]}>
+        <div
+          className={classNames(styles["gv-checkbox__input-wrapper"], {
+            [styles["gv-checkbox__input-wrapper--checked"]]: value,
+            [styles["gv-checkbox__input-wrapper--small"]]: size === "small",
+            [styles["gv-checkbox__input-wrapper--middle"]]: size === "middle"
+          })}
+        >
           <div>
             {value ? (
               "✔"
@@ -62,7 +72,7 @@ const _GVCheckbox: React.FC<IGVCheckboxProps> = ({
       </div>
       {label && (
         <div className={styles["gv-checkbox__label"]}>
-          <MutedText big>{label}</MutedText>
+          <MutedText big={size !== "small"}>{label}</MutedText>
         </div>
       )}
       {error && <div className={styles["gv-checkbox__error"]}>{error}</div>}
@@ -71,6 +81,7 @@ const _GVCheckbox: React.FC<IGVCheckboxProps> = ({
 };
 
 interface IGVCheckboxProps {
+  size?: SizesType;
   setFieldValue?: (name: string, value?: any, validate?: boolean) => void;
   name: string;
   className?: string;

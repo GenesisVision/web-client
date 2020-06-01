@@ -9,7 +9,5 @@ export const SUBSCRIPTION_COLUMNS: SortingColumn[] = [
   { name: "tolerance" },
   { name: "volume-fee" },
   { name: "success-fee" },
-  {
-    name: "buttons"
-  }
+  { name: "buttons" }
 ];

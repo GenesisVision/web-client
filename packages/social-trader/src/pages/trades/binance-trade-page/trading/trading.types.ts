@@ -71,6 +71,8 @@ export interface SymbolLeverageBrackets {
 }
 
 export interface TradeRequest {
+  reduceOnly?: boolean;
+  timeInForce?: TimeInForce;
   stopPrice?: number;
   symbol: TradeCurrency;
   price: number;
@@ -130,7 +132,7 @@ export interface ITerminalMethods {
   }) => Promise<HttpResponse>;
   getPositionMode?: (options: {
     authData: TradeAuthDataType;
-  }) => Promise<PositionModeResponse>;
+  }) => Promise<PositionModeType>;
   changePositionMode?: (options: {
     dualSidePosition: PositionModeType;
     authData: TradeAuthDataType;
@@ -958,7 +960,7 @@ export type ContingencyType = "OCO";
 
 export type NewOrderRespType = "ACK" | "RESULT" | "FULL";
 
-export type TimeInForce = "GTC" | "IOC" | "FOK";
+export type TimeInForce = "GTX" | "GTC" | "IOC" | "FOK";
 
 export type ExecutionType =
   | "NEW"

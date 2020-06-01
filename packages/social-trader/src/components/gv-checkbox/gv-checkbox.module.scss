@@ -1,6 +1,6 @@
-@import "~shared/styles/_colors";
-@import "~shared/styles/_sizes";
-@import "~shared/styles/_constants";
+@import "styles/_colors";
+@import "styles/_sizes";
+@import "styles/_constants";
 
 .gv-checkbox-wrapper {
   position: relative;
@@ -45,29 +45,33 @@
     &--secondary {
       color: $secondary-color;
     }
-
-    &--checked {
-      .gv-checkbox__input-wrapper {
-        color: currentColor;
-        background-color: rgba($primary-color, 0.1);
-      }
-      .gv-checkbox__track {
-        opacity: 1;
-      }
-    }
   }
 
   &__input-wrapper {
     @include transition(background-color, opacity, color);
     color: transparent;
     background-color: #343d44;
-    border-radius: 4px;
-    width: 24px;
-    height: 24px;
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    font-size: 17px;
+
+    &--checked {
+      color: $primary-color;
+      background-color: rgba($primary-color, 0.1);
+    }
+
+    &--small {
+      border-radius: 2px;
+      width: 16px;
+      height: 16px;
+      font-size: $font-size-xsmall;
+    }
+    &--middle {
+      border-radius: 4px;
+      width: 24px;
+      height: 24px;
+      font-size: 17px;
+    }
   }
 
   &__track {

@@ -2,9 +2,9 @@ import Dialog, { IDialogOuterProps } from "components/dialog/dialog";
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogTop } from "components/dialog/dialog-top";
 import GVButton from "components/gv-button";
-import { MutedText } from "components/muted-text/muted-text";
 import { RadioButton } from "components/radio-button/radio-button";
 import { Row } from "components/row/row";
+import { Text } from "components/text/text";
 import { PositionModeType } from "pages/trades/binance-trade-page/trading/trading.types";
 import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -48,16 +48,14 @@ const PositionModeDialogContent: React.FC<Props> = ({
       <DialogTop title={t("Position mode")} />
       <DialogBottom>
         <Row>
-          <MutedText noWrap={false}>
+          <Text muted>
             {t(
               "If there are open positions or open orders in the contract, you are not allowed to adjust the position mode. Position mode adjustments are effective for all contracts."
             )}
-          </MutedText>
+          </Text>
         </Row>
         <Row>
-          <MutedText noWrap={false}>
-            {t("This setting is only apply for Perpetual Futures.")}
-          </MutedText>
+          <Text>{t("This setting is only apply for Perpetual Futures.")}</Text>
         </Row>
         <Row>
           <RadioButton
@@ -67,11 +65,11 @@ const PositionModeDialogContent: React.FC<Props> = ({
           />
         </Row>
         <Row>
-          <MutedText noWrap={false}>
+          <Text>
             {t(
               "In the One-way Mode, one contract can only hold positions in one direction."
             )}
-          </MutedText>
+          </Text>
         </Row>
         <Row>
           <RadioButton
@@ -81,11 +79,11 @@ const PositionModeDialogContent: React.FC<Props> = ({
           />
         </Row>
         <Row>
-          <MutedText noWrap={false}>
+          <Text>
             {t(
               "In the Hedge Mode, one contract can hold positions in both long and short directions at the same time, and hedge positions in different directions under the same contract."
             )}
-          </MutedText>
+          </Text>
         </Row>
         <Row>
           <GVButton disabled={mode === modeProp} wide onClick={handleChange}>

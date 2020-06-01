@@ -3,12 +3,18 @@ import React, { createContext, useMemo, useState } from "react";
 
 type SocialSearchState = SearchInFeedValues;
 
-export const SocialSearchInitialState: SocialSearchState = {};
+export const SocialSearchInitialState: SocialSearchState = {
+  tagContent: [],
+  hashTags: []
+};
 
 export const SocialSearchContext = createContext<{
   searchValue: SocialSearchState;
   setSearchValue: (value: SocialSearchState) => void;
-}>({ searchValue: SocialSearchInitialState, setSearchValue: () => {} });
+}>({
+  searchValue: SocialSearchInitialState,
+  setSearchValue: () => {}
+});
 
 export const SocialSearchContextProvider: React.FC = ({ children }) => {
   const [searchValue, setSearchValue] = useState<SocialSearchState>(

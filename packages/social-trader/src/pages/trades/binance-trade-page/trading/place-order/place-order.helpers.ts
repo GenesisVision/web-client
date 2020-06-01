@@ -1,7 +1,13 @@
 import { API_REQUEST_STATUS } from "hooks/api-request.hook";
 import { TFunction } from "i18next";
-import { terminalMoneyFormat } from "pages/trades/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
 import {
+  terminalMoneyFormat,
+  truncated
+} from "pages/trades/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
+import { TerminalPlaceOrderContext } from "pages/trades/binance-trade-page/trading/terminal-place-order.context";
+import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
+import {
+  getDecimalScale,
   getSymbol,
   getSymbolFilters
 } from "pages/trades/binance-trade-page/trading/trading.helpers";
@@ -13,12 +19,13 @@ import {
   SymbolLotSizeFilter,
   SymbolMinNotionalFilter,
   SymbolPriceFilter,
+  TimeInForce,
   TradeCurrency
 } from "pages/trades/binance-trade-page/trading/trading.types";
-import { useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { NumberFormatValues } from "react-number-format";
 import { calculatePercentage } from "utils/currency-converter";
-import { formatCurrencyValue } from "utils/formatter";
+import { formatCurrencyValue, formatValue } from "utils/formatter";
 import { safeGetElemFromArray } from "utils/helpers";
 import { postponeFunc } from "utils/hook-form.helpers";
 import { AnyObjectType } from "utils/types";
@@ -32,6 +39,8 @@ type PlaceOrderFormSetValueType = (
 ) => void;
 
 export enum TRADE_FORM_FIELDS {
+  reduceOnly = "reduceOnly",
+  timeInForce = "timeInForce",
   stopPrice = "stopPrice",
   price = "price",
   quantity = "quantity",
@@ -39,6 +48,8 @@ export enum TRADE_FORM_FIELDS {
 }
 
 export interface IPlaceOrderDefaultFormValues {
+  [TRADE_FORM_FIELDS.reduceOnly]?: boolean;
+  [TRADE_FORM_FIELDS.timeInForce]?: TimeInForce;
   [TRADE_FORM_FIELDS.quantity]: number;
   [TRADE_FORM_FIELDS.total]: number;
   [TRADE_FORM_FIELDS.price]: number;
@@ -56,21 +67,19 @@ export const usePlaceOrderAutoFill = ({
   setValue,
   total,
   price,
-  stepSize,
   quantity,
-  tickSize,
   totalName,
   quantityName
 }: {
   total: number;
   price: number;
   quantity: number;
-  tickSize: string;
-  stepSize: string;
   setValue: PlaceOrderFormSetValueType;
   totalName: string;
   quantityName: string;
 }) => {
+  const { stepSize, tickSize } = useContext(TradingInfoContext);
+  const { leverage } = useContext(TerminalPlaceOrderContext);
   const [autoFill, setAutoFill] = useState<boolean>(false);
   useEffect(() => {
     if (!autoFill) {
@@ -88,7 +97,7 @@ export const usePlaceOrderAutoFill = ({
   useEffect(() => {
     if (!autoFill) {
       const value = +terminalMoneyFormat({
-        amount: quantity * price,
+        amount: leverage * quantity * price,
         tickSize: tickSize
       });
       if (isNaN(value)) return;
@@ -101,7 +110,7 @@ export const usePlaceOrderAutoFill = ({
     if (!autoFill) {
       if (quantity && price) {
         const value = +terminalMoneyFormat({
-          amount: quantity * price,
+          amount: leverage * quantity * price,
           tickSize: tickSize
         });
         if (isNaN(value)) return;
@@ -115,37 +124,30 @@ export const usePlaceOrderAutoFill = ({
 export const usePlaceOrderFormReset = ({
   status,
   triggerValidation,
-  stepSize,
   outerPrice,
   reset,
   watch,
   setValue,
   side,
-  baseAsset,
-  quoteAsset,
   balances,
   totalName,
   quantityName
 }: {
   status: API_REQUEST_STATUS;
   triggerValidation: VoidFunction;
-  stepSize: string;
   watch: () => AnyObjectType;
   reset: (values: any) => void;
   outerPrice: number;
   setValue: (name: string, value?: number, shouldValidate?: boolean) => void;
   side: OrderSide;
-  baseAsset: TradeCurrency;
-  quoteAsset: TradeCurrency;
   balances: AssetBalance[];
   totalName: string;
   quantityName: string;
 }) => {
+  const { terminalType } = useContext(TradingInfoContext);
   const { quantity, total } = watch();
   const { sliderValue, setSliderValue } = useTradeSlider({
-    stepSize,
-    baseAsset,
-    quoteAsset,
+    watch,
     side,
     setValue,
     balances,
@@ -169,6 +171,7 @@ export const usePlaceOrderFormReset = ({
 
   useEffect(() => {
     reset({
+      timeInForce: watch().timeInForce,
       stopPrice: outerPrice,
       price: outerPrice,
       quantity,
@@ -176,11 +179,21 @@ export const usePlaceOrderFormReset = ({
     });
   }, [outerPrice]);
 
+  useEffect(() => {
+    setSliderValue(0);
+    reset({
+      timeInForce: watch().timeInForce,
+      stopPrice: outerPrice,
+      price: outerPrice
+    });
+  }, [terminalType]);
+
   const [prevFormState, setPrevFormState] = useState<
     (AnyObjectType & { sliderValue?: number }) | undefined
   >();
 
   useEffect(() => {
+    console.log(watch());
     setPrevFormState({ ...watch(), sliderValue });
     if (prevFormState) {
       setSliderValue(prevFormState.sliderValue);
@@ -192,29 +205,35 @@ export const usePlaceOrderFormReset = ({
 
 export const usePlaceOrderInfo = ({
   exchangeInfo,
-  baseAsset,
-  quoteAsset,
   balances,
   side
 }: {
   exchangeInfo: ExchangeInfo;
   side: OrderSide;
-  baseAsset: TradeCurrency;
-  quoteAsset: TradeCurrency;
   balances: AssetBalance[];
 }) => {
+  const {
+    symbol: { baseAsset, quoteAsset },
+    terminalType
+  } = useContext(TradingInfoContext);
   const filters = getSymbolFilters(
     exchangeInfo,
     getSymbol(baseAsset, quoteAsset)
   );
-  const { minPrice, maxPrice, tickSize } = getSymbolPriceFilter(filters);
-  const { minQty, maxQty, stepSize } = getLotSizeFilter(filters);
+  const { minPrice, maxPrice } = getSymbolPriceFilter(filters);
+  const { minQty, maxQty } = getLotSizeFilter(filters);
   const { minNotional } = getMinNotionalFilter(filters);
 
   const maxQuantityWithWallet = useMemo(() => {
     return side === "BUY"
       ? +maxQty
-      : Math.min(+maxQty, +getBalance(balances, baseAsset));
+      : Math.min(
+          +maxQty,
+          +getBalance(
+            balances,
+            terminalType === "futures" ? quoteAsset : baseAsset
+          )
+        );
   }, [side, maxQty, balances, baseAsset]);
 
   const maxTotalWithWallet = useMemo(() => {
@@ -225,9 +244,7 @@ export const usePlaceOrderInfo = ({
   return {
     minPrice,
     maxPrice,
-    tickSize,
     minQty,
-    stepSize,
     minNotional,
     maxQuantityWithWallet,
     maxTotalWithWallet
@@ -235,37 +252,53 @@ export const usePlaceOrderInfo = ({
 };
 
 export const useTradeSlider = ({
-  stepSize,
+  watch,
   setValue,
   side,
   balances,
-  quoteAsset,
-  baseAsset,
   totalName,
   quantityName
 }: {
-  stepSize: string;
+  watch: () => AnyObjectType;
   setValue: (name: string, value?: number, shouldValidate?: boolean) => void;
   side: OrderSide;
-  baseAsset: TradeCurrency;
-  quoteAsset: TradeCurrency;
   balances: AssetBalance[];
   totalName: string;
   quantityName: string;
 }) => {
+  const {
+    symbol: { quoteAsset, baseAsset },
+    stepSize,
+    terminalType
+  } = useContext(TradingInfoContext);
+  const { leverage } = useContext(TerminalPlaceOrderContext);
   const [sliderValue, setSliderValue] = useState<number | undefined>();
   useEffect(() => {
     if (sliderValue === undefined) return;
     const percentValue = parseInt(RANGE_MARKS[sliderValue]);
     if (side === "BUY") {
+      const { price } = watch();
       const walletAvailable = +getBalance(balances, quoteAsset);
-      const newTotal = calculatePercentage(walletAvailable, percentValue);
+      const fullTotal = calculatePercentage(walletAvailable, percentValue);
+      const newAmount = +terminalMoneyFormat({
+        amount: fullTotal / price,
+        tickSize: stepSize
+      });
+      const newTotal = +formatValue(leverage * newAmount * price, 8);
       setValue(totalName, newTotal, true);
     }
     if (side === "SELL") {
-      const walletAvailable = +getBalance(balances, baseAsset);
+      const walletAvailable = +getBalance(
+        balances,
+        terminalType === "futures" ? quoteAsset : baseAsset
+      );
+      const percentAmount = calculatePercentage(walletAvailable, percentValue);
+      if (
+        truncated(percentAmount, getDecimalScale(formatValue(stepSize))) === 0
+      )
+        return;
       const newQuantity = +terminalMoneyFormat({
-        amount: calculatePercentage(walletAvailable, percentValue),
+        amount: percentAmount,
         tickSize: stepSize
       });
       setValue(quantityName, newQuantity, true);
@@ -277,11 +310,14 @@ export const useTradeSlider = ({
 export const getBalance = (balances: AssetBalance[], currency: TradeCurrency) =>
   safeGetElemFromArray(balances, ({ asset }) => asset === currency).free;
 
-export const getMinNotionalFilter = (filters: SymbolFilter[]) =>
-  safeGetElemFromArray(
-    filters,
-    ({ filterType }) => filterType === "MIN_NOTIONAL"
-  ) as SymbolMinNotionalFilter;
+export const getMinNotionalFilter = (filters: SymbolFilter[]) => {
+  return (filters.find(({ filterType }) => filterType === "MIN_NOTIONAL") || {
+    applyToMarket: false,
+    avgPriceMins: 0,
+    filterType: "MIN_NOTIONAL",
+    minNotional: 0
+  }) as SymbolMinNotionalFilter;
+};
 
 export const getSymbolPriceFilter = (filters: SymbolFilter[]) =>
   safeGetElemFromArray(

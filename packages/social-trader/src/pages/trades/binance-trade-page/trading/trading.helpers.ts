@@ -91,10 +91,14 @@ export const useTradeAuth = () => {
   };
 };
 
+export const USER_STREAM_ACCOUNT_UPDATE_EVENT_TYPE = "outboundAccountInfo";
+
 export const filterOutboundAccountInfoStream = (
   userStream: Observable<any>
 ): Observable<Account> =>
-  userStream.pipe(filter(info => info.eventType === "outboundAccountInfo"));
+  userStream.pipe(
+    filter(info => info.eventType === USER_STREAM_ACCOUNT_UPDATE_EVENT_TYPE)
+  );
 
 export const filterOrderEventsStream = (
   userStream: Observable<any>

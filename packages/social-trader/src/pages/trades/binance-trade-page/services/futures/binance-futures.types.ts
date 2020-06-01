@@ -1,4 +1,5 @@
 import {
+  EventType,
   FuturesPosition,
   MarginModeType,
   OrderSide,
@@ -136,14 +137,11 @@ export interface FuturesMarginCallEvent {
 }
 
 export interface FuturesAccountUpdateEvent {
-  eventType: FuturesAccountEventType; // Event Type
+  eventType: EventType; // Event Type
   eventTime: number; // Event Time               // Event Time
   transactionTime: number; // Transaction
-  accountUpdate: // Update Data
-  {
-    balances: FuturesAccountEventBalance[];
-    positions: FuturesAccountEventPosition[];
-  };
+  balances: FuturesAccountEventBalance[];
+  positions: FuturesAccountEventPosition[];
 }
 
 export interface FuturesTradeOrderUpdateEvent {

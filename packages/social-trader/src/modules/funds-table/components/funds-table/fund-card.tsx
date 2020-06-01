@@ -32,7 +32,8 @@ export const FundCardTable: React.FC<IFundCardTableProps> = ({
   currency,
   investorsCount,
   drawdown,
-  topFundAssets
+  topFundAssets,
+  amountTitle
 }) => {
   const [t] = useTranslation();
   return (
@@ -43,7 +44,7 @@ export const FundCardTable: React.FC<IFundCardTableProps> = ({
             label={
               <TooltipLabel
                 tooltipContent={t("dashboard-page.tooltips.investing.size")}
-                labelText={t("funds-page.funds-header.balance")}
+                labelText={amountTitle || t("funds-page.funds-header.balance")}
               />
             }
           >
@@ -165,6 +166,7 @@ interface IFundCardTableProps {
   totalAssetsCount: number;
   drawdown: number;
   topFundAssets: Array<FundAssetPercent>;
+  amountTitle?: string;
 }
 
 interface Props {

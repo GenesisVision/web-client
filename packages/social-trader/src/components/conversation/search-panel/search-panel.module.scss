@@ -1,9 +1,7 @@
-@import "~shared/styles/_colors";
-@import "~shared/styles/_constants";
+@import "styles/_colors";
+@import "styles/_constants";
 
 .search-panel {
-  @include vertical-paddings($padding-xsmall);
-  @include horizontal-paddings($padding-small);
   max-height: 160px;
   overflow-y: scroll;
 

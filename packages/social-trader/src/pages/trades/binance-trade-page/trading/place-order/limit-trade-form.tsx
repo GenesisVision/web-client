@@ -1,16 +1,23 @@
 import { isAllow } from "components/deposit/components/deposit.helpers";
 import HookFormAmountField from "components/input-amount-field/hook-form-amount-field";
 import { Slider } from "components/range/range";
+import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { API_REQUEST_STATUS } from "hooks/api-request.hook";
+import { ReduceOnlyField } from "pages/trades/binance-trade-page/trading/place-order/place-order-settings/reduce-only-field/reduce-only-field";
+import {
+  TIME_IN_FORCE_VALUES,
+  TimeInForceField
+} from "pages/trades/binance-trade-page/trading/place-order/place-order-settings/time-in-force-field/time-in-force-field";
 import { PlaceOrderSubmitButton } from "pages/trades/binance-trade-page/trading/place-order/place-order-submit-button";
+import { TerminalPlaceOrderContext } from "pages/trades/binance-trade-page/trading/terminal-place-order.context";
+import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import {
   Account,
   ExchangeInfo,
-  OrderSide,
-  TradeCurrency
+  OrderSide
 } from "pages/trades/binance-trade-page/trading/trading.types";
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
@@ -28,8 +35,6 @@ import {
 export interface ILimitTradeFormProps {
   status: API_REQUEST_STATUS;
   outerPrice: number;
-  baseAsset: TradeCurrency;
-  quoteAsset: TradeCurrency;
   direction: OrderSide;
   onSubmit: (values: IPlaceOrderFormValues) => any;
 }
@@ -43,26 +48,30 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
   exchangeInfo,
   outerPrice,
   onSubmit,
-  quoteAsset,
-  baseAsset,
   direction
 }) => {
   const [t] = useTranslation();
 
   const {
+    tickSize,
+    stepSize,
+    symbol: { baseAsset, quoteAsset },
+    terminalType
+  } = useContext(TradingInfoContext);
+  const { currentPositionMode } = useContext(TerminalPlaceOrderContext);
+
+  const isFutures = terminalType === "futures";
+
+  const {
     minPrice,
     maxPrice,
-    tickSize,
     minQty,
-    stepSize,
     minNotional,
     maxQuantityWithWallet,
     maxTotalWithWallet
   } = usePlaceOrderInfo({
     balances: accountInfo.balances,
     side: direction,
-    quoteAsset,
-    baseAsset,
     exchangeInfo
   });
 
@@ -80,7 +89,10 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
       minQuantity: +minQty,
       minNotional: +minNotional
     }),
-    defaultValues: { price: outerPrice },
+    defaultValues: {
+      [TRADE_FORM_FIELDS.timeInForce]: TIME_IN_FORCE_VALUES[0],
+      [TRADE_FORM_FIELDS.price]: outerPrice
+    },
     mode: "onChange"
   });
   const { triggerValidation, watch, setValue, reset } = form;
@@ -89,12 +101,9 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
   const { sliderValue, setSliderValue } = usePlaceOrderFormReset({
     status,
     triggerValidation,
-    stepSize,
     outerPrice,
     watch,
     reset,
-    baseAsset,
-    quoteAsset,
     side: direction,
     setValue,
     balances: accountInfo.balances,
@@ -106,10 +115,8 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
     totalName: TRADE_FORM_FIELDS.total,
     quantityName: TRADE_FORM_FIELDS.quantity,
     setValue,
-    tickSize,
     price,
     quantity,
-    stepSize,
     total
   });
 
@@ -146,7 +153,7 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
           externalDirty={true}
           autoFocus={false}
           isAllowed={isAllow("BTC")}
-          label={t("Total")}
+          label={isFutures ? t("Cost") : t("Total")}
           currency={quoteAsset}
           name={TRADE_FORM_FIELDS.total}
         />
@@ -156,6 +163,16 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
         side={direction}
         asset={baseAsset}
       />
+      <Row small>
+        <RowItem wide>
+          <TimeInForceField orderType={"LIMIT"} />
+        </RowItem>
+        {isFutures && currentPositionMode === false && (
+          <RowItem wide>
+            <ReduceOnlyField />
+          </RowItem>
+        )}
+      </Row>
     </HookForm>
   );
 };

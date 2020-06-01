@@ -11,18 +11,18 @@ const _SocialSearchInput: React.FC<Props> = ({ setSearchIsClose }) => {
   const { searchValue, setSearchValue } = useContext(SocialSearchContext);
   const handleSearchInput = useCallback(
     ({ target: { value } }: React.ChangeEvent<any>) => {
-      setSearchValue({ mask: value });
+      setSearchValue({ ...searchValue, mask: value });
       setSearchIsNotCancel();
     },
-    []
+    [searchValue]
   );
   const handleSearchBlur = useCallback(() => {
     if (!searchValue.mask) setSearchIsClose();
   }, [searchValue]);
   const handleSearchCancel = useCallback(() => {
-    setSearchValue(SocialSearchInitialState);
+    setSearchValue({ ...searchValue, mask: undefined });
     setSearchIsCancel();
-  }, []);
+  }, [searchValue]);
 
   useEffect(() => {
     if (cancelSearch && !searchValue.mask) setSearchIsClose();

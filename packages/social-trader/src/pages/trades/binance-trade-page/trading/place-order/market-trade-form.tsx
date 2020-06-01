@@ -1,18 +1,21 @@
 import { isAllow } from "components/deposit/components/deposit.helpers";
 import HookFormAmountField from "components/input-amount-field/hook-form-amount-field";
-import { MutedText } from "components/muted-text/muted-text";
 import { Slider } from "components/range/range";
+import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import StatisticItemInner from "components/statistic-item/statistic-item-inner";
+import { Text } from "components/text/text";
 import { API_REQUEST_STATUS } from "hooks/api-request.hook";
+import { ReduceOnlyField } from "pages/trades/binance-trade-page/trading/place-order/place-order-settings/reduce-only-field/reduce-only-field";
 import { PlaceOrderSubmitButton } from "pages/trades/binance-trade-page/trading/place-order/place-order-submit-button";
+import { TerminalPlaceOrderContext } from "pages/trades/binance-trade-page/trading/terminal-place-order.context";
+import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import {
   Account,
   ExchangeInfo,
-  OrderSide,
-  TradeCurrency
+  OrderSide
 } from "pages/trades/binance-trade-page/trading/trading.types";
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
@@ -30,8 +33,6 @@ import {
 export interface IMarketTradeFormProps {
   status: API_REQUEST_STATUS;
   outerPrice: number;
-  baseAsset: TradeCurrency;
-  quoteAsset: TradeCurrency;
   direction: OrderSide;
   onSubmit: (values: IPlaceOrderFormValues) => any;
 }
@@ -45,26 +46,30 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
   exchangeInfo,
   outerPrice,
   onSubmit,
-  quoteAsset,
-  baseAsset,
   direction
 }) => {
   const [t] = useTranslation();
 
   const {
+    tickSize,
+    stepSize,
+    symbol: { baseAsset, quoteAsset },
+    terminalType
+  } = useContext(TradingInfoContext);
+  const { currentPositionMode } = useContext(TerminalPlaceOrderContext);
+
+  const isFutures = terminalType === "futures";
+
+  const {
     minPrice,
     maxPrice,
-    tickSize,
     minQty,
-    stepSize,
     minNotional,
     maxQuantityWithWallet,
     maxTotalWithWallet
   } = usePlaceOrderInfo({
     balances: accountInfo.balances,
     side: direction,
-    quoteAsset,
-    baseAsset,
     exchangeInfo
   });
 
@@ -90,12 +95,9 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
   const { sliderValue, setSliderValue } = usePlaceOrderFormReset({
     status,
     triggerValidation,
-    stepSize,
     outerPrice,
     watch,
     reset,
-    baseAsset,
-    quoteAsset,
     side: direction,
     setValue,
     balances: accountInfo.balances,
@@ -107,10 +109,8 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
     totalName: TRADE_FORM_FIELDS.total,
     quantityName: TRADE_FORM_FIELDS.quantity,
     setValue,
-    tickSize,
     price,
     quantity,
-    stepSize,
     total
   });
 
@@ -125,7 +125,7 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
         />
       </Row>
       <StatisticItemInner label={t("Price")}>
-        {t("Market price")} <MutedText>(≈ {outerPrice})</MutedText>
+        {t("Market price")} <Text muted>(≈ {outerPrice})</Text>
       </StatisticItemInner>
       <Row>
         <HookFormAmountField
@@ -141,7 +141,7 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
           externalDirty={true}
           autoFocus={false}
           isAllowed={isAllow("BTC")}
-          label={t("Total")}
+          label={isFutures ? t("Cost") : t("Total")}
           currency={quoteAsset}
           name={TRADE_FORM_FIELDS.total}
         />
@@ -163,6 +163,13 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
         side={direction}
         asset={baseAsset}
       />
+      {isFutures && currentPositionMode === false && (
+        <Row small>
+          <RowItem>
+            <ReduceOnlyField />
+          </RowItem>
+        </Row>
+      )}
     </HookForm>
   );
 };

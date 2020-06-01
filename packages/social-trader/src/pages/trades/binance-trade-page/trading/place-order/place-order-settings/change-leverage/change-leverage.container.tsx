@@ -1,9 +1,11 @@
 import useApiRequest from "hooks/api-request.hook";
 import { ChangeLeverage } from "pages/trades/binance-trade-page/trading/place-order/place-order-settings/change-leverage/change-leverage";
 import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
+import { TerminalPlaceOrderContext } from "pages/trades/binance-trade-page/trading/terminal-place-order.context";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { getSymbolFromState } from "pages/trades/binance-trade-page/trading/trading.helpers";
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import { ChangeLeverageResponse } from "pages/trades/binance-trade-page/trading/trading.types";
+import React, { useCallback, useContext, useEffect } from "react";
 import { safeGetElemFromArray } from "utils/helpers";
 
 const _ChangeLeverageContainer: React.FC = () => {
@@ -11,8 +13,8 @@ const _ChangeLeverageContainer: React.FC = () => {
     changeLeverage: changeLeverageMethod,
     getLeverageBrackets: getLeverageBracketsMethod
   } = useContext(TerminalMethodsContext);
-  const { exchangeInfo, authData, symbol } = useContext(TradingInfoContext);
-  const [leverage, setLeverage] = useState<number>(20);
+  const { authData, symbol } = useContext(TradingInfoContext);
+  const { leverage, setLeverage } = useContext(TerminalPlaceOrderContext);
 
   const {
     sendRequest: getLeverageBrackets,
@@ -21,14 +23,16 @@ const _ChangeLeverageContainer: React.FC = () => {
     request: getLeverageBracketsMethod!
   });
   const { sendRequest: changeLeverage } = useApiRequest({
+    middleware: [
+      ({ leverage }: ChangeLeverageResponse) => setLeverage(leverage)
+    ],
     request: changeLeverageMethod!
   });
 
   useEffect(() => {
-    const isCorrectSymbol = exchangeInfo && exchangeInfo.symbols.length < 100;
-    if (authData.privateKey && isCorrectSymbol)
+    if (authData.privateKey)
       getLeverageBrackets({ authData, symbol: getSymbolFromState(symbol) });
-  }, [exchangeInfo]);
+  }, [authData, symbol]);
 
   const handleOnChange = useCallback(
     (leverage: number) => {
@@ -36,21 +40,27 @@ const _ChangeLeverageContainer: React.FC = () => {
         symbol: getSymbolFromState(symbol),
         authData,
         leverage
-      }).then(() => {
-        setLeverage(leverage);
       });
     },
     [symbol, authData]
   );
 
-  const maxLeverage = leverageBrackets
+  const symbolBrackets = leverageBrackets
     ? safeGetElemFromArray(
         leverageBrackets,
         brackets => brackets.symbol === getSymbolFromState(symbol)
-      ).brackets[0].initialLeverage
-    : 100;
+      ).brackets.sort((a, b) => {
+        return b.initialLeverage - a.initialLeverage;
+      })
+    : undefined;
+
+  if (!symbolBrackets) return null;
+
+  const maxLeverage = symbolBrackets[0].initialLeverage;
+
   return (
     <ChangeLeverage
+      leverageBrackets={symbolBrackets}
       maxLeverage={maxLeverage}
       leverage={leverage}
       onChange={handleOnChange}

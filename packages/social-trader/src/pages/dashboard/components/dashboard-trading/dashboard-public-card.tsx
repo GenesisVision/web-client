@@ -81,6 +81,14 @@ const _DashboardPublicCard: React.FC<Props> = ({
   const { programDetails, fundDetails } = asset.publicInfo;
   const topFundAssets = fundDetails && fundDetails.topFundAssets;
   const totalAssetsCount = fundDetails && fundDetails.totalAssetsCount;
+  const amountTitle =
+    asset.assetType === "Fund"
+      ? t("funds-page.funds-header.value")
+      : t("programs-page.programs-header.equity");
+  const amountTooltip =
+    asset.assetType === "Fund"
+      ? t("dashboard-page.tooltips.trading.equity-fund")
+      : t("dashboard-page.tooltips.investing.equity");
   return (
     <TableCard
       withOffset={withOffset}
@@ -102,12 +110,8 @@ const _DashboardPublicCard: React.FC<Props> = ({
           <StatisticItemInner
             label={
               <TooltipLabel
-                tooltipContent={
-                  fundDetails
-                    ? t("dashboard-page.tooltips.trading.equity-fund")
-                    : t("dashboard-page.tooltips.investing.equity")
-                }
-                labelText={t("programs-page.programs-header.equity")}
+                tooltipContent={amountTooltip}
+                labelText={amountTitle}
               />
             }
           >
@@ -139,7 +143,7 @@ const _DashboardPublicCard: React.FC<Props> = ({
             label={
               <TooltipLabel
                 tooltipContent={
-                  fundDetails
+                  asset.assetType === "Fund"
                     ? t("dashboard-page.tooltips.trading.ddown-fund")
                     : t("dashboard-page.tooltips.investing.ddown")
                 }
@@ -169,7 +173,7 @@ const _DashboardPublicCard: React.FC<Props> = ({
             label={
               <TooltipLabel
                 tooltipContent={
-                  fundDetails
+                  asset.assetType === "Fund"
                     ? t("dashboard-page.tooltips.trading.age-fund")
                     : t("dashboard-page.tooltips.investing.age-program")
                 }

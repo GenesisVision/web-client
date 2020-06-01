@@ -1,3 +1,4 @@
+import { USER_STREAM_ACCOUNT_UPDATE_EVENT_TYPE } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import {
   Account,
   Depth,
@@ -60,7 +61,7 @@ export const transformKline = (data: IBinanceKline): IKline => ({
 });
 
 export const transformOutboundAccountInfo = (m: any): OutboundAccountInfo => ({
-  eventType: "outboundAccountInfo",
+  eventType: USER_STREAM_ACCOUNT_UPDATE_EVENT_TYPE,
   eventTime: m.E,
   makerCommission: m.m,
   takerCommission: m.t,
@@ -105,54 +106,6 @@ export const transformExecutionReport = (m: any): ExecutionReport => ({
   orderCreationTime: m.O,
   totalQuoteTradeQuantity: m.Z
 });
-
-export const userTransforms = {
-  outboundAccountInfo: (m: any) => ({
-    eventType: "account",
-    eventTime: m.E,
-    makerCommissionRate: m.m,
-    takerCommissionRate: m.t,
-    buyerCommissionRate: m.b,
-    sellerCommissionRate: m.s,
-    canTrade: m.T,
-    canWithdraw: m.W,
-    canDeposit: m.D,
-    lastAccountUpdate: m.u,
-    balances: m.B.reduce((out: any, cur: any) => {
-      out[cur.a] = { available: cur.f, locked: cur.l };
-      return out;
-    }, {})
-  }),
-  executionReport: (m: any) => ({
-    eventType: "executionReport",
-    eventTime: m.E,
-    symbol: m.s,
-    newClientOrderId: m.c,
-    originalClientOrderId: m.C,
-    side: m.S,
-    orderType: m.o,
-    timeInForce: m.f,
-    quantity: m.q,
-    price: m.p,
-    executionType: m.x,
-    stopPrice: m.P,
-    icebergQuantity: m.F,
-    orderStatus: m.X,
-    orderRejectReason: m.r,
-    orderId: m.i,
-    orderTime: m.T,
-    lastTradeQuantity: m.l,
-    totalTradeQuantity: m.z,
-    priceLastTrade: m.L,
-    commission: m.n,
-    commissionAsset: m.N,
-    tradeId: m.t,
-    isOrderWorking: m.w,
-    isBuyerMaker: m.m,
-    creationTime: m.O,
-    totalQuoteTradeQuantity: m.Z
-  })
-};
 
 export const tickerTransform = (m: TickerWS): Ticker => ({
   eventType: m.e,

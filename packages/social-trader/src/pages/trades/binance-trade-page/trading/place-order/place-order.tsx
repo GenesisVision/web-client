@@ -5,9 +5,9 @@ import { GV_BTN_SIZE } from "components/gv-button";
 import GVTabs from "components/gv-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
 import { WalletIcon } from "components/icon/wallet-icon";
-import { MutedText } from "components/muted-text/muted-text";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { Text } from "components/text/text";
 import { SIZES } from "constants/constants";
 import useApiRequest from "hooks/api-request.hook";
 import useTab from "hooks/tab.hook";
@@ -32,6 +32,7 @@ const _PlaceOrder: React.FC = () => {
   const { price } = useContext(TradingPriceContext);
 
   const {
+    terminalType,
     authData,
     exchangeInfo,
     accountInfo,
@@ -55,10 +56,11 @@ const _PlaceOrder: React.FC = () => {
         authData
       });
     },
-    [authData, baseAsset, quoteAsset, side, tab]
+    [sendRequest, tradeRequest, authData, baseAsset, quoteAsset, side, tab]
   );
 
-  const walletAsset = side === "BUY" ? quoteAsset : baseAsset;
+  const walletAsset =
+    side === "BUY" || terminalType === "futures" ? quoteAsset : baseAsset;
   const balance = accountInfo
     ? getBalance(accountInfo.balances, walletAsset)
     : undefined;
@@ -98,9 +100,9 @@ const _PlaceOrder: React.FC = () => {
             </Center>
           </RowItem>
           <RowItem>
-            <MutedText>
+            <Text muted>
               {balance} {walletAsset}
-            </MutedText>
+            </Text>
           </RowItem>
         </Row>
       )}
@@ -114,8 +116,6 @@ const _PlaceOrder: React.FC = () => {
               outerPrice={+price}
               onSubmit={handleSubmit}
               direction={side}
-              baseAsset={baseAsset}
-              quoteAsset={quoteAsset}
             />
           )}
           {tab === "MARKET" && (
@@ -126,8 +126,6 @@ const _PlaceOrder: React.FC = () => {
               outerPrice={+price}
               onSubmit={handleSubmit}
               direction={side}
-              baseAsset={baseAsset}
-              quoteAsset={quoteAsset}
             />
           )}
           {tab === "STOP_LOSS_LIMIT" && (
@@ -138,8 +136,6 @@ const _PlaceOrder: React.FC = () => {
               outerPrice={+price}
               onSubmit={handleSubmit}
               direction={side}
-              baseAsset={baseAsset}
-              quoteAsset={quoteAsset}
             />
           )}
         </Row>

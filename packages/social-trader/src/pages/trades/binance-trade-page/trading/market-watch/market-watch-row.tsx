@@ -1,5 +1,4 @@
-import { ColoredText } from "components/colored-text/colored-text";
-import { MutedText } from "components/muted-text/muted-text";
+import { Text } from "components/text/text";
 import { TradeStatefulValue } from "pages/trades/binance-trade-page/trading/components/trade-stateful-value/trade-stateful-value";
 import { CHANGE_COLUMN } from "pages/trades/binance-trade-page/trading/market-watch/market-watch.helpers";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
@@ -47,7 +46,9 @@ export const MarketWatchRow: React.FC<Props> = React.memo(
         onClick={handleClick}
       >
         <td className={styles["market-watch__cell"]}>
-          <MutedText small>{symbol}</MutedText>
+          <Text muted size={"small"}>
+            {symbol}
+          </Text>
         </td>
         <td className={styles["market-watch__cell"]}>
           <TradeStatefulValue
@@ -57,11 +58,11 @@ export const MarketWatchRow: React.FC<Props> = React.memo(
         </td>
         <td className={styles["market-watch__table-value"]}>
           {column === CHANGE_COLUMN ? (
-            <ColoredText color={getTextColor(+priceChangePercent)}>
+            <Text color={getTextColor(+priceChangePercent)}>
               {priceChangePercent} %
-            </ColoredText>
+            </Text>
           ) : (
-            <ColoredText color={getTextColor(+volume)}>{volume} %</ColoredText>
+            <Text color={getTextColor(+volume)}>{volume} %</Text>
           )}
         </td>
       </tr>

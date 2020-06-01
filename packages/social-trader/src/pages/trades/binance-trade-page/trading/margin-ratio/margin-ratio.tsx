@@ -1,9 +1,7 @@
-import { ColoredText } from "components/colored-text/colored-text";
 import { DefaultBlock } from "components/default.block/default.block";
-import { MutedText } from "components/muted-text/muted-text";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
-import StatisticItemInner from "components/statistic-item/statistic-item-inner";
+import { Text } from "components/text/text";
 import { SIZES } from "constants/constants";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import { FuturesAsset } from "pages/trades/binance-trade-page/services/futures/binance-futures.types";
@@ -27,7 +25,7 @@ const MarginRatioItem: React.FC<{
   return (
     <Row wide>
       <RowItem wide>
-        <MutedText>{label}</MutedText>
+        <Text muted>{label}</Text>
       </RowItem>
       <RowItem className={styles["margin-ratio__value"]}>{value}</RowItem>
     </Row>
@@ -43,11 +41,14 @@ const _MarginRatio: React.FC<Props> = ({
   return (
     <DefaultBlock size={SIZES.SMALL} roundedBorder={false} bordered>
       <Row>
-        <StatisticItemInner big accent label={t("Margin ratio")}>
-          <ColoredText color={getMarginRatioColor(+marginRatio)}>
-            {marginRatio.toFixed(2)} %
-          </ColoredText>
-        </StatisticItemInner>
+        <MarginRatioItem
+          label={t("Margin ratio")}
+          value={
+            <Text wrap={false} color={getMarginRatioColor(+marginRatio)}>
+              <h4>{marginRatio.toFixed(2)} %</h4>
+            </Text>
+          }
+        />
       </Row>
       <Row onlyOffset>
         <MarginRatioItem

@@ -1,6 +1,6 @@
 import classNames from "classnames";
-import { MutedText } from "components/muted-text/muted-text";
 import { SortingColumn } from "components/table/components/filtering/filter.type";
+import { Text } from "components/text/text";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { SizesType } from "utils/types";
@@ -38,7 +38,7 @@ const _TradeTable: React.FC<Props> = ({
       <tr>
         <td colSpan={11}>
           <div className={styles["trade-table__empty-message"]}>
-            <MutedText>{t("table.no-items")}</MutedText>
+            <Text muted>{t("table.no-items")}</Text>
           </div>
         </td>
       </tr>

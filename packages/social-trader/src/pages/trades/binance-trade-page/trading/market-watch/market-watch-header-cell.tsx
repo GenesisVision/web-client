@@ -1,9 +1,9 @@
 import classNames from "classnames";
-import { MutedText } from "components/muted-text/muted-text";
 import {
   SORTING_DIRECTION,
   switchDirection
 } from "components/table/helpers/sorting.helpers";
+import { Text } from "components/text/text";
 import { SortingType } from "pages/trades/binance-trade-page/trading/market-watch/market-watch.helpers";
 import { MergedTickerSymbolType } from "pages/trades/binance-trade-page/trading/trading.types";
 import React, { useCallback } from "react";
@@ -43,7 +43,9 @@ export const MarketWatchHeaderCell: React.FC<Props> = React.memo(
               isSelected && sorting.direction === SORTING_DIRECTION.DESC
           })}
         >
-          <MutedText small> {children}</MutedText>
+          <Text size={"small"} muted>
+            {children}
+          </Text>
         </span>
       </th>
     );

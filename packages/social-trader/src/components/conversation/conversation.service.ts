@@ -99,15 +99,19 @@ export const getTopPosts = (values: Object): Promise<ConversationFeed> => {
 };
 
 export interface SearchInFeedValues {
-  tagContentId?: string;
-  hashTags?: Array<string>;
+  tagContent: { id: string; name: string }[];
+  hashTags: Array<string>;
   mask?: string;
 }
 
 export const searchInFeed = (searchValues: SearchInFeedValues) => (
   values: Object
 ): Promise<ConversationFeed> => {
-  return getFeedMethod({ ...searchValues, ...values });
+  return getFeedMethod({
+    ...searchValues,
+    tagContentIds: searchValues.tagContent.map(({ id }) => id),
+    ...values
+  });
 };
 
 export const getNewsFeed = (values?: Object): Promise<ConversationFeed> => {

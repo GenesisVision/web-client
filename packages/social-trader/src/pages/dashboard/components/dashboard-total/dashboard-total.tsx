@@ -63,7 +63,7 @@ const _DashboardTotal: React.FC<Props> = ({
           suffix={currency}
           color={$pieAvailableColor}
           tooltipContentLabel={t("dashboard-page.tooltips.total.wallet")}
-          label={t("dashboard-page.total.available")}
+          label={t("dashboard-page.total.wallet")}
           value={wallets}
           total={total}
         />

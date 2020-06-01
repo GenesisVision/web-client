@@ -1,3 +1,4 @@
+import { USER_STREAM_ACCOUNT_UPDATE_EVENT_TYPE } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import {
   Depth,
   IBinanceKline,
@@ -18,7 +19,7 @@ import {
   transformExecutionReport,
   transformKline,
   transformOutboundAccountInfo
-} from "./binance-ws.helpers";
+} from "./binance-spot-ws.helpers";
 
 export const BINANCE_WS_API_URL = "wss://stream.binance.com:9443";
 
@@ -75,7 +76,7 @@ export const getUserStreamSocket = (
   const url = `${BINANCE_WS_API_URL}/${BINANCE_WS_API_TYPE.WS}/${listenKey}`;
   return connectSocketMethod(socketName, url).pipe(
     map(item => {
-      if (item.e === "outboundAccountInfo")
+      if (item.e === USER_STREAM_ACCOUNT_UPDATE_EVENT_TYPE)
         return transformOutboundAccountInfo(item);
       if (item.e === "executionReport") return transformExecutionReport(item);
       return item;

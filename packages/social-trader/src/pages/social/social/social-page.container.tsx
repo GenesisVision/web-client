@@ -4,7 +4,7 @@ import { Row } from "components/row/row";
 import useApiRequest from "hooks/api-request.hook";
 import { getSocialPageData } from "pages/social/social/services/social-page.service";
 import { SocialPageDownloadsBlock } from "pages/social/social/social-page-downloads/social-page-downloads.block";
-import { SocialPageFeedBlock } from "pages/social/social/social-page-feed.block";
+import { SocialPageFeedBlock } from "pages/social/social/social-page-feed/social-page-feed.block";
 import { SocialPageGainersBlock } from "pages/social/social/social-page-gainers/social-page-gainers.block";
 import { SocialPageTopicsBlock } from "pages/social/social/social-page-topics/social-page-topics.block";
 import { SocialPageTradersBlock } from "pages/social/social/social-page-traders/social-page-traders.block";

@@ -4,9 +4,9 @@ import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogTop } from "components/dialog/dialog-top";
 import GVButton from "components/gv-button";
 import { GvButtonWithMark } from "components/gv-button/gv-button-with-mark/gv-button-with-mark";
-import { MutedText } from "components/muted-text/muted-text";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { Text } from "components/text/text";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { getSymbolFromState } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import { MarginModeType } from "pages/trades/binance-trade-page/trading/trading.types";
@@ -75,11 +75,11 @@ const MarginModeDialogContent: React.FC<Props> = ({
           </RowItem>
         </Row>
         <Row>
-          <MutedText noWrap={false}>
+          <Text muted>
             {t(
               "· Switching the margin mode will only apply it to the selected contract."
             )}
-          </MutedText>
+          </Text>
         </Row>
         <Row>
           <GVButton disabled={mode === modeProp} wide onClick={handleChange}>
@@ -88,17 +88,15 @@ const MarginModeDialogContent: React.FC<Props> = ({
         </Row>
         <Row>
           <Accordion
-            label={
-              <MutedText>{t("What are Cross and Isolated modes?")}</MutedText>
-            }
+            label={<Text muted>{t("What are Cross and Isolated modes?")}</Text>}
             text={
-              <MutedText noWrap={false}>
+              <Text>
                 {t(
                   "Cross Margin Mode: Share your margin balance across all open positions to avoid liquidation. In the event of liquidation you risk losing your full margin balance along with any remaining open positions.\n" +
                     "\n" +
                     "Isolated Margin Mode: Manage your risk on individual positions by restricting the amount of margin allocated to each. If the margin ratio of a position reached 100%, the position will be liquidated. Margin can be added or removed to positions using this mode."
                 )}
-              </MutedText>
+              </Text>
             }
           />
         </Row>

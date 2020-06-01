@@ -67,7 +67,9 @@ const _TransferContainer: React.FC<TransferContainerProps> = ({
         destinationType === "ExchangeAccount"
           ? accountId
           : values.destinationId;
-      return sendTransferRequest({ ...values, destinationId });
+      const sourceId =
+        sourceType === "ExchangeAccount" ? accountId : values.sourceId;
+      return sendTransferRequest({ ...values, destinationId, sourceId });
     },
     [destinationType, sourceType, destinationType, accountId]
   );

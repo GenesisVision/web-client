@@ -1,4 +1,4 @@
-import { ColoredText } from "components/colored-text/colored-text";
+import { Text } from "components/text/text";
 import { getTextColor } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import React, { useEffect, useState } from "react";
 
@@ -16,9 +16,9 @@ const _TradeStatefulValue: React.FC<Props> = ({ suffix, value, trigger }) => {
     setCurrentLastValue(value);
   }, [trigger]);
   return (
-    <ColoredText color={getTextColor(+value - +prevLastValue)}>
+    <Text color={getTextColor(+value - +prevLastValue)}>
       {value} {suffix}
-    </ColoredText>
+    </Text>
   );
 };
 

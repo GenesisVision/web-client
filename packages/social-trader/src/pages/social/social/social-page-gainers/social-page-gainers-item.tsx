@@ -4,6 +4,7 @@ import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { SocialSearchContext } from "pages/social/social/social-page.context";
 import React, { useCallback, useContext } from "react";
+import { formatCurrencyValue } from "utils/formatter";
 
 interface Props {
   title: string;
@@ -12,17 +13,24 @@ interface Props {
 }
 
 const _SocialPageGainersItem: React.FC<Props> = ({ title, price, change }) => {
-  const { setSearchValue } = useContext(SocialSearchContext);
+  const { searchValue, setSearchValue } = useContext(SocialSearchContext);
 
   const handleClick = useCallback(() => {
-    setSearchValue({ mask: title });
-  }, [title]);
+    const hashTag = `#${title.toLowerCase()}`;
+    const hashTags = searchValue.hashTags.includes(hashTag)
+      ? searchValue.hashTags
+      : [...searchValue.hashTags, hashTag];
+    setSearchValue({
+      ...searchValue,
+      hashTags
+    });
+  }, [searchValue, title]);
   return (
     <div>
       <Row onClick={handleClick}>{title}</Row>
       <Row>
         <RowItem>
-          <b>{price}</b>
+          <b>{formatCurrencyValue(price, title)}</b>
         </RowItem>
         <RowItem>
           <b>

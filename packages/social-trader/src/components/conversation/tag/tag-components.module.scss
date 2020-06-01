@@ -1,5 +1,10 @@
-@import "~shared/styles/_colors";
-@import "~shared/styles/_sizes";
+@import "styles/_colors";
+@import "styles/_sizes";
+
+.event-tag {
+  display: flex;
+  align-items: flex-end;
+}
 
 .asset-tag {
   font-size: $font-size-small;

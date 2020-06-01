@@ -7,6 +7,7 @@ import { safeGetElemFromArray } from "utils/helpers";
 import {
   AnyTag,
   EmptyTag,
+  EventTag,
   FollowLink,
   FollowTagCard,
   FundLink,
@@ -21,6 +22,7 @@ import {
 } from "./tag-components";
 
 export const inTextComponentsMap: TagToComponentType[] = [
+  { tagType: "Event", Component: EventTag },
   { tagType: "Undefined", Component: AnyTag },
   { tagType: "Program", Component: ProgramLink },
   { tagType: "Follow", Component: FollowLink },
@@ -29,6 +31,7 @@ export const inTextComponentsMap: TagToComponentType[] = [
 ];
 
 export const underTextComponentsMap: TagToComponentType[] = [
+  { tagType: "Event", Component: EmptyTag },
   { tagType: "Undefined", Component: EmptyTag },
   // @ts-ignore
   { tagType: "Post", Component: RepostTagComponent },
@@ -48,6 +51,8 @@ export const convertTagToComponent = (
   componentsMap: TagToComponentType[]
 ): JSX.Element => {
   switch (tag.type) {
+    case "Event":
+      return convertEventTagToComponent(tag, componentsMap);
     case "Asset":
       return convertPlatformAssetTagToComponent(tag, componentsMap);
     case "Program":
@@ -62,6 +67,17 @@ export const convertTagToComponent = (
     default:
       return convertUndefinedTagToComponent(tag);
   }
+};
+
+const convertEventTagToComponent = (
+  { event, type }: PostTag,
+  componentsMap: TagToComponentType[]
+): JSX.Element => {
+  const { Component } = safeGetElemFromArray(
+    componentsMap,
+    ({ tagType }) => tagType === type
+  );
+  return <Component data={event} />;
 };
 
 const convertPlatformAssetTagToComponent = (

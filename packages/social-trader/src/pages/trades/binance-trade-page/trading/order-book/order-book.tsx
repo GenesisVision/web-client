@@ -1,6 +1,6 @@
 import classNames from "classnames";
-import { MutedText } from "components/muted-text/muted-text";
 import { Row } from "components/row/row";
+import { Text } from "components/text/text";
 import { OrderBookCurrentPriceContainer } from "pages/trades/binance-trade-page/trading/order-book/order-book-current-price.container";
 import { OrderBookTickSizeSelect } from "pages/trades/binance-trade-page/trading/order-book/order-book-tick-size-select";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
@@ -37,13 +37,19 @@ const _OrderBook: React.FC<Props> = ({
         <table className={styles["order-book__table"]}>
           <thead>
             <th>
-              <MutedText small>Price ({baseAsset})</MutedText>
+              <Text muted size={"small"}>
+                Price ({baseAsset})
+              </Text>
             </th>
             <th>
-              <MutedText small>Amount ({quoteAsset})</MutedText>
+              <Text muted size={"small"}>
+                Amount ({quoteAsset})
+              </Text>
             </th>
             <th>
-              <MutedText small>Total</MutedText>
+              <Text muted size={"small"}>
+                Total
+              </Text>
             </th>
           </thead>
         </table>

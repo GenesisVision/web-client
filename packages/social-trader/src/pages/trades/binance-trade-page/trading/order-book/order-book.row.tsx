@@ -1,10 +1,8 @@
 import classNames from "classnames";
-import {
-  ColoredText,
-  ColoredTextColor
-} from "components/colored-text/colored-text";
+import { ColoredTextColor } from "components/colored-text/colored-text";
 import { DialogListItem } from "components/dialog/dialog-list-item";
 import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
+import { Text } from "components/text/text";
 import Tooltip from "components/tooltip/tooltip";
 import { TooltipContent } from "components/tooltip/tooltip-content";
 import { terminalMoneyFormat } from "pages/trades/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
@@ -103,7 +101,7 @@ const _OrderBookRow: React.FC<Props> = ({
         })}
       >
         <td>
-          <ColoredText color={color}>{formattedPrice}</ColoredText>
+          <Text color={color}>{formattedPrice}</Text>
         </td>
         <td>{formattedAmount}</td>
         <td>{formattedTotal}</td>

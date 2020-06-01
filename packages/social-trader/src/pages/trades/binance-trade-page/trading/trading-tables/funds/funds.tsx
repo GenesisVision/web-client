@@ -1,4 +1,4 @@
-import { MutedText } from "components/muted-text/muted-text";
+import { Text } from "components/text/text";
 import { TradeTable } from "pages/trades/binance-trade-page/trading/components/trade-table/trade-table";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { FundsRow } from "pages/trades/binance-trade-page/trading/trading-tables/funds/funds-row";
@@ -28,7 +28,7 @@ const _Funds: React.FC<Props> = ({ items }) => {
       columns={columns}
       renderHeaderCell={({ name }) => (
         <th>
-          <MutedText>{t(name)}</MutedText>
+          <Text muted>{t(name)}</Text>
         </th>
       )}
       renderRow={({ asset, free, locked }: AssetBalance) => (

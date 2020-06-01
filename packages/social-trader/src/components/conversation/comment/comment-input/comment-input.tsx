@@ -148,11 +148,13 @@ const _CommentInput: React.FC<Props> = ({ onSubmit, status, errorMessage }) => {
                 {isOpenPanel && (
                   <div>
                     {isOpenSearchPanel && (
-                      <SearchPanel
-                        isSearchPending={isSearchPending}
-                        onClick={handleSearchItemSelect}
-                        searchResult={searchResult}
-                      />
+                      <div className={styles["comment-input__search-panel"]}>
+                        <SearchPanel
+                          isSearchPending={isSearchPending}
+                          onClick={handleSearchItemSelect}
+                          searchResult={searchResult}
+                        />
+                      </div>
                     )}
                     {!!images?.length && (
                       <Center

@@ -9,6 +9,7 @@ import { PlaceOrder } from "pages/trades/binance-trade-page/trading/place-order/
 import { PlaceOrderSettingsContainer } from "pages/trades/binance-trade-page/trading/place-order/place-order-settings/place-order-settings.container";
 import { SymbolSummaryContainer } from "pages/trades/binance-trade-page/trading/symbol-summary/symbol-summary";
 import { SymbolSummarySmallBlock } from "pages/trades/binance-trade-page/trading/symbol-summary/symbol-summary-small";
+import { TerminalPlaceOrderContextProvider } from "pages/trades/binance-trade-page/trading/terminal-place-order.context";
 import { TradesBlock } from "pages/trades/binance-trade-page/trading/trades/trades.block";
 import {
   SymbolState,
@@ -97,9 +98,11 @@ const _Terminal: React.FC<Props> = ({
               </ResponsiveContainer>
             </div>
             <div className={styles["place-orders-grid-elem"]}>
-              {terminalType === "futures" && <PlaceOrderSettingsContainer />}
-              <PlaceOrder />
-              {terminalType === "futures" && <MarginRatioContainer />}
+              <TerminalPlaceOrderContextProvider>
+                {terminalType === "futures" && <PlaceOrderSettingsContainer />}
+                <PlaceOrder />
+                {terminalType === "futures" && <MarginRatioContainer />}
+              </TerminalPlaceOrderContextProvider>
             </div>
           </TradingPriceContextProvider>
         </TradingTickerContextProvider>

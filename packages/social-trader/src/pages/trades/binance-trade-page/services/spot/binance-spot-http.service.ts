@@ -15,8 +15,7 @@ import { Observable } from "rxjs";
 import {
   OrderRequest,
   REQUEST_TYPE,
-  requestService,
-  TimeInForce
+  requestService
 } from "services/request.service";
 
 const dev = process.env.NODE_ENV !== "production";
@@ -155,6 +154,8 @@ export const cancelOrder = (
   );
 
 export const postBuy = ({
+  reduceOnly,
+  timeInForce,
   stopPrice,
   authData,
   symbol,
@@ -164,6 +165,7 @@ export const postBuy = ({
 }: TradeRequest & { authData: TradeAuthDataType }): Promise<QueryOrderResult> =>
   newOrder(
     {
+      reduceOnly,
       stopPrice: type === "STOP_LOSS_LIMIT" ? String(stopPrice) : undefined,
       symbol,
       type,
@@ -172,16 +174,15 @@ export const postBuy = ({
           ? String(price)
           : undefined,
       quantity: String(quantity),
-      timeInForce:
-        type === "LIMIT" || type === "STOP_LOSS_LIMIT"
-          ? TimeInForce.GTC
-          : undefined,
+      timeInForce,
       side: "BUY"
     },
     authData
   );
 
 export const postSell = ({
+  reduceOnly,
+  timeInForce,
   stopPrice,
   authData,
   symbol,
@@ -191,6 +192,7 @@ export const postSell = ({
 }: TradeRequest & { authData: TradeAuthDataType }): Promise<QueryOrderResult> =>
   newOrder(
     {
+      reduceOnly,
       stopPrice: type === "STOP_LOSS_LIMIT" ? String(stopPrice) : undefined,
       symbol,
       type,
@@ -199,10 +201,7 @@ export const postSell = ({
           ? String(price)
           : undefined,
       quantity: String(quantity),
-      timeInForce:
-        type === "LIMIT" || type === "STOP_LOSS_LIMIT"
-          ? TimeInForce.GTC
-          : undefined,
+      timeInForce,
       side: "SELL"
     },
     authData

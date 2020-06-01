@@ -25,15 +25,7 @@ interface IUsersListProps {
 }
 
 export const UsersListItem: React.FC<IUsersListItemProps> = React.memo(
-  ({
-    user: {
-      logoUrl,
-      username,
-      url,
-      id,
-      personalDetails: { canFollow, isFollow }
-    }
-  }) => {
+  ({ user: { logoUrl, username, url, id, personalDetails } }) => {
     const { contextTitle } = useToLink();
     const link = managerToPathCreator(url, contextTitle);
     return (
@@ -50,12 +42,12 @@ export const UsersListItem: React.FC<IUsersListItemProps> = React.memo(
             </Center>
           </Link>
         </RowItem>
-        {true && (
+        {personalDetails && (
           <RowItem>
             <FollowUserButton
               size={GV_BTN_SIZE.SMALL}
               id={id}
-              value={isFollow}
+              value={personalDetails.isFollow}
             />
           </RowItem>
         )}

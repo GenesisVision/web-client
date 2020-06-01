@@ -1,11 +1,10 @@
 import { Center } from "components/center/center";
-import { ColoredText } from "components/colored-text/colored-text";
 import { DefaultBlock } from "components/default.block/default.block";
-import { MutedText } from "components/muted-text/muted-text";
 import { ResponsiveContainer } from "components/responsive-container/responsive-container";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import StatisticItemInner from "components/statistic-item/statistic-item-inner";
+import { Text } from "components/text/text";
 import { SIZES } from "constants/constants";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import { MonoText } from "pages/trades/binance-trade-page/trading/components/mono-text/mono-text";
@@ -89,24 +88,24 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
           </h4>
         </Row>
         <Row small>
-          <MutedText>
+          <Text muted>
             <MonoText>
               {terminalMoneyFormat({ amount: lastPrice, tickSize })}
             </MonoText>
-          </MutedText>
+          </Text>
         </Row>
       </RowItem>
       <RowItem>
         <StatisticItemInner label={"24 Change"}>
           <MonoText>
-            <ColoredText color={+priceChangePercent > 0 ? "green" : "red"}>
+            <Text color={+priceChangePercent > 0 ? "green" : "red"}>
               {terminalMoneyFormat({ amount: priceChange, tickSize })}{" "}
               {terminalMoneyFormat({
                 amount: priceChangePercent,
                 digits: 2
               })}{" "}
               %
-            </ColoredText>
+            </Text>
           </MonoText>
         </StatisticItemInner>
       </RowItem>
