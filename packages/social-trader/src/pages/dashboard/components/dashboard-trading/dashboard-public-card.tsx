@@ -165,7 +165,7 @@ const _DashboardPublicCard: React.FC<Props> = ({
       )}
       <DepositWithdrawButtons
         accountType={asset.assetTypeExt}
-        canTransfer={asset.actions.canTransferMoney}
+        canTransfer={asset?.actions?.canTransferMoney}
         transferableItem={mapAccountToTransferItemType(asset)}
         title={asset.publicInfo.title}
         onApply={updateItems}
