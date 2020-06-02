@@ -90,7 +90,7 @@ const _ManagerProgramHistoryRow: React.FC<IManagerHistoryRowProps> = ({
             >
               <ProgramPeriodPie
                 condition={asset.status !== STATUS.CLOSED}
-                loader={t("asset-period.asset-closed")}
+                loader={t("program-period.program-closed")}
                 start={asset.periodStarts}
                 end={asset.periodEnds}
               />

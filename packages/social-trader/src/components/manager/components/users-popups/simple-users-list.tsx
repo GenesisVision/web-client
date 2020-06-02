@@ -7,6 +7,7 @@ import React from "react";
 import styles from "./users-popups.module.scss";
 
 export interface ISimpleUserListProps {
+  onClick?: VoidFunction;
   items: ProfilePublicShort[];
 }
 
@@ -14,15 +15,14 @@ interface Props extends ISimpleUserListProps {
   title: string;
 }
 
-const _SimpleUserList: React.FC<Props> = ({ items, title }) => {
-  console.log(items);
+const _SimpleUserList: React.FC<Props> = ({ onClick, items, title }) => {
   return (
     <>
       <DialogTop title={title} />
       <PopoverContentCardBlock size={null} fixed={false}>
         <div className={styles["users-list"]}>
           {items.map(user => (
-            <UsersListItem user={user} />
+            <UsersListItem onClick={onClick} user={user} />
           ))}
         </div>
       </PopoverContentCardBlock>

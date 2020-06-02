@@ -70,14 +70,15 @@ export const convertTagToComponent = (
 };
 
 const convertEventTagToComponent = (
-  { event, type }: PostTag,
+  { assetDetails, event, type }: PostTag,
   componentsMap: TagToComponentType[]
 ): JSX.Element => {
   const { Component } = safeGetElemFromArray(
     componentsMap,
     ({ tagType }) => tagType === type
   );
-  return <Component data={event} />;
+  if (!event || !assetDetails) return <></>;
+  return <Component data={{ event, assetDetails }} />;
 };
 
 const convertPlatformAssetTagToComponent = (

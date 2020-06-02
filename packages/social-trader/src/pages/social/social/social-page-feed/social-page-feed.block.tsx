@@ -17,6 +17,7 @@ import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import SocialSearchInput from "./social-search-input";
 
 enum TABS {
+  SEARCH = "SEARCH",
   FEED = "FEED",
   HOT = "HOT",
   LIVE = "LIVE"
@@ -39,6 +40,11 @@ const _SocialPageFeedBlock: React.FC<Props> = () => {
     !!searchValue.hashTags.length ||
     !!searchValue.mask ||
     !!searchValue.tagContent.length;
+
+  useEffect(() => {
+    if (isSearch) setTab(null, TABS.SEARCH);
+    else setTab(null, TABS.LIVE);
+  }, [isSearch]);
   return (
     <>
       <Row>

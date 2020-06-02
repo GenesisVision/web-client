@@ -198,7 +198,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
                 brokerDetails={brokerDetails}
               />
             )}
-            {isOwnAsset && ownerActions.canTransferMoney && (
+            {isOwnAsset && ownerActions?.canTransferMoney && (
               <InvestmentAccountControls
                 transferableItem={mapProgramFollowToTransferItemType(
                   description

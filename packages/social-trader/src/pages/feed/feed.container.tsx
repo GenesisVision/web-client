@@ -46,6 +46,7 @@ const _FeedContainer: React.FC<Props> = ({
   );
   return (
     <PostListWithInput
+      key={JSON.stringify(searchValue)}
       fetchMethod={fetchMethod()}
       showInput={isAuthenticated && showInput}
     />

@@ -1,20 +1,20 @@
 import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
 import { Center } from "components/center/center";
 import { GV_BTN_SIZE } from "components/gv-button";
-import Link from "components/link/link";
+import { Push } from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import { FollowUserButton } from "components/manager/components/follow-user-buttom";
 import { UsersListItemType } from "components/manager/components/users-popups/users-popups.types";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
-import React from "react";
+import React, { useCallback } from "react";
 import InfiniteScroll from "react-infinite-scroller";
 import { managerToPathCreator } from "routes/manager.routes";
-import { getRandomBoolean } from "utils/helpers";
 
 import styles from "./users-popups.module.scss";
 
 interface IUsersListItemProps {
+  onClick?: VoidFunction;
   user: UsersListItemType;
 }
 
@@ -25,26 +25,29 @@ interface IUsersListProps {
 }
 
 export const UsersListItem: React.FC<IUsersListItemProps> = React.memo(
-  ({ user: { logoUrl, username, url, id, personalDetails } }) => {
+  ({ onClick, user: { logoUrl, username, url, id, personalDetails } }) => {
     const { contextTitle } = useToLink();
     const link = managerToPathCreator(url, contextTitle);
+    const handleClick = useCallback(() => {
+      Push(link.pathname, link.as);
+      onClick && onClick();
+    }, [link]);
     return (
       <Row wide className={styles["users-list__item"]}>
-        <RowItem wide>
-          <Link white to={link}>
-            <Center>
-              <RowItem>
-                <ProfileAvatar url={logoUrl} />
-              </RowItem>
-              <RowItem wide className={styles["users-list__name"]}>
-                {username}
-              </RowItem>
-            </Center>
-          </Link>
+        <RowItem wide onClick={handleClick}>
+          <Center>
+            <RowItem>
+              <ProfileAvatar url={logoUrl} />
+            </RowItem>
+            <RowItem wide className={styles["users-list__name"]}>
+              {username}
+            </RowItem>
+          </Center>
         </RowItem>
         {personalDetails && (
           <RowItem>
             <FollowUserButton
+              disabled={!personalDetails.allowFollow}
               size={GV_BTN_SIZE.SMALL}
               id={id}
               value={personalDetails.isFollow}
