@@ -82,7 +82,8 @@ export const PROGRAMS_TABLE_FILTERS: IComposeDefaultFilter[] = [
 export const PROGRAMS_COLUMNS: SortingColumn[] = [
   {
     name: "title",
-    sortingName: "ByTitle"
+    sortingName: "ByTitle",
+    tooltip: true
   },
   {
     name: "equity",

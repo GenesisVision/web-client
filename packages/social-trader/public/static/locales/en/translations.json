@@ -689,7 +689,9 @@
       "investors": "Number of investors in the fund.",
       "age": "Age of the fund",
       "drawdown": "Maximum drawdown of the fund during the selected date range.",
-      "profit": "Profit of the fund during the selected date range"
+      "profit": "Profit of the fund during the selected date range",
+      "title": "Name of the fund",
+      "size": "Current market value of all assets in the fund"
     }
   },
   "about-levels-page": {

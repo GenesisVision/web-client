@@ -23,7 +23,7 @@ const _FollowTableSortingValue: React.FC<{ column: SortingColumn }> = ({
         </TooltipContent>
       )}
     >
-      <div>{t(`follows-page.header.${column.name}`)}</div>
+      <div>{renderValue()}</div>
     </Tooltip>
   ) : (
     renderValue()
