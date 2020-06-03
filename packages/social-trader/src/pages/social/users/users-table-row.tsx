@@ -1,6 +1,8 @@
 import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
+import { GV_BTN_SIZE } from "components/gv-button";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
+import { FollowUserButton } from "components/manager/components/follow-user-buttom";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import TableCell from "components/table/components/table-cell";
@@ -19,6 +21,9 @@ const USER_TABLE_ROW_CURRENCY = "USD";
 
 export const UsersTableRow: React.FC<{ user: UserDetailsList }> = ({
   user: {
+    personalDetails,
+    userId,
+    followersCount,
     followers,
     about,
     url,
@@ -32,6 +37,13 @@ export const UsersTableRow: React.FC<{ user: UserDetailsList }> = ({
 }) => {
   const { contextTitle } = useToLink();
   const profileUrl = managerToPathCreator(url, contextTitle);
+  const slicedAbout =
+    about && about.split(" ").length > 13
+      ? about
+          .split(" ")
+          .slice(0, 13)
+          .join(" ") + " ..."
+      : about;
   return (
     <TableRow className={styles["users-table-row"]}>
       <TableCell className={styles["users-table-row__about-cell"]}>
@@ -48,13 +60,17 @@ export const UsersTableRow: React.FC<{ user: UserDetailsList }> = ({
               </Link>
             </Row>
             <Row small className={styles["users-table-row__about"]}>
-              {about}
+              {slicedAbout}
             </Row>
           </RowItem>
         </Row>
       </TableCell>
       <TableCell>
-        {followers.length ? <UserAvatarList list={followers} /> : "0"}
+        {followers.length ? (
+          <UserAvatarList count={followersCount} list={followers} />
+        ) : (
+          "0"
+        )}
       </TableCell>
       <TableCell>{distanceDate(regDate)}</TableCell>
       <TableCell>
@@ -75,6 +91,16 @@ export const UsersTableRow: React.FC<{ user: UserDetailsList }> = ({
           displayType="text"
         />
       </TableCell>
+      {personalDetails && (
+        <TableCell>
+          <FollowUserButton
+            disabled={!personalDetails.allowFollow}
+            size={GV_BTN_SIZE.SMALL}
+            id={userId}
+            value={personalDetails.isFollow}
+          />
+        </TableCell>
+      )}
     </TableRow>
   );
 };

@@ -18,5 +18,6 @@
     @include transition(opacity);
     white-space: normal;
     color: $label-color;
+    line-height: $font-size-h2;
   }
 }

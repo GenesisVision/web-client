@@ -10,17 +10,18 @@ import { managerToPathCreator } from "routes/manager.routes";
 import styles from "./user-avatar-list.module.scss";
 
 interface Props {
+  count: number;
   length?: number;
   list: ProfilePublicShort[];
 }
 
-const _UserAvatarList: React.FC<Props> = ({ length = 3, list }) => {
+const _UserAvatarList: React.FC<Props> = ({ count, length = 3, list }) => {
   const { contextTitle } = useToLink();
   return (
     <Center
       className={styles["user-avatar-list__container"]}
       style={{
-        width: (44 - 20) * (Math.min(length, list.length) + 1)
+        width: (44 - 20) * (Math.min(length, count) + 1)
       }}
     >
       {list.slice(0, length).map(({ url, logoUrl, username }, i) => {
@@ -38,7 +39,7 @@ const _UserAvatarList: React.FC<Props> = ({ length = 3, list }) => {
           </div>
         );
       })}
-      {list.length > length && (
+      {count > length && (
         <div
           className={classNames(
             styles["user-avatar-list__remainder"],
@@ -48,7 +49,7 @@ const _UserAvatarList: React.FC<Props> = ({ length = 3, list }) => {
             left: -(20 * length)
           }}
         >
-          + {list.length - length}
+          + {count - length}
         </div>
       )}
     </Center>
