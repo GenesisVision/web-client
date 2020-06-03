@@ -21,11 +21,11 @@ export const SocialPageContainer = () => {
   if (!data) return null;
   return (
     <>
-      <Row center={false} className={styles[""]}>
+      <Row center={false} className={styles["social-page__main-container"]}>
         <ResponsiveContainer
           enabledScreens={["landscape-tablet", "desktop", "large-desktop"]}
         >
-          <RowItem>
+          <RowItem className={styles["social-page__side-block"]}>
             <div className={styles["social-page__sticky"]}>
               <Row>
                 <SocialPageTradersBlock assets={data?.topStrategies} />
@@ -44,11 +44,11 @@ export const SocialPageContainer = () => {
             </div>
           </RowItem>
         </ResponsiveContainer>
-        <RowItem wide>
+        <RowItem className={styles["social-page__feed-container"]}>
           <SocialPageFeedBlock />
         </RowItem>
         <ResponsiveContainer enabledScreens={["large-desktop", "desktop"]}>
-          <RowItem>
+          <RowItem className={styles["social-page__side-block"]}>
             <div className={styles["social-page__sticky"]}>
               <Row>
                 <SocialPageTopicsBlock topics={data?.hotTopics} />

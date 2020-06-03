@@ -2,7 +2,36 @@
 @import "~shared/styles/_breakpoint";
 @import "~shared/styles/_constants";
 
+$desktop-center-width: 60%;
+$desktop-side-block-width: calc((100% - #{$desktop-center-width}) / 2);
+
+$tablet-center-width: 70%;
+$tablet-side-block-width: calc(100% - #{$tablet-center-width});
+
 .social-page {
+  &__main-container {
+    justify-content: space-between;
+  }
+
+  &__feed-container {
+    width: 100%;
+    @include media-breakpoint-landscape-tablet() {
+      width: $tablet-center-width;
+    }
+    @include media-breakpoint-desktop() {
+      width: $desktop-center-width;
+    }
+  }
+
+  &__side-block {
+    @include media-breakpoint-landscape-tablet() {
+      width: $tablet-side-block-width;
+    }
+    @include media-breakpoint-desktop() {
+      width: $desktop-side-block-width;
+    }
+  }
+
   &__sticky {
     position: sticky;
     top: $padding-xsmall;
