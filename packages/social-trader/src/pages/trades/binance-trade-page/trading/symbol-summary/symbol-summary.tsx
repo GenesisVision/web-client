@@ -14,17 +14,17 @@ import {
 } from "pages/trades/binance-trade-page/trading/symbol-summary/symbol-summary.helpers";
 import { TerminalTypeSwitcher } from "pages/trades/binance-trade-page/trading/symbol-summary/terminal-type-switcher";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
-import { MergedTickerSymbolType } from "pages/trades/binance-trade-page/trading/trading.types";
+import { SymbolSummaryData } from "pages/trades/binance-trade-page/trading/trading.types";
 import React, { useContext } from "react";
 
 import styles from "./symbol-summary.module.scss";
 
 interface Props {
-  data: MergedTickerSymbolType;
+  data: SymbolSummaryData;
 }
 
 export const SymbolSummaryContainer: React.FC = () => {
-  const { symbolData } = useSymbolData();
+  const symbolData = useSymbolData();
   return (
     <SymbolSummaryView
       data={symbolData!}
@@ -33,7 +33,7 @@ export const SymbolSummaryContainer: React.FC = () => {
   );
 };
 
-const SymbolSummaryLine: React.FC<{ label: string }> = React.memo(
+const SymbolSummaryLine: React.FC<{ label: string | JSX.Element }> = React.memo(
   ({ label, children }) => {
     return (
       <Row className={styles["symbol-summary__line"]}>
@@ -48,15 +48,17 @@ const SymbolSummaryLine: React.FC<{ label: string }> = React.memo(
 
 const _SymbolSummaryView: React.FC<Props> = ({
   data: {
-    eventTime,
-    lastPrice,
-    baseAsset,
-    quoteAsset,
-    priceChangePercent,
-    priceChange,
-    high,
-    low,
-    volume
+    tickerData: {
+      eventTime,
+      lastPrice,
+      baseAsset,
+      quoteAsset,
+      priceChangePercent,
+      priceChange,
+      high,
+      low,
+      volume
+    }
   }
 }) => {
   const { stepSize, tickSize } = useContext(TradingInfoContext);

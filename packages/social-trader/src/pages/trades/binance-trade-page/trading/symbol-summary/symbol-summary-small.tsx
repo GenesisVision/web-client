@@ -17,11 +17,11 @@ import {
 } from "pages/trades/binance-trade-page/trading/symbol-summary/symbol-summary.helpers";
 import { TerminalTypeSwitcher } from "pages/trades/binance-trade-page/trading/symbol-summary/terminal-type-switcher";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
-import { MergedTickerSymbolType } from "pages/trades/binance-trade-page/trading/trading.types";
+import { SymbolSummaryData } from "pages/trades/binance-trade-page/trading/trading.types";
 import React, { useContext } from "react";
 
 interface Props {
-  data: MergedTickerSymbolType;
+  data: SymbolSummaryData;
 }
 
 export const SymbolSummarySmallBlock: React.FC = () => {
@@ -33,7 +33,7 @@ export const SymbolSummarySmallBlock: React.FC = () => {
 };
 
 export const SymbolSummarySmallContainer: React.FC = () => {
-  const { symbolData } = useSymbolData();
+  const symbolData = useSymbolData();
   return (
     <SymbolSummarySmallView
       data={symbolData!}
@@ -44,15 +44,17 @@ export const SymbolSummarySmallContainer: React.FC = () => {
 
 const _SymbolSummarySmallView: React.FC<Props> = ({
   data: {
-    eventTime,
-    lastPrice,
-    baseAsset,
-    quoteAsset,
-    priceChangePercent,
-    priceChange,
-    high,
-    low,
-    volume
+    tickerData: {
+      eventTime,
+      lastPrice,
+      baseAsset,
+      quoteAsset,
+      priceChangePercent,
+      priceChange,
+      high,
+      low,
+      volume
+    }
   }
 }) => {
   const { stepSize, tickSize } = useContext(TradingInfoContext);
