@@ -24,7 +24,10 @@ export const useSymbolData = () => {
     : undefined;
 
   useEffect(() => {
-    if (!getMarkPrice) return;
+    if (!getMarkPrice) {
+      setMarkPrice(undefined);
+      return;
+    }
     getMarkPrice({ symbol: textSymbol }).subscribe(data => {
       setMarkPrice(data);
       markPriceSocket!(connectSocket, textSymbol).subscribe(data => {
