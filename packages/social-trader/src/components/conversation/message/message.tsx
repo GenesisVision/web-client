@@ -11,6 +11,7 @@ import {
   inTextComponentsMap,
   parseToTsx
 } from "components/conversation/tag/parse-to-tsx";
+import { HorizontalShadowList } from "components/horizontal-list-shadow-container/horizontal-shadow-list";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { PostTag } from "gv-api-web";
@@ -72,8 +73,10 @@ const _Message: React.FC<IMessageProps> = ({
         </RowItem>
       </div>
       {!!tagsUnderText?.length && (
-        <Row wrap small>
-          {generateTagsComponents(tagsUnderText)}
+        <Row small>
+          <HorizontalShadowList withScroll={false}>
+            {generateTagsComponents(tagsUnderText)}
+          </HorizontalShadowList>
         </Row>
       )}
     </div>
