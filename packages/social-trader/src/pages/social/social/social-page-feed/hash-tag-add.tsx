@@ -76,6 +76,7 @@ const HashTagAddPopover: React.FC<{ clearAnchor: VoidFunction }> = ({
           <FilterTitle>{t("Enter hash tag")}</FilterTitle>
         </Row>
         <ConversationInput
+          autoFocus
           bottomLine
           disabled={false}
           outerCaret={fixedCaretPosition}
