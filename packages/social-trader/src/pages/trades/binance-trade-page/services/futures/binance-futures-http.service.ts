@@ -15,6 +15,7 @@ import {
   HttpResponse,
   KlineParams,
   MarginModeType,
+  MarkPrice,
   OrderSide,
   PositionModeResponse,
   PositionModeType,
@@ -51,6 +52,14 @@ export const getExchangeInfo = (): Promise<ExchangeInfo> =>
 export const pingBinanceApi = (): Observable<any[]> =>
   requestService.get({
     url: `${API_ROUTE}/ping`
+  });
+
+export const getMarkPrice = (params: {
+  symbol: string;
+}): Observable<MarkPrice> =>
+  requestService.get({
+    params,
+    url: `${API_ROUTE}/premiumIndex`
   });
 
 export const getBalancesForTransfer = ({

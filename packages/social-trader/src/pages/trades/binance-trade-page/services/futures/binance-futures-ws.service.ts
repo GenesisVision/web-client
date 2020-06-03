@@ -2,13 +2,15 @@ import {
   futuresAccountUpdateEventTransform,
   futuresMarginCallEventTransform,
   futuresTradeOrderUpdateEventTransform,
-  transformFuturesTickerSymbolWS
+  transformFuturesTickerSymbolWS,
+  transformMarkPriceWS
 } from "pages/trades/binance-trade-page/services/futures/binance-futures.helpers";
 import {
   Depth,
   IBinanceKline,
   IKline,
   KlineSocketType,
+  MarkPrice,
   Ticker,
   Trade,
   TradeCurrency
@@ -38,6 +40,16 @@ export enum ORDER_STATUSES {
   PENDING = "PENDING",
   REJECTED = "REJECTED"
 }
+
+export const markPriceSocket = (
+  connectSocketMethod: ConnectSocketMethodType,
+  symbol: TradeCurrency
+): Observable<MarkPrice> => {
+  const socketType = "markPrice";
+  const socketName = `${symbol.toLowerCase()}@${socketType}`;
+  const url = `${BINANCE_FUTURES_WS_API_URL}/${BINANCE_WS_API_TYPE.WS}/${socketName}`;
+  return connectSocketMethod(socketType, url).pipe(map(transformMarkPriceWS));
+};
 
 export const tradeSocket = (
   connectSocketMethod: ConnectSocketMethodType,

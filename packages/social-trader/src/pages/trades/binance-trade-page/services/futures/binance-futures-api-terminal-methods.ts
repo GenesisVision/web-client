@@ -13,6 +13,7 @@ import {
   getExchangeInfo,
   getKlines,
   getLeverageBrackets,
+  getMarkPrice,
   getOpenOrders,
   getPositionInformation,
   getPositionMode,
@@ -27,10 +28,13 @@ import {
   getUserStreamSocket,
   klineSocket,
   marketTicketsSocket,
+  markPriceSocket,
   tradeSocket
 } from "./binance-futures-ws.service";
 
 export const BinanceFuturesTerminalMethods: ITerminalMethods = {
+  markPriceSocket,
+  getMarkPrice,
   getBalancesForTransfer,
   newFutureAccountTransfer,
   changePositionMode,
