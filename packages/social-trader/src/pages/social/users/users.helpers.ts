@@ -13,7 +13,8 @@ export const USERS_TABLE_COLUMNS: SortingColumn[] = [
   { name: "age", sortingName: "byAge" },
   { name: "aum", sortingName: "byAum" },
   { name: "investors", sortingName: "byInvestors" },
-  { name: "profit", sortingName: "byProfit" }
+  { name: "profit", sortingName: "byProfit" },
+  { name: "" }
 ];
 
 export const USERS_DATE_RANGE_FILTER_NAME = "timeframe";
