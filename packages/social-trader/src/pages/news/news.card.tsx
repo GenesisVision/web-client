@@ -29,7 +29,7 @@ const NewsCardContent: React.FC<Props> = React.memo(
       <div>
         <DefaultBlock>
           <Row>
-            <TitleTag>Title</TitleTag>
+            <TitleTag>{post.title}</TitleTag>
           </Row>
           {!!post.text?.length && (
             <Row>
