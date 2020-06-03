@@ -29,7 +29,7 @@ const HashTagAddPopover: React.FC<{ clearAnchor: VoidFunction }> = ({
     defaultValues: { [VALUE_FIELD]: "" },
     mode: "onChange"
   });
-  const { setValue, watch } = form;
+  const { handleSubmit, setValue, watch } = form;
 
   const handleSelectTag = useCallback(
     ({ id, name }: AssetSearchResult) => {
@@ -41,6 +41,20 @@ const HashTagAddPopover: React.FC<{ clearAnchor: VoidFunction }> = ({
     },
     [searchValue, setSearchValue]
   );
+
+  const enterSubmit = useCallback(args => {
+    setSearchValue({
+      ...searchValue,
+      hashTags: [...searchValue.hashTags, args[VALUE_FIELD]]
+    });
+    clearAnchor();
+  }, []);
+
+  const inputSubmit = useCallback(() => {
+    return handleSubmit(values => {
+      return enterSubmit(values);
+    });
+  }, [enterSubmit, handleSubmit]);
 
   const {
     isSearchPending,
@@ -66,7 +80,7 @@ const HashTagAddPopover: React.FC<{ clearAnchor: VoidFunction }> = ({
           disabled={false}
           outerCaret={fixedCaretPosition}
           onChangeCaret={onChangeCaret}
-          submitForm={() => {}}
+          submitForm={inputSubmit()}
           name={VALUE_FIELD}
         />
         {isOpenSearchPanel && (
