@@ -19,6 +19,7 @@ const USER_TABLE_ROW_CURRENCY = "USD";
 
 export const UsersTableRow: React.FC<{ user: UserDetailsList }> = ({
   user: {
+    followersCount,
     followers,
     about,
     url,
@@ -54,7 +55,11 @@ export const UsersTableRow: React.FC<{ user: UserDetailsList }> = ({
         </Row>
       </TableCell>
       <TableCell>
-        {followers.length ? <UserAvatarList list={followers} /> : "0"}
+        {followers.length ? (
+          <UserAvatarList length={followersCount} list={followers} />
+        ) : (
+          "0"
+        )}
       </TableCell>
       <TableCell>{distanceDate(regDate)}</TableCell>
       <TableCell>
