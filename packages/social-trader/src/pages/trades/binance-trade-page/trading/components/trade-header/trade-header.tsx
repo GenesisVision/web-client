@@ -43,7 +43,7 @@ const _TradeHeader: React.FC<Props> = ({ profileHeader }) => {
         <SymbolSummarySmallContainer />
       </ResponsiveContainer>
       {isAuthenticated ? (
-        <AuthWidgets profileHeader={profileHeader} />
+        <AuthWidgets showWallet={false} profileHeader={profileHeader} />
       ) : (
         <UnauthLinks backPath={backPath} />
       )}
