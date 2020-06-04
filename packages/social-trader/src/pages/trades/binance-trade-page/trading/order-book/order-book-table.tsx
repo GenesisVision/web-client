@@ -5,10 +5,12 @@ import {
 } from "pages/trades/binance-trade-page/trading/order-book/order-book.row";
 import { StringBidDepth } from "pages/trades/binance-trade-page/trading/trading.types";
 import React, { useEffect, useState } from "react";
+import { getPercentageValue } from "utils/helpers";
 
 import styles from "./order-book.module.scss";
 
 interface Props {
+  fullAmount: number;
   tableTickSize?: string;
   reverse?: boolean;
   items?: StringBidDepth[];
@@ -16,6 +18,7 @@ interface Props {
 }
 
 const _OrderBookTable: React.FC<Props> = ({
+  fullAmount,
   tableTickSize,
   reverse,
   color,
@@ -52,8 +55,10 @@ const _OrderBookTable: React.FC<Props> = ({
     <table className={styles["order-book__table"]}>
       <tbody>
         {items.map(([price, amount], i) => {
+          const total = +price * +amount;
           return (
             <OrderBookRow
+              barPercent={100 - getPercentageValue(total, fullAmount)}
               tableTickSize={tableTickSize}
               hovered={
                 hoveredRow !== undefined &&
@@ -65,7 +70,7 @@ const _OrderBookTable: React.FC<Props> = ({
               color={color}
               price={price}
               amount={amount}
-              total={+price * +amount}
+              total={total}
             />
           );
         })}

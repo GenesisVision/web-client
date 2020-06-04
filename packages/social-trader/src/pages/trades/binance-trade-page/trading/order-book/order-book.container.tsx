@@ -22,6 +22,9 @@ import { useSockets } from "services/websocket.service";
 
 interface Props {}
 
+const ASKS_FULL_AMOUNT_DIVIDER = 300;
+const BIDS_FULL_AMOUNT_DIVIDER = 25;
+
 const ROW_HEIGHT = 16;
 
 const _OrderBookContainer: React.FC<Props> = ({}) => {
@@ -151,8 +154,27 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
   );
   const { asks, bids } = listForRender;
 
+  const listAmount = useMemo(() => {
+    if (!list)
+      return {
+        asks: 0,
+        bids: 0
+      };
+    return {
+      asks:
+        Object.values(list.asks).reduce((prev, [price, amount]) => {
+          return prev + +price * +amount;
+        }, 0) / ASKS_FULL_AMOUNT_DIVIDER,
+      bids:
+        Object.values(list.bids).reduce((prev, [price, amount]) => {
+          return prev + +price * +amount;
+        }, 0) / BIDS_FULL_AMOUNT_DIVIDER
+    };
+  }, [list]);
+
   return (
     <OrderBook
+      listAmount={listAmount}
       tickValue={tickValue}
       setTickValue={setTickValue}
       tablesBlockRef={ref}

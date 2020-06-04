@@ -19,6 +19,7 @@ export interface LevelsSum {
 }
 
 interface Props {
+  barPercent: number;
   tableTickSize?: string;
   hovered: boolean;
   levelSum?: LevelsSum;
@@ -31,6 +32,7 @@ interface Props {
 }
 
 const _OrderBookRow: React.FC<Props> = ({
+  barPercent,
   tableTickSize,
   hovered,
   levelSum: { avgPrice, baseSum, quoteSum } = {
@@ -96,6 +98,9 @@ const _OrderBookRow: React.FC<Props> = ({
       )}
     >
       <tr
+        style={{
+          background: `linear-gradient(90deg, transparent ${barPercent}%, ${color}10 ${barPercent}%)`
+        }}
         className={classNames(styles["order-book__table-row"], {
           [styles["order-book__table-row--hovered"]]: hovered
         })}
