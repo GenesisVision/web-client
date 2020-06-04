@@ -61,7 +61,7 @@ const _OrderBookRow: React.FC<Props> = ({
   });
   const formattedTotal = terminalMoneyFormat({
     amount: total,
-    tickSize: stepSize
+    tickSize: tableTickSize || tickSize
   });
   const formattedAvgPrice = terminalMoneyFormat({
     amount: avgPrice,
