@@ -99,7 +99,7 @@ const _OrderBookRow: React.FC<Props> = ({
     >
       <tr
         style={{
-          background: `linear-gradient(90deg, transparent ${barPercent}%, ${color}10 ${barPercent}%)`
+          background: `linear-gradient(90deg, transparent ${barPercent}%, ${color}30 ${barPercent}%)`
         }}
         className={classNames(styles["order-book__table-row"], {
           [styles["order-book__table-row--hovered"]]: hovered
