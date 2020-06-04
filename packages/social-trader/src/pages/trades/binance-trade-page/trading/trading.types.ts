@@ -16,6 +16,11 @@ export type PositionModeType = boolean;
 
 export type BalancesItemName = "spot" | "futures";
 
+export interface DepthFullAmount {
+  bids: number;
+  asks: number;
+}
+
 export interface SymbolSummaryData {
   markPrice?: MarkPrice;
   tickerData: MergedTickerSymbolType;
