@@ -4,7 +4,13 @@ import { SizesType } from "utils/types";
 
 import styles from "./text.module.scss";
 
-export type TextColor = "white" | "red" | "green" | "yellow";
+export type TextColor =
+  | "#00ff00"
+  | "#ff0000"
+  | "white"
+  | "red"
+  | "green"
+  | "yellow";
 export type TextWeight = "thin" | "normal" | "bold" | "bolder";
 
 interface Props {
@@ -35,8 +41,8 @@ export const Text: React.FC<Props> = ({
         [styles["text--middle"]]: size === "middle",
         [styles["text--large"]]: size === "large",
         [styles["text--white"]]: color === "white",
-        [styles["text--red"]]: color === "red",
-        [styles["text--green"]]: color === "green",
+        [styles["text--red"]]: color === "red" || color === "#ff0000",
+        [styles["text--green"]]: color === "green" || color === "#00ff00",
         [styles["text--yellow"]]: color === "yellow",
         [styles["text--wrap"]]: wrap,
         [styles["text--muted"]]: muted

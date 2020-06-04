@@ -8,12 +8,14 @@ import { getRandomInteger } from "utils/helpers";
 
 import styles from "./header.module.scss";
 
-const AuthWidgets: React.FC<Props> = ({ profileHeader }) => {
+const AuthWidgets: React.FC<Props> = ({ showWallet = true, profileHeader }) => {
   return (
     <>
-      <div className={styles["header__wallet"]}>
-        <WalletWidgetContainer />
-      </div>
+      {showWallet && (
+        <div className={styles["header__wallet"]}>
+          <WalletWidgetContainer />
+        </div>
+      )}
       <NotificationsWidget
         loaderData={getRandomInteger(0, 1000)}
         data={profileHeader && profileHeader.notificationsCount}
@@ -29,6 +31,7 @@ const AuthWidgets: React.FC<Props> = ({ profileHeader }) => {
 };
 
 interface Props {
+  showWallet?: boolean;
   profileHeader?: ProfileHeaderViewModel;
 }
 

@@ -2,27 +2,18 @@ import { AvatarWithName } from "components/avatar/avatar-with-name/avatar-with-n
 import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
 import { Center } from "components/center/center";
 import { getImageUrlByQuality } from "components/conversation/conversation-image/conversation-image.helpers";
-import { ConversationUser } from "components/conversation/conversation-user/conversation-user";
 import styles from "components/conversation/conversation-user/conversation-user.module.scss";
-import { ConversationPost } from "components/conversation/conversation.types";
 import { LikeContainer } from "components/conversation/like/like-container";
 import { Share } from "components/conversation/share/share";
-import {
-  inTextComponentsMap,
-  parseToTsx
-} from "components/conversation/tag/parse-to-tsx";
-import { RepostTagContainer } from "components/conversation/tag/repost-tag-container";
 import { DefaultBlock } from "components/default.block/default.block";
-import Link from "components/link/link";
 import { MutedText } from "components/muted-text/muted-text";
 import { PlateFeedCard } from "components/plate-feed/plate-feed-card";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { Separator } from "components/separator/separator";
+import { SIZES } from "constants/constants";
 import { MediaPost } from "gv-api-web";
 import React from "react";
-import { managerToPathCreator } from "routes/manager.routes";
-import { postToPathCreator } from "routes/social.routes";
 import { formatDate } from "utils/dates";
 
 interface Props {
@@ -38,7 +29,7 @@ const NewsCardContent: React.FC<Props> = React.memo(
       <div>
         <DefaultBlock>
           <Row>
-            <TitleTag>Title</TitleTag>
+            <TitleTag>{post.title}</TitleTag>
           </Row>
           {!!post.text?.length && (
             <Row>
@@ -66,7 +57,7 @@ const NewsCardContent: React.FC<Props> = React.memo(
           </Row>
         </DefaultBlock>
         <Separator />
-        <DefaultBlock>
+        <DefaultBlock size={SIZES.LARGE}>
           <Center>
             <RowItem wide>
               <LikeContainer

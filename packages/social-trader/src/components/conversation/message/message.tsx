@@ -11,6 +11,7 @@ import {
   inTextComponentsMap,
   parseToTsx
 } from "components/conversation/tag/parse-to-tsx";
+import { HorizontalShadowList } from "components/horizontal-list-shadow-container/horizontal-shadow-list";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { PostTag } from "gv-api-web";
@@ -28,6 +29,7 @@ const _Message: React.FC<IMessageProps> = ({
   author: { username, url, logoUrl }
 }) => {
   const tagsUnderText = tags?.filter(({ type }) => type !== "Event");
+  const MessageItem = row ? RowItem : Row;
   return (
     <div>
       <div
@@ -35,7 +37,7 @@ const _Message: React.FC<IMessageProps> = ({
           [styles["message--row"]]: row
         })}
       >
-        <RowItem className={styles["message__user"]}>
+        <MessageItem className={styles["message__user"]}>
           <ConversationUser
             postId={postId}
             url={url}
@@ -43,8 +45,8 @@ const _Message: React.FC<IMessageProps> = ({
             username={username}
             date={date}
           />
-        </RowItem>
-        <RowItem className={styles["message__text"]}>
+        </MessageItem>
+        <MessageItem className={styles["message__text"]}>
           {text && (
             <Row>
               <div>
@@ -69,11 +71,13 @@ const _Message: React.FC<IMessageProps> = ({
               ))}
             </Row>
           )}
-        </RowItem>
+        </MessageItem>
       </div>
       {!!tagsUnderText?.length && (
-        <Row wrap small>
-          {generateTagsComponents(tagsUnderText)}
+        <Row>
+          <HorizontalShadowList withScroll={false}>
+            {generateTagsComponents(tagsUnderText)}
+          </HorizontalShadowList>
         </Row>
       )}
     </div>

@@ -2,6 +2,7 @@ import { DefaultBlock } from "components/default.block/default.block";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
+import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import { SIZES } from "constants/constants";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import { MonoText } from "pages/trades/binance-trade-page/trading/components/mono-text/mono-text";
@@ -14,17 +15,18 @@ import {
 } from "pages/trades/binance-trade-page/trading/symbol-summary/symbol-summary.helpers";
 import { TerminalTypeSwitcher } from "pages/trades/binance-trade-page/trading/symbol-summary/terminal-type-switcher";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
-import { MergedTickerSymbolType } from "pages/trades/binance-trade-page/trading/trading.types";
+import { SymbolSummaryData } from "pages/trades/binance-trade-page/trading/trading.types";
 import React, { useContext } from "react";
+import { diffDate } from "utils/dates";
 
 import styles from "./symbol-summary.module.scss";
 
 interface Props {
-  data: MergedTickerSymbolType;
+  data: SymbolSummaryData;
 }
 
 export const SymbolSummaryContainer: React.FC = () => {
-  const { symbolData } = useSymbolData();
+  const symbolData = useSymbolData();
   return (
     <SymbolSummaryView
       data={symbolData!}
@@ -33,7 +35,7 @@ export const SymbolSummaryContainer: React.FC = () => {
   );
 };
 
-const SymbolSummaryLine: React.FC<{ label: string }> = React.memo(
+const SymbolSummaryLine: React.FC<{ label: string | JSX.Element }> = React.memo(
   ({ label, children }) => {
     return (
       <Row className={styles["symbol-summary__line"]}>
@@ -48,15 +50,18 @@ const SymbolSummaryLine: React.FC<{ label: string }> = React.memo(
 
 const _SymbolSummaryView: React.FC<Props> = ({
   data: {
-    eventTime,
-    lastPrice,
-    baseAsset,
-    quoteAsset,
-    priceChangePercent,
-    priceChange,
-    high,
-    low,
-    volume
+    markPrice,
+    tickerData: {
+      eventTime,
+      lastPrice,
+      baseAsset,
+      quoteAsset,
+      priceChangePercent,
+      priceChange,
+      high,
+      low,
+      volume
+    }
   }
 }) => {
   const { stepSize, tickSize } = useContext(TradingInfoContext);
@@ -93,9 +98,50 @@ const _SymbolSummaryView: React.FC<Props> = ({
           </Row>
         </RowItem>
         <RowItem wide>
+          {markPrice && (
+            <>
+              <SymbolSummaryLine
+                label={
+                  <TooltipLabel
+                    labelText={"Mark Price"}
+                    tooltipContent={
+                      "The latest mark price for this contract. This is the price used for PNL and margin calculations, and may differ from the last price for the purposes of avoiding price manipulation."
+                    }
+                  />
+                }
+              >
+                <MonoText>
+                  {terminalMoneyFormat({
+                    amount: markPrice.markPrice,
+                    tickSize
+                  })}
+                </MonoText>
+              </SymbolSummaryLine>
+              <SymbolSummaryLine
+                label={
+                  <TooltipLabel
+                    labelText={"Funding/8h"}
+                    tooltipContent={
+                      "The payment rate exchanged between the buyer and seller for the next funding."
+                    }
+                  />
+                }
+              >
+                <MonoText>
+                  {+markPrice.lastFundingRate} %{" "}
+                  {diffDate(new Date(), markPrice.nextFundingTime).format(
+                    "HH:mm:ss"
+                  )}
+                </MonoText>
+              </SymbolSummaryLine>
+            </>
+          )}
           <SymbolSummaryLine label={"24 Change"}>
             <MonoText>
-              <Text color={+priceChangePercent > 0 ? "green" : "red"}>
+              <Text
+                size={"xlarge"}
+                color={+priceChangePercent > 0 ? "green" : "red"}
+              >
                 {terminalMoneyFormat({ amount: priceChange, tickSize })}{" "}
                 {terminalMoneyFormat({ amount: priceChangePercent, digits: 2 })}{" "}
                 %

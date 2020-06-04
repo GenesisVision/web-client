@@ -5,6 +5,7 @@ import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 const _FollowUserButton: React.FC<Props> = ({
+  onChange,
   size = GV_BTN_SIZE.BIG,
   id,
   value,
@@ -18,8 +19,9 @@ const _FollowUserButton: React.FC<Props> = ({
     middleware: [successMiddleware]
   });
   const handleClick = useCallback(() => {
+    onChange && onChange();
     return sendRequest({ id, value: innerValue });
-  }, [id, innerValue]);
+  }, [id, innerValue, onChange]);
   return (
     <GVButton
       variant={innerValue ? "outlined" : "contained"}
@@ -37,6 +39,7 @@ const _FollowUserButton: React.FC<Props> = ({
 };
 
 interface Props {
+  onChange?: VoidFunction;
   size?: GV_BTN_SIZE;
   disabled?: boolean;
   id: string;

@@ -13,7 +13,6 @@
   }
   &__user {
     width: auto;
-    margin-bottom: $padding-xsmall-mobile;
   }
   &__text {
     @include font-size($font-size-paragraph);

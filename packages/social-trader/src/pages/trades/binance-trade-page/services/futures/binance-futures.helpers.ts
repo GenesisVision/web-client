@@ -15,6 +15,7 @@ import {
   Account,
   AssetBalance,
   BalanceForTransfer,
+  MarkPrice,
   Ticker
 } from "pages/trades/binance-trade-page/trading/trading.types";
 import { Observable } from "rxjs";
@@ -25,6 +26,14 @@ export const transformAccountToBalanceForTransfer = ({
 }: Account): BalanceForTransfer[] => {
   return balances.map(({ asset, free }) => ({ asset, free }));
 };
+
+export const transformMarkPriceWS = (m: any): MarkPrice => ({
+  symbol: m.s,
+  markPrice: m.p,
+  lastFundingRate: m.r,
+  nextFundingTime: m.T,
+  time: m.E
+});
 
 export const transformFuturesTickerSymbolWS = (m: any): Ticker => ({
   eventType: m.e,

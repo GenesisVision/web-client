@@ -1,3 +1,4 @@
+import Regulator from "components/regulator/regulator";
 import { OrderBook } from "pages/trades/binance-trade-page/trading/order-book/order-book";
 import {
   collapseItems,
@@ -22,9 +23,15 @@ import { useSockets } from "services/websocket.service";
 
 interface Props {}
 
+const ASKS_FULL_AMOUNT_DIVIDER = 300;
+const BIDS_FULL_AMOUNT_DIVIDER = 25;
+
 const ROW_HEIGHT = 16;
 
 const _OrderBookContainer: React.FC<Props> = ({}) => {
+  const [asksDivider, setAsksDivider] = useState(ASKS_FULL_AMOUNT_DIVIDER);
+  const [bidsDivider, setBidsDivider] = useState(BIDS_FULL_AMOUNT_DIVIDER);
+
   const { depthSocket, getDepth } = useContext(TerminalMethodsContext);
   const ref = useRef<HTMLDivElement>(null);
   const [count, setCount] = useState<number>(0);
@@ -151,14 +158,55 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
   );
   const { asks, bids } = listForRender;
 
+  const listAmount = useMemo(() => {
+    if (!list)
+      return {
+        asks: 0,
+        bids: 0
+      };
+    return {
+      asks:
+        Object.values(list.asks).reduce((prev, [price, amount]) => {
+          return prev + +price * +amount;
+        }, 0) / asksDivider,
+      bids:
+        Object.values(list.bids).reduce((prev, [price, amount]) => {
+          return prev + +price * +amount;
+        }, 0) / bidsDivider
+    };
+  }, [list, asksDivider, bidsDivider]);
+
   return (
-    <OrderBook
-      tickValue={tickValue}
-      setTickValue={setTickValue}
-      tablesBlockRef={ref}
-      asks={asks}
-      bids={bids}
-    />
+    <>
+      <Regulator
+        size={"small"}
+        remainder={10000}
+        minValue={1}
+        value={asksDivider}
+        handleDown={() => setAsksDivider(asksDivider - 1)}
+        handleUp={() => setAsksDivider(asksDivider + 1)}
+      >
+        <>{asksDivider}</>
+      </Regulator>
+      <Regulator
+        size={"small"}
+        remainder={10000}
+        minValue={1}
+        value={bidsDivider}
+        handleDown={() => setBidsDivider(bidsDivider - 1)}
+        handleUp={() => setBidsDivider(bidsDivider + 1)}
+      >
+        <>{bidsDivider}</>
+      </Regulator>
+      <OrderBook
+        listAmount={listAmount}
+        tickValue={tickValue}
+        setTickValue={setTickValue}
+        tablesBlockRef={ref}
+        asks={asks}
+        bids={bids}
+      />
+    </>
   );
 };
 

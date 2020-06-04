@@ -4,13 +4,17 @@ import { Text } from "components/text/text";
 import { OrderBookCurrentPriceContainer } from "pages/trades/binance-trade-page/trading/order-book/order-book-current-price.container";
 import { OrderBookTickSizeSelect } from "pages/trades/binance-trade-page/trading/order-book/order-book-tick-size-select";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
-import { StringBidDepth } from "pages/trades/binance-trade-page/trading/trading.types";
+import {
+  DepthFullAmount,
+  StringBidDepth
+} from "pages/trades/binance-trade-page/trading/trading.types";
 import React, { RefObject, useContext } from "react";
 
 import { OrderBookTable } from "./order-book-table";
 import styles from "./order-book.module.scss";
 
 interface Props {
+  listAmount: DepthFullAmount;
   tickValue?: { value: string; default: boolean };
   setTickValue: (value: { value: string; default: boolean }) => void;
   tablesBlockRef: RefObject<HTMLDivElement>;
@@ -19,6 +23,7 @@ interface Props {
 }
 
 const _OrderBook: React.FC<Props> = ({
+  listAmount,
   tickValue,
   setTickValue,
   tablesBlockRef,
@@ -67,9 +72,10 @@ const _OrderBook: React.FC<Props> = ({
             )}
           >
             <OrderBookTable
+              fullAmount={listAmount.asks}
               tableTickSize={tickValue?.value}
               reverse
-              color={"red"}
+              color={"#ff0000"}
               items={asks}
             />
           </Row>
@@ -78,8 +84,9 @@ const _OrderBook: React.FC<Props> = ({
           </Row>
           <Row wide small className={styles["order-book__table-block"]}>
             <OrderBookTable
+              fullAmount={listAmount.bids}
               tableTickSize={tickValue?.value}
-              color={"green"}
+              color={"#00ff00"}
               items={bids}
             />
           </Row>

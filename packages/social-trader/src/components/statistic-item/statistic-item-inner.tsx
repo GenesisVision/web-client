@@ -1,10 +1,12 @@
 import classNames from "classnames";
 import { BlurContainer } from "components/blur-container/blur-container";
 import { MutedText } from "components/muted-text/muted-text";
+import { Text } from "components/text/text";
 import withLoader from "decorators/with-loader";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import { formatCurrencyValue } from "utils/formatter";
+import { SizesType } from "utils/types";
 
 import styles from "./statistic-item.module.scss";
 
@@ -22,6 +24,7 @@ const getTestId = (label: string | React.ReactNode) =>
   typeof label === "string" ? label : getTextContent(label);
 
 const _StatisticItemInner: React.FC<IStatisticItemInnerProps> = ({
+  size,
   hideLabel,
   isPending,
   invert,
@@ -49,7 +52,9 @@ const _StatisticItemInner: React.FC<IStatisticItemInnerProps> = ({
         {content}
       </div>
     ) : (
-      <MutedText noWrap>{content}</MutedText>
+      <Text muted size={size} wrap={false}>
+        {content}
+      </Text>
     );
   };
 
@@ -84,6 +89,7 @@ const _StatisticItemInner: React.FC<IStatisticItemInnerProps> = ({
 };
 
 export interface IStatisticItemInnerProps {
+  size?: SizesType;
   hideLabel?: boolean;
   isPending?: boolean;
   label?: string | React.ReactNode;

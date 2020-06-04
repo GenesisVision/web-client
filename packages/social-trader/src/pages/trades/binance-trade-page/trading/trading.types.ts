@@ -16,6 +16,24 @@ export type PositionModeType = boolean;
 
 export type BalancesItemName = "spot" | "futures";
 
+export interface DepthFullAmount {
+  bids: number;
+  asks: number;
+}
+
+export interface SymbolSummaryData {
+  markPrice?: MarkPrice;
+  tickerData: MergedTickerSymbolType;
+}
+
+export interface MarkPrice {
+  symbol: string;
+  markPrice: string;
+  lastFundingRate: string; // This is the lasted funding rate
+  nextFundingTime: number;
+  time: number;
+}
+
 export interface BalanceForTransfer {
   asset: TradeCurrency;
   free: string;
@@ -121,6 +139,7 @@ export interface IBinanceKline {
 }
 
 export interface ITerminalMethods {
+  getMarkPrice?: (options: { symbol: string }) => Observable<MarkPrice>;
   getBalancesForTransfer?: (options: {
     authData: TradeAuthDataType;
   }) => Promise<BalancesForTransfer>;
@@ -189,6 +208,10 @@ export interface ITerminalMethods {
 
   // Sockets
 
+  markPriceSocket?: (
+    connectSocketMethod: ConnectSocketMethodType,
+    symbol: TradeCurrency
+  ) => Observable<MarkPrice>;
   tradeSocket: (
     connectSocketMethod: ConnectSocketMethodType,
     symbol: TradeCurrency
