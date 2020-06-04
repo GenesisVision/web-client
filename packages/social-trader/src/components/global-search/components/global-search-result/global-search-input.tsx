@@ -28,7 +28,7 @@ export const SearchInputField: React.FC<{
     <Row wide>
       <RowItem wide>
         <GVTextField
-          maxlength={2000}
+          maxlength={1400}
           size={size}
           onBlur={onBlur}
           wide
