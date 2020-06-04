@@ -15,6 +15,11 @@ import PortfolioEventLogo from "components/dashboard/dashboard-portfolio-events/
 import Link, { ToType } from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import { MutedText } from "components/muted-text/muted-text";
+import Profitability from "components/profitability/profitability";
+import {
+  PROFITABILITY_PREFIX,
+  PROFITABILITY_VARIANT
+} from "components/profitability/profitability.helper";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import StatisticItemInner from "components/statistic-item/statistic-item-inner";
@@ -132,9 +137,24 @@ const _EventTag: React.FC<IEventTagProps> = ({
       {amount && (
         <RowItem bottomOffset>
           <StatisticItemInner label={t("Amount")}>
-            <ColoredText color={color}>
-              {amount} {currency}
-            </ColoredText>
+            <Center>
+              <RowItem small>
+                <ColoredText color={color}>
+                  {amount} {currency}
+                </ColoredText>
+              </RowItem>
+              {percent && (
+                <RowItem>
+                  <Profitability
+                    prefix={PROFITABILITY_PREFIX.SIGN}
+                    variant={PROFITABILITY_VARIANT.CHIPS}
+                    value={percent}
+                  >
+                    {percent} %
+                  </Profitability>
+                </RowItem>
+              )}
+            </Center>
           </StatisticItemInner>
         </RowItem>
       )}
