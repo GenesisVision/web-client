@@ -29,6 +29,7 @@ const _Message: React.FC<IMessageProps> = ({
   author: { username, url, logoUrl }
 }) => {
   const tagsUnderText = tags?.filter(({ type }) => type !== "Event");
+  const MessageItem = row ? RowItem : Row;
   return (
     <div>
       <div
@@ -36,7 +37,7 @@ const _Message: React.FC<IMessageProps> = ({
           [styles["message--row"]]: row
         })}
       >
-        <RowItem className={styles["message__user"]}>
+        <MessageItem className={styles["message__user"]}>
           <ConversationUser
             postId={postId}
             url={url}
@@ -44,8 +45,8 @@ const _Message: React.FC<IMessageProps> = ({
             username={username}
             date={date}
           />
-        </RowItem>
-        <RowItem className={styles["message__text"]}>
+        </MessageItem>
+        <MessageItem className={styles["message__text"]}>
           {text && (
             <Row>
               <div>
@@ -70,10 +71,10 @@ const _Message: React.FC<IMessageProps> = ({
               ))}
             </Row>
           )}
-        </RowItem>
+        </MessageItem>
       </div>
       {!!tagsUnderText?.length && (
-        <Row small>
+        <Row>
           <HorizontalShadowList withScroll={false}>
             {generateTagsComponents(tagsUnderText)}
           </HorizontalShadowList>

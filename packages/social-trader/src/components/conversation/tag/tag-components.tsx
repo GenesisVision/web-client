@@ -114,29 +114,31 @@ const _EventTag: React.FC<IEventTagProps> = ({
   const [t] = useTranslation();
   const color = getAssetTagTextColor(changeState);
   return (
-    <div>
-      <Row>
-        <RowItem small>
-          <PortfolioEventLogo
-            withAsset={true}
-            assetDetails={assetDetails}
-            icon={logoUrl}
-          />
-        </RowItem>
-        <RowItem>
-          <Center>{title}</Center>
-        </RowItem>
-      </Row>
-      <Row large>
-        <RowItem>
+    <Row className={styles["event-tag"]} wrap center={false}>
+      <RowItem bottomOffset>
+        <Center>
+          <RowItem small>
+            <PortfolioEventLogo
+              withAsset={true}
+              assetDetails={assetDetails}
+              icon={logoUrl}
+            />
+          </RowItem>
+          <RowItem>
+            <Center>{title}</Center>
+          </RowItem>
+        </Center>
+      </RowItem>
+      {amount && (
+        <RowItem bottomOffset>
           <StatisticItemInner label={t("Amount")}>
             <ColoredText color={color}>
               {amount} {currency}
             </ColoredText>
           </StatisticItemInner>
         </RowItem>
-      </Row>
-    </div>
+      )}
+    </Row>
   );
 };
 export const EventTag = React.memo(_EventTag);

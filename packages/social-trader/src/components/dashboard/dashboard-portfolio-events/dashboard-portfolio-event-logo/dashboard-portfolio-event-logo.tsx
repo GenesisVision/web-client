@@ -31,7 +31,11 @@ const _PortfolioEventLogo: React.FC<Props> = ({
     />
   );
   return (
-    <div className={styles["portfolio-event-logo"]}>
+    <div
+      className={classNames(styles["portfolio-event-logo"], {
+        [styles["portfolio-event-logo--with-asset"]]: icon && withAsset
+      })}
+    >
       {withAsset &&
         ((assetDetails.url && (
           <Link to={to} className={styles["portfolio-event-logo__photo"]}>

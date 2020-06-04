@@ -75,6 +75,7 @@ const _GVTextField: React.FC<GVTextFieldProps> = props => {
 };
 
 export interface GVTextFieldProps extends IPropsGvInput {
+  maxlength?: number;
   size?: SizesType;
   fixedVertical?: boolean;
   children?: ReactNode;
