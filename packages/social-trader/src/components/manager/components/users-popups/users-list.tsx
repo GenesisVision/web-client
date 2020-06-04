@@ -7,6 +7,7 @@ import { FollowUserButton } from "components/manager/components/follow-user-butt
 import { UsersListItemType } from "components/manager/components/users-popups/users-popups.types";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { ProfilePublicShort } from "gv-api-web";
 import React, { useCallback } from "react";
 import InfiniteScroll from "react-infinite-scroller";
 import { managerToPathCreator } from "routes/manager.routes";
@@ -14,6 +15,7 @@ import { managerToPathCreator } from "routes/manager.routes";
 import styles from "./users-popups.module.scss";
 
 interface IUsersListItemProps {
+  onChange?: (user: ProfilePublicShort) => void;
   onClick?: VoidFunction;
   user: UsersListItemType;
 }
@@ -25,9 +27,20 @@ interface IUsersListProps {
 }
 
 export const UsersListItem: React.FC<IUsersListItemProps> = React.memo(
-  ({ onClick, user: { logoUrl, username, url, id, personalDetails } }) => {
+  ({ onChange, onClick, user }) => {
+    const { logoUrl, username, url, id, personalDetails } = user;
     const { contextTitle } = useToLink();
     const link = managerToPathCreator(url, contextTitle);
+    const handleFollow = useCallback(() => {
+      onChange &&
+        onChange({
+          ...user,
+          personalDetails: {
+            ...user.personalDetails,
+            isFollow: !user.personalDetails.isFollow
+          }
+        });
+    }, [user, onChange]);
     const handleClick = useCallback(() => {
       Push(link.pathname, link.as);
       onClick && onClick();
@@ -47,6 +60,7 @@ export const UsersListItem: React.FC<IUsersListItemProps> = React.memo(
         {personalDetails && (
           <RowItem>
             <FollowUserButton
+              onChange={handleFollow}
               disabled={!personalDetails.allowFollow}
               size={GV_BTN_SIZE.SMALL}
               id={id}

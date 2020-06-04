@@ -1,6 +1,7 @@
 import Dialog, { IDialogOuterProps } from "components/dialog/dialog";
 import SimpleUserList, {
-  ISimpleUserListProps
+  ISimpleUserListProps,
+  useUsersList
 } from "components/manager/components/users-popups/simple-users-list";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -13,6 +14,7 @@ export const FollowersDialog: React.FC<IFollowersDialogProps> = ({
   onClose
 }) => {
   const [t] = useTranslation();
+  const { usersList, handleChange } = useUsersList(items);
   return (
     <Dialog
       className={styles["users-list__dialog"]}
@@ -20,9 +22,10 @@ export const FollowersDialog: React.FC<IFollowersDialogProps> = ({
       onClose={onClose}
     >
       <SimpleUserList
+        onChange={handleChange}
         onClick={onClose}
         title={t("manager-page.followers")}
-        items={items}
+        items={usersList}
       />
     </Dialog>
   );
