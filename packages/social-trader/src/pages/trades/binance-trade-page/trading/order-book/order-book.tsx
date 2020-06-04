@@ -69,7 +69,7 @@ const _OrderBook: React.FC<Props> = ({
             <OrderBookTable
               tableTickSize={tickValue?.value}
               reverse
-              color={"red"}
+              color={"#ff0000"}
               items={asks}
             />
           </Row>
@@ -79,7 +79,7 @@ const _OrderBook: React.FC<Props> = ({
           <Row wide small className={styles["order-book__table-block"]}>
             <OrderBookTable
               tableTickSize={tickValue?.value}
-              color={"green"}
+              color={"#00ff00"}
               items={bids}
             />
           </Row>
