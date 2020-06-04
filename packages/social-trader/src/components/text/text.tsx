@@ -4,7 +4,13 @@ import { SizesType } from "utils/types";
 
 import styles from "./text.module.scss";
 
-export type TextColor = "white" | "red" | "green" | "yellow";
+export type TextColor =
+  | "#00ff00"
+  | "#ff0000"
+  | "white"
+  | "red"
+  | "green"
+  | "yellow";
 export type TextWeight = "thin" | "normal" | "bold" | "bolder";
 
 interface Props {
