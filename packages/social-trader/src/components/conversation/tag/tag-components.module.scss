@@ -2,8 +2,7 @@
 @import "~shared/styles/_sizes";
 
 .event-tag {
-  display: flex;
-  align-items: flex-end;
+  margin-bottom: -$padding-xsmall;
 }
 
 .asset-tag {
