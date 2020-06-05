@@ -75,6 +75,8 @@ const _AccountDetailsContainer: React.FC<Props> = ({ data: description }) => {
         Controls={() =>
           description?.ownerActions?.canTransferMoney ? (
             <InvestmentAccountControls
+              id={description.id}
+              balances={description.tradingAccountInfo.balances}
               transferableItem={mapProgramFollowToTransferItemType(description)}
               accountType={description.tradingAccountInfo.type}
               onApply={handleDispatchDescription}
