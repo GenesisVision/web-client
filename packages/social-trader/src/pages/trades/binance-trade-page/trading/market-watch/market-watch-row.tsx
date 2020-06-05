@@ -3,7 +3,7 @@ import { TradeStatefulValue } from "pages/trades/binance-trade-page/trading/comp
 import { CHANGE_COLUMN } from "pages/trades/binance-trade-page/trading/market-watch/market-watch.helpers";
 import { TerminalInfoContext } from "pages/trades/binance-trade-page/trading/terminal-info.context";
 import { getTextColor } from "pages/trades/binance-trade-page/trading/terminal.helpers";
-import { TradeCurrency } from "pages/trades/binance-trade-page/trading/terminal.types";
+import { TerminalCurrency } from "pages/trades/binance-trade-page/trading/terminal.types";
 import React, { useCallback, useContext } from "react";
 import { formatCurrencyValue } from "utils/formatter";
 
@@ -11,8 +11,8 @@ import styles from "./market-watch.module.scss";
 
 interface Props {
   eventTime: number;
-  quoteAsset: TradeCurrency;
-  baseAsset: TradeCurrency;
+  quoteAsset: TerminalCurrency;
+  baseAsset: TerminalCurrency;
   column: string;
   volume: string;
   symbol: string;

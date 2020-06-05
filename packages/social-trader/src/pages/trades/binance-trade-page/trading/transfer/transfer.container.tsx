@@ -3,7 +3,7 @@ import { DialogTop } from "components/dialog/dialog-top";
 import useApiRequest, { API_REQUEST_STATUS } from "hooks/api-request.hook";
 import { TerminalInfoContext } from "pages/trades/binance-trade-page/trading/terminal-info.context";
 import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
-import { TradeCurrency } from "pages/trades/binance-trade-page/trading/terminal.types";
+import { TerminalCurrency } from "pages/trades/binance-trade-page/trading/terminal.types";
 import { TransferForm } from "pages/trades/binance-trade-page/trading/transfer/transfer-form";
 import { TransferFormValues } from "pages/trades/binance-trade-page/trading/transfer/transfer.helpers";
 import React, { useCallback, useContext } from "react";
@@ -12,7 +12,7 @@ import { postponeCallback } from "utils/hook-form.helpers";
 
 export interface ITransferContainerProps {
   onApply: VoidFunction;
-  asset: TradeCurrency;
+  asset: TerminalCurrency;
 }
 
 const _TransferContainer: React.FC<ITransferContainerProps> = ({

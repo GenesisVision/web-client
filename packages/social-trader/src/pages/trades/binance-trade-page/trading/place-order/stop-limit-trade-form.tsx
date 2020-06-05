@@ -16,7 +16,7 @@ import {
   Account,
   ExchangeInfo,
   OrderSide,
-  TradeCurrency
+  TerminalCurrency
 } from "pages/trades/binance-trade-page/trading/terminal.types";
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";

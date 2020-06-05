@@ -19,8 +19,8 @@ import {
   SymbolLotSizeFilter,
   SymbolMinNotionalFilter,
   SymbolPriceFilter,
-  TimeInForce,
-  TradeCurrency
+  TerminalCurrency,
+  TimeInForce
 } from "pages/trades/binance-trade-page/trading/terminal.types";
 import { useContext, useEffect, useMemo, useState } from "react";
 import { NumberFormatValues } from "react-number-format";
@@ -307,8 +307,10 @@ export const useTradeSlider = ({
   return { sliderValue, setSliderValue };
 };
 
-export const getBalance = (balances: AssetBalance[], currency: TradeCurrency) =>
-  safeGetElemFromArray(balances, ({ asset }) => asset === currency).free;
+export const getBalance = (
+  balances: AssetBalance[],
+  currency: TerminalCurrency
+) => safeGetElemFromArray(balances, ({ asset }) => asset === currency).free;
 
 export const getMinNotionalFilter = (filters: SymbolFilter[]) => {
   return (filters.find(({ filterType }) => filterType === "MIN_NOTIONAL") || {
@@ -371,7 +373,7 @@ const placeOrderTotalShape = ({
   maxQuantity
 }: {
   t: TFunction;
-  quoteAsset: TradeCurrency;
+  quoteAsset: TerminalCurrency;
   maxTotal: number;
   maxQuantity: number;
   minNotional: number;
@@ -408,7 +410,7 @@ const tradeNumberShape = ({
   t: TFunction;
   min: number;
   max: number;
-  currency: TradeCurrency;
+  currency: TerminalCurrency;
   divider: number;
 }) =>
   minMaxNumberShape({
@@ -436,8 +438,8 @@ export const placeOrderStopLimitValidationSchema = ({
 }: {
   side: OrderSide;
   t: TFunction;
-  baseAsset: TradeCurrency;
-  quoteAsset: TradeCurrency;
+  baseAsset: TerminalCurrency;
+  quoteAsset: TerminalCurrency;
   stepSize: number;
   tickSize: number;
   maxTotal: number;
@@ -502,8 +504,8 @@ export const placeOrderDefaultValidationSchema = ({
   minNotional
 }: {
   t: TFunction;
-  baseAsset: TradeCurrency;
-  quoteAsset: TradeCurrency;
+  baseAsset: TerminalCurrency;
+  quoteAsset: TerminalCurrency;
   stepSize: number;
   tickSize: number;
   maxTotal: number;

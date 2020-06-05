@@ -2,8 +2,8 @@ import { SORTING_DIRECTION } from "components/table/helpers/sorting.helpers";
 import {
   MergedTickerSymbolType,
   Symbol,
-  Ticker,
-  TradeCurrency
+  TerminalCurrency,
+  Ticker
 } from "pages/trades/binance-trade-page/trading/terminal.types";
 import { safeGetElemFromArray } from "utils/helpers";
 import { AnyObjectType } from "utils/types";
@@ -53,7 +53,7 @@ export const COLUMN_VALUES = [
 
 export const getSymbolPrice = (
   items: MergedTickerSymbolType[],
-  symbol: TradeCurrency
+  symbol: TerminalCurrency
 ): string => {
   return safeGetElemFromArray(items, filterForSymbol(symbol)).lastPrice;
 };

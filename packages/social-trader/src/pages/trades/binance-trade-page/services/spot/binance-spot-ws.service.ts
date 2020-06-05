@@ -4,9 +4,9 @@ import {
   IBinanceKline,
   IKline,
   KlineSocketType,
+  TerminalCurrency,
   Ticker,
-  Trade,
-  TradeCurrency
+  Trade
 } from "pages/trades/binance-trade-page/trading/terminal.types";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
@@ -39,7 +39,7 @@ export enum ORDER_STATUSES {
 
 export const tradeSocket = (
   connectSocketMethod: ConnectSocketMethodType,
-  symbol: TradeCurrency
+  symbol: TerminalCurrency
 ): Observable<Trade> => {
   const socketType = "trade";
   const socketName = `${symbol.toLowerCase()}@${socketType}`;
@@ -49,7 +49,7 @@ export const tradeSocket = (
 
 export const depthSocket = (
   connectSocketMethod: ConnectSocketMethodType,
-  symbol: TradeCurrency
+  symbol: TerminalCurrency
 ): Observable<Depth> => {
   const socketType = "depth";
   const socketName = `${symbol.toLowerCase()}@${socketType}`;

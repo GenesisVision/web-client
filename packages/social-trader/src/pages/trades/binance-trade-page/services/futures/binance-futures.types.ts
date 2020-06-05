@@ -5,9 +5,9 @@ import {
   OrderSide,
   OrderType,
   PositionSideType,
+  TerminalCurrency,
   TimeInForce,
-  Trade,
-  TradeCurrency
+  Trade
 } from "pages/trades/binance-trade-page/trading/terminal.types";
 
 export type FuturesAccountEventType =
@@ -18,7 +18,7 @@ export type FuturesAccountEventType =
 export type MarginType = MarginModeType;
 
 export interface FuturesTickerSymbol {
-  symbol: TradeCurrency;
+  symbol: TerminalCurrency;
   priceChange: string;
   priceChangePercent: string;
   weightedAvgPrice: string;
@@ -38,7 +38,7 @@ export interface FuturesTickerSymbol {
 }
 
 export interface FuturesAsset {
-  asset: TradeCurrency;
+  asset: TerminalCurrency;
   initialMargin: string;
   maintMargin: string;
   marginBalance: string;
@@ -68,7 +68,7 @@ export interface FuturesAccount {
 }
 
 export interface FuturesMarginCallEventPosition {
-  symbol: TradeCurrency; // Symbol
+  symbol: TerminalCurrency; // Symbol
   positionSide: PositionSideType; // Position Side
   positionAmount: string; // Position Amount
   marginType: MarginType; // Margin Type
@@ -90,14 +90,14 @@ export interface FuturesAccountEventPosition {
 }
 
 export interface FuturesAccountEventBalance {
-  asset: TradeCurrency; // Asset
+  asset: TerminalCurrency; // Asset
   free: string; // Wallet Balance
   walletBalance: string; // Wallet Balance
   crossWalletBalance: string; // Cross Wallet Balance
 }
 
 export interface FuturesTradeOrder {
-  symbol: TradeCurrency; // Symbol
+  symbol: TerminalCurrency; // Symbol
   clientOrderId: string; // Client Order Id
   // special client order id:
   // starts with "autoclose-": liquidation order

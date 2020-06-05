@@ -1,12 +1,12 @@
 import GVButton, { GV_BTN_SIZE } from "components/gv-button";
 import useIsOpen from "hooks/is-open.hook";
-import { TradeCurrency } from "pages/trades/binance-trade-page/trading/terminal.types";
+import { TerminalCurrency } from "pages/trades/binance-trade-page/trading/terminal.types";
 import { TransferDialog } from "pages/trades/binance-trade-page/trading/transfer/transfer.dialog";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
 interface Props {
-  asset: TradeCurrency;
+  asset: TerminalCurrency;
 }
 
 const _TransferButton: React.FC<Props> = ({ asset }) => {

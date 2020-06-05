@@ -12,7 +12,7 @@ import { SubmitButton } from "components/submit-button/submit-button";
 import { Text } from "components/text/text";
 import {
   BalancesForTransfer,
-  TradeCurrency
+  TerminalCurrency
 } from "pages/trades/binance-trade-page/trading/terminal.types";
 import {
   ENABLE_TRANSFER_ACCOUNTS,
@@ -30,7 +30,7 @@ import { HookForm } from "utils/hook-form.helpers";
 import styles from "./transfer.module.scss";
 
 interface Props {
-  asset: TradeCurrency;
+  asset: TerminalCurrency;
   isSuccessful?: boolean;
   data: BalancesForTransfer;
   onSubmit: (values: TransferFormValues) => Promise<void>;

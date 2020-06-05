@@ -11,8 +11,8 @@ import {
   ExchangeInfo,
   ExecutionReport,
   SymbolFilter,
-  TradeAuthDataType,
-  TradeCurrency
+  TerminalCurrency,
+  TradeAuthDataType
 } from "pages/trades/binance-trade-page/trading/terminal.types";
 import qs from "qs";
 import { useEffect, useState } from "react";
@@ -152,8 +152,10 @@ export const getSymbolFromState = ({
   baseAsset
 }: SymbolState): string => getSymbol(baseAsset, quoteAsset);
 
-export const getSymbol = (base: TradeCurrency, quote: TradeCurrency): string =>
-  base + quote;
+export const getSymbol = (
+  base: TerminalCurrency,
+  quote: TerminalCurrency
+): string => base + quote;
 
 export const getDecimalScale = (tick: string): number =>
   getDividerParts(tick).fracLength || 0;

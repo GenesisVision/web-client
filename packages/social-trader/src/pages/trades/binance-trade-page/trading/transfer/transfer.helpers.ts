@@ -2,7 +2,7 @@ import { TFunction } from "i18next";
 import {
   BalancesForTransfer,
   BalancesItemName,
-  TradeCurrency
+  TerminalCurrency
 } from "pages/trades/binance-trade-page/trading/terminal.types";
 import { safeGetElemFromArray } from "utils/helpers";
 import { minMaxNumberShape } from "utils/validators/validators";
@@ -20,7 +20,7 @@ export enum TRANSFER_FORM_FIELDS {
 }
 
 export interface TransferFormValues {
-  [TRANSFER_FORM_FIELDS.asset]: TradeCurrency;
+  [TRANSFER_FORM_FIELDS.asset]: TerminalCurrency;
   [TRANSFER_FORM_FIELDS.amount]: number;
   [TRANSFER_FORM_FIELDS.type]: number; // 1 | 2
 }

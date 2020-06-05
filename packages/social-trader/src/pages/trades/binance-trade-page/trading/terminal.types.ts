@@ -35,7 +35,7 @@ export interface MarkPrice {
 }
 
 export interface BalanceForTransfer {
-  asset: TradeCurrency;
+  asset: TerminalCurrency;
   free: string;
 }
 
@@ -92,7 +92,7 @@ export interface TradeRequest {
   reduceOnly?: boolean;
   timeInForce?: TimeInForce;
   stopPrice?: number;
-  symbol: TradeCurrency;
+  symbol: TerminalCurrency;
   price: number;
   quantity: number;
   type: OrderType;
@@ -144,7 +144,7 @@ export interface ITerminalMethods {
     authData: TradeAuthDataType;
   }) => Promise<BalancesForTransfer>;
   newFutureAccountTransfer?: (options: {
-    asset: TradeCurrency;
+    asset: TerminalCurrency;
     amount: number;
     type: number; // 1 | 2
     authData: TradeAuthDataType;
@@ -210,15 +210,15 @@ export interface ITerminalMethods {
 
   markPriceSocket?: (
     connectSocketMethod: ConnectSocketMethodType,
-    symbol: TradeCurrency
+    symbol: TerminalCurrency
   ) => Observable<MarkPrice>;
   tradeSocket: (
     connectSocketMethod: ConnectSocketMethodType,
-    symbol: TradeCurrency
+    symbol: TerminalCurrency
   ) => Observable<Trade>;
   depthSocket: (
     connectSocketMethod: ConnectSocketMethodType,
-    symbol: TradeCurrency
+    symbol: TerminalCurrency
   ) => Observable<Depth>;
   marketTicketsSocket: (
     connectSocketMethod: ConnectSocketMethodType
@@ -428,7 +428,7 @@ export interface IChartData {
   unsubscribeDepth: (subscriberUID: SubscriberUIDType) => void;
 }
 
-export type TradeCurrency = string;
+export type TerminalCurrency = string;
 
 export type MergedTickerSymbolType = Ticker & Symbol;
 

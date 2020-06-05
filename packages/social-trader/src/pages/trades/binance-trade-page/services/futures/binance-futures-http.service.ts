@@ -21,10 +21,10 @@ import {
   PositionModeType,
   QueryOrderResult,
   SymbolLeverageBrackets,
+  TerminalCurrency,
   Ticker,
   Trade,
   TradeAuthDataType,
-  TradeCurrency,
   TradeRequest
 } from "pages/trades/binance-trade-page/trading/terminal.types";
 import { Observable } from "rxjs";
@@ -100,7 +100,7 @@ export const newFutureAccountTransfer = ({
   type,
   authData
 }: {
-  asset: TradeCurrency;
+  asset: TerminalCurrency;
   amount: number;
   type: number; // 1 | 2
   authData: TradeAuthDataType;

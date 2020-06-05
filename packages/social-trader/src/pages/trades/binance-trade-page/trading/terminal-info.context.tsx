@@ -14,9 +14,9 @@ import {
 import {
   Account,
   ExchangeInfo,
+  TerminalCurrency,
   TerminalType,
-  TradeAuthDataType,
-  TradeCurrency
+  TradeAuthDataType
 } from "pages/trades/binance-trade-page/trading/terminal.types";
 import React, {
   createContext,
@@ -38,8 +38,8 @@ interface Props {
 }
 
 export type SymbolState = {
-  quoteAsset: TradeCurrency;
-  baseAsset: TradeCurrency;
+  quoteAsset: TerminalCurrency;
+  baseAsset: TerminalCurrency;
 };
 
 type TerminalAccountInfoState = {

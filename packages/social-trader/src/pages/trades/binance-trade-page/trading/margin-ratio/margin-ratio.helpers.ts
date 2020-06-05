@@ -2,7 +2,7 @@ import { ColoredTextColor } from "components/colored-text/colored-text";
 import { FuturesAsset } from "pages/trades/binance-trade-page/services/futures/binance-futures.types";
 import {
   AssetBalance,
-  TradeCurrency
+  TerminalCurrency
 } from "pages/trades/binance-trade-page/trading/terminal.types";
 import { safeGetElemFromArray } from "utils/helpers";
 
@@ -22,7 +22,7 @@ export const getMarginRatioLoaderData = (): FuturesAsset => ({
 
 export const getMarginInfo = (
   balances: AssetBalance[],
-  currency: TradeCurrency
+  currency: TerminalCurrency
 ): FuturesAsset => {
   const balance = balances.find(({ asset }) => asset === currency);
   return balance?.futuresAsset || ({} as FuturesAsset);

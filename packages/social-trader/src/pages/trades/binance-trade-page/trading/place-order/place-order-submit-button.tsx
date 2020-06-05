@@ -3,14 +3,14 @@ import { Row } from "components/row/row";
 import { SubmitButton } from "components/submit-button/submit-button";
 import {
   OrderSide,
-  TradeCurrency
+  TerminalCurrency
 } from "pages/trades/binance-trade-page/trading/terminal.types";
 import React from "react";
 
 interface Props {
   isSuccessful?: boolean;
   side: OrderSide;
-  asset: TradeCurrency;
+  asset: TerminalCurrency;
 }
 
 const _PlaceOrderSubmitButton: React.FC<Props> = ({
