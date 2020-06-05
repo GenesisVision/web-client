@@ -291,8 +291,8 @@ export const FollowLink = React.memo(_FollowLink);
 
 const _FollowTagCard: React.FC<IAssetTagProps> = ({ assetDetails }) => {
   const { linkCreator, contextTitle } = useToLink();
-  const route = composeAssetDetailsUrl("Fund", assetDetails.url);
-  const folderRoute = getAssetFolderRoute("Fund");
+  const route = composeAssetDetailsUrl("SignalProgram", assetDetails.url);
+  const folderRoute = getAssetFolderRoute("SignalProgram");
   return (
     <AssetTagCard
       assetDetails={assetDetails}
