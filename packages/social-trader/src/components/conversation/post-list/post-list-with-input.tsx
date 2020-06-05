@@ -23,7 +23,7 @@ const _PostListWithInput: React.FC<Props> = ({
 
   return (
     <div>
-      {showInput && <PostInputContainer onSuccess={setReset} />}
+      {showInput && <PostInputContainer userId={id} onSuccess={setReset} />}
       <PostListContainer reset={isReset} id={id} fetchMethod={fetchMethod} />
     </div>
   );

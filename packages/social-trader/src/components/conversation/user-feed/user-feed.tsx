@@ -1,14 +1,13 @@
 import { getPosts } from "components/conversation/conversation.service";
 import { PostListWithInput } from "components/conversation/post-list/post-list-with-input";
-import { useIsOwnPage } from "components/manager/manager.page.helpers";
 import React, { useCallback } from "react";
 
 interface Props {
+  canWritePost: boolean;
   id: string;
 }
 
-const _UserFeed: React.FC<Props> = ({ id }) => {
-  const isOwnPage = useIsOwnPage(id);
+const _UserFeed: React.FC<Props> = ({ canWritePost, id }) => {
   const fetchMethod = useCallback(
     (values: Object) => {
       return getPosts({ ...values, id, userMode: "ProfileOnlyOwnerPosts" });
@@ -20,7 +19,7 @@ const _UserFeed: React.FC<Props> = ({ id }) => {
       key={id}
       id={id}
       fetchMethod={fetchMethod}
-      showInput={isOwnPage}
+      showInput={canWritePost}
     />
   );
 };
