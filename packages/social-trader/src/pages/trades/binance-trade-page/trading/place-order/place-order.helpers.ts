@@ -4,6 +4,7 @@ import {
   terminalMoneyFormat,
   truncated
 } from "pages/trades/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
+import { TerminalInfoContext } from "pages/trades/binance-trade-page/trading/terminal-info.context";
 import { TerminalPlaceOrderContext } from "pages/trades/binance-trade-page/trading/terminal-place-order.context";
 import {
   getDecimalScale,
@@ -21,7 +22,6 @@ import {
   TimeInForce,
   TradeCurrency
 } from "pages/trades/binance-trade-page/trading/terminal.types";
-import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { useContext, useEffect, useMemo, useState } from "react";
 import { NumberFormatValues } from "react-number-format";
 import { calculatePercentage } from "utils/currency-converter";
@@ -78,7 +78,7 @@ export const usePlaceOrderAutoFill = ({
   totalName: string;
   quantityName: string;
 }) => {
-  const { stepSize, tickSize } = useContext(TradingInfoContext);
+  const { stepSize, tickSize } = useContext(TerminalInfoContext);
   const { leverage } = useContext(TerminalPlaceOrderContext);
   const [autoFill, setAutoFill] = useState<boolean>(false);
   useEffect(() => {
@@ -144,7 +144,7 @@ export const usePlaceOrderFormReset = ({
   totalName: string;
   quantityName: string;
 }) => {
-  const { terminalType } = useContext(TradingInfoContext);
+  const { terminalType } = useContext(TerminalInfoContext);
   const { quantity, total } = watch();
   const { sliderValue, setSliderValue } = useTradeSlider({
     watch,
@@ -215,7 +215,7 @@ export const usePlaceOrderInfo = ({
   const {
     symbol: { baseAsset, quoteAsset },
     terminalType
-  } = useContext(TradingInfoContext);
+  } = useContext(TerminalInfoContext);
   const filters = getSymbolFilters(
     exchangeInfo,
     getSymbol(baseAsset, quoteAsset)
@@ -270,7 +270,7 @@ export const useTradeSlider = ({
     symbol: { quoteAsset, baseAsset },
     stepSize,
     terminalType
-  } = useContext(TradingInfoContext);
+  } = useContext(TerminalInfoContext);
   const { leverage } = useContext(TerminalPlaceOrderContext);
   const [sliderValue, setSliderValue] = useState<number | undefined>();
   useEffect(() => {

@@ -2,8 +2,8 @@ import { Center } from "components/center/center";
 import { RowItem } from "components/row-item/row-item";
 import { terminalMoneyFormat } from "pages/trades/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
 import { TradeStatefulValue } from "pages/trades/binance-trade-page/trading/components/trade-stateful-value/trade-stateful-value";
+import { TerminalInfoContext } from "pages/trades/binance-trade-page/trading/terminal-info.context";
 import { TradeCurrency } from "pages/trades/binance-trade-page/trading/terminal.types";
-import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import React, { useContext } from "react";
 
 import styles from "./order-book.module.scss";
@@ -21,7 +21,7 @@ const _OrderBookCurrentPrice: React.FC<Props> = ({
   equivalent,
   equivalentCurrency
 }) => {
-  const { tickSize } = useContext(TradingInfoContext);
+  const { tickSize } = useContext(TerminalInfoContext);
   return (
     <Center className={styles["order-book__current-price"]}>
       <RowItem large>

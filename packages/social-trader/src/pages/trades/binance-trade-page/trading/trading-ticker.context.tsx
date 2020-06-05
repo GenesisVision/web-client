@@ -3,13 +3,13 @@ import {
   normalizeMarketList,
   normalizeSymbolsList
 } from "pages/trades/binance-trade-page/trading/market-watch/market-watch.helpers";
+import { TerminalInfoContext } from "pages/trades/binance-trade-page/trading/terminal-info.context";
 import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
 import {
   MergedTickerSymbolType,
   Symbol,
   Ticker
 } from "pages/trades/binance-trade-page/trading/terminal.types";
-import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import React, {
   createContext,
   useContext,
@@ -46,7 +46,7 @@ export const TradingTickerContextProvider: React.FC = ({ children }) => {
   }>({});
   const { connectSocket } = useSockets();
 
-  const { exchangeInfo } = useContext(TradingInfoContext);
+  const { exchangeInfo } = useContext(TerminalInfoContext);
 
   useEffect(() => {
     if (exchangeInfo) {

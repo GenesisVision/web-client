@@ -1,5 +1,6 @@
 import { SortingColumn } from "components/table/components/filtering/filter.type";
 import { getSymbolPriceFilter } from "pages/trades/binance-trade-page/trading/place-order/place-order.helpers";
+import { TerminalInfoContext } from "pages/trades/binance-trade-page/trading/terminal-info.context";
 import { getSymbol } from "pages/trades/binance-trade-page/trading/terminal.helpers";
 import {
   Depth,
@@ -8,7 +9,6 @@ import {
   StringBidDepth,
   TerminalType
 } from "pages/trades/binance-trade-page/trading/terminal.types";
-import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { useContext } from "react";
 import { formatValue } from "utils/formatter";
 import { safeGetElemFromArray } from "utils/helpers";
@@ -146,7 +146,7 @@ export const useSymbolTick = () => {
   const {
     exchangeInfo,
     symbol: { baseAsset, quoteAsset }
-  } = useContext(TradingInfoContext);
+  } = useContext(TerminalInfoContext);
   if (!exchangeInfo) return;
 
   const { filters } = safeGetElemFromArray(

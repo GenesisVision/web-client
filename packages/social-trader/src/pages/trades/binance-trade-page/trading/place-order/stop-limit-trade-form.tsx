@@ -10,6 +10,7 @@ import {
   TimeInForceField
 } from "pages/trades/binance-trade-page/trading/place-order/place-order-settings/time-in-force-field/time-in-force-field";
 import { PlaceOrderSubmitButton } from "pages/trades/binance-trade-page/trading/place-order/place-order-submit-button";
+import { TerminalInfoContext } from "pages/trades/binance-trade-page/trading/terminal-info.context";
 import { TerminalPlaceOrderContext } from "pages/trades/binance-trade-page/trading/terminal-place-order.context";
 import {
   Account,
@@ -17,7 +18,6 @@ import {
   OrderSide,
   TradeCurrency
 } from "pages/trades/binance-trade-page/trading/terminal.types";
-import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -58,7 +58,7 @@ const _StopLimitTradeForm: React.FC<IStopLimitTradeFormProps & {
     stepSize,
     symbol: { baseAsset, quoteAsset },
     terminalType
-  } = useContext(TradingInfoContext);
+  } = useContext(TerminalInfoContext);
   const { currentPositionMode } = useContext(TerminalPlaceOrderContext);
 
   const isFutures = terminalType === "futures";

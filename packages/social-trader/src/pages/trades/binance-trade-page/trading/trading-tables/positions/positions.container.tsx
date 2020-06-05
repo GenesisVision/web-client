@@ -1,8 +1,8 @@
 import { filterPositionEventsStream } from "pages/trades/binance-trade-page/services/futures/binance-futures.helpers";
 import { FuturesAccountUpdateEvent } from "pages/trades/binance-trade-page/services/futures/binance-futures.types";
+import { TerminalInfoContext } from "pages/trades/binance-trade-page/trading/terminal-info.context";
 import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
 import { FuturesPositionInformation } from "pages/trades/binance-trade-page/trading/terminal.types";
-import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { map } from "rxjs/operators";
 
@@ -11,12 +11,12 @@ import { normalizePositionsList } from "./positions.helpers";
 
 export const PositionsContainer: React.FC = () => {
   const { getPositionInformation } = useContext(TerminalMethodsContext);
-  const { authData } = useContext(TradingInfoContext);
+  const { authData } = useContext(TerminalInfoContext);
 
   const {
     userStream,
     symbol: { baseAsset, quoteAsset }
-  } = useContext(TradingInfoContext);
+  } = useContext(TerminalInfoContext);
 
   const [list, setList] = useState<{
     [key: string]: FuturesPositionInformation;

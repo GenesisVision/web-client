@@ -1,7 +1,7 @@
 import { Text } from "components/text/text";
+import { TerminalInfoContext } from "pages/trades/binance-trade-page/trading/terminal-info.context";
 import { Trade } from "pages/trades/binance-trade-page/trading/terminal.types";
 import { TradesRow } from "pages/trades/binance-trade-page/trading/trades/trades-row";
-import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import React, { useContext } from "react";
 
 import styles from "./trades.module.scss";
@@ -13,7 +13,7 @@ interface Props {
 const _Trades: React.FC<Props> = ({ items }) => {
   const {
     symbol: { baseAsset, quoteAsset }
-  } = useContext(TradingInfoContext);
+  } = useContext(TerminalInfoContext);
   return (
     <div className={styles["trades__container"]}>
       <div className={styles["trades__header-container"]}>

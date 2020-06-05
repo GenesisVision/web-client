@@ -8,13 +8,13 @@ import { Text } from "components/text/text";
 import { API_REQUEST_STATUS } from "hooks/api-request.hook";
 import { ReduceOnlyField } from "pages/trades/binance-trade-page/trading/place-order/place-order-settings/reduce-only-field/reduce-only-field";
 import { PlaceOrderSubmitButton } from "pages/trades/binance-trade-page/trading/place-order/place-order-submit-button";
+import { TerminalInfoContext } from "pages/trades/binance-trade-page/trading/terminal-info.context";
 import { TerminalPlaceOrderContext } from "pages/trades/binance-trade-page/trading/terminal-place-order.context";
 import {
   Account,
   ExchangeInfo,
   OrderSide
 } from "pages/trades/binance-trade-page/trading/terminal.types";
-import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -55,7 +55,7 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
     stepSize,
     symbol: { baseAsset, quoteAsset },
     terminalType
-  } = useContext(TradingInfoContext);
+  } = useContext(TerminalInfoContext);
   const { currentPositionMode } = useContext(TerminalPlaceOrderContext);
 
   const isFutures = terminalType === "futures";

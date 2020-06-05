@@ -4,6 +4,7 @@ import { useCookieState } from "hooks/cookie-state";
 import { useParams } from "hooks/location";
 import { NextPageContext } from "next";
 import { getDividerParts } from "pages/trades/binance-trade-page/trading/order-book/order-book.helpers";
+import { SymbolState } from "pages/trades/binance-trade-page/trading/terminal-info.context";
 import {
   Account,
   AssetBalance,
@@ -13,7 +14,6 @@ import {
   TradeAuthDataType,
   TradeCurrency
 } from "pages/trades/binance-trade-page/trading/terminal.types";
-import { SymbolState } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import qs from "qs";
 import { useEffect, useState } from "react";
 import { TERMINAL_FOLDER_ROUTE } from "routes/trade.routes";

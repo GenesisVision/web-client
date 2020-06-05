@@ -1,5 +1,10 @@
 import useApiRequest from "hooks/api-request.hook";
 import { Terminal } from "pages/trades/binance-trade-page/trading/terminal";
+import {
+  SymbolInitialState,
+  SymbolState,
+  TerminalTypeInitialState
+} from "pages/trades/binance-trade-page/trading/terminal-info.context";
 import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
 import {
   getSymbolFromState,
@@ -11,11 +16,6 @@ import {
   TerminalType,
   TradeAuthDataType
 } from "pages/trades/binance-trade-page/trading/terminal.types";
-import {
-  SymbolInitialState,
-  SymbolState,
-  TerminalTypeInitialState
-} from "pages/trades/binance-trade-page/trading/trading-info.context";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { TERMINAL_ROUTE } from "routes/trade.routes";
 

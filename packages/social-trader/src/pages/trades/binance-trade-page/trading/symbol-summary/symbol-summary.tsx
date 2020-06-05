@@ -14,8 +14,8 @@ import {
   useSymbolData
 } from "pages/trades/binance-trade-page/trading/symbol-summary/symbol-summary.helpers";
 import { TerminalTypeSwitcher } from "pages/trades/binance-trade-page/trading/symbol-summary/terminal-type-switcher";
+import { TerminalInfoContext } from "pages/trades/binance-trade-page/trading/terminal-info.context";
 import { SymbolSummaryData } from "pages/trades/binance-trade-page/trading/terminal.types";
-import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import React, { useContext } from "react";
 import { diffDate } from "utils/dates";
 
@@ -64,7 +64,7 @@ const _SymbolSummaryView: React.FC<Props> = ({
     }
   }
 }) => {
-  const { stepSize, tickSize } = useContext(TradingInfoContext);
+  const { stepSize, tickSize } = useContext(TerminalInfoContext);
   return (
     <DefaultBlock size={SIZES.SMALL} roundedBorder={false} bordered>
       <Row>

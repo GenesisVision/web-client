@@ -1,14 +1,14 @@
 import { filterPositionEventsStream } from "pages/trades/binance-trade-page/services/futures/binance-futures.helpers";
 import { FuturesAccountUpdateEvent } from "pages/trades/binance-trade-page/services/futures/binance-futures.types";
+import { TerminalInfoContext } from "pages/trades/binance-trade-page/trading/terminal-info.context";
 import { AssetBalance } from "pages/trades/binance-trade-page/trading/terminal.types";
-import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { normalizeFundsList } from "pages/trades/binance-trade-page/trading/trading-tables/funds/funds.helpers";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 
 import { Funds } from "./funds";
 
 export const FundsContainer: React.FC = () => {
-  const { accountInfo, userStream } = useContext(TradingInfoContext);
+  const { accountInfo, userStream } = useContext(TerminalInfoContext);
   const [socketData, setSocketData] = useState<
     FuturesAccountUpdateEvent | undefined
   >();

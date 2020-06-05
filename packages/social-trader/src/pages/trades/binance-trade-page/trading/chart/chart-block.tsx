@@ -6,8 +6,8 @@ import {
   $textAccentColor
 } from "components/gv-styles/gv-colors/gv-colors";
 import { SIZES } from "constants/constants";
+import { TerminalInfoContext } from "pages/trades/binance-trade-page/trading/terminal-info.context";
 import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
-import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import React from "react";
 import { useSockets } from "services/websocket.service";
 
@@ -16,7 +16,7 @@ import TradingView from "./charting_library/charting_library.min";
 import Datafeed from "./datafeed";
 
 export const ChartBlock: React.FC = () => {
-  const TradingInfo = React.useContext(TradingInfoContext);
+  const TradingInfo = React.useContext(TerminalInfoContext);
   const [widget, setWidget] = React.useState<
     TradingView.IChartingLibraryWidget
   >();

@@ -42,7 +42,7 @@ export type SymbolState = {
   baseAsset: TradeCurrency;
 };
 
-type TradingAccountInfoState = {
+type TerminalAccountInfoState = {
   stepSize: string;
   tickSize: string;
   authData: TradeAuthDataType;
@@ -61,7 +61,7 @@ export const SymbolInitialState: SymbolState = {
   baseAsset: "BTC"
 };
 
-export const TradingAccountInfoInitialState: TradingAccountInfoState = {
+export const TerminalAccountInfoInitialState: TerminalAccountInfoState = {
   stepSize: "0.01",
   tickSize: "0.01",
   authData: {
@@ -73,11 +73,11 @@ export const TradingAccountInfoInitialState: TradingAccountInfoState = {
   symbol: SymbolInitialState
 };
 
-export const TradingInfoContext = createContext<TradingAccountInfoState>(
-  TradingAccountInfoInitialState
+export const TerminalInfoContext = createContext<TerminalAccountInfoState>(
+  TerminalAccountInfoInitialState
 );
 
-export const TradingInfoContextProvider: React.FC<Props> = ({
+export const TerminalInfoContextProvider: React.FC<Props> = ({
   exchangeInfo,
   authData: authDataProp,
   outerSymbol: symbol = SymbolInitialState,
@@ -176,8 +176,8 @@ export const TradingInfoContextProvider: React.FC<Props> = ({
   );
 
   return (
-    <TradingInfoContext.Provider value={value}>
+    <TerminalInfoContext.Provider value={value}>
       {children}
-    </TradingInfoContext.Provider>
+    </TerminalInfoContext.Provider>
   );
 };

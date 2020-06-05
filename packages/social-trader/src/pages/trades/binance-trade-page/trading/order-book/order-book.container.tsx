@@ -9,13 +9,13 @@ import {
   updateOrderBookFromBufferLogger,
   updateOrderBookFromSocketLogger
 } from "pages/trades/binance-trade-page/trading/order-book/order-book.helpers";
+import { TerminalInfoContext } from "pages/trades/binance-trade-page/trading/terminal-info.context";
 import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
 import { getSymbol } from "pages/trades/binance-trade-page/trading/terminal.helpers";
 import {
   Depth,
   NormalizedDepth
 } from "pages/trades/binance-trade-page/trading/terminal.types";
-import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { timer } from "rxjs";
 import { switchMap } from "rxjs/operators";
@@ -41,7 +41,7 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
   const {
     terminalType,
     symbol: { baseAsset, quoteAsset }
-  } = useContext(TradingInfoContext);
+  } = useContext(TerminalInfoContext);
 
   const [tickValue, setTickValue] = useState<
     { value: string; default: boolean } | undefined

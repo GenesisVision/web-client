@@ -1,9 +1,9 @@
 import { getSymbolPrice } from "pages/trades/binance-trade-page/trading/market-watch/market-watch.helpers";
+import { TerminalInfoContext } from "pages/trades/binance-trade-page/trading/terminal-info.context";
 import {
   formatValueWithTick,
   getSymbol
 } from "pages/trades/binance-trade-page/trading/terminal.helpers";
-import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { TradingTickerContext } from "pages/trades/binance-trade-page/trading/trading-ticker.context";
 import { TransferButton } from "pages/trades/binance-trade-page/trading/transfer/transfer.button";
 import React, { useContext } from "react";
@@ -16,7 +16,7 @@ interface Props {
 
 const _FundsFRow: React.FC<Props> = ({ asset, available, locked }) => {
   const ticker = useContext(TradingTickerContext);
-  const { tickSize, terminalType } = useContext(TradingInfoContext);
+  const { tickSize, terminalType } = useContext(TerminalInfoContext);
   const symbol = getSymbol(asset, "BTC");
   // const price = ticker ? getSymbolPrice(ticker, symbol) : 0;
   const price = "0";

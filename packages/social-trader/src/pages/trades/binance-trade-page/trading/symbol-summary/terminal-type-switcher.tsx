@@ -2,9 +2,9 @@ import { DoubleButton } from "components/double-button/double-button";
 import { GV_BTN_SIZE } from "components/gv-button";
 import { Push } from "components/link/link";
 import { useParams } from "hooks/location";
+import { TerminalInfoContext } from "pages/trades/binance-trade-page/trading/terminal-info.context";
 import { stringifySymbolFromToParam } from "pages/trades/binance-trade-page/trading/terminal.helpers";
 import { TerminalType } from "pages/trades/binance-trade-page/trading/terminal.types";
-import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import * as qs from "qs";
 import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
@@ -15,7 +15,7 @@ import styles from "./symbol-summary.module.scss";
 export const TerminalTypeSwitcher: React.FC = () => {
   const [t] = useTranslation();
   const params = useParams();
-  const { terminalType, symbol } = useContext(TradingInfoContext);
+  const { terminalType, symbol } = useContext(TerminalInfoContext);
 
   const symbolPath = stringifySymbolFromToParam(symbol);
   const handleSelectType = useCallback(

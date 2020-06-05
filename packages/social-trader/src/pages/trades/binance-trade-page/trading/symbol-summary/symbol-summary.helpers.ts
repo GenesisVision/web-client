@@ -1,10 +1,10 @@
+import { TerminalInfoContext } from "pages/trades/binance-trade-page/trading/terminal-info.context";
 import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
 import { getSymbolFromState } from "pages/trades/binance-trade-page/trading/terminal.helpers";
 import {
   MarkPrice,
   SymbolSummaryData
 } from "pages/trades/binance-trade-page/trading/terminal.types";
-import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { TradingTickerContext } from "pages/trades/binance-trade-page/trading/trading-ticker.context";
 import { useContext, useEffect, useState } from "react";
 import { useSockets } from "services/websocket.service";
@@ -17,7 +17,7 @@ export const useSymbolData = () => {
 
   const { markPriceSocket, getMarkPrice } = useContext(TerminalMethodsContext);
   const items = useContext(TradingTickerContext);
-  const { symbol, terminalType } = useContext(TradingInfoContext);
+  const { symbol, terminalType } = useContext(TerminalInfoContext);
   const textSymbol = getSymbolFromState(symbol);
   const tickerData = items
     ? safeGetElemFromArray(items, item => item.symbol === textSymbol)

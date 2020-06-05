@@ -1,5 +1,5 @@
 import Select, { ISelectChangeEvent } from "components/select/select";
-import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
+import { TerminalInfoContext } from "pages/trades/binance-trade-page/trading/terminal-info.context";
 import React, { useContext, useEffect } from "react";
 import { formatValue } from "utils/formatter";
 
@@ -11,7 +11,7 @@ interface Props {
 }
 
 const _OrderBookTickSizeSelect: React.FC<Props> = ({ value, setValue }) => {
-  const { tickSize } = useContext(TradingInfoContext);
+  const { tickSize } = useContext(TerminalInfoContext);
   useEffect(() => {
     if (tickSize) setValue({ value: formatValue(tickSize), default: true });
   }, [tickSize]);

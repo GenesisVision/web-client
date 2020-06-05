@@ -6,7 +6,7 @@ import { Text } from "components/text/text";
 import Tooltip from "components/tooltip/tooltip";
 import { TooltipContent } from "components/tooltip/tooltip-content";
 import { terminalMoneyFormat } from "pages/trades/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
-import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
+import { TerminalInfoContext } from "pages/trades/binance-trade-page/trading/terminal-info.context";
 import { TradingPriceContext } from "pages/trades/binance-trade-page/trading/trading-price.context";
 import React, { useContext } from "react";
 
@@ -52,7 +52,7 @@ const _OrderBookRow: React.FC<Props> = ({
     stepSize,
     tickSize,
     symbol: { baseAsset, quoteAsset }
-  } = useContext(TradingInfoContext);
+  } = useContext(TerminalInfoContext);
   const formattedPrice = terminalMoneyFormat({
     amount: price,
     tickSize: tableTickSize || tickSize

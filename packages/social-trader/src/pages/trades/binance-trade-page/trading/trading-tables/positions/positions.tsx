@@ -4,8 +4,8 @@ import {
   getMarginInfo,
   MARGIN_INFO_ASSET
 } from "pages/trades/binance-trade-page/trading/margin-ratio/margin-ratio.helpers";
+import { TerminalInfoContext } from "pages/trades/binance-trade-page/trading/terminal-info.context";
 import { FuturesPositionInformation } from "pages/trades/binance-trade-page/trading/terminal.types";
-import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -19,7 +19,7 @@ interface Props {
 
 export const Positions: React.FC<Props> = ({ items }) => {
   const [t] = useTranslation();
-  const { accountInfo } = useContext(TradingInfoContext);
+  const { accountInfo } = useContext(TerminalInfoContext);
 
   if (!accountInfo?.balances) return null;
 

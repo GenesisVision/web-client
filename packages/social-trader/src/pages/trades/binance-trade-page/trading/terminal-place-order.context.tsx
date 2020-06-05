@@ -1,9 +1,9 @@
+import { TerminalInfoContext } from "pages/trades/binance-trade-page/trading/terminal-info.context";
 import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
 import {
   LeverageBracket,
   PositionModeType
 } from "pages/trades/binance-trade-page/trading/terminal.types";
-import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import React, {
   createContext,
   useCallback,
@@ -37,7 +37,7 @@ export const TerminalPlaceOrderContext = createContext<TradingAccountInfoState>(
 );
 
 export const TerminalPlaceOrderContextProvider: React.FC = ({ children }) => {
-  const { authData, terminalType } = useContext(TradingInfoContext);
+  const { authData, terminalType } = useContext(TerminalInfoContext);
   const { getPositionMode } = useContext(TerminalMethodsContext);
 
   const [bracket, setBracket] = useState<LeverageBracket | undefined>();

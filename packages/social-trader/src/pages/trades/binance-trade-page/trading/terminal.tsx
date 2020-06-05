@@ -9,6 +9,10 @@ import { PlaceOrder } from "pages/trades/binance-trade-page/trading/place-order/
 import { PlaceOrderSettingsContainer } from "pages/trades/binance-trade-page/trading/place-order/place-order-settings/place-order-settings.container";
 import { SymbolSummaryContainer } from "pages/trades/binance-trade-page/trading/symbol-summary/symbol-summary";
 import { SymbolSummarySmallBlock } from "pages/trades/binance-trade-page/trading/symbol-summary/symbol-summary-small";
+import {
+  SymbolState,
+  TerminalInfoContextProvider
+} from "pages/trades/binance-trade-page/trading/terminal-info.context";
 import { TerminalPlaceOrderContextProvider } from "pages/trades/binance-trade-page/trading/terminal-place-order.context";
 import {
   ExchangeInfo,
@@ -16,10 +20,6 @@ import {
   TradeAuthDataType
 } from "pages/trades/binance-trade-page/trading/terminal.types";
 import { TradesBlock } from "pages/trades/binance-trade-page/trading/trades/trades.block";
-import {
-  SymbolState,
-  TradingInfoContextProvider
-} from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { TradingPriceContextProvider } from "pages/trades/binance-trade-page/trading/trading-price.context";
 import { TradingTables } from "pages/trades/binance-trade-page/trading/trading-tables/trading-tables";
 import { TradingTickerContextProvider } from "pages/trades/binance-trade-page/trading/trading-ticker.context";
@@ -41,7 +41,7 @@ const _Terminal: React.FC<Props> = ({
   terminalType
 }) => {
   return (
-    <TradingInfoContextProvider
+    <TerminalInfoContextProvider
       exchangeInfo={exchangeInfo}
       authData={authData}
       outerSymbol={symbol}
@@ -108,7 +108,7 @@ const _Terminal: React.FC<Props> = ({
           </TradingPriceContextProvider>
         </TradingTickerContextProvider>
       </div>
-    </TradingInfoContextProvider>
+    </TerminalInfoContextProvider>
   );
 };
 

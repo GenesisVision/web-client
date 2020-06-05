@@ -1,3 +1,4 @@
+import { TerminalInfoContext } from "pages/trades/binance-trade-page/trading/terminal-info.context";
 import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
 import {
   filterOrderEventsStream,
@@ -7,7 +8,6 @@ import {
   ExecutionReport,
   QueryOrderResult
 } from "pages/trades/binance-trade-page/trading/terminal.types";
-import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { normalizeOpenOrdersList } from "pages/trades/binance-trade-page/trading/trading-tables/open-orders/open-orders.helpers";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { map } from "rxjs/operators";
@@ -23,7 +23,7 @@ export const OrderHistoryContainer: React.FC<Props> = () => {
     authData,
     userStream,
     symbol: { baseAsset, quoteAsset }
-  } = useContext(TradingInfoContext);
+  } = useContext(TerminalInfoContext);
 
   const [list, setList] = useState<{
     [key: string]: QueryOrderResult;

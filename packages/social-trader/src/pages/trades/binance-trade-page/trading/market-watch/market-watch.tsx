@@ -17,8 +17,8 @@ import {
   SortingType,
   sortMarketWatchItems
 } from "pages/trades/binance-trade-page/trading/market-watch/market-watch.helpers";
+import { TerminalInfoContext } from "pages/trades/binance-trade-page/trading/terminal-info.context";
 import { MergedTickerSymbolType } from "pages/trades/binance-trade-page/trading/terminal.types";
-import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import React, { useContext, useMemo, useState } from "react";
 
 import styles from "./market-watch.module.scss";
@@ -28,7 +28,7 @@ interface Props {
 }
 
 const _MarketWatch: React.FC<Props> = ({ items }) => {
-  const { terminalType } = useContext(TradingInfoContext);
+  const { terminalType } = useContext(TerminalInfoContext);
   const [column, setColumn] = useState<string>(CHANGE_COLUMN);
   const [search, setSearch] = useState<string>("");
   const initFiltering = terminalType === "spot" ? "margin" : undefined;

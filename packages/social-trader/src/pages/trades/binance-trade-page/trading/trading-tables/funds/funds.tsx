@@ -1,7 +1,7 @@
 import { Text } from "components/text/text";
 import { TradeTable } from "pages/trades/binance-trade-page/trading/components/trade-table/trade-table";
+import { TerminalInfoContext } from "pages/trades/binance-trade-page/trading/terminal-info.context";
 import { AssetBalance } from "pages/trades/binance-trade-page/trading/terminal.types";
-import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { FundsRow } from "pages/trades/binance-trade-page/trading/trading-tables/funds/funds-row";
 import {
   FUNDS_TABLE_COLUMNS,
@@ -18,7 +18,7 @@ interface Props {
 
 const _Funds: React.FC<Props> = ({ items }) => {
   const [t] = useTranslation();
-  const { terminalType } = useContext(TradingInfoContext);
+  const { terminalType } = useContext(TerminalInfoContext);
   const columns =
     terminalType === "spot" ? FUNDS_TABLE_COLUMNS : FUTURES_FUNDS_TABLE_COLUMNS;
   return (

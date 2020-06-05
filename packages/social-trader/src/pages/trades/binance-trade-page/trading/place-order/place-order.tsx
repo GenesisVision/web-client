@@ -12,13 +12,13 @@ import { SIZES } from "constants/constants";
 import useApiRequest from "hooks/api-request.hook";
 import useTab from "hooks/tab.hook";
 import { StopLimitTradeForm } from "pages/trades/binance-trade-page/trading/place-order/stop-limit-trade-form";
+import { TerminalInfoContext } from "pages/trades/binance-trade-page/trading/terminal-info.context";
 import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
 import { getSymbol } from "pages/trades/binance-trade-page/trading/terminal.helpers";
 import {
   OrderSide,
   OrderType
 } from "pages/trades/binance-trade-page/trading/terminal.types";
-import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { TradingPriceContext } from "pages/trades/binance-trade-page/trading/trading-price.context";
 import React, { useCallback, useContext, useState } from "react";
 
@@ -37,7 +37,7 @@ const _PlaceOrder: React.FC = () => {
     exchangeInfo,
     accountInfo,
     symbol: { baseAsset, quoteAsset }
-  } = useContext(TradingInfoContext);
+  } = useContext(TerminalInfoContext);
 
   const [side, setSide] = useState<OrderSide>("BUY");
   const { tab, setTab } = useTab<OrderType>("LIMIT");
