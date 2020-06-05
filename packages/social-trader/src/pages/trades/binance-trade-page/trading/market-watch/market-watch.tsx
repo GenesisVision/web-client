@@ -63,19 +63,6 @@ const _MarketWatch: React.FC<Props> = ({ items }) => {
       </Row>
       {terminalType === "spot" && (
         <Row small>
-          <RowItem>
-            <GVButton
-              noPadding
-              disabled={filteringType === "margin"}
-              variant={"text"}
-              size={GV_BTN_SIZE.SMALL}
-              onClick={() => {
-                setFilteringType("margin");
-              }}
-            >
-              Margin
-            </GVButton>
-          </RowItem>
           {FILTERING_CURRENCIES.map(currency => (
             <RowItem>
               <GVButton
@@ -94,6 +81,32 @@ const _MarketWatch: React.FC<Props> = ({ items }) => {
               </GVButton>
             </RowItem>
           ))}
+          <RowItem>
+            <GVButton
+              noPadding
+              disabled={filteringType === "ALTS"}
+              variant={"text"}
+              size={GV_BTN_SIZE.SMALL}
+              onClick={() => {
+                setFilteringType("ALTS");
+              }}
+            >
+              ALTS
+            </GVButton>
+          </RowItem>
+          <RowItem>
+            <GVButton
+              noPadding
+              disabled={filteringType === "FIATS"}
+              variant={"text"}
+              size={GV_BTN_SIZE.SMALL}
+              onClick={() => {
+                setFilteringType("FIATS");
+              }}
+            >
+              FIATS
+            </GVButton>
+          </RowItem>
         </Row>
       )}
       <Row small>

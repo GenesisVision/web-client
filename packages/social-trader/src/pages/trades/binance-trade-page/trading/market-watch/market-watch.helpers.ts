@@ -8,7 +8,12 @@ import {
 import { safeGetElemFromArray } from "utils/helpers";
 import { AnyObjectType } from "utils/types";
 
-export type FilteringVariant = "margin" | "symbol" | undefined;
+export type FilteringVariant =
+  | "ALTS"
+  | "FIATS"
+  | "margin"
+  | "symbol"
+  | undefined;
 
 export type SortingType = {
   dataType: "number" | "string";
@@ -20,6 +25,22 @@ export type FilteringType = {
   field?: keyof MergedTickerSymbolType;
   value?: any;
 };
+
+export const ALTS_CURRENCIES = ["ETH", "TRX", "XRP"];
+export const FIATS_CURRENCIES = [
+  "USDT",
+  "BUSD",
+  "TUSD",
+  "USDC",
+  "PAX",
+  "BKRW",
+  "EUR",
+  "IDRT",
+  "NGN",
+  "RUB",
+  "TRY",
+  "ZAR"
+];
 
 export const FILTERING_CURRENCIES = ["BTC", "BNB"];
 
@@ -76,11 +97,27 @@ export const sortMarketWatchItems = ({
   }
 };
 
+export const filterTrading = ({ status }: MergedTickerSymbolType) => {
+  return status === "TRADING";
+};
+
 export const filterForSymbol = (value: string) => (
   item: MergedTickerSymbolType
 ): boolean => {
   if (value === undefined) return true;
   return item.quoteAsset === value;
+};
+
+export const filterMarketWatchItemsForALTS = (
+  item: MergedTickerSymbolType
+): boolean => {
+  return ALTS_CURRENCIES.includes(item.quoteAsset);
+};
+
+export const filterMarketWatchItemsForFIATS = (
+  item: MergedTickerSymbolType
+): boolean => {
+  return FIATS_CURRENCIES.includes(item.quoteAsset);
 };
 
 export const filterMarketWatchItemsForMargin = (
@@ -94,6 +131,10 @@ export const getFilteringFunction = (
   filtering: FilteringType
 ): ((item: MergedTickerSymbolType) => boolean) => {
   switch (filteringType) {
+    case "ALTS":
+      return filterMarketWatchItemsForALTS;
+    case "FIATS":
+      return filterMarketWatchItemsForFIATS;
     case "margin":
       return filterMarketWatchItemsForMargin;
     case "symbol":

@@ -1,4 +1,5 @@
 import {
+  filterTrading,
   normalizeMarketList,
   normalizeSymbolsList
 } from "pages/trades/binance-trade-page/trading/market-watch/market-watch.helpers";
@@ -86,7 +87,9 @@ export const TradingTickerContextProvider: React.FC = ({ children }) => {
     });
     setList(updatedList);
   }, [requestData]);
-  const items = useMemo(() => Object.values(list), [list]);
+  const items = useMemo(() => Object.values(list).filter(filterTrading), [
+    list
+  ]);
   return (
     <TradingTickerContext.Provider
       value={Object.values(requestData).length ? items : undefined}
