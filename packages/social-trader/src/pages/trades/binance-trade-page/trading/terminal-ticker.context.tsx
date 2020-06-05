@@ -20,15 +20,15 @@ import React, {
 import { map } from "rxjs/operators";
 import { useSockets } from "services/websocket.service";
 
-type TradingTickerContextState = MergedTickerSymbolType[] | undefined;
+type TerminalTickerContextState = MergedTickerSymbolType[] | undefined;
 
-export const TradingTickerInitialState: TradingTickerContextState = undefined;
+export const TerminalTickerInitialState: TerminalTickerContextState = undefined;
 
-export const TradingTickerContext = createContext<TradingTickerContextState>(
-  TradingTickerInitialState
+export const TerminalTickerContext = createContext<TerminalTickerContextState>(
+  TerminalTickerInitialState
 );
 
-export const TradingTickerContextProvider: React.FC = ({ children }) => {
+export const TerminalTickerContextProvider: React.FC = ({ children }) => {
   const { getTickers, marketTicketsSocket } = useContext(
     TerminalMethodsContext
   );
@@ -91,10 +91,10 @@ export const TradingTickerContextProvider: React.FC = ({ children }) => {
     list
   ]);
   return (
-    <TradingTickerContext.Provider
+    <TerminalTickerContext.Provider
       value={Object.values(requestData).length ? items : undefined}
     >
       {children}
-    </TradingTickerContext.Provider>
+    </TerminalTickerContext.Provider>
   );
 };

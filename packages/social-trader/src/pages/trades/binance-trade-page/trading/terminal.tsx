@@ -14,6 +14,7 @@ import {
   TerminalInfoContextProvider
 } from "pages/trades/binance-trade-page/trading/terminal-info.context";
 import { TerminalPlaceOrderContextProvider } from "pages/trades/binance-trade-page/trading/terminal-place-order.context";
+import { TerminalTickerContextProvider } from "pages/trades/binance-trade-page/trading/terminal-ticker.context";
 import {
   ExchangeInfo,
   TerminalType,
@@ -22,7 +23,6 @@ import {
 import { TradesBlock } from "pages/trades/binance-trade-page/trading/trades/trades.block";
 import { TradingPriceContextProvider } from "pages/trades/binance-trade-page/trading/trading-price.context";
 import { TradingTables } from "pages/trades/binance-trade-page/trading/trading-tables/trading-tables";
-import { TradingTickerContextProvider } from "pages/trades/binance-trade-page/trading/trading-ticker.context";
 import React from "react";
 
 import styles from "./terminal.module.scss";
@@ -48,7 +48,7 @@ const _Terminal: React.FC<Props> = ({
       terminalType={terminalType}
     >
       <div className={styles["trading-grid"]}>
-        <TradingTickerContextProvider>
+        <TerminalTickerContextProvider>
           <Center className={styles["header-grid-elem"]}>
             <TradeHeaderContainer />
           </Center>
@@ -106,7 +106,7 @@ const _Terminal: React.FC<Props> = ({
               </TerminalPlaceOrderContextProvider>
             </div>
           </TradingPriceContextProvider>
-        </TradingTickerContextProvider>
+        </TerminalTickerContextProvider>
       </div>
     </TerminalInfoContextProvider>
   );
