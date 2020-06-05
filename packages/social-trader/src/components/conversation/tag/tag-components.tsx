@@ -134,7 +134,7 @@ const _EventTag: React.FC<IEventTagProps> = ({
           </RowItem>
         </Center>
       </RowItem>
-      {amount && (
+      {amount !== null && (
         <RowItem bottomOffset>
           <StatisticItemInner label={t("Amount")}>
             <Center>
@@ -143,7 +143,7 @@ const _EventTag: React.FC<IEventTagProps> = ({
                   {amount} {currency}
                 </ColoredText>
               </RowItem>
-              {percent && (
+              {percent !== null && (
                 <RowItem>
                   <Profitability
                     prefix={PROFITABILITY_PREFIX.SIGN}
