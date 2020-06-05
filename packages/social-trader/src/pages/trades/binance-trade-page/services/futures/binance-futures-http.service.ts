@@ -21,10 +21,10 @@ import {
   PositionModeType,
   QueryOrderResult,
   SymbolLeverageBrackets,
+  TerminalAuthDataType,
   TerminalCurrency,
   Ticker,
   Trade,
-  TradeAuthDataType,
   TradeRequest
 } from "pages/trades/binance-trade-page/trading/terminal.types";
 import { Observable } from "rxjs";
@@ -65,7 +65,7 @@ export const getMarkPrice = (params: {
 export const getBalancesForTransfer = ({
   authData
 }: {
-  authData: TradeAuthDataType;
+  authData: TerminalAuthDataType;
 }): Promise<BalancesForTransfer> => {
   const futuresAccountRequest = requestService
     .get(
@@ -103,7 +103,7 @@ export const newFutureAccountTransfer = ({
   asset: TerminalCurrency;
   amount: number;
   type: number; // 1 | 2
-  authData: TradeAuthDataType;
+  authData: TerminalAuthDataType;
 }): Promise<HttpResponse> =>
   requestService.post(
     {
@@ -124,7 +124,7 @@ export const changePositionMode = ({
   authData
 }: {
   dualSidePosition: PositionModeType;
-  authData: TradeAuthDataType;
+  authData: TerminalAuthDataType;
 }): Promise<HttpResponse> =>
   requestService.post(
     {
@@ -139,7 +139,7 @@ export const changePositionMode = ({
 export const getPositionMode = ({
   authData
 }: {
-  authData: TradeAuthDataType;
+  authData: TerminalAuthDataType;
 }): Promise<PositionModeType> =>
   requestService
     .get(
@@ -155,7 +155,7 @@ export const getPositionMode = ({
 export const getPositionInformation = ({
   authData
 }: {
-  authData: TradeAuthDataType;
+  authData: TerminalAuthDataType;
 }): Observable<FuturesPositionInformation[]> =>
   requestService.get({
     ...authData,
@@ -178,7 +178,7 @@ export const getLeverageBrackets = ({
   authData
 }: {
   symbol: string;
-  authData: TradeAuthDataType;
+  authData: TerminalAuthDataType;
 }): Promise<SymbolLeverageBrackets[]> =>
   requestService
     .get(
@@ -201,7 +201,7 @@ export const changeLeverage = ({
 }: {
   leverage: number;
   symbol: string;
-  authData: TradeAuthDataType;
+  authData: TerminalAuthDataType;
 }): Promise<ChangeLeverageResponse> =>
   requestService.post(
     {
@@ -220,7 +220,7 @@ export const changeMarginMode = ({
 }: {
   mode: MarginModeType;
   symbol: string;
-  authData: TradeAuthDataType;
+  authData: TerminalAuthDataType;
 }): Promise<HttpResponse> =>
   requestService.post(
     {
@@ -234,7 +234,7 @@ export const changeMarginMode = ({
 
 export const getOpenOrders = (
   symbol: string,
-  authData: TradeAuthDataType
+  authData: TerminalAuthDataType
 ): Observable<QueryOrderResult[]> =>
   requestService.get({
     ...authData,
@@ -245,7 +245,7 @@ export const getOpenOrders = (
 
 export const getAllOrders = (
   symbol: string,
-  authData: TradeAuthDataType
+  authData: TerminalAuthDataType
 ): Observable<QueryOrderResult[]> =>
   requestService.get({
     ...authData,
@@ -255,7 +255,7 @@ export const getAllOrders = (
   });
 
 export const getUserStreamKey = (
-  authData: TradeAuthDataType
+  authData: TerminalAuthDataType
 ): Observable<{ listenKey: string }> =>
   requestService.post({
     ...authData,
@@ -264,7 +264,7 @@ export const getUserStreamKey = (
   });
 
 export const getAccountInformation = (
-  authData: TradeAuthDataType
+  authData: TerminalAuthDataType
 ): Observable<Account> =>
   requestService
     .get({
@@ -306,7 +306,7 @@ export const getDepth = (
 
 export const newOrder = (
   options: OrderRequest,
-  authData: TradeAuthDataType
+  authData: TerminalAuthDataType
 ): Promise<any> =>
   requestService.post(
     {
@@ -320,7 +320,7 @@ export const newOrder = (
 
 export const cancelAllOrders = (
   options: { symbol: string; useServerTime?: boolean },
-  authData: TradeAuthDataType
+  authData: TerminalAuthDataType
 ): Promise<CancelOrderResult> =>
   requestService.deleteRequest(
     {
@@ -334,7 +334,7 @@ export const cancelAllOrders = (
 
 export const cancelOrder = (
   options: { symbol: string; orderId: string; useServerTime?: boolean },
-  authData: TradeAuthDataType
+  authData: TerminalAuthDataType
 ): Promise<CancelOrderResult> =>
   requestService.deleteRequest(
     {
@@ -355,7 +355,9 @@ export const postBuy = ({
   price,
   quantity,
   type
-}: TradeRequest & { authData: TradeAuthDataType }): Promise<QueryOrderResult> =>
+}: TradeRequest & {
+  authData: TerminalAuthDataType;
+}): Promise<QueryOrderResult> =>
   newOrder(
     {
       reduceOnly,
@@ -382,7 +384,9 @@ export const postSell = ({
   price,
   quantity,
   type
-}: TradeRequest & { authData: TradeAuthDataType }): Promise<QueryOrderResult> =>
+}: TradeRequest & {
+  authData: TerminalAuthDataType;
+}): Promise<QueryOrderResult> =>
   newOrder(
     {
       reduceOnly,
@@ -406,7 +410,7 @@ export const getTradeMethod = (side: OrderSide) =>
 export const tradeRequest = ({
   side,
   ...options
-}: TradeRequest & { authData: TradeAuthDataType; side: OrderSide }) => {
+}: TradeRequest & { authData: TerminalAuthDataType; side: OrderSide }) => {
   const method = getTradeMethod(side);
   return method(options);
 };

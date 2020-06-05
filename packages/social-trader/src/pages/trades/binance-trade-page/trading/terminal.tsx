@@ -17,8 +17,8 @@ import { TerminalPlaceOrderContextProvider } from "pages/trades/binance-trade-pa
 import { TerminalTickerContextProvider } from "pages/trades/binance-trade-page/trading/terminal-ticker.context";
 import {
   ExchangeInfo,
-  TerminalType,
-  TradeAuthDataType
+  TerminalAuthDataType,
+  TerminalType
 } from "pages/trades/binance-trade-page/trading/terminal.types";
 import { TradesBlock } from "pages/trades/binance-trade-page/trading/trades/trades.block";
 import { TradingPriceContextProvider } from "pages/trades/binance-trade-page/trading/trading-price.context";
@@ -29,7 +29,7 @@ import styles from "./terminal.module.scss";
 
 interface Props {
   exchangeInfo: ExchangeInfo;
-  authData: TradeAuthDataType;
+  authData: TerminalAuthDataType;
   terminalType: TerminalType;
   symbol?: SymbolState;
 }

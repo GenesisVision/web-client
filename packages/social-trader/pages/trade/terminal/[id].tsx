@@ -6,8 +6,8 @@ import { TerminalMethodsContextProvider } from "pages/trades/binance-trade-page/
 import { TerminalContainer } from "pages/trades/binance-trade-page/trading/terminal.container";
 import { parseSymbolFromUrlParam } from "pages/trades/binance-trade-page/trading/terminal.helpers";
 import {
-  TerminalType,
-  TradeAuthDataType
+  TerminalAuthDataType,
+  TerminalType
 } from "pages/trades/binance-trade-page/trading/terminal.types";
 import { SymbolState } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import React from "react";
@@ -17,7 +17,7 @@ import { NextPageWithRedux } from "utils/types";
 
 interface Props {
   brokerType?: BrokerTradeServerType;
-  authData: TradeAuthDataType;
+  authData: TerminalAuthDataType;
   terminalType?: TerminalType;
   symbol?: SymbolState;
 }

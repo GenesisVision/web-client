@@ -13,21 +13,21 @@ import {
 } from "pages/trades/binance-trade-page/trading/terminal.helpers";
 import {
   ExchangeInfo,
-  TerminalType,
-  TradeAuthDataType
+  TerminalAuthDataType,
+  TerminalType
 } from "pages/trades/binance-trade-page/trading/terminal.types";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { TERMINAL_ROUTE } from "routes/trade.routes";
 
 interface Props {
-  authData: TradeAuthDataType;
+  authData: TerminalAuthDataType;
   type?: TerminalType;
   symbol?: SymbolState;
 }
 
 interface ITerminalPropsData {
   exchangeInfo?: ExchangeInfo;
-  authData?: TradeAuthDataType;
+  authData?: TerminalAuthDataType;
   terminalType?: TerminalType;
   symbol?: SymbolState;
 }

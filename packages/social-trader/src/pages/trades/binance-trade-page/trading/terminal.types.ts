@@ -98,7 +98,7 @@ export interface TradeRequest {
   type: OrderType;
 }
 
-export type TradeAuthDataType = { publicKey: string; privateKey: string };
+export type TerminalAuthDataType = { publicKey: string; privateKey: string };
 
 export type KlineSocketType = (
   symbol: string,
@@ -141,68 +141,70 @@ export interface IBinanceKline {
 export interface ITerminalMethods {
   getMarkPrice?: (options: { symbol: string }) => Observable<MarkPrice>;
   getBalancesForTransfer?: (options: {
-    authData: TradeAuthDataType;
+    authData: TerminalAuthDataType;
   }) => Promise<BalancesForTransfer>;
   newFutureAccountTransfer?: (options: {
     asset: TerminalCurrency;
     amount: number;
     type: number; // 1 | 2
-    authData: TradeAuthDataType;
+    authData: TerminalAuthDataType;
   }) => Promise<HttpResponse>;
   getPositionMode?: (options: {
-    authData: TradeAuthDataType;
+    authData: TerminalAuthDataType;
   }) => Promise<PositionModeType>;
   changePositionMode?: (options: {
     dualSidePosition: PositionModeType;
-    authData: TradeAuthDataType;
+    authData: TerminalAuthDataType;
   }) => Promise<HttpResponse>;
   getKlines: (params: KlineParams) => Promise<number[][]>;
   getPositionInformation?: (options: {
-    authData: TradeAuthDataType;
+    authData: TerminalAuthDataType;
   }) => Observable<FuturesPositionInformation[]>;
   getLeverageBrackets?: (options: {
     symbol: string;
-    authData: TradeAuthDataType;
+    authData: TerminalAuthDataType;
   }) => Promise<SymbolLeverageBrackets[]>;
   changeLeverage?: (options: {
     leverage: number;
     symbol: string;
-    authData: TradeAuthDataType;
+    authData: TerminalAuthDataType;
   }) => Promise<ChangeLeverageResponse>;
   changeMarginMode?: (options: {
     mode: MarginModeType;
     symbol: string;
-    authData: TradeAuthDataType;
+    authData: TerminalAuthDataType;
   }) => Promise<HttpResponse>;
   getExchangeInfo: () => Promise<ExchangeInfo>;
   getOpenOrders: (
     symbol: string,
-    authData: TradeAuthDataType
+    authData: TerminalAuthDataType
   ) => Observable<QueryOrderResult[]>;
   getAllOrders: (
     symbol: string,
-    authData: TradeAuthDataType
+    authData: TerminalAuthDataType
   ) => Observable<QueryOrderResult[]>;
   getUserStreamKey: (
-    authData: TradeAuthDataType
+    authData: TerminalAuthDataType
   ) => Observable<{ listenKey: string }>;
-  getAccountInformation: (authData: TradeAuthDataType) => Observable<Account>;
+  getAccountInformation: (
+    authData: TerminalAuthDataType
+  ) => Observable<Account>;
   getTrades: (symbol: string, limit?: number) => Observable<Trade[]>;
   getTickers: (symbol?: string) => Observable<Ticker[]>;
   getDepth: (symbol: string, limit?: number) => Observable<Depth>;
   cancelAllOrders: (
     options: { symbol: string; useServerTime?: boolean },
-    authData: TradeAuthDataType
+    authData: TerminalAuthDataType
   ) => Promise<CancelOrderResult>;
   cancelOrder: (
     options: { symbol: string; orderId: string; useServerTime?: boolean },
-    authData: TradeAuthDataType
+    authData: TerminalAuthDataType
   ) => Promise<CancelOrderResult>;
   tradeRequest: ({
     side,
     ...options
   }: TradeRequest & {
-    authData: TradeAuthDataType;
+    authData: TerminalAuthDataType;
     side: OrderSide;
   }) => Promise<QueryOrderResult>;
 

@@ -6,9 +6,9 @@ import {
   KlineParams,
   OrderSide,
   QueryOrderResult,
+  TerminalAuthDataType,
   Ticker,
   Trade,
-  TradeAuthDataType,
   TradeRequest
 } from "pages/trades/binance-trade-page/trading/terminal.types";
 import { Observable } from "rxjs";
@@ -49,7 +49,7 @@ export const pingBinanceApi = (): Observable<any[]> =>
 
 export const getOpenOrders = (
   symbol: string,
-  authData: TradeAuthDataType
+  authData: TerminalAuthDataType
 ): Observable<QueryOrderResult[]> =>
   requestService.get({
     ...authData,
@@ -60,7 +60,7 @@ export const getOpenOrders = (
 
 export const getAllOrders = (
   symbol: string,
-  authData: TradeAuthDataType
+  authData: TerminalAuthDataType
 ): Observable<QueryOrderResult[]> =>
   requestService.get({
     ...authData,
@@ -70,7 +70,7 @@ export const getAllOrders = (
   });
 
 export const getUserStreamKey = (
-  authData: TradeAuthDataType
+  authData: TerminalAuthDataType
 ): Observable<{ listenKey: string }> =>
   requestService.post({
     ...authData,
@@ -79,7 +79,7 @@ export const getUserStreamKey = (
   });
 
 export const getAccountInformation = (
-  authData: TradeAuthDataType
+  authData: TerminalAuthDataType
 ): Observable<Account> =>
   requestService.get({
     ...authData,
@@ -113,7 +113,7 @@ export const getDepth = (
 
 export const newOrder = (
   options: OrderRequest,
-  authData: TradeAuthDataType
+  authData: TerminalAuthDataType
 ): Promise<any> =>
   requestService.post(
     {
@@ -127,7 +127,7 @@ export const newOrder = (
 
 export const cancelAllOrders = (
   options: { symbol: string; useServerTime?: boolean },
-  authData: TradeAuthDataType
+  authData: TerminalAuthDataType
 ): Promise<CancelOrderResult> =>
   requestService.deleteRequest(
     {
@@ -141,7 +141,7 @@ export const cancelAllOrders = (
 
 export const cancelOrder = (
   options: { symbol: string; orderId: string; useServerTime?: boolean },
-  authData: TradeAuthDataType
+  authData: TerminalAuthDataType
 ): Promise<CancelOrderResult> =>
   requestService.deleteRequest(
     {
@@ -162,7 +162,9 @@ export const postBuy = ({
   price,
   quantity,
   type
-}: TradeRequest & { authData: TradeAuthDataType }): Promise<QueryOrderResult> =>
+}: TradeRequest & {
+  authData: TerminalAuthDataType;
+}): Promise<QueryOrderResult> =>
   newOrder(
     {
       reduceOnly,
@@ -189,7 +191,9 @@ export const postSell = ({
   price,
   quantity,
   type
-}: TradeRequest & { authData: TradeAuthDataType }): Promise<QueryOrderResult> =>
+}: TradeRequest & {
+  authData: TerminalAuthDataType;
+}): Promise<QueryOrderResult> =>
   newOrder(
     {
       reduceOnly,
@@ -213,7 +217,7 @@ export const getTradeMethod = (side: OrderSide) =>
 export const tradeRequest = ({
   side,
   ...options
-}: TradeRequest & { authData: TradeAuthDataType; side: OrderSide }) => {
+}: TradeRequest & { authData: TerminalAuthDataType; side: OrderSide }) => {
   const method = getTradeMethod(side);
   return method(options);
 };

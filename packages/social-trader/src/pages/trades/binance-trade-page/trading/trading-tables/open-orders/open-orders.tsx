@@ -7,7 +7,7 @@ import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/
 import { getSymbolFromState } from "pages/trades/binance-trade-page/trading/terminal.helpers";
 import {
   QueryOrderResult,
-  TradeAuthDataType
+  TerminalAuthDataType
 } from "pages/trades/binance-trade-page/trading/terminal.types";
 import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
@@ -30,7 +30,7 @@ export const OpenOrders: React.FC<Props> = ({ items }) => {
       authData
     }: {
       options: { symbol: string; useServerTime?: boolean };
-      authData: TradeAuthDataType;
+      authData: TerminalAuthDataType;
     }) => cancelAllOrders(options, authData)
   });
   const handleCancel = useCallback(() => {

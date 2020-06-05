@@ -11,8 +11,8 @@ import {
   ExchangeInfo,
   ExecutionReport,
   SymbolFilter,
-  TerminalCurrency,
-  TradeAuthDataType
+  TerminalAuthDataType,
+  TerminalCurrency
 } from "pages/trades/binance-trade-page/trading/terminal.types";
 import qs from "qs";
 import { useEffect, useState } from "react";
@@ -83,7 +83,7 @@ export const useTradeAuth = () => {
     setAuthData(get());
   }, []);
   return {
-    set: (values: TradeAuthDataType) => {
+    set: (values: TerminalAuthDataType) => {
       setAuthData(values);
       set(values);
     },
