@@ -32,7 +32,7 @@ interface ITerminalPropsData {
   symbol?: SymbolState;
 }
 
-const _TradingContainer: React.FC<Props> = ({
+const _TerminalContainer: React.FC<Props> = ({
   authData,
   type = TerminalTypeInitialState,
   symbol
@@ -121,4 +121,4 @@ const _TradingContainer: React.FC<Props> = ({
   );
 };
 
-export const TradingContainer = React.memo(_TradingContainer);
+export const TerminalContainer = React.memo(_TerminalContainer);
