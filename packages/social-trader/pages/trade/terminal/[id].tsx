@@ -2,6 +2,7 @@ import withTradeLayout from "decorators/with-trade-layout";
 import { BrokerTradeServerType } from "gv-api-web";
 import { TYPE_PARAM_NAME } from "pages/trades/binance-trade-page/binance-trade.helpers";
 import { getTerminalApiMethods } from "pages/trades/binance-trade-page/services/api.helpers";
+import { SymbolState } from "pages/trades/binance-trade-page/trading/terminal-info.context";
 import { TerminalMethodsContextProvider } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
 import { TerminalContainer } from "pages/trades/binance-trade-page/trading/terminal.container";
 import { parseSymbolFromUrlParam } from "pages/trades/binance-trade-page/trading/terminal.helpers";
@@ -9,7 +10,6 @@ import {
   TerminalAuthDataType,
   TerminalType
 } from "pages/trades/binance-trade-page/trading/terminal.types";
-import { SymbolState } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import React from "react";
 import { api } from "services/api-client/swagger-custom-client";
 import { getParamsFromCtxWithSplit } from "utils/ssr-helpers";
