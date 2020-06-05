@@ -67,6 +67,7 @@ const _Post: React.FC<Props> = ({
       <Row center={false}>
         <RowItem wide>
           <Message
+            row={false}
             tags={tags}
             postId={id}
             images={images}
