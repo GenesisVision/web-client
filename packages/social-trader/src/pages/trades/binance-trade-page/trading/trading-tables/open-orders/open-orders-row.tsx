@@ -4,11 +4,11 @@ import TableRow from "components/table/components/table-row";
 import useApiRequest from "hooks/api-request.hook";
 import { terminalMoneyFormat } from "pages/trades/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
 import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
-import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import {
   OrderSide,
   TradeAuthDataType
-} from "pages/trades/binance-trade-page/trading/trading.types";
+} from "pages/trades/binance-trade-page/trading/terminal.types";
+import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import React, { useCallback, useContext } from "react";
 import { formatDate } from "utils/dates";
 

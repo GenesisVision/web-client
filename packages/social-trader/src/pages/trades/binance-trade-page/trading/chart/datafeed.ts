@@ -13,7 +13,7 @@ import {
   KlineParams,
   KlineSocketType,
   Symbol
-} from "pages/trades/binance-trade-page/trading/trading.types";
+} from "pages/trades/binance-trade-page/trading/terminal.types";
 
 const formatTimeResolution = (resolution: string) => {
   if (resolution.match("M")) return resolution;

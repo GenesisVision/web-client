@@ -1,12 +1,12 @@
 import { Text } from "components/text/text";
 import { TradeTable } from "pages/trades/binance-trade-page/trading/components/trade-table/trade-table";
+import { AssetBalance } from "pages/trades/binance-trade-page/trading/terminal.types";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { FundsRow } from "pages/trades/binance-trade-page/trading/trading-tables/funds/funds-row";
 import {
   FUNDS_TABLE_COLUMNS,
   FUTURES_FUNDS_TABLE_COLUMNS
 } from "pages/trades/binance-trade-page/trading/trading-tables/funds/funds.helpers";
-import { AssetBalance } from "pages/trades/binance-trade-page/trading/trading.types";
 import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 

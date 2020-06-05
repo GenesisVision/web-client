@@ -1,6 +1,6 @@
 import { BrokerTradeServerType } from "gv-api-web";
 import { getBinanceTerminalApiMethods } from "pages/trades/binance-trade-page/binance-trade.helpers";
-import { TerminalType } from "pages/trades/binance-trade-page/trading/trading.types";
+import { TerminalType } from "pages/trades/binance-trade-page/trading/terminal.types";
 
 export const getTerminalApiMethods = (
   brokerType?: BrokerTradeServerType,

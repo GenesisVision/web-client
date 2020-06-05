@@ -17,8 +17,8 @@ import {
   SortingType,
   sortMarketWatchItems
 } from "pages/trades/binance-trade-page/trading/market-watch/market-watch.helpers";
+import { MergedTickerSymbolType } from "pages/trades/binance-trade-page/trading/terminal.types";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
-import { MergedTickerSymbolType } from "pages/trades/binance-trade-page/trading/trading.types";
 import React, { useContext, useMemo, useState } from "react";
 
 import styles from "./market-watch.module.scss";

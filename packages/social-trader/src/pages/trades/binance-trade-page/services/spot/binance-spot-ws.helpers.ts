@@ -1,4 +1,3 @@
-import { USER_STREAM_ACCOUNT_UPDATE_EVENT_TYPE } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import {
   Account,
   Depth,
@@ -9,7 +8,8 @@ import {
   Ticker,
   TickerWS,
   Trade
-} from "pages/trades/binance-trade-page/trading/trading.types";
+} from "pages/trades/binance-trade-page/trading/terminal.types";
+import { USER_STREAM_ACCOUNT_UPDATE_EVENT_TYPE } from "pages/trades/binance-trade-page/trading/trading.helpers";
 
 export const tradeTransform = ({
   e,

@@ -8,7 +8,7 @@ import {
   TimeInForce,
   Trade,
   TradeCurrency
-} from "pages/trades/binance-trade-page/trading/trading.types";
+} from "pages/trades/binance-trade-page/trading/terminal.types";
 
 export type FuturesAccountEventType =
   | "ACCOUNT_UPDATE"

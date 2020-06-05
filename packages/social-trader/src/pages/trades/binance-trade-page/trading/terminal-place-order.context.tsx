@@ -1,9 +1,9 @@
 import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
-import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import {
   LeverageBracket,
   PositionModeType
-} from "pages/trades/binance-trade-page/trading/trading.types";
+} from "pages/trades/binance-trade-page/trading/terminal.types";
+import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import React, {
   createContext,
   useCallback,

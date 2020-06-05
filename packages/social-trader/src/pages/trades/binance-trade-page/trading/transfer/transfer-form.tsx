@@ -13,7 +13,7 @@ import { Text } from "components/text/text";
 import {
   BalancesForTransfer,
   TradeCurrency
-} from "pages/trades/binance-trade-page/trading/trading.types";
+} from "pages/trades/binance-trade-page/trading/terminal.types";
 import {
   ENABLE_TRANSFER_ACCOUNTS,
   futuresTransferValidationSchema,

@@ -1,4 +1,3 @@
-import { USER_STREAM_ACCOUNT_UPDATE_EVENT_TYPE } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import {
   Depth,
   IBinanceKline,
@@ -7,7 +6,8 @@ import {
   Ticker,
   Trade,
   TradeCurrency
-} from "pages/trades/binance-trade-page/trading/trading.types";
+} from "pages/trades/binance-trade-page/trading/terminal.types";
+import { USER_STREAM_ACCOUNT_UPDATE_EVENT_TYPE } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { ConnectSocketMethodType } from "services/websocket.service";

@@ -1,8 +1,8 @@
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import { terminalMoneyFormat } from "pages/trades/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
+import { OrderSide } from "pages/trades/binance-trade-page/trading/terminal.types";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
-import { OrderSide } from "pages/trades/binance-trade-page/trading/trading.types";
 import React, { useContext } from "react";
 import { formatDate } from "utils/dates";
 

@@ -17,8 +17,8 @@ import {
   useSymbolData
 } from "pages/trades/binance-trade-page/trading/symbol-summary/symbol-summary.helpers";
 import { TerminalTypeSwitcher } from "pages/trades/binance-trade-page/trading/symbol-summary/terminal-type-switcher";
+import { SymbolSummaryData } from "pages/trades/binance-trade-page/trading/terminal.types";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
-import { SymbolSummaryData } from "pages/trades/binance-trade-page/trading/trading.types";
 import React, { useContext } from "react";
 import { diffDate } from "utils/dates";
 

@@ -1,7 +1,7 @@
 import { Text } from "components/text/text";
+import { Trade } from "pages/trades/binance-trade-page/trading/terminal.types";
 import { TradesRow } from "pages/trades/binance-trade-page/trading/trades/trades-row";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
-import { Trade } from "pages/trades/binance-trade-page/trading/trading.types";
 import React, { useContext } from "react";
 
 import styles from "./trades.module.scss";

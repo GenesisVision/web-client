@@ -1,7 +1,7 @@
 import useIsOpen from "hooks/is-open.hook";
 import { MarginModeDialog } from "pages/trades/binance-trade-page/trading/place-order/place-order-settings/margin-mode/margin-mode.dialog";
 import { PlaceOrderSettingsButton } from "pages/trades/binance-trade-page/trading/place-order/place-order-settings/place-order-settings-button";
-import { MarginModeType } from "pages/trades/binance-trade-page/trading/trading.types";
+import { MarginModeType } from "pages/trades/binance-trade-page/trading/terminal.types";
 import React, { useCallback } from "react";
 
 interface Props {

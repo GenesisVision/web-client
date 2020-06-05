@@ -4,7 +4,7 @@ import {
   Symbol,
   Ticker,
   TradeCurrency
-} from "pages/trades/binance-trade-page/trading/trading.types";
+} from "pages/trades/binance-trade-page/trading/terminal.types";
 import { safeGetElemFromArray } from "utils/helpers";
 import { AnyObjectType } from "utils/types";
 

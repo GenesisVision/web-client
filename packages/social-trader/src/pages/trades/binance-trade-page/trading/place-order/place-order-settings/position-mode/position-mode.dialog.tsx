@@ -5,7 +5,7 @@ import GVButton from "components/gv-button";
 import { RadioButton } from "components/radio-button/radio-button";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
-import { PositionModeType } from "pages/trades/binance-trade-page/trading/trading.types";
+import { PositionModeType } from "pages/trades/binance-trade-page/trading/terminal.types";
 import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 

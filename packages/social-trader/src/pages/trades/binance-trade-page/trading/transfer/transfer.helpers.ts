@@ -3,7 +3,7 @@ import {
   BalancesForTransfer,
   BalancesItemName,
   TradeCurrency
-} from "pages/trades/binance-trade-page/trading/trading.types";
+} from "pages/trades/binance-trade-page/trading/terminal.types";
 import { safeGetElemFromArray } from "utils/helpers";
 import { minMaxNumberShape } from "utils/validators/validators";
 import { lazy, number, object, string } from "yup";

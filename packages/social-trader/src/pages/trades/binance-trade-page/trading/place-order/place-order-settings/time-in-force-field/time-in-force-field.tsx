@@ -2,11 +2,11 @@ import { GVHookFormField } from "components/gv-hook-form-field";
 import Select from "components/select/select";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
 import { TRADE_FORM_FIELDS } from "pages/trades/binance-trade-page/trading/place-order/place-order.helpers";
-import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import {
   OrderType,
   TimeInForce as TimeInForceType
-} from "pages/trades/binance-trade-page/trading/trading.types";
+} from "pages/trades/binance-trade-page/trading/terminal.types";
+import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 

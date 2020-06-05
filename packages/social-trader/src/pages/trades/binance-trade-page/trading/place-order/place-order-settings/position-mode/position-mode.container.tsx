@@ -1,10 +1,10 @@
 import useApiRequest from "hooks/api-request.hook";
 import { PositionMode } from "pages/trades/binance-trade-page/trading/place-order/place-order-settings/position-mode/position-mode";
 import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
-import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
-import { PositionModeType } from "pages/trades/binance-trade-page/trading/trading.types";
-import React, { useCallback, useContext, useEffect, useState } from "react";
 import { TerminalPlaceOrderContext } from "pages/trades/binance-trade-page/trading/terminal-place-order.context";
+import { PositionModeType } from "pages/trades/binance-trade-page/trading/terminal.types";
+import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 
 const _PositionModeContainer: React.FC = () => {
   const { currentPositionMode, updatePositionMode } = useContext(

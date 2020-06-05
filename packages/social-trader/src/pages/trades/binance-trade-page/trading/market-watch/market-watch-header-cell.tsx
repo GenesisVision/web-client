@@ -5,7 +5,7 @@ import {
 } from "components/table/helpers/sorting.helpers";
 import { Text } from "components/text/text";
 import { SortingType } from "pages/trades/binance-trade-page/trading/market-watch/market-watch.helpers";
-import { MergedTickerSymbolType } from "pages/trades/binance-trade-page/trading/trading.types";
+import { MergedTickerSymbolType } from "pages/trades/binance-trade-page/trading/terminal.types";
 import React, { useCallback } from "react";
 
 import styles from "./market-watch.module.scss";

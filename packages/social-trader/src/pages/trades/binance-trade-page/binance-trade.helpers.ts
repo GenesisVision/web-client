@@ -3,7 +3,7 @@ import { BinanceSpotTerminalMethods } from "pages/trades/binance-trade-page/serv
 import {
   ITerminalMethods,
   TerminalType
-} from "pages/trades/binance-trade-page/trading/trading.types";
+} from "pages/trades/binance-trade-page/trading/terminal.types";
 
 export const TYPE_PARAM_NAME = "type";
 

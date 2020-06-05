@@ -4,12 +4,12 @@ import {
   normalizeSymbolsList
 } from "pages/trades/binance-trade-page/trading/market-watch/market-watch.helpers";
 import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
-import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import {
   MergedTickerSymbolType,
   Symbol,
   Ticker
-} from "pages/trades/binance-trade-page/trading/trading.types";
+} from "pages/trades/binance-trade-page/trading/terminal.types";
+import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import React, {
   createContext,
   useContext,

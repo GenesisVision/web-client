@@ -10,12 +10,12 @@ import {
   updateOrderBookFromSocketLogger
 } from "pages/trades/binance-trade-page/trading/order-book/order-book.helpers";
 import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
-import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
-import { getSymbol } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import {
   Depth,
   NormalizedDepth
-} from "pages/trades/binance-trade-page/trading/trading.types";
+} from "pages/trades/binance-trade-page/trading/terminal.types";
+import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
+import { getSymbol } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { timer } from "rxjs";
 import { switchMap } from "rxjs/operators";

@@ -14,7 +14,7 @@ import {
   Ticker,
   Trade,
   TradeCurrency
-} from "pages/trades/binance-trade-page/trading/trading.types";
+} from "pages/trades/binance-trade-page/trading/terminal.types";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { ConnectSocketMethodType } from "services/websocket.service";

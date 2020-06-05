@@ -3,7 +3,7 @@ import { FuturesAsset } from "pages/trades/binance-trade-page/services/futures/b
 import {
   AssetBalance,
   TradeCurrency
-} from "pages/trades/binance-trade-page/trading/trading.types";
+} from "pages/trades/binance-trade-page/trading/terminal.types";
 import { safeGetElemFromArray } from "utils/helpers";
 
 export const MARGIN_INFO_ASSET = "USDT";

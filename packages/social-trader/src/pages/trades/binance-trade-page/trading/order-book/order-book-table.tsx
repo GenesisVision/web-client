@@ -3,7 +3,7 @@ import {
   LevelsSum,
   OrderBookRow
 } from "pages/trades/binance-trade-page/trading/order-book/order-book.row";
-import { StringBidDepth } from "pages/trades/binance-trade-page/trading/trading.types";
+import { StringBidDepth } from "pages/trades/binance-trade-page/trading/terminal.types";
 import React, { useEffect, useState } from "react";
 import { getPercentageValue } from "utils/helpers";
 

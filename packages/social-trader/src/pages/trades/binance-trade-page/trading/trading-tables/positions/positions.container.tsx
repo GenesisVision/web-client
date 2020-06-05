@@ -1,8 +1,8 @@
 import { filterPositionEventsStream } from "pages/trades/binance-trade-page/services/futures/binance-futures.helpers";
 import { FuturesAccountUpdateEvent } from "pages/trades/binance-trade-page/services/futures/binance-futures.types";
 import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
+import { FuturesPositionInformation } from "pages/trades/binance-trade-page/trading/terminal.types";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
-import { FuturesPositionInformation } from "pages/trades/binance-trade-page/trading/trading.types";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { map } from "rxjs/operators";
 

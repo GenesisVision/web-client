@@ -3,13 +3,13 @@ import { BrokerTradeServerType } from "gv-api-web";
 import { TYPE_PARAM_NAME } from "pages/trades/binance-trade-page/binance-trade.helpers";
 import { getTerminalApiMethods } from "pages/trades/binance-trade-page/services/api.helpers";
 import { TerminalMethodsContextProvider } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
-import { SymbolState } from "pages/trades/binance-trade-page/trading/trading-info.context";
-import { TradingContainer } from "pages/trades/binance-trade-page/trading/trading.container";
-import { parseSymbolFromUrlParam } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import {
   TerminalType,
   TradeAuthDataType
-} from "pages/trades/binance-trade-page/trading/trading.types";
+} from "pages/trades/binance-trade-page/trading/terminal.types";
+import { SymbolState } from "pages/trades/binance-trade-page/trading/trading-info.context";
+import { TradingContainer } from "pages/trades/binance-trade-page/trading/trading.container";
+import { parseSymbolFromUrlParam } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import React from "react";
 import { api } from "services/api-client/swagger-custom-client";
 import { getParamsFromCtxWithSplit } from "utils/ssr-helpers";

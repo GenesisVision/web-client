@@ -1,6 +1,6 @@
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
-import { FuturesPositionInformation } from "pages/trades/binance-trade-page/trading/trading.types";
+import { FuturesPositionInformation } from "pages/trades/binance-trade-page/trading/terminal.types";
 import React from "react";
 
 interface Props {

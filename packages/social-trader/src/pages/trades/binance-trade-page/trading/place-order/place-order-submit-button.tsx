@@ -4,7 +4,7 @@ import { SubmitButton } from "components/submit-button/submit-button";
 import {
   OrderSide,
   TradeCurrency
-} from "pages/trades/binance-trade-page/trading/trading.types";
+} from "pages/trades/binance-trade-page/trading/terminal.types";
 import React from "react";
 
 interface Props {

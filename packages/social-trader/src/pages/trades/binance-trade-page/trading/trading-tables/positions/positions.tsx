@@ -4,8 +4,8 @@ import {
   getMarginInfo,
   MARGIN_INFO_ASSET
 } from "pages/trades/binance-trade-page/trading/margin-ratio/margin-ratio.helpers";
+import { FuturesPositionInformation } from "pages/trades/binance-trade-page/trading/terminal.types";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
-import { FuturesPositionInformation } from "pages/trades/binance-trade-page/trading/trading.types";
 import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 

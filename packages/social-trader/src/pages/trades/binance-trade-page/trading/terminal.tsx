@@ -9,6 +9,12 @@ import { PlaceOrder } from "pages/trades/binance-trade-page/trading/place-order/
 import { PlaceOrderSettingsContainer } from "pages/trades/binance-trade-page/trading/place-order/place-order-settings/place-order-settings.container";
 import { SymbolSummaryContainer } from "pages/trades/binance-trade-page/trading/symbol-summary/symbol-summary";
 import { SymbolSummarySmallBlock } from "pages/trades/binance-trade-page/trading/symbol-summary/symbol-summary-small";
+import { TerminalPlaceOrderContextProvider } from "pages/trades/binance-trade-page/trading/terminal-place-order.context";
+import {
+  ExchangeInfo,
+  TerminalType,
+  TradeAuthDataType
+} from "pages/trades/binance-trade-page/trading/terminal.types";
 import { TradesBlock } from "pages/trades/binance-trade-page/trading/trades/trades.block";
 import {
   SymbolState,
@@ -18,13 +24,7 @@ import { TradingPriceContextProvider } from "pages/trades/binance-trade-page/tra
 import { TradingTables } from "pages/trades/binance-trade-page/trading/trading-tables/trading-tables";
 import { TradingTickerContextProvider } from "pages/trades/binance-trade-page/trading/trading-ticker.context";
 import styles from "pages/trades/binance-trade-page/trading/trading.module.scss";
-import {
-  ExchangeInfo,
-  TerminalType,
-  TradeAuthDataType
-} from "pages/trades/binance-trade-page/trading/trading.types";
 import React from "react";
-import { TerminalPlaceOrderContextProvider } from "pages/trades/binance-trade-page/trading/terminal-place-order.context";
 
 interface Props {
   exchangeInfo: ExchangeInfo;

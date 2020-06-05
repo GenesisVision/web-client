@@ -1,7 +1,7 @@
 import useIsOpen from "hooks/is-open.hook";
 import { ChangeLeverageDialog } from "pages/trades/binance-trade-page/trading/place-order/place-order-settings/change-leverage/change-leverage.dialog";
 import { PlaceOrderSettingsButton } from "pages/trades/binance-trade-page/trading/place-order/place-order-settings/place-order-settings-button";
-import { LeverageBracket } from "pages/trades/binance-trade-page/trading/trading.types";
+import { LeverageBracket } from "pages/trades/binance-trade-page/trading/terminal.types";
 import React, { useCallback } from "react";
 
 interface Props {
