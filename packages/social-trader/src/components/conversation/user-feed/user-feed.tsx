@@ -10,7 +10,7 @@ interface Props {
 const _UserFeed: React.FC<Props> = ({ canWritePost, id }) => {
   const fetchMethod = useCallback(
     (values: Object) => {
-      return getPosts({ ...values, id, userMode: "ProfileOnlyOwnerPosts" });
+      return getPosts({ ...values, id });
     },
     [id]
   );
