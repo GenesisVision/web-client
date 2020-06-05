@@ -46,7 +46,7 @@ const _Message: React.FC<IMessageProps> = ({
             date={date}
           />
         </MessageItem>
-        <MessageItem className={styles["message__text"]}>
+        <MessageItem onlyOffset className={styles["message__text"]}>
           {text && (
             <Row>
               <div>

@@ -134,7 +134,7 @@ const _EventTag: React.FC<IEventTagProps> = ({
           </RowItem>
         </Center>
       </RowItem>
-      {amount && (
+      {amount !== null && (
         <RowItem bottomOffset>
           <StatisticItemInner label={t("Amount")}>
             <Center>
@@ -143,7 +143,7 @@ const _EventTag: React.FC<IEventTagProps> = ({
                   {amount} {currency}
                 </ColoredText>
               </RowItem>
-              {percent && (
+              {percent !== null && (
                 <RowItem>
                   <Profitability
                     prefix={PROFITABILITY_PREFIX.SIGN}
@@ -291,8 +291,8 @@ export const FollowLink = React.memo(_FollowLink);
 
 const _FollowTagCard: React.FC<IAssetTagProps> = ({ assetDetails }) => {
   const { linkCreator, contextTitle } = useToLink();
-  const route = composeAssetDetailsUrl("Fund", assetDetails.url);
-  const folderRoute = getAssetFolderRoute("Fund");
+  const route = composeAssetDetailsUrl("SignalProgram", assetDetails.url);
+  const folderRoute = getAssetFolderRoute("SignalProgram");
   return (
     <AssetTagCard
       assetDetails={assetDetails}
