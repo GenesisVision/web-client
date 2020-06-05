@@ -115,7 +115,7 @@ const _PlaceOrder: React.FC = () => {
               accountInfo={accountInfo}
               outerPrice={+price}
               onSubmit={handleSubmit}
-              direction={side}
+              side={side}
             />
           )}
           {tab === "MARKET" && (
@@ -125,7 +125,7 @@ const _PlaceOrder: React.FC = () => {
               accountInfo={accountInfo}
               outerPrice={+price}
               onSubmit={handleSubmit}
-              direction={side}
+              side={side}
             />
           )}
           {tab === "STOP_LOSS_LIMIT" && (
@@ -135,7 +135,7 @@ const _PlaceOrder: React.FC = () => {
               accountInfo={accountInfo}
               outerPrice={+price}
               onSubmit={handleSubmit}
-              direction={side}
+              side={side}
             />
           )}
         </Row>

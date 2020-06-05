@@ -33,21 +33,14 @@ import {
 export interface IMarketTradeFormProps {
   status: API_REQUEST_STATUS;
   outerPrice: number;
-  direction: OrderSide;
+  side: OrderSide;
   onSubmit: (values: IPlaceOrderFormValues) => any;
 }
 
 const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
   accountInfo: Account;
   exchangeInfo: ExchangeInfo;
-}> = ({
-  status,
-  accountInfo,
-  exchangeInfo,
-  outerPrice,
-  onSubmit,
-  direction
-}) => {
+}> = ({ status, accountInfo, exchangeInfo, outerPrice, onSubmit, side }) => {
   const [t] = useTranslation();
 
   const {
@@ -69,7 +62,7 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
     maxTotalWithWallet
   } = usePlaceOrderInfo({
     balances: accountInfo.balances,
-    side: direction,
+    side,
     exchangeInfo
   });
 
@@ -98,7 +91,7 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
     outerPrice,
     watch,
     reset,
-    side: direction,
+    side,
     setValue,
     balances: accountInfo.balances,
     quantityName: TRADE_FORM_FIELDS.quantity,
@@ -146,7 +139,7 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
           name={TRADE_FORM_FIELDS.total}
         />
       </Row>
-      {direction === "SELL" && (
+      {side === "SELL" && (
         <Row wide onlyOffset>
           <Slider
             dots
@@ -160,7 +153,7 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
       )}
       <PlaceOrderSubmitButton
         isSuccessful={status === API_REQUEST_STATUS.SUCCESS}
-        side={direction}
+        side={side}
         asset={baseAsset}
       />
       {isFutures && currentPositionMode === false && (

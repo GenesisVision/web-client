@@ -36,21 +36,14 @@ import {
 export interface IStopLimitTradeFormProps {
   status: API_REQUEST_STATUS;
   outerPrice: number;
-  direction: OrderSide;
+  side: OrderSide;
   onSubmit: (values: IStopLimitFormValues) => any;
 }
 
 const _StopLimitTradeForm: React.FC<IStopLimitTradeFormProps & {
   accountInfo: Account;
   exchangeInfo: ExchangeInfo;
-}> = ({
-  status,
-  accountInfo,
-  exchangeInfo,
-  outerPrice,
-  onSubmit,
-  direction
-}) => {
+}> = ({ status, accountInfo, exchangeInfo, outerPrice, onSubmit, side }) => {
   const [t] = useTranslation();
 
   const {
@@ -72,13 +65,13 @@ const _StopLimitTradeForm: React.FC<IStopLimitTradeFormProps & {
     maxTotalWithWallet
   } = usePlaceOrderInfo({
     balances: accountInfo.balances,
-    side: direction,
+    side,
     exchangeInfo
   });
 
   const form = useForm<IStopLimitFormValues>({
     validationSchema: placeOrderStopLimitValidationSchema({
-      side: direction,
+      side,
       t,
       quoteAsset,
       baseAsset,
@@ -107,7 +100,7 @@ const _StopLimitTradeForm: React.FC<IStopLimitTradeFormProps & {
     outerPrice,
     watch,
     reset,
-    side: direction,
+    side,
     setValue,
     balances: accountInfo.balances,
     quantityName: TRADE_FORM_FIELDS.quantity,
@@ -171,7 +164,7 @@ const _StopLimitTradeForm: React.FC<IStopLimitTradeFormProps & {
       </Row>
       <PlaceOrderSubmitButton
         isSuccessful={status === API_REQUEST_STATUS.SUCCESS}
-        side={direction}
+        side={side}
         asset={baseAsset}
       />
       <Row small>

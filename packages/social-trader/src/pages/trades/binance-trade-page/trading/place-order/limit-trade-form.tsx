@@ -35,21 +35,14 @@ import {
 export interface ILimitTradeFormProps {
   status: API_REQUEST_STATUS;
   outerPrice: number;
-  direction: OrderSide;
+  side: OrderSide;
   onSubmit: (values: IPlaceOrderFormValues) => any;
 }
 
 const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
   accountInfo: Account;
   exchangeInfo: ExchangeInfo;
-}> = ({
-  status,
-  accountInfo,
-  exchangeInfo,
-  outerPrice,
-  onSubmit,
-  direction
-}) => {
+}> = ({ status, accountInfo, exchangeInfo, outerPrice, onSubmit, side }) => {
   const [t] = useTranslation();
 
   const {
@@ -71,7 +64,7 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
     maxTotalWithWallet
   } = usePlaceOrderInfo({
     balances: accountInfo.balances,
-    side: direction,
+    side,
     exchangeInfo
   });
 
@@ -104,7 +97,7 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
     outerPrice,
     watch,
     reset,
-    side: direction,
+    side,
     setValue,
     balances: accountInfo.balances,
     quantityName: TRADE_FORM_FIELDS.quantity,
@@ -160,7 +153,7 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
       </Row>
       <PlaceOrderSubmitButton
         isSuccessful={status === API_REQUEST_STATUS.SUCCESS}
-        side={direction}
+        side={side}
         asset={baseAsset}
       />
       <Row small>
