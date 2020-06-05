@@ -4,20 +4,20 @@ import {
 } from "pages/trades/binance-trade-page/trading/place-order/place-order.helpers";
 import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
 import {
-  Account,
-  ExchangeInfo,
-  TerminalType,
-  TradeAuthDataType,
-  TradeCurrency
-} from "pages/trades/binance-trade-page/trading/terminal.types";
-import {
   filterOutboundAccountInfoStream,
   getSymbolFilters,
   getSymbolFromState,
   stringifySymbolFromToParam,
   updateAccountInfo,
   useUpdateTerminalUrlParams
-} from "pages/trades/binance-trade-page/trading/trading.helpers";
+} from "pages/trades/binance-trade-page/trading/terminal.helpers";
+import {
+  Account,
+  ExchangeInfo,
+  TerminalType,
+  TradeAuthDataType,
+  TradeCurrency
+} from "pages/trades/binance-trade-page/trading/terminal.types";
 import React, {
   createContext,
   useCallback,

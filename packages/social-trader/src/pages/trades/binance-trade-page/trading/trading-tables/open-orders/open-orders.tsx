@@ -3,12 +3,12 @@ import { Text } from "components/text/text";
 import useApiRequest from "hooks/api-request.hook";
 import { TradeTable } from "pages/trades/binance-trade-page/trading/components/trade-table/trade-table";
 import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
+import { getSymbolFromState } from "pages/trades/binance-trade-page/trading/terminal.helpers";
 import {
   QueryOrderResult,
   TradeAuthDataType
 } from "pages/trades/binance-trade-page/trading/terminal.types";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
-import { getSymbolFromState } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
 

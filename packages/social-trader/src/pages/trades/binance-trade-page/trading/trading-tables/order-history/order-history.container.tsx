@@ -1,14 +1,14 @@
 import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
 import {
+  filterOrderEventsStream,
+  getSymbol
+} from "pages/trades/binance-trade-page/trading/terminal.helpers";
+import {
   ExecutionReport,
   QueryOrderResult
 } from "pages/trades/binance-trade-page/trading/terminal.types";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { normalizeOpenOrdersList } from "pages/trades/binance-trade-page/trading/trading-tables/open-orders/open-orders.helpers";
-import {
-  filterOrderEventsStream,
-  getSymbol
-} from "pages/trades/binance-trade-page/trading/trading.helpers";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { map } from "rxjs/operators";
 

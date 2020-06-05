@@ -10,6 +10,7 @@ import {
   FuturesTradeOrder,
   FuturesTradeOrderUpdateEvent
 } from "pages/trades/binance-trade-page/services/futures/binance-futures.types";
+import { USER_STREAM_ACCOUNT_UPDATE_EVENT_TYPE } from "pages/trades/binance-trade-page/trading/terminal.helpers";
 import {
   Account,
   AssetBalance,
@@ -17,7 +18,6 @@ import {
   MarkPrice,
   Ticker
 } from "pages/trades/binance-trade-page/trading/terminal.types";
-import { USER_STREAM_ACCOUNT_UPDATE_EVENT_TYPE } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import { Observable } from "rxjs";
 import { filter } from "rxjs/operators";
 

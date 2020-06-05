@@ -6,6 +6,11 @@ import {
 } from "pages/trades/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
 import { TerminalPlaceOrderContext } from "pages/trades/binance-trade-page/trading/terminal-place-order.context";
 import {
+  getDecimalScale,
+  getSymbol,
+  getSymbolFilters
+} from "pages/trades/binance-trade-page/trading/terminal.helpers";
+import {
   AssetBalance,
   ExchangeInfo,
   OrderSide,
@@ -17,11 +22,6 @@ import {
   TradeCurrency
 } from "pages/trades/binance-trade-page/trading/terminal.types";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
-import {
-  getDecimalScale,
-  getSymbol,
-  getSymbolFilters
-} from "pages/trades/binance-trade-page/trading/trading.helpers";
 import { useContext, useEffect, useMemo, useState } from "react";
 import { NumberFormatValues } from "react-number-format";
 import { calculatePercentage } from "utils/currency-converter";

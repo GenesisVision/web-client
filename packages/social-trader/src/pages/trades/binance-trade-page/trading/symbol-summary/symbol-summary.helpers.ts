@@ -1,11 +1,11 @@
 import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
+import { getSymbolFromState } from "pages/trades/binance-trade-page/trading/terminal.helpers";
 import {
   MarkPrice,
   SymbolSummaryData
 } from "pages/trades/binance-trade-page/trading/terminal.types";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import { TradingTickerContext } from "pages/trades/binance-trade-page/trading/trading-ticker.context";
-import { getSymbolFromState } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import { useContext, useEffect, useState } from "react";
 import { useSockets } from "services/websocket.service";
 import { safeGetElemFromArray } from "utils/helpers";

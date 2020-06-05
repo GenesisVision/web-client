@@ -7,9 +7,9 @@ import { GvButtonWithMark } from "components/gv-button/gv-button-with-mark/gv-bu
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
+import { getSymbolFromState } from "pages/trades/binance-trade-page/trading/terminal.helpers";
 import { MarginModeType } from "pages/trades/binance-trade-page/trading/terminal.types";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
-import { getSymbolFromState } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import React, { useCallback, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 

@@ -1,5 +1,5 @@
 import { Text } from "components/text/text";
-import { getTextColor } from "pages/trades/binance-trade-page/trading/trading.helpers";
+import { getTextColor } from "pages/trades/binance-trade-page/trading/terminal.helpers";
 import React, { useEffect, useState } from "react";
 
 interface Props {

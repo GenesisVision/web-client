@@ -1,5 +1,6 @@
 import { SortingColumn } from "components/table/components/filtering/filter.type";
 import { getSymbolPriceFilter } from "pages/trades/binance-trade-page/trading/place-order/place-order.helpers";
+import { getSymbol } from "pages/trades/binance-trade-page/trading/terminal.helpers";
 import {
   Depth,
   NormalizedDepth,
@@ -8,7 +9,6 @@ import {
   TerminalType
 } from "pages/trades/binance-trade-page/trading/terminal.types";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
-import { getSymbol } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import { useContext } from "react";
 import { formatValue } from "utils/formatter";
 import { safeGetElemFromArray } from "utils/helpers";

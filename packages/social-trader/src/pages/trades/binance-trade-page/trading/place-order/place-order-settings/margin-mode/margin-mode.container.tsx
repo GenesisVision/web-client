@@ -1,9 +1,9 @@
 import useApiRequest from "hooks/api-request.hook";
 import { MarginMode } from "pages/trades/binance-trade-page/trading/place-order/place-order-settings/margin-mode/margin-mode";
 import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
+import { getSymbolFromState } from "pages/trades/binance-trade-page/trading/terminal.helpers";
 import { MarginModeType } from "pages/trades/binance-trade-page/trading/terminal.types";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
-import { getSymbolFromState } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import React, { useCallback, useContext, useState } from "react";
 
 const _MarginModeContainer: React.FC = () => {

@@ -1,10 +1,10 @@
 import { getSymbolPrice } from "pages/trades/binance-trade-page/trading/market-watch/market-watch.helpers";
-import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
-import { TradingTickerContext } from "pages/trades/binance-trade-page/trading/trading-ticker.context";
 import {
   formatValueWithTick,
   getSymbol
-} from "pages/trades/binance-trade-page/trading/trading.helpers";
+} from "pages/trades/binance-trade-page/trading/terminal.helpers";
+import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
+import { TradingTickerContext } from "pages/trades/binance-trade-page/trading/trading-ticker.context";
 import { TransferButton } from "pages/trades/binance-trade-page/trading/transfer/transfer.button";
 import React, { useContext } from "react";
 

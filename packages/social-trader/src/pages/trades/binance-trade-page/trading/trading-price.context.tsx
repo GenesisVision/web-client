@@ -1,7 +1,7 @@
 import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
+import { getSymbol } from "pages/trades/binance-trade-page/trading/terminal.helpers";
 import { Trade } from "pages/trades/binance-trade-page/trading/terminal.types";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
-import { getSymbol } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import React, {
   createContext,
   useContext,

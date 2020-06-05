@@ -1,7 +1,7 @@
 import { Text } from "components/text/text";
 import { terminalMoneyFormat } from "pages/trades/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
+import { getTextColor } from "pages/trades/binance-trade-page/trading/terminal.helpers";
 import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
-import { getTextColor } from "pages/trades/binance-trade-page/trading/trading.helpers";
 import React, { useContext } from "react";
 import { formatTime } from "utils/dates";
 
