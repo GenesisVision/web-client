@@ -23,8 +23,9 @@ import {
 import { TradingPriceContextProvider } from "pages/trades/binance-trade-page/trading/trading-price.context";
 import { TradingTables } from "pages/trades/binance-trade-page/trading/trading-tables/trading-tables";
 import { TradingTickerContextProvider } from "pages/trades/binance-trade-page/trading/trading-ticker.context";
-import styles from "pages/trades/binance-trade-page/trading/trading.module.scss";
 import React from "react";
+
+import styles from "./terminal.module.scss";
 
 interface Props {
   exchangeInfo: ExchangeInfo;
