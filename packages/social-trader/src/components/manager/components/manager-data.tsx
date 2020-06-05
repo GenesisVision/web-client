@@ -23,7 +23,7 @@ enum TABS {
   INVESTING = "INVESTING"
 }
 
-const _ManagerData: React.FC<Props> = ({ id }) => {
+const _ManagerData: React.FC<Props> = ({ canWritePost, id }) => {
   const [t] = useTranslation();
   const betaTester = useSelector(betaTesterSelector);
   const isBetaTester = isSocialBetaTester(betaTester);
@@ -73,7 +73,7 @@ const _ManagerData: React.FC<Props> = ({ id }) => {
       </Row>
       {tab === TABS.FEED && (
         <Row large onlyOffset>
-          <UserFeed id={id} />
+          <UserFeed canWritePost={canWritePost} id={id} />
         </Row>
       )}
       {tab === TABS.TRADING && (
@@ -91,6 +91,7 @@ const _ManagerData: React.FC<Props> = ({ id }) => {
 };
 
 interface Props {
+  canWritePost: boolean;
   id: string;
 }
 

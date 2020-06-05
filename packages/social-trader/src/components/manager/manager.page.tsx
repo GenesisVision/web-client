@@ -28,7 +28,10 @@ const _ManagerPage: React.FC<Props> = ({ profile }) => {
           </Row>
         </RowItem>
         <RowItem className={styles["manager-page__data"]} bottomOffset>
-          <ManagerData id={profile.id} />
+          <ManagerData
+            canWritePost={profile.personalDetails?.canWritePost}
+            id={profile.id}
+          />
         </RowItem>
       </Row>
     </Page>
