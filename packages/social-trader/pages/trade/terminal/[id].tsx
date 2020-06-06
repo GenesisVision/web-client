@@ -17,7 +17,7 @@ import { NextPageWithRedux } from "utils/types";
 
 interface Props {
   brokerType?: BrokerTradeServerType;
-  authData: TerminalAuthDataType;
+  authData?: TerminalAuthDataType;
   terminalType?: TerminalType;
   symbol?: SymbolState;
 }
@@ -49,17 +49,19 @@ Page.getInitialProps = async ctx => {
     : undefined;
   const symbol = id ? parseSymbolFromUrlParam(String(id)) : undefined;
 
-  let brokerType: BrokerTradeServerType;
+  let brokerType: BrokerTradeServerType | undefined;
   let authData;
 
-  const credentialsData = await api
-    .dashboard(ctx.token)
-    .getExchangeAccountCredentials({ exchangeAccountId });
-  brokerType = credentialsData.broker.type;
-  authData = {
-    publicKey: credentialsData.credentials.apiKey,
-    privateKey: credentialsData.credentials.apiSecret
-  };
+  if (ctx.token.isExist()) {
+    const credentialsData = await api
+      .dashboard(ctx.token)
+      .getExchangeAccountCredentials({ exchangeAccountId });
+    brokerType = credentialsData.broker.type;
+    authData = {
+      publicKey: credentialsData.credentials.apiKey,
+      privateKey: credentialsData.credentials.apiSecret
+    };
+  }
 
   return {
     brokerType,
