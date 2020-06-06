@@ -4,6 +4,7 @@ import {
   collapseItems,
   getDividerParts,
   normalizeDepthList,
+  ORDER_BOOK_ROW_HEIGHT,
   sortDepthList,
   updateDepthList,
   updateOrderBookFromBufferLogger,
@@ -25,8 +26,6 @@ interface Props {}
 
 const ASKS_FULL_AMOUNT_DIVIDER = 300;
 const BIDS_FULL_AMOUNT_DIVIDER = 25;
-
-const ROW_HEIGHT = 19;
 
 const _OrderBookContainer: React.FC<Props> = ({}) => {
   const [asksDivider, setAsksDivider] = useState(ASKS_FULL_AMOUNT_DIVIDER);
@@ -56,7 +55,9 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
 
   useEffect(() => {
     if (ref.current)
-      setCount(Math.floor((ref.current.clientHeight / ROW_HEIGHT - 2) / 2));
+      setCount(
+        Math.floor((ref.current.clientHeight / ORDER_BOOK_ROW_HEIGHT - 2) / 2)
+      );
   }, [ref.current?.clientHeight]);
 
   useEffect(() => {

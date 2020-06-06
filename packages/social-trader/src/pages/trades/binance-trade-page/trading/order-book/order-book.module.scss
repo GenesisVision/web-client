@@ -1,8 +1,6 @@
 @import "styles/_sizes";
 @import "styles/_colors";
 
-$order-book-row-height: 16px;
-
 .order-book {
   width: 100%;
   height: 100%;
@@ -52,7 +50,6 @@ $order-book-row-height: 16px;
 
   &__table-row {
     cursor: pointer;
-    height: $order-book-row-height;
 
     &--hovered {
       background: rgba(255, 255, 255, 0.1);

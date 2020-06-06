@@ -7,6 +7,7 @@ import { Text } from "components/text/text";
 import Tooltip from "components/tooltip/tooltip";
 import { TooltipContent } from "components/tooltip/tooltip-content";
 import { terminalMoneyFormat } from "pages/trades/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
+import { ORDER_BOOK_ROW_HEIGHT } from "pages/trades/binance-trade-page/trading/order-book/order-book.helpers";
 import { TerminalInfoContext } from "pages/trades/binance-trade-page/trading/terminal-info.context";
 import { TradingPriceContext } from "pages/trades/binance-trade-page/trading/trading-price.context";
 import React, { useContext } from "react";
@@ -102,6 +103,7 @@ const _OrderBookRow: React.FC<Props> = ({
     >
       <tr
         style={{
+          height: `${ORDER_BOOK_ROW_HEIGHT}px`,
           background: `linear-gradient(90deg, transparent ${barPercent}%, ${color}30 ${barPercent}%)`
         }}
         className={classNames(styles["order-book__table-row"], {
