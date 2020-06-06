@@ -23,7 +23,7 @@ interface Props {
 }
 
 const Page: NextPageWithRedux<Props> = ({
-  brokerType,
+  brokerType = "Binance",
   authData,
   terminalType,
   symbol
@@ -44,23 +44,26 @@ Page.getInitialProps = async ctx => {
   const { id } = ctx.query;
   const params = getParamsFromCtxWithSplit(ctx);
   const exchangeAccountId = params["id"];
-  const credentialsData = await api
-    .dashboard(ctx.token)
-    .getExchangeAccountCredentials({ exchangeAccountId });
-  const {
-    credentials: { apiKey, apiSecret },
-    broker: { type }
-  } = credentialsData;
-  const symbol = id ? parseSymbolFromUrlParam(String(id)) : undefined;
   const terminalType = params[TYPE_PARAM_NAME]
     ? params[TYPE_PARAM_NAME].toLowerCase()
     : undefined;
+  const symbol = id ? parseSymbolFromUrlParam(String(id)) : undefined;
+
+  let brokerType: BrokerTradeServerType;
+  let authData;
+
+  const credentialsData = await api
+    .dashboard(ctx.token)
+    .getExchangeAccountCredentials({ exchangeAccountId });
+  brokerType = credentialsData.broker.type;
+  authData = {
+    publicKey: credentialsData.credentials.apiKey,
+    privateKey: credentialsData.credentials.apiSecret
+  };
+
   return {
-    brokerType: type as BrokerTradeServerType,
-    authData: {
-      publicKey: apiKey,
-      privateKey: apiSecret
-    },
+    brokerType,
+    authData,
     symbol,
     terminalType
   };
