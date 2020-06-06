@@ -157,7 +157,7 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
         .sort(sortDepthList)
         .slice(0, count)
     }),
-    [list, dividerParts, tickValue]
+    [count, list, dividerParts, tickValue]
   );
   const { asks, bids } = listForRender;
 
