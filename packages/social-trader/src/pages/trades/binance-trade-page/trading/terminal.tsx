@@ -13,6 +13,7 @@ import {
   SymbolState,
   TerminalInfoContextProvider
 } from "pages/trades/binance-trade-page/trading/terminal-info.context";
+import { TerminalOpenOrdersContextProvider } from "pages/trades/binance-trade-page/trading/terminal-open-orders.context";
 import { TerminalPlaceOrderContextProvider } from "pages/trades/binance-trade-page/trading/terminal-place-order.context";
 import { TerminalTickerContextProvider } from "pages/trades/binance-trade-page/trading/terminal-ticker.context";
 import {
@@ -71,21 +72,23 @@ const _Terminal: React.FC<Props> = ({
             <ChartBlock />
           </div>
           <TradingPriceContextProvider>
-            <div className={styles["tables-grid-elem"]}>
-              <TradingTables />
-            </div>
-            <div className={styles["order-book-grid-elem"]}>
-              <ResponsiveContainer
-                enabledScreens={[
-                  "tablet",
-                  "landscape-tablet",
-                  "desktop",
-                  "large-desktop"
-                ]}
-              >
-                <OrderBookBlock />
-              </ResponsiveContainer>
-            </div>
+            <TerminalOpenOrdersContextProvider>
+              <div className={styles["tables-grid-elem"]}>
+                <TradingTables />
+              </div>
+              <div className={styles["order-book-grid-elem"]}>
+                <ResponsiveContainer
+                  enabledScreens={[
+                    "tablet",
+                    "landscape-tablet",
+                    "desktop",
+                    "large-desktop"
+                  ]}
+                >
+                  <OrderBookBlock />
+                </ResponsiveContainer>
+              </div>
+            </TerminalOpenOrdersContextProvider>
             <div className={styles["trades-grid-elem"]}>
               <ResponsiveContainer
                 enabledScreens={[
