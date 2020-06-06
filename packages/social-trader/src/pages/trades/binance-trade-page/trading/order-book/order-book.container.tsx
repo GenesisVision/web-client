@@ -26,7 +26,7 @@ interface Props {}
 const ASKS_FULL_AMOUNT_DIVIDER = 300;
 const BIDS_FULL_AMOUNT_DIVIDER = 25;
 
-const ROW_HEIGHT = 16;
+const ROW_HEIGHT = 19;
 
 const _OrderBookContainer: React.FC<Props> = ({}) => {
   const [asksDivider, setAsksDivider] = useState(ASKS_FULL_AMOUNT_DIVIDER);
