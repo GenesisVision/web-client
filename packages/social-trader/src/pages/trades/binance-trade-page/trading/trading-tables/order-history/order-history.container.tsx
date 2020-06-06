@@ -31,7 +31,7 @@ export const OrderHistoryContainer: React.FC<Props> = () => {
   const [socketData, setSocketData] = useState<ExecutionReport | undefined>();
 
   useEffect(() => {
-    if (!authData.publicKey || !userStream) return;
+    if (!authData?.publicKey || !userStream) return;
     const openOrders = getAllOrders(getSymbol(baseAsset, quoteAsset), authData);
     openOrders.pipe(map(normalizeOpenOrdersList)).subscribe(data => {
       setList(data);

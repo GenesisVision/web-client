@@ -26,7 +26,7 @@ export const PositionsContainer: React.FC = () => {
   >();
 
   useEffect(() => {
-    if (!authData.publicKey || !userStream) return;
+    if (!authData?.publicKey || !userStream) return;
     const positions = getPositionInformation!({ authData });
     positions.pipe(map(normalizePositionsList)).subscribe(setList);
     const positionsStream = filterPositionEventsStream(userStream);

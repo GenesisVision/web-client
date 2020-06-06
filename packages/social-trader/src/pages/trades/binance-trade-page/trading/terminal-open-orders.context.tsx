@@ -42,7 +42,7 @@ export const TerminalOpenOrdersContextProvider: React.FC = ({ children }) => {
   const [socketData, setSocketData] = useState<ExecutionReport | undefined>();
 
   useEffect(() => {
-    if (!authData.publicKey || !userStream) return;
+    if (!authData?.publicKey || !userStream) return;
     const openOrders = getOpenOrders(
       getSymbol(baseAsset, quoteAsset),
       authData

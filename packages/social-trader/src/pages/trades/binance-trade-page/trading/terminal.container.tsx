@@ -20,7 +20,7 @@ import React, { useContext, useEffect, useMemo, useState } from "react";
 import { TERMINAL_ROUTE } from "routes/trade.routes";
 
 interface Props {
-  authData: TerminalAuthDataType;
+  authData?: TerminalAuthDataType;
   type?: TerminalType;
   symbol?: SymbolState;
 }
@@ -109,7 +109,7 @@ const _TerminalContainer: React.FC<Props> = ({
     terminalPropsData
   ]);
 
-  if (!authDataProp || !exchangeInfoProp || !terminalTypeProp) return null;
+  if (!exchangeInfoProp || !terminalTypeProp) return null;
 
   return (
     <Terminal
