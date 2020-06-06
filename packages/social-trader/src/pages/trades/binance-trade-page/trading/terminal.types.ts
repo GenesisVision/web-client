@@ -1219,7 +1219,7 @@ export interface QueryOrderResult {
   symbol: string;
   time: number;
   timeInForce: TimeInForce;
-  type: string;
+  type: OrderType;
   updateTime: number;
 }
 
