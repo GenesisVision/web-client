@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import { Center } from "components/center/center";
 import { ColoredTextColor } from "components/colored-text/colored-text";
 import { DialogListItem } from "components/dialog/dialog-list-item";
 import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
@@ -19,6 +20,7 @@ export interface LevelsSum {
 }
 
 interface Props {
+  hasOrder?: boolean;
   barPercent: number;
   tableTickSize?: string;
   hovered: boolean;
@@ -32,6 +34,7 @@ interface Props {
 }
 
 const _OrderBookRow: React.FC<Props> = ({
+  hasOrder,
   barPercent,
   tableTickSize,
   hovered,
@@ -105,8 +108,13 @@ const _OrderBookRow: React.FC<Props> = ({
           [styles["order-book__table-row--hovered"]]: hovered
         })}
       >
-        <td>
-          <Text color={color}>{formattedPrice}</Text>
+        <td className={classNames(styles["order-book__first-cell"])}>
+          <Center>
+            {hasOrder && (
+              <div className={styles["order-book__has-order-bubble"]} />
+            )}
+            <Text color={color}>{formattedPrice}</Text>
+          </Center>
         </td>
         <td>{formattedAmount}</td>
         <td>{formattedTotal}</td>
