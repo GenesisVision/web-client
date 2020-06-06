@@ -24,7 +24,11 @@ import React, { useCallback, useContext, useState } from "react";
 
 import { LimitTradeForm } from "./limit-trade-form";
 import { MarketTradeForm } from "./market-trade-form";
-import { getBalance, IPlaceOrderFormValues } from "./place-order.helpers";
+import {
+  getBalance,
+  getBalancesLoaderData,
+  IPlaceOrderFormValues
+} from "./place-order.helpers";
 import styles from "./place-order.module.scss";
 
 const _PlaceOrder: React.FC = () => {
@@ -63,7 +67,8 @@ const _PlaceOrder: React.FC = () => {
     side === "BUY" || terminalType === "futures" ? quoteAsset : baseAsset;
   const balance = accountInfo
     ? getBalance(accountInfo.balances, walletAsset)
-    : undefined;
+    : 0;
+  const balances = accountInfo ? accountInfo.balances : getBalancesLoaderData();
 
   return (
     <DefaultBlock size={SIZES.SMALL} roundedBorder={false} bordered>
@@ -92,27 +97,25 @@ const _PlaceOrder: React.FC = () => {
           <GVTab value={"STOP_LOSS_LIMIT"} label={"STOP LIMIT"} />
         </GVTabs>
       </Row>
-      {accountInfo && (
-        <Row>
-          <RowItem small>
-            <Center className={styles["place-order__wallet-icon"]}>
-              <WalletIcon />
-            </Center>
-          </RowItem>
-          <RowItem>
-            <Text muted>
-              {balance} {walletAsset}
-            </Text>
-          </RowItem>
-        </Row>
-      )}
-      {exchangeInfo && accountInfo && (
+      <Row>
+        <RowItem small>
+          <Center className={styles["place-order__wallet-icon"]}>
+            <WalletIcon />
+          </Center>
+        </RowItem>
+        <RowItem>
+          <Text muted>
+            {balance} {walletAsset}
+          </Text>
+        </RowItem>
+      </Row>
+      {exchangeInfo && (
         <Row>
           {tab === "LIMIT" && (
             <LimitTradeForm
               status={status}
               exchangeInfo={exchangeInfo}
-              accountInfo={accountInfo}
+              balances={balances}
               outerPrice={+price}
               onSubmit={handleSubmit}
               side={side}
@@ -122,7 +125,7 @@ const _PlaceOrder: React.FC = () => {
             <MarketTradeForm
               status={status}
               exchangeInfo={exchangeInfo}
-              accountInfo={accountInfo}
+              balances={balances}
               outerPrice={+price}
               onSubmit={handleSubmit}
               side={side}
@@ -132,7 +135,7 @@ const _PlaceOrder: React.FC = () => {
             <StopLimitTradeForm
               status={status}
               exchangeInfo={exchangeInfo}
-              accountInfo={accountInfo}
+              balances={balances}
               outerPrice={+price}
               onSubmit={handleSubmit}
               side={side}

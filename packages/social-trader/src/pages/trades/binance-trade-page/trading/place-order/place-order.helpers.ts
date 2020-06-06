@@ -26,7 +26,7 @@ import { useContext, useEffect, useMemo, useState } from "react";
 import { NumberFormatValues } from "react-number-format";
 import { calculatePercentage } from "utils/currency-converter";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
-import { safeGetElemFromArray } from "utils/helpers";
+import { safeGetElemFromArray, tableLoaderCreator } from "utils/helpers";
 import { postponeFunc } from "utils/hook-form.helpers";
 import { AnyObjectType } from "utils/types";
 import { minMaxNumberShape } from "utils/validators/validators";
@@ -62,6 +62,15 @@ export interface IStopLimitFormValues extends IPlaceOrderDefaultFormValues {
 export interface IPlaceOrderFormValues extends IPlaceOrderDefaultFormValues {}
 
 export const RANGE_MARKS = ["0%", "25%", "50%", "75%", "100%"];
+
+export const getBalanceLoaderData = (): AssetBalance => ({
+  asset: "BTC",
+  free: "0",
+  locked: "0"
+});
+
+export const getBalancesLoaderData = () =>
+  tableLoaderCreator(getBalanceLoaderData, 1);
 
 export const usePlaceOrderAutoFill = ({
   setValue,
