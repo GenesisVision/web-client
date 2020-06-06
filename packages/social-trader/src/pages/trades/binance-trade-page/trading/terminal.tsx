@@ -30,7 +30,7 @@ import styles from "./terminal.module.scss";
 
 interface Props {
   exchangeInfo: ExchangeInfo;
-  authData: TerminalAuthDataType;
+  authData?: TerminalAuthDataType;
   terminalType: TerminalType;
   symbol?: SymbolState;
 }
