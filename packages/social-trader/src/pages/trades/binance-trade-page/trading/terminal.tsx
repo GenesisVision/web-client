@@ -67,13 +67,13 @@ const _Terminal: React.FC<Props> = ({
               <MarketWatchBlock />
             </ResponsiveContainer>
           </div>
-          <div className={styles["tables-grid-elem"]}>
-            <TradingTables />
-          </div>
           <div className={styles["chart-grid-elem"]}>
             <ChartBlock />
           </div>
           <TradingPriceContextProvider>
+            <div className={styles["tables-grid-elem"]}>
+              <TradingTables />
+            </div>
             <div className={styles["order-book-grid-elem"]}>
               <ResponsiveContainer
                 enabledScreens={[
