@@ -1151,6 +1151,7 @@ export interface ExecutionReport extends Message {
   executionType: ExecutionType;
   stopPrice: string;
   icebergQuantity: string;
+  status?: OrderStatus;
   orderStatus: OrderStatus;
   orderRejectReason: string;
   orderId: number;

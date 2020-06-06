@@ -90,6 +90,7 @@ export const transformExecutionReport = (m: any): ExecutionReport => ({
   executionType: m.x,
   stopPrice: m.P,
   icebergQuantity: m.F,
+  status: m.X,
   orderStatus: m.X,
   orderRejectReason: m.r,
   orderId: m.i,
