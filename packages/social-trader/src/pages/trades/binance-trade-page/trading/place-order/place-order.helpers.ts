@@ -202,7 +202,6 @@ export const usePlaceOrderFormReset = ({
   >();
 
   useEffect(() => {
-    console.log(watch());
     setPrevFormState({ ...watch(), sliderValue });
     if (prevFormState) {
       setSliderValue(prevFormState.sliderValue);
