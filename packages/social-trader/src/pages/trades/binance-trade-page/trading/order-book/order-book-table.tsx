@@ -83,7 +83,6 @@ const _OrderBookTable: React.FC<Props> = ({
           const total = +price * +amount;
           return (
             <OrderBookRow
-              key={price}
               hasOrder={hasOrder}
               barPercent={100 - getPercentageValue(total, fullAmount)}
               tableTickSize={tableTickSize}
