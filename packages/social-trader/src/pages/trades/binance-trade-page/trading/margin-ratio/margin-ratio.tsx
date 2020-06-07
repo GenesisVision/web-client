@@ -1,8 +1,6 @@
-import { DefaultBlock } from "components/default.block/default.block";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
-import { SIZES } from "constants/constants";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import { FuturesAsset } from "pages/trades/binance-trade-page/services/futures/binance-futures.types";
 import {
@@ -39,7 +37,7 @@ const _MarginRatio: React.FC<Props> = ({
   const marginRatio =
     +marginBalance > 0 ? (+maintMargin / +marginBalance) * 100 : 0;
   return (
-    <DefaultBlock size={SIZES.SMALL} roundedBorder={false} bordered>
+    <>
       <Row>
         <MarginRatioItem
           label={t("Margin ratio")}
@@ -68,7 +66,7 @@ const _MarginRatio: React.FC<Props> = ({
           }
         />
       </Row>
-    </DefaultBlock>
+    </>
   );
 };
 

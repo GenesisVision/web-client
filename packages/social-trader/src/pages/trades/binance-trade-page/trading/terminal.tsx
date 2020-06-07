@@ -2,7 +2,7 @@ import { Center } from "components/center/center";
 import { ResponsiveContainer } from "components/responsive-container/responsive-container";
 import { ChartBlock } from "pages/trades/binance-trade-page/trading/chart/chart-block";
 import { TradeHeaderContainer } from "pages/trades/binance-trade-page/trading/components/trade-header/trade-header";
-import { MarginRatioContainer } from "pages/trades/binance-trade-page/trading/margin-ratio/margin-ratio.container";
+import { MarginRatioBlock } from "pages/trades/binance-trade-page/trading/margin-ratio/margin-ratio.block";
 import { MarketWatchBlock } from "pages/trades/binance-trade-page/trading/market-watch/market-watch.block";
 import { OrderBookBlock } from "pages/trades/binance-trade-page/trading/order-book/order-book.block";
 import { PlaceOrder } from "pages/trades/binance-trade-page/trading/place-order/place-order";
@@ -120,7 +120,7 @@ const _Terminal: React.FC<Props> = ({
               <TerminalPlaceOrderContextProvider>
                 {terminalType === "futures" && <PlaceOrderSettingsContainer />}
                 <PlaceOrder />
-                {terminalType === "futures" && <MarginRatioContainer />}
+                {terminalType === "futures" && <MarginRatioBlock />}
               </TerminalPlaceOrderContextProvider>
             </div>
           </TradingPriceContextProvider>
