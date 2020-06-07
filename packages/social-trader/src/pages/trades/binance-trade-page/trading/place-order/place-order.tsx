@@ -1,5 +1,4 @@
 import { Center } from "components/center/center";
-import { DefaultBlock } from "components/default.block/default.block";
 import { DoubleButton } from "components/double-button/double-button";
 import { GV_BTN_SIZE } from "components/gv-button";
 import GVTabs from "components/gv-tabs";
@@ -8,9 +7,9 @@ import { WalletIcon } from "components/icon/wallet-icon";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
-import { SIZES } from "constants/constants";
 import useApiRequest from "hooks/api-request.hook";
 import useTab from "hooks/tab.hook";
+import { TerminalDefaultBlock } from "pages/trades/binance-trade-page/trading/components/terminal-default-block/terminal-default-block";
 import { StopLimitTradeForm } from "pages/trades/binance-trade-page/trading/place-order/stop-limit-trade-form";
 import { TerminalInfoContext } from "pages/trades/binance-trade-page/trading/terminal-info.context";
 import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
@@ -71,7 +70,7 @@ const _PlaceOrder: React.FC = () => {
   const balances = accountInfo ? accountInfo.balances : getBalancesLoaderData();
 
   return (
-    <DefaultBlock size={SIZES.SMALL} roundedBorder={false} bordered>
+    <TerminalDefaultBlock>
       <Row>
         <DoubleButton
           size={GV_BTN_SIZE.SMALL}
@@ -143,7 +142,7 @@ const _PlaceOrder: React.FC = () => {
           )}
         </Row>
       )}
-    </DefaultBlock>
+    </TerminalDefaultBlock>
   );
 };
 
