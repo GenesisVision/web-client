@@ -139,7 +139,6 @@ export const usePlaceOrderFormReset = ({
   setValue,
   side,
   balances,
-  totalName,
   quantityName
 }: {
   status: API_REQUEST_STATUS;
@@ -150,7 +149,6 @@ export const usePlaceOrderFormReset = ({
   setValue: (name: string, value?: number, shouldValidate?: boolean) => void;
   side: OrderSide;
   balances: AssetBalance[];
-  totalName: string;
   quantityName: string;
 }) => {
   const { terminalType } = useContext(TerminalInfoContext);
@@ -160,8 +158,7 @@ export const usePlaceOrderFormReset = ({
     side,
     setValue,
     balances,
-    quantityName,
-    totalName
+    quantityName
   });
   const [isReset, setReset] = useState<boolean | undefined>();
   const [prevFormState, setPrevFormState] = useState<
@@ -263,14 +260,12 @@ export const useTradeSlider = ({
   setValue,
   side,
   balances,
-  totalName,
   quantityName
 }: {
   watch: () => AnyObjectType;
   setValue: (name: string, value?: number, shouldValidate?: boolean) => void;
   side: OrderSide;
   balances: AssetBalance[];
-  totalName: string;
   quantityName: string;
 }) => {
   const {
@@ -278,7 +273,6 @@ export const useTradeSlider = ({
     stepSize,
     terminalType
   } = useContext(TerminalInfoContext);
-  const { leverage } = useContext(TerminalPlaceOrderContext);
   const [sliderValue, setSliderValue] = useState<number | undefined>();
   useEffect(() => {
     if (sliderValue === undefined) return;
@@ -287,12 +281,11 @@ export const useTradeSlider = ({
       const { price } = watch();
       const walletAvailable = +getBalance(balances, quoteAsset);
       const fullTotal = calculatePercentage(walletAvailable, percentValue);
-      const newAmount = +terminalMoneyFormat({
-        amount: fullTotal / price,
-        tickSize: stepSize
-      });
-      const newTotal = +formatValue(leverage * newAmount * price, 8);
-      setValue(totalName, newTotal, true);
+      const newAmount = truncated(
+        fullTotal / price,
+        getDecimalScale(formatValue(stepSize))
+      );
+      setValue(quantityName, newAmount, true);
     }
     if (side === "SELL") {
       const walletAvailable = +getBalance(

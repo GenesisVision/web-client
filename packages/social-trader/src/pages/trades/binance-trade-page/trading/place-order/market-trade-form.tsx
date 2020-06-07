@@ -94,8 +94,7 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
     side,
     setValue,
     balances,
-    quantityName: TRADE_FORM_FIELDS.quantity,
-    totalName: TRADE_FORM_FIELDS.total
+    quantityName: TRADE_FORM_FIELDS.quantity
   });
 
   usePlaceOrderAutoFill({

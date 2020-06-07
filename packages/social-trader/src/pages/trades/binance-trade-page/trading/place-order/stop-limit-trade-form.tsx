@@ -102,8 +102,7 @@ const _StopLimitTradeForm: React.FC<IStopLimitTradeFormProps & {
     side,
     setValue,
     balances,
-    quantityName: TRADE_FORM_FIELDS.quantity,
-    totalName: TRADE_FORM_FIELDS.total
+    quantityName: TRADE_FORM_FIELDS.quantity
   });
 
   usePlaceOrderAutoFill({
