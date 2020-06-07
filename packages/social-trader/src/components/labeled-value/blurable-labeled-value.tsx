@@ -9,7 +9,7 @@ interface Props extends ILabeledValueProps {
   isPending?: boolean;
 }
 
-const BlurableLabeledValue: React.FC<Props> = ({
+export const BlurableLabeledValue: React.FC<Props> = ({
   isPending,
   children,
   ...otherProps
@@ -20,5 +20,3 @@ const BlurableLabeledValue: React.FC<Props> = ({
     </LabeledValue>
   );
 };
-
-export default BlurableLabeledValue;
