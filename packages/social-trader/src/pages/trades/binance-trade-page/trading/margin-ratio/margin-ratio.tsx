@@ -1,4 +1,4 @@
-import { RowItem } from "components/row-item/row-item";
+import { LabeledValue } from "components/labeled-value/labeled-value";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
 import { withBlurLoader } from "decorators/with-blur-loader";
@@ -10,25 +10,9 @@ import {
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import styles from "./margin-ratio.module.scss";
-
 interface Props {
   data: FuturesAsset;
 }
-
-const MarginRatioItem: React.FC<{
-  label: string;
-  value: JSX.Element;
-}> = React.memo(({ label, value }) => {
-  return (
-    <Row wide>
-      <RowItem wide>
-        <Text muted>{label}</Text>
-      </RowItem>
-      <RowItem className={styles["margin-ratio__value"]}>{value}</RowItem>
-    </Row>
-  );
-});
 
 const _MarginRatio: React.FC<Props> = ({
   data: { maintMargin, marginBalance }
@@ -39,32 +23,25 @@ const _MarginRatio: React.FC<Props> = ({
   return (
     <>
       <Row>
-        <MarginRatioItem
-          label={t("Margin ratio")}
-          value={
-            <Text wrap={false} color={getMarginRatioColor(+marginRatio)}>
-              <h4>{marginRatio.toFixed(2)} %</h4>
-            </Text>
-          }
-        />
+        <LabeledValue direction={"row"} label={t("Margin ratio")}>
+          <Text wrap={false} color={getMarginRatioColor(+marginRatio)}>
+            <h4>{marginRatio.toFixed(2)} %</h4>
+          </Text>
+        </LabeledValue>
       </Row>
       <Row onlyOffset>
-        <MarginRatioItem
-          label={t("Margin balance")}
-          value={
-            <>
-              {(+maintMargin).toFixed(2)} {MARGIN_INFO_ASSET}
-            </>
-          }
-        />
-        <MarginRatioItem
-          label={t("Maintenance margin")}
-          value={
-            <>
-              {(+marginBalance).toFixed(2)} {MARGIN_INFO_ASSET}
-            </>
-          }
-        />
+        <LabeledValue direction={"row"} label={t("Margin balance")}>
+          <Text size={"small"}>
+            {(+marginBalance).toFixed(2)} {MARGIN_INFO_ASSET}
+          </Text>
+        </LabeledValue>
+      </Row>
+      <Row>
+        <LabeledValue direction={"row"} label={t("Maintenance margin")}>
+          <Text size={"small"}>
+            {(+maintMargin).toFixed(2)} {MARGIN_INFO_ASSET}
+          </Text>
+        </LabeledValue>
       </Row>
     </>
   );
