@@ -8,13 +8,13 @@ import styles from "./labeled-value.module.scss";
 
 export type LabeledValueDirection = "column" | "row";
 
-interface Props {
+export interface ILabeledValueProps {
   direction?: LabeledValueDirection;
   label: string | React.ReactNode | JSX.Element;
   size?: SizesType;
 }
 
-export const LabeledValue: React.FC<Props> = ({
+export const LabeledValue: React.FC<ILabeledValueProps> = ({
   direction = "column",
   label,
   size = "middle",
