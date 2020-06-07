@@ -154,7 +154,7 @@ export const usePlaceOrderFormReset = ({
   quantityName: string;
 }) => {
   const { terminalType } = useContext(TerminalInfoContext);
-  const { quantity, total } = watch();
+  const { quantity, total, price } = watch();
   const { sliderValue, setSliderValue } = useTradeSlider({
     watch,
     side,
@@ -164,6 +164,9 @@ export const usePlaceOrderFormReset = ({
     totalName
   });
   const [isReset, setReset] = useState<boolean | undefined>();
+  const [prevFormState, setPrevFormState] = useState<
+    (AnyObjectType & { sliderValue?: number }) | undefined
+  >();
 
   useEffect(() => {
     if (status === API_REQUEST_STATUS.SUCCESS)
@@ -197,15 +200,11 @@ export const usePlaceOrderFormReset = ({
     });
   }, [terminalType]);
 
-  const [prevFormState, setPrevFormState] = useState<
-    (AnyObjectType & { sliderValue?: number }) | undefined
-  >();
-
   useEffect(() => {
     setPrevFormState({ ...watch(), sliderValue });
     if (prevFormState) {
       setSliderValue(prevFormState.sliderValue);
-      reset(prevFormState);
+      reset({ ...prevFormState, price });
     }
   }, [side]);
   return { sliderValue, setSliderValue };
