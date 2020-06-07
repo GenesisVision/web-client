@@ -26,6 +26,7 @@ import { TradingPriceContextProvider } from "pages/trades/binance-trade-page/tra
 import { TradingTables } from "pages/trades/binance-trade-page/trading/trading-tables/trading-tables";
 import React from "react";
 
+import { TerminalMobileChartBlock } from "./terminal-mobile-chart-block/terminal-mobile-chart-block";
 import styles from "./terminal.module.scss";
 
 interface Props {
@@ -68,10 +69,24 @@ const _Terminal: React.FC<Props> = ({
               <MarketWatchBlock />
             </ResponsiveContainer>
           </div>
-          <div className={styles["chart-grid-elem"]}>
-            <ChartBlock />
-          </div>
           <TradingPriceContextProvider>
+            <div className={styles["chart-grid-elem"]}>
+              <ResponsiveContainer
+                enabledScreens={["phone", "landscape-phone"]}
+              >
+                <TerminalMobileChartBlock />
+              </ResponsiveContainer>
+              <ResponsiveContainer
+                enabledScreens={[
+                  "tablet",
+                  "landscape-tablet",
+                  "desktop",
+                  "large-desktop"
+                ]}
+              >
+                <ChartBlock />
+              </ResponsiveContainer>
+            </div>
             <TerminalOpenOrdersContextProvider>
               <div className={styles["tables-grid-elem"]}>
                 <TradingTables />
