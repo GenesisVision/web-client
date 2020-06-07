@@ -18,12 +18,16 @@ enum TABS {
   ORDER_BOOK = "ORDER_BOOK"
 }
 
-export const TerminalMobileChartBlock = () => {
+export const TerminalMobileChartBlock: React.FC = () => {
   const [t] = useTranslation();
   const { tab, setTab } = useTab<TABS>(TABS.CHART);
   return (
     <TerminalDefaultBlock className={styles["terminal-mobile-chart-block"]}>
-      <DefaultBlock verticalOffsets={false} size={SIZES.SMALL}>
+      <DefaultBlock
+        horizontalOffsets={false}
+        verticalOffsets={false}
+        size={SIZES.SMALL}
+      >
         <GVTabs value={tab} onChange={setTab}>
           <GVTab value={TABS.CHART} label={t("Chart")} />
           <GVTab value={TABS.TRADES} label={t("Trades")} />
