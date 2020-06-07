@@ -115,7 +115,9 @@ const _OrderBookRow: React.FC<Props> = ({
             {hasOrder && (
               <div className={styles["order-book__has-order-bubble"]} />
             )}
-            <Text color={color}>{formattedPrice}</Text>
+            <Text size={"xsmall"} color={color}>
+              {formattedPrice}
+            </Text>
           </Center>
         </td>
         <td>{formattedAmount}</td>
