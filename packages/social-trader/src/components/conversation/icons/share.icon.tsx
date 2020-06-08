@@ -1,9 +1,9 @@
 import { ButtonIcon } from "components/button-icon/button-icon";
 import React from "react";
 
-export const ShareIcon: React.FC = () => {
+export const ShareIcon: React.FC<{ disabled?: boolean }> = ({ disabled }) => {
   return (
-    <ButtonIcon>
+    <ButtonIcon disabled={disabled}>
       <svg
         width="16"
         height="16"
