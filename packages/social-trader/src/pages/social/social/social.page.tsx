@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 export const SocialPage: React.FC = () => {
   const [t] = useTranslation();
   return (
-    <Page showTitle title={t("Social")}>
+    <Page title={t("Social")}>
       <SocialSearchContextProvider>
         <SocialPageContainer />
       </SocialSearchContextProvider>
