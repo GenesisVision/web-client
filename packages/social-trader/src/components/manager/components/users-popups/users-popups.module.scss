@@ -15,6 +15,7 @@
   &__dialog {
     &#{&} {
       width: 80vh;
+      max-width: 500px;
     }
   }
 }
