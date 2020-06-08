@@ -13,13 +13,15 @@
   path {
     @include transition(stroke, fill);
     fill: none;
-    stroke: white;
+    stroke: $label-color;
   }
 
   &:hover {
-    path {
-      fill: none;
-      stroke: $label-color;
+    &:not(.like-button-icon--disabled) {
+      path {
+        fill: none;
+        stroke: white;
+      }
     }
   }
 
@@ -39,6 +41,9 @@
 
   &--disabled {
     opacity: 0.5;
-    cursor: default !important;
+    &,
+    & svg {
+      cursor: default;
+    }
   }
 }
