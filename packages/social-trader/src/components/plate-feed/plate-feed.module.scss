@@ -2,6 +2,9 @@
 @import "~shared/styles/_sizes";
 
 .plate-feed {
+  &__link {
+    color: white;
+  }
   &__panel {
     &--pink {
       background: $landing-link-hover;
