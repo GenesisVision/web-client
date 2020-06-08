@@ -20,6 +20,7 @@ import React from "react";
 import styles from "./message.module.scss";
 
 const _Message: React.FC<IMessageProps> = ({
+  settingsBlock,
   row = true,
   tags,
   postId,
@@ -40,14 +41,17 @@ const _Message: React.FC<IMessageProps> = ({
           [styles["message--row"]]: row
         })}
       >
-        <MessageItem className={styles["message__user"]}>
-          <ConversationUser
-            postId={postId}
-            url={url}
-            avatar={logoUrl}
-            username={username}
-            date={date}
-          />
+        <MessageItem center={false} className={styles["message__user"]}>
+          <RowItem wide>
+            <ConversationUser
+              postId={postId}
+              url={url}
+              avatar={logoUrl}
+              username={username}
+              date={date}
+            />
+          </RowItem>
+          <RowItem>{settingsBlock}</RowItem>
         </MessageItem>
         <MessageItem onlyOffset className={styles["message__text"]}>
           {text && (
@@ -95,6 +99,7 @@ const _Message: React.FC<IMessageProps> = ({
 };
 
 export interface IMessageProps {
+  settingsBlock?: JSX.Element;
   row?: boolean;
   tags?: PostTag[];
   postId?: string;

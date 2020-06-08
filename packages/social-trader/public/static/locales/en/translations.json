@@ -1331,7 +1331,7 @@
     "heading": "Search Results",
     "programs": "Programs",
     "funds": "Funds",
-    "managers": "Managers"
+    "managers": "Users"
   },
   "profile-page": {
     "id": "id",
@@ -2052,7 +2052,7 @@
     "success-alert-message": "Program has been edited"
   },
   "app": {
-    "title": "Genesis Vision: "
+    "title": "Genesis Vision"
   },
   "auth-quotes": {
     "0": {

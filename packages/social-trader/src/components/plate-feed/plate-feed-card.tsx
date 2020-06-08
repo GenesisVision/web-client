@@ -19,7 +19,12 @@ const _PlateFeedCard: React.FC<Props> = ({ url, imageSrc, content }) => {
     ? undefined
     : PLATE_FEED_CARD_COLORS[getRandomInteger(0, 1)];
   return (
-    <Link white to={url}>
+    <a
+      className={styles["plate-feed__link"]}
+      href={url}
+      target={"_blank"}
+      rel={"noopener noreferrer"}
+    >
       <DefaultBlock
         className={classNames({
           // [styles["plate-feed__panel--pink"]]: color === "pink",
@@ -39,7 +44,7 @@ const _PlateFeedCard: React.FC<Props> = ({ url, imageSrc, content }) => {
           <div className={styles["plate-feed__content"]}>{content}</div>
         )}
       </DefaultBlock>
-    </Link>
+    </a>
   );
 };
 

@@ -1,20 +1,19 @@
 import Dialog, { IDialogOuterProps } from "components/dialog/dialog";
 import SimpleUserList, {
-  ISimpleUserListProps,
-  useUsersList
+  ISimpleUserListProps
 } from "components/manager/components/users-popups/simple-users-list";
+import { getFollowing } from "components/manager/services/manager.service";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
 import styles from "./users-popups.module.scss";
 
 export const FollowingDialog: React.FC<IFollowingDialogProps> = ({
-  items,
+  id,
   open,
   onClose
 }) => {
   const [t] = useTranslation();
-  const { usersList, handleChange } = useUsersList(items);
   return (
     <Dialog
       className={styles["users-list__dialog"]}
@@ -22,10 +21,9 @@ export const FollowingDialog: React.FC<IFollowingDialogProps> = ({
       onClose={onClose}
     >
       <SimpleUserList
-        onChange={handleChange}
+        request={() => getFollowing({ id })}
         onClick={onClose}
         title={t("manager-page.following")}
-        items={usersList}
       />
     </Dialog>
   );
@@ -33,4 +31,6 @@ export const FollowingDialog: React.FC<IFollowingDialogProps> = ({
 
 export interface IFollowingDialogProps
   extends IDialogOuterProps,
-    ISimpleUserListProps {}
+    ISimpleUserListProps {
+  id: string;
+}

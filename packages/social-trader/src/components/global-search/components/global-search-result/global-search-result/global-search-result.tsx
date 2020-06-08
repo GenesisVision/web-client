@@ -32,6 +32,11 @@ const _GlobalSearchResult: React.FC<Props> = ({ data }) => {
       <Row>
         <DetailsBlockTabs value={tab} onChange={setTab}>
           <GVTab
+            value={SEARCH_TABS.MANAGERS}
+            label={t("global-search-page.managers")}
+            count={data.managers && data.managers.total}
+          />
+          <GVTab
             value={SEARCH_TABS.PROGRAMS}
             label={t("global-search-page.programs")}
             count={data.programs && data.programs.total}
@@ -45,11 +50,6 @@ const _GlobalSearchResult: React.FC<Props> = ({ data }) => {
             value={SEARCH_TABS.FOLLOWS}
             label={t("global-search-page.follows")}
             count={data.follows && data.follows.total}
-          />
-          <GVTab
-            value={SEARCH_TABS.MANAGERS}
-            label={t("global-search-page.managers")}
-            count={data.managers && data.managers.total}
           />
         </DetailsBlockTabs>
       </Row>

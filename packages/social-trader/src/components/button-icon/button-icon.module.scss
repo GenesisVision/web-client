@@ -12,20 +12,22 @@
 
   svg [stroke] {
     @include transition(stroke);
-    stroke: white;
+    stroke: $label-color;
   }
 
   svg [fill] {
     @include transition(fill);
-    fill: white;
+    fill: $label-color;
   }
 
   &:hover {
-    svg [stroke] {
-      stroke: $label-color;
-    }
-    svg [fill] {
-      fill: $label-color;
+    &:not(.button-icon--disabled) {
+      svg [stroke] {
+        stroke: white;
+      }
+      svg [fill] {
+        fill: white;
+      }
     }
   }
 
@@ -34,11 +36,6 @@
     & svg {
       cursor: default;
     }
-    svg [stroke] {
-      stroke: $label-color;
-    }
-    svg [fill] {
-      fill: $label-color;
-    }
+    opacity: 0.5;
   }
 }

@@ -1,20 +1,19 @@
 import Dialog, { IDialogOuterProps } from "components/dialog/dialog";
 import SimpleUserList, {
-  ISimpleUserListProps,
-  useUsersList
+  ISimpleUserListProps
 } from "components/manager/components/users-popups/simple-users-list";
+import { getFollowers } from "components/manager/services/manager.service";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
 import styles from "./users-popups.module.scss";
 
 export const FollowersDialog: React.FC<IFollowersDialogProps> = ({
-  items,
+  id,
   open,
   onClose
 }) => {
   const [t] = useTranslation();
-  const { usersList, handleChange } = useUsersList(items);
   return (
     <Dialog
       className={styles["users-list__dialog"]}
@@ -22,10 +21,9 @@ export const FollowersDialog: React.FC<IFollowersDialogProps> = ({
       onClose={onClose}
     >
       <SimpleUserList
-        onChange={handleChange}
+        request={() => getFollowers({ id })}
         onClick={onClose}
         title={t("manager-page.followers")}
-        items={usersList}
       />
     </Dialog>
   );
@@ -33,4 +31,6 @@ export const FollowersDialog: React.FC<IFollowersDialogProps> = ({
 
 export interface IFollowersDialogProps
   extends IDialogOuterProps,
-    ISimpleUserListProps {}
+    ISimpleUserListProps {
+  id: string;
+}

@@ -18,9 +18,9 @@ const _SocialPageDownloadsBlock: React.FC<Props> = () => {
   return (
     <DefaultBlock wide solid>
       <Row>
-        <h2 className={styles["social-page-downloads__title"]}>
+        <h3 className={styles["social-page-downloads__title"]}>
           {t("Genesis Vision App")}
-        </h2>
+        </h3>
       </Row>
       <Row large onlyOffset>
         <Row wide small>

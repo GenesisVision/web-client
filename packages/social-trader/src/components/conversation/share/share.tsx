@@ -18,7 +18,7 @@ export const _Share: React.FC<Props> = ({ count, id, disable, onApply }) => {
     <>
       <Center onClick={setIsOpen}>
         <RowItem className={styles["share__icon"]} small>
-          <ShareIcon />
+          <ShareIcon disabled={disable} />
         </RowItem>
         {count > 0 && (
           <RowItem className={styles["share__count"]}>{count}</RowItem>

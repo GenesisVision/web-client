@@ -100,9 +100,9 @@ const mainMenuItemsUnion = [
     route: SOCIAL_ROUTE,
     children: [
       {
-        Icon: NewsIcon,
-        route: MEDIA_ROUTE,
-        label: "navigation.media"
+        Icon: UsersIcon,
+        route: USERS_ROUTE,
+        label: "navigation.users"
       },
       {
         Icon: MyProfileIcon,
@@ -110,9 +110,9 @@ const mainMenuItemsUnion = [
         label: "navigation.my-profile"
       },
       {
-        Icon: UsersIcon,
-        route: USERS_ROUTE,
-        label: "navigation.users"
+        Icon: NewsIcon,
+        route: MEDIA_ROUTE,
+        label: "navigation.media"
       }
     ]
   },
