@@ -17,7 +17,7 @@ const _SocialPageTopicsBlock: React.FC<Props> = ({ topics }) => {
   return (
     <DefaultBlock wide solid>
       <Row>
-        <h2>{t("Hot topics")}</h2>
+        <h3>{t("Hot topics")}</h3>
       </Row>
       <Row large onlyOffset className={styles["social-page-topics"]}>
         {topics.map(({ hashTag, impressionsCount, discussCount }, index) => (
