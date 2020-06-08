@@ -28,7 +28,10 @@ const _Message: React.FC<IMessageProps> = ({
   date,
   author: { username, url, logoUrl }
 }) => {
-  const tagsUnderText = tags?.filter(({ type }) => type !== "Event");
+  const tagsUnderText = tags
+    ?.filter(({ type }) => type !== "Event")
+    .filter(({ type }) => type !== "Post");
+  const repostTag = tags?.filter(({ type }) => type === "Post");
   const MessageItem = row ? RowItem : Row;
   return (
     <div>
@@ -77,6 +80,13 @@ const _Message: React.FC<IMessageProps> = ({
         <Row>
           <HorizontalShadowList withScroll={false}>
             {generateTagsComponents(tagsUnderText)}
+          </HorizontalShadowList>
+        </Row>
+      )}
+      {!!repostTag?.length && (
+        <Row>
+          <HorizontalShadowList withScroll={false}>
+            {generateTagsComponents(repostTag)}
           </HorizontalShadowList>
         </Row>
       )}
