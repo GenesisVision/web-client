@@ -46,7 +46,7 @@ export const UsersListItem: React.FC<IUsersListItemProps> = React.memo(
       onClick && onClick();
     }, [link]);
     return (
-      <Row wide className={styles["users-list__item"]}>
+      <Center className={styles["users-list__item"]}>
         <RowItem wide onClick={handleClick}>
           <Center>
             <RowItem>
@@ -68,7 +68,7 @@ export const UsersListItem: React.FC<IUsersListItemProps> = React.memo(
             />
           </RowItem>
         )}
-      </Row>
+      </Center>
     );
   }
 );
