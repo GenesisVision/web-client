@@ -22,7 +22,6 @@ import {
 } from "components/profitability/profitability.helper";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
-import StatisticItemInner from "components/statistic-item/statistic-item-inner";
 import Crashable from "decorators/crashable";
 import {
   ChangeState,
@@ -35,7 +34,6 @@ import {
 } from "gv-api-web";
 import { getAssetFolderRoute } from "pages/dashboard/components/dashboard-trading/dashboard-public-card";
 import React from "react";
-import { useTranslation } from "react-i18next";
 import { managerToPathCreator } from "routes/manager.routes";
 import { composeAssetDetailsUrl } from "utils/compose-url";
 
@@ -116,46 +114,39 @@ const _EventTag: React.FC<IEventTagProps> = ({
     event: { logoUrl, title, amount, currency, percent, changeState }
   }
 }) => {
-  const [t] = useTranslation();
   const color = getAssetTagTextColor(changeState);
   return (
-    <Row className={styles["event-tag"]} wrap center={false}>
-      <RowItem bottomOffset>
-        <Center>
-          <RowItem small>
-            <PortfolioEventLogo
-              withAsset={true}
-              assetDetails={assetDetails}
-              icon={logoUrl}
-            />
-          </RowItem>
-          <RowItem>
-            <Center>{title}</Center>
-          </RowItem>
-        </Center>
+    <Row wrap>
+      <RowItem small>
+        <PortfolioEventLogo
+          withAsset={true}
+          assetDetails={assetDetails}
+          icon={logoUrl}
+        />
+      </RowItem>
+      <RowItem>
+        <Center>{title}</Center>
       </RowItem>
       {amount !== null && (
-        <RowItem bottomOffset>
-          <StatisticItemInner label={t("Amount")}>
-            <Center>
-              <RowItem small>
-                <ColoredText color={color}>
-                  {amount} {currency}
-                </ColoredText>
+        <RowItem>
+          <Center>
+            <RowItem small>
+              <ColoredText color={color}>
+                {amount} {currency}
+              </ColoredText>
+            </RowItem>
+            {percent !== null && (
+              <RowItem>
+                <Profitability
+                  prefix={PROFITABILITY_PREFIX.SIGN}
+                  variant={PROFITABILITY_VARIANT.CHIPS}
+                  value={percent}
+                >
+                  {percent} %
+                </Profitability>
               </RowItem>
-              {percent !== null && (
-                <RowItem>
-                  <Profitability
-                    prefix={PROFITABILITY_PREFIX.SIGN}
-                    variant={PROFITABILITY_VARIANT.CHIPS}
-                    value={percent}
-                  >
-                    {percent} %
-                  </Profitability>
-                </RowItem>
-              )}
-            </Center>
-          </StatisticItemInner>
+            )}
+          </Center>
         </RowItem>
       )}
     </Row>
