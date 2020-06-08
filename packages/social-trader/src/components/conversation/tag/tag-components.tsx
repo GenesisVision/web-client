@@ -142,7 +142,7 @@ const _EventTag: React.FC<IEventTagProps> = ({
                   variant={PROFITABILITY_VARIANT.CHIPS}
                   value={percent}
                 >
-                  {percent} %
+                  {Math.abs(percent)} %
                 </Profitability>
               </RowItem>
             )}
