@@ -67,6 +67,33 @@ const _Post: React.FC<Props> = ({
       <Row center={false}>
         <RowItem wide>
           <Message
+            settingsBlock={
+              actions?.canDelete || actions?.canPin ? (
+                <RowItem>
+                  <Center>
+                    {actions?.canPin && (
+                      <RowItem>
+                        <ConversationPinButton
+                          id={id}
+                          value={isPinned}
+                          onSuccess={updateData}
+                        />
+                      </RowItem>
+                    )}
+                    {actions?.canDelete && (
+                      <RowItem>
+                        <ConversationRemoveButton
+                          id={id}
+                          onSuccess={setDeleted}
+                        />
+                      </RowItem>
+                    )}
+                  </Center>
+                </RowItem>
+              ) : (
+                undefined
+              )
+            }
             row={false}
             tags={tags}
             postId={id}
@@ -76,26 +103,6 @@ const _Post: React.FC<Props> = ({
             author={author}
           />
         </RowItem>
-        {(actions?.canDelete || actions?.canPin) && (
-          <RowItem>
-            <Center>
-              {actions?.canPin && (
-                <RowItem>
-                  <ConversationPinButton
-                    id={id}
-                    value={isPinned}
-                    onSuccess={updateData}
-                  />
-                </RowItem>
-              )}
-              {actions?.canDelete && (
-                <RowItem>
-                  <ConversationRemoveButton id={id} onSuccess={setDeleted} />
-                </RowItem>
-              )}
-            </Center>
-          </RowItem>
-        )}
       </Row>
       <PostButtons
         rePostsCount={rePostsCount}
