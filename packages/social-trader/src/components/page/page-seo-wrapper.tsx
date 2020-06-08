@@ -20,7 +20,7 @@ export const PageSeoWrapper: React.FC<IPageSeoWrapperProps> = ({
   previewImage
 }) => {
   const [t] = useTranslation();
-  const pageTitle = t("app.title") + title;
+  const pageTitle = `${title} | ${t("app.title")}`;
   return (
     <>
       <Head>
