@@ -21,19 +21,31 @@ const getMockUsersPromise = (): Promise<UsersListDataType> =>
     total: 100
   });
 
-export const getFollowers = (args: {
+export const getFollowers = ({
+  id
+}: {
   id: string;
-  take: number;
-  count: number;
-}): Promise<UsersListDataType> => {
-  return getMockUsersPromise();
+  take?: number;
+  count?: number;
+}): Promise<UsersListItemType[]> => {
+  return api
+    .users()
+    .getUserProfileFollowDetails(id)
+    .then(({ followers }) => followers);
 };
 
-export const getFollowing = (args: {
+export const getFollowing = ({
+  id
+}: {
   id: string;
-  take: number;
-  count: number;
-}): Promise<UsersListDataType> => getMockUsersPromise();
+  take?: number;
+  count?: number;
+}): Promise<UsersListItemType[]> => {
+  return api
+    .users()
+    .getUserProfileFollowDetails(id)
+    .then(({ following }) => following);
+};
 
 export const followUser = (id: string) => api.social().followUser(id);
 

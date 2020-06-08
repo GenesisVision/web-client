@@ -66,10 +66,10 @@ const _ManagerInfo: React.FC<Props> = ({
             )}
             <Row large>
               <RowItem>
-                <FollowersCountItem items={followers} />
+                <FollowersCountItem id={id} count={followers} />
               </RowItem>
               <RowItem>
-                <FollowingCountItem items={following} />
+                <FollowingCountItem id={id} count={following} />
               </RowItem>
             </Row>
           </>
