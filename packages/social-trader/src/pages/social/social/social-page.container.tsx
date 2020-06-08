@@ -26,22 +26,20 @@ export const SocialPageContainer = () => {
           enabledScreens={["landscape-tablet", "desktop", "large-desktop"]}
         >
           <RowItem className={styles["social-page__side-block"]}>
-            <div className={styles["social-page__sticky"]}>
+            <Row>
+              <SocialPageTradersBlock assets={data?.topStrategies} />
+            </Row>
+            <Row>
+              <SocialPageGainersBlock assets={data?.topAssets} />
+            </Row>
+            <ResponsiveContainer enabledScreens={["landscape-tablet"]}>
               <Row>
-                <SocialPageTradersBlock assets={data?.topStrategies} />
+                <SocialPageTopicsBlock topics={data?.hotTopics} />
               </Row>
               <Row>
-                <SocialPageGainersBlock assets={data?.topAssets} />
+                <SocialPageDownloadsBlock />
               </Row>
-              <ResponsiveContainer enabledScreens={["landscape-tablet"]}>
-                <Row>
-                  <SocialPageTopicsBlock topics={data?.hotTopics} />
-                </Row>
-                <Row>
-                  <SocialPageDownloadsBlock />
-                </Row>
-              </ResponsiveContainer>
-            </div>
+            </ResponsiveContainer>
           </RowItem>
         </ResponsiveContainer>
         <RowItem className={styles["social-page__feed-container"]}>
@@ -49,14 +47,12 @@ export const SocialPageContainer = () => {
         </RowItem>
         <ResponsiveContainer enabledScreens={["large-desktop", "desktop"]}>
           <RowItem className={styles["social-page__side-block"]}>
-            <div className={styles["social-page__sticky"]}>
-              <Row>
-                <SocialPageTopicsBlock topics={data?.hotTopics} />
-              </Row>
-              <Row>
-                <SocialPageDownloadsBlock />
-              </Row>
-            </div>
+            <Row>
+              <SocialPageTopicsBlock topics={data?.hotTopics} />
+            </Row>
+            <Row>
+              <SocialPageDownloadsBlock />
+            </Row>
           </RowItem>
         </ResponsiveContainer>
       </Row>
