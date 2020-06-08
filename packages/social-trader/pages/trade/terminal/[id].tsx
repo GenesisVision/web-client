@@ -56,10 +56,10 @@ Page.getInitialProps = async ctx => {
     const credentialsData = await api
       .dashboard(ctx.token)
       .getExchangeAccountCredentials({ exchangeAccountId });
-    brokerType = credentialsData.broker.type;
+    brokerType = credentialsData?.broker?.type;
     authData = {
-      publicKey: credentialsData.credentials.apiKey,
-      privateKey: credentialsData.credentials.apiSecret
+      publicKey: credentialsData?.credentials?.apiKey,
+      privateKey: credentialsData?.credentials?.apiSecret
     };
   }
 
