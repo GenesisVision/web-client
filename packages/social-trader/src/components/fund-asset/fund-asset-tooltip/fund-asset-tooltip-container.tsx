@@ -27,6 +27,7 @@ const _FundAssetTooltipContainer: React.FC<Props> = ({
       )}
     >
       <FundAsset
+        currentAmount={0}
         bottomOffset={bottomOffset}
         url={asset.url}
         logoUrl={asset.logoUrl}
