@@ -1,6 +1,6 @@
 @import "styles/_sizes";
 .users-list {
-  max-height: 500px;
+  max-height: 456px;
   overflow: auto;
   &__item {
     @include horizontal-paddings($popover-padding-medium);

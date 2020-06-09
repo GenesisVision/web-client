@@ -51,6 +51,9 @@ $image-full-button-size: 30px;
   min-height: $image-height-middle;
   max-height: $image-height-full;
   max-width: $image-width-full;
+  &__container {
+    background: $panel-background-color;
+  }
   &__button {
     padding: $image-full-button-size/4;
     cursor: pointer;
