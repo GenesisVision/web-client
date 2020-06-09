@@ -18,7 +18,7 @@ const _CreateAccountContainer: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   const { tab, setTab } = useTab<TAB>(TAB.BROKER);
-  const broker = brokers.find(
+  const broker = [...brokers, ...exchanges].find(
     ({ name }) => name.toLowerCase() === requestBrokerName.toLowerCase()
   );
   const [selectedBroker, setSelectedBroker] = useState<BrokerCardType>(
