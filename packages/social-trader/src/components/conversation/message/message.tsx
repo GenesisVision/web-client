@@ -34,6 +34,12 @@ const _Message: React.FC<IMessageProps> = ({
     .filter(({ type }) => type !== "Post");
   const repostTag = tags?.filter(({ type }) => type === "Post");
   const MessageItem = row ? RowItem : Row;
+  const hasLongWords =
+    text &&
+    !!text
+      .split(" ")
+      .map(word => word.length)
+      .filter(length => length > 20).length;
   return (
     <div>
       <div
@@ -53,7 +59,12 @@ const _Message: React.FC<IMessageProps> = ({
           </RowItem>
           <RowItem>{settingsBlock}</RowItem>
         </MessageItem>
-        <MessageItem onlyOffset className={styles["message__text"]}>
+        <MessageItem
+          onlyOffset
+          className={classNames(styles["message__text"], {
+            [styles["message__text--break-word"]]: hasLongWords
+          })}
+        >
           {text && (
             <Row>
               <div>
