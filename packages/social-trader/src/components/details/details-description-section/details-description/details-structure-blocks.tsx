@@ -1,7 +1,7 @@
 import ImageBase from "components/avatar/image-base";
-import { MutedText } from "components/muted-text/muted-text";
 import { Row } from "components/row/row";
 import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
+import { Text } from "components/text/text";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -40,7 +40,7 @@ const _DetailsStrategy: React.FC<{
     <>
       <h4>{descriptionTitle}</h4>
       <Row className={styles["details-description-text"]}>
-        <MutedText noWrap={false}>{description}</MutedText>
+        <Text muted>{description}</Text>
       </Row>
     </>
   );

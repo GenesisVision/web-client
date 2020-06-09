@@ -3,13 +3,13 @@ import { Center } from "components/center/center";
 import { CurrencyItem } from "components/currency-item/currency-item";
 import GVTextField from "components/gv-text-field";
 import { SearchIcon } from "components/icon/search-icon";
-import { MutedText } from "components/muted-text/muted-text";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
 } from "components/popover/popover";
 import { PopoverContent } from "components/popover/popover-content";
 import Regulator, { TRegulatorHandle } from "components/regulator/regulator";
+import { Text } from "components/text/text";
 import * as React from "react";
 import { useCallback, useEffect, useState } from "react";
 import { PlatformAssetFull } from "utils/types";
@@ -105,7 +105,7 @@ const AssetLine: React.FC<AssetLineProps> = React.memo(
         />
       </td>
       <td>
-        <MutedText>{asset.asset}</MutedText>
+        <Text muted>{asset.asset}</Text>
       </td>
       <td>
         <Regulator

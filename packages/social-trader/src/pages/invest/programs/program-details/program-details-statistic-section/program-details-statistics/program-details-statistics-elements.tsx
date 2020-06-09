@@ -2,11 +2,11 @@ import classNames from "classnames";
 import { ChartDefaultPeriod } from "components/chart/chart-period/chart-period.helpers";
 import DetailsStatisticsElements from "components/details/details-description-section/details-statistic-section/details-statistic/details-statistics-elements";
 import styles from "components/details/details-description-section/details-statistic-section/details-statistic/details-statistics.module.scss";
-import { MutedText } from "components/muted-text/muted-text";
 import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import ProgramPeriodLine from "components/program-period/program-period-line/program-period-line";
 import { Row } from "components/row/row";
 import StatisticItem from "components/statistic-item/statistic-item";
+import { Text } from "components/text/text";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import Tooltip from "components/tooltip/tooltip";
 import { TooltipContent } from "components/tooltip/tooltip-content";
@@ -96,9 +96,9 @@ const _ProgramDetailsStatisticsElements: React.FC<IProgramDetailsStatisticsEleme
                     styles["tooltip__label"]
                   )}
                 >
-                  <MutedText>
+                  <Text muted>
                     {t("program-details-page.statistics.period")}
-                  </MutedText>
+                  </Text>
                 </span>
               </Tooltip>
               <Row small onlyOffset>

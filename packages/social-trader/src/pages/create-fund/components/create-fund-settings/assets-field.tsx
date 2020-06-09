@@ -1,6 +1,6 @@
 import { GVHookFormField } from "components/gv-hook-form-field";
-import { MutedText } from "components/muted-text/muted-text";
 import { Row } from "components/row/row";
+import { Text } from "components/text/text";
 import { ReallocateFieldWrapper } from "pages/invest/funds/fund-settings/reallocation/components/reallocate-field-wrapper";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -12,9 +12,9 @@ const _AssetsField: React.FC<{ name: string }> = ({ name }) => {
   const assets = useSelector(fundAssetsSelector);
   return (
     <>
-      <MutedText small>
+      <Text muted size={"small"}>
         {t("create-fund-page.settings.fields.mandatory-assets")}
-      </MutedText>
+      </Text>
       <Row onlyOffset wide>
         <GVHookFormField
           name={name}

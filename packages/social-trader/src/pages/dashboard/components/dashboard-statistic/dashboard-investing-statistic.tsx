@@ -1,4 +1,4 @@
-import { MutedText } from "components/muted-text/muted-text";
+import { Text } from "components/text/text";
 import { useAccountCurrency } from "hooks/account-currency.hook";
 import { DashboardInvestingCounts } from "pages/dashboard/components/dashboard-statistic/dashboard-investing-counts";
 import { DashboardNewUserBlock } from "pages/dashboard/components/dashboard-statistic/dashboard-new-user.block";
@@ -58,11 +58,11 @@ const DashboardInvestingEmpty: React.FC = React.memo(() => {
         ),
         text: (
           <>
-            <MutedText>
+            <Text muted>
               {t(
                 "dashboard-page.statistic.get-started.investing.left-field.text"
               )}
-            </MutedText>
+            </Text>
             {t(
               "dashboard-page.statistic.get-started.investing.left-field.text-2"
             )}

@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { MutedText } from "components/muted-text/muted-text";
+import { Text } from "components/text/text";
 import * as React from "react";
 
 import { SORTING_DIRECTION } from "../helpers/sorting.helpers";
@@ -42,7 +42,7 @@ const _TableHeadCell: React.FC<ITableHeadCellProps> = ({
           {children}
         </span>
       ) : (
-        <MutedText>{children}</MutedText>
+        <Text muted>{children}</Text>
       )}
     </th>
   );

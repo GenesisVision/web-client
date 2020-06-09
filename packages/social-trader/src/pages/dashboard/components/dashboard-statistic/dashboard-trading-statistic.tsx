@@ -1,5 +1,5 @@
-import { MutedText } from "components/muted-text/muted-text";
 import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
+import { Text } from "components/text/text";
 import { useAccountCurrency } from "hooks/account-currency.hook";
 import { CREATE_ACCOUNT_PAGE_ROUTE } from "pages/create-account/create-account.constants";
 import { CREATE_FUND_PAGE_ROUTE } from "pages/create-fund/create-fund.constants";
@@ -58,11 +58,11 @@ const DashboardTradingEmpty: React.FC = React.memo(() => {
         text: (
           <>
             {t("dashboard-page.statistic.get-started.trading.left-field.text")}{" "}
-            <MutedText>
+            <Text muted>
               {t(
                 "dashboard-page.statistic.get-started.trading.left-field.text-2"
               )}
-            </MutedText>
+            </Text>
           </>
         )
       }}

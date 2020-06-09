@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { MutedText } from "components/muted-text/muted-text";
+import { Text } from "components/text/text";
 import * as React from "react";
 import { formatDate } from "utils/dates";
 
@@ -7,9 +7,11 @@ import styles from "./chart-tooltip.module.scss";
 
 const ChartTooltip: React.FC<Props> = ({ heading, body, date, className }) => (
   <div className={classNames(styles["gv-tooltip"], className)}>
-    <MutedText>{heading}</MutedText>
+    <Text muted>{heading}</Text>
     <div className={styles["gv-tooltip__body"]}>{body}</div>
-    <MutedText small>{formatDate(date)}</MutedText>
+    <Text muted size={"small"}>
+      {formatDate(date)}
+    </Text>
   </div>
 );
 

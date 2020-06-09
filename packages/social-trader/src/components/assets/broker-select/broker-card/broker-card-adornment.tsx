@@ -1,8 +1,8 @@
 import ConfirmPopup from "components/confirm-popup/confirm-popup";
 import HelpButton from "components/help-button/help-button";
-import { MutedText } from "components/muted-text/muted-text";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { Text } from "components/text/text";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -18,7 +18,7 @@ const _BrokerCardAdornment: React.FC<Props> = ({ cardState }) => {
   const [isOpenPopup, setIsOpen] = React.useState(false);
   return (
     <div className={styles["broker-card__adornment-text"]}>
-      <MutedText small>
+      <Text muted size={"small"}>
         <Row>
           <RowItem small>
             {t(`create-program-page.broker-card.${cardState}`)}
@@ -27,7 +27,7 @@ const _BrokerCardAdornment: React.FC<Props> = ({ cardState }) => {
             <HelpButton muted onClick={() => setIsOpen(true)} />
           )}
         </Row>
-      </MutedText>
+      </Text>
       <ConfirmPopup
         header={t("create-account-page.settings.kyc-required")}
         open={isOpenPopup}

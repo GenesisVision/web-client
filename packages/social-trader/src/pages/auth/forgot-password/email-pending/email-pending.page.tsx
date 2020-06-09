@@ -1,5 +1,5 @@
-import { MutedText } from "components/muted-text/muted-text";
 import { Row } from "components/row/row";
+import { Text } from "components/text/text";
 import useApiRequest from "hooks/api-request.hook";
 import { useEmailPendingState } from "pages/auth/auth.service";
 import * as React from "react";
@@ -23,19 +23,19 @@ const EmailPendingPage: React.FC = () => {
   return (
     <div className={styles["password-pending"]}>
       <Row small>
-        <MutedText noWrap={false}>
+        <Text muted>
           {t("auth.password-restore.email-pending.text-section-1")}
-        </MutedText>
+        </Text>
       </Row>
       <Row small>
-        <MutedText noWrap={false}>
+        <Text muted>
           {t("auth.password-restore.email-pending.text-section-2")}
-        </MutedText>
+        </Text>
       </Row>
       <Row small>
-        <MutedText noWrap={false}>
+        <Text muted>
           {t("auth.password-restore.email-pending.text-section-3")}
-        </MutedText>
+        </Text>
       </Row>
       <Row>
         <CaptchaContainer

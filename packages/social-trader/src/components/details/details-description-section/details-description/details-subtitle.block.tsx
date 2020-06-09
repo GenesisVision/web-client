@@ -1,5 +1,5 @@
 import Link, { ToType } from "components/link/link";
-import { MutedText } from "components/muted-text/muted-text";
+import { Text } from "components/text/text";
 import * as React from "react";
 
 const _DetailsSubtitle: React.FC<{
@@ -7,9 +7,9 @@ const _DetailsSubtitle: React.FC<{
   text: string;
 }> = ({ to, text }) => {
   return (
-    <MutedText bold>
+    <Text muted weight={"bold"}>
       <Link to={to}>{text}</Link>
-    </MutedText>
+    </Text>
   );
 };
 

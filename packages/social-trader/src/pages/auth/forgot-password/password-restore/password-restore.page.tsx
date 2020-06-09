@@ -1,5 +1,5 @@
-import { MutedText } from "components/muted-text/muted-text";
 import { Row } from "components/row/row";
+import { Text } from "components/text/text";
 import PasswordRestoreContainer from "pages/auth/forgot-password/password-restore/password-restore-container";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
@@ -9,9 +9,7 @@ const _PasswordRestorePage: React.FC<Props> = ({ code, userId }) => {
   return (
     <div>
       <Row>
-        <MutedText noWrap={false}>
-          {t("auth.password-restore.new-password.text")}
-        </MutedText>
+        <Text muted>{t("auth.password-restore.new-password.text")}</Text>
       </Row>
       <Row>
         <PasswordRestoreContainer code={code} userId={userId} />

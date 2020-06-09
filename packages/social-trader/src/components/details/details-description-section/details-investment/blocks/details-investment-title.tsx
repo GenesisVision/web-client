@@ -1,4 +1,4 @@
-import { MutedText } from "components/muted-text/muted-text";
+import { Text } from "components/text/text";
 import React from "react";
 
 import styles from "./details-investment-block.module.scss";
@@ -8,9 +8,9 @@ const _DetailsInvestmentHeading: React.FC<React.HTMLAttributes<
 >> = ({ children }) => {
   return (
     <div className={styles["details-investment-heading"]}>
-      <MutedText>
+      <Text muted>
         <h5>{children}</h5>
-      </MutedText>
+      </Text>
     </div>
   );
 };

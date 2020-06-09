@@ -3,9 +3,9 @@ import GVButton, { GV_BTN_SIZE } from "components/gv-button";
 import { CloseIcon } from "components/icon/close-icon";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
-import { MutedText } from "components/muted-text/muted-text";
 import { KYC_ROUTE } from "components/profile/profile.constants";
 import { RowItem } from "components/row-item/row-item";
+import { Text } from "components/text/text";
 import Crashable from "decorators/crashable";
 import withLoader from "decorators/with-loader";
 import {
@@ -270,7 +270,9 @@ const _LevelCalculatorPopup: React.FC<Props> = ({
       {!isKycConfirmed && (
         <>
           <div className={styles["level-calculator-popup__kyc-disclaimer"]}>
-            <MutedText small>{t("level-calculator.kyc-disclaimer")}</MutedText>
+            <Text muted size={"small"}>
+              {t("level-calculator.kyc-disclaimer")}
+            </Text>
           </div>
           <Link
             className={styles["level-calculator-popup__btn-verify"]}

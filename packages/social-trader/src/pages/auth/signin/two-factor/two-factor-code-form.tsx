@@ -3,10 +3,10 @@ import GVButton from "components/gv-button";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
-import { MutedText } from "components/muted-text/muted-text";
 import { Row } from "components/row/row";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
 import { SubmitButton } from "components/submit-button/submit-button";
+import { Text } from "components/text/text";
 import useIsOpen from "hooks/is-open.hook";
 import {
   CAPTCHA_STATUS,
@@ -84,7 +84,7 @@ const _TwoFactorCodeForm: React.FC<Props> = ({
     <HookForm form={form} onSubmit={handleSubmit}>
       <h3>{t("auth.login.two-factor.title")}</h3>
       <Row>
-        <MutedText noWrap={false}>{t("auth.login.two-factor.text")}</MutedText>
+        <Text muted>{t("auth.login.two-factor.text")}</Text>
       </Row>
       <Row xlarge>
         <GVHookFormField
@@ -99,9 +99,7 @@ const _TwoFactorCodeForm: React.FC<Props> = ({
         />
       </Row>
       <Row large>
-        <MutedText noWrap={false}>
-          {t("auth.login.two-factor.recovery-info")}
-        </MutedText>
+        <Text muted>{t("auth.login.two-factor.recovery-info")}</Text>
       </Row>
       <Row small>
         <GVButton noPadding variant="text">

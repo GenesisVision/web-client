@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { MutedText } from "components/muted-text/muted-text";
+import { Text } from "components/text/text";
 import React from "react";
 
 import styles from "./gv-input.module.scss";
@@ -39,7 +39,9 @@ const _GvInput: React.FC<Props> = ({
               focused || adornment || (value !== undefined && value !== "")
           })}
         >
-          <MutedText big>{label}</MutedText>
+          <Text muted size={"large"}>
+            {label}
+          </Text>
         </label>
       )}
       <div
