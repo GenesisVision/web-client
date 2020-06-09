@@ -23,7 +23,7 @@ export enum SEARCH_TABS {
 
 const _GlobalSearchResult: React.FC<Props> = ({ data }) => {
   const [t] = useTranslation();
-  const { tab, setTab } = useTab<SEARCH_TABS>(SEARCH_TABS.PROGRAMS);
+  const { tab, setTab } = useTab<SEARCH_TABS>(SEARCH_TABS.MANAGERS);
   return (
     <DefaultTableBlock>
       <DetailsBlockTitleBox>
