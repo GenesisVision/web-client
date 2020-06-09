@@ -7,12 +7,13 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 interface Props {
+  onChange: VoidFunction;
   id: string;
   count: number;
 }
 
 export const FollowersCountItem: React.FC<Props> = React.memo(
-  ({ id, count }) => {
+  ({ onChange, id, count }) => {
     const [t] = useTranslation();
     const [isOpen, setOpen, setClose] = useIsOpen();
     return (
@@ -22,14 +23,19 @@ export const FollowersCountItem: React.FC<Props> = React.memo(
           label={t("manager-page.followers")}
           value={count}
         />
-        <FollowersDialog id={id} onClose={setClose} open={isOpen} />
+        <FollowersDialog
+          onChange={onChange}
+          id={id}
+          onClose={setClose}
+          open={isOpen}
+        />
       </>
     );
   }
 );
 
 export const FollowingCountItem: React.FC<Props> = React.memo(
-  ({ id, count }) => {
+  ({ onChange, id, count }) => {
     const [t] = useTranslation();
     const [isOpen, setOpen, setClose] = useIsOpen();
     return (
@@ -39,7 +45,12 @@ export const FollowingCountItem: React.FC<Props> = React.memo(
           label={t("manager-page.following")}
           value={count}
         />
-        <FollowingDialog id={id} onClose={setClose} open={isOpen} />
+        <FollowingDialog
+          onChange={onChange}
+          id={id}
+          onClose={setClose}
+          open={isOpen}
+        />
       </>
     );
   }

@@ -9,6 +9,7 @@ import React, { useCallback } from "react";
 import styles from "./users-popups.module.scss";
 
 export interface ISimpleUserListProps {
+  onChange: VoidFunction;
   onClick?: VoidFunction;
 }
 
@@ -32,8 +33,13 @@ export const useUsersList = (request: () => Promise<UsersListItemType[]>) => {
   return { usersList, handleChange };
 };
 
-const _SimpleUserList: React.FC<Props> = ({ request, onClick, title }) => {
-  const { usersList, handleChange } = useUsersList(request);
+const _SimpleUserList: React.FC<Props> = ({
+  onChange,
+  request,
+  onClick,
+  title
+}) => {
+  const { usersList } = useUsersList(request);
   if (!usersList) return null;
   return (
     <>
@@ -41,11 +47,7 @@ const _SimpleUserList: React.FC<Props> = ({ request, onClick, title }) => {
       <PopoverContentCardBlock size={null} fixed={false}>
         <div className={styles["users-list"]}>
           {usersList.map(user => (
-            <UsersListItem
-              onChange={handleChange}
-              onClick={onClick}
-              user={user}
-            />
+            <UsersListItem onChange={onChange} onClick={onClick} user={user} />
           ))}
         </div>
       </PopoverContentCardBlock>
