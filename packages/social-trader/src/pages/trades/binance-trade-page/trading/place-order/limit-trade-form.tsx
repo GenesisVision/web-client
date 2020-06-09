@@ -150,11 +150,13 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
           name={TRADE_FORM_FIELDS.total}
         />
       </Row>
-      <PlaceOrderSubmitButton
-        isSuccessful={status === API_REQUEST_STATUS.SUCCESS}
-        side={side}
-        asset={baseAsset}
-      />
+      <Row>
+        <PlaceOrderSubmitButton
+          isSuccessful={status === API_REQUEST_STATUS.SUCCESS}
+          side={side}
+          asset={baseAsset}
+        />
+      </Row>
       <Row small>
         <RowItem wide>
           <TimeInForceField orderType={"LIMIT"} />

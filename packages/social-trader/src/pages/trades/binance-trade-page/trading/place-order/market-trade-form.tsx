@@ -150,11 +150,13 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
           />
         </Row>
       )}
-      <PlaceOrderSubmitButton
-        isSuccessful={status === API_REQUEST_STATUS.SUCCESS}
-        side={side}
-        asset={baseAsset}
-      />
+      <Row>
+        <PlaceOrderSubmitButton
+          isSuccessful={status === API_REQUEST_STATUS.SUCCESS}
+          side={side}
+          asset={baseAsset}
+        />
+      </Row>
       {isFutures && currentPositionMode === false && (
         <Row small>
           <RowItem>
