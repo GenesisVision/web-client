@@ -203,10 +203,10 @@ const _TransferForm: React.FC<ITransferFormProps> = ({
             {t("buttons.confirm")}
           </SubmitButton>
         </DialogButtons>
-        {(destinationType === "ExchangeAccount" ||
-          sourceType === "ExchangeAccount") && (
-          <DialogInfo>{t("transfer.info")}</DialogInfo>
-        )}
+        {destinationType !== "ExchangeAccount" &&
+          sourceType !== "ExchangeAccount" && (
+            <DialogInfo>{t("transfer.info")}</DialogInfo>
+          )}
       </DialogBottom>
     </HookForm>
   );
