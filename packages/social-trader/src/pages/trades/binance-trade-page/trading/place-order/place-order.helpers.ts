@@ -63,14 +63,16 @@ export interface IPlaceOrderFormValues extends IPlaceOrderDefaultFormValues {}
 
 export const RANGE_MARKS = ["0%", "25%", "50%", "75%", "100%"];
 
-export const getBalanceLoaderData = (): AssetBalance => ({
-  asset: "BTC",
+export const getBalanceLoaderData = (
+  asset: string = "BTC"
+) => (): AssetBalance => ({
+  asset,
   free: "0",
   locked: "0"
 });
 
-export const getBalancesLoaderData = () =>
-  tableLoaderCreator(getBalanceLoaderData, 1);
+export const getBalancesLoaderData = (asset: string) =>
+  tableLoaderCreator(getBalanceLoaderData(asset), 1);
 
 export const usePlaceOrderAutoFill = ({
   setValue,

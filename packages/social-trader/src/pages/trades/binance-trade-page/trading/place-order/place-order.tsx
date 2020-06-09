@@ -67,7 +67,9 @@ const _PlaceOrder: React.FC = () => {
   const balance = accountInfo
     ? getBalance(accountInfo.balances, walletAsset)
     : 0;
-  const balances = accountInfo ? accountInfo.balances : getBalancesLoaderData();
+  const balances = accountInfo
+    ? accountInfo.balances
+    : getBalancesLoaderData(quoteAsset);
 
   return (
     <TerminalDefaultBlock>
