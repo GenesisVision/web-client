@@ -81,7 +81,11 @@ const ConversationImagesFullContent: React.FC<{
   const isButtonsShow = isOver && images.length > 1;
   return (
     <EventListener target={"document"} onKeyUp={handleKeyPress}>
-      <div onMouseEnter={setOver} onMouseLeave={setLeave}>
+      <div
+        className={styles["conversation-image-full__container"]}
+        onMouseEnter={setOver}
+        onMouseLeave={setLeave}
+      >
         <ImageBase
           onClick={handleNext}
           quality={"High"}
