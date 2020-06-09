@@ -10,7 +10,11 @@ import {
   ProgramDetailsListItemItemsViewModel
 } from "gv-api-web";
 import { api } from "services/api-client/swagger-custom-client";
+import Token from "services/api-client/token";
 import { tableLoaderCreator } from "utils/helpers";
+
+export const getUserProfile = (id: string, token?: Token) =>
+  api.users(token).getUserProfile(id as string);
 
 export const getMockUsers = (): UsersListItemType[] =>
   tableLoaderCreator(getConversationUserLoaderData);
