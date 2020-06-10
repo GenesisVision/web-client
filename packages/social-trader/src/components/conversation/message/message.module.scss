@@ -24,4 +24,7 @@
       word-break: break-all;
     }
   }
+  &__images {
+    margin-bottom: -$padding-xsmall;
+  }
 }
