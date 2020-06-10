@@ -98,13 +98,7 @@ const _Message: React.FC<IMessageProps> = ({
           </HorizontalShadowList>
         </Row>
       )}
-      {!!repostTag?.length && (
-        <Row>
-          <HorizontalShadowList withScroll={false}>
-            {generateTagsComponents(repostTag)}
-          </HorizontalShadowList>
-        </Row>
-      )}
+      {!!repostTag?.length && <Row>{generateTagsComponents(repostTag)}</Row>}
     </div>
   );
 };
