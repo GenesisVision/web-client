@@ -52,7 +52,7 @@ export const DropZoneWrapper: React.FC<IDropZoneWrapperProps> = ({
     disabled,
     noClick: true,
     onDrop,
-    accept: "image/jpeg, image/png"
+    accept: "image/gif, image/jpeg, image/png"
   });
   return (
     <div
