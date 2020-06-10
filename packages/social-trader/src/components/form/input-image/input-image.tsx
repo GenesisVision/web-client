@@ -42,7 +42,7 @@ const _InputImage: React.FC<IInputImageProps> = ({
         className={styles["input-image__dropzone"]}
         name={name}
         onChange={onChange}
-        content={open => (
+        content={({ open }) => (
           <div className={styles["input-image__dropzone-content"]}>
             <div className={styles["input-image__image-container"]}>
               {image && !hasSizeError && (
