@@ -80,7 +80,7 @@ export const DropZoneWrapper: React.FC<IDropZoneWrapperProps> = ({
           {t("Some files will be rejected")}
         </div>
       )}
-      {content(open)}
+      {content({ open })}
     </div>
   );
 };
@@ -92,5 +92,5 @@ export interface IDropZoneWrapperProps {
   className?: string;
   name: string;
   onChange?: (event: IImageChangeEvent) => void;
-  content: (open: VoidFunction) => JSX.Element;
+  content: (options: { open: VoidFunction }) => JSX.Element;
 }

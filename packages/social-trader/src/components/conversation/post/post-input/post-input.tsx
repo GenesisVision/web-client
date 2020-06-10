@@ -120,7 +120,7 @@ const _PostInput: React.FC<Props> = ({
         disabled={disabledImages}
         className={styles["post-input__container"]}
         name={FORM_FIELDS.images}
-        content={open => (
+        content={({ open }) => (
           <>
             <Center className={styles["post-input__input-container"]}>
               <ConversationInput
