@@ -119,80 +119,86 @@ const _CommentInput: React.FC<Props> = ({ onSubmit, status, errorMessage }) => {
         disabled={disabledImages}
         className={styles["comment-input__drop-zone"]}
         name={FORM_FIELDS.images}
-        content={({ open }) => (
-          <Row className={styles["comment-input__block"]} center={false}>
-            <RowItem
-              className={styles["comment-input__input-container-row-item"]}
-            >
-              <div
-                className={classNames(
-                  styles["comment-input__input-and-panel-container"],
-                  {
-                    [styles[
-                      "comment-input__input-and-panel-container--open"
-                    ]]: isOpenPanel
-                  }
-                )}
+        content={({ open, onPaste }) => {
+          const handleOnPaste = (event?: any) => {
+            onPaste([...event.clipboardData?.files]);
+          };
+          return (
+            <Row className={styles["comment-input__block"]} center={false}>
+              <RowItem
+                className={styles["comment-input__input-container-row-item"]}
               >
-                <Center className={styles["comment-input__input-container"]}>
-                  <ConversationInput
-                    outerCaret={fixedCaretPosition}
-                    onChangeCaret={onChangeCaret}
-                    submitForm={inputSubmit()}
-                    name={FORM_FIELDS.text}
-                  />
-                  {!disabledImages && (
-                    <AttachImageCommentButton onClick={open} />
-                  )}
-                </Center>
-                {isOpenPanel && (
-                  <div>
-                    {isOpenSearchPanel && (
-                      <div className={styles["comment-input__search-panel"]}>
-                        <SearchPanel
-                          isSearchPending={isSearchPending}
-                          onClick={handleSearchItemSelect}
-                          searchResult={searchResult}
-                        />
-                      </div>
-                    )}
-                    {!!images?.length && (
-                      <Center
-                        wrap
-                        className={styles["comment-input__panel-container"]}
-                      >
-                        {images.map(image => (
-                          <RowItem key={image.id}>
-                            <PostInputImagePreview
-                              onRemove={handleRemoveImage}
-                              image={image}
-                            />
-                          </RowItem>
-                        ))}
-                      </Center>
-                    )}
-                  </div>
-                )}
-              </div>
-            </RowItem>
-            <RowItem>
-              <button
-                type="submit"
-                disabled={disabled}
-                className={classNames(styles["comment-input__send-button"], {
-                  [styles["comment-input__send-button--disable"]]: disabled
-                })}
-              >
-                <SendIcon
+                <div
                   className={classNames(
-                    styles["comment-input__send-button-icon"]
+                    styles["comment-input__input-and-panel-container"],
+                    {
+                      [styles[
+                        "comment-input__input-and-panel-container--open"
+                      ]]: isOpenPanel
+                    }
                   )}
+                >
+                  <Center className={styles["comment-input__input-container"]}>
+                    <ConversationInput
+                      onPaste={handleOnPaste}
+                      outerCaret={fixedCaretPosition}
+                      onChangeCaret={onChangeCaret}
+                      submitForm={inputSubmit()}
+                      name={FORM_FIELDS.text}
+                    />
+                    {!disabledImages && (
+                      <AttachImageCommentButton onClick={open} />
+                    )}
+                  </Center>
+                  {isOpenPanel && (
+                    <div>
+                      {isOpenSearchPanel && (
+                        <div className={styles["comment-input__search-panel"]}>
+                          <SearchPanel
+                            isSearchPending={isSearchPending}
+                            onClick={handleSearchItemSelect}
+                            searchResult={searchResult}
+                          />
+                        </div>
+                      )}
+                      {!!images?.length && (
+                        <Center
+                          wrap
+                          className={styles["comment-input__panel-container"]}
+                        >
+                          {images.map(image => (
+                            <RowItem key={image.id}>
+                              <PostInputImagePreview
+                                onRemove={handleRemoveImage}
+                                image={image}
+                              />
+                            </RowItem>
+                          ))}
+                        </Center>
+                      )}
+                    </div>
+                  )}
+                </div>
+              </RowItem>
+              <RowItem>
+                <button
+                  type="submit"
                   disabled={disabled}
-                />
-              </button>
-            </RowItem>
-          </Row>
-        )}
+                  className={classNames(styles["comment-input__send-button"], {
+                    [styles["comment-input__send-button--disable"]]: disabled
+                  })}
+                >
+                  <SendIcon
+                    className={classNames(
+                      styles["comment-input__send-button-icon"]
+                    )}
+                    disabled={disabled}
+                  />
+                </button>
+              </RowItem>
+            </Row>
+          );
+        }}
       />
       <CommentInputMessage disable={disabled || !!errorText}>
         <MutedText>Enter to send</MutedText>

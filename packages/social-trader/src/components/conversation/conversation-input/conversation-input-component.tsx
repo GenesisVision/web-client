@@ -7,6 +7,7 @@ import {
 import React, { useCallback } from "react";
 
 interface Props {
+  onPaste?: VoidFunction;
   bottomLine?: boolean;
   setFocused?: (value: boolean) => void;
   submitType?: CONVERSATION_SUBMIT_TYPE;
@@ -17,6 +18,7 @@ interface Props {
 }
 
 export const ConversationInputComponent: React.FC<Props> = ({
+  onPaste,
   bottomLine = false,
   setFocused,
   submitType = CONVERSATION_SUBMIT_TYPE.ENTER,
@@ -63,6 +65,7 @@ export const ConversationInputComponent: React.FC<Props> = ({
   return (
     <GVTextField
       {...props}
+      onPaste={onPaste}
       onFocus={handleOnFocus}
       onBlur={handleOnBlur}
       showError={false}

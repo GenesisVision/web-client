@@ -27,7 +27,7 @@ export const DropZoneWrapper: React.FC<IDropZoneWrapperProps> = ({
     setIndicatorValue(value === 100 ? 0 : value);
   }, []);
 
-  const onDrop = useCallback(
+  const uploadFiles = useCallback(
     (files: FileWithPreview[]) => {
       if (files.length === 0) return;
       const croppedFiles: IImageValue[] = [];
@@ -39,6 +39,20 @@ export const DropZoneWrapper: React.FC<IDropZoneWrapperProps> = ({
       });
     },
     [onChange, name]
+  );
+
+  const onDrop = useCallback(
+    (files: FileWithPreview[]) => {
+      uploadFiles(files);
+    },
+    [uploadFiles]
+  );
+
+  const onPaste = useCallback(
+    (files: FileWithPreview[]) => {
+      uploadFiles(files);
+    },
+    [uploadFiles]
   );
 
   const {
@@ -80,7 +94,7 @@ export const DropZoneWrapper: React.FC<IDropZoneWrapperProps> = ({
           {t("Some files will be rejected")}
         </div>
       )}
-      {content({ open })}
+      {content({ open, onPaste })}
     </div>
   );
 };
@@ -92,5 +106,8 @@ export interface IDropZoneWrapperProps {
   className?: string;
   name: string;
   onChange?: (event: IImageChangeEvent) => void;
-  content: (options: { open: VoidFunction }) => JSX.Element;
+  content: (options: {
+    open: VoidFunction;
+    onPaste: (e?: any) => void;
+  }) => JSX.Element;
 }

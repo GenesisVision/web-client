@@ -120,63 +120,71 @@ const _PostInput: React.FC<Props> = ({
         disabled={disabledImages}
         className={styles["post-input__container"]}
         name={FORM_FIELDS.images}
-        content={({ open }) => (
-          <>
-            <Center className={styles["post-input__input-container"]}>
-              <ConversationInput
-                disabled={isSubmitted}
-                outerCaret={fixedCaretPosition}
-                onChangeCaret={onChangeCaret}
-                setFocused={setFocused}
-                submitForm={inputSubmit()}
-                name={FORM_FIELDS.text}
-                placeholder={placeholder}
-              />
-              {!disabledImages && <AttachImagePostButton onClick={open} />}
-            </Center>
-            {isOpenEditPanel && (
-              <div>
-                {isOpenSearchPanel && (
-                  <div className={styles["post-input__search-panel"]}>
-                    <SearchPanel
-                      isSearchPending={isSearchPending}
-                      onClick={handleSearchItemSelect}
-                      searchResult={searchResult}
-                    />
-                  </div>
-                )}
-                <Center className={styles["post-input__edit-panel-container"]}>
-                  <RowItem className={styles["post-input__add-buttons"]}>
-                    <Center wrap>
-                      {images &&
-                        images.map(image => (
-                          <RowItem key={image.id} bottomOffset>
-                            <PostInputImagePreview
-                              onRemove={handleRemoveImage}
-                              image={image}
-                            />
-                          </RowItem>
-                        ))}
-                    </Center>
-                  </RowItem>
-                  <RowItem className={styles["post-input__errors"]}>
-                    {errorText && <ErrorMessage error={errorText} />}
-                  </RowItem>
-                  <RowItem className={styles["post-input__send-buttons"]}>
-                    <SubmitButton
-                      isSuccessful={isSuccessful}
-                      checkDirty={false}
-                      checkValid={false}
-                      disabled={disabled}
-                    >
-                      Send
-                    </SubmitButton>
-                  </RowItem>
-                </Center>
-              </div>
-            )}
-          </>
-        )}
+        content={({ open, onPaste }) => {
+          const handleOnPaste = (event?: any) => {
+            onPaste([...event.clipboardData?.files]);
+          };
+          return (
+            <>
+              <Center className={styles["post-input__input-container"]}>
+                <ConversationInput
+                  onPaste={handleOnPaste}
+                  disabled={isSubmitted}
+                  outerCaret={fixedCaretPosition}
+                  onChangeCaret={onChangeCaret}
+                  setFocused={setFocused}
+                  submitForm={inputSubmit()}
+                  name={FORM_FIELDS.text}
+                  placeholder={placeholder}
+                />
+                {!disabledImages && <AttachImagePostButton onClick={open} />}
+              </Center>
+              {isOpenEditPanel && (
+                <div>
+                  {isOpenSearchPanel && (
+                    <div className={styles["post-input__search-panel"]}>
+                      <SearchPanel
+                        isSearchPending={isSearchPending}
+                        onClick={handleSearchItemSelect}
+                        searchResult={searchResult}
+                      />
+                    </div>
+                  )}
+                  <Center
+                    className={styles["post-input__edit-panel-container"]}
+                  >
+                    <RowItem className={styles["post-input__add-buttons"]}>
+                      <Center wrap>
+                        {images &&
+                          images.map(image => (
+                            <RowItem key={image.id} bottomOffset>
+                              <PostInputImagePreview
+                                onRemove={handleRemoveImage}
+                                image={image}
+                              />
+                            </RowItem>
+                          ))}
+                      </Center>
+                    </RowItem>
+                    <RowItem className={styles["post-input__errors"]}>
+                      {errorText && <ErrorMessage error={errorText} />}
+                    </RowItem>
+                    <RowItem className={styles["post-input__send-buttons"]}>
+                      <SubmitButton
+                        isSuccessful={isSuccessful}
+                        checkDirty={false}
+                        checkValid={false}
+                        disabled={disabled}
+                      >
+                        Send
+                      </SubmitButton>
+                    </RowItem>
+                  </Center>
+                </div>
+              )}
+            </>
+          );
+        }}
       />
     </HookForm>
   );

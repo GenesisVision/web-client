@@ -83,6 +83,7 @@ interface Props extends IPropsGvInput {
 }
 
 export interface IPropsGvInput {
+  onPaste?: VoidFunction;
   onFocus?: VoidFunction;
   showError?: boolean;
   ref?: any;
