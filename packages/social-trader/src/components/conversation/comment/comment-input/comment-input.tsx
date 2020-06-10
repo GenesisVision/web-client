@@ -124,7 +124,7 @@ const _CommentInput: React.FC<Props> = ({ onSubmit, status, errorMessage }) => {
             onPaste([...event.clipboardData?.files]);
           };
           return (
-            <Row className={styles["comment-input__block"]} center={false}>
+            <div className={styles["comment-input__block"]}>
               <RowItem
                 className={styles["comment-input__input-container-row-item"]}
               >
@@ -196,7 +196,7 @@ const _CommentInput: React.FC<Props> = ({ onSubmit, status, errorMessage }) => {
                   />
                 </button>
               </RowItem>
-            </Row>
+            </div>
           );
         }}
       />
