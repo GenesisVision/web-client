@@ -119,7 +119,7 @@ const _CommentInput: React.FC<Props> = ({ onSubmit, status, errorMessage }) => {
         disabled={disabledImages}
         className={styles["comment-input__drop-zone"]}
         name={FORM_FIELDS.images}
-        content={open => (
+        content={({ open }) => (
           <Row className={styles["comment-input__block"]} center={false}>
             <RowItem
               className={styles["comment-input__input-container-row-item"]}
