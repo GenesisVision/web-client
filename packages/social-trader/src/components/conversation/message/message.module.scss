@@ -25,6 +25,6 @@
     }
   }
   &__images {
-    margin-bottom: -$padding-xsmall;
+    @include adaptive-margin(bottom, -$padding-xsmall);
   }
 }
