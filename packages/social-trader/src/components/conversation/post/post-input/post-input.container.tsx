@@ -5,7 +5,11 @@ import useApiRequest from "hooks/api-request.hook";
 import React from "react";
 import { postponeCallback } from "utils/hook-form.helpers";
 
-export const PostInputContainer: React.FC<Props> = ({ userId, onSuccess }) => {
+export const PostInputContainer: React.FC<Props> = ({
+  placeholder,
+  userId,
+  onSuccess
+}) => {
   const successMiddleware = postponeCallback(onSuccess);
   const { sendRequest, status, errorMessage } = useApiRequest({
     middleware: [sendPostEvent, successMiddleware],
@@ -14,6 +18,7 @@ export const PostInputContainer: React.FC<Props> = ({ userId, onSuccess }) => {
   });
   return (
     <PostInput
+      placeholder={placeholder}
       errorMessage={errorMessage}
       onSubmit={sendRequest}
       status={status}
@@ -22,6 +27,7 @@ export const PostInputContainer: React.FC<Props> = ({ userId, onSuccess }) => {
 };
 
 interface Props {
+  placeholder?: string;
   userId?: string;
   onSuccess: VoidFunction;
 }

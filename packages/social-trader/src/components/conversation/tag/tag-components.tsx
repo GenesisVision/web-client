@@ -25,10 +25,10 @@ import { Row } from "components/row/row";
 import Crashable from "decorators/crashable";
 import {
   ChangeState,
-  PlatformAsset,
   Post as PostType,
   PostAssetDetailsWithPrices,
   PostEvent,
+  PostPlatformAssetDetailsWithPrices,
   ProfilePublic,
   SocialPostTagType
 } from "gv-api-web";
@@ -42,7 +42,7 @@ export interface IEventTagProps {
 }
 
 export interface IPlatformAssetTagProps {
-  platformAssetDetails: PlatformAsset;
+  platformAssetDetails: PostPlatformAssetDetailsWithPrices;
 }
 
 export interface IUserTagProps {
@@ -79,11 +79,48 @@ const getAssetTagTextColor = (
 };
 
 const _PlatformAssetTagComponent: React.FC<IPlatformAssetTagProps> = ({
-  platformAssetDetails: { name, logoUrl, url }
+  platformAssetDetails: {
+    change24Percent,
+    changeState,
+    price,
+    name,
+    logoUrl,
+    url
+  }
 }) => {
+  const color = getAssetTagTextColor(changeState);
+  const hasPercent = change24Percent !== null;
+  const hasData = price !== null && hasPercent;
   return (
     <TagBlock>
-      <CurrencyItem name={name} url={url} logo={logoUrl} />
+      <Row className={styles["tag__title-row"]}>
+        <CurrencyItem small name={name} url={url} logo={logoUrl} />
+      </Row>
+      {hasData && (
+        <Row small className={styles["asset-tag"]}>
+          <RowItem wide>$ {price} </RowItem>
+          {hasPercent && (
+            <RowItem>
+              <ColoredText color={color}>
+                <Row>
+                  <RowItem xsmall>{change24Percent}% </RowItem>
+                  {changeState !== "NotChanged" && (
+                    <RowItem className={styles["asset-tag__arrow"]}>
+                      <div>
+                        {changeState === "Increased" ? (
+                          <>&uarr;</>
+                        ) : (
+                          <>&uarr;</>
+                        )}
+                      </div>
+                    </RowItem>
+                  )}
+                </Row>
+              </ColoredText>
+            </RowItem>
+          )}
+        </Row>
+      )}
     </TagBlock>
   );
 };
@@ -210,20 +247,22 @@ const _AssetTagCard: React.FC<IAssetTagProps & { url: ToType | string }> = ({
       />
       <Row small className={styles["asset-tag"]}>
         <RowItem wide>$ {price} </RowItem>
-        <RowItem>
-          <ColoredText color={color}>
-            <Row>
-              <RowItem xsmall>{change24Percent}% </RowItem>
-              {changeState !== "NotChanged" && (
-                <RowItem className={styles["asset-tag__arrow"]}>
-                  <div>
-                    {changeState === "Increased" ? <>&uarr;</> : <>&uarr;</>}
-                  </div>
-                </RowItem>
-              )}
-            </Row>
-          </ColoredText>
-        </RowItem>
+        {change24Percent !== null && (
+          <RowItem>
+            <ColoredText color={color}>
+              <Row>
+                <RowItem xsmall>{change24Percent}% </RowItem>
+                {changeState !== "NotChanged" && (
+                  <RowItem className={styles["asset-tag__arrow"]}>
+                    <div>
+                      {changeState === "Increased" ? <>&uarr;</> : <>&uarr;</>}
+                    </div>
+                  </RowItem>
+                )}
+              </Row>
+            </ColoredText>
+          </RowItem>
+        )}
       </Row>
     </TagBlock>
   );
