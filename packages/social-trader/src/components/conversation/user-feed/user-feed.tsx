@@ -1,6 +1,7 @@
 import { sendLoadFeedEvent } from "components/conversation/conversation.ga";
 import { getPosts } from "components/conversation/conversation.service";
 import { PostListWithInput } from "components/conversation/post-list/post-list-with-input";
+import { useIsOwnPage } from "components/manager/manager.page.helpers";
 import React, { useCallback, useEffect } from "react";
 
 interface Props {
@@ -9,6 +10,7 @@ interface Props {
 }
 
 const _UserFeed: React.FC<Props> = ({ canWritePost, id }) => {
+  const isOwnPage = useIsOwnPage(id);
   useEffect(() => {
     sendLoadFeedEvent();
   }, []);
@@ -20,6 +22,7 @@ const _UserFeed: React.FC<Props> = ({ canWritePost, id }) => {
   );
   return (
     <PostListWithInput
+      inputPlaceholder={!isOwnPage ? "Write something..." : undefined}
       key={id}
       id={id}
       fetchMethod={fetchMethod}
