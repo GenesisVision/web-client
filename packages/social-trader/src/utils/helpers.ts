@@ -1,6 +1,12 @@
 import { NumberFormatValues } from "react-number-format";
 import { Nullable } from "utils/types";
 
+export const getLongWordsCount = (text: string): number =>
+  text
+    .split(" ")
+    .map(word => word.length)
+    .filter(length => length > 20).length;
+
 export const modulo = (dividend: number, divider: number): number => {
   return dividend - Math.floor(dividend / divider) * divider;
 };
