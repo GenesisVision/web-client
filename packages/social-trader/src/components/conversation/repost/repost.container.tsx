@@ -14,7 +14,6 @@ const _RePostContainer: React.FC<IRePostContainerProps> = ({ onApply, id }) => {
   const onApplyMiddleware = postponeCallback(onApply);
   const { sendRequest, errorMessage, status } = useApiRequest({
     request: rePost,
-    successMessage: t("Success"),
     middleware: [sendShareEvent, onApplyMiddleware]
   });
   const handleSubmit = useCallback(values => {

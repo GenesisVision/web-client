@@ -24,6 +24,7 @@ $tablet-side-block-width: calc(100% - #{$tablet-center-width});
   }
 
   &__side-block {
+    position: relative;
     @include media-breakpoint-landscape-tablet() {
       width: $tablet-side-block-width;
     }
@@ -57,5 +58,25 @@ $tablet-side-block-width: calc(100% - #{$tablet-center-width});
     &--search {
       width: 100%;
     }
+  }
+}
+
+.upper-block {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  background: rgba(255, 255, 255, 0.005);
+  @include transition(opacity);
+  &:hover {
+    opacity: 1;
+    cursor: pointer;
+  }
+  &__arrow {
+    font-size: 40px;
+    font-weight: bolder;
   }
 }

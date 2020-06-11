@@ -8,6 +8,7 @@ import { SocialPageFeedBlock } from "pages/social/social/social-page-feed/social
 import { SocialPageGainersBlock } from "pages/social/social/social-page-gainers/social-page-gainers.block";
 import { SocialPageTopicsBlock } from "pages/social/social/social-page-topics/social-page-topics.block";
 import { SocialPageTradersBlock } from "pages/social/social/social-page-traders/social-page-traders.block";
+import { UpperBlock } from "pages/social/social/upper-block";
 import React from "react";
 
 import styles from "./social-page.module.scss";
@@ -40,6 +41,7 @@ export const SocialPageContainer = () => {
                 <SocialPageDownloadsBlock />
               </Row>
             </ResponsiveContainer>
+            <UpperBlock />
           </RowItem>
         </ResponsiveContainer>
         <RowItem className={styles["social-page__feed-container"]}>
