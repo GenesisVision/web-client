@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
 import { DefaultBlock } from "components/default.block/default.block";
 import { FollowUserBlock } from "components/manager/components/follow-user-block";
@@ -14,6 +15,9 @@ import {
   isSocialBetaTester
 } from "reducers/header-reducer";
 import { localizedDate } from "utils/dates";
+import { getLongWordsCount } from "utils/helpers";
+
+import styles from "./manager-info.module.scss";
 
 const _ManagerInfo: React.FC<Props> = ({ profile }) => {
   const { username, about, logoUrl, regDate, socialLinks } = profile;
@@ -23,6 +27,8 @@ const _ManagerInfo: React.FC<Props> = ({ profile }) => {
   const memberSince = `${t("manager-page.member-since")} ${localizedDate(
     regDate
   )}`;
+
+  const hasLongWords = about && !!getLongWordsCount(about);
   return (
     <>
       <DefaultBlock solid size={SIZES.LARGE}>
@@ -58,7 +64,13 @@ const _ManagerInfo: React.FC<Props> = ({ profile }) => {
               <Row>
                 <h3>{t("manager-page.about")}</h3>
               </Row>
-              <Row>{about}</Row>
+              <Row
+                className={classNames(styles["manager-info__about"], {
+                  [styles["manager-info__about--break-word"]]: hasLongWords
+                })}
+              >
+                {about}
+              </Row>
             </Row>
           )}
         </DefaultBlock>
