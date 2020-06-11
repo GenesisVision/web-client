@@ -90,7 +90,7 @@ const _PlatformAssetTagComponent: React.FC<IPlatformAssetTagProps> = ({
 }) => {
   const color = getAssetTagTextColor(changeState);
   const hasPercent = change24Percent !== null;
-  const hasData = price !== null && hasPercent;
+  const hasData = price !== null || hasPercent;
   return (
     <TagBlock>
       <Row className={styles["tag__title-row"]}>
@@ -110,7 +110,7 @@ const _PlatformAssetTagComponent: React.FC<IPlatformAssetTagProps> = ({
                         {changeState === "Increased" ? (
                           <>&uarr;</>
                         ) : (
-                          <>&uarr;</>
+                          <>&darr;</>
                         )}
                       </div>
                     </RowItem>
