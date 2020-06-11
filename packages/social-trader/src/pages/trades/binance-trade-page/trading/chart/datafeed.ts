@@ -68,7 +68,7 @@ const configurationData = {
 type Params = {
   getServerTime: () => Promise<{ serverTime: number }>;
   symbols: Symbol[];
-  getKlines: (params: KlineParams) => Promise<number[][]>;
+  getKlines: (params: KlineParams) => Promise<Bar[]>;
   klineSocket: KlineSocketType;
 };
 
@@ -170,18 +170,13 @@ export default ({
     };
 
     try {
-      const data = await getKlines(urlParameters);
+      const bars = await getKlines(urlParameters);
 
-      const bars: Bar[] = data.map(bar => ({
-        time: bar[0],
-        open: bar[1],
-        high: bar[2],
-        low: bar[3],
-        close: bar[4],
-        volume: parseFloat(String(bar[5]))
-      }));
-
-      onHistoryCallback(bars, { noData: false });
+      if (bars.length > 0) {
+        onHistoryCallback(bars, { noData: false });
+      } else {
+        onHistoryCallback(bars, { noData: true });
+      }
     } catch (error) {
       onErrorCallback(error);
     }

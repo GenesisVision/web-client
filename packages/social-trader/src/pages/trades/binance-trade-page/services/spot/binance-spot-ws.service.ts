@@ -17,7 +17,7 @@ import {
   tickerTransform,
   tradeTransform,
   transformExecutionReport,
-  transformKline,
+  transformKlineWs,
   transformOutboundAccountInfo
 } from "./binance-spot-ws.helpers";
 
@@ -90,7 +90,7 @@ export const klineSocket = (
   const socketName = `${symbol}@kline_${interval}`;
   const url = `${BINANCE_WS_API_URL}/${BINANCE_WS_API_TYPE.WS}/${socketName}`;
   return connectSocketMethod(socketName, url).pipe(
-    map<IBinanceKline, IKline>(transformKline)
+    map<IBinanceKline, IKline>(transformKlineWs)
   );
 };
 

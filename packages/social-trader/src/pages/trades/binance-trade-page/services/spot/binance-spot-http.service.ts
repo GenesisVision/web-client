@@ -1,3 +1,5 @@
+import { Bar } from "pages/trades/binance-trade-page/trading/chart/charting_library/datafeed-api";
+import { transformKlineWrapper } from "pages/trades/binance-trade-page/trading/terminal.helpers";
 import {
   Account,
   CancelOrderResult,
@@ -32,13 +34,13 @@ export const getExchangeInfo = (): Promise<ExchangeInfo> =>
     value => value
   );
 
-export const getKlines = (params: KlineParams): Promise<number[][]> => {
+export const getKlines = (params: KlineParams): Promise<Bar[]> => {
   return requestService.get(
     {
       url: `${API_ROUTE}/klines`,
       params
     },
-    value => value
+    transformKlineWrapper
   );
 };
 

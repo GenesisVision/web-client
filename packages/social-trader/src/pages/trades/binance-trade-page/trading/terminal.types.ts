@@ -2,6 +2,7 @@ import {
   FuturesAccountEventType,
   FuturesAsset
 } from "pages/trades/binance-trade-page/services/futures/binance-futures.types";
+import { Bar } from "pages/trades/binance-trade-page/trading/chart/charting_library/datafeed-api";
 import { Observable } from "rxjs";
 import { ConnectSocketMethodType } from "services/websocket.service";
 import { AnyObjectType } from "utils/types";
@@ -116,21 +117,21 @@ export interface IKline {
 
 export interface IBinanceKline {
   e: string; // Event type
-  E: number; // Event time
+  E: string; // Event time
   s: string; // Symbol
   k: {
-    t: number; // Kline start time
-    T: number; // Kline close time
+    t: string; // Kline start time
+    T: string; // Kline close time
     s: string; // Symbol
     i: string; // Interva\
-    f: number; // First trade ID
-    L: number; // Last trade ID
+    f: string; // First trade ID
+    L: string; // Last trade ID
     o: string; // Open price
     c: string; // Close price
     h: string; // High price
     l: string; // Low price
     v: string; // Base asset volume
-    n: number; // Number of trades
+    n: string; // Number of trades
     x: boolean; // Is this kline closed?
     q: string; // Quote asset volume
     V: string; // Taker buy base asset volume
@@ -158,7 +159,7 @@ export interface ITerminalMethods {
     dualSidePosition: PositionModeType;
     authData: TerminalAuthDataType;
   }) => Promise<HttpResponse>;
-  getKlines: (params: KlineParams) => Promise<number[][]>;
+  getKlines: (params: KlineParams) => Promise<Bar[]>;
   getPositionInformation?: (options: {
     authData: TerminalAuthDataType;
   }) => Observable<FuturesPositionInformation[]>;
