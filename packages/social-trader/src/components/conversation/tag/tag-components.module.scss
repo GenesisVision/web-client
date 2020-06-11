@@ -3,6 +3,10 @@
 
 .tag {
   &__title-row {
+    & div {
+      font-size: $font-size-small;
+      color: $label-color;
+    }
     height: 24px; // temp
   }
 }
