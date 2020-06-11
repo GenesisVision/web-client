@@ -54,10 +54,11 @@ export const depthTransform = ({ pu, e, E, s, U, u, b, a }: any): Depth => {
 
 export const transformKline = (data: IBinanceKline): IKline => ({
   time: data.k.t,
+  close: parseFloat(data.k.c),
   open: parseFloat(data.k.o),
   high: parseFloat(data.k.h),
   low: parseFloat(data.k.l),
-  close: parseFloat(data.k.c)
+  volume: parseFloat(data.k.v)
 });
 
 export const transformOutboundAccountInfo = (m: any): OutboundAccountInfo => ({

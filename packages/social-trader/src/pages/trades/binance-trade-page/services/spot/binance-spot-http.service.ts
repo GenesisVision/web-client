@@ -42,6 +42,15 @@ export const getKlines = (params: KlineParams): Promise<number[][]> => {
   );
 };
 
+export const getServerTime = (): Promise<{ serverTime: number }> => {
+  return requestService.get(
+    {
+      url: `${API_ROUTE}/time`
+    },
+    value => value
+  );
+};
+
 export const pingBinanceApi = (): Observable<any[]> =>
   requestService.get({
     url: `${API_ROUTE}/ping`

@@ -111,6 +111,7 @@ export interface IKline {
   high: number;
   low: number;
   close: number;
+  volume: number;
 }
 
 export interface IBinanceKline {
@@ -140,6 +141,7 @@ export interface IBinanceKline {
 
 export interface ITerminalMethods {
   getMarkPrice?: (options: { symbol: string }) => Observable<MarkPrice>;
+  getServerTime: () => Promise<{ serverTime: number }>;
   getBalancesForTransfer?: (options: {
     authData: TerminalAuthDataType;
   }) => Promise<BalancesForTransfer>;

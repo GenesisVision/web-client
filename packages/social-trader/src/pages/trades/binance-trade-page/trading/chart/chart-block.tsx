@@ -12,7 +12,7 @@ import React from "react";
 import { useSockets } from "services/websocket.service";
 
 import styles from "./chart.module.scss";
-import TradingView from "./charting_library/charting_library.min";
+import TradingView, { Timezone } from "./charting_library/charting_library.min";
 import Datafeed from "./datafeed";
 
 export const ChartBlock: React.FC = () => {
@@ -29,6 +29,11 @@ export const ChartBlock: React.FC = () => {
   React.useEffect(() => {
     import("./charting_library/charting_library.min").then(TradingView => {
       if (!exchangeInfo) return;
+      let timezone = "Asia/Shanghai" as Timezone;
+      try {
+        timezone = Intl.DateTimeFormat().resolvedOptions().timeZone as Timezone;
+      } catch (e) {}
+
       const widget = new TradingView.widget({
         custom_css_url: "/static/charting_library/style.css",
         symbol: `${symbol.baseAsset}${symbol.quoteAsset}`,
@@ -36,10 +41,11 @@ export const ChartBlock: React.FC = () => {
         autosize: true,
         container_id: "tv_chart_container",
         theme: "Dark",
+        timezone,
         toolbar_bg: $backgroundColor,
         datafeed: Datafeed({
-          servertime: exchangeInfo?.serverTime,
           symbols: exchangeInfo?.symbols || [],
+          getServerTime: methods.getServerTime,
           getKlines: methods.getKlines,
           klineSocket: methods.klineSocket(connectSocket)
         }),
@@ -98,6 +104,7 @@ export const ChartBlock: React.FC = () => {
         interval,
         emptyCallback
       );
+      widget.chart().createStudy("Volume", false, false, [99]);
     });
   }, [widget, symbol.quoteAsset, symbol.baseAsset, emptyCallback]);
 

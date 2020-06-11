@@ -54,6 +54,15 @@ export const pingBinanceApi = (): Observable<any[]> =>
     url: `${API_ROUTE}/ping`
   });
 
+export const getServerTime = (): Promise<{ serverTime: number }> => {
+  return requestService.get(
+    {
+      url: `${API_ROUTE}/time`
+    },
+    value => value
+  );
+};
+
 export const getMarkPrice = (params: {
   symbol: string;
 }): Observable<MarkPrice> =>

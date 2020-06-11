@@ -17,6 +17,7 @@ import {
   getOpenOrders,
   getPositionInformation,
   getPositionMode,
+  getServerTime,
   getTickers,
   getTrades,
   getUserStreamKey,
@@ -35,6 +36,7 @@ import {
 export const BinanceFuturesTerminalMethods: ITerminalMethods = {
   markPriceSocket,
   getMarkPrice,
+  getServerTime,
   getBalancesForTransfer,
   newFutureAccountTransfer,
   changePositionMode,
