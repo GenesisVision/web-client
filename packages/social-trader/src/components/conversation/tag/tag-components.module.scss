@@ -1,6 +1,12 @@
 @import "~shared/styles/_colors";
 @import "~shared/styles/_sizes";
 
+.tag {
+  &__title-row {
+    height: 24px; // temp
+  }
+}
+
 .event-tag {
   margin-bottom: -$padding-xsmall;
 }
