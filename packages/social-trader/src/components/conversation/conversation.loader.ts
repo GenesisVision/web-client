@@ -63,13 +63,16 @@ const getTagLoaderData = (): PostTag => ({
   type: "Program",
   userDetails: managerLoaderData,
   platformAssetDetails: {
+    change24Percent: 0,
+    changeState: "NotChanged",
+    price: 0,
+    priceCurrency: "GVT",
     id: "string",
     name: "string",
     asset: "string",
     description: "string",
     color: "string",
     logoUrl: "",
-    mandatoryFundPercent: 0,
     url: "string"
   }
 });
