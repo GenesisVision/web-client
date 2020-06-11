@@ -16,6 +16,7 @@ import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { PostTag } from "gv-api-web";
 import React from "react";
+import { getLongWordsCount } from "utils/helpers";
 
 import styles from "./message.module.scss";
 
@@ -34,12 +35,7 @@ const _Message: React.FC<IMessageProps> = ({
     .filter(({ type }) => type !== "Post");
   const repostTag = tags?.filter(({ type }) => type === "Post");
   const MessageItem = row ? RowItem : Row;
-  const hasLongWords =
-    text &&
-    !!text
-      .split(" ")
-      .map(word => word.length)
-      .filter(length => length > 20).length;
+  const hasLongWords = text && !!getLongWordsCount(text);
   return (
     <div>
       <div
