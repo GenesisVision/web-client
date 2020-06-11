@@ -9,7 +9,7 @@ import { formatCurrencyValue } from "utils/formatter";
 interface Props {
   title: string;
   price: number;
-  change: number;
+  change?: number;
 }
 
 const _SocialPageGainersItem: React.FC<Props> = ({ title, price, change }) => {
@@ -32,13 +32,15 @@ const _SocialPageGainersItem: React.FC<Props> = ({ title, price, change }) => {
         <RowItem>
           <b>{formatCurrencyValue(price, title)}</b>
         </RowItem>
-        <RowItem>
-          <b>
-            <Profitability prefix={PROFITABILITY_PREFIX.SIGN} value={change}>
-              {change} %
-            </Profitability>
-          </b>
-        </RowItem>
+        {change !== null && change !== undefined && (
+          <RowItem>
+            <b>
+              <Profitability prefix={PROFITABILITY_PREFIX.SIGN} value={change}>
+                {Math.abs(change)} %
+              </Profitability>
+            </b>
+          </RowItem>
+        )}
       </Row>
     </div>
   );
