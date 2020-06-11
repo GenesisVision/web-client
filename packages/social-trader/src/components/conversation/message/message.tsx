@@ -43,7 +43,11 @@ const _Message: React.FC<IMessageProps> = ({
           [styles["message--row"]]: row
         })}
       >
-        <MessageItem center={false} className={styles["message__user"]}>
+        <MessageItem
+          bottomOffset
+          center={false}
+          className={styles["message__user"]}
+        >
           <RowItem wide>
             <ConversationUser
               postId={postId}
@@ -56,6 +60,7 @@ const _Message: React.FC<IMessageProps> = ({
           <RowItem>{settingsBlock}</RowItem>
         </MessageItem>
         <MessageItem
+          bottomOffset
           onlyOffset
           className={classNames(styles["message__text"], {
             [styles["message__text--break-word"]]: hasLongWords

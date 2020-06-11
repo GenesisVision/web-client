@@ -8,6 +8,7 @@
   }
   &--row {
     display: flex;
+    @include adaptive-margin(bottom, -$padding-xsmall);
   }
   &__tags {
   }
