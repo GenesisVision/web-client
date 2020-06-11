@@ -11,7 +11,7 @@ import { PlaceOrderSubmitButton } from "pages/trades/binance-trade-page/trading/
 import { TerminalInfoContext } from "pages/trades/binance-trade-page/trading/terminal-info.context";
 import { TerminalPlaceOrderContext } from "pages/trades/binance-trade-page/trading/terminal-place-order.context";
 import {
-  Account,
+  AssetBalance,
   ExchangeInfo,
   OrderSide
 } from "pages/trades/binance-trade-page/trading/terminal.types";
@@ -38,9 +38,9 @@ export interface IMarketTradeFormProps {
 }
 
 const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
-  accountInfo: Account;
+  balances: AssetBalance[];
   exchangeInfo: ExchangeInfo;
-}> = ({ status, accountInfo, exchangeInfo, outerPrice, onSubmit, side }) => {
+}> = ({ status, balances, exchangeInfo, outerPrice, onSubmit, side }) => {
   const [t] = useTranslation();
 
   const {
@@ -61,7 +61,7 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
     maxQuantityWithWallet,
     maxTotalWithWallet
   } = usePlaceOrderInfo({
-    balances: accountInfo.balances,
+    balances,
     side,
     exchangeInfo
   });
@@ -93,9 +93,8 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
     reset,
     side,
     setValue,
-    balances: accountInfo.balances,
-    quantityName: TRADE_FORM_FIELDS.quantity,
-    totalName: TRADE_FORM_FIELDS.total
+    balances,
+    quantityName: TRADE_FORM_FIELDS.quantity
   });
 
   usePlaceOrderAutoFill({
@@ -151,11 +150,13 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
           />
         </Row>
       )}
-      <PlaceOrderSubmitButton
-        isSuccessful={status === API_REQUEST_STATUS.SUCCESS}
-        side={side}
-        asset={baseAsset}
-      />
+      <Row>
+        <PlaceOrderSubmitButton
+          isSuccessful={status === API_REQUEST_STATUS.SUCCESS}
+          side={side}
+          asset={baseAsset}
+        />
+      </Row>
       {isFutures && currentPositionMode === false && (
         <Row small>
           <RowItem>

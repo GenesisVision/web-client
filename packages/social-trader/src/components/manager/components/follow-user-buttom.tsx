@@ -14,12 +14,12 @@ const _FollowUserButton: React.FC<Props> = ({
   const [t] = useTranslation();
   const [innerValue, setInnerValue] = useState<boolean>(value);
   const successMiddleware = () => setInnerValue(!innerValue);
+  const onChangeMiddleware = () => onChange && onChange();
   const { sendRequest, isPending } = useApiRequest({
     request: toggleFollowUser,
-    middleware: [successMiddleware]
+    middleware: [successMiddleware, onChangeMiddleware]
   });
   const handleClick = useCallback(() => {
-    onChange && onChange();
     return sendRequest({ id, value: innerValue });
   }, [id, innerValue, onChange]);
   return (

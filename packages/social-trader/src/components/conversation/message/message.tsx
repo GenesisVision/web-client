@@ -16,10 +16,12 @@ import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { PostTag } from "gv-api-web";
 import React from "react";
+import { getLongWordsCount } from "utils/helpers";
 
 import styles from "./message.module.scss";
 
 const _Message: React.FC<IMessageProps> = ({
+  settingsBlock,
   row = true,
   tags,
   postId,
@@ -28,8 +30,12 @@ const _Message: React.FC<IMessageProps> = ({
   date,
   author: { username, url, logoUrl }
 }) => {
-  const tagsUnderText = tags?.filter(({ type }) => type !== "Event");
+  const tagsUnderText = tags
+    ?.filter(({ type }) => type !== "Event")
+    .filter(({ type }) => type !== "Post");
+  const repostTag = tags?.filter(({ type }) => type === "Post");
   const MessageItem = row ? RowItem : Row;
+  const hasLongWords = text && !!getLongWordsCount(text);
   return (
     <div>
       <div
@@ -37,16 +43,24 @@ const _Message: React.FC<IMessageProps> = ({
           [styles["message--row"]]: row
         })}
       >
-        <MessageItem className={styles["message__user"]}>
-          <ConversationUser
-            postId={postId}
-            url={url}
-            avatar={logoUrl}
-            username={username}
-            date={date}
-          />
+        <MessageItem center={false} className={styles["message__user"]}>
+          <RowItem wide>
+            <ConversationUser
+              postId={postId}
+              url={url}
+              avatar={logoUrl}
+              username={username}
+              date={date}
+            />
+          </RowItem>
+          <RowItem>{settingsBlock}</RowItem>
         </MessageItem>
-        <MessageItem onlyOffset className={styles["message__text"]}>
+        <MessageItem
+          onlyOffset
+          className={classNames(styles["message__text"], {
+            [styles["message__text--break-word"]]: hasLongWords
+          })}
+        >
           {text && (
             <Row>
               <div>
@@ -80,11 +94,13 @@ const _Message: React.FC<IMessageProps> = ({
           </HorizontalShadowList>
         </Row>
       )}
+      {!!repostTag?.length && <Row>{generateTagsComponents(repostTag)}</Row>}
     </div>
   );
 };
 
 export interface IMessageProps {
+  settingsBlock?: JSX.Element;
   row?: boolean;
   tags?: PostTag[];
   postId?: string;

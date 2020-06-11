@@ -1,9 +1,9 @@
 import GVButton, { GV_BTN_SIZE } from "components/gv-button";
-import { MutedText } from "components/muted-text/muted-text";
 import { PopoverContentCardBlock } from "components/popover/popover-card.block";
 import { PopoverContent } from "components/popover/popover-content";
 import { Row } from "components/row/row";
 import StatisticItemInner from "components/statistic-item/statistic-item-inner";
+import { Text } from "components/text/text";
 import { LevelInfo } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
 import { fetchInvestmentsLevels } from "pages/invest/programs/program-details/service/program-details.service";
@@ -66,9 +66,7 @@ const _InvestmentLimitsPopover: React.FC<Props> = ({
           className={styles["popover-levels__block"]}
         >
           <Row>
-            <MutedText noWrap={false}>
-              {t("program-details-page.popover.text")}
-            </MutedText>
+            <Text muted>{t("program-details-page.popover.text")}</Text>
           </Row>
           <Row>
             <GVButton

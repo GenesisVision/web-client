@@ -1,4 +1,4 @@
-import { MutedText } from "components/muted-text/muted-text";
+import { Text } from "components/text/text";
 import withLoader from "decorators/with-loader";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
@@ -16,9 +16,9 @@ const ItemsCounter: React.FC<IItemsCounterProps & WithTranslation> = ({
   const from = (currentPage - 1) * itemsOnPage + 1;
   const to = Math.min(currentPage * itemsOnPage, totalItems);
   return (
-    <MutedText>
+    <Text muted>
       {t("table.items-counter", { from, to, total: totalItems })}
-    </MutedText>
+    </Text>
   );
 };
 

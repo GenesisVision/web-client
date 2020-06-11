@@ -32,7 +32,7 @@ import { useSockets } from "services/websocket.service";
 
 interface Props {
   exchangeInfo: ExchangeInfo;
-  authData: TerminalAuthDataType;
+  authData?: TerminalAuthDataType;
   outerSymbol?: SymbolState;
   terminalType: TerminalType;
 }
@@ -45,7 +45,7 @@ export type SymbolState = {
 type TerminalAccountInfoState = {
   stepSize: string;
   tickSize: string;
-  authData: TerminalAuthDataType;
+  authData?: TerminalAuthDataType;
   terminalType: TerminalType;
   userStream?: Observable<any>;
   setSymbol: (symbol: SymbolState) => void;
@@ -64,10 +64,6 @@ export const SymbolInitialState: SymbolState = {
 export const TerminalAccountInfoInitialState: TerminalAccountInfoState = {
   stepSize: "0.01",
   tickSize: "0.01",
-  authData: {
-    publicKey: "",
-    privateKey: ""
-  },
   terminalType: TerminalTypeInitialState,
   setSymbol: () => {},
   symbol: SymbolInitialState
@@ -79,7 +75,7 @@ export const TerminalInfoContext = createContext<TerminalAccountInfoState>(
 
 export const TerminalInfoContextProvider: React.FC<Props> = ({
   exchangeInfo,
-  authData: authDataProp,
+  authData,
   outerSymbol: symbol = SymbolInitialState,
   terminalType,
   children
@@ -91,7 +87,6 @@ export const TerminalInfoContextProvider: React.FC<Props> = ({
     getUserStreamKey,
     getUserStreamSocket
   } = useContext(TerminalMethodsContext);
-  const [authData] = useState<TerminalAuthDataType>(authDataProp);
   const { connectSocket } = useSockets();
 
   const [tickSize, setTickSize] = useState<string>("0.01");
@@ -102,7 +97,7 @@ export const TerminalInfoContextProvider: React.FC<Props> = ({
   const [socketData, setSocketData] = useState<Account | undefined>(undefined);
 
   useEffect(() => {
-    if (!authData.publicKey) return;
+    if (!authData?.publicKey) return;
     const accountInfo = getAccountInformation(authData);
     accountInfo.subscribe(data => {
       setAccountInfo(data);
@@ -149,7 +144,6 @@ export const TerminalInfoContextProvider: React.FC<Props> = ({
     },
     [terminalType]
   );
-
   const value = useMemo(
     () => ({
       tickSize,

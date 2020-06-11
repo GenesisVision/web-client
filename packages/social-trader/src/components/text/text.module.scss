@@ -27,7 +27,7 @@
     @include font-size($font-size-common);
   }
   &--large {
-    @include font-size($font-size-paragraph);
+    @include font-size($font-size-h4);
   }
   &--white {
     color: $text-light-color;

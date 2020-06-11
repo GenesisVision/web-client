@@ -7,13 +7,11 @@ import { Row } from "components/row/row";
 import Crashable from "decorators/crashable";
 import { PublicProfile } from "gv-api-web";
 import * as React from "react";
-import { useTranslation } from "react-i18next";
 
 import styles from "./manager.page.module.scss";
 
 const _ManagerPage: React.FC<Props> = ({ profile }) => {
-  const [t] = useTranslation();
-  const title = `${t("manager-page.title")} ${profile.username}`;
+  const title = profile.username;
   return (
     <Page
       title={title}

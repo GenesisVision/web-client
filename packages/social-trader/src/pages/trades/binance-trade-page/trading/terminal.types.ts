@@ -1153,6 +1153,7 @@ export interface ExecutionReport extends Message {
   executionType: ExecutionType;
   stopPrice: string;
   icebergQuantity: string;
+  status?: OrderStatus;
   orderStatus: OrderStatus;
   orderRejectReason: string;
   orderId: number;
@@ -1221,7 +1222,7 @@ export interface QueryOrderResult {
   symbol: string;
   time: number;
   timeInForce: TimeInForce;
-  type: string;
+  type: OrderType;
   updateTime: number;
 }
 

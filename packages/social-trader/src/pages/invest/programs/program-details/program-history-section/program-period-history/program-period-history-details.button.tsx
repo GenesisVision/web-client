@@ -1,6 +1,5 @@
 import styles from "components/details/details-description-section/details-statistic-section/details-history/trades.module.scss";
 import GVButton, { GV_BTN_SIZE } from "components/gv-button";
-import { MutedText } from "components/muted-text/muted-text";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
   ORIENTATION_POPOVER
@@ -9,6 +8,7 @@ import {
   PopoverContent,
   PopoverContentListItem
 } from "components/popover/popover-content";
+import { Text } from "components/text/text";
 import withLoader from "decorators/with-loader";
 import { ProgramPeriodViewModel } from "gv-api-web";
 import useAnchor, { TAnchor } from "hooks/anchor.hook";
@@ -24,7 +24,7 @@ const _ProgramPeriodHistoryPopupItem: React.FC<{
   <PopoverContentListItem>
     <div className={styles["details-trades__history-popup-item"]}>
       <div className={styles["details-trades__history-popup-item-name"]}>
-        <MutedText>{label}</MutedText>
+        <Text muted>{label}</Text>
       </div>
       <div className={styles["details-trades__history-popup-item-value"]}>
         {value} {currency}

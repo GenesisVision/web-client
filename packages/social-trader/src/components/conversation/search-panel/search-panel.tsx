@@ -3,9 +3,9 @@ import ImageBaseElement from "components/avatar/image-base.element";
 import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
 import { Center } from "components/center/center";
 import { AssetSearchResult } from "components/conversation/conversation.types";
-import { MutedText } from "components/muted-text/muted-text";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { Text } from "components/text/text";
 import React from "react";
 
 import styles from "./search-panel.module.scss";
@@ -22,7 +22,7 @@ const SearchResultRow: React.FC<{
           <Center>
             <RowItem>{name}</RowItem>
             <RowItem>
-              <MutedText>{type}</MutedText>
+              <Text muted>{type}</Text>
             </RowItem>
           </Center>
         }
@@ -57,7 +57,7 @@ const _SearchPanel: React.FC<{
         </Row>
       )}
       {!isSearchPending && !searchResult?.length && (
-        <MutedText>Not found assets or managers</MutedText>
+        <Text muted>Not found assets or managers</Text>
       )}
     </div>
   );

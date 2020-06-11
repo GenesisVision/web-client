@@ -7,10 +7,12 @@ import useIsOpen from "hooks/is-open.hook";
 import React, { useEffect } from "react";
 
 interface Props extends IPostListContainerProps {
+  inputPlaceholder?: string;
   showInput?: boolean;
 }
 
 const _PostListWithInput: React.FC<Props> = ({
+  inputPlaceholder,
   showInput,
   id,
   fetchMethod
@@ -23,7 +25,13 @@ const _PostListWithInput: React.FC<Props> = ({
 
   return (
     <div>
-      {showInput && <PostInputContainer userId={id} onSuccess={setReset} />}
+      {showInput && (
+        <PostInputContainer
+          placeholder={inputPlaceholder}
+          userId={id}
+          onSuccess={setReset}
+        />
+      )}
       <PostListContainer reset={isReset} id={id} fetchMethod={fetchMethod} />
     </div>
   );

@@ -3,6 +3,7 @@ import GVTabs from "components/gv-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
 import { SIZES } from "constants/constants";
 import useTab from "hooks/tab.hook";
+import { TerminalDefaultBlock } from "pages/trades/binance-trade-page/trading/components/terminal-default-block/terminal-default-block";
 import { TerminalInfoContext } from "pages/trades/binance-trade-page/trading/terminal-info.context";
 import { FundsContainer } from "pages/trades/binance-trade-page/trading/trading-tables/funds/funds.container";
 import { OpenOrdersContainer } from "pages/trades/binance-trade-page/trading/trading-tables/open-orders/open-orders.container";
@@ -33,11 +34,8 @@ const _TradingTables: React.FC<Props> = () => {
     setTab(null, TABS.OPEN_ORDERS);
   }, [terminalType]);
   return (
-    <DefaultBlock
-      size={SIZES.SMALL}
+    <TerminalDefaultBlock
       horizontalOffsets={false}
-      roundedBorder={false}
-      bordered
       className={styles["trading-tables"]}
     >
       <DefaultBlock verticalOffsets={false} size={SIZES.SMALL}>
@@ -59,7 +57,7 @@ const _TradingTables: React.FC<Props> = () => {
         {tab === TABS.ORDER_HISTORY && <OrderHistoryContainer />}
         {tab === TABS.FUNDS && <FundsContainer />}
       </div>
-    </DefaultBlock>
+    </TerminalDefaultBlock>
   );
 };
 

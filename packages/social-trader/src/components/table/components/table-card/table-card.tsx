@@ -5,7 +5,6 @@ import { Center } from "components/center/center";
 import { ActionsCircleIcon } from "components/icon/actions-circle-icon";
 import LevelTooltip from "components/level-tooltip/level-tooltip";
 import Link, { ToType } from "components/link/link";
-import { MutedText } from "components/muted-text/muted-text";
 import Profitability from "components/profitability/profitability";
 import {
   PROFITABILITY_PREFIX,
@@ -14,6 +13,7 @@ import {
 import ProgramSimpleChart from "components/program-simple-chart/program-simple-chart";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { Text } from "components/text/text";
 import { SimpleChartPoint } from "gv-api-web";
 import useAnchor, { TAnchor } from "hooks/anchor.hook";
 import React from "react";
@@ -112,7 +112,7 @@ export const TableCardSubTitle: React.FC<{
   const title = typeof children === "string" ? children : "";
   return (
     <Row middle={false} className={styles["table-card__subtitle"]}>
-      <MutedText noWrap={false}>
+      <Text muted>
         {url ? (
           <Link
             title={`Open ${title} user page`}
@@ -124,7 +124,7 @@ export const TableCardSubTitle: React.FC<{
         ) : (
           children
         )}
-      </MutedText>
+      </Text>
     </Row>
   );
 };

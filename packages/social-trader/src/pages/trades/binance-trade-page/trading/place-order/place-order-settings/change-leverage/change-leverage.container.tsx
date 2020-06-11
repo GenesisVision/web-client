@@ -30,7 +30,7 @@ const _ChangeLeverageContainer: React.FC = () => {
   });
 
   useEffect(() => {
-    if (authData.privateKey)
+    if (authData?.privateKey)
       getLeverageBrackets({ authData, symbol: getSymbolFromState(symbol) });
   }, [authData, symbol]);
 

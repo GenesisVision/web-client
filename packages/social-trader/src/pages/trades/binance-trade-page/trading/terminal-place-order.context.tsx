@@ -59,12 +59,12 @@ export const TerminalPlaceOrderContextProvider: React.FC = ({ children }) => {
   }, [terminalType]);
 
   useEffect(() => {
-    if (getPositionMode)
+    if (getPositionMode && authData)
       getPositionMode({ authData }).then(setCurrentPositionMode);
   }, [getPositionMode]);
 
   const updatePositionMode = useCallback(() => {
-    if (getPositionMode)
+    if (getPositionMode && authData)
       getPositionMode({ authData }).then(setCurrentPositionMode);
   }, [getPositionMode, authData]);
 

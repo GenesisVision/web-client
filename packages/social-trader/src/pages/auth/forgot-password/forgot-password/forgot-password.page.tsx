@@ -1,7 +1,7 @@
 import { Push } from "components/link/link";
-import { MutedText } from "components/muted-text/muted-text";
 import { PageSeoWrapper } from "components/page/page-seo-wrapper";
 import { Row } from "components/row/row";
+import { Text } from "components/text/text";
 import { ForgotPasswordViewModel } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
 import { useEmailPendingState } from "pages/auth/auth.service";
@@ -29,9 +29,7 @@ const ForgotPasswordPage: React.FC = () => {
   return (
     <PageSeoWrapper title={t("auth.password-restore.title")}>
       <Row>
-        <MutedText noWrap={false}>
-          {t("auth.password-restore.forgot-password.text")}
-        </MutedText>
+        <Text muted>{t("auth.password-restore.forgot-password.text")}</Text>
       </Row>
       <Row large>
         <CaptchaContainer

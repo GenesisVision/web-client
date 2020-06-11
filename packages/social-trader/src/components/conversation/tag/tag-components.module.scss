@@ -1,6 +1,16 @@
 @import "styles/_colors";
 @import "styles/_sizes";
 
+.tag {
+  &__title-row {
+    & div {
+      font-size: $font-size-small;
+      color: $label-color;
+    }
+    height: 24px; // temp
+  }
+}
+
 .event-tag {
   margin-bottom: -$padding-xsmall;
 }

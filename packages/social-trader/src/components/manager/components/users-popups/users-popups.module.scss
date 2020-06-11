@@ -1,10 +1,13 @@
 @import "styles/_sizes";
 .users-list {
-  max-height: 500px;
+  max-height: 456px;
   overflow: auto;
-  @include vertical-paddings($popover-padding-medium);
   &__item {
     @include horizontal-paddings($popover-padding-medium);
+    @include vertical-paddings($popover-padding-small);
+    &:nth-child(2n + 1) {
+      background: rgba(255, 255, 255, 0.02);
+    }
   }
   &__name {
     font-size: $font-size-small;
@@ -15,6 +18,7 @@
   &__dialog {
     &#{&} {
       width: 80vh;
+      max-width: 500px;
     }
   }
 }

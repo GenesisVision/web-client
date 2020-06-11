@@ -25,7 +25,10 @@ const _TradesRow: React.FC<Props> = ({ prevPrice, price, amount, time }) => {
   return (
     <tr>
       <td>
-        <Text color={getTextColor(+price - +(prevPrice ? prevPrice : price))}>
+        <Text
+          size={"xsmall"}
+          color={getTextColor(+price - +(prevPrice ? prevPrice : price))}
+        >
           {formattedPrice}
         </Text>
       </td>

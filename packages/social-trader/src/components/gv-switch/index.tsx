@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import { Center } from "components/center/center";
-import { MutedText } from "components/muted-text/muted-text";
 import { RowItem } from "components/row-item/row-item";
+import { Text } from "components/text/text";
 import React from "react";
 
 import styles from "./style.module.scss";
@@ -57,7 +57,9 @@ class GVSwitch extends React.PureComponent<GVSwitchProps> {
             className={styles["gv-switch__label"]}
             onClick={this.handleClick}
           >
-            <MutedText big>{label}</MutedText>
+            <Text muted size={"large"}>
+              {label}
+            </Text>
           </RowItem>
         )}
         <RowItem>

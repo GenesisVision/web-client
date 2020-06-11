@@ -13,10 +13,9 @@ import { PlaceOrderSubmitButton } from "pages/trades/binance-trade-page/trading/
 import { TerminalInfoContext } from "pages/trades/binance-trade-page/trading/terminal-info.context";
 import { TerminalPlaceOrderContext } from "pages/trades/binance-trade-page/trading/terminal-place-order.context";
 import {
-  Account,
+  AssetBalance,
   ExchangeInfo,
-  OrderSide,
-  TerminalCurrency
+  OrderSide
 } from "pages/trades/binance-trade-page/trading/terminal.types";
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
@@ -41,9 +40,9 @@ export interface IStopLimitTradeFormProps {
 }
 
 const _StopLimitTradeForm: React.FC<IStopLimitTradeFormProps & {
-  accountInfo: Account;
+  balances: AssetBalance[];
   exchangeInfo: ExchangeInfo;
-}> = ({ status, accountInfo, exchangeInfo, outerPrice, onSubmit, side }) => {
+}> = ({ status, balances, exchangeInfo, outerPrice, onSubmit, side }) => {
   const [t] = useTranslation();
 
   const {
@@ -64,7 +63,7 @@ const _StopLimitTradeForm: React.FC<IStopLimitTradeFormProps & {
     maxQuantityWithWallet,
     maxTotalWithWallet
   } = usePlaceOrderInfo({
-    balances: accountInfo.balances,
+    balances,
     side,
     exchangeInfo
   });
@@ -102,9 +101,8 @@ const _StopLimitTradeForm: React.FC<IStopLimitTradeFormProps & {
     reset,
     side,
     setValue,
-    balances: accountInfo.balances,
-    quantityName: TRADE_FORM_FIELDS.quantity,
-    totalName: TRADE_FORM_FIELDS.total
+    balances,
+    quantityName: TRADE_FORM_FIELDS.quantity
   });
 
   usePlaceOrderAutoFill({
@@ -162,11 +160,13 @@ const _StopLimitTradeForm: React.FC<IStopLimitTradeFormProps & {
           name={TRADE_FORM_FIELDS.total}
         />
       </Row>
-      <PlaceOrderSubmitButton
-        isSuccessful={status === API_REQUEST_STATUS.SUCCESS}
-        side={side}
-        asset={baseAsset}
-      />
+      <Row>
+        <PlaceOrderSubmitButton
+          isSuccessful={status === API_REQUEST_STATUS.SUCCESS}
+          side={side}
+          asset={baseAsset}
+        />
+      </Row>
       <Row small>
         <RowItem wide>
           <TimeInForceField orderType={"STOP_LOSS_LIMIT"} />

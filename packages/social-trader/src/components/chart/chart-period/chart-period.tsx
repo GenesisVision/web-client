@@ -1,8 +1,8 @@
 import classNames from "classnames";
 import GVButton from "components/gv-button";
-import { MutedText } from "components/muted-text/muted-text";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { Text } from "components/text/text";
 import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
@@ -30,7 +30,7 @@ const _ChartPeriod: React.FC<Props> = ({ period, onChange }) => {
   );
   return (
     <Row className={styles["chart-period"]}>
-      <MutedText>
+      <Text muted>
         <Row>
           {ChartPeriodTypeValues.map(period => (
             <RowItem>
@@ -51,12 +51,12 @@ const _ChartPeriod: React.FC<Props> = ({ period, onChange }) => {
             </RowItem>
           ))}
         </Row>
-      </MutedText>
-      <MutedText bold>
+      </Text>
+      <Text muted weight={"bold"}>
         {type !== ChartPeriodType.all && (
           <ChartPeriodDateLabel start={start!} />
         )}
-      </MutedText>
+      </Text>
     </Row>
   );
 };

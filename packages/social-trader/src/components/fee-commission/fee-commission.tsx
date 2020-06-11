@@ -1,7 +1,7 @@
 import classNames from "classnames";
-import { MutedText } from "components/muted-text/muted-text";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { Text } from "components/text/text";
 import { DEFAULT_DECIMAL_SCALE } from "constants/constants";
 import * as React from "react";
 import { formatValue } from "utils/formatter";
@@ -16,13 +16,13 @@ export const _FeeCommission: React.FC<Props> = ({
 }) => (
   <Row className={classNames(styles["fee-commission"], className)}>
     <RowItem>
-      <MutedText>{title}</MutedText>
+      <Text muted>{title}</Text>
     </RowItem>
     <RowItem>
       <span className={styles["fee-commission__value"]}>
         {formatValue(value, DEFAULT_DECIMAL_SCALE)}{" "}
       </span>
-      <MutedText>{currency}</MutedText>
+      <Text muted>{currency}</Text>
     </RowItem>
   </Row>
 );

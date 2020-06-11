@@ -41,7 +41,11 @@ import {
   GV_PROGRAMS_ROUTE,
   INVEST_ROUTE
 } from "./invest.routes";
-import { META_TRADER_5_ROUTE, TERMINAL_ROUTE, TRADE_ROUTE } from "./trade.routes";
+import {
+  META_TRADER_5_ROUTE,
+  TERMINAL_ROUTE,
+  TRADE_ROUTE
+} from "./trade.routes";
 
 export type TMenuItem = {
   isBeta?: boolean;
@@ -100,9 +104,9 @@ const mainMenuItemsUnion = [
     route: SOCIAL_ROUTE,
     children: [
       {
-        Icon: NewsIcon,
-        route: MEDIA_ROUTE,
-        label: "navigation.media"
+        Icon: UsersIcon,
+        route: USERS_ROUTE,
+        label: "navigation.users"
       },
       {
         Icon: MyProfileIcon,
@@ -110,9 +114,9 @@ const mainMenuItemsUnion = [
         label: "navigation.my-profile"
       },
       {
-        Icon: UsersIcon,
-        route: USERS_ROUTE,
-        label: "navigation.users"
+        Icon: NewsIcon,
+        route: MEDIA_ROUTE,
+        label: "navigation.media"
       }
     ]
   },

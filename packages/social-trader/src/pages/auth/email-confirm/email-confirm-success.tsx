@@ -1,4 +1,4 @@
-import { MutedText } from "components/muted-text/muted-text";
+import { Text } from "components/text/text";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -6,7 +6,7 @@ const _EmailConfirmSuccess: React.FC = () => {
   const [t] = useTranslation();
   return (
     <div>
-      <MutedText>{t("auth.email-confirm.success-alert-message")}</MutedText>
+      <Text muted>{t("auth.email-confirm.success-alert-message")}</Text>
     </div>
   );
 };

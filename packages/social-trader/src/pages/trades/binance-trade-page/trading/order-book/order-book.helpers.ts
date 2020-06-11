@@ -16,6 +16,8 @@ import { AnyObjectType } from "utils/types";
 
 type DividerPartsType = { intLength?: number; fracLength?: number };
 
+export const ORDER_BOOK_ROW_HEIGHT = 16;
+
 export const sortDepthList = (
   [priceA]: StringBidDepth,
   [priceB]: StringBidDepth

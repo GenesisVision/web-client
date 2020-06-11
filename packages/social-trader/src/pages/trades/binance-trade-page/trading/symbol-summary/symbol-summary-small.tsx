@@ -1,5 +1,7 @@
 import { Center } from "components/center/center";
 import { DefaultBlock } from "components/default.block/default.block";
+import { BlurableLabeledValue } from "components/labeled-value/blurable-labeled-value";
+import { LabeledValue } from "components/labeled-value/labeled-value";
 import { ResponsiveContainer } from "components/responsive-container/responsive-container";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
@@ -92,8 +94,8 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
             </MonoText>
           </h4>
         </Row>
-        <Row small>
-          <Text size={"xsmall"} muted>
+        <Row xsmall>
+          <Text muted>
             <MonoText>
               {terminalMoneyFormat({ amount: lastPrice, tickSize })}
             </MonoText>
@@ -103,8 +105,8 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
       {markPrice && (
         <>
           <RowItem>
-            <StatisticItemInner
-              size={"small"}
+            <LabeledValue
+              size={"xsmall"}
               label={
                 <TooltipLabel
                   labelText={"Mark Price"}
@@ -122,11 +124,11 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
                   })}
                 </MonoText>
               </Text>
-            </StatisticItemInner>
+            </LabeledValue>
           </RowItem>
           <RowItem>
-            <StatisticItemInner
-              size={"small"}
+            <LabeledValue
+              size={"xsmall"}
               label={
                 <TooltipLabel
                   labelText={"Funding/8h"}
@@ -144,12 +146,12 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
                   )}
                 </MonoText>
               </Text>
-            </StatisticItemInner>
+            </LabeledValue>
           </RowItem>
         </>
       )}
       <RowItem>
-        <StatisticItemInner size={"small"} label={"24 Change"}>
+        <LabeledValue size={"xsmall"} label={"24 Change"}>
           <MonoText>
             <Text
               size={"xsmall"}
@@ -163,35 +165,39 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
               %
             </Text>
           </MonoText>
-        </StatisticItemInner>
+        </LabeledValue>
       </RowItem>
       <RowItem>
-        <StatisticItemInner size={"small"} isPending={!high} label={"24 High"}>
+        <BlurableLabeledValue
+          size={"xsmall"}
+          isPending={!high}
+          label={"24 High"}
+        >
           <Text size={"xsmall"}>
             <MonoText>
               {terminalMoneyFormat({ amount: high, tickSize })}
             </MonoText>
           </Text>
-        </StatisticItemInner>
+        </BlurableLabeledValue>
       </RowItem>
       <RowItem>
-        <StatisticItemInner size={"small"} isPending={!low} label={"24 Low"}>
+        <BlurableLabeledValue size={"xsmall"} isPending={!low} label={"24 Low"}>
           <Text size={"xsmall"}>
             <MonoText>
               {terminalMoneyFormat({ amount: low, tickSize })}
             </MonoText>
           </Text>
-        </StatisticItemInner>
+        </BlurableLabeledValue>
       </RowItem>
       <RowItem>
-        <StatisticItemInner size={"small"} label={"24 Volume"}>
+        <LabeledValue size={"xsmall"} label={"24 Volume"}>
           <Text size={"xsmall"}>
             <MonoText>
               {terminalMoneyFormat({ amount: volume, tickSize: stepSize })}{" "}
               {quoteAsset}
             </MonoText>
           </Text>
-        </StatisticItemInner>
+        </LabeledValue>
       </RowItem>
       <RowItem>
         <TerminalTypeSwitcher />

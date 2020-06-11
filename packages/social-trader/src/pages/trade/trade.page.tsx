@@ -11,11 +11,7 @@ const _TradePage: React.FC = () => {
   const [t] = useTranslation();
   const title = t("trade.title");
   return (
-    <Page
-      description={"Information about trade brokers"}
-      showTitle
-      title={title}
-    >
+    <Page description={"Information about trade brokers"} title={title}>
       <BrokersContainer
         darkTheme
         brokersInfo={brokersInfo}

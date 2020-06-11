@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import { Center } from "components/center/center";
 import { ColoredTextColor } from "components/colored-text/colored-text";
 import { DialogListItem } from "components/dialog/dialog-list-item";
 import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
@@ -6,6 +7,7 @@ import { Text } from "components/text/text";
 import Tooltip from "components/tooltip/tooltip";
 import { TooltipContent } from "components/tooltip/tooltip-content";
 import { terminalMoneyFormat } from "pages/trades/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
+import { ORDER_BOOK_ROW_HEIGHT } from "pages/trades/binance-trade-page/trading/order-book/order-book.helpers";
 import { TerminalInfoContext } from "pages/trades/binance-trade-page/trading/terminal-info.context";
 import { TradingPriceContext } from "pages/trades/binance-trade-page/trading/trading-price.context";
 import React, { useContext } from "react";
@@ -19,6 +21,7 @@ export interface LevelsSum {
 }
 
 interface Props {
+  hasOrder?: boolean;
   barPercent: number;
   tableTickSize?: string;
   hovered: boolean;
@@ -32,6 +35,7 @@ interface Props {
 }
 
 const _OrderBookRow: React.FC<Props> = ({
+  hasOrder,
   barPercent,
   tableTickSize,
   hovered,
@@ -99,14 +103,22 @@ const _OrderBookRow: React.FC<Props> = ({
     >
       <tr
         style={{
+          height: `${ORDER_BOOK_ROW_HEIGHT}px`,
           background: `linear-gradient(90deg, transparent ${barPercent}%, ${color}30 ${barPercent}%)`
         }}
         className={classNames(styles["order-book__table-row"], {
           [styles["order-book__table-row--hovered"]]: hovered
         })}
       >
-        <td>
-          <Text color={color}>{formattedPrice}</Text>
+        <td className={classNames(styles["order-book__first-cell"])}>
+          <Center>
+            {hasOrder && (
+              <div className={styles["order-book__has-order-bubble"]} />
+            )}
+            <Text size={"xsmall"} color={color}>
+              {formattedPrice}
+            </Text>
+          </Center>
         </td>
         <td>{formattedAmount}</td>
         <td>{formattedTotal}</td>

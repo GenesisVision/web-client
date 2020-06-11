@@ -1,3 +1,4 @@
+import { sendShareEvent } from "components/conversation/conversation.ga";
 import { rePost } from "components/conversation/conversation.service";
 import { PostInput } from "components/conversation/post/post-input/post-input";
 import { DialogBottom } from "components/dialog/dialog-bottom";
@@ -14,7 +15,7 @@ const _RePostContainer: React.FC<IRePostContainerProps> = ({ onApply, id }) => {
   const { sendRequest, errorMessage, status } = useApiRequest({
     request: rePost,
     successMessage: t("Success"),
-    middleware: [onApplyMiddleware]
+    middleware: [sendShareEvent, onApplyMiddleware]
   });
   const handleSubmit = useCallback(values => {
     return sendRequest({ ...values, id });

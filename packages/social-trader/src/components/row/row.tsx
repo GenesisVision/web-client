@@ -12,6 +12,7 @@ export const Row: React.FC<Props> = ({
   middle = true,
   hide,
   className,
+  xsmall,
   small,
   large,
   children,
@@ -26,8 +27,10 @@ export const Row: React.FC<Props> = ({
         [styles["row--flex"]]: !onlyOffset,
         [styles["row--wide"]]: wide,
         [styles["row--hidden"]]: hide,
+        [styles["row--xsmall"]]: xsmall,
         [styles["row--small"]]: small,
-        [styles["row--middle"]]: middle && !(small || large || xlarge),
+        [styles["row--middle"]]:
+          middle && !(xsmall || small || large || xlarge),
         [styles["row--xlarge"]]: xlarge,
         [styles["row--large"]]: large
       })}
@@ -45,6 +48,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
   center?: boolean;
   className?: string;
   wrap?: boolean;
+  xsmall?: boolean;
   small?: boolean;
   middle?: boolean;
   large?: boolean;

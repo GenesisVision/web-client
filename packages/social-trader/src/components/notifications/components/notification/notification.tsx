@@ -3,9 +3,9 @@ import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
 import ImageBaseElement from "components/avatar/image-base.element";
 import Link, { LinkProps } from "components/link/link";
 import { useToLink } from "components/link/link.helper";
-import { MutedText } from "components/muted-text/muted-text";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { Text } from "components/text/text";
 import dayjs from "dayjs";
 import { NotificationViewModel } from "gv-api-web";
 import NewsIcon from "media/news.svg";
@@ -101,7 +101,7 @@ const _Notification: React.FC<INotificationProps> = props => {
         <div className={styles["notification__content"]}>
           <Row className={styles["notification__description"]}>{text}</Row>
           <Row className={styles["notification__date"]}>
-            <MutedText>{dayjs(date).format("HH:mm")}</MutedText>
+            <Text muted>{dayjs(date).format("HH:mm")}</Text>
           </Row>
         </div>
       </RowItem>

@@ -23,7 +23,7 @@ export enum SEARCH_TABS {
 
 const _GlobalSearchResult: React.FC<Props> = ({ data }) => {
   const [t] = useTranslation();
-  const { tab, setTab } = useTab<SEARCH_TABS>(SEARCH_TABS.PROGRAMS);
+  const { tab, setTab } = useTab<SEARCH_TABS>(SEARCH_TABS.MANAGERS);
   return (
     <DefaultTableBlock>
       <DetailsBlockTitleBox>
@@ -31,6 +31,11 @@ const _GlobalSearchResult: React.FC<Props> = ({ data }) => {
       </DetailsBlockTitleBox>
       <Row>
         <DetailsBlockTabs value={tab} onChange={setTab}>
+          <GVTab
+            value={SEARCH_TABS.MANAGERS}
+            label={t("global-search-page.managers")}
+            count={data.managers && data.managers.total}
+          />
           <GVTab
             value={SEARCH_TABS.PROGRAMS}
             label={t("global-search-page.programs")}
@@ -45,11 +50,6 @@ const _GlobalSearchResult: React.FC<Props> = ({ data }) => {
             value={SEARCH_TABS.FOLLOWS}
             label={t("global-search-page.follows")}
             count={data.follows && data.follows.total}
-          />
-          <GVTab
-            value={SEARCH_TABS.MANAGERS}
-            label={t("global-search-page.managers")}
-            count={data.managers && data.managers.total}
           />
         </DetailsBlockTabs>
       </Row>

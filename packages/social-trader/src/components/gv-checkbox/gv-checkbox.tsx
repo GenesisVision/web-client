@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { MutedText } from "components/muted-text/muted-text";
+import { Text } from "components/text/text";
 import * as React from "react";
 import { useCallback, useRef } from "react";
 import { SizesType } from "utils/types";
@@ -72,7 +72,9 @@ const _GVCheckbox: React.FC<IGVCheckboxProps> = ({
       </div>
       {label && (
         <div className={styles["gv-checkbox__label"]}>
-          <MutedText big={size !== "small"}>{label}</MutedText>
+          <Text muted size={size}>
+            {label}
+          </Text>
         </div>
       )}
       {error && <div className={styles["gv-checkbox__error"]}>{error}</div>}

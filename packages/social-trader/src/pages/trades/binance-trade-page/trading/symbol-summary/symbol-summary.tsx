@@ -1,11 +1,10 @@
-import { DefaultBlock } from "components/default.block/default.block";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
-import { SIZES } from "constants/constants";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import { MonoText } from "pages/trades/binance-trade-page/trading/components/mono-text/mono-text";
+import { TerminalDefaultBlock } from "pages/trades/binance-trade-page/trading/components/terminal-default-block/terminal-default-block";
 import { terminalMoneyFormat } from "pages/trades/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
 import { TradeStatefulValue } from "pages/trades/binance-trade-page/trading/components/trade-stateful-value/trade-stateful-value";
 import { MarketWatchTooltipButton } from "pages/trades/binance-trade-page/trading/market-watch/market-watch.tooltip";
@@ -66,7 +65,7 @@ const _SymbolSummaryView: React.FC<Props> = ({
 }) => {
   const { stepSize, tickSize } = useContext(TerminalInfoContext);
   return (
-    <DefaultBlock size={SIZES.SMALL} roundedBorder={false} bordered>
+    <TerminalDefaultBlock>
       <Row>
         <TerminalTypeSwitcher />
       </Row>
@@ -166,7 +165,7 @@ const _SymbolSummaryView: React.FC<Props> = ({
           </SymbolSummaryLine>
         </RowItem>
       </Row>
-    </DefaultBlock>
+    </TerminalDefaultBlock>
   );
 };
 export const SymbolSummaryView = withBlurLoader(React.memo(_SymbolSummaryView));

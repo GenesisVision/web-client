@@ -2,9 +2,9 @@ import GVButton from "components/gv-button";
 import Hint from "components/hint/hint";
 import { ToType } from "components/link/link";
 import { useToLink } from "components/link/link.helper";
-import { MutedText } from "components/muted-text/muted-text";
 import { VERTICAL_POPOVER_POS } from "components/popover/popover";
 import { TableCardActionsItem } from "components/table/components/table-card/table-card-actions";
+import { Text } from "components/text/text";
 import {
   AmountWithCurrency,
   BrokerTradeServerType,
@@ -58,7 +58,7 @@ export const MakeProgramButton: React.FC<{
       </TableCardActionsItem>
     ) : (
       <GVButton variant="text" color="secondary">
-        <MutedText>
+        <Text muted>
           <Hint
             content={label}
             vertical={VERTICAL_POPOVER_POS.BOTTOM}
@@ -67,7 +67,7 @@ export const MakeProgramButton: React.FC<{
               { value: necessaryMoney }
             )}
           />
-        </MutedText>
+        </Text>
       </GVButton>
     );
   }
