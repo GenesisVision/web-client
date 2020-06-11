@@ -110,7 +110,7 @@ const _PlatformAssetTagComponent: React.FC<IPlatformAssetTagProps> = ({
                         {changeState === "Increased" ? (
                           <>&uarr;</>
                         ) : (
-                          <>&uarr;</>
+                          <>&darr;</>
                         )}
                       </div>
                     </RowItem>
