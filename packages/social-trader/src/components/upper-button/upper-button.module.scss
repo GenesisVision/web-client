@@ -5,7 +5,7 @@
 $upper-button-size: 60px;
 
 .upper-button {
-  mix-blend-mode: difference;
+  //mix-blend-mode: difference; why?..
   position: fixed;
   bottom: $upper-button-size;
   right: $upper-button-size;
