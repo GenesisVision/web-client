@@ -1,6 +1,7 @@
 import { sendShareEvent } from "components/conversation/conversation.ga";
 import { rePost } from "components/conversation/conversation.service";
 import { PostInput } from "components/conversation/post/post-input/post-input";
+import styles from "components/conversation/repost/repost.module.scss";
 import { RepostTagComponent } from "components/conversation/tag/tag-components";
 import { DefaultBlock } from "components/default.block/default.block";
 import { DialogTop } from "components/dialog/dialog-top";
@@ -36,7 +37,11 @@ const _RePostContainer: React.FC<IRePostContainerProps> = ({
         horizontalOffsets={false}
         verticalOffsets={false}
       >
-        <DefaultBlock size={SIZES.LARGE} roundedBorder={false}>
+        <DefaultBlock
+          className={styles["repost__message"]}
+          size={SIZES.LARGE}
+          roundedBorder={false}
+        >
           <RepostTagComponent post={post} />
         </DefaultBlock>
         <Row>

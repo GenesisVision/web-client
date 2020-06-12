@@ -1,7 +1,5 @@
 .repost {
-  &__dialog {
-    &#{&} {
-      min-width: 500px;
-    }
+  &__message {
+    max-width: 500px;
   }
 }
