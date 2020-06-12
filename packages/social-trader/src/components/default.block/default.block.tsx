@@ -6,6 +6,7 @@ import styles from "./default.block.module.scss";
 
 export interface IDefaultBlockProps
   extends React.HTMLAttributes<HTMLDivElement> {
+  light?: boolean;
   roundedBorder?: boolean;
   hoverable?: boolean;
   size?: SIZES;
@@ -19,6 +20,7 @@ export interface IDefaultBlockProps
 }
 
 export const DefaultBlock: React.FC<IDefaultBlockProps> = ({
+  light,
   roundedBorder = true,
   hoverable,
   wide,
@@ -33,6 +35,7 @@ export const DefaultBlock: React.FC<IDefaultBlockProps> = ({
 }) => (
   <div
     className={classNames(styles["default-block"], className, {
+      [styles["default-block--light"]]: light,
       [styles["default-block--rounded-border"]]: roundedBorder,
       [styles["default-block--hoverable"]]: hoverable,
       [styles["default-block--wide"]]: wide,
