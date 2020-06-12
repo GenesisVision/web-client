@@ -1,11 +1,9 @@
-import { DefaultBlock } from "components/default.block/default.block";
 import {
   $backgroundColor,
   $negativeColor,
   $positiveColor,
   $textAccentColor
 } from "components/gv-styles/gv-colors/gv-colors";
-import { SIZES } from "constants/constants";
 import { TerminalInfoContext } from "pages/trades/binance-trade-page/trading/terminal-info.context";
 import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
 import React from "react";
@@ -108,14 +106,5 @@ export const ChartContainer: React.FC = () => {
     });
   }, [widget, symbol.quoteAsset, symbol.baseAsset, emptyCallback]);
 
-  return (
-    <DefaultBlock
-      size={SIZES.SMALL}
-      roundedBorder={false}
-      bordered
-      className={styles.chart}
-    >
-      <div id="tv_chart_container" className={styles.chart_container} />
-    </DefaultBlock>
-  );
+  return <div id="tv_chart_container" className={styles.chart_container} />;
 };
