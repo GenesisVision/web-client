@@ -33,7 +33,7 @@ const _RePostContainer: React.FC<IRePostContainerProps> = ({
       <DialogTop title={t("conversation.repost")} />
       <DefaultBlock
         roundedBorder={false}
-        light
+        solid
         horizontalOffsets={false}
         verticalOffsets={false}
       >
