@@ -2,6 +2,7 @@ import { ResponsiveContainer } from "components/responsive-container/responsive-
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { UpperBlock } from "components/upper-block/upper-block";
+import { UpperButtonContainer } from "components/upper-button/upper-button";
 import useApiRequest from "hooks/api-request.hook";
 import { getSocialPageData } from "pages/social/social/services/social-page.service";
 import { SocialPageDownloadsBlock } from "pages/social/social/social-page-downloads/social-page-downloads.block";
@@ -58,6 +59,11 @@ export const SocialPageContainer = () => {
           </RowItem>
         </ResponsiveContainer>
       </Row>
+      <ResponsiveContainer
+        enabledScreens={["phone", "landscape-phone", "tablet"]}
+      >
+        <UpperButtonContainer />
+      </ResponsiveContainer>
     </>
   );
 };

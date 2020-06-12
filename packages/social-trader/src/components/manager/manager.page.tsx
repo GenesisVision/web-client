@@ -6,6 +6,7 @@ import { ResponsiveContainer } from "components/responsive-container/responsive-
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { UpperBlock } from "components/upper-block/upper-block";
+import { UpperButtonContainer } from "components/upper-button/upper-button";
 import Crashable from "decorators/crashable";
 import { PublicProfile } from "gv-api-web";
 import * as React from "react";
@@ -37,6 +38,11 @@ const _ManagerPage: React.FC<Props> = ({ profile }) => {
           />
         </RowItem>
       </Row>
+      <ResponsiveContainer
+        enabledScreens={["phone", "landscape-phone", "tablet"]}
+      >
+        <UpperButtonContainer />
+      </ResponsiveContainer>
     </Page>
   );
 };
