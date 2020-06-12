@@ -1,15 +1,23 @@
 import { sendShareEvent } from "components/conversation/conversation.ga";
 import { rePost } from "components/conversation/conversation.service";
 import { PostInput } from "components/conversation/post/post-input/post-input";
-import { DialogBottom } from "components/dialog/dialog-bottom";
+import styles from "components/conversation/repost/repost.module.scss";
+import { RepostTagComponent } from "components/conversation/tag/tag-components";
+import { DefaultBlock } from "components/default.block/default.block";
 import { DialogTop } from "components/dialog/dialog-top";
 import { Row } from "components/row/row";
+import { SIZES } from "constants/constants";
+import { Post as PostType } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { postponeCallback } from "utils/hook-form.helpers";
 
-const _RePostContainer: React.FC<IRePostContainerProps> = ({ onApply, id }) => {
+const _RePostContainer: React.FC<IRePostContainerProps> = ({
+  post,
+  onApply,
+  id
+}) => {
   const [t] = useTranslation();
   const onApplyMiddleware = postponeCallback(onApply);
   const { sendRequest, errorMessage, status } = useApiRequest({
@@ -23,23 +31,35 @@ const _RePostContainer: React.FC<IRePostContainerProps> = ({ onApply, id }) => {
   return (
     <>
       <DialogTop title={t("conversation.repost")} />
-      <DialogBottom fixed={false}>
-        <Row>{t("conversation.your-message")}</Row>
+      <DefaultBlock
+        roundedBorder={false}
+        solid
+        horizontalOffsets={false}
+        verticalOffsets={false}
+      >
+        <DefaultBlock
+          className={styles["repost__message"]}
+          size={SIZES.LARGE}
+          roundedBorder={false}
+        >
+          <RepostTagComponent post={post} />
+        </DefaultBlock>
         <Row>
           <PostInput
             allowEmptyMessage
-            placeholder={""}
+            placeholder={t("conversation.your-message")}
             errorMessage={errorMessage}
             onSubmit={handleSubmit}
             status={status}
           />
         </Row>
-      </DialogBottom>
+      </DefaultBlock>
     </>
   );
 };
 
 export interface IRePostContainerProps {
+  post: PostType;
   onApply?: VoidFunction;
   id: string;
 }

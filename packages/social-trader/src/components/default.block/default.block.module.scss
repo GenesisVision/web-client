@@ -15,6 +15,10 @@
 .default-block {
   box-sizing: border-box;
 
+  &--light {
+    background-color: lighten($secondary-background-color, 2%);
+  }
+
   &--hoverable {
     &:hover {
       background-color: lighten($panel-background-color, 1);
