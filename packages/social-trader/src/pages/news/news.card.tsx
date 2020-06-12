@@ -12,7 +12,7 @@ import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { Separator } from "components/separator/separator";
 import { SIZES } from "constants/constants";
-import { MediaPost } from "gv-api-web";
+import { MediaPost, Post } from "gv-api-web";
 import React from "react";
 import { formatDate } from "utils/dates";
 
@@ -21,6 +21,35 @@ interface Props {
   updateItems: VoidFunction;
   post: MediaPost;
 }
+
+const transformNewsPostToGVPost = (newsPost: MediaPost): Post => ({
+  id: newsPost.id,
+  text: newsPost.text,
+  date: newsPost.date,
+  likesCount: newsPost.likesCount,
+  rePostsCount: newsPost.rePostsCount,
+  impressionsCount: 0,
+  isPinned: false,
+  isDeleted: false,
+  images: [],
+  tags: [],
+  author: {
+    id: newsPost.author,
+    username: newsPost.author,
+    logoUrl: newsPost.authorLogoUrl,
+    registrationDate: new Date(),
+    url: newsPost.authorUrl,
+    socialLinks: []
+  },
+  actions: {
+    isLiked: false,
+    canEdit: false,
+    canDelete: false,
+    canPin: false,
+    canComment: false
+  },
+  comments: []
+});
 
 const NewsCardContent: React.FC<Props> = React.memo(
   ({ hasImage, updateItems, post }) => {
@@ -69,6 +98,7 @@ const NewsCardContent: React.FC<Props> = React.memo(
             </RowItem>
             <RowItem>
               <Share
+                post={transformNewsPostToGVPost(post)}
                 onApply={updateItems}
                 id={post.id}
                 count={post.rePostsCount}

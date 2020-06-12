@@ -44,9 +44,8 @@ const DeletedPost: React.FC<{
   );
 };
 
-const _Post: React.FC<Props> = ({
-  updateData,
-  post: {
+const _Post: React.FC<Props> = ({ updateData, post }) => {
+  const {
     rePostsCount,
     isPinned,
     images,
@@ -58,8 +57,7 @@ const _Post: React.FC<Props> = ({
     likesCount,
     author,
     tags
-  }
-}) => {
+  } = post;
   const [isDeleted, setDeleted, setNotDeleted] = useIsOpen();
   if (isDeleted) return <DeletedPost id={id} setNotDeleted={setNotDeleted} />;
   return (
@@ -105,6 +103,7 @@ const _Post: React.FC<Props> = ({
         </RowItem>
       </Row>
       <PostButtons
+        post={post}
         rePostsCount={rePostsCount}
         onApply={updateData}
         id={id}
