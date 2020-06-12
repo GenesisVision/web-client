@@ -55,7 +55,6 @@ $post-input-image-preview-size: 40px;
     position: relative;
     @include adaptive-border-radius($border-radius-middle);
     background-color: $panel-background-color;
-    margin-bottom: $padding-xsmall;
   }
   &__edit-panel-container {
     justify-content: space-between;

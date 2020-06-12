@@ -3,6 +3,7 @@ import {
   PostListContainer
 } from "components/conversation/post-list/post-list.container";
 import { PostInputContainer } from "components/conversation/post/post-input/post-input.container";
+import { Row } from "components/row/row";
 import useIsOpen from "hooks/is-open.hook";
 import React, { useEffect } from "react";
 
@@ -26,13 +27,17 @@ const _PostListWithInput: React.FC<Props> = ({
   return (
     <div>
       {showInput && (
-        <PostInputContainer
-          placeholder={inputPlaceholder}
-          userId={id}
-          onSuccess={setReset}
-        />
+        <Row>
+          <PostInputContainer
+            placeholder={inputPlaceholder}
+            userId={id}
+            onSuccess={setReset}
+          />
+        </Row>
       )}
-      <PostListContainer reset={isReset} id={id} fetchMethod={fetchMethod} />
+      <Row onlyOffset>
+        <PostListContainer reset={isReset} id={id} fetchMethod={fetchMethod} />
+      </Row>
     </div>
   );
 };
