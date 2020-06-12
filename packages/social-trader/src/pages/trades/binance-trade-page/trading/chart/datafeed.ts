@@ -16,12 +16,22 @@ import {
 } from "pages/trades/binance-trade-page/trading/terminal.types";
 
 const formatTimeResolution = (resolution: string) => {
-  if (resolution.match("M")) return resolution;
-  if (resolution.match("D|W")) return resolution.toLowerCase();
-  if (parseInt(resolution) >= 60) {
-    return `${parseInt(resolution) / 60}h`;
-  }
-  return `${resolution}m`;
+  const time: { [key: string]: string } = {
+    "1": "1m",
+    "3": "3m",
+    "5": "5m",
+    "15": "15m",
+    "30": "30m",
+    "60": "1h",
+    "120": "2h",
+    "240": "4h",
+    "360": "6h",
+    "720": "12h",
+    "1D": "1d",
+    "1W": "1w",
+    "1M": "1M"
+  };
+  return time[resolution];
 };
 
 const configurationData = {
@@ -35,7 +45,6 @@ const configurationData = {
     "120",
     "240",
     "360",
-    "480",
     "720",
     "1D",
     "1W",
@@ -57,22 +66,26 @@ const configurationData = {
 };
 
 type Params = {
-  servertime: number;
+  getServerTime: () => Promise<{ serverTime: number }>;
   symbols: Symbol[];
-  getKlines: (params: KlineParams) => Promise<number[][]>;
+  getKlines: (params: KlineParams) => Promise<Bar[]>;
   klineSocket: KlineSocketType;
 };
 
 export default ({
-  servertime,
+  getServerTime,
   symbols,
   getKlines,
   klineSocket
 }: Params): IBasicDataFeed => ({
-  getServerTime(callback: ServerTimeCallback): void {
-    callback(servertime);
+  getServerTime: async (callback: ServerTimeCallback) => {
+    try {
+      const { serverTime } = await getServerTime();
+      setTimeout(() => {
+        callback(Math.floor(serverTime / 1000));
+      }, 0);
+    } catch (e) {}
   },
-  //@ts-ignore
   onReady: callback => {
     setTimeout(() => callback(configurationData));
   },
@@ -99,6 +112,15 @@ export default ({
       onResolveErrorCallback("cannot resolve symbol");
       return;
     }
+
+    const filters = symbolItem.filters.find(function(e) {
+      //@ts-ignore
+      return e.tickSize || e.stepSize;
+    });
+
+    //@ts-ignore;
+    const size = filters.stepSize || filters.tickSize;
+
     const symbolInfo: LibrarySymbolInfo = {
       name: `${symbolItem.baseAsset}/${symbolItem.quoteAsset}`,
       //@ts-ignore
@@ -106,10 +128,12 @@ export default ({
       description: `Binance:${symbolItem.baseAsset}/${symbolItem.quoteAsset}`,
       type: "crypto",
       session: "24x7",
-      timezone: "Etc/UTC" as Timezone,
+      timezone: "Asia/Shanghai" as Timezone,
       exchange: "Binance",
       minmov: 1,
-      pricescale: 10 ** symbolItem.baseAssetPrecision,
+      minmove2: 0,
+      fractional: false,
+      pricescale: Math.pow(10, Math.abs(Math.log10(size))),
       has_intraday: true,
       has_no_volume: true,
       has_daily: true,
@@ -121,7 +145,9 @@ export default ({
       listed_exchange: "",
       format: "price" as SeriesFormat
     };
-    onSymbolResolvedCallback(symbolInfo);
+    setTimeout(() => {
+      onSymbolResolvedCallback(symbolInfo);
+    }, 0);
   },
   getBars: async (
     symbolInfo,
@@ -132,33 +158,25 @@ export default ({
     onErrorCallback,
     firstDataRequest
   ) => {
-    const fromms = from * 1000;
-    const toms = to * 1000;
+    const fromms = firstDataRequest ? undefined : from * 1000;
+    const toms = firstDataRequest ? undefined : to * 1000;
 
     const urlParameters = {
       symbol: symbolInfo.full_name,
       interval: formatTimeResolution(resolution),
       startTime: fromms,
-      endTime: toms
+      endTime: toms,
+      limit: 1000
     };
-    try {
-      const data = await getKlines(urlParameters);
 
-      let bars: Bar[] = [];
-      data.forEach(bar => {
-        bars = [
-          ...bars,
-          {
-            time: bar[0],
-            close: bar[4],
-            open: bar[1],
-            high: bar[2],
-            low: bar[3],
-            volume: bar[5]
-          }
-        ];
-      });
-      onHistoryCallback(bars, { noData: false });
+    try {
+      const bars = await getKlines(urlParameters);
+
+      if (bars.length > 0) {
+        onHistoryCallback(bars, { noData: false });
+      } else {
+        onHistoryCallback(bars, { noData: true });
+      }
     } catch (error) {
       onErrorCallback(error);
     }

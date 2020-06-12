@@ -4,6 +4,8 @@ import {
   transformFuturesTickerSymbol
 } from "pages/trades/binance-trade-page/services/futures/binance-futures.helpers";
 import { FuturesTickerSymbol } from "pages/trades/binance-trade-page/services/futures/binance-futures.types";
+import { Bar } from "pages/trades/binance-trade-page/trading/chart/charting_library/datafeed-api";
+import { transformKlineWrapper } from "pages/trades/binance-trade-page/trading/terminal.helpers";
 import {
   Account,
   BalancesForTransfer,
@@ -53,6 +55,15 @@ export const pingBinanceApi = (): Observable<any[]> =>
   requestService.get({
     url: `${API_ROUTE}/ping`
   });
+
+export const getServerTime = (): Promise<{ serverTime: number }> => {
+  return requestService.get(
+    {
+      url: `${API_ROUTE}/time`
+    },
+    value => value
+  );
+};
 
 export const getMarkPrice = (params: {
   symbol: string;
@@ -163,13 +174,13 @@ export const getPositionInformation = ({
     type: [REQUEST_TYPE.SIGNED, REQUEST_TYPE.AUTHORIZED]
   });
 
-export const getKlines = (params: KlineParams): Promise<number[][]> => {
+export const getKlines = (params: KlineParams): Promise<Bar[]> => {
   return requestService.get(
     {
       url: `${API_ROUTE}/klines`,
       params
     },
-    value => value
+    transformKlineWrapper
   );
 };
 

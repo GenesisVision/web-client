@@ -1,8 +1,8 @@
 import { ColoredTextColor } from "components/colored-text/colored-text";
 import { Push } from "components/link/link";
-import { useCookieState } from "hooks/cookie-state";
 import { useParams } from "hooks/location";
 import { NextPageContext } from "next";
+import { Bar } from "pages/trades/binance-trade-page/trading/chart/charting_library/datafeed-api";
 import { getDividerParts } from "pages/trades/binance-trade-page/trading/order-book/order-book.helpers";
 import { SymbolState } from "pages/trades/binance-trade-page/trading/terminal-info.context";
 import {
@@ -54,6 +54,20 @@ export const useUpdateTerminalUrlParams = () => {
     }`;
     Push(TERMINAL_FOLDER_ROUTE, ulrWithParams);
   };
+};
+
+export const transformKline = (data: string[]): Bar => ({
+  time: parseInt(data[0]),
+  open: parseFloat(data[1]),
+  high: parseFloat(data[2]),
+  low: parseFloat(data[3]),
+  close: parseFloat(data[4]),
+  volume: parseFloat(data[5])
+});
+
+export const transformKlineWrapper = async (promise: Promise<string[][]>) => {
+  const value = await promise;
+  return value.map(transformKline);
 };
 
 export const getSymbolFilters = (

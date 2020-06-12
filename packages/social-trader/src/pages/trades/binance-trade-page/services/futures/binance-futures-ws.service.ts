@@ -22,7 +22,7 @@ import { ConnectSocketMethodType } from "services/websocket.service";
 import {
   depthTransform,
   tradeTransform,
-  transformKline
+  transformKlineWs
 } from "../spot/binance-spot-ws.helpers";
 
 export const BINANCE_FUTURES_WS_API_URL = "wss://fstream.binance.com";
@@ -107,6 +107,6 @@ export const klineSocket = (
   const socketName = `${symbol}@kline_${interval}`;
   const url = `${BINANCE_FUTURES_WS_API_URL}/${BINANCE_WS_API_TYPE.WS}/${socketName}`;
   return connectSocketMethod(socketName, url).pipe(
-    map<IBinanceKline, IKline>(transformKline)
+    map<IBinanceKline, IKline>(transformKlineWs)
   );
 };

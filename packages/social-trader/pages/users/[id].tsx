@@ -1,9 +1,9 @@
 import ManagerPage from "components/manager/manager.page";
+import { getUserProfile } from "components/manager/services/manager.service";
 import withDefaultLayout from "decorators/with-default-layout";
 import { PublicProfile } from "gv-api-web";
 import React from "react";
 import { NextPageWithRedux } from "utils/types";
-import { getUserProfile } from "components/manager/services/manager.service";
 
 const Page: NextPageWithRedux<Props> = ({ profile }) => {
   return <ManagerPage profile={profile} />;
