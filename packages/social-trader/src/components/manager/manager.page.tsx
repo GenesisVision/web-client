@@ -2,8 +2,10 @@ import { ManagerData } from "components/manager/components/manager-data";
 import { ManagerInfo } from "components/manager/components/manager-info";
 import { getManagerSchema } from "components/manager/manager.schema";
 import Page from "components/page/page";
+import { ResponsiveContainer } from "components/responsive-container/responsive-container";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { UpperBlock } from "components/upper-block/upper-block";
 import Crashable from "decorators/crashable";
 import { PublicProfile } from "gv-api-web";
 import * as React from "react";
@@ -24,6 +26,9 @@ const _ManagerPage: React.FC<Props> = ({ profile }) => {
           <Row className={styles["manager-page__info-row"]} center={false}>
             <ManagerInfo profile={profile} />
           </Row>
+          <ResponsiveContainer enabledScreens={["landscape-tablet", "desktop"]}>
+            <UpperBlock />
+          </ResponsiveContainer>
         </RowItem>
         <RowItem className={styles["manager-page__data"]} bottomOffset>
           <ManagerData

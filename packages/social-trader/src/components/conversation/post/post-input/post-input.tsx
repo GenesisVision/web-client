@@ -137,7 +137,9 @@ const _PostInput: React.FC<Props> = ({
                   name={FORM_FIELDS.text}
                   placeholder={placeholder}
                 />
-                {!disabledImages && <AttachImagePostButton onClick={open} />}
+                {!text.length && !disabledImages && (
+                  <AttachImagePostButton onClick={open} />
+                )}
               </Center>
               {isOpenEditPanel && (
                 <div>
@@ -153,7 +155,7 @@ const _PostInput: React.FC<Props> = ({
                   <Center
                     className={styles["post-input__edit-panel-container"]}
                   >
-                    <RowItem className={styles["post-input__add-buttons"]}>
+                    <RowItem wide>
                       <Center wrap>
                         {images &&
                           images.map(image => (
@@ -169,6 +171,11 @@ const _PostInput: React.FC<Props> = ({
                     <RowItem className={styles["post-input__errors"]}>
                       {errorText && <ErrorMessage error={errorText} />}
                     </RowItem>
+                    {!!text.length && (
+                      <RowItem>
+                        <AttachImagePostButton size={"small"} onClick={open} />
+                      </RowItem>
+                    )}
                     <RowItem className={styles["post-input__send-buttons"]}>
                       <SubmitButton
                         isSuccessful={isSuccessful}

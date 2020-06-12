@@ -1,6 +1,7 @@
 @import "styles/_breakpoint";
 .manager-page {
   &__container {
+    position: relative;
     flex-direction: column;
     @include media-breakpoint-landscape-tablet() {
       flex-direction: row;

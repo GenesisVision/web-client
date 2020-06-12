@@ -4,6 +4,7 @@
 
 $post-input-height: 83px;
 $post-input-width: 60px;
+$post-input-button-small-size: 20px;
 $post-input-button-size: 30px;
 $post-input-image-preview-size: 40px;
 
@@ -74,12 +75,18 @@ $post-input-image-preview-size: 40px;
   }
   &__button {
     cursor: pointer;
-    width: $post-input-button-size;
-    height: $post-input-button-size;
     & > img,
     & > svg {
       width: 100%;
       height: 100%;
+    }
+    &--small {
+      width: $post-input-button-small-size;
+      height: $post-input-button-small-size;
+    }
+    &--middle {
+      width: $post-input-button-size;
+      height: $post-input-button-size;
     }
   }
 }

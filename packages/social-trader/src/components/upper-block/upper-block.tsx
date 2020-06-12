@@ -1,7 +1,8 @@
-import styles from "pages/social/social/social-page.module.scss";
 import React, { useCallback } from "react";
 
-export const UpperBlock = () => {
+import styles from "./upper-block.module.scss";
+
+export const UpperBlock: React.FC = () => {
   const handleClick = useCallback(() => {
     window.scroll({ top: 0 });
   }, []);
