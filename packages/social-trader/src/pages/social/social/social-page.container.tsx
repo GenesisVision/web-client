@@ -1,6 +1,7 @@
 import { ResponsiveContainer } from "components/responsive-container/responsive-container";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { UpperBlock } from "components/upper-block/upper-block";
 import useApiRequest from "hooks/api-request.hook";
 import { getSocialPageData } from "pages/social/social/services/social-page.service";
 import { SocialPageDownloadsBlock } from "pages/social/social/social-page-downloads/social-page-downloads.block";
@@ -8,7 +9,6 @@ import { SocialPageFeedBlock } from "pages/social/social/social-page-feed/social
 import { SocialPageGainersBlock } from "pages/social/social/social-page-gainers/social-page-gainers.block";
 import { SocialPageTopicsBlock } from "pages/social/social/social-page-topics/social-page-topics.block";
 import { SocialPageTradersBlock } from "pages/social/social/social-page-traders/social-page-traders.block";
-import { UpperBlock } from "pages/social/social/upper-block";
 import React from "react";
 
 import styles from "./social-page.module.scss";
