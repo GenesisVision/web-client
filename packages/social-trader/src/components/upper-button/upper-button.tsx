@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import { debounce } from "lodash";
 import React, { useCallback, useEffect, useState } from "react";
 import EventListener from "react-event-listener";
 
@@ -8,7 +9,11 @@ export const UpperButtonContainer: React.FC = () => {
   const [windowHeight, setWindowHeight] = useState<number>(0);
   const [scrollTop, setScrollTop] = useState<number>(0);
   const [visible, setVisible] = useState(false);
-  const handleScroll = useCallback(() => setScrollTop(window.scrollY), []);
+  const debouncedSetScrollFunc = useCallback(
+    debounce(() => setScrollTop(window.scrollY), 300),
+    []
+  );
+  const handleScroll = useCallback(() => debouncedSetScrollFunc(), []);
 
   useEffect(() => {
     setWindowHeight(window.innerHeight);
