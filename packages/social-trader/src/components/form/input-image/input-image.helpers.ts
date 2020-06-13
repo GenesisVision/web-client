@@ -82,7 +82,9 @@ export const handleOnLoadReader = ({
       src,
       id: uuid.v4(),
       image: {
-        cropped: file,
+        cropped: new File([file.slice()], file.name, {
+          type: file.type
+        }),
         name: file.name,
         type: file.type,
         size: file.size,
