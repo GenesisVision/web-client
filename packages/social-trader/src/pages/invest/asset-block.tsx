@@ -4,8 +4,8 @@ import DetailsBlock, {
 } from "components/details/details-block";
 import GVButton, { GV_BTN_SIZE } from "components/gv-button";
 import Link, { ToType } from "components/link/link";
-import { MutedText } from "components/muted-text/muted-text";
 import { Row } from "components/row/row";
+import { Text } from "components/text/text";
 import DashboardHorizontalWindowList from "pages/dashboard/components/dashboard-block/dashboard-horizontal-window-list";
 import { InvestAssetType } from "pages/invest/invest.types";
 import React from "react";
@@ -54,7 +54,7 @@ export const AssetBlock: React.FC<Props> = ({
             [styles["asset-block__description--side"]]: side
           })}
         >
-          <MutedText noWrap={false}>{description}</MutedText>
+          <Text muted>{description}</Text>
         </Row>
         <Row xlarge>
           <Link to={investLink}>
