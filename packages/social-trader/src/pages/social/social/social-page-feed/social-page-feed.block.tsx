@@ -30,16 +30,16 @@ const _SocialPageFeedBlock: React.FC<Props> = () => {
   const { searchValue } = useContext(SocialSearchContext);
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   const [openSearch, setSearchIsOpen, setSearchIsClose] = useIsOpen();
-
-  useEffect(() => {
-    if (searchValue.mask) setSearchIsOpen();
-  }, [searchValue]);
   const { tab, setTab } = useTab<TABS>(TABS.LIVE);
 
   const isSearch =
     !!searchValue.hashTags.length ||
     !!searchValue.mask ||
     !!searchValue.tagContent.length;
+
+  useEffect(() => {
+    if (searchValue.mask) setSearchIsOpen();
+  }, [searchValue]);
 
   useEffect(() => {
     if (isSearch) setTab(null, TABS.SEARCH);
