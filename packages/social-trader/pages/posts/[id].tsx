@@ -23,4 +23,4 @@ interface Props {
   post: ConversationPost;
 }
 
-export default compose(withDefaultLayout, withBetaTesting("Social"))(Page);
+export default compose(withDefaultLayout)(Page);
