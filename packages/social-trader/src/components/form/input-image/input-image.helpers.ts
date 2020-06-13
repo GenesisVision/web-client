@@ -65,22 +65,6 @@ export const asyncLoadFiles = async ({
     .catch(console.log);
 };
 
-export const loadFiles = ({
-  files,
-  croppedFiles,
-  onChange
-}: {
-  files: FileWithPreview[];
-  croppedFiles: IImageValue[];
-  onChange?: (event: IImageChangeEvent) => void;
-}) => {
-  files.forEach(file => {
-    const reader = new FileReader();
-    reader.onload = handleOnLoadReader({ file, croppedFiles, onChange });
-    reader.readAsDataURL(file);
-  });
-};
-
 export const handleOnLoadReader = ({
   file,
   croppedFiles,
