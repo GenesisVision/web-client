@@ -19,7 +19,7 @@ import {
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { TERMINAL_ROUTE } from "routes/trade.routes";
 
-interface Props {
+export interface ITerminalContainerProps {
   authData?: TerminalAuthDataType;
   type?: TerminalType;
   symbol?: SymbolState;
@@ -32,7 +32,7 @@ interface ITerminalPropsData {
   symbol?: SymbolState;
 }
 
-const _TerminalContainer: React.FC<Props> = ({
+const _TerminalContainer: React.FC<ITerminalContainerProps> = ({
   authData,
   type = TerminalTypeInitialState,
   symbol
