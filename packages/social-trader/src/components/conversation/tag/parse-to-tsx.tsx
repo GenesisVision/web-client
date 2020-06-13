@@ -136,14 +136,16 @@ const mergeArrays = (first: any[], second: any[]): any[] => {
 };
 
 export const parseToTsx = ({
+  simpleText,
   tags,
   map,
   text
 }: {
+  simpleText?: boolean;
   tags?: PostTag[];
   map: TagToComponentType[];
   text: string;
-}): JSX.Element => {
+}): JSX.Element | string => {
   if (!tags) return <>{text}</>;
   const commonRegex = /#[a-zA-Z]+|@tag-[\d]+/g;
   const tagStrings = text.match(commonRegex) || [];
@@ -156,12 +158,13 @@ export const parseToTsx = ({
     .map((tagId: number | string) => {
       if (typeof tagId === "number") {
         const tag = safeGetElemFromArray(tags, tag => tag.number === tagId);
-        return convertTagToComponent(tag, map);
+        return simpleText ? tag.title : convertTagToComponent(tag, map);
       } else {
-        return convertHashTagToComponent(tagId);
+        return simpleText ? `#${tagId}` : convertHashTagToComponent(tagId);
       }
     });
   const otherWords = text.split(commonRegex);
   const mergedText = mergeArrays(otherWords, parsedTags);
+  if (simpleText) return String(mergedText.join(" "));
   return <>{mergedText}</>;
 };
