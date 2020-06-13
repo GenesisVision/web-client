@@ -39,7 +39,10 @@ const _PostList: React.FC<Props> = ({ skip, hasMore, data, onScroll }) => {
   const [mergedPosts, setMergedPosts] = useState<ConversationPost[]>([]);
 
   useEffect(() => {
-    setMergedPosts([...(skip ? mergedPosts : []), ...data]);
+    const clearData = data.filter(
+      ({ id }) => !mergedPosts.find(post => post.id === id)
+    );
+    setMergedPosts([...(skip ? mergedPosts : []), ...clearData]);
   }, [data]);
 
   return (
