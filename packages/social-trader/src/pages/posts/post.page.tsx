@@ -6,6 +6,7 @@ import {
   parseToTsx
 } from "components/conversation/tag/parse-to-tsx";
 import Page from "components/page/page";
+import { getPostSchema } from "pages/posts/post-page.schema";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -22,7 +23,19 @@ export const PostPage: React.FC<Props> = ({ post }) => {
     ? getImageUrlByQuality(post.images[0].resizes, "Medium")
     : undefined;
   return (
-    <Page previewImage={previewImage} description={description} title={title}>
+    <Page
+      schemas={[
+        getPostSchema({
+          description,
+          identifier: post.id,
+          author: post.author.username,
+          logo: previewImage
+        })
+      ]}
+      previewImage={previewImage}
+      description={description}
+      title={title}
+    >
       <PostContainer post={post} id={post.id} />
     </Page>
   );
