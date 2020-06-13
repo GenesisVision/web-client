@@ -26,6 +26,7 @@ const getTagLoaderData = (): PostTag => ({
     title: ""
   },
   post: {
+    url: "",
     isDeleted: false,
     impressionsCount: 0,
     rePostsCount: getRandomInteger(),
@@ -154,6 +155,7 @@ export const getConversationPostLoaderData = (
     .map(getConversationImageLoaderData);
 
   return {
+    url: "",
     isDeleted: false,
     impressionsCount: 0,
     rePostsCount: getRandomInteger(),
@@ -174,6 +176,7 @@ export const getConversationPostLoaderData = (
 };
 
 export const getEmptyPostLoaderData = (): ConversationPost => ({
+  url: "",
   isDeleted: false,
   impressionsCount: 0,
   isPinned: false,
