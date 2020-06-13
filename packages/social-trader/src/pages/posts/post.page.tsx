@@ -13,12 +13,12 @@ import { useTranslation } from "react-i18next";
 export const PostPage: React.FC<Props> = ({ post }) => {
   const [t] = useTranslation();
   const title = t(`Post`);
-  const description = parseToTsx({
+  const description = (parseToTsx({
     simpleText: true,
     tags: post.tags,
     text: post.text,
     map: inTextComponentsMap
-  }) as string;
+  }) as string).trim();
   const previewImage = post.images.length
     ? getImageUrlByQuality(post.images[0].resizes, "Medium")
     : undefined;
