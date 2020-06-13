@@ -96,8 +96,11 @@ const getRandomTextString = (tagNumber: number): string => {
   return strings[getRandomInteger(0, strings.length - 1)];
 };
 
-const getMockTextAndTags = () => {
-  const tags = tableLoaderCreator(getTagLoaderData, getRandomInteger(1, 30));
+const getMockTextAndTags = (tagsCount?: number) => {
+  const tags = tableLoaderCreator(
+    getTagLoaderData,
+    getRandomInteger(0, tagsCount)
+  );
   const text = tags.map((_, i) => getRandomTextString(i)).join(". ");
   return { tags, text };
 };
@@ -129,11 +132,11 @@ export const getConversationImageLoaderData = (): IConversationImage => ({
 });
 
 export const getConversationPersonalDetailsLoaderData = (): ConversationMessagePersonalDetails => ({
-  canComment: getRandomBoolean(),
-  canEdit: getRandomBoolean(),
-  canDelete: getRandomBoolean(),
-  isLiked: getRandomBoolean(),
-  canPin: getRandomBoolean()
+  canComment: true,
+  canEdit: false,
+  canDelete: false,
+  isLiked: false,
+  canPin: false
 });
 
 export const getConversationUserLoaderData = (): IConversationUser => ({
@@ -147,9 +150,10 @@ export const getConversationUserLoaderData = (): IConversationUser => ({
 
 export const getConversationPostLoaderData = (
   imagesCount: number = 0,
-  commentsCount: number = 0
+  commentsCount: number = 0,
+  tagsCount?: number
 ): ConversationPost => {
-  const { tags, text } = getMockTextAndTags();
+  const { tags, text } = getMockTextAndTags(tagsCount);
   const images = new Array(imagesCount)
     .fill("")
     .map(getConversationImageLoaderData);
@@ -158,7 +162,7 @@ export const getConversationPostLoaderData = (
     url: "",
     isDeleted: false,
     impressionsCount: 0,
-    rePostsCount: getRandomInteger(),
+    rePostsCount: 0,
     isPinned: false,
     tags,
     comments: tableLoaderCreator(
@@ -169,7 +173,7 @@ export const getConversationPostLoaderData = (
     images,
     author: managerLoaderData,
     date: new Date(),
-    likesCount: getRandomInteger(1, 10),
+    likesCount: 0,
     text,
     actions: getConversationPersonalDetailsLoaderData()
   };
@@ -193,11 +197,6 @@ export const getEmptyPostLoaderData = (): ConversationPost => ({
 });
 
 export const getConversationPostListLoaderData = (): ConversationPost[] =>
-  tableLoaderCreator(
-    () =>
-      getConversationPostLoaderData(
-        getRandomInteger(0, 10),
-        getRandomInteger(0, 5)
-      ),
-    getRandomInteger(2, 5)
-  );
+  tableLoaderCreator(() => getConversationPostLoaderData(0, 0, 0), 10);
+
+export const ConversationPostListLoaderData = getConversationPostListLoaderData();
