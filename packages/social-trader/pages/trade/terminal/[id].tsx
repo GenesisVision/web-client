@@ -4,7 +4,6 @@ import { TYPE_PARAM_NAME } from "pages/trades/binance-trade-page/binance-trade.h
 import { getTerminalApiMethods } from "pages/trades/binance-trade-page/services/api.helpers";
 import { SymbolState } from "pages/trades/binance-trade-page/trading/terminal-info.context";
 import { TerminalMethodsContextProvider } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
-import { TerminalContainer } from "pages/trades/binance-trade-page/trading/terminal.container";
 import { parseSymbolFromUrlParam } from "pages/trades/binance-trade-page/trading/terminal.helpers";
 import {
   TerminalAuthDataType,
@@ -14,6 +13,7 @@ import React from "react";
 import { api } from "services/api-client/swagger-custom-client";
 import { getParamsFromCtxWithSplit } from "utils/ssr-helpers";
 import { NextPageWithRedux } from "utils/types";
+import { TerminalPage } from "pages/trades/terminal.page";
 
 interface Props {
   brokerType?: BrokerTradeServerType;
@@ -31,11 +31,7 @@ const Page: NextPageWithRedux<Props> = ({
   const terminalMethods = getTerminalApiMethods(brokerType, terminalType);
   return (
     <TerminalMethodsContextProvider methods={terminalMethods}>
-      <TerminalContainer
-        authData={authData}
-        type={terminalType}
-        symbol={symbol}
-      />
+      <TerminalPage authData={authData} type={terminalType} symbol={symbol} />
     </TerminalMethodsContextProvider>
   );
 };
