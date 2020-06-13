@@ -7,7 +7,10 @@ import useIsOpen from "hooks/is-open.hook";
 import useTab from "hooks/tab.hook";
 import { FEED_TYPE, FeedContainer } from "pages/feed/feed.container";
 import { HashTagsBlock } from "pages/social/social/social-page-feed/hash-tags-block";
-import { SocialSearchContext } from "pages/social/social/social-page.context";
+import {
+  SocialSearchContext,
+  SocialSearchInitialState
+} from "pages/social/social/social-page.context";
 import styles from "pages/social/social/social-page.module.scss";
 import React, { useContext, useEffect } from "react";
 import { useTranslation } from "react-i18next";
@@ -27,13 +30,9 @@ interface Props {}
 
 const _SocialPageFeedBlock: React.FC<Props> = () => {
   const [t] = useTranslation();
-  const { searchValue } = useContext(SocialSearchContext);
+  const { searchValue, setSearchValue } = useContext(SocialSearchContext);
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   const [openSearch, setSearchIsOpen, setSearchIsClose] = useIsOpen();
-
-  useEffect(() => {
-    if (searchValue.mask) setSearchIsOpen();
-  }, [searchValue]);
   const { tab, setTab } = useTab<TABS>(TABS.LIVE);
 
   const isSearch =
@@ -42,9 +41,18 @@ const _SocialPageFeedBlock: React.FC<Props> = () => {
     !!searchValue.tagContent.length;
 
   useEffect(() => {
+    if (searchValue.mask) setSearchIsOpen();
+  }, [searchValue]);
+
+  useEffect(() => {
     if (isSearch) setTab(null, TABS.SEARCH);
-    else setTab(null, TABS.LIVE);
+    else if (tab === TABS.SEARCH) setTab(null, TABS.LIVE);
   }, [isSearch]);
+
+  useEffect(() => {
+    if (tab !== TABS.SEARCH) setSearchValue(SocialSearchInitialState);
+  }, [tab]);
+
   return (
     <>
       <Row>

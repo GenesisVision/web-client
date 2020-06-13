@@ -23,6 +23,7 @@ interface Props {
 }
 
 const transformNewsPostToGVPost = (newsPost: MediaPost): Post => ({
+  url: newsPost.url,
   id: newsPost.id,
   text: newsPost.text,
   date: newsPost.date,

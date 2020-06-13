@@ -1,3 +1,4 @@
+import { ConversationPostListLoaderData } from "components/conversation/conversation.loader";
 import { PostList } from "components/conversation/post-list/post-list";
 import {
   initialOptions,
@@ -69,7 +70,7 @@ const _PostListContainer: React.FC<IPostListContainerProps> = ({
     <PostList
       skip={options.skip}
       hasMore={canLoadMore}
-      loaderData={[]}
+      loaderData={ConversationPostListLoaderData}
       data={data!?.items}
       onScroll={handleScroll}
     />
