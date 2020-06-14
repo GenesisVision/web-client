@@ -5,7 +5,7 @@ export const getLongWordsCount = (text: string): number =>
   text
     .split(" ")
     .map(word => word.length)
-    .filter(length => length > 20).length;
+    .filter(length => length > 30).length;
 
 export const modulo = (dividend: number, divider: number): number => {
   return dividend - Math.floor(dividend / divider) * divider;
