@@ -14,7 +14,7 @@ import filesService from "services/file-service";
 import sharp from "sharp";
 
 export type LogoOptions = {
-  size: 21 | 25;
+  size: { width: number; height: number };
   position: {
     x: number;
     y: number;
@@ -37,7 +37,7 @@ export type BannerProps = {
 
 export type BannerComponent = React.ComponentType<BannerProps>;
 
-const Mask: React.FC<{ size: 21 | 25 }> = ({ size }) => {
+const Mask: React.FC<{ size: number }> = ({ size }) => {
   return (
     <svg
       width={size}
@@ -62,11 +62,11 @@ export const createPng = async (
       const buffer = Buffer.from(result);
 
       const logo = await sharp(buffer)
-        .resize(pngOptions.size, pngOptions.size)
+        .resize(pngOptions.size.width, pngOptions.size.height)
         .toBuffer();
 
       const mask = ReactDOM.renderToStaticNodeStream(
-        <Mask size={pngOptions.size} />
+        <Mask size={pngOptions.size.width} />
       ).read();
 
       const maskPng = sharp(mask).png();

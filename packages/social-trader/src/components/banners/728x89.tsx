@@ -34,7 +34,7 @@ const Title: React.FC = ({ children }) => {
 };
 
 export const LOGO_OPTIONS: LogoOptions = {
-  size: 25,
+  size: { width: 25, height: 25 },
   position: {
     x: 25,
     y: 19
@@ -57,14 +57,14 @@ export const Banner: BannerComponent = props => {
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
     >
-      <rect width={728} height={89} fill="#1F2B35" />
-      <rect x={588} width={140} height={89} fill="#131E26" />
+      <rect width={728} height={89} fill="#1F2B35"/>
+      <rect x={588} width={140} height={89} fill="#131E26"/>
       <LogoPlaceholder
         {...LOGO_OPTIONS}
         href={props.details.publicInfo.logo}
         color={props.details.publicInfo.color}
       />
-      <GvLogo y={35} x={611} />
+      <GvLogo y={35} x={611}/>
       <Title>{title}</Title>
       <Label y={39}>Monthly Profit</Label>
       <Value y={39}>{`${statistic.profitPercent} %`}</Value>
@@ -73,7 +73,7 @@ export const Banner: BannerComponent = props => {
         statistic.balance,
         points.currency
       )} ${points.currency}`}</Value>
-      <Chart data={points.chart} width={259} height={66} x={329} y={12} />
+      <Chart data={points.chart} width={259} height={66} x={329} y={12}/>
     </svg>
   );
 };

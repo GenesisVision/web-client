@@ -34,7 +34,7 @@ const Label: React.FC = ({ children }) => {
 };
 
 export const LOGO_OPTIONS: LogoOptions = {
-  size: 25,
+  size: { width: 25, height: 25 },
   position: {
     x: 20,
     y: 25
