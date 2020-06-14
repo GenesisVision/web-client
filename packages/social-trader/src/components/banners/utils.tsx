@@ -84,7 +84,10 @@ export const createPng = async (
       const imageRatio = metadata.height! / metadata!.width!;
 
       const logo = await sharpedImage
-        .resize(pngOptions.size.height * imageRatio, pngOptions.size.height)
+        .resize(
+          Math.floor(pngOptions.size.height * imageRatio),
+          pngOptions.size.height
+        )
         .toBuffer();
 
       const maskPng = maskImage(logo, pngOptions.size.height);
@@ -92,11 +95,13 @@ export const createPng = async (
       const input = pngOptions.useMask ? await maskPng.toBuffer() : logo;
 
       const calculatedTop = pngOptions.containerSize
-        ? pngOptions.containerSize.height / 2 - metadata!.height! / 2
+        ? Math.floor(
+            pngOptions.containerSize.height / 2 - metadata!.height! / 2
+          )
         : undefined;
       const top = pngOptions.position?.y || calculatedTop || 0;
       const calculatedLeft = pngOptions.containerSize
-        ? pngOptions.containerSize.width / 2 - metadata!.width! / 2
+        ? Math.floor(pngOptions.containerSize.width / 2 - metadata!.width! / 2)
         : undefined;
       const left = pngOptions.position?.x || calculatedLeft || 0;
 
