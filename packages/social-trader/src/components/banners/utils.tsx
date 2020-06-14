@@ -133,7 +133,7 @@ export const createPng = async (
 };
 
 const createPostPreview = async (href: string): Promise<Buffer | string> => {
-  const containerSize = { height: 350, width: 650 };
+  const containerSize = { height: 250, width: 350 };
   const svgReactStream = `
   <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
   ${ReactDOM.renderToStaticMarkup(
@@ -201,7 +201,7 @@ export const createPostPreviewApi = () => {
       const { images } = await getPost({ id: id as string });
 
       const previewImage = images.length
-        ? getImageUrlByQuality(images[0].resizes, "Medium")
+        ? getImageUrlByQuality(images[0].resizes, "Low")
         : "";
 
       const banner = await createPostPreview(previewImage);
