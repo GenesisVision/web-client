@@ -6,21 +6,27 @@ import {
   IConversationImage,
   IConversationUser
 } from "components/conversation/conversation.types";
-import { generateTagsComponents } from "components/conversation/message/message.helpers";
+import {
+  generateTagsComponents,
+  reduceByBreaks,
+  reduceBySymbolsCount
+} from "components/conversation/message/message.helpers";
 import {
   inTextComponentsMap,
   parseToTsx
 } from "components/conversation/tag/parse-to-tsx";
+import GVButton from "components/gv-button";
 import { HorizontalShadowList } from "components/horizontal-list-shadow-container/horizontal-shadow-list";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { PostTag } from "gv-api-web";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { getLongWordsCount } from "utils/helpers";
 
 import styles from "./message.module.scss";
 
 const _Message: React.FC<IMessageProps> = ({
+  reduceLargeText = true,
   settingsBlock,
   row = true,
   tags,
@@ -30,12 +36,31 @@ const _Message: React.FC<IMessageProps> = ({
   date,
   author: { username, url, logoUrl }
 }) => {
+  const [textToRender, setTextToRender] = useState<string | undefined>();
+  const [isTextExpanded, setTextExpandState] = useState<boolean | undefined>();
+
+  useEffect(() => {
+    if (!text) return;
+    const newText = reduceLargeText
+      ? reduceByBreaks(
+          reduceBySymbolsCount(text, setTextExpandState),
+          setTextExpandState
+        )
+      : text;
+
+    setTextToRender(newText);
+  }, [text]);
+
+  useEffect(() => {
+    if (isTextExpanded) setTextToRender(text);
+  }, [isTextExpanded]);
+
   const tagsUnderText = tags
     ?.filter(({ type }) => type !== "Event")
     .filter(({ type }) => type !== "Post");
   const repostTag = tags?.filter(({ type }) => type === "Post");
   const MessageItem = row ? RowItem : Row;
-  const hasLongWords = text && !!getLongWordsCount(text);
+  const hasLongWords = textToRender && !!getLongWordsCount(textToRender);
   return (
     <div>
       <div
@@ -66,14 +91,23 @@ const _Message: React.FC<IMessageProps> = ({
             [styles["message__text--break-word"]]: hasLongWords
           })}
         >
-          {text && (
+          {textToRender && (
             <Row>
               <div>
                 {parseToTsx({
                   tags,
-                  text,
+                  text: textToRender,
                   map: inTextComponentsMap
                 })}
+                {isTextExpanded === false && (
+                  <GVButton
+                    noPadding
+                    variant={"text"}
+                    onClick={() => setTextExpandState(true)}
+                  >
+                    <b>Expand</b>
+                  </GVButton>
+                )}
               </div>
             </Row>
           )}
@@ -105,6 +139,7 @@ const _Message: React.FC<IMessageProps> = ({
 };
 
 export interface IMessageProps {
+  reduceLargeText?: boolean;
   settingsBlock?: JSX.Element;
   row?: boolean;
   tags?: PostTag[];
