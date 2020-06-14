@@ -1,3 +1,6 @@
+import { PostPreview } from "components/banners/post-preview";
+import { getImageUrlByQuality } from "components/conversation/conversation-image/conversation-image.helpers";
+import { getPost } from "components/conversation/conversation.service";
 import { ASSET } from "constants/constants";
 import {
   FundDetailsFull,
@@ -129,6 +132,29 @@ export const createPng = async (
   return await image.toBuffer();
 };
 
+const createPostPreview = async (href: string): Promise<Buffer | string> => {
+  const containerSize = { height: 350, width: 650 };
+  const svgReactStream = `
+  <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+  ${ReactDOM.renderToStaticMarkup(
+    <PostPreview containerSize={containerSize} />
+  )}
+  `;
+
+  try {
+    return await createPng(svgReactStream, {
+      href,
+      containerSize,
+      position: { y: 0 },
+      size: { height: containerSize.height }
+    });
+  } catch (e) {
+    console.error("Error 3: ", e.stack);
+  }
+
+  return svgReactStream;
+};
+
 async function createBanner(
   Banner: React.ReactElement,
   pngOptions?: PngOptions
@@ -164,6 +190,33 @@ export async function fetchProgramData(id: string) {
 
   return { details, chart };
 }
+
+export const createPostPreviewApi = () => {
+  return async (req: BannerApiContext, res: NextApiResponse) => {
+    const {
+      query: { id }
+    } = req;
+
+    try {
+      const { images } = await getPost({ id: id as string });
+
+      const previewImage = images.length
+        ? getImageUrlByQuality(images[0].resizes, "Medium")
+        : "";
+
+      const banner = await createPostPreview(previewImage);
+
+      res.statusCode = 200;
+      res.setHeader("Content-Type", `image/png`);
+      res.setHeader("Cache-Control", `max-age=86400`);
+      res.send(banner);
+    } catch (e) {
+      console.error("error 2: ", e);
+      res.statusCode = 500;
+      res.end();
+    }
+  };
+};
 
 export function createBannerApi(
   Banner: BannerComponent,
