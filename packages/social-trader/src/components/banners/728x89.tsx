@@ -34,6 +34,7 @@ const Title: React.FC = ({ children }) => {
 };
 
 export const LOGO_OPTIONS: LogoOptions = {
+  useMask: true,
   size: { width: 25, height: 25 },
   position: {
     x: 25,

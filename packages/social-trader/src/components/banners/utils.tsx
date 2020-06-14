@@ -14,6 +14,7 @@ import filesService from "services/file-service";
 import sharp from "sharp";
 
 export type LogoOptions = {
+  useMask?: boolean;
   size: { width: number; height: number };
   position: {
     x: number;
@@ -82,9 +83,11 @@ export const createPng = async (
 
       const maskPng = maskImage(logo, pngOptions.size.width);
 
+      const input = pngOptions.useMask ? await maskPng.toBuffer() : logo;
+
       image.composite([
         {
-          input: await maskPng.toBuffer(),
+          input,
           top: pngOptions.position.y,
           left: pngOptions.position.x
         }

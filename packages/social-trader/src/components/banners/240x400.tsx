@@ -34,6 +34,7 @@ const Label: React.FC = ({ children }) => {
 };
 
 export const LOGO_OPTIONS: LogoOptions = {
+  useMask: true,
   size: { width: 25, height: 25 },
   position: {
     x: 20,
@@ -58,14 +59,14 @@ export const Banner: BannerComponent = props => {
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
     >
-      <rect width={240} height={400} fill="#1F2B35" />
-      <rect y={337} width={240} height={63} fill="#131E26" />
+      <rect width={240} height={400} fill="#1F2B35"/>
+      <rect y={337} width={240} height={63} fill="#131E26"/>
       <LogoPlaceholder
         {...LOGO_OPTIONS}
         href={props.details.publicInfo.logo}
         color={props.details.publicInfo.color}
       />
-      <GvLogo y={359} x={69} />
+      <GvLogo y={359} x={69}/>
       <Label>{props.details.publicInfo.title}</Label>
       <Title y={92}>Monthly Profit</Title>
       <Value y={92}>{`${statistic.profitPercent}%`}</Value>
