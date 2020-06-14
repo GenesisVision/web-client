@@ -50,6 +50,21 @@ const Mask: React.FC<{ size: number }> = ({ size }) => {
   );
 };
 
+const maskImage = (logo: Buffer, size: number) => {
+  const mask = ReactDOM.renderToStaticNodeStream(<Mask size={size} />).read();
+
+  const maskPng = sharp(mask).png();
+
+  return maskPng
+    .composite([
+      {
+        input: logo,
+        blend: "in"
+      }
+    ])
+    .withMetadata();
+};
+
 export const createPng = async (
   svgReactStream: string,
   pngOptions: PngOptions
@@ -65,20 +80,7 @@ export const createPng = async (
         .resize(pngOptions.size.width, pngOptions.size.height)
         .toBuffer();
 
-      const mask = ReactDOM.renderToStaticNodeStream(
-        <Mask size={pngOptions.size.width} />
-      ).read();
-
-      const maskPng = sharp(mask).png();
-
-      maskPng
-        .composite([
-          {
-            input: logo,
-            blend: "in"
-          }
-        ])
-        .withMetadata();
+      const maskPng = maskImage(logo, pngOptions.size.width);
 
       image.composite([
         {
