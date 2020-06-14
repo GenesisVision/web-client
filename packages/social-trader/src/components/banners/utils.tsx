@@ -82,7 +82,7 @@ export const createPng = async (
 
       const metadata = await sharpedImage.metadata();
       const imageRatio = metadata.height! / metadata!.width!;
-      const imageWidth = Math.floor(pngOptions.size.height * imageRatio);
+      const imageWidth = Math.floor(pngOptions.size.height / imageRatio);
 
       const logo = await sharpedImage
         .resize(imageWidth, pngOptions.size.height)
