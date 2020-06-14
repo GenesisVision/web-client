@@ -57,7 +57,7 @@ export const createPng = async (
   const image = sharp(Buffer.from(svgReactStream));
   if (pngOptions.href !== null && pngOptions.href !== undefined) {
     try {
-      const req = await unfetch(filesService.getFileUrl(pngOptions.href));
+      const req = await unfetch(pngOptions.href);
       const result = await req.arrayBuffer();
       const buffer = Buffer.from(result);
 
@@ -151,7 +151,7 @@ export default function createBannerApi(
         <Banner chart={chart} details={details} />,
         logoOptions
           ? {
-              href: details.publicInfo.logo,
+              href: filesService.getFileUrl(details.publicInfo.logo),
               ...logoOptions
             }
           : undefined
