@@ -34,9 +34,7 @@ export const PostPage: React.FC<Props> = ({ post }) => {
           logo: previewImage
         })
       ]}
-      previewImage={
-        previewImage ? composePostPreviewImageUrl(post.id) : undefined
-      }
+      previewImage={previewImage}
       description={description}
       title={title}
     >
