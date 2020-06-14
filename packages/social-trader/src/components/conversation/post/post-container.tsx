@@ -5,18 +5,25 @@ import useApiRequest from "hooks/api-request.hook";
 import React from "react";
 
 interface Props {
+  reduceLargeText?: boolean;
   post?: ConversationPost;
   id: string;
 }
 
-const _PostContainer: React.FC<Props> = ({ id, post }) => {
+const _PostContainer: React.FC<Props> = ({ reduceLargeText, id, post }) => {
   const { data, sendRequest } = useApiRequest({
     request: () => getPost({ id }),
     defaultData: post,
     fetchOnMount: !post
   });
   if (!data) return null;
-  return <Post post={data} updateData={sendRequest} />;
+  return (
+    <Post
+      reduceLargeText={reduceLargeText}
+      post={data}
+      updateData={sendRequest}
+    />
+  );
 };
 
 export const PostContainer = React.memo(_PostContainer);

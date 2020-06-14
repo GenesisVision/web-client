@@ -1,11 +1,32 @@
 import { NumberFormatValues } from "react-number-format";
 import { Nullable } from "utils/types";
 
+export const getSymbolIndexByTurn = ({
+  text,
+  symbol,
+  turn
+}: {
+  text: string;
+  symbol: string;
+  turn: number;
+}): number => {
+  let position = 0;
+  let index = 0;
+  do {
+    const i = text.indexOf(symbol, index + 1);
+    if (i === index || position === turn) return index;
+    else {
+      position++;
+      index = i;
+    }
+  } while (true);
+};
+
 export const getLongWordsCount = (text: string): number =>
   text
     .split(" ")
     .map(word => word.length)
-    .filter(length => length > 20).length;
+    .filter(length => length > 30).length;
 
 export const modulo = (dividend: number, divider: number): number => {
   return dividend - Math.floor(dividend / divider) * divider;
