@@ -151,7 +151,7 @@ export async function fetchProgramData(id: string) {
   return { details, chart };
 }
 
-export default function createBannerApi(
+export function createBannerApi(
   Banner: BannerComponent,
   asset: ASSET,
   logoOptions?: LogoOptions
