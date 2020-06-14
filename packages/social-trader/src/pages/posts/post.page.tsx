@@ -9,6 +9,7 @@ import Page from "components/page/page";
 import { getPostSchema } from "pages/posts/post-page.schema";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { composePostPreviewImageUrl } from "utils/compose-url";
 
 export const PostPage: React.FC<Props> = ({ post }) => {
   const [t] = useTranslation();
@@ -32,7 +33,7 @@ export const PostPage: React.FC<Props> = ({ post }) => {
           logo: previewImage
         })
       ]}
-      previewImage={previewImage}
+      previewImage={composePostPreviewImageUrl(post.id)}
       description={description}
       title={title}
     >
