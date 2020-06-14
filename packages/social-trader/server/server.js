@@ -39,6 +39,13 @@ module.exports = async app => {
   );
 
   server.use(
+    createProxyMiddleware("/post-preview", {
+      target: `http://localhost:${port}/api`,
+      changeOrigin: true
+    })
+  );
+
+  server.use(
     createProxyMiddleware("/banners", {
       target: `http://localhost:${port}/api`,
       changeOrigin: true
