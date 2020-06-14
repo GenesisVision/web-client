@@ -11,8 +11,10 @@ export default function LogoPlaceholder({
   href,
   size,
   color = "white",
-  position: { x, y }
+  position
 }: LogoProps) {
+  const x = position?.x ? position.x : 0;
+  const y = position?.y ? position.y : 0;
   if (!href) {
     switch (size.width) {
       case 21:
