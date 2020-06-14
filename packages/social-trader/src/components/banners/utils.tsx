@@ -1,3 +1,6 @@
+import { PostPreview } from "components/banners/post-preview";
+import { getImageUrlByQuality } from "components/conversation/conversation-image/conversation-image.helpers";
+import { getPost } from "components/conversation/conversation.service";
 import { ASSET } from "constants/constants";
 import {
   FundDetailsFull,
@@ -14,10 +17,12 @@ import filesService from "services/file-service";
 import sharp from "sharp";
 
 export type LogoOptions = {
-  size: 21 | 25;
-  position: {
-    x: number;
-    y: number;
+  useMask?: boolean;
+  containerSize?: { width: number; height: number };
+  size: { width?: number; height: number };
+  position?: {
+    x?: number;
+    y?: number;
   };
 };
 
@@ -43,7 +48,7 @@ export type BannerProps = {
 
 export type BannerComponent = React.ComponentType<BannerProps>;
 
-const Mask: React.FC<{ size: 21 | 25 }> = ({ size }) => {
+const Mask: React.FC<{ size: number }> = ({ size }) => {
   return (
     <svg
       width={size}
@@ -56,6 +61,21 @@ const Mask: React.FC<{ size: 21 | 25 }> = ({ size }) => {
   );
 };
 
+const maskImage = (logo: Buffer, size: number) => {
+  const mask = ReactDOM.renderToStaticNodeStream(<Mask size={size} />).read();
+
+  const maskPng = sharp(mask).png();
+
+  return maskPng
+    .composite([
+      {
+        input: logo,
+        blend: "in"
+      }
+    ])
+    .withMetadata();
+};
+
 export const createPng = async (
   svgReactStream: string,
   pngOptions: PngOptions
@@ -63,34 +83,52 @@ export const createPng = async (
   const image = sharp(Buffer.from(svgReactStream));
   if (pngOptions.href !== null && pngOptions.href !== undefined) {
     try {
-      const req = await unfetch(filesService.getFileUrl(pngOptions.href));
+      const req = await unfetch(pngOptions.href);
       const result = await req.arrayBuffer();
       const buffer = Buffer.from(result);
 
-      const logo = await sharp(buffer)
-        .resize(pngOptions.size, pngOptions.size)
+      const sharpedImage = sharp(buffer);
+
+      const metadata = await sharpedImage.metadata();
+      const imageRatio = metadata.height! / metadata!.width!;
+      const imageWidth = Math.floor(pngOptions.size.height / imageRatio);
+
+      const logo = await sharpedImage
+        .resize(imageWidth, pngOptions.size.height)
         .toBuffer();
 
-      const mask = ReactDOM.renderToStaticNodeStream(
-        <Mask size={pngOptions.size} />
-      ).read();
+      const maskPng = maskImage(logo, pngOptions.size.height);
 
-      const maskPng = sharp(mask).png();
+      const input = pngOptions.useMask ? await maskPng.toBuffer() : logo;
 
-      maskPng
-        .composite([
-          {
-            input: logo,
-            blend: "in"
-          }
-        ])
-        .withMetadata();
+      const calculatedTop = pngOptions.containerSize
+        ? Math.floor(
+            pngOptions.containerSize.height / 2 - metadata!.height! / 2
+          )
+        : undefined;
+      const top =
+        pngOptions.position?.y === undefined
+          ? calculatedTop || 0
+          : pngOptions.position?.y;
+      const calculatedLeft = pngOptions.containerSize
+        ? Math.floor(pngOptions.containerSize.width / 2 - imageWidth / 2)
+        : undefined;
+      const left =
+        pngOptions.position?.x === undefined
+          ? calculatedLeft || 0
+          : pngOptions.position?.x;
 
+      if (
+        imageRatio <= 1 ||
+        (pngOptions.containerSize?.width &&
+          left + imageWidth > pngOptions.containerSize?.width)
+      )
+        return input;
       image.composite([
         {
-          input: await maskPng.toBuffer(),
-          top: pngOptions.position.y,
-          left: pngOptions.position.x
+          input,
+          top,
+          left
         }
       ]);
     } catch (e) {
@@ -99,6 +137,29 @@ export const createPng = async (
   }
 
   return await image.toBuffer();
+};
+
+const createPostPreview = async (href: string): Promise<Buffer | string> => {
+  const containerSize = { height: 250, width: 350 };
+  const svgReactStream = `
+  <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+  ${ReactDOM.renderToStaticMarkup(
+    <PostPreview containerSize={containerSize} />
+  )}
+  `;
+
+  try {
+    return await createPng(svgReactStream, {
+      href,
+      containerSize,
+      position: { y: 0 },
+      size: { height: containerSize.height }
+    });
+  } catch (e) {
+    console.error("Error 3: ", e.stack);
+  }
+
+  return svgReactStream;
 };
 
 async function createBanner(
@@ -139,7 +200,34 @@ export async function fetchProgramData(id: string) {
   return { details, chart };
 }
 
-export default function createBannerApi(
+export const createPostPreviewApi = () => {
+  return async (req: BannerApiContext, res: NextApiResponse) => {
+    const {
+      query: { id }
+    } = req;
+
+    try {
+      const { images } = await getPost({ id: id as string });
+
+      const previewImage = images.length
+        ? getImageUrlByQuality(images[0].resizes, "Low")
+        : "";
+
+      const banner = await createPostPreview(previewImage);
+
+      res.statusCode = 200;
+      res.setHeader("Content-Type", `image/png`);
+      res.setHeader("Cache-Control", `max-age=86400`);
+      res.send(banner);
+    } catch (e) {
+      console.error("error 2: ", e);
+      res.statusCode = 500;
+      res.end();
+    }
+  };
+};
+
+export function createBannerApi(
   Banner: BannerComponent,
   asset: ASSET,
   logoOptions?: LogoOptions
@@ -159,7 +247,7 @@ export default function createBannerApi(
         <Banner chart={chart} details={details} />,
         logoOptions
           ? {
-              href: details.publicInfo.logo,
+              href: filesService.getFileUrl(details.publicInfo.logo),
               ...logoOptions
             }
           : undefined

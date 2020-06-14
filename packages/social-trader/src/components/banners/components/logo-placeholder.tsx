@@ -11,10 +11,12 @@ export default function LogoPlaceholder({
   href,
   size,
   color = "white",
-  position: { x, y }
+  position
 }: LogoProps) {
+  const x = position?.x ? position.x : 0;
+  const y = position?.y ? position.y : 0;
   if (!href) {
-    switch (size) {
+    switch (size.width) {
       case 21:
         return <Logo21 color={color} x={x} y={y} />;
       case 25:
@@ -28,8 +30,8 @@ export default function LogoPlaceholder({
           id="rect"
           x={x}
           y={y}
-          width={size}
-          height={size}
+          width={size.width}
+          height={size.height}
           rx={BANNER_LOGO_RADIUS}
         />
         <clipPath id="clip">
@@ -42,8 +44,8 @@ export default function LogoPlaceholder({
         x={x}
         y={y}
         href={filesService.getFileUrl(href)}
-        width={size}
-        height={size}
+        width={size.width}
+        height={size.height}
         clipPath="url(#clip)"
       />
     </svg>

@@ -25,6 +25,7 @@ export const POSTS = "posts";
 export const POSTS_ROUTE = `/${POSTS}`;
 export const POST_ROUTE = `${POSTS_ROUTE}/:${SLUG_URL_PARAM_NAME}`;
 export const POST_FOLDER_ROUTE = `${POSTS_ROUTE}/[id]`;
+export const POST_PREVIEW_IMAGE_ROUTE = `/post-preview/:${SLUG_URL_PARAM_NAME}/image.png`;
 
 export const composePostDetailsUrl = (slugUrl: string): string =>
   replaceParams(POST_ROUTE, {

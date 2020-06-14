@@ -39,11 +39,12 @@ const Title: React.FC = ({ children }) => {
 };
 
 export const LOGO_OPTIONS: LogoOptions = {
+  useMask: true,
   position: {
     x: 20,
     y: 16
   },
-  size: 21
+  size: { width: 21, height: 21 }
 };
 
 export const Banner: BannerComponent = (props: BannerProps) => {

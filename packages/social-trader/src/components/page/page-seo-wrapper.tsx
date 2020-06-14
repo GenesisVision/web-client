@@ -39,6 +39,7 @@ export const PageSeoWrapper: React.FC<IPageSeoWrapperProps> = ({
 
 export interface IPageSeoWrapperProps
   extends React.HTMLAttributes<HTMLDivElement> {
+  type?: "website" | "article";
   showTitle?: boolean;
   title: string;
   schemas?: Array<SchemaType>;
