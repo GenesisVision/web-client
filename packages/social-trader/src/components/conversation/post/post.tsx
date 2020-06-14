@@ -44,7 +44,7 @@ const DeletedPost: React.FC<{
   );
 };
 
-const _Post: React.FC<Props> = ({ updateData, post }) => {
+const _Post: React.FC<Props> = ({ reduceLargeText, updateData, post }) => {
   const {
     rePostsCount,
     isPinned,
@@ -65,6 +65,7 @@ const _Post: React.FC<Props> = ({ updateData, post }) => {
       <Row center={false}>
         <RowItem wide>
           <Message
+            reduceLargeText={reduceLargeText}
             settingsBlock={
               actions?.canDelete || actions?.canPin ? (
                 <RowItem>
@@ -126,6 +127,7 @@ const _Post: React.FC<Props> = ({ updateData, post }) => {
 };
 
 interface Props {
+  reduceLargeText?: boolean;
   updateData: VoidFunction;
   post: ConversationPost;
 }
