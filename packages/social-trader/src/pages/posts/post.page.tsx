@@ -25,6 +25,7 @@ export const PostPage: React.FC<Props> = ({ post }) => {
     : undefined;
   return (
     <Page
+      type={"article"}
       schemas={[
         getPostSchema({
           description,
