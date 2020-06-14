@@ -113,8 +113,9 @@ export const createPng = async (
           : pngOptions.position?.x;
 
       if (
-        pngOptions.containerSize?.width &&
-        left + imageWidth > pngOptions.containerSize?.width
+        imageRatio <= 1 ||
+        (pngOptions.containerSize?.width &&
+          left + imageWidth > pngOptions.containerSize?.width)
       )
         return input;
       image.composite([
