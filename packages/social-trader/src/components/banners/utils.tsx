@@ -15,8 +15,9 @@ import sharp from "sharp";
 
 export type LogoOptions = {
   useMask?: boolean;
-  size: { width: number; height: number };
-  position: {
+  containerSize?: { width: number; height: number };
+  size: { width?: number; height: number };
+  position?: {
     x: number;
     y: number;
   };
@@ -77,19 +78,33 @@ export const createPng = async (
       const result = await req.arrayBuffer();
       const buffer = Buffer.from(result);
 
-      const logo = await sharp(buffer)
-        .resize(pngOptions.size.width, pngOptions.size.height)
+      const sharpedImage = sharp(buffer);
+
+      const metadata = await sharpedImage.metadata();
+      const imageRatio = metadata.height! / metadata!.width!;
+
+      const logo = await sharpedImage
+        .resize(pngOptions.size.height * imageRatio, pngOptions.size.height)
         .toBuffer();
 
-      const maskPng = maskImage(logo, pngOptions.size.width);
+      const maskPng = maskImage(logo, pngOptions.size.height);
 
       const input = pngOptions.useMask ? await maskPng.toBuffer() : logo;
+
+      const calculatedTop = pngOptions.containerSize
+        ? pngOptions.containerSize.height / 2 - metadata!.height! / 2
+        : undefined;
+      const top = pngOptions.position?.y || calculatedTop || 0;
+      const calculatedLeft = pngOptions.containerSize
+        ? pngOptions.containerSize.width / 2 - metadata!.width! / 2
+        : undefined;
+      const left = pngOptions.position?.x || calculatedLeft || 0;
 
       image.composite([
         {
           input,
-          top: pngOptions.position.y,
-          left: pngOptions.position.x
+          top,
+          left
         }
       ]);
     } catch (e) {
