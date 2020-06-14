@@ -18,8 +18,8 @@ export type LogoOptions = {
   containerSize?: { width: number; height: number };
   size: { width?: number; height: number };
   position?: {
-    x: number;
-    y: number;
+    x?: number;
+    y?: number;
   };
 };
 
@@ -82,12 +82,10 @@ export const createPng = async (
 
       const metadata = await sharpedImage.metadata();
       const imageRatio = metadata.height! / metadata!.width!;
+      const imageWidth = Math.floor(pngOptions.size.height * imageRatio);
 
       const logo = await sharpedImage
-        .resize(
-          Math.floor(pngOptions.size.height * imageRatio),
-          pngOptions.size.height
-        )
+        .resize(imageWidth, pngOptions.size.height)
         .toBuffer();
 
       const maskPng = maskImage(logo, pngOptions.size.height);
@@ -99,11 +97,17 @@ export const createPng = async (
             pngOptions.containerSize.height / 2 - metadata!.height! / 2
           )
         : undefined;
-      const top = pngOptions.position?.y || calculatedTop || 0;
+      const top =
+        pngOptions.position?.y === undefined
+          ? calculatedTop || 0
+          : pngOptions.position?.y;
       const calculatedLeft = pngOptions.containerSize
-        ? Math.floor(pngOptions.containerSize.width / 2 - metadata!.width! / 2)
+        ? Math.floor(pngOptions.containerSize.width / 2 - imageWidth / 2)
         : undefined;
-      const left = pngOptions.position?.x || calculatedLeft || 0;
+      const left =
+        pngOptions.position?.x === undefined
+          ? calculatedLeft || 0
+          : pngOptions.position?.x;
 
       image.composite([
         {
