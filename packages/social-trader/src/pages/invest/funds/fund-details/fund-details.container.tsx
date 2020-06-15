@@ -40,6 +40,7 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
   const title = `${t("funds-page.title")} - ${description.publicInfo.title}`;
   return (
     <Page
+      type={"article"}
       title={title}
       schemas={[getFundSchema(description)]}
       description={`${t("funds-page.title")} ${
