@@ -1,5 +1,5 @@
 import ImageBaseElement from "components/avatar/image-base.element";
-import { ImageQualityType } from "hooks/url.hook";
+import { ImageQuality } from "gv-api-web";
 import * as React from "react";
 
 const _ImageBase: React.FC<IImageBaseProps> = ({
@@ -40,7 +40,7 @@ export interface IImageProps {
 
 export interface IImageBaseProps {
   onClick?: VoidFunction;
-  quality?: ImageQualityType;
+  quality?: ImageQuality;
   title?: string;
   color?: string;
   DefaultImageComponent?: React.ComponentType<any>;
