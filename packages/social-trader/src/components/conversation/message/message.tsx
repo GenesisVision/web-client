@@ -7,6 +7,7 @@ import {
   IConversationUser
 } from "components/conversation/conversation.types";
 import {
+  ExcludedTagsUnderText,
   generateTagsComponents,
   reduceByBreaks,
   reduceBySymbolsCount
@@ -19,13 +20,14 @@ import GVButton from "components/gv-button";
 import { HorizontalShadowList } from "components/horizontal-list-shadow-container/horizontal-shadow-list";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
-import { PostTag } from "gv-api-web";
+import { PostTag, SocialPostTagType } from "gv-api-web";
 import React, { useEffect, useState } from "react";
 import { getLongWordsCount } from "utils/helpers";
 
 import styles from "./message.module.scss";
 
 const _Message: React.FC<IMessageProps> = ({
+  excludedTagsUnderText: excludedTagsUnderTextProp = [],
   reduceLargeText = true,
   settingsBlock,
   row = true,
@@ -55,9 +57,10 @@ const _Message: React.FC<IMessageProps> = ({
     if (isTextExpanded) setTextToRender(text);
   }, [isTextExpanded]);
 
-  const tagsUnderText = tags
-    ?.filter(({ type }) => type !== "Event")
-    .filter(({ type }) => type !== "Post");
+  const tagsUnderText = tags?.filter(
+    ({ type }) =>
+      ![...ExcludedTagsUnderText, ...excludedTagsUnderTextProp].includes(type)
+  );
   const repostTag = tags?.filter(({ type }) => type === "Post");
   const MessageItem = row ? RowItem : Row;
   const hasLongWords = textToRender && !!getLongWordsCount(textToRender);
@@ -139,6 +142,7 @@ const _Message: React.FC<IMessageProps> = ({
 };
 
 export interface IMessageProps {
+  excludedTagsUnderText?: SocialPostTagType[];
   reduceLargeText?: boolean;
   settingsBlock?: JSX.Element;
   row?: boolean;
