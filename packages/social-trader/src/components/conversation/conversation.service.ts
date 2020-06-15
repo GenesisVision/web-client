@@ -41,7 +41,7 @@ const uploadImages = async (images?: IImageValue[]) => {
   const ids: string[] = [];
   if (!images?.length) return [];
   for (const image of images) {
-    const id = await filesService.uploadFile(image.image!.cropped);
+    const id = await filesService.uploadFile(image.image!.cropped, "Social");
     ids.push(id);
   }
   return ids.map((image, position) => ({ image, position }));

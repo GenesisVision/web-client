@@ -1,7 +1,6 @@
 import { IConversationImage } from "components/conversation/conversation.types";
 import { SIZES } from "constants/constants";
 import { ImageQuality, PostImageResize } from "gv-api-web";
-import { ImageQualityType } from "hooks/url.hook";
 import { safeGetElemFromArray } from "utils/helpers";
 
 export const getImageUrlByQuality = (
@@ -37,7 +36,7 @@ export const getImageSize = (count: number): SIZES => {
   }
 };
 
-export const getImageQuality = (size: SIZES): ImageQualityType => {
+export const getImageQuality = (size: SIZES): ImageQuality => {
   switch (size) {
     case SIZES.XLARGE:
     case SIZES.LARGE:
