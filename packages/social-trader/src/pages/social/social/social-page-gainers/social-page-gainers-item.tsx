@@ -2,7 +2,10 @@ import Profitability from "components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "components/profitability/profitability.helper";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
-import { SocialSearchContext } from "pages/social/social/social-page.context";
+import {
+  SocialSearchContext,
+  SocialSearchInitialState
+} from "pages/social/social/social-page.context";
 import React, { useCallback, useContext } from "react";
 import { formatCurrencyValue } from "utils/formatter";
 
@@ -13,18 +16,16 @@ interface Props {
 }
 
 const _SocialPageGainersItem: React.FC<Props> = ({ title, price, change }) => {
-  const { searchValue, setSearchValue } = useContext(SocialSearchContext);
+  const { setSearchValue } = useContext(SocialSearchContext);
 
   const handleClick = useCallback(() => {
     const hashTag = `#${title.toLowerCase()}`;
-    const hashTags = searchValue.hashTags.includes(hashTag)
-      ? searchValue.hashTags
-      : [...searchValue.hashTags, hashTag];
+    const hashTags = [hashTag];
     setSearchValue({
-      ...searchValue,
+      ...SocialSearchInitialState,
       hashTags
     });
-  }, [searchValue, title]);
+  }, [title]);
   return (
     <div>
       <Row onClick={handleClick}>{title}</Row>

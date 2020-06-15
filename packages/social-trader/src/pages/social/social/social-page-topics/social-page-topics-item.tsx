@@ -1,7 +1,10 @@
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import StatisticItemInner from "components/statistic-item/statistic-item-inner";
-import { SocialSearchContext } from "pages/social/social/social-page.context";
+import {
+  SocialSearchContext,
+  SocialSearchInitialState
+} from "pages/social/social/social-page.context";
 import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -19,17 +22,15 @@ const _SocialPageTopicsItem: React.FC<Props> = ({
   discussCount
 }) => {
   const [t] = useTranslation();
-  const { searchValue, setSearchValue } = useContext(SocialSearchContext);
+  const { setSearchValue } = useContext(SocialSearchContext);
 
   const handleClick = useCallback(() => {
-    const hashTags = searchValue.hashTags.includes(hashTag)
-      ? searchValue.hashTags
-      : [...searchValue.hashTags, hashTag];
+    const hashTags = [hashTag];
     setSearchValue({
-      ...searchValue,
+      ...SocialSearchInitialState,
       hashTags
     });
-  }, [searchValue, hashTag]);
+  }, [hashTag]);
   return (
     <div className={styles["social-page-topics__item"]}>
       <Row onClick={handleClick}>{hashTag}</Row>
