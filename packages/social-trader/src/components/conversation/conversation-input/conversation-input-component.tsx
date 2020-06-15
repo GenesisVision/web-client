@@ -37,8 +37,15 @@ export const ConversationInputComponent: React.FC<Props> = ({
 
   const handleKeyDown = useCallback(
     (event: TextareaKeyDownEventExtended) => {
-      const { keyCode, metaKey, ctrlKey, ref, preventDefault } = event;
-      const ctrl = ctrlKey || metaKey;
+      const {
+        shiftKey,
+        keyCode,
+        metaKey,
+        ctrlKey,
+        ref,
+        preventDefault
+      } = event;
+      const ctrl = shiftKey || ctrlKey || metaKey;
       if (keyCode === 13) {
         if (ctrl && submitType === CONVERSATION_SUBMIT_TYPE.ENTER) {
           const position = ref.selectionEnd;
