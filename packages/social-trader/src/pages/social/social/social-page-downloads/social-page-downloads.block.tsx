@@ -41,7 +41,7 @@ const _SocialPageDownloadsBlock: React.FC<Props> = () => {
                 </RowItem>
                 <RowItem small>
                   <Row small>
-                    <MutedText>Available on the</MutedText>
+                    <MutedText>Available on</MutedText>
                   </Row>
                   <Row small>App Store</Row>
                 </RowItem>
