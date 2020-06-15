@@ -12,6 +12,7 @@ import {
 } from "utils/seo";
 
 export const PageSeoWrapper: React.FC<IPageSeoWrapperProps> = ({
+  type,
   children,
   url,
   schemas,
@@ -25,7 +26,7 @@ export const PageSeoWrapper: React.FC<IPageSeoWrapperProps> = ({
     <>
       <Head>
         <title>{pageTitle}</title>
-        {commonMeta()}
+        {commonMeta(type)}
         {urlMeta(url)}
         {schema(schemas)}
         {titleMeta(title)}

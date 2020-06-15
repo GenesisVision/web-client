@@ -10,6 +10,7 @@ import * as React from "react";
 import { PropsWithChildren } from "react";
 
 const Page = ({
+  type,
   showTitle,
   title,
   description,
@@ -22,6 +23,7 @@ const Page = ({
   return (
     <TitleContext.Provider value={title}>
       <PageSeoWrapper
+        type={type}
         url={url}
         schemas={schemas}
         title={title}
