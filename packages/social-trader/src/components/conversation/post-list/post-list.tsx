@@ -40,7 +40,7 @@ const _PostList: React.FC<Props> = ({ skip, hasMore, data, onScroll }) => {
 
   useEffect(() => {
     const clearData = data.filter(
-      ({ id }) => !mergedPosts.find(post => post.id === id)
+      ({ id }) => skip === 0 || !mergedPosts.find(post => post.id === id)
     );
     setMergedPosts([...(skip ? mergedPosts : []), ...clearData]);
   }, [data]);

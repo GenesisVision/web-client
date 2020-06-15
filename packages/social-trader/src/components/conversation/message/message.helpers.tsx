@@ -3,12 +3,14 @@ import {
   underTextComponentsMap
 } from "components/conversation/tag/parse-to-tsx";
 import { RowItem } from "components/row-item/row-item";
-import { PostTag } from "gv-api-web";
+import { PostTag, SocialPostTagType } from "gv-api-web";
 import React from "react";
 import { getSymbolIndexByTurn } from "utils/helpers";
 
 const MAX_TEXT_BREAKS_COUNT = 5;
 const MAX_TEXT_SYMBOLS_COUNT = 400;
+
+export const ExcludedTagsUnderText: SocialPostTagType[] = ["Event", "Post"];
 
 export const reduceBySymbolsCount = (
   text: string,
