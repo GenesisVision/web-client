@@ -11,9 +11,9 @@ const _SettingsPage: React.FC<WithTranslation> = ({ t }) => (
     <SettingsBlock label={t("profile-page.settings.platform-currency")}>
       <CurrencySelectContainer />
     </SettingsBlock>
-    <SettingsBlock>
+    {/*<SettingsBlock>
       <SocialBetaSelect />
-    </SettingsBlock>
+    </SettingsBlock>*/}
   </ProfileLayout>
 );
 
