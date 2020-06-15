@@ -17,6 +17,7 @@ const _Comment: React.FC<Props> = ({
       <Row className={styles["comment__message"]} center={false}>
         <RowItem>
           <Message
+            excludedTagsUnderText={["User"]}
             tags={tags}
             images={images}
             date={date}
