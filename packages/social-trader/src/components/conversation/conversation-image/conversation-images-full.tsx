@@ -90,7 +90,10 @@ const ConversationImagesFullContent: React.FC<{
           onClick={handleNext}
           quality={"High"}
           className={styles["conversation-image-full"]}
-          src={getImageUrlByQuality(images[currentImageIndex].resizes, "High")}
+          src={getImageUrlByQuality(
+            images[currentImageIndex].resizes,
+            "Original"
+          )}
         />
         <div
           onClick={handlePrev}
