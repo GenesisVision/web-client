@@ -125,6 +125,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
 
   return (
     <Page
+      type={"article"}
       title={`${
         assetType === ASSET.FOLLOW
           ? t("follows-page.title")
