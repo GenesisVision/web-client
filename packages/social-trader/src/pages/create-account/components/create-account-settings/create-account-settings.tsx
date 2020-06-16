@@ -120,6 +120,7 @@ const _CreateAccountSettings: React.FC<Props> = ({
       ) : (
         <>
           <DepositDetailsBlock
+            broker={accountType.type}
             hide={!accountType.isDepositRequired}
             blockNumber={2}
             setAvailable={setAvailable}
