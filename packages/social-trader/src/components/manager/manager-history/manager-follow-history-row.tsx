@@ -15,8 +15,8 @@ import { FollowDetailsListItem } from "gv-api-web";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { PROGRAM_DETAILS_FOLDER_ROUTE } from "routes/programs.routes";
-import { composeProgramDetailsUrl } from "utils/compose-url";
+import { FOLLOW_DETAILS_FOLDER_ROUTE } from "routes/invest.routes";
+import { composeFollowDetailsUrl } from "utils/compose-url";
 import { distanceDate } from "utils/dates";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
 
@@ -31,16 +31,16 @@ const _ManagerFollowHistoryRow: React.FC<IManagerHistoryRowProps> = ({
 }) => {
   const [t] = useTranslation();
   const { linkCreator } = useToLink();
-  const programLinkProps = linkCreator(
-    composeProgramDetailsUrl(asset.url),
-    PROGRAM_DETAILS_FOLDER_ROUTE
+  const linkProps = linkCreator(
+    composeFollowDetailsUrl(asset.url),
+    FOLLOW_DETAILS_FOLDER_ROUTE
   );
   return (
     <ManagerHistoryRow
       asset={asset}
       assetType={ASSET.PROGRAM}
       avatarBlock={
-        <Link to={programLinkProps}>
+        <Link to={linkProps}>
           <AssetAvatarWithName
             url={asset.logoUrl}
             alt={asset.title}

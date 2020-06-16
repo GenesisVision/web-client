@@ -22,7 +22,7 @@
     width: 100%;
     white-space: pre-wrap;
     &--break-word {
-      word-break: break-word;
+      overflow-wrap: anywhere;
     }
   }
   &__images {

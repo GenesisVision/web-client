@@ -47,6 +47,7 @@ $image-full-button-size: 30px;
 }
 
 .conversation-image-full {
+  display: block;
   cursor: pointer;
   min-height: $image-height-middle;
   max-height: $image-height-full;
