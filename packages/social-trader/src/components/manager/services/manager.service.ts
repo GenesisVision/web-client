@@ -90,6 +90,16 @@ export const fetchManagerFunds = (
   });
 };
 
+export const UserDataInitialCount: IAssetsCountModel = {
+  investingFollowCount: 0,
+  investingProgramsCount: 0,
+  investingFundsCount: 0,
+  postsCount: 0,
+  followCount: 0,
+  programsCount: 0,
+  fundsCount: 0
+};
+
 export const fetchManagerAssetsCount = ({
   ownerId,
   isBetaTester
@@ -97,6 +107,12 @@ export const fetchManagerAssetsCount = ({
   ownerId: string;
   isBetaTester: boolean;
 }): Promise<IAssetsCountModel> => {
+  const investOptions = {
+    subscriberId: ownerId,
+    investorId: ownerId,
+    take: 0,
+    includeWithInvestments: true
+  };
   const options = {
     ownerId,
     take: 0,
@@ -108,16 +124,35 @@ export const fetchManagerAssetsCount = ({
       : Promise.resolve({ items: [], total: 0 }),
     api.follows().getFollowAssets(options),
     api.programs().getPrograms(options),
-    api.funds().getFunds(options)
-  ]).then(([feedData, followData, programsData, fundsData]) => ({
-    postsCount: feedData.total,
-    followCount: followData.total,
-    programsCount: programsData.total,
-    fundsCount: fundsData.total
-  }));
+    api.funds().getFunds(options),
+    api.follows().getFollowAssets(investOptions),
+    api.programs().getPrograms(investOptions),
+    api.funds().getFunds(investOptions)
+  ]).then(
+    ([
+      feedData,
+      followData,
+      programsData,
+      fundsData,
+      investingFollowData,
+      investingProgramsData,
+      investingFundsData
+    ]) => ({
+      investingFollowCount: investingFollowData.total,
+      investingProgramsCount: investingProgramsData.total,
+      investingFundsCount: investingFundsData.total,
+      postsCount: feedData.total,
+      followCount: followData.total,
+      programsCount: programsData.total,
+      fundsCount: fundsData.total
+    })
+  );
 };
 
 export interface IAssetsCountModel {
+  investingFollowCount?: number;
+  investingProgramsCount?: number;
+  investingFundsCount?: number;
   postsCount?: number;
   followCount?: number;
   programsCount?: number;
