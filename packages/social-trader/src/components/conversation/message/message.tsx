@@ -6,23 +6,16 @@ import {
   IConversationImage,
   IConversationUser
 } from "components/conversation/conversation.types";
+import { MessageText } from "components/conversation/message/message-text";
 import {
   ExcludedTagsUnderText,
-  generateTagsComponents,
-  reduceByBreaks,
-  reduceBySymbolsCount
+  generateTagsComponents
 } from "components/conversation/message/message.helpers";
-import {
-  inTextComponentsMap,
-  parseToTsx
-} from "components/conversation/tag/parse-to-tsx";
-import GVButton from "components/gv-button";
 import { HorizontalShadowList } from "components/horizontal-list-shadow-container/horizontal-shadow-list";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { PostTag, SocialPostTagType } from "gv-api-web";
-import React, { useEffect, useState } from "react";
-import { getLongWordsCount } from "utils/helpers";
+import React from "react";
 
 import styles from "./message.module.scss";
 
@@ -32,38 +25,18 @@ const _Message: React.FC<IMessageProps> = ({
   settingsBlock,
   row = true,
   tags,
-  postId,
+  url,
   images,
   text,
   date,
-  author: { username, url, logoUrl }
+  author
 }) => {
-  const [textToRender, setTextToRender] = useState<string | undefined>();
-  const [isTextExpanded, setTextExpandState] = useState<boolean | undefined>();
-
-  useEffect(() => {
-    if (!text) return;
-    const newText = reduceLargeText
-      ? reduceByBreaks(
-          reduceBySymbolsCount(text, setTextExpandState),
-          setTextExpandState
-        )
-      : text;
-
-    setTextToRender(newText);
-  }, [text]);
-
-  useEffect(() => {
-    if (isTextExpanded) setTextToRender(text);
-  }, [isTextExpanded]);
-
   const tagsUnderText = tags?.filter(
     ({ type }) =>
       ![...ExcludedTagsUnderText, ...excludedTagsUnderTextProp].includes(type)
   );
   const repostTag = tags?.filter(({ type }) => type === "Post");
   const MessageItem = row ? RowItem : Row;
-  const hasLongWords = textToRender && !!getLongWordsCount(textToRender);
   return (
     <div>
       <div
@@ -78,42 +51,21 @@ const _Message: React.FC<IMessageProps> = ({
         >
           <RowItem wide>
             <ConversationUser
-              postId={postId}
-              url={url}
-              avatar={logoUrl}
-              username={username}
+              postUrl={url}
+              authorUrl={author.url}
+              avatar={author.logoUrl}
+              username={author.username}
               date={date}
             />
           </RowItem>
           <RowItem>{settingsBlock}</RowItem>
         </MessageItem>
-        <MessageItem
-          bottomOffset
-          onlyOffset
-          className={classNames(styles["message__text"], {
-            [styles["message__text--break-word"]]: hasLongWords
-          })}
-        >
-          {textToRender && (
-            <Row>
-              <div>
-                {parseToTsx({
-                  tags,
-                  text: textToRender,
-                  map: inTextComponentsMap
-                })}
-                {isTextExpanded === false && (
-                  <GVButton
-                    noPadding
-                    variant={"text"}
-                    onClick={() => setTextExpandState(true)}
-                  >
-                    <b>Expand</b>
-                  </GVButton>
-                )}
-              </div>
-            </Row>
-          )}
+        <MessageItem bottomOffset onlyOffset>
+          <MessageText
+            text={text}
+            tags={tags}
+            reduceLargeText={reduceLargeText}
+          />
           {!!images.length && (
             <Row wrap small className={styles["message__images"]}>
               {images.map((image, index) => (
@@ -147,7 +99,7 @@ export interface IMessageProps {
   settingsBlock?: JSX.Element;
   row?: boolean;
   tags?: PostTag[];
-  postId?: string;
+  url: string;
   images: IConversationImage[];
   author: IConversationUser;
   text?: string;

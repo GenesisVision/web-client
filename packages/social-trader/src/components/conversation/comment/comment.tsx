@@ -10,13 +10,14 @@ import styles from "./comment.module.scss";
 
 const _Comment: React.FC<Props> = ({
   updateData,
-  comment: { tags, images, date, text, id, actions, likesCount, author }
+  comment: { url, tags, images, date, text, id, actions, likesCount, author }
 }) => {
   return (
     <div className={styles["comment"]}>
       <Row className={styles["comment__message"]} center={false}>
         <RowItem>
           <Message
+            url={url}
             excludedTagsUnderText={["User"]}
             tags={tags}
             images={images}

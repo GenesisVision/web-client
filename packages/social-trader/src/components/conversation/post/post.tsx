@@ -46,6 +46,7 @@ const DeletedPost: React.FC<{
 
 const _Post: React.FC<Props> = ({ reduceLargeText, updateData, post }) => {
   const {
+    url,
     rePostsCount,
     isPinned,
     images,
@@ -95,7 +96,7 @@ const _Post: React.FC<Props> = ({ reduceLargeText, updateData, post }) => {
             }
             row={false}
             tags={tags}
-            postId={id}
+            url={url}
             images={images}
             date={date}
             text={text}
