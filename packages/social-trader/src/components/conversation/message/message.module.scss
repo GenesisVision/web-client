@@ -3,6 +3,7 @@
 .message {
   width: 100%;
   flex-wrap: wrap;
+  overflow: hidden;
   @include media-breakpoint-landscape-phone() {
     flex-wrap: nowrap;
   }
