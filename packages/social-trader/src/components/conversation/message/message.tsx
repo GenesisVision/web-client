@@ -25,11 +25,11 @@ const _Message: React.FC<IMessageProps> = ({
   settingsBlock,
   row = true,
   tags,
-  postId,
+  url,
   images,
   text,
   date,
-  author: { username, url, logoUrl }
+  author
 }) => {
   const tagsUnderText = tags?.filter(
     ({ type }) =>
@@ -51,10 +51,10 @@ const _Message: React.FC<IMessageProps> = ({
         >
           <RowItem wide>
             <ConversationUser
-              postId={postId}
-              url={url}
-              avatar={logoUrl}
-              username={username}
+              postUrl={url}
+              authorUrl={author.url}
+              avatar={author.logoUrl}
+              username={author.username}
               date={date}
             />
           </RowItem>
@@ -99,7 +99,7 @@ export interface IMessageProps {
   settingsBlock?: JSX.Element;
   row?: boolean;
   tags?: PostTag[];
-  postId?: string;
+  url: string;
   images: IConversationImage[];
   author: IConversationUser;
   text?: string;
