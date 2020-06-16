@@ -15,10 +15,10 @@ import {
 } from "../manager.constants";
 import { fetchManagerFollow } from "../services/manager.service";
 
-const _ManagerFollow: React.FC<Props> = ({ title, ownerId }) => {
+const _ManagerFollow: React.FC<Props> = ({ title, subscriberId, ownerId }) => {
   const [t] = useTranslation();
   const getManagerFollow: GetItemsFuncType = useCallback(
-    filters => fetchManagerFollow({ ...filters, ownerId }),
+    filters => fetchManagerFollow({ ...filters, subscriberId, ownerId }),
     [ownerId]
   );
 
@@ -46,7 +46,8 @@ const _ManagerFollow: React.FC<Props> = ({ title, ownerId }) => {
 };
 
 interface Props {
-  ownerId: string;
+  subscriberId?: string;
+  ownerId?: string;
   title: string;
 }
 

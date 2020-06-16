@@ -21,15 +21,16 @@ import {
 import { fetchManagerFunds } from "../services/manager.service";
 
 interface Props {
-  ownerId: string;
+  investorId?: string;
+  ownerId?: string;
   title: string;
 }
 
-const _ManagerFunds: React.FC<Props> = ({ title, ownerId }) => {
+const _ManagerFunds: React.FC<Props> = ({ title, investorId, ownerId }) => {
   const [t] = useTranslation();
   const showIn = useAccountCurrency();
   const getManagerFunds: GetItemsFuncType = useCallback(
-    filters => fetchManagerFunds({ ...filters, ownerId, showIn }),
+    filters => fetchManagerFunds({ ...filters, investorId, ownerId, showIn }),
     [ownerId]
   );
 
