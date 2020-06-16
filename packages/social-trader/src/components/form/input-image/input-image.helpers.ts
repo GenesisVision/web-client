@@ -30,7 +30,10 @@ const asyncCompressImages = async (
   const compressedFiles = [];
   try {
     for (const file of files) {
-      const compressedFile = await imageCompression(file, options);
+      const isGif = file.type === "image/gif";
+      const compressedFile = isGif
+        ? file
+        : await imageCompression(file, options);
       compressedFiles.push(compressedFile);
     }
   } catch (e) {
