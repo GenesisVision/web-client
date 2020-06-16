@@ -114,7 +114,7 @@ const NewsCardContent: React.FC<Props> = React.memo(
 
 const _NewsCard: React.FC<Props> = ({ updateItems, post }) => {
   const cardImage = post.image
-    ? getImageUrlByQuality(post.image.resizes, "High")
+    ? getImageUrlByQuality(post.image.resizes, "Original")
     : undefined;
   return (
     <PlateFeedCard
