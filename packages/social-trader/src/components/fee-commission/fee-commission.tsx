@@ -32,7 +32,7 @@ export default FeeCommission;
 
 interface Props {
   className?: string;
-  title: string;
+  title: string | React.ReactNode;
   value: number | string;
   currency: string;
 }
