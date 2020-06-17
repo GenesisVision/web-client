@@ -84,35 +84,38 @@
 
     &--last-screen {
       padding-top: 360px;
-      background-image: url("../images/common/join-bg-mob.svg");
+      background-image: url("../images/common/join-bg-2.svg"),
+        url("../images/common/join-bg-mob-1.svg");
       background-repeat: no-repeat;
-      background-size: auto 300px;
-      background-position: 50% 30px;
+      background-size: 300px auto;
+      background-position: 50% 50px, 50% 120px;
 
       @include media-breakpoint-tablet() {
         padding-top: 420px;
-        background-size: auto 400px;
-        background-position: 50% 30px;
+        background-size: 400px auto;
+        background-position: 50% 70px, 50% 150px;
       }
 
       @include media-breakpoint-landscape-tablet() {
-        background-image: url("../images/common/join-bg.svg");
         padding-top: 235px;
         padding-bottom: 235px;
-        background-size: 100%;
-        background-position: 50% 80px;
+        background-image: url("../images/common/join-bg-2.svg"),
+          url("../images/common/join-bg-1.svg");
+        background-size: auto;
+        background-position: 90% 50%, 50% 50%;
       }
 
       @include media-breakpoint-desktop() {
         padding-top: 260px;
         padding-bottom: 260px;
-        background-position: 50%;
-        background-size: 1600px 100%;
+        background-size: auto;
+        background-position: 80% 50%, 50% 50%;
       }
 
       @include media-breakpoint-large-desktop() {
         padding-top: 320px;
         padding-bottom: 320px;
+        background-position: 70% 50%, 50% 50%;
       }
     }
 
