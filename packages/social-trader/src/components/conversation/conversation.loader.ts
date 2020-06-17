@@ -16,6 +16,10 @@ import {
 import uuid from "uuid";
 
 const getTagLoaderData = (): PostTag => ({
+  link: {
+    title: "",
+    url: ""
+  },
   title: "",
   event: {
     logoUrl: "",
