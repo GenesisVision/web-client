@@ -15,10 +15,10 @@ import {
 } from "../manager.constants";
 import { fetchManagerPrograms } from "../services/manager.service";
 
-const _ManagerPrograms: React.FC<Props> = ({ title, ownerId }) => {
+const _ManagerPrograms: React.FC<Props> = ({ title, investorId, ownerId }) => {
   const [t] = useTranslation();
   const getManagerPrograms: GetItemsFuncType = useCallback(
-    filters => fetchManagerPrograms({ ...filters, ownerId }),
+    filters => fetchManagerPrograms({ ...filters, investorId, ownerId }),
     [ownerId]
   );
 
@@ -46,7 +46,8 @@ const _ManagerPrograms: React.FC<Props> = ({ title, ownerId }) => {
 };
 
 interface Props {
-  ownerId: string;
+  investorId?: string;
+  ownerId?: string;
   title: string;
 }
 
