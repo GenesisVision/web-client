@@ -10,7 +10,11 @@ import { getSymbolIndexByTurn } from "utils/helpers";
 const MAX_TEXT_BREAKS_COUNT = 5;
 const MAX_TEXT_SYMBOLS_COUNT = 400;
 
-export const ExcludedTagsUnderText: SocialPostTagType[] = ["Event", "Post"];
+export const ExcludedTagsUnderText: SocialPostTagType[] = [
+  "Url",
+  "Event",
+  "Post"
+];
 
 export const reduceBySymbolsCount = (
   text: string,
