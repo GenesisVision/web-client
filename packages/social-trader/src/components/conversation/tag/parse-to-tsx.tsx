@@ -17,11 +17,13 @@ import {
   ProgramTagCard,
   RepostTagComponent,
   TagToComponentType,
+  UrlTagComponent,
   UserLink,
   UserTagCard
 } from "./tag-components";
 
 export const inTextComponentsMap: TagToComponentType[] = [
+  { tagType: "Url", Component: UrlTagComponent },
   { tagType: "Event", Component: EventTag },
   { tagType: "Undefined", Component: AnyTag },
   { tagType: "Program", Component: ProgramLink },
@@ -51,6 +53,8 @@ export const convertTagToComponent = (
   componentsMap: TagToComponentType[]
 ): JSX.Element => {
   switch (tag.type) {
+    case "Url":
+      return convertUrlTagToComponent(tag, componentsMap);
     case "Event":
       return convertEventTagToComponent(tag, componentsMap);
     case "Asset":
@@ -67,6 +71,18 @@ export const convertTagToComponent = (
     default:
       return convertUndefinedTagToComponent(tag);
   }
+};
+
+const convertUrlTagToComponent = (
+  { link, type }: PostTag,
+  componentsMap: TagToComponentType[]
+): JSX.Element => {
+  const { Component } = safeGetElemFromArray(
+    componentsMap,
+    ({ tagType }) => tagType === type
+  );
+  if (!link) return <></>;
+  return <Component data={{ link }} />;
 };
 
 const convertEventTagToComponent = (

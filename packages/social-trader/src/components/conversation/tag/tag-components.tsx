@@ -28,6 +28,7 @@ import {
   Post as PostType,
   PostAssetDetailsWithPrices,
   PostEvent,
+  PostLink,
   PostPlatformAssetDetailsWithPrices,
   ProfilePublic,
   SocialPostTagType
@@ -36,6 +37,10 @@ import { getAssetFolderRoute } from "pages/dashboard/components/dashboard-tradin
 import React from "react";
 import { managerToPathCreator } from "routes/manager.routes";
 import { composeAssetDetailsUrl } from "utils/compose-url";
+
+export interface IUrlTagProps {
+  data: { link: PostLink };
+}
 
 export interface IEventTagProps {
   data: { event: PostEvent; assetDetails: PostAssetDetailsWithPrices };
@@ -77,6 +82,19 @@ const getAssetTagTextColor = (
       return "green";
   }
 };
+
+const _UrlTagComponent: React.FC<IUrlTagProps> = ({
+  data: {
+    link: { title, url }
+  }
+}) => {
+  return (
+    <a href={url} target="_blank" rel="noopener noreferrer">
+      {title}
+    </a>
+  );
+};
+export const UrlTagComponent = React.memo(_UrlTagComponent);
 
 const _PlatformAssetTagComponent: React.FC<IPlatformAssetTagProps> = ({
   platformAssetDetails: {
