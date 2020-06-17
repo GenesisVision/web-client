@@ -13,31 +13,31 @@ import { formatDate } from "utils/dates";
 import styles from "./conversation-user.module.scss";
 
 const _ConversationUser: React.FC<Props> = ({
-  postId,
+  postUrl,
   avatar,
   username,
   date,
-  url
+  authorUrl
 }) => {
   const { contextTitle } = useToLink();
   return (
     <AvatarWithName
       avatar={
-        <Link to={managerToPathCreator(url, contextTitle)}>
+        <Link to={managerToPathCreator(authorUrl, contextTitle)}>
           <ProfileAvatar url={avatar} alt={username} />
         </Link>
       }
       name={
         <>
           <Row>
-            <Link to={managerToPathCreator(url, contextTitle)}>
+            <Link to={managerToPathCreator(authorUrl, contextTitle)}>
               <RowItem className={styles["conversation-user__name"]}>
                 {username}
               </RowItem>
             </Link>
           </Row>
           <Row small>
-            <Link to={postId && postToPathCreator(postId, contextTitle)}>
+            <Link to={postUrl && postToPathCreator(postUrl, contextTitle)}>
               <MutedText>{formatDate(date)}</MutedText>
             </Link>
           </Row>
@@ -48,8 +48,8 @@ const _ConversationUser: React.FC<Props> = ({
 };
 
 interface Props {
-  postId?: string;
-  url: string;
+  postUrl: string;
+  authorUrl: string;
   avatar: string;
   username: string;
   date: string | Date;

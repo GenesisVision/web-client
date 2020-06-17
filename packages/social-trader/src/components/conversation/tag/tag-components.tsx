@@ -127,14 +127,14 @@ const _PlatformAssetTagComponent: React.FC<IPlatformAssetTagProps> = ({
 export const PlatformAssetTagComponent = React.memo(_PlatformAssetTagComponent);
 
 const _RepostTagComponent: React.FC<IRepostTagProps> = ({
-  post: { tags, id, images, date, text, author }
+  post: { url, tags, images, date, text, author }
 }) => {
   return (
     <RepostTagContainer>
       <Message
         row={false}
         tags={tags}
-        postId={id}
+        url={url}
         images={images}
         date={date}
         text={text}
