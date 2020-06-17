@@ -77,7 +77,7 @@ export const fetchManagerPrograms = (
 ): Promise<ProgramDetailsListItemItemsViewModel> => {
   return api.programs().getPrograms({
     ...filter,
-    includeWithInvestments: true
+    includeWithInvestments: !!filter.ownerId
   });
 };
 
@@ -86,7 +86,7 @@ export const fetchManagerFunds = (
 ): Promise<FundDetailsListItemItemsViewModel> => {
   return api.funds().getFunds({
     ...filter,
-    includeWithInvestments: true
+    includeWithInvestments: !!filter.ownerId
   });
 };
 
@@ -110,8 +110,7 @@ export const fetchManagerAssetsCount = ({
   const investOptions = {
     subscriberId: ownerId,
     investorId: ownerId,
-    take: 0,
-    includeWithInvestments: true
+    take: 0
   };
   const options = {
     ownerId,
