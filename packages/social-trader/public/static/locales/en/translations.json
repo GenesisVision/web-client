@@ -201,7 +201,15 @@
     "tag": {
       "add": "Tag",
       "popover-header": "Add tag",
-      "popover-search-placeholder": "Search for tags"
+      "popover-search-placeholder": "Search for tags",
+      "gm": "Genesis Markets",
+      "high-risk": "Program stop out level is from 31 to 100%",
+      "medium-risk": "Program stop out level is from 11 to 30%",
+      "low-risk": "Program stop out level is 10%",
+      "crypto": "Cryptocurrencies",
+      "binance": "Binance Exchange",
+      "forex": "Forex,",
+      "signal": "You can copy trades from this program using GV Follow"
     },
     "fund-asset": {
       "add": "Asset",
@@ -613,6 +621,16 @@
       "profit": "Profit",
       "chart": "Chart",
       "strategy": "Strategy"
+    },
+    "tooltips": {
+      "title": "Name of the program",
+      "equity": "Current market value of investments in the program, taking into account the profit/loss of open positions.",
+      "investors": "Number of investors in the program",
+      "available-to-invest": "Capital available for investment for the next period.",
+      "age": "Age of the program",
+      "period": "Reporting period is the interval of time in which the trader is to conduct trading operations of their Program and report the resulting profit or loss. Investments made by the investors appear on the Program balance at the beginning of the reporting period, while all of the resulting profit is distributed at the end of the reporting period.",
+      "drawdown": "Maximum drawdown of the program during the selected date range.",
+      "profit": "Profit during the selected date range."
     }
   },
   "follows-page": {
@@ -635,6 +653,15 @@
       "drawdown": "D.down",
       "profit": "Profit",
       "chart": "Chart"
+    },
+    "tooltips": {
+      "equity": "Current market value of investments in the program, taking into account the profit/loss of open positions.",
+      "subscribers": "Number of subscribers",
+      "trades": "Number of trades executed during the selected date range.",
+      "name": "Name of the program",
+      "age": "Age of the trading account",
+      "drawdown": "Maximum drawdown of the program during the selected date range.",
+      "profit": "Profit during the selected date range."
     }
   },
   "funds-page": {
@@ -655,6 +682,14 @@
       "profit": "Profit",
       "chart": "Chart",
       "value": "Value"
+    },
+    "tooltips": {
+      "balance": "Current market value of all assets in the fund",
+      "assets": "Assets included in the fund",
+      "investors": "Number of investors in the fund.",
+      "age": "Age of the fund",
+      "drawdown": "Maximum drawdown of the fund during the selected date range.",
+      "profit": "Profit of the fund during the selected date range"
     }
   },
   "about-levels-page": {
@@ -833,8 +868,12 @@
       "sharpe-ratio": "Program performance indicator, which is calculated as the mathematical ratio of the average return to the average deviation of this return. The higher the Sharpe Ratio value, the lower the portfolio risks.",
       "sortino-ratio": "A variation of the Sharpe ratio that only factors in the downside risk. The greater the value of Sortino Ratio, the higher the efficiency of the portfolio and the lower the investment risks of investing in a fund.",
       "max-drawdown": "The biggest drawdown of a fund during the selected date range.",
-      "target": "The fixed percentage of the coin (asset) allocation in the total fund portfolio.",
-      "current": "The current percentage of the coin (asset) allocation in the total fund portfolio."
+      "target": "Target asset allocation percentage",
+      "current": "Current asset allocation percentage",
+      "asset": "Asset name",
+      "symbol": "Ticker code",
+      "date": "Reallocation date",
+      "reallocate-fund": "New structure of the fund after reallocation"
     },
     "history": {
       "heading": "History",
@@ -1013,7 +1052,7 @@
         "trades": "Trades",
         "events": "My history",
         "open-positions": "Open positions",
-        "subscriptions": "Subscriptions",
+        "subscriptions": "Subscribers",
         "financial-statistic": "Financial statistic",
         "period-history": "Period History"
       },
@@ -1154,7 +1193,14 @@
       "requests-completed": "All requests completed successfully",
       "unauth-popup": "To invest in the selected program please login as an investor or create a new investor account.",
       "unauth-follow-popup": "To Follow trades in the selected program please login as an investor or create a new investor account.",
-      "auth-manager-popup": "In order to invest in investment programs of other managers please login as an investor or create a new investor account."
+      "auth-manager-popup": "In order to invest in investment programs of other managers please login as an investor or create a new investor account.",
+      "tooltips": {
+        "currency": "Base currency of the program",
+        "broker": "Current broker of the program",
+        "leverage": "Set leverage of the program. Trading with leverage allows the trader to open positions larger than their own capital",
+        "period": "Reporting period is the interval of time in which the trader is to conduct trading operations of their Program and report the resulting profit or loss. Investments made by the investors appear on the Program balance at the beginning of the reporting period, while all of the resulting profit is distributed at the end of the reporting period.",
+        "age": "Age of the program"
+      }
     },
     "statistics": {
       "heading": "Statistics",
@@ -1215,7 +1261,9 @@
     },
     "history": {
       "my-history": {
-        "details": "Details"
+        "details": "Details",
+        "loss": "Loss in the program",
+        "refund": "Amount of funds that have been returned to your wallet."
       },
       "heading": "History",
       "tabs": {
@@ -1223,7 +1271,7 @@
         "trades": "Trades",
         "events": "My history",
         "open-positions": "Open positions",
-        "subscriptions": "Subscriptions",
+        "subscriptions": "Subscribers",
         "financial-statistic": "Financial statistic",
         "period-history": "Period History"
       },
@@ -1245,7 +1293,18 @@
         "profit": "Profit",
         "price": "Price",
         "entry": "Entry",
-        "date": "Date"
+        "date": "Date",
+        "tooltips": {
+          "direction-entry": "Trade direction",
+          "commission": "Sum of all fees paid for the trade",
+          "symbol": "Trading instrument",
+          "volume": "Total quantity traded",
+          "profit": "Trade profit (excluding commission)",
+          "price": "Trade price",
+          "date": "Time the trade was executed",
+          "swap": "Fee for transferring open positions to the next day",
+          "ticket": "Ticket reference"
+        }
       },
       "open-positions": {
         "delay": "delay",
@@ -1257,7 +1316,16 @@
         "price": "Price Open",
         "priceCurrent": "Price",
         "profit": "Profit",
-        "profitPercent": "Profit %"
+        "profitPercent": "Profit %",
+        "tooltips": {
+          "date": "Time the trade was opened",
+          "symbol": "Trading instrument",
+          "direction": "Position direction (Buy/Long and Sell/Short)",
+          "volume": "Total quantity traded",
+          "price": "Weighted average trade price",
+          "priceCurrent": "Current price",
+          "profit": "Current floating profit"
+        }
       },
       "subscriptions": {
         "number": "Number",
@@ -1267,7 +1335,15 @@
         "subscriptionDate": "Subscription date",
         "unsubscriptionDate": "Unsubscription date",
         "commission": "Commission",
-        "status": "Status"
+        "status": "Status",
+        "tooltips": {
+          "number": "Subscriber number",
+          "trades": "Number of copied trades",
+          "profit": "Subscriber profit",
+          "volume": "Total traded volume by the subscriber",
+          "commission": "Amount of all fees paid by the subscriber to the trader",
+          "status": "Subscription status (active or ended)"
+        }
       },
       "financial-statistic": {
         "period": "Period",
@@ -1278,7 +1354,17 @@
         "management-fee": "Management fee",
         "entry-fee": "Entry fee",
         "deposit-withdraw": "Deposit/Withdraw",
-        "commission-rebate": "GV commission rebate"
+        "commission-rebate": "GV commission rebate",
+        "tooltips": {
+          "period": "Program period number",
+          "date-start": "Program period start date",
+          "balance": "Manager balance at the beginning of the period",
+          "profit": "Program profit for the period (including commissions)",
+          "success-fee": "Total amount of success fees that the manager received in this period",
+          "management-fee": "Total amount of management fees that the manager received in this period",
+          "deposit-withdraw": "Total amount of funds invested or withdrawn by the manager in this period",
+          "commission-rebate": "Amount of the compensated commission (Trading Fee) paid from the GVT wallet"
+        }
       },
       "period-history": {
         "investors-deposit": "Investors Invest",
@@ -1293,7 +1379,15 @@
         "period-length": "Period length",
         "balance": "Program balance",
         "profit": "Profit",
-        "investors": "Investors"
+        "investors": "Investors",
+        "tooltips": {
+          "period": "Program period number",
+          "date-start": "Program period start date",
+          "period-length": "Program period duration",
+          "balance": "Program balance at the end of the period",
+          "profit": "Program profit for the period (including commissions)",
+          "investors": "Number of investors in the program"
+        }
       }
     },
     "chart": {
@@ -1509,11 +1603,15 @@
       "total-balance": "The total value your funds on the platform.",
       "available": "Your funds that are currently available for investment.",
       "invested": "The funds that are currently invested in programs and / or funds. Invested GVT shows investment in funds. Invested USDT includes Forex.",
-      "trading": "Current market value of your investments in your programs, funds and trading accounts, taking into account the profit/loss of open positions.",
+      "pending": "Funds that are still being processed.",
       "transactions": "Operation of funds transferring to/from or between wallets.",
       "deposit": "A transaction involving a transfer of funds to another party.",
       "withdrawals": "A transaction of taking funds out of the account.",
-      "transfer": "A transaction between accounts."
+      "transfer": "A transaction between accounts.",
+      "deposit-button": "Send cryptocurrency from an external wallet address to your Genesis Vision Wallet address. The following cryptocurrencies are supported: BTC, ETH, USDT and GVT.",
+      "withdrawal-button": "Send cryptocurrency from your GV Wallet address to an external wallet address.",
+      "transfer-button": "Convert cryptocurrency within your GV Wallet between BTC, ETH, USDT and GVT",
+      "buy-with-card": "Purchase cryptocurrencies with a credit card and deposit them directly to your GVT Wallet. The following cryptocurrencies are supported: BTC, ETH and USDT."
     },
     "tabs": {
       "wallets": "My wallets",
@@ -1560,9 +1658,9 @@
       "buttons": ""
     },
     "buttons": {
-      "internal-transfer": "Internal transfer",
-      "deposit": "Deposit",
-      "withdraw": "Withdraw"
+      "internal-transfer": "Convert cryptocurrency within your GV Wallet between BTC, ETH, USDT and GVT",
+      "deposit": "Send cryptocurrency from an external wallet address to your Genesis Vision Wallet address. The following cryptocurrencies are supported: BTC, ETH, USDT and GVT.",
+      "withdraw": "Send cryptocurrency from your GV Wallet address to an external wallet address."
     },
     "transaction-actions": {
       "resend-email": "Resend confirmation email",
@@ -2117,6 +2215,45 @@
     }
   },
   "dashboard-page": {
+    "tooltips": {
+      "total": {
+        "total-balance": "Current market value of your assets on the platform.",
+        "invested": "Current market value of your investments in programs, funds, taking into account the profit/loss of open positions and including pending requests.",
+        "trading": "Current market value of your investments in your programs, funds and trading accounts, taking into account the profit/loss of open positions.",
+        "wallet": "Funds available in your wallet",
+        "performance": "The change of your profit on the platform: day, week, and month."
+      },
+      "trading": {
+        "your-equity": "Current market value of your investments in your programs, funds and trading accounts, taking into account the profit/loss of open positions.",
+        "aum": "Assets under management (AUM) is the total market value of the investments that you currently have under managment in programs and funds from investors.",
+        "total": "Current market value of your investments in your programs, funds and trading accounts, and assets under management (AUM)",
+        "login": "Login from the trading account for the program.",
+        "equity-fund": "Current market value of your assets in this fund.",
+        "age-fund": "Age of the fund.",
+        "ddown-fund": "Maximum drawdown of the fund during the selected date range.",
+        "leverage": "Set leverage of the trading account. Trading with leverage allows the trader to open positions larger than their own capital.",
+        "age": "Age of the trading account.",
+        "subscribers": "Number of subscribers",
+        "trades": "Number of trades the manager has executed during the selected date range."
+      },
+      "investing": {
+        "balance": "Current market value of your investments in programs and funds, taking into account the profit/loss of open positions and including pending requests.",
+        "programs": "Number of programs you have invested in.",
+        "funds": "Number of funds you have invested in.",
+        "size": "Current market value of your assets in the fund",
+        "investors": "Number of investors in the fund",
+        "ddown": "Maximum drawdown of the program during the selected date range.",
+        "profit": "Profit or loss resulting from the manager trading. This is calculated according to your share of investment in the program.",
+        "value": "Current market value of your investment in the program, taking into account the profit/loss of open positions.",
+        "equity": "Current market value of investments in the program, taking into account the profit/loss of open positions.",
+        "age-program": "Age of the program",
+        "broker": "Current broker of the program"
+      },
+      "others": {
+        "loss": "Loss in the program",
+        "refund": "Amount of funds that have been returned to your wallet."
+      }
+    },
     "investing": {
       "most-profitable": "The most profitable programs and funds",
       "title": "Investments",
