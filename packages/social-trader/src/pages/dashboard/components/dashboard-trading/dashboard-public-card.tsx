@@ -162,7 +162,14 @@ const _DashboardPublicCard: React.FC<Props> = ({
           </StatisticItemInner>
           {!!asset.signalInfo && (
             <StatisticItemInner
-              label={t("dashboard-page.trading.subscribers-count")}
+              label={
+                <TooltipLabel
+                  tooltipContent={t(
+                    "dashboard-page.tooltips.trading.subscribers"
+                  )}
+                  labelText={t("dashboard-page.trading.subscribers-count")}
+                />
+              }
             >
               {asset.signalInfo.subscribersCount}
             </StatisticItemInner>
