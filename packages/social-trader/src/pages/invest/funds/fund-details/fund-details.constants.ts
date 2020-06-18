@@ -7,10 +7,12 @@ import { SortingColumn } from "components/table/components/filtering/filter.type
 
 export const FUND_STRUCTURE_COLUMNS: SortingColumn[] = [
   {
-    name: "asset"
+    name: "asset",
+    tooltip: true
   },
   {
-    name: "symbol"
+    name: "symbol",
+    tooltip: true
   },
   {
     name: "target",
@@ -42,10 +44,12 @@ export const FUND_REBALANCING_FILTERS = {
 
 export const FUND_REALLOCATE_HISTORY_COLUMNS: SortingColumn[] = [
   {
-    name: "date"
+    name: "date",
+    tooltip: true
   },
   {
-    name: "reallocate-fund"
+    name: "reallocate-fund",
+    tooltip: true
   }
 ];
 
