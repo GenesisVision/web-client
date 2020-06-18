@@ -1,4 +1,5 @@
 import TagItem from "components/tags/tag-item/tag-item";
+import TagItemWrapperTooltip from "components/tags/tag-item/tag-item-with-tooltip";
 import { Tag } from "gv-api-web";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
@@ -20,7 +21,9 @@ const _TagFilter: React.FC<Props & WithTranslation> = ({
     .filter(x => value.includes(x.name))
     .map(tag => (
       <TileFilterItem key={tag.name} id={tag.name}>
-        <TagItem color={tag.color} name={tag.name} />
+        <TagItemWrapperTooltip name={tag.name}>
+          <TagItem color={tag.color} name={tag.name} />
+        </TagItemWrapperTooltip>
       </TileFilterItem>
     ));
   const notSelectedTags = values.filter(x => !value.includes(x.name));

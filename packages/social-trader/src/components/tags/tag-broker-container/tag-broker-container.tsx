@@ -1,5 +1,6 @@
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import TagItemWrapperTooltip from "components/tags/tag-item/tag-item-with-tooltip";
 import Tooltip from "components/tooltip/tooltip";
 import withLoader, { WithLoaderProps } from "decorators/with-loader";
 import { Tag } from "gv-api-web";
@@ -22,8 +23,10 @@ const _TagBrokerContainer: React.FC<Props & WithLoaderProps> = ({
       {tags.map(
         (tag, idx) =>
           ((remainder && idx === 0) || !remainder) && (
-            <RowItem small>
-              <TagItem name={tag.name} color={tag.color} key={idx} />
+            <RowItem small key={idx}>
+              <TagItemWrapperTooltip name={tag.name}>
+                <TagItem name={tag.name} color={tag.color} />
+              </TagItemWrapperTooltip>
             </RowItem>
           )
       )}

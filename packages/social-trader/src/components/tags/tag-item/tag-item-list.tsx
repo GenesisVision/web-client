@@ -1,3 +1,4 @@
+import TagItemWrapperTooltip from "components/tags/tag-item/tag-item-with-tooltip";
 import { Tag } from "gv-api-web";
 import React from "react";
 
@@ -8,7 +9,9 @@ const _TagItemList: React.FC<Props> = ({ tags }) => {
   return (
     <div className={styles["tag-item-list"]}>
       {tags.map((tag, idx) => (
-        <TagItem name={tag.name} color={tag.color} key={idx} />
+        <TagItemWrapperTooltip name={tag.name} key={idx}>
+          <TagItem name={tag.name} color={tag.color} />
+        </TagItemWrapperTooltip>
       ))}
     </div>
   );
