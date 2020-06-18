@@ -14,7 +14,7 @@ const _TradesDelay: React.FC<Props> = ({ name }) => {
   return (
     <>
       <GVHookFormField
-        wide
+        wide={false}
         name={name}
         component={SimpleTextField}
         label={t("program-settings.trades-update.select")}
