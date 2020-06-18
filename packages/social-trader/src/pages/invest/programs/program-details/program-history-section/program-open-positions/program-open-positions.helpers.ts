@@ -52,39 +52,46 @@ export const getOpenPositionsColumns = (model?: TradesViewModel) => {
     showDate
       ? {
           name: "date",
-          sortingName: "ByDate"
+          sortingName: "ByDate",
+          tooltip: true
         }
       : undefined,
     {
       name: "symbol",
-      sortingName: "BySymbol"
+      sortingName: "BySymbol",
+      tooltip: true
     },
     showDirection
       ? {
           name: "direction",
-          sortingName: "ByDirection"
+          sortingName: "ByDirection",
+          tooltip: true
         }
       : undefined,
     {
       name: "volume",
-      sortingName: "ByVolume"
+      sortingName: "ByVolume",
+      tooltip: true
     },
     showPrice
       ? {
           name: "price",
-          sortingName: "ByPrice"
+          sortingName: "ByPrice",
+          tooltip: true
         }
       : undefined,
     showPriceOpen
       ? {
           name: "priceCurrent",
-          sortingName: "ByPriceCurrent"
+          sortingName: "ByPriceCurrent",
+          tooltip: true
         }
       : undefined,
     showProfit
       ? {
           name: "profit",
-          sortingName: "ByProfit"
+          sortingName: "ByProfit",
+          tooltip: true
         }
       : undefined
   ].filter(column => column !== undefined) as SortingColumn[];
