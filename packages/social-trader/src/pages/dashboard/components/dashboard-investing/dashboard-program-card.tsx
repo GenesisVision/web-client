@@ -14,6 +14,7 @@ import {
 } from "components/table/components/table-card/table-card-actions";
 import { UpdateRowFuncType } from "components/table/components/table.types";
 import TagProgramContainer from "components/tags/tag-program-container/tag-program-container";
+import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import { ASSET, STATUS } from "constants/constants";
 import { ProgramInvestingDetailsList } from "gv-api-web";
 import { useTranslation } from "i18n";
@@ -75,7 +76,14 @@ const _DashboardProgramCard: React.FC<Props> = ({
     >
       <TableCardTable>
         <TableCardTableColumn>
-          <StatisticItem label={t("programs-page.programs-header.profit")}>
+          <StatisticItem
+            label={
+              <TooltipLabel
+                tooltipContent={t("dashboard-page.tooltips.investing.profit")}
+                labelText={t("programs-page.programs-header.profit")}
+              />
+            }
+          >
             <NumberFormat
               value={formatCurrencyValue(
                 program.personalDetails.profit,
@@ -87,7 +95,14 @@ const _DashboardProgramCard: React.FC<Props> = ({
           </StatisticItem>
         </TableCardTableColumn>
         <TableCardTableColumn>
-          <StatisticItem label={t("programs-page.programs-header.value")}>
+          <StatisticItem
+            label={
+              <TooltipLabel
+                tooltipContent={t("dashboard-page.tooltips.investing.value")}
+                labelText={t("programs-page.programs-header.value")}
+              />
+            }
+          >
             <NumberFormat
               value={formatCurrencyValue(
                 program.personalDetails.value,
