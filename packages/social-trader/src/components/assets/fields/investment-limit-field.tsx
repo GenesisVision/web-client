@@ -1,4 +1,3 @@
-import AssetField from "components/assets/asset-fields/asset-field";
 import FormTextField from "components/assets/fields/form-text-field";
 import GVCheckbox from "components/gv-checkbox/gv-checkbox";
 import InputAmountField from "components/input-amount-field/hook-form-amount-field";
@@ -14,6 +13,7 @@ const isAmountAllow = (currency: CurrencyEnum) => ({
 }: NumberFormatValues) => validateFraction(value, currency);
 
 const _InvestmentLimitField: React.FC<Props> = ({
+  wide,
   setHasInvestmentLimit,
   checkboxName,
   inputName,
@@ -35,7 +35,7 @@ const _InvestmentLimitField: React.FC<Props> = ({
       {hasInvestmentLimit && (
         <InputAmountField
           showCorrect
-          wide
+          wide={wide}
           autoFocus={false}
           isAllowed={isAmountAllow(currency)}
           name={inputName}
@@ -53,6 +53,7 @@ const _InvestmentLimitField: React.FC<Props> = ({
 };
 
 interface Props {
+  wide?: boolean;
   setHasInvestmentLimit: (value: boolean) => void;
   checkboxName: string;
   inputName: string;
