@@ -138,6 +138,7 @@ const _ConvertAssetSettings: React.FC<IConvertAssetSettingsProps> = props => {
             blockNumber={"03"}
           >
             <InvestmentLimitField
+              wide={false}
               setHasInvestmentLimit={setHasInvestmentLimit}
               checkboxName={"hasInvestmentLimit"}
               inputName={CONVERT_ASSET_FIELDS.investmentLimit}
