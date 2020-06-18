@@ -2,6 +2,7 @@ import { DialogButtons } from "components/dialog/dialog-buttons";
 import GVCheckbox from "components/gv-checkbox/gv-checkbox";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import InputAmountField from "components/input-amount-field/hook-form-amount-field";
+import { MutedText } from "components/muted-text/muted-text";
 import { Row } from "components/row/row";
 import { SubmitButton } from "components/submit-button/submit-button";
 import { Text } from "components/text/text";
