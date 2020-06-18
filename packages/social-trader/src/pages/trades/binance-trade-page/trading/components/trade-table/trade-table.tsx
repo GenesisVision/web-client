@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { SortingColumn } from "components/table/components/filtering/filter.type";
 import { Text } from "components/text/text";
 import React from "react";
@@ -45,9 +45,9 @@ const _TradeTable: React.FC<Props> = ({
     );
   return (
     <>
-      <div className={classNames(styles["trade-table__header-container"])}>
+      <div className={clsx(styles["trade-table__header-container"])}>
         <table
-          className={classNames(styles["trade-table"], className, {
+          className={clsx(styles["trade-table"], className, {
             [styles["trade-table--small"]]: size === "small",
             [styles["trade-table--middle"]]: size === "middle"
           })}
@@ -55,9 +55,9 @@ const _TradeTable: React.FC<Props> = ({
           <thead>{columns.map(renderHeaderCell)}</thead>
         </table>
       </div>
-      <div className={classNames(styles["trade-table__items-container"])}>
+      <div className={clsx(styles["trade-table__items-container"])}>
         <table
-          className={classNames(
+          className={clsx(
             styles["trade-table"],
             styles["trade-table--items"],
             className,

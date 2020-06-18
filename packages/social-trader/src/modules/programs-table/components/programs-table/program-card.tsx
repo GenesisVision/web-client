@@ -1,7 +1,7 @@
+import { LabeledValue } from "components/labeled-value/labeled-value";
 import { useToLink } from "components/link/link.helper";
 import ProgramPeriodPie from "components/program-period/program-period-pie/program-period-pie";
 import { Row } from "components/row/row";
-import StatisticItemInner from "components/statistic-item/statistic-item-inner";
 import TableCard, {
   TableCardTable,
   TableCardTableColumn
@@ -83,7 +83,7 @@ const _ProgramCard: React.FC<Props> = ({ program }) => {
       <TableCardTable>
         <TableCardTableColumn>
           <Row>
-            <StatisticItemInner
+            <LabeledValue
               label={
                 <TooltipLabel
                   tooltipContent={t("programs-page.tooltips.equity")}
@@ -100,10 +100,10 @@ const _ProgramCard: React.FC<Props> = ({ program }) => {
                 suffix={` ${requestCurrency}`}
                 displayType="text"
               />
-            </StatisticItemInner>
+            </LabeledValue>
           </Row>
           <Row>
-            <StatisticItemInner
+            <LabeledValue
               label={
                 <TooltipLabel
                   tooltipContent={t(
@@ -124,12 +124,12 @@ const _ProgramCard: React.FC<Props> = ({ program }) => {
                 displayType="text"
                 suffix={` ${requestCurrency}`}
               />
-            </StatisticItemInner>
+            </LabeledValue>
           </Row>
         </TableCardTableColumn>
         <TableCardTableColumn>
           <Row>
-            <StatisticItemInner
+            <LabeledValue
               label={
                 <TooltipLabel
                   tooltipContent={t("programs-page.tooltips.investors")}
@@ -142,10 +142,10 @@ const _ProgramCard: React.FC<Props> = ({ program }) => {
                 displayType="text"
                 decimalScale={0}
               />
-            </StatisticItemInner>
+            </LabeledValue>
           </Row>
           <Row>
-            <StatisticItemInner
+            <LabeledValue
               label={
                 <TooltipLabel
                   tooltipContent={t("programs-page.tooltips.period")}
@@ -157,12 +157,12 @@ const _ProgramCard: React.FC<Props> = ({ program }) => {
                 start={program.periodStarts}
                 end={program.periodEnds}
               />
-            </StatisticItemInner>
+            </LabeledValue>
           </Row>
         </TableCardTableColumn>
         <TableCardTableColumn>
           <Row>
-            <StatisticItemInner
+            <LabeledValue
               label={
                 <TooltipLabel
                   tooltipContent={t("programs-page.tooltips.age")}
@@ -171,10 +171,10 @@ const _ProgramCard: React.FC<Props> = ({ program }) => {
               }
             >
               {convertDateToShortFormat(distanceDate(program.creationDate))}
-            </StatisticItemInner>
+            </LabeledValue>
           </Row>
           <Row>
-            <StatisticItemInner
+            <LabeledValue
               label={
                 <TooltipLabel
                   tooltipContent={t("programs-page.tooltips.drawdown")}
@@ -187,7 +187,7 @@ const _ProgramCard: React.FC<Props> = ({ program }) => {
                 displayType="text"
                 suffix="%"
               />
-            </StatisticItemInner>
+            </LabeledValue>
           </Row>
         </TableCardTableColumn>
       </TableCardTable>

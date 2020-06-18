@@ -1,9 +1,9 @@
 import { isAllow } from "components/deposit/components/deposit.helpers";
 import HookFormAmountField from "components/input-amount-field/hook-form-amount-field";
+import { LabeledValue } from "components/labeled-value/labeled-value";
 import { Slider } from "components/range/range";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
-import StatisticItemInner from "components/statistic-item/statistic-item-inner";
 import { Text } from "components/text/text";
 import { API_REQUEST_STATUS } from "hooks/api-request.hook";
 import { ReduceOnlyField } from "pages/trades/binance-trade-page/trading/place-order/place-order-settings/reduce-only-field/reduce-only-field";
@@ -116,9 +116,9 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
           name={TRADE_FORM_FIELDS.price}
         />
       </Row>
-      <StatisticItemInner label={t("Price")}>
+      <LabeledValue label={t("Price")}>
         {t("Market price")} <Text muted>(≈ {outerPrice})</Text>
-      </StatisticItemInner>
+      </LabeledValue>
       <Row>
         <HookFormAmountField
           autoFocus={false}

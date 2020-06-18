@@ -1,8 +1,8 @@
 import GVButton, { GV_BTN_SIZE } from "components/gv-button";
+import { LabeledValue } from "components/labeled-value/labeled-value";
 import { PopoverContentCardBlock } from "components/popover/popover-card.block";
 import { PopoverContent } from "components/popover/popover-content";
 import { Row } from "components/row/row";
-import StatisticItemInner from "components/statistic-item/statistic-item-inner";
 import { Text } from "components/text/text";
 import { LevelInfo } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
@@ -42,23 +42,24 @@ const _InvestmentLimitsPopover: React.FC<Props> = ({
           </Row>
           {canLevelUp && (
             <Row>
-              <StatisticItemInner accent label={t("level-tooltip.level-up")}>
-                {t("level-tooltip.top10")}
-              </StatisticItemInner>
+              <LabeledValue label={t("level-tooltip.level-up")}>
+                <Text weight={"bold"}>{t("level-tooltip.top10")}</Text>
+              </LabeledValue>
             </Row>
           )}
           <Row>
-            <StatisticItemInner
-              accent
+            <LabeledValue
               label={t("program-details-page.popover.invest-limit")}
             >
-              <NumberFormat
-                value={formatCurrencyValue(limit, currency)}
-                thousandSeparator={" "}
-                displayType="text"
-                suffix={` ${currency}`}
-              />
-            </StatisticItemInner>
+              <Text weight={"bold"}>
+                <NumberFormat
+                  value={formatCurrencyValue(limit, currency)}
+                  thousandSeparator={" "}
+                  displayType="text"
+                  suffix={` ${currency}`}
+                />
+              </Text>
+            </LabeledValue>
           </Row>
         </PopoverContentCardBlock>
         <PopoverContentCardBlock

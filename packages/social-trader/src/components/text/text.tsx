@@ -14,6 +14,7 @@ export type TextColor =
 export type TextWeight = "thin" | "normal" | "bold" | "bolder";
 
 interface Props {
+  sizeValue?: string;
   weight?: TextWeight;
   size?: SizesType;
   color?: TextColor;
@@ -22,6 +23,7 @@ interface Props {
 }
 
 export const Text: React.FC<Props> = ({
+  sizeValue,
   weight = "normal",
   size = "middle",
   color,
@@ -31,6 +33,7 @@ export const Text: React.FC<Props> = ({
 }) => {
   return (
     <span
+      style={{ fontSize: sizeValue }}
       className={classNames(styles["text"], {
         [styles["text--thin"]]: weight === "thin",
         [styles["text--normal"]]: weight === "normal",
@@ -40,6 +43,7 @@ export const Text: React.FC<Props> = ({
         [styles["text--small"]]: size === "small",
         [styles["text--middle"]]: size === "middle",
         [styles["text--large"]]: size === "large",
+        [styles["text--xlarge"]]: size === "xlarge",
         [styles["text--white"]]: color === "white",
         [styles["text--red"]]: color === "red" || color === "#ff0000",
         [styles["text--green"]]: color === "green" || color === "#00ff00",

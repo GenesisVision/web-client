@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import {
   SORTING_DIRECTION,
   switchDirection
@@ -32,11 +32,11 @@ export const MarketWatchHeaderCell: React.FC<Props> = React.memo(
     const isSelected = field === sorting.field;
     return (
       <th
-        className={classNames(styles["market-watch__th"])}
+        className={clsx(styles["market-watch__th"])}
         onClick={handleChangeSorting(field)}
       >
         <span
-          className={classNames({
+          className={clsx({
             [styles["market-watch__th--asc"]]:
               isSelected && sorting.direction === SORTING_DIRECTION.ASC,
             [styles["market-watch__th--desc"]]:

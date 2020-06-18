@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
 import { OrderBookCurrentPriceContainer } from "pages/trades/binance-trade-page/trading/order-book/order-book-current-price.container";
@@ -66,7 +66,7 @@ const _OrderBook: React.FC<Props> = ({
         >
           <Row
             wide
-            className={classNames(
+            className={clsx(
               styles["order-book__table-block"],
               styles["order-book__table-block--reverse"]
             )}

@@ -2,8 +2,8 @@ import { FUND_ASSET_TYPE } from "components/fund-asset/fund-asset";
 import FundAssetContainer, {
   FundAssetType
 } from "components/fund-asset/fund-asset-container";
+import { LabeledValue } from "components/labeled-value/labeled-value";
 import { useToLink } from "components/link/link.helper";
-import StatisticItemInner from "components/statistic-item/statistic-item-inner";
 import TableCard, {
   IWithOffset,
   TableCardTable,
@@ -107,7 +107,7 @@ const _DashboardPublicCard: React.FC<Props> = ({
     >
       <TableCardTable>
         <TableCardTableColumn>
-          <StatisticItemInner
+          <LabeledValue
             label={
               <TooltipLabel
                 tooltipContent={amountTooltip}
@@ -124,9 +124,9 @@ const _DashboardPublicCard: React.FC<Props> = ({
               suffix={` ${asset.accountInfo.currency}`}
               displayType="text"
             />
-          </StatisticItemInner>
+          </LabeledValue>
           {asset.broker && (
-            <StatisticItemInner
+            <LabeledValue
               label={
                 <TooltipLabel
                   tooltipContent={t("dashboard-page.tooltips.investing.broker")}
@@ -135,11 +135,11 @@ const _DashboardPublicCard: React.FC<Props> = ({
               }
             >
               {asset.broker.name}
-            </StatisticItemInner>
+            </LabeledValue>
           )}
         </TableCardTableColumn>
         <TableCardTableColumn>
-          <StatisticItemInner
+          <LabeledValue
             label={
               <TooltipLabel
                 tooltipContent={
@@ -159,9 +159,9 @@ const _DashboardPublicCard: React.FC<Props> = ({
               )}
               displayType="text"
             />
-          </StatisticItemInner>
+          </LabeledValue>
           {!!asset.signalInfo && (
-            <StatisticItemInner
+            <LabeledValue
               label={
                 <TooltipLabel
                   tooltipContent={t(
@@ -172,11 +172,11 @@ const _DashboardPublicCard: React.FC<Props> = ({
               }
             >
               {asset.signalInfo.subscribersCount}
-            </StatisticItemInner>
+            </LabeledValue>
           )}
         </TableCardTableColumn>
         <TableCardTableColumn>
-          <StatisticItemInner
+          <LabeledValue
             label={
               <TooltipLabel
                 tooltipContent={
@@ -191,9 +191,9 @@ const _DashboardPublicCard: React.FC<Props> = ({
             {convertDateToShortFormat(
               distanceDate(asset.accountInfo.creationDate)
             )}
-          </StatisticItemInner>
+          </LabeledValue>
           {asset.accountInfo && asset.accountInfo.login && (
-            <StatisticItemInner
+            <LabeledValue
               label={
                 <TooltipLabel
                   tooltipContent={t("dashboard-page.tooltips.trading.login")}
@@ -202,7 +202,7 @@ const _DashboardPublicCard: React.FC<Props> = ({
               }
             >
               {asset.accountInfo.login}
-            </StatisticItemInner>
+            </LabeledValue>
           )}
         </TableCardTableColumn>
       </TableCardTable>

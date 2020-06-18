@@ -2,8 +2,8 @@ import FormTextField from "components/assets/fields/form-text-field";
 import { DialogError } from "components/dialog/dialog-error";
 import GVButton from "components/gv-button";
 import { GVHookFormField } from "components/gv-hook-form-field";
+import { LabeledValue } from "components/labeled-value/labeled-value";
 import { Row } from "components/row/row";
-import StatisticItemInner from "components/statistic-item/statistic-item-inner";
 import withLoader from "decorators/with-loader";
 import { FundAssetInfo, PlatformAsset } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
@@ -83,23 +83,23 @@ const _ReallocateForm: React.FC<Props> = ({
       </Row>
       {dirty && !equalWithCurrent && (
         <Row wide>
-          <StatisticItemInner label={"Current"}>
+          <LabeledValue label={"Current"}>
             <CreateFundSettingsAssetsComponent
               assets={savedCurrent || []}
               remainder={0}
               canChange={false}
             />
-          </StatisticItemInner>
+          </LabeledValue>
         </Row>
       )}
       <Row wide>
-        <StatisticItemInner label={dirty ? "New" : "Current"}>
+        <LabeledValue label={dirty ? "New" : "Current"}>
           <GVHookFormField
             name={FIELDS.assets}
             component={ReallocateFieldWrapper}
             assets={platformAssets}
           />
-        </StatisticItemInner>
+        </LabeledValue>
       </Row>
       {errorMessage && (
         <Row>

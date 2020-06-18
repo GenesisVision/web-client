@@ -1463,7 +1463,8 @@
     "privacy": {
       "title": "Privacy",
       "post": "Who can post to my wall",
-      "view": "Who can view comments on my posts"
+      "write-comment": "Who can comment on my posts",
+      "view-comment": "Who can view comments on my posts"
     },
     "referral-program": {
       "title": "Invite your friends to Genesis vision",
