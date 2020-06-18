@@ -70,6 +70,7 @@ const _InvestmentLimit: React.FC<Props> = ({
     >
       <HookForm resetOnSuccess form={form} onSubmit={handleSubmit}>
         <InvestmentLimitField
+          wide={false}
           setHasInvestmentLimit={setHasInvestmentLimit}
           checkboxName={"hasInvestmentLimit"}
           inputName={FIELDS.investmentLimit}
