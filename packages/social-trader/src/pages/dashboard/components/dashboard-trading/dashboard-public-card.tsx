@@ -2,8 +2,8 @@ import { FUND_ASSET_TYPE } from "components/fund-asset/fund-asset";
 import FundAssetContainer, {
   FundAssetType
 } from "components/fund-asset/fund-asset-container";
+import { LabeledValue } from "components/labeled-value/labeled-value";
 import { useToLink } from "components/link/link.helper";
-import StatisticItemInner from "components/statistic-item/statistic-item-inner";
 import TableCard, {
   IWithOffset,
   TableCardTable,
@@ -103,7 +103,7 @@ const _DashboardPublicCard: React.FC<Props> = ({
     >
       <TableCardTable>
         <TableCardTableColumn>
-          <StatisticItemInner label={amountTitle}>
+          <LabeledValue label={amountTitle}>
             <NumberFormat
               value={formatValueDifferentDecimalScale(
                 asset.accountInfo.balance,
@@ -113,15 +113,15 @@ const _DashboardPublicCard: React.FC<Props> = ({
               suffix={` ${asset.accountInfo.currency}`}
               displayType="text"
             />
-          </StatisticItemInner>
+          </LabeledValue>
           {asset.broker && (
-            <StatisticItemInner label={t("dashboard-page.trading.broker")}>
+            <LabeledValue label={t("dashboard-page.trading.broker")}>
               {asset.broker.name}
-            </StatisticItemInner>
+            </LabeledValue>
           )}
         </TableCardTableColumn>
         <TableCardTableColumn>
-          <StatisticItemInner label={t("dashboard-page.trading.ddown")}>
+          <LabeledValue label={t("dashboard-page.trading.ddown")}>
             <NumberFormat
               value={formatValueDifferentDecimalScale(
                 asset.statistic.drawdown,
@@ -130,25 +130,23 @@ const _DashboardPublicCard: React.FC<Props> = ({
               )}
               displayType="text"
             />
-          </StatisticItemInner>
+          </LabeledValue>
           {!!asset.signalInfo && (
-            <StatisticItemInner
-              label={t("dashboard-page.trading.subscribers-count")}
-            >
+            <LabeledValue label={t("dashboard-page.trading.subscribers-count")}>
               {asset.signalInfo.subscribersCount}
-            </StatisticItemInner>
+            </LabeledValue>
           )}
         </TableCardTableColumn>
         <TableCardTableColumn>
-          <StatisticItemInner label={t("dashboard-page.trading.age")}>
+          <LabeledValue label={t("dashboard-page.trading.age")}>
             {convertDateToShortFormat(
               distanceDate(asset.accountInfo.creationDate)
             )}
-          </StatisticItemInner>
+          </LabeledValue>
           {asset.accountInfo && asset.accountInfo.login && (
-            <StatisticItemInner label={t("dashboard-page.trading.login")}>
+            <LabeledValue label={t("dashboard-page.trading.login")}>
               {asset.accountInfo.login}
-            </StatisticItemInner>
+            </LabeledValue>
           )}
         </TableCardTableColumn>
       </TableCardTable>

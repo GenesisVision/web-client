@@ -3,11 +3,11 @@ import ImageBase from "components/avatar/image-base";
 import { CurrencyItem } from "components/currency-item/currency-item";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import HookFormAmountField from "components/input-amount-field/hook-form-amount-field";
+import { LabeledValue } from "components/labeled-value/labeled-value";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import Select from "components/select/select";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
-import StatisticItemInner from "components/statistic-item/statistic-item-inner";
 import { SubmitButton } from "components/submit-button/submit-button";
 import { Text } from "components/text/text";
 import {
@@ -84,12 +84,12 @@ const _TransferForm: React.FC<Props> = ({
       <Row className={styles["transfer__type-block"]}>
         <div className={styles["transfer__type-item"]}>
           <Row>
-            <StatisticItemInner label={t("From")}>
+            <LabeledValue label={t("From")}>
               <span className={styles["transfer__wallet-name"]}>
                 {fromSource}
               </span>
               &nbsp; wallet
-            </StatisticItemInner>
+            </LabeledValue>
           </Row>
           <Row small>
             <Text wrap={false} muted>
@@ -121,12 +121,12 @@ const _TransferForm: React.FC<Props> = ({
         </RowItem>
         <div className={styles["transfer__type-item"]}>
           <Row>
-            <StatisticItemInner label={t("To")}>
+            <LabeledValue label={t("To")}>
               <span className={styles["transfer__wallet-name"]}>
                 {toSource}
               </span>
               &nbsp; wallet
-            </StatisticItemInner>
+            </LabeledValue>
           </Row>
           <Row small>
             <Text wrap={false} muted>
