@@ -684,6 +684,7 @@
       "value": "Value"
     },
     "tooltips": {
+      "title": "Name of the fund",
       "balance": "Current market value of all assets in the fund",
       "assets": "Assets included in the fund",
       "investors": "Number of investors in the fund.",
