@@ -48,39 +48,48 @@ export const PROGRAM_TRADING_LOG_COLUMNS: SortingColumn[] = [
 export const PROGRAM_TRADES_COLUMNS: SortingColumn[] = [
   {
     name: "direction-entry",
-    sortingName: "ByDirection"
+    sortingName: "ByDirection",
+    tooltip: true
   },
   {
     name: "symbol",
-    sortingName: "BySymbol"
+    sortingName: "BySymbol",
+    tooltip: true
   },
   {
     name: "volume",
-    sortingName: "ByVolume"
+    sortingName: "ByVolume",
+    tooltip: true
   },
   {
     name: "price",
-    sortingName: "ByPrice"
+    sortingName: "ByPrice",
+    tooltip: true
   },
   {
     name: "profit",
-    sortingName: "ByProfit"
+    sortingName: "ByProfit",
+    tooltip: true
   },
   {
     name: "commission",
-    sortingName: "ByCommission"
+    sortingName: "ByCommission",
+    tooltip: true
   },
   {
     name: "swap",
-    sortingName: "BySwap"
+    sortingName: "BySwap",
+    tooltip: true
   },
   {
     name: "date",
-    sortingName: "ByDate"
+    sortingName: "ByDate",
+    tooltip: true
   },
   {
     name: "ticket",
-    sortingName: "ByTicket"
+    sortingName: "ByTicket",
+    tooltip: true
   },
   {
     name: "buttons"
@@ -123,19 +132,24 @@ export const PROGRAM_OPEN_POSITIONS_COLUMNS: SortingColumn[] = [
 
 export const PROGRAM_SUBSCRIBERS_COLUMNS: SortingColumn[] = [
   {
-    name: "number"
+    name: "number",
+    tooltip: true
   },
   {
-    name: "trades"
+    name: "trades",
+    tooltip: true
   },
   {
-    name: "profit"
+    name: "profit",
+    tooltip: true
   },
   {
-    name: "commission"
+    name: "commission",
+    tooltip: true
   },
   {
-    name: "volume"
+    name: "volume",
+    tooltip: true
   },
   {
     name: "subscriptionDate"
@@ -144,59 +158,74 @@ export const PROGRAM_SUBSCRIBERS_COLUMNS: SortingColumn[] = [
     name: "unsubscriptionDate"
   },
   {
-    name: "status"
+    name: "status",
+    tooltip: true
   }
 ];
 
 export const PROGRAM_FINANCIAL_STATISTIC_COLUMNS: SortingColumn[] = [
   {
-    name: "period"
+    name: "period",
+    tooltip: true
   },
   {
-    name: "date-start"
+    name: "date-start",
+    tooltip: true
   },
   {
-    name: "balance"
+    name: "balance",
+    tooltip: true
   },
   {
-    name: "profit"
+    name: "profit",
+    tooltip: true
   },
   {
-    name: "success-fee"
+    name: "success-fee",
+    tooltip: true
   },
   {
-    name: "management-fee"
+    name: "management-fee",
+    tooltip: true
   },
   {
-    name: "deposit-withdraw"
+    name: "deposit-withdraw",
+    tooltip: true
   }
 ];
 
 export const PROGRAM_GM_FINANCIAL_STATISTIC_COLUMNS: SortingColumn[] = [
   ...PROGRAM_FINANCIAL_STATISTIC_COLUMNS,
   {
-    name: "commission-rebate"
+    name: "commission-rebate",
+    tooltip: true
   }
 ];
 
 export const PROGRAM_PERIOD_HISTORY: SortingColumn[] = [
   {
-    name: "period"
+    name: "period",
+    tooltip: true
   },
   {
-    name: "date-start"
+    name: "date-start",
+    tooltip: true
   },
   {
-    name: "period-length"
+    name: "period-length",
+    tooltip: true
   },
   {
-    name: "balance"
+    name: "balance",
+    tooltip: true
   },
   {
-    name: "profit"
+    name: "profit",
+    tooltip: true
   },
   {
-    name: "investors"
+    name: "investors",
+    tooltip: true
   }
 ];
 
