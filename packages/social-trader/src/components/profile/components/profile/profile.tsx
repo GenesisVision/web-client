@@ -44,6 +44,8 @@ const _Profile: React.FC<IProfileOwnProps> = ({
           <SettingsBlock label={t("profile-page.privacy.title")}>
             <Privacy
               data={{
+                [PRIVACY_FORM_VALUES.whoCanCommentOnMyPosts]:
+                  info.whoCanCommentOnMyPosts,
                 [PRIVACY_FORM_VALUES.whoCanViewCommentsOnMyPosts]:
                   info.whoCanViewCommentsOnMyPosts,
                 [PRIVACY_FORM_VALUES.whoCanPostToMayWall]:
