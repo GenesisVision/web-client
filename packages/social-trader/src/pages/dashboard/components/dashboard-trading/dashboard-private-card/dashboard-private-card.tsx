@@ -7,6 +7,7 @@ import TableCard, {
 } from "components/table/components/table-card/table-card";
 import { IRenderActionsArgs } from "components/table/components/table-card/table-card-actions";
 import TagProgramContainer from "components/tags/tag-program-container/tag-program-container";
+import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import {
   DECIMAL_SCALE_BIG_VALUE,
   DECIMAL_SCALE_SMALL_VALUE
@@ -49,7 +50,14 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
       <TableCardTable>
         {asset.accountInfo.currency && (
           <TableCardTableColumn>
-            <StatisticItem label={t("programs-page.programs-header.equity")}>
+            <StatisticItem
+              label={
+                <TooltipLabel
+                  tooltipContent={t("dashboard-page.tooltips.investing.equity")}
+                  labelText={t("programs-page.programs-header.equity")}
+                />
+              }
+            >
               <NumberFormat
                 value={formatValueDifferentDecimalScale(
                   asset.accountInfo.balance,
