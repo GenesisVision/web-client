@@ -88,18 +88,22 @@ const _ProgramWithdrawAmountForm: React.FC<Props> = ({
           isAllowed={isAllow}
           setMax={isOwner ? setMaxAmount : undefined}
         />
-        {programCurrency !== accountCurrency && amount !== 0 && (
-          <NumberFormat
-            value={formatCurrencyValue(
-              convertFromCurrency(amount!, rate),
-              accountCurrency
-            )}
-            prefix="≈ "
-            suffix={` ${accountCurrency}`}
-            displayType="text"
-          />
-        )}
       </Row>
+      {programCurrency !== accountCurrency && amount !== 0 && (
+        <Row>
+          <MutedText>
+            <NumberFormat
+              value={formatCurrencyValue(
+                convertFromCurrency(amount!, rate),
+                accountCurrency
+              )}
+              prefix="≈ "
+              suffix={` ${accountCurrency}`}
+              displayType="text"
+            />
+          </MutedText>
+        </Row>
+      )}
       <DialogButtons>
         <SubmitButton
           wide
