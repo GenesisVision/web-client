@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { Center } from "components/center/center";
 import { ColoredTextColor } from "components/colored-text/colored-text";
 import { DialogListItem } from "components/dialog/dialog-list-item";
@@ -106,11 +106,11 @@ const _OrderBookRow: React.FC<Props> = ({
           height: `${ORDER_BOOK_ROW_HEIGHT}px`,
           background: `linear-gradient(90deg, transparent ${barPercent}%, ${color}30 ${barPercent}%)`
         }}
-        className={classNames(styles["order-book__table-row"], {
+        className={clsx(styles["order-book__table-row"], {
           [styles["order-book__table-row--hovered"]]: hovered
         })}
       >
-        <td className={classNames(styles["order-book__first-cell"])}>
+        <td className={clsx(styles["order-book__first-cell"])}>
           <Center>
             {hasOrder && (
               <div className={styles["order-book__has-order-bubble"]} />

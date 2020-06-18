@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import ImageBase from "components/avatar/image-base";
 import { CurrencyItem } from "components/currency-item/currency-item";
 import { GVHookFormField } from "components/gv-hook-form-field";
@@ -99,7 +99,7 @@ const _TransferForm: React.FC<Props> = ({
           </Row>
         </div>
         <div
-          className={classNames(
+          className={clsx(
             styles["transfer__type-item"],
             styles["transfer__type-turn-block"]
           )}
