@@ -53,7 +53,9 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
             <StatisticItem
               label={
                 <TooltipLabel
-                  tooltipContent={t("dashboard-page.tooltips.investing.equity")}
+                  tooltipContent={t(
+                    "dashboard-page.tooltips.private-card.equity"
+                  )}
                   labelText={t("programs-page.programs-header.equity")}
                 />
               }
@@ -71,7 +73,16 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
           </TableCardTableColumn>
         )}
         <TableCardTableColumn>
-          <StatisticItem label={t("dashboard-page.trading.leverage")}>
+          <StatisticItem
+            label={
+              <TooltipLabel
+                tooltipContent={t(
+                  "dashboard-page.tooltips.private-card.leverage"
+                )}
+                labelText={t("dashboard-page.trading.leverage")}
+              />
+            }
+          >
             <NumberFormat
               value={formatValueDifferentDecimalScale(
                 asset.accountInfo.leverage,
@@ -83,7 +94,14 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
           </StatisticItem>
         </TableCardTableColumn>
         <TableCardTableColumn>
-          <StatisticItem label={t("dashboard-page.trading.age")}>
+          <StatisticItem
+            label={
+              <TooltipLabel
+                tooltipContent={t("dashboard-page.tooltips.private-card.age")}
+                labelText={t("dashboard-page.trading.age")}
+              />
+            }
+          >
             {convertDateToShortFormat(
               distanceDate(asset.accountInfo.creationDate)
             )}
