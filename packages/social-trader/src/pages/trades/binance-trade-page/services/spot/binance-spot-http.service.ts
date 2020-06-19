@@ -34,14 +34,33 @@ export const getExchangeInfo = (): Promise<ExchangeInfo> =>
     value => value
   );
 
-export const getKlines = (params: KlineParams): Promise<Bar[]> => {
-  return requestService.get(
-    {
-      url: `${API_ROUTE}/klines`,
-      params
-    },
-    transformKlineWrapper
-  );
+export const getKlines = async (params: KlineParams): Promise<Bar[]> => {
+  const bars: Bar[] = [];
+
+  const sendRequest = async (startTime: number) => {
+    const data = await requestService.get(
+      {
+        url: `${API_ROUTE}/klines`,
+        params: {
+          ...params,
+          startTime
+        }
+      },
+      transformKlineWrapper
+    );
+
+    bars.push.apply(bars, data);
+    const length = bars.length;
+
+    if (length === 1000) {
+      const lastBar = bars[bars.length - 1];
+      const nextTime = lastBar.time + 1;
+      await sendRequest(nextTime);
+    }
+  };
+
+  await sendRequest(params.startTime);
+  return bars;
 };
 
 export const getServerTime = (): Promise<{ serverTime: number }> => {
