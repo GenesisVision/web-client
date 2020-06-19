@@ -264,7 +264,7 @@ const _AssetTagCard: React.FC<IAssetTagProps & { url: ToType | string }> = ({
         }
       />
       <Row small className={styles["asset-tag"]}>
-        <RowItem wide>$ {price} </RowItem>
+        {price !== null && <RowItem wide>$ {price} </RowItem>}
         {change24Percent !== null && (
           <RowItem>
             <ColoredText color={color}>
