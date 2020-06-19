@@ -23,7 +23,7 @@ const _InvestmentLimit: React.FC<Props> = ({
   const [t] = useTranslation();
 
   const [hasInvestmentLimit, setHasInvestmentLimit] = useState(
-    investmentLimit !== null
+    investmentLimit !== undefined
   );
 
   const form = useForm<InvesmentLimitFormValues>({
@@ -95,7 +95,7 @@ export interface InvesmentLimitFormValues {
 interface Props {
   editError?: boolean;
   currency: CurrencyEnum;
-  investmentLimit: number;
+  investmentLimit?: number;
   onSubmit: (values: InvesmentLimitFormValues) => void;
 }
 
