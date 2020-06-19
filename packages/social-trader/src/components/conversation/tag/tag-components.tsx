@@ -263,7 +263,7 @@ const _AssetTagCard: React.FC<IAssetTagProps & { url: ToType | string }> = ({
           </Link>
         }
       />
-      {price !== null && change24Percent !== null && (
+      {(price !== null || change24Percent !== null) && (
         <Row small className={styles["asset-tag"]}>
           {price !== null && <RowItem wide>$ {price} </RowItem>}
           {change24Percent !== null && (
