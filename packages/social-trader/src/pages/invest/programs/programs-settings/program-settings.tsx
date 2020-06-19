@@ -105,7 +105,11 @@ const _ProgramSettings: React.FC<Props> = ({
           <InvestmentLimit
             editError={editError}
             currency={description.tradingAccountInfo.currency}
-            investmentLimit={programDetails.availableInvestmentLimit}
+            investmentLimit={
+              programDetails.availableInvestmentLimit === null
+                ? undefined
+                : programDetails.availableInvestmentLimit
+            }
             onSubmit={editProgram}
           />
         </>
