@@ -1,7 +1,6 @@
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
-import TagItem from "components/tags/tag-item/tag-item";
-import TagItemWrapperTooltip from "components/tags/tag-item/tag-item-with-tooltip";
+import TagItemWithTooltip from "components/tags/tag-item/tag-item-with-tooltip";
 import { Tag } from "gv-api-web";
 import * as React from "react";
 import { useMemo } from "react";
@@ -31,9 +30,7 @@ const _TagFilterPopover: React.FC<Props> = ({ values, changeFilter }) => {
         <Row wrap>
           {filteredTags.map(tag => (
             <RowItem bottomOffset small onClick={() => handleClick(tag.id)}>
-              <TagItemWrapperTooltip name={tag.name}>
-                <TagItem name={tag.name} color={tag.color} clickable />
-              </TagItemWrapperTooltip>
+              <TagItemWithTooltip name={tag.name} color={tag.color} clickable />
             </RowItem>
           ))}
         </Row>

@@ -1,12 +1,11 @@
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
-import TagItemWrapperTooltip from "components/tags/tag-item/tag-item-with-tooltip";
+import TagItemWithTooltip from "components/tags/tag-item/tag-item-with-tooltip";
 import Tooltip from "components/tooltip/tooltip";
 import withLoader, { WithLoaderProps } from "decorators/with-loader";
 import { Tag } from "gv-api-web";
 import * as React from "react";
 
-import TagItem from "../tag-item/tag-item";
 import TagItemTooltip from "../tag-item/tag-item-tooltip";
 import styles from "./tag-broker-container.module.scss";
 
@@ -24,9 +23,7 @@ const _TagBrokerContainer: React.FC<Props & WithLoaderProps> = ({
         (tag, idx) =>
           ((remainder && idx === 0) || !remainder) && (
             <RowItem small key={idx}>
-              <TagItemWrapperTooltip name={tag.name}>
-                <TagItem name={tag.name} color={tag.color} />
-              </TagItemWrapperTooltip>
+              <TagItemWithTooltip name={tag.name} color={tag.color} />
             </RowItem>
           )
       )}

@@ -1,7 +1,6 @@
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
-import TagItem from "components/tags/tag-item/tag-item";
-import TagItemWrapperTooltip from "components/tags/tag-item/tag-item-with-tooltip";
+import TagItemWithTooltip from "components/tags/tag-item/tag-item-with-tooltip";
 import { Tag } from "gv-api-web";
 import * as React from "react";
 
@@ -11,9 +10,7 @@ const _DetailsTags: React.FC<{
   <Row wrap>
     {tags.map((tag, idx) => (
       <RowItem small key={idx}>
-        <TagItemWrapperTooltip name={tag.name}>
-          <TagItem name={tag.name} color={tag.color} />
-        </TagItemWrapperTooltip>
+        <TagItemWithTooltip name={tag.name} color={tag.color} />
       </RowItem>
     ))}
   </Row>
