@@ -118,12 +118,6 @@ export const createPng = async (
           ? calculatedLeft || 0
           : pngOptions.position?.x;
 
-      if (
-        imageRatio <= 1 ||
-        (pngOptions.containerSize?.width &&
-          left + imageWidth > pngOptions.containerSize?.width)
-      )
-        return input;
       image.composite([
         {
           input,
@@ -242,6 +236,8 @@ export function createBannerApi(
         asset === ASSET.FUND
           ? await fetchFundData(id as string)
           : await fetchProgramData(id as string);
+
+      console.info(chart, details);
 
       const banner = await createBanner(
         <Banner chart={chart} details={details} />,
