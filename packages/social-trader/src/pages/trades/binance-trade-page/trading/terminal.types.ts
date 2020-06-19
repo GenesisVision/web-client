@@ -878,9 +878,9 @@ export interface ExchangeInfo {
 export interface KlineParams {
   symbol: string;
   interval: string;
-  startTime?: number;
-  endTime?: number;
-  limit?: number;
+  startTime: number;
+  endTime: number;
+  limit: number;
 }
 
 export interface OrderBook {

@@ -155,18 +155,19 @@ export default ({
     from,
     to,
     onHistoryCallback,
-    onErrorCallback,
-    firstDataRequest
+    onErrorCallback
   ) => {
-    const fromms = firstDataRequest ? undefined : from * 1000;
-    const toms = firstDataRequest ? undefined : to * 1000;
+    const startTime = from * 1000;
+    const endTime = to * 1000;
+    const limit = 1000;
+    const interval = formatTimeResolution(resolution);
 
     const urlParameters = {
       symbol: symbolInfo.full_name,
-      interval: formatTimeResolution(resolution),
-      startTime: fromms,
-      endTime: toms,
-      limit: 1000
+      interval,
+      startTime,
+      endTime,
+      limit
     };
 
     try {
