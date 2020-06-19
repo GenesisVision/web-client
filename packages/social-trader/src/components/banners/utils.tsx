@@ -237,8 +237,6 @@ export function createBannerApi(
           ? await fetchFundData(id as string)
           : await fetchProgramData(id as string);
 
-      console.info(chart, details);
-
       const banner = await createBanner(
         <Banner chart={chart} details={details} />,
         logoOptions
