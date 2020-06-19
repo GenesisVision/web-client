@@ -2,14 +2,12 @@ import { sendEventToGA } from "utils/ga";
 
 export const sendPostEvent = (eventValue?: number) =>
   sendEventToGA({
-    eventValue,
     eventCategory: "Social",
     eventAction: "SendPost"
   });
 
 export const sendCommentEvent = (eventValue?: number) =>
   sendEventToGA({
-    eventValue,
     eventCategory: "Social",
     eventAction: "SendComment"
   });
