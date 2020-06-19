@@ -4,6 +4,7 @@ import filesService from "services/file-service";
 import { LogoOptions } from "../utils";
 import Logo21 from "./defaultLogos/Logo21";
 import Logo25 from "./defaultLogos/Logo25";
+import Logo55 from "./defaultLogos/Logo55";
 
 const BANNER_LOGO_RADIUS = 7;
 
@@ -21,6 +22,8 @@ export default function LogoPlaceholder({
         return <Logo21 color={color} x={x} y={y} />;
       case 25:
         return <Logo25 color={color} x={x} y={y} />;
+      case 55:
+        return <Logo55 color={color} x={x} y={y} />;
     }
   }
   return (

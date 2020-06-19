@@ -16,4 +16,4 @@ export const PROGRAMS_FACET_ROUTE = `${PROGRAMS_ROUTE}/${FACETS}/:${PROGRAM_SLUG
 export const PROGRAMS_FACET_FOLDER_ROUTE = `${PROGRAMS_ROUTE}/${FACETS}/[id]`;
 export const PROGRAMS_TAB_ROUTE = `${PROGRAMS_ROUTE}/:tab`;
 
-export const PROGRAM_BANNER_ROUTE = `/banners/programs/:${PROGRAM_SLUG_URL_PARAM_NAME}/250x250.png`;
+export const PROGRAM_BANNER_ROUTE = `/banners/programs/:${PROGRAM_SLUG_URL_PARAM_NAME}/600x315.png`;
