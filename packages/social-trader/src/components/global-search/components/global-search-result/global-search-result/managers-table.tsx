@@ -13,11 +13,7 @@ const ManagersTable: React.FC<SearchTableProps<ManagersList>> = ({ data }) => {
     <Table
       columns={MANAGERS_TABLE_COLUMNS}
       items={data.items}
-      renderHeader={column => (
-        <span className={`managers-table__cell--${column.name}`}>
-          {t(`managers-table.${column.name}`)}
-        </span>
-      )}
+      renderHeader={column => <span>{t(`managers-table.${column.name}`)}</span>}
       renderBodyRow={manager => <ManagersTableRow manager={manager} />}
     />
   );

@@ -1,5 +1,3 @@
-import "./post-buttons.scss";
-
 import React from "react";
 
 const _ShareButton: React.FC<Props> = ({}) => {

@@ -80,10 +80,3 @@ $primary-color-hover: #17c9bc;
 $landing-link-hover: #db2a7c;
 
 $popover-dark-background: #24323c;
-
-@mixin background-with-avatar-level($color) {
-  background: $color;
-  .program-avatar__level {
-    background: $color;
-  }
-}

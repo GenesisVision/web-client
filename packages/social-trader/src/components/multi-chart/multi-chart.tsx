@@ -1,5 +1,3 @@
-import "./multi-chart.scss";
-
 import ChartPeriod from "components/chart/chart-period/chart-period";
 import { ChartDefaultPeriod } from "components/chart/chart-period/chart-period.helpers";
 import { withBlurLoader } from "decorators/with-blur-loader";

@@ -1,3 +1,4 @@
+import styles from "components/details/details-description-section/details-statistic-section/details-history/trades.module.scss";
 import GVButton, { GV_BTN_SIZE } from "components/gv-button";
 import { MutedText } from "components/muted-text/muted-text";
 import Popover, {
@@ -21,11 +22,11 @@ const _ProgramPeriodHistoryPopupItem: React.FC<{
   currency: CurrencyEnum;
 }> = ({ label, value, currency }) => (
   <PopoverContentListItem>
-    <div className="details-trades__history-popup-item">
-      <div className="details-trades__history-popup-item-name">
+    <div className={styles["details-trades__history-popup-item"]}>
+      <div className={styles["details-trades__history-popup-item-name"]}>
         <MutedText>{label}</MutedText>
       </div>
-      <div className="details-trades__history-popup-item-value">
+      <div className={styles["details-trades__history-popup-item-value"]}>
         {value} {currency}
       </div>
     </div>

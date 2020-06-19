@@ -113,11 +113,7 @@ const _DisableAuthForm: React.FC<Props> = ({ onSubmit, errorMessage }) => {
         )}
         <Row large>
           <DialogButtons>
-            <SubmitButton
-              wide
-              className="google-auth__button"
-              isSuccessful={!errorMessage}
-            >
+            <SubmitButton wide isSuccessful={!errorMessage}>
               {t("buttons.disable")}
             </SubmitButton>
           </DialogButtons>

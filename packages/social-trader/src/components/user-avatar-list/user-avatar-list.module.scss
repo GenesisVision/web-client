@@ -1,0 +1,22 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
+@import "~shared/styles/_constants";
+
+.user-avatar-list {
+  &__container {
+    position: relative;
+  }
+  &__item {
+    position: relative;
+  }
+  &__remainder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: $small-avatar-size;
+    height: $small-avatar-size;
+    border-radius: 100%;
+    background-color: $panel-background-color;
+  }
+}

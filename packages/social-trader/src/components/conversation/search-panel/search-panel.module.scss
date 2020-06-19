@@ -1,0 +1,22 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_constants";
+
+.search-panel {
+  max-height: 160px;
+  overflow-y: scroll;
+
+  &__spinner {
+    width: 30px;
+    height: 30px;
+  }
+
+  &__row {
+    cursor: pointer;
+    &:hover {
+      & span {
+        @include transition(color);
+        color: white !important;
+      }
+    }
+  }
+}

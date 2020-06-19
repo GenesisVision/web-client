@@ -1,17 +1,17 @@
 import ManagerPage from "components/manager/manager.page";
 import withDefaultLayout from "decorators/with-default-layout";
 import { PublicProfile } from "gv-api-web";
-import { NextPage } from "next";
 import React from "react";
-import { api } from "services/api-client/swagger-custom-client";
+import { NextPageWithRedux } from "utils/types";
+import { getUserProfile } from "components/manager/services/manager.service";
 
-const Page: NextPage<Props> = ({ profile }) => {
+const Page: NextPageWithRedux<Props> = ({ profile }) => {
   return <ManagerPage profile={profile} />;
 };
 
 Page.getInitialProps = async ctx => {
   const { id } = ctx.query;
-  const profile = await api.users().getManagerProfile(id as string);
+  const profile = await getUserProfile(id as string, ctx.token);
   return {
     profile
   };

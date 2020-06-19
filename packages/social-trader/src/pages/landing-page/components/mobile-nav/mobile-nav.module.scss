@@ -1,0 +1,42 @@
+@import "~shared/styles/_colors";
+@import "../../styles/mixins";
+@import "../../styles/grid";
+
+.mobile-nav {
+  @include container();
+  @include transition(height);
+  position: fixed;
+  top: 64px;
+  left: 0;
+  height: 0;
+  width: 100%;
+  background-color: $landing-bg;
+  color: $main-color;
+  z-index: 3;
+  overflow: auto;
+
+  @include media-breakpoint-tablet() {
+    top: 130px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-content: center;
+  }
+
+  &--open {
+    height: calc(100% - 64px);
+
+    @include media-breakpoint-tablet() {
+      height: calc(100% - 130px);
+    }
+  }
+
+  &__seo-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    @include media-breakpoint-tablet() {
+      grid-column: 2/4;
+      grid-template-rows: repeat(auto-fill, minmax(auto, 1fr));
+    }
+  }
+}

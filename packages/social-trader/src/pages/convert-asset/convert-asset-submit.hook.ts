@@ -1,10 +1,9 @@
 import { Push } from "components/link/link";
+import { useAlerts } from "hooks/alert.hook";
 import useApiRequest from "hooks/api-request.hook";
 import { TErrorMessage } from "hooks/error-message.hook";
-import { alertMessageActions } from "modules/alert-message/actions/alert-message-actions";
 import { CONVERT_ASSET } from "pages/convert-asset/convert-asset.contants";
 import { useCallback } from "react";
-import { useDispatch } from "react-redux";
 import { TRADING_ROUTE } from "routes/dashboard.routes";
 import { sendEventToGA } from "utils/ga";
 
@@ -37,14 +36,11 @@ const useConvertAssetSubmit = ({
         eventAction: "ConvertToProgram"
       });
   };
-  const dispatch = useDispatch();
+  const { successAlert } = useAlerts();
   const checkConditionMiddleware = (data: any) => {
     if (!data || !condition || condition(data)) {
-      dispatch(
-        alertMessageActions.success(
-          `convert-${fromTo.assetFrom.toLowerCase()}-${fromTo.assetTo.toLowerCase()}-page.notifications.create-success`,
-          true
-        )
+      successAlert(
+        `convert-${fromTo.assetFrom.toLowerCase()}-${fromTo.assetTo.toLowerCase()}-page.notifications.create-success`
       );
       Push(TRADING_ROUTE);
     }

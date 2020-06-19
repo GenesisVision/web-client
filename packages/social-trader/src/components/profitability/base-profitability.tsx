@@ -2,6 +2,7 @@ import classNames from "classnames";
 import * as React from "react";
 
 import { PROFITABILITY_VARIANT } from "./profitability.helper";
+import styles from "./profitability.module.scss";
 
 const _BaseProfitability: React.FC<Props> = ({
   className,
@@ -11,10 +12,10 @@ const _BaseProfitability: React.FC<Props> = ({
   children
 }) => (
   <div
-    className={classNames("profitability", className, {
-      "profitability--positive": isPositive,
-      "profitability--negative": isNegative,
-      "profitability--chips": variant === PROFITABILITY_VARIANT.CHIPS
+    className={classNames(styles["profitability"], className, {
+      [styles["profitability--positive"]]: isPositive,
+      [styles["profitability--negative"]]: isNegative,
+      [styles["profitability--chips"]]: variant === PROFITABILITY_VARIANT.CHIPS
     })}
   >
     {children}

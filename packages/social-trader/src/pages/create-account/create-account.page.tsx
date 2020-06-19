@@ -1,11 +1,12 @@
 import Page from "components/page/page";
-import { Broker } from "gv-api-web";
+import { Broker, ExchangeInfo } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 
 import CreateAccountContainer from "./components/create-account.container";
 
 const _CreateAccountPage: React.FC<Props> = ({
+  exchanges,
   brokers,
   requestBrokerName
 }) => {
@@ -13,6 +14,7 @@ const _CreateAccountPage: React.FC<Props> = ({
   return (
     <Page showTitle title={t("create-account-page.title")}>
       <CreateAccountContainer
+        exchanges={exchanges}
         brokers={brokers}
         requestBrokerName={requestBrokerName}
       />
@@ -21,6 +23,7 @@ const _CreateAccountPage: React.FC<Props> = ({
 };
 
 interface Props {
+  exchanges: ExchangeInfo[];
   requestBrokerName?: string;
   brokers: Broker[];
 }

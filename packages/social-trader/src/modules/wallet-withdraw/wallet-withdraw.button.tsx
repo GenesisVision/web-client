@@ -14,7 +14,7 @@ import { useSelector } from "react-redux";
 import { safeGetElemFromArray } from "utils/helpers";
 import { CurrencyEnum } from "utils/types";
 
-import "./wallet-withdraw.button.scss";
+import styles from "./wallet-withdraw.button.module.scss";
 
 const _WalletWithdrawButton: React.FC<Props> = ({
   type,
@@ -58,7 +58,7 @@ const FullButton: React.FC<{
       <Center>
         <RowItem small>
           <ImageBaseElement
-            className="wallet-withdraw-button__full-button-icon"
+            className={styles["wallet-withdraw-button__full-button-icon"]}
             src={ArrowIcon}
             alt={t("wallet-page.buttons.withdraw")}
           />

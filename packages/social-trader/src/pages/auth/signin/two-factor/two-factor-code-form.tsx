@@ -1,10 +1,10 @@
-import "./two-factor-code.scss";
-
 import FormError from "components/form/form-error/form-error";
 import GVButton from "components/gv-button";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
+import { MutedText } from "components/muted-text/muted-text";
+import { Row } from "components/row/row";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
 import { SubmitButton } from "components/submit-button/submit-button";
 import useIsOpen from "hooks/is-open.hook";
@@ -81,40 +81,44 @@ const _TwoFactorCodeForm: React.FC<Props> = ({
   }, [storeTwoFactorState]);
 
   return (
-    <HookForm className="login-two-factor" form={form} onSubmit={handleSubmit}>
+    <HookForm form={form} onSubmit={handleSubmit}>
       <h3>{t("auth.login.two-factor.title")}</h3>
-      <div className="login-two-factor__text">
-        {t("auth.login.two-factor.text")}
-      </div>
-      <GVHookFormField
-        disabled={isSubmitting}
-        type="tel"
-        name={FIELDS.code}
-        label={t("auth.login.two-factor.input-label")}
-        autoComplete="off"
-        autoFocus
-        component={SimpleTextField}
-        format="######"
-      />
-
-      <div className="login-two-factor__recovery-info">
-        {t("auth.login.two-factor.recovery-info")}
-      </div>
-      <GVButton
-        noPadding
-        className="login-two-factor__recovery-link"
-        variant="text"
-      >
-        <Link
-          onClick={handleRecoveryClick}
-          to={linkCreator(LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE)}
-        >
-          {t("auth.login.two-factor.link-to-recovery")}
-        </Link>
-      </GVButton>
-
-      <FormError error={error} />
-      <div className="login-two-factor__submit">
+      <Row>
+        <MutedText noWrap={false}>{t("auth.login.two-factor.text")}</MutedText>
+      </Row>
+      <Row xlarge>
+        <GVHookFormField
+          disabled={isSubmitting}
+          type="tel"
+          name={FIELDS.code}
+          label={t("auth.login.two-factor.input-label")}
+          autoComplete="off"
+          autoFocus
+          component={SimpleTextField}
+          format="######"
+        />
+      </Row>
+      <Row large>
+        <MutedText noWrap={false}>
+          {t("auth.login.two-factor.recovery-info")}
+        </MutedText>
+      </Row>
+      <Row small>
+        <GVButton noPadding variant="text">
+          <Link
+            onClick={handleRecoveryClick}
+            to={linkCreator(LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE)}
+          >
+            {t("auth.login.two-factor.link-to-recovery")}
+          </Link>
+        </GVButton>
+      </Row>
+      {error && (
+        <Row>
+          <FormError error={error} />
+        </Row>
+      )}
+      <Row large>
         <SubmitButton
           checkSubmitted={false}
           id="signUpFormSubmit"
@@ -124,7 +128,7 @@ const _TwoFactorCodeForm: React.FC<Props> = ({
         >
           {t("auth.login.two-factor.verify")}
         </SubmitButton>
-      </div>
+      </Row>
     </HookForm>
   );
 };

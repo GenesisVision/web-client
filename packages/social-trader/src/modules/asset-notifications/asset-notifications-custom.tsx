@@ -5,6 +5,7 @@ import withLoader from "decorators/with-loader";
 import { ProgramNotificationSettingList } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
 import useIsOpen from "hooks/is-open.hook";
+import styles from "modules/notification-settings/notification-settings.module.scss";
 import {
   addNotificationMethod,
   IAddNotificationSettingProps
@@ -46,9 +47,9 @@ const _AssetNotificationsCustom: React.FC<Props> = ({ onSuccess, asset }) => {
     [asset]
   );
   return (
-    <div className="notification-settings">
+    <div>
       <Row>
-        <h3 className="notification-settings__subtitle">
+        <h3 className={styles["notification-settings__subtitle"]}>
           {t("notifications-page.custom.title")}
         </h3>
       </Row>

@@ -13,10 +13,9 @@ import React, { MouseEventHandler, useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { PlatformAssetFull } from "utils/types";
 
-import "./create-fund-settings-assets-block.scss";
+import styles from "./create-fund-settings-assets-block.module.scss";
 
 const _CreateFundSettingsAssetsComponent: React.FC<Props> = ({
-  touched,
   error,
   canChange = true,
   assets = [],
@@ -52,7 +51,7 @@ const _CreateFundSettingsAssetsComponent: React.FC<Props> = ({
           handleLeave={handleLeave}
         />
       </Row>
-      {touched && (
+      {error && (
         <Row>
           <FormError small error={error} />
         </Row>
@@ -60,7 +59,7 @@ const _CreateFundSettingsAssetsComponent: React.FC<Props> = ({
       {canChange && (
         <Row>
           <Center
-            className="assets-block__add-assets-button"
+            className={styles["assets-block__add-assets-button"]}
             onClick={addHandle}
           >
             <RowItem>

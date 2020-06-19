@@ -4,6 +4,7 @@ import * as React from "react";
 import { useTranslation } from "react-i18next";
 
 import DetailsDescriptionControl from "./details-description-control";
+import styles from "./details-description-control.module.scss";
 
 const _DetailsNotification: React.FC<Props> = ({ to, hasNotifications }) => {
   const [t] = useTranslation();
@@ -14,7 +15,7 @@ const _DetailsNotification: React.FC<Props> = ({ to, hasNotifications }) => {
     >
       <RingIcon
         selected={hasNotifications}
-        className="details-description-control__icon"
+        className={styles["details-description-control__icon"]}
       />
     </DetailsDescriptionControl>
   );

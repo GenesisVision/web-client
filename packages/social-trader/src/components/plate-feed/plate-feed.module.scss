@@ -1,0 +1,22 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_sizes";
+
+.plate-feed {
+  &__link {
+    color: white;
+  }
+  &__panel {
+    &--pink {
+      background: $landing-link-hover;
+    }
+    &--cyan {
+      background: $primary-color;
+    }
+  }
+  &__image {
+    background-size: cover;
+    border-radius: $border-radius-middle $border-radius-middle 0 0;
+    height: 300px;
+    overflow: hidden;
+  }
+}

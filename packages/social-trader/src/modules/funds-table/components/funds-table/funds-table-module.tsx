@@ -7,7 +7,6 @@ import FundsTableRow from "./fund-table-row";
 import { fundListLoaderData } from "./fund-table.loader-data";
 import FundsTableHeaderCell from "./funds-table-header-cell";
 import { FUNDS_TABLE_COLUMNS } from "./funds-table.constants";
-import "./funds-table.scss";
 
 interface Props extends ITableModuleProps {}
 

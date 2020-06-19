@@ -14,9 +14,7 @@ const _EmailConfirmPage: React.FC<Props> = ({ userId, code }) => {
       Footer={SignUpFooter}
       footerAuthRoute={LOGIN_ROUTE}
     >
-      <div className="email-confirm-page">
-        <EmailConfirmContainer userId={userId} code={code} />
-      </div>
+      <EmailConfirmContainer userId={userId} code={code} />
     </AuthLayout>
   );
 };

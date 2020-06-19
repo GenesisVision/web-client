@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import NextLink from "next/link";
 import Router from "next/router";
 import React, { useCallback } from "react";
@@ -7,9 +8,10 @@ import {
   normalizeUrlString,
   pushHistoryState
 } from "./link.helper";
-import "./link.scss";
+import styles from "./link.module.scss";
 
 const Link: React.FC<LinkProps> = ({
+  wide,
   white,
   title,
   to,
@@ -50,7 +52,10 @@ const Link: React.FC<LinkProps> = ({
   return (
     <NextLink href={normalizedTo.pathname} as={normalizedTo.as}>
       <a
-        className={white ? "link--white" : ""}
+        className={classNames({
+          [styles["link--wide"]]: wide,
+          [styles["link--white"]]: white
+        })}
         title={linkTitle}
         onClick={handleClick}
         {...other}
@@ -64,6 +69,7 @@ const Link: React.FC<LinkProps> = ({
 export default Link;
 
 export interface LinkProps {
+  wide?: boolean;
   white?: boolean;
   title?: string;
   to?: ToType | string;

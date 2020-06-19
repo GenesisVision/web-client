@@ -1,6 +1,7 @@
 import GeneralNotification from "components/general-notification/general-notification";
 import { Row } from "components/row/row";
 import { NotificationSettingViewModel } from "gv-api-web";
+import styles from "modules/notification-settings/notification-settings.module.scss";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -23,9 +24,9 @@ const _AssetNotificationsGeneral: React.FC<Props> = ({
   );
 
   return (
-    <div className="notification-settings">
+    <div className={styles["notification-settings"]}>
       <Row>
-        <h3 className="notification-settings__subtitle">
+        <h3 className={styles["notification-settings__subtitle"]}>
           {t("notifications-page.general.title")}
         </h3>
       </Row>

@@ -1,0 +1,23 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
+@import "~shared/styles/_constants";
+
+.users-table-row {
+  @include transition(background-color);
+  &:hover {
+    background-color: $row-color !important;
+    .users-table-row__about {
+      color: white;
+    }
+  }
+  &__about-cell {
+    max-width: 350px;
+  }
+  &__about {
+    @include transition(opacity);
+    white-space: normal;
+    color: $label-color;
+    line-height: $font-size-h2;
+  }
+}

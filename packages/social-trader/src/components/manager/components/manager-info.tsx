@@ -1,13 +1,8 @@
+import classNames from "classnames";
 import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
 import { DefaultBlock } from "components/default.block/default.block";
-import { FollowUserButton } from "components/manager/components/follow-user-buttom";
-import {
-  FollowersCountItem,
-  FollowingCountItem
-} from "components/manager/components/users-popups/users-count-item";
-import { useIsOwnPage } from "components/manager/manager.page.helpers";
+import { FollowUserBlock } from "components/manager/components/follow-user-block";
 import { MutedText } from "components/muted-text/muted-text";
-import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import SocialLinksBlock from "components/social-links-block/social-links-block";
 import { SIZES } from "constants/constants";
@@ -20,64 +15,39 @@ import {
   isSocialBetaTester
 } from "reducers/header-reducer";
 import { localizedDate } from "utils/dates";
+import { getLongWordsCount } from "utils/helpers";
 
-const _ManagerInfo: React.FC<Props> = ({
-  profile: {
-    personalDetails: { isFollow },
-    followers,
-    following,
-    username,
-    about,
-    logoUrl,
-    regDate,
-    id,
-    socialLinks
-  }
-}) => {
+import styles from "./manager-info.module.scss";
+
+const _ManagerInfo: React.FC<Props> = ({ profile }) => {
+  const { username, about, logoUrl, regDate, socialLinks } = profile;
   const betaTester = useSelector(betaTesterSelector);
   const isBetaTester = isSocialBetaTester(betaTester);
-  const isOwnPage = useIsOwnPage(id);
   const [t] = useTranslation();
   const memberSince = `${t("manager-page.member-since")} ${localizedDate(
     regDate
   )}`;
+
+  const hasLongWords = about && !!getLongWordsCount(about);
   return (
-    <div>
-      <Row>
-        <DefaultBlock solid wide size={SIZES.LARGE}>
+    <>
+      <DefaultBlock solid size={SIZES.LARGE}>
+        <Row>
+          <ProfileAvatar url={logoUrl} big />
+        </Row>
+        <Row onlyOffset large>
           <Row>
-            <ProfileAvatar url={logoUrl} big />
+            <h2>{username}</h2>
           </Row>
-          <Row onlyOffset large>
-            <Row>
-              <h2>{username}</h2>
-            </Row>
-            <Row small>
-              <MutedText>
-                <b>{memberSince}</b>
-              </MutedText>
-            </Row>
+          <Row small>
+            <MutedText>
+              <b>{memberSince}</b>
+            </MutedText>
           </Row>
-          {isBetaTester && (
-            <>
-              {isOwnPage === false && (
-                <Row onlyOffset large>
-                  <FollowUserButton id={id} value={isFollow} />
-                </Row>
-              )}
-              <Row large>
-                <RowItem>
-                  <FollowersCountItem id={id} count={followers} />
-                </RowItem>
-                <RowItem>
-                  <FollowingCountItem id={id} count={following} />
-                </RowItem>
-              </Row>
-            </>
-          )}
-        </DefaultBlock>
-      </Row>
-      <Row>
+        </Row>
+        {isBetaTester && <FollowUserBlock profile={profile} />}
+      </DefaultBlock>
+      <Row wide center={false}>
         <DefaultBlock>
           {!!socialLinks?.length && (
             <Row large onlyOffset>
@@ -94,12 +64,18 @@ const _ManagerInfo: React.FC<Props> = ({
               <Row>
                 <h3>{t("manager-page.about")}</h3>
               </Row>
-              <Row>{about}</Row>
+              <Row
+                className={classNames(styles["manager-info__about"], {
+                  [styles["manager-info__about--break-word"]]: hasLongWords
+                })}
+              >
+                {about}
+              </Row>
             </Row>
           )}
         </DefaultBlock>
       </Row>
-    </div>
+    </>
   );
 };
 

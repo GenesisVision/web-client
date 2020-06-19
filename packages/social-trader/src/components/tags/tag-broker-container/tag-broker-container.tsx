@@ -1,5 +1,3 @@
-import "./tag-broker-container.scss";
-
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import Tooltip from "components/tooltip/tooltip";
@@ -9,6 +7,7 @@ import * as React from "react";
 
 import TagItem from "../tag-item/tag-item";
 import TagItemTooltip from "../tag-item/tag-item-tooltip";
+import styles from "./tag-broker-container.module.scss";
 
 const MAX_VISIBLE_TAGS = 1;
 
@@ -34,11 +33,11 @@ const _TagBrokerContainer: React.FC<Props & WithLoaderProps> = ({
             render={() => (
               <TagItemTooltip
                 tags={tags}
-                className="tag-broker-container__tooltip"
+                className={styles["tag-broker-container__tooltip"]}
               />
             )}
           >
-            <div className="tag-broker-container__others">...</div>
+            <div className={styles["tag-broker-container__others"]}>...</div>
           </Tooltip>
         </RowItem>
       )}

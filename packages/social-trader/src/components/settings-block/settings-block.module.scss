@@ -1,0 +1,39 @@
+@import "~shared/styles/_sizes";
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+
+.asset-settings-block {
+  box-sizing: border-box;
+
+  &__content-block {
+    width: 100%;
+    @include adaptive-padding(bottom, $padding-small);
+  }
+
+  &__line-block {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    & h3 {
+      margin-left: -$font-size-h3/2;
+    }
+    @include media-breakpoint-landscape-phone() {
+      display: flex;
+    }
+  }
+
+  &__line {
+    min-height: 30px;
+    height: 100%;
+    @include media-breakpoint-landscape-phone() {
+      padding-left: $padding-big;
+      &--bordered {
+        border-left: 2px solid $secondary-color;
+      }
+    }
+  }
+
+  &__wrapper {
+    justify-content: space-between;
+  }
+}

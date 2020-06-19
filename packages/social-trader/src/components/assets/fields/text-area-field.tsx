@@ -3,13 +3,14 @@ import { SimpleTextField } from "components/simple-fields/simple-text-field";
 import * as React from "react";
 
 import AssetField from "../asset-fields/asset-field";
+import styles from "./text-area-field.module.scss";
 
 const _TextAreaField: React.FC<Props> = ({ name, value, label, caption }) => {
   return (
     <AssetField wide>
       <AssetFormField
         wide
-        className="text-area-field"
+        className={styles["text-area-field"]}
         value={value}
         type="textarea"
         name={name}

@@ -64,6 +64,7 @@ export enum ASSET {
 }
 
 export enum CREATE_ASSET {
+  EXCHANGE_ACCOUNT = "ExchangeAccount",
   ACCOUNT = "Account",
   PROGRAM = "Program",
   FUND = "Fund"

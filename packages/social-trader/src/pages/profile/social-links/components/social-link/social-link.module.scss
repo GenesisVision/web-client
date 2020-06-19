@@ -1,0 +1,19 @@
+@import "~shared/styles/_sizes";
+@import "~shared/styles/_constants";
+
+.social-link {
+  align-items: flex-start;
+  @include transition(height);
+  height: auto;
+
+  .social-input {
+    &__wrapper {
+      min-width: 150px;
+      width: 100%;
+    }
+    &__adornment,
+    &__label {
+      color: #8d9397;
+    }
+  }
+}

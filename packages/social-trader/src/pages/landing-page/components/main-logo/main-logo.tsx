@@ -1,6 +1,6 @@
-import "./main-logo.scss";
-
 import React from "react";
+
+import styles from "./main-logo.module.scss";
 
 export const MainLogo: React.FC = () => (
   <>
@@ -9,7 +9,7 @@ export const MainLogo: React.FC = () => (
       height="34"
       viewBox="0 0 139 34"
       xmlns="http://www.w3.org/2000/svg"
-      className="main-logo"
+      className={styles["main-logo"]}
     >
       <mask
         id="mask0"

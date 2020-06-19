@@ -1,5 +1,4 @@
 import SocialLinkImage from "components/avatar/social-link/social-link";
-import { Center } from "components/center/center";
 import GVButton from "components/gv-button";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import { RowItem } from "components/row-item/row-item";
@@ -16,7 +15,7 @@ import { useTranslation } from "react-i18next";
 import { HookForm, postponeCallback } from "utils/hook-form.helpers";
 import { object, string } from "yup";
 
-import "./social-link.scss";
+import styles from "./social-link.module.scss";
 
 enum FORM_FIELD {
   value = "value"
@@ -60,22 +59,17 @@ const _SocialLinkForm: React.FC<Props> = ({
   );
 
   return (
-    <Row className="social-link">
+    <Row className={styles["social-link"]}>
       <RowItem>
         <SocialLinkImage url={logoUrl} alt={name} />
       </RowItem>
       <RowItem>
-        <HookForm
-          resetOnSuccess
-          className="social-link__form"
-          form={form}
-          onSubmit={handleSubmit}
-        >
+        <HookForm resetOnSuccess form={form} onSubmit={handleSubmit}>
           <GVHookFormField
             component={SimpleTextField}
-            wrapperClassName="social-input__wrapper"
-            adornmentClassName="social-input__adornment"
-            labelClassName="social-input__label"
+            wrapperClassName={styles["social-input__wrapper"]}
+            adornmentClassName={styles["social-input__adornment"]}
+            labelClassName={styles["social-input__label"]}
             type="text"
             name={FORM_FIELD.value}
             label={name}

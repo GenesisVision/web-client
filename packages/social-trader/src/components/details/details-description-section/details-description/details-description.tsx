@@ -11,6 +11,7 @@ import * as React from "react";
 import { managerToPathCreator } from "routes/manager.routes";
 import { CurrencyEnum } from "utils/types";
 
+import styles from "./details-description.module.scss";
 import { DetailsLimitsAvatar } from "./details-limits-avatar.block";
 
 const _DetailsDescription: React.FC<Props> = ({
@@ -34,7 +35,7 @@ const _DetailsDescription: React.FC<Props> = ({
   settingsUrl
 }) => {
   return (
-    <div className="details-description__main">
+    <div className={styles["details-description__main"]}>
       <DetailsLimitsAvatar
         detailsType={detailsType}
         logo={logo}

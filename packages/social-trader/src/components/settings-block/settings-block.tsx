@@ -1,12 +1,12 @@
 import classNames from "classnames";
-import { Center } from "components/center/center";
 import { RowItem } from "components/row-item/row-item";
+import { Row } from "components/row/row";
 import VerificationStatus, {
   IStatusProps
 } from "components/verification-status/verification-status";
 import React from "react";
 
-import "./settings-block.scss";
+import styles from "./settings-block.module.scss";
 
 const SettingsBlock: React.FC<Props> = ({
   hide,
@@ -17,27 +17,23 @@ const SettingsBlock: React.FC<Props> = ({
   checked,
   verificationStatus
 }) => (
-  <section
-    className={classNames("asset-settings-block", {
-      "asset-settings-block--with-number": blockNumber,
-      "asset-settings-block--hidden": hide
-    })}
+  <Row
+    xlarge={!blockNumber}
+    center={false}
+    hide={hide}
+    className={styles["asset-settings-block"]}
   >
-    <div className="asset-settings-block__line-block">
-      {blockNumber && (
-        <div className="asset-settings-block__title">
-          <h3>{blockNumber}</h3>
-        </div>
-      )}
-      <div
-        className={classNames("asset-settings-block__line", {
-          "asset-settings-block__line--bordered": withBorder
+    <div className={styles["asset-settings-block__line-block"]}>
+      {blockNumber && <h3>{blockNumber}</h3>}
+      <Row
+        className={classNames(styles["asset-settings-block__line"], {
+          [styles["asset-settings-block__line--bordered"]]: withBorder
         })}
       />
     </div>
-    <div className="asset-settings-block__content-block">
+    <div className={styles["asset-settings-block__content-block"]}>
       {(label || verificationStatus) && (
-        <Center className="asset-settings-block__title">
+        <Row>
           {label && (
             <RowItem>
               <h3>{label}</h3>
@@ -51,11 +47,13 @@ const SettingsBlock: React.FC<Props> = ({
               />
             </RowItem>
           )}
-        </Center>
+        </Row>
       )}
-      <div className="asset-settings-block__wrapper">{children}</div>
+      <Row large wrap wide className={styles["asset-settings-block__wrapper"]}>
+        {children}
+      </Row>
     </div>
-  </section>
+  </Row>
 );
 
 interface OwnProps extends IStatusProps {
@@ -65,6 +63,7 @@ interface OwnProps extends IStatusProps {
   blockNumber?: string;
   withBorder?: boolean;
 }
+
 interface Props extends OwnProps, React.HTMLAttributes<HTMLDivElement> {}
 
 export default SettingsBlock;

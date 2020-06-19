@@ -1,0 +1,23 @@
+@import "~shared/styles/_sizes";
+
+.transfer {
+  &__field {
+    &:before {
+      content: none;
+    }
+    &:after {
+      content: none;
+    }
+  }
+
+  &-popup {
+    max-width: $modal-width;
+    &__two-factor-input {
+      margin-bottom: 20px;
+    }
+
+    &__right-text {
+      align-self: flex-start;
+    }
+  }
+}

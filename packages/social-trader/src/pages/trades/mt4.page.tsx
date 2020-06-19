@@ -1,15 +1,15 @@
-import "./trades.scss";
-
 import Page from "components/page/page";
 import React from "react";
 import { useTranslation } from "react-i18next";
+
+import styles from "./trades.module.scss";
 
 const _Mt4: React.FC = () => {
   const [t] = useTranslation();
   const title = t("mt4-page.title");
   return (
     <Page showTitle title={title}>
-      <div className="mt-frame">
+      <div className={styles["mt-frame"]}>
         <iframe
           title={title}
           allowFullScreen

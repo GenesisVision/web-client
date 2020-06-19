@@ -11,6 +11,7 @@ import { useTranslation } from "react-i18next";
 import { NumberFormatValues } from "react-number-format";
 
 const _SimpleInputAmountField: React.FC<ISimpleInputAmountFieldProps> = ({
+  externalDirty: externalDirtyProp,
   setMin,
   wide = true,
   autoFocus = true,
@@ -19,7 +20,7 @@ const _SimpleInputAmountField: React.FC<ISimpleInputAmountFieldProps> = ({
   setMax,
   ...props
 }) => {
-  const [externalDirty, setExternalDirty] = useIsOpen();
+  const [externalDirty, setExternalDirty] = useIsOpen(externalDirtyProp);
   const [t] = useTranslation();
   const handleSet = useCallback(
     (callback: VoidFunction) => () => {

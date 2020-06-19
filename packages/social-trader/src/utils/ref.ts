@@ -1,11 +1,8 @@
-import { REF_PARAM_NAME } from "constants/constants";
+import { cookieServiceCreator } from "utils/cookie-service.creator";
 
-import { getCookie, setCookie } from "./cookie";
+export const REFERRAL_CODE = "ref";
 
-export const getRef = (): string | undefined => {
-  return getCookie(REF_PARAM_NAME);
-};
-
-export const setRef = (value: string) => {
-  return setCookie(REF_PARAM_NAME, value);
-};
+export const { get: getRef, set: setRef } = cookieServiceCreator<string>({
+  key: REFERRAL_CODE,
+  initialState: undefined
+});

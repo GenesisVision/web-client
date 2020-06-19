@@ -17,11 +17,9 @@ const _LogoutButtonContainer: React.FC = () => {
   });
   const handleSubmit = useCallback(() => sendRequest(), []);
   return (
-    <div className="logout-container">
-      <GVButton onClick={handleSubmit} disabled={isPending}>
-        {t("profile-page.settings.logout-from-another-devices")}
-      </GVButton>
-    </div>
+    <GVButton onClick={handleSubmit} disabled={isPending}>
+      {t("profile-page.settings.logout-from-another-devices")}
+    </GVButton>
   );
 };
 

@@ -2,13 +2,15 @@ import { useTranslation } from "i18n";
 import { TIconLinks } from "pages/landing-page/static-data/app-links";
 import React from "react";
 
+import styles from "./icon-list.module.scss";
+
 const _IconItem: React.FC<TIconLinks> = ({ href, name, icon }) => {
   const { t } = useTranslation();
   return (
-    <li className="icon-list__item">
+    <li className={styles["icon-list__item"]}>
       <a
         href={href}
-        className="icon-list__link"
+        className={styles["icon-list__link"]}
         target="_blank"
         rel="noopener noreferrer"
         title={t(name)}

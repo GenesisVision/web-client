@@ -1,4 +1,9 @@
 {
+  "validations": {
+    "required": "Field is required",
+    "min": "Must be more or equal than {{min}}",
+    "max": "Must be less or equal than {{max}}"
+  },
   "news-page": {
     "title": "News",
     "tabs": {
@@ -8,7 +13,7 @@
   },
   "conversation": {
     "repost": "Share",
-    "your-message": "Your message: "
+    "your-message": "Your message..."
   },
   "input-amount-field": {
     "label": "Amount"
@@ -186,6 +191,7 @@
       "last-week": "Last week",
       "custom": "Custom",
       "account-creation": "Account creation",
+      "follow-start": "Follow start",
       "fund-start": "Fund start",
       "program-start": "Program start",
       "start": "Start",
@@ -251,6 +257,7 @@
     }
   },
   "navigation": {
+    "media": "Media",
     "users": "Users",
     "social": "Social",
     "news": "News",
@@ -1323,7 +1330,7 @@
     "heading": "Search Results",
     "programs": "Programs",
     "funds": "Funds",
-    "managers": "Managers"
+    "managers": "Users"
   },
   "profile-page": {
     "id": "id",
@@ -1360,7 +1367,8 @@
     "privacy": {
       "title": "Privacy",
       "post": "Who can post to my wall",
-      "view": "Who can view comments on my posts"
+      "write-comment": "Who can comment on my posts",
+      "view-comment": "Who can view comments on my posts"
     },
     "referral-program": {
       "title": "Invite your friends to Genesis vision",
@@ -1395,6 +1403,10 @@
       }
     },
     "settings": {
+      "social-beta-select": {
+        "label": "Participate in beta testing",
+        "text": "You can take part in beta testing of our new social product. With this special early access, you will be among the first who get access to new social features of our platform. Your participation doesn't require any special skills and will help us to roll out site improvements and new features."
+      },
       "public": {
         "label": "Public investor's profile",
         "text": "Other GenesisVision users will be able to follow you and see your current and past investments as well as your portfolio perfomance. You will also be displayed in the Investors Rating."
@@ -2036,7 +2048,7 @@
     "success-alert-message": "Program has been edited"
   },
   "app": {
-    "title": "Genesis Vision: "
+    "title": "Genesis Vision"
   },
   "auth-quotes": {
     "0": {

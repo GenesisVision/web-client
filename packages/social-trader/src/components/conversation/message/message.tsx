@@ -6,53 +6,68 @@ import {
   IConversationImage,
   IConversationUser
 } from "components/conversation/conversation.types";
-import { generateTagsComponents } from "components/conversation/message/message.helpers";
+import { MessageText } from "components/conversation/message/message-text";
 import {
-  inTextComponentsMap,
-  parseToTsx
-} from "components/conversation/tag/parse-to-tsx";
+  ExcludedTagsUnderText,
+  generateTagsComponents
+} from "components/conversation/message/message.helpers";
+import { HorizontalShadowList } from "components/horizontal-list-shadow-container/horizontal-shadow-list";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
-import { PostTag } from "gv-api-web";
+import { PostTag, SocialPostTagType } from "gv-api-web";
 import React from "react";
 
-import "./message.scss";
+import styles from "./message.module.scss";
 
 const _Message: React.FC<IMessageProps> = ({
+  excludedTagsUnderText: excludedTagsUnderTextProp = [],
+  reduceLargeText = true,
+  settingsBlock,
   row = true,
   tags,
-  postId,
+  url,
   images,
   text,
   date,
-  author: { username, url, logoUrl }
+  author
 }) => {
+  const tagsUnderText = tags?.filter(
+    ({ type }) =>
+      ![...ExcludedTagsUnderText, ...excludedTagsUnderTextProp].includes(type)
+  );
+  const repostTag = tags?.filter(({ type }) => type === "Post");
+  const MessageItem = row ? RowItem : Row;
   return (
     <div>
-      <div className={classNames("message", { "message--row": row })}>
-        <RowItem className="message__user">
-          <ConversationUser
-            postId={postId}
-            url={url}
-            avatar={logoUrl}
-            username={username}
-            date={date}
+      <div
+        className={classNames(styles["message"], {
+          [styles["message--row"]]: row
+        })}
+      >
+        <MessageItem
+          bottomOffset
+          center={false}
+          className={styles["message__user"]}
+        >
+          <RowItem wide>
+            <ConversationUser
+              postUrl={url}
+              authorUrl={author.url}
+              avatar={author.logoUrl}
+              username={author.username}
+              date={date}
+            />
+          </RowItem>
+          <RowItem>{settingsBlock}</RowItem>
+        </MessageItem>
+        <MessageItem bottomOffset onlyOffset>
+          <MessageText
+            text={text}
+            tags={tags}
+            reduceLargeText={reduceLargeText}
           />
-        </RowItem>
-        <RowItem className="message__text">
-          {text && (
-            <Row>
-              <div>
-                {parseToTsx({
-                  tags,
-                  text,
-                  map: inTextComponentsMap
-                })}
-              </div>
-            </Row>
-          )}
           {!!images.length && (
-            <Row wrap small className="message__images">
+            <Row wrap small className={styles["message__images"]}>
               {images.map((image, index) => (
                 <RowItem bottomOffset key={index}>
                   <ConversationImage
@@ -64,21 +79,27 @@ const _Message: React.FC<IMessageProps> = ({
               ))}
             </Row>
           )}
-        </RowItem>
+        </MessageItem>
       </div>
-      {!!tags?.length && (
-        <Row wrap small>
-          {generateTagsComponents(tags)}
+      {!!tagsUnderText?.length && (
+        <Row>
+          <HorizontalShadowList withScroll={false}>
+            {generateTagsComponents(tagsUnderText)}
+          </HorizontalShadowList>
         </Row>
       )}
+      {!!repostTag?.length && <Row>{generateTagsComponents(repostTag)}</Row>}
     </div>
   );
 };
 
 export interface IMessageProps {
+  excludedTagsUnderText?: SocialPostTagType[];
+  reduceLargeText?: boolean;
+  settingsBlock?: JSX.Element;
   row?: boolean;
   tags?: PostTag[];
-  postId?: string;
+  url: string;
   images: IConversationImage[];
   author: IConversationUser;
   text?: string;

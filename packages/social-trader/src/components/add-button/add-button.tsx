@@ -1,11 +1,11 @@
-import "./add-button.scss";
-
 import * as React from "react";
+
+import styles from "./add-button.module.scss";
 
 const AddButton: React.FC = () => {
   return (
-    <div className="add-button">
-      <div className="add-button__button">+</div>
+    <div className={styles["add-button"]}>
+      <div className={styles["add-button__button"]}>+</div>
     </div>
   );
 };

@@ -1,13 +1,12 @@
 import classNames from "classnames";
 import { DropZoneWrapper } from "components/form/input-image/drop-zone-wrapper";
 import { InputImageCropper } from "components/form/input-image/input-image-cropper";
-import "cropperjs/dist/cropper.css";
 import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 
 import InputImageDefault from "./input-image-default";
-import "./input-image.scss";
+import styles from "./input-image.module.scss";
 
 const _InputImage: React.FC<IInputImageProps> = ({
   value = {},
@@ -35,17 +34,17 @@ const _InputImage: React.FC<IInputImageProps> = ({
   const hasSizeError = error && error.image.size;
   return (
     <div
-      className={classNames("input-image", className, {
-        "input-image--error": error !== undefined
+      className={classNames(styles["input-image"], className, {
+        [styles["input-image--error"]]: error !== undefined
       })}
     >
       <DropZoneWrapper
-        className="input-image__dropzone"
+        className={styles["input-image__dropzone"]}
         name={name}
         onChange={onChange}
-        content={open => (
-          <div className="input-image__dropzone-content">
-            <div className="input-image__image-container">
+        content={({ open }) => (
+          <div className={styles["input-image__dropzone-content"]}>
+            <div className={styles["input-image__image-container"]}>
               {image && !hasSizeError && (
                 <InputImageCropper
                   error={error}
@@ -62,15 +61,26 @@ const _InputImage: React.FC<IInputImageProps> = ({
                 <InputImageDefault src={src} defaultImage={defaultImage} />
               )}
             </div>
-            <p className="input-image__text input-image__text--big">
+            <p
+              className={classNames(
+                styles["input-image__text"],
+                styles["input-image__text--big"]
+              )}
+            >
               {t("input-image.drag-or-click")}
-              <span className="input-image__text-upload" onClick={open}>
+              <span
+                className={styles["input-image__text-upload"]}
+                onClick={open}
+              >
                 {t("input-image.upload")}
               </span>
               {t("input-image.to-browse")}
             </p>
             <p
-              className="input-image__text input-image__text--small"
+              className={classNames(
+                styles["input-image__text"],
+                styles["input-image__text--small"]
+              )}
               onClick={open}
             >
               {t("input-image.tap-to-upload")}
@@ -79,14 +89,14 @@ const _InputImage: React.FC<IInputImageProps> = ({
         )}
       />
       {(image || src) && (
-        <div className="input-image__clear-btn" onClick={clear}>
+        <div className={styles["input-image__clear-btn"]} onClick={clear}>
           &#10006;
         </div>
       )}
       {error && (
         <div>
           {Object.values(error.image).map((error: any) => (
-            <div className="input-image__error">{error.message}</div>
+            <div className={styles["input-image__error"]}>{error.message}</div>
           ))}
         </div>
       )}

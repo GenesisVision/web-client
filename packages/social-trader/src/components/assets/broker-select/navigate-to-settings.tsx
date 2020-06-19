@@ -3,14 +3,20 @@ import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import { KYC_ROUTE } from "components/profile/profile.constants";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
-const _NavigateToSettings: React.FC<OwnProps & WithTranslation> = ({
-  t,
+interface Props {
+  navigateToSettings: VoidFunction;
+  isForex: boolean;
+  isKycConfirmed: boolean;
+}
+
+const _NavigateToSettings: React.FC<Props> = ({
   isForex,
   isKycConfirmed,
   navigateToSettings
 }) => {
+  const [t] = useTranslation();
   const { linkCreator } = useToLink();
   if (isForex && !isKycConfirmed)
     return (
@@ -29,11 +35,5 @@ const _NavigateToSettings: React.FC<OwnProps & WithTranslation> = ({
   );
 };
 
-const NavigateToSettings = translate()(_NavigateToSettings);
+const NavigateToSettings = React.memo(_NavigateToSettings);
 export default NavigateToSettings;
-
-interface OwnProps {
-  navigateToSettings(): void;
-  isForex: boolean;
-  isKycConfirmed: boolean;
-}

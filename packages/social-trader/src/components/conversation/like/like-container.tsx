@@ -1,3 +1,4 @@
+import { sendLikeEvent } from "components/conversation/conversation.ga";
 import { toggleLike } from "components/conversation/conversation.service";
 import { Like } from "components/conversation/like/like";
 import useApiRequest from "hooks/api-request.hook";
@@ -17,7 +18,7 @@ export const _LikeContainer: React.FC<Props> = ({
     setInnerLiked(!innerLiked);
   };
   const { sendRequest, isPending } = useApiRequest({
-    middleware: [successMiddleware],
+    middleware: [sendLikeEvent, successMiddleware],
     request: () => toggleLike({ id, liked })
   });
 

@@ -1,14 +1,14 @@
-import "./tag-item.scss";
-
 import classNames from "classnames";
 import * as React from "react";
+
+import styles from "./tag-item.module.scss";
 
 const _TagBubble: React.FC<Props> = ({ color, content, clickable }) => {
   const styleTag = { color, backgroundColor: `${color}1a` };
   return (
     <div
-      className={classNames("tag-item tag-button", {
-        "tag-button--clickable": clickable
+      className={classNames(styles["tag-item"], styles["tag-button"], {
+        [styles["tag-button--clickable"]]: clickable
       })}
       style={styleTag}
     >

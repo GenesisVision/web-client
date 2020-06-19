@@ -1,0 +1,108 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_constants";
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
+
+.auth {
+  display: flex;
+  box-sizing: border-box;
+  min-height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: url("../../../../media/bgnd.svg") no-repeat bottom;
+  background-size: 100%;
+
+  @include media-breakpoint-landscape-phone() {
+    padding: $padding-xsmall;
+  }
+  @include media-breakpoint-landscape-tablet() {
+    padding: $padding-large 0;
+    flex-direction: row;
+    align-items: inherit;
+  }
+  @include media-breakpoint-desktop() {
+    padding: $padding-xlarge $padding-xxlarge;
+    justify-content: space-between;
+  }
+
+  &__left {
+    padding: $padding-small 0;
+    @include media-breakpoint-landscape-tablet() {
+      min-height: 600px;
+      padding-left: $padding-medium;
+    }
+    @include media-breakpoint-desktop() {
+      padding-left: 0;
+    }
+  }
+
+  &__right {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 340px;
+    background-color: $panel-background-color;
+    border-radius: $border-radius;
+    @include media-breakpoint-tablet() {
+      min-width: 460px;
+    }
+    @include media-breakpoint-desktop() {
+      box-sizing: border-box;
+      min-width: 476px;
+    }
+  }
+
+  &__content {
+    box-sizing: border-box;
+    padding: $padding-xsmall;
+    @include media-breakpoint-tablet() {
+      padding: $padding-medium;
+    }
+    @include media-breakpoint-desktop() {
+      padding: $padding-large $padding-large $padding-big;
+    }
+  }
+
+  &__footer {
+    justify-content: space-between;
+    font-size: $font-size-common;
+    background-color: $secondary-background-color;
+    border-radius: 0 0 $border-radius $border-radius;
+    padding: $padding-xsmall;
+    @include media-breakpoint-tablet() {
+      padding: $padding-xsmall $padding-medium;
+    }
+    @include media-breakpoint-desktop() {
+      padding: $padding-medium $padding-large;
+    }
+  }
+
+  &__logo {
+    display: none;
+    @include media-breakpoint-tablet() {
+      display: flex;
+    }
+  }
+
+  &__quote {
+    display: none;
+    font-weight: 300;
+    font-size: 44px;
+    letter-spacing: 0.3px;
+
+    @include media-breakpoint-landscape-tablet() {
+      display: block;
+      margin-top: 110px;
+      margin-left: 0;
+      max-width: 760px;
+    }
+  }
+
+  &__quote-footer {
+    font-size: $font-size-h2;
+    margin-top: $padding-medium;
+  }
+}

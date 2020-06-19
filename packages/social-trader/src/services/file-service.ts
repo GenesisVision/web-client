@@ -1,6 +1,7 @@
 import { DateRangeFilterType } from "components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { composeRequestValueFunc } from "components/table/components/filtering/date-range-filter/date-range-filter.helpers";
 import { FilteringType } from "components/table/components/filtering/filter.type";
+import { ImageLocation } from "gv-api-web";
 import { handleErrors } from "gv-api-web/src/utils";
 import * as qs from "qs";
 import Token from "services/api-client/token";
@@ -89,11 +90,15 @@ const getFileUrl = (
   quality: "Low" | "Medium" | "High" = "Low"
 ): string => (id ? `${clientUrl}/v2.0/file/${id}?quality=${quality}` : "");
 
-const uploadFile = (uploadedFile: File): Promise<string> =>
+const uploadFile = (
+  uploadedFile: File,
+  location?: ImageLocation
+): Promise<string> =>
   api
     .files()
     .uploadFile({
-      uploadedFile
+      uploadedFile,
+      location
     })
     .then((response: any) => response.id);
 

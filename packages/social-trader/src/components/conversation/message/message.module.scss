@@ -1,0 +1,33 @@
+@import "~shared/styles/_sizes";
+
+.message {
+  width: 100%;
+  flex-wrap: wrap;
+  overflow: hidden;
+  @include media-breakpoint-landscape-phone() {
+    flex-wrap: nowrap;
+  }
+  &--row {
+    display: flex;
+    @include adaptive-margin(bottom, -$padding-xsmall);
+  }
+  &__tags {
+  }
+  &__user {
+    width: auto;
+  }
+  &__text {
+    @include font-size($font-size-paragraph);
+    @include line-height(1.7);
+    color: rgba(255, 255, 255, 0.75);
+    width: 100%;
+    white-space: pre-wrap;
+    &--break-word {
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+  }
+  &__images {
+    @include adaptive-margin(bottom, -$padding-xsmall);
+  }
+}

@@ -16,8 +16,21 @@ import {
 import uuid from "uuid";
 
 const getTagLoaderData = (): PostTag => ({
+  link: {
+    title: "",
+    url: ""
+  },
   title: "",
+  event: {
+    logoUrl: "",
+    amount: 0,
+    changeState: "NotChanged",
+    currency: "GVT",
+    percent: 0,
+    title: ""
+  },
   post: {
+    url: "",
     isDeleted: false,
     impressionsCount: 0,
     rePostsCount: getRandomInteger(),
@@ -40,6 +53,10 @@ const getTagLoaderData = (): PostTag => ({
   },
   number: 0,
   assetDetails: {
+    priceCurrency: "GVT",
+    price: 0,
+    changeState: "NotChanged",
+    change24Percent: 0,
     url: getRandomWord(),
     assetType: "Program",
     title: getRandomWord(),
@@ -51,13 +68,16 @@ const getTagLoaderData = (): PostTag => ({
   type: "Program",
   userDetails: managerLoaderData,
   platformAssetDetails: {
+    change24Percent: 0,
+    changeState: "NotChanged",
+    price: 0,
+    priceCurrency: "GVT",
     id: "string",
     name: "string",
     asset: "string",
     description: "string",
     color: "string",
     logoUrl: "",
-    mandatoryFundPercent: 0,
     url: "string"
   }
 });
@@ -80,8 +100,11 @@ const getRandomTextString = (tagNumber: number): string => {
   return strings[getRandomInteger(0, strings.length - 1)];
 };
 
-const getMockTextAndTags = () => {
-  const tags = tableLoaderCreator(getTagLoaderData, getRandomInteger(1, 30));
+const getMockTextAndTags = (tagsCount?: number) => {
+  const tags = tableLoaderCreator(
+    getTagLoaderData,
+    getRandomInteger(0, tagsCount)
+  );
   const text = tags.map((_, i) => getRandomTextString(i)).join(". ");
   return { tags, text };
 };
@@ -113,11 +136,11 @@ export const getConversationImageLoaderData = (): IConversationImage => ({
 });
 
 export const getConversationPersonalDetailsLoaderData = (): ConversationMessagePersonalDetails => ({
-  canComment: getRandomBoolean(),
-  canEdit: getRandomBoolean(),
-  canDelete: getRandomBoolean(),
-  isLiked: getRandomBoolean(),
-  canPin: getRandomBoolean()
+  canComment: true,
+  canEdit: false,
+  canDelete: false,
+  isLiked: false,
+  canPin: false
 });
 
 export const getConversationUserLoaderData = (): IConversationUser => ({
@@ -131,17 +154,19 @@ export const getConversationUserLoaderData = (): IConversationUser => ({
 
 export const getConversationPostLoaderData = (
   imagesCount: number = 0,
-  commentsCount: number = 0
+  commentsCount: number = 0,
+  tagsCount?: number
 ): ConversationPost => {
-  const { tags, text } = getMockTextAndTags();
+  const { tags, text } = getMockTextAndTags(tagsCount);
   const images = new Array(imagesCount)
     .fill("")
     .map(getConversationImageLoaderData);
 
   return {
+    url: "",
     isDeleted: false,
     impressionsCount: 0,
-    rePostsCount: getRandomInteger(),
+    rePostsCount: 0,
     isPinned: false,
     tags,
     comments: tableLoaderCreator(
@@ -152,13 +177,14 @@ export const getConversationPostLoaderData = (
     images,
     author: managerLoaderData,
     date: new Date(),
-    likesCount: getRandomInteger(1, 10),
+    likesCount: 0,
     text,
     actions: getConversationPersonalDetailsLoaderData()
   };
 };
 
 export const getEmptyPostLoaderData = (): ConversationPost => ({
+  url: "",
   isDeleted: false,
   impressionsCount: 0,
   isPinned: false,
@@ -175,11 +201,6 @@ export const getEmptyPostLoaderData = (): ConversationPost => ({
 });
 
 export const getConversationPostListLoaderData = (): ConversationPost[] =>
-  tableLoaderCreator(
-    () =>
-      getConversationPostLoaderData(
-        getRandomInteger(0, 10),
-        getRandomInteger(0, 5)
-      ),
-    getRandomInteger(2, 5)
-  );
+  tableLoaderCreator(() => getConversationPostLoaderData(0, 0, 0), 10);
+
+export const ConversationPostListLoaderData = getConversationPostListLoaderData();

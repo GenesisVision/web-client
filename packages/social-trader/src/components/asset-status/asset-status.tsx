@@ -28,8 +28,8 @@ const _AssetStatus: React.FC<Props> = ({ className, status, id, onCancel }) => {
         onClick={handleOpenDropdown}
       />
       <Popover
-        orientation={ORIENTATION_POPOVER.RIGHT}
-        horizontal={HORIZONTAL_POPOVER_POS.LEFT}
+        orientation={ORIENTATION_POPOVER.LEFT}
+        horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
         vertical={VERTICAL_POPOVER_POS.BOTTOM}
         anchorEl={anchor}
         noPadding

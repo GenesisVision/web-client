@@ -1,0 +1,8 @@
+@import "~shared/styles/_sizes";
+
+.social-page-gainers {
+  white-space: nowrap;
+  height: 380px;
+  overflow: scroll;
+  padding-right: $padding-xxsmall;
+}

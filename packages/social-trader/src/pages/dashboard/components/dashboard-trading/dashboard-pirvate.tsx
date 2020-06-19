@@ -8,7 +8,7 @@ import {
   fetchDashboardPrivateAction,
   fetchDashboardTradingTotalAction
 } from "pages/dashboard/actions/dashboard.actions";
-import DashboardPrivateCard from "pages/dashboard/components/dashboard-trading/dashboard-private-card";
+import DashboardPrivateCard from "pages/dashboard/components/dashboard-trading/dashboard-private-card/dashboard-private-card";
 import DashboardTradingTable from "pages/dashboard/components/dashboard-trading/dashboard-trading-table";
 import { dashboardTradingPrivateSelector } from "pages/dashboard/reducers/dashboard-trading-private.reducer";
 import React, { useCallback } from "react";

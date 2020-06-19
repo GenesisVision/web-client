@@ -9,14 +9,12 @@ import { DELAYS } from "pages/invest/programs/program-details/program-history-se
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import AssetField from "../asset-fields/asset-field";
-
 const _TradesDelay: React.FC<Props> = ({ name }) => {
   const [t] = useTranslation();
   return (
-    <AssetField>
+    <>
       <GVHookFormField
-        wide
+        wide={false}
         name={name}
         component={SimpleTextField}
         label={t("program-settings.trades-update.select")}
@@ -32,13 +30,12 @@ const _TradesDelay: React.FC<Props> = ({ name }) => {
         <MutedText small>
           <Hint
             content={t("create-program-page.settings.hints.trades-delay")}
-            className="asset-form-field__hint"
             vertical={VERTICAL_POPOVER_POS.BOTTOM}
             tooltipContent={t("program-settings.trades-update.text")}
           />
         </MutedText>
       </Row>
-    </AssetField>
+    </>
   );
 };
 

@@ -2,7 +2,7 @@ import classNames from "classnames";
 import { Center } from "components/center/center";
 import React from "react";
 
-import "./row.scss";
+import styles from "./row.module.scss";
 
 export const Row: React.FC<Props> = ({
   xlarge,
@@ -21,14 +21,15 @@ export const Row: React.FC<Props> = ({
     <Center
       {...otherProps}
       center={center && !onlyOffset}
-      className={classNames("row", className, {
-        "row--flex": !onlyOffset,
-        "row--wide": wide,
-        "row--hidden": hide,
-        "row--small": small,
-        "row--middle": middle && !(small || large),
-        "row--xlarge": xlarge,
-        "row--large": large
+      className={classNames(styles["row"], className, {
+        [styles["row--pointer"]]: !!otherProps.onClick,
+        [styles["row--flex"]]: !onlyOffset,
+        [styles["row--wide"]]: wide,
+        [styles["row--hidden"]]: hide,
+        [styles["row--small"]]: small,
+        [styles["row--middle"]]: middle && !(small || large || xlarge),
+        [styles["row--xlarge"]]: xlarge,
+        [styles["row--large"]]: large
       })}
     >
       {children}

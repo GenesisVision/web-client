@@ -1,0 +1,23 @@
+@import "~shared/styles/_sizes";
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_constants";
+
+.upper-block {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  background: rgba(255, 255, 255, 0.005);
+  @include transition(opacity);
+  &:hover {
+    opacity: 1;
+    cursor: pointer;
+  }
+  &__arrow {
+    font-size: 40px;
+    font-weight: bolder;
+  }
+}

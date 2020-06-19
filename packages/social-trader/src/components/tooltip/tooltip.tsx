@@ -1,5 +1,3 @@
-import "./tooltip.scss";
-
 import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
@@ -9,6 +7,9 @@ import * as React from "react";
 import { useCallback } from "react";
 
 const Tooltip: React.FC<Props> = ({
+  onClick,
+  onMouseEnter,
+  onMouseLeave,
   render,
   vertical = VERTICAL_POPOVER_POS.TOP,
   horizontal = HORIZONTAL_POPOVER_POS.CENTER,
@@ -18,9 +19,25 @@ const Tooltip: React.FC<Props> = ({
 }) => {
   const { anchor, setAnchor, clearAnchor } = useAnchor();
   const handleMouseEnter = useCallback(
-    (event: React.MouseEvent<HTMLElement, MouseEvent>) =>
-      !disable && setAnchor(event),
+    (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+      onMouseEnter && onMouseEnter(event);
+      !disable && setAnchor(event);
+    },
     [disable]
+  );
+  const handleMouseLeave = useCallback(
+    (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+      onMouseLeave && onMouseLeave(event);
+      clearAnchor();
+    },
+    []
+  );
+  const handleClick = useCallback(
+    (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+      onClick && onClick(event);
+      clearAnchor();
+    },
+    [onClick]
   );
   const child = React.Children.only(children)! as JSX.Element;
   return (
@@ -28,10 +45,10 @@ const Tooltip: React.FC<Props> = ({
       <child.type
         {...child.props}
         onMouseEnter={handleMouseEnter}
-        onMouseLeave={clearAnchor}
+        onMouseLeave={handleMouseLeave}
         onTouchStart={handleMouseEnter}
         onTouchEnd={clearAnchor}
-        onClick={clearAnchor}
+        onClick={handleClick}
       />
       <Popover
         noAbsolute

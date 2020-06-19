@@ -4,8 +4,10 @@ import GVTab from "components/gv-tabs/gv-tab";
 import ManagerHistorySection from "components/manager/manager-history/manager-history-section";
 import {
   fetchManagerAssetsCount,
-  IAssetsCountModel
+  IAssetsCountModel,
+  UserDataInitialCount
 } from "components/manager/services/manager.service";
+import UserInvestingSection from "components/manager/user-investing/user-investing-section";
 import { Row } from "components/row/row";
 import useApiRequest from "hooks/api-request.hook";
 import useTab from "hooks/tab.hook";
@@ -23,7 +25,7 @@ enum TABS {
   INVESTING = "INVESTING"
 }
 
-const _ManagerData: React.FC<Props> = ({ id }) => {
+const _ManagerData: React.FC<Props> = ({ canWritePost, id }) => {
   const [t] = useTranslation();
   const betaTester = useSelector(betaTesterSelector);
   const isBetaTester = isSocialBetaTester(betaTester);
@@ -33,23 +35,27 @@ const _ManagerData: React.FC<Props> = ({ id }) => {
     setTab(null, isBetaTester ? TABS.FEED : TABS.TRADING);
   }, [isBetaTester]);
 
-  const {
-    sendRequest,
-    data = { postsCount: 0, followCount: 0, programsCount: 0, fundsCount: 0 }
-  } = useApiRequest<IAssetsCountModel>({
+  const { sendRequest, data = UserDataInitialCount } = useApiRequest<
+    IAssetsCountModel
+  >({
     request: fetchManagerAssetsCount
   });
 
   useEffect(() => {
-    sendRequest({ ownerId: id, isBetaTester });
-  }, [id, isBetaTester]);
+    if (betaTester) sendRequest({ ownerId: id, isBetaTester });
+  }, [id, isBetaTester, betaTester]);
 
   const {
+    investingFollowCount = 0,
+    investingProgramsCount = 0,
+    investingFundsCount = 0,
     postsCount = 0,
     followCount = 0,
     programsCount = 0,
     fundsCount = 0
   } = data;
+  const investingCount =
+    investingFollowCount + investingProgramsCount + investingFundsCount;
   const tradingCount = followCount + programsCount + fundsCount;
 
   return (
@@ -68,12 +74,17 @@ const _ManagerData: React.FC<Props> = ({ id }) => {
             label={t("Trading")}
             count={tradingCount}
           />
-          {/*<GVTab value={TABS.INVESTING} label={t("Investing")} />*/}
+          <GVTab
+            visible={investingCount > 0}
+            value={TABS.INVESTING}
+            label={t("Investing")}
+            count={investingCount}
+          />
         </GVTabs>
       </Row>
       {tab === TABS.FEED && (
         <Row large onlyOffset>
-          <UserFeed id={id} />
+          <UserFeed canWritePost={canWritePost} id={id} />
         </Row>
       )}
       {tab === TABS.TRADING && (
@@ -86,11 +97,22 @@ const _ManagerData: React.FC<Props> = ({ id }) => {
           />
         </Row>
       )}
+      {tab === TABS.INVESTING && (
+        <Row large onlyOffset>
+          <UserInvestingSection
+            followCount={investingFollowCount}
+            programsCount={investingProgramsCount}
+            fundsCount={investingFundsCount}
+            id={id}
+          />
+        </Row>
+      )}
     </div>
   );
 };
 
 interface Props {
+  canWritePost: boolean;
   id: string;
 }
 

@@ -1,7 +1,8 @@
-import "./statistic-item-list.scss";
-
 import classNames from "classnames";
+import { Center } from "components/center/center";
 import * as React from "react";
+
+import styles from "./statistic-item-list.module.scss";
 
 export const StatisticItemList: React.FC<Props &
   React.HTMLAttributes<HTMLDivElement>> = ({
@@ -9,13 +10,14 @@ export const StatisticItemList: React.FC<Props &
   className,
   vertical
 }) => (
-  <div
-    className={classNames("statistics-item-list", className, {
-      "statistics-item-list--vertical": vertical
+  <Center
+    wrap
+    className={classNames(styles["statistics-item-list"], className, {
+      [styles["statistics-item-list--vertical"]]: vertical
     })}
   >
     {children}
-  </div>
+  </Center>
 );
 
 interface Props {

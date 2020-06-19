@@ -35,7 +35,6 @@ const _ConfirmClosePeriod: React.FC<IClosePeriodProps> = ({
       header={t("program-details-page.close-period.title")}
       body={t("program-details-page.close-period.body")}
       applyButtonText={t("buttons.confirm")}
-      className="dialog--wider"
     />
   );
 };

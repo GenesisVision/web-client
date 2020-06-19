@@ -1,3 +1,5 @@
+import classNames from "classnames";
+import styles from "components/details/details-description-section/details-statistic-section/details-history/trades.module.scss";
 import DateRangeFilter from "components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import TableContainer from "components/table/components/table-container";
@@ -56,7 +58,10 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
       columns={columns}
       renderHeader={column => (
         <span
-          className={`details-trades__head-cell program-details-trades__cell--${column.name}`}
+          className={classNames(
+            styles["details-trades__head-cell"],
+            styles[`program-details-trades__cell--${column.name}`]
+          )}
         >
           {t(`program-details-page.history.financial-statistic.${column.name}`)}
         </span>

@@ -1,0 +1,24 @@
+@import "~shared/styles/_sizes";
+.users-list {
+  max-height: 456px;
+  overflow: auto;
+  &__item {
+    @include horizontal-paddings($popover-padding-medium);
+    @include vertical-paddings($popover-padding-small);
+    &:nth-child(2n + 1) {
+      background: rgba(255, 255, 255, 0.02);
+    }
+  }
+  &__name {
+    font-size: $font-size-small;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__dialog {
+    &#{&} {
+      width: 80vh;
+      max-width: 500px;
+    }
+  }
+}

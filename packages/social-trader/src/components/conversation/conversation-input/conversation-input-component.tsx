@@ -7,6 +7,8 @@ import {
 import React, { useCallback } from "react";
 
 interface Props {
+  onPaste?: VoidFunction;
+  bottomLine?: boolean;
   setFocused?: (value: boolean) => void;
   submitType?: CONVERSATION_SUBMIT_TYPE;
   submitForm: VoidFunction;
@@ -16,6 +18,8 @@ interface Props {
 }
 
 export const ConversationInputComponent: React.FC<Props> = ({
+  onPaste,
+  bottomLine = false,
   setFocused,
   submitType = CONVERSATION_SUBMIT_TYPE.ENTER,
   submitForm,
@@ -33,8 +37,15 @@ export const ConversationInputComponent: React.FC<Props> = ({
 
   const handleKeyDown = useCallback(
     (event: TextareaKeyDownEventExtended) => {
-      const { keyCode, metaKey, ctrlKey, ref, preventDefault } = event;
-      const ctrl = ctrlKey || metaKey;
+      const {
+        shiftKey,
+        keyCode,
+        metaKey,
+        ctrlKey,
+        ref,
+        preventDefault
+      } = event;
+      const ctrl = shiftKey || ctrlKey || metaKey;
       if (keyCode === 13) {
         if (ctrl && submitType === CONVERSATION_SUBMIT_TYPE.ENTER) {
           const position = ref.selectionEnd;
@@ -61,13 +72,14 @@ export const ConversationInputComponent: React.FC<Props> = ({
   return (
     <GVTextField
       {...props}
+      onPaste={onPaste}
       onFocus={handleOnFocus}
       onBlur={handleOnBlur}
       showError={false}
       value={value}
       onChange={handleOnChange}
       onKeyDown={handleKeyDown}
-      bottomLine={false}
+      bottomLine={bottomLine}
       wide
       noMargin
       name={name}

@@ -1,5 +1,3 @@
-import "./brokers-container.scss";
-
 import classNames from "classnames";
 import { useNetworkStatusInWindow } from "hooks/network-status";
 import dynamic from "next/dynamic";
@@ -9,6 +7,8 @@ import TabControls, {
 } from "pages/landing-page/components/tab-controls/tab-controls";
 import { TBrokerInfo } from "pages/landing-page/static-data/brokers";
 import React, { useCallback, useState } from "react";
+
+import styles from "./brokers-container.module.scss";
 
 interface Props {
   darkTheme?: boolean;
@@ -64,19 +64,19 @@ const _BrokersContainer: React.FC<Props> = ({
   }, [effectiveConnectionType, currentTabId]);
   return (
     <div
-      className={classNames("brokers-container", className, {
-        "brokers-container--dark": darkTheme
+      className={classNames(styles["brokers-container"], className, {
+        [styles["brokers-container--dark"]]: darkTheme
       })}
     >
       {title !== undefined && (
-        <h2 className="brokers-container__title">{title}</h2>
+        <h2 className={styles["brokers-container__title"]}>{title}</h2>
       )}
-      <div className="brokers-container__wrapper-controls">
+      <div className={styles["brokers-container__wrapper-controls"]}>
         <TabControls
           currentTabId={currentTabId}
           tabsItems={brokersTabs}
           onChange={handleChange}
-          className="brokers-container__controls"
+          variant={"brokers"}
         />
       </div>
       {renderBrokersInfo()}

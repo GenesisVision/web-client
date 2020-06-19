@@ -1,8 +1,9 @@
+import classNames from "classnames";
 import { Table } from "components/table/components";
 import { ProgramDetailsListItemItemsViewModel } from "gv-api-web";
 import ProgramTableRowShort from "modules/programs-table/components/programs-table/program-table-row-short";
+import styles from "modules/programs-table/components/programs-table/programs-table.module.scss";
 import { PROGRAMS_COLUMNS } from "modules/programs-table/components/programs-table/programs.constants";
-import "modules/programs-table/components/programs-table/programs.scss";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -18,7 +19,10 @@ const ProgramsTable: React.FC<SearchTableProps<
       items={data.items}
       renderHeader={column => (
         <span
-          className={`programs-table__cell programs-table__cell--${column.name}`}
+          className={classNames(
+            styles["programs-table__cell"],
+            styles[`programs-table__cell--${column.name}`]
+          )}
         >
           {t(`programs-page.programs-header.${column.name}`)}
         </span>

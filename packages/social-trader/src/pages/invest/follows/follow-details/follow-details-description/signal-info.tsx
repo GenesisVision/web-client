@@ -21,7 +21,6 @@ const _SignalInfo: React.FC<ISignalProgramInfoProps> = ({
             labelText={t("program-details-page.description.successFee")}
           />
         }
-        className="asset-details-description__short-statistic-item"
         accent
       >
         <NumberFormat value={successFee} displayType="text" suffix=" %" />
@@ -33,7 +32,6 @@ const _SignalInfo: React.FC<ISignalProgramInfoProps> = ({
             labelText={t("program-details-page.description.volume-fee")}
           />
         }
-        className="asset-details-description__short-statistic-item"
         accent
       >
         <NumberFormat value={volumeFee} displayType="text" suffix=" %" />

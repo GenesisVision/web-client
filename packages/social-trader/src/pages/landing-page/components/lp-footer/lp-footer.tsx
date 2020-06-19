@@ -9,34 +9,43 @@ import {
 } from "pages/landing-page/static-data/nav-links";
 import React from "react";
 
-import "./lp-footer.scss";
+import styles from "./lp-footer.module.scss";
 
 const LPFooter: React.FC = () => {
   const { t } = useTranslation();
   return (
-    <footer id="contacts" className="lp-footer">
-      <div className="lp-footer__container">
-        <div className="lp-footer__row">
-          <h3 className="lp-footer__title">{t("landing-page:footer.title")}</h3>
-          <div className="lp-footer__email">
+    <footer id="contacts" className={styles["lp-footer"]}>
+      <div className={styles["lp-footer__container"]}>
+        <div className={styles["lp-footer__row"]}>
+          <h3 className={styles["lp-footer__title"]}>
+            {t("landing-page:footer.title")}
+          </h3>
+          <div className={styles["lp-footer__email"]}>
             <a
               title={t("landing-page:footer.email-title")}
               href={EMAIL_ROUTE}
-              className="lp-footer__email-link"
+              className={styles["lp-footer__email-link"]}
             >
               {t("landing-page:footer.email-support")}
             </a>
-            <LPButton color="secondary" href={EMAIL_ROUTE}>
+            <LPButton
+              className={styles["lp-footer__btn"]}
+              color="secondary"
+              href={EMAIL_ROUTE}
+            >
               {t("landing-page:buttons.send")}
             </LPButton>
           </div>
-          <div className="lp-footer__app-links">
-            <h3 className="lp-footer__subtitle">
+          <div className={styles["lp-footer__app-links"]}>
+            <h3 className={styles["lp-footer__subtitle"]}>
               {t("landing-page:footer.subtitle")}
             </h3>
             <IconList items={appLinks} />
           </div>
-          <SeoList seoItems={navFooter} className="lp-footer__seo-links" />
+          <SeoList
+            seoItems={navFooter}
+            className={styles["lp-footer__seo-links"]}
+          />
         </div>
       </div>
     </footer>

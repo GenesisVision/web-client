@@ -5,6 +5,7 @@ import FundAssetContainer, {
 import { useToLink } from "components/link/link.helper";
 import StatisticItemInner from "components/statistic-item/statistic-item-inner";
 import TableCard, {
+  IWithOffset,
   TableCardTable,
   TableCardTableColumn,
   TableCardTableRow
@@ -33,6 +34,7 @@ import { formatValueDifferentDecimalScale } from "utils/formatter";
 import { VoidFuncType } from "utils/types";
 
 const _DashboardPublicCard: React.FC<Props> = ({
+  withOffset,
   showWithdraw = true,
   showInvest = true,
   showActions = true,
@@ -80,6 +82,7 @@ const _DashboardPublicCard: React.FC<Props> = ({
   const totalAssetsCount = fundDetails && fundDetails.totalAssetsCount;
   return (
     <TableCard
+      withOffset={withOffset}
       hasAvatar
       subTitle={t(`dashboard-page.trading.asset-types.${asset.assetTypeExt}`)}
       level={programDetails ? programDetails.level : undefined}
@@ -157,7 +160,7 @@ const _DashboardPublicCard: React.FC<Props> = ({
       )}
       <DepositWithdrawButtons
         accountType={asset.assetTypeExt}
-        canTransfer={asset.actions.canTransferMoney}
+        canTransfer={asset?.actions?.canTransferMoney}
         transferableItem={mapAccountToTransferItemType(asset)}
         title={asset.publicInfo.title}
         onApply={updateItems}
@@ -187,7 +190,7 @@ export const getAssetFolderRoute = (assetType: AssetTypeExt) => {
   }
 };
 
-interface Props {
+interface Props extends IWithOffset {
   showWithdraw?: boolean;
   showInvest?: boolean;
   showActions?: boolean;

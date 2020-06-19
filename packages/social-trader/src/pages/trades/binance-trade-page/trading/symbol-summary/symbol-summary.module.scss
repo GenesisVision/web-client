@@ -1,0 +1,13 @@
+.symbol-summary {
+  &__type-switcher {
+    width: 100%;
+    min-width: 130px;
+  }
+  &__line {
+    justify-content: space-between;
+  }
+  &__label {
+    width: 100px;
+    text-align: right;
+  }
+}

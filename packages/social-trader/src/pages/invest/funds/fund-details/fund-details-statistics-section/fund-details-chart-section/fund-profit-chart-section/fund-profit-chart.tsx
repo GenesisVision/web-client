@@ -4,7 +4,7 @@ import {
   ChartsDataType
 } from "components/details/details-statistic-section/details.chart.types";
 import Crashable from "decorators/crashable";
-import { TChartCurrency } from "modules/chart-currency-selector/chart-currency-selector";
+import { TChartCurrency } from "modules/chart-currency-selector/chart-currency-selector.types";
 import * as React from "react";
 
 import FundProfitTooltip from "./fund-profit-tooltip";

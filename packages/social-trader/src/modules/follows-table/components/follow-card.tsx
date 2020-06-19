@@ -1,6 +1,7 @@
 import { useToLink } from "components/link/link.helper";
 import StatisticItem from "components/statistic-item/statistic-item";
 import TableCard, {
+  IWithOffset,
   TableCardTable,
   TableCardTableButtons,
   TableCardTableColumn
@@ -26,6 +27,7 @@ import { composeFollowDetailsUrl } from "utils/compose-url";
 import { formatValue } from "utils/formatter";
 
 const _FollowCard: React.FC<Props> = ({
+  withOffset,
   follow,
   withFollowButton,
   onApply
@@ -65,6 +67,7 @@ const _FollowCard: React.FC<Props> = ({
   );
   return (
     <TableCard
+      withOffset={withOffset}
       assetId={follow.id}
       profit={follow.statistic.profit}
       chart={follow.statistic.chart}
@@ -125,7 +128,7 @@ const _FollowCard: React.FC<Props> = ({
   );
 };
 
-interface Props {
+interface Props extends IWithOffset {
   onApply?: VoidFunction;
   withFollowButton?: boolean;
   follow: FollowDetailsListItem;

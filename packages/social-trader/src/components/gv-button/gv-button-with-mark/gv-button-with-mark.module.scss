@@ -1,0 +1,29 @@
+@import "~shared/styles/_constants";
+@import "~shared/styles/_colors";
+@import "~shared/styles/_sizes";
+
+$mark-size: 34px;
+
+.gv-button-with-mark {
+  position: relative;
+  &__mark {
+    @include transition(opacity);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 34px;
+    position: absolute;
+    border-radius: 50%;
+    background-color: $primary-color;
+    color: $text-light-color;
+    top: -8px;
+    right: -8px;
+    width: $mark-size;
+    height: $mark-size;
+    opacity: 0;
+
+    &--selected {
+      opacity: 1;
+    }
+  }
+}

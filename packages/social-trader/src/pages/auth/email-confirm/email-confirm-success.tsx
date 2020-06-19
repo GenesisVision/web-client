@@ -1,15 +1,12 @@
+import { MutedText } from "components/muted-text/muted-text";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-
-import "./email-confirm-failure.scss";
 
 const _EmailConfirmSuccess: React.FC = () => {
   const [t] = useTranslation();
   return (
-    <div className="email-confirm-failure">
-      <div className="email-confirm-failure__main-text">
-        {t("auth.email-confirm.success-alert-message")}
-      </div>
+    <div>
+      <MutedText>{t("auth.email-confirm.success-alert-message")}</MutedText>
     </div>
   );
 };

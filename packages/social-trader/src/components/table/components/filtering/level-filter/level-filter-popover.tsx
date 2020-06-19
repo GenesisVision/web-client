@@ -1,18 +1,20 @@
 import GVButton, { GV_BTN_SIZE } from "components/gv-button";
 import { PopoverContentCardBlock } from "components/popover/popover-card.block";
 import { PopoverContent } from "components/popover/popover-content";
+import { Range } from "components/range/range";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
-import { Range } from "rc-slider";
 import React, { useCallback, useState } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
+
+import styles from "./level-filter.module.scss";
 
 const _LevelFilterPopover: React.FC<Props> = ({
-  t,
   cancel,
   value: valueProp,
   changeFilter
 }) => {
+  const [t] = useTranslation();
   const [value, setValue] = useState<number[]>(valueProp);
   const marks = new Array(7).fill(0).reduce((prev, curr, idx) => {
     prev[idx + 1] = idx + 1;
@@ -24,9 +26,9 @@ const _LevelFilterPopover: React.FC<Props> = ({
     changeFilter
   ]);
   return (
-    <PopoverContent className="level-filter">
+    <PopoverContent className={styles["level-filter"]}>
       <PopoverContentCardBlock>
-        <div className="level-filter__slider">
+        <Row onlyOffset>
           <Range
             dots
             min={1}
@@ -36,7 +38,7 @@ const _LevelFilterPopover: React.FC<Props> = ({
             onChange={handleChange}
             pushable={false}
           />
-        </div>
+        </Row>
         <Row>
           <RowItem>
             <GVButton
@@ -65,11 +67,11 @@ const _LevelFilterPopover: React.FC<Props> = ({
   );
 };
 
-interface Props extends WithTranslation {
+interface Props {
   value: number[];
   cancel?: () => void;
   changeFilter?: (value: number[]) => void;
 }
 
-const LevelFilterPopover = translate()(React.memo(_LevelFilterPopover));
+const LevelFilterPopover = React.memo(_LevelFilterPopover);
 export default LevelFilterPopover;

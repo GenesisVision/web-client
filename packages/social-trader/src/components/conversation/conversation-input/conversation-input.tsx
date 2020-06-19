@@ -7,6 +7,9 @@ export const ConversationInput: React.FC<Props> = props => {
 };
 
 interface Props {
+  onPaste?: VoidFunction;
+  autoFocus?: boolean;
+  bottomLine?: boolean;
   disabled?: boolean;
   outerCaret?: number;
   onChangeCaret?: (position: number) => void;

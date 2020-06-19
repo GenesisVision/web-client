@@ -12,6 +12,13 @@ export const managerLoaderData: ProfilePublic = {
 };
 
 export const ownerLoaderData: ProfilePublicShort = {
+  personalDetails: {
+    canCommentPosts: false,
+    allowFollow: false,
+    canWritePost: false,
+    isFollow: false
+  },
+  logoUrl: "",
   id: "",
   username: "Manager name",
   url: ""

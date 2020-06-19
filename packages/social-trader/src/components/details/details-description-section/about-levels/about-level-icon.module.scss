@@ -1,0 +1,62 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
+
+$small-padding: 20px;
+$title-size: 32px;
+$subtitle-size: 17.5px;
+$large-font-size: 16px;
+$middle-font-size: 14px;
+$small-font-size: 12px;
+$mobile-padding-divider: 3;
+$mobile-text-divider: 1.5;
+$mobile-title-divider: 2;
+
+.about-levels-icon {
+  color: $main-color;
+  font-size: $small-font-size;
+  font-weight: bold;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #28768d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 0 0 auto;
+  box-sizing: border-box;
+  border: 2px solid transparent;
+
+  &--current {
+    background: transparent !important;
+  }
+
+  &--1 {
+    background-color: $level-color-1;
+    border-color: $level-color-1;
+  }
+  &--2 {
+    background-color: $level-color-2;
+    border-color: $level-color-2;
+  }
+  &--3 {
+    background-color: $level-color-3;
+    border-color: $level-color-3;
+  }
+  &--4 {
+    background-color: $level-color-4;
+    border-color: $level-color-4;
+  }
+  &--5 {
+    background-color: $level-color-5;
+    border-color: $level-color-5;
+  }
+  &--6 {
+    background-color: $level-color-6;
+    border-color: $level-color-6;
+  }
+  &--7 {
+    background-color: $level-color-7;
+    border-color: $level-color-7;
+  }
+}

@@ -1,10 +1,10 @@
-import "./glossary-section.scss";
-
 import React from "react";
+
+import styles from "./glossary-section.module.scss";
 
 const GlossarySection: React.FC = () => {
   return (
-    <section className="glossary-section">
+    <section className={styles["glossary-section"]}>
       <h1>Glossary</h1>
       <article className="internal__article">
         <h2>Program</h2>

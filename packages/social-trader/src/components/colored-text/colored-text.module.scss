@@ -1,0 +1,11 @@
+@import "~shared/styles/_colors";
+
+.colored-text {
+  color: $text-light-color;
+  &--green {
+    color: $positive-color;
+  }
+  &--red {
+    color: $negative-color;
+  }
+}

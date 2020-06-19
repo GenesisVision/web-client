@@ -1,8 +1,8 @@
-import "./gv-input.scss";
-
 import classNames from "classnames";
 import { MutedText } from "components/muted-text/muted-text";
 import React from "react";
+
+import styles from "./gv-input.module.scss";
 
 const _GvInput: React.FC<Props> = ({
   showError = true,
@@ -27,15 +27,15 @@ const _GvInput: React.FC<Props> = ({
 }) => {
   return (
     <div
-      className={classNames("gv-input__wrapper", wrapperClassName, {
-        "gv-input__wrapper--no-margin": noMargin,
-        "gv-input__wrapper--wide": wide
+      className={classNames(styles["gv-input__wrapper"], wrapperClassName, {
+        [styles["gv-input__wrapper--no-margin"]]: noMargin,
+        [styles["gv-input__wrapper--wide"]]: wide
       })}
     >
       {label && (
         <label
-          className={classNames("gv-input__label", labelClassName, {
-            "gv-input__label--shrink":
+          className={classNames(styles["gv-input__label"], labelClassName, {
+            [styles["gv-input__label--shrink"]]:
               focused || adornment || (value !== undefined && value !== "")
           })}
         >
@@ -43,28 +43,34 @@ const _GvInput: React.FC<Props> = ({
         </label>
       )}
       <div
-        className={classNames("gv-input", className, {
-          "gv-input--bottom-line": bottomLine,
-          "gv-input--correct": correct,
-          "gv-input--disabled": disabled,
-          "gv-input--invalid": touched && error,
-          "gv-input--focused": focused
+        className={classNames(styles["gv-input"], className, {
+          [styles["gv-input--bottom-line"]]: bottomLine,
+          [styles["gv-input--correct"]]: correct,
+          [styles["gv-input--disabled"]]: disabled,
+          [styles["gv-input--invalid"]]: touched && error,
+          [styles["gv-input--focused"]]: focused
         })}
       >
         {inputElement}
         {adornment && (
           <div
-            className={classNames("gv-input__adornment", adornmentClassName, {
-              "gv-input__adornment--start": adornmentPosition === "start",
-              "gv-input__adornment--end": adornmentPosition === "end"
-            })}
+            className={classNames(
+              styles["gv-input__adornment"],
+              adornmentClassName,
+              {
+                [styles["gv-input__adornment--start"]]:
+                  adornmentPosition === "start",
+                [styles["gv-input__adornment--end"]]:
+                  adornmentPosition === "end"
+              }
+            )}
           >
             {adornment}
           </div>
         )}
       </div>
       {showError && touched && error && (
-        <div className={classNames("gv-input__error", errorClassName)}>
+        <div className={classNames(styles["gv-input__error"], errorClassName)}>
           {error}
         </div>
       )}
@@ -77,6 +83,7 @@ interface Props extends IPropsGvInput {
 }
 
 export interface IPropsGvInput {
+  onPaste?: VoidFunction;
   onFocus?: VoidFunction;
   showError?: boolean;
   ref?: any;

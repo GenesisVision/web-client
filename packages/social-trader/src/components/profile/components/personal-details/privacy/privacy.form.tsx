@@ -9,6 +9,7 @@ import Select from "components/select/select";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
 import { SubmitButton } from "components/submit-button/submit-button";
 import * as React from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
@@ -34,14 +35,16 @@ const SELECT_VALUES = [
 ];
 
 const PrivacySelect: React.FC<{
+  disabled?: boolean;
   name: string;
   title: string;
   label?: string;
-}> = ({ label, name, title }) => {
+}> = ({ disabled, label, name, title }) => {
   return (
     <div>
       <h5>{title}</h5>
       <GVHookFormField
+        disabled={disabled}
         wide
         disableIfSingle
         name={name}
@@ -60,7 +63,11 @@ const PrivacySelect: React.FC<{
 };
 
 const _PublicInfoForm: React.FC<Props> = ({
-  data: { whoCanViewCommentsOnMyPosts, whoCanPostToMayWall },
+  data: {
+    whoCanCommentOnMyPosts,
+    whoCanViewCommentsOnMyPosts: whoCanViewCommentsOnMyPostsProp,
+    whoCanPostToMayWall
+  },
   onSubmit,
   isPending,
   errorMessage
@@ -68,20 +75,23 @@ const _PublicInfoForm: React.FC<Props> = ({
   const [t] = useTranslation();
   const form = useForm<IPrivacyFormValues>({
     defaultValues: {
-      [PRIVACY_FORM_VALUES.whoCanViewCommentsOnMyPosts]: whoCanViewCommentsOnMyPosts,
+      [PRIVACY_FORM_VALUES.whoCanCommentOnMyPosts]: whoCanCommentOnMyPosts,
+      [PRIVACY_FORM_VALUES.whoCanViewCommentsOnMyPosts]: whoCanViewCommentsOnMyPostsProp,
       [PRIVACY_FORM_VALUES.whoCanPostToMayWall]: whoCanPostToMayWall
     },
     mode: "onBlur"
   });
 
+  const { watch, setValue } = form;
+  const { whoCanViewCommentsOnMyPosts } = watch();
+
+  useEffect(() => {
+    if (whoCanViewCommentsOnMyPosts === "OnlyMe")
+      setValue(PRIVACY_FORM_VALUES.whoCanCommentOnMyPosts, "OnlyMe");
+  }, [whoCanViewCommentsOnMyPosts]);
+
   return (
     <HookForm resetOnSuccess form={form} onSubmit={onSubmit}>
-      <Row>
-        <PrivacySelect
-          title={t("profile-page.privacy.view")}
-          name={PRIVACY_FORM_VALUES.whoCanViewCommentsOnMyPosts}
-        />
-      </Row>
       <Row large>
         <PrivacySelect
           title={t("profile-page.privacy.post")}
@@ -89,9 +99,27 @@ const _PublicInfoForm: React.FC<Props> = ({
         />
       </Row>
       <Row>
-        <FormError error={errorMessage} />
+        <PrivacySelect
+          title={t("profile-page.privacy.view-comment")}
+          name={PRIVACY_FORM_VALUES.whoCanViewCommentsOnMyPosts}
+        />
       </Row>
       <Row>
+        <PrivacySelect
+          disabled={
+            watch()[PRIVACY_FORM_VALUES.whoCanViewCommentsOnMyPosts] ===
+            "OnlyMe"
+          }
+          title={t("profile-page.privacy.write-comment")}
+          name={PRIVACY_FORM_VALUES.whoCanCommentOnMyPosts}
+        />
+      </Row>
+      {errorMessage && (
+        <Row>
+          <FormError error={errorMessage} />
+        </Row>
+      )}
+      <Row large>
         <SubmitButton isPending={isPending} isSuccessful={!errorMessage}>
           {t("buttons.save")}
         </SubmitButton>

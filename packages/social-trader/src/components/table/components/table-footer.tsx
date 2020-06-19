@@ -7,6 +7,7 @@ import { useCallback } from "react";
 import { IPaging } from "../helpers/paging.helpers";
 import Paging from "./paging/paging";
 import ItemsCounter from "./table-items-counter";
+import styles from "./table.module.scss";
 import { UpdatePagingFuncType } from "./table.types";
 
 export interface ITableFooterProps {
@@ -27,9 +28,9 @@ const _TableFooter: React.FC<ITableFooterProps> = ({
     [updatePaging]
   );
   return (
-    <Row className="table__footer">
+    <Row className={styles["table__footer"]}>
       <ItemsCounter {...paging} condition={!!paging.totalItems} />
-      <RowItem className="table__paging">
+      <RowItem className={styles["table__paging"]}>
         <Paging
           asLink={asLinkPagination}
           condition={paging.totalPages !== 0}

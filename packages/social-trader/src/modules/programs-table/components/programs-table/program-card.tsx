@@ -1,5 +1,6 @@
 import { useToLink } from "components/link/link.helper";
 import ProgramPeriodPie from "components/program-period/program-period-pie/program-period-pie";
+import { Row } from "components/row/row";
 import StatisticItemInner from "components/statistic-item/statistic-item-inner";
 import TableCard, {
   TableCardTable,
@@ -80,61 +81,77 @@ const _ProgramCard: React.FC<Props> = ({ program }) => {
     >
       <TableCardTable>
         <TableCardTableColumn>
-          <StatisticItemInner label={t("programs-page.programs-header.equity")}>
-            <NumberFormat
-              value={formatValueDifferentDecimalScale(
-                program.balance.amount,
-                DECIMAL_SCALE_SMALL_VALUE,
-                DECIMAL_SCALE_BIG_VALUE
-              )}
-              suffix={` ${requestCurrency}`}
-              displayType="text"
-            />
-          </StatisticItemInner>
-          <StatisticItemInner
-            label={t("programs-page.programs-header.available-to-invest")}
-          >
-            <NumberFormat
-              value={formatValueDifferentDecimalScale(
-                program.availableToInvest,
-                DECIMAL_SCALE_SMALL_VALUE,
-                DECIMAL_SCALE_BIG_VALUE
-              )}
-              displayType="text"
-              suffix={` ${requestCurrency}`}
-            />
-          </StatisticItemInner>
+          <Row>
+            <StatisticItemInner
+              label={t("programs-page.programs-header.equity")}
+            >
+              <NumberFormat
+                value={formatValueDifferentDecimalScale(
+                  program.balance.amount,
+                  DECIMAL_SCALE_SMALL_VALUE,
+                  DECIMAL_SCALE_BIG_VALUE
+                )}
+                suffix={` ${requestCurrency}`}
+                displayType="text"
+              />
+            </StatisticItemInner>
+          </Row>
+          <Row>
+            <StatisticItemInner
+              label={t("programs-page.programs-header.available-to-invest")}
+            >
+              <NumberFormat
+                value={formatValueDifferentDecimalScale(
+                  program.availableToInvest,
+                  DECIMAL_SCALE_SMALL_VALUE,
+                  DECIMAL_SCALE_BIG_VALUE
+                )}
+                displayType="text"
+                suffix={` ${requestCurrency}`}
+              />
+            </StatisticItemInner>
+          </Row>
         </TableCardTableColumn>
         <TableCardTableColumn>
-          <StatisticItemInner
-            label={t("programs-page.programs-header.investors")}
-          >
-            <NumberFormat
-              value={program.investorsCount}
-              displayType="text"
-              decimalScale={0}
-            />
-          </StatisticItemInner>
-          <StatisticItemInner label={t("programs-page.programs-header.period")}>
-            <ProgramPeriodPie
-              start={program.periodStarts}
-              end={program.periodEnds}
-            />
-          </StatisticItemInner>
+          <Row>
+            <StatisticItemInner
+              label={t("programs-page.programs-header.investors")}
+            >
+              <NumberFormat
+                value={program.investorsCount}
+                displayType="text"
+                decimalScale={0}
+              />
+            </StatisticItemInner>
+          </Row>
+          <Row>
+            <StatisticItemInner
+              label={t("programs-page.programs-header.period")}
+            >
+              <ProgramPeriodPie
+                start={program.periodStarts}
+                end={program.periodEnds}
+              />
+            </StatisticItemInner>
+          </Row>
         </TableCardTableColumn>
         <TableCardTableColumn>
-          <StatisticItemInner label={t("programs-page.programs-header.age")}>
-            {convertDateToShortFormat(distanceDate(program.creationDate))}
-          </StatisticItemInner>
-          <StatisticItemInner
-            label={t("programs-page.programs-header.drawdown")}
-          >
-            <NumberFormat
-              value={formatValue(program.statistic.drawdown, 2)}
-              displayType="text"
-              suffix="%"
-            />
-          </StatisticItemInner>
+          <Row>
+            <StatisticItemInner label={t("programs-page.programs-header.age")}>
+              {convertDateToShortFormat(distanceDate(program.creationDate))}
+            </StatisticItemInner>
+          </Row>
+          <Row>
+            <StatisticItemInner
+              label={t("programs-page.programs-header.drawdown")}
+            >
+              <NumberFormat
+                value={formatValue(program.statistic.drawdown, 2)}
+                displayType="text"
+                suffix="%"
+              />
+            </StatisticItemInner>
+          </Row>
         </TableCardTableColumn>
       </TableCardTable>
     </TableCard>

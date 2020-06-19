@@ -1,11 +1,13 @@
 import { useToLink } from "components/link/link.helper";
 import MenuTooltip from "components/menu-tooltip/menu-tooltip";
 import { VERTICAL_POPOVER_POS } from "components/popover/popover";
+import { Row } from "components/row/row";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { TMenuItem } from "routes/menu";
 
 import NavigationItem from "./navigation-item";
+import styles from "./navigation.module.scss";
 
 export const MenuNavigationItem: React.FC<Props> = ({
   item: { Icon, route = "", label, children },
@@ -14,13 +16,16 @@ export const MenuNavigationItem: React.FC<Props> = ({
   const { linkCreator } = useToLink();
   const [t] = useTranslation();
   const renderNavigationItem = ({ Icon, route = "", label }: TMenuItem) => (
-    <NavigationItem
-      icon={<Icon primary />}
-      href={linkCreator(route)}
-      key={label}
-    >
-      {label && t(label)}
-    </NavigationItem>
+    <Row middle={!!popover}>
+      <NavigationItem
+        small={!!popover}
+        icon={<Icon primary />}
+        href={linkCreator(route)}
+        key={label}
+      >
+        {label && t(label)}
+      </NavigationItem>
+    </Row>
   );
   const havePopover = !!children && popover;
   const haveSecondLevel = !!children && !popover;
@@ -35,7 +40,7 @@ export const MenuNavigationItem: React.FC<Props> = ({
         </NavigationItem>
       </MenuNavigationTooltipItem>
       {haveSecondLevel && (
-        <div className="navigation__second-level">
+        <div className={styles["navigation__second-level"]}>
           {children!.map(renderNavigationItem)}
         </div>
       )}
@@ -62,7 +67,7 @@ const MenuNavigationTooltipItem: React.FC<{
         <MenuTooltip
           vertical={VERTICAL_POPOVER_POS.BOTTOM}
           render={() => (
-            <div className="navigation__popover">{secondLevel}</div>
+            <div className={styles["navigation__popover"]}>{secondLevel}</div>
           )}
         >
           <div>{children}</div>

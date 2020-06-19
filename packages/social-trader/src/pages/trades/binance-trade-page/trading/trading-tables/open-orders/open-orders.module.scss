@@ -1,0 +1,15 @@
+@import "~shared/styles/_constants";
+
+$column-width: 100px;
+
+.open-orders {
+  &__table {
+    & th,
+    & td {
+      width: $column-width;
+      min-width: $column-width;
+      max-width: $column-width;
+      box-sizing: border-box;
+    }
+  }
+}
