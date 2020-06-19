@@ -263,25 +263,31 @@ const _AssetTagCard: React.FC<IAssetTagProps & { url: ToType | string }> = ({
           </Link>
         }
       />
-      <Row small className={styles["asset-tag"]}>
-        {price !== null && <RowItem wide>$ {price} </RowItem>}
-        {change24Percent !== null && (
-          <RowItem>
-            <ColoredText color={color}>
-              <Row>
-                <RowItem xsmall>{change24Percent}% </RowItem>
-                {changeState !== "NotChanged" && (
-                  <RowItem className={styles["asset-tag__arrow"]}>
-                    <div>
-                      {changeState === "Increased" ? <>&uarr;</> : <>&uarr;</>}
-                    </div>
-                  </RowItem>
-                )}
-              </Row>
-            </ColoredText>
-          </RowItem>
-        )}
-      </Row>
+      {price !== null && change24Percent !== null && (
+        <Row small className={styles["asset-tag"]}>
+          {price !== null && <RowItem wide>$ {price} </RowItem>}
+          {change24Percent !== null && (
+            <RowItem>
+              <ColoredText color={color}>
+                <Row>
+                  <RowItem xsmall>{change24Percent}% </RowItem>
+                  {changeState !== "NotChanged" && (
+                    <RowItem className={styles["asset-tag__arrow"]}>
+                      <div>
+                        {changeState === "Increased" ? (
+                          <>&uarr;</>
+                        ) : (
+                          <>&uarr;</>
+                        )}
+                      </div>
+                    </RowItem>
+                  )}
+                </Row>
+              </ColoredText>
+            </RowItem>
+          )}
+        </Row>
+      )}
     </TagBlock>
   );
 };
