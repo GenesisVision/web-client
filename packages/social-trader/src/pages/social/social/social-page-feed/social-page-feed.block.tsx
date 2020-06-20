@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import { IPostListContainerInitData } from "components/conversation/post-list/post-list.container";
 import GVTabs from "components/gv-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
 import { SearchIcon } from "components/icon/search-icon";
@@ -26,9 +27,9 @@ enum TABS {
   LIVE = "LIVE"
 }
 
-interface Props {}
+interface Props extends IPostListContainerInitData {}
 
-const _SocialPageFeedBlock: React.FC<Props> = () => {
+const _SocialPageFeedBlock: React.FC<Props> = ({ initData }) => {
   const [t] = useTranslation();
   const { searchValue, setSearchValue } = useContext(SocialSearchContext);
   const isAuthenticated = useSelector(isAuthenticatedSelector);
@@ -98,7 +99,7 @@ const _SocialPageFeedBlock: React.FC<Props> = () => {
           <FeedContainer showTop />
         )}
         {(tab === TABS.LIVE || !isAuthenticated) && !isSearch && (
-          <FeedContainer feedType={FEED_TYPE.ALL} />
+          <FeedContainer initData={initData} feedType={FEED_TYPE.ALL} />
         )}
       </Row>
     </>
