@@ -80,6 +80,7 @@ const _NewsList: React.FC<Props> = ({
     setMergedPosts([...(skip ? mergedPosts : []), ...data]);
   }, [data]);
 
+  if (!mergedPosts.length) return null;
   return (
     <InfiniteScrollNewsList
       updateItems={updateItems}

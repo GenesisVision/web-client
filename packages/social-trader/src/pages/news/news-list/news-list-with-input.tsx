@@ -11,6 +11,7 @@ interface Props extends INewsListContainerProps {
 }
 
 const _NewsListWithInput: React.FC<Props> = ({
+  initData,
   showInput,
   id,
   fetchMethod
@@ -24,7 +25,12 @@ const _NewsListWithInput: React.FC<Props> = ({
   return (
     <div>
       {showInput && <PostInputContainer onSuccess={setReset} />}
-      <NewsListContainer reset={isReset} id={id} fetchMethod={fetchMethod} />
+      <NewsListContainer
+        initData={initData}
+        reset={isReset}
+        id={id}
+        fetchMethod={fetchMethod}
+      />
     </div>
   );
 };
