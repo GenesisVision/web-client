@@ -46,7 +46,7 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
       description={`${t("funds-page.title")} ${
         description.publicInfo.title
       } - ${description.publicInfo.description}`}
-      previewImage={composeFundBannerUrl(description.publicInfo.url)}
+      previewImage={description.publicInfo.logoUrl}
     >
       <DetailsDescriptionSection
         detailsType={DETAILS_TYPE.ASSET}
