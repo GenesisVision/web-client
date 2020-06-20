@@ -36,6 +36,7 @@ const _PlateNewsList: React.FC<{
   const columnSize = getColumnSize(size?.width);
   return (
     <StackGrid
+      enableSSR={true}
       columnWidth={columnSize}
       gutterWidth={OFFSET_HEIGHT}
       gutterHeight={OFFSET_HEIGHT}
@@ -74,12 +75,19 @@ const _NewsList: React.FC<Props> = ({
   data,
   onScroll
 }) => {
-  const [mergedPosts, setMergedPosts] = useState<MediaPost[]>([]);
+  const [mergedPosts, setMergedPosts] = useState<MediaPost[]>(data);
 
   useEffect(() => {
-    setMergedPosts([...(skip ? mergedPosts : []), ...data]);
+    if (skip === 0) setMergedPosts(data);
+    else {
+      const clearData = data.filter(
+        ({ id }) => !mergedPosts.find(post => post.id === id)
+      );
+      setMergedPosts([...mergedPosts, ...clearData]);
+    }
   }, [data]);
 
+  if (!mergedPosts.length) return null;
   return (
     <InfiniteScrollNewsList
       updateItems={updateItems}

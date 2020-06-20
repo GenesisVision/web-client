@@ -3,9 +3,7 @@ import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { UpperBlock } from "components/upper-block/upper-block";
 import { UpperButtonContainer } from "components/upper-button/upper-button";
-import { SocialSummary } from "gv-api-web";
-import useApiRequest from "hooks/api-request.hook";
-import { getSocialPageData } from "pages/social/social/services/social-page.service";
+import { PostItemsViewModel, SocialSummary } from "gv-api-web";
 import { SocialPageDownloadsBlock } from "pages/social/social/social-page-downloads/social-page-downloads.block";
 import { SocialPageFeedBlock } from "pages/social/social/social-page-feed/social-page-feed.block";
 import { SocialPageGainersBlock } from "pages/social/social/social-page-gainers/social-page-gainers.block";
@@ -16,10 +14,14 @@ import React from "react";
 import styles from "./social-page.module.scss";
 
 interface Props {
+  initFeedData?: PostItemsViewModel;
   data: SocialSummary;
 }
 
-export const SocialPageContainer: React.FC<Props> = ({ data }) => {
+export const SocialPageContainer: React.FC<Props> = ({
+  data,
+  initFeedData
+}) => {
   return (
     <>
       <Row center={false} className={styles["social-page__main-container"]}>
@@ -45,7 +47,7 @@ export const SocialPageContainer: React.FC<Props> = ({ data }) => {
           </RowItem>
         </ResponsiveContainer>
         <RowItem className={styles["social-page__feed-container"]}>
-          <SocialPageFeedBlock />
+          <SocialPageFeedBlock initData={initFeedData} />
         </RowItem>
         <ResponsiveContainer enabledScreens={["large-desktop", "desktop"]}>
           <RowItem className={styles["social-page__side-block"]}>
