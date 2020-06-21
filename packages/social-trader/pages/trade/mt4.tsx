@@ -7,4 +7,8 @@ const Page: NextPage = () => {
   return <Mt4Page />;
 };
 
+Page.getInitialProps = async () => ({
+  namespacesRequired: ["mt4-page"]
+});
+
 export default withDefaultLayout(Page);

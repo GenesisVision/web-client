@@ -35,7 +35,7 @@ Page.getInitialProps = async ctx => {
       accountCurrency = currency;
     }
   );
-  return { id, broker, accountCurrency };
+  return { namespacesRequired: ["convert-page"], id, broker, accountCurrency };
 };
 
 interface Props {

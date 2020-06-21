@@ -1,0 +1,40 @@
+{
+  "title": "About levels",
+  "section": {
+    "text-1": "Genesis level reflects the experience and reliability of a manager.",
+    "text-2": "All of the investment programs of a non-verified manager are limited to the first level and can’t level up unless the manager passes the KYC procedure. Once the verification process is completed, the investment programs of a manager are levelled up to the second level.",
+    "text-3": "Starting from the second level, the level will depend on Av. to invest and is  subject to constant change.",
+    "text-4": "The available amount of money for investing in the manager is calculated as",
+    "text-5": "The Success of the trading manager is calculated with the help of the Genesis Ratio, which is the ratio of the program profit to its risk. The formula is similar to the Sharpe ratio and is set in a range from 0 to 1. If Genesis Ratio <0.2, then the program is high risk and the Investment scale is limited to 1 meaning that the manager can attract no more than his own deposit.",
+    "text-6": "This is a multiplier of the volume traded by the manager relative to the program balance for all periods. It is calculated similarly to the Genesis Ratio, being a weighted average over all periods.",
+    "text-7": "To have a volume multiplier of 1 the managers weekly trading volume needs to be approximately the same as the amount of funds in his/her program. In the case of Forex programs, the volume is divided by the shoulder.",
+    "text-8": "The coefficient is designed so that trading more in one period can compensate for the lack of volume during another period, but one-time high volumes won’t compensate for the lack of trading.",
+    "text-9": "More information can be found in the",
+    "formula": "Investment Scale * Manager balance.",
+    "link": "article."
+  },
+  "list": {
+    "subtitle": "Investment Scale is calculated according to a formula that takes into account:",
+    "list-item-1": "The Age of the program",
+    "list-item-2": "The Success of the trading manager.",
+    "list-item-3": "The trading volume (Weighted volume scale)"
+  },
+  "notes": {
+    "title": "Notes:",
+    "note-1": "If the investor funds in the program exceed Av.to invest, then the Success Fee and Stop out Level are decreased until the investor funds in the program become less or equal to Av. to invest. This change takes effect in the new period.",
+    "note-2": "If the manager is not verified, the available investment limit is always $1000, translated into account currency. Otherwise, the available limit is set in the range from $5k to $300k."
+  },
+  "table-header": {
+    "level": "Level",
+    "age": "Age",
+    "avg-profit": "Avg. Profit",
+    "total-profit": "Total profit"
+  },
+  "titles": {
+    "main": "About Levels",
+    "table": "Requirements for Levels",
+    "limits": "Level limits",
+    "limit": "Investment limits"
+  },
+  "select": "Show in:"
+}
