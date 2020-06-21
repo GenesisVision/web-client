@@ -19,7 +19,7 @@ Page.getInitialProps = async ctx => {
     ctx.reduxStore.dispatch(dispatchProgramId(id as string)),
     ctx.reduxStore.dispatch(dispatchProgramDescription(ctx, ASSET.FOLLOW))
   ]);
-  return {};
+  return { namespacesRequired: ["follow-details-page"] };
 };
 
 export default compose(withDefaultLayout)(Page);
