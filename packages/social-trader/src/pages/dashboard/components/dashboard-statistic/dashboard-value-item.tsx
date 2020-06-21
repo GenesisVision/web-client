@@ -29,7 +29,7 @@ const _DashboardValueItem: React.FC<Props> = ({
 interface Props {
   big?: boolean;
   value: number;
-  label: string;
+  label: string | React.ReactNode;
   currency?: CurrencyEnum;
 }
 

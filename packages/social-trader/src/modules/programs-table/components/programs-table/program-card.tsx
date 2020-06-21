@@ -13,6 +13,7 @@ import {
   TableCardFavoriteActionItem
 } from "components/table/components/table-card/table-card-actions";
 import TagProgramContainer from "components/tags/tag-program-container/tag-program-container";
+import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import { ASSET } from "constants/constants";
 import { ProgramDetailsListItem } from "gv-api-web";
 import { useTranslation } from "i18n";
@@ -82,7 +83,14 @@ const _ProgramCard: React.FC<Props> = ({ program }) => {
       <TableCardTable>
         <TableCardTableColumn>
           <Row>
-            <LabeledValue label={t("programs-page.programs-header.equity")}>
+            <LabeledValue
+              label={
+                <TooltipLabel
+                  tooltipContent={t("programs-page.tooltips.equity")}
+                  labelText={t("programs-page.programs-header.equity")}
+                />
+              }
+            >
               <NumberFormat
                 value={formatValueDifferentDecimalScale(
                   program.balance.amount,
@@ -96,7 +104,16 @@ const _ProgramCard: React.FC<Props> = ({ program }) => {
           </Row>
           <Row>
             <LabeledValue
-              label={t("programs-page.programs-header.available-to-invest")}
+              label={
+                <TooltipLabel
+                  tooltipContent={t(
+                    "programs-page.tooltips.available-to-invest"
+                  )}
+                  labelText={t(
+                    "programs-page.programs-header.available-to-invest"
+                  )}
+                />
+              }
             >
               <NumberFormat
                 value={formatValueDifferentDecimalScale(
@@ -112,7 +129,14 @@ const _ProgramCard: React.FC<Props> = ({ program }) => {
         </TableCardTableColumn>
         <TableCardTableColumn>
           <Row>
-            <LabeledValue label={t("programs-page.programs-header.investors")}>
+            <LabeledValue
+              label={
+                <TooltipLabel
+                  tooltipContent={t("programs-page.tooltips.investors")}
+                  labelText={t("programs-page.programs-header.investors")}
+                />
+              }
+            >
               <NumberFormat
                 value={program.investorsCount}
                 displayType="text"
@@ -121,7 +145,14 @@ const _ProgramCard: React.FC<Props> = ({ program }) => {
             </LabeledValue>
           </Row>
           <Row>
-            <LabeledValue label={t("programs-page.programs-header.period")}>
+            <LabeledValue
+              label={
+                <TooltipLabel
+                  tooltipContent={t("programs-page.tooltips.period")}
+                  labelText={t("programs-page.programs-header.period")}
+                />
+              }
+            >
               <ProgramPeriodPie
                 start={program.periodStarts}
                 end={program.periodEnds}
@@ -131,12 +162,26 @@ const _ProgramCard: React.FC<Props> = ({ program }) => {
         </TableCardTableColumn>
         <TableCardTableColumn>
           <Row>
-            <LabeledValue label={t("programs-page.programs-header.age")}>
+            <LabeledValue
+              label={
+                <TooltipLabel
+                  tooltipContent={t("programs-page.tooltips.age")}
+                  labelText={t("programs-page.programs-header.age")}
+                />
+              }
+            >
               {convertDateToShortFormat(distanceDate(program.creationDate))}
             </LabeledValue>
           </Row>
           <Row>
-            <LabeledValue label={t("programs-page.programs-header.drawdown")}>
+            <LabeledValue
+              label={
+                <TooltipLabel
+                  tooltipContent={t("programs-page.tooltips.drawdown")}
+                  labelText={t("programs-page.programs-header.drawdown")}
+                />
+              }
+            >
               <NumberFormat
                 value={formatValue(program.statistic.drawdown, 2)}
                 displayType="text"

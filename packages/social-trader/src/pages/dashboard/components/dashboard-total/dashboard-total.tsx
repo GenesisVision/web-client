@@ -3,6 +3,7 @@ import { Row } from "components/row/row";
 import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
 import { PieStatisticItem } from "components/statistic-item/pie-statistic-item";
 import StatisticItem from "components/statistic-item/statistic-item";
+import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import WalletDeposit from "modules/wallet-deposit/wallet-deposit";
 import DashboardStatisticPeriods from "pages/dashboard/components/dashboard-statistic/dashboard-statistic-periods";
@@ -33,13 +34,19 @@ const _DashboardTotal: React.FC<Props> = ({
       <StatisticItemList>
         <DashboardValueItem
           big
-          label={t("dashboard-page.total.total")}
+          label={
+            <TooltipLabel
+              tooltipContent={t("dashboard-page.tooltips.total.total-balance")}
+              labelText={t("dashboard-page.total.total")}
+            />
+          }
           value={total}
           currency={currency}
         />
         <PieStatisticItem
           suffix={currency}
           color={GVColors.$primaryColor}
+          tooltipContentLabel={t("dashboard-page.tooltips.total.invested")}
           label={t("dashboard-page.total.invested")}
           value={invested}
           total={total}
@@ -47,6 +54,7 @@ const _DashboardTotal: React.FC<Props> = ({
         <PieStatisticItem
           suffix={currency}
           color={$piePendingColor}
+          tooltipContentLabel={t("dashboard-page.tooltips.total.trading")}
           label={t("dashboard-page.total.pending")}
           value={trading}
           total={total}
@@ -54,6 +62,7 @@ const _DashboardTotal: React.FC<Props> = ({
         <PieStatisticItem
           suffix={currency}
           color={$pieAvailableColor}
+          tooltipContentLabel={t("dashboard-page.tooltips.total.wallet")}
           label={t("dashboard-page.total.wallet")}
           value={wallets}
           total={total}
@@ -66,7 +75,12 @@ const _DashboardTotal: React.FC<Props> = ({
       </StatisticItemList>
       {hasProfits && (
         <>
-          <h5>{t("dashboard-page.total.performance")}</h5>
+          <h5>
+            <TooltipLabel
+              tooltipContent={t("dashboard-page.tooltips.total.performance")}
+              labelText={t("dashboard-page.total.performance")}
+            />
+          </h5>
           <Row small>
             <DashboardStatisticPeriods
               data={profits}

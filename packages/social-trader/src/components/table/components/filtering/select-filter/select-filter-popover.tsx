@@ -36,6 +36,7 @@ const _SelectFilterPopover: React.FC<Props> = ({
             noPadding
             variant="text"
             color={selected ? "primary" : "secondary"}
+            successSymbol={false}
             key={idx}
             onClick={handleClick(x.value)}
           >

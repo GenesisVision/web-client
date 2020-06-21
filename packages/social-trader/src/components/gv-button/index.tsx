@@ -25,6 +25,7 @@ export interface GVButtonProps {
   type?: "button" | "submit";
   className?: string;
   disabled?: boolean;
+  successSymbol?: boolean;
   onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   name?: string;
   noPadding?: boolean;
@@ -43,6 +44,7 @@ const GVButton: React.FC<GVButtonProps> = ({
   variant = "contained",
   color = "primary",
   type = "button",
+  successSymbol = true,
   disabled,
   onClick,
   children,
@@ -85,13 +87,15 @@ const GVButton: React.FC<GVButtonProps> = ({
       >
         {children}
       </span>
-      <span
-        className={classNames(styles["gv-btn__success-symbol"], {
-          [styles["gv-btn__success-symbol--success"]]: isSuccessful
-        })}
-      >
-        ✔
-      </span>
+      {successSymbol && (
+        <span
+          className={classNames(styles["gv-btn__success-symbol"], {
+            [styles["gv-btn__success-symbol--success"]]: isSuccessful
+          })}
+        >
+          ✔
+        </span>
+      )}
     </button>
   );
 };

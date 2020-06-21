@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import { ACTION_STATUS_FILTER_VALUES } from "components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs.helpers";
 import styles from "components/details/details-description-section/details-statistic-section/details-history/trades.module.scss";
+import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import { FilteringType } from "components/table/components/filtering/filter.type";
 import SelectFilter from "components/table/components/filtering/select-filter/select-filter";
 import { SelectFilterType } from "components/table/components/filtering/select-filter/select-filter.constants";
@@ -10,6 +11,8 @@ import {
   TableSelectorType,
   UpdateFilterFunc
 } from "components/table/components/table.types";
+import Tooltip from "components/tooltip/tooltip";
+import { TooltipContent } from "components/tooltip/tooltip-content";
 import { SignalSubscriber } from "gv-api-web";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -27,6 +30,16 @@ const _ProgramSubscriptions: React.FC<Props> = ({
   currency
 }) => {
   const [t] = useTranslation();
+  const renderCell = (name: string) => (
+    <span
+      className={classNames(
+        styles["details-trades__head-cell"],
+        styles[`program-details-trades__cell--${name}`]
+      )}
+    >
+      {t(`program-details-page.history.subscriptions.${name}`)}
+    </span>
+  );
   return (
     <TableContainer
       getItems={getItems}
@@ -45,16 +58,24 @@ const _ProgramSubscriptions: React.FC<Props> = ({
           onChange={updateFilter}
         />
       )}
-      renderHeader={column => (
-        <span
-          className={classNames(
-            styles["details-trades__head-cell"],
-            styles[`program-details-trades__cell--${column.name}`]
-          )}
-        >
-          {t(`program-details-page.history.subscriptions.${column.name}`)}
-        </span>
-      )}
+      renderHeader={column =>
+        column.tooltip ? (
+          <Tooltip
+            horizontal={HORIZONTAL_POPOVER_POS.LEFT}
+            render={() => (
+              <TooltipContent>
+                {t(
+                  `program-details-page.history.subscriptions.tooltips.${column.name}`
+                )}
+              </TooltipContent>
+            )}
+          >
+            {renderCell(column.name)}
+          </Tooltip>
+        ) : (
+          renderCell(column.name)
+        )
+      }
       renderBodyRow={(subscription: SignalSubscriber) => (
         <ProgramSubscriptionsRow
           subscription={subscription}

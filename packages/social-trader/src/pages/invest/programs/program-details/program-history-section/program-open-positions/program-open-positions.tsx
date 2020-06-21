@@ -1,10 +1,13 @@
 import classNames from "classnames";
 import styles from "components/details/details-description-section/details-statistic-section/details-history/trades.module.scss";
+import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import TableContainer from "components/table/components/table-container";
 import {
   GetItemsFuncActionType,
   TableSelectorType
 } from "components/table/components/table.types";
+import Tooltip from "components/tooltip/tooltip";
+import { TooltipContent } from "components/tooltip/tooltip-content";
 import { TRADE_ASSET_TYPE } from "constants/constants";
 import { getOpenPositionsColumns } from "pages/invest/programs/program-details/program-history-section/program-open-positions/program-open-positions.helpers";
 import React from "react";
@@ -32,6 +35,16 @@ const _ProgramOpenPositions: React.FC<Props> = ({
   } = openPositions;
   const delay = data ? data.tradesDelay : "None";
   if (!programId) return null;
+  const renderCell = (name: string) => (
+    <span
+      className={classNames(
+        styles["details-trades__head-cell"],
+        styles[`program-details-trades__cell--${name}`]
+      )}
+    >
+      {t(`program-details-page.history.open-positions.${name}`)}
+    </span>
+  );
   return (
     <TableContainer
       exportButtonToolbarRender={() => <TradesDelayHint delay={delay} />}
@@ -39,16 +52,24 @@ const _ProgramOpenPositions: React.FC<Props> = ({
       dataSelector={dataSelector}
       isFetchOnMount={true}
       columns={getOpenPositionsColumns(data)}
-      renderHeader={column => (
-        <span
-          className={classNames(
-            styles["details-trades__head-cell"],
-            styles[`program-details-trades__cell--${column.name}`]
-          )}
-        >
-          {t(`program-details-page.history.open-positions.${column.name}`)}
-        </span>
-      )}
+      renderHeader={column =>
+        column.tooltip ? (
+          <Tooltip
+            horizontal={HORIZONTAL_POPOVER_POS.LEFT}
+            render={() => (
+              <TooltipContent>
+                {t(
+                  `program-details-page.history.open-positions.tooltips.${column.name}`
+                )}
+              </TooltipContent>
+            )}
+          >
+            {renderCell(column.name)}
+          </Tooltip>
+        ) : (
+          renderCell(column.name)
+        )
+      }
       renderBodyRow={(position, _, updateItems) => (
         <ProgramOpenPositionsRow
           programId={programId}

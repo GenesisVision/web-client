@@ -1,11 +1,8 @@
 import { CurrencyItem } from "components/currency-item/currency-item";
-import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import { SortingColumn } from "components/table/components/filtering/filter.type";
 import Table from "components/table/components/table";
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
-import Tooltip from "components/tooltip/tooltip";
-import { TooltipContent } from "components/tooltip/tooltip-content";
 import { FundAssetInfo } from "gv-api-web";
 import { FUND_STRUCTURE_COLUMNS } from "pages/invest/funds/fund-details/fund-details.constants";
 import React from "react";
@@ -25,24 +22,9 @@ const _FundStructure: React.FC = () => {
     <Table
       items={items}
       columns={FUND_STRUCTURE_COLUMNS}
-      renderHeader={(column: SortingColumn) => {
-        return column.tooltip ? (
-          <Tooltip
-            horizontal={HORIZONTAL_POPOVER_POS.CENTER}
-            render={() => (
-              <TooltipContent>
-                {t(`fund-details-page.tooltip.${column.name}`)}
-              </TooltipContent>
-            )}
-          >
-            <span>
-              <FundStructureHeaderCell column={column} />
-            </span>
-          </Tooltip>
-        ) : (
-          <FundStructureHeaderCell column={column} />
-        );
-      }}
+      renderHeader={(column: SortingColumn) => (
+        <FundStructureHeaderCell column={column} />
+      )}
       renderBodyRow={(item: FundAssetInfo) => (
         <TableRow stripy>
           <TableCell className={styles["details-structure__cell"]}>

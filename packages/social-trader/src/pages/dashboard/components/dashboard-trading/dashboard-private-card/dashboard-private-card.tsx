@@ -7,6 +7,7 @@ import TableCard, {
 } from "components/table/components/table-card/table-card";
 import { IRenderActionsArgs } from "components/table/components/table-card/table-card-actions";
 import TagProgramContainer from "components/tags/tag-program-container/tag-program-container";
+import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import {
   DECIMAL_SCALE_BIG_VALUE,
   DECIMAL_SCALE_SMALL_VALUE
@@ -49,7 +50,16 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
       <TableCardTable>
         {asset.accountInfo.currency && (
           <TableCardTableColumn>
-            <StatisticItem label={t("programs-page.programs-header.equity")}>
+            <StatisticItem
+              label={
+                <TooltipLabel
+                  tooltipContent={t(
+                    "dashboard-page.tooltips.private-card.equity"
+                  )}
+                  labelText={t("programs-page.programs-header.equity")}
+                />
+              }
+            >
               <NumberFormat
                 value={formatValueDifferentDecimalScale(
                   asset.accountInfo.balance,
@@ -63,7 +73,16 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
           </TableCardTableColumn>
         )}
         <TableCardTableColumn>
-          <StatisticItem label={t("dashboard-page.trading.leverage")}>
+          <StatisticItem
+            label={
+              <TooltipLabel
+                tooltipContent={t(
+                  "dashboard-page.tooltips.private-card.leverage"
+                )}
+                labelText={t("dashboard-page.trading.leverage")}
+              />
+            }
+          >
             <NumberFormat
               value={formatValueDifferentDecimalScale(
                 asset.accountInfo.leverage,
@@ -75,7 +94,14 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
           </StatisticItem>
         </TableCardTableColumn>
         <TableCardTableColumn>
-          <StatisticItem label={t("dashboard-page.trading.age")}>
+          <StatisticItem
+            label={
+              <TooltipLabel
+                tooltipContent={t("dashboard-page.tooltips.private-card.age")}
+                labelText={t("dashboard-page.trading.age")}
+              />
+            }
+          >
             {convertDateToShortFormat(
               distanceDate(asset.accountInfo.creationDate)
             )}

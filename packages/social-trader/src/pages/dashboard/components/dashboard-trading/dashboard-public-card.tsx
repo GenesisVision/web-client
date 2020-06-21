@@ -10,6 +10,7 @@ import TableCard, {
   TableCardTableColumn,
   TableCardTableRow
 } from "components/table/components/table-card/table-card";
+import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import {
   ASSET,
   DECIMAL_SCALE_BIG_VALUE,
@@ -84,7 +85,10 @@ const _DashboardPublicCard: React.FC<Props> = ({
     asset.assetType === "Fund"
       ? t("funds-page.funds-header.value")
       : t("programs-page.programs-header.equity");
-
+  const amountTooltip =
+    asset.assetType === "Fund"
+      ? t("dashboard-page.tooltips.trading.equity-fund")
+      : t("dashboard-page.tooltips.investing.equity");
   return (
     <TableCard
       withOffset={withOffset}
@@ -103,7 +107,14 @@ const _DashboardPublicCard: React.FC<Props> = ({
     >
       <TableCardTable>
         <TableCardTableColumn>
-          <LabeledValue label={amountTitle}>
+          <LabeledValue
+            label={
+              <TooltipLabel
+                tooltipContent={amountTooltip}
+                labelText={amountTitle}
+              />
+            }
+          >
             <NumberFormat
               value={formatValueDifferentDecimalScale(
                 asset.accountInfo.balance,
@@ -115,13 +126,31 @@ const _DashboardPublicCard: React.FC<Props> = ({
             />
           </LabeledValue>
           {asset.broker && (
-            <LabeledValue label={t("dashboard-page.trading.broker")}>
+            <LabeledValue
+              label={
+                <TooltipLabel
+                  tooltipContent={t("dashboard-page.tooltips.investing.broker")}
+                  labelText={t("dashboard-page.trading.broker")}
+                />
+              }
+            >
               {asset.broker.name}
             </LabeledValue>
           )}
         </TableCardTableColumn>
         <TableCardTableColumn>
-          <LabeledValue label={t("dashboard-page.trading.ddown")}>
+          <LabeledValue
+            label={
+              <TooltipLabel
+                tooltipContent={
+                  asset.assetType === "Fund"
+                    ? t("dashboard-page.tooltips.trading.ddown-fund")
+                    : t("dashboard-page.tooltips.investing.ddown")
+                }
+                labelText={t("dashboard-page.trading.ddown")}
+              />
+            }
+          >
             <NumberFormat
               value={formatValueDifferentDecimalScale(
                 asset.statistic.drawdown,
@@ -132,19 +161,46 @@ const _DashboardPublicCard: React.FC<Props> = ({
             />
           </LabeledValue>
           {!!asset.signalInfo && (
-            <LabeledValue label={t("dashboard-page.trading.subscribers-count")}>
+            <LabeledValue
+              label={
+                <TooltipLabel
+                  tooltipContent={t(
+                    "dashboard-page.tooltips.trading.subscribers"
+                  )}
+                  labelText={t("dashboard-page.trading.subscribers-count")}
+                />
+              }
+            >
               {asset.signalInfo.subscribersCount}
             </LabeledValue>
           )}
         </TableCardTableColumn>
         <TableCardTableColumn>
-          <LabeledValue label={t("dashboard-page.trading.age")}>
+          <LabeledValue
+            label={
+              <TooltipLabel
+                tooltipContent={
+                  asset.assetType === "Fund"
+                    ? t("dashboard-page.tooltips.trading.age-fund")
+                    : t("dashboard-page.tooltips.investing.age-program")
+                }
+                labelText={t("dashboard-page.trading.age")}
+              />
+            }
+          >
             {convertDateToShortFormat(
               distanceDate(asset.accountInfo.creationDate)
             )}
           </LabeledValue>
           {asset.accountInfo && asset.accountInfo.login && (
-            <LabeledValue label={t("dashboard-page.trading.login")}>
+            <LabeledValue
+              label={
+                <TooltipLabel
+                  tooltipContent={t("dashboard-page.tooltips.trading.login")}
+                  labelText={t("dashboard-page.trading.login")}
+                />
+              }
+            >
               {asset.accountInfo.login}
             </LabeledValue>
           )}
