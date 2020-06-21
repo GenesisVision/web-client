@@ -13,6 +13,7 @@ Page.getInitialProps = async ctx => {
   const { id } = ctx.query;
   const profile = await getUserProfile(id as string, ctx.token);
   return {
+    namespacesRequired: ["manager-page"],
     profile
   };
 };

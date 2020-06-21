@@ -1129,24 +1129,6 @@
       "level": "Level"
     }
   },
-  "manager-page": {
-    "unfollow-user": "Unfollow",
-    "follow-user": "Follow",
-    "followers": "Followers",
-    "following": "Following",
-    "social-links": "Social Links",
-    "title": "Manager",
-    "about": "About",
-    "assets": "Assets",
-    "member-since": "Member since",
-    "history": {
-      "tabs": {
-        "follow": "Follow",
-        "programs": "Programs",
-        "funds": "Funds"
-      }
-    }
-  },
   "global-search-page": {
     "follows": "Follow",
     "title": "Search",
