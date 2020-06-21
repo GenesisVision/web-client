@@ -112,9 +112,6 @@
     "cancel-header": "Cancel request",
     "cancel-body": "Please confirm that you want to cancel the request."
   },
-  "mt4-page": {
-    "title": "MetaTrader 4"
-  },
   "active": {
     "chart": "Chart",
     "about": "About"
