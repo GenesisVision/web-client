@@ -31,7 +31,12 @@ Page.getInitialProps = async ctx => {
     brokerDetails: { type },
     tradingAccountInfo: { currency }
   } = await fetchFollowDescriptionCtx(id as string, ctx);
-  return { id, broker: type, accountCurrency: currency };
+  return {
+    namespacesRequired: ["convert-page"],
+    id,
+    broker: type,
+    accountCurrency: currency
+  };
 };
 
 interface Props {
