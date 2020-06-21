@@ -75,7 +75,7 @@ $action-offset-size: 5px;
   &__title {
     @include link($text-accent-color, $text-color);
     @include font-size($font-size-paragraph);
-    word-break: break-all;
+    word-break: break-word;
     display: block;
     padding-bottom: 26px;
     @include media-breakpoint-landscape-phone() {
