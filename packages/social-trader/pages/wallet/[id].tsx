@@ -19,7 +19,7 @@ Page.getInitialProps = async ctx => {
     ),
     ctx.reduxStore.dispatch(fetchWalletsWithCtx(ctx))
   ]);
-  return { namespacesRequired: ["wallet-page"], id };
+  return { namespacesRequired: ["fees", "wallet-page"], id };
 };
 
 interface OwnProps {

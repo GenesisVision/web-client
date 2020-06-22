@@ -26,11 +26,11 @@ IndexPage.getInitialProps = async () => {
       programs,
       funds,
       news,
-      namespacesRequired: ["auth", "landing-page"]
+      namespacesRequired: ["fees", "auth", "landing-page"]
     };
   } catch (e) {
     return {
-      namespacesRequired: ["auth", "landing-page"],
+      namespacesRequired: ["fees", "auth", "landing-page"],
       ...landingAssetsDefaultData
     };
   }

@@ -16,5 +16,5 @@ export const Fees: NextPage = () => {
 };
 
 Fees.getInitialProps = async () => ({
-  namespacesRequired: ["landing-page"]
+  namespacesRequired: ["fees", "landing-page"]
 });
