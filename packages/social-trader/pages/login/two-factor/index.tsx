@@ -12,6 +12,10 @@ const Page: NextPage = () => {
   return <TwoFactorPage redirectFrom={from || OVERVIEW_ROUTE} />;
 };
 
+Page.getInitialProps = async () => ({
+  namespacesRequired: ["auth"]
+});
+
 export default withAuthLayout({
   footerAuthRoute: SIGNUP_ROUTE,
   Footer: LoginFooter,

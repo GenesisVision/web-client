@@ -11,6 +11,7 @@ const Page: NextPage<Props> = ({ redirectFrom }) => {
 
 Page.getInitialProps = async () => {
   return {
+    namespacesRequired: ["auth"],
     redirectFrom: HOME_ROUTE
   };
 };

@@ -12,6 +12,10 @@ const Page: NextPage = () => {
   return <LoginPage redirectFrom={(query.from as string) || OVERVIEW_ROUTE} />;
 };
 
+Page.getInitialProps = async () => ({
+  namespacesRequired: ["auth"]
+});
+
 export default withAuthLayout({
   footerAuthRoute: SIGNUP_ROUTE,
   Footer: LoginFooter,

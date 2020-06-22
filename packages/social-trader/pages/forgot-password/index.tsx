@@ -9,6 +9,10 @@ const Page: NextPage = () => {
   return <ForgotPasswordPage />;
 };
 
+Page.getInitialProps = async () => ({
+  namespacesRequired: ["auth"]
+});
+
 export default withAuthLayout({
   titleKey: "auth.password-restore.title",
   footerAuthRoute: SIGNUP_ROUTE,

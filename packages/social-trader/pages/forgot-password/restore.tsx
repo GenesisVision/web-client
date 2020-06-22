@@ -12,7 +12,7 @@ const Page: NextPage<Props> = ({ userId, code }) => {
 
 Page.getInitialProps = async (ctx: NextPageContext) => {
   const { userId, code } = getParamsFromCtx(ctx);
-  return { userId, code };
+  return { namespacesRequired: ["auth"], userId, code };
 };
 
 interface Props {
