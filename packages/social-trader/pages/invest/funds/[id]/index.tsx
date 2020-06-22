@@ -24,6 +24,6 @@ Page.getInitialProps = async ctx => {
     ctx.reduxStore.dispatch(dispatchFundId(id as string)),
     ctx.reduxStore.dispatch(dispatchFundDescription(ctx, currency))
   ]);
-  return {};
+  return { namespacesRequired: ["asset-details"] };
 };
 export default compose(withDefaultLayout)(Page);

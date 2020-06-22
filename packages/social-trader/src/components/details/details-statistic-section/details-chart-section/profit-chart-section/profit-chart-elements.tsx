@@ -48,7 +48,7 @@ const _ProfitChartElements: React.FC<Props> = ({
   return (
     <>
       <Row>
-        <StatisticItem big accent label={t("details-page.chart.percent")}>
+        <StatisticItem big accent label={t("asset-details.chart.percent")}>
           <NumberFormat
             value={formatCurrencyValue(statistic.profitPercent, name)}
             thousandSeparator={" "}

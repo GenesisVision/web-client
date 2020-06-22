@@ -714,22 +714,6 @@
         "events": "My history"
       }
     },
-    "statistics": {
-      "heading": "Statistics",
-      "current": "Current",
-      "calmarRatio": "Calmar ratio",
-      "rebalances": "Rebalances",
-      "profit-change": "Profit change",
-      "for": "For",
-      "balance": "Balance",
-      "investors": "Investors",
-      "sharpe-ratio": "Sharpe ratio",
-      "sortino-ratio": "Sortino ratio",
-      "max-drawdown": "Max Drawdown",
-      "start-day": "Start day",
-      "period-end": "Period end",
-      "period": "Period"
-    },
     "tooltip": {
       "assets": "Objects that have an identifiable value and are traded on crypto markets.",
       "structure": "The current allocation of funds selected by the Manager.",
@@ -749,17 +733,6 @@
       "max-drawdown": "The biggest drawdown of a fund during the selected date range.",
       "target": "The fixed percentage of the coin (asset) allocation in the total fund portfolio.",
       "current": "The current percentage of the coin (asset) allocation in the total fund portfolio."
-    },
-    "chart": {
-      "percent": "Percent",
-      "assets": "Assets",
-      "value": "Value",
-      "heading": "Chart",
-      "tabs": {
-        "absolute-profit": "Profit (Abs)",
-        "profit": "Profit (%)",
-        "balance": "Balance"
-      }
     }
   },
   "asset-details-page": {
@@ -805,22 +778,6 @@
       "unauth-popup": "To invest in the selected fund please login as an investor or create a new investor account.",
       "auth-manager-popup": "In order to invest in investment funds of other managers please login as an investor or create a new investor account."
     },
-    "statistics": {
-      "heading": "Statistics",
-      "current": "Current",
-      "calmarRatio": "Calmar ratio",
-      "rebalances": "Rebalances",
-      "profit-change": "Profit change",
-      "for": "For",
-      "balance": "Balance",
-      "investors": "Investors",
-      "sharpe-ratio": "Sharpe ratio",
-      "sortino-ratio": "Sortino ratio",
-      "max-drawdown": "Max Drawdown",
-      "start-day": "Start day",
-      "period-end": "Period end",
-      "period": "Period"
-    },
     "tooltip": {
       "assets": "Objects that have an identifiable value and are traded on crypto markets.",
       "structure": "The current allocation of funds selected by the Manager.",
@@ -865,15 +822,6 @@
         "assets": "Assets",
         "from": "From",
         "to": "To"
-      }
-    },
-    "chart": {
-      "assets": "Assets",
-      "value": "Value",
-      "heading": "Chart",
-      "tabs": {
-        "profit": "Profit",
-        "balance": "Balance"
       }
     }
   },
@@ -967,29 +915,6 @@
         "leverage": "Set leverage of the program. Trading with leverage allows the trader to open positions larger than their own capital",
         "period": "Reporting period is the interval of time in which the trader is to conduct trading operations of their Program and report the resulting profit or loss. Investments made by the investors appear on the Program balance at the beginning of the reporting period, while all of the resulting profit is distributed at the end of the reporting period.",
         "age": "Age of the program"
-      }
-    },
-    "statistics": {
-      "heading": "Statistics",
-      "current": "Current",
-      "for": "For",
-      "equity": "Equity",
-      "investors": "Investors",
-      "trades": "Trades",
-      "success-trades": "Success trades",
-      "profit-factor": "Profit factor",
-      "sharpe-ratio": "Sharpe ratio",
-      "sortino-ratio": "Sortino ratio",
-      "max-drawdown": "Max Drawdown",
-      "start-day": "Start day",
-      "period-end": "Period end",
-      "period": "Period",
-      "trading-volume": "Trading Volume",
-      "tooltip": {
-        "profit": "Profit",
-        "investors-funds": "Investors Funds",
-        "managers-funds": "Managers Funds",
-        "trading-volume": "The total Trading volume for the selected period, divided by the leverage."
       }
     },
     "tooltip": {
@@ -1155,13 +1080,6 @@
           "profit": "Program profit for the period (including commissions)",
           "investors": "Number of investors in the program"
         }
-      }
-    },
-    "chart": {
-      "heading": "Chart",
-      "tabs": {
-        "profit": "Profit",
-        "equity": "Equity"
       }
     },
     "calculator": {

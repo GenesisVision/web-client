@@ -1,0 +1,41 @@
+{
+  "chart": {
+    "percent": "Percent",
+    "assets": "Assets",
+    "value": "Value",
+    "heading": "Chart",
+    "tabs": {
+      "absolute-profit": "Profit (Abs)",
+      "profit": "Profit (%)",
+      "equity": "Equity",
+      "balance": "Balance"
+    }
+  },
+  "statistics": {
+    "calmarRatio": "Calmar ratio",
+    "rebalances": "Rebalances",
+    "profit-change": "Profit change",
+    "balance": "Balance",
+    "heading": "Statistics",
+    "current": "Current",
+    "for": "For",
+    "equity": "Equity",
+    "investors": "Investors",
+    "trades": "Trades",
+    "success-trades": "Success trades",
+    "profit-factor": "Profit factor",
+    "sharpe-ratio": "Sharpe ratio",
+    "sortino-ratio": "Sortino ratio",
+    "max-drawdown": "Max Drawdown",
+    "start-day": "Start day",
+    "period-end": "Period end",
+    "period": "Period",
+    "trading-volume": "Trading Volume",
+    "tooltip": {
+      "profit": "Profit",
+      "investors-funds": "Investors Funds",
+      "managers-funds": "Managers Funds",
+      "trading-volume": "The total Trading volume for the selected period, divided by the leverage."
+    }
+  }
+}

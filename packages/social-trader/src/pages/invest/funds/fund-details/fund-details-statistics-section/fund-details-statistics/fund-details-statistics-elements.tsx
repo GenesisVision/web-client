@@ -26,7 +26,7 @@ const _FundDetailsStatisticsElements: React.FC<IFundDetailsStatisticsElementsPro
               label={
                 <TooltipLabel
                   tooltipContent={t("fund-details-page.tooltip.balance")}
-                  labelText={t("fund-details-page.statistics.balance")}
+                  labelText={t("asset-details.statistics.balance")}
                 />
               }
               accent
@@ -45,7 +45,7 @@ const _FundDetailsStatisticsElements: React.FC<IFundDetailsStatisticsElementsPro
               label={
                 <TooltipLabel
                   tooltipContent={t("fund-details-page.tooltip.start-day")}
-                  labelText={t("fund-details-page.statistics.start-day")}
+                  labelText={t("asset-details.statistics.start-day")}
                 />
               }
             >
@@ -57,7 +57,7 @@ const _FundDetailsStatisticsElements: React.FC<IFundDetailsStatisticsElementsPro
               label={
                 <TooltipLabel
                   tooltipContent={t("fund-details-page.tooltip.investors")}
-                  labelText={t("fund-details-page.statistics.investors")}
+                  labelText={t("asset-details.statistics.investors")}
                 />
               }
             >
@@ -77,7 +77,7 @@ const _FundDetailsStatisticsElements: React.FC<IFundDetailsStatisticsElementsPro
               label={
                 <TooltipLabel
                   tooltipContent={t("fund-details-page.tooltip.calmar-ratio")}
-                  labelText={t("fund-details-page.statistics.calmarRatio")}
+                  labelText={t("asset-details.statistics.calmarRatio")}
                 />
               }
               half
@@ -94,7 +94,7 @@ const _FundDetailsStatisticsElements: React.FC<IFundDetailsStatisticsElementsPro
               label={
                 <TooltipLabel
                   tooltipContent={t("fund-details-page.tooltip.profit-change")}
-                  labelText={t("fund-details-page.statistics.profit-change")}
+                  labelText={t("asset-details.statistics.profit-change")}
                 />
               }
               half
@@ -114,7 +114,7 @@ const _FundDetailsStatisticsElements: React.FC<IFundDetailsStatisticsElementsPro
               label={
                 <TooltipLabel
                   tooltipContent={t("fund-details-page.tooltip.max-drawdown")}
-                  labelText={t("fund-details-page.statistics.max-drawdown")}
+                  labelText={t("asset-details.statistics.max-drawdown")}
                 />
               }
               half
@@ -134,7 +134,7 @@ const _FundDetailsStatisticsElements: React.FC<IFundDetailsStatisticsElementsPro
               label={
                 <TooltipLabel
                   tooltipContent={t("fund-details-page.tooltip.sharpe-ratio")}
-                  labelText={t("fund-details-page.statistics.sharpe-ratio")}
+                  labelText={t("asset-details.statistics.sharpe-ratio")}
                 />
               }
               half
@@ -152,7 +152,7 @@ const _FundDetailsStatisticsElements: React.FC<IFundDetailsStatisticsElementsPro
               label={
                 <TooltipLabel
                   tooltipContent={t("fund-details-page.tooltip.sortino-ratio")}
-                  labelText={t("fund-details-page.statistics.sortino-ratio")}
+                  labelText={t("asset-details.statistics.sortino-ratio")}
                 />
               }
               half
