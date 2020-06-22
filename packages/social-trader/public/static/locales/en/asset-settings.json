@@ -1,4 +1,18 @@
 {
+  "password-change-trading-account": {
+    "title": "Change trading account password",
+    "new-password": "New password",
+    "confirm-password": "Confirm password",
+    "success-alert-message": "Password for the trading account was changed",
+    "validators": {
+      "password-weak": "New password must contain at least one letter.",
+      "password-is-short": "New password must be at least 8 characters.",
+      "password-is-long": "New password must be shorter than 32 characters.",
+      "password-required": "New password is required.",
+      "password-dont-match": "Passwords don't match.",
+      "confirm-password-required": "Password confirmation is required."
+    }
+  },
   "trades-update": {
     "title": "Trades and open positions delay",
     "text": "Managers have the ability to delay the public display of their trades and open positions to protect their strategy.",

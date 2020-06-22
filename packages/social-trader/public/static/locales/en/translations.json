@@ -1,10 +1,24 @@
 {
+  "asset-actions": {
+    "change-password": "Change password",
+    "remove-from-favorites": "Remove from Favourites",
+    "add-to-favorites": "Add to Favourites",
+    "details": "Details",
+    "invest": "Invest",
+    "withdraw": "Withdraw",
+    "create-program": "Create Program",
+    "create-tournament-account": "Create Tournament Account",
+    "edit-program": "Edit Program",
+    "close-program": "Close Program",
+    "close-period": "Close Period"
+  },
   "my-history": {
     "details": "Details",
     "loss": "Loss in the program",
     "refund": "Amount of funds that have been returned to your wallet."
   },
   "validations": {
+    "max-amount": "Must be less than {{maxAmount}}",
     "link-max-length": "The maximum link length is 100 characters.",
     "recovery-is-required": "Recovery code is required.",
     "resolution": "The resolution of the uploaded image is too low.",
@@ -68,39 +82,12 @@
     "min": "Must be more or equal than {{min}}",
     "max": "Must be less or equal than {{max}}"
   },
-  "news-page": {
-    "title": "News",
-    "tabs": {
-      "my": "My",
-      "all": "All"
-    }
-  },
   "conversation": {
     "repost": "Share",
     "your-message": "Your message..."
   },
   "input-amount-field": {
     "label": "Amount"
-  },
-  "demo-deposit": {
-    "validations": {
-      "max-amount": "Must be less than {{maxAmount}}",
-      "required": "Amount is required"
-    }
-  },
-  "facets": {
-    "texts": {
-      "all-funds": "All funds",
-      "last-week-challenge-winner": "Last week challenge winner",
-      "challenge-title": "GV Funds Weekly \n\n Challenge",
-      "challenge-sub-title": "Challenge details"
-    },
-    "most_reliable": "most reliable",
-    "rating": "rating",
-    "weekly_top": "weekly top",
-    "top": "top",
-    "popular": "popular",
-    "new": "new"
   },
   "trade": {
     "title": "Trade"
@@ -316,24 +303,6 @@
     "Ended": "Ended",
     "Pending": "Pending"
   },
-  "program-actions": {
-    "change-password": "Change password",
-    "remove-from-favorites": "Remove from Favourites",
-    "add-to-favorites": "Add to Favourites",
-    "details": "Details",
-    "invest": "Invest",
-    "withdraw": "Withdraw",
-    "create-program": "Create Program",
-    "create-tournament-account": "Create Tournament Account",
-    "edit-program": "Edit Program",
-    "close-program": "Close Program",
-    "close-period": "Close Period"
-  },
-  "fund-actions": {
-    "remove-from-favorites": "Remove from Favourites",
-    "add-to-favorites": "Add to Favourites",
-    "details": "Details"
-  },
   "wallet-widget": {
     "trading": "Trading",
     "total-balance": "Total Balance",
@@ -398,20 +367,6 @@
       "deposit-success": "Deposit request is confirmed",
       "withdraw-success": "Withdrawal request is confirmed",
       "success": "Withdrawal request is confirmed"
-    }
-  },
-  "password-change-trading-account": {
-    "title": "Change trading account password",
-    "new-password": "New password",
-    "confirm-password": "Confirm password",
-    "success-alert-message": "Password for the trading account was changed",
-    "validators": {
-      "password-weak": "New password must contain at least one letter.",
-      "password-is-short": "New password must be at least 8 characters.",
-      "password-is-long": "New password must be shorter than 32 characters.",
-      "password-required": "New password is required.",
-      "password-dont-match": "Passwords don't match.",
-      "confirm-password-required": "Password confirmation is required."
     }
   },
   "profile-widget": {
@@ -486,19 +441,6 @@
         "tooltip": "Instant closing of all open positions."
       }
     }
-  },
-  "subscription-details": {
-    "title": "Subscription details",
-    "tolerance-percentage": "Tolerance percentage",
-    "subscription-type": "Subscription Type",
-    "active": "Active",
-    "volume": "Volume",
-    "modes": {
-      "ByBalance": "By balance",
-      "Percent": "Percentage",
-      "Fixed": "Fixed"
-    },
-    "edit": "Edit"
   },
   "follow-program": {
     "info": {

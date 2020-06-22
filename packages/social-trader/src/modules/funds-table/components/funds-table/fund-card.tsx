@@ -117,7 +117,7 @@ const _FundCard: React.FC<Props> = ({ fund }) => {
   const renderActions = ({ clearAnchor, anchor }: IRenderActionsArgs) => (
     <TableCardActions anchor={anchor} clearAnchor={clearAnchor}>
       <TableCardActionsItem to={link} onClick={clearAnchor}>
-        {t("fund-actions.details")}
+        {t("asset-actions.details")}
       </TableCardActionsItem>
       {fund.personalDetails && (
         <TableCardFavoriteActionItem

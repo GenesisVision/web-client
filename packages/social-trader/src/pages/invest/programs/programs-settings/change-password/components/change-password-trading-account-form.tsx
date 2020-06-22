@@ -42,7 +42,7 @@ const _ChangePasswordTradingAccountForm: React.FC<ChangePasswordTradingAccountFo
   return (
     <HookForm form={form} onSubmit={onSubmit}>
       <DialogTop
-        title={t("password-change-trading-account.title")}
+        title={t("asset-settings.password-change-trading-account.title")}
         subtitle={programName}
       />
       <DialogBottom>
@@ -51,7 +51,9 @@ const _ChangePasswordTradingAccountForm: React.FC<ChangePasswordTradingAccountFo
             validateOnInput={false}
             wide
             component={SimpleTextField}
-            label={t("password-change-trading-account.new-password")}
+            label={t(
+              "asset-settings.password-change-trading-account.new-password"
+            )}
             type="password"
             name={FORM_FIELDS.password}
             autoComplete="off"
@@ -61,7 +63,9 @@ const _ChangePasswordTradingAccountForm: React.FC<ChangePasswordTradingAccountFo
           <GVHookFormField
             wide
             component={SimpleTextField}
-            label={t("password-change-trading-account.confirm-password")}
+            label={t(
+              "asset-settings.password-change-trading-account.confirm-password"
+            )}
             type="password"
             name={FORM_FIELDS.confirmPassword}
             autoComplete="off"

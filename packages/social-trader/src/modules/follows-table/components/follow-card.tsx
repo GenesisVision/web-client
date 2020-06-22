@@ -53,7 +53,7 @@ const _FollowCard: React.FC<Props> = ({
   const renderActions = ({ clearAnchor, anchor }: IRenderActionsArgs) => (
     <TableCardActions anchor={anchor} clearAnchor={clearAnchor}>
       <TableCardActionsItem to={linkProps} onClick={clearAnchor}>
-        {t("program-actions.details")}
+        {t("asset-actions.details")}
       </TableCardActionsItem>
       {follow.personalDetails && (
         <TableCardFavoriteActionItem

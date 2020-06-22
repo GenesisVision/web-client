@@ -34,7 +34,7 @@ const _DashboardFundCard: React.FC<Props> = ({
           FUND_DETAILS_FOLDER_ROUTE
         )}
       >
-        {t("fund-actions.details")}
+        {t("asset-actions.details")}
       </TableCardActionsItem>
       {fund.personalDetails && (
         <TableCardFavoriteActionItem

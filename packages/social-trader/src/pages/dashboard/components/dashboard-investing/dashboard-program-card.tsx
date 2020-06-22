@@ -44,7 +44,7 @@ const _DashboardProgramCard: React.FC<Props> = ({
   const renderActions = ({ clearAnchor, anchor }: IRenderActionsArgs) => (
     <TableCardActions anchor={anchor} clearAnchor={clearAnchor}>
       <TableCardActionsItem to={linkProps} onClick={clearAnchor}>
-        {t("program-actions.details")}
+        {t("asset-actions.details")}
       </TableCardActionsItem>
       {program.personalDetails && (
         <TableCardFavoriteActionItem
