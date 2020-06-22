@@ -713,26 +713,6 @@
         },
         "events": "My history"
       }
-    },
-    "tooltip": {
-      "assets": "Objects that have an identifiable value and are traded on crypto markets.",
-      "structure": "The current allocation of funds selected by the Manager.",
-      "entry-fee": "The commission that the investor pays the manager for investing in the fund. Set by the manager and calculated as a percentage of the amount invested.",
-      "exit-fee": "The commission that the investor pays the manager for withdrawing funds from the fund. Set by the manager and calculated as a percentage of the amount invested.",
-      "balance": "The current amount of funds in the fund.",
-      "status": {
-        "PROGRAM": "The current status of the investment program (Active/ Investing/ Withdrawing/ Ended)",
-        "FUND": "The current state of your investment in the fund (Active/ Investing/ Withdrawing/ Ended)."
-      },
-      "start-day": "Creation day of the fund.",
-      "investors": "The current number of investors in the fund.",
-      "calmar-ratio": "A comparison of the average annual compounded rate of return and the maximum drawdown risk of asset managers and hedge funds.The higher the score, the better the portfolio is formed.",
-      "profit-change": "How much in % has the profit changed in the current time period compared to the previous one in the same period.",
-      "sharpe-ratio": "Program performance indicator, which is calculated as the mathematical ratio of the average return to the average deviation of this return. The higher the Sharpe Ratio value, the lower the portfolio risks.",
-      "sortino-ratio": "A variation of the Sharpe ratio that only factors in the downside risk. The greater the value of Sortino Ratio, the higher the efficiency of the portfolio and the lower the investment risks of investing in a fund.",
-      "max-drawdown": "The biggest drawdown of a fund during the selected date range.",
-      "target": "The fixed percentage of the coin (asset) allocation in the total fund portfolio.",
-      "current": "The current percentage of the coin (asset) allocation in the total fund portfolio."
     }
   },
   "asset-details-page": {
