@@ -10,11 +10,23 @@
     "KYC_REQUIRED": "KYC required",
     "FOREX_DISABLED": "Forex disabled"
   },
+  "kyc-requirement-title": "KYC required",
+  "broker-info": {
+    "about": "About",
+    "terms": "Terms",
+    "read-terms": "Read Terms",
+    "leverage": "Leverage",
+    "fee": "Fee",
+    "assets": "Assets",
+    "account-type": "Account type",
+    "trading-platform": "Trading platform"
+  },
   "settings": {
     "kyc-required": "KYC required",
     "kyc-required-text-1": "In order to create a program with the selected broker, you need to verify your account by completing the KYC (Know Your Customer) procedure.",
     "kyc-required-text-2": "KYC is an authentication mechanism required in the financial industry to help ensure companies are compliant with anti money laundering regulations.",
     "main-settings": "Main settings",
+    "fees-settings": "Fees settings",
     "deposit-details": "Deposit details",
     "validation": {
       "amount-required": "Amount is required",
@@ -22,6 +34,26 @@
       "amount-is-zero": "Must be greater or equal {{min}}",
       "currency-required": "Currency is required",
       "leverage-required": "Leverage is required"
+    },
+    "investment-program-fees": "Investment program fees",
+    "signal-provider-fees": "Signal provider fees",
+    "hints": {
+      "trades-delay": "Description about Trades delay is here",
+      "entry-fee-levels": "The entry fee is disabled for programs that have not reached level 3. It will be charged only for programs with level 3 or higher.",
+      "entry-fee": "Description about entry fee is here",
+      "entry-fee-description": "A fee charged upon each investment in the program.",
+      "management-fee": "Description about management fee is here",
+      "management-fee-description": "A fee charged for the actual asset management period. Management fee is defined in annual percentage and is charged at the end of each reporting period.",
+      "success-fee": "Description about success fee is here",
+      "success-fee-description": "A fee charged upon the total profit made within the reporting period.",
+      "subscription-fee": "Description about subscription fee is here",
+      "subscription-fee-description": "A fee for the subscription to the signal provider services.",
+      "signal-volume-fee": "Description about volume fee is here",
+      "signal-volume-fee-description": "A fee charged for the copied volume.",
+      "signal-success-fee": "Description about signal success fee is here",
+      "signal-success-fee-description": "A fee charged for the profit made from copied successful trades.",
+      "stop-out-level": "Description about Stop Out is here",
+      "stop-out-level-description": "Stop Out is the maximum drawdown level for the reporting period at which the program is stopped, and all investments return to investors."
     }
   },
   "notifications": {

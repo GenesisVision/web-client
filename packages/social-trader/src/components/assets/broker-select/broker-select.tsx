@@ -78,12 +78,12 @@ const _BrokerSelectBroker: React.FC<Props> = ({
         <Row onlyOffset>
           <StatisticItem
             half
-            label={t("create-program-page.broker-info.about")}
+            label={t("create-account-page.broker-info.about")}
           >
             {selectedBroker.description}
           </StatisticItem>
           <StatisticItem
-            label={t("create-program-page.broker-info.account-type")}
+            label={t("create-account-page.broker-info.account-type")}
           >
             {"leverageMin" in selectedBroker
               ? getBrokerAccountTypes(
@@ -92,23 +92,23 @@ const _BrokerSelectBroker: React.FC<Props> = ({
               : getExchangeAccountTypes(selectedBroker.accountTypes)}
           </StatisticItem>
           <StatisticItem
-            label={t("create-program-page.broker-info.trading-platform")}
+            label={t("create-account-page.broker-info.trading-platform")}
           >
             {selectedBroker.accountTypes[0].type}
           </StatisticItem>
-          <StatisticItem label={t("create-program-page.broker-info.terms")}>
+          <StatisticItem label={t("create-account-page.broker-info.terms")}>
             <a
-              title={t("create-program-page.broker-info.read-terms")}
+              title={t("create-account-page.broker-info.read-terms")}
               href={selectedBroker.terms}
               target="_blank"
               rel="noopener noreferrer"
             >
-              {t("create-program-page.broker-info.read-terms")}
+              {t("create-account-page.broker-info.read-terms")}
             </a>
           </StatisticItem>
           {"leverageMin" in selectedBroker && (
             <StatisticItem
-              label={t("create-program-page.broker-info.leverage")}
+              label={t("create-account-page.broker-info.leverage")}
             >
               {getLeverageDescription(
                 selectedBroker.leverageMin,
@@ -116,7 +116,7 @@ const _BrokerSelectBroker: React.FC<Props> = ({
               )}
             </StatisticItem>
           )}
-          <StatisticItem label={t("create-program-page.broker-info.assets")}>
+          <StatisticItem label={t("create-account-page.broker-info.assets")}>
             {selectedBroker.assets}
           </StatisticItem>
         </Row>

@@ -32,10 +32,10 @@ const _SignalsFeeFormPartial: React.FC<ISignalsFeeFormPartialProps> = ({
           component={SimpleNumberField}
           isAllowed={allowPositiveValuesNumberFormat(4)}
           hintTooltipContent={t(
-            "create-program-page.settings.hints.signal-volume-fee-description"
+            "create-account-page.settings.hints.signal-volume-fee-description"
           )}
           hintContent={t(
-            "create-program-page.settings.hints.signal-volume-fee"
+            "create-account-page.settings.hints.signal-volume-fee"
           )}
         />
       </ContainerElem>
@@ -48,10 +48,10 @@ const _SignalsFeeFormPartial: React.FC<ISignalsFeeFormPartialProps> = ({
           component={SimpleNumberField}
           isAllowed={allowPositiveValuesNumberFormat(4)}
           hintTooltipContent={t(
-            "create-program-page.settings.hints.signal-success-fee-description"
+            "create-account-page.settings.hints.signal-success-fee-description"
           )}
           hintContent={t(
-            "create-program-page.settings.hints.signal-success-fee"
+            "create-account-page.settings.hints.signal-success-fee"
           )}
         />
       </ContainerElem>

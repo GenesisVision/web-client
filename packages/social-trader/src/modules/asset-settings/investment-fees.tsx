@@ -60,19 +60,19 @@ const _InvestmentFees: React.FC<Props> = ({
           <FeesSettings
             firstFeeLabel={t("asset-settings.fields.management-fee")}
             firstFeeUnderText={t(
-              "create-program-page.settings.hints.management-fee"
+              "create-account-page.settings.hints.management-fee"
             )}
             firstFeeName={FIELDS.entryFee}
             firstFeeDescription={t(
-              "create-program-page.settings.hints.management-fee-description"
+              "create-account-page.settings.hints.management-fee-description"
             )}
             secondFeeName={FIELDS.successFee}
             secondFeeLabel={t("asset-settings.fields.success-fee")}
             secondFeeUnderText={t(
-              "create-program-page.settings.hints.success-fee"
+              "create-account-page.settings.hints.success-fee"
             )}
             secondFeeDescription={t(
-              "create-program-page.settings.hints.success-fee-description"
+              "create-account-page.settings.hints.success-fee-description"
             )}
           />
         )}
@@ -80,7 +80,7 @@ const _InvestmentFees: React.FC<Props> = ({
           <FeesSettings
             firstFeeLabel={t("asset-settings.fields.entry-fee")}
             firstFeeUnderText={t(
-              "create-program-page.settings.hints.entry-fee"
+              "create-account-page.settings.hints.entry-fee"
             )}
             firstFeeName={FIELDS.entryFee}
             firstFeeDescription={t(

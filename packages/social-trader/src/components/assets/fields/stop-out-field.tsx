@@ -13,9 +13,9 @@ const _StopOutField: React.FC<Props> = ({ name }) => {
       adornment="%"
       component={SimpleNumberField}
       hintTooltipContent={t(
-        "create-program-page.settings.hints.stop-out-level-description"
+        "create-account-page.settings.hints.stop-out-level-description"
       )}
-      hintContent={t("create-program-page.settings.hints.stop-out-level")}
+      hintContent={t("create-account-page.settings.hints.stop-out-level")}
     />
   );
 };

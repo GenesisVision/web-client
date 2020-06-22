@@ -29,7 +29,7 @@ const _TradesDelay: React.FC<Props> = ({ name }) => {
       <Row>
         <Text muted size={"small"}>
           <Hint
-            content={t("create-program-page.settings.hints.trades-delay")}
+            content={t("create-account-page.settings.hints.trades-delay")}
             vertical={VERTICAL_POPOVER_POS.BOTTOM}
             tooltipContent={t("program-settings.trades-update.text")}
           />

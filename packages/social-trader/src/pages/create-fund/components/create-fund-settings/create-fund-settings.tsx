@@ -89,7 +89,7 @@ const _CreateFundSettings: React.FC<Props> = ({
       >
         <FeesSettings
           firstFeeLabel={t("asset-settings.fields.entry-fee")}
-          firstFeeUnderText={t("create-program-page.settings.hints.entry-fee")}
+          firstFeeUnderText={t("create-account-page.settings.hints.entry-fee")}
           firstFeeName={CREATE_FUND_FIELDS.entryFee}
           firstFeeDescription={t(
             "create-fund-page.settings.hints.entry-fee-description",
