@@ -82,7 +82,7 @@ export const ConfirmTFAButton: React.FC<{
   return (
     <>
       <TableCardActionsItem onClick={setOpen}>
-        {t("program-settings.buttons.two-factor-confirm")}
+        {t("asset-settings.buttons.two-factor-confirm")}
       </TableCardActionsItem>
       <ConfirmContainer
         open={isOpen}

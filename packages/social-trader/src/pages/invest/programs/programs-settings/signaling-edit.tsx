@@ -17,7 +17,7 @@ const _SignalingEdit: React.FC<Props> = ({
   const [isSignal, setIsSignal] = useState<boolean>(isSignalProgram);
   const changeIsSignal = useCallback(() => setIsSignal(!isSignal), [isSignal]);
   return (
-    <SettingsBlock label={t("program-settings.signaling-program.title")}>
+    <SettingsBlock label={t("asset-settings.signaling-program.title")}>
       <div>
         {!isSignalProgram && canMakeSignal && (
           <GVSwitch

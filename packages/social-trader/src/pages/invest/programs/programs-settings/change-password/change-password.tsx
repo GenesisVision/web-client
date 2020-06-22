@@ -17,9 +17,9 @@ const _ChangePassword: React.FC<Props> = ({ id, t, title }) => {
     setChangePasswordClose
   ] = useIsOpen();
   return (
-    <SettingsBlock label={t("program-settings.password.title")}>
+    <SettingsBlock label={t("asset-settings.password.title")}>
       <div>
-        <FormTextField>{t("program-settings.password.text")}</FormTextField>
+        <FormTextField>{t("asset-settings.password.text")}</FormTextField>
         <Row large>
           <GVButton color="primary" onClick={setChangePasswordOpen}>
             {t("asset-details.description.change-password")}

@@ -100,7 +100,7 @@ const _InvestmentFees: React.FC<Props> = ({
         )}
         <Row large>
           <SubmitButton isSuccessful={!editError}>
-            {t("program-settings.buttons.save")}
+            {t("asset-settings.buttons.save")}
           </SubmitButton>
         </Row>
       </HookForm>

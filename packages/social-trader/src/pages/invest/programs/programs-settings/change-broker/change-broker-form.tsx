@@ -170,9 +170,7 @@ const _ChangeBrokerForm: React.FC<Props> = ({
         isSignalProgram={isSignalProgram}
       />
       <Row>
-        <FormTextField>
-          {t("program-settings.broker.text-change")}
-        </FormTextField>
+        <FormTextField>{t("asset-settings.broker.text-change")}</FormTextField>
       </Row>
       <Row large>
         <GVButton
@@ -186,7 +184,7 @@ const _ChangeBrokerForm: React.FC<Props> = ({
             isSubmitting
           }
         >
-          {t("program-settings.buttons.change-broker")}
+          {t("asset-settings.buttons.change-broker")}
         </GVButton>
       </Row>
       <ConfirmChangeBroker

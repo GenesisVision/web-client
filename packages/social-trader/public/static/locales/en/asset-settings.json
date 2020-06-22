@@ -1,4 +1,33 @@
 {
+  "trades-update": {
+    "title": "Trades and open positions delay",
+    "text": "Managers have the ability to delay the public display of their trades and open positions to protect their strategy.",
+    "select": "Trades delay"
+  },
+  "two-factor-confirm": {
+    "title": "Two-factor authorization (2fa)",
+    "text": "You must confirm your 2fa code to access the Huobi native platform."
+  },
+  "investment-limit": {
+    "text": "At any time you can enter or cancel certain limitations on av. to invest, or even prohibit new investments if your Investment limit is 0. If the investment limit you've entered is larger than the av. to invest value calculated for your current level, then you will only be able to attract the av. to invest value."
+  },
+  "password": {
+    "title": "Password",
+    "text": "Change the password of your trading account."
+  },
+  "broker": {
+    "title": "Broker",
+    "text-warning": "Warning: all signal program subscriptions will be cancelled when switching from GM to Huobi (we do not currently offer copy trading on Huobi).",
+    "text-change": "A broker change in the program will occur automatically within 24 hours after the end of the reporting period. You will receive a message confirming the successful change of the broker and you will receive a new login and password from the trading account. The invested funds in the program will be transferred to the new broker. All trading history and statistics will be saved on the program page.",
+    "text-cancel": "Your broker will be changed from {{brokerFrom}} to {{brokerTo}} within 24 hours after the end of the reporting period. You will receive a message confirming the successful change of the broker and you will receive a new login and password from the trading account. The invested funds in the program will be transferred to the new broker. All trading history and statistics will be saved on the program page.",
+    "text-cancel-confirm": "Do you really want to cancel the change from {{brokerFrom}} to {{brokerTo}}?",
+    "text-cancel-confirm-title": "Change broker",
+    "text-change-confirm": "Do you really want to change from {{brokerFrom}} to {{brokerTo}}?",
+    "text-change-confirm-title": "Change broker"
+  },
+  "signaling-program": {
+    "title": "Signal provider"
+  },
   "fields": {
     "exchange": "Exchange",
     "api-secret": "API secret",
@@ -40,6 +69,8 @@
     "success-alert-message": "Your assets were successfully reallocated!"
   },
   "notifications": {
+    "cancel-broker-success": "Change broker has been canceled",
+    "broker-success": "Broker has been edited",
     "edit-success": {
       "trading-account": "Trading account has been edited.",
       "follow": "Follow has been edited",
@@ -117,6 +148,9 @@
     "title": "Avatar"
   },
   "buttons": {
+    "two-factor-confirm": "Confirm 2fa",
+    "cancel-broker": "Cancel",
+    "change-broker": "Change broker",
     "close-externalsignaltradingaccount": "Close trading account",
     "close-signaltradingaccount": "Close trading account",
     "close-signalprogram": "Close signal program",

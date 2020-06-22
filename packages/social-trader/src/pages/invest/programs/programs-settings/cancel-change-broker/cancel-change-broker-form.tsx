@@ -94,7 +94,7 @@ const _CancelChangeBrokerForm: React.FC<Props> = ({
       />
       <Row>
         <FormTextField>
-          {t("program-settings.broker.text-cancel", {
+          {t("asset-settings.broker.text-cancel", {
             brokerFrom: brokerFrom.name,
             brokerTo: brokerTo.name
           })}
@@ -102,7 +102,7 @@ const _CancelChangeBrokerForm: React.FC<Props> = ({
       </Row>
       <Row large>
         <GVButton color="primary" onClick={setCancelChangeBrokerOpen}>
-          {t("program-settings.buttons.cancel-broker")}
+          {t("asset-settings.buttons.cancel-broker")}
         </GVButton>
       </Row>
       <ConfirmCancelChangeBroker

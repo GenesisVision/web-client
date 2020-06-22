@@ -20,7 +20,7 @@ const _CloseAssetPeriod: React.FC<Props> = ({ id, t, onApply }) => {
     <>
       <Row onlyOffset className={styles["asset-settings__block-wrapper"]}>
         <FormTextField>
-          {t("program-settings.period-and-closing.text-period")}
+          {t("asset-settings.period-and-closing.text-period")}
         </FormTextField>
         <Row large>
           <GVButton color="primary" onClick={setClosePeriodOpen}>

@@ -14,7 +14,7 @@ const _ChangeBrokerForm: React.FC<IChangeBrokerFormContainerProps> = props => {
   const { sendRequest: changeBroker, errorMessage } = useApiRequest({
     middleware: [onCloseMiddleware],
     request: changeBrokerMethod,
-    successMessage: "program-settings.notifications.broker-success"
+    successMessage: "asset-settings.notifications.broker-success"
   });
   const handleChangeBroker = useCallback(
     (values: ChangeBrokerFormValues) =>

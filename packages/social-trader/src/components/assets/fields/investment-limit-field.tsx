@@ -45,7 +45,7 @@ const _InvestmentLimitField: React.FC<Props> = ({
       )}
       <Row wide large>
         <FormTextField>
-          {t("program-settings.investment-limit.text")}
+          {t("asset-settings.investment-limit.text")}
         </FormTextField>
       </Row>
     </>

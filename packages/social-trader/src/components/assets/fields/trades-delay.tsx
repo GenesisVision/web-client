@@ -17,7 +17,7 @@ const _TradesDelay: React.FC<Props> = ({ name }) => {
         wide={false}
         name={name}
         component={SimpleTextField}
-        label={t("program-settings.trades-update.select")}
+        label={t("asset-settings.trades-update.select")}
         InputComponent={Select}
       >
         {DELAYS.map(({ label, value }) => (
@@ -31,7 +31,7 @@ const _TradesDelay: React.FC<Props> = ({ name }) => {
           <Hint
             content={t("create-account-page.settings.hints.trades-delay")}
             vertical={VERTICAL_POPOVER_POS.BOTTOM}
-            tooltipContent={t("program-settings.trades-update.text")}
+            tooltipContent={t("asset-settings.trades-update.text")}
           />
         </Text>
       </Row>
