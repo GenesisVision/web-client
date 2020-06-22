@@ -37,7 +37,7 @@ Page.getInitialProps = async ctx => {
     fetchBrokers().then(res => (brokers = res))
   ]);
   return {
-    namespacesRequired: ["asset-settings"],
+    namespacesRequired: ["create-account-page", "asset-settings"],
     exchanges,
     brokers,
     requestBrokerName

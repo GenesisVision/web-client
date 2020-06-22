@@ -1,0 +1,31 @@
+{
+  "title": "Create Account",
+  "navigation-back-text": "All your settings will be lost. Are you sure you want to exit?",
+  "tabs": {
+    "select-broker": "Select broker",
+    "settings": "Settings"
+  },
+  "broker-card": {
+    "COMING_SOON": "Coming soon",
+    "KYC_REQUIRED": "KYC required",
+    "FOREX_DISABLED": "Forex disabled"
+  },
+  "settings": {
+    "kyc-required": "KYC required",
+    "kyc-required-text-1": "In order to create a program with the selected broker, you need to verify your account by completing the KYC (Know Your Customer) procedure.",
+    "kyc-required-text-2": "KYC is an authentication mechanism required in the financial industry to help ensure companies are compliant with anti money laundering regulations.",
+    "main-settings": "Main settings",
+    "deposit-details": "Deposit details",
+    "validation": {
+      "amount-required": "Amount is required",
+      "amount-is-large": "Must be available in Wallet",
+      "amount-is-zero": "Must be greater or equal {{min}}",
+      "currency-required": "Currency is required",
+      "leverage-required": "Leverage is required"
+    }
+  },
+  "notifications": {
+    "create-success": "Program was successfully created.",
+    "validate-error": "Please correct the errors on this form"
+  }
+}
