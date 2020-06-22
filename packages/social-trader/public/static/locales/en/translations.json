@@ -105,50 +105,6 @@
   "trade": {
     "title": "Trade"
   },
-  "copytrading-tables": {
-    "title": "Trades",
-    "open-trades": "Open trades",
-    "history": "Trades History",
-    "log": "Trading log",
-    "close-trade-confirm": {
-      "header": "Closing the trade",
-      "body": "Are you sure you want to close {{symbol}} trade in volume {{volume}}?",
-      "success-message": "The trade has been successfully closed",
-      "error-message": "An error occurred while closing the trade"
-    },
-    "open-trades-header": {
-      "providers": "Providers",
-      "date-open": "Date open",
-      "symbol": "Symbol",
-      "direction": "Dir",
-      "volume": "Volume",
-      "price-open": "Price open",
-      "price": "Price",
-      "profit": "Profit"
-    },
-    "trades-history-header": {
-      "direction-entry": "Dir/Entry",
-      "symbol": "Symbol",
-      "volume": "Volume",
-      "price": "Price",
-      "profit": "Profit",
-      "commission": "Commission",
-      "date": "Date",
-      "providers": "Providers"
-    },
-    "trades-log-header": {
-      "date": "Date",
-      "message": "Message"
-    },
-    "fees": {
-      "trading": "Trading fee",
-      "ManagerSignalMasterVolumeFee": "Volume fee",
-      "ManagerSignalMasterSuccessFee": "Manager Success fee",
-      "SuccessFee": "Success fee",
-      "GvSignalSuccessFee": "Platform Success Fee",
-      "total": "Total"
-    }
-  },
   "invest": {
     "title": "Invest",
     "follows": {
