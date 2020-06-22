@@ -12,7 +12,7 @@ interface Props {
 const _UserFeed: React.FC<Props> = ({ canWritePost, id }) => {
   const isOwnPage = useIsOwnPage(id);
   useEffect(() => {
-    sendLoadFeedEvent();
+    // sendLoadFeedEvent();
   }, []);
   const fetchMethod = useCallback(
     (values: Object) => {
