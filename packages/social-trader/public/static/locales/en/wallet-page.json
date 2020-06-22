@@ -1,0 +1,164 @@
+{
+  "title": "Wallet",
+  "wallet": "wallet",
+  "total-balance": "Total balance",
+  "invested": "Invested",
+  "available": "Available",
+  "trading": "Trading",
+  "pending": "Pending",
+  "deposit": "Deposit",
+  "withdraw": "Withdraw",
+  "transfer": "Transfer",
+  "transactions-details": {
+    "wallet": "Wallet",
+    "amount": "Amount",
+    "title": "Transaction details",
+    "entry-fee": "Entry fee",
+    "success-fee": "Success fee",
+    "gv-fee": "GV Commission",
+    "platform-fee": "Platform fee",
+    "deposit": "Deposit",
+    "converting": {
+      "title": "Converting",
+      "from": "Converting from",
+      "to": "Converting to"
+    },
+    "profit": "Profit program",
+    "copy": {
+      "error": "Copy failed",
+      "success": "Copy was successful"
+    },
+    "external": {
+      "from-wallet": "From",
+      "from": "From address",
+      "to": "To external address",
+      "to-wallet": "To",
+      "amount": "Amount"
+    },
+    "status": {
+      "title": "Status"
+    },
+    "Program": "Program",
+    "Fund": "Fund",
+    "Open": {
+      "Program": "Open program",
+      "Fund": "Open fund"
+    },
+    "Close": {
+      "Program": "Close program",
+      "Fund": "Close fund"
+    },
+    "investment": {
+      "amount": "Investment amount",
+      "program": "Program investment",
+      "fund": "Fund investment",
+      "direction-program": "To the program",
+      "direction-fund": "To the fund"
+    },
+    "withdrawal": {
+      "title": "Withdrawal",
+      "amount": "Withdrawal amount",
+      "program": "Program withdrawal",
+      "fund": "Fund withdrawal",
+      "direction-program": "From the program",
+      "direction-fund": "From the fund"
+    },
+    "signal": {
+      "SubscribeSignal": "Signal fee payment",
+      "ReceiveSignal": "Signal fee received",
+      "DepositSignal": "Deposit to signal account",
+      "WithdrawalSignal": "Withdrawal from signal account",
+      "Platform": "Platform transaction",
+      "amount": "Amount",
+      "to-signal-provider": "To the signal provider",
+      "signal-provider": "Signal provider"
+    }
+  },
+  "tooltip": {
+    "total-balance": "The total value your funds on the platform.",
+    "available": "Your funds that are currently available for investment.",
+    "invested": "The funds that are currently invested in programs and / or funds. Invested GVT shows investment in funds. Invested USDT includes Forex.",
+    "trading": "Current market value of your investments in your programs, funds and trading accounts, taking into account the profit/loss of open positions.",
+    "pending": "Funds that are still being processed.",
+    "transactions": "Operation of funds transferring to/from or between wallets.",
+    "deposit": "A transaction involving a transfer of funds to another party.",
+    "withdrawals": "A transaction of taking funds out of the account.",
+    "transfer": "A transaction between accounts.",
+    "deposit-button": "Send cryptocurrency from an external wallet address to your Genesis Vision Wallet address. The following cryptocurrencies are supported: BTC, ETH, USDT and GVT.",
+    "withdrawal-button": "Send cryptocurrency from your GV Wallet address to an external wallet address.",
+    "transfer-button": "Convert cryptocurrency within your GV Wallet between BTC, ETH, USDT and GVT",
+    "buy-with-card": "Purchase cryptocurrencies with a credit card and deposit them directly to your GVT Wallet. The following cryptocurrencies are supported: BTC, ETH and USDT."
+  },
+  "tabs": {
+    "wallets": "My wallets",
+    "copytrading": "Copytrading accounts",
+    "transactions": "Transactions",
+    "deposit": "Deposit/",
+    "withdrawals": "withdrawals"
+  },
+  "transactions": {
+    "title": "Transactions",
+    "empty-transactions": "There are no transactions",
+    "wallet": "Wallet",
+    "date": "Date",
+    "type": "",
+    "description": "Description",
+    "amount": "Amount"
+  },
+  "deposits-withdrawals": {
+    "status": "Status",
+    "title": "Deposits/withdrawals",
+    "empty-transactions": "There are no transactions",
+    "wallet": "Wallet",
+    "date": "Date",
+    "type": "",
+    "description": "Description",
+    "amount": "Amount"
+  },
+  "copytrading": {
+    "currency": "Currency",
+    "balance": "Balance",
+    "amount": "Amount",
+    "equity": "Equity",
+    "free-margin": "Free-margin",
+    "actions": ""
+  },
+  "list": {
+    "currency": "Currency",
+    "total-balance": "Total balance",
+    "invested": "Invested",
+    "available": "Available",
+    "trading": "Trading",
+    "pending": "Pending",
+    "buy-with-card": "Buy with card",
+    "buttons": ""
+  },
+  "buttons": {
+    "internal-transfer": "Convert cryptocurrency within your GV Wallet between BTC, ETH, USDT and GVT",
+    "deposit": "Send cryptocurrency from an external wallet address to your Genesis Vision Wallet address. The following cryptocurrencies are supported: BTC, ETH, USDT and GVT.",
+    "withdraw": "Send cryptocurrency from your GV Wallet address to an external wallet address."
+  },
+  "transaction-actions": {
+    "resend-email": "Resend confirmation email",
+    "cancel-request": "Cancel request"
+  },
+  "copytrading-actions": {
+    "transfer": "Transfer",
+    "trade-history": "Trade history"
+  },
+  "transaction-statuses": {
+    "Done": "Completed",
+    "InProcess": "Processing",
+    "New": "New",
+    "Error": "Error",
+    "Rejected": "Rejected",
+    "Cancelled": "Cancelled"
+  },
+  "alert-messages": {
+    "resend-email-success": "A withdrawal confirmation letter was resent to your email address.",
+    "cancel-request-success": "The withdrawal request was successfully cancelled."
+  },
+  "settings": {
+    "label": "Your Genesis Markets Discount is {{percent}}%"
+  }
+}

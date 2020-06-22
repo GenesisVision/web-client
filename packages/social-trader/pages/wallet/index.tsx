@@ -7,7 +7,7 @@ import React from "react";
 import { compose } from "redux";
 import { NextPageWithRedux } from "utils/types";
 
-const Page: NextPageWithRedux<void> = () => {
+const Page: NextPageWithRedux<{}> = () => {
   return <WalletTotalContainer />;
 };
 
@@ -18,6 +18,9 @@ Page.getInitialProps = async ctx => {
     ),
     ctx.reduxStore.dispatch(fetchWalletsWithCtx(ctx))
   ]);
+  return {
+    namespacesRequired: ["wallet-page"]
+  };
 };
 
 export default compose(withDefaultLayout, withPrivateRoute)(Page);
