@@ -702,15 +702,6 @@
       "profit": "Profit of the fund during the selected date range"
     }
   },
-  "asset-details-page": {
-    "tooltip": {
-      "status": {
-        "follow": "",
-        "program": "The current status of the investment program (Active/ Investing/ Withdrawing/ Ended)",
-        "fund": "The current state of your investment in the fund (Active/ Investing/ Withdrawing/ Ended)."
-      }
-    }
-  },
   "fund-details-page": {
     "title": "Program detail",
     "description": {

@@ -1,4 +1,11 @@
 {
+  "tooltip": {
+    "status": {
+      "follow": "",
+      "program": "The current status of the investment program (Active/ Investing/ Withdrawing/ Ended)",
+      "fund": "The current state of your investment in the fund (Active/ Investing/ Withdrawing/ Ended)."
+    }
+  },
   "investment": {
     "tabs": {
       "subscription": "Subscription details",
