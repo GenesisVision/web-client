@@ -322,9 +322,6 @@
   "input-amount-field": {
     "label": "Amount"
   },
-  "trade": {
-    "title": "Trade"
-  },
   "unauth-popup": {
     "fund": "You must be logged in to invest in a fund",
     "program": "You must be logged in to invest in a program",
