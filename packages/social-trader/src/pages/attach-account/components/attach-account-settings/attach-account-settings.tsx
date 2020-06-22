@@ -86,7 +86,7 @@ const _AttachAccountSettings: React.FC<Props> = ({
               onChange={brokerNameChangeHandle}
               name={ATTACH_ACCOUNT_FIELDS.brokerName}
               component={GVTextField}
-              label={t("attach-account-page.settings.fields.exchange")}
+              label={t("account-settings.fields.exchange")}
               InputComponent={Select}
               disableIfSingle
             >
@@ -102,7 +102,7 @@ const _AttachAccountSettings: React.FC<Props> = ({
               wide
               name={ATTACH_ACCOUNT_FIELDS.brokerAccountTypeId}
               component={GVTextField}
-              label={t("attach-account-page.settings.fields.account-type")}
+              label={t("asset-settings.fields.account-type")}
               InputComponent={Select}
               disableIfSingle
             >
@@ -126,7 +126,7 @@ const _AttachAccountSettings: React.FC<Props> = ({
             className={styles["attach-account-settings__api-field"]}
             type="text"
             name={ATTACH_ACCOUNT_FIELDS.key}
-            label={t("attach-account-page.settings.fields.api-key")}
+            label={t("asset-settings.fields.api-key")}
             autoComplete="off"
             component={SimpleTextField}
           />
@@ -138,7 +138,7 @@ const _AttachAccountSettings: React.FC<Props> = ({
             className={styles["attach-account-settings__api-field"]}
             type="text"
             name={ATTACH_ACCOUNT_FIELDS.secret}
-            label={t("attach-account-page.settings.fields.api-secret")}
+            label={t("asset-settings.fields.api-secret")}
             autoComplete="off"
             component={SimpleTextField}
           />
