@@ -15,13 +15,13 @@ const _ReferralFriendsTable: React.FC = () => {
   return (
     <TableModule
       loaderData={ReferralFriendsLoaderData}
-      title={t("profile-page.referral-program.referral-friends.title")}
+      title={t("profile-page:referral-program.referral-friends.title")}
       getItems={getFriendsTable}
       paging={DEFAULT_PAGING}
       columns={COLUMNS}
       renderHeader={column =>
         t(
-          `profile-page.referral-program.referral-friends.header.${column.name}`
+          `profile-page:referral-program.referral-friends.header.${column.name}`
         )
       }
       renderBodyRow={(friend: ReferralFriend) => (

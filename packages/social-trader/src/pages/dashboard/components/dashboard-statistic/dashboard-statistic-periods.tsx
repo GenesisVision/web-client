@@ -21,19 +21,19 @@ const _DashboardStatisticPeriods: React.FC<Props> = ({
       <DashboardStatisticPeriodsItem
         currency={currency}
         withProfitability={withProfitability}
-        label={t("dashboard-page.total.day")}
+        label={t("dashboard-page:total.day")}
         item={day}
       />
       <DashboardStatisticPeriodsItem
         currency={currency}
         withProfitability={withProfitability}
-        label={t("dashboard-page.total.week")}
+        label={t("dashboard-page:total.week")}
         item={week}
       />
       <DashboardStatisticPeriodsItem
         currency={currency}
         withProfitability={withProfitability}
-        label={t("dashboard-page.total.month")}
+        label={t("dashboard-page:total.month")}
         item={month}
       />
     </StatisticItemList>

@@ -42,7 +42,7 @@ const _ProgramOpenPositions: React.FC<Props> = ({
         styles[`program-details-trades__cell--${name}`]
       )}
     >
-      {t(`program-details-page.history.open-positions.${name}`)}
+      {t(`program-details-page:history.open-positions.${name}`)}
     </span>
   );
   return (
@@ -59,7 +59,7 @@ const _ProgramOpenPositions: React.FC<Props> = ({
             render={() => (
               <TooltipContent>
                 {t(
-                  `program-details-page.history.open-positions.tooltips.${column.name}`
+                  `program-details-page:history.open-positions.tooltips.${column.name}`
                 )}
               </TooltipContent>
             )}

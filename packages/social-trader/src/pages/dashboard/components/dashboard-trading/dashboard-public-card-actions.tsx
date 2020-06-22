@@ -90,11 +90,11 @@ const _DashboardPublicCardActions: React.FC<IDashboardPublicCardActionsProps> = 
         />
       )}
       <TableCardActionsItem to={settingsLink} onClick={clearAnchor}>
-        {t("dashboard-page.trading.actions.settings")}
+        {t("dashboard-page:trading.actions.settings")}
       </TableCardActionsItem>
       {showTerminal && (
         <TableCardActionsItem to={terminalLink} onClick={clearAnchor}>
-          {t("dashboard-page.trading.actions.terminal")}
+          {t("dashboard-page:trading.actions.terminal")}
         </TableCardActionsItem>
       )}
       {showClosePeriod && <ClosePeriodButton id={id} />}

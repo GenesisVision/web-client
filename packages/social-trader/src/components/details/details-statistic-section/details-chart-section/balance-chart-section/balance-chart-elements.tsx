@@ -49,7 +49,7 @@ const _BalanceChartElements: React.FC<Props> = ({
   return (
     <>
       <Row>
-        <StatisticItem label={t("asset-details.chart.value")} big accent>
+        <StatisticItem label={t("asset-details:chart.value")} big accent>
           <NumberFormat
             value={formatCurrencyValue(balance, name)}
             thousandSeparator={" "}

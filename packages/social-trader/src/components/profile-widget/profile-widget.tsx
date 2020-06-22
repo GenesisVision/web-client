@@ -112,7 +112,7 @@ const _ProfileWidget: React.FC<Props> = ({ profileHeader, className }) => {
               Icon={ReferrerIcon}
               to={linkCreator(REFERRAL_PROGRAM_ROUTE)}
               onClick={clearAnchor}
-              label={t("profile-page.tabs.referral-program")}
+              label={t("profile-page:tabs.referral-program")}
             />
             <div className={styles["profile-menu__separator"]} />
             <ProfileMenuItem

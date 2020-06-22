@@ -25,8 +25,8 @@ const GoogleAuth: React.FC<IGoogleAuthProps> = ({
       )}
     >
       <div className={styles["google-auth__header"]}>
-        <h2>{t("2fa-page.profile-page.title")}</h2>
-        <p>{t("2fa-page.profile-page.google")}</p>
+        <h2>{t("profile-page:2fa-page.title")}</h2>
+        <p>{t("profile-page:2fa-page.google")}</p>
       </div>
 
       <div className={styles["google-auth__steps"]}>

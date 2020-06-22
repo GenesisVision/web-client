@@ -48,9 +48,9 @@ const _RecoveryCodeForm: React.FC<Props> = ({
 
   return (
     <HookForm form={form} onSubmit={handleSubmit}>
-      <h3>{t("auth.login.recovery.title")}</h3>
+      <h3>{t("auth:login.recovery.title")}</h3>
       <Row>
-        <Text muted>{t("auth.login.recovery.text")}</Text>
+        <Text muted>{t("auth:login.recovery.text")}</Text>
       </Row>
       <Row>
         <GVHookFormField
@@ -72,7 +72,7 @@ const _RecoveryCodeForm: React.FC<Props> = ({
           isSuccessful={requestStatus === CAPTCHA_STATUS.SUCCESS}
           disabled={requestStatus === CAPTCHA_STATUS.PENDING}
         >
-          {t("auth.login.recovery.continue")}
+          {t("auth:login.recovery.continue")}
         </SubmitButton>
       </Row>
     </HookForm>

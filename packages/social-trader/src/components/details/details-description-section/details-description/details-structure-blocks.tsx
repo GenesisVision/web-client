@@ -34,7 +34,7 @@ const _DetailsStrategy: React.FC<{
   title?: string;
 }> = ({ description, title }) => {
   const [t] = useTranslation();
-  const descriptionTitle = title || t("asset-details.description.strategy");
+  const descriptionTitle = title || t("asset-details:description.strategy");
   return (
     <>
       <h4>{descriptionTitle}</h4>

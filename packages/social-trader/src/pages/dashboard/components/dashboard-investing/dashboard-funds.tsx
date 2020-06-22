@@ -26,7 +26,7 @@ const _DashboardInvestingFunds: React.FC = () => {
     <DashboardInvestingTable
       dataSelector={dashboardInvestmentsFundsSelector}
       action={fetchDashboardInvestmentsFundsAction}
-      title={t("dashboard-page.investing.funds")}
+      title={t("dashboard-page:investing.funds")}
       renderBodyCard={(
         fund: FundInvestingDetailsList,
         updateRow,

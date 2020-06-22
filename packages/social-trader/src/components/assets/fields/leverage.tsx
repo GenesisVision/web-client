@@ -14,7 +14,7 @@ const _Leverage: React.FC<Props> = ({ name, accountLeverages }) => {
         wide
         name={name}
         component={SimpleTextField}
-        label={t("asset-settings.fields.brokers-leverage")}
+        label={t("asset-settings:fields.brokers-leverage")}
         InputComponent={Select}
         disableIfSingle
       >

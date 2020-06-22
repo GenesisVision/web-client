@@ -128,8 +128,8 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
       type={"article"}
       title={`${
         assetType === ASSET.FOLLOW
-          ? t("follows-page.title")
-          : t("programs-page.title")
+          ? t("follows-page:title")
+          : t("programs-page:title")
       } - ${title}`}
       description={`${assetType} ${description.publicInfo.title} - ${description.publicInfo.description}`}
       previewImage={logoUrl}

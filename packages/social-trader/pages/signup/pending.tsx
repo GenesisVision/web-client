@@ -22,5 +22,5 @@ Page.getInitialProps = async ctx => {
 export default withAuthLayout({
   footerAuthRoute: LOGIN_ROUTE,
   Footer: SignUpFooter,
-  titleKey: "auth.signup.title"
+  titleKey: "auth:signup.title"
 })(Page);

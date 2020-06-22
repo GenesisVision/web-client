@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 
 const _TradingPage: React.FC = () => {
   const [t] = useTranslation();
-  const title = t(`dashboard-page.trading.title`);
+  const title = t(`dashboard-page:trading.title`);
   return (
     <Page title={title}>
       <div>

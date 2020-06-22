@@ -32,7 +32,7 @@ const _DemoDepositContainer: React.FC<IDemoDepositContainerProps> = ({
     <>
       <DialogTop
         title={t("transfer.deposit-to", {
-          title: t(`dashboard-page.trading.asset-types.TradingAccount`)
+          title: t(`dashboard-page:trading.asset-types.TradingAccount`)
         })}
       />
       <DialogBottom>

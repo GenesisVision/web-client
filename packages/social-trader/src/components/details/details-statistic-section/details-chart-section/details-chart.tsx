@@ -41,21 +41,21 @@ const _DetailsChart: React.FC<IDetailsChartProps> = ({
   return (
     <DetailsBlock className={styles["details-chart"]}>
       <DetailsBlockTitleBox>
-        <h3>{t("asset-details.chart.heading")}</h3>
+        <h3>{t("asset-details:chart.heading")}</h3>
       </DetailsBlockTitleBox>
       <Row>
         <DetailsBlockTabs value={tab} onChange={setTab}>
           <GVTab
             value={DETAILS_CHART_TABS.PROFIT}
-            label={t("asset-details.chart.tabs.profit")}
+            label={t("asset-details:chart.tabs.profit")}
           />
           <GVTab
             value={DETAILS_CHART_TABS.ABSOLUTE_PROFIT}
-            label={t("asset-details.chart.tabs.absolute-profit")}
+            label={t("asset-details:chart.tabs.absolute-profit")}
           />
           <GVTab
             value={DETAILS_CHART_TABS.BALANCE}
-            label={t("asset-details.chart.tabs.balance")}
+            label={t("asset-details:chart.tabs.balance")}
           />
         </DetailsBlockTabs>
       </Row>

@@ -30,7 +30,7 @@ const _DepositTransferButton: React.FC<Props> = props => {
       sourceType={"Wallet"}
       destinationType={accountType as InternalTransferRequestType}
       title={t("transfer.deposit-to", {
-        title: t(`dashboard-page.trading.asset-types.${accountType}`)
+        title: t(`dashboard-page:trading.asset-types.${accountType}`)
       })}
     />
   );

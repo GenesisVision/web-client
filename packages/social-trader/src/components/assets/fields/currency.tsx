@@ -20,7 +20,7 @@ const _Currency: React.FC<Props> = ({
         wide
         name={name}
         component={SimpleTextField}
-        label={t("asset-settings.fields.currency")}
+        label={t("asset-settings:fields.currency")}
         InputComponent={Select}
         disabled={disabled}
         disableIfSingle

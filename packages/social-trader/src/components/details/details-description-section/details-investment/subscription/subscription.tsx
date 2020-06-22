@@ -26,13 +26,13 @@ const _Subscription: React.FC<Props> = ({
   return (
     <DetailsInvestmentBlock>
       <DetailsInvestmentHeading>
-        {t("follow-details-page.current-investment.title")}
+        {t("follow-details-page:current-investment.title")}
       </DetailsInvestmentHeading>
       <Row>
         <StatisticItemList>
           <StatisticItem
             accent
-            label={t("follow-details-page.current-investment.fields.profit")}
+            label={t("follow-details-page:current-investment.fields.profit")}
           >
             <NumberFormat
               value={formatCurrencyValue(
@@ -45,13 +45,13 @@ const _Subscription: React.FC<Props> = ({
           </StatisticItem>
           <StatisticItem
             accent
-            label={t("follow-details-page.current-investment.fields.status")}
+            label={t("follow-details-page:current-investment.fields.status")}
           >
             {subscriptionInfo.status}
           </StatisticItem>
           <StatisticItem
             accent
-            label={t("follow-details-page.current-investment.fields.type")}
+            label={t("follow-details-page:current-investment.fields.type")}
           >
             <Tooltip
               render={() => (
@@ -68,7 +68,7 @@ const _Subscription: React.FC<Props> = ({
           <StatisticItem
             condition={!!subscriptionInfo.percent}
             accent
-            label={t("follow-details-page.current-investment.fields.percent")}
+            label={t("follow-details-page:current-investment.fields.percent")}
           >
             <NumberFormat
               value={subscriptionInfo.percent}
@@ -85,7 +85,7 @@ const _Subscription: React.FC<Props> = ({
                   "follow-program.params.tolerance-percent-tooltip"
                 )}
                 labelText={t(
-                  "follow-details-page.current-investment.fields.percentage"
+                  "follow-details-page:current-investment.fields.percentage"
                 )}
               />
             }
@@ -100,7 +100,7 @@ const _Subscription: React.FC<Props> = ({
             condition={!!subscriptionInfo.fixedVolume}
             accent
             label={t(
-              "follow-details-page.current-investment.fields.fixed-volume"
+              "follow-details-page:current-investment.fields.fixed-volume"
             )}
           >
             <NumberFormat
@@ -116,7 +116,7 @@ const _Subscription: React.FC<Props> = ({
             }
             accent
             label={t(
-              "follow-details-page.current-investment.fields.volume-fee"
+              "follow-details-page:current-investment.fields.volume-fee"
             )}
           >
             <NumberFormat
@@ -132,7 +132,7 @@ const _Subscription: React.FC<Props> = ({
             }
             accent
             label={t(
-              "follow-details-page.current-investment.fields.success-fee"
+              "follow-details-page:current-investment.fields.success-fee"
             )}
           >
             <NumberFormat

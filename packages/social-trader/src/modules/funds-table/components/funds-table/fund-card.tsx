@@ -43,7 +43,7 @@ export const FundCardTable: React.FC<IFundCardTableProps> = ({
           <StatisticItem
             label={
               <TooltipLabel
-                tooltipContent={t("dashboard-page.tooltips.investing.size")}
+                tooltipContent={t("dashboard-page:tooltips.investing.size")}
                 labelText={amountTitle || t("header-fields.balance")}
               />
             }
@@ -60,7 +60,7 @@ export const FundCardTable: React.FC<IFundCardTableProps> = ({
             label={
               <TooltipLabel
                 tooltipContent={t(
-                  "dashboard-page.tooltips.investing.investors"
+                  "dashboard-page:tooltips.investing.investors"
                 )}
                 labelText={t("header-fields.investors")}
               />
@@ -77,7 +77,7 @@ export const FundCardTable: React.FC<IFundCardTableProps> = ({
           <StatisticItem
             label={
               <TooltipLabel
-                tooltipContent={t("dashboard-page.tooltips.trading.ddown-fund")}
+                tooltipContent={t("dashboard-page:tooltips.trading.ddown-fund")}
                 labelText={t("header-fields.drawdown")}
               />
             }

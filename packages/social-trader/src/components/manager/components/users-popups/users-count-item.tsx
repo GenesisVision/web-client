@@ -20,7 +20,7 @@ export const FollowersCountItem: React.FC<Props> = React.memo(
       <>
         <ManagerStatisticItem
           onClick={setOpen}
-          label={t("manager-page.followers")}
+          label={t("manager-page:followers")}
           value={count}
         />
         <FollowersDialog
@@ -42,7 +42,7 @@ export const FollowingCountItem: React.FC<Props> = React.memo(
       <>
         <ManagerStatisticItem
           onClick={setOpen}
-          label={t("manager-page.following")}
+          label={t("manager-page:following")}
           value={count}
         />
         <FollowingDialog

@@ -24,7 +24,7 @@ const _WalletCurrency: React.FC<Props> = ({ data: info }) => {
                 <h1>
                   {info.title}
                   <span className={styles["wallet-title-block__title-wallet"]}>
-                    &nbsp;{t("wallet-page.wallet")}
+                    &nbsp;{t("wallet-page:wallet")}
                   </span>
                 </h1>
               </RowItem>

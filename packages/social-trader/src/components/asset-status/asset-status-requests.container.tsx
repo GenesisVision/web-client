@@ -28,7 +28,7 @@ const _AssetStatusRequestsContainer: React.FC<Props> = ({
   if (requests && requests.length === 0)
     return (
       <PopoverContentListItem>
-        {t("asset-details.description.requests-completed")}
+        {t("asset-details:description.requests-completed")}
       </PopoverContentListItem>
     );
 

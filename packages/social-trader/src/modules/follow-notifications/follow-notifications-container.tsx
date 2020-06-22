@@ -13,7 +13,7 @@ const _FollowNotificationsContainer: React.FC<Props> = ({ id }) => {
     general: [
       {
         name: NOTIFICATIONS.FollowNewsAndUpdates,
-        label: t("notifications-page.follow.general.news-updates")
+        label: t("notifications-page:follow.general.news-updates")
       }
     ],
     custom: false

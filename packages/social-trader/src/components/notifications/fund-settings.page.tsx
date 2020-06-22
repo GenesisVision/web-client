@@ -4,7 +4,7 @@ import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 
 const _FundNotificationPage: React.FC<Props> = ({ t, id }) => (
-  <Page showTitle title={t("notifications-page.fund.title")}>
+  <Page showTitle title={t("notifications-page:fund.title")}>
     <FundNotificationsContainer id={id} />
   </Page>
 );

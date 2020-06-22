@@ -64,7 +64,7 @@ const _DepositDetailsBlock: React.FC<Props> = ({
   return (
     <SettingsBlock
       hide={hide}
-      label={t("create-account-page.settings.deposit-details")}
+      label={t("create-account:settings.deposit-details")}
       blockNumber={`0${blockNumber}`}
       withBorder={false}
     >

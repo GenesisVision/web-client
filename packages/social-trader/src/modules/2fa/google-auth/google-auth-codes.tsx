@@ -33,15 +33,15 @@ const _GoogleAuthCodes: React.FC<Props> = ({ codes }) => {
   const [t] = useTranslation();
   return (
     <div className={styles["recovery-codes-container"]}>
-      <DialogTop title={t("2fa-page.profile-page.codes.title")} />
+      <DialogTop title={t("profile-page:2fa-page.codes.title")} />
       <DialogBottom>
-        <Row>{t("2fa-page.profile-page.codes.recovery_codes")}</Row>
-        <Row>{t("2fa-page.profile-page.codes.successfully")}</Row>
+        <Row>{t("profile-page:2fa-page.codes.recovery_codes")}</Row>
+        <Row>{t("profile-page:2fa-page.codes.successfully")}</Row>
         <CodeList codes={codes} />
         <DialogButtons>
           <CopyButton wide value={getCodesString(codes)} />
         </DialogButtons>
-        <DialogInfo>{t("2fa-page.profile-page.codes.warning")}</DialogInfo>
+        <DialogInfo>{t("profile-page:2fa-page.codes.warning")}</DialogInfo>
       </DialogBottom>
     </div>
   );

@@ -13,7 +13,7 @@ const _PublicInfo: React.FC<Props> = ({
   const { sendRequest, errorMessage } = useApiRequest({
     middleware: [onUpdate],
     request: updateProfile,
-    successMessage: "profile-page.success-edit"
+    successMessage: "profile-page:success-edit"
   });
   const handleSubmit = useCallback(
     (model: IAboutFormValues) =>

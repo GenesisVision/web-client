@@ -43,16 +43,16 @@ const _DisableAuthForm: React.FC<Props> = ({ onSubmit, errorMessage }) => {
         tab === TAB.RECOVERY
           ? string()
               .matches(/^\d{6}$/, t("validations.two-factor-6digits"))
-              .required(t("2fa-page.profile-page.code-required"))
+              .required(t("profile-page:2fa-page.code-required"))
           : string(),
       [FIELDS.twoFactorCode]:
         tab === TAB.TFA
           ? string()
               .matches(/^\d{6}$/, t("validations.two-factor-6digits"))
-              .required(t("2fa-page.profile-page.code-required"))
+              .required(t("profile-page:2fa-page.code-required"))
           : string(),
       [FIELDS.password]: string().required(
-        t("2fa-page.profile-page.password-required")
+        t("profile-page:2fa-page.password-required")
       )
     }),
     mode: "onChange"
@@ -60,13 +60,13 @@ const _DisableAuthForm: React.FC<Props> = ({ onSubmit, errorMessage }) => {
 
   return (
     <HookForm form={form} onSubmit={onSubmit}>
-      <DialogTop title={t("2fa-page.profile-page.disable.title")} />
+      <DialogTop title={t("profile-page:2fa-page.disable.title")} />
       <DialogBottom>
         <GVTabs value={tab} onChange={setTab}>
-          <GVTab value={TAB.TFA} label={t("2fa-page.profile-page.tabs.tfa")} />
+          <GVTab value={TAB.TFA} label={t("profile-page:2fa-page.tabs.tfa")} />
           <GVTab
             value={TAB.RECOVERY}
-            label={t("2fa-page.profile-page.tabs.recovery")}
+            label={t("profile-page:2fa-page.tabs.recovery")}
           />
         </GVTabs>
         <Row onlyOffset>
@@ -75,7 +75,7 @@ const _DisableAuthForm: React.FC<Props> = ({ onSubmit, errorMessage }) => {
               wide
               name={FIELDS.twoFactorCode}
               type="tel"
-              label={t("2fa-page.profile-page.google-code")}
+              label={t("profile-page:2fa-page.google-code")}
               component={SimpleTextField}
               autoComplete="off"
               allowNegative={false}
@@ -87,7 +87,7 @@ const _DisableAuthForm: React.FC<Props> = ({ onSubmit, errorMessage }) => {
               wide
               name={FIELDS.recoveryCode}
               type="tel"
-              label={t("2fa-page.profile-page.tabs.recovery")}
+              label={t("profile-page:2fa-page.tabs.recovery")}
               component={SimpleTextField}
               autoComplete="off"
               allowNegative={false}
@@ -100,7 +100,7 @@ const _DisableAuthForm: React.FC<Props> = ({ onSubmit, errorMessage }) => {
             wide
             name={FIELDS.password}
             type="password"
-            label={t("2fa-page.profile-page.password")}
+            label={t("profile-page:2fa-page.password")}
             component={SimpleTextField}
             autoComplete="new-password"
           />

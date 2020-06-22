@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 const _ChangeChangeBroker: React.FC<ICancelChangeBrokerFormContainerProps> = props => {
   const [t] = useTranslation();
   return (
-    <SettingsBlock label={t("asset-settings.broker.title")}>
+    <SettingsBlock label={t("asset-settings:broker.title")}>
       <CancelChangeBrokerFormContainer {...props} />
     </SettingsBlock>
   );

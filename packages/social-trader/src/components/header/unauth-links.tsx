@@ -22,14 +22,14 @@ const UnauthLinks: React.FC<Props> = ({ backPath }) => {
           }}
         >
           <GVButton variant="outlined" color="secondary">
-            {t("auth.login.title")}
+            {t("auth:login.title")}
           </GVButton>
         </Link>
       </RowItem>
       <RowItem>
         <Link to={linkCreator(SIGNUP_ROUTE)}>
           <GVButton variant="contained" color="primary">
-            {t("auth.signup.title")}
+            {t("auth:signup.title")}
           </GVButton>
         </Link>
       </RowItem>

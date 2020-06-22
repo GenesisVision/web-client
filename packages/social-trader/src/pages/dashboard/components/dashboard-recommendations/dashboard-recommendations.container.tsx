@@ -19,7 +19,7 @@ const _DashboardRecommendationsContainer: React.FC = () => {
   });
   if (!data) return null;
   return (
-    <DashboardBlock label={t("dashboard-page.recommendations.title")}>
+    <DashboardBlock label={t("dashboard-page:recommendations.title")}>
       <DashboardRecommendations
         loaderData={{
           assets: tableLoaderCreator(getRecommendationLoaderData, 15)

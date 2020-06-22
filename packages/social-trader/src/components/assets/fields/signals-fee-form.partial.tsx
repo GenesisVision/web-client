@@ -27,32 +27,28 @@ const _SignalsFeeFormPartial: React.FC<ISignalsFeeFormPartialProps> = ({
         <AssetFormField
           wide
           name={volumeFeeFieldName}
-          label={t("asset-settings.fields.signal-volume-fee")}
+          label={t("asset-settings:fields.signal-volume-fee")}
           adornment="%"
           component={SimpleNumberField}
           isAllowed={allowPositiveValuesNumberFormat(4)}
           hintTooltipContent={t(
-            "create-account-page.settings.hints.signal-volume-fee-description"
+            "create-account:settings.hints.signal-volume-fee-description"
           )}
-          hintContent={t(
-            "create-account-page.settings.hints.signal-volume-fee"
-          )}
+          hintContent={t("create-account:settings.hints.signal-volume-fee")}
         />
       </ContainerElem>
       <ContainerElem onlyOffset wide={inDialog}>
         <AssetFormField
           wide
           name={successFeeFieldName}
-          label={t("asset-settings.fields.signal-success-fee")}
+          label={t("asset-settings:fields.signal-success-fee")}
           adornment="%"
           component={SimpleNumberField}
           isAllowed={allowPositiveValuesNumberFormat(4)}
           hintTooltipContent={t(
-            "create-account-page.settings.hints.signal-success-fee-description"
+            "create-account:settings.hints.signal-success-fee-description"
           )}
-          hintContent={t(
-            "create-account-page.settings.hints.signal-success-fee"
-          )}
+          hintContent={t("create-account:settings.hints.signal-success-fee")}
         />
       </ContainerElem>
     </AssetRow>

@@ -87,13 +87,13 @@ const _DashboardPublicCard: React.FC<Props> = ({
       : t("header-fields.equity");
   const amountTooltip =
     asset.assetType === "Fund"
-      ? t("dashboard-page.tooltips.trading.equity-fund")
-      : t("dashboard-page.tooltips.investing.equity");
+      ? t("dashboard-page:tooltips.trading.equity-fund")
+      : t("dashboard-page:tooltips.investing.equity");
   return (
     <TableCard
       withOffset={withOffset}
       hasAvatar
-      subTitle={t(`dashboard-page.trading.asset-types.${asset.assetTypeExt}`)}
+      subTitle={t(`dashboard-page:trading.asset-types.${asset.assetTypeExt}`)}
       level={programDetails ? programDetails.level : undefined}
       levelProgress={programDetails ? programDetails.levelProgress : undefined}
       title={assetTitle}
@@ -129,8 +129,8 @@ const _DashboardPublicCard: React.FC<Props> = ({
             <LabeledValue
               label={
                 <TooltipLabel
-                  tooltipContent={t("dashboard-page.tooltips.investing.broker")}
-                  labelText={t("dashboard-page.trading.broker")}
+                  tooltipContent={t("dashboard-page:tooltips.investing.broker")}
+                  labelText={t("dashboard-page:trading.broker")}
                 />
               }
             >
@@ -144,10 +144,10 @@ const _DashboardPublicCard: React.FC<Props> = ({
               <TooltipLabel
                 tooltipContent={
                   asset.assetType === "Fund"
-                    ? t("dashboard-page.tooltips.trading.ddown-fund")
-                    : t("dashboard-page.tooltips.investing.ddown")
+                    ? t("dashboard-page:tooltips.trading.ddown-fund")
+                    : t("dashboard-page:tooltips.investing.ddown")
                 }
-                labelText={t("dashboard-page.trading.ddown")}
+                labelText={t("dashboard-page:trading.ddown")}
               />
             }
           >
@@ -165,9 +165,9 @@ const _DashboardPublicCard: React.FC<Props> = ({
               label={
                 <TooltipLabel
                   tooltipContent={t(
-                    "dashboard-page.tooltips.trading.subscribers"
+                    "dashboard-page:tooltips.trading.subscribers"
                   )}
-                  labelText={t("dashboard-page.trading.subscribers-count")}
+                  labelText={t("dashboard-page:trading.subscribers-count")}
                 />
               }
             >
@@ -181,10 +181,10 @@ const _DashboardPublicCard: React.FC<Props> = ({
               <TooltipLabel
                 tooltipContent={
                   asset.assetType === "Fund"
-                    ? t("dashboard-page.tooltips.trading.age-fund")
-                    : t("dashboard-page.tooltips.investing.age-program")
+                    ? t("dashboard-page:tooltips.trading.age-fund")
+                    : t("dashboard-page:tooltips.investing.age-program")
                 }
-                labelText={t("dashboard-page.trading.age")}
+                labelText={t("dashboard-page:trading.age")}
               />
             }
           >
@@ -196,8 +196,8 @@ const _DashboardPublicCard: React.FC<Props> = ({
             <LabeledValue
               label={
                 <TooltipLabel
-                  tooltipContent={t("dashboard-page.tooltips.trading.login")}
-                  labelText={t("dashboard-page.trading.login")}
+                  tooltipContent={t("dashboard-page:tooltips.trading.login")}
+                  labelText={t("dashboard-page:trading.login")}
                 />
               }
             >

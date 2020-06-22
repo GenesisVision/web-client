@@ -49,7 +49,7 @@ const _SocialLinksContainer: React.FC = () => {
   const { sendRequest: setSocialLinks, errorMessage } = useApiRequest({
     middleware: [getSocialLinks],
     request: updateSocialLink,
-    successMessage: "profile-page.social-links.notifications.edit-success"
+    successMessage: "profile-page:social-links.notifications.edit-success"
   });
 
   const handleSubmitSocialLink = useCallback(
@@ -59,7 +59,7 @@ const _SocialLinksContainer: React.FC = () => {
   );
 
   return (
-    <SettingsBlock label={t("profile-page.tabs.social-links")}>
+    <SettingsBlock label={t("profile-page:tabs.social-links")}>
       <Links
         errorMessage={errorMessage}
         condition={socialLinks !== undefined}

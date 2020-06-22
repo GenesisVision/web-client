@@ -78,7 +78,7 @@ const TransactionStatusBlock: React.FC<{
   const [t] = useTranslation();
   return (
     <TransactionDetailsItem
-      label={t(`wallet-page.transactions-details.status.title`)}
+      label={t(`wallet-page:transactions-details.status.title`)}
     >
       <Status withText status={status} />
     </TransactionDetailsItem>
@@ -105,7 +105,7 @@ const _TransactionWalletBlock: React.FC<{
   const walletSecond = wallets.second;
   return (
     <TransactionDetailsItem
-      label={t(`wallet-page.transactions-details.wallet`)}
+      label={t(`wallet-page:transactions-details.wallet`)}
     >
       {walletSecond ? (
         <WalletConvert wallets={wallets} />
@@ -130,7 +130,7 @@ const _CommonTransactionDetails: React.FC<Props> = ({
   return (
     <>
       <DialogTop
-        title={t(`wallet-page.transactions-details.title`)}
+        title={t(`wallet-page:transactions-details.title`)}
         subtitle={data.detailsTitle}
       >
         {data.asset && (

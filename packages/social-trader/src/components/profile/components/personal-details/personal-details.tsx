@@ -14,13 +14,13 @@ const _PersonalDetails: React.FC<IProfileOwnProps> = ({ info }) => {
   const [t] = useTranslation();
   return (
     <>
-      <SettingsBlock label={t("profile-page.contacts")} checked={true}>
-        <StatisticItem label={t("profile-page.email")}>
+      <SettingsBlock label={t("profile-page:contacts")} checked={true}>
+        <StatisticItem label={t("profile-page:email")}>
           {info.email}
         </StatisticItem>
       </SettingsBlock>
       <SettingsBlock
-        label={t("profile-page.personal-info")}
+        label={t("profile-page:personal-info")}
         verificationStatus={info.verificationStatus}
       >
         {info.verificationStatus === "NotVerified" && (

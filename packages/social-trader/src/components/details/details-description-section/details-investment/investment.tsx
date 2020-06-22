@@ -50,11 +50,11 @@ const _Investment: React.FC<Props> = ({
   return (
     <DetailsInvestmentBlock>
       <DetailsInvestmentHeading>
-        {t("asset-details.description.investment-details")}
+        {t("asset-details:description.investment-details")}
       </DetailsInvestmentHeading>
       <Row>
         <StatisticItemList>
-          <StatisticItem accent label={t("asset-details.description.value")}>
+          <StatisticItem accent label={t("asset-details:description.value")}>
             <NumberFormat
               value={formatCurrencyValue(personalDetails.value, currency)}
               suffix={` ${currency}`}
@@ -66,8 +66,8 @@ const _Investment: React.FC<Props> = ({
             accent
             label={
               <TooltipLabel
-                tooltipContent={t("program-details-page.tooltip.profit")}
-                labelText={t("asset-details.description.profit")}
+                tooltipContent={t("program-details-page:tooltip.profit")}
+                labelText={t("asset-details:description.profit")}
               />
             }
           >
@@ -83,7 +83,7 @@ const _Investment: React.FC<Props> = ({
               successFeePersonal !== undefined &&
               successFeePersonal !== null
             }
-            label={t("asset-details.description.successFee")}
+            label={t("asset-details:description.successFee")}
             accent
           >
             <NumberFormat
@@ -99,7 +99,7 @@ const _Investment: React.FC<Props> = ({
               managementFeePersonal !== undefined &&
               managementFeePersonal !== null
             }
-            label={t("asset-details.description.personal-management-fee")}
+            label={t("asset-details:description.personal-management-fee")}
             accent
           >
             <NumberFormat
@@ -115,7 +115,7 @@ const _Investment: React.FC<Props> = ({
               exitFeePersonal !== undefined &&
               exitFee !== exitFeePersonal
             }
-            label={t("asset-details.description.exitFee")}
+            label={t("asset-details:description.exitFee")}
             accent
           >
             <NumberFormat
@@ -132,7 +132,7 @@ const _Investment: React.FC<Props> = ({
                 tooltipContent={t(
                   `asset-details.tooltip.status.${asset.toLowerCase()}`
                 )}
-                labelText={t("asset-details.description.status")}
+                labelText={t("asset-details:description.status")}
               />
             }
           >
@@ -148,7 +148,7 @@ const _Investment: React.FC<Props> = ({
               personalDetails.pendingInput !== 0
             }
             accent
-            label={t("asset-details.description.pending-input")}
+            label={t("asset-details:description.pending-input")}
           >
             <NumberFormat
               value={formatCurrencyValue(
@@ -187,7 +187,7 @@ const _Investment: React.FC<Props> = ({
               personalDetails.pendingOutput !== 0
             }
             accent
-            label={t("asset-details.description.pending-output")}
+            label={t("asset-details:description.pending-output")}
           >
             {personalDetails.pendingOutputIsWithdrawAll ? (
               t("withdraw-program.withdrawing-all")

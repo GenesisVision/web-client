@@ -17,7 +17,7 @@ const _ClosePeriodButton: React.FC<{ id: string; onApply?: () => void }> = ({
   return (
     <>
       <TableCardActionsItem onClick={setClosePeriodOpen}>
-        {t("dashboard-page.trading.actions.close-period")}
+        {t("dashboard-page:trading.actions.close-period")}
       </TableCardActionsItem>
       <ConfirmClosePeriod
         open={isClosePeriodOpen}

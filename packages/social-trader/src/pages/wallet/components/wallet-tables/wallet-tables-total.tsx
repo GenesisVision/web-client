@@ -31,7 +31,7 @@ const _WalletTablesTotal: React.FC<Props> = ({ wallets }) => {
           value={TABS.WALLETS_TAB}
           label={
             <Link to={`${WALLET_TOTAL_PAGE_ROUTE}${TABS.WALLETS_TAB}`}>
-              {t("wallet-page.tabs.wallets")}
+              {t("wallet-page:tabs.wallets")}
             </Link>
           }
         />
@@ -42,7 +42,7 @@ const _WalletTablesTotal: React.FC<Props> = ({ wallets }) => {
               horizontal={HORIZONTAL_POPOVER_POS.LEFT}
               render={() => (
                 <TooltipContent>
-                  {t("wallet-page.tooltip.transactions")}
+                  {t("wallet-page:tooltip.transactions")}
                 </TooltipContent>
               )}
             >
@@ -51,7 +51,7 @@ const _WalletTablesTotal: React.FC<Props> = ({ wallets }) => {
                   `${WALLET_TOTAL_PAGE_ROUTE}${TABS.TRANSACTIONS_TAB}`
                 )}
               >
-                {t("wallet-page.tabs.transactions")}
+                {t("wallet-page:tabs.transactions")}
               </Link>
             </Tooltip>
           }
@@ -64,7 +64,7 @@ const _WalletTablesTotal: React.FC<Props> = ({ wallets }) => {
                 horizontal={HORIZONTAL_POPOVER_POS.LEFT}
                 render={() => (
                   <TooltipContent>
-                    {t("wallet-page.tooltip.deposit")}
+                    {t("wallet-page:tooltip.deposit")}
                   </TooltipContent>
                 )}
               >
@@ -73,14 +73,14 @@ const _WalletTablesTotal: React.FC<Props> = ({ wallets }) => {
                     `${WALLET_TOTAL_PAGE_ROUTE}${TABS.EXTERNAL_TAB}`
                   )}
                 >
-                  {t("wallet-page.tabs.deposit")}
+                  {t("wallet-page:tabs.deposit")}
                 </Link>
               </Tooltip>
               <Tooltip
                 horizontal={HORIZONTAL_POPOVER_POS.LEFT}
                 render={() => (
                   <TooltipContent>
-                    {t("wallet-page.tooltip.withdrawals")}
+                    {t("wallet-page:tooltip.withdrawals")}
                   </TooltipContent>
                 )}
               >
@@ -89,7 +89,7 @@ const _WalletTablesTotal: React.FC<Props> = ({ wallets }) => {
                     `${WALLET_TOTAL_PAGE_ROUTE}${TABS.EXTERNAL_TAB}`
                   )}
                 >
-                  {t("wallet-page.tabs.withdrawals")}
+                  {t("wallet-page:tabs.withdrawals")}
                 </Link>
               </Tooltip>
             </>

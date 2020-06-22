@@ -34,7 +34,7 @@ const _NavigationTabs: React.FC<Props> = ({
                 }).slice(0, -1)
               )}
             >
-              {t("funds-page.tabs.explore")}
+              {t("asset-list:tabs.explore")}
             </Link>
           }
         />
@@ -48,7 +48,7 @@ const _NavigationTabs: React.FC<Props> = ({
                 })
               )}
             >
-              {t("funds-page.tabs.favorites")}
+              {t("asset-list:tabs.favorites")}
             </Link>
           }
         />

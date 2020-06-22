@@ -15,7 +15,7 @@ const _ProgramSignalForm: React.FC<Props> = ({
   return (
     <>
       <DialogTop
-        title={t("dashboard-page.trading.actions.make-signal")}
+        title={t("dashboard-page:trading.actions.make-signal")}
         subtitle={programName}
       />
       <DialogBottom>

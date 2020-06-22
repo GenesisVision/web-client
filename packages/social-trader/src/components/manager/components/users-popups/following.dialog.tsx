@@ -32,7 +32,7 @@ export const FollowingDialog: React.FC<IFollowingDialogProps> = ({
         onChange={setIsChanged}
         request={() => getFollowing({ id })}
         onClick={onClose}
-        title={t("manager-page.following")}
+        title={t("manager-page:following")}
       />
     </Dialog>
   );

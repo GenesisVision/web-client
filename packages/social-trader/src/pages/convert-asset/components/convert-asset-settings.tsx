@@ -71,7 +71,7 @@ const _ConvertAssetSettings: React.FC<IConvertAssetSettingsProps> = props => {
   return (
     <HookForm form={form} onSubmit={onSubmit}>
       <SettingsBlock
-        label={t("create-account-page.settings.main-settings")}
+        label={t("create-account:settings.main-settings")}
         blockNumber={"01"}
       >
         {showDescriptionBlock && (
@@ -106,31 +106,31 @@ const _ConvertAssetSettings: React.FC<IConvertAssetSettingsProps> = props => {
       {showProgramFields && (
         <>
           <SettingsBlock
-            label={t("create-account-page.settings.fees-settings")}
+            label={t("create-account:settings.fees-settings")}
             blockNumber={"02"}
           >
             <FeesSettings
-              title={t("create-account-page.settings.investment-program-fees")}
-              firstFeeLabel={t("asset-settings.fields.management-fee")}
+              title={t("create-account:settings.investment-program-fees")}
+              firstFeeLabel={t("asset-settings:fields.management-fee")}
               firstFeeUnderText={t(
-                "create-account-page.settings.hints.management-fee"
+                "create-account:settings.hints.management-fee"
               )}
               firstFeeName={CONVERT_ASSET_FIELDS.entryFee}
               firstFeeDescription={t(
-                "create-account-page.settings.hints.management-fee-description"
+                "create-account:settings.hints.management-fee-description"
               )}
               secondFeeName={CONVERT_ASSET_FIELDS.successFee}
-              secondFeeLabel={t("asset-settings.fields.success-fee")}
+              secondFeeLabel={t("asset-settings:fields.success-fee")}
               secondFeeUnderText={t(
-                "create-account-page.settings.hints.success-fee"
+                "create-account:settings.hints.success-fee"
               )}
               secondFeeDescription={t(
-                "create-account-page.settings.hints.success-fee-description"
+                "create-account:settings.hints.success-fee-description"
               )}
             />
           </SettingsBlock>
           <SettingsBlock
-            label={t("asset-settings.fields.investment-limit")}
+            label={t("asset-settings:fields.investment-limit")}
             blockNumber={"03"}
           >
             <InvestmentLimitField
@@ -146,7 +146,7 @@ const _ConvertAssetSettings: React.FC<IConvertAssetSettingsProps> = props => {
       )}
       {showSignalFees && (
         <SettingsBlock
-          label={t("create-account-page.settings.signal-provider-fees")}
+          label={t("create-account:settings.signal-provider-fees")}
           blockNumber={"02"}
         >
           <SignalsFeeFormPartial

@@ -8,7 +8,7 @@ const _TransactionDetails: React.FC<Props> = ({ header, body, bottom }) => {
   return (
     <>
       <DialogTop
-        title={t(`wallet-page.transactions-details.title`)}
+        title={t(`wallet-page:transactions-details.title`)}
         subtitle={header}
       >
         {body}

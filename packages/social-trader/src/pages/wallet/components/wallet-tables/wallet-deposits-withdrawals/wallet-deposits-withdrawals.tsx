@@ -91,7 +91,7 @@ const _WalletDepositsWithdrawals: React.FC<Props> = ({
             styles[`wallet-deposits-withdrawals__cell--${column.name}`]
           )}
         >
-          {t(`wallet-page.deposits-withdrawals.${column.name}`)}
+          {t(`wallet-page:deposits-withdrawals.${column.name}`)}
         </span>
       )}
       renderBodyRow={renderBodyRow}

@@ -9,7 +9,7 @@ const _EmailConfirmFailure: React.FC<Props> = ({ errorMessage }) => {
   return (
     <div>
       <Row>
-        <Text muted>{t("auth.email-confirm.error-during-confirmation")}</Text>
+        <Text muted>{t("auth:email-confirm.error-during-confirmation")}</Text>
       </Row>
       <Row>
         <FormError error={errorMessage} />

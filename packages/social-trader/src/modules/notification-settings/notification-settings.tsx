@@ -18,11 +18,11 @@ const _NotificationSettings: React.FC<Props> = ({
   const notificationsGeneral = [
     {
       name: NOTIFICATIONS.PlatformNewsAndUpdates,
-      label: t("notifications-page.general.news-updates")
+      label: t("notifications-page:general.news-updates")
     },
     {
       name: NOTIFICATIONS.PlatformEmergency,
-      label: t("notifications-page.general.emergency")
+      label: t("notifications-page:general.emergency")
     }
   ];
   return (

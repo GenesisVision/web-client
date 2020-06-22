@@ -95,7 +95,7 @@ const _WalletTransactions: React.FC<Props> = ({
             styles[`wallet-transactions__cell--${column.name}`]
           )}
         >
-          {t(`wallet-page.transactions.${column.name}`)}
+          {t(`wallet-page:transactions.${column.name}`)}
         </span>
       )}
       renderBodyRow={renderBodyRow}

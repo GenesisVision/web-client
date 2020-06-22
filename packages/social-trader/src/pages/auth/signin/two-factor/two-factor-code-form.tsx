@@ -79,16 +79,16 @@ const _TwoFactorCodeForm: React.FC<Props> = ({
 
   return (
     <HookForm form={form} onSubmit={handleSubmit}>
-      <h3>{t("auth.login.two-factor.title")}</h3>
+      <h3>{t("auth:login.two-factor.title")}</h3>
       <Row>
-        <Text muted>{t("auth.login.two-factor.text")}</Text>
+        <Text muted>{t("auth:login.two-factor.text")}</Text>
       </Row>
       <Row xlarge>
         <GVHookFormField
           disabled={isSubmitting}
           type="tel"
           name={FIELDS.code}
-          label={t("auth.login.two-factor.input-label")}
+          label={t("auth:login.two-factor.input-label")}
           autoComplete="off"
           autoFocus
           component={SimpleTextField}
@@ -96,7 +96,7 @@ const _TwoFactorCodeForm: React.FC<Props> = ({
         />
       </Row>
       <Row large>
-        <Text muted>{t("auth.login.two-factor.recovery-info")}</Text>
+        <Text muted>{t("auth:login.two-factor.recovery-info")}</Text>
       </Row>
       <Row small>
         <GVButton noPadding variant="text">
@@ -104,7 +104,7 @@ const _TwoFactorCodeForm: React.FC<Props> = ({
             onClick={handleRecoveryClick}
             to={linkCreator(LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE)}
           >
-            {t("auth.login.two-factor.link-to-recovery")}
+            {t("auth:login.two-factor.link-to-recovery")}
           </Link>
         </GVButton>
       </Row>
@@ -121,7 +121,7 @@ const _TwoFactorCodeForm: React.FC<Props> = ({
           isSuccessful={requestStatus === CAPTCHA_STATUS.SUCCESS}
           disabled={requestStatus === CAPTCHA_STATUS.PENDING}
         >
-          {t("auth.login.two-factor.verify")}
+          {t("auth:login.two-factor.verify")}
         </SubmitButton>
       </Row>
     </HookForm>

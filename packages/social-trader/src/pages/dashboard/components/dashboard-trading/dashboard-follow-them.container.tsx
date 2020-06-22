@@ -23,7 +23,7 @@ const _DashboardFollowThemContainer: React.FC<Props> = () => {
     dispatch(fetchDashboardFollowThemAction());
   }, [currency]);
   return (
-    <DashboardBlock label={t("dashboard-page.trading.follow-them")}>
+    <DashboardBlock label={t("dashboard-page:trading.follow-them")}>
       <DashboardFollowThem
         loaderData={[]}
         data={data!}

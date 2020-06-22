@@ -6,7 +6,7 @@ const SignupEmailPending: React.FC<Props> = ({ sendConfirmationLink }) => {
   const [t] = useTranslation();
   return (
     <GVButton noPadding variant="text" onClick={sendConfirmationLink}>
-      {t("auth.signup-email-pending.resend-button-text")}
+      {t("auth:signup-email-pending.resend-button-text")}
     </GVButton>
   );
 };

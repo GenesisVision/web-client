@@ -47,7 +47,7 @@ const _NotifyButton: React.FC<Props> = ({
       <Tooltip
         render={() => (
           <TooltipContent>
-            {t("asset-details.description.notify-hint")}
+            {t("asset-details:description.notify-hint")}
           </TooltipContent>
         )}
       >

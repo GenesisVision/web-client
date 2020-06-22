@@ -31,8 +31,8 @@ const _WalletBalanceElements: React.FC<Props> = ({
           accent
           label={
             <TooltipLabel
-              tooltipContent={t("wallet-page.tooltip.total-balance")}
-              labelText={t("wallet-page.total-balance")}
+              tooltipContent={t("wallet-page:tooltip.total-balance")}
+              labelText={t("wallet-page:total-balance")}
             />
           }
           condition={total !== undefined}
@@ -49,28 +49,28 @@ const _WalletBalanceElements: React.FC<Props> = ({
           condition={available !== undefined}
           value={available!}
           total={total!}
-          label={t("wallet-page.available")}
+          label={t("wallet-page:available")}
           suffix={currency}
           color={$pieAvailableColor}
-          tooltipContentLabel={t("wallet-page.tooltip.available")}
+          tooltipContentLabel={t("wallet-page:tooltip.available")}
         />
         <PieStatisticItem
           condition={invested !== undefined}
           value={invested!}
           total={total!}
-          label={t("wallet-page.invested")}
+          label={t("wallet-page:invested")}
           suffix={currency}
           color={GVColors.$primaryColor}
-          tooltipContentLabel={t("wallet-page.tooltip.invested")}
+          tooltipContentLabel={t("wallet-page:tooltip.invested")}
         />
         <PieStatisticItem
           condition={pending !== undefined}
           value={pending!}
           total={total!}
-          label={t("wallet-page.trading")}
+          label={t("wallet-page:trading")}
           suffix={currency}
           color={$piePendingColor}
-          tooltipContentLabel={t("wallet-page.tooltip.trading")}
+          tooltipContentLabel={t("wallet-page:tooltip.trading")}
         />
       </StatisticItemList>
     </Row>

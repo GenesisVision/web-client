@@ -18,7 +18,7 @@ const _ClosePositionButton: React.FC<Props> = ({
   const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
   const { sendRequest, isPending: disabled, errorMessage } = useApiRequest({
     successMessage:
-      "program-details-page.copytrading-tables.close-trade-confirm.success-message",
+      "program-details-page:copytrading-tables.close-trade-confirm.success-message",
     request: closePosition(assetType),
     middleware: [
       () => {
@@ -43,10 +43,10 @@ const _ClosePositionButton: React.FC<Props> = ({
         onCancel={setClosePopup}
         onApply={handleApplyCancelRequest}
         header={t(
-          "program-details-page.copytrading-tables.close-trade-confirm.header"
+          "program-details-page:copytrading-tables.close-trade-confirm.header"
         )}
         body={t(
-          "program-details-page.copytrading-tables.close-trade-confirm.body",
+          "program-details-page:copytrading-tables.close-trade-confirm.body",
           {
             symbol,
             volume

@@ -25,8 +25,8 @@ const _FundDetailsStatisticsElements: React.FC<IFundDetailsStatisticsElementsPro
             <StatisticItem
               label={
                 <TooltipLabel
-                  tooltipContent={t("fund-details-page.tooltip.balance")}
-                  labelText={t("asset-details.statistics.balance")}
+                  tooltipContent={t("fund-details-page:tooltip.balance")}
+                  labelText={t("asset-details:statistics.balance")}
                 />
               }
               accent
@@ -44,8 +44,8 @@ const _FundDetailsStatisticsElements: React.FC<IFundDetailsStatisticsElementsPro
             <StatisticItem
               label={
                 <TooltipLabel
-                  tooltipContent={t("fund-details-page.tooltip.start-day")}
-                  labelText={t("asset-details.statistics.start-day")}
+                  tooltipContent={t("fund-details-page:tooltip.start-day")}
+                  labelText={t("asset-details:statistics.start-day")}
                 />
               }
             >
@@ -56,8 +56,8 @@ const _FundDetailsStatisticsElements: React.FC<IFundDetailsStatisticsElementsPro
             <StatisticItem
               label={
                 <TooltipLabel
-                  tooltipContent={t("fund-details-page.tooltip.investors")}
-                  labelText={t("asset-details.statistics.investors")}
+                  tooltipContent={t("fund-details-page:tooltip.investors")}
+                  labelText={t("asset-details:statistics.investors")}
                 />
               }
             >
@@ -76,8 +76,8 @@ const _FundDetailsStatisticsElements: React.FC<IFundDetailsStatisticsElementsPro
             <StatisticItem
               label={
                 <TooltipLabel
-                  tooltipContent={t("fund-details-page.tooltip.calmar-ratio")}
-                  labelText={t("asset-details.statistics.calmarRatio")}
+                  tooltipContent={t("fund-details-page:tooltip.calmar-ratio")}
+                  labelText={t("asset-details:statistics.calmarRatio")}
                 />
               }
               half
@@ -93,8 +93,8 @@ const _FundDetailsStatisticsElements: React.FC<IFundDetailsStatisticsElementsPro
             <StatisticItem
               label={
                 <TooltipLabel
-                  tooltipContent={t("fund-details-page.tooltip.profit-change")}
-                  labelText={t("asset-details.statistics.profit-change")}
+                  tooltipContent={t("fund-details-page:tooltip.profit-change")}
+                  labelText={t("asset-details:statistics.profit-change")}
                 />
               }
               half
@@ -113,8 +113,8 @@ const _FundDetailsStatisticsElements: React.FC<IFundDetailsStatisticsElementsPro
             <StatisticItem
               label={
                 <TooltipLabel
-                  tooltipContent={t("fund-details-page.tooltip.max-drawdown")}
-                  labelText={t("asset-details.statistics.max-drawdown")}
+                  tooltipContent={t("fund-details-page:tooltip.max-drawdown")}
+                  labelText={t("asset-details:statistics.max-drawdown")}
                 />
               }
               half
@@ -133,8 +133,8 @@ const _FundDetailsStatisticsElements: React.FC<IFundDetailsStatisticsElementsPro
             <StatisticItem
               label={
                 <TooltipLabel
-                  tooltipContent={t("fund-details-page.tooltip.sharpe-ratio")}
-                  labelText={t("asset-details.statistics.sharpe-ratio")}
+                  tooltipContent={t("fund-details-page:tooltip.sharpe-ratio")}
+                  labelText={t("asset-details:statistics.sharpe-ratio")}
                 />
               }
               half
@@ -151,8 +151,8 @@ const _FundDetailsStatisticsElements: React.FC<IFundDetailsStatisticsElementsPro
             <StatisticItem
               label={
                 <TooltipLabel
-                  tooltipContent={t("fund-details-page.tooltip.sortino-ratio")}
-                  labelText={t("asset-details.statistics.sortino-ratio")}
+                  tooltipContent={t("fund-details-page:tooltip.sortino-ratio")}
+                  labelText={t("asset-details:statistics.sortino-ratio")}
                 />
               }
               half

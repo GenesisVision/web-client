@@ -43,7 +43,7 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
         styles[`program-details-trades__cell--${name}`]
       )}
     >
-      {t(`program-details-page.history.financial-statistic.${name}`)}
+      {t(`program-details-page:history.financial-statistic.${name}`)}
     </span>
   );
   return (
@@ -76,7 +76,7 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
             render={() => (
               <TooltipContent>
                 {t(
-                  `program-details-page.history.financial-statistic.tooltips.${column.name}`
+                  `program-details-page:history.financial-statistic.tooltips.${column.name}`
                 )}
               </TooltipContent>
             )}

@@ -37,7 +37,7 @@ const _ProgramSubscriptions: React.FC<Props> = ({
         styles[`program-details-trades__cell--${name}`]
       )}
     >
-      {t(`program-details-page.history.subscriptions.${name}`)}
+      {t(`program-details-page:history.subscriptions.${name}`)}
     </span>
   );
   return (
@@ -52,7 +52,7 @@ const _ProgramSubscriptions: React.FC<Props> = ({
       ) => (
         <SelectFilter
           name={SUBSCRIBERS_STATUS_TYPE}
-          label={t("program-details-page.history.subscriptions.status")}
+          label={t("program-details-page:history.subscriptions.status")}
           value={filtering[SUBSCRIBERS_STATUS_TYPE] as SelectFilterType} //TODO fix filtering types
           values={ACTION_STATUS_FILTER_VALUES}
           onChange={updateFilter}
@@ -65,7 +65,7 @@ const _ProgramSubscriptions: React.FC<Props> = ({
             render={() => (
               <TooltipContent>
                 {t(
-                  `program-details-page.history.subscriptions.tooltips.${column.name}`
+                  `program-details-page:history.subscriptions.tooltips.${column.name}`
                 )}
               </TooltipContent>
             )}

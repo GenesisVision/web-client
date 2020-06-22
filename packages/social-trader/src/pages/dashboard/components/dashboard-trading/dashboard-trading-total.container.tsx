@@ -18,7 +18,7 @@ const _DashboardTradingTotalContainer: React.FC = () => {
     dispatch(fetchDashboardTradingTotalAction(currency));
   }, []);
   return (
-    <DashboardBlock label={t("dashboard-page.trading.title")}>
+    <DashboardBlock label={t("dashboard-page:trading.title")}>
       <DashboardTradingTotal
         currency={currency}
         loaderData={getTradingStatisticLoaderData()}

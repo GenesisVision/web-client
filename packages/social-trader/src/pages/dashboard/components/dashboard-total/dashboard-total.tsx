@@ -36,8 +36,8 @@ const _DashboardTotal: React.FC<Props> = ({
           big
           label={
             <TooltipLabel
-              tooltipContent={t("dashboard-page.tooltips.total.total-balance")}
-              labelText={t("dashboard-page.total.total")}
+              tooltipContent={t("dashboard-page:tooltips.total.total-balance")}
+              labelText={t("dashboard-page:total.total")}
             />
           }
           value={total}
@@ -46,24 +46,24 @@ const _DashboardTotal: React.FC<Props> = ({
         <PieStatisticItem
           suffix={currency}
           color={GVColors.$primaryColor}
-          tooltipContentLabel={t("dashboard-page.tooltips.total.invested")}
-          label={t("dashboard-page.total.invested")}
+          tooltipContentLabel={t("dashboard-page:tooltips.total.invested")}
+          label={t("dashboard-page:total.invested")}
           value={invested}
           total={total}
         />
         <PieStatisticItem
           suffix={currency}
           color={$piePendingColor}
-          tooltipContentLabel={t("dashboard-page.tooltips.total.trading")}
-          label={t("dashboard-page.total.pending")}
+          tooltipContentLabel={t("dashboard-page:tooltips.total.trading")}
+          label={t("dashboard-page:total.pending")}
           value={trading}
           total={total}
         />
         <PieStatisticItem
           suffix={currency}
           color={$pieAvailableColor}
-          tooltipContentLabel={t("dashboard-page.tooltips.total.wallet")}
-          label={t("dashboard-page.total.wallet")}
+          tooltipContentLabel={t("dashboard-page:tooltips.total.wallet")}
+          label={t("dashboard-page:total.wallet")}
           value={wallets}
           total={total}
         />
@@ -77,8 +77,8 @@ const _DashboardTotal: React.FC<Props> = ({
         <>
           <h5>
             <TooltipLabel
-              tooltipContent={t("dashboard-page.tooltips.total.performance")}
-              labelText={t("dashboard-page.total.performance")}
+              tooltipContent={t("dashboard-page:tooltips.total.performance")}
+              labelText={t("dashboard-page:total.performance")}
             />
           </h5>
           <Row small>

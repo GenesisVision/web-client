@@ -41,7 +41,7 @@ const _DashboardPublic: React.FC<Props> = () => {
         />
       }
       getItems={getItems}
-      title={t("dashboard-page.trading.public")}
+      title={t("dashboard-page:trading.public")}
       renderBodyCard={(
         asset: DashboardTradingAsset,
         updateRow,

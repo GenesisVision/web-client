@@ -33,8 +33,8 @@ const _ProgramDetailsStatisticsElements: React.FC<IProgramDetailsStatisticsEleme
           <StatisticItem
             label={
               <TooltipLabel
-                tooltipContent={t("program-details-page.tooltip.equity")}
-                labelText={t("asset-details.statistics.equity")}
+                tooltipContent={t("program-details-page:tooltip.equity")}
+                labelText={t("asset-details:statistics.equity")}
               />
             }
             accent
@@ -51,8 +51,8 @@ const _ProgramDetailsStatisticsElements: React.FC<IProgramDetailsStatisticsEleme
               half
               label={
                 <TooltipLabel
-                  tooltipContent={t("program-details-page.tooltip.investors")}
-                  labelText={t("asset-details.statistics.investors")}
+                  tooltipContent={t("program-details-page:tooltip.investors")}
+                  labelText={t("asset-details:statistics.investors")}
                 />
               }
             >
@@ -68,8 +68,8 @@ const _ProgramDetailsStatisticsElements: React.FC<IProgramDetailsStatisticsEleme
               half
               label={
                 <TooltipLabel
-                  tooltipContent={t("follow-details-page.tooltip.subscribers")}
-                  labelText={t("follow-details-page.statistics.subscribers")}
+                  tooltipContent={t("follow-details-page:tooltip.subscribers")}
+                  labelText={t("follow-details-page:statistics.subscribers")}
                 />
               }
             >
@@ -86,7 +86,7 @@ const _ProgramDetailsStatisticsElements: React.FC<IProgramDetailsStatisticsEleme
                 horizontal={HORIZONTAL_POPOVER_POS.LEFT}
                 render={() => (
                   <TooltipContent>
-                    {t("program-details-page.tooltip.period")}
+                    {t("program-details-page:tooltip.period")}
                   </TooltipContent>
                 )}
               >
@@ -96,7 +96,7 @@ const _ProgramDetailsStatisticsElements: React.FC<IProgramDetailsStatisticsEleme
                     styles["tooltip__label"]
                   )}
                 >
-                  <Text muted>{t("asset-details.statistics.period")}</Text>
+                  <Text muted>{t("asset-details:statistics.period")}</Text>
                 </span>
               </Tooltip>
               <Row small onlyOffset>
@@ -116,8 +116,8 @@ const _ProgramDetailsStatisticsElements: React.FC<IProgramDetailsStatisticsEleme
             <StatisticItem
               label={
                 <TooltipLabel
-                  tooltipContent={t("program-details-page.tooltip.trades")}
-                  labelText={t("asset-details.statistics.trades")}
+                  tooltipContent={t("program-details-page:tooltip.trades")}
+                  labelText={t("asset-details:statistics.trades")}
                 />
               }
               half
@@ -132,9 +132,9 @@ const _ProgramDetailsStatisticsElements: React.FC<IProgramDetailsStatisticsEleme
               label={
                 <TooltipLabel
                   tooltipContent={t(
-                    "program-details-page.tooltip.profit-factor"
+                    "program-details-page:tooltip.profit-factor"
                   )}
-                  labelText={t("asset-details.statistics.profit-factor")}
+                  labelText={t("asset-details:statistics.profit-factor")}
                 />
               }
               half
@@ -152,9 +152,9 @@ const _ProgramDetailsStatisticsElements: React.FC<IProgramDetailsStatisticsEleme
               label={
                 <TooltipLabel
                   tooltipContent={t(
-                    "program-details-page.tooltip.max-drawdown"
+                    "program-details-page:tooltip.max-drawdown"
                   )}
-                  labelText={t("asset-details.statistics.max-drawdown")}
+                  labelText={t("asset-details:statistics.max-drawdown")}
                 />
               }
               half
@@ -173,9 +173,9 @@ const _ProgramDetailsStatisticsElements: React.FC<IProgramDetailsStatisticsEleme
               label={
                 <TooltipLabel
                   tooltipContent={t(
-                    "asset-details.statistics.tooltip.trading-volume"
+                    "asset-details:statistics.tooltip.trading-volume"
                   )}
-                  labelText={t("asset-details.statistics.trading-volume")}
+                  labelText={t("asset-details:statistics.trading-volume")}
                 />
               }
               half
@@ -199,9 +199,9 @@ const _ProgramDetailsStatisticsElements: React.FC<IProgramDetailsStatisticsEleme
               label={
                 <TooltipLabel
                   tooltipContent={t(
-                    "program-details-page.tooltip.success-trades"
+                    "program-details-page:tooltip.success-trades"
                   )}
-                  labelText={t("asset-details.statistics.success-trades")}
+                  labelText={t("asset-details:statistics.success-trades")}
                 />
               }
               half
@@ -220,9 +220,9 @@ const _ProgramDetailsStatisticsElements: React.FC<IProgramDetailsStatisticsEleme
               label={
                 <TooltipLabel
                   tooltipContent={t(
-                    "program-details-page.tooltip.sharpe-ratio"
+                    "program-details-page:tooltip.sharpe-ratio"
                   )}
-                  labelText={t("asset-details.statistics.sharpe-ratio")}
+                  labelText={t("asset-details:statistics.sharpe-ratio")}
                 />
               }
               half
@@ -240,9 +240,9 @@ const _ProgramDetailsStatisticsElements: React.FC<IProgramDetailsStatisticsEleme
               label={
                 <TooltipLabel
                   tooltipContent={t(
-                    "program-details-page.tooltip.sortino-ratio"
+                    "program-details-page:tooltip.sortino-ratio"
                   )}
-                  labelText={t("asset-details.statistics.sortino-ratio")}
+                  labelText={t("asset-details:statistics.sortino-ratio")}
                 />
               }
               half

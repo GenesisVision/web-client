@@ -28,16 +28,16 @@ const _TwoFactor: React.FC<Props> = ({
     <div>
       <GVTextField
         name="2fa"
-        label={t("2fa-page.profile-page.type")}
+        label={t("profile-page:2fa-page.type")}
         value={twoFactorEnabled ? TYPE_2FA.GOOGLE : TYPE_2FA.DISABLE}
         onChange={handleChange}
         InputComponent={Select}
       >
         <option value={TYPE_2FA.DISABLE}>
-          {t("2fa-page.profile-page.none")}
+          {t("profile-page:2fa-page.none")}
         </option>
         <option value={TYPE_2FA.GOOGLE}>
-          {t("2fa-page.profile-page.google")}
+          {t("profile-page:2fa-page.google")}
         </option>
       </GVTextField>
       <Row>

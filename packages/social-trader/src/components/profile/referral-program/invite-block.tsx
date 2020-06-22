@@ -19,15 +19,15 @@ const _InviteBlock: React.FC<{ data: ProfileFullViewModel }> = ({
   return (
     <div>
       <Row>
-        <h4>{t("profile-page.referral-program.title")}</h4>
+        <h4>{t("profile-page:referral-program.title")}</h4>
       </Row>
       <Row className={styles["referral-program__link-block"]}>
-        {t("profile-page.referral-program.referral-link")}
+        {t("profile-page:referral-program.referral-link")}
         <div className={styles["referral-program__link"]}>{refUrl}</div>
         <CopyButton value={refUrl} />
       </Row>
       <Row onlyOffset className={styles["referral-program__share-block"]}>
-        {t("profile-page.referral-program.share-your-passion")}
+        {t("profile-page:referral-program.share-your-passion")}
         {refUrl && (
           <ShareBlock
             userName={userName}

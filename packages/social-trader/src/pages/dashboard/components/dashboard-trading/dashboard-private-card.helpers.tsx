@@ -51,7 +51,7 @@ export const MakeProgramButton: React.FC<{
     });
     const makeProgramLink =
       makeProgramLinkProp || linkCreator(makeProgramLinkMethod(id));
-    const label = t("dashboard-page.trading.actions.make-program");
+    const label = t("dashboard-page:trading.actions.make-program");
     return isEnoughMoney ? (
       <TableCardActionsItem to={makeProgramLink} onClick={clearAnchor}>
         {label}
@@ -63,7 +63,7 @@ export const MakeProgramButton: React.FC<{
             content={label}
             vertical={VERTICAL_POPOVER_POS.BOTTOM}
             tooltipContent={t(
-              "dashboard-page.trading.tooltips.is-not-enough-money",
+              "dashboard-page:trading.tooltips.is-not-enough-money",
               { value: necessaryMoney }
             )}
           />
@@ -82,7 +82,7 @@ export const ConfirmTFAButton: React.FC<{
   return (
     <>
       <TableCardActionsItem onClick={setOpen}>
-        {t("asset-settings.buttons.two-factor-confirm")}
+        {t("asset-settings:buttons.two-factor-confirm")}
       </TableCardActionsItem>
       <ConfirmContainer
         open={isOpen}

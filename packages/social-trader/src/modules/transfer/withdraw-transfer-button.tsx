@@ -25,7 +25,7 @@ const _WithdrawTransferButton: React.FC<Props> = props => {
       size={size}
       label={t("buttons.withdraw")}
       title={t("transfer.withdraw-from", {
-        title: t(`dashboard-page.trading.asset-types.${accountType}`)
+        title: t(`dashboard-page:trading.asset-types.${accountType}`)
       })}
       currentItemContainer={TRANSFER_CONTAINER.SOURCE}
       sourceType={accountType as InternalTransferRequestType}

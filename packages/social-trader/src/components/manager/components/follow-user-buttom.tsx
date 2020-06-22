@@ -32,8 +32,8 @@ const _FollowUserButton: React.FC<Props> = ({
       disabled={isPending || disabled}
     >
       {innerValue
-        ? t("manager-page.unfollow-user")
-        : t("manager-page.follow-user")}
+        ? t("manager-page:unfollow-user")
+        : t("manager-page:follow-user")}
     </GVButton>
   );
 };

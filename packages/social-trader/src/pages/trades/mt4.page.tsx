@@ -6,7 +6,7 @@ import styles from "./trades.module.scss";
 
 const _Mt4: React.FC = () => {
   const [t] = useTranslation();
-  const title = t("mt4-page.title");
+  const title = t("mt4-page:title");
   return (
     <Page showTitle title={title}>
       <div className={styles["mt-frame"]}>

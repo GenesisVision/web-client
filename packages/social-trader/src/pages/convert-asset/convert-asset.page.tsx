@@ -13,7 +13,7 @@ const _ConvertAssetPage: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   const title = t(
-    `convert-page.convert-${fromTo.assetFrom.toLowerCase()}-to-${fromTo.assetTo.toLowerCase()}`
+    `convert-page:convert-${fromTo.assetFrom.toLowerCase()}-to-${fromTo.assetTo.toLowerCase()}`
   );
   return (
     <Page showTitle title={title}>

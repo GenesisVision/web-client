@@ -11,7 +11,7 @@ const _SignUpPage: React.FC<Props> = props => {
   return (
     <PageSeoWrapper
       description={"Sign up to the Genesis Vision"}
-      title={t("auth.signup.title")}
+      title={t("auth:signup.title")}
     >
       <SignupContainer {...props} />
     </PageSeoWrapper>

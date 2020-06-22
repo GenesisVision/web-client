@@ -21,7 +21,7 @@ const _Reallocation: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   const { errorMessage, sendRequest } = useApiRequest({
-    successMessage: "asset-settings.reallocate.success-alert-message",
+    successMessage: "asset-settings:reallocate.success-alert-message",
     middleware: [postponeCallback(onApply)],
     request: args => updateAssets(args)
   });
@@ -32,7 +32,7 @@ const _Reallocation: React.FC<Props> = ({
     [id]
   );
   return (
-    <SettingsBlock label={t("fund-settings.reallocation.title")}>
+    <SettingsBlock label={t("fund-settings:reallocation.title")}>
       <ReallocateForm
         condition={!!fundAssets.length}
         availableReallocationPercents={availableReallocationPercents}

@@ -25,23 +25,23 @@ const _VerificationStatus: React.FC<IStatusProps & WithTranslation> = ({
   let type, value;
   if (checked) {
     type = CHIP_TYPE.POSITIVE;
-    value = t("profile-page.verification-status.verified");
+    value = t("profile-page:verification-status.verified");
   } else {
     switch (verificationStatus) {
       case VERIFICATION_STATUS.VERIFIED:
-        value = t("profile-page.verification-status.verified");
+        value = t("profile-page:verification-status.verified");
         type = CHIP_TYPE.POSITIVE;
         break;
       case VERIFICATION_STATUS.UNDER_REVIEW:
-        value = t("profile-page.verification-status.under-review");
+        value = t("profile-page:verification-status.under-review");
         type = CHIP_TYPE.WARNING;
         break;
       case VERIFICATION_STATUS.REJECTERD:
-        value = t("profile-page.verification-status.rejected");
+        value = t("profile-page:verification-status.rejected");
         type = CHIP_TYPE.NEGATIVE;
         break;
       default:
-        value = t("profile-page.verification-status.not-verified");
+        value = t("profile-page:verification-status.not-verified");
     }
   }
 

@@ -24,7 +24,7 @@ const _ManagerInfo: React.FC<Props> = ({ profile }) => {
   const betaTester = useSelector(betaTesterSelector);
   const isBetaTester = isSocialBetaTester(betaTester);
   const [t] = useTranslation();
-  const memberSince = `${t("manager-page.member-since")} ${localizedDate(
+  const memberSince = `${t("manager-page:member-since")} ${localizedDate(
     regDate
   )}`;
 
@@ -52,7 +52,7 @@ const _ManagerInfo: React.FC<Props> = ({ profile }) => {
           {!!socialLinks?.length && (
             <Row large onlyOffset>
               <Row>
-                <h3>{t("manager-page.social-links")}</h3>
+                <h3>{t("manager-page:social-links")}</h3>
               </Row>
               <Row>
                 <SocialLinksBlock socialLinks={socialLinks} />
@@ -62,7 +62,7 @@ const _ManagerInfo: React.FC<Props> = ({ profile }) => {
           {!!about?.length && (
             <Row large onlyOffset>
               <Row>
-                <h3>{t("manager-page.about")}</h3>
+                <h3>{t("manager-page:about")}</h3>
               </Row>
               <Row
                 className={classNames(styles["manager-info__about"], {

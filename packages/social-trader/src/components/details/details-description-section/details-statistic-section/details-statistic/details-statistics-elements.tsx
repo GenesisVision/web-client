@@ -17,7 +17,7 @@ const _DetailsStatisticsElements: React.FC<Props> = ({
   return (
     <>
       <Row onlyOffset>
-        <h5>{t("asset-details.statistics.current")}</h5>
+        <h5>{t("asset-details:statistics.current")}</h5>
         <Row
           wrap
           className={classNames(
@@ -30,7 +30,7 @@ const _DetailsStatisticsElements: React.FC<Props> = ({
       </Row>
       <Row large onlyOffset>
         <h5>
-          {t("asset-details.statistics.for")}{" "}
+          {t("asset-details:statistics.for")}{" "}
           {t(`chart-period.${ChartPeriodType[periodType]}`)}
         </h5>
         <Row

@@ -26,12 +26,12 @@ const _DashboardPage: React.FC = () => {
     fetchOnMount: true
   });
   const [t] = useTranslation();
-  const title = t(`dashboard-page.title`);
+  const title = t(`dashboard-page:title`);
   const notNewUser = !useSelector(isNewUserSelector);
   return (
     <Page title={title}>
       <div>
-        <DashboardTotalContainer label={t("dashboard-page.total.title")} />
+        <DashboardTotalContainer label={t("dashboard-page:total.title")} />
       </div>
       {!!requestCount && requestCount > 0 && (
         <div>

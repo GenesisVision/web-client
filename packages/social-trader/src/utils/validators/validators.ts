@@ -33,11 +33,11 @@ export const passwordValidator = (t: TFunction) =>
   string()
     .min(
       6,
-      t("auth.password-restore.validators.password-is-short", {
+      t("auth:password-restore.validators.password-is-short", {
         count: 6
       })
     )
-    .required(t("auth.password-restore.validators.password-required"));
+    .required(t("auth:password-restore.validators.password-required"));
 
 export const ethGvtWalletValidator = string().matches(
   /^0x[a-fA-F0-9]{40}$/,

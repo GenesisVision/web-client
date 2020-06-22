@@ -25,7 +25,7 @@ const _PasswordChange: React.FC = () => {
   };
   const { errorMessage, sendRequest } = useApiRequest({
     middleware: [successMiddleware],
-    successMessage: "auth.password-change.success-alert",
+    successMessage: "auth:password-change.success-alert",
     request: changePassword
   });
   const [t] = useTranslation();
@@ -38,7 +38,7 @@ const _PasswordChange: React.FC = () => {
     <>
       {!isOpen && (
         <GVButton onClick={setIsOpen}>
-          {t("profile-page.settings.change-password")}
+          {t("profile-page:settings.change-password")}
         </GVButton>
       )}
       {isOpen && (

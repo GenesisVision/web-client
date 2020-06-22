@@ -11,10 +11,10 @@ const ProgramAutoJoinTooltip = () => {
   const [t] = useTranslation();
   return (
     <div>
-      {t("program-details-page.tooltip.auto-join.text")}
+      {t("program-details-page:tooltip.auto-join.text")}
       <ul>
-        <li>{t("program-details-page.tooltip.auto-join.li-1")}</li>
-        <li>{t("program-details-page.tooltip.auto-join.li-2")}</li>
+        <li>{t("program-details-page:tooltip.auto-join.li-1")}</li>
+        <li>{t("program-details-page:tooltip.auto-join.li-2")}</li>
       </ul>
     </div>
   );
@@ -47,7 +47,7 @@ const _ProgramAutoJoin: React.FC<Props> = ({
         label={
           <TooltipLabel
             tooltipContent={<ProgramAutoJoinTooltip />}
-            labelText={t("asset-details.description.auto-join")}
+            labelText={t("asset-details:description.auto-join")}
             pointer
           />
         }

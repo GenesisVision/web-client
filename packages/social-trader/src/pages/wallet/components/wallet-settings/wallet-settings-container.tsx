@@ -12,7 +12,7 @@ const _WalletSettingsContainer: React.FC<Props> = ({
   return (
     <>
       <TextWithQuestion
-        label={t("wallet-page.settings.label", {
+        label={t("wallet-page:settings.label", {
           percent: genesisMarketsDiscountPercent
         })}
         onClickHelp={setOpenGVTFees}

@@ -76,7 +76,7 @@ const _AttachAccountSettings: React.FC<Props> = ({
   return (
     <HookForm form={form} onSubmit={validateAndSubmit}>
       <SettingsBlock
-        label={t("attach-account-page.settings.exchange")}
+        label={t("attach-account-page:settings.exchange")}
         blockNumber={"01"}
       >
         <Center>
@@ -102,7 +102,7 @@ const _AttachAccountSettings: React.FC<Props> = ({
               wide
               name={ATTACH_ACCOUNT_FIELDS.brokerAccountTypeId}
               component={GVTextField}
-              label={t("asset-settings.fields.account-type")}
+              label={t("asset-settings:fields.account-type")}
               InputComponent={Select}
               disableIfSingle
             >
@@ -116,7 +116,7 @@ const _AttachAccountSettings: React.FC<Props> = ({
         </Center>
       </SettingsBlock>
       <SettingsBlock
-        label={t("attach-account-page.settings.api")}
+        label={t("attach-account-page:settings.api")}
         blockNumber={"02"}
       >
         <Row wide>
@@ -126,7 +126,7 @@ const _AttachAccountSettings: React.FC<Props> = ({
             className={styles["attach-account-settings__api-field"]}
             type="text"
             name={ATTACH_ACCOUNT_FIELDS.key}
-            label={t("asset-settings.fields.api-key")}
+            label={t("asset-settings:fields.api-key")}
             autoComplete="off"
             component={SimpleTextField}
           />
@@ -138,7 +138,7 @@ const _AttachAccountSettings: React.FC<Props> = ({
             className={styles["attach-account-settings__api-field"]}
             type="text"
             name={ATTACH_ACCOUNT_FIELDS.secret}
-            label={t("asset-settings.fields.api-secret")}
+            label={t("asset-settings:fields.api-secret")}
             autoComplete="off"
             component={SimpleTextField}
           />

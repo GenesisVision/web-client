@@ -6,7 +6,7 @@ const _EmailPending: React.FC<Props> = ({ onSubmit, email }) => {
   const [t] = useTranslation();
   return (
     <GVButton noPadding variant="text" onClick={() => onSubmit({ email })}>
-      {t("auth.password-restore.email-pending.email-resend-button-text")}
+      {t("auth:password-restore.email-pending.email-resend-button-text")}
     </GVButton>
   );
 };

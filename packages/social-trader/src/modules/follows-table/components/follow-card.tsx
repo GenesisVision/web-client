@@ -88,7 +88,7 @@ const _FollowCard: React.FC<Props> = ({
             label={
               <TooltipLabel
                 tooltipContent={t(
-                  "dashboard-page.tooltips.trading.subscribers"
+                  "dashboard-page:tooltips.trading.subscribers"
                 )}
                 labelText={t("header-fields.subscribers")}
               />
@@ -105,7 +105,7 @@ const _FollowCard: React.FC<Props> = ({
           <StatisticItem
             label={
               <TooltipLabel
-                tooltipContent={t("dashboard-page.tooltips.trading.trades")}
+                tooltipContent={t("dashboard-page:tooltips.trading.trades")}
                 labelText={t("header-fields.trades")}
               />
             }
@@ -121,7 +121,7 @@ const _FollowCard: React.FC<Props> = ({
           <StatisticItem
             label={
               <TooltipLabel
-                tooltipContent={t("dashboard-page.tooltips.investing.ddown")}
+                tooltipContent={t("dashboard-page:tooltips.investing.ddown")}
                 labelText={t("header-fields.drawdown")}
               />
             }

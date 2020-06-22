@@ -21,7 +21,7 @@ const _ManagerHistorySection: React.FC<Props> = ({
         <Row onlyOffset>
           <DefaultTableBlock wide>
             <ManagerPrograms
-              title={t("manager-page.history.tabs.programs")}
+              title={t("manager-page:history.tabs.programs")}
               ownerId={id}
             />
           </DefaultTableBlock>
@@ -31,7 +31,7 @@ const _ManagerHistorySection: React.FC<Props> = ({
         <Row onlyOffset>
           <DefaultTableBlock wide>
             <ManagerFollow
-              title={t("manager-page.history.tabs.follow")}
+              title={t("manager-page:history.tabs.follow")}
               ownerId={id}
             />
           </DefaultTableBlock>
@@ -41,7 +41,7 @@ const _ManagerHistorySection: React.FC<Props> = ({
         <Row onlyOffset>
           <DefaultTableBlock wide>
             <ManagerFunds
-              title={t("manager-page.history.tabs.funds")}
+              title={t("manager-page:history.tabs.funds")}
               ownerId={id}
             />
           </DefaultTableBlock>

@@ -27,10 +27,10 @@ const _RestorePassword: React.FC<Props> = ({ errorMessage, onSubmit }) => {
       [FIELDS.confirmPassword]: string()
         .oneOf(
           [ref(FIELDS.password)],
-          t("auth.password-restore.validators.password-dont-match")
+          t("auth:password-restore.validators.password-dont-match")
         )
         .required(
-          t("auth.password-restore.validators.confirm-password-required")
+          t("auth:password-restore.validators.confirm-password-required")
         )
     }),
     mode: "onChange"
@@ -43,7 +43,7 @@ const _RestorePassword: React.FC<Props> = ({ errorMessage, onSubmit }) => {
         showCorrect
         type="password"
         name={FIELDS.password}
-        label={t("auth.password-restore.new-password.password-field-text")}
+        label={t("auth:password-restore.new-password.password-field-text")}
         component={SimpleTextField}
       />
       <Row onlyOffset>
@@ -53,7 +53,7 @@ const _RestorePassword: React.FC<Props> = ({ errorMessage, onSubmit }) => {
           type="password"
           name={FIELDS.confirmPassword}
           label={t(
-            "auth.password-restore.new-password.password-confirm-field-text"
+            "auth:password-restore.new-password.password-confirm-field-text"
           )}
           component={SimpleTextField}
         />
@@ -65,7 +65,7 @@ const _RestorePassword: React.FC<Props> = ({ errorMessage, onSubmit }) => {
       )}
       <Row xlarge>
         <SubmitButton id="passwordRestoreSubmit" isSuccessful={!errorMessage}>
-          {t("auth.password-restore.new-password.confirm-button-text")}
+          {t("auth:password-restore.new-password.confirm-button-text")}
         </SubmitButton>
       </Row>
     </HookForm>

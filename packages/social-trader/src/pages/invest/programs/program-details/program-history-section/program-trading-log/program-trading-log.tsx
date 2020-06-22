@@ -28,7 +28,7 @@ const _ProgramTradingLog: React.FC<Props> = ({ getItems, dataSelector }) => {
             styles[`program-details-trades__cell--${column.name}`]
           )}
         >
-          {t(`program-details-page.history.trading-log.${column.name}`)}
+          {t(`program-details-page:history.trading-log.${column.name}`)}
         </span>
       )}
       renderBodyRow={trade => <ProgramTradingLogRow trade={trade} />}

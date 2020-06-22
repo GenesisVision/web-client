@@ -102,7 +102,7 @@ const _LevelCalculatorPopup: React.FC<Props> = ({
     <div>
       <Center className={styles["level-calculator-popup__header"]}>
         <h2 className={styles["level-calculator-popup__heading"]}>
-          {t("program-details-page.level-calculator.title")}
+          {t("program-details-page:level-calculator.title")}
         </h2>
         <Center>
           <RowItem>
@@ -132,7 +132,7 @@ const _LevelCalculatorPopup: React.FC<Props> = ({
 
       <div className={styles["level-calculator-popup__program-name"]}>
         <div className={styles["level-calculator-popup__program-label"]}>
-          {t("program-details-page.level-calculator.program")}
+          {t("program-details-page:level-calculator.program")}
         </div>
         <div className={styles["level-calculator-popup__program-title"]}>
           {title}
@@ -145,9 +145,9 @@ const _LevelCalculatorPopup: React.FC<Props> = ({
           valueClassName={
             styles["level-calculator-popup__calculator-slider-value"]
           }
-          title={t("program-details-page.level-calculator.genesis-ratio")}
+          title={t("program-details-page:level-calculator.genesis-ratio")}
           tooltipContent={t(
-            "program-details-page.level-calculator.genesis-ratio-tooltip"
+            "program-details-page:level-calculator.genesis-ratio-tooltip"
           )}
           value={genesisRatio}
           editableValue
@@ -162,9 +162,9 @@ const _LevelCalculatorPopup: React.FC<Props> = ({
           valueClassName={
             styles["level-calculator-popup__calculator-slider-value"]
           }
-          title={t("program-details-page.level-calculator.age")}
+          title={t("program-details-page:level-calculator.age")}
           tooltipContent={t(
-            "program-details-page.level-calculator.age-tooltip"
+            "program-details-page:level-calculator.age-tooltip"
           )}
           value={programAge}
           editableValue
@@ -187,10 +187,10 @@ const _LevelCalculatorPopup: React.FC<Props> = ({
             styles["level-calculator-popup__calculator-slider-value"]
           }
           title={t(
-            "program-details-page.level-calculator.weighted-volume-scale"
+            "program-details-page:level-calculator.weighted-volume-scale"
           )}
           tooltipContent={t(
-            "program-details-page.level-calculator.weighted-volume-scale-tooltip"
+            "program-details-page:level-calculator.weighted-volume-scale-tooltip"
           )}
           value={weightedVolumeScale}
           editableValue
@@ -202,9 +202,9 @@ const _LevelCalculatorPopup: React.FC<Props> = ({
         <CalculatorLogarithmicSlider
           name="managerBalance"
           className={styles["level-calculator-popup__calculator-slider"]}
-          title={t("program-details-page.level-calculator.manager-balance")}
+          title={t("program-details-page:level-calculator.manager-balance")}
           tooltipContent={t(
-            "program-details-page.level-calculator.manager-balance-tooltip"
+            "program-details-page:level-calculator.manager-balance-tooltip"
           )}
           value={+formatValue(managerBalance, 2)}
           valueAdornment={` ${currency}`}
@@ -217,10 +217,10 @@ const _LevelCalculatorPopup: React.FC<Props> = ({
         <CalculatorOutput
           className={styles["level-calculator-popup__statistic-item"]}
           label={t(
-            "program-details-page.level-calculator.current-av-to-invest"
+            "program-details-page:level-calculator.current-av-to-invest"
           )}
           tooltipContent={t(
-            "program-details-page.level-calculator.current-av-to-invest-tooltip"
+            "program-details-page:level-calculator.current-av-to-invest-tooltip"
           )}
           value={
             <NumberFormat
@@ -238,10 +238,10 @@ const _LevelCalculatorPopup: React.FC<Props> = ({
         <CalculatorOutput
           className={styles["level-calculator-popup__statistic-item"]}
           label={t(
-            "program-details-page.level-calculator.current-investment-scale"
+            "program-details-page:level-calculator.current-investment-scale"
           )}
           tooltipContent={t(
-            "program-details-page.level-calculator.current-investment-scale-tooltip"
+            "program-details-page:level-calculator.current-investment-scale-tooltip"
           )}
           value={
             <NumberFormat
@@ -252,9 +252,9 @@ const _LevelCalculatorPopup: React.FC<Props> = ({
         />
         <CalculatorOutput
           className={styles["level-calculator-popup__statistic-item"]}
-          label={t("program-details-page.level-calculator.new-av-to-invest")}
+          label={t("program-details-page:level-calculator.new-av-to-invest")}
           tooltipContent={t(
-            "program-details-page.level-calculator.new-av-to-invest-tooltip"
+            "program-details-page:level-calculator.new-av-to-invest-tooltip"
           )}
           value={
             <NumberFormat
@@ -268,10 +268,10 @@ const _LevelCalculatorPopup: React.FC<Props> = ({
         <CalculatorOutput
           className={styles["level-calculator-popup__statistic-item"]}
           label={t(
-            "program-details-page.level-calculator.new-investment-scale"
+            "program-details-page:level-calculator.new-investment-scale"
           )}
           tooltipContent={t(
-            "program-details-page.level-calculator.new-investment-scale-tooltip"
+            "program-details-page:level-calculator.new-investment-scale-tooltip"
           )}
           value={
             <NumberFormat
@@ -293,7 +293,7 @@ const _LevelCalculatorPopup: React.FC<Props> = ({
         <>
           <div className={styles["level-calculator-popup__kyc-disclaimer"]}>
             <Text muted size={"small"}>
-              {t("program-details-page.level-calculator.kyc-disclaimer")}
+              {t("program-details-page:level-calculator.kyc-disclaimer")}
             </Text>
           </div>
           <Link

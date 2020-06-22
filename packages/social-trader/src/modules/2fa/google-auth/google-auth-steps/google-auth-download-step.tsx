@@ -15,7 +15,7 @@ export const GoogleStep1: React.FC<WithTranslation> = ({ t }) => (
   <div className={styles["google-auth__step"]}>
     <div className={styles["google-auth__count"]}>01</div>
     <div className={styles["google-auth__title"]}>
-      {t("2fa-page.profile-page.download-app")}
+      {t("profile-page:2fa-page.download-app")}
     </div>
     <a
       title={"link to android market"}

@@ -11,24 +11,24 @@ const passwordValidator = ({ t }: WithT) => {
     .min(
       8,
       t(
-        "asset-settings.password-change-trading-account.validators.password-is-short"
+        "asset-settings:password-change-trading-account.validators.password-is-short"
       )
     )
     .max(
       32,
       t(
-        "asset-settings.password-change-trading-account.validators.password-is-long"
+        "asset-settings:password-change-trading-account.validators.password-is-long"
       )
     )
     .matches(
       /^(?=.*[a-zA-Z])[a-zA-Z0-9]+$/,
       t(
-        "asset-settings.password-change-trading-account.validators.password-weak"
+        "asset-settings:password-change-trading-account.validators.password-weak"
       )
     )
     .required(
       t(
-        "asset-settings.password-change-trading-account.validators.password-required"
+        "asset-settings:password-change-trading-account.validators.password-required"
       )
     );
 };
@@ -47,12 +47,12 @@ export const ChangePasswordTradingAccountValidationSchema = ({
       .oneOf(
         [ref("password")],
         t(
-          "asset-settings.password-change-trading-account.validators.password-dont-match"
+          "asset-settings:password-change-trading-account.validators.password-dont-match"
         )
       )
       .required(
         t(
-          "asset-settings.password-change-trading-account.validators.confirm-password-required"
+          "asset-settings:password-change-trading-account.validators.confirm-password-required"
         )
       )
   });

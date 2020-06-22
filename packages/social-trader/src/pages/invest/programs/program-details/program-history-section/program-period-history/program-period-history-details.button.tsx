@@ -55,7 +55,7 @@ const ProgramPeriodHistoryPopup: React.FC<ProgramPeriodHistoryPopupProps> = ({
         <ProgramPeriodHistoryPopupItem
           condition={!!period.investorsDeposit}
           label={t(
-            "program-details-page.history.period-history.investors-deposit"
+            "program-details-page:history.period-history.investors-deposit"
           )}
           value={period.investorsDeposit}
           currency={currency}
@@ -63,7 +63,7 @@ const ProgramPeriodHistoryPopup: React.FC<ProgramPeriodHistoryPopupProps> = ({
         <ProgramPeriodHistoryPopupItem
           condition={!!period.investorsWithdraw}
           label={t(
-            "program-details-page.history.period-history.investors-withdraw"
+            "program-details-page:history.period-history.investors-withdraw"
           )}
           value={period.investorsWithdraw}
           currency={currency}
@@ -71,7 +71,7 @@ const ProgramPeriodHistoryPopup: React.FC<ProgramPeriodHistoryPopupProps> = ({
         <ProgramPeriodHistoryPopupItem
           condition={!!period.managerDeposit}
           label={t(
-            "program-details-page.history.period-history.manager-deposit"
+            "program-details-page:history.period-history.manager-deposit"
           )}
           value={period.managerDeposit}
           currency={currency}
@@ -79,7 +79,7 @@ const ProgramPeriodHistoryPopup: React.FC<ProgramPeriodHistoryPopupProps> = ({
         <ProgramPeriodHistoryPopupItem
           condition={!!period.managerWithdraw}
           label={t(
-            "program-details-page.history.period-history.manager-withdraw"
+            "program-details-page:history.period-history.manager-withdraw"
           )}
           value={period.managerWithdraw}
           currency={currency}
@@ -87,7 +87,7 @@ const ProgramPeriodHistoryPopup: React.FC<ProgramPeriodHistoryPopupProps> = ({
         <ProgramPeriodHistoryPopupItem
           condition={!!period.investorsProfitWithdraw}
           label={t(
-            "program-details-page.history.period-history.investors-profit-withdraw"
+            "program-details-page:history.period-history.investors-profit-withdraw"
           )}
           value={period.investorsProfitWithdraw}
           currency={currency}
@@ -95,7 +95,7 @@ const ProgramPeriodHistoryPopup: React.FC<ProgramPeriodHistoryPopupProps> = ({
         <ProgramPeriodHistoryPopupItem
           condition={!!period.platformSuccessFee}
           label={t(
-            "program-details-page.history.period-history.platform-success-fee"
+            "program-details-page:history.period-history.platform-success-fee"
           )}
           value={period.platformSuccessFee}
           currency={currency}
@@ -103,7 +103,7 @@ const ProgramPeriodHistoryPopup: React.FC<ProgramPeriodHistoryPopupProps> = ({
         <ProgramPeriodHistoryPopupItem
           condition={!!period.managerCommissionRebate}
           label={t(
-            "program-details-page.history.period-history.manager-commission-rebate"
+            "program-details-page:history.period-history.manager-commission-rebate"
           )}
           value={period.managerCommissionRebate}
           currency={currency}
@@ -128,7 +128,7 @@ const _ProgramPeriodHistoryDetailsButton: React.FC<IProgramPeriodHistoryDetailsB
   return (
     <>
       <GVButton size={GV_BTN_SIZE.SMALL} color="secondary" onClick={setAnchor}>
-        {t("program-details-page.history.my-history.details")}
+        {t("program-details-page:history.my-history.details")}
       </GVButton>
       <ProgramPeriodHistoryPopup
         period={period}

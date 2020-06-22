@@ -31,7 +31,7 @@ const _DashboardInvestingMostProfitableContainer: React.FC = () => {
     );
   }, [currency]);
   return (
-    <DashboardBlock label={t("dashboard-page.investing.most-profitable")}>
+    <DashboardBlock label={t("dashboard-page:investing.most-profitable")}>
       <DashboardInvestingMostProfitable
         onApply={handleUpdateItems}
         data={data!}

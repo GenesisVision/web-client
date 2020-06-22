@@ -36,7 +36,7 @@ const _FollowCreateExternalAccount: React.FC<CreateAccountFormProps> = ({
             wide
             type="text"
             name={CREATE_EXTERNAL_ACCOUNT_FORM_FIELDS.key}
-            label={t("asset-settings.fields.api-key")}
+            label={t("asset-settings:fields.api-key")}
             autoComplete="off"
             component={SimpleTextField}
           />
@@ -46,7 +46,7 @@ const _FollowCreateExternalAccount: React.FC<CreateAccountFormProps> = ({
             wide
             type="text"
             name={CREATE_EXTERNAL_ACCOUNT_FORM_FIELDS.secret}
-            label={t("asset-settings.fields.api-secret")}
+            label={t("asset-settings:fields.api-secret")}
             autoComplete="off"
             component={SimpleTextField}
           />

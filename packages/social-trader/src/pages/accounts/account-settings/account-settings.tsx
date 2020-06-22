@@ -19,7 +19,7 @@ const _AccountSettings: React.FC<Props> = ({ details, closeProgram }) => {
         id={details.id}
       />
       <CloseAssetBlock
-        label={t("asset-settings.close-program.title")}
+        label={t("asset-settings:close-program.title")}
         asset={CLOSEABLE_ASSET.TRADING_ACCOUNT}
         canCloseAsset={details.ownerActions.canClose}
         id={details.id}

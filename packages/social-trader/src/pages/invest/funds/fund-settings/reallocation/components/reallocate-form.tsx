@@ -75,11 +75,11 @@ const _ReallocateForm: React.FC<Props> = ({
   return (
     <HookForm resetOnSuccess form={form}>
       <FormTextField>
-        {t("fund-settings.reallocation.text-1")}
+        {t("fund-settings:reallocation.text-1")}
         {availableReallocationPercents}%
       </FormTextField>
       <Row>
-        <FormTextField>{t("fund-settings.reallocation.text-2")}</FormTextField>
+        <FormTextField>{t("fund-settings:reallocation.text-2")}</FormTextField>
       </Row>
       {dirty && !equalWithCurrent && (
         <Row wide>
@@ -107,7 +107,7 @@ const _ReallocateForm: React.FC<Props> = ({
         </Row>
       )}
       <Row>
-        <FormTextField>{t("fund-settings.reallocation.text-3")}</FormTextField>
+        <FormTextField>{t("fund-settings:reallocation.text-3")}</FormTextField>
       </Row>
       <Row large>
         <GVButton
@@ -116,7 +116,7 @@ const _ReallocateForm: React.FC<Props> = ({
           disabled={disabled}
           onClick={setIsOpenConfirm}
         >
-          {t("fund-settings.buttons.reallocation")}
+          {t("fund-settings:buttons.reallocation")}
         </GVButton>
       </Row>
       <ConfirmReallocate

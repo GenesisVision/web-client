@@ -36,11 +36,11 @@ const _FundsWeeklyContainer: React.FC = () => {
   );
   return (
     <Page
-      description={`${t("funds-page.title")} ${t(
-        `facets.${FUNDS_WEEKLY_FACET_NAME}`
+      description={`${t("funds-page:title")} ${t(
+        `asset-list:facets.${FUNDS_WEEKLY_FACET_NAME}`
       )} facet list`}
-      title={`${t("funds-page.title")} ${t(
-        `facets.${FUNDS_WEEKLY_FACET_NAME}`
+      title={`${t("funds-page:title")} ${t(
+        `asset-list:facets.${FUNDS_WEEKLY_FACET_NAME}`
       )}`}
     >
       <FundsWeeklyHeader />
@@ -50,7 +50,7 @@ const _FundsWeeklyContainer: React.FC = () => {
             updateRow={getFundsChallengeWinner}
             loaderCount={1}
             showSwitchView={false}
-            title={t("asset-list.facets.texts.last-week-challenge-winner")}
+            title={t("asset-list:facets.texts.last-week-challenge-winner")}
             data={data}
           />
         </DefaultTableBlock>
@@ -59,7 +59,7 @@ const _FundsWeeklyContainer: React.FC = () => {
         <DefaultTableBlock wide>
           <FacetContainer
             initCurrency={MAPPING_INIT_CURRENCY}
-            title={t("asset-list.facets.texts.all-funds")}
+            title={t("asset-list:facets.texts.all-funds")}
             id={FUNDS_WEEKLY_FACET_NAME}
             asset={FACET_ASSET.FUNDS}
             TableContainer={FundsFacetTable}

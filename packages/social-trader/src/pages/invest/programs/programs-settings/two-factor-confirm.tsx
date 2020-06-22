@@ -19,13 +19,13 @@ const _TwoFactorConfirm: React.FC<Props> = ({ id }) => {
     setClose();
   }, []);
   return (
-    <SettingsBlock label={t("asset-settings.two-factor-confirm.title")}>
+    <SettingsBlock label={t("asset-settings:two-factor-confirm.title")}>
       <FormTextField>
-        {t("asset-settings.two-factor-confirm.text")}
+        {t("asset-settings:two-factor-confirm.text")}
       </FormTextField>
       <Row large wide>
         <GVButton color="primary" onClick={setOpen}>
-          {t("asset-settings.buttons.two-factor-confirm")}
+          {t("asset-settings:buttons.two-factor-confirm")}
         </GVButton>
       </Row>
       <ConfirmContainer

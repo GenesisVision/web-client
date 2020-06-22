@@ -42,7 +42,7 @@ const _DashboardTradingTable: React.FC<Props> = ({
         ) => (
           <SelectFilter
             name={ACTION_STATUS_FILTER_NAME}
-            label={t(`dashboard-page.actions-status-filter.label`)}
+            label={t(`dashboard-page:actions-status-filter.label`)}
             value={filtering[ACTION_STATUS_FILTER_NAME] as SelectFilterType} //TODO fix filtering types
             values={ACTION_STATUS_FILTER_VALUES}
             onChange={updateFilter}

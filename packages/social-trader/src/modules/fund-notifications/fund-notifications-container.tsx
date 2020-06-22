@@ -13,11 +13,11 @@ const _FundNotificationsContainer: React.FC<Props> = ({ id }) => {
     general: [
       {
         name: NOTIFICATIONS.FundNewsAndUpdates,
-        label: t("notifications-page.fund.general.news-updates")
+        label: t("notifications-page:fund.general.news-updates")
       },
       {
         name: NOTIFICATIONS.FundRebalancing,
-        label: t("notifications-page.fund.general.fund-rebalancing")
+        label: t("notifications-page:fund.general.fund-rebalancing")
       }
     ],
     custom: false

@@ -16,5 +16,5 @@ export const LPReferralProgram: NextPage = () => {
 };
 
 LPReferralProgram.getInitialProps = async () => ({
-  namespacesRequired: ["landing-page"]
+  namespacesRequired: ["referral-program", "landing-page"]
 });

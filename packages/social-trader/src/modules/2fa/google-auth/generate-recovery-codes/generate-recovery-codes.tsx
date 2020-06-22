@@ -24,7 +24,7 @@ const _GenerateRecoveryCode: React.FC<Props> = ({ disabled }) => {
   return (
     <div>
       <GVButton noPadding variant="text" type="button" onClick={setOpenPopup}>
-        {t("2fa-page.profile-page.codes.generate-recovery-codes")}
+        {t("profile-page:2fa-page.codes.generate-recovery-codes")}
       </GVButton>
       <Dialog open={isOpenPopup} onClose={setClosePopup}>
         {data ? (

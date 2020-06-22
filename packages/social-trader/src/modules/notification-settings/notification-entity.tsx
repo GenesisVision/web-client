@@ -21,7 +21,7 @@ const _NotificationEntity: React.FC<Props> = ({
   const { linkCreator } = useToLink();
   return (
     <Row className={styles["notification-entity"]} wide>
-      <Link to={linkCreator(href, pathname, t("notifications-page.title"))}>
+      <Link to={linkCreator(href, pathname, t("notifications-page:title"))}>
         <AssetAvatarWithName
           levelColor={"#131e26"}
           levelProgress={levelProgress}

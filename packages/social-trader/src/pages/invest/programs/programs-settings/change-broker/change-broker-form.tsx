@@ -134,7 +134,7 @@ const _ChangeBrokerForm: React.FC<Props> = ({
           <GVHookFormField
             name={CHANGE_BROKER_FORM_FIELDS.brokerAccountTypeId}
             component={SimpleTextField}
-            label={t("asset-settings.fields.account-type")}
+            label={t("asset-settings:fields.account-type")}
             InputComponent={Select}
             disableIfSingle
             onChange={changeAccount}
@@ -152,7 +152,7 @@ const _ChangeBrokerForm: React.FC<Props> = ({
             disabled={currentAccountTypeId === brokerAccountTypeId}
             name={CHANGE_BROKER_FORM_FIELDS.leverage}
             component={SimpleTextField}
-            label={t("asset-settings.fields.brokers-leverage")}
+            label={t("asset-settings:fields.brokers-leverage")}
             InputComponent={Select}
             disableIfSingle
           >
@@ -170,7 +170,7 @@ const _ChangeBrokerForm: React.FC<Props> = ({
         isSignalProgram={isSignalProgram}
       />
       <Row>
-        <FormTextField>{t("asset-settings.broker.text-change")}</FormTextField>
+        <FormTextField>{t("asset-settings:broker.text-change")}</FormTextField>
       </Row>
       <Row large>
         <GVButton
@@ -184,7 +184,7 @@ const _ChangeBrokerForm: React.FC<Props> = ({
             isSubmitting
           }
         >
-          {t("asset-settings.buttons.change-broker")}
+          {t("asset-settings:buttons.change-broker")}
         </GVButton>
       </Row>
       <ConfirmChangeBroker

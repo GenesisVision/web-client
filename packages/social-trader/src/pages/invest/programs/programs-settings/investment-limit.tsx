@@ -58,7 +58,7 @@ const _InvestmentLimit: React.FC<Props> = ({
   );
 
   return (
-    <SettingsBlock label={t("asset-settings.fields.investment-limit")}>
+    <SettingsBlock label={t("asset-settings:fields.investment-limit")}>
       <HookForm resetOnSuccess form={form} onSubmit={handleSubmit}>
         <InvestmentLimitField
           wide={false}
@@ -70,7 +70,7 @@ const _InvestmentLimit: React.FC<Props> = ({
         />
         <Row large>
           <SubmitButton isSuccessful={!editError}>
-            {t("asset-settings.buttons.save")}
+            {t("asset-settings:buttons.save")}
           </SubmitButton>
         </Row>
       </HookForm>

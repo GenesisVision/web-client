@@ -20,7 +20,7 @@ Page.getInitialProps = async ctx => {
 };
 
 export default withAuthLayout({
-  titleKey: "auth.password-restore.title",
+  titleKey: "auth:password-restore.title",
   footerAuthRoute: SIGNUP_ROUTE,
   Footer: LoginFooter
 })(Page);

@@ -11,7 +11,7 @@ export const _LineDepositButton: React.FC<Props> = ({ disabled, currency }) => {
   const [t] = useTranslation();
   return (
     <>
-      <LineWalletButton title={t("wallet-page.buttons.deposit")}>
+      <LineWalletButton title={t("wallet-page:buttons.deposit")}>
         <WalletDeposit
           disabled={disabled}
           currency={currency}

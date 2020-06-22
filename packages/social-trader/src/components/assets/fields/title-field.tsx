@@ -13,9 +13,9 @@ const _TitleField: React.FC<Props> = ({ name }) => {
         wide
         type="text"
         name={name}
-        label={t("asset-settings.fields.name")}
+        label={t("asset-settings:fields.name")}
         component={SimpleTextField}
-        caption={t("asset-settings.fields.name-requirements")}
+        caption={t("asset-settings:fields.name-requirements")}
       />
     </AssetField>
   );

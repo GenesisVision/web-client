@@ -58,7 +58,7 @@ describe("Program details - Page markup", () => {
       const { currency } = details!.tradingAccountInfo;
       const testValue = currency;
       const pageValue = await getStatisticsItemValue(
-        "asset-details.description.currency"
+        "asset-details:description.currency"
       );
       expect(pageValue).toBe(testValue);
     });
@@ -67,7 +67,7 @@ describe("Program details - Page markup", () => {
       const { leverageMin, leverageMax } = details!.tradingAccountInfo;
       const testValue = `${leverageMin}:${leverageMax}`;
       const pageValue = await getStatisticsItemValue(
-        "asset-details.description.leverage"
+        "asset-details:description.leverage"
       );
       expect(pageValue).toBe(testValue);
     });
@@ -76,7 +76,7 @@ describe("Program details - Page markup", () => {
       const { periodStarts, periodEnds } = details!.programDetails;
       const testValue = distanceDate(periodStarts, periodEnds);
       const pageValue = await getStatisticsItemValue(
-        "asset-details.description.period"
+        "asset-details:description.period"
       );
       expect(pageValue).toBe(testValue);
     });
@@ -85,7 +85,7 @@ describe("Program details - Page markup", () => {
       const { ageDays } = details!.programDetails;
       const testValue = `${ageDays} days`;
       const pageValue = await getStatisticsItemValue(
-        "asset-details.description.age"
+        "asset-details:description.age"
       );
       expect(pageValue).toBe(testValue);
     });
@@ -94,7 +94,7 @@ describe("Program details - Page markup", () => {
       const { genesisRatio } = details!.programDetails;
       const testValue = String(genesisRatio);
       const pageValue = await getStatisticsItemValue(
-        "asset-details.description.genesis-ratio"
+        "asset-details:description.genesis-ratio"
       );
       expect(pageValue).toBe(testValue);
     });
@@ -103,7 +103,7 @@ describe("Program details - Page markup", () => {
       const { investmentScale } = details!.programDetails;
       const testValue = String(investmentScale);
       const pageValue = await getStatisticsItemValue(
-        "asset-details.description.investment-scale"
+        "asset-details:description.investment-scale"
       );
       expect(pageValue).toBe(testValue);
     });
@@ -112,7 +112,7 @@ describe("Program details - Page markup", () => {
       const { volumeScale } = details!.programDetails;
       const testValue = String(volumeScale);
       const pageValue = await getStatisticsItemValue(
-        "asset-details.description.volume-scale"
+        "asset-details:description.volume-scale"
       );
       expect(pageValue).toBe(testValue);
     });
@@ -125,7 +125,7 @@ describe("Program details - Page markup", () => {
         details!.tradingAccountInfo.currency
       }`;
       const pageValue = await getStatisticsItemValue(
-        "asset-details.statistics.equity"
+        "asset-details:statistics.equity"
       );
       expect(pageValue).toBe(testValue);
     });
@@ -134,7 +134,7 @@ describe("Program details - Page markup", () => {
       const { investors } = statistic!.statistic;
       const testValue = String(investors);
       const pageValue = await getStatisticsItemValue(
-        "asset-details.statistics.investors"
+        "asset-details:statistics.investors"
       );
       expect(pageValue).toBe(testValue);
     });
@@ -143,7 +143,7 @@ describe("Program details - Page markup", () => {
       const { trades } = statistic!.statistic;
       const testValue = String(trades);
       const pageValue = await getStatisticsItemValue(
-        "asset-details.statistics.trades"
+        "asset-details:statistics.trades"
       );
       expect(pageValue).toBe(testValue);
     });
@@ -152,7 +152,7 @@ describe("Program details - Page markup", () => {
       const { profitFactor } = statistic!.statistic;
       const testValue = String(profitFactor);
       const pageValue = await getStatisticsItemValue(
-        "asset-details.statistics.profit-factor"
+        "asset-details:statistics.profit-factor"
       );
       expect(pageValue).toBe(testValue);
     });
@@ -161,7 +161,7 @@ describe("Program details - Page markup", () => {
       const { maxDrawdown } = statistic!.statistic;
       const testValue = `${formatValue(maxDrawdown, 2)}%`;
       const pageValue = await getStatisticsItemValue(
-        "asset-details.statistics.max-drawdown"
+        "asset-details:statistics.max-drawdown"
       );
       expect(pageValue).toBe(testValue);
     });
@@ -170,7 +170,7 @@ describe("Program details - Page markup", () => {
       const { successTradesPercent } = statistic!.statistic;
       const testValue = `${successTradesPercent}%`;
       const pageValue = await getStatisticsItemValue(
-        "asset-details.statistics.success-trades"
+        "asset-details:statistics.success-trades"
       );
       expect(pageValue).toBe(testValue);
     });
@@ -181,7 +181,7 @@ describe("Program details - Page markup", () => {
         details!.tradingAccountInfo.currency
       }`;
       const pageValue = await getStatisticsItemValue(
-        "asset-details.statistics.trading-volume"
+        "asset-details:statistics.trading-volume"
       );
       expect(pageValue).toBe(testValue);
     });
@@ -190,7 +190,7 @@ describe("Program details - Page markup", () => {
       const { sharpeRatio } = statistic!.statistic;
       const testValue = formatValue(sharpeRatio, 2);
       const pageValue = await getStatisticsItemValue(
-        "asset-details.statistics.sharpe-ratio"
+        "asset-details:statistics.sharpe-ratio"
       );
       expect(pageValue).toBe(testValue);
     });
@@ -199,7 +199,7 @@ describe("Program details - Page markup", () => {
       const { sortinoRatio } = statistic!.statistic;
       const testValue = formatValue(sortinoRatio, 2);
       const pageValue = await getStatisticsItemValue(
-        "asset-details.statistics.sortino-ratio"
+        "asset-details:statistics.sortino-ratio"
       );
       expect(pageValue).toBe(testValue);
     });
@@ -211,7 +211,7 @@ describe("Program details - Page markup", () => {
         statisticCurrency
       )} %`;
       const pageValue = await getStatisticsItemValue(
-        "asset-details.chart.percent"
+        "asset-details:chart.percent"
       );
       expect(pageValue).toBe(testValue);
     });

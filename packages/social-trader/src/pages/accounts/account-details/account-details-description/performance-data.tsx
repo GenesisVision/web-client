@@ -17,17 +17,17 @@ const _PerformanceData: React.FC<Props> = ({
     <DetailsPerformanceData>
       <StatisticItem
         condition={!!leverage}
-        label={t("asset-details.description.leverage")}
+        label={t("asset-details:description.leverage")}
       >
         {leverage}
       </StatisticItem>
       <StatisticItem
         condition={!!currency}
-        label={t("asset-details.description.currency")}
+        label={t("asset-details:description.currency")}
       >
         {currency}
       </StatisticItem>
-      <StatisticItem label={t("asset-details.description.creation-date")}>
+      <StatisticItem label={t("asset-details:description.creation-date")}>
         {formatDate(creationDate)}
       </StatisticItem>
     </DetailsPerformanceData>

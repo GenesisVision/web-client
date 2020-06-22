@@ -14,13 +14,13 @@ const GoogleStep2: React.FC<Props> = ({
   <div className={classNames(styles["google-auth__step"], className)}>
     <div className={styles["google-auth__count"]}>02</div>
     <div className={styles["google-auth__title"]}>
-      {t("2fa-page.profile-page.scan-code")}
+      {t("profile-page:2fa-page.scan-code")}
     </div>
     <div className={styles["google-auth__qr"]}>
       <GVqr value={authenticatorUri} />
     </div>
     <p className={styles["google-auth__alt-text"]}>
-      {t("2fa-page.profile-page.alt-code")}
+      {t("profile-page:2fa-page.alt-code")}
     </p>
     <div className={styles["google-auth__alt-code"]}>{sharedKey}</div>
   </div>

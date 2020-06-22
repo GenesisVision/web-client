@@ -87,7 +87,7 @@ const _CreateAccountSettings: React.FC<Props> = ({
   return (
     <HookForm form={form} onSubmit={validateAndSubmit}>
       <SettingsBlock
-        label={t("create-account-page.settings.main-settings")}
+        label={t("create-account:settings.main-settings")}
         blockNumber={"01"}
       >
         <AssetFields>

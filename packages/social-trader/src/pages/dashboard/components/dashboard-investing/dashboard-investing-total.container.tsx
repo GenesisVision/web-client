@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 const _DashboardInvestingTotalContainer: React.FC = () => {
   const [t] = useTranslation();
-  const title = t("dashboard-page.investing.title");
+  const title = t("dashboard-page:investing.title");
   const dispatch = useDispatch();
   const currency = useAccountCurrency();
   const data = useSelector(dashboardInvestmentsTotalSelector);

@@ -25,7 +25,7 @@ const _GenerateRecoveryForm: React.FC<Props> = ({ errorMessage, onSubmit }) => {
     },
     validationSchema: object().shape({
       [FIELDS.password]: string().required(
-        t("2fa-page.profile-page.password-required")
+        t("profile-page:2fa-page.password-required")
       )
     }),
     mode: "onChange"
@@ -34,7 +34,7 @@ const _GenerateRecoveryForm: React.FC<Props> = ({ errorMessage, onSubmit }) => {
   return (
     <>
       <DialogTop
-        title={t("2fa-page.profile-page.codes.generate-recovery-codes")}
+        title={t("profile-page:2fa-page.codes.generate-recovery-codes")}
       />
       <DialogBottom>
         <HookForm form={form} onSubmit={onSubmit}>
@@ -42,7 +42,7 @@ const _GenerateRecoveryForm: React.FC<Props> = ({ errorMessage, onSubmit }) => {
             wide
             name={FIELDS.password}
             type="password"
-            label={t("2fa-page.profile-page.password")}
+            label={t("profile-page:2fa-page.password")}
             component={SimpleTextField}
             autoComplete="new-password"
           />

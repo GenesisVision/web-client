@@ -29,7 +29,7 @@ const _UnFollowButton: React.FC<Props> = ({
         variant="outlined"
         onClick={setIsOpenUnFollow}
       >
-        {t("asset-details.description.unfollow")}
+        {t("asset-details:description.unfollow")}
       </GVButton>
       <UnfollowContainer
         tradingAccountId={tradingAccountId}

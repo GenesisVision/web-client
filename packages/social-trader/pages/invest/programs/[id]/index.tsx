@@ -26,7 +26,13 @@ Page.getInitialProps = async ctx => {
     } = res.value as ProgramFollowDetailsFull;
     ctx.reduxStore.dispatch(statisticCurrencyAction(currency));
   });
-  return { namespacesRequired: ["asset-details", "about-levels-page"] };
+  return {
+    namespacesRequired: [
+      "asset-details",
+      "program-details-page",
+      "about-levels-page"
+    ]
+  };
 };
 
 export default compose(withDefaultLayout)(Page);
