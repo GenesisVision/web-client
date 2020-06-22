@@ -30,7 +30,7 @@ export const LPFundCardTable: React.FC<ILPFundCardTableProps> = ({
     <>
       <LPTableCardTable wrap>
         <LPTableCardTableColumn>
-          <StatisticItem label={t("funds-page.funds-header.balance")}>
+          <StatisticItem label={t("header-fields.balance")}>
             <NumberFormat
               value={formatCurrencyValue(amount, currency)}
               suffix={` ${currency}`}
@@ -39,7 +39,7 @@ export const LPFundCardTable: React.FC<ILPFundCardTableProps> = ({
           </StatisticItem>
         </LPTableCardTableColumn>
         <LPTableCardTableColumn>
-          <StatisticItem label={t("funds-page.funds-header.investors")}>
+          <StatisticItem label={t("header-fields.investors")}>
             <NumberFormat
               value={investorsCount}
               displayType="text"
@@ -48,7 +48,7 @@ export const LPFundCardTable: React.FC<ILPFundCardTableProps> = ({
           </StatisticItem>
         </LPTableCardTableColumn>
         <LPTableCardTableColumn>
-          <StatisticItem label={t("funds-page.funds-header.drawdown")}>
+          <StatisticItem label={t("header-fields.drawdown")}>
             <NumberFormat
               value={formatValue(drawdown, 2)}
               displayType="text"

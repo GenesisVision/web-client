@@ -50,7 +50,7 @@ const _LPProgramCard: React.FC<Props> = ({ program, className }) => {
     >
       <LPTableCardTable>
         <LPTableCardTableColumn>
-          <StatisticItemInner label={t("programs-page.programs-header.equity")}>
+          <StatisticItemInner label={t("header-fields.equity")}>
             <NumberFormat
               value={formatValueDifferentDecimalScale(
                 program.balance.amount,
@@ -61,9 +61,7 @@ const _LPProgramCard: React.FC<Props> = ({ program, className }) => {
               displayType="text"
             />
           </StatisticItemInner>
-          <StatisticItemInner
-            label={t("programs-page.programs-header.available-to-invest")}
-          >
+          <StatisticItemInner label={t("header-fields.available-to-invest")}>
             <NumberFormat
               value={formatValueDifferentDecimalScale(
                 program.availableToInvest,
@@ -76,16 +74,14 @@ const _LPProgramCard: React.FC<Props> = ({ program, className }) => {
           </StatisticItemInner>
         </LPTableCardTableColumn>
         <LPTableCardTableColumn>
-          <StatisticItemInner
-            label={t("programs-page.programs-header.investors")}
-          >
+          <StatisticItemInner label={t("header-fields.investors")}>
             <NumberFormat
               value={program.investorsCount}
               displayType="text"
               decimalScale={0}
             />
           </StatisticItemInner>
-          <StatisticItemInner label={t("programs-page.programs-header.period")}>
+          <StatisticItemInner label={t("header-fields.period")}>
             <ProgramPeriodPie
               start={program.periodStarts}
               end={program.periodEnds}
@@ -93,12 +89,10 @@ const _LPProgramCard: React.FC<Props> = ({ program, className }) => {
           </StatisticItemInner>
         </LPTableCardTableColumn>
         <LPTableCardTableColumn>
-          <StatisticItemInner label={t("programs-page.programs-header.age")}>
+          <StatisticItemInner label={t("header-fields.age")}>
             {convertDateToShortFormat(distanceDate(program.creationDate))}
           </StatisticItemInner>
-          <StatisticItemInner
-            label={t("programs-page.programs-header.drawdown")}
-          >
+          <StatisticItemInner label={t("header-fields.drawdown")}>
             <NumberFormat
               value={formatValue(program.statistic.drawdown, 2)}
               displayType="text"

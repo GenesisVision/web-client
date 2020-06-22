@@ -50,7 +50,7 @@ const _ProgramShort: React.FC<Props> = ({ program, className }) => {
       <TableCardTitle url={linkProps}>{program.title}</TableCardTitle>
       <StatisticItem
         className={styles["program-short__balance"]}
-        label={t("programs-page.programs-header.equity")}
+        label={t("header-fields.equity")}
       >
         <NumberFormat
           value={formatValueDifferentDecimalScale(

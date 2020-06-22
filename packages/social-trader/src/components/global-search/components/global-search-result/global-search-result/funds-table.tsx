@@ -22,7 +22,7 @@ const FundsTable: React.FC<SearchTableProps<FundDetailsListItemItemsViewModel> &
             styles[`funds-table__cell--${column.name}`]
           )}
         >
-          {t(`funds-page.funds-header.${column.name}`)}
+          {t(`header-fields.${column.name}`)}
         </span>
       )}
       renderBodyRow={fund => <FundsTableRow fund={fund} />}

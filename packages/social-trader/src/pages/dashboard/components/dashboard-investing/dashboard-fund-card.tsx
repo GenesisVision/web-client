@@ -71,7 +71,7 @@ const _DashboardFundCard: React.FC<Props> = ({
         drawdown={fund.statistic.drawdown}
         topFundAssets={fund.topFundAssets}
         totalAssetsCount={fund.totalAssetsCount}
-        amountTitle={t("funds-page.funds-header.value")}
+        amountTitle={t("header-fields.value")}
       />
       <DepositWithdrawButtons
         title={fund.title}

@@ -22,7 +22,7 @@ const _FollowTableHeaderCell: React.FC<{ column: SortingColumn }> = ({
         styles[`programs-table__cell--${column.name}`]
       )}
     >
-      {t(`follows-page.header.${column.name}`)}
+      {t(`header-fields.${column.name}`)}
     </span>
   );
   return column.tooltip ? (

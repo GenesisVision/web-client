@@ -56,7 +56,7 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
                   tooltipContent={t(
                     "dashboard-page.tooltips.private-card.equity"
                   )}
-                  labelText={t("programs-page.programs-header.equity")}
+                  labelText={t("header-fields.equity")}
                 />
               }
             >

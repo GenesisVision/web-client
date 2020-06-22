@@ -83,8 +83,8 @@ const _DashboardPublicCard: React.FC<Props> = ({
   const totalAssetsCount = fundDetails && fundDetails.totalAssetsCount;
   const amountTitle =
     asset.assetType === "Fund"
-      ? t("funds-page.funds-header.value")
-      : t("programs-page.programs-header.equity");
+      ? t("header-fields.value")
+      : t("header-fields.equity");
   const amountTooltip =
     asset.assetType === "Fund"
       ? t("dashboard-page.tooltips.trading.equity-fund")

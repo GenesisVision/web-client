@@ -19,7 +19,7 @@ const _FundsTableHeaderCell: React.FC<Props> = ({ column }) => {
   if (!isAuthenticated && column.name === "favorite") return null;
   const renderCell = () => (
     <span className={styles["funds-table__cell"]}>
-      {t(`funds-page.funds-header.${column.name}`)}
+      {t(`header-fields.${column.name}`)}
     </span>
   );
   return column.tooltip ? (

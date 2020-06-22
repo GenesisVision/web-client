@@ -87,7 +87,7 @@ const _ProgramCard: React.FC<Props> = ({ program }) => {
               label={
                 <TooltipLabel
                   tooltipContent={t("programs-page.tooltips.equity")}
-                  labelText={t("programs-page.programs-header.equity")}
+                  labelText={t("header-fields.equity")}
                 />
               }
             >
@@ -109,9 +109,7 @@ const _ProgramCard: React.FC<Props> = ({ program }) => {
                   tooltipContent={t(
                     "programs-page.tooltips.available-to-invest"
                   )}
-                  labelText={t(
-                    "programs-page.programs-header.available-to-invest"
-                  )}
+                  labelText={t("header-fields.available-to-invest")}
                 />
               }
             >
@@ -133,7 +131,7 @@ const _ProgramCard: React.FC<Props> = ({ program }) => {
               label={
                 <TooltipLabel
                   tooltipContent={t("programs-page.tooltips.investors")}
-                  labelText={t("programs-page.programs-header.investors")}
+                  labelText={t("header-fields.investors")}
                 />
               }
             >
@@ -149,7 +147,7 @@ const _ProgramCard: React.FC<Props> = ({ program }) => {
               label={
                 <TooltipLabel
                   tooltipContent={t("programs-page.tooltips.period")}
-                  labelText={t("programs-page.programs-header.period")}
+                  labelText={t("header-fields.period")}
                 />
               }
             >
@@ -166,7 +164,7 @@ const _ProgramCard: React.FC<Props> = ({ program }) => {
               label={
                 <TooltipLabel
                   tooltipContent={t("programs-page.tooltips.age")}
-                  labelText={t("programs-page.programs-header.age")}
+                  labelText={t("header-fields.age")}
                 />
               }
             >
@@ -178,7 +176,7 @@ const _ProgramCard: React.FC<Props> = ({ program }) => {
               label={
                 <TooltipLabel
                   tooltipContent={t("programs-page.tooltips.drawdown")}
-                  labelText={t("programs-page.programs-header.drawdown")}
+                  labelText={t("header-fields.drawdown")}
                 />
               }
             >

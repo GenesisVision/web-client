@@ -90,7 +90,7 @@ const _FollowCard: React.FC<Props> = ({
                 tooltipContent={t(
                   "dashboard-page.tooltips.trading.subscribers"
                 )}
-                labelText={t("follows-page.header.subscribers")}
+                labelText={t("header-fields.subscribers")}
               />
             }
           >
@@ -106,7 +106,7 @@ const _FollowCard: React.FC<Props> = ({
             label={
               <TooltipLabel
                 tooltipContent={t("dashboard-page.tooltips.trading.trades")}
-                labelText={t("follows-page.header.trades")}
+                labelText={t("header-fields.trades")}
               />
             }
           >
@@ -122,7 +122,7 @@ const _FollowCard: React.FC<Props> = ({
             label={
               <TooltipLabel
                 tooltipContent={t("dashboard-page.tooltips.investing.ddown")}
-                labelText={t("programs-page.programs-header.drawdown")}
+                labelText={t("header-fields.drawdown")}
               />
             }
           >

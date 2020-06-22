@@ -609,104 +609,29 @@
     "title": "Server Error",
     "body": "Server error occurred. Please try again later or contact the support department."
   },
-  "programs-page": {
-    "description": "Select investment programs that suit your personal profile and let the manager do the work for you. You will be able to withdraw your investment or profits only at predefined intervals set by the program’s manager.",
-    "title": "Programs",
-    "tabs": {
-      "explore": "Explore",
-      "favorites": "Favourites"
-    },
-    "programs-table": "All programs",
-    "programs-header": {
-      "reinvest": "Reinvest",
-      "value": "Value",
-      "current-value": "Current value",
-      "share": "Share",
-      "status": "Status",
-      "position": "Pos.",
-      "title": "Name",
-      "equity": "Equity",
-      "currency": "Curr.",
-      "investors": "Investors",
-      "available-to-invest": "Av. to invest",
-      "trades": "Trades",
-      "age": "Age",
-      "period": "Period",
-      "drawdown": "D.down",
-      "profit": "Profit",
-      "chart": "Chart",
-      "strategy": "Strategy"
-    },
-    "tooltips": {
-      "title": "Name of the program",
-      "equity": "Current market value of investments in the program, taking into account the profit/loss of open positions.",
-      "investors": "Number of investors in the program",
-      "available-to-invest": "Capital available for investment for the next period.",
-      "age": "Age of the program",
-      "period": "Reporting period is the interval of time in which the trader is to conduct trading operations of their Program and report the resulting profit or loss. Investments made by the investors appear on the Program balance at the beginning of the reporting period, while all of the resulting profit is distributed at the end of the reporting period.",
-      "drawdown": "Maximum drawdown of the program during the selected date range.",
-      "profit": "Profit during the selected date range."
-    }
-  },
-  "follows-page": {
-    "description": "Just choose a program and Genesis Vision will automatically copy the trades from your account. You will be able to withdraw your investment or exit trades at any point in time.",
-    "title": "Follow",
-    "tabs": {
-      "explore": "Explore",
-      "favorites": "Favourites"
-    },
-    "table": "All follow",
-    "filters": {
-      "type": "Type"
-    },
-    "header": {
-      "equity": "Equity",
-      "subscribers": "Subscribers",
-      "trades": "Trades",
-      "name": "Name",
-      "age": "Age",
-      "drawdown": "D.down",
-      "profit": "Profit",
-      "chart": "Chart"
-    },
-    "tooltips": {
-      "equity": "Current market value of investments in the program, taking into account the profit/loss of open positions.",
-      "subscribers": "Number of subscribers",
-      "trades": "Number of trades executed during the selected date range.",
-      "name": "Name of the program",
-      "age": "Age of the trading account",
-      "drawdown": "Maximum drawdown of the program during the selected date range.",
-      "profit": "Profit during the selected date range."
-    }
-  },
-  "funds-page": {
-    "description": "Diversify your capital across hundreds of cryptocurrencies in one click. Select a fund with a composition that matches your opinion on the market and let the manager readjust while the market evolves.",
-    "title": "Funds",
-    "all-funds": "All funds",
-    "tabs": {
-      "explore": "Explore",
-      "favorites": "Favourites"
-    },
-    "funds-header": {
-      "title": "Name",
-      "balance": "Size",
-      "assets": "Assets",
-      "investors": "Investors",
-      "age": "Age",
-      "drawdown": "D.down",
-      "profit": "Profit",
-      "chart": "Chart",
-      "value": "Value"
-    },
-    "tooltips": {
-      "title": "Name of the fund",
-      "balance": "Current market value of all assets in the fund",
-      "assets": "Assets included in the fund",
-      "investors": "Number of investors in the fund.",
-      "age": "Age of the fund",
-      "drawdown": "Maximum drawdown of the fund during the selected date range.",
-      "profit": "Profit of the fund during the selected date range"
-    }
+  "header-fields": {
+    "balance": "Size",
+    "assets": "Assets",
+    "subscribers": "Subscribers",
+    "name": "Name",
+    "reinvest": "Reinvest",
+    "value": "Value",
+    "current-value": "Current value",
+    "share": "Share",
+    "status": "Status",
+    "position": "Pos.",
+    "title": "Name",
+    "equity": "Equity",
+    "currency": "Curr.",
+    "investors": "Investors",
+    "available-to-invest": "Av. to invest",
+    "trades": "Trades",
+    "age": "Age",
+    "period": "Period",
+    "drawdown": "D.down",
+    "profit": "Profit",
+    "chart": "Chart",
+    "strategy": "Strategy"
   },
   "global-search-page": {
     "follows": "Follow",

@@ -23,7 +23,7 @@ const _ProgramTableHeaderCell: React.FC<{ column: SortingColumn }> = ({
         styles[`programs-table__cell--${column.name}`]
       )}
     >
-      {t(`programs-page.programs-header.${column.name}`)}
+      {t(`header-fields.${column.name}`)}
     </span>
   );
   return column.tooltip ? (

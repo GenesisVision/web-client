@@ -80,7 +80,7 @@ const _DashboardProgramCard: React.FC<Props> = ({
             label={
               <TooltipLabel
                 tooltipContent={t("dashboard-page.tooltips.investing.profit")}
-                labelText={t("programs-page.programs-header.profit")}
+                labelText={t("header-fields.profit")}
               />
             }
           >
@@ -99,7 +99,7 @@ const _DashboardProgramCard: React.FC<Props> = ({
             label={
               <TooltipLabel
                 tooltipContent={t("dashboard-page.tooltips.investing.value")}
-                labelText={t("programs-page.programs-header.value")}
+                labelText={t("header-fields.value")}
               />
             }
           >
@@ -114,7 +114,7 @@ const _DashboardProgramCard: React.FC<Props> = ({
           </StatisticItem>
         </TableCardTableColumn>
         <TableCardTableColumn>
-          <StatisticItem label={t("programs-page.programs-header.period")}>
+          <StatisticItem label={t("header-fields.period")}>
             <ProgramPeriodPie
               start={program.periodStarts}
               end={program.periodEnds}
