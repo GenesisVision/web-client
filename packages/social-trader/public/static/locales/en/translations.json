@@ -1396,66 +1396,6 @@
       "validate-error": "Please correct the errors on this form"
     }
   },
-  "create-fund-page": {
-    "title": "Create Fund",
-    "navigation-back-text": "All your settings will be lost. Are you sure you want to exit?",
-    "notifications": {
-      "create-success": "Fund was successfully created.",
-      "validate-error": "Please fix all the errors on the screen before proceeding"
-    },
-    "tabs": {
-      "select-broker": "Select broker",
-      "settings": "Settings"
-    },
-    "broker-info": {
-      "about": "About",
-      "terms": "Terms",
-      "leverage": "Leverage",
-      "fee": "Fee",
-      "assets": "Assets"
-    },
-    "settings": {
-      "investment-fund-fees": "Investment fund fees",
-      "main-settings": "Main settings",
-      "asset-selection": "Asset selection",
-      "fees-settings": "Fees settings",
-      "deposit-details": "Deposit details",
-      "fields": {
-        "mandatory-assets": "There is a mandatory 1% GVT allocation per Fund",
-        "asset-description": "Total share of all assets should be equal to 100%",
-        "name": "Name",
-        "name-requirements": "Requirement from 4 to 20 symbols",
-        "account-type": "Account type",
-        "currency": "Currency",
-        "description": "Description",
-        "description-requirements": "Requirement from 20 to 500 symbols",
-        "brokers-leverage": "Broker's leverage",
-        "period": "Period",
-        "upload-logo": "Upload the fund logo",
-        "upload-logo-rules": "At least 300 x 300px PNG or JPG file. The maximum file size is 2MB.",
-        "entry-fee": "Entry fee",
-        "success-fee": "Success fee",
-        "exit-fee": "Exit fee",
-        "deposit-amount": "Deposit amount",
-        "available-in-wallet": "Available in the wallet"
-      },
-      "validation": {
-        "entry-fee-required": "Field is required",
-        "exit-fee-required": "Field is required",
-        "exit-fee-min": "Exit fee must be greater than 0 %",
-        "exit-fee-max": "Exit fee must be less than {{max}} %",
-        "assets-share": "Total share of all assets should be equal to 100%",
-        "assets-count": "Must be at least two assets.",
-        "deposit-min": "Not enough money."
-      },
-      "hints": {
-        "entry-fee": "Description about entry fee is here",
-        "entry-fee-description": "An entry fee is a fee charged to investors upon their investment to a GV Fund. The maximum entry fee is {{maxFee}} %",
-        "exit-fee": "Description about exit fee is here",
-        "exit-fee-description": "An exit fee is a fee charged to investors when they redeem shares from a GV Fund. The maximum exit fee is {{maxFee}} %"
-      }
-    }
-  },
   "attach-account-page": {
     "title": "Attach external account",
     "navigation-back-text": "All your settings will be lost. Are you sure you want to exit?",
