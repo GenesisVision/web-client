@@ -114,7 +114,7 @@ const _DetailsInvestment: React.FC<Props> = ({
         <GVTab
           visible={showSubscription}
           value={TABS.SUBSCRIPTION}
-          label={t("details-page.investment.tabs.subscription")}
+          label={t("asset-details.investment.tabs.subscription")}
         />
         <GVTab
           visible={showInvestment}
@@ -126,7 +126,7 @@ const _DetailsInvestment: React.FC<Props> = ({
         <GVTab
           visible={haveEvents}
           value={TABS.EVENTS}
-          label={t("details-page.investment.tabs.events")}
+          label={t("asset-details.investment.tabs.events")}
         />
       </DetailsBlockTabs>
       {tab === TABS.SUBSCRIPTION && showSubscription && (

@@ -702,19 +702,6 @@
       "profit": "Profit of the fund during the selected date range"
     }
   },
-  "details-page": {
-    "investment": {
-      "tabs": {
-        "subscription": "Subscription details",
-        "investment": {
-          "follow": "Current period investment",
-          "program": "Current period investment",
-          "fund": "Current investment"
-        },
-        "events": "My history"
-      }
-    }
-  },
   "asset-details-page": {
     "tooltip": {
       "status": {
