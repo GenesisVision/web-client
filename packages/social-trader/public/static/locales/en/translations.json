@@ -1476,18 +1476,5 @@
         "exit-fee-description": "An exit fee is a fee charged to investors when they redeem shares from a GV Fund. The maximum exit fee is {{maxFee}} %"
       }
     }
-  },
-  "downloads": {
-    "title": "Genesis Vision Downloads",
-    "subtitle-1": "MetaTrader 5 for PC",
-    "text-1": "One of the most technically advanced and popular in the world of terminals for exchange trading with direct access to the order books and other new features.",
-    "link-1": "Download for PC",
-    "subtitle-2": "Mobile terminal",
-    "text-2": "The application provides advanced mobile trading through your favourite gadget. It supports all of the basic functionality of MetaTrader 5, user alerts for events on transactions, and is easy to connect and install.",
-    "link-2": "Version for IOS",
-    "link-3": "Version for Android",
-    "subtitle-3": "Web platform",
-    "text-3": "All the advanced functionality of the MetaTrader 5 platform right in your browser. No need to download and install. Compatible with any operating system (Windows, Mac OS, Linux).",
-    "link-4": "Login to platform"
   }
 }
