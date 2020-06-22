@@ -58,9 +58,7 @@ const _InvestmentLimit: React.FC<Props> = ({
   );
 
   return (
-    <SettingsBlock
-      label={t("create-program-page.settings.fields.investment-limit")}
-    >
+    <SettingsBlock label={t("asset-settings.fields.investment-limit")}>
       <HookForm resetOnSuccess form={form} onSubmit={handleSubmit}>
         <InvestmentLimitField
           wide={false}

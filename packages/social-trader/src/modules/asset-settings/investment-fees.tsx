@@ -58,9 +58,7 @@ const _InvestmentFees: React.FC<Props> = ({
       <HookForm resetOnSuccess form={form} onSubmit={onSubmit}>
         {asset === ASSET.PROGRAM && (
           <FeesSettings
-            firstFeeLabel={t(
-              "create-program-page.settings.fields.management-fee"
-            )}
+            firstFeeLabel={t("asset-settings.fields.management-fee")}
             firstFeeUnderText={t(
               "create-program-page.settings.hints.management-fee"
             )}
@@ -69,9 +67,7 @@ const _InvestmentFees: React.FC<Props> = ({
               "create-program-page.settings.hints.management-fee-description"
             )}
             secondFeeName={FIELDS.successFee}
-            secondFeeLabel={t(
-              "create-program-page.settings.fields.success-fee"
-            )}
+            secondFeeLabel={t("asset-settings.fields.success-fee")}
             secondFeeUnderText={t(
               "create-program-page.settings.hints.success-fee"
             )}
@@ -82,7 +78,7 @@ const _InvestmentFees: React.FC<Props> = ({
         )}
         {asset === ASSET.FUND && (
           <FeesSettings
-            firstFeeLabel={t("create-program-page.settings.fields.entry-fee")}
+            firstFeeLabel={t("asset-settings.fields.entry-fee")}
             firstFeeUnderText={t(
               "create-program-page.settings.hints.entry-fee"
             )}

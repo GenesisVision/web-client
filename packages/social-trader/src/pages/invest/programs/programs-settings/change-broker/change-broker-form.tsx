@@ -134,7 +134,7 @@ const _ChangeBrokerForm: React.FC<Props> = ({
           <GVHookFormField
             name={CHANGE_BROKER_FORM_FIELDS.brokerAccountTypeId}
             component={SimpleTextField}
-            label={t("create-program-page.settings.fields.account-type")}
+            label={t("asset-settings.fields.account-type")}
             InputComponent={Select}
             disableIfSingle
             onChange={changeAccount}
@@ -152,7 +152,7 @@ const _ChangeBrokerForm: React.FC<Props> = ({
             disabled={currentAccountTypeId === brokerAccountTypeId}
             name={CHANGE_BROKER_FORM_FIELDS.leverage}
             component={SimpleTextField}
-            label={t("create-program-page.settings.fields.brokers-leverage")}
+            label={t("asset-settings.fields.brokers-leverage")}
             InputComponent={Select}
             disableIfSingle
           >

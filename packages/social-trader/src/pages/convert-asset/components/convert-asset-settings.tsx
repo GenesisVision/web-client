@@ -111,9 +111,7 @@ const _ConvertAssetSettings: React.FC<IConvertAssetSettingsProps> = props => {
           >
             <FeesSettings
               title={t("create-program-page.settings.investment-program-fees")}
-              firstFeeLabel={t(
-                "create-program-page.settings.fields.management-fee"
-              )}
+              firstFeeLabel={t("asset-settings.fields.management-fee")}
               firstFeeUnderText={t(
                 "create-program-page.settings.hints.management-fee"
               )}
@@ -122,9 +120,7 @@ const _ConvertAssetSettings: React.FC<IConvertAssetSettingsProps> = props => {
                 "create-program-page.settings.hints.management-fee-description"
               )}
               secondFeeName={CONVERT_ASSET_FIELDS.successFee}
-              secondFeeLabel={t(
-                "create-program-page.settings.fields.success-fee"
-              )}
+              secondFeeLabel={t("asset-settings.fields.success-fee")}
               secondFeeUnderText={t(
                 "create-program-page.settings.hints.success-fee"
               )}
@@ -134,7 +130,7 @@ const _ConvertAssetSettings: React.FC<IConvertAssetSettingsProps> = props => {
             />
           </SettingsBlock>
           <SettingsBlock
-            label={t("create-program-page.settings.fields.investment-limit")}
+            label={t("asset-settings.fields.investment-limit")}
             blockNumber={"03"}
           >
             <InvestmentLimitField

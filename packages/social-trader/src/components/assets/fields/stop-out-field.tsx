@@ -9,7 +9,7 @@ const _StopOutField: React.FC<Props> = ({ name }) => {
     <AssetFormField
       wide={false}
       name={name}
-      label={t("create-program-page.settings.fields.stop-out-level")}
+      label={t("asset-settings.fields.stop-out-level")}
       adornment="%"
       component={SimpleNumberField}
       hintTooltipContent={t(

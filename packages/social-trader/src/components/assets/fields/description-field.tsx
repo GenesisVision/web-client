@@ -8,10 +8,8 @@ const _DescriptionField: React.FC<Props> = ({ name, description }) => {
     <TextAreaField
       value={description}
       name={name}
-      label={t("create-program-page.settings.fields.description")}
-      caption={t(
-        "create-program-page.settings.fields.description-requirements"
-      )}
+      label={t("asset-settings.fields.description")}
+      caption={t("asset-settings.fields.description-requirements")}
     />
   );
 };

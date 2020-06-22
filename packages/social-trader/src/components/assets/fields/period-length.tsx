@@ -14,13 +14,13 @@ const _PeriodLength: React.FC<Props> = ({ name, periods }) => {
         wide
         name={name}
         component={SimpleTextField}
-        label={t("create-program-page.settings.fields.period")}
+        label={t("asset-settings.fields.period")}
         InputComponent={Select}
       >
         {periods.map((period: any) => (
           <option value={period} key={period}>
             {`${period} ${t(
-              "create-program-page.settings.fields.period-option-notation.day",
+              "asset-settings.fields.period-option-notation.day",
               { count: period }
             )}`}
           </option>

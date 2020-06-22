@@ -27,7 +27,7 @@ const _SignalsFeeFormPartial: React.FC<ISignalsFeeFormPartialProps> = ({
         <AssetFormField
           wide
           name={volumeFeeFieldName}
-          label={t("create-program-page.settings.fields.signal-volume-fee")}
+          label={t("asset-settings.fields.signal-volume-fee")}
           adornment="%"
           component={SimpleNumberField}
           isAllowed={allowPositiveValuesNumberFormat(4)}
@@ -43,7 +43,7 @@ const _SignalsFeeFormPartial: React.FC<ISignalsFeeFormPartialProps> = ({
         <AssetFormField
           wide
           name={successFeeFieldName}
-          label={t("create-program-page.settings.fields.signal-success-fee")}
+          label={t("asset-settings.fields.signal-success-fee")}
           adornment="%"
           component={SimpleNumberField}
           isAllowed={allowPositiveValuesNumberFormat(4)}
