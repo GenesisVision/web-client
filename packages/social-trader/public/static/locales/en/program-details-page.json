@@ -1,0 +1,187 @@
+{
+  "level-calculator": {
+    "title": "Calculator",
+    "program": "Program",
+    "genesis-ratio": "Genesis Ratio",
+    "age": "Age",
+    "weighted-volume-scale": "Weighted volume scale",
+    "manager-balance": "Manager balance",
+    "current-av-to-invest": "Av. to invest (current)",
+    "new-av-to-invest": "Av. to invest (new)",
+    "current-investment-scale": "Investment scale (current)",
+    "new-investment-scale": "Investment scale (new)",
+    "age-tooltip": "The age of the program.",
+    "genesis-ratio-tooltip": "The ratio of the profit of the program against its risk. It is set in the range from 0 to 1. If Genesis Ratio <0.2, then the program is high risk and the InvScale is limited to 1, meaning that the manager can attract no more than his own deposit.",
+    "weighted-volume-scale-tooltip": "This is a multiplier of the volume traded by the manager relative to the program balance for all periods. \nIt is calculated similarly to the Genesis Ratio, being a weighted average over all given periods.",
+    "manager-balance-tooltip": "The current value of manager funds in the program.",
+    "current-av-to-invest-tooltip": "The current amount available for investment into the program. The investment limit and the funds already deposited are not taken into account.",
+    "new-av-to-invest-tooltip": "The new Av. to invest value you receive as a result of changing parameters within the calculator.",
+    "current-investment-scale-tooltip": "The current value ​​of the indicator, which depends on the Age, Volume Scale and Genesis Ratio. The indicator is set in a range from 1 to 20. \nAv. to invest = Investment scale * Manager Balance",
+    "new-investment-scale-tooltip": "The new value ​​of the indicator, which depends on the Age, Volume Scale and Genesis Ratio. The indicator is set in a range from 1 to 20. \nAv. to invest = Investment scale * Manager Balance",
+    "kyc-disclaimer": "All of your investment programs are limited to the first level since you have not yet completed the KYC verification procedure. The maximum amount of investment you can attract at the first level is the equivalent of 1000 USD."
+  },
+  "title": "Program detail",
+  "tooltip": {
+    "management-fee": "The сommission that is paid to the manager by an investor for the actual asset management period. Management fee is defined in annual percentage and is charged at the end of each reporting period.",
+    "auto-join": {
+      "text": "In the event a program hits the Stop-Out limit:",
+      "li-1": "“Ignore SO” is turned off → your investment (minus losses) is returned to your wallet.",
+      "li-2": "“Ignore SO” is turned on → your investment (minus losses) is reinvested in the program keeping all configured conditions saved."
+    },
+    "investment-scale": "The current value of the indicator, which depends on the Age, Volume Scale and Genesis Ratio. The indicator is set in a range from 1 to 20. Av. to invest = Investment scale * Manager Balance",
+    "volume-scale": "This is a multiplier of the volume traded by the manager relative to the program balance for all periods. It is calculated similarly to the Genesis Ratio, being a weighted average over all given periods.",
+    "genesis-ratio": "The ratio of the profit of the program against its risk. It is set in the range from 0 to 1. If Genesis Ratio <0.2, then the program is high risk and the InvScale is limited to 1, meaning that the manager can attract no more than his own deposit.",
+    "av-to-invest": "The amount available for investment up to the next period.",
+    "entry-fee": "The commission that is paid to the manager by an investor for investing in the program. The commission is set by the manager and calculated as a percentage of the amount invested. The commission is charged when investing in programs that have reached the third level.",
+    "success-fee": "The commission charged from the profit. It is set by the manager and calculated as a percentage of the profits earned over a certain period of time. If there is no profit, then there is no success fee charged.",
+    "success-fee-signal": "Commission charged from copy trading profits. The fee is calculated according to the method of the High-water mark. With this method, the percentage is not taken from the profit for the period, but from the difference between the investors' investments and the previous maximum profit.",
+    "volume-fee": "A volume commission, charged only for opening a transaction.",
+    "stop-out-level": "A compulsory closing of positions at current market prices when a loss reaches the Stop out level. The period is automatically closed and all money is distributed to investors minus a loss. If the current reporting period of an investment program was ended due to the Stop out trigger, then in the next period the investors who had investments in the program when Stop Out have triggered, the Entry fee = 0",
+    "profit": "Profit or loss resulting from the manager trading. Calculated according to your share of investment in the program.",
+    "reinvest": "If the reinvestment trigger is on, then at the end of the period all profits after deducting the commission will be reinvested back into the program. If the button is not pressed, then at the end of the period all the profits will be transferred to your GVT wallet.",
+    "equity": "The current amount of funds in the program, taking into account the profit / loss of open transactions",
+    "investors": "The current number of investors in the program.",
+    "period": "The time interval in the program, which is set by the manager when creating the program. At the end of the period, profit/loss is distributed between the investors and the manager, according to the share in the program, and all received queries for investment and withdrawals are processed.",
+    "trades": "The number of trades the manager has performed during the selected date range.",
+    "success-trades": "The percentage of successful trades among the number of total trades during the selected date range.",
+    "profit-factor": "An indicator which is defined as the gross profit divided by the gross loss for the selected date range.",
+    "sharpe-ratio": "A measure of the effectiveness of a program, which is calculated as the mathematical ratio of the average yield to the average deviation of this yield. The higher the ratio, the lower the risk of investments, and higher the hypothetical profit.",
+    "sortino-ratio": "A variation of the Sharpe ratio that only factors in the downside risk. The larger this indicator, the better and more effective the program in terms of combining risk and profitability.",
+    "max-drawdown": "The biggest drawdown of a program during the selected date range."
+  },
+  "popover": {
+    "genesis-level": "Genesis Level",
+    "invest-limit": "Total invest limit",
+    "text": "Genesis level shows the experience and reliability of the Manager",
+    "about-levels": "About levels"
+  },
+  "history": {
+    "heading": "History",
+    "tabs": {
+      "trading-log": "Trading log",
+      "trades": "Trades",
+      "events": "My history",
+      "open-positions": "Open positions",
+      "subscriptions": "Subscribers",
+      "financial-statistic": "Financial statistic",
+      "period-history": "Period History"
+    },
+    "trading-log": {
+      "date": "Date",
+      "message": "Message"
+    },
+    "trades": {
+      "buttons": "",
+      "download": "Export",
+      "swap": "Swap",
+      "providers": "Providers",
+      "direction-entry": "Dir/Entry",
+      "commission": "Commission",
+      "direction": "Dir",
+      "ticket": "Ticket",
+      "symbol": "Symbol",
+      "volume": "Volume",
+      "profit": "Profit",
+      "price": "Price",
+      "entry": "Entry",
+      "date": "Date",
+      "tooltips": {
+        "direction-entry": "Trade direction",
+        "commission": "Sum of all fees paid for the trade",
+        "symbol": "Trading instrument",
+        "volume": "Total quantity traded",
+        "profit": "Trade profit (excluding commission)",
+        "price": "Trade price",
+        "date": "Time the trade was executed",
+        "swap": "Fee for transferring open positions to the next day",
+        "ticket": "Ticket reference"
+      }
+    },
+    "open-positions": {
+      "delay": "delay",
+      "delay-tooltip": "This manager makes trades and open positions public with a {{delay}} delay.",
+      "date": "Date Open",
+      "symbol": "Symbol",
+      "direction": "Dir",
+      "volume": "Volume",
+      "price": "Price Open",
+      "priceCurrent": "Price",
+      "profit": "Profit",
+      "profitPercent": "Profit %",
+      "tooltips": {
+        "date": "Time the trade was opened",
+        "symbol": "Trading instrument",
+        "direction": "Position direction (Buy/Long and Sell/Short)",
+        "volume": "Total quantity traded",
+        "price": "Weighted average trade price",
+        "priceCurrent": "Current price",
+        "profit": "Current floating profit"
+      }
+    },
+    "subscriptions": {
+      "number": "Number",
+      "trades": "Trades",
+      "profit": "Profit",
+      "volume": "Volume",
+      "subscriptionDate": "Subscription date",
+      "unsubscriptionDate": "Unsubscription date",
+      "commission": "Commission",
+      "status": "Status",
+      "tooltips": {
+        "number": "Subscriber number",
+        "trades": "Number of copied trades",
+        "profit": "Subscriber profit",
+        "volume": "Total traded volume by the subscriber",
+        "commission": "Amount of all fees paid by the subscriber to the trader",
+        "status": "Subscription status (active or ended)"
+      }
+    },
+    "financial-statistic": {
+      "period": "Period",
+      "date-start": "Date start",
+      "balance": "Balance",
+      "profit": "Profit",
+      "success-fee": "Success fee",
+      "management-fee": "Management fee",
+      "entry-fee": "Entry fee",
+      "deposit-withdraw": "Deposit/Withdraw",
+      "commission-rebate": "GV commission rebate",
+      "tooltips": {
+        "period": "Program period number",
+        "date-start": "Program period start date",
+        "balance": "Manager balance at the beginning of the period",
+        "profit": "Program profit for the period (including commissions)",
+        "success-fee": "Total amount of success fees that the manager received in this period",
+        "management-fee": "Total amount of management fees that the manager received in this period",
+        "deposit-withdraw": "Total amount of funds invested or withdrawn by the manager in this period",
+        "commission-rebate": "Amount of the compensated commission (Trading Fee) paid from the GVT wallet"
+      }
+    },
+    "period-history": {
+      "investors-deposit": "Investors Invest",
+      "investors-withdraw": "Investors Withdrawal",
+      "manager-deposit": "Manager Investment",
+      "manager-withdraw": "Manager Withdrawal",
+      "investors-profit-withdraw": "Investors Withdrawal Profit",
+      "platform-success-fee": "Platform Success Fee",
+      "manager-commission-rebate": "GV commission rebate",
+      "period": "Period",
+      "date-start": "Date start",
+      "period-length": "Period length",
+      "balance": "Program balance",
+      "profit": "Profit",
+      "investors": "Investors",
+      "tooltips": {
+        "period": "Program period number",
+        "date-start": "Program period start date",
+        "period-length": "Program period duration",
+        "balance": "Program balance at the end of the period",
+        "profit": "Program profit for the period (including commissions)",
+        "investors": "Number of investors in the program"
+      }
+    }
+  },
+  "calculator": {
+    "level": "Level"
+  }
+}

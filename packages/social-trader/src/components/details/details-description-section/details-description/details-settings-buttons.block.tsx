@@ -44,7 +44,7 @@ const _DetailsSettingsButtons: React.FC<Props> = ({
         <Row>
           <DetailsSettingControl
             to={settingsUrl}
-            text={t("program-details-page.description.settings")}
+            text={t("asset-details.description.settings")}
           />
         </Row>
       )}

@@ -58,7 +58,7 @@ describe("Program details - Page markup", () => {
       const { currency } = details!.tradingAccountInfo;
       const testValue = currency;
       const pageValue = await getStatisticsItemValue(
-        "program-details-page.description.currency"
+        "asset-details.description.currency"
       );
       expect(pageValue).toBe(testValue);
     });
@@ -67,7 +67,7 @@ describe("Program details - Page markup", () => {
       const { leverageMin, leverageMax } = details!.tradingAccountInfo;
       const testValue = `${leverageMin}:${leverageMax}`;
       const pageValue = await getStatisticsItemValue(
-        "program-details-page.description.leverage"
+        "asset-details.description.leverage"
       );
       expect(pageValue).toBe(testValue);
     });
@@ -76,7 +76,7 @@ describe("Program details - Page markup", () => {
       const { periodStarts, periodEnds } = details!.programDetails;
       const testValue = distanceDate(periodStarts, periodEnds);
       const pageValue = await getStatisticsItemValue(
-        "program-details-page.description.period"
+        "asset-details.description.period"
       );
       expect(pageValue).toBe(testValue);
     });
@@ -85,7 +85,7 @@ describe("Program details - Page markup", () => {
       const { ageDays } = details!.programDetails;
       const testValue = `${ageDays} days`;
       const pageValue = await getStatisticsItemValue(
-        "program-details-page.description.age"
+        "asset-details.description.age"
       );
       expect(pageValue).toBe(testValue);
     });
@@ -94,7 +94,7 @@ describe("Program details - Page markup", () => {
       const { genesisRatio } = details!.programDetails;
       const testValue = String(genesisRatio);
       const pageValue = await getStatisticsItemValue(
-        "program-details-page.description.genesis-ratio"
+        "asset-details.description.genesis-ratio"
       );
       expect(pageValue).toBe(testValue);
     });
@@ -103,7 +103,7 @@ describe("Program details - Page markup", () => {
       const { investmentScale } = details!.programDetails;
       const testValue = String(investmentScale);
       const pageValue = await getStatisticsItemValue(
-        "program-details-page.description.investment-scale"
+        "asset-details.description.investment-scale"
       );
       expect(pageValue).toBe(testValue);
     });
@@ -112,7 +112,7 @@ describe("Program details - Page markup", () => {
       const { volumeScale } = details!.programDetails;
       const testValue = String(volumeScale);
       const pageValue = await getStatisticsItemValue(
-        "program-details-page.description.volume-scale"
+        "asset-details.description.volume-scale"
       );
       expect(pageValue).toBe(testValue);
     });

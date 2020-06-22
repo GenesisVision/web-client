@@ -47,7 +47,7 @@ const _ProgramAutoJoin: React.FC<Props> = ({
         label={
           <TooltipLabel
             tooltipContent={<ProgramAutoJoinTooltip />}
-            labelText={t("program-details-page.description.auto-join")}
+            labelText={t("asset-details.description.auto-join")}
             pointer
           />
         }

@@ -49,9 +49,9 @@ const _FollowControls: React.FC<Props> = ({
           )
         ) : (
           <InvestmentUnauthButton
-            label={t("program-details-page.description.follow-trade")}
+            label={t("asset-details.description.follow-trade")}
             asset={ASSET.FOLLOW}
-            header={t("program-details-page.description.follow-trade")}
+            header={t("asset-details.description.follow-trade")}
             message={t("unauth-popup.follow")}
             title={title}
           />

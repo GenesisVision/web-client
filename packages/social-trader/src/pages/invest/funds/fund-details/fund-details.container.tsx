@@ -79,7 +79,7 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
             <h4>
               <TooltipLabel
                 tooltipContent={t("fund-details-page.tooltip.assets")}
-                labelText={t("fund-details-page.description.assets")}
+                labelText={t("asset-details.description.assets")}
               />
             </h4>
             <Row>

@@ -86,7 +86,7 @@ const _RequestLine: React.FC<Props> = ({
                   />
                 }
               >
-                {t("program-details-page.description.successFee")}
+                {t("asset-details.description.successFee")}
               </RequestLineItem>
             </RowItem>
           )}
@@ -103,7 +103,7 @@ const _RequestLine: React.FC<Props> = ({
                     />
                   }
                 >
-                  {t("fund-details-page.description.entryFee")}
+                  {t("asset-details.description.entryFee")}
                 </RequestLineItem>
               )}
             </RowItem>
@@ -120,7 +120,7 @@ const _RequestLine: React.FC<Props> = ({
                     />
                   }
                 >
-                  {t("program-details-page.description.management-fee")}
+                  {t("asset-details.description.management-fee")}
                 </RequestLineItem>
               )}
             </RowItem>
@@ -137,7 +137,7 @@ const _RequestLine: React.FC<Props> = ({
                   />
                 }
               >
-                {t("fund-details-page.description.exitFee")}
+                {t("asset-details.description.exitFee")}
               </RequestLineItem>
             </RowItem>
           )}

@@ -18,7 +18,7 @@ const _SignalInfo: React.FC<ISignalProgramInfoProps> = ({
             tooltipContent={t(
               "program-details-page.tooltip.success-fee-signal"
             )}
-            labelText={t("program-details-page.description.successFee")}
+            labelText={t("asset-details.description.successFee")}
           />
         }
         accent
@@ -29,7 +29,7 @@ const _SignalInfo: React.FC<ISignalProgramInfoProps> = ({
         label={
           <TooltipLabel
             tooltipContent={t("program-details-page.tooltip.volume-fee")}
-            labelText={t("program-details-page.description.volume-fee")}
+            labelText={t("asset-details.description.volume-fee")}
           />
         }
         accent

@@ -51,6 +51,8 @@
     "title": "Close follow"
   },
   "close-period": {
+    "body": "Do you really want to restart current period?",
+    "notification-success": "Request to restart the period was sent successfully.",
     "title": "Close period"
   },
   "close-asset": {

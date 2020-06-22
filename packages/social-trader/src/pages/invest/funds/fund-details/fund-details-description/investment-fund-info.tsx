@@ -21,7 +21,7 @@ const _InvestmentFundInfo: React.FC<IInvestmentFundInfoProps> = ({
         label={
           <TooltipLabel
             tooltipContent={t("fund-details-page.tooltip.entry-fee")}
-            labelText={t("fund-details-page.description.entryFee")}
+            labelText={t("asset-details.description.entryFee")}
           />
         }
         accent
@@ -36,7 +36,7 @@ const _InvestmentFundInfo: React.FC<IInvestmentFundInfoProps> = ({
         label={
           <TooltipLabel
             tooltipContent={t("fund-details-page.tooltip.exit-fee")}
-            labelText={t("fund-details-page.description.exitFee")}
+            labelText={t("asset-details.description.exitFee")}
           />
         }
         accent

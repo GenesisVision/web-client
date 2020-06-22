@@ -34,10 +34,8 @@ const _PerformanceData: React.FC<Props> = ({
       <StatisticItem
         label={
           <TooltipLabel
-            tooltipContent={t(
-              "program-details-page.description.tooltips.broker"
-            )}
-            labelText={t("program-details-page.description.broker")}
+            tooltipContent={t("asset-details.description.tooltips.broker")}
+            labelText={t("asset-details.description.broker")}
           />
         }
       >
@@ -50,10 +48,8 @@ const _PerformanceData: React.FC<Props> = ({
         <StatisticItem
           label={
             <TooltipLabel
-              tooltipContent={t(
-                "program-details-page.description.tooltips.currency"
-              )}
-              labelText={t("program-details-page.description.currency")}
+              tooltipContent={t("asset-details.description.tooltips.currency")}
+              labelText={t("asset-details.description.currency")}
             />
           }
         >
@@ -64,10 +60,8 @@ const _PerformanceData: React.FC<Props> = ({
         <StatisticItem
           label={
             <TooltipLabel
-              tooltipContent={t(
-                "program-details-page.description.tooltips.leverage"
-              )}
-              labelText={t("program-details-page.description.leverage")}
+              tooltipContent={t("asset-details.description.tooltips.leverage")}
+              labelText={t("asset-details.description.leverage")}
             />
           }
         >
@@ -79,10 +73,8 @@ const _PerformanceData: React.FC<Props> = ({
           <StatisticItem
             label={
               <TooltipLabel
-                tooltipContent={t(
-                  "program-details-page.description.tooltips.period"
-                )}
-                labelText={t("program-details-page.description.period")}
+                tooltipContent={t("asset-details.description.tooltips.period")}
+                labelText={t("asset-details.description.period")}
               />
             }
           >
@@ -96,10 +88,8 @@ const _PerformanceData: React.FC<Props> = ({
           <StatisticItem
             label={
               <TooltipLabel
-                tooltipContent={t(
-                  "program-details-page.description.tooltips.age"
-                )}
-                labelText={t("program-details-page.description.age")}
+                tooltipContent={t("asset-details.description.tooltips.age")}
+                labelText={t("asset-details.description.age")}
               />
             }
           >
@@ -113,7 +103,7 @@ const _PerformanceData: React.FC<Props> = ({
             label={
               <TooltipLabel
                 tooltipContent={t("program-details-page.tooltip.genesis-ratio")}
-                labelText={t("program-details-page.description.genesis-ratio")}
+                labelText={t("asset-details.description.genesis-ratio")}
               />
             }
           >
@@ -129,9 +119,7 @@ const _PerformanceData: React.FC<Props> = ({
                 tooltipContent={t(
                   "program-details-page.tooltip.investment-scale"
                 )}
-                labelText={t(
-                  "program-details-page.description.investment-scale"
-                )}
+                labelText={t("asset-details.description.investment-scale")}
               />
             }
           >
@@ -145,7 +133,7 @@ const _PerformanceData: React.FC<Props> = ({
             label={
               <TooltipLabel
                 tooltipContent={t("program-details-page.tooltip.volume-scale")}
-                labelText={t("program-details-page.description.volume-scale")}
+                labelText={t("asset-details.description.volume-scale")}
               />
             }
           >

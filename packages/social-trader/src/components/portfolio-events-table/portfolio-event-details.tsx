@@ -19,9 +19,7 @@ const _PortfolioEventsDetails: React.FC<Props> = ({ extendedInfo }) => {
   const renderInfoTitle = (title: string) => {
     return title === "Loss" || title === "Refund" ? (
       <TooltipLabel
-        tooltipContent={t(
-          `program-details-page.history.my-history.${title.toLowerCase()}`
-        )}
+        tooltipContent={t(`my-history.${title.toLowerCase()}`)}
         labelText={title}
       />
     ) : (
@@ -31,7 +29,7 @@ const _PortfolioEventsDetails: React.FC<Props> = ({ extendedInfo }) => {
   return (
     <div>
       <GVButton size={GV_BTN_SIZE.SMALL} color="secondary" onClick={setAnchor}>
-        {t("program-details-page.history.my-history.details")}
+        {t("my-history.details")}
       </GVButton>
       <Popover
         anchorEl={anchor}
