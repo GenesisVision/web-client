@@ -32,7 +32,7 @@ Page.getInitialProps = async ctx => {
     tradingAccountInfo: { currency }
   } = await fetchFollowDescriptionCtx(id as string, ctx);
   return {
-    namespacesRequired: ["convert-page"],
+    namespacesRequired: ["asset-settings", "convert-page"],
     id,
     broker: type,
     accountCurrency: currency

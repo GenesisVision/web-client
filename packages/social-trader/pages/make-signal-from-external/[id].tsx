@@ -20,7 +20,7 @@ const Page: NextPageWithRedux<Props, {}> = ({ id }) => {
 
 Page.getInitialProps = async ctx => {
   const { id } = ctx.query;
-  return { namespacesRequired: ["convert-page"], id };
+  return { namespacesRequired: ["asset-settings", "convert-page"], id };
 };
 
 interface Props {
