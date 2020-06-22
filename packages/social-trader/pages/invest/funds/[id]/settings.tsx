@@ -25,7 +25,7 @@ Page.getInitialProps = async ctx => {
     if (checkClosed(description.value.publicInfo.status))
       throw "Fund is closed";
   });
-  return { namespacesRequired: ["fund-settings"] };
+  return { namespacesRequired: ["asset-settings", "fund-settings"] };
 };
 
 export default compose(withDefaultLayout, withPrivateRoute)(Page);
