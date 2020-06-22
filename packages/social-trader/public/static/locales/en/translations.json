@@ -1138,48 +1138,6 @@
     "managers": "Users"
   },
   "gvt-fees": {
-    "title": "Fees and Discounts",
-    "section": {
-      "text-1": "Any Genesis Vision user who holds a certain amount of GVT receives a discount for transaction fees. The size of a discount can vary and depends on the amount of GVT that is being held. The regular trading fee is 0.3%, and the information on the tiered discount system can be found in the Genesis Markets Trading Conditions section.",
-      "text-2": "Users of the Genesis Vision copy trading feature who hold any GVT on the Genesis Vision balance are eligible for discounts and also have the platform success fee of 10% for both investment programs and copy trading signals reduced by 1% for each 1000 GVT held.",
-      "text-3": "For managers the commission for trading will be debited from the manager’s GVT wallet. At the end of the reporting period, the manager will receive a refund of the commission at the expense of increasing the share of own funds in management."
-    },
-    "note": "* Please note that to be eligible for a discount tier you should hold GVT on your Genesis Vision wallet for at least 7 days",
-    "table-header": {
-      "amount": "Amount",
-      "discount": "Discount",
-      "fees": "Fees"
-    },
-    "table-row-1": {
-      "amount": "From 1 GVT up to 10",
-      "discount": "30%",
-      "fees": "0.210%"
-    },
-    "table-row-2": {
-      "amount": "Up to 25",
-      "discount": "35%",
-      "fees": "0.195%"
-    },
-    "table-row-3": {
-      "amount": "Up to 50 GVT",
-      "discount": "40%",
-      "fees": "0.180%"
-    },
-    "table-row-4": {
-      "amount": "Up to 100 GVT",
-      "discount": "45%",
-      "fees": "0.165%"
-    },
-    "table-row-5": {
-      "amount": "Up to 500 GVT",
-      "discount": "50%",
-      "fees": "0.150%"
-    },
-    "table-row-6": {
-      "amount": "500 GVT+",
-      "discount": "55%",
-      "fees": "0.135%"
-    },
     "titles": {
       "main": "Fees and Discounts"
     }
