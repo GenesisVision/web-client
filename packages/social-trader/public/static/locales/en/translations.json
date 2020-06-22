@@ -1278,9 +1278,5 @@
   },
   "app": {
     "title": "Genesis Vision"
-  },
-  "create-asset-page": {
-    "min-deposit": "Min deposit",
-    "go-back": "Go back"
   }
 }
