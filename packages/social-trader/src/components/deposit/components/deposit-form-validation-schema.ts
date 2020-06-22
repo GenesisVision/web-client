@@ -40,7 +40,7 @@ export const depositValidationSchema = ({
         .required()
         .min(
           +min,
-          t("deposit-asset.validation.amount-min-value", {
+          t("validations.amount-min-value", {
             min,
             currency: walletCurrency
           })
@@ -48,8 +48,8 @@ export const depositValidationSchema = ({
         .max(
           availableToInvest,
           availableInWallet < availableToInvestInAsset
-            ? t("deposit-asset.validation.amount-more-than-available")
-            : t("deposit-asset.validation.amount-exceeds-limit")
+            ? t("validations.amount-more-than-available")
+            : t("validations.amount-exceeds-limit")
         )
     });
   });

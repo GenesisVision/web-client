@@ -33,19 +33,12 @@ const _InvestmentLimit: React.FC<Props> = ({
     validationSchema: object().shape({
       [FIELDS.investmentLimit]: hasInvestmentLimit
         ? number()
-            .min(
-              0,
-              t("create-program-page.settings.validation.investment-limit-min")
-            )
+            .min(0, t("validations.investment-limit-min"))
             .lessThan(
               10000000000,
               "Investment Limit must be less than 10000000000"
             )
-            .required(
-              t(
-                "create-program-page.settings.validation.investment-limit-required"
-              )
-            )
+            .required(t("validations.investment-limit-required"))
         : number()
     }),
     mode: "onChange"

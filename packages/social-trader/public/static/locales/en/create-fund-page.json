@@ -41,15 +41,6 @@
       "deposit-amount": "Deposit amount",
       "available-in-wallet": "Available in the wallet"
     },
-    "validation": {
-      "entry-fee-required": "Field is required",
-      "exit-fee-required": "Field is required",
-      "exit-fee-min": "Exit fee must be greater than 0 %",
-      "exit-fee-max": "Exit fee must be less than {{max}} %",
-      "assets-share": "Total share of all assets should be equal to 100%",
-      "assets-count": "Must be at least two assets.",
-      "deposit-min": "Not enough money."
-    },
     "hints": {
       "entry-fee": "Description about entry fee is here",
       "entry-fee-description": "An entry fee is a fee charged to investors upon their investment to a GV Fund. The maximum entry fee is {{maxFee}} %",

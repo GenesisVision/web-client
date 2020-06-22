@@ -87,9 +87,6 @@
     "change-password": "Change password"
   },
   "social-links": {
-    "validation": {
-      "link-max-length": "The maximum link length is 100 characters."
-    },
     "notifications": {
       "edit-success": "Your profile was successfully updated."
     }

@@ -133,31 +133,22 @@ export enum CONVERT_ASSET_FIELDS {
 const investmentLimitShape = (hasInvestmentLimit: boolean, t: TFunction) =>
   hasInvestmentLimit
     ? number()
-        .min(
-          0,
-          t("create-program-page.settings.validation.investment-limit-min")
-        )
+        .min(0, t("validations.investment-limit-min"))
         .lessThan(10000000000, "Investment Limit must be less than 10000000000")
-        .required(
-          t("create-program-page.settings.validation.investment-limit-required")
-        )
+        .required(t("validations.investment-limit-required"))
     : number();
 
 const stopOutLevelShape = (t: TFunction) =>
   number()
-    .required(t("create-program-page.settings.validation.stop-out-required"))
-    .min(10, t("create-program-page.settings.validation.stop-out-is-zero"))
-    .max(100, t("create-program-page.settings.validation.stop-out-is-large"));
+    .required(t("validations.stop-out-required"))
+    .min(10, t("validations.stop-out-is-zero"))
+    .max(100, t("validations.stop-out-is-large"));
 
 const currencyShape = (t: TFunction) =>
-  string().required(
-    t("create-program-page.settings.validation.currency-required")
-  );
+  string().required(t("validations.currency-required"));
 
 const periodLengthShape = (t: TFunction) =>
-  number().required(
-    t("create-program-page.settings.validation.period-required")
-  );
+  number().required(t("validations.period-required"));
 
 const getPublicInfoShapes = (t: TFunction) => ({
   [CONVERT_ASSET_FIELDS.logo]: inputImageShape(t),

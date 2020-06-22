@@ -37,17 +37,14 @@ const CreateExchangeAccountSettingsValidationSchema = ({
     );
     return object<ICreateExchangeAccountSettingsFormValues>().shape({
       [CREATE_EXCHANGE_ACCOUNT_FIELDS.depositAmount]: number()
-        .required(t("create-program-page.settings.validation.amount-required"))
+        .required(t("validations.amount-required"))
         .min(
           minDeposit,
-          t("create-program-page.settings.validation.amount-is-zero", {
+          t("validations.amount-is-zero", {
             min: minDepositText
           })
         )
-        .max(
-          available,
-          t("create-program-page.settings.validation.amount-is-large")
-        )
+        .max(available, t("validations.amount-is-large"))
     });
   });
 };

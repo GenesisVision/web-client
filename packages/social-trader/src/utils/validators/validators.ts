@@ -52,21 +52,21 @@ export const btcWalletValidator = string().matches(
 export const assetTitleShape = (t: TFunction) => {
   return string()
     .trim()
-    .required(t("create-program-page.settings.validation.title-required"))
-    .min(4, t("create-program-page.settings.validation.title-is-short"))
-    .max(20, t("create-program-page.settings.validation.title-is-long"))
+    .required(t("validations.title-required"))
+    .min(4, t("validations.title-is-short"))
+    .max(20, t("validations.title-is-long"))
     .matches(
       /^[-a-zA-Z0-9\s]{4,20}$/,
-      t("create-program-page.settings.validation.title-is-latin-and-numbers")
+      t("validations.title-is-latin-and-numbers")
     );
 };
 
 export const assetDescriptionShape = (t: TFunction) => {
   return string()
     .trim()
-    .required(t("create-program-page.settings.validation.description-required"))
-    .min(20, t("create-program-page.settings.validation.description-is-short"))
-    .max(500, t("create-program-page.settings.validation.description-is-long"));
+    .required(t("validations.description-required"))
+    .min(20, t("validations.description-is-short"))
+    .max(500, t("validations.description-is-long"));
 };
 
 export const signalSuccessFeeShape = (
@@ -75,11 +75,11 @@ export const signalSuccessFeeShape = (
   max: number
 ) => {
   return number()
-    .min(min, t("create-program-page.settings.validation.success-fee-min"))
-    .required(t("create-program-page.settings.validation.success-fee-required"))
+    .min(min, t("validations.success-fee-min"))
+    .required(t("validations.success-fee-required"))
     .max(
       max,
-      t("create-program-page.settings.validation.success-fee-max", {
+      t("validations.success-fee-max", {
         max
       })
     );
@@ -91,18 +91,16 @@ export const signalVolumeFeeShape = (
   max: number = 0.1
 ) => {
   return number()
-    .required(
-      t("create-program-page.settings.validation.signal-volume-fee-required")
-    )
+    .required(t("validations.signal-volume-fee-required"))
     .min(
       min,
-      t("create-program-page.settings.validation.signal-volume-fee-min", {
+      t("validations.signal-volume-fee-min", {
         min
       })
     )
     .max(
       max,
-      t("create-program-page.settings.validation.signal-volume-fee-max", {
+      t("validations.signal-volume-fee-max", {
         max
       })
     );
@@ -110,33 +108,33 @@ export const signalVolumeFeeShape = (
 
 export const entryFeeShape = (t: TFunction, max: number) =>
   number()
-    .required(t("create-program-page.settings.validation.entry-fee-required"))
-    .min(0, t("create-program-page.settings.validation.entry-fee-min"))
+    .required(t("validations.entry-fee-required"))
+    .min(0, t("validations.entry-fee-min"))
     .max(
       max,
-      t("create-program-page.settings.validation.entry-fee-max", {
+      t("validations.entry-fee-max", {
         max
       })
     );
 
 export const successFeeShape = (t: TFunction, max: number) =>
   number()
-    .required(t("create-program-page.settings.validation.success-fee-required"))
-    .min(0, t("create-program-page.settings.validation.success-fee-min"))
+    .required(t("validations.success-fee-required"))
+    .min(0, t("validations.success-fee-min"))
     .max(
       max,
-      t("create-program-page.settings.validation.success-fee-max", {
+      t("validations.success-fee-max", {
         max
       })
     );
 
 export const exitFeeShape = (t: TFunction, max: number) =>
   number()
-    .required(t("create-fund-page.settings.validation.exit-fee-required"))
-    .min(0, t("create-fund-page.settings.validation.exit-fee-min"))
+    .required(t("validations.exit-fee-required"))
+    .min(0, t("validations.exit-fee-min"))
     .max(
       max,
-      t("create-fund-page.settings.validation.exit-fee-max", {
+      t("validations.exit-fee-max", {
         max
       })
     );
@@ -145,9 +143,9 @@ export const twoFactorValidator = (t: TFunction, twoFactorEnabled: boolean) => {
   return twoFactorEnabled
     ? string()
         .trim()
-        .matches(/^\d{6}$/, t("wallet-withdraw.validation.two-factor-6digits"))
-        .required(t("wallet-withdraw.validation.two-factor-required"))
+        .matches(/^\d{6}$/, t("validations.two-factor-6digits"))
+        .required(t("validations.two-factor-required"))
     : string()
         .trim()
-        .matches(/^\d{6}$/, t("wallet-withdraw.validation.two-factor-6digits"));
+        .matches(/^\d{6}$/, t("validations.two-factor-6digits"));
 };

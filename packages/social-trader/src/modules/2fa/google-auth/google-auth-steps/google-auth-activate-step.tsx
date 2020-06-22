@@ -33,10 +33,7 @@ export const GoogleStep3: React.FC<Props> = ({
     validationSchema: object().shape({
       [FIELDS.code]: string()
         .trim()
-        .matches(
-          /^\d{6}$/,
-          t("auth.login.two-factor.validation.two-factor-6digits")
-        )
+        .matches(/^\d{6}$/, t("validations.two-factor-6digits"))
         .required(t("2fa-page.code-required")),
       [FIELDS.password]: enablePassword
         ? string().required(t("2fa-page.password-required"))

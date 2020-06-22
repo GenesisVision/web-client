@@ -42,19 +42,13 @@ const _DisableAuthForm: React.FC<Props> = ({ onSubmit, errorMessage }) => {
       [FIELDS.recoveryCode]:
         tab === TAB.RECOVERY
           ? string()
-              .matches(
-                /^\d{6}$/,
-                t("auth.login.two-factor.validation.two-factor-6digits")
-              )
+              .matches(/^\d{6}$/, t("validations.two-factor-6digits"))
               .required(t("2fa-page.code-required"))
           : string(),
       [FIELDS.twoFactorCode]:
         tab === TAB.TFA
           ? string()
-              .matches(
-                /^\d{6}$/,
-                t("auth.login.two-factor.validation.two-factor-6digits")
-              )
+              .matches(/^\d{6}$/, t("validations.two-factor-6digits"))
               .required(t("2fa-page.code-required"))
           : string(),
       [FIELDS.password]: string().required(t("2fa-page.password-required"))

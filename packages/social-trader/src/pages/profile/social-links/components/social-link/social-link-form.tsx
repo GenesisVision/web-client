@@ -35,7 +35,7 @@ const _SocialLinkForm: React.FC<Props> = ({
     validationSchema: object().shape({
       [FORM_FIELD.value]: string()
         .trim()
-        .max(100, t("profile-page.social-links.validation.link-max-length"))
+        .max(100, t("validations.link-max-length"))
     }),
     mode: "onChange"
   });

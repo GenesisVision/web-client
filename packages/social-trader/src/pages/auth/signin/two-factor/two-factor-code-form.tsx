@@ -41,11 +41,8 @@ const _TwoFactorCodeForm: React.FC<Props> = ({
     validationSchema: object().shape({
       [FIELDS.code]: string()
         .trim()
-        .matches(
-          /^\d{6}$/,
-          t("auth.login.two-factor.validation.two-factor-6digits")
-        )
-        .required(t("auth.login.two-factor.validation.two-factor-required"))
+        .matches(/^\d{6}$/, t("validations.two-factor-6digits"))
+        .required(t("validations.two-factor-required"))
     }),
     mode: "onChange"
   });

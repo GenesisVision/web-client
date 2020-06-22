@@ -33,7 +33,7 @@ const _RecoveryCodeForm: React.FC<Props> = ({
     validationSchema: object().shape({
       [FIELDS.code]: string()
         .trim()
-        .required(t("auth.login.recovery.validation.recovery-is-required"))
+        .required(t("validations.recovery-is-required"))
     }),
     mode: "onChange"
   });

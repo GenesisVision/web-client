@@ -1,5 +1,64 @@
 {
   "validations": {
+    "link-max-length": "The maximum link length is 100 characters.",
+    "recovery-is-required": "Recovery code is required.",
+    "resolution": "The resolution of the uploaded image is too low.",
+    "file-is-large": "The uploaded image file is too large.",
+    "min-value": "Must be greater than or equal to {{minAmount}}",
+    "amount-more-than-wallet-balance": "Amount is greater than the account balance",
+    "address-is-required": "An address is required.",
+    "two-factor-6digits": "Should contain at least 6 digits.",
+    "two-factor-required": "Authentication code is required.",
+    "fixedVolume-min": "{{fixedCurrency}} equivalent must be greater than or equal to 0",
+    "fixedVolume-max": "{{fixedCurrency}} equivalent must be less than or equal to 99999",
+    "percent-min": "Percent must be greater than or equal to 1%",
+    "percent-max": "Percent must be less than or equal to 999%",
+    "tolerance-percent-min": "Tolerance percent must be greater than or equal to 0.01",
+    "tolerance-percent-max": "Tolerance percent must be less than or equal to 20%",
+    "tolerance-required": "Tolerance percent is required field",
+    "amount-more-than-min-deposit": "Must be greater than {{value}}",
+    "amount-more-than-account-balance": "Amount is greater than the account balance",
+    "amount-more-than-available": "Amount is more than available in your wallet",
+    "amount-exceeds-limit": "Amount exceeds the possible investment limit",
+    "amount-min-value": "Min amount is {{min}} {{currency}}",
+    "api-secret": "Api secret is required",
+    "api-key": "Api key is required",
+    "exit-fee-required": "Field is required",
+    "exit-fee-min": "Exit fee must be greater than 0 %",
+    "exit-fee-max": "Exit fee must be less than {{max}} %",
+    "assets-share": "Total share of all assets should be equal to 100%",
+    "assets-count": "Must be at least two assets.",
+    "deposit-min": "Not enough money.",
+    "stop-out-required": "Stop Out is required",
+    "stop-out-is-large": "Must be less than 100",
+    "stop-out-is-zero": "Must be more than 10",
+    "stop-out-less-ten": "Can't be less than 10",
+    "stop-out-more-current": "Can't be more than a current value",
+    "amount-required": "Amount is required",
+    "amount-is-large": "Must be available in Wallet",
+    "amount-is-zero": "Must be greater or equal {{min}}",
+    "title-required": "Title is required",
+    "title-is-long": "Title is too long",
+    "title-is-short": "Title is too short",
+    "title-is-latin-and-numbers": "Latin letters and numbers only.",
+    "description-is-long": "Description is too long",
+    "description-is-short": "Description is too short",
+    "description-required": "Description is required",
+    "currency-required": "Currency is required",
+    "period-required": "Period is required",
+    "leverage-required": "Leverage is required",
+    "entry-fee-required": "Field is required",
+    "entry-fee-min": "Must be greater than 0 % ",
+    "entry-fee-max": "Must be less than {{max}} %",
+    "success-fee-required": "Field is required",
+    "success-fee-min": "Must be greater or equal than 0 % ",
+    "success-fee-max": "Must be less than {{max}} % ",
+    "signal-volume-fee-required": "Volume fee is required",
+    "signal-volume-fee-min": "Must be greater than {{min}} %",
+    "signal-volume-fee-max": "Must be less than {{max}} %",
+    "account-type-required": "Account type is required",
+    "investment-limit-min": "Must be greater than 0",
+    "investment-limit-required": "Investment Limit is required",
     "required": "Field is required",
     "min": "Must be more or equal than {{min}}",
     "max": "Must be less or equal than {{max}}"
@@ -249,11 +308,7 @@
     "drag-or-click": "Drag the image here or click ",
     "upload": "upload",
     "to-browse": " to browse your files",
-    "tap-to-upload": "Tap to upload the image",
-    "validation": {
-      "resolution": "The resolution of the uploaded image is too low.",
-      "file-is-large": "The uploaded image file is too large."
-    }
+    "tap-to-upload": "Tap to upload the image"
   },
   "navigation": {
     "media": "Media",
@@ -356,12 +411,6 @@
       "page-title": "Wallet withdrawal confirmed",
       "error": "An error occurred during confirmation of email: ",
       "success": "Withdrawal request has been confirmed"
-    },
-    "validation": {
-      "amount-more-than-available": "Amount requested is more than currently available in your wallet",
-      "address-is-required": "An address is required.",
-      "two-factor-6digits": "Should contain at least 6 digits.",
-      "two-factor-required": "Authentication code is required."
     }
   },
   "transfer": {
@@ -387,10 +436,6 @@
       "deposit-success": "Deposit request is confirmed",
       "withdraw-success": "Withdrawal request is confirmed",
       "success": "Withdrawal request is confirmed"
-    },
-    "validation": {
-      "amount-more-than-available": "Amount is greater than the account balance",
-      "amount-is-zero": "Must be greater than zero"
     }
   },
   "password-change-trading-account": {
@@ -429,11 +474,6 @@
     "investment-amount": "Investment amount",
     "disclaimer": "After clicking the \"Confirm\" button, the invested GVT will be immediately converted to {{currency}}. The transfer of {{currency}} over to the account manager will only occur at the end of the current reporting period.",
     "confirm": "Confirm",
-    "validation": {
-      "amount-more-than-available": "Amount is more than available in your wallet",
-      "amount-exceeds-limit": "Amount exceeds the possible investment limit",
-      "amount-min-value": "Min amount is {{min}} {{currency}}"
-    },
     "program": {
       "available-to-invest": "Available to invest in program",
       "success-alert-message": "Successful request for investment in the program."
@@ -462,11 +502,7 @@
     "invested": "Invested",
     "how-much-withdraw": "How much would you like to withdraw?",
     "enter-amount": "Enter {{token}} amount",
-    "success-alert-message": "Request to withdraw sent successfully.",
-    "validation": {
-      "amount-is-zero": "Must be greater than zero",
-      "amount-more-than-available": "Amount is greater than the account balance"
-    }
+    "success-alert-message": "Request to withdraw sent successfully."
   },
   "unfollow-program": {
     "title": "Unfollow Trades",
@@ -533,12 +569,7 @@
       "available": "Available in wallet",
       "amount": "Deposit amount",
       "from": "From",
-      "next": "Next",
-      "validation": {
-        "amount-required": "Amount is a required field",
-        "amount-more-than-min-deposit": "Must be greater than {{value}}",
-        "amount-more-than-available": "Amount is greater than the account balance"
-      }
+      "next": "Next"
     },
     "params": {
       "fixed-currency": "Fixed currency",
@@ -549,16 +580,7 @@
       "volume-percent": "Volume percentage",
       "fixed-currency-equivalent": "{{fixedCurrency}} equivalent",
       "back": "Back",
-      "submit": "Subscribe",
-      "validation": {
-        "fixedVolume-min": "{{fixedCurrency}} equivalent must be greater than or equal to 0",
-        "fixedVolume-max": "{{fixedCurrency}} equivalent must be less than or equal to 99999",
-        "percent-min": "Percent must be greater than or equal to 1%",
-        "percent-max": "Percent must be less than or equal to 999%",
-        "tolerance-percent-min": "Tolerance percent must be greater than or equal to 0.01",
-        "tolerance-percent-max": "Tolerance percent must be less than or equal to 20%",
-        "tolerance-required": "Tolerance percent is required field"
-      }
+      "submit": "Subscribe"
     },
     "create-success-alert-message": "You have been subscribed.",
     "edit-success-alert-message": "Subscription settings have been edited."
@@ -571,11 +593,7 @@
     "amount-to-withdraw": "Amount to withdraw",
     "withdrawing": "Withdrawing",
     "wallet": "Wallet",
-    "success-alert-message": "Withdrawal request sent successfully.",
-    "validation": {
-      "required": "Amount is required",
-      "min-value": "Must be greater than or equal to {{minAmount}}"
-    }
+    "success-alert-message": "Withdrawal request sent successfully."
   },
   "not-found-page": {
     "title": "Page Not Found",
@@ -1340,38 +1358,6 @@
         "signal-success-fee-description": "A fee charged for the profit made from copied successful trades.",
         "stop-out-level": "Description about Stop Out is here",
         "stop-out-level-description": "Stop Out is the maximum drawdown level for the reporting period at which the program is stopped, and all investments return to investors."
-      },
-      "validation": {
-        "stop-out-required": "Stop Out is required",
-        "stop-out-is-large": "Must be less than 100",
-        "stop-out-is-zero": "Must be more than 10",
-        "stop-out-less-ten": "Can't be less than 10",
-        "stop-out-more-current": "Can't be more than a current value",
-        "amount-required": "Amount is required",
-        "amount-is-large": "Must be available in Wallet",
-        "amount-is-zero": "Must be greater or equal {{min}}",
-        "title-required": "Title is required",
-        "title-is-long": "Title is too long",
-        "title-is-short": "Title is too short",
-        "title-is-latin-and-numbers": "Latin letters and numbers only.",
-        "description-is-long": "Description is too long",
-        "description-is-short": "Description is too short",
-        "description-required": "Description is required",
-        "currency-required": "Currency is required",
-        "period-required": "Period is required",
-        "leverage-required": "Leverage is required",
-        "entry-fee-required": "Field is required",
-        "entry-fee-min": "Must be greater than 0 % ",
-        "entry-fee-max": "Must be less than {{max}} %",
-        "success-fee-required": "Field is required",
-        "success-fee-min": "Must be greater or equal than 0 % ",
-        "success-fee-max": "Must be less than {{max}} % ",
-        "signal-volume-fee-required": "Volume fee is required",
-        "signal-volume-fee-min": "Must be greater than {{min}} %",
-        "signal-volume-fee-max": "Must be less than {{max}} %",
-        "account-type-required": "Account type is required",
-        "investment-limit-min": "Must be greater than 0",
-        "investment-limit-required": "Investment Limit is required"
       }
     },
     "notifications": {
@@ -1457,17 +1443,6 @@
         "exit-fee": "Exit fee",
         "deposit-amount": "Deposit amount",
         "available-in-wallet": "Available in the wallet"
-      },
-      "validation": {
-        "api-secret": "Api secret is required",
-        "api-key": "Api key is required",
-        "entry-fee-required": "Field is required",
-        "exit-fee-required": "Field is required",
-        "exit-fee-min": "Exit fee must be greater than 0 %",
-        "exit-fee-max": "Exit fee must be less than {{max}} %",
-        "assets-share": "Total share of all assets should be equal to 100%",
-        "assets-count": "Must be at least two assets.",
-        "deposit-min": "Not enough money."
       },
       "hints": {
         "entry-fee": "Description about entry fee is here",
