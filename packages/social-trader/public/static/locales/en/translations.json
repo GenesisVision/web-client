@@ -860,6 +860,27 @@
     }
   },
   "program-details-page": {
+    "level-calculator": {
+      "title": "Calculator",
+      "program": "Program",
+      "genesis-ratio": "Genesis Ratio",
+      "age": "Age",
+      "weighted-volume-scale": "Weighted volume scale",
+      "manager-balance": "Manager balance",
+      "current-av-to-invest": "Av. to invest (current)",
+      "new-av-to-invest": "Av. to invest (new)",
+      "current-investment-scale": "Investment scale (current)",
+      "new-investment-scale": "Investment scale (new)",
+      "age-tooltip": "The age of the program.",
+      "genesis-ratio-tooltip": "The ratio of the profit of the program against its risk. It is set in the range from 0 to 1. If Genesis Ratio <0.2, then the program is high risk and the InvScale is limited to 1, meaning that the manager can attract no more than his own deposit.",
+      "weighted-volume-scale-tooltip": "This is a multiplier of the volume traded by the manager relative to the program balance for all periods. \nIt is calculated similarly to the Genesis Ratio, being a weighted average over all given periods.",
+      "manager-balance-tooltip": "The current value of manager funds in the program.",
+      "current-av-to-invest-tooltip": "The current amount available for investment into the program. The investment limit and the funds already deposited are not taken into account.",
+      "new-av-to-invest-tooltip": "The new Av. to invest value you receive as a result of changing parameters within the calculator.",
+      "current-investment-scale-tooltip": "The current value ​​of the indicator, which depends on the Age, Volume Scale and Genesis Ratio. The indicator is set in a range from 1 to 20. \nAv. to invest = Investment scale * Manager Balance",
+      "new-investment-scale-tooltip": "The new value ​​of the indicator, which depends on the Age, Volume Scale and Genesis Ratio. The indicator is set in a range from 1 to 20. \nAv. to invest = Investment scale * Manager Balance",
+      "kyc-disclaimer": "All of your investment programs are limited to the first level since you have not yet completed the KYC verification procedure. The maximum amount of investment you can attract at the first level is the equivalent of 1000 USD."
+    },
     "title": "Program detail",
     "close-period": {
       "title": "Close Period",
@@ -1455,98 +1476,6 @@
         "exit-fee-description": "An exit fee is a fee charged to investors when they redeem shares from a GV Fund. The maximum exit fee is {{maxFee}} %"
       }
     }
-  },
-  "edit-asset": {
-    "notifications": {
-      "edit-success": {
-        "trading-account": "Trading account has been edited.",
-        "follow": "Follow has been edited",
-        "program": "Program has been edited",
-        "fund": "Fund has been edited."
-      }
-    }
-  },
-  "edit-program": {
-    "title": "Edit program",
-    "navigation-back-text": "All data will be deleted. Do you want to continue?",
-    "confirm": "Confirm",
-    "settings": {
-      "fields": {
-        "name": "Name",
-        "name-requirements": "Requirement from 4 to 20 symbols",
-        "description": "Description",
-        "description-requirements": "Requirement from 20 to 500 symbols",
-        "upload-logo": "Upload program logo",
-        "upload-logo-rules": "At least 300 x 300px PNG or JPG file. The maximum file size is 2MB."
-      },
-      "hints": {
-        "entry-fee": "Description about entry fee is here"
-      },
-      "validation": {
-        "title-required": "Title is required",
-        "title-is-long": "Title is too long",
-        "title-is-short": "Title is too short",
-        "title-is-latin-and-numbers": "Latin letters and numbers only.",
-        "description-is-long": "Description is too long",
-        "description-is-short": "Description is too short",
-        "description-required": "Description is required",
-        "account-type-required": "Account type is required"
-      }
-    }
-  },
-  "edit-fund": {
-    "title": "Edit details",
-    "navigation-back-text": "All data will be deleted. Do you want to continue?",
-    "confirm": "Confirm",
-    "settings": {
-      "fields": {
-        "name": "Name",
-        "name-requirements": "Requirement from 4 to 20 symbols",
-        "description": "Description",
-        "description-requirements": "Requirement from 20 to 500 symbols",
-        "upload-logo": "Upload fund logo",
-        "upload-logo-rules": "At least 300 x 300px PNG or JPG file. The maximum file size is 2MB."
-      },
-      "hints": {
-        "entry-fee": "Description about entry fee is here"
-      },
-      "validation": {
-        "title-required": "Title is required",
-        "title-is-long": "Title is too long",
-        "title-is-short": "Title is too short",
-        "title-is-latin-and-numbers": "Latin letters and numbers only.",
-        "description-is-long": "Description is too long",
-        "description-is-short": "Description is too short",
-        "description-required": "Description is required",
-        "account-type-required": "Account type is required"
-      }
-    }
-  },
-  "reallocate": {
-    "title": "Reallocate",
-    "apply": "Confirm",
-    "success-alert-message": "Your assets were successfully reallocated!"
-  },
-  "level-calculator": {
-    "title": "Calculator",
-    "program": "Program",
-    "genesis-ratio": "Genesis Ratio",
-    "age": "Age",
-    "weighted-volume-scale": "Weighted volume scale",
-    "manager-balance": "Manager balance",
-    "current-av-to-invest": "Av. to invest (current)",
-    "new-av-to-invest": "Av. to invest (new)",
-    "current-investment-scale": "Investment scale (current)",
-    "new-investment-scale": "Investment scale (new)",
-    "age-tooltip": "The age of the program.",
-    "genesis-ratio-tooltip": "The ratio of the profit of the program against its risk. It is set in the range from 0 to 1. If Genesis Ratio <0.2, then the program is high risk and the InvScale is limited to 1, meaning that the manager can attract no more than his own deposit.",
-    "weighted-volume-scale-tooltip": "This is a multiplier of the volume traded by the manager relative to the program balance for all periods. \nIt is calculated similarly to the Genesis Ratio, being a weighted average over all given periods.",
-    "manager-balance-tooltip": "The current value of manager funds in the program.",
-    "current-av-to-invest-tooltip": "The current amount available for investment into the program. The investment limit and the funds already deposited are not taken into account.",
-    "new-av-to-invest-tooltip": "The new Av. to invest value you receive as a result of changing parameters within the calculator.",
-    "current-investment-scale-tooltip": "The current value ​​of the indicator, which depends on the Age, Volume Scale and Genesis Ratio. The indicator is set in a range from 1 to 20. \nAv. to invest = Investment scale * Manager Balance",
-    "new-investment-scale-tooltip": "The new value ​​of the indicator, which depends on the Age, Volume Scale and Genesis Ratio. The indicator is set in a range from 1 to 20. \nAv. to invest = Investment scale * Manager Balance",
-    "kyc-disclaimer": "All of your investment programs are limited to the first level since you have not yet completed the KYC verification procedure. The maximum amount of investment you can attract at the first level is the equivalent of 1000 USD."
   },
   "referral-program": {
     "title": "Genesis Vision Referral program",

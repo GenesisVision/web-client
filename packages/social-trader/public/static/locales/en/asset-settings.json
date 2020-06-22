@@ -1,4 +1,17 @@
 {
+  "reallocate": {
+    "title": "Reallocate",
+    "apply": "Confirm",
+    "success-alert-message": "Your assets were successfully reallocated!"
+  },
+  "notifications": {
+    "edit-success": {
+      "trading-account": "Trading account has been edited.",
+      "follow": "Follow has been edited",
+      "program": "Program has been edited",
+      "fund": "Fund has been edited."
+    }
+  },
   "close-follow": {
     "title": "Close follow"
   },

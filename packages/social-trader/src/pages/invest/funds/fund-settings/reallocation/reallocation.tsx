@@ -21,7 +21,7 @@ const _Reallocation: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   const { errorMessage, sendRequest } = useApiRequest({
-    successMessage: "reallocate.success-alert-message",
+    successMessage: "asset-settings.reallocate.success-alert-message",
     middleware: [postponeCallback(onApply)],
     request: args => updateAssets(args)
   });
