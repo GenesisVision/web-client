@@ -6,8 +6,8 @@ const DisableSuccess: React.FC = () => {
   const { t } = useTranslation();
   return (
     <DialogTop
-      title={t("2fa-page.disable.title")}
-      subtitle={t("2fa-page.disable.success")}
+      title={t("2fa-page.profile-page.disable.title")}
+      subtitle={t("2fa-page.profile-page.disable.success")}
     />
   );
 };
