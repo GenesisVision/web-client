@@ -1,22 +1,4 @@
 {
-  "asset-actions": {
-    "change-password": "Change password",
-    "remove-from-favorites": "Remove from Favourites",
-    "add-to-favorites": "Add to Favourites",
-    "details": "Details",
-    "invest": "Invest",
-    "withdraw": "Withdraw",
-    "create-program": "Create Program",
-    "create-tournament-account": "Create Tournament Account",
-    "edit-program": "Edit Program",
-    "close-program": "Close Program",
-    "close-period": "Close Period"
-  },
-  "my-history": {
-    "details": "Details",
-    "loss": "Loss in the program",
-    "refund": "Amount of funds that have been returned to your wallet."
-  },
   "validations": {
     "max-amount": "Must be less than {{maxAmount}}",
     "link-max-length": "The maximum link length is 100 characters.",
@@ -81,30 +63,6 @@
     "required": "Field is required",
     "min": "Must be more or equal than {{min}}",
     "max": "Must be less or equal than {{max}}"
-  },
-  "conversation": {
-    "repost": "Share",
-    "your-message": "Your message..."
-  },
-  "input-amount-field": {
-    "label": "Amount"
-  },
-  "trade": {
-    "title": "Trade"
-  },
-  "unauth-popup": {
-    "fund": "You must be logged in to invest in a fund",
-    "program": "You must be logged in to invest in a program",
-    "follow": "You must be logged in to follow trades."
-  },
-  "request-line": {
-    "success-message": "Request successfully canceled.",
-    "cancel-header": "Cancel request",
-    "cancel-body": "Please confirm that you want to cancel the request."
-  },
-  "active": {
-    "chart": "Chart",
-    "about": "About"
   },
   "table": {
     "loading": "Loading...",
@@ -193,48 +151,11 @@
       "popover-search-placeholder": "Search for assets"
     }
   },
-  "program-period": {
-    "day": "day",
-    "day_plural": "days",
-    "hour": "hour",
-    "hour_plural": "hours",
-    "minute": "minute",
-    "minute_plural": "minutes",
-    "second": "second",
-    "second_plural": "seconds",
-    "waiting-period-start": "Waiting for the period to start",
-    "period-is-over": "The period is over.",
-    "time-left": "Time left",
-    "period-ends": "Period ends",
-    "left": "left",
-    "program-closed": "Program is closed"
-  },
-  "chart-period": {
-    "day-short": "1D",
-    "day": "a Day",
-    "week-short": "1W",
-    "week": "a Week",
-    "month-short": "1M",
-    "month": "a Month",
-    "quarter-short": "3M",
-    "quarter": "a Quarter",
-    "year-short": "1Y",
-    "year": "a Year",
-    "all-short": "All",
-    "all": "All Time"
-  },
   "pager": {
     "first": "First",
     "prev": "Prev",
     "next": "Next",
     "last": "Last"
-  },
-  "input-image": {
-    "drop-files": "Drop files...",
-    "drag-or-click": "Drag the image here or click ",
-    "upload": "upload",
-    "to-browse": " to browse your files",
-    "tap-to-upload": "Tap to upload the image"
   },
   "navigation": {
     "media": "Media",
@@ -267,18 +188,83 @@
     "logout": "Logout",
     "login": "Login"
   },
+  "profile-widget": {
+    "security": "Security",
+    "personal-details": "Personal Details",
+    "settings": "Settings",
+    "logout": "Log out"
+  },
+  "not-found-page": {
+    "title": "Page Not Found",
+    "body": "Page Not Found"
+  },
+  "server-connection-error-page": {
+    "title": "Server Error",
+    "body": "Server error occurred. Please try again later or contact the support department."
+  },
+  "header-fields": {
+    "balance": "Size",
+    "assets": "Assets",
+    "subscribers": "Subscribers",
+    "name": "Name",
+    "reinvest": "Reinvest",
+    "value": "Value",
+    "current-value": "Current value",
+    "share": "Share",
+    "status": "Status",
+    "position": "Pos.",
+    "title": "Name",
+    "equity": "Equity",
+    "currency": "Curr.",
+    "investors": "Investors",
+    "available-to-invest": "Av. to invest",
+    "trades": "Trades",
+    "age": "Age",
+    "period": "Period",
+    "drawdown": "D.down",
+    "profit": "Profit",
+    "chart": "Chart",
+    "strategy": "Strategy"
+  },
+  "global-search-page": {
+    "managers-table": {
+      "username": "Username",
+      "assets": "Assets",
+      "memberSince": "Member Since"
+    },
+    "follows": "Follow",
+    "title": "Search",
+    "heading": "Search Results",
+    "programs": "Programs",
+    "funds": "Funds",
+    "managers": "Users"
+  },
+  "app": {
+    "title": "Genesis Vision"
+  },
+  "asset-actions": {
+    "change-password": "Change password",
+    "remove-from-favorites": "Remove from Favourites",
+    "add-to-favorites": "Add to Favourites",
+    "details": "Details",
+    "invest": "Invest",
+    "withdraw": "Withdraw",
+    "create-program": "Create Program",
+    "create-tournament-account": "Create Tournament Account",
+    "edit-program": "Edit Program",
+    "close-program": "Close Program",
+    "close-period": "Close Period"
+  },
+  "my-history": {
+    "details": "Details",
+    "loss": "Loss in the program",
+    "refund": "Amount of funds that have been returned to your wallet."
+  },
   "notifications-aside": {
     "clear": "Clear",
     "header": "Notifications",
     "today": "today",
     "yesterday": "yesterday"
-  },
-  "program-statuses": {
-    "Active": "Active",
-    "Investing": "Investing",
-    "Withdrawing": "Withdrawing",
-    "Ended": "Ended",
-    "Pending": "Pending"
   },
   "wallet-widget": {
     "trading": "Trading",
@@ -301,6 +287,101 @@
     "copy-to-clipboard-error": "Failed to copy the data to the clipboard.",
     "disclaimer": "After processing the {{currency}} transaction, your transferred funds will be converted to GVT, according to the current market price. The exact amount of GVT received will be determined at the time of conversion in the market.",
     "warning": "Send only {{currency}} to this deposit address. Sending any other coin or token to this address may result in the loss of your deposit."
+  },
+  "level-tooltip": {
+    "genesis-level": "Genesis level",
+    "level-up": "Level Up",
+    "top10": "Top 10%"
+  },
+  "deposit-asset": {
+    "management-fee": "Management fee",
+    "title": "Invest",
+    "own-title": "Deposit",
+    "gv-commission": "GV commission",
+    "available-in-wallet": "Available in wallet",
+    "amount": "Amount to invest",
+    "entry-fee": "Entry fee",
+    "investment-amount": "Investment amount",
+    "disclaimer": "After clicking the \"Confirm\" button, the invested GVT will be immediately converted to {{currency}}. The transfer of {{currency}} over to the account manager will only occur at the end of the current reporting period.",
+    "confirm": "Confirm",
+    "program": {
+      "available-to-invest": "Available to invest in program",
+      "success-alert-message": "Successful request for investment in the program."
+    },
+    "fund": {
+      "available-to-invest": "Available to invest in fund",
+      "success-alert-message": "Successful request for investment in the fund.",
+      "disclaimer": "After clicking the \"Confirm\" button, your request will be processed within a few minutes."
+    }
+  },
+
+  "conversation": {
+    "repost": "Share",
+    "your-message": "Your message..."
+  },
+  "input-amount-field": {
+    "label": "Amount"
+  },
+  "trade": {
+    "title": "Trade"
+  },
+  "unauth-popup": {
+    "fund": "You must be logged in to invest in a fund",
+    "program": "You must be logged in to invest in a program",
+    "follow": "You must be logged in to follow trades."
+  },
+  "request-line": {
+    "success-message": "Request successfully canceled.",
+    "cancel-header": "Cancel request",
+    "cancel-body": "Please confirm that you want to cancel the request."
+  },
+  "active": {
+    "chart": "Chart",
+    "about": "About"
+  },
+  "program-period": {
+    "day": "day",
+    "day_plural": "days",
+    "hour": "hour",
+    "hour_plural": "hours",
+    "minute": "minute",
+    "minute_plural": "minutes",
+    "second": "second",
+    "second_plural": "seconds",
+    "waiting-period-start": "Waiting for the period to start",
+    "period-is-over": "The period is over.",
+    "time-left": "Time left",
+    "period-ends": "Period ends",
+    "left": "left",
+    "program-closed": "Program is closed"
+  },
+  "chart-period": {
+    "day-short": "1D",
+    "day": "a Day",
+    "week-short": "1W",
+    "week": "a Week",
+    "month-short": "1M",
+    "month": "a Month",
+    "quarter-short": "3M",
+    "quarter": "a Quarter",
+    "year-short": "1Y",
+    "year": "a Year",
+    "all-short": "All",
+    "all": "All Time"
+  },
+  "input-image": {
+    "drop-files": "Drop files...",
+    "drag-or-click": "Drag the image here or click ",
+    "upload": "upload",
+    "to-browse": " to browse your files",
+    "tap-to-upload": "Tap to upload the image"
+  },
+  "program-statuses": {
+    "Active": "Active",
+    "Investing": "Investing",
+    "Withdrawing": "Withdrawing",
+    "Ended": "Ended",
+    "Pending": "Pending"
   },
   "wallet-withdraw": {
     "title": "Withdraw",
@@ -344,33 +425,6 @@
       "deposit-success": "Deposit request is confirmed",
       "withdraw-success": "Withdrawal request is confirmed",
       "success": "Withdrawal request is confirmed"
-    }
-  },
-  "profile-widget": {
-    "security": "Security",
-    "personal-details": "Personal Details",
-    "settings": "Settings",
-    "logout": "Log out"
-  },
-  "deposit-asset": {
-    "management-fee": "Management fee",
-    "title": "Invest",
-    "own-title": "Deposit",
-    "gv-commission": "GV commission",
-    "available-in-wallet": "Available in wallet",
-    "amount": "Amount to invest",
-    "entry-fee": "Entry fee",
-    "investment-amount": "Investment amount",
-    "disclaimer": "After clicking the \"Confirm\" button, the invested GVT will be immediately converted to {{currency}}. The transfer of {{currency}} over to the account manager will only occur at the end of the current reporting period.",
-    "confirm": "Confirm",
-    "program": {
-      "available-to-invest": "Available to invest in program",
-      "success-alert-message": "Successful request for investment in the program."
-    },
-    "fund": {
-      "available-to-invest": "Available to invest in fund",
-      "success-alert-message": "Successful request for investment in the fund.",
-      "disclaimer": "After clicking the \"Confirm\" button, your request will be processed within a few minutes."
     }
   },
   "withdraw-program": {
@@ -471,65 +525,12 @@
     "wallet": "Wallet",
     "success-alert-message": "Withdrawal request sent successfully."
   },
-  "not-found-page": {
-    "title": "Page Not Found",
-    "body": "Page Not Found"
-  },
-  "server-connection-error-page": {
-    "title": "Server Error",
-    "body": "Server error occurred. Please try again later or contact the support department."
-  },
-  "header-fields": {
-    "balance": "Size",
-    "assets": "Assets",
-    "subscribers": "Subscribers",
-    "name": "Name",
-    "reinvest": "Reinvest",
-    "value": "Value",
-    "current-value": "Current value",
-    "share": "Share",
-    "status": "Status",
-    "position": "Pos.",
-    "title": "Name",
-    "equity": "Equity",
-    "currency": "Curr.",
-    "investors": "Investors",
-    "available-to-invest": "Av. to invest",
-    "trades": "Trades",
-    "age": "Age",
-    "period": "Period",
-    "drawdown": "D.down",
-    "profit": "Profit",
-    "chart": "Chart",
-    "strategy": "Strategy"
-  },
-  "global-search-page": {
-    "managers-table": {
-      "username": "Username",
-      "assets": "Assets",
-      "memberSince": "Member Since"
-    },
-    "follows": "Follow",
-    "title": "Search",
-    "heading": "Search Results",
-    "programs": "Programs",
-    "funds": "Funds",
-    "managers": "Users"
-  },
   "gvt-fees": {
     "titles": {
       "main": "Fees and Discounts"
     }
   },
-  "level-tooltip": {
-    "genesis-level": "Genesis level",
-    "level-up": "Level Up",
-    "top10": "Top 10%"
-  },
   "program-edit-signal": {
     "success-alert-message": "Program has been edited"
-  },
-  "app": {
-    "title": "Genesis Vision"
   }
 }
