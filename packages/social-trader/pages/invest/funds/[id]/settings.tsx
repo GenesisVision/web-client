@@ -11,7 +11,7 @@ import { compose } from "redux";
 import { getAccountCurrency } from "utils/account-currency";
 import { NextPageWithRedux } from "utils/types";
 
-const Page: NextPageWithRedux<void> = () => {
+const Page: NextPageWithRedux<{}> = () => {
   return <FundSettingsPage />;
 };
 
@@ -25,6 +25,7 @@ Page.getInitialProps = async ctx => {
     if (checkClosed(description.value.publicInfo.status))
       throw "Fund is closed";
   });
+  return { namespacesRequired: ["fund-settings"] };
 };
 
 export default compose(withDefaultLayout, withPrivateRoute)(Page);
