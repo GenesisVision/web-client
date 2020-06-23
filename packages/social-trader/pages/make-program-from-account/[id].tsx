@@ -36,7 +36,7 @@ Page.getInitialProps = async ctx => {
     }
   );
   return {
-    namespacesRequired: ["asset-settings", "convert-page"],
+    namespacesRequired: ["asset-settings", "create-account", "convert-page"],
     id,
     broker,
     accountCurrency

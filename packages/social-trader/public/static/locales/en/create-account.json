@@ -28,13 +28,6 @@
     "main-settings": "Main settings",
     "fees-settings": "Fees settings",
     "deposit-details": "Deposit details",
-    "validation": {
-      "amount-required": "Amount is required",
-      "amount-is-large": "Must be available in Wallet",
-      "amount-is-zero": "Must be greater or equal {{min}}",
-      "currency-required": "Currency is required",
-      "leverage-required": "Leverage is required"
-    },
     "investment-program-fees": "Investment program fees",
     "signal-provider-fees": "Signal provider fees",
     "hints": {

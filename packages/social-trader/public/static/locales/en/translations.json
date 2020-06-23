@@ -76,6 +76,8 @@
     "server-error": "Server error occurred. Please try again later or contact the support department."
   },
   "buttons": {
+    "signup": "Sign up",
+    "login": "Login",
     "download": "Download",
     "max": "Max",
     "min": "Min",

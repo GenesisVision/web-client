@@ -12,7 +12,9 @@ const CreateFund: NextPageWithRedux<Props, {}> = () => {
 
 CreateFund.getInitialProps = async ctx => {
   await ctx.reduxStore.dispatch(fetchWalletsWithCtx(ctx));
-  return { namespacesRequired: ["asset-settings", "create-fund-page"] };
+  return {
+    namespacesRequired: ["asset-settings", "create-account", "create-fund-page"]
+  };
 };
 
 export default compose(withDefaultLayout, withPrivateRoute)(CreateFund);
