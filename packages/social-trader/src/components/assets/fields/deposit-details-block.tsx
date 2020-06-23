@@ -71,7 +71,7 @@ const _DepositDetailsBlock: React.FC<Props> = ({
       <div>
         <WalletSelect
           name={walletFieldName}
-          label={t("transfer.from")}
+          label={t("transfer:from")}
           items={wallets}
           onChange={onSelectChange(handleWalletChange)}
         />

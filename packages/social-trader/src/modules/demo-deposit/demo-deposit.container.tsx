@@ -21,7 +21,7 @@ const _DemoDepositContainer: React.FC<IDemoDepositContainerProps> = ({
   const onApplyMiddleware = postponeCallback(onApply);
   const { sendRequest, errorMessage } = useApiRequest({
     request: depositToDemo,
-    successMessage: t("transfer.confirmation.deposit-success"),
+    successMessage: t("transfer:confirmation.deposit-success"),
     middleware: [onApplyMiddleware]
   });
   const handleSubmit = useCallback(values => {
@@ -31,7 +31,7 @@ const _DemoDepositContainer: React.FC<IDemoDepositContainerProps> = ({
   return (
     <>
       <DialogTop
-        title={t("transfer.deposit-to", {
+        title={t("transfer:deposit-to", {
           title: t(`dashboard-page:trading.asset-types.TradingAccount`)
         })}
       />

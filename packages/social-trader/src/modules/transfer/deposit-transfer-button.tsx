@@ -20,7 +20,7 @@ const _DepositTransferButton: React.FC<Props> = props => {
   return (
     <TransferButton
       {...props}
-      successMessage={"transfer.confirmation.deposit-success"}
+      successMessage={"transfer:confirmation.deposit-success"}
       singleCurrentItemContainer={!outerCurrentItemContainerItems}
       size={size}
       color={"primary"}
@@ -29,7 +29,7 @@ const _DepositTransferButton: React.FC<Props> = props => {
       currentItemContainer={TRANSFER_CONTAINER.DESTINATION}
       sourceType={"Wallet"}
       destinationType={accountType as InternalTransferRequestType}
-      title={t("transfer.deposit-to", {
+      title={t("transfer:deposit-to", {
         title: t(`dashboard-page:trading.asset-types.${accountType}`)
       })}
     />

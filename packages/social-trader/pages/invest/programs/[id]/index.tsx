@@ -28,6 +28,7 @@ Page.getInitialProps = async ctx => {
   });
   return {
     namespacesRequired: [
+      "transfer",
       "asset-details",
       "program-details-page",
       "about-levels-page"
