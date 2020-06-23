@@ -1,11 +1,11 @@
 import { AvatarWithName } from "components/avatar/avatar-with-name/avatar-with-name";
 import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
 import Link from "components/link/link";
-import { useToLink } from "components/link/link.helper";
+import { createToUrl, useToLink } from "components/link/link.helper";
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import * as React from "react";
-import { managerToPathCreator } from "routes/manager.routes";
+import { composeManagerDetailsUrl } from "utils/compose-url";
 import { localizedDate } from "utils/dates";
 
 type ManagerProfile = any;
@@ -18,7 +18,13 @@ const _ManagersTableRow: React.FC<IManagersTableRowProps> = ({ manager }) => {
   return (
     <TableRow>
       <TableCell>
-        <Link to={managerToPathCreator(manager.url, contextTitle)}>
+        <Link
+          to={createToUrl(
+            composeManagerDetailsUrl(manager.url),
+            composeManagerDetailsUrl(manager.url),
+            contextTitle
+          )}
+        >
           <AvatarWithName
             avatar={
               <ProfileAvatar url={manager.logoUrl} alt={manager.username} />
