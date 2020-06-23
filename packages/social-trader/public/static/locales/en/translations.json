@@ -1,5 +1,6 @@
 {
   "labels": {
+    "gvt-fees-title": "Fees and Discounts",
     "to": "To",
     "two-factor-code-label": "Two factor authentication code"
   },
@@ -479,11 +480,6 @@
     "withdrawing": "Withdrawing",
     "wallet": "Wallet",
     "success-alert-message": "Withdrawal request sent successfully."
-  },
-  "gvt-fees": {
-    "titles": {
-      "main": "Fees and Discounts"
-    }
   },
   "program-edit-signal": {
     "success-alert-message": "Program has been edited"

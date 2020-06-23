@@ -15,7 +15,7 @@ const _GVTFees: React.FC<Props> = ({ open, onClose }) => {
   const [t] = useTranslation();
   return (
     <Dialog open={open} onClose={onClose} className={styles["gvt-fees"]}>
-      <DialogTop title={t("gvt-fees.titles.main")} />
+      <DialogTop title={t("labels.gvt-fees-title")} />
       <DialogBottom className={styles["gvt-fees__container"]}>
         <Row wide>
           <FeesTradingDiscountInfo withoutOffset dark />
