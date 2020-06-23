@@ -42,7 +42,7 @@ const _ManagerData: React.FC<Props> = ({ canWritePost, id }) => {
   });
 
   useEffect(() => {
-    if (betaTester) sendRequest({ ownerId: id, isBetaTester });
+    sendRequest({ ownerId: id, isBetaTester });
   }, [id, isBetaTester, betaTester]);
 
   const {
