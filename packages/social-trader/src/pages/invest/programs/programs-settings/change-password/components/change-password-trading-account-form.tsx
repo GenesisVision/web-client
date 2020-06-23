@@ -77,7 +77,7 @@ const _ChangePasswordTradingAccountForm: React.FC<ChangePasswordTradingAccountFo
               wide
               type="text"
               name={FORM_FIELDS.twoFactorCode}
-              label={t("wallet-withdraw.two-factor-code-label")}
+              label={t("labels.two-factor-code-label")}
               autoComplete="off"
               component={SimpleTextField}
             />

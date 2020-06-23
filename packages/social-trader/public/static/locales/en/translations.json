@@ -1,4 +1,8 @@
 {
+  "labels": {
+    "to": "To",
+    "two-factor-code-label": "Two factor authentication code"
+  },
   "validations": {
     "max-amount": "Must be less than {{maxAmount}}",
     "link-max-length": "The maximum link length is 100 characters.",
@@ -377,25 +381,6 @@
     "Withdrawing": "Withdrawing",
     "Ended": "Ended",
     "Pending": "Pending"
-  },
-  "wallet-withdraw": {
-    "title": "Withdraw",
-    "available": "Available in wallet",
-    "select-currency": "Select a wallet currency",
-    "amount": "Enter correct amount",
-    "will-get": "You'll get",
-    "address": "Withdrawal address",
-    "to": "To",
-    "fee": "Fee",
-    "withdrawing": "Withdrawing",
-    "info": "Amount of withdrawal can vary depending on the fluctuating exchange rate.",
-    "withdraw-request": "Please approve the withdrawal request via the link in the confirmation email.",
-    "two-factor-code-label": "Two factor authentication code",
-    "confirmation": {
-      "page-title": "Wallet withdrawal confirmed",
-      "error": "An error occurred during confirmation of email: ",
-      "success": "Withdrawal request has been confirmed"
-    }
   },
   "withdraw-program": {
     "all-text": "You are withdrawing the entire amount that will be available in the program at the end of the period",

@@ -96,11 +96,11 @@ const _WalletWithdrawForm: React.FC<Props> = ({
 
   return (
     <HookForm form={form} onSubmit={handleSubmit}>
-      <DialogTop title={t("wallet-withdraw.title")}>
+      <DialogTop title={t("wallet-withdraw:title")}>
         <Row large>
           <WalletSelect
             name={WALLET_WITHDRAW_FIELDS.id}
-            label={t("wallet-withdraw.select-currency")}
+            label={t("wallet-withdraw:select-currency")}
             wallets={wallets}
             onChange={onChangeCurrency}
           />
@@ -111,14 +111,14 @@ const _WalletWithdrawForm: React.FC<Props> = ({
           <GVHookFormField
             wide
             name={WALLET_WITHDRAW_FIELDS.address}
-            label={t("wallet-withdraw.address")}
+            label={t("wallet-withdraw:address")}
             component={SimpleTextField}
             autoComplete="off"
           />
         </Row>
         <InputAmountField
           name={WALLET_WITHDRAW_FIELDS.amount}
-          label={t("wallet-withdraw.amount")}
+          label={t("wallet-withdraw:amount")}
           currency={currency}
           isAllowed={isAllow}
           setMax={setMaxAmount}
@@ -129,21 +129,21 @@ const _WalletWithdrawForm: React.FC<Props> = ({
               wide
               type="text"
               name={WALLET_WITHDRAW_FIELDS.twoFactorCode}
-              label={t("wallet-withdraw.two-factor-code-label")}
+              label={t("labels.two-factor-code-label")}
               autoComplete="off"
               component={SimpleTextField}
             />
           </Row>
         )}
         <DialogList>
-          <DialogListItem label={t("wallet-withdraw.will-get")}>
+          <DialogListItem label={t("wallet-withdraw:will-get")}>
             <NumberFormat
               value={formatCurrencyValue(willGet, currency)}
               suffix={` ${currency}`}
               displayType="text"
             />
           </DialogListItem>
-          <DialogListItem label={t("wallet-withdraw.fee")}>
+          <DialogListItem label={t("wallet-withdraw:fee")}>
             <NumberFormat
               value={formatCurrencyValue(withdrawalCommission, currency)}
               suffix={` ${currency}`}

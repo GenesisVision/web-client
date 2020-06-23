@@ -9,7 +9,7 @@ import { confirmWithdraw } from "./services/wallet-withdraw-confirm.services";
 const _WalletWithdrawConfirm: React.FC<Props> = ({ requestId, code }) => {
   const { sendRequest } = useApiRequest({
     request: confirmWithdraw,
-    successMessage: "wallet-withdraw.confirmation.success"
+    successMessage: "wallet-withdraw:confirmation.success"
   });
   useEffect(() => {
     if (requestId && code) {
