@@ -1,7 +1,7 @@
 import { CommonPublicAssetsViewModel } from "gv-api-web";
 import { debounce } from "lodash";
 import * as React from "react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Nullable } from "utils/types";
 
 import { search } from "../../services/global-search-result.service";
@@ -18,9 +18,12 @@ const globalSearchLoaderData: CommonPublicAssetsViewModel = {
 const _GlobalSearchResultContainer: React.FC<Props> = ({ query = "" }) => {
   const [data, setData] = useState<Nullable<CommonPublicAssetsViewModel>>(null);
 
-  const searchDebounced = debounce((value: string) => {
-    search(value).then(setData);
-  }, 300);
+  const searchDebounced = useCallback(
+    debounce((value: string) => {
+      search(value).then(setData);
+    }, 300),
+    []
+  );
 
   useEffect(() => {
     searchDebounced(query);
