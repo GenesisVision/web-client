@@ -75,8 +75,8 @@ const _InvestmentProgramInfo: React.FC<IInvestmentProgramInfoProps> = ({
       <StatisticItem
         label={
           <TooltipLabel
-            tooltipContent={t("program-details-page.tooltip.av-to-invest")}
-            labelText={t("program-details-page.description.avToInvest")}
+            tooltipContent={t("program-details-page:tooltip.av-to-invest")}
+            labelText={t("asset-details:description.avToInvest")}
           />
         }
         accent
@@ -90,8 +90,8 @@ const _InvestmentProgramInfo: React.FC<IInvestmentProgramInfoProps> = ({
       <StatisticItem
         label={
           <TooltipLabel
-            tooltipContent={t("program-details-page.tooltip.management-fee")}
-            labelText={t("program-details-page.description.management-fee")}
+            tooltipContent={t("program-details-page:tooltip.management-fee")}
+            labelText={t("asset-details:description.management-fee")}
           />
         }
         accent
@@ -107,9 +107,7 @@ const _InvestmentProgramInfo: React.FC<IInvestmentProgramInfoProps> = ({
               />
             }
             vertical={VERTICAL_POPOVER_POS.BOTTOM}
-            tooltipContent={t(
-              "program-details-page.description.entry-fee-levels"
-            )}
+            tooltipContent={t("asset-details:description.entry-fee-levels")}
           />
         ) : (
           <NumberFormat
@@ -122,8 +120,8 @@ const _InvestmentProgramInfo: React.FC<IInvestmentProgramInfoProps> = ({
       <StatisticItem
         label={
           <TooltipLabel
-            tooltipContent={t("program-details-page.tooltip.success-fee")}
-            labelText={t("program-details-page.description.successFee")}
+            tooltipContent={t("program-details-page:tooltip.success-fee")}
+            labelText={t("asset-details:description.successFee")}
           />
         }
         accent
@@ -133,8 +131,8 @@ const _InvestmentProgramInfo: React.FC<IInvestmentProgramInfoProps> = ({
       <StatisticItem
         label={
           <TooltipLabel
-            tooltipContent={t("program-details-page.tooltip.stop-out-level")}
-            labelText={t("program-details-page.description.stop-out-level")}
+            tooltipContent={t("program-details-page:tooltip.stop-out-level")}
+            labelText={t("asset-details:description.stop-out-level")}
           />
         }
         condition={!!stopOutLevelCurrent && !!stopOutLevelSelected}

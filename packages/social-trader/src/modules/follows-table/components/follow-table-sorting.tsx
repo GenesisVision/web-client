@@ -13,7 +13,7 @@ const _FollowTableSortingValue: React.FC<{ column: SortingColumn }> = ({
   const { t } = useTranslation();
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   if (!isAuthenticated && column.name === "favorite") return null;
-  const renderValue = () => <>{t(`follows-page.header.${column.name}`)}</>;
+  const renderValue = () => <>{t(`header-fields.${column.name}`)}</>;
   return column.tooltip ? (
     <Tooltip
       horizontal={HORIZONTAL_POPOVER_POS.LEFT}

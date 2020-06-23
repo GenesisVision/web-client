@@ -17,7 +17,7 @@ const _LogoField: React.FC<Props> = ({
       {title && <h5>{title}</h5>}
       <Row wide>
         <Text muted size={"small"}>
-          {t("create-program-page.settings.fields.upload-logo-rules")}
+          {t("asset-settings:fields.upload-logo-rules")}
         </Text>
       </Row>
       <Row wide large>

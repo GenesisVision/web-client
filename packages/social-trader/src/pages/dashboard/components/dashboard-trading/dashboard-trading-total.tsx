@@ -22,8 +22,8 @@ const _DashboardTradingTotal: React.FC<Props> = ({
         <DashboardValueItem
           label={
             <TooltipLabel
-              tooltipContent={t("dashboard-page.tooltips.trading.total")}
-              labelText={t("dashboard-page.statistic.total")}
+              tooltipContent={t("dashboard-page:tooltips.trading.total")}
+              labelText={t("dashboard-page:statistic.total")}
             />
           }
           value={total}
@@ -32,8 +32,8 @@ const _DashboardTradingTotal: React.FC<Props> = ({
         <DashboardValueItem
           label={
             <TooltipLabel
-              tooltipContent={t("dashboard-page.tooltips.trading.your-equity")}
-              labelText={t("dashboard-page.statistic.equity")}
+              tooltipContent={t("dashboard-page:tooltips.trading.your-equity")}
+              labelText={t("dashboard-page:statistic.equity")}
             />
           }
           value={equity}
@@ -42,8 +42,8 @@ const _DashboardTradingTotal: React.FC<Props> = ({
         <DashboardValueItem
           label={
             <TooltipLabel
-              tooltipContent={t("dashboard-page.tooltips.trading.aum")}
-              labelText={t("dashboard-page.statistic.AUM")}
+              tooltipContent={t("dashboard-page:tooltips.trading.aum")}
+              labelText={t("dashboard-page:statistic.AUM")}
             />
           }
           value={aum}

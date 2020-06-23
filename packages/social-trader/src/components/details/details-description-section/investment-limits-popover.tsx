@@ -37,7 +37,7 @@ const _InvestmentLimitsPopover: React.FC<Props> = ({
         <PopoverContentCardBlock className={styles["popover-levels__block"]}>
           <Row>
             <h4>
-              {t("program-details-page.popover.genesis-level")} {level}
+              {t("program-details-page:popover.genesis-level")} {level}
             </h4>
           </Row>
           {canLevelUp && (
@@ -49,7 +49,7 @@ const _InvestmentLimitsPopover: React.FC<Props> = ({
           )}
           <Row>
             <LabeledValue
-              label={t("program-details-page.popover.invest-limit")}
+              label={t("program-details-page:popover.invest-limit")}
             >
               <Text weight={"bold"}>
                 <NumberFormat
@@ -67,7 +67,7 @@ const _InvestmentLimitsPopover: React.FC<Props> = ({
           className={styles["popover-levels__block"]}
         >
           <Row>
-            <Text muted>{t("program-details-page.popover.text")}</Text>
+            <Text muted>{t("program-details-page:popover.text")}</Text>
           </Row>
           <Row>
             <GVButton
@@ -77,7 +77,7 @@ const _InvestmentLimitsPopover: React.FC<Props> = ({
               onClick={setOpen}
               color="secondary"
             >
-              <>{t("program-details-page.popover.about-levels")} &#8250;</>
+              <>{t("program-details-page:popover.about-levels")} &#8250;</>
             </GVButton>
           </Row>
         </PopoverContentCardBlock>

@@ -43,8 +43,8 @@ export const FundCardTable: React.FC<IFundCardTableProps> = ({
           <StatisticItem
             label={
               <TooltipLabel
-                tooltipContent={t("dashboard-page.tooltips.investing.size")}
-                labelText={amountTitle || t("funds-page.funds-header.balance")}
+                tooltipContent={t("dashboard-page:tooltips.investing.size")}
+                labelText={amountTitle || t("header-fields.balance")}
               />
             }
           >
@@ -60,9 +60,9 @@ export const FundCardTable: React.FC<IFundCardTableProps> = ({
             label={
               <TooltipLabel
                 tooltipContent={t(
-                  "dashboard-page.tooltips.investing.investors"
+                  "dashboard-page:tooltips.investing.investors"
                 )}
-                labelText={t("funds-page.funds-header.investors")}
+                labelText={t("header-fields.investors")}
               />
             }
           >
@@ -77,8 +77,8 @@ export const FundCardTable: React.FC<IFundCardTableProps> = ({
           <StatisticItem
             label={
               <TooltipLabel
-                tooltipContent={t("dashboard-page.tooltips.trading.ddown-fund")}
-                labelText={t("funds-page.funds-header.drawdown")}
+                tooltipContent={t("dashboard-page:tooltips.trading.ddown-fund")}
+                labelText={t("header-fields.drawdown")}
               />
             }
           >
@@ -117,7 +117,7 @@ const _FundCard: React.FC<Props> = ({ fund }) => {
   const renderActions = ({ clearAnchor, anchor }: IRenderActionsArgs) => (
     <TableCardActions anchor={anchor} clearAnchor={clearAnchor}>
       <TableCardActionsItem to={link} onClick={clearAnchor}>
-        {t("fund-actions.details")}
+        {t("asset-actions.details")}
       </TableCardActionsItem>
       {fund.personalDetails && (
         <TableCardFavoriteActionItem

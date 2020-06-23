@@ -36,7 +36,7 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
   return (
     <TableCard
       subTitle={t(
-        `dashboard-page.trading.asset-types.${asset.accountInfo.type}`
+        `dashboard-page:trading.asset-types.${asset.accountInfo.type}`
       )}
       detailsUrl={detailsLink}
       assetId={asset.id}
@@ -54,9 +54,9 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
               label={
                 <TooltipLabel
                   tooltipContent={t(
-                    "dashboard-page.tooltips.private-card.equity"
+                    "dashboard-page:tooltips.private-card.equity"
                   )}
-                  labelText={t("programs-page.programs-header.equity")}
+                  labelText={t("header-fields.equity")}
                 />
               }
             >
@@ -77,9 +77,9 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
             label={
               <TooltipLabel
                 tooltipContent={t(
-                  "dashboard-page.tooltips.private-card.leverage"
+                  "dashboard-page:tooltips.private-card.leverage"
                 )}
-                labelText={t("dashboard-page.trading.leverage")}
+                labelText={t("dashboard-page:trading.leverage")}
               />
             }
           >
@@ -97,8 +97,8 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
           <StatisticItem
             label={
               <TooltipLabel
-                tooltipContent={t("dashboard-page.tooltips.private-card.age")}
-                labelText={t("dashboard-page.trading.age")}
+                tooltipContent={t("dashboard-page:tooltips.private-card.age")}
+                labelText={t("dashboard-page:trading.age")}
               />
             }
           >

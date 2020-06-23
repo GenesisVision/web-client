@@ -25,27 +25,20 @@ const _StopOutLevel: React.FC<Props> = ({
     },
     validationSchema: object().shape({
       [FIELDS.stopOutLevel]: number()
-        .required(
-          t("create-program-page.settings.validation.stop-out-required")
-        )
-        .min(10, t("create-program-page.settings.validation.stop-out-less-ten"))
-        .max(
-          stopOutLevel || 100,
-          t("create-program-page.settings.validation.stop-out-more-current")
-        )
+        .required(t("validations.stop-out-required"))
+        .min(10, t("validations.stop-out-less-ten"))
+        .max(stopOutLevel || 100, t("validations.stop-out-more-current"))
     }),
     mode: "onBlur"
   });
 
   return (
-    <SettingsBlock
-      label={t("create-program-page.settings.fields.stop-out-level")}
-    >
+    <SettingsBlock label={t("asset-settings:fields.stop-out-level")}>
       <HookForm resetOnSuccess form={form} onSubmit={onSubmit}>
         <StopOutField name={FIELDS.stopOutLevel} />
         <Row large>
           <SubmitButton isSuccessful={!editError}>
-            {t("program-settings.buttons.save")}
+            {t("asset-settings:buttons.save")}
           </SubmitButton>
         </Row>
       </HookForm>

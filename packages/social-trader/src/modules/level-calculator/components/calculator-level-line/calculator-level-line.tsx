@@ -32,7 +32,7 @@ const _CalculatorLevelLine: React.FC<Props & WithTranslation> = ({
     <div className={classNames(styles["calculator-level-line"], className)}>
       <div className={styles["calculator-level-line__label"]}>
         <span className={styles["calculator-level-line__title"]}>
-          {t("program-details-page.calculator.level")}
+          {t("program-details-page:calculator.level")}
         </span>
         <span className={styles["calculator-level-line__value"]}>{level}</span>
       </div>

@@ -16,9 +16,7 @@ const Page: NextPage<Props> = ({ initData }) => {
 
 Page.getInitialProps = async () => {
   const initData = await getSocialMedia(initialOptions);
-  return {
-    initData
-  };
+  return { namespacesRequired: ["conversation"], initData };
 };
 
 export default compose(withDefaultLayout, withBetaTesting("Social"))(Page);

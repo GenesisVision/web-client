@@ -46,7 +46,7 @@ const _CustomNotificationCreateForm: React.FC<Props> = ({
     },
     validationSchema: object().shape({
       [FIELDS.conditionAmount]: number().required(
-        t("notifications-page.create.amount-required")
+        t("notifications-page:create.amount-required")
       )
     }),
     mode: "onChange"
@@ -61,7 +61,7 @@ const _CustomNotificationCreateForm: React.FC<Props> = ({
   return (
     <>
       <DialogTop
-        title={t("notifications-page.create.title")}
+        title={t("notifications-page:create.title")}
         subtitle={asset.title}
       />
       <DialogBottom>
@@ -71,17 +71,17 @@ const _CustomNotificationCreateForm: React.FC<Props> = ({
               wide
               name={FIELDS.conditionType}
               component={SimpleTextField}
-              label={t("notifications-page.create.type-label")}
+              label={t("notifications-page:create.type-label")}
               InputComponent={Select}
             >
               <option value={CONDITION_TYPE_VALUES.Profit}>
-                {t("notifications-page.create.Profit.title")}
+                {t("notifications-page:create.Profit.title")}
               </option>
               <option value={CONDITION_TYPE_VALUES.Level}>
-                {t("notifications-page.create.Level.title")}
+                {t("notifications-page:create.Level.title")}
               </option>
               <option value={CONDITION_TYPE_VALUES.AvailableToInvest}>
-                {t("notifications-page.create.AvailableToInvest.title")}
+                {t("notifications-page:create.AvailableToInvest.title")}
               </option>
             </GVHookFormField>
           </Row>
@@ -89,7 +89,7 @@ const _CustomNotificationCreateForm: React.FC<Props> = ({
             <GVHookFormField
               wide
               name={FIELDS.conditionAmount}
-              label={t("notifications-page.create.amount-label")}
+              label={t("notifications-page:create.amount-label")}
               component={SimpleNumberField}
               adornment={isProfit ? "%" : null}
               autoComplete="off"

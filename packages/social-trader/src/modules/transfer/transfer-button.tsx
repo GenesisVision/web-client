@@ -56,7 +56,7 @@ const _TransferButton: React.FC<Props> = ({
         currentItem={currentItem}
         sourceType={sourceType}
         destinationType={destinationType}
-        title={title || t("transfer.title")}
+        title={title || t("transfer:title")}
         currentItemContainer={currentItemContainer}
         onApply={onApply}
         open={isOpenPopup}
@@ -87,7 +87,7 @@ const FullButton: React.FC<{
 }> = React.memo(
   ({ disabled, onClick, label, color, variant, withIcon, size }) => {
     const [t] = useTranslation();
-    const labelText = label || t("wallet-page.transfer");
+    const labelText = label || t("wallet-page:transfer");
     return (
       <GVButton
         className={labelText}
@@ -117,7 +117,7 @@ const FullButton: React.FC<{
 const SmallButton: React.FC<{ onClick: () => void }> = React.memo(
   ({ onClick }) => {
     const [t] = useTranslation();
-    const label = t("wallet-page.transfer");
+    const label = t("wallet-page:transfer");
     return (
       <ChipButton
         className={label}

@@ -13,7 +13,7 @@ const _DownloadButton: React.FC<Props> = ({
   const [t] = useTranslation();
   return (
     <a
-      title={title || t("program-details-page.history.trades.download")}
+      title={title || t("buttons.download")}
       className={styles["download-button__container"]}
       href={getExportFileUrl && getExportFileUrl()}
     >
@@ -25,7 +25,7 @@ const _DownloadButton: React.FC<Props> = ({
         onClick={authHandle}
       >
         <>
-          {title || t("program-details-page.history.trades.download")}
+          {title || t("buttons.download")}
           <ExportIcon />
         </>
       </GVButton>

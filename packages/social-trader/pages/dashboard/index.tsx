@@ -9,4 +9,8 @@ const Page: NextPage = () => {
   return <DashboardPage />;
 };
 
+Page.getInitialProps = async () => ({
+  namespacesRequired: ["asset-details", "dashboard-page"]
+});
+
 export default compose(withDefaultLayout, withPrivateRoute)(Page);

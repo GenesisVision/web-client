@@ -9,8 +9,13 @@ const Page: NextPage<Props> = ({ requestId, code }) => {
 };
 Page.getInitialProps = async (ctx: NextPageContext) => {
   const { requestId, code } = getParamsFromCtx(ctx);
-  return { requestId, code };
+  return {
+    namespacesRequired: ["wallet-withdraw"],
+    requestId,
+    code
+  };
 };
+
 interface Props {
   requestId: string;
   code: string;

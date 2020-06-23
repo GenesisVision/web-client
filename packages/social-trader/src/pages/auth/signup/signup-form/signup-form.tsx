@@ -72,7 +72,7 @@ const _SignUpForm: React.FC<Props> = ({
           showCorrect
           type="text"
           name={SIGN_UP_FORM_FIELDS.userName}
-          label={t("auth.signup.username-field-text")}
+          label={t("auth:signup.username-field-text")}
           autoComplete="off"
           autoFocus
           component={SimpleTextField}
@@ -84,7 +84,7 @@ const _SignUpForm: React.FC<Props> = ({
           showCorrect
           type="email"
           name={SIGN_UP_FORM_FIELDS.email}
-          label={t("auth.signup.email-field-text")}
+          label={t("auth:signup.email-field-text")}
           autoComplete="email"
           component={SimpleTextField}
         />
@@ -95,7 +95,7 @@ const _SignUpForm: React.FC<Props> = ({
           showCorrect
           type="password"
           name={SIGN_UP_FORM_FIELDS.password}
-          label={t("auth.signup.password-field-text")}
+          label={t("auth:signup.password-field-text")}
           component={SimpleTextField}
           autoComplete="new-password"
         />
@@ -107,15 +107,15 @@ const _SignUpForm: React.FC<Props> = ({
           name={SIGN_UP_FORM_FIELDS.privacyPolicy}
           label={
             <span>
-              {t("auth.signup.i-accept-text")}{" "}
+              {t("auth:signup.i-accept-text")}{" "}
               <a
-                title={t("auth.signup.privacy-policy-text")}
+                title={t("auth:signup.privacy-policy-text")}
                 target="_blank"
                 rel="noopener noreferrer"
                 href={PRIVACY_POLICY_ROUTE}
                 onClick={e => e.stopPropagation()}
               >
-                {t("auth.signup.privacy-policy-text")}
+                {t("auth:signup.privacy-policy-text")}
               </a>
             </span>
           }
@@ -129,15 +129,15 @@ const _SignUpForm: React.FC<Props> = ({
           name={SIGN_UP_FORM_FIELDS.acceptTerms}
           label={
             <span>
-              {t("auth.signup.i-accept-text")}{" "}
+              {t("auth:signup.i-accept-text")}{" "}
               <a
-                title={t("auth.signup.accept-terms-text")}
+                title={t("auth:signup.accept-terms-text")}
                 target="_blank"
                 rel="noopener noreferrer"
                 href={TERMS_ROUTE}
                 onClick={e => e.stopPropagation()}
               >
-                {t("auth.signup.accept-terms-text")}
+                {t("auth:signup.accept-terms-text")}
               </a>
             </span>
           }
@@ -157,14 +157,14 @@ const _SignUpForm: React.FC<Props> = ({
             isSuccessful={requestStatus === CAPTCHA_STATUS.SUCCESS}
             disabled={requestStatus === CAPTCHA_STATUS.PENDING}
           >
-            {t("auth.signup.title")}
+            {t("auth:signup.title")}
           </SubmitButton>
         </RowItem>
         {showLogin && (
           <RowItem>
             <Link to={LOGIN_ROUTE}>
               <GVButton variant="outlined" color="secondary">
-                {t("auth.login.title")}
+                {t("auth:login.title")}
               </GVButton>
             </Link>
           </RowItem>

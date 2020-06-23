@@ -45,7 +45,7 @@ const _DashboardStatistic: React.FC<Props> = ({
       </div>
       <div className={styles["dashboard-statistic__see-all"]}>
         <Link to={linkCreator(EVENTS_ROUTE)}>
-          {t("dashboard-page.statistic.see-all")}
+          {t("dashboard-page:statistic.see-all")}
         </Link>
       </div>
     </>

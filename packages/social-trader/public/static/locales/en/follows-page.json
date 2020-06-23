@@ -1,0 +1,17 @@
+{
+  "description": "Just choose a program and Genesis Vision will automatically copy the trades from your account. You will be able to withdraw your investment or exit trades at any point in time.",
+  "title": "Follow",
+  "table": "All follow",
+  "filters": {
+    "type": "Type"
+  },
+  "tooltips": {
+    "equity": "Current market value of investments in the program, taking into account the profit/loss of open positions.",
+    "subscribers": "Number of subscribers",
+    "trades": "Number of trades executed during the selected date range.",
+    "name": "Name of the program",
+    "age": "Age of the trading account",
+    "drawdown": "Maximum drawdown of the program during the selected date range.",
+    "profit": "Profit during the selected date range."
+  }
+}

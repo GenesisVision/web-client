@@ -26,7 +26,7 @@ const _DashboardTradingStatistic: React.FC<Props> = ({
       tablet={tablet}
       EmptyBlock={DashboardTradingEmpty}
       currency={currency}
-      label={t("dashboard-page.statistic.trading")}
+      label={t("dashboard-page:statistic.trading")}
       request={fetchTradingTotalStatistic}
       all={TRADING_ROUTE}
       renderValues={({ equity, aum }: TDashboardTradingStatistic) => (
@@ -35,9 +35,9 @@ const _DashboardTradingStatistic: React.FC<Props> = ({
             label={
               <TooltipLabel
                 tooltipContent={t(
-                  "dashboard-page.tooltips.trading.your-equity"
+                  "dashboard-page:tooltips.trading.your-equity"
                 )}
-                labelText={t("dashboard-page.statistic.equity")}
+                labelText={t("dashboard-page:statistic.equity")}
               />
             }
             value={equity}
@@ -46,8 +46,8 @@ const _DashboardTradingStatistic: React.FC<Props> = ({
           <DashboardValueItem
             label={
               <TooltipLabel
-                tooltipContent={t("dashboard-page.tooltips.trading.aum")}
-                labelText={t("dashboard-page.statistic.AUM")}
+                tooltipContent={t("dashboard-page:tooltips.trading.aum")}
+                labelText={t("dashboard-page:statistic.AUM")}
               />
             }
             value={aum}
@@ -66,14 +66,14 @@ const DashboardTradingEmpty: React.FC = React.memo(() => {
       leftField={{
         link: CREATE_ACCOUNT_PAGE_ROUTE,
         linkLabel: t(
-          "dashboard-page.statistic.get-started.trading.left-field.button"
+          "dashboard-page:statistic.get-started.trading.left-field.button"
         ),
         text: (
           <>
-            {t("dashboard-page.statistic.get-started.trading.left-field.text")}{" "}
+            {t("dashboard-page:statistic.get-started.trading.left-field.text")}{" "}
             <Text muted>
               {t(
-                "dashboard-page.statistic.get-started.trading.left-field.text-2"
+                "dashboard-page:statistic.get-started.trading.left-field.text-2"
               )}
             </Text>
           </>
@@ -82,11 +82,11 @@ const DashboardTradingEmpty: React.FC = React.memo(() => {
       rightField={{
         link: CREATE_FUND_PAGE_ROUTE,
         linkLabel: t(
-          "dashboard-page.statistic.get-started.trading.right-field.button"
+          "dashboard-page:statistic.get-started.trading.right-field.button"
         ),
         text: (
           <>
-            {t("dashboard-page.statistic.get-started.trading.right-field.text")}
+            {t("dashboard-page:statistic.get-started.trading.right-field.text")}
           </>
         )
       }}

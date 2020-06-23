@@ -10,7 +10,7 @@ import React from "react";
 import { compose } from "redux";
 import { NextPageWithRedux } from "utils/types";
 
-const ProgramSettings: NextPageWithRedux<void> = () => {
+const ProgramSettings: NextPageWithRedux<{}> = () => {
   return <ProgramSettingsPage />;
 };
 
@@ -23,6 +23,7 @@ ProgramSettings.getInitialProps = async ctx => {
     if (checkClosed(description.value.publicInfo.status))
       throw "Program is closed";
   });
+  return { namespacesRequired: ["asset-settings"] };
 };
 
 export default compose(withDefaultLayout, withPrivateRoute)(ProgramSettings);

@@ -30,17 +30,17 @@ const _WalletListButton: React.FC<IWalletListButton> = ({ wallet }) => {
             horizontal={HORIZONTAL_POPOVER_POS.LEFT}
             render={() => (
               <TooltipContent>
-                {t("wallet-page.tooltip.buy-with-card")}
+                {t("wallet-page:tooltip.buy-with-card")}
               </TooltipContent>
             )}
           >
             <a
-              title={t("wallet-page.list.buy-with-card")}
+              title={t("wallet-page:list.buy-with-card")}
               href={depositUrlCoindirect}
               target={"_blank"}
               rel="noopener noreferrer"
             >
-              {t("wallet-page.list.buy-with-card")}
+              {t("wallet-page:list.buy-with-card")}
             </a>
           </Tooltip>
         </RowItem>

@@ -50,7 +50,7 @@ const _ProgramCard: React.FC<Props> = ({ program }) => {
   const renderActions = ({ clearAnchor, anchor }: IRenderActionsArgs) => (
     <TableCardActions anchor={anchor} clearAnchor={clearAnchor}>
       <TableCardActionsItem to={linkProps} onClick={clearAnchor}>
-        {t("program-actions.details")}
+        {t("asset-actions.details")}
       </TableCardActionsItem>
       {program.personalDetails && (
         <TableCardFavoriteActionItem
@@ -86,8 +86,8 @@ const _ProgramCard: React.FC<Props> = ({ program }) => {
             <LabeledValue
               label={
                 <TooltipLabel
-                  tooltipContent={t("programs-page.tooltips.equity")}
-                  labelText={t("programs-page.programs-header.equity")}
+                  tooltipContent={t("programs-page:tooltips.equity")}
+                  labelText={t("header-fields.equity")}
                 />
               }
             >
@@ -107,11 +107,9 @@ const _ProgramCard: React.FC<Props> = ({ program }) => {
               label={
                 <TooltipLabel
                   tooltipContent={t(
-                    "programs-page.tooltips.available-to-invest"
+                    "programs-page:tooltips.available-to-invest"
                   )}
-                  labelText={t(
-                    "programs-page.programs-header.available-to-invest"
-                  )}
+                  labelText={t("header-fields.available-to-invest")}
                 />
               }
             >
@@ -132,8 +130,8 @@ const _ProgramCard: React.FC<Props> = ({ program }) => {
             <LabeledValue
               label={
                 <TooltipLabel
-                  tooltipContent={t("programs-page.tooltips.investors")}
-                  labelText={t("programs-page.programs-header.investors")}
+                  tooltipContent={t("programs-page:tooltips.investors")}
+                  labelText={t("header-fields.investors")}
                 />
               }
             >
@@ -148,8 +146,8 @@ const _ProgramCard: React.FC<Props> = ({ program }) => {
             <LabeledValue
               label={
                 <TooltipLabel
-                  tooltipContent={t("programs-page.tooltips.period")}
-                  labelText={t("programs-page.programs-header.period")}
+                  tooltipContent={t("programs-page:tooltips.period")}
+                  labelText={t("header-fields.period")}
                 />
               }
             >
@@ -165,8 +163,8 @@ const _ProgramCard: React.FC<Props> = ({ program }) => {
             <LabeledValue
               label={
                 <TooltipLabel
-                  tooltipContent={t("programs-page.tooltips.age")}
-                  labelText={t("programs-page.programs-header.age")}
+                  tooltipContent={t("programs-page:tooltips.age")}
+                  labelText={t("header-fields.age")}
                 />
               }
             >
@@ -177,8 +175,8 @@ const _ProgramCard: React.FC<Props> = ({ program }) => {
             <LabeledValue
               label={
                 <TooltipLabel
-                  tooltipContent={t("programs-page.tooltips.drawdown")}
-                  labelText={t("programs-page.programs-header.drawdown")}
+                  tooltipContent={t("programs-page:tooltips.drawdown")}
+                  labelText={t("header-fields.drawdown")}
                 />
               }
             >

@@ -27,9 +27,9 @@ const ForgotPasswordPage: React.FC = () => {
   });
 
   return (
-    <PageSeoWrapper title={t("auth.password-restore.title")}>
+    <PageSeoWrapper title={t("auth:password-restore.title")}>
       <Row>
-        <Text muted>{t("auth.password-restore.forgot-password.text")}</Text>
+        <Text muted>{t("auth:password-restore.forgot-password.text")}</Text>
       </Row>
       <Row large>
         <CaptchaContainer

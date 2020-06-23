@@ -1,0 +1,16 @@
+{
+  "subscriptions": {
+    "title": "Subscriptions",
+    "table": {
+      "volume-fee": "Volume fee",
+      "success-fee": "Success fee",
+      "buttons": "",
+      "value": "Value",
+      "provider": "Provider",
+      "profit": "Profit",
+      "subscription-date": "Subscription date",
+      "type": "Type",
+      "tolerance": "Tolerance"
+    }
+  }
+}

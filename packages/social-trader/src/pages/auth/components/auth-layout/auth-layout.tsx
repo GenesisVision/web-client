@@ -36,11 +36,11 @@ const _AuthLayout: NextPage<Props> = ({
           </Center>
         </Link>
         <blockquote className={styles["auth__quote"]}>
-          {t(`auth-quotes.${quoteNo}.quote`)}
+          {t(`auth:auth-quotes.${quoteNo}.quote`)}
           <footer className={styles["auth__quote-footer"]}>
             —{" "}
             <cite className={styles["auth__quote-author"]}>
-              {t(`auth-quotes.${quoteNo}.author`)}
+              {t(`auth:auth-quotes.${quoteNo}.author`)}
             </cite>
           </footer>
         </blockquote>

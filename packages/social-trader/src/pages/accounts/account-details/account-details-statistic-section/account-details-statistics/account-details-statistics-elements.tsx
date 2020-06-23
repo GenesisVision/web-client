@@ -22,8 +22,8 @@ const _AccountDetailsStatisticsElements: React.FC<IAccountDetailsStatisticsEleme
         <StatisticItem
           label={
             <TooltipLabel
-              tooltipContent={t("program-details-page.tooltip.equity")}
-              labelText={t("program-details-page.statistics.equity")}
+              tooltipContent={t("program-details-page:tooltip.equity")}
+              labelText={t("asset-details:statistics.equity")}
             />
           }
           accent
@@ -42,8 +42,8 @@ const _AccountDetailsStatisticsElements: React.FC<IAccountDetailsStatisticsEleme
             <StatisticItem
               label={
                 <TooltipLabel
-                  tooltipContent={t("program-details-page.tooltip.trades")}
-                  labelText={t("program-details-page.statistics.trades")}
+                  tooltipContent={t("program-details-page:tooltip.trades")}
+                  labelText={t("asset-details:statistics.trades")}
                 />
               }
               half
@@ -58,9 +58,9 @@ const _AccountDetailsStatisticsElements: React.FC<IAccountDetailsStatisticsEleme
               label={
                 <TooltipLabel
                   tooltipContent={t(
-                    "program-details-page.tooltip.profit-factor"
+                    "program-details-page:tooltip.profit-factor"
                   )}
-                  labelText={t("program-details-page.statistics.profit-factor")}
+                  labelText={t("asset-details:statistics.profit-factor")}
                 />
               }
               half
@@ -78,9 +78,9 @@ const _AccountDetailsStatisticsElements: React.FC<IAccountDetailsStatisticsEleme
               label={
                 <TooltipLabel
                   tooltipContent={t(
-                    "program-details-page.tooltip.max-drawdown"
+                    "program-details-page:tooltip.max-drawdown"
                   )}
-                  labelText={t("program-details-page.statistics.max-drawdown")}
+                  labelText={t("asset-details:statistics.max-drawdown")}
                 />
               }
               half
@@ -99,11 +99,9 @@ const _AccountDetailsStatisticsElements: React.FC<IAccountDetailsStatisticsEleme
               label={
                 <TooltipLabel
                   tooltipContent={t(
-                    "program-details-page.statistics.tooltip.trading-volume"
+                    "asset-details:statistics.tooltip.trading-volume"
                   )}
-                  labelText={t(
-                    "program-details-page.statistics.trading-volume"
-                  )}
+                  labelText={t("asset-details:statistics.trading-volume")}
                 />
               }
               half
@@ -127,11 +125,9 @@ const _AccountDetailsStatisticsElements: React.FC<IAccountDetailsStatisticsEleme
               label={
                 <TooltipLabel
                   tooltipContent={t(
-                    "program-details-page.tooltip.success-trades"
+                    "program-details-page:tooltip.success-trades"
                   )}
-                  labelText={t(
-                    "program-details-page.statistics.success-trades"
-                  )}
+                  labelText={t("asset-details:statistics.success-trades")}
                 />
               }
               half
@@ -150,9 +146,9 @@ const _AccountDetailsStatisticsElements: React.FC<IAccountDetailsStatisticsEleme
               label={
                 <TooltipLabel
                   tooltipContent={t(
-                    "program-details-page.tooltip.sharpe-ratio"
+                    "program-details-page:tooltip.sharpe-ratio"
                   )}
-                  labelText={t("program-details-page.statistics.sharpe-ratio")}
+                  labelText={t("asset-details:statistics.sharpe-ratio")}
                 />
               }
               half
@@ -170,9 +166,9 @@ const _AccountDetailsStatisticsElements: React.FC<IAccountDetailsStatisticsEleme
               label={
                 <TooltipLabel
                   tooltipContent={t(
-                    "program-details-page.tooltip.sortino-ratio"
+                    "program-details-page:tooltip.sortino-ratio"
                   )}
-                  labelText={t("program-details-page.statistics.sortino-ratio")}
+                  labelText={t("asset-details:statistics.sortino-ratio")}
                 />
               }
               half

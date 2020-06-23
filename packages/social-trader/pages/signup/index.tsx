@@ -21,13 +21,13 @@ Page.getInitialProps = async () => {
   const utmSource = getUtm();
   const referrer = getReferrer();
 
-  return { referralCode, utmSource, referrer };
+  return { namespacesRequired: ["auth"], referralCode, utmSource, referrer };
 };
 
 export default withAuthLayout({
   footerAuthRoute: LOGIN_ROUTE,
   Footer: SignUpFooter,
-  titleKey: "auth.signup.title"
+  titleKey: "auth:signup.title"
 })(Page);
 
 interface Props {

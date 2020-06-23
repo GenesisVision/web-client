@@ -18,7 +18,7 @@ describe("Invest", () => {
   }, ASYNC_TEST_TIMEOUT);
   it("should be titled Invest", async () => {
     const title = await page.title();
-    expect(title).toContain(testT("invest.title"));
+    expect(title).toContain(testT("invest:title"));
   });
   afterAll(() => {
     browser.close();

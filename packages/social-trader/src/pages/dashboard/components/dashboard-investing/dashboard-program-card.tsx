@@ -44,7 +44,7 @@ const _DashboardProgramCard: React.FC<Props> = ({
   const renderActions = ({ clearAnchor, anchor }: IRenderActionsArgs) => (
     <TableCardActions anchor={anchor} clearAnchor={clearAnchor}>
       <TableCardActionsItem to={linkProps} onClick={clearAnchor}>
-        {t("program-actions.details")}
+        {t("asset-actions.details")}
       </TableCardActionsItem>
       {program.personalDetails && (
         <TableCardFavoriteActionItem
@@ -79,8 +79,8 @@ const _DashboardProgramCard: React.FC<Props> = ({
           <StatisticItem
             label={
               <TooltipLabel
-                tooltipContent={t("dashboard-page.tooltips.investing.profit")}
-                labelText={t("programs-page.programs-header.profit")}
+                tooltipContent={t("dashboard-page:tooltips.investing.profit")}
+                labelText={t("header-fields.profit")}
               />
             }
           >
@@ -98,8 +98,8 @@ const _DashboardProgramCard: React.FC<Props> = ({
           <StatisticItem
             label={
               <TooltipLabel
-                tooltipContent={t("dashboard-page.tooltips.investing.value")}
-                labelText={t("programs-page.programs-header.value")}
+                tooltipContent={t("dashboard-page:tooltips.investing.value")}
+                labelText={t("header-fields.value")}
               />
             }
           >
@@ -114,7 +114,7 @@ const _DashboardProgramCard: React.FC<Props> = ({
           </StatisticItem>
         </TableCardTableColumn>
         <TableCardTableColumn>
-          <StatisticItem label={t("programs-page.programs-header.period")}>
+          <StatisticItem label={t("header-fields.period")}>
             <ProgramPeriodPie
               start={program.periodStarts}
               end={program.periodEnds}

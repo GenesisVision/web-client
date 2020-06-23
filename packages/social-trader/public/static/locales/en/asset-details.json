@@ -1,0 +1,133 @@
+{
+  "description": {
+    "tooltips": {
+      "currency": "Base currency of the program",
+      "broker": "Current broker of the program",
+      "leverage": "Set leverage of the program. Trading with leverage allows the trader to open positions larger than their own capital",
+      "period": "Reporting period is the interval of time in which the trader is to conduct trading operations of their Program and report the resulting profit or loss. Investments made by the investors appear on the Program balance at the beginning of the reporting period, while all of the resulting profit is distributed at the end of the reporting period.",
+      "age": "Age of the program"
+    },
+    "personal-management-fee": "Management fee",
+    "management-fee": "Management fee",
+    "auto-join": "Ignore SO",
+    "creation-date": "Creation date",
+    "currency": "Currency",
+    "broker": "Broker",
+    "leverage": "Leverage",
+    "period": "Period",
+    "age": "Age",
+    "genesis-ratio": "Genesis Ratio",
+    "investment-scale": "Invest. scale",
+    "volume-scale": "Volume scale",
+    "notify-hint": "Notify me when the program is available for investment",
+    "stop-out-level": "Stop out",
+    "entry-fee-levels": "The entry fee is disabled for programs that have not reached level 3. It will be charged only for programs with level 3 or higher.",
+    "successFee": "Success fee",
+    "subscriptionFee": "Subscription fee",
+    "volume-fee": "Volume fee",
+    "investment-details": "Investment details",
+    "edit-program": "Edit Program",
+    "close-program": "Close Program",
+    "follow-trade": "Follow Trades",
+    "unfollow": "Unfollow",
+    "edit-subscription": "Edit subscription",
+    "signal-provider": {
+      "title": "Make a signal provider",
+      "disclaimer": "Parameters cannot be changed in the future."
+    },
+    "edit-signal-provider": {
+      "title": "Edit a signal provider"
+    },
+    "change-password": "Change password",
+    "settings": "Settings",
+    "close-program-notification": "Investment program will be closed after this reporting period. Current investment requests will be cancelled, and new requests won’t be accepted. Profit and funds from the trading account will be deposited to investors and manager according to their shares.",
+    "close-program-notification-success": "Request to close the program was sent successfully.",
+    "requests-completed": "All requests completed successfully",
+    "unauth-follow-popup": "To Follow trades in the selected program please login as an investor or create a new investor account.",
+    "fund-settings": "Fund settings",
+    "disable-reallocation-message": "The next reallocation will be available on",
+    "reallocate": "Reallocate",
+    "edit-fund": "Edit details",
+    "strategy": "Strategy",
+    "assets": "Assets",
+    "addToFavorites": "Add to favourites",
+    "notifications": "Notifications",
+    "avToInvest": "Av. to invest",
+    "entryFee": "Entry fee",
+    "exitFee": "Exit fee",
+    "invest": "Invest",
+    "reinvest": "Reinvest profit",
+    "yourInvestment": {
+      "Program": "Current period investment",
+      "Fund": "Current investment"
+    },
+    "pending-input": "Pending input",
+    "pending-output": "Pending output",
+    "invested": "Invested",
+    "value": "Value",
+    "profit": "Profit",
+    "status": "Status",
+    "withdraw": "Withdraw",
+    "close-fund": "Close Fund",
+    "close-fund-notification": "You are about to close the fund. After you confirm this, all your funds will be withdrawn, no one will be able to invest in the fund anymore, but investors will still be able to withdraw their funds with a zero commission.",
+    "close-fund-notification-success": "Request to close the fund was sent successfully.",
+    "withdraw-notice-text": "You can withdraw only the invested funds, the profit will be withdrawn to your account at the end of the period automatically"
+  },
+  "tooltip": {
+    "status": {
+      "follow": "",
+      "program": "The current status of the investment program (Active/ Investing/ Withdrawing/ Ended)",
+      "fund": "The current state of your investment in the fund (Active/ Investing/ Withdrawing/ Ended)."
+    }
+  },
+  "investment": {
+    "tabs": {
+      "subscription": "Subscription details",
+      "investment": {
+        "follow": "Current period investment",
+        "program": "Current period investment",
+        "fund": "Current investment"
+      },
+      "events": "My history"
+    }
+  },
+  "chart": {
+    "percent": "Percent",
+    "assets": "Assets",
+    "value": "Value",
+    "heading": "Chart",
+    "tabs": {
+      "absolute-profit": "Profit (Abs)",
+      "profit": "Profit (%)",
+      "equity": "Equity",
+      "balance": "Balance"
+    }
+  },
+  "statistics": {
+    "calmarRatio": "Calmar ratio",
+    "rebalances": "Rebalances",
+    "profit-change": "Profit change",
+    "balance": "Balance",
+    "heading": "Statistics",
+    "current": "Current",
+    "for": "For",
+    "equity": "Equity",
+    "investors": "Investors",
+    "trades": "Trades",
+    "success-trades": "Success trades",
+    "profit-factor": "Profit factor",
+    "sharpe-ratio": "Sharpe ratio",
+    "sortino-ratio": "Sortino ratio",
+    "max-drawdown": "Max Drawdown",
+    "start-day": "Start day",
+    "period-end": "Period end",
+    "period": "Period",
+    "trading-volume": "Trading Volume",
+    "tooltip": {
+      "profit": "Profit",
+      "investors-funds": "Investors Funds",
+      "managers-funds": "Managers Funds",
+      "trading-volume": "The total Trading volume for the selected period, divided by the leverage."
+    }
+  }
+}

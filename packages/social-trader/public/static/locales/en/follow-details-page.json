@@ -1,0 +1,208 @@
+{
+  "current-investment": {
+    "title": "Subscription details",
+    "fields": {
+      "tolerance": "Tolerance",
+      "value": "Value",
+      "name": "Name",
+      "buttons": "",
+      "volume-fee": "Volume fee",
+      "success-fee": "Success fee",
+      "fixed-volume": "Fixed volume",
+      "profit": "Profit",
+      "status": "Status",
+      "type": "Type",
+      "percent": "Percent",
+      "percentage": "Tolerance"
+    }
+  },
+  "title": "Follow detail",
+  "description": {
+    "currency": "Follow currency",
+    "broker": "Broker",
+    "leverage": "Leverage",
+    "period": "Period",
+    "age": "Age",
+    "genesis-ratio": "Genesis Ratio",
+    "investment-scale": "Invest. scale",
+    "volume-scale": "Volume scale",
+    "notify-hint": "Notify me when the program is available for investment",
+    "stop-out-level": "Stop out",
+    "entry-fee-levels": "The entry fee is disabled for programs that have not reached level 3. It will be charged only for programs with level 3 or higher.",
+    "strategy": "Strategy",
+    "addToFavorites": "Add to favourites",
+    "notifications": "Notifications",
+    "avToInvest": "Av. to invest",
+    "entryFee": "Entry fee",
+    "successFee": "Success fee",
+    "subscriptionFee": "Subscription fee",
+    "volume-fee": "Volume fee",
+    "invest": "Invest",
+    "investment-details": "Investment details",
+    "reinvest": "Reinvest profit",
+    "yourInvestment": "Current investment",
+    "pending-input": "Pending input",
+    "pending-output": "Pending output",
+    "invested": "Invested",
+    "value": "Value",
+    "profit": "Profit",
+    "status": "Status",
+    "withdraw": "Withdraw",
+    "withdraw-notice-text": "You can only withdraw the invested funds, the profit will be withdrawn to your account at the end of the period automatically",
+    "edit-program": "Edit Program",
+    "close-program": "Close Program",
+    "follow-trade": "Follow Trades",
+    "unfollow": "Unfollow",
+    "edit-subscription": "Edit subscription",
+    "signal-provider": {
+      "title": "Make a signal provider",
+      "disclaimer": "Parameters cannot be changed in the future."
+    },
+    "edit-signal-provider": {
+      "title": "Edit a signal provider"
+    },
+    "change-password": "Change password",
+    "program-settings": "Program settings",
+    "close-program-notification": "Investment program will be closed after this reporting period. Current investment requests will be cancelled, and new requests won’t be accepted. Profit and funds from the trading account will be deposited to investors and manager according to their shares.",
+    "close-program-notification-success": "Request to close the program was sent successfully.",
+    "requests-completed": "All requests completed successfully",
+    "auth-manager-popup": "You must be logged in to invest in a program"
+  },
+  "statistics": {
+    "subscribers": "Subscribers",
+    "heading": "Statistics",
+    "current": "Current",
+    "for": "For",
+    "equity": "Equity",
+    "investors": "Investors",
+    "trades": "Trades",
+    "success-trades": "Success trades",
+    "profit-factor": "Profit factor",
+    "sharpe-ratio": "Sharpe ratio",
+    "sortino-ratio": "Sortino ratio",
+    "max-drawdown": "Max Drawdown",
+    "start-day": "Start day",
+    "period-end": "Period end",
+    "period": "Period",
+    "trading-volume": "Trading Volume",
+    "tooltip": {
+      "profit": "Profit",
+      "investors-funds": "Investors Funds",
+      "managers-funds": "Managers Funds",
+      "trading-volume": "The total Trading volume for the selected period, divided by the leverage."
+    }
+  },
+  "tooltip": {
+    "subscribers": "The current number of subscribers.",
+    "investment-scale": "The current value of the indicator, which depends on the Age, Volume Scale and Genesis Ratio. The indicator is set in a range from 1 to 20. Av. to invest = Investment scale * Manager Balance",
+    "volume-scale": "This is a multiplier of the volume traded by the manager relative to the program balance for all periods. It is calculated similarly to the Genesis Ratio, being a weighted average over all given periods.",
+    "genesis-ratio": "The ratio of the profit of the program against its risk. It is set in the range from 0 to 1. If Genesis Ratio <0.2, then the program is high risk and the InvScale is limited to 1, meaning that the manager can attract no more than his own deposit.",
+    "av-to-invest": "The amount available for investment up to the next period.",
+    "entry-fee": "The commission that is paid to the manager by an investor for investing in the program. The commission is set by the manager and calculated as a percentage of the amount invested. The commission is charged when investing in programs that have reached the third level.",
+    "success-fee": "The commission charged from the profit. It is set by the manager and calculated as a percentage of the profits earned over a certain period of time. If there is no profit, then there is no success fee charged.",
+    "success-fee-signal": "Commission charged from copy trading profits. The fee is calculated according to the method of the High-water mark. With this method, the percentage is not taken from the profit for the period, but from the difference between the investors' investments and the previous maximum profit.",
+    "volume-fee": "A volume commission, charged only for opening a transaction.",
+    "stop-out-level": "A compulsory closing of positions at current market prices when a loss reaches the Stop out level. The period is automatically closed and all money is distributed to investors minus a loss. If the current reporting period of an investment program was ended due to the Stop out trigger, then in the next period the investors who had investments in the program when Stop Out have triggered, the Entry fee = 0",
+    "profit": "Profit or loss resulting from the manager trading. Calculated according to your share of investment in the program.",
+    "reinvest": "If the reinvestment trigger is on, then at the end of the period all profits after deducting the commission will be reinvested back into the program. If the button is not pressed, then at the end of the period all the profits will be transferred to your GVT wallet.",
+    "equity": "The current amount of funds in the program, taking into account the profit / loss of open transactions",
+    "investors": "The current number of investors in the program.",
+    "period": "The time interval in the program, which is set by the manager when creating the program. At the end of the period, profit/loss is distributed between the investors and the manager, according to the share in the program, and all received queries for investment and withdrawals are processed.",
+    "trades": "The number of trades the manager has performed during the selected date range.",
+    "success-trades": "The percentage of successful trades among the number of total trades during the selected date range.",
+    "profit-factor": "An indicator which is defined as the gross profit divided by the gross loss for the selected date range.",
+    "sharpe-ratio": "A measure of the effectiveness of a program, which is calculated as the mathematical ratio of the average yield to the average deviation of this yield. The higher the ratio, the lower the risk of investments, and higher the hypothetical profit.",
+    "sortino-ratio": "A variation of the Sharpe ratio that only factors in the downside risk. The larger this indicator, the better and more effective the program in terms of combining risk and profitability.",
+    "max-drawdown": "The biggest drawdown of a program during the selected date range."
+  },
+  "popover": {
+    "genesis-level": "Genesis Level",
+    "invest-limit": "Total invest limit",
+    "text": "Genesis level shows the experience and reliability of the Manager",
+    "about-levels": "About levels"
+  },
+  "history": {
+    "heading": "History",
+    "tabs": {
+      "trades": "Trades",
+      "events": "My history",
+      "open-positions": "Open positions",
+      "subscriptions": "Subscribers",
+      "financial-statistic": "Financial statistic",
+      "period-history": "Period History"
+    },
+    "trades": {
+      "download": "Export",
+      "swap": "Swap",
+      "providers": "Providers",
+      "direction-entry": "Dir/Entry",
+      "commission": "Commission",
+      "direction": "Dir",
+      "ticket": "Ticket",
+      "symbol": "Symbol",
+      "volume": "Volume",
+      "profit": "Profit",
+      "price": "Price",
+      "entry": "Entry",
+      "date": "Date"
+    },
+    "open-positions": {
+      "delay": "delay",
+      "delay-tooltip": "This manager makes trades and open positions public with a {{delay}} delay.",
+      "date": "Date Open",
+      "symbol": "Symbol",
+      "direction": "Dir",
+      "volume": "Volume",
+      "price": "Price Open",
+      "priceCurrent": "Price",
+      "profit": "Profit",
+      "profitPercent": "Profit %"
+    },
+    "subscriptions": {
+      "number": "Number",
+      "trades": "Trades",
+      "profit": "Profit",
+      "volume": "Volume",
+      "subscriptionDate": "Subscription date",
+      "unsubscriptionDate": "Unsubscription date",
+      "commission": "Commission",
+      "status": "Status"
+    },
+    "financial-statistic": {
+      "period": "Period",
+      "date-start": "Date start",
+      "balance": "Balance",
+      "profit": "Profit",
+      "success-fee": "Success fee",
+      "management-fee": "Management fee",
+      "entry-fee": "Entry fee",
+      "deposit-withdraw": "Deposit/Withdraw",
+      "commission-rebate": "GV commission rebate"
+    },
+    "period-history": {
+      "investors-deposit": "Investors Invest",
+      "investors-withdraw": "Investors Withdrawal",
+      "manager-deposit": "Manager Investment",
+      "manager-withdraw": "Manager Withdrawal",
+      "investors-profit-withdraw": "Investors Withdrawal Profit",
+      "platform-success-fee": "Platform Success Fee",
+      "manager-commission-rebate": "GV commission rebate",
+      "period": "Period",
+      "date-start": "Date start",
+      "period-length": "Period length",
+      "balance": "Program balance",
+      "profit": "Profit",
+      "investors": "Investors"
+    }
+  },
+  "chart": {
+    "heading": "Chart",
+    "tabs": {
+      "profit": "Profit",
+      "equity": "Equity"
+    }
+  },
+  "calculator": {
+    "level": "Level"
+  }
+}

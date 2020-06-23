@@ -53,7 +53,7 @@ const _FollowCard: React.FC<Props> = ({
   const renderActions = ({ clearAnchor, anchor }: IRenderActionsArgs) => (
     <TableCardActions anchor={anchor} clearAnchor={clearAnchor}>
       <TableCardActionsItem to={linkProps} onClick={clearAnchor}>
-        {t("program-actions.details")}
+        {t("asset-actions.details")}
       </TableCardActionsItem>
       {follow.personalDetails && (
         <TableCardFavoriteActionItem
@@ -88,9 +88,9 @@ const _FollowCard: React.FC<Props> = ({
             label={
               <TooltipLabel
                 tooltipContent={t(
-                  "dashboard-page.tooltips.trading.subscribers"
+                  "dashboard-page:tooltips.trading.subscribers"
                 )}
-                labelText={t("follows-page.header.subscribers")}
+                labelText={t("header-fields.subscribers")}
               />
             }
           >
@@ -105,8 +105,8 @@ const _FollowCard: React.FC<Props> = ({
           <StatisticItem
             label={
               <TooltipLabel
-                tooltipContent={t("dashboard-page.tooltips.trading.trades")}
-                labelText={t("follows-page.header.trades")}
+                tooltipContent={t("dashboard-page:tooltips.trading.trades")}
+                labelText={t("header-fields.trades")}
               />
             }
           >
@@ -121,8 +121,8 @@ const _FollowCard: React.FC<Props> = ({
           <StatisticItem
             label={
               <TooltipLabel
-                tooltipContent={t("dashboard-page.tooltips.investing.ddown")}
-                labelText={t("programs-page.programs-header.drawdown")}
+                tooltipContent={t("dashboard-page:tooltips.investing.ddown")}
+                labelText={t("header-fields.drawdown")}
               />
             }
           >

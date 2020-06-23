@@ -9,4 +9,8 @@ const Page: NextPage = () => {
   return <NotificationsPage />;
 };
 
+Page.getInitialProps = async () => ({
+  namespacesRequired: ["notifications-page"]
+});
+
 export default compose(withDefaultLayout, withPrivateRoute)(Page);

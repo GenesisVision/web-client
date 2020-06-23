@@ -18,7 +18,7 @@ const _FollowButton: React.FC<Props> = ({
   currency
 }) => {
   const [t] = useTranslation();
-  const label = t("program-details-page.description.follow-trade");
+  const label = t("asset-details:description.follow-trade");
   const [isOpenFollow, setIsOpenFollow, setIsCloseFollow] = useIsOpen();
   const dispatchDescription = useCallback(() => {
     onApply && onApply();
@@ -31,7 +31,7 @@ const _FollowButton: React.FC<Props> = ({
         size={GV_BTN_SIZE.BIG}
         onClick={setIsOpenFollow}
       >
-        {t("program-details-page.description.follow-trade")}
+        {t("asset-details:description.follow-trade")}
       </GVButton>
       <FollowModuleContainer
         leverage={leverage}

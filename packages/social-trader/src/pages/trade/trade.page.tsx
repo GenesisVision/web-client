@@ -9,9 +9,9 @@ import { useTranslation } from "react-i18next";
 
 const _TradePage: React.FC = () => {
   const [t] = useTranslation();
-  const title = t("trade.title");
+  const title = t("trade:title");
   return (
-    <Page description={"Information about trade brokers"} title={title}>
+    <Page description={t("trade:description")} title={title}>
       <BrokersContainer
         darkTheme
         brokersInfo={brokersInfo}

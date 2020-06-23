@@ -34,11 +34,11 @@ describe("Program details - chart", () => {
   const url = `${PROGRAMS_ROUTE}/${programName}`;
   let page: Page;
   let browser: Browser;
-  const profitChartTabSelector = testT("details-page.chart.tabs.profit");
+  const profitChartTabSelector = testT("asset-details:chart.tabs.profit");
   const absoluteProfitChartTabSelector = testT(
-    "details-page.chart.tabs.absolute-profit"
+    "asset-details:chart.tabs.absolute-profit"
   );
-  const balanceChartTabSelector = testT("details-page.chart.tabs.balance");
+  const balanceChartTabSelector = testT("asset-details:chart.tabs.balance");
   const chartOptions = {
     ...getDefaultDateRange()
   };
@@ -128,7 +128,7 @@ describe("Program details - chart", () => {
       await waitForLoadBlurLoader(".details-chart__container");
       await waitForSelector(".details-chart__profit");
       const value = await getStatisticsItemValue(
-        testT("details-page.chart.percent")
+        testT("asset-details:chart.percent")
       );
       expect(value).toBe(`${profitPercentCharts!.statistic.profitPercent} %`);
     });
@@ -150,7 +150,7 @@ describe("Program details - chart", () => {
           { dateFrom, currencies: [statisticCurrency] }
         );
         const value = await getStatisticsItemValue(
-          testT("details-page.chart.percent")
+          testT("asset-details:chart.percent")
         );
         expect(value).toBe(
           `${separateThousand(profitPercentCharts.statistic.profitPercent)} %`
@@ -171,7 +171,7 @@ describe("Program details - chart", () => {
           { dateFrom, currencies: [statisticCurrency] }
         );
         const value = await getStatisticsItemValue(
-          testT("details-page.chart.percent")
+          testT("asset-details:chart.percent")
         );
         expect(value).toBe(`${profitPercentCharts.statistic.profitPercent} %`);
       });
@@ -190,7 +190,7 @@ describe("Program details - chart", () => {
           { dateFrom, currencies: [statisticCurrency] }
         );
         const value = await getStatisticsItemValue(
-          testT("details-page.chart.percent")
+          testT("asset-details:chart.percent")
         );
         expect(value).toBe(`${profitPercentCharts.statistic.profitPercent} %`);
       });
@@ -209,7 +209,7 @@ describe("Program details - chart", () => {
           { dateFrom, currencies: [statisticCurrency] }
         );
         const value = await getStatisticsItemValue(
-          testT("details-page.chart.percent")
+          testT("asset-details:chart.percent")
         );
         expect(value).toBe(
           `${separateThousand(profitPercentCharts.statistic.profitPercent)} %`
@@ -230,7 +230,7 @@ describe("Program details - chart", () => {
           { dateFrom, currencies: [statisticCurrency] }
         );
         const value = await getStatisticsItemValue(
-          testT("details-page.chart.percent")
+          testT("asset-details:chart.percent")
         );
         expect(value).toBe(
           `${separateThousand(profitPercentCharts.statistic.profitPercent)} %`
@@ -268,7 +268,7 @@ describe("Program details - chart", () => {
           { ...chartOptions, currencies: [newCurrency] }
         );
         const percentValue = await getStatisticsItemValue(
-          testT("details-page.chart.percent")
+          testT("asset-details:chart.percent")
         );
         expect(percentValue).toBe(
           `${separateThousand(profitPercentCharts.statistic.profitPercent)} %`

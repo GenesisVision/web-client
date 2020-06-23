@@ -9,7 +9,7 @@ const _PasswordRestorePage: React.FC<Props> = ({ code, userId }) => {
   return (
     <div>
       <Row>
-        <Text muted>{t("auth.password-restore.new-password.text")}</Text>
+        <Text muted>{t("auth:password-restore.new-password.text")}</Text>
       </Row>
       <Row>
         <PasswordRestoreContainer code={code} userId={userId} />

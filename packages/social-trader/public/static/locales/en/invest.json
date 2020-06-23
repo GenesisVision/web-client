@@ -1,0 +1,17 @@
+{
+  "title": "Invest",
+  "follows": {
+    "title": "Follow",
+    "text": "Leverage the expertise of seasoned traders while keeping control of your capital. Just choose a program and Genesis Vision will automatically copy the trades from your account. You will be able to withdraw your investment or exit trades at any point in time."
+  },
+  "programs": {
+    "title": "Programs",
+    "text": "Invest your money with the peace of mind of knowing that a manager’s track record is stored on the blockchain. Select investment programs that suit your personal profile and let the manager do the work for you. You will be able to withdraw your investment or profits only at the predefined intervals."
+  },
+  "funds": {
+    "title": "Funds",
+    "text": "Diversify your capital across hundreds of cryptocurrencies in one click. Select a fund with a composition that matches your opinion on the market and let the manager readjust while the market evolves. You retain full control of your investment. You can withdraw your capital at any time."
+  },
+  "invest-button": "Invest",
+  "follow-button": "Follow"
+}

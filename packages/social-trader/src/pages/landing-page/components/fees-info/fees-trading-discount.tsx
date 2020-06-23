@@ -16,14 +16,14 @@ const _FeesTradingDiscountInfo: React.FC<{
         [styles["fees-info__notes--withoutOffset"]]: withoutOffset
       })}
     >
-      <p>{t("fees.text-3")}</p>
-      <h3>{t("fees.trading-discount")}</h3>
+      <p>{t("fees:text-3")}</p>
+      <h3>{t("fees:trading-discount")}</h3>
       <ul
         className={classNames(styles["fees-info__list-notes"], {
           [styles["fees-info__list-notes--dark"]]: dark
         })}
       >
-        {t("fees.list-4")
+        {t("fees:list-4")
           .split("\n")
           .map((line, index) => (
             <li key={index} className={styles["fees-info__note-item"]}>
@@ -48,7 +48,7 @@ const _FeesTradingDiscountTable: React.FC<{
         [styles["fees-info__notes--withoutOffset"]]: withoutOffset
       })}
     >
-      <h4>{t("fees.conditions")}</h4>
+      <h4>{t("fees:conditions")}</h4>
       <div className={styles["fees-info__table-wrapper"]}>
         <table
           className={classNames(styles["fees-table"], {
@@ -64,13 +64,13 @@ const _FeesTradingDiscountTable: React.FC<{
                   styles["fees-table__cell--width-bg"]
                 )}
               >
-                {t("fees.wallet")}
+                {t("fees:wallet")}
               </th>
-              <th className={styles["fees-table__cell"]}>{t("fees.amount")}</th>
+              <th className={styles["fees-table__cell"]}>{t("fees:amount")}</th>
             </tr>
           </thead>
           <tbody>
-            {t("fees.discounts-table")
+            {t("fees:discounts-table")
               .split("\n")
               .map((row, index) => (
                 <tr key={index} className={styles["fees-table__row"]}>

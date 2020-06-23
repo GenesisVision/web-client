@@ -18,7 +18,7 @@ export const _FundStructureHeaderCell: React.FC<WithTranslation & {
         }
       )}
     >
-      {t(`fund-details-page.history.structure.${column.name}`)}
+      {t(`fund-details-page:history.structure.${column.name}`)}
     </span>
   );
   return column.tooltip ? (
@@ -26,7 +26,7 @@ export const _FundStructureHeaderCell: React.FC<WithTranslation & {
       horizontal={HORIZONTAL_POPOVER_POS.LEFT}
       render={() => (
         <TooltipContent>
-          {t(`fund-details-page.tooltip.${column.name}`)}
+          {t(`fund-details-page:tooltip.${column.name}`)}
         </TooltipContent>
       )}
     >

@@ -74,8 +74,8 @@ export const TableCardFavoriteActionItem: React.FC<{
         isFavorite={isFavorite}
       >
         {isFavorite
-          ? t("fund-actions.remove-from-favorites")
-          : t("fund-actions.add-to-favorites")}
+          ? t("asset-actions.remove-from-favorites")
+          : t("asset-actions.add-to-favorites")}
       </ToggleAssetFavoriteButton>
     </PopoverContentListItem>
   );

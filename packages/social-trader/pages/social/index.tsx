@@ -24,7 +24,7 @@ Page.getInitialProps = async () => {
   return {
     initFeedData,
     data,
-    namespacesRequired: ["social-page"]
+    namespacesRequired: ["conversation", "social-page"]
   };
 };
 

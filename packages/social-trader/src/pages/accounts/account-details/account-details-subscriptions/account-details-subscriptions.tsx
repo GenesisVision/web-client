@@ -15,7 +15,7 @@ const _AccountDetailsSubscriptions: React.FC<Props> = ({
     <div>
       <DetailsBlock table wide>
         <DetailsBlockTitleBox>
-          <h3>{t("account-details-page.subscriptions.title")}</h3>
+          <h3>{t("account-details-page:subscriptions.title")}</h3>
         </DetailsBlockTitleBox>
         <SubscriptionsContainer id={id} assetCurrency={assetCurrency} />
       </DetailsBlock>

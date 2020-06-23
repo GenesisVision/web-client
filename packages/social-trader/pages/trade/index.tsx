@@ -9,7 +9,7 @@ const Page: NextPage = () => {
 };
 
 Page.getInitialProps = async () => ({
-  namespacesRequired: ["landing-page"]
+  namespacesRequired: ["trade", "landing-page"]
 });
 
 export default compose(withDefaultLayout)(Page);

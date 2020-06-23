@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 const _WalletWithdrawConfirmPage: React.FC<Props> = ({ requestId, code }) => {
   const [t] = useTranslation();
   return (
-    <Page title={t("wallet-withdraw.confirmation.page-title")}>
+    <Page title={t("wallet-withdraw:confirmation.page-title")}>
       <WalletWithdrawConfirm requestId={requestId} code={code} />
     </Page>
   );

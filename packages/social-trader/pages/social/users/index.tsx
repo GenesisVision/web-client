@@ -10,7 +10,7 @@ const Page: NextPage = () => {
 };
 
 Page.getInitialProps = async () => ({
-  namespacesRequired: ["users-page"]
+  namespacesRequired: ["conversation", "users-page"]
 });
 
 export default compose(withDefaultLayout, withBetaTesting("Social"))(Page);

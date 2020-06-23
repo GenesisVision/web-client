@@ -18,23 +18,23 @@ const EmailPendingPage: React.FC = () => {
     request: values => {
       return sendForgotPasswordEmail({ ...values, email });
     },
-    successMessage: "auth.password-restore.resend-email-alert-message"
+    successMessage: "auth:password-restore.resend-email-alert-message"
   });
   return (
     <div className={styles["password-pending"]}>
       <Row small>
         <Text muted>
-          {t("auth.password-restore.email-pending.text-section-1")}
+          {t("auth:password-restore.email-pending.text-section-1")}
         </Text>
       </Row>
       <Row small>
         <Text muted>
-          {t("auth.password-restore.email-pending.text-section-2")}
+          {t("auth:password-restore.email-pending.text-section-2")}
         </Text>
       </Row>
       <Row small>
         <Text muted>
-          {t("auth.password-restore.email-pending.text-section-3")}
+          {t("auth:password-restore.email-pending.text-section-3")}
         </Text>
       </Row>
       <Row>

@@ -32,7 +32,9 @@ Page.getInitialProps = async ctx => {
       dispatch(statisticCurrencyAction(statisticCurrency))
     );
   });
-  return {};
+  return {
+    namespacesRequired: ["transfer", "asset-details", "account-details-page"]
+  };
 };
 
 export default compose(withPrivateRoute, withDefaultLayout)(Page);

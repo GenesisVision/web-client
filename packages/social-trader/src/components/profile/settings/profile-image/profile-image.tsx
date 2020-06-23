@@ -36,7 +36,7 @@ const _ProfileImage: React.FC<Props> = ({ onSubmit, avatar, errorMessage }) => {
         </Row>
         <Row xlarge>
           <SubmitButton isSuccessful={!errorMessage}>
-            {t("profile-page.settings.save-photo")}
+            {t("profile-page:settings.save-photo")}
           </SubmitButton>
         </Row>
       </div>

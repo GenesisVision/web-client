@@ -13,7 +13,7 @@ export const _LineWithdrawButton: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   return (
-    <LineWalletButton title={t("wallet-page.buttons.withdraw")}>
+    <LineWalletButton title={t("wallet-page:buttons.withdraw")}>
       <WalletWithdrawButton
         type={WALLET_DEPOSIT_BUTTON_TYPE.SMALL}
         currency={currency}

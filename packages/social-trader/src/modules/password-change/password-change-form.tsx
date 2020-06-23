@@ -57,7 +57,7 @@ const _PasswordChangeForm: React.FC<IPasswordChangeFormOwnProps> = ({
       <Row>
         <GVHookFormField
           component={SimpleTextField}
-          label={t("auth.password-change.current-password")}
+          label={t("auth:password-change.current-password")}
           name={PASSWORD_CHANGE_FORM_FIELDS.oldPassword}
           type="password"
           autoComplete="new-password"
@@ -69,7 +69,7 @@ const _PasswordChangeForm: React.FC<IPasswordChangeFormOwnProps> = ({
           <GVHookFormField
             className={className}
             component={SimpleTextField}
-            label={t("auth.password-change.password")}
+            label={t("auth:password-change.password")}
             type="password"
             name={PASSWORD_CHANGE_FORM_FIELDS.password}
             autoComplete="new-password"
@@ -79,7 +79,7 @@ const _PasswordChangeForm: React.FC<IPasswordChangeFormOwnProps> = ({
           <GVHookFormField
             className={className}
             component={SimpleTextField}
-            label={t("auth.password-change.confirm-password")}
+            label={t("auth:password-change.confirm-password")}
             type="password"
             name={PASSWORD_CHANGE_FORM_FIELDS.confirmPassword}
             autoComplete="new-password"

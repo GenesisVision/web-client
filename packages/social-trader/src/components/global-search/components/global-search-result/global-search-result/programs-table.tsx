@@ -24,7 +24,7 @@ const ProgramsTable: React.FC<SearchTableProps<
             styles[`programs-table__cell--${column.name}`]
           )}
         >
-          {t(`programs-page.programs-header.${column.name}`)}
+          {t(`header-fields.${column.name}`)}
         </span>
       )}
       renderBodyRow={program => <ProgramTableRowShort program={program} />}

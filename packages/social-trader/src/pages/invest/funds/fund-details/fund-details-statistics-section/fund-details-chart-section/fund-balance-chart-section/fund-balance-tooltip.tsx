@@ -24,13 +24,13 @@ const _TooltipBody: React.FC<ITooltipBodyProps & WithTranslation> = ({
   return (
     <>
       <StatisticItem
-        label={t("program-details-page.statistics.tooltip.investors-funds")}
+        label={t("asset-details:statistics.tooltip.investors-funds")}
         accent
       >
         {formattedInvestorsFunds}
       </StatisticItem>
       <StatisticItem
-        label={t("program-details-page.statistics.tooltip.managers-funds")}
+        label={t("asset-details:statistics.tooltip.managers-funds")}
         accent
       >
         {formattedManagersFunds}

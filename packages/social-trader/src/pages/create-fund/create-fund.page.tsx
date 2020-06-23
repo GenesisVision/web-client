@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 const _CreateFundPage: React.FC = () => {
   const [t] = useTranslation();
   return (
-    <Page showTitle title={t("create-fund-page.title")}>
+    <Page showTitle title={t("create-fund-page:title")}>
       <CreateFundSettingsSection />
     </Page>
   );

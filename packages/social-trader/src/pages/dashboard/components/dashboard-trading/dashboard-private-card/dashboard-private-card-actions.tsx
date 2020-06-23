@@ -62,7 +62,7 @@ const _DashboardPrivateCardActions: React.FC<Props> = ({
     <TableCardActions anchor={anchor} clearAnchor={clearAnchor}>
       {asset.actions.hasTerminal && (
         <TableCardActionsItem to={terminalLink} onClick={clearAnchor}>
-          {t("dashboard-page.trading.actions.terminal")}
+          {t("dashboard-page:trading.actions.terminal")}
         </TableCardActionsItem>
       )}
       {asset.actions.canMakeSignalProviderFromPrivateExternalTradingAccount && (
@@ -70,7 +70,7 @@ const _DashboardPrivateCardActions: React.FC<Props> = ({
           to={makeProgramExternalLink}
           onClick={clearAnchor}
         >
-          {t("dashboard-page.trading.actions.make-signal-account")}
+          {t("dashboard-page:trading.actions.make-signal-account")}
         </TableCardActionsItem>
       )}
       {asset.actions.canMakeProgramFromPrivateTradingAccount && (
@@ -83,7 +83,7 @@ const _DashboardPrivateCardActions: React.FC<Props> = ({
       )}
       {asset.actions.canMakeSignalProviderFromPrivateTradingAccount && (
         <TableCardActionsItem to={makeSignalAccountLink} onClick={clearAnchor}>
-          {t("dashboard-page.trading.actions.make-signal-account")}
+          {t("dashboard-page:trading.actions.make-signal-account")}
         </TableCardActionsItem>
       )}
       {asset.actions.canChangePassword && (

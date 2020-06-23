@@ -4,7 +4,7 @@ import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 
 const _PasswordPage: React.FC<WithTranslation> = ({ t }) => (
-  <Page showTitle title={t("auth.password-change.title")}>
+  <Page showTitle title={t("auth:password-change.title")}>
     <PasswordChange />
   </Page>
 );

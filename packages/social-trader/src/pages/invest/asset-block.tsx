@@ -59,7 +59,7 @@ export const AssetBlock: React.FC<Props> = ({
         <Row xlarge>
           <Link to={investLink}>
             <GVButton size={GV_BTN_SIZE.LARGE} color="primary">
-              {buttonLabel || t("invest.invest-button")}
+              {buttonLabel || t("invest:invest-button")}
             </GVButton>
           </Link>
         </Row>

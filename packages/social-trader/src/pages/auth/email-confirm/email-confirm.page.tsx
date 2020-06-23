@@ -10,7 +10,7 @@ const _EmailConfirmPage: React.FC<Props> = ({ userId, code }) => {
   return (
     <AuthLayout
       quoteNo={0}
-      titleKey={t("auth.email-confirm.title")}
+      titleKey={t("auth:email-confirm.title")}
       Footer={SignUpFooter}
       footerAuthRoute={LOGIN_ROUTE}
     >

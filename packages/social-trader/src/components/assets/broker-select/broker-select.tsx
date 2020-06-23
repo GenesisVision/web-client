@@ -76,15 +76,10 @@ const _BrokerSelectBroker: React.FC<Props> = ({
           <h3>{selectedBroker.name}</h3>
         </Row>
         <Row onlyOffset>
-          <StatisticItem
-            half
-            label={t("create-program-page.broker-info.about")}
-          >
+          <StatisticItem half label={t("create-account:broker-info.about")}>
             {selectedBroker.description}
           </StatisticItem>
-          <StatisticItem
-            label={t("create-program-page.broker-info.account-type")}
-          >
+          <StatisticItem label={t("create-account:broker-info.account-type")}>
             {"leverageMin" in selectedBroker
               ? getBrokerAccountTypes(
                   selectedBroker.accountTypes as BrokerAccountType[]
@@ -92,31 +87,29 @@ const _BrokerSelectBroker: React.FC<Props> = ({
               : getExchangeAccountTypes(selectedBroker.accountTypes)}
           </StatisticItem>
           <StatisticItem
-            label={t("create-program-page.broker-info.trading-platform")}
+            label={t("create-account:broker-info.trading-platform")}
           >
             {selectedBroker.accountTypes[0].type}
           </StatisticItem>
-          <StatisticItem label={t("create-program-page.broker-info.terms")}>
+          <StatisticItem label={t("create-account:broker-info.terms")}>
             <a
-              title={t("create-program-page.broker-info.read-terms")}
+              title={t("create-account:broker-info.read-terms")}
               href={selectedBroker.terms}
               target="_blank"
               rel="noopener noreferrer"
             >
-              {t("create-program-page.broker-info.read-terms")}
+              {t("create-account:broker-info.read-terms")}
             </a>
           </StatisticItem>
           {"leverageMin" in selectedBroker && (
-            <StatisticItem
-              label={t("create-program-page.broker-info.leverage")}
-            >
+            <StatisticItem label={t("create-account:broker-info.leverage")}>
               {getLeverageDescription(
                 selectedBroker.leverageMin,
                 selectedBroker.leverageMax
               )}
             </StatisticItem>
           )}
-          <StatisticItem label={t("create-program-page.broker-info.assets")}>
+          <StatisticItem label={t("create-account:broker-info.assets")}>
             {selectedBroker.assets}
           </StatisticItem>
         </Row>

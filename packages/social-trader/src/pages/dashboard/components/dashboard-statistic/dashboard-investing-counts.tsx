@@ -17,8 +17,8 @@ export const DashboardInvestingCounts: React.FC<{
       <DashboardValueItem
         label={
           <TooltipLabel
-            tooltipContent={t("dashboard-page.tooltips.investing.balance")}
-            labelText={t("dashboard-page.statistic.balance")}
+            tooltipContent={t("dashboard-page:tooltips.investing.balance")}
+            labelText={t("dashboard-page:statistic.balance")}
           />
         }
         value={balance}
@@ -27,8 +27,8 @@ export const DashboardInvestingCounts: React.FC<{
       <DashboardValueItem
         label={
           <TooltipLabel
-            tooltipContent={t("dashboard-page.tooltips.investing.programs")}
-            labelText={t("dashboard-page.statistic.programs")}
+            tooltipContent={t("dashboard-page:tooltips.investing.programs")}
+            labelText={t("dashboard-page:statistic.programs")}
           />
         }
         value={programs}
@@ -36,8 +36,8 @@ export const DashboardInvestingCounts: React.FC<{
       <DashboardValueItem
         label={
           <TooltipLabel
-            tooltipContent={t("dashboard-page.tooltips.investing.funds")}
-            labelText={t("dashboard-page.statistic.funds")}
+            tooltipContent={t("dashboard-page:tooltips.investing.funds")}
+            labelText={t("dashboard-page:statistic.funds")}
           />
         }
         value={funds}

@@ -27,7 +27,7 @@ Page.getInitialProps = async ctx => {
         follows: follows.items
       };
     });
-  return { assets };
+  return { namespacesRequired: ["invest"], assets };
 };
 
 interface Props {

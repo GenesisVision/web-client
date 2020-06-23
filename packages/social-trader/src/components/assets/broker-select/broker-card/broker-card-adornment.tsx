@@ -29,14 +29,14 @@ const _BrokerCardAdornment: React.FC<Props> = ({ cardState }) => {
         </Row>
       </Text>
       <ConfirmPopup
-        header={t("create-account-page.settings.kyc-required")}
+        header={t("create-account:settings.kyc-required")}
         open={isOpenPopup}
         onApply={() => setIsOpen(false)}
         onClose={() => setIsOpen(false)}
         body={
           <>
-            <div>{t("create-account-page.settings.kyc-required-text-1")}</div>
-            <div>{t("create-account-page.settings.kyc-required-text-2")}</div>
+            <div>{t("create-account:settings.kyc-required-text-1")}</div>
+            <div>{t("create-account:settings.kyc-required-text-2")}</div>
           </>
         }
         applyButtonText={t("buttons.close")}

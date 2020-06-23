@@ -13,7 +13,7 @@ const _AssetsField: React.FC<{ name: string }> = ({ name }) => {
   return (
     <>
       <Text muted size={"small"}>
-        {t("create-fund-page.settings.fields.mandatory-assets")}
+        {t("create-fund-page:settings.fields.mandatory-assets")}
       </Text>
       <Row onlyOffset wide>
         <GVHookFormField

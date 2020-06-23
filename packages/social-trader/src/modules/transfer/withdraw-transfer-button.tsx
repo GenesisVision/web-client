@@ -20,12 +20,12 @@ const _WithdrawTransferButton: React.FC<Props> = props => {
   return (
     <TransferButton
       {...props}
-      successMessage={"transfer.confirmation.withdraw-success"}
+      successMessage={"transfer:confirmation.withdraw-success"}
       singleCurrentItemContainer={!outerCurrentItemContainerItems}
       size={size}
       label={t("buttons.withdraw")}
-      title={t("transfer.withdraw-from", {
-        title: t(`dashboard-page.trading.asset-types.${accountType}`)
+      title={t("transfer:withdraw-from", {
+        title: t(`dashboard-page:trading.asset-types.${accountType}`)
       })}
       currentItemContainer={TRANSFER_CONTAINER.SOURCE}
       sourceType={accountType as InternalTransferRequestType}

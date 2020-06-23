@@ -9,4 +9,8 @@ const Page: NextPage = () => {
   return <TradingPage />;
 };
 
+Page.getInitialProps = async () => ({
+  namespacesRequired: ["transfer", "asset-details", "dashboard-page"]
+});
+
 export default compose(withDefaultLayout, withPrivateRoute)(Page);

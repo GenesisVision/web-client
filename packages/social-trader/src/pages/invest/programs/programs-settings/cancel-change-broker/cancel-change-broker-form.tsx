@@ -54,9 +54,7 @@ const _CancelChangeBrokerForm: React.FC<Props> = ({
             tags={brokerFrom.tags}
           />
           <Row onlyOffset>
-            <StatisticItem
-              label={t("create-program-page.settings.fields.account-type")}
-            >
+            <StatisticItem label={t("asset-settings:fields.account-type")}>
               {
                 safeGetElemFromArray(
                   brokerFrom.accountTypes,
@@ -65,9 +63,7 @@ const _CancelChangeBrokerForm: React.FC<Props> = ({
                 ).name
               }
             </StatisticItem>
-            <StatisticItem
-              label={t("create-program-page.settings.fields.brokers-leverage")}
-            >
+            <StatisticItem label={t("asset-settings:fields.brokers-leverage")}>
               {leverage}
             </StatisticItem>
           </Row>
@@ -82,14 +78,10 @@ const _CancelChangeBrokerForm: React.FC<Props> = ({
             tags={brokerTo.tags}
           />
           <Row onlyOffset>
-            <StatisticItem
-              label={t("create-program-page.settings.fields.account-type")}
-            >
+            <StatisticItem label={t("asset-settings:fields.account-type")}>
               {brokerTo.accountTypes[0].name}
             </StatisticItem>
-            <StatisticItem
-              label={t("create-program-page.settings.fields.brokers-leverage")}
-            >
+            <StatisticItem label={t("asset-settings:fields.brokers-leverage")}>
               {newLeverage}
             </StatisticItem>
           </Row>
@@ -102,7 +94,7 @@ const _CancelChangeBrokerForm: React.FC<Props> = ({
       />
       <Row>
         <FormTextField>
-          {t("program-settings.broker.text-cancel", {
+          {t("asset-settings:broker.text-cancel", {
             brokerFrom: brokerFrom.name,
             brokerTo: brokerTo.name
           })}
@@ -110,7 +102,7 @@ const _CancelChangeBrokerForm: React.FC<Props> = ({
       </Row>
       <Row large>
         <GVButton color="primary" onClick={setCancelChangeBrokerOpen}>
-          {t("program-settings.buttons.cancel-broker")}
+          {t("asset-settings:buttons.cancel-broker")}
         </GVButton>
       </Row>
       <ConfirmCancelChangeBroker

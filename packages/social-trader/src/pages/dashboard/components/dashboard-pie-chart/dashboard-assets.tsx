@@ -10,7 +10,7 @@ const _DashboardAssets: React.FC<Props> = ({ landscapeTablet, tablet }) => {
     <DashboardPieChartBlock
       landscapeTablet={landscapeTablet}
       tablet={tablet}
-      label={t("dashboard-page.portfolio.title")}
+      label={t("dashboard-page:portfolio.title")}
       request={getAssetsPercents}
       loaderData={assetsLoaderData()}
     />

@@ -13,9 +13,7 @@ const _ProgramTableSortingValue: React.FC<{ column: SortingColumn }> = ({
   const { t } = useTranslation();
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   if (!isAuthenticated && column.name === "favorite") return null;
-  const renderValue = () => (
-    <>{t(`programs-page.programs-header.${column.name}`)}</>
-  );
+  const renderValue = () => <>{t(`header-fields.${column.name}`)}</>;
   return column.tooltip ? (
     <Tooltip
       horizontal={HORIZONTAL_POPOVER_POS.LEFT}

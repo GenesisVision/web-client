@@ -45,7 +45,7 @@ const _DashboardPrivate: React.FC = () => {
         </Row>
       }
       getItems={getItems}
-      title={t("dashboard-page.trading.private")}
+      title={t("dashboard-page:trading.private")}
       renderBodyCard={(
         asset: DashboardTradingAsset,
         updateRow,

@@ -13,13 +13,13 @@ const _PerformanceData: React.FC<Props> = ({ description }) => {
   const [t] = useTranslation();
   return (
     <DetailsPerformanceData>
-      <StatisticItem label={t("program-details-page.description.broker")}>
+      <StatisticItem label={t("asset-details:description.broker")}>
         <DetailsBroker
           name={"broker"}
           logoUrl={description.brokerDetails.logoUrl}
         />
       </StatisticItem>
-      <StatisticItem label={t("program-details-page.description.currency")}>
+      <StatisticItem label={t("asset-details:description.currency")}>
         {description.currency}
       </StatisticItem>
     </DetailsPerformanceData>

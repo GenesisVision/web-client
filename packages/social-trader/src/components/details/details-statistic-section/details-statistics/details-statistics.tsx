@@ -35,7 +35,7 @@ const _DetailsStatistics: React.FC<IDetailsStatisticsProps> = ({
   return (
     <DetailsBlock horizontalPaddings className={styles["details-statistics"]}>
       <Row>
-        <h3>{t("details-page.statistics.heading")}</h3>
+        <h3>{t("asset-details:statistics.heading")}</h3>
       </Row>
       <Row>
         {renderDetailsStatisticsElements({

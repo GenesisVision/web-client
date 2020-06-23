@@ -19,14 +19,14 @@ const _TradesDelayHint: React.FC<{ delay: TradesDelay }> = ({ delay }) => {
       <Text muted>
         <Row>
           <RowItem small>
-            {label} {t("program-details-page.history.open-positions.delay")}
+            {label} {t("program-details-page:history.open-positions.delay")}
           </RowItem>
           <Tooltip
             horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
             render={() => (
               <TooltipContent small>
                 {t(
-                  "program-details-page.history.open-positions.delay-tooltip",
+                  "program-details-page:history.open-positions.delay-tooltip",
                   {
                     delay: label
                   }

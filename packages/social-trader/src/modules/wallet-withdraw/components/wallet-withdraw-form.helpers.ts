@@ -30,7 +30,7 @@ export const walletWithdrawValidationSchema = ({
     case "USDT":
       return object().shape({
         [WALLET_WITHDRAW_FIELDS.address]: ethGvtWalletValidator.required(
-          t("wallet-withdraw.validation.address-is-required")
+          t("validations.address-is-required")
         ),
         [WALLET_WITHDRAW_FIELDS.twoFactorCode]: twoFactorValidator(
           t,
@@ -40,7 +40,7 @@ export const walletWithdrawValidationSchema = ({
     default:
       return object().shape({
         [WALLET_WITHDRAW_FIELDS.address]: btcWalletValidator.required(
-          t("wallet-withdraw.validation.address-is-required")
+          t("validations.address-is-required")
         ),
         [WALLET_WITHDRAW_FIELDS.twoFactorCode]: twoFactorValidator(
           t,

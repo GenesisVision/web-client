@@ -17,7 +17,7 @@ export const PublicPageLink: React.FC = React.memo(() => {
   if (!managerUrl) return null;
   return (
     <Link to={linkCreator(url, MANAGER_DETAILS_FOLDER_ROUTE)}>
-      {t("dashboard-page.investing.public-page")}
+      {t("dashboard-page:investing.public-page")}
     </Link>
   );
 });

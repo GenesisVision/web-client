@@ -31,11 +31,11 @@ const _PasswordRestoreContainer: React.FC<Props> = ({ userId, code }) => {
     catchCallback: ({ code }: ResponseError) => {
       if (code === "RequiresTwoFactor") {
         Push(LOGIN_ROUTE);
-        successAlert("auth.password-restore.success-alert-message");
+        successAlert("auth:password-restore.success-alert-message");
       }
     },
     request: restorePassword,
-    successMessage: "auth.password-restore.success-alert-message"
+    successMessage: "auth:password-restore.success-alert-message"
   });
 
   const handleSubmit = useCallback(

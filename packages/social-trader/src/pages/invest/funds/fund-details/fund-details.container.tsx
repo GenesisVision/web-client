@@ -37,13 +37,13 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
       dispatchFundDescriptionWithId(description.id, undefined, currency)
     );
   }, []);
-  const title = `${t("funds-page.title")} - ${description.publicInfo.title}`;
+  const title = `${t("funds-page:title")} - ${description.publicInfo.title}`;
   return (
     <Page
       type={"article"}
       title={title}
       schemas={[getFundSchema(description)]}
-      description={`${t("funds-page.title")} ${
+      description={`${t("funds-page:title")} ${
         description.publicInfo.title
       } - ${description.publicInfo.description}`}
       previewImage={description.publicInfo.logoUrl}
@@ -78,8 +78,8 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
           <>
             <h4>
               <TooltipLabel
-                tooltipContent={t("fund-details-page.tooltip.assets")}
-                labelText={t("fund-details-page.description.assets")}
+                tooltipContent={t("fund-details-page:tooltip.assets")}
+                labelText={t("asset-details:description.assets")}
               />
             </h4>
             <Row>

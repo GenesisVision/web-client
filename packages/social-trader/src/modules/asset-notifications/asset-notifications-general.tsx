@@ -27,7 +27,7 @@ const _AssetNotificationsGeneral: React.FC<Props> = ({
     <div className={styles["notification-settings"]}>
       <Row>
         <h3 className={styles["notification-settings__subtitle"]}>
-          {t("notifications-page.general.title")}
+          {t("notifications-page:general.title")}
         </h3>
       </Row>
       {notifications.map(notification => (

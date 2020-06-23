@@ -55,7 +55,7 @@ const _AssetEdit: React.FC<Props> = ({
     <SettingsBlock>
       <HookForm resetOnSuccess form={form} onSubmit={onSubmit}>
         <Row onlyOffset className={styles["asset-settings__block-wrapper"]}>
-          <h3>{t("asset-settings.avatar.title")}</h3>
+          <h3>{t("asset-settings:avatar.title")}</h3>
           <Row onlyOffset>
             <LogoField name={FIELDS.logo} />
           </Row>
@@ -65,7 +65,7 @@ const _AssetEdit: React.FC<Props> = ({
           onlyOffset
           className={styles["asset-settings__block-wrapper"]}
         >
-          <h3>{t("asset-settings.name.title")}</h3>
+          <h3>{t("asset-settings:name.title")}</h3>
           <Row onlyOffset>
             <TitleField name={FIELDS.title} />
           </Row>
@@ -75,7 +75,7 @@ const _AssetEdit: React.FC<Props> = ({
           onlyOffset
           className={styles["asset-settings__block-wrapper"]}
         >
-          <h3>{t("asset-settings.strategy.title")}</h3>
+          <h3>{t("asset-settings:strategy.title")}</h3>
           <Row onlyOffset>
             <DescriptionField
               name={FIELDS.description}
@@ -85,7 +85,7 @@ const _AssetEdit: React.FC<Props> = ({
         </Row>
         <Row large onlyOffset>
           <SubmitButton isSuccessful={!editError}>
-            {t("asset-settings.buttons.save")}
+            {t("asset-settings:buttons.save")}
           </SubmitButton>
         </Row>
       </HookForm>

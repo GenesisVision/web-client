@@ -20,9 +20,7 @@ const _DescriptionBlock: React.FC<Props> = ({
       <DescriptionField name={descriptionName} description={description} />
       <LogoField
         name={logoName}
-        title={t(
-          `create-${asset.toLowerCase()}-page.settings.fields.upload-logo`
-        )}
+        title={t(`asset-settings:fields.upload-logo`)}
       />
     </>
   );

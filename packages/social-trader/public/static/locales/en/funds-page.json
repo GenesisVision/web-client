@@ -1,0 +1,14 @@
+{
+  "description": "Diversify your capital across hundreds of cryptocurrencies in one click. Select a fund with a composition that matches your opinion on the market and let the manager readjust while the market evolves.",
+  "title": "Funds",
+  "all-funds": "All funds",
+  "tooltips": {
+    "title": "Name of the fund",
+    "balance": "Current market value of all assets in the fund",
+    "assets": "Assets included in the fund",
+    "investors": "Number of investors in the fund.",
+    "age": "Age of the fund",
+    "drawdown": "Maximum drawdown of the fund during the selected date range.",
+    "profit": "Profit of the fund during the selected date range"
+  }
+}

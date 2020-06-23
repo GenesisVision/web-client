@@ -24,7 +24,7 @@ const _FollowsTable: React.FC<SearchTableProps<
             styles[`programs-table__cell--${column.name}`]
           )}
         >
-          {t(`follows-page.header.${column.name}`)}
+          {t(`header-fields.${column.name}`)}
         </span>
       )}
       renderBodyRow={follow => <FollowTableRowShort follow={follow} />}

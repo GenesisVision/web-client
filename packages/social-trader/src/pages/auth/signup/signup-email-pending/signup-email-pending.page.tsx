@@ -13,9 +13,9 @@ const _EmailPending: React.FC = () => {
   const { email } = getEmailPendingState();
   return (
     <div>
-      <h3>{t("auth.signup.email-confirm-title")}</h3>
+      <h3>{t("auth:signup.email-confirm-title")}</h3>
       <Row>
-        <Text muted>{t("auth.signup-email-pending.text-section")}</Text>
+        <Text muted>{t("auth:signup-email-pending.text-section")}</Text>
       </Row>
       <Row>
         <CaptchaContainer

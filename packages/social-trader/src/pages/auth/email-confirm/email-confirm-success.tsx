@@ -6,7 +6,7 @@ const _EmailConfirmSuccess: React.FC = () => {
   const [t] = useTranslation();
   return (
     <div>
-      <Text muted>{t("auth.email-confirm.success-alert-message")}</Text>
+      <Text muted>{t("auth:email-confirm.success-alert-message")}</Text>
     </div>
   );
 };

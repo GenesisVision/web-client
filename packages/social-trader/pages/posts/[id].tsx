@@ -15,6 +15,7 @@ Page.getInitialProps = async ctx => {
   const { id } = ctx.query;
   const post = await getPost({ id: id as string });
   return {
+    namespacesRequired: ["conversation"],
     post
   };
 };

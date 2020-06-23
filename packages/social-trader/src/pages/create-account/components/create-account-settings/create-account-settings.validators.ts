@@ -35,19 +35,14 @@ const createAccountSettingsValidationSchema = ({
     return object<ICreateAccountSettingsFormValues>().shape({
       [CREATE_ACCOUNT_FIELDS.depositAmount]: accountType.isDepositRequired
         ? number()
-            .required(
-              t("create-program-page.settings.validation.amount-required")
-            )
+            .required(t("validations.amount-required"))
             .min(
               minDeposit,
-              t("create-program-page.settings.validation.amount-is-zero", {
+              t("validations.amount-is-zero", {
                 min: minDepositText
               })
             )
-            .max(
-              available,
-              t("create-program-page.settings.validation.amount-is-large")
-            )
+            .max(available, t("validations.amount-is-large"))
         : mixed()
     });
   });

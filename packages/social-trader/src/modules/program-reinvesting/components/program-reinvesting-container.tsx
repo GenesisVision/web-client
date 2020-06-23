@@ -33,8 +33,8 @@ const _ProgramReinvestingContainer: React.FC<Props> = ({
         onChange={onReinvestingLabelClick}
         label={
           <TooltipLabel
-            tooltipContent={t("program-details-page.tooltip.reinvest")}
-            labelText={t("program-details-page.description.reinvest")}
+            tooltipContent={t("program-details-page:tooltip.reinvest")}
+            labelText={t("asset-details:description.reinvest")}
             pointer
           />
         }

@@ -58,44 +58,36 @@ const _InvestmentFees: React.FC<Props> = ({
       <HookForm resetOnSuccess form={form} onSubmit={onSubmit}>
         {asset === ASSET.PROGRAM && (
           <FeesSettings
-            firstFeeLabel={t(
-              "create-program-page.settings.fields.management-fee"
-            )}
+            firstFeeLabel={t("asset-settings:fields.management-fee")}
             firstFeeUnderText={t(
-              "create-program-page.settings.hints.management-fee"
+              "create-account:settings.hints.management-fee"
             )}
             firstFeeName={FIELDS.entryFee}
             firstFeeDescription={t(
-              "create-program-page.settings.hints.management-fee-description"
+              "create-account:settings.hints.management-fee-description"
             )}
             secondFeeName={FIELDS.successFee}
-            secondFeeLabel={t(
-              "create-program-page.settings.fields.success-fee"
-            )}
-            secondFeeUnderText={t(
-              "create-program-page.settings.hints.success-fee"
-            )}
+            secondFeeLabel={t("asset-settings:fields.success-fee")}
+            secondFeeUnderText={t("create-account:settings.hints.success-fee")}
             secondFeeDescription={t(
-              "create-program-page.settings.hints.success-fee-description"
+              "create-account:settings.hints.success-fee-description"
             )}
           />
         )}
         {asset === ASSET.FUND && (
           <FeesSettings
-            firstFeeLabel={t("create-program-page.settings.fields.entry-fee")}
-            firstFeeUnderText={t(
-              "create-program-page.settings.hints.entry-fee"
-            )}
+            firstFeeLabel={t("asset-settings:fields.entry-fee")}
+            firstFeeUnderText={t("create-fund-page:settings.hints.entry-fee")}
             firstFeeName={FIELDS.entryFee}
             firstFeeDescription={t(
-              "create-fund-page.settings.hints.entry-fee-description",
+              "create-fund-page:settings.hints.entry-fee-description",
               { maxFee: maxEntryFee }
             )}
             secondFeeName={FIELDS.exitFee}
-            secondFeeLabel={t("create-fund-page.settings.fields.exit-fee")}
-            secondFeeUnderText={t("create-fund-page.settings.hints.exit-fee")}
+            secondFeeLabel={t("create-fund-page:settings.fields.exit-fee")}
+            secondFeeUnderText={t("create-fund-page:settings.hints.exit-fee")}
             secondFeeDescription={t(
-              "create-fund-page.settings.hints.exit-fee-description",
+              "create-fund-page:settings.hints.exit-fee-description",
               {
                 maxFee: maxExitFee
               }
@@ -104,7 +96,7 @@ const _InvestmentFees: React.FC<Props> = ({
         )}
         <Row large>
           <SubmitButton isSuccessful={!editError}>
-            {t("program-settings.buttons.save")}
+            {t("asset-settings:buttons.save")}
           </SubmitButton>
         </Row>
       </HookForm>

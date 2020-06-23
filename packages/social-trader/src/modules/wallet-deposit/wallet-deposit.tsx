@@ -36,7 +36,7 @@ const FullButton: React.FC<{
   onClick: () => void;
 }> = React.memo(({ disabled, onClick }) => {
   const [t] = useTranslation();
-  const label = t("wallet-page.deposit");
+  const label = t("wallet-page:deposit");
   return (
     <GVButton
       className={label}
@@ -57,7 +57,7 @@ const FullButton: React.FC<{
 const SmallButton: React.FC<{ onClick: () => void }> = React.memo(
   ({ onClick }) => {
     const [t] = useTranslation();
-    const label = t("wallet-page.deposit");
+    const label = t("wallet-page:deposit");
     return (
       <ChipButton
         className={label}

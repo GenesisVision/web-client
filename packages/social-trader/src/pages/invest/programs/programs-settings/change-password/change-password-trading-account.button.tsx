@@ -18,7 +18,7 @@ const _ChangeAccountPasswordButton: React.FC<{ title: string; id: string }> = ({
   return (
     <>
       <TableCardActionsItem onClick={setChangePasswordOpen}>
-        {t("program-actions.change-password")}
+        {t("asset-actions.change-password")}
       </TableCardActionsItem>
       <ChangePasswordTradingAccountPopup
         programName={title}

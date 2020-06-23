@@ -18,11 +18,11 @@ import styles from "./wallet-title-block.module.scss";
 const _WalletTotal: React.FC<Props> = ({ data: wallet }) => {
   const [t] = useTranslation();
   return (
-    <Page title={t("wallet-page.title")}>
+    <Page title={t("wallet-page:title")}>
       <div className={styles["wallet-title-block"]}>
         <Row wrap>
           <RowItem className={styles["wallet-title-block__title"]}>
-            <h1>{t("wallet-page.title")}</h1>
+            <h1>{t("wallet-page:title")}</h1>
           </RowItem>
           <RowItem>
             <WalletSettingsContainer

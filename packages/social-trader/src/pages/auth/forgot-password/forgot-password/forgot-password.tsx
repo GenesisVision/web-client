@@ -33,8 +33,8 @@ const _ForgotPasswordForm: React.FC<Props> = ({ onSubmit, errorMessage }) => {
     },
     validationSchema: object().shape({
       [FORGOT_PASSWORD_FORM_FIELDS.email]: string()
-        .email(t("auth.password-restore.validators.email-invalid"))
-        .required(t("auth.password-restore.validators.email-required"))
+        .email(t("auth:password-restore.validators.email-invalid"))
+        .required(t("auth:password-restore.validators.email-required"))
     }),
     mode: "onChange"
   });
@@ -45,7 +45,7 @@ const _ForgotPasswordForm: React.FC<Props> = ({ onSubmit, errorMessage }) => {
         wide
         type="email"
         name={FORGOT_PASSWORD_FORM_FIELDS.email}
-        label={t("auth.password-restore.forgot-password.email-field-text")}
+        label={t("auth:password-restore.forgot-password.email-field-text")}
         addon="fas fa-envelope"
         autoComplete="email"
         autoFocus
@@ -62,7 +62,7 @@ const _ForgotPasswordForm: React.FC<Props> = ({ onSubmit, errorMessage }) => {
             <GVButton noPadding variant="text" color="secondary">
               <>
                 &larr;{" "}
-                {t("auth.password-restore.forgot-password.back-button-text")}
+                {t("auth:password-restore.forgot-password.back-button-text")}
               </>
             </GVButton>
           </Link>
@@ -74,7 +74,7 @@ const _ForgotPasswordForm: React.FC<Props> = ({ onSubmit, errorMessage }) => {
             isSuccessful={requestStatus === CAPTCHA_STATUS.SUCCESS}
             isPending={requestStatus === CAPTCHA_STATUS.PENDING}
           >
-            {t("auth.password-restore.forgot-password.confirm-button-text")}
+            {t("auth:password-restore.forgot-password.confirm-button-text")}
           </SubmitButton>
         </RowItem>
       </Row>

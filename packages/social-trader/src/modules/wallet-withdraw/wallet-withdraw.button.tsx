@@ -45,7 +45,7 @@ const FullButton: React.FC<{
   onClick: () => void;
 }> = React.memo(({ disabled, onClick }) => {
   const [t] = useTranslation();
-  const label = t("wallet-page.withdraw");
+  const label = t("wallet-page:withdraw");
   return (
     <GVButton
       className={label}
@@ -60,7 +60,7 @@ const FullButton: React.FC<{
           <ImageBaseElement
             className={styles["wallet-withdraw-button__full-button-icon"]}
             src={ArrowIcon}
-            alt={t("wallet-page.buttons.withdraw")}
+            alt={t("wallet-page:buttons.withdraw")}
           />
         </RowItem>
         <RowItem>{label}</RowItem>
@@ -72,7 +72,7 @@ const FullButton: React.FC<{
 const SmallButton: React.FC<{ onClick: () => void }> = React.memo(
   ({ onClick }) => {
     const [t] = useTranslation();
-    const label = t("wallet-page.withdraw");
+    const label = t("wallet-page:withdraw");
     return (
       <ChipButton
         className={label}

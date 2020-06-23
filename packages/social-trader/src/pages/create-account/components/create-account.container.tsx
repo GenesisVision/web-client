@@ -41,12 +41,9 @@ const _CreateAccountContainer: React.FC<Props> = ({
         <GVTab
           onClick={confirmNavigateToBroker}
           value={TAB.BROKER}
-          label={t("create-account-page.tabs.select-broker")}
+          label={t("create-account:tabs.select-broker")}
         />
-        <GVTab
-          value={TAB.SETTINGS}
-          label={t("create-account-page.tabs.settings")}
-        />
+        <GVTab value={TAB.SETTINGS} label={t("create-account:tabs.settings")} />
       </GVTabs>
       <Row large>
         {tab === TAB.BROKER && (

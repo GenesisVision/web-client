@@ -20,7 +20,7 @@ const _MakeSignalButton: React.FC<Props> = ({ id, programName, onApply }) => {
   return (
     <>
       <TableCardActionsItem onClick={setIsOpenPopup}>
-        {t("dashboard-page.trading.actions.make-signal")}
+        {t("dashboard-page:trading.actions.make-signal")}
       </TableCardActionsItem>
       <Dialog open={isOpenPopup} onClose={setIsClosePopup}>
         <ProgramSignalForm

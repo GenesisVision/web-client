@@ -64,14 +64,14 @@ const _DepositDetailsBlock: React.FC<Props> = ({
   return (
     <SettingsBlock
       hide={hide}
-      label={t("create-program-page.settings.deposit-details")}
+      label={t("create-account:settings.deposit-details")}
       blockNumber={`0${blockNumber}`}
       withBorder={false}
     >
       <div>
         <WalletSelect
           name={walletFieldName}
-          label={t("transfer.from")}
+          label={t("transfer:from")}
           items={wallets}
           onChange={onSelectChange(handleWalletChange)}
         />

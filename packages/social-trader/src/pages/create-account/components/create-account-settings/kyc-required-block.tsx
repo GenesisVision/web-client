@@ -13,17 +13,17 @@ const _KycRequiredBlock: React.FC = () => {
   const { linkCreator } = useToLink();
   return (
     <SettingsBlock
-      label={t("create-account-page.settings.kyc-required")}
+      label={t("create-account:settings.kyc-required")}
       withBorder={false}
     >
       <Row>
         <FormTextField>
-          {t("create-account-page.settings.kyc-required-text-1")}
+          {t("create-account:settings.kyc-required-text-1")}
         </FormTextField>
       </Row>
       <Row>
         <FormTextField>
-          {t("create-account-page.settings.kyc-required-text-2")}
+          {t("create-account:settings.kyc-required-text-2")}
         </FormTextField>
       </Row>
       <Row large wide>

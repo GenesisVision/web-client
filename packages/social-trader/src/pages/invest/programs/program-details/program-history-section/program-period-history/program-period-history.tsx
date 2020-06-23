@@ -34,7 +34,7 @@ const _ProgramPeriodHistory: React.FC<Props> = ({
         styles[`program-details-trades__cell--${name}`]
       )}
     >
-      {t(`program-details-page.history.period-history.${name}`)}
+      {t(`program-details-page:history.period-history.${name}`)}
     </span>
   );
   return (
@@ -66,7 +66,7 @@ const _ProgramPeriodHistory: React.FC<Props> = ({
             render={() => (
               <TooltipContent>
                 {t(
-                  `program-details-page.history.period-history.tooltips.${column.name}`
+                  `program-details-page:history.period-history.tooltips.${column.name}`
                 )}
               </TooltipContent>
             )}

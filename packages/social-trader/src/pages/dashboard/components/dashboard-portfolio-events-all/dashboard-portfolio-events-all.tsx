@@ -26,16 +26,16 @@ const _PortfolioEventsAllComponent: React.FC = () => {
   const [t] = useTranslation();
   const assetTypeValues = useSelector(assetTypeValuesSelector);
   return (
-    <Page title={t(`dashboard-page.portfolio-events.title`)}>
+    <Page title={t(`dashboard-page:portfolio-events.title`)}>
       <DefaultTableBlock>
         <DetailsBlockTabs value={tab} onChange={setTab}>
           <GVTab
             value={TABS.INVESTMENT_HISTORY}
-            label={t(`dashboard-page.portfolio-events.investment-history`)}
+            label={t(`dashboard-page:portfolio-events.investment-history`)}
           />
           <GVTab
             value={TABS.TRADING_HISTORY}
-            label={t(`dashboard-page.portfolio-events.trading-history`)}
+            label={t(`dashboard-page:portfolio-events.trading-history`)}
           />
         </DetailsBlockTabs>
         {tab === TABS.INVESTMENT_HISTORY && (
