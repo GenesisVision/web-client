@@ -31,10 +31,6 @@ const _ManagerData: React.FC<Props> = ({ canWritePost, id }) => {
   const isBetaTester = isSocialBetaTester(betaTester);
   const { tab, setTab } = useTab<TABS>(TABS.TRADING);
 
-  useEffect(() => {
-    setTab(null, isBetaTester ? TABS.FEED : TABS.TRADING);
-  }, [isBetaTester]);
-
   const { sendRequest, data = UserDataInitialCount } = useApiRequest<
     IAssetsCountModel
   >({
@@ -42,7 +38,7 @@ const _ManagerData: React.FC<Props> = ({ canWritePost, id }) => {
   });
 
   useEffect(() => {
-    if (betaTester) sendRequest({ ownerId: id, isBetaTester });
+    sendRequest({ ownerId: id, isBetaTester });
   }, [id, isBetaTester, betaTester]);
 
   const {
@@ -57,6 +53,12 @@ const _ManagerData: React.FC<Props> = ({ canWritePost, id }) => {
   const investingCount =
     investingFollowCount + investingProgramsCount + investingFundsCount;
   const tradingCount = followCount + programsCount + fundsCount;
+
+  useEffect(() => {
+    const noTestingTab =
+      !tradingCount && investingCount ? TABS.INVESTING : TABS.TRADING;
+    setTab(null, isBetaTester ? TABS.FEED : noTestingTab);
+  }, [tradingCount, investingCount, isBetaTester]);
 
   return (
     <div>
