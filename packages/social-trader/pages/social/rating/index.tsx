@@ -9,4 +9,8 @@ const Page: NextPage = () => {
   return <RatingPage />;
 };
 
+Page.getInitialProps = async () => ({
+  namespacesRequired: ["conversation"]
+});
+
 export default compose(withDefaultLayout, withBetaTesting("Social"))(Page);
