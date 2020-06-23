@@ -1409,7 +1409,7 @@
       },
       "public": {
         "label": "Public investor's profile",
-        "text": "Other GenesisVision users will be able to follow you and see your current and past investments as well as your portfolio perfomance. You will also be displayed in the Investors Rating."
+        "text": "Other GenesisVision users will be able to follow you and see your current and past investments as well as your portfolio perfomance. You will also be displayed in the Users list."
       },
       "platform-currency": "Platform currency",
       "title": "Settings",
