@@ -30,7 +30,7 @@ const _RePostContainer: React.FC<IRePostContainerProps> = ({
 
   return (
     <>
-      <DialogTop title={t("conversation.repost")} />
+      <DialogTop title={t("conversation:repost")} />
       <DefaultBlock
         roundedBorder={false}
         solid
@@ -47,7 +47,7 @@ const _RePostContainer: React.FC<IRePostContainerProps> = ({
         <Row>
           <PostInput
             allowEmptyMessage
-            placeholder={t("conversation.your-message")}
+            placeholder={t("conversation:your-message")}
             errorMessage={errorMessage}
             onSubmit={handleSubmit}
             status={status}
