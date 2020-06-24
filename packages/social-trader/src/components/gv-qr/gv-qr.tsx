@@ -13,6 +13,8 @@ interface IGVqr {
   className?: string;
 }
 
+const PADDING_SIZE = 2;
+
 const GVqr: React.FC<IGVqr> = ({
   value,
   size = 180,
@@ -23,9 +25,10 @@ const GVqr: React.FC<IGVqr> = ({
   <div
     className={classNames(styles["gv-qr"], className)}
     style={{
+      padding: `${PADDING_SIZE}px`,
       background: backgroundColor,
-      width: `${size}px`,
-      height: `${size}px`
+      width: `${size + PADDING_SIZE * 2}px`,
+      height: `${size + PADDING_SIZE * 2}px`
     }}
   >
     {value ? (
