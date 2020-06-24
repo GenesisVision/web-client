@@ -1,6 +1,6 @@
-import "./spinner.scss";
-
 import * as React from "react";
+
+import styles from "./spinner.module.scss";
 
 interface ISpinnerProps {
   isShown?: boolean;
@@ -8,8 +8,8 @@ interface ISpinnerProps {
 
 const Spinner: React.FC<ISpinnerProps> = React.memo(({ isShown }) =>
   isShown ? (
-    <div className="gv-spinner__wrapper">
-      <div className="gv-spinner">
+    <div className={styles["gv-spinner__wrapper"]}>
+      <div className={styles["gv-spinner"]}>
         <div />
         <div />
         <div />

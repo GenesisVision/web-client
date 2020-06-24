@@ -55,7 +55,7 @@ describe("Dialog tests", () => {
         {children}
       </Dialog>
     );
-    component.find(".dialog__close--inside").simulate("click");
+    component.find(".dialog__close").simulate("click");
     expect(handleClick).toBeCalled();
   });
 });

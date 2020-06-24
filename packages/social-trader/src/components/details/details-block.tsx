@@ -1,7 +1,7 @@
-import "./details.block.scss";
-
 import classNames from "classnames";
 import * as React from "react";
+
+import styles from "./details.block.module.scss";
 
 export enum DETAILS_BLOCK_TYPE {
   SOLID = "SOLID",
@@ -22,18 +22,19 @@ const DetailsBlock: React.FC<Props> = ({
   type = DETAILS_BLOCK_TYPE.SOLID
 }) => (
   <div
-    className={classNames("details-block", className, {
-      "details-block--landscape-tablet": landscapeTablet,
-      "details-block--tablet": tablet,
-      "details-block--landscape-phone":
+    className={classNames(styles["details-block"], className, {
+      [styles["details-block--landscape-tablet"]]: landscapeTablet,
+      [styles["details-block--tablet"]]: tablet,
+      [styles["details-block--landscape-phone"]]:
         landscapePhone && !landscapeTablet && !tablet,
-      "details-block--row": row,
-      "details-block--horizontal-paddings": !!horizontalPaddings,
-      "details-block--table": !!table,
-      "details-block--wide": !!wide,
-      "details-block--solid": type === DETAILS_BLOCK_TYPE.SOLID,
-      "details-block--bordered": type === DETAILS_BLOCK_TYPE.BORDERED,
-      "details-block--transparent": type === DETAILS_BLOCK_TYPE.TRANSPARENT
+      [styles["details-block--row"]]: row,
+      [styles["details-block--horizontal-paddings"]]: !!horizontalPaddings,
+      [styles["details-block--table"]]: !!table,
+      [styles["details-block--wide"]]: !!wide,
+      [styles["details-block--solid"]]: type === DETAILS_BLOCK_TYPE.SOLID,
+      [styles["details-block--bordered"]]: type === DETAILS_BLOCK_TYPE.BORDERED,
+      [styles["details-block--transparent"]]:
+        type === DETAILS_BLOCK_TYPE.TRANSPARENT
     })}
   >
     {children}

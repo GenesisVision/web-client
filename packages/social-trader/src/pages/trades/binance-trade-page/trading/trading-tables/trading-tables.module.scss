@@ -1,0 +1,13 @@
+@import "~shared/styles/_sizes";
+
+.trading-tables {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  &__tables-container {
+    height: calc(100% - 45px);
+    display: flex;
+    flex-direction: column;
+    overflow-x: scroll;
+  }
+}

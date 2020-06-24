@@ -47,7 +47,6 @@ const _PortfolioEventsAllComponent: React.FC = () => {
             columns={PORTFOLIO_EVENTS_COLUMNS}
             getItems={fetchInvestmentHistory}
             eventLocation={EVENT_LOCATION.Dashboard}
-            className="portfolio-events-all-table"
             dateRangeStartLabel={t("filters.date-range.account-creation")}
           />
         )}
@@ -58,7 +57,6 @@ const _PortfolioEventsAllComponent: React.FC = () => {
             columns={PORTFOLIO_EVENTS_COLUMNS}
             getItems={fetchTradingHistory}
             eventLocation={EVENT_LOCATION.Dashboard}
-            className="portfolio-events-all-table"
             dateRangeStartLabel={t("filters.date-range.account-creation")}
           />
         )}

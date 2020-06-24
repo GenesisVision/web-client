@@ -1,0 +1,8 @@
+.manager-info {
+  &__about {
+    white-space: pre-wrap;
+    &--break-word {
+      overflow-wrap: anywhere;
+    }
+  }
+}

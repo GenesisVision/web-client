@@ -1,4 +1,6 @@
+import classNames from "classnames";
 import ImageBaseElement from "components/avatar/image-base.element";
+import { Row } from "components/row/row";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import { ProfileFullViewModel } from "gv-api-web";
 import Email from "media/email.svg";
@@ -8,21 +10,23 @@ import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { rawUrlEncode } from "utils/helpers";
 
+import styles from "./referral-program.module.scss";
+
 const _InviteBlock: React.FC<{ data: ProfileFullViewModel }> = ({
   data: { refUrl, lastName, firstName, userName }
 }) => {
   const [t] = useTranslation();
   return (
     <div>
-      <div className="referral-program__title">
+      <Row>
         <h4>{t("profile-page.referral-program.title")}</h4>
-      </div>
-      <div className="referral-program__link-block">
+      </Row>
+      <Row className={styles["referral-program__link-block"]}>
         {t("profile-page.referral-program.referral-link")}
-        <div className="referral-program__link">{refUrl}</div>
+        <div className={styles["referral-program__link"]}>{refUrl}</div>
         <CopyButton value={refUrl} />
-      </div>
-      <div className="referral-program__share-block">
+      </Row>
+      <Row onlyOffset className={styles["referral-program__share-block"]}>
         {t("profile-page.referral-program.share-your-passion")}
         {refUrl && (
           <ShareBlock
@@ -32,7 +36,7 @@ const _InviteBlock: React.FC<{ data: ProfileFullViewModel }> = ({
             refUrl={refUrl}
           />
         )}
-      </div>
+      </Row>
     </div>
   );
 };
@@ -61,13 +65,18 @@ const _ShareBlock: React.FC<{
       window.addthis.layers.refresh();
   }, [window]);
   return (
-    <div className="referral-program__share-buttons">
+    <div className={styles["referral-program__share-buttons"]}>
       <div
-        className="addthis_inline_share_toolbox"
+        className={"addthis_inline_share_toolbox"}
         data-title={shareMessage}
         data-url={refUrl}
       />
-      <div className="referral-program__share-buttons--email at-icon-wrapper">
+      <div
+        className={classNames(
+          styles["referral-program__share-buttons--email"],
+          "at-icon-wrapper"
+        )}
+      >
         <a
           title={"Email"}
           target="_blank"

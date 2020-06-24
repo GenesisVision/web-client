@@ -7,6 +7,7 @@ import { safeGetElemFromArray } from "utils/helpers";
 import {
   AnyTag,
   EmptyTag,
+  EventTag,
   FollowLink,
   FollowTagCard,
   FundLink,
@@ -16,11 +17,14 @@ import {
   ProgramTagCard,
   RepostTagComponent,
   TagToComponentType,
+  UrlTagComponent,
   UserLink,
   UserTagCard
 } from "./tag-components";
 
 export const inTextComponentsMap: TagToComponentType[] = [
+  { tagType: "Url", Component: UrlTagComponent },
+  { tagType: "Event", Component: EventTag },
   { tagType: "Undefined", Component: AnyTag },
   { tagType: "Program", Component: ProgramLink },
   { tagType: "Follow", Component: FollowLink },
@@ -29,6 +33,7 @@ export const inTextComponentsMap: TagToComponentType[] = [
 ];
 
 export const underTextComponentsMap: TagToComponentType[] = [
+  { tagType: "Event", Component: EmptyTag },
   { tagType: "Undefined", Component: EmptyTag },
   // @ts-ignore
   { tagType: "Post", Component: RepostTagComponent },
@@ -48,6 +53,10 @@ export const convertTagToComponent = (
   componentsMap: TagToComponentType[]
 ): JSX.Element => {
   switch (tag.type) {
+    case "Url":
+      return convertUrlTagToComponent(tag, componentsMap);
+    case "Event":
+      return convertEventTagToComponent(tag, componentsMap);
     case "Asset":
       return convertPlatformAssetTagToComponent(tag, componentsMap);
     case "Program":
@@ -62,6 +71,30 @@ export const convertTagToComponent = (
     default:
       return convertUndefinedTagToComponent(tag);
   }
+};
+
+const convertUrlTagToComponent = (
+  { link, type }: PostTag,
+  componentsMap: TagToComponentType[]
+): JSX.Element => {
+  const { Component } = safeGetElemFromArray(
+    componentsMap,
+    ({ tagType }) => tagType === type
+  );
+  if (!link) return <></>;
+  return <Component data={{ link }} />;
+};
+
+const convertEventTagToComponent = (
+  { assetDetails, event, type }: PostTag,
+  componentsMap: TagToComponentType[]
+): JSX.Element => {
+  const { Component } = safeGetElemFromArray(
+    componentsMap,
+    ({ tagType }) => tagType === type
+  );
+  if (!event || !assetDetails) return <></>;
+  return <Component data={{ event, assetDetails }} />;
 };
 
 const convertPlatformAssetTagToComponent = (
@@ -119,14 +152,16 @@ const mergeArrays = (first: any[], second: any[]): any[] => {
 };
 
 export const parseToTsx = ({
+  simpleText,
   tags,
   map,
   text
 }: {
+  simpleText?: boolean;
   tags?: PostTag[];
   map: TagToComponentType[];
   text: string;
-}): JSX.Element => {
+}): JSX.Element | string => {
   if (!tags) return <>{text}</>;
   const commonRegex = /#[a-zA-Z]+|@tag-[\d]+/g;
   const tagStrings = text.match(commonRegex) || [];
@@ -139,12 +174,13 @@ export const parseToTsx = ({
     .map((tagId: number | string) => {
       if (typeof tagId === "number") {
         const tag = safeGetElemFromArray(tags, tag => tag.number === tagId);
-        return convertTagToComponent(tag, map);
+        return simpleText ? tag.title : convertTagToComponent(tag, map);
       } else {
-        return convertHashTagToComponent(tagId);
+        return simpleText ? `#${tagId}` : convertHashTagToComponent(tagId);
       }
     });
   const otherWords = text.split(commonRegex);
   const mergedText = mergeArrays(otherWords, parsedTags);
+  if (simpleText) return String(mergedText.join(" "));
   return <>{mergedText}</>;
 };

@@ -1,11 +1,11 @@
-import "./sidebar.scss";
-
 import classNames from "classnames";
 import Modal, { BodyFix } from "components/modal/modal";
 import { NextComponentType } from "next";
 import Router from "next/router";
 import * as React from "react";
 import { useCallback, useEffect } from "react";
+
+import styles from "./sidebar.module.scss";
 
 export enum SIDEBAR_POSITION {
   LEFT = "left",
@@ -31,7 +31,12 @@ const _Sidebar: NextComponentType<{}, {}, Props> = ({
   return (
     <Modal open={open} onClose={onClose}>
       <BodyFix />
-      <div className={classNames("sidebar", `sidebar--${position}`)}>
+      <div
+        className={classNames(
+          styles["sidebar"],
+          styles[`sidebar--${position}`]
+        )}
+      >
         {children}
       </div>
     </Modal>

@@ -1,0 +1,45 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
+
+.add-fund-asset-popover {
+  &__regulator-indicator {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  &__regulator-input {
+    width: 23px;
+    display: block;
+    background: transparent;
+    border-width: 0;
+    @include font-size($font-size-paragraph);
+    @include line-height($font-size-paragraph);
+    color: $text-accent-color;
+    text-align: right;
+    &:focus {
+      border-width: 0;
+      outline-width: 0;
+    }
+    &--mute {
+      color: rgba(255, 255, 255, 0.3);
+    }
+  }
+  &__assets {
+    @include adaptive-padding(bottom, $popover-padding-medium);
+    max-height: 180px;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    table {
+      @include horizontal-paddings($popover-padding-medium);
+      border-spacing: 0;
+    }
+    td {
+      padding-top: $padding-xxsmall;
+      &:not(:last-child) {
+        padding-right: $padding-xsmall;
+      }
+    }
+  }
+  &__search {
+    @include adaptive-full-padding($popover-padding-medium);
+  }
+}

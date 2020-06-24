@@ -10,6 +10,9 @@ const withBetaTesting = (type: BetaTestingType) => (
 ): any =>
   class extends Component {
     static async getInitialProps(ctx: NextPageWithReduxContext) {
+      if (!ctx.token.isExist()) {
+        throw { code: "InternalServerError" };
+      }
       const { betaTester } = await getHeader(ctx.token);
       const isBetaTester = isBetaTesterByType(type)(betaTester);
       if (!isBetaTester) {

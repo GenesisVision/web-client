@@ -1,7 +1,6 @@
 import DetailsBlock from "components/details/details-block";
 import DetailsBlockTabs from "components/details/details-block-tabs";
 import DetailsBlockTitleBox from "components/details/details-block-title-box";
-import "components/details/details-description-section/details-statistic-section/details-chart-section/details-chart-section.scss";
 import AbsoluteProfitChartSection, {
   IAbsoluteProfitChartSectionProps
 } from "components/details/details-statistic-section/details-chart-section/absolute-profit-chart-section/absolute-profit-chart-section";
@@ -14,6 +13,7 @@ import { useTranslation } from "react-i18next";
 import BalanceChartSection, {
   IBalanceChartSectionProps
 } from "./balance-chart-section/balance-chart-section";
+import styles from "./details-chart-section.module.scss";
 import ProfitChartSection, {
   IProfitChartSectionProps
 } from "./profit-chart-section/profit-chart-section";
@@ -39,7 +39,7 @@ const _DetailsChart: React.FC<IDetailsChartProps> = ({
   const [t] = useTranslation();
   const { tab, setTab } = useTab<DETAILS_CHART_TABS>(DETAILS_CHART_TABS.PROFIT);
   return (
-    <DetailsBlock className="details-chart">
+    <DetailsBlock className={styles["details-chart"]}>
       <DetailsBlockTitleBox>
         <h3>{t("details-page.chart.heading")}</h3>
       </DetailsBlockTitleBox>
@@ -59,7 +59,7 @@ const _DetailsChart: React.FC<IDetailsChartProps> = ({
           />
         </DetailsBlockTabs>
       </Row>
-      <Row onlyOffset className="details-chart__container">
+      <Row onlyOffset className={styles["details-chart__container"]}>
         {tab === DETAILS_CHART_TABS.PROFIT && (
           <ProfitChartSection
             loaderData={loaderData}

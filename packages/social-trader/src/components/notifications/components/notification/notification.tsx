@@ -20,6 +20,8 @@ import {
   composeProgramDetailsUrl
 } from "utils/compose-url";
 
+import styles from "../notifications.module.scss";
+
 enum TYPE {
   PROFILE = "profile",
   PLATFORM = "platform"
@@ -54,13 +56,12 @@ const _NotificationAssetAvatar: React.FC<INotificationProps> = ({
       )
     : null;
   return (
-    <Tag to={to} onClick={closeNotifications} className="notification__icon">
-      <AssetAvatar
-        url={logoUrl}
-        alt={type}
-        className="notification__icon-logo"
-        color={color}
-      />
+    <Tag
+      to={to}
+      onClick={closeNotifications}
+      className={styles["notification__icon"]}
+    >
+      <AssetAvatar url={logoUrl} alt={type} color={color} />
     </Tag>
   );
 };
@@ -79,21 +80,17 @@ const _Notification: React.FC<INotificationProps> = props => {
     <Row
       center={false}
       className={classNames(
-        "notification",
-        `notification--type-${type.toLowerCase()}`,
+        styles["notification"],
+        styles[`notification--type-${type.toLowerCase()}`],
         {
-          "notification--is-unread": isUnread
+          [styles["notification--is-unread"]]: isUnread
         }
       )}
     >
       <RowItem>
         {staticIconUrl ? (
-          <div className="notification__icon">
-            <ImageBaseElement
-              src={staticIconUrl}
-              alt={type}
-              className="notification__icon-logo"
-            />
+          <div className={styles["notification__icon"]}>
+            <ImageBaseElement src={staticIconUrl} alt={type} />
           </div>
         ) : (
           <NotificationAssetAvatar {...props} />
@@ -101,11 +98,11 @@ const _Notification: React.FC<INotificationProps> = props => {
       </RowItem>
 
       <RowItem>
-        <div className="notification__content">
-          <div className="notification__description">{text}</div>
-          <div className="notification__date">
+        <div className={styles["notification__content"]}>
+          <Row className={styles["notification__description"]}>{text}</Row>
+          <Row className={styles["notification__date"]}>
             <MutedText>{dayjs(date).format("HH:mm")}</MutedText>
-          </div>
+          </Row>
         </div>
       </RowItem>
     </Row>

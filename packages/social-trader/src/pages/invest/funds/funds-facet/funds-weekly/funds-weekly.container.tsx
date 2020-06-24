@@ -1,8 +1,10 @@
+import { DefaultTableBlock } from "components/default.block/default-table.block";
 import DetailsBlock from "components/details/details-block";
 import FacetContainer, {
   FACET_ASSET
 } from "components/facet-container/facet-container";
 import Page from "components/page/page";
+import { Row } from "components/row/row";
 import { ComposeFiltersAllType } from "components/table/components/filtering/filter.type";
 import { IDataModel } from "constants/constants";
 import useApiRequest from "hooks/api-request.hook";
@@ -42,25 +44,29 @@ const _FundsWeeklyContainer: React.FC = () => {
       )}`}
     >
       <FundsWeeklyHeader />
-      <DetailsBlock wide table>
-        <FundsTable
-          updateRow={getFundsChallengeWinner}
-          loaderCount={1}
-          showSwitchView={false}
-          title={t("facets.texts.last-week-challenge-winner")}
-          data={data}
-        />
-      </DetailsBlock>
-      <DetailsBlock table>
-        <FacetContainer
-          initCurrency={MAPPING_INIT_CURRENCY}
-          title={t("facets.texts.all-funds")}
-          id={FUNDS_WEEKLY_FACET_NAME}
-          asset={FACET_ASSET.FUNDS}
-          TableContainer={FundsFacetTable}
-          getItems={getFunds}
-        />
-      </DetailsBlock>
+      <Row>
+        <DefaultTableBlock wide>
+          <FundsTable
+            updateRow={getFundsChallengeWinner}
+            loaderCount={1}
+            showSwitchView={false}
+            title={t("facets.texts.last-week-challenge-winner")}
+            data={data}
+          />
+        </DefaultTableBlock>
+      </Row>
+      <Row>
+        <DefaultTableBlock wide>
+          <FacetContainer
+            initCurrency={MAPPING_INIT_CURRENCY}
+            title={t("facets.texts.all-funds")}
+            id={FUNDS_WEEKLY_FACET_NAME}
+            asset={FACET_ASSET.FUNDS}
+            TableContainer={FundsFacetTable}
+            getItems={getFunds}
+          />
+        </DefaultTableBlock>
+      </Row>
     </Page>
   );
 };

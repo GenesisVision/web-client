@@ -1,0 +1,51 @@
+@import "~shared/styles/_sizes";
+@import "~shared/styles/_colors";
+@import "~shared/styles/_shadow.scss";
+
+.horizontal-shadow-list {
+  display: flex;
+  overflow-x: scroll;
+  width: 100%;
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+  scrollbar-width: 0;
+  &--with-scroll {
+    &::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+  }
+}
+
+.horizontal-list-shadow-container {
+  display: flex;
+  position: relative;
+  overflow-y: hidden;
+  width: 100%;
+
+  &--left {
+    &:before {
+      @include leftShadow();
+    }
+
+    &.horizontal-list-shadow-container--dark-shadow {
+      &:before {
+        @include leftDarkShadow();
+      }
+    }
+  }
+
+  &--right {
+    &:after {
+      @include rightShadow();
+    }
+
+    &.horizontal-list-shadow-container--dark-shadow {
+      &:after {
+        @include rightDarkShadow();
+      }
+    }
+  }
+}

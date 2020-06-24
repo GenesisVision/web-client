@@ -38,17 +38,17 @@ const _RestorePassword: React.FC<Props> = ({ errorMessage, onSubmit }) => {
 
   return (
     <HookForm form={form} onSubmit={onSubmit}>
-      <Row>
-        <GVHookFormField
-          showCorrect
-          type="password"
-          name={FIELDS.password}
-          label={t("auth.password-restore.new-password.password-field-text")}
-          component={SimpleTextField}
-        />
-      </Row>
+      <GVHookFormField
+        wide
+        showCorrect
+        type="password"
+        name={FIELDS.password}
+        label={t("auth.password-restore.new-password.password-field-text")}
+        component={SimpleTextField}
+      />
       <Row onlyOffset>
         <GVHookFormField
+          wide
           showCorrect
           type="password"
           name={FIELDS.confirmPassword}

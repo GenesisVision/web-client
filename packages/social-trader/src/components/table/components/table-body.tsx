@@ -4,6 +4,7 @@ import { WithTranslation, withTranslation as translate } from "react-i18next";
 import { TagType } from "utils/types";
 
 import { LIST_VIEW } from "../table.constants";
+import styles from "./table.module.scss";
 import {
   RenderBodyItemFuncType,
   UpdateItemsFuncType,
@@ -49,14 +50,18 @@ const _EmptyMessage: React.FC<{ view: LIST_VIEW } & WithTranslation> = ({
 }) => {
   switch (view) {
     case LIST_VIEW.CARDS:
-      return <div className="table-message">{t("table.no-items")}</div>;
+      return (
+        <div className={styles["table-message"]}>{t("table.no-items")}</div>
+      );
     case LIST_VIEW.TABLE:
     default:
       return (
         <tbody>
           <tr>
             <td colSpan={11}>
-              <div className="table-message">{t("table.no-items")}</div>
+              <div className={styles["table-message"]}>
+                {t("table.no-items")}
+              </div>
             </td>
           </tr>
         </tbody>

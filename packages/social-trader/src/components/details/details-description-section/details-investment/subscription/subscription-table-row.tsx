@@ -6,6 +6,7 @@ import { useToLink } from "components/link/link.helper";
 import { RowItem } from "components/row-item/row-item";
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
+import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import Tooltip from "components/tooltip/tooltip";
 import { TooltipContent } from "components/tooltip/tooltip-content";
 import { SignalSubscription } from "gv-api-web";
@@ -75,19 +76,13 @@ const _SubscriptionTableRow: React.FC<Props> = ({
       </TableCell>
       <TableCell>{subscriptionInfo.status}</TableCell>
       <TableCell>
-        <Tooltip
-          render={() => (
-            <TooltipContent>
-              {t(
-                `follow-program.modes.${subscriptionInfo.mode.toLowerCase()}.tooltip`
-              )}
-            </TooltipContent>
+        <TooltipLabel
+          tooltipContent={t(
+            `follow-program.modes.${subscriptionInfo.mode.toLowerCase()}.tooltip`
           )}
-        >
-          <div className="tooltip__label">{subscriptionInfo.mode}</div>
-        </Tooltip>
+          labelText={subscriptionInfo.mode}
+        />
       </TableCell>
-      <TableCell>{subscriptionInfo.openTolerancePercent} %</TableCell>
       <TableCell>
         {subscriptionInfo.percent && <>{subscriptionInfo.percent} %</>}
         {subscriptionInfo.fixedVolume && (
@@ -98,6 +93,7 @@ const _SubscriptionTableRow: React.FC<Props> = ({
         {subscriptionInfo.percent === null &&
           subscriptionInfo.fixedVolume === null && <> - </>}
       </TableCell>
+      <TableCell>{subscriptionInfo.openTolerancePercent} %</TableCell>
       <TableCell>
         {subscriptionInfo.volumeFeePersonal !== undefined &&
           subscriptionInfo.volumeFeePersonal !== null && (

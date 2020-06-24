@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
 import { LogoutIcon } from "components/icon/logout-icon";
 import NavigationItem, {
@@ -10,6 +11,7 @@ import { LOGIN_ROUTE } from "routes/app.routes";
 import { TMenuItem } from "routes/menu";
 
 import { MenuNavigationItem } from "../menu-navigation-item";
+import styles from "../navigation.module.scss";
 
 const _NavigationMobile: React.FC<Props> = ({
   onClose,
@@ -21,18 +23,18 @@ const _NavigationMobile: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   return (
-    <div className="navigation__mobile mobile">
+    <div className={classNames(styles["navigation__mobile"], styles["mobile"])}>
       {isAuthenticated && profileHeader && (
-        <div className="mobile__header">
+        <div className={styles["mobile__header"]}>
           <ProfileAvatar
             url={profileHeader.logoUrl}
             alt={profileHeader.email}
-            className="mobile__avatar"
+            className={styles["mobile__avatar"]}
           />
-          <div className="mobile__email">{profileHeader.email}</div>
+          <div className={styles["mobile__email"]}>{profileHeader.email}</div>
         </div>
       )}
-      <div className="mobile__top" onClick={onClose}>
+      <div className={styles["mobile__top"]} onClick={onClose}>
         {mobileMenuItems.map(item => (
           <MenuNavigationItem item={item} key={item.label} />
         ))}

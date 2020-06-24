@@ -1,3 +1,1 @@
-export const getTokenName = () => {
-  return `gvToken`;
-};
+export const GV_TOKEN_KEY = "gvToken";

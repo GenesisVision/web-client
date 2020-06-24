@@ -73,7 +73,7 @@ const _AccountDetailsContainer: React.FC<Props> = ({ data: description }) => {
         asset={ASSET.FOLLOW}
         PerformanceData={() => <PerformanceData description={description} />}
         Controls={() =>
-          description.ownerActions.canTransferMoney ? (
+          description?.ownerActions?.canTransferMoney ? (
             <InvestmentAccountControls
               transferableItem={mapProgramFollowToTransferItemType(description)}
               accountType={description.tradingAccountInfo.type}

@@ -12,8 +12,6 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { LOGIN_ROUTE, SIGNUP_ROUTE } from "routes/app.routes";
 
-import "./investment-unauth-popup.scss";
-
 const _InvestmentUnauthPopup: React.FC<Props> = ({
   header,
   open,

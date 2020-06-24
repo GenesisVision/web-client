@@ -30,7 +30,10 @@ const asyncCompressImages = async (
   const compressedFiles = [];
   try {
     for (const file of files) {
-      const compressedFile = await imageCompression(file, options);
+      const isGif = file.type === "image/gif";
+      const compressedFile = isGif
+        ? file
+        : await imageCompression(file, options);
       compressedFiles.push(compressedFile);
     }
   } catch (e) {
@@ -65,22 +68,6 @@ export const asyncLoadFiles = async ({
     .catch(console.log);
 };
 
-export const loadFiles = ({
-  files,
-  croppedFiles,
-  onChange
-}: {
-  files: FileWithPreview[];
-  croppedFiles: IImageValue[];
-  onChange?: (event: IImageChangeEvent) => void;
-}) => {
-  files.forEach(file => {
-    const reader = new FileReader();
-    reader.onload = handleOnLoadReader({ file, croppedFiles, onChange });
-    reader.readAsDataURL(file);
-  });
-};
-
 export const handleOnLoadReader = ({
   file,
   croppedFiles,
@@ -98,7 +85,9 @@ export const handleOnLoadReader = ({
       src,
       id: uuid.v4(),
       image: {
-        cropped: file,
+        cropped: new File([file.slice()], file.name, {
+          type: file.type
+        }),
         name: file.name,
         type: file.type,
         size: file.size,

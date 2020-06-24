@@ -1,8 +1,8 @@
 import authActions from "actions/auth-actions";
 import { Push } from "components/link/link";
 import { NOT_FOUND_PAGE_ROUTE } from "components/not-found/not-found.routes";
+import { useAlerts } from "hooks/alert.hook";
 import useApiRequest from "hooks/api-request.hook";
-import { alertMessageActions } from "modules/alert-message/actions/alert-message-actions";
 import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { LOGIN_ROUTE } from "routes/app.routes";
@@ -17,6 +17,7 @@ import PasswordRestore, {
 } from "./password-restore";
 
 const _PasswordRestoreContainer: React.FC<Props> = ({ userId, code }) => {
+  const { successAlert } = useAlerts();
   const dispatch = useDispatch();
   const successCallback = (response: string) => {
     authService.storeToken(response);
@@ -30,12 +31,7 @@ const _PasswordRestoreContainer: React.FC<Props> = ({ userId, code }) => {
     catchCallback: ({ code }: ResponseError) => {
       if (code === "RequiresTwoFactor") {
         Push(LOGIN_ROUTE);
-        dispatch(
-          alertMessageActions.success(
-            "auth.password-restore.success-alert-message",
-            true
-          )
-        );
+        successAlert("auth.password-restore.success-alert-message");
       }
     },
     request: restorePassword,

@@ -2,6 +2,8 @@ import classNames from "classnames";
 import * as React from "react";
 import { ReactNode } from "react";
 
+import styles from "./table.module.scss";
+
 const TableRow: React.FC<Props> = ({
   className = "",
   stripy,
@@ -10,9 +12,9 @@ const TableRow: React.FC<Props> = ({
 }) => (
   <tr
     className={classNames(
-      "table__row",
+      styles["table__row"],
       {
-        "table__row--stripy": stripy
+        [styles["table__row--stripy"]]: stripy
       },
       className
     )}

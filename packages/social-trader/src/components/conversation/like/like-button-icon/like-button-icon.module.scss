@@ -1,0 +1,49 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_constants";
+
+.like-button-icon {
+  &,
+  & svg {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    display: block;
+  }
+
+  path {
+    @include transition(stroke, fill);
+    fill: none;
+    stroke: $label-color;
+  }
+
+  &:hover {
+    &:not(.like-button-icon--disabled) {
+      path {
+        fill: none;
+        stroke: white;
+      }
+    }
+  }
+
+  &--liked {
+    path {
+      fill: $primary-color;
+      stroke: $primary-color;
+    }
+
+    &:hover {
+      path {
+        fill: darken($primary-color, 10);
+        stroke: darken($primary-color, 10);
+      }
+    }
+  }
+
+  &--disabled {
+    opacity: 0.5;
+    &,
+    & svg {
+      cursor: default;
+    }
+  }
+}

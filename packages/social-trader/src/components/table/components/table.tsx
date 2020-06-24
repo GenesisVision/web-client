@@ -15,8 +15,8 @@ import { setTableView } from "utils/table-view";
 
 import { FilteringType } from "./filtering/filter.type";
 import TableBodyContainer from "./table-body";
-import "./table-cards.scss";
-import "./table.scss";
+import cardsStyles from "./table-cards.module.scss";
+import tableStyles from "./table.module.scss";
 import { RenderBodyItemFuncType } from "./table.types";
 
 const _Table: React.FC<ITableProps> = ({
@@ -62,7 +62,7 @@ const _Table: React.FC<ITableProps> = ({
   const renderBodyItem =
     view === LIST_VIEW.CARDS ? renderBodyCard : renderBodyRow;
   return (
-    <div className="table-wrapper">
+    <div className={tableStyles["table-wrapper"]}>
       <TableToolbar
         hide={hideToolbar}
         disableTitle={disableTitle}
@@ -83,16 +83,16 @@ const _Table: React.FC<ITableProps> = ({
           exportButtonToolbarRender && exportButtonToolbarRender(filtering)
         }
       />
-      <div className={"table__scroll"}>
+      <div className={tableStyles["table__scroll"]}>
         {view === LIST_VIEW.CARDS && (
-          <div className={classNames("table", className)}>
+          <div className={classNames(tableStyles["table"], className)}>
             <TableBodyContainer
               updateRow={updateRow}
               updateItems={updateItems}
               loaderData={loaderData}
               isPending={isPending}
               items={items}
-              className="table-cards"
+              className={cardsStyles["table-cards"]}
               tag="div"
               view={view}
               renderBodyItem={renderBodyItem!}
@@ -100,7 +100,7 @@ const _Table: React.FC<ITableProps> = ({
           </div>
         )}
         {view === LIST_VIEW.TABLE && (
-          <table className={classNames("table", className)}>
+          <table className={classNames(tableStyles["table"], className)}>
             <TableHeader
               columns={columns}
               sorting={sorting}
@@ -111,7 +111,7 @@ const _Table: React.FC<ITableProps> = ({
               loaderData={loaderData}
               isPending={isPending}
               items={items}
-              className="table__body"
+              className={tableStyles["table__body"]}
               tag="tbody"
               view={view}
               updateRow={updateRow}

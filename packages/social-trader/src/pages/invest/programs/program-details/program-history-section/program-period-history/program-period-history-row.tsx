@@ -10,7 +10,7 @@ import { formatDate, humanizeDate } from "utils/dates";
 import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 
-import "./program-period-history-row.scss";
+import styles from "./program-period-history-row.module.scss";
 
 export const ProgramPeriodHistoryRow: React.FC<ProgramPeriodHistoryRowProps> = React.memo(
   ({ period, currency }) => {
@@ -44,7 +44,9 @@ export const ProgramPeriodHistoryRow: React.FC<ProgramPeriodHistoryRowProps> = R
             />
           </TableCell>
           <TableCell>
-            <Center className="program-period-history-row__details-cell">
+            <Center
+              className={styles["program-period-history-row__details-cell"]}
+            >
               <RowItem>
                 <NumberFormat value={period.investors} displayType="text" />
               </RowItem>

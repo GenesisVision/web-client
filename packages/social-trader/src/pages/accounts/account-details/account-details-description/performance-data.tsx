@@ -1,4 +1,4 @@
-import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
+import { DetailsPerformanceData } from "components/details/details-description-section/details-description/details-structure-blocks";
 import StatisticItem from "components/statistic-item/statistic-item";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
@@ -14,7 +14,7 @@ const _PerformanceData: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   return (
-    <StatisticItemList className="asset-details-description__performance-data">
+    <DetailsPerformanceData>
       <StatisticItem
         condition={!!leverage}
         label={t("program-details-page.description.leverage")}
@@ -32,7 +32,7 @@ const _PerformanceData: React.FC<Props> = ({
       >
         {formatDate(creationDate)}
       </StatisticItem>
-    </StatisticItemList>
+    </DetailsPerformanceData>
   );
 };
 

@@ -1,11 +1,11 @@
 import { Row } from "components/row/row";
 import React from "react";
 
-import "./manager-statistic-item.scss";
+import styles from "./manager-statistic-item.module.scss";
 
 const _ManagerStatisticItem: React.FC<Props> = ({ onClick, label, value }) => {
   return (
-    <div className="manager-statistic-item" onClick={onClick}>
+    <div className={styles["manager-statistic-item"]} onClick={onClick}>
       <Row>
         <h3>{label}</h3>
       </Row>

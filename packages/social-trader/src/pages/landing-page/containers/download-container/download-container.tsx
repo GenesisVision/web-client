@@ -8,49 +8,45 @@ import { appLinks } from "pages/landing-page/static-data/app-links";
 import { VIDEO_LINK } from "pages/landing-page/static-data/download";
 import React from "react";
 
-import "./download-container.scss";
+import styles from "./download-container.module.scss";
 
 const DownloadContainer: React.FC = () => {
   const { t } = useTranslation();
   return (
-    <div className="download-container">
-      <div className="download-container__info">
-        <h2 className="download-container__title">
+    <div className={styles["download-container"]}>
+      <div className={styles["download-container__info"]}>
+        <h2 className={styles["download-container__title"]}>
           {t("landing-page:download.title")}
         </h2>
-        <p className="download-container__text">
+        <p className={styles["download-container__text"]}>
           {t("landing-page:download.text")}
         </p>
-        <IconList
-          items={appLinks}
-          lightTheme
-          className="download-container__app-links"
-        />
+        <IconList items={appLinks} lightTheme />
       </div>
-      <div className="download-container__img-wrapper">
+      <div className={styles["download-container__img-wrapper"]}>
         <ImageBaseElement
           src={FacetImg}
           alt="Download app"
-          className="download-container__img-facet"
+          className={styles["download-container__img-facet"]}
         />
         <ImageBaseElement
           src={NotificationImg}
           alt="Download app"
-          className="download-container__img-notification"
+          className={styles["download-container__img-notification"]}
         />
         <ImageBaseElement
           src={iPhoneImg}
           alt="Download app"
-          className="download-container__img-iphone"
+          className={styles["download-container__img-iphone"]}
         />
         <a
           title={"Download"}
           href={VIDEO_LINK}
-          className="download-container__play"
+          className={styles["download-container__play"]}
           target="_blank"
           rel="noopener noreferrer"
         >
-          <span className="download-container__play-btn" />
+          <span className={styles["download-container__play-btn"]} />
         </a>
       </div>
     </div>

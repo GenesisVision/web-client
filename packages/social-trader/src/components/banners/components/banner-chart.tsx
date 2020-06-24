@@ -7,12 +7,24 @@ import { SimpleChartPoint } from "gv-api-web";
 import { JSDOM } from "jsdom";
 import React from "react";
 
-import "../../program-simple-chart/program-simple-chart.scss";
-
 const MARGIN_TOP = 1;
 
 const getChartColor = (minValue: number, maxValue: number) => {
-  return maxValue - minValue >= 0 ? "#16B9AD" : GVColors.$negativeColor;
+  return maxValue - minValue >= 0
+    ? GVColors.$positiveColor
+    : GVColors.$negativeColor;
+};
+
+const getGradientColor = (minValue: number, maxValue: number) => {
+  return maxValue - minValue >= 0
+    ? [
+        { offset: "0%", color: "rgba(0,189,175,0.01)" },
+        { offset: "100%", color: "rgba(0,189,175,0.3)" }
+      ]
+    : [
+        { offset: "0%", color: "rgba(235,59,90,0.01)" },
+        { offset: "100%", color: "rgba(235,59,90,0.3)" }
+      ];
 };
 
 const lineFunction = line()
@@ -50,6 +62,7 @@ const BannerChart: React.FC<Props> = ({
   const lastPoint = data[length - 1];
 
   const color = getChartColor(firstPoint.value, lastPoint.value);
+  const gradient = getGradientColor(firstPoint.value, lastPoint.value);
 
   const timeScale = scaleLinear()
     .domain([firstPoint.date, lastPoint.date])
@@ -82,10 +95,7 @@ const BannerChart: React.FC<Props> = ({
       .attr("x2", 0)
       .attr("y2", valueScale(maxValue))
       .selectAll("stop")
-      .data([
-        { offset: "0%", color: "rgba(0,189,175,0.01)" },
-        { offset: "100%", color: "rgba(0,189,175,0.3)" }
-      ])
+      .data(gradient)
       .enter()
       .append("stop")
       .attr("offset", function(d) {

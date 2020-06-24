@@ -1,0 +1,71 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
+
+.details-statistics {
+  box-sizing: border-box;
+  width: 100%;
+  color: $text-light-color;
+  @include media-breakpoint-landscape-phone() {
+    max-width: $details-statistic-section-width;
+  }
+
+  &__particular-information {
+    justify-content: space-between;
+    align-items: flex-start;
+    align-content: stretch;
+  }
+
+  &__vertical-info-block {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__column {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    @include media-breakpoint-phone() {
+      flex-wrap: wrap;
+      flex-direction: row;
+      width: 100%;
+      justify-content: space-between;
+    }
+    @include media-breakpoint-landscape-phone() {
+      flex-direction: column;
+      width: auto;
+      max-width: ($details-statistic-section-width - $padding-small * 2)/2;
+      justify-content: space-between;
+    }
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    padding-right: $padding-xsmall-mobile;
+    padding-bottom: $padding-big-mobile;
+    &--half {
+      width: 70px;
+      @include media-breakpoint-landscape-phone() {
+        padding-right: 0;
+        width: auto;
+        box-sizing: border-box;
+      }
+    }
+  }
+
+  &__period {
+    width: 100%;
+  }
+
+  &__value {
+    @include font-size($font-size-h4-mobile);
+    &--accent {
+      font-weight: 600;
+    }
+  }
+
+  &__item--secondary &__value {
+    @include font-size($font-size-paragraph-mobile);
+  }
+}

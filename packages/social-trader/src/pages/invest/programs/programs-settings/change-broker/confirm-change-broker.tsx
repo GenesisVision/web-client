@@ -25,7 +25,6 @@ const _ConfirmChangeBroker: React.FC<Props> = ({
         brokerTo
       })}
       applyButtonText={t("buttons.confirm")}
-      className="dialog--wider"
     />
   );
 };

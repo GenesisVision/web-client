@@ -10,13 +10,15 @@ import NumberFormat from "react-number-format";
 import { formatCurrencyValue, roundPercents } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 
+import styles from "./profitability.module.scss";
+
 const _ProfitabilityValuePercent: React.FC<Props> = ({
   value,
   currency,
   percent
 }) => {
   return (
-    <Center className="profitability-value-percent">
+    <Center className={styles["profitability-value-percent"]}>
       <RowItem small>
         <Profitability
           value={formatCurrencyValue(value, currency)}

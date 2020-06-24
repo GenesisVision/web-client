@@ -12,7 +12,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { ListChildComponentProps } from "react-window";
 
-import "./asset-block.scss";
+import styles from "./asset-block.module.scss";
 
 const ASSET_WIDTH = 312;
 const ASSET_HEIGHT = 390;
@@ -36,22 +36,22 @@ export const AssetBlock: React.FC<Props> = ({
     <DetailsBlock
       wide
       type={blockType}
-      className={classNames("asset-block", {
-        "asset-block--left": left,
-        "asset-block--side": side
+      className={classNames(styles["asset-block"], {
+        [styles["asset-block--left"]]: left,
+        [styles["asset-block--side"]]: side
       })}
     >
       <div
-        className={classNames("asset-block__description-block", {
-          "asset-block__description-block--side": side
+        className={classNames(styles["asset-block__description-block"], {
+          [styles["asset-block__description-block--side"]]: side
         })}
       >
         <Row>
           <h2>{title}</h2>
         </Row>
         <Row
-          className={classNames("asset-block__description", {
-            "asset-block__description--side": side
+          className={classNames(styles["asset-block__description"], {
+            [styles["asset-block__description--side"]]: side
           })}
         >
           <MutedText noWrap={false}>{description}</MutedText>
@@ -64,7 +64,7 @@ export const AssetBlock: React.FC<Props> = ({
           </Link>
         </Row>
       </div>
-      <div className="asset-block__assets-block">
+      <div className={styles["asset-block__assets-block"]}>
         <DashboardHorizontalWindowList
           darkShadow={blockType === DETAILS_BLOCK_TYPE.TRANSPARENT}
           items={assets}

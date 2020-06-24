@@ -1,10 +1,11 @@
 import React from "react";
+import { formatCurrencyValue } from "utils/formatter";
 
 import Chart from "./components/banner-chart";
 import GvLogo from "./components/gv-logo";
 import LogoPlaceholder from "./components/logo-placeholder";
 import Text from "./components/text";
-import { BannerComponent, LogoOptions } from "./utils";
+import { BannerComponent, BannerProps, LogoOptions } from "./utils";
 
 type Position = { y: number };
 
@@ -33,14 +34,15 @@ const Title: React.FC = ({ children }) => {
 };
 
 export const LOGO_OPTIONS: LogoOptions = {
+  useMask: true,
   position: {
     x: 20,
     y: 16
   },
-  size: 21
+  size: { width: 21, height: 21 }
 };
 
-export const Banner: BannerComponent = props => {
+export const Banner: BannerComponent = (props: BannerProps) => {
   const points = props.chart.charts[0];
   const statistic = props.chart.statistic;
 
@@ -63,7 +65,10 @@ export const Banner: BannerComponent = props => {
       <Label y={62}>Monthly Profit</Label>
       <Value y={62}>{`${statistic.profitPercent}%`}</Value>
       <Label y={87}>Equity</Label>
-      <Value y={87}>{`${points.currency}${statistic.balance}`}</Value>
+      <Value y={87}>{`${formatCurrencyValue(
+        statistic.balance,
+        points.currency
+      )} ${points.currency}`}</Value>
       <Chart data={points.chart} width={210} height={82} x={20} y={108} />
     </svg>
   );

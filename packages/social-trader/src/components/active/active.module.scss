@@ -1,0 +1,25 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
+
+.active {
+  &__description {
+    font-size: $font-size-paragraph;
+    line-height: $font-size-paragraph * 1.8;
+  }
+  &__popup {
+    box-sizing: border-box;
+    @include vertical-paddings($padding-big);
+    @include horizontal-paddings($padding-large);
+    max-width: 768px;
+  }
+  &__chart_container {
+    height: 300px;
+  }
+  &__title {
+    text-transform: uppercase;
+    color: $primary-color;
+    @include font-size($font-size-paragraph);
+    font-weight: 600;
+  }
+}

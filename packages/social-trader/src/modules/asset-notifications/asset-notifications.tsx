@@ -8,7 +8,7 @@ import AssetNotificationsCustom from "modules/asset-notifications/asset-notifica
 import AssetNotificationsGeneral from "modules/asset-notifications/asset-notifications-general";
 import * as React from "react";
 
-import "../notification-settings/notification-settings.scss";
+import styles from "../notification-settings/notification-settings.module.scss";
 import { NotificationsList } from "./asset-notifications.types";
 
 const _AssetNotifications: React.FC<Props> = ({
@@ -19,7 +19,7 @@ const _AssetNotifications: React.FC<Props> = ({
   return (
     <>
       <Row>
-        <h3 className="notification-settings__title">{data.title}</h3>
+        <h3 className={styles["notification-settings__title"]}>{data.title}</h3>
       </Row>
       <Row>
         <AssetNotificationsGeneral
@@ -30,7 +30,7 @@ const _AssetNotifications: React.FC<Props> = ({
         />
       </Row>
       {notifications.custom && (
-        <Row large>
+        <Row large onlyOffset>
           <AssetNotificationsCustom
             onSuccess={onSuccess}
             condition={notifications.custom}

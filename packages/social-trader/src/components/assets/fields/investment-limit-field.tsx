@@ -1,7 +1,7 @@
-import AssetField from "components/assets/asset-fields/asset-field";
 import FormTextField from "components/assets/fields/form-text-field";
 import GVCheckbox from "components/gv-checkbox/gv-checkbox";
 import InputAmountField from "components/input-amount-field/hook-form-amount-field";
+import { Row } from "components/row/row";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { NumberFormatValues } from "react-number-format";
@@ -13,6 +13,7 @@ const isAmountAllow = (currency: CurrencyEnum) => ({
 }: NumberFormatValues) => validateFraction(value, currency);
 
 const _InvestmentLimitField: React.FC<Props> = ({
+  wide,
   setHasInvestmentLimit,
   checkboxName,
   inputName,
@@ -22,7 +23,7 @@ const _InvestmentLimitField: React.FC<Props> = ({
   const { t } = useTranslation();
   return (
     <>
-      <AssetField wide>
+      <Row wide large>
         <GVCheckbox
           value={hasInvestmentLimit}
           setFieldValue={(_, value) => setHasInvestmentLimit(value)}
@@ -30,32 +31,29 @@ const _InvestmentLimitField: React.FC<Props> = ({
           name={checkboxName}
           label={t("create-program-page.settings.fields.investment-limit")}
         />
-      </AssetField>
+      </Row>
       {hasInvestmentLimit && (
-        <AssetField>
-          <InputAmountField
-            showCorrect
-            wide
-            autoFocus={false}
-            isAllowed={isAmountAllow(currency)}
-            name={inputName}
-            label={t(
-              "create-program-page.settings.fields.enter-correct-amount"
-            )}
-            currency={currency}
-          />
-        </AssetField>
+        <InputAmountField
+          showCorrect
+          wide={wide}
+          autoFocus={false}
+          isAllowed={isAmountAllow(currency)}
+          name={inputName}
+          label={t("create-program-page.settings.fields.enter-correct-amount")}
+          currency={currency}
+        />
       )}
-      <AssetField wide>
+      <Row wide large>
         <FormTextField>
           {t("program-settings.investment-limit.text")}
         </FormTextField>
-      </AssetField>
+      </Row>
     </>
   );
 };
 
 interface Props {
+  wide?: boolean;
   setHasInvestmentLimit: (value: boolean) => void;
   checkboxName: string;
   inputName: string;

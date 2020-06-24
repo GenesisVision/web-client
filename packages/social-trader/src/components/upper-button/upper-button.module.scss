@@ -1,0 +1,36 @@
+@import "~shared/styles/_sizes";
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_constants";
+
+$upper-button-size: 60px;
+
+.upper-button {
+  //mix-blend-mode: difference; why?..
+  position: fixed;
+  bottom: $upper-button-size;
+  right: $upper-button-size;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: $upper-button-size;
+  height: $upper-button-size;
+  opacity: 0;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  cursor: pointer;
+  @include transition(opacity);
+
+  &--visible {
+    opacity: 0.5;
+  }
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &__arrow {
+    font-size: 40px;
+    line-height: 40px;
+    font-weight: bolder;
+  }
+}

@@ -31,7 +31,6 @@ const _ConfirmCancelChangeBroker: React.FC<Props> = ({
         brokerTo
       })}
       applyButtonText={t("buttons.confirm")}
-      className="dialog--wider"
     />
   );
 };

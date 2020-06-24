@@ -15,6 +15,9 @@ export const RATING_ROUTE = `${SOCIAL_ROUTE}/${RATING}`;
 export const MY_PROFILE = "my-profile";
 export const MY_PROFILE_ROUTE = `${SOCIAL_ROUTE}/${MY_PROFILE}`;
 
+export const MEDIA = "media";
+export const MEDIA_ROUTE = `${SOCIAL_ROUTE}/${MEDIA}`;
+
 export const NEWS = "news";
 export const NEWS_ROUTE = `${SOCIAL_ROUTE}/${NEWS}`;
 
@@ -22,6 +25,7 @@ export const POSTS = "posts";
 export const POSTS_ROUTE = `/${POSTS}`;
 export const POST_ROUTE = `${POSTS_ROUTE}/:${SLUG_URL_PARAM_NAME}`;
 export const POST_FOLDER_ROUTE = `${POSTS_ROUTE}/[id]`;
+export const POST_PREVIEW_IMAGE_ROUTE = `/post-preview/:${SLUG_URL_PARAM_NAME}/image.png`;
 
 export const composePostDetailsUrl = (slugUrl: string): string =>
   replaceParams(POST_ROUTE, {

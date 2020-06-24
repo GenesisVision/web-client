@@ -23,6 +23,8 @@ import { MultiWalletTransaction } from "pages/wallet/wallet.types";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 
+import styles from "../transaction-details.module.scss";
+
 const _TransactionDetailsItemsBlock: React.FC<{
   items: TransactionDetailItem[];
 }> = ({ items }) => {
@@ -47,8 +49,9 @@ const TransactionDetailsListItem: React.FC<{
       <Row>
         <RowItem
           className={classNames({
-            "transaction-details__details-list-statistic-item-value--long":
-              details.length > 40
+            [styles[
+              "transaction-details__details-list-statistic-item-value--long"
+            ]]: details.length > 40
           })}
         >
           {url ? <Link to={linkCreator(url)}>{details}</Link> : details}
@@ -136,7 +139,7 @@ const _CommonTransactionDetails: React.FC<Props> = ({
         <TransactionStatusBlock status={data.status} />
         {data.actions && (
           <Row>
-            <Row className="external-transaction__actions">
+            <Row className={styles["external-transaction__actions"]}>
               {data.actions.canCancel && (
                 <RowItem>
                   <ActionButton

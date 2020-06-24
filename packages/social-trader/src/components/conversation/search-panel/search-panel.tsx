@@ -8,14 +8,14 @@ import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import React from "react";
 
-import "./search-panel.scss";
+import styles from "./search-panel.module.scss";
 
 const SearchResultRow: React.FC<{
   asset: AssetSearchResult;
   onClick: VoidFunction;
 }> = ({ asset: { avatar, name, type }, onClick }) => {
   return (
-    <Row onClick={onClick} className="search-panel__row">
+    <Row onClick={onClick} className={styles["search-panel__row"]}>
       <AvatarWithName
         avatar={<ProfileAvatar url={avatar} alt={name} />}
         name={
@@ -37,7 +37,7 @@ const _SearchPanel: React.FC<{
   onClick: (values: AssetSearchResult) => void;
 }> = ({ isSearchPending, searchResult, onClick }) => {
   return (
-    <div className="search-panel">
+    <div className={styles["search-panel"]}>
       {!!searchResult?.length &&
         searchResult?.map(asset => (
           <SearchResultRow
@@ -49,7 +49,7 @@ const _SearchPanel: React.FC<{
       {isSearchPending && (
         <Row>
           <ImageBaseElement
-            className="search-panel__spinner"
+            className={styles["search-panel__spinner"]}
             src={
               "https://thumbs.gfycat.com/TediousCookedFunnelweaverspider-max-1mb.gif"
             }

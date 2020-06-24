@@ -4,6 +4,8 @@ import { RowItem } from "components/row-item/row-item";
 import * as React from "react";
 import { useCallback } from "react";
 
+import styles from "./pager.module.scss";
+
 export const _PagerButton: React.FC<Props> = ({
   asLink = false,
   page,
@@ -19,8 +21,8 @@ export const _PagerButton: React.FC<Props> = ({
     [page, clickHandle]
   );
 
-  const classname = classNames("pager__button", {
-    "pager__button--current": page === current
+  const classname = classNames(styles["pager__button"], {
+    [styles["pager__button--current"]]: page === current
   });
 
   const value = label || page;

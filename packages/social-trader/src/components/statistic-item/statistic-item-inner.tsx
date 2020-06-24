@@ -6,6 +6,8 @@ import * as React from "react";
 import NumberFormat from "react-number-format";
 import { formatCurrencyValue } from "utils/formatter";
 
+import styles from "./statistic-item.module.scss";
+
 enum ITEM {
   LABEL = "LABEL",
   VALUE = "VALUE"
@@ -38,10 +40,10 @@ const _StatisticItemInner: React.FC<IStatisticItemInnerProps> = ({
     return (item === ITEM.VALUE && !invert) ||
       (item === ITEM.LABEL && invert) ? (
       <div
-        className={classNames("statistics-item__value", {
-          "statistics-item__value--accent": accent,
-          "statistics-item__value--big": big,
-          "statistics-item__value--large": large
+        className={classNames(styles["statistics-item__value"], {
+          [styles["statistics-item__value--accent"]]: accent,
+          [styles["statistics-item__value--big"]]: big,
+          [styles["statistics-item__value--large"]]: large
         })}
       >
         {content}
@@ -52,11 +54,11 @@ const _StatisticItemInner: React.FC<IStatisticItemInnerProps> = ({
   };
 
   return (
-    <div>
+    <div className={styles["statistics-item__inner"]}>
       <div
         className={classNames(
-          { "statistics-item__top--hidden": hideLabel },
-          "statistics-item__top",
+          { [styles["statistics-item__top--hidden"]]: hideLabel },
+          styles["statistics-item__top"],
           labelClassName
         )}
       >

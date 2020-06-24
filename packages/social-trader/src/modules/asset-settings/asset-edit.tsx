@@ -16,6 +16,8 @@ import {
 } from "utils/validators/validators";
 import { object } from "yup";
 
+import styles from "./asset-settings.module.scss";
+
 enum FIELDS {
   title = "title",
   logo = "logo",
@@ -51,25 +53,28 @@ const _AssetEdit: React.FC<Props> = ({
 
   return (
     <SettingsBlock>
-      <HookForm
-        resetOnSuccess
-        className={"asset-settings-block__form"}
-        form={form}
-        onSubmit={onSubmit}
-      >
-        <Row onlyOffset className="asset-settings__block-wrapper">
+      <HookForm resetOnSuccess form={form} onSubmit={onSubmit}>
+        <Row onlyOffset className={styles["asset-settings__block-wrapper"]}>
           <h3>{t("asset-settings.avatar.title")}</h3>
           <Row onlyOffset>
             <LogoField name={FIELDS.logo} />
           </Row>
         </Row>
-        <Row large onlyOffset className="asset-settings__block-wrapper">
+        <Row
+          large
+          onlyOffset
+          className={styles["asset-settings__block-wrapper"]}
+        >
           <h3>{t("asset-settings.name.title")}</h3>
           <Row onlyOffset>
             <TitleField name={FIELDS.title} />
           </Row>
         </Row>
-        <Row large onlyOffset className="asset-settings__block-wrapper">
+        <Row
+          large
+          onlyOffset
+          className={styles["asset-settings__block-wrapper"]}
+        >
           <h3>{t("asset-settings.strategy.title")}</h3>
           <Row onlyOffset>
             <DescriptionField

@@ -1,11 +1,11 @@
-import "./image-base.scss";
-import "lazysizes";
-import "lazysizes/plugins/attrchange/ls.attrchange";
-
 import classNames from "classnames";
 import useIsOpen from "hooks/is-open.hook";
+import "lazysizes";
+import "lazysizes/plugins/attrchange/ls.attrchange";
 import * as React from "react";
 import { useCallback, useEffect } from "react";
+
+import styles from "./image-base.module.scss";
 
 const emptyImg =
   "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=";

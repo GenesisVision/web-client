@@ -1,13 +1,14 @@
-import "./lp-button.scss";
-
 import classNames from "classnames";
 import Link, { ToType } from "components/link/link";
 import React from "react";
+
+import styles from "./lp-button.module.scss";
 
 interface LPButtonProps {
   id?: string;
   type?: "button" | "submit";
   color?: "primary" | "secondary" | "pink";
+  circle?: boolean;
   className?: string;
   disabled?: boolean;
   onClick?: (
@@ -20,6 +21,7 @@ interface LPButtonProps {
 const _LPButton: React.FC<LPButtonProps> = ({
   id,
   color,
+  circle,
   className,
   type,
   disabled,
@@ -27,10 +29,11 @@ const _LPButton: React.FC<LPButtonProps> = ({
   children,
   href
 }) => {
-  const classname = classNames("lp-button", className, {
-    "lp-button--pink": color === "pink",
-    "lp-button--primary": color === "primary",
-    "lp-button--secondary": color === "secondary"
+  const classname = classNames(styles["lp-button"], className, {
+    [styles["lp-button--pink"]]: color === "pink",
+    [styles["lp-button--primary"]]: color === "primary",
+    [styles["lp-button--secondary"]]: color === "secondary",
+    [styles["lp-button--circle"]]: circle
   });
   const title = typeof children === "string" ? children : String(href);
   switch (true) {

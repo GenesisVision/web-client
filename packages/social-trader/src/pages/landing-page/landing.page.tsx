@@ -24,9 +24,6 @@ import {
 import { useUtm } from "pages/landing-page/utils";
 import React from "react";
 
-import "./styles/home.scss";
-import "./styles/index.scss";
-
 const _LandingPage: React.FC<Props> = ({
   programs,
   funds,

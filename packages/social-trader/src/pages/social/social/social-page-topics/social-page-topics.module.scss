@@ -1,0 +1,11 @@
+@import "~shared/styles/_sizes";
+
+.social-page-topics {
+  height: 450px;
+  overflow: scroll;
+  padding-right: $padding-xxsmall;
+
+  &__item {
+    width: 100%;
+  }
+}

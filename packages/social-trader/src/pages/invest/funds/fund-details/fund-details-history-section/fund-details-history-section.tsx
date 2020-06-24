@@ -1,6 +1,5 @@
 import { DefaultTableBlock } from "components/default.block/default-table.block";
 import DetailsBlockTabs from "components/details/details-block-tabs";
-import "components/details/details-description-section/details-statistic-section/details-history/details-history.scss";
 import GVTab from "components/gv-tabs/gv-tab";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import useTab from "hooks/tab.hook";
@@ -41,7 +40,7 @@ const _FundDetailsHistorySection: React.FC<Props> = ({ id }) => {
             <TooltipLabel
               tooltipContent={t("fund-details-page.tooltip.structure")}
               labelText={t("fund-details-page.history.tabs.structure")}
-              className="tooltip__label--cursor-pointer"
+              pointer
             />
           }
         />

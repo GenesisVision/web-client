@@ -5,6 +5,7 @@ import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import DetailsDescriptionControl from "./details-description-control";
+import styles from "./details-description-control.module.scss";
 
 const _DetailsFavorite: React.FC<Props> = ({
   asset,
@@ -28,7 +29,7 @@ const _DetailsFavorite: React.FC<Props> = ({
         text={t("fund-details-page.description.addToFavorites")}
       >
         <FavoriteIcon
-          className="details-description-control__icon"
+          className={styles["details-description-control__icon"]}
           selected={isFavorite}
         />
       </DetailsDescriptionControl>

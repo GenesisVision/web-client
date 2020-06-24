@@ -1,0 +1,96 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+@import "../../styles/mixins";
+
+$pink-color: #cf2877;
+$pink-color-hover: lighten(#cf2877, 10%);
+
+.lp-button {
+  @include transition(color, background-color);
+  @include reset-button();
+  @include reset-link();
+  @include text-transform(1px);
+  color: $main-color;
+  text-align: center;
+  line-height: 12px;
+  padding: 14px 40px;
+  border-radius: 20px;
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+
+  @include media-breakpoint-tablet() {
+    padding-top: 19px;
+    padding-bottom: 19px;
+    border-radius: 40px;
+  }
+
+  @include media-breakpoint-large-desktop() {
+    padding-top: 18px;
+    padding-bottom: 18px;
+    line-height: 14px;
+    font-size: 14px;
+    border-radius: 100px;
+  }
+
+  &--pink {
+    background-color: $pink-color;
+
+    &:hover {
+      background-color: $pink-color-hover;
+      color: $main-color;
+    }
+
+    &:focus,
+    &:active {
+      background-color: $pink-color;
+      color: $main-color;
+    }
+  }
+
+  &--primary {
+    background-color: $primary-color;
+
+    &:hover {
+      background-color: $primary-color-hover;
+      color: $main-color;
+    }
+
+    &:focus,
+    &:active {
+      background-color: $primary-color;
+      color: $main-color;
+    }
+  }
+
+  &--secondary {
+    background-color: rgba($main-color, 0.1);
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 100px;
+    min-width: 120px;
+
+    &:hover {
+      background-color: rgba($main-color, 0.15);
+      color: $main-color;
+    }
+
+    &:focus,
+    &:active {
+      background-color: rgba($main-color, 0.1);
+      color: $main-color;
+    }
+
+    @include media-breakpoint-desktop() {
+      text-transform: none;
+    }
+  }
+
+  &--circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    padding: 0;
+    line-height: 100px;
+  }
+}

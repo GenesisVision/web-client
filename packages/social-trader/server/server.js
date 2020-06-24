@@ -4,8 +4,10 @@ const nextI18next = require("../src/i18n");
 const cacheableResponse = require("cacheable-response");
 const generateSitemap = require("./sitemap");
 const robotTxt = require("./robot");
+const { createProxyMiddleware } = require("http-proxy-middleware");
 
 module.exports = async app => {
+  const port = process.env.PORT || 3000;
   const handle = app.getRequestHandler();
 
   const ssrCache = cacheableResponse({
@@ -22,7 +24,34 @@ module.exports = async app => {
   const robot = robotTxt(dev);
 
   const server = express();
-  const port = process.env.PORT || 3000;
+
+  server.use(
+    createProxyMiddleware("/api/v3", {
+      target: "https://api.binance.com",
+      changeOrigin: true
+    })
+  );
+  server.use(
+    createProxyMiddleware("/fapi/v1", {
+      target: "https://fapi.binance.com",
+      changeOrigin: true
+    })
+  );
+
+  server.use(
+    createProxyMiddleware("/post-preview", {
+      target: `http://localhost:${port}/api`,
+      changeOrigin: true
+    })
+  );
+
+  server.use(
+    createProxyMiddleware("/banners", {
+      target: `http://localhost:${port}/api`,
+      changeOrigin: true
+    })
+  );
+
   await nextI18next.initPromise;
   server.use(nextI18NextMiddleware(nextI18next));
 

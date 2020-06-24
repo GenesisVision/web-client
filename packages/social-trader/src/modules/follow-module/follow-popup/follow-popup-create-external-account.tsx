@@ -52,7 +52,7 @@ const _FollowCreateExternalAccount: React.FC<CreateAccountFormProps> = ({
           />
         </Row>
         <DialogButtons>
-          <SubmitButton wide className="invest-form__submit-button">
+          <SubmitButton wide>
             {t("follow-program.create-account.next")}
           </SubmitButton>
         </DialogButtons>

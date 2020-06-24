@@ -1,8 +1,9 @@
 import { remove } from "components/conversation/conversation.service";
-import GVButton from "components/gv-button";
-import { CloseIcon } from "components/icon/close-icon";
+import { RemoveIcon } from "components/conversation/icons/remove.icon";
 import useApiRequest from "hooks/api-request.hook";
 import React from "react";
+
+import styles from "../conversation-pin-button/conversation-pin-button.module.scss";
 
 const _ConversationRemoveButton: React.FC<Props> = ({ id, onSuccess }) => {
   const updateMiddleware = () => onSuccess();
@@ -11,15 +12,9 @@ const _ConversationRemoveButton: React.FC<Props> = ({ id, onSuccess }) => {
     middleware: [updateMiddleware]
   });
   return (
-    <GVButton
-      onClick={sendRequest}
-      noPadding
-      variant="text"
-      color="secondary"
-      disabled={isPending}
-    >
-      <CloseIcon />
-    </GVButton>
+    <div className={styles["conversation-pin-button"]} onClick={sendRequest}>
+      <RemoveIcon disabled={isPending} />
+    </div>
   );
 };
 

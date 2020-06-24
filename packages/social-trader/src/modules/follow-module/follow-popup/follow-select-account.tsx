@@ -32,11 +32,7 @@ const _FollowSelectAccount: React.FC<Props> = ({ accounts, onSelect }) => {
           />
         </Row>
         <DialogButtons>
-          <GVButton
-            wide
-            onClick={handleNext}
-            className="invest-form__submit-button"
-          >
+          <GVButton wide onClick={handleNext}>
             {t("follow-program.create-account.next")}
           </GVButton>
         </DialogButtons>

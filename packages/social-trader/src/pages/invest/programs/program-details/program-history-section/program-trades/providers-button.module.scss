@@ -1,0 +1,23 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
+
+.providers-button {
+  &__container {
+    position: relative;
+  }
+  &__count {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: $font-size-small;
+    font-weight: 500;
+    left: -4px;
+    border-radius: 50%;
+    background: $primary-color;
+    width: 20px;
+    height: 20px;
+    border: 2px solid $secondary-background-color;
+  }
+}

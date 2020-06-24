@@ -2,6 +2,8 @@ import classNames from "classnames";
 import { PIE_DIRECTION } from "components/pie-container/pie";
 import * as React from "react";
 
+import styles from "./pie-container.module.scss";
+
 export const PieCircle: React.FC<IPieCircleProps> = React.memo(
   ({
     selected,
@@ -16,8 +18,8 @@ export const PieCircle: React.FC<IPieCircleProps> = React.memo(
   }) => {
     return (
       <circle
-        className={classNames("pie-circle", {
-          "pie-circle--selected": selected
+        className={classNames(styles["pie-circle"], {
+          [styles["pie-circle--selected"]]: selected
         })}
         onMouseLeave={onMouseLeave}
         onMouseEnter={onMouseOver}

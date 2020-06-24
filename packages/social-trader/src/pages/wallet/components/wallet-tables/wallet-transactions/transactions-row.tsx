@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import Status from "components/status/status";
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
@@ -10,6 +11,7 @@ import TransactionDetailsPopup from "../../transaction-details/transaction-detai
 import AmountItem from "../../transaction-details/transactions/amount-item";
 import WalletConvert from "../../wallet-tables/wallet-transactions/wallet-convert";
 import AmountConvert from "./amount-convert";
+import styles from "./wallet-transactions.module.scss";
 
 const _TransactionsRow: React.FC<Props> = ({
   transaction,
@@ -32,20 +34,35 @@ const _TransactionsRow: React.FC<Props> = ({
       />
       <TableRow stripy onClick={setOpenPopup}>
         {!walletCurrency && (
-          <TableCell className="wallet-transactions__cell">
+          <TableCell className={styles["wallet-transactions__cell"]}>
             <WalletConvert wallets={transaction.amount} />
           </TableCell>
         )}
-        <TableCell className="wallet-transactions__cell wallet-transactions__cell--date">
+        <TableCell
+          className={classNames(
+            styles["wallet-transactions__cell"],
+            styles["wallet-transactions__cell--date"]
+          )}
+        >
           {formatDate(transaction.date)}
         </TableCell>
-        <TableCell className="wallet-transactions__cell">
+        <TableCell className={styles["wallet-transactions__cell"]}>
           <Status status={transaction.status} />
         </TableCell>
-        <TableCell className="wallet-transactions__cell wallet-transactions__cell--information">
+        <TableCell
+          className={classNames(
+            styles["wallet-transactions__cell"],
+            styles["wallet-transactions__cell--information"]
+          )}
+        >
           {transaction.description}
         </TableCell>
-        <TableCell className="wallet-transactions__cell wallet-transactions__cell--amount">
+        <TableCell
+          className={classNames(
+            styles["wallet-transactions__cell"],
+            styles["wallet-transactions__cell--amount"]
+          )}
+        >
           {isConvertAction ? (
             <AmountConvert amount={transaction.amount} />
           ) : (

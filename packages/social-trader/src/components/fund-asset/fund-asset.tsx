@@ -6,7 +6,7 @@ import { Currency, FundAssetInfo } from "gv-api-web";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 
-import "./fund-asset.scss";
+import styles from "./fund-asset.module.scss";
 
 export enum FUND_ASSET_TYPE {
   LARGE = "large",
@@ -27,6 +27,7 @@ const _FundAsset: React.FC<Props> = ({
   removeHandle,
   logoUrl,
   className,
+  lightTheme,
   asset: name,
   ...other
 }) => {
@@ -38,9 +39,9 @@ const _FundAsset: React.FC<Props> = ({
       : "";
   const currencyClassName =
     type === FUND_ASSET_TYPE.LARGE
-      ? "fund-asset__currency-full"
+      ? styles["fund-asset__currency-full"]
       : type !== FUND_ASSET_TYPE.SHORT
-      ? "fund-asset__currency-short"
+      ? styles["fund-asset__currency-short"]
       : "";
   switch (type) {
     case FUND_ASSET_TYPE.TEXT:
@@ -56,11 +57,12 @@ const _FundAsset: React.FC<Props> = ({
           <Row
             {...other}
             className={classNames(
-              "fund-asset",
-              "fund-asset--default",
+              styles["fund-asset"],
+              styles["fund-asset--default"],
               className,
               {
-                "fund-asset--large": type === FUND_ASSET_TYPE.LARGE
+                [styles["fund-asset--large"]]: type === FUND_ASSET_TYPE.LARGE,
+                [styles["fund-asset--light"]]: lightTheme
               }
             )}
           >
@@ -72,7 +74,7 @@ const _FundAsset: React.FC<Props> = ({
                 name={!!currency && currencyName}
                 symbol={currency}
                 className={classNames(
-                  "fund-asset__currency",
+                  styles["fund-asset__currency"],
                   currencyClassName
                 )}
               />
@@ -82,7 +84,7 @@ const _FundAsset: React.FC<Props> = ({
             )}
             {percent > mandatoryFundPercent && removable && removeHandle && (
               <div
-                className="fund-asset__remove-button"
+                className={styles["fund-asset__remove-button"]}
                 onClick={removeHandle(currency)}
               >
                 +
@@ -100,6 +102,7 @@ interface Props extends FundAssetInfo {
   type: FUND_ASSET_TYPE;
   last: boolean;
   removable?: boolean;
+  lightTheme?: boolean;
   removeHandle?: (
     currency: Currency
   ) => (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;

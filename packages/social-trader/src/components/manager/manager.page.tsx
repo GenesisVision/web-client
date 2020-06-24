@@ -2,18 +2,19 @@ import { ManagerData } from "components/manager/components/manager-data";
 import { ManagerInfo } from "components/manager/components/manager-info";
 import { getManagerSchema } from "components/manager/manager.schema";
 import Page from "components/page/page";
+import { ResponsiveContainer } from "components/responsive-container/responsive-container";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { UpperBlock } from "components/upper-block/upper-block";
+import { UpperButtonContainer } from "components/upper-button/upper-button";
 import Crashable from "decorators/crashable";
 import { PublicProfile } from "gv-api-web";
 import * as React from "react";
-import { useTranslation } from "react-i18next";
 
-import "./manager.page.scss";
+import styles from "./manager.page.module.scss";
 
 const _ManagerPage: React.FC<Props> = ({ profile }) => {
-  const [t] = useTranslation();
-  const title = `${t("manager-page.title")} ${profile.username}`;
+  const title = profile.username;
   return (
     <Page
       title={title}
@@ -21,14 +22,27 @@ const _ManagerPage: React.FC<Props> = ({ profile }) => {
       description={profile.about || title}
       previewImage={profile.logoUrl}
     >
-      <Row className="manager-page__container" center={false} wide>
-        <RowItem className="manager-page__info" bottomOffset>
-          <ManagerInfo profile={profile} />
+      <Row className={styles["manager-page__container"]} center={false} wide>
+        <RowItem className={styles["manager-page__info"]} bottomOffset>
+          <Row className={styles["manager-page__info-row"]} center={false}>
+            <ManagerInfo profile={profile} />
+          </Row>
+          <ResponsiveContainer enabledScreens={["landscape-tablet", "desktop"]}>
+            <UpperBlock />
+          </ResponsiveContainer>
         </RowItem>
-        <RowItem className="manager-page__data" bottomOffset>
-          <ManagerData id={profile.id} />
+        <RowItem className={styles["manager-page__data"]} bottomOffset>
+          <ManagerData
+            canWritePost={profile.personalDetails?.canWritePost}
+            id={profile.id}
+          />
         </RowItem>
       </Row>
+      <ResponsiveContainer
+        enabledScreens={["phone", "landscape-phone", "tablet"]}
+      >
+        <UpperButtonContainer />
+      </ResponsiveContainer>
     </Page>
   );
 };

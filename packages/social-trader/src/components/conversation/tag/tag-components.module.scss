@@ -1,0 +1,30 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_sizes";
+
+.tag {
+  &__title-row {
+    & div {
+      font-size: $font-size-small;
+      color: $label-color;
+    }
+    height: 24px; // temp
+  }
+}
+
+.event-tag {
+  margin-bottom: -$padding-xsmall;
+}
+
+.asset-tag {
+  font-size: $font-size-small;
+  white-space: nowrap;
+  &__arrow {
+    font-size: 18px;
+    line-height: 15px;
+  }
+}
+
+.repost-tag-container {
+  padding-left: $padding-xsmall;
+  border-left: 1px solid $border-color;
+}

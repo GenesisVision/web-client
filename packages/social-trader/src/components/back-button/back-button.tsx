@@ -1,3 +1,4 @@
+import { Row } from "components/row/row";
 import useHistoryContext from "decorators/history-provider/use-history-context";
 import Router from "next/router";
 import React from "react";
@@ -8,9 +9,9 @@ export const _BackButton: React.FC = () => {
   const { from } = useHistoryContext();
   if (!from) return null;
   return (
-    <div className="page__back">
+    <Row>
       <BackButtonBody onClick={() => Router.back()} backPath={from} />
-    </div>
+    </Row>
   );
 };
 

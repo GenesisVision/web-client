@@ -1,6 +1,30 @@
 import { TFunction } from "i18next";
 import { number, string } from "yup";
 
+export const minMaxNumberShape = ({
+  t,
+  min,
+  max
+}: {
+  t: TFunction;
+  min: number;
+  max: number;
+}) =>
+  number()
+    .required(t("validations.required"))
+    .min(
+      min,
+      t("validations.min", {
+        min
+      })
+    )
+    .max(
+      max,
+      t("validations.max", {
+        max
+      })
+    );
+
 export const emailValidator = string()
   .email("Invalid email address.")
   .required("Email is required.");

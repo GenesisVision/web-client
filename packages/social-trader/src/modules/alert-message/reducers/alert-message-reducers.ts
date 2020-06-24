@@ -4,9 +4,9 @@ import { IAlertAction } from "../actions/alert-message-actions";
 import { ALERT_MESSAGE } from "../actions/alert-message-actions.constants";
 
 export type IMessage = Readonly<{
+  type?: ALERT_MESSAGE;
   id?: string;
   text?: string;
-  className?: string;
   isUseLocalization?: boolean;
 }>;
 
@@ -18,12 +18,13 @@ const addMessage = (
   state: AlertMessagesState,
   action: IAlertAction
 ): AlertMessagesState => {
-  const newMessage = {
+  if (!action.payload) return state;
+  const newMessage: IMessage = {
+    type: action.payload.type,
     id: uuid.v4(),
     text: action.payload && action.payload.text,
-    className: action.payload && action.payload.className,
     isUseLocalization: action.payload && action.payload.isUseLocalization
-  } as IMessage;
+  };
   return [...state.slice(-2), newMessage];
 };
 

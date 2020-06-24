@@ -1,9 +1,9 @@
-import "./modal.scss";
-
 import classNames from "classnames";
 import Portal from "components/portal/portal";
 import React, { useCallback, useEffect } from "react";
 import EventListener from "react-event-listener";
+
+import styles from "./modal.module.scss";
 
 export const BodyFix = () => {
   useEffect(() => {
@@ -24,12 +24,12 @@ const _Modal: React.FC<Props> = ({
   const handleKeyPress = useCallback(
     (event: KeyboardEvent & React.MouseEvent<HTMLElement>) =>
       event.keyCode === 27 && handleClose(event),
-    []
+    [onClose]
   );
 
   const handleBackdropClick = useCallback(
     (event: React.MouseEvent<HTMLElement>): void => handleClose(event),
-    []
+    [onClose]
   );
 
   const handleClose = useCallback(
@@ -40,15 +40,15 @@ const _Modal: React.FC<Props> = ({
   return (
     <Portal open={open}>
       <div
-        className={classNames("modal", {
-          "modal--position-absolute": !noAbsolute,
-          "modal--position-fixed": fixed
+        className={classNames(styles["modal"], {
+          [styles["modal--position-absolute"]]: !noAbsolute,
+          [styles["modal--position-fixed"]]: fixed
         })}
       >
         <EventListener target={"document"} onKeyUp={handleKeyPress}>
           <div
-            className={classNames("modal__backdrop", {
-              "modal__backdrop--transparent": transparentBackdrop
+            className={classNames(styles["modal__backdrop"], {
+              [styles["modal__backdrop--transparent"]]: transparentBackdrop
             })}
             onClick={handleBackdropClick}
           />

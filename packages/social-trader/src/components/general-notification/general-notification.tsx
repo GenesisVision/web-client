@@ -1,5 +1,5 @@
 import { Center } from "components/center/center";
-import GVSwitch from "components/gv-selection/gv-switch";
+import GVSwitch from "components/gv-switch";
 import { RowItem } from "components/row-item/row-item";
 import useApiRequest from "hooks/api-request.hook";
 import {
@@ -8,7 +8,7 @@ import {
 } from "modules/notification-settings/services/notification-settings.services";
 import React, { useCallback } from "react";
 
-import "./general-notification.scss";
+import styles from "./general-notification.module.scss";
 
 const _GeneralNotification: React.FC<Props> = ({
   onSuccess,
@@ -64,7 +64,9 @@ const _GeneralNotification: React.FC<Props> = ({
           onChange={handleSwitch}
         />
       </RowItem>
-      <RowItem className="notification-setting__label">{label}</RowItem>
+      <RowItem className={styles["notification-setting__label"]}>
+        {label}
+      </RowItem>
     </Center>
   );
 };

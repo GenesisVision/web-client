@@ -9,7 +9,7 @@ import SocialLink from "media/social-link.svg";
 import React from "react";
 import { getAssetLink } from "utils/compose-url";
 
-import "./dashboard-portfolio-event-logo.scss";
+import styles from "./dashboard-portfolio-event-logo.module.scss";
 
 const _PortfolioEventLogo: React.FC<Props> = ({
   withAsset = true,
@@ -26,27 +26,37 @@ const _PortfolioEventLogo: React.FC<Props> = ({
     <AssetAvatar
       url={assetDetails.logoUrl}
       alt={assetDetails.title}
-      className="portfolio-event-logo__logo"
+      className={styles["portfolio-event-logo__logo"]}
       color={assetDetails.color}
     />
   );
   return (
-    <div className="portfolio-event-logo">
+    <div
+      className={classNames(styles["portfolio-event-logo"], {
+        [styles["portfolio-event-logo--with-asset"]]: icon && withAsset
+      })}
+    >
       {withAsset &&
         ((assetDetails.url && (
-          <Link to={to} className="portfolio-event-logo__photo">
+          <Link to={to} className={styles["portfolio-event-logo__photo"]}>
             {renderAvatar()}
           </Link>
         )) || (
-          <div className="portfolio-event-logo__photo">{renderAvatar()}</div>
+          <div className={styles["portfolio-event-logo__photo"]}>
+            {renderAvatar()}
+          </div>
         ))}
       {icon && (
         <div
-          className={classNames("portfolio-event-logo__type", {
-            "portfolio-event-logo__type--with-asset": withAsset
+          className={classNames(styles["portfolio-event-logo__type"], {
+            [styles["portfolio-event-logo__type--with-asset"]]: withAsset
           })}
         >
-          <ImageBase src={icon} alt="event logo" defaultImage={SocialLink} />
+          <ImageBase
+            src={icon}
+            alt={styles["event logo"]}
+            defaultImage={SocialLink}
+          />
         </div>
       )}
     </div>

@@ -3,13 +3,15 @@ import { STATUS } from "constants/constants";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
 
+import styles from "./asset-status.module.scss";
+
 const getStatusClassName = (status: STATUS, className?: string) =>
-  classNames("asset-status", className, {
-    "asset-status__active": status === STATUS.ACTIVE,
-    "asset-status__investing": status === STATUS.INVESTING,
-    "asset-status__withdrawing": status === STATUS.WITHDRAWING,
-    "asset-status__ended": status === STATUS.ENDED,
-    "asset-status__pending": status === STATUS.PENDING
+  classNames(styles["asset-status"], className, {
+    [styles["asset-status__active"]]: status === STATUS.ACTIVE,
+    [styles["asset-status__investing"]]: status === STATUS.INVESTING,
+    [styles["asset-status__withdrawing"]]: status === STATUS.WITHDRAWING,
+    [styles["asset-status__ended"]]: status === STATUS.ENDED,
+    [styles["asset-status__pending"]]: status === STATUS.PENDING
   });
 
 const _AssetStatusLabel: React.FC<Props> = ({

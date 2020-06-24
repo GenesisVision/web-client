@@ -13,7 +13,6 @@ import { FollowsTable } from "./follows-table";
 import FundsTable from "./funds-table";
 import ManagersTable from "./managers-table";
 import ProgramsTable from "./programs-table";
-import SearchResultTable from "./search-result-table";
 
 export enum SEARCH_TABS {
   FOLLOWS = "follows",
@@ -24,7 +23,7 @@ export enum SEARCH_TABS {
 
 const _GlobalSearchResult: React.FC<Props> = ({ data }) => {
   const [t] = useTranslation();
-  const { tab, setTab } = useTab<SEARCH_TABS>(SEARCH_TABS.PROGRAMS);
+  const { tab, setTab } = useTab<SEARCH_TABS>(SEARCH_TABS.MANAGERS);
   return (
     <DefaultTableBlock>
       <DetailsBlockTitleBox>
@@ -32,6 +31,11 @@ const _GlobalSearchResult: React.FC<Props> = ({ data }) => {
       </DetailsBlockTitleBox>
       <Row>
         <DetailsBlockTabs value={tab} onChange={setTab}>
+          <GVTab
+            value={SEARCH_TABS.MANAGERS}
+            label={t("global-search-page.managers")}
+            count={data.managers && data.managers.total}
+          />
           <GVTab
             value={SEARCH_TABS.PROGRAMS}
             label={t("global-search-page.programs")}
@@ -46,11 +50,6 @@ const _GlobalSearchResult: React.FC<Props> = ({ data }) => {
             value={SEARCH_TABS.FOLLOWS}
             label={t("global-search-page.follows")}
             count={data.follows && data.follows.total}
-          />
-          <GVTab
-            value={SEARCH_TABS.MANAGERS}
-            label={t("global-search-page.managers")}
-            count={data.managers && data.managers.total}
           />
         </DetailsBlockTabs>
       </Row>
@@ -67,29 +66,13 @@ interface ITabProps {
 const Tab: React.FC<ITabProps> = React.memo(({ data, tab }) => {
   switch (tab) {
     case SEARCH_TABS.MANAGERS:
-      return (
-        <SearchResultTable data={Boolean(data.managers)}>
-          <ManagersTable data={data.managers} />
-        </SearchResultTable>
-      );
+      return <ManagersTable data={data.managers} />;
     case SEARCH_TABS.FUNDS:
-      return (
-        <SearchResultTable data={Boolean(data.funds)}>
-          <FundsTable data={data.funds} />
-        </SearchResultTable>
-      );
+      return <FundsTable data={data.funds} />;
     case SEARCH_TABS.PROGRAMS:
-      return (
-        <SearchResultTable data={Boolean(data.programs)}>
-          <ProgramsTable data={data.programs} />
-        </SearchResultTable>
-      );
+      return <ProgramsTable data={data.programs} />;
     case SEARCH_TABS.FOLLOWS:
-      return (
-        <SearchResultTable data={Boolean(data.follows)}>
-          <FollowsTable data={data.follows} />
-        </SearchResultTable>
-      );
+      return <FollowsTable data={data.follows} />;
     default:
       return null;
   }

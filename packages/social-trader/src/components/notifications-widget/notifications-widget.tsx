@@ -10,7 +10,7 @@ import * as React from "react";
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 
-import "./notifications-widget.scss";
+import styles from "./notifications-widget.module.scss";
 
 const _NotificationsWidget: React.FC<Props> = ({
   data: notificationsCount = 0
@@ -31,7 +31,9 @@ const _NotificationsWidget: React.FC<Props> = ({
           onClick={setOpen}
           type={hasNotifications ? CHIP_TYPE.NEGATIVE : undefined}
           chipLabel={
-            <div className="notifications-count">{notificationsCount}</div>
+            <div className={styles["notifications-count"]}>
+              {notificationsCount}
+            </div>
           }
           label={
             <HeaderIcon>

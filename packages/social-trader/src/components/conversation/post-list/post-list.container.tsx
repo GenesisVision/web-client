@@ -1,3 +1,4 @@
+import { ConversationPostListLoaderData } from "components/conversation/conversation.loader";
 import { PostList } from "components/conversation/post-list/post-list";
 import {
   initialOptions,
@@ -6,9 +7,8 @@ import {
 } from "components/notifications/components/notifications.helpers";
 import useApiRequest, { API_REQUEST_STATUS } from "hooks/api-request.hook";
 import useIsOpen from "hooks/is-open.hook";
+import { debounce } from "lodash";
 import React, { useCallback, useEffect, useState } from "react";
-
-import "./post-list.scss";
 
 export interface IPostListContainerProps {
   reset?: boolean;
@@ -38,9 +38,15 @@ const _PostListContainer: React.FC<IPostListContainerProps> = ({
     request: values => fetchMethod(values)
   });
 
+  const updateDebounced = useCallback(
+    debounce((options: any, sendRequest: any) => sendRequest(options), 300),
+    []
+  );
+
   useEffect(() => {
-    sendRequest(options);
-  }, [id, options]);
+    if (options.take === 0) return;
+    updateDebounced(options, sendRequest);
+  }, [id, options, fetchMethod]);
 
   useEffect(() => {
     if (reset) setOptions({ ...initialOptions });
@@ -65,7 +71,7 @@ const _PostListContainer: React.FC<IPostListContainerProps> = ({
     <PostList
       skip={options.skip}
       hasMore={canLoadMore}
-      loaderData={[]}
+      loaderData={ConversationPostListLoaderData}
       data={data!?.items}
       onScroll={handleScroll}
     />

@@ -1,3 +1,4 @@
+import { RowItem } from "components/row-item/row-item";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import FollowCard from "modules/follows-table/components/follow-card";
 import DashboardHorizontalList from "pages/dashboard/components/dashboard-block/dashboard-horizontal-list";
@@ -8,7 +9,9 @@ const _DashboardRecommendations: React.FC<Props> = ({ data }) => {
   return (
     <DashboardHorizontalList>
       {data.map(asset => (
-        <FollowCard withFollowButton follow={asset} />
+        <RowItem>
+          <FollowCard withOffset={false} withFollowButton follow={asset} />
+        </RowItem>
       ))}
     </DashboardHorizontalList>
   );

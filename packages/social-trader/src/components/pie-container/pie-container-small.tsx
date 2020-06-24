@@ -1,8 +1,9 @@
-import "./pie-container.scss";
-
+import { Center } from "components/center/center";
+import { RowItem } from "components/row-item/row-item";
 import * as React from "react";
 
 import GVProgramPeriod from "../gv-program-period";
+import styles from "./pie-container.module.scss";
 
 export interface IPieContainer {
   end: number;
@@ -17,12 +18,14 @@ const _PieContainerSmall: React.FC<IPieContainer> = ({
   value,
   suffix
 }) => (
-  <div className="program-period-pie">
-    <GVProgramPeriod start={start} end={end} value={value} variant="pie" />
-    <div className="program-period-pie__text">
+  <Center>
+    <RowItem small>
+      <GVProgramPeriod start={start} end={end} value={value} variant="pie" />
+    </RowItem>
+    <RowItem className={styles["program-period-pie__text"]}>
       {value} {suffix}
-    </div>
-  </div>
+    </RowItem>
+  </Center>
 );
 
 const PieContainerSmall = React.memo(_PieContainerSmall);

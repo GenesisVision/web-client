@@ -1,4 +1,9 @@
-import { Broker, BrokerAccountType, BrokersProgramInfo } from "gv-api-web";
+import {
+  Broker,
+  BrokerAccountType,
+  BrokersProgramInfo,
+  ExchangeAccountType
+} from "gv-api-web";
 import { getRandomInteger, getRandomWord, getRandomWords } from "utils/helpers";
 import { CurrencyEnum } from "utils/types";
 
@@ -10,7 +15,7 @@ export const getCurrency = (accountType: BrokerAccountType): CurrencyEnum =>
 export const getLeverage = (accountType: BrokerAccountType): number =>
   accountType.leverages[0];
 
-export const getBrokerId = (accountTypes: BrokerAccountType[]): string =>
+export const getBrokerId = (accountTypes: ExchangeAccountType[]): string =>
   accountTypes[0].id;
 
 export const getLeverageDescription = (
@@ -28,7 +33,13 @@ export const getLeverageDescription = (
   return result;
 };
 
-export const getAccountTypes = (accountTypes: BrokerAccountType[]) => {
+export const getExchangeAccountTypes = (
+  accountTypes: ExchangeAccountType[]
+) => {
+  return accountTypes.map(({ name }) => name).join(", ");
+};
+
+export const getBrokerAccountTypes = (accountTypes: BrokerAccountType[]) => {
   if (!accountTypes[0].currencies) return null;
   return accountTypes[0].currencies.join(", ");
 };

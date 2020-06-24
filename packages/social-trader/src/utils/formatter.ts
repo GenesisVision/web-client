@@ -30,11 +30,10 @@ export const addOneUp = (item: string[]): string[] => {
   const [whole, fraction] = item;
   if (!fraction) return item;
   const uppedFraction = String(+fraction + 1);
-  return fraction
+  return fraction && fraction.length - uppedFraction.length >= 0
     ? [
         whole,
-        new Array(fraction.length - uppedFraction.length).fill("0").join("") +
-          uppedFraction
+        "0".repeat(fraction.length - uppedFraction.length) + uppedFraction
       ]
     : item;
 };
@@ -60,11 +59,15 @@ const formatValue = (
   value: any,
   decimalScale?: number,
   abs?: boolean,
-  options?: { up?: boolean }
+  options?: { breakZero?: boolean; up?: boolean }
 ): string => {
   value = typeof value !== "number" ? +value : value;
   value = abs ? Math.abs(value) : value;
-  if (value === undefined || isNaN(value) || value.toFixed(0) == value)
+  if (
+    value === undefined ||
+    isNaN(value) ||
+    (!options?.breakZero && value.toFixed(0) == value)
+  )
     return String(value);
 
   return [value.toFixed(10).split(".")]

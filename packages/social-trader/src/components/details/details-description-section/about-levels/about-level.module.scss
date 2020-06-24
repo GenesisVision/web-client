@@ -1,0 +1,78 @@
+@import "~shared/styles/_colors";
+@import "~shared/styles/_breakpoint";
+@import "~shared/styles/_sizes";
+
+$small-padding: 20px;
+$title-size: 32px;
+$subtitle-size: 17.5px;
+$large-font-size: 16px;
+$middle-font-size: 14px;
+$small-font-size: 12px;
+$mobile-padding-divider: 3;
+$mobile-text-divider: 1.5;
+$mobile-title-divider: 2;
+
+.about-levels {
+  max-width: 1100px;
+  margin: $padding-small/2 0;
+
+  * {
+    box-sizing: border-box;
+  }
+
+  &__container {
+    @include vertical-paddings($padding-large);
+    @include adaptive-padding(left, $padding-large);
+    background: $panel-background-color;
+  }
+
+  &__content {
+    @include font-size($font-size-paragraph);
+    align-items: flex-start !important;
+  }
+
+  &__left-block {
+    line-height: 2;
+    letter-spacing: 0.2px;
+  }
+
+  &__list {
+    @include adaptive-padding(right, $padding-small);
+    @include adaptive-padding(bottom, $padding-small);
+    @include font-size($font-size-paragraph);
+    margin: 0;
+    counter-reset: myCounter;
+  }
+
+  &__list-item {
+    list-style: none;
+    position: relative;
+
+    &:before {
+      counter-increment: myCounter;
+      content: counter(myCounter) ".";
+      margin-right: $middle-font-size;
+    }
+  }
+
+  &__notes {
+    padding: 0;
+  }
+
+  &__ul {
+    padding: 0 0 0 $small-padding;
+    margin-top: 0;
+
+    li {
+      padding-bottom: $small-padding;
+    }
+  }
+
+  &__right-block {
+    @include adaptive-full-padding($padding-small);
+    background: rgba(232, 239, 243, 0.04);
+    width: 100%;
+    max-width: 300px;
+    border-radius: $border-radius 0 0 $border-radius;
+  }
+}

@@ -8,7 +8,6 @@ import {
   getProgramLevelsInfo
 } from "../services/level-calculator.service";
 import LevelCalculatorPopup from "./level-calculator-popup";
-import LevelCalculatorPopupLoader from "./level-calculator-popup.loader";
 
 const _LevelCalculatorPopupContainer: React.FC<ILevelCalculatorProps & {
   onClose(): void;
@@ -32,7 +31,6 @@ const _LevelCalculatorPopupContainer: React.FC<ILevelCalculatorProps & {
   return (
     <LevelCalculatorPopup
       condition={isDataReady}
-      loader={<LevelCalculatorPopupLoader />}
       id={id}
       title={title}
       currency={currency}

@@ -17,8 +17,6 @@ import useIsOpen from "hooks/is-open.hook";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 
-import "./post.scss";
-
 const DeletedPost: React.FC<{
   id: string;
   setNotDeleted: VoidFunction;
@@ -46,9 +44,9 @@ const DeletedPost: React.FC<{
   );
 };
 
-const _Post: React.FC<Props> = ({
-  updateData,
-  post: {
+const _Post: React.FC<Props> = ({ reduceLargeText, updateData, post }) => {
+  const {
+    url,
     rePostsCount,
     isPinned,
     images,
@@ -60,45 +58,54 @@ const _Post: React.FC<Props> = ({
     likesCount,
     author,
     tags
-  }
-}) => {
+  } = post;
   const [isDeleted, setDeleted, setNotDeleted] = useIsOpen();
   if (isDeleted) return <DeletedPost id={id} setNotDeleted={setNotDeleted} />;
   return (
-    <DefaultBlock solid wide className="post">
+    <DefaultBlock solid wide>
       <Row center={false}>
         <RowItem wide>
           <Message
+            reduceLargeText={reduceLargeText}
+            settingsBlock={
+              actions?.canDelete || actions?.canPin ? (
+                <RowItem>
+                  <Center>
+                    {actions?.canPin && (
+                      <RowItem>
+                        <ConversationPinButton
+                          id={id}
+                          value={isPinned}
+                          onSuccess={updateData}
+                        />
+                      </RowItem>
+                    )}
+                    {actions?.canDelete && (
+                      <RowItem>
+                        <ConversationRemoveButton
+                          id={id}
+                          onSuccess={setDeleted}
+                        />
+                      </RowItem>
+                    )}
+                  </Center>
+                </RowItem>
+              ) : (
+                undefined
+              )
+            }
+            row={false}
             tags={tags}
-            postId={id}
+            url={url}
             images={images}
             date={date}
             text={text}
             author={author}
           />
         </RowItem>
-        {(actions?.canDelete || actions?.canPin) && (
-          <RowItem>
-            <Center>
-              {actions?.canPin && (
-                <RowItem>
-                  <ConversationPinButton
-                    id={id}
-                    value={isPinned}
-                    onSuccess={updateData}
-                  />
-                </RowItem>
-              )}
-              {actions?.canDelete && (
-                <RowItem>
-                  <ConversationRemoveButton id={id} onSuccess={setDeleted} />
-                </RowItem>
-              )}
-            </Center>
-          </RowItem>
-        )}
       </Row>
       <PostButtons
+        post={post}
         rePostsCount={rePostsCount}
         onApply={updateData}
         id={id}
@@ -111,7 +118,7 @@ const _Post: React.FC<Props> = ({
           <CommentsList comments={comments} updateData={updateData} />
         </Row>
       )}
-      {actions && (
+      {actions && actions.canComment && (
         <Row>
           <CommentInputContainer onSuccess={updateData} id={id} />
         </Row>
@@ -121,6 +128,7 @@ const _Post: React.FC<Props> = ({
 };
 
 interface Props {
+  reduceLargeText?: boolean;
   updateData: VoidFunction;
   post: ConversationPost;
 }
