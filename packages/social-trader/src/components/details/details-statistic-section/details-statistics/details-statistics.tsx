@@ -37,7 +37,7 @@ const _DetailsStatistics: React.FC<IDetailsStatisticsProps> = ({
       <Row>
         <h3>{t("asset-details:statistics.heading")}</h3>
       </Row>
-      <Row>
+      <Row onlyOffset>
         {renderDetailsStatisticsElements({
           period,
           statisticData
