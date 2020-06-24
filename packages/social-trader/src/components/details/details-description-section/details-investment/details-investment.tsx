@@ -120,7 +120,7 @@ const _DetailsInvestment: React.FC<Props> = ({
           visible={showInvestment}
           value={TABS.INVESTMENT}
           label={t(
-            `details-page.investment.tabs.investment.${asset.toLowerCase()}`
+            `asset-details:investment.tabs.investment.${asset.toLowerCase()}`
           )}
         />
         <GVTab
