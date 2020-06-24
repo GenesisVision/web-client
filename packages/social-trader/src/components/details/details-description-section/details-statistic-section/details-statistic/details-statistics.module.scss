@@ -34,7 +34,10 @@
     @include media-breakpoint-landscape-phone() {
       flex-direction: column;
       width: auto;
-      max-width: ($details-statistic-section-width - $padding-small * 2)/2;
+      max-width: (
+          $details-statistic-section-width - $padding-small * 2 - $padding-small *
+            2
+        )/2;
       justify-content: space-between;
     }
   }
