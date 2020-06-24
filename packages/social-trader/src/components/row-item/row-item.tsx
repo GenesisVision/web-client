@@ -3,7 +3,20 @@ import React from "react";
 
 import styles from "./row-item.module.scss";
 
-export const RowItem: React.FC<Props> = ({
+export interface IRowItemProps {
+  hide?: boolean;
+  onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  wide?: boolean;
+  bottomOffset?: boolean;
+  className?: string;
+  xsmall?: boolean;
+  small?: boolean;
+  middle?: boolean;
+  xlarge?: boolean;
+  large?: boolean;
+}
+
+export const RowItem: React.FC<IRowItemProps> = ({
   hide,
   wide,
   onClick,
@@ -36,16 +49,3 @@ export const RowItem: React.FC<Props> = ({
     </div>
   );
 };
-
-interface Props {
-  hide?: boolean;
-  onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-  wide?: boolean;
-  bottomOffset?: boolean;
-  className?: string;
-  xsmall?: boolean;
-  small?: boolean;
-  middle?: boolean;
-  xlarge?: boolean;
-  large?: boolean;
-}
