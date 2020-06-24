@@ -55,7 +55,7 @@ const _PostListContainer: React.FC<IPostListContainerProps> = ({
   useEffect(() => {
     if (isUpdatingPage) {
       const newOptions = calculateOptions(options, data.total);
-      setOptions(newOptions);
+      if (newOptions.take) setOptions(newOptions);
       setNotUpdatingPage();
     }
   }, [isUpdatingPage, options]);
