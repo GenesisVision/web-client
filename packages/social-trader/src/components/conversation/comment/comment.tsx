@@ -15,8 +15,18 @@ const _Comment: React.FC<Props> = ({
   return (
     <div className={styles["comment"]}>
       <Row className={styles["comment__message"]} center={false}>
-        <RowItem>
+        <RowItem wide>
           <Message
+            row={false}
+            settingsBlock={
+              actions?.canDelete ? (
+                <RowItem>
+                  <ConversationRemoveButton id={id} onSuccess={updateData} />
+                </RowItem>
+              ) : (
+                <></>
+              )
+            }
             url={url}
             excludedTagsUnderText={["User"]}
             tags={tags}
@@ -26,11 +36,6 @@ const _Comment: React.FC<Props> = ({
             author={author}
           />
         </RowItem>
-        {actions?.canDelete && (
-          <RowItem>
-            <ConversationRemoveButton id={id} onSuccess={updateData} />
-          </RowItem>
-        )}
       </Row>
       <Row className={styles["comment__buttons"]}>
         <LikeContainer
