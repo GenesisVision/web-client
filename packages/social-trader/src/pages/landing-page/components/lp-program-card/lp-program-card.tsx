@@ -1,6 +1,6 @@
+import { LabeledValue } from "components/labeled-value/labeled-value";
 import { useToLink } from "components/link/link.helper";
 import ProgramPeriodPie from "components/program-period/program-period-pie/program-period-pie";
-import StatisticItemInner from "components/statistic-item/statistic-item-inner";
 import TagProgramContainer from "components/tags/tag-program-container/tag-program-container";
 import { ProgramDetailsListItem } from "gv-api-web";
 import { useTranslation } from "i18n";
@@ -50,7 +50,7 @@ const _LPProgramCard: React.FC<Props> = ({ program, className }) => {
     >
       <LPTableCardTable>
         <LPTableCardTableColumn>
-          <StatisticItemInner label={t("header-fields.equity")}>
+          <LabeledValue label={t("header-fields.equity")}>
             <NumberFormat
               value={formatValueDifferentDecimalScale(
                 program.balance.amount,
@@ -60,8 +60,8 @@ const _LPProgramCard: React.FC<Props> = ({ program, className }) => {
               suffix={` ${requestCurrency}`}
               displayType="text"
             />
-          </StatisticItemInner>
-          <StatisticItemInner label={t("header-fields.available-to-invest")}>
+          </LabeledValue>
+          <LabeledValue label={t("header-fields.available-to-invest")}>
             <NumberFormat
               value={formatValueDifferentDecimalScale(
                 program.availableToInvest,
@@ -71,34 +71,34 @@ const _LPProgramCard: React.FC<Props> = ({ program, className }) => {
               displayType="text"
               suffix={` ${requestCurrency}`}
             />
-          </StatisticItemInner>
+          </LabeledValue>
         </LPTableCardTableColumn>
         <LPTableCardTableColumn>
-          <StatisticItemInner label={t("header-fields.investors")}>
+          <LabeledValue label={t("header-fields.investors")}>
             <NumberFormat
               value={program.investorsCount}
               displayType="text"
               decimalScale={0}
             />
-          </StatisticItemInner>
-          <StatisticItemInner label={t("header-fields.period")}>
+          </LabeledValue>
+          <LabeledValue label={t("header-fields.period")}>
             <ProgramPeriodPie
               start={program.periodStarts}
               end={program.periodEnds}
             />
-          </StatisticItemInner>
+          </LabeledValue>
         </LPTableCardTableColumn>
         <LPTableCardTableColumn>
-          <StatisticItemInner label={t("header-fields.age")}>
+          <LabeledValue label={t("header-fields.age")}>
             {convertDateToShortFormat(distanceDate(program.creationDate))}
-          </StatisticItemInner>
-          <StatisticItemInner label={t("header-fields.drawdown")}>
+          </LabeledValue>
+          <LabeledValue label={t("header-fields.drawdown")}>
             <NumberFormat
               value={formatValue(program.statistic.drawdown, 2)}
               displayType="text"
               suffix="%"
             />
-          </StatisticItemInner>
+          </LabeledValue>
         </LPTableCardTableColumn>
       </LPTableCardTable>
     </LPTableCard>
