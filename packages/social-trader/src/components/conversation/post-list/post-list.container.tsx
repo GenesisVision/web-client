@@ -44,6 +44,7 @@ const _PostListContainer: React.FC<IPostListContainerProps> = ({
   );
 
   useEffect(() => {
+    if (options.take === 0) return;
     updateDebounced(options, sendRequest);
   }, [id, options, fetchMethod]);
 
