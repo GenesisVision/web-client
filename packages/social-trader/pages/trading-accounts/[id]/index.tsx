@@ -33,7 +33,12 @@ Page.getInitialProps = async ctx => {
     );
   });
   return {
-    namespacesRequired: ["transfer", "asset-details", "account-details-page"]
+    namespacesRequired: [
+      "transfer",
+      "asset-details",
+      "program-details-page",
+      "account-details-page"
+    ]
   };
 };
 
