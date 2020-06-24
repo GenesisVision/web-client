@@ -1,11 +1,14 @@
 import classNames from "classnames";
 import { ChartDefaultPeriod } from "components/chart/chart-period/chart-period.helpers";
+import { DetailsStatisticColumn } from "components/details/details-description-section/details-statistic-section/details-statistic/details-statistic-column";
+import { DetailsStatisticElement } from "components/details/details-description-section/details-statistic-section/details-statistic/details-statistic-element";
 import DetailsStatisticsElements from "components/details/details-description-section/details-statistic-section/details-statistic/details-statistics-elements";
 import styles from "components/details/details-description-section/details-statistic-section/details-statistic/details-statistics.module.scss";
+import { LabeledValue } from "components/labeled-value/labeled-value";
 import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import ProgramPeriodLine from "components/program-period/program-period-line/program-period-line";
+import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
-import StatisticItem from "components/statistic-item/statistic-item";
 import { Text } from "components/text/text";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import Tooltip from "components/tooltip/tooltip";
@@ -30,105 +33,122 @@ const _ProgramDetailsStatisticsElements: React.FC<IProgramDetailsStatisticsEleme
     <DetailsStatisticsElements
       Current={() => (
         <>
-          <StatisticItem
-            label={
-              <TooltipLabel
-                tooltipContent={t("program-details-page:tooltip.equity")}
-                labelText={t("asset-details:statistics.equity")}
-              />
-            }
-            accent
-          >
-            <NumberFormat
-              value={formatCurrencyValue(statistic.balance, statisticCurrency)}
-              thousandSeparator={" "}
-              displayType="text"
-              suffix={` ${statisticCurrency}`}
-            />
-          </StatisticItem>
-          {statistic.investors !== null && (
-            <StatisticItem
-              half
-              label={
-                <TooltipLabel
-                  tooltipContent={t("program-details-page:tooltip.investors")}
-                  labelText={t("asset-details:statistics.investors")}
-                />
-              }
-            >
-              <NumberFormat
-                value={statistic.investors}
-                thousandSeparator={" "}
-                displayType="text"
-              />
-            </StatisticItem>
-          )}
-          {statistic.subscribers !== null && (
-            <StatisticItem
-              half
-              label={
-                <TooltipLabel
-                  tooltipContent={t("follow-details-page:tooltip.subscribers")}
-                  labelText={t("follow-details-page:statistics.subscribers")}
-                />
-              }
-            >
-              <NumberFormat
-                value={statistic.subscribers}
-                thousandSeparator={" "}
-                displayType="text"
-              />
-            </StatisticItem>
-          )}
-          {!!statistic.lastPeriodStarts && (
-            <div className={styles["details-statistics__period"]}>
-              <Tooltip
-                horizontal={HORIZONTAL_POPOVER_POS.LEFT}
-                render={() => (
-                  <TooltipContent>
-                    {t("program-details-page:tooltip.period")}
-                  </TooltipContent>
-                )}
+          <Row wide>
+            <RowItem wide>
+              <LabeledValue
+                label={
+                  <TooltipLabel
+                    tooltipContent={t("program-details-page:tooltip.equity")}
+                    labelText={t("asset-details:statistics.equity")}
+                  />
+                }
               >
-                <span
-                  className={classNames(
-                    styles["details-statistics__label"],
-                    styles["tooltip__label"]
+                <Text weight={"bold"} wrap={false}>
+                  <NumberFormat
+                    value={formatCurrencyValue(
+                      statistic.balance,
+                      statisticCurrency
+                    )}
+                    thousandSeparator={" "}
+                    displayType="text"
+                    suffix={` ${statisticCurrency}`}
+                  />
+                </Text>
+              </LabeledValue>
+            </RowItem>
+            {statistic.investors !== null && (
+              <RowItem>
+                <LabeledValue
+                  label={
+                    <TooltipLabel
+                      tooltipContent={t(
+                        "program-details-page:tooltip.investors"
+                      )}
+                      labelText={t("asset-details:statistics.investors")}
+                    />
+                  }
+                >
+                  <NumberFormat
+                    value={statistic.investors}
+                    thousandSeparator={" "}
+                    displayType="text"
+                  />
+                </LabeledValue>
+              </RowItem>
+            )}
+            {statistic.subscribers !== null && (
+              <RowItem>
+                <LabeledValue
+                  label={
+                    <TooltipLabel
+                      tooltipContent={t(
+                        "follow-details-page:tooltip.subscribers"
+                      )}
+                      labelText={t(
+                        "follow-details-page:statistics.subscribers"
+                      )}
+                    />
+                  }
+                >
+                  <NumberFormat
+                    value={statistic.subscribers}
+                    thousandSeparator={" "}
+                    displayType="text"
+                  />
+                </LabeledValue>
+              </RowItem>
+            )}
+          </Row>
+          <Row onlyOffset wide>
+            {!!statistic.lastPeriodStarts && (
+              <div className={styles["details-statistics__period"]}>
+                <Tooltip
+                  horizontal={HORIZONTAL_POPOVER_POS.LEFT}
+                  render={() => (
+                    <TooltipContent>
+                      {t("program-details-page:tooltip.period")}
+                    </TooltipContent>
                   )}
                 >
-                  <Text muted>{t("asset-details:statistics.period")}</Text>
-                </span>
-              </Tooltip>
-              <Row small onlyOffset>
-                <ProgramPeriodLine
-                  start={statistic.lastPeriodStarts}
-                  end={statistic.lastPeriodEnds}
-                  status={status}
-                />
-              </Row>
-            </div>
-          )}
+                  <span
+                    className={classNames(
+                      styles["details-statistics__label"],
+                      styles["tooltip__label"]
+                    )}
+                  >
+                    <Text muted>{t("asset-details:statistics.period")}</Text>
+                  </span>
+                </Tooltip>
+                <Row small onlyOffset>
+                  <ProgramPeriodLine
+                    start={statistic.lastPeriodStarts}
+                    end={statistic.lastPeriodEnds}
+                    status={status}
+                  />
+                </Row>
+              </div>
+            )}
+          </Row>
         </>
       )}
       Particular={() => (
         <>
-          <div className={styles["details-statistics__column"]}>
-            <StatisticItem
+          <DetailsStatisticColumn>
+            <DetailsStatisticElement
               label={
                 <TooltipLabel
                   tooltipContent={t("program-details-page:tooltip.trades")}
                   labelText={t("asset-details:statistics.trades")}
                 />
               }
-              half
             >
               <NumberFormat
                 value={statistic.trades !== undefined ? statistic.trades : "-"}
                 thousandSeparator={" "}
                 displayType="text"
               />
-            </StatisticItem>
-            <StatisticItem
+            </DetailsStatisticElement>
+            <DetailsStatisticElement
               label={
                 <TooltipLabel
                   tooltipContent={t(
@@ -137,7 +157,6 @@ const _ProgramDetailsStatisticsElements: React.FC<IProgramDetailsStatisticsEleme
                   labelText={t("asset-details:statistics.profit-factor")}
                 />
               }
-              half
             >
               <NumberFormat
                 value={
@@ -147,8 +166,8 @@ const _ProgramDetailsStatisticsElements: React.FC<IProgramDetailsStatisticsEleme
                 }
                 displayType="text"
               />
-            </StatisticItem>
-            <StatisticItem
+            </DetailsStatisticElement>
+            <DetailsStatisticElement
               label={
                 <TooltipLabel
                   tooltipContent={t(
@@ -157,7 +176,6 @@ const _ProgramDetailsStatisticsElements: React.FC<IProgramDetailsStatisticsEleme
                   labelText={t("asset-details:statistics.max-drawdown")}
                 />
               }
-              half
             >
               <NumberFormat
                 value={
@@ -168,8 +186,8 @@ const _ProgramDetailsStatisticsElements: React.FC<IProgramDetailsStatisticsEleme
                 displayType="text"
                 suffix="%"
               />
-            </StatisticItem>
-            <StatisticItem
+            </DetailsStatisticElement>
+            <DetailsStatisticElement
               label={
                 <TooltipLabel
                   tooltipContent={t(
@@ -178,7 +196,6 @@ const _ProgramDetailsStatisticsElements: React.FC<IProgramDetailsStatisticsEleme
                   labelText={t("asset-details:statistics.trading-volume")}
                 />
               }
-              half
             >
               <NumberFormat
                 value={
@@ -192,10 +209,10 @@ const _ProgramDetailsStatisticsElements: React.FC<IProgramDetailsStatisticsEleme
                 displayType="text"
                 suffix={` ${statisticCurrency}`} //statistic.programCurrency
               />
-            </StatisticItem>
-          </div>
-          <div className={styles["details-statistics__column"]}>
-            <StatisticItem
+            </DetailsStatisticElement>
+          </DetailsStatisticColumn>
+          <DetailsStatisticColumn>
+            <DetailsStatisticElement
               label={
                 <TooltipLabel
                   tooltipContent={t(
@@ -204,7 +221,6 @@ const _ProgramDetailsStatisticsElements: React.FC<IProgramDetailsStatisticsEleme
                   labelText={t("asset-details:statistics.success-trades")}
                 />
               }
-              half
             >
               <NumberFormat
                 value={
@@ -215,8 +231,8 @@ const _ProgramDetailsStatisticsElements: React.FC<IProgramDetailsStatisticsEleme
                 displayType="text"
                 suffix="%"
               />
-            </StatisticItem>
-            <StatisticItem
+            </DetailsStatisticElement>
+            <DetailsStatisticElement
               label={
                 <TooltipLabel
                   tooltipContent={t(
@@ -225,7 +241,6 @@ const _ProgramDetailsStatisticsElements: React.FC<IProgramDetailsStatisticsEleme
                   labelText={t("asset-details:statistics.sharpe-ratio")}
                 />
               }
-              half
             >
               <NumberFormat
                 value={
@@ -235,8 +250,8 @@ const _ProgramDetailsStatisticsElements: React.FC<IProgramDetailsStatisticsEleme
                 }
                 displayType="text"
               />
-            </StatisticItem>
-            <StatisticItem
+            </DetailsStatisticElement>
+            <DetailsStatisticElement
               label={
                 <TooltipLabel
                   tooltipContent={t(
@@ -245,7 +260,6 @@ const _ProgramDetailsStatisticsElements: React.FC<IProgramDetailsStatisticsEleme
                   labelText={t("asset-details:statistics.sortino-ratio")}
                 />
               }
-              half
             >
               <NumberFormat
                 value={
@@ -255,8 +269,8 @@ const _ProgramDetailsStatisticsElements: React.FC<IProgramDetailsStatisticsEleme
                 }
                 displayType="text"
               />
-            </StatisticItem>
-          </div>
+            </DetailsStatisticElement>
+          </DetailsStatisticColumn>
         </>
       )}
       periodType={period.type}
