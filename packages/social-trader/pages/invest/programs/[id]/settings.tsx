@@ -23,7 +23,13 @@ ProgramSettings.getInitialProps = async ctx => {
     if (checkClosed(description.value.publicInfo.status))
       throw "Program is closed";
   });
-  return { namespacesRequired: ["asset-settings"] };
+  return {
+    namespacesRequired: [
+      "create-program-page",
+      "create-account",
+      "asset-settings"
+    ]
+  };
 };
 
 export default compose(withDefaultLayout, withPrivateRoute)(ProgramSettings);
