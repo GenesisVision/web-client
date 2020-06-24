@@ -51,6 +51,7 @@ const _PostListContainer: React.FC<IPostListContainerProps> = ({
   );
 
   useEffect(() => {
+    if (options.take === 0) return;
     updateDebounced(options, sendRequest);
   }, [id, options, fetchMethod]);
 
@@ -61,7 +62,7 @@ const _PostListContainer: React.FC<IPostListContainerProps> = ({
   useEffect(() => {
     if (isUpdatingPage) {
       const newOptions = calculateOptions(options, data.total);
-      setOptions(newOptions);
+      if (newOptions.take) setOptions(newOptions);
       setNotUpdatingPage();
     }
   }, [isUpdatingPage, options]);
