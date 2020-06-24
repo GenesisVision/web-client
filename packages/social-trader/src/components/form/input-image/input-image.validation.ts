@@ -5,8 +5,7 @@ const inputImageShape = (t: TFunction) =>
   object().shape({
     image: object().shape({
       width: number().min(300, t("input-image.validation.resolution")),
-      height: number().min(300, t("input-image.validation.resolution")),
-      size: number().max(2097152, t("input-image.validation.file-is-large"))
+      height: number().min(300, t("input-image.validation.resolution"))
     })
   });
 

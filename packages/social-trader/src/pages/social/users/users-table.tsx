@@ -42,7 +42,9 @@ export const UsersTable: React.FC = () => {
         paging={DEFAULT_PAGING}
         columns={USERS_TABLE_COLUMNS}
         renderHeader={column => <UsersTableHeaderCell column={column} />}
-        renderBodyRow={(user: UserDetailsList) => <UsersTableRow user={user} />}
+        renderBodyRow={(user: UserDetailsList) => (
+          <UsersTableRow key={user.userId} user={user} />
+        )}
       />
     </div>
   );
