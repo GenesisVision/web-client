@@ -1,6 +1,7 @@
 import { DialogTop } from "components/dialog/dialog-top";
+import { BlurableLabeledValue } from "components/labeled-value/blurable-labeled-value";
 import { Row } from "components/row/row";
-import StatisticItem from "components/statistic-item/statistic-item";
+import { Text } from "components/text/text";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { formatCurrencyValue } from "utils/formatter";
@@ -22,13 +23,14 @@ const _FundWithdrawTop: React.FC<IFundWithdrawTopProps> = ({
   return (
     <DialogTop title={t("withdraw-fund.title")} subtitle={title}>
       <Row large>
-        <StatisticItem
+        <BlurableLabeledValue
           label={t("withdraw-fund.available-to-withdraw")}
-          big
           isPending={isPending}
         >
-          {formatCurrencyValue(availableToWithdraw, currency)} {currency}
-        </StatisticItem>
+          <Text size={"xlarge"}>
+            {formatCurrencyValue(availableToWithdraw, currency)} {currency}
+          </Text>
+        </BlurableLabeledValue>
       </Row>
     </DialogTop>
   );

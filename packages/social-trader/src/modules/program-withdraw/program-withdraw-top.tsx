@@ -1,6 +1,7 @@
 import { DialogTop } from "components/dialog/dialog-top";
+import { LabeledValue } from "components/labeled-value/labeled-value";
 import { Row } from "components/row/row";
-import StatisticItem from "components/statistic-item/statistic-item";
+import { Text } from "components/text/text";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { formatCurrencyValue } from "utils/formatter";
@@ -15,10 +16,12 @@ const _ProgramWithdrawTop: React.FC<OwnProps> = ({
   return (
     <DialogTop title={t("withdraw-program.title")} subtitle={title}>
       <Row large>
-        <StatisticItem label={t("withdraw-program.available-to-withdraw")} big>
-          {formatCurrencyValue(availableToWithdraw, programCurrency)}{" "}
-          {programCurrency}
-        </StatisticItem>
+        <LabeledValue label={t("withdraw-program.available-to-withdraw")}>
+          <Text size={"xlarge"}>
+            {formatCurrencyValue(availableToWithdraw, programCurrency)}{" "}
+            {programCurrency}
+          </Text>
+        </LabeledValue>
       </Row>
     </DialogTop>
   );

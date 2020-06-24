@@ -2,8 +2,8 @@ import { FUND_ASSET_TYPE } from "components/fund-asset/fund-asset";
 import FundAssetContainer, {
   FundAssetType
 } from "components/fund-asset/fund-asset-container";
+import { LabeledValue } from "components/labeled-value/labeled-value";
 import { useToLink } from "components/link/link.helper";
-import StatisticItem from "components/statistic-item/statistic-item";
 import TableCard, {
   TableCardTable,
   TableCardTableColumn
@@ -40,7 +40,7 @@ export const FundCardTable: React.FC<IFundCardTableProps> = ({
     <>
       <TableCardTable wrap>
         <TableCardTableColumn>
-          <StatisticItem
+          <LabeledValue
             label={
               <TooltipLabel
                 tooltipContent={t("dashboard-page:tooltips.investing.size")}
@@ -53,10 +53,10 @@ export const FundCardTable: React.FC<IFundCardTableProps> = ({
               suffix={` ${currency}`}
               displayType="text"
             />
-          </StatisticItem>
+          </LabeledValue>
         </TableCardTableColumn>
         <TableCardTableColumn>
-          <StatisticItem
+          <LabeledValue
             label={
               <TooltipLabel
                 tooltipContent={t(
@@ -71,10 +71,10 @@ export const FundCardTable: React.FC<IFundCardTableProps> = ({
               displayType="text"
               decimalScale={0}
             />
-          </StatisticItem>
+          </LabeledValue>
         </TableCardTableColumn>
         <TableCardTableColumn>
-          <StatisticItem
+          <LabeledValue
             label={
               <TooltipLabel
                 tooltipContent={t("dashboard-page:tooltips.trading.ddown-fund")}
@@ -87,7 +87,7 @@ export const FundCardTable: React.FC<IFundCardTableProps> = ({
               displayType="text"
               suffix="%"
             />
-          </StatisticItem>
+          </LabeledValue>
         </TableCardTableColumn>
       </TableCardTable>
       {topFundAssets && (

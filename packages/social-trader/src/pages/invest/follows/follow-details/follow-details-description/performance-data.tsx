@@ -1,9 +1,9 @@
-import ImageBaseElement from "components/avatar/image-base.element";
 import {
   DetailsBroker,
   DetailsPerformanceData
 } from "components/details/details-description-section/details-description/details-structure-blocks";
-import StatisticItem from "components/statistic-item/statistic-item";
+import { LabeledValue } from "components/labeled-value/labeled-value";
+import { RowItem } from "components/row-item/row-item";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -13,15 +13,19 @@ const _PerformanceData: React.FC<Props> = ({ description }) => {
   const [t] = useTranslation();
   return (
     <DetailsPerformanceData>
-      <StatisticItem label={t("asset-details:description.broker")}>
-        <DetailsBroker
-          name={"broker"}
-          logoUrl={description.brokerDetails.logoUrl}
-        />
-      </StatisticItem>
-      <StatisticItem label={t("asset-details:description.currency")}>
-        {description.currency}
-      </StatisticItem>
+      <RowItem xlarge>
+        <LabeledValue label={t("asset-details:description.broker")}>
+          <DetailsBroker
+            name={"broker"}
+            logoUrl={description.brokerDetails.logoUrl}
+          />
+        </LabeledValue>
+      </RowItem>
+      <RowItem xlarge>
+        <LabeledValue label={t("asset-details:description.currency")}>
+          {description.currency}
+        </LabeledValue>
+      </RowItem>
     </DetailsPerformanceData>
   );
 };

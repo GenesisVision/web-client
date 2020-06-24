@@ -1,5 +1,5 @@
+import { LabeledValue } from "components/labeled-value/labeled-value";
 import { useToLink } from "components/link/link.helper";
-import StatisticItem from "components/statistic-item/statistic-item";
 import TableCard, {
   TableCardRow,
   TableCardTable,
@@ -50,7 +50,7 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
       <TableCardTable>
         {asset.accountInfo.currency && (
           <TableCardTableColumn>
-            <StatisticItem
+            <LabeledValue
               label={
                 <TooltipLabel
                   tooltipContent={t(
@@ -69,11 +69,11 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
                 suffix={` ${asset.accountInfo.currency}`}
                 displayType="text"
               />
-            </StatisticItem>
+            </LabeledValue>
           </TableCardTableColumn>
         )}
         <TableCardTableColumn>
-          <StatisticItem
+          <LabeledValue
             label={
               <TooltipLabel
                 tooltipContent={t(
@@ -91,10 +91,10 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
               )}
               displayType="text"
             />
-          </StatisticItem>
+          </LabeledValue>
         </TableCardTableColumn>
         <TableCardTableColumn>
-          <StatisticItem
+          <LabeledValue
             label={
               <TooltipLabel
                 tooltipContent={t("dashboard-page:tooltips.private-card.age")}
@@ -105,7 +105,7 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
             {convertDateToShortFormat(
               distanceDate(asset.accountInfo.creationDate)
             )}
-          </StatisticItem>
+          </LabeledValue>
         </TableCardTableColumn>
       </TableCardTable>
       <TableCardRow>

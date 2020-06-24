@@ -1,8 +1,8 @@
 import { BrokerCardType } from "components/assets/broker-select/broker-select.types";
 import { DefaultBlock } from "components/default.block/default.block";
+import { LabeledValue } from "components/labeled-value/labeled-value";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
-import StatisticItem from "components/statistic-item/statistic-item";
 import { SIZES } from "constants/constants";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import { BrokerAccountType } from "gv-api-web";
@@ -76,42 +76,54 @@ const _BrokerSelectBroker: React.FC<Props> = ({
           <h3>{selectedBroker.name}</h3>
         </Row>
         <Row onlyOffset>
-          <StatisticItem half label={t("create-account:broker-info.about")}>
-            {selectedBroker.description}
-          </StatisticItem>
-          <StatisticItem label={t("create-account:broker-info.account-type")}>
-            {"leverageMin" in selectedBroker
-              ? getBrokerAccountTypes(
-                  selectedBroker.accountTypes as BrokerAccountType[]
-                )
-              : getExchangeAccountTypes(selectedBroker.accountTypes)}
-          </StatisticItem>
-          <StatisticItem
-            label={t("create-account:broker-info.trading-platform")}
-          >
-            {selectedBroker.accountTypes[0].type}
-          </StatisticItem>
-          <StatisticItem label={t("create-account:broker-info.terms")}>
-            <a
-              title={t("create-account:broker-info.read-terms")}
-              href={selectedBroker.terms}
-              target="_blank"
-              rel="noopener noreferrer"
+          <Row>
+            <LabeledValue label={t("create-account:broker-info.about")}>
+              {selectedBroker.description}
+            </LabeledValue>
+          </Row>
+          <Row>
+            <LabeledValue label={t("create-account:broker-info.account-type")}>
+              {"leverageMin" in selectedBroker
+                ? getBrokerAccountTypes(
+                    selectedBroker.accountTypes as BrokerAccountType[]
+                  )
+                : getExchangeAccountTypes(selectedBroker.accountTypes)}
+            </LabeledValue>
+          </Row>
+          <Row>
+            <LabeledValue
+              label={t("create-account:broker-info.trading-platform")}
             >
-              {t("create-account:broker-info.read-terms")}
-            </a>
-          </StatisticItem>
+              {selectedBroker.accountTypes[0].type}
+            </LabeledValue>
+          </Row>
+          <Row>
+            <LabeledValue label={t("create-account:broker-info.terms")}>
+              <a
+                title={t("create-account:broker-info.read-terms")}
+                href={selectedBroker.terms}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {t("create-account:broker-info.read-terms")}
+              </a>
+            </LabeledValue>
+          </Row>
           {"leverageMin" in selectedBroker && (
-            <StatisticItem label={t("create-account:broker-info.leverage")}>
-              {getLeverageDescription(
-                selectedBroker.leverageMin,
-                selectedBroker.leverageMax
-              )}
-            </StatisticItem>
+            <Row>
+              <LabeledValue label={t("create-account:broker-info.leverage")}>
+                {getLeverageDescription(
+                  selectedBroker.leverageMin,
+                  selectedBroker.leverageMax
+                )}
+              </LabeledValue>
+            </Row>
           )}
-          <StatisticItem label={t("create-account:broker-info.assets")}>
-            {selectedBroker.assets}
-          </StatisticItem>
+          <Row>
+            <LabeledValue label={t("create-account:broker-info.assets")}>
+              {selectedBroker.assets}
+            </LabeledValue>
+          </Row>
         </Row>
       </DefaultBlock>
     </Row>

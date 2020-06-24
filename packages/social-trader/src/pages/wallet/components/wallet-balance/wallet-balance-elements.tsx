@@ -1,9 +1,10 @@
 import GVColors from "components/gv-styles/gv-colors";
+import { LabeledValue } from "components/labeled-value/labeled-value";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
 import { PieStatisticItem } from "components/statistic-item/pie-statistic-item";
-import StatisticItem from "components/statistic-item/statistic-item";
+import { Text } from "components/text/text";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
@@ -26,24 +27,27 @@ const _WalletBalanceElements: React.FC<Props> = ({
   return (
     <Row large>
       <StatisticItemList>
-        <StatisticItem
-          big
-          accent
-          label={
-            <TooltipLabel
-              tooltipContent={t("wallet-page:tooltip.total-balance")}
-              labelText={t("wallet-page:total-balance")}
-            />
-          }
-          condition={total !== undefined}
-        >
-          <NumberFormat
-            value={total}
-            thousandSeparator={" "}
-            suffix={` ${currency}`}
-            displayType="text"
-          />
-        </StatisticItem>
+        {total !== undefined && (
+          <RowItem xlarge>
+            <LabeledValue
+              label={
+                <TooltipLabel
+                  tooltipContent={t("wallet-page:tooltip.total-balance")}
+                  labelText={t("wallet-page:total-balance")}
+                />
+              }
+            >
+              <Text size={"xlarge"} weight={"bold"}>
+                <NumberFormat
+                  value={total}
+                  thousandSeparator={" "}
+                  suffix={` ${currency}`}
+                  displayType="text"
+                />
+              </Text>
+            </LabeledValue>
+          </RowItem>
+        )}
         <RowItem large className={styles["wallet-balance__divider"]} />
         <PieStatisticItem
           condition={available !== undefined}

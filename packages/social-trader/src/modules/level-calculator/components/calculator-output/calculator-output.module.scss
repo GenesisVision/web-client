@@ -8,6 +8,7 @@
   }
 
   &__value {
+    font-weight: bold;
     @include font-size(15px);
     display: inline-block;
     padding: 6px 22px;

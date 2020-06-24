@@ -1,7 +1,7 @@
+import { InvestmentItem } from "components/details/details-description-section/details-investment/investment-item";
 import Hint from "components/hint/hint";
 import { VERTICAL_POPOVER_POS } from "components/popover/popover";
 import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
-import StatisticItem from "components/statistic-item/statistic-item";
 import { StatisticItemContainerBlock } from "components/statistic-item/statistic-item-container.block";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import Crashable from "decorators/crashable";
@@ -72,29 +72,27 @@ const _InvestmentProgramInfo: React.FC<IInvestmentProgramInfoProps> = ({
           />
         </StatisticItemContainerBlock>
       )}
-      <StatisticItem
+      <InvestmentItem
         label={
           <TooltipLabel
             tooltipContent={t("program-details-page:tooltip.av-to-invest")}
             labelText={t("asset-details:description.avToInvest")}
           />
         }
-        accent
       >
         <NumberFormat
           value={formatCurrencyValue(availableInvestment, currency)}
           displayType="text"
           suffix={` ${currency}`}
         />
-      </StatisticItem>
-      <StatisticItem
+      </InvestmentItem>
+      <InvestmentItem
         label={
           <TooltipLabel
             tooltipContent={t("program-details-page:tooltip.management-fee")}
             labelText={t("asset-details:description.management-fee")}
           />
         }
-        accent
       >
         {managementFeeSelected !== managementFeeCurrent ? (
           <Hint
@@ -116,30 +114,29 @@ const _InvestmentProgramInfo: React.FC<IInvestmentProgramInfoProps> = ({
             suffix=" % (annual)"
           />
         )}
-      </StatisticItem>
-      <StatisticItem
+      </InvestmentItem>
+      <InvestmentItem
         label={
           <TooltipLabel
             tooltipContent={t("program-details-page:tooltip.success-fee")}
             labelText={t("asset-details:description.successFee")}
           />
         }
-        accent
       >
         {renderFee(successFeeSelected, successFeeCurrent)}
-      </StatisticItem>
-      <StatisticItem
-        label={
-          <TooltipLabel
-            tooltipContent={t("program-details-page:tooltip.stop-out-level")}
-            labelText={t("asset-details:description.stop-out-level")}
-          />
-        }
-        condition={!!stopOutLevelCurrent && !!stopOutLevelSelected}
-        accent
-      >
-        {renderFee(stopOutLevelSelected, stopOutLevelCurrent)}
-      </StatisticItem>
+      </InvestmentItem>
+      {!!stopOutLevelCurrent && !!stopOutLevelSelected && (
+        <InvestmentItem
+          label={
+            <TooltipLabel
+              tooltipContent={t("program-details-page:tooltip.stop-out-level")}
+              labelText={t("asset-details:description.stop-out-level")}
+            />
+          }
+        >
+          {renderFee(stopOutLevelSelected, stopOutLevelCurrent)}
+        </InvestmentItem>
+      )}
     </StatisticItemList>
   );
 };

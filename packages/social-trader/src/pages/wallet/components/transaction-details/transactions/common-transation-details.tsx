@@ -3,11 +3,11 @@ import ActionButton from "components/action-button/action-button";
 import { CurrencyItem } from "components/currency-item/currency-item";
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogTop } from "components/dialog/dialog-top";
+import { LabeledValue } from "components/labeled-value/labeled-value";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
-import StatisticItem from "components/statistic-item/statistic-item";
 import Status from "components/status/status";
 import Crashable from "decorators/crashable";
 import {
@@ -31,7 +31,9 @@ const _TransactionDetailsItemsBlock: React.FC<{
   return (
     <>
       {items.map(item => (
-        <TransactionDetailsListItem item={item} />
+        <RowItem>
+          <TransactionDetailsListItem item={item} />
+        </RowItem>
       ))}
     </>
   );
@@ -45,7 +47,7 @@ const TransactionDetailsListItem: React.FC<{
 }> = React.memo(({ item: { title, details, url, canCopy } }) => {
   const { linkCreator } = useToLink();
   return (
-    <StatisticItem label={title}>
+    <LabeledValue label={title}>
       <Row>
         <RowItem
           className={classNames({
@@ -58,7 +60,7 @@ const TransactionDetailsListItem: React.FC<{
         </RowItem>
         <RowItem>{canCopy && <CopyButton value={details} text />}</RowItem>
       </Row>
-    </StatisticItem>
+    </LabeledValue>
   );
 });
 
@@ -67,7 +69,7 @@ const TransactionDetailsItem: React.FC<{
 } & React.HTMLAttributes<HTMLDivElement>> = ({ label, children }) => {
   return (
     <Row>
-      <StatisticItem label={label}>{children}</StatisticItem>
+      <LabeledValue label={label}>{children}</LabeledValue>
     </Row>
   );
 };

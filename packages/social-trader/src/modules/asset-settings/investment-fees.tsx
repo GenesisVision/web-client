@@ -52,7 +52,7 @@ const _InvestmentFees: React.FC<Props> = ({
   return (
     <SettingsBlock
       label={t(
-        `create-${asset.toLowerCase()}-page.settings.investment-${asset.toLowerCase()}-fees`
+        `create-${asset.toLowerCase()}-page:settings.investment-${asset.toLowerCase()}-fees`
       )}
     >
       <HookForm resetOnSuccess form={form} onSubmit={onSubmit}>

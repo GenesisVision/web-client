@@ -1,5 +1,6 @@
 import { Center } from "components/center/center";
 import GVSwitch from "components/gv-switch";
+import { Text } from "components/text/text";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import useApiRequest from "hooks/api-request.hook";
 import React, { useCallback, useState } from "react";
@@ -45,11 +46,13 @@ const _ProgramAutoJoin: React.FC<Props> = ({
         color="primary"
         onChange={onLabelClick}
         label={
-          <TooltipLabel
-            tooltipContent={<ProgramAutoJoinTooltip />}
-            labelText={t("asset-details:description.auto-join")}
-            pointer
-          />
+          <Text sizeValue={"14px"}>
+            <TooltipLabel
+              tooltipContent={<ProgramAutoJoinTooltip />}
+              labelText={t("asset-details:description.auto-join")}
+              pointer
+            />
+          </Text>
         }
         disabled={isPending}
       />

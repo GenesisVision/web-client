@@ -3,9 +3,9 @@ import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogTop } from "components/dialog/dialog-top";
 import GVqr from "components/gv-qr/gv-qr";
+import { LabeledValue } from "components/labeled-value/labeled-value";
 import { Row } from "components/row/row";
 import { ISelectChangeEvent } from "components/select/select";
-import StatisticItem from "components/statistic-item/statistic-item";
 import withLoader from "decorators/with-loader";
 import { WalletData } from "gv-api-web";
 import CopyButton from "modules/copy-button/copy-button";
@@ -48,15 +48,12 @@ const _WalletAddFundsForm: React.FC<Props> = ({ wallets, currentWallet }) => {
         <Row>
           <GVqr value={depositAddress} />
         </Row>
-        <Row>
-          <StatisticItem
-            className={styles["wallet-add-funds-popup__address"]}
-            label={t("wallet-deposit.deposit-address")}
-          >
+        <Row className={styles["wallet-add-funds-popup__address"]}>
+          <LabeledValue label={t("wallet-deposit.deposit-address")}>
             <div className={styles["wallet-add-funds-popup__address-value"]}>
               {depositAddress}
             </div>
-          </StatisticItem>
+          </LabeledValue>
         </Row>
         <DialogButtons>
           <CopyButton wide value={depositAddress} />

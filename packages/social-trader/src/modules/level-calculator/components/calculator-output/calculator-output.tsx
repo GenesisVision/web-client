@@ -1,7 +1,6 @@
-import classNames from "classnames";
 import { Center } from "components/center/center";
+import { LabeledValue } from "components/labeled-value/labeled-value";
 import { RowItem } from "components/row-item/row-item";
-import StatisticItem from "components/statistic-item/statistic-item";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import withLoader from "decorators/with-loader";
 import * as React from "react";
@@ -15,8 +14,8 @@ const _CalculatorOutput: React.FC<Props> = ({
   tooltipContent
 }) => {
   return (
-    <div className={classNames(styles["calculator-output"], className)}>
-      <StatisticItem
+    <div className={className}>
+      <LabeledValue
         label={
           <Center className={styles["calculator-output__label"]}>
             <RowItem small>{label}</RowItem>
@@ -27,10 +26,9 @@ const _CalculatorOutput: React.FC<Props> = ({
             )}
           </Center>
         }
-        accent
       >
-        <span className={styles["calculator-output__value"]}>{value}</span>
-      </StatisticItem>
+        <div className={styles["calculator-output__value"]}>{value}</div>
+      </LabeledValue>
     </div>
   );
 };

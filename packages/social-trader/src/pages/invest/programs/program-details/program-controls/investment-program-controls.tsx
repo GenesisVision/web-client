@@ -4,6 +4,7 @@ import DetailsBlock, {
 import { DetailsStatisticContainer } from "components/details/details-description-section/details-description/details-structure-blocks";
 import InvestmentProgramInfo from "components/details/details-description-section/investment-program-info";
 import { GV_BTN_SIZE } from "components/gv-button";
+import { Row } from "components/row/row";
 import { ASSET } from "constants/constants";
 import Crashable from "decorators/crashable";
 import {
@@ -46,32 +47,34 @@ const _InvestmentProgramControls: React.FC<Props> = ({
         isOwnProgram={isOwnProgram}
         levelsParameters={levelsParameters}
       />
-      <DetailsStatisticContainer>
-        {programDetails.availableInvestmentBase === 0 &&
-        isAuthenticated &&
-        !isOwnProgram ? (
-          <NotifyButton
-            broker={brokerDetails.type}
-            canInvest={programDetails.personalDetails.canInvest}
-            currency={currency}
-            assetId={id}
-          />
-        ) : (
-          <DepositButton
-            disabled={!canInvest}
-            title={publicInfo.title}
-            onApply={onApply}
-            size={GV_BTN_SIZE.BIG}
-            ownAsset={isOwnProgram}
-            entryFee={programDetails.managementFeeCurrent}
-            availableToInvest={programDetails.availableInvestmentBase}
-            broker={brokerDetails.type}
-            type={ASSET.PROGRAM}
-            id={id}
-            currency={tradingAccountInfo.currency}
-          />
-        )}
-      </DetailsStatisticContainer>
+      <Row>
+        <DetailsStatisticContainer>
+          {programDetails.availableInvestmentBase === 0 &&
+          isAuthenticated &&
+          !isOwnProgram ? (
+            <NotifyButton
+              broker={brokerDetails.type}
+              canInvest={programDetails.personalDetails.canInvest}
+              currency={currency}
+              assetId={id}
+            />
+          ) : (
+            <DepositButton
+              disabled={!canInvest}
+              title={publicInfo.title}
+              onApply={onApply}
+              size={GV_BTN_SIZE.BIG}
+              ownAsset={isOwnProgram}
+              entryFee={programDetails.managementFeeCurrent}
+              availableToInvest={programDetails.availableInvestmentBase}
+              broker={brokerDetails.type}
+              type={ASSET.PROGRAM}
+              id={id}
+              currency={tradingAccountInfo.currency}
+            />
+          )}
+        </DetailsStatisticContainer>
+      </Row>
     </DetailsBlock>
   );
 };

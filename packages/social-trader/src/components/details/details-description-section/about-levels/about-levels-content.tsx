@@ -1,7 +1,8 @@
 import LevelIcon from "components/details/details-description-section/about-levels/level-icon";
+import { LabeledValue } from "components/labeled-value/labeled-value";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
-import StatisticItem from "components/statistic-item/statistic-item";
+import { Text } from "components/text/text";
 import { LevelInfo } from "gv-api-web";
 import { CURRENCIES } from "modules/currency-select/currency-select.constants";
 import React from "react";
@@ -26,14 +27,16 @@ const _Limits: React.FC<ILimitsProps> = ({ investmentsLimits, currency }) => {
           <RowItem>
             <LevelIcon levelInfo={levelInfo} />
           </RowItem>
-          <StatisticItem accent label={t("about-levels-page:titles.limit")}>
-            <NumberFormat
-              value={formatCurrencyValue(levelInfo.investmentLimit, currency)}
-              thousandSeparator={" "}
-              displayType="text"
-              suffix={` ${currency}`}
-            />
-          </StatisticItem>
+          <LabeledValue label={t("about-levels-page:titles.limit")}>
+            <Text weight={"bold"}>
+              <NumberFormat
+                value={formatCurrencyValue(levelInfo.investmentLimit, currency)}
+                thousandSeparator={" "}
+                displayType="text"
+                suffix={` ${currency}`}
+              />
+            </Text>
+          </LabeledValue>
         </Row>
       ))}
     </>

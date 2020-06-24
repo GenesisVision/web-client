@@ -4,8 +4,9 @@ import {
   BalanceChartElementType,
   BalanceChartType
 } from "components/details/details-statistic-section/details.chart.types";
+import { LabeledValue } from "components/labeled-value/labeled-value";
 import { Row } from "components/row/row";
-import StatisticItem from "components/statistic-item/statistic-item";
+import { Text } from "components/text/text";
 import withLoader from "decorators/with-loader";
 import {
   FundBalanceChart as FundBalanceChartType,
@@ -49,14 +50,16 @@ const _BalanceChartElements: React.FC<Props> = ({
   return (
     <>
       <Row>
-        <StatisticItem label={t("asset-details:chart.value")} big accent>
-          <NumberFormat
-            value={formatCurrencyValue(balance, name)}
-            thousandSeparator={" "}
-            displayType="text"
-            suffix={` ${name}`}
-          />
-        </StatisticItem>
+        <LabeledValue label={t("asset-details:chart.value")}>
+          <Text weight={"bold"} size={"xlarge"}>
+            <NumberFormat
+              value={formatCurrencyValue(balance, name)}
+              thousandSeparator={" "}
+              displayType="text"
+              suffix={` ${name}`}
+            />
+          </Text>
+        </LabeledValue>
       </Row>
       <ChartPeriod onChange={setPeriod} period={period} />
       <ChartCurrencySelector

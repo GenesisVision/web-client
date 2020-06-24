@@ -1,4 +1,4 @@
-import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
+import { Row } from "components/row/row";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import DashboardValueItem from "pages/dashboard/components/dashboard-statistic/dashboard-value-item";
 import React from "react";
@@ -13,7 +13,7 @@ export const DashboardInvestingCounts: React.FC<{
 }> = React.memo(({ balance, currency, programs, funds }) => {
   const [t] = useTranslation();
   return (
-    <StatisticItemList>
+    <Row>
       <DashboardValueItem
         label={
           <TooltipLabel
@@ -42,6 +42,6 @@ export const DashboardInvestingCounts: React.FC<{
         }
         value={funds}
       />
-    </StatisticItemList>
+    </Row>
   );
 });

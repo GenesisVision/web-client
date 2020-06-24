@@ -29,7 +29,7 @@ const _ConfirmCloseAssetContainer: React.FC<Props> = ({
   const { twoFactorEnabled } = useTFAStatus();
   const { sendRequest, errorMessage } = useApiRequest({
     request: getMethod(asset),
-    successMessage: `asset-settings.close-asset.notifications.${asset.toLowerCase()}`,
+    successMessage: `asset-settings:close-asset.notifications.${asset.toLowerCase()}`,
     middleware: [onApply, postponeCallback(onClose)]
   });
   const handleSubmit = useCallback(

@@ -1,8 +1,8 @@
 import { HookFormWalletField as WalletSelect } from "components/deposit/components/form-fields/wallet-field";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import InputAmountField from "components/input-amount-field/hook-form-amount-field";
+import { LabeledValue } from "components/labeled-value/labeled-value";
 import { Row } from "components/row/row";
-import StatisticItem from "components/statistic-item/statistic-item";
 import { SubmitButton } from "components/submit-button/submit-button";
 import { WalletItemType } from "components/wallet-select/wallet-select";
 import { WalletBaseData } from "gv-api-web";
@@ -128,9 +128,9 @@ const _FundWithdrawAmountForm: React.FC<Props> = ({
       </Row>
       {minPercent === 100 && (
         <Row>
-          <StatisticItem label={t("withdraw-fund.amount-to-withdraw")}>
+          <LabeledValue label={t("withdraw-fund.amount-to-withdraw")}>
             {percent} %
-          </StatisticItem>
+          </LabeledValue>
         </Row>
       )}
       <FundWithdrawResult

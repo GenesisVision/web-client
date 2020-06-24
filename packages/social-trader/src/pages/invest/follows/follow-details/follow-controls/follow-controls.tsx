@@ -1,5 +1,6 @@
 import SignalProviderControls from "components/details/details-description-section/details-description/controls/signal-provider-controls/signal-provider-controls";
 import { DetailsStatisticContainer } from "components/details/details-description-section/details-description/details-structure-blocks";
+import { Row } from "components/row/row";
 import { ASSET } from "constants/constants";
 import Crashable from "decorators/crashable";
 import {
@@ -34,29 +35,31 @@ const _FollowControls: React.FC<Props> = ({
         successFee={signalSettings.signalSuccessFee}
         volumeFee={signalSettings.signalVolumeFee}
       />
-      <DetailsStatisticContainer>
-        {isAuthenticated ? (
-          !isOwnAsset && (
-            <SignalProviderButtons
-              onApply={onApply}
-              guestActions={personalDetails && personalDetails.guestActions}
-              leverage={leverageMax}
-              brokerId={brokerDetails.id}
-              broker={brokerDetails.type}
-              id={id}
-              currency={currency}
+      <Row>
+        <DetailsStatisticContainer>
+          {isAuthenticated ? (
+            !isOwnAsset && (
+              <SignalProviderButtons
+                onApply={onApply}
+                guestActions={personalDetails && personalDetails.guestActions}
+                leverage={leverageMax}
+                brokerId={brokerDetails.id}
+                broker={brokerDetails.type}
+                id={id}
+                currency={currency}
+              />
+            )
+          ) : (
+            <InvestmentUnauthButton
+              label={t("asset-details:description.follow-trade")}
+              asset={ASSET.FOLLOW}
+              header={t("asset-details:description.follow-trade")}
+              message={t("unauth-popup.follow")}
+              title={title}
             />
-          )
-        ) : (
-          <InvestmentUnauthButton
-            label={t("asset-details:description.follow-trade")}
-            asset={ASSET.FOLLOW}
-            header={t("asset-details:description.follow-trade")}
-            message={t("unauth-popup.follow")}
-            title={title}
-          />
-        )}
-      </DetailsStatisticContainer>
+          )}
+        </DetailsStatisticContainer>
+      </Row>
     </SignalProviderControls>
   );
 };

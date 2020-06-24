@@ -135,7 +135,7 @@ const _ProgramSettings: React.FC<Props> = ({
         />
       )}
       <CloseAssetBlock
-        label={t(`asset-settings.close-${assetType.toLowerCase()}.title`)}
+        label={t(`asset-settings:close-${assetType.toLowerCase()}.title`)}
         asset={assetType}
         canCloseAsset={description.ownerActions.canClose}
         id={closeId}

@@ -1,5 +1,6 @@
 import { DetailsPerformanceData } from "components/details/details-description-section/details-description/details-structure-blocks";
-import StatisticItem from "components/statistic-item/statistic-item";
+import { LabeledValue } from "components/labeled-value/labeled-value";
+import { RowItem } from "components/row-item/row-item";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { formatDate } from "utils/dates";
@@ -15,21 +16,25 @@ const _PerformanceData: React.FC<Props> = ({
   const [t] = useTranslation();
   return (
     <DetailsPerformanceData>
-      <StatisticItem
-        condition={!!leverage}
-        label={t("asset-details:description.leverage")}
-      >
-        {leverage}
-      </StatisticItem>
-      <StatisticItem
-        condition={!!currency}
-        label={t("asset-details:description.currency")}
-      >
-        {currency}
-      </StatisticItem>
-      <StatisticItem label={t("asset-details:description.creation-date")}>
-        {formatDate(creationDate)}
-      </StatisticItem>
+      {leverage && (
+        <RowItem xlarge>
+          <LabeledValue label={t("asset-details:description.leverage")}>
+            {leverage}
+          </LabeledValue>
+        </RowItem>
+      )}
+      {currency && (
+        <RowItem xlarge>
+          <LabeledValue label={t("asset-details:description.currency")}>
+            {currency}
+          </LabeledValue>
+        </RowItem>
+      )}
+      <RowItem xlarge>
+        <LabeledValue label={t("asset-details:description.creation-date")}>
+          {formatDate(creationDate)}
+        </LabeledValue>
+      </RowItem>
     </DetailsPerformanceData>
   );
 };

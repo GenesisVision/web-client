@@ -1,5 +1,5 @@
+import { LabeledValue } from "components/labeled-value/labeled-value";
 import { useToLink } from "components/link/link.helper";
-import StatisticItem from "components/statistic-item/statistic-item";
 import TableCard, {
   IWithOffset,
   TableCardTable,
@@ -18,8 +18,7 @@ import { ASSET } from "constants/constants";
 import { FollowDetailsListItem } from "gv-api-web";
 import FollowButton from "pages/invest/follows/follow-details/follow-button";
 import * as React from "react";
-import { useState } from "react";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { FOLLOW_DETAILS_FOLDER_ROUTE } from "routes/invest.routes";
@@ -84,7 +83,7 @@ const _FollowCard: React.FC<Props> = ({
     >
       <TableCardTable>
         <TableCardTableColumn>
-          <StatisticItem
+          <LabeledValue
             label={
               <TooltipLabel
                 tooltipContent={t(
@@ -99,10 +98,10 @@ const _FollowCard: React.FC<Props> = ({
               displayType="text"
               decimalScale={0}
             />
-          </StatisticItem>
+          </LabeledValue>
         </TableCardTableColumn>
         <TableCardTableColumn>
-          <StatisticItem
+          <LabeledValue
             label={
               <TooltipLabel
                 tooltipContent={t("dashboard-page:tooltips.trading.trades")}
@@ -115,10 +114,10 @@ const _FollowCard: React.FC<Props> = ({
               displayType="text"
               decimalScale={0}
             />
-          </StatisticItem>
+          </LabeledValue>
         </TableCardTableColumn>
         <TableCardTableColumn>
-          <StatisticItem
+          <LabeledValue
             label={
               <TooltipLabel
                 tooltipContent={t("dashboard-page:tooltips.investing.ddown")}
@@ -131,7 +130,7 @@ const _FollowCard: React.FC<Props> = ({
               displayType="text"
               suffix="%"
             />
-          </StatisticItem>
+          </LabeledValue>
         </TableCardTableColumn>
       </TableCardTable>
       {withFollowButton && (

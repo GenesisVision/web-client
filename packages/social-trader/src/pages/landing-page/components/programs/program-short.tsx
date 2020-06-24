@@ -1,10 +1,8 @@
 import classNames from "classnames";
+import { LabeledValue } from "components/labeled-value/labeled-value";
 import { useToLink } from "components/link/link.helper";
-import StatisticItem from "components/statistic-item/statistic-item";
-import {
-  TableCardAvatar,
-  TableCardTitle
-} from "components/table/components/table-card/table-card";
+import { Row } from "components/row/row";
+import { TableCardTitle } from "components/table/components/table-card/table-card";
 import {
   DECIMAL_SCALE_BIG_VALUE,
   DECIMAL_SCALE_SMALL_VALUE
@@ -48,20 +46,19 @@ const _ProgramShort: React.FC<Props> = ({ program, className }) => {
         {distanceDate(program.periodStarts, program.periodEnds)}
       </div>
       <TableCardTitle url={linkProps}>{program.title}</TableCardTitle>
-      <StatisticItem
-        className={styles["program-short__balance"]}
-        label={t("header-fields.equity")}
-      >
-        <NumberFormat
-          value={formatValueDifferentDecimalScale(
-            program.balance.amount,
-            DECIMAL_SCALE_SMALL_VALUE,
-            DECIMAL_SCALE_BIG_VALUE
-          )}
-          suffix={` ${program.balance.currency}`}
-          displayType="text"
-        />
-      </StatisticItem>
+      <Row>
+        <LabeledValue label={t("header-fields.equity")}>
+          <NumberFormat
+            value={formatValueDifferentDecimalScale(
+              program.balance.amount,
+              DECIMAL_SCALE_SMALL_VALUE,
+              DECIMAL_SCALE_BIG_VALUE
+            )}
+            suffix={` ${program.balance.currency}`}
+            displayType="text"
+          />
+        </LabeledValue>
+      </Row>
     </div>
   );
 };

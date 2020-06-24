@@ -16,7 +16,7 @@ const _AssetsEditPage: React.FC<Props> = ({
   redirectToAsset,
   description
 }) => {
-  const successMessage = `asset-settings.notifications.edit-success.${asset.toLowerCase()}`;
+  const successMessage = `asset-settings:notifications.edit-success.${asset.toLowerCase()}`;
   const { sendRequest: editRequest, errorMessage } = useApiRequest({
     middleware: [dispatchDescription],
     request: editAsset,

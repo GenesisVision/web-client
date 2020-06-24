@@ -3,7 +3,6 @@ import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import InputAmountField from "components/input-amount-field/hook-form-amount-field";
 import { Row } from "components/row/row";
-import StatisticItem from "components/statistic-item/statistic-item";
 import { SubmitButton } from "components/submit-button/submit-button";
 import { WalletItemType } from "components/wallet-select/wallet-select";
 import { WalletData } from "gv-api-web";

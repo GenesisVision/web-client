@@ -1,4 +1,4 @@
-import StatisticItem from "components/statistic-item/statistic-item";
+import { LabeledValue } from "components/labeled-value/labeled-value";
 import { TooltipContent } from "components/tooltip/tooltip-content";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
@@ -8,14 +8,11 @@ const _PropgramPeriodEndTooltip: React.FC<Props> = ({ periodEnds }) => {
   const [t] = useTranslation();
   return (
     <TooltipContent>
-      <StatisticItem
-        withPadding={false}
-        label={t("program-period.period-ends")}
-      >
+      <LabeledValue label={t("program-period.period-ends")}>
         {periodEnds
           ? formatDate(periodEnds)
           : t("program-period.waiting-period-start")}
-      </StatisticItem>
+      </LabeledValue>
     </TooltipContent>
   );
 };

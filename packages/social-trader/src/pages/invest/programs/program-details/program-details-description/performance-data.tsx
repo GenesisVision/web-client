@@ -1,12 +1,12 @@
-import ImageBase from "components/avatar/image-base";
 import {
   DetailsBroker,
   DetailsPerformanceData
 } from "components/details/details-description-section/details-description/details-structure-blocks";
+import { LabeledValue } from "components/labeled-value/labeled-value";
 import Leverage from "components/leverage/leverage";
 import PieContainerSmall from "components/pie-container/pie-container-small";
 import ProgramPeriodPie from "components/program-period/program-period-pie/program-period-pie";
-import StatisticItem from "components/statistic-item/statistic-item";
+import { RowItem } from "components/row-item/row-item";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import { STATUS } from "constants/constants";
 import { withBlurLoader } from "decorators/with-blur-loader";
@@ -31,118 +31,144 @@ const _PerformanceData: React.FC<Props> = ({
   const [t] = useTranslation();
   return (
     <DetailsPerformanceData>
-      <StatisticItem
-        label={
-          <TooltipLabel
-            tooltipContent={t("asset-details:description.tooltips.broker")}
-            labelText={t("asset-details:description.broker")}
+      <RowItem xlarge bottomOffset>
+        <LabeledValue
+          label={
+            <TooltipLabel
+              tooltipContent={t("asset-details:description.tooltips.broker")}
+              labelText={t("asset-details:description.broker")}
+            />
+          }
+        >
+          <DetailsBroker
+            name={brokerDetails.name}
+            logoUrl={brokerDetails.logoUrl}
           />
-        }
-      >
-        <DetailsBroker
-          name={brokerDetails.name}
-          logoUrl={brokerDetails.logoUrl}
-        />
-      </StatisticItem>
+        </LabeledValue>
+      </RowItem>
       {currency && (
-        <StatisticItem
-          label={
-            <TooltipLabel
-              tooltipContent={t("asset-details:description.tooltips.currency")}
-              labelText={t("asset-details:description.currency")}
-            />
-          }
-        >
-          {currency}
-        </StatisticItem>
-      )}
-      {!!leverageMin && !!leverageMax && (
-        <StatisticItem
-          label={
-            <TooltipLabel
-              tooltipContent={t("asset-details:description.tooltips.leverage")}
-              labelText={t("asset-details:description.leverage")}
-            />
-          }
-        >
-          <Leverage min={leverageMin} max={leverageMax} />
-        </StatisticItem>
-      )}
-      {programDetails && (
-        <>
-          <StatisticItem
-            label={
-              <TooltipLabel
-                tooltipContent={t("asset-details:description.tooltips.period")}
-                labelText={t("asset-details:description.period")}
-              />
-            }
-          >
-            <ProgramPeriodPie
-              condition={status !== STATUS.CLOSED}
-              loader={t("program-period.program-closed")}
-              start={programDetails.periodStarts}
-              end={programDetails.periodEnds}
-            />
-          </StatisticItem>
-          <StatisticItem
-            label={
-              <TooltipLabel
-                tooltipContent={t("asset-details:description.tooltips.age")}
-                labelText={t("asset-details:description.age")}
-              />
-            }
-          >
-            <PieContainerSmall
-              end={levelsParameters.programAgeMax}
-              value={programDetails.ageDays}
-              suffix={"days"}
-            />
-          </StatisticItem>
-          <StatisticItem
-            label={
-              <TooltipLabel
-                tooltipContent={t("program-details-page:tooltip.genesis-ratio")}
-                labelText={t("asset-details:description.genesis-ratio")}
-              />
-            }
-          >
-            <PieContainerSmall
-              start={levelsParameters.genesisRatioMin}
-              end={levelsParameters.genesisRatioMax}
-              value={programDetails.genesisRatio}
-            />
-          </StatisticItem>
-          <StatisticItem
+        <RowItem xlarge bottomOffset>
+          <LabeledValue
             label={
               <TooltipLabel
                 tooltipContent={t(
-                  "program-details-page:tooltip.investment-scale"
+                  "asset-details:description.tooltips.currency"
                 )}
-                labelText={t("asset-details:description.investment-scale")}
+                labelText={t("asset-details:description.currency")}
               />
             }
           >
-            <PieContainerSmall
-              start={levelsParameters.investmentScaleMin}
-              end={levelsParameters.investmentScaleMax}
-              value={programDetails.investmentScale}
-            />
-          </StatisticItem>
-          <StatisticItem
+            {currency}
+          </LabeledValue>
+        </RowItem>
+      )}
+      {!!leverageMin && !!leverageMax && (
+        <RowItem xlarge bottomOffset>
+          <LabeledValue
             label={
               <TooltipLabel
-                tooltipContent={t("program-details-page:tooltip.volume-scale")}
-                labelText={t("asset-details:description.volume-scale")}
+                tooltipContent={t(
+                  "asset-details:description.tooltips.leverage"
+                )}
+                labelText={t("asset-details:description.leverage")}
               />
             }
           >
-            <PieContainerSmall
-              start={levelsParameters.volumeScaleMin}
-              end={levelsParameters.volumeScaleMax}
-              value={programDetails.volumeScale}
-            />
-          </StatisticItem>
+            <Leverage min={leverageMin} max={leverageMax} />
+          </LabeledValue>
+        </RowItem>
+      )}
+      {programDetails && (
+        <>
+          <RowItem xlarge bottomOffset>
+            <LabeledValue
+              label={
+                <TooltipLabel
+                  tooltipContent={t(
+                    "asset-details:description.tooltips.period"
+                  )}
+                  labelText={t("asset-details:description.period")}
+                />
+              }
+            >
+              <ProgramPeriodPie
+                condition={status !== STATUS.CLOSED}
+                loader={t("program-period.program-closed")}
+                start={programDetails.periodStarts}
+                end={programDetails.periodEnds}
+              />
+            </LabeledValue>
+          </RowItem>
+          <RowItem xlarge bottomOffset>
+            <LabeledValue
+              label={
+                <TooltipLabel
+                  tooltipContent={t("asset-details:description.tooltips.age")}
+                  labelText={t("asset-details:description.age")}
+                />
+              }
+            >
+              <PieContainerSmall
+                end={levelsParameters.programAgeMax}
+                value={programDetails.ageDays}
+                suffix={"days"}
+              />
+            </LabeledValue>
+          </RowItem>
+          <RowItem xlarge bottomOffset>
+            <LabeledValue
+              label={
+                <TooltipLabel
+                  tooltipContent={t(
+                    "program-details-page:tooltip.genesis-ratio"
+                  )}
+                  labelText={t("asset-details:description.genesis-ratio")}
+                />
+              }
+            >
+              <PieContainerSmall
+                start={levelsParameters.genesisRatioMin}
+                end={levelsParameters.genesisRatioMax}
+                value={programDetails.genesisRatio}
+              />
+            </LabeledValue>
+          </RowItem>
+          <RowItem xlarge bottomOffset>
+            <LabeledValue
+              label={
+                <TooltipLabel
+                  tooltipContent={t(
+                    "program-details-page:tooltip.investment-scale"
+                  )}
+                  labelText={t("asset-details:description.investment-scale")}
+                />
+              }
+            >
+              <PieContainerSmall
+                start={levelsParameters.investmentScaleMin}
+                end={levelsParameters.investmentScaleMax}
+                value={programDetails.investmentScale}
+              />
+            </LabeledValue>
+          </RowItem>
+          <RowItem xlarge bottomOffset>
+            <LabeledValue
+              label={
+                <TooltipLabel
+                  tooltipContent={t(
+                    "program-details-page:tooltip.volume-scale"
+                  )}
+                  labelText={t("asset-details:description.volume-scale")}
+                />
+              }
+            >
+              <PieContainerSmall
+                start={levelsParameters.volumeScaleMin}
+                end={levelsParameters.volumeScaleMax}
+                value={programDetails.volumeScale}
+              />
+            </LabeledValue>
+          </RowItem>
         </>
       )}
     </DetailsPerformanceData>

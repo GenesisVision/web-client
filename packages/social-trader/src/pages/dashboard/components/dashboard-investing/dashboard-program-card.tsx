@@ -1,7 +1,7 @@
 import AssetStatus from "components/asset-status/asset-status";
+import { LabeledValue } from "components/labeled-value/labeled-value";
 import { useToLink } from "components/link/link.helper";
 import ProgramPeriodPie from "components/program-period/program-period-pie/program-period-pie";
-import StatisticItem from "components/statistic-item/statistic-item";
 import TableCard, {
   TableCardTable,
   TableCardTableColumn
@@ -76,7 +76,7 @@ const _DashboardProgramCard: React.FC<Props> = ({
     >
       <TableCardTable>
         <TableCardTableColumn>
-          <StatisticItem
+          <LabeledValue
             label={
               <TooltipLabel
                 tooltipContent={t("dashboard-page:tooltips.investing.profit")}
@@ -92,10 +92,10 @@ const _DashboardProgramCard: React.FC<Props> = ({
               displayType="text"
               suffix={` ${requestCurrency}`}
             />
-          </StatisticItem>
+          </LabeledValue>
         </TableCardTableColumn>
         <TableCardTableColumn>
-          <StatisticItem
+          <LabeledValue
             label={
               <TooltipLabel
                 tooltipContent={t("dashboard-page:tooltips.investing.value")}
@@ -111,15 +111,15 @@ const _DashboardProgramCard: React.FC<Props> = ({
               suffix={` ${requestCurrency}`}
               displayType="text"
             />
-          </StatisticItem>
+          </LabeledValue>
         </TableCardTableColumn>
         <TableCardTableColumn>
-          <StatisticItem label={t("header-fields.period")}>
+          <LabeledValue label={t("header-fields.period")}>
             <ProgramPeriodPie
               start={program.periodStarts}
               end={program.periodEnds}
             />
-          </StatisticItem>
+          </LabeledValue>
         </TableCardTableColumn>
       </TableCardTable>
       <TableCardTable>

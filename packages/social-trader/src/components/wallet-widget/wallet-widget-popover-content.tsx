@@ -1,10 +1,11 @@
+import { LabeledValue } from "components/labeled-value/labeled-value";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import { PopoverContentCardBlock } from "components/popover/popover-card.block";
 import { PopoverContent } from "components/popover/popover-content";
-import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
-import StatisticItem from "components/statistic-item/statistic-item";
+import { Row } from "components/row/row";
 import { StatisticItemContainerBlock } from "components/statistic-item/statistic-item-container.block";
+import styles from "components/wallet-widget/wallet-widget.module.scss";
 import { WALLET_TOTAL_PAGE_ROUTE } from "pages/wallet/wallet.paths";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -23,20 +24,31 @@ const _WalletWidgetPopoverContent: React.FC<Props> = ({
   const [t] = useTranslation();
   return (
     <PopoverContent>
-      <PopoverContentCardBlock stretched>
-        <StatisticItemList vertical>
-          <StatisticItem label={t("wallet-widget.total-balance")}>
+      <PopoverContentCardBlock
+        className={styles["wallet-widget__popover"]}
+        stretched
+      >
+        <Row>
+          <LabeledValue label={t("wallet-widget.total-balance")}>
             {`${formatCurrencyValue(total, currency)} ${currency}`}
-          </StatisticItem>
-          <StatisticItem label={t("wallet-widget.available")}>
+          </LabeledValue>
+        </Row>
+        <Row>
+          <LabeledValue label={t("wallet-widget.available")}>
             {`${formatCurrencyValue(available, currency)} ${currency}`}
-          </StatisticItem>
-          <StatisticItem label={t("wallet-widget.invested")}>
+          </LabeledValue>
+        </Row>
+        <Row>
+          <LabeledValue label={t("wallet-widget.invested")}>
             {`${formatCurrencyValue(invested, currency)} ${currency}`}
-          </StatisticItem>
-          <StatisticItem label={t("wallet-widget.trading")}>
+          </LabeledValue>
+        </Row>
+        <Row>
+          <LabeledValue label={t("wallet-widget.trading")}>
             {`${formatCurrencyValue(trading, currency)} ${currency}`}
-          </StatisticItem>
+          </LabeledValue>
+        </Row>
+        <Row>
           <StatisticItemContainerBlock>
             <Link
               to={linkCreator(WALLET_TOTAL_PAGE_ROUTE)}
@@ -45,7 +57,7 @@ const _WalletWidgetPopoverContent: React.FC<Props> = ({
               {t("wallet-widget.details")} ›
             </Link>
           </StatisticItemContainerBlock>
-        </StatisticItemList>
+        </Row>
       </PopoverContentCardBlock>
     </PopoverContent>
   );

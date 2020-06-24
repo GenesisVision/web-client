@@ -1,19 +1,22 @@
 import GVColors from "components/gv-styles/gv-colors";
+import { LabeledValue } from "components/labeled-value/labeled-value";
+import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
 import { PieStatisticItem } from "components/statistic-item/pie-statistic-item";
-import StatisticItem from "components/statistic-item/statistic-item";
+import { Text } from "components/text/text";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import WalletDeposit from "modules/wallet-deposit/wallet-deposit";
 import DashboardStatisticPeriods from "pages/dashboard/components/dashboard-statistic/dashboard-statistic-periods";
-import DashboardValueItem from "pages/dashboard/components/dashboard-statistic/dashboard-value-item";
 import {
   $pieAvailableColor,
   $piePendingColor
 } from "pages/wallet/components/wallet-balance/wallet-balance-elements";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import NumberFormat from "react-number-format";
+import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 
 import { TDashboardTotal } from "../../dashboard.types";
@@ -32,17 +35,31 @@ const _DashboardTotal: React.FC<Props> = ({
   return (
     <div className={styles["dashboard-total__values"]}>
       <StatisticItemList>
-        <DashboardValueItem
-          big
-          label={
-            <TooltipLabel
-              tooltipContent={t("dashboard-page:tooltips.total.total-balance")}
-              labelText={t("dashboard-page:total.total")}
-            />
-          }
-          value={total}
-          currency={currency}
-        />
+        <RowItem>
+          <LabeledValue
+            label={
+              <TooltipLabel
+                tooltipContent={t(
+                  "dashboard-page:tooltips.total.total-balance"
+                )}
+                labelText={t("dashboard-page:total.total")}
+              />
+            }
+          >
+            <Text size={"xlarge"} weight={"bold"}>
+              {currency ? (
+                <NumberFormat
+                  value={formatCurrencyValue(total, currency)}
+                  thousandSeparator={" "}
+                  suffix={` ${currency}`}
+                  displayType="text"
+                />
+              ) : (
+                total
+              )}
+            </Text>
+          </LabeledValue>
+        </RowItem>
         <PieStatisticItem
           suffix={currency}
           color={GVColors.$primaryColor}
@@ -68,19 +85,21 @@ const _DashboardTotal: React.FC<Props> = ({
           total={total}
         />
         {!hasMoney && (
-          <StatisticItem>
+          <RowItem>
             <WalletDeposit />
-          </StatisticItem>
+          </RowItem>
         )}
       </StatisticItemList>
       {hasProfits && (
         <>
-          <h5>
-            <TooltipLabel
-              tooltipContent={t("dashboard-page:tooltips.total.performance")}
-              labelText={t("dashboard-page:total.performance")}
-            />
-          </h5>
+          <Row>
+            <h5>
+              <TooltipLabel
+                tooltipContent={t("dashboard-page:tooltips.total.performance")}
+                labelText={t("dashboard-page:total.performance")}
+              />
+            </h5>
+          </Row>
           <Row small>
             <DashboardStatisticPeriods
               data={profits}
