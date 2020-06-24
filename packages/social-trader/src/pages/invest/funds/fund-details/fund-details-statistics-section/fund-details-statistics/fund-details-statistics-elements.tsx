@@ -2,7 +2,6 @@ import { ChartDefaultPeriod } from "components/chart/chart-period/chart-period.h
 import { DetailsStatisticColumn } from "components/details/details-description-section/details-statistic-section/details-statistic/details-statistic-column";
 import { DetailsStatisticElement } from "components/details/details-description-section/details-statistic-section/details-statistic/details-statistic-element";
 import DetailsStatisticsElements from "components/details/details-description-section/details-statistic-section/details-statistic/details-statistics-elements";
-import styles from "components/details/details-description-section/details-statistic-section/details-statistic/details-statistics.module.scss";
 import { Text } from "components/text/text";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import { withBlurLoader } from "decorators/with-blur-loader";
@@ -23,7 +22,7 @@ const _FundDetailsStatisticsElements: React.FC<IFundDetailsStatisticsElementsPro
     <DetailsStatisticsElements
       Current={() => (
         <>
-          <div className={styles["details-statistics__vertical-info-block"]}>
+          <DetailsStatisticColumn>
             <DetailsStatisticElement
               label={
                 <TooltipLabel
@@ -32,7 +31,7 @@ const _FundDetailsStatisticsElements: React.FC<IFundDetailsStatisticsElementsPro
                 />
               }
             >
-              <Text weight={"bold"}>
+              <Text weight={"bold"} wrap={false}>
                 <NumberFormat
                   value={formatCurrencyValue(
                     statistic.balance,
@@ -55,8 +54,8 @@ const _FundDetailsStatisticsElements: React.FC<IFundDetailsStatisticsElementsPro
             >
               {localizedDate(statistic.creationDate)}
             </DetailsStatisticElement>
-          </div>
-          <div className={styles["details-statistics__vertical-info-block"]}>
+          </DetailsStatisticColumn>
+          <DetailsStatisticColumn>
             <DetailsStatisticElement
               label={
                 <TooltipLabel
@@ -71,7 +70,7 @@ const _FundDetailsStatisticsElements: React.FC<IFundDetailsStatisticsElementsPro
                 displayType="text"
               />
             </DetailsStatisticElement>
-          </div>
+          </DetailsStatisticColumn>
         </>
       )}
       Particular={() => (

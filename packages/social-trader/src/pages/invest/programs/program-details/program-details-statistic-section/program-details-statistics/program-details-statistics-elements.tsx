@@ -1,9 +1,7 @@
-import classNames from "classnames";
 import { ChartDefaultPeriod } from "components/chart/chart-period/chart-period.helpers";
 import { DetailsStatisticColumn } from "components/details/details-description-section/details-statistic-section/details-statistic/details-statistic-column";
 import { DetailsStatisticElement } from "components/details/details-description-section/details-statistic-section/details-statistic/details-statistic-element";
 import DetailsStatisticsElements from "components/details/details-description-section/details-statistic-section/details-statistic/details-statistics-elements";
-import styles from "components/details/details-description-section/details-statistic-section/details-statistic/details-statistics.module.scss";
 import { LabeledValue } from "components/labeled-value/labeled-value";
 import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import ProgramPeriodLine from "components/program-period/program-period-line/program-period-line";
@@ -99,36 +97,27 @@ const _ProgramDetailsStatisticsElements: React.FC<IProgramDetailsStatisticsEleme
               </RowItem>
             )}
           </Row>
-          <Row onlyOffset wide>
-            {!!statistic.lastPeriodStarts && (
-              <div className={styles["details-statistics__period"]}>
-                <Tooltip
-                  horizontal={HORIZONTAL_POPOVER_POS.LEFT}
-                  render={() => (
-                    <TooltipContent>
-                      {t("program-details-page:tooltip.period")}
-                    </TooltipContent>
-                  )}
-                >
-                  <span
-                    className={classNames(
-                      styles["details-statistics__label"],
-                      styles["tooltip__label"]
-                    )}
-                  >
-                    <Text muted>{t("asset-details:statistics.period")}</Text>
-                  </span>
-                </Tooltip>
-                <Row small onlyOffset>
-                  <ProgramPeriodLine
-                    start={statistic.lastPeriodStarts}
-                    end={statistic.lastPeriodEnds}
-                    status={status}
-                  />
-                </Row>
-              </div>
-            )}
-          </Row>
+          {!!statistic.lastPeriodStarts && (
+            <Row onlyOffset wide>
+              <Tooltip
+                horizontal={HORIZONTAL_POPOVER_POS.LEFT}
+                render={() => (
+                  <TooltipContent>
+                    {t("program-details-page:tooltip.period")}
+                  </TooltipContent>
+                )}
+              >
+                <Text muted>{t("asset-details:statistics.period")}</Text>
+              </Tooltip>
+              <Row small onlyOffset>
+                <ProgramPeriodLine
+                  start={statistic.lastPeriodStarts}
+                  end={statistic.lastPeriodEnds}
+                  status={status}
+                />
+              </Row>
+            </Row>
+          )}
         </>
       )}
       Particular={() => (
