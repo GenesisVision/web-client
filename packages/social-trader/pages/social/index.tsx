@@ -8,18 +8,19 @@ import { getSocialPageData } from "pages/social/social/services/social-page.serv
 import { SocialPage } from "pages/social/social/social.page";
 import React from "react";
 import { compose } from "redux";
+import { NextPageWithRedux } from "utils/types";
 
 interface Props {
   initFeedData?: PostItemsViewModel;
   data: SocialSummary;
 }
 
-const Page: NextPage<Props> = ({ initFeedData, data }) => {
+const Page: NextPageWithRedux<Props> = ({ initFeedData, data }) => {
   return <SocialPage initFeedData={initFeedData} data={data} />;
 };
 
-Page.getInitialProps = async () => {
-  const data = await getSocialPageData();
+Page.getInitialProps = async ctx => {
+  const data = await getSocialPageData(ctx.token);
   const initFeedData = await getGlobalFeed(initialOptions);
   return {
     initFeedData,
