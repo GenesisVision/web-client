@@ -5,13 +5,14 @@ import {
   SEARCH_ASSET_TYPE
 } from "components/conversation/conversation.types";
 import { IImageValue } from "components/form/input-image/input-image";
-import { EditablePost, RePost, UserFeedMode } from "gv-api-web";
+import { EditablePost, UserFeedMode } from "gv-api-web";
 import { api } from "services/api-client/swagger-custom-client";
+import Token from "services/api-client/token";
 import filesService from "services/file-service";
 import { getRandomBoolean } from "utils/helpers";
 
-export const getSocialMedia = (values?: Object) => {
-  return api.social().getSocialMedia(values);
+export const getSocialMedia = (values?: Object, token?: Token) => {
+  return api.social(token).getSocialMedia(values);
 };
 
 export const rePost = (values: {
@@ -86,12 +87,15 @@ export const remove = ({ id }: { id: string }) => {
   return api.social().deletePost(id);
 };
 
-export const getFeedMethod = (values?: Object) => {
-  return api.social().getFeed(values);
+export const getFeedMethod = (values?: Object, token?: Token) => {
+  return api.social(token).getFeed(values);
 };
 
-export const getGlobalFeed = (values?: Object): Promise<ConversationFeed> => {
-  return getFeedMethod(values);
+export const getGlobalFeed = (
+  values?: Object,
+  token?: Token
+): Promise<ConversationFeed> => {
+  return getFeedMethod(values, token);
 };
 
 export const getTopPosts = (values: Object): Promise<ConversationFeed> => {
