@@ -95,10 +95,8 @@ const _SocialPageFeedBlock: React.FC<Props> = ({ initData }) => {
         {tab === TABS.FEED && !isSearch && isAuthenticated && (
           <FeedContainer feedType={FEED_TYPE.PERSONAL} />
         )}
-        {(tab === TABS.HOT || !isAuthenticated) && !isSearch && (
-          <FeedContainer showTop />
-        )}
-        {(tab === TABS.LIVE || !isAuthenticated) && !isSearch && (
+        {tab === TABS.HOT && !isSearch && <FeedContainer showTop />}
+        {tab === TABS.LIVE && !isSearch && (
           <FeedContainer initData={initData} feedType={FEED_TYPE.ALL} />
         )}
       </Row>
