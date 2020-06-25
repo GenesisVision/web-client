@@ -21,7 +21,7 @@ const _AssetStatusLabel: React.FC<Props> = ({
   onClick
 }) => (
   <span className={getStatusClassName(status, className)} onClick={onClick}>
-    {t(`program-statuses.${status}`)}
+    {t(`asset-details:program-statuses.${status}`)}
   </span>
 );
 

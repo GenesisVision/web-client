@@ -345,13 +345,6 @@
     "left": "left",
     "program-closed": "Program is closed"
   },
-  "program-statuses": {
-    "Active": "Active",
-    "Investing": "Investing",
-    "Withdrawing": "Withdrawing",
-    "Ended": "Ended",
-    "Pending": "Pending"
-  },
   "withdraw-program": {
     "all-text": "You are withdrawing the entire amount that will be available in the program at the end of the period",
     "title": "Withdraw",

@@ -1,4 +1,11 @@
 {
+  "program-statuses": {
+    "Active": "Active",
+    "Investing": "Investing",
+    "Withdrawing": "Withdrawing",
+    "Ended": "Ended",
+    "Pending": "Pending"
+  },
   "request-line": {
     "success-message": "Request successfully canceled.",
     "cancel-header": "Cancel request",
