@@ -325,11 +325,6 @@
   "input-amount-field": {
     "label": "Amount"
   },
-  "unauth-popup": {
-    "fund": "You must be logged in to invest in a fund",
-    "program": "You must be logged in to invest in a program",
-    "follow": "You must be logged in to follow trades."
-  },
   "request-line": {
     "success-message": "Request successfully canceled.",
     "cancel-header": "Cancel request",
