@@ -101,11 +101,9 @@ export const UserDataInitialCount: IAssetsCountModel = {
 };
 
 export const fetchManagerAssetsCount = ({
-  ownerId,
-  isBetaTester
+  ownerId
 }: {
   ownerId: string;
-  isBetaTester: boolean;
 }): Promise<IAssetsCountModel> => {
   const investOptions = {
     subscriberId: ownerId,
@@ -118,9 +116,7 @@ export const fetchManagerAssetsCount = ({
     includeWithInvestments: true
   };
   return Promise.all([
-    isBetaTester
-      ? api.social().getFeed({ ...options, userId: ownerId })
-      : Promise.resolve({ items: [], total: 0 }),
+    api.social().getFeed({ ...options, userId: ownerId }),
     api.follows().getFollowAssets(options),
     api.programs().getPrograms(options),
     api.funds().getFunds(options),

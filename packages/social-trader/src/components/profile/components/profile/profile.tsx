@@ -9,11 +9,6 @@ import PublicInfo from "modules/public-info/public-info";
 import SocialLinksContainer from "pages/profile/social-links/components/social-links.container";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
-import {
-  betaTesterSelector,
-  isSocialBetaTester
-} from "reducers/header-reducer";
 
 const _Profile: React.FC<IProfileOwnProps> = ({
   info,
@@ -21,8 +16,6 @@ const _Profile: React.FC<IProfileOwnProps> = ({
   isPending
 }) => {
   const [t] = useTranslation();
-  const betaTester = useSelector(betaTesterSelector);
-  const isBetaTester = isSocialBetaTester(betaTester);
   return (
     <>
       <SettingsBlock label={t("profile-page.public-info")}>
@@ -36,27 +29,22 @@ const _Profile: React.FC<IProfileOwnProps> = ({
       <SettingsBlock label={t("profile-page.settings.profile-image")}>
         <ProfileImageContainer />
       </SettingsBlock>
-      {isBetaTester && (
-        <>
-          <SettingsBlock>
-            <PublicSelect />
-          </SettingsBlock>
-          <SettingsBlock label={t("profile-page.privacy.title")}>
-            <Privacy
-              data={{
-                [PRIVACY_FORM_VALUES.whoCanCommentOnMyPosts]:
-                  info.whoCanCommentOnMyPosts,
-                [PRIVACY_FORM_VALUES.whoCanViewCommentsOnMyPosts]:
-                  info.whoCanViewCommentsOnMyPosts,
-                [PRIVACY_FORM_VALUES.whoCanPostToMayWall]:
-                  info.whoCanPostToMayWall
-              }}
-              onUpdate={onUpdate}
-              isPending={isPending}
-            />
-          </SettingsBlock>
-        </>
-      )}
+      <SettingsBlock>
+        <PublicSelect />
+      </SettingsBlock>
+      <SettingsBlock label={t("profile-page.privacy.title")}>
+        <Privacy
+          data={{
+            [PRIVACY_FORM_VALUES.whoCanCommentOnMyPosts]:
+              info.whoCanCommentOnMyPosts,
+            [PRIVACY_FORM_VALUES.whoCanViewCommentsOnMyPosts]:
+              info.whoCanViewCommentsOnMyPosts,
+            [PRIVACY_FORM_VALUES.whoCanPostToMayWall]: info.whoCanPostToMayWall
+          }}
+          onUpdate={onUpdate}
+          isPending={isPending}
+        />
+      </SettingsBlock>
       <SocialLinksContainer />
     </>
   );

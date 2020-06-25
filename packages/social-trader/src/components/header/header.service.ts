@@ -3,25 +3,15 @@ import { updateCurrency } from "modules/currency-select/services/currency-select
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
-import {
-  betaTesterSelector,
-  headerSelector,
-  isSocialBetaTester
-} from "reducers/header-reducer";
+import { headerSelector } from "reducers/header-reducer";
 import { Dispatch } from "redux";
-import { filterBeta, mobileMenuItems, topMenuItems } from "routes/menu";
+import { mobileMenuItems, topMenuItems } from "routes/menu";
 
 import { fetchProfileHeaderInfoAction } from "./actions/header-actions";
 
 export const useMenuItems = () => {
-  const betaTester = useSelector(betaTesterSelector);
-  const isBetaTester = isSocialBetaTester(betaTester);
-  const showedMobileMenuItems = isBetaTester
-    ? mobileMenuItems
-    : mobileMenuItems.filter(filterBeta);
-  const showedTopMenuItems = isBetaTester
-    ? topMenuItems
-    : topMenuItems.filter(filterBeta);
+  const showedMobileMenuItems = mobileMenuItems;
+  const showedTopMenuItems = topMenuItems;
   return { showedMobileMenuItems, showedTopMenuItems };
 };
 
