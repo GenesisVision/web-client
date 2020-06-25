@@ -4,6 +4,12 @@ import {
   GV_PROGRAMS_ROUTE,
   INVEST_ROUTE
 } from "routes/invest.routes";
+import {
+  MEDIA_ROUTE,
+  MY_PROFILE_ROUTE,
+  SOCIAL_ROUTE,
+  USERS_ROUTE
+} from "routes/social.routes";
 import { TRADE_ROUTE } from "routes/trade.routes";
 
 export type TNavFooter = {
@@ -33,6 +39,24 @@ export const TERMS_ROUTE = "/terms";
 export const DOWNLOADS_ROUTE = "/downloads";
 
 export const navHeader: TNavHeader[] = [
+  {
+    name: "landing-page:links.invest",
+    href: SOCIAL_ROUTE,
+    subNav: [
+      {
+        name: "landing-page:links.follow",
+        href: USERS_ROUTE
+      },
+      {
+        name: "landing-page:links.programs",
+        href: MY_PROFILE_ROUTE
+      },
+      {
+        name: "landing-page:links.funds",
+        href: MEDIA_ROUTE
+      }
+    ]
+  },
   {
     name: "landing-page:links.invest",
     href: INVEST_ROUTE,

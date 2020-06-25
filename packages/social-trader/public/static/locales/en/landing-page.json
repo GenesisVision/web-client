@@ -25,6 +25,10 @@
   "links": {
     "genesis-vision": "genesis.vision",
     "title": "Go to {{title}} {{page}} page",
+    "social": "Social",
+    "users": "Users",
+    "my-profile": "My profile",
+    "media": "Media",
     "invest": "Invest",
     "follow": "Follow",
     "programs": "Programs",
