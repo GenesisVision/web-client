@@ -122,17 +122,16 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
   };
 
   const banner = composeProgramBannerUrl(url);
-
   return (
     <Page
       type={"article"}
       title={`${
         assetType === ASSET.FOLLOW
-          ? t("follows-page:title")
-          : t("programs-page:title")
+          ? t("follow-details-page:title")
+          : t("program-details-page:title")
       } - ${title}`}
       description={`${assetType} ${description.publicInfo.title} - ${description.publicInfo.description}`}
-      previewImage={logoUrl}
+      previewImage={banner}
       schemas={[getSchema(description)]}
     >
       <DetailsDescriptionSection
