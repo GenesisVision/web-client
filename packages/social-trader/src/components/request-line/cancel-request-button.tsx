@@ -13,7 +13,7 @@ const _CancelRequestButton: React.FC<{
   const [t] = useTranslation();
   const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
   const { sendRequest, isPending: disabled } = useApiRequest({
-    successMessage: "request-line.success-message",
+    successMessage: "asset-details:request-line.success-message",
     request: (id: string) => api.investments().cancelRequest(id),
     middleware: [onApplyCancelRequest, setClosePopup]
   });
@@ -35,8 +35,8 @@ const _CancelRequestButton: React.FC<{
         onClose={setClosePopup}
         onCancel={setClosePopup}
         onApply={handleApplyCancelRequest}
-        header={t("request-line.cancel-header")}
-        body={t("request-line.cancel-body")}
+        header={t("asset-details:request-line.cancel-header")}
+        body={t("asset-details:request-line.cancel-body")}
         applyButtonText={t("buttons.confirm")}
         disabled={disabled}
       />

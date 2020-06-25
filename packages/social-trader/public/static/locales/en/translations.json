@@ -325,11 +325,6 @@
   "input-amount-field": {
     "label": "Amount"
   },
-  "request-line": {
-    "success-message": "Request successfully canceled.",
-    "cancel-header": "Cancel request",
-    "cancel-body": "Please confirm that you want to cancel the request."
-  },
   "active": {
     "chart": "Chart",
     "about": "About"
