@@ -13,6 +13,7 @@ interface Props extends IPostListContainerProps {
 }
 
 const _PostListWithInput: React.FC<Props> = ({
+  initData,
   inputPlaceholder,
   showInput,
   id,
@@ -36,7 +37,12 @@ const _PostListWithInput: React.FC<Props> = ({
         </Row>
       )}
       <Row onlyOffset>
-        <PostListContainer reset={isReset} id={id} fetchMethod={fetchMethod} />
+        <PostListContainer
+          initData={initData}
+          reset={isReset}
+          id={id}
+          fetchMethod={fetchMethod}
+        />
       </Row>
     </div>
   );

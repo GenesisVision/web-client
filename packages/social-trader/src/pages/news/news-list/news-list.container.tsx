@@ -3,13 +3,18 @@ import {
   SkipTake,
   TAKE_COUNT
 } from "components/notifications/components/notifications.helpers";
+import { MediaPostItemsViewModel } from "gv-api-web";
 import useApiRequest, { API_REQUEST_STATUS } from "hooks/api-request.hook";
 import useIsOpen from "hooks/is-open.hook";
 import { NewsList } from "pages/news/news-list/news-list";
 import React, { useCallback, useEffect, useState } from "react";
 import { postponeFunc } from "utils/hook-form.helpers";
 
-export interface INewsListContainerProps {
+export interface INewsListContainerInitData {
+  initData: MediaPostItemsViewModel;
+}
+
+export interface INewsListContainerProps extends INewsListContainerInitData {
   reset?: boolean;
   fetchMethod: (values: Object) => Promise<any>;
   id?: string;
@@ -27,13 +32,15 @@ export const calculateOptions = (
 };
 
 const _NewsListContainer: React.FC<INewsListContainerProps> = ({
+  initData,
   reset,
   id,
   fetchMethod
 }) => {
   const [isUpdatingPage, updatePage, setNotUpdatingPage] = useIsOpen();
-  const [options, setOptions] = useState(initialOptions);
+  const [options, setOptions] = useState({ ...initialOptions, skip: 10 });
   const { data, sendRequest, status } = useApiRequest({
+    defaultData: initData,
     request: values => fetchMethod(values)
   });
   const hasMore = data ? data.total > options.skip : false;
