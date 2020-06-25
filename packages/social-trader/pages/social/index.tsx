@@ -21,7 +21,7 @@ const Page: NextPageWithRedux<Props> = ({ initFeedData, data }) => {
 
 Page.getInitialProps = async ctx => {
   const data = await getSocialPageData(ctx.token);
-  const initFeedData = await getGlobalFeed(initialOptions);
+  const initFeedData = await getGlobalFeed(initialOptions, ctx.token);
   return {
     initFeedData,
     data,
