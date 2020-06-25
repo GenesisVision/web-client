@@ -163,12 +163,15 @@ export const parseToTsx = ({
   text: string;
 }): JSX.Element | string => {
   if (!tags) return <>{text}</>;
-  const commonRegex = /#[a-zA-Z]+|@tag-[\d]+/g;
+  const commonRegex = /#[a-zA-Z0-9]+|@tag-[\d]+/g;
   const tagStrings = text.match(commonRegex) || [];
   const parsedTags = tagStrings
     .map(tag => {
-      const tagNumber = tag.match(/[\d]+/g);
-      const tagSymbol = tag.match(/[a-zA-Z]+/g);
+      const tagItem = tag.match(/@tag-[\d]+/g);
+      const tagNumber = tagItem?.length
+        ? tagItem[0].match(/[\d]+/g)
+        : undefined;
+      const tagSymbol = tag.match(/[a-zA-Z0-9]+/g);
       return tagNumber ? +tagNumber[0] : tagSymbol![0];
     })
     .map((tagId: number | string) => {
