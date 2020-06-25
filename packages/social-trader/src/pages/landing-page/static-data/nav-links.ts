@@ -40,19 +40,19 @@ export const DOWNLOADS_ROUTE = "/downloads";
 
 export const navHeader: TNavHeader[] = [
   {
-    name: "landing-page:links.invest",
+    name: "landing-page:links.social",
     href: SOCIAL_ROUTE,
     subNav: [
       {
-        name: "landing-page:links.follow",
+        name: "landing-page:links.users",
         href: USERS_ROUTE
       },
       {
-        name: "landing-page:links.programs",
+        name: "landing-page:links.my-profile",
         href: MY_PROFILE_ROUTE
       },
       {
-        name: "landing-page:links.funds",
+        name: "landing-page:links.media",
         href: MEDIA_ROUTE
       }
     ]
