@@ -30,6 +30,7 @@ Page.getInitialProps = async ctx => {
     namespacesRequired: [
       "transfer",
       "asset-details",
+      "follow-details-page",
       "program-details-page",
       "about-levels-page"
     ]

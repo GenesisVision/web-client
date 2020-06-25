@@ -4,7 +4,6 @@ import { useToLink } from "components/link/link.helper";
 import { PopoverContentCardBlock } from "components/popover/popover-card.block";
 import { PopoverContent } from "components/popover/popover-content";
 import { Row } from "components/row/row";
-import { StatisticItemContainerBlock } from "components/statistic-item/statistic-item-container.block";
 import styles from "components/wallet-widget/wallet-widget.module.scss";
 import { WALLET_TOTAL_PAGE_ROUTE } from "pages/wallet/wallet.paths";
 import React from "react";
@@ -49,14 +48,9 @@ const _WalletWidgetPopoverContent: React.FC<Props> = ({
           </LabeledValue>
         </Row>
         <Row>
-          <StatisticItemContainerBlock>
-            <Link
-              to={linkCreator(WALLET_TOTAL_PAGE_ROUTE)}
-              onClick={clearAnchor}
-            >
-              {t("wallet-widget.details")} ›
-            </Link>
-          </StatisticItemContainerBlock>
+          <Link to={linkCreator(WALLET_TOTAL_PAGE_ROUTE)} onClick={clearAnchor}>
+            {t("wallet-widget.details")} ›
+          </Link>
         </Row>
       </PopoverContentCardBlock>
     </PopoverContent>

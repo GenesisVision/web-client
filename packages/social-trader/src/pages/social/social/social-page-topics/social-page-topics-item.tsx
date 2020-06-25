@@ -1,6 +1,6 @@
+import { LabeledValue } from "components/labeled-value/labeled-value";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
-import StatisticItemInner from "components/statistic-item/statistic-item-inner";
 import {
   SocialSearchContext,
   SocialSearchInitialState
@@ -36,14 +36,10 @@ const _SocialPageTopicsItem: React.FC<Props> = ({
       <Row onClick={handleClick}>{hashTag}</Row>
       <Row small>
         <RowItem wide>
-          <StatisticItemInner label={t("View")}>
-            {impressionsCount}
-          </StatisticItemInner>
+          <LabeledValue label={t("View")}>{impressionsCount}</LabeledValue>
         </RowItem>
         <RowItem wide>
-          <StatisticItemInner label={t("Discuss")}>
-            {discussCount}
-          </StatisticItemInner>
+          <LabeledValue label={t("Discuss")}>{discussCount}</LabeledValue>
         </RowItem>
       </Row>
     </div>

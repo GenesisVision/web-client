@@ -5,7 +5,6 @@ import { LabeledValue } from "components/labeled-value/labeled-value";
 import { ResponsiveContainer } from "components/responsive-container/responsive-container";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
-import StatisticItemInner from "components/statistic-item/statistic-item-inner";
 import { Text } from "components/text/text";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import { SIZES } from "constants/constants";

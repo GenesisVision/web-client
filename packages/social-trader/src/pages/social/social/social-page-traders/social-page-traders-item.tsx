@@ -1,8 +1,8 @@
 import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
 import { AvatarWithName } from "components/avatar/avatar-with-name/avatar-with-name";
+import { LabeledValue } from "components/labeled-value/labeled-value";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
-import StatisticItemInner from "components/statistic-item/statistic-item-inner";
 import {
   SocialSearchContext,
   SocialSearchInitialState
@@ -59,14 +59,10 @@ const _SocialPageTradersItem: React.FC<Props> = ({
       </Row>
       <Row>
         <RowItem wide>
-          <StatisticItemInner label={t("Profit")}>
-            {profit} %
-          </StatisticItemInner>
+          <LabeledValue label={t("Profit")}>{profit} %</LabeledValue>
         </RowItem>
         <RowItem wide>
-          <StatisticItemInner label={t("Investors")}>
-            {investorsCount}
-          </StatisticItemInner>
+          <LabeledValue label={t("Investors")}>{investorsCount}</LabeledValue>
         </RowItem>
       </Row>
     </div>
