@@ -355,20 +355,6 @@
     "left": "left",
     "program-closed": "Program is closed"
   },
-  "chart-period": {
-    "day-short": "1D",
-    "day": "a Day",
-    "week-short": "1W",
-    "week": "a Week",
-    "month-short": "1M",
-    "month": "a Month",
-    "quarter-short": "3M",
-    "quarter": "a Quarter",
-    "year-short": "1Y",
-    "year": "a Year",
-    "all-short": "All",
-    "all": "All Time"
-  },
   "input-image": {
     "drop-files": "Drop files...",
     "drag-or-click": "Drag the image here or click ",

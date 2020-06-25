@@ -134,7 +134,7 @@ describe("Program details - chart", () => {
     });
     describe("Periods", () => {
       const getPeriodSelector = (period: TChartPeriod): string =>
-        testT(`chart-period.${ChartPeriodType[period]}-short`);
+        testT(`asset-details:chart-period.${ChartPeriodType[period]}-short`);
       it("Day", async () => {
         const {
           getStatisticsItemValue,

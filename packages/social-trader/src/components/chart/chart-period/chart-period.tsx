@@ -35,7 +35,9 @@ const _ChartPeriod: React.FC<Props> = ({ period, onChange }) => {
           {ChartPeriodTypeValues.map(period => (
             <RowItem>
               <GVButton
-                testId={t(`chart-period.${ChartPeriodType[period]}-short`)}
+                testId={t(
+                  `asset-details:chart-period.${ChartPeriodType[period]}-short`
+                )}
                 noPadding
                 key={period}
                 className={classNames(styles["chart-period__period-item"], {
@@ -46,7 +48,9 @@ const _ChartPeriod: React.FC<Props> = ({ period, onChange }) => {
                 color="secondary"
                 disabled={type === period}
               >
-                {t(`chart-period.${ChartPeriodType[period]}-short`)}
+                {t(
+                  `asset-details:chart-period.${ChartPeriodType[period]}-short`
+                )}
               </GVButton>
             </RowItem>
           ))}
