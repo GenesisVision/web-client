@@ -6,6 +6,7 @@ import {
   SearchInFeedValues
 } from "components/conversation/conversation.service";
 import { PostListWithInput } from "components/conversation/post-list/post-list-with-input";
+import { IPostListContainerInitData } from "components/conversation/post-list/post-list.container";
 import React, { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
@@ -15,7 +16,7 @@ export enum FEED_TYPE {
   PERSONAL = "PERSONAL"
 }
 
-interface Props {
+interface Props extends IPostListContainerInitData {
   showTop?: boolean;
   showInput?: boolean;
   searchValue?: SearchInFeedValues;
@@ -34,6 +35,7 @@ const getFeedMethod = (
 };
 
 const _FeedContainer: React.FC<Props> = ({
+  initData,
   showTop,
   searchValue,
   showInput,
@@ -46,6 +48,7 @@ const _FeedContainer: React.FC<Props> = ({
   );
   return (
     <PostListWithInput
+      initData={initData}
       key={JSON.stringify(searchValue)}
       fetchMethod={fetchMethod()}
       showInput={isAuthenticated && showInput}

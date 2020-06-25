@@ -36,7 +36,7 @@ const InfiniteScrollPostList: React.FC<{
 });
 
 const _PostList: React.FC<Props> = ({ skip, hasMore, data, onScroll }) => {
-  const [mergedPosts, setMergedPosts] = useState<ConversationPost[]>([]);
+  const [mergedPosts, setMergedPosts] = useState<ConversationPost[]>(data);
 
   useEffect(() => {
     if (skip === 0) setMergedPosts(data);
@@ -47,6 +47,8 @@ const _PostList: React.FC<Props> = ({ skip, hasMore, data, onScroll }) => {
       setMergedPosts([...mergedPosts, ...clearData]);
     }
   }, [data]);
+
+  if (!mergedPosts.length) return null;
 
   return (
     <InfiniteScrollPostList
