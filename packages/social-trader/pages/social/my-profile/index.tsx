@@ -19,7 +19,10 @@ const Page: NextPageWithRedux<Props> = ({ profile }) => {
 Page.getInitialProps = async ctx => {
   const { id } = await getHeader(ctx.token);
   const profile = await api.users(ctx.token).getUserProfile(id as string);
-  return { namespacesRequired: ["conversation", "manager-page"], profile };
+  return {
+    namespacesRequired: ["form-fields", "conversation", "manager-page"],
+    profile
+  };
 };
 
 export default compose(withDefaultLayout, withPrivateRoute)(Page);

@@ -10,7 +10,7 @@ const Page: NextPage = () => {
 };
 
 Page.getInitialProps = async () => ({
-  namespacesRequired: ["asset-settings", "profile-page"]
+  namespacesRequired: ["form-fields", "asset-settings", "profile-page"]
 });
 
 export default compose(withDefaultLayout, withPrivateRoute)(Page);

@@ -23,7 +23,7 @@ Page.getInitialProps = async ctx => {
   return {
     initFeedData,
     data,
-    namespacesRequired: ["conversation", "social-page"]
+    namespacesRequired: ["form-fields", "conversation", "social-page"]
   };
 };
 

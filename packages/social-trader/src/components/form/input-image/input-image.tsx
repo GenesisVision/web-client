@@ -67,14 +67,14 @@ const _InputImage: React.FC<IInputImageProps> = ({
                 styles["input-image__text--big"]
               )}
             >
-              {t("input-image.drag-or-click")}
+              {t("form-fields:input-image.drag-or-click")}
               <span
                 className={styles["input-image__text-upload"]}
                 onClick={open}
               >
-                {t("input-image.upload")}
+                {t("form-fields:input-image.upload")}
               </span>
-              {t("input-image.to-browse")}
+              {t("form-fields:input-image.to-browse")}
             </p>
             <p
               className={classNames(
@@ -83,7 +83,7 @@ const _InputImage: React.FC<IInputImageProps> = ({
               )}
               onClick={open}
             >
-              {t("input-image.tap-to-upload")}
+              {t("form-fields:input-image.tap-to-upload")}
             </p>
           </div>
         )}
