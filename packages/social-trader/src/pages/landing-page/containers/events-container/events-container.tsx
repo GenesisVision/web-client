@@ -10,24 +10,20 @@ interface Props {
   events: PlatformEvent[];
 }
 
-const _FollowsContainer: React.FC<Props> = ({ events }) => {
+const _EventsContainer: React.FC<Props> = ({ events }) => {
   const { t } = useTranslation();
   if (!events.length) return null;
   return (
-    <section className="home__section home__section--bg-white">
-      <div className="home__container">
-        <div className={styles["events-container"]}>
-          <h2 className={styles["events-container__title"]}>
-            {t("landing-page:events.title")}
-          </h2>
-          <EventsList
-            events={events}
-            className={styles["events-container__list"]}
-          />
-        </div>
-      </div>
-    </section>
+    <div className={styles["events-container"]}>
+      <h2 className={styles["events-container__title"]}>
+        {t("landing-page:events.title")}
+      </h2>
+      <EventsList
+        events={events}
+        className={styles["events-container__list"]}
+      />
+    </div>
   );
 };
-const EventsContainer = React.memo(_FollowsContainer);
+const EventsContainer = React.memo(_EventsContainer);
 export default EventsContainer;

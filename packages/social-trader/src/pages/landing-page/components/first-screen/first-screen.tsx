@@ -35,14 +35,12 @@ const _FirstScreen: React.FC<Props> = ({ news }) => {
     }
   }, [effectiveConnectionType, slides]);
   return (
-    <section className="home__section home__section--first-screen">
-      <div className="home__container">
-        {renderSlider()}
-        <div className="home__grid-row home__grid-row--mob-wider">
-          <NewsList className="home__grid-item" newsItems={news} />
-        </div>
+    <>
+      {renderSlider()}
+      <div className="home__grid-row home__grid-row--mob-wider">
+        <NewsList className="home__grid-item" newsItems={news} />
       </div>
-    </section>
+    </>
   );
 };
 
