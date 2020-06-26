@@ -1,6 +1,5 @@
 import { getPost } from "components/conversation/conversation.service";
 import { ConversationPost } from "components/conversation/conversation.types";
-import withBetaTesting from "decorators/with-beta-testing";
 import withDefaultLayout from "decorators/with-default-layout";
 import { NextPage } from "next";
 import { PostPage } from "pages/posts/post.page";
@@ -15,7 +14,7 @@ Page.getInitialProps = async ctx => {
   const { id } = ctx.query;
   const post = await getPost({ id: id as string });
   return {
-    namespacesRequired: ["conversation"],
+    namespacesRequired: ["form-fields", "conversation"],
     post
   };
 };

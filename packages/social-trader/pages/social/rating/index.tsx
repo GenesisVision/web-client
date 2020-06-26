@@ -1,4 +1,3 @@
-import withBetaTesting from "decorators/with-beta-testing";
 import withDefaultLayout from "decorators/with-default-layout";
 import { NextPage } from "next";
 import { RatingPage } from "pages/rating/rating.page";
@@ -10,7 +9,7 @@ const Page: NextPage = () => {
 };
 
 Page.getInitialProps = async () => ({
-  namespacesRequired: ["conversation"]
+  namespacesRequired: ["form-fields", "conversation"]
 });
 
-export default compose(withDefaultLayout, withBetaTesting("Social"))(Page);
+export default compose(withDefaultLayout)(Page);

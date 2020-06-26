@@ -18,14 +18,14 @@ export const FeedPage: React.FC = () => {
   const [t] = useTranslation();
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   const { tab, setTab } = useTab<TABS>(TABS.MY);
-  const title = t(`news-page.title`);
+  const title = t(`news-page:title`);
   return (
     <Page title={title}>
       {isAuthenticated && (
         <Row>
           <GVTabs value={tab} onChange={setTab}>
-            <GVTab value={TABS.MY} label={t("news-page.tabs.my")} />
-            <GVTab value={TABS.ALL} label={t("news-page.tabs.all")} />
+            <GVTab value={TABS.MY} label={t("news-page:tabs.my")} />
+            <GVTab value={TABS.ALL} label={t("news-page:tabs.all")} />
           </GVTabs>
         </Row>
       )}

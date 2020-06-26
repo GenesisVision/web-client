@@ -17,7 +17,13 @@ const _PostButtons: React.FC<Props> = ({
   return (
     <Row large>
       <RowItem>
-        <Share post={post} onApply={onApply} id={id} count={rePostsCount} />
+        <Share
+          disable={!canLike}
+          post={post}
+          onApply={onApply}
+          id={id}
+          count={rePostsCount}
+        />
       </RowItem>
       <RowItem>
         <LikeContainer

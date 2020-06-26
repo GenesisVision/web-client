@@ -3,6 +3,7 @@
 
 .comment {
   @include adaptive-padding(top, $padding-xsmall);
+  @include adaptive-padding(left, $padding-small);
   border-top: 1px solid $border-color;
   flex-direction: column;
   &__message,

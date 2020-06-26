@@ -25,6 +25,7 @@ ProgramSettings.getInitialProps = async ctx => {
   });
   return {
     namespacesRequired: [
+      "form-fields",
       "create-program-page",
       "create-account",
       "asset-details",

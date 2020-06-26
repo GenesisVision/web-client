@@ -325,16 +325,6 @@
   "input-amount-field": {
     "label": "Amount"
   },
-  "unauth-popup": {
-    "fund": "You must be logged in to invest in a fund",
-    "program": "You must be logged in to invest in a program",
-    "follow": "You must be logged in to follow trades."
-  },
-  "request-line": {
-    "success-message": "Request successfully canceled.",
-    "cancel-header": "Cancel request",
-    "cancel-body": "Please confirm that you want to cancel the request."
-  },
   "active": {
     "chart": "Chart",
     "about": "About"
@@ -354,34 +344,6 @@
     "period-ends": "Period ends",
     "left": "left",
     "program-closed": "Program is closed"
-  },
-  "chart-period": {
-    "day-short": "1D",
-    "day": "a Day",
-    "week-short": "1W",
-    "week": "a Week",
-    "month-short": "1M",
-    "month": "a Month",
-    "quarter-short": "3M",
-    "quarter": "a Quarter",
-    "year-short": "1Y",
-    "year": "a Year",
-    "all-short": "All",
-    "all": "All Time"
-  },
-  "input-image": {
-    "drop-files": "Drop files...",
-    "drag-or-click": "Drag the image here or click ",
-    "upload": "upload",
-    "to-browse": " to browse your files",
-    "tap-to-upload": "Tap to upload the image"
-  },
-  "program-statuses": {
-    "Active": "Active",
-    "Investing": "Investing",
-    "Withdrawing": "Withdrawing",
-    "Ended": "Ended",
-    "Pending": "Pending"
   },
   "withdraw-program": {
     "all-text": "You are withdrawing the entire amount that will be available in the program at the end of the period",

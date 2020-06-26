@@ -86,7 +86,7 @@ export const DropZoneWrapper: React.FC<IDropZoneWrapperProps> = ({
       <input {...getInputProps()} />
       {isDragAccept && (
         <div className={styles["input-image__dropzone-helper"]}>
-          {t("input-image.drop-files")}
+          {t("form-fields:input-image.drop-files")}
         </div>
       )}
       {isDragReject && (

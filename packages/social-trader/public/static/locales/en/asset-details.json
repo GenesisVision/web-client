@@ -1,4 +1,35 @@
 {
+  "program-statuses": {
+    "Active": "Active",
+    "Investing": "Investing",
+    "Withdrawing": "Withdrawing",
+    "Ended": "Ended",
+    "Pending": "Pending"
+  },
+  "request-line": {
+    "success-message": "Request successfully canceled.",
+    "cancel-header": "Cancel request",
+    "cancel-body": "Please confirm that you want to cancel the request."
+  },
+  "unauth-popup": {
+    "fund": "You must be logged in to invest in a fund",
+    "program": "You must be logged in to invest in a program",
+    "follow": "You must be logged in to follow trades."
+  },
+  "chart-period": {
+    "day-short": "1D",
+    "day": "a Day",
+    "week-short": "1W",
+    "week": "a Week",
+    "month-short": "1M",
+    "month": "a Month",
+    "quarter-short": "3M",
+    "quarter": "a Quarter",
+    "year-short": "1Y",
+    "year": "a Year",
+    "all-short": "All",
+    "all": "All Time"
+  },
   "description": {
     "tooltips": {
       "currency": "Base currency of the program",
