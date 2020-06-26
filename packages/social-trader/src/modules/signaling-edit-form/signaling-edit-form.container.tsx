@@ -19,7 +19,8 @@ const _SignalingEditFormContainer: React.FC<Props> = ({
   const { sendRequest: editSignalRequest, errorMessage } = useApiRequest({
     middleware: [onApply],
     request: editSignal,
-    successMessage: "program-edit-signal.success-alert-message"
+    successMessage:
+      "follow-details-page:program-edit-signal.success-alert-message"
   });
   const changeSignaling = useCallback(
     ({ volumeFee, successFee }: IProgramSignalFormValues) =>

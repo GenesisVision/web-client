@@ -480,8 +480,5 @@
     "withdrawing": "Withdrawing",
     "wallet": "Wallet",
     "success-alert-message": "Withdrawal request sent successfully."
-  },
-  "program-edit-signal": {
-    "success-alert-message": "Program has been edited"
   }
 }

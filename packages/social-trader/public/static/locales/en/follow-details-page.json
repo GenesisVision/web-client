@@ -1,4 +1,7 @@
 {
+  "program-edit-signal": {
+    "success-alert-message": "Program has been edited"
+  },
   "current-investment": {
     "title": "Subscription details",
     "fields": {
