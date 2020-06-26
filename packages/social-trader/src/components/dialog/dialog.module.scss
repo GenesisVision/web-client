@@ -59,7 +59,7 @@
 
   &__subtitle {
     @include font-size($font-size-common);
-    font-weight: 300;
+    font-weight: 400;
     letter-spacing: 0.4px;
     color: #e8eff3;
   }
@@ -76,7 +76,7 @@
 .dialog-list {
   &__item {
     @include font-size($font-size-paragraph);
-    font-weight: 300;
+    font-weight: 400;
     justify-content: space-between;
   }
 }

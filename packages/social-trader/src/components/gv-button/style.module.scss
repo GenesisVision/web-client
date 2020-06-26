@@ -101,7 +101,7 @@ $default-padding: $padding-xxsmall $padding-small;
       @include height($btn-height-small);
     }
     letter-spacing: 0.3px;
-    font-weight: 300;
+    font-weight: 400;
     box-sizing: border-box;
     padding: 0;
   }
@@ -115,7 +115,7 @@ $default-padding: $padding-xxsmall $padding-small;
       @include horizontal-paddings($padding-xxsmall);
     }
     letter-spacing: 0.3px;
-    font-weight: 300;
+    font-weight: 400;
     box-sizing: border-box;
   }
 
