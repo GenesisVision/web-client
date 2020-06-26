@@ -9,6 +9,7 @@ export const HomeContainer: React.FC = ({ children }) => {
 
 export const HomeSection: React.FC<HomeSectionProps> = ({
   children,
+  id,
   bgColor,
   isFirst,
   isLast,
@@ -16,6 +17,7 @@ export const HomeSection: React.FC<HomeSectionProps> = ({
 }) => {
   return (
     <section
+      id={id}
       className={classNames(styles["home__section"], {
         [styles["home__section--bg-gray"]]: bgColor === "gray",
         [styles["home__section--bg-white"]]: bgColor === "white",
@@ -30,6 +32,7 @@ export const HomeSection: React.FC<HomeSectionProps> = ({
 };
 
 interface HomeSectionProps {
+  id?: string;
   bgColor?: "gray" | "white";
   isFirst?: boolean;
   isLast?: boolean;

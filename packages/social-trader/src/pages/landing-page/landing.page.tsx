@@ -7,7 +7,10 @@ import {
 } from "gv-api-web";
 import { useTranslation } from "i18n";
 import FirstScreen from "pages/landing-page/components/first-screen/first-screen";
-import { HomeContainer } from "pages/landing-page/components/home/home.blocks";
+import {
+  HomeContainer,
+  HomeSection
+} from "pages/landing-page/components/home/home.blocks";
 import AdvantagesContainer from "pages/landing-page/containers/advantages-container/advantages-container";
 import BrokersContainer from "pages/landing-page/containers/brokers-container/brokers-container";
 import DownloadContainer from "pages/landing-page/containers/download-container/download-container";
@@ -25,8 +28,6 @@ import {
 import { useUtm } from "pages/landing-page/utils";
 import React from "react";
 
-import styles from "./home.module.scss";
-
 const _LandingPage: React.FC<Props> = ({
   programs,
   funds,
@@ -42,43 +43,45 @@ const _LandingPage: React.FC<Props> = ({
       title={t("landing-page:title")}
     >
       <main>
-        <section className="home__section home__section--first-screen">
+        <HomeSection isFirst>
           <HomeContainer>
             <FirstScreen news={news} />
           </HomeContainer>
-        </section>
-        <section className="home__section home__section--bg-white">
+        </HomeSection>
+        <HomeSection bgColor="white">
           <HomeContainer>
             <EventsContainer events={events} />
           </HomeContainer>
-        </section>
-        <section className="home__section home__section--bg-gray">
+        </HomeSection>
+        <HomeSection bgColor="gray">
           <HomeContainer>
             <FollowsContainer follows={follows.items} />
           </HomeContainer>
-        </section>
+        </HomeSection>
         <section className="home__section">
           <HomeContainer>
             <ProgramsContainer programs={programs.items} />
           </HomeContainer>
         </section>
-        <section className="home__section home__section--bg-gray">
+        <HomeSection bgColor="gray">
           <HomeContainer>
             <FundsContainer funds={funds.items} />
           </HomeContainer>
-        </section>
-        <section id="info" className="home__section home__section--bg-white">
+        </HomeSection>
+        <HomeSection id="info" bgColor="white">
           <HomeContainer>
             <InfoContainer />
           </HomeContainer>
-        </section>
-        <section className="home__section home__section--bg-gray">
+        </HomeSection>
+        <HomeSection bgColor="gray">
           <HomeContainer>
             <DownloadContainer />
           </HomeContainer>
-        </section>
-        <AdvantagesContainer />
-        <section className="home__section home__section--bg-gray home__section--horizontal-padding">
+        </HomeSection>
+        <HomeSection bgColor="white">
+          <AdvantagesContainer />
+        </HomeSection>
+        <HomeSection bgColor="gray" hasPadding>
           <HomeContainer>
             <BrokersContainer
               brokersInfo={brokersInfo}
@@ -86,12 +89,12 @@ const _LandingPage: React.FC<Props> = ({
               title={t("landing-page:brokers.title")}
             />
           </HomeContainer>
-        </section>
-        <section className="home__section home__section--last-screen">
+        </HomeSection>
+        <HomeSection isLast>
           <HomeContainer>
             <SocialContainer />
           </HomeContainer>
-        </section>
+        </HomeSection>
       </main>
     </Layout>
   );

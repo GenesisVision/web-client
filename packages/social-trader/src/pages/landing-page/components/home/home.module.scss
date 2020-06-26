@@ -54,6 +54,10 @@
     color: $main-color;
     position: relative;
 
+    @include media-breakpoint-desktop() {
+      overflow: hidden;
+    }
+
     &--first-screen {
       @include media-breakpoint-tablet() {
         min-height: 670px;
