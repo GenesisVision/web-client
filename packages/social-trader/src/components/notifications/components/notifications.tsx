@@ -1,6 +1,4 @@
-import classNames from "classnames";
 import Chip, { CHIP_TYPE } from "components/chip/chip";
-import { Icon } from "components/icon/icon";
 import { RingIcon } from "components/icon/ring-icon";
 import InfinityScroll from "components/infinity-scroll/inifinity-scroll";
 import Link from "components/link/link";
@@ -22,6 +20,7 @@ import { useTranslation } from "react-i18next";
 
 import { NOTIFICATIONS_ROUTE } from "../notifications.routes";
 import styles from "./notifications.module.scss";
+import { SettingsIcon } from "./settings-icon/settings-icon";
 
 const _Notifications: React.FC<Props> = ({
   isPending,
@@ -86,14 +85,7 @@ const _Notifications: React.FC<Props> = ({
             to={linkCreator(NOTIFICATIONS_ROUTE)}
             onClick={closeNotifications}
           >
-            <div
-              className={classNames(
-                styles["profile-avatar"],
-                styles["notifications__link"]
-              )}
-            >
-              <Icon type={"controls"} />
-            </div>
+            <SettingsIcon />
           </Link>
         </Row>
         <div className={styles["notifications__content"]}>

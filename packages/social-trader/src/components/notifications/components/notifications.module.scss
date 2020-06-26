@@ -8,12 +8,6 @@ $ring-icon-size: 32px;
 $avatar-size: 32px;
 
 .notifications {
-  &__link {
-    &:hover {
-      background-color: lighten($secondary-color, 5%);
-    }
-  }
-
   &__ring {
     @include height($ring-icon-size);
     @include width($ring-icon-size);
