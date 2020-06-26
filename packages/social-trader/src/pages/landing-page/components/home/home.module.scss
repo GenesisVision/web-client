@@ -8,47 +8,6 @@
     @include container();
   }
 
-  &__grid-row {
-    @include grid();
-    align-items: center;
-
-    &--mob-wider {
-      margin-left: -20px;
-      margin-right: -20px;
-
-      @include media-breakpoint-tablet() {
-        margin-left: 0;
-        margin-right: 0;
-      }
-
-      .home__grid-item {
-        padding-left: 20px;
-        padding-right: 20px;
-
-        @include media-breakpoint-tablet() {
-          padding-left: 0;
-          padding-right: 0;
-        }
-      }
-    }
-  }
-
-  &__grid-item {
-    @include media-breakpoint-tablet() {
-      grid-column: 2/12;
-    }
-
-    &--sm {
-      @include media-breakpoint-tablet() {
-        grid-column: 3/11;
-      }
-
-      @include media-breakpoint-landscape-tablet() {
-        grid-column: 4/10;
-      }
-    }
-  }
-
   &__section {
     background-color: $landing-bg;
     color: $main-color;

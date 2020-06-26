@@ -21,15 +21,10 @@ const _FirstScreen: React.FC<Props> = ({ news }) => {
   const renderSlider = useCallback(() => {
     switch (effectiveConnectionType) {
       case "4g":
-        return (
-          <FirstSliderWithAnimation
-            className="home__grid-row"
-            slidesItems={slides}
-          />
-        );
+        return <FirstSliderWithAnimation slidesItems={slides} />;
       case "3g":
       case "2g":
-        return <FirstSlider className="home__grid-row" slidesItems={slides} />;
+        return <FirstSlider slidesItems={slides} />;
       default:
         return null;
     }
@@ -37,9 +32,7 @@ const _FirstScreen: React.FC<Props> = ({ news }) => {
   return (
     <>
       {renderSlider()}
-      <div className="home__grid-row home__grid-row--mob-wider">
-        <NewsList className="home__grid-item" newsItems={news} />
-      </div>
+      <NewsList newsItems={news} />
     </>
   );
 };
