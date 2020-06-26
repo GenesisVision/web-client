@@ -86,7 +86,7 @@ const NewsCardContent: React.FC<Props> = React.memo(
             />
           </Row>
         </DefaultBlock>
-        <Separator />
+        {/* <Separator />
         <DefaultBlock size={SIZES.LARGE}>
           <Center>
             <RowItem wide>
@@ -106,7 +106,7 @@ const NewsCardContent: React.FC<Props> = React.memo(
               />
             </RowItem>
           </Center>
-        </DefaultBlock>
+        </DefaultBlock> */}
       </div>
     );
   }
