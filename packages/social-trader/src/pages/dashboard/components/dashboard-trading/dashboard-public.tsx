@@ -1,7 +1,7 @@
+import { DataStorageContext } from "components/data-storage/data-storage";
 import { ToolbarButton } from "components/table/components/toolbar-button";
 import { DashboardTradingAsset } from "gv-api-web";
 import { useAccountCurrency } from "hooks/account-currency.hook";
-import { DataStorageContext } from "hooks/data-storage";
 import { CREATE_FUND_PAGE_ROUTE } from "pages/create-fund/create-fund.constants";
 import DashboardPublicCard from "pages/dashboard/components/dashboard-trading/dashboard-public-card";
 import DashboardTradingTable from "pages/dashboard/components/dashboard-trading/dashboard-trading-table";

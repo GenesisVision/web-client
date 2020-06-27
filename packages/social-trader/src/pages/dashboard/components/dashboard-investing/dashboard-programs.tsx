@@ -1,5 +1,5 @@
+import { DataStorageContext } from "components/data-storage/data-storage";
 import { ProgramInvestingDetailsList } from "gv-api-web";
-import { DataStorageContext } from "hooks/data-storage";
 import { fetchDashboardInvestmentsProgramsAction } from "pages/dashboard/actions/dashboard.actions";
 import DashboardInvestingTable from "pages/dashboard/components/dashboard-investing/dashboard-investing-table";
 import DashboardProgramCard from "pages/dashboard/components/dashboard-investing/dashboard-program-card";

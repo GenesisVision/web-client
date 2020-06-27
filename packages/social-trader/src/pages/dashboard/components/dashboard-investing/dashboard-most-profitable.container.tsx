@@ -1,5 +1,5 @@
+import { DataStorageContext } from "components/data-storage/data-storage";
 import { useAccountCurrency } from "hooks/account-currency.hook";
-import { DataStorageContext } from "hooks/data-storage";
 import {
   fetchDashboardInvestmentsFundsAction,
   fetchDashboardInvestmentsMostProfitableAction,

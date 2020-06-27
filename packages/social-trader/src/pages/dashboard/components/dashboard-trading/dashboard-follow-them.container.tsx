@@ -1,5 +1,5 @@
+import { DataStorageContext } from "components/data-storage/data-storage";
 import useApiRequest from "hooks/api-request.hook";
-import { DataStorageContext } from "hooks/data-storage";
 import DashboardBlock from "pages/dashboard/components/dashboard-block/dashboard-block";
 import DashboardFollowThem from "pages/dashboard/components/dashboard-trading/dashboard-follow-them";
 import { getFollowThem } from "pages/dashboard/services/dashboard.service";

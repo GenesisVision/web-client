@@ -1,4 +1,4 @@
-import { DataStorageContext } from "hooks/data-storage";
+import { DataStorageContext } from "components/data-storage/data-storage";
 import DashboardBlock from "pages/dashboard/components/dashboard-block/dashboard-block";
 import DashboardInvestingTotal from "pages/dashboard/components/dashboard-investing/dashboard-investing-total";
 import { getTotalLoaderData } from "pages/dashboard/dashboard.loaders-data";

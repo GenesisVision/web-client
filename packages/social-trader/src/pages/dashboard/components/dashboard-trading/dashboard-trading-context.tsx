@@ -1,5 +1,5 @@
+import { DataStorageContextProvider } from "components/data-storage/data-storage";
 import { useAccountCurrency } from "hooks/account-currency.hook";
-import { DataStorageContextProvider } from "hooks/data-storage";
 import { fetchTradingTotalStatistic } from "pages/dashboard/services/dashboard.service";
 import React from "react";
 
