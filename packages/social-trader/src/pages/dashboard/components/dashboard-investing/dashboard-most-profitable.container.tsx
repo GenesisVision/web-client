@@ -1,18 +1,19 @@
 import { useAccountCurrency } from "hooks/account-currency.hook";
+import { DataStorageContext } from "hooks/data-storage";
 import {
   fetchDashboardInvestmentsFundsAction,
   fetchDashboardInvestmentsMostProfitableAction,
-  fetchDashboardInvestmentsProgramsAction,
-  fetchDashboardInvestmentsTotalAction
+  fetchDashboardInvestmentsProgramsAction
 } from "pages/dashboard/actions/dashboard.actions";
 import DashboardBlock from "pages/dashboard/components/dashboard-block/dashboard-block";
 import DashboardInvestingMostProfitable from "pages/dashboard/components/dashboard-investing/dashboard-most-profitable";
 import { dashboardInvestmentsMostProfitableItemsSelector } from "pages/dashboard/reducers/dashboard-investments-most-profitable.reducer";
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useContext, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 
 const _DashboardInvestingMostProfitableContainer: React.FC = () => {
+  const { updateData } = useContext(DataStorageContext);
   const [t] = useTranslation();
   const dispatch = useDispatch();
   const currency = useAccountCurrency();
@@ -25,7 +26,7 @@ const _DashboardInvestingMostProfitableContainer: React.FC = () => {
   const handleUpdateItems = useCallback(() => {
     dispatch(fetchDashboardInvestmentsProgramsAction());
     dispatch(fetchDashboardInvestmentsFundsAction({ showIn: currency }));
-    dispatch(fetchDashboardInvestmentsTotalAction(currency));
+    updateData();
     dispatch(
       fetchDashboardInvestmentsMostProfitableAction({ showIn: currency })
     );

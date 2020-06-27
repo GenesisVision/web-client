@@ -12,10 +12,6 @@ import {
   TInvestmentsProgramsAction
 } from "pages/dashboard/reducers/dashboard-investments-programs.reducer";
 import {
-  DASHBOARD_INVESTMENTS_TOTAL,
-  TInvestmentsTotalAction
-} from "pages/dashboard/reducers/dashboard-investments-total.reducer";
-import {
   DASHBOARD_TRADING_FOLLOW_THEM,
   TTradingFollowThemAction
 } from "pages/dashboard/reducers/dashboard-trading-follow-them.reducer";
@@ -33,23 +29,14 @@ import {
   getInvestingMostProfitable,
   getInvestingPrograms,
   getPrivateAssets,
-  getPublicAssets,
-  getTotalInvestingStatistic
+  getPublicAssets
 } from "pages/dashboard/services/dashboard.service";
-import { CurrencyEnum } from "utils/types";
 
 export const DASHBOARD_PROGRAMS = "DASHBOARD_PROGRAMS";
 
 export const CLEAR_DASHBOARD_ASSETS_TABLE = "CLEAR_DASHBOARD_ASSETS_TABLE";
 
 // TODO move actions to shared
-
-export const fetchDashboardInvestmentsTotalAction = (
-  currency: CurrencyEnum
-): TInvestmentsTotalAction => ({
-  type: DASHBOARD_INVESTMENTS_TOTAL,
-  payload: getTotalInvestingStatistic({ currency })
-});
 
 export const fetchDashboardInvestmentsFundsAction = (
   filters?: ComposeFiltersAllType
