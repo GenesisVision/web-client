@@ -28,11 +28,6 @@ import {
   TTradingPublicAction
 } from "pages/dashboard/reducers/dashboard-trading-public.reducer";
 import {
-  DASHBOARD_TRADING_TOTAL,
-  TTradingTotalAction
-} from "pages/dashboard/reducers/dashboard-trading-total.reducer";
-import {
-  fetchTradingTotalStatistic,
   getFollowThem,
   getInvestingFunds,
   getInvestingMostProfitable,
@@ -75,13 +70,6 @@ export const fetchDashboardInvestmentsMostProfitableAction = (
 ): TInvestmentsMostProfitableAction => ({
   type: DASHBOARD_INVESTMENTS_MOST_PROFITABLE,
   payload: getInvestingMostProfitable(filters)
-});
-
-export const fetchDashboardTradingTotalAction = (
-  currency: CurrencyEnum
-): TTradingTotalAction => ({
-  type: DASHBOARD_TRADING_TOTAL,
-  payload: fetchTradingTotalStatistic({ currency })
 });
 
 export const fetchDashboardPublicAction = (

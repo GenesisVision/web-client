@@ -1,33 +1,28 @@
 import { Row } from "components/row/row";
 import { ToolbarButton } from "components/table/components/toolbar-button";
 import { DashboardTradingAsset } from "gv-api-web";
-import { useAccountCurrency } from "hooks/account-currency.hook";
+import { DataStorageContext } from "hooks/data-storage";
 import { ATTACH_ACCOUNT_PAGE_ROUTE } from "pages/attach-account/attach-account.constants";
 import { CREATE_ACCOUNT_PAGE_ROUTE } from "pages/create-account/create-account.constants";
-import {
-  fetchDashboardPrivateAction,
-  fetchDashboardTradingTotalAction
-} from "pages/dashboard/actions/dashboard.actions";
+import { fetchDashboardPrivateAction } from "pages/dashboard/actions/dashboard.actions";
 import DashboardPrivateCard from "pages/dashboard/components/dashboard-trading/dashboard-private-card/dashboard-private-card";
 import DashboardTradingTable from "pages/dashboard/components/dashboard-trading/dashboard-trading-table";
 import { dashboardTradingPrivateSelector } from "pages/dashboard/reducers/dashboard-trading-private.reducer";
-import React, { useCallback } from "react";
+import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
 
 const _DashboardPrivate: React.FC = () => {
-  const dispatch = useDispatch();
-  const currency = useAccountCurrency();
+  const { updateData } = useContext(DataStorageContext);
   const [t] = useTranslation();
   const getItems = useCallback(filters => {
     return fetchDashboardPrivateAction(filters);
   }, []);
   const handleUpdateItems = useCallback(
     updateItems => () => {
-      dispatch(fetchDashboardTradingTotalAction(currency));
+      updateData();
       updateItems();
     },
-    [currency]
+    []
   );
   return (
     <DashboardTradingTable

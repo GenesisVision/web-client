@@ -1,26 +1,17 @@
-import { useAccountCurrency } from "hooks/account-currency.hook";
-import { fetchDashboardTradingTotalAction } from "pages/dashboard/actions/dashboard.actions";
+import { DataStorageContext } from "hooks/data-storage";
 import DashboardBlock from "pages/dashboard/components/dashboard-block/dashboard-block";
-import { dashboardTradingTotalSelector } from "pages/dashboard/reducers/dashboard-trading-total.reducer";
-import React, { useEffect } from "react";
+import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
 
 import { getTradingStatisticLoaderData } from "../../dashboard.loaders-data";
 import DashboardTradingTotal from "./dashboard-trading-total";
 
 const _DashboardTradingTotalContainer: React.FC = () => {
-  const dispatch = useDispatch();
-  const currency = useAccountCurrency();
   const [t] = useTranslation();
-  const data = useSelector(dashboardTradingTotalSelector);
-  useEffect(() => {
-    dispatch(fetchDashboardTradingTotalAction(currency));
-  }, []);
+  const { data } = useContext(DataStorageContext);
   return (
     <DashboardBlock label={t("dashboard-page.trading.title")}>
       <DashboardTradingTotal
-        currency={currency}
         loaderData={getTradingStatisticLoaderData()}
         data={data!}
       />
