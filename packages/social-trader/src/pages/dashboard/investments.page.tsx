@@ -1,5 +1,6 @@
 import Page from "components/page/page";
 import DashboardInvestingFunds from "pages/dashboard/components/dashboard-investing/dashboard-funds";
+import { DashboardInvestingContext } from "pages/dashboard/components/dashboard-investing/dashboard-investing-context";
 import DashboardInvestingTotalContainer from "pages/dashboard/components/dashboard-investing/dashboard-investing-total.container";
 import DashboardInvestingMostProfitableContainer from "pages/dashboard/components/dashboard-investing/dashboard-most-profitable.container";
 import DashboardInvestingPrograms from "pages/dashboard/components/dashboard-investing/dashboard-programs";
@@ -11,18 +12,20 @@ const _InvestmentsPage: React.FC = () => {
   const title = t(`dashboard-page:investing.title`);
   return (
     <Page title={title}>
-      <div>
-        <DashboardInvestingTotalContainer />
-      </div>
-      <div>
-        <DashboardInvestingFunds />
-      </div>
-      <div>
-        <DashboardInvestingPrograms />
-      </div>
-      <div>
-        <DashboardInvestingMostProfitableContainer />
-      </div>
+      <DashboardInvestingContext>
+        <div>
+          <DashboardInvestingTotalContainer />
+        </div>
+        <div>
+          <DashboardInvestingFunds />
+        </div>
+        <div>
+          <DashboardInvestingPrograms />
+        </div>
+        <div>
+          <DashboardInvestingMostProfitableContainer />
+        </div>
+      </DashboardInvestingContext>
     </Page>
   );
 };

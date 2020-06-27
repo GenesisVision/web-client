@@ -52,11 +52,7 @@ const _PortfolioEventLogo: React.FC<Props> = ({
             [styles["portfolio-event-logo__type--with-asset"]]: withAsset
           })}
         >
-          <ImageBase
-            src={icon}
-            alt={styles["event logo"]}
-            defaultImage={SocialLink}
-          />
+          <ImageBase src={icon} alt={"event logo"} defaultImage={SocialLink} />
         </div>
       )}
     </div>

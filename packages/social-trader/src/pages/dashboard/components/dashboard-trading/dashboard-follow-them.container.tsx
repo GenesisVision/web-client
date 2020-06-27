@@ -1,32 +1,27 @@
-import { useAccountCurrency } from "hooks/account-currency.hook";
-import {
-  fetchDashboardFollowThemAction,
-  fetchDashboardTradingTotalAction
-} from "pages/dashboard/actions/dashboard.actions";
+import { DataStorageContext } from "components/data-storage/data-storage";
+import useApiRequest from "hooks/api-request.hook";
 import DashboardBlock from "pages/dashboard/components/dashboard-block/dashboard-block";
 import DashboardFollowThem from "pages/dashboard/components/dashboard-trading/dashboard-follow-them";
-import { dashboardTradingFollowThemItemsSelector } from "pages/dashboard/reducers/dashboard-trading-follow-them.reducer";
-import React, { useCallback, useEffect } from "react";
+import { getFollowThem } from "pages/dashboard/services/dashboard.service";
+import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
 
 const _DashboardFollowThemContainer: React.FC<Props> = () => {
-  const dispatch = useDispatch();
-  const currency = useAccountCurrency();
+  const { updateData } = useContext(DataStorageContext);
   const [t] = useTranslation();
-  const data = useSelector(dashboardTradingFollowThemItemsSelector);
-  useEffect(() => {
-    dispatch(fetchDashboardFollowThemAction());
-  }, []);
+  const { data, sendRequest } = useApiRequest({
+    request: getFollowThem,
+    fetchOnMount: true
+  });
   const handleUpdateItems = useCallback(() => {
-    dispatch(fetchDashboardTradingTotalAction(currency));
-    dispatch(fetchDashboardFollowThemAction());
-  }, [currency]);
+    updateData();
+    sendRequest();
+  }, []);
   return (
     <DashboardBlock label={t("dashboard-page:trading.follow-them")}>
       <DashboardFollowThem
         loaderData={[]}
-        data={data!}
+        data={data?.items!}
         onApply={handleUpdateItems}
       />
     </DashboardBlock>

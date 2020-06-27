@@ -12,14 +12,6 @@ import {
   TInvestmentsProgramsAction
 } from "pages/dashboard/reducers/dashboard-investments-programs.reducer";
 import {
-  DASHBOARD_INVESTMENTS_TOTAL,
-  TInvestmentsTotalAction
-} from "pages/dashboard/reducers/dashboard-investments-total.reducer";
-import {
-  DASHBOARD_TRADING_FOLLOW_THEM,
-  TTradingFollowThemAction
-} from "pages/dashboard/reducers/dashboard-trading-follow-them.reducer";
-import {
   DASHBOARD_TRADING_PRIVATE,
   TTradingPrivateAction
 } from "pages/dashboard/reducers/dashboard-trading-private.reducer";
@@ -28,33 +20,19 @@ import {
   TTradingPublicAction
 } from "pages/dashboard/reducers/dashboard-trading-public.reducer";
 import {
-  DASHBOARD_TRADING_TOTAL,
-  TTradingTotalAction
-} from "pages/dashboard/reducers/dashboard-trading-total.reducer";
-import {
-  fetchTradingTotalStatistic,
   getFollowThem,
   getInvestingFunds,
   getInvestingMostProfitable,
   getInvestingPrograms,
   getPrivateAssets,
-  getPublicAssets,
-  getTotalInvestingStatistic
+  getPublicAssets
 } from "pages/dashboard/services/dashboard.service";
-import { CurrencyEnum } from "utils/types";
 
 export const DASHBOARD_PROGRAMS = "DASHBOARD_PROGRAMS";
 
 export const CLEAR_DASHBOARD_ASSETS_TABLE = "CLEAR_DASHBOARD_ASSETS_TABLE";
 
 // TODO move actions to shared
-
-export const fetchDashboardInvestmentsTotalAction = (
-  currency: CurrencyEnum
-): TInvestmentsTotalAction => ({
-  type: DASHBOARD_INVESTMENTS_TOTAL,
-  payload: getTotalInvestingStatistic({ currency })
-});
 
 export const fetchDashboardInvestmentsFundsAction = (
   filters?: ComposeFiltersAllType
@@ -77,13 +55,6 @@ export const fetchDashboardInvestmentsMostProfitableAction = (
   payload: getInvestingMostProfitable(filters)
 });
 
-export const fetchDashboardTradingTotalAction = (
-  currency: CurrencyEnum
-): TTradingTotalAction => ({
-  type: DASHBOARD_TRADING_TOTAL,
-  payload: fetchTradingTotalStatistic({ currency })
-});
-
 export const fetchDashboardPublicAction = (
   filters?: ComposeFiltersAllType
 ): TTradingPublicAction => ({
@@ -96,9 +67,4 @@ export const fetchDashboardPrivateAction = (
 ): TTradingPrivateAction => ({
   type: DASHBOARD_TRADING_PRIVATE,
   payload: getPrivateAssets(filters)
-});
-
-export const fetchDashboardFollowThemAction = (): TTradingFollowThemAction => ({
-  type: DASHBOARD_TRADING_FOLLOW_THEM,
-  payload: getFollowThem()
 });

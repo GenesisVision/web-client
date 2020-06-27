@@ -1,26 +1,21 @@
+import { DataStorageContext } from "components/data-storage/data-storage";
 import { ProgramInvestingDetailsList } from "gv-api-web";
-import { useAccountCurrency } from "hooks/account-currency.hook";
-import {
-  fetchDashboardInvestmentsProgramsAction,
-  fetchDashboardInvestmentsTotalAction
-} from "pages/dashboard/actions/dashboard.actions";
+import { fetchDashboardInvestmentsProgramsAction } from "pages/dashboard/actions/dashboard.actions";
 import DashboardInvestingTable from "pages/dashboard/components/dashboard-investing/dashboard-investing-table";
 import DashboardProgramCard from "pages/dashboard/components/dashboard-investing/dashboard-program-card";
 import { dashboardInvestmentsProgramsSelector } from "pages/dashboard/reducers/dashboard-investments-programs.reducer";
-import React, { useCallback } from "react";
+import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
 
 const _DashboardInvestingPrograms: React.FC = () => {
-  const dispatch = useDispatch();
-  const currency = useAccountCurrency();
+  const { updateData } = useContext(DataStorageContext);
   const [t] = useTranslation();
   const handleUpdateItems = useCallback(
     updateItems => () => {
-      dispatch(fetchDashboardInvestmentsTotalAction(currency));
+      updateData();
       updateItems();
     },
-    [currency]
+    []
   );
   return (
     <DashboardInvestingTable
