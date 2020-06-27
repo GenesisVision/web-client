@@ -12,10 +12,6 @@ import {
   TInvestmentsProgramsAction
 } from "pages/dashboard/reducers/dashboard-investments-programs.reducer";
 import {
-  DASHBOARD_TRADING_FOLLOW_THEM,
-  TTradingFollowThemAction
-} from "pages/dashboard/reducers/dashboard-trading-follow-them.reducer";
-import {
   DASHBOARD_TRADING_PRIVATE,
   TTradingPrivateAction
 } from "pages/dashboard/reducers/dashboard-trading-private.reducer";
@@ -71,9 +67,4 @@ export const fetchDashboardPrivateAction = (
 ): TTradingPrivateAction => ({
   type: DASHBOARD_TRADING_PRIVATE,
   payload: getPrivateAssets(filters)
-});
-
-export const fetchDashboardFollowThemAction = (): TTradingFollowThemAction => ({
-  type: DASHBOARD_TRADING_FOLLOW_THEM,
-  payload: getFollowThem()
 });

@@ -4,19 +4,15 @@ import { DashboardTradingAsset } from "gv-api-web";
 import { DataStorageContext } from "hooks/data-storage";
 import { ATTACH_ACCOUNT_PAGE_ROUTE } from "pages/attach-account/attach-account.constants";
 import { CREATE_ACCOUNT_PAGE_ROUTE } from "pages/create-account/create-account.constants";
-import { fetchDashboardPrivateAction } from "pages/dashboard/actions/dashboard.actions";
 import DashboardPrivateCard from "pages/dashboard/components/dashboard-trading/dashboard-private-card/dashboard-private-card";
 import DashboardTradingTable from "pages/dashboard/components/dashboard-trading/dashboard-trading-table";
-import { dashboardTradingPrivateSelector } from "pages/dashboard/reducers/dashboard-trading-private.reducer";
+import { getPrivateAssets } from "pages/dashboard/services/dashboard.service";
 import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
 
 const _DashboardPrivate: React.FC = () => {
   const { updateData } = useContext(DataStorageContext);
   const [t] = useTranslation();
-  const getItems = useCallback(filters => {
-    return fetchDashboardPrivateAction(filters);
-  }, []);
   const handleUpdateItems = useCallback(
     updateItems => () => {
       updateData();
@@ -26,7 +22,6 @@ const _DashboardPrivate: React.FC = () => {
   );
   return (
     <DashboardTradingTable
-      dataSelector={dashboardTradingPrivateSelector}
       createButtonToolbar={
         <Row>
           <ToolbarButton
@@ -39,7 +34,7 @@ const _DashboardPrivate: React.FC = () => {
           />
         </Row>
       }
-      getItems={getItems}
+      getItems={getPrivateAssets}
       title={t("dashboard-page.trading.private")}
       renderBodyCard={(
         asset: DashboardTradingAsset,

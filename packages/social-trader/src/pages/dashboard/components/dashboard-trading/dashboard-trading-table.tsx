@@ -5,11 +5,10 @@ import {
 import { FilteringType } from "components/table/components/filtering/filter.type";
 import SelectFilter from "components/table/components/filtering/select-filter/select-filter";
 import { SelectFilterType } from "components/table/components/filtering/select-filter/select-filter.constants";
-import TableContainer from "components/table/components/table-container";
+import TableModule from "components/table/components/table-module";
 import {
-  GetItemsFuncActionType,
+  GetItemsFuncType,
   RenderBodyItemFuncType,
-  TableSelectorType,
   UpdateFilterFunc
 } from "components/table/components/table.types";
 import { LIST_VIEW } from "components/table/table.constants";
@@ -18,7 +17,6 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 const _DashboardTradingTable: React.FC<Props> = ({
-  dataSelector,
   createButtonToolbar,
   getItems,
   title,
@@ -27,9 +25,7 @@ const _DashboardTradingTable: React.FC<Props> = ({
   const [t] = useTranslation();
   return (
     <DashboardBlock>
-      <TableContainer
-        isFetchOnMount={true}
-        dataSelector={dataSelector}
+      <TableModule
         createButtonToolbar={createButtonToolbar}
         title={title}
         loaderData={[]}
@@ -55,8 +51,7 @@ const _DashboardTradingTable: React.FC<Props> = ({
 };
 
 interface Props {
-  getItems: GetItemsFuncActionType;
-  dataSelector: TableSelectorType;
+  getItems: GetItemsFuncType;
   createButtonToolbar?: JSX.Element;
   title: string;
   renderBodyCard?: RenderBodyItemFuncType;
