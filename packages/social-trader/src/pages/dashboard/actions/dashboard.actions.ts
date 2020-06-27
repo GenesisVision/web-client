@@ -12,20 +12,9 @@ import {
   TInvestmentsProgramsAction
 } from "pages/dashboard/reducers/dashboard-investments-programs.reducer";
 import {
-  DASHBOARD_TRADING_PRIVATE,
-  TTradingPrivateAction
-} from "pages/dashboard/reducers/dashboard-trading-private.reducer";
-import {
-  DASHBOARD_TRADING_PUBLIC,
-  TTradingPublicAction
-} from "pages/dashboard/reducers/dashboard-trading-public.reducer";
-import {
-  getFollowThem,
   getInvestingFunds,
   getInvestingMostProfitable,
-  getInvestingPrograms,
-  getPrivateAssets,
-  getPublicAssets
+  getInvestingPrograms
 } from "pages/dashboard/services/dashboard.service";
 
 export const DASHBOARD_PROGRAMS = "DASHBOARD_PROGRAMS";
@@ -53,18 +42,4 @@ export const fetchDashboardInvestmentsMostProfitableAction = (
 ): TInvestmentsMostProfitableAction => ({
   type: DASHBOARD_INVESTMENTS_MOST_PROFITABLE,
   payload: getInvestingMostProfitable(filters)
-});
-
-export const fetchDashboardPublicAction = (
-  filters?: ComposeFiltersAllType
-): TTradingPublicAction => ({
-  type: DASHBOARD_TRADING_PUBLIC,
-  payload: getPublicAssets(filters)
-});
-
-export const fetchDashboardPrivateAction = (
-  filters?: ComposeFiltersAllType
-): TTradingPrivateAction => ({
-  type: DASHBOARD_TRADING_PRIVATE,
-  payload: getPrivateAssets(filters)
 });
