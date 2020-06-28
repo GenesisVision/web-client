@@ -2,42 +2,55 @@ import {
   ACTION_STATUS_FILTER_NAME,
   ACTION_STATUS_FILTER_VALUES
 } from "components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs.helpers";
-import {
-  ComposeFiltersAllType,
-  FilteringType
-} from "components/table/components/filtering/filter.type";
+import { DataStorageContext } from "components/data-storage/data-storage";
+import { FilteringType } from "components/table/components/filtering/filter.type";
 import SelectFilter from "components/table/components/filtering/select-filter/select-filter";
 import { SelectFilterType } from "components/table/components/filtering/select-filter/select-filter.constants";
-import TableContainer from "components/table/components/table-container";
+import TableModule from "components/table/components/table-module";
 import {
+  GetItemsFuncType,
   RenderBodyItemFuncType,
-  TableSelectorType,
   UpdateFilterFunc
 } from "components/table/components/table.types";
 import { LIST_VIEW } from "components/table/table.constants";
 import { useAccountCurrency } from "hooks/account-currency.hook";
 import DashboardBlock from "pages/dashboard/components/dashboard-block/dashboard-block";
-import React, { useCallback } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ApiAction } from "utils/types";
 
 const _DashboardInvestingTable: React.FC<Props> = ({
-  dataSelector,
-  action,
+  getItemsFunc,
   title,
   renderBodyCard
 }) => {
+  const { data } = useContext(DataStorageContext);
+  const [timestamp, setTimestamp] = useState<number | undefined>();
+  const [updateData, setUpdateData] = useState<any[]>([]);
   const [t] = useTranslation();
   const showIn = useAccountCurrency();
-  const getItems = useCallback(filters => {
-    return action({
-      ...filters,
-      showIn
-    });
-  }, []);
+
+  const getItems = useCallback(
+    filters => {
+      return getItemsFunc({
+        ...filters,
+        showIn
+      });
+    },
+    [showIn]
+  );
+
+  useEffect(() => {
+    if (data) setUpdateData([...updateData, data]);
+  }, [data]);
+
+  useEffect(() => {
+    if (updateData.length > 1) setTimestamp(+new Date());
+  }, [updateData]);
+
   return (
     <DashboardBlock>
-      <TableContainer
+      <TableModule
+        timestamp={timestamp}
         renderFilters={(
           updateFilter: UpdateFilterFunc,
           filtering: FilteringType
@@ -50,8 +63,6 @@ const _DashboardInvestingTable: React.FC<Props> = ({
             onChange={updateFilter}
           />
         )}
-        dataSelector={dataSelector}
-        isFetchOnMount={true}
         title={title}
         loaderData={[]}
         getItems={getItems}
@@ -64,8 +75,7 @@ const _DashboardInvestingTable: React.FC<Props> = ({
 };
 
 interface Props {
-  dataSelector: TableSelectorType;
-  action: (filters?: ComposeFiltersAllType) => ApiAction;
+  getItemsFunc: GetItemsFuncType;
   title: string;
   renderBodyCard?: RenderBodyItemFuncType;
 }

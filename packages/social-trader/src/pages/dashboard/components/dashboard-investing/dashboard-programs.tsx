@@ -1,9 +1,8 @@
 import { DataStorageContext } from "components/data-storage/data-storage";
 import { ProgramInvestingDetailsList } from "gv-api-web";
-import { fetchDashboardInvestmentsProgramsAction } from "pages/dashboard/actions/dashboard.actions";
 import DashboardInvestingTable from "pages/dashboard/components/dashboard-investing/dashboard-investing-table";
 import DashboardProgramCard from "pages/dashboard/components/dashboard-investing/dashboard-program-card";
-import { dashboardInvestmentsProgramsSelector } from "pages/dashboard/reducers/dashboard-investments-programs.reducer";
+import { getInvestingPrograms } from "pages/dashboard/services/dashboard.service";
 import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -19,8 +18,7 @@ const _DashboardInvestingPrograms: React.FC = () => {
   );
   return (
     <DashboardInvestingTable
-      dataSelector={dashboardInvestmentsProgramsSelector}
-      action={fetchDashboardInvestmentsProgramsAction}
+      getItemsFunc={getInvestingPrograms}
       title={t("dashboard-page:investing.programs")}
       renderBodyCard={(
         program: ProgramInvestingDetailsList,
