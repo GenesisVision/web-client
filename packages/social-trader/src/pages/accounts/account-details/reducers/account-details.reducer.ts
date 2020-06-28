@@ -17,13 +17,11 @@ import accountBalanceChartReducer, {
 import accountDescriptionReducer, {
   AccountDescriptionState
 } from "./description.reducer";
-import accountIdReducer, { AccountIdState } from "./id.reducer";
 import accountProfitChartReducer, {
   AccountProfitChartState
 } from "./profit-chart.reducer";
 
 type AccountDetailsDataType = Readonly<{
-  id: AccountIdState;
   statisticPeriod: StatisticPeriodState;
   statisticCurrency: StatisticCurrencyState;
   absoluteProfitChart: AccountAbsoluteProfitChartState;
@@ -37,7 +35,6 @@ export type AccountDetailsState = AccountDetailsDataType;
 
 const accountDetailsReducer = clearableReducer(
   combineReducers<AccountDetailsState>({
-    id: accountIdReducer,
     statisticPeriod: statisticPeriodReducer,
     statisticCurrency: statisticCurrencyReducer,
     description: accountDescriptionReducer,

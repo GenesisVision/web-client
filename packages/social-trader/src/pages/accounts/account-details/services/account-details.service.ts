@@ -23,8 +23,7 @@ import {
   fetchAccountProfitChartAction,
   fetchOpenPositionsAction,
   fetchTradesAction,
-  fetchTradingLogAction,
-  setAccountIdAction
+  fetchTradingLogAction
 } from "../actions/account-details.actions";
 import {
   tradesTableSelector,
@@ -52,10 +51,6 @@ export const dispatchAccountDescription = (id: string) => (
 ) => async (dispatch: MiddlewareDispatch) => {
   return await dispatch(fetchAccountDescriptionAction(id, ctx?.token));
 };
-
-export const dispatchAccountId = (id: string) => async (
-  dispatch: MiddlewareDispatch
-) => await dispatch(setAccountIdAction(id));
 
 export const getTradingLog = (id: string) => (
   filters: ComposeFiltersAllType

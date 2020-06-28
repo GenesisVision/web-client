@@ -21,11 +21,9 @@ import {
   FETCH_FUND_DESCRIPTION,
   FETCH_FUND_PROFIT_CHART,
   FUND_REALLOCATE_HISTORY,
-  SET_FUND_ID,
   SET_FUND_STATISTIC_CURRENCY,
   SET_FUND_STATISTIC_PERIOD
 } from "../fund-details.constants";
-import { SetFundIdAction } from "../fund-details.types";
 import { FundProfitChartDataType } from "../reducers/profit-chart.reducer";
 
 export const fetchFundProfitChartAction = (
@@ -97,9 +95,4 @@ export const fundReallocateHistoryAction = (
 ): ApiAction<ReallocationModelItemsViewModel> => ({
   type: FUND_REALLOCATE_HISTORY,
   payload: api.funds().getReallocatingHistory(id, filters)
-});
-
-export const setFundIdAction = (id: string): SetFundIdAction => ({
-  type: SET_FUND_ID,
-  payload: id
 });

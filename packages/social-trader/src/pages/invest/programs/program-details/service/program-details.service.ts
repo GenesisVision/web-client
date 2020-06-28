@@ -19,7 +19,6 @@ import authService from "services/auth-service";
 import {
   ApiActionResponse,
   CurrencyEnum,
-  MiddlewareDispatch,
   NextPageWithReduxContext,
   RootThunk
 } from "utils/types";
@@ -36,8 +35,7 @@ import {
   fetchProgramDescriptionAction,
   fetchProgramProfitChartAction,
   fetchSubscriptionsAction,
-  fetchTradesAction,
-  setProgramIdAction
+  fetchTradesAction
 } from "../actions/program-details.actions";
 import {
   financialStatisticTableSelector,
@@ -105,20 +103,17 @@ export const dispatchProgramDescription = (
   getState
 ) => {
   const {
-    programDetails: { id: stateId }
+    programDetails: { description }
   } = getState();
+  const stateId = description.data?.id;
   return dispatch(
     dispatchProgramDescriptionWithId(
-      ctx ? (ctx.query.id as string) : stateId,
+      ctx ? (ctx.query.id as string) : stateId!,
       ctx?.token,
       asset
     )
   );
 };
-
-export const dispatchProgramId = (id: string) => async (
-  dispatch: MiddlewareDispatch
-) => await dispatch(setProgramIdAction(id));
 
 export const closePeriod = (programId: string) => {
   return api.assets().closeCurrentPeriod(programId);

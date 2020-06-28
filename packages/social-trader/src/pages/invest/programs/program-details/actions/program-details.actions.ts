@@ -8,7 +8,7 @@ import { EVENTS_ACTION_TYPE } from "components/portfolio-events-table/portfolio-
 import { ComposeFiltersAllType } from "components/table/components/filtering/filter.type";
 import { api } from "services/api-client/swagger-custom-client";
 import Token from "services/api-client/token";
-import { ActionType, ApiAction, CurrencyEnum } from "utils/types";
+import { ApiAction, CurrencyEnum } from "utils/types";
 
 import {
   FETCH_LEVEL_PARAMETERS,
@@ -21,7 +21,6 @@ import {
   PROGRAM_OPEN_POSITIONS,
   PROGRAM_SUBSCRIPTIONS,
   PROGRAM_TRADES,
-  SET_PROGRAM_ID,
   SET_PROGRAM_STATISTIC_CURRENCY,
   SET_PROGRAM_STATISTIC_PERIOD
 } from "../program-details.constants";
@@ -37,7 +36,6 @@ import {
   SignalProviderSubscribersDataType,
   TradesDataType
 } from "../program-details.types";
-import { ProgramIdState } from "../reducers/id.reducer";
 import {
   EVENT_LOCATION,
   fetchPortfolioEventsWithoutTable
@@ -170,12 +168,4 @@ export const fetchSubscriptionsAction = (
 ): ApiAction<SignalProviderSubscribersDataType> => ({
   type: PROGRAM_SUBSCRIPTIONS,
   payload: api.programs().getProgramSubscribers(id, filters)
-});
-
-export interface SetProgramIdAction extends ActionType<ProgramIdState> {
-  type: typeof SET_PROGRAM_ID;
-}
-export const setProgramIdAction = (id: string): SetProgramIdAction => ({
-  type: SET_PROGRAM_ID,
-  payload: id
 });
