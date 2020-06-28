@@ -11,7 +11,6 @@ import Token from "services/api-client/token";
 import { ApiAction, CurrencyEnum } from "utils/types";
 
 import {
-  FETCH_LEVEL_PARAMETERS,
   FETCH_PROGRAM_ABSOLUTE_PROFIT_CHART,
   FETCH_PROGRAM_BALANCE_CHART,
   FETCH_PROGRAM_DESCRIPTION,
@@ -26,7 +25,6 @@ import {
 } from "../program-details.constants";
 import {
   EventsDataType,
-  LevelParametersDataType,
   OpenTradesDataType,
   ProgramAbsoluteProfitChartDataType,
   ProgramBalanceChartDataType,
@@ -121,13 +119,6 @@ export const fetchFollowProgramDescriptionAction = (
 ): ApiAction<ProgramDescriptionDataType> => ({
   type: FETCH_PROGRAM_DESCRIPTION,
   payload: api.follows(token).getFollowAssetDetails(id)
-});
-
-export const fetchLevelParametersAction = (
-  currency: CurrencyEnum
-): ApiAction<LevelParametersDataType> => ({
-  type: FETCH_LEVEL_PARAMETERS,
-  payload: api.platform().getProgramLevelsParams({ currency })
 });
 
 export const fetchOpenPositionsAction = (

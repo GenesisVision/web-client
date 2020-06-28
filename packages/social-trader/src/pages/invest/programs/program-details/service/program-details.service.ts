@@ -27,7 +27,6 @@ import {
   fetchEventsAction,
   fetchFinancialStatisticAction,
   fetchFollowProgramDescriptionAction,
-  fetchLevelParametersAction,
   fetchOpenPositionsAction,
   fetchPeriodHistoryAction,
   fetchProgramAbsoluteProfitChartAction,
@@ -50,6 +49,9 @@ type ClosePositionMethodType = (
     symbol?: string;
   }
 ) => Promise<any>;
+
+export const fetchLevelParameters = (currency: CurrencyEnum) =>
+  api.platform().getProgramLevelsParams({ currency });
 
 export const getCloseOpenPositionMethod = (
   assetType?: TRADE_ASSET_TYPE
@@ -78,10 +80,6 @@ export const getEvents = (id: string, eventLocation: EVENT_LOCATION) => (
 
 export const getProgramBrokersMethod = (id: string) =>
   api.brokers().getBrokersForProgram(id);
-
-export const dispatchPlatformLevelsParameters = (currency: CurrencyEnum) => (
-  dispatch: Dispatch
-) => dispatch(fetchLevelParametersAction(currency));
 
 export const dispatchProgramDescriptionWithId = (
   id: string,

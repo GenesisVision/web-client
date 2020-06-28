@@ -7,7 +7,6 @@ import { CurrencyEnum } from "utils/types";
 import { statisticCurrencyAction } from "./actions/program-details.actions";
 import ProgramDetailsContainer from "./program-details.contaner";
 import { programDescriptionSelector } from "./reducers/description.reducer";
-import { dispatchPlatformLevelsParameters } from "./service/program-details.service";
 
 const _ProgramDetailsPage: React.FC<Props> = ({ route }) => {
   const dispatch = useDispatch();
@@ -24,9 +23,6 @@ const _ProgramDetailsPage: React.FC<Props> = ({ route }) => {
     setProgramId(description.id);
   }, [description]);
   useEffect(() => {
-    dispatch(
-      dispatchPlatformLevelsParameters(programCurrency || profileCurrency)
-    );
     dispatch(statisticCurrencyAction(programCurrency || profileCurrency));
   }, [programId]);
   return <ProgramDetailsContainer route={route} data={description!} />;

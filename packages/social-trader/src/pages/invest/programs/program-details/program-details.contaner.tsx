@@ -6,28 +6,29 @@ import { DETAILS_TYPE } from "components/details/details.types";
 import Page from "components/page/page";
 import { ASSET, TRADE_ASSET_TYPE } from "constants/constants";
 import Crashable from "decorators/crashable";
+import { useAccountCurrency } from "hooks/account-currency.hook";
+import useApiRequest from "hooks/api-request.hook";
 import dynamic from "next/dynamic";
 import { mapProgramFollowToTransferItemType } from "pages/dashboard/services/dashboard.service";
 import FollowDetailsStatisticSection from "pages/invest/follows/follow-details/follow-details-statistic-section/follow-details-statistic-section";
+import PerformanceData from "pages/invest/programs/program-details/program-details-description/performance-data";
 import ProgramDetailsStatisticSection from "pages/invest/programs/program-details/program-details-statistic-section/program-details-statistic-section";
+import { levelsParamsLoaderData } from "pages/invest/programs/program-details/program-details.loader-data";
 import { ProgramDescriptionDataType } from "pages/invest/programs/program-details/program-details.types";
 import { getSchema } from "pages/invest/programs/program-details/program-schema";
 import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   composeProgramBannerUrl,
   createProgramNotificationsToUrl,
   createProgramSettingsToUrl
 } from "utils/compose-url";
 
-import PerformanceData from "./program-details-description/performance-data";
-import { levelsParamsLoaderData } from "./program-details.loader-data";
 import ProgramDetailsHistorySection, {
   TProgramTablesData
 } from "./program-history-section/program-details-history-section";
-import { levelParametersSelector } from "./reducers/level-parameters.reducer";
 import {
   financialStatisticTableSelector,
   openPositionsSelector,
@@ -40,6 +41,7 @@ import {
 } from "./reducers/program-history.reducer";
 import {
   dispatchProgramDescriptionWithId,
+  fetchLevelParameters,
   getFinancialStatistics,
   getOpenPositions,
   getPeriodHistory,
@@ -64,7 +66,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   const dispatch = useDispatch();
-  const levelsParameters = useSelector(levelParametersSelector);
+  const profileCurrency = useAccountCurrency();
   const {
     programDetails,
     followDetails,
@@ -76,6 +78,10 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
     brokerDetails,
     ownerActions
   } = description;
+  const { data: levelsParameters } = useApiRequest({
+    request: () => fetchLevelParameters(profileCurrency || currency),
+    fetchOnMount: true
+  });
   const programPersonalDetails =
     programDetails && programDetails.personalDetails;
   const followPersonalDetails = followDetails && followDetails.personalDetails;

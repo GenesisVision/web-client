@@ -14,9 +14,6 @@ import programBalanceChartReducer, {
 import programDescriptionReducer, {
   ProgramDescriptionState
 } from "./description.reducer";
-import levelParametersReducer, {
-  LevelParametersState
-} from "./level-parameters.reducer";
 import programProfitChartReducer, {
   ProgramProfitChartState
 } from "./profit-chart.reducer";
@@ -31,7 +28,6 @@ type ProgramDetailsDataType = Readonly<{
   absoluteProfitChart: ProgramAbsoluteProfitChartState;
   balanceChart: ProgramBalanceChartState;
   description: ProgramDescriptionState;
-  levelParameters: LevelParametersState;
   programHistory: ProgramHistoryState;
 }>;
 
@@ -41,7 +37,6 @@ const programDetailsReducer = clearableReducer(
   combineReducers<ProgramDetailsState>({
     statisticPeriod: statisticPeriodReducer,
     statisticCurrency: statisticCurrencyReducer,
-    levelParameters: levelParametersReducer,
     description: programDescriptionReducer,
     profitChart: programProfitChartReducer,
     absoluteProfitChart: programAbsoluteProfitChartReducer,
