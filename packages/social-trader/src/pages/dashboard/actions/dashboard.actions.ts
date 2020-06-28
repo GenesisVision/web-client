@@ -4,16 +4,11 @@ import {
   TInvestmentsFundsAction
 } from "pages/dashboard/reducers/dashboard-investments-funds.reducer";
 import {
-  DASHBOARD_INVESTMENTS_MOST_PROFITABLE,
-  TInvestmentsMostProfitableAction
-} from "pages/dashboard/reducers/dashboard-investments-most-profitable.reducer";
-import {
   DASHBOARD_INVESTMENTS_PROGRAMS,
   TInvestmentsProgramsAction
 } from "pages/dashboard/reducers/dashboard-investments-programs.reducer";
 import {
   getInvestingFunds,
-  getInvestingMostProfitable,
   getInvestingPrograms
 } from "pages/dashboard/services/dashboard.service";
 
@@ -35,11 +30,4 @@ export const fetchDashboardInvestmentsProgramsAction = (
 ): TInvestmentsProgramsAction => ({
   type: DASHBOARD_INVESTMENTS_PROGRAMS,
   payload: getInvestingPrograms(filters)
-});
-
-export const fetchDashboardInvestmentsMostProfitableAction = (
-  filters?: ComposeFiltersAllType
-): TInvestmentsMostProfitableAction => ({
-  type: DASHBOARD_INVESTMENTS_MOST_PROFITABLE,
-  payload: getInvestingMostProfitable(filters)
 });
