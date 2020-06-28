@@ -57,11 +57,6 @@ $transition-size: $type-size/$divider-text;
     @include width(12px);
   }
 
-  &__logo {
-    @include height(28px);
-    @include width(28px);
-  }
-
   &--positive {
     & .portfolio-event-logo__type {
       background-color: $positive-background-color;
