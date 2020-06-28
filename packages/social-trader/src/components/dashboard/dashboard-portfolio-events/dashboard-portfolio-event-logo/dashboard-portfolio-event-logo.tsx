@@ -24,9 +24,9 @@ const _PortfolioEventLogo: React.FC<Props> = ({
   );
   const renderAvatar = () => (
     <AssetAvatar
+      size={"full"}
       url={assetDetails.logoUrl}
       alt={assetDetails.title}
-      className={styles["portfolio-event-logo__logo"]}
       color={assetDetails.color}
     />
   );
