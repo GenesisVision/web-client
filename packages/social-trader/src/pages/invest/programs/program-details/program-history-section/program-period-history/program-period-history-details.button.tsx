@@ -128,7 +128,7 @@ const _ProgramPeriodHistoryDetailsButton: React.FC<IProgramPeriodHistoryDetailsB
   return (
     <>
       <GVButton size={GV_BTN_SIZE.SMALL} color="secondary" onClick={setAnchor}>
-        {t("program-details-page:history.my-history.details")}
+        {t("my-history.details")}
       </GVButton>
       <ProgramPeriodHistoryPopup
         period={period}
