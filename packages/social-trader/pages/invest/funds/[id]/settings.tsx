@@ -21,7 +21,12 @@ Page.getInitialProps = async ctx => {
       throw "Fund is closed";
   });
   return {
-    namespacesRequired: ["form-fields", "asset-settings", "fund-settings"]
+    namespacesRequired: [
+      "create-fund-page",
+      "form-fields",
+      "asset-settings",
+      "fund-settings"
+    ]
   };
 };
 
