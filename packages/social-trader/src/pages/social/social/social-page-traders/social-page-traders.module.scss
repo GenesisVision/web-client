@@ -10,6 +10,7 @@
   }
 
   &__avatar-name {
+    @include font-size($font-size-common);
     cursor: pointer;
   }
 }
