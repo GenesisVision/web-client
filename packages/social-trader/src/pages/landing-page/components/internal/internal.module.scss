@@ -77,7 +77,11 @@
     margin-bottom: 30px;
     position: relative;
     font-size: 13px;
-    padding-left: 20px;
+    padding-left: 40px;
+
+    @include media-breakpoint-tablet() {
+      font-size: 16px;
+    }
 
     &:last-child {
       margin-bottom: 0;
@@ -92,12 +96,12 @@
       border-radius: 50%;
       background: $primary-color;
       border: 7px solid #e8f8f7;
-      top: 5px;
-      left: -20px;
+      top: 0;
+      left: 0;
+      box-sizing: border-box;
 
       @include media-breakpoint-tablet() {
-        font-size: 16px;
-        left: -43px;
+        top: 2px;
       }
     }
   }
