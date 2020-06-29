@@ -13,7 +13,12 @@ const CreateFund: NextPageWithRedux<Props, {}> = () => {
 CreateFund.getInitialProps = async ctx => {
   await ctx.reduxStore.dispatch(fetchWalletsWithCtx(ctx));
   return {
-    namespacesRequired: ["asset-settings", "create-account", "create-fund-page"]
+    namespacesRequired: [
+      "form-fields",
+      "asset-settings",
+      "create-account",
+      "create-fund-page"
+    ]
   };
 };
 

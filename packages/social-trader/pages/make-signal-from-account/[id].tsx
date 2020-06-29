@@ -21,7 +21,12 @@ const Page: NextPageWithRedux<Props, {}> = ({ id }) => {
 Page.getInitialProps = async ctx => {
   const { id } = ctx.query;
   return {
-    namespacesRequired: ["asset-settings", "create-account", "convert-page"],
+    namespacesRequired: [
+      "form-fields",
+      "asset-settings",
+      "create-account",
+      "convert-page"
+    ],
     id
   };
 };
