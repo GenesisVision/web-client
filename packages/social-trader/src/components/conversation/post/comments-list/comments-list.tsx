@@ -49,9 +49,7 @@ const _CommentsList: React.FC<Props> = ({
         </Row>
       )}
       {visibleComments.map(comment => (
-        <Row onlyOffset>
-          <Comment updateData={updateData} key={comment.id} comment={comment} />
-        </Row>
+        <Comment updateData={updateData} key={comment.id} comment={comment} />
       ))}
     </div>
   );

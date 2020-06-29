@@ -7,6 +7,9 @@
   border-top: 1px solid $border-color;
   flex-direction: column;
 
+  &:not(:last-child) {
+    @include adaptive-padding(bottom, $padding-xsmall);
+  }
   &--highlighted {
     background: linear-gradient(
       90deg,
