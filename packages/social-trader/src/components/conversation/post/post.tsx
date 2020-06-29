@@ -44,7 +44,12 @@ const DeletedPost: React.FC<{
   );
 };
 
-const _Post: React.FC<Props> = ({ reduceLargeText, updateData, post }) => {
+const _Post: React.FC<Props> = ({
+  visibleCommentsCount,
+  reduceLargeText,
+  updateData,
+  post
+}) => {
   const {
     url,
     rePostsCount,
@@ -115,7 +120,11 @@ const _Post: React.FC<Props> = ({ reduceLargeText, updateData, post }) => {
       />
       {!!comments.length && (
         <Row large>
-          <CommentsList comments={comments} updateData={updateData} />
+          <CommentsList
+            visibleCommentsCount={visibleCommentsCount}
+            comments={comments}
+            updateData={updateData}
+          />
         </Row>
       )}
       {actions && actions.canComment && (
@@ -128,6 +137,7 @@ const _Post: React.FC<Props> = ({ reduceLargeText, updateData, post }) => {
 };
 
 interface Props {
+  visibleCommentsCount?: number;
   reduceLargeText?: boolean;
   updateData: VoidFunction;
   post: ConversationPost;
