@@ -5,7 +5,7 @@ import { LikeContainer } from "components/conversation/like/like-container";
 import { Message } from "components/conversation/message/message";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
 import styles from "./comment.module.scss";
 
@@ -24,8 +24,17 @@ const _Comment: React.FC<Props> = ({
     author
   }
 }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (ref.current !== null && isHighlighted) {
+      const top = ref.current.getBoundingClientRect().top;
+      window.scroll({ left: 0, top });
+    }
+  }, [ref.current]);
+
   return (
     <div
+      ref={ref}
       className={classNames(styles["comment"], {
         [styles["comment--highlighted"]]: isHighlighted
       })}
