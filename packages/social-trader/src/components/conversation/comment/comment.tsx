@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import { ConversationRemoveButton } from "components/conversation/conversation-remove-button/conversation-remove-button";
 import { ConversationComment } from "components/conversation/conversation.types";
 import { LikeContainer } from "components/conversation/like/like-container";
@@ -13,7 +14,11 @@ const _Comment: React.FC<Props> = ({
   comment: { url, tags, images, date, text, id, actions, likesCount, author }
 }) => {
   return (
-    <div className={styles["comment"]}>
+    <div
+      className={classNames(styles["comment"], {
+        [styles["comment--highlighted"]]: false
+      })}
+    >
       <Row className={styles["comment__message"]} center={false}>
         <RowItem wide>
           <Message
