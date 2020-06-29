@@ -6,6 +6,15 @@
   @include adaptive-padding(left, $padding-small);
   border-top: 1px solid $border-color;
   flex-direction: column;
+
+  &--highlighted {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.02) 0%,
+      rgba(0, 0, 0, 0) 100%
+    );
+  }
+
   &__message,
   &__buttons {
     width: 100%;
