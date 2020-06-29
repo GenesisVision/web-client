@@ -1,5 +1,6 @@
 import ImageBaseElement from "components/avatar/image-base.element";
 import { useTranslation } from "i18n";
+import { InternalArticle } from "pages/landing-page/components/internal/internal.blocks";
 import MetatraderLogo from "pages/landing-page/images/internal/metatrader.png";
 import React from "react";
 
@@ -17,7 +18,7 @@ const DownloadsSection: React.FC = () => {
   const { t } = useTranslation();
   return (
     <section className={styles["downloads-section"]}>
-      <article className={"internal__article"} id="pc">
+      <InternalArticle id="pc">
         <h1>{t("downloads.title")}</h1>
         <h2>{t("downloads.subtitle-1")}</h2>
         <p>
@@ -32,8 +33,8 @@ const DownloadsSection: React.FC = () => {
             />
           </a>
         </p>
-      </article>
-      <article className={"internal__article"} id="mobile">
+      </InternalArticle>
+      <InternalArticle id="mobile">
         <h2>{t("downloads.subtitle-2")}</h2>
         <p>
           {t("downloads.text-2")}
@@ -56,8 +57,8 @@ const DownloadsSection: React.FC = () => {
             {t("downloads.link-3")}
           </a>
         </p>
-      </article>
-      <article className={"internal__article"} id="web">
+      </InternalArticle>
+      <InternalArticle id="web">
         <h2>{t("downloads.subtitle-3")}</h2>
         <p>
           {t("downloads.text-3")}
@@ -71,7 +72,7 @@ const DownloadsSection: React.FC = () => {
             {t("downloads.link-4")}
           </a>
         </p>
-      </article>
+      </InternalArticle>
     </section>
   );
 };

@@ -23,9 +23,13 @@ export const InternalContainer: React.FC = ({ children }) => {
 
 export const InternalArticle: React.FC<{
   id?: string;
-}> = ({ id, children }) => {
+  className?: string;
+}> = ({ id, className, children }) => {
   return (
-    <article className={styles["internal__article"]} id={id}>
+    <article
+      className={classNames(styles["internal__article"], className)}
+      id={id}
+    >
       {children}
     </article>
   );

@@ -40,6 +40,14 @@
       margin-bottom: 20px;
     }
 
+    li {
+      font-size: 13px;
+
+      @include media-breakpoint-tablet() {
+        font-size: 16px;
+      }
+    }
+
     a {
       @include reset-link();
       @include transition(color);
