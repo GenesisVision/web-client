@@ -65,7 +65,7 @@ export const _AssetFormField: React.FC<React.HTMLAttributes<HTMLDivElement> &
       )}
       {hintContent && (
         <Row>
-          <Text size={"small"}>
+          <Text muted size={"small"}>
             <Hint
               content={hintContent}
               className={styles["asset-form-field__hint"]}
