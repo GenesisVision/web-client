@@ -11,12 +11,23 @@ import styles from "./comment.module.scss";
 
 const _Comment: React.FC<Props> = ({
   updateData,
-  comment: { url, tags, images, date, text, id, actions, likesCount, author }
+  comment: {
+    isHighlighted,
+    url,
+    tags,
+    images,
+    date,
+    text,
+    id,
+    actions,
+    likesCount,
+    author
+  }
 }) => {
   return (
     <div
       className={classNames(styles["comment"], {
-        [styles["comment--highlighted"]]: false
+        [styles["comment--highlighted"]]: isHighlighted
       })}
     >
       <Row className={styles["comment__message"]} center={false}>
