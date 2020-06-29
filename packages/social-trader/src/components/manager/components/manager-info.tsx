@@ -9,11 +9,6 @@ import { SIZES } from "constants/constants";
 import { PublicProfile } from "gv-api-web";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
-import {
-  betaTesterSelector,
-  isSocialBetaTester
-} from "reducers/header-reducer";
 import { localizedDate } from "utils/dates";
 import { getLongWordsCount } from "utils/helpers";
 
@@ -21,8 +16,6 @@ import styles from "./manager-info.module.scss";
 
 const _ManagerInfo: React.FC<Props> = ({ profile }) => {
   const { username, about, logoUrl, regDate, socialLinks } = profile;
-  const betaTester = useSelector(betaTesterSelector);
-  const isBetaTester = isSocialBetaTester(betaTester);
   const [t] = useTranslation();
   const memberSince = `${t("manager-page.member-since")} ${localizedDate(
     regDate
@@ -45,7 +38,7 @@ const _ManagerInfo: React.FC<Props> = ({ profile }) => {
             </MutedText>
           </Row>
         </Row>
-        {isBetaTester && <FollowUserBlock profile={profile} />}
+        <FollowUserBlock profile={profile} />
       </DefaultBlock>
       <Row wide center={false}>
         <DefaultBlock>

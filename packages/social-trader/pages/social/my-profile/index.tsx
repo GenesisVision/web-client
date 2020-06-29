@@ -1,6 +1,5 @@
 import { getHeader } from "components/header/services/header.service";
 import ManagerPage from "components/manager/manager.page";
-import withBetaTesting from "decorators/with-beta-testing";
 import withDefaultLayout from "decorators/with-default-layout";
 import withPrivateRoute from "decorators/with-private-route";
 import { PublicProfile } from "gv-api-web";
@@ -25,8 +24,4 @@ Page.getInitialProps = async ctx => {
   };
 };
 
-export default compose(
-  withDefaultLayout,
-  withPrivateRoute,
-  withBetaTesting("Social")
-)(Page);
+export default compose(withDefaultLayout, withPrivateRoute)(Page);
