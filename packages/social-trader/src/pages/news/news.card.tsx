@@ -67,6 +67,9 @@ const NewsCardContent: React.FC<Props> = React.memo(
             </Row>
           )}
           <Row>
+            <Separator />
+          </Row>
+          <Row>
             <AvatarWithName
               avatar={
                 <ProfileAvatar url={post.authorLogoUrl} alt={post.author} />
