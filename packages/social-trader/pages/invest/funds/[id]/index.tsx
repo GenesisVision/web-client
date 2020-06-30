@@ -19,6 +19,12 @@ Page.getInitialProps = async ctx => {
     ),
     ctx.reduxStore.dispatch(dispatchFundDescription(ctx, currency))
   ]);
-  return { namespacesRequired: ["asset-details", "fund-details-page"] };
+  return {
+    namespacesRequired: [
+      "portfolio-events",
+      "asset-details",
+      "fund-details-page"
+    ]
+  };
 };
 export default compose(withDefaultLayout)(Page);

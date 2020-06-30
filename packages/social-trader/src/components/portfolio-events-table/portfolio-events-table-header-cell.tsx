@@ -6,11 +6,7 @@ const _PortfolioEventsTableHeaderCell: React.FC<{ column: SortingColumn }> = ({
   column
 }) => {
   const [t] = useTranslation();
-  return (
-    <span>
-      {t(`dashboard-page:portfolio-events.table-header.${column.name}`)}
-    </span>
-  );
+  return <span>{t(`portfolio-events:table-header.${column.name}`)}</span>;
 };
 
 const PortfolioEventsTableHeaderCell = React.memo(
