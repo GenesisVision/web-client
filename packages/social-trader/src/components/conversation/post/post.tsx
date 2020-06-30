@@ -12,6 +12,7 @@ import GVButton, { GV_BTN_SIZE } from "components/gv-button";
 import { MutedText } from "components/muted-text/muted-text";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { PostActions as PostActionsType } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
 import useIsOpen from "hooks/is-open.hook";
 import React, { useCallback } from "react";
@@ -44,6 +45,36 @@ const DeletedPost: React.FC<{
   );
 };
 
+const PostActions: React.FC<{
+  actions: PostActionsType;
+  id: string;
+  isPinned: boolean;
+  updateData: VoidFunction;
+  setDeleted: VoidFunction;
+}> = ({ actions, id, isPinned, updateData, setDeleted }) => {
+  if (!actions?.canDelete && !actions?.canPin) return null;
+  return (
+    <RowItem>
+      <Center>
+        {actions?.canPin && (
+          <RowItem>
+            <ConversationPinButton
+              id={id}
+              value={isPinned}
+              onSuccess={updateData}
+            />
+          </RowItem>
+        )}
+        {actions?.canDelete && (
+          <RowItem>
+            <ConversationRemoveButton id={id} onSuccess={setDeleted} />
+          </RowItem>
+        )}
+      </Center>
+    </RowItem>
+  );
+};
+
 const _Post: React.FC<Props> = ({
   visibleCommentsCount,
   reduceLargeText,
@@ -73,31 +104,13 @@ const _Post: React.FC<Props> = ({
           <Message
             reduceLargeText={reduceLargeText}
             settingsBlock={
-              actions?.canDelete || actions?.canPin ? (
-                <RowItem>
-                  <Center>
-                    {actions?.canPin && (
-                      <RowItem>
-                        <ConversationPinButton
-                          id={id}
-                          value={isPinned}
-                          onSuccess={updateData}
-                        />
-                      </RowItem>
-                    )}
-                    {actions?.canDelete && (
-                      <RowItem>
-                        <ConversationRemoveButton
-                          id={id}
-                          onSuccess={setDeleted}
-                        />
-                      </RowItem>
-                    )}
-                  </Center>
-                </RowItem>
-              ) : (
-                undefined
-              )
+              <PostActions
+                actions={actions}
+                id={id}
+                isPinned={isPinned}
+                updateData={updateData}
+                setDeleted={setDeleted}
+              />
             }
             row={false}
             tags={tags}
