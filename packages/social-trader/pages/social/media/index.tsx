@@ -1,12 +1,24 @@
+import { getSocialMedia } from "components/conversation/conversation.service";
+import { initialOptions } from "components/notifications/components/notifications.helpers";
 import withBetaTesting from "decorators/with-beta-testing";
 import withDefaultLayout from "decorators/with-default-layout";
-import { NextPage } from "next";
+import { INewsListContainerInitData } from "pages/news/news-list/news-list.container";
 import { NewsPage } from "pages/news/news.page";
 import React from "react";
 import { compose } from "redux";
+import { NextPageWithRedux } from "utils/types";
 
-const Page: NextPage = () => {
-  return <NewsPage />;
+interface Props extends INewsListContainerInitData {}
+
+const Page: NextPageWithRedux<Props> = ({ initData }) => {
+  return <NewsPage initData={initData} />;
+};
+
+Page.getInitialProps = async ctx => {
+  const initData = await getSocialMedia(initialOptions, ctx.token);
+  return {
+    initData
+  };
 };
 
 export default compose(withDefaultLayout, withBetaTesting("Social"))(Page);

@@ -5,12 +5,17 @@ import {
   SkipTake,
   TAKE_COUNT
 } from "components/notifications/components/notifications.helpers";
+import { PostItemsViewModel } from "gv-api-web";
 import useApiRequest, { API_REQUEST_STATUS } from "hooks/api-request.hook";
 import useIsOpen from "hooks/is-open.hook";
 import { debounce } from "lodash";
 import React, { useCallback, useEffect, useState } from "react";
 
-export interface IPostListContainerProps {
+export interface IPostListContainerInitData {
+  initData?: PostItemsViewModel;
+}
+
+export interface IPostListContainerProps extends IPostListContainerInitData {
   reset?: boolean;
   fetchMethod: (values: Object) => Promise<any>;
   id?: string;
@@ -28,6 +33,7 @@ export const calculateOptions = (
 };
 
 const _PostListContainer: React.FC<IPostListContainerProps> = ({
+  initData,
   reset,
   id,
   fetchMethod
@@ -35,6 +41,7 @@ const _PostListContainer: React.FC<IPostListContainerProps> = ({
   const [isUpdatingPage, updatePage, setNotUpdatingPage] = useIsOpen();
   const [options, setOptions] = useState(initialOptions);
   const { data, sendRequest, status } = useApiRequest({
+    defaultData: initData,
     request: values => fetchMethod(values)
   });
 
@@ -55,7 +62,7 @@ const _PostListContainer: React.FC<IPostListContainerProps> = ({
   useEffect(() => {
     if (isUpdatingPage) {
       const newOptions = calculateOptions(options, data.total);
-      setOptions(newOptions);
+      if (newOptions.take) setOptions(newOptions);
       setNotUpdatingPage();
     }
   }, [isUpdatingPage, options]);
