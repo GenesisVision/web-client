@@ -9,19 +9,26 @@ import React from "react";
 import styles from "./comments-list.module.scss";
 
 interface Props {
+  visibleCommentsCount?: number;
   comments: Array<Post>;
   updateData: VoidFunction;
 }
 
 const VISIBLE_COMMENTS_COUNT = 3;
 
-const _CommentsList: React.FC<Props> = ({ comments, updateData }) => {
+const _CommentsList: React.FC<Props> = ({
+  visibleCommentsCount,
+  comments,
+  updateData
+}) => {
+  const visibleCommentsCountInner =
+    visibleCommentsCount || VISIBLE_COMMENTS_COUNT;
   const [isViewAll, setViewAll] = useIsOpen(
-    comments.length <= VISIBLE_COMMENTS_COUNT
+    comments.length <= visibleCommentsCountInner
   );
   const visibleComments = isViewAll
     ? comments
-    : comments.slice(comments.length - VISIBLE_COMMENTS_COUNT);
+    : comments.slice(comments.length - visibleCommentsCountInner);
   return (
     <div className={styles["comments-list__comments"]}>
       {!isViewAll && (
@@ -35,14 +42,17 @@ const _CommentsList: React.FC<Props> = ({ comments, updateData }) => {
             View all
           </GVButton>
           &nbsp;
-          <MutedText> ({comments.length - VISIBLE_COMMENTS_COUNT})</MutedText>
+          <MutedText>
+            {" "}
+            ({comments.length - visibleCommentsCountInner})
+          </MutedText>
         </Row>
       )}
-      {visibleComments.map(comment => (
-        <Row onlyOffset>
+      <Row onlyOffset>
+        {visibleComments.map(comment => (
           <Comment updateData={updateData} key={comment.id} comment={comment} />
-        </Row>
-      ))}
+        ))}
+      </Row>
     </div>
   );
 };

@@ -30,6 +30,7 @@ const getTagLoaderData = (): PostTag => ({
     title: ""
   },
   post: {
+    isHighlighted: false,
     url: "",
     isDeleted: false,
     impressionsCount: 0,
@@ -163,6 +164,7 @@ export const getConversationPostLoaderData = (
     .map(getConversationImageLoaderData);
 
   return {
+    isHighlighted: false,
     url: "",
     isDeleted: false,
     impressionsCount: 0,
@@ -184,6 +186,7 @@ export const getConversationPostLoaderData = (
 };
 
 export const getEmptyPostLoaderData = (): ConversationPost => ({
+  isHighlighted: false,
   url: "",
   isDeleted: false,
   impressionsCount: 0,

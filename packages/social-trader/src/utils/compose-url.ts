@@ -55,7 +55,7 @@ export const composeUrl = (route: string, slugParamName: string) => (
   });
 
 export const composeAssetDetailsUrl = (
-  assetType: AssetTypeExt,
+  assetType: AssetTypeExt | AssetType,
   slugUrl: string
 ): string => {
   switch (assetType) {

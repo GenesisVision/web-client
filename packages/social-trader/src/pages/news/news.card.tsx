@@ -23,12 +23,13 @@ interface Props {
 }
 
 const transformNewsPostToGVPost = (newsPost: MediaPost): Post => ({
+  isHighlighted: false,
   url: newsPost.url,
   id: newsPost.id,
   text: newsPost.text,
   date: newsPost.date,
-  likesCount: newsPost.likesCount,
-  rePostsCount: newsPost.rePostsCount,
+  likesCount: 0,
+  rePostsCount: 0,
   impressionsCount: 0,
   isPinned: false,
   isDeleted: false,
@@ -66,6 +67,9 @@ const NewsCardContent: React.FC<Props> = React.memo(
               <MutedText noWrap={false}>{post.text}</MutedText>
             </Row>
           )}
+          <Row>
+            <Separator />
+          </Row>
           <Row>
             <AvatarWithName
               avatar={

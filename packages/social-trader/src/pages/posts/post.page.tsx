@@ -37,7 +37,12 @@ export const PostPage: React.FC<Props> = ({ post }) => {
       description={description}
       title={title}
     >
-      <PostContainer reduceLargeText={false} post={post} id={post.id} />
+      <PostContainer
+        visibleCommentsCount={post.comments.length}
+        reduceLargeText={false}
+        post={post}
+        id={post.id}
+      />
     </Page>
   );
 };
