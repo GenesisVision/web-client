@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import { Center } from "components/center/center";
 import GVTextField from "components/gv-text-field";
+import { SliderStyleWrapper } from "components/range/range";
 import { RowItem } from "components/row-item/row-item";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import Slider from "rc-slider";
@@ -110,15 +111,17 @@ class _CalculatorSlider extends React.PureComponent<Props> {
             )}
           </div>
         </div>
-        <Slider
-          className={"calculator-slider__slider-element"}
-          min={min}
-          max={max}
-          marks={this.marks}
-          value={value}
-          step={step}
-          onChange={this.handleChange}
-        />
+        <SliderStyleWrapper>
+          <Slider
+            className={"calculator-slider__slider-element"}
+            min={min}
+            max={max}
+            marks={this.marks}
+            value={value}
+            step={step}
+            onChange={this.handleChange}
+          />
+        </SliderStyleWrapper>
       </div>
     );
   }
