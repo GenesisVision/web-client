@@ -1,6 +1,7 @@
 import { useTranslation } from "i18n";
 import { TFunction } from "i18next";
 import AdvantagesList from "pages/landing-page/components/advantages-list/advantages-list";
+import { InternalList } from "pages/landing-page/components/internal/internal.blocks";
 import { refProgItems } from "pages/landing-page/static-data/referral-progs";
 import React from "react";
 
@@ -15,6 +16,19 @@ const renderLastItem = (t: TFunction) => (
 
 const ReferralProgramSection: React.FC = () => {
   const { t } = useTranslation();
+  const textListFirst = [
+    t("referral-program.text-list-1"),
+    t("referral-program.text-list-2"),
+    t("referral-program.text-list-3"),
+    t("referral-program.text-list-4"),
+    t("referral-program.text-list-5"),
+    t("referral-program.text-list-6")
+  ];
+  const textListSecond = [
+    t("referral-program.text-list-7"),
+    t("referral-program.text-list-8"),
+    t("referral-program.text-list-9")
+  ];
   return (
     <section className={styles["referral-program-section"]}>
       <div className={styles["referral-program-section__container"]}>
@@ -38,40 +52,11 @@ const ReferralProgramSection: React.FC = () => {
         <div className={styles["referral-program-section__container"]}>
           <div className={styles["referral-program-section__list"]}>
             <h3>{t("referral-program.title-list-1")}</h3>
-            <ul className="internal__list">
-              <li className="internal__list-item">
-                {t("referral-program.text-list-1")}
-              </li>
-              <li className="internal__list-item">
-                {t("referral-program.text-list-2")}
-              </li>
-              <li className="internal__list-item">
-                {t("referral-program.text-list-3")}
-              </li>
-              <li className="internal__list-item">
-                {t("referral-program.text-list-4")}
-              </li>
-              <li className="internal__list-item">
-                {t("referral-program.text-list-5")}
-              </li>
-              <li className="internal__list-item">
-                {t("referral-program.text-list-6")}
-              </li>
-            </ul>
+            <InternalList list={textListFirst} />
           </div>
           <div className={styles["referral-program-section__list"]}>
             <h3>{t("referral-program.title-list-2")}</h3>
-            <ul className="internal__list">
-              <li className="internal__list-item">
-                {t("referral-program.text-list-7")}
-              </li>
-              <li className="internal__list-item">
-                {t("referral-program.text-list-8")}
-              </li>
-              <li className="internal__list-item">
-                {t("referral-program.text-list-9")}
-              </li>
-            </ul>
+            <InternalList list={textListSecond} />
           </div>
         </div>
       </div>

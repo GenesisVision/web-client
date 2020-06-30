@@ -1,52 +1,11 @@
 @import "styles/_colors";
 @import "styles/_breakpoint";
-@import "mixins";
-@import "grid";
+@import "../../styles/mixins";
+@import "../../styles/grid";
 
 .home {
   &__container {
     @include container();
-  }
-
-  &__grid-row {
-    @include grid();
-    align-items: center;
-
-    &--mob-wider {
-      margin-left: -20px;
-      margin-right: -20px;
-
-      @include media-breakpoint-tablet() {
-        margin-left: 0;
-        margin-right: 0;
-      }
-
-      .home__grid-item {
-        padding-left: 20px;
-        padding-right: 20px;
-
-        @include media-breakpoint-tablet() {
-          padding-left: 0;
-          padding-right: 0;
-        }
-      }
-    }
-  }
-
-  &__grid-item {
-    @include media-breakpoint-tablet() {
-      grid-column: 2/12;
-    }
-
-    &--sm {
-      @include media-breakpoint-tablet() {
-        grid-column: 3/11;
-      }
-
-      @include media-breakpoint-landscape-tablet() {
-        grid-column: 4/10;
-      }
-    }
   }
 
   &__section {
@@ -84,8 +43,8 @@
 
     &--last-screen {
       padding-top: 360px;
-      background-image: url("../images/common/join-bg-2.svg"),
-        url("../images/common/join-bg-mob-1.svg");
+      background-image: url("../../images/common/join-bg-2.svg"),
+        url("../../images/common/join-bg-mob-1.svg");
       background-repeat: no-repeat;
       background-size: 300px auto;
       background-position: 50% 50px, 50% 120px;
@@ -99,8 +58,8 @@
       @include media-breakpoint-landscape-tablet() {
         padding-top: 235px;
         padding-bottom: 235px;
-        background-image: url("../images/common/join-bg-2.svg"),
-          url("../images/common/join-bg-1.svg");
+        background-image: url("../../images/common/join-bg-2.svg"),
+          url("../../images/common/join-bg-1.svg");
         background-size: auto;
         background-position: 90% 50%, 50% 50%;
       }
@@ -122,20 +81,6 @@
     &--horizontal-padding {
       padding-top: 100px;
       padding-bottom: 100px;
-
-      @include media-breakpoint-large-desktop() {
-        padding-top: 140px;
-        padding-bottom: 140px;
-      }
-    }
-
-    &--not-padding-bottom-mob {
-      padding-top: 100px;
-      padding-bottom: 0;
-
-      @include media-breakpoint-tablet() {
-        padding-bottom: 100px;
-      }
 
       @include media-breakpoint-large-desktop() {
         padding-top: 140px;

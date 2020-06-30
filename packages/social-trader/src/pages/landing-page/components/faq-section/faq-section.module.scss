@@ -20,8 +20,6 @@
   }
 
   &__article {
-    composes: internal__article from global;
-
     @include media-breakpoint-tablet() {
       grid-column: 2/12;
     }

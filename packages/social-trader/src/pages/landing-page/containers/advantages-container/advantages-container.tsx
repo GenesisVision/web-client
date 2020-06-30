@@ -1,6 +1,6 @@
 import { useNetworkStatusInWindow } from "hooks/network-status";
 import dynamic from "next/dynamic";
-import AdvantagesSection from "pages/landing-page/components/advantages-section/advantages-section";
+import { AdvantagesListContainer } from "pages/landing-page/components/advantages-section/advantages.blocks";
 import React, { useCallback } from "react";
 
 const AdvantagesSectionWithAnimation = dynamic(() =>
@@ -16,7 +16,7 @@ const AdvantagesContainer: React.FC = () => {
       case "4g":
         return <AdvantagesSectionWithAnimation />;
       default:
-        return <AdvantagesSection />;
+        return <AdvantagesListContainer />;
     }
   }, [effectiveConnectionType]);
   return renderSection();

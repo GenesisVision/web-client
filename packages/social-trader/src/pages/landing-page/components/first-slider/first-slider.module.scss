@@ -26,6 +26,8 @@
 }
 
 .slider {
+  @include grid();
+  align-items: center;
   margin-bottom: 60px;
 
   @include media-breakpoint-landscape-tablet() {

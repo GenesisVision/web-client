@@ -4,9 +4,7 @@ import withHistoryProvider from "decorators/history-provider/with-history-provid
 import withReduxStore from "decorators/with-redux-store";
 import { appWithTranslation } from "i18n";
 import App from "next/app";
-import "pages/landing-page/styles/home.scss";
 import "pages/landing-page/styles/index.scss";
-import "pages/landing-page/styles/internal.scss";
 import React from "react";
 import { Provider } from "react-redux";
 import { compose, Store } from "redux";

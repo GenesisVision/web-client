@@ -1,6 +1,9 @@
 import { useTranslation } from "i18n";
 import { NextPage } from "next";
-import { Fees } from "pages/fees";
+import {
+  InternalContainer,
+  InternalMainWrapper
+} from "pages/landing-page/components/internal/internal.blocks";
 import TermsSection from "pages/landing-page/components/terms-section/terms-section";
 import Layout from "pages/landing-page/layouts/_layout";
 import React from "react";
@@ -9,11 +12,11 @@ export const Terms: NextPage = () => {
   const { t } = useTranslation();
   return (
     <Layout title={t("landing-page:page-titles.terms")}>
-      <main className="internal">
-        <div className="internal__container">
+      <InternalMainWrapper isSmallFont>
+        <InternalContainer>
           <TermsSection />
-        </div>
-      </main>
+        </InternalContainer>
+      </InternalMainWrapper>
     </Layout>
   );
 };

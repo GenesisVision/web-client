@@ -13,10 +13,18 @@
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: none;
   padding-bottom: 60px;
+  padding-left: 20px;
+  padding-right: 20px;
 
   &::-webkit-scrollbar {
     width: 0;
     height: 0;
+  }
+
+  @include media-breakpoint-tablet() {
+    grid-column: 2/12;
+    padding-left: 0;
+    padding-right: 0;
   }
 
   @include media-breakpoint-landscape-tablet() {
@@ -76,5 +84,17 @@
         color: $primary-color;
       }
     }
+  }
+}
+
+.news-list-wrapper {
+  @include grid();
+  align-items: center;
+  margin-left: -20px;
+  margin-right: -20px;
+
+  @include media-breakpoint-tablet() {
+    margin-left: 0;
+    margin-right: 0;
   }
 }
