@@ -48,10 +48,6 @@ export const navHeader: TNavHeader[] = [
         href: USERS_ROUTE
       },
       {
-        name: "landing-page:links.my-profile",
-        href: MY_PROFILE_ROUTE
-      },
-      {
         name: "landing-page:links.media",
         href: MEDIA_ROUTE
       }
