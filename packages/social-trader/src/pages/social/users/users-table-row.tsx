@@ -95,7 +95,7 @@ export const UsersTableRow: React.FC<{ user: UserDetailsList }> = ({
       <TableCell>
         {investorsCount === null ? renderHidden() : investorsCount}
       </TableCell>
-      <TableCell>
+      {/*<TableCell>
         {totalProfit === null ? (
           renderHidden()
         ) : (
@@ -105,7 +105,7 @@ export const UsersTableRow: React.FC<{ user: UserDetailsList }> = ({
             displayType="text"
           />
         )}
-      </TableCell>
+      </TableCell>*/}
       {personalDetails && (
         <TableCell>
           <FollowUserButton
