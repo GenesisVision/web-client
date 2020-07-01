@@ -1,5 +1,7 @@
 import { ASSET } from "constants/constants";
 import { useAccountCurrency } from "hooks/account-currency.hook";
+import useApiRequest from "hooks/api-request.hook";
+import { fetchLevelParameters } from "pages/invest/programs/program-details/service/program-details.service";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CurrencyEnum } from "utils/types";
@@ -16,16 +18,35 @@ const _ProgramDetailsPage: React.FC<Props> = ({ route }) => {
     CurrencyEnum | undefined
   >();
   const [programId, setProgramId] = useState<string | undefined>();
+
+  const {
+    data: levelsParameters,
+    sendRequest: getLevelsParameters
+  } = useApiRequest({
+    request: (currency: CurrencyEnum) =>
+      fetchLevelParameters(profileCurrency || currency)
+  });
+
   useEffect(() => {
     if (!description) return;
     const { currency } = description.tradingAccountInfo;
     setProgramCurrency(currency);
     setProgramId(description.id);
+    getLevelsParameters(currency);
   }, [description]);
   useEffect(() => {
     dispatch(statisticCurrencyAction(programCurrency || profileCurrency));
   }, [programId]);
-  return <ProgramDetailsContainer route={route} data={description!} />;
+
+  if (!description) return null;
+
+  return (
+    <ProgramDetailsContainer
+      levelsParameters={levelsParameters}
+      route={route}
+      data={description!}
+    />
+  );
 };
 
 interface Props {

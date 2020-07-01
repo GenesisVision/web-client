@@ -23,11 +23,11 @@ export const DetailsPerformanceData: React.FC = ({ children }) => {
 export const DetailsBroker: React.FC<{
   name?: string;
   logoUrl: string;
-}> = ({ name, logoUrl }) => {
+}> = React.memo(({ name, logoUrl }) => {
   return (
     <ImageBase alt={name} className={styles["details-broker"]} src={logoUrl} />
   );
-};
+});
 
 const _DetailsStrategy: React.FC<{
   description: string;
