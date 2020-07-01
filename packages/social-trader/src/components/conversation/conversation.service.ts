@@ -129,8 +129,14 @@ export const getPosts = (values: {
   return getFeedMethod({ ...values, userId: values.id });
 };
 
-export const getPost = ({ id }: { id: string }): Promise<EditablePost> => {
-  return api.social().getPost(id);
+export const getPost = ({
+  id,
+  token
+}: {
+  id: string;
+  token?: Token;
+}): Promise<EditablePost> => {
+  return api.social(token).getPost(id);
 };
 
 type RequestFilters = {

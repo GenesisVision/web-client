@@ -15,7 +15,7 @@ import {
   DECIMAL_SCALE_BIG_VALUE,
   DECIMAL_SCALE_SMALL_VALUE
 } from "constants/constants";
-import { AssetTypeExt, DashboardTradingAsset } from "gv-api-web";
+import { AssetType, AssetTypeExt, DashboardTradingAsset } from "gv-api-web";
 import { TAnchor } from "hooks/anchor.hook";
 import { useTranslation } from "i18n";
 import { DashboardPublicCardActions } from "pages/dashboard/components/dashboard-trading/dashboard-public-card-actions";
@@ -176,7 +176,7 @@ const _DashboardPublicCard: React.FC<Props> = ({
   );
 };
 
-export const getAssetFolderRoute = (assetType: AssetTypeExt) => {
+export const getAssetFolderRoute = (assetType: AssetTypeExt | AssetType) => {
   switch (assetType) {
     case "SignalTradingAccount":
     case "ExternalSignalTradingAccount":

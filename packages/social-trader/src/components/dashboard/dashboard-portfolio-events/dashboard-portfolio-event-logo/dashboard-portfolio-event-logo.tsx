@@ -24,9 +24,9 @@ const _PortfolioEventLogo: React.FC<Props> = ({
   );
   const renderAvatar = () => (
     <AssetAvatar
+      size={"full"}
       url={assetDetails.logoUrl}
       alt={assetDetails.title}
-      className={styles["portfolio-event-logo__logo"]}
       color={assetDetails.color}
     />
   );
@@ -52,11 +52,7 @@ const _PortfolioEventLogo: React.FC<Props> = ({
             [styles["portfolio-event-logo__type--with-asset"]]: withAsset
           })}
         >
-          <ImageBase
-            src={icon}
-            alt={styles["event logo"]}
-            defaultImage={SocialLink}
-          />
+          <ImageBase src={icon} alt={"event logo"} defaultImage={SocialLink} />
         </div>
       )}
     </div>

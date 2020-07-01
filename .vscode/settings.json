@@ -1,4 +1,5 @@
 {
+  "emmet.triggerExpansionOnTab": true,
   "editor.tabSize": 2,
   "workbench.activityBar.visible": true,
   "git.autofetch": true,
