@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import React from "react";
 
 import styles from "./mobile-burger.module.scss";
@@ -12,7 +12,7 @@ export const MobileBurger: React.FC<Props> = ({ onClick, menuOpen }) => (
   <button
     aria-label="Menu"
     onClick={onClick}
-    className={classNames(styles["mobile-burger"], {
+    className={clsx(styles["mobile-burger"], {
       [styles["mobile-burger--open-menu"]]: menuOpen
     })}
   >

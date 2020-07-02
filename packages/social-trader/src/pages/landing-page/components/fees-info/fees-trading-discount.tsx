@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { useTranslation } from "i18n";
 import React from "react";
 
@@ -12,14 +12,14 @@ const _FeesTradingDiscountInfo: React.FC<{
   const { t } = useTranslation();
   return (
     <div
-      className={classNames(styles["fees-info__notes"], {
+      className={clsx(styles["fees-info__notes"], {
         [styles["fees-info__notes--withoutOffset"]]: withoutOffset
       })}
     >
       <p>{t("fees:text-3")}</p>
       <h3>{t("fees:trading-discount")}</h3>
       <ul
-        className={classNames(styles["fees-info__list-notes"], {
+        className={clsx(styles["fees-info__list-notes"], {
           [styles["fees-info__list-notes--dark"]]: dark
         })}
       >
@@ -44,14 +44,14 @@ const _FeesTradingDiscountTable: React.FC<{
   const { t } = useTranslation();
   return (
     <div
-      className={classNames(styles["fees-info__notes"], {
+      className={clsx(styles["fees-info__notes"], {
         [styles["fees-info__notes--withoutOffset"]]: withoutOffset
       })}
     >
       <h4>{t("fees:conditions")}</h4>
       <div className={styles["fees-info__table-wrapper"]}>
         <table
-          className={classNames(styles["fees-table"], {
+          className={clsx(styles["fees-table"], {
             [styles["fees-table--dark"]]: dark,
             [styles["fees-table--white-head"]]: white
           })}
@@ -59,7 +59,7 @@ const _FeesTradingDiscountTable: React.FC<{
           <thead className={styles["fees-table__head"]}>
             <tr className={styles["fees-table__row"]}>
               <th
-                className={classNames(
+                className={clsx(
                   styles["fees-table__cell"],
                   styles["fees-table__cell--width-bg"]
                 )}

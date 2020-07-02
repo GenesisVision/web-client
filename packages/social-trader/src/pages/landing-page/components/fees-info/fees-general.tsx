@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { useTranslation } from "i18n";
 import { Done } from "pages/landing-page/components/common-icons/done";
 import React from "react";
@@ -38,7 +38,7 @@ const _FeesGeneral: React.FC = () => {
                     {t("fees:entry-fee-number")}
                   </td>
                   <td
-                    className={classNames(
+                    className={clsx(
                       styles["fees-table__cell"],
                       styles["fees-table__cell--color-primary"]
                     )}
@@ -46,7 +46,7 @@ const _FeesGeneral: React.FC = () => {
                     <span>{<Done />}</span>
                   </td>
                   <td
-                    className={classNames(
+                    className={clsx(
                       styles["fees-table__cell"],
                       styles["fees-table__cell--color-primary"]
                     )}
@@ -54,7 +54,7 @@ const _FeesGeneral: React.FC = () => {
                     <b>&mdash;</b>
                   </td>
                   <td
-                    className={classNames(
+                    className={clsx(
                       styles["fees-table__cell"],
                       styles["fees-table__cell--color-primary"]
                     )}
@@ -70,7 +70,7 @@ const _FeesGeneral: React.FC = () => {
                     {t("fees:success-fee-number")}
                   </td>
                   <td
-                    className={classNames(
+                    className={clsx(
                       styles["fees-table__cell"],
                       styles["fees-table__cell--color-primary"]
                     )}
@@ -78,7 +78,7 @@ const _FeesGeneral: React.FC = () => {
                     {<Done />}
                   </td>
                   <td
-                    className={classNames(
+                    className={clsx(
                       styles["fees-table__cell"],
                       styles["fees-table__cell--color-primary"]
                     )}
@@ -86,7 +86,7 @@ const _FeesGeneral: React.FC = () => {
                     {<Done />}
                   </td>
                   <td
-                    className={classNames(
+                    className={clsx(
                       styles["fees-table__cell"],
                       styles["fees-table__cell--color-primary"]
                     )}
@@ -102,7 +102,7 @@ const _FeesGeneral: React.FC = () => {
                     {t("fees:gv-commission-number")}
                   </td>
                   <td
-                    className={classNames(
+                    className={clsx(
                       styles["fees-table__cell"],
                       styles["fees-table__cell--color-primary"]
                     )}
@@ -110,7 +110,7 @@ const _FeesGeneral: React.FC = () => {
                     <b>&mdash;</b>
                   </td>
                   <td
-                    className={classNames(
+                    className={clsx(
                       styles["fees-table__cell"],
                       styles["fees-table__cell--color-primary"]
                     )}
@@ -118,7 +118,7 @@ const _FeesGeneral: React.FC = () => {
                     {<Done />}
                   </td>
                   <td
-                    className={classNames(
+                    className={clsx(
                       styles["fees-table__cell"],
                       styles["fees-table__cell--color-primary"]
                     )}
@@ -139,7 +139,7 @@ const _FeesGeneral: React.FC = () => {
                   </li>
                 ))}
               <li
-                className={classNames(
+                className={clsx(
                   styles["fees-info__note-item"],
                   styles["fees-info__note-item--star"]
                 )}
@@ -151,7 +151,7 @@ const _FeesGeneral: React.FC = () => {
         </div>
       </div>
       <div
-        className={classNames(
+        className={clsx(
           styles["fees-info__section--bg-gray"],
           styles["fees-info__section"]
         )}
@@ -165,7 +165,7 @@ const _FeesGeneral: React.FC = () => {
           </div>
           <div className={styles["fees-info__table-wrapper"]}>
             <table
-              className={classNames(
+              className={clsx(
                 styles["fees-table"],
                 styles["fees-table--white-head"]
               )}

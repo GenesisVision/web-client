@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import React from "react";
 
 import styles from "./internal.module.scss";
@@ -8,7 +8,7 @@ export const InternalMainWrapper: React.FC<{
 }> = ({ isSmallFont, children }) => {
   return (
     <main
-      className={classNames(styles["internal"], {
+      className={clsx(styles["internal"], {
         [styles["internal--font-small"]]: isSmallFont
       })}
     >
@@ -26,10 +26,7 @@ export const InternalArticle: React.FC<{
   className?: string;
 }> = ({ id, className, children }) => {
   return (
-    <article
-      className={classNames(styles["internal__article"], className)}
-      id={id}
-    >
+    <article className={clsx(styles["internal__article"], className)} id={id}>
       {children}
     </article>
   );

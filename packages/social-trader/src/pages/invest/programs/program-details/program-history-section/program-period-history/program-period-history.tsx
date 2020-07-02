@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import styles from "components/details/details-description-section/details-statistic-section/details-history/trades.module.scss";
 import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import DateRangeFilter from "components/table/components/filtering/date-range-filter/date-range-filter";
@@ -29,7 +29,7 @@ const _ProgramPeriodHistory: React.FC<Props> = ({
   const [t] = useTranslation();
   const renderCell = (name: string) => (
     <span
-      className={classNames(
+      className={clsx(
         styles["details-trades__head-cell"],
         styles[`program-details-trades__cell--${name}`]
       )}

@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import React from "react";
 
 import styles from "./home.module.scss";
@@ -18,7 +18,7 @@ export const HomeSection: React.FC<HomeSectionProps> = ({
   return (
     <section
       id={id}
-      className={classNames(styles["home__section"], {
+      className={clsx(styles["home__section"], {
         [styles["home__section--bg-gray"]]: bgColor === "gray",
         [styles["home__section--bg-white"]]: bgColor === "white",
         [styles["home__section--first-screen"]]: isFirst,

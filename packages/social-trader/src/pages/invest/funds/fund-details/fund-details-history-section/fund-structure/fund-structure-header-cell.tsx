@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import { SortingColumn } from "components/table/components/filtering/filter.type";
 import Tooltip from "components/tooltip/tooltip";
@@ -11,7 +11,7 @@ export const _FundStructureHeaderCell: React.FC<WithTranslation & {
 }> = ({ t, column }) => {
   const renderCell = () => (
     <span
-      className={classNames(
+      className={clsx(
         `details-structure__head-cell fund-details-structure__cell--${column.name}`,
         {
           tooltip__label: column.tooltip

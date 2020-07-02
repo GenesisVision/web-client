@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { useNetworkStatusInWindow } from "hooks/network-status";
 import dynamic from "next/dynamic";
 import AccordionContent from "pages/landing-page/components/accordion-content/accordion-content";
@@ -50,7 +50,7 @@ const _Accordion: React.FC<Props> = ({ accordion, className }) => {
     <div className={styles["accordion"]} id={String(accordion.id)}>
       <header className={styles["accordion__header"]} onClick={handleClick}>
         <span
-          className={classNames(styles["accordion__arrow"], {
+          className={clsx(styles["accordion__arrow"], {
             [styles["accordion__arrow--up"]]: isVisible
           })}
         >

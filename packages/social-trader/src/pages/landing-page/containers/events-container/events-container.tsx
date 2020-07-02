@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { PlatformEvent } from "gv-api-web";
 import { useTranslation } from "i18n";
 import EventsList from "pages/landing-page/components/events-list/events-list";

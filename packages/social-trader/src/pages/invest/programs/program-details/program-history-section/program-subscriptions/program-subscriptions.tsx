@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { ACTION_STATUS_FILTER_VALUES } from "components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs.helpers";
 import styles from "components/details/details-description-section/details-statistic-section/details-history/trades.module.scss";
 import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
@@ -32,7 +32,7 @@ const _ProgramSubscriptions: React.FC<Props> = ({
   const [t] = useTranslation();
   const renderCell = (name: string) => (
     <span
-      className={classNames(
+      className={clsx(
         styles["details-trades__head-cell"],
         styles[`program-details-trades__cell--${name}`]
       )}

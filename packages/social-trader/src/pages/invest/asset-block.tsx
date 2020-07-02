@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import DetailsBlock, {
   DETAILS_BLOCK_TYPE
 } from "components/details/details-block";
@@ -36,13 +36,13 @@ export const AssetBlock: React.FC<Props> = ({
     <DetailsBlock
       wide
       type={blockType}
-      className={classNames(styles["asset-block"], {
+      className={clsx(styles["asset-block"], {
         [styles["asset-block--left"]]: left,
         [styles["asset-block--side"]]: side
       })}
     >
       <div
-        className={classNames(styles["asset-block__description-block"], {
+        className={clsx(styles["asset-block__description-block"], {
           [styles["asset-block__description-block--side"]]: side
         })}
       >
@@ -50,7 +50,7 @@ export const AssetBlock: React.FC<Props> = ({
           <h2>{title}</h2>
         </Row>
         <Row
-          className={classNames(styles["asset-block__description"], {
+          className={clsx(styles["asset-block__description"], {
             [styles["asset-block__description--side"]]: side
           })}
         >

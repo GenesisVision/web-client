@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { LabeledValue } from "components/labeled-value/labeled-value";
 import { useToLink } from "components/link/link.helper";
 import { Row } from "components/row/row";
@@ -32,7 +32,7 @@ const _ProgramShort: React.FC<Props> = ({ program, className }) => {
     PROGRAM_DETAILS_FOLDER_ROUTE
   );
   return (
-    <div className={classNames(styles["program-short"], className)}>
+    <div className={clsx(styles["program-short"], className)}>
       <LPTableCardAvatar
         logo={program.logoUrl}
         alt={program.title}

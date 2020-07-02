@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import Page from "components/page/page";
 import useApiRequest from "hooks/api-request.hook";
 import dynamic from "next/dist/next-server/lib/dynamic";
@@ -39,7 +39,7 @@ const _DashboardPage: React.FC = () => {
         </div>
       )}
       <div
-        className={classNames(
+        className={clsx(
           styles["dashboard__statistic-block"],
           styles["dashboard__statistic-block--landscape-tablet"]
         )}
@@ -49,7 +49,7 @@ const _DashboardPage: React.FC = () => {
       </div>
       {notNewUser && (
         <div
-          className={classNames(
+          className={clsx(
             styles["dashboard__statistic-block"],
             styles["dashboard__statistic-block--tablet"]
           )}

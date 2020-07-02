@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import ImageBaseElement from "components/avatar/image-base.element";
 import { useTranslation } from "i18n";
 import {
@@ -35,7 +35,7 @@ const _FeesTrading: React.FC<Props> = () => {
               <thead className={styles["fees-table__head"]}>
                 <tr className={styles["fees-table__row"]}>
                   <th
-                    className={classNames(
+                    className={clsx(
                       styles["fees-table__cell"],
                       styles["fees-table__cell--width-bg"]
                     )}
@@ -123,7 +123,7 @@ const _FeesTrading: React.FC<Props> = () => {
         </div>
       </div>
       <div
-        className={classNames(
+        className={clsx(
           styles["fees-info__section"],
           styles["fees-info__section--bg-gray"]
         )}
@@ -133,7 +133,7 @@ const _FeesTrading: React.FC<Props> = () => {
             <h2 className={styles["fees-info__title"]}>{t("fees:global")}</h2>
           </div>
           <div
-            className={classNames(
+            className={clsx(
               styles["fees-info__table-wrapper"],
               styles["fees-info__table-wrapper--bg-white"]
             )}
@@ -151,19 +151,19 @@ const _FeesTrading: React.FC<Props> = () => {
                 </tr>
                 <tr className={styles["fees-table__row"]}>
                   <th
-                    className={classNames(
+                    className={clsx(
                       styles["fees-table__cell"],
                       styles["fees-table__cell--white"]
                     )}
                   />
                   <th
-                    className={classNames(
+                    className={clsx(
                       styles["fees-table__cell"],
                       styles["fees-table__cell--white"]
                     )}
                   />
                   <th
-                    className={classNames(
+                    className={clsx(
                       styles["fees-table__cell"],
                       styles["fees-table__cell--colspan"]
                     )}
@@ -174,25 +174,25 @@ const _FeesTrading: React.FC<Props> = () => {
                 </tr>
                 <tr className={styles["fees-table__row"]}>
                   <th
-                    className={classNames(
+                    className={clsx(
                       styles["fees-table__cell"],
                       styles["fees-table__cell--white"]
                     )}
                   />
                   <th
-                    className={classNames(
+                    className={clsx(
                       styles["fees-table__cell"],
                       styles["fees-table__cell--white"]
                     )}
                   />
                   <th
-                    className={classNames(
+                    className={clsx(
                       styles["fees-table__cell"],
                       styles["fees-table__cell--white"]
                     )}
                   />
                   <th
-                    className={classNames(
+                    className={clsx(
                       styles["fees-table__cell"],
                       styles["fees-table__cell--colspan"]
                     )}
@@ -205,7 +205,7 @@ const _FeesTrading: React.FC<Props> = () => {
               <tbody>
                 <tr className={styles["fees-table__row"]}>
                   <td
-                    className={classNames(
+                    className={clsx(
                       styles["fees-table__cell"],
                       styles["fees-table__cell--without-border"]
                     )}
@@ -226,7 +226,7 @@ const _FeesTrading: React.FC<Props> = () => {
                 </tr>
                 <tr className={styles["fees-table__row"]}>
                   <td
-                    className={classNames(
+                    className={clsx(
                       styles["fees-table__cell"],
                       styles["fees-table__cell--without-border"]
                     )}
@@ -236,7 +236,7 @@ const _FeesTrading: React.FC<Props> = () => {
                 </tr>
                 <tr className={styles["fees-table__row"]}>
                   <td
-                    className={classNames(
+                    className={clsx(
                       styles["fees-table__cell"],
                       styles["fees-table__cell--without-border"]
                     )}
@@ -282,7 +282,7 @@ const _FeesTrading: React.FC<Props> = () => {
                 </tr>
                 <tr className={styles["fees-table__row"]}>
                   <td
-                    className={classNames(
+                    className={clsx(
                       styles["fees-table__cell"],
                       styles["fees-table__cell--without-border"]
                     )}
@@ -307,7 +307,7 @@ const _FeesTrading: React.FC<Props> = () => {
                 </tr>
                 <tr className={styles["fees-table__row"]}>
                   <td
-                    className={classNames(
+                    className={clsx(
                       styles["fees-table__cell"],
                       styles["fees-table__cell--without-border"]
                     )}
@@ -329,7 +329,7 @@ const _FeesTrading: React.FC<Props> = () => {
                 </tr>
                 <tr className={styles["fees-table__row"]}>
                   <td
-                    className={classNames(
+                    className={clsx(
                       styles["fees-table__cell"],
                       styles["fees-table__cell--without-border"]
                     )}
@@ -351,7 +351,7 @@ const _FeesTrading: React.FC<Props> = () => {
                 </tr>
                 <tr className={styles["fees-table__row"]}>
                   <td
-                    className={classNames(
+                    className={clsx(
                       styles["fees-table__cell"],
                       styles["fees-table__cell--without-border"]
                     )}
@@ -373,7 +373,7 @@ const _FeesTrading: React.FC<Props> = () => {
                 </tr>
                 <tr className={styles["fees-table__row"]}>
                   <td
-                    className={classNames(
+                    className={clsx(
                       styles["fees-table__cell"],
                       styles["fees-table__cell--without-border"]
                     )}
@@ -435,7 +435,7 @@ const _FeesTrading: React.FC<Props> = () => {
                 </tr>
                 <tr className={styles["fees-table__row"]}>
                   <td
-                    className={classNames(
+                    className={clsx(
                       styles["fees-table__cell"],
                       styles["fees-table__cell--without-border"]
                     )}

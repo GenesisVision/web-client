@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import ImageBaseElement from "components/avatar/image-base.element";
 import { Arrow } from "pages/landing-page/components/common-icons/arrow";
 import { TSlide } from "pages/landing-page/static-data/slides";
@@ -16,7 +16,7 @@ const _SliderImg: React.FC<ISliderImgProps> = ({ item, animation }) => {
           src={item.imageBg}
           alt={t(item.title)}
           title={t(item.title)}
-          className={classNames(
+          className={clsx(
             styles["slider__img"],
             styles["slider__img--animation-bg"]
           )}
@@ -29,7 +29,7 @@ const _SliderImg: React.FC<ISliderImgProps> = ({ item, animation }) => {
           alt={t(item.title)}
           title={t(item.title)}
           style={{ animationDelay: `${500 * index + 500}ms` }}
-          className={classNames(
+          className={clsx(
             styles["slider__img"],
             styles["slider__img--animation"]
           )}
@@ -85,10 +85,7 @@ export const SliderControls: React.FC<{
       <button
         aria-label="Left"
         type="button"
-        className={classNames(
-          styles["slider__arrow"],
-          styles["slider__arrow--left"]
-        )}
+        className={clsx(styles["slider__arrow"], styles["slider__arrow--left"])}
         onClick={onClickLeft}
       >
         <Arrow />
@@ -108,7 +105,5 @@ export const SliderControls: React.FC<{
 export const SliderMainWrapper: React.FC<{
   className?: string;
 }> = ({ children, className }) => {
-  return (
-    <div className={classNames(styles["slider"], className)}>{children}</div>
-  );
+  return <div className={clsx(styles["slider"], className)}>{children}</div>;
 };

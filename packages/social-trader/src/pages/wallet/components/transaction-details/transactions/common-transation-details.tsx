@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import ActionButton from "components/action-button/action-button";
 import { CurrencyItem } from "components/currency-item/currency-item";
 import { DialogBottom } from "components/dialog/dialog-bottom";
@@ -50,7 +50,7 @@ const TransactionDetailsListItem: React.FC<{
     <LabeledValue label={title}>
       <Row>
         <RowItem
-          className={classNames({
+          className={clsx({
             [styles[
               "transaction-details__details-list-statistic-item-value--long"
             ]]: details.length > 40

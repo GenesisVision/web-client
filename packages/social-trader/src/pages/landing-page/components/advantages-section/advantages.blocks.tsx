@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { useTranslation } from "i18n";
 import AdvantagesList from "pages/landing-page/components/advantages-list/advantages-list";
 import { HomeContainer } from "pages/landing-page/components/home/home.blocks";
@@ -21,7 +21,7 @@ export const AdvantagesListContainer: React.FC<{
         </h2>
         <AdvantagesList
           advantagesItems={advantagesItems}
-          className={classNames(styles["advantages-section__list"], {
+          className={clsx(styles["advantages-section__list"], {
             [styles["advantages-section__list--animation"]]: animation
           })}
           lastItem={{

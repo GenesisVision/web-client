@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import Status from "components/status/status";
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
@@ -34,7 +34,7 @@ const _DepositsWithdrawalsRow: React.FC<Props> = ({ transaction, update }) => {
           <Status withText status={transaction.status} />
         </TableCell>
         <TableCell
-          className={classNames(
+          className={clsx(
             styles["wallet-deposits-withdrawals__cell"],
             styles["wallet-deposits-withdrawals__cell--amount"]
           )}

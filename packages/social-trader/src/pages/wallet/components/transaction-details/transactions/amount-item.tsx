@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { DEFAULT_DECIMAL_SCALE } from "constants/constants";
@@ -34,7 +34,7 @@ const ColoredAmount: React.FC<{ color: Color } & React.HTMLAttributes<
 >> = ({ color, children }) => {
   return (
     <div
-      className={classNames({
+      className={clsx({
         [styles["amount-item__amount--white"]]: color === "White",
         [styles["amount-item__amount--red"]]: color === "Red",
         [styles["amount-item__amount--green"]]: color === "Green"

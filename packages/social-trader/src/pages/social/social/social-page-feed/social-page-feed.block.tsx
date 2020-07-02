@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { IPostListContainerInitData } from "components/conversation/post-list/post-list.container";
 import GVTabs from "components/gv-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
@@ -58,7 +58,7 @@ const _SocialPageFeedBlock: React.FC<Props> = ({ initData }) => {
     <>
       <Row>
         <div
-          className={classNames(styles["social-page__tabs-container"], {
+          className={clsx(styles["social-page__tabs-container"], {
             [styles["social-page__tabs-container--search"]]: openSearch
           })}
         >
@@ -74,7 +74,7 @@ const _SocialPageFeedBlock: React.FC<Props> = ({ initData }) => {
         </div>
         <div
           onClick={setSearchIsOpen}
-          className={classNames(styles["social-page__search-container"], {
+          className={clsx(styles["social-page__search-container"], {
             [styles["social-page__search-container--search"]]: openSearch
           })}
         >

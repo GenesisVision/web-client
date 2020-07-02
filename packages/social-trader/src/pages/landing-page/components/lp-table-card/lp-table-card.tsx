@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
 import { Center } from "components/center/center";
 import LevelTooltip from "components/level-tooltip/level-tooltip";
@@ -40,7 +40,7 @@ export const LPTableCardContainer: React.FC<ITableCardContainer> = ({
   className
 }) => (
   <div
-    className={classNames(styles["lp-table-card"], className, {
+    className={clsx(styles["lp-table-card"], className, {
       [styles["lp-table-card--white"]]: whiteTheme
     })}
   >
@@ -52,7 +52,7 @@ export const LPTableCardRow: React.FC<{
   center?: boolean;
 } & React.HTMLAttributes<HTMLDivElement>> = ({ children, center }) => (
   <div
-    className={classNames(styles["lp-table-card__row"], {
+    className={clsx(styles["lp-table-card__row"], {
       [styles["lp-table-card__row--center"]]: center
     })}
   >
@@ -64,7 +64,7 @@ export const LPTableCardTable: React.FC<{
   wrap?: boolean;
 } & React.HTMLAttributes<HTMLDivElement>> = ({ children, wrap }) => (
   <div
-    className={classNames(styles["lp-table-card__table"], {
+    className={clsx(styles["lp-table-card__table"], {
       [styles["lp-table-card__table--flex-wrap"]]: wrap
     })}
   >
@@ -136,7 +136,7 @@ export const LPTableCardAvatar: React.FC<ITableCardAvatarProps> = React.memo(
     );
     return (
       <Center
-        className={classNames(styles["lp-table-card__avatar"], {
+        className={clsx(styles["lp-table-card__avatar"], {
           [styles["lp-table-card__avatar--center"]]: contentCenter
         })}
       >

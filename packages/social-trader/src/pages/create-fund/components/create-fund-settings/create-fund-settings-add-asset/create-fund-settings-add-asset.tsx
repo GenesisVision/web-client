@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { Center } from "components/center/center";
 import { CurrencyItem } from "components/currency-item/currency-item";
 import GVTextField from "components/gv-text-field";
@@ -121,7 +121,7 @@ const AssetLine: React.FC<AssetLineProps> = React.memo(
             <input
               value={asset.percent}
               onChange={handlePercentChange(asset)}
-              className={classNames(
+              className={clsx(
                 styles["add-fund-asset-popover__regulator-input"],
                 {
                   [styles["add-fund-asset-popover__regulator-input--mute"]]:

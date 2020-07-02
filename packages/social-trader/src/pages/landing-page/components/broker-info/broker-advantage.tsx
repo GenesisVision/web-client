@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { useTranslation } from "i18n";
 import { TBrokerItem } from "pages/landing-page/static-data/brokers";
 import React from "react";
@@ -10,7 +10,7 @@ const _BrokerAdvantage: React.FC<TBrokerItem> = ({ text, number, imageBg }) => {
   const style = imageBg ? { backgroundImage: `url(${imageBg})` } : {};
   return (
     <li
-      className={classNames(styles["broker-info__advantage"], {
+      className={clsx(styles["broker-info__advantage"], {
         [styles["broker-info__advantage--bg"]]: imageBg
       })}
       style={style}
