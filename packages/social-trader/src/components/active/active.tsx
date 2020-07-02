@@ -25,11 +25,11 @@ const _Active: React.FC<Props> = ({
   const isGoodNetwork = effectiveConnectionType === "4g";
   return (
     <div>
-      <Row large>
+      <Row size={"large"}>
         <CurrencyItem logo={logoUrl} name={name} clickable={false} big />
       </Row>
-      <Row large>{tags && <TagItemList tags={tags} />}</Row>
-      <Row large onlyOffset>
+      <Row size={"large"}>{tags && <TagItemList tags={tags} />}</Row>
+      <Row size={"large"} onlyOffset>
         <Row>
           <h2 className={styles.active__title}>{t("active.chart")}</h2>
         </Row>
@@ -43,7 +43,7 @@ const _Active: React.FC<Props> = ({
           )}
         </Row>
       </Row>
-      <Row large onlyOffset>
+      <Row size={"large"} onlyOffset>
         <Row>
           <h2 className={styles.active__title}>
             {t("active.about")} {name}
@@ -51,7 +51,7 @@ const _Active: React.FC<Props> = ({
         </Row>
         <Row className={styles.active__description}>{description}</Row>
       </Row>
-      <Row large>
+      <Row size={"large"}>
         {socialLinks && <SocialLinksBlock socialLinks={socialLinks} />}
       </Row>
     </div>

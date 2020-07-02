@@ -83,7 +83,7 @@ const _SubscriptionsTableRow: React.FC<Props> = ({
       <TableCell>
         {status !== "Canceled" && (
           <Center>
-            <RowItem large>
+            <RowItem size={"large"}>
               <EditFollowButton
                 size={GV_BTN_SIZE.MIDDLE}
                 signalSubscription={provider}
@@ -93,7 +93,7 @@ const _SubscriptionsTableRow: React.FC<Props> = ({
                 tradingAccountId={id}
               />
             </RowItem>
-            <RowItem large>
+            <RowItem size={"large"}>
               <UnFollowButton
                 size={GV_BTN_SIZE.MIDDLE}
                 onApply={onApply}

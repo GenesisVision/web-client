@@ -84,7 +84,7 @@ const _ConvertAssetSettings: React.FC<IConvertAssetSettingsProps> = props => {
           />
         )}
         {showProgramFields && (
-          <Row large>
+          <Row size={"large"}>
             <AssetFields>
               <Currency
                 hide={!showCurrency}
@@ -155,7 +155,7 @@ const _ConvertAssetSettings: React.FC<IConvertAssetSettingsProps> = props => {
           />
         </SettingsBlock>
       )}
-      <Row large>
+      <Row size={"large"}>
         <CreateAssetNavigation asset={assetTo} isSuccessful={!errorMessage} />
       </Row>
     </HookForm>

@@ -18,7 +18,7 @@ const _TradesDelayHint: React.FC<{ delay: TradesDelay }> = ({ delay }) => {
     <RowItem>
       <Text muted>
         <Row>
-          <RowItem small>
+          <RowItem size={"small"}>
             {label} {t("program-details-page:history.open-positions.delay")}
           </RowItem>
           <Tooltip

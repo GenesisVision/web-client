@@ -33,7 +33,7 @@ const _PieStatisticItem: React.FC<Props> = ({
     value
   );
   return (
-    <RowItem xlarge>
+    <RowItem size={"xlarge"}>
       <Center>
         <RowItem>
           <PieContainer

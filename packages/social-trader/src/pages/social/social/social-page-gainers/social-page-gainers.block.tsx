@@ -19,7 +19,7 @@ const _SocialPageGainersBlock: React.FC<Props> = ({ assets }) => {
       <Row>
         <h3>{t("Trending assets")}</h3>
       </Row>
-      <Row large onlyOffset className={styles["social-page-gainers"]}>
+      <Row size={"large"} onlyOffset className={styles["social-page-gainers"]}>
         {assets.map(({ asset, price, change24Percent }, index) => (
           <>
             <Row>

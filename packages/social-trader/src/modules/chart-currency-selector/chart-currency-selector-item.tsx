@@ -43,7 +43,7 @@ const _ChartCurrencySelectorItem: React.FC<Props> = ({
         color={color}
         content={
           <Center>
-            <RowItem small>
+            <RowItem size={"small"}>
               <TagCircle backgroundColor={color} />
             </RowItem>
             <RowItem>

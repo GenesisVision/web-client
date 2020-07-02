@@ -65,7 +65,7 @@ const _FundAssetContainer: React.FC<IFundAssetContainerProps> = ({
       )}
       {remainder > 0 && (
         <RowItem
-          small
+          size={"small"}
           bottomOffset
           className={classNames(
             styles["fund-asset"],

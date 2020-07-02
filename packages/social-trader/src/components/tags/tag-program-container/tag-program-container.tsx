@@ -15,11 +15,11 @@ const TagProgramContainer: React.FC<Props> = React.memo(({ tags }) => {
   const length = tags.length;
   const remainder = length > MAX_VISIBLE_TAGS ? `${length - 1}` : null;
   return (
-    <Row small>
+    <Row size={"small"}>
       {tags.map(
         (tag, idx) =>
           ((remainder && idx === 0) || !remainder) && (
-            <RowItem small key={idx}>
+            <RowItem size={"small"} key={idx}>
               <TagItemWithTooltip name={tag.name} color={tag.color} />
             </RowItem>
           )

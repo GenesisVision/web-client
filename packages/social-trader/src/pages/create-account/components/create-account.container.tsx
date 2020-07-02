@@ -45,7 +45,7 @@ const _CreateAccountContainer: React.FC<Props> = ({
         />
         <GVTab value={TAB.SETTINGS} label={t("create-account:tabs.settings")} />
       </GVTabs>
-      <Row large>
+      <Row size={"large"}>
         {tab === TAB.BROKER && (
           <BrokerSelectContainer
             brokers={[...brokers, ...exchanges]}

@@ -70,7 +70,7 @@ const _ProfileWidget: React.FC<Props> = ({ profileHeader, className }) => {
   return (
     <div className={classNames(styles["profile-widget"], className)}>
       <Center className={styles["profile-widget__content"]} onClick={setAnchor}>
-        <RowItem small>
+        <RowItem size={"small"}>
           <ProfileAvatar
             url={profileHeader.logoUrl}
             alt={profileHeader.email}

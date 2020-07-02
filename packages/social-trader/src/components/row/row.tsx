@@ -1,20 +1,17 @@
 import classNames from "classnames";
 import { Center } from "components/center/center";
 import React from "react";
+import { SizesType } from "utils/types";
 
 import styles from "./row.module.scss";
 
 export const Row: React.FC<Props> = ({
-  xlarge,
+  size = "middle",
   onlyOffset,
   center = true,
   wide,
-  middle = true,
   hide,
   className,
-  xsmall,
-  small,
-  large,
   children,
   ...otherProps
 }) => {
@@ -27,12 +24,11 @@ export const Row: React.FC<Props> = ({
         [styles["row--flex"]]: !onlyOffset,
         [styles["row--wide"]]: wide,
         [styles["row--hidden"]]: hide,
-        [styles["row--xsmall"]]: xsmall,
-        [styles["row--small"]]: small,
-        [styles["row--middle"]]:
-          middle && !(xsmall || small || large || xlarge),
-        [styles["row--xlarge"]]: xlarge,
-        [styles["row--large"]]: large
+        [styles["row--xsmall"]]: size === "xsmall",
+        [styles["row--small"]]: size === "small",
+        [styles["row--middle"]]: size === "middle",
+        [styles["row--xlarge"]]: size === "xlarge",
+        [styles["row--large"]]: size === "large"
       })}
     >
       {children}
@@ -41,15 +37,11 @@ export const Row: React.FC<Props> = ({
 };
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
-  xlarge?: boolean;
+  size?: SizesType;
   onlyOffset?: boolean;
   wide?: boolean;
   hide?: boolean;
   center?: boolean;
   className?: string;
   wrap?: boolean;
-  xsmall?: boolean;
-  small?: boolean;
-  middle?: boolean;
-  large?: boolean;
 }

@@ -20,7 +20,7 @@ const _GVTFees: React.FC<Props> = ({ open, onClose }) => {
         <Row wide>
           <FeesTradingDiscountInfo withoutOffset dark />
         </Row>
-        <Row wide large onlyOffset>
+        <Row wide size={"large"} onlyOffset>
           <FeesTradingDiscountTable withoutOffset dark />
         </Row>
       </DialogBottom>

@@ -8,7 +8,7 @@ import styles from "./navigation.module.scss";
 
 export const GvRootItem: React.FC = () => {
   return (
-    <RowItem large className={styles["gv-root-item"]}>
+    <RowItem size={"large"} className={styles["gv-root-item"]}>
       <Link className={styles["gv-root-item"]} to={HOME_ROUTE}>
         <GVLogo />
       </Link>

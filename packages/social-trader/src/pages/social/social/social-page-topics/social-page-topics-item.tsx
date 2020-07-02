@@ -34,7 +34,7 @@ const _SocialPageTopicsItem: React.FC<Props> = ({
   return (
     <div className={styles["social-page-topics__item"]}>
       <Row onClick={handleClick}>{hashTag}</Row>
-      <Row small>
+      <Row size={"small"}>
         <RowItem wide>
           <LabeledValue label={t("View")}>{impressionsCount}</LabeledValue>
         </RowItem>

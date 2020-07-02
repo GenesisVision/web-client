@@ -8,7 +8,7 @@ export const AssetField: React.FC<React.HTMLAttributes<HTMLDivElement> &
   Props> = ({ children, wide, hide }) => {
   return (
     <RowItem
-      large
+      size={"large"}
       hide={hide}
       wide={wide}
       bottomOffset

@@ -172,7 +172,7 @@ const _ChangeBrokerForm: React.FC<Props> = ({
       <Row>
         <FormTextField>{t("asset-settings:broker.text-change")}</FormTextField>
       </Row>
-      <Row large>
+      <Row size={"large"}>
         <GVButton
           onClick={setChangeBrokerOpen}
           color="primary"

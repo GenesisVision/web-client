@@ -104,7 +104,7 @@ const _CreateExchangeAccountSettings: React.FC<Props> = ({
             setFieldValue={setValue}
             assetCurrency={currency}
           />
-          <Row large>
+          <Row size={"large"}>
             <CreateAssetNavigation
               asset={"ACCOUNT"}
               isSuccessful={!errorMessage}

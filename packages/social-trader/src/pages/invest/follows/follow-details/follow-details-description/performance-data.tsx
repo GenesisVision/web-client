@@ -13,7 +13,7 @@ const _PerformanceData: React.FC<Props> = ({ description }) => {
   const [t] = useTranslation();
   return (
     <DetailsPerformanceData>
-      <RowItem xlarge>
+      <RowItem size={"xlarge"}>
         <LabeledValue label={t("asset-details:description.broker")}>
           <DetailsBroker
             name={"broker"}
@@ -21,7 +21,7 @@ const _PerformanceData: React.FC<Props> = ({ description }) => {
           />
         </LabeledValue>
       </RowItem>
-      <RowItem xlarge>
+      <RowItem size={"xlarge"}>
         <LabeledValue label={t("asset-details:description.currency")}>
           {description.currency}
         </LabeledValue>

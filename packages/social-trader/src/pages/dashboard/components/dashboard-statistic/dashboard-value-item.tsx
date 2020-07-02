@@ -13,7 +13,7 @@ const _DashboardValueItem: React.FC<Props> = ({
   big
 }) => {
   return (
-    <RowItem xlarge>
+    <RowItem size={"xlarge"}>
       <LabeledValue size={big ? "xlarge" : undefined} label={label}>
         <Text size={"large"} weight={"bold"}>
           {currency ? (

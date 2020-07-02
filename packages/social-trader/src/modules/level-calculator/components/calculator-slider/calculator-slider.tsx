@@ -75,7 +75,7 @@ class _CalculatorSlider extends React.PureComponent<Props> {
           })}
         >
           <Center className={styles["calculator-slider__title"]}>
-            <RowItem small>{title}</RowItem>
+            <RowItem size={"small"}>{title}</RowItem>
             {tooltipContent && (
               <RowItem>
                 <TooltipLabel tooltipContent={tooltipContent} />

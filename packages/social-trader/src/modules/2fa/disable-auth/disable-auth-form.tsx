@@ -110,7 +110,7 @@ const _DisableAuthForm: React.FC<Props> = ({ onSubmit, errorMessage }) => {
             <FormError error={errorMessage} />
           </Row>
         )}
-        <Row large>
+        <Row size={"large"}>
           <DialogButtons>
             <SubmitButton wide isSuccessful={!errorMessage}>
               {t("buttons.disable")}

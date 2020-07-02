@@ -35,7 +35,7 @@ const _FacetCards: React.FC<Props> = ({
           onScroll={handleScroll}
         >
           {data.map(facet => (
-            <RowItem large key={facet.id}>
+            <RowItem size={"large"} key={facet.id}>
               <FacetCard
                 title={title}
                 fileRoute={fileRoute}

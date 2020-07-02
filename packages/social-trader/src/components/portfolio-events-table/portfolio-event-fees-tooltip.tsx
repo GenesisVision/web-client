@@ -16,7 +16,7 @@ const _PortfolioEventFeesTooltip: React.FC<Props> = ({ fees, children }) => {
       render={() => (
         <TooltipContent>
           {notNullFees.map((fee, idx) => (
-            <Row small key={idx}>
+            <Row size={"small"} key={idx}>
               <FeeCommission
                 title={fee.title}
                 value={fee.amount}

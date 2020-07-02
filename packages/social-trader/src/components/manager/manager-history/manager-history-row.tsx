@@ -26,7 +26,7 @@ interface IManagerHistoryRowProps {
 export const ManagerHistoryItem: React.FC<IManagerHistoryItemProps> = React.memo(
   ({ label, children }) => {
     return (
-      <RowItem xlarge bottomOffset>
+      <RowItem size={"xlarge"} bottomOffset>
         <LabeledValue label={label}>
           <Text wrap={false}>{children}</Text>
         </LabeledValue>
@@ -47,7 +47,7 @@ export const ManagerHistoryRow: React.FC<IManagerHistoryRowProps> = ({
       <td>
         <DefaultBlock verticalOffsets={false} size={SIZES.LARGE}>
           <Row />
-          <Row large center={false}>
+          <Row size={"large"} center={false}>
             <RowItem wide bottomOffset>
               <Center wrap>
                 <RowItem>{avatarBlock}</RowItem>

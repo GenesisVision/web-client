@@ -9,11 +9,11 @@ import {
   TerminalAuthDataType,
   TerminalType
 } from "pages/trades/binance-trade-page/trading/terminal.types";
+import { TerminalPage } from "pages/trades/terminal.page";
 import React from "react";
 import { api } from "services/api-client/swagger-custom-client";
 import { getParamsFromCtxWithSplit } from "utils/ssr-helpers";
 import { NextPageWithRedux } from "utils/types";
-import { TerminalPage } from "pages/trades/terminal.page";
 
 interface Props {
   brokerType?: BrokerTradeServerType;

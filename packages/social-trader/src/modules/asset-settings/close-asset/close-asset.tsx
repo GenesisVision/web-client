@@ -18,7 +18,7 @@ const _CloseAsset: React.FC<Props> = ({ asset, id, onApply, canClose }) => {
         <FormTextField>
           {t(`asset-settings:period-and-closing.text-${asset.toLowerCase()}`)}
         </FormTextField>
-        <Row large>
+        <Row size={"large"}>
           <GVButton
             color="danger"
             disabled={!canClose}

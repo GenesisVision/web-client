@@ -15,7 +15,7 @@ const _AvatarWithName: React.FC<Props> = ({
   return (
     <Row className={className} onClick={onClick}>
       {avatar && (
-        <RowItem small={size === "small"} large={size === "large"}>
+        <RowItem size={size}>
           <Row>{avatar}</Row>
         </RowItem>
       )}

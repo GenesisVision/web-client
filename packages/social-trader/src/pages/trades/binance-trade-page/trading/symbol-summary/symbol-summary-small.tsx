@@ -69,7 +69,7 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
   );
   return (
     <Center>
-      <RowItem large>
+      <RowItem size={"large"}>
         <ResponsiveContainer
           enabledScreens={["tablet", "landscape-tablet", "desktop"]}
         >
@@ -93,7 +93,7 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
             </MonoText>
           </h4>
         </Row>
-        <Row xsmall>
+        <Row size={"xsmall"}>
           <Text muted>
             <MonoText>
               {terminalMoneyFormat({ amount: lastPrice, tickSize })}

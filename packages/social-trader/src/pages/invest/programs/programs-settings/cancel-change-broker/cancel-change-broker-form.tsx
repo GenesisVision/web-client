@@ -104,7 +104,7 @@ const _CancelChangeBrokerForm: React.FC<Props> = ({
           })}
         </FormTextField>
       </Row>
-      <Row large>
+      <Row size={"large"}>
         <GVButton color="primary" onClick={setCancelChangeBrokerOpen}>
           {t("asset-settings:buttons.cancel-broker")}
         </GVButton>

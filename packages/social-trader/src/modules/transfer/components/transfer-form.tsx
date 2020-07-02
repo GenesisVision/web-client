@@ -159,7 +159,7 @@ const _TransferForm: React.FC<ITransferFormProps> = ({
       onSubmit={setValuesFromPropsAndSubmit}
     >
       <DialogTop title={title}>
-        <Row large>
+        <Row size={"large"}>
           <TransferSelectField
             currency={selectedSourceItem.currency}
             name={TRANSFER_FORM_FIELDS.sourceId}

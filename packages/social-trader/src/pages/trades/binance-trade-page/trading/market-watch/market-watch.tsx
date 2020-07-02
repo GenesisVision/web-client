@@ -52,7 +52,7 @@ const _MarketWatch: React.FC<Props> = ({ items }) => {
 
   return (
     <>
-      <Row small>
+      <Row size={"small"}>
         <GlobalSearchInput
           autoFocus={false}
           size={"small"}
@@ -62,7 +62,7 @@ const _MarketWatch: React.FC<Props> = ({ items }) => {
         />
       </Row>
       {terminalType === "spot" && (
-        <Row small>
+        <Row size={"small"}>
           {FILTERING_CURRENCIES.map(currency => (
             <RowItem>
               <GVButton
@@ -109,7 +109,7 @@ const _MarketWatch: React.FC<Props> = ({ items }) => {
           </RowItem>
         </Row>
       )}
-      <Row small>
+      <Row size={"small"}>
         <Select
           fixedWidth={false}
           size={"small"}
@@ -124,7 +124,7 @@ const _MarketWatch: React.FC<Props> = ({ items }) => {
           ))}
         </Select>
       </Row>
-      <Row small className={styles["market-watch__header-container"]}>
+      <Row size={"small"} className={styles["market-watch__header-container"]}>
         <table className={styles["market-watch__table"]}>
           <thead>
             <MarketWatchHeaderCell

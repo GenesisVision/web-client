@@ -36,7 +36,7 @@ const _ConversationUser: React.FC<Props> = ({
               </RowItem>
             </Link>
           </Row>
-          <Row small>
+          <Row size={"small"}>
             <Link to={postUrl && postToPathCreator(postUrl, contextTitle)}>
               <Text muted>{formatDate(date)}</Text>
             </Link>

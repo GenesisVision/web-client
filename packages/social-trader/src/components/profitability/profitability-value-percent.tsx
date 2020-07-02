@@ -19,7 +19,7 @@ const _ProfitabilityValuePercent: React.FC<Props> = ({
 }) => {
   return (
     <Center className={styles["profitability-value-percent"]}>
-      <RowItem small>
+      <RowItem size={"small"}>
         <Profitability
           value={formatCurrencyValue(value, currency)}
           prefix={PROFITABILITY_PREFIX.SIGN}

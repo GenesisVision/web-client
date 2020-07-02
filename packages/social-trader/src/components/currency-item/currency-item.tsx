@@ -35,7 +35,7 @@ const _CurrencyItem: React.FC<ICurrencyItemProps> = ({
       <Row>
         {logo && (
           <RowItem
-            small={small}
+            size={small ? "small" : undefined}
             className={classNames(styles["currency-item__icon"], {
               [styles["currency-item__icon--medium"]]: !small,
               [styles["currency-item__icon--small"]]: small

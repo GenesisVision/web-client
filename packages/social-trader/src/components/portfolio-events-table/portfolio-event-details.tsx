@@ -39,7 +39,7 @@ const _PortfolioEventsDetails: React.FC<Props> = ({ extendedInfo }) => {
         <PopoverContent>
           <PopoverContentCardBlock size={"small"}>
             {extendedInfo.map((info, idx) => (
-              <Row key={idx} small>
+              <Row key={idx} size={"small"}>
                 <FeeCommission
                   title={renderInfoTitle(info.title)}
                   value={info.amount}

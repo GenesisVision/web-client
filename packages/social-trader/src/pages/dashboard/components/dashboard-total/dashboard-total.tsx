@@ -100,7 +100,7 @@ const _DashboardTotal: React.FC<Props> = ({
               />
             </h5>
           </Row>
-          <Row small>
+          <Row size={"small"}>
             <DashboardStatisticPeriods
               data={profits}
               currency={currency}

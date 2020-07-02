@@ -31,7 +31,7 @@ const ForgotPasswordPage: React.FC = () => {
       <Row>
         <Text muted>{t("auth:password-restore.forgot-password.text")}</Text>
       </Row>
-      <Row large>
+      <Row size={"large"}>
         <CaptchaContainer
           request={request}
           renderForm={handle => (

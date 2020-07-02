@@ -36,7 +36,7 @@ const _StopOutLevel: React.FC<Props> = ({
     <SettingsBlock label={t("asset-settings:fields.stop-out-level")}>
       <HookForm resetOnSuccess form={form} onSubmit={onSubmit}>
         <StopOutField name={FIELDS.stopOutLevel} />
-        <Row large>
+        <Row size={"large"}>
           <SubmitButton isSuccessful={!editError}>
             {t("asset-settings:buttons.save")}
           </SubmitButton>

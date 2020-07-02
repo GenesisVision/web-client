@@ -15,7 +15,7 @@ const _ProgramWithdrawTop: React.FC<OwnProps> = ({
   const [t] = useTranslation();
   return (
     <DialogTop title={t("withdraw-program.title")} subtitle={title}>
-      <Row large>
+      <Row size={"large"}>
         <LabeledValue label={t("withdraw-program.available-to-withdraw")}>
           <Text size={"xlarge"}>
             {formatCurrencyValue(availableToWithdraw, programCurrency)}{" "}

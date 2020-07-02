@@ -22,7 +22,7 @@ const _RadioButton: React.FC<Props> = ({
   return (
     <Center className={styles["radio-button"]} onClick={onClick}>
       <RowItem
-        small
+        size={"small"}
         className={classNames(styles["radio-button__round-container"], {
           [styles["radio-button__round-container--middle"]]: size === "middle"
         })}

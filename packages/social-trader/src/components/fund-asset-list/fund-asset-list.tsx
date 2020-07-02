@@ -7,17 +7,17 @@ import * as React from "react";
 import styles from "./fund-assets-list.module.scss";
 
 const _FundAssetList: React.FC<Props> = ({ values }) => (
-  <Row wrap small>
+  <Row wrap size={"small"}>
     {values.map((item: FundAssetPartWithIcon) => (
       <RowItem key={item.name}>
         <Row>
-          <RowItem small>
+          <RowItem size={"small"}>
             <div
               className={styles["fund-asset-list__bubble"]}
               style={{ background: item.color }}
             />
           </RowItem>
-          <RowItem small>
+          <RowItem size={"small"}>
             <Text size={"small"} muted>
               {item.name} {item.percent} %
             </Text>

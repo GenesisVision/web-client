@@ -23,7 +23,7 @@ const _DepositTop: React.FC<DepositTopOwnProps> = ({
   return (
     <DialogTop title={header || title} subtitle={subtitle || asset}>
       {asset === ASSET.PROGRAM && !ownAsset && !!availableToInvest && (
-        <Row large>
+        <Row size={"large"}>
           <LabeledValue label={t("deposit-asset.program.available-to-invest")}>
             <Text size={"xlarge"}>{`${formatCurrencyValue(
               availableToInvest,

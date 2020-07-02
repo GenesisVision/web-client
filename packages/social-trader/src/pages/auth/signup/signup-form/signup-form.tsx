@@ -149,8 +149,8 @@ const _SignUpForm: React.FC<Props> = ({
           <FormError error={error} />
         </Row>
       )}
-      <Row xlarge>
-        <RowItem large>
+      <Row size={"xlarge"}>
+        <RowItem size={"large"}>
           <SubmitButton
             id="signUpFormSubmit"
             isPending={requestStatus === CAPTCHA_STATUS.PENDING}

@@ -58,7 +58,7 @@ const _DashboardStatisticPeriodsItem: React.FC<{
   label: string;
 }> = ({ item: { profit, profitPercent }, label, currency }) => {
   return (
-    <RowItem xlarge>
+    <RowItem size={"xlarge"}>
       <LabeledValue label={label}>
         <Profitability
           value={formatCurrencyValue(profit, currency)}

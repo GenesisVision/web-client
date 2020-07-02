@@ -18,7 +18,7 @@ const SettingsBlock: React.FC<Props> = ({
   verificationStatus
 }) => (
   <Row
-    xlarge={!blockNumber}
+    size={!blockNumber ? "xlarge" : undefined}
     center={false}
     hide={hide}
     className={styles["asset-settings-block"]}
@@ -49,7 +49,12 @@ const SettingsBlock: React.FC<Props> = ({
           )}
         </Row>
       )}
-      <Row large wrap wide className={styles["asset-settings-block__wrapper"]}>
+      <Row
+        size={"large"}
+        wrap
+        wide
+        className={styles["asset-settings-block__wrapper"]}
+      >
         {children}
       </Row>
     </div>

@@ -139,7 +139,7 @@ const Select: React.FC<Props> = ({
       >
         <Center>
           {displayValue && (
-            <RowItem small>
+            <RowItem size={"small"}>
               <span className={styles["select__text"]}>{displayValue}</span>
             </RowItem>
           )}

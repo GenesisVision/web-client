@@ -115,13 +115,13 @@ const _PlatformAssetTagComponent: React.FC<IPlatformAssetTagProps> = ({
         <CurrencyItem small name={name} url={url} logo={logoUrl} />
       </Row>
       {hasData && (
-        <Row small className={styles["asset-tag"]}>
+        <Row size={"small"} className={styles["asset-tag"]}>
           <RowItem wide>$ {price} </RowItem>
           {hasPercent && (
             <RowItem>
               <ColoredText color={color}>
                 <Row>
-                  <RowItem xsmall>{change24Percent}% </RowItem>
+                  <RowItem size={"xsmall"}>{change24Percent}% </RowItem>
                   {changeState !== "NotChanged" && (
                     <RowItem className={styles["asset-tag__arrow"]}>
                       <div>
@@ -172,7 +172,7 @@ const _EventTag: React.FC<IEventTagProps> = ({
   const color = getAssetTagTextColor(changeState);
   return (
     <Row wrap>
-      <RowItem small>
+      <RowItem size={"small"}>
         <PortfolioEventLogo
           withAsset={true}
           assetDetails={assetDetails}
@@ -185,7 +185,7 @@ const _EventTag: React.FC<IEventTagProps> = ({
       {amount !== null && (
         <RowItem>
           <Center>
-            <RowItem small>
+            <RowItem size={"small"}>
               <ColoredText color={color}>
                 {amount} {currency}
               </ColoredText>
@@ -266,13 +266,13 @@ const _AssetTagCard: React.FC<IAssetTagProps & { url: ToType | string }> = ({
         }
       />
       {(price !== null || change24Percent !== null) && (
-        <Row small className={styles["asset-tag"]}>
+        <Row size={"small"} className={styles["asset-tag"]}>
           {price !== null && <RowItem wide>$ {price} </RowItem>}
           {change24Percent !== null && (
             <RowItem>
               <ColoredText color={color}>
                 <Row>
-                  <RowItem xsmall>{change24Percent}% </RowItem>
+                  <RowItem size={"xsmall"}>{change24Percent}% </RowItem>
                   {changeState !== "NotChanged" && (
                     <RowItem className={styles["asset-tag__arrow"]}>
                       <div>

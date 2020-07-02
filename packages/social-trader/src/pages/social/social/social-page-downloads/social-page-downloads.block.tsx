@@ -22,8 +22,8 @@ const _SocialPageDownloadsBlock: React.FC<Props> = () => {
           {t("Genesis Vision App")}
         </h3>
       </Row>
-      <Row large onlyOffset>
-        <Row wide small>
+      <Row size={"large"} onlyOffset>
+        <Row wide size={"small"}>
           <Link
             wide
             white
@@ -39,17 +39,17 @@ const _SocialPageDownloadsBlock: React.FC<Props> = () => {
                     <AppleIcon />
                   </Center>
                 </RowItem>
-                <RowItem small>
-                  <Row small>
+                <RowItem size={"small"}>
+                  <Row size={"small"}>
                     <Text muted>Available on</Text>
                   </Row>
-                  <Row small>App Store</Row>
+                  <Row size={"small"}>App Store</Row>
                 </RowItem>
               </Center>
             </DefaultBlock>
           </Link>
         </Row>
-        <Row wide small>
+        <Row wide size={"small"}>
           <Link
             wide
             white
@@ -65,11 +65,11 @@ const _SocialPageDownloadsBlock: React.FC<Props> = () => {
                     <AndroidIcon />
                   </Center>
                 </RowItem>
-                <RowItem small>
-                  <Row small>
+                <RowItem size={"small"}>
+                  <Row size={"small"}>
                     <Text muted>Get it on</Text>
                   </Row>
-                  <Row small>Google Play</Row>
+                  <Row size={"small"}>Google Play</Row>
                 </RowItem>
               </Center>
             </DefaultBlock>

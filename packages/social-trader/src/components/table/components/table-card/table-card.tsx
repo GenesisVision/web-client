@@ -111,7 +111,7 @@ export const TableCardSubTitle: React.FC<{
 } & React.HTMLAttributes<HTMLDivElement>> = ({ children, url }) => {
   const title = typeof children === "string" ? children : "";
   return (
-    <Row middle={false} className={styles["table-card__subtitle"]}>
+    <div className={styles["table-card__subtitle"]}>
       <Text muted>
         {url ? (
           <Link
@@ -125,7 +125,7 @@ export const TableCardSubTitle: React.FC<{
           children
         )}
       </Text>
-    </Row>
+    </div>
   );
 };
 
@@ -201,7 +201,7 @@ export const TableCardTopBlock: React.FC<ITableCardTopBlockProps> = React.memo(
             {subTitle && (
               <TableCardSubTitle url={managerUrl}>{subTitle}</TableCardSubTitle>
             )}
-            <Row small>{extraBlock}</Row>
+            <Row size={"small"}>{extraBlock}</Row>
           </div>
           {renderActions && (
             <div className={styles["table-card__actions"]}>

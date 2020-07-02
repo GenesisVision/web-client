@@ -29,7 +29,7 @@ export const Accordion: React.FC<Props> = ({ label, text }) => {
       className={classNames(styles["accordion"])}
     >
       <Row onClick={handleClickLabel} className={styles["accordion__label"]}>
-        <RowItem small>
+        <RowItem size={"small"}>
           <Center
             className={classNames(styles["accordion__icon"], {
               [styles["accordion__icon--open"]]: isOpen
@@ -41,7 +41,7 @@ export const Accordion: React.FC<Props> = ({ label, text }) => {
         <RowItem>{label}</RowItem>
       </Row>
       {isOpen && (
-        <Row small onClick={handleClickText}>
+        <Row size={"small"} onClick={handleClickText}>
           {text}
         </Row>
       )}

@@ -18,7 +18,7 @@ const _CalculatorOutput: React.FC<Props> = ({
       <LabeledValue
         label={
           <Center className={styles["calculator-output__label"]}>
-            <RowItem small>{label}</RowItem>
+            <RowItem size={"small"}>{label}</RowItem>
             {tooltipContent && (
               <RowItem>
                 <TooltipLabel tooltipContent={tooltipContent} />

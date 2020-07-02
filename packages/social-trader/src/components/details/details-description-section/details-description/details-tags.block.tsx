@@ -9,7 +9,7 @@ const _DetailsTags: React.FC<{
 }> = ({ tags }) => (
   <Row wrap>
     {tags.map((tag, idx) => (
-      <RowItem small key={idx}>
+      <RowItem size={"small"} key={idx}>
         <TagItemWithTooltip name={tag.name} color={tag.color} />
       </RowItem>
     ))}

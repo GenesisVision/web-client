@@ -92,7 +92,7 @@ const _PublicInfoForm: React.FC<Props> = ({
 
   return (
     <HookForm resetOnSuccess form={form} onSubmit={onSubmit}>
-      <Row large>
+      <Row size={"large"}>
         <PrivacySelect
           title={t("profile-page:privacy.post")}
           name={PRIVACY_FORM_VALUES.whoCanPostToMayWall}
@@ -119,7 +119,7 @@ const _PublicInfoForm: React.FC<Props> = ({
           <FormError error={errorMessage} />
         </Row>
       )}
-      <Row large>
+      <Row size={"large"}>
         <SubmitButton isPending={isPending} isSuccessful={!errorMessage}>
           {t("buttons.save")}
         </SubmitButton>

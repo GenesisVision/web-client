@@ -109,7 +109,7 @@ const _ProgramDetailsStatisticsElements: React.FC<IProgramDetailsStatisticsEleme
               >
                 <Text muted>{t("asset-details:statistics.period")}</Text>
               </Tooltip>
-              <Row small onlyOffset>
+              <Row size={"small"} onlyOffset>
                 <ProgramPeriodLine
                   start={statistic.lastPeriodStarts}
                   end={statistic.lastPeriodEnds}

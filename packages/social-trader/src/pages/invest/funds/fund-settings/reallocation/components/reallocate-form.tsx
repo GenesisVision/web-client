@@ -109,7 +109,7 @@ const _ReallocateForm: React.FC<Props> = ({
       <Row>
         <FormTextField>{t("fund-settings:reallocation.text-3")}</FormTextField>
       </Row>
-      <Row large>
+      <Row size={"large"}>
         <GVButton
           isPending={isSubmitting}
           isSuccessful={isSuccessful}

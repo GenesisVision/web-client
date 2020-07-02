@@ -22,7 +22,7 @@ const _TagBrokerContainer: React.FC<Props & WithLoaderProps> = ({
       {tags.map(
         (tag, idx) =>
           ((remainder && idx === 0) || !remainder) && (
-            <RowItem small key={idx}>
+            <RowItem size={"small"} key={idx}>
               <TagItemWithTooltip name={tag.name} color={tag.color} />
             </RowItem>
           )

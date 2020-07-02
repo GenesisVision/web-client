@@ -91,7 +91,7 @@ const _TransferForm: React.FC<Props> = ({
               &nbsp; wallet
             </LabeledValue>
           </Row>
-          <Row small>
+          <Row size={"small"}>
             <Text wrap={false} muted>
               {getMaxValueForFuturesTransfer({ type, asset, balances: data })}{" "}
               {asset}
@@ -128,7 +128,7 @@ const _TransferForm: React.FC<Props> = ({
               &nbsp; wallet
             </LabeledValue>
           </Row>
-          <Row small>
+          <Row size={"small"}>
             <Text wrap={false} muted>
               {" "}
               {getMaxValueForFuturesTransfer({

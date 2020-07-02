@@ -26,7 +26,7 @@ const _FundAssetPopover: React.FC<Props> = ({ values, changeFilter }) => {
         <Row onlyOffset className={styles["fund-asset-filter__assets-block"]}>
           {filteredAssets.map((asset, idx) => (
             <Row
-              small
+              size={"small"}
               className={styles["fund-asset-filter__asset-item"]}
               key={idx}
               onClick={() => handleClick(asset.asset)}

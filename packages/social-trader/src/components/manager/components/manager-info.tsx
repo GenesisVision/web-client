@@ -28,11 +28,11 @@ const _ManagerInfo: React.FC<Props> = ({ profile }) => {
         <Row>
           <ProfileAvatar url={logoUrl} big />
         </Row>
-        <Row onlyOffset large>
+        <Row onlyOffset size={"large"}>
           <Row>
             <h2>{username}</h2>
           </Row>
-          <Row small>
+          <Row size={"small"}>
             <Text muted>
               <b>{memberSince}</b>
             </Text>
@@ -43,7 +43,7 @@ const _ManagerInfo: React.FC<Props> = ({ profile }) => {
       <Row wide center={false}>
         <DefaultBlock>
           {!!socialLinks?.length && (
-            <Row large onlyOffset>
+            <Row size={"large"} onlyOffset>
               <Row>
                 <h3>{t("manager-page:social-links")}</h3>
               </Row>
@@ -53,7 +53,7 @@ const _ManagerInfo: React.FC<Props> = ({ profile }) => {
             </Row>
           )}
           {!!about?.length && (
-            <Row large onlyOffset>
+            <Row size={"large"} onlyOffset>
               <Row>
                 <h3>{t("manager-page:about")}</h3>
               </Row>

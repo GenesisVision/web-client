@@ -27,10 +27,10 @@ const _AuthLayout: NextPage<Props> = ({
       <div className={styles["auth__left"]}>
         <Link className={styles["auth__logo"]} to={linkCreator(HOME_ROUTE)}>
           <Center>
-            <RowItem small>
+            <RowItem size={"small"}>
               <GvLogo />
             </RowItem>
-            <RowItem small>
+            <RowItem size={"small"}>
               <GvBrand />
             </RowItem>
           </Center>
@@ -48,7 +48,7 @@ const _AuthLayout: NextPage<Props> = ({
       <div className={styles["auth__right"]}>
         <div className={styles["auth__content"]}>
           {titleKey && <h1>{t(titleKey)}</h1>}
-          <Row large onlyOffset>
+          <Row size={"large"} onlyOffset>
             {children}
           </Row>
         </div>

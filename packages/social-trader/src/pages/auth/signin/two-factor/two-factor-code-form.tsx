@@ -83,7 +83,7 @@ const _TwoFactorCodeForm: React.FC<Props> = ({
       <Row>
         <Text muted>{t("auth:login.two-factor.text")}</Text>
       </Row>
-      <Row xlarge>
+      <Row size={"xlarge"}>
         <GVHookFormField
           disabled={isSubmitting}
           type="tel"
@@ -95,10 +95,10 @@ const _TwoFactorCodeForm: React.FC<Props> = ({
           format="######"
         />
       </Row>
-      <Row large>
+      <Row size={"large"}>
         <Text muted>{t("auth:login.two-factor.recovery-info")}</Text>
       </Row>
-      <Row small>
+      <Row size={"small"}>
         <GVButton noPadding variant="text">
           <Link
             onClick={handleRecoveryClick}
@@ -113,7 +113,7 @@ const _TwoFactorCodeForm: React.FC<Props> = ({
           <FormError error={error} />
         </Row>
       )}
-      <Row large>
+      <Row size={"large"}>
         <SubmitButton
           checkSubmitted={false}
           id="signUpFormSubmit"

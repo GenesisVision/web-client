@@ -22,7 +22,7 @@ const RequestLineItem: React.FC<{ label: string | JSX.Element }> = ({
       <Row>
         <Text size={"small"}>{label}</Text>
       </Row>
-      <Row small>
+      <Row size={"small"}>
         <Text muted>{children}</Text>
       </Row>
     </div>
@@ -44,10 +44,10 @@ const _RequestLine: React.FC<Props> = ({
   const [t] = useTranslation();
   return (
     <Center className={styles["request-line"]}>
-      <RowItem small>
+      <RowItem size={"small"}>
         <PortfolioEventLogo withAsset assetDetails={assetDetails} icon={""} />
       </RowItem>
-      <RowItem large>
+      <RowItem size={"large"}>
         <Center>
           <RowItem>
             <RequestLineItem label={<Text weight={"bold"}>{title}</Text>}>

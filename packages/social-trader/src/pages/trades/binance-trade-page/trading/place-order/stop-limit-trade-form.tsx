@@ -150,7 +150,7 @@ const _StopLimitTradeForm: React.FC<IStopLimitTradeFormProps & {
           onChange={setSliderValue}
         />
       </Row>
-      <Row small>
+      <Row size={"small"}>
         <HookFormAmountField
           externalDirty={true}
           autoFocus={false}
@@ -167,7 +167,7 @@ const _StopLimitTradeForm: React.FC<IStopLimitTradeFormProps & {
           asset={baseAsset}
         />
       </Row>
-      <Row small>
+      <Row size={"small"}>
         <RowItem wide>
           <TimeInForceField orderType={"STOP_LOSS_LIMIT"} />
         </RowItem>

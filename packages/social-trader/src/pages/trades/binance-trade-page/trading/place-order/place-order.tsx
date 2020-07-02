@@ -99,7 +99,7 @@ const _PlaceOrder: React.FC = () => {
         </GVTabs>
       </Row>
       <Row>
-        <RowItem small>
+        <RowItem size={"small"}>
           <Center className={styles["place-order__wallet-icon"]}>
             <WalletIcon />
           </Center>

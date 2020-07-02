@@ -135,7 +135,7 @@ const _Post: React.FC<Props> = ({
         canLike={!!actions}
       />
       {!!comments.length && (
-        <Row large>
+        <Row size={"large"}>
           <CommentsList
             visibleCommentsCount={visibleCommentsCount}
             comments={comments}

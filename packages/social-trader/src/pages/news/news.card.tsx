@@ -78,7 +78,7 @@ const NewsCardContent: React.FC<Props> = React.memo(
                       {post.author}
                     </RowItem>
                   </Row>
-                  <Row small>
+                  <Row size={"small"}>
                     <Text muted>{formatDate(post.date)}</Text>
                   </Row>
                 </>

@@ -61,7 +61,7 @@ const _AssetEdit: React.FC<Props> = ({
           </Row>
         </Row>
         <Row
-          large
+          size={"large"}
           onlyOffset
           className={styles["asset-settings__block-wrapper"]}
         >
@@ -71,7 +71,7 @@ const _AssetEdit: React.FC<Props> = ({
           </Row>
         </Row>
         <Row
-          large
+          size={"large"}
           onlyOffset
           className={styles["asset-settings__block-wrapper"]}
         >
@@ -83,7 +83,7 @@ const _AssetEdit: React.FC<Props> = ({
             />
           </Row>
         </Row>
-        <Row large onlyOffset>
+        <Row size={"large"} onlyOffset>
           <SubmitButton isSuccessful={!editError}>
             {t("asset-settings:buttons.save")}
           </SubmitButton>

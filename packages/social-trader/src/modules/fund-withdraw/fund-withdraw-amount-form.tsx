@@ -115,7 +115,7 @@ const _FundWithdrawAmountForm: React.FC<Props> = ({
           onChange={changeWalletCallback}
         />
       </Row>
-      <Row large hide={minPercent === 100}>
+      <Row size={"large"} hide={minPercent === 100}>
         <InputAmountField
           name={FUND_WITHDRAW_FIELDS.percent}
           label={t("withdraw-fund.amount-to-withdraw")}

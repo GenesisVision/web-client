@@ -15,7 +15,7 @@ const _PostButtons: React.FC<Props> = ({
   liked
 }) => {
   return (
-    <Row large>
+    <Row size={"large"}>
       <RowItem>
         <Share
           disable={!canLike}

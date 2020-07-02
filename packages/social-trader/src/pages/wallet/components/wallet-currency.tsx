@@ -35,7 +35,7 @@ const _WalletCurrency: React.FC<Props> = ({ data: info }) => {
               />
             </Row>
           </RowItem>
-          <RowItem large>
+          <RowItem size={"large"}>
             <WalletBalanceButtons currentItem={info} />
           </RowItem>
         </Row>

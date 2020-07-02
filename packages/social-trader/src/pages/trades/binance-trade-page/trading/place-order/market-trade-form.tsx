@@ -158,7 +158,7 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
         />
       </Row>
       {isFutures && currentPositionMode === false && (
-        <Row small>
+        <Row size={"small"}>
           <RowItem>
             <ReduceOnlyField />
           </RowItem>

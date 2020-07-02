@@ -26,7 +26,10 @@ const _ProgramPeriodLine: React.FC<Props> = ({
         value={new Date()}
         variant="line"
       />
-      <Row small className={styles["program-period-line__description"]}>
+      <Row
+        size={"small"}
+        className={styles["program-period-line__description"]}
+      >
         <div>
           <b>{duration}</b>
         </div>

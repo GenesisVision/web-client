@@ -46,7 +46,7 @@ export const _PagerButton: React.FC<Props> = ({
     }
   };
 
-  return <RowItem small>{renderButtonContent()}</RowItem>;
+  return <RowItem size={"small"}>{renderButtonContent()}</RowItem>;
 };
 
 export const PagerButton = React.memo(_PagerButton);

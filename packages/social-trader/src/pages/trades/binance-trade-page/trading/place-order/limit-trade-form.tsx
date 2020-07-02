@@ -140,7 +140,7 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
           onChange={setSliderValue}
         />
       </Row>
-      <Row small>
+      <Row size={"small"}>
         <HookFormAmountField
           externalDirty={true}
           autoFocus={false}
@@ -157,7 +157,7 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
           asset={baseAsset}
         />
       </Row>
-      <Row small>
+      <Row size={"small"}>
         <RowItem wide>
           <TimeInForceField orderType={"LIMIT"} />
         </RowItem>

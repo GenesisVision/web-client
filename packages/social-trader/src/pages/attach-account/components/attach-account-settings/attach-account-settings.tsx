@@ -144,7 +144,7 @@ const _AttachAccountSettings: React.FC<Props> = ({
           />
         </Row>
       </SettingsBlock>
-      <Row large>
+      <Row size={"large"}>
         <CreateAssetNavigation
           asset={"attach-external-account"}
           isSuccessful={isSuccessful}

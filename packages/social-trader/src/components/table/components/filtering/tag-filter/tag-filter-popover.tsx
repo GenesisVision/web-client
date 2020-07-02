@@ -29,7 +29,11 @@ const _TagFilterPopover: React.FC<Props> = ({ values, changeFilter }) => {
       {(filteredTags, handleClick) => (
         <Row wrap>
           {filteredTags.map(tag => (
-            <RowItem bottomOffset small onClick={() => handleClick(tag.id)}>
+            <RowItem
+              bottomOffset
+              size={"small"}
+              onClick={() => handleClick(tag.id)}
+            >
               <TagItemWithTooltip name={tag.name} color={tag.color} clickable />
             </RowItem>
           ))}

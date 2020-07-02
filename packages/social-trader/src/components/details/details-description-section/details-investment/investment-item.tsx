@@ -10,7 +10,7 @@ interface Props extends ILabeledValueProps {}
 
 export const InvestmentItem: React.FC<Props> = ({ children, label }) => {
   return (
-    <RowItem xlarge>
+    <RowItem size={"xlarge"}>
       <LabeledValue label={label}>
         <Text weight={"bold"}>{children}</Text>
       </LabeledValue>

@@ -14,7 +14,7 @@ export const DialogTop: React.FC<React.HTMLAttributes<HTMLDivElement> &
         </Row>
       )}
       {subtitle && (
-        <Row small className={styles["dialog__subtitle"]}>
+        <Row size={"small"} className={styles["dialog__subtitle"]}>
           {subtitle}
         </Row>
       )}

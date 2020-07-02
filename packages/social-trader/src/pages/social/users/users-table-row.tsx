@@ -64,7 +64,7 @@ export const UsersTableRow: React.FC<{ user: UserDetailsList }> = ({
                 <b>{username}</b>
               </Link>
             </Row>
-            <Row small className={styles["users-table-row__about"]}>
+            <Row size={"small"} className={styles["users-table-row__about"]}>
               {slicedAbout}
             </Row>
           </RowItem>

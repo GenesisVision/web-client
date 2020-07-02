@@ -97,7 +97,7 @@ const _WalletWithdrawForm: React.FC<Props> = ({
   return (
     <HookForm form={form} onSubmit={handleSubmit}>
       <DialogTop title={t("wallet-withdraw:title")}>
-        <Row large>
+        <Row size={"large"}>
           <WalletSelect
             name={WALLET_WITHDRAW_FIELDS.id}
             label={t("wallet-withdraw:select-currency")}

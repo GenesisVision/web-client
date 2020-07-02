@@ -33,7 +33,7 @@ const _WalletAddFundsForm: React.FC<Props> = ({ wallets, currentWallet }) => {
   return (
     <div>
       <DialogTop title={t("wallet-deposit.title")}>
-        <Row large>
+        <Row size={"large"}>
           <CurrencySourceSelectElement
             name=""
             items={wallets}

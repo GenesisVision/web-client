@@ -62,7 +62,7 @@ const _InvestmentProgramInfo: React.FC<IInvestmentProgramInfoProps> = ({
   return (
     <StatisticItemList>
       {isOwnProgram && (
-        <RowItem large>
+        <RowItem size={"large"}>
           <LevelCalculator
             id={id}
             currency={currency}

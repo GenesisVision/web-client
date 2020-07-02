@@ -50,7 +50,7 @@ export const _AssetFormField: React.FC<React.HTMLAttributes<HTMLDivElement> &
           </Text>
           {trimmedLength > 0 && (
             <Center>
-              <RowItem small>
+              <RowItem size={"small"}>
                 <Text>{trimmedLength}</Text>
               </RowItem>
               <GVProgramPeriod

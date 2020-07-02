@@ -23,7 +23,7 @@ const _TwoFactorConfirm: React.FC<Props> = ({ id }) => {
       <FormTextField>
         {t("asset-settings:two-factor-confirm.text")}
       </FormTextField>
-      <Row large wide>
+      <Row size={"large"} wide>
         <GVButton color="primary" onClick={setOpen}>
           {t("asset-settings:buttons.two-factor-confirm")}
         </GVButton>

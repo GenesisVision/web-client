@@ -17,20 +17,20 @@ const _PerformanceData: React.FC<Props> = ({
   return (
     <DetailsPerformanceData>
       {leverage && (
-        <RowItem xlarge>
+        <RowItem size={"xlarge"}>
           <LabeledValue label={t("asset-details:description.leverage")}>
             {leverage}
           </LabeledValue>
         </RowItem>
       )}
       {currency && (
-        <RowItem xlarge>
+        <RowItem size={"xlarge"}>
           <LabeledValue label={t("asset-details:description.currency")}>
             {currency}
           </LabeledValue>
         </RowItem>
       )}
-      <RowItem xlarge>
+      <RowItem size={"xlarge"}>
         <LabeledValue label={t("asset-details:description.creation-date")}>
           {formatDate(creationDate)}
         </LabeledValue>

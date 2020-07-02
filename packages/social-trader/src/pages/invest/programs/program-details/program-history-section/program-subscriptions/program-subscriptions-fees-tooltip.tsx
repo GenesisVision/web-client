@@ -20,7 +20,7 @@ const _SubscriptionsFeesTooltip: React.FC<Props> = ({
           value={subscription.totalSuccessFeeAmount}
           currency={subscription.totalSuccessFeeCurrency}
         />
-        <Row small>
+        <Row size={"small"}>
           <FeeCommission
             className={styles["fee-commission--green-value"]}
             title={t(

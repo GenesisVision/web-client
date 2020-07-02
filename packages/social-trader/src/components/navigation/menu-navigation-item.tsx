@@ -16,7 +16,7 @@ export const MenuNavigationItem: React.FC<Props> = ({
   const { linkCreator } = useToLink();
   const [t] = useTranslation();
   const renderNavigationItem = ({ Icon, route = "", label }: TMenuItem) => (
-    <Row middle={!!popover}>
+    <Row>
       <NavigationItem
         small={!!popover}
         icon={<Icon primary />}

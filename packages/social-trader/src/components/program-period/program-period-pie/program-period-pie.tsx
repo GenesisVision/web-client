@@ -13,7 +13,7 @@ const _ProgramPeriodPie: React.FC<Props> = ({ start, end, className }) => {
   return (
     <Tooltip render={() => <ProgramPeriodTooltip end={end} />}>
       <Center className={className}>
-        <RowItem small>
+        <RowItem size={"small"}>
           <GVProgramPeriod
             start={start}
             end={end}

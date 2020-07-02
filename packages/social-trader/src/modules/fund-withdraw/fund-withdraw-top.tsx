@@ -22,7 +22,7 @@ const _FundWithdrawTop: React.FC<IFundWithdrawTopProps> = ({
   const [t] = useTranslation();
   return (
     <DialogTop title={t("withdraw-fund.title")} subtitle={title}>
-      <Row large>
+      <Row size={"large"}>
         <BlurableLabeledValue
           label={t("withdraw-fund.available-to-withdraw")}
           isPending={isPending}

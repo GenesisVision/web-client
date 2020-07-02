@@ -16,7 +16,7 @@ const _FundAssetTooltip: React.FC<IFundAssetTooltipProps> = ({
 }) => (
   <TooltipContent fixed={false}>
     <Center>
-      <RowItem small>{name}</RowItem>
+      <RowItem size={"small"}>{name}</RowItem>
       <Text muted>{currency}</Text>
     </Center>
   </TooltipContent>

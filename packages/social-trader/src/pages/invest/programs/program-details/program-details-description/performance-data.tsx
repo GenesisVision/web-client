@@ -31,7 +31,7 @@ const _PerformanceData: React.FC<Props> = ({
   const [t] = useTranslation();
   return (
     <DetailsPerformanceData>
-      <RowItem xlarge bottomOffset>
+      <RowItem size={"xlarge"} bottomOffset>
         <LabeledValue
           label={
             <TooltipLabel
@@ -47,7 +47,7 @@ const _PerformanceData: React.FC<Props> = ({
         </LabeledValue>
       </RowItem>
       {currency && (
-        <RowItem xlarge bottomOffset>
+        <RowItem size={"xlarge"} bottomOffset>
           <LabeledValue
             label={
               <TooltipLabel
@@ -63,7 +63,7 @@ const _PerformanceData: React.FC<Props> = ({
         </RowItem>
       )}
       {!!leverageMin && !!leverageMax && (
-        <RowItem xlarge bottomOffset>
+        <RowItem size={"xlarge"} bottomOffset>
           <LabeledValue
             label={
               <TooltipLabel
@@ -80,7 +80,7 @@ const _PerformanceData: React.FC<Props> = ({
       )}
       {programDetails && (
         <>
-          <RowItem xlarge bottomOffset>
+          <RowItem size={"xlarge"} bottomOffset>
             <LabeledValue
               label={
                 <TooltipLabel
@@ -99,7 +99,7 @@ const _PerformanceData: React.FC<Props> = ({
               />
             </LabeledValue>
           </RowItem>
-          <RowItem xlarge bottomOffset>
+          <RowItem size={"xlarge"} bottomOffset>
             <LabeledValue
               label={
                 <TooltipLabel
@@ -115,7 +115,7 @@ const _PerformanceData: React.FC<Props> = ({
               />
             </LabeledValue>
           </RowItem>
-          <RowItem xlarge bottomOffset>
+          <RowItem size={"xlarge"} bottomOffset>
             <LabeledValue
               label={
                 <TooltipLabel
@@ -133,7 +133,7 @@ const _PerformanceData: React.FC<Props> = ({
               />
             </LabeledValue>
           </RowItem>
-          <RowItem xlarge bottomOffset>
+          <RowItem size={"xlarge"} bottomOffset>
             <LabeledValue
               label={
                 <TooltipLabel
@@ -151,7 +151,7 @@ const _PerformanceData: React.FC<Props> = ({
               />
             </LabeledValue>
           </RowItem>
-          <RowItem xlarge bottomOffset>
+          <RowItem size={"xlarge"} bottomOffset>
             <LabeledValue
               label={
                 <TooltipLabel

@@ -53,7 +53,7 @@ class GVSwitch extends React.PureComponent<GVSwitchProps> {
       <Center className={styles["gv-switch-wrapper"]}>
         {label && (
           <RowItem
-            small
+            size={"small"}
             className={styles["gv-switch__label"]}
             onClick={this.handleClick}
           >

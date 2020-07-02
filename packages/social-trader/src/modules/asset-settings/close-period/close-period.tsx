@@ -22,7 +22,7 @@ const _CloseAssetPeriod: React.FC<Props> = ({ id, t, onApply }) => {
         <FormTextField>
           {t("asset-settings:period-and-closing.text-period")}
         </FormTextField>
-        <Row large>
+        <Row size={"large"}>
           <GVButton color="primary" onClick={setClosePeriodOpen}>
             {t("asset-settings:close-period.title")}
           </GVButton>

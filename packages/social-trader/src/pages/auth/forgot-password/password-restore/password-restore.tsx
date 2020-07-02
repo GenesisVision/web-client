@@ -63,7 +63,7 @@ const _RestorePassword: React.FC<Props> = ({ errorMessage, onSubmit }) => {
           <FormError error={errorMessage} />
         </Row>
       )}
-      <Row xlarge>
+      <Row size={"xlarge"}>
         <SubmitButton id="passwordRestoreSubmit" isSuccessful={!errorMessage}>
           {t("auth:password-restore.new-password.confirm-button-text")}
         </SubmitButton>

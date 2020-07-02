@@ -18,7 +18,7 @@ const _SwitchWithQuestion: React.FC<Props> = ({
 }) => {
   return (
     <Center>
-      <RowItem small>
+      <RowItem size={"small"}>
         <HelpContainer tooltipContent={tooltipContent}>
           <HelpButton
             className={classNames(styles["text-with-question__question"], {
@@ -28,7 +28,7 @@ const _SwitchWithQuestion: React.FC<Props> = ({
           />
         </HelpContainer>
       </RowItem>
-      <RowItem small className={styles["text-with-question__label"]}>
+      <RowItem size={"small"} className={styles["text-with-question__label"]}>
         {label}
       </RowItem>
     </Center>

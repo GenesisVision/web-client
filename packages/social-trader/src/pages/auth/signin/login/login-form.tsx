@@ -58,7 +58,7 @@ const _LoginForm: React.FC<Props> = ({ errorMessage, onSubmit }) => {
         />
       </Row>
 
-      <Row large>
+      <Row size={"large"}>
         <Link to={FORGOT_PASSWORD_ROUTE}>
           <GVButton noPadding variant="text">
             {t("auth:login.forgot")}
@@ -71,7 +71,7 @@ const _LoginForm: React.FC<Props> = ({ errorMessage, onSubmit }) => {
         </Row>
       )}
 
-      <Row large>
+      <Row size={"large"}>
         <SubmitButton
           checkValid={false}
           checkDirty={false}

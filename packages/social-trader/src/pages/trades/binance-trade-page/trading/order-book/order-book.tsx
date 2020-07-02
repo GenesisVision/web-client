@@ -35,10 +35,10 @@ const _OrderBook: React.FC<Props> = ({
   } = useContext(TerminalInfoContext);
   return (
     <>
-      <Row small>
+      <Row size={"small"}>
         <OrderBookTickSizeSelect value={tickValue} setValue={setTickValue} />
       </Row>
-      <Row small>
+      <Row size={"small"}>
         <table className={styles["order-book__table"]}>
           <thead>
             <th>
@@ -59,7 +59,7 @@ const _OrderBook: React.FC<Props> = ({
           </thead>
         </table>
       </Row>
-      <Row small className={styles["order-book__tables-row"]}>
+      <Row size={"small"} className={styles["order-book__tables-row"]}>
         <div
           ref={tablesBlockRef}
           className={styles["order-book__tables-block"]}
@@ -79,10 +79,14 @@ const _OrderBook: React.FC<Props> = ({
               items={asks}
             />
           </Row>
-          <Row small>
+          <Row size={"small"}>
             <OrderBookCurrentPriceContainer />
           </Row>
-          <Row wide small className={styles["order-book__table-block"]}>
+          <Row
+            wide
+            size={"small"}
+            className={styles["order-book__table-block"]}
+          >
             <OrderBookTable
               fullAmount={listAmount.bids}
               tableTickSize={tickValue?.value}

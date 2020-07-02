@@ -68,7 +68,7 @@ const _InvestmentLimit: React.FC<Props> = ({
           hasInvestmentLimit={hasInvestmentLimit}
           currency={currency}
         />
-        <Row large>
+        <Row size={"large"}>
           <SubmitButton isSuccessful={!editError}>
             {t("asset-settings:buttons.save")}
           </SubmitButton>

@@ -56,7 +56,7 @@ const _ForgotPasswordForm: React.FC<Props> = ({ onSubmit, errorMessage }) => {
           <FormError error={errorMessage} />
         </Row>
       )}
-      <Row large>
+      <Row size={"large"}>
         <RowItem>
           <Link to={LOGIN_ROUTE}>
             <GVButton noPadding variant="text" color="secondary">

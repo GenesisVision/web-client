@@ -15,21 +15,21 @@ const _ReferralRewardsBlock: React.FC<Props> = ({
   const [t] = useTranslation();
   return (
     <Row>
-      <RowItem large>
+      <RowItem size={"large"}>
         <LabeledValue
           label={t("profile-page:referral-program.referral-friends-1lvl")}
         >
           <Text size={"xlarge"}>{totalReferralsL1}</Text>
         </LabeledValue>
       </RowItem>
-      <RowItem large>
+      <RowItem size={"large"}>
         <LabeledValue
           label={t("profile-page:referral-program.referral-friends-2lvl")}
         >
           <Text size={"xlarge"}>{totalReferralsL2}</Text>
         </LabeledValue>
       </RowItem>
-      <RowItem large>
+      <RowItem size={"large"}>
         <LabeledValue label={t("profile-page:referral-program.total-rewards")}>
           <Text size={"xlarge"}>
             {totalAmount} {currency}

@@ -24,7 +24,7 @@ export const _Share: React.FC<Props> = ({
   return (
     <>
       <Center onClick={() => !disable && setIsOpen()}>
-        <RowItem className={styles["share__icon"]} small>
+        <RowItem className={styles["share__icon"]} size={"small"}>
           <ShareIcon disabled={disable} />
         </RowItem>
         {count > 0 && (

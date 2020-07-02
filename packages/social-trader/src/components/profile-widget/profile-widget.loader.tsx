@@ -9,7 +9,7 @@ import styles from "./profile-widget.module.scss";
 export const ProfileWidgetLoader: React.FC<{ className?: string }> = React.memo(
   ({ className }) => (
     <Center className={styles["profile-widget__content"]}>
-      <RowItem small>
+      <RowItem size={"small"}>
         <ProfileAvatar
           className={styles["profile-widget__avatar"]}
           url={""}

@@ -66,7 +66,7 @@ const _CustomNotificationCreateForm: React.FC<Props> = ({
       />
       <DialogBottom>
         <HookForm form={form} onSubmit={onSubmit}>
-          <Row large>
+          <Row size={"large"}>
             <GVHookFormField
               wide
               name={FIELDS.conditionType}

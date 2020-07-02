@@ -37,7 +37,7 @@ const _FundAssetRatio: React.FC<Props> = ({
         })}
       </div>
       {showBounds && (
-        <Row small className={styles["fund-asset-ratio__values"]}>
+        <Row size={"small"} className={styles["fund-asset-ratio__values"]}>
           <div className={styles["fund-asset-ratio__value"]}>0%</div>
           <div
             className={classNames(styles["fund-asset-ratio__value"], {

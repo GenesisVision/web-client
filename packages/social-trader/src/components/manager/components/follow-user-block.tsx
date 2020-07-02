@@ -32,7 +32,7 @@ const _FollowUserBlock: React.FC<Props> = ({
   return (
     <>
       {isOwnPage === false && personalDetails && (
-        <Row onlyOffset large>
+        <Row onlyOffset size={"large"}>
           <FollowUserButton
             onChange={updateData}
             id={id}
@@ -40,7 +40,7 @@ const _FollowUserBlock: React.FC<Props> = ({
           />
         </Row>
       )}
-      <Row large>
+      <Row size={"large"}>
         <RowItem>
           <FollowersCountItem
             onChange={updateData}

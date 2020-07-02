@@ -51,7 +51,7 @@ const TileFilter: React.FC<Props> = ({
   return (
     <RowItem>
       <Row>
-        <RowItem large>
+        <RowItem size={"large"}>
           <Row className={styles["tile-filter__items"]}>{selectedItems}</Row>
         </RowItem>
         <RowItem>

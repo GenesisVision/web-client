@@ -26,7 +26,7 @@ const _KycRequiredBlock: React.FC = () => {
           {t("create-account:settings.kyc-required-text-2")}
         </FormTextField>
       </Row>
-      <Row large wide>
+      <Row size={"large"} wide>
         <Link to={linkCreator(KYC_ROUTE)}>
           <GVButton color="primary" variant="outlined">
             {t("buttons.verify")}

@@ -56,7 +56,7 @@ const ProfileLayout: React.FC<Props> = ({ route, children }) => {
             />
           ))}
       </GVTabs>
-      <Row onlyOffset large>
+      <Row onlyOffset size={"large"}>
         {children}
       </Row>
     </Page>

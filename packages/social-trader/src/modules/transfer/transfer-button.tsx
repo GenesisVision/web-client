@@ -99,7 +99,7 @@ const FullButton: React.FC<{
       >
         <Center>
           {withIcon && (
-            <RowItem small>
+            <RowItem size={"small"}>
               <ImageBaseElement
                 className={styles["transfer-button__full-button-icon"]}
                 src={ConvertIcon}

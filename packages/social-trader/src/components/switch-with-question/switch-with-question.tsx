@@ -15,7 +15,7 @@ const _SwitchWithQuestion: React.FC<Props> = ({
 }) => {
   return (
     <Center>
-      <RowItem small>
+      <RowItem size={"small"}>
         <TextWithQuestion
           label={label}
           onClickHelp={onClickHelp}

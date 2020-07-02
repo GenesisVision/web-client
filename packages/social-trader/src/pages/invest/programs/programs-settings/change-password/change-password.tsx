@@ -20,7 +20,7 @@ const _ChangePassword: React.FC<Props> = ({ id, t, title }) => {
     <SettingsBlock label={t("asset-settings:password.title")}>
       <div>
         <FormTextField>{t("asset-settings:password.text")}</FormTextField>
-        <Row large>
+        <Row size={"large"}>
           <GVButton color="primary" onClick={setChangePasswordOpen}>
             {t("asset-details:description.change-password")}
           </GVButton>

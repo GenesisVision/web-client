@@ -56,14 +56,14 @@ const _AboutLevelsContent: React.FC<Props> = ({
       </Row>
       <Row className={styles["about-levels__content"]}>
         <RowItem className={styles["about-levels__left-block"]}>
-          <Row small>{t("about-levels-page:section.text-1")}</Row>
-          <Row small>{t("about-levels-page:section.text-2")}</Row>
-          <Row small>{t("about-levels-page:section.text-3")}</Row>
-          <Row small>{t("about-levels-page:section.text-4")}</Row>
+          <Row size={"small"}>{t("about-levels-page:section.text-1")}</Row>
+          <Row size={"small"}>{t("about-levels-page:section.text-2")}</Row>
+          <Row size={"small"}>{t("about-levels-page:section.text-3")}</Row>
+          <Row size={"small"}>{t("about-levels-page:section.text-4")}</Row>
           <Row>
             <h4>{t("about-levels-page:section.formula")}</h4>
           </Row>
-          <Row small>{t("about-levels-page:list.subtitle")}</Row>
+          <Row size={"small"}>{t("about-levels-page:list.subtitle")}</Row>
           <div className={styles["about-levels__list"]}>
             <h4 className={styles["about-levels__list-item"]}>
               {t("about-levels-page:list.list-item-1")}

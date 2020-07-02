@@ -53,7 +53,7 @@ const _FundAsset: React.FC<Props> = ({
       );
     default:
       return (
-        <RowItem small bottomOffset={bottomOffset}>
+        <RowItem size={"small"} bottomOffset={bottomOffset}>
           <Row
             {...other}
             className={classNames(
@@ -66,7 +66,7 @@ const _FundAsset: React.FC<Props> = ({
               }
             )}
           >
-            <RowItem small>
+            <RowItem size={"small"}>
               <CurrencyItem
                 url={url}
                 logo={logoUrl}

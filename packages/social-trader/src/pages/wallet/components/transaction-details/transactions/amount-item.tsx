@@ -16,14 +16,14 @@ const _AmountItem: React.FC<Props> = ({
   return (
     <ColoredAmount color={color}>
       <Row>
-        <RowItem small>
+        <RowItem size={"small"}>
           <NumberFormat
             value={formatValue(amount, DEFAULT_DECIMAL_SCALE)}
             allowNegative={true}
             displayType="text"
           />
         </RowItem>
-        <RowItem small>{currency}</RowItem>
+        <RowItem size={"small"}>{currency}</RowItem>
       </Row>
     </ColoredAmount>
   );

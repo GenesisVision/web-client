@@ -43,7 +43,7 @@ const _FacetCard: React.FC<Props> = ({
           </div>
           <div className={styles["facet__info"]}>
             <h2 className={styles["facet__title"]}>{facet.title}</h2>
-            <Row small className={styles["facet__description"]}>
+            <Row size={"small"} className={styles["facet__description"]}>
               {facet.description}
             </Row>
           </div>

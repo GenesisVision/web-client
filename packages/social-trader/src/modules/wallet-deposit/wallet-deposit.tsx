@@ -45,7 +45,10 @@ const FullButton: React.FC<{
       onClick={onClick}
     >
       <Center>
-        <RowItem small className={styles["wallet-deposit__full-button-icon"]}>
+        <RowItem
+          size={"small"}
+          className={styles["wallet-deposit__full-button-icon"]}
+        >
           +
         </RowItem>
         <RowItem>{label}</RowItem>

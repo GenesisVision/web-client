@@ -20,7 +20,7 @@ const _BrokerCardAdornment: React.FC<Props> = ({ cardState }) => {
     <div className={styles["broker-card__adornment-text"]}>
       <Text muted size={"small"}>
         <Row>
-          <RowItem small>
+          <RowItem size={"small"}>
             {t(`create-program-page:broker-card.${cardState}`)}
           </RowItem>
           {cardState === BROKER_CARD_EXTRA_STATE.KYC_REQUIRED && (

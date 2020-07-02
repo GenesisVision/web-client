@@ -20,7 +20,7 @@ const _TagItemTooltip: React.FC<Props> = ({ tags, className }) => {
         {tags
           .filter((tag, idx) => idx > 0)
           .map((tag, idx) => (
-            <RowItem small>
+            <RowItem size={"small"}>
               <TagItem name={tag.name} color={tag.color} key={idx} />
             </RowItem>
           ))}

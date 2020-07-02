@@ -28,7 +28,7 @@ const _DetailsStatisticsElements: React.FC<Props> = ({
           <Current />
         </Row>
       </Row>
-      <Row large onlyOffset>
+      <Row size={"large"} onlyOffset>
         <h5>
           {t("asset-details:statistics.for")}{" "}
           {t(`asset-details:chart-period.${ChartPeriodType[periodType]}`)}

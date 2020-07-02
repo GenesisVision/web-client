@@ -22,17 +22,17 @@ const EmailPendingPage: React.FC = () => {
   });
   return (
     <div className={styles["password-pending"]}>
-      <Row small>
+      <Row size={"small"}>
         <Text muted>
           {t("auth:password-restore.email-pending.text-section-1")}
         </Text>
       </Row>
-      <Row small>
+      <Row size={"small"}>
         <Text muted>
           {t("auth:password-restore.email-pending.text-section-2")}
         </Text>
       </Row>
-      <Row small>
+      <Row size={"small"}>
         <Text muted>
           {t("auth:password-restore.email-pending.text-section-3")}
         </Text>

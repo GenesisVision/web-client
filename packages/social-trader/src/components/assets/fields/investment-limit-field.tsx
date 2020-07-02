@@ -23,7 +23,7 @@ const _InvestmentLimitField: React.FC<Props> = ({
   const { t } = useTranslation();
   return (
     <>
-      <Row wide large>
+      <Row wide size={"large"}>
         <GVCheckbox
           value={hasInvestmentLimit}
           setFieldValue={(_, value) => setHasInvestmentLimit(value)}
@@ -43,7 +43,7 @@ const _InvestmentLimitField: React.FC<Props> = ({
           currency={currency}
         />
       )}
-      <Row wide large>
+      <Row wide size={"large"}>
         <FormTextField>
           {t("asset-settings:investment-limit.text")}
         </FormTextField>

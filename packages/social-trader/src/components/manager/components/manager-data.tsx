@@ -71,12 +71,12 @@ const _ManagerData: React.FC<Props> = ({ canWritePost, id }) => {
         </GVTabs>
       </Row>
       {tab === TABS.FEED && (
-        <Row large onlyOffset>
+        <Row size={"large"} onlyOffset>
           <UserFeed canWritePost={canWritePost} id={id} />
         </Row>
       )}
       {tab === TABS.TRADING && (
-        <Row large onlyOffset>
+        <Row size={"large"} onlyOffset>
           <ManagerHistorySection
             followCount={followCount}
             programsCount={programsCount}
@@ -86,7 +86,7 @@ const _ManagerData: React.FC<Props> = ({ canWritePost, id }) => {
         </Row>
       )}
       {tab === TABS.INVESTING && (
-        <Row large onlyOffset>
+        <Row size={"large"} onlyOffset>
           <UserInvestingSection
             followCount={investingFollowCount}
             programsCount={investingProgramsCount}

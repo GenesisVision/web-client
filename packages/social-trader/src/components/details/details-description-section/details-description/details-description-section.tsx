@@ -57,14 +57,14 @@ const _DetailsDescriptionSection: React.FC<Props> = ({
         settingsUrl={settingsUrl}
       />
       {PerformanceData && (
-        <Row xlarge>
+        <Row size={"xlarge"}>
           <PerformanceData />
         </Row>
       )}
       {Controls && (
         <Row
           center={false}
-          xlarge
+          size={"xlarge"}
           wrap
           className={styles["asset-details-description__controls"]}
         >

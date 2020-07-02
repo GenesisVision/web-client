@@ -7,7 +7,7 @@ import styles from "./dialog.module.scss";
 export const DialogInfo: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
   children
 }) => (
-  <Row large className={styles["dialog__info"]}>
+  <Row size={"large"} className={styles["dialog__info"]}>
     <Text muted size={"small"}>
       {children}{" "}
     </Text>

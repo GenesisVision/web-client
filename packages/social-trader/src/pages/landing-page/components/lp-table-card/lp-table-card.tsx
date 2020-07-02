@@ -100,7 +100,7 @@ export const LPTableCardSubTitle: React.FC<{
 } & React.HTMLAttributes<HTMLDivElement>> = ({ children, url }) => {
   const title = typeof children === "string" ? children : "";
   return (
-    <Row middle={false} className={styles["lp-table-card__subtitle"]}>
+    <div className={styles["lp-table-card__subtitle"]}>
       <Text muted>
         {url ? (
           <Link
@@ -114,7 +114,7 @@ export const LPTableCardSubTitle: React.FC<{
           children
         )}
       </Text>
-    </Row>
+    </div>
   );
 };
 
@@ -186,7 +186,7 @@ export const LPTableCardTopBlock: React.FC<ITableCardTopBlockProps> = React.memo
                 {subTitle}
               </LPTableCardSubTitle>
             )}
-            <Row small>{extraBlock}</Row>
+            <Row size={"small"}>{extraBlock}</Row>
           </div>
         </RowItem>
       </LPTableCardRow>

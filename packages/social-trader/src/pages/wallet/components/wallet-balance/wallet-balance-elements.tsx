@@ -25,10 +25,10 @@ const _WalletBalanceElements: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   return (
-    <Row large>
+    <Row size={"large"}>
       <StatisticItemList>
         {total !== undefined && (
-          <RowItem xlarge>
+          <RowItem size={"xlarge"}>
             <LabeledValue
               label={
                 <TooltipLabel
@@ -48,7 +48,7 @@ const _WalletBalanceElements: React.FC<Props> = ({
             </LabeledValue>
           </RowItem>
         )}
-        <RowItem large className={styles["wallet-balance__divider"]} />
+        <RowItem size={"large"} className={styles["wallet-balance__divider"]} />
         <PieStatisticItem
           condition={available !== undefined}
           value={available!}

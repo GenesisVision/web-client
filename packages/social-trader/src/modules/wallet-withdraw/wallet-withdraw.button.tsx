@@ -56,7 +56,7 @@ const FullButton: React.FC<{
       onClick={onClick}
     >
       <Center>
-        <RowItem small>
+        <RowItem size={"small"}>
           <ImageBaseElement
             className={styles["wallet-withdraw-button__full-button-icon"]}
             src={ArrowIcon}

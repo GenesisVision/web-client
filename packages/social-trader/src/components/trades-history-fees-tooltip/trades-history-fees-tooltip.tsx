@@ -26,7 +26,7 @@ const _TradesHistoryFeesTooltip: React.FC<Props> = ({
             currency={originalCommissionCurrency}
           />
           {totalCommissionByType.map((commission, index) => (
-            <Row key={index} small>
+            <Row key={index} size={"small"}>
               <FeeCommission
                 title={commission.title}
                 value={commission.amount}

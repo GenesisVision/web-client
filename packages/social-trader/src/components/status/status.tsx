@@ -25,7 +25,7 @@ export type IStatus = {
 const _Status: React.FC<IStatus> = ({ withText, className, status }) => {
   return (
     <Row>
-      <RowItem small>
+      <RowItem size={"small"}>
         <Row>
           <ImageBaseElement
             className={classNames(styles["status__image"], className)}
