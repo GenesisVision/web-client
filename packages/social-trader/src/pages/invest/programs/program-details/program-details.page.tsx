@@ -40,7 +40,7 @@ const _ProgramDetailsPage: React.FC<Props> = ({ levelsParameters, route }) => {
 };
 
 interface Props {
-  levelsParameters: LevelsParamsInfo;
+  levelsParameters?: LevelsParamsInfo;
   route: ASSET;
 }
 
