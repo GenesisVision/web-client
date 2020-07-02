@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import React from "react";
 import { SizesType } from "utils/types";
 
@@ -11,7 +11,7 @@ const _PostInputButton: React.FC<Props> = ({
 }) => {
   return (
     <div
-      className={classNames(styles["post-input__button"], {
+      className={clsx(styles["post-input__button"], {
         [styles["post-input__button--small"]]: size === "small",
         [styles["post-input__button--middle"]]: size === "middle"
       })}

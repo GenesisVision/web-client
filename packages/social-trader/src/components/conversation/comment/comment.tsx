@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { ConversationRemoveButton } from "components/conversation/conversation-remove-button/conversation-remove-button";
 import { ConversationComment } from "components/conversation/conversation.types";
 import { LikeContainer } from "components/conversation/like/like-container";
@@ -35,7 +35,7 @@ const _Comment: React.FC<Props> = ({
   return (
     <div
       ref={ref}
-      className={classNames(styles["comment"], {
+      className={clsx(styles["comment"], {
         [styles["comment--highlighted"]]: isHighlighted
       })}
     >

@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import * as React from "react";
 
 import styles from "./tile-filter-button.module.scss";
@@ -10,7 +10,7 @@ const _TileFilterButton: React.FC<ITagFilterButton> = ({
 }) => {
   return (
     <div
-      className={classNames(styles["tile-filter-button__add"], {
+      className={clsx(styles["tile-filter-button__add"], {
         [styles["tile-filter-button__add--active"]]: isActive
       })}
       onClick={onClick}

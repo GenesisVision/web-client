@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import ImageBaseElement from "components/avatar/image-base.element";
 import { getImageUrlBySize } from "components/conversation/conversation-image/conversation-image.helpers";
 import { ConversationImagesFull } from "components/conversation/conversation-image/conversation-images-full";
@@ -29,7 +29,7 @@ const _ConversationImage: React.FC<Props> = ({ images, size, index }) => {
         onClick={setOpen}
         DefaultImageComponent={EmptyImage}
         defaultImageClassName={styles["conversation-image__empty"]}
-        className={classNames(styles["conversation-image"], {
+        className={clsx(styles["conversation-image"], {
           [styles["conversation-image--small"]]: size === "small",
           [styles["conversation-image--middle"]]: size === "middle",
           [styles["conversation-image--large"]]: size === "large"

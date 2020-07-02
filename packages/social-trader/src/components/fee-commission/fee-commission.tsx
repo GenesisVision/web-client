@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
@@ -14,7 +14,7 @@ export const _FeeCommission: React.FC<Props> = ({
   currency,
   className
 }) => (
-  <Row className={classNames(styles["fee-commission"], className)}>
+  <Row className={clsx(styles["fee-commission"], className)}>
     <RowItem>
       <Text muted>{title}</Text>
     </RowItem>

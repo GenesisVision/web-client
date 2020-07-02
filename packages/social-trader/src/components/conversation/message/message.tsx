@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { ConversationImage } from "components/conversation/conversation-image/conversation-image";
 import { getImageSize } from "components/conversation/conversation-image/conversation-image.helpers";
 import { ConversationUser } from "components/conversation/conversation-user/conversation-user";
@@ -40,7 +40,7 @@ const _Message: React.FC<IMessageProps> = ({
   return (
     <div>
       <div
-        className={classNames(styles["message"], {
+        className={clsx(styles["message"], {
           [styles["message--row"]]: row
         })}
       >

@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import React from "react";
 
 import styles from "./button-icon.module.scss";
@@ -15,7 +15,7 @@ export const ButtonIcon: React.FC<Props> = ({
 }) => {
   return (
     <div
-      className={classNames(styles["button-icon"], className, {
+      className={clsx(styles["button-icon"], className, {
         [styles["button-icon--disabled"]]: disabled
       })}
     >

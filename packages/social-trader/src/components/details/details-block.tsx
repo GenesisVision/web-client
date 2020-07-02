@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import * as React from "react";
 
 import styles from "./details.block.module.scss";
@@ -22,7 +22,7 @@ const DetailsBlock: React.FC<Props> = ({
   type = DETAILS_BLOCK_TYPE.SOLID
 }) => (
   <div
-    className={classNames(styles["details-block"], className, {
+    className={clsx(styles["details-block"], className, {
       [styles["details-block--landscape-tablet"]]: landscapeTablet,
       [styles["details-block--tablet"]]: tablet,
       [styles["details-block--landscape-phone"]]:

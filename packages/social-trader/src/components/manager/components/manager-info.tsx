@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
 import { DefaultBlock } from "components/default.block/default.block";
 import { FollowUserBlock } from "components/manager/components/follow-user-block";
@@ -57,7 +57,7 @@ const _ManagerInfo: React.FC<Props> = ({ profile }) => {
                 <h3>{t("manager-page:about")}</h3>
               </Row>
               <Row
-                className={classNames(styles["manager-info__about"], {
+                className={clsx(styles["manager-info__about"], {
                   [styles["manager-info__about--break-word"]]: hasLongWords
                 })}
               >

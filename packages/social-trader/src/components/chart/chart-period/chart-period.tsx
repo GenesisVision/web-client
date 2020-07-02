@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import GVButton from "components/gv-button";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
@@ -40,7 +40,7 @@ const _ChartPeriod: React.FC<Props> = ({ period, onChange }) => {
                 )}
                 noPadding
                 key={period}
-                className={classNames(styles["chart-period__period-item"], {
+                className={clsx(styles["chart-period__period-item"], {
                   [styles["chart-period__period-item--active"]]: type === period
                 })}
                 onClick={handleChangePeriod(period)}

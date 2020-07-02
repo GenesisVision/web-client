@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { Center } from "components/center/center";
 import { AttachImageCommentButton } from "components/conversation/comment/comment-input/attach-image-comment-button";
 import { ConversationInput } from "components/conversation/conversation-input/conversation-input";
@@ -128,7 +128,7 @@ const _CommentInput: React.FC<Props> = ({ onSubmit, status, errorMessage }) => {
                 className={styles["comment-input__input-container-row-item"]}
               >
                 <div
-                  className={classNames(
+                  className={clsx(
                     styles["comment-input__input-and-panel-container"],
                     {
                       [styles[
@@ -183,14 +183,12 @@ const _CommentInput: React.FC<Props> = ({ onSubmit, status, errorMessage }) => {
                 <button
                   type="submit"
                   disabled={disabled}
-                  className={classNames(styles["comment-input__send-button"], {
+                  className={clsx(styles["comment-input__send-button"], {
                     [styles["comment-input__send-button--disable"]]: disabled
                   })}
                 >
                   <SendIcon
-                    className={classNames(
-                      styles["comment-input__send-button-icon"]
-                    )}
+                    className={clsx(styles["comment-input__send-button-icon"])}
                     disabled={disabled}
                   />
                 </button>
@@ -216,7 +214,7 @@ const CommentInputMessage: React.FC<{ disable: boolean }> = ({
   return (
     <div className={styles["comment-input__send-text-container"]}>
       <Center
-        className={classNames(styles["comment-input__send-text"], {
+        className={clsx(styles["comment-input__send-text"], {
           [styles["comment-input__send-text--disable"]]: disable
         })}
       >

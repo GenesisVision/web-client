@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import useIsOpen from "hooks/is-open.hook";
 import "lazysizes";
 import "lazysizes/plugins/attrchange/ls.attrchange";
@@ -36,14 +36,14 @@ const _ImageBaseElement: React.FC<IImageBaseElementProps> = ({
     return DefaultImageComponent ? (
       <DefaultImageComponent
         color={color}
-        imageClassName={classNames(defaultImageClassName, className)}
+        imageClassName={clsx(defaultImageClassName, className)}
       />
     ) : (
       // eslint-disable-next-line jsx-a11y/img-redundant-alt
       <img
         src={defaultImage || emptyImg}
         alt="Image not found"
-        className={classNames(defaultImageClassName, className)}
+        className={clsx(defaultImageClassName, className)}
       />
     );
   return (
@@ -53,7 +53,7 @@ const _ImageBaseElement: React.FC<IImageBaseElementProps> = ({
       data-src={currentSrc}
       title={title}
       alt={alt || "Image loading"}
-      className={classNames("lazyload", className)}
+      className={clsx("lazyload", className)}
       onError={handleError}
     />
   );

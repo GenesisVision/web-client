@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import * as React from "react";
 
 import styles from "./error-message.module.scss";
@@ -14,7 +14,7 @@ interface IErrorMessage {
 }
 const ErrorMessage: React.FC<IErrorMessage> = ({ error, className, type }) => (
   <span
-    className={classNames(styles["error-message"], className, {
+    className={clsx(styles["error-message"], className, {
       [styles["error-message--over"]]: type === MESSAGE_TYPES.OVER
     })}
   >

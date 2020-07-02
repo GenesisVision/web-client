@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
 import ImageBase from "components/avatar/image-base";
 import Link from "components/link/link";
@@ -32,7 +32,7 @@ const _PortfolioEventLogo: React.FC<Props> = ({
   );
   return (
     <div
-      className={classNames(styles["portfolio-event-logo"], {
+      className={clsx(styles["portfolio-event-logo"], {
         [styles["portfolio-event-logo--with-asset"]]: icon && withAsset
       })}
     >
@@ -48,7 +48,7 @@ const _PortfolioEventLogo: React.FC<Props> = ({
         ))}
       {icon && (
         <div
-          className={classNames(styles["portfolio-event-logo__type"], {
+          className={clsx(styles["portfolio-event-logo__type"], {
             [styles["portfolio-event-logo__type--with-asset"]]: withAsset
           })}
         >

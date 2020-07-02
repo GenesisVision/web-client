@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { DropZoneWrapper } from "components/form/input-image/drop-zone-wrapper";
 import { InputImageCropper } from "components/form/input-image/input-image-cropper";
 import * as React from "react";
@@ -34,7 +34,7 @@ const _InputImage: React.FC<IInputImageProps> = ({
   const hasSizeError = error && error.image.size;
   return (
     <div
-      className={classNames(styles["input-image"], className, {
+      className={clsx(styles["input-image"], className, {
         [styles["input-image--error"]]: error !== undefined
       })}
     >
@@ -62,7 +62,7 @@ const _InputImage: React.FC<IInputImageProps> = ({
               )}
             </div>
             <p
-              className={classNames(
+              className={clsx(
                 styles["input-image__text"],
                 styles["input-image__text--big"]
               )}
@@ -77,7 +77,7 @@ const _InputImage: React.FC<IInputImageProps> = ({
               {t("form-fields:input-image.to-browse")}
             </p>
             <p
-              className={classNames(
+              className={clsx(
                 styles["input-image__text"],
                 styles["input-image__text--small"]
               )}

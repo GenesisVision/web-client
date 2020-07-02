@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import * as React from "react";
 import { SizesType } from "utils/types";
 
@@ -34,7 +34,7 @@ export const DefaultBlock: React.FC<IDefaultBlockProps> = ({
   className
 }) => (
   <div
-    className={classNames(styles["default-block"], className, {
+    className={clsx(styles["default-block"], className, {
       [styles["default-block--light"]]: light,
       [styles["default-block--rounded-border"]]: roundedBorder,
       [styles["default-block--hoverable"]]: hoverable,

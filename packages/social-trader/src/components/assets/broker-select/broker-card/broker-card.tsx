@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import ImageBase from "components/avatar/image-base";
 import TagBrokerContainer from "components/tags/tag-broker-container/tag-broker-container";
 import { Tag } from "gv-api-web";
@@ -30,12 +30,12 @@ const _BrokerCard: React.FC<Props> = ({
     BROKER_CARD_EXTRA_STATE.NONE,
     BROKER_CARD_EXTRA_STATE.KYC_REQUIRED
   ].includes(cardState);
-  const className = classNames(styles["broker-card"], {
+  const className = clsx(styles["broker-card"], {
     [styles["broker-card--clickable"]]: !!onSelect,
     [styles["broker-card--active"]]: isActive,
     [styles["broker-card--inactive"]]: !isActive
   });
-  let logoClassName = classNames(
+  let logoClassName = clsx(
     styles["broker-card__logo"],
     styles["broker-card__logo--" + slugBrokerName(brokerName)]
   );

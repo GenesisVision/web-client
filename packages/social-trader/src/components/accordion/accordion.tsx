@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { Center } from "components/center/center";
 import { DefaultBlock } from "components/default.block/default.block";
 import { RowItem } from "components/row-item/row-item";
@@ -22,15 +22,11 @@ export const Accordion: React.FC<Props> = ({ label, text }) => {
     setIsOpen(false);
   }, []);
   return (
-    <DefaultBlock
-      wide
-      size={"small"}
-      className={classNames(styles["accordion"])}
-    >
+    <DefaultBlock wide size={"small"} className={clsx(styles["accordion"])}>
       <Row onClick={handleClickLabel} className={styles["accordion__label"]}>
         <RowItem size={"small"}>
           <Center
-            className={classNames(styles["accordion__icon"], {
+            className={clsx(styles["accordion__icon"], {
               [styles["accordion__icon--open"]]: isOpen
             })}
           >

@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { LevelInfo } from "gv-api-web";
 import * as React from "react";
 
@@ -6,7 +6,7 @@ import styles from "./about-level-icon.module.scss";
 
 const LevelIcon: React.FC<Props> = React.memo(({ levelInfo, current }) => (
   <div
-    className={classNames(
+    className={clsx(
       styles["about-levels-icon"],
       styles[`about-levels-icon--${levelInfo.level}`],
       {

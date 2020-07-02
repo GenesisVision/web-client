@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
 import ImageBase from "components/avatar/image-base";
 import { Center } from "components/center/center";
@@ -39,7 +39,7 @@ const TableCard: React.FC<ITableCardProps & IWithOffset> = props => {
 export const TableCardContainer: React.FC<React.HTMLAttributes<HTMLDivElement> &
   IWithOffset> = ({ withOffset = true, children }) => (
   <div
-    className={classNames(styles["table-card"], {
+    className={clsx(styles["table-card"], {
       [styles["table-card--with-offset"]]: withOffset
     })}
   >
@@ -51,7 +51,7 @@ export const TableCardRow: React.FC<{ center?: boolean } & React.HTMLAttributes<
   HTMLDivElement
 >> = ({ children, center }) => (
   <div
-    className={classNames(styles["table-card__row"], {
+    className={clsx(styles["table-card__row"], {
       [styles["table-card__row--center"]]: center
     })}
   >
@@ -63,7 +63,7 @@ export const TableCardTable: React.FC<{ wrap?: boolean } & React.HTMLAttributes<
   HTMLDivElement
 >> = ({ children, wrap }) => (
   <div
-    className={classNames(styles["table-card__table"], {
+    className={clsx(styles["table-card__table"], {
       [styles["table-card__table--flex-wrap"]]: wrap
     })}
   >

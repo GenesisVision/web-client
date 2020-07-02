@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import {
   reduceByBreaks,
   reduceBySymbolsCount
@@ -43,7 +43,7 @@ const _MessageText: React.FC<Props> = ({ tags, reduceLargeText, text }) => {
   const hasLongWords = textToRender && !!getLongWordsCount(textToRender);
   return (
     <div
-      className={classNames(styles["message__text"], {
+      className={clsx(styles["message__text"], {
         [styles["message__text--break-word"]]: hasLongWords
       })}
     >

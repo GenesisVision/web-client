@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { CurrencyItem } from "components/currency-item/currency-item";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
@@ -56,7 +56,7 @@ const _FundAsset: React.FC<Props> = ({
         <RowItem size={"small"} bottomOffset={bottomOffset}>
           <Row
             {...other}
-            className={classNames(
+            className={clsx(
               styles["fund-asset"],
               styles["fund-asset--default"],
               className,
@@ -73,7 +73,7 @@ const _FundAsset: React.FC<Props> = ({
                 small
                 name={!!currency && currencyName}
                 symbol={currency}
-                className={classNames(
+                className={clsx(
                   styles["fund-asset__currency"],
                   currencyClassName
                 )}

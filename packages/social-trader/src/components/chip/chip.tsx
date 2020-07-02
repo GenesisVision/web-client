@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import * as React from "react";
 import { SizesType } from "utils/types";
 
@@ -23,7 +23,7 @@ const Chip: React.FC<Props> = React.memo(
     stretch
   }) => (
     <div
-      className={classNames(styles["chip"], className, {
+      className={clsx(styles["chip"], className, {
         [styles[`chip--${type}`]]: type,
         [styles["chip--small"]]: size === "small",
         [styles["chip--stretch"]]: stretch,

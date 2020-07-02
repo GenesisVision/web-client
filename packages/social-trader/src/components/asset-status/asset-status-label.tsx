@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { STATUS } from "constants/constants";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
@@ -6,7 +6,7 @@ import { WithTranslation, withTranslation as translate } from "react-i18next";
 import styles from "./asset-status.module.scss";
 
 const getStatusClassName = (status: STATUS, className?: string) =>
-  classNames(styles["asset-status"], className, {
+  clsx(styles["asset-status"], className, {
     [styles["asset-status__active"]]: status === STATUS.ACTIVE,
     [styles["asset-status__investing"]]: status === STATUS.INVESTING,
     [styles["asset-status__withdrawing"]]: status === STATUS.WITHDRAWING,

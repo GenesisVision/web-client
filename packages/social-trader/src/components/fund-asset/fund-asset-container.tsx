@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import FundAssetTooltipContainer from "components/fund-asset/fund-asset-tooltip/fund-asset-tooltip-container";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
@@ -67,7 +67,7 @@ const _FundAssetContainer: React.FC<IFundAssetContainerProps> = ({
         <RowItem
           size={"small"}
           bottomOffset
-          className={classNames(
+          className={clsx(
             styles["fund-asset"],
             styles["fund-asset--remainder"]
           )}

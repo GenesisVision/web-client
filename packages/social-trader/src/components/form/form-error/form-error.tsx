@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import * as React from "react";
 
 import styles from "./form-error.module.scss";
@@ -12,7 +12,7 @@ const FormError: React.FC<IFormErrorProps> = React.memo(({ error, small }) => {
   if (error) {
     return (
       <div
-        className={classNames(styles["form-error"], {
+        className={clsx(styles["form-error"], {
           [styles["form-error--small"]]: small
         })}
       >

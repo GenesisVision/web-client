@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import Chip, { CHIP_TYPE } from "components/chip/chip";
 import * as React from "react";
 import { ReactNode } from "react";
@@ -22,7 +22,7 @@ const ChipButton: React.FC<Props> = React.memo(
   }) => (
     <div
       onClick={onClick}
-      className={classNames(styles["chip-button"], {
+      className={clsx(styles["chip-button"], {
         [styles["chip-button--reversed"]]: reverseOrder
       })}
     >

@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import React from "react";
 
 import styles from "./center.module.scss";
@@ -13,7 +13,7 @@ export const Center: React.FC<Props> = ({
   return (
     <div
       {...otherProps}
-      className={classNames(className, {
+      className={clsx(className, {
         [styles["center"]]: center,
         [styles["center--wrap"]]: wrap
       })}

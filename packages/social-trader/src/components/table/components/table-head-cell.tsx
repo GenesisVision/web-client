@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { Text } from "components/text/text";
 import * as React from "react";
 
@@ -21,7 +21,7 @@ const _TableHeadCell: React.FC<ITableHeadCellProps> = ({
 }) => {
   return (
     <th
-      className={classNames(
+      className={clsx(
         styles["table__cell--first-offset"],
         styles["table__cell"],
         styles["table__cell--medium"],
@@ -32,7 +32,7 @@ const _TableHeadCell: React.FC<ITableHeadCellProps> = ({
     >
       {sortable ? (
         <span
-          className={classNames({
+          className={clsx({
             [styles["sortable-asc"]]:
               sortingDirection === SORTING_DIRECTION.ASC,
             [styles["sortable-desc"]]:

@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import ImageBase from "components/avatar/image-base";
 import { DefaultBlock } from "components/default.block/default.block";
 import Link from "components/link/link";
@@ -24,7 +24,7 @@ const _FacetCard: React.FC<Props> = ({
       solid
       horizontalOffsets={false}
       verticalOffsets={false}
-      className={classNames(styles["facet"], {
+      className={clsx(styles["facet"], {
         [styles["facet--hovered"]]: isHovered
       })}
       onMouseEnter={setHovered}

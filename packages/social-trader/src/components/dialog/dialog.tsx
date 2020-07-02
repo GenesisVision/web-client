@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import GVButton from "components/gv-button";
 import { CloseIcon } from "components/icon/close-icon";
 import Modal, { BodyFix } from "components/modal/modal";
@@ -38,7 +38,7 @@ export const Dialog: React.FC<IDialogProps> = ({
       >
         <BodyFix />
         <div
-          className={classNames(styles["dialog"], className, {
+          className={clsx(styles["dialog"], className, {
             [styles["dialog--top"]]: top
           })}
         >
