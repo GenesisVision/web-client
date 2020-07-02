@@ -1,4 +1,4 @@
-import GVButton, { GV_BTN_SIZE } from "components/gv-button";
+import GVButton from "components/gv-button";
 import { LabeledValue } from "components/labeled-value/labeled-value";
 import { PopoverContentCardBlock } from "components/popover/popover-card.block";
 import { PopoverContent } from "components/popover/popover-content";
@@ -71,7 +71,7 @@ const _InvestmentLimitsPopover: React.FC<Props> = ({
           </Row>
           <Row>
             <GVButton
-              size={GV_BTN_SIZE.BIG}
+              size={"xlarge"}
               noPadding
               variant="text"
               onClick={setOpen}

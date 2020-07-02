@@ -1,5 +1,5 @@
 import { Comment } from "components/conversation/comment/comment";
-import GVButton, { GV_BTN_SIZE } from "components/gv-button";
+import GVButton from "components/gv-button";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
 import { Post } from "gv-api-web";
@@ -36,7 +36,7 @@ const _CommentsList: React.FC<Props> = ({
           <GVButton
             noPadding
             variant={"text"}
-            size={GV_BTN_SIZE.BIG}
+            size={"xlarge"}
             onClick={setViewAll}
           >
             View all

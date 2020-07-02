@@ -1,12 +1,13 @@
-import GVButton, { GV_BTN_SIZE } from "components/gv-button";
+import GVButton from "components/gv-button";
 import { toggleFollowUser } from "components/manager/services/manager.service";
 import useApiRequest from "hooks/api-request.hook";
 import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { SizesType } from "utils/types";
 
 const _FollowUserButton: React.FC<Props> = ({
   onChange,
-  size = GV_BTN_SIZE.BIG,
+  size = "xlarge",
   id,
   value,
   disabled
@@ -40,7 +41,7 @@ const _FollowUserButton: React.FC<Props> = ({
 
 interface Props {
   onChange?: VoidFunction;
-  size?: GV_BTN_SIZE;
+  size?: SizesType;
   disabled?: boolean;
   id: string;
   value: boolean;

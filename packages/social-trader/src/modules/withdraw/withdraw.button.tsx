@@ -1,4 +1,4 @@
-import GVButton, { GV_BTN_SIZE } from "components/gv-button";
+import GVButton from "components/gv-button";
 import { ASSET } from "constants/constants";
 import { useAccountCurrency } from "hooks/account-currency.hook";
 import useIsOpen from "hooks/is-open.hook";
@@ -6,7 +6,7 @@ import { useTranslation } from "i18n";
 import { FundWithdrawDialog } from "modules/fund-withdraw/fund-withdraw-dialog";
 import ProgramWithdrawDialog from "modules/program-withdraw/program-withdraw-dialog";
 import React from "react";
-import { CurrencyEnum } from "utils/types";
+import { CurrencyEnum, SizesType } from "utils/types";
 
 const _WithdrawButton: React.FC<Props> = ({
   size,
@@ -57,7 +57,7 @@ const _WithdrawButton: React.FC<Props> = ({
 };
 
 interface Props {
-  size?: GV_BTN_SIZE;
+  size?: SizesType;
   disabled?: boolean;
   onApply?: VoidFunction;
   type: ASSET;

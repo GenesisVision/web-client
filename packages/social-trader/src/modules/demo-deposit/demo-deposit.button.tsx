@@ -1,9 +1,10 @@
-import GVButton, { GV_BTN_SIZE } from "components/gv-button";
+import GVButton from "components/gv-button";
 import useIsOpen from "hooks/is-open.hook";
 import { IDemoDepositContainerProps } from "modules/demo-deposit/demo-deposit.container";
 import { DemoDepositDialog } from "modules/demo-deposit/demo-deposit.dialog";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
+import { SizesType } from "utils/types";
 
 const _DemoDepositButton: React.FC<Props> = ({
   currentDeposit,
@@ -66,7 +67,7 @@ export const FullButton: React.FC<IFullButtonProps & {
 );
 
 interface IFullButtonProps {
-  size?: GV_BTN_SIZE;
+  size?: SizesType;
   withIcon?: boolean;
   color?: "primary" | "secondary" | "primary-dark" | "danger";
   variant?: "text" | "outlined" | "contained";

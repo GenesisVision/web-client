@@ -2,7 +2,7 @@ import classNames from "classnames";
 import DetailsBlock, {
   DETAILS_BLOCK_TYPE
 } from "components/details/details-block";
-import GVButton, { GV_BTN_SIZE } from "components/gv-button";
+import GVButton from "components/gv-button";
 import Link, { ToType } from "components/link/link";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
@@ -58,7 +58,7 @@ export const AssetBlock: React.FC<Props> = ({
         </Row>
         <Row size={"xlarge"}>
           <Link to={investLink}>
-            <GVButton size={GV_BTN_SIZE.LARGE} color="primary">
+            <GVButton size={"large"} color="primary">
               {buttonLabel || t("invest:invest-button")}
             </GVButton>
           </Link>

@@ -1,6 +1,5 @@
 import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
 import { Center } from "components/center/center";
-import { GV_BTN_SIZE } from "components/gv-button";
 import { Push } from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import { FollowUserButton } from "components/manager/components/follow-user-buttom";
@@ -62,7 +61,7 @@ export const UsersListItem: React.FC<IUsersListItemProps> = React.memo(
             <FollowUserButton
               onChange={handleFollow}
               disabled={!personalDetails.allowFollow}
-              size={GV_BTN_SIZE.SMALL}
+              size={"small"}
               id={id}
               value={personalDetails.isFollow}
             />

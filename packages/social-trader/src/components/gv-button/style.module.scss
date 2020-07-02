@@ -83,7 +83,7 @@ $default-padding: $padding-xxsmall $padding-small;
     }
   }
 
-  &--big {
+  &--xlarge {
     align-self: flex-end;
     @include font-size($font-size-paragraph);
     letter-spacing: 0.3px;

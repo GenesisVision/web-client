@@ -3,7 +3,6 @@ import DetailsBlock, {
 } from "components/details/details-block";
 import { DetailsStatisticContainer } from "components/details/details-description-section/details-description/details-structure-blocks";
 import InvestmentProgramInfo from "components/details/details-description-section/investment-program-info";
-import { GV_BTN_SIZE } from "components/gv-button";
 import { Row } from "components/row/row";
 import { ASSET } from "constants/constants";
 import Crashable from "decorators/crashable";
@@ -63,7 +62,7 @@ const _InvestmentProgramControls: React.FC<Props> = ({
               disabled={!canInvest}
               title={publicInfo.title}
               onApply={onApply}
-              size={GV_BTN_SIZE.BIG}
+              size={"xlarge"}
               ownAsset={isOwnProgram}
               entryFee={programDetails.managementFeeCurrent}
               availableToInvest={programDetails.availableInvestmentBase}

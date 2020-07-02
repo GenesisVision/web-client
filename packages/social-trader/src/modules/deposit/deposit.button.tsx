@@ -1,5 +1,5 @@
 import InvestmentUnauthPopup from "components/details/details-description-section/investment-unauth-popup/investment-unauth-popup";
-import GVButton, { GV_BTN_SIZE } from "components/gv-button";
+import GVButton from "components/gv-button";
 import { ASSET } from "constants/constants";
 import useIsOpen from "hooks/is-open.hook";
 import { useTranslation } from "i18n";
@@ -8,7 +8,7 @@ import ProgramDeposit from "modules/program-deposit/program-deposit";
 import React from "react";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
-import { CurrencyEnum } from "utils/types";
+import { CurrencyEnum, SizesType } from "utils/types";
 
 const _DepositButton: React.FC<Props> = ({
   disabled,
@@ -93,7 +93,7 @@ const _DepositButton: React.FC<Props> = ({
 interface Props {
   disabled?: boolean;
   title: string;
-  size?: GV_BTN_SIZE;
+  size?: SizesType;
   onApply?: VoidFunction;
   ownAsset?: boolean;
   entryFee?: number;

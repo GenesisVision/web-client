@@ -1,5 +1,4 @@
 import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
-import { GV_BTN_SIZE } from "components/gv-button";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import { FollowUserButton } from "components/manager/components/follow-user-buttom";
@@ -110,7 +109,7 @@ export const UsersTableRow: React.FC<{ user: UserDetailsList }> = ({
         <TableCell>
           <FollowUserButton
             disabled={!personalDetails.allowFollow}
-            size={GV_BTN_SIZE.SMALL}
+            size={"small"}
             id={userId}
             value={personalDetails.isFollow}
           />

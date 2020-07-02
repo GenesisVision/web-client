@@ -1,6 +1,6 @@
 import { DepositTopOwnProps } from "components/deposit/components/deposit-top";
 import InvestmentUnauthPopup from "components/details/details-description-section/investment-unauth-popup/investment-unauth-popup";
-import GVButton, { GV_BTN_SIZE } from "components/gv-button";
+import GVButton from "components/gv-button";
 import useIsOpen from "hooks/is-open.hook";
 import React from "react";
 
@@ -15,7 +15,7 @@ const _InvestmentUnauthButton: React.FC<Props> = ({
   const [isOpenUnAuth, setIsOpenUnAuth, setIsCloseUnAuth] = useIsOpen();
   return (
     <>
-      <GVButton size={GV_BTN_SIZE.BIG} onClick={setIsOpenUnAuth}>
+      <GVButton size={"xlarge"} onClick={setIsOpenUnAuth}>
         {label}
       </GVButton>
       <InvestmentUnauthPopup

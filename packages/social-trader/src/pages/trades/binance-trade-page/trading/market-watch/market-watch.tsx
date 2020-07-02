@@ -1,5 +1,5 @@
 import GlobalSearchInput from "components/global-search/components/global-search-result/global-search-input";
-import GVButton, { GV_BTN_SIZE } from "components/gv-button";
+import GVButton from "components/gv-button";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import Select, { ISelectChangeEvent } from "components/select/select";
@@ -71,7 +71,7 @@ const _MarketWatch: React.FC<Props> = ({ items }) => {
                   filteringType === "symbol" && filtering.value === currency
                 }
                 variant={"text"}
-                size={GV_BTN_SIZE.SMALL}
+                size={"small"}
                 onClick={() => {
                   setFilteringType("symbol");
                   setFiltering({ value: currency });
@@ -86,7 +86,7 @@ const _MarketWatch: React.FC<Props> = ({ items }) => {
               noPadding
               disabled={filteringType === "ALTS"}
               variant={"text"}
-              size={GV_BTN_SIZE.SMALL}
+              size={"small"}
               onClick={() => {
                 setFilteringType("ALTS");
               }}
@@ -99,7 +99,7 @@ const _MarketWatch: React.FC<Props> = ({ items }) => {
               noPadding
               disabled={filteringType === "FIATS"}
               variant={"text"}
-              size={GV_BTN_SIZE.SMALL}
+              size={"small"}
               onClick={() => {
                 setFilteringType("FIATS");
               }}

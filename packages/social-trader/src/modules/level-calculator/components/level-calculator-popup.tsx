@@ -1,5 +1,5 @@
 import { Center } from "components/center/center";
-import GVButton, { GV_BTN_SIZE } from "components/gv-button";
+import GVButton from "components/gv-button";
 import { CloseIcon } from "components/icon/close-icon";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
@@ -107,7 +107,7 @@ const _LevelCalculatorPopup: React.FC<Props> = ({
         <Center>
           <RowItem>
             <GVButton
-              size={GV_BTN_SIZE.SMALL}
+              size={"small"}
               color={"secondary"}
               onClick={handleResetForm}
             >

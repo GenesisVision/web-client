@@ -1,4 +1,4 @@
-import GVButton, { GV_BTN_SIZE } from "components/gv-button";
+import GVButton from "components/gv-button";
 import { fetchProfileHeaderInfo } from "components/header/header.service";
 import { clearAll } from "components/notifications/services/notifications.services";
 import useApiRequest from "hooks/api-request.hook";
@@ -21,7 +21,7 @@ const ClearButton: React.FC<Props> = ({ onApply }) => {
 
   return (
     <GVButton
-      size={GV_BTN_SIZE.BIG}
+      size={"xlarge"}
       noPadding
       variant={"text"}
       onClick={handleClick}

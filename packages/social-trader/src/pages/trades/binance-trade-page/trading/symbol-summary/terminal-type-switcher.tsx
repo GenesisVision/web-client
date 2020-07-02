@@ -1,5 +1,4 @@
 import { DoubleButton } from "components/double-button/double-button";
-import { GV_BTN_SIZE } from "components/gv-button";
 import { Push } from "components/link/link";
 import { useParams } from "hooks/location";
 import { TerminalInfoContext } from "pages/trades/binance-trade-page/trading/terminal-info.context";
@@ -30,7 +29,7 @@ export const TerminalTypeSwitcher: React.FC = () => {
   return (
     <div className={styles["symbol-summary__type-switcher"]}>
       <DoubleButton
-        size={GV_BTN_SIZE.SMALL}
+        size={"small"}
         first={{
           selected: terminalType === "spot",
           enable: terminalType !== "spot",

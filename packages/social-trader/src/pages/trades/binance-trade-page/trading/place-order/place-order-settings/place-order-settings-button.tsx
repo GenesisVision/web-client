@@ -1,4 +1,4 @@
-import GVButton, { GV_BTN_SIZE } from "components/gv-button";
+import GVButton from "components/gv-button";
 import React from "react";
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
@@ -9,7 +9,7 @@ const _PlaceOrderSettingsButton: React.FC<Props> = ({ onClick, children }) => {
   return (
     <GVButton
       noPadding={false}
-      size={GV_BTN_SIZE.XSMALL}
+      size={"xsmall"}
       variant={"outlined"}
       onClick={onClick}
     >

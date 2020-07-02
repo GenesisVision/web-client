@@ -1,4 +1,4 @@
-import GVButton, { GV_BTN_SIZE } from "components/gv-button";
+import GVButton from "components/gv-button";
 import { BrokerTradeServerType } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
 import FollowModuleContainer from "modules/follow-module/follow-module-container";
@@ -28,7 +28,7 @@ const _FollowButton: React.FC<Props> = ({
       <GVButton
         className={label}
         disabled={!canFollow}
-        size={GV_BTN_SIZE.BIG}
+        size={"xlarge"}
         onClick={setIsOpenFollow}
       >
         {t("asset-details:description.follow-trade")}

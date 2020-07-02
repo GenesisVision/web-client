@@ -2,7 +2,7 @@ import ImageBaseElement from "components/avatar/image-base.element";
 import { Center } from "components/center/center";
 import { CHIP_SIZE } from "components/chip/chip";
 import ChipButton from "components/chip/chip-button";
-import GVButton, { GV_BTN_SIZE } from "components/gv-button";
+import GVButton from "components/gv-button";
 import { RowItem } from "components/row-item/row-item";
 import useIsOpen from "hooks/is-open.hook";
 import ConvertIcon from "media/convert.svg";
@@ -10,6 +10,7 @@ import { TransferContainerProps } from "modules/transfer/components/transfer-con
 import TransferPopup from "modules/transfer/transfer-popup";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { SizesType } from "utils/types";
 
 import styles from "./transfer.button.module.scss";
 
@@ -19,7 +20,7 @@ const _TransferButton: React.FC<Props> = ({
   outerCurrentItemContainerItems,
   successMessage,
   singleCurrentItemContainer = false,
-  size = GV_BTN_SIZE.LARGE,
+  size = "large",
   withIcon,
   color,
   variant,
@@ -67,7 +68,7 @@ const _TransferButton: React.FC<Props> = ({
 };
 
 interface Props extends TransferContainerProps {
-  size?: GV_BTN_SIZE;
+  size?: SizesType;
   withIcon?: boolean;
   type?: WALLET_BUTTON_TYPE;
   color?: "primary" | "secondary" | "primary-dark" | "danger";
@@ -77,7 +78,7 @@ interface Props extends TransferContainerProps {
 }
 
 const FullButton: React.FC<{
-  size?: GV_BTN_SIZE;
+  size?: SizesType;
   withIcon?: boolean;
   color?: "primary" | "secondary" | "primary-dark" | "danger";
   variant?: "text" | "outlined" | "contained";

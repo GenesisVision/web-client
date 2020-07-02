@@ -1,4 +1,4 @@
-import GVButton, { GV_BTN_SIZE } from "components/gv-button";
+import GVButton from "components/gv-button";
 import useIsOpen from "hooks/is-open.hook";
 import { TerminalCurrency } from "pages/trades/binance-trade-page/trading/terminal.types";
 import { TransferDialog } from "pages/trades/binance-trade-page/trading/transfer/transfer.dialog";
@@ -14,12 +14,7 @@ const _TransferButton: React.FC<Props> = ({ asset }) => {
   const [isOpen, setIsOpen, setIsClose] = useIsOpen();
   return (
     <>
-      <GVButton
-        noPadding
-        size={GV_BTN_SIZE.SMALL}
-        variant={"text"}
-        onClick={setIsOpen}
-      >
+      <GVButton noPadding size={"small"} variant={"text"} onClick={setIsOpen}>
         {t("Transfer")}
       </GVButton>
       <TransferDialog

@@ -1,6 +1,7 @@
 import { Center } from "components/center/center";
-import GVButton, { GV_BTN_SIZE } from "components/gv-button";
+import GVButton from "components/gv-button";
 import React from "react";
+import { SizesType } from "utils/types";
 
 import styles from "./double-button.module.scss";
 
@@ -13,7 +14,7 @@ export type DoubleButtonSideParams = {
 };
 
 interface Props {
-  size?: GV_BTN_SIZE;
+  size?: SizesType;
   first: DoubleButtonSideParams;
   second: DoubleButtonSideParams;
 }

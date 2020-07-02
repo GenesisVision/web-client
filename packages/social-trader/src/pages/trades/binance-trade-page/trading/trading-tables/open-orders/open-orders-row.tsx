@@ -1,4 +1,4 @@
-import GVButton, { GV_BTN_SIZE } from "components/gv-button";
+import GVButton from "components/gv-button";
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import useApiRequest from "hooks/api-request.hook";
@@ -69,7 +69,7 @@ const _OpenOrdersRow: React.FC<Props> = ({
           variant={"text"}
           disabled={isPending}
           isPending={isPending}
-          size={GV_BTN_SIZE.SMALL}
+          size={"small"}
           color={"danger"}
           onClick={handleCancel}
         >

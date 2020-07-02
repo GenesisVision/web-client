@@ -1,7 +1,7 @@
 import { Center } from "components/center/center";
 import { CHIP_SIZE, CHIP_TYPE } from "components/chip/chip";
 import ChipButton from "components/chip/chip-button";
-import GVButton, { GV_BTN_SIZE } from "components/gv-button";
+import GVButton from "components/gv-button";
 import { RowItem } from "components/row-item/row-item";
 import useIsOpen from "hooks/is-open.hook";
 import WalletAddFundsPopup from "modules/wallet-add-funds/wallet-add-funds-popup";
@@ -40,7 +40,7 @@ const FullButton: React.FC<{
   return (
     <GVButton
       className={label}
-      size={GV_BTN_SIZE.LARGE}
+      size={"large"}
       disabled={disabled}
       onClick={onClick}
     >

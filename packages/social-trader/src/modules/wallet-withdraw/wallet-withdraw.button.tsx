@@ -2,7 +2,7 @@ import ImageBaseElement from "components/avatar/image-base.element";
 import { Center } from "components/center/center";
 import { CHIP_SIZE } from "components/chip/chip";
 import ChipButton from "components/chip/chip-button";
-import GVButton, { GV_BTN_SIZE } from "components/gv-button";
+import GVButton from "components/gv-button";
 import { RowItem } from "components/row-item/row-item";
 import useIsOpen from "hooks/is-open.hook";
 import ArrowIcon from "media/arrow-up.svg";
@@ -49,7 +49,7 @@ const FullButton: React.FC<{
   return (
     <GVButton
       className={label}
-      size={GV_BTN_SIZE.LARGE}
+      size={"large"}
       color="secondary"
       variant="outlined"
       disabled={disabled}

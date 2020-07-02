@@ -1,4 +1,4 @@
-import GVButton, { GV_BTN_SIZE } from "components/gv-button";
+import GVButton from "components/gv-button";
 import useIsOpen from "hooks/is-open.hook";
 import UnfollowContainer from "modules/unfollow/unfollow-container";
 import { dispatchFollowDescription } from "pages/invest/follows/follow-details/services/follow-details.service";
@@ -6,9 +6,10 @@ import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
+import { SizesType } from "utils/types";
 
 const _UnFollowButton: React.FC<Props> = ({
-  size = GV_BTN_SIZE.BIG,
+  size = "xlarge",
   onApply,
   id,
   isExternal,
@@ -44,7 +45,7 @@ const _UnFollowButton: React.FC<Props> = ({
 };
 
 interface Props {
-  size?: GV_BTN_SIZE;
+  size?: SizesType;
   onApply: VoidFunction;
   tradingAccountId: string;
   isExternal: boolean;

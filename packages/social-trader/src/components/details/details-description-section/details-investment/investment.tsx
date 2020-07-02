@@ -3,7 +3,6 @@ import { DetailsInvestmentBlock } from "components/details/details-description-s
 import { DetailsInvestmentFooter } from "components/details/details-description-section/details-investment/blocks/details-investment-footer";
 import { DetailsInvestmentHeading } from "components/details/details-description-section/details-investment/blocks/details-investment-title";
 import { InvestmentItem } from "components/details/details-description-section/details-investment/investment-item";
-import { GV_BTN_SIZE } from "components/gv-button";
 import { LabeledValue } from "components/labeled-value/labeled-value";
 import { ProfitabilityValuePercent } from "components/profitability/profitability-value-percent";
 import { Row } from "components/row/row";
@@ -193,7 +192,7 @@ const _Investment: React.FC<Props> = ({
       <Row>
         <DetailsInvestmentFooter>
           <WithdrawButton
-            size={GV_BTN_SIZE.BIG}
+            size={"xlarge"}
             disabled={!personalDetails.canWithdraw}
             onApply={updateDescription}
             type={asset}

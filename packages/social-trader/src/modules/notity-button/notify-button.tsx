@@ -1,6 +1,6 @@
 import { Center } from "components/center/center";
 import { getMinProgramDeposit } from "components/deposit/services/program-deposit.service";
-import GVButton, { GV_BTN_SIZE } from "components/gv-button";
+import GVButton from "components/gv-button";
 import { RowItem } from "components/row-item/row-item";
 import Tooltip from "components/tooltip/tooltip";
 import { TooltipContent } from "components/tooltip/tooltip-content";
@@ -37,7 +37,7 @@ const _NotifyButton: React.FC<Props> = ({
     <Center>
       <RowItem>
         <GVButton
-          size={GV_BTN_SIZE.BIG}
+          size={"xlarge"}
           onClick={handleClick}
           disabled={Boolean(data || isPending || !canInvest)}
         >

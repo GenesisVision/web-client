@@ -1,5 +1,5 @@
 import { Center } from "components/center/center";
-import GVButton, { GV_BTN_SIZE } from "components/gv-button";
+import GVButton from "components/gv-button";
 import { PopoverContentCardBlock } from "components/popover/popover-card.block";
 import { PopoverContent } from "components/popover/popover-content";
 import { RowItem } from "components/row-item/row-item";
@@ -135,7 +135,7 @@ class _DateRangeFilterPopover extends React.PureComponent<Props, State> {
           <Row>
             <RowItem>
               <GVButton
-                size={GV_BTN_SIZE.BIG}
+                size={"xlarge"}
                 noPadding
                 variant="text"
                 onClick={this.handleSubmit}
@@ -145,7 +145,7 @@ class _DateRangeFilterPopover extends React.PureComponent<Props, State> {
             </RowItem>
             <RowItem>
               <GVButton
-                size={GV_BTN_SIZE.BIG}
+                size={"xlarge"}
                 noPadding
                 variant="text"
                 color="secondary"

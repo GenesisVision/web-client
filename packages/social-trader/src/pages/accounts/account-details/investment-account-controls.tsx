@@ -2,7 +2,6 @@ import DetailsBlock, {
   DETAILS_BLOCK_TYPE
 } from "components/details/details-block";
 import { DetailsBlockRowItem } from "components/details/details-block-row-item.block";
-import { GV_BTN_SIZE } from "components/gv-button";
 import { WalletItemType } from "components/wallet-select/wallet-select";
 import {
   AmountWithCurrency,
@@ -37,7 +36,7 @@ const _InvestmentAccountControls: React.FC<Props> = ({
           fixedSelects={isExchangeAccount}
           accountId={id}
           outerCurrentItemContainerItems={currentItemContainerItems}
-          size={GV_BTN_SIZE.BIG}
+          size={"xlarge"}
           onApply={onApply}
           currentItem={currentItem}
           accountType={accountType}
@@ -48,7 +47,7 @@ const _InvestmentAccountControls: React.FC<Props> = ({
           fixedSelects={isExchangeAccount}
           accountId={id}
           outerCurrentItemContainerItems={currentItemContainerItems}
-          size={GV_BTN_SIZE.BIG}
+          size={"xlarge"}
           onApply={onApply}
           currentItem={currentItem}
           accountType={accountType}

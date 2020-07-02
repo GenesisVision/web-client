@@ -1,4 +1,4 @@
-import GVButton, { GV_BTN_SIZE } from "components/gv-button";
+import GVButton from "components/gv-button";
 import { Text } from "components/text/text";
 import useApiRequest from "hooks/api-request.hook";
 import { TradeTable } from "pages/trades/binance-trade-page/trading/components/trade-table/trade-table";
@@ -53,7 +53,7 @@ export const OpenOrders: React.FC<Props> = ({ items }) => {
                 variant={"text"}
                 disabled={isPending}
                 isPending={isPending}
-                size={GV_BTN_SIZE.SMALL}
+                size={"small"}
                 color={"danger"}
                 onClick={handleCancel}
               >

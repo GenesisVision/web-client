@@ -1,5 +1,5 @@
 import ConfirmPopup from "components/confirm-popup/confirm-popup";
-import GVButton, { GV_BTN_SIZE } from "components/gv-button";
+import GVButton from "components/gv-button";
 import useApiRequest from "hooks/api-request.hook";
 import useIsOpen from "hooks/is-open.hook";
 import React, { useCallback } from "react";
@@ -23,7 +23,7 @@ const _CancelRequestButton: React.FC<{
   return (
     <>
       <GVButton
-        size={GV_BTN_SIZE.SMALL}
+        size={"small"}
         color={"secondary"}
         variant={"contained"}
         onClick={setOpenPopup}

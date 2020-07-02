@@ -1,6 +1,5 @@
 import { Center } from "components/center/center";
 import { DoubleButton } from "components/double-button/double-button";
-import { GV_BTN_SIZE } from "components/gv-button";
 import GVTabs from "components/gv-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
 import { WalletIcon } from "components/icon/wallet-icon";
@@ -75,7 +74,7 @@ const _PlaceOrder: React.FC = () => {
     <TerminalDefaultBlock>
       <Row>
         <DoubleButton
-          size={GV_BTN_SIZE.SMALL}
+          size={"small"}
           first={{
             selected: side === "BUY",
             enable: side !== "BUY",

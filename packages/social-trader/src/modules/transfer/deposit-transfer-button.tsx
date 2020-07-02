@@ -1,4 +1,3 @@
-import { GV_BTN_SIZE } from "components/gv-button";
 import { WalletItemType } from "components/wallet-select/wallet-select";
 import {
   AssetTypeExt,
@@ -9,12 +8,13 @@ import TransferButton from "modules/transfer/transfer-button";
 import { TRANSFER_CONTAINER } from "modules/transfer/transfer.types";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { SizesType } from "utils/types";
 
 const _DepositTransferButton: React.FC<Props> = props => {
   const {
     outerCurrentItemContainerItems,
     accountType,
-    size = GV_BTN_SIZE.MIDDLE
+    size = "middle"
   } = props;
   const [t] = useTranslation();
   return (
@@ -40,7 +40,7 @@ interface Props {
   fixedSelects?: boolean;
   accountId?: string;
   outerCurrentItemContainerItems?: WalletItemType[];
-  size?: GV_BTN_SIZE;
+  size?: SizesType;
   currentItem: WalletItemType;
   onApply: VoidFunction;
   accountType?: PrivateTradingAccountType | AssetTypeExt;
