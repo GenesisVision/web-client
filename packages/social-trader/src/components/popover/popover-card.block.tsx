@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import React from "react";
+import { SizesType } from "utils/types";
 
 import styles from "./popover-content.block.module.scss";
 
@@ -19,7 +20,7 @@ export const PopoverContentCardBlock: React.FC<IPopoverContentCardBlockProps> = 
         [styles["popover-content__block--dark"]]: dark,
         [styles["popover-content__block--small"]]: size === "small",
         [styles["popover-content__block--middle"]]: size === "middle",
-        [styles["popover-content__block--big"]]: size === "big"
+        [styles["popover-content__block--big"]]: size === "large"
       })}
     >
       {children}
@@ -30,7 +31,7 @@ interface IPopoverContentCardBlockProps
   extends React.HTMLAttributes<HTMLDivElement> {
   dark?: boolean;
   className?: string;
-  size?: "small" | "middle" | "big" | null;
+  size?: SizesType | null;
   stretched?: boolean;
   fixed?: boolean;
 }

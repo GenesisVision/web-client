@@ -10,7 +10,7 @@ export const DialogBottom: React.FC<Props> = ({
   className,
   children
 }) => (
-  <PopoverContentCardBlock size={"big"} fixed={fixed} className={className}>
+  <PopoverContentCardBlock size={"large"} fixed={fixed} className={className}>
     {children}
   </PopoverContentCardBlock>
 );
