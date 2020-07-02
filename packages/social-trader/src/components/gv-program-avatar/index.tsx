@@ -3,6 +3,7 @@ import ImageBase from "components/avatar/image-base";
 import GVColors from "components/gv-styles/gv-colors";
 import PieContainer from "components/pie-container/pie-container";
 import React from "react";
+import { SizesType } from "utils/types";
 
 import GVProgramDefaultAvatar from "./gv-propgram-default-avatar";
 import styles from "./style.module.scss";
@@ -35,12 +36,12 @@ const _GVProgramAvatar: React.FC<GVProgramAvatarProps> = ({
           [styles["program-avatar--full"]]: size === "full",
           [styles["program-avatar--xsmall"]]: size === "xsmall",
           [styles["program-avatar--small"]]: size === "small",
-          [styles["program-avatar--medium"]]: size === "medium",
-          [styles["program-avatar--big"]]: size === "big"
+          [styles["program-avatar--medium"]]: size === "middle",
+          [styles["program-avatar--big"]]: size === "large"
         })}
       >
         <ImageBase
-          quality={size === "big" ? "Medium" : "Low"}
+          quality={size === "large" ? "Medium" : "Low"}
           DefaultImageComponent={GVProgramDefaultAvatar}
           src={url}
           color={color}
@@ -78,7 +79,7 @@ export interface GVProgramAvatarProps {
   alt: string;
   level?: number;
   levelProgress?: number;
-  size?: "xsmall" | "small" | "medium" | "big" | "full";
+  size?: SizesType | "full";
   className?: string;
   color?: string;
   imageClassName?: string;

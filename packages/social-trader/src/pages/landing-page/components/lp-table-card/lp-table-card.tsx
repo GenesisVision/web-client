@@ -128,7 +128,7 @@ export const LPTableCardAvatar: React.FC<ITableCardAvatarProps> = React.memo(
         level={level}
         alt={alt || ""}
         color={color}
-        size="medium"
+        size="middle"
         tooltip={
           level ? <LevelTooltip level={level} canLevelUp={false} /> : undefined
         }
