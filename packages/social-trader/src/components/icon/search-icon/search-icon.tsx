@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import * as React from "react";
 import { SizesType } from "utils/types";
 
@@ -15,7 +15,7 @@ const SearchIcon: React.FC<{ size?: SizesType; primary: boolean }> = ({
       height="18"
       viewBox="0 0 18 18"
       fill="none"
-      className={classNames(styles["search-icon"], {
+      className={clsx(styles["search-icon"], {
         [styles["search-icon--small"]]: size === "small",
         [styles["search-icon--primary"]]: primary
       })}

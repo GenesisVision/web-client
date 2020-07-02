@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { VERTICAL_POPOVER_POS } from "components/popover/popover";
 import Tooltip from "components/tooltip/tooltip";
 import { TooltipContent } from "components/tooltip/tooltip-content";
@@ -13,7 +13,7 @@ const _Hint: React.FC<Props> = ({
   vertical
 }) => {
   return (
-    <div className={classNames(styles["hint"], className)}>
+    <div className={clsx(styles["hint"], className)}>
       <Tooltip
         vertical={vertical}
         render={() => <TooltipContent>{tooltipContent}</TooltipContent>}

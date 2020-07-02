@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import * as React from "react";
 
 import styles from "./icon.module.scss";
@@ -25,17 +25,12 @@ export const Icon: React.FC<IIconProps> = ({
 }) => {
   return (
     <div
-      className={classNames(
-        styles["icon"],
-        styles[`icon--${type}`],
-        className,
-        {
-          [styles["icon--primary"]]: primary,
-          [styles["icon--secondary"]]: secondary,
-          [styles["icon--rotate"]]: rotate,
-          [styles["icon--selected"]]: selected
-        }
-      )}
+      className={clsx(styles["icon"], styles[`icon--${type}`], className, {
+        [styles["icon--primary"]]: primary,
+        [styles["icon--secondary"]]: secondary,
+        [styles["icon--rotate"]]: rotate,
+        [styles["icon--selected"]]: selected
+      })}
       onClick={onClick}
     >
       {children}
