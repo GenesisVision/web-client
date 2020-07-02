@@ -20,7 +20,7 @@ export const PostPage: React.FC<Props> = ({ post }) => {
     map: inTextComponentsMap
   }) as string).trim();
   const previewImage = post.images.length
-    ? getImageUrlByQuality(post.images[0].resizes, "Low")
+    ? getImageUrlByQuality(post.images[0].resizes, "Medium")
     : undefined;
   return (
     <Page
