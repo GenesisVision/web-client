@@ -1,27 +1,47 @@
 import { ASSET } from "constants/constants";
 import withDefaultLayout from "decorators/with-default-layout";
-import { ProgramFollowDetailsFull } from "gv-api-web";
+import { LevelsParamsInfo, ProgramFollowDetailsFull } from "gv-api-web";
 import { statisticCurrencyAction } from "pages/invest/programs/program-details/actions/program-details.actions";
 import ProgramDetailsPage from "pages/invest/programs/program-details/program-details.page";
-import { dispatchProgramDescription } from "pages/invest/programs/program-details/service/program-details.service";
+import {
+  dispatchProgramDescription,
+  fetchLevelParameters
+} from "pages/invest/programs/program-details/service/program-details.service";
 import React from "react";
 import { compose } from "redux";
+import { getAccountCurrency } from "utils/account-currency";
 import { NextPageWithRedux } from "utils/types";
 
-const Page: NextPageWithRedux<{}> = () => {
-  return <ProgramDetailsPage route={ASSET.PROGRAM} />;
+interface Props {
+  levelsParameters: LevelsParamsInfo;
+}
+
+const Page: NextPageWithRedux<Props> = ({ levelsParameters }) => {
+  return (
+    <ProgramDetailsPage
+      levelsParameters={levelsParameters}
+      route={ASSET.PROGRAM}
+    />
+  );
 };
 
 Page.getInitialProps = async ctx => {
+  let programCurrency = "GVT";
+  const cookieCurrency = getAccountCurrency(ctx);
   await Promise.all([
     ctx.reduxStore.dispatch(dispatchProgramDescription(ctx))
   ]).then(([res]) => {
     const {
       tradingAccountInfo: { currency }
     } = res.value as ProgramFollowDetailsFull;
+    programCurrency = currency;
     ctx.reduxStore.dispatch(statisticCurrencyAction(currency));
   });
+  const levelsParameters = await fetchLevelParameters(
+    cookieCurrency || programCurrency
+  );
   return {
+    levelsParameters,
     namespacesRequired: [
       "portfolio-events",
       "transfer",
