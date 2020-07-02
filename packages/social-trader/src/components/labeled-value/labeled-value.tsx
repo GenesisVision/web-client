@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { Row } from "components/row/row";
 import { Text, TextWeight } from "components/text/text";
 import React from "react";
@@ -36,7 +36,7 @@ export const LabeledValue: React.FC<ILabeledValueProps> = ({
 }) => {
   return (
     <div
-      className={classNames(styles["labeled-value"], {
+      className={clsx(styles["labeled-value"], {
         [styles["labeled-value--column"]]: direction === "column",
         [styles["labeled-value--row"]]: direction === "row"
       })}
