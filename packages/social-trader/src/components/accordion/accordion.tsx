@@ -4,7 +4,6 @@ import { DefaultBlock } from "components/default.block/default.block";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import FilterArrowIcon from "components/table/components/filtering/filter-arrow-icon";
-import { SIZES } from "constants/constants";
 import React, { useCallback, useState } from "react";
 
 import styles from "./accordion.module.scss";
@@ -25,7 +24,7 @@ export const Accordion: React.FC<Props> = ({ label, text }) => {
   return (
     <DefaultBlock
       wide
-      size={SIZES.SMALL}
+      size={"small"}
       className={classNames(styles["accordion"])}
     >
       <Row onClick={handleClickLabel} className={styles["accordion__label"]}>

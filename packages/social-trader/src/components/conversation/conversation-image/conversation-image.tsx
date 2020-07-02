@@ -4,9 +4,9 @@ import { getImageUrlBySize } from "components/conversation/conversation-image/co
 import { ConversationImagesFull } from "components/conversation/conversation-image/conversation-images-full";
 import { IConversationImage } from "components/conversation/conversation.types";
 import { Text } from "components/text/text";
-import { SIZES } from "constants/constants";
 import useIsOpen from "hooks/is-open.hook";
 import React from "react";
+import { SizesType } from "utils/types";
 
 import styles from "./conversation-image.module.scss";
 
@@ -30,9 +30,9 @@ const _ConversationImage: React.FC<Props> = ({ images, size, index }) => {
         DefaultImageComponent={EmptyImage}
         defaultImageClassName={styles["conversation-image__empty"]}
         className={classNames(styles["conversation-image"], {
-          [styles["conversation-image--small"]]: size === SIZES.SMALL,
-          [styles["conversation-image--middle"]]: size === SIZES.MIDDLE,
-          [styles["conversation-image--large"]]: size === SIZES.LARGE
+          [styles["conversation-image--small"]]: size === "small",
+          [styles["conversation-image--middle"]]: size === "middle",
+          [styles["conversation-image--large"]]: size === "large"
         })}
         src={getImageUrlBySize(images[index], size)}
       />
@@ -48,7 +48,7 @@ const _ConversationImage: React.FC<Props> = ({ images, size, index }) => {
 
 interface Props {
   index: number;
-  size: SIZES;
+  size: SizesType;
   images: IConversationImage[];
 }
 

@@ -5,7 +5,6 @@ import { FollowUserBlock } from "components/manager/components/follow-user-block
 import { Row } from "components/row/row";
 import SocialLinksBlock from "components/social-links-block/social-links-block";
 import { Text } from "components/text/text";
-import { SIZES } from "constants/constants";
 import { PublicProfile } from "gv-api-web";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -24,7 +23,7 @@ const _ManagerInfo: React.FC<Props> = ({ profile }) => {
   const hasLongWords = about && !!getLongWordsCount(about);
   return (
     <>
-      <DefaultBlock solid size={SIZES.LARGE}>
+      <DefaultBlock solid size={"large"}>
         <Row>
           <ProfileAvatar url={logoUrl} big />
         </Row>

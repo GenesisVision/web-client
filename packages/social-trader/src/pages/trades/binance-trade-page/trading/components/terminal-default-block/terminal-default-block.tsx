@@ -1,5 +1,4 @@
 import { DefaultBlock } from "components/default.block/default.block";
-import { SIZES } from "constants/constants";
 import React from "react";
 
 interface Props {
@@ -14,7 +13,7 @@ export const TerminalDefaultBlock: React.FC<Props> = ({
 }) => {
   return (
     <DefaultBlock
-      size={SIZES.SMALL}
+      size={"small"}
       horizontalOffsets={horizontalOffsets}
       roundedBorder={false}
       bordered

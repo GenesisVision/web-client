@@ -1,7 +1,6 @@
 import { DefaultBlock } from "components/default.block/default.block";
 import GVTabs from "components/gv-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
-import { SIZES } from "constants/constants";
 import useTab from "hooks/tab.hook";
 import { TerminalDefaultBlock } from "pages/trades/binance-trade-page/trading/components/terminal-default-block/terminal-default-block";
 import { TerminalInfoContext } from "pages/trades/binance-trade-page/trading/terminal-info.context";
@@ -38,7 +37,7 @@ const _TradingTables: React.FC<Props> = () => {
       horizontalOffsets={false}
       className={styles["trading-tables"]}
     >
-      <DefaultBlock verticalOffsets={false} size={SIZES.SMALL}>
+      <DefaultBlock verticalOffsets={false} size={"small"}>
         <GVTabs value={tab} onChange={setTab}>
           <GVTab value={TABS.OPEN_ORDERS} label={t("Open orders")} />
           <GVTab

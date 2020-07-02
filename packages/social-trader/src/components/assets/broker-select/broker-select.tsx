@@ -3,7 +3,6 @@ import { DefaultBlock } from "components/default.block/default.block";
 import { LabeledValue } from "components/labeled-value/labeled-value";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
-import { SIZES } from "constants/constants";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import { BrokerAccountType } from "gv-api-web";
 import * as React from "react";
@@ -67,7 +66,7 @@ const _BrokerSelectBroker: React.FC<Props> = ({
         </Row>
       </RowItem>
       <DefaultBlock
-        size={SIZES.LARGE}
+        size={"large"}
         solid
         wide
         className={styles["broker-select__description"]}

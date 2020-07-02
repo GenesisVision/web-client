@@ -4,7 +4,7 @@ import { LabeledValue } from "components/labeled-value/labeled-value";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
-import { ASSET, SIZES } from "constants/constants";
+import { ASSET } from "constants/constants";
 import { IconFavoriteButton } from "modules/toggle-asset-favorite-button/icon-favorite-button";
 import { ToggleableAssetType } from "modules/toggle-asset-favorite-button/toggle-asset-favorite-button.types";
 import React from "react";
@@ -45,7 +45,7 @@ export const ManagerHistoryRow: React.FC<IManagerHistoryRowProps> = ({
   return (
     <tr className={styles["manager-history-row"]}>
       <td>
-        <DefaultBlock verticalOffsets={false} size={SIZES.LARGE}>
+        <DefaultBlock verticalOffsets={false} size={"large"}>
           <Row />
           <Row size={"large"} center={false}>
             <RowItem wide bottomOffset>

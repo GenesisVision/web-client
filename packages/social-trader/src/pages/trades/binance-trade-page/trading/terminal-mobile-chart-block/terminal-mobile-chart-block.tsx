@@ -1,7 +1,6 @@
 import { DefaultBlock } from "components/default.block/default.block";
 import GVTabs from "components/gv-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
-import { SIZES } from "constants/constants";
 import useTab from "hooks/tab.hook";
 import { ChartContainer } from "pages/trades/binance-trade-page/trading/chart/chart.container";
 import { TerminalDefaultBlock } from "pages/trades/binance-trade-page/trading/components/terminal-default-block/terminal-default-block";
@@ -26,7 +25,7 @@ export const TerminalMobileChartBlock: React.FC = () => {
       <DefaultBlock
         horizontalOffsets={false}
         verticalOffsets={false}
-        size={SIZES.SMALL}
+        size={"small"}
       >
         <GVTabs value={tab} onChange={setTab}>
           <GVTab value={TABS.CHART} label={t("Chart")} />

@@ -7,7 +7,6 @@ import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
-import { SIZES } from "constants/constants";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import { MonoText } from "pages/trades/binance-trade-page/trading/components/mono-text/mono-text";
 import { terminalMoneyFormat } from "pages/trades/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
@@ -29,7 +28,7 @@ interface Props {
 
 export const SymbolSummarySmallBlock: React.FC = () => {
   return (
-    <DefaultBlock size={SIZES.SMALL} roundedBorder={false} bordered>
+    <DefaultBlock size={"small"} roundedBorder={false} bordered>
       <SymbolSummarySmallContainer />
     </DefaultBlock>
   );
