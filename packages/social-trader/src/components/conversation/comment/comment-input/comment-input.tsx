@@ -14,9 +14,8 @@ import { useSearchPanel } from "components/conversation/search-panel/search-pane
 import ErrorMessage from "components/error-message/error-message";
 import { IImageValue } from "components/form/input-image/input-image";
 import { HookFormInputImages } from "components/form/input-image/input-images";
-import { MutedText } from "components/muted-text/muted-text";
 import { RowItem } from "components/row-item/row-item";
-import { Row } from "components/row/row";
+import { Text } from "components/text/text";
 import { PostTag } from "gv-api-web";
 import { API_REQUEST_STATUS } from "hooks/api-request.hook";
 import React, { useCallback, useEffect } from "react";
@@ -201,7 +200,7 @@ const _CommentInput: React.FC<Props> = ({ onSubmit, status, errorMessage }) => {
         }}
       />
       <CommentInputMessage disable={disabled || !!errorText}>
-        <MutedText>Enter to send</MutedText>
+        <Text muted>Enter to send</Text>
       </CommentInputMessage>
       <CommentInputMessage disable={!errorText}>
         {errorText && <ErrorMessage error={errorText} />}

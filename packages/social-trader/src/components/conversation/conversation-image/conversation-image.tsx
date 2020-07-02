@@ -3,7 +3,7 @@ import ImageBaseElement from "components/avatar/image-base.element";
 import { getImageUrlBySize } from "components/conversation/conversation-image/conversation-image.helpers";
 import { ConversationImagesFull } from "components/conversation/conversation-image/conversation-images-full";
 import { IConversationImage } from "components/conversation/conversation.types";
-import { MutedText } from "components/muted-text/muted-text";
+import { Text } from "components/text/text";
 import { SIZES } from "constants/constants";
 import useIsOpen from "hooks/is-open.hook";
 import React from "react";
@@ -15,7 +15,7 @@ const EmptyImage: React.FC<{ imageClassName: string }> = ({
 }) => {
   return (
     <div className={imageClassName}>
-      <MutedText>Image not found</MutedText>
+      <Text muted>Image not found</Text>
     </div>
   );
 };

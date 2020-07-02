@@ -3,11 +3,11 @@ import { GV_BTN_SIZE } from "components/gv-button";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import { FollowUserButton } from "components/manager/components/follow-user-buttom";
-import { MutedText } from "components/muted-text/muted-text";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
+import { Text } from "components/text/text";
 import { UserAvatarList } from "components/user-avatar-list/user-avatar-list";
 import { UserDetailsList } from "gv-api-web";
 import React from "react";
@@ -48,7 +48,7 @@ export const UsersTableRow: React.FC<{ user: UserDetailsList }> = ({
           .join(" ") + " ..."
       : about;
 
-  const renderHidden = () => <MutedText>{t("Hidden")}</MutedText>;
+  const renderHidden = () => <Text muted>{t("Hidden")}</Text>;
   return (
     <TableRow className={styles["users-table-row"]}>
       <TableCell className={styles["users-table-row__about-cell"]}>

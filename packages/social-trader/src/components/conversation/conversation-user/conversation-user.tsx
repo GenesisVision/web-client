@@ -2,9 +2,9 @@ import { AvatarWithName } from "components/avatar/avatar-with-name/avatar-with-n
 import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
-import { MutedText } from "components/muted-text/muted-text";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { Text } from "components/text/text";
 import React from "react";
 import { managerToPathCreator } from "routes/manager.routes";
 import { postToPathCreator } from "routes/social.routes";
@@ -38,7 +38,7 @@ const _ConversationUser: React.FC<Props> = ({
           </Row>
           <Row small>
             <Link to={postUrl && postToPathCreator(postUrl, contextTitle)}>
-              <MutedText>{formatDate(date)}</MutedText>
+              <Text muted>{formatDate(date)}</Text>
             </Link>
           </Row>
         </>

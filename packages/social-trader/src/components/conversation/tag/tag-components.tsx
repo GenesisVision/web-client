@@ -14,7 +14,6 @@ import { CurrencyItem } from "components/currency-item/currency-item";
 import PortfolioEventLogo from "components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
 import Link, { ToType } from "components/link/link";
 import { useToLink } from "components/link/link.helper";
-import { MutedText } from "components/muted-text/muted-text";
 import Profitability from "components/profitability/profitability";
 import {
   PROFITABILITY_PREFIX,
@@ -22,6 +21,7 @@ import {
 } from "components/profitability/profitability.helper";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { Text } from "components/text/text";
 import Crashable from "decorators/crashable";
 import {
   ChangeState,
@@ -259,7 +259,9 @@ const _AssetTagCard: React.FC<IAssetTagProps & { url: ToType | string }> = ({
         }
         name={
           <Link to={url}>
-            <MutedText className={styles["asset-tag"]}>{title}</MutedText>
+            <Text muted wrap={false} size={"small"}>
+              {title}
+            </Text>
           </Link>
         }
       />
@@ -380,7 +382,9 @@ const _UserTagCard: React.FC<IUserTagProps> = ({
         }
         name={
           <Link to={managerToPathCreator(url, contextTitle)}>
-            <MutedText className={styles["asset-tag"]}>{username}</MutedText>
+            <Text muted wrap={false} size={"small"}>
+              {username}
+            </Text>
           </Link>
         }
       />

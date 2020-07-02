@@ -9,9 +9,9 @@ import { CommentsList } from "components/conversation/post/comments-list/comment
 import { PostButtons } from "components/conversation/post/post-buttons/post-buttons";
 import { DefaultBlock } from "components/default.block/default.block";
 import GVButton, { GV_BTN_SIZE } from "components/gv-button";
-import { MutedText } from "components/muted-text/muted-text";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { Text } from "components/text/text";
 import { PostActions as PostActionsType } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
 import useIsOpen from "hooks/is-open.hook";
@@ -31,7 +31,10 @@ const DeletedPost: React.FC<{
   return (
     <DefaultBlock solid wide>
       <Center>
-        <MutedText big>{t("Post is deleted")}</MutedText>&nbsp;
+        <Text muted size={"large"}>
+          {t("Post is deleted")}
+        </Text>
+        &nbsp;
         <GVButton
           size={GV_BTN_SIZE.BIG}
           variant={"text"}

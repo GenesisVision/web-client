@@ -2,8 +2,8 @@ import { Center } from "components/center/center";
 import { togglePin } from "components/conversation/conversation.service";
 import { PinIcon } from "components/conversation/icons/pin.icon";
 import { UnpinIcon } from "components/conversation/icons/unpin.icon";
-import { MutedText } from "components/muted-text/muted-text";
 import { RowItem } from "components/row-item/row-item";
+import { Text } from "components/text/text";
 import useApiRequest from "hooks/api-request.hook";
 import useIsOpen from "hooks/is-open.hook";
 import React, { useState } from "react";
@@ -32,9 +32,9 @@ const _ConversationPinButton: React.FC<Props> = ({ id, value, onSuccess }) => {
       {false && (
         <RowItem>
           <Center>
-            <MutedText small>
+            <Text muted size={"small"}>
               {innerPinned ? t("pinned") : t("unpinned")}
-            </MutedText>
+            </Text>
           </Center>
         </RowItem>
       )}

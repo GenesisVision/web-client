@@ -2,9 +2,9 @@ import classNames from "classnames";
 import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
 import { DefaultBlock } from "components/default.block/default.block";
 import { FollowUserBlock } from "components/manager/components/follow-user-block";
-import { MutedText } from "components/muted-text/muted-text";
 import { Row } from "components/row/row";
 import SocialLinksBlock from "components/social-links-block/social-links-block";
+import { Text } from "components/text/text";
 import { SIZES } from "constants/constants";
 import { PublicProfile } from "gv-api-web";
 import React from "react";
@@ -33,9 +33,9 @@ const _ManagerInfo: React.FC<Props> = ({ profile }) => {
             <h2>{username}</h2>
           </Row>
           <Row small>
-            <MutedText>
+            <Text muted>
               <b>{memberSince}</b>
-            </MutedText>
+            </Text>
           </Row>
         </Row>
         <FollowUserBlock profile={profile} />

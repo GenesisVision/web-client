@@ -1,6 +1,5 @@
 import { Center } from "components/center/center";
 import PortfolioEventLogo from "components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
-import { MutedText } from "components/muted-text/muted-text";
 import { CancelRequestButton } from "components/request-line/cancel-request-button";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
@@ -24,7 +23,7 @@ const RequestLineItem: React.FC<{ label: string | JSX.Element }> = ({
         <Text size={"small"}>{label}</Text>
       </Row>
       <Row small>
-        <MutedText>{children}</MutedText>
+        <Text muted>{children}</Text>
       </Row>
     </div>
   );
