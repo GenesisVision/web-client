@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import GVButton, { GVButtonProps } from "components/gv-button";
 import React from "react";
 
@@ -19,7 +19,7 @@ const _GvButtonWithMark: React.FC<Props> = ({
     <div className={styles["gv-button-with-mark"]}>
       <GVButton {...otherProps} variant={variant} wide={wide} />
       <div
-        className={classNames(styles["gv-button-with-mark__mark"], {
+        className={clsx(styles["gv-button-with-mark__mark"], {
           [styles["gv-button-with-mark__mark--selected"]]: selected
         })}
       >

@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import React from "react";
 import { SizesType } from "utils/types";
 
@@ -44,7 +44,7 @@ const GVButton: React.FC<GVButtonProps> = ({
   name,
   noPadding
 }) => {
-  const classname = classNames(styles["gv-btn"], className, {
+  const classname = clsx(styles["gv-btn"], className, {
     [styles["gv-btn--successful"]]: isSuccessful,
     [styles["gv-btn--pending"]]: isPending,
     [styles["gv-btn--bold"]]: bold,
@@ -74,7 +74,7 @@ const GVButton: React.FC<GVButtonProps> = ({
       name={name}
     >
       <span
-        className={classNames(styles["gv-btn__label"], {
+        className={clsx(styles["gv-btn__label"], {
           [styles["gv-btn__label--success"]]: isSuccessful
         })}
       >
@@ -82,7 +82,7 @@ const GVButton: React.FC<GVButtonProps> = ({
       </span>
       {successSymbol && (
         <span
-          className={classNames(styles["gv-btn__success-symbol"], {
+          className={clsx(styles["gv-btn__success-symbol"], {
             [styles["gv-btn__success-symbol--success"]]: isSuccessful
           })}
         >

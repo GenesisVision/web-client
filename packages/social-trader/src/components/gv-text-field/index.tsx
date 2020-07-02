@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { GvInput, IPropsGvInput } from "components/gv-input/gv-input";
 import useIsOpen from "hooks/is-open.hook";
 import React, { ReactNode, useCallback, useEffect, useRef } from "react";
@@ -54,7 +54,7 @@ const _GVTextField: React.FC<GVTextFieldProps> = props => {
         {...props}
         ref={input}
         type={type}
-        className={classNames(styles["gv-text-field"], inputClassName, {
+        className={clsx(styles["gv-text-field"], inputClassName, {
           [styles["gv-text-field--small"]]: size === "small",
           [styles["gv-text-field--middle"]]: size === "middle"
         })}

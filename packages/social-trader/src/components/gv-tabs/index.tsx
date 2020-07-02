@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { Row } from "components/row/row";
 import React from "react";
 
@@ -30,7 +30,7 @@ const GVTabs: React.FC<GVTabsProps> = ({
   const visibleTabs = children.filter(child => child.props.visible).length;
   return (
     <Row
-      className={classNames(className, styles["gv-tabs"], {
+      className={clsx(className, styles["gv-tabs"], {
         [styles["gv-tabs--title"]]: visibleTabs === 1
       })}
     >

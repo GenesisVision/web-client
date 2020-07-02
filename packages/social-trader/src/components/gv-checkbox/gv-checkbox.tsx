@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { Text } from "components/text/text";
 import * as React from "react";
 import { useCallback, useRef } from "react";
@@ -35,7 +35,7 @@ const _GVCheckbox: React.FC<IGVCheckboxProps> = ({
   return (
     <div className={styles["gv-checkbox-wrapper"]} onClick={handleBlockClick}>
       <div
-        className={classNames(styles["gv-checkbox"], className, {
+        className={clsx(styles["gv-checkbox"], className, {
           [styles["gv-checkbox--small"]]: size === "small",
           [styles["gv-checkbox--middle"]]: size === "middle",
           [styles["gv-checkbox--checked"]]: value,
@@ -45,7 +45,7 @@ const _GVCheckbox: React.FC<IGVCheckboxProps> = ({
         })}
       >
         <div
-          className={classNames(styles["gv-checkbox__input-wrapper"], {
+          className={clsx(styles["gv-checkbox__input-wrapper"], {
             [styles["gv-checkbox__input-wrapper--checked"]]: value,
             [styles["gv-checkbox__input-wrapper--small"]]: size === "small",
             [styles["gv-checkbox__input-wrapper--middle"]]: size === "middle"
@@ -62,7 +62,7 @@ const _GVCheckbox: React.FC<IGVCheckboxProps> = ({
             ref={checkbox}
             type="checkbox"
             name={name}
-            className={classNames(styles["gv-checkbox__input"])}
+            className={clsx(styles["gv-checkbox__input"])}
             checked={value}
             disabled={disabled}
             {...other}

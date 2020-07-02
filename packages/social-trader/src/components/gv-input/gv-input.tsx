@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { Text } from "components/text/text";
 import React from "react";
 
@@ -27,14 +27,14 @@ const _GvInput: React.FC<Props> = ({
 }) => {
   return (
     <div
-      className={classNames(styles["gv-input__wrapper"], wrapperClassName, {
+      className={clsx(styles["gv-input__wrapper"], wrapperClassName, {
         [styles["gv-input__wrapper--no-margin"]]: noMargin,
         [styles["gv-input__wrapper--wide"]]: wide
       })}
     >
       {label && (
         <label
-          className={classNames(styles["gv-input__label"], labelClassName, {
+          className={clsx(styles["gv-input__label"], labelClassName, {
             [styles["gv-input__label--shrink"]]:
               focused || adornment || (value !== undefined && value !== "")
           })}
@@ -45,7 +45,7 @@ const _GvInput: React.FC<Props> = ({
         </label>
       )}
       <div
-        className={classNames(styles["gv-input"], className, {
+        className={clsx(styles["gv-input"], className, {
           [styles["gv-input--top-offset"]]: !!label,
           [styles["gv-input--bottom-line"]]: bottomLine,
           [styles["gv-input--correct"]]: correct,
@@ -57,23 +57,18 @@ const _GvInput: React.FC<Props> = ({
         {inputElement}
         {adornment && (
           <div
-            className={classNames(
-              styles["gv-input__adornment"],
-              adornmentClassName,
-              {
-                [styles["gv-input__adornment--start"]]:
-                  adornmentPosition === "start",
-                [styles["gv-input__adornment--end"]]:
-                  adornmentPosition === "end"
-              }
-            )}
+            className={clsx(styles["gv-input__adornment"], adornmentClassName, {
+              [styles["gv-input__adornment--start"]]:
+                adornmentPosition === "start",
+              [styles["gv-input__adornment--end"]]: adornmentPosition === "end"
+            })}
           >
             {adornment}
           </div>
         )}
       </div>
       {showError && touched && error && (
-        <div className={classNames(styles["gv-input__error"], errorClassName)}>
+        <div className={clsx(styles["gv-input__error"], errorClassName)}>
           {error}
         </div>
       )}

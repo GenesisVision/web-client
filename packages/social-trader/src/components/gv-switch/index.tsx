@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { Center } from "components/center/center";
 import { RowItem } from "components/row-item/row-item";
 import { Text } from "components/text/text";
@@ -64,7 +64,7 @@ class GVSwitch extends React.PureComponent<GVSwitchProps> {
         )}
         <RowItem>
           <span
-            className={classNames(styles["gv-switch"], className, {
+            className={clsx(styles["gv-switch"], className, {
               [styles["gv-switch--checked"]]: value,
               [styles["gv-switch--primary"]]: color === "primary",
               [styles["gv-switch--secondary"]]: color === "secondary",

@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import GVColors from "components/gv-styles/gv-colors";
 import QRCode from "qrcode.react";
 import * as React from "react";
@@ -23,7 +23,7 @@ const GVqr: React.FC<IGVqr> = ({
   className
 }) => (
   <div
-    className={classNames(styles["gv-qr"], className)}
+    className={clsx(styles["gv-qr"], className)}
     style={{
       padding: `${PADDING_SIZE}px`,
       background: backgroundColor,
