@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import AssetAvatarWithName from "components/avatar/asset-avatar/asset-avatar-with-name";
 import FavoriteIcon from "components/favorite-asset/favorite-icon/favorite-icon";
 import { FUND_ASSET_TYPE } from "components/fund-asset/fund-asset";
@@ -49,7 +49,7 @@ const _FundsTableRow: React.FC<Props> = ({ fund }) => {
         </Link>
       </TableCell>
       <TableCell
-        className={classNames(
+        className={clsx(
           styles["funds-table__cell"],
           styles["funds-table__cell--amount"]
         )}
@@ -100,7 +100,7 @@ const _FundsTableRow: React.FC<Props> = ({ fund }) => {
       </TableCell>
       <TableCell
         height={"small"}
-        className={classNames(
+        className={clsx(
           styles["funds-table__cell"],
           styles["funds-table__cell--chart"]
         )}

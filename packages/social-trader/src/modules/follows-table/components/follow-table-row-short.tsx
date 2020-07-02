@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import AssetAvatarWithName from "components/avatar/asset-avatar/asset-avatar-with-name";
 import FavoriteIcon from "components/favorite-asset/favorite-icon/favorite-icon";
 import Link from "components/link/link";
@@ -110,7 +110,7 @@ const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
         </Profitability>
       </TableCell>
       <TableCell
-        className={classNames(
+        className={clsx(
           styles["programs-table__cell"],
           styles["programs-table__cell--chart"]
         )}

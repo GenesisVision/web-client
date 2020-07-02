@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import Dialog from "components/dialog/dialog";
 import GVTextField from "components/gv-text-field";
 import { Row } from "components/row/row";

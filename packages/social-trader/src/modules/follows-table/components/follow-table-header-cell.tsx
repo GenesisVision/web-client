@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import { SortingColumn } from "components/table/components/filtering/filter.type";
 import Tooltip from "components/tooltip/tooltip";
@@ -17,7 +17,7 @@ const _FollowTableHeaderCell: React.FC<{ column: SortingColumn }> = ({
   if (!isAuthenticated && column.name === "favorite") return null;
   const renderCell = () => (
     <span
-      className={classNames(
+      className={clsx(
         styles["programs-table__cell"],
         styles[`programs-table__cell--${column.name}`]
       )}

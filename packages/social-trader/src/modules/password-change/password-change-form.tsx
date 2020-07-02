@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import FormError from "components/form/form-error/form-error";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import { RowItem } from "components/row-item/row-item";
@@ -44,7 +44,7 @@ const _PasswordChangeForm: React.FC<IPasswordChangeFormOwnProps> = ({
     formState: { touched }
   } = form;
   const { password, confirmPassword } = watch();
-  const className = classNames({
+  const className = clsx({
     "change-password__equal":
       !errors[PASSWORD_CHANGE_FORM_FIELDS.password] &&
       !errors[PASSWORD_CHANGE_FORM_FIELDS.confirmPassword] &&

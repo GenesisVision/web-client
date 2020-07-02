@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import GVqr from "components/gv-qr/gv-qr";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
@@ -11,7 +11,7 @@ const GoogleStep2: React.FC<Props> = ({
   sharedKey,
   className
 }) => (
-  <div className={classNames(styles["google-auth__step"], className)}>
+  <div className={clsx(styles["google-auth__step"], className)}>
     <div className={styles["google-auth__count"]}>02</div>
     <div className={styles["google-auth__title"]}>
       {t("profile-page:2fa-page.scan-code")}

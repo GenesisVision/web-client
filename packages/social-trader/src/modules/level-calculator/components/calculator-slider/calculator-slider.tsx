@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { Center } from "components/center/center";
 import GVTextField from "components/gv-text-field";
 import { SliderStyleWrapper } from "components/range/range";
@@ -66,9 +66,9 @@ class _CalculatorSlider extends React.PureComponent<Props> {
       editableValue = false
     } = this.props;
     return (
-      <div className={classNames(styles["calculator-slider"], className)}>
+      <div className={clsx(styles["calculator-slider"], className)}>
         <div
-          className={classNames(styles["calculator-slider__heading"], {
+          className={clsx(styles["calculator-slider__heading"], {
             [styles[
               "calculator-slider__heading--editable-value"
             ]]: editableValue
@@ -91,7 +91,7 @@ class _CalculatorSlider extends React.PureComponent<Props> {
                 onChange={this.handleValueChange}
                 adornment={valueAdornment}
                 adornmentPosition="end"
-                wrapperClassName={classNames(
+                wrapperClassName={clsx(
                   styles["calculator-slider__editable-value-wrapper"],
                   valueClassName
                 )}
