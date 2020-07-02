@@ -1,7 +1,8 @@
 import classNames from "classnames";
-import Chip, { CHIP_SIZE, CHIP_TYPE } from "components/chip/chip";
+import Chip, { CHIP_TYPE } from "components/chip/chip";
 import * as React from "react";
 import { ReactNode } from "react";
+import { SizesType } from "utils/types";
 
 import styles from "./chip.module.scss";
 
@@ -9,7 +10,7 @@ const ChipButton: React.FC<Props> = React.memo(
   ({
     stretch,
     reverseOrder,
-    size = CHIP_SIZE.SMALL,
+    size = "small",
     type,
     children,
     rounded,
@@ -42,7 +43,7 @@ const ChipButton: React.FC<Props> = React.memo(
 interface Props {
   stretch?: boolean;
   reverseOrder?: boolean;
-  size?: CHIP_SIZE;
+  size?: SizesType;
   label?: string | JSX.Element;
   chipLabel?: string | number | ReactNode;
   disabled?: boolean;

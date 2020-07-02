@@ -1,6 +1,5 @@
 import ImageBaseElement from "components/avatar/image-base.element";
 import { Center } from "components/center/center";
-import { CHIP_SIZE } from "components/chip/chip";
 import ChipButton from "components/chip/chip-button";
 import GVButton from "components/gv-button";
 import { RowItem } from "components/row-item/row-item";
@@ -77,7 +76,7 @@ const SmallButton: React.FC<{ onClick: () => void }> = React.memo(
       <ChipButton
         className={label}
         onClick={onClick}
-        size={CHIP_SIZE.SMALL}
+        size={"small"}
         chipLabel={<ImageBaseElement src={ArrowIcon} alt={label} />}
       />
     );

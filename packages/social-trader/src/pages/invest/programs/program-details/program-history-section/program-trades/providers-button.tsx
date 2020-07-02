@@ -1,6 +1,5 @@
 import AssetAvatarWithName from "components/avatar/asset-avatar/asset-avatar-with-name";
 import { Center } from "components/center/center";
-import { CHIP_SIZE } from "components/chip/chip";
 import ChipButton from "components/chip/chip-button";
 import CopyIcon from "components/icon/copy-icon";
 import LevelTooltip from "components/level-tooltip/level-tooltip";
@@ -38,11 +37,7 @@ const _ProvidersButton: React.FC<Props> = ({ providers }) => {
           ))}
         </PopoverContent>
       </Popover>
-      <ChipButton
-        onClick={setAnchor}
-        size={CHIP_SIZE.SMALL}
-        chipLabel={<CopyIcon />}
-      />
+      <ChipButton onClick={setAnchor} size={"small"} chipLabel={<CopyIcon />} />
       <div className={styles["providers-button__count"]}>
         {providers.length}
       </div>
