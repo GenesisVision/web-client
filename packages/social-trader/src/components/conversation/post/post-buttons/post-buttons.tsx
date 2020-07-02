@@ -18,7 +18,7 @@ const _PostButtons: React.FC<Props> = ({
     <Row large>
       <RowItem>
         <Share
-          disable={!!post.actions}
+          disable={!post.actions}
           post={post}
           onApply={onApply}
           id={id}
