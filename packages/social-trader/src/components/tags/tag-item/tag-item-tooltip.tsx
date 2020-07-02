@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { TooltipContent } from "components/tooltip/tooltip-content";
@@ -16,7 +16,7 @@ interface Props {
 const _TagItemTooltip: React.FC<Props> = ({ tags, className }) => {
   return (
     <TooltipContent>
-      <Row wrap className={classNames(styles["tag-item-tooltip"], className)}>
+      <Row wrap className={clsx(styles["tag-item-tooltip"], className)}>
         {tags
           .filter((tag, idx) => idx > 0)
           .map((tag, idx) => (

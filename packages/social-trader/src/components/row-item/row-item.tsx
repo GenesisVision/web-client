@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import React from "react";
 import { SizesType } from "utils/types";
 
@@ -25,7 +25,7 @@ export const RowItem: React.FC<IRowItemProps> = ({
   return (
     <div
       onClick={onClick}
-      className={classNames(styles["row-item"], className, {
+      className={clsx(styles["row-item"], className, {
         [styles["row-item--pointer"]]: !!onClick,
         [styles["row-item--hide"]]: hide,
         [styles["row-item--wide"]]: wide,

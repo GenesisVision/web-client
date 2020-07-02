@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import GVButton from "components/gv-button";
 import { PopoverContentListItem } from "components/popover/popover-content";
 import React, { useCallback } from "react";
@@ -19,7 +19,7 @@ const SelectItem: React.FC<Props> = React.memo(
         variant="text"
         color="secondary"
         noPadding
-        className={classNames(styles["select__option"], className, {
+        className={clsx(styles["select__option"], className, {
           [styles["select__option--selected"]]: isSelected
         })}
         onClick={handleClick}

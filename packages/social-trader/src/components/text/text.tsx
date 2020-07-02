@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import React from "react";
 import { SizesType } from "utils/types";
 
@@ -34,7 +34,7 @@ export const Text: React.FC<Props> = ({
   return (
     <span
       style={{ fontSize: sizeValue }}
-      className={classNames(styles["text"], {
+      className={clsx(styles["text"], {
         [styles["text--thin"]]: weight === "thin",
         [styles["text--normal"]]: weight === "normal",
         [styles["text--bold"]]: weight === "bold",

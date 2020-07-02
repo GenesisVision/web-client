@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
 import ImageBaseElement from "components/avatar/image-base.element";
 import Link, { LinkProps } from "components/link/link";
@@ -79,7 +79,7 @@ const _Notification: React.FC<INotificationProps> = props => {
   return (
     <Row
       center={false}
-      className={classNames(
+      className={clsx(
         styles["notification"],
         styles[`notification--type-${type.toLowerCase()}`],
         {

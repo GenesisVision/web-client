@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import ImageBaseElement from "components/avatar/image-base.element";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
@@ -28,7 +28,7 @@ const _Status: React.FC<IStatus> = ({ withText, className, status }) => {
       <RowItem size={"small"}>
         <Row>
           <ImageBaseElement
-            className={classNames(styles["status__image"], className)}
+            className={clsx(styles["status__image"], className)}
             src={statuses[status]}
             alt={`status ${status}`}
           />

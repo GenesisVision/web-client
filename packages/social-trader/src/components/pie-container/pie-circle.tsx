@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { PIE_DIRECTION } from "components/pie-container/pie";
 import * as React from "react";
 
@@ -18,7 +18,7 @@ export const PieCircle: React.FC<IPieCircleProps> = React.memo(
   }) => {
     return (
       <circle
-        className={classNames(styles["pie-circle"], {
+        className={clsx(styles["pie-circle"], {
           [styles["pie-circle--selected"]]: selected
         })}
         onMouseLeave={onMouseLeave}

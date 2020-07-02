@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import VerificationStatus, {
@@ -26,7 +26,7 @@ const SettingsBlock: React.FC<Props> = ({
     <div className={styles["asset-settings-block__line-block"]}>
       {blockNumber && <h3>{blockNumber}</h3>}
       <Row
-        className={classNames(styles["asset-settings-block__line"], {
+        className={clsx(styles["asset-settings-block__line"], {
           [styles["asset-settings-block__line--bordered"]]: withBorder
         })}
       />

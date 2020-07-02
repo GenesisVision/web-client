@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import TagItemWithTooltip from "components/tags/tag-item/tag-item-with-tooltip";
@@ -28,7 +28,7 @@ const TagProgramContainer: React.FC<Props> = React.memo(({ tags }) => {
         <RowItem>
           <Tooltip render={() => <TagItemTooltip tags={tags} />}>
             <div
-              className={classNames(
+              className={clsx(
                 styles["tag-item"],
                 styles["tag-button"],
                 styles["tag-button--remainder"]

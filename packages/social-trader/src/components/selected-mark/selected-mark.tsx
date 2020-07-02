@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import React from "react";
 
 import styles from "./selected-mark.module.scss";
@@ -6,7 +6,7 @@ import styles from "./selected-mark.module.scss";
 const _SelectedMark: React.FC<Props> = ({ selected, className }) => {
   return (
     <div
-      className={classNames(styles["selected-mark"], className, {
+      className={clsx(styles["selected-mark"], className, {
         [styles["selected-mark--selected"]]: selected
       })}
     >

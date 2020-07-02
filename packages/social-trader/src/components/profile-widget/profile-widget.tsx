@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
 import { Center } from "components/center/center";
 import GVButton from "components/gv-button";
@@ -68,7 +68,7 @@ const _ProfileWidget: React.FC<Props> = ({ profileHeader, className }) => {
   const [t] = useTranslation();
   const { anchor, setAnchor, clearAnchor } = useAnchor();
   return (
-    <div className={classNames(styles["profile-widget"], className)}>
+    <div className={clsx(styles["profile-widget"], className)}>
       <Center className={styles["profile-widget__content"]} onClick={setAnchor}>
         <RowItem size={"small"}>
           <ProfileAvatar

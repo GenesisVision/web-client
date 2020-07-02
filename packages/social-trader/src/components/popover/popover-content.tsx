@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import React from "react";
 
 import styles from "./popover-content.module.scss";
@@ -12,7 +12,7 @@ export const PopoverContent: React.FC<Props &
 }) => {
   return (
     <div
-      className={classNames(styles["popover-content"], className, {
+      className={clsx(styles["popover-content"], className, {
         [styles["popover-content__list--left-align"]]: leftAlign,
         [styles["popover-content__list"]]: type === "list"
       })}

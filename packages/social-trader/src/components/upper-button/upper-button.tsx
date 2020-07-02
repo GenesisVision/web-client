@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { debounce } from "lodash";
 import React, { useCallback, useEffect, useState } from "react";
 import EventListener from "react-event-listener";
@@ -41,7 +41,7 @@ export const UpperButton: React.FC<{ visible: boolean }> = ({ visible }) => {
     <>
       <div
         onClick={handleClick}
-        className={classNames(styles["upper-button"], {
+        className={clsx(styles["upper-button"], {
           [styles["upper-button--visible"]]: visible
         })}
       >

@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { Center } from "components/center/center";
 import HelpButton from "components/help-button/help-button";
 import {
@@ -21,7 +21,7 @@ const _SwitchWithQuestion: React.FC<Props> = ({
       <RowItem size={"small"}>
         <HelpContainer tooltipContent={tooltipContent}>
           <HelpButton
-            className={classNames(styles["text-with-question__question"], {
+            className={clsx(styles["text-with-question__question"], {
               [styles["text-with-question__question-button"]]: !!tooltipContent
             })}
             onClick={onClickHelp}

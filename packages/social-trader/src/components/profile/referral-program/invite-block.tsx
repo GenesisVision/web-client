@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import ImageBaseElement from "components/avatar/image-base.element";
 import { Row } from "components/row/row";
 import { withBlurLoader } from "decorators/with-blur-loader";
@@ -72,7 +72,7 @@ const _ShareBlock: React.FC<{
         data-url={refUrl}
       />
       <div
-        className={classNames(
+        className={clsx(
           styles["referral-program__share-buttons--email"],
           "at-icon-wrapper"
         )}

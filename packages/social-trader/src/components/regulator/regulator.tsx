@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import * as React from "react";
 import { useCallback } from "react";
 import { PlatformAssetFull, SizesType } from "utils/types";
@@ -28,14 +28,14 @@ const Regulator: React.FC<Props> = ({
   );
   return (
     <div
-      className={classNames(styles["regulator"], {
+      className={clsx(styles["regulator"], {
         [styles["regulator--small"]]: size === "small",
         [styles["regulator--middle"]]: size === "middle",
         [styles["regulator--mute"]]: value <= minValue
       })}
     >
       <div
-        className={classNames(
+        className={clsx(
           styles["regulator__button"],
           styles["regulator__button--minus"],
           {
@@ -49,7 +49,7 @@ const Regulator: React.FC<Props> = ({
         &minus;
       </div>
       <div
-        className={classNames(styles["regulator__indicator"], {
+        className={clsx(styles["regulator__indicator"], {
           [styles["regulator__indicator--small"]]: size === "small",
           [styles["regulator__indicator--middle"]]: size === "middle"
         })}
@@ -57,7 +57,7 @@ const Regulator: React.FC<Props> = ({
         {children}
       </div>
       <div
-        className={classNames(
+        className={clsx(
           styles["regulator__button"],
           styles["regulator__button--plus"],
           {

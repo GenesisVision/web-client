@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { Center } from "components/center/center";
 import React from "react";
 import { SizesType } from "utils/types";
@@ -19,7 +19,7 @@ export const Row: React.FC<Props> = ({
     <Center
       {...otherProps}
       center={center && !onlyOffset}
-      className={classNames(styles["row"], className, {
+      className={clsx(styles["row"], className, {
         [styles["row--pointer"]]: !!otherProps.onClick,
         [styles["row--flex"]]: !onlyOffset,
         [styles["row--wide"]]: wide,

@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import React from "react";
 import { SizesType } from "utils/types";
 
@@ -14,7 +14,7 @@ export const PopoverContentCardBlock: React.FC<IPopoverContentCardBlockProps> = 
 }) => {
   return (
     <div
-      className={classNames(styles["popover-content__block"], className, {
+      className={clsx(styles["popover-content__block"], className, {
         [styles["popover-content__block--fixed"]]: fixed,
         [styles["popover-content__block--stretched"]]: stretched,
         [styles["popover-content__block--dark"]]: dark,

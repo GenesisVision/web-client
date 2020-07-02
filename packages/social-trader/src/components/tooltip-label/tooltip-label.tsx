@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import Tooltip from "components/tooltip/tooltip";
 import { TooltipContent } from "components/tooltip/tooltip-content";
@@ -17,7 +17,7 @@ export const TooltipLabel: React.FC<{
     render={() => <TooltipContent>{tooltipContent}</TooltipContent>}
   >
     <span
-      className={classNames(
+      className={clsx(
         styles["tooltip-label"],
         {
           [styles["tooltip-label--cursor-pointer"]]: pointer,

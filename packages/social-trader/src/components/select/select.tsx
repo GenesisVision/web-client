@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { Center } from "components/center/center";
 import Popover, { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import { PopoverContent } from "components/popover/popover-content";
@@ -119,7 +119,7 @@ const Select: React.FC<Props> = ({
 
   return (
     <div
-      className={classNames(styles["select"], className, {
+      className={clsx(styles["select"], className, {
         [styles["select--fixed-width"]]: fixedWidth,
         [styles["select--middle"]]: size === "middle",
         [styles["select--small"]]: size === "small",
@@ -129,7 +129,7 @@ const Select: React.FC<Props> = ({
       <button
         name={name}
         onClick={handleClick}
-        className={classNames(styles["select__value"], {
+        className={clsx(styles["select__value"], {
           [styles["select__value--bottom-line"]]: bottomLine
         })}
         onBlur={handleBlur}

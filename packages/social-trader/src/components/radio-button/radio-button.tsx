@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { Center } from "components/center/center";
 import { RowItem } from "components/row-item/row-item";
 import React from "react";
@@ -23,25 +23,25 @@ const _RadioButton: React.FC<Props> = ({
     <Center className={styles["radio-button"]} onClick={onClick}>
       <RowItem
         size={"small"}
-        className={classNames(styles["radio-button__round-container"], {
+        className={clsx(styles["radio-button__round-container"], {
           [styles["radio-button__round-container--middle"]]: size === "middle"
         })}
       >
         <div
-          className={classNames(styles["radio-button__round"], {
+          className={clsx(styles["radio-button__round"], {
             [styles["radio-button__round--selected"]]: selected,
             [styles["radio-button__round--middle"]]: size === "middle"
           })}
         >
           <div
-            className={classNames(styles["radio-button__selected-mark"], {
+            className={clsx(styles["radio-button__selected-mark"], {
               [styles["radio-button__selected-mark--selected"]]: selected
             })}
           />
         </div>
       </RowItem>
       <RowItem
-        className={classNames(styles["radio-button__label"], {
+        className={clsx(styles["radio-button__label"], {
           [styles["radio-button__label--middle"]]: size === "middle"
         })}
       >

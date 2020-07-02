@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
 import { Center } from "components/center/center";
 import Link from "components/link/link";
@@ -41,7 +41,7 @@ const _UserAvatarList: React.FC<Props> = ({ count, length = 3, list }) => {
       })}
       {count > length && (
         <div
-          className={classNames(
+          className={clsx(
             styles["user-avatar-list__remainder"],
             styles["user-avatar-list__item"]
           )}
