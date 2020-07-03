@@ -31,7 +31,7 @@ const _ProgramTableHeaderCell: React.FC<{ column: SortingColumn }> = ({
       horizontal={HORIZONTAL_POPOVER_POS.LEFT}
       render={() => (
         <TooltipContent>
-          {t(`programs-page.tooltips.${column.name}`)}
+          {t(`programs-page:tooltips.${column.name}`)}
         </TooltipContent>
       )}
     >

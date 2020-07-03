@@ -30,7 +30,7 @@ const _FollowTableHeaderCell: React.FC<{ column: SortingColumn }> = ({
       horizontal={HORIZONTAL_POPOVER_POS.LEFT}
       render={() => (
         <TooltipContent>
-          {t(`follows-page.tooltips.${column.name}`)}
+          {t(`follows-page:tooltips.${column.name}`)}
         </TooltipContent>
       )}
     >

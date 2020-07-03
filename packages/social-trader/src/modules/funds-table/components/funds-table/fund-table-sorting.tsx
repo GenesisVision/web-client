@@ -21,7 +21,7 @@ const _FundTableSortingValue: React.FC<Props> = ({ column }) => {
       horizontal={HORIZONTAL_POPOVER_POS.LEFT}
       render={() => (
         <TooltipContent>
-          {t(`funds-page.tooltips.${column.name}`)}
+          {t(`funds-page:tooltips.${column.name}`)}
         </TooltipContent>
       )}
     >
