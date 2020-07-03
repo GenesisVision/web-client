@@ -18,7 +18,7 @@ import ProgramDetailsHistorySection, {
   TProgramTablesData
 } from "pages/invest/programs/program-details/program-history-section/program-details-history-section";
 import * as React from "react";
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import { useDispatch } from "react-redux";
 
 import PerformanceData from "./account-details-description/performance-data";
@@ -39,28 +39,51 @@ const InvestmentAccountControls = dynamic(() =>
 
 const _AccountDetailsContainer: React.FC<Props> = ({ data: description }) => {
   const dispatch = useDispatch();
-  const tablesData: TProgramTablesData = {
-    tradingLog: {
-      itemSelector: tradingLogSelector,
-      dataSelector: tradingLogTableSelector,
-      getItems: getTradingLog
-    },
-    openPositions: {
-      itemSelector: openPositionsSelector,
-      dataSelector: openPositionsTableSelector,
-      getItems: getOpenPositions
-    },
-    trades: {
-      itemSelector: tradesSelector,
-      dataSelector: tradesTableSelector,
-      getItems: getTrades
-    }
-  };
+  const tablesData: TProgramTablesData = useMemo(
+    () => ({
+      tradingLog: {
+        itemSelector: tradingLogSelector,
+        dataSelector: tradingLogTableSelector,
+        getItems: getTradingLog
+      },
+      openPositions: {
+        itemSelector: openPositionsSelector,
+        dataSelector: openPositionsTableSelector,
+        getItems: getOpenPositions
+      },
+      trades: {
+        itemSelector: tradesSelector,
+        dataSelector: tradesTableSelector,
+        getItems: getTrades
+      }
+    }),
+    []
+  );
   const title = description.publicInfo.title;
 
   const handleDispatchDescription = useCallback(() => {
     dispatch(dispatchAccountDescription(description.id)());
   }, [description.id]);
+
+  const renderPerformanceData = useCallback(
+    () => <PerformanceData description={description} />,
+    [description]
+  );
+
+  const renderControls = useCallback(
+    () =>
+      description?.ownerActions?.canTransferMoney ? (
+        <InvestmentAccountControls
+          id={description.id}
+          balances={description.tradingAccountInfo.balances}
+          transferableItem={mapProgramFollowToTransferItemType(description)}
+          accountType={description.tradingAccountInfo.type}
+          onApply={handleDispatchDescription}
+        />
+      ) : null,
+    [description, handleDispatchDescription]
+  );
+
   return (
     <Page title={title}>
       <DetailsDescriptionSection
@@ -71,18 +94,8 @@ const _AccountDetailsContainer: React.FC<Props> = ({ data: description }) => {
         id={description.id}
         currency={description.tradingAccountInfo.currency}
         asset={ASSET.FOLLOW}
-        PerformanceData={() => <PerformanceData description={description} />}
-        Controls={() =>
-          description?.ownerActions?.canTransferMoney ? (
-            <InvestmentAccountControls
-              id={description.id}
-              balances={description.tradingAccountInfo.balances}
-              transferableItem={mapProgramFollowToTransferItemType(description)}
-              accountType={description.tradingAccountInfo.type}
-              onApply={handleDispatchDescription}
-            />
-          ) : null
-        }
+        PerformanceData={renderPerformanceData}
+        Controls={renderControls}
       />
       <DetailsDivider />
       {!!description.tradingAccountInfo.subscriptions && (
