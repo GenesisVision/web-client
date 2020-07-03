@@ -124,7 +124,7 @@ export const useChartStateDataCreator: TUseFundChartStateDataCreator = ({
   };
 };
 
-export const useFundChartStateValuesCreator: TUseFundChartStateValuesCreator = useFundChartStateData => {
+export const useChartStateValuesCreator: TUseFundChartStateValuesCreator = useFundChartStateData => {
   const dispatch = useDispatch();
   const {
     statisticCurrencyAction,

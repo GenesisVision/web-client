@@ -2,7 +2,7 @@ import { DETAILS_CHART_TABS } from "components/details/details-statistic-section
 import {
   useChartPeriodCreator,
   useChartStateDataCreator,
-  useFundChartStateValuesCreator
+  useChartStateValuesCreator
 } from "components/details/details-statistic-section/details.chart.helpers";
 import { accountAbsoluteProfitChartSelector } from "pages/accounts/account-details/reducers/absolute-profit-chart.reducer";
 
@@ -40,4 +40,4 @@ export const useAccountChartStateData = (view: DETAILS_CHART_TABS) =>
   });
 
 export const useAccountChartStateValues = (view: DETAILS_CHART_TABS) =>
-  useFundChartStateValuesCreator(useAccountChartStateData(view));
+  useChartStateValuesCreator(useAccountChartStateData(view));
