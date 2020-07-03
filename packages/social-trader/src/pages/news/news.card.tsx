@@ -23,12 +23,13 @@ interface Props {
 }
 
 const transformNewsPostToGVPost = (newsPost: MediaPost): Post => ({
+  isHighlighted: false,
   url: newsPost.url,
   id: newsPost.id,
   text: newsPost.text,
   date: newsPost.date,
-  likesCount: newsPost.likesCount,
-  rePostsCount: newsPost.rePostsCount,
+  likesCount: 0,
+  rePostsCount: 0,
   impressionsCount: 0,
   isPinned: false,
   isDeleted: false,
@@ -67,6 +68,9 @@ const NewsCardContent: React.FC<Props> = React.memo(
             </Row>
           )}
           <Row>
+            <Separator />
+          </Row>
+          <Row>
             <AvatarWithName
               avatar={
                 <ProfileAvatar url={post.authorLogoUrl} alt={post.author} />
@@ -86,7 +90,7 @@ const NewsCardContent: React.FC<Props> = React.memo(
             />
           </Row>
         </DefaultBlock>
-        <Separator />
+        {/* <Separator />
         <DefaultBlock size={SIZES.LARGE}>
           <Center>
             <RowItem wide>
@@ -106,7 +110,7 @@ const NewsCardContent: React.FC<Props> = React.memo(
               />
             </RowItem>
           </Center>
-        </DefaultBlock>
+        </DefaultBlock> */}
       </div>
     );
   }

@@ -20,7 +20,7 @@ export const PostPage: React.FC<Props> = ({ post }) => {
     map: inTextComponentsMap
   }) as string).trim();
   const previewImage = post.images.length
-    ? getImageUrlByQuality(post.images[0].resizes, "Low")
+    ? getImageUrlByQuality(post.images[0].resizes, "Original")
     : undefined;
   return (
     <Page
@@ -37,7 +37,12 @@ export const PostPage: React.FC<Props> = ({ post }) => {
       description={description}
       title={title}
     >
-      <PostContainer reduceLargeText={false} post={post} id={post.id} />
+      <PostContainer
+        visibleCommentsCount={post.comments.length}
+        reduceLargeText={false}
+        post={post}
+        id={post.id}
+      />
     </Page>
   );
 };

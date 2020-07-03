@@ -13,11 +13,6 @@ import useApiRequest from "hooks/api-request.hook";
 import useTab from "hooks/tab.hook";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
-import {
-  betaTesterSelector,
-  isSocialBetaTester
-} from "reducers/header-reducer";
 
 enum TABS {
   FEED = "FEED",
@@ -27,8 +22,6 @@ enum TABS {
 
 const _ManagerData: React.FC<Props> = ({ canWritePost, id }) => {
   const [t] = useTranslation();
-  const betaTester = useSelector(betaTesterSelector);
-  const isBetaTester = isSocialBetaTester(betaTester);
   const { tab, setTab } = useTab<TABS>(TABS.TRADING);
 
   const { sendRequest, data = UserDataInitialCount } = useApiRequest<
@@ -38,8 +31,8 @@ const _ManagerData: React.FC<Props> = ({ canWritePost, id }) => {
   });
 
   useEffect(() => {
-    sendRequest({ ownerId: id, isBetaTester });
-  }, [id, isBetaTester, betaTester]);
+    sendRequest({ ownerId: id });
+  }, [id]);
 
   const {
     investingFollowCount = 0,
@@ -55,21 +48,14 @@ const _ManagerData: React.FC<Props> = ({ canWritePost, id }) => {
   const tradingCount = followCount + programsCount + fundsCount;
 
   useEffect(() => {
-    const noTestingTab =
-      !tradingCount && investingCount ? TABS.INVESTING : TABS.TRADING;
-    setTab(null, isBetaTester ? TABS.FEED : noTestingTab);
-  }, [tradingCount, investingCount, isBetaTester]);
+    setTab(null, TABS.FEED);
+  }, [tradingCount, investingCount]);
 
   return (
     <div>
       <Row onlyOffset>
         <GVTabs value={tab} onChange={setTab}>
-          <GVTab
-            visible={!!isBetaTester}
-            value={TABS.FEED}
-            label={t("Feed")}
-            count={postsCount}
-          />
+          <GVTab value={TABS.FEED} label={t("Feed")} count={postsCount} />
           <GVTab
             visible={tradingCount > 0}
             value={TABS.TRADING}

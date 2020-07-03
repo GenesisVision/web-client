@@ -3,6 +3,7 @@ import { GV_BTN_SIZE } from "components/gv-button";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import { FollowUserButton } from "components/manager/components/follow-user-buttom";
+import { MutedText } from "components/muted-text/muted-text";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import TableCell from "components/table/components/table-cell";
@@ -10,6 +11,7 @@ import TableRow from "components/table/components/table-row";
 import { UserAvatarList } from "components/user-avatar-list/user-avatar-list";
 import { UserDetailsList } from "gv-api-web";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { managerToPathCreator } from "routes/manager.routes";
 import { distanceDate } from "utils/dates";
@@ -35,6 +37,7 @@ export const UsersTableRow: React.FC<{ user: UserDetailsList }> = ({
     investorsCount
   }
 }) => {
+  const [t] = useTranslation();
   const { contextTitle } = useToLink();
   const profileUrl = managerToPathCreator(url, contextTitle);
   const slicedAbout =
@@ -44,6 +47,8 @@ export const UsersTableRow: React.FC<{ user: UserDetailsList }> = ({
           .slice(0, 13)
           .join(" ") + " ..."
       : about;
+
+  const renderHidden = () => <MutedText>{t("Hidden")}</MutedText>;
   return (
     <TableRow className={styles["users-table-row"]}>
       <TableCell className={styles["users-table-row__about-cell"]}>
@@ -74,23 +79,33 @@ export const UsersTableRow: React.FC<{ user: UserDetailsList }> = ({
       </TableCell>
       <TableCell>{distanceDate(regDate)}</TableCell>
       <TableCell>
-        <NumberFormat
-          value={formatCurrencyValue(
-            assetsUnderManagement,
-            USER_TABLE_ROW_CURRENCY
-          )}
-          suffix={` ${USER_TABLE_ROW_CURRENCY}`}
-          displayType="text"
-        />
+        {assetsUnderManagement === null ? (
+          renderHidden()
+        ) : (
+          <NumberFormat
+            value={formatCurrencyValue(
+              assetsUnderManagement,
+              USER_TABLE_ROW_CURRENCY
+            )}
+            suffix={` ${USER_TABLE_ROW_CURRENCY}`}
+            displayType="text"
+          />
+        )}
       </TableCell>
-      <TableCell>{investorsCount}</TableCell>
       <TableCell>
-        <NumberFormat
-          value={formatCurrencyValue(totalProfit, USER_TABLE_ROW_CURRENCY)}
-          suffix={` ${USER_TABLE_ROW_CURRENCY}`}
-          displayType="text"
-        />
+        {investorsCount === null ? renderHidden() : investorsCount}
       </TableCell>
+      {/*<TableCell>
+        {totalProfit === null ? (
+          renderHidden()
+        ) : (
+          <NumberFormat
+            value={formatCurrencyValue(totalProfit, USER_TABLE_ROW_CURRENCY)}
+            suffix={` ${USER_TABLE_ROW_CURRENCY}`}
+            displayType="text"
+          />
+        )}
+      </TableCell>*/}
       {personalDetails && (
         <TableCell>
           <FollowUserButton

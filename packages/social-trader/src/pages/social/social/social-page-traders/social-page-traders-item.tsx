@@ -1,5 +1,6 @@
 import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
 import { AvatarWithName } from "components/avatar/avatar-with-name/avatar-with-name";
+import Link, { ToType } from "components/link/link";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import StatisticItemInner from "components/statistic-item/statistic-item-inner";
@@ -17,7 +18,7 @@ interface Props {
   id: string;
   investorsCount: number;
   profit: number;
-  url: string;
+  url: string | ToType;
   logoUrl: string;
   title: string;
 }
@@ -43,19 +44,22 @@ const _SocialPageTradersItem: React.FC<Props> = ({
   return (
     <div className={styles["social-page-traders__item"]}>
       <Row>
-        <AvatarWithName
-          className={styles["social-page-traders__avatar-name"]}
-          onClick={handleClick}
-          avatar={
+        <RowItem>
+          <Link to={url}>
             <AssetAvatar
               color={color}
               size={"xsmall"}
               url={logoUrl}
               alt={title}
             />
-          }
-          name={title}
-        />
+          </Link>
+        </RowItem>
+        <RowItem
+          onClick={handleClick}
+          className={styles["social-page-traders__avatar-name"]}
+        >
+          {title}
+        </RowItem>
       </Row>
       <Row>
         <RowItem wide>

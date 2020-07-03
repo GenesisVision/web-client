@@ -1,6 +1,5 @@
 import { getSocialMedia } from "components/conversation/conversation.service";
 import { initialOptions } from "components/notifications/components/notifications.helpers";
-import withBetaTesting from "decorators/with-beta-testing";
 import withDefaultLayout from "decorators/with-default-layout";
 import { INewsListContainerInitData } from "pages/news/news-list/news-list.container";
 import { NewsPage } from "pages/news/news.page";
@@ -21,4 +20,4 @@ Page.getInitialProps = async ctx => {
   };
 };
 
-export default compose(withDefaultLayout, withBetaTesting("Social"))(Page);
+export default compose(withDefaultLayout)(Page);

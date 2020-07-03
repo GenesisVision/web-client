@@ -12,6 +12,7 @@ import GVButton, { GV_BTN_SIZE } from "components/gv-button";
 import { MutedText } from "components/muted-text/muted-text";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { PostActions as PostActionsType } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
 import useIsOpen from "hooks/is-open.hook";
 import React, { useCallback } from "react";
@@ -44,7 +45,42 @@ const DeletedPost: React.FC<{
   );
 };
 
-const _Post: React.FC<Props> = ({ reduceLargeText, updateData, post }) => {
+const PostActions: React.FC<{
+  actions: PostActionsType;
+  id: string;
+  isPinned: boolean;
+  updateData: VoidFunction;
+  setDeleted: VoidFunction;
+}> = ({ actions, id, isPinned, updateData, setDeleted }) => {
+  if (!actions?.canDelete && !actions?.canPin) return null;
+  return (
+    <RowItem>
+      <Center>
+        {actions?.canPin && (
+          <RowItem>
+            <ConversationPinButton
+              id={id}
+              value={isPinned}
+              onSuccess={updateData}
+            />
+          </RowItem>
+        )}
+        {actions?.canDelete && (
+          <RowItem>
+            <ConversationRemoveButton id={id} onSuccess={setDeleted} />
+          </RowItem>
+        )}
+      </Center>
+    </RowItem>
+  );
+};
+
+const _Post: React.FC<Props> = ({
+  visibleCommentsCount,
+  reduceLargeText,
+  updateData,
+  post
+}) => {
   const {
     url,
     rePostsCount,
@@ -68,31 +104,13 @@ const _Post: React.FC<Props> = ({ reduceLargeText, updateData, post }) => {
           <Message
             reduceLargeText={reduceLargeText}
             settingsBlock={
-              actions?.canDelete || actions?.canPin ? (
-                <RowItem>
-                  <Center>
-                    {actions?.canPin && (
-                      <RowItem>
-                        <ConversationPinButton
-                          id={id}
-                          value={isPinned}
-                          onSuccess={updateData}
-                        />
-                      </RowItem>
-                    )}
-                    {actions?.canDelete && (
-                      <RowItem>
-                        <ConversationRemoveButton
-                          id={id}
-                          onSuccess={setDeleted}
-                        />
-                      </RowItem>
-                    )}
-                  </Center>
-                </RowItem>
-              ) : (
-                undefined
-              )
+              <PostActions
+                actions={actions}
+                id={id}
+                isPinned={isPinned}
+                updateData={updateData}
+                setDeleted={setDeleted}
+              />
             }
             row={false}
             tags={tags}
@@ -115,7 +133,11 @@ const _Post: React.FC<Props> = ({ reduceLargeText, updateData, post }) => {
       />
       {!!comments.length && (
         <Row large>
-          <CommentsList comments={comments} updateData={updateData} />
+          <CommentsList
+            visibleCommentsCount={visibleCommentsCount}
+            comments={comments}
+            updateData={updateData}
+          />
         </Row>
       )}
       {actions && actions.canComment && (
@@ -128,6 +150,7 @@ const _Post: React.FC<Props> = ({ reduceLargeText, updateData, post }) => {
 };
 
 interface Props {
+  visibleCommentsCount?: number;
   reduceLargeText?: boolean;
   updateData: VoidFunction;
   post: ConversationPost;
