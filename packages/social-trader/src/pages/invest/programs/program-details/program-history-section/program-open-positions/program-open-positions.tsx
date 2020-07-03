@@ -10,7 +10,7 @@ import Tooltip from "components/tooltip/tooltip";
 import { TooltipContent } from "components/tooltip/tooltip-content";
 import { TRADE_ASSET_TYPE } from "constants/constants";
 import { getOpenPositionsColumns } from "pages/invest/programs/program-details/program-history-section/program-open-positions/program-open-positions.helpers";
-import React from "react";
+import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { RootState } from "reducers/root-reducer";
@@ -34,7 +34,7 @@ const _ProgramOpenPositions: React.FC<Props> = ({
     itemsData: { data }
   } = openPositions;
   const delay = data ? data.tradesDelay : "None";
-  if (!programId) return null;
+
   const renderCell = (name: string) => (
     <span
       className={clsx(
@@ -45,42 +45,58 @@ const _ProgramOpenPositions: React.FC<Props> = ({
       {t(`program-details-page:history.open-positions.${name}`)}
     </span>
   );
+
+  const exportButtonToolbarRender = useCallback(
+    () => <TradesDelayHint delay={delay} />,
+    [delay]
+  );
+
+  const renderHeader = useCallback(
+    column =>
+      column.tooltip ? (
+        <Tooltip
+          horizontal={HORIZONTAL_POPOVER_POS.LEFT}
+          render={() => (
+            <TooltipContent>
+              {t(
+                `program-details-page:history.open-positions.tooltips.${column.name}`
+              )}
+            </TooltipContent>
+          )}
+        >
+          {renderCell(column.name)}
+        </Tooltip>
+      ) : (
+        renderCell(column.name)
+      ),
+    []
+  );
+  const renderBodyRow = useCallback(
+    (position, _, updateItems) => (
+      <ProgramOpenPositionsRow
+        programId={programId}
+        assetType={assetType}
+        canCloseOpenPositions={canCloseOpenPositions}
+        updateItems={updateItems}
+        data={data!}
+        position={position}
+        currency={currency}
+      />
+    ),
+    [data, programId, assetType, canCloseOpenPositions, currency]
+  );
+
+  if (!programId) return null;
+
   return (
     <TableContainer
-      exportButtonToolbarRender={() => <TradesDelayHint delay={delay} />}
+      exportButtonToolbarRender={exportButtonToolbarRender}
       getItems={getItems}
       dataSelector={dataSelector}
       isFetchOnMount={true}
       columns={getOpenPositionsColumns(data)}
-      renderHeader={column =>
-        column.tooltip ? (
-          <Tooltip
-            horizontal={HORIZONTAL_POPOVER_POS.LEFT}
-            render={() => (
-              <TooltipContent>
-                {t(
-                  `program-details-page:history.open-positions.tooltips.${column.name}`
-                )}
-              </TooltipContent>
-            )}
-          >
-            {renderCell(column.name)}
-          </Tooltip>
-        ) : (
-          renderCell(column.name)
-        )
-      }
-      renderBodyRow={(position, _, updateItems) => (
-        <ProgramOpenPositionsRow
-          programId={programId}
-          assetType={assetType}
-          canCloseOpenPositions={canCloseOpenPositions}
-          updateItems={updateItems}
-          data={data!}
-          position={position}
-          currency={currency}
-        />
-      )}
+      renderHeader={renderHeader}
+      renderBodyRow={renderBodyRow}
     />
   );
 };
