@@ -9,7 +9,6 @@ interface ITableHeadCellProps extends React.HTMLAttributes<HTMLDivElement> {
   sortable: boolean;
   sortingDirection: SORTING_DIRECTION;
   className?: string;
-  onClick(): void;
 }
 
 const _TableHeadCell: React.FC<ITableHeadCellProps> = ({

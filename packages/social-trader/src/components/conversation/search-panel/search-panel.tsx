@@ -7,13 +7,18 @@ import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
 import React from "react";
+import { Clickable } from "utils/types";
 
 import styles from "./search-panel.module.scss";
 
-const SearchResultRow: React.FC<{
+interface Props extends Clickable {
   asset: AssetSearchResult;
-  onClick: VoidFunction;
-}> = ({ asset: { avatar, name, type }, onClick }) => {
+}
+
+const SearchResultRow: React.FC<Props> = ({
+  asset: { avatar, name, type },
+  onClick
+}) => {
   return (
     <Row onClick={onClick} className={styles["search-panel__row"]}>
       <AvatarWithName
@@ -31,11 +36,16 @@ const SearchResultRow: React.FC<{
   );
 };
 
-const _SearchPanel: React.FC<{
+interface ISearchPanelProps extends Clickable {
   isSearchPending: boolean;
   searchResult?: AssetSearchResult[];
-  onClick: (values: AssetSearchResult) => void;
-}> = ({ isSearchPending, searchResult, onClick }) => {
+}
+
+const _SearchPanel: React.FC<ISearchPanelProps> = ({
+  isSearchPending,
+  searchResult,
+  onClick
+}) => {
   return (
     <div className={styles["search-panel"]}>
       {!!searchResult?.length &&

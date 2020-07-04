@@ -2,12 +2,11 @@ import clsx from "clsx";
 import { Center } from "components/center/center";
 import { RowItem } from "components/row-item/row-item";
 import React from "react";
-import { Sizeable } from "utils/types";
+import { Clickable, Sizeable } from "utils/types";
 
 import styles from "./radio-button.module.scss";
 
-interface Props extends Sizeable {
-  onClick?: VoidFunction;
+interface Props extends Sizeable, Clickable {
   selected: boolean;
   label: string;
 }

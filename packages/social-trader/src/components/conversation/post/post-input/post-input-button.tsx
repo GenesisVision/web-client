@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import React from "react";
-import { Sizeable } from "utils/types";
+import { Childrenable, Clickable, Sizeable } from "utils/types";
 
 import styles from "./post-input.module.scss";
 
@@ -22,9 +22,6 @@ const _PostInputButton: React.FC<Props> = ({
   );
 };
 
-interface Props extends Sizeable {
-  children?: string | JSX.Element;
-  onClick?: VoidFunction;
-}
+interface Props extends Sizeable, Clickable, Childrenable {}
 
 export const PostInputButton = React.memo(_PostInputButton);

@@ -9,7 +9,7 @@ import { TransferContainerProps } from "modules/transfer/components/transfer-con
 import TransferPopup from "modules/transfer/transfer-popup";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Sizeable } from "utils/types";
+import { Clickable, Sizeable } from "utils/types";
 
 import styles from "./transfer.button.module.scss";
 
@@ -75,13 +75,12 @@ interface Props extends TransferContainerProps, Sizeable {
   disabled?: boolean;
 }
 
-interface FullButtonProps extends Sizeable {
+interface FullButtonProps extends Sizeable, Clickable {
   withIcon?: boolean;
   color?: "primary" | "secondary" | "primary-dark" | "danger";
   variant?: "text" | "outlined" | "contained";
   label?: string;
   disabled?: boolean;
-  onClick: () => void;
 }
 
 const FullButton: React.FC<FullButtonProps> = React.memo(
@@ -114,20 +113,18 @@ const FullButton: React.FC<FullButtonProps> = React.memo(
   }
 );
 
-const SmallButton: React.FC<{ onClick: () => void }> = React.memo(
-  ({ onClick }) => {
-    const [t] = useTranslation();
-    const label = t("wallet-page:transfer");
-    return (
-      <ChipButton
-        className={label}
-        onClick={onClick}
-        size={"small"}
-        chipLabel={<ImageBaseElement src={ConvertIcon} alt={label} />}
-      />
-    );
-  }
-);
+const SmallButton: React.FC<Clickable> = React.memo(({ onClick }) => {
+  const [t] = useTranslation();
+  const label = t("wallet-page:transfer");
+  return (
+    <ChipButton
+      className={label}
+      onClick={onClick}
+      size={"small"}
+      chipLabel={<ImageBaseElement src={ConvertIcon} alt={label} />}
+    />
+  );
+});
 
 export enum WALLET_BUTTON_TYPE {
   SMALL = "SMALL",

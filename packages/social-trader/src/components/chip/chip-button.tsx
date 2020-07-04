@@ -2,7 +2,7 @@ import clsx from "clsx";
 import Chip, { CHIP_TYPE } from "components/chip/chip";
 import * as React from "react";
 import { ReactNode } from "react";
-import { Sizeable } from "utils/types";
+import { Clickable, Sizeable } from "utils/types";
 
 import styles from "./chip.module.scss";
 
@@ -40,7 +40,7 @@ const ChipButton: React.FC<Props> = React.memo(
   )
 );
 
-interface Props extends Sizeable {
+interface Props extends Sizeable, Clickable {
   stretch?: boolean;
   reverseOrder?: boolean;
   label?: string | JSX.Element;
@@ -49,7 +49,6 @@ interface Props extends Sizeable {
   className?: string;
   rounded?: boolean;
   type?: CHIP_TYPE;
-  onClick?: (event: React.MouseEvent<HTMLElement>) => void | undefined;
 }
 
 export default ChipButton;

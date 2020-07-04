@@ -15,6 +15,7 @@ import { ToggleAssetFavoriteButton } from "modules/toggle-asset-favorite-button/
 import { ToggleableAssetType } from "modules/toggle-asset-favorite-button/toggle-asset-favorite-button.types";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { Clickable } from "utils/types";
 
 export const TableCardActions: React.FC<Props> = ({
   clearAnchor,
@@ -81,10 +82,9 @@ export const TableCardFavoriteActionItem: React.FC<{
   );
 };
 
-interface ITableCardActionsItemProps {
+interface ITableCardActionsItemProps extends Clickable {
   children?: string | JSX.Element;
   to?: ToType | string;
-  onClick: (event: any) => void;
 }
 
 interface Props

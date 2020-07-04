@@ -11,7 +11,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { safeGetElemFromArray } from "utils/helpers";
-import { CurrencyEnum } from "utils/types";
+import { Clickable, CurrencyEnum } from "utils/types";
 
 import styles from "./wallet-withdraw.button.module.scss";
 
@@ -39,49 +39,49 @@ const _WalletWithdrawButton: React.FC<Props> = ({
   );
 };
 
-const FullButton: React.FC<{
+interface IFullButtonProps extends Clickable {
   disabled?: boolean;
-  onClick: () => void;
-}> = React.memo(({ disabled, onClick }) => {
-  const [t] = useTranslation();
-  const label = t("wallet-page:withdraw");
-  return (
-    <GVButton
-      className={label}
-      size={"large"}
-      color="secondary"
-      variant="outlined"
-      disabled={disabled}
-      onClick={onClick}
-    >
-      <Center>
-        <RowItem size={"small"}>
-          <ImageBaseElement
-            className={styles["wallet-withdraw-button__full-button-icon"]}
-            src={ArrowIcon}
-            alt={t("wallet-page:buttons.withdraw")}
-          />
-        </RowItem>
-        <RowItem>{label}</RowItem>
-      </Center>
-    </GVButton>
-  );
-});
-
-const SmallButton: React.FC<{ onClick: () => void }> = React.memo(
-  ({ onClick }) => {
+}
+const FullButton: React.FC<IFullButtonProps> = React.memo(
+  ({ disabled, onClick }) => {
     const [t] = useTranslation();
     const label = t("wallet-page:withdraw");
     return (
-      <ChipButton
+      <GVButton
         className={label}
+        size={"large"}
+        color="secondary"
+        variant="outlined"
+        disabled={disabled}
         onClick={onClick}
-        size={"small"}
-        chipLabel={<ImageBaseElement src={ArrowIcon} alt={label} />}
-      />
+      >
+        <Center>
+          <RowItem size={"small"}>
+            <ImageBaseElement
+              className={styles["wallet-withdraw-button__full-button-icon"]}
+              src={ArrowIcon}
+              alt={t("wallet-page:buttons.withdraw")}
+            />
+          </RowItem>
+          <RowItem>{label}</RowItem>
+        </Center>
+      </GVButton>
     );
   }
 );
+
+const SmallButton: React.FC<Clickable> = React.memo(({ onClick }) => {
+  const [t] = useTranslation();
+  const label = t("wallet-page:withdraw");
+  return (
+    <ChipButton
+      className={label}
+      onClick={onClick}
+      size={"small"}
+      chipLabel={<ImageBaseElement src={ArrowIcon} alt={label} />}
+    />
+  );
+});
 
 interface Props {
   currency: CurrencyEnum;

@@ -1,10 +1,10 @@
 import clsx from "clsx";
 import React from "react";
+import { Clickable } from "utils/types";
 
 import styles from "./mobile-burger.module.scss";
 
-interface Props {
-  onClick(): void;
+interface Props extends Clickable {
   menuOpen: boolean;
 }
 

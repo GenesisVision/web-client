@@ -22,7 +22,7 @@ import {
   safeGetElemFromArray
 } from "utils/helpers";
 import { HookForm } from "utils/hook-form.helpers";
-import { CurrencyEnum } from "utils/types";
+import { Clickable, CurrencyEnum } from "utils/types";
 
 import CreateAccountFormValidationSchema, {
   CREATE_ACCOUNT_FORM_FIELDS

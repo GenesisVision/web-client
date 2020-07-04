@@ -2,6 +2,7 @@ import { Center } from "components/center/center";
 import { LikeButtonIcon } from "components/conversation/like/like-button-icon/like-button-icon";
 import { RowItem } from "components/row-item/row-item";
 import React, { useCallback } from "react";
+import { Clickable } from "utils/types";
 
 import styles from "./like.module.scss";
 
@@ -24,9 +25,8 @@ export const _Like: React.FC<Props> = ({ count, onClick, disable, liked }) => {
   );
 };
 
-interface Props {
+interface Props extends Clickable {
   count: number;
-  onClick: VoidFunction;
   disable?: boolean;
   liked?: boolean;
 }

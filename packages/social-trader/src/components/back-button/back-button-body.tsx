@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useTranslation } from "react-i18next";
+import { Clickable } from "utils/types";
 
 import styles from "./back-button.module.scss";
 
@@ -19,7 +20,6 @@ export const _BackButtonBody: React.FC<Props> = ({ onClick, backPath }) => {
 const BackButtonBody = React.memo(_BackButtonBody);
 export default BackButtonBody;
 
-interface Props {
-  onClick: () => void;
+interface Props extends Clickable {
   backPath?: string;
 }

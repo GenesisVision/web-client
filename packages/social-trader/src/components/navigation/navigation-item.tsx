@@ -4,15 +4,14 @@ import HeaderIcon from "components/header/header-icon";
 import Link, { ToType } from "components/link/link";
 import { useRouter } from "next/router";
 import React from "react";
+import { Childrenable, Clickable } from "utils/types";
 
 import { normalizeLinkFrom } from "../link/link.helper";
 import styles from "./navigation.module.scss";
 
-interface INavigationButtonProps extends React.HTMLAttributes<HTMLDivElement> {
+interface INavigationButtonProps extends Clickable, Childrenable {
   icon: JSX.Element;
   title?: string;
-
-  onClick(): void;
 }
 
 const _NavigationButton: React.FC<INavigationButtonProps> = ({

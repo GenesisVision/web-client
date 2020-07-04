@@ -29,37 +29,43 @@ import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
+import { Clickable } from "utils/types";
 
 import styles from "./profile-widget.module.scss";
 
-const ProfileMenuItem: React.FC<{
+interface IProfileMenuItemProps extends Clickable {
   to?: ToType | string;
-  onClick: VoidFunction;
   label: any;
   Icon: React.ComponentType;
-}> = React.memo(({ Icon, to, onClick, label }) => {
-  const renderLabel = () => (
-    <Row>
-      <RowItem>
-        <Center className={styles["profile-menu__item-icon"]}>
-          <Icon />
-        </Center>
-      </RowItem>
-      <RowItem className={styles["profile-menu__item-label"]}>{label}</RowItem>
-    </Row>
-  );
-  const renderButton = () =>
-    to ? (
-      <Link to={to} onClick={onClick}>
-        {renderLabel()}
-      </Link>
-    ) : (
-      <GVButton variant="text" color={"danger"} noPadding onClick={onClick}>
-        {renderLabel()}
-      </GVButton>
+}
+
+const ProfileMenuItem: React.FC<IProfileMenuItemProps> = React.memo(
+  ({ Icon, to, onClick, label }) => {
+    const renderLabel = () => (
+      <Row>
+        <RowItem>
+          <Center className={styles["profile-menu__item-icon"]}>
+            <Icon />
+          </Center>
+        </RowItem>
+        <RowItem className={styles["profile-menu__item-label"]}>
+          {label}
+        </RowItem>
+      </Row>
     );
-  return <Row className={styles["profile-menu__item"]}>{renderButton()}</Row>;
-});
+    const renderButton = () =>
+      to ? (
+        <Link to={to} onClick={onClick}>
+          {renderLabel()}
+        </Link>
+      ) : (
+        <GVButton variant="text" color={"danger"} noPadding onClick={onClick}>
+          {renderLabel()}
+        </GVButton>
+      );
+    return <Row className={styles["profile-menu__item"]}>{renderButton()}</Row>;
+  }
+);
 
 const _ProfileWidget: React.FC<Props> = ({ profileHeader, className }) => {
   const dispatch = useDispatch();

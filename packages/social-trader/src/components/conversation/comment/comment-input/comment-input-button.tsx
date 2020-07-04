@@ -1,4 +1,5 @@
 import React from "react";
+import { OptionalClickable } from "utils/types";
 
 import styles from "./comment-input.module.scss";
 
@@ -10,9 +11,8 @@ const _CommentInputButton: React.FC<Props> = ({ children, onClick }) => {
   );
 };
 
-interface Props {
+interface Props extends OptionalClickable {
   children?: string | JSX.Element;
-  onClick?: VoidFunction;
 }
 
 export const CommentInputButton = React.memo(_CommentInputButton);

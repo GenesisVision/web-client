@@ -1,9 +1,7 @@
 import GVButton from "components/gv-button";
 import React from "react";
 
-interface Props extends React.HTMLAttributes<HTMLDivElement> {
-  onClick: VoidFunction;
-}
+interface Props extends React.HTMLAttributes<HTMLButtonElement> {}
 
 const _PlaceOrderSettingsButton: React.FC<Props> = ({ onClick, children }) => {
   return (

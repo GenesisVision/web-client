@@ -1,7 +1,7 @@
 import { MediaIcon } from "components/conversation/icons/media.icon";
 import { PostInputButton } from "components/conversation/post/post-input/post-input-button";
 import React, { useCallback } from "react";
-import { Sizeable } from "utils/types";
+import { Clickable, Sizeable } from "utils/types";
 
 const _AttachImagePostButton: React.FC<Props> = ({ size, onClick }) => {
   const handleClick = useCallback(() => {
@@ -15,8 +15,6 @@ const _AttachImagePostButton: React.FC<Props> = ({ size, onClick }) => {
   );
 };
 
-interface Props extends Sizeable {
-  onClick: VoidFunction;
-}
+interface Props extends Sizeable, Clickable {}
 
 export const AttachImagePostButton = React.memo(_AttachImagePostButton);

@@ -5,12 +5,12 @@ import { PopoverContentCardBlock } from "components/popover/popover-card.block";
 import { ProfilePublicShort } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
 import React, { useCallback } from "react";
+import { OptionalClickable } from "utils/types";
 
 import styles from "./users-popups.module.scss";
 
-export interface ISimpleUserListProps {
+export interface ISimpleUserListProps extends OptionalClickable {
   onChange: VoidFunction;
-  onClick?: VoidFunction;
 }
 
 interface Props extends ISimpleUserListProps {

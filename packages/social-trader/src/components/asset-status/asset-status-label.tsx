@@ -2,6 +2,7 @@ import clsx from "clsx";
 import { STATUS } from "constants/constants";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { OptionalClickable } from "utils/types";
 
 import styles from "./asset-status.module.scss";
 
@@ -25,9 +26,8 @@ const _AssetStatusLabel: React.FC<Props> = ({
   </span>
 );
 
-interface Props extends WithTranslation {
+interface Props extends WithTranslation, OptionalClickable {
   status: STATUS;
-  onClick?: (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void;
   className?: string;
 }
 

@@ -5,17 +5,16 @@ import { useToLink } from "components/link/link.helper";
 import { FollowUserButton } from "components/manager/components/follow-user-buttom";
 import { UsersListItemType } from "components/manager/components/users-popups/users-popups.types";
 import { RowItem } from "components/row-item/row-item";
-import { Row } from "components/row/row";
 import { ProfilePublicShort } from "gv-api-web";
 import React, { useCallback } from "react";
 import InfiniteScroll from "react-infinite-scroller";
 import { managerToPathCreator } from "routes/manager.routes";
+import { OptionalClickable } from "utils/types";
 
 import styles from "./users-popups.module.scss";
 
-interface IUsersListItemProps {
+interface IUsersListItemProps extends OptionalClickable {
   onChange?: (user: ProfilePublicShort) => void;
-  onClick?: VoidFunction;
   user: UsersListItemType;
 }
 
