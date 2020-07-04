@@ -17,6 +17,7 @@ const CHANGE_CARET_KEYS = [...ARROW_KEYS];
 const ROWS_HEIGHT = 22;
 
 interface GVTextAreaProps {
+  focusTrigger?: any;
   outerCaret?: number;
   onChangeCaret?: (position: number) => void;
   onKeyDown?: (e: TextareaKeyDownEventExtended) => void;
@@ -29,6 +30,7 @@ interface GVTextAreaProps {
 }
 
 const _GVTextArea: React.FC<GVTextAreaProps> = ({
+  focusTrigger,
   outerCaret,
   onChangeCaret,
   rows = 1,
@@ -77,6 +79,16 @@ const _GVTextArea: React.FC<GVTextAreaProps> = ({
       setCaretChanged();
     }
   }, [outerCaret]);
+
+  useEffect(() => {
+    if (focusTrigger !== undefined && textareaRef.current) {
+      const focusInput = () => {
+        textareaRef.current!.focus && textareaRef.current!.focus();
+      };
+      if (typeof setImmediate !== "undefined") setImmediate(focusInput);
+      else focusInput();
+    }
+  }, [focusTrigger, textareaRef.current]);
 
   const handleKeyDown = useCallback(
     (event: TextareaKeyDownEvent) => {
