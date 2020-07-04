@@ -35,15 +35,18 @@ const _ProgramOpenPositions: React.FC<Props> = ({
   } = openPositions;
   const delay = data ? data.tradesDelay : "None";
 
-  const renderCell = (name: string) => (
-    <span
-      className={clsx(
-        styles["details-trades__head-cell"],
-        styles[`program-details-trades__cell--${name}`]
-      )}
-    >
-      {t(`program-details-page:history.open-positions.${name}`)}
-    </span>
+  const renderCell = useCallback(
+    (name: string) => (
+      <span
+        className={clsx(
+          styles["details-trades__head-cell"],
+          styles[`program-details-trades__cell--${name}`]
+        )}
+      >
+        {t(`program-details-page:history.open-positions.${name}`)}
+      </span>
+    ),
+    []
   );
 
   const exportButtonToolbarRender = useCallback(
