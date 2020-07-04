@@ -22,6 +22,7 @@ $post-input-image-preview-size: 40px;
     @include adaptive-border-radius($border-radius);
   }
   &__image-preview-remove {
+    padding: 5px;
     cursor: pointer;
     box-sizing: border-box;
     display: inline-flex;
