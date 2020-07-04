@@ -1,10 +1,10 @@
 import clsx from "clsx";
 import React from "react";
-import { Clickable, Sizeable } from "utils/types";
+import { OptionalClickable, Sizeable } from "utils/types";
 
 import styles from "./row-item.module.scss";
 
-export interface IRowItemProps extends Sizeable, Clickable {
+export interface IRowItemProps extends Sizeable, OptionalClickable {
   hide?: boolean;
   wide?: boolean;
   bottomOffset?: boolean;

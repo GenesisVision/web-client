@@ -1,7 +1,7 @@
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import * as React from "react";
-import { Clickable, Sizeable } from "utils/types";
+import { OptionalClickable, Sizeable } from "utils/types";
 
 import styles from "./avatar-with-name.module.scss";
 
@@ -24,7 +24,7 @@ const _AvatarWithName: React.FC<Props> = ({
   );
 };
 
-interface Props extends Sizeable, Clickable {
+interface Props extends Sizeable, OptionalClickable {
   className?: string;
   avatar?: React.ReactNode;
   name: string | JSX.Element | React.ReactNode;
