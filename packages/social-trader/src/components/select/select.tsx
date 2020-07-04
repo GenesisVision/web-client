@@ -7,7 +7,7 @@ import FilterArrowIcon from "components/table/components/filtering/filter-arrow-
 import useAnchor from "hooks/anchor.hook";
 import * as React from "react";
 import { useCallback, useEffect, useRef } from "react";
-import { SizesType } from "utils/types";
+import { Sizeable } from "utils/types";
 
 import SelectItem from "./select-item";
 import styles from "./select.module.scss";
@@ -176,10 +176,9 @@ interface ChildOwnProps {
 
 interface SelectChild extends React.ReactElement<ChildOwnProps> {}
 
-interface Props {
+interface Props extends Sizeable {
   fixedWidth?: boolean;
   bottomLine?: boolean;
-  size?: SizesType;
   fixedVertical?: boolean;
   value: string;
   name: string;

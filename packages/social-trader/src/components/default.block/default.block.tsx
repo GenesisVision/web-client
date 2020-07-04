@@ -1,15 +1,15 @@
 import clsx from "clsx";
 import * as React from "react";
-import { SizesType } from "utils/types";
+import { Sizeable } from "utils/types";
 
 import styles from "./default.block.module.scss";
 
 export interface IDefaultBlockProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+  extends React.HTMLAttributes<HTMLDivElement>,
+    Sizeable {
   light?: boolean;
   roundedBorder?: boolean;
   hoverable?: boolean;
-  size?: SizesType;
   className?: string;
   wide?: boolean;
   solid?: boolean;

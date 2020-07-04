@@ -1,11 +1,10 @@
 import clsx from "clsx";
 import React from "react";
-import { SizesType } from "utils/types";
+import { Sizeable } from "utils/types";
 
 import styles from "./row-item.module.scss";
 
-export interface IRowItemProps {
-  size?: SizesType;
+export interface IRowItemProps extends Sizeable {
   hide?: boolean;
   onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   wide?: boolean;

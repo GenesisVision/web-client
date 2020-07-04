@@ -4,7 +4,7 @@ import { IDemoDepositContainerProps } from "modules/demo-deposit/demo-deposit.co
 import { DemoDepositDialog } from "modules/demo-deposit/demo-deposit.dialog";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { SizesType } from "utils/types";
+import { Sizeable } from "utils/types";
 
 const _DemoDepositButton: React.FC<Props> = ({
   currentDeposit,
@@ -66,8 +66,7 @@ export const FullButton: React.FC<IFullButtonProps & {
   }
 );
 
-interface IFullButtonProps {
-  size?: SizesType;
+interface IFullButtonProps extends Sizeable {
   withIcon?: boolean;
   color?: "primary" | "secondary" | "primary-dark" | "danger";
   variant?: "text" | "outlined" | "contained";

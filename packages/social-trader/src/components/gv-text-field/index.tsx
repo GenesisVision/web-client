@@ -3,7 +3,7 @@ import { GvInput, IPropsGvInput } from "components/gv-input/gv-input";
 import useIsOpen from "hooks/is-open.hook";
 import React, { ReactNode, useCallback, useEffect, useRef } from "react";
 import { NumberFormatValues } from "react-number-format";
-import { SizesType } from "utils/types";
+import { Sizeable } from "utils/types";
 
 import GVTextArea from "./gv-text-area";
 import styles from "./style.module.scss";
@@ -74,9 +74,8 @@ const _GVTextField: React.FC<GVTextFieldProps> = props => {
   );
 };
 
-export interface GVTextFieldProps extends IPropsGvInput {
+export interface GVTextFieldProps extends IPropsGvInput, Sizeable {
   maxlength?: number;
-  size?: SizesType;
   fixedVertical?: boolean;
   children?: ReactNode;
   name: string;

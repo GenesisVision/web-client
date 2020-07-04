@@ -8,7 +8,7 @@ import ProgramDeposit from "modules/program-deposit/program-deposit";
 import React from "react";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
-import { CurrencyEnum, SizesType } from "utils/types";
+import { CurrencyEnum, Sizeable } from "utils/types";
 
 const _DepositButton: React.FC<Props> = ({
   disabled,
@@ -90,10 +90,9 @@ const _DepositButton: React.FC<Props> = ({
   );
 };
 
-interface Props {
+interface Props extends Sizeable {
   disabled?: boolean;
   title: string;
-  size?: SizesType;
   onApply?: VoidFunction;
   ownAsset?: boolean;
   entryFee?: number;

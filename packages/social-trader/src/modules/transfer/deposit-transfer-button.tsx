@@ -8,7 +8,7 @@ import TransferButton from "modules/transfer/transfer-button";
 import { TRANSFER_CONTAINER } from "modules/transfer/transfer.types";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { SizesType } from "utils/types";
+import { Sizeable } from "utils/types";
 
 const _DepositTransferButton: React.FC<Props> = props => {
   const {
@@ -36,11 +36,10 @@ const _DepositTransferButton: React.FC<Props> = props => {
   );
 };
 
-interface Props {
+interface Props extends Sizeable {
   fixedSelects?: boolean;
   accountId?: string;
   outerCurrentItemContainerItems?: WalletItemType[];
-  size?: SizesType;
   currentItem: WalletItemType;
   onApply: VoidFunction;
   accountType?: PrivateTradingAccountType | AssetTypeExt;

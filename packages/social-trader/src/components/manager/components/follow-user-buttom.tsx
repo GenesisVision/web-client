@@ -3,7 +3,7 @@ import { toggleFollowUser } from "components/manager/services/manager.service";
 import useApiRequest from "hooks/api-request.hook";
 import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { SizesType } from "utils/types";
+import { Sizeable } from "utils/types";
 
 const _FollowUserButton: React.FC<Props> = ({
   onChange,
@@ -39,9 +39,8 @@ const _FollowUserButton: React.FC<Props> = ({
   );
 };
 
-interface Props {
+interface Props extends Sizeable {
   onChange?: VoidFunction;
-  size?: SizesType;
   disabled?: boolean;
   id: string;
   value: boolean;

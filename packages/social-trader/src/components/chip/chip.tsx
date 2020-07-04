@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import * as React from "react";
-import { SizesType } from "utils/types";
+import { Sizeable } from "utils/types";
 
 import styles from "./chip.module.scss";
 
@@ -38,9 +38,8 @@ const Chip: React.FC<Props> = React.memo(
   )
 );
 
-interface Props {
+interface Props extends Sizeable {
   stretch?: boolean;
-  size?: SizesType;
   disabled?: boolean;
   className?: string;
   rounded?: boolean;

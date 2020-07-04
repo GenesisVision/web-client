@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import React from "react";
-import { SizesType } from "utils/types";
+import { Sizeable } from "utils/types";
 
 import styles from "./text.module.scss";
 
@@ -13,10 +13,9 @@ export type TextColor =
   | "yellow";
 export type TextWeight = "thin" | "normal" | "bold" | "bolder";
 
-interface Props {
+interface Props extends Sizeable {
   sizeValue?: string;
   weight?: TextWeight;
-  size?: SizesType;
   color?: TextColor;
   muted?: boolean;
   wrap?: boolean;

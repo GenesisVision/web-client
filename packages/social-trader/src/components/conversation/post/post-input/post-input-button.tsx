@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import React from "react";
-import { SizesType } from "utils/types";
+import { Sizeable } from "utils/types";
 
 import styles from "./post-input.module.scss";
 
@@ -22,8 +22,7 @@ const _PostInputButton: React.FC<Props> = ({
   );
 };
 
-interface Props {
-  size?: SizesType;
+interface Props extends Sizeable {
   children?: string | JSX.Element;
   onClick?: VoidFunction;
 }

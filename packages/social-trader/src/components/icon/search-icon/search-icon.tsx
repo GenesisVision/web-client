@@ -1,13 +1,14 @@
 import clsx from "clsx";
 import * as React from "react";
-import { SizesType } from "utils/types";
+import { Sizeable } from "utils/types";
 
 import styles from "./search-icon.module.scss";
 
-const SearchIcon: React.FC<{ size?: SizesType; primary: boolean }> = ({
-  size,
-  primary
-}) => {
+interface Props extends Sizeable {
+  primary: boolean;
+}
+
+const SearchIcon: React.FC<Props> = ({ size, primary }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

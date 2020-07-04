@@ -5,7 +5,7 @@ import EditFollowModuleContainer from "modules/follow-module/edit-follow-module-
 import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { CurrencyEnum, SizesType } from "utils/types";
+import { CurrencyEnum, Sizeable } from "utils/types";
 
 const _EditFollowButton: React.FC<Props> = ({
   size = "xlarge",
@@ -38,8 +38,7 @@ const _EditFollowButton: React.FC<Props> = ({
   );
 };
 
-interface Props {
-  size?: SizesType;
+interface Props extends Sizeable {
   signalSubscription: SignalSubscription;
   onApply: VoidFunction;
   tradingAccountId: string;

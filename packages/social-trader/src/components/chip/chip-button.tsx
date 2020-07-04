@@ -2,7 +2,7 @@ import clsx from "clsx";
 import Chip, { CHIP_TYPE } from "components/chip/chip";
 import * as React from "react";
 import { ReactNode } from "react";
-import { SizesType } from "utils/types";
+import { Sizeable } from "utils/types";
 
 import styles from "./chip.module.scss";
 
@@ -40,10 +40,9 @@ const ChipButton: React.FC<Props> = React.memo(
   )
 );
 
-interface Props {
+interface Props extends Sizeable {
   stretch?: boolean;
   reverseOrder?: boolean;
-  size?: SizesType;
   label?: string | JSX.Element;
   chipLabel?: string | number | ReactNode;
   disabled?: boolean;

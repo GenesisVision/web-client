@@ -6,7 +6,7 @@ import { useTranslation } from "i18n";
 import { FundWithdrawDialog } from "modules/fund-withdraw/fund-withdraw-dialog";
 import ProgramWithdrawDialog from "modules/program-withdraw/program-withdraw-dialog";
 import React from "react";
-import { CurrencyEnum, SizesType } from "utils/types";
+import { CurrencyEnum, Sizeable, SizesType } from "utils/types";
 
 const _WithdrawButton: React.FC<Props> = ({
   size,
@@ -56,8 +56,7 @@ const _WithdrawButton: React.FC<Props> = ({
   );
 };
 
-interface Props {
-  size?: SizesType;
+interface Props extends Sizeable {
   disabled?: boolean;
   onApply?: VoidFunction;
   type: ASSET;

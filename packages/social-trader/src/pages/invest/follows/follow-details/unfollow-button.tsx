@@ -6,7 +6,7 @@ import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import { SizesType } from "utils/types";
+import { Sizeable } from "utils/types";
 
 const _UnFollowButton: React.FC<Props> = ({
   size = "xlarge",
@@ -44,8 +44,7 @@ const _UnFollowButton: React.FC<Props> = ({
   );
 };
 
-interface Props {
-  size?: SizesType;
+interface Props extends Sizeable {
   onApply: VoidFunction;
   tradingAccountId: string;
   isExternal: boolean;

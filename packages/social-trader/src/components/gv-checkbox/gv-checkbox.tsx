@@ -2,7 +2,7 @@ import clsx from "clsx";
 import { Text } from "components/text/text";
 import * as React from "react";
 import { useCallback, useRef } from "react";
-import { SizesType } from "utils/types";
+import { Sizeable } from "utils/types";
 
 import styles from "./gv-checkbox.module.scss";
 
@@ -82,8 +82,7 @@ const _GVCheckbox: React.FC<IGVCheckboxProps> = ({
   );
 };
 
-interface IGVCheckboxProps {
-  size?: SizesType;
+interface IGVCheckboxProps extends Sizeable {
   setFieldValue?: (name: string, value?: any, validate?: boolean) => void;
   name: string;
   className?: string;

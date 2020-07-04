@@ -5,17 +5,18 @@ import SearchIcon from "components/icon/search-icon/search-icon";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import React, { useCallback } from "react";
-import { SizesType } from "utils/types";
+import { Sizeable } from "utils/types";
 
-export const SearchInputField: React.FC<{
+interface ISearchInputFieldProps extends Sizeable {
   autoFocus?: boolean;
-  size?: SizesType;
   canClose?: boolean;
   onBlur?: VoidFunction;
   value?: string;
   onCancel?: VoidFunction;
   onChange: (event: React.ChangeEvent<any>) => void;
-}> = ({
+}
+
+export const SearchInputField: React.FC<ISearchInputFieldProps> = ({
   autoFocus = true,
   size,
   canClose = true,
@@ -75,9 +76,8 @@ const GlobalSearchInput: React.FC<Props> = React.memo(
   }
 );
 
-interface Props {
+interface Props extends Sizeable {
   autoFocus?: boolean;
-  size?: SizesType;
   canClose?: boolean;
   onChange(value: string): void;
   query: string;

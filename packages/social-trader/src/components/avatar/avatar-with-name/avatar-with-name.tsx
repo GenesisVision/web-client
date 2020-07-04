@@ -1,7 +1,7 @@
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import * as React from "react";
-import { SizesType } from "utils/types";
+import { Sizeable } from "utils/types";
 
 import styles from "./avatar-with-name.module.scss";
 
@@ -24,10 +24,9 @@ const _AvatarWithName: React.FC<Props> = ({
   );
 };
 
-interface Props {
+interface Props extends Sizeable {
   className?: string;
   onClick?: VoidFunction;
-  size?: SizesType;
   avatar?: React.ReactNode;
   name: string | JSX.Element | React.ReactNode;
 }

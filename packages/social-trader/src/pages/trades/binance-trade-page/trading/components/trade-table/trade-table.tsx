@@ -3,15 +3,14 @@ import { SortingColumn } from "components/table/components/filtering/filter.type
 import { Text } from "components/text/text";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { SizesType } from "utils/types";
+import { Sizeable } from "utils/types";
 
 import styles from "./trade-table.module.scss";
 
-interface Props {
+interface Props extends Sizeable {
   className?: string;
   loaderData?: any[];
   isPending?: boolean;
-  size?: SizesType;
   items?: any[];
   columns: SortingColumn[];
   renderHeaderCell: (column: SortingColumn) => JSX.Element;

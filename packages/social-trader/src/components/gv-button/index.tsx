@@ -1,16 +1,15 @@
 import clsx from "clsx";
 import React from "react";
-import { SizesType } from "utils/types";
+import { Sizeable } from "utils/types";
 
 import styles from "./style.module.scss";
 
-export interface GVButtonProps {
+export interface GVButtonProps extends Sizeable {
   isSuccessful?: boolean;
   isPending?: boolean;
   testId?: string;
   bold?: boolean;
   wide?: boolean;
-  size?: SizesType;
   id?: string;
   title?: string;
   variant?: "text" | "outlined" | "contained";

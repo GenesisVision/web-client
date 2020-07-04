@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { Center } from "components/center/center";
 import React from "react";
-import { SizesType } from "utils/types";
+import { Sizeable } from "utils/types";
 
 import styles from "./row.module.scss";
 
@@ -36,8 +36,7 @@ export const Row: React.FC<Props> = ({
   );
 };
 
-interface Props extends React.HTMLAttributes<HTMLDivElement> {
-  size?: SizesType;
+interface Props extends React.HTMLAttributes<HTMLDivElement>, Sizeable {
   onlyOffset?: boolean;
   wide?: boolean;
   hide?: boolean;

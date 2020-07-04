@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import * as React from "react";
 import { useCallback } from "react";
-import { PlatformAssetFull, SizesType } from "utils/types";
+import { PlatformAssetFull, Sizeable } from "utils/types";
 
 import styles from "./regulator.module.scss";
 
@@ -74,8 +74,7 @@ const Regulator: React.FC<Props> = ({
   );
 };
 
-interface Props {
-  size?: SizesType;
+interface Props extends Sizeable {
   remainder: number;
   minValue?: number;
   value: number;

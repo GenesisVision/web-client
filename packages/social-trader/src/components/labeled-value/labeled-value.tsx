@@ -2,17 +2,16 @@ import clsx from "clsx";
 import { Row } from "components/row/row";
 import { Text, TextWeight } from "components/text/text";
 import React from "react";
-import { SizesType } from "utils/types";
+import { Sizeable, SizesType } from "utils/types";
 
 import styles from "./labeled-value.module.scss";
 
 export type LabeledValueDirection = "column" | "row";
 
-export interface ILabeledValueProps {
+export interface ILabeledValueProps extends Sizeable {
   weight?: TextWeight;
   direction?: LabeledValueDirection;
   label: string | React.ReactNode | JSX.Element;
-  size?: SizesType;
 }
 
 const getChildOffsetValue = (size: SizesType): SizesType => {
