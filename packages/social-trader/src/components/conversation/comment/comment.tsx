@@ -3,6 +3,7 @@ import { ConversationRemoveButton } from "components/conversation/conversation-r
 import { ConversationComment } from "components/conversation/conversation.types";
 import { LikeContainer } from "components/conversation/like/like-container";
 import { Message } from "components/conversation/message/message";
+import { Reply } from "components/conversation/reply/reply";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import React, { useEffect, useRef } from "react";
@@ -63,12 +64,17 @@ const _Comment: React.FC<Props> = ({
         </RowItem>
       </Row>
       <Row className={styles["comment__buttons"]}>
-        <LikeContainer
-          id={id}
-          canLike={!!actions}
-          count={likesCount}
-          liked={actions?.isLiked}
-        />
+        <RowItem wide>
+          <Reply author={author} />
+        </RowItem>
+        <RowItem>
+          <LikeContainer
+            id={id}
+            canLike={!!actions}
+            count={likesCount}
+            liked={actions?.isLiked}
+          />
+        </RowItem>
       </Row>
     </div>
   );
