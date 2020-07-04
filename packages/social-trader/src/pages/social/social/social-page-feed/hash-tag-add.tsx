@@ -11,7 +11,7 @@ import { Row } from "components/row/row";
 import { FilterTitle } from "components/table/components/filtering/filter-title";
 import TileFilterButton from "components/table/components/filtering/tile-filter-button";
 import useAnchor from "hooks/anchor.hook";
-import { SocialSearchContext } from "pages/social/social/social-page.context";
+import { SocialPageContext } from "pages/social/social/social-page.context";
 import React, { useCallback, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -23,7 +23,7 @@ const HashTagAddPopover: React.FC<{ clearAnchor: VoidFunction }> = ({
   clearAnchor
 }) => {
   const [t] = useTranslation();
-  const { searchValue, setSearchValue } = useContext(SocialSearchContext);
+  const { searchValue, setSearchValue } = useContext(SocialPageContext);
 
   const form = useForm<{ [VALUE_FIELD]: string }>({
     defaultValues: { [VALUE_FIELD]: "" },

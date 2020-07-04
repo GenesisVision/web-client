@@ -5,7 +5,7 @@ import Link, { ToType } from "components/link/link";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import {
-  SocialSearchContext,
+  SocialPageContext,
   SocialSearchInitialState
 } from "pages/social/social/social-page.context";
 import React, { useCallback, useContext } from "react";
@@ -33,7 +33,7 @@ const _SocialPageTradersItem: React.FC<Props> = ({
   title
 }) => {
   const [t] = useTranslation();
-  const { setSearchValue } = useContext(SocialSearchContext);
+  const { setSearchValue } = useContext(SocialPageContext);
 
   const handleClick = useCallback(() => {
     setSearchValue({

@@ -3,13 +3,15 @@ import { IPostListContainerInitData } from "components/conversation/post-list/po
 import GVTabs from "components/gv-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
 import { SearchIcon } from "components/icon/search-icon";
+import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import useIsOpen from "hooks/is-open.hook";
 import useTab from "hooks/tab.hook";
 import { FEED_TYPE, FeedContainer } from "pages/feed/feed.container";
+import { ShowEventsContainer } from "pages/feed/show-events-container/show-events-container";
 import { HashTagsBlock } from "pages/social/social/social-page-feed/hash-tags-block";
 import {
-  SocialSearchContext,
+  SocialPageContext,
   SocialSearchInitialState
 } from "pages/social/social/social-page.context";
 import styles from "pages/social/social/social-page.module.scss";
@@ -31,7 +33,7 @@ interface Props extends IPostListContainerInitData {}
 
 const _SocialPageFeedBlock: React.FC<Props> = ({ initData }) => {
   const [t] = useTranslation();
-  const { searchValue, setSearchValue } = useContext(SocialSearchContext);
+  const { searchValue, setSearchValue } = useContext(SocialPageContext);
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   const [openSearch, setSearchIsOpen, setSearchIsClose] = useIsOpen();
   const { tab, setTab } = useTab<TABS>(TABS.LIVE);
@@ -88,7 +90,12 @@ const _SocialPageFeedBlock: React.FC<Props> = ({ initData }) => {
         </div>
       </Row>
       <Row>
-        <HashTagsBlock />
+        <RowItem wide>
+          <HashTagsBlock />
+        </RowItem>
+        <RowItem>
+          <ShowEventsContainer />
+        </RowItem>
       </Row>
       <Row onlyOffset wide>
         {isSearch && <FeedContainer searchValue={searchValue} />}

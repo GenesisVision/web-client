@@ -4,7 +4,7 @@ import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import styles from "pages/social/social/social-page-gainers/social-page-gainers.module.scss";
 import {
-  SocialSearchContext,
+  SocialPageContext,
   SocialSearchInitialState
 } from "pages/social/social/social-page.context";
 import React, { useCallback, useContext } from "react";
@@ -17,7 +17,7 @@ interface Props {
 }
 
 const _SocialPageGainersItem: React.FC<Props> = ({ title, price, change }) => {
-  const { setSearchValue } = useContext(SocialSearchContext);
+  const { setSearchValue } = useContext(SocialPageContext);
 
   const handleClick = useCallback(() => {
     const hashTag = `#${title.toLowerCase()}`;

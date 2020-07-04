@@ -3,20 +3,26 @@ import React, { createContext, useMemo, useState } from "react";
 
 type SocialSearchState = SearchInFeedValues;
 
+interface ISocialPageContextState {
+  searchValue: SocialSearchState;
+  setSearchValue: (value: SocialSearchState) => void;
+}
+
 export const SocialSearchInitialState: SocialSearchState = {
   tagContent: [],
   hashTags: []
 };
 
-export const SocialSearchContext = createContext<{
-  searchValue: SocialSearchState;
-  setSearchValue: (value: SocialSearchState) => void;
-}>({
+const SocialPageContextInitialState: ISocialPageContextState = {
   searchValue: SocialSearchInitialState,
   setSearchValue: () => {}
-});
+};
 
-export const SocialSearchContextProvider: React.FC = ({ children }) => {
+export const SocialPageContext = createContext<ISocialPageContextState>(
+  SocialPageContextInitialState
+);
+
+export const SocialPageContextProvider: React.FC = ({ children }) => {
   const [searchValue, setSearchValue] = useState<SocialSearchState>(
     SocialSearchInitialState
   );
@@ -24,8 +30,8 @@ export const SocialSearchContextProvider: React.FC = ({ children }) => {
     return { searchValue, setSearchValue };
   }, [searchValue, setSearchValue]);
   return (
-    <SocialSearchContext.Provider value={contextValue}>
+    <SocialPageContext.Provider value={contextValue}>
       {children}
-    </SocialSearchContext.Provider>
+    </SocialPageContext.Provider>
   );
 };
