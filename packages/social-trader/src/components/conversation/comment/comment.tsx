@@ -64,9 +64,7 @@ const _Comment: React.FC<Props> = ({
         </RowItem>
       </Row>
       <Row className={styles["comment__buttons"]}>
-        <RowItem wide>
-          <Reply author={author} />
-        </RowItem>
+        <RowItem wide>{actions && <Reply author={author} />}</RowItem>
         <RowItem>
           <LikeContainer
             id={id}
