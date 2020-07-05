@@ -62,6 +62,7 @@ const _Message: React.FC<IMessageProps> = ({
         </MessageItem>
         <MessageItem bottomOffset onlyOffset>
           <MessageText
+            key={text}
             text={text}
             tags={tags}
             reduceLargeText={reduceLargeText}
