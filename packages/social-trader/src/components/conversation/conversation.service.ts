@@ -158,7 +158,7 @@ export const getPostForEdit = ({
           image: id,
           id,
           src
-        };
+        } as IImageValue;
       });
       return { text: post.textOriginal, images };
     });
