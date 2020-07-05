@@ -18,6 +18,12 @@ export const sendLikeEvent = () =>
     eventAction: "Like"
   });
 
+export const sendEditEvent = () =>
+  sendEventToGA({
+    eventCategory: "Social",
+    eventAction: "Edit"
+  });
+
 export const sendShareEvent = () =>
   sendEventToGA({
     eventCategory: "Social",
