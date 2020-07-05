@@ -154,11 +154,11 @@ export const getPostForEdit = ({
     .then((post: EditablePost) => {
       const images = post.images.map(({ id, resizes }) => {
         const src = getImageUrlByQuality(resizes, "Low");
-        return {
+        return ({
           image: id,
           id,
           src
-        } as IImageValue;
+        } as unknown) as IImageValue;
       });
       return { text: post.textOriginal, images };
     });
