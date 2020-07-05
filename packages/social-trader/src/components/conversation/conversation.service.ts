@@ -1,11 +1,13 @@
+import { getImageUrlByQuality } from "components/conversation/conversation-image/conversation-image.helpers";
 import { IPostMessageValues } from "components/conversation/conversation-input/conversation-input.helpers";
 import {
   AssetSearchResult,
   ConversationFeed,
+  IEditPostData,
   SEARCH_ASSET_TYPE
 } from "components/conversation/conversation.types";
 import { IImageValue } from "components/form/input-image/input-image";
-import { EditablePost, UserFeedMode } from "gv-api-web";
+import { EditablePost, EditPost, UserFeedMode } from "gv-api-web";
 import { api } from "services/api-client/swagger-custom-client";
 import Token from "services/api-client/token";
 import filesService from "services/file-service";
@@ -137,6 +139,40 @@ export const getPost = ({
   token?: Token;
 }): Promise<EditablePost> => {
   return api.social(token).getPost(id);
+};
+
+export const getPostForEdit = ({
+  id,
+  token
+}: {
+  id: string;
+  token?: Token;
+}): Promise<IEditPostData> => {
+  return api
+    .social(token)
+    .getPost(id)
+    .then(post => {
+      const images = post.images.map(({ resizes }) => {
+        const src = getImageUrlByQuality(resizes, "Low");
+        return {
+          id: src,
+          src
+        };
+      });
+      return { text: post.textOriginal, images };
+    });
+};
+
+export const editPost = (values: EditPost & { images?: IImageValue[] }) => {
+  const oldImages = values.images.filter(({ image }) => !image);
+  const newImages = (values.images.filter(
+    ({ image }) => !!image
+  ) as unknown) as IImageValue[];
+  return uploadImages(newImages).then(images => {
+    return api.social().editPost({
+      body: { ...values, images: [...oldImages, ...images] }
+    });
+  });
 };
 
 type RequestFilters = {
