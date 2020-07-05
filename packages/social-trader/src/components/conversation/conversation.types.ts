@@ -1,3 +1,4 @@
+import { IImageValue } from "components/form/input-image/input-image";
 import { TableDataType } from "constants/constants";
 import { Post, PostActions, PostImage, ProfilePublic } from "gv-api-web";
 
@@ -6,6 +7,11 @@ export enum SEARCH_ASSET_TYPE {
   fund = "fund",
   follow = "follow",
   user = "user"
+}
+
+export interface IEditPostData {
+  text: string;
+  images: Array<IImageValue>;
 }
 
 export type AssetSearchResult = {
