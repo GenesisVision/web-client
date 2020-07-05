@@ -133,6 +133,7 @@ const mockImages = [
 ];
 
 export const getConversationImageLoaderData = (): IConversationImage => ({
+  id: "",
   resizes: []
 });
 
