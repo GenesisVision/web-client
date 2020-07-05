@@ -151,11 +151,12 @@ export const getPostForEdit = ({
   return api
     .social(token)
     .getPost(id)
-    .then(post => {
-      const images = post.images.map(({ resizes }) => {
+    .then((post: EditablePost) => {
+      const images = post.images.map(({ id, resizes }) => {
         const src = getImageUrlByQuality(resizes, "Low");
         return {
-          id: src,
+          image: id,
+          id,
           src
         };
       });
@@ -164,9 +165,9 @@ export const getPostForEdit = ({
 };
 
 export const editPost = (values: EditPost & { images?: IImageValue[] }) => {
-  const oldImages = values.images.filter(({ image }) => !image);
+  const oldImages = values.images.filter(({ image }) => !image?.cropped);
   const newImages = (values.images.filter(
-    ({ image }) => !!image
+    ({ image }) => !!image?.cropped
   ) as unknown) as IImageValue[];
   return uploadImages(newImages).then(images => {
     return api.social().editPost({

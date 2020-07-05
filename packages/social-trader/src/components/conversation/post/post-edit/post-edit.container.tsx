@@ -43,10 +43,8 @@ const _PostEditContainer: React.FC<IPostEditContainerProps> = ({
   const handleSubmit = useCallback(
     values => {
       return submitEditPost({
-        userId,
-        postId: id,
-        id,
-        ...values
+        ...values,
+        id
       });
     },
     [id, userId]
