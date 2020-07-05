@@ -165,9 +165,9 @@ export const getPostForEdit = ({
 };
 
 export const editPost = (values: EditPost & { images?: IImageValue[] }) => {
-  const oldImages = values.images.filter(
-    ({ image }: IImageValue) => !image?.cropped
-  );
+  const oldImages = values.images
+    .filter(({ image }: IImageValue) => !image?.cropped)
+    .map(({ image }: IImageValue) => ({ image, position: 0 }));
   const newImages = (values.images.filter(
     ({ image }: IImageValue) => !!image?.cropped
   ) as unknown) as IImageValue[];
