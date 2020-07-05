@@ -11,7 +11,7 @@ export enum SEARCH_ASSET_TYPE {
 
 export interface IEditPostData {
   text: string;
-  images: Array<IImageValue>;
+  images: Array<{ image: string; id: string; src: string }>;
 }
 
 export type AssetSearchResult = {
