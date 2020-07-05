@@ -7,6 +7,7 @@ import { ConversationPost } from "components/conversation/conversation.types";
 import { Message } from "components/conversation/message/message";
 import { CommentsList } from "components/conversation/post/comments-list/comments-list";
 import { PostButtons } from "components/conversation/post/post-buttons/post-buttons";
+import { PostEditButton } from "components/conversation/post/post-edit/post-edit.button";
 import { DefaultBlock } from "components/default.block/default.block";
 import GVButton from "components/gv-button";
 import { RowItem } from "components/row-item/row-item";
@@ -59,6 +60,11 @@ const PostActions: React.FC<{
   return (
     <RowItem>
       <Center>
+        {actions?.canEdit && (
+          <RowItem>
+            <PostEditButton id={id} onApply={updateData} />
+          </RowItem>
+        )}
         {actions?.canPin && (
           <RowItem>
             <ConversationPinButton
