@@ -1,5 +1,4 @@
 import { SearchInFeedValues } from "components/conversation/conversation.service";
-import { getShowEventsState } from "pages/feed/show-events-container/show-events-cookie-service";
 import React, { createContext, useMemo, useState } from "react";
 
 type SocialSearchState = SearchInFeedValues;
@@ -16,6 +15,10 @@ export const SocialSearchInitialState: SocialSearchState = {
   hashTags: []
 };
 
+interface Props {
+  cookieShowEvents?: boolean;
+}
+
 const SocialPageContextInitialState: ISocialPageContextState = {
   searchValue: SocialSearchInitialState,
   setSearchValue: () => {},
@@ -26,8 +29,10 @@ export const SocialPageContext = createContext<ISocialPageContextState>(
   SocialPageContextInitialState
 );
 
-export const SocialPageContextProvider: React.FC = ({ children }) => {
-  const cookieShowEvents = getShowEventsState();
+export const SocialPageContextProvider: React.FC<Props> = ({
+  cookieShowEvents = true,
+  children
+}) => {
   const [showEvents, setShowEvents] = useState<boolean>(cookieShowEvents);
   const [searchValue, setSearchValue] = useState<SocialSearchState>(
     SocialSearchInitialState

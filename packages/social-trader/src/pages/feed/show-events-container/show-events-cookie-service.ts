@@ -1,4 +1,6 @@
+import { NextPageContext } from "next";
 import { cookieServiceCreator } from "utils/cookie-service.creator";
+import { NextPageWithReduxContext } from "utils/types";
 
 type StateType = { value: boolean };
 
@@ -12,8 +14,10 @@ export const { get, set, clear } = cookieServiceCreator<StateType>({
   initialState: DEFAULT_SHOW_EVENTS_STATE
 });
 
-export const getShowEventsState = () => {
-  return get().value;
+export const getShowEventsState = (
+  ctx?: NextPageWithReduxContext | NextPageContext
+) => {
+  return get(ctx).value;
 };
 export const setShowEventsState = (value: boolean) => {
   set({ value });
