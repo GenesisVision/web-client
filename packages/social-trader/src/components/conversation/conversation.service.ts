@@ -165,9 +165,11 @@ export const getPostForEdit = ({
 };
 
 export const editPost = (values: EditPost & { images?: IImageValue[] }) => {
-  const oldImages = values.images.filter(({ image }) => !image?.cropped);
+  const oldImages = values.images.filter(
+    ({ image }: IImageValue) => !image?.cropped
+  );
   const newImages = (values.images.filter(
-    ({ image }) => !!image?.cropped
+    ({ image }: IImageValue) => !!image?.cropped
   ) as unknown) as IImageValue[];
   return uploadImages(newImages).then(images => {
     return api.social().editPost({
