@@ -1,9 +1,8 @@
 import clsx from "clsx";
-import { ConversationRemoveButton } from "components/conversation/conversation-remove-button/conversation-remove-button";
 import { ConversationComment } from "components/conversation/conversation.types";
 import { LikeContainer } from "components/conversation/like/like-container";
 import { Message } from "components/conversation/message/message";
-import { PostEditButton } from "components/conversation/post/post-edit/post-edit.button";
+import { MessageActions } from "components/conversation/message/message-actions/message-actions";
 import { Reply } from "components/conversation/reply/reply";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
@@ -46,18 +45,12 @@ const _Comment: React.FC<Props> = ({
           <Message
             row={false}
             settingsBlock={
-              <Row>
-                {actions?.canEdit && (
-                  <RowItem>
-                    <PostEditButton id={id} onApply={updateData} />
-                  </RowItem>
-                )}
-                {actions?.canDelete && (
-                  <RowItem>
-                    <ConversationRemoveButton id={id} onSuccess={updateData} />
-                  </RowItem>
-                )}
-              </Row>
+              <MessageActions
+                actions={actions}
+                id={id}
+                onApply={updateData}
+                setDeleted={updateData}
+              />
             }
             url={url}
             excludedTagsUnderText={["User"]}

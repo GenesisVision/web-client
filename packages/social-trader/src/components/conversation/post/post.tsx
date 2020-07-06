@@ -1,19 +1,16 @@
 import { Center } from "components/center/center";
 import { CommentInputContainer } from "components/conversation/comment/comment-input/comment-input-container";
-import { ConversationPinButton } from "components/conversation/conversation-pin-button/conversation-pin-button";
-import { ConversationRemoveButton } from "components/conversation/conversation-remove-button/conversation-remove-button";
 import { restorePost } from "components/conversation/conversation.service";
 import { ConversationPost } from "components/conversation/conversation.types";
 import { Message } from "components/conversation/message/message";
+import { MessageActions } from "components/conversation/message/message-actions/message-actions";
 import { CommentsList } from "components/conversation/post/comments-list/comments-list";
 import { PostButtons } from "components/conversation/post/post-buttons/post-buttons";
-import { PostEditButton } from "components/conversation/post/post-edit/post-edit.button";
 import { DefaultBlock } from "components/default.block/default.block";
 import GVButton from "components/gv-button";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
-import { PostActions as PostActionsType } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
 import useIsOpen from "hooks/is-open.hook";
 import React, { useCallback } from "react";
@@ -49,41 +46,6 @@ const DeletedPost: React.FC<{
   );
 };
 
-const PostActions: React.FC<{
-  actions: PostActionsType;
-  id: string;
-  isPinned: boolean;
-  updateData: VoidFunction;
-  setDeleted: VoidFunction;
-}> = ({ actions, id, isPinned, updateData, setDeleted }) => {
-  if (!actions?.canDelete && !actions?.canPin) return null;
-  return (
-    <RowItem>
-      <Center>
-        {actions?.canEdit && (
-          <RowItem>
-            <PostEditButton id={id} onApply={updateData} />
-          </RowItem>
-        )}
-        {actions?.canPin && (
-          <RowItem>
-            <ConversationPinButton
-              id={id}
-              value={isPinned}
-              onSuccess={updateData}
-            />
-          </RowItem>
-        )}
-        {actions?.canDelete && (
-          <RowItem>
-            <ConversationRemoveButton id={id} onSuccess={setDeleted} />
-          </RowItem>
-        )}
-      </Center>
-    </RowItem>
-  );
-};
-
 const _Post: React.FC<Props> = ({
   visibleCommentsCount,
   reduceLargeText,
@@ -113,11 +75,11 @@ const _Post: React.FC<Props> = ({
           <Message
             reduceLargeText={reduceLargeText}
             settingsBlock={
-              <PostActions
+              <MessageActions
                 actions={actions}
                 id={id}
                 isPinned={isPinned}
-                updateData={updateData}
+                onApply={updateData}
                 setDeleted={setDeleted}
               />
             }
