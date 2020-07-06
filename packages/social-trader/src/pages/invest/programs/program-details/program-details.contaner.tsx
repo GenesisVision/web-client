@@ -215,6 +215,12 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
     [isOwnAsset, programPersonalDetails, programDetails]
   );
 
+  const hasProgramDetails = !!programDetails;
+  const getHistoryCounts = useMemo(
+    () => getProgramHistoryCounts(hasProgramDetails),
+    [hasProgramDetails]
+  );
+
   return (
     <Page
       type={"article"}
@@ -265,7 +271,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
       <ProgramDetailsHistorySection
         assetType={(route as unknown) as TRADE_ASSET_TYPE}
         canCloseOpenPositions={ownerActions?.canCloseOpenPositions}
-        getHistoryCounts={getProgramHistoryCounts(!!programDetails)}
+        getHistoryCounts={getHistoryCounts}
         tablesData={tablesData}
         showCommissionRebateSometime={
           brokerDetails.showCommissionRebateSometime
