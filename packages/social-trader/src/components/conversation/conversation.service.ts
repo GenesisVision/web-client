@@ -7,7 +7,7 @@ import {
   SEARCH_ASSET_TYPE
 } from "components/conversation/conversation.types";
 import { IImageValue } from "components/form/input-image/input-image";
-import { EditablePost, EditPost, UserFeedMode } from "gv-api-web";
+import { EditablePost, EditPost, Post, UserFeedMode } from "gv-api-web";
 import { api } from "services/api-client/swagger-custom-client";
 import Token from "services/api-client/token";
 import filesService from "services/file-service";
@@ -137,7 +137,7 @@ export const getPost = ({
 }: {
   id: string;
   token?: Token;
-}): Promise<EditablePost> => {
+}): Promise<Post> => {
   return api.social(token).getPost(id);
 };
 
