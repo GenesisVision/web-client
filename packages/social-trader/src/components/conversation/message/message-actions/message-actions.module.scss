@@ -1,0 +1,17 @@
+$action-icon-size: 30px;
+
+.message-actions {
+  position: absolute;
+  right: 0;
+  top: 0;
+  cursor: pointer;
+
+  &__container {
+    position: relative;
+  }
+
+  &__icon {
+    width: $action-icon-size;
+    height: $action-icon-size;
+  }
+}
