@@ -1,16 +1,13 @@
 import { Center } from "components/center/center";
 import { togglePin } from "components/conversation/conversation.service";
-import { PinIcon } from "components/conversation/icons/pin.icon";
-import { UnpinIcon } from "components/conversation/icons/unpin.icon";
 import { RowItem } from "components/row-item/row-item";
+import { TableCardActionsItem } from "components/table/components/table-card/table-card-actions";
 import { Text } from "components/text/text";
 import useApiRequest from "hooks/api-request.hook";
 import useIsOpen from "hooks/is-open.hook";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { postponeFunc } from "utils/hook-form.helpers";
-
-import styles from "./conversation-pin-button.module.scss";
 
 const _ConversationPinButton: React.FC<Props> = ({ id, value, onSuccess }) => {
   const [t] = useTranslation();
@@ -27,6 +24,11 @@ const _ConversationPinButton: React.FC<Props> = ({ id, value, onSuccess }) => {
     },
     middleware: [onSuccess, setChangedMiddleware]
   });
+
+  useEffect(() => {
+    setInnerPinned(!!value);
+  }, [value]);
+
   return (
     <Center>
       {false && (
@@ -40,12 +42,9 @@ const _ConversationPinButton: React.FC<Props> = ({ id, value, onSuccess }) => {
       )}
       <RowItem>
         <Center>
-          <div
-            className={styles["conversation-pin-button"]}
-            onClick={sendRequest}
-          >
-            {innerPinned ? <UnpinIcon /> : <PinIcon />}
-          </div>
+          <TableCardActionsItem onClick={sendRequest}>
+            {innerPinned ? t("Unpin") : t("Pin")}
+          </TableCardActionsItem>
         </Center>
       </RowItem>
     </Center>

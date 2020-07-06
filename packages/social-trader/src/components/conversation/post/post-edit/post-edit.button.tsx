@@ -1,30 +1,42 @@
-import { ShareIcon } from "components/conversation/icons/share.icon";
+import { TableCardActionsItem } from "components/table/components/table-card/table-card-actions";
+import { TEvent } from "hooks/anchor.hook";
 import useIsOpen from "hooks/is-open.hook";
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 
 import { PostEditDialog } from "./post-edit.dialog";
-import styles from "./post-edit.module.scss";
 
 interface Props {
+  clearAnchor: (event?: TEvent) => void;
+  label?: string;
   id: string;
   onApply: VoidFunction;
 }
 
-export const _PostEditButton: React.FC<Props> = ({ id, onApply }) => {
+export const _PostEditButton: React.FC<Props> = ({
+  clearAnchor,
+  label = "Edit",
+  id,
+  onApply
+}) => {
   const [isOpen, setIsOpen, setIsClose] = useIsOpen();
   const handleOnApply = useCallback(() => {
-    setIsClose();
+    handleClose();
     onApply && onApply();
+  }, []);
+
+  const handleClose = useCallback(() => {
+    setIsClose();
+    clearAnchor();
   }, []);
 
   return (
     <>
-      <div onClick={() => setIsOpen()} className={styles["post-edit__icon"]}>
-        <ShareIcon />
-      </div>
+      <TableCardActionsItem onClick={() => setIsOpen()}>
+        {label}
+      </TableCardActionsItem>
       <PostEditDialog
         open={isOpen}
-        onClose={setIsClose}
+        onClose={handleClose}
         id={id}
         onApply={handleOnApply}
       />
