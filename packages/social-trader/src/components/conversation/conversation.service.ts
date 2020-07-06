@@ -150,7 +150,7 @@ export const getPostForEdit = ({
 }): Promise<IEditPostData> => {
   return api
     .social(token)
-    .getPost(id)
+    .getOriginalPost(id)
     .then((post: EditablePost) => {
       const images = post.images.map(({ id, resizes }) => {
         const src = getImageUrlByQuality(resizes, "Low");
