@@ -38,6 +38,7 @@ export const TableCardActions: React.FC<Props> = ({
 };
 
 export const TableCardActionsItem: React.FC<ITableCardActionsItemProps> = ({
+  disabled,
   to,
   onClick,
   children
@@ -45,7 +46,13 @@ export const TableCardActionsItem: React.FC<ITableCardActionsItemProps> = ({
   return (
     <PopoverContentListItem>
       <Link to={to}>
-        <GVButton noPadding variant="text" color="secondary" onClick={onClick}>
+        <GVButton
+          disabled={disabled}
+          noPadding
+          variant="text"
+          color="secondary"
+          onClick={onClick}
+        >
           {children}
         </GVButton>
       </Link>
@@ -83,6 +90,7 @@ export const TableCardFavoriteActionItem: React.FC<{
 };
 
 interface ITableCardActionsItemProps extends Clickable {
+  disabled?: boolean;
   children?: string | JSX.Element;
   to?: ToType | string;
 }
