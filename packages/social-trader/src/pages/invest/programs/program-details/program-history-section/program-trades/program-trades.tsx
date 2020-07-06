@@ -16,7 +16,7 @@ import { TRADE_ASSET_TYPE } from "constants/constants";
 import { OrderSignalModel } from "gv-api-web";
 import { generateProgramTradesColumns } from "pages/invest/programs/program-details/program-details.constants";
 import DownloadButtonToolbarAuth from "pages/invest/programs/program-details/program-history-section/download-button-toolbar/download-button-toolbar-auth";
-import React from "react";
+import React, { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { RootState } from "reducers/root-reducer";
@@ -38,82 +38,106 @@ const _ProgramTrades: React.FC<Props> = ({
   programId
 }) => {
   const [t] = useTranslation();
-  const columns = generateProgramTradesColumns(!showSwaps, !showTickets);
+  const columns = useMemo(
+    () => generateProgramTradesColumns(!showSwaps, !showTickets),
+    [showSwaps, showTickets]
+  );
   const {
     itemsData: { data }
   } = useSelector(itemSelector);
   const delay = data && data.tradesDelay ? data.tradesDelay : "None";
-  const renderCell = (name: string) => (
-    <span
-      className={clsx(
-        styles[`details-trades__head-cell`],
-        styles[`program-details-trades__cell--${name}`]
-      )}
-    >
-      {t(`program-details-page:history.trades.${name}`)}
-    </span>
+  const renderCell = useCallback(
+    (name: string) => (
+      <span
+        className={clsx(
+          styles[`details-trades__head-cell`],
+          styles[`program-details-trades__cell--${name}`]
+        )}
+      >
+        {t(`program-details-page:history.trades.${name}`)}
+      </span>
+    ),
+    []
   );
+  const exportButtonToolbarRender = useCallback(
+    (filtering: any) => (
+      <Row>
+        {haveDelay && <TradesDelayHint delay={delay} />}
+        <div>
+          {assetType === TRADE_ASSET_TYPE.ACCOUNT ? (
+            <DownloadButtonToolbarAuth
+              method={filesService.getAccountTradesExportFileUrl}
+              dateRange={filtering!.dateRange}
+              programId={programId}
+              title={title}
+            />
+          ) : (
+            <DownloadButtonToolbar
+              filtering={filtering!.dateRange}
+              programId={programId}
+              getExportFileUrl={filesService.getProgramTradesExportFileUrl}
+            />
+          )}
+        </div>
+      </Row>
+    ),
+    [delay, programId, title]
+  );
+  const renderFilters = useCallback(
+    (updateFilter, filtering) => (
+      <DateRangeFilter
+        name={DATE_RANGE_FILTER_NAME}
+        value={filtering[DATE_RANGE_FILTER_NAME]}
+        onChange={updateFilter}
+        startLabel={t("filters.date-range.program-start")}
+      />
+    ),
+    []
+  );
+  const renderTooltip = useCallback(
+    (name: string) => () => (
+      <TooltipContent>
+        {t(`program-details-page:history.trades.tooltips.${name}`)}
+      </TooltipContent>
+    ),
+    []
+  );
+  const renderHeader = useCallback(
+    column =>
+      column.tooltip ? (
+        <Tooltip
+          horizontal={HORIZONTAL_POPOVER_POS.LEFT}
+          render={renderTooltip(column.name)}
+        >
+          {renderCell(column.name)}
+        </Tooltip>
+      ) : (
+        renderCell(column.name)
+      ),
+    []
+  );
+  const renderBodyRow = useCallback(
+    (trade: OrderSignalModel) => (
+      <ProgramTradesRow
+        trade={trade}
+        showSwaps={showSwaps}
+        showTickets={showTickets}
+      />
+    ),
+    [showSwaps, showTickets]
+  );
+
   return (
     <TableContainer
-      exportButtonToolbarRender={(filtering: any) => (
-        <Row>
-          {haveDelay && <TradesDelayHint delay={delay} />}
-          <div>
-            {assetType === TRADE_ASSET_TYPE.ACCOUNT ? (
-              <DownloadButtonToolbarAuth
-                method={filesService.getAccountTradesExportFileUrl}
-                dateRange={filtering!.dateRange}
-                programId={programId}
-                title={title}
-              />
-            ) : (
-              <DownloadButtonToolbar
-                filtering={filtering!.dateRange}
-                programId={programId}
-                getExportFileUrl={filesService.getProgramTradesExportFileUrl}
-              />
-            )}
-          </div>
-        </Row>
-      )}
+      exportButtonToolbarRender={exportButtonToolbarRender}
       getItems={getItems}
       dataSelector={dataSelector}
       isFetchOnMount={true}
-      renderFilters={(updateFilter, filtering) => (
-        <DateRangeFilter
-          name={DATE_RANGE_FILTER_NAME}
-          value={filtering[DATE_RANGE_FILTER_NAME]}
-          onChange={updateFilter}
-          startLabel={t("filters.date-range.program-start")}
-        />
-      )}
+      renderFilters={renderFilters}
       paging={DEFAULT_PAGING}
       columns={columns}
-      renderHeader={column =>
-        column.tooltip ? (
-          <Tooltip
-            horizontal={HORIZONTAL_POPOVER_POS.LEFT}
-            render={() => (
-              <TooltipContent>
-                {t(
-                  `program-details-page:history.trades.tooltips.${column.name}`
-                )}
-              </TooltipContent>
-            )}
-          >
-            {renderCell(column.name)}
-          </Tooltip>
-        ) : (
-          renderCell(column.name)
-        )
-      }
-      renderBodyRow={(trade: OrderSignalModel) => (
-        <ProgramTradesRow
-          trade={trade}
-          showSwaps={showSwaps}
-          showTickets={showTickets}
-        />
-      )}
+      renderHeader={renderHeader}
+      renderBodyRow={renderBodyRow}
     />
   );
 };

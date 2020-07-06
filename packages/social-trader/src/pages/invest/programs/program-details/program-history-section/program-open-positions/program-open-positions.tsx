@@ -9,8 +9,11 @@ import {
 import Tooltip from "components/tooltip/tooltip";
 import { TooltipContent } from "components/tooltip/tooltip-content";
 import { TRADE_ASSET_TYPE } from "constants/constants";
-import { getOpenPositionsColumns } from "pages/invest/programs/program-details/program-history-section/program-open-positions/program-open-positions.helpers";
-import React, { useCallback } from "react";
+import {
+  getOpenPositionsColumns,
+  OpenPositionsColumnsEmptyObject
+} from "pages/invest/programs/program-details/program-history-section/program-open-positions/program-open-positions.helpers";
+import React, { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { RootState } from "reducers/root-reducer";
@@ -54,18 +57,21 @@ const _ProgramOpenPositions: React.FC<Props> = ({
     [delay]
   );
 
+  const tooltipRender = useCallback(
+    (name: string) => () => (
+      <TooltipContent>
+        {t(`program-details-page:history.open-positions.tooltips.${name}`)}
+      </TooltipContent>
+    ),
+    []
+  );
+
   const renderHeader = useCallback(
     column =>
       column.tooltip ? (
         <Tooltip
           horizontal={HORIZONTAL_POPOVER_POS.LEFT}
-          render={() => (
-            <TooltipContent>
-              {t(
-                `program-details-page:history.open-positions.tooltips.${column.name}`
-              )}
-            </TooltipContent>
-          )}
+          render={tooltipRender(column.name)}
         >
           {renderCell(column.name)}
         </Tooltip>
@@ -89,6 +95,21 @@ const _ProgramOpenPositions: React.FC<Props> = ({
     [data, programId, assetType, canCloseOpenPositions, currency]
   );
 
+  const { showDate, showDirection, showPrice, showPriceOpen, showProfit } =
+    data || OpenPositionsColumnsEmptyObject;
+
+  const columns = useMemo(
+    () =>
+      getOpenPositionsColumns({
+        showDate,
+        showDirection,
+        showPrice,
+        showPriceOpen,
+        showProfit
+      }),
+    [showDate, showDirection, showPrice, showPriceOpen, showProfit]
+  );
+
   if (!programId) return null;
 
   return (
@@ -97,7 +118,7 @@ const _ProgramOpenPositions: React.FC<Props> = ({
       getItems={getItems}
       dataSelector={dataSelector}
       isFetchOnMount={true}
-      columns={getOpenPositionsColumns(data)}
+      columns={columns}
       renderHeader={renderHeader}
       renderBodyRow={renderBodyRow}
     />

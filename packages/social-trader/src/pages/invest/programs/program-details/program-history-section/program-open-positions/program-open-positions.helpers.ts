@@ -39,7 +39,21 @@ export const DELAYS: DelayType[] = [
   }
 ];
 
-export const getOpenPositionsColumns = (model?: TradesViewModel) => {
+export const OpenPositionsColumnsEmptyObject = {
+  showDate: false,
+  showDirection: false,
+  showPrice: false,
+  showPriceOpen: false,
+  showProfit: false
+};
+
+export const getOpenPositionsColumns = (model?: {
+  showDate: boolean;
+  showDirection: boolean;
+  showPrice: boolean;
+  showPriceOpen: boolean;
+  showProfit: boolean;
+}) => {
   if (!model) return PROGRAM_OPEN_POSITIONS_COLUMNS;
   const {
     showDate,
