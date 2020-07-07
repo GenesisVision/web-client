@@ -3,12 +3,16 @@ import { TFunction } from "i18next";
 import { convertToCurrency } from "utils/currency-converter";
 import { formatCurrencyValue } from "utils/formatter";
 import { safeGetElemFromArray } from "utils/helpers";
+import { CurrencyEnum } from "utils/types";
 import { lazy, mixed, number, object } from "yup";
 
 import {
   CREATE_ACCOUNT_FIELDS,
   ICreateAccountSettingsFormValues
 } from "./create-account-settings";
+
+export const correctDepositCurrency = (currency: CurrencyEnum | string) =>
+  currency === "USD" ? "USDT" : (currency as CurrencyEnum);
 
 const createAccountSettingsValidationSchema = ({
   rate,
@@ -22,7 +26,9 @@ const createAccountSettingsValidationSchema = ({
   broker: Broker;
 }) => {
   return lazy<ICreateAccountSettingsFormValues>(values => {
-    const currency = values[CREATE_ACCOUNT_FIELDS.currency];
+    const currency = correctDepositCurrency(
+      values[CREATE_ACCOUNT_FIELDS.currency]
+    );
     const accountType = safeGetElemFromArray(
       broker.accountTypes,
       ({ id }) => values[CREATE_ACCOUNT_FIELDS.brokerAccountTypeId] === id
