@@ -10,7 +10,7 @@ import {
 import React from "react";
 import { compose } from "redux";
 import { getAccountCurrency } from "utils/account-currency";
-import { NextPageWithRedux } from "utils/types";
+import { CurrencyEnum, NextPageWithRedux } from "utils/types";
 
 interface Props {
   levelsParameters: LevelsParamsInfo;
@@ -38,7 +38,7 @@ Page.getInitialProps = async ctx => {
     ctx.reduxStore.dispatch(statisticCurrencyAction(currency));
   });
   const levelsParameters = await fetchLevelParameters(
-    cookieCurrency || programCurrency
+    (programCurrency as CurrencyEnum) || cookieCurrency
   );
   return {
     levelsParameters,
