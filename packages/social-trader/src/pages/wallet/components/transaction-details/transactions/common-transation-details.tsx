@@ -31,7 +31,7 @@ const _TransactionDetailsItemsBlock: React.FC<{
   return (
     <>
       {items.map(item => (
-        <RowItem>
+        <RowItem key={item.title} bottomOffset>
           <TransactionDetailsListItem item={item} />
         </RowItem>
       ))}
