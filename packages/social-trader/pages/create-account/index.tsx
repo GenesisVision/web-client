@@ -37,7 +37,12 @@ Page.getInitialProps = async ctx => {
     fetchBrokers().then(res => (brokers = res))
   ]);
   return {
-    namespacesRequired: ["form-fields", "create-account", "asset-settings"],
+    namespacesRequired: [
+      "attach-account",
+      "form-fields",
+      "create-account",
+      "asset-settings"
+    ],
     exchanges,
     brokers,
     requestBrokerName

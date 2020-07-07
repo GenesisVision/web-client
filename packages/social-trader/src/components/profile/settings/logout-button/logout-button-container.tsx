@@ -13,12 +13,13 @@ const _LogoutButtonContainer: React.FC = () => {
   const dispatch = useDispatch<MiddlewareDispatch>();
   const { isPending, sendRequest } = useApiRequest({
     request: () => dispatch(logoutFromDevices),
-    successMessage: "auth:logout-from-another-devices.success-message"
+    successMessage:
+      "profile-page:settings.logout-from-another-devices.success-message"
   });
   const handleSubmit = useCallback(() => sendRequest(), []);
   return (
     <GVButton onClick={handleSubmit} disabled={isPending}>
-      {t("profile-page:settings.logout-from-another-devices")}
+      {t("profile-page:settings.logout-from-another-devices.label")}
     </GVButton>
   );
 };

@@ -120,7 +120,10 @@
     "image-requirements": "Image resolution should be at least 300 x 300px PNG or JPG file. The maximum file size is 2MB.",
     "save-photo": "Save photo",
     "image-success-save-message": "The photo has just been successfully changed.",
-    "logout-from-another-devices": "Logout from other devices",
+    "logout-from-another-devices": {
+      "label": "Logout from other devices",
+      "success-message": "Successful logout on another devices."
+    },
     "change-password": "Change password"
   },
   "social-links": {

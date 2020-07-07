@@ -25,7 +25,7 @@ const _DownloadButton: React.FC<Props> = ({
         onClick={authHandle}
       >
         <>
-          {title || t("buttons.download")}
+          {title || t("buttons.export")}
           <ExportIcon />
         </>
       </GVButton>

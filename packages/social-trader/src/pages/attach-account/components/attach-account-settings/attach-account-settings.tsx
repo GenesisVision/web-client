@@ -86,7 +86,7 @@ const _AttachAccountSettings: React.FC<Props> = ({
               onChange={brokerNameChangeHandle}
               name={ATTACH_ACCOUNT_FIELDS.brokerName}
               component={GVTextField}
-              label={t("account-settings.fields.exchange")}
+              label={t("account-settings:fields.exchange")}
               InputComponent={Select}
               disableIfSingle
             >
