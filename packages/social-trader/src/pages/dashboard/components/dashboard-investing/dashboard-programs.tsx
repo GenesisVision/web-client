@@ -14,9 +14,9 @@ const _DashboardInvestingPrograms: React.FC = () => {
   const { updateData } = useContext(DataStorageContext);
   const [t] = useTranslation();
   const handleUpdateItems = useCallback(
-    updateItems => () => {
+    (updateItems, item) => () => {
       updateData();
-      updateItems();
+      updateItems(item);
     },
     []
   );
@@ -32,8 +32,8 @@ const _DashboardInvestingPrograms: React.FC = () => {
         updateItems
       ) => (
         <DashboardProgramCard
-          updateRow={handleUpdateItems(updateRow)}
-          updateItems={handleUpdateItems(updateItems)!}
+          updateRow={handleUpdateItems(updateRow, program)}
+          updateItems={handleUpdateItems(updateItems, program)!}
           program={program}
         />
       )}
