@@ -3,7 +3,10 @@ import {
   ACTION_STATUS_FILTER_VALUES
 } from "components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs.helpers";
 import { DataStorageContext } from "components/data-storage/data-storage";
-import { FilteringType } from "components/table/components/filtering/filter.type";
+import {
+  FilteringType,
+  TDefaultFilters
+} from "components/table/components/filtering/filter.type";
 import SelectFilter from "components/table/components/filtering/select-filter/select-filter";
 import { SelectFilterType } from "components/table/components/filtering/select-filter/select-filter.constants";
 import TableModule from "components/table/components/table-module";
@@ -12,6 +15,7 @@ import {
   RenderBodyItemFuncType,
   UpdateFilterFunc
 } from "components/table/components/table.types";
+import { DEFAULT_CARD_PAGING } from "components/table/reducers/table-paging.reducer";
 import { LIST_VIEW } from "components/table/table.constants";
 import { useAccountCurrency } from "hooks/account-currency.hook";
 import DashboardBlock from "pages/dashboard/components/dashboard-block/dashboard-block";
@@ -19,6 +23,8 @@ import React, { useCallback, useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 const _DashboardInvestingTable: React.FC<Props> = ({
+  filtering,
+  defaultFilters,
   getItemsFunc,
   title,
   renderBodyCard
@@ -50,6 +56,9 @@ const _DashboardInvestingTable: React.FC<Props> = ({
   return (
     <DashboardBlock>
       <TableModule
+        filtering={filtering}
+        defaultFilters={defaultFilters}
+        paging={DEFAULT_CARD_PAGING}
         timestamp={timestamp}
         renderFilters={(
           updateFilter: UpdateFilterFunc,
@@ -75,6 +84,8 @@ const _DashboardInvestingTable: React.FC<Props> = ({
 };
 
 interface Props {
+  filtering?: FilteringType;
+  defaultFilters?: TDefaultFilters;
   getItemsFunc: GetItemsFuncType;
   title: string;
   renderBodyCard?: RenderBodyItemFuncType;
