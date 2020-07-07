@@ -5,6 +5,10 @@ import { useAccountCurrency } from "hooks/account-currency.hook";
 import { CREATE_FUND_PAGE_ROUTE } from "pages/create-fund/create-fund.constants";
 import DashboardPublicCard from "pages/dashboard/components/dashboard-trading/dashboard-public-card";
 import DashboardTradingTable from "pages/dashboard/components/dashboard-trading/dashboard-trading-table";
+import {
+  DASHBOARD_PUBLIC_DEFAULT_FILTERS,
+  DASHBOARD_PUBLIC_FILTERING
+} from "pages/dashboard/dashboard.constants";
 import { getPublicAssets } from "pages/dashboard/services/dashboard.service";
 import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
@@ -28,6 +32,8 @@ const _DashboardPublic: React.FC<Props> = () => {
   );
   return (
     <DashboardTradingTable
+      filtering={DASHBOARD_PUBLIC_FILTERING}
+      defaultFilters={DASHBOARD_PUBLIC_DEFAULT_FILTERS}
       createButtonToolbar={
         <ToolbarButton
           text={t("buttons.create-fund")}

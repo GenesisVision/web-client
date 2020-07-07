@@ -6,6 +6,10 @@ import { ATTACH_ACCOUNT_PAGE_ROUTE } from "pages/attach-account/attach-account.c
 import { CREATE_ACCOUNT_PAGE_ROUTE } from "pages/create-account/create-account.constants";
 import DashboardPrivateCard from "pages/dashboard/components/dashboard-trading/dashboard-private-card/dashboard-private-card";
 import DashboardTradingTable from "pages/dashboard/components/dashboard-trading/dashboard-trading-table";
+import {
+  DASHBOARD_PUBLIC_DEFAULT_FILTERS,
+  DASHBOARD_PUBLIC_FILTERING
+} from "pages/dashboard/dashboard.constants";
 import { getPrivateAssets } from "pages/dashboard/services/dashboard.service";
 import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
@@ -22,6 +26,8 @@ const _DashboardPrivate: React.FC = () => {
   );
   return (
     <DashboardTradingTable
+      filtering={DASHBOARD_PUBLIC_FILTERING}
+      defaultFilters={DASHBOARD_PUBLIC_DEFAULT_FILTERS}
       createButtonToolbar={
         <Row>
           <ToolbarButton
