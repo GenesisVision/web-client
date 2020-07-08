@@ -10,7 +10,12 @@ const Page: NextPage = () => {
 };
 
 Page.getInitialProps = async () => ({
-  namespacesRequired: ["portfolio-events", "asset-details", "dashboard-page"]
+  namespacesRequired: [
+    "asset-settings",
+    "portfolio-events",
+    "asset-details",
+    "dashboard-page"
+  ]
 });
 
 export default compose(withDefaultLayout, withPrivateRoute)(Page);

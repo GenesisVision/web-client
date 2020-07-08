@@ -10,7 +10,7 @@ const Page: NextPage = () => {
 };
 
 Page.getInitialProps = async () => ({
-  namespacesRequired: ["asset-details", "dashboard-page"]
+  namespacesRequired: ["asset-settings", "asset-details", "dashboard-page"]
 });
 
 export default compose(withDefaultLayout, withPrivateRoute)(Page);

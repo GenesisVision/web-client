@@ -40,6 +40,7 @@ Page.getInitialProps = async ctx => {
   return {
     levelsParameters,
     namespacesRequired: [
+      "asset-settings",
       "portfolio-events",
       "asset-details",
       "program-details-page",
