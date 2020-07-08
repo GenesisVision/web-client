@@ -9,11 +9,11 @@ import useIsOpen from "hooks/is-open.hook";
 import useTab from "hooks/tab.hook";
 import { FEED_TYPE, FeedContainer } from "pages/feed/feed.container";
 import { ShowEventsContainer } from "pages/feed/show-events-container/show-events-container";
-import { HashTagsBlock } from "pages/social/social/social-page-feed/hash-tags-block";
 import {
-  SocialPageContext,
+  FeedContext,
   SocialSearchInitialState
-} from "pages/social/social/social-page.context";
+} from "pages/social/social/feed.context";
+import { HashTagsBlock } from "pages/social/social/social-page-feed/hash-tags-block";
 import styles from "pages/social/social/social-page.module.scss";
 import React, { useContext, useEffect } from "react";
 import { useTranslation } from "react-i18next";
@@ -33,7 +33,7 @@ interface Props extends IPostListContainerInitData {}
 
 const _SocialPageFeedBlock: React.FC<Props> = ({ initData }) => {
   const [t] = useTranslation();
-  const { searchValue, setSearchValue } = useContext(SocialPageContext);
+  const { searchValue, setSearchValue } = useContext(FeedContext);
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   const [openSearch, setSearchIsOpen, setSearchIsClose] = useIsOpen();
   const { tab, setTab } = useTab<TABS>(TABS.LIVE);

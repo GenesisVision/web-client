@@ -25,7 +25,7 @@ const SocialPageContextInitialState: ISocialPageContextState = {
   setShowEvents: () => {}
 };
 
-export const SocialPageContext = createContext<ISocialPageContextState>(
+export const FeedContext = createContext<ISocialPageContextState>(
   SocialPageContextInitialState
 );
 
@@ -41,8 +41,6 @@ export const SocialPageContextProvider: React.FC<Props> = ({
     return { showEvents, setShowEvents, searchValue, setSearchValue };
   }, [showEvents, setShowEvents, searchValue, setSearchValue]);
   return (
-    <SocialPageContext.Provider value={contextValue}>
-      {children}
-    </SocialPageContext.Provider>
+    <FeedContext.Provider value={contextValue}>{children}</FeedContext.Provider>
   );
 };

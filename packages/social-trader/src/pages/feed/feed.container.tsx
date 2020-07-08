@@ -7,7 +7,7 @@ import {
 } from "components/conversation/conversation.service";
 import { PostListWithInput } from "components/conversation/post-list/post-list-with-input";
 import { IPostListContainerInitData } from "components/conversation/post-list/post-list.container";
-import { SocialPageContext } from "pages/social/social/social-page.context";
+import { FeedContext } from "pages/social/social/feed.context";
 import React, { useCallback, useContext } from "react";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
@@ -50,7 +50,7 @@ const _FeedContainer: React.FC<Props> = ({
   showInput,
   feedType
 }) => {
-  const { showEvents } = useContext(SocialPageContext);
+  const { showEvents } = useContext(FeedContext);
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   const fetchMethod = useCallback(
     () => getFeedMethod({ feedType, searchValue, showTop, showEvents }),

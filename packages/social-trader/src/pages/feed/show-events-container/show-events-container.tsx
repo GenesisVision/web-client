@@ -1,5 +1,5 @@
 import { ShowEvents } from "pages/feed/show-events-container/show-events";
-import { SocialPageContext } from "pages/social/social/social-page.context";
+import { FeedContext } from "pages/social/social/feed.context";
 import React, { useCallback, useContext, useState } from "react";
 
 import { setShowEventsState } from "./show-events-cookie-service";
@@ -10,7 +10,7 @@ interface Props {
 }
 
 const _ShowEventsContainer: React.FC<Props> = ({ isPending, onChange }) => {
-  const { showEvents = true, setShowEvents } = useContext(SocialPageContext);
+  const { showEvents = true, setShowEvents } = useContext(FeedContext);
   const [showState, setShowState] = useState(showEvents);
 
   const handleChange = useCallback(() => {

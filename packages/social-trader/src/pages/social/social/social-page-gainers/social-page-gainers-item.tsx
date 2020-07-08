@@ -3,11 +3,11 @@ import Profitability from "components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "components/profitability/profitability.helper";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
-import styles from "pages/social/social/social-page-gainers/social-page-gainers.module.scss";
 import {
-  SocialPageContext,
+  FeedContext,
   SocialSearchInitialState
-} from "pages/social/social/social-page.context";
+} from "pages/social/social/feed.context";
+import styles from "pages/social/social/social-page-gainers/social-page-gainers.module.scss";
 import React, { useCallback, useContext } from "react";
 import { formatCurrencyValue } from "utils/formatter";
 
@@ -24,7 +24,7 @@ const _SocialPageGainersItem: React.FC<Props> = ({
   price,
   change
 }) => {
-  const { setSearchValue } = useContext(SocialPageContext);
+  const { setSearchValue } = useContext(FeedContext);
 
   const handleClick = useCallback(() => {
     const hashTag = `#${title.toLowerCase()}`;

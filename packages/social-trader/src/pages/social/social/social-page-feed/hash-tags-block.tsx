@@ -1,15 +1,15 @@
 import { Center } from "components/center/center";
 import { RowItem } from "components/row-item/row-item";
+import { FeedContext } from "pages/social/social/feed.context";
 import { HashTag } from "pages/social/social/social-page-feed/hash-tag";
 import { HashTagAdd } from "pages/social/social/social-page-feed/hash-tag-add";
-import { SocialPageContext } from "pages/social/social/social-page.context";
 import React, { useCallback, useContext } from "react";
 import { getRandomColor } from "utils/helpers";
 
 interface Props {}
 
 const _HashTagsBlock: React.FC<Props> = () => {
-  const { setSearchValue, searchValue } = useContext(SocialPageContext);
+  const { setSearchValue, searchValue } = useContext(FeedContext);
   const handleRemoveContentId = useCallback(
     (name: string) => {
       const tagContent = searchValue.tagContent?.filter(
