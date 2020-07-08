@@ -20,6 +20,7 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import {
   composeProgramBannerUrl,
+  createFollowNotificationsToUrl,
   createProgramNotificationsToUrl,
   createProgramSettingsToUrl
 } from "utils/compose-url";
@@ -200,8 +201,11 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
   );
 
   const notificationsUrl = useMemo(
-    () => createProgramNotificationsToUrl(url, title),
-    [url, title]
+    () =>
+      assetType === "Follow"
+        ? createFollowNotificationsToUrl(url, title)
+        : createProgramNotificationsToUrl(url, title),
+    [assetType, url, title]
   );
 
   const fees = useMemo(
