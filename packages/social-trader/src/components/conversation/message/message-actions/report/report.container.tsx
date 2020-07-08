@@ -23,16 +23,21 @@ const _ReportContainer: React.FC<IReportContainerProps> = ({ onApply, id }) => {
   const onApplyMiddleware = postponeCallback(onApply);
 
   const { sendRequest, errorMessage, status } = useApiRequest({
-    request: values => report(values),
+    request: report,
     middleware: [sendReportEvent, onApplyMiddleware]
   });
-
+  // report throw error TODO discover why
   const handleSubmit = useCallback(
     values => {
-      return sendRequest({
+      return report({
         ...values,
         id
-      });
+      })
+        .catch(console.log)
+        .then(() => {
+          onApplyMiddleware({});
+          sendReportEvent();
+        });
     },
     [id, userId]
   );
