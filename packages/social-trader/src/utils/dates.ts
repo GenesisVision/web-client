@@ -26,7 +26,15 @@ export const diffDate = (
   dateEnd: Date | number | string = new Date(),
   unit?: OpUnitType
 ) => {
-  return dayjs(dayjs(dateEnd).diff(dayjs(dateStart), unit));
+  return dayjs(diffDateRaw(dateStart, dateEnd, unit));
+};
+
+export const diffDateRaw = (
+  dateStart: Date | number | string,
+  dateEnd: Date | number | string = new Date(),
+  unit?: OpUnitType
+) => {
+  return dayjs(dateEnd).diff(dayjs(dateStart), unit);
 };
 
 export const distanceDate = (
