@@ -3,7 +3,7 @@ import { ConversationRemoveButton } from "components/conversation/conversation-r
 import { PostEditButton } from "components/conversation/post/post-edit/post-edit.button";
 import { ActionsCircleIcon } from "components/icon/actions-circle-icon";
 import { TableCardActions } from "components/table/components/table-card/table-card-actions";
-import { PostActions } from "gv-api-web";
+import { PostPersonalDetails } from "gv-api-web";
 import useAnchor from "hooks/anchor.hook";
 import React from "react";
 
@@ -15,10 +15,10 @@ interface Props {
   isPinned?: boolean;
   id: string;
   onApply: VoidFunction;
-  actions?: PostActions;
+  actions?: PostPersonalDetails;
 }
 
-const hasActions = (actions: PostActions) =>
+const hasActions = (actions: PostPersonalDetails) =>
   !!Object.entries(actions)
     .filter(([name]) => name !== "canComment")
     .filter(([name]) => name !== "isLiked")
@@ -34,7 +34,6 @@ const _MessageActions: React.FC<Props> = ({
 }) => {
   const { anchor, setAnchor, clearAnchor } = useAnchor();
 
-  if (!actions || !hasActions(actions)) return null;
   return (
     <div className={styles["message-actions__container"]}>
       <div className={styles["message-actions"]}>
@@ -42,14 +41,14 @@ const _MessageActions: React.FC<Props> = ({
           <ActionsCircleIcon primary={!!anchor} onClick={setAnchor} />
         </div>
         <TableCardActions anchor={anchor} clearAnchor={clearAnchor}>
-          {actions.canEdit && (
+          {actions?.canEdit && (
             <PostEditButton
               clearAnchor={clearAnchor}
               id={id}
               onApply={onApply}
             />
           )}
-          {actions.canPin && (
+          {actions?.canPin && (
             <ConversationPinButton
               setPinned={setPinned}
               id={id}
@@ -57,7 +56,7 @@ const _MessageActions: React.FC<Props> = ({
               onSuccess={onApply}
             />
           )}
-          {actions.canDelete && (
+          {actions?.canDelete && (
             <ConversationRemoveButton id={id} onSuccess={setDeleted} />
           )}
         </TableCardActions>
