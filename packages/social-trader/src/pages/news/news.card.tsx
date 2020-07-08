@@ -19,6 +19,8 @@ interface Props {
 }
 
 const transformNewsPostToGVPost = (newsPost: MediaPost): Post => ({
+  rePostsUsers: [],
+  likesUsers: [],
   isHighlighted: false,
   url: newsPost.url,
   id: newsPost.id,
@@ -39,7 +41,7 @@ const transformNewsPostToGVPost = (newsPost: MediaPost): Post => ({
     url: newsPost.authorUrl,
     socialLinks: []
   },
-  actions: {
+  personalDetails: {
     isLiked: false,
     canEdit: false,
     canDelete: false,
