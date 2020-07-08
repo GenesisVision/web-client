@@ -1,6 +1,7 @@
 import { ConversationPinButton } from "components/conversation/conversation-pin-button/conversation-pin-button";
 import { ConversationRemoveButton } from "components/conversation/conversation-remove-button/conversation-remove-button";
 import { CopyLink } from "components/conversation/message/message-actions/copy-link";
+import { ReportButton } from "components/conversation/message/message-actions/report/report.button";
 import { PostEditButton } from "components/conversation/post/post-edit/post-edit.button";
 import { ActionsCircleIcon } from "components/icon/actions-circle-icon";
 import { TableCardActions } from "components/table/components/table-card/table-card-actions";
@@ -44,6 +45,7 @@ const _MessageActions: React.FC<Props> = ({
           <ActionsCircleIcon primary={!!anchor} onClick={setAnchor} />
         </div>
         <TableCardActions anchor={anchor} clearAnchor={clearAnchor}>
+          <ReportButton clearAnchor={clearAnchor} id={id} onApply={onApply} />
           <CopyLink url={url} />
           {actions?.canEdit && (
             <PostEditButton
