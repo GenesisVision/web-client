@@ -167,8 +167,16 @@ export const getPostForEdit = ({
     });
 };
 
-export const report = ({ id, text }: { id: string; text?: string }) => {
-  return api.social().spamReport(id, { text });
+export const report = ({
+  id,
+  text,
+  reason
+}: {
+  id: string;
+  text?: string;
+  reason?: string;
+}) => {
+  return api.social().spamReport(id, { text, reason });
 };
 
 export const editPost = (values: EditPost & { images?: IImageValue[] }) => {
