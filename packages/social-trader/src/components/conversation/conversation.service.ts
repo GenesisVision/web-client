@@ -12,6 +12,7 @@ import { api } from "services/api-client/swagger-custom-client";
 import Token from "services/api-client/token";
 import filesService from "services/file-service";
 import { getRandomBoolean } from "utils/helpers";
+import { AnyObjectType } from "utils/types";
 
 export const getSocialMedia = (values?: Object, token?: Token) => {
   return api.social(token).getSocialMedia(values);
@@ -89,8 +90,10 @@ export const remove = ({ id }: { id: string }) => {
   return api.social().deletePost(id);
 };
 
-export const getFeedMethod = (values?: Object, token?: Token) => {
-  return api.social(token).getFeed(values);
+export const getFeedMethod = (values?: AnyObjectType, token?: Token) => {
+  return api
+    .social(token)
+    .getFeed({ ...values, showOnlyUserPosts: !values?.showEvents });
 };
 
 export const getGlobalFeed = (
