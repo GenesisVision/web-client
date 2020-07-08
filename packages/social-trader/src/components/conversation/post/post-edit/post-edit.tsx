@@ -25,6 +25,7 @@ const _PostEdit: React.FC<Props> = ({
   const [t] = useTranslation();
   return (
     <PostInput
+      submitLabel={t("Save")}
       text={data.text}
       images={(data.images as unknown) as Array<IImageValue & NewPostImage>}
       allowEmptyMessage
