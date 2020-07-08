@@ -164,6 +164,10 @@ export const getPostForEdit = ({
     });
 };
 
+export const report = ({ id, text }: { id: string; text?: string }) => {
+  return api.social().spamReport(id, { text });
+};
+
 export const editPost = (values: EditPost & { images?: IImageValue[] }) => {
   const oldImages = values.images
     .filter(({ image }: IImageValue) => !image?.cropped)
