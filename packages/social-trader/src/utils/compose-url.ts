@@ -1,6 +1,7 @@
 import { ToType } from "components/link/link";
 import { createToUrl } from "components/link/link.helper";
 import {
+  FOLLOW_NOTIFICATIONS_FOLDER_ROUTE,
   FOLLOW_NOTIFICATIONS_ROUTE,
   FUND_NOTIFICATIONS_FOLDER_ROUTE,
   FUND_NOTIFICATIONS_ROUTE,
@@ -207,6 +208,16 @@ export const createProgramNotificationsToUrl = (
   createToUrl(
     composeProgramNotificationsUrl(url),
     PROGRAM_NOTIFICATIONS_FOLDER_ROUTE,
+    title
+  );
+
+export const createFollowNotificationsToUrl = (
+  url: string,
+  title: string
+): ToType =>
+  createToUrl(
+    composeFollowNotificationsUrl(url),
+    FOLLOW_NOTIFICATIONS_FOLDER_ROUTE,
     title
   );
 
