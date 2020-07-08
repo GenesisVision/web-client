@@ -43,7 +43,7 @@ const getTagLoaderData = (): PostTag => ({
     images: [],
     tags: [],
     author: managerLoaderData,
-    actions: {
+    personalDetails: {
       canComment: true,
       isLiked: true,
       canEdit: false,
@@ -182,7 +182,7 @@ export const getConversationPostLoaderData = (
     date: new Date(),
     likesCount: 0,
     text,
-    actions: getConversationPersonalDetailsLoaderData()
+    personalDetails: getConversationPersonalDetailsLoaderData()
   };
 };
 
@@ -201,7 +201,7 @@ export const getEmptyPostLoaderData = (): ConversationPost => ({
   date: new Date(),
   likesCount: 0,
   text: "",
-  actions: getConversationPersonalDetailsLoaderData()
+  personalDetails: getConversationPersonalDetailsLoaderData()
 });
 
 export const getConversationPostListLoaderData = (): ConversationPost[] =>

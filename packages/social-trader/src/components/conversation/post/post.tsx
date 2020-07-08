@@ -61,7 +61,7 @@ const _Post: React.FC<Props> = ({
     text,
     id,
     comments,
-    actions,
+    personalDetails,
     likesCount,
     author,
     tags
@@ -76,7 +76,7 @@ const _Post: React.FC<Props> = ({
             reduceLargeText={reduceLargeText}
             settingsBlock={
               <MessageActions
-                actions={actions}
+                actions={personalDetails}
                 id={id}
                 isPinned={isPinned}
                 onApply={updateData}
@@ -98,9 +98,9 @@ const _Post: React.FC<Props> = ({
         rePostsCount={rePostsCount}
         onApply={updateData}
         id={id}
-        liked={actions?.isLiked}
+        liked={personalDetails?.isLiked}
         likesCount={likesCount}
-        canLike={!!actions}
+        canLike={!!personalDetails}
       />
       {!!comments.length && (
         <Row size={"large"}>
@@ -111,7 +111,7 @@ const _Post: React.FC<Props> = ({
           />
         </Row>
       )}
-      {actions && actions.canComment && (
+      {personalDetails && personalDetails.canComment && (
         <Row>
           <CommentInputContainer onSuccess={updateData} id={id} />
         </Row>

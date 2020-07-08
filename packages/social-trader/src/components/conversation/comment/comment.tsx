@@ -20,7 +20,7 @@ const _Comment: React.FC<Props> = ({
     date,
     text,
     id,
-    actions,
+    personalDetails,
     likesCount,
     author
   }
@@ -46,7 +46,7 @@ const _Comment: React.FC<Props> = ({
             row={false}
             settingsBlock={
               <MessageActions
-                actions={actions}
+                actions={personalDetails}
                 id={id}
                 onApply={updateData}
                 setDeleted={updateData}
@@ -63,13 +63,13 @@ const _Comment: React.FC<Props> = ({
         </RowItem>
       </Row>
       <Row className={styles["comment__buttons"]}>
-        <RowItem wide>{actions && <Reply author={author} />}</RowItem>
+        <RowItem wide>{personalDetails && <Reply author={author} />}</RowItem>
         <RowItem>
           <LikeContainer
             id={id}
-            canLike={!!actions}
+            canLike={!!personalDetails}
             count={likesCount}
-            liked={actions?.isLiked}
+            liked={personalDetails?.isLiked}
           />
         </RowItem>
       </Row>
