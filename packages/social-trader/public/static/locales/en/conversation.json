@@ -1,4 +1,17 @@
 {
+  "report": {
+    "title": "Report",
+    "reasons": {
+      "spam": "Spam",
+      "adult-content": "Adult content",
+      "misleading-information": "Misleading information",
+      "fraud": "Fraud",
+      "non-original-content": "Non-original content",
+      "false-news": "False news",
+      "hate-speech": "Hate speech",
+      "terrorism": "Terrorism"
+    }
+  },
   "edit": "Edit",
   "repost": "Share",
   "your-message": "Your message..."
