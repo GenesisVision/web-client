@@ -46,6 +46,7 @@ const _Comment: React.FC<Props> = ({
             row={false}
             settingsBlock={
               <MessageActions
+                url={url}
                 actions={personalDetails}
                 id={id}
                 onApply={updateData}

@@ -85,6 +85,7 @@ const _Post: React.FC<Props> = ({
                 )}
                 <RowItem>
                   <MessageActions
+                    url={url}
                     actions={personalDetails}
                     id={id}
                     isPinned={isPinned}
