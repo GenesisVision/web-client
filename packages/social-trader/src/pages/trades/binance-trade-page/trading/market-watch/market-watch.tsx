@@ -1,4 +1,4 @@
-import GlobalSearchInput from "components/global-search/components/global-search-result/global-search-input";
+import GlobalSearchInput from "components/global-search/components/global-search-result/global-search-input/global-search-input";
 import GVButton from "components/gv-button";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";

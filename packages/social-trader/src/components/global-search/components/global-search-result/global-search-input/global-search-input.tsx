@@ -7,6 +7,8 @@ import { Row } from "components/row/row";
 import React, { useCallback } from "react";
 import { Sizeable } from "utils/types";
 
+import styles from "./global-search-input.module.scss";
+
 interface ISearchInputFieldProps extends Sizeable {
   autoFocus?: boolean;
   canClose?: boolean;
@@ -45,7 +47,13 @@ export const SearchInputField: React.FC<ISearchInputFieldProps> = ({
         />
       </RowItem>
       {canClose && (
-        <GVButton noPadding variant="text" color="secondary" onClick={onCancel}>
+        <GVButton
+          className={styles["global-search-input__close-icon"]}
+          noPadding
+          variant="text"
+          color="secondary"
+          onClick={onCancel}
+        >
           <CloseIcon />
         </GVButton>
       )}
