@@ -38,6 +38,7 @@ Page.getInitialProps = async ctx => {
   ]);
   return {
     namespacesRequired: [
+      "profile-page",
       "attach-account",
       "form-fields",
       "create-account",
