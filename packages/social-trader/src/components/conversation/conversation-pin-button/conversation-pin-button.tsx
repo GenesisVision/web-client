@@ -9,7 +9,12 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { postponeFunc } from "utils/hook-form.helpers";
 
-const _ConversationPinButton: React.FC<Props> = ({ id, value, onSuccess }) => {
+const _ConversationPinButton: React.FC<Props> = ({
+  setPinned,
+  id,
+  value,
+  onSuccess
+}) => {
   const [t] = useTranslation();
   const [innerPinned, setInnerPinned] = useState<boolean>(!!value);
   const [isChanged, setChanged, setNotChanged] = useIsOpen();
@@ -19,6 +24,7 @@ const _ConversationPinButton: React.FC<Props> = ({ id, value, onSuccess }) => {
   };
   const { sendRequest } = useApiRequest({
     request: () => {
+      setPinned(!innerPinned);
       setInnerPinned(!innerPinned);
       return togglePin({ id, value });
     },
@@ -52,6 +58,7 @@ const _ConversationPinButton: React.FC<Props> = ({ id, value, onSuccess }) => {
 };
 
 interface Props {
+  setPinned: (value: boolean) => void;
   id: string;
   value: boolean;
   onSuccess: VoidFunction;

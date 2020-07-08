@@ -8,6 +8,8 @@ $action-icon-size: 30px;
 
   &__container {
     position: relative;
+    width: $action-icon-size;
+    height: $action-icon-size;
   }
 
   &__icon {

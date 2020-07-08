@@ -2,6 +2,7 @@ import { Center } from "components/center/center";
 import { CommentInputContainer } from "components/conversation/comment/comment-input/comment-input-container";
 import { restorePost } from "components/conversation/conversation.service";
 import { ConversationPost } from "components/conversation/conversation.types";
+import { PinIcon } from "components/conversation/icons/pin.icon";
 import { Message } from "components/conversation/message/message";
 import { MessageActions } from "components/conversation/message/message-actions/message-actions";
 import { CommentsList } from "components/conversation/post/comments-list/comments-list";
@@ -13,7 +14,7 @@ import { Row } from "components/row/row";
 import { Text } from "components/text/text";
 import useApiRequest from "hooks/api-request.hook";
 import useIsOpen from "hooks/is-open.hook";
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 const DeletedPost: React.FC<{
@@ -67,6 +68,7 @@ const _Post: React.FC<Props> = ({
     tags
   } = post;
   const [isDeleted, setDeleted, setNotDeleted] = useIsOpen();
+  const [isPinnedInner, setPinnedInner] = useState(isPinned);
   if (isDeleted) return <DeletedPost id={id} setNotDeleted={setNotDeleted} />;
   return (
     <DefaultBlock solid wide>
@@ -75,13 +77,23 @@ const _Post: React.FC<Props> = ({
           <Message
             reduceLargeText={reduceLargeText}
             settingsBlock={
-              <MessageActions
-                actions={personalDetails}
-                id={id}
-                isPinned={isPinned}
-                onApply={updateData}
-                setDeleted={setDeleted}
-              />
+              <Row>
+                {isPinnedInner && (
+                  <RowItem>
+                    <PinIcon />
+                  </RowItem>
+                )}
+                <RowItem>
+                  <MessageActions
+                    actions={personalDetails}
+                    id={id}
+                    isPinned={isPinned}
+                    onApply={updateData}
+                    setDeleted={setDeleted}
+                    setPinned={setPinnedInner}
+                  />
+                </RowItem>
+              </Row>
             }
             row={false}
             tags={tags}

@@ -10,6 +10,7 @@ import React from "react";
 import styles from "./message-actions.module.scss";
 
 interface Props {
+  setPinned: (value: boolean) => void;
   setDeleted: VoidFunction;
   isPinned?: boolean;
   id: string;
@@ -24,6 +25,7 @@ const hasActions = (actions: PostActions) =>
     .filter(([name, value]) => value).length;
 
 const _MessageActions: React.FC<Props> = ({
+  setPinned,
   setDeleted,
   isPinned,
   id,
@@ -49,6 +51,7 @@ const _MessageActions: React.FC<Props> = ({
           )}
           {actions.canPin && (
             <ConversationPinButton
+              setPinned={setPinned}
               id={id}
               value={!!isPinned}
               onSuccess={onApply}
