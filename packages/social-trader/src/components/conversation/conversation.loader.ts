@@ -30,6 +30,8 @@ const getTagLoaderData = (): PostTag => ({
     title: ""
   },
   post: {
+    rePostsUsers: [],
+    likesUsers: [],
     isHighlighted: false,
     url: "",
     isDeleted: false,
@@ -165,6 +167,8 @@ export const getConversationPostLoaderData = (
     .map(getConversationImageLoaderData);
 
   return {
+    rePostsUsers: [],
+    likesUsers: [],
     isHighlighted: false,
     url: "",
     isDeleted: false,
@@ -187,6 +191,8 @@ export const getConversationPostLoaderData = (
 };
 
 export const getEmptyPostLoaderData = (): ConversationPost => ({
+  rePostsUsers: [],
+  likesUsers: [],
   isHighlighted: false,
   url: "",
   isDeleted: false,
