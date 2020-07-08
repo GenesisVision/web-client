@@ -37,8 +37,10 @@ const getFeedMethod = ({
   showEvents?: boolean;
 }) => {
   if (searchValue) return searchInFeed(searchValue);
-  if (showTop) return getTopPosts;
-  if (feedType === FEED_TYPE.PERSONAL) return getNewsFeed;
+  if (showTop)
+    return (values?: Object) => getTopPosts({ ...values, showEvents });
+  if (feedType === FEED_TYPE.PERSONAL)
+    return (values?: Object) => getNewsFeed({ ...values, showEvents });
   return (values?: Object, token?: Token) =>
     getGlobalFeed({ ...values, showEvents }, token);
 };
