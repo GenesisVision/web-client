@@ -22,7 +22,7 @@ const _NotificationAssets: React.FC<Props> = ({ settings, asset }) => {
     <div className={styles["notification-settings"]}>
       <Row>
         <h3 className={styles["notification-settings__subtitle"]}>
-          {t(`notifications-page.${asset.toLowerCase()}s`)}
+          {t(`notifications-page:${asset.toLowerCase()}s`)}
         </h3>
       </Row>
       <Row wide onlyOffset>

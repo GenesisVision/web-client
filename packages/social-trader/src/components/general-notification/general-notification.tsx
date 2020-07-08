@@ -22,7 +22,7 @@ const _GeneralNotification: React.FC<Props> = ({
     isPending: isAddPending
   } = useApiRequest({
     request: addNotificationMethod,
-    successMessage: `notifications-page.general.${name}.enabled-alert`,
+    successMessage: `notifications-page:general.${name}.enabled-alert`,
     middleware: [onSuccess]
   });
 
@@ -31,7 +31,7 @@ const _GeneralNotification: React.FC<Props> = ({
     isPending: isRemovePending
   } = useApiRequest({
     request: removeNotificationMethod,
-    successMessage: `notifications-page.general.${name}.disabled-alert`,
+    successMessage: `notifications-page:general.${name}.disabled-alert`,
     middleware: [onSuccess]
   });
 
