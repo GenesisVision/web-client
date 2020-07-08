@@ -39,6 +39,7 @@ export interface PostInputFormValues {
 }
 
 interface Props {
+  submitLabel?: string;
   text?: string;
   images?: Array<IImageValue & NewPostImage>;
   allowEmptyMessage?: boolean;
@@ -49,6 +50,7 @@ interface Props {
 }
 
 const _PostInput: React.FC<Props> = ({
+  submitLabel = "Send",
   text: propText,
   images: propImages,
   allowEmptyMessage,
@@ -191,7 +193,7 @@ const _PostInput: React.FC<Props> = ({
                         checkValid={false}
                         disabled={disabled}
                       >
-                        Send
+                        {submitLabel}
                       </SubmitButton>
                     </RowItem>
                   </Center>
