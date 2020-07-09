@@ -4,6 +4,7 @@ import { LabeledValue } from "components/labeled-value/labeled-value";
 import Link, { ToType } from "components/link/link";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { Text } from "components/text/text";
 import {
   FeedContext,
   SocialSearchInitialState
@@ -63,7 +64,9 @@ const _SocialPageTradersItem: React.FC<Props> = ({
       </Row>
       <Row>
         <RowItem wide>
-          <LabeledValue label={t("Profit")}>{profit} %</LabeledValue>
+          <LabeledValue label={t("Profit")}>
+            <Text wrap={false}>{profit} %</Text>
+          </LabeledValue>
         </RowItem>
         <RowItem wide>
           <LabeledValue label={t("Investors")}>{investorsCount}</LabeledValue>
