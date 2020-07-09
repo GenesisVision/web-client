@@ -47,7 +47,7 @@ const _MessageActions: React.FC<Props> = ({
         </div>
         <TableCardActions anchor={anchor} clearAnchor={clearAnchor}>
           <ReportButton clearAnchor={clearAnchor} id={id} onApply={onApply} />
-          <CopyLink url={url} />
+          <CopyLink onApply={clearAnchor} url={url} />
           {actions?.canEdit && (
             <PostEditButton
               clearAnchor={clearAnchor}
