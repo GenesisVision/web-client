@@ -60,7 +60,11 @@ const _Message: React.FC<IMessageProps> = ({
           </RowItem>
           <RowItem>{settingsBlock}</RowItem>
         </MessageItem>
-        <MessageItem bottomOffset onlyOffset>
+        <MessageItem
+          className={styles["message--content"]}
+          bottomOffset
+          onlyOffset
+        >
           <MessageText
             key={text}
             text={text}

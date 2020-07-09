@@ -3,7 +3,6 @@
 .message {
   width: 100%;
   flex-wrap: wrap;
-  overflow: hidden;
   @include media-breakpoint-landscape-phone() {
     flex-wrap: nowrap;
   }
@@ -11,7 +10,8 @@
     display: flex;
     @include adaptive-margin(bottom, -$padding-xsmall);
   }
-  &__tags {
+  &__content {
+    overflow: hidden;
   }
   &__user {
     width: auto;
