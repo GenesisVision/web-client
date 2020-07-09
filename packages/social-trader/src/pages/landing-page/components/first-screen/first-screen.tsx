@@ -2,6 +2,7 @@ import { PlatformNews } from "gv-api-web";
 import { useNetworkStatusInWindow } from "hooks/network-status";
 import dynamic from "next/dynamic";
 import FirstSlider from "pages/landing-page/components/first-slider/first-slider";
+import styles from "pages/landing-page/components/first-slider/first-slider.module.scss";
 import NewsList from "pages/landing-page/components/news/news-list";
 import { slides } from "pages/landing-page/static-data/slides";
 import React, { useCallback } from "react";
@@ -31,7 +32,7 @@ const _FirstScreen: React.FC<Props> = ({ news }) => {
   }, [effectiveConnectionType, slides]);
   return (
     <>
-      {renderSlider()}
+      <div className={styles["slider__container"]}>{renderSlider()}</div>
       <NewsList newsItems={news} />
     </>
   );

@@ -34,6 +34,10 @@
     margin-bottom: 0;
   }
 
+  &__container {
+    min-height: 380px;
+  }
+
   &__img-wrapper {
     position: relative;
     height: 250px;
