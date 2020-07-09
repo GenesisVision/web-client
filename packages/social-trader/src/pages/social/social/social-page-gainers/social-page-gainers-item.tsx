@@ -43,7 +43,7 @@ const _SocialPageGainersItem: React.FC<Props> = ({
         <RowItem onClick={handleClick}>{title}</RowItem>
       </Row>
       <Row className={styles["social-page-gainers__item-value"]}>
-        <RowItem>{formatCurrencyValue(price, title)}</RowItem>
+        <RowItem>$ {formatCurrencyValue(price, title)}</RowItem>
         {change !== null && change !== undefined && (
           <RowItem>
             <Profitability prefix={PROFITABILITY_PREFIX.SIGN} value={change}>
