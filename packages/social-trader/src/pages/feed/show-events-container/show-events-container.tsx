@@ -1,3 +1,4 @@
+import { sendSetEventsOffEvent } from "components/conversation/conversation.ga";
 import { ShowEvents } from "pages/feed/show-events-container/show-events";
 import { FeedContext } from "pages/social/social/feed.context";
 import React, { useCallback, useContext, useState } from "react";
@@ -19,6 +20,7 @@ const _ShowEventsContainer: React.FC<Props> = ({ isPending, onChange }) => {
     setShowEventsState(newValue);
     onChange && onChange(newValue);
     setShowEvents(newValue);
+    if (!newValue) sendSetEventsOffEvent();
   }, [showState, onChange]);
 
   return (
