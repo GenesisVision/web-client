@@ -129,6 +129,7 @@ export const getNewsFeed = (values?: Object): Promise<ConversationFeed> => {
 
 export const getPosts = (values: {
   id: string;
+  showEvents?: boolean;
   userMode?: UserFeedMode;
 }): Promise<ConversationFeed> => {
   return getFeedMethod({ ...values, userId: values.id });

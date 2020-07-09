@@ -2,7 +2,8 @@ import { sendLoadFeedEvent } from "components/conversation/conversation.ga";
 import { getPosts } from "components/conversation/conversation.service";
 import { PostListWithInput } from "components/conversation/post-list/post-list-with-input";
 import { useIsOwnPage } from "components/manager/manager.page.helpers";
-import React, { useCallback, useEffect } from "react";
+import { FeedContext } from "pages/social/social/feed.context";
+import React, { useCallback, useContext, useEffect } from "react";
 
 interface Props {
   canWritePost: boolean;
@@ -10,15 +11,16 @@ interface Props {
 }
 
 const _UserFeed: React.FC<Props> = ({ canWritePost, id }) => {
+  const { showEvents } = useContext(FeedContext);
   const isOwnPage = useIsOwnPage(id);
   useEffect(() => {
     // sendLoadFeedEvent();
   }, []);
   const fetchMethod = useCallback(
     (values: Object) => {
-      return getPosts({ ...values, id });
+      return getPosts({ ...values, showEvents, id });
     },
-    [id]
+    [showEvents, id]
   );
   return (
     <PostListWithInput
