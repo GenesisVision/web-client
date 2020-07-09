@@ -6,10 +6,11 @@ import { useTranslation } from "react-i18next";
 import { composePostDetailsUrl } from "routes/social.routes";
 
 export interface ICopyLinkProps {
+  onApply?: VoidFunction;
   url: string;
 }
 
-const _CopyLink: React.FC<ICopyLinkProps> = ({ url }) => {
+const _CopyLink: React.FC<ICopyLinkProps> = ({ onApply, url }) => {
   const [t] = useTranslation();
   const { location } = useLocation();
   const { copy } = useCopy();
@@ -21,7 +22,10 @@ const _CopyLink: React.FC<ICopyLinkProps> = ({ url }) => {
   }, [location]);
 
   const handleClick = useCallback(() => {
-    if (value) copy(value);
+    if (value) {
+      copy(value);
+      onApply && onApply();
+    }
   }, [value]);
 
   return (
