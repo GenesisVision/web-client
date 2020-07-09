@@ -46,8 +46,6 @@ const _MessageActions: React.FC<Props> = ({
           <ActionsIcon primary={!!anchor} />
         </div>
         <TableCardActions anchor={anchor} clearAnchor={clearAnchor}>
-          <ReportButton clearAnchor={clearAnchor} id={id} onApply={onApply} />
-          <CopyLink onApply={clearAnchor} url={url} />
           {actions?.canEdit && (
             <PostEditButton
               clearAnchor={clearAnchor}
@@ -63,6 +61,8 @@ const _MessageActions: React.FC<Props> = ({
               onSuccess={onApply}
             />
           )}
+          <CopyLink onApply={clearAnchor} url={url} />
+          <ReportButton clearAnchor={clearAnchor} id={id} onApply={onApply} />
           {actions?.canDelete && (
             <ConversationRemoveButton id={id} onSuccess={setDeleted} />
           )}
