@@ -17,6 +17,8 @@ import useIsOpen from "hooks/is-open.hook";
 import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import styles from "./post.module.scss";
+
 const DeletedPost: React.FC<{
   id: string;
   setNotDeleted: VoidFunction;
@@ -79,7 +81,7 @@ const _Post: React.FC<Props> = ({
             settingsBlock={
               <Row>
                 {isPinnedInner && (
-                  <RowItem>
+                  <RowItem className={styles["post__pin-icon"]}>
                     <PinIcon />
                   </RowItem>
                 )}
