@@ -3,7 +3,6 @@ import { ConversationRemoveButton } from "components/conversation/conversation-r
 import { CopyLink } from "components/conversation/message/message-actions/copy-link";
 import { ReportButton } from "components/conversation/message/message-actions/report/report.button";
 import { PostEditButton } from "components/conversation/post/post-edit/post-edit.button";
-import { ActionsCircleIcon } from "components/icon/actions-circle-icon";
 import { ActionsIcon } from "components/icon/actions-icon";
 import { TableCardActions } from "components/table/components/table-card/table-card-actions";
 import { PostPersonalDetails } from "gv-api-web";
@@ -62,7 +61,9 @@ const _MessageActions: React.FC<Props> = ({
             />
           )}
           <CopyLink onApply={clearAnchor} url={url} />
-          <ReportButton clearAnchor={clearAnchor} id={id} onApply={onApply} />
+          {actions && !actions.canDelete && (
+            <ReportButton clearAnchor={clearAnchor} id={id} onApply={onApply} />
+          )}
           {actions?.canDelete && (
             <ConversationRemoveButton id={id} onSuccess={setDeleted} />
           )}
