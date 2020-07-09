@@ -29,6 +29,7 @@ import { useUtm } from "pages/landing-page/utils";
 import React from "react";
 
 const _LandingPage: React.FC<Props> = ({
+  cookieAccept,
   programs,
   funds,
   follows,
@@ -39,6 +40,7 @@ const _LandingPage: React.FC<Props> = ({
   useUtm();
   return (
     <Layout
+      cookieAccept={cookieAccept}
       description={t("landing-page:description")}
       title={t("landing-page:title")}
     >
@@ -101,6 +103,7 @@ const _LandingPage: React.FC<Props> = ({
 };
 
 interface Props {
+  cookieAccept?: string;
   refLink?: string;
   programs: ProgramDetailsListItemItemsViewModel;
   funds: FundDetailsListItemItemsViewModel;

@@ -1,5 +1,6 @@
 import { useTranslation } from "i18n";
 import { NextPage } from "next";
+import { getAccept } from "pages/landing-page/components/cookie-message/cookie-message.helpers";
 import {
   InternalContainer,
   InternalMainWrapper
@@ -8,10 +9,17 @@ import PrivacyPolicySection from "pages/landing-page/components/privacy-policy-s
 import Layout from "pages/landing-page/layouts/_layout";
 import React from "react";
 
-export const PrivacyPolicy: NextPage = () => {
+interface Props {
+  cookieAccept?: string;
+}
+
+export const PrivacyPolicy: NextPage<Props> = ({ cookieAccept }) => {
   const { t } = useTranslation();
   return (
-    <Layout title={t("landing-page:page-titles.privacy-policy")}>
+    <Layout
+      cookieAccept={cookieAccept}
+      title={t("landing-page:page-titles.privacy-policy")}
+    >
       <InternalMainWrapper isSmallFont>
         <InternalContainer>
           <PrivacyPolicySection />
@@ -21,6 +29,10 @@ export const PrivacyPolicy: NextPage = () => {
   );
 };
 
-PrivacyPolicy.getInitialProps = async () => ({
-  namespacesRequired: ["landing-page"]
-});
+PrivacyPolicy.getInitialProps = async ctx => {
+  const cookieAccept = getAccept(ctx);
+  return {
+    cookieAccept,
+    namespacesRequired: ["landing-page"]
+  };
+};
