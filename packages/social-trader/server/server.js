@@ -68,7 +68,7 @@ module.exports = async app => {
   server.get("/sitemap.xml", (req, res) =>
     sitemap({ req, res, pagePath: "/sitemap.xml" })
   );
-  server.get("/", (req, res) => ssrCache({ req, res, pagePath: "/" }));
+  // server.get("/", (req, res) => ssrCache({ req, res, pagePath: "/" }));
   server.get("*", (req, res) => handle(req, res));
   server.post("*", (req, res) => handle(req, res));
 
