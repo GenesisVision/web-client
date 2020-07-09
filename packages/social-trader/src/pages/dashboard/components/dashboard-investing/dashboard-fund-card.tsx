@@ -72,6 +72,7 @@ const _DashboardFundCard: React.FC<Props> = ({
         topFundAssets={fund.topFundAssets}
         totalAssetsCount={fund.totalAssetsCount}
         amountTitle={t("header-fields.value")}
+        amountTitleTooltip={t("dashboard-page:tooltips.investing.size")}
       />
       <DepositWithdrawButtons
         title={fund.title}
