@@ -28,6 +28,6 @@ LPReferralProgram.getInitialProps = async ctx => {
   const cookieAccept = getAccept(ctx);
   return {
     cookieAccept,
-    namespacesRequired: ["landing-page"]
+    namespacesRequired: ["referral-program", "landing-page"]
   };
 };
