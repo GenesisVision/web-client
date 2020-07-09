@@ -4,6 +4,7 @@ import { CopyLink } from "components/conversation/message/message-actions/copy-l
 import { ReportButton } from "components/conversation/message/message-actions/report/report.button";
 import { PostEditButton } from "components/conversation/post/post-edit/post-edit.button";
 import { ActionsCircleIcon } from "components/icon/actions-circle-icon";
+import { ActionsIcon } from "components/icon/actions-icon";
 import { TableCardActions } from "components/table/components/table-card/table-card-actions";
 import { PostPersonalDetails } from "gv-api-web";
 import useAnchor from "hooks/anchor.hook";
@@ -41,8 +42,8 @@ const _MessageActions: React.FC<Props> = ({
   return (
     <div className={styles["message-actions__container"]}>
       <div className={styles["message-actions"]}>
-        <div className={styles["message-actions__icon"]}>
-          <ActionsCircleIcon primary={!!anchor} onClick={setAnchor} />
+        <div onClick={setAnchor} className={styles["message-actions__icon"]}>
+          <ActionsIcon primary={!!anchor} />
         </div>
         <TableCardActions anchor={anchor} clearAnchor={clearAnchor}>
           <ReportButton clearAnchor={clearAnchor} id={id} onApply={onApply} />

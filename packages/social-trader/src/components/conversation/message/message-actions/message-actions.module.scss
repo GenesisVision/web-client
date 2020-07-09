@@ -1,8 +1,8 @@
-$action-icon-size: 30px;
+$action-icon-size: 15px;
 
 .message-actions {
   position: absolute;
-  right: 0;
+  right: -$action-icon-size;
   top: 0;
   cursor: pointer;
 
@@ -13,7 +13,7 @@ $action-icon-size: 30px;
   }
 
   &__icon {
-    width: $action-icon-size;
+    width: $action-icon-size * 2;
     height: $action-icon-size;
   }
 }
