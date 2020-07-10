@@ -1,7 +1,10 @@
 import { onSelectChange } from "components/select/select.test-helpers";
 import SettingsBlock from "components/settings-block/settings-block";
 import { HookFormWalletSelect as WalletSelect } from "components/wallet-select/wallet-select";
-import { BrokerTradeServerType } from "gv-api-web";
+import {
+  BrokerTradeServerType,
+  TradingAccountMinCreateAmount
+} from "gv-api-web";
 import { getMinDeposit } from "modules/follow-module/services/follow-module-service";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
@@ -13,6 +16,21 @@ import { CurrencyEnum } from "utils/types";
 
 import useAssetSection from "../asset-section.hook";
 import InputDepositAmount from "./input-deposit-amount";
+
+const hasMinAmount = (
+  tradingAccountMinDepositAmounts: TradingAccountMinCreateAmount[],
+  currency: CurrencyEnum,
+  broker?: BrokerTradeServerType
+) => {
+  if (!broker) return false;
+  const brokerDepositAmounts = tradingAccountMinDepositAmounts.find(
+    ({ serverType }) => serverType === broker
+  );
+  if (!brokerDepositAmounts) return false;
+  return !!brokerDepositAmounts.minDepositCreateAsset.find(
+    deposit => deposit.currency === currency
+  );
+};
 
 const _DepositDetailsBlock: React.FC<Props> = ({
   broker,
@@ -46,14 +64,21 @@ const _DepositDetailsBlock: React.FC<Props> = ({
 
   if (!wallet) return null;
 
-  const minimumDepositAmountInCurr = broker
-    ? getMinDeposit({
-        isExternal: false,
-        tradingAccountMinDepositAmounts,
-        broker,
-        currency: wallet.currency
-      })
-    : convertToCurrency(minimumDepositAmount, rate);
+  const isWalletWithMinAmount = hasMinAmount(
+    tradingAccountMinDepositAmounts,
+    wallet.currency,
+    broker
+  );
+
+  const minimumDepositAmountInCurr =
+    broker && isWalletWithMinAmount
+      ? getMinDeposit({
+          isExternal: false,
+          tradingAccountMinDepositAmounts,
+          broker,
+          currency: wallet.currency
+        })
+      : convertToCurrency(minimumDepositAmount, rate);
 
   const minimumDepositAmountInCurrFormatted =
     wallet.currency === assetCurrency || broker
