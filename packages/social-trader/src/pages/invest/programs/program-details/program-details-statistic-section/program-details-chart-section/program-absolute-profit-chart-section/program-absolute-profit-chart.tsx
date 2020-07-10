@@ -1,7 +1,6 @@
 import chartXAxis from "components/chart/chart-components/chart-xaxis";
 import { ChartDataType } from "components/details/details-statistic-section/details.chart.types";
 import GVColors from "components/gv-styles/gv-colors";
-import Crashable from "decorators/crashable";
 import ProgramAbsoluteProfitTooltip from "pages/invest/programs/program-details/program-details-statistic-section/program-details-chart-section/program-absolute-profit-chart-section/program-absolute-profit-tooltip";
 import * as React from "react";
 import {
@@ -69,7 +68,5 @@ interface Props {
   currency: CurrencyEnum;
 }
 
-const ProgramAbsoluteProfitChart = React.memo(
-  Crashable(_ProgramAbsoluteProfitChart)
-);
+const ProgramAbsoluteProfitChart = React.memo(_ProgramAbsoluteProfitChart);
 export default ProgramAbsoluteProfitChart;

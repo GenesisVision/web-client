@@ -3,13 +3,11 @@ import { DetailsInvestmentBlock } from "components/details/details-description-s
 import { DetailsInvestmentFooter } from "components/details/details-description-section/details-investment/blocks/details-investment-footer";
 import { DetailsInvestmentHeading } from "components/details/details-description-section/details-investment/blocks/details-investment-title";
 import { InvestmentItem } from "components/details/details-description-section/details-investment/investment-item";
-import { LabeledValue } from "components/labeled-value/labeled-value";
 import { ProfitabilityValuePercent } from "components/profitability/profitability-value-percent";
 import { Row } from "components/row/row";
 import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import { ASSET, STATUS } from "constants/constants";
-import Crashable from "decorators/crashable";
 import { useAccountCurrency } from "hooks/account-currency.hook";
 import ProgramAutoJoin from "modules/program-auto-join/program-auto-join";
 import ProgramReinvestingContainer from "modules/program-reinvesting/components/program-reinvesting-container";
@@ -215,5 +213,5 @@ interface Props {
   personalDetails: InvestmentType;
 }
 
-const Investment = React.memo(Crashable(_Investment));
+const Investment = React.memo(_Investment);
 export default Investment;

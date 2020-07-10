@@ -1,7 +1,6 @@
 import chartXAxis from "components/chart/chart-components/chart-xaxis";
 import { BalanceChartElementType } from "components/details/details-statistic-section/details.chart.types";
 import GVColors from "components/gv-styles/gv-colors";
-import Crashable from "decorators/crashable";
 import * as React from "react";
 import {
   Area,
@@ -74,5 +73,5 @@ interface Props {
   currency: CurrencyEnum;
 }
 
-const FollowBalanceChart = React.memo(Crashable(_FollowBalanceChart));
+const FollowBalanceChart = React.memo(_FollowBalanceChart);
 export default FollowBalanceChart;

@@ -5,7 +5,6 @@ import { DetailsStatisticContainer } from "components/details/details-descriptio
 import InvestmentProgramInfo from "components/details/details-description-section/investment-program-info";
 import { Row } from "components/row/row";
 import { ASSET } from "constants/constants";
-import Crashable from "decorators/crashable";
 import {
   AssetPublicDetails,
   BrokerDetails,
@@ -90,7 +89,5 @@ interface Props {
   levelsParameters: LevelsParamsInfo;
 }
 
-const InvestmentProgramControls = React.memo(
-  Crashable(_InvestmentProgramControls)
-);
+const InvestmentProgramControls = React.memo(_InvestmentProgramControls);
 export default InvestmentProgramControls;

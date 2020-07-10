@@ -4,7 +4,6 @@ import { VERTICAL_POPOVER_POS } from "components/popover/popover";
 import { RowItem } from "components/row-item/row-item";
 import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
-import Crashable from "decorators/crashable";
 import { LevelsParamsInfo, ProgramDetailsFull } from "gv-api-web";
 import LevelCalculator from "modules/level-calculator/components/level-calculator";
 import React from "react";
@@ -150,5 +149,5 @@ interface IInvestmentProgramInfoProps {
   levelsParameters: LevelsParamsInfo;
 }
 
-const InvestmentProgramInfo = React.memo(Crashable(_InvestmentProgramInfo));
+const InvestmentProgramInfo = React.memo(_InvestmentProgramInfo);
 export default InvestmentProgramInfo;

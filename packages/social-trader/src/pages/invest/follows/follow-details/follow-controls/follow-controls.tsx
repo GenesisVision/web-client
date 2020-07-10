@@ -2,7 +2,6 @@ import SignalProviderControls from "components/details/details-description-secti
 import { DetailsStatisticContainer } from "components/details/details-description-section/details-description/details-structure-blocks";
 import { Row } from "components/row/row";
 import { ASSET } from "constants/constants";
-import Crashable from "decorators/crashable";
 import {
   AssetPublicDetails,
   BrokerDetails,
@@ -74,5 +73,5 @@ interface Props {
   brokerDetails: BrokerDetails;
 }
 
-const FollowControls = React.memo(Crashable(_FollowControls));
+const FollowControls = React.memo(_FollowControls);
 export default FollowControls;
