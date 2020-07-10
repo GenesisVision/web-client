@@ -32,7 +32,11 @@ const Page: NextPageWithRedux<Props> = ({
 Page.getInitialProps = async ctx => {
   const cookieShowEvents = getShowEventsState(ctx);
   const data = await getSocialPageData(ctx.token);
-  const initFeedData = await getGlobalFeed(initialOptions, ctx.token);
+  const showEvents = cookieShowEvents === undefined ? true : cookieShowEvents;
+  const initFeedData = await getGlobalFeed(
+    { ...initialOptions, showEvents },
+    ctx.token
+  );
   return {
     cookieShowEvents,
     initFeedData,
