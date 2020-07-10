@@ -81,7 +81,7 @@ const _DepositDetailsBlock: React.FC<Props> = ({
       : convertToCurrency(minimumDepositAmount, rate);
 
   const minimumDepositAmountInCurrFormatted =
-    wallet.currency === assetCurrency || broker
+    wallet.currency === assetCurrency
       ? minimumDepositAmountInCurr
       : +formatCurrencyValue(minimumDepositAmountInCurr, wallet.currency, {
           up: true
