@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { ResponsiveContainer } from "components/responsive-container/responsive-container";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
@@ -28,7 +29,12 @@ export const SocialPageContainer: React.FC<Props> = ({
         <ResponsiveContainer
           enabledScreens={["landscape-tablet", "desktop", "large-desktop"]}
         >
-          <RowItem className={styles["social-page__side-block"]}>
+          <RowItem
+            className={clsx(
+              styles["social-page__side-block"],
+              styles["social-page__left-block"]
+            )}
+          >
             <Row>
               <SocialPageTradersBlock assets={data?.topStrategies} />
             </Row>
@@ -50,7 +56,12 @@ export const SocialPageContainer: React.FC<Props> = ({
           <SocialPageFeedBlock initData={initFeedData} />
         </RowItem>
         <ResponsiveContainer enabledScreens={["large-desktop", "desktop"]}>
-          <RowItem className={styles["social-page__side-block"]}>
+          <RowItem
+            className={clsx(
+              styles["social-page__side-block"],
+              styles["social-page__right-block"]
+            )}
+          >
             <Row>
               <SocialPageTopicsBlock topics={data?.hotTopics} />
             </Row>

@@ -23,6 +23,20 @@ $tablet-side-block-width: calc(100% - #{$tablet-center-width});
     }
   }
 
+  &__left-block {
+    display: none;
+    @include media-breakpoint-landscape-tablet() {
+      display: block;
+    }
+  }
+
+  &__right-block {
+    display: none;
+    @include media-breakpoint-desktop() {
+      display: block;
+    }
+  }
+
   &__side-block {
     position: relative;
     @include media-breakpoint-landscape-tablet() {
