@@ -3,7 +3,6 @@ import {
   ChartAssetsType,
   ChartsDataType
 } from "components/details/details-statistic-section/details.chart.types";
-import Crashable from "decorators/crashable";
 import { TChartCurrency } from "modules/chart-currency-selector/chart-currency-selector.types";
 import * as React from "react";
 
@@ -31,5 +30,5 @@ interface Props {
   chartCurrencies?: TChartCurrency[];
 }
 
-const FundProfitChart = React.memo(Crashable(_FundProfitChart));
+const FundProfitChart = React.memo(_FundProfitChart);
 export default FundProfitChart;

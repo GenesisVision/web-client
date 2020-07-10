@@ -1,5 +1,5 @@
+import { InvestmentItem } from "components/details/details-description-section/details-investment/investment-item";
 import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
-import StatisticItem from "components/statistic-item/statistic-item";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
@@ -12,30 +12,28 @@ const _SignalInfo: React.FC<ISignalProgramInfoProps> = ({
   const [t] = useTranslation();
   return (
     <StatisticItemList>
-      <StatisticItem
+      <InvestmentItem
         label={
           <TooltipLabel
             tooltipContent={t(
-              "program-details-page.tooltip.success-fee-signal"
+              "program-details-page:tooltip.success-fee-signal"
             )}
-            labelText={t("program-details-page.description.successFee")}
+            labelText={t("asset-details:description.successFee")}
           />
         }
-        accent
       >
         <NumberFormat value={successFee} displayType="text" suffix=" %" />
-      </StatisticItem>
-      <StatisticItem
+      </InvestmentItem>
+      <InvestmentItem
         label={
           <TooltipLabel
-            tooltipContent={t("program-details-page.tooltip.volume-fee")}
-            labelText={t("program-details-page.description.volume-fee")}
+            tooltipContent={t("program-details-page:tooltip.volume-fee")}
+            labelText={t("asset-details:description.volume-fee")}
           />
         }
-        accent
       >
         <NumberFormat value={volumeFee} displayType="text" suffix=" %" />
-      </StatisticItem>
+      </InvestmentItem>
     </StatisticItemList>
   );
 };

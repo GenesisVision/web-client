@@ -15,9 +15,7 @@ const Page: NextPageWithRedux<Props> = ({ initData }) => {
 
 Page.getInitialProps = async ctx => {
   const initData = await getSocialMedia(initialOptions, ctx.token);
-  return {
-    initData
-  };
+  return { namespacesRequired: ["conversation"], initData };
 };
 
 export default compose(withDefaultLayout)(Page);

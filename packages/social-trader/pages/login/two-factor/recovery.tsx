@@ -11,6 +11,7 @@ const Page: NextPage<Props> = ({ redirectFrom }) => {
 
 Page.getInitialProps = async () => {
   return {
+    namespacesRequired: ["auth"],
     redirectFrom: HOME_ROUTE
   };
 };
@@ -22,5 +23,5 @@ interface Props {
 export default withAuthLayout({
   footerAuthRoute: SIGNUP_ROUTE,
   Footer: LoginFooter,
-  titleKey: "auth.login.title"
+  titleKey: "auth:login.title"
 })(Page);

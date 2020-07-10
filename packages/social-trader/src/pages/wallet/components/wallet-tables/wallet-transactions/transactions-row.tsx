@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import Status from "components/status/status";
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
@@ -39,7 +39,7 @@ const _TransactionsRow: React.FC<Props> = ({
           </TableCell>
         )}
         <TableCell
-          className={classNames(
+          className={clsx(
             styles["wallet-transactions__cell"],
             styles["wallet-transactions__cell--date"]
           )}
@@ -50,7 +50,7 @@ const _TransactionsRow: React.FC<Props> = ({
           <Status status={transaction.status} />
         </TableCell>
         <TableCell
-          className={classNames(
+          className={clsx(
             styles["wallet-transactions__cell"],
             styles["wallet-transactions__cell--information"]
           )}
@@ -58,7 +58,7 @@ const _TransactionsRow: React.FC<Props> = ({
           {transaction.description}
         </TableCell>
         <TableCell
-          className={classNames(
+          className={clsx(
             styles["wallet-transactions__cell"],
             styles["wallet-transactions__cell--amount"]
           )}

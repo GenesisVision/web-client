@@ -1,6 +1,5 @@
 import AssetAvatarWithName from "components/avatar/asset-avatar/asset-avatar-with-name";
 import { Center } from "components/center/center";
-import { GV_BTN_SIZE } from "components/gv-button";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import { RowItem } from "components/row-item/row-item";
@@ -118,7 +117,7 @@ const _SubscriptionTableRow: React.FC<Props> = ({
         <Center>
           <RowItem>
             <EditFollowButton
-              size={GV_BTN_SIZE.MIDDLE}
+              size={"middle"}
               signalSubscription={subscriptionInfo}
               onApply={onApply}
               currency={assetCurrency}
@@ -130,7 +129,7 @@ const _SubscriptionTableRow: React.FC<Props> = ({
           </RowItem>
           <RowItem>
             <UnFollowButton
-              size={GV_BTN_SIZE.MIDDLE}
+              size={"middle"}
               onApply={onApply}
               id={id}
               tradingAccountId={

@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { DropZoneWrapper } from "components/form/input-image/drop-zone-wrapper";
 import { InputImageCropper } from "components/form/input-image/input-image-cropper";
 import * as React from "react";
@@ -34,7 +34,7 @@ const _InputImage: React.FC<IInputImageProps> = ({
   const hasSizeError = error && error.image.size;
   return (
     <div
-      className={classNames(styles["input-image"], className, {
+      className={clsx(styles["input-image"], className, {
         [styles["input-image--error"]]: error !== undefined
       })}
     >
@@ -62,28 +62,28 @@ const _InputImage: React.FC<IInputImageProps> = ({
               )}
             </div>
             <p
-              className={classNames(
+              className={clsx(
                 styles["input-image__text"],
                 styles["input-image__text--big"]
               )}
             >
-              {t("input-image.drag-or-click")}
+              {t("form-fields:input-image.drag-or-click")}
               <span
                 className={styles["input-image__text-upload"]}
                 onClick={open}
               >
-                {t("input-image.upload")}
+                {t("form-fields:input-image.upload")}
               </span>
-              {t("input-image.to-browse")}
+              {t("form-fields:input-image.to-browse")}
             </p>
             <p
-              className={classNames(
+              className={clsx(
                 styles["input-image__text"],
                 styles["input-image__text--small"]
               )}
               onClick={open}
             >
-              {t("input-image.tap-to-upload")}
+              {t("form-fields:input-image.tap-to-upload")}
             </p>
           </div>
         )}

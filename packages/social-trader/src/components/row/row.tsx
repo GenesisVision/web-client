@@ -1,19 +1,17 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { Center } from "components/center/center";
 import React from "react";
+import { Sizeable } from "utils/types";
 
 import styles from "./row.module.scss";
 
 export const Row: React.FC<Props> = ({
-  xlarge,
+  size = "middle",
   onlyOffset,
   center = true,
   wide,
-  middle = true,
   hide,
   className,
-  small,
-  large,
   children,
   ...otherProps
 }) => {
@@ -21,15 +19,16 @@ export const Row: React.FC<Props> = ({
     <Center
       {...otherProps}
       center={center && !onlyOffset}
-      className={classNames(styles["row"], className, {
+      className={clsx(styles["row"], className, {
         [styles["row--pointer"]]: !!otherProps.onClick,
         [styles["row--flex"]]: !onlyOffset,
         [styles["row--wide"]]: wide,
         [styles["row--hidden"]]: hide,
-        [styles["row--small"]]: small,
-        [styles["row--middle"]]: middle && !(small || large || xlarge),
-        [styles["row--xlarge"]]: xlarge,
-        [styles["row--large"]]: large
+        [styles["row--xsmall"]]: size === "xsmall",
+        [styles["row--small"]]: size === "small",
+        [styles["row--middle"]]: size === "middle",
+        [styles["row--xlarge"]]: size === "xlarge",
+        [styles["row--large"]]: size === "large"
       })}
     >
       {children}
@@ -37,15 +36,11 @@ export const Row: React.FC<Props> = ({
   );
 };
 
-interface Props extends React.HTMLAttributes<HTMLDivElement> {
-  xlarge?: boolean;
+interface Props extends React.HTMLAttributes<HTMLDivElement>, Sizeable {
   onlyOffset?: boolean;
   wide?: boolean;
   hide?: boolean;
   center?: boolean;
   className?: string;
   wrap?: boolean;
-  small?: boolean;
-  middle?: boolean;
-  large?: boolean;
 }

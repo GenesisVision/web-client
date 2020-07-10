@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import * as React from "react";
 import { ReactNode } from "react";
 
@@ -11,7 +11,7 @@ const TableRow: React.FC<Props> = ({
   ...other
 }) => (
   <tr
-    className={classNames(
+    className={clsx(
       styles["table__row"],
       {
         [styles["table__row--stripy"]]: stripy

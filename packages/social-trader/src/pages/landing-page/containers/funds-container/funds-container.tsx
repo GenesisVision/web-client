@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import ImageBaseElement from "components/avatar/image-base.element";
 import { FundDetailsListItem } from "gv-api-web";
 import { useTranslation } from "i18n";
@@ -33,7 +33,7 @@ const _FundsContainer: React.FC<Props> = ({ funds }) => {
   return (
     <div className={styles["funds-container"]}>
       <div
-        className={classNames(styles["funds-container__info"], {
+        className={clsx(styles["funds-container__info"], {
           [styles["funds-container__info--hide"]]: hide,
           [styles["funds-container__info--show"]]: !hide
         })}

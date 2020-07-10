@@ -24,9 +24,11 @@ const _ProgramsFacetPage: React.FC<Props> = ({ t, id }) => {
 
   return (
     <Page
-      description={`${t("follows-page.title")} ${t(`facets.${id}`)} facet list`}
+      description={`${t("follows-page:title")} ${t(
+        `asset-list:facets.${id}`
+      )} facet list`}
       showTitle
-      title={`${t("follows-page.title")} ${t(`facets.${id}`)}`}
+      title={`${t("follows-page:title")} ${t(`asset-list:facets.${id}`)}`}
     >
       <DefaultTableBlock>
         <FacetContainer

@@ -1,37 +1,78 @@
-import { DialogButtons } from "components/dialog/dialog-buttons";
-import { Row } from "components/row/row";
+import GVButton from "components/gv-button";
+import { Push } from "components/link/link";
 import { SubmitButton } from "components/submit-button/submit-button";
+import useIsOpen from "hooks/is-open.hook";
+import SignupDialog from "pages/auth/signup/signup-popup/signup-dialog";
+import { composeCreateAccountRouteWithBroker } from "pages/create-account/create-account.constants";
+import { TerminalInfoContext } from "pages/trades/binance-trade-page/trading/terminal-info.context";
 import {
   OrderSide,
-  TradeCurrency
-} from "pages/trades/binance-trade-page/trading/trading.types";
-import React from "react";
+  TerminalCurrency
+} from "pages/trades/binance-trade-page/trading/terminal.types";
+import React, { useContext } from "react";
+import { useSelector } from "react-redux";
+import { isAuthenticatedSelector } from "reducers/auth-reducer";
 
 interface Props {
   isSuccessful?: boolean;
   side: OrderSide;
-  asset: TradeCurrency;
+  asset: TerminalCurrency;
 }
 
-const _PlaceOrderSubmitButton: React.FC<Props> = ({
-  isSuccessful,
-  side,
-  asset
-}) => {
+const RealSubmit: React.FC<Props> = ({ isSuccessful, side, asset }) => {
   return (
-    <Row>
-      <SubmitButton
-        checkDirty={false}
-        isSuccessful={isSuccessful}
+    <SubmitButton
+      checkDirty={false}
+      isSuccessful={isSuccessful}
+      color={side === "SELL" ? "danger" : "primary"}
+      wide
+    >
+      <>
+        {side} {asset}
+      </>
+    </SubmitButton>
+  );
+};
+
+const UnAuthButton: React.FC<Props> = ({ side, asset }) => {
+  const [isOpen, setOpen, setClose] = useIsOpen();
+  return (
+    <>
+      <GVButton
         color={side === "SELL" ? "danger" : "primary"}
         wide
+        onClick={setOpen}
       >
         <>
           {side} {asset}
         </>
-      </SubmitButton>
-    </Row>
+      </GVButton>
+      <SignupDialog open={isOpen} onClose={setClose} />
+    </>
   );
+};
+
+const WithoutAccountButton: React.FC<Props> = ({ side, asset }) => {
+  return (
+    <GVButton
+      color={side === "SELL" ? "danger" : "primary"}
+      wide
+      onClick={() => Push(composeCreateAccountRouteWithBroker("Binance"))}
+    >
+      <>
+        {side} {asset}
+      </>
+    </GVButton>
+  );
+};
+
+const _PlaceOrderSubmitButton: React.FC<Props> = props => {
+  const isAuthenticated = useSelector(isAuthenticatedSelector);
+  const { authData } = useContext(TerminalInfoContext);
+
+  if (!isAuthenticated) return <UnAuthButton {...props} />;
+  if (!authData?.publicKey) return <WithoutAccountButton {...props} />;
+  return <RealSubmit {...props} />;
 };
 
 export const PlaceOrderSubmitButton = React.memo(_PlaceOrderSubmitButton);

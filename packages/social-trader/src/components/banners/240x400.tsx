@@ -1,11 +1,11 @@
 import React from "react";
-import { formatCurrencyValue } from "utils/formatter";
+import { roundPercents } from "utils/formatter";
 
 import BannerChart from "./components/banner-chart";
 import GvLogo from "./components/gv-logo";
 import LogoPlaceholder from "./components/logo-placeholder";
 import Text from "./components/text";
-import { BannerComponent, LogoOptions } from "./utils";
+import { BannerComponent, formatEquity, LogoOptions } from "./utils";
 
 type Position = { y: number };
 
@@ -59,22 +59,19 @@ export const Banner: BannerComponent = props => {
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
     >
-      <rect width={240} height={400} fill="#1F2B35"/>
-      <rect y={337} width={240} height={63} fill="#131E26"/>
+      <rect width={240} height={400} fill="#1F2B35" />
+      <rect y={337} width={240} height={63} fill="#131E26" />
       <LogoPlaceholder
         {...LOGO_OPTIONS}
         href={props.details.publicInfo.logo}
         color={props.details.publicInfo.color}
       />
-      <GvLogo y={359} x={69}/>
+      <GvLogo y={359} x={69} />
       <Label>{props.details.publicInfo.title}</Label>
       <Title y={92}>Monthly Profit</Title>
-      <Value y={92}>{`${statistic.profitPercent}%`}</Value>
+      <Value y={92}>{roundPercents(statistic.profitPercent)}</Value>
       <Title y={122}>Equity</Title>
-      <Value y={122}>{`${formatCurrencyValue(
-        statistic.balance,
-        points.currency
-      )} ${points.currency}`}</Value>
+      <Value y={122}>{formatEquity(statistic.balance)}</Value>
       <BannerChart {...chartProps} />
     </svg>
   );

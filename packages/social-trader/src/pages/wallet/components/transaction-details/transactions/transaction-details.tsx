@@ -7,7 +7,10 @@ const _TransactionDetails: React.FC<Props> = ({ header, body, bottom }) => {
   const [t] = useTranslation();
   return (
     <>
-      <DialogTop title={t(`transactions-details.title`)} subtitle={header}>
+      <DialogTop
+        title={t(`wallet-page:transactions-details.title`)}
+        subtitle={header}
+      >
         {body}
       </DialogTop>
       <DialogBottom>{bottom}</DialogBottom>

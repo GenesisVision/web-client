@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import DateRangeFilter from "components/table/components/filtering/date-range-filter/date-range-filter";
 import {
   DATE_RANGE_FILTER_NAME,
@@ -90,12 +90,12 @@ const _WalletTransactions: React.FC<Props> = ({
       columns={columns}
       renderHeader={column => (
         <span
-          className={classNames(
+          className={clsx(
             styles["wallet-transactions__cell"],
             styles[`wallet-transactions__cell--${column.name}`]
           )}
         >
-          {t(`wallet-page.transactions.${column.name}`)}
+          {t(`wallet-page:transactions.${column.name}`)}
         </span>
       )}
       renderBodyRow={renderBodyRow}

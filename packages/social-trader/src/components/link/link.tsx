@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import NextLink from "next/link";
 import Router from "next/router";
 import React, { useCallback } from "react";
@@ -52,7 +52,7 @@ const Link: React.FC<LinkProps> = ({
   return (
     <NextLink href={normalizedTo.pathname} as={normalizedTo.as}>
       <a
-        className={classNames({
+        className={clsx({
           [styles["link--wide"]]: wide,
           [styles["link--white"]]: white
         })}

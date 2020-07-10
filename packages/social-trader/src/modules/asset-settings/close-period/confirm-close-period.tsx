@@ -18,7 +18,7 @@ const _ConfirmClosePeriod: React.FC<IClosePeriodProps> = ({
   });
   const { sendRequest, errorMessage } = useApiRequest({
     request: closePeriod,
-    successMessage: "program-details-page.close-period.notification-success",
+    successMessage: "asset-settings:close-period.notification-success",
     middleware: [onCloseMiddleware]
   });
   const handleApplyClick = useCallback(() => {
@@ -32,8 +32,8 @@ const _ConfirmClosePeriod: React.FC<IClosePeriodProps> = ({
       onClose={onClose}
       onCancel={onClose}
       onApply={handleApplyClick}
-      header={t("program-details-page.close-period.title")}
-      body={t("program-details-page.close-period.body")}
+      header={t("asset-settings:close-period.title")}
+      body={t("asset-settings:close-period.body")}
       applyButtonText={t("buttons.confirm")}
     />
   );

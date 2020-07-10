@@ -1,7 +1,7 @@
 import Select, { ISelectChangeEvent } from "components/select/select";
 import withLoader from "decorators/with-loader";
 import * as React from "react";
-import { CurrencyEnum, SizesType } from "utils/types";
+import { CurrencyEnum, Sizeable } from "utils/types";
 
 const _CurrencySelect: React.FC<Props> = ({
   bottomLine = true,
@@ -31,9 +31,8 @@ const _CurrencySelect: React.FC<Props> = ({
   );
 };
 
-interface Props {
+interface Props extends Sizeable {
   bottomLine?: boolean;
-  size?: SizesType;
   value: CurrencyEnum | string;
   onChange: (event: ISelectChangeEvent, child: JSX.Element) => void;
   currencyValues: CurrencyEnum[];

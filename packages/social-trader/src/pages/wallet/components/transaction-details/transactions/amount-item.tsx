@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { DEFAULT_DECIMAL_SCALE } from "constants/constants";
@@ -16,14 +16,14 @@ const _AmountItem: React.FC<Props> = ({
   return (
     <ColoredAmount color={color}>
       <Row>
-        <RowItem small>
+        <RowItem size={"small"}>
           <NumberFormat
             value={formatValue(amount, DEFAULT_DECIMAL_SCALE)}
             allowNegative={true}
             displayType="text"
           />
         </RowItem>
-        <RowItem small>{currency}</RowItem>
+        <RowItem size={"small"}>{currency}</RowItem>
       </Row>
     </ColoredAmount>
   );
@@ -34,7 +34,7 @@ const ColoredAmount: React.FC<{ color: Color } & React.HTMLAttributes<
 >> = ({ color, children }) => {
   return (
     <div
-      className={classNames({
+      className={clsx({
         [styles["amount-item__amount--white"]]: color === "White",
         [styles["amount-item__amount--red"]]: color === "Red",
         [styles["amount-item__amount--green"]]: color === "Green"

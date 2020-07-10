@@ -43,7 +43,7 @@ const _LoginForm: React.FC<Props> = ({ errorMessage, onSubmit }) => {
         autoFocus
         type="email"
         name={FIELDS.email}
-        label={t("auth.login.placeholder.email")}
+        label={t("auth:login.placeholder.email")}
         autoComplete="email"
         component={SimpleTextField}
       />
@@ -52,16 +52,16 @@ const _LoginForm: React.FC<Props> = ({ errorMessage, onSubmit }) => {
           wide
           type="password"
           name={FIELDS.password}
-          label={t("auth.login.placeholder.password")}
+          label={t("auth:login.placeholder.password")}
           autoComplete="current-password"
           component={SimpleTextField}
         />
       </Row>
 
-      <Row large>
+      <Row size={"large"}>
         <Link to={FORGOT_PASSWORD_ROUTE}>
           <GVButton noPadding variant="text">
-            {t("auth.login.forgot")}
+            {t("auth:login.forgot")}
           </GVButton>
         </Link>
       </Row>
@@ -71,7 +71,7 @@ const _LoginForm: React.FC<Props> = ({ errorMessage, onSubmit }) => {
         </Row>
       )}
 
-      <Row large>
+      <Row size={"large"}>
         <SubmitButton
           checkValid={false}
           checkDirty={false}
@@ -80,7 +80,7 @@ const _LoginForm: React.FC<Props> = ({ errorMessage, onSubmit }) => {
           isSuccessful={requestStatus === CAPTCHA_STATUS.SUCCESS}
           isPending={requestStatus === CAPTCHA_STATUS.PENDING}
         >
-          {t("auth.login.confirm-button-text")}
+          {t("auth:login.confirm-button-text")}
         </SubmitButton>
       </Row>
     </HookForm>

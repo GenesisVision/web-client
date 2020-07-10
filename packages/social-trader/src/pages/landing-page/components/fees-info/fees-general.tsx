@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { useTranslation } from "i18n";
 import { Done } from "pages/landing-page/components/common-icons/done";
 import React from "react";
@@ -13,14 +13,14 @@ const _FeesGeneral: React.FC = () => {
         <div className={styles["fees-info__container"]}>
           <div className={styles["fees-info__wrapper"]}>
             <h2 className={styles["fees-info__title"]}>
-              {t("fees.platform-fee")}
+              {t("fees:platform-fee")}
             </h2>
           </div>
           <div className={styles["fees-info__table-wrapper"]}>
             <table className={styles["fees-table"]}>
               <thead className={styles["fees-table__head"]}>
                 <tr className={styles["fees-table__row"]}>
-                  {t("fees.platform-table-head")
+                  {t("fees:platform-table-head")
                     .split("\t")
                     .map((line, index) => (
                       <th key={index} className={styles["fees-table__cell"]}>
@@ -32,13 +32,13 @@ const _FeesGeneral: React.FC = () => {
               <tbody>
                 <tr className={styles["fees-table__row"]}>
                   <td className={styles["fees-table__cell"]}>
-                    {t("fees.entry-fee")}
+                    {t("fees:entry-fee")}
                   </td>
                   <td className={styles["fees-table__cell"]}>
-                    {t("fees.entry-fee-number")}
+                    {t("fees:entry-fee-number")}
                   </td>
                   <td
-                    className={classNames(
+                    className={clsx(
                       styles["fees-table__cell"],
                       styles["fees-table__cell--color-primary"]
                     )}
@@ -46,7 +46,7 @@ const _FeesGeneral: React.FC = () => {
                     <span>{<Done />}</span>
                   </td>
                   <td
-                    className={classNames(
+                    className={clsx(
                       styles["fees-table__cell"],
                       styles["fees-table__cell--color-primary"]
                     )}
@@ -54,7 +54,7 @@ const _FeesGeneral: React.FC = () => {
                     <b>&mdash;</b>
                   </td>
                   <td
-                    className={classNames(
+                    className={clsx(
                       styles["fees-table__cell"],
                       styles["fees-table__cell--color-primary"]
                     )}
@@ -64,13 +64,13 @@ const _FeesGeneral: React.FC = () => {
                 </tr>
                 <tr className={styles["fees-table__row"]}>
                   <td className={styles["fees-table__cell"]}>
-                    {t("fees.success-fee")}
+                    {t("fees:success-fee")}
                   </td>
                   <td className={styles["fees-table__cell"]}>
-                    {t("fees.success-fee-number")}
+                    {t("fees:success-fee-number")}
                   </td>
                   <td
-                    className={classNames(
+                    className={clsx(
                       styles["fees-table__cell"],
                       styles["fees-table__cell--color-primary"]
                     )}
@@ -78,7 +78,7 @@ const _FeesGeneral: React.FC = () => {
                     {<Done />}
                   </td>
                   <td
-                    className={classNames(
+                    className={clsx(
                       styles["fees-table__cell"],
                       styles["fees-table__cell--color-primary"]
                     )}
@@ -86,7 +86,7 @@ const _FeesGeneral: React.FC = () => {
                     {<Done />}
                   </td>
                   <td
-                    className={classNames(
+                    className={clsx(
                       styles["fees-table__cell"],
                       styles["fees-table__cell--color-primary"]
                     )}
@@ -96,13 +96,13 @@ const _FeesGeneral: React.FC = () => {
                 </tr>
                 <tr className={styles["fees-table__row"]}>
                   <td className={styles["fees-table__cell"]}>
-                    {t("fees.gv-commission")}
+                    {t("fees:gv-commission")}
                   </td>
                   <td className={styles["fees-table__cell"]}>
-                    {t("fees.gv-commission-number")}
+                    {t("fees:gv-commission-number")}
                   </td>
                   <td
-                    className={classNames(
+                    className={clsx(
                       styles["fees-table__cell"],
                       styles["fees-table__cell--color-primary"]
                     )}
@@ -110,7 +110,7 @@ const _FeesGeneral: React.FC = () => {
                     <b>&mdash;</b>
                   </td>
                   <td
-                    className={classNames(
+                    className={clsx(
                       styles["fees-table__cell"],
                       styles["fees-table__cell--color-primary"]
                     )}
@@ -118,7 +118,7 @@ const _FeesGeneral: React.FC = () => {
                     {<Done />}
                   </td>
                   <td
-                    className={classNames(
+                    className={clsx(
                       styles["fees-table__cell"],
                       styles["fees-table__cell--color-primary"]
                     )}
@@ -131,7 +131,7 @@ const _FeesGeneral: React.FC = () => {
           </div>
           <div className={styles["fees-info__notes"]}>
             <ul className={styles["fees-info__list-notes"]}>
-              {t("fees.list-1")
+              {t("fees:list-1")
                 .split("\n")
                 .map((line, index) => (
                   <li key={index} className={styles["fees-info__note-item"]}>
@@ -139,19 +139,19 @@ const _FeesGeneral: React.FC = () => {
                   </li>
                 ))}
               <li
-                className={classNames(
+                className={clsx(
                   styles["fees-info__note-item"],
                   styles["fees-info__note-item--star"]
                 )}
               >
-                {t("fees.list-last-item")}
+                {t("fees:list-last-item")}
               </li>
             </ul>
           </div>
         </div>
       </div>
       <div
-        className={classNames(
+        className={clsx(
           styles["fees-info__section--bg-gray"],
           styles["fees-info__section"]
         )}
@@ -159,20 +159,20 @@ const _FeesGeneral: React.FC = () => {
         <div className={styles["fees-info__container"]}>
           <div className={styles["fees-info__wrapper"]}>
             <h2 className={styles["fees-info__title"]}>
-              {t("fees.withdrawal-fee")}
+              {t("fees:withdrawal-fee")}
             </h2>
-            <p className={styles["fees-info__text"]}>{t("fees.text-2")}</p>
+            <p className={styles["fees-info__text"]}>{t("fees:text-2")}</p>
           </div>
           <div className={styles["fees-info__table-wrapper"]}>
             <table
-              className={classNames(
+              className={clsx(
                 styles["fees-table"],
                 styles["fees-table--white-head"]
               )}
             >
               <thead className={styles["fees-table__head"]}>
                 <tr className={styles["fees-table__row"]}>
-                  {t("fees.withdrawal-table-head")
+                  {t("fees:withdrawal-table-head")
                     .split("\t")
                     .map((line, index) => (
                       <th key={index} className={styles["fees-table__cell"]}>
@@ -183,7 +183,7 @@ const _FeesGeneral: React.FC = () => {
               </thead>
               <tbody>
                 <tr className={styles["fees-table__row"]}>
-                  {t("fees.withdrawal-table-row")
+                  {t("fees:withdrawal-table-row")
                     .split("\t")
                     .map((line, index) => (
                       <td key={index} className={styles["fees-table__cell"]}>

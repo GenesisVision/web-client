@@ -1,5 +1,6 @@
 import * as crypto from "crypto-js";
 import fetch from "isomorphic-unfetch";
+import { TimeInForce } from "pages/trades/binance-trade-page/trading/terminal.types";
 import { from } from "rxjs";
 import { AnyObjectType } from "utils/types";
 
@@ -7,7 +8,7 @@ export interface RequestOptions {
   privateKey?: string;
   publicKey?: string;
   url: string;
-  params?: OrderRequest;
+  params?: AnyObjectType;
   type?: REQUEST_TYPE[];
   method?: HTTP_METHODS;
 }
@@ -29,12 +30,6 @@ export interface OrderRequest extends AnyObjectType {
   startTime?: number;
   endTime?: number;
   limit?: number | string;
-}
-
-export enum TimeInForce {
-  GTC = "GTC",
-  IOC = "IOC",
-  FOK = "FOK"
 }
 
 export enum HTTP_METHODS {
@@ -67,7 +62,7 @@ export const handleErrors = async (response: Response) => {
 
 const parseOptions = (options: OrderRequest) =>
   Object.entries(options)
-    .map(([name, value]) => `${name}=${String(value).toUpperCase()}`)
+    .map(([name, value]) => `${name}=${String(value)}`)
     .join("&");
 
 const signOptions = (options: OrderRequest, privateKey?: string): string =>
@@ -85,7 +80,8 @@ export const sendRequest = ({
   const body: AnyObjectType = {};
 
   if (params)
-    for (const param in params) if (params[param]) body[param] = params[param];
+    for (const param in params)
+      if (params[param] !== undefined) body[param] = params[param];
 
   if (type && type.includes(REQUEST_TYPE.AUTHORIZED)) {
     headers[BINANCE_API_KEY_HEADER] = publicKey;

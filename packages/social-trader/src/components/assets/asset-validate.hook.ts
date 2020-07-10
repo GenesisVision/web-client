@@ -20,7 +20,7 @@ const useAssetValidate = ({
   return useCallback(
     (e?: handleSubmitValue): void => {
       if (isValid) return handleSubmit(e);
-      else successAlert(t("create-program-page.notifications.validate-error"));
+      else successAlert(t("create-account:notifications.validate-error"));
     },
     [handleSubmit, isValid]
   );

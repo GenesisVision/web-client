@@ -14,6 +14,7 @@ Page.getInitialProps = async ctx => {
   const { id } = ctx.query;
   const post = await getPost({ id: id as string, token: ctx.token });
   return {
+    namespacesRequired: ["form-fields", "conversation"],
     post
   };
 };

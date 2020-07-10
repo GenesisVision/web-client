@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { Row } from "components/row/row";
 import * as React from "react";
 
@@ -16,7 +16,7 @@ const _HidedAssets: React.FC<Props> = ({ type, count, handleOpen }) => {
           onClick={handleOpen}
         >
           <Row
-            className={classNames(
+            className={clsx(
               styles["fund-asset"],
               styles["fund-asset--others-count"]
             )}

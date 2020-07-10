@@ -24,7 +24,7 @@ const _SubscriptionsTable: React.FC<Props> = ({
       items={data}
       renderHeader={column => (
         <span>
-          {t(`account-details-page.subscriptions.table.${column.name}`)}
+          {t(`account-details-page:subscriptions.table.${column.name}`)}
         </span>
       )}
       renderBodyRow={(provider: AccountSubscriptionsDataType) => (

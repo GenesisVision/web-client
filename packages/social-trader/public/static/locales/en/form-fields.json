@@ -1,0 +1,9 @@
+{
+  "input-image": {
+    "drop-files": "Drop files...",
+    "drag-or-click": "Drag the image here or click ",
+    "upload": "upload",
+    "to-browse": " to browse your files",
+    "tap-to-upload": "Tap to upload the image"
+  }
+}

@@ -1,5 +1,4 @@
 import { DetailsStatisticContainer } from "components/details/details-description-section/details-description/details-structure-blocks";
-import Crashable from "decorators/crashable";
 import { AssetGuestActions, BrokerTradeServerType } from "gv-api-web";
 import * as React from "react";
 import { useCallback } from "react";
@@ -55,5 +54,5 @@ interface Props {
   currency: CurrencyEnum;
 }
 
-const SignalProviderButtons = React.memo(Crashable(_SignalProviderButtons));
+const SignalProviderButtons = React.memo(_SignalProviderButtons);
 export default SignalProviderButtons;

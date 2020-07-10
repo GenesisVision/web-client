@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import React, { useCallback } from "react";
 
 import { MultiPie } from "./pie";
@@ -22,7 +22,7 @@ const _MultiPieContainer: React.FC<Props> = ({ data, over, setOverItem }) => {
   });
   return (
     <div className={styles["multi-pie-container"]}>
-      <div className={classNames(styles["multi-pie-container__chart"])}>
+      <div className={clsx(styles["multi-pie-container__chart"])}>
         <MultiPie
           over={over}
           circles={dataWithBegin}

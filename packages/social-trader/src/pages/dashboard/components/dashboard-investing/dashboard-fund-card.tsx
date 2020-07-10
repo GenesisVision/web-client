@@ -34,7 +34,7 @@ const _DashboardFundCard: React.FC<Props> = ({
           FUND_DETAILS_FOLDER_ROUTE
         )}
       >
-        {t("fund-actions.details")}
+        {t("asset-actions.details")}
       </TableCardActionsItem>
       {fund.personalDetails && (
         <TableCardFavoriteActionItem
@@ -71,6 +71,8 @@ const _DashboardFundCard: React.FC<Props> = ({
         drawdown={fund.statistic.drawdown}
         topFundAssets={fund.topFundAssets}
         totalAssetsCount={fund.totalAssetsCount}
+        amountTitle={t("header-fields.value")}
+        amountTitleTooltip={t("dashboard-page:tooltips.investing.size")}
       />
       <DepositWithdrawButtons
         title={fund.title}

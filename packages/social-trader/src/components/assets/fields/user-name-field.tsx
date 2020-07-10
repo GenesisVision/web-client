@@ -12,9 +12,9 @@ const _UserNameField: React.FC<Props> = ({ name }) => {
       <AssetFormField
         type="text"
         name={name}
-        label={t("profile-page.login")}
+        label={t("profile-page:login")}
         component={SimpleTextField}
-        caption={t("create-program-page.settings.fields.name-requirements")}
+        caption={t("asset-settings:fields.name-requirements")}
       />
     </AssetField>
   );

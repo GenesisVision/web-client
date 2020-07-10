@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import useIsOpen from "hooks/is-open.hook";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
@@ -17,6 +17,7 @@ const CHANGE_CARET_KEYS = [...ARROW_KEYS];
 const ROWS_HEIGHT = 22;
 
 interface GVTextAreaProps {
+  focusTrigger?: any;
   outerCaret?: number;
   onChangeCaret?: (position: number) => void;
   onKeyDown?: (e: TextareaKeyDownEventExtended) => void;
@@ -29,6 +30,7 @@ interface GVTextAreaProps {
 }
 
 const _GVTextArea: React.FC<GVTextAreaProps> = ({
+  focusTrigger,
   outerCaret,
   onChangeCaret,
   rows = 1,
@@ -78,6 +80,16 @@ const _GVTextArea: React.FC<GVTextAreaProps> = ({
     }
   }, [outerCaret]);
 
+  useEffect(() => {
+    if (focusTrigger !== undefined && textareaRef.current) {
+      const focusInput = () => {
+        textareaRef.current!.focus && textareaRef.current!.focus();
+      };
+      if (typeof setImmediate !== "undefined") setImmediate(focusInput);
+      else focusInput();
+    }
+  }, [focusTrigger, textareaRef.current]);
+
   const handleKeyDown = useCallback(
     (event: TextareaKeyDownEvent) => {
       if (onKeyDown && textareaRef.current) {
@@ -110,9 +122,9 @@ const _GVTextArea: React.FC<GVTextAreaProps> = ({
   }, []);
 
   return (
-    <div className={classNames(styles["gv-text-area"], textAreaClassName)}>
+    <div className={clsx(styles["gv-text-area"], textAreaClassName)}>
       <textarea
-        className={classNames(
+        className={clsx(
           styles["gv-text-area__hidden"],
           styles["gv-text-area__gv-text-field"],
           className
@@ -126,7 +138,7 @@ const _GVTextArea: React.FC<GVTextAreaProps> = ({
       <textarea
         onClick={handleClick}
         rows={rows}
-        className={classNames(styles["gv-text-area__gv-text-field"], className)}
+        className={clsx(styles["gv-text-area__gv-text-field"], className)}
         value={value}
         ref={textareaRef}
         style={{ height }}

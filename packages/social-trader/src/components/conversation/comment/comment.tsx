@@ -1,8 +1,9 @@
-import classNames from "classnames";
-import { ConversationRemoveButton } from "components/conversation/conversation-remove-button/conversation-remove-button";
+import clsx from "clsx";
 import { ConversationComment } from "components/conversation/conversation.types";
 import { LikeContainer } from "components/conversation/like/like-container";
 import { Message } from "components/conversation/message/message";
+import { MessageActions } from "components/conversation/message/message-actions/message-actions";
+import { Reply } from "components/conversation/reply/reply";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import React, { useEffect, useRef } from "react";
@@ -19,7 +20,7 @@ const _Comment: React.FC<Props> = ({
     date,
     text,
     id,
-    actions,
+    personalDetails,
     likesCount,
     author
   }
@@ -35,7 +36,7 @@ const _Comment: React.FC<Props> = ({
   return (
     <div
       ref={ref}
-      className={classNames(styles["comment"], {
+      className={clsx(styles["comment"], {
         [styles["comment--highlighted"]]: isHighlighted
       })}
     >
@@ -44,13 +45,13 @@ const _Comment: React.FC<Props> = ({
           <Message
             row={false}
             settingsBlock={
-              actions?.canDelete ? (
-                <RowItem>
-                  <ConversationRemoveButton id={id} onSuccess={updateData} />
-                </RowItem>
-              ) : (
-                <></>
-              )
+              <MessageActions
+                url={url}
+                actions={personalDetails}
+                id={id}
+                onApply={updateData}
+                setDeleted={updateData}
+              />
             }
             url={url}
             excludedTagsUnderText={["User"]}
@@ -63,12 +64,15 @@ const _Comment: React.FC<Props> = ({
         </RowItem>
       </Row>
       <Row className={styles["comment__buttons"]}>
-        <LikeContainer
-          id={id}
-          canLike={!!actions}
-          count={likesCount}
-          liked={actions?.isLiked}
-        />
+        <RowItem wide>{personalDetails && <Reply author={author} />}</RowItem>
+        <RowItem>
+          <LikeContainer
+            id={id}
+            canLike={!!personalDetails}
+            count={likesCount}
+            liked={personalDetails?.isLiked}
+          />
+        </RowItem>
       </Row>
     </div>
   );

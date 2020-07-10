@@ -1,9 +1,8 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
 import { Center } from "components/center/center";
 import LevelTooltip from "components/level-tooltip/level-tooltip";
 import Link, { ToType } from "components/link/link";
-import { MutedText } from "components/muted-text/muted-text";
 import Profitability from "components/profitability/profitability";
 import {
   PROFITABILITY_PREFIX,
@@ -12,6 +11,7 @@ import {
 import ProgramSimpleChart from "components/program-simple-chart/program-simple-chart";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { Text } from "components/text/text";
 import { SimpleChartPoint } from "gv-api-web";
 import React from "react";
 import NumberFormat from "react-number-format";
@@ -40,7 +40,7 @@ export const LPTableCardContainer: React.FC<ITableCardContainer> = ({
   className
 }) => (
   <div
-    className={classNames(styles["lp-table-card"], className, {
+    className={clsx(styles["lp-table-card"], className, {
       [styles["lp-table-card--white"]]: whiteTheme
     })}
   >
@@ -52,7 +52,7 @@ export const LPTableCardRow: React.FC<{
   center?: boolean;
 } & React.HTMLAttributes<HTMLDivElement>> = ({ children, center }) => (
   <div
-    className={classNames(styles["lp-table-card__row"], {
+    className={clsx(styles["lp-table-card__row"], {
       [styles["lp-table-card__row--center"]]: center
     })}
   >
@@ -64,7 +64,7 @@ export const LPTableCardTable: React.FC<{
   wrap?: boolean;
 } & React.HTMLAttributes<HTMLDivElement>> = ({ children, wrap }) => (
   <div
-    className={classNames(styles["lp-table-card__table"], {
+    className={clsx(styles["lp-table-card__table"], {
       [styles["lp-table-card__table--flex-wrap"]]: wrap
     })}
   >
@@ -100,8 +100,8 @@ export const LPTableCardSubTitle: React.FC<{
 } & React.HTMLAttributes<HTMLDivElement>> = ({ children, url }) => {
   const title = typeof children === "string" ? children : "";
   return (
-    <Row middle={false} className={styles["lp-table-card__subtitle"]}>
-      <MutedText noWrap={false}>
+    <div className={styles["lp-table-card__subtitle"]}>
+      <Text muted>
         {url ? (
           <Link
             title={`Open ${title} user page`}
@@ -113,8 +113,8 @@ export const LPTableCardSubTitle: React.FC<{
         ) : (
           children
         )}
-      </MutedText>
-    </Row>
+      </Text>
+    </div>
   );
 };
 
@@ -128,7 +128,7 @@ export const LPTableCardAvatar: React.FC<ITableCardAvatarProps> = React.memo(
         level={level}
         alt={alt || ""}
         color={color}
-        size="medium"
+        size="middle"
         tooltip={
           level ? <LevelTooltip level={level} canLevelUp={false} /> : undefined
         }
@@ -136,7 +136,7 @@ export const LPTableCardAvatar: React.FC<ITableCardAvatarProps> = React.memo(
     );
     return (
       <Center
-        className={classNames(styles["lp-table-card__avatar"], {
+        className={clsx(styles["lp-table-card__avatar"], {
           [styles["lp-table-card__avatar--center"]]: contentCenter
         })}
       >
@@ -186,7 +186,7 @@ export const LPTableCardTopBlock: React.FC<ITableCardTopBlockProps> = React.memo
                 {subTitle}
               </LPTableCardSubTitle>
             )}
-            <Row small>{extraBlock}</Row>
+            <Row size={"small"}>{extraBlock}</Row>
           </div>
         </RowItem>
       </LPTableCardRow>

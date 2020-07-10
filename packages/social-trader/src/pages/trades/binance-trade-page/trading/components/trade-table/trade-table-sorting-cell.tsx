@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import {
   SORTING_DIRECTION,
   switchDirection
@@ -32,13 +32,13 @@ export const TradeTableHeaderCell: React.FC<Props> = React.memo(
     const isSelected = field === sorting.field;
     return (
       <th
-        className={classNames({
+        className={clsx({
           [styles["trading-table-sorting-cell--right"]]: right
         })}
         onClick={handleChangeSorting(field)}
       >
         <span
-          className={classNames({
+          className={clsx({
             [styles["trading-table-sorting-cell--asc"]]:
               isSelected && sorting.direction === SORTING_DIRECTION.ASC,
             [styles["trading-table-sorting-cell--desc"]]:

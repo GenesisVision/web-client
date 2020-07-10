@@ -26,6 +26,12 @@ module.exports = async app => {
   const server = express();
 
   server.use(
+    createProxyMiddleware("/sapi/v1", {
+      target: "https://api.binance.com",
+      changeOrigin: true
+    })
+  );
+  server.use(
     createProxyMiddleware("/api/v3", {
       target: "https://api.binance.com",
       changeOrigin: true
@@ -62,7 +68,7 @@ module.exports = async app => {
   server.get("/sitemap.xml", (req, res) =>
     sitemap({ req, res, pagePath: "/sitemap.xml" })
   );
-  server.get("/", (req, res) => ssrCache({ req, res, pagePath: "/" }));
+  // server.get("/", (req, res) => ssrCache({ req, res, pagePath: "/" }));
   server.get("*", (req, res) => handle(req, res));
   server.post("*", (req, res) => handle(req, res));
 

@@ -10,18 +10,18 @@ export type TAdvantages = {
 
 export const refProgItems: TAdvantages[] = [
   {
-    title: "referral-program.title-1",
-    text: "referral-program.text-1",
+    title: "referral-program:title-1",
+    text: "referral-program:text-1",
     image: ImgAccess
   },
   {
-    title: "referral-program.title-2",
-    text: "referral-program.text-2",
+    title: "referral-program:title-2",
+    text: "referral-program:text-2",
     image: ImgChoose
   },
   {
-    title: "referral-program.title-3",
-    text: "referral-program.text-3",
+    title: "referral-program:title-3",
+    text: "referral-program:text-3",
     image: ImgControl
   }
 ];

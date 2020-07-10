@@ -100,7 +100,9 @@ describe("Program details withdrawing", () => {
         clearAlert,
         safeClick
       } = useTestHelpers(page);
-      const successMessage = testT("request-line.success-message");
+      const successMessage = testT(
+        "asset-details:request-line.success-message"
+      );
       const status = await hasElement(statusSelector);
       if (!status) {
         await openPopup(withdrawButtonSelector);

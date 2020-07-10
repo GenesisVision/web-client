@@ -11,7 +11,7 @@ const _DetailsNotification: React.FC<Props> = ({ to, hasNotifications }) => {
   return (
     <DetailsDescriptionControl
       to={to}
-      text={t("fund-details-page.description.notifications")}
+      text={t("asset-details:description.notifications")}
     >
       <RingIcon
         selected={hasNotifications}

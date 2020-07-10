@@ -2,6 +2,7 @@ import { ToType } from "components/link/link";
 import LPButton from "pages/landing-page/components/lp-button/lp-button";
 import React, { useCallback } from "react";
 import { sendEventToGA } from "utils/ga";
+import { OptionalClickable } from "utils/types";
 
 export const JoinButton: React.FC<Props> = ({
   onClick,
@@ -34,8 +35,7 @@ export const JoinButton: React.FC<Props> = ({
   );
 };
 
-interface Props {
-  onClick?: VoidFunction;
+interface Props extends OptionalClickable {
   color?: "primary" | "secondary" | "pink";
   eventLabel?: string;
   children: string | JSX.Element;

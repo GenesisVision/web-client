@@ -18,7 +18,7 @@ const _Profile: React.FC<IProfileOwnProps> = ({
   const [t] = useTranslation();
   return (
     <>
-      <SettingsBlock label={t("profile-page.public-info")}>
+      <SettingsBlock label={t("profile-page:public-info")}>
         <PublicInfo
           isPending={isPending}
           about={info.about}
@@ -26,13 +26,13 @@ const _Profile: React.FC<IProfileOwnProps> = ({
           onUpdate={onUpdate}
         />
       </SettingsBlock>
-      <SettingsBlock label={t("profile-page.settings.profile-image")}>
+      <SettingsBlock label={t("profile-page:settings.profile-image")}>
         <ProfileImageContainer />
       </SettingsBlock>
       <SettingsBlock>
         <PublicSelect />
       </SettingsBlock>
-      <SettingsBlock label={t("profile-page.privacy.title")}>
+      <SettingsBlock label={t("profile-page:privacy.title")}>
         <Privacy
           data={{
             [PRIVACY_FORM_VALUES.whoCanCommentOnMyPosts]:

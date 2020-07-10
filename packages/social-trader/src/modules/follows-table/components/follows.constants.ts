@@ -14,30 +14,37 @@ export const CURRENCY_MAP_NAME = "showIn";
 export const FOLLOW_COLUMNS: SortingColumn[] = [
   {
     name: "name",
-    sortingName: "ByTitle"
+    sortingName: "ByTitle",
+    tooltip: true
   },
   {
     name: "equity",
-    sortingName: "ByEquity"
+    sortingName: "ByEquity",
+    tooltip: true
   },
   {
     name: "subscribers",
-    sortingName: "BySubscribers"
+    sortingName: "BySubscribers",
+    tooltip: true
   },
   {
-    name: "age"
+    name: "age",
+    tooltip: true
   },
   {
     name: "trades",
-    sortingName: "ByTrades"
+    sortingName: "ByTrades",
+    tooltip: true
   },
   {
     name: "drawdown",
-    sortingName: "ByDrawdown"
+    sortingName: "ByDrawdown",
+    tooltip: true
   },
   {
     name: "profit",
-    sortingName: "ByProfit"
+    sortingName: "ByProfit",
+    tooltip: true
   },
   {
     name: "chart"

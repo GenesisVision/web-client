@@ -92,6 +92,7 @@ const _CreateExchangeAccountSettings: React.FC<Props> = ({
       ) : (
         <>
           <DepositDetailsBlock
+            broker={accountType.type}
             hide={!accountType.isDepositRequired}
             blockNumber={2}
             setAvailable={setAvailable}
@@ -103,7 +104,7 @@ const _CreateExchangeAccountSettings: React.FC<Props> = ({
             setFieldValue={setValue}
             assetCurrency={currency}
           />
-          <Row large>
+          <Row size={"large"}>
             <CreateAssetNavigation
               asset={"ACCOUNT"}
               isSuccessful={!errorMessage}

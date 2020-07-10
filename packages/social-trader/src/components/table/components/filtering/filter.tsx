@@ -1,9 +1,9 @@
-import { MutedText } from "components/muted-text/muted-text";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
 } from "components/popover/popover";
 import { RowItem } from "components/row-item/row-item";
+import { Text } from "components/text/text";
 import useAnchor from "hooks/anchor.hook";
 import * as React from "react";
 import { useCallback } from "react";
@@ -36,7 +36,7 @@ const _Filter: React.FC<Props> = ({
   return (
     <RowItem>
       <div className={styles["filter"]} onClick={setAnchor}>
-        <MutedText>{label}</MutedText>
+        <Text muted>{label}</Text>
         <div className={styles["filter__value"]}>{renderValueText(value)}</div>
         <FilterArrowIcon isOpen={anchor !== undefined} />
       </div>

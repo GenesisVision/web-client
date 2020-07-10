@@ -1,0 +1,13 @@
+@import "styles/_sizes";
+
+.terminal-mobile-chart-block {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  &__tables-container {
+    height: calc(100%);
+    display: flex;
+    flex-direction: column;
+    overflow-x: scroll;
+  }
+}

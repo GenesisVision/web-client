@@ -26,7 +26,7 @@ const _DetailsFavorite: React.FC<Props> = ({
       isFavorite={isFavorite}
     >
       <DetailsDescriptionControl
-        text={t("fund-details-page.description.addToFavorites")}
+        text={t("asset-details:description.addToFavorites")}
       >
         <FavoriteIcon
           className={styles["details-description-control__icon"]}

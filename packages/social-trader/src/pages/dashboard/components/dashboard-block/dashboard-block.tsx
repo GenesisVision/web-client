@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import DetailsBlock from "components/details/details-block";
 import DetailsBlockTitleBox from "components/details/details-block-title-box";
 import Link from "components/link/link";
@@ -19,7 +19,7 @@ const DashboardBlock: React.FC<Props> = ({
       landscapeTablet={landscapeTablet}
       tablet={tablet}
       table
-      className={classNames(styles["dashboard-block__container"], className)}
+      className={clsx(styles["dashboard-block__container"], className)}
     >
       {(label || all) && (
         <DetailsBlockTitleBox>

@@ -1,4 +1,3 @@
-import { GV_BTN_SIZE } from "components/gv-button";
 import { WalletItemType } from "components/wallet-select/wallet-select";
 import {
   AssetTypeExt,
@@ -9,23 +8,24 @@ import TransferButton from "modules/transfer/transfer-button";
 import { TRANSFER_CONTAINER } from "modules/transfer/transfer.types";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { Sizeable } from "utils/types";
 
 const _WithdrawTransferButton: React.FC<Props> = props => {
   const {
     outerCurrentItemContainerItems,
     accountType,
-    size = GV_BTN_SIZE.MIDDLE
+    size = "middle"
   } = props;
   const [t] = useTranslation();
   return (
     <TransferButton
       {...props}
-      successMessage={"transfer.confirmation.withdraw-success"}
+      successMessage={"transfer:confirmation.withdraw-success"}
       singleCurrentItemContainer={!outerCurrentItemContainerItems}
       size={size}
       label={t("buttons.withdraw")}
-      title={t("transfer.withdraw-from", {
-        title: t(`dashboard-page.trading.asset-types.${accountType}`)
+      title={t("transfer:withdraw-from", {
+        title: t(`dashboard-page:trading.asset-types.${accountType}`)
       })}
       currentItemContainer={TRANSFER_CONTAINER.SOURCE}
       sourceType={accountType as InternalTransferRequestType}
@@ -34,11 +34,10 @@ const _WithdrawTransferButton: React.FC<Props> = props => {
   );
 };
 
-interface Props {
+interface Props extends Sizeable {
   fixedSelects?: boolean;
   accountId?: string;
   outerCurrentItemContainerItems?: WalletItemType[];
-  size?: GV_BTN_SIZE;
   currentItem: WalletItemType;
   onApply: VoidFunction;
   accountType?: PrivateTradingAccountType | AssetTypeExt;

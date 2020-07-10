@@ -34,9 +34,9 @@ const _ProfileImage: React.FC<Props> = ({ onSubmit, avatar, errorMessage }) => {
         <Row onlyOffset>
           <LogoField name={FIELDS.logo} defaultImage={UserIcon} />
         </Row>
-        <Row xlarge>
+        <Row size={"xlarge"}>
           <SubmitButton isSuccessful={!errorMessage}>
-            {t("profile-page.settings.save-photo")}
+            {t("profile-page:settings.save-photo")}
           </SubmitButton>
         </Row>
       </div>

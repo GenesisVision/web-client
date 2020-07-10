@@ -1,39 +1,39 @@
+import { DataStorageContext } from "components/data-storage/data-storage";
 import { ToolbarButton } from "components/table/components/toolbar-button";
 import { DashboardTradingAsset } from "gv-api-web";
 import { useAccountCurrency } from "hooks/account-currency.hook";
 import { CREATE_FUND_PAGE_ROUTE } from "pages/create-fund/create-fund.constants";
-import {
-  fetchDashboardPublicAction,
-  fetchDashboardTradingTotalAction
-} from "pages/dashboard/actions/dashboard.actions";
 import DashboardPublicCard from "pages/dashboard/components/dashboard-trading/dashboard-public-card";
 import DashboardTradingTable from "pages/dashboard/components/dashboard-trading/dashboard-trading-table";
-import { dashboardTradingPublicSelector } from "pages/dashboard/reducers/dashboard-trading-public.reducer";
-import React, { useCallback } from "react";
+import {
+  DASHBOARD_PUBLIC_DEFAULT_FILTERS,
+  DASHBOARD_PUBLIC_FILTERING
+} from "pages/dashboard/dashboard.constants";
+import { getPublicAssets } from "pages/dashboard/services/dashboard.service";
+import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
 
 const _DashboardPublic: React.FC<Props> = () => {
-  const dispatch = useDispatch();
-  const currency = useAccountCurrency();
+  const { updateData } = useContext(DataStorageContext);
   const [t] = useTranslation();
   const showIn = useAccountCurrency();
   const getItems = useCallback(filters => {
-    return fetchDashboardPublicAction({
+    return getPublicAssets({
       ...filters,
       showIn
     });
   }, []);
   const handleUpdateItems = useCallback(
     updateItems => () => {
-      dispatch(fetchDashboardTradingTotalAction(currency));
+      updateData();
       updateItems();
     },
-    [currency]
+    []
   );
   return (
     <DashboardTradingTable
-      dataSelector={dashboardTradingPublicSelector}
+      filtering={DASHBOARD_PUBLIC_FILTERING}
+      defaultFilters={DASHBOARD_PUBLIC_DEFAULT_FILTERS}
       createButtonToolbar={
         <ToolbarButton
           text={t("buttons.create-fund")}
@@ -41,7 +41,7 @@ const _DashboardPublic: React.FC<Props> = () => {
         />
       }
       getItems={getItems}
-      title={t("dashboard-page.trading.public")}
+      title={t("dashboard-page:trading.public")}
       renderBodyCard={(
         asset: DashboardTradingAsset,
         updateRow,

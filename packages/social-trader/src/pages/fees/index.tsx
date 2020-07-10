@@ -1,20 +1,33 @@
 import { useTranslation } from "i18n";
 import { NextPage } from "next";
+import { getAccept } from "pages/landing-page/components/cookie-message/cookie-message.helpers";
 import FeesSection from "pages/landing-page/components/fees-section/fees-section";
+import { InternalMainWrapper } from "pages/landing-page/components/internal/internal.blocks";
 import Layout from "pages/landing-page/layouts/_layout";
 import React from "react";
 
-export const Fees: NextPage = () => {
+interface Props {
+  cookieAccept?: string;
+}
+
+export const Fees: NextPage<Props> = ({ cookieAccept }) => {
   const { t } = useTranslation();
   return (
-    <Layout title={t("landing-page:page-titles.fees")}>
-      <main className="internal">
+    <Layout
+      cookieAccept={cookieAccept}
+      title={t("landing-page:page-titles.fees")}
+    >
+      <InternalMainWrapper>
         <FeesSection />
-      </main>
+      </InternalMainWrapper>
     </Layout>
   );
 };
 
-Fees.getInitialProps = async () => ({
-  namespacesRequired: ["landing-page"]
-});
+Fees.getInitialProps = async ctx => {
+  const cookieAccept = getAccept(ctx);
+  return {
+    cookieAccept,
+    namespacesRequired: ["fees", "landing-page"]
+  };
+};

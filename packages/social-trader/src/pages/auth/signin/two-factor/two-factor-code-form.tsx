@@ -3,10 +3,10 @@ import GVButton from "components/gv-button";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
-import { MutedText } from "components/muted-text/muted-text";
 import { Row } from "components/row/row";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
 import { SubmitButton } from "components/submit-button/submit-button";
+import { Text } from "components/text/text";
 import useIsOpen from "hooks/is-open.hook";
 import {
   CAPTCHA_STATUS,
@@ -41,11 +41,8 @@ const _TwoFactorCodeForm: React.FC<Props> = ({
     validationSchema: object().shape({
       [FIELDS.code]: string()
         .trim()
-        .matches(
-          /^\d{6}$/,
-          t("auth.login.two-factor.validation.two-factor-6digits")
-        )
-        .required(t("auth.login.two-factor.validation.two-factor-required"))
+        .matches(/^\d{6}$/, t("validations.two-factor-6digits"))
+        .required(t("validations.two-factor-required"))
     }),
     mode: "onChange"
   });
@@ -82,34 +79,32 @@ const _TwoFactorCodeForm: React.FC<Props> = ({
 
   return (
     <HookForm form={form} onSubmit={handleSubmit}>
-      <h3>{t("auth.login.two-factor.title")}</h3>
+      <h3>{t("auth:login.two-factor.title")}</h3>
       <Row>
-        <MutedText noWrap={false}>{t("auth.login.two-factor.text")}</MutedText>
+        <Text muted>{t("auth:login.two-factor.text")}</Text>
       </Row>
-      <Row xlarge>
+      <Row size={"xlarge"}>
         <GVHookFormField
           disabled={isSubmitting}
           type="tel"
           name={FIELDS.code}
-          label={t("auth.login.two-factor.input-label")}
+          label={t("auth:login.two-factor.input-label")}
           autoComplete="off"
           autoFocus
           component={SimpleTextField}
           format="######"
         />
       </Row>
-      <Row large>
-        <MutedText noWrap={false}>
-          {t("auth.login.two-factor.recovery-info")}
-        </MutedText>
+      <Row size={"large"}>
+        <Text muted>{t("auth:login.two-factor.recovery-info")}</Text>
       </Row>
-      <Row small>
+      <Row size={"small"}>
         <GVButton noPadding variant="text">
           <Link
             onClick={handleRecoveryClick}
             to={linkCreator(LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE)}
           >
-            {t("auth.login.two-factor.link-to-recovery")}
+            {t("auth:login.two-factor.link-to-recovery")}
           </Link>
         </GVButton>
       </Row>
@@ -118,7 +113,7 @@ const _TwoFactorCodeForm: React.FC<Props> = ({
           <FormError error={error} />
         </Row>
       )}
-      <Row large>
+      <Row size={"large"}>
         <SubmitButton
           checkSubmitted={false}
           id="signUpFormSubmit"
@@ -126,7 +121,7 @@ const _TwoFactorCodeForm: React.FC<Props> = ({
           isSuccessful={requestStatus === CAPTCHA_STATUS.SUCCESS}
           disabled={requestStatus === CAPTCHA_STATUS.PENDING}
         >
-          {t("auth.login.two-factor.verify")}
+          {t("auth:login.two-factor.verify")}
         </SubmitButton>
       </Row>
     </HookForm>

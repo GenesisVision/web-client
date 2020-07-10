@@ -22,7 +22,7 @@ const _CustomNotification: React.FC<Props> = ({ onSuccess, settings }) => {
     isPending: isRemovePending
   } = useApiRequest({
     request: removeNotificationMethod,
-    successMessage: `notifications-page.custom.delete-alert`,
+    successMessage: `notifications-page:custom.delete-alert`,
     middleware: [onSuccess]
   });
 
@@ -31,7 +31,7 @@ const _CustomNotification: React.FC<Props> = ({ onSuccess, settings }) => {
     isPending: isTogglePending
   } = useApiRequest({
     request: toggleNotificationMethod,
-    successMessage: `notifications-page.custom.${
+    successMessage: `notifications-page:custom.${
       status ? "enabled" : "disabled"
     }-alert`,
     middleware: [onSuccess]
@@ -54,7 +54,7 @@ const _CustomNotification: React.FC<Props> = ({ onSuccess, settings }) => {
     <div>
       <Row>
         <GVSwitch
-          label={t(`notifications-page.create.${settings.conditionType}.title`)}
+          label={t(`notifications-page:create.${settings.conditionType}.title`)}
           name={settings.type}
           value={settings.isEnabled}
           disabled={isPending}
@@ -70,7 +70,7 @@ const _CustomNotification: React.FC<Props> = ({ onSuccess, settings }) => {
             value={settings.conditionAmount.toString()}
             disabled
             label={t(
-              `notifications-page.create.${settings.conditionType}.label`
+              `notifications-page:create.${settings.conditionType}.label`
             )}
             adornment={settings.conditionType === "Profit" ? "%" : undefined}
             InputComponent={NumberFormat}

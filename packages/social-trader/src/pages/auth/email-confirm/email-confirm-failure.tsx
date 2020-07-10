@@ -1,6 +1,6 @@
 import FormError from "components/form/form-error/form-error";
-import { MutedText } from "components/muted-text/muted-text";
 import { Row } from "components/row/row";
+import { Text } from "components/text/text";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -9,9 +9,7 @@ const _EmailConfirmFailure: React.FC<Props> = ({ errorMessage }) => {
   return (
     <div>
       <Row>
-        <MutedText noWrap={false}>
-          {t("auth.email-confirm.error-during-confirmation")}
-        </MutedText>
+        <Text muted>{t("auth:email-confirm.error-during-confirmation")}</Text>
       </Row>
       <Row>
         <FormError error={errorMessage} />

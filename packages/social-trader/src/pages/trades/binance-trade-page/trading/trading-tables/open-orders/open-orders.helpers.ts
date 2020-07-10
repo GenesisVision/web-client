@@ -1,5 +1,5 @@
 import { SortingColumn } from "components/table/components/filtering/filter.type";
-import { QueryOrderResult } from "pages/trades/binance-trade-page/trading/trading.types";
+import { QueryOrderResult } from "pages/trades/binance-trade-page/trading/terminal.types";
 import { AnyObjectType } from "utils/types";
 
 export const normalizeOpenOrdersList = (list: QueryOrderResult[]) => {

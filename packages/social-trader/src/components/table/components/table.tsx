@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { ITableBodyContainerExternalProps } from "components/table/components/table-body";
 import TableFooter, {
   ITableFooterProps
@@ -85,7 +85,7 @@ const _Table: React.FC<ITableProps> = ({
       />
       <div className={tableStyles["table__scroll"]}>
         {view === LIST_VIEW.CARDS && (
-          <div className={classNames(tableStyles["table"], className)}>
+          <div className={clsx(tableStyles["table"], className)}>
             <TableBodyContainer
               updateRow={updateRow}
               updateItems={updateItems}
@@ -100,7 +100,7 @@ const _Table: React.FC<ITableProps> = ({
           </div>
         )}
         {view === LIST_VIEW.TABLE && (
-          <table className={classNames(tableStyles["table"], className)}>
+          <table className={clsx(tableStyles["table"], className)}>
             <TableHeader
               columns={columns}
               sorting={sorting}

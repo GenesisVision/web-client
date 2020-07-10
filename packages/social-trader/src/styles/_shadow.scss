@@ -1,0 +1,52 @@
+@import "styles/_colors.scss";
+
+$shadow-width: 50px;
+$defaultShadow: $panel-background-color;
+$darkShadow: $background-color;
+
+@mixin shadow-background($side, $color) {
+  @if $side == "left" {
+    background: linear-gradient(
+      90deg,
+      $color,
+      rgba($color, 0.01) $shadow-width
+    );
+  }
+  @if $side == "right" {
+    background: linear-gradient(
+      90deg,
+      rgba($color, 0.01),
+      $color $shadow-width
+    );
+  }
+}
+@mixin shadow-main() {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: $shadow-width;
+  z-index: 2;
+  transition: opacity 250ms ease-in-out;
+  pointer-events: none;
+}
+
+@mixin rightShadow($color: $defaultShadow) {
+  @include shadow-main();
+  @include shadow-background("right", $color);
+  right: 0;
+}
+
+@mixin leftShadow($color: $defaultShadow) {
+  @include shadow-main();
+  @include shadow-background("left", $color);
+  left: 0;
+}
+
+@mixin rightDarkShadow() {
+  @include rightShadow($darkShadow);
+}
+
+@mixin leftDarkShadow() {
+  @include leftShadow($darkShadow);
+}

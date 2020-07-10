@@ -25,10 +25,10 @@ export const programWithdrawAmountValidationSchema = ({
       {
         is: false,
         then: number()
-          .moreThan(0, t("withdraw-program.validation.amount-is-zero"))
+          .moreThan(0, t("validations.amount-is-zero"))
           .max(
             availableToWithdraw,
-            t("withdraw-program.validation.amount-more-than-available")
+            t("validations.amount-more-than-account-balance")
           )
       }
     )

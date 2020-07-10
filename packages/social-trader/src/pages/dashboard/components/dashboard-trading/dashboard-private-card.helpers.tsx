@@ -2,9 +2,9 @@ import GVButton from "components/gv-button";
 import Hint from "components/hint/hint";
 import { ToType } from "components/link/link";
 import { useToLink } from "components/link/link.helper";
-import { MutedText } from "components/muted-text/muted-text";
 import { VERTICAL_POPOVER_POS } from "components/popover/popover";
 import { TableCardActionsItem } from "components/table/components/table-card/table-card-actions";
+import { Text } from "components/text/text";
 import {
   AmountWithCurrency,
   BrokerTradeServerType,
@@ -51,23 +51,23 @@ export const MakeProgramButton: React.FC<{
     });
     const makeProgramLink =
       makeProgramLinkProp || linkCreator(makeProgramLinkMethod(id));
-    const label = t("dashboard-page.trading.actions.make-program");
+    const label = t("dashboard-page:trading.actions.make-program");
     return isEnoughMoney ? (
       <TableCardActionsItem to={makeProgramLink} onClick={clearAnchor}>
         {label}
       </TableCardActionsItem>
     ) : (
       <GVButton variant="text" color="secondary">
-        <MutedText>
+        <Text muted>
           <Hint
             content={label}
             vertical={VERTICAL_POPOVER_POS.BOTTOM}
             tooltipContent={t(
-              "dashboard-page.trading.tooltips.is-not-enough-money",
+              "dashboard-page:trading.tooltips.is-not-enough-money",
               { value: necessaryMoney }
             )}
           />
-        </MutedText>
+        </Text>
       </GVButton>
     );
   }
@@ -82,7 +82,7 @@ export const ConfirmTFAButton: React.FC<{
   return (
     <>
       <TableCardActionsItem onClick={setOpen}>
-        {t("program-settings.buttons.two-factor-confirm")}
+        {t("asset-settings:buttons.two-factor-confirm")}
       </TableCardActionsItem>
       <ConfirmContainer
         open={isOpen}

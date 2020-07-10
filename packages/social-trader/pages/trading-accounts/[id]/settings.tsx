@@ -1,9 +1,6 @@
 import withDefaultLayout from "decorators/with-default-layout";
 import withPrivateRoute from "decorators/with-private-route";
-import {
-  dispatchAccountDescription,
-  dispatchAccountId
-} from "pages/accounts/account-details/services/account-details.service";
+import { dispatchAccountDescription } from "pages/accounts/account-details/services/account-details.service";
 import AccountSettingsPage from "pages/accounts/account-settings/account-settings.page";
 import React from "react";
 import { compose } from "redux";
@@ -16,7 +13,6 @@ const Page: NextPageWithRedux<void> = () => {
 Page.getInitialProps = async ctx => {
   const { id } = ctx.query;
   await Promise.all([
-    ctx.reduxStore.dispatch(dispatchAccountId(id as string)),
     ctx.reduxStore.dispatch(dispatchAccountDescription(id as string)(ctx))
   ]);
 };

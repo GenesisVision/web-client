@@ -1,21 +1,27 @@
-import { ITerminalMethods } from "pages/trades/binance-trade-page/trading/trading.types";
+import { ITerminalMethods } from "pages/trades/binance-trade-page/trading/terminal.types";
 
 import {
   cancelAllOrders,
   cancelOrder,
   changeLeverage,
   changeMarginMode,
+  changePositionMode,
   getAccountInformation,
   getAllOrders,
+  getBalancesForTransfer,
   getDepth,
   getExchangeInfo,
   getKlines,
   getLeverageBrackets,
+  getMarkPrice,
   getOpenOrders,
   getPositionInformation,
+  getPositionMode,
+  getServerTime,
   getTickers,
   getTrades,
   getUserStreamKey,
+  newFutureAccountTransfer,
   tradeRequest
 } from "./binance-futures-http.service";
 import {
@@ -23,10 +29,18 @@ import {
   getUserStreamSocket,
   klineSocket,
   marketTicketsSocket,
+  markPriceSocket,
   tradeSocket
 } from "./binance-futures-ws.service";
 
 export const BinanceFuturesTerminalMethods: ITerminalMethods = {
+  markPriceSocket,
+  getMarkPrice,
+  getServerTime,
+  getBalancesForTransfer,
+  newFutureAccountTransfer,
+  changePositionMode,
+  getPositionMode,
   getPositionInformation,
   getLeverageBrackets,
   changeLeverage,

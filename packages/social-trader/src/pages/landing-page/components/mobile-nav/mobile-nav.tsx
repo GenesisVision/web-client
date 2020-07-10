@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { BodyFix } from "components/modal/modal";
 import { MobileBurger } from "pages/landing-page/components/mobile-burger/mobile-burger";
 import NavList from "pages/landing-page/components/nav/nav-list";
@@ -39,7 +39,7 @@ class MobileNav extends React.Component<Props, States> {
       <>
         <MobileBurger menuOpen={menuOpen} onClick={this.handleMenuClick} />
         <div
-          className={classNames(styles["mobile-nav"], className, {
+          className={clsx(styles["mobile-nav"], className, {
             [styles["mobile-nav--open"]]: menuOpen
           })}
         >

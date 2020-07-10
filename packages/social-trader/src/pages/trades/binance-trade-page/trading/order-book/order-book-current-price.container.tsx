@@ -1,7 +1,7 @@
 import { OrderBookCurrentPrice } from "pages/trades/binance-trade-page/trading/order-book/order-book-current-price";
-import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
+import { TerminalInfoContext } from "pages/trades/binance-trade-page/trading/terminal-info.context";
+import { TerminalTickerContext } from "pages/trades/binance-trade-page/trading/terminal-ticker.context";
 import { TradingPriceContext } from "pages/trades/binance-trade-page/trading/trading-price.context";
-import { TradingTickerContext } from "pages/trades/binance-trade-page/trading/trading-ticker.context";
 import React, { useContext, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { headerAccountCurrencySelector } from "reducers/header-reducer";
@@ -12,9 +12,9 @@ export const OrderBookCurrentPriceContainer: React.FC = () => {
   const { trades } = useContext(TradingPriceContext);
   const {
     symbol: { quoteAsset }
-  } = useContext(TradingInfoContext);
+  } = useContext(TerminalInfoContext);
   const accountCurrency = useSelector(headerAccountCurrencySelector);
-  const tickerItems = useContext(TradingTickerContext);
+  const tickerItems = useContext(TerminalTickerContext);
   const accountCurrencySymbolPrice = useMemo(() => {
     const rateBaseAsset = quoteAsset;
     const rateQuoteAsset = accountCurrency === "USD" ? "USDT" : accountCurrency;

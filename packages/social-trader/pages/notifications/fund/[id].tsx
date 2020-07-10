@@ -13,7 +13,7 @@ Page.getInitialProps = async ctx => {
   const {
     query: { id }
   } = ctx;
-  return { id };
+  return { namespacesRequired: ["notifications-page"], id };
 };
 
 export default compose(withDefaultLayout, withPrivateRoute)(Page);

@@ -43,14 +43,14 @@ const _CloseAssetForm: React.FC<Props> = ({
     <HookForm form={form} onSubmit={onSubmit}>
       <DialogTop
         title={t(
-          `asset-settings.period-and-closing.close-confirm-title-${asset.toLowerCase()}`
+          `asset-settings:period-and-closing.close-confirm-title-${asset.toLowerCase()}`
         )}
         subtitle={assetName}
       />
       <DialogBottom>
         <Row>
           {t(
-            `asset-settings.period-and-closing.close-confirm-notification-${asset.toLowerCase()}`
+            `asset-settings:period-and-closing.close-confirm-notification-${asset.toLowerCase()}`
           )}
         </Row>
         {twoFactorEnabled && (
@@ -59,7 +59,7 @@ const _CloseAssetForm: React.FC<Props> = ({
               wide
               type="tel"
               name={FIELDS.twoFactorCode}
-              label={t("wallet-withdraw.two-factor-code-label")}
+              label={t("labels.two-factor-code-label")}
               autoComplete="off"
               component={SimpleTextField}
             />

@@ -4,12 +4,12 @@ import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogTop } from "components/dialog/dialog-top";
 import GVButton from "components/gv-button";
 import { GvButtonWithMark } from "components/gv-button/gv-button-with-mark/gv-button-with-mark";
-import { MutedText } from "components/muted-text/muted-text";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
-import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
-import { getSymbolFromState } from "pages/trades/binance-trade-page/trading/trading.helpers";
-import { MarginModeType } from "pages/trades/binance-trade-page/trading/trading.types";
+import { Text } from "components/text/text";
+import { TerminalInfoContext } from "pages/trades/binance-trade-page/trading/terminal-info.context";
+import { getSymbolFromState } from "pages/trades/binance-trade-page/trading/terminal.helpers";
+import { MarginModeType } from "pages/trades/binance-trade-page/trading/terminal.types";
 import React, { useCallback, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -34,7 +34,7 @@ const MarginModeDialogContent: React.FC<Props> = ({
   onChange
 }) => {
   const [mode, setMode] = useState<MarginModeType>(modeProp);
-  const { symbol } = useContext(TradingInfoContext);
+  const { symbol } = useContext(TerminalInfoContext);
   const [t] = useTranslation();
   const handleClickButton = useCallback(
     (mode: MarginModeType) => () => {
@@ -75,11 +75,11 @@ const MarginModeDialogContent: React.FC<Props> = ({
           </RowItem>
         </Row>
         <Row>
-          <MutedText noWrap={false}>
+          <Text muted>
             {t(
               "· Switching the margin mode will only apply it to the selected contract."
             )}
-          </MutedText>
+          </Text>
         </Row>
         <Row>
           <GVButton disabled={mode === modeProp} wide onClick={handleChange}>
@@ -88,17 +88,15 @@ const MarginModeDialogContent: React.FC<Props> = ({
         </Row>
         <Row>
           <Accordion
-            label={
-              <MutedText>{t("What are Cross and Isolated modes?")}</MutedText>
-            }
+            label={<Text muted>{t("What are Cross and Isolated modes?")}</Text>}
             text={
-              <MutedText noWrap={false}>
+              <Text>
                 {t(
                   "Cross Margin Mode: Share your margin balance across all open positions to avoid liquidation. In the event of liquidation you risk losing your full margin balance along with any remaining open positions.\n" +
                     "\n" +
                     "Isolated Margin Mode: Manage your risk on individual positions by restricting the amount of margin allocated to each. If the margin ratio of a position reached 100%, the position will be liquidated. Margin can be added or removed to positions using this mode."
                 )}
-              </MutedText>
+              </Text>
             }
           />
         </Row>

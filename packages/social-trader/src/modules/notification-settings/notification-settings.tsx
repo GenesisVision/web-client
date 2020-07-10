@@ -18,11 +18,11 @@ const _NotificationSettings: React.FC<Props> = ({
   const notificationsGeneral = [
     {
       name: NOTIFICATIONS.PlatformNewsAndUpdates,
-      label: t("notifications-page.general.news-updates")
+      label: t("notifications-page:general.news-updates")
     },
     {
       name: NOTIFICATIONS.PlatformEmergency,
-      label: t("notifications-page.general.emergency")
+      label: t("notifications-page:general.emergency")
     }
   ];
   return (
@@ -34,21 +34,21 @@ const _NotificationSettings: React.FC<Props> = ({
           settings={settingsGeneral}
         />
       </Row>
-      <Row large>
+      <Row size={"large"}>
         <NotificationAssets
           condition={!!settingsProgram.length}
           settings={settingsProgram}
           asset={ASSET.PROGRAM}
         />
       </Row>
-      <Row large>
+      <Row size={"large"}>
         <NotificationAssets
           condition={!!settingsFund.length}
           settings={settingsFund}
           asset={ASSET.FUND}
         />
       </Row>
-      <Row large>
+      <Row size={"large"}>
         <NotificationManagers
           condition={settingsManager.length > 0}
           settings={settingsManager}

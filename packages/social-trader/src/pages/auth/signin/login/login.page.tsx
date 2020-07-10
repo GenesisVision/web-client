@@ -8,7 +8,7 @@ import LoginForm from "./login-form";
 const _LoginPage: React.FC<Props> = ({ redirectFrom }) => {
   const [t] = useTranslation();
   return (
-    <PageSeoWrapper title={t("auth.login.title")}>
+    <PageSeoWrapper title={t("auth:login.title")}>
       <SignInContainer
         redirectFrom={redirectFrom}
         renderForm={({ handle, errorMessage }) => (

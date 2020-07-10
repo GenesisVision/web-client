@@ -23,7 +23,7 @@ const _SocialPageTradersBlock: React.FC<Props> = ({ assets }) => {
       <Row>
         <h3>{t("Top strategies")}</h3>
       </Row>
-      <Row large onlyOffset className={styles["social-page-traders"]}>
+      <Row size={"large"} onlyOffset className={styles["social-page-traders"]}>
         {assets.map(
           (
             {

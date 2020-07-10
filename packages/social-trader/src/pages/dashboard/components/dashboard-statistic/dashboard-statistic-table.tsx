@@ -37,7 +37,7 @@ const _DashboardStatisticTable: React.FC<Props> = ({ data }) => {
         columns={DASHBOARD_STATISTIC_COLUMNS}
         items={data}
         renderHeader={column => (
-          <span>{t(`dashboard-page.statistic.table.${column.name}`)}</span>
+          <span>{t(`dashboard-page:statistic.table.${column.name}`)}</span>
         )}
         renderBodyRow={(event: TDashboardEvent) => {
           const humanizedDate = humanizeDate(formatDate(event.date));

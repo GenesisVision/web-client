@@ -1,6 +1,6 @@
-@import "~shared/styles/_sizes";
-@import "~shared/styles/_breakpoint";
-@import "~shared/styles/_constants";
+@import "styles/_sizes";
+@import "styles/_breakpoint";
+@import "styles/_constants";
 
 $desktop-center-width: 60%;
 $desktop-side-block-width: calc((100% - #{$desktop-center-width}) / 2);
@@ -20,6 +20,20 @@ $tablet-side-block-width: calc(100% - #{$tablet-center-width});
     }
     @include media-breakpoint-desktop() {
       width: $desktop-center-width;
+    }
+  }
+
+  &__left-block {
+    display: none;
+    @include media-breakpoint-landscape-tablet() {
+      display: block;
+    }
+  }
+
+  &__right-block {
+    display: none;
+    @include media-breakpoint-desktop() {
+      display: block;
     }
   }
 

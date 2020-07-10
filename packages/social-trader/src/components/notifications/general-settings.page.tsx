@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 const NotificationsPage: React.FC = () => {
   const [t] = useTranslation();
   return (
-    <Page showTitle title={t("notifications-page.title")}>
+    <Page showTitle title={t("notifications-page:title")}>
       <NotificationSettingsContainer />
     </Page>
   );

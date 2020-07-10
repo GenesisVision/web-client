@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { Table } from "components/table/components";
 import { FundDetailsListItemItemsViewModel } from "gv-api-web";
 import FundsTableRow from "modules/funds-table/components/funds-table/fund-table-row";
@@ -17,12 +17,12 @@ const FundsTable: React.FC<SearchTableProps<FundDetailsListItemItemsViewModel> &
       items={data.items}
       renderHeader={column => (
         <span
-          className={classNames(
+          className={clsx(
             styles["funds-table__cell"],
             styles[`funds-table__cell--${column.name}`]
           )}
         >
-          {t(`funds-page.funds-header.${column.name}`)}
+          {t(`header-fields.${column.name}`)}
         </span>
       )}
       renderBodyRow={fund => <FundsTableRow fund={fund} />}

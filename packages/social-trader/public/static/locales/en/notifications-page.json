@@ -1,0 +1,118 @@
+{
+  "title": "Notification settings",
+  "general": {
+    "title": "GENERAL",
+    "news-updates": "News and updates",
+    "emergency": "Emergency notifications",
+    "FundRebalancing": {
+      "disabled-alert": "Disabled rebalancing notifications",
+      "enabled-alert": "Enabled rebalancing notifications"
+    },
+    "FundNewsAndUpdates": {
+      "disabled-alert": "Disabled news and updates notifications",
+      "enabled-alert": "Enabled news and updates notifications"
+    },
+    "FundEndOfPeriod": {
+      "disabled-alert": "Disabled the end of period notifications",
+      "enabled-alert": "Enabled the end of period notifications"
+    },
+    "ProgramEndOfPeriod": {
+      "enabled-alert": "Enabled the end of period notifications",
+      "disabled-alert": "Disabled the end of period notifications"
+    },
+    "ProgramNewsAndUpdates": {
+      "enabled-alert": "Enabled news and updates notifications",
+      "disabled-alert": "Disabled news and updates notifications"
+    },
+    "FollowNewsAndUpdates": {
+      "enabled-alert": "Enabled news and updates notifications",
+      "disabled-alert": "Disabled news and updates notifications"
+    },
+    "PlatformEmergency": {
+      "enabled-alert": "Enabled emergency notifications",
+      "disabled-alert": "Disabled emergency notifications"
+    },
+    "PlatformNewsAndUpdates": {
+      "enabled-alert": "Enabled news and updates notifications",
+      "disabled-alert": "Disabled news and updates notifications"
+    }
+  },
+  "custom": {
+    "title": "CUSTOM",
+    "profit": "Profit notification",
+    "create": "Create notification",
+    "enabled-alert": "Enabled custom notification",
+    "disabled-alert": "Disabled custom notification",
+    "delete-alert": "Custom notification was deleted",
+    "create-alert": "Custom notification was created"
+  },
+  "create": {
+    "title": "Create notification",
+    "type-label": "Type",
+    "amount-label": "Enter amount",
+    "amount-required": "Amount is required",
+    "Level": {
+      "title": "Level notification",
+      "label": "Level"
+    },
+    "Profit": {
+      "title": "Profit notification",
+      "label": "Profit"
+    },
+    "AvailableToInvest": {
+      "title": "Investment availability notification",
+      "label": "Amount"
+    }
+  },
+  "follows": "FOLLOW",
+  "programs": "PROGRAMS",
+  "funds": "FUNDS",
+  "follow": {
+    "title": "Follow notifications",
+    "general": {
+      "title": "GENERAL",
+      "news-updates": "Follow news and updates",
+      "ProgramNewsAndUpdates": {
+        "enabled-alert": "Enabled follow news and updates notifications",
+        "disabled-alert": "Disabled follow news and updates notifications"
+      }
+    }
+  },
+  "program": {
+    "title": "Program notifications",
+    "general": {
+      "title": "GENERAL",
+      "news-updates": "Program news and updates",
+      "end-of-period": "Notifications for the end of the period",
+      "ProgramNewsAndUpdates": {
+        "enabled-alert": "Enabled program news and updates notifications",
+        "disabled-alert": "Disabled program news and updates notifications"
+      },
+      "ProgramEndOfPeriod": {
+        "enabled-alert": "Enabled the end of period notifications",
+        "disabled-alert": "Disabled the end of period notifications"
+      }
+    }
+  },
+  "fund": {
+    "title": "Fund notifications",
+    "general": {
+      "title": "GENERAL",
+      "news-updates": "Fund news and updates",
+      "end-of-period": "Notifications for the end of the period",
+      "fund-rebalancing": "Fund structure changing",
+      "FundRebalancing": {
+        "disabled-alert": "Disabled fund rebalancing notifications",
+        "enabled-alert": "Enabled fund rebalancing notifications"
+      },
+      "FundNewsAndUpdates": {
+        "disabled-alert": "Disabled fund news and updates notifications",
+        "enabled-alert": "Enabled fund news and updates notifications"
+      },
+      "FundEndOfPeriod": {
+        "disabled-alert": "Disabled the end of period notifications",
+        "enabled-alert": "Enabled the end of period notifications"
+      }
+    }
+  }
+}

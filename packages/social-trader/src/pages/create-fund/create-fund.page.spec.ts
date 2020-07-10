@@ -19,7 +19,7 @@ describe("Create fund", () => {
   }, ASYNC_TEST_TIMEOUT);
   it("should be titled Create fund", async () => {
     const title = await page.title();
-    expect(title).toContain(testT("create-fund-page.title"));
+    expect(title).toContain(testT("create-fund-page:title"));
   });
   afterAll(() => {
     browser.close();

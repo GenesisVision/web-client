@@ -2,9 +2,8 @@ import { Center } from "components/center/center";
 import PortfolioEventLogo from "components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
 import { CancelRequestButton } from "components/request-line/cancel-request-button";
 import { RowItem } from "components/row-item/row-item";
-import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
-import StatisticItem from "components/statistic-item/statistic-item";
-import StatisticItemInner from "components/statistic-item/statistic-item-inner";
+import { Row } from "components/row/row";
+import { Text } from "components/text/text";
 import { AssetInvestmentRequest } from "gv-api-web";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -13,6 +12,22 @@ import { localizedDate } from "utils/dates";
 import { formatCurrencyValue } from "utils/formatter";
 
 import styles from "./request-line.module.scss";
+
+const RequestLineItem: React.FC<{ label: string | JSX.Element }> = ({
+  children,
+  label
+}) => {
+  return (
+    <div>
+      <Row>
+        <Text size={"small"}>{label}</Text>
+      </Row>
+      <Row size={"small"}>
+        <Text muted>{children}</Text>
+      </Row>
+    </div>
+  );
+};
 
 const _RequestLine: React.FC<Props> = ({
   request: { assetDetails, type, amount, currency, date, canCancelRequest, id },
@@ -29,18 +44,18 @@ const _RequestLine: React.FC<Props> = ({
   const [t] = useTranslation();
   return (
     <Center className={styles["request-line"]}>
-      <RowItem small>
+      <RowItem size={"small"}>
         <PortfolioEventLogo withAsset assetDetails={assetDetails} icon={""} />
       </RowItem>
-      <RowItem large>
+      <RowItem size={"large"}>
         <Center>
           <RowItem>
-            <StatisticItemInner label={title} invert accent>
+            <RequestLineItem label={<Text weight={"bold"}>{title}</Text>}>
               {type}
-            </StatisticItemInner>
+            </RequestLineItem>
           </RowItem>
           <RowItem>
-            <StatisticItemInner
+            <RequestLineItem
               label={
                 assetDetails.isWithdrawAll ? (
                   t("withdraw-program.withdrawing-all")
@@ -54,78 +69,77 @@ const _RequestLine: React.FC<Props> = ({
                   />
                 )
               }
-              invert
             >
               {localizedDate(date)}
-            </StatisticItemInner>
+            </RequestLineItem>
           </RowItem>
-          <RowItem>
-            <StatisticItemInner
-              condition={successFee !== null}
-              label={
-                <NumberFormat
-                  value={successFee}
-                  suffix={` %`}
-                  allowNegative={false}
-                  displayType="text"
-                />
-              }
-              invert
-            >
-              {t("program-details-page.description.successFee")}
-            </StatisticItemInner>
-          </RowItem>
-          {assetType === "Fund" ? (
+          {successFee !== null && (
             <RowItem>
-              <StatisticItemInner
-                condition={entryFee !== null}
+              <RequestLineItem
                 label={
                   <NumberFormat
-                    value={entryFee}
+                    value={successFee}
                     suffix={` %`}
                     allowNegative={false}
                     displayType="text"
                   />
                 }
-                invert
               >
-                {t("fund-details-page.description.entryFee")}
-              </StatisticItemInner>
+                {t("asset-details:description.successFee")}
+              </RequestLineItem>
+            </RowItem>
+          )}
+          {assetType === "Fund" ? (
+            <RowItem>
+              {entryFee !== null && (
+                <RequestLineItem
+                  label={
+                    <NumberFormat
+                      value={entryFee}
+                      suffix={` %`}
+                      allowNegative={false}
+                      displayType="text"
+                    />
+                  }
+                >
+                  {t("asset-details:description.entryFee")}
+                </RequestLineItem>
+              )}
             </RowItem>
           ) : (
             <RowItem>
-              <StatisticItemInner
-                condition={managementFee !== null}
+              {managementFee !== null && (
+                <RequestLineItem
+                  label={
+                    <NumberFormat
+                      value={managementFee}
+                      suffix={` %`}
+                      allowNegative={false}
+                      displayType="text"
+                    />
+                  }
+                >
+                  {t("asset-details:description.management-fee")}
+                </RequestLineItem>
+              )}
+            </RowItem>
+          )}
+          {exitFee !== null && (
+            <RowItem>
+              <RequestLineItem
                 label={
                   <NumberFormat
-                    value={managementFee}
+                    value={exitFee}
                     suffix={` %`}
                     allowNegative={false}
                     displayType="text"
                   />
                 }
-                invert
               >
-                {t("program-details-page.description.management-fee")}
-              </StatisticItemInner>
+                {t("asset-details:description.exitFee")}
+              </RequestLineItem>
             </RowItem>
           )}
-          <RowItem>
-            <StatisticItemInner
-              condition={exitFee !== null}
-              label={
-                <NumberFormat
-                  value={exitFee}
-                  suffix={` %`}
-                  allowNegative={false}
-                  displayType="text"
-                />
-              }
-              invert
-            >
-              {t("fund-details-page.description.exitFee")}
-            </StatisticItemInner>
-          </RowItem>
         </Center>
       </RowItem>
       {canCancelRequest && (

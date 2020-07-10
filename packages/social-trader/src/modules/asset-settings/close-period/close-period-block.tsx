@@ -7,7 +7,7 @@ import ClosePeriod from "./close-period";
 
 const _ClosePeriodBlock: React.FC<Props> = ({
   t,
-  label = t("asset-settings.close-period.title"),
+  label = t("asset-settings:close-period.title"),
   id,
   closePeriod = () => {}
 }) => (

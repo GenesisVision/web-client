@@ -1,4 +1,4 @@
-import { MutedText } from "components/muted-text/muted-text";
+import { Text } from "components/text/text";
 import { useAccountCurrency } from "hooks/account-currency.hook";
 import { DashboardInvestingCounts } from "pages/dashboard/components/dashboard-statistic/dashboard-investing-counts";
 import { DashboardNewUserBlock } from "pages/dashboard/components/dashboard-statistic/dashboard-new-user.block";
@@ -23,7 +23,7 @@ const _DashboardInvestingStatistic: React.FC<Props> = ({
       tablet={tablet}
       EmptyBlock={DashboardInvestingEmpty}
       currency={currency}
-      label={t("dashboard-page.statistic.investing")}
+      label={t("dashboard-page:statistic.investing")}
       request={getTotalInvestingStatistic}
       all={INVESTMENTS_ROUTE}
       renderValues={({
@@ -54,17 +54,17 @@ const DashboardInvestingEmpty: React.FC = React.memo(() => {
       leftField={{
         link: GV_PROGRAMS_ROUTE,
         linkLabel: t(
-          "dashboard-page.statistic.get-started.investing.left-field.button"
+          "dashboard-page:statistic.get-started.investing.left-field.button"
         ),
         text: (
           <>
-            <MutedText>
+            <Text muted>
               {t(
-                "dashboard-page.statistic.get-started.investing.left-field.text"
+                "dashboard-page:statistic.get-started.investing.left-field.text"
               )}
-            </MutedText>
+            </Text>
             {t(
-              "dashboard-page.statistic.get-started.investing.left-field.text-2"
+              "dashboard-page:statistic.get-started.investing.left-field.text-2"
             )}
           </>
         )
@@ -72,12 +72,12 @@ const DashboardInvestingEmpty: React.FC = React.memo(() => {
       rightField={{
         link: GV_FUNDS_ROUTE,
         linkLabel: t(
-          "dashboard-page.statistic.get-started.investing.right-field.button"
+          "dashboard-page:statistic.get-started.investing.right-field.button"
         ),
         text: (
           <>
             {t(
-              "dashboard-page.statistic.get-started.investing.right-field.text"
+              "dashboard-page:statistic.get-started.investing.right-field.text"
             )}
           </>
         )

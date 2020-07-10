@@ -1,11 +1,22 @@
+import { IImageValue } from "components/form/input-image/input-image";
 import { TableDataType } from "constants/constants";
-import { Post, PostActions, PostImage, ProfilePublic } from "gv-api-web";
+import {
+  Post,
+  PostImage,
+  PostPersonalDetails,
+  ProfilePublic
+} from "gv-api-web";
 
 export enum SEARCH_ASSET_TYPE {
   program = "program",
   fund = "fund",
   follow = "follow",
   user = "user"
+}
+
+export interface IEditPostData {
+  text: string;
+  images: Array<IImageValue>;
 }
 
 export type AssetSearchResult = {
@@ -26,7 +37,7 @@ export interface MessageDetailType {
   title: string;
 }
 
-export type ConversationMessagePersonalDetails = PostActions;
+export type ConversationMessagePersonalDetails = PostPersonalDetails;
 
 export type ConversationComment = ConversationPost;
 

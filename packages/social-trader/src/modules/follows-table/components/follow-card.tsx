@@ -1,5 +1,5 @@
+import { LabeledValue } from "components/labeled-value/labeled-value";
 import { useToLink } from "components/link/link.helper";
-import StatisticItem from "components/statistic-item/statistic-item";
 import TableCard, {
   IWithOffset,
   TableCardTable,
@@ -13,12 +13,12 @@ import {
   TableCardFavoriteActionItem
 } from "components/table/components/table-card/table-card-actions";
 import TagProgramContainer from "components/tags/tag-program-container/tag-program-container";
+import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import { ASSET } from "constants/constants";
 import { FollowDetailsListItem } from "gv-api-web";
 import FollowButton from "pages/invest/follows/follow-details/follow-button";
 import * as React from "react";
-import { useState } from "react";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { FOLLOW_DETAILS_FOLDER_ROUTE } from "routes/invest.routes";
@@ -52,7 +52,7 @@ const _FollowCard: React.FC<Props> = ({
   const renderActions = ({ clearAnchor, anchor }: IRenderActionsArgs) => (
     <TableCardActions anchor={anchor} clearAnchor={clearAnchor}>
       <TableCardActionsItem to={linkProps} onClick={clearAnchor}>
-        {t("program-actions.details")}
+        {t("asset-actions.details")}
       </TableCardActionsItem>
       {follow.personalDetails && (
         <TableCardFavoriteActionItem
@@ -83,31 +83,54 @@ const _FollowCard: React.FC<Props> = ({
     >
       <TableCardTable>
         <TableCardTableColumn>
-          <StatisticItem label={t("follows-page.header.subscribers")}>
+          <LabeledValue
+            label={
+              <TooltipLabel
+                tooltipContent={t(
+                  "dashboard-page:tooltips.trading.subscribers"
+                )}
+                labelText={t("header-fields.subscribers")}
+              />
+            }
+          >
             <NumberFormat
               value={subscribersCount}
               displayType="text"
               decimalScale={0}
             />
-          </StatisticItem>
+          </LabeledValue>
         </TableCardTableColumn>
         <TableCardTableColumn>
-          <StatisticItem label={t("follows-page.header.trades")}>
+          <LabeledValue
+            label={
+              <TooltipLabel
+                tooltipContent={t("dashboard-page:tooltips.trading.trades")}
+                labelText={t("header-fields.trades")}
+              />
+            }
+          >
             <NumberFormat
               value={tradesCount}
               displayType="text"
               decimalScale={0}
             />
-          </StatisticItem>
+          </LabeledValue>
         </TableCardTableColumn>
         <TableCardTableColumn>
-          <StatisticItem label={t("programs-page.programs-header.drawdown")}>
+          <LabeledValue
+            label={
+              <TooltipLabel
+                tooltipContent={t("dashboard-page:tooltips.investing.ddown")}
+                labelText={t("header-fields.drawdown")}
+              />
+            }
+          >
             <NumberFormat
               value={formatValue(drawdown, 2)}
               displayType="text"
               suffix="%"
             />
-          </StatisticItem>
+          </LabeledValue>
         </TableCardTableColumn>
       </TableCardTable>
       {withFollowButton && (

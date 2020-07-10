@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import ImageBaseElement from "components/avatar/image-base.element";
 import { Row } from "components/row/row";
 import { withBlurLoader } from "decorators/with-blur-loader";
@@ -19,15 +19,15 @@ const _InviteBlock: React.FC<{ data: ProfileFullViewModel }> = ({
   return (
     <div>
       <Row>
-        <h4>{t("profile-page.referral-program.title")}</h4>
+        <h4>{t("profile-page:referral-program.title")}</h4>
       </Row>
       <Row className={styles["referral-program__link-block"]}>
-        {t("profile-page.referral-program.referral-link")}
+        {t("profile-page:referral-program.referral-link")}
         <div className={styles["referral-program__link"]}>{refUrl}</div>
         <CopyButton value={refUrl} />
       </Row>
       <Row onlyOffset className={styles["referral-program__share-block"]}>
-        {t("profile-page.referral-program.share-your-passion")}
+        {t("profile-page:referral-program.share-your-passion")}
         {refUrl && (
           <ShareBlock
             userName={userName}
@@ -72,7 +72,7 @@ const _ShareBlock: React.FC<{
         data-url={refUrl}
       />
       <div
-        className={classNames(
+        className={clsx(
           styles["referral-program__share-buttons--email"],
           "at-icon-wrapper"
         )}

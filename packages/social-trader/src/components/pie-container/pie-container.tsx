@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import * as React from "react";
 
 import Pie, { PIE_DIRECTION } from "./pie";
@@ -21,7 +21,7 @@ const _PieContainer: React.FC<IPieContainer> = ({
   pieDirection
 }) => (
   <div
-    className={classNames(styles["pie-container"], {
+    className={clsx(styles["pie-container"], {
       [styles["pie-container--small"]]: small
     })}
   >

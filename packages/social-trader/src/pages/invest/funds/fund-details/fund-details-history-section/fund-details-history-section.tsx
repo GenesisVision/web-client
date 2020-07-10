@@ -38,15 +38,15 @@ const _FundDetailsHistorySection: React.FC<Props> = ({ id }) => {
           value={TABS.STRUCTURE}
           label={
             <TooltipLabel
-              tooltipContent={t("fund-details-page.tooltip.structure")}
-              labelText={t("fund-details-page.history.tabs.structure")}
+              tooltipContent={t("fund-details-page:tooltip.structure")}
+              labelText={t("fund-details-page:history.tabs.structure")}
               pointer
             />
           }
         />
         <GVTab
           value={TABS.REALLOCATE_HISTORY}
-          label={t("fund-details-page.history.tabs.reallocate-history")}
+          label={t("fund-details-page:history.tabs.reallocate-history")}
           count={reallocateCount}
         />
       </DetailsBlockTabs>

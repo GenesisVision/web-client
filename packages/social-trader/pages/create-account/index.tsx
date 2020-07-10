@@ -36,7 +36,18 @@ Page.getInitialProps = async ctx => {
     fetchExchanges().then(res => (exchanges = res)),
     fetchBrokers().then(res => (brokers = res))
   ]);
-  return { exchanges, brokers, requestBrokerName };
+  return {
+    namespacesRequired: [
+      "profile-page",
+      "attach-account",
+      "form-fields",
+      "create-account",
+      "asset-settings"
+    ],
+    exchanges,
+    brokers,
+    requestBrokerName
+  };
 };
 
 interface Props {

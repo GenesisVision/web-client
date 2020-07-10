@@ -1,4 +1,4 @@
-import { MutedText } from "components/muted-text/muted-text";
+import { Text } from "components/text/text";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import { convertFromCurrency } from "utils/currency-converter";
@@ -10,13 +10,13 @@ const _ConvertCurrency: React.FC<{
   currency: CurrencyEnum;
   rate: number;
 }> = ({ rate, amount, currency }) => (
-  <MutedText>
+  <Text muted>
     <NumberFormat
       value={formatCurrencyValue(convertFromCurrency(amount, rate), currency)}
       prefix="≈ "
       suffix={` ${currency}`}
       displayType="text"
     />
-  </MutedText>
+  </Text>
 );
 export const ConvertCurrency = React.memo(_ConvertCurrency);

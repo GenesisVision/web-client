@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { LikeIcon } from "components/conversation/icons/like.icon";
 import React from "react";
 
@@ -12,7 +12,7 @@ interface Props {
 export const LikeButtonIcon: React.FC<Props> = ({ liked, disabled }) => {
   return (
     <div
-      className={classNames(styles["like-button-icon"], {
+      className={clsx(styles["like-button-icon"], {
         [styles["like-button-icon--liked"]]: liked,
         [styles["like-button-icon--disabled"]]: disabled
       })}

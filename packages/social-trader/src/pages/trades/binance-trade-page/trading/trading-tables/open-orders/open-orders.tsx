@@ -1,14 +1,14 @@
-import GVButton, { GV_BTN_SIZE } from "components/gv-button";
-import { MutedText } from "components/muted-text/muted-text";
+import GVButton from "components/gv-button";
+import { Text } from "components/text/text";
 import useApiRequest from "hooks/api-request.hook";
 import { TradeTable } from "pages/trades/binance-trade-page/trading/components/trade-table/trade-table";
+import { TerminalInfoContext } from "pages/trades/binance-trade-page/trading/terminal-info.context";
 import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
-import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
-import { getSymbolFromState } from "pages/trades/binance-trade-page/trading/trading.helpers";
+import { getSymbolFromState } from "pages/trades/binance-trade-page/trading/terminal.helpers";
 import {
   QueryOrderResult,
-  TradeAuthDataType
-} from "pages/trades/binance-trade-page/trading/trading.types";
+  TerminalAuthDataType
+} from "pages/trades/binance-trade-page/trading/terminal.types";
 import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -23,14 +23,14 @@ interface Props {
 export const OpenOrders: React.FC<Props> = ({ items }) => {
   const { cancelAllOrders } = useContext(TerminalMethodsContext);
   const [t] = useTranslation();
-  const { authData, symbol } = useContext(TradingInfoContext);
+  const { authData, symbol } = useContext(TerminalInfoContext);
   const { sendRequest, isPending } = useApiRequest({
     request: ({
       options,
       authData
     }: {
       options: { symbol: string; useServerTime?: boolean };
-      authData: TradeAuthDataType;
+      authData: TerminalAuthDataType;
     }) => cancelAllOrders(options, authData)
   });
   const handleCancel = useCallback(() => {
@@ -53,7 +53,7 @@ export const OpenOrders: React.FC<Props> = ({ items }) => {
                 variant={"text"}
                 disabled={isPending}
                 isPending={isPending}
-                size={GV_BTN_SIZE.SMALL}
+                size={"small"}
                 color={"danger"}
                 onClick={handleCancel}
               >
@@ -63,7 +63,7 @@ export const OpenOrders: React.FC<Props> = ({ items }) => {
               ""
             )
           ) : (
-            <MutedText>{t(`${name}`)}</MutedText>
+            <Text muted>{t(`${name}`)}</Text>
           )}
         </th>
       )}

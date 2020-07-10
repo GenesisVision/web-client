@@ -7,6 +7,7 @@ export const ConversationInput: React.FC<Props> = props => {
 };
 
 interface Props {
+  focusTrigger?: any;
   onPaste?: VoidFunction;
   autoFocus?: boolean;
   bottomLine?: boolean;

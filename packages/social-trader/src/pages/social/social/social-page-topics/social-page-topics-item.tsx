@@ -1,10 +1,10 @@
+import { LabeledValue } from "components/labeled-value/labeled-value";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
-import StatisticItemInner from "components/statistic-item/statistic-item-inner";
 import {
-  SocialSearchContext,
+  FeedContext,
   SocialSearchInitialState
-} from "pages/social/social/social-page.context";
+} from "pages/social/social/feed.context";
 import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -22,7 +22,7 @@ const _SocialPageTopicsItem: React.FC<Props> = ({
   discussCount
 }) => {
   const [t] = useTranslation();
-  const { setSearchValue } = useContext(SocialSearchContext);
+  const { setSearchValue } = useContext(FeedContext);
 
   const handleClick = useCallback(() => {
     const hashTags = [hashTag];
@@ -34,16 +34,12 @@ const _SocialPageTopicsItem: React.FC<Props> = ({
   return (
     <div className={styles["social-page-topics__item"]}>
       <Row onClick={handleClick}>{hashTag}</Row>
-      <Row small>
+      <Row size={"small"}>
         <RowItem wide>
-          <StatisticItemInner label={t("View")}>
-            {impressionsCount}
-          </StatisticItemInner>
+          <LabeledValue label={t("View")}>{impressionsCount}</LabeledValue>
         </RowItem>
         <RowItem wide>
-          <StatisticItemInner label={t("Discuss")}>
-            {discussCount}
-          </StatisticItemInner>
+          <LabeledValue label={t("Discuss")}>{discussCount}</LabeledValue>
         </RowItem>
       </Row>
     </div>

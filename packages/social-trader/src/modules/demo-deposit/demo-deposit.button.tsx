@@ -1,9 +1,10 @@
-import GVButton, { GV_BTN_SIZE } from "components/gv-button";
+import GVButton from "components/gv-button";
 import useIsOpen from "hooks/is-open.hook";
 import { IDemoDepositContainerProps } from "modules/demo-deposit/demo-deposit.container";
 import { DemoDepositDialog } from "modules/demo-deposit/demo-deposit.dialog";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
+import { Clickable, Sizeable } from "utils/types";
 
 const _DemoDepositButton: React.FC<Props> = ({
   currentDeposit,
@@ -45,12 +46,10 @@ const _DemoDepositButton: React.FC<Props> = ({
   );
 };
 
-export const FullButton: React.FC<IFullButtonProps & {
-  onClick: () => void;
-}> = React.memo(
+export const FullButton: React.FC<IFullButtonProps & Clickable> = React.memo(
   ({ disabled, onClick, label, color, variant, withIcon, size }) => {
     const [t] = useTranslation();
-    const labelText = label || t("wallet-page.deposit");
+    const labelText = label || t("wallet-page:deposit");
     return (
       <GVButton
         size={size}
@@ -65,8 +64,7 @@ export const FullButton: React.FC<IFullButtonProps & {
   }
 );
 
-interface IFullButtonProps {
-  size?: GV_BTN_SIZE;
+interface IFullButtonProps extends Sizeable {
   withIcon?: boolean;
   color?: "primary" | "secondary" | "primary-dark" | "danger";
   variant?: "text" | "outlined" | "contained";

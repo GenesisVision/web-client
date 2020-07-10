@@ -1,14 +1,12 @@
-import classNames from "classnames";
+import { InternalArticle } from "pages/landing-page/components/internal/internal.blocks";
 import React from "react";
 
 import styles from "./terms-section.module.scss";
 
 const TermsSection: React.FC = () => (
-  <section
-    className={classNames(styles["terms-section"], "internal--font-small")}
-  >
+  <section className={styles["terms-section"]}>
     <h1>TERMS AND CONDITIONS</h1>
-    <article className="internal__article">
+    <InternalArticle>
       <p>1. DEFINITIONS</p>
       <p>
         1.1. For purposes of these Terms of Use, the following terms shall have
@@ -554,7 +552,7 @@ const TermsSection: React.FC = () => (
         NOT IN CHARGE OF THE PAST PERFORMANCE OF EACH CRYPTOCURRENCY. GV
         PROVIDES TECHNICAL SERVICES ONLY.
       </p>
-    </article>
+    </InternalArticle>
   </section>
 );
 

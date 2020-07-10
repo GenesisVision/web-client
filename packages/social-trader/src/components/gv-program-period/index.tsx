@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { calcPercent } from "components/pie-container/pie.helpers";
 import React from "react";
 
@@ -30,7 +30,7 @@ const GVProgramPeriod: React.FC<GVProgramPeriodProps> = ({
         width="100%"
         height="100%"
         viewBox="0 0 42 42"
-        className={classNames(
+        className={clsx(
           styles["gv-program-period"],
           styles["gv-program-period--pie"],
           className
@@ -60,17 +60,14 @@ const GVProgramPeriod: React.FC<GVProgramPeriodProps> = ({
   else
     return (
       <div
-        className={classNames(
+        className={clsx(
           styles["gv-program-period"],
           styles["gv-program-period--line"],
           className
         )}
       >
         <div
-          className={classNames(
-            styles["gv-program-period__value"],
-            valueClassName
-          )}
+          className={clsx(styles["gv-program-period__value"], valueClassName)}
           style={{ width: `${valuePercent}%` }}
         />
       </div>

@@ -16,14 +16,16 @@ const _SubscriptionsFeesTooltip: React.FC<Props> = ({
       <>
         <FeeCommission
           className={styles["fee-commission--green-value"]}
-          title={t(`copytrading-tables.fees.SuccessFee`)}
+          title={t("program-details-page:copytrading-tables.fees.SuccessFee")}
           value={subscription.totalSuccessFeeAmount}
           currency={subscription.totalSuccessFeeCurrency}
         />
-        <Row small>
+        <Row size={"small"}>
           <FeeCommission
             className={styles["fee-commission--green-value"]}
-            title={t(`copytrading-tables.fees.ManagerSignalMasterVolumeFee`)}
+            title={t(
+              "program-details-page:copytrading-tables.fees.ManagerSignalMasterVolumeFee"
+            )}
             value={subscription.totalVolumeFeeAmount}
             currency={subscription.totalVolumeFeeCurrency}
           />
@@ -33,7 +35,7 @@ const _SubscriptionsFeesTooltip: React.FC<Props> = ({
     footer={
       <FeeCommission
         className={styles["fee-commission--green-value"]}
-        title={t(`copytrading-tables.fees.total`)}
+        title={t("program-details-page:copytrading-tables.fees.total")}
         value={subscription.totalCommissionAmount}
         currency={subscription.totalCommissionCurrency}
       />

@@ -10,7 +10,7 @@ import {
   AppContextType,
   NextComponentType
 } from "next/dist/next-server/lib/utils";
-import React from "react";
+import React, { ReactNode } from "react";
 import { AuthRootState as SocialTraderAuthRootState } from "reducers";
 import { RootState } from "reducers/root-reducer";
 import { Action, AnyAction, Dispatch, Store } from "redux";
@@ -18,6 +18,20 @@ import { ThunkAction, ThunkDispatch } from "redux-thunk";
 import Token from "services/api-client/token";
 
 export type SizesType = "xsmall" | "small" | "middle" | "large" | "xlarge";
+
+export interface Childrenable {
+  children?: ReactNode | ReactNode[];
+}
+
+export interface Clickable {
+  onClick: (values?: any) => void;
+}
+
+export type OptionalClickable = Partial<Clickable>;
+
+export interface Sizeable {
+  size?: SizesType;
+}
 
 export type AnyObjectType = { [keys: string]: any };
 

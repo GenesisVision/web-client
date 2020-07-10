@@ -1,5 +1,11 @@
 import { sendEventToGA } from "utils/ga";
 
+export const sendSetEventsOffEvent = (eventValue?: number) =>
+  sendEventToGA({
+    eventCategory: "Social",
+    eventAction: "SetEventsOff"
+  });
+
 export const sendPostEvent = (eventValue?: number) =>
   sendEventToGA({
     eventCategory: "Social",
@@ -16,6 +22,18 @@ export const sendLikeEvent = () =>
   sendEventToGA({
     eventCategory: "Social",
     eventAction: "Like"
+  });
+
+export const sendReportEvent = () =>
+  sendEventToGA({
+    eventCategory: "Social",
+    eventAction: "Report"
+  });
+
+export const sendEditEvent = () =>
+  sendEventToGA({
+    eventCategory: "Social",
+    eventAction: "Edit"
   });
 
 export const sendShareEvent = () =>

@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import React from "react";
 import { TagType } from "utils/types";
 
@@ -11,7 +11,7 @@ const _BlurContainer: React.FC<Props> = ({
   tag: Tag = "div"
 }) => (
   <Tag
-    className={classNames(styles["blur-container"], className, {
+    className={clsx(styles["blur-container"], className, {
       [styles["blur-container--loading"]]: blur,
       [styles["blur-container--loaded"]]: !blur
     })}

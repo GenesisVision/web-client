@@ -1,4 +1,5 @@
 import { TAccordion } from "pages/landing-page/components/accordion/accordion";
+import { InternalTableWrapper } from "pages/landing-page/components/internal/internal.blocks";
 import React from "react";
 
 export const faqGeneral: TAccordion[] = [
@@ -623,8 +624,8 @@ export const faqPrograms: TAccordion[] = [
     content: (
       <p>
         You will first need to create a private trading account. You can do that
-        in the <b>Trade</b> section on the platform. Once this is created, you can
-        upgrade your private trading account to either: Program or signal
+        in the <b>Trade</b> section on the platform. Once this is created, you
+        can upgrade your private trading account to either: Program or signal
         account (Follow). Now your trading account is public and can attract
         investments or followers.
       </p>
@@ -1178,7 +1179,7 @@ export const faqGVT: TAccordion[] = [
             fee reduction by holding up to 500 GVT.
           </li>
         </ul>
-        <table className="internal__table">
+        <InternalTableWrapper>
           <thead>
             <tr>
               <th>Wallet</th>
@@ -1211,7 +1212,7 @@ export const faqGVT: TAccordion[] = [
               <td>55%</td>
             </tr>
           </tbody>
-        </table>
+        </InternalTableWrapper>
         <p>To be eligible for a trading discount</p>
         <ul>
           <li>There must be more than 1 GVT stored in the wallet</li>

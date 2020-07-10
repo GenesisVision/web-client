@@ -9,4 +9,8 @@ const Page: NextPage = () => {
   return <FinancialStatisticPage />;
 };
 
+Page.getInitialProps = async () => ({
+  namespacesRequired: ["asset-details", "dashboard-page"]
+});
+
 export default compose(withDefaultLayout, withPrivateRoute)(Page);

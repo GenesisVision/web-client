@@ -90,35 +90,35 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
       <DetailsBlockTabs value={tab} onChange={setTab}>
         <GVTab
           value={TABS.OPEN_POSITIONS}
-          label={t("program-details-page.history.tabs.open-positions")}
+          label={t("program-details-page:history.tabs.open-positions")}
           count={openPositionsCount}
         />
         <GVTab
           value={TABS.TRADES}
-          label={t("program-details-page.history.tabs.trades")}
+          label={t("program-details-page:history.tabs.trades")}
           count={tradesCount}
         />
         <GVTab
           visible={!!periodHistory}
           value={TABS.PERIOD_HISTORY}
-          label={t("program-details-page.history.tabs.period-history")}
+          label={t("program-details-page:history.tabs.period-history")}
           count={periodHistoryCount}
         />
         <GVTab
           value={TABS.SUBSCRIBERS}
-          label={t("program-details-page.history.tabs.subscriptions")}
+          label={t("program-details-page:history.tabs.subscriptions")}
           count={subscriptionsCount}
           visible={isAuthenticated && isOwnProgram && !!subscriptions}
         />
         <GVTab
           value={TABS.FINANCIAL_STATISTIC}
-          label={t("program-details-page.history.tabs.financial-statistic")}
+          label={t("program-details-page:history.tabs.financial-statistic")}
           count={financialStatisticCount}
           visible={isAuthenticated && isOwnProgram && !!financialStatistic}
         />
         <GVTab
           value={TABS.TRADING_LOG}
-          label={t("program-details-page.history.tabs.trading-log")}
+          label={t("program-details-page:history.tabs.trading-log")}
           count={tradingLogCount}
           visible={!!isAuthenticated && !!isFollower && !!tradingLog}
         />

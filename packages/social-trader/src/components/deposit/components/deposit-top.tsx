@@ -1,6 +1,7 @@
 import { DialogTop } from "components/dialog/dialog-top";
+import { LabeledValue } from "components/labeled-value/labeled-value";
 import { Row } from "components/row/row";
-import StatisticItem from "components/statistic-item/statistic-item";
+import { Text } from "components/text/text";
 import { ASSET } from "constants/constants";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
@@ -22,13 +23,13 @@ const _DepositTop: React.FC<DepositTopOwnProps> = ({
   return (
     <DialogTop title={header || title} subtitle={subtitle || asset}>
       {asset === ASSET.PROGRAM && !ownAsset && !!availableToInvest && (
-        <Row large>
-          <StatisticItem
-            label={t("deposit-asset.program.available-to-invest")}
-            big
-          >
-            {`${formatCurrencyValue(availableToInvest, currency!)} ${currency}`}
-          </StatisticItem>
+        <Row size={"large"}>
+          <LabeledValue label={t("deposit-asset.program.available-to-invest")}>
+            <Text size={"xlarge"}>{`${formatCurrencyValue(
+              availableToInvest,
+              currency!
+            )} ${currency}`}</Text>
+          </LabeledValue>
         </Row>
       )}
     </DialogTop>

@@ -2,14 +2,15 @@ import { FUND_ASSET_TYPE } from "components/fund-asset/fund-asset";
 import FundAssetContainer, {
   FundAssetType
 } from "components/fund-asset/fund-asset-container";
+import { LabeledValue } from "components/labeled-value/labeled-value";
 import { useToLink } from "components/link/link.helper";
-import StatisticItemInner from "components/statistic-item/statistic-item-inner";
 import TableCard, {
   IWithOffset,
   TableCardTable,
   TableCardTableColumn,
   TableCardTableRow
 } from "components/table/components/table-card/table-card";
+import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import {
   ASSET,
   DECIMAL_SCALE_BIG_VALUE,
@@ -80,11 +81,19 @@ const _DashboardPublicCard: React.FC<Props> = ({
   const { programDetails, fundDetails } = asset.publicInfo;
   const topFundAssets = fundDetails && fundDetails.topFundAssets;
   const totalAssetsCount = fundDetails && fundDetails.totalAssetsCount;
+  const amountTitle =
+    asset.assetType === "Fund"
+      ? t("header-fields.value")
+      : t("header-fields.equity");
+  const amountTooltip =
+    asset.assetType === "Fund"
+      ? t("dashboard-page:tooltips.trading.equity-fund")
+      : t("dashboard-page:tooltips.investing.equity");
   return (
     <TableCard
       withOffset={withOffset}
       hasAvatar
-      subTitle={t(`dashboard-page.trading.asset-types.${asset.assetTypeExt}`)}
+      subTitle={t(`dashboard-page:trading.asset-types.${asset.assetTypeExt}`)}
       level={programDetails ? programDetails.level : undefined}
       levelProgress={programDetails ? programDetails.levelProgress : undefined}
       title={assetTitle}
@@ -98,7 +107,14 @@ const _DashboardPublicCard: React.FC<Props> = ({
     >
       <TableCardTable>
         <TableCardTableColumn>
-          <StatisticItemInner label={t("programs-page.programs-header.equity")}>
+          <LabeledValue
+            label={
+              <TooltipLabel
+                tooltipContent={amountTooltip}
+                labelText={amountTitle}
+              />
+            }
+          >
             <NumberFormat
               value={formatValueDifferentDecimalScale(
                 asset.accountInfo.balance,
@@ -108,15 +124,33 @@ const _DashboardPublicCard: React.FC<Props> = ({
               suffix={` ${asset.accountInfo.currency}`}
               displayType="text"
             />
-          </StatisticItemInner>
+          </LabeledValue>
           {asset.broker && (
-            <StatisticItemInner label={t("dashboard-page.trading.broker")}>
+            <LabeledValue
+              label={
+                <TooltipLabel
+                  tooltipContent={t("dashboard-page:tooltips.investing.broker")}
+                  labelText={t("dashboard-page:trading.broker")}
+                />
+              }
+            >
               {asset.broker.name}
-            </StatisticItemInner>
+            </LabeledValue>
           )}
         </TableCardTableColumn>
         <TableCardTableColumn>
-          <StatisticItemInner label={t("dashboard-page.trading.ddown")}>
+          <LabeledValue
+            label={
+              <TooltipLabel
+                tooltipContent={
+                  asset.assetType === "Fund"
+                    ? t("dashboard-page:tooltips.trading.ddown-fund")
+                    : t("dashboard-page:tooltips.investing.ddown")
+                }
+                labelText={t("dashboard-page:trading.ddown")}
+              />
+            }
+          >
             <NumberFormat
               value={formatValueDifferentDecimalScale(
                 asset.statistic.drawdown,
@@ -125,25 +159,50 @@ const _DashboardPublicCard: React.FC<Props> = ({
               )}
               displayType="text"
             />
-          </StatisticItemInner>
+          </LabeledValue>
           {!!asset.signalInfo && (
-            <StatisticItemInner
-              label={t("dashboard-page.trading.subscribers-count")}
+            <LabeledValue
+              label={
+                <TooltipLabel
+                  tooltipContent={t(
+                    "dashboard-page:tooltips.trading.subscribers"
+                  )}
+                  labelText={t("dashboard-page:trading.subscribers-count")}
+                />
+              }
             >
               {asset.signalInfo.subscribersCount}
-            </StatisticItemInner>
+            </LabeledValue>
           )}
         </TableCardTableColumn>
         <TableCardTableColumn>
-          <StatisticItemInner label={t("dashboard-page.trading.age")}>
+          <LabeledValue
+            label={
+              <TooltipLabel
+                tooltipContent={
+                  asset.assetType === "Fund"
+                    ? t("dashboard-page:tooltips.trading.age-fund")
+                    : t("dashboard-page:tooltips.investing.age-program")
+                }
+                labelText={t("dashboard-page:trading.age")}
+              />
+            }
+          >
             {convertDateToShortFormat(
               distanceDate(asset.accountInfo.creationDate)
             )}
-          </StatisticItemInner>
+          </LabeledValue>
           {asset.accountInfo && asset.accountInfo.login && (
-            <StatisticItemInner label={t("dashboard-page.trading.login")}>
+            <LabeledValue
+              label={
+                <TooltipLabel
+                  tooltipContent={t("dashboard-page:tooltips.trading.login")}
+                  labelText={t("dashboard-page:trading.login")}
+                />
+              }
+            >
               {asset.accountInfo.login}
-            </StatisticItemInner>
+            </LabeledValue>
           )}
         </TableCardTableColumn>
       </TableCardTable>

@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import {
   IImageChangeEvent,
   IImageValue
@@ -71,10 +71,7 @@ export const DropZoneWrapper: React.FC<IDropZoneWrapperProps> = ({
   return (
     <div
       {...getRootProps({
-        className: classNames(
-          styles["input-image__dropzone-container"],
-          className
-        )
+        className: clsx(styles["input-image__dropzone-container"], className)
       })}
     >
       {showIndicator && (
@@ -86,7 +83,7 @@ export const DropZoneWrapper: React.FC<IDropZoneWrapperProps> = ({
       <input {...getInputProps()} />
       {isDragAccept && (
         <div className={styles["input-image__dropzone-helper"]}>
-          {t("input-image.drop-files")}
+          {t("form-fields:input-image.drop-files")}
         </div>
       )}
       {isDragReject && (

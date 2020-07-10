@@ -1,11 +1,10 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
 import { DefaultBlock } from "components/default.block/default.block";
 import { FollowUserBlock } from "components/manager/components/follow-user-block";
-import { MutedText } from "components/muted-text/muted-text";
 import { Row } from "components/row/row";
 import SocialLinksBlock from "components/social-links-block/social-links-block";
-import { SIZES } from "constants/constants";
+import { Text } from "components/text/text";
 import { PublicProfile } from "gv-api-web";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -17,25 +16,25 @@ import styles from "./manager-info.module.scss";
 const _ManagerInfo: React.FC<Props> = ({ profile }) => {
   const { username, about, logoUrl, regDate, socialLinks } = profile;
   const [t] = useTranslation();
-  const memberSince = `${t("manager-page.member-since")} ${localizedDate(
+  const memberSince = `${t("manager-page:member-since")} ${localizedDate(
     regDate
   )}`;
 
   const hasLongWords = about && !!getLongWordsCount(about);
   return (
     <>
-      <DefaultBlock solid size={SIZES.LARGE}>
+      <DefaultBlock solid size={"large"}>
         <Row>
           <ProfileAvatar url={logoUrl} big />
         </Row>
-        <Row onlyOffset large>
+        <Row onlyOffset size={"large"}>
           <Row>
             <h2>{username}</h2>
           </Row>
-          <Row small>
-            <MutedText>
+          <Row size={"small"}>
+            <Text muted>
               <b>{memberSince}</b>
-            </MutedText>
+            </Text>
           </Row>
         </Row>
         <FollowUserBlock profile={profile} />
@@ -43,9 +42,9 @@ const _ManagerInfo: React.FC<Props> = ({ profile }) => {
       <Row wide center={false}>
         <DefaultBlock>
           {!!socialLinks?.length && (
-            <Row large onlyOffset>
+            <Row size={"large"} onlyOffset>
               <Row>
-                <h3>{t("manager-page.social-links")}</h3>
+                <h3>{t("manager-page:social-links")}</h3>
               </Row>
               <Row>
                 <SocialLinksBlock socialLinks={socialLinks} />
@@ -53,12 +52,12 @@ const _ManagerInfo: React.FC<Props> = ({ profile }) => {
             </Row>
           )}
           {!!about?.length && (
-            <Row large onlyOffset>
+            <Row size={"large"} onlyOffset>
               <Row>
-                <h3>{t("manager-page.about")}</h3>
+                <h3>{t("manager-page:about")}</h3>
               </Row>
               <Row
-                className={classNames(styles["manager-info__about"], {
+                className={clsx(styles["manager-info__about"], {
                   [styles["manager-info__about--break-word"]]: hasLongWords
                 })}
               >

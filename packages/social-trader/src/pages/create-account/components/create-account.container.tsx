@@ -18,7 +18,7 @@ const _CreateAccountContainer: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   const { tab, setTab } = useTab<TAB>(TAB.BROKER);
-  const broker = brokers.find(
+  const broker = [...brokers, ...exchanges].find(
     ({ name }) => name.toLowerCase() === requestBrokerName.toLowerCase()
   );
   const [selectedBroker, setSelectedBroker] = useState<BrokerCardType>(
@@ -41,14 +41,11 @@ const _CreateAccountContainer: React.FC<Props> = ({
         <GVTab
           onClick={confirmNavigateToBroker}
           value={TAB.BROKER}
-          label={t("create-account-page.tabs.select-broker")}
+          label={t("create-account:tabs.select-broker")}
         />
-        <GVTab
-          value={TAB.SETTINGS}
-          label={t("create-account-page.tabs.settings")}
-        />
+        <GVTab value={TAB.SETTINGS} label={t("create-account:tabs.settings")} />
       </GVTabs>
-      <Row large>
+      <Row size={"large"}>
         {tab === TAB.BROKER && (
           <BrokerSelectContainer
             brokers={[...brokers, ...exchanges]}

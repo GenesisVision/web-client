@@ -15,7 +15,12 @@ import {
   titleMeta
 } from "utils/seo";
 
-const _Layout: React.FC<Props> = ({ description, title, children }) => {
+const _Layout: React.FC<Props> = ({
+  cookieAccept,
+  description,
+  title,
+  children
+}) => {
   const { t } = useTranslation();
   useRefLink();
   return (
@@ -35,13 +40,14 @@ const _Layout: React.FC<Props> = ({ description, title, children }) => {
         {children}
         <LPFooter />
       </TitleContext.Provider>
-      <CookieMessage />
+      <CookieMessage cookieAccept={cookieAccept} />
       <div id="modal-root" />
     </div>
   );
 };
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
+  cookieAccept?: string;
   description?: string;
   title: string;
 }

@@ -12,7 +12,14 @@ const Page: NextPageWithRedux<Props, {}> = ({ requestBrokerName }) => {
 
 Page.getInitialProps = async ctx => {
   const requestBrokerName = getBrokerFromContext(ctx);
-  return { requestBrokerName };
+  return {
+    namespacesRequired: [
+      "account-settings",
+      "asset-settings",
+      "attach-account-page"
+    ],
+    requestBrokerName
+  };
 };
 
 export default compose(withDefaultLayout, withPrivateRoute)(Page);

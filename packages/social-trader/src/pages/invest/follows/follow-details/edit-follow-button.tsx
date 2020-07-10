@@ -1,14 +1,14 @@
-import GVButton, { GV_BTN_SIZE } from "components/gv-button";
+import GVButton from "components/gv-button";
 import { SignalSubscription } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
 import EditFollowModuleContainer from "modules/follow-module/edit-follow-module-container";
 import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { CurrencyEnum } from "utils/types";
+import { CurrencyEnum, Sizeable } from "utils/types";
 
 const _EditFollowButton: React.FC<Props> = ({
-  size = GV_BTN_SIZE.BIG,
+  size = "xlarge",
   signalSubscription,
   onApply,
   tradingAccountId,
@@ -38,8 +38,7 @@ const _EditFollowButton: React.FC<Props> = ({
   );
 };
 
-interface Props {
-  size?: GV_BTN_SIZE;
+interface Props extends Sizeable {
   signalSubscription: SignalSubscription;
   onApply: VoidFunction;
   tradingAccountId: string;

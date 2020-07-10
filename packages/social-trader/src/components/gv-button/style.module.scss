@@ -1,6 +1,6 @@
-@import "~shared/styles/_colors";
-@import "~shared/styles/_sizes";
-@import "~shared/styles/_constants";
+@import "styles/_colors";
+@import "styles/_sizes";
+@import "styles/_constants";
 
 $default-padding: $padding-xxsmall $padding-small;
 
@@ -83,7 +83,7 @@ $default-padding: $padding-xxsmall $padding-small;
     }
   }
 
-  &--big {
+  &--xlarge {
     align-self: flex-end;
     @include font-size($font-size-paragraph);
     letter-spacing: 0.3px;
@@ -101,9 +101,22 @@ $default-padding: $padding-xxsmall $padding-small;
       @include height($btn-height-small);
     }
     letter-spacing: 0.3px;
-    font-weight: 300;
+    font-weight: 400;
     box-sizing: border-box;
     padding: 0;
+  }
+
+  &--xsmall {
+    @include font-size($font-size-xxsmall);
+    &:not(.gv-btn--no-padding) {
+      width: auto;
+      @include height($btn-height-xsmall);
+      padding: 0;
+      @include horizontal-paddings($padding-xxsmall);
+    }
+    letter-spacing: 0.3px;
+    font-weight: 400;
+    box-sizing: border-box;
   }
 
   &--no-padding {

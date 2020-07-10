@@ -1,3 +1,4 @@
+import { InternalArticle } from "pages/landing-page/components/internal/internal.blocks";
 import React from "react";
 
 import styles from "./glossary-section.module.scss";
@@ -6,7 +7,7 @@ const GlossarySection: React.FC = () => {
   return (
     <section className={styles["glossary-section"]}>
       <h1>Glossary</h1>
-      <article className="internal__article">
+      <InternalArticle>
         <h2>Program</h2>
         <p>
           <b>Investment program</b> - an investment product created by the
@@ -53,8 +54,8 @@ const GlossarySection: React.FC = () => {
           <b>Level</b> - Genesis level shows the experience and reliability of
           the Manager in the current program.
         </p>
-      </article>
-      <article className="internal__article">
+      </InternalArticle>
+      <InternalArticle>
         <h2>Fees</h2>
         <p>
           <b>Entry fee</b> - the fee an investor pays to the manager for
@@ -75,8 +76,8 @@ const GlossarySection: React.FC = () => {
           <b>GV commission</b> - a commission charged by the Genesis Vision
           platform.
         </p>
-      </article>
-      <article className="internal__article">
+      </InternalArticle>
+      <InternalArticle>
         <h2>Statistics</h2>
         <p>
           <b>Trades</b> - the number of trades the manager has performed during
@@ -109,8 +110,8 @@ const GlossarySection: React.FC = () => {
           <b>Profit factor</b> - an indicator which is defined as the gross
           profit divided by the gross loss for the selected date range.
         </p>
-      </article>
-      <article className="internal__article">
+      </InternalArticle>
+      <InternalArticle>
         <h2>Trades history</h2>
         <p>
           <b>Direction (Dir)</b> - (Sell or Buy) - an indicator showing a trade
@@ -140,8 +141,8 @@ const GlossarySection: React.FC = () => {
           open. If the trade has got a status “out”, it means that the trade has
           been closed.
         </p>
-      </article>
-      <article className="internal__article">
+      </InternalArticle>
+      <InternalArticle>
         <h2>Funds</h2>
         <p>
           <b>GV Fund</b> - GV Funds are portfolios of multiple assets, gathered
@@ -160,8 +161,8 @@ const GlossarySection: React.FC = () => {
         <p>
           <b>Balance</b> - the current balance of the GV Fund.
         </p>
-      </article>
-      <article className="internal__article">
+      </InternalArticle>
+      <InternalArticle>
         <h2>Wallet</h2>
         <p>
           <b>Total balance</b> - the total value of funds that belong to the
@@ -192,8 +193,8 @@ const GlossarySection: React.FC = () => {
         <p>
           <b>Transfer</b> - a transaction between accounts.
         </p>
-      </article>
-      <article className="internal__article">
+      </InternalArticle>
+      <InternalArticle>
         <h2>Additional</h2>
         <p>
           <b>Trading strategy</b> – trading rules, by the guidance of which a
@@ -218,7 +219,7 @@ const GlossarySection: React.FC = () => {
           the trading operation it is necessary to have an amount that is 100
           times smaller than the transaction volume on a trading account.
         </p>
-      </article>
+      </InternalArticle>
     </section>
   );
 };

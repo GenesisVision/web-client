@@ -1,0 +1,53 @@
+@import "styles/_colors";
+@import "styles/_breakpoint";
+@import "styles/_sizes";
+@import "styles/_constants";
+
+.text {
+  white-space: nowrap;
+  &--thin {
+    font-weight: 200;
+  }
+  &--normal {
+    font-weight: 400;
+  }
+  &--bold {
+    font-weight: 600;
+  }
+  &--bolder {
+    font-weight: 800;
+  }
+  &--xsmall {
+    @include font-size($font-size-xsmall);
+  }
+  &--small {
+    @include font-size($font-size-small);
+  }
+  &--middle {
+    @include font-size($font-size-common);
+  }
+  &--large {
+    @include font-size($font-size-h4);
+  }
+  &--xlarge {
+    @include font-size($font-size-h2);
+  }
+  &--white {
+    color: $text-light-color;
+  }
+  &--green {
+    color: $positive-color;
+  }
+  &--red {
+    color: $negative-color;
+  }
+  &--yellow {
+    color: $yellow;
+  }
+  &--muted {
+    color: $label-color;
+  }
+  &--wrap {
+    white-space: normal;
+  }
+}

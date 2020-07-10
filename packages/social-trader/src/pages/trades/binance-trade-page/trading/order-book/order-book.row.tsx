@@ -1,14 +1,14 @@
-import classNames from "classnames";
-import {
-  ColoredText,
-  ColoredTextColor
-} from "components/colored-text/colored-text";
+import clsx from "clsx";
+import { Center } from "components/center/center";
+import { ColoredTextColor } from "components/colored-text/colored-text";
 import { DialogListItem } from "components/dialog/dialog-list-item";
 import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
+import { Text } from "components/text/text";
 import Tooltip from "components/tooltip/tooltip";
 import { TooltipContent } from "components/tooltip/tooltip-content";
 import { terminalMoneyFormat } from "pages/trades/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
-import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
+import { ORDER_BOOK_ROW_HEIGHT } from "pages/trades/binance-trade-page/trading/order-book/order-book.helpers";
+import { TerminalInfoContext } from "pages/trades/binance-trade-page/trading/terminal-info.context";
 import { TradingPriceContext } from "pages/trades/binance-trade-page/trading/trading-price.context";
 import React, { useContext } from "react";
 
@@ -21,6 +21,8 @@ export interface LevelsSum {
 }
 
 interface Props {
+  hasOrder?: boolean;
+  barPercent: number;
   tableTickSize?: string;
   hovered: boolean;
   levelSum?: LevelsSum;
@@ -33,6 +35,8 @@ interface Props {
 }
 
 const _OrderBookRow: React.FC<Props> = ({
+  hasOrder,
+  barPercent,
   tableTickSize,
   hovered,
   levelSum: { avgPrice, baseSum, quoteSum } = {
@@ -52,7 +56,7 @@ const _OrderBookRow: React.FC<Props> = ({
     stepSize,
     tickSize,
     symbol: { baseAsset, quoteAsset }
-  } = useContext(TradingInfoContext);
+  } = useContext(TerminalInfoContext);
   const formattedPrice = terminalMoneyFormat({
     amount: price,
     tickSize: tableTickSize || tickSize
@@ -63,7 +67,7 @@ const _OrderBookRow: React.FC<Props> = ({
   });
   const formattedTotal = terminalMoneyFormat({
     amount: total,
-    tickSize: stepSize
+    tickSize: tableTickSize || tickSize
   });
   const formattedAvgPrice = terminalMoneyFormat({
     amount: avgPrice,
@@ -98,12 +102,23 @@ const _OrderBookRow: React.FC<Props> = ({
       )}
     >
       <tr
-        className={classNames(styles["order-book__table-row"], {
+        style={{
+          height: `${ORDER_BOOK_ROW_HEIGHT}px`,
+          background: `linear-gradient(90deg, transparent ${barPercent}%, ${color}30 ${barPercent}%)`
+        }}
+        className={clsx(styles["order-book__table-row"], {
           [styles["order-book__table-row--hovered"]]: hovered
         })}
       >
-        <td>
-          <ColoredText color={color}>{formattedPrice}</ColoredText>
+        <td className={clsx(styles["order-book__first-cell"])}>
+          <Center>
+            {hasOrder && (
+              <div className={styles["order-book__has-order-bubble"]} />
+            )}
+            <Text size={"xsmall"} color={color}>
+              {formattedPrice}
+            </Text>
+          </Center>
         </td>
         <td>{formattedAmount}</td>
         <td>{formattedTotal}</td>

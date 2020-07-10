@@ -2,17 +2,19 @@ import {
   futuresAccountUpdateEventTransform,
   futuresMarginCallEventTransform,
   futuresTradeOrderUpdateEventTransform,
-  transformFuturesTickerSymbolWS
+  transformFuturesTickerSymbolWS,
+  transformMarkPriceWS
 } from "pages/trades/binance-trade-page/services/futures/binance-futures.helpers";
 import {
   Depth,
   IBinanceKline,
   IKline,
   KlineSocketType,
+  MarkPrice,
+  TerminalCurrency,
   Ticker,
-  Trade,
-  TradeCurrency
-} from "pages/trades/binance-trade-page/trading/trading.types";
+  Trade
+} from "pages/trades/binance-trade-page/trading/terminal.types";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { ConnectSocketMethodType } from "services/websocket.service";
@@ -20,8 +22,8 @@ import { ConnectSocketMethodType } from "services/websocket.service";
 import {
   depthTransform,
   tradeTransform,
-  transformKline
-} from "../binance-ws.helpers";
+  transformKlineWs
+} from "../spot/binance-spot-ws.helpers";
 
 export const BINANCE_FUTURES_WS_API_URL = "wss://fstream.binance.com";
 
@@ -39,9 +41,19 @@ export enum ORDER_STATUSES {
   REJECTED = "REJECTED"
 }
 
+export const markPriceSocket = (
+  connectSocketMethod: ConnectSocketMethodType,
+  symbol: TerminalCurrency
+): Observable<MarkPrice> => {
+  const socketType = "markPrice";
+  const socketName = `${symbol.toLowerCase()}@${socketType}`;
+  const url = `${BINANCE_FUTURES_WS_API_URL}/${BINANCE_WS_API_TYPE.WS}/${socketName}`;
+  return connectSocketMethod(socketType, url).pipe(map(transformMarkPriceWS));
+};
+
 export const tradeSocket = (
   connectSocketMethod: ConnectSocketMethodType,
-  symbol: TradeCurrency
+  symbol: TerminalCurrency
 ): Observable<Trade> => {
   const socketType = "trade";
   const socketName = `${symbol.toLowerCase()}@${socketType}`;
@@ -51,7 +63,7 @@ export const tradeSocket = (
 
 export const depthSocket = (
   connectSocketMethod: ConnectSocketMethodType,
-  symbol: TradeCurrency
+  symbol: TerminalCurrency
 ): Observable<Depth> => {
   const socketType = "depth";
   const socketName = `${symbol.toLowerCase()}@${socketType}`;
@@ -95,6 +107,6 @@ export const klineSocket = (
   const socketName = `${symbol}@kline_${interval}`;
   const url = `${BINANCE_FUTURES_WS_API_URL}/${BINANCE_WS_API_TYPE.WS}/${socketName}`;
   return connectSocketMethod(socketName, url).pipe(
-    map<IBinanceKline, IKline>(transformKline)
+    map<IBinanceKline, IKline>(transformKlineWs)
   );
 };

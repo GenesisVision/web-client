@@ -75,13 +75,13 @@ export const followParamsValidationSchema = (t: TFunction) =>
           ? number()
               .min(
                 0,
-                t("follow-program.params.validation.fixedVolume-min", {
+                t("validations.fixedVolume-min", {
                   fixedCurrency
                 })
               )
               .lessThan(
                 100000,
-                t("follow-program.params.validation.fixedVolume-max", {
+                t("validations.fixedVolume-max", {
                   fixedCurrency
                 })
               )
@@ -89,13 +89,13 @@ export const followParamsValidationSchema = (t: TFunction) =>
       [FOLLOW_PARAMS_FIELDS.percent]:
         mode === modes.percentage.value
           ? number()
-              .min(1, t("follow-program.params.validation.percent-min"))
-              .lessThan(1000, t("follow-program.params.validation.percent-max"))
+              .min(1, t("validations.percent-min"))
+              .lessThan(1000, t("validations.percent-max"))
           : number(),
       [FOLLOW_PARAMS_FIELDS.openTolerancePercent]: number()
-        .required(t("follow-program.params.validation.tolerance-required"))
-        .min(0.01, t("follow-program.params.validation.tolerance-percent-min"))
-        .max(20, t("follow-program.params.validation.tolerance-percent-max"))
+        .required(t("validations.tolerance-required"))
+        .min(0.01, t("validations.tolerance-percent-min"))
+        .max(20, t("validations.tolerance-percent-max"))
     });
   });
 

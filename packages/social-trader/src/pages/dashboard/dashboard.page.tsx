@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import Page from "components/page/page";
 import useApiRequest from "hooks/api-request.hook";
 import dynamic from "next/dist/next-server/lib/dynamic";
@@ -26,12 +26,12 @@ const _DashboardPage: React.FC = () => {
     fetchOnMount: true
   });
   const [t] = useTranslation();
-  const title = t(`dashboard-page.title`);
+  const title = t(`dashboard-page:title`);
   const notNewUser = !useSelector(isNewUserSelector);
   return (
     <Page title={title}>
       <div>
-        <DashboardTotalContainer label={t("dashboard-page.total.title")} />
+        <DashboardTotalContainer label={t("dashboard-page:total.title")} />
       </div>
       {!!requestCount && requestCount > 0 && (
         <div>
@@ -39,7 +39,7 @@ const _DashboardPage: React.FC = () => {
         </div>
       )}
       <div
-        className={classNames(
+        className={clsx(
           styles["dashboard__statistic-block"],
           styles["dashboard__statistic-block--landscape-tablet"]
         )}
@@ -49,7 +49,7 @@ const _DashboardPage: React.FC = () => {
       </div>
       {notNewUser && (
         <div
-          className={classNames(
+          className={clsx(
             styles["dashboard__statistic-block"],
             styles["dashboard__statistic-block--tablet"]
           )}

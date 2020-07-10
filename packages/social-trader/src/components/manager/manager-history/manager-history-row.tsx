@@ -1,9 +1,10 @@
 import { Center } from "components/center/center";
 import { DefaultBlock } from "components/default.block/default.block";
+import { LabeledValue } from "components/labeled-value/labeled-value";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
-import StatisticItemInner from "components/statistic-item/statistic-item-inner";
-import { ASSET, SIZES } from "constants/constants";
+import { Text } from "components/text/text";
+import { ASSET } from "constants/constants";
 import { IconFavoriteButton } from "modules/toggle-asset-favorite-button/icon-favorite-button";
 import { ToggleableAssetType } from "modules/toggle-asset-favorite-button/toggle-asset-favorite-button.types";
 import React from "react";
@@ -25,8 +26,10 @@ interface IManagerHistoryRowProps {
 export const ManagerHistoryItem: React.FC<IManagerHistoryItemProps> = React.memo(
   ({ label, children }) => {
     return (
-      <RowItem xlarge bottomOffset>
-        <StatisticItemInner label={label}>{children}</StatisticItemInner>
+      <RowItem size={"xlarge"} bottomOffset>
+        <LabeledValue label={label}>
+          <Text wrap={false}>{children}</Text>
+        </LabeledValue>
       </RowItem>
     );
   }
@@ -42,9 +45,9 @@ export const ManagerHistoryRow: React.FC<IManagerHistoryRowProps> = ({
   return (
     <tr className={styles["manager-history-row"]}>
       <td>
-        <DefaultBlock verticalOffsets={false} size={SIZES.LARGE}>
+        <DefaultBlock verticalOffsets={false} size={"large"}>
           <Row />
-          <Row large center={false}>
+          <Row size={"large"} center={false}>
             <RowItem wide bottomOffset>
               <Center wrap>
                 <RowItem>{avatarBlock}</RowItem>

@@ -1,4 +1,6 @@
-import StatisticItem from "components/statistic-item/statistic-item";
+import { LabeledValue } from "components/labeled-value/labeled-value";
+import { RowItem } from "components/row-item/row-item";
+import { Text } from "components/text/text";
 import React from "react";
 import NumberFormat from "react-number-format";
 import { formatCurrencyValue } from "utils/formatter";
@@ -11,25 +13,29 @@ const _DashboardValueItem: React.FC<Props> = ({
   big
 }) => {
   return (
-    <StatisticItem big={big} accent label={label}>
-      {currency ? (
-        <NumberFormat
-          value={formatCurrencyValue(value, currency)}
-          thousandSeparator={" "}
-          suffix={` ${currency}`}
-          displayType="text"
-        />
-      ) : (
-        value
-      )}
-    </StatisticItem>
+    <RowItem size={"xlarge"}>
+      <LabeledValue size={big ? "xlarge" : undefined} label={label}>
+        <Text size={"large"} weight={"bold"}>
+          {currency ? (
+            <NumberFormat
+              value={formatCurrencyValue(value, currency)}
+              thousandSeparator={" "}
+              suffix={` ${currency}`}
+              displayType="text"
+            />
+          ) : (
+            value
+          )}
+        </Text>
+      </LabeledValue>
+    </RowItem>
   );
 };
 
 interface Props {
   big?: boolean;
   value: number;
-  label: string;
+  label: string | React.ReactNode;
   currency?: CurrencyEnum;
 }
 

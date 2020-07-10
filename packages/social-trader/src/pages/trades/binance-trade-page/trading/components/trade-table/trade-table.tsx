@@ -1,17 +1,16 @@
-import classNames from "classnames";
-import { MutedText } from "components/muted-text/muted-text";
+import clsx from "clsx";
 import { SortingColumn } from "components/table/components/filtering/filter.type";
+import { Text } from "components/text/text";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { SizesType } from "utils/types";
+import { Sizeable } from "utils/types";
 
 import styles from "./trade-table.module.scss";
 
-interface Props {
+interface Props extends Sizeable {
   className?: string;
   loaderData?: any[];
   isPending?: boolean;
-  size?: SizesType;
   items?: any[];
   columns: SortingColumn[];
   renderHeaderCell: (column: SortingColumn) => JSX.Element;
@@ -38,16 +37,16 @@ const _TradeTable: React.FC<Props> = ({
       <tr>
         <td colSpan={11}>
           <div className={styles["trade-table__empty-message"]}>
-            <MutedText>{t("table.no-items")}</MutedText>
+            <Text muted>{t("table.no-items")}</Text>
           </div>
         </td>
       </tr>
     );
   return (
     <>
-      <div className={classNames(styles["trade-table__header-container"])}>
+      <div className={clsx(styles["trade-table__header-container"])}>
         <table
-          className={classNames(styles["trade-table"], className, {
+          className={clsx(styles["trade-table"], className, {
             [styles["trade-table--small"]]: size === "small",
             [styles["trade-table--middle"]]: size === "middle"
           })}
@@ -55,9 +54,9 @@ const _TradeTable: React.FC<Props> = ({
           <thead>{columns.map(renderHeaderCell)}</thead>
         </table>
       </div>
-      <div className={classNames(styles["trade-table__items-container"])}>
+      <div className={clsx(styles["trade-table__items-container"])}>
         <table
-          className={classNames(
+          className={clsx(
             styles["trade-table"],
             styles["trade-table--items"],
             className,

@@ -52,7 +52,7 @@ const _FundSettings: React.FC<Props> = ({
         onSubmit={editAsset}
       />
       <CloseAssetBlock
-        label={t("asset-settings.close-fund.title")}
+        label={t("asset-settings:close-fund.title")}
         asset={CLOSEABLE_ASSET.FUND}
         canCloseAsset={details.personalDetails.ownerActions.canClose}
         id={details.id}

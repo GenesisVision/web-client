@@ -45,9 +45,9 @@ const _ProgramsRating: React.FC<WithTranslation> = ({ t }) => {
 
   return (
     <Page
-      description={`${t("programs-page.title")} rating facet list`}
+      description={`${t("programs-page:title")} rating facet list`}
       showTitle
-      title={`${t("programs-page.title")} ${t(`facets.rating`)}`}
+      title={`${t("programs-page:title")} ${t(`asset-list:facets.rating`)}`}
     >
       <Row>
         {levels.map((lvl, i) => (

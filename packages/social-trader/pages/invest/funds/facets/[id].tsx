@@ -22,7 +22,10 @@ Page.getInitialProps = async ctx => {
       async dispatch => await dispatch(platformActions.fetchPlatformSettings())
     )
   ]);
-  return { id };
+  return {
+    namespacesRequired: ["funds-page", "asset-list"],
+    id
+  };
 };
 
 interface Props {

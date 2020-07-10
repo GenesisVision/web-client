@@ -1,10 +1,14 @@
 import {
+  transformAccountToBalanceForTransfer,
   transformFuturesAccount,
   transformFuturesTickerSymbol
 } from "pages/trades/binance-trade-page/services/futures/binance-futures.helpers";
 import { FuturesTickerSymbol } from "pages/trades/binance-trade-page/services/futures/binance-futures.types";
+import { Bar } from "pages/trades/binance-trade-page/trading/chart/charting_library/datafeed-api";
+import { transformKlineWrapper } from "pages/trades/binance-trade-page/trading/terminal.helpers";
 import {
   Account,
+  BalancesForTransfer,
   CancelOrderResult,
   ChangeLeverageResponse,
   Depth,
@@ -13,21 +17,24 @@ import {
   HttpResponse,
   KlineParams,
   MarginModeType,
+  MarkPrice,
   OrderSide,
+  PositionModeResponse,
+  PositionModeType,
   QueryOrderResult,
   SymbolLeverageBrackets,
+  TerminalAuthDataType,
+  TerminalCurrency,
   Ticker,
   Trade,
-  TradeAuthDataType,
   TradeRequest
-} from "pages/trades/binance-trade-page/trading/trading.types";
+} from "pages/trades/binance-trade-page/trading/terminal.types";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import {
   OrderRequest,
   REQUEST_TYPE,
-  requestService,
-  TimeInForce
+  requestService
 } from "services/request.service";
 
 const dev = process.env.NODE_ENV !== "production";
@@ -49,10 +56,117 @@ export const pingBinanceApi = (): Observable<any[]> =>
     url: `${API_ROUTE}/ping`
   });
 
+export const getServerTime = (): Promise<{ serverTime: number }> => {
+  return requestService.get(
+    {
+      url: `${API_ROUTE}/time`
+    },
+    value => value
+  );
+};
+
+export const getMarkPrice = (params: {
+  symbol: string;
+}): Observable<MarkPrice> =>
+  requestService.get({
+    params,
+    url: `${API_ROUTE}/premiumIndex`
+  });
+
+export const getBalancesForTransfer = ({
+  authData
+}: {
+  authData: TerminalAuthDataType;
+}): Promise<BalancesForTransfer> => {
+  const futuresAccountRequest = requestService
+    .get(
+      {
+        ...authData,
+        url: `${API_ROUTE}/account`,
+        type: [REQUEST_TYPE.SIGNED, REQUEST_TYPE.AUTHORIZED]
+      },
+      value => value
+    )
+    .then(transformFuturesAccount)
+    .then(transformAccountToBalanceForTransfer);
+  const spotAccountRequest = requestService
+    .get(
+      {
+        ...authData,
+        url: "/api/v3/account",
+        type: [REQUEST_TYPE.SIGNED, REQUEST_TYPE.AUTHORIZED]
+      },
+      value => value
+    )
+    .then(transformAccountToBalanceForTransfer);
+  return Promise.all([
+    futuresAccountRequest,
+    spotAccountRequest
+  ]).then(([futures, spot]) => ({ futures, spot }));
+};
+
+export const newFutureAccountTransfer = ({
+  asset,
+  amount,
+  type,
+  authData
+}: {
+  asset: TerminalCurrency;
+  amount: number;
+  type: number; // 1 | 2
+  authData: TerminalAuthDataType;
+}): Promise<HttpResponse> =>
+  requestService.post(
+    {
+      ...authData,
+      url: "/sapi/v1/futures/transfer",
+      params: {
+        asset,
+        amount,
+        type
+      },
+      type: [REQUEST_TYPE.SIGNED, REQUEST_TYPE.AUTHORIZED]
+    },
+    value => value
+  );
+
+export const changePositionMode = ({
+  dualSidePosition,
+  authData
+}: {
+  dualSidePosition: PositionModeType;
+  authData: TerminalAuthDataType;
+}): Promise<HttpResponse> =>
+  requestService.post(
+    {
+      ...authData,
+      url: `${API_ROUTE}/positionSide/dual`,
+      params: { dualSidePosition },
+      type: [REQUEST_TYPE.SIGNED, REQUEST_TYPE.AUTHORIZED]
+    },
+    value => value
+  );
+
+export const getPositionMode = ({
+  authData
+}: {
+  authData: TerminalAuthDataType;
+}): Promise<PositionModeType> =>
+  requestService
+    .get(
+      {
+        ...authData,
+        url: `${API_ROUTE}/positionSide/dual`,
+        type: [REQUEST_TYPE.SIGNED, REQUEST_TYPE.AUTHORIZED]
+      },
+      value => value
+    )
+    .then(({ dualSidePosition }: PositionModeResponse) => dualSidePosition);
+
 export const getPositionInformation = ({
   authData
 }: {
-  authData: TradeAuthDataType;
+  authData: TerminalAuthDataType;
 }): Observable<FuturesPositionInformation[]> =>
   requestService.get({
     ...authData,
@@ -60,14 +174,33 @@ export const getPositionInformation = ({
     type: [REQUEST_TYPE.SIGNED, REQUEST_TYPE.AUTHORIZED]
   });
 
-export const getKlines = (params: KlineParams): Promise<number[][]> => {
-  return requestService.get(
-    {
-      url: `${API_ROUTE}/klines`,
-      params
-    },
-    value => value
-  );
+export const getKlines = async (params: KlineParams): Promise<Bar[]> => {
+  const bars: Bar[] = [];
+
+  const sendRequest = async (startTime: number) => {
+    const data = await requestService.get(
+      {
+        url: `${API_ROUTE}/klines`,
+        params: {
+          ...params,
+          startTime
+        }
+      },
+      transformKlineWrapper
+    );
+
+    bars.push.apply(bars, data);
+    const length = bars.length;
+
+    if (length === 1000) {
+      const lastBar = bars[bars.length - 1];
+      const nextTime = lastBar.time + 1;
+      await sendRequest(nextTime);
+    }
+  };
+
+  await sendRequest(params.startTime);
+  return bars;
 };
 
 export const getLeverageBrackets = ({
@@ -75,7 +208,7 @@ export const getLeverageBrackets = ({
   authData
 }: {
   symbol: string;
-  authData: TradeAuthDataType;
+  authData: TerminalAuthDataType;
 }): Promise<SymbolLeverageBrackets[]> =>
   requestService
     .get(
@@ -98,7 +231,7 @@ export const changeLeverage = ({
 }: {
   leverage: number;
   symbol: string;
-  authData: TradeAuthDataType;
+  authData: TerminalAuthDataType;
 }): Promise<ChangeLeverageResponse> =>
   requestService.post(
     {
@@ -117,7 +250,7 @@ export const changeMarginMode = ({
 }: {
   mode: MarginModeType;
   symbol: string;
-  authData: TradeAuthDataType;
+  authData: TerminalAuthDataType;
 }): Promise<HttpResponse> =>
   requestService.post(
     {
@@ -131,7 +264,7 @@ export const changeMarginMode = ({
 
 export const getOpenOrders = (
   symbol: string,
-  authData: TradeAuthDataType
+  authData: TerminalAuthDataType
 ): Observable<QueryOrderResult[]> =>
   requestService.get({
     ...authData,
@@ -142,7 +275,7 @@ export const getOpenOrders = (
 
 export const getAllOrders = (
   symbol: string,
-  authData: TradeAuthDataType
+  authData: TerminalAuthDataType
 ): Observable<QueryOrderResult[]> =>
   requestService.get({
     ...authData,
@@ -152,7 +285,7 @@ export const getAllOrders = (
   });
 
 export const getUserStreamKey = (
-  authData: TradeAuthDataType
+  authData: TerminalAuthDataType
 ): Observable<{ listenKey: string }> =>
   requestService.post({
     ...authData,
@@ -161,7 +294,7 @@ export const getUserStreamKey = (
   });
 
 export const getAccountInformation = (
-  authData: TradeAuthDataType
+  authData: TerminalAuthDataType
 ): Observable<Account> =>
   requestService
     .get({
@@ -203,7 +336,7 @@ export const getDepth = (
 
 export const newOrder = (
   options: OrderRequest,
-  authData: TradeAuthDataType
+  authData: TerminalAuthDataType
 ): Promise<any> =>
   requestService.post(
     {
@@ -217,7 +350,7 @@ export const newOrder = (
 
 export const cancelAllOrders = (
   options: { symbol: string; useServerTime?: boolean },
-  authData: TradeAuthDataType
+  authData: TerminalAuthDataType
 ): Promise<CancelOrderResult> =>
   requestService.deleteRequest(
     {
@@ -231,7 +364,7 @@ export const cancelAllOrders = (
 
 export const cancelOrder = (
   options: { symbol: string; orderId: string; useServerTime?: boolean },
-  authData: TradeAuthDataType
+  authData: TerminalAuthDataType
 ): Promise<CancelOrderResult> =>
   requestService.deleteRequest(
     {
@@ -244,15 +377,20 @@ export const cancelOrder = (
   );
 
 export const postBuy = ({
+  reduceOnly,
+  timeInForce,
   stopPrice,
   authData,
   symbol,
   price,
   quantity,
   type
-}: TradeRequest & { authData: TradeAuthDataType }): Promise<QueryOrderResult> =>
+}: TradeRequest & {
+  authData: TerminalAuthDataType;
+}): Promise<QueryOrderResult> =>
   newOrder(
     {
+      reduceOnly,
       stopPrice: type === "STOP_LOSS_LIMIT" ? String(stopPrice) : undefined,
       symbol,
       type,
@@ -261,25 +399,27 @@ export const postBuy = ({
           ? String(price)
           : undefined,
       quantity: String(quantity),
-      timeInForce:
-        type === "LIMIT" || type === "STOP_LOSS_LIMIT"
-          ? TimeInForce.GTC
-          : undefined,
+      timeInForce,
       side: "BUY"
     },
     authData
   );
 
 export const postSell = ({
+  reduceOnly,
+  timeInForce,
   stopPrice,
   authData,
   symbol,
   price,
   quantity,
   type
-}: TradeRequest & { authData: TradeAuthDataType }): Promise<QueryOrderResult> =>
+}: TradeRequest & {
+  authData: TerminalAuthDataType;
+}): Promise<QueryOrderResult> =>
   newOrder(
     {
+      reduceOnly,
       stopPrice: type === "STOP_LOSS_LIMIT" ? String(stopPrice) : undefined,
       symbol,
       type,
@@ -288,10 +428,7 @@ export const postSell = ({
           ? String(price)
           : undefined,
       quantity: String(quantity),
-      timeInForce:
-        type === "LIMIT" || type === "STOP_LOSS_LIMIT"
-          ? TimeInForce.GTC
-          : undefined,
+      timeInForce,
       side: "SELL"
     },
     authData
@@ -303,7 +440,7 @@ export const getTradeMethod = (side: OrderSide) =>
 export const tradeRequest = ({
   side,
   ...options
-}: TradeRequest & { authData: TradeAuthDataType; side: OrderSide }) => {
+}: TradeRequest & { authData: TerminalAuthDataType; side: OrderSide }) => {
   const method = getTradeMethod(side);
   return method(options);
 };

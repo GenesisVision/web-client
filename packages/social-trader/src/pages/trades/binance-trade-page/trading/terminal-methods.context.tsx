@@ -1,4 +1,4 @@
-import { ITerminalMethods } from "pages/trades/binance-trade-page/trading/trading.types";
+import { ITerminalMethods } from "pages/trades/binance-trade-page/trading/terminal.types";
 import React, { createContext } from "react";
 
 interface Props {

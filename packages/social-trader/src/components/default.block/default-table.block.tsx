@@ -1,4 +1,3 @@
-import { SIZES } from "constants/constants";
 import React from "react";
 
 import { DefaultBlock, IDefaultBlockProps } from "./default.block";
@@ -6,7 +5,7 @@ import { DefaultBlock, IDefaultBlockProps } from "./default.block";
 export const DefaultTableBlock: React.FC<IDefaultBlockProps> = props => {
   return (
     <DefaultBlock
-      size={SIZES.XLARGE}
+      size={"xlarge"}
       horizontalOffsets={false}
       solid
       table

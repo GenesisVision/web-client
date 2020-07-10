@@ -20,7 +20,7 @@ export const _LineTransferButton: React.FC<Props> = ({ wallet }) => {
     dispatch(fetchWallets(profileCurrency));
   }, [profileCurrency]);
   return (
-    <LineWalletButton title={t("wallet-page.buttons.internal-transfer")}>
+    <LineWalletButton title={t("wallet-page:buttons.internal-transfer")}>
       <TransferButton
         onApply={updateWalletInfo}
         type={WALLET_BUTTON_TYPE.SMALL}

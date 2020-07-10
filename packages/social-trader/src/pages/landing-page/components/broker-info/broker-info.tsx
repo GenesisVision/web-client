@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { useToLink } from "components/link/link.helper";
 import { useTranslation } from "i18n";
 import { composeAttachAccountRouteWithBroker } from "pages/attach-account/attach-account.constants";
@@ -37,7 +37,7 @@ const _BrokerInfo: React.FC<Props> = ({
     : `${LOGIN_ROUTE}?from=${TRADE_ROUTE}`;
   return (
     <div
-      className={classNames(styles["broker-info"], className, {
+      className={clsx(styles["broker-info"], className, {
         [styles["broker-info--dark"]]: darkTheme
       })}
     >

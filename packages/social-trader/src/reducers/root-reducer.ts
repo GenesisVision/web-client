@@ -4,9 +4,6 @@ import alertMessagesReducer, {
 import accountDetailsReducer, {
   AccountDetailsState
 } from "pages/accounts/account-details/reducers/account-details.reducer";
-import dashboardReducer, {
-  DashboardState
-} from "pages/dashboard/reducers/dashboard.reducers";
 import followDetailsReducer, {
   FollowDetailsState
 } from "pages/invest/follows/follow-details/reducers/follow-details.reducer";
@@ -25,7 +22,6 @@ import headerReducer, { HeaderState } from "reducers/header-reducer";
 import platformReducer, { PlatformState } from "reducers/platform-reducer";
 
 export const sharedRootReducers = {
-  dashboard: dashboardReducer,
   accountDetails: accountDetailsReducer,
   fundDetails: fundDetailsReducer,
   followDetails: followDetailsReducer,
@@ -38,7 +34,6 @@ export const sharedRootReducers = {
 };
 
 export type RootState = Readonly<{
-  dashboard: DashboardState;
   accountDetails: AccountDetailsState;
   fundDetails: FundDetailsState;
   followDetails: FollowDetailsState;

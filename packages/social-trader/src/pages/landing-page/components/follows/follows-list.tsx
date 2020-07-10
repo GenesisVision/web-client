@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { FollowDetailsListItem } from "gv-api-web";
 import React from "react";
 
@@ -11,7 +11,7 @@ interface Props {
 }
 
 const _FollowsList: React.FC<Props> = ({ className, follows }) => (
-  <ul className={classNames(styles["follows-list"], className)}>
+  <ul className={clsx(styles["follows-list"], className)}>
     {follows.map(follow => (
       <FollowsItem
         key={follow.id}

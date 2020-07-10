@@ -16,7 +16,7 @@ const _AssetsEditPage: React.FC<Props> = ({
   redirectToAsset,
   description
 }) => {
-  const successMessage = `edit-asset.notifications.edit-success.${asset.toLowerCase()}`;
+  const successMessage = `asset-settings:notifications.edit-success.${asset.toLowerCase()}`;
   const { sendRequest: editRequest, errorMessage } = useApiRequest({
     middleware: [dispatchDescription],
     request: editAsset,
@@ -61,7 +61,7 @@ const _AssetsEditPage: React.FC<Props> = ({
     description,
     redirectToAsset
   ]);
-  const title = t("asset-settings.title");
+  const title = t("asset-settings:title");
   return (
     <Page showTitle title={title}>
       {settingsBlocks(editAssetCallback, applyCloseAsset, errorMessage)}

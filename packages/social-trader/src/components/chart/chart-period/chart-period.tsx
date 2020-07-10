@@ -1,8 +1,8 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import GVButton from "components/gv-button";
-import { MutedText } from "components/muted-text/muted-text";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { Text } from "components/text/text";
 import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
@@ -30,15 +30,17 @@ const _ChartPeriod: React.FC<Props> = ({ period, onChange }) => {
   );
   return (
     <Row className={styles["chart-period"]}>
-      <MutedText>
+      <Text muted>
         <Row>
           {ChartPeriodTypeValues.map(period => (
             <RowItem>
               <GVButton
-                testId={t(`chart-period.${ChartPeriodType[period]}-short`)}
+                testId={t(
+                  `asset-details:chart-period.${ChartPeriodType[period]}-short`
+                )}
                 noPadding
                 key={period}
-                className={classNames(styles["chart-period__period-item"], {
+                className={clsx(styles["chart-period__period-item"], {
                   [styles["chart-period__period-item--active"]]: type === period
                 })}
                 onClick={handleChangePeriod(period)}
@@ -46,17 +48,19 @@ const _ChartPeriod: React.FC<Props> = ({ period, onChange }) => {
                 color="secondary"
                 disabled={type === period}
               >
-                {t(`chart-period.${ChartPeriodType[period]}-short`)}
+                {t(
+                  `asset-details:chart-period.${ChartPeriodType[period]}-short`
+                )}
               </GVButton>
             </RowItem>
           ))}
         </Row>
-      </MutedText>
-      <MutedText bold>
+      </Text>
+      <Text muted weight={"bold"}>
         {type !== ChartPeriodType.all && (
           <ChartPeriodDateLabel start={start!} />
         )}
-      </MutedText>
+      </Text>
     </Row>
   );
 };

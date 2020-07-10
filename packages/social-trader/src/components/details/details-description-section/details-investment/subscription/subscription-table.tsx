@@ -22,7 +22,7 @@ const _SubscriptionTable: React.FC<Props> = ({
       items={data}
       renderHeader={column => (
         <span>
-          {t(`follow-details-page.current-investment.fields.${column.name}`)}
+          {t(`follow-details-page:current-investment.fields.${column.name}`)}
         </span>
       )}
       renderBodyRow={(data: SignalSubscription) => (

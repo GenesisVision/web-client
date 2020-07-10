@@ -1,14 +1,14 @@
-import { SearchInputField } from "components/global-search/components/global-search-result/global-search-input";
+import { SearchInputField } from "components/global-search/components/global-search-result/global-search-input/global-search-input";
 import useIsOpen from "hooks/is-open.hook";
 import {
-  SocialSearchContext,
+  FeedContext,
   SocialSearchInitialState
-} from "pages/social/social/social-page.context";
+} from "pages/social/social/feed.context";
 import React, { useCallback, useContext, useEffect } from "react";
 
 const _SocialSearchInput: React.FC<Props> = ({ setSearchIsClose }) => {
   const [cancelSearch, setSearchIsCancel, setSearchIsNotCancel] = useIsOpen();
-  const { searchValue, setSearchValue } = useContext(SocialSearchContext);
+  const { searchValue, setSearchValue } = useContext(FeedContext);
   const handleSearchInput = useCallback(
     ({ target: { value } }: React.ChangeEvent<any>) => {
       setSearchValue({ ...searchValue, mask: value });

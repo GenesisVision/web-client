@@ -8,7 +8,7 @@ import { WithTranslation, withTranslation as translate } from "react-i18next";
 
 const _SettingsPage: React.FC<WithTranslation> = ({ t }) => (
   <ProfileLayout route={SETTINGS}>
-    <SettingsBlock label={t("profile-page.settings.platform-currency")}>
+    <SettingsBlock label={t("profile-page:settings.platform-currency")}>
       <CurrencySelectContainer />
     </SettingsBlock>
     {/*<SettingsBlock>

@@ -1,17 +1,19 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { IPostListContainerInitData } from "components/conversation/post-list/post-list.container";
 import GVTabs from "components/gv-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
 import { SearchIcon } from "components/icon/search-icon";
+import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import useIsOpen from "hooks/is-open.hook";
 import useTab from "hooks/tab.hook";
 import { FEED_TYPE, FeedContainer } from "pages/feed/feed.container";
-import { HashTagsBlock } from "pages/social/social/social-page-feed/hash-tags-block";
+import { ShowEventsContainer } from "pages/feed/show-events-container/show-events-container";
 import {
-  SocialSearchContext,
+  FeedContext,
   SocialSearchInitialState
-} from "pages/social/social/social-page.context";
+} from "pages/social/social/feed.context";
+import { HashTagsBlock } from "pages/social/social/social-page-feed/hash-tags-block";
 import styles from "pages/social/social/social-page.module.scss";
 import React, { useContext, useEffect } from "react";
 import { useTranslation } from "react-i18next";
@@ -31,7 +33,7 @@ interface Props extends IPostListContainerInitData {}
 
 const _SocialPageFeedBlock: React.FC<Props> = ({ initData }) => {
   const [t] = useTranslation();
-  const { searchValue, setSearchValue } = useContext(SocialSearchContext);
+  const { searchValue, setSearchValue } = useContext(FeedContext);
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   const [openSearch, setSearchIsOpen, setSearchIsClose] = useIsOpen();
   const { tab, setTab } = useTab<TABS>(TABS.LIVE);
@@ -58,7 +60,7 @@ const _SocialPageFeedBlock: React.FC<Props> = ({ initData }) => {
     <>
       <Row>
         <div
-          className={classNames(styles["social-page__tabs-container"], {
+          className={clsx(styles["social-page__tabs-container"], {
             [styles["social-page__tabs-container--search"]]: openSearch
           })}
         >
@@ -74,7 +76,7 @@ const _SocialPageFeedBlock: React.FC<Props> = ({ initData }) => {
         </div>
         <div
           onClick={setSearchIsOpen}
-          className={classNames(styles["social-page__search-container"], {
+          className={clsx(styles["social-page__search-container"], {
             [styles["social-page__search-container--search"]]: openSearch
           })}
         >
@@ -88,16 +90,25 @@ const _SocialPageFeedBlock: React.FC<Props> = ({ initData }) => {
         </div>
       </Row>
       <Row>
-        <HashTagsBlock />
+        <RowItem wide>
+          <HashTagsBlock />
+        </RowItem>
+        <RowItem>
+          <ShowEventsContainer />
+        </RowItem>
       </Row>
       <Row onlyOffset wide>
         {isSearch && <FeedContainer searchValue={searchValue} />}
         {tab === TABS.FEED && !isSearch && isAuthenticated && (
-          <FeedContainer feedType={FEED_TYPE.PERSONAL} />
+          <FeedContainer showInput feedType={FEED_TYPE.PERSONAL} />
         )}
         {tab === TABS.HOT && !isSearch && <FeedContainer showTop />}
         {tab === TABS.LIVE && !isSearch && (
-          <FeedContainer initData={initData} feedType={FEED_TYPE.ALL} />
+          <FeedContainer
+            showInput
+            initData={initData}
+            feedType={FEED_TYPE.ALL}
+          />
         )}
       </Row>
     </>

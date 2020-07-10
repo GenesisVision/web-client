@@ -16,7 +16,7 @@ const _Privacy: React.FC<Props> = ({ data, onUpdate, isPending }) => {
   const { sendRequest, errorMessage } = useApiRequest({
     middleware: [onUpdate],
     request: updatePrivacy,
-    successMessage: "profile-page.success-edit"
+    successMessage: "profile-page:success-edit"
   });
   const handleSubmit = useCallback(
     (values: IPrivacyFormValues) => sendRequest(values),

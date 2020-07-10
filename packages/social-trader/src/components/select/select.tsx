@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { Center } from "components/center/center";
 import Popover, { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import { PopoverContent } from "components/popover/popover-content";
@@ -7,7 +7,7 @@ import FilterArrowIcon from "components/table/components/filtering/filter-arrow-
 import useAnchor from "hooks/anchor.hook";
 import * as React from "react";
 import { useCallback, useEffect, useRef } from "react";
-import { SizesType } from "utils/types";
+import { Sizeable } from "utils/types";
 
 import SelectItem from "./select-item";
 import styles from "./select.module.scss";
@@ -119,7 +119,7 @@ const Select: React.FC<Props> = ({
 
   return (
     <div
-      className={classNames(styles["select"], className, {
+      className={clsx(styles["select"], className, {
         [styles["select--fixed-width"]]: fixedWidth,
         [styles["select--middle"]]: size === "middle",
         [styles["select--small"]]: size === "small",
@@ -129,7 +129,7 @@ const Select: React.FC<Props> = ({
       <button
         name={name}
         onClick={handleClick}
-        className={classNames(styles["select__value"], {
+        className={clsx(styles["select__value"], {
           [styles["select__value--bottom-line"]]: bottomLine
         })}
         onBlur={handleBlur}
@@ -139,7 +139,7 @@ const Select: React.FC<Props> = ({
       >
         <Center>
           {displayValue && (
-            <RowItem small>
+            <RowItem size={"small"}>
               <span className={styles["select__text"]}>{displayValue}</span>
             </RowItem>
           )}
@@ -176,10 +176,9 @@ interface ChildOwnProps {
 
 interface SelectChild extends React.ReactElement<ChildOwnProps> {}
 
-interface Props {
+interface Props extends Sizeable {
   fixedWidth?: boolean;
   bottomLine?: boolean;
-  size?: SizesType;
   fixedVertical?: boolean;
   value: string;
   name: string;

@@ -7,10 +7,10 @@ const LoginFooter: React.FC<ILoginFooterProps> = ({ ROUTE }) => {
   const [t] = useTranslation();
   return (
     <>
-      <span>{t("auth.login.footer-text")}</span>
+      <span>{t("auth:login.footer-text")}</span>
       <Link to={ROUTE}>
         <GVButton color="secondary" variant="outlined">
-          {t("auth.signup.title")}
+          {t("auth:signup.title")}
         </GVButton>
       </Link>
     </>

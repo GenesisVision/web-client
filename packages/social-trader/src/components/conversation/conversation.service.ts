@@ -1,15 +1,18 @@
+import { getImageUrlByQuality } from "components/conversation/conversation-image/conversation-image.helpers";
 import { IPostMessageValues } from "components/conversation/conversation-input/conversation-input.helpers";
 import {
   AssetSearchResult,
   ConversationFeed,
+  IEditPostData,
   SEARCH_ASSET_TYPE
 } from "components/conversation/conversation.types";
 import { IImageValue } from "components/form/input-image/input-image";
-import { EditablePost, UserFeedMode } from "gv-api-web";
+import { EditablePost, EditPost, Post, UserFeedMode } from "gv-api-web";
 import { api } from "services/api-client/swagger-custom-client";
 import Token from "services/api-client/token";
 import filesService from "services/file-service";
 import { getRandomBoolean } from "utils/helpers";
+import { AnyObjectType } from "utils/types";
 
 export const getSocialMedia = (values?: Object, token?: Token) => {
   return api.social(token).getSocialMedia(values);
@@ -87,8 +90,10 @@ export const remove = ({ id }: { id: string }) => {
   return api.social().deletePost(id);
 };
 
-export const getFeedMethod = (values?: Object, token?: Token) => {
-  return api.social(token).getFeed(values);
+export const getFeedMethod = (values?: AnyObjectType, token?: Token) => {
+  return api
+    .social(token)
+    .getFeed({ ...values, showOnlyUserPosts: !values?.showEvents });
 };
 
 export const getGlobalFeed = (
@@ -124,6 +129,7 @@ export const getNewsFeed = (values?: Object): Promise<ConversationFeed> => {
 
 export const getPosts = (values: {
   id: string;
+  showEvents?: boolean;
   userMode?: UserFeedMode;
 }): Promise<ConversationFeed> => {
   return getFeedMethod({ ...values, userId: values.id });
@@ -135,8 +141,57 @@ export const getPost = ({
 }: {
   id: string;
   token?: Token;
-}): Promise<EditablePost> => {
+}): Promise<Post> => {
   return api.social(token).getPost(id);
+};
+
+export const getPostForEdit = ({
+  id,
+  token
+}: {
+  id: string;
+  token?: Token;
+}): Promise<IEditPostData> => {
+  return api
+    .social(token)
+    .getOriginalPost(id)
+    .then((post: EditablePost) => {
+      const images = post.images.map(({ id, resizes }) => {
+        const src = getImageUrlByQuality(resizes, "Low");
+        return ({
+          image: id,
+          id,
+          src
+        } as unknown) as IImageValue;
+      });
+      return { text: post.textOriginal, images };
+    });
+};
+
+export const report = ({
+  id,
+  text,
+  reason
+}: {
+  id: string;
+  text?: string;
+  reason?: string;
+}) => {
+  return api.social().spamReport(id, { text, reason });
+};
+
+export const editPost = (values: EditPost & { images?: IImageValue[] }) => {
+  const oldImages = values.images
+    .filter(({ image }: IImageValue) => !image?.cropped)
+    .map(({ image }: IImageValue) => ({ image: String(image), position: 0 }));
+  const newImages = (values.images.filter(
+    ({ image }: IImageValue) => !!image?.cropped
+  ) as unknown) as IImageValue[];
+  return uploadImages(newImages).then(images => {
+    return api.social().editPost({
+      body: { ...values, images: [...oldImages, ...images] }
+    });
+  });
 };
 
 type RequestFilters = {

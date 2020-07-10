@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { getActiveUrl } from "components/active/active.helpers";
 import ActivePopup from "components/active/active.popup";
 import WalletImage from "components/avatar/wallet-image/wallet-image";
@@ -35,8 +35,8 @@ const _CurrencyItem: React.FC<ICurrencyItemProps> = ({
       <Row>
         {logo && (
           <RowItem
-            small={small}
-            className={classNames(styles["currency-item__icon"], {
+            size={small ? "small" : undefined}
+            className={clsx(styles["currency-item__icon"], {
               [styles["currency-item__icon--medium"]]: !small,
               [styles["currency-item__icon--small"]]: small
             })}
@@ -48,17 +48,12 @@ const _CurrencyItem: React.FC<ICurrencyItemProps> = ({
           <RowItem>
             {big ? (
               <h1
-                className={classNames(
-                  styles["currency-item__name--big"],
-                  className
-                )}
+                className={clsx(styles["currency-item__name--big"], className)}
               >
                 {name}
               </h1>
             ) : (
-              <div
-                className={classNames(styles["currency-item__name"], className)}
-              >
+              <div className={clsx(styles["currency-item__name"], className)}>
                 {name}
               </div>
             )}

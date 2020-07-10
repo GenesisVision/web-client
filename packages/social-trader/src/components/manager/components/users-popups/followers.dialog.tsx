@@ -36,7 +36,7 @@ export const FollowersDialog: React.FC<IFollowersDialogProps> = ({
         onChange={setIsChanged}
         request={() => getFollowers({ id })}
         onClick={onClose}
-        title={t("manager-page.followers")}
+        title={t("manager-page:followers")}
       />
     </Dialog>
   );

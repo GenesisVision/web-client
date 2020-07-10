@@ -1,0 +1,16 @@
+@import "styles/_colors";
+@import "styles/_breakpoint";
+@import "styles/_sizes";
+@import "styles/_constants";
+
+.labeled-value {
+  display: flex;
+  width: 100%;
+  &--column {
+    flex-direction: column;
+  }
+  &--row {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}

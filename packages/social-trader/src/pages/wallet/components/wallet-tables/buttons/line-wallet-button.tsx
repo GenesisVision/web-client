@@ -8,9 +8,11 @@ export const _LineWalletButton: React.FC<Props> = ({
   className,
   children
 }) => (
-  <Tooltip render={() => <TooltipContent>{title}</TooltipContent>}>
-    <RowItem className={className}>{children}</RowItem>
-  </Tooltip>
+  <RowItem className={className}>
+    <Tooltip render={() => <TooltipContent>{title}</TooltipContent>}>
+      <div>{children}</div>
+    </Tooltip>
+  </RowItem>
 );
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {

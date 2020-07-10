@@ -2,8 +2,8 @@ import { FUND_ASSET_TYPE } from "components/fund-asset/fund-asset";
 import FundAssetContainer, {
   FundAssetType
 } from "components/fund-asset/fund-asset-container";
+import { LabeledValue } from "components/labeled-value/labeled-value";
 import { useToLink } from "components/link/link.helper";
-import StatisticItem from "components/statistic-item/statistic-item";
 import TableCard, {
   TableCardTable,
   TableCardTableColumn
@@ -14,6 +14,7 @@ import {
   TableCardActionsItem,
   TableCardFavoriteActionItem
 } from "components/table/components/table-card/table-card-actions";
+import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import { ASSET } from "constants/constants";
 import { Currency, FundAssetPercent, FundDetailsListItem } from "gv-api-web";
 import * as React from "react";
@@ -31,38 +32,65 @@ export const FundCardTable: React.FC<IFundCardTableProps> = ({
   currency,
   investorsCount,
   drawdown,
-  topFundAssets
+  topFundAssets,
+  amountTitle,
+  amountTitleTooltip
 }) => {
   const [t] = useTranslation();
   return (
     <>
       <TableCardTable wrap>
         <TableCardTableColumn>
-          <StatisticItem label={t("funds-page.funds-header.balance")}>
+          <LabeledValue
+            label={
+              <TooltipLabel
+                tooltipContent={
+                  amountTitleTooltip || t("funds-page:tooltips.balance")
+                }
+                labelText={amountTitle || t("header-fields.balance")}
+              />
+            }
+          >
             <NumberFormat
               value={formatCurrencyValue(amount, currency)}
               suffix={` ${currency}`}
               displayType="text"
             />
-          </StatisticItem>
+          </LabeledValue>
         </TableCardTableColumn>
         <TableCardTableColumn>
-          <StatisticItem label={t("funds-page.funds-header.investors")}>
+          <LabeledValue
+            label={
+              <TooltipLabel
+                tooltipContent={t(
+                  "dashboard-page:tooltips.investing.investors"
+                )}
+                labelText={t("header-fields.investors")}
+              />
+            }
+          >
             <NumberFormat
               value={investorsCount}
               displayType="text"
               decimalScale={0}
             />
-          </StatisticItem>
+          </LabeledValue>
         </TableCardTableColumn>
         <TableCardTableColumn>
-          <StatisticItem label={t("funds-page.funds-header.drawdown")}>
+          <LabeledValue
+            label={
+              <TooltipLabel
+                tooltipContent={t("dashboard-page:tooltips.trading.ddown-fund")}
+                labelText={t("header-fields.drawdown")}
+              />
+            }
+          >
             <NumberFormat
               value={formatValue(drawdown, 2)}
               displayType="text"
               suffix="%"
             />
-          </StatisticItem>
+          </LabeledValue>
         </TableCardTableColumn>
       </TableCardTable>
       {topFundAssets && (
@@ -92,7 +120,7 @@ const _FundCard: React.FC<Props> = ({ fund }) => {
   const renderActions = ({ clearAnchor, anchor }: IRenderActionsArgs) => (
     <TableCardActions anchor={anchor} clearAnchor={clearAnchor}>
       <TableCardActionsItem to={link} onClick={clearAnchor}>
-        {t("fund-actions.details")}
+        {t("asset-actions.details")}
       </TableCardActionsItem>
       {fund.personalDetails && (
         <TableCardFavoriteActionItem
@@ -141,6 +169,8 @@ interface IFundCardTableProps {
   totalAssetsCount: number;
   drawdown: number;
   topFundAssets: Array<FundAssetPercent>;
+  amountTitle?: string;
+  amountTitleTooltip?: string;
 }
 
 interface Props {

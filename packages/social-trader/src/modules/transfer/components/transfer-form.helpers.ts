@@ -71,10 +71,10 @@ export const transferFormValidationSchema = ({
       );
       return object().shape({
         [TRANSFER_FORM_FIELDS.amount]: number()
-          .moreThan(0, t("transfer.validation.amount-is-zero"))
+          .moreThan(0, t("validations.amount-is-zero"))
           .max(
             +formatCurrencyValue(available, currency),
-            t("transfer.validation.amount-more-than-available")
+            t("validations.amount-more-than-wallet-balance")
           )
       });
     }

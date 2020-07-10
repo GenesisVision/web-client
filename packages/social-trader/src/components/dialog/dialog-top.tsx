@@ -6,7 +6,7 @@ import styles from "./dialog.module.scss";
 
 export const DialogTop: React.FC<React.HTMLAttributes<HTMLDivElement> &
   Props> = ({ title, subtitle, children }) => (
-  <PopoverContentCardBlock dark size={"big"} fixed>
+  <PopoverContentCardBlock dark size={"large"} fixed>
     <div className={styles["dialog__header"]}>
       {title && (
         <Row>
@@ -14,7 +14,7 @@ export const DialogTop: React.FC<React.HTMLAttributes<HTMLDivElement> &
         </Row>
       )}
       {subtitle && (
-        <Row small className={styles["dialog__subtitle"]}>
+        <Row size={"small"} className={styles["dialog__subtitle"]}>
           {subtitle}
         </Row>
       )}

@@ -21,12 +21,12 @@ const _TradesHistoryFeesTooltip: React.FC<Props> = ({
       header={
         <>
           <FeeCommission
-            title={t(`copytrading-tables.fees.trading`)}
+            title={t("program-details-page:copytrading-tables.fees.trading")}
             value={originalCommission}
             currency={originalCommissionCurrency}
           />
           {totalCommissionByType.map((commission, index) => (
-            <Row key={index} small>
+            <Row key={index} size={"small"}>
               <FeeCommission
                 title={commission.title}
                 value={commission.amount}
@@ -39,7 +39,7 @@ const _TradesHistoryFeesTooltip: React.FC<Props> = ({
       footer={
         totalCommissionByType && totalCommissionByType.length > 0 ? (
           <FeeCommission
-            title={t(`copytrading-tables.fees.total`)}
+            title={t("program-details-page:copytrading-tables.fees.total")}
             value={totalCommission}
             currency={currency}
           />

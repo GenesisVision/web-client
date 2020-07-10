@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { TAdvantages } from "pages/landing-page/static-data/advantages";
 import React from "react";
 
@@ -19,7 +19,7 @@ const _AdvantagesList: React.FC<Props> = ({
   advantagesItems,
   lastItem
 }) => (
-  <ul className={classNames(styles["advantages-list"], className)}>
+  <ul className={clsx(styles["advantages-list"], className)}>
     {advantagesItems.map((item, index) => (
       <AdvantageItem
         key={index}
@@ -30,7 +30,7 @@ const _AdvantagesList: React.FC<Props> = ({
     ))}
     {lastItem && (
       <li
-        className={classNames(
+        className={clsx(
           styles["advantages-list__item"],
           styles["advantages-list__item--last"],
           { [styles["advantages-list__item--last-is-hided"]]: lastItem.isHided }

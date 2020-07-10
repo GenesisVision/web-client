@@ -1,4 +1,4 @@
-@import "~shared/styles/_colors";
+@import "styles/_colors";
 @import "../../styles/mixins";
 @import "../../styles/grid";
 
@@ -26,10 +26,16 @@
 }
 
 .slider {
+  @include grid();
+  align-items: center;
   margin-bottom: 60px;
 
   @include media-breakpoint-landscape-tablet() {
     margin-bottom: 0;
+  }
+
+  &__container {
+    min-height: 380px;
   }
 
   &__img-wrapper {

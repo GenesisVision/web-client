@@ -32,7 +32,7 @@ const _DetailsInfo: React.FC<Props> = ({
       )}
       {children && <Row onlyOffset>{children}</Row>}
       {description && (
-        <Row xlarge onlyOffset>
+        <Row size={"xlarge"} onlyOffset>
           <DetailsStrategy title={descriptionTitle} description={description} />
         </Row>
       )}

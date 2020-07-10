@@ -1,5 +1,5 @@
+import { InvestmentItem } from "components/details/details-description-section/details-investment/investment-item";
 import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
-import StatisticItem from "components/statistic-item/statistic-item";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import { FundDetailsFull } from "gv-api-web";
 import * as React from "react";
@@ -17,36 +17,34 @@ const _InvestmentFundInfo: React.FC<IInvestmentFundInfoProps> = ({
   const [t] = useTranslation();
   return (
     <StatisticItemList>
-      <StatisticItem
+      <InvestmentItem
         label={
           <TooltipLabel
-            tooltipContent={t("fund-details-page.tooltip.entry-fee")}
-            labelText={t("fund-details-page.description.entryFee")}
+            tooltipContent={t("fund-details-page:tooltip.entry-fee")}
+            labelText={t("asset-details:description.entryFee")}
           />
         }
-        accent
       >
         <NumberFormat
           value={formatValue(fundDescription.entryFeeCurrent)}
           displayType="text"
           suffix=" %"
         />
-      </StatisticItem>
-      <StatisticItem
+      </InvestmentItem>
+      <InvestmentItem
         label={
           <TooltipLabel
-            tooltipContent={t("fund-details-page.tooltip.exit-fee")}
-            labelText={t("fund-details-page.description.exitFee")}
+            tooltipContent={t("fund-details-page:tooltip.exit-fee")}
+            labelText={t("asset-details:description.exitFee")}
           />
         }
-        accent
       >
         <NumberFormat
           value={formatValue(fundDescription.exitFeeCurrent)}
           displayType="text"
           suffix=" %"
         />
-      </StatisticItem>
+      </InvestmentItem>
     </StatisticItemList>
   );
 };

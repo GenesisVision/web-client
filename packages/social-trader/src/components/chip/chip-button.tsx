@@ -1,7 +1,8 @@
-import classNames from "classnames";
-import Chip, { CHIP_SIZE, CHIP_TYPE } from "components/chip/chip";
+import clsx from "clsx";
+import Chip, { CHIP_TYPE } from "components/chip/chip";
 import * as React from "react";
 import { ReactNode } from "react";
+import { Clickable, Sizeable } from "utils/types";
 
 import styles from "./chip.module.scss";
 
@@ -9,7 +10,7 @@ const ChipButton: React.FC<Props> = React.memo(
   ({
     stretch,
     reverseOrder,
-    size = CHIP_SIZE.SMALL,
+    size = "small",
     type,
     children,
     rounded,
@@ -21,7 +22,7 @@ const ChipButton: React.FC<Props> = React.memo(
   }) => (
     <div
       onClick={onClick}
-      className={classNames(styles["chip-button"], {
+      className={clsx(styles["chip-button"], {
         [styles["chip-button--reversed"]]: reverseOrder
       })}
     >
@@ -39,17 +40,15 @@ const ChipButton: React.FC<Props> = React.memo(
   )
 );
 
-interface Props {
+interface Props extends Sizeable, Clickable {
   stretch?: boolean;
   reverseOrder?: boolean;
-  size?: CHIP_SIZE;
   label?: string | JSX.Element;
   chipLabel?: string | number | ReactNode;
   disabled?: boolean;
   className?: string;
   rounded?: boolean;
   type?: CHIP_TYPE;
-  onClick?: (event: React.MouseEvent<HTMLElement>) => void | undefined;
 }
 
 export default ChipButton;

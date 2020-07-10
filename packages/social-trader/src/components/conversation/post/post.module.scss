@@ -1,0 +1,8 @@
+$pin-icon-size: 15px;
+
+.post {
+  &__pin-icon {
+    width: $pin-icon-size;
+    height: $pin-icon-size;
+  }
+}

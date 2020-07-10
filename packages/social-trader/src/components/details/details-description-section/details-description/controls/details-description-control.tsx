@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import Link, { ToType } from "components/link/link";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
@@ -22,10 +22,7 @@ const DetailsDescriptionControl: React.FC<IDetailsDescriptionControlProps> = ({
 }) => {
   return (
     <Link
-      className={classNames(
-        styles["details-description-control--button"],
-        className
-      )}
+      className={clsx(styles["details-description-control--button"], className)}
       onClick={onClick}
       to={to}
     >

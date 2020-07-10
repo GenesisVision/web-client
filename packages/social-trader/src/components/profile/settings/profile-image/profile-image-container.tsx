@@ -15,7 +15,7 @@ const _ProfileImageContainer: React.FC = () => {
   const { sendRequest, errorMessage } = useApiRequest({
     middleware: [fetchProfileMiddleware],
     request: updateProfileAvatar,
-    successMessage: "profile-page.settings.image-success-save-message"
+    successMessage: "profile-page:settings.image-success-save-message"
   });
   const dispatch = useDispatch();
   const headerData = useSelector(headerSelector);

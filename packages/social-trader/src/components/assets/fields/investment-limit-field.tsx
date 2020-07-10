@@ -23,13 +23,13 @@ const _InvestmentLimitField: React.FC<Props> = ({
   const { t } = useTranslation();
   return (
     <>
-      <Row wide large>
+      <Row wide size={"large"}>
         <GVCheckbox
           value={hasInvestmentLimit}
           setFieldValue={(_, value) => setHasInvestmentLimit(value)}
           color="primary"
           name={checkboxName}
-          label={t("create-program-page.settings.fields.investment-limit")}
+          label={t("asset-settings:fields.investment-limit")}
         />
       </Row>
       {hasInvestmentLimit && (
@@ -39,13 +39,13 @@ const _InvestmentLimitField: React.FC<Props> = ({
           autoFocus={false}
           isAllowed={isAmountAllow(currency)}
           name={inputName}
-          label={t("create-program-page.settings.fields.enter-correct-amount")}
+          label={t("asset-settings:fields.enter-correct-amount")}
           currency={currency}
         />
       )}
-      <Row wide large>
+      <Row wide size={"large"}>
         <FormTextField>
-          {t("program-settings.investment-limit.text")}
+          {t("asset-settings:investment-limit.text")}
         </FormTextField>
       </Row>
     </>

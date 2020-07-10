@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { Row } from "components/row/row";
 import { FundAssetPartWithIcon } from "gv-api-web";
 import * as React from "react";
@@ -16,7 +16,7 @@ const _FundAssetRatio: React.FC<Props> = ({
   return (
     <>
       <div
-        className={classNames(
+        className={clsx(
           styles["fund-asset-ratio"],
           styles["fund-asset-ratio--line"]
         )}
@@ -37,10 +37,10 @@ const _FundAssetRatio: React.FC<Props> = ({
         })}
       </div>
       {showBounds && (
-        <Row small className={styles["fund-asset-ratio__values"]}>
+        <Row size={"small"} className={styles["fund-asset-ratio__values"]}>
           <div className={styles["fund-asset-ratio__value"]}>0%</div>
           <div
-            className={classNames(styles["fund-asset-ratio__value"], {
+            className={clsx(styles["fund-asset-ratio__value"], {
               [styles["fund-asset-ratio__value--full"]]:
                 values.reduce(
                   (sum: number, item: FundAssetPartWithIcon): number =>

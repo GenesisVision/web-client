@@ -1,6 +1,6 @@
-@import "~shared/styles/_breakpoint";
-@import "~shared/styles/_colors";
-@import "~shared/styles/_sizes";
+@import "styles/_breakpoint";
+@import "styles/_colors";
+@import "styles/_sizes";
 
 .wallet-title-block {
   padding: 0 $padding-xsmall/$divider-padding;
@@ -9,7 +9,7 @@
     padding: 0 0 $padding-medium;
   }
   &__title-wallet {
-    font-weight: 300;
+    font-weight: 400;
   }
 
   &__title-icon {

@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import Modal, { BodyFix } from "components/modal/modal";
 import { NextComponentType } from "next";
 import Router from "next/router";
@@ -31,12 +31,7 @@ const _Sidebar: NextComponentType<{}, {}, Props> = ({
   return (
     <Modal open={open} onClose={onClose}>
       <BodyFix />
-      <div
-        className={classNames(
-          styles["sidebar"],
-          styles[`sidebar--${position}`]
-        )}
-      >
+      <div className={clsx(styles["sidebar"], styles[`sidebar--${position}`])}>
         {children}
       </div>
     </Modal>

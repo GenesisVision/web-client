@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import GVProgramPeriod from "components/gv-program-period";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
@@ -29,10 +29,10 @@ const _CalculatorLevelLine: React.FC<Props & WithTranslation> = ({
   const marksItems = getMarks(start, end, value);
   const marks = Object.keys(marksItems);
   return (
-    <div className={classNames(styles["calculator-level-line"], className)}>
+    <div className={clsx(styles["calculator-level-line"], className)}>
       <div className={styles["calculator-level-line__label"]}>
         <span className={styles["calculator-level-line__title"]}>
-          {t("program-details-page.calculator.level")}
+          {t("program-details-page:calculator.level")}
         </span>
         <span className={styles["calculator-level-line__value"]}>{level}</span>
       </div>
@@ -47,7 +47,7 @@ const _CalculatorLevelLine: React.FC<Props & WithTranslation> = ({
         {marks.map(mark => {
           return (
             <span
-              className={classNames(styles["calculator-level-line__mark"], {
+              className={clsx(styles["calculator-level-line__mark"], {
                 [styles["calculator-level-line__mark--active"]]:
                   marksItems[mark].active
               })}

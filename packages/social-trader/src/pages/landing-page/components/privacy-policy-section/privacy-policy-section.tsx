@@ -1,18 +1,13 @@
-import classNames from "classnames";
+import { InternalArticle } from "pages/landing-page/components/internal/internal.blocks";
 import React from "react";
 
 import styles from "./privacy-policy-section.module.scss";
 
 const PrivacyPolicySection: React.FC = () => {
   return (
-    <section
-      className={classNames(
-        styles["privacy-policy-section"],
-        "internal--font-small"
-      )}
-    >
+    <section className={styles["privacy-policy-section"]}>
       <h1>PRIVACY POLICY</h1>
-      <article className="internal__article">
+      <InternalArticle>
         <p>
           GENESIS VISION LP is the controller and is responsible for your
           personal data processing when you use his “Genesis Vision” technical
@@ -1400,7 +1395,7 @@ const PrivacyPolicySection: React.FC = () => {
             Your comments and feedback are always welcome.{" "}
           </span>
         </p>
-      </article>
+      </InternalArticle>
     </section>
   );
 };

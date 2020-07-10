@@ -1,4 +1,3 @@
-import classNames from "classnames";
 import { useTranslation } from "i18n";
 import { AdvantagesListContainer } from "pages/landing-page/components/advantages-section/advantages.blocks";
 import { JoinButton } from "pages/landing-page/components/join-button";
@@ -40,27 +39,21 @@ const AdvantagesSectionWithAnimation: React.FC = () => {
     []
   );
   return (
-    <section
-      className="home__section home__section--bg-white"
-      onMouseMove={handleMouseMove}
-      ref={section}
-    >
-      <>
-        {trail.map((props, index) => (
-          <animated.div
-            key={index}
-            className={styles["advantages-section__sticky-button"]}
-            //@ts-ignore
-            style={{ transform: props.xy.interpolate(translate) }}
-          >
-            <JoinButton href={TRADE_ROUTE} circle>
-              {t("landing-page:buttons.join")}
-            </JoinButton>
-          </animated.div>
-        ))}
-        <AdvantagesListContainer animation />
-      </>
-    </section>
+    <div onMouseMove={handleMouseMove} ref={section}>
+      {trail.map((props, index) => (
+        <animated.div
+          key={index}
+          className={styles["advantages-section__sticky-button"]}
+          //@ts-ignore
+          style={{ transform: props.xy.interpolate(translate) }}
+        >
+          <JoinButton href={TRADE_ROUTE} circle>
+            {t("landing-page:buttons.join")}
+          </JoinButton>
+        </animated.div>
+      ))}
+      <AdvantagesListContainer animation />
+    </div>
   );
 };
 

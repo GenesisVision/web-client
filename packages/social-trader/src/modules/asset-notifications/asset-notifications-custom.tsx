@@ -29,7 +29,7 @@ const _AssetNotificationsCustom: React.FC<Props> = ({ onSuccess, asset }) => {
     request: (values: IAddNotificationSettingProps) => {
       return addNotificationMethod({ ...values, type: "ProgramCondition" });
     },
-    successMessage: "notifications-page.custom.create-alert",
+    successMessage: "notifications-page:custom.create-alert",
     middleware: [
       postponeCallback(() => {
         setClosePopup();
@@ -50,7 +50,7 @@ const _AssetNotificationsCustom: React.FC<Props> = ({ onSuccess, asset }) => {
     <div>
       <Row>
         <h3 className={styles["notification-settings__subtitle"]}>
-          {t("notifications-page.custom.title")}
+          {t("notifications-page:custom.title")}
         </h3>
       </Row>
       {asset.settingsCustom.map(settings => (
@@ -65,7 +65,7 @@ const _AssetNotificationsCustom: React.FC<Props> = ({ onSuccess, asset }) => {
       <Row>
         <ChipButton
           onClick={setOpenPopup}
-          label={t("notifications-page.create.title")}
+          label={t("notifications-page:create.title")}
           chipLabel={"+"}
         />
       </Row>

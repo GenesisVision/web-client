@@ -2,7 +2,7 @@ import { DETAILS_CHART_TABS } from "components/details/details-statistic-section
 import {
   useChartPeriodCreator,
   useChartStateDataCreator,
-  useFundChartStateValuesCreator
+  useChartStateValuesCreator
 } from "components/details/details-statistic-section/details.chart.helpers";
 import { fundAbsoluteProfitChartSelector } from "pages/invest/funds/fund-details/reducers/absolute-profit-chart.reducer";
 
@@ -37,7 +37,7 @@ export const useFundChartStateData = (view: DETAILS_CHART_TABS) =>
   });
 
 export const useFundChartStateValues = (view: DETAILS_CHART_TABS) =>
-  useFundChartStateValuesCreator(useFundChartStateData(view));
+  useChartStateValuesCreator(useFundChartStateData(view));
 
 export const useChartPeriod = () =>
   useChartPeriodCreator(statisticPeriodSelector, statisticPeriodAction);

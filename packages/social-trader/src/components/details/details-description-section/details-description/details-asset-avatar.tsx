@@ -32,7 +32,7 @@ const _DetailsAssetAvatar: React.FC<Props> = ({
         level={level}
         levelProgress={levelProgress}
         alt={title}
-        size="big"
+        size="large"
         color={color}
         onClickLevel={setAnchor}
       />

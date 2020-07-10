@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { AvatarWithName } from "components/avatar/avatar-with-name/avatar-with-name";
 import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
 import { Center } from "components/center/center";
@@ -44,7 +44,7 @@ const _RatingBlockRow: React.FC<IPropsRatingBlockRow> = ({
         <AvatarWithName
           avatar={
             <ProfileAvatar
-              className={classNames({
+              className={clsx({
                 [styles["rating__winner-avatar"]]: winner
               })}
               big={winner}
@@ -54,9 +54,7 @@ const _RatingBlockRow: React.FC<IPropsRatingBlockRow> = ({
             />
           }
           name={
-            <Center
-              className={classNames({ [styles["rating__winner"]]: winner })}
-            >
+            <Center className={clsx({ [styles["rating__winner"]]: winner })}>
               <RowItem>
                 <b>{username}</b>
               </RowItem>

@@ -24,7 +24,9 @@ import { safeGetElemFromArray } from "utils/helpers";
 import { HookForm } from "utils/hook-form.helpers";
 import { CurrencyEnum } from "utils/types";
 
-import createAccountSettingsValidationSchema from "./create-account-settings.validators";
+import createAccountSettingsValidationSchema, {
+  correctDepositCurrency
+} from "./create-account-settings.validators";
 
 export enum CREATE_ACCOUNT_FIELDS {
   depositWalletId = "depositWalletId",
@@ -87,7 +89,7 @@ const _CreateAccountSettings: React.FC<Props> = ({
   return (
     <HookForm form={form} onSubmit={validateAndSubmit}>
       <SettingsBlock
-        label={t("create-account-page.settings.main-settings")}
+        label={t("create-account:settings.main-settings")}
         blockNumber={"01"}
       >
         <AssetFields>
@@ -120,6 +122,7 @@ const _CreateAccountSettings: React.FC<Props> = ({
       ) : (
         <>
           <DepositDetailsBlock
+            broker={accountType.type}
             hide={!accountType.isDepositRequired}
             blockNumber={2}
             setAvailable={setAvailable}
@@ -129,9 +132,9 @@ const _CreateAccountSettings: React.FC<Props> = ({
             depositAmount={depositAmount}
             minimumDepositAmount={minimumDepositAmount}
             setFieldValue={setValue}
-            assetCurrency={currency as CurrencyEnum}
+            assetCurrency={correctDepositCurrency(currency)}
           />
-          <Row large>
+          <Row size={"large"}>
             <CreateAssetNavigation
               asset={"ACCOUNT"}
               isSuccessful={!errorMessage}

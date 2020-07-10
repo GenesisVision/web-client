@@ -12,7 +12,7 @@ const _SocialLinksBlock: React.FC<Props> = ({ socialLinks }) => {
       {socialLinks.map(socialLink => {
         const value = "value" in socialLink ? socialLink.value : 0;
         return (
-          <RowItem bottomOffset small key={socialLink.name}>
+          <RowItem bottomOffset size={"small"} key={socialLink.name}>
             <a
               title={socialLink.name}
               key={socialLink.type}

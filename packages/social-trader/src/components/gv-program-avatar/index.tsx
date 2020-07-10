@@ -1,8 +1,9 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import ImageBase from "components/avatar/image-base";
 import GVColors from "components/gv-styles/gv-colors";
 import PieContainer from "components/pie-container/pie-container";
 import React from "react";
+import { SizesType } from "utils/types";
 
 import GVProgramDefaultAvatar from "./gv-propgram-default-avatar";
 import styles from "./style.module.scss";
@@ -25,29 +26,26 @@ const _GVProgramAvatar: React.FC<GVProgramAvatarProps> = ({
   const haveLevel = level !== undefined && level !== 0;
   return (
     <div
-      className={classNames(styles["program-avatar__container"], className, {
+      className={clsx(styles["program-avatar__container"], className, {
         [styles["program-avatar__container--with-level"]]:
           haveLevel && size === "small"
       })}
     >
       <div
-        className={classNames(styles["program-avatar"], className, {
+        className={clsx(styles["program-avatar"], className, {
           [styles["program-avatar--full"]]: size === "full",
           [styles["program-avatar--xsmall"]]: size === "xsmall",
           [styles["program-avatar--small"]]: size === "small",
-          [styles["program-avatar--medium"]]: size === "medium",
-          [styles["program-avatar--big"]]: size === "big"
+          [styles["program-avatar--medium"]]: size === "middle",
+          [styles["program-avatar--big"]]: size === "large"
         })}
       >
         <ImageBase
-          quality={size === "big" ? "Medium" : "Low"}
+          quality={size === "large" ? "Medium" : "Low"}
           DefaultImageComponent={GVProgramDefaultAvatar}
           src={url}
           color={color}
-          className={classNames(
-            styles["program-avatar__image"],
-            imageClassName
-          )}
+          className={clsx(styles["program-avatar__image"], imageClassName)}
           alt={alt}
         />
         {haveLevel && (
@@ -78,7 +76,7 @@ export interface GVProgramAvatarProps {
   alt: string;
   level?: number;
   levelProgress?: number;
-  size?: "xsmall" | "small" | "medium" | "big" | "full";
+  size?: SizesType | "full";
   className?: string;
   color?: string;
   imageClassName?: string;

@@ -10,11 +10,9 @@ import {
 export const attachAccountSettingsValidationSchema = (t: TFunction) =>
   object<IAttachAccountSettingsFormValues>().shape({
     [ATTACH_ACCOUNT_FIELDS.secret]: string().required(
-      t("attach-account-page.settings.validation.api-secret")
+      t("validations.api-secret")
     ),
-    [ATTACH_ACCOUNT_FIELDS.key]: string().required(
-      t("attach-account-page.settings.validation.api-key")
-    )
+    [ATTACH_ACCOUNT_FIELDS.key]: string().required(t("validations.api-key"))
   });
 
 export const attachAccountSettingsMapPropsToValues = ({

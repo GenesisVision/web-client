@@ -21,6 +21,6 @@ export interface IDemoDepositFormValues {
 export const DemoDepositValidationSchema = (t: TFunction, maxAmount: number) =>
   object().shape({
     [DEMO_DEPOSIT_FORM_FIELDS.amount]: number()
-      .required(t("demo-deposit.validations.required"))
-      .max(maxAmount, t("demo-deposit.validations.max-amount", { maxAmount }))
+      .required(t("validations.required"))
+      .max(maxAmount, t("validations.max-amount", { maxAmount }))
   });

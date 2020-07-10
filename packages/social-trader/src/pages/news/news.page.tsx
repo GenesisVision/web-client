@@ -8,7 +8,7 @@ interface Props extends INewsListContainerInitData {}
 
 export const NewsPage: React.FC<Props> = ({ initData }) => {
   const [t] = useTranslation();
-  const title = t(`news-page.title`);
+  const title = t(`news-page:title`);
   return (
     <Page title={title}>
       <NewsContainer initData={initData} />

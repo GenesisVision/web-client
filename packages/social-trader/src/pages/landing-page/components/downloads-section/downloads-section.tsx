@@ -1,5 +1,6 @@
 import ImageBaseElement from "components/avatar/image-base.element";
 import { useTranslation } from "i18n";
+import { InternalArticle } from "pages/landing-page/components/internal/internal.blocks";
 import MetatraderLogo from "pages/landing-page/images/internal/metatrader.png";
 import React from "react";
 
@@ -17,61 +18,61 @@ const DownloadsSection: React.FC = () => {
   const { t } = useTranslation();
   return (
     <section className={styles["downloads-section"]}>
-      <article className={"internal__article"} id="pc">
-        <h1>{t("downloads.title")}</h1>
-        <h2>{t("downloads.subtitle-1")}</h2>
+      <InternalArticle id="pc">
+        <h1>{t("landing-page:downloads.title")}</h1>
+        <h2>{t("landing-page:downloads.subtitle-1")}</h2>
         <p>
-          {t("downloads.text-1")}
+          {t("landing-page:downloads.text-1")}
           <br />
-          <a title={t("downloads.link-1")} href={MetatraderPCLink}>
-            {t("downloads.link-1")}
+          <a title={t("landing-page:downloads.link-1")} href={MetatraderPCLink}>
+            {t("landing-page:downloads.link-1")}
             <br />
             <ImageBaseElement
               src={MetatraderLogo}
-              alt={t("downloads.link-1")}
+              alt={t("landing-page:downloads.link-1")}
             />
           </a>
         </p>
-      </article>
-      <article className={"internal__article"} id="mobile">
-        <h2>{t("downloads.subtitle-2")}</h2>
+      </InternalArticle>
+      <InternalArticle id="mobile">
+        <h2>{t("landing-page:downloads.subtitle-2")}</h2>
         <p>
-          {t("downloads.text-2")}
+          {t("landing-page:downloads.text-2")}
           <br />
           <a
-            title={t("downloads.link-2")}
+            title={t("landing-page:downloads.link-2")}
             href={MetatraderIOSLink}
             target="_blank"
             rel="noopener noreferrer"
           >
-            {t("downloads.link-2")}
+            {t("landing-page:downloads.link-2")}
           </a>
           <br />
           <a
-            title={t("downloads.link-3")}
+            title={t("landing-page:downloads.link-3")}
             href={MetatraderAndroidLink}
             target="_blank"
             rel="noopener noreferrer"
           >
-            {t("downloads.link-3")}
+            {t("landing-page:downloads.link-3")}
           </a>
         </p>
-      </article>
-      <article className={"internal__article"} id="web">
-        <h2>{t("downloads.subtitle-3")}</h2>
+      </InternalArticle>
+      <InternalArticle id="web">
+        <h2>{t("landing-page:downloads.subtitle-3")}</h2>
         <p>
-          {t("downloads.text-3")}
+          {t("landing-page:downloads.text-3")}
           <br />
           <a
-            title={t("downloads.link-4")}
+            title={t("landing-page:downloads.link-4")}
             href={MetatraderLoginLink}
             target="_blank"
             rel="noopener noreferrer"
           >
-            {t("downloads.link-4")}
+            {t("landing-page:downloads.link-4")}
           </a>
         </p>
-      </article>
+      </InternalArticle>
     </section>
   );
 };

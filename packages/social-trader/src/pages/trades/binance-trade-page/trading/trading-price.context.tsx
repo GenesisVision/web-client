@@ -1,7 +1,7 @@
+import { TerminalInfoContext } from "pages/trades/binance-trade-page/trading/terminal-info.context";
 import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
-import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
-import { getSymbol } from "pages/trades/binance-trade-page/trading/trading.helpers";
-import { Trade } from "pages/trades/binance-trade-page/trading/trading.types";
+import { getSymbol } from "pages/trades/binance-trade-page/trading/terminal.helpers";
+import { Trade } from "pages/trades/binance-trade-page/trading/terminal.types";
 import React, {
   createContext,
   useContext,
@@ -33,8 +33,9 @@ export const TradingPriceContextProvider: React.FC = ({ children }) => {
   const TRADE_LIST_SIZE = 50;
   const { tradeSocket, getTrades } = useContext(TerminalMethodsContext);
   const {
+    terminalType,
     symbol: { baseAsset, quoteAsset }
-  } = useContext(TradingInfoContext);
+  } = useContext(TerminalInfoContext);
 
   const { connectSocket } = useSockets();
   const [price, setPrice] = useState<string>(PriceInitialState);
@@ -57,7 +58,7 @@ export const TradingPriceContextProvider: React.FC = ({ children }) => {
       setList(updatedData);
       setSocketDataBuffer([]);
     });
-  }, [getTrades, tradeSocket, baseAsset, quoteAsset]);
+  }, [terminalType, baseAsset, quoteAsset]);
 
   useEffect(() => {
     if (!socketData && !list) return;

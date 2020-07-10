@@ -102,7 +102,7 @@ const _DepositPopup: React.FC<Props> = ({
 const getRequestMethod = (asset: ASSET) =>
   asset === ASSET.FUND ? fundInvest : programInvest;
 
-interface Props {
+export interface IDepositContainerProps {
   title: string;
   availableToInvest?: number;
   fees: TFees;
@@ -112,9 +112,12 @@ interface Props {
   onApply: () => void;
   currency: CurrencyEnum;
   asset: ASSET;
-  data: TWalletsAvailableData;
   hasEntryFee?: boolean;
   ownAsset?: boolean;
+}
+
+interface Props extends IDepositContainerProps {
+  data: TWalletsAvailableData;
 }
 
 const DepositPopup = withBlurLoader(React.memo(_DepositPopup));

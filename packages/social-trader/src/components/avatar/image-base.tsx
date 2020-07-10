@@ -1,6 +1,7 @@
 import ImageBaseElement from "components/avatar/image-base.element";
 import { ImageQuality } from "gv-api-web";
 import * as React from "react";
+import { OptionalClickable } from "utils/types";
 
 const _ImageBase: React.FC<IImageBaseProps> = ({
   onClick,
@@ -38,8 +39,7 @@ export interface IImageProps {
   className?: string;
 }
 
-export interface IImageBaseProps {
-  onClick?: VoidFunction;
+export interface IImageBaseProps extends OptionalClickable {
   quality?: ImageQuality;
   title?: string;
   color?: string;

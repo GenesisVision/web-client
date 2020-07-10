@@ -1,5 +1,6 @@
 import { Center } from "components/center/center";
 import GVSwitch from "components/gv-switch";
+import { Text } from "components/text/text";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import useApiRequest from "hooks/api-request.hook";
 import React, { useCallback, useState } from "react";
@@ -32,11 +33,13 @@ const _ProgramReinvestingContainer: React.FC<Props> = ({
         color="primary"
         onChange={onReinvestingLabelClick}
         label={
-          <TooltipLabel
-            tooltipContent={t("program-details-page.tooltip.reinvest")}
-            labelText={t("program-details-page.description.reinvest")}
-            pointer
-          />
+          <Text sizeValue={"14px"}>
+            <TooltipLabel
+              tooltipContent={t("program-details-page:tooltip.reinvest")}
+              labelText={t("asset-details:description.reinvest")}
+              pointer
+            />
+          </Text>
         }
         disabled={isPending}
       />

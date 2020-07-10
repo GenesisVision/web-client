@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import styles from "components/details/details-description-section/details-statistic-section/details-history/trades.module.scss";
 import TableContainer from "components/table/components/table-container";
 import {
@@ -23,12 +23,12 @@ const _ProgramTradingLog: React.FC<Props> = ({ getItems, dataSelector }) => {
       columns={PROGRAM_TRADING_LOG_COLUMNS}
       renderHeader={column => (
         <span
-          className={classNames(
+          className={clsx(
             styles["details-trades__head-cell"],
             styles[`program-details-trades__cell--${column.name}`]
           )}
         >
-          {t(`program-details-page.history.trading-log.${column.name}`)}
+          {t(`program-details-page:history.trading-log.${column.name}`)}
         </span>
       )}
       renderBodyRow={trade => <ProgramTradingLogRow trade={trade} />}

@@ -1,8 +1,8 @@
-import { MutedText } from "components/muted-text/muted-text";
+import { Text } from "components/text/text";
 import { TradeTable } from "pages/trades/binance-trade-page/trading/components/trade-table/trade-table";
+import { QueryOrderResult } from "pages/trades/binance-trade-page/trading/terminal.types";
 import { OrderHistoryRow } from "pages/trades/binance-trade-page/trading/trading-tables/order-history/order-history-row";
 import { ORDER_HISTORY_TABLE_COLUMNS } from "pages/trades/binance-trade-page/trading/trading-tables/order-history/order-history.helpers";
-import { QueryOrderResult } from "pages/trades/binance-trade-page/trading/trading.types";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -21,7 +21,7 @@ export const OrderHistory: React.FC<Props> = ({ items }) => {
       items={items}
       renderHeaderCell={column => (
         <th>
-          <MutedText>{t(`${column.name}`)}</MutedText>
+          <Text muted>{t(`${column.name}`)}</Text>
         </th>
       )}
       renderRow={({

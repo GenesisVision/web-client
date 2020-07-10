@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import AssetStatusLabel from "components/asset-status/asset-status-label";
 import styles from "components/fee-commission/fee-commission.module.scss";
 import Profitability from "components/profitability/profitability";
@@ -37,7 +37,7 @@ const _ProgramSubscriptionsRow: React.FC<Props> = ({
     <TableCell>
       <SubscriptionsFeesTooltip subscription={subscription}>
         <span
-          className={classNames({
+          className={clsx({
             [styles["fee-commission__value"]]:
               subscription.totalCommissionAmount > 0
           })}

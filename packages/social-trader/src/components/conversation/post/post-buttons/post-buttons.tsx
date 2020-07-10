@@ -15,10 +15,10 @@ const _PostButtons: React.FC<Props> = ({
   liked
 }) => {
   return (
-    <Row large>
+    <Row size={"large"}>
       <RowItem>
         <Share
-          disable={!post.actions}
+          disable={!canLike}
           post={post}
           onApply={onApply}
           id={id}

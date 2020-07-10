@@ -1,5 +1,5 @@
-import { api } from "services/api-client/swagger-custom-client";
 import { CaptchaCheckResult } from "gv-api-web";
+import { api } from "services/api-client/swagger-custom-client";
 
 export const sendConfirmationLink = (email: string) => ({
   captchaCheckResult

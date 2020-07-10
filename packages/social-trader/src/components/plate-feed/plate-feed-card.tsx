@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { DefaultBlock } from "components/default.block/default.block";
 import Link from "components/link/link";
 import React from "react";
@@ -26,7 +26,7 @@ const _PlateFeedCard: React.FC<Props> = ({ url, imageSrc, content }) => {
       rel={"noopener noreferrer"}
     >
       <DefaultBlock
-        className={classNames({
+        className={clsx({
           // [styles["plate-feed__panel--pink"]]: color === "pink",
           // [styles["plate-feed__panel--cyan"]]: color === "cyan"
         })}

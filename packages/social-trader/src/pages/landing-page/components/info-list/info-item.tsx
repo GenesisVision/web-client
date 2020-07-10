@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import ImageBaseElement from "components/avatar/image-base.element";
 import { useTranslation } from "i18n";
 import { JoinButton } from "pages/landing-page/components/join-button";
@@ -11,7 +11,7 @@ const _InfoItem: React.FC<TInfoItem> = ({ texts, image, button }) => {
   const { t } = useTranslation();
   return (
     <li
-      className={classNames(styles["info-list__item"], {
+      className={clsx(styles["info-list__item"], {
         [styles["info-list__item--bg-transparent"]]: image
       })}
     >

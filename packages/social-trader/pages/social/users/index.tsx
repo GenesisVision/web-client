@@ -9,7 +9,12 @@ const Page: NextPage = () => {
 };
 
 Page.getInitialProps = async () => ({
-  namespacesRequired: ["users-page"]
+  namespacesRequired: [
+    "manager-page",
+    "form-fields",
+    "conversation",
+    "users-page"
+  ]
 });
 
 export default compose(withDefaultLayout)(Page);

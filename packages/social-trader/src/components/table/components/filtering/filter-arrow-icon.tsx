@@ -1,11 +1,11 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import * as React from "react";
 
 import styles from "./filter.module.scss";
 
 const _FilterArrowIcon: React.FC<{ isOpen?: boolean }> = ({ isOpen }) => (
   <svg
-    className={classNames(styles["filter__arrow"], {
+    className={clsx(styles["filter__arrow"], {
       [styles["filter__arrow__is-open"]]: isOpen
     })}
     width="6"

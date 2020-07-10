@@ -1,5 +1,6 @@
 import { Row } from "components/row/row";
 import React from "react";
+import { OptionalClickable } from "utils/types";
 
 import styles from "./manager-statistic-item.module.scss";
 
@@ -14,8 +15,7 @@ const _ManagerStatisticItem: React.FC<Props> = ({ onClick, label, value }) => {
   );
 };
 
-interface Props {
-  onClick?: VoidFunction;
+interface Props extends OptionalClickable {
   label: string;
   value: string | number;
 }

@@ -1,12 +1,12 @@
 import { Center } from "components/center/center";
-import { ColoredText } from "components/colored-text/colored-text";
 import { DefaultBlock } from "components/default.block/default.block";
-import { MutedText } from "components/muted-text/muted-text";
+import { BlurableLabeledValue } from "components/labeled-value/blurable-labeled-value";
+import { LabeledValue } from "components/labeled-value/labeled-value";
 import { ResponsiveContainer } from "components/responsive-container/responsive-container";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
-import StatisticItemInner from "components/statistic-item/statistic-item-inner";
-import { SIZES } from "constants/constants";
+import { Text } from "components/text/text";
+import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import { MonoText } from "pages/trades/binance-trade-page/trading/components/mono-text/mono-text";
 import { terminalMoneyFormat } from "pages/trades/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
@@ -17,24 +17,25 @@ import {
   useSymbolData
 } from "pages/trades/binance-trade-page/trading/symbol-summary/symbol-summary.helpers";
 import { TerminalTypeSwitcher } from "pages/trades/binance-trade-page/trading/symbol-summary/terminal-type-switcher";
-import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
-import { MergedTickerSymbolType } from "pages/trades/binance-trade-page/trading/trading.types";
+import { TerminalInfoContext } from "pages/trades/binance-trade-page/trading/terminal-info.context";
+import { SymbolSummaryData } from "pages/trades/binance-trade-page/trading/terminal.types";
 import React, { useContext } from "react";
+import { diffDate } from "utils/dates";
 
 interface Props {
-  data: MergedTickerSymbolType;
+  data: SymbolSummaryData;
 }
 
 export const SymbolSummarySmallBlock: React.FC = () => {
   return (
-    <DefaultBlock size={SIZES.SMALL} roundedBorder={false} bordered>
+    <DefaultBlock size={"small"} roundedBorder={false} bordered>
       <SymbolSummarySmallContainer />
     </DefaultBlock>
   );
 };
 
 export const SymbolSummarySmallContainer: React.FC = () => {
-  const { symbolData } = useSymbolData();
+  const symbolData = useSymbolData();
   return (
     <SymbolSummarySmallView
       data={symbolData!}
@@ -45,26 +46,29 @@ export const SymbolSummarySmallContainer: React.FC = () => {
 
 const _SymbolSummarySmallView: React.FC<Props> = ({
   data: {
-    eventTime,
-    lastPrice,
-    baseAsset,
-    quoteAsset,
-    priceChangePercent,
-    priceChange,
-    high,
-    low,
-    volume
+    markPrice,
+    tickerData: {
+      eventTime,
+      lastPrice,
+      baseAsset,
+      quoteAsset,
+      priceChangePercent,
+      priceChange,
+      high,
+      low,
+      volume
+    }
   }
 }) => {
-  const { stepSize, tickSize } = useContext(TradingInfoContext);
+  const { stepSize, tickSize } = useContext(TerminalInfoContext);
   const renderSymbol = () => (
-    <h3>
+    <h5>
       {baseAsset}/{quoteAsset}
-    </h3>
+    </h5>
   );
   return (
     <Center>
-      <RowItem large>
+      <RowItem size={"large"}>
         <ResponsiveContainer
           enabledScreens={["tablet", "landscape-tablet", "desktop"]}
         >
@@ -88,45 +92,110 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
             </MonoText>
           </h4>
         </Row>
-        <Row small>
-          <MutedText>
+        <Row size={"xsmall"}>
+          <Text muted>
             <MonoText>
               {terminalMoneyFormat({ amount: lastPrice, tickSize })}
             </MonoText>
-          </MutedText>
+          </Text>
         </Row>
       </RowItem>
+      {markPrice && (
+        <>
+          <RowItem>
+            <LabeledValue
+              size={"xsmall"}
+              label={
+                <TooltipLabel
+                  labelText={"Mark Price"}
+                  tooltipContent={
+                    "The latest mark price for this contract. This is the price used for PNL and margin calculations, and may differ from the last price for the purposes of avoiding price manipulation."
+                  }
+                />
+              }
+            >
+              <Text size={"xsmall"}>
+                <MonoText>
+                  {terminalMoneyFormat({
+                    amount: markPrice.markPrice,
+                    tickSize
+                  })}
+                </MonoText>
+              </Text>
+            </LabeledValue>
+          </RowItem>
+          <RowItem>
+            <LabeledValue
+              size={"xsmall"}
+              label={
+                <TooltipLabel
+                  labelText={"Funding/8h"}
+                  tooltipContent={
+                    "The payment rate exchanged between the buyer and seller for the next funding."
+                  }
+                />
+              }
+            >
+              <Text size={"xsmall"}>
+                <MonoText>
+                  {+markPrice.lastFundingRate} %{" "}
+                  {diffDate(new Date(), markPrice.nextFundingTime).format(
+                    "HH:mm:ss"
+                  )}
+                </MonoText>
+              </Text>
+            </LabeledValue>
+          </RowItem>
+        </>
+      )}
       <RowItem>
-        <StatisticItemInner label={"24 Change"}>
+        <LabeledValue size={"xsmall"} label={"24 Change"}>
           <MonoText>
-            <ColoredText color={+priceChangePercent > 0 ? "green" : "red"}>
+            <Text
+              size={"xsmall"}
+              color={+priceChangePercent > 0 ? "green" : "red"}
+            >
               {terminalMoneyFormat({ amount: priceChange, tickSize })}{" "}
               {terminalMoneyFormat({
                 amount: priceChangePercent,
                 digits: 2
               })}{" "}
               %
-            </ColoredText>
+            </Text>
           </MonoText>
-        </StatisticItemInner>
+        </LabeledValue>
       </RowItem>
       <RowItem>
-        <StatisticItemInner isPending={!high} label={"24 High"}>
-          <MonoText>{terminalMoneyFormat({ amount: high, tickSize })}</MonoText>
-        </StatisticItemInner>
+        <BlurableLabeledValue
+          size={"xsmall"}
+          isPending={!high}
+          label={"24 High"}
+        >
+          <Text size={"xsmall"}>
+            <MonoText>
+              {terminalMoneyFormat({ amount: high, tickSize })}
+            </MonoText>
+          </Text>
+        </BlurableLabeledValue>
       </RowItem>
       <RowItem>
-        <StatisticItemInner isPending={!low} label={"24 Low"}>
-          <MonoText>{terminalMoneyFormat({ amount: low, tickSize })}</MonoText>
-        </StatisticItemInner>
+        <BlurableLabeledValue size={"xsmall"} isPending={!low} label={"24 Low"}>
+          <Text size={"xsmall"}>
+            <MonoText>
+              {terminalMoneyFormat({ amount: low, tickSize })}
+            </MonoText>
+          </Text>
+        </BlurableLabeledValue>
       </RowItem>
       <RowItem>
-        <StatisticItemInner label={"24 Volume"}>
-          <MonoText>
-            {terminalMoneyFormat({ amount: volume, tickSize: stepSize })}{" "}
-            {quoteAsset}
-          </MonoText>
-        </StatisticItemInner>
+        <LabeledValue size={"xsmall"} label={"24 Volume"}>
+          <Text size={"xsmall"}>
+            <MonoText>
+              {terminalMoneyFormat({ amount: volume, tickSize: stepSize })}{" "}
+              {quoteAsset}
+            </MonoText>
+          </Text>
+        </LabeledValue>
       </RowItem>
       <RowItem>
         <TerminalTypeSwitcher />

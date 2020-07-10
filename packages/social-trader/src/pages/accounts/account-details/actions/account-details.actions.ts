@@ -24,12 +24,10 @@ import {
   FETCH_ACCOUNT_BALANCE_CHART,
   FETCH_ACCOUNT_DESCRIPTION,
   FETCH_ACCOUNT_PROFIT_CHART,
-  SET_ACCOUNT_ID,
   SET_ACCOUNT_STATISTIC_CURRENCY,
   SET_ACCOUNT_STATISTIC_PERIOD
 } from "../account-details.constants";
 import { AccountDetailsDataType } from "../account-details.types";
-import { AccountIdState } from "../reducers/id.reducer";
 import { AccountProfitChartDataType } from "../reducers/profit-chart.reducer";
 
 export const statisticCurrencyAction = (
@@ -116,12 +114,4 @@ export const fetchTradesAction = (
 ): ActionType<Promise<TradesSignalViewModel>> => ({
   type: ACCOUNT_TRADES,
   payload: api.accounts().getTrades(id, filters)
-});
-
-export interface SetAccountIdAction extends ActionType<AccountIdState> {
-  type: typeof SET_ACCOUNT_ID;
-}
-export const setAccountIdAction = (id: string): SetAccountIdAction => ({
-  type: SET_ACCOUNT_ID,
-  payload: id
 });

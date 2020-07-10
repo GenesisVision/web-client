@@ -19,7 +19,7 @@ const _UserInvestingHistorySection: React.FC<Props> = ({
         <Row onlyOffset>
           <DefaultTableBlock wide>
             <ManagerPrograms
-              title={t("manager-page.history.tabs.programs")}
+              title={t("manager-page:history.tabs.programs")}
               investorId={id}
             />
           </DefaultTableBlock>
@@ -29,7 +29,7 @@ const _UserInvestingHistorySection: React.FC<Props> = ({
         <Row onlyOffset>
           <DefaultTableBlock wide>
             <ManagerFollow
-              title={t("manager-page.history.tabs.follow")}
+              title={t("manager-page:history.tabs.follow")}
               subscriberId={id}
             />
           </DefaultTableBlock>
@@ -39,7 +39,7 @@ const _UserInvestingHistorySection: React.FC<Props> = ({
         <Row onlyOffset>
           <DefaultTableBlock wide>
             <ManagerFunds
-              title={t("manager-page.history.tabs.funds")}
+              title={t("manager-page:history.tabs.funds")}
               investorId={id}
             />
           </DefaultTableBlock>

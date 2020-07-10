@@ -1,6 +1,6 @@
-@import "~shared/styles/_colors";
-@import "~shared/styles/_breakpoint";
-@import "~shared/styles/_constants";
+@import "styles/_colors";
+@import "styles/_breakpoint";
+@import "styles/_constants";
 
 .icon {
   height: 100%;
@@ -46,12 +46,6 @@
   &--rotate {
     transform: rotate(180deg);
   }
-  &--collapse {
-    background-image: url("../../media/collapse.svg");
-  }
-  &--ring-circle {
-    background-image: url("../../media/ring-circle.svg");
-  }
   &--ring {
     width: 16px;
   }
@@ -59,14 +53,6 @@
     path {
       fill: transparent;
     }
-  }
-  &--close {
-    width: 10px;
-    height: 10px;
-  }
-  &--controls {
-    height: 20px;
-    background-image: url("../../media/controls.svg");
   }
   &--search {
     width: 18px;

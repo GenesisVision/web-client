@@ -1,12 +1,13 @@
-import GVButton, { GV_BTN_SIZE } from "components/gv-button";
+import GVButton from "components/gv-button";
 import { toggleFollowUser } from "components/manager/services/manager.service";
 import useApiRequest from "hooks/api-request.hook";
 import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Sizeable } from "utils/types";
 
 const _FollowUserButton: React.FC<Props> = ({
   onChange,
-  size = GV_BTN_SIZE.BIG,
+  size = "xlarge",
   id,
   value,
   disabled
@@ -32,15 +33,14 @@ const _FollowUserButton: React.FC<Props> = ({
       disabled={isPending || disabled}
     >
       {innerValue
-        ? t("manager-page.unfollow-user")
-        : t("manager-page.follow-user")}
+        ? t("manager-page:unfollow-user")
+        : t("manager-page:follow-user")}
     </GVButton>
   );
 };
 
-interface Props {
+interface Props extends Sizeable {
   onChange?: VoidFunction;
-  size?: GV_BTN_SIZE;
   disabled?: boolean;
   id: string;
   value: boolean;

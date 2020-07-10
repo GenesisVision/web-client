@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import NavSubItem from "pages/landing-page/components/nav/nav-subitem";
 import { TNavHeader, TSubNav } from "pages/landing-page/static-data/nav-links";
 import React from "react";
@@ -7,7 +7,7 @@ import styles from "./nav-list.module.scss";
 
 const _NavSubList: React.FC<Props> = ({ subNav, subNavOpen, onClick }) => (
   <ul
-    className={classNames(styles["nav-list"], styles["nav-list--sub"], {
+    className={clsx(styles["nav-list"], styles["nav-list--sub"], {
       [styles["nav-list--sub-open"]]: subNavOpen
     })}
   >

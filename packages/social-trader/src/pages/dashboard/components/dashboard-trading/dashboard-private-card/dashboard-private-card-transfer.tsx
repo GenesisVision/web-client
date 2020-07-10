@@ -19,9 +19,10 @@ const _DashboardPrivateCardTransfer: React.FC<Props> = ({
   const currentItemContainerItems = isExchangeAccount
     ? asset.accountInfo.balances.map(transformAmountWithCurrencyToTransferItem)
     : undefined;
-  const currentItem = isExchangeAccount
-    ? transformAmountWithCurrencyToTransferItem(asset.accountInfo.balances[0])
-    : mapAccountToTransferItemType(asset);
+  const currentItem =
+    isExchangeAccount && asset.accountInfo.balances?.length
+      ? transformAmountWithCurrencyToTransferItem(asset.accountInfo.balances[0])
+      : mapAccountToTransferItemType(asset);
   return (
     <>
       {asset?.actions?.canTransferMoney && (
