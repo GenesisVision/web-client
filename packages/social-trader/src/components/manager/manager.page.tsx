@@ -7,7 +7,6 @@ import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { UpperBlock } from "components/upper-block/upper-block";
 import { UpperButtonContainer } from "components/upper-button/upper-button";
-import Crashable from "decorators/crashable";
 import { PublicProfile } from "gv-api-web";
 import { SocialPageContextProvider } from "pages/social/social/feed.context";
 import * as React from "react";
@@ -57,5 +56,5 @@ interface Props {
   profile: PublicProfile;
 }
 
-const ManagerPage = React.memo(Crashable(_ManagerPage));
+const ManagerPage = React.memo(_ManagerPage);
 export default ManagerPage;
