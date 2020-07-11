@@ -13,6 +13,7 @@ import styles from "./comment.module.scss";
 const _Comment: React.FC<Props> = ({
   updateData,
   comment: {
+    likesUsers,
     isHighlighted,
     url,
     tags,
@@ -67,6 +68,7 @@ const _Comment: React.FC<Props> = ({
         <RowItem wide>{personalDetails && <Reply author={author} />}</RowItem>
         <RowItem>
           <LikeContainer
+            likesUsers={likesUsers}
             id={id}
             canLike={!!personalDetails}
             count={likesCount}
