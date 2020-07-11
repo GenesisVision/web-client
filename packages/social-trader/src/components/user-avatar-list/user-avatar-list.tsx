@@ -9,7 +9,7 @@ import { managerToPathCreator } from "routes/manager.routes";
 
 import styles from "./user-avatar-list.module.scss";
 
-interface Props {
+export interface IUserAvatarListProps {
   remainderColor?: string;
   count: number;
   length?: number;
@@ -18,7 +18,7 @@ interface Props {
 
 const AVATAR_SHIFT = 20;
 
-const _UserAvatarList: React.FC<Props> = ({
+const _UserAvatarList: React.FC<IUserAvatarListProps> = ({
   remainderColor = "#1c2730",
   count,
   length = 3,
