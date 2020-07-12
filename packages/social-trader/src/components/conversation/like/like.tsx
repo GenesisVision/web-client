@@ -12,7 +12,7 @@ export const _Like: React.FC<Props> = ({ count, onClick, disable, liked }) => {
   }, [disable, onClick]);
 
   return (
-    <Center onClick={clickHandle}>
+    <Center className={styles["like"]} onClick={clickHandle}>
       <RowItem size={"small"}>
         <div className={styles["like__icon"]}>
           <LikeButtonIcon liked={!!liked} disabled={disable} />

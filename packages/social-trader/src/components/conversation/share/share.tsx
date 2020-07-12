@@ -26,7 +26,10 @@ export const _Share: React.FC<Props> = ({
 
   const renderShareButton = useCallback(
     () => (
-      <Center onClick={() => !disable && setIsOpen()}>
+      <Center
+        className={styles["share"]}
+        onClick={() => !disable && setIsOpen()}
+      >
         <RowItem className={styles["share__icon"]} size={"small"}>
           <ShareIcon disabled={disable} />
         </RowItem>
