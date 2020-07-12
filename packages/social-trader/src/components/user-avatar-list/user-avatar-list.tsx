@@ -44,7 +44,7 @@ const _UserAvatarList: React.FC<IUserAvatarListProps> = ({
               left: -(AVATAR_SHIFT * i)
             }}
           >
-            <Link to={profileUrl}>
+            <Link title={username} to={profileUrl}>
               <ProfileAvatar url={logoUrl} alt={username} />
             </Link>
           </div>
