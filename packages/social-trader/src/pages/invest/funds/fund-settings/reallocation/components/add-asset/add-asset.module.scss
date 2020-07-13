@@ -39,7 +39,11 @@
       }
     }
   }
-  &__search {
+  &__title-block {
     @include adaptive-full-padding($popover-padding-medium);
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-wrap: wrap;
   }
 }

@@ -9,11 +9,11 @@ import { FundAssetInfo, PlatformAsset } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
 import { assetsShape } from "pages/create-fund/components/create-fund-settings/create-fund-settings.validators";
 import AssetsComponent from "pages/invest/funds/fund-settings/reallocation/components/assets-block/assets-block";
+import { ReallocateFieldWrapper } from "pages/invest/funds/fund-settings/reallocation/components/reallocate-field-wrapper";
 import {
   compareAssets,
   composeSelectedAssets
-} from "pages/invest/funds/fund-settings/reallocation/components/reallocate-field";
-import { ReallocateFieldWrapper } from "pages/invest/funds/fund-settings/reallocation/components/reallocate-field-wrapper";
+} from "pages/invest/funds/fund-settings/reallocation/reallocation.helpers";
 import * as React from "react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";

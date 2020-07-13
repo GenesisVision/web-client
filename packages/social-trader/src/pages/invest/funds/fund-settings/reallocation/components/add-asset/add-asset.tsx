@@ -1,6 +1,5 @@
-import clsx from "clsx";
-import { Center } from "components/center/center";
-import { CurrencyItem } from "components/currency-item/currency-item";
+import GVTabs from "components/gv-tabs";
+import GVTab from "components/gv-tabs/gv-tab";
 import GVTextField from "components/gv-text-field";
 import { SearchIcon } from "components/icon/search-icon";
 import Popover, {
@@ -8,15 +7,32 @@ import Popover, {
   VERTICAL_POPOVER_POS
 } from "components/popover/popover";
 import { PopoverContent } from "components/popover/popover-content";
-import Regulator, { TRegulatorHandle } from "components/regulator/regulator";
-import { Text } from "components/text/text";
+import { TRegulatorHandle } from "components/regulator/regulator";
+import { RowItem } from "components/row-item/row-item";
+import { ProviderPlatformAssets } from "gv-api-web";
+import useTab from "hooks/tab.hook";
+import AddAssetList, {
+  TRegulatorInputHandle
+} from "pages/invest/funds/fund-settings/reallocation/components/add-asset/add-asset-list";
 import * as React from "react";
 import { useCallback, useEffect, useState } from "react";
 import { PlatformAssetFull } from "utils/types";
 
 import styles from "./add-asset.module.scss";
 
+interface Props {
+  tradingAssets: ProviderPlatformAssets[];
+  remainder: number;
+  anchor?: EventTarget;
+  assets: PlatformAssetFull[];
+  handleCloseDropdown(): void;
+  handleDown: TRegulatorHandle;
+  handleUp: TRegulatorHandle;
+  handlePercentChange: TRegulatorInputHandle;
+}
+
 const _AddAsset: React.FC<Props> = ({
+  tradingAssets,
   remainder,
   assets,
   anchor,
@@ -25,6 +41,12 @@ const _AddAsset: React.FC<Props> = ({
   handleUp,
   handlePercentChange
 }) => {
+  const tradingAssetObject = tradingAssets.reduce((prev, curr) => {
+    return { ...prev, [curr.type]: curr };
+  }, {}) as { [keys: string]: ProviderPlatformAssets };
+  const tabs = Object.keys(tradingAssetObject);
+
+  const { tab, setTab } = useTab<any>(tabs[0]);
   const [filteredAssets, setFilteredAssets] = useState<PlatformAssetFull[]>(
     assets
   );
@@ -45,6 +67,7 @@ const _AddAsset: React.FC<Props> = ({
         : assets
     );
   }, [assets, searchValue]);
+
   return (
     <>
       <Popover
@@ -55,33 +78,35 @@ const _AddAsset: React.FC<Props> = ({
         onClose={handleCloseDropdown}
       >
         <PopoverContent>
-          <div className={styles["add-fund-asset-popover__search"]}>
-            <GVTextField
-              noMargin
-              name="queryValue"
-              placeholder="Search for assets"
-              autoComplete="off"
-              adornment={<SearchIcon secondary />}
-              adornmentPosition="start"
-              onChange={searchHandle}
-              value={searchValue}
-            />
+          <div className={styles["add-fund-asset-popover__title-block"]}>
+            <RowItem>
+              <GVTabs onChange={setTab} value={tab}>
+                {tabs.map(tab => (
+                  <GVTab value={tab} label={tab} />
+                ))}
+              </GVTabs>
+            </RowItem>
+            <RowItem>
+              <GVTextField
+                noMargin
+                name="queryValue"
+                placeholder="Search for assets"
+                autoComplete="off"
+                adornment={<SearchIcon secondary />}
+                adornmentPosition="start"
+                onChange={searchHandle}
+                value={searchValue}
+              />
+            </RowItem>
           </div>
           <div className={styles["add-fund-asset-popover__assets"]}>
-            <table>
-              <tbody>
-                {filteredAssets.map(asset => (
-                  <AssetLine
-                    remainder={remainder}
-                    asset={asset}
-                    handleDown={handleDown}
-                    handleUp={handleUp}
-                    handlePercentChange={handlePercentChange}
-                    key={asset.id}
-                  />
-                ))}
-              </tbody>
-            </table>
+            <AddAssetList
+              remainder={remainder}
+              assets={filteredAssets}
+              onDown={handleDown}
+              onUp={handleUp}
+              onPercentChange={handlePercentChange}
+            />
           </div>
         </PopoverContent>
       </Popover>
@@ -91,70 +116,3 @@ const _AddAsset: React.FC<Props> = ({
 
 const AddAsset = React.memo(_AddAsset);
 export default AddAsset;
-
-const AssetLine: React.FC<AssetLineProps> = React.memo(
-  ({ remainder, asset, handleDown, handleUp, handlePercentChange }) => (
-    <tr>
-      <td>
-        <CurrencyItem
-          url={asset.url}
-          logo={asset.logoUrl}
-          small
-          name={asset.name}
-          symbol={asset.name}
-        />
-      </td>
-      <td>
-        <Text muted>{asset.asset}</Text>
-      </td>
-      <td>
-        <Regulator
-          remainder={remainder}
-          minValue={asset.mandatoryFundPercent}
-          value={asset.percent}
-          handleDown={handleDown(asset)}
-          handleUp={handleUp(asset)}
-        >
-          <Center
-            className={styles["add-fund-asset-popover__regulator-indicator"]}
-          >
-            <input
-              value={asset.percent}
-              onChange={handlePercentChange(asset)}
-              className={clsx(
-                styles["add-fund-asset-popover__regulator-input"],
-                {
-                  [styles["add-fund-asset-popover__regulator-input--mute"]]:
-                    asset.percent === 0
-                }
-              )}
-            />
-            %
-          </Center>
-        </Regulator>
-      </td>
-    </tr>
-  )
-);
-
-interface AssetLineProps {
-  remainder: number;
-  asset: PlatformAssetFull;
-  handleDown: TRegulatorHandle;
-  handleUp: TRegulatorHandle;
-  handlePercentChange: TRegulatorInputHandle;
-}
-
-interface Props {
-  remainder: number;
-  anchor?: EventTarget;
-  assets: PlatformAssetFull[];
-  handleCloseDropdown(): void;
-  handleDown: TRegulatorHandle;
-  handleUp: TRegulatorHandle;
-  handlePercentChange: TRegulatorInputHandle;
-}
-
-export type TRegulatorInputHandle = (
-  asset: PlatformAssetFull
-) => React.ChangeEventHandler<HTMLInputElement>;
