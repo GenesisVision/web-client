@@ -13,9 +13,9 @@ import React, { MouseEventHandler, useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { PlatformAssetFull } from "utils/types";
 
-import styles from "./create-fund-settings-assets-block.module.scss";
+import styles from "./assets-block.module.scss";
 
-const _CreateFundSettingsAssetsComponent: React.FC<Props> = ({
+const _AssetsComponent: React.FC<Props> = ({
   error,
   canChange = true,
   assets = [],
@@ -83,7 +83,5 @@ interface Props {
   touched?: boolean;
 }
 
-const CreateFundSettingsAssetsComponent = React.memo(
-  _CreateFundSettingsAssetsComponent
-);
-export default CreateFundSettingsAssetsComponent;
+const AssetsComponent = React.memo(_AssetsComponent);
+export default AssetsComponent;

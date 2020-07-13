@@ -8,11 +8,12 @@ import useAnchor from "hooks/anchor.hook";
 import CreateFundSettingsAddAsset, {
   TRegulatorInputHandle
 } from "pages/create-fund/components/create-fund-settings/create-fund-settings-add-asset/create-fund-settings-add-asset";
-import CreateFundSettingsAssetsComponent from "pages/create-fund/components/create-fund-settings/create-fund-settings-assets-block/create-fund-settings-assets-block";
 import * as React from "react";
 import { useCallback, useEffect, useState } from "react";
 import { safeGetElemFromArray } from "utils/helpers";
 import { PlatformAssetFull } from "utils/types";
+
+import AssetsComponent from "./assets-block/assets-block";
 
 const _ReallocateField: React.FC<IReallocateFieldProps> = ({
   name,
@@ -111,7 +112,7 @@ const _ReallocateField: React.FC<IReallocateFieldProps> = ({
 
   return (
     <>
-      <CreateFundSettingsAssetsComponent
+      <AssetsComponent
         touched={touched}
         error={error}
         assets={stateAssets.filter(item => item.percent > 0)}

@@ -7,8 +7,8 @@ import { Row } from "components/row/row";
 import withLoader from "decorators/with-loader";
 import { FundAssetInfo, PlatformAsset } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
-import CreateFundSettingsAssetsComponent from "pages/create-fund/components/create-fund-settings/create-fund-settings-assets-block/create-fund-settings-assets-block";
 import { assetsShape } from "pages/create-fund/components/create-fund-settings/create-fund-settings.validators";
+import AssetsComponent from "pages/invest/funds/fund-settings/reallocation/components/assets-block/assets-block";
 import {
   compareAssets,
   composeSelectedAssets
@@ -84,7 +84,7 @@ const _ReallocateForm: React.FC<Props> = ({
       {dirty && !equalWithCurrent && (
         <Row wide>
           <LabeledValue label={"Current"}>
-            <CreateFundSettingsAssetsComponent
+            <AssetsComponent
               assets={savedCurrent || []}
               remainder={0}
               canChange={false}
