@@ -5,14 +5,12 @@ import {
   PlatformAsset
 } from "gv-api-web";
 import useAnchor from "hooks/anchor.hook";
-import CreateFundSettingsAddAsset, {
-  TRegulatorInputHandle
-} from "pages/create-fund/components/create-fund-settings/create-fund-settings-add-asset/create-fund-settings-add-asset";
 import * as React from "react";
 import { useCallback, useEffect, useState } from "react";
 import { safeGetElemFromArray } from "utils/helpers";
 import { PlatformAssetFull } from "utils/types";
 
+import AddAsset, { TRegulatorInputHandle } from "./add-asset/add-asset";
 import AssetsComponent from "./assets-block/assets-block";
 
 const _ReallocateField: React.FC<IReallocateFieldProps> = ({
@@ -120,7 +118,7 @@ const _ReallocateField: React.FC<IReallocateFieldProps> = ({
         removeHandle={handleRemove}
         addHandle={setAnchor}
       />
-      <CreateFundSettingsAddAsset
+      <AddAsset
         remainder={remainder}
         anchor={anchor}
         handleCloseDropdown={clearAnchor}

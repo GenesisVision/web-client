@@ -14,9 +14,9 @@ import * as React from "react";
 import { useCallback, useEffect, useState } from "react";
 import { PlatformAssetFull } from "utils/types";
 
-import styles from "./create-fund-settings-add-asset.module.scss";
+import styles from "./add-asset.module.scss";
 
-const _CreateFundSettingsAddAsset: React.FC<Props> = ({
+const _AddAsset: React.FC<Props> = ({
   remainder,
   assets,
   anchor,
@@ -89,8 +89,8 @@ const _CreateFundSettingsAddAsset: React.FC<Props> = ({
   );
 };
 
-const CreateFundSettingsAddAsset = React.memo(_CreateFundSettingsAddAsset);
-export default CreateFundSettingsAddAsset;
+const AddAsset = React.memo(_AddAsset);
+export default AddAsset;
 
 const AssetLine: React.FC<AssetLineProps> = React.memo(
   ({ remainder, asset, handleDown, handleUp, handlePercentChange }) => (
