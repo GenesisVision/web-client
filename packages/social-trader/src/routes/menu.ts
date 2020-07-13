@@ -59,6 +59,17 @@ export const rootMenuItem = { Icon: GVLogo, route: HOME_ROUTE };
 
 export const filterBeta = ({ isBeta }: TMenuItem): boolean => !isBeta;
 
+export const filterMenuForBeta = (menu: TMenuItem[]) => {
+  return menu
+    .map(menuItem => {
+      const children = (menuItem.children
+        ? filterMenuForBeta(menuItem.children)
+        : undefined) as TMenuItem[];
+      return { ...menuItem, children };
+    })
+    .filter(filterBeta);
+};
+
 const advancedMobileMenuItems: TMenuItem[] = [
   {
     Icon: DetailsIcon,
@@ -98,7 +109,6 @@ const mainMenuItemsUnion = [
     ]
   },
   {
-    isBeta: true,
     Icon: SocialIcon,
     label: "navigation.social",
     route: SOCIAL_ROUTE,
@@ -148,6 +158,7 @@ const mainMenuItemsUnion = [
     route: TRADE_ROUTE,
     children: [
       {
+        isBeta: true,
         Icon: Mt5Icon,
         route: TERMINAL_ROUTE,
         label: "navigation.terminal"
