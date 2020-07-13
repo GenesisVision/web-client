@@ -1,3 +1,4 @@
+import withBetaTesting from "decorators/with-beta-testing";
 import withTradeLayout from "decorators/with-trade-layout";
 import { BrokerTradeServerType } from "gv-api-web";
 import { TYPE_PARAM_NAME } from "pages/trades/binance-trade-page/binance-trade.helpers";
@@ -67,4 +68,4 @@ Page.getInitialProps = async ctx => {
   };
 };
 
-export default withTradeLayout(Page);
+export default withTradeLayout(withBetaTesting("TradingTerminal")(Page));
