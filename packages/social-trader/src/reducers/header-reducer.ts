@@ -15,6 +15,8 @@ export const isBetaTesterByType = (selectType: BetaTestingType) => (
   types: Array<BetaTestingType> = []
 ): boolean => !!types.find(type => type === selectType);
 
+export const isTerminalBetaTester = isBetaTesterByType("TradingTerminal");
+
 export const isSocialBetaTester = isBetaTesterByType("Social");
 
 export const betaTesterSelector = apiFieldSelector(
