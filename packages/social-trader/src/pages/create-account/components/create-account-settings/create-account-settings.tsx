@@ -132,7 +132,7 @@ const _CreateAccountSettings: React.FC<Props> = ({
             depositAmount={depositAmount}
             minimumDepositAmount={minimumDepositAmount}
             setFieldValue={setValue}
-            assetCurrency={correctDepositCurrency(currency)}
+            assetCurrency={currency}
           />
           <Row size={"large"}>
             <CreateAssetNavigation
