@@ -20,10 +20,14 @@ const RequestLineItem: React.FC<{ label: string | JSX.Element }> = ({
   return (
     <div>
       <Row>
-        <Text size={"small"}>{label}</Text>
+        <Text wrap={false} size={"small"}>
+          {label}
+        </Text>
       </Row>
       <Row size={"small"}>
-        <Text muted>{children}</Text>
+        <Text wrap={false} muted>
+          {children}
+        </Text>
       </Row>
     </div>
   );
