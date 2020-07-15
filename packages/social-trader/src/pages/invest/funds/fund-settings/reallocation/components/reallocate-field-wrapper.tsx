@@ -8,7 +8,7 @@ import React, { useCallback } from "react";
 const _ReallocateFieldWrapper: React.FC<Props> = props => {
   const { setFieldValue, name } = props;
 
-  const { data: tradingAssets } = useApiRequest({
+  const { data: platformAssets } = useApiRequest({
     request: getTradingAssets,
     fetchOnMount: true
   });
@@ -20,12 +20,14 @@ const _ReallocateFieldWrapper: React.FC<Props> = props => {
     [setFieldValue]
   );
 
-  if (!tradingAssets) return null;
+  if (!platformAssets) return null;
+  const { assets, providers } = platformAssets;
 
   return (
     <ReallocateField
       {...props}
-      tradingAssets={tradingAssets}
+      assets={assets}
+      providers={providers}
       onChange={onChange}
     />
   );

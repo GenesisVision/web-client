@@ -20,7 +20,7 @@ import { TRegulatorInputHandle } from "./add-asset/add-asset-list";
 import AssetsComponent from "./assets-block/assets-block";
 
 export interface IReallocateFieldProps {
-  tradingAssets: ProviderPlatformAssets[];
+  providers: ProviderPlatformAssets[];
   name: string;
   value: FundAssetPart[];
   assets: PlatformAsset[];
@@ -40,7 +40,7 @@ export interface IReallocateFieldProps {
 }
 
 const _ReallocateField: React.FC<IReallocateFieldProps> = ({
-  tradingAssets,
+  providers,
   name,
   value = [],
   assets,
@@ -50,7 +50,6 @@ const _ReallocateField: React.FC<IReallocateFieldProps> = ({
   onBlur
 }) => {
   const { anchor, setAnchor, clearAnchor } = useAnchor();
-  const unitedTradingAssets = tradingAssets.map(({ assets }) => assets);
   const [stateAssets, setStateAssets] = useState<PlatformAssetFull[]>(
     composeSelectedAssets(value, assets).sort((a, b) => b.percent - a.percent)
   );
@@ -149,7 +148,7 @@ const _ReallocateField: React.FC<IReallocateFieldProps> = ({
         addHandle={setAnchor}
       />
       <AddAsset
-        tradingAssets={tradingAssets}
+        providers={providers}
         remainder={remainder}
         anchor={anchor}
         handleCloseDropdown={clearAnchor}

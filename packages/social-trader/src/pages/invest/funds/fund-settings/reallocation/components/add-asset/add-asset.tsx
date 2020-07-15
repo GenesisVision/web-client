@@ -21,7 +21,7 @@ import { PlatformAssetFull } from "utils/types";
 import styles from "./add-asset.module.scss";
 
 interface Props {
-  tradingAssets: ProviderPlatformAssets[];
+  providers: ProviderPlatformAssets[];
   remainder: number;
   anchor?: EventTarget;
   assets: PlatformAssetFull[];
@@ -32,7 +32,7 @@ interface Props {
 }
 
 const _AddAsset: React.FC<Props> = ({
-  tradingAssets,
+  providers,
   remainder,
   assets,
   anchor,
@@ -41,7 +41,7 @@ const _AddAsset: React.FC<Props> = ({
   handleUp,
   handlePercentChange
 }) => {
-  const tradingAssetObject = tradingAssets.reduce((prev, curr) => {
+  const tradingAssetObject = providers.reduce((prev, curr) => {
     return { ...prev, [curr.type]: curr };
   }, {}) as { [keys: string]: ProviderPlatformAssets };
   const tabs = Object.keys(tradingAssetObject);
@@ -56,17 +56,18 @@ const _AddAsset: React.FC<Props> = ({
     []
   );
   useEffect(() => {
-    setFilteredAssets(
-      !!searchValue
-        ? assets.filter(
-            item =>
-              ~(item.name + item.asset)
-                .toUpperCase()
-                .indexOf(searchValue.toUpperCase())
-          )
-        : assets
+    const newList = assets.filter(item =>
+      searchValue
+        ? ~(item.name + item.asset)
+            .toUpperCase()
+            .indexOf(searchValue.toUpperCase())
+        : true
     );
-  }, [assets, searchValue]);
+    setFilteredAssets(newList);
+    // if (!!searchValue) setTab(null, "");
+  }, [tab, assets, searchValue]);
+
+  const renderList = filteredAssets.filter(({ provider }) => provider === tab);
 
   return (
     <>
@@ -81,9 +82,12 @@ const _AddAsset: React.FC<Props> = ({
           <div className={styles["add-fund-asset-popover__title-block"]}>
             <RowItem>
               <GVTabs onChange={setTab} value={tab}>
-                {tabs.map(tab => (
-                  <GVTab value={tab} label={tab} />
-                ))}
+                {tabs.map(tab => {
+                  const count = filteredAssets.filter(
+                    ({ provider }) => provider === tab
+                  ).length;
+                  return <GVTab count={count} value={tab} label={tab} />;
+                })}
               </GVTabs>
             </RowItem>
             <RowItem>
@@ -102,7 +106,7 @@ const _AddAsset: React.FC<Props> = ({
           <div className={styles["add-fund-asset-popover__assets"]}>
             <AddAssetList
               remainder={remainder}
-              assets={filteredAssets}
+              assets={renderList}
               onDown={handleDown}
               onUp={handleUp}
               onPercentChange={handlePercentChange}

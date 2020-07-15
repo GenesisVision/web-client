@@ -4,7 +4,7 @@ import { CurrencyItem } from "components/currency-item/currency-item";
 import Regulator, { TRegulatorHandle } from "components/regulator/regulator";
 import { Text } from "components/text/text";
 import * as React from "react";
-import { PlatformAssetFull } from "utils/types";
+import { AnyObjectType, PlatformAssetFull } from "utils/types";
 
 import styles from "./add-asset.module.scss";
 
@@ -73,26 +73,45 @@ const AssetLine: React.FC<AssetLineProps> = React.memo(
   )
 );
 
-const _AddAssetList: React.FC<Props> = ({
-  remainder,
-  assets,
-  onDown,
-  onUp,
-  onPercentChange
-}) => {
+const _AddAssetList: React.FC<Props> = props => {
+  const { remainder, assets, onDown, onUp, onPercentChange } = props;
+  const providers = Object.keys(
+    assets
+      .map(({ provider }) => provider)
+      .reduce((prev, curr) => {
+        if (!prev[curr as string]) return { ...prev, [curr]: curr };
+        else return prev;
+      }, {} as AnyObjectType)
+  );
+
   return (
     <table>
       <tbody>
-        {assets.map(asset => (
-          <AssetLine
-            remainder={remainder}
-            asset={asset}
-            handleDown={onDown}
-            handleUp={onUp}
-            handlePercentChange={onPercentChange}
-            key={asset.id}
-          />
-        ))}
+        {providers.map(provider => {
+          return (
+            <>
+              {providers.length > 1 && (
+                <tr>
+                  <td colSpan={3}>
+                    <Text muted>{provider}</Text>
+                  </td>
+                </tr>
+              )}
+              {assets
+                .filter(asset => asset.provider === provider)
+                .map(asset => (
+                  <AssetLine
+                    remainder={remainder}
+                    asset={asset}
+                    handleDown={onDown}
+                    handleUp={onUp}
+                    handlePercentChange={onPercentChange}
+                    key={asset.id}
+                  />
+                ))}
+            </>
+          );
+        })}
       </tbody>
     </table>
   );
