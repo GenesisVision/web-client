@@ -1,5 +1,5 @@
 import { PopoverContent } from "components/popover/popover-content";
-import RequestLine from "components/request-line/request-line";
+import RequestColumn from "components/request-line/request-column";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import { AssetInvestmentRequest } from "gv-api-web";
 import React from "react";
@@ -13,7 +13,7 @@ const _AssetStatusRequests: React.FC<Props> = ({
   return (
     <PopoverContent type={"list"} className={styles["request-popover"]}>
       {requests.map(request => (
-        <RequestLine request={request} onApplyCancelRequest={handleCancel} />
+        <RequestColumn request={request} onApplyCancelRequest={handleCancel} />
       ))}
     </PopoverContent>
   );

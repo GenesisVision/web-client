@@ -20,10 +20,14 @@ const RequestLineItem: React.FC<{ label: string | JSX.Element }> = ({
   return (
     <div>
       <Row>
-        <Text size={"small"}>{label}</Text>
+        <Text wrap={false} size={"small"}>
+          {label}
+        </Text>
       </Row>
       <Row size={"small"}>
-        <Text muted>{children}</Text>
+        <Text wrap={false} muted>
+          {children}
+        </Text>
       </Row>
     </div>
   );
@@ -50,7 +54,13 @@ const _RequestLine: React.FC<Props> = ({
       <RowItem size={"large"}>
         <Center>
           <RowItem>
-            <RequestLineItem label={<Text weight={"bold"}>{title}</Text>}>
+            <RequestLineItem
+              label={
+                <Text wrap={false} weight={"bold"}>
+                  {title}
+                </Text>
+              }
+            >
               {type}
             </RequestLineItem>
           </RowItem>
