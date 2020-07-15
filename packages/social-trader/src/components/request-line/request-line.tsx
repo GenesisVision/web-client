@@ -54,7 +54,13 @@ const _RequestLine: React.FC<Props> = ({
       <RowItem size={"large"}>
         <Center>
           <RowItem>
-            <RequestLineItem label={<Text weight={"bold"}>{title}</Text>}>
+            <RequestLineItem
+              label={
+                <Text wrap={false} weight={"bold"}>
+                  {title}
+                </Text>
+              }
+            >
               {type}
             </RequestLineItem>
           </RowItem>
