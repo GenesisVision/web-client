@@ -10,7 +10,8 @@ import {
   ProgramAssetPlatformInfo,
   ProgramCreateAssetPlatformInfo,
   ProgramMinInvestAmount,
-  TradingAccountMinCreateAmount
+  TradingAccountMinCreateAmount,
+  UsersSocialLinkInfo
 } from "gv-api-web";
 import apiReducerFactory, {
   IApiState
@@ -196,5 +197,14 @@ export const allEventsSelector = createSelector<
 const platformReducer = apiReducerFactory<PlatformInfo>({
   apiType: PLATFORM_SETTINGS
 });
+
+export const socialLinkTypesSelector = apiFieldSelector<
+  PlatformInfo,
+  Array<UsersSocialLinkInfo>
+>(
+  platformDataSelector,
+  fieldSelector(state => state.usersInfo.socialLinkTypes),
+  undefined
+);
 
 export default platformReducer;
