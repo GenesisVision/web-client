@@ -48,6 +48,7 @@ const _DepositWithdrawButtons: React.FC<Props> = ({
       )}
       {canWithdraw && (
         <WithdrawButton
+          infoMessage={infoMessage}
           onApply={onApply}
           type={type}
           id={id}

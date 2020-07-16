@@ -9,6 +9,7 @@ import React from "react";
 import { CurrencyEnum, Sizeable, SizesType } from "utils/types";
 
 const _WithdrawButton: React.FC<Props> = ({
+  infoMessage,
   size,
   onApply,
   type,
@@ -23,6 +24,7 @@ const _WithdrawButton: React.FC<Props> = ({
   const withdraw =
     type === ASSET.FUND ? (
       <FundWithdrawDialog
+        infoMessage={infoMessage}
         onApply={onApply}
         open={isOpenPopup}
         id={id}
@@ -57,6 +59,7 @@ const _WithdrawButton: React.FC<Props> = ({
 };
 
 interface Props extends Sizeable {
+  infoMessage?: string;
   disabled?: boolean;
   onApply?: VoidFunction;
   type: ASSET;
