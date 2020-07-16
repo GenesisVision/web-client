@@ -24,6 +24,9 @@
   }
 
   &__info {
+    display: flex;
+    justify-content: center;
+    white-space: pre-wrap !important; // TODO fix
     line-height: 1.64;
     text-align: center;
   }
