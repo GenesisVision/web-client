@@ -25,6 +25,14 @@ const _DashboardFundCard: React.FC<Props> = ({
 }) => {
   const { linkCreator, contextTitle } = useToLink();
   const { t } = useTranslation();
+
+  const hasNasdaqAssets = false;
+  // fundDescription.assetsStructure.filter(
+  //   ({ provider }) => provider === "Nasdaq"
+  // ).length > 0;
+  const nasdaqMessage = `${t(
+    "deposit-asset.fund.nasdaq"
+  )} \n ${"Monday - Friday, 1:30 p.m. - 8:00 p.m. (UTC)"}`;
   const renderActions = ({ clearAnchor, anchor }: IRenderActionsArgs) => (
     <TableCardActions anchor={anchor} clearAnchor={clearAnchor}>
       <TableCardActionsItem
@@ -75,6 +83,7 @@ const _DashboardFundCard: React.FC<Props> = ({
         amountTitleTooltip={t("dashboard-page:tooltips.investing.size")}
       />
       <DepositWithdrawButtons
+        infoMessage={hasNasdaqAssets ? nasdaqMessage : undefined}
         title={fund.title}
         onApply={updateItems}
         canWithdraw={fund.personalDetails.canWithdraw}

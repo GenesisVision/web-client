@@ -1,6 +1,7 @@
 import AssetStatus from "components/asset-status/asset-status";
 import { DetailsInvestmentBlock } from "components/details/details-description-section/details-investment/blocks/details-investment-block";
 import { DetailsInvestmentFooter } from "components/details/details-description-section/details-investment/blocks/details-investment-footer";
+import { DetailsInvestmentText } from "components/details/details-description-section/details-investment/blocks/details-investment-text";
 import { DetailsInvestmentHeading } from "components/details/details-description-section/details-investment/blocks/details-investment-title";
 import { InvestmentItem } from "components/details/details-description-section/details-investment/investment-item";
 import { ProfitabilityValuePercent } from "components/profitability/profitability-value-percent";
@@ -46,13 +47,21 @@ const _Investment: React.FC<Props> = ({
   const pendingCurrency =
     asset === ASSET.FUND ? personalDetails.pendingInOutCurrency : assetCurrency;
 
+  const hasNasdaqAssets = false;
+  // asset.assetsStructure.filter(
+  //   ({ provider }) => provider === "Nasdaq"
+  // ).length > 0;
+  const nasdaqMessage = `${t(
+    "deposit-asset.fund.nasdaq"
+  )} \n${"Monday - Friday, 1:30 p.m. - 8:00 p.m. (UTC)"}`;
+
   return (
     <DetailsInvestmentBlock>
       <DetailsInvestmentHeading>
         {t("asset-details:description.investment-details")}
       </DetailsInvestmentHeading>
       <Row>
-        <StatisticItemList>
+        <StatisticItemList wrap={false}>
           <InvestmentItem label={t("asset-details:description.value")}>
             <NumberFormat
               value={formatCurrencyValue(personalDetails.value, currency)}
@@ -186,6 +195,9 @@ const _Investment: React.FC<Props> = ({
                 )}
               </InvestmentItem>
             )}
+          {hasNasdaqAssets && (
+            <DetailsInvestmentText>{nasdaqMessage}</DetailsInvestmentText>
+          )}
         </StatisticItemList>
       </Row>
       <Row>

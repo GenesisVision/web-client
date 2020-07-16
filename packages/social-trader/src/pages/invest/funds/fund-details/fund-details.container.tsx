@@ -36,6 +36,15 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
       dispatchFundDescriptionWithId(description.id, undefined, currency)
     );
   }, []);
+
+  const hasNasdaqAssets = false;
+  // asset.assetsStructure.filter(
+  //   ({ provider }) => provider === "Nasdaq"
+  // ).length > 0;
+  const nasdaqMessage = `${t(
+    "deposit-asset.fund.nasdaq"
+  )} \n ${"Monday - Friday, 1:30 p.m. - 8:00 p.m. (UTC)"}`;
+
   const title = `${t("funds-page:title")} - ${description.publicInfo.title}`;
 
   const banner = useMemo(
@@ -136,6 +145,7 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
       />
       <DetailsDivider />
       <DetailsInvestment
+        withdrawMessage={hasNasdaqAssets ? nasdaqMessage : undefined}
         isOwnAsset={description.publicInfo.isOwnAsset}
         fees={fees}
         dispatchDescription={handleDispatchDescription}

@@ -56,6 +56,15 @@ const _DashboardPublicCard: React.FC<Props> = ({
   const assetTitle = asset.publicInfo ? asset.publicInfo.title : asset.id;
   const assetColor = asset.publicInfo ? asset.publicInfo.color : "";
   const assetLogo = asset.publicInfo ? asset.publicInfo.logoUrl : "";
+
+  const hasNasdaqAssets = false;
+  // asset.assetsStructure.filter(
+  //   ({ provider }) => provider === "Nasdaq"
+  // ).length > 0;
+  const nasdaqMessage = `${t(
+    "deposit-asset.fund.nasdaq"
+  )} \n ${"Monday - Friday, 1:30 p.m. - 8:00 p.m. (UTC)"}`;
+
   const renderActions = ({
     anchor,
     clearAnchor
@@ -219,6 +228,7 @@ const _DashboardPublicCard: React.FC<Props> = ({
         </TableCardTableRow>
       )}
       <DepositWithdrawButtons
+        infoMessage={hasNasdaqAssets ? nasdaqMessage : undefined}
         accountType={asset.assetTypeExt}
         canTransfer={asset?.actions?.canTransferMoney}
         transferableItem={mapAccountToTransferItemType(asset)}
