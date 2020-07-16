@@ -16,6 +16,12 @@
     display: flex;
     width: 100%;
   }
+
+  & input[type="date"] {
+    &::-webkit-calendar-picker-indicator {
+      margin: 0;
+    }
+  }
 }
 
 $back-color: #273642;
