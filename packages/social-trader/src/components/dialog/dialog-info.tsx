@@ -8,7 +8,7 @@ export const DialogInfo: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
   children
 }) => (
   <Row size={"large"} className={styles["dialog__info"]}>
-    <Text muted size={"small"}>
+    <Text preWrap muted size={"small"}>
       {children}{" "}
     </Text>
   </Row>
