@@ -124,7 +124,10 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
     []
   );
 
-  const banner = useMemo(() => composeProgramBannerUrl(url), [url]);
+  const banner = useMemo(() => {
+    // return composeProgramBannerUrl(url);
+    return description.publicInfo.logoUrl;
+  }, [url]);
   const schemas = useMemo(() => [getSchema(description)], [description]);
 
   const renderAssetDetailsExtraBlock = useCallback(

@@ -152,6 +152,7 @@ const _DashboardPublicCard: React.FC<Props> = ({
             }
           >
             <NumberFormat
+              suffix="%"
               value={formatValueDifferentDecimalScale(
                 asset.statistic.drawdown,
                 DECIMAL_SCALE_SMALL_VALUE,

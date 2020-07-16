@@ -39,7 +39,8 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
   const title = `${t("funds-page:title")} - ${description.publicInfo.title}`;
 
   const banner = useMemo(
-    () => composeFundBannerUrl(description.publicInfo.url),
+    // () => composeFundBannerUrl(description.publicInfo.url),
+    () => description.publicInfo.logoUrl,
     [description]
   );
   const schemas = useMemo(() => [getFundSchema(description)], [description]);
