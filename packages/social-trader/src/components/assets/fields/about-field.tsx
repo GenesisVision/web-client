@@ -8,7 +8,7 @@ const _AboutField: React.FC<Props> = ({ name, description }) => {
     <TextAreaField
       value={description}
       name={name}
-      label={t("profile-page.about")}
+      label={t("profile-page:about")}
       caption={" "}
     />
   );

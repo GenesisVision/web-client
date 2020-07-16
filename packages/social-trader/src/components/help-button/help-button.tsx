@@ -1,12 +1,13 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import * as React from "react";
+import { OptionalClickable } from "utils/types";
 
 import styles from "./help-button.module.scss";
 
-const HelpButton: React.FC<OwnProps> = ({ muted, className, onClick }) => {
+const HelpButton: React.FC<Props> = ({ muted, className, onClick }) => {
   return (
     <div
-      className={classNames(styles["help-button"], className, {
+      className={clsx(styles["help-button"], className, {
         [styles["help-button--muted"]]: muted
       })}
       onClick={onClick}
@@ -18,8 +19,7 @@ const HelpButton: React.FC<OwnProps> = ({ muted, className, onClick }) => {
 
 export default HelpButton;
 
-interface OwnProps {
+interface Props extends OptionalClickable {
   muted?: boolean;
-  onClick?: () => void;
   className?: string;
 }

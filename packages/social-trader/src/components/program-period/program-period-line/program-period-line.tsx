@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import GVProgramPeriod from "components/gv-program-period";
 import { Row } from "components/row/row";
 import { STATUS } from "constants/constants";
@@ -19,14 +19,17 @@ const _ProgramPeriodLine: React.FC<Props> = ({
   const duration = distanceDate(start, end);
   const timeLeft = distanceDate(end);
   return (
-    <div className={classNames(styles["program-period-line"], className)}>
+    <div className={clsx(styles["program-period-line"], className)}>
       <GVProgramPeriod
         start={start}
         end={end}
         value={new Date()}
         variant="line"
       />
-      <Row small className={styles["program-period-line__description"]}>
+      <Row
+        size={"small"}
+        className={styles["program-period-line__description"]}
+      >
         <div>
           <b>{duration}</b>
         </div>

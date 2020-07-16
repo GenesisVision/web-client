@@ -1,0 +1,12 @@
+$post-edit-icon-size: 18px;
+
+.post-edit {
+  &__message {
+    min-width: 500px;
+    max-width: 500px;
+  }
+  &__icon {
+    width: $post-edit-icon-size;
+    height: $post-edit-icon-size;
+  }
+}

@@ -1,15 +1,18 @@
-import GVButton, { GV_BTN_SIZE } from "components/gv-button";
 import useIsOpen from "hooks/is-open.hook";
 import { ChangeLeverageDialog } from "pages/trades/binance-trade-page/trading/place-order/place-order-settings/change-leverage/change-leverage.dialog";
+import { PlaceOrderSettingsButton } from "pages/trades/binance-trade-page/trading/place-order/place-order-settings/place-order-settings-button";
+import { LeverageBracket } from "pages/trades/binance-trade-page/trading/terminal.types";
 import React, { useCallback } from "react";
 
 interface Props {
+  leverageBrackets: LeverageBracket[];
   maxLeverage: number;
   onChange: (leverage: number) => void;
   leverage: number;
 }
 
 const _ChangeLeverage: React.FC<Props> = ({
+  leverageBrackets,
   maxLeverage,
   leverage,
   onChange
@@ -23,14 +26,11 @@ const _ChangeLeverage: React.FC<Props> = ({
   );
   return (
     <>
-      <GVButton
-        size={GV_BTN_SIZE.SMALL}
-        variant={"outlined"}
-        onClick={setIsOpen}
-      >
+      <PlaceOrderSettingsButton onClick={setIsOpen}>
         {leverage}x
-      </GVButton>
+      </PlaceOrderSettingsButton>
       <ChangeLeverageDialog
+        leverageBrackets={leverageBrackets}
         maxLeverage={maxLeverage}
         onChange={handleOnChange}
         leverage={leverage}

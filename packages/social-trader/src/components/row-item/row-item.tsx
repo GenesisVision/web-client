@@ -1,51 +1,41 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import React from "react";
+import { OptionalClickable, Sizeable } from "utils/types";
 
 import styles from "./row-item.module.scss";
 
-export const RowItem: React.FC<Props> = ({
+export interface IRowItemProps extends Sizeable, OptionalClickable {
+  hide?: boolean;
+  wide?: boolean;
+  bottomOffset?: boolean;
+  className?: string;
+}
+
+export const RowItem: React.FC<IRowItemProps> = ({
+  size = "middle",
   hide,
   wide,
   onClick,
-  middle = true,
   bottomOffset,
   className,
-  xsmall,
-  small,
-  xlarge,
-  large,
   children
 }) => {
   return (
     <div
       onClick={onClick}
-      className={classNames(styles["row-item"], className, {
+      className={clsx(styles["row-item"], className, {
         [styles["row-item--pointer"]]: !!onClick,
         [styles["row-item--hide"]]: hide,
         [styles["row-item--wide"]]: wide,
         [styles["row-item--bottom-offset"]]: bottomOffset,
-        [styles["row-item--xsmall"]]: xsmall,
-        [styles["row-item--small"]]: small,
-        [styles["row-item--middle"]]:
-          middle && !(xlarge || xsmall || small || large),
-        [styles["row-item--xlarge"]]: xlarge,
-        [styles["row-item--large"]]: large
+        [styles["row-item--xsmall"]]: size === "xsmall",
+        [styles["row-item--small"]]: size === "small",
+        [styles["row-item--middle"]]: size === "middle",
+        [styles["row-item--xlarge"]]: size === "xlarge",
+        [styles["row-item--large"]]: size === "large"
       })}
     >
       {children}
     </div>
   );
 };
-
-interface Props {
-  hide?: boolean;
-  onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-  wide?: boolean;
-  bottomOffset?: boolean;
-  className?: string;
-  xsmall?: boolean;
-  small?: boolean;
-  middle?: boolean;
-  xlarge?: boolean;
-  large?: boolean;
-}

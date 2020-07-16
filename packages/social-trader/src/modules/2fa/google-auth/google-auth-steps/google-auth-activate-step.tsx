@@ -33,13 +33,10 @@ export const GoogleStep3: React.FC<Props> = ({
     validationSchema: object().shape({
       [FIELDS.code]: string()
         .trim()
-        .matches(
-          /^\d{6}$/,
-          t("auth.login.two-factor.validation.two-factor-6digits")
-        )
-        .required(t("2fa-page.code-required")),
+        .matches(/^\d{6}$/, t("validations.two-factor-6digits"))
+        .required(t("profile-page:2fa-page.code-required")),
       [FIELDS.password]: enablePassword
-        ? string().required(t("2fa-page.password-required"))
+        ? string().required(t("profile-page:2fa-page.password-required"))
         : string()
     }),
     mode: "onChange"
@@ -49,7 +46,7 @@ export const GoogleStep3: React.FC<Props> = ({
     <div className={styles["google-auth__step"]}>
       <div className={styles["google-auth__count"]}>03</div>
       <div className={styles["google-auth__title"]}>
-        {t("2fa-page.enter-code")}
+        {t("profile-page:2fa-page.enter-code")}
       </div>
       <HookForm form={form} onSubmit={onSubmit}>
         <Row>
@@ -57,7 +54,7 @@ export const GoogleStep3: React.FC<Props> = ({
             showCorrect
             name={FIELDS.code}
             type="tel"
-            label={t("2fa-page.google-code")}
+            label={t("profile-page:2fa-page.google-code")}
             component={SimpleNumberField}
             autoComplete="off"
             autoFocus
@@ -71,7 +68,7 @@ export const GoogleStep3: React.FC<Props> = ({
             <GVHookFormField
               name={FIELDS.password}
               type="password"
-              label={t("2fa-page.password")}
+              label={t("profile-page:2fa-page.password")}
               component={SimpleTextField}
               autocomplete="new-password"
             />

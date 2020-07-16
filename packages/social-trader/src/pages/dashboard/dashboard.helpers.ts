@@ -1,8 +1,17 @@
 import { BrokerTradeServerType, DashboardProfits } from "gv-api-web";
-import { META_TRADER_4_ROUTE, META_TRADER_5_ROUTE } from "routes/trade.routes";
+import {
+  META_TRADER_4_ROUTE,
+  META_TRADER_5_ROUTE,
+  TERMINAL_ROUTE
+} from "routes/trade.routes";
 
-export const getTerminalLink = (brokerType: BrokerTradeServerType): string => {
+export const getTerminalLink = (
+  brokerType: BrokerTradeServerType,
+  id?: string
+): string => {
   switch (brokerType) {
+    case "Binance":
+      return `${TERMINAL_ROUTE}?id=${id}`;
     case "BinanceFollow":
       return "https://www.binance.com/en/login";
     case "Huobi":

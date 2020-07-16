@@ -34,11 +34,11 @@ const Page = ({
           <BackButton />
         </div>
         {showTitle && (
-          <Row xlarge>
+          <Row size={"xlarge"}>
             <h1>{title}</h1>
           </Row>
         )}
-        <Row onlyOffset large>
+        <Row onlyOffset size={"large"}>
           {children}
         </Row>
       </PageSeoWrapper>

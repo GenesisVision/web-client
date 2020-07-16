@@ -1,6 +1,6 @@
-@import "~shared/styles/_colors";
-@import "~shared/styles/_breakpoint";
-@import "~shared/styles/_sizes";
+@import "styles/_colors";
+@import "styles/_breakpoint";
+@import "styles/_sizes";
 
 .details-chart {
   flex: 1;
@@ -28,7 +28,7 @@
 
   &__title {
     font-size: $font-size-paragraph-mobile;
-    font-weight: 300;
+    font-weight: 400;
     letter-spacing: 0.4px;
     color: $text-color;
     max-width: 10em;

@@ -1,3 +1,4 @@
+import { InternalArticle } from "pages/landing-page/components/internal/internal.blocks";
 import React from "react";
 
 import styles from "./aml-manual-section.module.scss";
@@ -8,7 +9,7 @@ const AmlManualSection: React.FC = () => (
       ANTI-MONEY LAUNDERING AND COUNTER TERRORISM FINANCING PROCEDURE MANUAL FOR
       GENESIS VISION LP.
     </h1>
-    <article className="internal__article">
+    <InternalArticle>
       <p>Table of Contents</p>
       <ol>
         <li>WHAT IS MONEY LAUNDERING</li>
@@ -709,7 +710,7 @@ const AmlManualSection: React.FC = () => (
           </p>
         </li>
       </ol>
-    </article>
+    </InternalArticle>
   </section>
 );
 

@@ -21,7 +21,8 @@ const _ChangePasswordTradingAccountPopup: React.FC<Props> = ({
   const onCloseMiddleware = postponeCallback(onClose);
   const { twoFactorEnabled } = useTFAStatus();
   const { errorMessage, cleanErrorMessage, sendRequest } = useApiRequest({
-    successMessage: "password-change-trading-account.success-alert-message",
+    successMessage:
+      "asset-settings:password-change-trading-account.success-alert-message",
     middleware: [onCloseMiddleware],
     request: changePasswordTradingAccount
   });

@@ -1,11 +1,13 @@
-import classNames from "classnames";
-import { MutedText } from "components/muted-text/muted-text";
+import clsx from "clsx";
+import { Text } from "components/text/text";
 import * as React from "react";
 import { useCallback, useRef } from "react";
+import { Sizeable } from "utils/types";
 
 import styles from "./gv-checkbox.module.scss";
 
 const _GVCheckbox: React.FC<IGVCheckboxProps> = ({
+  size = "middle",
   setFieldValue,
   touched,
   error,
@@ -33,14 +35,22 @@ const _GVCheckbox: React.FC<IGVCheckboxProps> = ({
   return (
     <div className={styles["gv-checkbox-wrapper"]} onClick={handleBlockClick}>
       <div
-        className={classNames(styles["gv-checkbox"], className, {
+        className={clsx(styles["gv-checkbox"], className, {
+          [styles["gv-checkbox--small"]]: size === "small",
+          [styles["gv-checkbox--middle"]]: size === "middle",
           [styles["gv-checkbox--checked"]]: value,
           [styles["gv-checkbox--primary"]]: color === "primary",
           [styles["gv-checkbox--secondary"]]: color === "secondary",
           [styles["gv-checkbox--disabled"]]: disabled
         })}
       >
-        <div className={styles["gv-checkbox__input-wrapper"]}>
+        <div
+          className={clsx(styles["gv-checkbox__input-wrapper"], {
+            [styles["gv-checkbox__input-wrapper--checked"]]: value,
+            [styles["gv-checkbox__input-wrapper--small"]]: size === "small",
+            [styles["gv-checkbox__input-wrapper--middle"]]: size === "middle"
+          })}
+        >
           <div>
             {value ? (
               "✔"
@@ -52,7 +62,7 @@ const _GVCheckbox: React.FC<IGVCheckboxProps> = ({
             ref={checkbox}
             type="checkbox"
             name={name}
-            className={classNames(styles["gv-checkbox__input"])}
+            className={clsx(styles["gv-checkbox__input"])}
             checked={value}
             disabled={disabled}
             {...other}
@@ -62,7 +72,9 @@ const _GVCheckbox: React.FC<IGVCheckboxProps> = ({
       </div>
       {label && (
         <div className={styles["gv-checkbox__label"]}>
-          <MutedText big>{label}</MutedText>
+          <Text muted size={size}>
+            {label}
+          </Text>
         </div>
       )}
       {error && <div className={styles["gv-checkbox__error"]}>{error}</div>}
@@ -70,7 +82,7 @@ const _GVCheckbox: React.FC<IGVCheckboxProps> = ({
   );
 };
 
-interface IGVCheckboxProps {
+interface IGVCheckboxProps extends Sizeable {
   setFieldValue?: (name: string, value?: any, validate?: boolean) => void;
   name: string;
   className?: string;

@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { useNetworkStatusInWindow } from "hooks/network-status";
 import dynamic from "next/dynamic";
 import BrokerInfoWrapper from "pages/landing-page/components/broker-info-wrapper/broker-info-wrapper";
@@ -64,7 +64,7 @@ const _BrokersContainer: React.FC<Props> = ({
   }, [effectiveConnectionType, currentTabId]);
   return (
     <div
-      className={classNames(styles["brokers-container"], className, {
+      className={clsx(styles["brokers-container"], className, {
         [styles["brokers-container--dark"]]: darkTheme
       })}
     >

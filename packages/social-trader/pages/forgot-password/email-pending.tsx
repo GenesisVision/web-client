@@ -16,10 +16,11 @@ Page.getInitialProps = async ctx => {
   const { getEmailPendingState } = useEmailPendingState(ctx);
   const { email } = getEmailPendingState();
   redirect(ctx, email.length === 0);
+  return { namespacesRequired: ["auth"] };
 };
 
 export default withAuthLayout({
-  titleKey: "auth.password-restore.title",
+  titleKey: "auth:password-restore.title",
   footerAuthRoute: SIGNUP_ROUTE,
   Footer: LoginFooter
 })(Page);

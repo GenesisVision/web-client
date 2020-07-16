@@ -13,14 +13,14 @@ const _FollowNotificationsContainer: React.FC<Props> = ({ id }) => {
     general: [
       {
         name: NOTIFICATIONS.FollowNewsAndUpdates,
-        label: t("notifications-page.follow.general.news-updates")
+        label: t("notifications-page:follow.general.news-updates")
       }
     ],
-    custom: true
+    custom: false
   };
   return (
     <AssetNotificationsContainer
-      assetType={ASSETS_TYPES.Program}
+      assetType={ASSETS_TYPES.Follow}
       id={id}
       notifications={notifications}
     />

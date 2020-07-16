@@ -1,17 +1,13 @@
 import { AvatarWithName } from "components/avatar/avatar-with-name/avatar-with-name";
 import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
-import { Center } from "components/center/center";
 import { getImageUrlByQuality } from "components/conversation/conversation-image/conversation-image.helpers";
 import styles from "components/conversation/conversation-user/conversation-user.module.scss";
-import { LikeContainer } from "components/conversation/like/like-container";
-import { Share } from "components/conversation/share/share";
 import { DefaultBlock } from "components/default.block/default.block";
-import { MutedText } from "components/muted-text/muted-text";
 import { PlateFeedCard } from "components/plate-feed/plate-feed-card";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { Separator } from "components/separator/separator";
-import { SIZES } from "constants/constants";
+import { Text } from "components/text/text";
 import { MediaPost, Post } from "gv-api-web";
 import React from "react";
 import { formatDate } from "utils/dates";
@@ -23,6 +19,8 @@ interface Props {
 }
 
 const transformNewsPostToGVPost = (newsPost: MediaPost): Post => ({
+  rePostsUsers: [],
+  likesUsers: [],
   isHighlighted: false,
   url: newsPost.url,
   id: newsPost.id,
@@ -43,7 +41,7 @@ const transformNewsPostToGVPost = (newsPost: MediaPost): Post => ({
     url: newsPost.authorUrl,
     socialLinks: []
   },
-  actions: {
+  personalDetails: {
     isLiked: false,
     canEdit: false,
     canDelete: false,
@@ -64,7 +62,7 @@ const NewsCardContent: React.FC<Props> = React.memo(
           </Row>
           {!!post.text?.length && (
             <Row>
-              <MutedText noWrap={false}>{post.text}</MutedText>
+              <Text muted>{post.text}</Text>
             </Row>
           )}
           <Row>
@@ -82,8 +80,8 @@ const NewsCardContent: React.FC<Props> = React.memo(
                       {post.author}
                     </RowItem>
                   </Row>
-                  <Row small>
-                    <MutedText>{formatDate(post.date)}</MutedText>
+                  <Row size={"small"}>
+                    <Text muted>{formatDate(post.date)}</Text>
                   </Row>
                 </>
               }

@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import ImageBaseElement from "components/avatar/image-base.element";
 import { useTranslation } from "i18n";
 import React from "react";
@@ -30,7 +30,7 @@ const _TabControls: React.FC<Props> = ({
   const { t } = useTranslation();
   return (
     <ul
-      className={classNames(styles["tab-controls"], {
+      className={clsx(styles["tab-controls"], {
         [styles["tab-controls--info"]]: variant === "info",
         [styles["tab-controls--brokers"]]: variant === "brokers",
         [styles["tab-controls--fees"]]: variant === "fees"
@@ -39,7 +39,7 @@ const _TabControls: React.FC<Props> = ({
       {tabsItems.map((tab, index) => (
         <li
           key={index}
-          className={classNames(styles["tab-controls__item"], {
+          className={clsx(styles["tab-controls__item"], {
             [styles["tab-controls__item--active"]]: currentTabId === tab.id
           })}
         >

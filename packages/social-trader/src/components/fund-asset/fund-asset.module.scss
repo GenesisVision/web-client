@@ -1,6 +1,6 @@
-@import "~shared/styles/_colors";
-@import "~shared/styles/_breakpoint";
-@import "~shared/styles/_sizes";
+@import "styles/_colors";
+@import "styles/_breakpoint";
+@import "styles/_sizes";
 
 $asset-height: 40px;
 $asset-height-mobile: $asset-height/$divider-text;
@@ -70,7 +70,7 @@ $remove-button-color: #293842;
     border: solid 2px #131e26;
     border-radius: $remove-button-size-mobile;
     font-size: 20px;
-    font-weight: 300;
+    font-weight: 400;
     display: flex;
     justify-content: center;
     align-items: center;

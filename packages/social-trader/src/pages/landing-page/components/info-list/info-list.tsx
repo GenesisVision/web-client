@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { TInfoList } from "pages/landing-page/static-data/info";
 import React from "react";
 
@@ -10,7 +10,7 @@ interface Props extends TInfoList {
 }
 
 const _InfoList: React.FC<Props> = ({ className, listItems }) => (
-  <ul className={classNames(styles["info-list"], className)}>
+  <ul className={clsx(styles["info-list"], className)}>
     {listItems.map((item, index) => (
       <InfoItem
         key={index}

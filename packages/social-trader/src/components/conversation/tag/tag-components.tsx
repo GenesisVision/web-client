@@ -14,7 +14,6 @@ import { CurrencyItem } from "components/currency-item/currency-item";
 import PortfolioEventLogo from "components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
 import Link, { ToType } from "components/link/link";
 import { useToLink } from "components/link/link.helper";
-import { MutedText } from "components/muted-text/muted-text";
 import Profitability from "components/profitability/profitability";
 import {
   PROFITABILITY_PREFIX,
@@ -22,6 +21,7 @@ import {
 } from "components/profitability/profitability.helper";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { Text } from "components/text/text";
 import Crashable from "decorators/crashable";
 import {
   ChangeState,
@@ -115,13 +115,13 @@ const _PlatformAssetTagComponent: React.FC<IPlatformAssetTagProps> = ({
         <CurrencyItem small name={name} url={url} logo={logoUrl} />
       </Row>
       {hasData && (
-        <Row small className={styles["asset-tag"]}>
+        <Row size={"small"} className={styles["asset-tag"]}>
           <RowItem wide>$ {price} </RowItem>
           {hasPercent && (
             <RowItem>
               <ColoredText color={color}>
                 <Row>
-                  <RowItem xsmall>{change24Percent}% </RowItem>
+                  <RowItem size={"xsmall"}>{change24Percent}% </RowItem>
                   {changeState !== "NotChanged" && (
                     <RowItem className={styles["asset-tag__arrow"]}>
                       <div>
@@ -172,7 +172,7 @@ const _EventTag: React.FC<IEventTagProps> = ({
   const color = getAssetTagTextColor(changeState);
   return (
     <Row wrap>
-      <RowItem small>
+      <RowItem size={"small"}>
         <PortfolioEventLogo
           withAsset={true}
           assetDetails={assetDetails}
@@ -185,7 +185,7 @@ const _EventTag: React.FC<IEventTagProps> = ({
       {amount !== null && (
         <RowItem>
           <Center>
-            <RowItem small>
+            <RowItem size={"small"}>
               <ColoredText color={color}>
                 {amount} {currency}
               </ColoredText>
@@ -259,18 +259,20 @@ const _AssetTagCard: React.FC<IAssetTagProps & { url: ToType | string }> = ({
         }
         name={
           <Link to={url}>
-            <MutedText className={styles["asset-tag"]}>{title}</MutedText>
+            <Text muted wrap={false} size={"small"}>
+              {title}
+            </Text>
           </Link>
         }
       />
       {(price !== null || change24Percent !== null) && (
-        <Row small className={styles["asset-tag"]}>
+        <Row size={"small"} className={styles["asset-tag"]}>
           {price !== null && <RowItem wide>$ {price} </RowItem>}
           {change24Percent !== null && (
             <RowItem>
               <ColoredText color={color}>
                 <Row>
-                  <RowItem xsmall>{change24Percent}% </RowItem>
+                  <RowItem size={"xsmall"}>{change24Percent}% </RowItem>
                   {changeState !== "NotChanged" && (
                     <RowItem className={styles["asset-tag__arrow"]}>
                       <div>
@@ -380,7 +382,9 @@ const _UserTagCard: React.FC<IUserTagProps> = ({
         }
         name={
           <Link to={managerToPathCreator(url, contextTitle)}>
-            <MutedText className={styles["asset-tag"]}>{username}</MutedText>
+            <Text muted wrap={false} size={"small"}>
+              {username}
+            </Text>
           </Link>
         }
       />

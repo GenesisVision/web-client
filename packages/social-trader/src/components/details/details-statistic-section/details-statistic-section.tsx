@@ -4,9 +4,9 @@ import DetailsChart, {
   IDetailsChartProps
 } from "./details-chart-section/details-chart";
 import styles from "./details-statistic-section.module.scss";
-import DetailsStatistics, {
+import DetailsStatisticsContainer, {
   IDetailsStatisticsProps
-} from "./details-statistics/details-statistics";
+} from "./details-statistics/details-statistics.container";
 
 const _DetailsStatisticSection: React.FC<Props> = ({
   renderAbsoluteProfitChart,
@@ -23,7 +23,7 @@ const _DetailsStatisticSection: React.FC<Props> = ({
   renderDetailsStatisticsElements
 }) => (
   <div className={styles["details-statistic-section"]}>
-    <DetailsStatistics
+    <DetailsStatisticsContainer
       profitChartSelector={profitChartSelector}
       statisticCurrencySelector={statisticCurrencySelector}
       useChartPeriod={useChartPeriod}

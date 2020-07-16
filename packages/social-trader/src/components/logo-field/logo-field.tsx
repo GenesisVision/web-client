@@ -1,7 +1,7 @@
 import { InputImageWrapper } from "components/form/input-image/input-image-wrapper";
 import { GVHookFormField } from "components/gv-hook-form-field";
-import { MutedText } from "components/muted-text/muted-text";
 import { Row } from "components/row/row";
+import { Text } from "components/text/text";
 import ProgramDefaultImage from "media/program-default-image.svg";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
@@ -16,11 +16,11 @@ const _LogoField: React.FC<Props> = ({
     <>
       {title && <h5>{title}</h5>}
       <Row wide>
-        <MutedText small>
-          {t("create-program-page.settings.fields.upload-logo-rules")}
-        </MutedText>
+        <Text muted size={"small"}>
+          {t("asset-settings:fields.upload-logo-rules")}
+        </Text>
       </Row>
-      <Row wide large>
+      <Row wide size={"large"}>
         <GVHookFormField
           name={name}
           component={InputImageWrapper}

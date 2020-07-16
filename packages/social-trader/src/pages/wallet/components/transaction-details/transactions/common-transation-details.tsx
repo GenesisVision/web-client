@@ -1,13 +1,13 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import ActionButton from "components/action-button/action-button";
 import { CurrencyItem } from "components/currency-item/currency-item";
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogTop } from "components/dialog/dialog-top";
+import { LabeledValue } from "components/labeled-value/labeled-value";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
-import StatisticItem from "components/statistic-item/statistic-item";
 import Status from "components/status/status";
 import Crashable from "decorators/crashable";
 import {
@@ -31,7 +31,9 @@ const _TransactionDetailsItemsBlock: React.FC<{
   return (
     <>
       {items.map(item => (
-        <TransactionDetailsListItem item={item} />
+        <RowItem key={item.title} bottomOffset>
+          <TransactionDetailsListItem item={item} />
+        </RowItem>
       ))}
     </>
   );
@@ -45,10 +47,10 @@ const TransactionDetailsListItem: React.FC<{
 }> = React.memo(({ item: { title, details, url, canCopy } }) => {
   const { linkCreator } = useToLink();
   return (
-    <StatisticItem label={title}>
+    <LabeledValue label={title}>
       <Row>
         <RowItem
-          className={classNames({
+          className={clsx({
             [styles[
               "transaction-details__details-list-statistic-item-value--long"
             ]]: details.length > 40
@@ -58,7 +60,7 @@ const TransactionDetailsListItem: React.FC<{
         </RowItem>
         <RowItem>{canCopy && <CopyButton value={details} text />}</RowItem>
       </Row>
-    </StatisticItem>
+    </LabeledValue>
   );
 });
 
@@ -67,7 +69,7 @@ const TransactionDetailsItem: React.FC<{
 } & React.HTMLAttributes<HTMLDivElement>> = ({ label, children }) => {
   return (
     <Row>
-      <StatisticItem label={label}>{children}</StatisticItem>
+      <LabeledValue label={label}>{children}</LabeledValue>
     </Row>
   );
 };
@@ -77,7 +79,9 @@ const TransactionStatusBlock: React.FC<{
 }> = React.memo(({ status }) => {
   const [t] = useTranslation();
   return (
-    <TransactionDetailsItem label={t(`transactions-details.status.title`)}>
+    <TransactionDetailsItem
+      label={t(`wallet-page:transactions-details.status.title`)}
+    >
       <Status withText status={status} />
     </TransactionDetailsItem>
   );
@@ -102,7 +106,9 @@ const _TransactionWalletBlock: React.FC<{
   const walletFirst = wallets.first;
   const walletSecond = wallets.second;
   return (
-    <TransactionDetailsItem label={t(`transactions-details.wallet`)}>
+    <TransactionDetailsItem
+      label={t(`wallet-page:transactions-details.wallet`)}
+    >
       {walletSecond ? (
         <WalletConvert wallets={wallets} />
       ) : (
@@ -126,7 +132,7 @@ const _CommonTransactionDetails: React.FC<Props> = ({
   return (
     <>
       <DialogTop
-        title={t(`transactions-details.title`)}
+        title={t(`wallet-page:transactions-details.title`)}
         subtitle={data.detailsTitle}
       >
         {data.asset && (

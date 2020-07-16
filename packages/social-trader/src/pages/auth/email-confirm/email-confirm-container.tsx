@@ -19,7 +19,7 @@ const _EmailConfirmContainer: React.FC<Props> = ({ userId, code }) => {
   };
   const { errorMessage, sendRequest, data } = useApiRequest({
     middleware: [updateTokenMiddleware],
-    successMessage: "auth.email-confirm.success-alert-message",
+    successMessage: "auth:email-confirm.success-alert-message",
     request: props => confirmEmail(props)
   });
   useEffect(() => {

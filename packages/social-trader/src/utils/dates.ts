@@ -25,7 +25,15 @@ export const diffDate = (
   dateStart: Date | number | string,
   dateEnd: Date | number | string = new Date(),
   unit?: OpUnitType
-): number => {
+) => {
+  return dayjs(diffDateRaw(dateStart, dateEnd, unit));
+};
+
+export const diffDateRaw = (
+  dateStart: Date | number | string,
+  dateEnd: Date | number | string = new Date(),
+  unit?: OpUnitType
+) => {
   return dayjs(dateEnd).diff(dayjs(dateStart), unit);
 };
 
@@ -81,7 +89,8 @@ const getString = (value: number, period: string) => {
 
 export const humanizeDate = (
   start: string | number | Date,
-  end: string | number | Date = new Date()
+  end: string | number | Date = new Date(),
+  options?: { unitsCount?: number }
 ): string => {
   let from = dayjs(start);
   const to = dayjs(end);
@@ -95,7 +104,7 @@ export const humanizeDate = (
 
   return Object.entries(thisTimeUnits)
     .filter(period => period[1] > 0)
-    .slice(0, 2)
+    .slice(0, options?.unitsCount || 2)
     .reduce((str, value) => {
       return `${str} ${getString(value[1], value[0])}`;
     }, "")

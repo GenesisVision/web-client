@@ -61,7 +61,7 @@ const _ManagerFundHistoryRow: React.FC<IManagerHistoryRowProps> = ({
       }
       dataBlock={
         <>
-          <ManagerHistoryItem label={t("funds-page.funds-header.balance")}>
+          <ManagerHistoryItem label={t("header-fields.balance")}>
             <NumberFormat
               value={formatCurrencyValue(
                 asset.balance.amount,
@@ -71,20 +71,20 @@ const _ManagerFundHistoryRow: React.FC<IManagerHistoryRowProps> = ({
               displayType="text"
             />
           </ManagerHistoryItem>
-          <ManagerHistoryItem label={t("funds-page.funds-header.investors")}>
+          <ManagerHistoryItem label={t("header-fields.investors")}>
             {asset.investorsCount}
           </ManagerHistoryItem>
-          <ManagerHistoryItem label={t("funds-page.funds-header.age")}>
+          <ManagerHistoryItem label={t("header-fields.age")}>
             {distanceDate(asset.creationDate)}
           </ManagerHistoryItem>
-          <ManagerHistoryItem label={t("funds-page.funds-header.drawdown")}>
+          <ManagerHistoryItem label={t("header-fields.drawdown")}>
             <NumberFormat
               value={formatValue(asset.statistic.drawdown, 2)}
               suffix="%"
               displayType="text"
             />
           </ManagerHistoryItem>
-          <ManagerHistoryItem label={t("funds-page.funds-header.profit")}>
+          <ManagerHistoryItem label={t("header-fields.profit")}>
             <Profitability
               value={formatValue(asset.statistic.profit, 2)}
               prefix={PROFITABILITY_PREFIX.SIGN}

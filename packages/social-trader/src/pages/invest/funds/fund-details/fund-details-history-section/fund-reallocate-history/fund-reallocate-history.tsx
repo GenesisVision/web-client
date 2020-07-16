@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { FUND_ASSET_TYPE } from "components/fund-asset/fund-asset";
 import FundAssetContainer from "components/fund-asset/fund-asset-container";
 import DateRangeFilter from "components/table/components/filtering/date-range-filter/date-range-filter";
@@ -47,7 +47,7 @@ const _FundReallocateHistory: React.FC<Props> = ({ id }) => {
       renderBodyRow={(item: ReallocationModel) => (
         <TableRow stripy>
           <TableCell
-            className={classNames(
+            className={clsx(
               styles["details-structure__cell"],
               styles["details-structure__cell--reallocate-date"]
             )}
@@ -55,7 +55,7 @@ const _FundReallocateHistory: React.FC<Props> = ({ id }) => {
             {formatDate(item.date)}
           </TableCell>
           <TableCell
-            className={classNames(
+            className={clsx(
               styles["details-structure__cell"],
               styles["details-structure__cell--reallocate-funds"]
             )}

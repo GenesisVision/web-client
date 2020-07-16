@@ -2,7 +2,7 @@ import { DETAILS_CHART_TABS } from "components/details/details-statistic-section
 import {
   useChartPeriodCreator,
   useChartStateDataCreator,
-  useFundChartStateValuesCreator
+  useChartStateValuesCreator
 } from "components/details/details-statistic-section/details.chart.helpers";
 import { programAbsoluteProfitChartSelector } from "pages/invest/programs/program-details/reducers/absolute-profit-chart.reducer";
 
@@ -40,4 +40,4 @@ export const useProgramChartStateData = (view: DETAILS_CHART_TABS) =>
   });
 
 export const useProgramChartStateValues = (view: DETAILS_CHART_TABS) =>
-  useFundChartStateValuesCreator(useProgramChartStateData(view));
+  useChartStateValuesCreator(useProgramChartStateData(view));

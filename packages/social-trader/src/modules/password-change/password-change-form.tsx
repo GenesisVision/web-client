@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import FormError from "components/form/form-error/form-error";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import { RowItem } from "components/row-item/row-item";
@@ -44,7 +44,7 @@ const _PasswordChangeForm: React.FC<IPasswordChangeFormOwnProps> = ({
     formState: { touched }
   } = form;
   const { password, confirmPassword } = watch();
-  const className = classNames({
+  const className = clsx({
     "change-password__equal":
       !errors[PASSWORD_CHANGE_FORM_FIELDS.password] &&
       !errors[PASSWORD_CHANGE_FORM_FIELDS.confirmPassword] &&
@@ -57,7 +57,7 @@ const _PasswordChangeForm: React.FC<IPasswordChangeFormOwnProps> = ({
       <Row>
         <GVHookFormField
           component={SimpleTextField}
-          label={t("auth.password-change.current-password")}
+          label={t("auth:password-change.current-password")}
           name={PASSWORD_CHANGE_FORM_FIELDS.oldPassword}
           type="password"
           autoComplete="new-password"
@@ -69,7 +69,7 @@ const _PasswordChangeForm: React.FC<IPasswordChangeFormOwnProps> = ({
           <GVHookFormField
             className={className}
             component={SimpleTextField}
-            label={t("auth.password-change.password")}
+            label={t("auth:password-change.password")}
             type="password"
             name={PASSWORD_CHANGE_FORM_FIELDS.password}
             autoComplete="new-password"
@@ -79,7 +79,7 @@ const _PasswordChangeForm: React.FC<IPasswordChangeFormOwnProps> = ({
           <GVHookFormField
             className={className}
             component={SimpleTextField}
-            label={t("auth.password-change.confirm-password")}
+            label={t("auth:password-change.confirm-password")}
             type="password"
             name={PASSWORD_CHANGE_FORM_FIELDS.confirmPassword}
             autoComplete="new-password"

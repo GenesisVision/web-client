@@ -12,7 +12,7 @@ const SignupDialog: React.FC = () => {
   const referrer = getReferrer();
   return (
     <>
-      <DialogTop title={t("auth.signup.title")} />
+      <DialogTop title={t("auth:signup.title")} />
       <DialogBottom>
         <SignupContainer
           showLogin

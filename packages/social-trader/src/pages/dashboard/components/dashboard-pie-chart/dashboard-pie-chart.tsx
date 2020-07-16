@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import MultiPieContainer from "components/pie-container/multi-pie.container";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
@@ -21,13 +21,10 @@ const _DashboardPieChart: React.FC<Props> = ({ data }) => {
       <div>
         {data.map(({ name, color, percent }) => (
           <Row
-            className={classNames(
-              styles["dashboard-pie-chart__name-container"],
-              {
-                [styles["dashboard-pie-chart__name-container--selected"]]:
-                  name === overItem
-              }
-            )}
+            className={clsx(styles["dashboard-pie-chart__name-container"], {
+              [styles["dashboard-pie-chart__name-container--selected"]]:
+                name === overItem
+            })}
             onMouseEnter={() => setOverItem(name)}
             onMouseLeave={() => setOverItem(undefined)}
           >

@@ -6,7 +6,6 @@ import { RepostTagComponent } from "components/conversation/tag/tag-components";
 import { DefaultBlock } from "components/default.block/default.block";
 import { DialogTop } from "components/dialog/dialog-top";
 import { Row } from "components/row/row";
-import { SIZES } from "constants/constants";
 import { Post as PostType } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
 import React, { useCallback } from "react";
@@ -30,7 +29,7 @@ const _RePostContainer: React.FC<IRePostContainerProps> = ({
 
   return (
     <>
-      <DialogTop title={t("conversation.repost")} />
+      <DialogTop title={t("conversation:repost")} />
       <DefaultBlock
         roundedBorder={false}
         solid
@@ -39,7 +38,7 @@ const _RePostContainer: React.FC<IRePostContainerProps> = ({
       >
         <DefaultBlock
           className={styles["repost__message"]}
-          size={SIZES.LARGE}
+          size={"large"}
           roundedBorder={false}
         >
           <RepostTagComponent post={post} />
@@ -47,7 +46,7 @@ const _RePostContainer: React.FC<IRePostContainerProps> = ({
         <Row>
           <PostInput
             allowEmptyMessage
-            placeholder={t("conversation.your-message")}
+            placeholder={t("conversation:your-message")}
             errorMessage={errorMessage}
             onSubmit={handleSubmit}
             status={status}

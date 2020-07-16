@@ -1,4 +1,7 @@
+import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import { SortingColumn } from "components/table/components/filtering/filter.type";
+import Tooltip from "components/tooltip/tooltip";
+import { TooltipContent } from "components/tooltip/tooltip-content";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
@@ -10,7 +13,21 @@ const _ProgramTableSortingValue: React.FC<{ column: SortingColumn }> = ({
   const { t } = useTranslation();
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   if (!isAuthenticated && column.name === "favorite") return null;
-  return t(`programs-page.programs-header.${column.name}`);
+  const renderValue = () => <>{t(`header-fields.${column.name}`)}</>;
+  return column.tooltip ? (
+    <Tooltip
+      horizontal={HORIZONTAL_POPOVER_POS.LEFT}
+      render={() => (
+        <TooltipContent>
+          {t(`programs-page:tooltips.${column.name}`)}
+        </TooltipContent>
+      )}
+    >
+      <div>{renderValue()}</div>
+    </Tooltip>
+  ) : (
+    renderValue()
+  );
 };
 
 const ProgramTableSortingValue = React.memo(_ProgramTableSortingValue);

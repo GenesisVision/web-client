@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import ImageBase from "components/avatar/image-base";
 import GVProgramDefaultAvatar from "components/gv-program-avatar/gv-propgram-default-avatar";
 import Link from "components/link/link";
@@ -46,10 +46,7 @@ const _FollowsItem: React.FC<ITraderItemProps> = ({
             defaultImageClassName={styles["follows-list__item-image--default"]}
             color={color}
             alt={title}
-            className={classNames(
-              styles["follows-list__item-image"],
-              imageClassName
-            )}
+            className={clsx(styles["follows-list__item-image"], imageClassName)}
             src={logo}
           />
         </div>

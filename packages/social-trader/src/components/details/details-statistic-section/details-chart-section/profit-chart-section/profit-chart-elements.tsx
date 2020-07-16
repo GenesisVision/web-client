@@ -6,8 +6,9 @@ import {
   ProfitChartDataType,
   StatisticDataType
 } from "components/details/details-statistic-section/details.chart.types";
+import { LabeledValue } from "components/labeled-value/labeled-value";
 import { Row } from "components/row/row";
-import StatisticItem from "components/statistic-item/statistic-item";
+import { Text } from "components/text/text";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import ChartCurrencySelector from "modules/chart-currency-selector/chart-currency-selector";
 import {
@@ -48,14 +49,16 @@ const _ProfitChartElements: React.FC<Props> = ({
   return (
     <>
       <Row>
-        <StatisticItem big accent label={t("details-page.chart.percent")}>
-          <NumberFormat
-            value={formatCurrencyValue(statistic.profitPercent, name)}
-            thousandSeparator={" "}
-            displayType="text"
-            suffix={` %`}
-          />
-        </StatisticItem>
+        <LabeledValue label={t("asset-details:chart.percent")}>
+          <Text weight={"bold"} size={"xlarge"}>
+            <NumberFormat
+              value={formatCurrencyValue(statistic.profitPercent, name)}
+              thousandSeparator={" "}
+              displayType="text"
+              suffix={` %`}
+            />
+          </Text>
+        </LabeledValue>
       </Row>
       <ChartPeriod onChange={setPeriod} period={period} />
       <ChartCurrencySelector

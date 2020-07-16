@@ -52,29 +52,36 @@ export const FUNDS_TABLE_FILTERS = [
 export const FUNDS_TABLE_COLUMNS: SortingColumn[] = [
   {
     name: "title",
-    sortingName: "ByTitle"
+    sortingName: "ByTitle",
+    tooltip: true
   },
   {
     name: "balance",
-    sortingName: "BySize"
+    sortingName: "BySize",
+    tooltip: true
   },
   {
-    name: "assets"
+    name: "assets",
+    tooltip: true
   },
   {
     name: "investors",
-    sortingName: "ByInvestors"
+    sortingName: "ByInvestors",
+    tooltip: true
   },
   {
-    name: "age"
+    name: "age",
+    tooltip: true
   },
   {
     name: "drawdown",
-    sortingName: "ByDrawdown"
+    sortingName: "ByDrawdown",
+    tooltip: true
   },
   {
     name: "profit",
-    sortingName: "ByProfit"
+    sortingName: "ByProfit",
+    tooltip: true
   },
   {
     name: "chart"

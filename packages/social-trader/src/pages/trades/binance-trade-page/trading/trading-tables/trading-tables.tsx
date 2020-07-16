@@ -1,14 +1,14 @@
 import { DefaultBlock } from "components/default.block/default.block";
 import GVTabs from "components/gv-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
-import { SIZES } from "constants/constants";
 import useTab from "hooks/tab.hook";
-import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
+import { TerminalDefaultBlock } from "pages/trades/binance-trade-page/trading/components/terminal-default-block/terminal-default-block";
+import { TerminalInfoContext } from "pages/trades/binance-trade-page/trading/terminal-info.context";
 import { FundsContainer } from "pages/trades/binance-trade-page/trading/trading-tables/funds/funds.container";
 import { OpenOrdersContainer } from "pages/trades/binance-trade-page/trading/trading-tables/open-orders/open-orders.container";
 import { OrderHistoryContainer } from "pages/trades/binance-trade-page/trading/trading-tables/order-history/order-history.container";
 import { PositionsContainer } from "pages/trades/binance-trade-page/trading/trading-tables/positions/positions.container";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import styles from "./trading-tables.module.scss";
@@ -24,22 +24,24 @@ enum TABS {
 interface Props {}
 
 const _TradingTables: React.FC<Props> = () => {
-  const { terminalType } = useContext(TradingInfoContext);
+  const { terminalType } = useContext(TerminalInfoContext);
+  const isFutures = terminalType === "futures";
   const [t] = useTranslation();
   const { tab, setTab } = useTab<TABS>(TABS.OPEN_ORDERS);
+
+  useEffect(() => {
+    setTab(null, TABS.OPEN_ORDERS);
+  }, [terminalType]);
   return (
-    <DefaultBlock
-      size={SIZES.SMALL}
+    <TerminalDefaultBlock
       horizontalOffsets={false}
-      roundedBorder={false}
-      bordered
       className={styles["trading-tables"]}
     >
-      <DefaultBlock verticalOffsets={false} size={SIZES.SMALL}>
+      <DefaultBlock verticalOffsets={false} size={"small"}>
         <GVTabs value={tab} onChange={setTab}>
           <GVTab value={TABS.OPEN_ORDERS} label={t("Open orders")} />
           <GVTab
-            visible={terminalType === "futures"}
+            visible={isFutures}
             value={TABS.POSITIONS}
             label={t("Positions")}
           />
@@ -49,12 +51,12 @@ const _TradingTables: React.FC<Props> = () => {
         </GVTabs>
       </DefaultBlock>
       <div className={styles["trading-tables__tables-container"]}>
-        {tab === TABS.POSITIONS && <PositionsContainer />}
+        {tab === TABS.POSITIONS && isFutures && <PositionsContainer />}
         {tab === TABS.OPEN_ORDERS && <OpenOrdersContainer />}
         {tab === TABS.ORDER_HISTORY && <OrderHistoryContainer />}
         {tab === TABS.FUNDS && <FundsContainer />}
       </div>
-    </DefaultBlock>
+    </TerminalDefaultBlock>
   );
 };
 

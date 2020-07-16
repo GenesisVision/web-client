@@ -2,7 +2,7 @@ import { Center } from "components/center/center";
 import { ConversationInput } from "components/conversation/conversation-input/conversation-input";
 import {
   ConversationInputShape,
-  postMessageDefaultOptions
+  getPostMessageDefaultOptions
 } from "components/conversation/conversation-input/conversation-input.helpers";
 import { OnMessageSendFunc } from "components/conversation/conversation.types";
 import { AttachImagePostButton } from "components/conversation/post/post-input/attach-image-post-button";
@@ -14,6 +14,7 @@ import { IImageValue } from "components/form/input-image/input-image";
 import { HookFormInputImages } from "components/form/input-image/input-images";
 import { RowItem } from "components/row-item/row-item";
 import { SubmitButton } from "components/submit-button/submit-button";
+import { NewPostImage } from "gv-api-web";
 import { API_REQUEST_STATUS } from "hooks/api-request.hook";
 import useIsOpen from "hooks/is-open.hook";
 import React, { useCallback, useEffect } from "react";
@@ -38,6 +39,9 @@ export interface PostInputFormValues {
 }
 
 interface Props {
+  submitLabel?: string;
+  text?: string;
+  images?: Array<IImageValue & NewPostImage>;
   allowEmptyMessage?: boolean;
   placeholder?: string;
   errorMessage?: string;
@@ -46,6 +50,9 @@ interface Props {
 }
 
 const _PostInput: React.FC<Props> = ({
+  submitLabel = "Send",
+  text: propText,
+  images: propImages,
   allowEmptyMessage,
   placeholder = "What's new?",
   errorMessage,
@@ -55,7 +62,10 @@ const _PostInput: React.FC<Props> = ({
   const [t] = useTranslation();
   const [isFocused, _, __, setFocused] = useIsOpen();
   const form = useForm<PostInputFormValues>({
-    defaultValues: postMessageDefaultOptions,
+    defaultValues: getPostMessageDefaultOptions({
+      text: propText,
+      images: propImages
+    }),
     validationSchema: object().shape({
       [FORM_FIELDS.text]: ConversationInputShape(t)
     }),
@@ -183,7 +193,7 @@ const _PostInput: React.FC<Props> = ({
                         checkValid={false}
                         disabled={disabled}
                       >
-                        Send
+                        {submitLabel}
                       </SubmitButton>
                     </RowItem>
                   </Center>

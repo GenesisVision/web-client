@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { FundDetailsListItem } from "gv-api-web";
 import React, { useCallback, useRef, useState } from "react";
 
@@ -28,7 +28,7 @@ const _FundsList: React.FC<Props> = ({ className, funds, onScroll }) => {
   }, [list.current]);
   return (
     <ul
-      className={classNames(styles["funds-list"], className, {
+      className={clsx(styles["funds-list"], className, {
         [styles["funds-list--active"]]: activeScroll
       })}
       onScroll={handleScroll}

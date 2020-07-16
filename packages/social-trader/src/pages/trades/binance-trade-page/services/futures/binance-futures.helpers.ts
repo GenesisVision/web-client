@@ -10,14 +10,30 @@ import {
   FuturesTradeOrder,
   FuturesTradeOrderUpdateEvent
 } from "pages/trades/binance-trade-page/services/futures/binance-futures.types";
+import { USER_STREAM_ACCOUNT_UPDATE_EVENT_TYPE } from "pages/trades/binance-trade-page/trading/terminal.helpers";
 import {
   Account,
   AssetBalance,
-  ExecutionReport,
+  BalanceForTransfer,
+  MarkPrice,
   Ticker
-} from "pages/trades/binance-trade-page/trading/trading.types";
+} from "pages/trades/binance-trade-page/trading/terminal.types";
 import { Observable } from "rxjs";
 import { filter } from "rxjs/operators";
+
+export const transformAccountToBalanceForTransfer = ({
+  balances
+}: Account): BalanceForTransfer[] => {
+  return balances.map(({ asset, free }) => ({ asset, free }));
+};
+
+export const transformMarkPriceWS = (m: any): MarkPrice => ({
+  symbol: m.s,
+  markPrice: m.p,
+  lastFundingRate: m.r,
+  nextFundingTime: m.T,
+  time: m.E
+});
 
 export const transformFuturesTickerSymbolWS = (m: any): Ticker => ({
   eventType: m.e,
@@ -81,7 +97,7 @@ export const transformFuturesBalance = (
   return {
     futuresAsset,
     asset: futuresAsset.asset,
-    free: futuresAsset.walletBalance,
+    free: futuresAsset.maxWithdrawAmount,
     locked: "0"
   };
 };
@@ -137,6 +153,7 @@ export const futuresEventBalanceTransform = (
 ): FuturesAccountEventBalance => {
   return {
     asset: socketData.a,
+    free: socketData.wb,
     walletBalance: socketData.wb,
     crossWalletBalance: socketData.cw
   };
@@ -191,15 +208,11 @@ export const futuresAccountUpdateEventTransform = (
   socketData: any
 ): FuturesAccountUpdateEvent => {
   return {
-    eventType: socketData.e,
+    eventType: USER_STREAM_ACCOUNT_UPDATE_EVENT_TYPE,
     eventTime: socketData.E,
     transactionTime: socketData.T,
-    accountUpdate: {
-      balances: (socketData.a?.B || []).map(futuresEventBalanceTransform),
-      positions: (socketData.a?.P || []).map(
-        futuresAccountEventPositionTransform
-      )
-    }
+    balances: (socketData.a?.B || []).map(futuresEventBalanceTransform),
+    positions: (socketData.a?.P || []).map(futuresAccountEventPositionTransform)
   };
 };
 
@@ -217,4 +230,6 @@ export const futuresTradeOrderUpdateEventTransform = (
 export const filterPositionEventsStream = (
   userStream: Observable<any>
 ): Observable<FuturesAccountUpdateEvent> =>
-  userStream.pipe(filter(info => info.eventType === "ACCOUNT_UPDATE"));
+  userStream.pipe(
+    filter(info => info.eventType === USER_STREAM_ACCOUNT_UPDATE_EVENT_TYPE)
+  );

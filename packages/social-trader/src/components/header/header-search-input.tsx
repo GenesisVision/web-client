@@ -1,4 +1,4 @@
-import { SearchInputField } from "components/global-search/components/global-search-result/global-search-input";
+import { SearchInputField } from "components/global-search/components/global-search-result/global-search-input/global-search-input";
 import {
   GlobalSearchContext,
   GlobalSearchInitialState

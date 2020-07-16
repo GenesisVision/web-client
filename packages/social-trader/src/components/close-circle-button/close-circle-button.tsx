@@ -1,5 +1,6 @@
 import { CloseIcon } from "components/icon/close-icon";
 import React from "react";
+import { Clickable } from "utils/types";
 
 import styles from "./close-circle-button.module.scss";
 
@@ -13,8 +14,6 @@ const _CloseCircleButton: React.FC<Props> = ({ onClick }) => {
   );
 };
 
-interface Props {
-  onClick: VoidFunction;
-}
+interface Props extends Clickable {}
 
 export const CloseCircleButton = React.memo(_CloseCircleButton);

@@ -7,7 +7,7 @@ import CloseAsset, { CloseableAssetType } from "./close-asset";
 const _CloseAssetBlock: React.FC<Props> = ({
   asset,
   t,
-  label = t("asset-settings.close-asset.title"),
+  label = t("asset-settings:close-asset.title"),
   id,
   canCloseAsset,
   closeAsset

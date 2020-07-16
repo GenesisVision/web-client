@@ -13,11 +13,11 @@ const ProgramNotificationsContainer: React.FC<Props> = ({ id }) => {
     general: [
       {
         name: NOTIFICATIONS.ProgramNewsAndUpdates,
-        label: t("notifications-page.program.general.news-updates")
+        label: t("notifications-page:program.general.news-updates")
       },
       {
         name: NOTIFICATIONS.ProgramEndOfPeriod,
-        label: t("notifications-page.program.general.end-of-period")
+        label: t("notifications-page:program.general.end-of-period")
       }
     ],
     custom: true

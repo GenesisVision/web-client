@@ -15,6 +15,7 @@ import { ToggleAssetFavoriteButton } from "modules/toggle-asset-favorite-button/
 import { ToggleableAssetType } from "modules/toggle-asset-favorite-button/toggle-asset-favorite-button.types";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { Clickable } from "utils/types";
 
 export const TableCardActions: React.FC<Props> = ({
   clearAnchor,
@@ -37,6 +38,7 @@ export const TableCardActions: React.FC<Props> = ({
 };
 
 export const TableCardActionsItem: React.FC<ITableCardActionsItemProps> = ({
+  disabled,
   to,
   onClick,
   children
@@ -44,7 +46,13 @@ export const TableCardActionsItem: React.FC<ITableCardActionsItemProps> = ({
   return (
     <PopoverContentListItem>
       <Link to={to}>
-        <GVButton noPadding variant="text" color="secondary" onClick={onClick}>
+        <GVButton
+          disabled={disabled}
+          noPadding
+          variant="text"
+          color="secondary"
+          onClick={onClick}
+        >
           {children}
         </GVButton>
       </Link>
@@ -74,17 +82,17 @@ export const TableCardFavoriteActionItem: React.FC<{
         isFavorite={isFavorite}
       >
         {isFavorite
-          ? t("fund-actions.remove-from-favorites")
-          : t("fund-actions.add-to-favorites")}
+          ? t("asset-actions.remove-from-favorites")
+          : t("asset-actions.add-to-favorites")}
       </ToggleAssetFavoriteButton>
     </PopoverContentListItem>
   );
 };
 
-interface ITableCardActionsItemProps {
+interface ITableCardActionsItemProps extends Clickable {
+  disabled?: boolean;
   children?: string | JSX.Element;
   to?: ToType | string;
-  onClick: (event: any) => void;
 }
 
 interface Props

@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { Center } from "components/center/center";
 import * as React from "react";
 
@@ -12,7 +12,7 @@ export const StatisticItemList: React.FC<Props &
 }) => (
   <Center
     wrap
-    className={classNames(styles["statistics-item-list"], className, {
+    className={clsx(styles["statistics-item-list"], className, {
       [styles["statistics-item-list--vertical"]]: vertical
     })}
   >

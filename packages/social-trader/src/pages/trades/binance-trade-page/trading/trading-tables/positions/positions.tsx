@@ -1,14 +1,11 @@
-import { MutedText } from "components/muted-text/muted-text";
+import { Text } from "components/text/text";
 import { TradeTable } from "pages/trades/binance-trade-page/trading/components/trade-table/trade-table";
 import {
   getMarginInfo,
   MARGIN_INFO_ASSET
 } from "pages/trades/binance-trade-page/trading/margin-ratio/margin-ratio.helpers";
-import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
-import {
-  FuturesPositionInformation,
-  QueryOrderResult
-} from "pages/trades/binance-trade-page/trading/trading.types";
+import { TerminalInfoContext } from "pages/trades/binance-trade-page/trading/terminal-info.context";
+import { FuturesPositionInformation } from "pages/trades/binance-trade-page/trading/terminal.types";
 import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -22,7 +19,7 @@ interface Props {
 
 export const Positions: React.FC<Props> = ({ items }) => {
   const [t] = useTranslation();
-  const { accountInfo } = useContext(TradingInfoContext);
+  const { accountInfo } = useContext(TerminalInfoContext);
 
   if (!accountInfo?.balances) return null;
 
@@ -40,7 +37,7 @@ export const Positions: React.FC<Props> = ({ items }) => {
       items={items}
       renderHeaderCell={({ name }) => (
         <th>
-          <MutedText>{t(`${name}`)}</MutedText>
+          <Text muted>{t(`${name}`)}</Text>
         </th>
       )}
       renderRow={(position: FuturesPositionInformation) => (

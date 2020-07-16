@@ -1,8 +1,12 @@
-@import "~shared/styles/_colors";
-@import "~shared/styles/_constants";
-@import "~shared/styles/_sizes";
+@import "styles/_colors";
+@import "styles/_constants";
+@import "styles/_sizes";
 
 .wallet-widget {
+  &__popover {
+    min-width: 200px;
+  }
+
   &__icon {
     height: 20px;
     width: 20px;

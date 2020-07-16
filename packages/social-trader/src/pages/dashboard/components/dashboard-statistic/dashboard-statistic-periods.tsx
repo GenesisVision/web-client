@@ -1,7 +1,8 @@
+import { LabeledValue } from "components/labeled-value/labeled-value";
 import Profitability from "components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "components/profitability/profitability.helper";
-import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
-import StatisticItem from "components/statistic-item/statistic-item";
+import { RowItem } from "components/row-item/row-item";
+import { Row } from "components/row/row";
 import Crashable from "decorators/crashable";
 import { TDashboardTotalField } from "pages/dashboard/dashboard.types";
 import React from "react";
@@ -17,26 +18,26 @@ const _DashboardStatisticPeriods: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   return (
-    <StatisticItemList>
+    <Row>
       <DashboardStatisticPeriodsItem
         currency={currency}
         withProfitability={withProfitability}
-        label={t("dashboard-page.total.day")}
+        label={t("dashboard-page:total.day")}
         item={day}
       />
       <DashboardStatisticPeriodsItem
         currency={currency}
         withProfitability={withProfitability}
-        label={t("dashboard-page.total.week")}
+        label={t("dashboard-page:total.week")}
         item={week}
       />
       <DashboardStatisticPeriodsItem
         currency={currency}
         withProfitability={withProfitability}
-        label={t("dashboard-page.total.month")}
+        label={t("dashboard-page:total.month")}
         item={month}
       />
-    </StatisticItemList>
+    </Row>
   );
 };
 
@@ -57,24 +58,26 @@ const _DashboardStatisticPeriodsItem: React.FC<{
   label: string;
 }> = ({ item: { profit, profitPercent }, label, currency }) => {
   return (
-    <StatisticItem label={label}>
-      <Profitability
-        value={formatCurrencyValue(profit, currency)}
-        prefix={PROFITABILITY_PREFIX.SIGN}
-      >
-        <NumberFormat
+    <RowItem size={"xlarge"}>
+      <LabeledValue label={label}>
+        <Profitability
           value={formatCurrencyValue(profit, currency)}
-          suffix={` ${currency}`}
-          allowNegative={false}
-          displayType="text"
-        />
-      </Profitability>
-      {/*<ProfitabilityValuePercent
+          prefix={PROFITABILITY_PREFIX.SIGN}
+        >
+          <NumberFormat
+            value={formatCurrencyValue(profit, currency)}
+            suffix={` ${currency}`}
+            allowNegative={false}
+            displayType="text"
+          />
+        </Profitability>
+        {/*<ProfitabilityValuePercent
           currency={currency}
           percent={profitPercent}
           value={profit}
         />*/}
-    </StatisticItem>
+      </LabeledValue>
+    </RowItem>
   );
 };
 export const DashboardStatisticPeriodsItem = React.memo(

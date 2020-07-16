@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import * as React from "react";
 import { ReactNode } from "react";
 import { SizesType } from "utils/types";
@@ -13,7 +13,7 @@ const TableCell: React.FC<Props> = ({
 }) => {
   return (
     <td
-      className={classNames(styles["table__cell"], className, {
+      className={clsx(styles["table__cell"], className, {
         [styles["table__cell--first-offset"]]: firstOffset,
         [styles["table__cell--medium"]]: height === "medium",
         [styles["table__cell--low"]]: height === "small"

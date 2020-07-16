@@ -1,5 +1,5 @@
-@import "~shared/styles/_constants";
-@import "~shared/styles/_sizes";
+@import "styles/_constants";
+@import "styles/_sizes";
 
 .row {
   &--pointer {
@@ -14,6 +14,9 @@
   }
   &--hidden {
     display: none;
+  }
+  &--xsmall:not(:first-child) {
+    @include adaptive-margin(top, $padding-xxxsmall);
   }
   &--small:not(:first-child) {
     @include adaptive-margin(top, $padding-xxsmall);

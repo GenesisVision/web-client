@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { SearchIcon } from "components/icon/search-icon";
 import React from "react";
 
@@ -19,7 +19,7 @@ const _SocialSearchInputBlock: React.FC<Props> = ({
   return (
     <div
       onClick={setSearchIsOpen}
-      className={classNames(styles["social-page__search-container"], {
+      className={clsx(styles["social-page__search-container"], {
         [styles["social-page__search-container--search"]]: openSearch
       })}
     >

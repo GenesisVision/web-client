@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import {
   ChartPeriodType,
   TChartPeriod
@@ -17,10 +17,10 @@ const _DetailsStatisticsElements: React.FC<Props> = ({
   return (
     <>
       <Row onlyOffset>
-        <h5>{t("program-details-page.statistics.current")}</h5>
+        <h5>{t("asset-details:statistics.current")}</h5>
         <Row
           wrap
-          className={classNames(
+          className={clsx(
             styles["details-statistics__particular-information"],
             styles["details-statistics__particular-information--current"]
           )}
@@ -28,10 +28,10 @@ const _DetailsStatisticsElements: React.FC<Props> = ({
           <Current />
         </Row>
       </Row>
-      <Row large onlyOffset>
+      <Row size={"large"} onlyOffset>
         <h5>
-          {t("program-details-page.statistics.for")}{" "}
-          {t(`chart-period.${ChartPeriodType[periodType]}`)}
+          {t("asset-details:statistics.for")}{" "}
+          {t(`asset-details:chart-period.${ChartPeriodType[periodType]}`)}
         </h5>
         <Row
           wrap

@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import VerificationStatus, {
@@ -18,7 +18,7 @@ const SettingsBlock: React.FC<Props> = ({
   verificationStatus
 }) => (
   <Row
-    xlarge={!blockNumber}
+    size={!blockNumber ? "xlarge" : undefined}
     center={false}
     hide={hide}
     className={styles["asset-settings-block"]}
@@ -26,7 +26,7 @@ const SettingsBlock: React.FC<Props> = ({
     <div className={styles["asset-settings-block__line-block"]}>
       {blockNumber && <h3>{blockNumber}</h3>}
       <Row
-        className={classNames(styles["asset-settings-block__line"], {
+        className={clsx(styles["asset-settings-block__line"], {
           [styles["asset-settings-block__line--bordered"]]: withBorder
         })}
       />
@@ -49,7 +49,12 @@ const SettingsBlock: React.FC<Props> = ({
           )}
         </Row>
       )}
-      <Row large wrap wide className={styles["asset-settings-block__wrapper"]}>
+      <Row
+        size={"large"}
+        wrap
+        wide
+        className={styles["asset-settings-block__wrapper"]}
+      >
         {children}
       </Row>
     </div>

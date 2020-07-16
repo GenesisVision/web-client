@@ -1,8 +1,8 @@
-@import "~shared/styles/_breakpoint";
-@import "~shared/styles/_sizes";
+@import "styles/_breakpoint";
+@import "styles/_sizes";
 
 .statistics-item-list {
-  align-items: flex-start;
+  align-items: flex-start !important; // TODO
   &--vertical {
     flex-direction: column;
   }

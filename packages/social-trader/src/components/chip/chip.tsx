@@ -1,5 +1,6 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import * as React from "react";
+import { Sizeable } from "utils/types";
 
 import styles from "./chip.module.scss";
 
@@ -8,10 +9,6 @@ export enum CHIP_TYPE {
   POSITIVE = "positive",
   NEGATIVE = "negative",
   WARNING = "warning"
-}
-
-export enum CHIP_SIZE {
-  SMALL = "SMALL"
 }
 
 const Chip: React.FC<Props> = React.memo(
@@ -26,9 +23,9 @@ const Chip: React.FC<Props> = React.memo(
     stretch
   }) => (
     <div
-      className={classNames(styles["chip"], className, {
+      className={clsx(styles["chip"], className, {
         [styles[`chip--${type}`]]: type,
-        [styles["chip--small"]]: size === CHIP_SIZE.SMALL,
+        [styles["chip--small"]]: size === "small",
         [styles["chip--stretch"]]: stretch,
         [styles["chip--rounded"]]: rounded,
         [styles["chip--disabled"]]: disabled,
@@ -41,9 +38,8 @@ const Chip: React.FC<Props> = React.memo(
   )
 );
 
-interface Props {
+interface Props extends Sizeable {
   stretch?: boolean;
-  size?: CHIP_SIZE;
   disabled?: boolean;
   className?: string;
   rounded?: boolean;

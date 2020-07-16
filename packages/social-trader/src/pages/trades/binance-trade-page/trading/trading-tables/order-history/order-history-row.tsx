@@ -1,8 +1,8 @@
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import { terminalMoneyFormat } from "pages/trades/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
-import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
-import { OrderSide } from "pages/trades/binance-trade-page/trading/trading.types";
+import { TerminalInfoContext } from "pages/trades/binance-trade-page/trading/terminal-info.context";
+import { OrderSide } from "pages/trades/binance-trade-page/trading/terminal.types";
 import React, { useContext } from "react";
 import { formatDate } from "utils/dates";
 
@@ -29,10 +29,10 @@ const _OrderHistoryRow: React.FC<Props> = ({
   filled,
   total
 }) => {
-  const { tickSize, stepSize } = useContext(TradingInfoContext);
+  const { tickSize, stepSize } = useContext(TerminalInfoContext);
   return (
     <TableRow>
-      <TableCell>{formatDate(time)}</TableCell>
+      <TableCell firstOffset={false}>{formatDate(time)}</TableCell>
       <TableCell>{symbol}</TableCell>
       <TableCell>{type}</TableCell>
       <TableCell>{side}</TableCell>

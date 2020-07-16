@@ -20,7 +20,7 @@ export const _MarketWatchTooltipButton: React.FC = ({ children }) => {
     <>
       <GVButton variant={"text"} noPadding onClick={setAnchor}>
         <Center>
-          <RowItem small>{children}</RowItem>
+          <RowItem size={"small"}>{children}</RowItem>
           <RowItem>
             <Center>
               <FilterArrowIcon isOpen={anchor !== undefined} />

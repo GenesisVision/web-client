@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import styles from "components/gv-program-avatar/style.module.scss";
 import React from "react";
 
@@ -18,10 +18,7 @@ const GVProgramDefaultAvatar: React.FC<GVProgramDefaultAvatarProps> = ({
       height="80"
       fill="none"
       viewBox="0 0 80 80"
-      className={classNames(
-        imageClassName,
-        styles["program-avatar__default-image"]
-      )}
+      className={clsx(imageClassName, styles["program-avatar__default-image"])}
     >
       <rect width="80" height="80" fill={color} rx="8" />
       <g fill="#1B232B" opacity=".3">

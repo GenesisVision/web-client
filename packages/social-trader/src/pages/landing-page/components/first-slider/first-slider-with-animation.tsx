@@ -23,10 +23,7 @@ interface Props {
   slidesItems: TSlide[];
 }
 
-const _FirstSliderWithAnimation: React.FC<Props> = ({
-  className,
-  slidesItems
-}) => {
+const _FirstSliderWithAnimation: React.FC<Props> = ({ slidesItems }) => {
   const { t } = useTranslation();
   const [index, setIndex] = useState(0);
   const transitions = useTransition(slidesItems[index], item => item.id, {
@@ -61,7 +58,7 @@ const _FirstSliderWithAnimation: React.FC<Props> = ({
     []
   );
   return (
-    <SliderMainWrapper className={className}>
+    <SliderMainWrapper>
       <SliderImgWrapper>
         {transitions.map(({ item, props: { transform, ...rest }, key }) => (
           <animated.div

@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { Center } from "components/center/center";
 import AuthWidgets from "components/header/auth-widgets";
 import HeaderIcon from "components/header/header-icon";
@@ -39,13 +39,13 @@ const HeaderLeft: React.FC<{
       />
       <Navigation
         menuItems={showedTopMenuItems}
-        className={classNames(styles["header__navigation"], {
+        className={clsx(styles["header__navigation"], {
           [styles["header__navigation--search"]]: openSearch
         })}
       />
       <div
         onClick={setSearchIsOpen}
-        className={classNames(styles["header__search-container"], {
+        className={clsx(styles["header__search-container"], {
           [styles["header__search-container--search"]]: openSearch
         })}
       >

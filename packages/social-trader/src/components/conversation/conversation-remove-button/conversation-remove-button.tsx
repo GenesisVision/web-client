@@ -1,20 +1,20 @@
 import { remove } from "components/conversation/conversation.service";
-import { RemoveIcon } from "components/conversation/icons/remove.icon";
+import { TableCardActionsItem } from "components/table/components/table-card/table-card-actions";
 import useApiRequest from "hooks/api-request.hook";
 import React from "react";
-
-import styles from "../conversation-pin-button/conversation-pin-button.module.scss";
+import { useTranslation } from "react-i18next";
 
 const _ConversationRemoveButton: React.FC<Props> = ({ id, onSuccess }) => {
+  const [t] = useTranslation();
   const updateMiddleware = () => onSuccess();
   const { sendRequest, isPending } = useApiRequest({
     request: () => remove({ id }),
     middleware: [updateMiddleware]
   });
   return (
-    <div className={styles["conversation-pin-button"]} onClick={sendRequest}>
-      <RemoveIcon disabled={isPending} />
-    </div>
+    <TableCardActionsItem disabled={isPending} onClick={sendRequest}>
+      {t("Delete")}
+    </TableCardActionsItem>
   );
 };
 

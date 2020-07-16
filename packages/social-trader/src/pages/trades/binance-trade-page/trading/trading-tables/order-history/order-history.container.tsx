@@ -1,14 +1,14 @@
+import { TerminalInfoContext } from "pages/trades/binance-trade-page/trading/terminal-info.context";
 import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
-import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
-import { normalizeOpenOrdersList } from "pages/trades/binance-trade-page/trading/trading-tables/open-orders/open-orders.helpers";
 import {
   filterOrderEventsStream,
   getSymbol
-} from "pages/trades/binance-trade-page/trading/trading.helpers";
+} from "pages/trades/binance-trade-page/trading/terminal.helpers";
 import {
   ExecutionReport,
   QueryOrderResult
-} from "pages/trades/binance-trade-page/trading/trading.types";
+} from "pages/trades/binance-trade-page/trading/terminal.types";
+import { normalizeOpenOrdersList } from "pages/trades/binance-trade-page/trading/trading-tables/open-orders/open-orders.helpers";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { map } from "rxjs/operators";
 
@@ -23,7 +23,7 @@ export const OrderHistoryContainer: React.FC<Props> = () => {
     authData,
     userStream,
     symbol: { baseAsset, quoteAsset }
-  } = useContext(TradingInfoContext);
+  } = useContext(TerminalInfoContext);
 
   const [list, setList] = useState<{
     [key: string]: QueryOrderResult;
@@ -31,7 +31,7 @@ export const OrderHistoryContainer: React.FC<Props> = () => {
   const [socketData, setSocketData] = useState<ExecutionReport | undefined>();
 
   useEffect(() => {
-    if (!authData.publicKey || !userStream) return;
+    if (!authData?.publicKey || !userStream) return;
     const openOrders = getAllOrders(getSymbol(baseAsset, quoteAsset), authData);
     openOrders.pipe(map(normalizeOpenOrdersList)).subscribe(data => {
       setList(data);

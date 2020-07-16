@@ -16,8 +16,7 @@ import {
   fetchFundBalanceChartAction,
   fetchFundDescriptionAction,
   fetchFundProfitChartAction,
-  fundReallocateHistoryAction,
-  setFundIdAction
+  fundReallocateHistoryAction
 } from "../actions/fund-details.actions";
 import { fundReallocateHistoryTableSelector } from "../reducers/fund-reallocate-history.reducer";
 
@@ -33,20 +32,17 @@ export const dispatchFundDescription = (
   currency?: CurrencyEnum
 ) => async (dispatch: MiddlewareDispatch, getState: TGetState) => {
   const {
-    fundDetails: { id: stateId }
+    fundDetails: { description }
   } = getState();
+  const stateId = description.data?.id;
   return await dispatch(
     dispatchFundDescriptionWithId(
-      ctx ? (ctx.query.id as string) : stateId,
+      ctx ? (ctx.query.id as string) : stateId!,
       ctx?.token,
       currency
     )
   );
 };
-
-export const dispatchFundId = (id: string) => async (
-  dispatch: MiddlewareDispatch
-) => await dispatch(setFundIdAction(id));
 
 // export const fetchFundStructure = (
 //   fundId: string

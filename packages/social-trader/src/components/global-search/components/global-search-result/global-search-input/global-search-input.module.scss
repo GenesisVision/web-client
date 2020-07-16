@@ -1,0 +1,8 @@
+$close-icon-size: 10px;
+
+.global-search-input {
+  &__close-icon {
+    width: $close-icon-size;
+    height: $close-icon-size;
+  }
+}

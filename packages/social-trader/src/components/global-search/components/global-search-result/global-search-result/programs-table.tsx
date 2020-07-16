@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { Table } from "components/table/components";
 import { ProgramDetailsListItemItemsViewModel } from "gv-api-web";
 import ProgramTableRowShort from "modules/programs-table/components/programs-table/program-table-row-short";
@@ -19,12 +19,12 @@ const ProgramsTable: React.FC<SearchTableProps<
       items={data.items}
       renderHeader={column => (
         <span
-          className={classNames(
+          className={clsx(
             styles["programs-table__cell"],
             styles[`programs-table__cell--${column.name}`]
           )}
         >
-          {t(`programs-page.programs-header.${column.name}`)}
+          {t(`header-fields.${column.name}`)}
         </span>
       )}
       renderBodyRow={program => <ProgramTableRowShort program={program} />}

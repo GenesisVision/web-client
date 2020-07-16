@@ -1,7 +1,7 @@
+import { LabeledValue } from "components/labeled-value/labeled-value";
 import { useToLink } from "components/link/link.helper";
 import ProgramPeriodPie from "components/program-period/program-period-pie/program-period-pie";
 import { Row } from "components/row/row";
-import StatisticItemInner from "components/statistic-item/statistic-item-inner";
 import TableCard, {
   TableCardTable,
   TableCardTableColumn
@@ -13,6 +13,7 @@ import {
   TableCardFavoriteActionItem
 } from "components/table/components/table-card/table-card-actions";
 import TagProgramContainer from "components/tags/tag-program-container/tag-program-container";
+import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import { ASSET } from "constants/constants";
 import { ProgramDetailsListItem } from "gv-api-web";
 import { useTranslation } from "i18n";
@@ -49,7 +50,7 @@ const _ProgramCard: React.FC<Props> = ({ program }) => {
   const renderActions = ({ clearAnchor, anchor }: IRenderActionsArgs) => (
     <TableCardActions anchor={anchor} clearAnchor={clearAnchor}>
       <TableCardActionsItem to={linkProps} onClick={clearAnchor}>
-        {t("program-actions.details")}
+        {t("asset-actions.details")}
       </TableCardActionsItem>
       {program.personalDetails && (
         <TableCardFavoriteActionItem
@@ -82,8 +83,13 @@ const _ProgramCard: React.FC<Props> = ({ program }) => {
       <TableCardTable>
         <TableCardTableColumn>
           <Row>
-            <StatisticItemInner
-              label={t("programs-page.programs-header.equity")}
+            <LabeledValue
+              label={
+                <TooltipLabel
+                  tooltipContent={t("programs-page:tooltips.equity")}
+                  labelText={t("header-fields.equity")}
+                />
+              }
             >
               <NumberFormat
                 value={formatValueDifferentDecimalScale(
@@ -94,11 +100,18 @@ const _ProgramCard: React.FC<Props> = ({ program }) => {
                 suffix={` ${requestCurrency}`}
                 displayType="text"
               />
-            </StatisticItemInner>
+            </LabeledValue>
           </Row>
           <Row>
-            <StatisticItemInner
-              label={t("programs-page.programs-header.available-to-invest")}
+            <LabeledValue
+              label={
+                <TooltipLabel
+                  tooltipContent={t(
+                    "programs-page:tooltips.available-to-invest"
+                  )}
+                  labelText={t("header-fields.available-to-invest")}
+                />
+              }
             >
               <NumberFormat
                 value={formatValueDifferentDecimalScale(
@@ -109,48 +122,70 @@ const _ProgramCard: React.FC<Props> = ({ program }) => {
                 displayType="text"
                 suffix={` ${requestCurrency}`}
               />
-            </StatisticItemInner>
+            </LabeledValue>
           </Row>
         </TableCardTableColumn>
         <TableCardTableColumn>
           <Row>
-            <StatisticItemInner
-              label={t("programs-page.programs-header.investors")}
+            <LabeledValue
+              label={
+                <TooltipLabel
+                  tooltipContent={t("programs-page:tooltips.investors")}
+                  labelText={t("header-fields.investors")}
+                />
+              }
             >
               <NumberFormat
                 value={program.investorsCount}
                 displayType="text"
                 decimalScale={0}
               />
-            </StatisticItemInner>
+            </LabeledValue>
           </Row>
           <Row>
-            <StatisticItemInner
-              label={t("programs-page.programs-header.period")}
+            <LabeledValue
+              label={
+                <TooltipLabel
+                  tooltipContent={t("programs-page:tooltips.period")}
+                  labelText={t("header-fields.period")}
+                />
+              }
             >
               <ProgramPeriodPie
                 start={program.periodStarts}
                 end={program.periodEnds}
               />
-            </StatisticItemInner>
+            </LabeledValue>
           </Row>
         </TableCardTableColumn>
         <TableCardTableColumn>
           <Row>
-            <StatisticItemInner label={t("programs-page.programs-header.age")}>
+            <LabeledValue
+              label={
+                <TooltipLabel
+                  tooltipContent={t("programs-page:tooltips.age")}
+                  labelText={t("header-fields.age")}
+                />
+              }
+            >
               {convertDateToShortFormat(distanceDate(program.creationDate))}
-            </StatisticItemInner>
+            </LabeledValue>
           </Row>
           <Row>
-            <StatisticItemInner
-              label={t("programs-page.programs-header.drawdown")}
+            <LabeledValue
+              label={
+                <TooltipLabel
+                  tooltipContent={t("programs-page:tooltips.drawdown")}
+                  labelText={t("header-fields.drawdown")}
+                />
+              }
             >
               <NumberFormat
                 value={formatValue(program.statistic.drawdown, 2)}
                 displayType="text"
                 suffix="%"
               />
-            </StatisticItemInner>
+            </LabeledValue>
           </Row>
         </TableCardTableColumn>
       </TableCardTable>

@@ -1,20 +1,22 @@
 import { SortingColumn } from "components/table/components/filtering/filter.type";
 import { getSymbolPriceFilter } from "pages/trades/binance-trade-page/trading/place-order/place-order.helpers";
-import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
-import { getSymbol } from "pages/trades/binance-trade-page/trading/trading.helpers";
+import { TerminalInfoContext } from "pages/trades/binance-trade-page/trading/terminal-info.context";
+import { getSymbol } from "pages/trades/binance-trade-page/trading/terminal.helpers";
 import {
   Depth,
   NormalizedDepth,
   NormalizedDepthList,
   StringBidDepth,
   TerminalType
-} from "pages/trades/binance-trade-page/trading/trading.types";
+} from "pages/trades/binance-trade-page/trading/terminal.types";
 import { useContext } from "react";
 import { formatValue } from "utils/formatter";
 import { safeGetElemFromArray } from "utils/helpers";
 import { AnyObjectType } from "utils/types";
 
 type DividerPartsType = { intLength?: number; fracLength?: number };
+
+export const ORDER_BOOK_ROW_HEIGHT = 16;
 
 export const sortDepthList = (
   [priceA]: StringBidDepth,
@@ -146,7 +148,7 @@ export const useSymbolTick = () => {
   const {
     exchangeInfo,
     symbol: { baseAsset, quoteAsset }
-  } = useContext(TradingInfoContext);
+  } = useContext(TerminalInfoContext);
   if (!exchangeInfo) return;
 
   const { filters } = safeGetElemFromArray(

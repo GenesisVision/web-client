@@ -10,7 +10,7 @@ const _DashboardPortfolio: React.FC<Props> = ({ landscapeTablet, tablet }) => {
     <DashboardPieChartBlock
       landscapeTablet={landscapeTablet}
       tablet={tablet}
-      label={t("dashboard-page.assets.title")}
+      label={t("dashboard-page:assets.title")}
       request={getPortfolio}
       loaderData={portfolioLoaderData()}
     />

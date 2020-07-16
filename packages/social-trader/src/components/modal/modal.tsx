@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import Portal from "components/portal/portal";
 import React, { useCallback, useEffect } from "react";
 import EventListener from "react-event-listener";
@@ -40,14 +40,14 @@ const _Modal: React.FC<Props> = ({
   return (
     <Portal open={open}>
       <div
-        className={classNames(styles["modal"], {
+        className={clsx(styles["modal"], {
           [styles["modal--position-absolute"]]: !noAbsolute,
           [styles["modal--position-fixed"]]: fixed
         })}
       >
         <EventListener target={"document"} onKeyUp={handleKeyPress}>
           <div
-            className={classNames(styles["modal__backdrop"], {
+            className={clsx(styles["modal__backdrop"], {
               [styles["modal__backdrop--transparent"]]: transparentBackdrop
             })}
             onClick={handleBackdropClick}

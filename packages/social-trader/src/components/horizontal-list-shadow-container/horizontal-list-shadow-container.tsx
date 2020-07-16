@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import React, { useEffect, useState } from "react";
 
 import styles from "./horizontal-list-shadow-container.module.scss";
@@ -18,7 +18,7 @@ export const HorizontalListShadowContainer: React.FC<Props> = ({
   }, [scroll, endOfList]);
   return (
     <div
-      className={classNames(styles["horizontal-list-shadow-container"], {
+      className={clsx(styles["horizontal-list-shadow-container"], {
         [styles["horizontal-list-shadow-container--right"]]: rightShadow,
         [styles["horizontal-list-shadow-container--left"]]: leftShadow,
         [styles["horizontal-list-shadow-container--dark-shadow"]]: darkShadow

@@ -1,5 +1,10 @@
-import { getDecimalScale } from "pages/trades/binance-trade-page/trading/trading.helpers";
+import { getDecimalScale } from "pages/trades/binance-trade-page/trading/terminal.helpers";
 import { formatValue } from "utils/formatter";
+
+export const truncated = (num: number, decimalPlaces: number) => {
+  let numPowerConverter = Math.pow(10, decimalPlaces);
+  return ~~(num * numPowerConverter) / numPowerConverter;
+};
 
 export const terminalMoneyFormat = ({
   tickSize,

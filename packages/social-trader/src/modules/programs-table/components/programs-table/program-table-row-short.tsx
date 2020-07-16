@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import AssetAvatarWithName from "components/avatar/asset-avatar/asset-avatar-with-name";
 import LevelTooltip from "components/level-tooltip/level-tooltip";
 import Link from "components/link/link";
@@ -84,7 +84,7 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
         />
       </TableCell>
       <TableCell
-        className={classNames(
+        className={clsx(
           styles["programs-table__cell"],
           styles["programs-table__cell--investors"]
         )}
@@ -92,7 +92,7 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
         {investorsCount}
       </TableCell>
       <TableCell
-        className={classNames(
+        className={clsx(
           styles["programs-table__cell"],
           styles["programs-table__cell--available-to-invest"]
         )}
@@ -104,7 +104,7 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
         />
       </TableCell>
       <TableCell
-        className={classNames(
+        className={clsx(
           styles["programs-table__cell"],
           styles["programs-table__cell--period"]
         )}
@@ -119,7 +119,7 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
         )}
       </TableCell>
       <TableCell
-        className={classNames(
+        className={clsx(
           styles["programs-table__cell"],
           styles["programs-table__cell--trades"]
         )}
@@ -127,7 +127,7 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
         {distanceDate(program.creationDate)}
       </TableCell>
       <TableCell
-        className={classNames(
+        className={clsx(
           styles["programs-table__cell"],
           styles["programs-table__cell--drawdown"]
         )}
@@ -139,7 +139,7 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
         />
       </TableCell>
       <TableCell
-        className={classNames(
+        className={clsx(
           styles["programs-table__cell"],
           styles["programs-table__cell--profit"]
         )}
@@ -158,7 +158,7 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
       </TableCell>
       <TableCell
         height={"small"}
-        className={classNames(
+        className={clsx(
           styles["programs-table__cell"],
           styles["programs-table__cell--chart"]
         )}
@@ -167,7 +167,7 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
       </TableCell>
       {isAuthenticated && personalDetails && (
         <TableCell
-          className={classNames(
+          className={clsx(
             styles["programs-table__cell"],
             styles["programs-table__cell--favorite"]
           )}

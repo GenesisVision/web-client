@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { CurrencyItem } from "components/currency-item/currency-item";
 import styles from "components/details/details-description-section/details-statistic-section/details-history/trades.module.scss";
 import BaseProfitability from "components/profitability/base-profitability";
@@ -27,7 +27,7 @@ const _ProgramOpenPositionsRow: React.FC<Props> = ({
   <TableRow stripy>
     {showDate && (
       <TableCell
-        className={classNames(
+        className={clsx(
           styles["details-trades__cell"],
           styles["program-details-trades__cell--date"]
         )}
@@ -36,7 +36,7 @@ const _ProgramOpenPositionsRow: React.FC<Props> = ({
       </TableCell>
     )}
     <TableCell
-      className={classNames(
+      className={clsx(
         styles["details-trades__cell"],
         styles["program-details-trades__cell--symbol"]
       )}

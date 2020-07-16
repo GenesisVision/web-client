@@ -3,7 +3,7 @@ import { Row } from "components/row/row";
 import * as React from "react";
 import { useCallback, useState } from "react";
 
-import GlobalSearchInput from "./global-search-input";
+import GlobalSearchInput from "./global-search-input/global-search-input";
 
 const _GlobalSearchContainer: React.FC = () => {
   const [query, setQuery] = useState<string>("");

@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -19,14 +19,11 @@ const GoogleAuth: React.FC<IGoogleAuthProps> = ({
   const [t] = useTranslation();
   return (
     <div
-      className={classNames(
-        styles["google-auth"],
-        styles["google-auth--desktop"]
-      )}
+      className={clsx(styles["google-auth"], styles["google-auth--desktop"])}
     >
       <div className={styles["google-auth__header"]}>
-        <h2>{t("2fa-page.title")}</h2>
-        <p>{t("2fa-page.google")}</p>
+        <h2>{t("profile-page:2fa-page.title")}</h2>
+        <p>{t("profile-page:2fa-page.google")}</p>
       </div>
 
       <div className={styles["google-auth__steps"]}>

@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import PagerLinkButton from "components/pager/pager-link-button";
 import { RowItem } from "components/row-item/row-item";
 import * as React from "react";
@@ -21,7 +21,7 @@ export const _PagerButton: React.FC<Props> = ({
     [page, clickHandle]
   );
 
-  const classname = classNames(styles["pager__button"], {
+  const classname = clsx(styles["pager__button"], {
     [styles["pager__button--current"]]: page === current
   });
 
@@ -46,7 +46,7 @@ export const _PagerButton: React.FC<Props> = ({
     }
   };
 
-  return <RowItem small>{renderButtonContent()}</RowItem>;
+  return <RowItem size={"small"}>{renderButtonContent()}</RowItem>;
 };
 
 export const PagerButton = React.memo(_PagerButton);

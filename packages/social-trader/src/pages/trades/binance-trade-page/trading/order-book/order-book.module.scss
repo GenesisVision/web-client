@@ -1,6 +1,5 @@
-@import "~shared/styles/_sizes";
-
-$order-book-row-height: 16px;
+@import "styles/_sizes";
+@import "styles/_colors";
 
 .order-book {
   width: 100%;
@@ -25,7 +24,6 @@ $order-book-row-height: 16px;
 
   &__tables-row {
     height: 100%;
-    overflow: hidden;
   }
 
   &__tables-block {
@@ -52,10 +50,22 @@ $order-book-row-height: 16px;
 
   &__table-row {
     cursor: pointer;
-    height: $order-book-row-height;
 
     &--hovered {
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.1) !important;
     }
+  }
+
+  &__first-cell {
+    position: relative;
+  }
+  &__has-order-bubble {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 100%;
+    background: $yellow;
+    top: 7px;
+    left: -7px;
   }
 }

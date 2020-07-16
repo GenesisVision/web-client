@@ -1,13 +1,14 @@
 import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
 import { AvatarWithName } from "components/avatar/avatar-with-name/avatar-with-name";
+import { LabeledValue } from "components/labeled-value/labeled-value";
 import Link, { ToType } from "components/link/link";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
-import StatisticItemInner from "components/statistic-item/statistic-item-inner";
+import { Text } from "components/text/text";
 import {
-  SocialSearchContext,
+  FeedContext,
   SocialSearchInitialState
-} from "pages/social/social/social-page.context";
+} from "pages/social/social/feed.context";
 import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -33,7 +34,7 @@ const _SocialPageTradersItem: React.FC<Props> = ({
   title
 }) => {
   const [t] = useTranslation();
-  const { setSearchValue } = useContext(SocialSearchContext);
+  const { setSearchValue } = useContext(FeedContext);
 
   const handleClick = useCallback(() => {
     setSearchValue({
@@ -63,14 +64,12 @@ const _SocialPageTradersItem: React.FC<Props> = ({
       </Row>
       <Row>
         <RowItem wide>
-          <StatisticItemInner label={t("Profit")}>
-            {profit} %
-          </StatisticItemInner>
+          <LabeledValue label={t("Profit")}>
+            <Text wrap={false}>{profit} %</Text>
+          </LabeledValue>
         </RowItem>
         <RowItem wide>
-          <StatisticItemInner label={t("Investors")}>
-            {investorsCount}
-          </StatisticItemInner>
+          <LabeledValue label={t("Investors")}>{investorsCount}</LabeledValue>
         </RowItem>
       </Row>
     </div>

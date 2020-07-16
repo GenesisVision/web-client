@@ -1,20 +1,33 @@
 import { useTranslation } from "i18n";
 import { NextPage } from "next";
+import { getAccept } from "pages/landing-page/components/cookie-message/cookie-message.helpers";
+import { InternalMainWrapper } from "pages/landing-page/components/internal/internal.blocks";
 import ReferralProgramSection from "pages/landing-page/components/referral-program-section/referral-program-section";
 import Layout from "pages/landing-page/layouts/_layout";
 import React from "react";
 
-export const LPReferralProgram: NextPage = () => {
+interface Props {
+  cookieAccept?: string;
+}
+
+export const LPReferralProgram: NextPage<Props> = ({ cookieAccept }) => {
   const { t } = useTranslation();
   return (
-    <Layout title={t("landing-page:page-titles.referral-program")}>
-      <main className="internal">
+    <Layout
+      cookieAccept={cookieAccept}
+      title={t("landing-page:page-titles.referral-program")}
+    >
+      <InternalMainWrapper>
         <ReferralProgramSection />
-      </main>
+      </InternalMainWrapper>
     </Layout>
   );
 };
 
-LPReferralProgram.getInitialProps = async () => ({
-  namespacesRequired: ["landing-page"]
-});
+LPReferralProgram.getInitialProps = async ctx => {
+  const cookieAccept = getAccept(ctx);
+  return {
+    cookieAccept,
+    namespacesRequired: ["referral-program", "landing-page"]
+  };
+};

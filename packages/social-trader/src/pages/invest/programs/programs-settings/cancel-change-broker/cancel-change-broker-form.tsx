@@ -3,9 +3,9 @@ import BrokerCard from "components/assets/broker-select/broker-card/broker-card"
 import styles from "components/assets/broker-select/broker-card/broker-card.module.scss";
 import FormTextField from "components/assets/fields/form-text-field";
 import GVButton from "components/gv-button";
+import { LabeledValue } from "components/labeled-value/labeled-value";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
-import StatisticItem from "components/statistic-item/statistic-item";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import {
   BrokerAccountType,
@@ -53,10 +53,13 @@ const _CancelChangeBrokerForm: React.FC<Props> = ({
             cardState={BROKER_CARD_EXTRA_STATE.NONE}
             tags={brokerFrom.tags}
           />
-          <Row onlyOffset>
-            <StatisticItem
-              label={t("create-program-page.settings.fields.account-type")}
-            >
+          <Row>
+            <LabeledValue label={t("asset-settings:fields.brokers-leverage")}>
+              {leverage}
+            </LabeledValue>
+          </Row>
+          <Row>
+            <LabeledValue label={t("asset-settings:fields.account-type")}>
               {
                 safeGetElemFromArray(
                   brokerFrom.accountTypes,
@@ -64,12 +67,7 @@ const _CancelChangeBrokerForm: React.FC<Props> = ({
                     account.id === currentAccountTypeId
                 ).name
               }
-            </StatisticItem>
-            <StatisticItem
-              label={t("create-program-page.settings.fields.brokers-leverage")}
-            >
-              {leverage}
-            </StatisticItem>
+            </LabeledValue>
           </Row>
         </RowItem>
         <RowItem className={styles["broker-card__next-arrow"]}>&rarr;</RowItem>
@@ -81,17 +79,15 @@ const _CancelChangeBrokerForm: React.FC<Props> = ({
             cardState={BROKER_CARD_EXTRA_STATE.NONE}
             tags={brokerTo.tags}
           />
-          <Row onlyOffset>
-            <StatisticItem
-              label={t("create-program-page.settings.fields.account-type")}
-            >
+          <Row>
+            <LabeledValue label={t("asset-settings:fields.account-type")}>
               {brokerTo.accountTypes[0].name}
-            </StatisticItem>
-            <StatisticItem
-              label={t("create-program-page.settings.fields.brokers-leverage")}
-            >
+            </LabeledValue>
+          </Row>
+          <Row>
+            <LabeledValue label={t("asset-settings:fields.brokers-leverage")}>
               {newLeverage}
-            </StatisticItem>
+            </LabeledValue>
           </Row>
         </RowItem>
       </Row>
@@ -102,15 +98,15 @@ const _CancelChangeBrokerForm: React.FC<Props> = ({
       />
       <Row>
         <FormTextField>
-          {t("program-settings.broker.text-cancel", {
+          {t("asset-settings:broker.text-cancel", {
             brokerFrom: brokerFrom.name,
             brokerTo: brokerTo.name
           })}
         </FormTextField>
       </Row>
-      <Row large>
+      <Row size={"large"}>
         <GVButton color="primary" onClick={setCancelChangeBrokerOpen}>
-          {t("program-settings.buttons.cancel-broker")}
+          {t("asset-settings:buttons.cancel-broker")}
         </GVButton>
       </Row>
       <ConfirmCancelChangeBroker

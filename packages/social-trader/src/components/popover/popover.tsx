@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import Modal from "components/modal/modal";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import EventListener from "react-event-listener";
@@ -161,7 +161,7 @@ const Popover: React.FC<Props> = props => {
       <div
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
-        className={classNames(styles["popover"], className, {
+        className={clsx(styles["popover"], className, {
           [styles["popover--no-padding"]]: noPadding
         })}
         ref={popover}

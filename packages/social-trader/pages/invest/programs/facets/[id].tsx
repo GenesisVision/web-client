@@ -14,7 +14,10 @@ const Page: NextPageWithRedux<Props, {}> = ({ id }) => {
 
 Page.getInitialProps = async ctx => {
   const { id } = ctx.query;
-  return { id };
+  return {
+    namespacesRequired: ["programs-page", "asset-list"],
+    id
+  };
 };
 
 export default compose(withDefaultLayout)(Page);

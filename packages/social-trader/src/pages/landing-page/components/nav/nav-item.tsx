@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import Link from "components/link/link";
 import { useTranslation } from "i18n";
 import { useRouter } from "next/router";
@@ -41,7 +41,7 @@ const _NavItem: React.FC<INavItemProps> = ({
   );
   return (
     <li
-      className={classNames(styles["nav-list__item"], {
+      className={clsx(styles["nav-list__item"], {
         [styles["nav-list__item--hide-mobile"]]: hideMobile,
         [styles["nav-list__item--sub-open"]]: subOpen
       })}

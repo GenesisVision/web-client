@@ -26,8 +26,8 @@ interface Props {
 
 const ProgramsPage: NextPage<Props> = ({ data, outerView }) => {
   const { t } = useTranslation();
-  const title = t("programs-page.title");
-  const description = t("programs-page.description");
+  const title = t("programs-page:title");
+  const description = t("programs-page:description");
   return (
     <Page
       description={description}

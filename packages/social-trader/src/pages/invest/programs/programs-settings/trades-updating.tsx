@@ -26,12 +26,12 @@ const _TradesUpdating: React.FC<Props> = ({
   });
 
   return (
-    <SettingsBlock label={t("program-settings.trades-update.title")}>
+    <SettingsBlock label={t("asset-settings:trades-update.title")}>
       <HookForm form={form} onSubmit={onSubmit}>
         <TradesDelay name={FIELDS.tradesDelay} />
-        <Row large>
+        <Row size={"large"}>
           <SubmitButton isSuccessful={!editError}>
-            {t("program-settings.buttons.save")}
+            {t("asset-settings:buttons.save")}
           </SubmitButton>
         </Row>
       </HookForm>

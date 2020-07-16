@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import GVButton from "components/gv-button";
 import * as React from "react";
@@ -20,12 +20,7 @@ const GoogleAuth: React.FC<Props> = props => {
   const isPrevDisabled = () => step === 0;
   const isNextDisabled = () => step === 2;
   return (
-    <div
-      className={classNames(
-        styles["google-auth"],
-        styles["google-auth--mobile"]
-      )}
-    >
+    <div className={clsx(styles["google-auth"], styles["google-auth--mobile"])}>
       {step === 0 && <GoogleDownloadStep />}
       {step === 1 && <GoogleCodeStep {...props} />}
       {step === 2 && <GoogleActivateStep {...props} />}

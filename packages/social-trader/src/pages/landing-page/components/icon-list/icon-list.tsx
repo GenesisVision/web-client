@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { TIconLinks } from "pages/landing-page/static-data/app-links";
 import React from "react";
 
@@ -19,7 +19,7 @@ const _IconList: React.FC<Props> = ({
   socialTheme
 }) => (
   <ul
-    className={classNames(styles["icon-list"], className, {
+    className={clsx(styles["icon-list"], className, {
       [styles["icon-list--color-gray"]]: lightTheme,
       [styles["icon-list--social"]]: socialTheme
     })}

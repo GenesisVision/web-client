@@ -1,12 +1,12 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import ImageBaseElement from "components/avatar/image-base.element";
 import { getImageUrlBySize } from "components/conversation/conversation-image/conversation-image.helpers";
 import { ConversationImagesFull } from "components/conversation/conversation-image/conversation-images-full";
 import { IConversationImage } from "components/conversation/conversation.types";
-import { MutedText } from "components/muted-text/muted-text";
-import { SIZES } from "constants/constants";
+import { Text } from "components/text/text";
 import useIsOpen from "hooks/is-open.hook";
 import React from "react";
+import { SizesType } from "utils/types";
 
 import styles from "./conversation-image.module.scss";
 
@@ -15,7 +15,7 @@ const EmptyImage: React.FC<{ imageClassName: string }> = ({
 }) => {
   return (
     <div className={imageClassName}>
-      <MutedText>Image not found</MutedText>
+      <Text muted>Image not found</Text>
     </div>
   );
 };
@@ -29,10 +29,10 @@ const _ConversationImage: React.FC<Props> = ({ images, size, index }) => {
         onClick={setOpen}
         DefaultImageComponent={EmptyImage}
         defaultImageClassName={styles["conversation-image__empty"]}
-        className={classNames(styles["conversation-image"], {
-          [styles["conversation-image--small"]]: size === SIZES.SMALL,
-          [styles["conversation-image--middle"]]: size === SIZES.MIDDLE,
-          [styles["conversation-image--large"]]: size === SIZES.LARGE
+        className={clsx(styles["conversation-image"], {
+          [styles["conversation-image--small"]]: size === "small",
+          [styles["conversation-image--middle"]]: size === "middle",
+          [styles["conversation-image--large"]]: size === "large"
         })}
         src={getImageUrlBySize(images[index], size)}
       />
@@ -48,7 +48,7 @@ const _ConversationImage: React.FC<Props> = ({ images, size, index }) => {
 
 interface Props {
   index: number;
-  size: SIZES;
+  size: SizesType;
   images: IConversationImage[];
 }
 

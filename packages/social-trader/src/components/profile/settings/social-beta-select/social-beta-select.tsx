@@ -41,10 +41,10 @@ const _SocialBetaSelect: React.FC = () => {
       onChange={handleSwitch}
       value={isTester}
       isPending={isPending}
-      label={t("profile-page.settings.social-beta-select.label")}
+      label={t("profile-page:settings.social-beta-select.label")}
       tooltipContent={
         <TooltipContent>
-          {t("profile-page.settings.social-beta-select.text")}
+          {t("profile-page:settings.social-beta-select.text")}
         </TooltipContent>
       }
     />

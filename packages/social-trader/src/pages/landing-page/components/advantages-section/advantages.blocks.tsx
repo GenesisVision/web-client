@@ -1,6 +1,7 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { useTranslation } from "i18n";
 import AdvantagesList from "pages/landing-page/components/advantages-list/advantages-list";
+import { HomeContainer } from "pages/landing-page/components/home/home.blocks";
 import { JoinButton } from "pages/landing-page/components/join-button";
 import { advantagesItems } from "pages/landing-page/static-data/advantages";
 import React from "react";
@@ -13,14 +14,14 @@ export const AdvantagesListContainer: React.FC<{
 }> = ({ animation }) => {
   const { t } = useTranslation();
   return (
-    <div className="home__container">
+    <HomeContainer>
       <div className={styles["advantages-section"]}>
         <h2 className={styles["advantages-section__title"]}>
           {t("landing-page:advantages.title")}
         </h2>
         <AdvantagesList
           advantagesItems={advantagesItems}
-          className={classNames(styles["advantages-section__list"], {
+          className={clsx(styles["advantages-section__list"], {
             [styles["advantages-section__list--animation"]]: animation
           })}
           lastItem={{
@@ -33,6 +34,6 @@ export const AdvantagesListContainer: React.FC<{
           }}
         />
       </div>
-    </div>
+    </HomeContainer>
   );
 };

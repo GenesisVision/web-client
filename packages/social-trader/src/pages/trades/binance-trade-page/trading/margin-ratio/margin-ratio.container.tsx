@@ -3,13 +3,13 @@ import {
   getMarginRatioLoaderData,
   MARGIN_INFO_ASSET
 } from "pages/trades/binance-trade-page/trading/margin-ratio/margin-ratio.helpers";
-import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
+import { TerminalInfoContext } from "pages/trades/binance-trade-page/trading/terminal-info.context";
 import React, { useContext } from "react";
 
 import { MarginRatio } from "./margin-ratio";
 
 export const MarginRatioContainer: React.FC = () => {
-  const { accountInfo } = useContext(TradingInfoContext);
+  const { accountInfo } = useContext(TerminalInfoContext);
   if (!accountInfo?.balances) return null;
 
   const marginInfo = getMarginInfo(accountInfo.balances, MARGIN_INFO_ASSET);

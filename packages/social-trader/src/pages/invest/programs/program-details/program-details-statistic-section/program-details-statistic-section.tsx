@@ -2,6 +2,7 @@ import DetailsStatisticSection from "components/details/details-statistic-sectio
 import dynamic from "next/dist/next-server/lib/dynamic";
 import { programAbsoluteProfitChartSelector } from "pages/invest/programs/program-details/reducers/absolute-profit-chart.reducer";
 import * as React from "react";
+import { useCallback } from "react";
 import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
 import { formatCurrencyValue } from "utils/formatter";
@@ -38,6 +39,62 @@ const ProgramProfitChart = dynamic(() =>
 const _ProgramDetailsStatisticSection: React.FC = () => {
   const status = useSelector(programStatusSelector);
   const statisticCurrency = useSelector(statisticCurrencySelector);
+
+  const renderProfitValue = useCallback(
+    ({ statistic }) => {
+      return (
+        <NumberFormat
+          value={formatCurrencyValue(
+            "profitPercent" in statistic ? statistic.profitPercent : 0,
+            statisticCurrency
+          )}
+          thousandSeparator={" "}
+          displayType="text"
+          suffix={` ${statisticCurrency}`}
+        />
+      );
+    },
+    [statisticCurrency]
+  );
+  const renderBalanceChart = useCallback(
+    ({ color, currency, balanceChart }) => (
+      <ProgramBalanceChart
+        color={color}
+        balanceChart={balanceChart}
+        currency={currency}
+      />
+    ),
+    []
+  );
+  const renderAbsoluteProfitChart = useCallback(
+    ({ color, currency, chart }) => (
+      <ProgramAbsoluteProfitChart
+        color={color}
+        chart={chart}
+        currency={currency}
+      />
+    ),
+    []
+  );
+  const renderProfitChart = useCallback(
+    ({ profitChart, chartCurrencies }) => (
+      <ProgramProfitChart charts={profitChart} colors={chartCurrencies} />
+    ),
+    []
+  );
+  const renderDetailsStatisticsElements = useCallback(
+    ({ period, statisticData }) => {
+      return (
+        <ProgramDetailsStatisticsElements
+          loaderData={statisticDataLoaderData}
+          status={status}
+          data={statisticData! as IProgramStatisticData}
+          period={period}
+        />
+      );
+    },
+    [status]
+  );
   return (
     <DetailsStatisticSection
       absoluteProfitChartSelector={programAbsoluteProfitChartSelector}
@@ -46,46 +103,11 @@ const _ProgramDetailsStatisticSection: React.FC = () => {
       statisticCurrencySelector={statisticCurrencySelector}
       useChartStateValues={useProgramChartStateValues}
       useChartPeriod={useChartPeriod}
-      renderProfitValue={({ statistic }) => {
-        return (
-          <NumberFormat
-            value={formatCurrencyValue(
-              "profitPercent" in statistic ? statistic.profitPercent : 0,
-              statisticCurrency
-            )}
-            thousandSeparator={" "}
-            displayType="text"
-            suffix={` ${statisticCurrency}`}
-          />
-        );
-      }}
-      renderBalanceChart={({ color, currency, balanceChart }) => (
-        <ProgramBalanceChart
-          color={color}
-          balanceChart={balanceChart}
-          currency={currency}
-        />
-      )}
-      renderAbsoluteProfitChart={({ color, currency, chart }) => (
-        <ProgramAbsoluteProfitChart
-          color={color}
-          chart={chart}
-          currency={currency}
-        />
-      )}
-      renderProfitChart={({ profitChart, chartCurrencies }) => (
-        <ProgramProfitChart charts={profitChart} colors={chartCurrencies} />
-      )}
-      renderDetailsStatisticsElements={({ period, statisticData }) => {
-        return (
-          <ProgramDetailsStatisticsElements
-            loaderData={statisticDataLoaderData}
-            status={status}
-            data={statisticData! as IProgramStatisticData}
-            period={period}
-          />
-        );
-      }}
+      renderProfitValue={renderProfitValue}
+      renderBalanceChart={renderBalanceChart}
+      renderAbsoluteProfitChart={renderAbsoluteProfitChart}
+      renderProfitChart={renderProfitChart}
+      renderDetailsStatisticsElements={renderDetailsStatisticsElements}
     />
   );
 };

@@ -1,7 +1,7 @@
-import { ColoredText } from "components/colored-text/colored-text";
+import { Text } from "components/text/text";
 import { terminalMoneyFormat } from "pages/trades/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
-import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
-import { getTextColor } from "pages/trades/binance-trade-page/trading/trading.helpers";
+import { TerminalInfoContext } from "pages/trades/binance-trade-page/trading/terminal-info.context";
+import { getTextColor } from "pages/trades/binance-trade-page/trading/terminal.helpers";
 import React, { useContext } from "react";
 import { formatTime } from "utils/dates";
 
@@ -13,7 +13,7 @@ interface Props {
 }
 
 const _TradesRow: React.FC<Props> = ({ prevPrice, price, amount, time }) => {
-  const { stepSize, tickSize } = useContext(TradingInfoContext);
+  const { stepSize, tickSize } = useContext(TerminalInfoContext);
   const formattedPrice = terminalMoneyFormat({
     amount: price,
     tickSize: tickSize
@@ -25,11 +25,12 @@ const _TradesRow: React.FC<Props> = ({ prevPrice, price, amount, time }) => {
   return (
     <tr>
       <td>
-        <ColoredText
+        <Text
+          size={"xsmall"}
           color={getTextColor(+price - +(prevPrice ? prevPrice : price))}
         >
           {formattedPrice}
-        </ColoredText>
+        </Text>
       </td>
       <td>{formattedAmount}</td>
       <td>{formatTime(time)}</td>

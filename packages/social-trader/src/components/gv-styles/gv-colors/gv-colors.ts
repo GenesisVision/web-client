@@ -1,3 +1,5 @@
+export const $popoverBackground = "#273642";
+
 export const $primaryColor = "#03bdaf";
 export const $secondaryColor = "#2a353f";
 

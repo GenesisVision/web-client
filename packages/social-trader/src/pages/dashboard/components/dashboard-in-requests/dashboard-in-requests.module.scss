@@ -1,5 +1,6 @@
-@import "~shared/styles/_sizes";
+@import "styles/_sizes";
 
 .dashboard-in-requests {
+  overflow-x: auto;
   @include details-block-horizontal-paddings;
 }

@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { HorizontalListShadowContainer } from "components/horizontal-list-shadow-container/horizontal-list-shadow-container";
 import { useShadow } from "components/horizontal-list-shadow-container/shadow.hook";
 import React from "react";
@@ -24,7 +24,7 @@ const _HorizontalShadowList: React.FC<Props> = ({
       <div
         ref={ref}
         onScroll={handleScroll}
-        className={classNames(styles["horizontal-shadow-list"], {
+        className={clsx(styles["horizontal-shadow-list"], {
           [styles["horizontal-shadow-list--with-scroll"]]: withScroll
         })}
       >

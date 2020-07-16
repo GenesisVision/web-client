@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
 import { LogoutIcon } from "components/icon/logout-icon";
 import NavigationItem, {
@@ -23,7 +23,7 @@ const _NavigationMobile: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   return (
-    <div className={classNames(styles["navigation__mobile"], styles["mobile"])}>
+    <div className={clsx(styles["navigation__mobile"], styles["mobile"])}>
       {isAuthenticated && profileHeader && (
         <div className={styles["mobile__header"]}>
           <ProfileAvatar

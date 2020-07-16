@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 const _FollowNotificationPage: React.FC<Props> = ({ id }) => {
   const [t] = useTranslation();
   return (
-    <Page showTitle title={t("notifications-page.follow.title")}>
+    <Page showTitle title={t("notifications-page:follow.title")}>
       <FollowNotificationsContainer id={id} />
     </Page>
   );

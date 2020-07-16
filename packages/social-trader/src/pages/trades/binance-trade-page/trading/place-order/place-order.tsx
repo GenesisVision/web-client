@@ -1,30 +1,32 @@
 import { Center } from "components/center/center";
-import { DefaultBlock } from "components/default.block/default.block";
 import { DoubleButton } from "components/double-button/double-button";
-import { GV_BTN_SIZE } from "components/gv-button";
 import GVTabs from "components/gv-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
 import { WalletIcon } from "components/icon/wallet-icon";
-import { MutedText } from "components/muted-text/muted-text";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
-import { SIZES } from "constants/constants";
+import { Text } from "components/text/text";
 import useApiRequest from "hooks/api-request.hook";
 import useTab from "hooks/tab.hook";
+import { TerminalDefaultBlock } from "pages/trades/binance-trade-page/trading/components/terminal-default-block/terminal-default-block";
 import { StopLimitTradeForm } from "pages/trades/binance-trade-page/trading/place-order/stop-limit-trade-form";
+import { TerminalInfoContext } from "pages/trades/binance-trade-page/trading/terminal-info.context";
 import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
-import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
-import { TradingPriceContext } from "pages/trades/binance-trade-page/trading/trading-price.context";
-import { getSymbol } from "pages/trades/binance-trade-page/trading/trading.helpers";
+import { getSymbol } from "pages/trades/binance-trade-page/trading/terminal.helpers";
 import {
   OrderSide,
   OrderType
-} from "pages/trades/binance-trade-page/trading/trading.types";
+} from "pages/trades/binance-trade-page/trading/terminal.types";
+import { TradingPriceContext } from "pages/trades/binance-trade-page/trading/trading-price.context";
 import React, { useCallback, useContext, useState } from "react";
 
 import { LimitTradeForm } from "./limit-trade-form";
 import { MarketTradeForm } from "./market-trade-form";
-import { getBalance, IPlaceOrderFormValues } from "./place-order.helpers";
+import {
+  getBalance,
+  getBalancesLoaderData,
+  IPlaceOrderFormValues
+} from "./place-order.helpers";
 import styles from "./place-order.module.scss";
 
 const _PlaceOrder: React.FC = () => {
@@ -32,11 +34,12 @@ const _PlaceOrder: React.FC = () => {
   const { price } = useContext(TradingPriceContext);
 
   const {
+    terminalType,
     authData,
     exchangeInfo,
     accountInfo,
     symbol: { baseAsset, quoteAsset }
-  } = useContext(TradingInfoContext);
+  } = useContext(TerminalInfoContext);
 
   const [side, setSide] = useState<OrderSide>("BUY");
   const { tab, setTab } = useTab<OrderType>("LIMIT");
@@ -55,19 +58,23 @@ const _PlaceOrder: React.FC = () => {
         authData
       });
     },
-    [authData, baseAsset, quoteAsset, side, tab]
+    [sendRequest, tradeRequest, authData, baseAsset, quoteAsset, side, tab]
   );
 
-  const walletAsset = side === "BUY" ? quoteAsset : baseAsset;
+  const walletAsset =
+    side === "BUY" || terminalType === "futures" ? quoteAsset : baseAsset;
   const balance = accountInfo
     ? getBalance(accountInfo.balances, walletAsset)
-    : undefined;
+    : 0;
+  const balances = accountInfo
+    ? accountInfo.balances
+    : getBalancesLoaderData(quoteAsset);
 
   return (
-    <DefaultBlock size={SIZES.SMALL} roundedBorder={false} bordered>
+    <TerminalDefaultBlock>
       <Row>
         <DoubleButton
-          size={GV_BTN_SIZE.SMALL}
+          size={"small"}
           first={{
             selected: side === "BUY",
             enable: side !== "BUY",
@@ -90,61 +97,53 @@ const _PlaceOrder: React.FC = () => {
           <GVTab value={"STOP_LOSS_LIMIT"} label={"STOP LIMIT"} />
         </GVTabs>
       </Row>
-      {accountInfo && (
-        <Row>
-          <RowItem small>
-            <Center className={styles["place-order__wallet-icon"]}>
-              <WalletIcon />
-            </Center>
-          </RowItem>
-          <RowItem>
-            <MutedText>
-              {balance} {walletAsset}
-            </MutedText>
-          </RowItem>
-        </Row>
-      )}
-      {exchangeInfo && accountInfo && (
+      <Row>
+        <RowItem size={"small"}>
+          <Center className={styles["place-order__wallet-icon"]}>
+            <WalletIcon />
+          </Center>
+        </RowItem>
+        <RowItem>
+          <Text muted>
+            {balance} {walletAsset}
+          </Text>
+        </RowItem>
+      </Row>
+      {exchangeInfo && (
         <Row>
           {tab === "LIMIT" && (
             <LimitTradeForm
               status={status}
               exchangeInfo={exchangeInfo}
-              accountInfo={accountInfo}
+              balances={balances}
               outerPrice={+price}
               onSubmit={handleSubmit}
-              direction={side}
-              baseAsset={baseAsset}
-              quoteAsset={quoteAsset}
+              side={side}
             />
           )}
           {tab === "MARKET" && (
             <MarketTradeForm
               status={status}
               exchangeInfo={exchangeInfo}
-              accountInfo={accountInfo}
+              balances={balances}
               outerPrice={+price}
               onSubmit={handleSubmit}
-              direction={side}
-              baseAsset={baseAsset}
-              quoteAsset={quoteAsset}
+              side={side}
             />
           )}
           {tab === "STOP_LOSS_LIMIT" && (
             <StopLimitTradeForm
               status={status}
               exchangeInfo={exchangeInfo}
-              accountInfo={accountInfo}
+              balances={balances}
               outerPrice={+price}
               onSubmit={handleSubmit}
-              direction={side}
-              baseAsset={baseAsset}
-              quoteAsset={quoteAsset}
+              side={side}
             />
           )}
         </Row>
       )}
-    </DefaultBlock>
+    </TerminalDefaultBlock>
   );
 };
 

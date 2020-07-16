@@ -1,22 +1,15 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import React from "react";
+import { Sizeable } from "utils/types";
 
 import styles from "./style.module.scss";
 
-export enum GV_BTN_SIZE {
-  SMALL = "SMALL",
-  LARGE = "LARGE",
-  BIG = "BIG",
-  MIDDLE = "MIDDLE"
-}
-
-export interface GVButtonProps {
+export interface GVButtonProps extends Sizeable {
   isSuccessful?: boolean;
   isPending?: boolean;
   testId?: string;
   bold?: boolean;
   wide?: boolean;
-  size?: GV_BTN_SIZE;
   id?: string;
   title?: string;
   variant?: "text" | "outlined" | "contained";
@@ -24,6 +17,7 @@ export interface GVButtonProps {
   type?: "button" | "submit";
   className?: string;
   disabled?: boolean;
+  successSymbol?: boolean;
   onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   name?: string;
   noPadding?: boolean;
@@ -35,27 +29,29 @@ const GVButton: React.FC<GVButtonProps> = ({
   testId,
   bold,
   wide,
-  size = GV_BTN_SIZE.MIDDLE,
+  size = "middle",
   id,
   className,
   title,
   variant = "contained",
   color = "primary",
   type = "button",
+  successSymbol = true,
   disabled,
   onClick,
   children,
   name,
   noPadding
 }) => {
-  const classname = classNames(styles["gv-btn"], className, {
+  const classname = clsx(styles["gv-btn"], className, {
     [styles["gv-btn--successful"]]: isSuccessful,
     [styles["gv-btn--pending"]]: isPending,
     [styles["gv-btn--bold"]]: bold,
     [styles["gv-btn--wide"]]: wide,
-    [styles["gv-btn--large"]]: size === GV_BTN_SIZE.LARGE,
-    [styles["gv-btn--big"]]: size === GV_BTN_SIZE.BIG,
-    [styles["gv-btn--small"]]: size === GV_BTN_SIZE.SMALL,
+    [styles["gv-btn--large"]]: size === "large",
+    [styles["gv-btn--xlarge"]]: size === "xlarge",
+    [styles["gv-btn--small"]]: size === "small",
+    [styles["gv-btn--xsmall"]]: size === "xsmall",
     [styles["gv-btn--danger"]]: color === "danger",
     [styles["gv-btn--primary"]]: color === "primary",
     [styles["gv-btn--secondary"]]: color === "secondary",
@@ -77,19 +73,21 @@ const GVButton: React.FC<GVButtonProps> = ({
       name={name}
     >
       <span
-        className={classNames(styles["gv-btn__label"], {
+        className={clsx(styles["gv-btn__label"], {
           [styles["gv-btn__label--success"]]: isSuccessful
         })}
       >
         {children}
       </span>
-      <span
-        className={classNames(styles["gv-btn__success-symbol"], {
-          [styles["gv-btn__success-symbol--success"]]: isSuccessful
-        })}
-      >
-        ✔
-      </span>
+      {successSymbol && (
+        <span
+          className={clsx(styles["gv-btn__success-symbol"], {
+            [styles["gv-btn__success-symbol--success"]]: isSuccessful
+          })}
+        >
+          ✔
+        </span>
+      )}
     </button>
   );
 };

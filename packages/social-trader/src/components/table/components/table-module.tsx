@@ -5,7 +5,7 @@ import {
 import { updateFilter } from "components/table/helpers/filtering.helpers";
 import { IDataModel } from "constants/constants";
 import useIsOpen from "hooks/is-open.hook";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 
 import { composeRequestFilters } from "../services/table.service";
 import {
@@ -104,11 +104,20 @@ const _TableModule: React.FC<ITableModuleProps> = props => {
     [data]
   );
 
-  const newPaging = {
-    ...paging,
-    totalItems: data.total ? data.total : 0,
-    totalPages: calculateTotalPages(data.total, paging && paging.itemsOnPage)
-  };
+  const newPaging = useMemo(
+    () => ({
+      ...paging,
+      totalItems: data.total ? data.total : 0,
+      totalPages: calculateTotalPages(data.total, paging && paging.itemsOnPage)
+    }),
+    [
+      paging?.itemsOnPage,
+      paging?.currentPage,
+      paging?.totalItems,
+      paging?.totalPages,
+      data.total
+    ]
+  );
   return (
     <Table
       {...props}

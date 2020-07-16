@@ -1,4 +1,4 @@
-import GVButton, { GV_BTN_SIZE } from "components/gv-button";
+import GVButton from "components/gv-button";
 import { BrokerTradeServerType } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
 import FollowModuleContainer from "modules/follow-module/follow-module-container";
@@ -18,7 +18,7 @@ const _FollowButton: React.FC<Props> = ({
   currency
 }) => {
   const [t] = useTranslation();
-  const label = t("program-details-page.description.follow-trade");
+  const label = t("asset-details:description.follow-trade");
   const [isOpenFollow, setIsOpenFollow, setIsCloseFollow] = useIsOpen();
   const dispatchDescription = useCallback(() => {
     onApply && onApply();
@@ -28,10 +28,10 @@ const _FollowButton: React.FC<Props> = ({
       <GVButton
         className={label}
         disabled={!canFollow}
-        size={GV_BTN_SIZE.BIG}
+        size={"xlarge"}
         onClick={setIsOpenFollow}
       >
-        {t("program-details-page.description.follow-trade")}
+        {t("asset-details:description.follow-trade")}
       </GVButton>
       <FollowModuleContainer
         leverage={leverage}

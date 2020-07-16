@@ -31,7 +31,17 @@ Page.getInitialProps = async ctx => {
     brokerDetails: { type },
     tradingAccountInfo: { currency }
   } = await fetchFollowDescriptionCtx(id as string, ctx);
-  return { id, broker: type, accountCurrency: currency };
+  return {
+    namespacesRequired: [
+      "form-fields",
+      "asset-settings",
+      "create-account",
+      "convert-page"
+    ],
+    id,
+    broker: type,
+    accountCurrency: currency
+  };
 };
 
 interface Props {

@@ -1,4 +1,4 @@
-@import "~shared/styles/_colors";
+@import "styles/_colors";
 @import "../../styles/mixins";
 @import "../../styles/grid";
 
@@ -6,7 +6,7 @@
   @include container();
   @include transition(height);
   position: fixed;
-  top: 64px;
+  top: 60px;
   left: 0;
   height: 0;
   width: 100%;
@@ -16,17 +16,17 @@
   overflow: auto;
 
   @include media-breakpoint-tablet() {
-    top: 130px;
+    top: 120px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     align-content: center;
   }
 
   &--open {
-    height: calc(100% - 64px);
+    height: calc(100% - 60px);
 
     @include media-breakpoint-tablet() {
-      height: calc(100% - 130px);
+      height: calc(100% - 120px);
     }
   }
 

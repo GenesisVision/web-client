@@ -6,7 +6,9 @@ import { fundDescriptionSelector } from "./reducers/description.reducer";
 
 const _FundDetailsPage: React.FC = () => {
   const description = useSelector(fundDescriptionSelector);
-  return <FundDetailsContainer data={description!} />;
+
+  if (!description) return null;
+  return <FundDetailsContainer data={description} />;
 };
 
 const FundDetailsPage = React.memo(_FundDetailsPage);

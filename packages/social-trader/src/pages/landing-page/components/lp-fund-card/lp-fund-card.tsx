@@ -2,8 +2,8 @@ import { FUND_ASSET_TYPE } from "components/fund-asset/fund-asset";
 import FundAssetContainer, {
   FundAssetType
 } from "components/fund-asset/fund-asset-container";
+import { LabeledValue } from "components/labeled-value/labeled-value";
 import { useToLink } from "components/link/link.helper";
-import StatisticItem from "components/statistic-item/statistic-item";
 import { Currency, FundAssetPercent, FundDetailsListItem } from "gv-api-web";
 import LPTableCard, {
   LPTableCardTable,
@@ -30,31 +30,31 @@ export const LPFundCardTable: React.FC<ILPFundCardTableProps> = ({
     <>
       <LPTableCardTable wrap>
         <LPTableCardTableColumn>
-          <StatisticItem label={t("funds-page.funds-header.balance")}>
+          <LabeledValue label={t("header-fields.balance")}>
             <NumberFormat
               value={formatCurrencyValue(amount, currency)}
               suffix={` ${currency}`}
               displayType="text"
             />
-          </StatisticItem>
+          </LabeledValue>
         </LPTableCardTableColumn>
         <LPTableCardTableColumn>
-          <StatisticItem label={t("funds-page.funds-header.investors")}>
+          <LabeledValue label={t("header-fields.investors")}>
             <NumberFormat
               value={investorsCount}
               displayType="text"
               decimalScale={0}
             />
-          </StatisticItem>
+          </LabeledValue>
         </LPTableCardTableColumn>
         <LPTableCardTableColumn>
-          <StatisticItem label={t("funds-page.funds-header.drawdown")}>
+          <LabeledValue label={t("header-fields.drawdown")}>
             <NumberFormat
               value={formatValue(drawdown, 2)}
               displayType="text"
               suffix="%"
             />
-          </StatisticItem>
+          </LabeledValue>
         </LPTableCardTableColumn>
       </LPTableCardTable>
       {topFundAssets && (

@@ -1,3 +1,5 @@
+import { ITerminalMethods } from "pages/trades/binance-trade-page/trading/terminal.types";
+
 import {
   cancelAllOrders,
   cancelOrder,
@@ -7,19 +9,19 @@ import {
   getExchangeInfo,
   getKlines,
   getOpenOrders,
+  getServerTime,
   getTickers,
   getTrades,
   getUserStreamKey,
   tradeRequest
-} from "pages/trades/binance-trade-page/services/binance-http.service";
+} from "./binance-spot-http.service";
 import {
   depthSocket,
   getUserStreamSocket,
   klineSocket,
   marketTicketsSocket,
   tradeSocket
-} from "pages/trades/binance-trade-page/services/binance-ws.service";
-import { ITerminalMethods } from "pages/trades/binance-trade-page/trading/trading.types";
+} from "./binance-spot-ws.service";
 
 export const BinanceSpotTerminalMethods: ITerminalMethods = {
   getExchangeInfo,
@@ -29,6 +31,7 @@ export const BinanceSpotTerminalMethods: ITerminalMethods = {
   getAccountInformation,
   getTrades,
   getKlines,
+  getServerTime,
   klineSocket,
   getTickers,
   getDepth,

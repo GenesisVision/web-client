@@ -1,11 +1,11 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import DetailsBlock, {
   DETAILS_BLOCK_TYPE
 } from "components/details/details-block";
-import GVButton, { GV_BTN_SIZE } from "components/gv-button";
+import GVButton from "components/gv-button";
 import Link, { ToType } from "components/link/link";
-import { MutedText } from "components/muted-text/muted-text";
 import { Row } from "components/row/row";
+import { Text } from "components/text/text";
 import DashboardHorizontalWindowList from "pages/dashboard/components/dashboard-block/dashboard-horizontal-window-list";
 import { InvestAssetType } from "pages/invest/invest.types";
 import React from "react";
@@ -36,13 +36,13 @@ export const AssetBlock: React.FC<Props> = ({
     <DetailsBlock
       wide
       type={blockType}
-      className={classNames(styles["asset-block"], {
+      className={clsx(styles["asset-block"], {
         [styles["asset-block--left"]]: left,
         [styles["asset-block--side"]]: side
       })}
     >
       <div
-        className={classNames(styles["asset-block__description-block"], {
+        className={clsx(styles["asset-block__description-block"], {
           [styles["asset-block__description-block--side"]]: side
         })}
       >
@@ -50,16 +50,16 @@ export const AssetBlock: React.FC<Props> = ({
           <h2>{title}</h2>
         </Row>
         <Row
-          className={classNames(styles["asset-block__description"], {
+          className={clsx(styles["asset-block__description"], {
             [styles["asset-block__description--side"]]: side
           })}
         >
-          <MutedText noWrap={false}>{description}</MutedText>
+          <Text muted>{description}</Text>
         </Row>
-        <Row xlarge>
+        <Row size={"xlarge"}>
           <Link to={investLink}>
-            <GVButton size={GV_BTN_SIZE.LARGE} color="primary">
-              {buttonLabel || t("invest.invest-button")}
+            <GVButton size={"large"} color="primary">
+              {buttonLabel || t("invest:invest-button")}
             </GVButton>
           </Link>
         </Row>

@@ -1,9 +1,9 @@
 import FormError from "components/form/form-error/form-error";
 import { GVHookFormField } from "components/gv-hook-form-field";
-import { MutedText } from "components/muted-text/muted-text";
 import { Row } from "components/row/row";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
 import { SubmitButton } from "components/submit-button/submit-button";
+import { Text } from "components/text/text";
 import {
   CAPTCHA_STATUS,
   CaptchaStatusContext
@@ -33,7 +33,7 @@ const _RecoveryCodeForm: React.FC<Props> = ({
     validationSchema: object().shape({
       [FIELDS.code]: string()
         .trim()
-        .required(t("auth.login.recovery.validation.recovery-is-required"))
+        .required(t("validations.recovery-is-required"))
     }),
     mode: "onChange"
   });
@@ -48,9 +48,9 @@ const _RecoveryCodeForm: React.FC<Props> = ({
 
   return (
     <HookForm form={form} onSubmit={handleSubmit}>
-      <h3>{t("auth.login.recovery.title")}</h3>
+      <h3>{t("auth:login.recovery.title")}</h3>
       <Row>
-        <MutedText noWrap={false}>{t("auth.login.recovery.text")}</MutedText>
+        <Text muted>{t("auth:login.recovery.text")}</Text>
       </Row>
       <Row>
         <GVHookFormField
@@ -72,7 +72,7 @@ const _RecoveryCodeForm: React.FC<Props> = ({
           isSuccessful={requestStatus === CAPTCHA_STATUS.SUCCESS}
           disabled={requestStatus === CAPTCHA_STATUS.PENDING}
         >
-          {t("auth.login.recovery.continue")}
+          {t("auth:login.recovery.continue")}
         </SubmitButton>
       </Row>
     </HookForm>

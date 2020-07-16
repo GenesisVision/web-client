@@ -1,6 +1,6 @@
-@import "~shared/styles/_sizes";
-@import "~shared/styles/_colors";
-@import "~shared/styles/_constants";
+@import "styles/_sizes";
+@import "styles/_colors";
+@import "styles/_constants";
 
 .gv-datepicker {
   display: inline-flex;
@@ -15,6 +15,12 @@
   .react-datepicker__input-container {
     display: flex;
     width: 100%;
+  }
+
+  & input[type="date"] {
+    &::-webkit-calendar-picker-indicator {
+      margin: 0;
+    }
   }
 }
 

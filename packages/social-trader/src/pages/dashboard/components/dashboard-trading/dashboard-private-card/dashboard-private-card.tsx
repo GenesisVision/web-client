@@ -1,5 +1,5 @@
+import { LabeledValue } from "components/labeled-value/labeled-value";
 import { useToLink } from "components/link/link.helper";
-import StatisticItem from "components/statistic-item/statistic-item";
 import TableCard, {
   TableCardRow,
   TableCardTable,
@@ -7,6 +7,7 @@ import TableCard, {
 } from "components/table/components/table-card/table-card";
 import { IRenderActionsArgs } from "components/table/components/table-card/table-card-actions";
 import TagProgramContainer from "components/tags/tag-program-container/tag-program-container";
+import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import {
   DECIMAL_SCALE_BIG_VALUE,
   DECIMAL_SCALE_SMALL_VALUE
@@ -35,7 +36,7 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
   return (
     <TableCard
       subTitle={t(
-        `dashboard-page.trading.asset-types.${asset.accountInfo.type}`
+        `dashboard-page:trading.asset-types.${asset.accountInfo.type}`
       )}
       detailsUrl={detailsLink}
       assetId={asset.id}
@@ -49,7 +50,16 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
       <TableCardTable>
         {asset.accountInfo.currency && (
           <TableCardTableColumn>
-            <StatisticItem label={t("programs-page.programs-header.equity")}>
+            <LabeledValue
+              label={
+                <TooltipLabel
+                  tooltipContent={t(
+                    "dashboard-page:tooltips.private-card.equity"
+                  )}
+                  labelText={t("header-fields.equity")}
+                />
+              }
+            >
               <NumberFormat
                 value={formatValueDifferentDecimalScale(
                   asset.accountInfo.balance,
@@ -59,11 +69,20 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
                 suffix={` ${asset.accountInfo.currency}`}
                 displayType="text"
               />
-            </StatisticItem>
+            </LabeledValue>
           </TableCardTableColumn>
         )}
         <TableCardTableColumn>
-          <StatisticItem label={t("dashboard-page.trading.leverage")}>
+          <LabeledValue
+            label={
+              <TooltipLabel
+                tooltipContent={t(
+                  "dashboard-page:tooltips.private-card.leverage"
+                )}
+                labelText={t("dashboard-page:trading.leverage")}
+              />
+            }
+          >
             <NumberFormat
               value={formatValueDifferentDecimalScale(
                 asset.accountInfo.leverage,
@@ -72,14 +91,21 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
               )}
               displayType="text"
             />
-          </StatisticItem>
+          </LabeledValue>
         </TableCardTableColumn>
         <TableCardTableColumn>
-          <StatisticItem label={t("dashboard-page.trading.age")}>
+          <LabeledValue
+            label={
+              <TooltipLabel
+                tooltipContent={t("dashboard-page:tooltips.private-card.age")}
+                labelText={t("dashboard-page:trading.age")}
+              />
+            }
+          >
             {convertDateToShortFormat(
               distanceDate(asset.accountInfo.creationDate)
             )}
-          </StatisticItem>
+          </LabeledValue>
         </TableCardTableColumn>
       </TableCardTable>
       <TableCardRow>

@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
 import { Center } from "components/center/center";
 import GVButton from "components/gv-button";
@@ -29,37 +29,43 @@ import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
+import { Clickable } from "utils/types";
 
 import styles from "./profile-widget.module.scss";
 
-const ProfileMenuItem: React.FC<{
+interface IProfileMenuItemProps extends Clickable {
   to?: ToType | string;
-  onClick: VoidFunction;
   label: any;
   Icon: React.ComponentType;
-}> = React.memo(({ Icon, to, onClick, label }) => {
-  const renderLabel = () => (
-    <Row>
-      <RowItem>
-        <Center className={styles["profile-menu__item-icon"]}>
-          <Icon />
-        </Center>
-      </RowItem>
-      <RowItem className={styles["profile-menu__item-label"]}>{label}</RowItem>
-    </Row>
-  );
-  const renderButton = () =>
-    to ? (
-      <Link to={to} onClick={onClick}>
-        {renderLabel()}
-      </Link>
-    ) : (
-      <GVButton variant="text" color={"danger"} noPadding onClick={onClick}>
-        {renderLabel()}
-      </GVButton>
+}
+
+const ProfileMenuItem: React.FC<IProfileMenuItemProps> = React.memo(
+  ({ Icon, to, onClick, label }) => {
+    const renderLabel = () => (
+      <Row>
+        <RowItem>
+          <Center className={styles["profile-menu__item-icon"]}>
+            <Icon />
+          </Center>
+        </RowItem>
+        <RowItem className={styles["profile-menu__item-label"]}>
+          {label}
+        </RowItem>
+      </Row>
     );
-  return <Row className={styles["profile-menu__item"]}>{renderButton()}</Row>;
-});
+    const renderButton = () =>
+      to ? (
+        <Link to={to} onClick={onClick}>
+          {renderLabel()}
+        </Link>
+      ) : (
+        <GVButton variant="text" color={"danger"} noPadding onClick={onClick}>
+          {renderLabel()}
+        </GVButton>
+      );
+    return <Row className={styles["profile-menu__item"]}>{renderButton()}</Row>;
+  }
+);
 
 const _ProfileWidget: React.FC<Props> = ({ profileHeader, className }) => {
   const dispatch = useDispatch();
@@ -68,9 +74,9 @@ const _ProfileWidget: React.FC<Props> = ({ profileHeader, className }) => {
   const [t] = useTranslation();
   const { anchor, setAnchor, clearAnchor } = useAnchor();
   return (
-    <div className={classNames(styles["profile-widget"], className)}>
+    <div className={clsx(styles["profile-widget"], className)}>
       <Center className={styles["profile-widget__content"]} onClick={setAnchor}>
-        <RowItem small>
+        <RowItem size={"small"}>
           <ProfileAvatar
             url={profileHeader.logoUrl}
             alt={profileHeader.email}
@@ -112,7 +118,7 @@ const _ProfileWidget: React.FC<Props> = ({ profileHeader, className }) => {
               Icon={ReferrerIcon}
               to={linkCreator(REFERRAL_PROGRAM_ROUTE)}
               onClick={clearAnchor}
-              label={t("profile-page.tabs.referral-program")}
+              label={t("profile-widget.referral-program")}
             />
             <div className={styles["profile-menu__separator"]} />
             <ProfileMenuItem

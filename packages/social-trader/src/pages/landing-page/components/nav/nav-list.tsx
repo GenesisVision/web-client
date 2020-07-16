@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import NavItem from "pages/landing-page/components/nav/nav-item";
 import { TNavHeader } from "pages/landing-page/static-data/nav-links";
 import React from "react";
@@ -14,7 +14,7 @@ const _NavList: React.FC<Props> = ({
 }) => (
   <nav className={className}>
     <ul
-      className={classNames(styles["nav-list"], {
+      className={clsx(styles["nav-list"], {
         [styles["nav-list--is-mobile"]]: isMobile
       })}
     >

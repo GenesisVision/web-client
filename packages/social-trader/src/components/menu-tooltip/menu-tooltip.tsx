@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
   ORIENTATION_POPOVER,
@@ -67,7 +67,7 @@ const MenuTooltip: React.FC<Props> = ({
         noAbsolute
         noPadding
         anchorEl={anchor}
-        className={classNames(styles["menu-tooltip__popover"], className)}
+        className={clsx(styles["menu-tooltip__popover"], className)}
         vertical={VERTICAL_POPOVER_POS.BOTTOM}
         horizontal={HORIZONTAL_POPOVER_POS.CENTER}
         orientation={ORIENTATION_POPOVER.CENTER}

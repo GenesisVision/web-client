@@ -1,5 +1,5 @@
 import { Center } from "components/center/center";
-import GVButton, { GV_BTN_SIZE } from "components/gv-button";
+import GVButton from "components/gv-button";
 import { PopoverContentCardBlock } from "components/popover/popover-card.block";
 import { PopoverContent } from "components/popover/popover-content";
 import { RowItem } from "components/row-item/row-item";
@@ -8,6 +8,7 @@ import { FilterTitle } from "components/table/components/filtering/filter-title"
 import dayjs from "dayjs";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { Clickable } from "utils/types";
 
 import DateRangeFilterValues from "./date-range-filter-values";
 import {
@@ -23,26 +24,29 @@ const subtract: { [keys: string]: "month" | "week" } = {
   [DATA_RANGE_FILTER_TYPES.LAST_WEEK]: "week"
 };
 
-const DateRangeItem: React.FC<{
-  onClick: VoidFunction;
+interface IDateRangeItemProps extends Clickable {
   disabled: boolean;
   label: string;
-}> = React.memo(({ onClick, disabled, label }) => {
-  return (
-    <Row>
-      <GVButton
-        className={styles["date-range-filter__type-btn"]}
-        noPadding
-        variant="text"
-        color="secondary"
-        onClick={onClick}
-        disabled={disabled}
-      >
-        {label}
-      </GVButton>
-    </Row>
-  );
-});
+}
+
+const DateRangeItem: React.FC<IDateRangeItemProps> = React.memo(
+  ({ onClick, disabled, label }) => {
+    return (
+      <Row>
+        <GVButton
+          className={styles["date-range-filter__type-btn"]}
+          noPadding
+          variant="text"
+          color="secondary"
+          onClick={onClick}
+          disabled={disabled}
+        >
+          {label}
+        </GVButton>
+      </Row>
+    );
+  }
+);
 
 class _DateRangeFilterPopover extends React.PureComponent<Props, State> {
   state = {
@@ -135,7 +139,7 @@ class _DateRangeFilterPopover extends React.PureComponent<Props, State> {
           <Row>
             <RowItem>
               <GVButton
-                size={GV_BTN_SIZE.BIG}
+                size={"xlarge"}
                 noPadding
                 variant="text"
                 onClick={this.handleSubmit}
@@ -145,7 +149,7 @@ class _DateRangeFilterPopover extends React.PureComponent<Props, State> {
             </RowItem>
             <RowItem>
               <GVButton
-                size={GV_BTN_SIZE.BIG}
+                size={"xlarge"}
                 noPadding
                 variant="text"
                 color="secondary"

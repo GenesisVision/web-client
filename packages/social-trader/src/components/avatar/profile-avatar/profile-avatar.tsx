@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import UserIcon from "media/user-avatar.svg";
 import * as React from "react";
 
@@ -14,7 +14,7 @@ const _ProfileAvatar: React.FC<Props> = ({
 }) => {
   return (
     <div
-      className={classNames(styles["profile-avatar"], className, {
+      className={clsx(styles["profile-avatar"], className, {
         [styles["profile-avatar--middle"]]: middle,
         [styles["profile-avatar--big"]]: big
       })}

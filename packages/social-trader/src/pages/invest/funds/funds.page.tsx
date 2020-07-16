@@ -25,8 +25,8 @@ interface Props {
 
 const FundsPage: React.FC<Props> = ({ data, outerView }) => {
   const { t } = useTranslation();
-  const title = t("funds-page.title");
-  const description = t("funds-page.description");
+  const title = t("funds-page:title");
+  const description = t("funds-page:description");
   return (
     <Page
       description={description}
@@ -56,7 +56,7 @@ const FundsPage: React.FC<Props> = ({ data, outerView }) => {
         <FundsTableSSR
           data={data}
           outerView={outerView}
-          title={t("funds-page.all-funds")}
+          title={t("funds-page:all-funds")}
           showSwitchView
         />
       </DefaultTableBlock>

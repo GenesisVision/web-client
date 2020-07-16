@@ -31,7 +31,7 @@ const _ReferralHistoryTable: React.FC = () => {
       exportButtonToolbarRender={(filtering: any) => (
         <DownloadReferralHistoryButton dateRange={filtering!.dateRange} />
       )}
-      title={t("profile-page.referral-program.referral-history.title")}
+      title={t("profile-page:referral-program.referral-history.title")}
       getItems={getHistoryTable}
       filtering={REFERRAL_HISTORY_FILTERING}
       defaultFilters={REFERRAL_HISTORY_DEFAULT_FILTERS}
@@ -47,7 +47,7 @@ const _ReferralHistoryTable: React.FC = () => {
       paging={DEFAULT_PAGING}
       renderHeader={column =>
         t(
-          `profile-page.referral-program.referral-history.header.${column.name}`
+          `profile-page:referral-program.referral-history.header.${column.name}`
         )
       }
       renderBodyRow={(reward: RewardDetails) => (

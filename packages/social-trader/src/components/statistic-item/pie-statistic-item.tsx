@@ -1,8 +1,7 @@
 import { Center } from "components/center/center";
+import { LabeledValue } from "components/labeled-value/labeled-value";
 import PieContainer from "components/pie-container/pie-container";
 import { RowItem } from "components/row-item/row-item";
-import { StatisticItemContainerBlock } from "components/statistic-item/statistic-item-container.block";
-import StatisticItemInner from "components/statistic-item/statistic-item-inner";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import withLoader from "decorators/with-loader";
 import React from "react";
@@ -34,7 +33,7 @@ const _PieStatisticItem: React.FC<Props> = ({
     value
   );
   return (
-    <StatisticItemContainerBlock>
+    <RowItem size={"xlarge"}>
       <Center>
         <RowItem>
           <PieContainer
@@ -43,11 +42,13 @@ const _PieStatisticItem: React.FC<Props> = ({
             color={color}
           />
         </RowItem>
-        <StatisticItemInner accent label={renderLabel}>
-          {renderValue}
-        </StatisticItemInner>
+        <RowItem>
+          <LabeledValue weight={"bold"} label={renderLabel}>
+            {renderValue}
+          </LabeledValue>
+        </RowItem>
       </Center>
-    </StatisticItemContainerBlock>
+    </RowItem>
   );
 };
 

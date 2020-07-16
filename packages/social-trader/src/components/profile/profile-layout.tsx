@@ -36,7 +36,7 @@ const ProfileLayout: React.FC<Props> = ({ route, children }) => {
   const [t] = useTranslation();
   const verified = useSelector(kycConfirmedSelector);
   return (
-    <Page showTitle title={t("profile-page.title")}>
+    <Page showTitle title={t("profile-page:title")}>
       <GVTabs value={route}>
         {tabs
           .filter(tab => !tab.hideable || !verified)
@@ -49,14 +49,14 @@ const ProfileLayout: React.FC<Props> = ({ route, children }) => {
                     pathname
                   }}
                 >
-                  {t(`profile-page.tabs.${value}`)}
+                  {t(`profile-page:tabs.${value}`)}
                 </Link>
               }
               value={value}
             />
           ))}
       </GVTabs>
-      <Row onlyOffset large>
+      <Row onlyOffset size={"large"}>
         {children}
       </Row>
     </Page>

@@ -1,10 +1,9 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { Center } from "components/center/center";
 import { DefaultBlock } from "components/default.block/default.block";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import FilterArrowIcon from "components/table/components/filtering/filter-arrow-icon";
-import { SIZES } from "constants/constants";
 import React, { useCallback, useState } from "react";
 
 import styles from "./accordion.module.scss";
@@ -23,15 +22,11 @@ export const Accordion: React.FC<Props> = ({ label, text }) => {
     setIsOpen(false);
   }, []);
   return (
-    <DefaultBlock
-      wide
-      size={SIZES.SMALL}
-      className={classNames(styles["accordion"])}
-    >
+    <DefaultBlock wide size={"small"} className={clsx(styles["accordion"])}>
       <Row onClick={handleClickLabel} className={styles["accordion__label"]}>
-        <RowItem small>
+        <RowItem size={"small"}>
           <Center
-            className={classNames(styles["accordion__icon"], {
+            className={clsx(styles["accordion__icon"], {
               [styles["accordion__icon--open"]]: isOpen
             })}
           >
@@ -41,7 +36,7 @@ export const Accordion: React.FC<Props> = ({ label, text }) => {
         <RowItem>{label}</RowItem>
       </Row>
       {isOpen && (
-        <Row small onClick={handleClickText}>
+        <Row size={"small"} onClick={handleClickText}>
           {text}
         </Row>
       )}

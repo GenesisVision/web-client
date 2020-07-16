@@ -45,17 +45,14 @@ const createFundSettingsValidationSchema = ({
     );
     return object<ICreateFundSettingsFormValues>().shape({
       [CREATE_FUND_FIELDS.depositAmount]: number()
-        .required(t("create-program-page.settings.validation.amount-required"))
+        .required(t("validations.amount-required"))
         .min(
           minDepositInCurText,
-          t("create-program-page.settings.validation.amount-is-zero", {
+          t("validations.amount-is-zero", {
             min: minDepositInCurText
           })
         )
-        .max(
-          available,
-          t("create-program-page.settings.validation.amount-is-large")
-        ),
+        .max(available, t("validations.amount-is-large")),
       [CREATE_FUND_FIELDS.logo]: inputImageShape(t),
       [CREATE_FUND_FIELDS.title]: assetTitleShape(t),
       [CREATE_FUND_FIELDS.description]: assetDescriptionShape(t),
@@ -69,13 +66,13 @@ export const assetsShape = (t: TFunction) => {
   return array()
     .test(
       CREATE_FUND_FIELDS.assets,
-      t("create-fund-page.settings.validation.assets-share"),
+      t("validations.assets-share"),
       (val: FundAssetPart[] = []) => {
         return val.reduce((acc, next) => acc + next.percent, 0) === 100;
       }
     )
-    .required(t("create-fund-page.settings.validation.assets-count"))
-    .min(2, t("create-fund-page.settings.validation.assets-count"));
+    .required(t("validations.assets-count"))
+    .min(2, t("validations.assets-count"));
 };
 
 export default createFundSettingsValidationSchema;

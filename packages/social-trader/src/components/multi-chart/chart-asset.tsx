@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
@@ -13,7 +13,7 @@ const _ChartAsset: React.FC<Prop> = ({ asset, selected, onToggle }) => {
   const { linkCreator } = useToLink();
   return (
     <div
-      className={classNames("multi-chart__asset", {
+      className={clsx("multi-chart__asset", {
         "multi-chart__asset--selected": selected
       })}
       onClick={() => onToggle(asset.id)}

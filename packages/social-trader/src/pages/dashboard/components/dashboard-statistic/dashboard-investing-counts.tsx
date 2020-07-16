@@ -1,4 +1,5 @@
-import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
+import { Row } from "components/row/row";
+import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import DashboardValueItem from "pages/dashboard/components/dashboard-statistic/dashboard-value-item";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -12,20 +13,35 @@ export const DashboardInvestingCounts: React.FC<{
 }> = React.memo(({ balance, currency, programs, funds }) => {
   const [t] = useTranslation();
   return (
-    <StatisticItemList>
+    <Row>
       <DashboardValueItem
-        label={t("dashboard-page.statistic.balance")}
+        label={
+          <TooltipLabel
+            tooltipContent={t("dashboard-page:tooltips.investing.balance")}
+            labelText={t("dashboard-page:statistic.balance")}
+          />
+        }
         value={balance}
         currency={currency}
       />
       <DashboardValueItem
-        label={t("dashboard-page.statistic.programs")}
+        label={
+          <TooltipLabel
+            tooltipContent={t("dashboard-page:tooltips.investing.programs")}
+            labelText={t("dashboard-page:statistic.programs")}
+          />
+        }
         value={programs}
       />
       <DashboardValueItem
-        label={t("dashboard-page.statistic.funds")}
+        label={
+          <TooltipLabel
+            tooltipContent={t("dashboard-page:tooltips.investing.funds")}
+            labelText={t("dashboard-page:statistic.funds")}
+          />
+        }
         value={funds}
       />
-    </StatisticItemList>
+    </Row>
   );
 });

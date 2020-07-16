@@ -1,5 +1,6 @@
-import { MutedText } from "components/muted-text/muted-text";
 import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
+import { Text } from "components/text/text";
+import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import { useAccountCurrency } from "hooks/account-currency.hook";
 import { CREATE_ACCOUNT_PAGE_ROUTE } from "pages/create-account/create-account.constants";
 import { CREATE_FUND_PAGE_ROUTE } from "pages/create-fund/create-fund.constants";
@@ -25,18 +26,30 @@ const _DashboardTradingStatistic: React.FC<Props> = ({
       tablet={tablet}
       EmptyBlock={DashboardTradingEmpty}
       currency={currency}
-      label={t("dashboard-page.statistic.trading")}
+      label={t("dashboard-page:statistic.trading")}
       request={fetchTradingTotalStatistic}
       all={TRADING_ROUTE}
       renderValues={({ equity, aum }: TDashboardTradingStatistic) => (
         <StatisticItemList>
           <DashboardValueItem
-            label={t("dashboard-page.statistic.equity")}
+            label={
+              <TooltipLabel
+                tooltipContent={t(
+                  "dashboard-page:tooltips.trading.your-equity"
+                )}
+                labelText={t("dashboard-page:statistic.equity")}
+              />
+            }
             value={equity}
             currency={currency}
           />
           <DashboardValueItem
-            label={t("dashboard-page.statistic.AUM")}
+            label={
+              <TooltipLabel
+                tooltipContent={t("dashboard-page:tooltips.trading.aum")}
+                labelText={t("dashboard-page:statistic.AUM")}
+              />
+            }
             value={aum}
             currency={currency}
           />
@@ -53,27 +66,27 @@ const DashboardTradingEmpty: React.FC = React.memo(() => {
       leftField={{
         link: CREATE_ACCOUNT_PAGE_ROUTE,
         linkLabel: t(
-          "dashboard-page.statistic.get-started.trading.left-field.button"
+          "dashboard-page:statistic.get-started.trading.left-field.button"
         ),
         text: (
           <>
-            {t("dashboard-page.statistic.get-started.trading.left-field.text")}{" "}
-            <MutedText>
+            {t("dashboard-page:statistic.get-started.trading.left-field.text")}{" "}
+            <Text muted>
               {t(
-                "dashboard-page.statistic.get-started.trading.left-field.text-2"
+                "dashboard-page:statistic.get-started.trading.left-field.text-2"
               )}
-            </MutedText>
+            </Text>
           </>
         )
       }}
       rightField={{
         link: CREATE_FUND_PAGE_ROUTE,
         linkLabel: t(
-          "dashboard-page.statistic.get-started.trading.right-field.button"
+          "dashboard-page:statistic.get-started.trading.right-field.button"
         ),
         text: (
           <>
-            {t("dashboard-page.statistic.get-started.trading.right-field.text")}
+            {t("dashboard-page:statistic.get-started.trading.right-field.text")}
           </>
         )
       }}

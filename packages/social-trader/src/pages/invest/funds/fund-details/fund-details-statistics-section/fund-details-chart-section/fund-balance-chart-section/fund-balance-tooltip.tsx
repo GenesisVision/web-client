@@ -1,6 +1,8 @@
 import ChartTooltip from "components/chart/chart-tooltip/chart-tooltip";
 import styles from "components/details/details-statistic-section/details-chart-section/details-chart-section.module.scss";
-import StatisticItem from "components/statistic-item/statistic-item";
+import { LabeledValue } from "components/labeled-value/labeled-value";
+import { Row } from "components/row/row";
+import { Text } from "components/text/text";
 import { statisticCurrencySelector } from "pages/invest/funds/fund-details/reducers/statistic-currency.reducer";
 import * as React from "react";
 import { WithTranslation, withTranslation as translate } from "react-i18next";
@@ -23,18 +25,20 @@ const _TooltipBody: React.FC<ITooltipBodyProps & WithTranslation> = ({
   )} ${statisticCurrency}`;
   return (
     <>
-      <StatisticItem
-        label={t("program-details-page.statistics.tooltip.investors-funds")}
-        accent
-      >
-        {formattedInvestorsFunds}
-      </StatisticItem>
-      <StatisticItem
-        label={t("program-details-page.statistics.tooltip.managers-funds")}
-        accent
-      >
-        {formattedManagersFunds}
-      </StatisticItem>
+      <Row>
+        <LabeledValue
+          label={t("asset-details:statistics.tooltip.investors-funds")}
+        >
+          <Text weight={"bold"}>{formattedInvestorsFunds}</Text>
+        </LabeledValue>
+      </Row>
+      <Row>
+        <LabeledValue
+          label={t("asset-details:statistics.tooltip.managers-funds")}
+        >
+          <Text weight={"bold"}>{formattedManagersFunds}</Text>
+        </LabeledValue>
+      </Row>
     </>
   );
 };

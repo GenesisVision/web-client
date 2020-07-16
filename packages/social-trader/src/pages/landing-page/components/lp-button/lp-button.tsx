@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import Link, { ToType } from "components/link/link";
 import React from "react";
 
@@ -29,7 +29,7 @@ const _LPButton: React.FC<LPButtonProps> = ({
   children,
   href
 }) => {
-  const classname = classNames(styles["lp-button"], className, {
+  const classname = clsx(styles["lp-button"], className, {
     [styles["lp-button--pink"]]: color === "pink",
     [styles["lp-button--primary"]]: color === "primary",
     [styles["lp-button--secondary"]]: color === "secondary",

@@ -9,4 +9,8 @@ const Page: NextPage = () => {
   return <PortfolioEventsAllComponent />;
 };
 
+Page.getInitialProps = async () => ({
+  namespacesRequired: ["portfolio-events", "asset-details", "dashboard-page"]
+});
+
 export default compose(withDefaultLayout, withPrivateRoute)(Page);

@@ -26,7 +26,7 @@ const _CloseAssetButton: React.FC<Props> = ({
         onClick={setOpen}
         disabled={!canClose}
       >
-        {t(`asset-settings.buttons.close-${type.toLowerCase()}`)}
+        {t(`asset-settings:buttons.close-${type.toLowerCase()}`)}
       </GVButton>
       <ConfirmCloseAssetContainer
         assetName={assetName}

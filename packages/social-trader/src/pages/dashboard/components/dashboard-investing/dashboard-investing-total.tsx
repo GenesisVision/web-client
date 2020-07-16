@@ -1,17 +1,17 @@
 import { withBlurLoader } from "decorators/with-blur-loader";
+import { useAccountCurrency } from "hooks/account-currency.hook";
 import { DashboardInvestingCounts } from "pages/dashboard/components/dashboard-statistic/dashboard-investing-counts";
 import DashboardStatisticPeriods from "pages/dashboard/components/dashboard-statistic/dashboard-statistic-periods";
 import { hasProfits } from "pages/dashboard/dashboard.helpers";
 import React from "react";
-import { CurrencyEnum } from "utils/types";
 
 import { TDashboardInvestingStatistic } from "../../dashboard.types";
 import styles from "./dashboard-investing.module.scss";
 
 const _DashboardInvestingTotal: React.FC<Props> = ({
-  currency,
   data: { profits, equity, fundsCount, programsCount }
 }) => {
+  const currency = useAccountCurrency();
   return (
     <div className={styles["dashboard-investing__values"]}>
       <DashboardInvestingCounts
@@ -32,7 +32,6 @@ const _DashboardInvestingTotal: React.FC<Props> = ({
 };
 
 interface Props {
-  currency: CurrencyEnum;
   data: TDashboardInvestingStatistic;
 }
 

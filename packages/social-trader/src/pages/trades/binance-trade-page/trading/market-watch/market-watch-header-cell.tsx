@@ -1,11 +1,11 @@
-import classNames from "classnames";
-import { MutedText } from "components/muted-text/muted-text";
+import clsx from "clsx";
 import {
   SORTING_DIRECTION,
   switchDirection
 } from "components/table/helpers/sorting.helpers";
+import { Text } from "components/text/text";
 import { SortingType } from "pages/trades/binance-trade-page/trading/market-watch/market-watch.helpers";
-import { MergedTickerSymbolType } from "pages/trades/binance-trade-page/trading/trading.types";
+import { MergedTickerSymbolType } from "pages/trades/binance-trade-page/trading/terminal.types";
 import React, { useCallback } from "react";
 
 import styles from "./market-watch.module.scss";
@@ -32,18 +32,20 @@ export const MarketWatchHeaderCell: React.FC<Props> = React.memo(
     const isSelected = field === sorting.field;
     return (
       <th
-        className={classNames(styles["market-watch__th"])}
+        className={clsx(styles["market-watch__th"])}
         onClick={handleChangeSorting(field)}
       >
         <span
-          className={classNames({
+          className={clsx({
             [styles["market-watch__th--asc"]]:
               isSelected && sorting.direction === SORTING_DIRECTION.ASC,
             [styles["market-watch__th--desc"]]:
               isSelected && sorting.direction === SORTING_DIRECTION.DESC
           })}
         >
-          <MutedText small> {children}</MutedText>
+          <Text size={"small"} muted>
+            {children}
+          </Text>
         </span>
       </th>
     );

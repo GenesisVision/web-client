@@ -35,7 +35,7 @@ const _SignalingEdit: React.FC<Props> = ({
   });
 
   const renderButton = () => (
-    <Row large>
+    <Row size={"large"}>
       <SubmitButton wide={inDialog} isSuccessful={!editError}>
         {t("buttons.save")}
       </SubmitButton>

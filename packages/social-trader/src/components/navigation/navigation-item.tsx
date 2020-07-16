@@ -1,18 +1,17 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import GVButton from "components/gv-button";
 import HeaderIcon from "components/header/header-icon";
 import Link, { ToType } from "components/link/link";
 import { useRouter } from "next/router";
 import React from "react";
+import { Childrenable, Clickable } from "utils/types";
 
 import { normalizeLinkFrom } from "../link/link.helper";
 import styles from "./navigation.module.scss";
 
-interface INavigationButtonProps extends React.HTMLAttributes<HTMLDivElement> {
+interface INavigationButtonProps extends Clickable, Childrenable {
   icon: JSX.Element;
   title?: string;
-
-  onClick(): void;
 }
 
 const _NavigationButton: React.FC<INavigationButtonProps> = ({
@@ -57,7 +56,7 @@ const _NavigationItem: React.FC<INavigationItemProps> = ({
     <>
       <HeaderIcon>
         <div
-          className={classNames({
+          className={clsx({
             [styles["navigation__icon--medium"]]: !small,
             [styles["navigation__icon--small"]]: small
           })}
@@ -72,7 +71,7 @@ const _NavigationItem: React.FC<INavigationItemProps> = ({
     (!!href && (
       <Link
         to={href}
-        className={classNames(styles["navigation__item"], {
+        className={clsx(styles["navigation__item"], {
           [styles["navigation__item--active"]]: route.startsWith(
             normalizeLinkFrom(href)
           )

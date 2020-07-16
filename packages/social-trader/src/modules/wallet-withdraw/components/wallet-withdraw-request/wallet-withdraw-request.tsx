@@ -16,7 +16,7 @@ const WalletWithdrawRequest: React.FC = () => {
           src={PaperPlan}
           alt="Confirm withdrawal"
         />
-        <p>{t("wallet-withdraw.withdraw-request")}</p>
+        <p>{t("wallet-withdraw:withdraw-request")}</p>
       </div>
     </DialogTop>
   );

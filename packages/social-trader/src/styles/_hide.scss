@@ -1,0 +1,15 @@
+@import "styles/_breakpoint";
+
+@mixin hide-on-landscape-tablet($display: block) {
+  display: none;
+  @include media-breakpoint-landscape-tablet() {
+    display: $display;
+  }
+}
+
+@mixin hide-on-landscape-phone($display: block) {
+  display: none;
+  @include media-breakpoint-landscape-phone() {
+    display: $display;
+  }
+}

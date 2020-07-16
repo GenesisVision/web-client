@@ -52,7 +52,7 @@ const _ManagerFollowHistoryRow: React.FC<IManagerHistoryRowProps> = ({
       tileBlock={<TagProgramContainer tags={asset.tags} />}
       dataBlock={
         <>
-          <ManagerHistoryItem label={t("follows-page.header.equity")}>
+          <ManagerHistoryItem label={t("header-fields.equity")}>
             <NumberFormat
               value={formatCurrencyValue(
                 asset.balance.amount,
@@ -62,23 +62,23 @@ const _ManagerFollowHistoryRow: React.FC<IManagerHistoryRowProps> = ({
               displayType="text"
             />
           </ManagerHistoryItem>
-          <ManagerHistoryItem label={t("follows-page.header.subscribers")}>
+          <ManagerHistoryItem label={t("header-fields.subscribers")}>
             {asset.subscribersCount}
           </ManagerHistoryItem>
-          <ManagerHistoryItem label={t("follows-page.header.age")}>
+          <ManagerHistoryItem label={t("header-fields.age")}>
             {distanceDate(asset.creationDate)}
           </ManagerHistoryItem>
-          <ManagerHistoryItem label={t("follows-page.header.trades")}>
+          <ManagerHistoryItem label={t("header-fields.trades")}>
             {asset.tradesCount}
           </ManagerHistoryItem>
-          <ManagerHistoryItem label={t("follows-page.header.drawdown")}>
+          <ManagerHistoryItem label={t("header-fields.drawdown")}>
             <NumberFormat
               value={formatValue(asset.statistic.drawdown, 2)}
               suffix="%"
               displayType="text"
             />
           </ManagerHistoryItem>
-          <ManagerHistoryItem label={t("follows-page.header.profit")}>
+          <ManagerHistoryItem label={t("header-fields.profit")}>
             <Profitability
               value={formatValue(asset.statistic.profit, 2)}
               prefix={PROFITABILITY_PREFIX.SIGN}

@@ -9,7 +9,7 @@ import NotificationEntity from "./notification-entity";
 
 const _NotificationManagers: React.FC<Props> = ({ t, settings }) => (
   <div>
-    <h3>{t("notifications-page.managers")}</h3>
+    <h3>{t("notifications-page:managers")}</h3>
     <Row wide onlyOffset>
       {settings.map(setting => (
         <NotificationEntity

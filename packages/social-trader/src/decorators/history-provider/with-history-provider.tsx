@@ -26,7 +26,8 @@ const withHistoryProvider = (WrappedComponent: AppType | any) => {
               chunksSelector
             ) as any;
             const timestamp = new Date().valueOf();
-            chunksNodes[0].href = `/_next/static/css/styles.chunk.css?${timestamp}`;
+            if (chunksNodes.length)
+              chunksNodes[0].href = `/_next/static/css/styles.chunk.css?${timestamp}`;
           });
         }
       }

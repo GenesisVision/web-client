@@ -1,7 +1,6 @@
 import chartXAxis from "components/chart/chart-components/chart-xaxis";
 import { BalanceChartElementType } from "components/details/details-statistic-section/details.chart.types";
 import GVColors from "components/gv-styles/gv-colors";
-import Crashable from "decorators/crashable";
 import { CURRENCIES } from "modules/currency-select/currency-select.constants";
 import * as React from "react";
 import {
@@ -72,5 +71,5 @@ interface Props {
   currency: CURRENCIES;
 }
 
-const FundBalanceChart = React.memo(Crashable(_FundBalanceChart));
+const FundBalanceChart = React.memo(_FundBalanceChart);
 export default FundBalanceChart;

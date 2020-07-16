@@ -74,7 +74,7 @@ const _Pager: React.FC<Props> = ({
 };
 
 export const PagerSeparator: React.FC = () => (
-  <RowItem small className={styles["pager__separator"]}>
+  <RowItem size={"small"} className={styles["pager__separator"]}>
     ...
   </RowItem>
 );

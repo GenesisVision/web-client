@@ -1,7 +1,7 @@
 import AssetStatus from "components/asset-status/asset-status";
+import { LabeledValue } from "components/labeled-value/labeled-value";
 import { useToLink } from "components/link/link.helper";
 import ProgramPeriodPie from "components/program-period/program-period-pie/program-period-pie";
-import StatisticItem from "components/statistic-item/statistic-item";
 import TableCard, {
   TableCardTable,
   TableCardTableColumn
@@ -14,6 +14,7 @@ import {
 } from "components/table/components/table-card/table-card-actions";
 import { UpdateRowFuncType } from "components/table/components/table.types";
 import TagProgramContainer from "components/tags/tag-program-container/tag-program-container";
+import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import { ASSET, STATUS } from "constants/constants";
 import { ProgramInvestingDetailsList } from "gv-api-web";
 import { useTranslation } from "i18n";
@@ -43,7 +44,7 @@ const _DashboardProgramCard: React.FC<Props> = ({
   const renderActions = ({ clearAnchor, anchor }: IRenderActionsArgs) => (
     <TableCardActions anchor={anchor} clearAnchor={clearAnchor}>
       <TableCardActionsItem to={linkProps} onClick={clearAnchor}>
-        {t("program-actions.details")}
+        {t("asset-actions.details")}
       </TableCardActionsItem>
       {program.personalDetails && (
         <TableCardFavoriteActionItem
@@ -75,7 +76,14 @@ const _DashboardProgramCard: React.FC<Props> = ({
     >
       <TableCardTable>
         <TableCardTableColumn>
-          <StatisticItem label={t("programs-page.programs-header.profit")}>
+          <LabeledValue
+            label={
+              <TooltipLabel
+                tooltipContent={t("dashboard-page:tooltips.investing.profit")}
+                labelText={t("header-fields.profit")}
+              />
+            }
+          >
             <NumberFormat
               value={formatCurrencyValue(
                 program.personalDetails.profit,
@@ -84,10 +92,17 @@ const _DashboardProgramCard: React.FC<Props> = ({
               displayType="text"
               suffix={` ${requestCurrency}`}
             />
-          </StatisticItem>
+          </LabeledValue>
         </TableCardTableColumn>
         <TableCardTableColumn>
-          <StatisticItem label={t("programs-page.programs-header.value")}>
+          <LabeledValue
+            label={
+              <TooltipLabel
+                tooltipContent={t("dashboard-page:tooltips.investing.value")}
+                labelText={t("header-fields.value")}
+              />
+            }
+          >
             <NumberFormat
               value={formatCurrencyValue(
                 program.personalDetails.value,
@@ -96,15 +111,15 @@ const _DashboardProgramCard: React.FC<Props> = ({
               suffix={` ${requestCurrency}`}
               displayType="text"
             />
-          </StatisticItem>
+          </LabeledValue>
         </TableCardTableColumn>
         <TableCardTableColumn>
-          <StatisticItem label={t("programs-page.programs-header.period")}>
+          <LabeledValue label={t("header-fields.period")}>
             <ProgramPeriodPie
               start={program.periodStarts}
               end={program.periodEnds}
             />
-          </StatisticItem>
+          </LabeledValue>
         </TableCardTableColumn>
       </TableCardTable>
       <TableCardTable>

@@ -1,8 +1,7 @@
 import ImageBaseElement from "components/avatar/image-base.element";
 import { Center } from "components/center/center";
-import { CHIP_SIZE } from "components/chip/chip";
 import ChipButton from "components/chip/chip-button";
-import GVButton, { GV_BTN_SIZE } from "components/gv-button";
+import GVButton from "components/gv-button";
 import { RowItem } from "components/row-item/row-item";
 import useIsOpen from "hooks/is-open.hook";
 import ConvertIcon from "media/convert.svg";
@@ -10,6 +9,7 @@ import { TransferContainerProps } from "modules/transfer/components/transfer-con
 import TransferPopup from "modules/transfer/transfer-popup";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { Clickable, Sizeable } from "utils/types";
 
 import styles from "./transfer.button.module.scss";
 
@@ -19,7 +19,7 @@ const _TransferButton: React.FC<Props> = ({
   outerCurrentItemContainerItems,
   successMessage,
   singleCurrentItemContainer = false,
-  size = GV_BTN_SIZE.LARGE,
+  size = "large",
   withIcon,
   color,
   variant,
@@ -56,7 +56,7 @@ const _TransferButton: React.FC<Props> = ({
         currentItem={currentItem}
         sourceType={sourceType}
         destinationType={destinationType}
-        title={title || t("transfer.title")}
+        title={title || t("transfer:title")}
         currentItemContainer={currentItemContainer}
         onApply={onApply}
         open={isOpenPopup}
@@ -66,8 +66,7 @@ const _TransferButton: React.FC<Props> = ({
   );
 };
 
-interface Props extends TransferContainerProps {
-  size?: GV_BTN_SIZE;
+interface Props extends TransferContainerProps, Sizeable {
   withIcon?: boolean;
   type?: WALLET_BUTTON_TYPE;
   color?: "primary" | "secondary" | "primary-dark" | "danger";
@@ -76,18 +75,18 @@ interface Props extends TransferContainerProps {
   disabled?: boolean;
 }
 
-const FullButton: React.FC<{
-  size?: GV_BTN_SIZE;
+interface FullButtonProps extends Sizeable, Clickable {
   withIcon?: boolean;
   color?: "primary" | "secondary" | "primary-dark" | "danger";
   variant?: "text" | "outlined" | "contained";
   label?: string;
   disabled?: boolean;
-  onClick: () => void;
-}> = React.memo(
+}
+
+const FullButton: React.FC<FullButtonProps> = React.memo(
   ({ disabled, onClick, label, color, variant, withIcon, size }) => {
     const [t] = useTranslation();
-    const labelText = label || t("wallet-page.transfer");
+    const labelText = label || t("wallet-page:transfer");
     return (
       <GVButton
         className={labelText}
@@ -99,7 +98,7 @@ const FullButton: React.FC<{
       >
         <Center>
           {withIcon && (
-            <RowItem small>
+            <RowItem size={"small"}>
               <ImageBaseElement
                 className={styles["transfer-button__full-button-icon"]}
                 src={ConvertIcon}
@@ -114,20 +113,18 @@ const FullButton: React.FC<{
   }
 );
 
-const SmallButton: React.FC<{ onClick: () => void }> = React.memo(
-  ({ onClick }) => {
-    const [t] = useTranslation();
-    const label = t("wallet-page.transfer");
-    return (
-      <ChipButton
-        className={label}
-        onClick={onClick}
-        size={CHIP_SIZE.SMALL}
-        chipLabel={<ImageBaseElement src={ConvertIcon} alt={label} />}
-      />
-    );
-  }
-);
+const SmallButton: React.FC<Clickable> = React.memo(({ onClick }) => {
+  const [t] = useTranslation();
+  const label = t("wallet-page:transfer");
+  return (
+    <ChipButton
+      className={label}
+      onClick={onClick}
+      size={"small"}
+      chipLabel={<ImageBaseElement src={ConvertIcon} alt={label} />}
+    />
+  );
+});
 
 export enum WALLET_BUTTON_TYPE {
   SMALL = "SMALL",

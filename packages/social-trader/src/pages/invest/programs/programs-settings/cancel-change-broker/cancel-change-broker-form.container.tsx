@@ -13,7 +13,7 @@ const _CancelChangeBrokerFormContainer: React.FC<ICancelChangeBrokerFormContaine
   const { sendRequest: cancelChangeBroker, errorMessage } = useApiRequest({
     middleware: [postponeCallback(onApply)],
     request: cancelChangeBrokerMethod,
-    successMessage: "program-settings.notifications.broker-success"
+    successMessage: "asset-settings:notifications.broker-success"
   });
   const handleCancelChangeBroker = useCallback(() => {
     return cancelChangeBroker(id);

@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { RowItem } from "components/row-item/row-item";
 import React from "react";
 
@@ -39,7 +39,7 @@ const GVTab: React.FC<GVTabProps> = ({
   const renderCount = () => {
     if (count === undefined) return null;
     return (
-      <span className={classNames(countClassName, styles["gv-tab__count"])}>
+      <span className={clsx(countClassName, styles["gv-tab__count"])}>
         {count}
       </span>
     );
@@ -52,7 +52,7 @@ const GVTab: React.FC<GVTabProps> = ({
   return (
     <RowItem>
       <div
-        className={classNames(className, styles["gv-tab"], {
+        className={clsx(className, styles["gv-tab"], {
           [styles["gv-tab--active"]]: selected
         })}
         data-test-id={label}

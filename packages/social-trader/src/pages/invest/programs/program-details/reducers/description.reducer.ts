@@ -12,6 +12,12 @@ export const programDescriptionSelector = apiSelector<
   ProgramDescriptionDataType
 >(state => state.programDetails.description);
 
+export const programCurrencySelector = apiFieldSelector(
+  programDescriptionSelector,
+  fieldSelector(state => state.tradingAccountInfo.currency),
+  undefined
+);
+
 export const programIdSelector = apiFieldSelector(
   programDescriptionSelector,
   fieldSelector(state => state.id),

@@ -8,4 +8,8 @@ const Page: NextPage = () => {
   return <RatingPage />;
 };
 
+Page.getInitialProps = async () => ({
+  namespacesRequired: ["form-fields", "conversation"]
+});
+
 export default compose(withDefaultLayout)(Page);

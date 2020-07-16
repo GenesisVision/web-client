@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import ImageBaseElement from "components/avatar/image-base.element";
 import { useTranslation } from "i18n";
 import { JoinButton } from "pages/landing-page/components/join-button";
@@ -12,7 +12,7 @@ const _EventLastItem: React.FC<Props> = ({ minHeight }) => {
   const { t } = useTranslation();
   return (
     <li
-      className={classNames(
+      className={clsx(
         styles["events-list__item"],
         styles["events-list__item--last"]
       )}

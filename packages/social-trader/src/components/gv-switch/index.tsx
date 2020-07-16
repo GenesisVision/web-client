@@ -1,7 +1,7 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { Center } from "components/center/center";
-import { MutedText } from "components/muted-text/muted-text";
 import { RowItem } from "components/row-item/row-item";
+import { Text } from "components/text/text";
 import React from "react";
 
 import styles from "./style.module.scss";
@@ -53,16 +53,18 @@ class GVSwitch extends React.PureComponent<GVSwitchProps> {
       <Center className={styles["gv-switch-wrapper"]}>
         {label && (
           <RowItem
-            small
+            size={"small"}
             className={styles["gv-switch__label"]}
             onClick={this.handleClick}
           >
-            <MutedText big>{label}</MutedText>
+            <Text muted size={"large"}>
+              {label}
+            </Text>
           </RowItem>
         )}
         <RowItem>
           <span
-            className={classNames(styles["gv-switch"], className, {
+            className={clsx(styles["gv-switch"], className, {
               [styles["gv-switch--checked"]]: value,
               [styles["gv-switch--primary"]]: color === "primary",
               [styles["gv-switch--secondary"]]: color === "secondary",

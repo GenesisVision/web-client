@@ -25,8 +25,8 @@ interface Props {
 
 const FollowsPage: React.FC<Props> = ({ data, outerView }) => {
   const { t } = useTranslation();
-  const title = t("follows-page.title");
-  const description = t("follows-page.description");
+  const title = t("follows-page:title");
+  const description = t("follows-page:description");
   return (
     <Page
       description={description}
@@ -58,7 +58,7 @@ const FollowsPage: React.FC<Props> = ({ data, outerView }) => {
           data={data}
           outerView={outerView}
           showSwitchView
-          title={t("follows-page.table")}
+          title={t("follows-page:table")}
         />
       </DefaultTableBlock>
     </Page>

@@ -29,10 +29,10 @@ const _PublicSelect: React.FC = () => {
       onChange={handleSwitch}
       value={isPublic}
       isPending={isPending}
-      label={t("profile-page.settings.public.label")}
+      label={t("profile-page:settings.public.label")}
       tooltipContent={
         <TooltipContent>
-          {t("profile-page.settings.public.text")}
+          {t("profile-page:settings.public.text")}
         </TooltipContent>
       }
     />

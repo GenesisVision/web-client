@@ -27,7 +27,11 @@ Page.getInitialProps = async ctx => {
     console.error(e);
   }
   const outerView = getTableView(ctx);
-  return { outerView, data };
+  return {
+    namespacesRequired: ["follows-page", "asset-list"],
+    outerView,
+    data
+  };
 };
 
 export default withDefaultLayout(Page);

@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { ConversationImage } from "components/conversation/conversation-image/conversation-image";
 import { getImageSize } from "components/conversation/conversation-image/conversation-image.helpers";
 import { ConversationUser } from "components/conversation/conversation-user/conversation-user";
@@ -40,7 +40,7 @@ const _Message: React.FC<IMessageProps> = ({
   return (
     <div>
       <div
-        className={classNames(styles["message"], {
+        className={clsx(styles["message"], {
           [styles["message--row"]]: row
         })}
       >
@@ -60,14 +60,19 @@ const _Message: React.FC<IMessageProps> = ({
           </RowItem>
           <RowItem>{settingsBlock}</RowItem>
         </MessageItem>
-        <MessageItem bottomOffset onlyOffset>
+        <MessageItem
+          className={styles["message--content"]}
+          bottomOffset
+          onlyOffset
+        >
           <MessageText
+            key={text}
             text={text}
             tags={tags}
             reduceLargeText={reduceLargeText}
           />
           {!!images.length && (
-            <Row wrap small className={styles["message__images"]}>
+            <Row wrap size={"small"} className={styles["message__images"]}>
               {images.map((image, index) => (
                 <RowItem bottomOffset key={index}>
                   <ConversationImage

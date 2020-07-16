@@ -1,5 +1,4 @@
-import { DefaultBlock } from "components/default.block/default.block";
-import { SIZES } from "constants/constants";
+import { TerminalDefaultBlock } from "pages/trades/binance-trade-page/trading/components/terminal-default-block/terminal-default-block";
 import { TradesContainer } from "pages/trades/binance-trade-page/trading/trades/trades.container";
 import React from "react";
 
@@ -9,13 +8,8 @@ interface Props {}
 
 export const TradesBlock: React.FC<Props> = () => {
   return (
-    <DefaultBlock
-      size={SIZES.SMALL}
-      roundedBorder={false}
-      bordered
-      className={styles["trades"]}
-    >
+    <TerminalDefaultBlock className={styles["trades"]}>
       <TradesContainer />
-    </DefaultBlock>
+    </TerminalDefaultBlock>
   );
 };

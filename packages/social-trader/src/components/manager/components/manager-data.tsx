@@ -8,9 +8,11 @@ import {
   UserDataInitialCount
 } from "components/manager/services/manager.service";
 import UserInvestingSection from "components/manager/user-investing/user-investing-section";
+import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import useApiRequest from "hooks/api-request.hook";
 import useTab from "hooks/tab.hook";
+import { ShowEventsContainer } from "pages/feed/show-events-container/show-events-container";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -71,12 +73,20 @@ const _ManagerData: React.FC<Props> = ({ canWritePost, id }) => {
         </GVTabs>
       </Row>
       {tab === TABS.FEED && (
-        <Row large onlyOffset>
-          <UserFeed canWritePost={canWritePost} id={id} />
+        <Row size={"large"} onlyOffset>
+          <Row>
+            <RowItem wide />
+            <RowItem>
+              <ShowEventsContainer />
+            </RowItem>
+          </Row>
+          <Row onlyOffset>
+            <UserFeed canWritePost={canWritePost} id={id} />
+          </Row>
         </Row>
       )}
       {tab === TABS.TRADING && (
-        <Row large onlyOffset>
+        <Row size={"large"} onlyOffset>
           <ManagerHistorySection
             followCount={followCount}
             programsCount={programsCount}
@@ -86,7 +96,7 @@ const _ManagerData: React.FC<Props> = ({ canWritePost, id }) => {
         </Row>
       )}
       {tab === TABS.INVESTING && (
-        <Row large onlyOffset>
+        <Row size={"large"} onlyOffset>
           <UserInvestingSection
             followCount={investingFollowCount}
             programsCount={investingProgramsCount}

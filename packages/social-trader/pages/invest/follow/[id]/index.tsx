@@ -1,25 +1,53 @@
 import { ASSET } from "constants/constants";
 import withDefaultLayout from "decorators/with-default-layout";
+import { LevelsParamsInfo, ProgramFollowDetailsFull } from "gv-api-web";
 import ProgramDetailsPage from "pages/invest/programs/program-details/program-details.page";
 import {
   dispatchProgramDescription,
-  dispatchProgramId
+  fetchLevelParameters
 } from "pages/invest/programs/program-details/service/program-details.service";
 import React from "react";
 import { compose } from "redux";
-import { NextPageWithRedux } from "utils/types";
+import { getAccountCurrency } from "utils/account-currency";
+import { CurrencyEnum, NextPageWithRedux } from "utils/types";
 
-const Page: NextPageWithRedux<{}> = () => {
-  return <ProgramDetailsPage route={ASSET.FOLLOW} />;
+interface Props {
+  levelsParameters: LevelsParamsInfo;
+}
+const Page: NextPageWithRedux<Props> = ({ levelsParameters }) => {
+  return (
+    <ProgramDetailsPage
+      levelsParameters={levelsParameters}
+      route={ASSET.FOLLOW}
+    />
+  );
 };
 
 Page.getInitialProps = async ctx => {
-  const { id } = ctx.query;
+  let programCurrency = "GVT";
+  const cookieCurrency = getAccountCurrency(ctx);
   await Promise.all([
-    ctx.reduxStore.dispatch(dispatchProgramId(id as string)),
     ctx.reduxStore.dispatch(dispatchProgramDescription(ctx, ASSET.FOLLOW))
-  ]);
-  return {};
+  ]).then(([res]) => {
+    const {
+      tradingAccountInfo: { currency }
+    } = res.value as ProgramFollowDetailsFull;
+    programCurrency = currency;
+  });
+  const levelsParameters = await fetchLevelParameters(
+    (programCurrency as CurrencyEnum) || cookieCurrency
+  );
+  return {
+    levelsParameters,
+    namespacesRequired: [
+      "transfer",
+      "asset-settings",
+      "portfolio-events",
+      "asset-details",
+      "program-details-page",
+      "follow-details-page"
+    ]
+  };
 };
 
 export default compose(withDefaultLayout)(Page);

@@ -2,7 +2,7 @@ import DetailsBlock, {
   DETAILS_BLOCK_TYPE
 } from "components/details/details-block";
 import { DetailsStatisticContainer } from "components/details/details-description-section/details-description/details-structure-blocks";
-import { GV_BTN_SIZE } from "components/gv-button";
+import { Row } from "components/row/row";
 import { ASSET } from "constants/constants";
 import { FundDetailsFull } from "gv-api-web";
 import DepositButton from "modules/deposit/deposit.button";
@@ -24,18 +24,20 @@ const _InvestmentFundControls: React.FC<Props> = ({
   return (
     <DetailsBlock type={DETAILS_BLOCK_TYPE.BORDERED}>
       <InvestmentFundInfo fundDescription={fundDescription} />
-      <DetailsStatisticContainer>
-        <DepositButton
-          disabled={!canInvest}
-          title={fundDescription.publicInfo.title}
-          onApply={onApply}
-          size={GV_BTN_SIZE.BIG}
-          ownAsset={isOwnProgram}
-          entryFee={fundDescription.entryFeeCurrent}
-          type={ASSET.FUND}
-          id={fundDescription.id}
-        />
-      </DetailsStatisticContainer>
+      <Row>
+        <DetailsStatisticContainer>
+          <DepositButton
+            disabled={!canInvest}
+            title={fundDescription.publicInfo.title}
+            onApply={onApply}
+            size={"xlarge"}
+            ownAsset={isOwnProgram}
+            entryFee={fundDescription.entryFeeCurrent}
+            type={ASSET.FUND}
+            id={fundDescription.id}
+          />
+        </DetailsStatisticContainer>
+      </Row>
     </DetailsBlock>
   );
 };

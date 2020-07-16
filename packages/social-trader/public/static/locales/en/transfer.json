@@ -1,0 +1,25 @@
+{
+  "deposit-to": "Deposit to {{title}}",
+  "withdraw-from": "Withdraw from {{title}}",
+  "title": "Transfer",
+  "availableWalletTo": "Available in Wallet",
+  "availableWalletFrom": "Available in Wallet",
+  "availableTradingAccountTo": "Available in Account",
+  "availableTradingAccountFrom": "Available in Account",
+  "availableSignalTradingAccountTo": "Available in Account",
+  "availableSignalTradingAccountFrom": "Available in Account",
+  "availablePrivateTradingAccountTo": "Available in Account",
+  "availablePrivateTradingAccountFrom": "Available in Account",
+  "to": "To",
+  "from": "From",
+  "amount": "Enter correct amount",
+  "info": "The funds will be converted according to the current market price (via market order on Binance).",
+  "two-factor-code-label": "Two factor code",
+  "confirmation": {
+    "page-title": "Wallet withdraw confirm",
+    "error": "An error occurred during confirmation of email: ",
+    "deposit-success": "Deposit request is confirmed",
+    "withdraw-success": "Withdrawal request is confirmed",
+    "success": "Withdrawal request is confirmed"
+  }
+}

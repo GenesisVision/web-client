@@ -15,12 +15,23 @@ const _TableContainer: React.FC<ITableContainerProps> = props => {
   const {
     data,
     isPending,
-    paging,
+    paging: selectorPaging,
     filtering,
     fetchItems,
     defaults
   } = tableSelectorData;
   const dispatch = useDispatch();
+
+  const { currentPage, totalPages, totalItems, itemsOnPage } = selectorPaging;
+  const paging = useMemo(
+    () => ({
+      currentPage,
+      totalPages,
+      totalItems,
+      itemsOnPage
+    }),
+    [currentPage, totalPages, totalItems, itemsOnPage]
+  );
 
   useEffect(() => {
     if (isFetchOnMount) updateItems();

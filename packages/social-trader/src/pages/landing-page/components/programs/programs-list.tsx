@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { ProgramDetailsListItem } from "gv-api-web";
 import LpProgramCard from "pages/landing-page/components/lp-program-card/lp-program-card";
 import React from "react";
@@ -13,7 +13,7 @@ interface Props {
 
 const _ProgramsList: React.FC<Props> = ({ className, programs }) => {
   return (
-    <ul className={classNames(styles["programs-list"], className)}>
+    <ul className={clsx(styles["programs-list"], className)}>
       {programs.map((program, index) => (
         <li className={styles["programs-list__item"]} key={program.id}>
           <LpProgramCard

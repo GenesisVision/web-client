@@ -57,7 +57,7 @@ const _ManagerProgramHistoryRow: React.FC<IManagerHistoryRowProps> = ({
       tileBlock={<TagProgramContainer tags={asset.tags} />}
       dataBlock={
         <>
-          <ManagerHistoryItem label={t("programs-page.programs-header.equity")}>
+          <ManagerHistoryItem label={t("header-fields.equity")}>
             <NumberFormat
               value={formatCurrencyValue(
                 asset.balance.amount,
@@ -67,14 +67,10 @@ const _ManagerProgramHistoryRow: React.FC<IManagerHistoryRowProps> = ({
               displayType="text"
             />
           </ManagerHistoryItem>
-          <ManagerHistoryItem
-            label={t("programs-page.programs-header.investors")}
-          >
+          <ManagerHistoryItem label={t("header-fields.investors")}>
             {asset.investorsCount}
           </ManagerHistoryItem>
-          <ManagerHistoryItem
-            label={t("programs-page.programs-header.available-to-invest")}
-          >
+          <ManagerHistoryItem label={t("header-fields.available-to-invest")}>
             <NumberFormat
               value={formatCurrencyValue(
                 asset.availableToInvest,
@@ -85,9 +81,7 @@ const _ManagerProgramHistoryRow: React.FC<IManagerHistoryRowProps> = ({
             />
           </ManagerHistoryItem>
           {asset.periodStarts && (
-            <ManagerHistoryItem
-              label={t("programs-page.programs-header.period")}
-            >
+            <ManagerHistoryItem label={t("header-fields.period")}>
               <ProgramPeriodPie
                 condition={asset.status !== STATUS.CLOSED}
                 loader={t("program-period.program-closed")}
@@ -96,19 +90,17 @@ const _ManagerProgramHistoryRow: React.FC<IManagerHistoryRowProps> = ({
               />
             </ManagerHistoryItem>
           )}
-          <ManagerHistoryItem label={t("programs-page.programs-header.age")}>
+          <ManagerHistoryItem label={t("header-fields.age")}>
             {distanceDate(asset.creationDate)}
           </ManagerHistoryItem>
-          <ManagerHistoryItem
-            label={t("programs-page.programs-header.drawdown")}
-          >
+          <ManagerHistoryItem label={t("header-fields.drawdown")}>
             <NumberFormat
               value={formatValue(asset.statistic.drawdown, 2)}
               suffix="%"
               displayType="text"
             />
           </ManagerHistoryItem>
-          <ManagerHistoryItem label={t("programs-page.programs-header.profit")}>
+          <ManagerHistoryItem label={t("header-fields.profit")}>
             <Profitability
               value={formatValue(asset.statistic.profit, 2)}
               prefix={PROFITABILITY_PREFIX.SIGN}

@@ -1,14 +1,14 @@
-import GVButton, { GV_BTN_SIZE } from "components/gv-button";
+import GVButton from "components/gv-button";
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import useApiRequest from "hooks/api-request.hook";
 import { terminalMoneyFormat } from "pages/trades/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
+import { TerminalInfoContext } from "pages/trades/binance-trade-page/trading/terminal-info.context";
 import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
-import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
 import {
   OrderSide,
-  TradeAuthDataType
-} from "pages/trades/binance-trade-page/trading/trading.types";
+  TerminalAuthDataType
+} from "pages/trades/binance-trade-page/trading/terminal.types";
 import React, { useCallback, useContext } from "react";
 import { formatDate } from "utils/dates";
 
@@ -36,14 +36,14 @@ const _OpenOrdersRow: React.FC<Props> = ({
   total
 }) => {
   const { cancelOrder } = useContext(TerminalMethodsContext);
-  const { authData, tickSize, stepSize } = useContext(TradingInfoContext);
+  const { authData, tickSize, stepSize } = useContext(TerminalInfoContext);
   const { sendRequest, isPending } = useApiRequest({
     request: ({
       options,
       authData
     }: {
       options: { symbol: string; orderId: string; useServerTime?: boolean };
-      authData: TradeAuthDataType;
+      authData: TerminalAuthDataType;
     }) => cancelOrder(options, authData)
   });
   const handleCancel = useCallback(() => {
@@ -51,7 +51,7 @@ const _OpenOrdersRow: React.FC<Props> = ({
   }, [symbol, orderId, authData]);
   return (
     <TableRow>
-      <TableCell>{formatDate(time)}</TableCell>
+      <TableCell firstOffset={false}>{formatDate(time)}</TableCell>
       <TableCell>{symbol}</TableCell>
       <TableCell>{type}</TableCell>
       <TableCell>{side}</TableCell>
@@ -69,7 +69,7 @@ const _OpenOrdersRow: React.FC<Props> = ({
           variant={"text"}
           disabled={isPending}
           isPending={isPending}
-          size={GV_BTN_SIZE.SMALL}
+          size={"small"}
           color={"danger"}
           onClick={handleCancel}
         >

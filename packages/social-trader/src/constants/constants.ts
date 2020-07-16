@@ -1,15 +1,8 @@
 import { Currency, SimpleChart } from "gv-api-web";
 
-export enum SIZES {
-  SMALL = "SMALL",
-  MIDDLE = "MIDDLE",
-  LARGE = "LARGE",
-  XLARGE = "XLARGE"
-}
-
 export enum ASSETS_TYPES {
   All = "All",
-  Signal = "Signal",
+  Follow = "Follow",
   Program = "Program",
   Fund = "Fund"
 }

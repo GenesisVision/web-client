@@ -1,6 +1,6 @@
 import { Center } from "components/center/center";
-import { MutedText } from "components/muted-text/muted-text";
 import { RowItem } from "components/row-item/row-item";
+import { Text } from "components/text/text";
 import { TooltipContent } from "components/tooltip/tooltip-content";
 import * as React from "react";
 import { CurrencyEnum } from "utils/types";
@@ -16,8 +16,8 @@ const _FundAssetTooltip: React.FC<IFundAssetTooltipProps> = ({
 }) => (
   <TooltipContent fixed={false}>
     <Center>
-      <RowItem small>{name}</RowItem>
-      <MutedText>{currency}</MutedText>
+      <RowItem size={"small"}>{name}</RowItem>
+      <Text muted>{currency}</Text>
     </Center>
   </TooltipContent>
 );

@@ -16,15 +16,15 @@ const _CloseAsset: React.FC<Props> = ({ asset, id, onApply, canClose }) => {
     <>
       <Row onlyOffset className={styles["asset-settings__block-wrapper"]}>
         <FormTextField>
-          {t(`asset-settings.period-and-closing.text-${asset.toLowerCase()}`)}
+          {t(`asset-settings:period-and-closing.text-${asset.toLowerCase()}`)}
         </FormTextField>
-        <Row large>
+        <Row size={"large"}>
           <GVButton
             color="danger"
             disabled={!canClose}
             onClick={setCloseAssetOpen}
           >
-            {t(`asset-settings.buttons.close-${asset.toLowerCase()}`)}
+            {t(`asset-settings:buttons.close-${asset.toLowerCase()}`)}
           </GVButton>
         </Row>
       </Row>

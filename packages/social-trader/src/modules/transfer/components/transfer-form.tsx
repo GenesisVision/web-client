@@ -159,12 +159,12 @@ const _TransferForm: React.FC<ITransferFormProps> = ({
       onSubmit={setValuesFromPropsAndSubmit}
     >
       <DialogTop title={title}>
-        <Row large>
+        <Row size={"large"}>
           <TransferSelectField
             currency={selectedSourceItem.currency}
             name={TRANSFER_FORM_FIELDS.sourceId}
             value={formattedAvailableSourceItem}
-            label={t("transfer.from")}
+            label={t("transfer:from")}
             onChange={onChangeSourceId}
             items={sourceItems}
             sourceType={sourceType}
@@ -176,14 +176,14 @@ const _TransferForm: React.FC<ITransferFormProps> = ({
           currency={selectedDestinationItem.currency}
           name={TRANSFER_FORM_FIELDS.destinationId}
           value={formattedAvailableDestinationItem}
-          label={t("transfer.to")}
+          label={t("transfer:to")}
           onChange={onChangeDestinationId}
           items={destinationItemsWithoutCurrent}
           sourceType={destinationType}
         />
         <InputAmountField
           name={TRANSFER_FORM_FIELDS.amount}
-          label={t("transfer.amount")}
+          label={t("transfer:amount")}
           currency={selectedSourceItem.currency}
           setMax={setMax}
           isAllowed={isAmountAllow(sourceItems, sourceId)}
@@ -203,7 +203,10 @@ const _TransferForm: React.FC<ITransferFormProps> = ({
             {t("buttons.confirm")}
           </SubmitButton>
         </DialogButtons>
-        <DialogInfo>{t("transfer.info")}</DialogInfo>
+        {destinationType !== "ExchangeAccount" &&
+          sourceType !== "ExchangeAccount" && (
+            <DialogInfo>{t("transfer:info")}</DialogInfo>
+          )}
       </DialogBottom>
     </HookForm>
   );

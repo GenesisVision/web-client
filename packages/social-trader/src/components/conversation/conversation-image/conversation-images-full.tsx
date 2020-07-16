@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import ImageBase from "components/avatar/image-base";
 import { getImageUrlByQuality } from "components/conversation/conversation-image/conversation-image.helpers";
 import { IConversationImage } from "components/conversation/conversation.types";
@@ -97,7 +97,7 @@ const ConversationImagesFullContent: React.FC<{
         />
         <div
           onClick={handlePrev}
-          className={classNames(
+          className={clsx(
             styles["conversation-image-full__button--left"],
             styles["conversation-image-full__button"],
             {
@@ -109,7 +109,7 @@ const ConversationImagesFullContent: React.FC<{
         </div>
         <div
           onClick={handleNext}
-          className={classNames(
+          className={clsx(
             styles["conversation-image-full__button--right"],
             styles["conversation-image-full__button"],
             { [styles["conversation-image-full__button--show"]]: isButtonsShow }

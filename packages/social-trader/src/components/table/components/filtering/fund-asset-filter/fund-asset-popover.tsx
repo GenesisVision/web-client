@@ -1,7 +1,7 @@
 import { CurrencyItem } from "components/currency-item/currency-item";
-import { MutedText } from "components/muted-text/muted-text";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { Text } from "components/text/text";
 import { PlatformAsset } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
@@ -26,7 +26,7 @@ const _FundAssetPopover: React.FC<Props> = ({ values, changeFilter }) => {
         <Row onlyOffset className={styles["fund-asset-filter__assets-block"]}>
           {filteredAssets.map((asset, idx) => (
             <Row
-              small
+              size={"small"}
               className={styles["fund-asset-filter__asset-item"]}
               key={idx}
               onClick={() => handleClick(asset.asset)}
@@ -39,7 +39,7 @@ const _FundAssetPopover: React.FC<Props> = ({ values, changeFilter }) => {
                   small
                 />
               </RowItem>
-              <MutedText>{asset.asset}</MutedText>
+              <Text muted>{asset.asset}</Text>
             </Row>
           ))}
         </Row>

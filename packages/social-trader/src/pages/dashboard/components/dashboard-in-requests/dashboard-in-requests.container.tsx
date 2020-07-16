@@ -15,7 +15,7 @@ const _DashboardInRequestsContainer: React.FC = () => {
     fetchOnMount: true
   });
   return (
-    <DashboardBlock label={t("dashboard-page.in-requests.title")}>
+    <DashboardBlock label={t("dashboard-page:in-requests.title")}>
       <DashboardInRequests
         updateData={sendRequest}
         data={data!}

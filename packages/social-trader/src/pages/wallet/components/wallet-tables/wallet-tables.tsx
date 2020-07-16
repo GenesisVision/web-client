@@ -37,7 +37,7 @@ const _WalletTables: React.FC<Props> = ({ currency }) => {
               horizontal={HORIZONTAL_POPOVER_POS.LEFT}
               render={() => (
                 <TooltipContent>
-                  {t("wallet-page.tooltip.transactions")}
+                  {t("wallet-page:tooltip.transactions")}
                 </TooltipContent>
               )}
             >
@@ -49,7 +49,7 @@ const _WalletTables: React.FC<Props> = ({ currency }) => {
                   title
                 )}
               >
-                {t("wallet-page.tabs.transactions")}
+                {t("wallet-page:tabs.transactions")}
               </Link>
             </Tooltip>
           }
@@ -62,7 +62,7 @@ const _WalletTables: React.FC<Props> = ({ currency }) => {
                 horizontal={HORIZONTAL_POPOVER_POS.LEFT}
                 render={() => (
                   <TooltipContent>
-                    {t("wallet-page.tooltip.deposit")}
+                    {t("wallet-page:tooltip.deposit")}
                   </TooltipContent>
                 )}
               >
@@ -74,14 +74,14 @@ const _WalletTables: React.FC<Props> = ({ currency }) => {
                     title
                   )}
                 >
-                  {t("wallet-page.tabs.deposit")}
+                  {t("wallet-page:tabs.deposit")}
                 </Link>
               </Tooltip>
               <Tooltip
                 horizontal={HORIZONTAL_POPOVER_POS.LEFT}
                 render={() => (
                   <TooltipContent>
-                    {t("wallet-page.tooltip.withdrawals")}
+                    {t("wallet-page:tooltip.withdrawals")}
                   </TooltipContent>
                 )}
               >
@@ -93,7 +93,7 @@ const _WalletTables: React.FC<Props> = ({ currency }) => {
                     title
                   )}
                 >
-                  {t("wallet-page.tabs.withdrawals")}
+                  {t("wallet-page:tabs.withdrawals")}
                 </Link>
               </Tooltip>
             </>

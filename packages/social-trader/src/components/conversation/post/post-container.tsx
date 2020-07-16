@@ -1,6 +1,7 @@
 import { getPost } from "components/conversation/conversation.service";
 import { ConversationPost } from "components/conversation/conversation.types";
 import { Post } from "components/conversation/post/post";
+import PostContextProvider from "components/conversation/post/post.context";
 import useApiRequest from "hooks/api-request.hook";
 import React from "react";
 
@@ -24,12 +25,14 @@ const _PostContainer: React.FC<Props> = ({
   });
   if (!data) return null;
   return (
-    <Post
-      visibleCommentsCount={visibleCommentsCount}
-      reduceLargeText={reduceLargeText}
-      post={data}
-      updateData={sendRequest}
-    />
+    <PostContextProvider>
+      <Post
+        visibleCommentsCount={visibleCommentsCount}
+        reduceLargeText={reduceLargeText}
+        post={data}
+        updateData={sendRequest}
+      />
+    </PostContextProvider>
   );
 };
 

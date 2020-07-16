@@ -34,6 +34,12 @@ export interface BannerApiContext extends NextApiRequest {
   query: { id: string };
 }
 
+const CURRENCY = "USD";
+
+export const formatEquity = (balance: number) => {
+  return `$${Math.round(balance)}`;
+};
+
 export type BannerProps = {
   chart: ProgramProfitPercentCharts | FundProfitPercentCharts;
   details: ProgramFollowDetailsFull | FundDetailsFull;
@@ -112,12 +118,6 @@ export const createPng = async (
           ? calculatedLeft || 0
           : pngOptions.position?.x;
 
-      if (
-        imageRatio <= 1 ||
-        (pngOptions.containerSize?.width &&
-          left + imageWidth > pngOptions.containerSize?.width)
-      )
-        return input;
       image.composite([
         {
           input,
@@ -179,7 +179,7 @@ async function createBanner(
 export async function fetchFundData(id: string) {
   const details = await api.funds().getFundDetails(id as string);
   const chart = await api.funds().getFundProfitPercentCharts(details.id, {
-    currencies: ["USDT"]
+    currencies: [CURRENCY]
   });
 
   return { details, chart };
@@ -187,7 +187,9 @@ export async function fetchFundData(id: string) {
 
 export async function fetchProgramData(id: string) {
   const details = await api.programs().getProgramDetails(id as string);
-  const chart = await api.programs().getProgramProfitPercentCharts(details.id);
+  const chart = await api.programs().getProgramProfitPercentCharts(details.id, {
+    currency: CURRENCY
+  });
 
   return { details, chart };
 }

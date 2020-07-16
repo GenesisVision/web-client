@@ -1,7 +1,7 @@
-import { MutedText } from "components/muted-text/muted-text";
+import { Text } from "components/text/text";
+import { TerminalInfoContext } from "pages/trades/binance-trade-page/trading/terminal-info.context";
+import { Trade } from "pages/trades/binance-trade-page/trading/terminal.types";
 import { TradesRow } from "pages/trades/binance-trade-page/trading/trades/trades-row";
-import { TradingInfoContext } from "pages/trades/binance-trade-page/trading/trading-info.context";
-import { Trade } from "pages/trades/binance-trade-page/trading/trading.types";
 import React, { useContext } from "react";
 
 import styles from "./trades.module.scss";
@@ -13,20 +13,26 @@ interface Props {
 const _Trades: React.FC<Props> = ({ items }) => {
   const {
     symbol: { baseAsset, quoteAsset }
-  } = useContext(TradingInfoContext);
+  } = useContext(TerminalInfoContext);
   return (
     <div className={styles["trades__container"]}>
       <div className={styles["trades__header-container"]}>
         <table className={styles["trades__table"]}>
           <thead>
             <th>
-              <MutedText small>Price ({baseAsset})</MutedText>
+              <Text muted size={"small"}>
+                Price ({baseAsset})
+              </Text>
             </th>
             <th>
-              <MutedText small>Amount ({quoteAsset})</MutedText>
+              <Text muted size={"small"}>
+                Amount ({quoteAsset})
+              </Text>
             </th>
             <th>
-              <MutedText small>Time</MutedText>
+              <Text muted size={"small"}>
+                Time
+              </Text>
             </th>
           </thead>
         </table>

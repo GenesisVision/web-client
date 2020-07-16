@@ -1,14 +1,14 @@
-@import "~shared/styles/_constants";
-@import "~shared/styles/_colors";
-@import "~shared/styles/_breakpoint";
-@import "~shared/styles/_sizes";
+@import "styles/_constants";
+@import "styles/_colors";
+@import "styles/_breakpoint";
+@import "styles/_sizes";
 
 @mixin default-block-offsets($padding) {
   &.default-block--vertical-offsets {
-    @include vertical-paddings($padding);
+    @include vertical-paddings($padding, $divider-text);
   }
   &.default-block--horizontal-offsets {
-    @include horizontal-paddings($padding);
+    @include horizontal-paddings($padding, $divider-text);
   }
 }
 
@@ -34,7 +34,7 @@
     &.default-block--rounded-border {
       @include adaptive-border-radius($border-radius);
     }
-    padding: $padding-xxsmall;
+    @include default-block-offsets($padding-xxsmall);
   }
 
   &--middle {

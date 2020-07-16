@@ -1,22 +1,23 @@
 import { Center } from "components/center/center";
 import { CommentInputContainer } from "components/conversation/comment/comment-input/comment-input-container";
-import { ConversationPinButton } from "components/conversation/conversation-pin-button/conversation-pin-button";
-import { ConversationRemoveButton } from "components/conversation/conversation-remove-button/conversation-remove-button";
 import { restorePost } from "components/conversation/conversation.service";
 import { ConversationPost } from "components/conversation/conversation.types";
+import { PinIcon } from "components/conversation/icons/pin.icon";
 import { Message } from "components/conversation/message/message";
+import { MessageActions } from "components/conversation/message/message-actions/message-actions";
 import { CommentsList } from "components/conversation/post/comments-list/comments-list";
 import { PostButtons } from "components/conversation/post/post-buttons/post-buttons";
 import { DefaultBlock } from "components/default.block/default.block";
-import GVButton, { GV_BTN_SIZE } from "components/gv-button";
-import { MutedText } from "components/muted-text/muted-text";
+import GVButton from "components/gv-button";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
-import { PostActions as PostActionsType } from "gv-api-web";
+import { Text } from "components/text/text";
 import useApiRequest from "hooks/api-request.hook";
 import useIsOpen from "hooks/is-open.hook";
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
+
+import styles from "./post.module.scss";
 
 const DeletedPost: React.FC<{
   id: string;
@@ -31,9 +32,12 @@ const DeletedPost: React.FC<{
   return (
     <DefaultBlock solid wide>
       <Center>
-        <MutedText big>{t("Post is deleted")}</MutedText>&nbsp;
+        <Text muted size={"large"}>
+          {t("Post is deleted")}
+        </Text>
+        &nbsp;
         <GVButton
-          size={GV_BTN_SIZE.BIG}
+          size={"xlarge"}
           variant={"text"}
           noPadding
           onClick={handleUndo}
@@ -42,36 +46,6 @@ const DeletedPost: React.FC<{
         </GVButton>
       </Center>
     </DefaultBlock>
-  );
-};
-
-const PostActions: React.FC<{
-  actions: PostActionsType;
-  id: string;
-  isPinned: boolean;
-  updateData: VoidFunction;
-  setDeleted: VoidFunction;
-}> = ({ actions, id, isPinned, updateData, setDeleted }) => {
-  if (!actions?.canDelete && !actions?.canPin) return null;
-  return (
-    <RowItem>
-      <Center>
-        {actions?.canPin && (
-          <RowItem>
-            <ConversationPinButton
-              id={id}
-              value={isPinned}
-              onSuccess={updateData}
-            />
-          </RowItem>
-        )}
-        {actions?.canDelete && (
-          <RowItem>
-            <ConversationRemoveButton id={id} onSuccess={setDeleted} />
-          </RowItem>
-        )}
-      </Center>
-    </RowItem>
   );
 };
 
@@ -90,12 +64,13 @@ const _Post: React.FC<Props> = ({
     text,
     id,
     comments,
-    actions,
+    personalDetails,
     likesCount,
     author,
     tags
   } = post;
   const [isDeleted, setDeleted, setNotDeleted] = useIsOpen();
+  const [isPinnedInner, setPinnedInner] = useState(isPinned);
   if (isDeleted) return <DeletedPost id={id} setNotDeleted={setNotDeleted} />;
   return (
     <DefaultBlock solid wide>
@@ -104,13 +79,24 @@ const _Post: React.FC<Props> = ({
           <Message
             reduceLargeText={reduceLargeText}
             settingsBlock={
-              <PostActions
-                actions={actions}
-                id={id}
-                isPinned={isPinned}
-                updateData={updateData}
-                setDeleted={setDeleted}
-              />
+              <Row>
+                {isPinnedInner && (
+                  <RowItem className={styles["post__pin-icon"]}>
+                    <PinIcon />
+                  </RowItem>
+                )}
+                <RowItem>
+                  <MessageActions
+                    url={url}
+                    actions={personalDetails}
+                    id={id}
+                    isPinned={isPinnedInner}
+                    onApply={updateData}
+                    setDeleted={setDeleted}
+                    setPinned={setPinnedInner}
+                  />
+                </RowItem>
+              </Row>
             }
             row={false}
             tags={tags}
@@ -127,12 +113,12 @@ const _Post: React.FC<Props> = ({
         rePostsCount={rePostsCount}
         onApply={updateData}
         id={id}
-        liked={actions?.isLiked}
+        liked={personalDetails?.isLiked}
         likesCount={likesCount}
-        canLike={!!actions}
+        canLike={!!personalDetails}
       />
       {!!comments.length && (
-        <Row large>
+        <Row size={"large"}>
           <CommentsList
             visibleCommentsCount={visibleCommentsCount}
             comments={comments}
@@ -140,7 +126,7 @@ const _Post: React.FC<Props> = ({
           />
         </Row>
       )}
-      {actions && actions.canComment && (
+      {personalDetails && personalDetails.canComment && (
         <Row>
           <CommentInputContainer onSuccess={updateData} id={id} />
         </Row>

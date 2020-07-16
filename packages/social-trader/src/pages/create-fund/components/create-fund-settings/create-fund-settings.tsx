@@ -66,7 +66,7 @@ const _CreateFundSettings: React.FC<Props> = ({
   return (
     <HookForm form={form} onSubmit={onSubmit}>
       <SettingsBlock
-        label={t("create-fund-page.settings.main-settings")}
+        label={t("create-fund-page:settings.main-settings")}
         blockNumber={"01"}
       >
         <DescriptionBlock
@@ -78,28 +78,28 @@ const _CreateFundSettings: React.FC<Props> = ({
         />
       </SettingsBlock>
       <SettingsBlock
-        label={t("create-fund-page.settings.asset-selection")}
+        label={t("create-fund-page:settings.asset-selection")}
         blockNumber={"02"}
       >
         <AssetsField name={CREATE_FUND_FIELDS.assets} />
       </SettingsBlock>
       <SettingsBlock
-        label={t("create-fund-page.settings.fees-settings")}
+        label={t("create-fund-page:settings.fees-settings")}
         blockNumber={"03"}
       >
         <FeesSettings
-          firstFeeLabel={t("create-program-page.settings.fields.entry-fee")}
-          firstFeeUnderText={t("create-program-page.settings.hints.entry-fee")}
+          firstFeeLabel={t("asset-settings:fields.entry-fee")}
+          firstFeeUnderText={t("create-fund-page:settings.hints.entry-fee")}
           firstFeeName={CREATE_FUND_FIELDS.entryFee}
           firstFeeDescription={t(
-            "create-fund-page.settings.hints.entry-fee-description",
+            "create-fund-page:settings.hints.entry-fee-description",
             { maxFee: maxEntryFee }
           )}
           secondFeeName={CREATE_FUND_FIELDS.exitFee}
-          secondFeeLabel={t("create-fund-page.settings.fields.exit-fee")}
-          secondFeeUnderText={t("create-fund-page.settings.hints.exit-fee")}
+          secondFeeLabel={t("create-fund-page:settings.fields.exit-fee")}
+          secondFeeUnderText={t("create-fund-page:settings.hints.exit-fee")}
           secondFeeDescription={t(
-            "create-fund-page.settings.hints.exit-fee-description",
+            "create-fund-page:settings.hints.exit-fee-description",
             {
               maxFee: maxExitFee
             }
@@ -117,7 +117,7 @@ const _CreateFundSettings: React.FC<Props> = ({
         setFieldValue={setValue}
         assetCurrency={FUND_CURRENCY}
       />
-      <Row large>
+      <Row size={"large"}>
         <CreateAssetNavigation
           asset={ASSET.FUND}
           isSuccessful={!errorMessage}

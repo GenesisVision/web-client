@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import Link from "components/link/link";
 import { useTranslation } from "i18n";
 import { TNavHeader } from "pages/landing-page/static-data/nav-links";
@@ -21,7 +21,7 @@ const _NavSubItem: React.FC<INavSubItemProps> = ({
   const { t } = useTranslation();
   return (
     <li
-      className={classNames(styles["nav-list__item"], {
+      className={clsx(styles["nav-list__item"], {
         [styles["nav-list__item--hide-mobile"]]: hideMobile
       })}
     >

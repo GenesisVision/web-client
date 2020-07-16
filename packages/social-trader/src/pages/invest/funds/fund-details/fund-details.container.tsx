@@ -8,10 +8,9 @@ import Page from "components/page/page";
 import { Row } from "components/row/row";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import { ASSET } from "constants/constants";
-import Crashable from "decorators/crashable";
 import { FundDetailsFull } from "gv-api-web";
 import { useAccountCurrency } from "hooks/account-currency.hook";
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import {
@@ -37,16 +36,85 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
       dispatchFundDescriptionWithId(description.id, undefined, currency)
     );
   }, []);
-  const title = `${t("funds-page.title")} - ${description.publicInfo.title}`;
+  const title = `${t("funds-page:title")} - ${description.publicInfo.title}`;
+
+  const banner = useMemo(
+    // () => composeFundBannerUrl(description.publicInfo.url),
+    () => description.publicInfo.logoUrl,
+    [description]
+  );
+  const schemas = useMemo(() => [getFundSchema(description)], [description]);
+
+  const notificationsUrl = useMemo(
+    () =>
+      createFundNotificationsToUrl(
+        description.publicInfo.url,
+        description.publicInfo.title
+      ),
+    [description]
+  );
+  const settingsUrl = useMemo(
+    () =>
+      description.publicInfo.status !== "Disabled" &&
+      description.publicInfo.status !== "Closed"
+        ? createFundSettingsToUrl(
+            description.publicInfo.url,
+            description.publicInfo.title
+          )
+        : undefined,
+    [description]
+  );
+
+  const renderAssetDetailsExtraBlock = useCallback(
+    () => (
+      <>
+        <h4>
+          <TooltipLabel
+            tooltipContent={t("fund-details-page:tooltip.assets")}
+            labelText={t("asset-details:description.assets")}
+          />
+        </h4>
+        <Row>
+          <FundAssetContainer
+            type={FUND_ASSET_TYPE.LARGE}
+            assets={description.assetsStructure}
+            size={7}
+          />
+        </Row>
+      </>
+    ),
+    [description]
+  );
+  const renderControls = useCallback(
+    () => (
+      <InvestmentFundControls
+        fundDescription={description}
+        onApply={handleDispatchDescription}
+      />
+    ),
+    [description, handleDispatchDescription]
+  );
+
+  const fees = useMemo(
+    () => ({
+      exitFee: description.exitFeeCurrent,
+      entryFee: description.entryFeeCurrent,
+      exitFeePersonal: description.personalDetails
+        ? description.personalDetails.exitFeePersonal
+        : 0
+    }),
+    [description]
+  );
+
   return (
     <Page
       type={"article"}
       title={title}
-      schemas={[getFundSchema(description)]}
-      description={`${t("funds-page.title")} ${
+      schemas={schemas}
+      description={`${t("funds-page:title")} ${
         description.publicInfo.title
       } - ${description.publicInfo.description}`}
-      previewImage={description.publicInfo.logoUrl}
+      previewImage={banner}
     >
       <DetailsDescriptionSection
         detailsType={DETAILS_TYPE.ASSET}
@@ -61,53 +129,15 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
         subtitle={description.owner.username}
         asset={ASSET.FUND}
         description={description.publicInfo.description}
-        notificationsUrl={createFundNotificationsToUrl(
-          description.publicInfo.url,
-          description.publicInfo.title
-        )}
-        settingsUrl={
-          description.publicInfo.status !== "Disabled" &&
-          description.publicInfo.status !== "Closed"
-            ? createFundSettingsToUrl(
-                description.publicInfo.url,
-                description.publicInfo.title
-              )
-            : undefined
-        }
-        AssetDetailsExtraBlock={() => (
-          <>
-            <h4>
-              <TooltipLabel
-                tooltipContent={t("fund-details-page.tooltip.assets")}
-                labelText={t("fund-details-page.description.assets")}
-              />
-            </h4>
-            <Row>
-              <FundAssetContainer
-                type={FUND_ASSET_TYPE.LARGE}
-                assets={description.assetsStructure}
-                size={7}
-              />
-            </Row>
-          </>
-        )}
-        Controls={() => (
-          <InvestmentFundControls
-            fundDescription={description}
-            onApply={handleDispatchDescription}
-          />
-        )}
+        notificationsUrl={notificationsUrl}
+        settingsUrl={settingsUrl}
+        AssetDetailsExtraBlock={renderAssetDetailsExtraBlock}
+        Controls={renderControls}
       />
       <DetailsDivider />
       <DetailsInvestment
         isOwnAsset={description.publicInfo.isOwnAsset}
-        fees={{
-          exitFee: description.exitFeeCurrent,
-          entryFee: description.entryFeeCurrent,
-          exitFeePersonal: description.personalDetails
-            ? description.personalDetails.exitFeePersonal
-            : 0
-        }}
+        fees={fees}
         dispatchDescription={handleDispatchDescription}
         asset={ASSET.FUND}
         selector={fundEventsTableSelector}
@@ -125,5 +155,5 @@ interface Props {
   data: FundDetailsFull;
 }
 
-const FundDetailsContainer = React.memo(Crashable(_FundDetailsContainer));
+const FundDetailsContainer = React.memo(_FundDetailsContainer);
 export default FundDetailsContainer;

@@ -6,7 +6,7 @@ import styles from "./dialog.module.scss";
 export const _DialogButtons: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
   children
 }) => (
-  <Row xlarge className={styles["dialog__buttons"]}>
+  <Row size={"xlarge"} className={styles["dialog__buttons"]}>
     {children}
   </Row>
 );

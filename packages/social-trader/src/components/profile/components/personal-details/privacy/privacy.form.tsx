@@ -92,15 +92,15 @@ const _PublicInfoForm: React.FC<Props> = ({
 
   return (
     <HookForm resetOnSuccess form={form} onSubmit={onSubmit}>
-      <Row large>
+      <Row size={"large"}>
         <PrivacySelect
-          title={t("profile-page.privacy.post")}
+          title={t("profile-page:privacy.post")}
           name={PRIVACY_FORM_VALUES.whoCanPostToMayWall}
         />
       </Row>
       <Row>
         <PrivacySelect
-          title={t("profile-page.privacy.view-comment")}
+          title={t("profile-page:privacy.view-comment")}
           name={PRIVACY_FORM_VALUES.whoCanViewCommentsOnMyPosts}
         />
       </Row>
@@ -110,7 +110,7 @@ const _PublicInfoForm: React.FC<Props> = ({
             watch()[PRIVACY_FORM_VALUES.whoCanViewCommentsOnMyPosts] ===
             "OnlyMe"
           }
-          title={t("profile-page.privacy.write-comment")}
+          title={t("profile-page:privacy.write-comment")}
           name={PRIVACY_FORM_VALUES.whoCanCommentOnMyPosts}
         />
       </Row>
@@ -119,7 +119,7 @@ const _PublicInfoForm: React.FC<Props> = ({
           <FormError error={errorMessage} />
         </Row>
       )}
-      <Row large>
+      <Row size={"large"}>
         <SubmitButton isPending={isPending} isSuccessful={!errorMessage}>
           {t("buttons.save")}
         </SubmitButton>

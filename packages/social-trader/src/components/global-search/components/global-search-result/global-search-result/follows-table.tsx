@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { Table } from "components/table/components";
 import { FollowDetailsListItemItemsViewModel } from "gv-api-web";
 import FollowTableRowShort from "modules/follows-table/components/follow-table-row-short";
@@ -19,12 +19,12 @@ const _FollowsTable: React.FC<SearchTableProps<
       items={data.items}
       renderHeader={column => (
         <span
-          className={classNames(
+          className={clsx(
             styles[`programs-table__cell`],
             styles[`programs-table__cell--${column.name}`]
           )}
         >
-          {t(`follows-page.header.${column.name}`)}
+          {t(`header-fields.${column.name}`)}
         </span>
       )}
       renderBodyRow={follow => <FollowTableRowShort follow={follow} />}
