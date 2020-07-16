@@ -1,4 +1,14 @@
+@import "styles/_colors";
+
 .social-share {
   &__message {
+  }
+
+  &__item {
+    button {
+      margin: 0;
+      padding: 0;
+      outline: none;
+    }
   }
 }

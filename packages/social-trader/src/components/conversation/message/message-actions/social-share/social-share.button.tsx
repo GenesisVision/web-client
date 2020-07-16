@@ -9,9 +9,14 @@ import { SocialShareDialog } from "./social-share.dialog";
 interface Props {
   clearAnchor: (event?: TEvent) => void;
   label?: string;
+  url: string;
 }
 
-export const _SocialShareButton: React.FC<Props> = ({ clearAnchor, label }) => {
+export const _SocialShareButton: React.FC<Props> = ({
+  clearAnchor,
+  label,
+  url
+}) => {
   const [t] = useTranslation();
   const [isOpen, setIsOpen, setIsClose] = useIsOpen();
 
@@ -25,7 +30,7 @@ export const _SocialShareButton: React.FC<Props> = ({ clearAnchor, label }) => {
       <TableCardActionsItem onClick={() => setIsOpen()}>
         {label || t("Share")}
       </TableCardActionsItem>
-      <SocialShareDialog open={isOpen} onClose={handleClose} />
+      <SocialShareDialog url={url} open={isOpen} onClose={handleClose} />
     </>
   );
 };
