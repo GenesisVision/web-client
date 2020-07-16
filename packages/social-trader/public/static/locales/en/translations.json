@@ -318,6 +318,7 @@
       "success-alert-message": "Successful request for investment in the program."
     },
     "fund": {
+      "nasdaq": "Your investment/withdrawal request will be processed when the NASDAQ Stock Exchange is open.",
       "available-to-invest": "Available to invest in fund",
       "success-alert-message": "Successful request for investment in the fund.",
       "disclaimer": "After clicking the \"Confirm\" button, your request will be processed within a few minutes."
