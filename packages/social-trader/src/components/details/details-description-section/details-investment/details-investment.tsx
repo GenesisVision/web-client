@@ -51,6 +51,7 @@ enum TABS {
 }
 
 const _DetailsInvestment: React.FC<Props> = ({
+  withdrawMessage,
   isOwnAsset,
   fees,
   asset,
@@ -139,6 +140,7 @@ const _DetailsInvestment: React.FC<Props> = ({
       {tab === TABS.INVESTMENT && showInvestment && (
         <Row onlyOffset>
           <Investment
+            withdrawMessage={withdrawMessage}
             isOwnAsset={isOwnAsset}
             fees={fees}
             updateDescription={dispatchDescription}
@@ -164,6 +166,7 @@ const _DetailsInvestment: React.FC<Props> = ({
 };
 
 interface Props {
+  withdrawMessage?: string;
   isOwnAsset: boolean;
   fees: FeesType;
   asset: ASSET;

@@ -21,6 +21,7 @@ import { CurrencyEnum, FeesType } from "utils/types";
 import { InvestmentType } from "./details-investment.helpers";
 
 const _Investment: React.FC<Props> = ({
+  withdrawMessage,
   isOwnAsset,
   fees,
   updateDescription,
@@ -190,6 +191,7 @@ const _Investment: React.FC<Props> = ({
       <Row>
         <DetailsInvestmentFooter>
           <WithdrawButton
+            infoMessage={withdrawMessage}
             size={"xlarge"}
             disabled={!personalDetails.canWithdraw}
             onApply={updateDescription}
@@ -204,6 +206,7 @@ const _Investment: React.FC<Props> = ({
 };
 
 interface Props {
+  withdrawMessage?: string;
   isOwnAsset: boolean;
   fees: FeesType;
   updateDescription: () => void;
