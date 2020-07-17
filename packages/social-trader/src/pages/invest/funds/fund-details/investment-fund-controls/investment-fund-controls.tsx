@@ -8,28 +8,21 @@ import { FundDetailsFull } from "gv-api-web";
 import DepositButton from "modules/deposit/deposit.button";
 import InvestmentFundInfo from "pages/invest/funds/fund-details/fund-details-description/investment-fund-info";
 import * as React from "react";
-import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
 
 const _InvestmentFundControls: React.FC<Props> = ({
+  hasNasdaqAssets,
+  nasdaqMessage,
   fundDescription,
   onApply
 }) => {
-  const [t] = useTranslation();
   const isOwnProgram = fundDescription.publicInfo.isOwnAsset;
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   const canInvest = isAuthenticated
     ? !!fundDescription.personalDetails &&
       fundDescription.personalDetails.canInvest
     : true;
-  const hasNasdaqAssets = false;
-  // fundDescription.assetsStructure.filter(
-  //   ({ provider }) => provider === "Nasdaq"
-  // ).length > 0;
-  const nasdaqMessage = `${t(
-    "deposit-asset.fund.nasdaq"
-  )} \n ${"Monday - Friday, 1:30 p.m. - 8:00 p.m. (UTC)"}`;
   return (
     <DetailsBlock type={DETAILS_BLOCK_TYPE.BORDERED}>
       <InvestmentFundInfo fundDescription={fundDescription} />
@@ -53,6 +46,8 @@ const _InvestmentFundControls: React.FC<Props> = ({
 };
 
 interface Props {
+  hasNasdaqAssets?: boolean;
+  nasdaqMessage?: string;
   fundDescription: FundDetailsFull;
   onApply: () => any;
 }

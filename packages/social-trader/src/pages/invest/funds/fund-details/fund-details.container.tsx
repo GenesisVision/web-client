@@ -97,6 +97,8 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
   const renderControls = useCallback(
     () => (
       <InvestmentFundControls
+        hasNasdaqAssets={hasNasdaqAssets}
+        nasdaqMessage={nasdaqMessage}
         fundDescription={description}
         onApply={handleDispatchDescription}
       />
