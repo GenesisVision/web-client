@@ -47,7 +47,7 @@ const _Investment: React.FC<Props> = ({
   const pendingCurrency =
     asset === ASSET.FUND ? personalDetails.pendingInOutCurrency : assetCurrency;
 
-  const hasNasdaqAssets = false;
+  const hasTradingSchedule = false;
   // asset.assetsStructure.filter(
   //   ({ provider }) => provider === "Nasdaq"
   // ).length > 0;
@@ -195,7 +195,7 @@ const _Investment: React.FC<Props> = ({
                 )}
               </InvestmentItem>
             )}
-          {hasNasdaqAssets && (
+          {hasTradingSchedule && (
             <DetailsInvestmentText>{nasdaqMessage}</DetailsInvestmentText>
           )}
         </StatisticItemList>

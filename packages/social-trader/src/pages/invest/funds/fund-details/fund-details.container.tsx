@@ -37,7 +37,7 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
     );
   }, []);
 
-  const hasNasdaqAssets = false;
+  const hasTradingSchedule = false;
   // asset.assetsStructure.filter(
   //   ({ provider }) => provider === "Nasdaq"
   // ).length > 0;
@@ -97,7 +97,7 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
   const renderControls = useCallback(
     () => (
       <InvestmentFundControls
-        hasNasdaqAssets={hasNasdaqAssets}
+        hasTradingSchedule={hasTradingSchedule}
         nasdaqMessage={nasdaqMessage}
         fundDescription={description}
         onApply={handleDispatchDescription}
@@ -147,7 +147,7 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
       />
       <DetailsDivider />
       <DetailsInvestment
-        withdrawMessage={hasNasdaqAssets ? nasdaqMessage : undefined}
+        withdrawMessage={hasTradingSchedule ? nasdaqMessage : undefined}
         isOwnAsset={description.publicInfo.isOwnAsset}
         fees={fees}
         dispatchDescription={handleDispatchDescription}

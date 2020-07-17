@@ -12,7 +12,7 @@ import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
 
 const _InvestmentFundControls: React.FC<Props> = ({
-  hasNasdaqAssets,
+  hasTradingSchedule,
   nasdaqMessage,
   fundDescription,
   onApply
@@ -29,7 +29,7 @@ const _InvestmentFundControls: React.FC<Props> = ({
       <Row>
         <DetailsStatisticContainer>
           <DepositButton
-            infoMessage={hasNasdaqAssets ? nasdaqMessage : undefined}
+            infoMessage={hasTradingSchedule ? nasdaqMessage : undefined}
             disabled={!canInvest}
             title={fundDescription.publicInfo.title}
             onApply={onApply}
@@ -46,7 +46,7 @@ const _InvestmentFundControls: React.FC<Props> = ({
 };
 
 interface Props {
-  hasNasdaqAssets?: boolean;
+  hasTradingSchedule?: boolean;
   nasdaqMessage?: string;
   fundDescription: FundDetailsFull;
   onApply: () => any;

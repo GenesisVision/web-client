@@ -33,7 +33,7 @@ const _AssetsComponent: React.FC<Props> = ({
     []
   );
   const handleLeave = useCallback(() => setHoveringAssetName(undefined), []);
-  const hasNasdaqAssets =
+  const hasTradingSchedule =
     assets.filter(({ provider }) => provider === "Nasdaq").length > 0;
   return (
     <>
@@ -72,7 +72,7 @@ const _AssetsComponent: React.FC<Props> = ({
           </Center>
         </Row>
       )}
-      {hasNasdaqAssets && (
+      {hasTradingSchedule && (
         <Row onlyOffset>
           <Row>
             <Text muted>{t("asset-settings:reallocate.nasdaq-message")}</Text>

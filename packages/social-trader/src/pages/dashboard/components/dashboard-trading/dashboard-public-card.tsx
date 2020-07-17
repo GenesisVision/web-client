@@ -57,7 +57,7 @@ const _DashboardPublicCard: React.FC<Props> = ({
   const assetColor = asset.publicInfo ? asset.publicInfo.color : "";
   const assetLogo = asset.publicInfo ? asset.publicInfo.logoUrl : "";
 
-  const hasNasdaqAssets = false;
+  const hasTradingSchedule = false;
   // asset.assetsStructure.filter(
   //   ({ provider }) => provider === "Nasdaq"
   // ).length > 0;
@@ -228,7 +228,7 @@ const _DashboardPublicCard: React.FC<Props> = ({
         </TableCardTableRow>
       )}
       <DepositWithdrawButtons
-        infoMessage={hasNasdaqAssets ? nasdaqMessage : undefined}
+        infoMessage={hasTradingSchedule ? nasdaqMessage : undefined}
         accountType={asset.assetTypeExt}
         canTransfer={asset?.actions?.canTransferMoney}
         transferableItem={mapAccountToTransferItemType(asset)}
