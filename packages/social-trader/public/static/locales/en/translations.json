@@ -1,4 +1,10 @@
 {
+  "trading-schedule": {
+    "create-fund": "Please note that this fund will be processed when the Stock Exchange is open.",
+    "reallocate-fund": "Please note that any reallocations will be processed when the Stock Exchange is open.",
+    "post-create-fund": "Please note that this fund will be processed when the Stock Exchange is open.",
+    "invest-fund": "Your investment/withdrawal request will be processed when the Stock Exchange is open."
+  },
   "labels": {
     "gvt-fees-title": "Fees and Discounts",
     "to": "To",
