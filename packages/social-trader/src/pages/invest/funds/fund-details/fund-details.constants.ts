@@ -15,6 +15,9 @@ export const FUND_STRUCTURE_COLUMNS: SortingColumn[] = [
     tooltip: true
   },
   {
+    name: "amount"
+  },
+  {
     name: "target",
     tooltip: true
   },

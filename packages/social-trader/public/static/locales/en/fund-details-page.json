@@ -33,6 +33,7 @@
       "reallocate-history": "Reallocate History"
     },
     "structure": {
+      "amount": "Amount",
       "asset": "Asset",
       "symbol": "Symbol",
       "target": "Target",

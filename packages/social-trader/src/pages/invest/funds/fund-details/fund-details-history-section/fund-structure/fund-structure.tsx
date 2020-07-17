@@ -40,6 +40,12 @@ const _FundStructure: React.FC = () => {
           </TableCell>
           <TableCell className={styles["details-structure__cell"]}>
             <NumberFormat
+              value={formatValue(item.currentAmount)}
+              displayType="text"
+            />
+          </TableCell>
+          <TableCell className={styles["details-structure__cell"]}>
+            <NumberFormat
               value={formatValue(item.target)}
               suffix={"%"}
               displayType="text"
