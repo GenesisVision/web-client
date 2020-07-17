@@ -45,7 +45,7 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
     "deposit-asset.fund.nasdaq"
   )} \n ${"Monday - Friday, 1:30 p.m. - 8:00 p.m. (UTC)"}`;
 
-  const title = `${t("funds-page:title")} - ${description.publicInfo.title}`;
+  const title = `${t("fund-details-page:title")} - ${description.publicInfo.title}`;
 
   const banner = useMemo(
     // () => composeFundBannerUrl(description.publicInfo.url),
