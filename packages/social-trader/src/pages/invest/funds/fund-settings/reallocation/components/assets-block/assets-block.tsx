@@ -96,7 +96,7 @@ const _AssetsComponent: React.FC<Props> = ({
 };
 
 interface Props {
-  providers: ProviderPlatformAssets[];
+  providers?: ProviderPlatformAssets[];
   scheduleMessage?: string;
   assets: PlatformAssetFull[];
   remainder: number;
