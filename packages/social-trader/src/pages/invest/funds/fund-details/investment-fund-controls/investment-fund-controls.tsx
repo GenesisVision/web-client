@@ -13,7 +13,7 @@ import { isAuthenticatedSelector } from "reducers/auth-reducer";
 
 const _InvestmentFundControls: React.FC<Props> = ({
   hasTradingSchedule,
-  nasdaqMessage,
+  infoMessage,
   fundDescription,
   onApply
 }) => {
@@ -29,7 +29,7 @@ const _InvestmentFundControls: React.FC<Props> = ({
       <Row>
         <DetailsStatisticContainer>
           <DepositButton
-            infoMessage={hasTradingSchedule ? nasdaqMessage : undefined}
+            infoMessage={hasTradingSchedule ? infoMessage : undefined}
             disabled={!canInvest}
             title={fundDescription.publicInfo.title}
             onApply={onApply}
@@ -47,7 +47,7 @@ const _InvestmentFundControls: React.FC<Props> = ({
 
 interface Props {
   hasTradingSchedule?: boolean;
-  nasdaqMessage?: string;
+  infoMessage?: string;
   fundDescription: FundDetailsFull;
   onApply: () => any;
 }

@@ -25,7 +25,10 @@ import FundDetailsStatisticSection from "./fund-details-statistics-section/fund-
 import { getFundSchema } from "./fund-schema";
 import InvestmentFundControls from "./investment-fund-controls/investment-fund-controls";
 import { fundEventsTableSelector } from "./reducers/fund-events.reducer";
-import { dispatchFundDescriptionWithId } from "./services/fund-details.service";
+import {
+  dispatchFundDescriptionWithId,
+  generateScheduleText
+} from "./services/fund-details.service";
 
 const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
   const [t] = useTranslation();
@@ -37,15 +40,16 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
     );
   }, []);
 
-  const hasTradingSchedule = false;
-  // asset.assetsStructure.filter(
-  //   ({ provider }) => provider === "Nasdaq"
-  // ).length > 0;
-  const nasdaqMessage = `${t(
-    "deposit-asset.fund.nasdaq"
-  )} \n ${"Monday - Friday, 1:30 p.m. - 8:00 p.m. (UTC)"}`;
+  const hasTradingSchedule = description.tradingSchedule.hasTradingSchedule;
+  const schedule = generateScheduleText(description.tradingSchedule);
+  const investMessage = `${t("trading-schedule.invest-fund")} \n ${schedule}`;
+  const investmentMessage = `${t(
+    "trading-schedule.post-create-fund"
+  )} \n${schedule}`;
 
-  const title = `${t("fund-details-page:title")} - ${description.publicInfo.title}`;
+  const title = `${t("fund-details-page:title")} - ${
+    description.publicInfo.title
+  }`;
 
   const banner = useMemo(
     // () => composeFundBannerUrl(description.publicInfo.url),
@@ -98,7 +102,7 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
     () => (
       <InvestmentFundControls
         hasTradingSchedule={hasTradingSchedule}
-        nasdaqMessage={nasdaqMessage}
+        infoMessage={investMessage}
         fundDescription={description}
         onApply={handleDispatchDescription}
       />
@@ -147,7 +151,9 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
       />
       <DetailsDivider />
       <DetailsInvestment
-        withdrawMessage={hasTradingSchedule ? nasdaqMessage : undefined}
+        hasTradingSchedule={hasTradingSchedule}
+        investmentMessage={hasTradingSchedule ? investmentMessage : undefined}
+        withdrawMessage={hasTradingSchedule ? investMessage : undefined}
         isOwnAsset={description.publicInfo.isOwnAsset}
         fees={fees}
         dispatchDescription={handleDispatchDescription}

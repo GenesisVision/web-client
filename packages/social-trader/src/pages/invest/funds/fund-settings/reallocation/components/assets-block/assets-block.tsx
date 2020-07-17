@@ -10,13 +10,18 @@ import FundAssetContainer, {
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
+import { ProviderPlatformAssets } from "gv-api-web";
+import { generateScheduleText } from "pages/invest/funds/fund-details/services/fund-details.service";
 import React, { MouseEventHandler, useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { safeGetElemFromArray } from "utils/helpers";
 import { PlatformAssetFull } from "utils/types";
 
 import styles from "./assets-block.module.scss";
 
 const _AssetsComponent: React.FC<Props> = ({
+  providers,
+  scheduleMessage,
   error,
   canChange = true,
   assets = [],
@@ -35,6 +40,10 @@ const _AssetsComponent: React.FC<Props> = ({
   const handleLeave = useCallback(() => setHoveringAssetName(undefined), []);
   const hasTradingSchedule =
     assets.filter(({ provider }) => provider === "Nasdaq").length > 0;
+  const provider =
+    providers &&
+    safeGetElemFromArray(providers, ({ type }) => type === "Nasdaq");
+  const schedule = generateScheduleText(provider?.tradingSchedule);
   return (
     <>
       <Row onlyOffset wide>
@@ -75,10 +84,10 @@ const _AssetsComponent: React.FC<Props> = ({
       {hasTradingSchedule && (
         <Row onlyOffset>
           <Row>
-            <Text muted>{t("asset-settings:reallocate.nasdaq-message")}</Text>
+            <Text muted>{scheduleMessage}</Text>
           </Row>
           <Row>
-            <Text muted>Monday - Friday, 1:30 p.m. - 8:00 p.m. (UTC)</Text>
+            <Text muted>{schedule}</Text>
           </Row>
         </Row>
       )}
@@ -87,6 +96,8 @@ const _AssetsComponent: React.FC<Props> = ({
 };
 
 interface Props {
+  providers: ProviderPlatformAssets[];
+  scheduleMessage?: string;
   assets: PlatformAssetFull[];
   remainder: number;
   removeHandle?: FundAssetRemoveType;

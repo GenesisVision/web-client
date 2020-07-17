@@ -11,6 +11,7 @@ import { ASSET, FUND_CURRENCY } from "constants/constants";
 import { FundInvestingDetailsList } from "gv-api-web";
 import { FundCardTable } from "modules/funds-table/components/funds-table/fund-card";
 import DepositWithdrawButtons from "pages/dashboard/components/dashboard-trading/deposit-withdraw-buttons";
+import { generateScheduleText } from "pages/invest/funds/fund-details/services/fund-details.service";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { FUND_DETAILS_FOLDER_ROUTE } from "routes/invest.routes";
@@ -26,13 +27,10 @@ const _DashboardFundCard: React.FC<Props> = ({
   const { linkCreator, contextTitle } = useToLink();
   const { t } = useTranslation();
 
-  const hasTradingSchedule = false;
-  // fundDescription.assetsStructure.filter(
-  //   ({ provider }) => provider === "Nasdaq"
-  // ).length > 0;
-  const nasdaqMessage = `${t(
-    "deposit-asset.fund.nasdaq"
-  )} \n ${"Monday - Friday, 1:30 p.m. - 8:00 p.m. (UTC)"}`;
+  const hasTradingSchedule = fund.tradingSchedule.hasTradingSchedule;
+  const schedule = generateScheduleText(fund.tradingSchedule);
+  const investMessage = `${t("trading-schedule.invest-fund")} \n ${schedule}`;
+
   const renderActions = ({ clearAnchor, anchor }: IRenderActionsArgs) => (
     <TableCardActions anchor={anchor} clearAnchor={clearAnchor}>
       <TableCardActionsItem
@@ -83,7 +81,7 @@ const _DashboardFundCard: React.FC<Props> = ({
         amountTitleTooltip={t("dashboard-page:tooltips.investing.size")}
       />
       <DepositWithdrawButtons
-        infoMessage={hasTradingSchedule ? nasdaqMessage : undefined}
+        infoMessage={hasTradingSchedule ? investMessage : undefined}
         title={fund.title}
         onApply={updateItems}
         canWithdraw={fund.personalDetails.canWithdraw}

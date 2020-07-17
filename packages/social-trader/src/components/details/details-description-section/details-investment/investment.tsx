@@ -22,6 +22,8 @@ import { CurrencyEnum, FeesType } from "utils/types";
 import { InvestmentType } from "./details-investment.helpers";
 
 const _Investment: React.FC<Props> = ({
+  investmentMessage,
+  hasTradingSchedule,
   withdrawMessage,
   isOwnAsset,
   fees,
@@ -46,14 +48,6 @@ const _Investment: React.FC<Props> = ({
   const currency = asset === ASSET.FUND ? accountCurrency : assetCurrency;
   const pendingCurrency =
     asset === ASSET.FUND ? personalDetails.pendingInOutCurrency : assetCurrency;
-
-  const hasTradingSchedule = false;
-  // asset.assetsStructure.filter(
-  //   ({ provider }) => provider === "Nasdaq"
-  // ).length > 0;
-  const nasdaqMessage = `${t(
-    "deposit-asset.fund.nasdaq"
-  )} \n${"Monday - Friday, 1:30 p.m. - 8:00 p.m. (UTC)"}`;
 
   return (
     <DetailsInvestmentBlock>
@@ -195,8 +189,8 @@ const _Investment: React.FC<Props> = ({
                 )}
               </InvestmentItem>
             )}
-          {hasTradingSchedule && (
-            <DetailsInvestmentText>{nasdaqMessage}</DetailsInvestmentText>
+          {hasTradingSchedule && personalDetails.status === "Pending" && (
+            <DetailsInvestmentText>{investmentMessage}</DetailsInvestmentText>
           )}
         </StatisticItemList>
       </Row>
@@ -218,6 +212,8 @@ const _Investment: React.FC<Props> = ({
 };
 
 interface Props {
+  hasTradingSchedule?: boolean;
+  investmentMessage?: string;
   withdrawMessage?: string;
   isOwnAsset: boolean;
   fees: FeesType;

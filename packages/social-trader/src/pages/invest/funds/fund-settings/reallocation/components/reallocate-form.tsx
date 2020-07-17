@@ -95,6 +95,7 @@ const _ReallocateForm: React.FC<Props> = ({
       <Row wide>
         <LabeledValue label={dirty ? "New" : "Current"}>
           <GVHookFormField
+            scheduleMessage={t("trading-schedule.reallocate-fund")}
             name={FIELDS.assets}
             component={ReallocateFieldWrapper}
             assets={platformAssets}

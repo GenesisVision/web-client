@@ -20,6 +20,7 @@ import { TRegulatorInputHandle } from "./add-asset/add-asset-list";
 import AssetsComponent from "./assets-block/assets-block";
 
 export interface IReallocateFieldProps {
+  scheduleMessage?: string;
   providers: ProviderPlatformAssets[];
   name: string;
   value: FundAssetPart[];
@@ -40,6 +41,7 @@ export interface IReallocateFieldProps {
 }
 
 const _ReallocateField: React.FC<IReallocateFieldProps> = ({
+  scheduleMessage,
   providers,
   name,
   value = [],
@@ -140,6 +142,8 @@ const _ReallocateField: React.FC<IReallocateFieldProps> = ({
   return (
     <>
       <AssetsComponent
+        providers={providers}
+        scheduleMessage={scheduleMessage}
         touched={touched}
         error={error}
         assets={stateAssets.filter(item => item.percent > 0)}

@@ -22,6 +22,7 @@ import { useTranslation } from "i18n";
 import { DashboardPublicCardActions } from "pages/dashboard/components/dashboard-trading/dashboard-public-card-actions";
 import DepositWithdrawButtons from "pages/dashboard/components/dashboard-trading/deposit-withdraw-buttons";
 import { mapAccountToTransferItemType } from "pages/dashboard/services/dashboard.service";
+import { generateScheduleText } from "pages/invest/funds/fund-details/services/fund-details.service";
 import React from "react";
 import NumberFormat from "react-number-format";
 import {
@@ -57,13 +58,12 @@ const _DashboardPublicCard: React.FC<Props> = ({
   const assetColor = asset.publicInfo ? asset.publicInfo.color : "";
   const assetLogo = asset.publicInfo ? asset.publicInfo.logoUrl : "";
 
-  const hasTradingSchedule = false;
-  // asset.assetsStructure.filter(
-  //   ({ provider }) => provider === "Nasdaq"
-  // ).length > 0;
-  const nasdaqMessage = `${t(
-    "deposit-asset.fund.nasdaq"
-  )} \n ${"Monday - Friday, 1:30 p.m. - 8:00 p.m. (UTC)"}`;
+  const hasTradingSchedule =
+    asset.publicInfo?.fundDetails?.tradingSchedule?.hasTradingSchedule;
+  const schedule = generateScheduleText(
+    asset.publicInfo?.fundDetails?.tradingSchedule
+  );
+  const investMessage = `${t("trading-schedule.invest-fund")} \n ${schedule}`;
 
   const renderActions = ({
     anchor,
@@ -228,7 +228,7 @@ const _DashboardPublicCard: React.FC<Props> = ({
         </TableCardTableRow>
       )}
       <DepositWithdrawButtons
-        infoMessage={hasTradingSchedule ? nasdaqMessage : undefined}
+        infoMessage={hasTradingSchedule ? investMessage : undefined}
         accountType={asset.assetTypeExt}
         canTransfer={asset?.actions?.canTransferMoney}
         transferableItem={mapAccountToTransferItemType(asset)}
