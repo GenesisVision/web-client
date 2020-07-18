@@ -45,9 +45,7 @@ export const cookieServiceCreator = <T = string>({
   };
 
   const clear = (): void => {
-    const setValue = parse
-      ? JSON.stringify(CookieServiceDefaultEmptyParseState)
-      : initialState;
+    const setValue = parse ? CookieServiceDefaultEmptyParseState : initialState;
     cookieProvider.setCookie(
       key,
       String(setValue) || CookieServiceDefaultEmptyState
