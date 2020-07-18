@@ -2,7 +2,7 @@ import { NextPageContext } from "next";
 import { getCookie, removeCookie, setCookie } from "utils/cookie";
 import { NextPageWithReduxContext } from "utils/types";
 
-interface CookieProvider {
+export interface CookieProvider {
   getCookie: (name: string, ctx?: NextPageContext) => string | undefined;
   setCookie: (name: string, value: string) => void;
   removeCookie: (name: string) => void;
