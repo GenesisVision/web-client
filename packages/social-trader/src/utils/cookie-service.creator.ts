@@ -17,7 +17,7 @@ type CookieServiceCreatorArgsType<T> = {
 };
 
 export const CookieServiceDefaultEmptyState = "";
-export const CookieServiceDefaultEmptyParseState = JSON.stringify({});
+export const CookieServiceDefaultEmptyParseState = {};
 
 const defaultCookieProvider: CookieProvider = {
   removeCookie,
@@ -30,26 +30,25 @@ export const cookieServiceCreator = <T = string>({
   ctx,
   parse,
   key,
-  initialState = (CookieServiceDefaultEmptyState as unknown) as T
+  initialState = (parse
+    ? CookieServiceDefaultEmptyParseState
+    : (CookieServiceDefaultEmptyState as unknown)) as T
 }: CookieServiceCreatorArgsType<T>) => {
   const get = (funcCtx?: NextPageWithReduxContext | NextPageContext): T => {
     const cookieValue = cookieProvider.getCookie(key, ctx || funcCtx);
-    return parse
-      ? JSON.parse(cookieValue || CookieServiceDefaultEmptyParseState)
-      : cookieValue || initialState;
+    if (!cookieValue) return initialState;
+    return parse ? JSON.parse(cookieValue) : cookieValue;
   };
 
   const set = (value: T): void => {
+    if (value === null || value === undefined) return;
     const setValue = parse ? JSON.stringify(value) : value;
     cookieProvider.setCookie(key, String(setValue));
   };
 
   const clear = (): void => {
-    const setValue = parse ? CookieServiceDefaultEmptyParseState : initialState;
-    cookieProvider.setCookie(
-      key,
-      String(setValue) || CookieServiceDefaultEmptyState
-    );
+    const value = parse ? JSON.stringify(initialState) : String(initialState);
+    cookieProvider.setCookie(key, value);
   };
   return { get, set, clear };
 };
