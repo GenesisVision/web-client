@@ -39,7 +39,7 @@ const _SignInContainer: React.FC<Props> = ({
     if (!value) return;
     authService.storeToken(value);
     dispatch(authActions.updateTokenAction(true));
-    Router.push(redirectFrom);
+    Push(redirectFrom);
   };
   const saveAccountCurrencyMiddleware = (res: any) => {
     if (res)
