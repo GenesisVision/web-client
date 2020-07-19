@@ -11,9 +11,7 @@ const withPrivateRoute = (WrappedComponent: NextPage<any>): any =>
     static async getInitialProps(ctx: NextPageContext) {
       const token = getToken(ctx);
       if (ctx.req && ctx.res && !token) {
-        const redirectUrl = `${LOGIN_ROUTE}?from=${qs.stringify(
-          ctx.req.url || HOME_ROUTE
-        )}`;
+        const redirectUrl = `${LOGIN_ROUTE}?from=${ctx.req.url || HOME_ROUTE}`;
         ctx.res.writeHead(302, { Location: normalizeUrlString(redirectUrl) });
         ctx.res.end();
         return;
