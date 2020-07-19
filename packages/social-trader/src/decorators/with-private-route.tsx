@@ -2,6 +2,7 @@ import { getHeader } from "components/header/services/header.service";
 import { Push } from "components/link/link";
 import { normalizeUrlString } from "components/link/link.helper";
 import { NextPage } from "next";
+import qs from "qs";
 import React, { Component } from "react";
 import { HOME_ROUTE, LOGIN_ROUTE } from "routes/app.routes";
 import Token from "services/api-client/token";
@@ -19,9 +20,11 @@ const withPrivateRoute = (WrappedComponent: NextPage<any>): any =>
 
       if (ctx.req && ctx.res && (!token || !isValidToken)) {
         const clearToken = !isValidToken;
-        const redirectUrl = `${LOGIN_ROUTE}?from=${ctx.req.url || HOME_ROUTE}${
-          clearToken ? "&clearToken=true" : ""
-        }`;
+        const params = {
+          from: ctx.req.url || HOME_ROUTE,
+          clearToken: clearToken ? true : undefined
+        };
+        const redirectUrl = `${LOGIN_ROUTE}?${qs.stringify(params)}`;
         ctx.res.writeHead(302, { Location: normalizeUrlString(redirectUrl) });
         ctx.res.end();
         return;
