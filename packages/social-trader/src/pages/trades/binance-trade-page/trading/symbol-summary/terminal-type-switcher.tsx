@@ -13,18 +13,17 @@ import styles from "./symbol-summary.module.scss";
 
 export const TerminalTypeSwitcher: React.FC = () => {
   const [t] = useTranslation();
-  const params = useParams();
+  const { parsedParams } = useParams();
   const { terminalType, symbol } = useContext(TerminalInfoContext);
 
   const symbolPath = stringifySymbolFromToParam(symbol);
   const handleSelectType = useCallback(
     (type: TerminalType) => () => {
-      const parsedParams = qs.parse(params || "");
       const newParams = qs.stringify({ ...parsedParams, type });
       const route = `${TERMINAL_ROUTE}/${symbolPath}?${newParams}`;
       Push(TERMINAL_FOLDER_ROUTE, route);
     },
-    [params, symbolPath]
+    [parsedParams, symbolPath]
   );
   return (
     <div className={styles["symbol-summary__type-switcher"]}>

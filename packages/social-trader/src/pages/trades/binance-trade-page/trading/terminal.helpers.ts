@@ -45,8 +45,7 @@ export const updateTerminalUrl = (url: string, updates?: Object) => {
 };
 
 export const useUpdateTerminalUrlParams = () => {
-  const params = useParams();
-  const parsedParams = qs.parse(params || "");
+  const { parsedParams } = useParams();
   return (url: string, updates?: Object) => {
     const updatedParams = qs.stringify({ ...parsedParams, ...updates });
     const ulrWithParams = `${url}${
