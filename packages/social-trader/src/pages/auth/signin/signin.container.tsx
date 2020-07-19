@@ -4,6 +4,7 @@ import { Push } from "components/link/link";
 import useApiRequest from "hooks/api-request.hook";
 import useErrorMessage from "hooks/error-message.hook";
 import useIsOpen from "hooks/is-open.hook";
+import { useParams } from "hooks/location";
 import Router from "next/router";
 import { LOGIN_ROUTE_TWO_FACTOR_ROUTE } from "pages/auth/signin/signin.constants";
 import * as React from "react";
@@ -23,6 +24,7 @@ const _SignInContainer: React.FC<Props> = ({
   redirectFrom,
   type
 }) => {
+  const { parsedParams } = useParams();
   const [innerFields, setInnerFields] = useState<{
     email?: string;
     password?: string;
@@ -80,6 +82,11 @@ const _SignInContainer: React.FC<Props> = ({
     if (type && (email === "" || password === "")) Router.replace(LOGIN_ROUTE);
     clearTwoFactorState();
   }, []);
+
+  useEffect(() => {
+    if (!!parsedParams?.clearToken) authService.removeToken();
+  }, [parsedParams]);
+
   return (
     <div className={className}>
       <CaptchaContainer
