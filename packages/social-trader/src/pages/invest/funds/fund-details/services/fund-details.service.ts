@@ -40,7 +40,7 @@ export const generateScheduleText = (
   const hourEndInPM = hourEnd > 12 ? hourEnd - 12 : hourEnd;
   return `${dayStart} - ${dayEnd}, ${hourStartInPM}:${correctMinuteString(
     minuteStart
-  )} p.m. - ${hourEndInPM}:${correctMinuteString(minuteEnd)} p.m.`;
+  )} p.m. - ${hourEndInPM}:${correctMinuteString(minuteEnd)} p.m. (UTC)`;
 };
 
 export const dispatchFundDescriptionWithId = (
