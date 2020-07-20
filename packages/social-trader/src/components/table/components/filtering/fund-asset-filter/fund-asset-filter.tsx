@@ -1,5 +1,5 @@
 import { CurrencyItem } from "components/currency-item/currency-item";
-import { PlatformAsset } from "gv-api-web";
+import { PlatformAsset, ProviderPlatformAssets } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -9,7 +9,21 @@ import TileFilterItem from "../tile-filter-item";
 import styles from "./fund-asset-filter.module.scss";
 import FundAssetPopover from "./fund-asset-popover";
 
+export interface IFundAssetFilterProps {
+  name: string;
+  value: string[];
+  values: PlatformAsset[];
+  onChange: UpdateFilterFunc;
+}
+
+interface OwnProps {
+  providers: Array<ProviderPlatformAssets>;
+}
+
+interface Props extends IFundAssetFilterProps, OwnProps {}
+
 const _FundAssetFilter: React.FC<Props> = ({
+  providers,
   name,
   values,
   value,
@@ -37,17 +51,10 @@ const _FundAssetFilter: React.FC<Props> = ({
       buttonTitle={t("filters.fund-asset.add")}
       selectedTiles={selectedAssets}
     >
-      <FundAssetPopover values={notSelectedAssets} />
+      <FundAssetPopover providers={providers} values={notSelectedAssets} />
     </TileFilter>
   );
 };
 
 const FundAssetFilter = React.memo(_FundAssetFilter);
 export default FundAssetFilter;
-
-interface Props {
-  name: string;
-  value: string[];
-  values: PlatformAsset[];
-  onChange: UpdateFilterFunc;
-}
