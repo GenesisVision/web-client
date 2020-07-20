@@ -1,8 +1,8 @@
 import DateRangeFilter from "components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { FilteringType } from "components/table/components/filtering/filter.type";
-import FundAssetFilter from "components/table/components/filtering/fund-asset-filter/fund-asset-filter";
 import { FUND_ASSET_FILTER_NAME } from "components/table/components/filtering/fund-asset-filter/fund-asset-filter.constants";
+import { FundAssetFilterContainer } from "components/table/components/filtering/fund-asset-filter/fund-asset-filter.container";
 import SelectFilter from "components/table/components/filtering/select-filter/select-filter";
 import { composePaging } from "components/table/helpers/paging.helpers";
 import { LIST_VIEW } from "components/table/table.constants";
@@ -73,7 +73,7 @@ const _FundsTableSSR: React.FC<Props> = ({
   );
   const renderFilters = useCallback(
     (updateFilter: any, filtering: FilteringType) => (
-      <FundAssetFilter
+      <FundAssetFilterContainer
         name={FUND_ASSET_FILTER_NAME}
         value={filtering[FUND_ASSET_FILTER_NAME] as string[]}
         values={fundAssets}
