@@ -36,7 +36,10 @@ const _DashboardTotal: React.FC<Props> = ({
   return (
     <div className={styles["dashboard-total__values"]}>
       <Row wrap className={styles["dashboard-total__main-row"]}>
-        <RowItem className={styles["dashboard-total__main-row-item"]}>
+        <RowItem
+          bottomOffset
+          className={styles["dashboard-total__main-row-item"]}
+        >
           <Row>
             <LabeledValue
               label={
@@ -100,7 +103,10 @@ const _DashboardTotal: React.FC<Props> = ({
             </StatisticItemList>
           </Row>
         </RowItem>
-        <RowItem className={styles["dashboard-total__main-row-item"]}>
+        <RowItem
+          bottomOffset
+          className={styles["dashboard-total__main-row-item"]}
+        >
           <KYCLimitContainer limitWithoutKyc={limitWithoutKyc} />
         </RowItem>
       </Row>
