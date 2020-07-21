@@ -2,6 +2,7 @@ import { Center } from "components/center/center";
 import { LabeledValue } from "components/labeled-value/labeled-value";
 import PieContainer from "components/pie-container/pie-container";
 import { RowItem } from "components/row-item/row-item";
+import { Text } from "components/text/text";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import withLoader from "decorators/with-loader";
 import React from "react";
@@ -44,7 +45,9 @@ const _PieStatisticItem: React.FC<Props> = ({
         </RowItem>
         <RowItem>
           <LabeledValue weight={"bold"} label={renderLabel}>
-            {renderValue}
+            <Text weight={"bold"} wrap={false}>
+              {renderValue}
+            </Text>
           </LabeledValue>
         </RowItem>
       </Center>
