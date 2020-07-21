@@ -1,7 +1,7 @@
 import { ownerLoaderData } from "components/details/details.loader-data";
 import { getEquityChartLoaderData } from "components/multi-chart/service/multi-chart.service";
 import { ASSET } from "constants/constants";
-import { AssetType, MoneyLocation } from "gv-api-web";
+import { AssetType, LimitWithoutKyc, MoneyLocation } from "gv-api-web";
 import {
   TDashboardEvent,
   TDashboardInRequests,
@@ -170,11 +170,7 @@ export const getRecommendationLoaderData = (): TRecommendation => {
 };
 
 export const getTotalLoaderData = (): TDashboardTotal => ({
-  limitWithoutKyc: {
-    limit: 0,
-    currency: "GVT",
-    invested: 0
-  },
+  limitWithoutKyc: (undefined as unknown) as LimitWithoutKyc,
   total: getRandomInteger(1, 10000),
   trading: getRandomInteger(-10000, 10000),
   invested: getRandomInteger(-10000, 10000),
