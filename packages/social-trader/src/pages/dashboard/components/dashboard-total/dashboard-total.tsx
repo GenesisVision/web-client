@@ -9,6 +9,7 @@ import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import WalletDeposit from "modules/wallet-deposit/wallet-deposit";
 import DashboardStatisticPeriods from "pages/dashboard/components/dashboard-statistic/dashboard-statistic-periods";
+import { KYCLimitContainer } from "pages/dashboard/components/kyc-limit/kyc-limit.container";
 import {
   $pieAvailableColor,
   $piePendingColor
@@ -24,7 +25,7 @@ import styles from "./dashboard-total.module.scss";
 
 const _DashboardTotal: React.FC<Props> = ({
   currency,
-  data: { wallets, invested, trading, profits, total }
+  data: { limitWithoutKyc, wallets, invested, trading, profits, total }
 }) => {
   const [t] = useTranslation();
   const hasMoney = total > 0;
@@ -34,62 +35,75 @@ const _DashboardTotal: React.FC<Props> = ({
       .reduce((prev, cur) => prev + cur, 0) !== 0;
   return (
     <div className={styles["dashboard-total__values"]}>
-      <StatisticItemList>
-        <RowItem>
-          <LabeledValue
-            label={
-              <TooltipLabel
-                tooltipContent={t(
-                  "dashboard-page:tooltips.total.total-balance"
-                )}
-                labelText={t("dashboard-page:total.total")}
-              />
-            }
-          >
-            <Text size={"xlarge"} weight={"bold"}>
-              {currency ? (
-                <NumberFormat
-                  value={formatCurrencyValue(total, currency)}
-                  thousandSeparator={" "}
-                  suffix={` ${currency}`}
-                  displayType="text"
+      <Row wrap className={styles["dashboard-total__main-row"]}>
+        <RowItem className={styles["dashboard-total__main-row-item"]}>
+          <Row>
+            <LabeledValue
+              label={
+                <TooltipLabel
+                  tooltipContent={t(
+                    "dashboard-page:tooltips.total.total-balance"
+                  )}
+                  labelText={t("dashboard-page:total.total")}
                 />
-              ) : (
-                total
+              }
+            >
+              <Text size={"xlarge"} weight={"bold"}>
+                {currency ? (
+                  <NumberFormat
+                    value={formatCurrencyValue(total, currency)}
+                    thousandSeparator={" "}
+                    suffix={` ${currency}`}
+                    displayType="text"
+                  />
+                ) : (
+                  total
+                )}
+              </Text>
+            </LabeledValue>
+          </Row>
+          <Row>
+            <StatisticItemList
+              className={styles["dashboard-total__main-block-pie-item-list"]}
+            >
+              <PieStatisticItem
+                suffix={currency}
+                color={GVColors.$primaryColor}
+                tooltipContentLabel={t(
+                  "dashboard-page:tooltips.total.invested"
+                )}
+                label={t("dashboard-page:total.invested")}
+                value={invested}
+                total={total}
+              />
+              <PieStatisticItem
+                suffix={currency}
+                color={$piePendingColor}
+                tooltipContentLabel={t("dashboard-page:tooltips.total.trading")}
+                label={t("dashboard-page:total.pending")}
+                value={trading}
+                total={total}
+              />
+              <PieStatisticItem
+                suffix={currency}
+                color={$pieAvailableColor}
+                tooltipContentLabel={t("dashboard-page:tooltips.total.wallet")}
+                label={t("dashboard-page:total.wallet")}
+                value={wallets}
+                total={total}
+              />
+              {!hasMoney && (
+                <RowItem>
+                  <WalletDeposit />
+                </RowItem>
               )}
-            </Text>
-          </LabeledValue>
+            </StatisticItemList>
+          </Row>
         </RowItem>
-        <PieStatisticItem
-          suffix={currency}
-          color={GVColors.$primaryColor}
-          tooltipContentLabel={t("dashboard-page:tooltips.total.invested")}
-          label={t("dashboard-page:total.invested")}
-          value={invested}
-          total={total}
-        />
-        <PieStatisticItem
-          suffix={currency}
-          color={$piePendingColor}
-          tooltipContentLabel={t("dashboard-page:tooltips.total.trading")}
-          label={t("dashboard-page:total.pending")}
-          value={trading}
-          total={total}
-        />
-        <PieStatisticItem
-          suffix={currency}
-          color={$pieAvailableColor}
-          tooltipContentLabel={t("dashboard-page:tooltips.total.wallet")}
-          label={t("dashboard-page:total.wallet")}
-          value={wallets}
-          total={total}
-        />
-        {!hasMoney && (
-          <RowItem>
-            <WalletDeposit />
-          </RowItem>
-        )}
-      </StatisticItemList>
+        <RowItem className={styles["dashboard-total__main-row-item"]}>
+          <KYCLimitContainer limitWithoutKyc={limitWithoutKyc} />
+        </RowItem>
+      </Row>
       {hasProfits && (
         <>
           <Row>
