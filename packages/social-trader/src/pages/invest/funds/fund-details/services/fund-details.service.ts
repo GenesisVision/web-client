@@ -16,6 +16,7 @@ import {
   fetchFundBalanceChartAction,
   fetchFundDescriptionAction,
   fetchFundProfitChartAction,
+  fundHistoryTableAction,
   fundReallocateHistoryAction
 } from "../actions/fund-details.actions";
 import { fundReallocateHistoryTableSelector } from "../reducers/fund-reallocate-history.reducer";
@@ -59,7 +60,7 @@ export const getDashboardHistoryDetailsCounts = (fundId: string) => (
     fundReallocateHistoryTableSelector(getState())
   );
   dispatch(
-    getFundReallocateHistory(fundId)({
+    getFundHistoryTable(fundId)({
       ...reallocateHistoryCountFilters,
       ...commonFiltering
     })
@@ -70,6 +71,12 @@ export const getFundReallocateHistory = (fundId: string) => (
   filters?: FilteringType
 ) => {
   return fundReallocateHistoryAction(fundId, filters);
+};
+
+export const getFundHistoryTable = (fundId: string) => (
+  filters?: FilteringType
+) => {
+  return fundHistoryTableAction(fundId, filters);
 };
 
 /*export const getFundStructure = (fundId: string) => (
