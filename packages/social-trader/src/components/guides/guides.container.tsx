@@ -1,44 +1,57 @@
-import GuidesContent from "components/guides/guides-content";
-import GuidesNavList from "components/guides/guides-nav-list";
+import GuidesSection from "components/guides/guides-section/guides-section";
+import {
+  getAllGuides,
+  getCurrentGuide,
+  getPrevNextGuidesNames,
+  IPrevNextGuidesNamesProps
+} from "components/guides/guides.helpers";
+import { passGuide } from "components/guides/services/guides.services";
 import { Guide, GuidesCategory } from "gv-api-web";
+import useApiRequest from "hooks/api-request.hook";
 import useHashTab from "pages/wallet/services/hashTab.hook";
-import React, { useEffect, useState } from "react";
-import { safeGetElemFromArray } from "utils/helpers";
-
-import styles from "./guides.container.module.scss";
+import React, { useCallback, useEffect, useState } from "react";
 
 interface Props {
   navGuides: GuidesCategory[];
 }
 
-const getCurrentGuide = (navGuides: GuidesCategory[], tab: string): Guide => {
-  const allGuides = navGuides.reduce((acc: Guide[], current) => {
-    return [...acc, ...current.guides];
-  }, []);
-  return safeGetElemFromArray(
-    allGuides,
-    guide => guide.canonicalName === tab.slice(1, tab.length)
-  );
+const initialPrevNextGuidesNames = {
+  prev: "",
+  next: ""
 };
 
 const _GuidesContainer: React.FC<Props> = ({ navGuides }) => {
   const { tab } = useHashTab("");
+  const allGuides = getAllGuides(navGuides);
   const [currentGuide, setCurrentGuide] = useState<Guide | undefined>();
+  const [prevNextGuidesNames, setPrevNextGuidesNames] = useState<
+    IPrevNextGuidesNamesProps
+  >(initialPrevNextGuidesNames);
+  const { sendRequest } = useApiRequest({
+    request: passGuide
+  });
 
   useEffect(() => {
-    setCurrentGuide(getCurrentGuide(navGuides, tab));
-  }, [navGuides, tab]);
+    setCurrentGuide(getCurrentGuide(allGuides, tab));
+  }, [allGuides, tab]);
+
+  useEffect(() => {
+    if (currentGuide) {
+      setPrevNextGuidesNames(getPrevNextGuidesNames(allGuides, currentGuide));
+    }
+  }, [currentGuide]);
+
+  const handlePass = useCallback(id => {
+    sendRequest(id);
+  }, []);
+
   return (
-    <section className={styles["guides-container"]}>
-      <h1 className={styles["guides-container__title"]}>
-        Genesis Vision Step By Step Guides
-      </h1>
-      <GuidesNavList
-        navGuides={navGuides}
-        currentId={currentGuide && currentGuide.id}
-      />
-      {currentGuide && <GuidesContent guide={currentGuide} />}
-    </section>
+    <GuidesSection
+      navGuides={navGuides}
+      prevNextGuidesNames={prevNextGuidesNames}
+      currentGuide={currentGuide}
+      onClickPass={handlePass}
+    />
   );
 };
 
