@@ -43,6 +43,7 @@
 }
 
 .guides-list-subtitle {
+  @include adaptive-padding(bottom, $padding-medium);
   display: flex;
   align-items: center;
   justify-content: space-between;
