@@ -56,6 +56,30 @@ export const FUND_REALLOCATE_HISTORY_COLUMNS: SortingColumn[] = [
   }
 ];
 
+export const FUND_HISTORY_COLUMNS: SortingColumn[] = [
+  {
+    name: "date"
+  },
+  {
+    name: "event"
+  },
+  {
+    name: "description"
+  }
+];
+
+export const FUND_HISTORY_INNER_COLUMNS: SortingColumn[] = [
+  {
+    name: "date"
+  },
+  {
+    name: "trades"
+  },
+  {
+    name: "commission"
+  }
+];
+
 export const SET_FUND_STATISTIC_PERIOD = "SET_FUND_STATISTIC_PERIOD";
 export const SET_FUND_STATISTIC_CURRENCY = "SET_FUND_STATISTIC_CURRENCY";
 export const FETCH_FUND_ABSOLUTE_PROFIT_CHART =
@@ -65,5 +89,6 @@ export const FETCH_FUND_BALANCE_CHART = "FETCH_FUND_BALANCE_CHART";
 export const FETCH_FUND_DESCRIPTION = "FETCH_FUND_DESCRIPTION";
 export const SET_FUND_ID = "SET_FUND_ID";
 
+export const FUND_HISTORY = "FUND_HISTORY";
 export const FUND_REALLOCATE_HISTORY = "FUND_REALLOCATE_HISTORY";
 export const FUND_STRUCTURE = "FUND_STRUCTURE";

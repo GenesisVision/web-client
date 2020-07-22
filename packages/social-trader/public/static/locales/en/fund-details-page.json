@@ -28,9 +28,17 @@
     "heading": "History",
     "subheading": "Rebalancing",
     "tabs": {
+      "history": "History",
       "events": "Events",
       "structure": "Structure",
       "reallocate-history": "Reallocate History"
+    },
+    "history-table": {
+      "date": "Date",
+      "event": "Event",
+      "description": "Description",
+      "trades": "Trades",
+      "commission": "Commission"
     },
     "structure": {
       "amount": "Amount",
