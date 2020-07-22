@@ -15,15 +15,6 @@ import {
 type TFundReallocateHistoryData = ReallocationModelItemsViewModel;
 export type TReallocateHistoryState = ITableState<TFundReallocateHistoryData>;
 
-const fundReallocateHistorySelector = (state: RootState) =>
-  state.fundDetails.fundHistory.reallocateHistory;
-
-export const fundReallocateHistoryTableSelector = tableSelectorCreator<
-  RootState,
-  TFundReallocateHistoryData,
-  TFundReallocateHistoryData
->(fundReallocateHistorySelector);
-
 const fundReallocateHistoryReducer = tableReducerFactory<
   TFundReallocateHistoryData
 >({
