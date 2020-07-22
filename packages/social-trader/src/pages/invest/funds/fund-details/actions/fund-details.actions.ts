@@ -105,5 +105,5 @@ export const fundHistoryTableAction = (
   filters?: FilteringType
 ): ApiAction<TableItems<IFundHistoryDataItem>> => ({
   type: FUND_HISTORY,
-  payload: api.funds().getReallocatingHistory(id, filters)
+  payload: api.funds().getFundsHistoryEvents(id, filters)
 });

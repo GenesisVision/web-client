@@ -1,3 +1,3 @@
-import { ReallocationModel } from "gv-api-web";
+import { FundHistoryEventViewModel } from "gv-api-web";
 
-export type IFundHistoryDataItem = ReallocationModel;
+export type IFundHistoryDataItem = FundHistoryEventViewModel;

@@ -1,6 +1,7 @@
 @import "styles/_colors";
 @import "styles/_breakpoint";
 @import "styles/_sizes";
+@import "styles/_constants";
 
 $row-control-icon-size: 20px;
 
@@ -12,6 +13,7 @@ $row-control-icon-size: 20px;
   }
 
   &__full-row {
+    box-shadow: inset 0px 25px 31px -17px rgba(0, 0, 0, 0.1);
     background: rgba(0, 0, 0, 0.1);
   }
 

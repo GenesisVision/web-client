@@ -2,7 +2,7 @@ import useFlag from "hooks/flag.hook";
 import FundHistoryFullRow from "pages/invest/funds/fund-details/fund-details-history-section/fund-history/fund-history-full-row";
 import FundHistoryShortRow from "pages/invest/funds/fund-details/fund-details-history-section/fund-history/fund-history-short-row";
 import { IFundHistoryDataItem } from "pages/invest/funds/fund-details/fund-details.types";
-import React from "react";
+import React, { useCallback } from "react";
 
 interface Props {
   item: IFundHistoryDataItem;
@@ -10,8 +10,16 @@ interface Props {
 
 const _FundHistoryRow: React.FC<Props> = ({ item }) => {
   const [isOpen, setOpen, setClose] = useFlag();
+
+  const handleOpen = useCallback(() => {
+    isOpen ? setClose() : setOpen();
+  }, [isOpen]);
+
   return isOpen ? (
-    <FundHistoryFullRow setClose={setClose} item={item} />
+    <>
+      <FundHistoryShortRow setOpen={handleOpen} item={item} />
+      <FundHistoryFullRow setClose={setClose} item={item} />
+    </>
   ) : (
     <FundHistoryShortRow setOpen={setOpen} item={item} />
   );
