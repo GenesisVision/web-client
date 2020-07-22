@@ -3,6 +3,7 @@ import GuidesNav from "components/guides/guides-nav/guides-nav";
 import { IPrevNextGuidesNamesProps } from "components/guides/guides.helpers";
 import { Guide, GuidesCategory } from "gv-api-web";
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 import styles from "./guides-section.module.scss";
 
@@ -19,11 +20,10 @@ const _GuidesSection: React.FC<Props> = ({
   prevNextGuidesNames,
   onClickPass
 }) => {
+  const [t] = useTranslation();
   return (
     <section className={styles["guides-section"]}>
-      <h1 className={styles["guides-section__title"]}>
-        Genesis Vision Step By Step Guides
-      </h1>
+      <h1 className={styles["guides-section__title"]}>{t("guides:title")}</h1>
       <GuidesNav
         navGuides={navGuides}
         currentId={currentGuide && currentGuide.id}

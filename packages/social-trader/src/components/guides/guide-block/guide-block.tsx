@@ -3,6 +3,7 @@ import GuideBlockLink from "components/guides/guide-block/guide-block-link";
 import GVButton from "components/gv-button";
 import { Guide } from "gv-api-web";
 import React, { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
 
@@ -26,6 +27,7 @@ const _GuideBlock: React.FC<Props> = ({
     if (guide.isPassed) return null;
     onClickPass(guide.id);
   }, [guide]);
+  const [t] = useTranslation();
   return (
     <DetailsBlock className={styles["guide-block"]}>
       <h3 className={styles["guide-block__subtitle"]}>{guide.name}</h3>
@@ -33,7 +35,7 @@ const _GuideBlock: React.FC<Props> = ({
       <div className={styles["guide-block__controls"]}>
         {prevGuideName && (
           <GuideBlockLink guideCanonicalName={prevGuideName}>
-            Back
+            {t("guides:controls.back")}
           </GuideBlockLink>
         )}
         {isAuthenticated && (
@@ -42,12 +44,12 @@ const _GuideBlock: React.FC<Props> = ({
             onClick={handlePass}
             isSuccessful={guide.isPassed}
           >
-            I've done!
+            {t("guides:controls.done")}
           </GVButton>
         )}
         {nextGuideName && (
           <GuideBlockLink guideCanonicalName={nextGuideName} isNext>
-            Next
+            {t("guides:controls.next")}
           </GuideBlockLink>
         )}
       </div>
