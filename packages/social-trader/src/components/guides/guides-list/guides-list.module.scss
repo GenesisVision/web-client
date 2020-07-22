@@ -42,7 +42,7 @@
   }
 }
 
-.guides-list-subtitle {
+.guides-list-header {
   @include adaptive-padding(bottom, $padding-medium);
   display: flex;
   align-items: center;
