@@ -1,9 +1,6 @@
 import { api } from "services/api-client/swagger-custom-client";
 
 export const passGuide = (id?: string) =>
-  api
-    .guides()
-    .passGuide({
-      id
-    })
-    .then(response => response);
+  api.guides().passGuide({
+    id
+  });
