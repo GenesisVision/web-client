@@ -1,0 +1,74 @@
+@import "styles/_colors";
+@import "styles/_breakpoint";
+@import "styles/_sizes";
+@import "styles/_constants";
+
+.guide-block {
+  width: 100%;
+  padding-left: $padding-small;
+  padding-right: $padding-small;
+
+  @include media-breakpoint-tablet() {
+    width: calc(100% - 250px);
+  }
+
+  @include media-breakpoint-landscape-tablet() {
+    padding-left: $padding-xxlarge;
+    padding-right: $padding-xxlarge;
+    width: calc(100% - 347px);
+  }
+
+  &__subtitle {
+    @include adaptive-padding(bottom, $padding-medium);
+  }
+
+  &__content {
+    @include adaptive-padding(bottom, $padding-medium);
+  }
+
+  &__controls {
+    @include font-size($font-size-common);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    @include media-breakpoint-landscape-phone() {
+      justify-content: space-between;
+    }
+  }
+
+  &__link {
+    @include transition(background-color);
+    background-color: $table-background-subcolor;
+    padding: $padding-xxsmall $padding-small;
+    border-radius: 8px;
+    width: 100%;
+    margin-bottom: $padding-xxsmall;
+    text-align: center;
+
+    @include media-breakpoint-landscape-phone() {
+      width: auto;
+      margin-bottom: 0;
+    }
+
+    &:hover {
+      background-color: rgba($main-color, 0.06);
+    }
+
+    &--next {
+      margin-top: $padding-xxsmall;
+      margin-bottom: 0;
+
+      @include media-breakpoint-landscape-phone() {
+        margin-left: auto;
+        margin-top: 0;
+      }
+    }
+
+    ~ .guide-block__button {
+      @include media-breakpoint-landscape-phone() {
+        margin-left: auto;
+      }
+    }
+  }
+}
