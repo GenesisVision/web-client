@@ -1,0 +1,39 @@
+@import "styles/_colors";
+@import "styles/_breakpoint";
+@import "styles/_sizes";
+
+$row-control-icon-size: 20px;
+
+.fund-history {
+  &__short-row {
+    & td {
+      cursor: pointer;
+    }
+  }
+
+  &__full-row {
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  &__full-row-container {
+    position: relative;
+  }
+
+  &__row-control-icon {
+    width: $row-control-icon-size;
+    height: $row-control-icon-size;
+  }
+
+  &__row-control {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.1);
+    padding: $padding-xxsmall;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
