@@ -24,7 +24,8 @@ import styles from "./fund-reallocate-history.module.scss";
 
 const _FundReallocateHistory: React.FC<Props> = ({ id }) => {
   const [t] = useTranslation();
-  return (
+  return null;
+  /*  return (
     <TableContainer
       getItems={getFundReallocateHistory(id)}
       dataSelector={fundReallocateHistoryTableSelector}
@@ -74,7 +75,7 @@ const _FundReallocateHistory: React.FC<Props> = ({ id }) => {
         </TableRow>
       )}
     />
-  );
+  );*/
 };
 
 interface Props {
