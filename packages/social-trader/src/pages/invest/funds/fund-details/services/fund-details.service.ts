@@ -1,6 +1,7 @@
 import { TGetChartFunc } from "components/details/details-statistic-section/details.chart.types";
 import { FilteringType } from "components/table/components/filtering/filter.type";
 import { composeRequestFiltersByTableState } from "components/table/services/table.service";
+import { fundHistoryTableTableSelector } from "pages/invest/funds/fund-details/reducers/fund-history-table.reducer";
 import { RootState } from "reducers/root-reducer";
 import { Dispatch } from "redux";
 import Token from "services/api-client/token";
@@ -19,7 +20,6 @@ import {
   fundHistoryTableAction,
   fundReallocateHistoryAction
 } from "../actions/fund-details.actions";
-import { fundReallocateHistoryTableSelector } from "../reducers/fund-reallocate-history.reducer";
 
 export const dispatchFundDescriptionWithId = (
   id: string,
@@ -56,12 +56,12 @@ export const getDashboardHistoryDetailsCounts = (fundId: string) => (
 ) => {
   const commonFiltering = { take: 0 };
 
-  const reallocateHistoryCountFilters = composeRequestFiltersByTableState(
-    fundReallocateHistoryTableSelector(getState())
+  const historyCountFilters = composeRequestFiltersByTableState(
+    fundHistoryTableTableSelector(getState())
   );
   dispatch(
     getFundHistoryTable(fundId)({
-      ...reallocateHistoryCountFilters,
+      ...historyCountFilters,
       ...commonFiltering
     })
   );
