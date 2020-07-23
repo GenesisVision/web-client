@@ -7,11 +7,21 @@ $row-control-icon-size: 20px;
 $expand-icon-size: 10px;
 
 .fund-history {
+  &__event-logo-icon {
+    @include height(28px);
+    @include width(28px);
+    & img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
   &__short-row {
     & td {
       cursor: pointer;
     }
   }
+
   &__expand-icon {
     width: $expand-icon-size;
     height: $expand-icon-size;
