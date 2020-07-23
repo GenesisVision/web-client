@@ -44,7 +44,7 @@ const _FundHistoryShortRow: React.FC<Props> = ({ isOpen, setOpen, item }) => {
               amount={item.amount}
               name={item.asset.name}
               type={item.type}
-              reallocateAssets={item.reallocateAssets}
+              reallocateAssets={item.newAssets}
             />
           </RowItem>
           <RowItem className={styles["fund-history__expand-icon"]}>
