@@ -23,66 +23,56 @@ interface Props {
 const _FundHistoryFullRow: React.FC<Props> = ({ setClose, item }) => {
   const [t] = useTranslation();
   return (
-    <TableRow hoverable={false} className={styles["fund-history__full-row"]}>
+    <TableRow hoverable={false}>
       <td colSpan={3}>
-        <Center className={styles["fund-history__full-row-container"]}>
-          <RowItem wide>
-            <Table
-              items={item.trades}
-              columns={FUND_HISTORY_INNER_COLUMNS}
-              renderHeader={(column: SortingColumn) => (
-                <span>
-                  {t(`fund-details-page:history.history-table.${column.name}`)}
-                </span>
-              )}
-              renderBodyRow={({
-                boughtAmount,
-                boughtAsset,
-                commission,
-                commissionCurrency,
-                date,
-                soldAmount,
-                soldAsset
-              }: FundTradingEventViewModel) => (
-                <TableRow hoverable={false}>
-                  <TableCell>{formatDate(date)}</TableCell>
-                  <TableCell>
-                    <Center>
-                      <RowItem size={"small"}>{soldAmount}</RowItem>
-                      <RowItem size={"small"}>
-                        <CurrencyItem
-                          small
-                          name={soldAsset.asset}
-                          logo={soldAsset.logoUrl}
-                        />
-                      </RowItem>
-                      <RowItem size={"small"}>→</RowItem>
-                      <RowItem size={"small"}>{boughtAmount}</RowItem>
-                      <RowItem size={"small"}>
-                        <CurrencyItem
-                          small
-                          name={boughtAsset.asset}
-                          logo={boughtAsset.logoUrl}
-                        />
-                      </RowItem>
-                    </Center>
-                  </TableCell>
-                  <TableCell>
-                    {commission} {commissionCurrency}
-                  </TableCell>
-                </TableRow>
-              )}
-            />
-          </RowItem>
-          <RowItem
-            className={styles["fund-history__row-control"]}
-            onClick={setClose}
-          >
-            <div className={styles["fund-history__row-control-icon"]}>
-              <CollapseIcon />
-            </div>
-          </RowItem>
-        </Center>
+        <div className={styles["fund-history__full-row"]}>
+          <Table
+            items={item.trades}
+            columns={FUND_HISTORY_INNER_COLUMNS}
+            renderHeader={(column: SortingColumn) => (
+              <span>
+                {t(`fund-details-page:history.history-table.${column.name}`)}
+              </span>
+            )}
+            renderBodyRow={({
+              boughtAmount,
+              boughtAsset,
+              commission,
+              commissionCurrency,
+              date,
+              soldAmount,
+              soldAsset
+            }: FundTradingEventViewModel) => (
+              <TableRow hoverable={false}>
+                <TableCell>{formatDate(date)}</TableCell>
+                <TableCell>
+                  <Center>
+                    <RowItem size={"small"}>{soldAmount}</RowItem>
+                    <RowItem size={"small"}>
+                      <CurrencyItem
+                        small
+                        name={soldAsset.asset}
+                        logo={soldAsset.logoUrl}
+                      />
+                    </RowItem>
+                    <RowItem size={"small"}>→</RowItem>
+                    <RowItem size={"small"}>{boughtAmount}</RowItem>
+                    <RowItem size={"small"}>
+                      <CurrencyItem
+                        small
+                        name={boughtAsset.asset}
+                        logo={boughtAsset.logoUrl}
+                      />
+                    </RowItem>
+                  </Center>
+                </TableCell>
+                <TableCell>
+                  {commission} {commissionCurrency}
+                </TableCell>
+              </TableRow>
+            )}
+          />
+        </div>
       </td>
     </TableRow>
   );

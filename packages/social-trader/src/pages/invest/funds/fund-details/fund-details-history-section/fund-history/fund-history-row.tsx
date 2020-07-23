@@ -17,11 +17,11 @@ const _FundHistoryRow: React.FC<Props> = ({ item }) => {
 
   return isOpen ? (
     <>
-      <FundHistoryShortRow setOpen={handleOpen} item={item} />
+      <FundHistoryShortRow isOpen={isOpen} setOpen={handleOpen} item={item} />
       <FundHistoryFullRow setClose={setClose} item={item} />
     </>
   ) : (
-    <FundHistoryShortRow setOpen={setOpen} item={item} />
+    <FundHistoryShortRow isOpen={isOpen} setOpen={setOpen} item={item} />
   );
 };
 
