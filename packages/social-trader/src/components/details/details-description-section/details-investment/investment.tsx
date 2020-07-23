@@ -55,7 +55,7 @@ const _Investment: React.FC<Props> = ({
         {t("asset-details:description.investment-details")}
       </DetailsInvestmentHeading>
       <Row>
-        <StatisticItemList wrap={false}>
+        <StatisticItemList wrap={asset !== ASSET.FUND}>
           <InvestmentItem label={t("asset-details:description.value")}>
             <NumberFormat
               value={formatCurrencyValue(personalDetails.value, currency)}
