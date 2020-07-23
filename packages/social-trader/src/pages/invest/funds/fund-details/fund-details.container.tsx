@@ -42,7 +42,7 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
 
   const hasTradingSchedule = description.tradingSchedule.hasTradingSchedule;
   const schedule = generateScheduleText(description.tradingSchedule);
-  const investMessage = `${t("trading-schedule.invest-fund")} \n ${schedule}`;
+  const investMessage = `${t("trading-schedule.invest-fund")} \n${schedule}`;
   const investmentMessage = `${t(
     "trading-schedule.post-create-fund"
   )} \n${schedule}`;
