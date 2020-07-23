@@ -55,6 +55,8 @@ const _Investment: React.FC<Props> = ({
   const hasPendingOutput =
     personalDetails.pendingOutput !== undefined &&
     personalDetails.pendingOutput !== 0;
+  const message =
+    hasPendingInput || hasPendingOutput ? withdrawMessage : investmentMessage;
 
   return (
     <DetailsInvestmentBlock>
@@ -198,7 +200,7 @@ const _Investment: React.FC<Props> = ({
             (personalDetails.status === "Pending" ||
               hasPendingInput ||
               hasPendingOutput) && (
-              <DetailsInvestmentText>{investmentMessage}</DetailsInvestmentText>
+              <DetailsInvestmentText>{message}</DetailsInvestmentText>
             )}
         </StatisticItemList>
       </Row>
