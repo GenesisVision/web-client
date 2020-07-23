@@ -1,10 +1,10 @@
-import { getHeader } from "components/header/services/header.service";
 import { Push } from "components/link/link";
 import { normalizeUrlString } from "components/link/link.helper";
 import { NextPage } from "next";
 import qs from "qs";
 import React, { Component } from "react";
 import { HOME_ROUTE, LOGIN_ROUTE } from "routes/app.routes";
+import { api } from "services/api-client/swagger-custom-client";
 import Token from "services/api-client/token";
 import { getToken } from "services/auth-service";
 import { NextPageWithTokenContext } from "utils/types";
@@ -14,7 +14,9 @@ const withPrivateRoute = (WrappedComponent: NextPage<any>): any =>
     static async getInitialProps(ctx: NextPageWithTokenContext) {
       const token = getToken(ctx);
       const tokenObject = Token.create(ctx);
-      const isValidToken = await getHeader(tokenObject)
+      const isValidToken = await api
+        .auth(tokenObject)
+        .getTwoStepAuthStatus()
         .then(() => true)
         .catch(() => false);
 
