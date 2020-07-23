@@ -4,6 +4,7 @@
 @import "styles/_constants";
 
 $row-control-icon-size: 20px;
+$expand-icon-size: 10px;
 
 .fund-history {
   &__short-row {
@@ -11,10 +12,16 @@ $row-control-icon-size: 20px;
       cursor: pointer;
     }
   }
+  &__expand-icon {
+    width: $expand-icon-size;
+    height: $expand-icon-size;
+  }
 
   &__full-row {
     box-shadow: inset 0px 25px 31px -17px rgba(0, 0, 0, 0.1);
     background: rgba(0, 0, 0, 0.1);
+    max-height: 250px;
+    overflow-y: auto;
   }
 
   &__full-row-container {
