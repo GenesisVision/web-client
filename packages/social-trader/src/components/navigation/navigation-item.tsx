@@ -1,44 +1,15 @@
 import clsx from "clsx";
-import GVButton from "components/gv-button";
 import HeaderIcon from "components/header/header-icon";
 import Link, { ToType } from "components/link/link";
 import { useRouter } from "next/router";
 import React from "react";
-import { Childrenable, Clickable } from "utils/types";
 
 import { normalizeLinkFrom } from "../link/link.helper";
 import styles from "./navigation.module.scss";
 
-interface INavigationButtonProps extends Clickable, Childrenable {
-  icon: JSX.Element;
-  title?: string;
-}
-
-const _NavigationButton: React.FC<INavigationButtonProps> = ({
-  icon,
-  children,
-  onClick
-}) => (
-  <GVButton
-    className={styles["navigation__button"]}
-    variant="text"
-    onClick={onClick}
-  >
-    <>
-      <HeaderIcon>
-        <div className={styles["navigation__icon--medium"]}>
-          {<icon.type {...icon.props} />}
-        </div>
-      </HeaderIcon>
-      <span className={styles["navigation__link"]}>{children}</span>
-    </>
-  </GVButton>
-);
-export const NavigationButton = React.memo(_NavigationButton);
-
 interface INavigationItemProps extends React.HTMLAttributes<HTMLAnchorElement> {
   small?: boolean;
-  href: string | ToType;
+  href?: string | ToType;
   icon: JSX.Element;
   exact?: boolean;
   onClick?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
