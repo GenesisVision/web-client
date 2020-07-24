@@ -1,9 +1,19 @@
-import { DEFAULT_DATE_RANGE_FILTER_VALUE } from "components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import {
+  DATE_RANGE_FILTER_NAME,
+  DEFAULT_DATE_RANGE_FILTER_VALUE
+} from "components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import {
   composeDefaultDateRangeFilter,
   composeRequestValueFunc
 } from "components/table/components/filtering/date-range-filter/date-range-filter.helpers";
+import {
+  ComposedRequestEventTypeValue,
+  EVENT_TYPE_FILTER_DEFAULT_VALUE,
+  EventTypeFilterType
+} from "components/table/components/filtering/event-type-filter/event-type-filter.constants";
 import { SortingColumn } from "components/table/components/filtering/filter.type";
+import { IComposeDefaultFilter } from "components/table/components/table.types";
+import { FILTER_TYPE } from "components/table/helpers/filtering.helpers";
 
 export const FUND_STRUCTURE_COLUMNS: SortingColumn[] = [
   {
@@ -36,6 +46,35 @@ export const FUND_REBALANCING_DEFAULT_FILTERS = [
       )
     })
   }
+];
+
+const HISTORY_EVENT_TYPE_FILTER_NAME = "eventType";
+const HISTORY_EVENT_TYPE_FILTER_DEFAULT_VALUE = "All";
+
+export const composeDefaultHistoryEventTypeFilter = (): IComposeDefaultFilter => ({
+  name: HISTORY_EVENT_TYPE_FILTER_NAME,
+  composeRequestValue: (
+    value: EventTypeFilterType
+  ): ComposedRequestEventTypeValue => value,
+  defaultValue: HISTORY_EVENT_TYPE_FILTER_DEFAULT_VALUE,
+  type: FILTER_TYPE.GENERAL
+});
+
+export const FUND_HISTORY_FILTERS = {
+  [DATE_RANGE_FILTER_NAME]: DEFAULT_DATE_RANGE_FILTER_VALUE,
+  [HISTORY_EVENT_TYPE_FILTER_NAME]: EVENT_TYPE_FILTER_DEFAULT_VALUE
+};
+
+export const FUND_HISTORY_DEFAULT_FILTERS = [
+  {
+    ...composeDefaultDateRangeFilter({
+      composeApiRequestValue: composeRequestValueFunc(
+        SERVER_DATE_RANGE_MIN_FILTER_NAME,
+        SERVER_DATE_RANGE_MAX_FILTER_NAME
+      )
+    })
+  },
+  { ...composeDefaultHistoryEventTypeFilter() }
 ];
 
 export const FUND_REBALANCING_FILTERS = {
