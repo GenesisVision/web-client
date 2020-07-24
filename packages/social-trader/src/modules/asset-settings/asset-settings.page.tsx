@@ -33,12 +33,9 @@ const _AssetsEditPage: React.FC<Props> = ({
           ? values.investmentLimit
           : description.programDetails?.availableInvestmentLimit;
       const logo =
-        values.logo?.image?.cropped !== undefined
-          ? values.logo
-          : values.logo?.src
-          ? { src: description.publicInfo.logo }
-          : {};
+        values.logo?.image?.cropped !== undefined ? values.logo : undefined;
       const currentValues = {
+        logo: { src: description.publicInfo.logo },
         tradesDelay: description.tradesDelay,
         exitFee: description.exitFeeSelected, //exitFee
         entryFee: description.entryFeeSelected, //entryFee
@@ -52,7 +49,6 @@ const _AssetsEditPage: React.FC<Props> = ({
         editAssetData: {
           ...currentValues,
           ...values,
-          logo,
           investmentLimit
         }
       }).finally(resetForm);
