@@ -13,13 +13,15 @@ const withReduxStore = (
   initialActions?: any[]
 ) => (WrappedComponent: AppType | any) => {
   const getOrCreateStore = (initialState?: RootState) => {
-    const state = initializeStore(initialState);
-    if (isServer) return state;
+    if (!isServer) {
+      if ((window as any)[__NEXT_REDUX_STORE__])
+        return (window as any)[__NEXT_REDUX_STORE__];
 
-    if (!(window as any)[__NEXT_REDUX_STORE__])
+      const state = initializeStore(initialState);
       (window as any)[__NEXT_REDUX_STORE__] = state;
-
-    return (window as any)[__NEXT_REDUX_STORE__];
+      return state;
+    }
+    return initializeStore(initialState);
   };
 
   return class extends Component<{
@@ -45,14 +47,22 @@ const withReduxStore = (
       }
 
       return {
+        reduxStore,
         initialReduxState: reduxStore.getState(),
         ...componentProps
       };
     }
 
-    constructor(props: { initialReduxState: RootState; actions: any }) {
+    constructor(props: {
+      reduxStore: Store;
+      initialReduxState: RootState;
+      actions: any;
+    }) {
       super(props);
-      this.reduxStore = getOrCreateStore(props.initialReduxState);
+      const hasStore = props.reduxStore && Object.keys(props.reduxStore).length;
+      this.reduxStore = hasStore
+        ? props.reduxStore
+        : getOrCreateStore(props.initialReduxState);
     }
 
     render() {
