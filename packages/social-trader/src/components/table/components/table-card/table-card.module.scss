@@ -96,7 +96,6 @@ $action-offset-size: 5px;
   &__subtitle {
     max-width: 130px;
     word-break: break-all;
-    @include hide-on-landscape-phone();
   }
 
   &__main-info {
