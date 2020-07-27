@@ -34,6 +34,7 @@
 
     @include media-breakpoint-landscape-phone() {
       justify-content: space-between;
+      position: relative;
     }
   }
 
@@ -49,6 +50,7 @@
     @include media-breakpoint-landscape-phone() {
       width: auto;
       margin-bottom: 0;
+      margin-right: 116px;
     }
 
     &:hover {
@@ -62,13 +64,17 @@
       @include media-breakpoint-landscape-phone() {
         margin-left: auto;
         margin-top: 0;
+        margin-right: 0;
       }
     }
+  }
 
-    ~ .guide-block__button {
-      @include media-breakpoint-landscape-phone() {
-        margin-left: auto;
-      }
+  &__button {
+    @include media-breakpoint-landscape-phone() {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
     }
   }
 }
