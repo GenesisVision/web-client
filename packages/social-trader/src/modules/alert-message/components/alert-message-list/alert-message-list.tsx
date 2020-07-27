@@ -34,7 +34,7 @@ const _AlertMessageList: React.FC = () => {
   }, []);
 
   const children = messages.map(message => (
-    <AlertMessage message={message} onClick={removeMessage} />
+    <AlertMessage key={message.id} message={message} onClick={removeMessage} />
   ));
 
   if (messages.length > 1) {

@@ -1,28 +1,17 @@
+import { fetchGuides } from "components/guides/services/guides.services";
 import withDefaultLayout from "decorators/with-default-layout";
-import { GuidesCategory } from "gv-api-web";
-import { NextPage } from "next";
 import GuidesPage from "pages/guides/guides.page";
 import React from "react";
 import { compose } from "redux";
-import { api } from "services/api-client/swagger-custom-client";
+import { NextPageWithRedux } from "utils/types";
 
-const Page: NextPage<Props> = ({ guides }) => {
-  return <GuidesPage guides={guides} />;
+const Page: NextPageWithRedux<{}> = () => {
+  return <GuidesPage />;
 };
 
-Page.getInitialProps = async () => {
-  let guides;
-  await api
-    .guides()
-    .getGuides()
-    .then(({ items }) => {
-      guides = items;
-    });
-  return { namespacesRequired: ["guides"], guides };
+Page.getInitialProps = async ctx => {
+  await Promise.all([ctx.reduxStore.dispatch(fetchGuides(ctx))]);
+  return { namespacesRequired: ["guides"] };
 };
-
-interface Props {
-  guides: GuidesCategory[];
-}
 
 export default compose(withDefaultLayout)(Page);

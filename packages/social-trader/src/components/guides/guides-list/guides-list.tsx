@@ -19,7 +19,8 @@ const _GuidesList: React.FC<Props> = ({ name, guides, currentId }) => {
   }, [isVisibleList]);
 
   useEffect(() => {
-    setIsVisibleList(guides.some(guide => guide.id === currentId));
+    if (!isVisibleList)
+      setIsVisibleList(guides.some(guide => guide.id === currentId));
   }, [guides, currentId]);
   return (
     <>
