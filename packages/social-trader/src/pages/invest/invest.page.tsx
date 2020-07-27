@@ -22,8 +22,21 @@ export const InvestPage: React.FC<Props> = ({
   return (
     <Page description={t("invest:follows.text")} title={title}>
       <AssetBlock
-        buttonLabel={t("invest:follow-button")}
         blockType={DETAILS_BLOCK_TYPE.TRANSPARENT}
+        side
+        title={t("invest:funds.title")}
+        description={t("invest:funds.text")}
+        assets={funds}
+        investLink={createToUrl(GV_FUNDS_ROUTE, GV_FUNDS_ROUTE, title)}
+        renderCard={({ data, index, style }) => (
+          <div style={style}>
+            <FundCard fund={data[index]} />
+          </div>
+        )}
+      />
+      <AssetBlock
+        buttonLabel={t("invest:follow-button")}
+        left
         side
         title={t("invest:follows.title")}
         description={t("invest:follows.text")}
@@ -37,7 +50,7 @@ export const InvestPage: React.FC<Props> = ({
       />
       <AssetBlock
         side
-        left
+        blockType={DETAILS_BLOCK_TYPE.TRANSPARENT}
         title={t("invest:programs.title")}
         description={t("invest:programs.text")}
         assets={programs}
@@ -45,19 +58,6 @@ export const InvestPage: React.FC<Props> = ({
         renderCard={({ data, index, style }) => (
           <div style={style}>
             <ProgramCard program={data[index]} />
-          </div>
-        )}
-      />
-      <AssetBlock
-        blockType={DETAILS_BLOCK_TYPE.TRANSPARENT}
-        side
-        title={t("invest:funds.title")}
-        description={t("invest:funds.text")}
-        assets={funds}
-        investLink={createToUrl(GV_FUNDS_ROUTE, GV_FUNDS_ROUTE, title)}
-        renderCard={({ data, index, style }) => (
-          <div style={style}>
-            <FundCard fund={data[index]} />
           </div>
         )}
       />
