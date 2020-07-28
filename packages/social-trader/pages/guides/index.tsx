@@ -1,17 +1,15 @@
-import { fetchGuides } from "components/guides/services/guides.services";
 import withDefaultLayout from "decorators/with-default-layout";
+import { NextPage } from "next";
 import GuidesPage from "pages/guides/guides.page";
 import React from "react";
 import { compose } from "redux";
-import { NextPageWithRedux } from "utils/types";
 
-const Page: NextPageWithRedux<{}> = () => {
+const Page: NextPage<{}> = () => {
   return <GuidesPage />;
 };
 
-Page.getInitialProps = async ctx => {
-  await Promise.all([ctx.reduxStore.dispatch(fetchGuides(ctx))]);
-  return { namespacesRequired: ["guides"] };
-};
+Page.getInitialProps = async () => ({
+  namespacesRequired: ["guides"]
+});
 
 export default compose(withDefaultLayout)(Page);
