@@ -12,17 +12,16 @@ interface Props {
   currentGuide?: Guide;
   prevNextGuidesNames: IPrevNextGuidesNamesProps;
   onClickPass: (id: string) => void;
-  errorMessage?: string;
 }
 
 const _GuidesSection: React.FC<Props> = ({
   navGuides,
   currentGuide,
   prevNextGuidesNames,
-  onClickPass,
-  errorMessage
+  onClickPass
 }) => {
   const [t] = useTranslation();
+
   return (
     <section className={styles["guides-section"]}>
       <h1 className={styles["guides-section__title"]}>{t("guides:title")}</h1>
@@ -36,7 +35,6 @@ const _GuidesSection: React.FC<Props> = ({
           onClickPass={onClickPass}
           prevGuideName={prevNextGuidesNames.prev}
           nextGuideName={prevNextGuidesNames.next}
-          errorMessage={errorMessage}
         />
       )}
     </section>
