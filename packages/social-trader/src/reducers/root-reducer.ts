@@ -4,9 +4,6 @@ import alertMessagesReducer, {
 import accountDetailsReducer, {
   AccountDetailsState
 } from "pages/accounts/account-details/reducers/account-details.reducer";
-import guidesReducer, {
-  GuidesState
-} from "pages/guides/reducers/guides.reducers";
 import followDetailsReducer, {
   FollowDetailsState
 } from "pages/invest/follows/follow-details/reducers/follow-details.reducer";
@@ -33,8 +30,7 @@ export const sharedRootReducers = {
   authData: authReducer,
   alertMessages: alertMessagesReducer,
   profileHeader: headerReducer,
-  wallet: walletReducer,
-  guides: guidesReducer
+  wallet: walletReducer
 };
 
 export type RootState = Readonly<{
@@ -47,5 +43,4 @@ export type RootState = Readonly<{
   authData: AuthState;
   alertMessages: AlertMessagesState;
   wallet: WalletState;
-  guides: GuidesState;
 }>;
