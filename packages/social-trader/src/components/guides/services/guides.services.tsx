@@ -1,14 +1,14 @@
-import { fetchGuidesAction } from "pages/guides/actions/guides.actions";
+import { GuidesCategory } from "gv-api-web";
 import { api } from "services/api-client/swagger-custom-client";
-import { NextPageWithReduxContext, RootThunk } from "utils/types";
+import Token from "services/api-client/token";
 
 export const passGuide = (id: string) =>
   api.guides().passGuide({
     id
   });
 
-export const fetchGuides = (
-  ctx?: NextPageWithReduxContext
-): RootThunk<void> => async dispatch => {
-  await dispatch(fetchGuidesAction(ctx?.token));
-};
+export const fetchGuides = (): Promise<GuidesCategory[]> =>
+  api
+    .guides()
+    .getGuides()
+    .then(({ items }) => items);

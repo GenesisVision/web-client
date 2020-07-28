@@ -5,15 +5,9 @@ import {
   getPrevNextGuidesNames,
   IPrevNextGuidesNamesProps
 } from "components/guides/guides.helpers";
-import {
-  fetchGuides,
-  passGuide
-} from "components/guides/services/guides.services";
 import { Guide, GuidesCategory } from "gv-api-web";
-import useApiRequest from "hooks/api-request.hook";
 import useHashTab from "pages/wallet/services/hashTab.hook";
-import React, { useCallback, useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
 
 const initialPrevNextGuidesNames = {
   prev: "",
@@ -22,32 +16,27 @@ const initialPrevNextGuidesNames = {
 
 interface Props {
   navGuides: GuidesCategory[];
+  onClickPass: (id: string) => void;
 }
 
-const _GuidesContainer: React.FC<Props> = ({ navGuides }) => {
-  const dispatch = useDispatch();
-  const updateGuides = () => dispatch(fetchGuides());
-  const { errorMessage, sendRequest } = useApiRequest({
-    request: passGuide,
-    middleware: [updateGuides]
-  });
+const _GuidesContainer: React.FC<Props> = ({ navGuides, onClickPass }) => {
   const { tab } = useHashTab("");
-  const [allGuides] = useState<Guide[]>(getAllGuides(navGuides));
+  const [allGuides, setAllGuides] = useState<Guide[] | undefined>();
   const [currentGuide, setCurrentGuide] = useState<Guide | undefined>();
   const [prevNextGuidesNames, setPrevNextGuidesNames] = useState<
     IPrevNextGuidesNamesProps
   >(initialPrevNextGuidesNames);
 
-  const handlePass = useCallback(id => {
-    sendRequest(id);
-  }, []);
+  useEffect(() => {
+    setAllGuides(getAllGuides(navGuides));
+  }, [navGuides]);
 
   useEffect(() => {
-    setCurrentGuide(getCurrentGuide(allGuides, tab));
+    if (allGuides) setCurrentGuide(getCurrentGuide(allGuides, tab));
   }, [allGuides, tab]);
 
   useEffect(() => {
-    if (currentGuide)
+    if (currentGuide && allGuides)
       setPrevNextGuidesNames(getPrevNextGuidesNames(allGuides, currentGuide));
   }, [currentGuide, tab]);
 
@@ -56,8 +45,7 @@ const _GuidesContainer: React.FC<Props> = ({ navGuides }) => {
       navGuides={navGuides}
       prevNextGuidesNames={prevNextGuidesNames}
       currentGuide={currentGuide}
-      onClickPass={handlePass}
-      errorMessage={errorMessage}
+      onClickPass={onClickPass}
     />
   );
 };
