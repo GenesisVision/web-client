@@ -1,10 +1,15 @@
 import clsx from "clsx";
 import { STATUS } from "constants/constants";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { OptionalClickable } from "utils/types";
 
 import styles from "./asset-status.module.scss";
+
+interface Props extends OptionalClickable {
+  status: STATUS;
+  className?: string;
+}
 
 const getStatusClassName = (status: STATUS, className?: string) =>
   clsx(styles["asset-status"], className, {
@@ -15,21 +20,14 @@ const getStatusClassName = (status: STATUS, className?: string) =>
     [styles["asset-status__pending"]]: status === STATUS.PENDING
   });
 
-const _AssetStatusLabel: React.FC<Props> = ({
-  className,
-  status,
-  t,
-  onClick
-}) => (
-  <span className={getStatusClassName(status, className)} onClick={onClick}>
-    {t(`asset-details:program-statuses.${status}`)}
-  </span>
-);
+const _AssetStatusLabel: React.FC<Props> = ({ className, status, onClick }) => {
+  const [t] = useTranslation();
+  return (
+    <span className={getStatusClassName(status, className)} onClick={onClick}>
+      {t(`asset-details:program-statuses.${status}`)}
+    </span>
+  );
+};
 
-interface Props extends WithTranslation, OptionalClickable {
-  status: STATUS;
-  className?: string;
-}
-
-const AssetStatusLabel = translate()(React.memo(_AssetStatusLabel));
+const AssetStatusLabel = React.memo(_AssetStatusLabel);
 export default AssetStatusLabel;
