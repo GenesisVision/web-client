@@ -15,6 +15,7 @@ const _FundHistoryDescription: React.FC<IFundHistoryDescriptionProps> = ({
   assets
 }) => {
   switch (type) {
+    case "Reallocation":
     case "Creation":
       return (
         <FundAssetContainer
