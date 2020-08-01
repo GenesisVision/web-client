@@ -1,7 +1,5 @@
-import { getEventTypes } from "components/portfolio-events-table/portfolio-events-table.service";
 import DateRangeFilter from "components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "components/table/components/filtering/date-range-filter/date-range-filter.constants";
-import { EVENT_TYPE_FILTER_NAME } from "components/table/components/filtering/event-type-filter/event-type-filter.constants";
 import {
   FilteringType,
   SelectFilterValue,
@@ -10,14 +8,18 @@ import {
 import SelectFilter from "components/table/components/filtering/select-filter/select-filter";
 import TableContainer from "components/table/components/table-container";
 import { UpdateFilterFunc } from "components/table/components/table.types";
+import { FilterItemInfo } from "gv-api-web";
 import FundHistoryRow from "pages/invest/funds/fund-details/fund-details-history-section/fund-history/fund-history-row";
-import { FUND_HISTORY_COLUMNS } from "pages/invest/funds/fund-details/fund-details.constants";
+import {
+  FUND_HISTORY_COLUMNS,
+  HISTORY_EVENT_TYPE_FILTER_NAME
+} from "pages/invest/funds/fund-details/fund-details.constants";
 import { IFundHistoryDataItem } from "pages/invest/funds/fund-details/fund-details.types";
 import { fundHistoryTableTableSelector } from "pages/invest/funds/fund-details/reducers/fund-history-table.reducer";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import { allEventsSelector } from "reducers/platform-reducer";
+import { fundHistoryEventsSelector } from "reducers/platform-reducer";
 
 import { getFundHistoryTable } from "../../services/fund-details.service";
 
@@ -25,13 +27,22 @@ interface Props {
   id: string;
 }
 
+export const getEventTypes = (
+  types: Array<FilterItemInfo>
+): SelectFilterValue<string>[] =>
+  types.map(({ key, title }) => ({
+    value: key,
+    labelKey: title
+  }));
+
 const _FundHistory: React.FC<Props> = ({ id }) => {
   const [t] = useTranslation();
 
-  const eventTypeFilterValues = useSelector(allEventsSelector);
-  const eventTypes = eventTypeFilterValues
-    ? getEventTypes(eventTypeFilterValues, "investmentHistory", "fund")
-    : [];
+  const eventTypeFilterValues = useSelector(fundHistoryEventsSelector);
+  const eventTypes =
+    eventTypeFilterValues !== undefined
+      ? getEventTypes(eventTypeFilterValues)
+      : [];
   return (
     <TableContainer
       getItems={getFundHistoryTable(id)}
@@ -44,9 +55,9 @@ const _FundHistory: React.FC<Props> = ({ id }) => {
       ) => (
         <>
           <SelectFilter
-            name={EVENT_TYPE_FILTER_NAME}
+            name={HISTORY_EVENT_TYPE_FILTER_NAME}
             label="Type"
-            value={filtering[EVENT_TYPE_FILTER_NAME]} //TODO fix filtering types
+            value={filtering[HISTORY_EVENT_TYPE_FILTER_NAME]} //TODO fix filtering types
             values={eventTypes}
             onChange={updateFilter}
           />
