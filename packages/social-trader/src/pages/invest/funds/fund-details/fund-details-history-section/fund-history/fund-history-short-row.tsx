@@ -39,7 +39,13 @@ const _FundHistoryShortRow: React.FC<Props> = ({ isOpen, setOpen, item }) => {
       </TableCell>
       <TableCell>
         <Center>
-          <RowItem wide>{item.description}</RowItem>
+          <RowItem wide>
+            <FundHistoryDescription
+              description={item.description}
+              assets={item.newAssets}
+              type={item.type}
+            />
+          </RowItem>
           <RowItem className={styles["fund-history__expand-icon"]}>
             <ShortArrow direction={isOpen ? "top" : "bottom"} />
           </RowItem>
