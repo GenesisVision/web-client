@@ -9,8 +9,8 @@ import { RootState } from "reducers/root-reducer";
 
 import {
   FUND_HISTORY,
-  FUND_REBALANCING_DEFAULT_FILTERS,
-  FUND_REBALANCING_FILTERS
+  FUND_HISTORY_DEFAULT_FILTERS,
+  FUND_HISTORY_FILTERS
 } from "../fund-details.constants";
 
 type TFundHistoryTableData = TableItems<IFundHistoryDataItem>;
@@ -28,8 +28,8 @@ export const fundHistoryTableTableSelector = tableSelectorCreator<
 const fundHistoryTableReducer = tableReducerFactory<TFundHistoryTableData>({
   type: FUND_HISTORY,
   paging: DEFAULT_PAGING,
-  filtering: FUND_REBALANCING_FILTERS,
-  defaultFilters: FUND_REBALANCING_DEFAULT_FILTERS
+  filtering: FUND_HISTORY_FILTERS,
+  defaultFilters: FUND_HISTORY_DEFAULT_FILTERS
 });
 
 export default fundHistoryTableReducer;

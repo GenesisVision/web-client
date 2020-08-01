@@ -2,46 +2,32 @@ import { FUND_ASSET_TYPE } from "components/fund-asset/fund-asset";
 import FundAssetContainer from "components/fund-asset/fund-asset-container";
 import { FundAssetPartWithIcon, FundHistoryEventType } from "gv-api-web";
 import React from "react";
-import { useTranslation } from "react-i18next";
 
 export interface IFundHistoryDescriptionProps {
-  amount: number;
-  name: string;
   type: FundHistoryEventType;
-  reallocateAssets: Array<FundAssetPartWithIcon>;
+  description: string;
+  assets: Array<FundAssetPartWithIcon>;
 }
 
 const _FundHistoryDescription: React.FC<IFundHistoryDescriptionProps> = ({
-  amount,
-  name,
-  reallocateAssets,
-  type
+  type,
+  description,
+  assets
 }) => {
-  const [t] = useTranslation();
   switch (type) {
     case "Creation":
-      return <>{t("Creation")}</>;
-    case "Investment":
-      return <>{t(`Investment into the fund ${amount} GVT`)}</>;
-    case "Withdrawal":
-      return <>{t(`Withdrawal from the fund ${amount} GVT`)}</>;
-    case "Rebalance":
-      return <>{t("Fund was rebalanced")}</>;
-    case "Reallocation":
       return (
         <FundAssetContainer
           noWrap
-          assets={reallocateAssets}
+          assets={assets}
           type={FUND_ASSET_TYPE.SHORT}
           size={12}
-          length={reallocateAssets.length}
+          length={assets.length}
           hasPopoverList
         />
       );
-    case "ChallengeWinner":
-      return <>{t(`Fund ${name} is a week's GV Funds Challenge winner`)}</>;
     default:
-      return null;
+      return <>{description}</>;
   }
 };
 

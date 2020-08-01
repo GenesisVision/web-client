@@ -13,6 +13,7 @@ import {
   TradingAccountMinCreateAmount,
   UsersSocialLinkInfo
 } from "gv-api-web";
+import { FilterItemInfo } from "gv-api-web";
 import apiReducerFactory, {
   IApiState
 } from "reducers/reducer-creators/api-reducer";
@@ -186,6 +187,15 @@ export const assetTypeValuesSelector = createSelector<
         label: title
       }))) ||
     []
+);
+
+export const fundHistoryEventsSelector = createSelector<
+  RootState,
+  PlatformInfo | undefined,
+  Array<FilterItemInfo> | undefined
+>(
+  platformDataSelector,
+  data => (data && data.filters.fundsHistoryEvents) || undefined
 );
 
 export const allEventsSelector = createSelector<
