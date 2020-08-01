@@ -48,7 +48,7 @@ export const FUND_REBALANCING_DEFAULT_FILTERS = [
   }
 ];
 
-const HISTORY_EVENT_TYPE_FILTER_NAME = "eventType";
+export const HISTORY_EVENT_TYPE_FILTER_NAME = "eventsType";
 const HISTORY_EVENT_TYPE_FILTER_DEFAULT_VALUE = "All";
 
 export const composeDefaultHistoryEventTypeFilter = (): IComposeDefaultFilter => ({
