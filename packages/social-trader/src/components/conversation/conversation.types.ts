@@ -20,6 +20,7 @@ export interface IEditPostData {
 }
 
 export type AssetSearchResult = {
+  color?: string;
   type: SEARCH_ASSET_TYPE;
   avatar: string;
   id: string;
