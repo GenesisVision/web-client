@@ -11,6 +11,7 @@ import React, { useEffect, useRef } from "react";
 import styles from "./comment.module.scss";
 
 const _Comment: React.FC<Props> = ({
+  canReply,
   updateData,
   comment: {
     likesUsers,
@@ -81,6 +82,7 @@ const _Comment: React.FC<Props> = ({
 };
 
 interface Props {
+  canReply?: boolean;
   updateData: VoidFunction;
   comment: ConversationComment;
 }
