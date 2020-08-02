@@ -204,6 +204,7 @@ const getAssetSearchResult = (type: SEARCH_ASSET_TYPE) => (
   data: any
 ): AssetSearchResult => {
   return {
+    color: data.color,
     type,
     avatar: data.logoUrl, //TODO check
     name: data.url,
