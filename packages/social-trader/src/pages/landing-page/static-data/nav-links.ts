@@ -62,12 +62,12 @@ export const navHeader: TNavHeader[] = [
         href: GV_FUNDS_ROUTE
       },
       {
-        name: "landing-page:links.follow",
-        href: GV_FOLLOW_ROUTE
-      },
-      {
         name: "landing-page:links.programs",
         href: GV_PROGRAMS_ROUTE
+      },
+      {
+        name: "landing-page:links.follow",
+        href: GV_FOLLOW_ROUTE
       }
     ]
   },
