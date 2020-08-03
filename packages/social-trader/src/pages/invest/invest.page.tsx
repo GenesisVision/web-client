@@ -35,8 +35,21 @@ export const InvestPage: React.FC<Props> = ({
         )}
       />
       <AssetBlock
-        buttonLabel={t("invest:follow-button")}
+        side
         left
+        title={t("invest:programs.title")}
+        description={t("invest:programs.text")}
+        assets={programs}
+        investLink={createToUrl(GV_PROGRAMS_ROUTE, GV_PROGRAMS_ROUTE, title)}
+        renderCard={({ data, index, style }) => (
+          <div style={style}>
+            <ProgramCard program={data[index]} />
+          </div>
+        )}
+      />
+      <AssetBlock
+        buttonLabel={t("invest:follow-button")}
+        blockType={DETAILS_BLOCK_TYPE.TRANSPARENT}
         side
         title={t("invest:follows.title")}
         description={t("invest:follows.text")}
@@ -45,19 +58,6 @@ export const InvestPage: React.FC<Props> = ({
         renderCard={({ data, index, style }) => (
           <div style={style}>
             <FollowCard follow={data[index]} />
-          </div>
-        )}
-      />
-      <AssetBlock
-        side
-        blockType={DETAILS_BLOCK_TYPE.TRANSPARENT}
-        title={t("invest:programs.title")}
-        description={t("invest:programs.text")}
-        assets={programs}
-        investLink={createToUrl(GV_PROGRAMS_ROUTE, GV_PROGRAMS_ROUTE, title)}
-        renderCard={({ data, index, style }) => (
-          <div style={style}>
-            <ProgramCard program={data[index]} />
           </div>
         )}
       />
