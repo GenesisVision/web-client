@@ -64,7 +64,7 @@ $view-svg-size: 15px;
         background-color: $background-pretender-level-hover !important;
       }
     }
-    &:not(.table__row--head):hover {
+    &--hoverable:not(.table__row--head):hover {
       background: $row-color;
     }
 

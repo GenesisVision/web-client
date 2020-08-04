@@ -71,6 +71,7 @@ const getTagLoaderData = (): PostTag => ({
   type: "Program",
   userDetails: managerLoaderData,
   platformAssetDetails: {
+    provider: "Binance",
     change24Percent: 0,
     changeState: "NotChanged",
     price: 0,

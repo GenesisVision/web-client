@@ -10,7 +10,7 @@ import { OptionalClickable } from "utils/types";
 import styles from "./users-popups.module.scss";
 
 export interface ISimpleUserListProps extends OptionalClickable {
-  onChange: VoidFunction;
+  onChange?: VoidFunction;
 }
 
 interface Props extends ISimpleUserListProps {

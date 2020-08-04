@@ -11,6 +11,7 @@ import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import { CurrencyEnum, Sizeable } from "utils/types";
 
 const _DepositButton: React.FC<Props> = ({
+  infoMessage,
   disabled,
   title,
   size,
@@ -38,6 +39,7 @@ const _DepositButton: React.FC<Props> = ({
   const deposit =
     type === ASSET.FUND ? (
       <FundDepositContainer
+        infoMessage={infoMessage}
         title={title}
         ownAsset={ownAsset}
         onApply={onApply}
@@ -91,6 +93,7 @@ const _DepositButton: React.FC<Props> = ({
 };
 
 interface Props extends Sizeable {
+  infoMessage?: string;
   disabled?: boolean;
   title: string;
   onApply?: VoidFunction;

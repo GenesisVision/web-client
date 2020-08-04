@@ -11,7 +11,7 @@ export const getElementHeight = (ref: React.RefObject<HTMLDivElement>) => {
 
 export const useUtm = () => {
   const referer = useReferrer();
-  const params = useParams();
+  const { params } = useParams();
   useEffect(() => {
     if (params) {
       setUtm(params);

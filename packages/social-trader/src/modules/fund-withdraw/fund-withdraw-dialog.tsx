@@ -9,6 +9,7 @@ const FundWithdrawPopupContainer = dynamic(() =>
 );
 
 const _FundWithdrawDialog: React.FC<IFundWithdrawDialogProps> = ({
+  infoMessage,
   onApply,
   id,
   open,
@@ -16,7 +17,12 @@ const _FundWithdrawDialog: React.FC<IFundWithdrawDialogProps> = ({
 }) => {
   return (
     <Dialog open={open} onClose={onClose}>
-      <FundWithdrawPopupContainer onApply={onApply} onClose={onClose} id={id} />
+      <FundWithdrawPopupContainer
+        infoMessage={infoMessage}
+        onApply={onApply}
+        onClose={onClose}
+        id={id}
+      />
     </Dialog>
   );
 };

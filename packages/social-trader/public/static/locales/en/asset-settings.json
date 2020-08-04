@@ -78,6 +78,7 @@
     "available-in-wallet": "Available in wallet"
   },
   "reallocate": {
+    "nasdaq-message": "Please note that this fund will be processed when the NASDAQ Stock Exchange is open.",
     "title": "Reallocate",
     "apply": "Confirm",
     "success-alert-message": "Your assets were successfully reallocated!"

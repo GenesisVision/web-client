@@ -20,6 +20,7 @@ import DepositTop from "./deposit-top";
 import { MinDepositType, TFees } from "./deposit.types";
 
 const _DepositPopup: React.FC<Props> = ({
+  infoMessage,
   title,
   availableToInvest,
   fees,
@@ -84,6 +85,7 @@ const _DepositPopup: React.FC<Props> = ({
         currency={currency}
       />
       <DepositForm
+        infoMessage={infoMessage}
         ownAsset={ownAsset}
         minDeposit={minDeposit}
         availableToInvest={ownAsset ? undefined : availableToInvest}
@@ -103,6 +105,7 @@ const getRequestMethod = (asset: ASSET) =>
   asset === ASSET.FUND ? fundInvest : programInvest;
 
 export interface IDepositContainerProps {
+  infoMessage?: string;
   title: string;
   availableToInvest?: number;
   fees: TFees;

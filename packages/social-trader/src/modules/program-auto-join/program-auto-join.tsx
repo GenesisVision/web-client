@@ -46,7 +46,7 @@ const _ProgramAutoJoin: React.FC<Props> = ({
         color="primary"
         onChange={onLabelClick}
         label={
-          <Text sizeValue={"14px"}>
+          <Text wrap={false} sizeValue={"14px"}>
             <TooltipLabel
               tooltipContent={<ProgramAutoJoinTooltip />}
               labelText={t("asset-details:description.auto-join")}

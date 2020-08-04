@@ -2,6 +2,7 @@ import { ConversationPinButton } from "components/conversation/conversation-pin-
 import { ConversationRemoveButton } from "components/conversation/conversation-remove-button/conversation-remove-button";
 import { CopyLink } from "components/conversation/message/message-actions/copy-link";
 import { ReportButton } from "components/conversation/message/message-actions/report/report.button";
+import { SocialShareButton } from "components/conversation/message/message-actions/social-share/social-share.button";
 import { PostEditButton } from "components/conversation/post/post-edit/post-edit.button";
 import { ActionsIcon } from "components/icon/actions-icon";
 import { TableCardActions } from "components/table/components/table-card/table-card-actions";
@@ -67,6 +68,7 @@ const _MessageActions: React.FC<Props> = ({
           {actions?.canDelete && (
             <ConversationRemoveButton id={id} onSuccess={setDeleted} />
           )}
+          <SocialShareButton url={url} clearAnchor={clearAnchor} />
         </TableCardActions>
       </div>
     </div>

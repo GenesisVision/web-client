@@ -14,6 +14,7 @@ export type TextColor =
 export type TextWeight = "thin" | "normal" | "bold" | "bolder";
 
 interface Props extends Sizeable {
+  preWrap?: boolean;
   sizeValue?: string;
   weight?: TextWeight;
   color?: TextColor;
@@ -22,6 +23,7 @@ interface Props extends Sizeable {
 }
 
 export const Text: React.FC<Props> = ({
+  preWrap,
   sizeValue,
   weight = "normal",
   size = "middle",
@@ -34,6 +36,7 @@ export const Text: React.FC<Props> = ({
     <span
       style={{ fontSize: sizeValue }}
       className={clsx(styles["text"], {
+        [styles["text--pre-wrap"]]: preWrap,
         [styles["text--thin"]]: weight === "thin",
         [styles["text--normal"]]: weight === "normal",
         [styles["text--bold"]]: weight === "bold",
@@ -47,7 +50,7 @@ export const Text: React.FC<Props> = ({
         [styles["text--red"]]: color === "red" || color === "#ff0000",
         [styles["text--green"]]: color === "green" || color === "#00ff00",
         [styles["text--yellow"]]: color === "yellow",
-        [styles["text--wrap"]]: wrap,
+        [styles["text--wrap"]]: wrap && !preWrap,
         [styles["text--muted"]]: muted
       })}
     >

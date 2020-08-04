@@ -3,6 +3,22 @@
 @import "styles/_sizes";
 
 .dashboard-total {
+  &__main-block-pie-item-list {
+    @include media-breakpoint-landscape-tablet() {
+      flex-wrap: nowrap !important;
+    }
+  }
+  &__main-row-item {
+    width: 100%;
+    @include media-breakpoint-landscape-tablet() {
+      width: 47%;
+    }
+  }
+  &__main-row {
+    margin-bottom: -$padding-xsmall;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
   &__values {
     @include details-block-horizontal-paddings();
   }

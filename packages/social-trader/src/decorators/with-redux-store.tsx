@@ -3,8 +3,6 @@ import { AppType } from "next/dist/next-server/lib/utils";
 import React, { Component } from "react";
 import { RootState } from "reducers/root-reducer";
 import { Store } from "redux";
-import { api } from "services/api-client/swagger-custom-client";
-import Token from "services/api-client/token";
 import { AppWithReduxContext, InitializeStoreType } from "utils/types";
 
 const isServer = typeof window === "undefined";
@@ -15,13 +13,15 @@ const withReduxStore = (
   initialActions?: any[]
 ) => (WrappedComponent: AppType | any) => {
   const getOrCreateStore = (initialState?: RootState) => {
-    const state = initializeStore(initialState);
-    if (isServer) return state;
+    if (!isServer) {
+      if ((window as any)[__NEXT_REDUX_STORE__])
+        return (window as any)[__NEXT_REDUX_STORE__];
 
-    if (!(window as any)[__NEXT_REDUX_STORE__])
+      const state = initializeStore(initialState);
       (window as any)[__NEXT_REDUX_STORE__] = state;
-
-    return (window as any)[__NEXT_REDUX_STORE__];
+      return state;
+    }
+    return initializeStore(initialState);
   };
 
   return class extends Component<{
@@ -31,41 +31,38 @@ const withReduxStore = (
     reduxStore: Store;
     static async getInitialProps(ctx: AppWithReduxContext) {
       const reduxStore = getOrCreateStore();
-      const token = Token.create(ctx.ctx);
-
-      if (token.isExpiring()) {
-        try {
-          const newToken = await api.auth(token).updateAuthToken();
-          token.restore(newToken);
-        } catch (e) {
-          token.restore("");
-        }
-      }
-
-      if (token.isExist()) {
-        reduxStore.dispatch(authActions.updateTokenAction(true));
-      }
 
       ctx.ctx.reduxStore = reduxStore;
-      ctx.ctx.token = token;
 
       const componentProps =
         WrappedComponent.getInitialProps &&
         (await WrappedComponent.getInitialProps(ctx));
+
+      if (componentProps.isTokenExist) {
+        reduxStore.dispatch(authActions.updateTokenAction(true));
+      }
 
       if (initialActions) {
         await Promise.all(initialActions);
       }
 
       return {
+        reduxStore,
         initialReduxState: reduxStore.getState(),
         ...componentProps
       };
     }
 
-    constructor(props: { initialReduxState: RootState; actions: any }) {
+    constructor(props: {
+      reduxStore: Store;
+      initialReduxState: RootState;
+      actions: any;
+    }) {
       super(props);
-      this.reduxStore = getOrCreateStore(props.initialReduxState);
+      const hasStore = props.reduxStore && Object.keys(props.reduxStore).length;
+      this.reduxStore = hasStore
+        ? props.reduxStore
+        : getOrCreateStore(props.initialReduxState);
     }
 
     render() {

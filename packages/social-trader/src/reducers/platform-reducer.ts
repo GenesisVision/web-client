@@ -10,8 +10,10 @@ import {
   ProgramAssetPlatformInfo,
   ProgramCreateAssetPlatformInfo,
   ProgramMinInvestAmount,
-  TradingAccountMinCreateAmount
+  TradingAccountMinCreateAmount,
+  UsersSocialLinkInfo
 } from "gv-api-web";
+import { FilterItemInfo } from "gv-api-web";
 import apiReducerFactory, {
   IApiState
 } from "reducers/reducer-creators/api-reducer";
@@ -187,6 +189,15 @@ export const assetTypeValuesSelector = createSelector<
     []
 );
 
+export const fundHistoryEventsSelector = createSelector<
+  RootState,
+  PlatformInfo | undefined,
+  Array<FilterItemInfo> | undefined
+>(
+  platformDataSelector,
+  data => (data && data.filters.fundsHistoryEvents) || undefined
+);
+
 export const allEventsSelector = createSelector<
   RootState,
   PlatformInfo | undefined,
@@ -196,5 +207,14 @@ export const allEventsSelector = createSelector<
 const platformReducer = apiReducerFactory<PlatformInfo>({
   apiType: PLATFORM_SETTINGS
 });
+
+export const socialLinkTypesSelector = apiFieldSelector<
+  PlatformInfo,
+  Array<UsersSocialLinkInfo>
+>(
+  platformDataSelector,
+  fieldSelector(state => state.usersInfo.socialLinkTypes),
+  undefined
+);
 
 export default platformReducer;

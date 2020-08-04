@@ -13,6 +13,7 @@ const DepositPopupContainer = dynamic(() =>
 );
 
 const _DepositContainer: React.FC<Props> = ({
+  infoMessage,
   title,
   availableToInvest,
   entryFee,
@@ -37,6 +38,7 @@ const _DepositContainer: React.FC<Props> = ({
   return (
     <Dialog open={open} onClose={onClose}>
       <DepositPopupContainer
+        infoMessage={infoMessage}
         title={title}
         ownAsset={ownAsset}
         availableToInvest={availableToInvest}
@@ -54,6 +56,7 @@ const _DepositContainer: React.FC<Props> = ({
 };
 
 interface Props extends IDialogProps {
+  infoMessage?: string;
   title: string;
   availableToInvest?: number;
   entryFee?: number;

@@ -1,0 +1,25 @@
+@import "styles/_sizes";
+@import "styles/_colors";
+
+$li-bullet-size: $padding-xsmall;
+
+.li {
+  position: relative;
+  padding-left: $li-bullet-size * 2;
+  &::before {
+    border: 7px solid $background-color;
+    content: "";
+    position: absolute;
+    width: $li-bullet-size;
+    height: $li-bullet-size;
+    display: block;
+    border-radius: 50%;
+    background: $primary-color;
+    left: 0;
+    box-sizing: border-box;
+  }
+
+  &--small:not(:first-child) {
+    margin-top: $padding-small;
+  }
+}
