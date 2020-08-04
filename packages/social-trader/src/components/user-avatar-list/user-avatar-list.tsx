@@ -56,6 +56,11 @@ const _UserAvatarList: React.FC<IUserAvatarListProps> = ({
         <div
           onClick={onClickRemainder}
           className={clsx(
+            {
+              [styles[
+                "user-avatar-list__remainder--clickable"
+              ]]: !!onClickRemainder
+            },
             styles["user-avatar-list__remainder"],
             styles["user-avatar-list__item"]
           )}

@@ -17,5 +17,8 @@
     min-width: $small-avatar-size;
     height: $small-avatar-size;
     border-radius: 100%;
+    &--clickable {
+      cursor: pointer;
+    }
   }
 }
