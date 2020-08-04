@@ -87,6 +87,8 @@
     "server-error": "Server error occurred. Please try again later or contact the support department."
   },
   "buttons": {
+    "unfollow": "Unfollow",
+    "follow": "Follow",
     "export": "Export",
     "signup": "Sign up",
     "login": "Login",
