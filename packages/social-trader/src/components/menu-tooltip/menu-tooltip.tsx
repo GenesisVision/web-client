@@ -72,14 +72,14 @@ const MenuTooltip: React.FC<Props> = ({
         horizontal={HORIZONTAL_POPOVER_POS.CENTER}
         orientation={ORIENTATION_POPOVER.CENTER}
       >
-        {render()}
+        {render(clearAnchor)}
       </Popover>
     </div>
   );
 };
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
-  render: Function;
+  render: (clearAnchor?: VoidFunction) => JSX.Element | undefined;
   disable?: boolean;
   horizontal?: HORIZONTAL_POPOVER_POS;
   vertical?: VERTICAL_POPOVER_POS;
