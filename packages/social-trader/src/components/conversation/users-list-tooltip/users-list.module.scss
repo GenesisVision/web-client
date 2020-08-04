@@ -1,0 +1,9 @@
+@import "styles/_sizes";
+.users-list {
+  &__dialog {
+    &#{&} {
+      width: 80vh;
+      max-width: 500px;
+    }
+  }
+}
