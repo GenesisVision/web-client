@@ -2,21 +2,31 @@ import Dialog, { IDialogOuterProps } from "components/dialog/dialog";
 import SimpleUserList, {
   ISimpleUserListProps
 } from "components/manager/components/users-popups/simple-users-list";
-import { getFollowing } from "components/manager/services/manager.service";
+import { UsersListItemType } from "components/manager/components/users-popups/users-popups.types";
 import useIsOpen from "hooks/is-open.hook";
-import React, { useCallback } from "react";
-import { useTranslation } from "react-i18next";
+import React, { useCallback, useEffect } from "react";
 
-import styles from "./users-popups.module.scss";
+import styles from "./users-list.module.scss";
 
-export const FollowingDialog: React.FC<IFollowingDialogProps> = ({
+export interface IUsersDialogProps
+  extends IDialogOuterProps,
+    ISimpleUserListProps {
+  request: () => Promise<UsersListItemType[]>;
+  dialogTitle: string;
+}
+
+export const UsersDialog: React.FC<IUsersDialogProps> = ({
+  request,
+  dialogTitle,
   onChange,
-  id,
   open,
   onClose
 }) => {
-  const [t] = useTranslation();
-  const [isChanged, setIsChanged] = useIsOpen();
+  const [isChanged, setIsChanged, setIsNotChanged] = useIsOpen();
+
+  useEffect(() => {
+    if (open) setIsNotChanged();
+  }, [open]);
 
   const handleClose = useCallback(() => {
     if (isChanged && onChange) onChange();
@@ -30,16 +40,10 @@ export const FollowingDialog: React.FC<IFollowingDialogProps> = ({
     >
       <SimpleUserList
         onChange={setIsChanged}
-        request={() => getFollowing({ id })}
+        request={request}
         onClick={onClose}
-        title={t("manager-page:following")}
+        title={dialogTitle}
       />
     </Dialog>
   );
 };
-
-export interface IFollowingDialogProps
-  extends IDialogOuterProps,
-    ISimpleUserListProps {
-  id: string;
-}

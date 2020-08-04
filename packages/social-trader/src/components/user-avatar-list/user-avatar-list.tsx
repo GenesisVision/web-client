@@ -10,6 +10,7 @@ import { managerToPathCreator } from "routes/manager.routes";
 import styles from "./user-avatar-list.module.scss";
 
 export interface IUserAvatarListProps {
+  onClickRemainder?: VoidFunction;
   remainderColor?: string;
   count: number;
   length?: number;
@@ -19,6 +20,7 @@ export interface IUserAvatarListProps {
 const AVATAR_SHIFT = 20;
 
 const _UserAvatarList: React.FC<IUserAvatarListProps> = ({
+  onClickRemainder,
   remainderColor = "#1c2730",
   count,
   length = 3,
@@ -52,7 +54,13 @@ const _UserAvatarList: React.FC<IUserAvatarListProps> = ({
       })}
       {count > length && (
         <div
+          onClick={onClickRemainder}
           className={clsx(
+            {
+              [styles[
+                "user-avatar-list__remainder--clickable"
+              ]]: !!onClickRemainder
+            },
             styles["user-avatar-list__remainder"],
             styles["user-avatar-list__item"]
           )}

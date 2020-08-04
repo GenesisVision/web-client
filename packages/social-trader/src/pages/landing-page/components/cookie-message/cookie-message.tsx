@@ -1,3 +1,4 @@
+import { getAccept } from "pages/landing-page/components/cookie-message/cookie-message.helpers";
 import LPButton from "pages/landing-page/components/lp-button/lp-button";
 import React, { useCallback, useEffect, useState } from "react";
 
@@ -11,8 +12,9 @@ interface Props {
 const CookieMessage: React.FC<Props> = ({ cookieAccept }) => {
   const [hasAcceptance, setAcceptance] = useState(true);
   useEffect(() => {
-    if (!cookieAccept) setAcceptance(false);
-  }, [cookieAccept]);
+    const cookie = getAccept();
+    if (!cookie) setAcceptance(false);
+  }, []);
   const handleClick = useCallback(() => {
     setAccept("y");
     setAcceptance(true);

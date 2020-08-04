@@ -14,6 +14,20 @@ import filesService from "services/file-service";
 import { getRandomBoolean } from "utils/helpers";
 import { AnyObjectType } from "utils/types";
 
+export const getPostLikesUsers = (id: string) => {
+  return api
+    .social()
+    .getPostLikesUsers(id)
+    .then(({ items }) => items);
+};
+
+export const getPostRepostsUsers = (id: string) => {
+  return api
+    .social()
+    .getPostRepostsUsers(id)
+    .then(({ items }) => items);
+};
+
 export const getSocialMedia = (values?: Object, token?: Token) => {
   return api.social(token).getSocialMedia(values);
 };

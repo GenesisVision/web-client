@@ -5,7 +5,7 @@ import {
   PlatformNews,
   ProgramDetailsListItemItemsViewModel
 } from "gv-api-web";
-import { NextPage } from "next";
+import { GetStaticProps, NextPage } from "next";
 import { getAccept } from "pages/landing-page/components/cookie-message/cookie-message.helpers";
 import { LandingPage } from "pages/landing-page/landing.page";
 import {
@@ -18,25 +18,26 @@ const IndexPage: NextPage<Props> = props => {
   return <LandingPage {...props} />;
 };
 
-IndexPage.getInitialProps = async ctx => {
-  const cookieAccept = getAccept(ctx);
+export const getStaticProps: GetStaticProps = async ctx => {
+  // @ts-ignore
+  const cookieAccept = false;
   const namespacesRequired = ["fees", "auth", "landing-page"];
   try {
     const { events, follows, programs, funds, news } = await getLandingAssets();
     return {
-      cookieAccept,
-      events,
-      follows,
-      programs,
-      funds,
-      news,
-      namespacesRequired
+      props: {
+        cookieAccept,
+        events,
+        follows,
+        programs,
+        funds,
+        news,
+        namespacesRequired
+      }
     };
   } catch (e) {
     return {
-      cookieAccept,
-      namespacesRequired,
-      ...landingAssetsDefaultData
+      props: { cookieAccept, namespacesRequired, ...landingAssetsDefaultData }
     };
   }
 };

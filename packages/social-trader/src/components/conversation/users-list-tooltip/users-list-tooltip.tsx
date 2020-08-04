@@ -7,11 +7,17 @@ import React from "react";
 export interface IUsersListTooltipProps extends IUserAvatarListProps {}
 
 const _UsersListTooltip: React.FC<IUsersListTooltipProps> = ({
+  onClickRemainder,
   count,
   list
 }) => {
   return (
-    <UserAvatarList remainderColor={"#273642"} count={count} list={list} />
+    <UserAvatarList
+      onClickRemainder={onClickRemainder}
+      remainderColor={"#273642"}
+      count={count}
+      list={list}
+    />
   );
 };
 
