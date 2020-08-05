@@ -12,7 +12,7 @@ import { LevelInfo } from "gv-api-web";
 import { fetchPrograms } from "modules/programs-table/services/programs-table.service";
 import { fetchInvestmentsLevels } from "pages/invest/programs/program-details/service/program-details.service";
 import React, { useCallback, useEffect, useState } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 import ProgramsFacetTable from "../../pages/invest/programs/programs-facet/components/programs-facet-table";
 import LevelIcon from "../details/details-description-section/about-levels/level-icon";
@@ -20,7 +20,8 @@ import { PROGRAMS_COLUMNS } from "./program-rating.constants";
 
 const RATING_FACET_NAME = "most_reliable";
 
-const _ProgramsRating: React.FC<WithTranslation> = ({ t }) => {
+const _ProgramsRating: React.FC = () => {
+  const [t] = useTranslation();
   const [levels, setLevels] = useState<LevelInfo[]>([]);
   const [level, setLevel] = useState<number | undefined>(undefined);
 
@@ -80,5 +81,5 @@ const _ProgramsRating: React.FC<WithTranslation> = ({ t }) => {
   );
 };
 
-const ProgramsRatingContainer = translate()(React.memo(_ProgramsRating));
+const ProgramsRatingContainer = React.memo(_ProgramsRating);
 export default ProgramsRatingContainer;
