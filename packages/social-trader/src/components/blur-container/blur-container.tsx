@@ -4,6 +4,12 @@ import { TagType } from "utils/types";
 
 import styles from "./blur-container.module.scss";
 
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
+  tag?: TagType;
+  className?: string;
+  blur: boolean;
+}
+
 const _BlurContainer: React.FC<Props> = ({
   children,
   blur,
@@ -22,12 +28,6 @@ const _BlurContainer: React.FC<Props> = ({
     {children}
   </Tag>
 );
-
-interface Props extends React.HTMLAttributes<HTMLDivElement> {
-  tag?: TagType;
-  className?: string;
-  blur: boolean;
-}
 
 export const BlurContainer = React.memo<React.FunctionComponent<Props>>(
   _BlurContainer

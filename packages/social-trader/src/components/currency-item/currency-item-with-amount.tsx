@@ -9,6 +9,10 @@ import React from "react";
 
 import styles from "./currency-item-with-amount.module.scss";
 
+interface Props extends ICurrencyItemProps {
+  available?: number;
+}
+
 const _CurrencyItemWithAmount: React.FC<Props> = ({
   available,
   symbol,
@@ -30,9 +34,5 @@ const _CurrencyItemWithAmount: React.FC<Props> = ({
     </Row>
   );
 };
-
-interface Props extends ICurrencyItemProps {
-  available?: number;
-}
 
 export const CurrencyItemWithAmount = React.memo(_CurrencyItemWithAmount);

@@ -7,6 +7,14 @@ import { SimpleChartPoint } from "gv-api-web";
 import { JSDOM } from "jsdom";
 import React from "react";
 
+interface Props {
+  data: SimpleChartPoint[];
+  width: number;
+  height: number;
+  x: number;
+  y: number;
+}
+
 const MARGIN_TOP = 1;
 
 const getChartColor = (minValue: number, maxValue: number) => {
@@ -135,13 +143,5 @@ const BannerChart: React.FC<Props> = ({
     />
   );
 };
-
-interface Props {
-  data: SimpleChartPoint[];
-  width: number;
-  height: number;
-  x: number;
-  y: number;
-}
 
 export default BannerChart;

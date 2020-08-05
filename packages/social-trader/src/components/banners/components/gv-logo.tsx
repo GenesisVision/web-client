@@ -1,5 +1,10 @@
 import React from "react";
 
+type Props = {
+  x: number;
+  y: number;
+};
+
 export default function GvLogo(props: Props) {
   return (
     <svg
@@ -106,8 +111,3 @@ export default function GvLogo(props: Props) {
     </svg>
   );
 }
-
-type Props = {
-  x: number;
-  y: number;
-};

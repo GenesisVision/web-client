@@ -6,6 +6,17 @@ import * as React from "react";
 import { useCallback, useEffect } from "react";
 import { OptionalClickable } from "utils/types";
 
+export interface IImageBaseElementProps extends OptionalClickable {
+  title?: string;
+  color?: string;
+  DefaultImageComponent?: React.ComponentType<any>;
+  src?: string;
+  alt?: string;
+  defaultImage?: string;
+  className?: string;
+  defaultImageClassName?: string;
+}
+
 const emptyImg =
   "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=";
 
@@ -60,14 +71,3 @@ const _ImageBaseElement: React.FC<IImageBaseElementProps> = ({
 
 const ImageBaseElement = React.memo(_ImageBaseElement);
 export default ImageBaseElement;
-
-export interface IImageBaseElementProps extends OptionalClickable {
-  title?: string;
-  color?: string;
-  DefaultImageComponent?: React.ComponentType<any>;
-  src?: string;
-  alt?: string;
-  defaultImage?: string;
-  className?: string;
-  defaultImageClassName?: string;
-}

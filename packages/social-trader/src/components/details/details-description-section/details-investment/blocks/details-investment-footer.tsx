@@ -10,4 +10,5 @@ const _DetailsInvestmentFooter: React.FC<React.HTMLAttributes<
     <Center className={styles["details-investment-footer"]}>{children}</Center>
   );
 };
+
 export const DetailsInvestmentFooter = React.memo(_DetailsInvestmentFooter);

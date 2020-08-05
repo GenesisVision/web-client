@@ -14,6 +14,14 @@ import useIsOpen from "hooks/is-open.hook";
 import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+interface Props {
+  likesUsers?: Array<ProfilePublicShort>;
+  id: string;
+  count: number;
+  liked?: boolean;
+  canLike?: boolean;
+}
+
 export const _LikeContainer: React.FC<Props> = ({
   likesUsers,
   count,
@@ -85,13 +93,5 @@ export const _LikeContainer: React.FC<Props> = ({
     renderLike()
   );
 };
-
-interface Props {
-  likesUsers?: Array<ProfilePublicShort>;
-  id: string;
-  count: number;
-  liked?: boolean;
-  canLike?: boolean;
-}
 
 export const LikeContainer = React.memo(_LikeContainer);

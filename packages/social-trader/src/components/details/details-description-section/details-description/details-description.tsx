@@ -14,6 +14,27 @@ import { CurrencyEnum } from "utils/types";
 import styles from "./details-description.module.scss";
 import { DetailsLimitsAvatar } from "./details-limits-avatar.block";
 
+interface Props {
+  descriptionTitle?: string;
+  detailsType: DETAILS_TYPE;
+  personalDetails?: PersonalDetailsType;
+  isOwnAsset?: boolean;
+  id: string;
+  logo: string;
+  title: string;
+  color?: string;
+  currency?: CurrencyEnum;
+  subtitleUrl?: string;
+  subtitle?: string;
+  socialLinks?: SocialLinkViewModel[];
+  programDetails?: ProgramDetailsFull;
+  asset?: ASSET;
+  notificationsUrl?: ToType;
+  settingsUrl?: ToType;
+  AssetDetailsExtraBlock?: React.ComponentType<any>;
+  description?: string;
+}
+
 const _DetailsDescription: React.FC<Props> = ({
   descriptionTitle,
   detailsType,
@@ -75,27 +96,6 @@ const _DetailsDescription: React.FC<Props> = ({
     </div>
   );
 };
-
-interface Props {
-  descriptionTitle?: string;
-  detailsType: DETAILS_TYPE;
-  personalDetails?: PersonalDetailsType;
-  isOwnAsset?: boolean;
-  id: string;
-  logo: string;
-  title: string;
-  color?: string;
-  currency?: CurrencyEnum;
-  subtitleUrl?: string;
-  subtitle?: string;
-  socialLinks?: SocialLinkViewModel[];
-  programDetails?: ProgramDetailsFull;
-  asset?: ASSET;
-  notificationsUrl?: ToType;
-  settingsUrl?: ToType;
-  AssetDetailsExtraBlock?: React.ComponentType<any>;
-  description?: string;
-}
 
 const DetailsDescription = React.memo(_DetailsDescription);
 export default DetailsDescription;

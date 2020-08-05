@@ -18,6 +18,11 @@ interface ILimitsProps {
   currency: CURRENCIES;
 }
 
+interface Props {
+  investmentsLimits: LevelInfo[];
+  currency: CurrencyEnum;
+}
+
 const _Limits: React.FC<ILimitsProps> = ({ investmentsLimits, currency }) => {
   const [t] = useTranslation();
   return (
@@ -119,11 +124,6 @@ const _AboutLevelsContent: React.FC<Props> = ({
     </div>
   );
 };
-
-interface Props {
-  investmentsLimits: LevelInfo[];
-  currency: CurrencyEnum;
-}
 
 const AboutLevelsContent = React.memo(_AboutLevelsContent);
 export default AboutLevelsContent;

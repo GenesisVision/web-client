@@ -3,6 +3,24 @@ import { ImageQuality } from "gv-api-web";
 import * as React from "react";
 import { OptionalClickable } from "utils/types";
 
+export interface IImageProps {
+  url: string;
+  alt?: string;
+  className?: string;
+}
+
+export interface IImageBaseProps extends OptionalClickable {
+  quality?: ImageQuality;
+  title?: string;
+  color?: string;
+  DefaultImageComponent?: React.ComponentType<any>;
+  src?: string;
+  alt?: string;
+  defaultImage?: string;
+  className?: string;
+  defaultImageClassName?: string;
+}
+
 const _ImageBase: React.FC<IImageBaseProps> = ({
   onClick,
   quality,
@@ -32,21 +50,3 @@ const _ImageBase: React.FC<IImageBaseProps> = ({
 
 const ImageBase = React.memo(_ImageBase);
 export default ImageBase;
-
-export interface IImageProps {
-  url: string;
-  alt?: string;
-  className?: string;
-}
-
-export interface IImageBaseProps extends OptionalClickable {
-  quality?: ImageQuality;
-  title?: string;
-  color?: string;
-  DefaultImageComponent?: React.ComponentType<any>;
-  src?: string;
-  alt?: string;
-  defaultImage?: string;
-  className?: string;
-  defaultImageClassName?: string;
-}

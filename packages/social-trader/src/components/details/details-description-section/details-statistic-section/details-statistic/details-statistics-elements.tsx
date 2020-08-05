@@ -8,6 +8,12 @@ import { Row } from "components/row/row";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 
+interface Props {
+  Current: React.ComponentType;
+  Particular: React.ComponentType;
+  periodType: TChartPeriod;
+}
+
 const _DetailsStatisticsElements: React.FC<Props> = ({
   Current,
   Particular,
@@ -43,12 +49,6 @@ const _DetailsStatisticsElements: React.FC<Props> = ({
     </>
   );
 };
-
-interface Props {
-  Current: React.ComponentType;
-  Particular: React.ComponentType;
-  periodType: TChartPeriod;
-}
 
 const DetailsStatisticsElements = React.memo(_DetailsStatisticsElements);
 export default DetailsStatisticsElements;

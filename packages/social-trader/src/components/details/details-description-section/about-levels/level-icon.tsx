@@ -4,6 +4,11 @@ import * as React from "react";
 
 import styles from "./about-level-icon.module.scss";
 
+interface Props {
+  levelInfo: LevelInfo;
+  current?: boolean;
+}
+
 const LevelIcon: React.FC<Props> = React.memo(({ levelInfo, current }) => (
   <div
     className={clsx(
@@ -19,8 +24,3 @@ const LevelIcon: React.FC<Props> = React.memo(({ levelInfo, current }) => (
 ));
 
 export default LevelIcon;
-
-interface Props {
-  levelInfo: LevelInfo;
-  current?: boolean;
-}

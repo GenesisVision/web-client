@@ -10,6 +10,17 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
 
+export interface IConfirmPopupContentProps extends IDialogProps {
+  errorMessage?: string;
+  onApply: () => void;
+  onCancel?: () => void;
+  header?: string;
+  body?: React.ReactNode;
+  applyButtonText?: string;
+  cancelButtonText?: string;
+  disabled?: boolean;
+}
+
 const _ConfirmPopupContent: React.ComponentType<IConfirmPopupContentProps> = ({
   errorMessage,
   onApply,
@@ -49,14 +60,3 @@ const _ConfirmPopupContent: React.ComponentType<IConfirmPopupContentProps> = ({
 
 const ConfirmPopupContent = React.memo(_ConfirmPopupContent);
 export default ConfirmPopupContent;
-
-export interface IConfirmPopupContentProps extends IDialogProps {
-  errorMessage?: string;
-  onApply: () => void;
-  onCancel?: () => void;
-  header?: string;
-  body?: React.ReactNode;
-  applyButtonText?: string;
-  cancelButtonText?: string;
-  disabled?: boolean;
-}

@@ -19,6 +19,28 @@ import DepositForm from "./deposit-form";
 import DepositTop from "./deposit-top";
 import { MinDepositType, TFees } from "./deposit.types";
 
+const getRequestMethod = (asset: ASSET) =>
+  asset === ASSET.FUND ? fundInvest : programInvest;
+
+export interface IDepositContainerProps {
+  infoMessage?: string;
+  title: string;
+  availableToInvest?: number;
+  fees: TFees;
+  minDeposit: MinDepositType;
+  id: string;
+  onClose: (param?: any) => void;
+  onApply: () => void;
+  currency: CurrencyEnum;
+  asset: ASSET;
+  hasEntryFee?: boolean;
+  ownAsset?: boolean;
+}
+
+interface Props extends IDepositContainerProps {
+  data: TWalletsAvailableData;
+}
+
 const _DepositPopup: React.FC<Props> = ({
   infoMessage,
   title,
@@ -100,28 +122,6 @@ const _DepositPopup: React.FC<Props> = ({
     </>
   );
 };
-
-const getRequestMethod = (asset: ASSET) =>
-  asset === ASSET.FUND ? fundInvest : programInvest;
-
-export interface IDepositContainerProps {
-  infoMessage?: string;
-  title: string;
-  availableToInvest?: number;
-  fees: TFees;
-  minDeposit: MinDepositType;
-  id: string;
-  onClose: (param?: any) => void;
-  onApply: () => void;
-  currency: CurrencyEnum;
-  asset: ASSET;
-  hasEntryFee?: boolean;
-  ownAsset?: boolean;
-}
-
-interface Props extends IDepositContainerProps {
-  data: TWalletsAvailableData;
-}
 
 const DepositPopup = withBlurLoader(React.memo(_DepositPopup));
 export default DepositPopup;

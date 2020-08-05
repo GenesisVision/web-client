@@ -12,6 +12,20 @@ const DepositPopupContainer = dynamic(() =>
   import("./deposit-popup.container")
 );
 
+interface Props extends IDialogProps {
+  infoMessage?: string;
+  title: string;
+  availableToInvest?: number;
+  entryFee?: number;
+  minDeposit: MinDepositType;
+  asset: ASSET;
+  id: string;
+  onApply: () => void;
+  hasEntryFee?: boolean;
+  currency?: CurrencyEnum;
+  ownAsset?: boolean;
+}
+
 const _DepositContainer: React.FC<Props> = ({
   infoMessage,
   title,
@@ -54,20 +68,6 @@ const _DepositContainer: React.FC<Props> = ({
     </Dialog>
   );
 };
-
-interface Props extends IDialogProps {
-  infoMessage?: string;
-  title: string;
-  availableToInvest?: number;
-  entryFee?: number;
-  minDeposit: MinDepositType;
-  asset: ASSET;
-  id: string;
-  onApply: () => void;
-  hasEntryFee?: boolean;
-  currency?: CurrencyEnum;
-  ownAsset?: boolean;
-}
 
 const DepositContainer = React.memo(_DepositContainer);
 export default DepositContainer;

@@ -10,6 +10,18 @@ import { CurrencyEnum } from "utils/types";
 
 import styles from "./currency-item.module.scss";
 
+export interface ICurrencyItemProps {
+  url?: string;
+  symbol?: string | CurrencyEnum;
+  big?: boolean;
+  rate?: number;
+  clickable?: boolean;
+  className?: string;
+  small?: boolean;
+  logo?: string;
+  name?: string | CurrencyEnum;
+}
+
 const _CurrencyItem: React.FC<ICurrencyItemProps> = ({
   url,
   symbol,
@@ -86,17 +98,5 @@ const _CurrencyItem: React.FC<ICurrencyItemProps> = ({
     renderItemContent()
   );
 };
-
-export interface ICurrencyItemProps {
-  url?: string;
-  symbol?: string | CurrencyEnum;
-  big?: boolean;
-  rate?: number;
-  clickable?: boolean;
-  className?: string;
-  small?: boolean;
-  logo?: string;
-  name?: string | CurrencyEnum;
-}
 
 export const CurrencyItem = React.memo(_CurrencyItem);

@@ -11,6 +11,13 @@ import EventListener from "react-event-listener";
 
 import styles from "./conversation-image.module.scss";
 
+interface Props {
+  initIndex: number;
+  images: IConversationImage[];
+  open: boolean;
+  onClose?: (event?: any) => void;
+}
+
 const _ConversationImagesFull: React.FC<Props> = ({
   initIndex,
   open,
@@ -121,12 +128,5 @@ const ConversationImagesFullContent: React.FC<{
     </EventListener>
   );
 };
-
-interface Props {
-  initIndex: number;
-  images: IConversationImage[];
-  open: boolean;
-  onClose?: (event?: any) => void;
-}
 
 export const ConversationImagesFull = React.memo(_ConversationImagesFull);

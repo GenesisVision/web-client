@@ -8,6 +8,15 @@ import * as React from "react";
 import styles from "./details-description.module.scss";
 import { DetailsSubtitle } from "./details-subtitle.block";
 
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
+  descriptionTitle?: string;
+  title: string;
+  subtitleUrl?: ToType;
+  subtitle?: string;
+  socialLinks?: SocialLinkViewModel[];
+  description?: string;
+}
+
 const _DetailsInfo: React.FC<Props> = ({
   descriptionTitle,
   title,
@@ -39,14 +48,5 @@ const _DetailsInfo: React.FC<Props> = ({
     </div>
   );
 };
-
-interface Props extends React.HTMLAttributes<HTMLDivElement> {
-  descriptionTitle?: string;
-  title: string;
-  subtitleUrl?: ToType;
-  subtitle?: string;
-  socialLinks?: SocialLinkViewModel[];
-  description?: string;
-}
 
 export const DetailsInfo = React.memo(_DetailsInfo);

@@ -4,6 +4,10 @@ import { Clickable } from "utils/types";
 
 import styles from "./back-button.module.scss";
 
+interface Props extends Clickable {
+  backPath?: string;
+}
+
 export const _BackButtonBody: React.FC<Props> = ({ onClick, backPath }) => {
   const { t } = useTranslation();
   return (
@@ -19,7 +23,3 @@ export const _BackButtonBody: React.FC<Props> = ({ onClick, backPath }) => {
 
 const BackButtonBody = React.memo(_BackButtonBody);
 export default BackButtonBody;
-
-interface Props extends Clickable {
-  backPath?: string;
-}

@@ -7,6 +7,12 @@ import { useTranslation } from "react-i18next";
 import DetailsDescriptionControl from "./details-description-control";
 import styles from "./details-description-control.module.scss";
 
+interface Props {
+  asset?: ASSET;
+  id: string;
+  isFavorite: boolean;
+}
+
 const _DetailsFavorite: React.FC<Props> = ({
   asset,
   id,
@@ -36,12 +42,6 @@ const _DetailsFavorite: React.FC<Props> = ({
     </ToggleAssetFavoriteButton>
   );
 };
-
-interface Props {
-  asset?: ASSET;
-  id: string;
-  isFavorite: boolean;
-}
 
 const DetailsFavorite = React.memo(_DetailsFavorite);
 export default DetailsFavorite;

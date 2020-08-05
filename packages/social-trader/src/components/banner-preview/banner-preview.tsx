@@ -1,6 +1,12 @@
 import GVTextField from "components/gv-text-field";
 import React from "react";
 
+type Props = {
+  url: string;
+  title: string;
+  type?: "png" | "svg";
+};
+
 const BannerPreview: React.FC<Props> = ({ url, title, type = "png" }) => (
   <div>
     {type === "png" && <img src={url} alt={title} />}
@@ -10,9 +16,3 @@ const BannerPreview: React.FC<Props> = ({ url, title, type = "png" }) => (
 );
 
 export default BannerPreview;
-
-type Props = {
-  url: string;
-  title: string;
-  type?: "png" | "svg";
-};

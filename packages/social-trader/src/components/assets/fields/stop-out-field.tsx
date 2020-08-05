@@ -3,6 +3,10 @@ import { SimpleNumberField } from "components/simple-fields/simple-number-field"
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 
+interface Props {
+  name: string;
+}
+
 const _StopOutField: React.FC<Props> = ({ name }) => {
   const { t } = useTranslation();
   return (
@@ -19,10 +23,6 @@ const _StopOutField: React.FC<Props> = ({ name }) => {
     />
   );
 };
-
-interface Props {
-  name: string;
-}
 
 const StopOutField = React.memo(_StopOutField);
 export default StopOutField;

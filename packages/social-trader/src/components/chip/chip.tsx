@@ -11,6 +11,15 @@ export enum CHIP_TYPE {
   WARNING = "warning"
 }
 
+interface Props extends Sizeable {
+  stretch?: boolean;
+  disabled?: boolean;
+  className?: string;
+  rounded?: boolean;
+  type?: CHIP_TYPE;
+  onClick?: (event: React.MouseEvent<HTMLElement>) => void | undefined;
+}
+
 const Chip: React.FC<Props> = React.memo(
   ({
     type,
@@ -37,14 +46,5 @@ const Chip: React.FC<Props> = React.memo(
     </div>
   )
 );
-
-interface Props extends Sizeable {
-  stretch?: boolean;
-  disabled?: boolean;
-  className?: string;
-  rounded?: boolean;
-  type?: CHIP_TYPE;
-  onClick?(event: React.MouseEvent<HTMLElement>): void | undefined;
-}
 
 export default Chip;

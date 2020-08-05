@@ -1,5 +1,11 @@
 import React from "react";
 
+type Props = {
+  color: string;
+  x: number;
+  y: number;
+};
+
 export default function Logo21({ color, x, y }: Props) {
   return (
     <svg
@@ -38,9 +44,3 @@ export default function Logo21({ color, x, y }: Props) {
     </svg>
   );
 }
-
-type Props = {
-  color: string;
-  x: number;
-  y: number;
-};
