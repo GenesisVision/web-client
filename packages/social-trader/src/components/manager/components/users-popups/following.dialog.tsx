@@ -19,7 +19,7 @@ export const FollowingDialog: React.FC<IFollowingDialogProps> = ({
   const [isChanged, setIsChanged] = useIsOpen();
 
   const handleClose = useCallback(() => {
-    if (isChanged) onChange();
+    if (isChanged && onChange) onChange();
     onClose();
   }, [isChanged, onChange, onClose]);
   return (

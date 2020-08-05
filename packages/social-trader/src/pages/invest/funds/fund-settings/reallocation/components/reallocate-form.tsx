@@ -7,13 +7,13 @@ import { Row } from "components/row/row";
 import withLoader from "decorators/with-loader";
 import { FundAssetInfo, PlatformAsset } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
-import CreateFundSettingsAssetsComponent from "pages/create-fund/components/create-fund-settings/create-fund-settings-assets-block/create-fund-settings-assets-block";
 import { assetsShape } from "pages/create-fund/components/create-fund-settings/create-fund-settings.validators";
+import AssetsComponent from "pages/invest/funds/fund-settings/reallocation/components/assets-block/assets-block";
+import { ReallocateFieldWrapper } from "pages/invest/funds/fund-settings/reallocation/components/reallocate-field-wrapper";
 import {
   compareAssets,
   composeSelectedAssets
-} from "pages/invest/funds/fund-settings/reallocation/components/reallocate-field";
-import { ReallocateFieldWrapper } from "pages/invest/funds/fund-settings/reallocation/components/reallocate-field-wrapper";
+} from "pages/invest/funds/fund-settings/reallocation/reallocation.helpers";
 import * as React from "react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -84,7 +84,7 @@ const _ReallocateForm: React.FC<Props> = ({
       {dirty && !equalWithCurrent && (
         <Row wide>
           <LabeledValue label={"Current"}>
-            <CreateFundSettingsAssetsComponent
+            <AssetsComponent
               assets={savedCurrent || []}
               remainder={0}
               canChange={false}
@@ -95,6 +95,7 @@ const _ReallocateForm: React.FC<Props> = ({
       <Row wide>
         <LabeledValue label={dirty ? "New" : "Current"}>
           <GVHookFormField
+            scheduleMessage={t("trading-schedule.reallocate-fund")}
             name={FIELDS.assets}
             component={ReallocateFieldWrapper}
             assets={platformAssets}

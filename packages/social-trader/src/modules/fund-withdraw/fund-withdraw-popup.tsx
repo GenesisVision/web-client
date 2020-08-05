@@ -23,6 +23,7 @@ enum FUND_WITHDRAW_FORM {
 }
 
 const _FundWithdrawPopup: React.FC<Props> = ({
+  infoMessage,
   errorMessage,
   onApply,
   onClose,
@@ -67,6 +68,7 @@ const _FundWithdrawPopup: React.FC<Props> = ({
       <DialogBottom>
         {tab === FUND_WITHDRAW_FORM.ENTER_AMOUNT && (
           <FundWithdrawAmountForm
+            infoMessage={infoMessage}
             isPending={isRatePending}
             currency={currency}
             setCurrency={setCurrency}
@@ -99,6 +101,7 @@ export const FundWithdrawPopup = withBlurLoader(React.memo(_FundWithdrawPopup));
 interface Props extends IFundWithdrawPopupProps, IFundWithdrawPopupOwnProps {}
 
 export interface IFundWithdrawPopupProps {
+  infoMessage?: string;
   errorMessage?: string;
   onApply?: VoidFunction;
   onClose: (param?: any) => void;

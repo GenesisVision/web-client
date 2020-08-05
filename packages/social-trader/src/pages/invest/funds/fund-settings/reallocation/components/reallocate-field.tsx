@@ -1,20 +1,48 @@
 import { FundAssetRemoveType } from "components/fund-asset/fund-asset-container";
 import {
   FundAssetPart,
-  FundAssetPartWithIcon,
-  PlatformAsset
+  PlatformAsset,
+  ProviderPlatformAssets
 } from "gv-api-web";
 import useAnchor from "hooks/anchor.hook";
-import CreateFundSettingsAddAsset, {
-  TRegulatorInputHandle
-} from "pages/create-fund/components/create-fund-settings/create-fund-settings-add-asset/create-fund-settings-add-asset";
-import CreateFundSettingsAssetsComponent from "pages/create-fund/components/create-fund-settings/create-fund-settings-assets-block/create-fund-settings-assets-block";
+import {
+  composeSelectedAssets,
+  getRemainder,
+  getRemainderWithoutSelected
+} from "pages/invest/funds/fund-settings/reallocation/reallocation.helpers";
 import * as React from "react";
 import { useCallback, useEffect, useState } from "react";
 import { safeGetElemFromArray } from "utils/helpers";
 import { PlatformAssetFull } from "utils/types";
 
+import AddAsset from "./add-asset/add-asset";
+import { TRegulatorInputHandle } from "./add-asset/add-asset-list";
+import AssetsComponent from "./assets-block/assets-block";
+
+export interface IReallocateFieldProps {
+  scheduleMessage?: string;
+  providers: ProviderPlatformAssets[];
+  name: string;
+  value: FundAssetPart[];
+  assets: PlatformAsset[];
+  error?: string;
+  touched: boolean;
+  onChange(event: {
+    target: {
+      value: FundAssetPart[];
+      name: string;
+    };
+  }): void;
+  onBlur(event: {
+    target: {
+      name: string;
+    };
+  }): void;
+}
+
 const _ReallocateField: React.FC<IReallocateFieldProps> = ({
+  scheduleMessage,
+  providers,
   name,
   value = [],
   assets,
@@ -43,12 +71,13 @@ const _ReallocateField: React.FC<IReallocateFieldProps> = ({
 
   useEffect(() => {
     if (!newAsset) return;
-    const assets = stateAssets.map(x =>
-      x.asset === newAsset.asset ? newAsset : x
+    const assets = stateAssets.map(item =>
+      item.asset === newAsset.asset ? newAsset : item
     );
     setStateAssets(assets);
     setRemainder(getRemainder(assets));
   }, [newAsset]);
+
   useEffect(() => {
     if (!anchor && !!newAsset) {
       onBlur &&
@@ -60,8 +89,9 @@ const _ReallocateField: React.FC<IReallocateFieldProps> = ({
       submitChanges();
     }
   }, [anchor, name, newAsset, onBlur, submitChanges]);
+
   useEffect(() => {
-    !anchor &&
+    if (!anchor)
       setStateAssets(stateAssets.sort((a, b) => b.percent - a.percent));
   }, [anchor, stateAssets]);
 
@@ -111,7 +141,9 @@ const _ReallocateField: React.FC<IReallocateFieldProps> = ({
 
   return (
     <>
-      <CreateFundSettingsAssetsComponent
+      <AssetsComponent
+        providers={providers}
+        scheduleMessage={scheduleMessage}
         touched={touched}
         error={error}
         assets={stateAssets.filter(item => item.percent > 0)}
@@ -119,7 +151,8 @@ const _ReallocateField: React.FC<IReallocateFieldProps> = ({
         removeHandle={handleRemove}
         addHandle={setAnchor}
       />
-      <CreateFundSettingsAddAsset
+      <AddAsset
+        providers={providers}
         remainder={remainder}
         anchor={anchor}
         handleCloseDropdown={clearAnchor}
@@ -134,85 +167,3 @@ const _ReallocateField: React.FC<IReallocateFieldProps> = ({
 
 const ReallocateField = React.memo(_ReallocateField);
 export default ReallocateField;
-
-const MAX_PERCENT = 100;
-
-const getRemainder = (assets: { percent: number }[]) =>
-  MAX_PERCENT - assets.reduce((sum, item) => sum + item.percent, 0);
-
-export const composeSelectedAssets = (
-  assetsPercents: FundAssetPart[],
-  assets: PlatformAsset[]
-): PlatformAssetFull[] =>
-  assets.map(asset => {
-    const targetAsset = assetsPercents.find(x => x.id === asset.id);
-    const percent = targetAsset
-      ? targetAsset.percent
-      : asset.mandatoryFundPercent;
-    return { ...asset, percent };
-  });
-
-const getRemainderWithoutSelected = (
-  asset: FundAssetPartWithIcon,
-  assets: PlatformAssetFull[]
-) =>
-  MAX_PERCENT -
-  assets
-    .filter(item => item.asset !== asset.asset)
-    .reduce((sum, item) => sum + item.percent, 0);
-
-export interface IReallocateFieldProps {
-  name: string;
-  value: FundAssetPart[];
-  assets: PlatformAsset[];
-  error?: string;
-  touched: boolean;
-  onChange(event: {
-    target: {
-      value: FundAssetPart[];
-      name: string;
-    };
-  }): void;
-  onBlur(event: {
-    target: {
-      name: string;
-    };
-  }): void;
-}
-
-export const mapToPercentWithAsset = ({
-  percent,
-  asset
-}: {
-  [key: string]: any;
-}): PercentWithAssetType => ({ percent, asset });
-
-export type AssetType =
-  | PlatformAsset
-  | FundAssetPart
-  | FundAssetPartWithIcon
-  | PlatformAssetFull;
-
-export type PercentWithAssetType = { percent: number; asset: string };
-
-export const compareAssets = (
-  first: Array<AssetType>,
-  second: Array<AssetType>
-): boolean => {
-  const mappedFirst = first.map(mapToPercentWithAsset);
-  const mappedSecond = second.map(mapToPercentWithAsset);
-  if (
-    !mappedFirst ||
-    !mappedSecond ||
-    mappedFirst.length !== mappedSecond.length
-  )
-    return false;
-  for (const i in mappedFirst) {
-    if (
-      mappedFirst[i].asset + mappedFirst[i].percent !==
-      mappedSecond[i].asset + mappedSecond[i].percent
-    )
-      return false;
-  }
-  return true;
-};

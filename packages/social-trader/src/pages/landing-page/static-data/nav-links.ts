@@ -58,16 +58,16 @@ export const navHeader: TNavHeader[] = [
     href: INVEST_ROUTE,
     subNav: [
       {
-        name: "landing-page:links.follow",
-        href: GV_FOLLOW_ROUTE
+        name: "landing-page:links.funds",
+        href: GV_FUNDS_ROUTE
       },
       {
         name: "landing-page:links.programs",
         href: GV_PROGRAMS_ROUTE
       },
       {
-        name: "landing-page:links.funds",
-        href: GV_FUNDS_ROUTE
+        name: "landing-page:links.follow",
+        href: GV_FOLLOW_ROUTE
       }
     ]
   },

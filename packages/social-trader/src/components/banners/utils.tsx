@@ -185,6 +185,15 @@ export async function fetchFundData(id: string) {
   return { details, chart };
 }
 
+export async function fetchFollowData(id: string) {
+  const details = await api.follows().getFollowAssetDetails(id as string);
+  const chart = await api.follows().getProfitPercentCharts(details.id, {
+    currency: CURRENCY
+  });
+
+  return { details, chart };
+}
+
 export async function fetchProgramData(id: string) {
   const details = await api.programs().getProgramDetails(id as string);
   const chart = await api.programs().getProgramProfitPercentCharts(details.id, {
@@ -221,6 +230,17 @@ export const createPostPreviewApi = () => {
   };
 };
 
+const getFetchMethod = (asset: ASSET) => {
+  switch (asset) {
+    case ASSET.FOLLOW:
+      return fetchFollowData;
+    case ASSET.FUND:
+      return fetchFundData;
+    case ASSET.PROGRAM:
+      return fetchProgramData;
+  }
+};
+
 export function createBannerApi(
   Banner: BannerComponent,
   asset: ASSET,
@@ -232,10 +252,8 @@ export function createBannerApi(
     } = req;
 
     try {
-      const { chart, details } =
-        asset === ASSET.FUND
-          ? await fetchFundData(id as string)
-          : await fetchProgramData(id as string);
+      const method = getFetchMethod(asset);
+      const { chart, details } = await method(id as string);
 
       const banner = await createBanner(
         <Banner chart={chart} details={details} />,

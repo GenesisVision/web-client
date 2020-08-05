@@ -1,9 +1,7 @@
 import clsx from "clsx";
 import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
 import { LogoutIcon } from "components/icon/logout-icon";
-import NavigationItem, {
-  NavigationButton
-} from "components/navigation/navigation-item";
+import NavigationItem from "components/navigation/navigation-item";
 import { ProfileHeaderViewModel } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
@@ -39,9 +37,9 @@ const _NavigationMobile: React.FC<Props> = ({
           <MenuNavigationItem item={item} key={item.label} />
         ))}
         {isAuthenticated ? (
-          <NavigationButton icon={<LogoutIcon primary />} onClick={logout}>
+          <NavigationItem icon={<LogoutIcon primary />} onClick={logout}>
             {t("navigation.logout")}
-          </NavigationButton>
+          </NavigationItem>
         ) : (
           <NavigationItem
             icon={<LogoutIcon primary rotate />}

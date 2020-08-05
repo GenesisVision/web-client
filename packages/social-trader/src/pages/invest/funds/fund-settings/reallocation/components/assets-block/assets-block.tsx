@@ -9,13 +9,19 @@ import FundAssetContainer, {
 } from "components/fund-asset/fund-asset-container";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { Text } from "components/text/text";
+import { ProviderPlatformAssets } from "gv-api-web";
+import { generateScheduleText } from "pages/invest/funds/fund-details/services/fund-details.service";
 import React, { MouseEventHandler, useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { safeGetElemFromArray } from "utils/helpers";
 import { PlatformAssetFull } from "utils/types";
 
-import styles from "./create-fund-settings-assets-block.module.scss";
+import styles from "./assets-block.module.scss";
 
-const _CreateFundSettingsAssetsComponent: React.FC<Props> = ({
+const _AssetsComponent: React.FC<Props> = ({
+  providers,
+  scheduleMessage,
   error,
   canChange = true,
   assets = [],
@@ -32,6 +38,12 @@ const _CreateFundSettingsAssetsComponent: React.FC<Props> = ({
     []
   );
   const handleLeave = useCallback(() => setHoveringAssetName(undefined), []);
+  const hasTradingSchedule =
+    assets.filter(({ provider }) => provider === "Nasdaq").length > 0;
+  const provider =
+    providers &&
+    safeGetElemFromArray(providers, ({ type }) => type === "Nasdaq");
+  const schedule = generateScheduleText(provider?.tradingSchedule);
   return (
     <>
       <Row onlyOffset wide>
@@ -69,11 +81,23 @@ const _CreateFundSettingsAssetsComponent: React.FC<Props> = ({
           </Center>
         </Row>
       )}
+      {hasTradingSchedule && (
+        <Row onlyOffset>
+          <Row>
+            <Text muted>{scheduleMessage}</Text>
+          </Row>
+          <Row>
+            <Text muted>{schedule}</Text>
+          </Row>
+        </Row>
+      )}
     </>
   );
 };
 
 interface Props {
+  providers?: ProviderPlatformAssets[];
+  scheduleMessage?: string;
   assets: PlatformAssetFull[];
   remainder: number;
   removeHandle?: FundAssetRemoveType;
@@ -83,7 +107,5 @@ interface Props {
   touched?: boolean;
 }
 
-const CreateFundSettingsAssetsComponent = React.memo(
-  _CreateFundSettingsAssetsComponent
-);
-export default CreateFundSettingsAssetsComponent;
+const AssetsComponent = React.memo(_AssetsComponent);
+export default AssetsComponent;

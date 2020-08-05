@@ -10,6 +10,7 @@ import React from "react";
 import { CurrencyEnum } from "utils/types";
 
 const _DepositWithdrawButtons: React.FC<Props> = ({
+  infoMessage,
   accountType,
   transferableItem,
   canTransfer,
@@ -33,6 +34,7 @@ const _DepositWithdrawButtons: React.FC<Props> = ({
     >
       {canInvest && (
         <DepositButton
+          infoMessage={infoMessage}
           title={title}
           onApply={onApply}
           ownAsset={ownAsset}
@@ -46,6 +48,7 @@ const _DepositWithdrawButtons: React.FC<Props> = ({
       )}
       {canWithdraw && (
         <WithdrawButton
+          infoMessage={infoMessage}
           onApply={onApply}
           type={type}
           id={id}
@@ -71,6 +74,7 @@ const _DepositWithdrawButtons: React.FC<Props> = ({
 };
 
 interface Props {
+  infoMessage?: string;
   accountType?: PrivateTradingAccountType | AssetTypeExt;
   transferableItem?: WalletItemType;
   canTransfer?: boolean;

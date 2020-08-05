@@ -1,14 +1,13 @@
 import { useParams } from "hooks/location";
-import * as qs from "qs";
 import { useEffect } from "react";
 import { setRef } from "utils/ref";
 
 export const useRefLink = () => {
-  const params = useParams();
+  const { parsedParams } = useParams();
   useEffect(() => {
-    if (params) {
-      const { ref } = qs.parse(params);
+    if (parsedParams) {
+      const { ref } = parsedParams;
       if (ref) setRef(ref);
     }
-  }, [params]);
+  }, [parsedParams]);
 };

@@ -57,7 +57,7 @@ const _LandingPage: React.FC<Props> = ({
         </HomeSection>
         <HomeSection bgColor="gray">
           <HomeContainer>
-            <FollowsContainer follows={follows.items} />
+            <FundsContainer funds={funds.items} />
           </HomeContainer>
         </HomeSection>
         <section className="home__section">
@@ -67,7 +67,7 @@ const _LandingPage: React.FC<Props> = ({
         </section>
         <HomeSection bgColor="gray">
           <HomeContainer>
-            <FundsContainer funds={funds.items} />
+            <FollowsContainer follows={follows.items} />
           </HomeContainer>
         </HomeSection>
         <HomeSection id="info" bgColor="white">

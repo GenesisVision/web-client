@@ -23,7 +23,7 @@ export const FollowersDialog: React.FC<IFollowersDialogProps> = ({
   }, [open]);
 
   const handleClose = useCallback(() => {
-    if (isChanged) onChange();
+    if (isChanged && onChange) onChange();
     onClose();
   }, [isChanged, onChange, onClose]);
   return (

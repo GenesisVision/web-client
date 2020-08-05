@@ -37,14 +37,14 @@ const _GlobalSearchResult: React.FC<Props> = ({ data }) => {
             count={data.managers && data.managers.total}
           />
           <GVTab
-            value={SEARCH_TABS.PROGRAMS}
-            label={t("global-search-page.programs")}
-            count={data.programs && data.programs.total}
-          />
-          <GVTab
             value={SEARCH_TABS.FUNDS}
             label={t("global-search-page.funds")}
             count={data.funds && data.funds.total}
+          />
+          <GVTab
+            value={SEARCH_TABS.PROGRAMS}
+            label={t("global-search-page.programs")}
+            count={data.programs && data.programs.total}
           />
           <GVTab
             value={SEARCH_TABS.FOLLOWS}

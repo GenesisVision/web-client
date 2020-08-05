@@ -1,4 +1,19 @@
 {
+  "kyc-limit": {
+    "text-1": "Without KYC you can:",
+    "text-2": "Verify to remove the limit",
+    "text-3": "Deposit and withdraw crypto without limits",
+    "text-4": "Exchange cryptocurrencies",
+    "text-5": "Create crypto trading accounts",
+    "text-6": "Create Programs (with a maximum investment amount equivalent to $1,000) and Funds",
+    "text-7": "Bind your external trading account and use copy trading functionality (Follow)",
+    "text-8": "Invest in Programs an  d Funds up to $1,000 in total",
+    "text-9": "After you pass KYC you also can:",
+    "text-10": "Create Forex trading accounts",
+    "text-11": "Invest in Programs and Funds without limits",
+    "text-12": "Attract investments in your Programs beyond the KYC limit",
+    "text-13": "Note\n KYC is an authentication mechanism required in the financial industry to help ensure companies are compliant with anti money laundering regulations."
+  },
   "tooltips": {
     "total": {
       "total-balance": "Current market value of your assets on the platform.",

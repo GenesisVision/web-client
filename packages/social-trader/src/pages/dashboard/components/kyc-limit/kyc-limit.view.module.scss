@@ -1,0 +1,8 @@
+@import "styles/_breakpoint";
+
+.kyc-limit-view {
+  flex-wrap: wrap;
+  @include media-breakpoint-landscape-phone() {
+    flex-wrap: nowrap;
+  }
+}

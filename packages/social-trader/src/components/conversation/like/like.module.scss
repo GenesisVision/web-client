@@ -5,6 +5,7 @@
 $like-icon-size: 15px;
 
 .like {
+  cursor: pointer;
   &__count {
     font-size: $font-size-common;
     line-height: $font-size-common;

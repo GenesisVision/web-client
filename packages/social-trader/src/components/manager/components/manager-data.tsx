@@ -73,7 +73,7 @@ const _ManagerData: React.FC<Props> = ({ canWritePost, id }) => {
         </GVTabs>
       </Row>
       {tab === TABS.FEED && (
-        <Row size={"large"} onlyOffset>
+        <Row onlyOffset>
           <Row>
             <RowItem wide />
             <RowItem>

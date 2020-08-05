@@ -1,6 +1,7 @@
 import AssetStatus from "components/asset-status/asset-status";
 import { DetailsInvestmentBlock } from "components/details/details-description-section/details-investment/blocks/details-investment-block";
 import { DetailsInvestmentFooter } from "components/details/details-description-section/details-investment/blocks/details-investment-footer";
+import { DetailsInvestmentText } from "components/details/details-description-section/details-investment/blocks/details-investment-text";
 import { DetailsInvestmentHeading } from "components/details/details-description-section/details-investment/blocks/details-investment-title";
 import { InvestmentItem } from "components/details/details-description-section/details-investment/investment-item";
 import { ProfitabilityValuePercent } from "components/profitability/profitability-value-percent";
@@ -21,6 +22,9 @@ import { CurrencyEnum, FeesType } from "utils/types";
 import { InvestmentType } from "./details-investment.helpers";
 
 const _Investment: React.FC<Props> = ({
+  investmentMessage,
+  hasTradingSchedule,
+  withdrawMessage,
   isOwnAsset,
   fees,
   updateDescription,
@@ -45,13 +49,22 @@ const _Investment: React.FC<Props> = ({
   const pendingCurrency =
     asset === ASSET.FUND ? personalDetails.pendingInOutCurrency : assetCurrency;
 
+  const hasPendingInput =
+    personalDetails.pendingInput !== undefined &&
+    personalDetails.pendingInput !== 0;
+  const hasPendingOutput =
+    personalDetails.pendingOutput !== undefined &&
+    personalDetails.pendingOutput !== 0;
+  const message =
+    hasPendingInput || hasPendingOutput ? withdrawMessage : investmentMessage;
+
   return (
     <DetailsInvestmentBlock>
       <DetailsInvestmentHeading>
         {t("asset-details:description.investment-details")}
       </DetailsInvestmentHeading>
       <Row>
-        <StatisticItemList>
+        <StatisticItemList wrap={asset !== ASSET.FUND}>
           <InvestmentItem label={t("asset-details:description.value")}>
             <NumberFormat
               value={formatCurrencyValue(personalDetails.value, currency)}
@@ -129,21 +142,20 @@ const _Investment: React.FC<Props> = ({
               onCancel={updateDescription}
             />
           </InvestmentItem>
-          {personalDetails.pendingInput !== undefined &&
-            personalDetails.pendingInput !== 0 && (
-              <InvestmentItem
-                label={t("asset-details:description.pending-input")}
-              >
-                <NumberFormat
-                  value={formatCurrencyValue(
-                    personalDetails.pendingInput,
-                    pendingCurrency
-                  )}
-                  suffix={` ${pendingCurrency}`}
-                  displayType="text"
-                />
-              </InvestmentItem>
-            )}
+          {hasPendingInput && (
+            <InvestmentItem
+              label={t("asset-details:description.pending-input")}
+            >
+              <NumberFormat
+                value={formatCurrencyValue(
+                  personalDetails.pendingInput,
+                  pendingCurrency
+                )}
+                suffix={` ${pendingCurrency}`}
+                displayType="text"
+              />
+            </InvestmentItem>
+          )}
           {"isReinvest" in personalDetails &&
             personalDetails.isInvested &&
             personalDetails.canInvest &&
@@ -166,30 +178,36 @@ const _Investment: React.FC<Props> = ({
                 />
               </InvestmentItem>
             )}
-          {personalDetails.pendingOutput !== undefined &&
-            personalDetails.pendingOutput !== 0 && (
-              <InvestmentItem
-                label={t("asset-details:description.pending-output")}
-              >
-                {personalDetails.pendingOutputIsWithdrawAll ? (
-                  t("withdraw-program.withdrawing-all")
-                ) : (
-                  <NumberFormat
-                    value={formatCurrencyValue(
-                      personalDetails.pendingOutput,
-                      pendingCurrency
-                    )}
-                    suffix={` ${pendingCurrency}`}
-                    displayType="text"
-                  />
-                )}
-              </InvestmentItem>
+          {hasPendingOutput && (
+            <InvestmentItem
+              label={t("asset-details:description.pending-output")}
+            >
+              {personalDetails.pendingOutputIsWithdrawAll ? (
+                t("withdraw-program.withdrawing-all")
+              ) : (
+                <NumberFormat
+                  value={formatCurrencyValue(
+                    personalDetails.pendingOutput,
+                    pendingCurrency
+                  )}
+                  suffix={` ${pendingCurrency}`}
+                  displayType="text"
+                />
+              )}
+            </InvestmentItem>
+          )}
+          {hasTradingSchedule &&
+            (personalDetails.status === "Pending" ||
+              hasPendingInput ||
+              hasPendingOutput) && (
+              <DetailsInvestmentText>{message}</DetailsInvestmentText>
             )}
         </StatisticItemList>
       </Row>
       <Row>
         <DetailsInvestmentFooter>
           <WithdrawButton
+            infoMessage={withdrawMessage}
             size={"xlarge"}
             disabled={!personalDetails.canWithdraw}
             onApply={updateDescription}
@@ -204,6 +222,9 @@ const _Investment: React.FC<Props> = ({
 };
 
 interface Props {
+  hasTradingSchedule?: boolean;
+  investmentMessage?: string;
+  withdrawMessage?: string;
   isOwnAsset: boolean;
   fees: FeesType;
   updateDescription: () => void;

@@ -1,4 +1,10 @@
 {
+  "trading-schedule": {
+    "create-fund": "Please note that this fund will be processed when the Stock Exchange is open.",
+    "reallocate-fund": "Please note that any reallocations will be processed when the Stock Exchange is open.",
+    "post-create-fund": "Please note that this fund will be processed when the Stock Exchange is open.",
+    "invest-fund": "Your investment/withdrawal request will be processed when the Stock Exchange is open."
+  },
   "labels": {
     "gvt-fees-title": "Fees and Discounts",
     "to": "To",
@@ -81,6 +87,8 @@
     "server-error": "Server error occurred. Please try again later or contact the support department."
   },
   "buttons": {
+    "unfollow": "Unfollow",
+    "follow": "Follow",
     "export": "Export",
     "signup": "Sign up",
     "login": "Login",
@@ -318,6 +326,7 @@
       "success-alert-message": "Successful request for investment in the program."
     },
     "fund": {
+      "nasdaq": "Your investment/withdrawal request will be processed when the NASDAQ Stock Exchange is open.",
       "available-to-invest": "Available to invest in fund",
       "success-alert-message": "Successful request for investment in the fund.",
       "disclaimer": "After clicking the \"Confirm\" button, your request will be processed within a few minutes."
