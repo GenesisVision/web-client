@@ -10,7 +10,7 @@ interface Props {
   subscription: SignalSubscriber;
 }
 
-export const SubscriptionsFeesTooltip: React.FC<Props> = ({
+const SubscriptionsFeesTooltip: React.FC<Props> = ({
   subscription,
   children
 }) => {
@@ -50,3 +50,5 @@ export const SubscriptionsFeesTooltip: React.FC<Props> = ({
     </FeesTooltip>
   );
 };
+
+export default SubscriptionsFeesTooltip;
