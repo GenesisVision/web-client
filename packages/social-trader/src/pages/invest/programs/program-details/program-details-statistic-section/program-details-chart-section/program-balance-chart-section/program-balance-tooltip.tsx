@@ -8,7 +8,6 @@ import { useTranslation } from "react-i18next";
 import { formatCurrencyValue } from "utils/formatter";
 
 const _TooltipBody: React.FC<ITooltipBodyProps> = ({
-  t,
   managersFunds,
   investorsFunds
 }) => {
