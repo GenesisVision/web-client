@@ -44,6 +44,22 @@ const PortfolioEventsTableContainer = dynamic(() =>
   import("components/portfolio-events-table/portfolio-events-table-container")
 );
 
+interface Props {
+  hasTradingSchedule?: boolean;
+  investmentMessage?: string;
+  withdrawMessage?: string;
+  isOwnAsset: boolean;
+  fees: FeesType;
+  asset: ASSET;
+  dispatchDescription: () => void;
+  selector: TableSelectorType;
+  currency: CurrencyEnum;
+  id: string;
+  personalFundDetails?: PersonalFundDetails;
+  programPersonalDetails?: PersonalProgramDetails;
+  followPersonalDetails?: PersonalFollowDetailsFull;
+}
+
 enum TABS {
   SUBSCRIPTION = "SUBSCRIPTION",
   INVESTMENT = "INVESTMENT",
@@ -168,22 +184,6 @@ const _DetailsInvestment: React.FC<Props> = ({
     </DetailsBlock>
   );
 };
-
-interface Props {
-  hasTradingSchedule?: boolean;
-  investmentMessage?: string;
-  withdrawMessage?: string;
-  isOwnAsset: boolean;
-  fees: FeesType;
-  asset: ASSET;
-  dispatchDescription: () => void;
-  selector: TableSelectorType;
-  currency: CurrencyEnum;
-  id: string;
-  personalFundDetails?: PersonalFundDetails;
-  programPersonalDetails?: PersonalProgramDetails;
-  followPersonalDetails?: PersonalFollowDetailsFull;
-}
 
 const DetailsInvestment = React.memo(_DetailsInvestment);
 export default DetailsInvestment;

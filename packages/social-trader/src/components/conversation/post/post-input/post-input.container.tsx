@@ -5,6 +5,12 @@ import useApiRequest from "hooks/api-request.hook";
 import React from "react";
 import { postponeCallback } from "utils/hook-form.helpers";
 
+interface Props {
+  placeholder?: string;
+  userId?: string;
+  onSuccess: VoidFunction;
+}
+
 export const PostInputContainer: React.FC<Props> = ({
   placeholder,
   userId,
@@ -24,9 +30,3 @@ export const PostInputContainer: React.FC<Props> = ({
     />
   );
 };
-
-interface Props {
-  placeholder?: string;
-  userId?: string;
-  onSuccess: VoidFunction;
-}

@@ -1,7 +1,7 @@
 import Chip, { CHIP_TYPE } from "components/chip/chip";
 import { UserVerificationStatus } from "gv-api-web";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 import styles from "./verification-status.module.scss";
 
@@ -17,11 +17,11 @@ export interface IStatusProps {
   verificationStatus?: UserVerificationStatus;
 }
 
-const _VerificationStatus: React.FC<IStatusProps & WithTranslation> = ({
-  t,
+const _VerificationStatus: React.FC<IStatusProps> = ({
   checked,
   verificationStatus = VERIFICATION_STATUS.NOT_VERIFIED
 }) => {
+  const [t] = useTranslation();
   let type, value;
   if (checked) {
     type = CHIP_TYPE.POSITIVE;
@@ -52,5 +52,5 @@ const _VerificationStatus: React.FC<IStatusProps & WithTranslation> = ({
   );
 };
 
-const VerificationStatus = translate()(React.memo(_VerificationStatus));
+const VerificationStatus = React.memo(_VerificationStatus);
 export default VerificationStatus;

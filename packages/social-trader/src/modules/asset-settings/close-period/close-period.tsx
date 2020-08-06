@@ -5,12 +5,16 @@ import withLoader, { WithLoaderProps } from "decorators/with-loader";
 import useIsOpen from "hooks/is-open.hook";
 import ConfirmClosePeriod from "modules/asset-settings/close-period/confirm-close-period";
 import React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { compose } from "redux";
+import { useTranslation } from "react-i18next";
 
 import styles from "../asset-settings.module.scss";
 
-const _CloseAssetPeriod: React.FC<Props> = ({ id, t, onApply }) => {
+interface Props extends WithLoaderProps {
+  onApply: () => void;
+  id: string;
+}
+const _CloseAssetPeriod: React.FC<Props> = ({ id, onApply }) => {
+  const [t] = useTranslation();
   const [
     isClosePeriodOpen,
     setClosePeriodOpen,
@@ -38,16 +42,5 @@ const _CloseAssetPeriod: React.FC<Props> = ({ id, t, onApply }) => {
   );
 };
 
-interface Props extends OwnProps, WithTranslation {}
-
-interface OwnProps extends WithLoaderProps {
-  onApply: () => void;
-  id: string;
-}
-
-const CloseAssetPeriod = compose<React.ComponentType<OwnProps>>(
-  withLoader,
-  translate(),
-  React.memo
-)(_CloseAssetPeriod);
+const CloseAssetPeriod = withLoader(React.memo(_CloseAssetPeriod));
 export default CloseAssetPeriod;

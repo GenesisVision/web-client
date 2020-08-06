@@ -10,6 +10,12 @@ import React, { useEffect, useRef } from "react";
 
 import styles from "./comment.module.scss";
 
+interface Props {
+  canReply?: boolean;
+  updateData: VoidFunction;
+  comment: ConversationComment;
+}
+
 const _Comment: React.FC<Props> = ({
   canReply,
   updateData,
@@ -80,11 +86,5 @@ const _Comment: React.FC<Props> = ({
     </div>
   );
 };
-
-interface Props {
-  canReply?: boolean;
-  updateData: VoidFunction;
-  comment: ConversationComment;
-}
 
 export const Comment = React.memo(_Comment);

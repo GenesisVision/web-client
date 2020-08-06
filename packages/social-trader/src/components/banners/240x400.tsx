@@ -9,6 +9,15 @@ import { BannerComponent, formatEquity, LogoOptions } from "./utils";
 
 type Position = { y: number };
 
+export const LOGO_OPTIONS: LogoOptions = {
+  useMask: true,
+  size: { width: 25, height: 25 },
+  position: {
+    x: 20,
+    y: 25
+  }
+};
+
 const Title: React.FC<Position> = ({ children, y }) => {
   return (
     <Text fontSize={14} x={20} y={y} color="rgba(255,255,255,0.5)">
@@ -31,15 +40,6 @@ const Label: React.FC = ({ children }) => {
       {children}
     </Text>
   );
-};
-
-export const LOGO_OPTIONS: LogoOptions = {
-  useMask: true,
-  size: { width: 25, height: 25 },
-  position: {
-    x: 20,
-    y: 25
-  }
 };
 
 export const Banner: BannerComponent = props => {

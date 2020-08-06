@@ -21,6 +21,19 @@ import { CurrencyEnum, FeesType } from "utils/types";
 
 import { InvestmentType } from "./details-investment.helpers";
 
+interface Props {
+  hasTradingSchedule?: boolean;
+  investmentMessage?: string;
+  withdrawMessage?: string;
+  isOwnAsset: boolean;
+  fees: FeesType;
+  updateDescription: VoidFunction;
+  asset: ASSET;
+  id: string;
+  assetCurrency: CurrencyEnum;
+  personalDetails: InvestmentType;
+}
+
 const _Investment: React.FC<Props> = ({
   investmentMessage,
   hasTradingSchedule,
@@ -220,19 +233,6 @@ const _Investment: React.FC<Props> = ({
     </DetailsInvestmentBlock>
   );
 };
-
-interface Props {
-  hasTradingSchedule?: boolean;
-  investmentMessage?: string;
-  withdrawMessage?: string;
-  isOwnAsset: boolean;
-  fees: FeesType;
-  updateDescription: () => void;
-  asset: ASSET;
-  id: string;
-  assetCurrency: CurrencyEnum;
-  personalDetails: InvestmentType;
-}
 
 const Investment = React.memo(_Investment);
 export default Investment;

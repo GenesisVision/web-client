@@ -1,9 +1,8 @@
 import Dialog from "components/dialog/dialog";
-import withLoader, { WithLoaderProps } from "decorators/with-loader";
+import withLoader from "decorators/with-loader";
 import { LevelInfo } from "gv-api-web";
 import dynamic from "next/dist/next-server/lib/dynamic";
 import * as React from "react";
-import { compose } from "redux";
 import { CurrencyEnum } from "utils/types";
 
 import styles from "./about-level.module.scss";
@@ -13,6 +12,13 @@ const AboutLevelsContent = dynamic(() =>
     "components/details/details-description-section/about-levels/about-levels-content"
   )
 );
+
+interface Props {
+  open: boolean;
+  onClose: VoidFunction;
+  investmentsLimits: LevelInfo[];
+  currency: CurrencyEnum;
+}
 
 const _AboutLevelsComponent: React.FC<Props> = ({
   open,
@@ -35,17 +41,5 @@ const _AboutLevelsComponent: React.FC<Props> = ({
   );
 };
 
-interface Props {
-  open: boolean;
-  onClose(): void;
-  investmentsLimits: LevelInfo[];
-  currency: CurrencyEnum;
-}
-
-const AboutLevelsComponent = compose<
-  React.ComponentType<Props & WithLoaderProps>
->(
-  withLoader,
-  React.memo
-)(_AboutLevelsComponent);
+const AboutLevelsComponent = withLoader(React.memo(_AboutLevelsComponent));
 export default AboutLevelsComponent;

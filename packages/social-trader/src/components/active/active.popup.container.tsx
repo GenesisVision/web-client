@@ -5,6 +5,10 @@ import Active from "./active";
 import styles from "./active.module.scss";
 import { fetchActive, getActiveLoaderData } from "./service/active.service";
 
+interface Props {
+  active: string;
+}
+
 const _ActivePopupContainer: React.FC<Props> = ({ active }) => {
   const { data } = useApiRequest({
     request: () => fetchActive({ active }),
@@ -16,10 +20,6 @@ const _ActivePopupContainer: React.FC<Props> = ({ active }) => {
     </div>
   );
 };
-
-interface Props {
-  active: string;
-}
 
 const ActivePopupContainer = React.memo(_ActivePopupContainer);
 export default ActivePopupContainer;

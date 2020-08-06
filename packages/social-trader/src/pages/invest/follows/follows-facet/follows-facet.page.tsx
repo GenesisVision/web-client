@@ -7,11 +7,16 @@ import { ComposeFiltersAllType } from "components/table/components/filtering/fil
 import { FollowDetailsListItemItemsViewModel } from "gv-api-web";
 import { fetchFollows } from "modules/follows-table/services/follows-table.service";
 import React, { useCallback } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 import FollowsFacetTable from "./components/follows-facet-table";
 
-const _ProgramsFacetPage: React.FC<Props> = ({ t, id }) => {
+interface Props {
+  id: string;
+}
+
+const _ProgramsFacetPage: React.FC<Props> = ({ id }) => {
+  const [t] = useTranslation();
   const getFollows = useCallback(
     (
       filters: ComposeFiltersAllType
@@ -42,9 +47,5 @@ const _ProgramsFacetPage: React.FC<Props> = ({ t, id }) => {
   );
 };
 
-interface Props extends WithTranslation {
-  id: string;
-}
-
-const FollowsFacetPage = translate()(React.memo(_ProgramsFacetPage));
+const FollowsFacetPage = React.memo(_ProgramsFacetPage);
 export default FollowsFacetPage;

@@ -18,6 +18,11 @@ import {
 } from "./chart-period.helpers";
 import styles from "./chart-period.module.scss";
 
+interface Props {
+  period: ChartDefaultPeriod;
+  onChange: HandlePeriodChangeType;
+}
+
 const _ChartPeriod: React.FC<Props> = ({ period, onChange }) => {
   const { type, start } = period;
   const { t } = useTranslation();
@@ -72,11 +77,6 @@ const ChartPeriodDateLabel: React.FC<{ start: Date }> = ({ start }) => {
     </span>
   );
 };
-
-interface Props {
-  period: ChartDefaultPeriod;
-  onChange: HandlePeriodChangeType;
-}
 
 const ChartPeriod = React.memo(_ChartPeriod);
 export default ChartPeriod;

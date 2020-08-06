@@ -24,12 +24,15 @@ const _DateRangeFilterValues: React.FC<IDateRangeFilterValuesProps> = props => {
     [onChange]
   );
 
-  const handleBlur = useCallback((event: FocusEvent<HTMLInputElement>) => {
-    const type = event.target.name as keyof IDataRangeFilterValue;
-    if (event.target.value.length === 0) {
-      onChange(type, props[type]!);
-    }
-  }, []);
+  const handleBlur = useCallback(
+    (event: FocusEvent<HTMLInputElement>) => {
+      const type = event.target.name as keyof IDataRangeFilterValue;
+      if (event.target.value.length === 0) {
+        onChange(type, props[type]!);
+      }
+    },
+    [onChange]
+  );
 
   switch (type) {
     case DATA_RANGE_FILTER_TYPES.ALL:

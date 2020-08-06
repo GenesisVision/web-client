@@ -5,6 +5,14 @@ import { line } from "d3-shape";
 import { SimpleChartPoint } from "gv-api-web";
 import * as React from "react";
 
+interface Props {
+  data: SimpleChartPoint[];
+  width?: number;
+  height?: number;
+  x?: number;
+  y?: number;
+}
+
 const DEFAULT_WIDTH = 100;
 const DEFAULT_HEIGHT = 50;
 const OFFSET = 0;
@@ -58,14 +66,6 @@ const _SimpleChart: React.FC<Props> = ({
     </svg>
   );
 };
-
-interface Props {
-  data: SimpleChartPoint[];
-  width?: number;
-  height?: number;
-  x?: number;
-  y?: number;
-}
 
 const SimpleChart = React.memo(_SimpleChart);
 export default SimpleChart;

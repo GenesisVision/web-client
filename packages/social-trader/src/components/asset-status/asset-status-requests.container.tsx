@@ -8,6 +8,12 @@ import { useTranslation } from "react-i18next";
 
 import { getAssetRequests } from "./services/asset-status.service";
 
+interface Props {
+  id: string;
+  onCancel: () => void;
+  handleCloseDropdown: () => void;
+}
+
 const _AssetStatusRequestsContainer: React.FC<Props> = ({
   id,
   onCancel,
@@ -40,12 +46,6 @@ const _AssetStatusRequestsContainer: React.FC<Props> = ({
     />
   );
 };
-
-interface Props {
-  id: string;
-  onCancel: () => void;
-  handleCloseDropdown: () => void;
-}
 
 const AssetStatusRequestsContainer = React.memo(_AssetStatusRequestsContainer);
 export default AssetStatusRequestsContainer;

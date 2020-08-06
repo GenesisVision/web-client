@@ -3,6 +3,16 @@ import { AssetDetails } from "gv-api-web";
 import React from "react";
 import { CurrencyEnum } from "utils/types";
 
+export type CurrencySourceSelectItemsType = Array<CurrencySourceSelectItemType>;
+export interface CurrencySourceSelectItemType {
+  asset?: AssetDetails;
+  available?: number;
+  id: string;
+  currency: CurrencyEnum;
+  logoUrl?: string;
+  title?: string;
+}
+
 export const getCurrencySourceSelectItems = (
   items: CurrencySourceSelectItemsType
 ): JSX.Element[] =>
@@ -24,13 +34,3 @@ export const getCurrencySourceSelectItems = (
       </option>
     );
   });
-
-export type CurrencySourceSelectItemsType = Array<CurrencySourceSelectItemType>;
-export interface CurrencySourceSelectItemType {
-  asset?: AssetDetails;
-  available?: number;
-  id: string;
-  currency: CurrencyEnum;
-  logoUrl?: string;
-  title?: string;
-}

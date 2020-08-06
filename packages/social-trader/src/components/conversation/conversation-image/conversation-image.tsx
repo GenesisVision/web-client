@@ -10,6 +10,12 @@ import { SizesType } from "utils/types";
 
 import styles from "./conversation-image.module.scss";
 
+interface Props {
+  index: number;
+  size: SizesType;
+  images: IConversationImage[];
+}
+
 const EmptyImage: React.FC<{ imageClassName: string }> = ({
   imageClassName
 }) => {
@@ -45,11 +51,5 @@ const _ConversationImage: React.FC<Props> = ({ images, size, index }) => {
     </>
   );
 };
-
-interface Props {
-  index: number;
-  size: SizesType;
-  images: IConversationImage[];
-}
 
 export const ConversationImage = React.memo(_ConversationImage);

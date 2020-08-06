@@ -12,6 +12,10 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { LOGIN_ROUTE, SIGNUP_ROUTE } from "routes/app.routes";
 
+interface Props extends DepositTopOwnProps, IDialogProps {
+  message: string;
+}
+
 const _InvestmentUnauthPopup: React.FC<Props> = ({
   header,
   open,
@@ -52,7 +56,3 @@ const _InvestmentUnauthPopup: React.FC<Props> = ({
 
 const InvestmentUnauthPopup = React.memo(_InvestmentUnauthPopup);
 export default InvestmentUnauthPopup;
-
-interface Props extends DepositTopOwnProps, IDialogProps {
-  message: string;
-}

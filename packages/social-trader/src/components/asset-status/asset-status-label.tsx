@@ -6,6 +6,11 @@ import { OptionalClickable } from "utils/types";
 
 import styles from "./asset-status.module.scss";
 
+interface Props extends OptionalClickable {
+  status: STATUS;
+  className?: string;
+}
+
 const getStatusClassName = (status: STATUS, className?: string) =>
   clsx(styles["asset-status"], className, {
     [styles["asset-status__active"]]: status === STATUS.ACTIVE,
@@ -23,11 +28,6 @@ const _AssetStatusLabel: React.FC<Props> = ({ className, status, onClick }) => {
     </span>
   );
 };
-
-interface Props extends OptionalClickable {
-  status: STATUS;
-  className?: string;
-}
 
 const AssetStatusLabel = React.memo(_AssetStatusLabel);
 export default AssetStatusLabel;

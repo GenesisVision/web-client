@@ -12,6 +12,29 @@ import { CurrencyEnum } from "utils/types";
 
 import styles from "./details-description.module.scss";
 
+interface Props {
+  descriptionTitle?: string;
+  detailsType: DETAILS_TYPE;
+  id: string;
+  logo: string;
+  title: string;
+  isOwnAsset?: boolean;
+  personalDetails?: PersonalDetailsType;
+  color?: string;
+  currency?: CurrencyEnum;
+  subtitleUrl?: string;
+  subtitle?: string;
+  socialLinks?: SocialLinkViewModel[];
+  programDetails?: ProgramDetailsFull;
+  asset?: ASSET;
+  notificationsUrl?: ToType;
+  settingsUrl?: ToType;
+  description?: string;
+  AssetDetailsExtraBlock?: React.ComponentType<any>;
+  PerformanceData?: React.ComponentType<any>;
+  Controls?: React.ComponentType<any>;
+}
+
 const _DetailsDescriptionSection: React.FC<Props> = ({
   descriptionTitle,
   detailsType,
@@ -74,29 +97,6 @@ const _DetailsDescriptionSection: React.FC<Props> = ({
     </div>
   );
 };
-
-interface Props {
-  descriptionTitle?: string;
-  detailsType: DETAILS_TYPE;
-  id: string;
-  logo: string;
-  title: string;
-  isOwnAsset?: boolean;
-  personalDetails?: PersonalDetailsType;
-  color?: string;
-  currency?: CurrencyEnum;
-  subtitleUrl?: string;
-  subtitle?: string;
-  socialLinks?: SocialLinkViewModel[];
-  programDetails?: ProgramDetailsFull;
-  asset?: ASSET;
-  notificationsUrl?: ToType;
-  settingsUrl?: ToType;
-  description?: string;
-  AssetDetailsExtraBlock?: React.ComponentType<any>;
-  PerformanceData?: React.ComponentType<any>;
-  Controls?: React.ComponentType<any>;
-}
 
 const DetailsDescriptionSection = React.memo(_DetailsDescriptionSection);
 export default DetailsDescriptionSection;

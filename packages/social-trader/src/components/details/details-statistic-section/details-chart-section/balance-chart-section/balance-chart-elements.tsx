@@ -28,6 +28,24 @@ import { CurrencyEnum, HandlePeriodChangeType } from "utils/types";
 import { useChartData } from "../../details.chart.helpers";
 import styles from "../details-chart-section.module.scss";
 
+export type TRenderBalanceChart = (props: {
+  color: string;
+  balanceChart: BalanceChartElementType;
+  currency: CurrencyEnum;
+}) => JSX.Element;
+
+interface Props {
+  renderBalanceChart: TRenderBalanceChart;
+  period: ChartDefaultPeriod;
+  setPeriod: HandlePeriodChangeType;
+  selectedCurrencies: TChartCurrency[];
+  balanceChart: BalanceChartType;
+  addCurrency: TAddChartCurrency;
+  removeCurrency: TRemoveChartCurrency;
+  changeCurrency: TChangeChartCurrency;
+  selectCurrencies: TChartCurrency[];
+}
+
 export const BALANCE_CHART_TEST_ID = "BALANCE_CHART_TEST_ID";
 
 const _BalanceChartElements: React.FC<Props> = ({
@@ -84,24 +102,6 @@ const _BalanceChartElements: React.FC<Props> = ({
     </>
   );
 };
-
-export type TRenderBalanceChart = (props: {
-  color: string;
-  balanceChart: BalanceChartElementType;
-  currency: CurrencyEnum;
-}) => JSX.Element;
-
-interface Props {
-  renderBalanceChart: TRenderBalanceChart;
-  period: ChartDefaultPeriod;
-  setPeriod: HandlePeriodChangeType;
-  selectedCurrencies: TChartCurrency[];
-  balanceChart: BalanceChartType;
-  addCurrency: TAddChartCurrency;
-  removeCurrency: TRemoveChartCurrency;
-  changeCurrency: TChangeChartCurrency;
-  selectCurrencies: TChartCurrency[];
-}
 
 const BalanceChartElements = withLoader(React.memo(_BalanceChartElements));
 export default BalanceChartElements;

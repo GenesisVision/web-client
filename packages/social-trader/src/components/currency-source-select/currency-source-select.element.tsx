@@ -6,14 +6,14 @@ import GVTextField, { GVTextFieldProps } from "components/gv-text-field";
 import Select from "components/select/select";
 import React from "react";
 
+interface Props extends GVTextFieldProps {
+  items: CurrencySourceSelectItemsType;
+}
+
 const _CurrencySourceSelect: React.FC<Props> = props => (
   <GVTextField {...props} fixedVertical InputComponent={Select}>
     {getCurrencySourceSelectItems(props.items)}
   </GVTextField>
 );
-
-interface Props extends GVTextFieldProps {
-  items: CurrencySourceSelectItemsType;
-}
 
 export const CurrencySourceSelectElement = React.memo(_CurrencySourceSelect);

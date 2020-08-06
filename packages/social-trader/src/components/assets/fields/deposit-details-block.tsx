@@ -17,6 +17,20 @@ import { CurrencyEnum } from "utils/types";
 import useAssetSection from "../asset-section.hook";
 import InputDepositAmount from "./input-deposit-amount";
 
+interface Props {
+  broker?: BrokerTradeServerType;
+  hide?: boolean;
+  setRate: (value: number) => void;
+  setAvailable: (value: number) => void;
+  blockNumber?: number;
+  walletFieldName: string;
+  inputName: string;
+  depositAmount?: number | string;
+  minimumDepositAmount: number;
+  setFieldValue: Function;
+  assetCurrency: CurrencyEnum;
+}
+
 const hasMinAmount = (
   tradingAccountMinDepositAmounts: TradingAccountMinCreateAmount[],
   currency: CurrencyEnum,
@@ -114,20 +128,6 @@ const _DepositDetailsBlock: React.FC<Props> = ({
     </SettingsBlock>
   );
 };
-
-interface Props {
-  broker?: BrokerTradeServerType;
-  hide?: boolean;
-  setRate: (value: number) => void;
-  setAvailable: (value: number) => void;
-  blockNumber?: number;
-  walletFieldName: string;
-  inputName: string;
-  depositAmount?: number | string;
-  minimumDepositAmount: number;
-  setFieldValue: Function;
-  assetCurrency: CurrencyEnum;
-}
 
 const DepositDetailsBlock = React.memo(_DepositDetailsBlock);
 export default DepositDetailsBlock;

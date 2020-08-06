@@ -11,6 +11,12 @@ import { getAssetLink } from "utils/compose-url";
 
 import styles from "./dashboard-portfolio-event-logo.module.scss";
 
+interface Props {
+  assetDetails: AssetDetails;
+  icon: string;
+  withAsset?: boolean;
+}
+
 const _PortfolioEventLogo: React.FC<Props> = ({
   withAsset = true,
   assetDetails,
@@ -58,12 +64,6 @@ const _PortfolioEventLogo: React.FC<Props> = ({
     </div>
   );
 };
-
-interface Props {
-  assetDetails: AssetDetails;
-  icon: string;
-  withAsset?: boolean;
-}
 
 const PortfolioEventLogo = React.memo(Crashable(_PortfolioEventLogo));
 export default PortfolioEventLogo;

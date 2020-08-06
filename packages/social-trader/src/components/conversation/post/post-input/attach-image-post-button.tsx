@@ -3,6 +3,8 @@ import { PostInputButton } from "components/conversation/post/post-input/post-in
 import React, { useCallback } from "react";
 import { Clickable, Sizeable } from "utils/types";
 
+interface Props extends Sizeable, Clickable {}
+
 const _AttachImagePostButton: React.FC<Props> = ({ size, onClick }) => {
   const handleClick = useCallback(() => {
     onClick();
@@ -14,7 +16,5 @@ const _AttachImagePostButton: React.FC<Props> = ({ size, onClick }) => {
     </PostInputButton>
   );
 };
-
-interface Props extends Sizeable, Clickable {}
 
 export const AttachImagePostButton = React.memo(_AttachImagePostButton);

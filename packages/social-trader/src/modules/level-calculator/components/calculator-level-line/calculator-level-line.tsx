@@ -1,9 +1,17 @@
 import clsx from "clsx";
 import GVProgramPeriod from "components/gv-program-period";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 import styles from "./calculator-level-line.module.scss";
+
+interface Props {
+  start: number;
+  end: number;
+  level: number;
+  levelProgress?: number;
+  className?: string;
+}
 
 const getMarks = (start: number, end: number, value: number) =>
   new Array(end - start + 1).fill(start).reduce((acc, curr, idx) => {
@@ -17,14 +25,14 @@ const calcProgressValue = (level: number, levelProgress: number) => {
   return level + levelProgress / 100;
 };
 
-const _CalculatorLevelLine: React.FC<Props & WithTranslation> = ({
-  t,
+const _CalculatorLevelLine: React.FC<Props> = ({
   start,
   end,
   className,
   level,
   levelProgress = 0
 }) => {
+  const [t] = useTranslation();
   const value = calcProgressValue(level, levelProgress);
   const marksItems = getMarks(start, end, value);
   const marks = Object.keys(marksItems);
@@ -63,13 +71,5 @@ const _CalculatorLevelLine: React.FC<Props & WithTranslation> = ({
   );
 };
 
-interface Props {
-  start: number;
-  end: number;
-  level: number;
-  levelProgress?: number;
-  className?: string;
-}
-
-const CalculatorLevelLine = translate()(React.memo(_CalculatorLevelLine));
+const CalculatorLevelLine = React.memo(_CalculatorLevelLine);
 export default CalculatorLevelLine;

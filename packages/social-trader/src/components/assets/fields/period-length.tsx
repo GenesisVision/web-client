@@ -6,6 +6,11 @@ import { useTranslation } from "react-i18next";
 
 import AssetField from "../asset-fields/asset-field";
 
+interface Props {
+  periods: number[];
+  name: string;
+}
+
 const _PeriodLength: React.FC<Props> = ({ name, periods }) => {
   const [t] = useTranslation();
   return (
@@ -29,11 +34,6 @@ const _PeriodLength: React.FC<Props> = ({ name, periods }) => {
     </AssetField>
   );
 };
-
-interface Props {
-  periods: number[];
-  name: string;
-}
 
 const PeriodLength = React.memo(_PeriodLength);
 export default PeriodLength;

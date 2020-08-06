@@ -6,6 +6,11 @@ import { useTranslation } from "react-i18next";
 import DetailsDescriptionControl from "./details-description-control";
 import styles from "./details-description-control.module.scss";
 
+interface Props {
+  hasNotifications: boolean;
+  to: ToType;
+}
+
 const _DetailsNotification: React.FC<Props> = ({ to, hasNotifications }) => {
   const [t] = useTranslation();
   return (
@@ -20,11 +25,6 @@ const _DetailsNotification: React.FC<Props> = ({ to, hasNotifications }) => {
     </DetailsDescriptionControl>
   );
 };
-
-interface Props {
-  hasNotifications: boolean;
-  to: ToType;
-}
 
 const DetailsNotification = React.memo(_DetailsNotification);
 export default DetailsNotification;

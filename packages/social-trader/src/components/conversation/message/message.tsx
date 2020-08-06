@@ -19,6 +19,19 @@ import React from "react";
 
 import styles from "./message.module.scss";
 
+export interface IMessageProps {
+  excludedTagsUnderText?: SocialPostTagType[];
+  reduceLargeText?: boolean;
+  settingsBlock?: JSX.Element;
+  row?: boolean;
+  tags?: PostTag[];
+  url: string;
+  images: IConversationImage[];
+  author: IConversationUser;
+  text?: string;
+  date: string | Date;
+}
+
 const _Message: React.FC<IMessageProps> = ({
   excludedTagsUnderText: excludedTagsUnderTextProp = [],
   reduceLargeText = true,
@@ -97,18 +110,5 @@ const _Message: React.FC<IMessageProps> = ({
     </div>
   );
 };
-
-export interface IMessageProps {
-  excludedTagsUnderText?: SocialPostTagType[];
-  reduceLargeText?: boolean;
-  settingsBlock?: JSX.Element;
-  row?: boolean;
-  tags?: PostTag[];
-  url: string;
-  images: IConversationImage[];
-  author: IConversationUser;
-  text?: string;
-  date: string | Date;
-}
 
 export const Message = React.memo(_Message);

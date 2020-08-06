@@ -6,6 +6,12 @@ import { Clickable } from "utils/types";
 
 import styles from "./like.module.scss";
 
+interface Props extends Clickable {
+  count: number;
+  disable?: boolean;
+  liked?: boolean;
+}
+
 export const _Like: React.FC<Props> = ({ count, onClick, disable, liked }) => {
   const clickHandle = useCallback(() => {
     if (!disable) onClick();
@@ -24,11 +30,5 @@ export const _Like: React.FC<Props> = ({ count, onClick, disable, liked }) => {
     </Center>
   );
 };
-
-interface Props extends Clickable {
-  count: number;
-  disable?: boolean;
-  liked?: boolean;
-}
 
 export const Like = React.memo(_Like);

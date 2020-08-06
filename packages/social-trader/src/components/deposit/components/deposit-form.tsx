@@ -32,6 +32,20 @@ import { ConvertCurrency } from "./form-fields/convert-currency";
 import { InvestorFees } from "./form-fields/investor-fees";
 import { HookFormWalletField as WalletField } from "./form-fields/wallet-field";
 
+export interface Props {
+  infoMessage?: string;
+  minDeposit: MinDepositType;
+  ownAsset?: boolean;
+  fees: TFees;
+  availableToInvest?: number;
+  wallets: WalletBaseData[];
+  asset: ASSET;
+  hasEntryFee: boolean;
+  currency: CurrencyEnum;
+  errorMessage: string;
+  onSubmit: (values: IDepositFormValues) => void;
+}
+
 const _DepositForm: React.FC<Props> = ({
   infoMessage,
   onSubmit,
@@ -149,17 +163,3 @@ const _DepositForm: React.FC<Props> = ({
 
 const DepositForm = React.memo(_DepositForm);
 export default DepositForm;
-
-export interface Props {
-  infoMessage?: string;
-  minDeposit: MinDepositType;
-  ownAsset?: boolean;
-  fees: TFees;
-  availableToInvest?: number;
-  wallets: WalletBaseData[];
-  asset: ASSET;
-  hasEntryFee: boolean;
-  currency: CurrencyEnum;
-  errorMessage: string;
-  onSubmit: (values: IDepositFormValues) => void;
-}

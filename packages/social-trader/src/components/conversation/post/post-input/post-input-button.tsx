@@ -4,6 +4,8 @@ import { Childrenable, Clickable, Sizeable } from "utils/types";
 
 import styles from "./post-input.module.scss";
 
+interface Props extends Sizeable, Clickable, Childrenable {}
+
 const _PostInputButton: React.FC<Props> = ({
   size = "middle",
   children,
@@ -21,7 +23,5 @@ const _PostInputButton: React.FC<Props> = ({
     </div>
   );
 };
-
-interface Props extends Sizeable, Clickable, Childrenable {}
 
 export const PostInputButton = React.memo(_PostInputButton);

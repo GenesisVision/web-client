@@ -9,6 +9,13 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { postponeFunc } from "utils/hook-form.helpers";
 
+interface Props {
+  setPinned: (value: boolean) => void;
+  id: string;
+  value: boolean;
+  onSuccess: VoidFunction;
+}
+
 const _ConversationPinButton: React.FC<Props> = ({
   setPinned,
   id,
@@ -56,12 +63,5 @@ const _ConversationPinButton: React.FC<Props> = ({
     </Center>
   );
 };
-
-interface Props {
-  setPinned: (value: boolean) => void;
-  id: string;
-  value: boolean;
-  onSuccess: VoidFunction;
-}
 
 export const ConversationPinButton = React.memo(_ConversationPinButton);

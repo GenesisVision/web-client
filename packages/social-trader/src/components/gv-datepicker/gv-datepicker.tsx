@@ -24,25 +24,34 @@ const _GVDatePicker = React.forwardRef<HTMLInputElement, Props>(
     },
     ref
   ) => {
-    const handleChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-      if (onChange) {
-        onChange(event);
-      }
-    }, []);
+    const handleChange = useCallback(
+      (event: ChangeEvent<HTMLInputElement>) => {
+        if (onChange) {
+          onChange(event);
+        }
+      },
+      [onChange]
+    );
 
-    const handleBlur = useCallback((event: FocusEvent<HTMLInputElement>) => {
-      if (disabled) return;
-      if (onBlur) {
-        onBlur(event);
-      }
-    }, []);
+    const handleBlur = useCallback(
+      (event: FocusEvent<HTMLInputElement>) => {
+        if (disabled) return;
+        if (onBlur) {
+          onBlur(event);
+        }
+      },
+      [onBlur]
+    );
 
-    const handleFocus = useCallback((event: FocusEvent<HTMLInputElement>) => {
-      if (disabled) return;
-      if (onFocus) {
-        onFocus(event);
-      }
-    }, []);
+    const handleFocus = useCallback(
+      (event: FocusEvent<HTMLInputElement>) => {
+        if (disabled) return;
+        if (onFocus) {
+          onFocus(event);
+        }
+      },
+      [onFocus]
+    );
     return (
       <div className={styles["gv-datepicker"]}>
         <input

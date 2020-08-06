@@ -1,6 +1,6 @@
 import { withBlurLoader } from "decorators/with-blur-loader";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { TagType } from "utils/types";
 
 import { LIST_VIEW } from "../table.constants";
@@ -44,10 +44,8 @@ const _TableItems: React.FC<ITableItemsProps> = ({
 );
 const TableItems = React.memo(_TableItems);
 
-const _EmptyMessage: React.FC<{ view: LIST_VIEW } & WithTranslation> = ({
-  view,
-  t
-}) => {
+const _EmptyMessage: React.FC<{ view: LIST_VIEW }> = ({ view }) => {
+  const [t] = useTranslation();
   switch (view) {
     case LIST_VIEW.CARDS:
       return (
@@ -68,7 +66,7 @@ const _EmptyMessage: React.FC<{ view: LIST_VIEW } & WithTranslation> = ({
       );
   }
 };
-const EmptyMessage = translate()(React.memo(_EmptyMessage));
+const EmptyMessage = React.memo(_EmptyMessage);
 
 interface ITableItemsProps {
   data: any[];

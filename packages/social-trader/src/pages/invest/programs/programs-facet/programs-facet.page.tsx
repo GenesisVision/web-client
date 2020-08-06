@@ -7,11 +7,16 @@ import { ComposeFiltersAllType } from "components/table/components/filtering/fil
 import { IDataModel } from "constants/constants";
 import { fetchPrograms } from "modules/programs-table/services/programs-table.service";
 import React, { useCallback } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 import ProgramsFacetTable from "./components/programs-facet-table";
 
-const _ProgramsFacetPage: React.FC<Props> = ({ t, id }) => {
+interface Props {
+  id: string;
+}
+
+const _ProgramsFacetPage: React.FC<Props> = ({ id }) => {
+  const [t] = useTranslation();
   const getPrograms = useCallback(
     (filters: ComposeFiltersAllType): Promise<IDataModel> =>
       fetchPrograms({
@@ -40,9 +45,5 @@ const _ProgramsFacetPage: React.FC<Props> = ({ t, id }) => {
   );
 };
 
-interface Props extends WithTranslation {
-  id: string;
-}
-
-const ProgramsFacetPage = translate()(React.memo(_ProgramsFacetPage));
+const ProgramsFacetPage = React.memo(_ProgramsFacetPage);
 export default ProgramsFacetPage;

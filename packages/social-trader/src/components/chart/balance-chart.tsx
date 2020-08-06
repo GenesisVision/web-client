@@ -14,6 +14,16 @@ import {
   YAxis
 } from "recharts";
 
+interface Props {
+  tooltip?:
+    | React.ReactElement
+    | React.StatelessComponent<any>
+    | ContentRenderer<TooltipProps>;
+  color: string;
+  balanceChart: BalanceChartElementType;
+  currency: CURRENCIES;
+}
+
 const _BalanceChart: React.FC<Props> = ({
   tooltip,
   color,
@@ -65,16 +75,6 @@ const _BalanceChart: React.FC<Props> = ({
     </ResponsiveContainer>
   );
 };
-
-interface Props {
-  tooltip?:
-    | React.ReactElement
-    | React.StatelessComponent<any>
-    | ContentRenderer<TooltipProps>;
-  color: string;
-  balanceChart: BalanceChartElementType;
-  currency: CURRENCIES;
-}
 
 const BalanceChart = React.memo(_BalanceChart);
 export default BalanceChart;
