@@ -12,6 +12,7 @@ import { IFundHistoryDataItem } from "pages/invest/funds/fund-details/fund-detai
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { formatDate } from "utils/dates";
+import { formatCurrencyValue } from "utils/formatter";
 
 import styles from "./fund-history.module.scss";
 
@@ -67,7 +68,8 @@ const _FundHistoryFullRow: React.FC<Props> = ({ setClose, item }) => {
                   </Center>
                 </TableCell>
                 <TableCell>
-                  {commission} {commissionCurrency}
+                  {formatCurrencyValue(commission, commissionCurrency)}
+                  {commissionCurrency}
                 </TableCell>
               </TableRow>
             )}
