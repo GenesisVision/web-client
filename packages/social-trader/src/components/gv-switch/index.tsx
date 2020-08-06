@@ -7,6 +7,7 @@ import React, { useCallback, useRef } from "react";
 import styles from "./style.module.scss";
 
 interface GVSwitchProps {
+  onChange?: any;
   name?: string;
   checked?: boolean;
   color?: string;
