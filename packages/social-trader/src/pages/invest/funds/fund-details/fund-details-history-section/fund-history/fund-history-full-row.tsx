@@ -68,7 +68,7 @@ const _FundHistoryFullRow: React.FC<Props> = ({ setClose, item }) => {
                   </Center>
                 </TableCell>
                 <TableCell>
-                  {formatCurrencyValue(commission, commissionCurrency)}
+                  {formatCurrencyValue(commission, commissionCurrency)}{" "}
                   {commissionCurrency}
                 </TableCell>
               </TableRow>
