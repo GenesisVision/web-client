@@ -11,9 +11,6 @@ import {
   ICreateAccountSettingsFormValues
 } from "./create-account-settings";
 
-export const correctDepositCurrency = (currency: CurrencyEnum | string) =>
-  currency === "USD" ? "USDT" : (currency as CurrencyEnum);
-
 const createAccountSettingsValidationSchema = ({
   rate,
   available,
@@ -26,9 +23,7 @@ const createAccountSettingsValidationSchema = ({
   broker: Broker;
 }) => {
   return lazy<ICreateAccountSettingsFormValues>(values => {
-    const currency = correctDepositCurrency(
-      values[CREATE_ACCOUNT_FIELDS.currency]
-    );
+    const currency = values[CREATE_ACCOUNT_FIELDS.currency];
     const accountType = safeGetElemFromArray(
       broker.accountTypes,
       ({ id }) => values[CREATE_ACCOUNT_FIELDS.brokerAccountTypeId] === id
