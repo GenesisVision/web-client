@@ -24,9 +24,7 @@ import { safeGetElemFromArray } from "utils/helpers";
 import { HookForm } from "utils/hook-form.helpers";
 import { CurrencyEnum } from "utils/types";
 
-import createAccountSettingsValidationSchema, {
-  correctDepositCurrency
-} from "./create-account-settings.validators";
+import createAccountSettingsValidationSchema from "./create-account-settings.validators";
 
 export enum CREATE_ACCOUNT_FIELDS {
   depositWalletId = "depositWalletId",
