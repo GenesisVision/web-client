@@ -19,6 +19,13 @@ import { useTranslation } from "react-i18next";
 
 import styles from "./post.module.scss";
 
+interface Props {
+  visibleCommentsCount?: number;
+  reduceLargeText?: boolean;
+  updateData: VoidFunction;
+  post: ConversationPost;
+}
+
 const DeletedPost: React.FC<{
   id: string;
   setNotDeleted: VoidFunction;
@@ -135,12 +142,5 @@ const _Post: React.FC<Props> = ({
     </DefaultBlock>
   );
 };
-
-interface Props {
-  visibleCommentsCount?: number;
-  reduceLargeText?: boolean;
-  updateData: VoidFunction;
-  post: ConversationPost;
-}
 
 export const Post = React.memo(_Post);

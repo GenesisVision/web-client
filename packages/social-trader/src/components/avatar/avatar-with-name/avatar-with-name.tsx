@@ -5,6 +5,12 @@ import { OptionalClickable, Sizeable } from "utils/types";
 
 import styles from "./avatar-with-name.module.scss";
 
+interface Props extends Sizeable, OptionalClickable {
+  className?: string;
+  avatar?: React.ReactNode;
+  name: string | JSX.Element | React.ReactNode;
+}
+
 const _AvatarWithName: React.FC<Props> = ({
   className,
   onClick,
@@ -23,11 +29,5 @@ const _AvatarWithName: React.FC<Props> = ({
     </Row>
   );
 };
-
-interface Props extends Sizeable, OptionalClickable {
-  className?: string;
-  avatar?: React.ReactNode;
-  name: string | JSX.Element | React.ReactNode;
-}
 
 export const AvatarWithName = React.memo(_AvatarWithName);

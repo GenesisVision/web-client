@@ -10,7 +10,7 @@ interface IDetailsDescriptionControlProps
   extends React.HTMLAttributes<HTMLDivElement> {
   text: string;
   className?: string;
-  onClick?(): void;
+  onClick?: VoidFunction;
   to?: ToType;
 }
 const DetailsDescriptionControl: React.FC<IDetailsDescriptionControlProps> = ({

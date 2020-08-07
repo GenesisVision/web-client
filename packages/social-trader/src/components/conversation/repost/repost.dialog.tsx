@@ -7,6 +7,10 @@ import styles from "./repost.module.scss";
 
 const RePostContainer = dynamic(() => import("./repost.container"));
 
+export interface IRePostDialogProps
+  extends IDialogOuterProps,
+    IRePostContainerProps {}
+
 export const RePostDialog: React.FC<IRePostDialogProps> = props => {
   const { open, onClose } = props;
   return (
@@ -15,7 +19,3 @@ export const RePostDialog: React.FC<IRePostDialogProps> = props => {
     </Dialog>
   );
 };
-
-export interface IRePostDialogProps
-  extends IDialogOuterProps,
-    IRePostContainerProps {}

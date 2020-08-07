@@ -10,6 +10,15 @@ import DetailsNotification from "./controls/details-notification";
 import DetailsSettingControl from "./controls/details-setting-control";
 import styles from "./details-description.module.scss";
 
+interface Props {
+  isOwnAsset?: boolean;
+  asset?: ASSET;
+  personalDetails?: PersonalDetailsType;
+  id: string;
+  notificationsUrl?: ToType;
+  settingsUrl?: ToType;
+}
+
 const _DetailsSettingsButtons: React.FC<Props> = ({
   isOwnAsset,
   asset,
@@ -51,14 +60,5 @@ const _DetailsSettingsButtons: React.FC<Props> = ({
     </div>
   );
 };
-
-interface Props {
-  isOwnAsset?: boolean;
-  asset?: ASSET;
-  personalDetails?: PersonalDetailsType;
-  id: string;
-  notificationsUrl?: ToType;
-  settingsUrl?: ToType;
-}
 
 export const DetailsSettingsButtons = React.memo(_DetailsSettingsButtons);

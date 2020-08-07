@@ -6,6 +6,11 @@ import React from "react";
 
 import styles from "./asset-status.module.scss";
 
+interface Props {
+  data: AssetInvestmentRequest[];
+  handleCancel: () => void;
+}
+
 const _AssetStatusRequests: React.FC<Props> = ({
   data: requests,
   handleCancel
@@ -18,11 +23,6 @@ const _AssetStatusRequests: React.FC<Props> = ({
     </PopoverContent>
   );
 };
-
-interface Props {
-  data: AssetInvestmentRequest[];
-  handleCancel: () => void;
-}
 
 const AssetStatusRequests = withBlurLoader(React.memo(_AssetStatusRequests));
 export default AssetStatusRequests;

@@ -5,6 +5,13 @@ import * as React from "react";
 import AssetField from "../asset-fields/asset-field";
 import styles from "./text-area-field.module.scss";
 
+interface Props {
+  value?: string;
+  caption: string;
+  label: string;
+  name: string;
+}
+
 const _TextAreaField: React.FC<Props> = ({ name, value, label, caption }) => {
   return (
     <AssetField wide>
@@ -21,13 +28,6 @@ const _TextAreaField: React.FC<Props> = ({ name, value, label, caption }) => {
     </AssetField>
   );
 };
-
-interface Props {
-  value?: string;
-  caption: string;
-  label: string;
-  name: string;
-}
 
 const TextAreaField = React.memo(_TextAreaField);
 export default TextAreaField;

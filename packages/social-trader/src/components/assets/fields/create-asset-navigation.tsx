@@ -3,6 +3,13 @@ import { ASSET } from "constants/constants";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
+interface Props {
+  asset: ASSET | string;
+  disabled?: boolean;
+  isSuccessful?: boolean;
+  isSubmitting?: boolean;
+}
+
 const _CreateAssetNavigation: React.FC<Props> = ({
   asset,
   isSubmitting,
@@ -21,13 +28,6 @@ const _CreateAssetNavigation: React.FC<Props> = ({
     </SubmitButton>
   );
 };
-
-interface Props {
-  asset: ASSET | string;
-  disabled?: boolean;
-  isSuccessful?: boolean;
-  isSubmitting?: boolean;
-}
 
 const CreateAssetNavigation = React.memo(_CreateAssetNavigation);
 export default CreateAssetNavigation;

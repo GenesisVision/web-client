@@ -13,6 +13,10 @@ import SocialLinksBlock from "../social-links-block/social-links-block";
 import TagItemList from "../tags/tag-item/tag-item-list";
 import styles from "./active.module.scss";
 
+interface Props {
+  data: AssetInfo;
+}
+
 const _Active: React.FC<Props> = ({
   data: { name, description, tags, chartSymbol, logoUrl, socialLinks }
 }) => {
@@ -57,10 +61,6 @@ const _Active: React.FC<Props> = ({
     </div>
   );
 };
-
-interface Props {
-  data: AssetInfo;
-}
 
 const Active = withBlurLoader(React.memo(_Active));
 export default Active;

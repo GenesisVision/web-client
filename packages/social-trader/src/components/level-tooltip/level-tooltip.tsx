@@ -7,6 +7,11 @@ import { useTranslation } from "react-i18next";
 
 import styles from "./level-tooltip.module.scss";
 
+export interface ILevelTooltip {
+  level: number;
+  canLevelUp: boolean;
+}
+
 const _LevelTooltip: React.FC<ILevelTooltip> = ({ level, canLevelUp }) => {
   const [t] = useTranslation();
   return (
@@ -29,8 +34,3 @@ const _LevelTooltip: React.FC<ILevelTooltip> = ({ level, canLevelUp }) => {
 
 const LevelTooltip = React.memo(_LevelTooltip);
 export default LevelTooltip;
-
-export interface ILevelTooltip {
-  level: number;
-  canLevelUp: boolean;
-}

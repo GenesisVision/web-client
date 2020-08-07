@@ -11,6 +11,13 @@ import { useCallback } from "react";
 import AssetStatusLabel from "./asset-status-label";
 import AssetStatusRequestsContainer from "./asset-status-requests.container";
 
+interface Props {
+  className?: string;
+  status: STATUS;
+  id: string;
+  onCancel: () => void;
+}
+
 const _AssetStatus: React.FC<Props> = ({ className, status, id, onCancel }) => {
   const { anchor, setAnchor, clearAnchor } = useAnchor();
   const handleOpenDropdown = useCallback(
@@ -44,13 +51,6 @@ const _AssetStatus: React.FC<Props> = ({ className, status, id, onCancel }) => {
     </>
   );
 };
-
-interface Props {
-  className?: string;
-  status: STATUS;
-  id: string;
-  onCancel: () => void;
-}
 
 const AssetStatus = React.memo(_AssetStatus);
 export default AssetStatus;

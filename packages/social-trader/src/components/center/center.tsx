@@ -3,6 +3,16 @@ import React from "react";
 
 import styles from "./center.module.scss";
 
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
+  hide?: boolean;
+  center?: boolean;
+  className?: string;
+  wrap?: boolean;
+  small?: boolean;
+  middle?: boolean;
+  large?: boolean;
+}
+
 export const Center: React.FC<Props> = ({
   wrap,
   className,
@@ -22,12 +32,3 @@ export const Center: React.FC<Props> = ({
     </div>
   );
 };
-interface Props extends React.HTMLAttributes<HTMLDivElement> {
-  hide?: boolean;
-  center?: boolean;
-  className?: string;
-  wrap?: boolean;
-  small?: boolean;
-  middle?: boolean;
-  large?: boolean;
-}

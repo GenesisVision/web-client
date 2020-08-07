@@ -4,6 +4,10 @@ import * as React from "react";
 
 import styles from "./form-text-field.module.scss";
 
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
+  accent?: boolean;
+}
+
 const _FormTextField: React.FC<Props> = ({ children, accent }) => {
   return (
     <div
@@ -15,10 +19,6 @@ const _FormTextField: React.FC<Props> = ({ children, accent }) => {
     </div>
   );
 };
-
-interface Props extends React.HTMLAttributes<HTMLDivElement> {
-  accent?: boolean;
-}
 
 const FormTextField = React.memo(_FormTextField);
 export default FormTextField;

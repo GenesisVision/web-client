@@ -1,13 +1,14 @@
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { compose } from "redux";
+import { useTranslation } from "react-i18next";
 import { distanceDate } from "utils/dates";
 
-export const _PeriodTimeLeft: React.FC<Props> = ({
-  t,
-  periodEnds,
-  className
-}) => {
+interface Props {
+  className?: string;
+  periodEnds: Date;
+}
+
+export const _PeriodTimeLeft: React.FC<Props> = ({ periodEnds, className }) => {
+  const [t] = useTranslation();
   const renderTimeLeft = () => {
     const now = new Date().getTime();
     const periodEndsMoment = new Date(periodEnds).getTime();
@@ -23,14 +24,5 @@ export const _PeriodTimeLeft: React.FC<Props> = ({
   return <div className={className}>{renderTimeLeft()}</div>;
 };
 
-interface Props extends WithTranslation, OwnProps {}
-interface OwnProps {
-  className?: string;
-  periodEnds: Date;
-}
-
-const PeriodTimeLeft = compose<React.ComponentType<OwnProps>>(
-  translate(),
-  React.memo
-)(_PeriodTimeLeft);
+const PeriodTimeLeft = React.memo(_PeriodTimeLeft);
 export default PeriodTimeLeft;

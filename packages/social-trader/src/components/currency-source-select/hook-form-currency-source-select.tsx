@@ -7,6 +7,14 @@ import GVTextField from "components/gv-text-field";
 import Select, { ISelectChangeEvent } from "components/select/select";
 import React from "react";
 
+interface Props {
+  items: CurrencySourceSelectItemsType;
+  label: string;
+  name: string;
+  onChange?: (event: ISelectChangeEvent, child: JSX.Element) => void;
+  disabled?: boolean;
+}
+
 const _CurrencySourceSelect: React.FC<Props> = ({
   disabled,
   items,
@@ -29,13 +37,5 @@ const _CurrencySourceSelect: React.FC<Props> = ({
     </GVHookFormField>
   );
 };
-
-interface Props {
-  items: CurrencySourceSelectItemsType;
-  label: string;
-  name: string;
-  onChange?: (event: ISelectChangeEvent, child: JSX.Element) => void;
-  disabled?: boolean;
-}
 
 export const CurrencySourceSelect = React.memo(_CurrencySourceSelect);

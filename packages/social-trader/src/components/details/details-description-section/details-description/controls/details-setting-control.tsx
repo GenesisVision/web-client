@@ -5,6 +5,11 @@ import React from "react";
 import DetailsDescriptionControl from "./details-description-control";
 import styles from "./details-description-control.module.scss";
 
+export interface Props {
+  to: ToType;
+  text: string;
+}
+
 const _DetailsSettingControl: React.FC<Props> = ({ to, text }) => {
   return (
     <DetailsDescriptionControl to={to} text={text}>
@@ -12,11 +17,6 @@ const _DetailsSettingControl: React.FC<Props> = ({ to, text }) => {
     </DetailsDescriptionControl>
   );
 };
-
-export interface Props {
-  to: ToType;
-  text: string;
-}
 
 const DetailsSettingControl = React.memo(_DetailsSettingControl);
 export default DetailsSettingControl;

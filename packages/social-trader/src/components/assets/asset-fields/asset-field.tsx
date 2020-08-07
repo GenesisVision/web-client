@@ -4,6 +4,11 @@ import * as React from "react";
 
 import styles from "./asset-field.module.scss";
 
+interface Props {
+  hide?: boolean;
+  wide?: boolean;
+}
+
 export const AssetField: React.FC<React.HTMLAttributes<HTMLDivElement> &
   Props> = ({ children, wide, hide }) => {
   return (
@@ -18,11 +23,6 @@ export const AssetField: React.FC<React.HTMLAttributes<HTMLDivElement> &
     </RowItem>
   );
 };
-
-interface Props {
-  hide?: boolean;
-  wide?: boolean;
-}
 
 export const AssetFields: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
   children

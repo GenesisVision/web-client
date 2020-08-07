@@ -4,6 +4,8 @@ import { Clickable } from "utils/types";
 
 import styles from "./close-circle-button.module.scss";
 
+interface Props extends Clickable {}
+
 const _CloseCircleButton: React.FC<Props> = ({ onClick }) => {
   return (
     <div className={styles["close-circle-button"]} onClick={onClick}>
@@ -13,7 +15,5 @@ const _CloseCircleButton: React.FC<Props> = ({ onClick }) => {
     </div>
   );
 };
-
-interface Props extends Clickable {}
 
 export const CloseCircleButton = React.memo(_CloseCircleButton);

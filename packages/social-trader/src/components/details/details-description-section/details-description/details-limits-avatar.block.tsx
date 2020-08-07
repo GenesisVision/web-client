@@ -6,6 +6,17 @@ import { CurrencyEnum } from "utils/types";
 
 import styles from "./details-description.module.scss";
 
+interface Props {
+  detailsType: DETAILS_TYPE;
+  logo: string;
+  title: string;
+  color?: string;
+  level?: number;
+  levelProgress?: number;
+  totalAvailableInvestment?: number;
+  currency?: CurrencyEnum;
+}
+
 const _DetailsLimitsAvatar: React.FC<Props> = props => {
   const { detailsType, logo, title } = props;
   return (
@@ -18,16 +29,5 @@ const _DetailsLimitsAvatar: React.FC<Props> = props => {
     </div>
   );
 };
-
-interface Props {
-  detailsType: DETAILS_TYPE;
-  logo: string;
-  title: string;
-  color?: string;
-  level?: number;
-  levelProgress?: number;
-  totalAvailableInvestment?: number;
-  currency?: CurrencyEnum;
-}
 
 export const DetailsLimitsAvatar = React.memo(_DetailsLimitsAvatar);

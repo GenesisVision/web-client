@@ -15,6 +15,26 @@ import {
 import chartXAxis from "./chart-components/chart-xaxis";
 import { getStrokeColor } from "./chart-gradient/chart-gradient";
 
+interface Props {
+  tooltip?:
+    | React.ReactElement
+    | React.StatelessComponent<any>
+    | ContentRenderer<TooltipProps>;
+  equityCharts: EquityChartType[];
+  equities: EquityChartType[];
+  colors?: TChartColor[];
+}
+
+export type TChartColor = {
+  name?: string;
+  color: string;
+};
+
+export type EquityChartElementType = SimpleChartPoint & {
+  assets?: FundAssetPartWithIcon[];
+};
+export type EquityChartType = Array<EquityChartElementType>;
+
 const _ProfitChart: React.FC<Props> = ({
   tooltip,
   equities,
@@ -65,26 +85,6 @@ const _ProfitChart: React.FC<Props> = ({
     </ResponsiveContainer>
   );
 };
-
-interface Props {
-  tooltip?:
-    | React.ReactElement
-    | React.StatelessComponent<any>
-    | ContentRenderer<TooltipProps>;
-  equityCharts: EquityChartType[];
-  equities: EquityChartType[];
-  colors?: TChartColor[];
-}
-
-export type TChartColor = {
-  name?: string;
-  color: string;
-};
-
-export type EquityChartElementType = SimpleChartPoint & {
-  assets?: FundAssetPartWithIcon[];
-};
-export type EquityChartType = Array<EquityChartElementType>;
 
 const ProfitChart = React.memo(_ProfitChart);
 export default ProfitChart;

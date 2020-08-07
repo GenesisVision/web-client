@@ -14,6 +14,14 @@ import { useTranslation } from "react-i18next";
 
 import styles from "./share.module.scss";
 
+interface Props {
+  post: PostType;
+  count: number;
+  id: string;
+  onApply: VoidFunction;
+  disable?: boolean;
+}
+
 export const _Share: React.FC<Props> = ({
   post,
   count,
@@ -93,13 +101,5 @@ export const _Share: React.FC<Props> = ({
     </>
   );
 };
-
-interface Props {
-  post: PostType;
-  count: number;
-  id: string;
-  onApply: VoidFunction;
-  disable?: boolean;
-}
 
 export const Share = React.memo(_Share);

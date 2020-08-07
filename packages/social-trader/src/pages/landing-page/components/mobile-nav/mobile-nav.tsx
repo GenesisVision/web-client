@@ -4,7 +4,7 @@ import { MobileBurger } from "pages/landing-page/components/mobile-burger/mobile
 import NavList from "pages/landing-page/components/nav/nav-list";
 import SeoList from "pages/landing-page/components/seo-links/seo-list";
 import { TNavHeader } from "pages/landing-page/static-data/nav-links";
-import React from "react";
+import React, { useCallback, useState } from "react";
 
 import styles from "./mobile-nav.module.scss";
 
@@ -14,55 +14,45 @@ interface Props {
   navFooter: TNavHeader[];
 }
 
-interface States {
-  menuOpen: boolean;
-}
+const _MobileNav: React.FC<Props> = ({ className, navHeader, navFooter }) => {
+  const [isOpenMenu, setOpenMenu] = useState(false);
 
-class MobileNav extends React.Component<Props, States> {
-  state = {
-    menuOpen: false
-  };
+  const handleMenuClick = useCallback(() => {
+    setOpenMenu(!isOpenMenu);
+  }, [isOpenMenu]);
 
-  handleMenuClick = () => {
-    this.setState({ menuOpen: !this.state.menuOpen });
-  };
+  const handleLinkClick = useCallback(() => {
+    setOpenMenu(false);
+  }, []);
 
-  handleLinkClick = () => {
-    this.setState({ menuOpen: false });
-  };
+  return (
+    <>
+      <MobileBurger menuOpen={isOpenMenu} onClick={handleMenuClick} />
+      <div
+        className={clsx(styles["mobile-nav"], className, {
+          [styles["mobile-nav--open"]]: isOpenMenu
+        })}
+      >
+        {isOpenMenu ? (
+          <>
+            <BodyFix />
+            <NavList
+              onClick={handleLinkClick}
+              menuItems={navHeader}
+              subNavOpen
+              isMobile
+            />
+            <SeoList
+              seoItems={navFooter}
+              className={styles["mobile-nav__seo-list"]}
+              isMobile
+            />
+          </>
+        ) : null}
+      </div>
+    </>
+  );
+};
 
-  render() {
-    const { className, navHeader, navFooter } = this.props;
-    const { menuOpen } = this.state;
-
-    return (
-      <>
-        <MobileBurger menuOpen={menuOpen} onClick={this.handleMenuClick} />
-        <div
-          className={clsx(styles["mobile-nav"], className, {
-            [styles["mobile-nav--open"]]: menuOpen
-          })}
-        >
-          {menuOpen ? (
-            <>
-              <BodyFix />
-              <NavList
-                onClick={this.handleLinkClick}
-                menuItems={navHeader}
-                subNavOpen
-                isMobile
-              />
-              <SeoList
-                seoItems={navFooter}
-                className={styles["mobile-nav__seo-list"]}
-                isMobile
-              />
-            </>
-          ) : null}
-        </div>
-      </>
-    );
-  }
-}
-
+const MobileNav = React.memo(_MobileNav);
 export default MobileNav;

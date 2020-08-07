@@ -4,6 +4,10 @@ import * as React from "react";
 import { useCallback, useState } from "react";
 import { TRADING_ROUTE } from "routes/dashboard.routes";
 
+interface Props {
+  id: string;
+}
+
 const _TFAConfirmBlock: React.FC<Props> = ({ id }) => {
   const [isOpenConfirmTFA, setIsOpenConfirmTFA] = useState(true);
   const closeHandle = useCallback(() => {
@@ -21,9 +25,5 @@ const _TFAConfirmBlock: React.FC<Props> = ({ id }) => {
     </>
   );
 };
-
-interface Props {
-  id: string;
-}
 
 export const TFAConfirmBlock = React.memo(_TFAConfirmBlock);

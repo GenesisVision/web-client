@@ -98,7 +98,7 @@ interface Props {
   currency: CurrencyEnum;
   level: number;
   canLevelUp: boolean;
-  closePopover(): void;
+  closePopover: VoidFunction;
 }
 
 const InvestmentLimitsPopover = React.memo(_InvestmentLimitsPopover);

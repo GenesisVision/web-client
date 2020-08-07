@@ -5,6 +5,16 @@ import { Row } from "components/row/row";
 import { Post as PostType } from "gv-api-web";
 import React from "react";
 
+interface Props {
+  post: PostType;
+  rePostsCount: number;
+  onApply: VoidFunction;
+  id: string;
+  liked?: boolean;
+  likesCount: number;
+  canLike?: boolean;
+}
+
 const _PostButtons: React.FC<Props> = ({
   post,
   rePostsCount,
@@ -37,15 +47,5 @@ const _PostButtons: React.FC<Props> = ({
     </Row>
   );
 };
-
-interface Props {
-  post: PostType;
-  rePostsCount: number;
-  onApply: VoidFunction;
-  id: string;
-  liked?: boolean;
-  likesCount: number;
-  canLike?: boolean;
-}
 
 export const PostButtons = React.memo(_PostButtons);

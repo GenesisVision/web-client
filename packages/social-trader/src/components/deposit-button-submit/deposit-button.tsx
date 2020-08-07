@@ -6,7 +6,7 @@ interface IDepositButtonStateProps {
 }
 
 interface IDepositButtonProps {
-  onSubmit?(): void;
+  onSubmit?: VoidFunction;
   disabled?: boolean;
   deposit: number;
   available: number;
@@ -22,5 +22,4 @@ const DepositButton: React.FC<IDepositButtonProps &
 );
 
 const DepositButtonContainer = React.memo(DepositButton);
-
 export default DepositButtonContainer;

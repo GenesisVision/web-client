@@ -11,6 +11,14 @@ import { postToPathCreator } from "routes/social.routes";
 
 import styles from "./conversation-user.module.scss";
 
+interface Props {
+  postUrl: string;
+  authorUrl: string;
+  avatar: string;
+  username: string;
+  date: string | Date;
+}
+
 const _ConversationUser: React.FC<Props> = ({
   postUrl,
   avatar,
@@ -45,13 +53,5 @@ const _ConversationUser: React.FC<Props> = ({
     />
   );
 };
-
-interface Props {
-  postUrl: string;
-  authorUrl: string;
-  avatar: string;
-  username: string;
-  date: string | Date;
-}
 
 export const ConversationUser = React.memo(_ConversationUser);

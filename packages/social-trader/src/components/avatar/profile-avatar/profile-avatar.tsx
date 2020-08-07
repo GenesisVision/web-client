@@ -5,6 +5,11 @@ import * as React from "react";
 import ImageBase, { IImageProps } from "../image-base";
 import styles from "./profile-avatar.module.scss";
 
+interface Props extends IImageProps {
+  middle?: boolean;
+  big?: boolean;
+}
+
 const _ProfileAvatar: React.FC<Props> = ({
   url,
   alt,
@@ -29,11 +34,6 @@ const _ProfileAvatar: React.FC<Props> = ({
     </div>
   );
 };
-
-interface Props extends IImageProps {
-  middle?: boolean;
-  big?: boolean;
-}
 
 const ProfileAvatar = React.memo(_ProfileAvatar);
 export default ProfileAvatar;

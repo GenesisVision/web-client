@@ -7,6 +7,18 @@ import { convertFromCurrency } from "utils/currency-converter";
 import { formatCurrencyValue, validateFraction } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 
+interface Props {
+  minAmount: number;
+  rate: number;
+  name: string;
+  setFieldValue: Function;
+  assetCurrency: CurrencyEnum;
+  walletAvailable: number;
+  walletCurrency: CurrencyEnum;
+  depositAmount?: number | string;
+  disabled?: boolean;
+}
+
 const _InputDepositAmount: React.FC<Props> = ({
   minAmount,
   disabled,
@@ -64,18 +76,6 @@ const _InputDepositAmount: React.FC<Props> = ({
     </>
   );
 };
-
-interface Props {
-  minAmount: number;
-  rate: number;
-  name: string;
-  setFieldValue: Function;
-  assetCurrency: CurrencyEnum;
-  walletAvailable: number;
-  walletCurrency: CurrencyEnum;
-  depositAmount?: number | string;
-  disabled?: boolean;
-}
 
 const InputDepositAmount = React.memo(_InputDepositAmount);
 export default InputDepositAmount;

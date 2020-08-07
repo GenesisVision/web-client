@@ -5,6 +5,11 @@ import React from "react";
 
 import styles from "./post-input.module.scss";
 
+interface Props {
+  onRemove: (id?: string) => void;
+  image: IImageValue;
+}
+
 const _PostInputImagePreview: React.FC<Props> = ({ image, onRemove }) => {
   return (
     <div className={styles["post-input__image-preview-container"]}>
@@ -23,10 +28,5 @@ const _PostInputImagePreview: React.FC<Props> = ({ image, onRemove }) => {
     </div>
   );
 };
-
-interface Props {
-  onRemove: (id?: string) => void;
-  image: IImageValue;
-}
 
 export const PostInputImagePreview = React.memo(_PostInputImagePreview);
