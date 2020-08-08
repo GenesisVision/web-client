@@ -1,4 +1,11 @@
 {
+  "actions-status-filter": {
+    "label": "Status",
+    "values": {
+      "all": "All",
+      "active": "Active"
+    }
+  },
   "trading-schedule": {
     "create-fund": "Please note that this fund will be processed when the Stock Exchange is open.",
     "reallocate-fund": "Please note that any reallocations will be processed when the Stock Exchange is open.",
