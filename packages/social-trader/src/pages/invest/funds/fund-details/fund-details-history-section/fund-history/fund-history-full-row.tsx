@@ -1,6 +1,5 @@
 import { Center } from "components/center/center";
 import { CurrencyItem } from "components/currency-item/currency-item";
-import CollapseIcon from "components/icon/collapse-icon/collapse-icon";
 import { RowItem } from "components/row-item/row-item";
 import { SortingColumn } from "components/table/components/filtering/filter.type";
 import Table from "components/table/components/table";
@@ -12,7 +11,7 @@ import { IFundHistoryDataItem } from "pages/invest/funds/fund-details/fund-detai
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { formatDate } from "utils/dates";
-import { formatCurrencyValue } from "utils/formatter";
+import { formatValue } from "utils/formatter";
 
 import styles from "./fund-history.module.scss";
 
@@ -68,8 +67,7 @@ const _FundHistoryFullRow: React.FC<Props> = ({ setClose, item }) => {
                   </Center>
                 </TableCell>
                 <TableCell>
-                  {formatCurrencyValue(commission, commissionCurrency)}{" "}
-                  {commissionCurrency}
+                  {formatValue(commission, 8)} {commissionCurrency}
                 </TableCell>
               </TableRow>
             )}
