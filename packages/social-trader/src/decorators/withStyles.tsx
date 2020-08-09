@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled, { FlattenInterpolation } from "styled-components";
-import { IStyleTable, parseStyles } from "utils/style/class-generators";
+import { IStyleTable, parseStyles } from "utils/style/style-generators";
 
 export interface WithStylesOptions {
   styleTable: IStyleTable;
