@@ -56,7 +56,7 @@ const HelpButton: React.FC<Props> = ({ muted, className, onClick }) => {
   );
 };
 
-export default withStyles({
+export default withStyles<Props>({
   styleTable,
   additionalStyles
 })(HelpButton);
