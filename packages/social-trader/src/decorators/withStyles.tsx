@@ -7,7 +7,7 @@ import styled, {
 import { IStyleTable, parseStyles } from "utils/style/style-generators";
 
 export interface WithStylesOptions {
-  styleTable: IStyleTable;
+  styleTable?: IStyleTable;
   additionalStyles?: FlattenInterpolation<any>;
 }
 
@@ -18,7 +18,7 @@ export const withStyles = <T extends { [k: string]: any }>({
   Component: React.FC<T>
 ): StyledComponent<FC<T>, any> => {
   return styled(Component)`
-    ${parseStyles({ styleTable })}
+    ${styleTable && parseStyles({ styleTable })}
     ${additionalStyles}
   `;
 };
