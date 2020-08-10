@@ -1,3 +1,4 @@
+import { Button } from "components/button/button";
 import { SettingsIcon } from "components/icon/settings-icon";
 import { ToType } from "components/link/link";
 import React from "react";
@@ -12,9 +13,11 @@ export interface Props {
 
 const _DetailsSettingControl: React.FC<Props> = ({ to, text }) => {
   return (
-    <DetailsDescriptionControl to={to} text={text}>
-      <SettingsIcon className={styles["details-description-control__icon"]} />
-    </DetailsDescriptionControl>
+    <Button color={"secondary"} noPadding variant={"text"}>
+      <DetailsDescriptionControl to={to} text={text}>
+        <SettingsIcon className={styles["details-description-control__icon"]} />
+      </DetailsDescriptionControl>
+    </Button>
   );
 };
 

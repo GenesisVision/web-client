@@ -1,4 +1,4 @@
-import GVButton from "components/gv-button";
+import { Button } from "components/button/button";
 import Link from "components/link/link";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -9,9 +9,9 @@ const LoginFooter: React.FC<ILoginFooterProps> = ({ ROUTE }) => {
     <>
       <span>{t("auth:login.footer-text")}</span>
       <Link to={ROUTE}>
-        <GVButton color="secondary" variant="outlined">
+        <Button color="secondary" variant="outlined">
           {t("auth:signup.title")}
-        </GVButton>
+        </Button>
       </Link>
     </>
   );

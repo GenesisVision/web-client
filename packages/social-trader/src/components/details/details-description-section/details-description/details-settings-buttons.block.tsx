@@ -31,7 +31,7 @@ const _DetailsSettingsButtons: React.FC<Props> = ({
   return (
     <div className={styles["asset-details-description__settings"]}>
       {personalDetails && (
-        <Row>
+        <Row className={styles["asset-details-description__settings-item"]}>
           <DetailsFavorite
             asset={asset}
             id={id}
@@ -40,7 +40,7 @@ const _DetailsSettingsButtons: React.FC<Props> = ({
         </Row>
       )}
       {personalDetails && notificationsUrl && (
-        <Row>
+        <Row className={styles["asset-details-description__settings-item"]}>
           <DetailsNotification
             to={notificationsUrl}
             hasNotifications={
@@ -50,7 +50,7 @@ const _DetailsSettingsButtons: React.FC<Props> = ({
         </Row>
       )}
       {isOwnAsset && !!settingsUrl && (
-        <Row>
+        <Row className={styles["asset-details-description__settings-item"]}>
           <DetailsSettingControl
             to={settingsUrl}
             text={t("asset-details:description.settings")}

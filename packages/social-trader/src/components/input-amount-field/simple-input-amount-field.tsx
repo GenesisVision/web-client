@@ -1,4 +1,4 @@
-import GVButton from "components/gv-button";
+import { Button } from "components/button/button";
 import { Row } from "components/row/row";
 import {
   ISimpleNumberFieldProps,
@@ -43,25 +43,25 @@ const _SimpleInputAmountField: React.FC<ISimpleInputAmountFieldProps> = ({
         adornment={
           <>
             {setMin && (
-              <GVButton
+              <Button
                 noPadding
                 onClick={handleSet(setMin)}
                 variant="text"
                 color="secondary"
               >
                 {t("buttons.min")}
-              </GVButton>
+              </Button>
             )}
             {setMin && setMax && <>&nbsp;|&nbsp;</>}
             {setMax && (
-              <GVButton
+              <Button
                 noPadding
                 onClick={handleSet(setMax)}
                 variant="text"
                 color="secondary"
               >
                 {t("buttons.max")}
-              </GVButton>
+              </Button>
             )}
           </>
         }

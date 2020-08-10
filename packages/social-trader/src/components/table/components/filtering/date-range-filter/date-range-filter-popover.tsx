@@ -1,3 +1,4 @@
+import { Button } from "components/button/button";
 import { Center } from "components/center/center";
 import GVButton from "components/gv-button";
 import { PopoverContentCardBlock } from "components/popover/popover-card.block";
@@ -155,17 +156,17 @@ const _DateRangeFilterPopover: React.FC<Props> = ({
         </Center>
         <Row>
           <RowItem>
-            <GVButton
+            <Button
               size={"xlarge"}
               noPadding
               variant="text"
               onClick={handleSubmit}
             >
               {t("buttons.apply")}
-            </GVButton>
+            </Button>
           </RowItem>
           <RowItem>
-            <GVButton
+            <Button
               size={"xlarge"}
               noPadding
               variant="text"
@@ -173,7 +174,7 @@ const _DateRangeFilterPopover: React.FC<Props> = ({
               onClick={cancel}
             >
               {t("buttons.cancel")}
-            </GVButton>
+            </Button>
           </RowItem>
         </Row>
       </PopoverContentCardBlock>
