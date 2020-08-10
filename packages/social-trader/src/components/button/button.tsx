@@ -16,15 +16,16 @@ const _Label: React.FC<ILabelProps> = ({ className, children }) => {
 };
 
 const Label = withStyles<ILabelProps>({
-  additionalStyles: LabelAdditionalStyles
+  staticStyles: LabelStyles,
+  dynamicStyles: LabelAdditionalStyles
 })(_Label);
 
 const _SuccessMark: React.FC<ISuccessMarkProps> = ({ className }) => {
   return <span className={className}>✔</span>;
 };
 const SuccessMark = withStyles<ISuccessMarkProps>({
-  styleTable: SuccessMarkStyles,
-  additionalStyles: SuccessMarkAdditionalStyles
+  staticStyles: SuccessMarkStyles,
+  dynamicStyles: SuccessMarkAdditionalStyles
 })(_SuccessMark);
 
 const _Button: React.FC<IButtonProps> = ({
