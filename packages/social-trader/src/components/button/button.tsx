@@ -28,6 +28,7 @@ const SuccessMark = withStyles<ISuccessMarkProps>({
 })(_SuccessMark);
 
 const _Button: React.FC<IButtonProps> = ({
+  isSuccessful,
   successSymbol,
   children,
   testId,
@@ -50,8 +51,8 @@ const _Button: React.FC<IButtonProps> = ({
       type={type}
       name={name}
     >
-      <Label>{children}</Label>
-      {successSymbol && <SuccessMark />}
+      <Label isSuccessful={isSuccessful}>{children}</Label>
+      {successSymbol && <SuccessMark isSuccessful={isSuccessful} />}
     </button>
   );
 };
