@@ -22,17 +22,33 @@ import {
   $paddingSmall,
   $paddingXxsmall
 } from "components/gv-styles/gv-sizes";
-import { css } from "styled-components";
+import { css, keyframes } from "styled-components";
+import { pSBC } from "utils/psbc";
+import { getBoxShadowValue, transition } from "utils/style/style-mixins";
 
-export const LabelAdditionalStyles = css`
+const pending = keyframes`
+  0% {
+    color: rgba(255, 255, 255, 8);
+  }
+  50% {
+    color: rgba(255, 255, 255, 0.3);
+  }
+`;
+
+export const LabelStyles = {
+  ...transition("opacity")
+};
+
+export const LabelDynamicStyles = css`
   opacity: ${({ isSuccessful }: ILabelProps) => (isSuccessful ? 0 : 1)};
 `;
 
 export const SuccessMarkStyles = {
-  position: "absolute"
+  position: "absolute",
+  ...transition("opacity")
 };
 
-export const SuccessMarkAdditionalStyles = css`
+export const SuccessMarkDynamicStyles = css`
   opacity: ${({ isSuccessful }: ISuccessMarkProps) => (isSuccessful ? 1 : 0)};
 `;
 
@@ -46,22 +62,66 @@ export const ButtonStyles = {
   border: "0",
   outline: "none",
   "background-color": "transparent",
-  "letter-spacing": { value: 0.3, unit: "px" },
   "text-decoration": "none",
   "border-radius": { value: 2, unit: "em" },
-  "border-width": { value: 0.1, unit: "em" },
-  "border-style": "solid"
+  "border-style": "solid",
+  ...transition(
+    "filter",
+    "background-color",
+    "box-shadow",
+    "color",
+    "opacity",
+    "padding"
+  )
 };
 
-export const ButtonAdditionalStyles = css`
+export const ButtonDynamicStyles = css`
+  border-width: ${({ variant = "contained" }: IButtonProps) =>
+    variant === "outlined" ? "0.1em" : 0};
   opacity: ${({ disabled, isSuccessful }: IButtonProps) =>
     !disabled || isSuccessful ? 1 : 0.5};
   cursor: ${({ disabled }: IButtonProps) => (disabled ? "default" : "pointer")};
-  color: ${({ variant, color }: IButtonProps) =>
-    variant === "contained" && color === "primary-dark"
+  color: ${({ variant = "contained", color = "primary" }: IButtonProps) => {
+    switch (variant) {
+      case "contained":
+        switch (color) {
+          case "primary-dark":
+            return $primaryColor;
+        }
+        break;
+      case "text":
+        switch (color) {
+          case "primary":
+            return $primaryColor;
+          case "danger":
+            return $negativeColor;
+          case "secondary":
+            return $textAccentColor;
+        }
+    }
+    return variant === "contained" && color === "primary-dark"
       ? $primaryColor
-      : $textAccentColor};
-  background-color: ${({ variant, color, isSuccessful }: IButtonProps) => {
+      : $textAccentColor;
+  }};
+  box-shadow: ${({ variant = "contained", color }: IButtonProps) => {
+    switch (variant) {
+      case "contained":
+        switch (color) {
+          case "danger":
+            return getBoxShadowValue(`${pSBC(-0.9, $negativeColor)}50`);
+          case "primary":
+            return getBoxShadowValue(`${pSBC(-0.9, $primaryColor)}50`);
+          case "secondary":
+            return getBoxShadowValue(`${pSBC(-0.9, $secondaryColor)}50`);
+        }
+    }
+    return "none";
+  }};
+  background-color: ${({
+    variant = "contained",
+    color = "primary",
+    isSuccessful
+  }: IButtonProps) => {
     if (isSuccessful) return $positiveColor;
     switch (variant) {
       case "contained":
@@ -76,11 +136,15 @@ export const ButtonAdditionalStyles = css`
             return $secondaryColor;
         }
         break;
+      case "text":
       case "outlined":
         return "transparent";
     }
   }};
-  border-color: ${({ variant, color }: IButtonProps) => {
+  border-color: ${({
+    variant = "contained",
+    color = "primary"
+  }: IButtonProps) => {
     switch (variant) {
       case "contained":
         switch (color) {
@@ -107,18 +171,19 @@ export const ButtonAdditionalStyles = css`
         }
     }
   }};
-  padding: ${({ noPadding, size }: IButtonProps) => {
+  padding: ${({ noPadding, size = "middle" }: IButtonProps) => {
     if (noPadding) return 0;
     switch (size) {
       case "xlarge":
         return `${$paddingXxsmall}px ${$paddingSmall}px`;
       case "large":
+      case "middle":
         return "10px 32px";
       case "xsmall":
         return `0 ${$paddingXxsmall}`;
     }
   }};
-  font-weight: ${({ bold, size }: IButtonProps) => {
+  font-weight: ${({ bold, size = "middle" }: IButtonProps) => {
     if (bold) return 600;
     switch (size) {
       case "xlarge":
@@ -128,39 +193,63 @@ export const ButtonAdditionalStyles = css`
         return 400;
     }
   }};
-  height: ${({ size }: IButtonProps) => {
+  height: ${({ noPadding, size = "middle" }: IButtonProps) => {
+    if (noPadding) return "auto";
     switch (size) {
       case "xlarge":
-        return $btnHeight;
+        return `${$btnHeight}px`;
       case "large":
-        return "50px";
+        return `${50}px`;
       case "small":
-        return $btnHeightSmall;
+        return `${$btnHeightSmall}px`;
       case "xsmall":
-        return $btnHeightXsmall;
+        return `${$btnHeightXsmall}px`;
     }
   }};
-  width: ${({ wide, size }: IButtonProps) => {
+  width: ${({ noPadding, wide, size = "middle" }: IButtonProps) => {
+    if (noPadding) return "auto";
     if (wide) return "100%";
     switch (size) {
       case "small":
-        return $btnWidthSmall;
+        return `${$btnWidthSmall}px`;
       case "xsmall":
         return "auto";
     }
   }};
-  font-size: ${({ size }: IButtonProps) => {
+  font-size: ${({ size = "middle" }: IButtonProps) => {
     switch (size) {
       case "xlarge":
-        return $fontSizeParagraph;
+        return `${$fontSizeParagraph}px`;
       case "large":
-        return $fontSizeCommon;
+        return `${$fontSizeCommon}px`;
       case "middle":
-        return $fontSizeCommon;
+        return `${$fontSizeCommon}px`;
       case "small":
-        return $fontSizeCommon;
+        return `${$fontSizeCommon}px`;
       case "xsmall":
-        return $fontSizeXxsmall;
+        return `${$fontSizeXxsmall}px`;
     }
   }};
+
+  filter: ${({ isPending }: IButtonProps) =>
+    isPending ? "grayscale(50%)" : "unset"};
+  animation: ${({ isPending }: IButtonProps) =>
+    isPending
+      ? css`
+          ${pending} 2s cubic-bezier(0.4, 0, 0.2, 1) infinite
+        `
+      : "unset"};
+
+  &:hover {
+    filter: ${({
+      variant = "contained",
+      isPending,
+      disabled,
+      isSuccessful
+    }: IButtonProps) => {
+      if (isSuccessful || disabled || isPending || variant === "outlined")
+        return "none";
+      return "brightness(70%)";
+    }};
+  }
 `;

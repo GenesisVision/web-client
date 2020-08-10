@@ -1,6 +1,9 @@
 import {
-  LabelAdditionalStyles,
-  SuccessMarkAdditionalStyles,
+  ButtonDynamicStyles,
+  ButtonStyles,
+  LabelDynamicStyles,
+  LabelStyles,
+  SuccessMarkDynamicStyles,
   SuccessMarkStyles
 } from "components/button/button.styles";
 import {
@@ -17,7 +20,7 @@ const _Label: React.FC<ILabelProps> = ({ className, children }) => {
 
 const Label = withStyles<ILabelProps>({
   staticStyles: LabelStyles,
-  dynamicStyles: LabelAdditionalStyles
+  dynamicStyles: LabelDynamicStyles
 })(_Label);
 
 const _SuccessMark: React.FC<ISuccessMarkProps> = ({ className }) => {
@@ -25,12 +28,12 @@ const _SuccessMark: React.FC<ISuccessMarkProps> = ({ className }) => {
 };
 const SuccessMark = withStyles<ISuccessMarkProps>({
   staticStyles: SuccessMarkStyles,
-  dynamicStyles: SuccessMarkAdditionalStyles
+  dynamicStyles: SuccessMarkDynamicStyles
 })(_SuccessMark);
 
 const _Button: React.FC<IButtonProps> = ({
   isSuccessful,
-  successSymbol,
+  successSymbol = true,
   children,
   testId,
   id,
@@ -38,7 +41,7 @@ const _Button: React.FC<IButtonProps> = ({
   className,
   onClick,
   title,
-  type,
+  type = "button",
   name
 }) => {
   return (
@@ -58,4 +61,9 @@ const _Button: React.FC<IButtonProps> = ({
   );
 };
 
-export const Button = React.memo(_Button);
+export const Button = React.memo(
+  withStyles({
+    staticStyles: ButtonStyles,
+    dynamicStyles: ButtonDynamicStyles
+  })(_Button)
+);
