@@ -1,3 +1,4 @@
+export const PHONE = 322;
 export const PHONE_LANDSCAPE = 576;
 export const TABLET = 768;
 export const TABLET_LANDSCAPE = 992;
