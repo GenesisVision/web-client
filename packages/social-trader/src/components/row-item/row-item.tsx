@@ -1,15 +1,8 @@
 import clsx from "clsx";
+import { IRowItemProps } from "components/row-item/row-item.types";
 import React from "react";
-import { OptionalClickable, Sizeable } from "utils/types";
 
 import styles from "./row-item.module.scss";
-
-export interface IRowItemProps extends Sizeable, OptionalClickable {
-  hide?: boolean;
-  wide?: boolean;
-  bottomOffset?: boolean;
-  className?: string;
-}
 
 export const RowItem: React.FC<IRowItemProps> = ({
   size = "middle",
