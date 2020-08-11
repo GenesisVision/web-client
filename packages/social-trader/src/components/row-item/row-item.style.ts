@@ -14,9 +14,11 @@ export const RowItemStaticStyles = {
 };
 
 const getOffset = (size: number, bottom: boolean) => {
-  return `${adaptiveMargin("right", size)}${
-    bottom ? adaptiveMargin("bottom", size) : ""
-  }`;
+  return `
+  &:not(:last-child){
+    ${adaptiveMargin("right", size)}
+  }
+  ${bottom ? adaptiveMargin("bottom", size) : ""}`;
 };
 
 export const RowItemDynamicStyles = css`
