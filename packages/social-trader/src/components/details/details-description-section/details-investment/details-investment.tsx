@@ -1,4 +1,4 @@
-import DetailsBlock from "components/details/details-block";
+import { DefaultTableBlock } from "components/default.block/default-table.block";
 import DetailsBlockTabs from "components/details/details-block-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
 import { Row } from "components/row/row";
@@ -128,7 +128,7 @@ const _DetailsInvestment: React.FC<Props> = ({
 
   if (!haveEvents && !showInvestment && !showSubscription) return null;
   return (
-    <DetailsBlock table wide>
+    <DefaultTableBlock>
       <DetailsBlockTabs value={tab} onChange={setTab}>
         <GVTab
           visible={showSubscription}
@@ -181,7 +181,7 @@ const _DetailsInvestment: React.FC<Props> = ({
           dateRangeStartLabel={t("filters.date-range.program-start")}
         />
       )}
-    </DetailsBlock>
+    </DefaultTableBlock>
   );
 };
 

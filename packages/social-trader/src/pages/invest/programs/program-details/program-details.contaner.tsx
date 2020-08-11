@@ -4,6 +4,7 @@ import DetailsInvestment from "components/details/details-description-section/de
 import { DetailsDivider } from "components/details/details-divider.block";
 import { DETAILS_TYPE } from "components/details/details.types";
 import Page from "components/page/page";
+import { Row } from "components/row/row";
 import { ASSET, TRADE_ASSET_TYPE } from "constants/constants";
 import { LevelsParamsInfo } from "gv-api-web";
 import dynamic from "next/dynamic";
@@ -273,8 +274,16 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
         programPersonalDetails={programPersonalDetails}
         followPersonalDetails={followPersonalDetails}
       />
-      {showFollowStatistic && <FollowDetailsStatisticSection />}
-      {showProgramStatistic && <ProgramDetailsStatisticSection />}
+      {showFollowStatistic && (
+        <Row onlyOffset>
+          <FollowDetailsStatisticSection />
+        </Row>
+      )}
+      {showProgramStatistic && (
+        <Row onlyOffset>
+          <ProgramDetailsStatisticSection />
+        </Row>
+      )}
       <ProgramDetailsHistorySection
         assetType={(route as unknown) as TRADE_ASSET_TYPE}
         canCloseOpenPositions={ownerActions?.canCloseOpenPositions}

@@ -163,7 +163,9 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
         currency={"GVT" as CurrencyEnum}
         personalFundDetails={description.personalDetails}
       />
-      <FundDetailsStatisticSection />
+      <Row onlyOffset>
+        <FundDetailsStatisticSection />
+      </Row>
       <FundDetailsHistorySection id={description.id} />
     </Page>
   );
