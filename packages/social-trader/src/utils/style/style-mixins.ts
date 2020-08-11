@@ -1,12 +1,11 @@
 import { mediaBreakpointLandscapePhone } from "components/gv-styles/gv-media";
 import { $dividerPadding } from "components/gv-styles/gv-sizes";
-import { css } from "styled-components";
 import { IStyleValue } from "utils/style/style-generators";
 
-export const adaptiveMargin = (direction: string, marginSize: string) => {
-  return css`
-    margin-${direction}: ${marginSize}/${$dividerPadding};
-    ${mediaBreakpointLandscapePhone(`margin-${direction}: ${marginSize};`)}
+export const adaptiveMargin = (direction: string, marginSize: number) => {
+  return `
+    margin-${direction}: ${marginSize / $dividerPadding}px;
+    ${mediaBreakpointLandscapePhone(`margin-${direction}: ${marginSize}px;`)}
   `;
 };
 
