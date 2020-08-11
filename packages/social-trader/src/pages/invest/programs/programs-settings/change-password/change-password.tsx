@@ -1,5 +1,5 @@
 import FormTextField from "components/assets/fields/form-text-field";
-import GVButton from "components/gv-button";
+import { Button } from "components/button/button";
 import { Row } from "components/row/row";
 import SettingsBlock from "components/settings-block/settings-block";
 import withLoader from "decorators/with-loader";
@@ -26,9 +26,9 @@ const _ChangePassword: React.FC<Props> = ({ id, title }) => {
       <div>
         <FormTextField>{t("asset-settings:password.text")}</FormTextField>
         <Row size={"large"}>
-          <GVButton color="primary" onClick={setChangePasswordOpen}>
+          <Button color="primary" onClick={setChangePasswordOpen}>
             {t("asset-details:description.change-password")}
-          </GVButton>
+          </Button>
         </Row>
       </div>
       <ChangePasswordTradingAccountPopup

@@ -1,4 +1,4 @@
-import GVButton from "components/gv-button";
+import { Button } from "components/button/button";
 import Link, { ToType } from "components/link/link";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
@@ -46,7 +46,7 @@ export const TableCardActionsItem: React.FC<ITableCardActionsItemProps> = ({
   return (
     <PopoverContentListItem>
       <Link to={to}>
-        <GVButton
+        <Button
           disabled={disabled}
           noPadding
           variant="text"
@@ -54,7 +54,7 @@ export const TableCardActionsItem: React.FC<ITableCardActionsItemProps> = ({
           onClick={onClick}
         >
           {children}
-        </GVButton>
+        </Button>
       </Link>
     </PopoverContentListItem>
   );

@@ -1,4 +1,4 @@
-import GVButton from "components/gv-button";
+import { Button } from "components/button/button";
 import { UpdateRowFuncType } from "components/table/components/table.types";
 import { ASSET } from "constants/constants";
 import useApiRequest from "hooks/api-request.hook";
@@ -44,7 +44,7 @@ const _ToggleAssetFavoriteButton: React.FC<IToggleAssetFavoriteButtonProps> = ({
   }, [id, isFavorite, assetType]);
   if (!isAuthenticated) return null;
   return (
-    <GVButton
+    <Button
       color={"secondary"}
       noPadding
       variant={"text"}
@@ -52,7 +52,7 @@ const _ToggleAssetFavoriteButton: React.FC<IToggleAssetFavoriteButtonProps> = ({
       onClick={handleToggle}
     >
       {children}
-    </GVButton>
+    </Button>
   );
 };
 

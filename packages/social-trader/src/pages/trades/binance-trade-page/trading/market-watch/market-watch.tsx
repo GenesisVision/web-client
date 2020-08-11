@@ -1,5 +1,5 @@
+import { Button } from "components/button/button";
 import GlobalSearchInput from "components/global-search/components/global-search-result/global-search-input/global-search-input";
-import GVButton from "components/gv-button";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import Select, { ISelectChangeEvent } from "components/select/select";
@@ -65,7 +65,7 @@ const _MarketWatch: React.FC<Props> = ({ items }) => {
         <Row size={"small"}>
           {FILTERING_CURRENCIES.map(currency => (
             <RowItem>
-              <GVButton
+              <Button
                 noPadding
                 disabled={
                   filteringType === "symbol" && filtering.value === currency
@@ -78,11 +78,11 @@ const _MarketWatch: React.FC<Props> = ({ items }) => {
                 }}
               >
                 {currency}
-              </GVButton>
+              </Button>
             </RowItem>
           ))}
           <RowItem>
-            <GVButton
+            <Button
               noPadding
               disabled={filteringType === "ALTS"}
               variant={"text"}
@@ -92,10 +92,10 @@ const _MarketWatch: React.FC<Props> = ({ items }) => {
               }}
             >
               ALTS
-            </GVButton>
+            </Button>
           </RowItem>
           <RowItem>
-            <GVButton
+            <Button
               noPadding
               disabled={filteringType === "FIATS"}
               variant={"text"}
@@ -105,7 +105,7 @@ const _MarketWatch: React.FC<Props> = ({ items }) => {
               }}
             >
               FIATS
-            </GVButton>
+            </Button>
           </RowItem>
         </Row>
       )}

@@ -1,5 +1,5 @@
 import SocialLinkImage from "components/avatar/social-link/social-link";
-import GVButton from "components/gv-button";
+import { Button } from "components/button/button";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
@@ -88,13 +88,13 @@ const _SocialLinkForm: React.FC<Props> = ({
                 </SubmitButton>
               </RowItem>
               <RowItem>
-                <GVButton
+                <Button
                   color="secondary"
                   variant="outlined"
                   onClick={handleCancelClick}
                 >
                   {t("buttons.cancel")}
-                </GVButton>
+                </Button>
               </RowItem>
             </Row>
           )}

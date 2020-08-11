@@ -1,4 +1,4 @@
-import GVButton from "components/gv-button";
+import { Button } from "components/button/button";
 import AlertMessage from "modules/alert-message/components/alert-message-list/alert-message";
 import Router from "next/router";
 import * as React from "react";
@@ -39,13 +39,13 @@ const _AlertMessageList: React.FC = () => {
 
   if (messages.length > 1) {
     children.push(
-      <GVButton
+      <Button
         testId={CLEAR_ALL_ALERTS_ID}
         color="primary"
         onClick={clearAllMessages}
       >
         {t("alerts.clear-all")}
-      </GVButton>
+      </Button>
     );
   }
 

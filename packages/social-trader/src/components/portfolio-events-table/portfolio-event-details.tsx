@@ -1,4 +1,4 @@
-import GVButton from "components/gv-button";
+import { Button } from "components/button/button";
 import Popover, { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import { PopoverContentCardBlock } from "components/popover/popover-card.block";
 import { PopoverContent } from "components/popover/popover-content";
@@ -28,9 +28,9 @@ const _PortfolioEventsDetails: React.FC<Props> = ({ extendedInfo }) => {
   };
   return (
     <div>
-      <GVButton size={"small"} color="secondary" onClick={setAnchor}>
+      <Button size={"small"} color="secondary" onClick={setAnchor}>
         {t("my-history.details")}
-      </GVButton>
+      </Button>
       <Popover
         anchorEl={anchor}
         onClose={clearAnchor}

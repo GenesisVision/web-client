@@ -1,5 +1,6 @@
 import clsx from "clsx";
-import GVButton, { GVButtonProps } from "components/gv-button";
+import { Button } from "components/button/button";
+import { GVButtonProps } from "components/gv-button";
 import React from "react";
 
 import styles from "./gv-button-with-mark.module.scss";
@@ -17,7 +18,7 @@ const _GvButtonWithMark: React.FC<Props> = ({
 }) => {
   return (
     <div className={styles["gv-button-with-mark"]}>
-      <GVButton {...otherProps} variant={variant} wide={wide} />
+      <Button {...otherProps} variant={variant} wide={wide} />
       <div
         className={clsx(styles["gv-button-with-mark__mark"], {
           [styles["gv-button-with-mark__mark--selected"]]: selected

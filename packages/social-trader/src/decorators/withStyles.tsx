@@ -7,18 +7,18 @@ import styled, {
 import { IStyleTable, parseStyles } from "utils/style/style-generators";
 
 export interface WithStylesOptions {
-  styleTable: IStyleTable;
-  additionalStyles?: FlattenInterpolation<any>;
+  staticStyles?: IStyleTable;
+  dynamicStyles?: FlattenInterpolation<any>;
 }
 
 export const withStyles = <T extends { [k: string]: any }>({
-  additionalStyles,
-  styleTable
+  dynamicStyles,
+  staticStyles
 }: WithStylesOptions) => (
   Component: React.FC<T>
 ): StyledComponent<FC<T>, any> => {
   return styled(Component)`
-    ${parseStyles({ styleTable })}
-    ${additionalStyles}
+    ${staticStyles && parseStyles({ styleTable: staticStyles })}
+    ${dynamicStyles}
   `;
 };

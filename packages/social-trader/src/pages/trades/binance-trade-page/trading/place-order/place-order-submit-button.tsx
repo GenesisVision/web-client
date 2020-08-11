@@ -1,4 +1,4 @@
-import GVButton from "components/gv-button";
+import { Button } from "components/button/button";
 import { Push } from "components/link/link";
 import { SubmitButton } from "components/submit-button/submit-button";
 import useIsOpen from "hooks/is-open.hook";
@@ -38,7 +38,7 @@ const UnAuthButton: React.FC<Props> = ({ side, asset }) => {
   const [isOpen, setOpen, setClose] = useIsOpen();
   return (
     <>
-      <GVButton
+      <Button
         color={side === "SELL" ? "danger" : "primary"}
         wide
         onClick={setOpen}
@@ -46,7 +46,7 @@ const UnAuthButton: React.FC<Props> = ({ side, asset }) => {
         <>
           {side} {asset}
         </>
-      </GVButton>
+      </Button>
       <SignupDialog open={isOpen} onClose={setClose} />
     </>
   );
@@ -54,7 +54,7 @@ const UnAuthButton: React.FC<Props> = ({ side, asset }) => {
 
 const WithoutAccountButton: React.FC<Props> = ({ side, asset }) => {
   return (
-    <GVButton
+    <Button
       color={side === "SELL" ? "danger" : "primary"}
       wide
       onClick={() => Push(composeCreateAccountRouteWithBroker("Binance"))}
@@ -62,7 +62,7 @@ const WithoutAccountButton: React.FC<Props> = ({ side, asset }) => {
       <>
         {side} {asset}
       </>
-    </GVButton>
+    </Button>
   );
 };
 

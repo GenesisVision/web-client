@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
+import { Button } from "components/button/button";
 import { Center } from "components/center/center";
-import GVButton from "components/gv-button";
 import { DetailsIcon } from "components/icon/details-icon";
 import { LogoutIcon } from "components/icon/logout-icon";
 import { ReferrerIcon } from "components/icon/referrer-icon";
@@ -59,9 +59,9 @@ const ProfileMenuItem: React.FC<IProfileMenuItemProps> = React.memo(
           {renderLabel()}
         </Link>
       ) : (
-        <GVButton variant="text" color={"danger"} noPadding onClick={onClick}>
+        <Button variant="text" color={"danger"} noPadding onClick={onClick}>
           {renderLabel()}
-        </GVButton>
+        </Button>
       );
     return <Row className={styles["profile-menu__item"]}>{renderButton()}</Row>;
   }

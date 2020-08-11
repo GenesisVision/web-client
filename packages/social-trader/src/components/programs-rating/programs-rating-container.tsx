@@ -1,8 +1,8 @@
+import { Button } from "components/button/button";
 import { DefaultTableBlock } from "components/default.block/default-table.block";
 import FacetContainer, {
   FACET_ASSET
 } from "components/facet-container/facet-container";
-import GVButton from "components/gv-button";
 import Page from "components/page/page";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
@@ -53,13 +53,13 @@ const _ProgramsRating: React.FC = () => {
       <Row>
         {levels.map((lvl, i) => (
           <RowItem bottomOffset key={i}>
-            <GVButton
+            <Button
               onClick={() => updateLevel(lvl.level)}
               noPadding
               variant={"text"}
             >
               <LevelIcon levelInfo={lvl} current={lvl.level === level} />
-            </GVButton>
+            </Button>
           </RowItem>
         ))}
       </Row>

@@ -1,8 +1,8 @@
 import clsx from "clsx";
+import { Button } from "components/button/button";
 import DetailsBlock, {
   DETAILS_BLOCK_TYPE
 } from "components/details/details-block";
-import GVButton from "components/gv-button";
 import Link, { ToType } from "components/link/link";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
@@ -58,9 +58,9 @@ export const AssetBlock: React.FC<Props> = ({
         </Row>
         <Row size={"xlarge"}>
           <Link to={investLink}>
-            <GVButton size={"large"} color="primary">
+            <Button size={"large"} color="primary">
               {buttonLabel || t("invest:invest-button")}
-            </GVButton>
+            </Button>
           </Link>
         </Row>
       </div>

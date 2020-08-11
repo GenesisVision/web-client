@@ -1,4 +1,4 @@
-import GVButton from "components/gv-button";
+import { Button } from "components/button/button";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import { KYC_ROUTE } from "components/profile/profile.constants";
@@ -21,15 +21,15 @@ const _NavigateToSettings: React.FC<Props> = ({
   if (isForex && !isKycConfirmed)
     return (
       <Link to={linkCreator(KYC_ROUTE, KYC_ROUTE, t("create-account:title"))}>
-        <GVButton color="primary" variant="outlined">
+        <Button color="primary" variant="outlined">
           {t("buttons.verify")}
-        </GVButton>
+        </Button>
       </Link>
     );
   return (
-    <GVButton color="primary" onClick={navigateToSettings}>
+    <Button color="primary" onClick={navigateToSettings}>
       {t("buttons.continue")}
-    </GVButton>
+    </Button>
   );
 };
 

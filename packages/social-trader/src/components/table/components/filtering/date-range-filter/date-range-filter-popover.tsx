@@ -1,5 +1,5 @@
+import { Button } from "components/button/button";
 import { Center } from "components/center/center";
-import GVButton from "components/gv-button";
 import { PopoverContentCardBlock } from "components/popover/popover-card.block";
 import { PopoverContent } from "components/popover/popover-content";
 import { RowItem } from "components/row-item/row-item";
@@ -52,7 +52,7 @@ const DateRangeItem: React.FC<IDateRangeItemProps> = React.memo(
   ({ onClick, disabled, label }) => {
     return (
       <Row>
-        <GVButton
+        <Button
           className={styles["date-range-filter__type-btn"]}
           noPadding
           variant="text"
@@ -61,7 +61,7 @@ const DateRangeItem: React.FC<IDateRangeItemProps> = React.memo(
           disabled={disabled}
         >
           {label}
-        </GVButton>
+        </Button>
       </Row>
     );
   }
@@ -155,17 +155,17 @@ const _DateRangeFilterPopover: React.FC<Props> = ({
         </Center>
         <Row>
           <RowItem>
-            <GVButton
+            <Button
               size={"xlarge"}
               noPadding
               variant="text"
               onClick={handleSubmit}
             >
               {t("buttons.apply")}
-            </GVButton>
+            </Button>
           </RowItem>
           <RowItem>
-            <GVButton
+            <Button
               size={"xlarge"}
               noPadding
               variant="text"
@@ -173,7 +173,7 @@ const _DateRangeFilterPopover: React.FC<Props> = ({
               onClick={cancel}
             >
               {t("buttons.cancel")}
-            </GVButton>
+            </Button>
           </RowItem>
         </Row>
       </PopoverContentCardBlock>

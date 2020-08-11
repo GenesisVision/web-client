@@ -1,5 +1,5 @@
+import { Button } from "components/button/button";
 import styles from "components/details/details-description-section/details-statistic-section/details-history/trades.module.scss";
-import GVButton from "components/gv-button";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
   ORIENTATION_POPOVER
@@ -127,9 +127,9 @@ const _ProgramPeriodHistoryDetailsButton: React.FC<IProgramPeriodHistoryDetailsB
   const [t] = useTranslation();
   return (
     <>
-      <GVButton size={"small"} color="secondary" onClick={setAnchor}>
+      <Button size={"small"} color="secondary" onClick={setAnchor}>
         {t("my-history.details")}
-      </GVButton>
+      </Button>
       <ProgramPeriodHistoryPopup
         period={period}
         currency={currency}

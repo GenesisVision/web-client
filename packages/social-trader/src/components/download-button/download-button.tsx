@@ -1,4 +1,4 @@
-import GVButton from "components/gv-button";
+import { Button } from "components/button/button";
 import { ExportIcon } from "components/icon/export-icon";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
@@ -17,7 +17,7 @@ const _DownloadButton: React.FC<Props> = ({
       className={styles["download-button__container"]}
       href={getExportFileUrl && getExportFileUrl()}
     >
-      <GVButton
+      <Button
         noPadding
         className={styles["download-button"]}
         color="primary"
@@ -28,7 +28,7 @@ const _DownloadButton: React.FC<Props> = ({
           {title || t("buttons.export")}
           <ExportIcon />
         </>
-      </GVButton>
+      </Button>
     </a>
   );
 };

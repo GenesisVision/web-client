@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import GVButton from "components/gv-button";
+import { Button } from "components/button/button";
 import { PopoverContentListItem } from "components/popover/popover-content";
 import React, { useCallback } from "react";
 
@@ -14,7 +14,7 @@ const SelectItem: React.FC<Props> = React.memo(
       [onClick, isSelected]
     );
     return (
-      <GVButton
+      <Button
         testId={getSelectItemSelector(value)}
         variant="text"
         color="secondary"
@@ -26,7 +26,7 @@ const SelectItem: React.FC<Props> = React.memo(
         name={name}
       >
         <PopoverContentListItem>{children}</PopoverContentListItem>
-      </GVButton>
+      </Button>
     );
   }
 );

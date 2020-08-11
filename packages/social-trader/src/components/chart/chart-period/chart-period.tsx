@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import GVButton from "components/gv-button";
+import { Button } from "components/button/button";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
@@ -39,7 +39,7 @@ const _ChartPeriod: React.FC<Props> = ({ period, onChange }) => {
         <Row>
           {ChartPeriodTypeValues.map(period => (
             <RowItem>
-              <GVButton
+              <Button
                 testId={t(
                   `asset-details:chart-period.${ChartPeriodType[period]}-short`
                 )}
@@ -56,7 +56,7 @@ const _ChartPeriod: React.FC<Props> = ({ period, onChange }) => {
                 {t(
                   `asset-details:chart-period.${ChartPeriodType[period]}-short`
                 )}
-              </GVButton>
+              </Button>
             </RowItem>
           ))}
         </Row>

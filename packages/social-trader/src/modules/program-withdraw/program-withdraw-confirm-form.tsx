@@ -1,8 +1,8 @@
+import { Button } from "components/button/button";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogError } from "components/dialog/dialog-error";
 import { DialogList } from "components/dialog/dialog-list";
 import { DialogListItem } from "components/dialog/dialog-list-item";
-import GVButton from "components/gv-button";
 import { SubmitButton } from "components/submit-button/submit-button";
 import useApiRequest from "hooks/api-request.hook";
 import { IProgramWithdrawAmountFormValues } from "modules/program-withdraw/program-withdraw.helpers";
@@ -90,14 +90,14 @@ const _ProgramWithdrawConfirmForm: React.FC<Props> = ({
       </DialogList>
       <DialogError error={errorMessage} />
       <DialogButtons>
-        <GVButton
+        <Button
           onClick={onBackClick}
           color="secondary"
           variant="outlined"
           title={"back"}
         >
           {t("withdraw-program.back")}
-        </GVButton>
+        </Button>
         <SubmitButton
           checkDirty={false}
           checkValid={false}

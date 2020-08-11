@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import GVButton from "components/gv-button";
+import { Button } from "components/button/button";
 import { CloseIcon } from "components/icon/close-icon";
 import Modal, { BodyFix } from "components/modal/modal";
 import React, { ReactNode, useCallback, useState } from "react";
@@ -43,14 +43,14 @@ export const Dialog: React.FC<IDialogProps> = ({
           })}
         >
           {showClose && (
-            <GVButton
+            <Button
               variant="text"
               color="secondary"
               className={styles["dialog__close"]}
               onClick={onClose}
             >
               <CloseIcon />
-            </GVButton>
+            </Button>
           )}
           {children}
         </div>

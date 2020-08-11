@@ -1,4 +1,4 @@
-import GVButton from "components/gv-button";
+import { Button } from "components/button/button";
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import useApiRequest from "hooks/api-request.hook";
@@ -64,7 +64,7 @@ const _OpenOrdersRow: React.FC<Props> = ({
         {terminalMoneyFormat({ amount: total, tickSize: stepSize })}
       </TableCell>
       <TableCell>
-        <GVButton
+        <Button
           noPadding
           variant={"text"}
           disabled={isPending}
@@ -74,7 +74,7 @@ const _OpenOrdersRow: React.FC<Props> = ({
           onClick={handleCancel}
         >
           Cancel
-        </GVButton>
+        </Button>
       </TableCell>
     </TableRow>
   );

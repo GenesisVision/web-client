@@ -1,3 +1,4 @@
+import { Button } from "components/button/button";
 import { Center } from "components/center/center";
 import { CommentInputContainer } from "components/conversation/comment/comment-input/comment-input-container";
 import { restorePost } from "components/conversation/conversation.service";
@@ -8,7 +9,6 @@ import { MessageActions } from "components/conversation/message/message-actions/
 import { CommentsList } from "components/conversation/post/comments-list/comments-list";
 import { PostButtons } from "components/conversation/post/post-buttons/post-buttons";
 import { DefaultBlock } from "components/default.block/default.block";
-import GVButton from "components/gv-button";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
@@ -43,14 +43,9 @@ const DeletedPost: React.FC<{
           {t("Post is deleted")}
         </Text>
         &nbsp;
-        <GVButton
-          size={"xlarge"}
-          variant={"text"}
-          noPadding
-          onClick={handleUndo}
-        >
+        <Button size={"xlarge"} variant={"text"} noPadding onClick={handleUndo}>
           {t("Undo")}
-        </GVButton>
+        </Button>
       </Center>
     </DefaultBlock>
   );

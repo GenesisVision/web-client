@@ -1,4 +1,3 @@
-import clsx from "clsx";
 import Link, { ToType } from "components/link/link";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
@@ -21,11 +20,7 @@ const DetailsDescriptionControl: React.FC<IDetailsDescriptionControlProps> = ({
   to
 }) => {
   return (
-    <Link
-      className={clsx(styles["details-description-control--button"], className)}
-      onClick={onClick}
-      to={to}
-    >
+    <Link onClick={onClick} to={to}>
       <Row className={styles["details-description-control"]}>
         <RowItem className={styles["details-description-control__text"]}>
           {text}

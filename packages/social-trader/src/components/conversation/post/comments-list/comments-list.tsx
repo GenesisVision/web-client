@@ -1,5 +1,5 @@
+import { Button } from "components/button/button";
 import { Comment } from "components/conversation/comment/comment";
-import GVButton from "components/gv-button";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
 import { Post } from "gv-api-web";
@@ -35,14 +35,14 @@ const _CommentsList: React.FC<Props> = ({
     <div className={styles["comments-list__comments"]}>
       {!isViewAll && (
         <Row className={styles["comments-list__view-all-button-container"]}>
-          <GVButton
+          <Button
             noPadding
             variant={"text"}
             size={"xlarge"}
             onClick={setViewAll}
           >
             View all
-          </GVButton>
+          </Button>
           &nbsp;
           <Text muted> ({comments.length - visibleCommentsCountInner})</Text>
         </Row>

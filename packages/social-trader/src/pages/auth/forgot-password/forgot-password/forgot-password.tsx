@@ -1,5 +1,5 @@
+import { Button } from "components/button/button";
 import FormError from "components/form/form-error/form-error";
-import GVButton from "components/gv-button";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import Link from "components/link/link";
 import { RowItem } from "components/row-item/row-item";
@@ -59,12 +59,12 @@ const _ForgotPasswordForm: React.FC<Props> = ({ onSubmit, errorMessage }) => {
       <Row size={"large"}>
         <RowItem>
           <Link to={LOGIN_ROUTE}>
-            <GVButton noPadding variant="text" color="secondary">
+            <Button noPadding variant="text" color="secondary">
               <>
                 &larr;{" "}
                 {t("auth:password-restore.forgot-password.back-button-text")}
               </>
-            </GVButton>
+            </Button>
           </Link>
         </RowItem>
         <RowItem>

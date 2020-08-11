@@ -1,4 +1,4 @@
-import GVButton from "components/gv-button";
+import { Button } from "components/button/button";
 import { LabeledValue } from "components/labeled-value/labeled-value";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
@@ -25,9 +25,9 @@ const _PersonalDetails: React.FC<IProfileOwnProps> = ({ info }) => {
       >
         {info.verificationStatus === "NotVerified" && (
           <Link to={linkCreator(KYC_ROUTE)}>
-            <GVButton color="primary" variant="outlined">
+            <Button color="primary" variant="outlined">
               {t("buttons.verify")}
-            </GVButton>
+            </Button>
           </Link>
         )}
       </SettingsBlock>

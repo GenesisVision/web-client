@@ -1,4 +1,4 @@
-import GVButton from "components/gv-button";
+import { Button } from "components/button/button";
 import { Text } from "components/text/text";
 import useApiRequest from "hooks/api-request.hook";
 import { TradeTable } from "pages/trades/binance-trade-page/trading/components/trade-table/trade-table";
@@ -48,7 +48,7 @@ export const OpenOrders: React.FC<Props> = ({ items }) => {
         <th>
           {name === "cancel-all" ? (
             items?.length ? (
-              <GVButton
+              <Button
                 noPadding
                 variant={"text"}
                 disabled={isPending}
@@ -58,7 +58,7 @@ export const OpenOrders: React.FC<Props> = ({ items }) => {
                 onClick={handleCancel}
               >
                 {t("Cancel all")}
-              </GVButton>
+              </Button>
             ) : (
               ""
             )

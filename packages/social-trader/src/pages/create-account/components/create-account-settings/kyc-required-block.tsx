@@ -1,5 +1,5 @@
 import FormTextField from "components/assets/fields/form-text-field";
-import GVButton from "components/gv-button";
+import { Button } from "components/button/button";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import { KYC_ROUTE } from "components/profile/profile.constants";
@@ -28,9 +28,9 @@ const _KycRequiredBlock: React.FC = () => {
       </Row>
       <Row size={"large"} wide>
         <Link to={linkCreator(KYC_ROUTE)}>
-          <GVButton color="primary" variant="outlined">
+          <Button color="primary" variant="outlined">
             {t("buttons.verify")}
-          </GVButton>
+          </Button>
         </Link>
       </Row>
     </SettingsBlock>
