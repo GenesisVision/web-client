@@ -14,8 +14,8 @@ export const RowItemStaticStyles = {
 };
 
 const getOffset = (size: number, bottom: boolean) => {
-  return `${adaptiveMargin("right", `${size}px`)}${
-    bottom ? adaptiveMargin("bottom", `${size}px`) : ""
+  return `${adaptiveMargin("right", size)}${
+    bottom ? adaptiveMargin("bottom", size) : ""
   }`;
 };
 
@@ -23,7 +23,7 @@ export const RowItemDynamicStyles = css`
   cursor: ${({ onClick }: IRowItemProps) => (onClick ? "pointer" : "default")};
   display: ${({ hide }: IRowItemProps) => (hide ? "none" : "block")};
   width: ${({ wide }: IRowItemProps) => (wide ? "100%" : "auto")};
-  ${({ size, bottomOffset }: IRowItemProps) => {
+  ${({ size = "middle", bottomOffset }: IRowItemProps) => {
     switch (size) {
       case "xsmall":
         return getOffset($paddingXxxsmall, !!bottomOffset);
