@@ -1,7 +1,7 @@
+import { Button } from "components/button/button";
 import Dialog, { IDialogOuterProps } from "components/dialog/dialog";
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogTop } from "components/dialog/dialog-top";
-import GVButton from "components/gv-button";
 import { Slider } from "components/range/range";
 import Regulator from "components/regulator/regulator";
 import { Row } from "components/row/row";
@@ -123,13 +123,13 @@ const ChangeLeverageDialogContent: React.FC<Props> = ({
           </Text>
         </Row>
         <Row>
-          <GVButton
+          <Button
             disabled={leverage === leverageProp}
             wide
             onClick={handleChange}
           >
             {t("Confirm")}
-          </GVButton>
+          </Button>
         </Row>
       </DialogBottom>
     </>

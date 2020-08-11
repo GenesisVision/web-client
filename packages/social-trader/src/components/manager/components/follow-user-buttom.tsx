@@ -1,4 +1,4 @@
-import GVButton from "components/gv-button";
+import { Button } from "components/button/button";
 import { toggleFollowUser } from "components/manager/services/manager.service";
 import useApiRequest from "hooks/api-request.hook";
 import React, { useCallback, useState } from "react";
@@ -24,7 +24,7 @@ const _FollowUserButton: React.FC<Props> = ({
     return sendRequest({ id, value: innerValue });
   }, [id, innerValue, onChange]);
   return (
-    <GVButton
+    <Button
       variant={innerValue ? "outlined" : "contained"}
       color={innerValue ? "secondary" : "primary"}
       wide
@@ -33,7 +33,7 @@ const _FollowUserButton: React.FC<Props> = ({
       disabled={isPending || disabled}
     >
       {innerValue ? t("buttons.unfollow") : t("buttons.follow")}
-    </GVButton>
+    </Button>
   );
 };
 

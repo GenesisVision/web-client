@@ -1,4 +1,4 @@
-import GVButton from "components/gv-button";
+import { Button } from "components/button/button";
 import { SignalSubscription } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
 import EditFollowModuleContainer from "modules/follow-module/edit-follow-module-container";
@@ -22,9 +22,9 @@ const _EditFollowButton: React.FC<Props> = ({
   }, [id]);
   return (
     <>
-      <GVButton size={size} onClick={setIsOpenPopup}>
+      <Button size={size} onClick={setIsOpenPopup}>
         {t("buttons.edit")}
-      </GVButton>
+      </Button>
       <EditFollowModuleContainer
         signalSubscription={signalSubscription}
         tradingAccountId={tradingAccountId}

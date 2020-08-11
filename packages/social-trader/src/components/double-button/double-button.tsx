@@ -1,5 +1,5 @@
+import { Button } from "components/button/button";
 import { Center } from "components/center/center";
-import GVButton from "components/gv-button";
 import React from "react";
 import { Sizeable } from "utils/types";
 
@@ -21,7 +21,7 @@ interface Props extends Sizeable {
 const _DoubleButton: React.FC<Props> = ({ size, first, second }) => {
   return (
     <Center className={styles["double-button"]}>
-      <GVButton
+      <Button
         color={first.color}
         className={styles["double-button--first"]}
         disabled={!first.enable}
@@ -30,8 +30,8 @@ const _DoubleButton: React.FC<Props> = ({ size, first, second }) => {
         onClick={first.handleClick}
       >
         {first.label}
-      </GVButton>
-      <GVButton
+      </Button>
+      <Button
         color={second.color}
         className={styles["double-button--second"]}
         disabled={!second.enable}
@@ -40,7 +40,7 @@ const _DoubleButton: React.FC<Props> = ({ size, first, second }) => {
         onClick={second.handleClick}
       >
         {second.label}
-      </GVButton>
+      </Button>
     </Center>
   );
 };

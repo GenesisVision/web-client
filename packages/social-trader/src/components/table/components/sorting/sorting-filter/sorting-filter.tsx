@@ -1,5 +1,5 @@
+import { Button } from "components/button/button";
 import { Center } from "components/center/center";
-import GVButton from "components/gv-button";
 import React, { useCallback } from "react";
 
 import {
@@ -63,14 +63,14 @@ const _SortingFilter: React.FC<ISortingFilterProps> = ({
         values={columnValues}
         onChange={handleOnSelectChange}
       />
-      <GVButton
+      <Button
         variant="text"
         color="secondary"
         className={styles["sorting-filter__btn"]}
         onClick={handleOnDirectionChange(!isAsc())}
       >
         {isAsc() ? <span>&uarr;</span> : <span>&darr;</span>}
-      </GVButton>
+      </Button>
     </Center>
   );
 };

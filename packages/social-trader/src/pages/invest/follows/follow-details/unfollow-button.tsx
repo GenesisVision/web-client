@@ -1,4 +1,4 @@
-import GVButton from "components/gv-button";
+import { Button } from "components/button/button";
 import useIsOpen from "hooks/is-open.hook";
 import UnfollowContainer from "modules/unfollow/unfollow-container";
 import { dispatchFollowDescription } from "pages/invest/follows/follow-details/services/follow-details.service";
@@ -24,14 +24,14 @@ const _UnFollowButton: React.FC<Props> = ({
   const [isOpenUnFollow, setIsOpenUnFollow, setIsCloseUnFollow] = useIsOpen();
   return (
     <>
-      <GVButton
+      <Button
         size={size}
         color="secondary"
         variant="outlined"
         onClick={setIsOpenUnFollow}
       >
         {t("asset-details:description.unfollow")}
-      </GVButton>
+      </Button>
       <UnfollowContainer
         tradingAccountId={tradingAccountId}
         isExternal={isExternal}

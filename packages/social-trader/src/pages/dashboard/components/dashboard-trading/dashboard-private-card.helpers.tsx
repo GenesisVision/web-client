@@ -1,4 +1,4 @@
-import GVButton from "components/gv-button";
+import { Button } from "components/button/button";
 import Hint from "components/hint/hint";
 import { ToType } from "components/link/link";
 import { useToLink } from "components/link/link.helper";
@@ -57,7 +57,7 @@ export const MakeProgramButton: React.FC<{
         {label}
       </TableCardActionsItem>
     ) : (
-      <GVButton variant="text" color="secondary">
+      <Button variant="text" color="secondary">
         <Text muted>
           <Hint
             content={label}
@@ -68,7 +68,7 @@ export const MakeProgramButton: React.FC<{
             )}
           />
         </Text>
-      </GVButton>
+      </Button>
     );
   }
 );

@@ -1,5 +1,5 @@
+import { Button } from "components/button/button";
 import FormError from "components/form/form-error/form-error";
-import GVButton from "components/gv-button";
 import GVCheckbox from "components/gv-checkbox/gv-checkbox";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import Link from "components/link/link";
@@ -163,9 +163,9 @@ const _SignUpForm: React.FC<Props> = ({
         {showLogin && (
           <RowItem>
             <Link to={LOGIN_ROUTE}>
-              <GVButton variant="outlined" color="secondary">
+              <Button variant="outlined" color="secondary">
                 {t("auth:login.title")}
-              </GVButton>
+              </Button>
             </Link>
           </RowItem>
         )}

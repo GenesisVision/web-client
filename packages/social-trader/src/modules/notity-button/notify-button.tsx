@@ -1,6 +1,6 @@
+import { Button } from "components/button/button";
 import { Center } from "components/center/center";
 import { getMinProgramDeposit } from "components/deposit/services/program-deposit.service";
-import GVButton from "components/gv-button";
 import { RowItem } from "components/row-item/row-item";
 import Tooltip from "components/tooltip/tooltip";
 import { TooltipContent } from "components/tooltip/tooltip-content";
@@ -36,13 +36,13 @@ const _NotifyButton: React.FC<Props> = ({
   return (
     <Center>
       <RowItem>
-        <GVButton
+        <Button
           size={"xlarge"}
           onClick={handleClick}
           disabled={Boolean(data || isPending || !canInvest)}
         >
           {t("buttons.notify")}
-        </GVButton>
+        </Button>
       </RowItem>
       <Tooltip
         render={() => (

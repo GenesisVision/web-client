@@ -1,5 +1,5 @@
 import authActions from "actions/auth-actions";
-import GVButton from "components/gv-button";
+import { Button } from "components/button/button";
 import { fetchProfileHeaderInfoAction } from "components/header/actions/header-actions";
 import { Push } from "components/link/link";
 import { SECURITY_ROUTE } from "components/profile/profile.constants";
@@ -37,9 +37,9 @@ const _PasswordChange: React.FC = () => {
   return (
     <>
       {!isOpen && (
-        <GVButton onClick={setIsOpen}>
+        <Button onClick={setIsOpen}>
           {t("profile-page:settings.change-password")}
-        </GVButton>
+        </Button>
       )}
       {isOpen && (
         <PasswordChangeForm

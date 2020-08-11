@@ -1,6 +1,6 @@
+import { Button } from "components/button/button";
 import DetailsBlock from "components/details/details-block";
 import GuideBlockLink from "components/guides/guide-block/guide-block-link";
-import GVButton from "components/gv-button";
 import { Guide } from "gv-api-web";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
@@ -39,14 +39,14 @@ const _GuideBlock: React.FC<Props> = ({
           </GuideBlockLink>
         )}
         {isAuthenticated && (
-          <GVButton
+          <Button
             className={styles["guide-block__button"]}
             onClick={handlePass}
             isSuccessful={guide.isPassed}
             disabled={guide.isPassed}
           >
             {t("guides:controls.done")}
-          </GVButton>
+          </Button>
         )}
         {nextGuideName && (
           <GuideBlockLink guideCanonicalName={nextGuideName} isNext>

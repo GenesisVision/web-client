@@ -1,7 +1,7 @@
+import { Button } from "components/button/button";
 import Dialog, { IDialogOuterProps } from "components/dialog/dialog";
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogTop } from "components/dialog/dialog-top";
-import GVButton from "components/gv-button";
 import { RadioButton } from "components/radio-button/radio-button";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
@@ -86,9 +86,9 @@ const PositionModeDialogContent: React.FC<Props> = ({
           </Text>
         </Row>
         <Row>
-          <GVButton disabled={mode === modeProp} wide onClick={handleChange}>
+          <Button disabled={mode === modeProp} wide onClick={handleChange}>
             {t("Confirm")}
-          </GVButton>
+          </Button>
         </Row>
       </DialogBottom>
     </>

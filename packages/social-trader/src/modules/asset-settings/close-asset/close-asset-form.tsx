@@ -1,7 +1,7 @@
+import { Button } from "components/button/button";
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogTop } from "components/dialog/dialog-top";
-import GVButton from "components/gv-button";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import { Row } from "components/row/row";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
@@ -73,14 +73,14 @@ const _CloseAssetForm: React.FC<Props> = ({
           >
             {t("buttons.confirm")}
           </SubmitButton>
-          <GVButton
+          <Button
             color="secondary"
             variant="outlined"
             disabled={isSubmitting}
             onClick={onCancel}
           >
             {t("buttons.cancel")}
-          </GVButton>
+          </Button>
         </DialogButtons>
       </DialogBottom>
     </HookForm>

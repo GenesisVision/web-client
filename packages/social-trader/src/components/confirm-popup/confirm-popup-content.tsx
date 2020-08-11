@@ -1,8 +1,8 @@
+import { Button } from "components/button/button";
 import { IDialogProps } from "components/dialog/dialog";
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogTop } from "components/dialog/dialog-top";
-import GVButton from "components/gv-button";
 import { Row } from "components/row/row";
 import { SubmitButton } from "components/submit-button/submit-button";
 import React from "react";
@@ -48,9 +48,9 @@ const _ConfirmPopupContent: React.ComponentType<IConfirmPopupContentProps> = ({
             {applyButtonText || t("buttons.apply")}
           </SubmitButton>
           {onCancel && (
-            <GVButton color="secondary" variant="outlined" onClick={onCancel}>
+            <Button color="secondary" variant="outlined" onClick={onCancel}>
               {cancelButtonText || t("buttons.cancel")}
-            </GVButton>
+            </Button>
           )}
         </DialogButtons>
       </DialogBottom>

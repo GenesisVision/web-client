@@ -1,4 +1,4 @@
-import GVButton from "components/gv-button";
+import { Button } from "components/button/button";
 import useApiRequest from "hooks/api-request.hook";
 import * as React from "react";
 import { useCallback } from "react";
@@ -18,9 +18,9 @@ const _LogoutButtonContainer: React.FC = () => {
   });
   const handleSubmit = useCallback(() => sendRequest(), []);
   return (
-    <GVButton onClick={handleSubmit} disabled={isPending}>
+    <Button onClick={handleSubmit} disabled={isPending}>
       {t("profile-page:settings.logout-from-another-devices.label")}
-    </GVButton>
+    </Button>
   );
 };
 

@@ -1,5 +1,5 @@
+import { Button } from "components/button/button";
 import { Center } from "components/center/center";
-import GVButton from "components/gv-button";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import { RowItem } from "components/row-item/row-item";
@@ -21,16 +21,16 @@ const UnauthLinks: React.FC<Props> = ({ backPath }) => {
             state: backPath
           }}
         >
-          <GVButton variant="outlined" color="secondary">
+          <Button variant="outlined" color="secondary">
             {t("buttons.login")}
-          </GVButton>
+          </Button>
         </Link>
       </RowItem>
       <RowItem>
         <Link to={linkCreator(SIGNUP_ROUTE)}>
-          <GVButton variant="contained" color="primary">
+          <Button variant="contained" color="primary">
             {t("buttons.signup")}
-          </GVButton>
+          </Button>
         </Link>
       </RowItem>
     </Center>

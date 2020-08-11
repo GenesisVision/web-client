@@ -1,4 +1,4 @@
-import GVButton from "components/gv-button";
+import { Button } from "components/button/button";
 import { fetchProfileHeaderInfo } from "components/header/header.service";
 import { clearAll } from "components/notifications/services/notifications.services";
 import useApiRequest from "hooks/api-request.hook";
@@ -20,7 +20,7 @@ const ClearButton: React.FC<Props> = ({ onApply }) => {
   }, []);
 
   return (
-    <GVButton
+    <Button
       size={"xlarge"}
       noPadding
       variant={"text"}
@@ -28,7 +28,7 @@ const ClearButton: React.FC<Props> = ({ onApply }) => {
       disabled={isPending}
     >
       {t("notifications-aside.clear")}
-    </GVButton>
+    </Button>
   );
 };
 

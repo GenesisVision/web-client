@@ -1,4 +1,4 @@
-import GVButton from "components/gv-button";
+import { Button } from "components/button/button";
 import useIsOpen from "hooks/is-open.hook";
 import { useTranslation } from "i18n";
 import { CLOSEABLE_ASSET } from "modules/asset-settings/close-asset/close-asset";
@@ -19,7 +19,7 @@ const _CloseAssetButton: React.FC<Props> = ({
   const [isOpen, setOpen, setClose] = useIsOpen();
   return (
     <>
-      <GVButton
+      <Button
         noPadding={noPadding}
         variant={variant}
         color="danger"
@@ -27,7 +27,7 @@ const _CloseAssetButton: React.FC<Props> = ({
         disabled={!canClose}
       >
         {t(`asset-settings:buttons.close-${type.toLowerCase()}`)}
-      </GVButton>
+      </Button>
       <ConfirmCloseAssetContainer
         assetName={assetName}
         asset={type}

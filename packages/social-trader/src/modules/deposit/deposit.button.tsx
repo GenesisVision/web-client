@@ -1,5 +1,5 @@
+import { Button } from "components/button/button";
 import InvestmentUnauthPopup from "components/details/details-description-section/investment-unauth-popup/investment-unauth-popup";
-import GVButton from "components/gv-button";
 import { ASSET } from "constants/constants";
 import useIsOpen from "hooks/is-open.hook";
 import { useTranslation } from "i18n";
@@ -69,7 +69,7 @@ const _DepositButton: React.FC<Props> = ({
     : setIsOpenUnAuthInvestPopup;
   return (
     <>
-      <GVButton
+      <Button
         testId={label}
         className={label}
         disabled={disabled}
@@ -77,7 +77,7 @@ const _DepositButton: React.FC<Props> = ({
         onClick={openPopupMethod}
       >
         {label}
-      </GVButton>
+      </Button>
       {deposit}
       <InvestmentUnauthPopup
         message={t(`asset-details:unauth-popup.${type.toLowerCase()}`)}

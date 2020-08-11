@@ -1,4 +1,4 @@
-import GVButton from "components/gv-button";
+import { Button } from "components/button/button";
 import { PopoverContentCardBlock } from "components/popover/popover-card.block";
 import { PopoverContent } from "components/popover/popover-content";
 import { Range } from "components/range/range";
@@ -41,17 +41,17 @@ const _LevelFilterPopover: React.FC<Props> = ({
         </Row>
         <Row>
           <RowItem>
-            <GVButton
+            <Button
               size={"xlarge"}
               noPadding
               variant="text"
               onClick={handleSubmit}
             >
               {t("buttons.apply")}
-            </GVButton>
+            </Button>
           </RowItem>
           <RowItem>
-            <GVButton
+            <Button
               size={"xlarge"}
               noPadding
               variant="text"
@@ -59,7 +59,7 @@ const _LevelFilterPopover: React.FC<Props> = ({
               onClick={cancel}
             >
               {t("buttons.cancel")}
-            </GVButton>
+            </Button>
           </RowItem>
         </Row>
       </PopoverContentCardBlock>

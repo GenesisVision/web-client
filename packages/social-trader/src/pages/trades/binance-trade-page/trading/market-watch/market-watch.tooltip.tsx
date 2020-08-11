@@ -1,5 +1,5 @@
+import { Button } from "components/button/button";
 import { Center } from "components/center/center";
-import GVButton from "components/gv-button";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
   ORIENTATION_POPOVER,
@@ -18,7 +18,7 @@ export const _MarketWatchTooltipButton: React.FC = ({ children }) => {
   const { anchor, setAnchor, clearAnchor } = useAnchor();
   return (
     <>
-      <GVButton variant={"text"} noPadding onClick={setAnchor}>
+      <Button variant={"text"} noPadding onClick={setAnchor}>
         <Center>
           <RowItem size={"small"}>{children}</RowItem>
           <RowItem>
@@ -27,7 +27,7 @@ export const _MarketWatchTooltipButton: React.FC = ({ children }) => {
             </Center>
           </RowItem>
         </Center>
-      </GVButton>
+      </Button>
       <Popover
         vertical={VERTICAL_POPOVER_POS.BOTTOM}
         fixedVertical

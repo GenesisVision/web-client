@@ -1,5 +1,5 @@
+import { Button } from "components/button/button";
 import { Center } from "components/center/center";
-import GVButton from "components/gv-button";
 import { CloseIcon } from "components/icon/close-icon";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
@@ -106,7 +106,7 @@ const _LevelCalculatorPopup: React.FC<Props> = ({
         </h2>
         <Center>
           <RowItem>
-            <GVButton
+            <Button
               size={"small"}
               color={"secondary"}
               onClick={handleResetForm}
@@ -116,9 +116,9 @@ const _LevelCalculatorPopup: React.FC<Props> = ({
               >
                 {t("buttons.reset")}
               </span>
-            </GVButton>
+            </Button>
           </RowItem>
-          <GVButton
+          <Button
             className={styles["level-calculator-popup__close-button"]}
             noPadding
             variant="text"
@@ -126,7 +126,7 @@ const _LevelCalculatorPopup: React.FC<Props> = ({
             onClick={onClose}
           >
             <CloseIcon />
-          </GVButton>
+          </Button>
         </Center>
       </Center>
 
@@ -300,9 +300,9 @@ const _LevelCalculatorPopup: React.FC<Props> = ({
             className={styles["level-calculator-popup__btn-verify"]}
             to={linkCreator(KYC_ROUTE, title)}
           >
-            <GVButton color="primary" variant="outlined">
+            <Button color="primary" variant="outlined">
               {t("buttons.verify")}
-            </GVButton>
+            </Button>
           </Link>
         </>
       )}

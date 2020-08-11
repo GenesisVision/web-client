@@ -1,6 +1,6 @@
 import clsx from "clsx";
+import { Button } from "components/button/button";
 import { DialogButtons } from "components/dialog/dialog-buttons";
-import GVButton from "components/gv-button";
 import * as React from "react";
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -26,7 +26,7 @@ const GoogleAuth: React.FC<Props> = props => {
       {step === 2 && <GoogleActivateStep {...props} />}
       <DialogButtons>
         <div className={styles["google-auth__buttons"]}>
-          <GVButton
+          <Button
             disabled={isPrevDisabled()}
             onClick={handlePrev}
             variant="text"
@@ -35,8 +35,8 @@ const GoogleAuth: React.FC<Props> = props => {
               &larr;&nbsp;
               {t("Prev")}
             </>
-          </GVButton>
-          <GVButton
+          </Button>
+          <Button
             disabled={isNextDisabled()}
             onClick={handleNext}
             variant="text"
@@ -45,7 +45,7 @@ const GoogleAuth: React.FC<Props> = props => {
               {t("Next")}
               &nbsp;&rarr;
             </>
-          </GVButton>
+          </Button>
         </div>
       </DialogButtons>
     </div>

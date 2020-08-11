@@ -1,6 +1,6 @@
+import { Button } from "components/button/button";
 import Dialog from "components/dialog/dialog";
 import { DialogBottom } from "components/dialog/dialog-bottom";
-import GVButton from "components/gv-button";
 import { Li } from "components/li/li";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
@@ -32,9 +32,9 @@ const _InvestmentLimitPopup: React.FC<Props> = ({ open, onClose }) => {
           </RowItem>
           <RowItem>
             <Link to={linkCreator(KYC_ROUTE, KYC_ROUTE)}>
-              <GVButton color="primary">
+              <Button color="primary">
                 {t("dashboard-page:kyc-limit.text-2")}
-              </GVButton>
+              </Button>
             </Link>
           </RowItem>
         </Row>

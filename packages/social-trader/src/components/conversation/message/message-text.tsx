@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { Button } from "components/button/button";
 import {
   reduceByBreaks,
   reduceBySymbolsCount
@@ -8,7 +9,6 @@ import {
   inTextComponentsMap,
   parseToTsx
 } from "components/conversation/tag/parse-to-tsx";
-import GVButton from "components/gv-button";
 import { Row } from "components/row/row";
 import { PostTag } from "gv-api-web";
 import React, { useEffect, useState } from "react";
@@ -56,13 +56,13 @@ const _MessageText: React.FC<Props> = ({ tags, reduceLargeText, text }) => {
               map: inTextComponentsMap
             })}
             {isTextExpanded === false && (
-              <GVButton
+              <Button
                 noPadding
                 variant={"text"}
                 onClick={() => setTextExpandState(true)}
               >
                 <b>Expand</b>
-              </GVButton>
+              </Button>
             )}
           </div>
         </Row>
