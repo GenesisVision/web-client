@@ -1,7 +1,19 @@
+import { mediaBreakpointLandscapePhone } from "components/gv-styles/gv-media";
+import { $paddingBig } from "components/gv-styles/gv-sizes";
+import { withStyles } from "decorators/withStyles";
 import * as React from "react";
+import { css } from "styled-components";
 
-import styles from "./details-divider.block.module.scss";
+interface Props {
+  className?: string;
+}
 
-export const DetailsDivider: React.FC = () => {
-  return <div className={styles["details-divider"]} />;
+const dynamicStyles = css`
+  ${mediaBreakpointLandscapePhone(`padding-bottom: ${$paddingBig}px`)}
+`;
+
+export const _DetailsDivider: React.FC<Props> = ({ className }) => {
+  return <div className={className} />;
 };
+
+export const DetailsDivider = withStyles({ dynamicStyles })(_DetailsDivider);

@@ -4,17 +4,30 @@ import {
   DETAILS_TYPE,
   PersonalDetailsType
 } from "components/details/details.types";
+import { mediaBreakpointTablet } from "components/gv-styles/gv-media";
 import { ToType } from "components/link/link";
 import { ASSET } from "constants/constants";
+import { withStyles } from "decorators/withStyles";
 import { ProgramDetailsFull, SocialLinkViewModel } from "gv-api-web";
 import * as React from "react";
 import { managerToPathCreator } from "routes/manager.routes";
+import { css } from "styled-components";
 import { CurrencyEnum } from "utils/types";
 
-import styles from "./details-description.module.scss";
 import { DetailsLimitsAvatar } from "./details-limits-avatar.block";
 
+const dynamicStyles = css`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  ${mediaBreakpointTablet(`
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+  `)}
+`;
+
 interface Props {
+  className?: string;
   descriptionTitle?: string;
   detailsType: DETAILS_TYPE;
   personalDetails?: PersonalDetailsType;
@@ -36,6 +49,7 @@ interface Props {
 }
 
 const _DetailsDescription: React.FC<Props> = ({
+  className,
   descriptionTitle,
   detailsType,
   personalDetails,
@@ -56,7 +70,7 @@ const _DetailsDescription: React.FC<Props> = ({
   settingsUrl
 }) => {
   return (
-    <div className={styles["details-description__main"]}>
+    <div className={className}>
       <DetailsLimitsAvatar
         detailsType={detailsType}
         logo={logo}
@@ -97,5 +111,7 @@ const _DetailsDescription: React.FC<Props> = ({
   );
 };
 
-const DetailsDescription = React.memo(_DetailsDescription);
+const DetailsDescription = withStyles<Props>({ dynamicStyles })(
+  React.memo(_DetailsDescription)
+);
 export default DetailsDescription;

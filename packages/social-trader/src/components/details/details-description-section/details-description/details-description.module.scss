@@ -11,17 +11,6 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
     background: $background-color;
   }
 
-  &__main {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-
-    @include media-breakpoint-tablet() {
-      flex-wrap: nowrap;
-      justify-content: flex-start;
-    }
-  }
-
   &__avatar {
     cursor: pointer;
     margin: $padding-xsmall-mobile 0 $padding-xsmall;

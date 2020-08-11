@@ -1,11 +1,16 @@
+import { detailsBlockHorizontalPaddings } from "components/details/details.constants";
+import { withStyles } from "decorators/withStyles";
 import React from "react";
-
-import styles from "./details-block-title-box.module.scss";
-
-const DetailsBlockTitleBox: React.FC<Props> = ({ children }) => {
-  return <div className={styles["details-block-title-box"]}>{children}</div>;
-};
+import { css } from "styled-components";
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {}
 
-export default DetailsBlockTitleBox;
+const dynamicStyles = css`
+  ${detailsBlockHorizontalPaddings}
+`;
+
+const DetailsBlockTitleBox: React.FC<Props> = ({ children, className }) => {
+  return <div className={className}>{children}</div>;
+};
+
+export default withStyles({ dynamicStyles })(DetailsBlockTitleBox);
