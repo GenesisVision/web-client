@@ -1,3 +1,4 @@
+export const $mainColor = "#fff";
 export const $iconColor = "#d8d8d8";
 export const $popoverBackground = "#273642";
 
