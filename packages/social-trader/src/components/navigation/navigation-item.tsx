@@ -45,16 +45,16 @@ const dynamicStyles = css`
   }
   ${mediaBreakpointLandscapeTablet(
     `padding: 0;
-      margin-right: ${$paddingXsmall};`
+      margin-right: ${$paddingXsmall}px;`
   )}
   ${mediaBreakpointDesktop(
     `padding: 0;
-      margin-right: ${$paddingBig};`
+      margin-right: ${$paddingBig}px;`
   )}
   ${mediaBreakpointLargeDesktop(
     `margin-right: 70px;
     &:first-child {
-        margin-right: ${$paddingBig};
+        margin-right: ${$paddingBig}px;
     }`
   )}
 `;
