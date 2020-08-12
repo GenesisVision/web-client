@@ -1,13 +1,26 @@
-import clsx from "clsx";
-import HeaderIcon from "components/header/header-icon";
+import {
+  mediaBreakpointDesktop,
+  mediaBreakpointLandscapeTablet,
+  mediaBreakpointLargeDesktop
+} from "components/gv-styles/gv-media";
+import {
+  $paddingBig,
+  $paddingSmall,
+  $paddingXsmall
+} from "components/gv-styles/gv-sizes";
 import Link, { ToType } from "components/link/link";
-import { useRouter } from "next/router";
+import NavigationIconWithName from "components/navigation/navigation-icon-with-name";
+import { withStyles } from "decorators/withStyles";
+import { WithRouterProps } from "next/dist/client/with-router";
+import { withRouter } from "next/router";
 import React from "react";
+import { css } from "styled-components";
 
 import { normalizeLinkFrom } from "../link/link.helper";
-import styles from "./navigation.module.scss";
 
-interface INavigationItemProps extends React.HTMLAttributes<HTMLAnchorElement> {
+interface INavigationItemProps
+  extends React.HTMLAttributes<HTMLAnchorElement>,
+    WithRouterProps {
   small?: boolean;
   href?: string | ToType;
   icon: JSX.Element;
@@ -15,47 +28,66 @@ interface INavigationItemProps extends React.HTMLAttributes<HTMLAnchorElement> {
   onClick?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 }
 
+const staticStyles = {
+  cursor: "pointer",
+  display: "flex",
+  "align-items": "center",
+  padding: `${$paddingSmall / 2}px ${$paddingSmall}px`,
+  "text-decoration": "none",
+  position: "relative"
+};
+
+const dynamicStyles = css`
+  opacity: ${({ router, href }: INavigationItemProps) =>
+    !!href && router.route.startsWith(normalizeLinkFrom(href)) ? 1 : 0.4};
+  &:hover {
+    opacity: 1;
+  }
+  ${mediaBreakpointLandscapeTablet(
+    `padding: 0;
+      margin-right: ${$paddingXsmall};`
+  )}
+  ${mediaBreakpointDesktop(
+    `padding: 0;
+      margin-right: ${$paddingBig};`
+  )}
+  ${mediaBreakpointLargeDesktop(
+    `margin-right: 70px;
+    &:first-child {
+        margin-right: ${$paddingBig};
+    }`
+  )}
+`;
+
 const _NavigationItem: React.FC<INavigationItemProps> = ({
+  className,
   small,
   onClick,
   href,
   icon,
   children
 }) => {
-  const { route } = useRouter();
   const renderIconWithName = () => (
-    <>
-      <HeaderIcon>
-        <div
-          className={clsx({
-            [styles["navigation__icon--medium"]]: !small,
-            [styles["navigation__icon--small"]]: small
-          })}
-        >
-          {<icon.type {...icon.props} />}
-        </div>
-      </HeaderIcon>
-      <span className={styles["navigation__link"]}>{children}</span>
-    </>
+    <NavigationIconWithName small={small} icon={icon}>
+      {children}
+    </NavigationIconWithName>
   );
   return (
     (!!href && (
-      <Link
-        to={href}
-        className={clsx(styles["navigation__item"], {
-          [styles["navigation__item--active"]]: route.startsWith(
-            normalizeLinkFrom(href)
-          )
-        })}
-      >
+      <Link to={href} className={className}>
         {renderIconWithName()}
       </Link>
     )) || (
-      <div className={styles["navigation__item"]} onClick={onClick}>
+      <div className={className} onClick={onClick}>
         {renderIconWithName()}
       </div>
     )
   );
 };
-const NavigationItem = React.memo(_NavigationItem);
+const NavigationItem = withRouter(
+  withStyles<INavigationItemProps>({
+    staticStyles,
+    dynamicStyles
+  })(React.memo(_NavigationItem))
+);
 export default NavigationItem;
