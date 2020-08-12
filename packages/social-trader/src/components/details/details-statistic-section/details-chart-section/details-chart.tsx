@@ -1,4 +1,4 @@
-import DetailsBlock from "components/details/details-block";
+import { DefaultBlock } from "components/default.block/default.block";
 import DetailsBlockTabs from "components/details/details-block-tabs";
 import DetailsBlockTitleBox from "components/details/details-block-title-box";
 import AbsoluteProfitChartSection, {
@@ -39,7 +39,12 @@ const _DetailsChart: React.FC<IDetailsChartProps> = ({
   const [t] = useTranslation();
   const { tab, setTab } = useTab<DETAILS_CHART_TABS>(DETAILS_CHART_TABS.PROFIT);
   return (
-    <DetailsBlock className={styles["details-chart"]}>
+    <DefaultBlock
+      horizontalOffsets={false}
+      size={"large"}
+      solid
+      className={styles["details-chart"]}
+    >
       <DetailsBlockTitleBox>
         <h3>{t("asset-details:chart.heading")}</h3>
       </DetailsBlockTitleBox>
@@ -89,7 +94,7 @@ const _DetailsChart: React.FC<IDetailsChartProps> = ({
           />
         )}
       </Row>
-    </DetailsBlock>
+    </DefaultBlock>
   );
 };
 

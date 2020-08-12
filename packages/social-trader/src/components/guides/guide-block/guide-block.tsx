@@ -1,5 +1,5 @@
 import { Button } from "components/button/button";
-import DetailsBlock from "components/details/details-block";
+import { DefaultBlock } from "components/default.block/default.block";
 import GuideBlockLink from "components/guides/guide-block/guide-block-link";
 import { Guide } from "gv-api-web";
 import React, { useCallback } from "react";
@@ -29,7 +29,7 @@ const _GuideBlock: React.FC<Props> = ({
   }, [guide]);
   const [t] = useTranslation();
   return (
-    <DetailsBlock className={styles["guide-block"]}>
+    <DefaultBlock size={"xlarge"} solid className={styles["guide-block"]}>
       <h3 className={styles["guide-block__subtitle"]}>{guide.name}</h3>
       <div className={styles["guide-block__content"]}>{guide.content}</div>
       <div className={styles["guide-block__controls"]}>
@@ -54,7 +54,7 @@ const _GuideBlock: React.FC<Props> = ({
           </GuideBlockLink>
         )}
       </div>
-    </DetailsBlock>
+    </DefaultBlock>
   );
 };
 

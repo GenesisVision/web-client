@@ -6,6 +6,14 @@
   box-sizing: border-box;
   width: 100%;
   color: $text-light-color;
+
+  margin-bottom: $padding-xsmall;
+  &:not(:last-child) {
+    @include media-breakpoint-landscape-phone() {
+      margin-right: $padding-xsmall;
+    }
+  }
+
   @include media-breakpoint-landscape-phone() {
     max-width: $details-statistic-section-width;
   }
