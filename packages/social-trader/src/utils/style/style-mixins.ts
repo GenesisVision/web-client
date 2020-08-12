@@ -1,6 +1,22 @@
-import { mediaBreakpointLandscapePhone } from "components/gv-styles/gv-media";
+import {
+  mediaBreakpointLandscapePhone,
+  mediaBreakpointLandscapeTablet
+} from "components/gv-styles/gv-media";
 import { $dividerPadding } from "components/gv-styles/gv-sizes";
+import { css } from "styled-components";
 import { IStyleValue } from "utils/style/style-generators";
+import { AnyObjectType } from "utils/types";
+
+export const cursorPointer = css`
+  cursor: ${({ onClick }: AnyObjectType) => (onClick ? "pointer" : "default")};
+`;
+
+export const hideOnLandscapeTablet = (display: string = "block") => {
+  return `
+    display: none;
+    ${mediaBreakpointLandscapeTablet(`display: ${display};`)}
+  `;
+};
 
 export const adaptivePadding = (direction: string, marginSize: number) => {
   return `
