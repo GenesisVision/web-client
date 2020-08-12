@@ -6,17 +6,15 @@ import * as React from "react";
 
 import styles from "./profile-widget.module.scss";
 
-export const ProfileWidgetLoader: React.FC<{ className?: string }> = React.memo(
-  ({ className }) => (
-    <Center className={styles["profile-widget__content"]}>
-      <RowItem size={"small"}>
-        <ProfileAvatar
-          className={styles["profile-widget__avatar"]}
-          url={""}
-          alt={""}
-        />
-      </RowItem>
-      <FilterArrowIcon />
-    </Center>
-  )
-);
+export const ProfileWidgetLoader: React.FC = React.memo(() => (
+  <Center className={styles["profile-widget__content"]}>
+    <RowItem size={"small"}>
+      <ProfileAvatar
+        className={styles["profile-widget__avatar"]}
+        url={""}
+        alt={""}
+      />
+    </RowItem>
+    <FilterArrowIcon />
+  </Center>
+));

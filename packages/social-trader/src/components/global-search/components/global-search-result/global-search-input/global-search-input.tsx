@@ -47,15 +47,11 @@ export const SearchInputField: React.FC<ISearchInputFieldProps> = ({
         />
       </RowItem>
       {canClose && (
-        <Button
-          className={styles["global-search-input__close-icon"]}
-          noPadding
-          variant="text"
-          color="secondary"
-          onClick={onCancel}
-        >
-          <CloseIcon />
-        </Button>
+        <div className={styles["global-search-input__close-icon"]}>
+          <Button noPadding variant="text" color="secondary" onClick={onCancel}>
+            <CloseIcon />
+          </Button>
+        </div>
       )}
     </Row>
   );

@@ -3,17 +3,32 @@ import { Center } from "components/center/center";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import { RowItem } from "components/row-item/row-item";
+import { withStyles } from "decorators/withStyles";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { LOGIN_ROUTE, SIGNUP_ROUTE } from "routes/app.routes";
+import { css } from "styled-components";
+import { hideOnLandscapeTablet } from "utils/style/style-mixins";
 
-import styles from "./header.module.scss";
+interface Props {
+  className?: string;
+  backPath: string;
+}
 
-const UnauthLinks: React.FC<Props> = ({ backPath }) => {
+const staticStyles = {
+  width: "100%",
+  "justify-content": "flex-end"
+};
+
+const dynamicStyles = css`
+  ${hideOnLandscapeTablet("flex")}
+`;
+
+const UnauthLinks: React.FC<Props> = ({ className, backPath }) => {
   const { linkCreator } = useToLink();
   const [t] = useTranslation();
   return (
-    <Center className={styles["header__buttons"]}>
+    <Center className={className}>
       <RowItem>
         <Link
           to={{
@@ -37,8 +52,4 @@ const UnauthLinks: React.FC<Props> = ({ backPath }) => {
   );
 };
 
-interface Props {
-  backPath: string;
-}
-
-export default UnauthLinks;
+export default withStyles<Props>({ staticStyles, dynamicStyles })(UnauthLinks);

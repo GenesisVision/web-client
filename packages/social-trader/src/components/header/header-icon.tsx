@@ -1,10 +1,15 @@
+import { $paddingSmall } from "components/gv-styles/gv-sizes";
 import { Row } from "components/row/row";
+import { withStyles } from "decorators/withStyles";
 import React from "react";
 
-import styles from "./header.module.scss";
+const staticStyles = {
+  "margin-right": `${$paddingSmall / 2}px`
+};
 
 const HeaderIcon: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
+  className,
   children
-}) => <Row className={styles["header__icon"]}>{children}</Row>;
+}) => <Row className={className}>{children}</Row>;
 
-export default HeaderIcon;
+export default withStyles({ staticStyles })(HeaderIcon);
