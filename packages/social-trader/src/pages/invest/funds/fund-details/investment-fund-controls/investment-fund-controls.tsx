@@ -1,6 +1,4 @@
-import DetailsBlock, {
-  DETAILS_BLOCK_TYPE
-} from "components/details/details-block";
+import { DefaultBlock } from "components/default.block/default.block";
 import { DetailsStatisticContainer } from "components/details/details-description-section/details-description/details-structure-blocks";
 import { Row } from "components/row/row";
 import { ASSET } from "constants/constants";
@@ -24,7 +22,7 @@ const _InvestmentFundControls: React.FC<Props> = ({
       fundDescription.personalDetails.canInvest
     : true;
   return (
-    <DetailsBlock type={DETAILS_BLOCK_TYPE.BORDERED}>
+    <DefaultBlock size={"large"} bordered>
       <InvestmentFundInfo fundDescription={fundDescription} />
       <Row>
         <DetailsStatisticContainer>
@@ -41,7 +39,7 @@ const _InvestmentFundControls: React.FC<Props> = ({
           />
         </DetailsStatisticContainer>
       </Row>
-    </DetailsBlock>
+    </DefaultBlock>
   );
 };
 

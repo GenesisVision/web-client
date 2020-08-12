@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import DetailsBlock from "components/details/details-block";
+import { DefaultTableBlock } from "components/default.block/default-table.block";
 import DetailsBlockTitleBox from "components/details/details-block-title-box";
 import Link from "components/link/link";
 import React from "react";
@@ -15,11 +15,12 @@ const DashboardBlock: React.FC<Props> = ({
   className
 }) => {
   return (
-    <DetailsBlock
-      landscapeTablet={landscapeTablet}
-      tablet={tablet}
+    <DefaultTableBlock
       table
-      className={clsx(styles["dashboard-block__container"], className)}
+      className={clsx(styles["dashboard-block"], className, {
+        [styles["dashboard-block--tablet"]]: tablet,
+        [styles["dashboard-block--landscape-tablet"]]: landscapeTablet
+      })}
     >
       {(label || all) && (
         <DetailsBlockTitleBox>
@@ -36,7 +37,7 @@ const DashboardBlock: React.FC<Props> = ({
         </DetailsBlockTitleBox>
       )}
       {children}
-    </DetailsBlock>
+    </DefaultTableBlock>
   );
 };
 

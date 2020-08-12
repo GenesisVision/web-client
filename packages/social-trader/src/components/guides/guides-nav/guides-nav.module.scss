@@ -21,8 +21,8 @@
       padding-bottom: 5px;
     }
   }
-
-  &__item:last-child {
+  &__item {
+    margin-bottom: $padding-xsmall;
     @include media-breakpoint-tablet() {
       margin-right: $padding-xsmall;
     }

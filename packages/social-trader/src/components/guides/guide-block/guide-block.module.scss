@@ -5,16 +5,23 @@
 
 .guide-block {
   width: 100%;
-  padding-left: $padding-small;
-  padding-right: $padding-small;
+  padding-left: $padding-small !important;
+  padding-right: $padding-small !important;
+
+  margin-bottom: $padding-xsmall;
+  &:not(:last-child) {
+    @include media-breakpoint-landscape-phone() {
+      margin-right: $padding-xsmall;
+    }
+  }
 
   @include media-breakpoint-tablet() {
     width: calc(100% - 250px);
   }
 
   @include media-breakpoint-landscape-tablet() {
-    padding-left: $padding-xxlarge;
-    padding-right: $padding-xxlarge;
+    padding-left: $padding-xxlarge !important;
+    padding-right: $padding-xxlarge !important;
     width: calc(100% - 347px);
   }
 

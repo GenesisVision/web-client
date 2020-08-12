@@ -1,5 +1,4 @@
 import { DefaultTableBlock } from "components/default.block/default-table.block";
-import DetailsBlock from "components/details/details-block";
 import FacetContainer, {
   FACET_ASSET
 } from "components/facet-container/facet-container";

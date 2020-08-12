@@ -1,4 +1,4 @@
-import DetailsBlock from "components/details/details-block";
+import { DefaultBlock } from "components/default.block/default.block";
 import GuidesList from "components/guides/guides-list/guides-list";
 import { GuidesCategory } from "gv-api-web";
 import React from "react";
@@ -13,10 +13,10 @@ interface Props {
 const _GuidesNav: React.FC<Props> = ({ navGuides, currentId }) => (
   <nav className={styles["guides-nav"]}>
     {navGuides.map(navGuide => (
-      <DetailsBlock
+      <DefaultBlock
+        solid
+        size={"xlarge"}
         className={styles["guides-nav__item"]}
-        horizontalPaddings
-        tablet
         key={navGuide.name}
       >
         <GuidesList
@@ -24,7 +24,7 @@ const _GuidesNav: React.FC<Props> = ({ navGuides, currentId }) => (
           guides={navGuide.guides}
           currentId={currentId}
         />
-      </DetailsBlock>
+      </DefaultBlock>
     ))}
   </nav>
 );

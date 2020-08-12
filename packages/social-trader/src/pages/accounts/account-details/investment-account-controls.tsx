@@ -1,7 +1,6 @@
-import DetailsBlock, {
-  DETAILS_BLOCK_TYPE
-} from "components/details/details-block";
+import { DefaultBlock } from "components/default.block/default.block";
 import { DetailsBlockRowItem } from "components/details/details-block-row-item.block";
+import { Row } from "components/row/row";
 import { WalletItemType } from "components/wallet-select/wallet-select";
 import {
   AmountWithCurrency,
@@ -30,30 +29,32 @@ const _InvestmentAccountControls: React.FC<Props> = ({
       ? transformAmountWithCurrencyToTransferItem(balances[0])
       : transferableItem;
   return (
-    <DetailsBlock type={DETAILS_BLOCK_TYPE.BORDERED} row>
-      <DetailsBlockRowItem>
-        <DepositTransferButton
-          fixedSelects={isExchangeAccount}
-          accountId={id}
-          outerCurrentItemContainerItems={currentItemContainerItems}
-          size={"xlarge"}
-          onApply={onApply}
-          currentItem={currentItem}
-          accountType={accountType}
-        />
-      </DetailsBlockRowItem>
-      <DetailsBlockRowItem>
-        <WithdrawTransferButton
-          fixedSelects={isExchangeAccount}
-          accountId={id}
-          outerCurrentItemContainerItems={currentItemContainerItems}
-          size={"xlarge"}
-          onApply={onApply}
-          currentItem={currentItem}
-          accountType={accountType}
-        />
-      </DetailsBlockRowItem>
-    </DetailsBlock>
+    <DefaultBlock size={"large"} bordered>
+      <Row>
+        <DetailsBlockRowItem>
+          <DepositTransferButton
+            fixedSelects={isExchangeAccount}
+            accountId={id}
+            outerCurrentItemContainerItems={currentItemContainerItems}
+            size={"xlarge"}
+            onApply={onApply}
+            currentItem={currentItem}
+            accountType={accountType}
+          />
+        </DetailsBlockRowItem>
+        <DetailsBlockRowItem>
+          <WithdrawTransferButton
+            fixedSelects={isExchangeAccount}
+            accountId={id}
+            outerCurrentItemContainerItems={currentItemContainerItems}
+            size={"xlarge"}
+            onApply={onApply}
+            currentItem={currentItem}
+            accountType={accountType}
+          />
+        </DetailsBlockRowItem>
+      </Row>
+    </DefaultBlock>
   );
 };
 

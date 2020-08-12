@@ -1,5 +1,5 @@
 import { ChartDefaultPeriod } from "components/chart/chart-period/chart-period.helpers";
-import DetailsBlock from "components/details/details-block";
+import { DefaultBlock } from "components/default.block/default.block";
 import styles from "components/details/details-description-section/details-statistic-section/details-statistic/details-statistics.module.scss";
 import {
   IStatisticData,
@@ -22,7 +22,7 @@ const _DetailsStatistics: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   return (
-    <DetailsBlock horizontalPaddings className={styles["details-statistics"]}>
+    <DefaultBlock size={"large"} solid className={styles["details-statistics"]}>
       <Row>
         <h3>{t("asset-details:statistics.heading")}</h3>
       </Row>
@@ -32,7 +32,7 @@ const _DetailsStatistics: React.FC<Props> = ({
           statisticData
         })}
       </Row>
-    </DetailsBlock>
+    </DefaultBlock>
   );
 };
 
