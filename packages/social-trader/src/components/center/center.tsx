@@ -16,7 +16,8 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 const dynamicStyles = css`
   display: flex;
   align-items: center;
-  flex-wrap: ${({ wrap }: Props) => (wrap ? "wrap" : "nowrap")} ${cursorPointer};
+  flex-wrap: ${({ wrap }: Props) => (wrap ? "wrap" : "nowrap")};
+  ${cursorPointer}
 `;
 
 const _Center: React.FC<Props> = ({
