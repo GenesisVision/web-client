@@ -1,11 +1,9 @@
-import clsx from "clsx";
 import ImageBase from "components/avatar/image-base";
 import { DefaultBlock } from "components/default.block/default.block";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import { Row } from "components/row/row";
 import { AssetFacet } from "gv-api-web";
-import useIsOpen from "hooks/is-open.hook";
 import * as React from "react";
 
 import styles from "./facet-cards.module.scss";
@@ -18,17 +16,12 @@ const _FacetCard: React.FC<Props> = ({
   fileRoute
 }) => {
   const { linkCreator } = useToLink();
-  const [isHovered, setHovered, setNotHovered] = useIsOpen();
   return (
     <DefaultBlock
       solid
       horizontalOffsets={false}
       verticalOffsets={false}
-      className={clsx(styles["facet"], {
-        [styles["facet--hovered"]]: isHovered
-      })}
-      onMouseEnter={setHovered}
-      onMouseLeave={setNotHovered}
+      className={styles["facet"]}
     >
       <Link to={linkCreator(composeFacetUrl(facet.url), fileRoute, title)}>
         <div className={styles["facet__facet-container"]}>
