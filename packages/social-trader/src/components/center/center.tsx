@@ -1,10 +1,7 @@
-import clsx from "clsx";
 import { withStyles } from "decorators/withStyles";
 import React from "react";
 import { css } from "styled-components";
 import { cursorPointer } from "utils/style/style-mixins";
-
-import styles from "./center.module.scss";
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   hide?: boolean;
@@ -17,7 +14,9 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const dynamicStyles = css`
-  ${cursorPointer}
+  display: flex;
+  align-items: center;
+  flex-wrap: ${({ wrap }: Props) => (wrap ? "wrap" : "nowrap")} ${cursorPointer};
 `;
 
 const _Center: React.FC<Props> = ({
@@ -28,13 +27,7 @@ const _Center: React.FC<Props> = ({
   ...otherProps
 }) => {
   return (
-    <div
-      {...otherProps}
-      className={clsx(className, {
-        [styles["center"]]: center,
-        [styles["center--wrap"]]: wrap
-      })}
-    >
+    <div {...otherProps} className={className}>
       {children}
     </div>
   );
