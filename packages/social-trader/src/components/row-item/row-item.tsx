@@ -1,34 +1,24 @@
-import clsx from "clsx";
+import {
+  RowItemDynamicStyles,
+  RowItemStaticStyles
+} from "components/row-item/row-item.style";
 import { IRowItemProps } from "components/row-item/row-item.types";
+import { withStyles } from "decorators/withStyles";
 import React from "react";
 
-import styles from "./row-item.module.scss";
-
-export const RowItem: React.FC<IRowItemProps> = ({
-  size = "middle",
-  hide,
-  wide,
+const _RowItem: React.FC<IRowItemProps> = ({
   onClick,
-  bottomOffset,
   className,
   children
 }) => {
   return (
-    <div
-      onClick={onClick}
-      className={clsx(styles["row-item"], className, {
-        [styles["row-item--pointer"]]: !!onClick,
-        [styles["row-item--hide"]]: hide,
-        [styles["row-item--wide"]]: wide,
-        [styles["row-item--bottom-offset"]]: bottomOffset,
-        [styles["row-item--xsmall"]]: size === "xsmall",
-        [styles["row-item--small"]]: size === "small",
-        [styles["row-item--middle"]]: size === "middle",
-        [styles["row-item--xlarge"]]: size === "xlarge",
-        [styles["row-item--large"]]: size === "large"
-      })}
-    >
+    <div onClick={onClick} className={className}>
       {children}
     </div>
   );
 };
+
+export const RowItem = withStyles({
+  dynamicStyles: RowItemDynamicStyles,
+  staticStyles: RowItemStaticStyles
+})(_RowItem);
