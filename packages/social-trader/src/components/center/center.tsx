@@ -15,19 +15,12 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 
 const dynamicStyles = css`
   display: flex;
-  align-items: ${({ center = true }: Props) =>
-    center ? "center" : "flex-start"};
+  ${({ center = true }: Props) => center && "align-items: center"};
   flex-wrap: ${({ wrap }: Props) => (wrap ? "wrap" : "nowrap")};
   ${cursorPointer}
 `;
 
-const _Center: React.FC<Props> = ({
-  wrap,
-  className,
-  children,
-  center = true,
-  ...otherProps
-}) => {
+const _Center: React.FC<Props> = ({ className, children, ...otherProps }) => {
   return (
     <div {...otherProps} className={className}>
       {children}
