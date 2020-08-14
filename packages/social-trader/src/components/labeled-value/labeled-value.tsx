@@ -1,18 +1,10 @@
-import clsx from "clsx";
+import { dynamicLabeledValueStyles } from "components/labeled-value/labeled-value.style";
+import { ILabeledValueProps } from "components/labeled-value/labeled-value.types";
 import { Row } from "components/row/row";
-import { Text, TextWeight } from "components/text/text";
+import { Text } from "components/text/text";
+import { withStyles } from "decorators/withStyles";
 import React from "react";
-import { Sizeable, SizesType } from "utils/types";
-
-import styles from "./labeled-value.module.scss";
-
-export type LabeledValueDirection = "column" | "row";
-
-export interface ILabeledValueProps extends Sizeable {
-  weight?: TextWeight;
-  direction?: LabeledValueDirection;
-  label: string | React.ReactNode | JSX.Element;
-}
+import { SizesType } from "utils/types";
 
 const getChildOffsetValue = (size: SizesType): SizesType => {
   switch (size) {
@@ -26,7 +18,8 @@ const getChildOffsetValue = (size: SizesType): SizesType => {
   }
 };
 
-export const LabeledValue: React.FC<ILabeledValueProps> = ({
+const _LabeledValue: React.FC<ILabeledValueProps> = ({
+  className,
   weight,
   direction = "column",
   label,
@@ -34,12 +27,7 @@ export const LabeledValue: React.FC<ILabeledValueProps> = ({
   children
 }) => {
   return (
-    <div
-      className={clsx(styles["labeled-value"], {
-        [styles["labeled-value--column"]]: direction === "column",
-        [styles["labeled-value--row"]]: direction === "row"
-      })}
-    >
+    <div className={className}>
       <Row onlyOffset>
         <Text wrap={false} muted size={size}>
           {label}
@@ -59,3 +47,7 @@ export const LabeledValue: React.FC<ILabeledValueProps> = ({
     </div>
   );
 };
+
+export const LabeledValue = withStyles<ILabeledValueProps>({
+  dynamicStyles: dynamicLabeledValueStyles
+})(_LabeledValue);
