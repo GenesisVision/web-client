@@ -41,9 +41,6 @@ const _FundAssetTooltipContainer: React.FC<Props> = ({
         removable={removable}
         lightTheme={lightTheme}
         removeHandle={removeHandle}
-        className={
-          hoveringAsset === asset.asset ? "fund-asset--hover" : undefined
-        }
       />
     </Tooltip>
   );

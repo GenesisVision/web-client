@@ -26,7 +26,6 @@ const _FundAsset: React.FC<Props> = ({
   removable,
   removeHandle,
   logoUrl,
-  className,
   lightTheme,
   asset: name,
   ...other
@@ -59,7 +58,6 @@ const _FundAsset: React.FC<Props> = ({
             className={clsx(
               styles["fund-asset"],
               styles["fund-asset--default"],
-              className,
               {
                 [styles["fund-asset--large"]]: type === FUND_ASSET_TYPE.LARGE,
                 [styles["fund-asset--light"]]: lightTheme
@@ -106,7 +104,6 @@ interface Props extends FundAssetInfo {
   removeHandle?: (
     currency: Currency
   ) => (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-  className?: string;
 }
 
 const FundAsset = React.memo(_FundAsset);
