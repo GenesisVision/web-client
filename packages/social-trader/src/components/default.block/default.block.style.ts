@@ -38,11 +38,8 @@ export const defaultBlockDynamicStyles = css`
   }};
   width: ${({ wide }: IDefaultBlockProps) => (wide ? "100%" : "auto")};
   border: ${({ bordered }: IDefaultBlockProps) =>
-    bordered ? `1px solid rgba(${$mainColor}, 0.06)` : "none"};
-  border-radius: ${({
-    roundedBorder = true,
-    size = "middle"
-  }: IDefaultBlockProps) => {
+    bordered ? `1px solid ${$mainColor}10` : "none"};
+  ${({ roundedBorder = true, size = "middle" }: IDefaultBlockProps) => {
     if (!roundedBorder) return 0;
     switch (size) {
       case "small":
