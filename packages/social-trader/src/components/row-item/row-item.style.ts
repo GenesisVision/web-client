@@ -24,7 +24,7 @@ const getOffset = (size: number, bottom: boolean) => {
 export const RowItemDynamicStyles = css`
   cursor: ${({ onClick }: IRowItemProps) => (onClick ? "pointer" : "default")};
   display: ${({ hide }: IRowItemProps) => (hide ? "none" : "block")};
-  width: ${({ wide }: IRowItemProps) => (wide ? "100%" : "auto")};
+  ${({ wide }: IRowItemProps) => (wide ? "width: 100%" : "")};
   ${({ size = "middle", bottomOffset }: IRowItemProps) => {
     switch (size) {
       case "xsmall":
