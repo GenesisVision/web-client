@@ -1,13 +1,13 @@
 import { Center } from "components/center/center";
 import GVProgramPeriod from "components/gv-program-period";
 import { RowItem } from "components/row-item/row-item";
+import { Text } from "components/text/text";
 import Tooltip from "components/tooltip/tooltip";
 import withLoader from "decorators/with-loader";
 import * as React from "react";
 import { convertDateToShortFormat, distanceDate } from "utils/dates";
 
 import ProgramPeriodTooltip from "../program-period-tooltip/program-period-tooltip";
-import styles from "./program-period-pie.module.scss";
 
 const _ProgramPeriodPie: React.FC<Props> = ({ start, end, className }) => {
   return (
@@ -21,8 +21,10 @@ const _ProgramPeriodPie: React.FC<Props> = ({ start, end, className }) => {
             variant="pie"
           />
         </RowItem>
-        <RowItem className={styles["program-period-pie__text"]}>
-          {convertDateToShortFormat(distanceDate(start, end))}
+        <RowItem>
+          <Text wrap={false}>
+            {convertDateToShortFormat(distanceDate(start, end))}
+          </Text>
         </RowItem>
       </Center>
     </Tooltip>
