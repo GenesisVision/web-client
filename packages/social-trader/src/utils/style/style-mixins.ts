@@ -2,10 +2,16 @@ import {
   mediaBreakpointLandscapePhone,
   mediaBreakpointLandscapeTablet
 } from "components/gv-styles/gv-media";
-import { $dividerPadding } from "components/gv-styles/gv-sizes";
+import { $dividerPadding, $dividerText } from "components/gv-styles/gv-sizes";
 import { css } from "styled-components";
 import { IStyleValue } from "utils/style/style-generators";
 import { AnyObjectType } from "utils/types";
+
+export const adaptiveBorderRadius = (size: number) => {
+  return `
+    border-radius: ${size / $dividerText}px;
+    ${mediaBreakpointLandscapePhone(`border-radius: ${size}px;`)}`;
+};
 
 export const cursorPointer = css`
   cursor: ${({ onClick }: AnyObjectType) => (onClick ? "pointer" : "default")};
@@ -50,18 +56,18 @@ export const fontSize = (value: IStyleValue | string) => {
   };
 };
 
-export const horizontalPaddings = (value: IStyleValue | string) => {
-  return {
-    "padding-left": value,
-    "padding-right": value
-  };
+export const horizontalPaddings = (value: number) => {
+  return `
+    ${adaptivePadding("left", value)}
+    ${adaptivePadding("right", value)}
+  `;
 };
 
-export const verticalPaddings = (value: IStyleValue | string) => {
-  return {
-    "padding-left": value,
-    "padding-right": value
-  };
+export const verticalPaddings = (value: number) => {
+  return `
+    ${adaptivePadding("top", value)}
+    ${adaptivePadding("bottom", value)}
+  `;
 };
 
 export const getBoxShadowValue = (color: string) => {
