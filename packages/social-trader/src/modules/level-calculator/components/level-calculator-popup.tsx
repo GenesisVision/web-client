@@ -118,15 +118,16 @@ const _LevelCalculatorPopup: React.FC<Props> = ({
               </span>
             </Button>
           </RowItem>
-          <Button
-            className={styles["level-calculator-popup__close-button"]}
-            noPadding
-            variant="text"
-            color="secondary"
-            onClick={onClose}
-          >
-            <CloseIcon />
-          </Button>
+          <div className={styles["level-calculator-popup__close-button"]}>
+            <Button
+              noPadding
+              variant="text"
+              color="secondary"
+              onClick={onClose}
+            >
+              <CloseIcon />
+            </Button>
+          </div>
         </Center>
       </Center>
 
