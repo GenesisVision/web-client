@@ -50,10 +50,11 @@ export const height = (value: IStyleValue | string) => {
   };
 };
 
-export const fontSize = (value: IStyleValue | string) => {
-  return {
-    "font-size": value
-  };
+export const fontSize = (value: number) => {
+  return `
+    font-size: ${value / $dividerText}px;
+    ${mediaBreakpointLandscapePhone(`font-size: ${value}px;`)}
+  `;
 };
 
 export const horizontalPaddings = (value: number) => {
