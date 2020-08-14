@@ -45,7 +45,7 @@ const PageContent: React.FC = ({ children }) => {
   );
 };
 
-const _AppLayout: ComponentType = ({ children }) => {
+const AppLayout: ComponentType = ({ children }) => {
   return (
     <GlobalSearchContextProvider>
       <AppWrapper>
@@ -64,5 +64,4 @@ const _AppLayout: ComponentType = ({ children }) => {
   );
 };
 
-const AppLayout = React.memo(_AppLayout);
 export default AppLayout;
