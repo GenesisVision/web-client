@@ -1,4 +1,5 @@
-export const $mainColor = "#fff";
+export const $yellow = "#ecdf75";
+export const $mainColor = "#ffffff";
 export const $iconColor = "#d8d8d8";
 export const $popoverBackground = "#273642";
 
