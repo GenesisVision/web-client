@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import GVProgramPeriod from "components/gv-program-period";
+import { $mainColor } from "components/gv-styles/gv-colors/gv-colors";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -45,7 +46,7 @@ const _CalculatorLevelLine: React.FC<Props> = ({
         <span className={styles["calculator-level-line__value"]}>{level}</span>
       </div>
       <GVProgramPeriod
-        className={styles["calculator-level-line__substrate"]}
+        bgColor={`${$mainColor}10`}
         start={start}
         end={end}
         value={value}
