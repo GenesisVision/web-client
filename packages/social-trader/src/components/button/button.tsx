@@ -61,8 +61,8 @@ const _Button: React.FC<IButtonProps> = ({
   );
 };
 
-export const Button = React.memo(
-  withStyles({
+export const Button = React.memo<IButtonProps>(
+  withStyles<IButtonProps>({
     staticStyles: ButtonStyles,
     dynamicStyles: ButtonDynamicStyles
   })(_Button)
