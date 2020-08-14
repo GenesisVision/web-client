@@ -14,7 +14,7 @@ export const adaptiveBorderRadius = (size: number) => {
 };
 
 export const cursorPointer = css`
-  cursor: ${({ onClick }: AnyObjectType) => (onClick ? "pointer" : "default")};
+  ${({ onClick }: AnyObjectType) => onClick && "cursor: pointer"};
 `;
 
 export const hideOnLandscapeTablet = (display: string = "block") => {

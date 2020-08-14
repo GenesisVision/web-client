@@ -7,7 +7,7 @@ import {
 } from "components/gv-styles/gv-sizes";
 import { IRowItemProps } from "components/row-item/row-item.types";
 import { css } from "styled-components";
-import { adaptiveMargin } from "utils/style/style-mixins";
+import { adaptiveMargin, cursorPointer } from "utils/style/style-mixins";
 
 export const RowItemStaticStyles = {
   "box-sizing": "border-box"
@@ -22,7 +22,7 @@ const getOffset = (size: number, bottom: boolean) => {
 };
 
 export const RowItemDynamicStyles = css`
-  cursor: ${({ onClick }: IRowItemProps) => (onClick ? "pointer" : "default")};
+  ${cursorPointer}
   display: ${({ hide }: IRowItemProps) => (hide ? "none" : "block")};
   ${({ wide }: IRowItemProps) => (wide ? "width: 100%" : "")};
   ${({ size = "middle", bottomOffset }: IRowItemProps) => {
