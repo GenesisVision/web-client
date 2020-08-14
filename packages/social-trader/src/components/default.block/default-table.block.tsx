@@ -1,6 +1,7 @@
+import { IDefaultBlockProps } from "components/default.block/default.block.types";
 import React from "react";
 
-import { DefaultBlock, IDefaultBlockProps } from "./default.block";
+import { DefaultBlock } from "./default.block";
 
 export const DefaultTableBlock: React.FC<IDefaultBlockProps> = props => {
   return (
