@@ -13,7 +13,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { managerToPathCreator } from "routes/manager.routes";
-import { distanceDate } from "utils/dates";
+import { humanizeDate } from "utils/dates";
 import { formatCurrencyValue } from "utils/formatter";
 
 import styles from "./users-table-row.module.scss";
@@ -76,7 +76,9 @@ export const UsersTableRow: React.FC<{ user: UserDetailsList }> = ({
           "0"
         )}
       </TableCell>
-      <TableCell>{distanceDate(regDate)}</TableCell>
+      <TableCell>
+        {humanizeDate(regDate, new Date(), { unitsCount: 1 })}
+      </TableCell>
       <TableCell>
         {assetsUnderManagement === null ? (
           renderHidden()
