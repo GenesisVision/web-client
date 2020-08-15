@@ -82,7 +82,14 @@ class _CalculatorSlider extends React.PureComponent<Props> {
               </RowItem>
             )}
           </Center>
-          <div className={styles["calculator-slider__value"]}>
+          <div
+            className={clsx(
+              styles["calculator-slider__value"],
+              styles["calculator-slider__editable-value"],
+              styles["calculator-slider__editable-value-wrapper"],
+              valueClassName
+            )}
+          >
             {editableValue ? (
               <GVTextField
                 name={name}
@@ -91,14 +98,8 @@ class _CalculatorSlider extends React.PureComponent<Props> {
                 onChange={this.handleValueChange}
                 adornment={valueAdornment}
                 adornmentPosition="end"
-                wrapperClassName={clsx(
-                  styles["calculator-slider__editable-value-wrapper"],
-                  valueClassName
-                )}
-                className={styles["calculator-slider__editable-value"]}
-                inputClassName={
-                  styles["calculator-slider__editable-value-input"]
-                }
+                size={"small"}
+                align={"right"}
                 InputComponent={NumberFormat}
               />
             ) : (
