@@ -1,6 +1,5 @@
-import GVProgramAvatar, {
-  GVProgramAvatarProps
-} from "components/gv-program-avatar";
+import GVProgramAvatar from "components/gv-program-avatar";
+import { GVProgramAvatarProps } from "components/gv-program-avatar/gv-program-avatar.styles";
 import { ILevelTooltip } from "components/level-tooltip/level-tooltip";
 import Popover, {
   HORIZONTAL_POPOVER_POS,

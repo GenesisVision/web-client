@@ -2,7 +2,8 @@ import {
   CurrencySourceSelectItemsType,
   getCurrencySourceSelectItems
 } from "components/currency-source-select/currency-source-select-items";
-import GVTextField, { GVTextFieldProps } from "components/gv-text-field";
+import GVTextField from "components/gv-text-field";
+import { GVTextFieldProps } from "components/gv-text-field/gv-text-field.style";
 import Select from "components/select/select";
 import React from "react";
 
