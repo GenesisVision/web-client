@@ -1,4 +1,4 @@
-import { GVTextFieldProps } from "components/gv-text-field";
+import { GVTextFieldProps } from "components/gv-text-field/gv-text-field.style";
 import { SimpleField } from "components/simple-fields/simple-field";
 import React from "react";
 
