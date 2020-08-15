@@ -65,21 +65,20 @@ const _SocialLinkForm: React.FC<Props> = ({
       </RowItem>
       <RowItem>
         <HookForm resetOnSuccess form={form} onSubmit={handleSubmit}>
-          <GVHookFormField
-            component={SimpleTextField}
-            wrapperClassName={styles["social-input__wrapper"]}
-            adornmentClassName={styles["social-input__adornment"]}
-            labelClassName={styles["social-input__label"]}
-            type="text"
-            name={FORM_FIELD.value}
-            label={name}
-            adornment={value || isButtonsVisible ? url : ""}
-            adornmentPosition="start"
-            onClick={() => {
-              if (!isButtonsVisible) setButtonsVisible();
-            }}
-            autoComplete="off"
-          />
+          <div className={styles["social-input__wrapper"]}>
+            <GVHookFormField
+              component={SimpleTextField}
+              type="text"
+              name={FORM_FIELD.value}
+              label={name}
+              adornment={value || isButtonsVisible ? url : ""}
+              adornmentPosition="start"
+              onClick={() => {
+                if (!isButtonsVisible) setButtonsVisible();
+              }}
+              autoComplete="off"
+            />
+          </div>
           {isButtonsVisible && (
             <Row>
               <RowItem>
