@@ -29,7 +29,6 @@ const dynamicStyles = css`
 interface Props {
   className?: string;
   descriptionTitle?: string;
-  detailsType: DETAILS_TYPE;
   personalDetails?: PersonalDetailsType;
   isOwnAsset?: boolean;
   id: string;
@@ -51,7 +50,6 @@ interface Props {
 const _DetailsDescription: React.FC<Props> = ({
   className,
   descriptionTitle,
-  detailsType,
   personalDetails,
   isOwnAsset,
   id,
@@ -72,7 +70,6 @@ const _DetailsDescription: React.FC<Props> = ({
   return (
     <div className={className}>
       <DetailsLimitsAvatar
-        detailsType={detailsType}
         logo={logo}
         level={programDetails ? programDetails.level : undefined}
         levelProgress={

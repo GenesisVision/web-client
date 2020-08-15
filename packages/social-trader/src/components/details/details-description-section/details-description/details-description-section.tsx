@@ -14,7 +14,6 @@ import styles from "./details-description.module.scss";
 
 interface Props {
   descriptionTitle?: string;
-  detailsType: DETAILS_TYPE;
   id: string;
   logo: string;
   title: string;
@@ -58,10 +57,9 @@ const _DetailsDescriptionSection: React.FC<Props> = ({
   Controls
 }) => {
   return (
-    <div className={styles["details-description__section"]}>
+    <div>
       <DetailsDescription
         descriptionTitle={descriptionTitle}
-        detailsType={detailsType}
         personalDetails={personalDetails}
         isOwnAsset={isOwnAsset}
         id={id}
