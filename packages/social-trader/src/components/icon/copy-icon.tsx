@@ -1,8 +1,9 @@
 import { Icon, IIconProps } from "components/icon/icon";
+import { withStyles } from "decorators/withStyles";
 import * as React from "react";
 
 const CopyIcon: React.FC<IIconProps> = props => (
-  <Icon type="copy" {...props}>
+  <Icon {...props}>
     <svg
       width="15"
       height="16"
@@ -28,4 +29,4 @@ const CopyIcon: React.FC<IIconProps> = props => (
   </Icon>
 );
 
-export default CopyIcon;
+export default withStyles({ staticStyles: { width: "14px" } })(CopyIcon);

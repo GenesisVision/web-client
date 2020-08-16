@@ -1,8 +1,11 @@
+import { $primaryColor } from "components/gv-styles/gv-colors/gv-colors";
 import { Icon, IIconProps } from "components/icon/icon";
+import { withStyles } from "decorators/withStyles";
 import * as React from "react";
+import { css } from "styled-components";
 
-export const CalculatorIcon: React.FC<IIconProps> = props => (
-  <Icon type="calculator" {...props}>
+const _CalculatorIcon: React.FC<IIconProps> = props => (
+  <Icon {...props}>
     <svg xmlns="http://www.w3.org/2000/svg" width="21" height="26">
       <path
         fill="#00BDAF"
@@ -12,3 +15,15 @@ export const CalculatorIcon: React.FC<IIconProps> = props => (
     </svg>
   </Icon>
 );
+
+export const CalculatorIcon = withStyles({
+  dynamicStyles: css`
+    width: 21px;
+    height: 26px;
+    &:hover {
+      svg [fill] {
+        fill: ${$primaryColor};
+      }
+    }
+  `
+})(_CalculatorIcon);

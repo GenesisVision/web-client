@@ -1,8 +1,9 @@
 import { Icon, IIconProps } from "components/icon/icon";
+import { withStyles } from "decorators/withStyles";
 import * as React from "react";
 
-export const RingIcon: React.FC<IIconProps> = props => (
-  <Icon type={"ring"} {...props}>
+const _RingIcon: React.FC<IIconProps> = props => (
+  <Icon {...props}>
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="27"
@@ -17,4 +18,8 @@ export const RingIcon: React.FC<IIconProps> = props => (
       />
     </svg>
   </Icon>
+);
+
+export const RingIcon = withStyles({ staticStyles: { width: "16px" } })(
+  _RingIcon
 );

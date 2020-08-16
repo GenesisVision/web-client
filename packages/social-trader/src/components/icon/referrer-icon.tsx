@@ -1,8 +1,9 @@
 import { Icon, IIconProps } from "components/icon/icon";
+import { withStyles } from "decorators/withStyles";
 import * as React from "react";
 
-export const ReferrerIcon: React.FC<IIconProps> = props => (
-  <Icon type={"referrer"} {...props}>
+const _ReferrerIcon: React.FC<IIconProps> = props => (
+  <Icon {...props}>
     <svg
       width="20"
       height="20"
@@ -25,3 +26,7 @@ export const ReferrerIcon: React.FC<IIconProps> = props => (
     </svg>
   </Icon>
 );
+
+export const ReferrerIcon = withStyles({
+  staticStyles: { height: "13px", width: "13px" }
+})(_ReferrerIcon);

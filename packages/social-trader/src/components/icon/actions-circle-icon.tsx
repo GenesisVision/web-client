@@ -1,9 +1,15 @@
+import {
+  $labelColor,
+  $panelBackgroundColor
+} from "components/gv-styles/gv-colors/gv-colors";
 import { Icon, IIconProps } from "components/icon/icon";
 import withLoader from "decorators/with-loader";
+import { withStyles } from "decorators/withStyles";
 import * as React from "react";
+import { css } from "styled-components";
 
 export const _ActionsCircleIcon: React.FC<IIconProps> = props => (
-  <Icon type={"actions-circle"} {...props}>
+  <Icon {...props}>
     <svg
       width="31"
       height="31"
@@ -43,4 +49,17 @@ export const _ActionsCircleIcon: React.FC<IIconProps> = props => (
   </Icon>
 );
 
-export const ActionsCircleIcon = withLoader(React.memo(_ActionsCircleIcon));
+export const ActionsCircleIcon = withLoader(
+  withStyles<IIconProps>({
+    dynamicStyles: css`
+      circle[fill] {
+        fill: ${({ primary }: IIconProps) =>
+          primary ? "white" : `${$labelColor}70`};
+      }
+      g[fill] {
+        fill: ${({ primary }: IIconProps) =>
+          primary ? $panelBackgroundColor : "white"};
+      }
+    `
+  })(React.memo(_ActionsCircleIcon))
+);

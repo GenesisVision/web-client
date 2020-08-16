@@ -1,8 +1,10 @@
 import { Icon, IIconProps } from "components/icon/icon";
+import { withStyles } from "decorators/withStyles";
 import * as React from "react";
+import { css } from "styled-components";
 
-export const WalletIcon: React.FC<IIconProps> = props => (
-  <Icon type={"wallet"} {...props}>
+const _WalletIcon: React.FC<IIconProps> = props => (
+  <Icon {...props}>
     <svg width="18px" height="16px" viewBox="0 0 18 16" version="1.1">
       <g
         stroke="none"
@@ -32,3 +34,11 @@ export const WalletIcon: React.FC<IIconProps> = props => (
     </svg>
   </Icon>
 );
+
+export const WalletIcon = withStyles({
+  dynamicStyles: css`
+    path {
+      fill: transparent;
+    }
+  `
+})(_WalletIcon);
