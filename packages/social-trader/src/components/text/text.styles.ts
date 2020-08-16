@@ -17,10 +17,11 @@ import { css } from "styled-components";
 import { fontSize } from "utils/style/style-mixins";
 
 export const dynamicTextStyles = css`
-  ${({ wrap = true, preWrap }: ITextProps) =>
-    wrap && !preWrap && "white-space: normal;"};
-  white-space: ${({ preWrap }: ITextProps) =>
-    preWrap ? "pre-wrap" : "nowrap"};
+  white-space: ${({ wrap = true, preWrap }: ITextProps) => {
+    if (wrap && !preWrap) return "normal";
+    if (preWrap) return "pre-wrap";
+    return "nowrap";
+  }};
   font-weight: ${({ weight = "normal" }: ITextProps) => {
     switch (weight) {
       case "thin":
