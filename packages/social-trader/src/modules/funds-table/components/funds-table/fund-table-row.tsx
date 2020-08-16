@@ -3,6 +3,7 @@ import AssetAvatarWithName from "components/avatar/asset-avatar/asset-avatar-wit
 import FavoriteIcon from "components/favorite-asset/favorite-icon/favorite-icon";
 import { FUND_ASSET_TYPE } from "components/fund-asset/fund-asset";
 import FundAssetContainer from "components/fund-asset/fund-asset-container";
+import { mediaBreakpointLandscapePhone } from "components/gv-styles/gv-media";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import Profitability from "components/profitability/profitability";
@@ -19,11 +20,21 @@ import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import { FUND_DETAILS_FOLDER_ROUTE } from "routes/funds.routes";
+import styled from "styled-components";
 import { composeFundsDetailsUrl } from "utils/compose-url";
 import { distanceDate } from "utils/dates";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
 
 import styles from "./funds-table.module.scss";
+
+const FavoriteIconContainer = styled.div`
+  width: 20px;
+  height: 19px;
+  ${mediaBreakpointLandscapePhone(`
+    width: 28px;
+    height: 27px;
+  `)}
+`;
 
 const _FundsTableRow: React.FC<Props> = ({ fund }) => {
   const [fundState, setFundState] = useState(fund);
@@ -109,15 +120,17 @@ const _FundsTableRow: React.FC<Props> = ({ fund }) => {
       </TableCell>
       {isAuthenticated && fund.personalDetails && (
         <TableCell className={styles["funds-table__cell"]}>
-          <ToggleAssetFavoriteButton
-            asset={fundState}
-            updateRow={handleUpdateRow}
-            assetType={ASSET.FUND}
-            id={fund.id}
-            isFavorite={fundState.personalDetails.isFavorite}
-          >
-            <FavoriteIcon selected={fundState.personalDetails.isFavorite} />
-          </ToggleAssetFavoriteButton>
+          <FavoriteIconContainer>
+            <ToggleAssetFavoriteButton
+              asset={fundState}
+              updateRow={handleUpdateRow}
+              assetType={ASSET.FUND}
+              id={fund.id}
+              isFavorite={fundState.personalDetails.isFavorite}
+            >
+              <FavoriteIcon selected={fundState.personalDetails.isFavorite} />
+            </ToggleAssetFavoriteButton>
+          </FavoriteIconContainer>
         </TableCell>
       )}
     </TableRow>

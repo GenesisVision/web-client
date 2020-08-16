@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import AssetAvatarWithName from "components/avatar/asset-avatar/asset-avatar-with-name";
+import { mediaBreakpointLandscapePhone } from "components/gv-styles/gv-media";
 import LevelTooltip from "components/level-tooltip/level-tooltip";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
@@ -19,11 +20,21 @@ import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import { PROGRAM_DETAILS_FOLDER_ROUTE } from "routes/programs.routes";
+import styled from "styled-components";
 import { composeProgramDetailsUrl } from "utils/compose-url";
 import { distanceDate } from "utils/dates";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
 
 import styles from "./programs-table.module.scss";
+
+const FavoriteIcon = styled.div`
+  width: 20px;
+  height: 19px;
+  ${mediaBreakpointLandscapePhone(`
+    width: 28px;
+    height: 27px;
+  `)}
+`;
 
 const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
   program
@@ -54,7 +65,7 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
   const { currency, amount } = balance;
   return (
     <TableRow>
-      <TableCell height={"small"} className={styles["programs-table__cell"]}>
+      <TableCell height={"small"}>
         <Link to={programLinkProps}>
           <AssetAvatarWithName
             url={logoUrl}
@@ -76,26 +87,18 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
           />
         </Link>
       </TableCell>
-      <TableCell className={styles["programs-table__cell"]}>
+      <TableCell>
         <NumberFormat
           value={formatCurrencyValue(amount, currency)}
           suffix={` ${currency}`}
           displayType="text"
         />
       </TableCell>
-      <TableCell
-        className={clsx(
-          styles["programs-table__cell"],
-          styles["programs-table__cell--investors"]
-        )}
-      >
+      <TableCell className={clsx(styles["programs-table__cell--investors"])}>
         {investorsCount}
       </TableCell>
       <TableCell
-        className={clsx(
-          styles["programs-table__cell"],
-          styles["programs-table__cell--available-to-invest"]
-        )}
+        className={clsx(styles["programs-table__cell--available-to-invest"])}
       >
         <NumberFormat
           value={formatCurrencyValue(availableToInvest, currency)}
@@ -103,12 +106,7 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
           displayType="text"
         />
       </TableCell>
-      <TableCell
-        className={clsx(
-          styles["programs-table__cell"],
-          styles["programs-table__cell--period"]
-        )}
-      >
+      <TableCell className={clsx(styles["programs-table__cell--period"])}>
         {periodStarts && (
           <ProgramPeriodPie
             condition={status !== STATUS.CLOSED}
@@ -118,32 +116,17 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
           />
         )}
       </TableCell>
-      <TableCell
-        className={clsx(
-          styles["programs-table__cell"],
-          styles["programs-table__cell--trades"]
-        )}
-      >
+      <TableCell className={clsx(styles["programs-table__cell--trades"])}>
         {distanceDate(program.creationDate)}
       </TableCell>
-      <TableCell
-        className={clsx(
-          styles["programs-table__cell"],
-          styles["programs-table__cell--drawdown"]
-        )}
-      >
+      <TableCell className={clsx(styles["programs-table__cell--drawdown"])}>
         <NumberFormat
           value={formatValue(statistic.drawdown, 2)}
           suffix="%"
           displayType="text"
         />
       </TableCell>
-      <TableCell
-        className={clsx(
-          styles["programs-table__cell"],
-          styles["programs-table__cell--profit"]
-        )}
-      >
+      <TableCell className={clsx(styles["programs-table__cell--profit"])}>
         <Profitability
           value={formatValue(statistic.profit, 2)} /*statistic.profitPercent*/
           prefix={PROFITABILITY_PREFIX.SIGN}
@@ -158,21 +141,15 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
       </TableCell>
       <TableCell
         height={"small"}
-        className={clsx(
-          styles["programs-table__cell"],
-          styles["programs-table__cell--chart"]
-        )}
+        className={clsx(styles["programs-table__cell--chart"])}
       >
         <ProgramSimpleChart data={statistic?.chart} />
       </TableCell>
       {isAuthenticated && personalDetails && (
-        <TableCell
-          className={clsx(
-            styles["programs-table__cell"],
-            styles["programs-table__cell--favorite"]
-          )}
-        >
-          <IconFavoriteButton asset={program} assetType={ASSET.PROGRAM} />
+        <TableCell>
+          <FavoriteIcon>
+            <IconFavoriteButton asset={program} assetType={ASSET.PROGRAM} />
+          </FavoriteIcon>
         </TableCell>
       )}
     </TableRow>

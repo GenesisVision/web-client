@@ -58,7 +58,7 @@ const _ProgramsRating: React.FC = () => {
               noPadding
               variant={"text"}
             >
-              <LevelIcon levelInfo={lvl} current={lvl.level === level} />
+              <LevelIcon level={lvl.level} current={lvl.level === level} />
             </Button>
           </RowItem>
         ))}

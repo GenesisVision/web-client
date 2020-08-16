@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import AssetAvatarWithName from "components/avatar/asset-avatar/asset-avatar-with-name";
 import FavoriteIcon from "components/favorite-asset/favorite-icon/favorite-icon";
+import { mediaBreakpointLandscapePhone } from "components/gv-styles/gv-media";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import Profitability from "components/profitability/profitability";
@@ -19,9 +20,19 @@ import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import { FOLLOW_DETAILS_FOLDER_ROUTE } from "routes/invest.routes";
+import styled from "styled-components";
 import { composeFollowDetailsUrl } from "utils/compose-url";
 import { distanceDate } from "utils/dates";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
+
+const FavoriteIconContainer = styled.div`
+  width: 20px;
+  height: 19px;
+  ${mediaBreakpointLandscapePhone(`
+    width: 28px;
+    height: 27px;
+  `)}
+`;
 
 const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
   follow
@@ -119,15 +130,17 @@ const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
       </TableCell>
       {isAuthenticated && personalDetails && (
         <TableCell className={styles["programs-table__cell"]}>
-          <ToggleAssetFavoriteButton
-            asset={followState}
-            updateRow={handleUpdateRow}
-            assetType={ASSET.FOLLOW}
-            id={id}
-            isFavorite={followState.personalDetails.isFavorite}
-          >
-            <FavoriteIcon selected={followState.personalDetails.isFavorite} />
-          </ToggleAssetFavoriteButton>
+          <FavoriteIconContainer>
+            <ToggleAssetFavoriteButton
+              asset={followState}
+              updateRow={handleUpdateRow}
+              assetType={ASSET.FOLLOW}
+              id={id}
+              isFavorite={followState.personalDetails.isFavorite}
+            >
+              <FavoriteIcon selected={followState.personalDetails.isFavorite} />
+            </ToggleAssetFavoriteButton>
+          </FavoriteIconContainer>
         </TableCell>
       )}
     </TableRow>
