@@ -37,17 +37,25 @@ export const adaptiveMargin = (direction: string, marginSize: number) => {
     ${mediaBreakpointLandscapePhone(`margin-${direction}: ${marginSize}px;`)}
   `;
 };
-
-export const width = (value: IStyleValue | string) => {
-  return {
-    width: value
-  };
+export const right = (value: number) => {
+  return `
+    right: ${value / $dividerText}px;
+    ${mediaBreakpointLandscapePhone(`right: ${value}px;`)}
+  `;
 };
 
-export const height = (value: IStyleValue | string) => {
-  return {
-    height: value
-  };
+export const width = (value: number) => {
+  return `
+    width: ${value / $dividerText}px;
+    ${mediaBreakpointLandscapePhone(`width: ${value}px;`)}
+  `;
+};
+
+export const height = (value: number) => {
+  return `
+    height: ${value / $dividerText}px;
+    ${mediaBreakpointLandscapePhone(`height: ${value}px;`)}
+  `;
 };
 
 export const fontSize = (value: number) => {
