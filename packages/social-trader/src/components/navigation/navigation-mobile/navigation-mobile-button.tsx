@@ -2,6 +2,7 @@ import { mediaBreakpointLandscapeTablet } from "components/gv-styles/gv-media";
 import { $paddingMedium, $walletItemSize } from "components/gv-styles/gv-sizes";
 import { $boxShadow4 } from "components/gv-styles/gv-style-constants";
 import { Icon } from "components/icon/icon";
+import { MenuIcon } from "components/icon/menu-icon";
 import NavigationMobileContainer from "components/navigation/navigation-mobile/navigation-mobile.container";
 import { withStyles } from "decorators/withStyles";
 import { ProfileHeaderViewModel } from "gv-api-web";
@@ -54,7 +55,7 @@ const _NavigationMobileButton: React.FC<Props> = ({
   return (
     <>
       <div className={className} onClick={setOpen}>
-        <Icon type="menu" />
+        <MenuIcon />
       </div>
       <NavigationMobileContainer
         mobileMenuItems={mobileMenuItems}
