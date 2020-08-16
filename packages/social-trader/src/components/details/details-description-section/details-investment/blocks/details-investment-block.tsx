@@ -1,23 +1,16 @@
+import { $paddingSmall } from "components/gv-styles/gv-sizes";
 import React from "react";
+import styled from "styled-components";
+import { horizontalPaddings } from "utils/style/style-mixins";
 
-import styles from "./details-investment-block.module.scss";
+const Container = styled.div`
+  ${horizontalPaddings($paddingSmall)}
+`;
 
 const _DetailsInvestmentBlock: React.FC<React.HTMLAttributes<
   HTMLDivElement
 >> = ({ children }) => {
-  return (
-    <div className={styles["details-investment-container"]}>
-      <div
-        className={
-          styles[
-            "details-investment-block details-investment-block--investment"
-          ]
-        }
-      >
-        {children}
-      </div>
-    </div>
-  );
+  return <Container>{children}</Container>;
 };
 
 export const DetailsInvestmentBlock = React.memo(_DetailsInvestmentBlock);

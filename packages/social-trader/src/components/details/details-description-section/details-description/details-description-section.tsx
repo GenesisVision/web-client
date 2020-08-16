@@ -1,16 +1,18 @@
 import DetailsDescription from "components/details/details-description-section/details-description/details-description";
+import { $paddingControlsLeft } from "components/details/details-description-section/details-description/details-description.style";
+import { PersonalDetailsType } from "components/details/details.types";
 import {
-  DETAILS_TYPE,
-  PersonalDetailsType
-} from "components/details/details.types";
+  mediaBreakpointDesktop,
+  mediaBreakpointTablet
+} from "components/gv-styles/gv-media";
+import { $paddingXxsmall } from "components/gv-styles/gv-sizes";
 import { ToType } from "components/link/link";
 import { Row } from "components/row/row";
 import { ASSET } from "constants/constants";
 import { ProgramDetailsFull, SocialLinkViewModel } from "gv-api-web";
 import * as React from "react";
+import styled from "styled-components";
 import { CurrencyEnum } from "utils/types";
-
-import styles from "./details-description.module.scss";
 
 interface Props {
   descriptionTitle?: string;
@@ -34,9 +36,19 @@ interface Props {
   Controls?: React.ComponentType<any>;
 }
 
+const ControlsRow = styled(Row)`
+  ${mediaBreakpointDesktop(`
+      margin-left: ${-$paddingXxsmall / 2}px;
+      flex-wrap: nowrap;
+  `)}
+  ${mediaBreakpointTablet(`
+      margin-left: ${$paddingControlsLeft}px;
+      margin-right: 0;
+  `)}
+`;
+
 const _DetailsDescriptionSection: React.FC<Props> = ({
   descriptionTitle,
-  detailsType,
   personalDetails,
   isOwnAsset,
   id,
@@ -83,14 +95,9 @@ const _DetailsDescriptionSection: React.FC<Props> = ({
         </Row>
       )}
       {Controls && (
-        <Row
-          center={false}
-          size={"xlarge"}
-          wrap
-          className={styles["asset-details-description__controls"]}
-        >
+        <ControlsRow center={false} size={"xlarge"} wrap>
           <Controls />
-        </Row>
+        </ControlsRow>
       )}
     </div>
   );

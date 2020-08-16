@@ -1,5 +1,4 @@
 import DetailsAssetAvatar from "components/details/details-description-section/details-description/details-asset-avatar";
-import { DETAILS_TYPE } from "components/details/details.types";
 import { mediaBreakpointTablet } from "components/gv-styles/gv-media";
 import {
   $paddingXsmall,
@@ -11,7 +10,6 @@ import { width } from "utils/style/style-mixins";
 import { CurrencyEnum } from "utils/types";
 
 interface Props {
-  detailsType: DETAILS_TYPE;
   logo: string;
   title: string;
   color?: string;
