@@ -28,10 +28,6 @@ interface Props {
   onChange: HandlePeriodChangeType;
 }
 
-const Container = styled(Row)`
-  justify-content: space-between;
-`;
-
 const PeriodButton = styled(Button)<
   IButtonProps & {
     periodType: TChartPeriod;
@@ -57,38 +53,40 @@ const _ChartPeriod: React.FC<Props> = ({ period, onChange }) => {
     []
   );
   return (
-    <Container>
-      <Text muted>
-        <Row>
-          {ChartPeriodTypeValues.map(period => (
-            <RowItem>
-              <PeriodButton
-                period={period}
-                periodType={type}
-                testId={t(
-                  `asset-details:chart-period.${ChartPeriodType[period]}-short`
-                )}
-                noPadding
-                key={period}
-                onClick={handleChangePeriod(period)}
-                variant="text"
-                color="secondary"
-                disabled={type === period}
-              >
-                {t(
-                  `asset-details:chart-period.${ChartPeriodType[period]}-short`
-                )}
-              </PeriodButton>
-            </RowItem>
-          ))}
-        </Row>
-      </Text>
+    <Row>
+      <RowItem wide>
+        <Text muted>
+          <Row>
+            {ChartPeriodTypeValues.map(period => (
+              <RowItem>
+                <PeriodButton
+                  period={period}
+                  periodType={type}
+                  testId={t(
+                    `asset-details:chart-period.${ChartPeriodType[period]}-short`
+                  )}
+                  noPadding
+                  key={period}
+                  onClick={handleChangePeriod(period)}
+                  variant="text"
+                  color="secondary"
+                  disabled={type === period}
+                >
+                  {t(
+                    `asset-details:chart-period.${ChartPeriodType[period]}-short`
+                  )}
+                </PeriodButton>
+              </RowItem>
+            ))}
+          </Row>
+        </Text>
+      </RowItem>
       <Text muted weight={"bold"} wrap={false}>
         {type !== ChartPeriodType.all && (
           <ChartPeriodDateLabel start={start!} />
         )}
       </Text>
-    </Container>
+    </Row>
   );
 };
 
