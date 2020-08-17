@@ -83,7 +83,7 @@ const _ChartPeriod: React.FC<Props> = ({ period, onChange }) => {
           ))}
         </Row>
       </Text>
-      <Text muted weight={"bold"}>
+      <Text muted weight={"bold"} wrap={false}>
         {type !== ChartPeriodType.all && (
           <ChartPeriodDateLabel start={start!} />
         )}
