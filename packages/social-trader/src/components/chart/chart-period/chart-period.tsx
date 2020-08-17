@@ -1,11 +1,17 @@
-import clsx from "clsx";
 import { Button } from "components/button/button";
+import { IButtonProps } from "components/button/button.types";
+import {
+  $textAccentColor,
+  $textColor
+} from "components/gv-styles/gv-colors/gv-colors";
+import { $fontSizeParagraph } from "components/gv-styles/gv-sizes";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
 import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
+import styled from "styled-components";
 import { localizedDate } from "utils/dates";
 import { HandlePeriodChangeType } from "utils/types";
 
@@ -16,12 +22,29 @@ import {
   getPeriodStartDate,
   TChartPeriod
 } from "./chart-period.helpers";
-import styles from "./chart-period.module.scss";
 
 interface Props {
   period: ChartDefaultPeriod;
   onChange: HandlePeriodChangeType;
 }
+
+const Container = styled(Row)`
+  justify-content: space-between;
+`;
+
+const PeriodButton = styled(Button)<
+  IButtonProps & {
+    periodType: TChartPeriod;
+    period: TChartPeriod;
+  }
+>`
+  font-size: ${$fontSizeParagraph};
+  cursor: ${({ periodType, period }) =>
+    periodType === period ? "default" : "pointer"};
+  color: ${({ periodType, period }) =>
+    periodType === period ? $textAccentColor : $textColor};
+  ${({ disabled }) => disabled && "opacity: 1;"};
+`;
 
 const _ChartPeriod: React.FC<Props> = ({ period, onChange }) => {
   const { type, start } = period;
@@ -34,20 +57,19 @@ const _ChartPeriod: React.FC<Props> = ({ period, onChange }) => {
     []
   );
   return (
-    <Row className={styles["chart-period"]}>
+    <Container>
       <Text muted>
         <Row>
           {ChartPeriodTypeValues.map(period => (
             <RowItem>
-              <Button
+              <PeriodButton
+                period={period}
+                periodType={type}
                 testId={t(
                   `asset-details:chart-period.${ChartPeriodType[period]}-short`
                 )}
                 noPadding
                 key={period}
-                className={clsx(styles["chart-period__period-item"], {
-                  [styles["chart-period__period-item--active"]]: type === period
-                })}
                 onClick={handleChangePeriod(period)}
                 variant="text"
                 color="secondary"
@@ -56,7 +78,7 @@ const _ChartPeriod: React.FC<Props> = ({ period, onChange }) => {
                 {t(
                   `asset-details:chart-period.${ChartPeriodType[period]}-short`
                 )}
-              </Button>
+              </PeriodButton>
             </RowItem>
           ))}
         </Row>
@@ -66,7 +88,7 @@ const _ChartPeriod: React.FC<Props> = ({ period, onChange }) => {
           <ChartPeriodDateLabel start={start!} />
         )}
       </Text>
-    </Row>
+    </Container>
   );
 };
 
