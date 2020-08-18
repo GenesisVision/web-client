@@ -1,5 +1,6 @@
 import { HookFormWalletField as WalletSelect } from "components/deposit/components/form-fields/wallet-field";
 import { DialogButtons } from "components/dialog/dialog-buttons";
+import { DialogInfo } from "components/dialog/dialog-info";
 import InputAmountField from "components/input-amount-field/hook-form-amount-field";
 import { LabeledValue } from "components/labeled-value/labeled-value";
 import { Row } from "components/row/row";
@@ -31,6 +32,7 @@ const getMinPercent = (value: number, total: number) =>
   Math.max((value / total) * 100, MIN_FUND_WITHDRAW_VALUE);
 
 const _FundWithdrawAmountForm: React.FC<Props> = ({
+  infoMessage,
   onSubmit,
   isPending,
   currency,
@@ -145,11 +147,13 @@ const _FundWithdrawAmountForm: React.FC<Props> = ({
           {t("buttons.next")}
         </SubmitButton>
       </DialogButtons>
+      {infoMessage && <DialogInfo>{infoMessage}</DialogInfo>}
     </HookForm>
   );
 };
 
 interface Props {
+  infoMessage?: string;
   isPending: boolean;
   currency: CurrencyEnum;
   setCurrency: (id: CurrencyEnum) => void;

@@ -6,12 +6,13 @@ import styles from "./statistic-item-list.module.scss";
 
 export const StatisticItemList: React.FC<Props &
   React.HTMLAttributes<HTMLDivElement>> = ({
+  wrap = true,
   children,
   className,
   vertical
 }) => (
   <Center
-    wrap
+    wrap={wrap}
     className={clsx(styles["statistics-item-list"], className, {
       [styles["statistics-item-list--vertical"]]: vertical
     })}
@@ -21,6 +22,7 @@ export const StatisticItemList: React.FC<Props &
 );
 
 interface Props {
+  wrap?: boolean;
   vertical?: boolean;
   className?: string;
 }

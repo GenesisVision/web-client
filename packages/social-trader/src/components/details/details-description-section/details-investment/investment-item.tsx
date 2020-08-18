@@ -12,7 +12,9 @@ export const InvestmentItem: React.FC<Props> = ({ children, label }) => {
   return (
     <RowItem size={"xlarge"}>
       <LabeledValue label={label}>
-        <Text weight={"bold"}>{children}</Text>
+        <Text weight={"bold"} wrap={false}>
+          {children}
+        </Text>
       </LabeledValue>
     </RowItem>
   );

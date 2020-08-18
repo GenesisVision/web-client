@@ -9,6 +9,7 @@ import React from "react";
 import styles from "./comments-list.module.scss";
 
 interface Props {
+  canReply?: boolean;
   visibleCommentsCount?: number;
   comments: Array<Post>;
   updateData: VoidFunction;
@@ -17,6 +18,7 @@ interface Props {
 const VISIBLE_COMMENTS_COUNT = 3;
 
 const _CommentsList: React.FC<Props> = ({
+  canReply,
   visibleCommentsCount,
   comments,
   updateData
@@ -47,7 +49,12 @@ const _CommentsList: React.FC<Props> = ({
       )}
       <Row onlyOffset>
         {visibleComments.map(comment => (
-          <Comment updateData={updateData} key={comment.id} comment={comment} />
+          <Comment
+            canReply={canReply}
+            updateData={updateData}
+            key={comment.id}
+            comment={comment}
+          />
         ))}
       </Row>
     </div>

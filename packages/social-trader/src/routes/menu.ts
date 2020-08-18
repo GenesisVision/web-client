@@ -136,11 +136,6 @@ const mainMenuItemsUnion = [
     route: INVEST_ROUTE,
     children: [
       {
-        Icon: FollowIcon,
-        route: GV_FOLLOW_ROUTE,
-        label: "navigation.gv-follow"
-      },
-      {
         Icon: ProgramsIcon,
         route: GV_FUNDS_ROUTE,
         label: "navigation.gv-funds"
@@ -149,6 +144,11 @@ const mainMenuItemsUnion = [
         Icon: FundsIcon,
         route: GV_PROGRAMS_ROUTE,
         label: "navigation.gv-programs"
+      },
+      {
+        Icon: FollowIcon,
+        route: GV_FOLLOW_ROUTE,
+        label: "navigation.gv-follow"
       }
     ]
   },

@@ -33,6 +33,7 @@ import { InvestorFees } from "./form-fields/investor-fees";
 import { HookFormWalletField as WalletField } from "./form-fields/wallet-field";
 
 const _DepositForm: React.FC<Props> = ({
+  infoMessage,
   onSubmit,
   minDeposit,
   fees,
@@ -140,9 +141,7 @@ const _DepositForm: React.FC<Props> = ({
             {t("deposit-asset.confirm")}
           </SubmitButton>
         </DialogButtons>
-        {asset === ASSET.FUND && (
-          <DialogInfo>{t("deposit-asset.fund.disclaimer")}</DialogInfo>
-        )}
+        {infoMessage && <DialogInfo>{infoMessage}</DialogInfo>}
       </DialogBottom>
     </HookForm>
   );
@@ -152,6 +151,7 @@ const DepositForm = React.memo(_DepositForm);
 export default DepositForm;
 
 export interface Props {
+  infoMessage?: string;
   minDeposit: MinDepositType;
   ownAsset?: boolean;
   fees: TFees;

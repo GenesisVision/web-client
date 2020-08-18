@@ -11,8 +11,10 @@ import React, { useEffect, useRef } from "react";
 import styles from "./comment.module.scss";
 
 const _Comment: React.FC<Props> = ({
+  canReply,
   updateData,
   comment: {
+    likesUsers,
     isHighlighted,
     url,
     tags,
@@ -64,9 +66,10 @@ const _Comment: React.FC<Props> = ({
         </RowItem>
       </Row>
       <Row className={styles["comment__buttons"]}>
-        <RowItem wide>{personalDetails && <Reply author={author} />}</RowItem>
+        <RowItem wide>{canReply && <Reply author={author} />}</RowItem>
         <RowItem>
           <LikeContainer
+            likesUsers={likesUsers}
             id={id}
             canLike={!!personalDetails}
             count={likesCount}
@@ -79,6 +82,7 @@ const _Comment: React.FC<Props> = ({
 };
 
 interface Props {
+  canReply?: boolean;
   updateData: VoidFunction;
   comment: ConversationComment;
 }

@@ -17,6 +17,7 @@ const _AssetsField: React.FC<{ name: string }> = ({ name }) => {
       </Text>
       <Row onlyOffset wide>
         <GVHookFormField
+          scheduleMessage={t("trading-schedule.create-fund")}
           name={name}
           component={ReallocateFieldWrapper}
           assets={assets}

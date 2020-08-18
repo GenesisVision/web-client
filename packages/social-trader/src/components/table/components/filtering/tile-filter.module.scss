@@ -1,7 +1,8 @@
 @import "styles/_sizes";
 
 .tile-filter {
-  &__row {
+  &__header {
+    align-items: flex-end;
   }
 
   &__items {

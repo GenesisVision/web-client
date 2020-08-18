@@ -1,30 +1,10 @@
-import clsx from "clsx";
-import { FUND_ASSET_TYPE } from "components/fund-asset/fund-asset";
-import FundAssetContainer from "components/fund-asset/fund-asset-container";
-import DateRangeFilter from "components/table/components/filtering/date-range-filter/date-range-filter";
-import { DATE_RANGE_FILTER_NAME } from "components/table/components/filtering/date-range-filter/date-range-filter.constants";
-import {
-  FilteringType,
-  SortingColumn
-} from "components/table/components/filtering/filter.type";
-import TableCell from "components/table/components/table-cell";
-import TableContainer from "components/table/components/table-container";
-import TableRow from "components/table/components/table-row";
-import { UpdateFilterFunc } from "components/table/components/table.types";
-import { ReallocationModel } from "gv-api-web";
-import { FUND_REALLOCATE_HISTORY_COLUMNS } from "pages/invest/funds/fund-details/fund-details.constants";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { formatDate } from "utils/dates";
-
-import { fundReallocateHistoryTableSelector } from "../../reducers/fund-reallocate-history.reducer";
-import { getFundReallocateHistory } from "../../services/fund-details.service";
-import FundStructureHeaderCell from "../fund-structure/fund-structure-header-cell";
-import styles from "./fund-reallocate-history.module.scss";
 
 const _FundReallocateHistory: React.FC<Props> = ({ id }) => {
   const [t] = useTranslation();
-  return (
+  return null;
+  /*  return (
     <TableContainer
       getItems={getFundReallocateHistory(id)}
       dataSelector={fundReallocateHistoryTableSelector}
@@ -74,7 +54,7 @@ const _FundReallocateHistory: React.FC<Props> = ({ id }) => {
         </TableRow>
       )}
     />
-  );
+  );*/
 };
 
 interface Props {

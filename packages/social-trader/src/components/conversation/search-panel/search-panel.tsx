@@ -1,3 +1,4 @@
+import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
 import { AvatarWithName } from "components/avatar/avatar-with-name/avatar-with-name";
 import ImageBaseElement from "components/avatar/image-base.element";
 import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
@@ -16,13 +17,20 @@ interface Props extends Clickable {
 }
 
 const SearchResultRow: React.FC<Props> = ({
-  asset: { avatar, name, type },
+  asset: { color, avatar, name, type },
   onClick
 }) => {
+  const renderAvatar = () => {
+    return type === "user" ? (
+      <ProfileAvatar url={avatar} alt={name} />
+    ) : (
+      <AssetAvatar color={color} url={avatar} alt={name} />
+    );
+  };
   return (
     <Row onClick={onClick} className={styles["search-panel__row"]}>
       <AvatarWithName
-        avatar={<ProfileAvatar url={avatar} alt={name} />}
+        avatar={renderAvatar()}
         name={
           <Center>
             <RowItem>{name}</RowItem>

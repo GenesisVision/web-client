@@ -13,7 +13,8 @@ import { Row } from "components/row/row";
 import useApiRequest from "hooks/api-request.hook";
 import useTab from "hooks/tab.hook";
 import { ShowEventsContainer } from "pages/feed/show-events-container/show-events-container";
-import React, { useEffect } from "react";
+import { FeedContext } from "pages/social/social/feed.context";
+import React, { useContext, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 enum TABS {
@@ -26,6 +27,8 @@ const _ManagerData: React.FC<Props> = ({ canWritePost, id }) => {
   const [t] = useTranslation();
   const { tab, setTab } = useTab<TABS>(TABS.TRADING);
 
+  const { showEvents } = useContext(FeedContext);
+
   const { sendRequest, data = UserDataInitialCount } = useApiRequest<
     IAssetsCountModel
   >({
@@ -33,8 +36,8 @@ const _ManagerData: React.FC<Props> = ({ canWritePost, id }) => {
   });
 
   useEffect(() => {
-    sendRequest({ ownerId: id });
-  }, [id]);
+    sendRequest({ ownerId: id, showEvents });
+  }, [id, showEvents]);
 
   const {
     investingFollowCount = 0,
@@ -73,7 +76,7 @@ const _ManagerData: React.FC<Props> = ({ canWritePost, id }) => {
         </GVTabs>
       </Row>
       {tab === TABS.FEED && (
-        <Row size={"large"} onlyOffset>
+        <Row onlyOffset>
           <Row>
             <RowItem wide />
             <RowItem>

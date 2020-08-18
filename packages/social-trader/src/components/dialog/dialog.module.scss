@@ -24,6 +24,8 @@
   }
 
   &__info {
+    display: flex;
+    justify-content: center;
     line-height: 1.64;
     text-align: center;
   }

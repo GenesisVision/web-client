@@ -1,0 +1,14 @@
+.short-arrow {
+  &__top {
+    transform: rotate(180deg);
+  }
+  &__right {
+    transform: rotate(-90deg);
+  }
+  &__bottom {
+    transform: rotate(0);
+  }
+  &__left {
+    transform: rotate(90deg);
+  }
+}

@@ -4,16 +4,18 @@ import { DialogTop } from "components/dialog/dialog-top";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-export interface ISocialShareContainerProps {}
+export interface ISocialShareContainerProps {
+  url: string;
+}
 
-const _ReportContainer: React.FC<ISocialShareContainerProps> = () => {
+const _ReportContainer: React.FC<ISocialShareContainerProps> = ({ url }) => {
   const [t] = useTranslation();
 
   return (
     <>
       <DialogTop title={t("conversation:social-share.title")} />
       <DialogBottom>
-        <SocialShare />
+        <SocialShare url={url} />
       </DialogBottom>
     </>
   );

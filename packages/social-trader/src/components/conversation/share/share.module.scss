@@ -4,6 +4,7 @@
 $share-icon-size: 18px;
 
 .share {
+  cursor: pointer;
   &__count {
     font-size: $font-size-common;
     line-height: $font-size-common;

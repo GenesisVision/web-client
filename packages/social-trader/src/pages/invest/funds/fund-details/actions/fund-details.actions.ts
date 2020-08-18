@@ -5,11 +5,13 @@ import {
 import { TStatisticCurrencyAction } from "components/details/reducers/statistic-currency.reducer";
 import { TStatisticPeriodAction } from "components/details/reducers/statistic-period.reducer";
 import { FilteringType } from "components/table/components/filtering/filter.type";
+import { TableItems } from "components/table/helpers/mapper";
 import {
   FundBalanceChart,
   FundDetailsFull,
   ReallocationModelItemsViewModel
 } from "gv-api-web";
+import { IFundHistoryDataItem } from "pages/invest/funds/fund-details/fund-details.types";
 import { FundAbsoluteProfitChartDataType } from "pages/invest/funds/fund-details/reducers/absolute-profit-chart.reducer";
 import { api } from "services/api-client/swagger-custom-client";
 import Token from "services/api-client/token";
@@ -20,6 +22,7 @@ import {
   FETCH_FUND_BALANCE_CHART,
   FETCH_FUND_DESCRIPTION,
   FETCH_FUND_PROFIT_CHART,
+  FUND_HISTORY,
   FUND_REALLOCATE_HISTORY,
   SET_FUND_STATISTIC_CURRENCY,
   SET_FUND_STATISTIC_PERIOD
@@ -95,4 +98,12 @@ export const fundReallocateHistoryAction = (
 ): ApiAction<ReallocationModelItemsViewModel> => ({
   type: FUND_REALLOCATE_HISTORY,
   payload: api.funds().getReallocatingHistory(id, filters)
+});
+
+export const fundHistoryTableAction = (
+  id: string,
+  filters?: FilteringType
+): ApiAction<TableItems<IFundHistoryDataItem>> => ({
+  type: FUND_HISTORY,
+  payload: api.funds().getFundsHistoryEvents(id, filters)
 });

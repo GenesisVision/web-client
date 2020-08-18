@@ -27,6 +27,7 @@ const _PostButtons: React.FC<Props> = ({
       </RowItem>
       <RowItem>
         <LikeContainer
+          likesUsers={post.likesUsers}
           id={id}
           canLike={canLike}
           count={likesCount}

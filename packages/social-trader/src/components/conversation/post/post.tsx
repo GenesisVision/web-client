@@ -120,6 +120,7 @@ const _Post: React.FC<Props> = ({
       {!!comments.length && (
         <Row size={"large"}>
           <CommentsList
+            canReply={personalDetails?.canComment}
             visibleCommentsCount={visibleCommentsCount}
             comments={comments}
             updateData={updateData}

@@ -10,6 +10,7 @@
     "shared": "^1.0.0"
   },
   "scripts": {
+    "build-start": "next build && next start",
     "start": "node index.js",
     "build": "next build",
     "production": "cross-env NODE_ENV=production node index.js",

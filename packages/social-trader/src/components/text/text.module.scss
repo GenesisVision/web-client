@@ -5,6 +5,9 @@
 
 .text {
   white-space: nowrap;
+  &--pre-wrap {
+    white-space: pre-wrap;
+  }
   &--thin {
     font-weight: 200;
   }

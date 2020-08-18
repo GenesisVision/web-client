@@ -20,6 +20,7 @@ const IndexPage: NextPage<Props> = props => {
 
 IndexPage.getInitialProps = async ctx => {
   const cookieAccept = getAccept(ctx);
+  const namespacesRequired = ["fees", "auth", "landing-page"];
   try {
     const { events, follows, programs, funds, news } = await getLandingAssets();
     return {
@@ -29,12 +30,12 @@ IndexPage.getInitialProps = async ctx => {
       programs,
       funds,
       news,
-      namespacesRequired: ["fees", "auth", "landing-page"]
+      namespacesRequired
     };
   } catch (e) {
     return {
       cookieAccept,
-      namespacesRequired: ["fees", "auth", "landing-page"],
+      namespacesRequired,
       ...landingAssetsDefaultData
     };
   }

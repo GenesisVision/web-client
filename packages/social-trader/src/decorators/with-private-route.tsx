@@ -1,25 +1,38 @@
 import { Push } from "components/link/link";
 import { normalizeUrlString } from "components/link/link.helper";
-import { NextPage, NextPageContext } from "next";
+import { NextPage } from "next";
 import qs from "qs";
 import React, { Component } from "react";
 import { HOME_ROUTE, LOGIN_ROUTE } from "routes/app.routes";
+import { api } from "services/api-client/swagger-custom-client";
+import Token from "services/api-client/token";
 import { getToken } from "services/auth-service";
+import { NextPageWithTokenContext } from "utils/types";
 
 const withPrivateRoute = (WrappedComponent: NextPage<any>): any =>
   class extends Component {
-    static async getInitialProps(ctx: NextPageContext) {
+    static async getInitialProps(ctx: NextPageWithTokenContext) {
       const token = getToken(ctx);
-      if (ctx.req && ctx.res && !token) {
-        const redirectUrl = `${LOGIN_ROUTE}?from=${qs.stringify(
-          ctx.req.url || HOME_ROUTE
-        )}`;
+      const tokenObject = Token.create(ctx);
+      const isValidToken = await api
+        .auth(tokenObject)
+        .getTwoStepAuthStatus()
+        .then(() => true)
+        .catch(() => false);
+
+      if (ctx.req && ctx.res && (!token || !isValidToken)) {
+        const clearToken = !isValidToken;
+        const params = {
+          from: ctx.req.url || HOME_ROUTE,
+          clearToken: clearToken ? true : undefined
+        };
+        const redirectUrl = `${LOGIN_ROUTE}?${qs.stringify(params)}`;
         ctx.res.writeHead(302, { Location: normalizeUrlString(redirectUrl) });
         ctx.res.end();
         return;
       }
 
-      if (!token) {
+      if (!token || !isValidToken) {
         Push(LOGIN_ROUTE, undefined, { from: ctx.pathname });
         return;
       }

@@ -9,19 +9,32 @@ import { managerToPathCreator } from "routes/manager.routes";
 
 import styles from "./user-avatar-list.module.scss";
 
-interface Props {
+export interface IUserAvatarListProps {
+  onClickRemainder?: VoidFunction;
+  remainderColor?: string;
   count: number;
   length?: number;
   list: ProfilePublicShort[];
 }
 
-const _UserAvatarList: React.FC<Props> = ({ count, length = 3, list }) => {
+const AVATAR_SHIFT = 20;
+
+const _UserAvatarList: React.FC<IUserAvatarListProps> = ({
+  onClickRemainder,
+  remainderColor = "#1c2730",
+  count,
+  length = 3,
+  list
+}) => {
   const { contextTitle } = useToLink();
+  const hasRemainder = count > length;
   return (
     <Center
       className={styles["user-avatar-list__container"]}
       style={{
-        width: (44 - 20) * (Math.min(length, count) + 1)
+        width:
+          (44 - AVATAR_SHIFT) * (Math.min(length, count) + 1) +
+          +hasRemainder * AVATAR_SHIFT
       }}
     >
       {list.slice(0, length).map(({ url, logoUrl, username }, i) => {
@@ -30,10 +43,10 @@ const _UserAvatarList: React.FC<Props> = ({ count, length = 3, list }) => {
           <div
             className={styles["user-avatar-list__item"]}
             style={{
-              left: -(20 * i)
+              left: -(AVATAR_SHIFT * i)
             }}
           >
-            <Link to={profileUrl}>
+            <Link title={username} to={profileUrl}>
               <ProfileAvatar url={logoUrl} alt={username} />
             </Link>
           </div>
@@ -41,12 +54,19 @@ const _UserAvatarList: React.FC<Props> = ({ count, length = 3, list }) => {
       })}
       {count > length && (
         <div
+          onClick={onClickRemainder}
           className={clsx(
+            {
+              [styles[
+                "user-avatar-list__remainder--clickable"
+              ]]: !!onClickRemainder
+            },
             styles["user-avatar-list__remainder"],
             styles["user-avatar-list__item"]
           )}
           style={{
-            left: -(20 * length)
+            background: remainderColor,
+            left: -(AVATAR_SHIFT * length)
           }}
         >
           + {count - length}
