@@ -1,0 +1,19 @@
+import React from "react";
+
+export const OkIcon: React.FC = () => {
+  return (
+    <svg
+      width="9"
+      height="7"
+      viewBox="0 0 9 7"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M7.48588 0.734375L3.72996 4.99991L1 2.56851"
+        stroke="#2CD392"
+        strokeWidth="1.5"
+      />
+    </svg>
+  );
+};
