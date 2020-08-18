@@ -1,14 +1,21 @@
-import clsx from "clsx";
 import NextLink from "next/link";
 import Router from "next/router";
 import React, { useCallback } from "react";
+import styled from "styled-components";
 
 import {
   normalizeTo,
   normalizeUrlString,
   pushHistoryState
 } from "./link.helper";
-import styles from "./link.module.scss";
+
+const StyledA = styled.a<{ wide?: boolean; white?: boolean }>`
+  ${({ wide }) =>
+    wide &&
+    `display: block;
+    width: 100%;`}
+  ${({ white }) => white && `color: white;`}
+`;
 
 const Link: React.FC<LinkProps> = ({
   wide,
@@ -51,17 +58,15 @@ const Link: React.FC<LinkProps> = ({
   const linkTitle = title || (typeof children === "string" && children) || "";
   return (
     <NextLink href={normalizedTo.pathname} as={normalizedTo.as}>
-      <a
-        className={clsx({
-          [styles["link--wide"]]: wide,
-          [styles["link--white"]]: white
-        })}
+      <StyledA
+        wide={wide}
+        white={white}
         title={linkTitle}
         onClick={handleClick}
         {...other}
       >
         {children}
-      </a>
+      </StyledA>
     </NextLink>
   );
 };

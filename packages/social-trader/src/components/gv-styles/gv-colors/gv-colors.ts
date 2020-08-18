@@ -1,3 +1,7 @@
+export const $backgroundChipPositive = "#132d34";
+export const $backgroundChipNegative = "#29212b";
+export const $warningColor = "#f5a623";
+export const $warningBackgroundColor = `${$warningColor}10`;
 export const $tooltipBackgroundColor = "#263642";
 export const $tooltipShadowColor = "#00000007";
 export const $yellow = "#ecdf75";
