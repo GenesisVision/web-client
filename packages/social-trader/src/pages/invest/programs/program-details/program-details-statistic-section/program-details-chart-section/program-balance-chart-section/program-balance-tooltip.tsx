@@ -59,7 +59,6 @@ const ProgramBalanceTooltip: React.FC<IProgramBalanceTooltipProps> = ({
         />
       }
       date={new Date(label)}
-      className={styles["details-tooltip"]}
     />
   );
 };

@@ -73,7 +73,6 @@ const FundBalanceTooltip: React.FC<IFundBalanceTooltipProps> = ({
         />
       }
       date={new Date(label)}
-      className={styles["details-tooltip"]}
     />
   );
 };

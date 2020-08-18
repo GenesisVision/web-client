@@ -22,11 +22,7 @@ const FollowBalanceTooltip: React.FC<IProgramBalanceTooltipProps> = ({
   }`;
 
   return (
-    <ChartTooltip
-      body={<TooltipBody value={value} />}
-      date={new Date(label)}
-      className={styles["details-tooltip"]}
-    />
+    <ChartTooltip body={<TooltipBody value={value} />} date={new Date(label)} />
   );
 };
 

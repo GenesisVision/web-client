@@ -20,7 +20,6 @@ const ProgramAbsoluteProfitTooltip: React.FC<Props> = ({
     <ChartTooltip
       body={<TooltipBody equity={equity} />}
       date={new Date(label)}
-      className={styles["details-tooltip"]}
     />
   );
 };

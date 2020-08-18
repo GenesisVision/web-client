@@ -1,9 +1,13 @@
-import clsx from "clsx";
+import {
+  $textLightColor,
+  $tooltipBackgroundColor,
+  $tooltipShadowColor
+} from "components/gv-styles/gv-colors/gv-colors";
+import { $fontSizeH4, $paddingXsmall } from "components/gv-styles/gv-sizes";
 import { Text } from "components/text/text";
 import * as React from "react";
+import styled from "styled-components";
 import { formatDate } from "utils/dates";
-
-import styles from "./chart-tooltip.module.scss";
 
 interface Props {
   body: JSX.Element;
@@ -12,14 +16,32 @@ interface Props {
   heading?: string;
 }
 
-const ChartTooltip: React.FC<Props> = ({ heading, body, date, className }) => (
-  <div className={clsx(styles["gv-tooltip"], className)}>
+const Container = styled.div`
+  font-size: 10px;
+  line-height: 1.2rem;
+  padding: ${$paddingXsmall}px;
+  border-radius: 0.5rem;
+  background-color: ${$tooltipBackgroundColor};
+  box-shadow: 5px 5px 25px 0 ${$tooltipShadowColor};
+`;
+
+const Body = styled.div`
+  margin-top: 7px;
+  margin-bottom: 15px;
+  font-size: ${$fontSizeH4};
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: ${$textLightColor};
+`;
+
+const ChartTooltip: React.FC<Props> = ({ heading, body, date }) => (
+  <Container>
     <Text muted>{heading}</Text>
-    <div className={styles["gv-tooltip__body"]}>{body}</div>
+    <Body>{body}</Body>
     <Text muted size={"small"}>
       {formatDate(date)}
     </Text>
-  </div>
+  </Container>
 );
 
 export default React.memo(ChartTooltip);

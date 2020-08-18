@@ -16,7 +16,6 @@ const ProgramProfitTooltip: React.FC<Props> = ({ active, label, payload }) => {
     <ChartTooltip
       body={<TooltipBody equity={equity} />}
       date={new Date(label)}
-      className={styles["details-tooltip"]}
     />
   );
 };

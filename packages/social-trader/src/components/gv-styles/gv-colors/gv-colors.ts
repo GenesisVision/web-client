@@ -1,3 +1,5 @@
+export const $tooltipBackgroundColor = "#263642";
+export const $tooltipShadowColor = "#00000007";
 export const $yellow = "#ecdf75";
 export const $mainColor = "#ffffff";
 export const $iconColor = "#d8d8d8";
