@@ -20,6 +20,6 @@ const _RingIcon: React.FC<IIconProps> = props => (
   </Icon>
 );
 
-export const RingIcon = withStyles({ staticStyles: { width: "16px" } })(
-  _RingIcon
-);
+export const RingIcon = withStyles({
+  staticStyles: { width: "16px", height: "16px" }
+})(_RingIcon);
