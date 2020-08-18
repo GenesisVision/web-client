@@ -1,5 +1,6 @@
 import { CHIP_TYPE } from "components/chip/chip";
 import ChipButton from "components/chip/chip-button";
+import { $fontSizeCommon } from "components/gv-styles/gv-sizes";
 import HeaderIcon from "components/header/header-icon";
 import { fetchProfileHeaderInfo } from "components/header/header.service";
 import { RingIcon } from "components/icon/ring-icon";
@@ -9,8 +10,12 @@ import useIsOpen from "hooks/is-open.hook";
 import * as React from "react";
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
+import styled from "styled-components";
+import { fontSize } from "utils/style/style-mixins";
 
-import styles from "./notifications-widget.module.scss";
+const NotificationsCount = styled.div`
+  ${fontSize($fontSizeCommon)}
+`;
 
 const _NotificationsWidget: React.FC<Props> = ({
   data: notificationsCount = 0
@@ -31,9 +36,7 @@ const _NotificationsWidget: React.FC<Props> = ({
           onClick={setOpen}
           type={hasNotifications ? CHIP_TYPE.NEGATIVE : undefined}
           chipLabel={
-            <div className={styles["notifications-count"]}>
-              {notificationsCount}
-            </div>
+            <NotificationsCount>{notificationsCount}</NotificationsCount>
           }
           label={
             <HeaderIcon>
