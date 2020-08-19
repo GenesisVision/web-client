@@ -36,7 +36,7 @@ const Content = styled(Center)`
 `;
 
 const Separator = styled.div`
-  padding: ${$paddingXxsmall} 0;
+  padding: ${$paddingXxsmall}px 0;
 `;
 
 const _ProfileWidget: React.FC<Props> = ({ profileHeader, className }) => {

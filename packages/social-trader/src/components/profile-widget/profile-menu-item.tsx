@@ -27,12 +27,12 @@ const IconContainer = styled(Center)`
 `;
 
 const Label = styled(RowItem)`
-  font-size: ${$fontSizeCommon};
+  font-size: ${$fontSizeCommon}px;
   color: ${$textLightColor};
   white-space: nowrap;
 `;
 
-const Item = styled.div`
+const Item = styled(Row)`
   min-width: 200px;
 `;
 
