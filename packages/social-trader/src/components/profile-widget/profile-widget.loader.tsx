@@ -4,16 +4,10 @@ import { RowItem } from "components/row-item/row-item";
 import FilterArrowIcon from "components/table/components/filtering/filter-arrow-icon";
 import * as React from "react";
 
-import styles from "./profile-widget.module.scss";
-
 export const ProfileWidgetLoader: React.FC = React.memo(() => (
-  <Center className={styles["profile-widget__content"]}>
+  <Center>
     <RowItem size={"small"}>
-      <ProfileAvatar
-        className={styles["profile-widget__avatar"]}
-        url={""}
-        alt={""}
-      />
+      <ProfileAvatar url={""} alt={""} />
     </RowItem>
     <FilterArrowIcon />
   </Center>

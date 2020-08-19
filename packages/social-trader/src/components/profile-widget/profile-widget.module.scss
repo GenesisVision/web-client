@@ -4,13 +4,6 @@
 
 .profile-widget {
   &__content {
-    cursor: pointer;
-
-    &:hover {
-      .profile-widget__avatar {
-        background-color: lighten($secondary-color, 5%);
-      }
-    }
   }
 }
 
@@ -21,24 +14,12 @@
   }
 
   &__item {
-    min-width: 200px;
   }
 
   &__item-icon {
-    opacity: 0.2;
-    background-position: center;
-    height: 13px;
-    width: 13px;
-
-    &:hover {
-      opacity: 0.5;
-    }
   }
 
   &__item-label {
-    font-size: $font-size-common;
-    color: $text-light-color;
-    white-space: nowrap;
   }
 
   &__separator {
