@@ -1,6 +1,9 @@
 import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
 import { Center } from "components/center/center";
-import { $paddingXxsmall } from "components/gv-styles/gv-sizes";
+import {
+  $fontSizeCommon,
+  $paddingXxsmall
+} from "components/gv-styles/gv-sizes";
 import { DetailsIcon } from "components/icon/details-icon";
 import { LogoutIcon } from "components/icon/logout-icon";
 import { ReferrerIcon } from "components/icon/referrer-icon";
@@ -29,13 +32,16 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 
-import styles from "./profile-widget.module.scss";
-
 const Content = styled(Center)`
   cursor: pointer;
 `;
 
 const Separator = styled.div`
+  padding: ${$paddingXxsmall}px 0;
+`;
+
+const Header = styled.div`
+  font-size: ${$fontSizeCommon}px;
   padding: ${$paddingXxsmall}px 0;
 `;
 
@@ -63,9 +69,7 @@ const _ProfileWidget: React.FC<Props> = ({ profileHeader, className }) => {
       >
         <PopoverContent>
           <PopoverContentCardBlock dark>
-            <div className={styles["profile-menu__header"]}>
-              {profileHeader.email}
-            </div>
+            <Header>{profileHeader.email}</Header>
           </PopoverContentCardBlock>
           <PopoverContentCardBlock>
             <ProfileMenuItem
