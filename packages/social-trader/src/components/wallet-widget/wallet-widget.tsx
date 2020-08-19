@@ -21,7 +21,7 @@ const WalletWidgetPopoverContent = dynamic(() =>
 );
 
 const WalletContainer = styled(Row)`
-  font-size: ${$fontSizeCommon};
+  font-size: ${$fontSizeCommon}px;
   cursor: pointer;
 
   &:hover {
