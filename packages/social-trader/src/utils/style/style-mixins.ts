@@ -1,35 +1,82 @@
+import {
+  mediaBreakpointLandscapePhone,
+  mediaBreakpointLandscapeTablet
+} from "components/gv-styles/gv-media";
+import { $dividerPadding, $dividerText } from "components/gv-styles/gv-sizes";
+import { css } from "styled-components";
 import { IStyleValue } from "utils/style/style-generators";
+import { AnyObjectType } from "utils/types";
 
-export const width = (value: IStyleValue | string) => {
-  return {
-    width: value
-  };
+export const adaptiveBorderRadius = (size: number) => {
+  return `
+    border-radius: ${size / $dividerText}px;
+    ${mediaBreakpointLandscapePhone(`border-radius: ${size}px;`)}`;
 };
 
-export const height = (value: IStyleValue | string) => {
-  return {
-    height: value
-  };
+export const cursorPointer = css`
+  cursor: ${({ onClick }: AnyObjectType) => (onClick ? "pointer" : "default")};
+`;
+
+export const hideOnLandscapeTablet = (display: string = "block") => {
+  return `
+    display: none;
+    ${mediaBreakpointLandscapeTablet(`display: ${display};`)}
+  `;
 };
 
-export const fontSize = (value: IStyleValue | string) => {
-  return {
-    "font-size": value
-  };
+export const adaptivePadding = (direction: string, marginSize: number) => {
+  return `
+    padding-${direction}: ${marginSize / $dividerPadding}px;
+    ${mediaBreakpointLandscapePhone(`padding-${direction}: ${marginSize}px;`)}
+  `;
 };
 
-export const horizontalPaddings = (value: IStyleValue | string) => {
-  return {
-    "padding-left": value,
-    "padding-right": value
-  };
+export const adaptiveMargin = (direction: string, marginSize: number) => {
+  return `
+    margin-${direction}: ${marginSize / $dividerPadding}px;
+    ${mediaBreakpointLandscapePhone(`margin-${direction}: ${marginSize}px;`)}
+  `;
+};
+export const right = (value: number) => {
+  return `
+    right: ${value / $dividerText}px;
+    ${mediaBreakpointLandscapePhone(`right: ${value}px;`)}
+  `;
 };
 
-export const verticalPaddings = (value: IStyleValue | string) => {
-  return {
-    "padding-left": value,
-    "padding-right": value
-  };
+export const width = (value: number) => {
+  return `
+    width: ${value / $dividerText}px;
+    ${mediaBreakpointLandscapePhone(`width: ${value}px;`)}
+  `;
+};
+
+export const height = (value: number) => {
+  return `
+    height: ${value / $dividerText}px;
+    ${mediaBreakpointLandscapePhone(`height: ${value}px;`)}
+  `;
+};
+
+export const fontSize = (value: number) => {
+  return `
+    font-size: ${value / $dividerText}px;
+    ${mediaBreakpointLandscapePhone(`font-size: ${value}px;`)}
+  `;
+};
+
+export const horizontalPaddings = (value: number) => {
+  return `
+    ${adaptivePadding("left", value)}
+    ${adaptivePadding("right", value)}
+  `;
+};
+
+export const verticalPaddings = (value: number) => {
+  return `
+    ${adaptivePadding("top", value)}
+    ${adaptivePadding("bottom", value)}
+  `;
 };
 
 export const getBoxShadowValue = (color: string) => {
