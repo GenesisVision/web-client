@@ -27,6 +27,7 @@ export const socialShareComponentsMap: SocialShareToComponentType[] = [
   { socialShareType: "Twitter", Component: TwitterShareButton },
   { socialShareType: "LinkedIn", Component: LinkedinShareButton },
   { socialShareType: "Email", Component: EmailShareButton },
+  { socialShareType: "Instagram", Component: EmptySocialShare },
   { socialShareType: "Undefined", Component: EmptySocialShare },
   { socialShareType: "Telegram", Component: EmptySocialShare },
   { socialShareType: "Youtube", Component: EmptySocialShare },

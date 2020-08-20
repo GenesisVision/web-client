@@ -5,7 +5,7 @@ import { ProgramPeriodViewModel } from "gv-api-web";
 import React from "react";
 import NumberFormat from "react-number-format";
 import { formatDate } from "utils/dates";
-import { formatCurrencyValue } from "utils/formatter";
+import { formatCurrencyValue, formatValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 
 const _ProgramFinancialStatisticRow: React.FC<Props> = ({
@@ -45,14 +45,14 @@ const _ProgramFinancialStatisticRow: React.FC<Props> = ({
       </TableCell>
       <TableCell>
         <NumberFormat
-          value={successFee}
+          value={formatValue(successFee, 8)}
           suffix={` ${currency}`}
           displayType="text"
         />
       </TableCell>
       <TableCell>
         <NumberFormat
-          value={entryFee}
+          value={formatValue(entryFee, 8)}
           suffix={` ${currency}`}
           displayType="text"
         />
