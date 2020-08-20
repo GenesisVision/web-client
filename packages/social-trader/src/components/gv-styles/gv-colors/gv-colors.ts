@@ -1,3 +1,5 @@
+export const $rowColor = "#212c34";
+export const $tableBackgroundSubColor = "#202b34";
 export const $backgroundChipPositive = "#132d34";
 export const $backgroundChipNegative = "#29212b";
 export const $warningColor = "#f5a623";
