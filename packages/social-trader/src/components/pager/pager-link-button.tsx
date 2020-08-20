@@ -24,7 +24,7 @@ export default PagerLinkButton;
 
 interface Props {
   page: number;
-  classname: string;
+  classname?: string;
   callback: (e: any) => void;
   value: string | number;
 }
