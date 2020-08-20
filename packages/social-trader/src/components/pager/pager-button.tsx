@@ -25,7 +25,14 @@ export const _PagerButton: React.FC<Props> = ({
 
   const renderButtonContent = () => {
     if (asLink) {
-      return <PagerStyledLink page={page} value={value} callback={callback} />;
+      return (
+        <PagerStyledLink
+          current={page === current}
+          page={page}
+          value={value}
+          callback={callback}
+        />
+      );
     } else {
       return (
         <PagerStyledButton current={page === current} onClick={callback}>
