@@ -75,7 +75,7 @@ const _FundHistory: React.FC<Props> = ({ id }) => {
         </span>
       )}
       renderBodyRow={(item: IFundHistoryDataItem) => (
-        <FundHistoryRow item={item} />
+        <FundHistoryRow key={String(item.date)} item={item} />
       )}
     />
   );
