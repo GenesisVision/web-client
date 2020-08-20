@@ -9,7 +9,7 @@ import {
   $paddingXxxsmall
 } from "components/gv-styles/gv-sizes";
 import { RowItem } from "components/row-item/row-item";
-import React from "react";
+import React, { useCallback } from "react";
 import styled from "styled-components";
 import {
   adaptiveBorderRadius,
@@ -51,7 +51,7 @@ const Count = styled.div<{ selected?: boolean }>`
   }};
   color: ${({ selected }) => {
     if (selected) return $primaryColor;
-    return $textLightColor;
+    return $labelColor;
   }};
 `;
 
@@ -95,23 +95,18 @@ const GVTab: React.FC<GVTabProps> = ({
   count,
   selected,
   visible = true,
-  className,
-  countClassName,
   onChange,
   onClick
 }) => {
-  const handleChange = (e: React.SyntheticEvent<EventTarget>) => {
-    if (onChange) {
-      onChange(e, value);
-    }
-    if (onClick) {
-      onClick(e);
-    }
-  };
+  const handleChange = useCallback(
+    (e: React.SyntheticEvent<EventTarget>) => {
+      if (onChange) onChange(e, value);
+      if (onClick) onClick(e);
+    },
+    [onChange, onClick]
+  );
 
-  if (!visible) {
-    return null;
-  }
+  if (!visible) return null;
 
   return (
     <RowItem>
