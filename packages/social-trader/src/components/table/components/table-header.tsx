@@ -20,8 +20,8 @@ const _TableHeader: React.FC<ITableHeaderProps> = ({
   columns,
   renderHeader
 }) => (
-  <thead className={styles["table__head"]}>
-    <TableRow className={styles["table__row--head"]}>
+  <thead>
+    <TableRow head>
       <TableColumns
         condition={!!columns}
         columns={columns!}

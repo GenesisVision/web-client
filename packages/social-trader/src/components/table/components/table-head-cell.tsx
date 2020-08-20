@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { SortableIcon } from "components/table/components/sortable-icon";
 import { Text } from "components/text/text";
 import * as React from "react";
 
@@ -30,16 +31,9 @@ const _TableHeadCell: React.FC<ITableHeadCellProps> = ({
       onClick={sortable ? onClick : undefined}
     >
       {sortable ? (
-        <span
-          className={clsx({
-            [styles["sortable-asc"]]:
-              sortingDirection === SORTING_DIRECTION.ASC,
-            [styles["sortable-desc"]]:
-              sortingDirection === SORTING_DIRECTION.DESC
-          })}
-        >
+        <SortableIcon sortingDirection={sortingDirection}>
           {children}
-        </span>
+        </SortableIcon>
       ) : (
         <Text muted>{children}</Text>
       )}
