@@ -1,17 +1,13 @@
 import { $paddingXsmall } from "components/gv-styles/gv-sizes";
-import { withStyles } from "decorators/withStyles";
 import * as React from "react";
+import styled from "styled-components";
 
-const staticStyles = {
-  "padding-right": { value: $paddingXsmall, unit: "px" }
-};
+const StyledDiv = styled.div`
+  padding-right: ${$paddingXsmall}px;
+`;
 
-export const _DetailsBlockRowItem: React.FC<React.HTMLAttributes<
+export const DetailsBlockRowItem: React.FC<React.HTMLAttributes<
   HTMLDivElement
->> = ({ children, className }) => {
-  return <div className={className}>{children}</div>;
+>> = ({ children }) => {
+  return <StyledDiv>{children}</StyledDiv>;
 };
-
-export const DetailsBlockRowItem = withStyles({ staticStyles })(
-  _DetailsBlockRowItem
-);

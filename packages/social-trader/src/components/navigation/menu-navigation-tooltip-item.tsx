@@ -1,22 +1,19 @@
 import { $paddingSmall } from "components/gv-styles/gv-sizes";
 import MenuTooltip from "components/menu-tooltip/menu-tooltip";
 import { VERTICAL_POPOVER_POS } from "components/popover/popover";
-import { withStyles } from "decorators/withStyles";
 import * as React from "react";
-
-import styles from "./navigation.module.scss";
+import styled from "styled-components";
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   havePopover?: boolean;
   secondLevel?: JSX.Element[];
 }
 
-const staticStyles = {
-  padding: `${$paddingSmall / 2}px`
-};
+const SecondLevel = styled.div`
+  padding: ${$paddingSmall / 2}px;
+`;
 
-const _MenuNavigationTooltipItem: React.FC<Props> = ({
-  className,
+export const MenuNavigationTooltipItem: React.FC<Props> = ({
   children,
   secondLevel,
   havePopover
@@ -26,7 +23,7 @@ const _MenuNavigationTooltipItem: React.FC<Props> = ({
       return (
         <MenuTooltip
           vertical={VERTICAL_POPOVER_POS.BOTTOM}
-          render={() => <div className={className}>{secondLevel}</div>}
+          render={() => <SecondLevel>{secondLevel}</SecondLevel>}
         >
           <div>{children}</div>
         </MenuTooltip>
@@ -36,7 +33,3 @@ const _MenuNavigationTooltipItem: React.FC<Props> = ({
       return <>{children}</>;
   }
 };
-
-export const MenuNavigationTooltipItem = withStyles({ staticStyles })(
-  _MenuNavigationTooltipItem
-);

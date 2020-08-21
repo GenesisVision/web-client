@@ -24,10 +24,8 @@ export interface IButtonProps
 
 export interface ILabelProps {
   isSuccessful?: boolean;
-  className?: string;
 }
 
 export interface ISuccessMarkProps {
   isSuccessful?: boolean;
-  className?: string;
 }

@@ -2,9 +2,8 @@ import { $secondaryColor } from "components/gv-styles/gv-colors/gv-colors";
 import { $avatarSize, $smallAvatarSize } from "components/gv-styles/gv-sizes";
 import { $boxShadow1 } from "components/gv-styles/gv-style-constants";
 import { UserAvatarIcon } from "components/icon/user-avatar-icon";
-import { withStyles } from "decorators/withStyles";
 import * as React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { height, transition, width } from "utils/style/style-mixins";
 
 import ImageBase, { IImageProps } from "../image-base";
@@ -14,7 +13,7 @@ interface Props extends IImageProps {
   big?: boolean;
 }
 
-const style = css<Props>`
+const Container = styled.div<{ middle?: boolean; big?: boolean }>`
   ${transition("background-color")};
   display: flex;
   justify-content: center;
@@ -51,19 +50,17 @@ const StyledImageBase = styled(ImageBase)`
   height: auto;
 `;
 
-const _ProfileAvatar: React.FC<Props> = ({ url, alt, className }) => {
+const _ProfileAvatar: React.FC<Props> = ({ url, alt, middle, big }) => {
   return (
-    <div className={className}>
+    <Container middle={middle} big={big}>
       <StyledImageBase
         src={url}
         alt={alt}
         DefaultImageComponent={StyledUserIcon}
       />
-    </div>
+    </Container>
   );
 };
 
-const ProfileAvatar = withStyles<Props>({ dynamicStyles: style })(
-  React.memo(_ProfileAvatar)
-);
+const ProfileAvatar = React.memo(_ProfileAvatar);
 export default ProfileAvatar;

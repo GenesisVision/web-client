@@ -10,11 +10,12 @@ import {
 } from "components/gv-styles/gv-sizes";
 import Link, { ToType } from "components/link/link";
 import NavigationIconWithName from "components/navigation/navigation-icon-with-name";
-import { withStyles } from "decorators/withStyles";
+import { NextRouter } from "next/dist/client/router";
 import { WithRouterProps } from "next/dist/client/with-router";
 import { withRouter } from "next/router";
 import React from "react";
-import { css } from "styled-components";
+import styled, { css } from "styled-components";
+import { parseStyles } from "utils/style/style-generators";
 
 import { normalizeLinkFrom } from "../link/link.helper";
 
@@ -37,8 +38,13 @@ const staticStyles = {
   position: "relative"
 };
 
+interface IStyleProps {
+  router: NextRouter;
+  href?: string | ToType;
+}
+
 const dynamicStyles = css`
-  opacity: ${({ router, href }: INavigationItemProps) =>
+  opacity: ${({ router, href }: IStyleProps) =>
     !!href && router.route.startsWith(normalizeLinkFrom(href)) ? 1 : 0.4};
   &:hover {
     opacity: 1;
@@ -59,7 +65,21 @@ const dynamicStyles = css`
   )}
 `;
 
+const styles = css<IStyleProps>`
+  ${parseStyles({ styleTable: staticStyles })}
+  ${dynamicStyles}
+`;
+
+const StyledLink = styled(Link)<IStyleProps>`
+  ${styles}
+`;
+
+const StyledButton = styled(Link)<IStyleProps>`
+  ${styles}
+`;
+
 const _NavigationItem: React.FC<INavigationItemProps> = ({
+  router,
   className,
   small,
   onClick,
@@ -74,20 +94,15 @@ const _NavigationItem: React.FC<INavigationItemProps> = ({
   );
   return (
     (!!href && (
-      <Link to={href} className={className}>
+      <StyledLink href={href} router={router} to={href}>
         {renderIconWithName()}
-      </Link>
+      </StyledLink>
     )) || (
-      <div className={className} onClick={onClick}>
+      <StyledButton href={href} router={router} onClick={onClick}>
         {renderIconWithName()}
-      </div>
+      </StyledButton>
     )
   );
 };
-const NavigationItem = withRouter(
-  withStyles<INavigationItemProps>({
-    staticStyles,
-    dynamicStyles
-  })(React.memo(_NavigationItem))
-);
+const NavigationItem = withRouter(React.memo(_NavigationItem));
 export default NavigationItem;

@@ -1,10 +1,15 @@
 import { Icon, IIconProps } from "components/icon/icon";
-import { withStyles } from "decorators/withStyles";
 import * as React from "react";
-import { css } from "styled-components";
+import styled from "styled-components";
 
-const _SecurityIcon: React.FC<IIconProps> = props => (
-  <Icon {...props}>
+const StyledIcon = styled(Icon)`
+  svg [fill] {
+    fill: none;
+  }
+`;
+
+export const SecurityIcon: React.FC<IIconProps> = props => (
+  <StyledIcon {...props}>
     <svg
       width="13"
       height="13"
@@ -44,13 +49,5 @@ const _SecurityIcon: React.FC<IIconProps> = props => (
         </g>
       </g>
     </svg>
-  </Icon>
+  </StyledIcon>
 );
-
-export const SecurityIcon = withStyles({
-  dynamicStyles: css`
-    svg [fill] {
-      fill: none;
-    }
-  `
-})(_SecurityIcon);

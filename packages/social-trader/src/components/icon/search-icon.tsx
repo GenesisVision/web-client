@@ -1,11 +1,21 @@
 import { $primaryColor } from "components/gv-styles/gv-colors/gv-colors";
 import { Icon, IIconProps } from "components/icon/icon";
-import { withStyles } from "decorators/withStyles";
 import * as React from "react";
-import { css } from "styled-components";
+import styled from "styled-components";
 
-const _SearchIcon: React.FC<IIconProps> = props => (
-  <Icon {...props}>
+const StyledIcon = styled(Icon)`
+  width: 18px;
+  height: 18px;
+
+  &:hover {
+    svg [stroke] {
+      stroke: ${$primaryColor};
+    }
+  }
+`;
+
+export const SearchIcon: React.FC<IIconProps> = props => (
+  <StyledIcon {...props}>
     <svg
       width="18"
       height="18"
@@ -28,18 +38,5 @@ const _SearchIcon: React.FC<IIconProps> = props => (
         strokeLinejoin="round"
       />
     </svg>
-  </Icon>
+  </StyledIcon>
 );
-
-export const SearchIcon = withStyles({
-  dynamicStyles: css`
-    width: 18px;
-    height: 18px;
-
-    &:hover {
-      svg [stroke] {
-        stroke: ${$primaryColor};
-      }
-    }
-  `
-})(_SearchIcon);

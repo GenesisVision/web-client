@@ -1,10 +1,8 @@
 import { mediaBreakpointLandscapeTablet } from "components/gv-styles/gv-media";
 import { $paddingMedium, $walletItemSize } from "components/gv-styles/gv-sizes";
 import { $boxShadow4 } from "components/gv-styles/gv-style-constants";
-import { Icon } from "components/icon/icon";
 import { MenuIcon } from "components/icon/menu-icon";
 import NavigationMobileContainer from "components/navigation/navigation-mobile/navigation-mobile.container";
-import { withStyles } from "decorators/withStyles";
 import { ProfileHeaderViewModel } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
 import { logout } from "pages/auth/signin/signin.service";
@@ -12,18 +10,17 @@ import * as React from "react";
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { TMenuItem } from "routes/menu";
-import { css } from "styled-components";
+import styled from "styled-components";
 import { adaptiveMargin } from "utils/style/style-mixins";
 
 interface Props {
-  className?: string;
   mobileMenuItems: TMenuItem[];
   backPath: string;
   isAuthenticated: boolean;
   profileHeader?: ProfileHeaderViewModel;
 }
 
-const dynamicStyles = css`
+const Container = styled.div`
   padding: 0;
   min-height: ${$walletItemSize}px;
   min-width: ${$walletItemSize}px;
@@ -43,7 +40,6 @@ const dynamicStyles = css`
 `;
 
 const _NavigationMobileButton: React.FC<Props> = ({
-  className,
   mobileMenuItems,
   isAuthenticated,
   profileHeader,
@@ -54,9 +50,9 @@ const _NavigationMobileButton: React.FC<Props> = ({
   const handlerLogout = useCallback(() => dispatch(logout), []);
   return (
     <>
-      <div className={className} onClick={setOpen}>
+      <Container onClick={setOpen}>
         <MenuIcon />
-      </div>
+      </Container>
       <NavigationMobileContainer
         mobileMenuItems={mobileMenuItems}
         backPath={backPath}
@@ -70,7 +66,5 @@ const _NavigationMobileButton: React.FC<Props> = ({
   );
 };
 
-const NavigationMobileButton = withStyles<Props>({ dynamicStyles })(
-  React.memo(_NavigationMobileButton)
-);
+const NavigationMobileButton = React.memo(_NavigationMobileButton);
 export default NavigationMobileButton;

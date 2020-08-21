@@ -3,11 +3,10 @@ import {
   $textAccentColor
 } from "components/gv-styles/gv-colors/gv-colors";
 import { Icon } from "components/icon/icon";
-import { withStyles } from "decorators/withStyles";
 import * as React from "react";
-import { css } from "styled-components";
+import styled from "styled-components";
 
-const dynamicStyles = css`
+const StyledIcon = styled(Icon)`
   cursor: pointer;
   svg [stroke] {
     stroke: ${$labelColor};
@@ -24,7 +23,7 @@ const dynamicStyles = css`
 
 const FavoriteIcon: React.FC<Props> = React.memo(({ selected, className }) => {
   return (
-    <Icon selected={selected} className={className}>
+    <StyledIcon selected={selected} className={className}>
       <svg
         width="28px"
         height="27px"
@@ -39,7 +38,7 @@ const FavoriteIcon: React.FC<Props> = React.memo(({ selected, className }) => {
           fill="none"
         />
       </svg>
-    </Icon>
+    </StyledIcon>
   );
 });
 
@@ -49,4 +48,4 @@ interface Props {
   className?: string;
 }
 
-export default withStyles<Props>({ dynamicStyles })(FavoriteIcon);
+export default FavoriteIcon;

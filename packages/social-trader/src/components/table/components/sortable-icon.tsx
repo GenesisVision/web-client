@@ -1,7 +1,6 @@
 import { SORTING_DIRECTION } from "components/table/helpers/sorting.helpers";
-import { withStyles } from "decorators/withStyles";
 import React from "react";
-import { css } from "styled-components";
+import styled, { css } from "styled-components";
 import { transition } from "utils/style/style-mixins";
 
 interface Props {
@@ -17,7 +16,7 @@ const sortableBorderIcon = css`
   border-top: 1px solid white;
 `;
 
-const styles = css<Props>`
+export const SortableIcon = styled.span<Props>`
   cursor: pointer;
   padding-right: 10px;
   span {
@@ -56,11 +55,3 @@ const styles = css<Props>`
     }};
   }
 `;
-
-const _SortableIcon: React.FC<Props> = ({ children, className }) => {
-  return <span className={className}>{children}</span>;
-};
-
-export const SortableIcon = withStyles<Props>({ dynamicStyles: styles })(
-  _SortableIcon
-);

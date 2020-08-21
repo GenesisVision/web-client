@@ -1,11 +1,14 @@
-import { $primaryColor } from "components/gv-styles/gv-colors/gv-colors";
 import { Icon, IIconProps } from "components/icon/icon";
-import { withStyles } from "decorators/withStyles";
 import * as React from "react";
-import { css } from "styled-components";
+import styled from "styled-components";
+
+const StyledIcon = styled(Icon)`
+  height: 15px;
+  width: 16px;
+`;
 
 const _MenuIcon: React.FC<IIconProps> = props => (
-  <Icon {...props}>
+  <StyledIcon {...props}>
     <svg
       width="15"
       height="14"
@@ -19,12 +22,7 @@ const _MenuIcon: React.FC<IIconProps> = props => (
         <path d="M0 13.1763H14" stroke="white" strokeWidth="1.5" />
       </g>
     </svg>
-  </Icon>
+  </StyledIcon>
 );
 
-export const MenuIcon = withStyles({
-  dynamicStyles: css`
-    height: 15px;
-    width: 16px;
-  `
-})(_MenuIcon);
+export const MenuIcon = _MenuIcon;

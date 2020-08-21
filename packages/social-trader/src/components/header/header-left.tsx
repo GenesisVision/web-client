@@ -7,7 +7,6 @@ import SearchContainer from "components/header/search.container";
 import { SearchIcon } from "components/icon/search-icon";
 import Navigation from "components/navigation/navigation";
 import NavigationMobileButton from "components/navigation/navigation-mobile/navigation-mobile-button";
-import { withStyles } from "decorators/withStyles";
 import { ProfileHeaderViewModel } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
 import dynamic from "next/dist/next-server/lib/dynamic";
@@ -15,6 +14,7 @@ import { useRouter } from "next/router";
 import * as React from "react";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
+import styled from "styled-components";
 
 const HeaderSearchInput = dynamic(() =>
   import("components/header/header-search-input")
@@ -25,13 +25,13 @@ export interface Props {
   profileHeader?: ProfileHeaderViewModel;
 }
 
-const staticStyles = {
-  display: "flex",
-  "align-items": "center",
-  width: "60%",
-  "justify-content": "space-between",
-  "padding-right": `${$paddingMedium}px`
-};
+const Container = styled.div`
+  display: flex;
+  align-items: center;
+  width: 60%;
+  justify-content: space-between;
+  padding-right: ${$paddingMedium}px;
+`;
 
 const _HeaderLeft: React.FC<Props> = ({ className, profileHeader }) => {
   const { route, asPath } = useRouter();
@@ -41,7 +41,7 @@ const _HeaderLeft: React.FC<Props> = ({ className, profileHeader }) => {
 
   const [openSearch, setSearchIsOpen, setSearchIsClose] = useIsOpen();
   return (
-    <div className={className}>
+    <Container>
       <NavigationMobileButton
         mobileMenuItems={showedMobileMenuItems}
         backPath={backPath}
@@ -62,10 +62,8 @@ const _HeaderLeft: React.FC<Props> = ({ className, profileHeader }) => {
           )}
         </HeaderIcon>
       </SearchContainer>
-    </div>
+    </Container>
   );
 };
 
-export const HeaderLeft = withStyles<Props>({ staticStyles })(
-  React.memo(_HeaderLeft)
-);
+export const HeaderLeft = React.memo(_HeaderLeft);

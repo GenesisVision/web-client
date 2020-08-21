@@ -8,7 +8,6 @@ import {
 } from "components/gv-program-avatar/gv-program-avatar.styles";
 import GVColors from "components/gv-styles/gv-colors";
 import PieContainer from "components/pie-container/pie-container";
-import { withStyles } from "decorators/withStyles";
 import React from "react";
 import styled from "styled-components";
 import {
@@ -38,8 +37,11 @@ const StyledImageBase = styled(ImageBase)`
   ${adaptiveBorderRadius(7)};
 `;
 
+const Avatar = styled.div<{ size?: SizesType | "full" }>`
+  ${GVProgramAvatarStyles}
+`;
+
 const _GVProgramAvatar: React.FC<GVProgramAvatarProps> = ({
-  className,
   levelColor = "#1c2730",
   url,
   alt,
@@ -55,7 +57,7 @@ const _GVProgramAvatar: React.FC<GVProgramAvatarProps> = ({
   const haveLevel = level !== undefined && level !== 0;
   return (
     <Container level={level} size={size}>
-      <div className={className}>
+      <Avatar size={size}>
         <StyledImageBase
           quality={size === "large" ? "Medium" : "Low"}
           DefaultImageComponent={GVProgramDefaultAvatar}
@@ -80,12 +82,10 @@ const _GVProgramAvatar: React.FC<GVProgramAvatarProps> = ({
             />
           </GVProgramAvatarLevel>
         )}
-      </div>
+      </Avatar>
     </Container>
   );
 };
 
-const GVProgramAvatar = withStyles<GVProgramAvatarProps>({
-  dynamicStyles: GVProgramAvatarStyles
-})(React.memo(_GVProgramAvatar));
+const GVProgramAvatar = React.memo(_GVProgramAvatar);
 export default GVProgramAvatar;

@@ -8,6 +8,5 @@ export interface IRowProps
   wide?: boolean;
   hide?: boolean;
   center?: boolean;
-  className?: string;
   wrap?: boolean;
 }

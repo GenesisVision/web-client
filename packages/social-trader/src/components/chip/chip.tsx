@@ -11,9 +11,8 @@ import {
 } from "components/gv-styles/gv-colors/gv-colors";
 import { $fontSizeCommon, $fontSizeH3 } from "components/gv-styles/gv-sizes";
 import { $boxShadow1 } from "components/gv-styles/gv-style-constants";
-import { withStyles } from "decorators/withStyles";
 import * as React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { pSBC } from "utils/psbc";
 import {
   adaptiveBorderRadius,
@@ -46,7 +45,7 @@ interface Props extends Sizeable {
 
 const SMALL_SIZE = 32;
 
-const style = css<Props>`
+const Container = styled.div<Props>`
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -128,10 +127,13 @@ const Content = styled.div`
   margin: 0 auto;
 `;
 
-const Chip: React.FC<Props> = ({ children, onClick, className, disabled }) => (
-  <div className={className} onClick={disabled ? () => {} : onClick}>
-    <Content>{children}</Content>
-  </div>
-);
+const Chip: React.FC<Props> = props => {
+  const { children, onClick, disabled } = props;
+  return (
+    <Container {...props} onClick={disabled ? () => {} : onClick}>
+      <Content>{children}</Content>
+    </Container>
+  );
+};
 
-export default withStyles({ dynamicStyles: style })(Chip);
+export default Chip;

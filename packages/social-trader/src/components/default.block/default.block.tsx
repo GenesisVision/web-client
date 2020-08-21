@@ -1,13 +1,14 @@
 import { defaultBlockDynamicStyles } from "components/default.block/default.block.style";
 import { IDefaultBlockProps } from "components/default.block/default.block.types";
-import { withStyles } from "decorators/withStyles";
 import * as React from "react";
+import styled from "styled-components";
 
-const _DefaultBlock: React.FC<IDefaultBlockProps> = ({
-  children,
-  className
-}) => <div className={className}>{children}</div>;
+const StyledDiv = styled.div<IDefaultBlockProps>`
+  ${defaultBlockDynamicStyles}
+`;
 
-export const DefaultBlock = withStyles<IDefaultBlockProps>({
-  dynamicStyles: defaultBlockDynamicStyles
-})(_DefaultBlock);
+const _DefaultBlock: React.FC<IDefaultBlockProps> = props => (
+  <StyledDiv {...props} />
+);
+
+export const DefaultBlock = React.memo(_DefaultBlock);

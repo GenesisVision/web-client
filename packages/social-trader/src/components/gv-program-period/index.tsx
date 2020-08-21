@@ -1,8 +1,7 @@
 import { $primaryColor } from "components/gv-styles/gv-colors/gv-colors";
 import { calcPercent } from "components/pie-container/pie.helpers";
-import { withStyles } from "decorators/withStyles";
 import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 interface GVProgramPeriodProps {
   className?: string;
@@ -39,7 +38,7 @@ const Line = styled.div<ILineProps>`
   position: relative;
 `;
 
-const GVProgramPeriodStyles = css`
+const StyledSvg = styled.svg`
   display: block;
   width: 20px;
   height: 20px;
@@ -56,7 +55,12 @@ const GVProgramPeriod: React.FC<GVProgramPeriodProps> = ({
   const valuePercent = calcPercent(value, start, end);
   if (variant === "pie")
     return (
-      <svg width="100%" height="100%" viewBox="0 0 42 42" className={className}>
+      <StyledSvg
+        width="100%"
+        height="100%"
+        viewBox="0 0 42 42"
+        className={className}
+      >
         <circle
           cx="21"
           cy="21"
@@ -76,7 +80,7 @@ const GVProgramPeriod: React.FC<GVProgramPeriodProps> = ({
           strokeDasharray={calcDash(valuePercent)}
           strokeDashoffset={25}
         />
-      </svg>
+      </StyledSvg>
     );
   else
     return (
@@ -86,6 +90,4 @@ const GVProgramPeriod: React.FC<GVProgramPeriodProps> = ({
     );
 };
 
-export default withStyles<GVProgramPeriodProps>({
-  dynamicStyles: GVProgramPeriodStyles
-})(GVProgramPeriod);
+export default GVProgramPeriod;

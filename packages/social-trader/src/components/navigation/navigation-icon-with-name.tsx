@@ -1,18 +1,17 @@
 import { $mainColor } from "components/gv-styles/gv-colors/gv-colors";
 import { $fontSizeParagraph } from "components/gv-styles/gv-sizes";
 import HeaderIcon from "components/header/header-icon";
-import { withStyles } from "decorators/withStyles";
 import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 interface Props extends React.HTMLAttributes<HTMLAnchorElement> {
   small?: boolean;
   icon: JSX.Element;
 }
 
-const dynamicStyles = css`
-  width: ${({ small }: Props) => (small ? "12px" : "20px")};
-  height: ${({ small }: Props) => (small ? "12px" : "20px")};
+const Container = styled.div<{ small?: boolean }>`
+  width: ${({ small }) => (small ? "12px" : "20px")};
+  height: ${({ small }) => (small ? "12px" : "20px")};
 `;
 
 const NavigationLink = styled.span`
@@ -25,21 +24,19 @@ const NavigationLink = styled.span`
 `;
 
 const _NavigationIconWithName: React.FC<Props> = ({
-  className,
+  small,
   icon,
   children
 }) => {
   return (
     <>
       <HeaderIcon>
-        <div className={className}>{<icon.type {...icon.props} />}</div>
+        <Container small={small}>{<icon.type {...icon.props} />}</Container>
       </HeaderIcon>
       <NavigationLink>{children}</NavigationLink>
     </>
   );
 };
 
-const NavigationIconWithName = withStyles<Props>({ dynamicStyles })(
-  React.memo(_NavigationIconWithName)
-);
+const NavigationIconWithName = React.memo(_NavigationIconWithName);
 export default NavigationIconWithName;

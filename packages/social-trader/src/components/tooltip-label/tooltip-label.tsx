@@ -2,21 +2,19 @@ import { $textColor } from "components/gv-styles/gv-colors/gv-colors";
 import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import Tooltip from "components/tooltip/tooltip";
 import { TooltipContent } from "components/tooltip/tooltip-content";
-import { withStyles } from "decorators/withStyles";
 import * as React from "react";
 import { useCallback } from "react";
-import { css } from "styled-components";
+import styled from "styled-components";
 
 interface Props {
   pointer?: boolean;
   tooltipContent: string | JSX.Element;
   labelText?: string;
-  className?: string;
 }
 
-const style = css`
-  cursor: ${({ pointer }: Props) => (pointer ? "pointer" : "help")};
-  ${({ labelText }: Props) =>
+const StyledSpan = styled.span<{ pointer?: boolean; labelText?: string }>`
+  cursor: ${({ pointer }) => (pointer ? "pointer" : "help")};
+  ${({ labelText }) =>
     !labelText &&
     `
     box-sizing: border-box;
@@ -33,19 +31,19 @@ const style = css`
 `;
 
 const _TooltipLabel: React.FC<Props> = React.memo(
-  ({ pointer, tooltipContent, labelText, className }) => {
+  ({ pointer, tooltipContent, labelText }) => {
     const tooltipRender = useCallback(
       () => <TooltipContent>{tooltipContent}</TooltipContent>,
       [tooltipContent]
     );
     return (
       <Tooltip horizontal={HORIZONTAL_POPOVER_POS.LEFT} render={tooltipRender}>
-        <span className={className}>{labelText ? labelText : "?"}</span>
+        <StyledSpan pointer={pointer} labelText={labelText}>
+          {labelText ? labelText : "?"}
+        </StyledSpan>
       </Tooltip>
     );
   }
 );
 
-export const TooltipLabel = withStyles<Props>({ dynamicStyles: style })(
-  _TooltipLabel
-);
+export const TooltipLabel = React.memo(_TooltipLabel);

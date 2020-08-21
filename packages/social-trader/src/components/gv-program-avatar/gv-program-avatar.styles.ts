@@ -69,7 +69,7 @@ export const GVProgramAvatarStyles = css`
   display: flex;
   justify-content: center;
   align-items: center;
-  ${({ size = "small" }: GVProgramAvatarProps) => {
+  ${({ size = "small" }: { size?: SizesType | "full" }) => {
     switch (size) {
       case "full":
         return `

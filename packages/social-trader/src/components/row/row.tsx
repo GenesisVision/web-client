@@ -1,29 +1,10 @@
 import { Center } from "components/center/center";
-import { RowDynamicStyles } from "components/row/row.style";
-import { withStyles } from "decorators/withStyles";
+import { RowStyledCenter } from "components/row/row.style";
 import React from "react";
+import styled from "styled-components";
 
 import { IRowProps } from "./row.types";
 
-const _Row: React.FC<IRowProps> = ({
-  size = "middle",
-  onlyOffset,
-  center = true,
-  wide,
-  hide,
-  className,
-  children,
-  ...otherProps
-}) => {
-  return (
-    <Center
-      {...otherProps}
-      center={center && !onlyOffset}
-      className={className}
-    >
-      {children}
-    </Center>
-  );
+export const Row: React.FC<IRowProps> = props => {
+  return <RowStyledCenter {...props} />;
 };
-
-export const Row = withStyles({ dynamicStyles: RowDynamicStyles })(_Row);

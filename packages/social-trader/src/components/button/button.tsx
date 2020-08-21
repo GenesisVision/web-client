@@ -2,68 +2,40 @@ import {
   ButtonDynamicStyles,
   ButtonStyles,
   LabelDynamicStyles,
-  LabelStyles,
-  SuccessMarkDynamicStyles,
-  SuccessMarkStyles
+  SuccessMarkDynamicStyles
 } from "components/button/button.styles";
-import {
-  IButtonProps,
-  ILabelProps,
-  ISuccessMarkProps
-} from "components/button/button.types";
-import { withStyles } from "decorators/withStyles";
+import { IButtonProps, ILabelProps } from "components/button/button.types";
 import React from "react";
+import styled from "styled-components";
+import { parseStyles } from "utils/style/style-generators";
+import { transition } from "utils/style/style-mixins";
 
-const _Label: React.FC<ILabelProps> = ({ className, children }) => {
-  return <span className={className}>{children}</span>;
-};
+const Label = styled.span<ILabelProps>`
+  ${transition("opacity")}
+  ${LabelDynamicStyles}
+`;
 
-const Label = withStyles<ILabelProps>({
-  staticStyles: LabelStyles,
-  dynamicStyles: LabelDynamicStyles
-})(_Label);
+const SuccessMark = styled.span<ILabelProps>`
+  position: absolute;
+  ${transition("opacity")}
+  ${SuccessMarkDynamicStyles}
+`;
 
-const _SuccessMark: React.FC<ISuccessMarkProps> = ({ className }) => {
-  return <span className={className}>✔</span>;
-};
-const SuccessMark = withStyles<ISuccessMarkProps>({
-  staticStyles: SuccessMarkStyles,
-  dynamicStyles: SuccessMarkDynamicStyles
-})(_SuccessMark);
+const StyledButton = styled.button<IButtonProps>`
+  ${parseStyles({ styleTable: ButtonStyles })}
+  ${ButtonDynamicStyles}
+`;
 
-const _Button: React.FC<IButtonProps> = ({
-  isSuccessful,
-  successSymbol = true,
-  children,
-  testId,
-  id,
-  disabled,
-  className,
-  onClick,
-  title,
-  type = "button",
-  name
-}) => {
+const _Button: React.FC<IButtonProps> = props => {
+  const { isSuccessful, successSymbol = true, children, testId } = props;
   return (
-    <button
-      data-test-id={testId}
-      id={id}
-      disabled={disabled}
-      className={className}
-      onClick={onClick}
-      title={title}
-      type={type}
-      name={name}
-    >
+    <StyledButton data-test-id={testId} {...props}>
       <Label isSuccessful={isSuccessful}>{children}</Label>
-      {successSymbol && <SuccessMark isSuccessful={isSuccessful} />}
-    </button>
+      {successSymbol && (
+        <SuccessMark isSuccessful={isSuccessful}>✔</SuccessMark>
+      )}
+    </StyledButton>
   );
 };
 
-export const Button = React.memo<IButtonProps>(
-  withStyles<IButtonProps>({
-    staticStyles: ButtonStyles,
-    dynamicStyles: ButtonDynamicStyles
-  })(_Button)
-);
+export const Button = React.memo<IButtonProps>(_Button);

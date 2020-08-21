@@ -1,23 +1,28 @@
 import GVLogo from "components/gv-logo/gv-logo";
 import Link from "components/link/link";
 import { RowItem } from "components/row-item/row-item";
-import { withStyles } from "decorators/withStyles";
 import React from "react";
 import { HOME_ROUTE } from "routes/app.routes";
+import styled, { css } from "styled-components";
 
-const staticStyles = {
-  display: "flex",
-  "align-items": "center"
-};
+const styles = css`
+  display: flex;
+  align-items: center;
+`;
 
-const _GvRootItem: React.FC<{ className?: string }> = ({ className }) => {
+const StyledRowItem = styled(RowItem)`
+  ${styles}
+`;
+const StyledLink = styled(Link)`
+  ${styles}
+`;
+
+export const GvRootItem: React.FC = () => {
   return (
-    <RowItem size={"large"} className={className}>
-      <Link className={className} to={HOME_ROUTE}>
+    <StyledRowItem size={"large"}>
+      <StyledLink to={HOME_ROUTE}>
         <GVLogo />
-      </Link>
-    </RowItem>
+      </StyledLink>
+    </StyledRowItem>
   );
 };
-
-export const GvRootItem = withStyles({ staticStyles })(_GvRootItem);

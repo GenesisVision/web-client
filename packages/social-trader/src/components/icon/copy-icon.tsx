@@ -1,9 +1,13 @@
 import { Icon, IIconProps } from "components/icon/icon";
-import { withStyles } from "decorators/withStyles";
 import * as React from "react";
+import styled from "styled-components";
+
+const StyledIcon = styled(Icon)`
+  width: 14px;
+`;
 
 const CopyIcon: React.FC<IIconProps> = props => (
-  <Icon {...props}>
+  <StyledIcon {...props}>
     <svg
       width="15"
       height="16"
@@ -26,7 +30,7 @@ const CopyIcon: React.FC<IIconProps> = props => (
         strokeWidth="1.5"
       />
     </svg>
-  </Icon>
+  </StyledIcon>
 );
 
-export default withStyles({ staticStyles: { width: "14px" } })(CopyIcon);
+export default CopyIcon;

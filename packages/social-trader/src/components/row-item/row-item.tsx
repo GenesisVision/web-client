@@ -1,24 +1,9 @@
-import {
-  RowItemDynamicStyles,
-  RowItemStaticStyles
-} from "components/row-item/row-item.style";
+import { RowItemDynamicStyles } from "components/row-item/row-item.style";
 import { IRowItemProps } from "components/row-item/row-item.types";
-import { withStyles } from "decorators/withStyles";
 import React from "react";
+import styled from "styled-components";
 
-const _RowItem: React.FC<IRowItemProps> = ({
-  onClick,
-  className,
-  children
-}) => {
-  return (
-    <div onClick={onClick} className={className}>
-      {children}
-    </div>
-  );
-};
-
-export const RowItem = withStyles({
-  dynamicStyles: RowItemDynamicStyles,
-  staticStyles: RowItemStaticStyles
-})(_RowItem);
+export const RowItem = styled.div<IRowItemProps>`
+  box-sizing: border-box;
+  ${RowItemDynamicStyles}
+`;

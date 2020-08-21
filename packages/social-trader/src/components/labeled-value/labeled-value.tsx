@@ -1,9 +1,12 @@
-import { dynamicLabeledValueStyles } from "components/labeled-value/labeled-value.style";
+import {
+  dynamicLabeledValueStyles,
+  StyleProps
+} from "components/labeled-value/labeled-value.style";
 import { ILabeledValueProps } from "components/labeled-value/labeled-value.types";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
-import { withStyles } from "decorators/withStyles";
 import React from "react";
+import styled from "styled-components";
 import { SizesType } from "utils/types";
 
 const getChildOffsetValue = (size: SizesType): SizesType => {
@@ -18,8 +21,11 @@ const getChildOffsetValue = (size: SizesType): SizesType => {
   }
 };
 
-const _LabeledValue: React.FC<ILabeledValueProps> = ({
-  className,
+const Container = styled.div<StyleProps>`
+  ${dynamicLabeledValueStyles}
+`;
+
+export const LabeledValue: React.FC<ILabeledValueProps> = ({
   weight,
   direction = "column",
   label,
@@ -27,7 +33,7 @@ const _LabeledValue: React.FC<ILabeledValueProps> = ({
   children
 }) => {
   return (
-    <div className={className}>
+    <Container direction={direction}>
       <Row onlyOffset>
         <Text wrap={false} muted size={size}>
           {label}
@@ -44,10 +50,6 @@ const _LabeledValue: React.FC<ILabeledValueProps> = ({
           {children}
         </Text>
       </Row>
-    </div>
+    </Container>
   );
 };
-
-export const LabeledValue = withStyles<ILabeledValueProps>({
-  dynamicStyles: dynamicLabeledValueStyles
-})(_LabeledValue);

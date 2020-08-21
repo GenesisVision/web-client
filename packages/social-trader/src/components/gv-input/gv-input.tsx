@@ -8,7 +8,6 @@ import {
 import { $negativeColor } from "components/gv-styles/gv-colors/gv-colors";
 import { $fontSizeXsmall } from "components/gv-styles/gv-sizes";
 import { Text } from "components/text/text";
-import { withStyles } from "decorators/withStyles";
 import React from "react";
 import styled from "styled-components";
 import { fontSize } from "utils/style/style-mixins";
@@ -26,20 +25,24 @@ const Error = styled.div`
   color: ${$negativeColor};
 `;
 
-const _GvInput: React.FC<Props> = ({
-  showError = true,
-  noMargin,
-  wide,
-  label,
-  focused,
-  adornment,
-  value,
-  className,
-  touched,
-  error,
-  inputElement,
-  adornmentPosition = "end"
-}) => {
+const StyledDiv = styled.div<Props>`
+  ${GVInputStyles}
+`;
+
+const _GvInput: React.FC<Props> = props => {
+  const {
+    showError = true,
+    noMargin,
+    wide,
+    label,
+    focused,
+    adornment,
+    value,
+    touched,
+    error,
+    inputElement,
+    adornmentPosition = "end"
+  } = props;
   return (
     <GvInputWrapper margin={!noMargin} wide={wide}>
       {label && (
@@ -53,19 +56,17 @@ const _GvInput: React.FC<Props> = ({
           </Text>
         </GvInputLabel>
       )}
-      <div className={className}>
+      <StyledDiv {...props}>
         {inputElement}
         {adornment && (
           <GvInputAdornment adornmentPosition={adornmentPosition}>
             {adornment}
           </GvInputAdornment>
         )}
-      </div>
+      </StyledDiv>
       {showError && touched && error && <Error>{error}</Error>}
     </GvInputWrapper>
   );
 };
 
-export const GvInput = withStyles<Props>({ dynamicStyles: GVInputStyles })(
-  React.memo(_GvInput)
-);
+export const GvInput = React.memo(_GvInput);
