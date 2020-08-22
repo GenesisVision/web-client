@@ -1,26 +1,67 @@
-import clsx from "clsx";
+import {
+  $mainColor,
+  $panelBackgroundColor
+} from "components/gv-styles/gv-colors/gv-colors";
+import {
+  $fontSizeH3,
+  $fontSizeXsmall,
+  $paddingXxsmall,
+  $paddingXxxsmall
+} from "components/gv-styles/gv-sizes";
 import * as React from "react";
+import styled from "styled-components";
+import {
+  adaptiveBorderRadius,
+  fontSize,
+  height,
+  horizontalPaddings,
+  lineHeight
+} from "utils/style/style-mixins";
 import { OptionalClickable } from "utils/types";
 
-import styles from "./tile-filter-button.module.scss";
+const Container = styled.div`
+  ${fontSize($fontSizeXsmall)};
+  ${adaptiveBorderRadius(19.5)};
+  ${height(18)};
+  ${lineHeight(18)};
+  ${horizontalPaddings($paddingXxsmall)};
+  cursor: pointer;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  text-transform: uppercase;
+  line-height: 16px;
+  white-space: nowrap;
+  transition-property: border-color;
+  border: 1px solid #6e757b;
+  background-color: transparent;
+  color: ${$mainColor};
 
-const _TileFilterButton: React.FC<ITagFilterButton> = ({
-  title,
-  isActive,
-  onClick
-}) => {
+  &:hover,
+  &:active {
+    border-color: ${$mainColor};
+    background-color: ${$mainColor};
+    &,
+    & span {
+      color: ${$panelBackgroundColor};
+    }
+  }
+`;
+
+const Plus = styled.span`
+  ${fontSize($fontSizeH3)};
+  font-weight: 400;
+  padding-right: ${$paddingXxxsmall}px;
+`;
+
+const _TileFilterButton: React.FC<ITagFilterButton> = ({ title, onClick }) => {
   return (
-    <div
-      className={clsx(styles["tile-filter-button__add"], {
-        [styles["tile-filter-button__add--active"]]: isActive
-      })}
-      onClick={onClick}
-    >
-      <>
-        <span className={styles["tile-filter-button__plus"]}>+</span>
-        {title}
-      </>
-    </div>
+    <Container onClick={onClick}>
+      <Plus>+</Plus>
+      {title}
+    </Container>
   );
 };
 
