@@ -14,11 +14,13 @@ const withPrivateRoute = (WrappedComponent: NextPage<any>): any =>
     static async getInitialProps(ctx: NextPageWithTokenContext) {
       const token = getToken(ctx);
       const tokenObject = Token.create(ctx);
-      const isValidToken = await api
-        .auth(tokenObject)
-        .getTwoStepAuthStatus()
-        .then(() => true)
-        .catch(() => false);
+      const isValidToken = tokenObject.isExist()
+        ? await api
+            .auth(tokenObject)
+            .getTwoStepAuthStatus()
+            .then(() => true)
+            .catch(() => false)
+        : false;
 
       if (ctx.req && ctx.res && (!token || !isValidToken)) {
         const clearToken = !isValidToken;
