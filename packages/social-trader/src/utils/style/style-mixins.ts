@@ -4,8 +4,25 @@ import {
 } from "components/gv-styles/gv-media";
 import { $dividerPadding, $dividerText } from "components/gv-styles/gv-sizes";
 import { css } from "styled-components";
-import { IStyleValue } from "utils/style/style-generators";
 import { AnyObjectType } from "utils/types";
+
+export const link = (color: string) => {
+  return css`
+    ${transition("opacity")};
+    font-size: inherit;
+    color: ${color};
+    &:hover {
+      opacity: 0.9;
+    }
+  `;
+};
+
+export const lineHeight = (value: number, divider: number = $dividerText) => {
+  return `
+    line-height: ${value / divider}px;
+    ${mediaBreakpointLandscapePhone(`line-height: ${value}px;`)}
+  `;
+};
 
 export const adaptiveBorderRadius = (size: number) => {
   return `
@@ -44,16 +61,16 @@ export const right = (value: number) => {
   `;
 };
 
-export const width = (value: number) => {
+export const width = (value: number, divider: number = $dividerText) => {
   return `
-    width: ${value / $dividerText}px;
+    width: ${value / divider}px;
     ${mediaBreakpointLandscapePhone(`width: ${value}px;`)}
   `;
 };
 
-export const height = (value: number) => {
+export const height = (value: number, divider: number = $dividerText) => {
   return `
-    height: ${value / $dividerText}px;
+    height: ${value / divider}px;
     ${mediaBreakpointLandscapePhone(`height: ${value}px;`)}
   `;
 };
