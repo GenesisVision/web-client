@@ -6,12 +6,15 @@ import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
 import React from "react";
-
-import styles from "./currency-item-with-amount.module.scss";
+import styled from "styled-components";
 
 interface Props extends ICurrencyItemProps {
   available?: number;
 }
+
+const Name = styled(RowItem)`
+  min-width: 80px;
+`;
 
 const _CurrencyItemWithAmount: React.FC<Props> = ({
   available,
@@ -21,13 +24,13 @@ const _CurrencyItemWithAmount: React.FC<Props> = ({
 }) => {
   return (
     <Row>
-      <RowItem className={styles["currency-item-with-amount__name"]}>
+      <Name>
         <CurrencyItem
           {...props}
           symbol={symbol}
           name={available !== undefined ? symbol : name}
         />
-      </RowItem>
+      </Name>
       <RowItem>
         <Text muted>{available}</Text>
       </RowItem>
