@@ -1,7 +1,6 @@
 import DetailsDescriptionSection from "components/details/details-description-section/details-description/details-description-section";
 import DetailsInvestment from "components/details/details-description-section/details-investment/details-investment";
 import { DetailsDivider } from "components/details/details-divider.block";
-import { FUND_ASSET_TYPE } from "components/fund-asset/fund-asset";
 import FundAssetContainer from "components/fund-asset/fund-asset-container";
 import Page from "components/page/page";
 import { Row } from "components/row/row";
@@ -87,7 +86,7 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
         </h4>
         <Row>
           <FundAssetContainer
-            type={FUND_ASSET_TYPE.LARGE}
+            type={"large"}
             assets={description.assetsStructure}
             size={7}
           />

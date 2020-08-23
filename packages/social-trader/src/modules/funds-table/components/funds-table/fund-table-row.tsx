@@ -1,7 +1,6 @@
 import clsx from "clsx";
 import AssetAvatarWithName from "components/avatar/asset-avatar/asset-avatar-with-name";
 import FavoriteIcon from "components/favorite-asset/favorite-icon/favorite-icon";
-import { FUND_ASSET_TYPE } from "components/fund-asset/fund-asset";
 import FundAssetContainer from "components/fund-asset/fund-asset-container";
 import { mediaBreakpointLandscapePhone } from "components/gv-styles/gv-media";
 import Link from "components/link/link";
@@ -78,7 +77,7 @@ const _FundsTableRow: React.FC<Props> = ({ fund }) => {
         <FundAssetContainer
           noWrap
           assets={fund.topFundAssets}
-          type={FUND_ASSET_TYPE.SHORT}
+          type={"short"}
           size={3}
           length={fund.totalAssetsCount}
         />
