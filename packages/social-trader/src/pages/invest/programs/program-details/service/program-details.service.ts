@@ -11,6 +11,7 @@ import {
   NotificationType,
   ProgramFollowDetailsFull
 } from "gv-api-web";
+import { IProgramHistoryCounts } from "pages/invest/programs/program-details/program-details.types";
 import { RootState } from "reducers/root-reducer";
 import { Dispatch } from "redux";
 import { api } from "services/api-client/swagger-custom-client";
@@ -155,6 +156,45 @@ export const fetchInvestmentsLevels = (
     .getProgramLevels({ currency })
     .then(({ levels }) => levels);
 
+export const getProgramTrades = api.programs().getAssetTrades;
+
+export const getInitProgramHistoryCounts = async (
+  id: string,
+  isProgram?: boolean
+): Promise<IProgramHistoryCounts> => {
+  const counts: IProgramHistoryCounts = {
+    trades: 0,
+    periods: 0,
+    tradingLog: 0,
+    openPositions: 0,
+    subscriptions: 0,
+    financialStatistic: 0
+  };
+  const isAuthenticated = authService.isAuthenticated();
+  const commonFiltering = { take: 0 };
+  counts.trades = await getProgramTrades(id, commonFiltering).then(
+    ({ total }) => total
+  );
+  if (isProgram) {
+    counts.periods = await api
+      .programs()
+      .getProgramPeriods(id, commonFiltering)
+      .then(({ total }) => total);
+  }
+  if (isAuthenticated) {
+    counts.subscriptions = await api
+      .programs()
+      .getProgramSubscribers(id, commonFiltering)
+      .then(({ total }) => total);
+    if (isProgram) {
+      counts.financialStatistic = await api
+        .programs()
+        .getProgramPeriods(id, commonFiltering)
+        .then(({ total }) => total);
+    }
+  }
+  return counts;
+};
 export const getProgramHistoryCounts = (isProgram: boolean) => (id: string) => (
   dispatch: Dispatch,
   getState: () => RootState
