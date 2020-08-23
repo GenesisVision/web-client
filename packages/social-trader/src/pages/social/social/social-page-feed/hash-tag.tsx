@@ -11,7 +11,7 @@ interface Props {
 const _HashTag: React.FC<Props> = ({ color, name, onRemove }) => {
   return (
     <TileFilterItem bottomOffset={false} id={name} removeTile={onRemove}>
-      <TagBubble color={color} content={name} />
+      <TagBubble color={color}>{name}</TagBubble>
     </TileFilterItem>
   );
 };

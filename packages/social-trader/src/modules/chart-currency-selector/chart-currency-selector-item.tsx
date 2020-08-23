@@ -39,36 +39,33 @@ const _ChartCurrencySelectorItem: React.FC<Props> = ({
       id={name}
       removeTile={onRemove}
     >
-      <TagBubble
-        color={color}
-        content={
-          <Center>
-            <RowItem size={"small"}>
-              <TagCircle backgroundColor={color} />
-            </RowItem>
-            <RowItem>
-              {selectCurrencies.length || i === 0 ? (
-                <CurrencySelect
-                  bottomLine={false}
-                  size={"small"}
-                  className={styles["chart-currency-selector__select"]}
-                  value={name}
-                  onChange={onChange(i)}
-                  currencyValues={
-                    i === 0 && fullSelectCurrencies
-                      ? fullSelectCurrencies.filter(
-                          fullSelectCurrency => fullSelectCurrency !== name
-                        )
-                      : selectCurrencies
-                  }
-                />
-              ) : (
-                name
-              )}
-            </RowItem>
-          </Center>
-        }
-      />
+      <TagBubble color={color}>
+        <Center>
+          <RowItem size={"small"}>
+            <TagCircle backgroundColor={color} />
+          </RowItem>
+          <RowItem>
+            {selectCurrencies.length || i === 0 ? (
+              <CurrencySelect
+                bottomLine={false}
+                size={"small"}
+                className={styles["chart-currency-selector__select"]}
+                value={name}
+                onChange={onChange(i)}
+                currencyValues={
+                  i === 0 && fullSelectCurrencies
+                    ? fullSelectCurrencies.filter(
+                        fullSelectCurrency => fullSelectCurrency !== name
+                      )
+                    : selectCurrencies
+                }
+              />
+            ) : (
+              name
+            )}
+          </RowItem>
+        </Center>
+      </TagBubble>
     </TileFilterItem>
   );
 };
