@@ -1,3 +1,5 @@
+export const $landingBgGray = "#f7f7f7";
+export const $landingItemBg = "#100c31";
 export const $rowColor = "#212c34";
 export const $tableBackgroundSubColor = "#202b34";
 export const $backgroundChipPositive = "#132d34";
