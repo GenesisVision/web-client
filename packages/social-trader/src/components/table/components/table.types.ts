@@ -11,6 +11,12 @@ import {
   TFilter
 } from "./filtering/filter.type";
 
+export interface TableRequestData {
+  paging?: IPaging;
+  sorting?: string;
+  filtering?: FilteringType;
+}
+
 export type TRenderHeaderFunc = (
   column: SortingColumn,
   i?: number
@@ -27,7 +33,8 @@ export type UpdateItemsFuncType = VoidFuncType;
 export type UpdateRowFuncType = (row: any) => void;
 
 export type GetItemsFuncType = (
-  filters?: ComposeFiltersAllType
+  filters?: ComposeFiltersAllType,
+  requestData?: TableRequestData
 ) => Promise<IDataModel>;
 
 export type GetItemsFuncActionType = (filters: ComposeFiltersAllType) => Action;
