@@ -12,6 +12,15 @@ import {
 } from "gv-api-web";
 import { CurrencyEnum } from "utils/types";
 
+export interface IProgramHistoryCounts {
+  trades: number;
+  periods: number;
+  tradingLog: number;
+  openPositions: number;
+  subscriptions: number;
+  financialStatistic: number;
+}
+
 export interface ILevelCalculatorProps {
   id: string;
   title: string;
