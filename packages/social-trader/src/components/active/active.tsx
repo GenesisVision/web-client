@@ -32,7 +32,7 @@ const ChartContainer = styled(Row)`
 `;
 
 const Description = styled(Row)`
-  font-size: ${$fontSizeParagraph};
+  font-size: ${$fontSizeParagraph}px;
   line-height: 1.8;
 `;
 
