@@ -14,21 +14,20 @@ import PerformanceData from "pages/invest/programs/program-details/program-detai
 import ProgramDetailsStatisticSection from "pages/invest/programs/program-details/program-details-statistic-section/program-details-statistic-section";
 import { levelsParamsLoaderData } from "pages/invest/programs/program-details/program-details.loader-data";
 import { ProgramDescriptionDataType } from "pages/invest/programs/program-details/program-details.types";
+import { ProgramHistoryContextProvider } from "pages/invest/programs/program-details/program-history-section/program-details-history-context";
+import ProgramDetailsSimpleHistorySection from "pages/invest/programs/program-details/program-history-section/program-details-simple-history-section";
 import { getSchema } from "pages/invest/programs/program-details/program-schema";
 import * as React from "react";
 import { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import {
-  composeProgramBannerUrl,
   createFollowNotificationsToUrl,
   createProgramNotificationsToUrl,
   createProgramSettingsToUrl
 } from "utils/compose-url";
 
-import ProgramDetailsHistorySection, {
-  TProgramTablesData
-} from "./program-history-section/program-details-history-section";
+import { TProgramTablesData } from "./program-history-section/program-details-history-section";
 import {
   financialStatisticTableSelector,
   openPositionsSelector,
@@ -44,7 +43,6 @@ import {
   getFinancialStatistics,
   getOpenPositions,
   getPeriodHistory,
-  getProgramHistoryCounts,
   getSubscriptions,
   getTrades
 } from "./service/program-details.service";
@@ -224,10 +222,6 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
   );
 
   const hasProgramDetails = !!programDetails;
-  const getHistoryCounts = useMemo(
-    () => getProgramHistoryCounts(hasProgramDetails),
-    [hasProgramDetails]
-  );
 
   return (
     <Page
@@ -284,21 +278,22 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
           <ProgramDetailsStatisticSection />
         </Row>
       )}
-      <ProgramDetailsHistorySection
-        assetType={(route as unknown) as TRADE_ASSET_TYPE}
-        canCloseOpenPositions={ownerActions?.canCloseOpenPositions}
-        getHistoryCounts={getHistoryCounts}
-        tablesData={tablesData}
-        showCommissionRebateSometime={
-          brokerDetails.showCommissionRebateSometime
-        }
-        isOwnProgram={isOwnAsset}
-        showSwaps={brokerDetails.showSwaps}
-        showTickets={brokerDetails.showTickets}
-        programId={id}
-        programCurrency={currency}
-        title={title}
-      />
+      <ProgramHistoryContextProvider id={id} isProgram={hasProgramDetails}>
+        <ProgramDetailsSimpleHistorySection
+          assetType={(route as unknown) as TRADE_ASSET_TYPE}
+          canCloseOpenPositions={ownerActions?.canCloseOpenPositions}
+          tablesData={tablesData}
+          showCommissionRebateSometime={
+            brokerDetails.showCommissionRebateSometime
+          }
+          isOwnProgram={isOwnAsset}
+          showSwaps={brokerDetails.showSwaps}
+          showTickets={brokerDetails.showTickets}
+          programId={id}
+          programCurrency={currency}
+          title={title}
+        />
+      </ProgramHistoryContextProvider>
     </Page>
   );
 };
