@@ -1,5 +1,8 @@
 import { Button } from "components/button/button";
 import { Center } from "components/center/center";
+import { $textDarkColor } from "components/gv-styles/gv-colors/gv-colors";
+import { mediaBreakpointLandscapePhone } from "components/gv-styles/gv-media";
+import { $fontSizeParagraph } from "components/gv-styles/gv-sizes";
 import { PopoverContentCardBlock } from "components/popover/popover-card.block";
 import { PopoverContent } from "components/popover/popover-content";
 import { RowItem } from "components/row-item/row-item";
@@ -9,6 +12,8 @@ import dayjs from "dayjs";
 import * as React from "react";
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
+import styled from "styled-components";
+import { fontSize } from "utils/style/style-mixins";
 import { Clickable } from "utils/types";
 
 import DateRangeFilterValues from "./date-range-filter-values";
@@ -18,7 +23,6 @@ import {
   DATE_RANGE_MIN_FILTER_NAME,
   IDataRangeFilterValue
 } from "./date-range-filter.constants";
-import styles from "./date-range-filter.module.scss";
 
 interface Props {
   value?: IDataRangeFilterValue;
@@ -48,12 +52,21 @@ const getDateStart = (type: DATA_RANGE_FILTER_TYPES) => {
   }
 };
 
+const StyledButton = styled(Button)`
+  ${fontSize($fontSizeParagraph)};
+  &:not(:disabled) {
+    color: ${$textDarkColor};
+  }
+  &:disabled {
+    opacity: 1;
+  }
+`;
+
 const DateRangeItem: React.FC<IDateRangeItemProps> = React.memo(
   ({ onClick, disabled, label }) => {
     return (
       <Row>
-        <Button
-          className={styles["date-range-filter__type-btn"]}
+        <StyledButton
           noPadding
           variant="text"
           color="secondary"
@@ -61,11 +74,35 @@ const DateRangeItem: React.FC<IDateRangeItemProps> = React.memo(
           disabled={disabled}
         >
           {label}
-        </Button>
+        </StyledButton>
       </Row>
     );
   }
 );
+
+const Container = styled(PopoverContent)`
+  display: flex;
+`;
+
+const TypeBlock = styled(PopoverContentCardBlock)`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+`;
+
+const Dates = styled(PopoverContentCardBlock)`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+const Values = styled(Center)`
+  flex-wrap: wrap;
+  ${mediaBreakpointLandscapePhone(`
+      flex - wrap:nowrap;
+  `)}
+`;
 
 const _DateRangeFilterPopover: React.FC<Props> = ({
   changeFilter,
@@ -118,11 +155,8 @@ const _DateRangeFilterPopover: React.FC<Props> = ({
   }, [changeFilter, state]);
 
   return (
-    <PopoverContent className={styles["date-range-filter"]}>
-      <PopoverContentCardBlock
-        dark
-        className={styles["date-range-filter__type"]}
-      >
+    <Container>
+      <TypeBlock dark>
         <DateRangeItem
           onClick={handleChangeType(DATA_RANGE_FILTER_TYPES.ALL)}
           disabled={state.type === DATA_RANGE_FILTER_TYPES.ALL}
@@ -143,16 +177,16 @@ const _DateRangeFilterPopover: React.FC<Props> = ({
           disabled={state.type === DATA_RANGE_FILTER_TYPES.CUSTOM}
           label={t("filters.date-range.custom")}
         />
-      </PopoverContentCardBlock>
-      <PopoverContentCardBlock className={styles["date-range-filter__dates"]}>
+      </TypeBlock>
+      <Dates>
         <FilterTitle>{t("filters.date-range.label")}</FilterTitle>
-        <Center className={styles["date-range-filter__values"]}>
+        <Values>
           <DateRangeFilterValues
             {...state}
             onChange={handleChangeDate}
             startLabel={startLabel}
           />
-        </Center>
+        </Values>
         <Row>
           <RowItem>
             <Button
@@ -176,8 +210,8 @@ const _DateRangeFilterPopover: React.FC<Props> = ({
             </Button>
           </RowItem>
         </Row>
-      </PopoverContentCardBlock>
-    </PopoverContent>
+      </Dates>
+    </Container>
   );
 };
 
