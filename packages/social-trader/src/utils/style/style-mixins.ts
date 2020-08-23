@@ -96,6 +96,13 @@ export const verticalPaddings = (value: number) => {
   `;
 };
 
+export const adaptiveFullPadding = (value: number) => {
+  return `
+    ${verticalPaddings(value)}
+    ${horizontalPaddings(value)}
+  `;
+};
+
 export const getBoxShadowValue = (color: string) => {
   return `0 0.2em 0.5em 0 ${color}`;
 };
