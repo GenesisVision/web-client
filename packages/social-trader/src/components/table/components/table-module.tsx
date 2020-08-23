@@ -58,7 +58,7 @@ const _TableModule: React.FC<ITableModuleProps> = props => {
       filtering,
       defaultFilters
     });
-    getItems(filters)
+    getItems(filters, { paging, sorting, filtering })
       .then(setData)
       .finally(setIsNotPending);
   }, [loader, paging, sorting, filtering, timestamp]);
