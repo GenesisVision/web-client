@@ -8,14 +8,13 @@ import React, { Component } from "react";
 import { Dispatch } from "redux";
 import { NextPageWithReduxContext } from "utils/types";
 
-const isServer = typeof window === "undefined";
-
 const withDefaultLayout = (WrappedComponent: NextPage<any>) =>
   class extends Component<{
     info: PlatformInfo;
     ex: ErrorViewModel;
   }> {
     static async getInitialProps(ctx: NextPageWithReduxContext) {
+      const hasPlatformData = !!ctx.reduxStore?.getState()?.platformData?.data;
       let componentProps = {};
       await ctx.reduxStore.dispatch(async (dispatch: Dispatch) => {
         await dispatch(changeLocationAction());
@@ -24,7 +23,8 @@ const withDefaultLayout = (WrappedComponent: NextPage<any>) =>
         WrappedComponent.getInitialProps &&
           WrappedComponent.getInitialProps(ctx),
         ctx.reduxStore.dispatch(async (dispatch: Dispatch) => {
-          isServer && (await dispatch(platformActions.fetchPlatformSettings()));
+          !hasPlatformData &&
+            (await dispatch(platformActions.fetchPlatformSettings()));
         })
       ])
         .then(([data]) => {

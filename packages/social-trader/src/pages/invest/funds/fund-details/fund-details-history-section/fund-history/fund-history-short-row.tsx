@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import ImageBase from "components/avatar/image-base";
 import { Center } from "components/center/center";
 import ShortArrow from "components/icon/short-arrow/short-arrow";
@@ -19,8 +20,14 @@ interface Props {
 }
 
 const _FundHistoryShortRow: React.FC<Props> = ({ isOpen, setOpen, item }) => {
+  const hasTrades = !!item.trades.length;
   return (
-    <TableRow onClick={setOpen} className={styles["fund-history__short-row"]}>
+    <TableRow
+      onClick={setOpen}
+      className={clsx({
+        [styles["fund-history__short-row"]]: hasTrades
+      })}
+    >
       <TableCell>{formatDate(item.date)}</TableCell>
       <TableCell>
         <Center>
@@ -46,9 +53,11 @@ const _FundHistoryShortRow: React.FC<Props> = ({ isOpen, setOpen, item }) => {
               type={item.type}
             />
           </RowItem>
-          <RowItem className={styles["fund-history__expand-icon"]}>
-            <ShortArrow direction={isOpen ? "top" : "bottom"} />
-          </RowItem>
+          {hasTrades && (
+            <RowItem className={styles["fund-history__expand-icon"]}>
+              <ShortArrow direction={isOpen ? "top" : "bottom"} />
+            </RowItem>
+          )}
         </Center>
       </TableCell>
     </TableRow>
