@@ -89,7 +89,12 @@ const _UrlTagComponent: React.FC<IUrlTagProps> = ({
   }
 }) => {
   return (
-    <a href={url} target="_blank" rel="noopener noreferrer">
+    <a
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      style={{ wordBreak: "break-all" }}
+    >
       {title}
     </a>
   );
