@@ -41,16 +41,24 @@ export const hideOnLandscapeTablet = (display: string = "block") => {
   `;
 };
 
-export const adaptivePadding = (direction: string, marginSize: number) => {
+export const adaptivePadding = (
+  direction: string,
+  marginSize: number,
+  divider: number = $dividerPadding
+) => {
   return `
-    padding-${direction}: ${marginSize / $dividerPadding}px;
+    padding-${direction}: ${marginSize / divider}px;
     ${mediaBreakpointLandscapePhone(`padding-${direction}: ${marginSize}px;`)}
   `;
 };
 
-export const adaptiveMargin = (direction: string, marginSize: number) => {
+export const adaptiveMargin = (
+  direction: string,
+  marginSize: number,
+  divider: number = $dividerPadding
+) => {
   return `
-    margin-${direction}: ${marginSize / $dividerPadding}px;
+    margin-${direction}: ${marginSize / divider}px;
     ${mediaBreakpointLandscapePhone(`margin-${direction}: ${marginSize}px;`)}
   `;
 };
@@ -82,17 +90,17 @@ export const fontSize = (value: number) => {
   `;
 };
 
-export const horizontalPaddings = (value: number) => {
+export const horizontalPaddings = (value: number, divider?: number) => {
   return `
-    ${adaptivePadding("left", value)}
-    ${adaptivePadding("right", value)}
+    ${adaptivePadding("left", value, divider)}
+    ${adaptivePadding("right", value, divider)}
   `;
 };
 
-export const verticalPaddings = (value: number) => {
+export const verticalPaddings = (value: number, divider?: number) => {
   return `
-    ${adaptivePadding("top", value)}
-    ${adaptivePadding("bottom", value)}
+    ${adaptivePadding("top", value, divider)}
+    ${adaptivePadding("bottom", value, divider)}
   `;
 };
 
