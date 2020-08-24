@@ -190,7 +190,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
   vertical?: VERTICAL_POPOVER_POS;
   anchorEl?: anchorElType;
   noPadding?: boolean;
-  noAbsolute?: boolean;
+  absolute?: boolean;
   className?: string;
   fixed?: boolean;
   ownWidth?: boolean;

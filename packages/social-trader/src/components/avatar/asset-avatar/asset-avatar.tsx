@@ -39,7 +39,7 @@ const _AssetAvatar: React.FC<IAssetAvatarProps> = props => {
       />
       {tooltip && (
         <Popover
-          noAbsolute
+          absolute={false}
           noPadding
           anchorEl={anchor}
           className="tooltip__popover"

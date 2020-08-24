@@ -64,7 +64,7 @@ const MenuTooltip: React.FC<Props> = ({
         fixedHorizontal
         onMouseEnter={handlePopoverMouseEnter}
         onMouseLeave={handlePopoverMouseLeave}
-        noAbsolute
+        absolute={false}
         noPadding
         anchorEl={anchor}
         className={clsx(styles["menu-tooltip__popover"], className)}

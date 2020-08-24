@@ -51,7 +51,7 @@ const Tooltip: React.FC<Props> = ({
         onClick={handleClick}
       />
       <Popover
-        noAbsolute
+        absolute={false}
         noPadding
         anchorEl={anchor}
         className={className}

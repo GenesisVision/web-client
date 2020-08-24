@@ -16,7 +16,7 @@ export const BodyFix = () => {
 const _Modal: React.FC<Props> = ({
   onClose,
   open,
-  noAbsolute,
+  absolute = true,
   transparentBackdrop,
   children,
   fixed
@@ -41,7 +41,7 @@ const _Modal: React.FC<Props> = ({
     <Portal open={open}>
       <div
         className={clsx(styles["modal"], {
-          [styles["modal--position-absolute"]]: !noAbsolute,
+          [styles["modal--position-absolute"]]: !absolute,
           [styles["modal--position-fixed"]]: fixed
         })}
       >
@@ -62,7 +62,7 @@ const _Modal: React.FC<Props> = ({
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   onClose?: (event: React.MouseEvent<HTMLElement>) => void;
   open: boolean;
-  noAbsolute?: boolean;
+  absolute?: boolean;
   transparentBackdrop?: boolean;
   fixed?: boolean;
 }
