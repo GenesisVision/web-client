@@ -6,16 +6,15 @@ import { appWithTranslation } from "i18n";
 import App from "next/app";
 import "pages/landing-page/styles/index.scss";
 import React from "react";
-import { Provider } from "react-redux";
 import { compose, Store } from "redux";
 import { initializeStore } from "store";
 import "styles/index.scss";
 
 class CustomApp extends App<Props> {
   render() {
-    const { Component, pageProps, reduxStore } = this.props;
+    const { Component, pageProps } = this.props;
     return (
-      <Provider store={reduxStore}>
+      <>
         <Component {...pageProps} />
         <style global jsx>{`
           :root {
@@ -47,7 +46,7 @@ class CustomApp extends App<Props> {
             scrollbar-color: var(--scroll-thumb-color) var(--scroll-background);
           }
         `}</style>
-      </Provider>
+      </>
     );
   }
 }
