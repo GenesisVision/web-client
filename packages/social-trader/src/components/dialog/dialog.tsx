@@ -6,6 +6,18 @@ import React, { ReactNode, useCallback, useState } from "react";
 
 import styles from "./dialog.module.scss";
 
+export interface IDialogProps extends IDialogOuterProps {
+  showClose?: boolean;
+  children?: ReactNode;
+  className?: string;
+  top?: boolean;
+}
+
+export interface IDialogOuterProps {
+  open: boolean;
+  onClose: (param?: any) => void;
+}
+
 export const Dialog: React.FC<IDialogProps> = ({
   showClose = true,
   top,
@@ -60,15 +72,3 @@ export const Dialog: React.FC<IDialogProps> = ({
 };
 
 export default Dialog;
-
-export interface IDialogProps extends IDialogOuterProps {
-  showClose?: boolean;
-  children?: ReactNode;
-  className?: string;
-  top?: boolean;
-}
-
-export interface IDialogOuterProps {
-  open: boolean;
-  onClose: (param?: any) => void;
-}
