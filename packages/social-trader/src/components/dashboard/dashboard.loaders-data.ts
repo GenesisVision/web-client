@@ -11,7 +11,14 @@ const investmentEventViewModelCreator = (): InvestmentEventViewModel => ({
   logoUrl: "",
   date: new Date(),
   assetDetails: {
-    programDetails: { level: 0, levelProgress: 0 },
+    programDetails: {
+      successFeeSelected: 0,
+      successFeeCurrent: 0,
+      managementFeeSelected: 0,
+      managementFeeCurrent: 0,
+      level: 0,
+      levelProgress: 0
+    },
     id: "",
     logoUrl: "",
     color: getRandomColor(),
