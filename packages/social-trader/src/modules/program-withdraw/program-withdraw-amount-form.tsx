@@ -1,4 +1,5 @@
 import { DialogButtons } from "components/dialog/dialog-buttons";
+import { DialogInfo } from "components/dialog/dialog-info";
 import GVCheckbox from "components/gv-checkbox/gv-checkbox";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import InputAmountField from "components/input-amount-field/hook-form-amount-field";
@@ -18,7 +19,19 @@ import { convertFromCurrency } from "utils/currency-converter";
 import { formatCurrencyValue, validateFraction } from "utils/formatter";
 import { HookForm } from "utils/hook-form.helpers";
 
+interface Props {
+  withdrawInPercent?: boolean;
+  formValues: IProgramWithdrawAmountFormValues;
+  onSubmit: (values: IProgramWithdrawAmountFormValues) => void;
+  availableToWithdraw: number;
+  programCurrency: string;
+  accountCurrency: string;
+  rate: number;
+  isOwner: boolean;
+}
+
 const _ProgramWithdrawAmountForm: React.FC<Props> = ({
+  withdrawInPercent,
   onSubmit,
   formValues,
   availableToWithdraw,
@@ -34,6 +47,7 @@ const _ProgramWithdrawAmountForm: React.FC<Props> = ({
       [WITHDRAW_FORM_FIELDS.withdrawAll]: formValues.withdrawAll
     },
     validationSchema: programWithdrawAmountValidationSchema({
+      withdrawInPercent,
       availableToWithdraw,
       t
     }),
@@ -53,13 +67,22 @@ const _ProgramWithdrawAmountForm: React.FC<Props> = ({
     [programCurrency]
   );
 
+  const maxAmount = +formatCurrencyValue(availableToWithdraw, programCurrency);
+
   const setMaxAmount = useCallback(() => {
-    setValue(
-      WITHDRAW_FORM_FIELDS.amount,
-      +formatCurrencyValue(availableToWithdraw, programCurrency),
-      true
-    );
-  }, [availableToWithdraw, programCurrency, setValue]);
+    const formMaxAmount = withdrawInPercent ? 100 : maxAmount;
+    setValue(WITHDRAW_FORM_FIELDS.amount, formMaxAmount, true);
+  }, [
+    maxAmount,
+    withdrawInPercent,
+    availableToWithdraw,
+    programCurrency,
+    setValue
+  ]);
+
+  const convertedValue = withdrawInPercent
+    ? (maxAmount / 100) * +amount
+    : amount;
 
   return (
     <HookForm form={form} onSubmit={onSubmit}>
@@ -84,9 +107,9 @@ const _ProgramWithdrawAmountForm: React.FC<Props> = ({
         <InputAmountField
           name={WITHDRAW_FORM_FIELDS.amount}
           label={t("withdraw-program.amount-to-withdraw")}
-          currency={programCurrency}
+          currency={withdrawInPercent ? "%" : programCurrency}
           isAllowed={isAllow}
-          setMax={isOwner ? setMaxAmount : undefined}
+          setMax={isOwner || withdrawInPercent ? setMaxAmount : undefined}
         />
       </Row>
       {programCurrency !== accountCurrency && amount !== 0 && (
@@ -94,7 +117,7 @@ const _ProgramWithdrawAmountForm: React.FC<Props> = ({
           <Text muted>
             <NumberFormat
               value={formatCurrencyValue(
-                convertFromCurrency(amount!, rate),
+                convertFromCurrency(convertedValue!, rate),
                 accountCurrency
               )}
               prefix="≈ "
@@ -119,13 +142,3 @@ const _ProgramWithdrawAmountForm: React.FC<Props> = ({
 
 const ProgramWithdrawAmountForm = React.memo(_ProgramWithdrawAmountForm);
 export default ProgramWithdrawAmountForm;
-
-interface Props {
-  formValues: IProgramWithdrawAmountFormValues;
-  onSubmit(values: IProgramWithdrawAmountFormValues): void;
-  availableToWithdraw: number;
-  programCurrency: string;
-  accountCurrency: string;
-  rate: number;
-  isOwner: boolean;
-}

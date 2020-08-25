@@ -23,7 +23,7 @@ const _ProgramWithdrawPopup: React.FC<Props> = ({
   onApply,
   id,
   onClose,
-  data: { availableToWithdraw, periodEnds, title, isOwner },
+  data: { withdrawInPercent, availableToWithdraw, periodEnds, title, isOwner },
   assetCurrency,
   accountCurrency
 }) => {
@@ -54,6 +54,16 @@ const _ProgramWithdrawPopup: React.FC<Props> = ({
   const isAvailableProgramConfirmForm =
     formValues.amount || formValues.withdrawAll;
 
+  const isRealTime = +new Date() + 2 * 60 * 100 > +new Date(periodEnds);
+
+  const time = withdrawInPercent
+    ? new Date(periodEnds).toUTCString()
+    : t("withdraw-program.end");
+
+  const infoMessage = t("withdraw-program.info", {
+    time
+  });
+
   return (
     <>
       <ProgramWithdrawTop
@@ -66,6 +76,7 @@ const _ProgramWithdrawPopup: React.FC<Props> = ({
       <DialogBottom>
         {tab === PROGRAM_WITHDRAW_FORM.ENTER_AMOUNT && (
           <ProgramWithdrawAmountForm
+            withdrawInPercent={withdrawInPercent}
             isOwner={isOwner}
             formValues={formValues}
             rate={rate}
@@ -78,6 +89,7 @@ const _ProgramWithdrawPopup: React.FC<Props> = ({
         {tab === PROGRAM_WITHDRAW_FORM.CONFIRM &&
           isAvailableProgramConfirmForm && (
             <ProgramWithdrawConfirm
+              withdrawInPercent={withdrawInPercent}
               onApply={onApply}
               id={id}
               onClose={onClose}
@@ -87,7 +99,9 @@ const _ProgramWithdrawPopup: React.FC<Props> = ({
               periodEnds={periodEnds}
             />
           )}
-        <DialogInfo>{t("withdraw-program.info")}</DialogInfo>
+        {(!withdrawInPercent || !isRealTime) && (
+          <DialogInfo>{infoMessage}</DialogInfo>
+        )}
       </DialogBottom>
     </>
   );
