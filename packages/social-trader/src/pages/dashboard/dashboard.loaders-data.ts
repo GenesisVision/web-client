@@ -112,7 +112,14 @@ const getEventLoaderData = (): TDashboardEvent => ({
     title: "",
     url: "",
     assetType: (getRandomAsset() as unknown) as AssetType,
-    programDetails: { level: 0, levelProgress: 0 }
+    programDetails: {
+      successFeeSelected: 0,
+      successFeeCurrent: 0,
+      managementFeeSelected: 0,
+      managementFeeCurrent: 0,
+      level: 0,
+      levelProgress: 0
+    }
   },
   currency: "GVT",
   changeState: "NotChanged",
