@@ -42,6 +42,10 @@ export const assetInfoLoaderData: AssetDetails = {
   url: "",
   assetType: "Follow",
   programDetails: {
+    successFeeSelected: 0,
+    successFeeCurrent: 0,
+    managementFeeSelected: 0,
+    managementFeeCurrent: 0,
     level: 0,
     levelProgress: 0
   }
