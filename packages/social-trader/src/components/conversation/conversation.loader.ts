@@ -66,7 +66,14 @@ const getTagLoaderData = (): PostTag => ({
     id: "",
     color: "",
     logoUrl: "",
-    programDetails: { level: 0, levelProgress: 0 }
+    programDetails: {
+      successFeeSelected: 0,
+      successFeeCurrent: 0,
+      managementFeeSelected: 0,
+      managementFeeCurrent: 0,
+      level: 0,
+      levelProgress: 0
+    }
   },
   type: "Program",
   userDetails: managerLoaderData,
