@@ -33,7 +33,8 @@ const withReduxStore = (
     static async getInitialProps(ctx: AppWithReduxContext) {
       const reduxStore = getOrCreateStore();
 
-      ctx.ctx.reduxStore = reduxStore;
+      if (ctx.ctx) ctx.ctx.reduxStore = reduxStore;
+      else ctx.reduxStore = reduxStore;
 
       const componentProps =
         WrappedComponent.getInitialProps &&

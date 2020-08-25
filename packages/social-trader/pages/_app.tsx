@@ -1,13 +1,11 @@
 import { $textDarkColor } from "components/gv-styles/gv-colors/gv-colors";
 import withHistoryProvider from "decorators/history-provider/with-history-provider";
-import withReduxStore from "decorators/with-redux-store";
 import withToken from "decorators/with-token";
 import { appWithTranslation } from "i18n";
 import App from "next/app";
 import "pages/landing-page/styles/index.scss";
 import React from "react";
 import { compose, Store } from "redux";
-import { initializeStore } from "store";
 import "styles/index.scss";
 
 class CustomApp extends App<Props> {
@@ -54,7 +52,6 @@ class CustomApp extends App<Props> {
 export default compose(
   withHistoryProvider,
   appWithTranslation,
-  withReduxStore(initializeStore),
   withToken
 )(CustomApp);
 
