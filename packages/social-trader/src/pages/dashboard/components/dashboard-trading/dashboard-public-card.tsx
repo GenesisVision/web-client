@@ -100,8 +100,8 @@ const _DashboardPublicCard: React.FC<Props> = ({
 
   const fee =
     asset.assetType === "Fund"
-      ? asset.publicInfo.fundDetails.entryFeeCurrent
-      : asset.publicInfo.programDetails.managementFeeCurrent;
+      ? asset.publicInfo.fundDetails?.entryFeeCurrent
+      : asset.publicInfo.programDetails?.managementFeeCurrent;
   return (
     <TableCard
       withOffset={withOffset}
