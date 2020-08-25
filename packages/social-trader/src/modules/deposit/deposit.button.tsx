@@ -10,6 +10,20 @@ import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import { CurrencyEnum, Sizeable } from "utils/types";
 
+interface Props extends Sizeable {
+  infoMessage?: string;
+  disabled?: boolean;
+  title: string;
+  onApply?: VoidFunction;
+  ownAsset?: boolean;
+  entryFee?: number;
+  availableToInvest?: number;
+  broker?: string;
+  type: ASSET;
+  id: string;
+  currency?: CurrencyEnum;
+}
+
 const _DepositButton: React.FC<Props> = ({
   infoMessage,
   disabled,
@@ -91,20 +105,6 @@ const _DepositButton: React.FC<Props> = ({
     </>
   );
 };
-
-interface Props extends Sizeable {
-  infoMessage?: string;
-  disabled?: boolean;
-  title: string;
-  onApply?: VoidFunction;
-  ownAsset?: boolean;
-  entryFee?: number;
-  availableToInvest?: number;
-  broker?: string;
-  type: ASSET;
-  id: string;
-  currency?: CurrencyEnum;
-}
 
 const DepositButton = React.memo(_DepositButton);
 export default DepositButton;
