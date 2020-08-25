@@ -19,6 +19,7 @@ const tagsLoaderDataCreator = () =>
   tableLoaderCreator(tagLoaderDataCreator);
 
 export const programDetailsLoaderDataCreator = (): ProgramDetailsListItem => ({
+  type: "DailyPeriod",
   brokerId: "",
   entryFeeSelected: 0,
   entryFeeCurrent: 0,
