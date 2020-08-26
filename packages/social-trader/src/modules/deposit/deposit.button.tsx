@@ -11,6 +11,7 @@ import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import { CurrencyEnum, Sizeable } from "utils/types";
 
 interface Props extends Sizeable {
+  isProcessingRealTime?: boolean;
   infoMessage?: string;
   disabled?: boolean;
   title: string;
@@ -25,6 +26,7 @@ interface Props extends Sizeable {
 }
 
 const _DepositButton: React.FC<Props> = ({
+  isProcessingRealTime,
   infoMessage,
   disabled,
   title,
@@ -65,6 +67,7 @@ const _DepositButton: React.FC<Props> = ({
       />
     ) : (
       <ProgramDeposit
+        isProcessingRealTime={isProcessingRealTime}
         title={title}
         onApply={onApply}
         ownAsset={ownAsset}

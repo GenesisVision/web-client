@@ -263,6 +263,9 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
       />
       <DetailsDivider />
       <DetailsInvestment
+        isProcessingRealTime={
+          programDetails.dailyPeriodDetails.isProcessingRealTime
+        }
         isOwnAsset={isOwnAsset}
         fees={fees}
         dispatchDescription={handleDispatchDescription}

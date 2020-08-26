@@ -21,7 +21,22 @@ import { CurrencyEnum, FeesType } from "utils/types";
 
 import { InvestmentType } from "./details-investment.helpers";
 
+interface Props {
+  isProcessingRealTime?: boolean;
+  hasTradingSchedule?: boolean;
+  investmentMessage?: string;
+  withdrawMessage?: string;
+  isOwnAsset: boolean;
+  fees: FeesType;
+  updateDescription: () => void;
+  asset: ASSET;
+  id: string;
+  assetCurrency: CurrencyEnum;
+  personalDetails: InvestmentType;
+}
+
 const _Investment: React.FC<Props> = ({
+  isProcessingRealTime,
   investmentMessage,
   hasTradingSchedule,
   withdrawMessage,
@@ -207,6 +222,7 @@ const _Investment: React.FC<Props> = ({
       <Row>
         <DetailsInvestmentFooter>
           <WithdrawButton
+            isProcessingRealTime={isProcessingRealTime}
             infoMessage={withdrawMessage}
             size={"xlarge"}
             disabled={!personalDetails.canWithdraw}
@@ -220,19 +236,6 @@ const _Investment: React.FC<Props> = ({
     </DetailsInvestmentBlock>
   );
 };
-
-interface Props {
-  hasTradingSchedule?: boolean;
-  investmentMessage?: string;
-  withdrawMessage?: string;
-  isOwnAsset: boolean;
-  fees: FeesType;
-  updateDescription: () => void;
-  asset: ASSET;
-  id: string;
-  assetCurrency: CurrencyEnum;
-  personalDetails: InvestmentType;
-}
 
 const Investment = React.memo(_Investment);
 export default Investment;

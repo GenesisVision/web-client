@@ -58,6 +58,9 @@ const _InvestmentProgramControls: React.FC<Props> = ({
             />
           ) : (
             <DepositButton
+              isProcessingRealTime={
+                programDetails.dailyPeriodDetails.isProcessingRealTime
+              }
               disabled={!canInvest}
               title={publicInfo.title}
               onApply={onApply}

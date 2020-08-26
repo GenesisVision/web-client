@@ -51,6 +51,7 @@ enum TABS {
 }
 
 const _DetailsInvestment: React.FC<Props> = ({
+  isProcessingRealTime,
   investmentMessage,
   hasTradingSchedule,
   withdrawMessage,
@@ -142,6 +143,7 @@ const _DetailsInvestment: React.FC<Props> = ({
       {tab === TABS.INVESTMENT && showInvestment && (
         <Row onlyOffset>
           <Investment
+            isProcessingRealTime={isProcessingRealTime}
             hasTradingSchedule={hasTradingSchedule}
             investmentMessage={investmentMessage}
             withdrawMessage={withdrawMessage}
@@ -170,6 +172,7 @@ const _DetailsInvestment: React.FC<Props> = ({
 };
 
 interface Props {
+  isProcessingRealTime?: boolean;
   hasTradingSchedule?: boolean;
   investmentMessage?: string;
   withdrawMessage?: string;

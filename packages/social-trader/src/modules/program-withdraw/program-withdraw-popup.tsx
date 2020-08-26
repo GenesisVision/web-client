@@ -19,7 +19,28 @@ enum PROGRAM_WITHDRAW_FORM {
   CONFIRM = "CONFIRM"
 }
 
+interface Props extends OwnProps, IProgramWithdrawPopupProps {}
+
+interface OwnProps {
+  data: ProgramWithdrawInfo;
+}
+
+export interface IProgramWithdrawPopupProps {
+  isProcessingRealTime?: boolean;
+  onApply?: VoidFunction;
+  id: string;
+  onClose: (param?: any) => void;
+  assetCurrency: CurrencyEnum;
+  accountCurrency: CurrencyEnum;
+}
+
+export type ProgramWithdrawType = {
+  amount: number;
+  withdrawAll?: boolean;
+};
+
 const _ProgramWithdrawPopup: React.FC<Props> = ({
+  isProcessingRealTime,
   onApply,
   id,
   onClose,
@@ -53,8 +74,6 @@ const _ProgramWithdrawPopup: React.FC<Props> = ({
 
   const isAvailableProgramConfirmForm =
     formValues.amount || formValues.withdrawAll;
-
-  const isRealTime = +new Date() + 2 * 60 * 100 > +new Date(periodEnds);
 
   const time = withdrawInPercent
     ? new Date(periodEnds).toUTCString()
@@ -99,7 +118,7 @@ const _ProgramWithdrawPopup: React.FC<Props> = ({
               periodEnds={periodEnds}
             />
           )}
-        {(!withdrawInPercent || !isRealTime) && (
+        {(!withdrawInPercent || !isProcessingRealTime) && (
           <DialogInfo>{infoMessage}</DialogInfo>
         )}
       </DialogBottom>
@@ -109,22 +128,3 @@ const _ProgramWithdrawPopup: React.FC<Props> = ({
 
 const ProgramWithdrawPopup = withBlurLoader(React.memo(_ProgramWithdrawPopup));
 export default ProgramWithdrawPopup;
-
-interface Props extends OwnProps, IProgramWithdrawPopupProps {}
-
-interface OwnProps {
-  data: ProgramWithdrawInfo;
-}
-
-export interface IProgramWithdrawPopupProps {
-  onApply?: VoidFunction;
-  id: string;
-  onClose: (param?: any) => void;
-  assetCurrency: CurrencyEnum;
-  accountCurrency: CurrencyEnum;
-}
-
-export type ProgramWithdrawType = {
-  amount: number;
-  withdrawAll?: boolean;
-};

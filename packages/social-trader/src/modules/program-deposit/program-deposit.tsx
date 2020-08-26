@@ -16,6 +16,7 @@ import { programMinDepositAmountsSelector } from "reducers/platform-reducer";
 import { CurrencyEnum } from "utils/types";
 
 interface OwnProps {
+  isProcessingRealTime?: boolean;
   title: string;
   entryFee?: number;
   ownAsset?: boolean;
@@ -29,6 +30,7 @@ interface OwnProps {
 interface Props extends OwnProps, IDialogProps {}
 
 const _ProgramDeposit: React.FC<Props> = ({
+  isProcessingRealTime,
   title,
   entryFee,
   availableToInvest,
@@ -61,12 +63,8 @@ const _ProgramDeposit: React.FC<Props> = ({
     }
   }, [open]);
 
-  const isRealTime =
-    withdrawInfo &&
-    +new Date() + 2 * 60 * 100 > +new Date(withdrawInfo.periodEnds);
-
   const infoMessage =
-    withdrawInfo && !isRealTime
+    withdrawInfo && !isProcessingRealTime
       ? `Your request will be processed at ${new Date(
           withdrawInfo?.periodEnds
         ).toUTCString()}`
