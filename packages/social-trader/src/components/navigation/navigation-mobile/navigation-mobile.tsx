@@ -27,7 +27,7 @@ const MobileHeader = styled.div`
   flex-shrink: 0;
   display: flex;
   flex-direction: row;
-  padding: ${$paddingXsmall};
+  padding: ${$paddingXsmall}px;
   align-items: center;
   background-color: ${$panelBackgroundColor};
 `;
@@ -35,7 +35,7 @@ const MobileEmail = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   letter-spacing: 0.4px;
-  font-size: ${$fontSizeParagraph};
+  font-size: ${$fontSizeParagraph}px;
 `;
 const MobileTop = styled.div`
   padding: 10px 0;
