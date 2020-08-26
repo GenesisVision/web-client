@@ -12,10 +12,6 @@ const investmentEventViewModelCreator = (): InvestmentEventViewModel => ({
   date: new Date(),
   assetDetails: {
     programDetails: {
-      successFeeSelected: 0,
-      successFeeCurrent: 0,
-      managementFeeSelected: 0,
-      managementFeeCurrent: 0,
       level: 0,
       levelProgress: 0
     },
