@@ -1,9 +1,11 @@
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogTop } from "components/dialog/dialog-top";
+import withReduxStore from "decorators/with-redux-store";
 import SignupContainer from "pages/auth/signup/signup-container";
 import { getRefCode, getReferrer, getUtm } from "pages/landing-page/utils";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { initializeStore } from "store";
 
 const SignupDialog: React.FC = () => {
   const [t] = useTranslation();
@@ -25,4 +27,4 @@ const SignupDialog: React.FC = () => {
   );
 };
 
-export default SignupDialog;
+export default withReduxStore(initializeStore)(SignupDialog);
