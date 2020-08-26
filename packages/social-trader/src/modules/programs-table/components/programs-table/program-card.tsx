@@ -142,21 +142,23 @@ const _ProgramCard: React.FC<Props> = ({ program }) => {
               />
             </LabeledValue>
           </Row>
-          <Row>
-            <LabeledValue
-              label={
-                <TooltipLabel
-                  tooltipContent={t("programs-page:tooltips.period")}
-                  labelText={t("header-fields.period")}
+          {program.type === "FixedPeriod" && (
+            <Row>
+              <LabeledValue
+                label={
+                  <TooltipLabel
+                    tooltipContent={t("programs-page:tooltips.period")}
+                    labelText={t("header-fields.period")}
+                  />
+                }
+              >
+                <ProgramPeriodPie
+                  start={program.periodStarts}
+                  end={program.periodEnds}
                 />
-              }
-            >
-              <ProgramPeriodPie
-                start={program.periodStarts}
-                end={program.periodEnds}
-              />
-            </LabeledValue>
-          </Row>
+              </LabeledValue>
+            </Row>
+          )}
         </TableCardTableColumn>
         <TableCardTableColumn>
           <Row>

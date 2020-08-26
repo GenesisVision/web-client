@@ -113,14 +113,16 @@ const _DashboardProgramCard: React.FC<Props> = ({
             />
           </LabeledValue>
         </TableCardTableColumn>
-        <TableCardTableColumn>
-          <LabeledValue label={t("header-fields.period")}>
-            <ProgramPeriodPie
-              start={program.periodStarts}
-              end={program.periodEnds}
-            />
-          </LabeledValue>
-        </TableCardTableColumn>
+        {program.type === "FixedPeriod" && (
+          <TableCardTableColumn>
+            <LabeledValue label={t("header-fields.period")}>
+              <ProgramPeriodPie
+                start={program.periodStarts}
+                end={program.periodEnds}
+              />
+            </LabeledValue>
+          </TableCardTableColumn>
+        )}
       </TableCardTable>
       <TableCardTable>
         <TableCardTableColumn>
