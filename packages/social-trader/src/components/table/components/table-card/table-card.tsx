@@ -145,7 +145,6 @@ const SubtitleContainer = styled.div`
 `;
 const NameLink = styled(Link)`
   ${link($primaryColor)};
-  transition-property: color;
 `;
 
 export const TableCardSubTitle: React.FC<{

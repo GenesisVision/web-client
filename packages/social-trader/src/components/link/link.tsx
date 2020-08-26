@@ -10,6 +10,7 @@ import {
 } from "./link.helper";
 
 const StyledA = styled.a<{ wide?: boolean; white?: boolean }>`
+  cursor: pointer;
   ${({ wide }) =>
     wide &&
     `display: block;

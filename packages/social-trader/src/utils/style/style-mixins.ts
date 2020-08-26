@@ -12,7 +12,7 @@ export const link = (color: string) => {
     font-size: inherit;
     color: ${color};
     &:hover {
-      opacity: 0.9;
+      opacity: 0.4;
     }
   `;
 };
