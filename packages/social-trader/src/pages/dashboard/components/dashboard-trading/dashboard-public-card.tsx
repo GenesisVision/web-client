@@ -98,6 +98,11 @@ const _DashboardPublicCard: React.FC<Props> = ({
     asset.assetType === "Fund"
       ? t("dashboard-page:tooltips.trading.equity-fund")
       : t("dashboard-page:tooltips.investing.equity");
+
+  const fee =
+    asset.assetType === "Fund"
+      ? asset.publicInfo.fundDetails?.entryFeeCurrent
+      : asset.publicInfo.programDetails?.managementFeeCurrent;
   return (
     <TableCard
       withOffset={withOffset}
@@ -228,6 +233,7 @@ const _DashboardPublicCard: React.FC<Props> = ({
         </TableCardTableRow>
       )}
       <DepositWithdrawButtons
+        entryFee={fee}
         infoMessage={hasTradingSchedule ? investMessage : undefined}
         accountType={asset.assetTypeExt}
         canTransfer={asset?.actions?.canTransferMoney}
