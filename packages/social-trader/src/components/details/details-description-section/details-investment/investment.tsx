@@ -22,6 +22,7 @@ import { CurrencyEnum, FeesType } from "utils/types";
 import { InvestmentType } from "./details-investment.helpers";
 
 interface Props {
+  isExchange?: boolean;
   isProcessingRealTime?: boolean;
   hasTradingSchedule?: boolean;
   investmentMessage?: string;
@@ -36,6 +37,7 @@ interface Props {
 }
 
 const _Investment: React.FC<Props> = ({
+  isExchange,
   isProcessingRealTime,
   investmentMessage,
   hasTradingSchedule,
@@ -171,7 +173,8 @@ const _Investment: React.FC<Props> = ({
               />
             </InvestmentItem>
           )}
-          {"isReinvest" in personalDetails &&
+          {!isExchange &&
+            "isReinvest" in personalDetails &&
             personalDetails.isInvested &&
             personalDetails.canInvest &&
             !isOwnAsset && (
@@ -182,7 +185,8 @@ const _Investment: React.FC<Props> = ({
                 />
               </InvestmentItem>
             )}
-          {"isReinvest" in personalDetails &&
+          {!isExchange &&
+            "isReinvest" in personalDetails &&
             personalDetails.isInvested &&
             personalDetails.canInvest &&
             !isOwnAsset && (

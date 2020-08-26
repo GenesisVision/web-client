@@ -19,7 +19,19 @@ import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { CurrencyEnum } from "utils/types";
 
+interface Props {
+  isExchange?: boolean;
+  leverageMin: number;
+  leverageMax: number;
+  currency?: CurrencyEnum;
+  data: LevelsParamsInfo;
+  status: string;
+  brokerDetails: BrokerDetails;
+  programDetails?: ProgramDetailsFull;
+}
+
 const _PerformanceData: React.FC<Props> = ({
+  isExchange,
   leverageMin,
   leverageMax,
   currency,
@@ -62,7 +74,7 @@ const _PerformanceData: React.FC<Props> = ({
           </LabeledValue>
         </RowItem>
       )}
-      {!!leverageMin && !!leverageMax && (
+      {!isExchange && !!leverageMin && !!leverageMax && (
         <RowItem size={"xlarge"} bottomOffset>
           <LabeledValue
             label={
@@ -80,25 +92,27 @@ const _PerformanceData: React.FC<Props> = ({
       )}
       {programDetails && (
         <>
-          <RowItem size={"xlarge"} bottomOffset>
-            <LabeledValue
-              label={
-                <TooltipLabel
-                  tooltipContent={t(
-                    "asset-details:description.tooltips.period"
-                  )}
-                  labelText={t("asset-details:description.period")}
+          {!isExchange && (
+            <RowItem size={"xlarge"} bottomOffset>
+              <LabeledValue
+                label={
+                  <TooltipLabel
+                    tooltipContent={t(
+                      "asset-details:description.tooltips.period"
+                    )}
+                    labelText={t("asset-details:description.period")}
+                  />
+                }
+              >
+                <ProgramPeriodPie
+                  condition={status !== STATUS.CLOSED}
+                  loader={t("program-period.program-closed")}
+                  start={programDetails.periodStarts}
+                  end={programDetails.periodEnds}
                 />
-              }
-            >
-              <ProgramPeriodPie
-                condition={status !== STATUS.CLOSED}
-                loader={t("program-period.program-closed")}
-                start={programDetails.periodStarts}
-                end={programDetails.periodEnds}
-              />
-            </LabeledValue>
-          </RowItem>
+              </LabeledValue>
+            </RowItem>
+          )}
           <RowItem size={"xlarge"} bottomOffset>
             <LabeledValue
               label={
@@ -174,16 +188,6 @@ const _PerformanceData: React.FC<Props> = ({
     </DetailsPerformanceData>
   );
 };
-
-interface Props {
-  leverageMin: number;
-  leverageMax: number;
-  currency?: CurrencyEnum;
-  data: LevelsParamsInfo;
-  status: string;
-  brokerDetails: BrokerDetails;
-  programDetails?: ProgramDetailsFull;
-}
 
 const PerformanceData = withBlurLoader(React.memo(_PerformanceData));
 export default PerformanceData;

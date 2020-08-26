@@ -14,6 +14,16 @@ import { kycConfirmedSelector } from "reducers/header-reducer";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 
+interface IInvestmentProgramInfoProps {
+  isExchange?: boolean;
+  id: string;
+  currency: CurrencyEnum;
+  title: string;
+  programDetails: ProgramDetailsFull;
+  isOwnProgram: boolean;
+  levelsParameters: LevelsParamsInfo;
+}
+
 const renderFee = (
   valueSelected: number,
   valueCurrent: number
@@ -35,6 +45,7 @@ const renderFee = (
 };
 
 const _InvestmentProgramInfo: React.FC<IInvestmentProgramInfoProps> = ({
+  isExchange,
   isOwnProgram,
   id,
   currency,
@@ -124,7 +135,7 @@ const _InvestmentProgramInfo: React.FC<IInvestmentProgramInfoProps> = ({
       >
         {renderFee(successFeeSelected, successFeeCurrent)}
       </InvestmentItem>
-      {!!stopOutLevelCurrent && !!stopOutLevelSelected && (
+      {!isExchange && !!stopOutLevelCurrent && !!stopOutLevelSelected && (
         <InvestmentItem
           label={
             <TooltipLabel
@@ -139,15 +150,6 @@ const _InvestmentProgramInfo: React.FC<IInvestmentProgramInfoProps> = ({
     </StatisticItemList>
   );
 };
-
-interface IInvestmentProgramInfoProps {
-  id: string;
-  currency: CurrencyEnum;
-  title: string;
-  programDetails: ProgramDetailsFull;
-  isOwnProgram: boolean;
-  levelsParameters: LevelsParamsInfo;
-}
 
 const InvestmentProgramInfo = React.memo(_InvestmentProgramInfo);
 export default InvestmentProgramInfo;

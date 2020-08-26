@@ -20,6 +20,7 @@ import { formatCurrencyValue, formatValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 
 const _ProgramDetailsStatisticsElements: React.FC<IProgramDetailsStatisticsElementsProps> = ({
+  showPeriod = true,
   data,
   period,
   status
@@ -97,7 +98,7 @@ const _ProgramDetailsStatisticsElements: React.FC<IProgramDetailsStatisticsEleme
               </RowItem>
             )}
           </Row>
-          {!!statistic.lastPeriodStarts && (
+          {showPeriod && !!statistic.lastPeriodStarts && (
             <Row onlyOffset wide>
               <Tooltip
                 horizontal={HORIZONTAL_POPOVER_POS.LEFT}
@@ -273,6 +274,7 @@ export interface IProgramStatisticData {
 }
 
 export interface IProgramDetailsStatisticsElementsProps {
+  showPeriod?: boolean;
   status: string;
   period: ChartDefaultPeriod;
   data: IProgramStatisticData;

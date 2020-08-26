@@ -19,7 +19,21 @@ import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import { CurrencyEnum } from "utils/types";
 
+interface Props {
+  isExchange?: boolean;
+  currency: CurrencyEnum;
+  id: string;
+  programDetails: ProgramDetailsFull;
+  publicInfo: AssetPublicDetails;
+  brokerDetails: BrokerDetails;
+  tradingAccountInfo: ProgramFollowDetailsFullTradingAccountDetails;
+  onApply: VoidFunction;
+  isOwnProgram: boolean;
+  levelsParameters: LevelsParamsInfo;
+}
+
 const _InvestmentProgramControls: React.FC<Props> = ({
+  isExchange,
   currency,
   onApply,
   isOwnProgram,
@@ -38,6 +52,7 @@ const _InvestmentProgramControls: React.FC<Props> = ({
   return (
     <DetailsBlock type={DETAILS_BLOCK_TYPE.BORDERED}>
       <InvestmentProgramInfo
+        isExchange={isExchange}
         id={id}
         currency={tradingAccountInfo.currency}
         title={publicInfo.title}
@@ -79,18 +94,6 @@ const _InvestmentProgramControls: React.FC<Props> = ({
     </DetailsBlock>
   );
 };
-
-interface Props {
-  currency: CurrencyEnum;
-  id: string;
-  programDetails: ProgramDetailsFull;
-  publicInfo: AssetPublicDetails;
-  brokerDetails: BrokerDetails;
-  tradingAccountInfo: ProgramFollowDetailsFullTradingAccountDetails;
-  onApply: VoidFunction;
-  isOwnProgram: boolean;
-  levelsParameters: LevelsParamsInfo;
-}
 
 const InvestmentProgramControls = React.memo(_InvestmentProgramControls);
 export default InvestmentProgramControls;
