@@ -12,6 +12,7 @@ const _FundHistoryRow: React.FC<Props> = ({ item }) => {
   const [isOpen, setOpen, setClose] = useFlag();
 
   const handleOpen = useCallback(() => {
+    if (!item.trades?.length) return;
     isOpen ? setClose() : setOpen();
   }, [isOpen]);
 

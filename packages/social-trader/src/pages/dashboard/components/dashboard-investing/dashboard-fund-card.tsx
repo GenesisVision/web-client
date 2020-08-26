@@ -81,6 +81,7 @@ const _DashboardFundCard: React.FC<Props> = ({
         amountTitleTooltip={t("dashboard-page:tooltips.investing.size")}
       />
       <DepositWithdrawButtons
+        entryFee={fund.entryFeeCurrent}
         infoMessage={hasTradingSchedule ? investMessage : undefined}
         title={fund.title}
         onApply={updateItems}
