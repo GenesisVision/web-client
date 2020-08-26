@@ -130,14 +130,15 @@ const _DashboardProgramCard: React.FC<Props> = ({
             onCancel={updateItems}
           />
         </TableCardTableColumn>
-        {program.personalDetails.canChangeReinvest && (
-          <TableCardTableColumn>
-            <ProgramReinvestingContainer
-              id={program.id}
-              isReinvesting={program.personalDetails.isReinvest}
-            />
-          </TableCardTableColumn>
-        )}
+        {program.type === "FixedPeriod" &&
+          program.personalDetails.canChangeReinvest && (
+            <TableCardTableColumn>
+              <ProgramReinvestingContainer
+                id={program.id}
+                isReinvesting={program.personalDetails.isReinvest}
+              />
+            </TableCardTableColumn>
+          )}
       </TableCardTable>
       <DepositWithdrawButtons
         entryFee={program.managementFeeCurrent}
