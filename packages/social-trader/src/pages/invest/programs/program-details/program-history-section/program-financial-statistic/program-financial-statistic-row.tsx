@@ -9,6 +9,7 @@ import { formatCurrencyValue, formatValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 
 const _ProgramFinancialStatisticRow: React.FC<Props> = ({
+  isExchange,
   period,
   currency,
   showCommissionRebateSometime
@@ -22,8 +23,9 @@ const _ProgramFinancialStatisticRow: React.FC<Props> = ({
 
   return (
     <TableRow stripy>
-      <TableCell>{period.number}</TableCell>
+      {!isExchange && <TableCell>{period.number}</TableCell>}
       <TableCell>{formatDate(period.dateFrom)}</TableCell>
+      {isExchange && <TableCell>{period.periodLength}</TableCell>}
       <TableCell>
         <NumberFormat
           value={formatCurrencyValue(balance, currency)}
@@ -98,6 +100,7 @@ const _ProgramFinancialStatisticRow: React.FC<Props> = ({
 };
 
 interface Props {
+  isExchange?: boolean;
   showCommissionRebateSometime: boolean;
   period: ProgramPeriodViewModel;
   currency: CurrencyEnum;

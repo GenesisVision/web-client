@@ -172,6 +172,15 @@
       "status": "Status"
     },
     "financial-statistic": {
+      "interval-filter": {
+        "name": "Interval",
+        "values": {
+          "day": "Day",
+          "week": "Week",
+          "month": "Month"
+        }
+      },
+      "period-length": "Period length",
       "period": "Period",
       "date-start": "Date start",
       "balance": "Balance",

@@ -285,6 +285,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
         <ProgramDetailsStatisticSection showPeriod={!isExchange} />
       )}
       <ProgramDetailsHistorySection
+        isExchange={isExchange}
         assetType={(route as unknown) as TRADE_ASSET_TYPE}
         canCloseOpenPositions={ownerActions?.canCloseOpenPositions}
         getHistoryCounts={getHistoryCounts}

@@ -39,6 +39,7 @@ const nullSelector = () => ({
 });
 
 const _ProgramDetailsHistorySection: React.FC<Props> = ({
+  isExchange,
   isFollower,
   canCloseOpenPositions,
   assetType,
@@ -163,6 +164,7 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
       )}
       {tab === TABS.FINANCIAL_STATISTIC && financialStatistic && (
         <ProgramFinancialStatistic
+          isExchange={isExchange}
           getItems={financialStatistic.getItems(programId)}
           dataSelector={financialStatistic.dataSelector}
           showCommissionRebateSometime={showCommissionRebateSometime}
@@ -193,6 +195,7 @@ enum TABS {
 }
 
 interface Props {
+  isExchange?: boolean;
   isFollower?: boolean;
   canCloseOpenPositions?: boolean;
   assetType: TRADE_ASSET_TYPE;
