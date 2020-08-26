@@ -35,6 +35,29 @@ import { convertDateToShortFormat, distanceDate } from "utils/dates";
 import { formatValueDifferentDecimalScale } from "utils/formatter";
 import { VoidFuncType } from "utils/types";
 
+interface Props extends IWithOffset {
+  showWithdraw?: boolean;
+  showInvest?: boolean;
+  showActions?: boolean;
+  ownAsset?: boolean;
+  updateItems: VoidFuncType;
+  asset: DashboardTradingAsset;
+}
+
+export const getAssetFolderRoute = (assetType: AssetTypeExt | AssetType) => {
+  switch (assetType) {
+    case "SignalTradingAccount":
+    case "ExternalSignalTradingAccount":
+    case "SignalProgram":
+      return FOLLOW_DETAILS_FOLDER_ROUTE;
+    case "Fund":
+      return FUND_DETAILS_FOLDER_ROUTE;
+    case "Program":
+    default:
+      return PROGRAM_DETAILS_FOLDER_ROUTE;
+  }
+};
+
 const _DashboardPublicCard: React.FC<Props> = ({
   withOffset,
   showWithdraw = true,
@@ -233,6 +256,10 @@ const _DashboardPublicCard: React.FC<Props> = ({
         </TableCardTableRow>
       )}
       <DepositWithdrawButtons
+        isProcessingRealTime={
+          asset.publicInfo.programDetails.dailyPeriodDetails
+            .isProcessingRealTime
+        }
         entryFee={fee}
         infoMessage={hasTradingSchedule ? investMessage : undefined}
         accountType={asset.assetTypeExt}
@@ -251,29 +278,6 @@ const _DashboardPublicCard: React.FC<Props> = ({
     </TableCard>
   );
 };
-
-export const getAssetFolderRoute = (assetType: AssetTypeExt | AssetType) => {
-  switch (assetType) {
-    case "SignalTradingAccount":
-    case "ExternalSignalTradingAccount":
-    case "SignalProgram":
-      return FOLLOW_DETAILS_FOLDER_ROUTE;
-    case "Fund":
-      return FUND_DETAILS_FOLDER_ROUTE;
-    case "Program":
-    default:
-      return PROGRAM_DETAILS_FOLDER_ROUTE;
-  }
-};
-
-interface Props extends IWithOffset {
-  showWithdraw?: boolean;
-  showInvest?: boolean;
-  showActions?: boolean;
-  ownAsset?: boolean;
-  updateItems: VoidFuncType;
-  asset: DashboardTradingAsset;
-}
 
 const DashboardPublicCard = React.memo(_DashboardPublicCard);
 export default DashboardPublicCard;
