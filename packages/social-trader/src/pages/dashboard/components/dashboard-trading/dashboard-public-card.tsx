@@ -257,8 +257,8 @@ const _DashboardPublicCard: React.FC<Props> = ({
       )}
       <DepositWithdrawButtons
         isProcessingRealTime={
-          asset.publicInfo.programDetails.dailyPeriodDetails
-            .isProcessingRealTime
+          asset.publicInfo?.programDetails?.dailyPeriodDetails
+            ?.isProcessingRealTime
         }
         entryFee={fee}
         infoMessage={hasTradingSchedule ? investMessage : undefined}
