@@ -127,6 +127,7 @@
   "history": {
     "heading": "History",
     "tabs": {
+      "analytics": "Analytics",
       "trades": "Trades",
       "events": "My history",
       "open-positions": "Open positions",

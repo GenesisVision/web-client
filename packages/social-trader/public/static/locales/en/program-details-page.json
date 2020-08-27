@@ -102,6 +102,7 @@
   "history": {
     "heading": "History",
     "tabs": {
+      "analytics": "Analytics",
       "trading-log": "Trading log",
       "trades": "Trades",
       "events": "My history",
