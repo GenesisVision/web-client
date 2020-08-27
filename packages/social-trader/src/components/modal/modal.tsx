@@ -50,7 +50,7 @@ const Container = styled.div<{
   z-index: 1300;
   position: ${({ fixed, absolute }) => {
     if (fixed) return "fixed";
-    if (absolute) return "fixed";
+    if (absolute) return "absolute";
   }};
 `;
 
