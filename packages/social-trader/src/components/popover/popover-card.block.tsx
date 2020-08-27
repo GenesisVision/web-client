@@ -36,8 +36,8 @@ export const PopoverContentCardBlock = styled.div<
   ${({ fixed }) =>
     fixed &&
     `
-    max-width: ${$modalWidth};
-  `}
+    max-width: ${$modalWidth}px;
+  `};
   ${({ stretched, size = "middle" }) => {
     switch (size) {
       case "small":
@@ -62,5 +62,5 @@ export const PopoverContentCardBlock = styled.div<
       case "large":
         return adaptiveFullPadding($popoverPaddingLarge);
     }
-  }}
+  }};
 `;
