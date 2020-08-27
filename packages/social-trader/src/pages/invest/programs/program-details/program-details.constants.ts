@@ -235,6 +235,29 @@ export const PROGRAM_GM_FINANCIAL_STATISTIC_COLUMNS: SortingColumn[] = [
   }
 ];
 
+export const PROGRAM_ANALYTICS: SortingColumn[] = [
+  {
+    name: "date-start",
+    tooltip: true
+  },
+  {
+    name: "period-length",
+    tooltip: true
+  },
+  {
+    name: "balance",
+    tooltip: true
+  },
+  {
+    name: "profit",
+    tooltip: true
+  },
+  {
+    name: "investors",
+    tooltip: true
+  }
+];
+
 export const PROGRAM_PERIOD_HISTORY: SortingColumn[] = [
   {
     name: "period",
@@ -284,6 +307,10 @@ export const PROGRAM_FINANCIAL_STATISTIC_FILTERS = {
 
 export const PROGRAM_TRADES_DEFAULT_FILTERS = [
   {
+    name: INTERVAL_FILTER_NAME,
+    type: FILTER_TYPE.GENERAL
+  },
+  {
     ...composeDefaultDateRangeFilter({
       composeApiRequestValue: composeRequestValueFunc(
         SERVER_DATE_RANGE_MIN_FILTER_NAME,
@@ -294,6 +321,7 @@ export const PROGRAM_TRADES_DEFAULT_FILTERS = [
 ];
 
 export const PROGRAM_TRADES_FILTERS = {
+  [INTERVAL_FILTER_NAME]: INTERVAL_FILTER_VALUES[0].value,
   dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE
 };
 
