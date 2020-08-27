@@ -268,7 +268,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
       <DetailsInvestment
         isExchange={isExchange}
         isProcessingRealTime={
-          programDetails.dailyPeriodDetails.isProcessingRealTime
+          programDetails.dailyPeriodDetails?.isProcessingRealTime
         }
         isOwnAsset={isOwnAsset}
         fees={fees}
