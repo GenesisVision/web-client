@@ -1,16 +1,31 @@
-import clsx from "clsx";
+import { $paddingSmall, $paddingXsmall } from "components/gv-styles/gv-sizes";
 import { SortableIcon } from "components/table/components/sortable-icon";
+import {
+  tableCellFirstOffsetStyle,
+  tableCellStyle
+} from "components/table/components/table-cell";
 import { Text } from "components/text/text";
 import * as React from "react";
+import styled from "styled-components";
+import { adaptivePadding, verticalPaddings } from "utils/style/style-mixins";
 
 import { SORTING_DIRECTION } from "../helpers/sorting.helpers";
-import styles from "./table.module.scss";
 
 interface ITableHeadCellProps extends React.HTMLAttributes<HTMLDivElement> {
   sortable: boolean;
   sortingDirection: SORTING_DIRECTION;
   className?: string;
 }
+
+const StyledTh = styled.th`
+  ${tableCellStyle}
+  ${tableCellFirstOffsetStyle}
+  ${verticalPaddings($paddingXsmall)}
+  ${adaptivePadding("right", $paddingSmall / 2)};
+  &:last-child {
+    ${adaptivePadding("right", $paddingSmall)};
+  }
+`;
 
 const _TableHeadCell: React.FC<ITableHeadCellProps> = ({
   sortable,
@@ -20,16 +35,7 @@ const _TableHeadCell: React.FC<ITableHeadCellProps> = ({
   children
 }) => {
   return (
-    <th
-      className={clsx(
-        styles["table__cell--first-offset"],
-        styles["table__cell"],
-        styles["table__cell--medium"],
-        styles["table__cell--head"],
-        className
-      )}
-      onClick={sortable ? onClick : undefined}
-    >
+    <StyledTh className={className} onClick={sortable ? onClick : undefined}>
       {sortable ? (
         <SortableIcon sortingDirection={sortingDirection}>
           {children}
@@ -37,7 +43,7 @@ const _TableHeadCell: React.FC<ITableHeadCellProps> = ({
       ) : (
         <Text muted>{children}</Text>
       )}
-    </th>
+    </StyledTh>
   );
 };
 
