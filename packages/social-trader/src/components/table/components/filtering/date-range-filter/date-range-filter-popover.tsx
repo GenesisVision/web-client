@@ -100,7 +100,7 @@ const Dates = styled(PopoverContentCardBlock)`
 const Values = styled(Center)`
   flex-wrap: wrap;
   ${mediaBreakpointLandscapePhone(`
-      flex - wrap:nowrap;
+      flex-wrap:nowrap;
   `)}
 `;
 
