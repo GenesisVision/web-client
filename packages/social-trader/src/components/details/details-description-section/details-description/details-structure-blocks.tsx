@@ -32,14 +32,24 @@ export const DetailsPerformanceData = styled(StatisticItemList)`
 `;
 
 const StyledImageBase = styled(ImageBase)`
+  width: 100%;
+`;
+
+const BrokerImageContainer = styled.div`
   height: 20px;
+  width: 100px;
+  overflow: hidden;
 `;
 
 export const DetailsBroker: React.FC<{
   name?: string;
   logoUrl: string;
 }> = React.memo(({ name, logoUrl }) => {
-  return <StyledImageBase alt={name} src={logoUrl} />;
+  return (
+    <BrokerImageContainer>
+      <StyledImageBase alt={name} src={logoUrl} />
+    </BrokerImageContainer>
+  );
 });
 
 const TextContainer = styled(Row)`
