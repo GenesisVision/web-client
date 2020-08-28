@@ -56,23 +56,23 @@ export const defaultBlockDynamicStyles = css`
     switch (size) {
       case "small":
         return `
-          ${horizontalOffsets && horizontalPaddings($paddingXxsmall)}
-          ${verticalOffsets && verticalPaddings($paddingXxsmall)}
+          ${horizontalOffsets && horizontalPaddings($paddingXxsmall)};
+          ${verticalOffsets && verticalPaddings($paddingXxsmall)};
         `;
       case "middle":
         return `
-          ${horizontalOffsets && horizontalPaddings($paddingXsmall)}
-          ${verticalOffsets && verticalPaddings($paddingXsmall)}
+          ${horizontalOffsets && horizontalPaddings($paddingXsmall)};
+          ${verticalOffsets && verticalPaddings($paddingXsmall)};
         `;
       case "large":
         return `
-          ${horizontalOffsets && horizontalPaddings($paddingSmall)}
-          ${verticalOffsets && verticalPaddings($paddingSmall)}
+          ${horizontalOffsets && horizontalPaddings($paddingSmall)};
+          ${verticalOffsets && verticalPaddings($paddingSmall)};
         `;
       case "xlarge":
         return `
-          ${horizontalOffsets && horizontalPaddings($paddingMedium)}
-          ${verticalOffsets && verticalPaddings($paddingMedium)}
+          ${horizontalOffsets && horizontalPaddings($paddingMedium)};
+          ${verticalOffsets && verticalPaddings($paddingMedium)};
         `;
     }
   }};

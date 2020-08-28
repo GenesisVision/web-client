@@ -43,10 +43,7 @@ export const LabeledValue: React.FC<ILabeledValueProps> = ({
         onlyOffset
         size={direction !== "row" ? getChildOffsetValue(size) : undefined}
       >
-        <Text
-          weight={weight}
-          sizeValue={size === "middle" ? "14px" : undefined}
-        >
+        <Text weight={weight} sizeValue={size === "middle" ? "14" : undefined}>
           {children}
         </Text>
       </Row>

@@ -34,8 +34,8 @@ export const dynamicTextStyles = css`
         return 800;
     }
   }};
-  font-size: ${({ size = "middle", sizeValue }: ITextProps) => {
-    if (sizeValue) return sizeValue;
+  ${({ size = "middle", sizeValue }: ITextProps) => {
+    if (sizeValue) return fontSize(+sizeValue);
     switch (size) {
       case "xsmall":
         return fontSize($fontSizeXsmall);

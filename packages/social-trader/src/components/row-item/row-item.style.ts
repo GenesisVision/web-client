@@ -22,7 +22,7 @@ const getOffset = (size: number, bottom: boolean) => {
 };
 
 export const RowItemDynamicStyles = css`
-  ${cursorPointer}
+  ${cursorPointer};
   display: ${({ hide }: IRowItemProps) => (hide ? "none" : "block")};
   ${({ wide }: IRowItemProps) => (wide ? "width: 100%" : "")};
   ${({ size = "middle", bottomOffset }: IRowItemProps) => {
