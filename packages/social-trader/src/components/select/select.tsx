@@ -32,7 +32,7 @@ interface Props extends Sizeable {
   fixedWidth?: boolean;
   bottomLine?: boolean;
   fixedVertical?: boolean;
-  className: string;
+  className?: string;
   value: string;
   name: string;
   fullWidthPopover?: boolean;
