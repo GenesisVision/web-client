@@ -28,7 +28,9 @@ const _AssetStatus: React.FC<Props> = ({ status, id, onCancel }) => {
   );
   return (
     <>
-      <AssetStatusLabel status={status} onClick={handleOpenDropdown} />
+      <AssetStatusLabel status={status} onClick={handleOpenDropdown}>
+        {status}
+      </AssetStatusLabel>
       <Popover
         orientation={ORIENTATION_POPOVER.LEFT}
         horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
