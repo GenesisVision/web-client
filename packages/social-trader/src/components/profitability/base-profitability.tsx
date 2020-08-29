@@ -26,6 +26,7 @@ const BaseProfitability = styled.div<Props>`
   background-color: ${({ isPositive, isNegative }) => {
     if (isPositive) return `${$positiveColor}1a`;
     if (isNegative) return `${$negativeColor}1a`;
+    return `${$labelColor}1a`;
   }};
   ${({ variant }) => {
     if (variant === PROFITABILITY_VARIANT.CHIPS)
@@ -34,7 +35,6 @@ const BaseProfitability = styled.div<Props>`
         font-weight: 600;
         border-radius: 19.5px;
         padding: 4px 10px;
-        background-color: ${$labelColor}1a;
         white-space: nowrap;
       
         ${mediaBreakpointLandscapePhone(`
