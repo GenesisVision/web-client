@@ -9,9 +9,8 @@ import {
 } from "modules/chart-currency-selector/chart-currency-selector.types";
 import CurrencySelect from "modules/currency-select/components/currency-select";
 import * as React from "react";
+import styled from "styled-components";
 import { CurrencyEnum } from "utils/types";
-
-import styles from "./chart-currency-selector.module.scss";
 
 interface Props {
   i: number;
@@ -22,6 +21,13 @@ interface Props {
   onRemove: TRemoveChartCurrency;
   onChange: TChangeChartCurrency;
 }
+
+const StyledCurrencySelect = styled(CurrencySelect)`
+  min-width: auto;
+  height: auto;
+  display: block;
+  border-bottom: 0;
+`;
 
 const _ChartCurrencySelectorItem: React.FC<Props> = ({
   i,
@@ -46,10 +52,9 @@ const _ChartCurrencySelectorItem: React.FC<Props> = ({
           </RowItem>
           <RowItem>
             {selectCurrencies.length || i === 0 ? (
-              <CurrencySelect
+              <StyledCurrencySelect
                 bottomLine={false}
                 size={"small"}
-                className={styles["chart-currency-selector__select"]}
                 value={name}
                 onChange={onChange(i)}
                 currencyValues={
