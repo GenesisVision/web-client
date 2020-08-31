@@ -5,13 +5,6 @@ import {
 import { InternalTransferRequest } from "gv-api-web";
 import { api } from "services/api-client/swagger-custom-client";
 import { formatCurrencyValue } from "utils/formatter";
-import { CurrencyEnum } from "utils/types";
-
-export const fetchTradingAccounts = (currency: CurrencyEnum) =>
-  api
-    .wallet()
-    .getAccountsAvailable(currency)
-    .then(({ wallets }) => wallets);
 
 export const transferRequest = (body: InternalTransferRequest): Promise<any> =>
   api.wallet().transfer({
