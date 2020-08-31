@@ -1,5 +1,9 @@
 import platformActions from "actions/platform-actions";
-import { fetchBrokers, fetchExchanges } from "components/assets/asset.service";
+import {
+  fetchBrokers,
+  fetchExchanges,
+  GM_DEMO_BROKER_NAME
+} from "components/assets/asset.service";
 import withDefaultLayout from "decorators/with-default-layout";
 import withPrivateRoute from "decorators/with-private-route";
 import { Broker, ExchangeInfo } from "gv-api-web";
@@ -32,7 +36,7 @@ const Page: NextPageWithRedux<Props, {}> = ({
 
 Page.getInitialProps = async ctx => {
   const requestBrokerName = getBrokerFromContext(ctx);
-  let brokers: Broker[] = [];
+  let serverBrokers: Broker[] = [];
   let exchanges: ExchangeInfo[] = [];
   await Promise.all([
     ctx.reduxStore.dispatch(
@@ -40,8 +44,11 @@ Page.getInitialProps = async ctx => {
     ),
     ctx.reduxStore.dispatch(fetchWalletsWithCtx(ctx)),
     fetchExchanges().then(res => (exchanges = res)),
-    fetchBrokers().then(res => (brokers = res))
+    fetchBrokers().then(res => (serverBrokers = res))
   ]);
+  const brokers = serverBrokers.filter(
+    ({ name }) => name !== GM_DEMO_BROKER_NAME
+  );
   return {
     namespacesRequired: [
       "profile-page",
