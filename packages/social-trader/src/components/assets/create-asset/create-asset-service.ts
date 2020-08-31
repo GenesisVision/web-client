@@ -1,5 +1,6 @@
 import { CREATE_ASSET } from "constants/constants";
 import {
+  MakeProgram,
   NewExchangeAccountRequest,
   NewFundRequest,
   NewTradingAccountRequest
@@ -59,22 +60,26 @@ export const createAsset = ({
 const getCreateMethod = (
   asset: CREATE_ASSET
 ): ((request: NewAssetRequest) => Promise<any>) => {
-  const assetsApi = api.assets();
   switch (asset) {
+    case CREATE_ASSET.PROGRAM:
+      return (request: NewAssetRequest) =>
+        api.assets().makeProgram({
+          body: request as MakeProgram
+        });
     case CREATE_ASSET.EXCHANGE_ACCOUNT:
       return (request: NewAssetRequest) =>
-        assetsApi.createExchangeAccount({
+        api.assets().createExchangeAccount({
           body: request as NewExchangeAccountRequest
         });
     case CREATE_ASSET.ACCOUNT:
       return (request: NewAssetRequest) =>
-        assetsApi.createTradingAccount({
+        api.assets().createTradingAccount({
           body: request as NewTradingAccountRequest
         });
     case CREATE_ASSET.FUND:
     default:
       return (request: NewAssetRequest) =>
-        assetsApi.createFund({
+        api.assets().createFund({
           body: request as NewFundRequest
         });
   }

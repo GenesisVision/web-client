@@ -1,8 +1,11 @@
+import { Center } from "components/center/center";
 import { DataStorageContext } from "components/data-storage/data-storage";
+import { RowItem } from "components/row-item/row-item";
 import { ToolbarButton } from "components/table/components/toolbar-button";
 import { DashboardTradingAsset } from "gv-api-web";
 import { useAccountCurrency } from "hooks/account-currency.hook";
 import { CREATE_FUND_PAGE_ROUTE } from "pages/create-fund/create-fund.constants";
+import { CREATE_PROGRAM_PAGE_ROUTE } from "pages/create-program/create-program.constants";
 import DashboardPublicCard from "pages/dashboard/components/dashboard-trading/dashboard-public-card";
 import DashboardTradingTable from "pages/dashboard/components/dashboard-trading/dashboard-trading-table";
 import {
@@ -35,10 +38,20 @@ const _DashboardPublic: React.FC<Props> = () => {
       filtering={DASHBOARD_PUBLIC_FILTERING}
       defaultFilters={DASHBOARD_PUBLIC_DEFAULT_FILTERS}
       createButtonToolbar={
-        <ToolbarButton
-          text={t("buttons.create-fund")}
-          route={CREATE_FUND_PAGE_ROUTE}
-        />
+        <Center>
+          <RowItem>
+            <ToolbarButton
+              text={t("buttons.create-fund")}
+              route={CREATE_FUND_PAGE_ROUTE}
+            />
+          </RowItem>
+          <RowItem>
+            <ToolbarButton
+              text={t("buttons.create-program")}
+              route={CREATE_PROGRAM_PAGE_ROUTE}
+            />
+          </RowItem>
+        </Center>
       }
       getItems={getItems}
       title={t("dashboard-page:trading.public")}
