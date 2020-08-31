@@ -4,6 +4,18 @@ import { formatValue } from "utils/formatter";
 
 import CalculatorSlider from "./calculator-slider";
 
+interface Props {
+  name: string;
+  value: number;
+  valueAdornment?: string;
+  max: number;
+  maxLabel?: React.ReactElement;
+  title?: React.ReactNode;
+  className?: string;
+  tooltipContent?: string;
+  onChange(name: string, value: number): void;
+}
+
 const STEP = 0.0001;
 
 const CalculatorLogarithmicSlider: React.FC<Props> = ({
@@ -48,6 +60,7 @@ const CalculatorLogarithmicSlider: React.FC<Props> = ({
 
   return (
     <CalculatorSlider
+      wideValue
       name={name}
       min={0}
       max={1}
@@ -63,7 +76,6 @@ const CalculatorLogarithmicSlider: React.FC<Props> = ({
           <NumberFormat value={max} displayType="text" thousandSeparator=" " />
         )
       }
-      className={className}
       tooltipContent={tooltipContent}
       onChange={handleChange}
       onChangeValue={handleChangeValue}
@@ -72,15 +84,3 @@ const CalculatorLogarithmicSlider: React.FC<Props> = ({
 };
 
 export default CalculatorLogarithmicSlider;
-
-interface Props {
-  name: string;
-  value: number;
-  valueAdornment?: string;
-  max: number;
-  maxLabel?: React.ReactElement;
-  title?: React.ReactNode;
-  className?: string;
-  tooltipContent?: string;
-  onChange(name: string, value: number): void;
-}
