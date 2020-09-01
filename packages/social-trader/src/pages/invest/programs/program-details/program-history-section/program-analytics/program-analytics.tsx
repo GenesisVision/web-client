@@ -12,43 +12,28 @@ import { DEFAULT_PAGING } from "components/table/reducers/table-paging.reducer";
 import Tooltip from "components/tooltip/tooltip";
 import { TooltipContent } from "components/tooltip/tooltip-content";
 import { IntervalFilter } from "pages/invest/programs/program-details/program-history-section/interval-filter";
+import { ProgramAnalyticsRow } from "pages/invest/programs/program-details/program-history-section/program-analytics/program-analytics-row";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import filesService from "services/file-service";
 import { CurrencyEnum } from "utils/types";
 
-import {
-  EXCHANGE_PROGRAM_FINANCIAL_STATISTIC_COLUMNS,
-  PROGRAM_FINANCIAL_STATISTIC_COLUMNS,
-  PROGRAM_GM_FINANCIAL_STATISTIC_COLUMNS
-} from "../../program-details.constants";
-import DownloadButtonToolbarAuth from "../download-button-toolbar/download-button-toolbar-auth";
-import ProgramFinancialStatisticRow from "./program-financial-statistic-row";
+import { PROGRAM_ANALYTICS } from "../../program-details.constants";
+import DownloadButtonToolbar from "../download-button-toolbar/download-button-toolbar";
 
-const getColumns = ({
-  isExchange,
-  showCommissionRebateSometime
-}: {
-  isExchange?: boolean;
-  showCommissionRebateSometime?: boolean;
-}) => {
-  if (isExchange) return EXCHANGE_PROGRAM_FINANCIAL_STATISTIC_COLUMNS;
-  if (showCommissionRebateSometime)
-    return PROGRAM_GM_FINANCIAL_STATISTIC_COLUMNS;
-  return PROGRAM_FINANCIAL_STATISTIC_COLUMNS;
-};
+interface Props {
+  getItems: GetItemsFuncActionType;
+  dataSelector: TableSelectorType;
+  id: string;
+  currency: CurrencyEnum;
+}
 
-const _ProgramFinancialStatistic: React.FC<Props> = ({
-  isExchange,
+const _ProgramAnalytics: React.FC<Props> = ({
   getItems,
   dataSelector,
-  showCommissionRebateSometime,
   currency,
-  id,
-  title
+  id
 }) => {
-  const columns = getColumns({ showCommissionRebateSometime, isExchange });
-
   const [t] = useTranslation();
   const renderCell = useCallback(
     (name: string) => (
@@ -58,28 +43,25 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
           styles[`program-details-trades__cell--${name}`]
         )}
       >
-        {t(`program-details-page:history.financial-statistic.${name}`)}
+        {t(`program-details-page:history.period-history.${name}`)}
       </span>
     ),
     []
   );
   const exportButtonToolbarRender = useCallback(
     (filtering: any) => (
-      <DownloadButtonToolbarAuth
-        method={filesService.getStatisticExportFile}
-        dateRange={filtering!.dateRange}
+      <DownloadButtonToolbar
+        filtering={filtering!.dateRange}
         programId={id}
-        title={title}
+        getExportFileUrl={filesService.getPeriodExportFileUrl}
       />
     ),
-    [id, title]
+    [id]
   );
   const renderFilters = useCallback(
     (updateFilter, filtering) => (
       <>
-        {isExchange && (
-          <IntervalFilter updateFilter={updateFilter} filtering={filtering} />
-        )}
+        <IntervalFilter updateFilter={updateFilter} filtering={filtering} />
         <DateRangeFilter
           name={DATE_RANGE_FILTER_NAME}
           value={filtering[DATE_RANGE_FILTER_NAME]}
@@ -93,7 +75,7 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
   const renderTooltip = useCallback(
     (name: string) => () => (
       <TooltipContent>
-        {t(`program-details-page:history.financial-statistic.tooltips.${name}`)}
+        {t(`program-details-page:history.period-history.tooltips.${name}`)}
       </TooltipContent>
     ),
     []
@@ -112,17 +94,9 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
       ),
     []
   );
-
   const renderBodyRow = useCallback(
-    period => (
-      <ProgramFinancialStatisticRow
-        isExchange={isExchange}
-        period={period}
-        showCommissionRebateSometime={showCommissionRebateSometime}
-        currency={currency}
-      />
-    ),
-    [showCommissionRebateSometime, currency]
+    period => <ProgramAnalyticsRow period={period} currency={currency} />,
+    [currency]
   );
 
   return (
@@ -133,22 +107,12 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
       isFetchOnMount={true}
       renderFilters={renderFilters}
       paging={DEFAULT_PAGING}
-      columns={columns}
+      columns={PROGRAM_ANALYTICS}
       renderHeader={renderHeader}
       renderBodyRow={renderBodyRow}
     />
   );
 };
 
-interface Props {
-  isExchange?: boolean;
-  getItems: GetItemsFuncActionType;
-  dataSelector: TableSelectorType;
-  showCommissionRebateSometime: boolean;
-  id: string;
-  title: string;
-  currency: CurrencyEnum;
-}
-
-const ProgramFinancialStatistic = React.memo(_ProgramFinancialStatistic);
-export default ProgramFinancialStatistic;
+const ProgramAnalytics = React.memo(_ProgramAnalytics);
+export default ProgramAnalytics;

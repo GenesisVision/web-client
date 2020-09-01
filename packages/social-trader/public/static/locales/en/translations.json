@@ -364,12 +364,13 @@
     "program-closed": "Program is closed"
   },
   "withdraw-program": {
+    "end": "the end of the reporting period.",
     "all-text": "You are withdrawing the entire amount that will be available in the program at the end of the period",
     "title": "Withdraw",
     "available-to-withdraw": "Available for withdrawal",
     "amount-to-withdraw": "Amount to withdraw",
     "next": "Next",
-    "info": "Your request will be processed at the end of the reporting period.",
+    "info": "Your request will be processed at {{time}}",
     "withdrawing": "Withdrawing",
     "all": "All",
     "withdraw-all": "Withdraw all",

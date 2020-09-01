@@ -102,6 +102,7 @@
   "history": {
     "heading": "History",
     "tabs": {
+      "analytics": "Analytics",
       "trading-log": "Trading log",
       "trades": "Trades",
       "events": "My history",
@@ -181,6 +182,15 @@
       }
     },
     "financial-statistic": {
+      "interval-filter": {
+        "name": "Interval",
+        "values": {
+          "day": "Day",
+          "week": "Week",
+          "month": "Month"
+        }
+      },
+      "period-length": "Period length",
       "period": "Period",
       "date-start": "Date start",
       "balance": "Balance",

@@ -77,6 +77,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
     brokerDetails,
     ownerActions
   } = description;
+  const isExchange = programDetails.type === "DailyPeriod";
   const programPersonalDetails =
     programDetails && programDetails.personalDetails;
   const followPersonalDetails = followDetails && followDetails.personalDetails;
@@ -139,6 +140,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
   const renderPerformanceData = useCallback(
     () => (
       <PerformanceData
+        isExchange={isExchange}
         leverageMax={description.tradingAccountInfo.leverageMax}
         leverageMin={description.tradingAccountInfo.leverageMin}
         currency={description.tradingAccountInfo.currency}
@@ -157,6 +159,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
       <>
         {description.programDetails && (
           <InvestmentProgramControls
+            isExchange={isExchange}
             currency={description.tradingAccountInfo.currency}
             id={description.id}
             programDetails={description.programDetails}
@@ -264,6 +267,10 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
       />
       <DetailsDivider />
       <DetailsInvestment
+        isExchange={isExchange}
+        isProcessingRealTime={
+          programDetails.dailyPeriodDetails?.isProcessingRealTime
+        }
         isOwnAsset={isOwnAsset}
         fees={fees}
         dispatchDescription={handleDispatchDescription}
@@ -281,10 +288,11 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
       )}
       {showProgramStatistic && (
         <Row onlyOffset>
-          <ProgramDetailsStatisticSection />
+          <ProgramDetailsStatisticSection showPeriod={!isExchange} />
         </Row>
       )}
       <ProgramDetailsHistorySection
+        isExchange={isExchange}
         assetType={(route as unknown) as TRADE_ASSET_TYPE}
         canCloseOpenPositions={ownerActions?.canCloseOpenPositions}
         getHistoryCounts={getHistoryCounts}
