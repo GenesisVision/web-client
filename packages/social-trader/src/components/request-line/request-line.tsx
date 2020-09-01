@@ -1,11 +1,7 @@
 import { Center } from "components/center/center";
 import PortfolioEventLogo from "components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
-import {
-  $borderColor,
-  $textAccentColor
-} from "components/gv-styles/gv-colors/gv-colors";
-import { $paddingXxsmall } from "components/gv-styles/gv-sizes";
 import { CancelRequestButton } from "components/request-line/cancel-request-button";
+import { RequestLineContainer } from "components/request-line/request-line-container";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
@@ -13,7 +9,6 @@ import { AssetInvestmentRequest } from "gv-api-web";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
-import styled from "styled-components";
 import { localizedDate } from "utils/dates";
 import { formatCurrencyValue } from "utils/formatter";
 
@@ -42,15 +37,6 @@ const RequestLineItem: React.FC<{ label: string | JSX.Element }> = ({
   );
 };
 
-const Container = styled(Center)`
-  padding: ${$paddingXxsmall}px 0;
-  color: ${$textAccentColor};
-
-  &:not(:last-of-type) {
-    border-bottom: 1px solid ${$borderColor};
-  }
-`;
-
 const _RequestLine: React.FC<Props> = ({
   request: { assetDetails, type, amount, currency, date, canCancelRequest, id },
   onApplyCancelRequest
@@ -65,7 +51,7 @@ const _RequestLine: React.FC<Props> = ({
   } = assetDetails;
   const [t] = useTranslation();
   return (
-    <Container>
+    <RequestLineContainer>
       <RowItem size={"small"}>
         <PortfolioEventLogo withAsset assetDetails={assetDetails} icon={""} />
       </RowItem>
@@ -178,7 +164,7 @@ const _RequestLine: React.FC<Props> = ({
           />
         </RowItem>
       )}
-    </Container>
+    </RequestLineContainer>
   );
 };
 

@@ -14,11 +14,17 @@ const StyledCenter = styled(Center)<{ vertical?: boolean }>`
 
 export const StatisticItemList: React.FC<Props &
   React.HTMLAttributes<HTMLDivElement>> = ({
+  className,
   wrap = true,
   children,
   vertical
 }) => (
-  <StyledCenter wrap={wrap} vertical={vertical} center={false}>
+  <StyledCenter
+    className={className}
+    wrap={wrap}
+    vertical={vertical}
+    center={false}
+  >
     {children}
   </StyledCenter>
 );
