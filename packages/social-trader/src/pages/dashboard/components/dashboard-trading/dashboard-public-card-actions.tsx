@@ -29,6 +29,21 @@ import {
 } from "utils/compose-url";
 import { CurrencyEnum } from "utils/types";
 
+interface IDashboardPublicCardActionsProps {
+  currency: CurrencyEnum;
+  brokerType: BrokerTradeServerType;
+  onApply: VoidFunction;
+  name: string;
+  actions: DashboardTradingAssetActions;
+  assetType: AssetType;
+  clearAnchor: VoidFunction;
+  anchor?: TAnchor;
+  url?: string;
+  id: string;
+  showTerminal: boolean;
+  showClosePeriod: boolean;
+}
+
 const _DashboardPublicCardActions: React.FC<IDashboardPublicCardActionsProps> = ({
   currency,
   brokerType,
@@ -37,6 +52,7 @@ const _DashboardPublicCardActions: React.FC<IDashboardPublicCardActionsProps> = 
   assetType,
   actions: {
     isEnoughMoneyToCreateProgram,
+    canMakeExchangeProgramFromPrivateTradingAccount,
     canMakeSignalProviderFromProgram,
     canMakeProgramFromPrivateTradingAccount,
     canMakeProgramFromSignalProvider,
@@ -66,7 +82,9 @@ const _DashboardPublicCardActions: React.FC<IDashboardPublicCardActionsProps> = 
     assetType === "Fund" ? createFundSettingsToUrl : createProgramSettingsToUrl;
   const settingsLink = url ? createSettingsToUrlMethod(url, contextTitle) : "";
   const makeProgramLinkMethod = makeProgramLinkCreator({
-    assetFrom: CONVERT_ASSET.SIGNAL,
+    assetFrom: canMakeExchangeProgramFromPrivateTradingAccount
+      ? CONVERT_ASSET.EXCHANGE_ACCOUNT
+      : CONVERT_ASSET.SIGNAL,
     assetTo: CONVERT_ASSET.PROGRAM
   });
   const makeProgramLink = linkCreator(makeProgramLinkMethod(id));
@@ -80,6 +98,7 @@ const _DashboardPublicCardActions: React.FC<IDashboardPublicCardActionsProps> = 
         <MakeSignalButton onApply={handleOnApply} id={id} programName={name} />
       )}
       {(canMakeProgramFromPrivateTradingAccount ||
+        canMakeExchangeProgramFromPrivateTradingAccount ||
         canMakeProgramFromSignalProvider) && (
         <MakeProgramButton
           makeProgramLink={makeProgramLink}
@@ -104,21 +123,6 @@ const _DashboardPublicCardActions: React.FC<IDashboardPublicCardActionsProps> = 
     </TableCardActions>
   );
 };
-
-interface IDashboardPublicCardActionsProps {
-  currency: CurrencyEnum;
-  brokerType: BrokerTradeServerType;
-  onApply: VoidFunction;
-  name: string;
-  actions: DashboardTradingAssetActions;
-  assetType: AssetType;
-  clearAnchor: VoidFunction;
-  anchor?: TAnchor;
-  url?: string;
-  id: string;
-  showTerminal: boolean;
-  showClosePeriod: boolean;
-}
 
 export const DashboardPublicCardActions = React.memo(
   _DashboardPublicCardActions
