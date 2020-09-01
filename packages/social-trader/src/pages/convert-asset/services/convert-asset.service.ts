@@ -1,4 +1,5 @@
 import {
+  MakeExchangeAccountProgram,
   MakeSignalProviderProgram,
   MakeTradingAccountProgram,
   MakeTradingAccountSignalProvider
@@ -12,6 +13,7 @@ import { TAssetFromTo } from "../convert-asset.types";
 export type IConvertAssetSettingsFormValues = any;
 
 export type RequestType =
+  | MakeExchangeAccountProgram
   | MakeSignalProviderProgram
   | MakeTradingAccountProgram
   | MakeTradingAccountSignalProvider;
@@ -41,6 +43,11 @@ const getCovertMethod = ({
   assetTo
 }: TAssetFromTo): ((body: RequestType) => Promise<any>) => {
   switch (assetFrom + assetTo) {
+    case CONVERT_ASSET.EXCHANGE_ACCOUNT + CONVERT_ASSET.PROGRAM:
+      return (body: RequestType) =>
+        api.assets().makeExchangeAccountProgram({
+          body: body as MakeExchangeAccountProgram
+        });
     case CONVERT_ASSET.SIGNAL + CONVERT_ASSET.PROGRAM:
       return (body: RequestType) =>
         api.assets().makeSignalProviderProgram({
