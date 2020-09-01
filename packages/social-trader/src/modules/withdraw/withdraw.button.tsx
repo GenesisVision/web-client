@@ -8,7 +8,18 @@ import ProgramWithdrawDialog from "modules/program-withdraw/program-withdraw-dia
 import React from "react";
 import { CurrencyEnum, Sizeable } from "utils/types";
 
+interface Props extends Sizeable {
+  isProcessingRealTime?: boolean;
+  infoMessage?: string;
+  disabled?: boolean;
+  onApply?: VoidFunction;
+  type: ASSET;
+  id: string;
+  currency: CurrencyEnum;
+}
+
 const _WithdrawButton: React.FC<Props> = ({
+  isProcessingRealTime,
   infoMessage,
   size,
   onApply,
@@ -32,6 +43,7 @@ const _WithdrawButton: React.FC<Props> = ({
       />
     ) : (
       <ProgramWithdrawDialog
+        isProcessingRealTime={isProcessingRealTime}
         onApply={onApply}
         open={isOpenPopup}
         id={id}
@@ -57,15 +69,6 @@ const _WithdrawButton: React.FC<Props> = ({
     </>
   );
 };
-
-interface Props extends Sizeable {
-  infoMessage?: string;
-  disabled?: boolean;
-  onApply?: VoidFunction;
-  type: ASSET;
-  id: string;
-  currency: CurrencyEnum;
-}
 
 const WithdrawButton = React.memo(_WithdrawButton);
 export default WithdrawButton;

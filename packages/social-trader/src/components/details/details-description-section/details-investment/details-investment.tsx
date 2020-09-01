@@ -66,7 +66,27 @@ enum TABS {
   EVENTS = "EVENTS"
 }
 
+interface Props {
+  isExchange?: boolean;
+  isProcessingRealTime?: boolean;
+  hasTradingSchedule?: boolean;
+  investmentMessage?: string;
+  withdrawMessage?: string;
+  isOwnAsset: boolean;
+  fees: FeesType;
+  asset: ASSET;
+  dispatchDescription: () => void;
+  selector: TableSelectorType;
+  currency: CurrencyEnum;
+  id: string;
+  personalFundDetails?: PersonalFundDetails;
+  programPersonalDetails?: PersonalProgramDetails;
+  followPersonalDetails?: PersonalFollowDetailsFull;
+}
+
 const _DetailsInvestment: React.FC<Props> = ({
+  isExchange,
+  isProcessingRealTime,
   investmentMessage,
   hasTradingSchedule,
   withdrawMessage,
@@ -139,7 +159,9 @@ const _DetailsInvestment: React.FC<Props> = ({
           visible={showInvestment}
           value={TABS.INVESTMENT}
           label={t(
-            `asset-details:investment.tabs.investment.${asset.toLowerCase()}`
+            `asset-details:investment.tabs.investment.${
+              isExchange ? "exchange-" : ""
+            }${asset.toLowerCase()}`
           )}
         />
         <GVTab
@@ -158,6 +180,8 @@ const _DetailsInvestment: React.FC<Props> = ({
       {tab === TABS.INVESTMENT && showInvestment && (
         <Row onlyOffset>
           <Investment
+            isExchange={isExchange}
+            isProcessingRealTime={isProcessingRealTime}
             hasTradingSchedule={hasTradingSchedule}
             investmentMessage={investmentMessage}
             withdrawMessage={withdrawMessage}

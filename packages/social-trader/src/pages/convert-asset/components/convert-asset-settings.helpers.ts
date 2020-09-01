@@ -39,6 +39,12 @@ const convertAssetSettingsValidationSchema = ({
         programsInfo,
         hasInvestmentLimit
       });
+    case CONVERT_ASSET.EXCHANGE_ACCOUNT + CONVERT_ASSET.PROGRAM:
+      return convertExchangeAccountToProgramValidationSchema({
+        t,
+        programsInfo,
+        hasInvestmentLimit
+      });
     case CONVERT_ASSET.ACCOUNT + CONVERT_ASSET.PROGRAM:
       return convertAccountToProgramValidationSchema({
         t,
@@ -95,6 +101,27 @@ const convertAccountToProgramValidationSchema = ({
     })
   });
 
+const convertExchangeAccountToProgramValidationSchema = ({
+  t,
+  hasInvestmentLimit,
+  programsInfo: {
+    createProgramInfo: { maxManagementFee, maxSuccessFee }
+  }
+}: {
+  t: TFunction;
+  programsInfo: ProgramAssetPlatformInfo;
+  hasInvestmentLimit: boolean;
+}) =>
+  object<IConvertAssetSettingsFormValues>().shape({
+    ...getPublicInfoShapes(t),
+    ...getExchangeProgramShapes({
+      hasInvestmentLimit,
+      t,
+      maxManagementFee,
+      maxSuccessFee
+    })
+  });
+
 const convertToSignalValidationSchema = ({
   isSignalProgram,
   t,
@@ -117,6 +144,8 @@ const convertToSignalValidationSchema = ({
   });
 
 export enum CONVERT_ASSET_FIELDS {
+  isProcessingRealTime = "isProcessingRealTime",
+  hourProcessing = "hourProcessing",
   tradesDelay = "tradesDelay",
   currency = "currency",
   periodLength = "periodLength",
@@ -130,7 +159,10 @@ export enum CONVERT_ASSET_FIELDS {
   investmentLimit = "investmentLimit"
 }
 
-const investmentLimitShape = (hasInvestmentLimit: boolean, t: TFunction) =>
+export const investmentLimitShape = (
+  hasInvestmentLimit: boolean,
+  t: TFunction
+) =>
   hasInvestmentLimit
     ? number()
         .min(0, t("validations.investment-limit-min"))
@@ -138,19 +170,19 @@ const investmentLimitShape = (hasInvestmentLimit: boolean, t: TFunction) =>
         .required(t("validations.investment-limit-required"))
     : number();
 
-const stopOutLevelShape = (t: TFunction) =>
+export const stopOutLevelShape = (t: TFunction) =>
   number()
     .required(t("validations.stop-out-required"))
     .min(10, t("validations.stop-out-is-zero"))
     .max(100, t("validations.stop-out-is-large"));
 
-const currencyShape = (t: TFunction) =>
+export const currencyShape = (t: TFunction) =>
   string().required(t("validations.currency-required"));
 
-const periodLengthShape = (t: TFunction) =>
+export const periodLengthShape = (t: TFunction) =>
   number().required(t("validations.period-required"));
 
-const getPublicInfoShapes = (t: TFunction) => ({
+export const getPublicInfoShapes = (t: TFunction) => ({
   [CONVERT_ASSET_FIELDS.logo]: inputImageShape(t),
   [CONVERT_ASSET_FIELDS.title]: assetTitleShape(t),
   [CONVERT_ASSET_FIELDS.description]: assetDescriptionShape(t)
@@ -192,6 +224,27 @@ const getProgramShapes = ({
 }) => ({
   [CONVERT_ASSET_FIELDS.currency]: currencyShape(t),
   [CONVERT_ASSET_FIELDS.periodLength]: periodLengthShape(t),
+  [CONVERT_ASSET_FIELDS.stopOutLevel]: stopOutLevelShape(t),
+  [CONVERT_ASSET_FIELDS.entryFee]: entryFeeShape(t, maxManagementFee),
+  [CONVERT_ASSET_FIELDS.successFee]: successFeeShape(t, maxSuccessFee),
+  [CONVERT_ASSET_FIELDS.investmentLimit]: investmentLimitShape(
+    hasInvestmentLimit,
+    t
+  )
+});
+
+const getExchangeProgramShapes = ({
+  hasInvestmentLimit,
+  t,
+  maxManagementFee,
+  maxSuccessFee
+}: {
+  hasInvestmentLimit: boolean;
+  t: TFunction;
+  maxManagementFee: number;
+  maxSuccessFee: number;
+}) => ({
+  [CONVERT_ASSET_FIELDS.currency]: currencyShape(t),
   [CONVERT_ASSET_FIELDS.stopOutLevel]: stopOutLevelShape(t),
   [CONVERT_ASSET_FIELDS.entryFee]: entryFeeShape(t, maxManagementFee),
   [CONVERT_ASSET_FIELDS.successFee]: successFeeShape(t, maxSuccessFee),

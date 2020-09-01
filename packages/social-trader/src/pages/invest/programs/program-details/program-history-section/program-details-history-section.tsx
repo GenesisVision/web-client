@@ -23,6 +23,9 @@ const ProgramFinancialStatistic = dynamic(() =>
 const ProgramOpenPositions = dynamic(() =>
   import("./program-open-positions/program-open-positions")
 );
+const ProgramAnalytics = dynamic(() =>
+  import("./program-analytics/program-analytics")
+);
 const ProgramPeriodHistory = dynamic(() =>
   import("./program-period-history/program-period-history")
 );
@@ -34,11 +37,56 @@ const ProgramTradingLog = dynamic(() =>
   import("./program-trading-log/program-trading-log")
 );
 
+enum TABS {
+  ANALYTICS = "analytics",
+  TRADING_LOG = "tradingLog",
+  TRADES = "trades",
+  OPEN_POSITIONS = "openPositions",
+  SUBSCRIBERS = "subscribers",
+  FINANCIAL_STATISTIC = "financialStatistic",
+  PERIOD_HISTORY = "periodHistory"
+}
+
+interface Props {
+  isExchange?: boolean;
+  isFollower?: boolean;
+  canCloseOpenPositions?: boolean;
+  assetType: TRADE_ASSET_TYPE;
+  haveDelay?: boolean;
+  getHistoryCounts: (
+    id: string
+  ) => (dispatch: Dispatch, getState: () => RootState) => void;
+  tablesData: TProgramTablesData;
+  showCommissionRebateSometime: boolean;
+  showSwaps: boolean;
+  showTickets: boolean;
+  programId: string;
+  programCurrency: CurrencyEnum;
+  isOwnProgram: boolean;
+  title: string;
+}
+
+export type TProgramTableReduxData = {
+  getItems: (id: string) => GetItemsFuncActionType;
+  dataSelector: TableSelectorType;
+  itemSelector?: (state: RootState) => { [keys: string]: any };
+};
+
+export type TProgramTablesData = {
+  tradingLog?: TProgramTableReduxData;
+  trades: TProgramTableReduxData;
+  openPositions: TProgramTableReduxData;
+  subscriptions?: TProgramTableReduxData;
+  financialStatistic?: TProgramTableReduxData;
+  periodHistory?: TProgramTableReduxData;
+};
+
 const nullSelector = () => ({
   itemsData: { data: { total: 0 } }
 });
 
 const _ProgramDetailsHistorySection: React.FC<Props> = ({
+  isExchange,
   isFollower,
   canCloseOpenPositions,
   assetType,
@@ -99,7 +147,13 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
           count={tradesCount}
         />
         <GVTab
-          visible={!!periodHistory}
+          visible={isExchange && !!periodHistory}
+          value={TABS.ANALYTICS}
+          label={t("program-details-page:history.tabs.analytics")}
+          count={periodHistoryCount}
+        />
+        <GVTab
+          visible={!isExchange && !!periodHistory}
           value={TABS.PERIOD_HISTORY}
           label={t("program-details-page:history.tabs.period-history")}
           count={periodHistoryCount}
@@ -163,6 +217,7 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
       )}
       {tab === TABS.FINANCIAL_STATISTIC && financialStatistic && (
         <ProgramFinancialStatistic
+          isExchange={isExchange}
           getItems={financialStatistic.getItems(programId)}
           dataSelector={financialStatistic.dataSelector}
           showCommissionRebateSometime={showCommissionRebateSometime}
@@ -179,50 +234,16 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
           currency={programCurrency}
         />
       )}
+      {tab === TABS.ANALYTICS && periodHistory && (
+        <ProgramAnalytics
+          getItems={periodHistory.getItems(programId)}
+          dataSelector={periodHistory.dataSelector}
+          id={programId}
+          currency={programCurrency}
+        />
+      )}
     </DefaultTableBlock>
   );
-};
-
-enum TABS {
-  TRADING_LOG = "tradingLog",
-  TRADES = "trades",
-  OPEN_POSITIONS = "openPositions",
-  SUBSCRIBERS = "subscribers",
-  FINANCIAL_STATISTIC = "financialStatistic",
-  PERIOD_HISTORY = "periodHistory"
-}
-
-interface Props {
-  isFollower?: boolean;
-  canCloseOpenPositions?: boolean;
-  assetType: TRADE_ASSET_TYPE;
-  haveDelay?: boolean;
-  getHistoryCounts: (
-    id: string
-  ) => (dispatch: Dispatch, getState: () => RootState) => void;
-  tablesData: TProgramTablesData;
-  showCommissionRebateSometime: boolean;
-  showSwaps: boolean;
-  showTickets: boolean;
-  programId: string;
-  programCurrency: CurrencyEnum;
-  isOwnProgram: boolean;
-  title: string;
-}
-
-export type TProgramTableReduxData = {
-  getItems: (id: string) => GetItemsFuncActionType;
-  dataSelector: TableSelectorType;
-  itemSelector?: (state: RootState) => { [keys: string]: any };
-};
-
-export type TProgramTablesData = {
-  tradingLog?: TProgramTableReduxData;
-  trades: TProgramTableReduxData;
-  openPositions: TProgramTableReduxData;
-  subscriptions?: TProgramTableReduxData;
-  financialStatistic?: TProgramTableReduxData;
-  periodHistory?: TProgramTableReduxData;
 };
 
 const ProgramDetailsHistorySection = React.memo(_ProgramDetailsHistorySection);

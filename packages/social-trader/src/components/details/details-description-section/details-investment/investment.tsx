@@ -22,6 +22,8 @@ import { CurrencyEnum, FeesType } from "utils/types";
 import { InvestmentType } from "./details-investment.helpers";
 
 interface Props {
+  isExchange?: boolean;
+  isProcessingRealTime?: boolean;
   hasTradingSchedule?: boolean;
   investmentMessage?: string;
   withdrawMessage?: string;
@@ -35,6 +37,8 @@ interface Props {
 }
 
 const _Investment: React.FC<Props> = ({
+  isExchange,
+  isProcessingRealTime,
   investmentMessage,
   hasTradingSchedule,
   withdrawMessage,
@@ -169,7 +173,8 @@ const _Investment: React.FC<Props> = ({
               />
             </InvestmentItem>
           )}
-          {"isReinvest" in personalDetails &&
+          {!isExchange &&
+            "isReinvest" in personalDetails &&
             personalDetails.isInvested &&
             personalDetails.canInvest &&
             !isOwnAsset && (
@@ -180,7 +185,8 @@ const _Investment: React.FC<Props> = ({
                 />
               </InvestmentItem>
             )}
-          {"isReinvest" in personalDetails &&
+          {!isExchange &&
+            "isReinvest" in personalDetails &&
             personalDetails.isInvested &&
             personalDetails.canInvest &&
             !isOwnAsset && (
@@ -220,6 +226,7 @@ const _Investment: React.FC<Props> = ({
       <Row>
         <DetailsInvestmentFooter>
           <WithdrawButton
+            isProcessingRealTime={isProcessingRealTime}
             infoMessage={withdrawMessage}
             size={"xlarge"}
             disabled={!personalDetails.canWithdraw}

@@ -15,6 +15,7 @@ import { formatCurrencyValue, formatValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 
 interface IInvestmentProgramInfoProps {
+  isExchange?: boolean;
   id: string;
   currency: CurrencyEnum;
   title: string;
@@ -44,6 +45,7 @@ const renderFee = (
 };
 
 const _InvestmentProgramInfo: React.FC<IInvestmentProgramInfoProps> = ({
+  isExchange,
   isOwnProgram,
   id,
   currency,
@@ -133,7 +135,7 @@ const _InvestmentProgramInfo: React.FC<IInvestmentProgramInfoProps> = ({
       >
         {renderFee(successFeeSelected, successFeeCurrent)}
       </InvestmentItem>
-      {!!stopOutLevelCurrent && !!stopOutLevelSelected && (
+      {!isExchange && !!stopOutLevelCurrent && !!stopOutLevelSelected && (
         <InvestmentItem
           label={
             <TooltipLabel
