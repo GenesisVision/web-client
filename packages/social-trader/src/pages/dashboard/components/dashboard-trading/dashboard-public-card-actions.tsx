@@ -60,7 +60,7 @@ const _DashboardPublicCardActions: React.FC<IDashboardPublicCardActionsProps> = 
   const { linkCreator, contextTitle } = useToLink();
   const [t] = useTranslation();
   const terminalLink = brokerType
-    ? linkCreator(getTerminalLink(brokerType))
+    ? linkCreator(getTerminalLink(brokerType, id))
     : "";
   const createSettingsToUrlMethod =
     assetType === "Fund" ? createFundSettingsToUrl : createProgramSettingsToUrl;
