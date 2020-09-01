@@ -1,4 +1,5 @@
 import {
+  MakeExchangeAccountProgram,
   MakeSignalProviderProgram,
   MakeTradingAccountProgram,
   MakeTradingAccountSignalProvider
@@ -12,6 +13,7 @@ import { TAssetFromTo } from "../convert-asset.types";
 export type IConvertAssetSettingsFormValues = any;
 
 export type RequestType =
+  | MakeExchangeAccountProgram
   | MakeSignalProviderProgram
   | MakeTradingAccountProgram
   | MakeTradingAccountSignalProvider;
@@ -40,27 +42,31 @@ const getCovertMethod = ({
   assetFrom,
   assetTo
 }: TAssetFromTo): ((body: RequestType) => Promise<any>) => {
-  const assetsApi = api.assets();
   switch (assetFrom + assetTo) {
+    case CONVERT_ASSET.EXCHANGE_ACCOUNT + CONVERT_ASSET.PROGRAM:
+      return (body: RequestType) =>
+        api.assets().makeExchangeAccountProgram({
+          body: body as MakeExchangeAccountProgram
+        });
     case CONVERT_ASSET.SIGNAL + CONVERT_ASSET.PROGRAM:
       return (body: RequestType) =>
-        assetsApi.makeSignalProviderProgram({
+        api.assets().makeSignalProviderProgram({
           body: body as MakeSignalProviderProgram
         });
     case CONVERT_ASSET.ACCOUNT + CONVERT_ASSET.PROGRAM:
       return (body: RequestType) =>
-        assetsApi.makeAccountProgram({
+        api.assets().makeAccountProgram({
           body: body as MakeTradingAccountProgram
         });
     case CONVERT_ASSET.ACCOUNT + CONVERT_ASSET.SIGNAL:
       return (body: RequestType) =>
-        assetsApi.makeAccountSignalProvider({
+        api.assets().makeAccountSignalProvider({
           body: body as MakeTradingAccountSignalProvider
         });
     case CONVERT_ASSET.EXTERNAL_ACCOUNT + CONVERT_ASSET.SIGNAL:
     default:
       return (body: RequestType) =>
-        assetsApi.makeExternalAccountSignalProvider({
+        api.assets().makeExternalAccountSignalProvider({
           body: body as MakeTradingAccountSignalProvider
         });
   }

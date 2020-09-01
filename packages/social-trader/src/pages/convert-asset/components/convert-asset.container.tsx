@@ -3,25 +3,13 @@ import React from "react";
 
 import { ConvertAssetSettingsSection } from "./convert-asset-settings-section";
 
-const _ConvertAssetContainer: React.FC<Props> = ({
-  currency,
-  fromTo,
-  id,
-  broker
-}) => {
-  return (
-    <ConvertAssetSettingsSection
-      currency={currency}
-      fromTo={fromTo}
-      id={id}
-      broker={broker}
-    />
-  );
-};
-
 interface Props extends IConvertAssetSettingsFormOwnProps {
   title: string;
 }
+
+const _ConvertAssetContainer: React.FC<Props> = props => {
+  return <ConvertAssetSettingsSection {...props} />;
+};
 
 const ConvertAssetContainer = React.memo(_ConvertAssetContainer);
 export default ConvertAssetContainer;
