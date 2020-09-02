@@ -11,6 +11,7 @@ import { useTranslation } from "react-i18next";
 import { NumberFormatValues } from "react-number-format";
 
 const _SimpleInputAmountField: React.FC<ISimpleInputAmountFieldProps> = ({
+  hide,
   externalDirty: externalDirtyProp,
   setMin,
   wide = true,
@@ -30,7 +31,7 @@ const _SimpleInputAmountField: React.FC<ISimpleInputAmountFieldProps> = ({
     []
   );
   return (
-    <Row size={"large"} wide={wide}>
+    <Row size={"large"} hide={hide} wide={wide}>
       <SimpleNumberField
         {...props}
         externalDirty={externalDirty}
@@ -71,6 +72,7 @@ const _SimpleInputAmountField: React.FC<ISimpleInputAmountFieldProps> = ({
 };
 
 export interface ISimpleInputAmountFieldProps extends ISimpleNumberFieldProps {
+  hide?: boolean;
   wide?: boolean;
   name: string;
   label?: React.ReactNode;

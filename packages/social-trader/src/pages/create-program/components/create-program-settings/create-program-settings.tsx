@@ -24,7 +24,7 @@ import { ASSET } from "constants/constants";
 import { Broker, ProgramAssetPlatformInfo } from "gv-api-web";
 import { KycRequiredBlock } from "pages/create-account/components/create-account-settings/kyc-required-block";
 import * as React from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
@@ -33,7 +33,7 @@ import { safeGetElemFromArray } from "utils/helpers";
 import { HookForm } from "utils/hook-form.helpers";
 import { CurrencyEnum } from "utils/types";
 
-import createAccountSettingsValidationSchema from "./create-program-settings.validators";
+import createProgramSettingsValidationSchema from "./create-program-settings.validators";
 
 export enum CREATE_PROGRAM_FIELDS {
   title = "title",
@@ -104,7 +104,7 @@ const _CreateProgramSettings: React.FC<Props> = ({
       [CREATE_PROGRAM_FIELDS.depositWalletId]: "",
       [CREATE_PROGRAM_FIELDS.depositAmount]: undefined
     },
-    validationSchema: createAccountSettingsValidationSchema({
+    validationSchema: createProgramSettingsValidationSchema({
       maxManagementFee,
       maxSuccessFee,
       hasInvestmentLimit,
@@ -116,6 +116,7 @@ const _CreateProgramSettings: React.FC<Props> = ({
     mode: "onChange"
   });
   const {
+    triggerValidation,
     watch,
     setValue,
     errors,
@@ -123,7 +124,9 @@ const _CreateProgramSettings: React.FC<Props> = ({
   } = form;
   const { description, brokerAccountTypeId, depositAmount, currency } = watch();
 
-  console.log(isValid, dirty, errors);
+  useEffect(() => {
+    triggerValidation();
+  }, [hasInvestmentLimit]);
 
   const accountType = safeGetElemFromArray(
     broker.accountTypes,

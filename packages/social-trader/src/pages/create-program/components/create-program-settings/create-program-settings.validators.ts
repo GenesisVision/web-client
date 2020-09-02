@@ -23,7 +23,7 @@ import {
   ICreateProgramSettingsFormValues
 } from "./create-program-settings";
 
-const createAccountSettingsValidationSchema = ({
+const createProgramSettingsValidationSchema = ({
   maxManagementFee,
   maxSuccessFee,
   hasInvestmentLimit,
@@ -77,4 +77,4 @@ const createAccountSettingsValidationSchema = ({
   });
 };
 
-export default createAccountSettingsValidationSchema;
+export default createProgramSettingsValidationSchema;
