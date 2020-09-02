@@ -46,23 +46,21 @@ const _Processing: React.FC<Props> = ({
           component={GVCheckbox}
         />
       </Row>
-      {!realtimeValue && (
-        <Row>
-          <GVHookFormField
-            wide
-            name={selectName}
-            component={SimpleTextField}
-            label={t("asset-settings:fields.processing")}
-            InputComponent={Select}
-          >
-            {HOURS.map(({ hour, label }: HourType) => (
-              <option value={hour} key={hour}>
-                {label}
-              </option>
-            ))}
-          </GVHookFormField>
-        </Row>
-      )}
+      <Row hide={realtimeValue}>
+        <GVHookFormField
+          wide
+          name={selectName}
+          component={SimpleTextField}
+          label={t("asset-settings:fields.processing")}
+          InputComponent={Select}
+        >
+          {HOURS.map(({ hour, label }: HourType) => (
+            <option value={hour} key={hour}>
+              {label}
+            </option>
+          ))}
+        </GVHookFormField>
+      </Row>
     </AssetField>
   );
 };
