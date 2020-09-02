@@ -30,6 +30,7 @@ export const transformAmountWithCurrencyToTransferItem = ({
 });
 
 export const MakeProgramButton: React.FC<{
+  isExchange?: boolean;
   makeProgramLink?: string | ToType;
   necessaryMoney: string;
   isEnoughMoney: boolean;
@@ -37,6 +38,7 @@ export const MakeProgramButton: React.FC<{
   clearAnchor: (event: TEvent) => void;
 }> = React.memo(
   ({
+    isExchange,
     makeProgramLink: makeProgramLinkProp,
     isEnoughMoney,
     id,
@@ -46,7 +48,9 @@ export const MakeProgramButton: React.FC<{
     const { linkCreator } = useToLink();
     const [t] = useTranslation();
     const makeProgramLinkMethod = makeProgramLinkCreator({
-      assetFrom: CONVERT_ASSET.ACCOUNT,
+      assetFrom: isExchange
+        ? CONVERT_ASSET.ACCOUNT
+        : CONVERT_ASSET.EXCHANGE_ACCOUNT,
       assetTo: CONVERT_ASSET.PROGRAM
     });
     const makeProgramLink =

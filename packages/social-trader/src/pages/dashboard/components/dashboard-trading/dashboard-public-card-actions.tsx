@@ -52,7 +52,6 @@ const _DashboardPublicCardActions: React.FC<IDashboardPublicCardActionsProps> = 
   assetType,
   actions: {
     isEnoughMoneyToCreateProgram,
-    canMakeExchangeProgramFromPrivateTradingAccount,
     canMakeSignalProviderFromProgram,
     canMakeProgramFromPrivateTradingAccount,
     canMakeProgramFromSignalProvider,
@@ -82,9 +81,7 @@ const _DashboardPublicCardActions: React.FC<IDashboardPublicCardActionsProps> = 
     assetType === "Fund" ? createFundSettingsToUrl : createProgramSettingsToUrl;
   const settingsLink = url ? createSettingsToUrlMethod(url, contextTitle) : "";
   const makeProgramLinkMethod = makeProgramLinkCreator({
-    assetFrom: canMakeExchangeProgramFromPrivateTradingAccount
-      ? CONVERT_ASSET.EXCHANGE_ACCOUNT
-      : CONVERT_ASSET.SIGNAL,
+    assetFrom: CONVERT_ASSET.SIGNAL,
     assetTo: CONVERT_ASSET.PROGRAM
   });
   const makeProgramLink = linkCreator(makeProgramLinkMethod(id));
@@ -98,7 +95,6 @@ const _DashboardPublicCardActions: React.FC<IDashboardPublicCardActionsProps> = 
         <MakeSignalButton onApply={handleOnApply} id={id} programName={name} />
       )}
       {(canMakeProgramFromPrivateTradingAccount ||
-        canMakeExchangeProgramFromPrivateTradingAccount ||
         canMakeProgramFromSignalProvider) && (
         <MakeProgramButton
           makeProgramLink={makeProgramLink}
