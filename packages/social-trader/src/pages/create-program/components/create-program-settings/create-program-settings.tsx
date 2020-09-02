@@ -1,4 +1,3 @@
-import { AssetFields } from "components/assets/asset-fields/asset-field";
 import useAssetValidate from "components/assets/asset-validate.hook";
 import {
   getBrokerId,
@@ -7,8 +6,8 @@ import {
 } from "components/assets/asset.helpers";
 import BrokerAccount from "components/assets/fields/broker-account";
 import CreateAssetNavigation from "components/assets/fields/create-asset-navigation";
+import CreateProgramDepositBlock from "components/assets/fields/create-program-deposit-block";
 import Currency from "components/assets/fields/currency";
-import DepositDetailsBlock from "components/assets/fields/deposit-details-block";
 import DescriptionBlock from "components/assets/fields/description-block";
 import FeesSettings from "components/assets/fields/fees-settings";
 import InvestmentLimitField from "components/assets/fields/investment-limit-field";
@@ -78,6 +77,7 @@ interface Props {
 
 const _CreateProgramSettings: React.FC<Props> = ({
   programsInfo: {
+    minInvestAmounts,
     periods,
     createProgramInfo: { maxManagementFee, maxSuccessFee }
   },
@@ -105,6 +105,7 @@ const _CreateProgramSettings: React.FC<Props> = ({
       [CREATE_PROGRAM_FIELDS.depositAmount]: undefined
     },
     validationSchema: createProgramSettingsValidationSchema({
+      minInvestAmounts,
       maxManagementFee,
       maxSuccessFee,
       hasInvestmentLimit,
@@ -119,8 +120,7 @@ const _CreateProgramSettings: React.FC<Props> = ({
     triggerValidation,
     watch,
     setValue,
-    errors,
-    formState: { isValid, dirty }
+    formState: { isValid }
   } = form;
   const { description, brokerAccountTypeId, depositAmount, currency } = watch();
 
@@ -136,7 +136,11 @@ const _CreateProgramSettings: React.FC<Props> = ({
   const isKycConfirmed = useSelector(kycConfirmedSelector);
   const kycRequired = !isKycConfirmed && accountType.isKycRequired;
 
-  const minimumDepositAmount = accountType.minimumDepositsAmount[currency];
+  const minDepositCreateAssetArray = safeGetElemFromArray(
+    minInvestAmounts,
+    ({ serverType }) => serverType === accountType.type
+  ).minDepositCreateAsset;
+
   const validateAndSubmit = useAssetValidate({
     handleSubmit: onSubmit,
     isValid
@@ -241,8 +245,7 @@ const _CreateProgramSettings: React.FC<Props> = ({
         <KycRequiredBlock />
       ) : (
         <>
-          <DepositDetailsBlock
-            broker={accountType.type}
+          <CreateProgramDepositBlock
             hide={!accountType.isDepositRequired}
             blockNumber={2}
             setAvailable={setAvailable}
@@ -250,7 +253,7 @@ const _CreateProgramSettings: React.FC<Props> = ({
             walletFieldName={CREATE_PROGRAM_FIELDS.depositWalletId}
             inputName={CREATE_PROGRAM_FIELDS.depositAmount}
             depositAmount={depositAmount}
-            minimumDepositAmount={minimumDepositAmount}
+            minimumDepositAmounts={minDepositCreateAssetArray}
             setFieldValue={setValue}
             assetCurrency={currency as CurrencyEnum}
           />
