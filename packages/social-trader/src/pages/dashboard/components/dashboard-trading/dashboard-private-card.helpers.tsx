@@ -49,8 +49,8 @@ export const MakeProgramButton: React.FC<{
     const [t] = useTranslation();
     const makeProgramLinkMethod = makeProgramLinkCreator({
       assetFrom: isExchange
-        ? CONVERT_ASSET.ACCOUNT
-        : CONVERT_ASSET.EXCHANGE_ACCOUNT,
+        ? CONVERT_ASSET.EXCHANGE_ACCOUNT
+        : CONVERT_ASSET.ACCOUNT,
       assetTo: CONVERT_ASSET.PROGRAM
     });
     const makeProgramLink =
