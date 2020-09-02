@@ -11,6 +11,7 @@ import { useTranslation } from "react-i18next";
 import { NumberFormatValues } from "react-number-format";
 
 const _SimpleInputAmountField: React.FC<ISimpleInputAmountFieldProps> = ({
+  disabled,
   hide,
   externalDirty: externalDirtyProp,
   setMin,
@@ -34,6 +35,7 @@ const _SimpleInputAmountField: React.FC<ISimpleInputAmountFieldProps> = ({
     <Row size={"large"} hide={hide} wide={wide}>
       <SimpleNumberField
         {...props}
+        disabled={disabled}
         externalDirty={externalDirty}
         wide={wide}
         autoFocus={autoFocus}
@@ -45,6 +47,7 @@ const _SimpleInputAmountField: React.FC<ISimpleInputAmountFieldProps> = ({
           <>
             {setMin && (
               <GVButton
+                disabled={disabled}
                 noPadding
                 onClick={handleSet(setMin)}
                 variant="text"
@@ -56,6 +59,7 @@ const _SimpleInputAmountField: React.FC<ISimpleInputAmountFieldProps> = ({
             {setMin && setMax && <>&nbsp;|&nbsp;</>}
             {setMax && (
               <GVButton
+                disabled={disabled}
                 noPadding
                 onClick={handleSet(setMax)}
                 variant="text"
