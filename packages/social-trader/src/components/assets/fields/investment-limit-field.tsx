@@ -32,17 +32,16 @@ const _InvestmentLimitField: React.FC<Props> = ({
           label={t("asset-settings:fields.investment-limit")}
         />
       </Row>
-      {hasInvestmentLimit && (
-        <InputAmountField
-          showCorrect
-          wide={wide}
-          autoFocus={false}
-          isAllowed={isAmountAllow(currency)}
-          name={inputName}
-          label={t("asset-settings:fields.enter-correct-amount")}
-          currency={currency}
-        />
-      )}
+      <InputAmountField
+        hide={!hasInvestmentLimit}
+        showCorrect
+        wide={wide}
+        autoFocus={false}
+        isAllowed={isAmountAllow(currency)}
+        name={inputName}
+        label={t("asset-settings:fields.enter-correct-amount")}
+        currency={currency}
+      />
       <Row wide size={"large"}>
         <FormTextField>
           {t("asset-settings:investment-limit.text")}
