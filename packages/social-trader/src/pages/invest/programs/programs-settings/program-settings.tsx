@@ -62,11 +62,13 @@ const _ProgramSettings: React.FC<Props> = ({
             condition={programDetails.personalDetails.showTwoFactorButton}
             id={description.id}
           />
-          <ClosePeriodBlock
-            condition={description.ownerActions.canClosePeriod}
-            id={description.id}
-            closePeriod={updateDescription}
-          />
+          {description.programDetails.type === "FixedPeriod" && (
+            <ClosePeriodBlock
+              condition={description.ownerActions.canClosePeriod}
+              id={description.id}
+              closePeriod={updateDescription}
+            />
+          )}
           <CancelChangeBroker
             onApply={updateDescription}
             id={description.id}
