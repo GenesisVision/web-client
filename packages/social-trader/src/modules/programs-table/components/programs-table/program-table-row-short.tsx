@@ -42,7 +42,7 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
     statistic,
     personalDetails,
     availableToInvest,
-    id,
+    type,
     tags,
     balance,
     investorsCount
@@ -103,19 +103,20 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
           displayType="text"
         />
       </TableCell>
-      <TableCell
-        className={clsx(
-          styles["programs-table__cell"],
-          styles["programs-table__cell--period"]
-        )}
-      >
-        {periodStarts && (
-          <ProgramPeriodPie
-            condition={status !== STATUS.CLOSED}
-            loader={t("program-period.program-closed")}
-            start={periodStarts}
-            end={periodEnds}
-          />
+      <TableCell>
+        {type === "FixedPeriod" ? (
+          <>
+            {periodStarts && (
+              <ProgramPeriodPie
+                condition={status !== STATUS.CLOSED}
+                loader={t("program-period.program-closed")}
+                start={periodStarts}
+                end={periodEnds}
+              />
+            )}
+          </>
+        ) : (
+          <div className={styles["daily-period"]}>—</div>
         )}
       </TableCell>
       <TableCell
