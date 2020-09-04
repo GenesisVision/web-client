@@ -1,13 +1,12 @@
-import { onSelectChange } from "components/select/select.test-helpers";
-import SettingsBlock from "components/settings-block/settings-block";
-import { HookFormWalletSelect as WalletSelect } from "components/wallet-select/wallet-select";
+import DepositDetailsDefaultBlock, {
+  IDepositDetailsDefaultBlockProps
+} from "components/assets/fields/deposit-details-default-block";
 import {
   BrokerTradeServerType,
   TradingAccountMinCreateAmount
 } from "gv-api-web";
 import { getMinDeposit } from "modules/follow-module/services/follow-module-service";
-import React, { useEffect } from "react";
-import { useTranslation } from "react-i18next";
+import React from "react";
 import { useSelector } from "react-redux";
 import { tradingAccountMinDepositAmountsSelector } from "reducers/platform-reducer";
 import { convertToCurrency } from "utils/currency-converter";
@@ -15,7 +14,11 @@ import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 
 import useAssetSection from "../asset-section.hook";
-import InputDepositAmount from "./input-deposit-amount";
+
+interface Props extends IDepositDetailsDefaultBlockProps {
+  minimumDepositAmount: number;
+  broker?: BrokerTradeServerType;
+}
 
 const hasMinAmount = (
   tradingAccountMinDepositAmounts: TradingAccountMinCreateAmount[],
@@ -45,22 +48,13 @@ const _DepositDetailsBlock: React.FC<Props> = ({
   minimumDepositAmount = 0,
   setFieldValue
 }) => {
-  const [t] = useTranslation();
   const tradingAccountMinDepositAmounts = useSelector(
     tradingAccountMinDepositAmountsSelector
   );
-  const { rate, handleWalletChange, wallet, wallets } = useAssetSection({
+  const assetSection = useAssetSection({
     assetCurrency
   });
-  useEffect(() => {
-    setRate(rate);
-  }, [rate]);
-  useEffect(() => {
-    if (!wallet) return;
-    setFieldValue(inputName, undefined, true);
-    setAvailable(wallet.available);
-    setFieldValue(walletFieldName, wallet.id, true);
-  }, [wallet]);
+  const { rate, wallet } = assetSection;
 
   if (!wallet) return null;
 
@@ -86,48 +80,23 @@ const _DepositDetailsBlock: React.FC<Props> = ({
       : +formatCurrencyValue(minimumDepositAmountInCurr, wallet.currency, {
           up: true
         });
+
   return (
-    <SettingsBlock
+    <DepositDetailsDefaultBlock
+      assetSection={assetSection}
       hide={hide}
-      label={t("create-account:settings.deposit-details")}
-      blockNumber={`0${blockNumber}`}
-      withBorder={false}
-    >
-      <div>
-        <WalletSelect
-          name={walletFieldName}
-          label={t("transfer:from")}
-          items={wallets}
-          onChange={onSelectChange(handleWalletChange)}
-        />
-        <InputDepositAmount
-          minAmount={minimumDepositAmountInCurrFormatted}
-          name={inputName}
-          walletCurrency={wallet.currency}
-          walletAvailable={wallet.available}
-          assetCurrency={assetCurrency}
-          depositAmount={depositAmount}
-          rate={rate}
-          setFieldValue={setFieldValue}
-        />
-      </div>
-    </SettingsBlock>
+      setRate={setRate}
+      setAvailable={setAvailable}
+      blockNumber={blockNumber}
+      walletFieldName={walletFieldName}
+      inputName={inputName}
+      depositAmount={depositAmount}
+      minimumDepositAmount={minimumDepositAmountInCurrFormatted}
+      setFieldValue={setFieldValue}
+      assetCurrency={assetCurrency}
+    />
   );
 };
-
-interface Props {
-  broker?: BrokerTradeServerType;
-  hide?: boolean;
-  setRate: (value: number) => void;
-  setAvailable: (value: number) => void;
-  blockNumber?: number;
-  walletFieldName: string;
-  inputName: string;
-  depositAmount?: number | string;
-  minimumDepositAmount: number;
-  setFieldValue: Function;
-  assetCurrency: CurrencyEnum;
-}
 
 const DepositDetailsBlock = React.memo(_DepositDetailsBlock);
 export default DepositDetailsBlock;
