@@ -197,6 +197,7 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
       )}
       {tab === TABS.OPEN_POSITIONS && (
         <ProgramOpenPositions
+          isExchange={isExchange}
           assetType={assetType}
           canCloseOpenPositions={canCloseOpenPositions}
           itemSelector={openPositions.itemSelector!}
