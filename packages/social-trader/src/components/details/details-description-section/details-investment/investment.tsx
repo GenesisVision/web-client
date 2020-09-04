@@ -89,7 +89,7 @@ const _Investment: React.FC<Props> = ({
               displayType="text"
             />
           </InvestmentItem>
-          {asset === ASSET.PROGRAM && (
+          {asset === ASSET.PROGRAM && !isExchange && (
             <InvestmentItem
               label={
                 <TooltipLabel
