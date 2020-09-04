@@ -20,21 +20,27 @@ interface Props {
   text?: string;
 }
 
+const getTextToRender = ({
+  text,
+  reduceLargeText
+}: {
+  text?: string;
+  reduceLargeText?: boolean;
+}) => {
+  if (!text) return;
+  return reduceLargeText ? reduceByBreaks(reduceBySymbolsCount(text)) : text;
+};
+
 const _MessageText: React.FC<Props> = ({ tags, reduceLargeText, text }) => {
-  const [textToRender, setTextToRender] = useState<string | undefined>();
-  const [isTextExpanded, setTextExpandState] = useState<boolean | undefined>();
-
-  useEffect(() => {
-    if (!text) return;
-    const newText = reduceLargeText
-      ? reduceByBreaks(
-          reduceBySymbolsCount(text, setTextExpandState),
-          setTextExpandState
-        )
-      : text;
-
-    setTextToRender(newText);
-  }, [text]);
+  const [textToRender, setTextToRender] = useState<string | undefined>(
+    getTextToRender({
+      text,
+      reduceLargeText
+    })
+  );
+  const [isTextExpanded, setTextExpandState] = useState<boolean | undefined>(
+    textToRender?.length === text?.length
+  );
 
   useEffect(() => {
     if (isTextExpanded) setTextToRender(text);
