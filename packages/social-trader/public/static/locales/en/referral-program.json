@@ -16,8 +16,9 @@
   "text-list-4": "Agent's commissions are accrued once per day at 9:00 AM (UTC).",
   "text-list-5": "The commissions from all your referrals are summarized each day and the total amount accrued for that day is transferred to the wallets. The wallet currency depends on the currency used by  your referrals to pay for fees.",
   "text-list-6": "The wallet is checked for a 1 000 GVT balance once per day at a random time.",
-  "title-list-2": "The list of fees used to pay the agent’s commissions",
-  "text-list-7": "Trading Fee commission: generated from each transaction if the referral is trading on Genesis Markets Crypto.",
-  "text-list-8": "Entry Fee commission: the Entry Fee that is charged to investors entering the referrals' programs created with any trading account other than Genesis Markets Crypto.",
-  "text-list-9": "Platform Success fee commission: It is calculated according to the HWM system as a percentage of the profit received from a program during the reporting period or from a trade transaction when copy trading. No profit means no Platform Success fee is charged."
+  "title-list-2": "How we calculate the commissions you have earnt :",
+  "text-list-7": "From Trading Fees :  we generate commissions from each transaction generated when your referral is trading on Genesis Markets Global.",
+  "text-list-8": "From Programs : commissions are generated from Entry Fees that are charged to investors entering a Program (excluding Genesis Markets).",
+  "text-list-9": "From Funds : earn commissions from Entry Fees that are charged by the platform. These fees are charged as a percentage of the initial amount invested in a Fund.",
+  "text-list-10": "From Platform Success Fees: this fee is calculated according to the HWM system as a percentage of the profit received from a program during the reporting period, or from a trade transaction when copy trading. We only generate commissions in the event of your referral making a profit. We do not charge a Platform Success fee if there is no profits made."
 }
