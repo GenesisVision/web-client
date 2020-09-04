@@ -26,6 +26,7 @@ const _DetailsDescriptionSection: React.FC<Props> = ({
   socialLinks,
   subtitle,
   asset,
+  systemUrl,
   notificationsUrl,
   settingsUrl,
   programDetails,
@@ -53,6 +54,7 @@ const _DetailsDescriptionSection: React.FC<Props> = ({
         programDetails={programDetails}
         description={description}
         AssetDetailsExtraBlock={AssetDetailsExtraBlock}
+        systemUrl={systemUrl}
         notificationsUrl={notificationsUrl}
         settingsUrl={settingsUrl}
       />
@@ -90,6 +92,7 @@ interface Props {
   socialLinks?: SocialLinkViewModel[];
   programDetails?: ProgramDetailsFull;
   asset?: ASSET;
+  systemUrl?: string;
   notificationsUrl?: ToType;
   settingsUrl?: ToType;
   description?: string;
