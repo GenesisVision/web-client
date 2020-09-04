@@ -47,6 +47,10 @@ export const closeFund: TCloseAsset = ({ id, twoFactorCode }) => {
   });
 };
 
+export const closeTradingExchangeAccount: TCloseAsset = ({ id }) => {
+  return api.assets().closeExchangeAccount(id);
+};
+
 export const closeTradingAccount: TCloseAsset = ({ id }) => {
   return api.assets().closeTradingAccount(id);
 };
