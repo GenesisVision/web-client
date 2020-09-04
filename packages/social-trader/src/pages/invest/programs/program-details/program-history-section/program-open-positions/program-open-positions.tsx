@@ -22,7 +22,19 @@ import { CurrencyEnum } from "utils/types";
 import { TradesDelayHint } from "../trades-delay-hint";
 import ProgramOpenPositionsRow from "./program-open-positions-row";
 
+interface Props {
+  isExchange?: boolean;
+  assetType: TRADE_ASSET_TYPE;
+  canCloseOpenPositions?: boolean;
+  getItems: GetItemsFuncActionType;
+  itemSelector: (state: RootState) => { [keys: string]: any };
+  dataSelector: TableSelectorType;
+  currency: CurrencyEnum;
+  programId: string;
+}
+
 const _ProgramOpenPositions: React.FC<Props> = ({
+  isExchange,
   assetType,
   canCloseOpenPositions,
   itemSelector,
@@ -83,6 +95,7 @@ const _ProgramOpenPositions: React.FC<Props> = ({
   const renderBodyRow = useCallback(
     (position, _, updateItems) => (
       <ProgramOpenPositionsRow
+        isExchange={isExchange}
         programId={programId}
         assetType={assetType}
         canCloseOpenPositions={canCloseOpenPositions}
@@ -124,16 +137,6 @@ const _ProgramOpenPositions: React.FC<Props> = ({
     />
   );
 };
-
-interface Props {
-  assetType: TRADE_ASSET_TYPE;
-  canCloseOpenPositions?: boolean;
-  getItems: GetItemsFuncActionType;
-  itemSelector: (state: RootState) => { [keys: string]: any };
-  dataSelector: TableSelectorType;
-  currency: CurrencyEnum;
-  programId: string;
-}
 
 const ProgramOpenPositions = React.memo(_ProgramOpenPositions);
 export default ProgramOpenPositions;

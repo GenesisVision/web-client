@@ -73,8 +73,12 @@ const _DashboardPrivateCardActions: React.FC<Props> = ({
           {t("dashboard-page:trading.actions.make-signal-account")}
         </TableCardActionsItem>
       )}
-      {asset.actions.canMakeProgramFromPrivateTradingAccount && (
+      {(asset.actions.canMakeExchangeProgramFromPrivateTradingAccount ||
+        asset.actions.canMakeProgramFromPrivateTradingAccount) && (
         <MakeProgramButton
+          isExchange={
+            asset.actions.canMakeExchangeProgramFromPrivateTradingAccount
+          }
           necessaryMoney={`${minDepositCreateProgram} ${asset.accountInfo.currency}`}
           isEnoughMoney={asset.actions.isEnoughMoneyToCreateProgram}
           id={asset.id}
@@ -98,7 +102,7 @@ const _DashboardPrivateCardActions: React.FC<Props> = ({
             noPadding
             assetName={asset.accountInfo.title}
             onApply={updateItems}
-            type={CLOSEABLE_ASSET.TRADING_ACCOUNT}
+            type={asset.accountInfo.type}
             id={asset.id}
             variant={"text"}
           />

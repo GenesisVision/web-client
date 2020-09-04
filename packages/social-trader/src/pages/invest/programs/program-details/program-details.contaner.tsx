@@ -256,6 +256,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
         asset={assetType}
         programDetails={programDetails || followDetails}
         description={description.publicInfo.description}
+        systemUrl={description.publicInfo.systemUrl}
         notificationsUrl={notificationsUrl}
         settingsUrl={settingsUrl}
         AssetDetailsExtraBlock={renderAssetDetailsExtraBlock}

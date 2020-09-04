@@ -27,7 +27,8 @@ const ReferralProgramSection: React.FC = () => {
   const textListSecond = [
     t("referral-program:text-list-7"),
     t("referral-program:text-list-8"),
-    t("referral-program:text-list-9")
+    t("referral-program:text-list-9"),
+    t("referral-program:text-list-10")
   ];
   return (
     <section className={styles["referral-program-section"]}>

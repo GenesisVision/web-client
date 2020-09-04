@@ -140,6 +140,7 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
         subtitle={description.owner.username}
         asset={ASSET.FUND}
         description={description.publicInfo.description}
+        systemUrl={description.publicInfo.systemUrl}
         notificationsUrl={notificationsUrl}
         settingsUrl={settingsUrl}
         AssetDetailsExtraBlock={renderAssetDetailsExtraBlock}

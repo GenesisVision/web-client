@@ -15,6 +15,7 @@ import MakeSignalButton from "modules/program-signal-popup/make-signal.button";
 import { CONVERT_ASSET } from "pages/convert-asset/convert-asset.contants";
 import { makeProgramLinkCreator } from "pages/convert-asset/convert-asset.routes";
 import {
+  ConfirmTFAButton,
   getMinDepositCreateProgram,
   MakeProgramButton
 } from "pages/dashboard/components/dashboard-trading/dashboard-private-card.helpers";
@@ -51,8 +52,8 @@ const _DashboardPublicCardActions: React.FC<IDashboardPublicCardActionsProps> = 
   name,
   assetType,
   actions: {
+    canConfirm2FA,
     isEnoughMoneyToCreateProgram,
-    canMakeExchangeProgramFromPrivateTradingAccount,
     canMakeSignalProviderFromProgram,
     canMakeProgramFromPrivateTradingAccount,
     canMakeProgramFromSignalProvider,
@@ -82,9 +83,7 @@ const _DashboardPublicCardActions: React.FC<IDashboardPublicCardActionsProps> = 
     assetType === "Fund" ? createFundSettingsToUrl : createProgramSettingsToUrl;
   const settingsLink = url ? createSettingsToUrlMethod(url, contextTitle) : "";
   const makeProgramLinkMethod = makeProgramLinkCreator({
-    assetFrom: canMakeExchangeProgramFromPrivateTradingAccount
-      ? CONVERT_ASSET.EXCHANGE_ACCOUNT
-      : CONVERT_ASSET.SIGNAL,
+    assetFrom: CONVERT_ASSET.SIGNAL,
     assetTo: CONVERT_ASSET.PROGRAM
   });
   const makeProgramLink = linkCreator(makeProgramLinkMethod(id));
@@ -98,7 +97,6 @@ const _DashboardPublicCardActions: React.FC<IDashboardPublicCardActionsProps> = 
         <MakeSignalButton onApply={handleOnApply} id={id} programName={name} />
       )}
       {(canMakeProgramFromPrivateTradingAccount ||
-        canMakeExchangeProgramFromPrivateTradingAccount ||
         canMakeProgramFromSignalProvider) && (
         <MakeProgramButton
           makeProgramLink={makeProgramLink}
@@ -120,6 +118,7 @@ const _DashboardPublicCardActions: React.FC<IDashboardPublicCardActionsProps> = 
       {canChangePassword && (
         <ChangeAccountPasswordButton id={id} title={contextTitle} />
       )}
+      {canConfirm2FA && <ConfirmTFAButton onApply={handleOnApply} id={id} />}
     </TableCardActions>
   );
 };

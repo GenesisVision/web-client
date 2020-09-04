@@ -15,7 +15,8 @@ type TUseAssetSectionProps = {
 
 export type AssetSectionWalletType = WalletBaseData;
 
-type TUseAssetSectionOutput = {
+export type TUseAssetSectionOutput = {
+  isRatePending?: boolean;
   rate: number;
   handleWalletChange: (walletId: string) => void;
   wallet: AssetSectionWalletType;
@@ -31,7 +32,7 @@ const useAssetSection = ({
   const [wallet, setWallet] = useState<AssetSectionWalletType>(
     safeGetElemFromArray(wallets, ({ currency }) => currency === assetCurrency)
   );
-  const { rate, getRate } = useGetRate();
+  const { rate, getRate, isRatePending } = useGetRate();
 
   useEffect(() => {
     dispatch(fetchWalletsByCurrencyAvailableAction(accountCurrency));
@@ -57,6 +58,6 @@ const useAssetSection = ({
       setWallet(safeGetElemFromArray(wallets, ({ id }) => id === walletId)),
     [wallets]
   );
-  return { rate, handleWalletChange, wallet, wallets };
+  return { isRatePending, rate, handleWalletChange, wallet, wallets };
 };
 export default useAssetSection;

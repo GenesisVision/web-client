@@ -1,5 +1,5 @@
 import inputImageShape from "components/form/input-image/input-image.validation";
-import { Broker } from "gv-api-web";
+import { Broker, ProgramMinInvestAmount } from "gv-api-web";
 import { TFunction } from "i18next";
 import {
   currencyShape,
@@ -16,14 +16,15 @@ import {
   entryFeeShape,
   successFeeShape
 } from "utils/validators/validators";
-import { lazy, mixed, number, object } from "yup";
+import { lazy, number, object } from "yup";
 
 import {
   CREATE_PROGRAM_FIELDS,
   ICreateProgramSettingsFormValues
 } from "./create-program-settings";
 
-const createAccountSettingsValidationSchema = ({
+const createProgramSettingsValidationSchema = ({
+  minInvestAmounts,
   maxManagementFee,
   maxSuccessFee,
   hasInvestmentLimit,
@@ -32,6 +33,7 @@ const createAccountSettingsValidationSchema = ({
   broker,
   t
 }: {
+  minInvestAmounts: Array<ProgramMinInvestAmount>;
   maxManagementFee: number;
   maxSuccessFee: number;
   hasInvestmentLimit: boolean;
@@ -46,8 +48,18 @@ const createAccountSettingsValidationSchema = ({
       broker.accountTypes,
       ({ id }) => values[CREATE_PROGRAM_FIELDS.brokerAccountTypeId] === id
     );
-    const minimumDepositAmount = accountType.minimumDepositsAmount[currency];
-    const minDeposit = convertToCurrency(minimumDepositAmount, rate);
+    const minDepositCreateAssetArray = safeGetElemFromArray(
+      minInvestAmounts,
+      ({ serverType }) => serverType === accountType.type
+    ).minDepositCreateAsset;
+
+    const minDepositAmount = safeGetElemFromArray(
+      minDepositCreateAssetArray,
+      amountWithCurrency => amountWithCurrency.currency === currency
+    ).amount;
+
+    const minDeposit = convertToCurrency(minDepositAmount, rate);
+
     const minDepositText = parseFloat(
       formatCurrencyValue(minDeposit, currency)
     );
@@ -77,4 +89,4 @@ const createAccountSettingsValidationSchema = ({
   });
 };
 
-export default createAccountSettingsValidationSchema;
+export default createProgramSettingsValidationSchema;

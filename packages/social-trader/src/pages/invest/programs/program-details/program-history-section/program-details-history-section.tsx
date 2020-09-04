@@ -9,6 +9,7 @@ import { TRADE_ASSET_TYPE } from "constants/constants";
 import { useAccountCurrency } from "hooks/account-currency.hook";
 import useTab from "hooks/tab.hook";
 import dynamic from "next/dynamic";
+import ProgramAnalytics from "pages/invest/programs/program-details/program-history-section/program-analytics/program-analytics";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
@@ -23,9 +24,7 @@ const ProgramFinancialStatistic = dynamic(() =>
 const ProgramOpenPositions = dynamic(() =>
   import("./program-open-positions/program-open-positions")
 );
-const ProgramAnalytics = dynamic(() =>
-  import("./program-analytics/program-analytics")
-);
+
 const ProgramPeriodHistory = dynamic(() =>
   import("./program-period-history/program-period-history")
 );
@@ -198,6 +197,7 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
       )}
       {tab === TABS.OPEN_POSITIONS && (
         <ProgramOpenPositions
+          isExchange={isExchange}
           assetType={assetType}
           canCloseOpenPositions={canCloseOpenPositions}
           itemSelector={openPositions.itemSelector!}
