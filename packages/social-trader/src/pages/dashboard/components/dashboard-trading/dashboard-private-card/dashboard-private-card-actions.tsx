@@ -102,7 +102,7 @@ const _DashboardPrivateCardActions: React.FC<Props> = ({
             noPadding
             assetName={asset.accountInfo.title}
             onApply={updateItems}
-            type={CLOSEABLE_ASSET.TRADING_ACCOUNT}
+            type={asset.accountInfo.type}
             id={asset.id}
             variant={"text"}
           />
