@@ -15,11 +15,13 @@ interface Props {
   asset?: ASSET;
   personalDetails?: PersonalDetailsType;
   id: string;
+  systemUrl?: string;
   notificationsUrl?: ToType;
   settingsUrl?: ToType;
 }
 
 const _DetailsSettingsButtons: React.FC<Props> = ({
+  systemUrl,
   isOwnAsset,
   asset,
   personalDetails,
@@ -54,6 +56,14 @@ const _DetailsSettingsButtons: React.FC<Props> = ({
           <DetailsSettingControl
             to={settingsUrl}
             text={t("asset-details:description.settings")}
+          />
+        </Row>
+      )}
+      {systemUrl && (
+        <Row>
+          <DetailsSettingControl
+            to={{ pathname: systemUrl }}
+            text={"Admin panel"}
           />
         </Row>
       )}

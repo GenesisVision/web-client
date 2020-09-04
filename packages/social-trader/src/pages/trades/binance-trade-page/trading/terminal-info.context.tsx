@@ -80,7 +80,7 @@ export const TerminalInfoContextProvider: React.FC<Props> = ({
   terminalType,
   children
 }) => {
-  const updateUrl = useUpdateTerminalUrlParams();
+  const { updateUrl } = useUpdateTerminalUrlParams();
 
   const {
     getAccountInformation,
@@ -142,7 +142,7 @@ export const TerminalInfoContextProvider: React.FC<Props> = ({
       const route = `${TERMINAL_ROUTE}/${symbolPath}`;
       updateUrl(route, { type: terminalType });
     },
-    [terminalType]
+    [terminalType, updateUrl]
   );
   const value = useMemo(
     () => ({

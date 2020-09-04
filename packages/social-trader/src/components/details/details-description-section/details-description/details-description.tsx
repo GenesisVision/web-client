@@ -29,6 +29,7 @@ interface Props {
   socialLinks?: SocialLinkViewModel[];
   programDetails?: ProgramDetailsFull;
   asset?: ASSET;
+  systemUrl?: string;
   notificationsUrl?: ToType;
   settingsUrl?: ToType;
   AssetDetailsExtraBlock?: React.ComponentType<any>;
@@ -52,6 +53,7 @@ const _DetailsDescription: React.FC<Props> = ({
   asset,
   description,
   AssetDetailsExtraBlock,
+  systemUrl,
   notificationsUrl,
   settingsUrl
 }) => {
@@ -89,6 +91,7 @@ const _DetailsDescription: React.FC<Props> = ({
           asset={asset}
           personalDetails={personalDetails}
           id={id}
+          systemUrl={systemUrl}
           notificationsUrl={notificationsUrl}
           settingsUrl={settingsUrl}
         />
