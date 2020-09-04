@@ -6,7 +6,7 @@ import { ProgramPeriodViewModel } from "gv-api-web";
 import { ProgramAnalyticsDetailsButton } from "pages/invest/programs/program-details/program-history-section/program-analytics/program-analytics-details.button";
 import React from "react";
 import NumberFormat from "react-number-format";
-import { formatDate, humanizeDate } from "utils/dates";
+import { formatDate } from "utils/dates";
 import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 
@@ -31,7 +31,7 @@ export const ProgramAnalyticsRow: React.FC<ProgramAnalyticsRowProps> = React.mem
       <>
         <TableRow stripy>
           <TableCell>{formatDate(period.dateFrom)}</TableCell>
-          <TableCell>{humanizeDate(0, period.periodLength)}</TableCell>
+          <TableCell>{period.periodLength}</TableCell>
           <TableCell>
             <NumberFormat
               value={formatCurrencyValue(period.balance, currency)}
