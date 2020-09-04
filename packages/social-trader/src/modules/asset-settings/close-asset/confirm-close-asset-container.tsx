@@ -12,7 +12,8 @@ import { postponeCallback } from "utils/hook-form.helpers";
 import {
   closeFund,
   closeProgram,
-  closeTradingAccount
+  closeTradingAccount,
+  closeTradingExchangeAccount
 } from "../services/asset-settings.service";
 import { ICloseAssetFormValues } from "./close-asset-form";
 
@@ -54,6 +55,8 @@ const _ConfirmCloseAssetContainer: React.FC<Props> = ({
 
 const getMethod = (asset: CloseableAssetType) => {
   switch (asset) {
+    case "ExchangeAccount":
+      return closeTradingExchangeAccount;
     case "Follow":
     case "TradingAccount":
     case "Trading-account":
