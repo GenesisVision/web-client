@@ -16,7 +16,19 @@ import { formatDate } from "utils/dates";
 import { formatValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 
+interface Props {
+  isExchange?: boolean;
+  programId: string;
+  assetType: TRADE_ASSET_TYPE;
+  canCloseOpenPositions?: boolean;
+  updateItems?: UpdateItemsFuncType;
+  data: TradesViewModel;
+  currency: CurrencyEnum;
+  position: OrderSignalModel;
+}
+
 const _ProgramOpenPositionsRow: React.FC<Props> = ({
+  isExchange,
   programId,
   assetType,
   canCloseOpenPositions,
@@ -61,11 +73,10 @@ const _ProgramOpenPositionsRow: React.FC<Props> = ({
       </TableCell>
     )}
     <TableCell>
-      <NumberFormat
-        value={formatValue(position.volume, DEFAULT_DECIMAL_SCALE / 2)}
-        displayType="text"
-        thousandSeparator=" "
-      />
+      {formatValue(
+        position.volume,
+        isExchange ? DEFAULT_DECIMAL_SCALE : DEFAULT_DECIMAL_SCALE / 2
+      )}
     </TableCell>
     {showPrice && (
       <TableCell>
@@ -112,16 +123,6 @@ const _ProgramOpenPositionsRow: React.FC<Props> = ({
     )}
   </TableRow>
 );
-
-interface Props {
-  programId: string;
-  assetType: TRADE_ASSET_TYPE;
-  canCloseOpenPositions?: boolean;
-  updateItems?: UpdateItemsFuncType;
-  data: TradesViewModel;
-  currency: CurrencyEnum;
-  position: OrderSignalModel;
-}
 
 const ProgramOpenPositionsRow = React.memo(_ProgramOpenPositionsRow);
 export default ProgramOpenPositionsRow;
