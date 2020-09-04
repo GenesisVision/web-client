@@ -21,7 +21,7 @@ import {
 import { CONVERT_ASSET } from "pages/convert-asset/convert-asset.contants";
 import { TAssetFromTo } from "pages/convert-asset/convert-asset.types";
 import * as React from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
@@ -60,8 +60,12 @@ const _ConvertAssetSettings: React.FC<IConvertAssetSettingsProps> = props => {
     }),
     mode: "onChange"
   });
-  const { watch } = form;
+  const { watch, triggerValidation } = form;
   const { description, currency } = watch();
+
+  useEffect(() => {
+    triggerValidation();
+  }, [hasInvestmentLimit]);
 
   const showDescriptionBlock = assetFrom !== CONVERT_ASSET.SIGNAL;
   const showSignalFees = assetTo === CONVERT_ASSET.SIGNAL;

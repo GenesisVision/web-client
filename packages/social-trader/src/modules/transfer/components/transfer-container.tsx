@@ -5,7 +5,6 @@ import {
 } from "gv-api-web";
 import { useAccountCurrency } from "hooks/account-currency.hook";
 import useApiRequest from "hooks/api-request.hook";
-import { getTransferFormLoaderData } from "modules/transfer/components/transfer-form.helpers";
 import { updateWalletTimestampAction } from "pages/wallet/actions/wallet.actions";
 import { walletsSelector } from "pages/wallet/reducers/wallet.reducers";
 import { fetchWallets } from "pages/wallet/services/wallet.services";
@@ -13,10 +12,7 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { postponeCallback } from "utils/hook-form.helpers";
 
-import {
-  fetchTradingAccounts,
-  transferRequest
-} from "../services/transfer.services";
+import { transferRequest } from "../services/transfer.services";
 import {
   TRANSFER_CONTAINER,
   TransferFormItemsType,
@@ -41,12 +37,7 @@ const _TransferContainer: React.FC<TransferContainerProps> = ({
   const [items, setItems] = useState<TransferFormItemsType | undefined>(
     undefined
   );
-  const {
-    sendRequest: getTradingAccounts,
-    data: tradingAccounts
-  } = useApiRequest<TransferItemType[]>({
-    request: fetchTradingAccounts
-  });
+  const tradingAccounts: TransferItemType[] = [];
   const dispatch = useDispatch();
   const wallets = useSelector(walletsSelector);
   const currency = useAccountCurrency();
@@ -73,17 +64,6 @@ const _TransferContainer: React.FC<TransferContainerProps> = ({
     },
     [destinationType, sourceType, destinationType, accountId]
   );
-  useEffect(() => {
-    if (
-      !singleCurrentItemContainer &&
-      !outerCurrentItemContainerItems &&
-      ((currentItemContainer === TRANSFER_CONTAINER.SOURCE &&
-        sourceType !== "Wallet") ||
-        (currentItemContainer === TRANSFER_CONTAINER.DESTINATION &&
-          destinationType !== "Wallet"))
-    )
-      getTradingAccounts(currency);
-  }, []);
   const currentItemContainerItems = useMemo(() => {
     if (outerCurrentItemContainerItems) return outerCurrentItemContainerItems;
     if (singleCurrentItemContainer) return [currentItem];

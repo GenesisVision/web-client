@@ -130,7 +130,10 @@ export enum CONVERT_ASSET_FIELDS {
   investmentLimit = "investmentLimit"
 }
 
-const investmentLimitShape = (hasInvestmentLimit: boolean, t: TFunction) =>
+export const investmentLimitShape = (
+  hasInvestmentLimit: boolean,
+  t: TFunction
+) =>
   hasInvestmentLimit
     ? number()
         .min(0, t("validations.investment-limit-min"))
@@ -138,19 +141,19 @@ const investmentLimitShape = (hasInvestmentLimit: boolean, t: TFunction) =>
         .required(t("validations.investment-limit-required"))
     : number();
 
-const stopOutLevelShape = (t: TFunction) =>
+export const stopOutLevelShape = (t: TFunction) =>
   number()
     .required(t("validations.stop-out-required"))
     .min(10, t("validations.stop-out-is-zero"))
     .max(100, t("validations.stop-out-is-large"));
 
-const currencyShape = (t: TFunction) =>
+export const currencyShape = (t: TFunction) =>
   string().required(t("validations.currency-required"));
 
-const periodLengthShape = (t: TFunction) =>
+export const periodLengthShape = (t: TFunction) =>
   number().required(t("validations.period-required"));
 
-const getPublicInfoShapes = (t: TFunction) => ({
+export const getPublicInfoShapes = (t: TFunction) => ({
   [CONVERT_ASSET_FIELDS.logo]: inputImageShape(t),
   [CONVERT_ASSET_FIELDS.title]: assetTitleShape(t),
   [CONVERT_ASSET_FIELDS.description]: assetDescriptionShape(t)

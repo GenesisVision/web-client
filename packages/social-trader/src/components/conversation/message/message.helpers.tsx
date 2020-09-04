@@ -16,12 +16,8 @@ export const ExcludedTagsUnderText: SocialPostTagType[] = [
   "Post"
 ];
 
-export const reduceBySymbolsCount = (
-  text: string,
-  setTextExpandState: (state: boolean) => void
-): string => {
+export const reduceBySymbolsCount = (text: string): string => {
   if (text.length > MAX_TEXT_SYMBOLS_COUNT) {
-    setTextExpandState(false);
     const reducedText = text.slice(0, MAX_TEXT_SYMBOLS_COUNT);
     const lastTagIndex = reducedText.lastIndexOf("@-");
     const lastWordIndex = reducedText.lastIndexOf(" ");
@@ -32,13 +28,9 @@ export const reduceBySymbolsCount = (
   return text;
 };
 
-export const reduceByBreaks = (
-  text: string,
-  setTextExpandState: (state: boolean) => void
-): string => {
+export const reduceByBreaks = (text: string): string => {
   const countBreaks = (text.match(/\n/g) || []).length;
   if (countBreaks > MAX_TEXT_BREAKS_COUNT) {
-    setTextExpandState(false);
     const breakIndex = getSymbolIndexByTurn({
       text,
       symbol: "\n",
