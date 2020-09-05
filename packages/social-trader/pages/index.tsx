@@ -13,9 +13,20 @@ import {
   landingAssetsDefaultData
 } from "pages/landing-page/services/landing.service";
 import React from "react";
+import { createGlobalStyle } from "styled-components";
+import { LandingPageRootStyle } from "styles/root-styles";
+
+const GlobalStyle = createGlobalStyle`
+  ${LandingPageRootStyle}
+`;
 
 const IndexPage: NextPage<Props> = props => {
-  return <LandingPage {...props} />;
+  return (
+    <>
+      <GlobalStyle />
+      <LandingPage {...props} />
+    </>
+  );
 };
 
 IndexPage.getInitialProps = async ctx => {

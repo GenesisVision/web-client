@@ -32,7 +32,6 @@ class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <style>{"body {color: white};"}</style>
           <link rel="icon" sizes="192x192" href="/icon.png" />
           <link rel="apple-touch-icon" href="/icon.png" />
           <link rel="shortcut icon" href="/favicon.ico" />
