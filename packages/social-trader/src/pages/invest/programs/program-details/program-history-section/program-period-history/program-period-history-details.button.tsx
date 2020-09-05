@@ -1,5 +1,6 @@
 import { Button } from "components/button/button";
-import styles from "components/details/details-description-section/details-statistic-section/details-history/trades.module.scss";
+import { Center } from "components/center/center";
+import { TradesComponentsPopupItemName } from "components/details/details-description-section/details-statistic-section/details-history/trades-components";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
   ORIENTATION_POPOVER
@@ -22,14 +23,14 @@ const _ProgramPeriodHistoryPopupItem: React.FC<{
   currency: CurrencyEnum;
 }> = ({ label, value, currency }) => (
   <PopoverContentListItem>
-    <div className={styles["details-trades__history-popup-item"]}>
-      <div className={styles["details-trades__history-popup-item-name"]}>
+    <Center>
+      <TradesComponentsPopupItemName>
         <Text muted>{label}</Text>
-      </div>
-      <div className={styles["details-trades__history-popup-item-value"]}>
+      </TradesComponentsPopupItemName>
+      <Text wrap={false}>
         {value} {currency}
-      </div>
-    </div>
+      </Text>
+    </Center>
   </PopoverContentListItem>
 );
 const ProgramPeriodHistoryPopupItem = withLoader(

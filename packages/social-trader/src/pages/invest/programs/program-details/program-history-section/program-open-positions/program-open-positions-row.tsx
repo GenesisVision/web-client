@@ -1,9 +1,10 @@
-import clsx from "clsx";
+import { Center } from "components/center/center";
 import { CurrencyItem } from "components/currency-item/currency-item";
-import styles from "components/details/details-description-section/details-statistic-section/details-history/trades.module.scss";
+import { TradesComponentsCell } from "components/details/details-description-section/details-statistic-section/details-history/trades-components";
 import BaseProfitability from "components/profitability/base-profitability";
 import Profitability from "components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "components/profitability/profitability.helper";
+import { RowItem } from "components/row-item/row-item";
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import { UpdateItemsFuncType } from "components/table/components/table.types";
@@ -38,21 +39,9 @@ const _ProgramOpenPositionsRow: React.FC<Props> = ({
 }) => (
   <TableRow stripy>
     {showDate && (
-      <TableCell
-        className={clsx(
-          styles["details-trades__cell"],
-          styles["program-details-trades__cell--date"]
-        )}
-      >
-        {formatDate(position.date)}
-      </TableCell>
+      <TradesComponentsCell>{formatDate(position.date)}</TradesComponentsCell>
     )}
-    <TableCell
-      className={clsx(
-        styles["details-trades__cell"],
-        styles["program-details-trades__cell--symbol"]
-      )}
-    >
+    <TradesComponentsCell>
       <CurrencyItem
         clickable={position.assetData ? position.assetData.hasAssetInfo : false}
         url={position.assetData ? position.assetData.url : ""}
@@ -61,7 +50,7 @@ const _ProgramOpenPositionsRow: React.FC<Props> = ({
         name={position.symbol}
         symbol={position.symbol}
       />
-    </TableCell>
+    </TradesComponentsCell>
     {showDirection && (
       <TableCell>
         <BaseProfitability
@@ -97,29 +86,35 @@ const _ProgramOpenPositionsRow: React.FC<Props> = ({
       </TableCell>
     )}
     {showProfit && (
-      <TableCell className={styles["details-trades__cell--profit"]}>
-        <Profitability
-          value={formatValue(position.profit, DEFAULT_DECIMAL_SCALE)}
-          prefix={PROFITABILITY_PREFIX.SIGN}
-        >
-          <NumberFormat
-            value={formatValue(position.profit, DEFAULT_DECIMAL_SCALE)}
-            thousandSeparator=" "
-            displayType="text"
-            allowNegative={false}
-            suffix={` ${position.profitCurrency}`}
-          />
-        </Profitability>
-        {canCloseOpenPositions && (
-          <ClosePositionButton
-            assetType={assetType}
-            onApply={updateItems}
-            volume={position.volume}
-            symbol={position.symbol}
-            id={programId}
-          />
-        )}
-      </TableCell>
+      <TradesComponentsCell>
+        <Center>
+          <RowItem wide>
+            <Profitability
+              value={formatValue(position.profit, DEFAULT_DECIMAL_SCALE)}
+              prefix={PROFITABILITY_PREFIX.SIGN}
+            >
+              <NumberFormat
+                value={formatValue(position.profit, DEFAULT_DECIMAL_SCALE)}
+                thousandSeparator=" "
+                displayType="text"
+                allowNegative={false}
+                suffix={` ${position.profitCurrency}`}
+              />
+            </Profitability>
+          </RowItem>
+          {canCloseOpenPositions && (
+            <RowItem>
+              <ClosePositionButton
+                assetType={assetType}
+                onApply={updateItems}
+                volume={position.volume}
+                symbol={position.symbol}
+                id={programId}
+              />
+            </RowItem>
+          )}
+        </Center>
+      </TradesComponentsCell>
     )}
   </TableRow>
 );
