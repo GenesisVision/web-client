@@ -10,8 +10,6 @@ import { formatDate } from "utils/dates";
 import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 
-import styles from "./program-analytics-row.module.scss";
-
 export interface ProgramAnalyticsRowProps {
   currency: CurrencyEnum;
   period: ProgramPeriodViewModel;
@@ -48,8 +46,8 @@ export const ProgramAnalyticsRow: React.FC<ProgramAnalyticsRowProps> = React.mem
             />
           </TableCell>
           <TableCell>
-            <Center className={styles["program-analytics-row__details-cell"]}>
-              <RowItem>
+            <Center>
+              <RowItem wide>
                 <NumberFormat value={period.investors} displayType="text" />
               </RowItem>
               {haveInfo && (
