@@ -27,6 +27,7 @@ import { css } from "styled-components";
 import { adaptivePadding, fontSize } from "utils/style/style-mixins";
 
 export const RootStyle = css`
+  @import url("https://fonts.googleapis.com/css?family=Montserrat:200,400,500,600,700,800&display=swap");
   body {
     color: white;
     margin: 0;
