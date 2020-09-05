@@ -5,7 +5,6 @@ import "pages/landing-page/styles/index.scss";
 import React from "react";
 import { compose, Store } from "redux";
 import { createGlobalStyle } from "styled-components";
-import "styles/index.scss";
 import { RootStyle } from "styles/root-styles";
 
 interface Props {
