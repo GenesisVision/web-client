@@ -1,3 +1,10 @@
+export const $landingBg = "#040027";
+export const $landingBgGray2 = "#f0f0f0";
+export const $landingColorIcon = "#1d1a3d";
+export const $landingText = "#c6c6c6";
+export const $primaryColorHover = "#17c9bc";
+export const $landingLinkHover = "#db2a7c";
+export const landingItemBg = "#100c31";
 export const $borderColor = "#313a41";
 export const $landingBgGray = "#f7f7f7";
 export const $landingItemBg = "#100c31";
