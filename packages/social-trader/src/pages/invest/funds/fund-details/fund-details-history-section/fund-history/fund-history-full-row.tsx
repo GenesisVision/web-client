@@ -10,22 +10,27 @@ import { FUND_HISTORY_INNER_COLUMNS } from "pages/invest/funds/fund-details/fund
 import { IFundHistoryDataItem } from "pages/invest/funds/fund-details/fund-details.types";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import styled from "styled-components";
 import { formatDate } from "utils/dates";
 import { formatValue } from "utils/formatter";
 
-import styles from "./fund-history.module.scss";
-
 interface Props {
-  setClose: VoidFunction;
   item: IFundHistoryDataItem;
 }
 
-const _FundHistoryFullRow: React.FC<Props> = ({ setClose, item }) => {
+const TableContainer = styled.div`
+  box-shadow: inset 0px 25px 31px -17px rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.1);
+  max-height: 250px;
+  overflow-y: auto;
+`;
+
+const _FundHistoryFullRow: React.FC<Props> = ({ item }) => {
   const [t] = useTranslation();
   return (
     <TableRow hoverable={false}>
       <td colSpan={3}>
-        <div className={styles["fund-history__full-row"]}>
+        <TableContainer>
           <Table
             items={item.trades}
             columns={FUND_HISTORY_INNER_COLUMNS}
@@ -72,7 +77,7 @@ const _FundHistoryFullRow: React.FC<Props> = ({ setClose, item }) => {
               </TableRow>
             )}
           />
-        </div>
+        </TableContainer>
       </td>
     </TableRow>
   );
