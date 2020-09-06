@@ -6,7 +6,8 @@ export type TextColor =
   | "white"
   | "red"
   | "green"
-  | "yellow";
+  | "yellow"
+  | string;
 export type TextWeight = "thin" | "normal" | "bold" | "bolder";
 
 export interface ITextProps extends Sizeable {
