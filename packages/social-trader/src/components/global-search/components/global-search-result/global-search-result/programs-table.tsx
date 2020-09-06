@@ -1,8 +1,6 @@
-import clsx from "clsx";
 import { Table } from "components/table/components";
 import { ProgramDetailsListItemItemsViewModel } from "gv-api-web";
 import ProgramTableRowShort from "modules/programs-table/components/programs-table/program-table-row-short";
-import styles from "modules/programs-table/components/programs-table/programs-table.module.scss";
 import { PROGRAMS_COLUMNS } from "modules/programs-table/components/programs-table/programs.constants";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -17,16 +15,7 @@ const ProgramsTable: React.FC<SearchTableProps<
     <Table
       columns={PROGRAMS_COLUMNS}
       items={data.items}
-      renderHeader={column => (
-        <span
-          className={clsx(
-            styles["programs-table__cell"],
-            styles[`programs-table__cell--${column.name}`]
-          )}
-        >
-          {t(`header-fields.${column.name}`)}
-        </span>
-      )}
+      renderHeader={column => <span>{t(`header-fields.${column.name}`)}</span>}
       renderBodyRow={program => <ProgramTableRowShort program={program} />}
     />
   );
