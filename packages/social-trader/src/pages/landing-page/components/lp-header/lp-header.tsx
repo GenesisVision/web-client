@@ -26,6 +26,7 @@ const LPHeader: React.FC = () => {
           </div>
           <div className={styles["lp-header__logo"]}>
             <Link
+              white
               title={"Go to home page"}
               className={styles["lp-header__logo-link"]}
               to={{

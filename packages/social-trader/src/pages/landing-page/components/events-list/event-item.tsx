@@ -1,14 +1,23 @@
 import ImageBase from "components/avatar/image-base";
 import GVProgramDefaultAvatar from "components/gv-program-avatar/gv-propgram-default-avatar";
+import { $primaryColor } from "components/gv-styles/gv-colors/gv-colors";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import { PlatformEvent } from "gv-api-web";
 import { useTranslation } from "i18n";
 import { getElementHeight } from "pages/landing-page/utils";
 import React, { useEffect, useRef, useState } from "react";
+import styled from "styled-components";
 import { composeManagerDetailsUrl, getAssetLink } from "utils/compose-url";
 
 import styles from "./events-list.module.scss";
+
+const ItemLink = styled(Link)`
+  color: inherit;
+  &:hover {
+    color: ${$primaryColor};
+  }
+`;
 
 const timeConversion = (date: Date) => {
   const MS_IN_ONE_SEC = 1000;
@@ -152,7 +161,7 @@ const _EventItem: React.FC<Props> = ({
         </div>
       </Link>
       <div className={styles["events-list__item-info"]}>
-        <Link
+        <ItemLink
           title={t("landing-page:links.title", {
             title: userUrl,
             page: "user"
@@ -161,7 +170,7 @@ const _EventItem: React.FC<Props> = ({
           to={linkUser}
         >
           <div className={styles["events-list__item-title"]}>{title}</div>
-        </Link>
+        </ItemLink>
         <div className={styles["events-list__item-text"]}>{text}</div>
       </div>
       <div className={styles["events-list__item-values"]}>
