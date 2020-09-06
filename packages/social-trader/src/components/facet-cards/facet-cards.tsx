@@ -10,7 +10,10 @@ import { useCallback } from "react";
 import styled from "styled-components";
 import { adaptiveMargin } from "utils/style/style-mixins";
 
-import FacetCard, { composeFacetUrlFunc } from "./facet-card";
+import FacetCard, {
+  $facetTranslateSize,
+  composeFacetUrlFunc
+} from "./facet-card";
 
 interface Props {
   data: Array<AssetFacet>;
@@ -26,7 +29,7 @@ const Wrapper = styled.div`
 const Carousel = styled.div`
   display: flex;
   overflow-x: scroll;
-  padding-top: 10px;
+  padding-top: ${$facetTranslateSize}px;
   overflow-y: hidden;
   &::-webkit-scrollbar {
     width: 0;

@@ -30,7 +30,7 @@ interface Props {
 
 export type composeFacetUrlFunc = (url: string) => string;
 
-const $translateSize = 10;
+export const $facetTranslateSize = 10;
 const $facetWidth = 315;
 const $facetHeight = 280;
 
@@ -43,7 +43,7 @@ const StyledDefaultBlock = styled(DefaultBlock)`
   box-shadow: ${$boxShadow1};
 
   &:hover {
-    transform: translateY(-${$translateSize});
+    transform: translateY(-${$facetTranslateSize});
     box-shadow: ${$boxShadow4};
   }
 
