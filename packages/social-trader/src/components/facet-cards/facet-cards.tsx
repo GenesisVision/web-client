@@ -1,3 +1,4 @@
+import { $paddingSmall } from "components/gv-styles/gv-sizes";
 import { HorizontalListShadowContainer } from "components/horizontal-list-shadow-container/horizontal-list-shadow-container";
 import { useShadow } from "components/horizontal-list-shadow-container/shadow.hook";
 import { RowItem } from "components/row-item/row-item";
@@ -6,9 +7,35 @@ import { AssetFacet } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
 import * as React from "react";
 import { useCallback } from "react";
+import styled from "styled-components";
+import { adaptiveMargin } from "utils/style/style-mixins";
 
 import FacetCard, { composeFacetUrlFunc } from "./facet-card";
-import styles from "./facet-cards.module.scss";
+
+interface Props {
+  data: Array<AssetFacet>;
+  composeFacetUrl: composeFacetUrlFunc;
+  title: string;
+  fileRoute: string;
+}
+
+const Wrapper = styled.div`
+  ${adaptiveMargin("bottom", $paddingSmall)}
+`;
+
+const Carousel = styled.div`
+  display: flex;
+  overflow-x: scroll;
+  padding-top: 10px;
+  overflow-y: hidden;
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+  & {
+    -ms-overflow-style: none;
+  }
+`;
 
 const _FacetCards: React.FC<Props> = ({
   data,
@@ -26,14 +53,9 @@ const _FacetCards: React.FC<Props> = ({
     }
   }, [load]);
   return (
-    <div className={styles["facets__wrapper"]}>
+    <Wrapper>
       <HorizontalListShadowContainer darkShadow scrollData={scrollData}>
-        <div
-          className={styles["facets__carousel"]}
-          ref={ref}
-          onLoad={handleLoad}
-          onScroll={handleScroll}
-        >
+        <Carousel ref={ref} onLoad={handleLoad} onScroll={handleScroll}>
           {data.map(facet => (
             <RowItem size={"large"} key={facet.id}>
               <FacetCard
@@ -44,18 +66,11 @@ const _FacetCards: React.FC<Props> = ({
               />
             </RowItem>
           ))}
-        </div>
+        </Carousel>
       </HorizontalListShadowContainer>
-    </div>
+    </Wrapper>
   );
 };
-
-interface Props {
-  data: Array<AssetFacet>;
-  composeFacetUrl: composeFacetUrlFunc;
-  title: string;
-  fileRoute: string;
-}
 
 const FacetCards = withBlurLoader(React.memo(_FacetCards));
 export default FacetCards;
