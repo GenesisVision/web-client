@@ -23,14 +23,16 @@ const BaseProfitability = styled.div<Props>`
     if (isPositive) return $positiveColor;
     if (isNegative) return $negativeColor;
   }};
-  background-color: ${({ isPositive, isNegative }) => {
-    if (isPositive) return `${$positiveColor}1a`;
-    if (isNegative) return `${$negativeColor}1a`;
-    return `${$labelColor}1a`;
-  }};
-  ${({ variant }) => {
+  ${({ variant, isPositive, isNegative }) => {
     if (variant === PROFITABILITY_VARIANT.CHIPS)
       return `
+        background-color: ${
+          isPositive
+            ? `${$positiveColor}1a`
+            : isNegative
+            ? `${$negativeColor}1a`
+            : `${$labelColor}1a`
+        };
         font-size: ${$fontSizeCommon / 1.5}px;
         font-weight: 600;
         border-radius: 19.5px;
@@ -42,7 +44,7 @@ const BaseProfitability = styled.div<Props>`
           padding: 5px 13px;
         `)}
     `;
-  }}
+  }};
 `;
 
 export default BaseProfitability;
