@@ -245,7 +245,6 @@ const getExchangeProgramShapes = ({
   maxSuccessFee: number;
 }) => ({
   [CONVERT_ASSET_FIELDS.currency]: currencyShape(t),
-  [CONVERT_ASSET_FIELDS.stopOutLevel]: stopOutLevelShape(t),
   [CONVERT_ASSET_FIELDS.entryFee]: entryFeeShape(t, maxManagementFee),
   [CONVERT_ASSET_FIELDS.successFee]: successFeeShape(t, maxSuccessFee),
   [CONVERT_ASSET_FIELDS.investmentLimit]: investmentLimitShape(
