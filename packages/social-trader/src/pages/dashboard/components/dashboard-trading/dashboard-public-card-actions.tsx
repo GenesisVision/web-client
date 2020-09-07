@@ -15,6 +15,7 @@ import MakeSignalButton from "modules/program-signal-popup/make-signal.button";
 import { CONVERT_ASSET } from "pages/convert-asset/convert-asset.contants";
 import { makeProgramLinkCreator } from "pages/convert-asset/convert-asset.routes";
 import {
+  ConfirmTFAButton,
   getMinDepositCreateProgram,
   MakeProgramButton
 } from "pages/dashboard/components/dashboard-trading/dashboard-private-card.helpers";
@@ -51,6 +52,7 @@ const _DashboardPublicCardActions: React.FC<IDashboardPublicCardActionsProps> = 
   name,
   assetType,
   actions: {
+    canConfirm2FA,
     isEnoughMoneyToCreateProgram,
     canMakeSignalProviderFromProgram,
     canMakeProgramFromPrivateTradingAccount,
@@ -116,6 +118,7 @@ const _DashboardPublicCardActions: React.FC<IDashboardPublicCardActionsProps> = 
       {canChangePassword && (
         <ChangeAccountPasswordButton id={id} title={contextTitle} />
       )}
+      {canConfirm2FA && <ConfirmTFAButton onApply={handleOnApply} id={id} />}
     </TableCardActions>
   );
 };
