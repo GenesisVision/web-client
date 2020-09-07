@@ -1,4 +1,5 @@
 import { DataStorageContext } from "components/data-storage/data-storage";
+import { SortingColumn } from "components/table/components/filtering/filter.type";
 import { FundInvestingDetailsList } from "gv-api-web";
 import DashboardFundCard from "pages/dashboard/components/dashboard-investing/dashboard-fund-card";
 import DashboardInvestingTable from "pages/dashboard/components/dashboard-investing/dashboard-investing-table";
@@ -9,6 +10,16 @@ import {
 import { getInvestingFunds } from "pages/dashboard/services/dashboard.service";
 import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
+
+const INIT_SORTING = "value";
+
+const COLUMNS: SortingColumn[] = [
+  { name: "drawdown", sortingName: "drawdown" },
+  { name: "investors", sortingName: "investors" },
+  { name: "value", sortingName: "value" },
+  { name: "name", sortingName: "name" },
+  { name: "profit", sortingName: "profit" }
+];
 
 const _DashboardInvestingFunds: React.FC = () => {
   const { updateData } = useContext(DataStorageContext);
@@ -22,6 +33,8 @@ const _DashboardInvestingFunds: React.FC = () => {
   );
   return (
     <DashboardInvestingTable
+      columns={COLUMNS}
+      sorting={INIT_SORTING}
       filtering={DASHBOARD_INVESTMENTS_FILTERING}
       defaultFilters={DASHBOARD_INVESTMENTS_DEFAULT_FILTERS}
       getItemsFunc={getInvestingFunds}
