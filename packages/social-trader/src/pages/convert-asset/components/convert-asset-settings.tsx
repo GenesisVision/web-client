@@ -77,13 +77,17 @@ const _ConvertAssetSettings: React.FC<IConvertAssetSettingsProps> = props => {
     errorMessage
   } = props;
   const [t] = useTranslation();
+  const isExchange = assetFrom === CONVERT_ASSET.EXCHANGE_ACCOUNT;
+  const currencies = (isExchange
+    ? ["BTC", "USDT"]
+    : ["GVT", "BTC", "ETH"]) as CurrencyEnum[];
 
   const form = useForm<IConvertAssetSettingsFormValues>({
     defaultValues: {
       [CONVERT_ASSET_FIELDS.hourProcessing]: 0,
       [CONVERT_ASSET_FIELDS.tradesDelay]: "None",
       [CONVERT_ASSET_FIELDS.stopOutLevel]: 100,
-      [CONVERT_ASSET_FIELDS.currency]: currencyProp || "GVT",
+      [CONVERT_ASSET_FIELDS.currency]: currencyProp || currencies[0],
       [CONVERT_ASSET_FIELDS.periodLength]:
         periods.length === 1 ? periods[0] : undefined
     },
@@ -105,7 +109,7 @@ const _ConvertAssetSettings: React.FC<IConvertAssetSettingsProps> = props => {
   const showDescriptionBlock = assetFrom !== CONVERT_ASSET.SIGNAL;
   const showSignalFees = assetTo === CONVERT_ASSET.SIGNAL;
   const showProgramFields = assetTo === CONVERT_ASSET.PROGRAM;
-  const showCurrency = broker === "Huobi";
+  const showCurrency = broker === "Huobi" || isExchange;
 
   return (
     <HookForm form={form} onSubmit={onSubmit}>
@@ -124,7 +128,7 @@ const _ConvertAssetSettings: React.FC<IConvertAssetSettingsProps> = props => {
         )}
         {showProgramFields && (
           <Row onlyOffset size={"large"}>
-            {assetFrom === CONVERT_ASSET.EXCHANGE_ACCOUNT && (
+            {isExchange && (
               <Row>
                 <Processing
                   realtimeValue={isProcessingRealTime}
@@ -138,9 +142,9 @@ const _ConvertAssetSettings: React.FC<IConvertAssetSettingsProps> = props => {
                 <Currency
                   hide={!showCurrency}
                   name={CONVERT_ASSET_FIELDS.currency}
-                  accountCurrencies={["GVT", "BTC", "ETH"]}
+                  accountCurrencies={currencies}
                 />
-                {assetFrom !== CONVERT_ASSET.EXCHANGE_ACCOUNT && (
+                {!isExchange && (
                   <RowItem>
                     <PeriodLength
                       periods={periods}
@@ -148,15 +152,16 @@ const _ConvertAssetSettings: React.FC<IConvertAssetSettingsProps> = props => {
                     />
                   </RowItem>
                 )}
-                <RowItem>
-                  <StopOutField name={CONVERT_ASSET_FIELDS.stopOutLevel} />
-                </RowItem>
+                {!isExchange && (
+                  <RowItem>
+                    <StopOutField name={CONVERT_ASSET_FIELDS.stopOutLevel} />
+                  </RowItem>
+                )}
                 <RowItem>
                   <TradesDelay name={CONVERT_ASSET_FIELDS.tradesDelay} />
                 </RowItem>
               </AssetFields>
             </Row>
-            <Row onlyOffset></Row>
           </Row>
         )}
       </SettingsBlock>
