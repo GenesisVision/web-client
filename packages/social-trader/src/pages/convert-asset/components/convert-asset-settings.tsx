@@ -152,9 +152,11 @@ const _ConvertAssetSettings: React.FC<IConvertAssetSettingsProps> = props => {
                     />
                   </RowItem>
                 )}
-                <RowItem>
-                  <StopOutField name={CONVERT_ASSET_FIELDS.stopOutLevel} />
-                </RowItem>
+                {!isExchange && (
+                  <RowItem>
+                    <StopOutField name={CONVERT_ASSET_FIELDS.stopOutLevel} />
+                  </RowItem>
+                )}
                 <RowItem>
                   <TradesDelay name={CONVERT_ASSET_FIELDS.tradesDelay} />
                 </RowItem>
