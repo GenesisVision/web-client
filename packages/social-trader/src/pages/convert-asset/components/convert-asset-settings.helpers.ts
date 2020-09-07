@@ -105,7 +105,7 @@ const convertExchangeAccountToProgramValidationSchema = ({
   t,
   hasInvestmentLimit,
   programsInfo: {
-    createProgramInfo: { maxSuccessFee }
+    createProgramInfo: { maxManagementFee, maxSuccessFee }
   }
 }: {
   t: TFunction;
@@ -117,6 +117,7 @@ const convertExchangeAccountToProgramValidationSchema = ({
     ...getExchangeProgramShapes({
       hasInvestmentLimit,
       t,
+      maxManagementFee,
       maxSuccessFee
     })
   });
@@ -235,14 +236,16 @@ const getProgramShapes = ({
 const getExchangeProgramShapes = ({
   hasInvestmentLimit,
   t,
+  maxManagementFee,
   maxSuccessFee
 }: {
   hasInvestmentLimit: boolean;
   t: TFunction;
+  maxManagementFee: number;
   maxSuccessFee: number;
 }) => ({
   [CONVERT_ASSET_FIELDS.currency]: currencyShape(t),
-  [CONVERT_ASSET_FIELDS.stopOutLevel]: stopOutLevelShape(t),
+  [CONVERT_ASSET_FIELDS.entryFee]: entryFeeShape(t, maxManagementFee),
   [CONVERT_ASSET_FIELDS.successFee]: successFeeShape(t, maxSuccessFee),
   [CONVERT_ASSET_FIELDS.investmentLimit]: investmentLimitShape(
     hasInvestmentLimit,
