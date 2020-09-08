@@ -14,7 +14,7 @@ export const OrderBookCurrentPriceContainer: React.FC = () => {
     symbol: { quoteAsset }
   } = useContext(TerminalInfoContext);
   const accountCurrency = useSelector(headerAccountCurrencySelector);
-  const tickerItems = useContext(TerminalTickerContext);
+  const { items: tickerItems } = useContext(TerminalTickerContext);
   const accountCurrencySymbolPrice = useMemo(() => {
     const rateBaseAsset = quoteAsset;
     const rateQuoteAsset = accountCurrency === "USD" ? "USDT" : accountCurrency;

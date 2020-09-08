@@ -850,6 +850,7 @@ export type SymbolFilter =
   | SymbolMaxAlgoOrdersFilter;
 
 export interface Symbol {
+  isFavorite?: boolean;
   baseAsset: string;
   baseAssetPrecision: number;
   baseCommissionPrecision: number;

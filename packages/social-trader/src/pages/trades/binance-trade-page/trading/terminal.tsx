@@ -30,6 +30,7 @@ import { TerminalMobileChartBlock } from "./terminal-mobile-chart-block/terminal
 import styles from "./terminal.module.scss";
 
 interface Props {
+  exchangeAccountId?: string;
   exchangeInfo: ExchangeInfo;
   authData?: TerminalAuthDataType;
   terminalType: TerminalType;
@@ -37,6 +38,7 @@ interface Props {
 }
 
 const _Terminal: React.FC<Props> = ({
+  exchangeAccountId,
   exchangeInfo,
   authData,
   symbol,
@@ -44,6 +46,7 @@ const _Terminal: React.FC<Props> = ({
 }) => {
   return (
     <TerminalInfoContextProvider
+      exchangeAccountId={exchangeAccountId}
       exchangeInfo={exchangeInfo}
       authData={authData}
       outerSymbol={symbol}
