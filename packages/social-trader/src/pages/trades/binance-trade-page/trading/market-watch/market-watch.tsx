@@ -1,3 +1,4 @@
+import FavoriteIcon from "components/favorite-asset/favorite-icon/favorite-icon";
 import GlobalSearchInput from "components/global-search/components/global-search-result/global-search-input/global-search-input";
 import GVButton from "components/gv-button";
 import { RowItem } from "components/row-item/row-item";
@@ -26,6 +27,14 @@ import styles from "./market-watch.module.scss";
 interface Props {
   items: MergedTickerSymbolType[];
 }
+const Container: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
+  onClick,
+  children
+}) => (
+  <div onClick={onClick} className={styles["market-watch-favorite-button"]}>
+    {children}
+  </div>
+);
 
 const _MarketWatch: React.FC<Props> = ({ items }) => {
   const { terminalType } = useContext(TerminalInfoContext);
@@ -61,54 +70,67 @@ const _MarketWatch: React.FC<Props> = ({ items }) => {
           canClose={false}
         />
       </Row>
-      {terminalType === "spot" && (
-        <Row size={"small"}>
-          {FILTERING_CURRENCIES.map(currency => (
+      <Row size={"small"}>
+        <RowItem>
+          <Container
+            onClick={() => {
+              filteringType === "favorites"
+                ? setFilteringType(initFiltering)
+                : setFilteringType("favorites");
+            }}
+          >
+            <FavoriteIcon selected={filteringType === "favorites"} />
+          </Container>
+        </RowItem>
+        {terminalType === "spot" && (
+          <>
+            {FILTERING_CURRENCIES.map(currency => (
+              <RowItem>
+                <GVButton
+                  noPadding
+                  disabled={
+                    filteringType === "symbol" && filtering.value === currency
+                  }
+                  variant={"text"}
+                  size={"small"}
+                  onClick={() => {
+                    setFilteringType("symbol");
+                    setFiltering({ value: currency });
+                  }}
+                >
+                  {currency}
+                </GVButton>
+              </RowItem>
+            ))}
             <RowItem>
               <GVButton
                 noPadding
-                disabled={
-                  filteringType === "symbol" && filtering.value === currency
-                }
+                disabled={filteringType === "ALTS"}
                 variant={"text"}
                 size={"small"}
                 onClick={() => {
-                  setFilteringType("symbol");
-                  setFiltering({ value: currency });
+                  setFilteringType("ALTS");
                 }}
               >
-                {currency}
+                ALTS
               </GVButton>
             </RowItem>
-          ))}
-          <RowItem>
-            <GVButton
-              noPadding
-              disabled={filteringType === "ALTS"}
-              variant={"text"}
-              size={"small"}
-              onClick={() => {
-                setFilteringType("ALTS");
-              }}
-            >
-              ALTS
-            </GVButton>
-          </RowItem>
-          <RowItem>
-            <GVButton
-              noPadding
-              disabled={filteringType === "FIATS"}
-              variant={"text"}
-              size={"small"}
-              onClick={() => {
-                setFilteringType("FIATS");
-              }}
-            >
-              FIATS
-            </GVButton>
-          </RowItem>
-        </Row>
-      )}
+            <RowItem>
+              <GVButton
+                noPadding
+                disabled={filteringType === "FIATS"}
+                variant={"text"}
+                size={"small"}
+                onClick={() => {
+                  setFilteringType("FIATS");
+                }}
+              >
+                FIATS
+              </GVButton>
+            </RowItem>
+          </>
+        )}
+      </Row>
       <Row size={"small"}>
         <Select
           fixedWidth={false}
