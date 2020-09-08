@@ -5,7 +5,6 @@ import {
 import { IImageChangeEvent } from "components/form/input-image/input-image";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import React, { useCallback } from "react";
-import styled from "styled-components";
 
 export enum INPUT_IMAGES_MODE {
   ADD = "ADD",
@@ -15,13 +14,8 @@ export enum INPUT_IMAGES_MODE {
 interface IInputImagesProps extends IDropZoneWrapperProps {
   maxImages?: number;
   mode?: INPUT_IMAGES_MODE;
-
   [key: string]: any;
 }
-
-const StyledDropZoneWrapper = styled(DropZoneWrapper)`
-  outline: none;
-`;
 
 export const InputImages: React.FC<IInputImagesProps> = props => {
   const {
@@ -43,7 +37,7 @@ export const InputImages: React.FC<IInputImagesProps> = props => {
     },
     [setFieldValue, name]
   );
-  return <StyledDropZoneWrapper {...props} onChange={onChange} />;
+  return <DropZoneWrapper {...props} onChange={onChange} />;
 };
 
 export const HookFormInputImages: React.FC<IInputImagesProps> = props => {
