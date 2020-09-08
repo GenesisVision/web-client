@@ -22,7 +22,10 @@ import { map } from "rxjs/operators";
 import { api } from "services/api-client/swagger-custom-client";
 import { useSockets } from "services/websocket.service";
 
-type TerminalTickerContextState = MergedTickerSymbolType[] | undefined;
+type TerminalTickerContextState = {
+  getFavorites: VoidFunction;
+  items?: MergedTickerSymbolType[];
+};
 
 const getAccountFavorites = async (id?: string) =>
   id
@@ -32,7 +35,9 @@ const getAccountFavorites = async (id?: string) =>
         .then(({ items }) => items)
     : [];
 
-export const TerminalTickerInitialState: TerminalTickerContextState = undefined;
+export const TerminalTickerInitialState: TerminalTickerContextState = {
+  getFavorites: () => {}
+};
 
 export const TerminalTickerContext = createContext<TerminalTickerContextState>(
   TerminalTickerInitialState
@@ -69,8 +74,11 @@ export const TerminalTickerContextProvider: React.FC = ({ children }) => {
   useEffect(() => {
     if (accountFavorites) {
       const updatedList = { ...list };
-      accountFavorites.forEach(id => {
-        updatedList[id] = { ...updatedList[id], isFavorite: true };
+      Object.keys(updatedList).forEach(symbol => {
+        updatedList[symbol] = {
+          ...updatedList[symbol],
+          isFavorite: accountFavorites.includes(symbol)
+        };
       });
       setList(updatedList);
     }
@@ -121,10 +129,16 @@ export const TerminalTickerContextProvider: React.FC = ({ children }) => {
     list
   ]);
 
+  const value = useMemo(
+    () => ({
+      items: Object.values(requestData).length ? items : undefined,
+      getFavorites
+    }),
+    [requestData, items]
+  );
+
   return (
-    <TerminalTickerContext.Provider
-      value={Object.values(requestData).length ? items : undefined}
-    >
+    <TerminalTickerContext.Provider value={value}>
       {children}
     </TerminalTickerContext.Provider>
   );

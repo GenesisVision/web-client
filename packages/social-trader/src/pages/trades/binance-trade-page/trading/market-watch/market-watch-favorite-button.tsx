@@ -1,6 +1,7 @@
 import FavoriteIcon from "components/favorite-asset/favorite-icon/favorite-icon";
 import useApiRequest from "hooks/api-request.hook";
-import React, { useCallback, useState } from "react";
+import { TerminalTickerContext } from "pages/trades/binance-trade-page/trading/terminal-ticker.context";
+import React, { useCallback, useContext, useState } from "react";
 import { api } from "services/api-client/swagger-custom-client";
 
 import styles from "./market-watch.module.scss";
@@ -42,8 +43,13 @@ const _MarketWatchFavoriteButton: React.FC<IMarketWatchFavoriteButtonProps> = ({
   symbol,
   isFavorite
 }) => {
+  const { getFavorites } = useContext(TerminalTickerContext);
+
   const [innerIsFavorite, setInnerIsFavorite] = useState(isFavorite);
-  const { sendRequest } = useApiRequest({ request: toggleFavorites });
+  const { sendRequest } = useApiRequest({
+    request: toggleFavorites,
+    middleware: [getFavorites]
+  });
 
   const handleClick = useCallback(
     (e: React.MouseEvent) => {
