@@ -102,3 +102,14 @@
   content: "";
   border-top: 1px solid white;
 }
+
+.market-watch-favorite-button {
+  cursor: pointer;
+  width: 10px;
+  height: 10px;
+  & > div,
+  svg {
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
