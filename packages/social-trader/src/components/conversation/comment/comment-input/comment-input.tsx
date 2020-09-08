@@ -146,7 +146,7 @@ const _CommentInput: React.FC<Props> = ({ onSubmit, status, errorMessage }) => {
         </Text>
       </CommentInputMessage>
       <CommentInputMessage disable={!errorText}>
-        {errorText && <ErrorMessage error={errorText} />}
+        {errorText && <ErrorMessage>{errorText}</ErrorMessage>}
       </CommentInputMessage>
     </HookForm>
   );

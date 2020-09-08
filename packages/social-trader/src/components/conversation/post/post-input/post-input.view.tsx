@@ -132,7 +132,9 @@ const _PostInputView: React.FC<Props> = ({
                   ))}
               </Center>
             </RowItem>
-            <RowItem>{errorText && <ErrorMessage error={errorText} />}</RowItem>
+            <RowItem>
+              {errorText && <ErrorMessage>{errorText}</ErrorMessage>}
+            </RowItem>
             {!!text.length && (
               <RowItem>
                 <AttachImagePostButton size={"small"} onClick={open} />

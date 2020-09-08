@@ -1,25 +1,23 @@
-import clsx from "clsx";
+import { $negativeColor } from "components/gv-styles/gv-colors/gv-colors";
+import { $fontSizeSmall } from "components/gv-styles/gv-sizes";
 import * as React from "react";
-
-import styles from "./error-message.module.scss";
+import styled from "styled-components";
+import { fontSize } from "utils/style/style-mixins";
 
 export enum MESSAGE_TYPES {
   DEFAULT = "DEFAULT",
   OVER = "OVER"
 }
-interface IErrorMessage {
-  error: string | string[];
+
+interface IErrorMessageProps {
   type?: MESSAGE_TYPES;
-  className?: string;
 }
-const ErrorMessage: React.FC<IErrorMessage> = ({ error, className, type }) => (
-  <span
-    className={clsx(styles["error-message"], className, {
-      [styles["error-message--over"]]: type === MESSAGE_TYPES.OVER
-    })}
-  >
-    {error}
-  </span>
-);
+
+const ErrorMessage = styled.span<IErrorMessageProps>`
+  font-weight: 500;
+  color: ${$negativeColor};
+  ${fontSize($fontSizeSmall)};
+  ${({ type }) => type === MESSAGE_TYPES.OVER && "position: absolute;"}
+`;
 
 export default ErrorMessage;
