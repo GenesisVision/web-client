@@ -174,6 +174,7 @@ const _MarketWatch: React.FC<Props> = ({ items }) => {
               .sort(sortMarketWatchItems(sorting))
               .map(
                 ({
+                  isFavorite,
                   eventTime,
                   quoteAsset,
                   baseAsset,
@@ -184,6 +185,7 @@ const _MarketWatch: React.FC<Props> = ({ items }) => {
                   priceChangePercent
                 }) => (
                   <MarketWatchRow
+                    isFavorite={isFavorite}
                     eventTime={eventTime}
                     quoteAsset={quoteAsset}
                     baseAsset={baseAsset}
