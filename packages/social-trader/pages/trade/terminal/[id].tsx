@@ -17,6 +17,7 @@ import { getParamsFromCtxWithSplit } from "utils/ssr-helpers";
 import { NextPageWithRedux } from "utils/types";
 
 interface Props {
+  exchangeAccountId?: string;
   brokerType?: BrokerTradeServerType;
   authData?: TerminalAuthDataType;
   terminalType?: TerminalType;
@@ -24,6 +25,7 @@ interface Props {
 }
 
 const Page: NextPageWithRedux<Props> = ({
+  exchangeAccountId,
   brokerType = "Binance",
   authData,
   terminalType,
@@ -32,7 +34,12 @@ const Page: NextPageWithRedux<Props> = ({
   const terminalMethods = getTerminalApiMethods(brokerType, terminalType);
   return (
     <TerminalMethodsContextProvider methods={terminalMethods}>
-      <TerminalPage authData={authData} type={terminalType} symbol={symbol} />
+      <TerminalPage
+        exchangeAccountId={exchangeAccountId}
+        authData={authData}
+        type={terminalType}
+        symbol={symbol}
+      />
     </TerminalMethodsContextProvider>
   );
 };
@@ -61,6 +68,7 @@ Page.getInitialProps = async ctx => {
   }
 
   return {
+    exchangeAccountId,
     brokerType,
     authData,
     symbol,

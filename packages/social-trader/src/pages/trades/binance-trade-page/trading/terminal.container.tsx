@@ -20,6 +20,7 @@ import React, { useContext, useEffect, useMemo, useState } from "react";
 import { TERMINAL_ROUTE } from "routes/trade.routes";
 
 export interface ITerminalContainerProps {
+  exchangeAccountId?: string;
   authData?: TerminalAuthDataType;
   type?: TerminalType;
   symbol?: SymbolState;
@@ -33,6 +34,7 @@ interface ITerminalPropsData {
 }
 
 const _TerminalContainer: React.FC<ITerminalContainerProps> = ({
+  exchangeAccountId,
   authData,
   type = TerminalTypeInitialState,
   symbol
@@ -113,6 +115,7 @@ const _TerminalContainer: React.FC<ITerminalContainerProps> = ({
 
   return (
     <Terminal
+      exchangeAccountId={exchangeAccountId}
       exchangeInfo={exchangeInfoProp}
       authData={authDataProp}
       symbol={symbolProp}

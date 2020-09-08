@@ -30,6 +30,7 @@ import { TerminalMobileChartBlock } from "./terminal-mobile-chart-block/terminal
 import styles from "./terminal.module.scss";
 
 interface Props {
+  exchangeAccountId?: string;
   exchangeInfo: ExchangeInfo;
   authData?: TerminalAuthDataType;
   terminalType: TerminalType;
@@ -37,6 +38,7 @@ interface Props {
 }
 
 const _Terminal: React.FC<Props> = ({
+  exchangeAccountId,
   exchangeInfo,
   authData,
   symbol,
@@ -44,6 +46,7 @@ const _Terminal: React.FC<Props> = ({
 }) => {
   return (
     <TerminalInfoContextProvider
+      exchangeAccountId={exchangeAccountId}
       exchangeInfo={exchangeInfo}
       authData={authData}
       outerSymbol={symbol}
@@ -52,16 +55,16 @@ const _Terminal: React.FC<Props> = ({
       <div className={styles["trading-grid"]}>
         <TerminalTickerContextProvider>
           <Center className={styles["header-grid-elem"]}>
-            <TradeHeaderContainer />
+            {/*<TradeHeaderContainer />*/}
           </Center>
           <div className={styles["symbol-summary-grid-elem"]}>
             <ResponsiveContainer
               enabledScreens={["tablet", "landscape-tablet"]}
             >
-              <SymbolSummarySmallBlock />
+              {/*<SymbolSummarySmallBlock />*/}
             </ResponsiveContainer>
             <ResponsiveContainer enabledScreens={["phone", "landscape-phone"]}>
-              <SymbolSummaryContainer />
+              {/*<SymbolSummaryContainer />*/}
             </ResponsiveContainer>
           </div>
           <div className={styles["market-watch-grid-elem"]}>
@@ -74,7 +77,7 @@ const _Terminal: React.FC<Props> = ({
               <ResponsiveContainer
                 enabledScreens={["phone", "landscape-phone"]}
               >
-                <TerminalMobileChartBlock />
+                {/*<TerminalMobileChartBlock />*/}
               </ResponsiveContainer>
               <ResponsiveContainer
                 enabledScreens={[
@@ -84,12 +87,12 @@ const _Terminal: React.FC<Props> = ({
                   "large-desktop"
                 ]}
               >
-                <ChartBlock />
+                {/*<ChartBlock />*/}
               </ResponsiveContainer>
             </div>
             <TerminalOpenOrdersContextProvider>
               <div className={styles["tables-grid-elem"]}>
-                <TradingTables />
+                {/*<TradingTables />*/}
               </div>
               <div className={styles["order-book-grid-elem"]}>
                 <ResponsiveContainer
@@ -100,7 +103,7 @@ const _Terminal: React.FC<Props> = ({
                     "large-desktop"
                   ]}
                 >
-                  <OrderBookBlock />
+                  {/*<OrderBookBlock />*/}
                 </ResponsiveContainer>
               </div>
             </TerminalOpenOrdersContextProvider>
@@ -113,14 +116,14 @@ const _Terminal: React.FC<Props> = ({
                   "large-desktop"
                 ]}
               >
-                <TradesBlock />
+                {/*<TradesBlock />*/}
               </ResponsiveContainer>
             </div>
             <div className={styles["place-orders-grid-elem"]}>
               <TerminalPlaceOrderContextProvider>
-                {terminalType === "futures" && <PlaceOrderSettingsContainer />}
-                <PlaceOrder />
-                {terminalType === "futures" && <MarginRatioBlock />}
+                {/*{terminalType === "futures" && <PlaceOrderSettingsContainer />}*/}
+                {/*<PlaceOrder />*/}
+                {/*{terminalType === "futures" && <MarginRatioBlock />}*/}
               </TerminalPlaceOrderContextProvider>
             </div>
           </TradingPriceContextProvider>

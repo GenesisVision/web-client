@@ -70,6 +70,7 @@ export const TerminalTickerContextProvider: React.FC = ({ children }) => {
     );
     ticketsSocket.subscribe(setSocketData);
   }, [normalizedSymbols]);
+
   useEffect(() => {
     if (!Object.values(socketData).length) return;
     const updatedList = { ...list };
