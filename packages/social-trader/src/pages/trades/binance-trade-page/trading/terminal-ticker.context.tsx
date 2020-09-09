@@ -30,8 +30,8 @@ type TerminalTickerContextState = {
 const getAccountFavorites = async (id?: string) =>
   id
     ? await api
-        .assets()
-        .getFavoriteSymbols(id)
+        .terminal()
+        .getTradingPlatformFavoriteSymbols(id)
         .then(({ items }) => items)
     : [];
 
