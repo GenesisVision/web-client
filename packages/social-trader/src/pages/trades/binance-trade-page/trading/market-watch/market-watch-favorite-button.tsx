@@ -13,10 +13,10 @@ export interface IMarketWatchFavoriteButtonProps {
 }
 
 const addToFavorites = (id: string, symbol: string) =>
-  api.assets().addFavoriteSymbol(id, symbol);
+  api.terminal().addTradingPlatformFavoriteSymbol(id, symbol);
 
 const removeFromFavorites = (id: string, symbol: string) =>
-  api.assets().removeFavoriteSymbol(id, symbol);
+  api.terminal().removeTradingPlatformFavoriteSymbol(id, symbol);
 
 const toggleFavorites = ({
   isFavorite,
