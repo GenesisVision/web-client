@@ -14,11 +14,11 @@ import { useTranslation } from "react-i18next";
 const INIT_SORTING = "value";
 
 const COLUMNS: SortingColumn[] = [
-  { name: "drawdown", sortingName: "drawdown" },
-  { name: "investors", sortingName: "investors" },
-  { name: "value", sortingName: "value" },
-  { name: "name", sortingName: "name" },
-  { name: "profit", sortingName: "profit" }
+  { name: "drawdown", sortingName: "ByDrawdown" },
+  { name: "investors", sortingName: "ByInvestors" },
+  { name: "value", sortingName: "ByValue" },
+  { name: "name", sortingName: "ByName" },
+  { name: "profit", sortingName: "ByProfit" }
 ];
 
 const _DashboardInvestingFunds: React.FC = () => {
