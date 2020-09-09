@@ -47,6 +47,7 @@ enum TABS {
 }
 
 interface Props {
+  isProgram?: boolean;
   isExchange?: boolean;
   isFollower?: boolean;
   canCloseOpenPositions?: boolean;
@@ -85,6 +86,7 @@ const nullSelector = () => ({
 });
 
 const _ProgramDetailsHistorySection: React.FC<Props> = ({
+  isProgram = true,
   isExchange,
   isFollower,
   canCloseOpenPositions,
@@ -146,7 +148,7 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
           count={tradesCount}
         />
         <GVTab
-          visible={isExchange && !!periodHistory}
+          visible={isExchange && !!periodHistory && isProgram}
           value={TABS.ANALYTICS}
           label={t("program-details-page:history.tabs.analytics")}
           count={periodHistoryCount}
