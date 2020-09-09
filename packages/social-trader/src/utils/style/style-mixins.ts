@@ -6,6 +6,12 @@ import { $dividerPadding, $dividerText } from "components/gv-styles/gv-sizes";
 import { css } from "styled-components";
 import { AnyObjectType } from "utils/types";
 
+export const unselectable = css`
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
+`;
+
 export const link = (color: string) => {
   return css`
     ${transition("opacity")};
