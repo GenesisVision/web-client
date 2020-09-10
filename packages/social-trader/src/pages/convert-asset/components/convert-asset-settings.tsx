@@ -61,7 +61,7 @@ export interface IConvertAssetSettingsFormValues {
   [CONVERT_ASSET_FIELDS.title]: string;
   [CONVERT_ASSET_FIELDS.description]: string;
   [CONVERT_ASSET_FIELDS.logo]: IImageValue;
-  [CONVERT_ASSET_FIELDS.entryFee]?: number;
+  [CONVERT_ASSET_FIELDS.managementFee]?: number;
   [CONVERT_ASSET_FIELDS.investmentLimit]?: number;
 }
 
@@ -177,7 +177,7 @@ const _ConvertAssetSettings: React.FC<IConvertAssetSettingsProps> = props => {
               firstFeeUnderText={t(
                 "create-account:settings.hints.management-fee"
               )}
-              firstFeeName={CONVERT_ASSET_FIELDS.entryFee}
+              firstFeeName={CONVERT_ASSET_FIELDS.managementFee}
               firstFeeDescription={t(
                 "create-account:settings.hints.management-fee-description"
               )}
