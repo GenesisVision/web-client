@@ -17,8 +17,8 @@ const COLUMNS: SortingColumn[] = [
   { name: "name", sortingName: "ByTitle" },
   { name: "value", sortingName: "ByValue" },
   { name: "profit", sortingName: "ByProfit" },
-  { name: "drawdown", sortingName: "ByDrawdown" },
-  { name: "investors", sortingName: "ByInvestors" }
+  { name: "investors", sortingName: "ByInvestors" },
+  { name: "drawdown", sortingName: "ByDrawdown" }
 ];
 
 const _DashboardInvestingFunds: React.FC = () => {
