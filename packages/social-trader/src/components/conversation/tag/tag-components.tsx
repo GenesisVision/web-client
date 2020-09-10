@@ -206,7 +206,7 @@ const _EventTag: React.FC<IEventTagProps> = ({
         <RowItem>
           <Center>
             <RowItem size={"small"}>
-              <Text color={color}>
+              <Text sizeValue={"14"} color={color}>
                 {amount} {currency}
               </Text>
             </RowItem>
