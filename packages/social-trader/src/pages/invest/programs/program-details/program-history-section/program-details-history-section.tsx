@@ -163,7 +163,9 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
           value={TABS.SUBSCRIBERS}
           label={t("program-details-page:history.tabs.subscriptions")}
           count={subscriptionsCount}
-          visible={isAuthenticated && isOwnProgram && !!subscriptions}
+          visible={
+            !isExchange && isAuthenticated && isOwnProgram && !!subscriptions
+          }
         />
         <GVTab
           value={TABS.FINANCIAL_STATISTIC}
