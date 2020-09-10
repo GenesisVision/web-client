@@ -1,13 +1,24 @@
-import clsx from "clsx";
+import {
+  GoogleAuthHeader,
+  GoogleAuthSteps,
+  GoogleAuthStyledContainer
+} from "modules/2fa/google-auth/google-auth-steps/google-auth-steps.styles";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 
-import styles from "../google-auth.module.scss";
 import GoogleActivateStep, {
   IGoogleActivateStepFormValues
 } from "./google-auth-activate-step";
 import GoogleCodeStep from "./google-auth-code-step";
 import GoogleDownloadStep from "./google-auth-download-step";
+
+export interface IGoogleAuthProps {
+  enablePassword?: boolean;
+  authenticatorUri: string;
+  sharedKey: string;
+  onSubmit: (twoFactorCode: IGoogleActivateStepFormValues) => void;
+  errorMessage?: string;
+}
 
 const GoogleAuth: React.FC<IGoogleAuthProps> = ({
   enablePassword,
@@ -18,18 +29,16 @@ const GoogleAuth: React.FC<IGoogleAuthProps> = ({
 }) => {
   const [t] = useTranslation();
   return (
-    <div
-      className={clsx(styles["google-auth"], styles["google-auth--desktop"])}
-    >
-      <div className={styles["google-auth__header"]}>
+    <GoogleAuthStyledContainer desktop>
+      <GoogleAuthHeader>
         <h2>{t("profile-page:2fa-page.title")}</h2>
         <p>{t("profile-page:2fa-page.google")}</p>
-      </div>
+      </GoogleAuthHeader>
 
-      <div className={styles["google-auth__steps"]}>
+      <GoogleAuthSteps>
         <GoogleDownloadStep />
         <GoogleCodeStep
-          className={styles["google-auth__step--alt-color"]}
+          altColor
           authenticatorUri={authenticatorUri}
           sharedKey={sharedKey}
         />
@@ -38,18 +47,10 @@ const GoogleAuth: React.FC<IGoogleAuthProps> = ({
           errorMessage={errorMessage}
           enablePassword={enablePassword}
         />
-      </div>
-    </div>
+      </GoogleAuthSteps>
+    </GoogleAuthStyledContainer>
   );
 };
-
-export interface IGoogleAuthProps {
-  enablePassword?: boolean;
-  authenticatorUri: string;
-  sharedKey: string;
-  onSubmit: (twoFactorCode: IGoogleActivateStepFormValues) => void;
-  errorMessage?: string;
-}
 
 const GoogleAuthDesktop = React.memo(GoogleAuth);
 export default GoogleAuthDesktop;

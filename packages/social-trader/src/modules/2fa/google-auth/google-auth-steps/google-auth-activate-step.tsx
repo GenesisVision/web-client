@@ -1,24 +1,41 @@
 import FormError from "components/form/form-error/form-error";
 import { GVHookFormField } from "components/gv-hook-form-field";
+import { $paddingUpperMedium } from "components/gv-styles/gv-sizes";
 import { Row } from "components/row/row";
 import { SimpleNumberField } from "components/simple-fields/simple-number-field";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
 import { SubmitButton } from "components/submit-button/submit-button";
+import {
+  GoogleAuthStepContainer,
+  GoogleAuthStepCount,
+  GoogleAuthStepTitle
+} from "modules/2fa/google-auth/google-auth-steps/google-auth-steps.styles";
 import * as React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
+import styled from "styled-components";
 import { HookForm } from "utils/hook-form.helpers";
 import { object, string } from "yup";
-
-import styles from "../google-auth.module.scss";
 
 enum FIELDS {
   code = "code",
   password = "password"
 }
 
+interface Props {
+  mobile?: boolean;
+  enablePassword?: boolean;
+  onSubmit: (twoFactorCode: IGoogleActivateStepFormValues) => void;
+  errorMessage?: string;
+}
+export interface IGoogleActivateStepFormValues {
+  [FIELDS.code]: string;
+  [FIELDS.password]: string;
+}
+
 export const GoogleStep3: React.FC<Props> = ({
+  mobile,
   onSubmit,
   errorMessage,
   enablePassword = true
@@ -43,11 +60,11 @@ export const GoogleStep3: React.FC<Props> = ({
   });
 
   return (
-    <div className={styles["google-auth__step"]}>
-      <div className={styles["google-auth__count"]}>03</div>
-      <div className={styles["google-auth__title"]}>
+    <GoogleAuthStepContainer mobile={mobile}>
+      <GoogleAuthStepCount>03</GoogleAuthStepCount>
+      <GoogleAuthStepTitle>
         {t("profile-page:2fa-page.enter-code")}
-      </div>
+      </GoogleAuthStepTitle>
       <HookForm form={form} onSubmit={onSubmit}>
         <Row>
           <GVHookFormField
@@ -85,19 +102,9 @@ export const GoogleStep3: React.FC<Props> = ({
           </SubmitButton>
         </Row>
       </HookForm>
-    </div>
+    </GoogleAuthStepContainer>
   );
 };
-
-interface Props {
-  enablePassword?: boolean;
-  onSubmit(twoFactorCode: IGoogleActivateStepFormValues): void;
-  errorMessage?: string;
-}
-export interface IGoogleActivateStepFormValues {
-  [FIELDS.code]: string;
-  [FIELDS.password]: string;
-}
 
 const GoogleActivateStep = React.memo(GoogleStep3);
 export default GoogleActivateStep;
