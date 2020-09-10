@@ -11,11 +11,11 @@ import { getInvestingPrograms } from "pages/dashboard/services/dashboard.service
 import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
 
-const INIT_SORTING = "value";
+const INIT_SORTING = "ByValueDesc";
 
 const COLUMNS: SortingColumn[] = [
+  { name: "name", sortingName: "ByTitle" },
   { name: "value", sortingName: "ByValue" },
-  { name: "name", sortingName: "ByName" },
   { name: "profit", sortingName: "ByProfit" },
   { name: "period", sortingName: "ByPeriod" }
 ];
