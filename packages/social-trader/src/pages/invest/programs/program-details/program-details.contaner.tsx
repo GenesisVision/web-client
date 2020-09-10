@@ -77,7 +77,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
     brokerDetails,
     ownerActions
   } = description;
-  const isExchange = programDetails.type === "DailyPeriod";
+  const isExchange = programDetails?.type === "DailyPeriod";
   const programPersonalDetails =
     programDetails && programDetails.personalDetails;
   const followPersonalDetails = followDetails && followDetails.personalDetails;
@@ -270,7 +270,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
       <DetailsInvestment
         isExchange={isExchange}
         isProcessingRealTime={
-          programDetails.dailyPeriodDetails?.isProcessingRealTime
+          programDetails?.dailyPeriodDetails?.isProcessingRealTime
         }
         isOwnAsset={isOwnAsset}
         fees={fees}
