@@ -108,6 +108,7 @@
     "notifications": {
       "fund": "Request to close the fund was sent successfully.",
       "exchangeaccount": "Request to close the trading account was sent successfully.",
+      "externalsignaltradingaccount": "Request to close the trading account was sent successfully.",
       "signaltradingaccount": "Request to close the trading account was sent successfully.",
       "signalprogram": "Request to close the program was sent successfully.",
       "program": "Request to close the program was sent successfully.",
