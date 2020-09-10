@@ -86,6 +86,7 @@
     "title": "Trading",
     "follow-them": "Follow them",
     "actions": {
+      "make-public-fund": "Make a public fund",
       "make-signal": "Make a signal provider",
       "make-program": "Make program",
       "make-signal-account": "Make signal account",
