@@ -2,16 +2,13 @@ import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
 import { AvatarWithName } from "components/avatar/avatar-with-name/avatar-with-name";
 import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
 import { Center } from "components/center/center";
-import {
-  ColoredText,
-  ColoredTextColor
-} from "components/colored-text/colored-text";
 import { Message } from "components/conversation/message/message";
 import { RepostTagContainer } from "components/conversation/tag/repost-tag-container";
-import styles from "components/conversation/tag/tag-components.module.scss";
 import { TagBlock } from "components/conversation/tag/tag.block";
 import { CurrencyItem } from "components/currency-item/currency-item";
 import PortfolioEventLogo from "components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
+import { $labelColor } from "components/gv-styles/gv-colors/gv-colors";
+import { $fontSizeSmall } from "components/gv-styles/gv-sizes";
 import Link, { ToType } from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import Profitability from "components/profitability/profitability";
@@ -22,6 +19,7 @@ import {
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
+import { TextColor } from "components/text/text.types";
 import Crashable from "decorators/crashable";
 import {
   ChangeState,
@@ -36,6 +34,7 @@ import {
 import { getAssetFolderRoute } from "pages/dashboard/components/dashboard-trading/dashboard-public-card";
 import React from "react";
 import { managerToPathCreator } from "routes/manager.routes";
+import styled from "styled-components";
 import { composeAssetDetailsUrl } from "utils/compose-url";
 
 export interface IUrlTagProps {
@@ -74,7 +73,7 @@ export type TagToComponentType = {
 
 const getAssetTagTextColor = (
   changeState: ChangeState
-): ColoredTextColor | undefined => {
+): TextColor | undefined => {
   switch (changeState) {
     case "Decreased":
       return "red";
@@ -82,6 +81,18 @@ const getAssetTagTextColor = (
       return "green";
   }
 };
+
+const TagTitleRow = styled(Row)`
+  & div {
+    font-size: ${$fontSizeSmall}px;
+    color: ${$labelColor};
+  }
+`;
+
+const AssetTagArrow = styled(RowItem)`
+  font-size: 18px;
+  line-height: 15px;
+`;
 
 const _UrlTagComponent: React.FC<IUrlTagProps> = ({
   data: {
@@ -116,19 +127,23 @@ const _PlatformAssetTagComponent: React.FC<IPlatformAssetTagProps> = ({
   const hasData = price !== null || hasPercent;
   return (
     <TagBlock>
-      <Row className={styles["tag__title-row"]}>
+      <TagTitleRow>
         <CurrencyItem small name={name} url={url} logo={logoUrl} />
-      </Row>
+      </TagTitleRow>
       {hasData && (
-        <Row size={"small"} className={styles["asset-tag"]}>
-          <RowItem wide>$ {price} </RowItem>
+        <Row size={"small"}>
+          <RowItem wide>
+            <Text size={"small"} wrap={false}>
+              $ {price}
+            </Text>
+          </RowItem>
           {hasPercent && (
             <RowItem>
-              <ColoredText color={color}>
+              <Text size={"small"} wrap={false} color={color}>
                 <Row>
                   <RowItem size={"xsmall"}>{change24Percent}% </RowItem>
                   {changeState !== "NotChanged" && (
-                    <RowItem className={styles["asset-tag__arrow"]}>
+                    <AssetTagArrow>
                       <div>
                         {changeState === "Increased" ? (
                           <>&uarr;</>
@@ -136,10 +151,10 @@ const _PlatformAssetTagComponent: React.FC<IPlatformAssetTagProps> = ({
                           <>&darr;</>
                         )}
                       </div>
-                    </RowItem>
+                    </AssetTagArrow>
                   )}
                 </Row>
-              </ColoredText>
+              </Text>
             </RowItem>
           )}
         </Row>
@@ -191,9 +206,9 @@ const _EventTag: React.FC<IEventTagProps> = ({
         <RowItem>
           <Center>
             <RowItem size={"small"}>
-              <ColoredText color={color}>
+              <Text color={color}>
                 {amount} {currency}
-              </ColoredText>
+              </Text>
             </RowItem>
             {percent !== null && (
               <RowItem>
@@ -271,15 +286,21 @@ const _AssetTagCard: React.FC<IAssetTagProps & { url: ToType | string }> = ({
         }
       />
       {(price !== null || change24Percent !== null) && (
-        <Row size={"small"} className={styles["asset-tag"]}>
-          {price !== null && <RowItem wide>$ {price} </RowItem>}
+        <Row size={"small"}>
+          {price !== null && (
+            <RowItem wide>
+              <Text size={"small"} wrap={false}>
+                $ {price}
+              </Text>
+            </RowItem>
+          )}
           {change24Percent !== null && (
             <RowItem>
-              <ColoredText color={color}>
+              <Text size={"small"} wrap={false} color={color}>
                 <Row>
                   <RowItem size={"xsmall"}>{change24Percent}% </RowItem>
                   {changeState !== "NotChanged" && (
-                    <RowItem className={styles["asset-tag__arrow"]}>
+                    <AssetTagArrow>
                       <div>
                         {changeState === "Increased" ? (
                           <>&uarr;</>
@@ -287,10 +308,10 @@ const _AssetTagCard: React.FC<IAssetTagProps & { url: ToType | string }> = ({
                           <>&uarr;</>
                         )}
                       </div>
-                    </RowItem>
+                    </AssetTagArrow>
                   )}
                 </Row>
-              </ColoredText>
+              </Text>
             </RowItem>
           )}
         </Row>
