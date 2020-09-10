@@ -2,6 +2,7 @@ import ImageBaseElement from "components/avatar/image-base.element";
 import { Button } from "components/button/button";
 import { Center } from "components/center/center";
 import ChipButton from "components/chip/chip-button";
+import { mediaBreakpointLandscapePhone } from "components/gv-styles/gv-media";
 import { RowItem } from "components/row-item/row-item";
 import useIsOpen from "hooks/is-open.hook";
 import ConvertIcon from "media/convert.svg";
@@ -9,9 +10,35 @@ import { TransferContainerProps } from "modules/transfer/components/transfer-con
 import TransferPopup from "modules/transfer/transfer-popup";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import styled from "styled-components";
 import { Clickable, Sizeable } from "utils/types";
 
-import styles from "./transfer.button.module.scss";
+export enum WALLET_BUTTON_TYPE {
+  SMALL = "SMALL",
+  FULL = "FULL"
+}
+
+interface Props extends TransferContainerProps, Sizeable {
+  withIcon?: boolean;
+  type?: WALLET_BUTTON_TYPE;
+  color?: "primary" | "secondary" | "primary-dark" | "danger";
+  variant?: "text" | "outlined" | "contained";
+  label?: string;
+  disabled?: boolean;
+}
+
+interface FullButtonProps extends Sizeable, Clickable {
+  withIcon?: boolean;
+  color?: "primary" | "secondary" | "primary-dark" | "danger";
+  variant?: "text" | "outlined" | "contained";
+  label?: string;
+  disabled?: boolean;
+}
+
+const FullButtonIcon = styled(ImageBaseElement)`
+  height: 8px;
+  ${mediaBreakpointLandscapePhone("height: 12px;")};
+`;
 
 const _TransferButton: React.FC<Props> = ({
   fixedSelects,
@@ -66,23 +93,6 @@ const _TransferButton: React.FC<Props> = ({
   );
 };
 
-interface Props extends TransferContainerProps, Sizeable {
-  withIcon?: boolean;
-  type?: WALLET_BUTTON_TYPE;
-  color?: "primary" | "secondary" | "primary-dark" | "danger";
-  variant?: "text" | "outlined" | "contained";
-  label?: string;
-  disabled?: boolean;
-}
-
-interface FullButtonProps extends Sizeable, Clickable {
-  withIcon?: boolean;
-  color?: "primary" | "secondary" | "primary-dark" | "danger";
-  variant?: "text" | "outlined" | "contained";
-  label?: string;
-  disabled?: boolean;
-}
-
 const FullButton: React.FC<FullButtonProps> = React.memo(
   ({ disabled, onClick, label, color, variant, withIcon, size }) => {
     const [t] = useTranslation();
@@ -99,11 +109,7 @@ const FullButton: React.FC<FullButtonProps> = React.memo(
         <Center>
           {withIcon && (
             <RowItem size={"small"}>
-              <ImageBaseElement
-                className={styles["transfer-button__full-button-icon"]}
-                src={ConvertIcon}
-                alt={labelText}
-              />
+              <FullButtonIcon src={ConvertIcon} alt={labelText} />
             </RowItem>
           )}
           <RowItem>{labelText}</RowItem>
@@ -125,11 +131,6 @@ const SmallButton: React.FC<Clickable> = React.memo(({ onClick }) => {
     />
   );
 });
-
-export enum WALLET_BUTTON_TYPE {
-  SMALL = "SMALL",
-  FULL = "FULL"
-}
 
 const TransferButton = React.memo(_TransferButton);
 export default TransferButton;
