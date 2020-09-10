@@ -11,14 +11,14 @@ import { getInvestingFunds } from "pages/dashboard/services/dashboard.service";
 import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
 
-const INIT_SORTING = "value";
+const INIT_SORTING = "ByValueDesc";
 
 const COLUMNS: SortingColumn[] = [
-  { name: "drawdown", sortingName: "ByDrawdown" },
-  { name: "investors", sortingName: "ByInvestors" },
+  { name: "name", sortingName: "ByTitle" },
   { name: "value", sortingName: "ByValue" },
-  { name: "name", sortingName: "ByName" },
-  { name: "profit", sortingName: "ByProfit" }
+  { name: "profit", sortingName: "ByProfit" },
+  { name: "drawdown", sortingName: "ByDrawdown" },
+  { name: "investors", sortingName: "ByInvestors" }
 ];
 
 const _DashboardInvestingFunds: React.FC = () => {
