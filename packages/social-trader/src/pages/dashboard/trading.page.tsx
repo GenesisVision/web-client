@@ -1,6 +1,6 @@
 import Page from "components/page/page";
 import DashboardFollowThemContainer from "pages/dashboard/components/dashboard-trading/dashboard-follow-them.container";
-import DashboardPrivate from "pages/dashboard/components/dashboard-trading/dashboard-pirvate";
+import DashboardPrivate from "pages/dashboard/components/dashboard-trading/dashboard-private";
 import DashboardPublic from "pages/dashboard/components/dashboard-trading/dashboard-public";
 import { DashboardTradingContext } from "pages/dashboard/components/dashboard-trading/dashboard-trading-context";
 import DashboardTradingTotalContainer from "pages/dashboard/components/dashboard-trading/dashboard-trading-total.container";
