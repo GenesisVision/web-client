@@ -8,7 +8,11 @@ import { createFundInfoSelector } from "reducers/platform-reducer";
 import { PlatformDataLoaderData } from "../../services/create-fund.service";
 import CreateFundSettings from "./create-fund-settings";
 
-const _CreateFundSettingsSection: React.FC = () => {
+interface Props {
+  selfManaged?: boolean;
+}
+
+const _CreateFundSettingsSection: React.FC<Props> = ({ selfManaged }) => {
   const createFundInfo = useSelector(createFundInfoSelector);
   const { handleCreate, errorMessage } = useCreateAssetSubmit({
     asset: CREATE_ASSET.FUND
@@ -17,6 +21,7 @@ const _CreateFundSettingsSection: React.FC = () => {
 
   return (
     <CreateFundSettings
+      selfManaged={selfManaged}
       errorMessage={errorMessage}
       wallets={wallets}
       loaderData={PlatformDataLoaderData}
