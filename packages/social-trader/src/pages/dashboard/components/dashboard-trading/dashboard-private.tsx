@@ -7,6 +7,7 @@ import { DashboardTradingAsset, FundInvestingDetailsList } from "gv-api-web";
 import useTab from "hooks/tab.hook";
 import { ATTACH_ACCOUNT_PAGE_ROUTE } from "pages/attach-account/attach-account.constants";
 import { CREATE_ACCOUNT_PAGE_ROUTE } from "pages/create-account/create-account.constants";
+import { CREATE_SELF_MANAGED_FUND_PAGE_ROUTE } from "pages/create-fund/create-fund.constants";
 import DashboardBlock from "pages/dashboard/components/dashboard-block/dashboard-block";
 import DashboardFundCard from "pages/dashboard/components/dashboard-investing/dashboard-fund-card";
 import DashboardPrivateCard from "pages/dashboard/components/dashboard-trading/dashboard-private-card/dashboard-private-card";
@@ -95,7 +96,7 @@ const _DashboardPrivate: React.FC = () => {
           createButtonToolbar={
             <ToolbarButton
               text={t("buttons.create-self-managed-fund")}
-              route={CREATE_ACCOUNT_PAGE_ROUTE}
+              route={CREATE_SELF_MANAGED_FUND_PAGE_ROUTE}
             />
           }
           getItems={getSelfManagedFunds}
