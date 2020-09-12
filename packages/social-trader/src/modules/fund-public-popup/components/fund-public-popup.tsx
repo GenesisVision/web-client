@@ -1,16 +1,16 @@
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogTop } from "components/dialog/dialog-top";
 import { FundPublicEditFormContainer } from "modules/fund-public-popup/components/fund-public-edit-form/fund-public-edit-form.container";
+import { IFundPublicFormValues } from "modules/fund-public-popup/components/fund-public-edit-form/fund-public.validators";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 
 interface Props {
-  id: string;
-  onApply: VoidFunction;
+  onSubmit: (values: IFundPublicFormValues) => void;
   name: string;
 }
 
-const _FundPublicPopup: React.FC<Props> = ({ id, onApply, name }) => {
+const _FundPublicPopup: React.FC<Props> = ({ onSubmit, name }) => {
   const [t] = useTranslation();
   return (
     <>
@@ -19,7 +19,7 @@ const _FundPublicPopup: React.FC<Props> = ({ id, onApply, name }) => {
         subtitle={name}
       />
       <DialogBottom>
-        <FundPublicEditFormContainer inDialog id={id} onApply={onApply} />
+        <FundPublicEditFormContainer inDialog onSubmit={onSubmit} />
       </DialogBottom>
     </>
   );
