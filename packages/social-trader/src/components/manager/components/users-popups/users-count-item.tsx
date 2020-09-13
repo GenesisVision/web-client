@@ -1,7 +1,6 @@
 import { ManagerStatisticItem } from "components/manager/components/manager-statistic-item";
 import { FollowersDialog } from "components/manager/components/users-popups/followers.dialog";
 import { FollowingDialog } from "components/manager/components/users-popups/following.dialog";
-import { ProfilePublicShort } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
 import React from "react";
 import { useTranslation } from "react-i18next";

@@ -1,13 +1,12 @@
 import { DialogTop } from "components/dialog/dialog-top";
 import { UsersListItem } from "components/manager/components/users-popups/users-list";
+import { UserPopupList } from "components/manager/components/users-popups/users-popups.styles";
 import { UsersListItemType } from "components/manager/components/users-popups/users-popups.types";
 import { PopoverContentCardBlock } from "components/popover/popover-card.block";
 import { ProfilePublicShort } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
 import React, { useCallback } from "react";
 import { OptionalClickable } from "utils/types";
-
-import styles from "./users-popups.module.scss";
 
 export interface ISimpleUserListProps extends OptionalClickable {
   onChange?: VoidFunction;
@@ -45,11 +44,11 @@ const _SimpleUserList: React.FC<Props> = ({
     <>
       <DialogTop title={title} />
       <PopoverContentCardBlock size={null} fixed={false}>
-        <div className={styles["users-list"]}>
+        <UserPopupList>
           {usersList.map(user => (
             <UsersListItem onChange={onChange} onClick={onClick} user={user} />
           ))}
-        </div>
+        </UserPopupList>
       </PopoverContentCardBlock>
     </>
   );
