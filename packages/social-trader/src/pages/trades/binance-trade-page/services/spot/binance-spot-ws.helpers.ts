@@ -90,15 +90,15 @@ export const transformExecutionReport = (m: any): ExecutionReport => ({
   price: m.p,
   executionType: m.x,
   stopPrice: m.P,
-  icebergQuantity: m.F,
+  icebergQty: m.F,
   status: m.X,
   orderStatus: m.X,
   orderRejectReason: m.r,
   orderId: m.i,
   transactionTime: m.T,
   executedQty: m.l,
-  lastTradeQuantity: m.l,
-  totalTradeQuantity: m.z,
+  lastTradeQty: m.l,
+  totalTradeQty: m.z,
   priceLastTrade: m.L,
   commission: m.n,
   commissionAsset: m.N,
@@ -106,7 +106,7 @@ export const transformExecutionReport = (m: any): ExecutionReport => ({
   isOrderWorking: m.w,
   isBuyerMaker: m.m,
   orderCreationTime: m.O,
-  totalQuoteTradeQuantity: m.Z
+  totalQuoteTradeQty: m.Z
 });
 
 export const tickerTransform = (m: TickerWS): Ticker => ({
