@@ -140,7 +140,11 @@ export interface IBinanceKline {
   };
 }
 
-export interface ITerminalMethods {
+export interface IGVTerminalMethods {
+  getFavorites: (id?: string) => Promise<Array<string>>;
+}
+
+export interface ITerminalMethods extends IGVTerminalMethods {
   getMarkPrice?: (options: { symbol: string }) => Observable<MarkPrice>;
   getServerTime: () => Promise<{ serverTime: number }>;
   getBalancesForTransfer?: (options: {

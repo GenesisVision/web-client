@@ -19,21 +19,12 @@ import React, {
   useState
 } from "react";
 import { map } from "rxjs/operators";
-import { api } from "services/api-client/swagger-custom-client";
 import { useSockets } from "services/websocket.service";
 
 type TerminalTickerContextState = {
   getFavorites: VoidFunction;
   items?: MergedTickerSymbolType[];
 };
-
-const getAccountFavorites = async (id?: string) =>
-  id
-    ? await api
-        .terminal()
-        .getTradingPlatformFavoriteSymbols(id)
-        .then(({ items }) => items)
-    : [];
 
 export const TerminalTickerInitialState: TerminalTickerContextState = {
   getFavorites: () => {}
@@ -44,7 +35,7 @@ export const TerminalTickerContext = createContext<TerminalTickerContextState>(
 );
 
 export const TerminalTickerContextProvider: React.FC = ({ children }) => {
-  const { getTickers, marketTicketsSocket } = useContext(
+  const { getTickers, marketTicketsSocket, getFavorites } = useContext(
     TerminalMethodsContext
   );
   const [requestData, setRequestData] = useState<{
@@ -63,12 +54,15 @@ export const TerminalTickerContextProvider: React.FC = ({ children }) => {
 
   const { exchangeAccountId, exchangeInfo } = useContext(TerminalInfoContext);
 
-  const { data: accountFavorites, sendRequest: getFavorites } = useApiRequest({
-    request: () => getAccountFavorites(exchangeAccountId)
+  const {
+    data: accountFavorites,
+    sendRequest: getFavoritesList
+  } = useApiRequest({
+    request: () => getFavorites(exchangeAccountId)
   });
 
   useEffect(() => {
-    getFavorites();
+    getFavoritesList();
   }, [exchangeInfo, exchangeAccountId]);
 
   useEffect(() => {
@@ -132,7 +126,7 @@ export const TerminalTickerContextProvider: React.FC = ({ children }) => {
   const value = useMemo(
     () => ({
       items: Object.values(requestData).length ? items : undefined,
-      getFavorites
+      getFavorites: getFavoritesList
     }),
     [requestData, items]
   );
