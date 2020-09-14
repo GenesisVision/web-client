@@ -14,8 +14,6 @@ import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 
-import styles from "./share.module.scss";
-
 interface Props {
   post: PostType;
   count: number;
@@ -50,10 +48,7 @@ export const _Share: React.FC<Props> = ({
 
   const renderShareButton = useCallback(
     () => (
-      <Container
-        className={styles["share"]}
-        onClick={() => !disable && setIsOpenRePost()}
-      >
+      <Container onClick={() => !disable && setIsOpenRePost()}>
         <Icon size={"small"}>
           <ShareIcon disabled={disable} />
         </Icon>
