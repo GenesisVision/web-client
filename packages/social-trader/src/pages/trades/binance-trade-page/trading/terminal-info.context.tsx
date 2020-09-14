@@ -31,6 +31,7 @@ import { Observable } from "rxjs";
 import { useSockets } from "services/websocket.service";
 
 interface Props {
+  exchangeAccountId?: string;
   exchangeInfo: ExchangeInfo;
   authData?: TerminalAuthDataType;
   outerSymbol?: SymbolState;
@@ -43,6 +44,7 @@ export type SymbolState = {
 };
 
 type TerminalAccountInfoState = {
+  exchangeAccountId?: string;
   stepSize: string;
   tickSize: string;
   authData?: TerminalAuthDataType;
@@ -74,6 +76,7 @@ export const TerminalInfoContext = createContext<TerminalAccountInfoState>(
 );
 
 export const TerminalInfoContextProvider: React.FC<Props> = ({
+  exchangeAccountId,
   exchangeInfo,
   authData,
   outerSymbol: symbol = SymbolInitialState,
@@ -146,6 +149,7 @@ export const TerminalInfoContextProvider: React.FC<Props> = ({
   );
   const value = useMemo(
     () => ({
+      exchangeAccountId,
       tickSize,
       stepSize,
       authData,
@@ -157,6 +161,7 @@ export const TerminalInfoContextProvider: React.FC<Props> = ({
       exchangeInfo
     }),
     [
+      exchangeAccountId,
       tickSize,
       stepSize,
       authData,

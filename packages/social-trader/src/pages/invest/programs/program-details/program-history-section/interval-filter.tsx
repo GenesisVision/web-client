@@ -17,19 +17,19 @@ export interface IIntervalFilterProps {
   filtering: FilteringType;
 }
 
-export const INTERVAL_FILTER_NAME = "interval";
+export const INTERVAL_FILTER_NAME = "timeframe";
 
 export const INTERVAL_FILTER_VALUES = [
   {
-    value: "month",
+    value: "Month",
     labelKey: `program-details-page:history.financial-statistic.interval-filter.values.month`
   },
   {
-    value: "week",
+    value: "Week",
     labelKey: `program-details-page:history.financial-statistic.interval-filter.values.week`
   },
   {
-    value: "day",
+    value: "Day",
     labelKey: `program-details-page:history.financial-statistic.interval-filter.values.day`
   }
 ];

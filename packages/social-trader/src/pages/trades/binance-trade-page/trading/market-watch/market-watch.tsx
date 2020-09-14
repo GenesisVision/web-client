@@ -1,4 +1,5 @@
 import { Button } from "components/button/button";
+import FavoriteIcon from "components/favorite-asset/favorite-icon/favorite-icon";
 import GlobalSearchInput from "components/global-search/components/global-search-result/global-search-input/global-search-input";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
@@ -26,6 +27,14 @@ import styles from "./market-watch.module.scss";
 interface Props {
   items: MergedTickerSymbolType[];
 }
+const Container: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
+  onClick,
+  children
+}) => (
+  <div onClick={onClick} className={styles["market-watch-favorite-button"]}>
+    {children}
+  </div>
+);
 
 const _MarketWatch: React.FC<Props> = ({ items }) => {
   const { terminalType } = useContext(TerminalInfoContext);
@@ -61,54 +70,67 @@ const _MarketWatch: React.FC<Props> = ({ items }) => {
           canClose={false}
         />
       </Row>
-      {terminalType === "spot" && (
-        <Row size={"small"}>
-          {FILTERING_CURRENCIES.map(currency => (
+      <Row size={"small"}>
+        <RowItem>
+          <Container
+            onClick={() => {
+              filteringType === "favorites"
+                ? setFilteringType(initFiltering)
+                : setFilteringType("favorites");
+            }}
+          >
+            <FavoriteIcon selected={filteringType === "favorites"} />
+          </Container>
+        </RowItem>
+        {terminalType === "spot" && (
+          <>
+            {FILTERING_CURRENCIES.map(currency => (
+              <RowItem>
+                <Button
+                  noPadding
+                  disabled={
+                    filteringType === "symbol" && filtering.value === currency
+                  }
+                  variant={"text"}
+                  size={"small"}
+                  onClick={() => {
+                    setFilteringType("symbol");
+                    setFiltering({ value: currency });
+                  }}
+                >
+                  {currency}
+                </Button>
+              </RowItem>
+            ))}
             <RowItem>
               <Button
                 noPadding
-                disabled={
-                  filteringType === "symbol" && filtering.value === currency
-                }
+                disabled={filteringType === "ALTS"}
                 variant={"text"}
                 size={"small"}
                 onClick={() => {
-                  setFilteringType("symbol");
-                  setFiltering({ value: currency });
+                  setFilteringType("ALTS");
                 }}
               >
-                {currency}
+                ALTS
               </Button>
             </RowItem>
-          ))}
-          <RowItem>
-            <Button
-              noPadding
-              disabled={filteringType === "ALTS"}
-              variant={"text"}
-              size={"small"}
-              onClick={() => {
-                setFilteringType("ALTS");
-              }}
-            >
-              ALTS
-            </Button>
-          </RowItem>
-          <RowItem>
-            <Button
-              noPadding
-              disabled={filteringType === "FIATS"}
-              variant={"text"}
-              size={"small"}
-              onClick={() => {
-                setFilteringType("FIATS");
-              }}
-            >
-              FIATS
-            </Button>
-          </RowItem>
-        </Row>
-      )}
+            <RowItem>
+              <Button
+                noPadding
+                disabled={filteringType === "FIATS"}
+                variant={"text"}
+                size={"small"}
+                onClick={() => {
+                  setFilteringType("FIATS");
+                }}
+              >
+                FIATS
+              </Button>
+            </RowItem>
+          </>
+        )}
+      </Row>
       <Row size={"small"}>
         <Select
           fixedWidth={false}
@@ -174,6 +196,7 @@ const _MarketWatch: React.FC<Props> = ({ items }) => {
               .sort(sortMarketWatchItems(sorting))
               .map(
                 ({
+                  isFavorite,
                   eventTime,
                   quoteAsset,
                   baseAsset,
@@ -184,6 +207,7 @@ const _MarketWatch: React.FC<Props> = ({ items }) => {
                   priceChangePercent
                 }) => (
                   <MarketWatchRow
+                    isFavorite={isFavorite}
                     eventTime={eventTime}
                     quoteAsset={quoteAsset}
                     baseAsset={baseAsset}

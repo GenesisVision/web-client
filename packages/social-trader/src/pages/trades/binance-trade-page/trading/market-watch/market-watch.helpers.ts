@@ -9,6 +9,7 @@ import { safeGetElemFromArray } from "utils/helpers";
 import { AnyObjectType } from "utils/types";
 
 export type FilteringVariant =
+  | "favorites"
   | "ALTS"
   | "FIATS"
   | "margin"
@@ -108,6 +109,12 @@ export const filterForSymbol = (value: string) => (
   return item.quoteAsset === value;
 };
 
+export const filterMarketWatchItemsForFavorites = (
+  item: MergedTickerSymbolType
+): boolean => {
+  return !!item.isFavorite;
+};
+
 export const filterMarketWatchItemsForALTS = (
   item: MergedTickerSymbolType
 ): boolean => {
@@ -131,6 +138,8 @@ export const getFilteringFunction = (
   filtering: FilteringType
 ): ((item: MergedTickerSymbolType) => boolean) => {
   switch (filteringType) {
+    case "favorites":
+      return filterMarketWatchItemsForFavorites;
     case "ALTS":
       return filterMarketWatchItemsForALTS;
     case "FIATS":

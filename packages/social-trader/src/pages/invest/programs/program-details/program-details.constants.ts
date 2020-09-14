@@ -253,7 +253,7 @@ export const PROGRAM_ANALYTICS: SortingColumn[] = [
     tooltip: true
   },
   {
-    name: "investors",
+    name: "investors-max",
     tooltip: true
   }
 ];

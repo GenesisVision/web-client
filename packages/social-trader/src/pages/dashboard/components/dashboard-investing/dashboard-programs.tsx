@@ -11,13 +11,13 @@ import { getInvestingPrograms } from "pages/dashboard/services/dashboard.service
 import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
 
-const INIT_SORTING = "value";
+const INIT_SORTING = "ByValueDesc";
 
 const COLUMNS: SortingColumn[] = [
-  { name: "value", sortingName: "value" },
-  { name: "name", sortingName: "name" },
-  { name: "profit", sortingName: "profit" },
-  { name: "period", sortingName: "period" }
+  { name: "name", sortingName: "ByTitle" },
+  { name: "value", sortingName: "ByValue" },
+  { name: "profit", sortingName: "ByProfit" },
+  { name: "period", sortingName: "ByPeriod" }
 ];
 
 const _DashboardInvestingPrograms: React.FC = () => {

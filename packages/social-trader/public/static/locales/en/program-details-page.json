@@ -224,6 +224,7 @@
       "period-length": "Period length",
       "balance": "Program balance",
       "profit": "Profit",
+      "investors-max": "Investors (max)",
       "investors": "Investors",
       "tooltips": {
         "period": "Program period number",

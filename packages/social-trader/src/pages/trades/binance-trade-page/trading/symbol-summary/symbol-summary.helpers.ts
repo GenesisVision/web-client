@@ -16,7 +16,7 @@ export const useSymbolData = () => {
   const [markPrice, setMarkPrice] = useState<MarkPrice | undefined>();
 
   const { markPriceSocket, getMarkPrice } = useContext(TerminalMethodsContext);
-  const items = useContext(TerminalTickerContext);
+  const { items } = useContext(TerminalTickerContext);
   const { symbol, terminalType } = useContext(TerminalInfoContext);
   const textSymbol = getSymbolFromState(symbol);
   const tickerData = items

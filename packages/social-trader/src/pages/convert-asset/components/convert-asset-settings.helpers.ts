@@ -155,7 +155,7 @@ export enum CONVERT_ASSET_FIELDS {
   title = "title",
   description = "description",
   logo = "logo",
-  entryFee = "entryFee",
+  managementFee = "managementFee",
   investmentLimit = "investmentLimit"
 }
 
@@ -225,7 +225,7 @@ const getProgramShapes = ({
   [CONVERT_ASSET_FIELDS.currency]: currencyShape(t),
   [CONVERT_ASSET_FIELDS.periodLength]: periodLengthShape(t),
   [CONVERT_ASSET_FIELDS.stopOutLevel]: stopOutLevelShape(t),
-  [CONVERT_ASSET_FIELDS.entryFee]: entryFeeShape(t, maxManagementFee),
+  [CONVERT_ASSET_FIELDS.managementFee]: entryFeeShape(t, maxManagementFee),
   [CONVERT_ASSET_FIELDS.successFee]: successFeeShape(t, maxSuccessFee),
   [CONVERT_ASSET_FIELDS.investmentLimit]: investmentLimitShape(
     hasInvestmentLimit,
@@ -245,8 +245,7 @@ const getExchangeProgramShapes = ({
   maxSuccessFee: number;
 }) => ({
   [CONVERT_ASSET_FIELDS.currency]: currencyShape(t),
-  [CONVERT_ASSET_FIELDS.stopOutLevel]: stopOutLevelShape(t),
-  [CONVERT_ASSET_FIELDS.entryFee]: entryFeeShape(t, maxManagementFee),
+  [CONVERT_ASSET_FIELDS.managementFee]: entryFeeShape(t, maxManagementFee),
   [CONVERT_ASSET_FIELDS.successFee]: successFeeShape(t, maxSuccessFee),
   [CONVERT_ASSET_FIELDS.investmentLimit]: investmentLimitShape(
     hasInvestmentLimit,

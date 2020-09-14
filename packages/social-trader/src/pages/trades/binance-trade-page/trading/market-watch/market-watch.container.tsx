@@ -3,7 +3,7 @@ import { TerminalTickerContext } from "pages/trades/binance-trade-page/trading/t
 import React, { useContext } from "react";
 
 const _MarketWatchContainer: React.FC = () => {
-  const items = useContext(TerminalTickerContext);
+  const { items } = useContext(TerminalTickerContext);
   return items?.length ? <MarketWatch items={items} /> : null;
 };
 

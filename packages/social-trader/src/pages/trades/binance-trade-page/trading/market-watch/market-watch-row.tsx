@@ -1,15 +1,21 @@
+import { Center } from "components/center/center";
+import { RowItem } from "components/row-item/row-item";
 import { Text } from "components/text/text";
 import { TradeStatefulValue } from "pages/trades/binance-trade-page/trading/components/trade-stateful-value/trade-stateful-value";
+import { MarketWatchFavoriteButton } from "pages/trades/binance-trade-page/trading/market-watch/market-watch-favorite-button";
 import { CHANGE_COLUMN } from "pages/trades/binance-trade-page/trading/market-watch/market-watch.helpers";
 import { TerminalInfoContext } from "pages/trades/binance-trade-page/trading/terminal-info.context";
 import { getTextColor } from "pages/trades/binance-trade-page/trading/terminal.helpers";
 import { TerminalCurrency } from "pages/trades/binance-trade-page/trading/terminal.types";
 import React, { useCallback, useContext } from "react";
+import { useSelector } from "react-redux";
+import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import { formatCurrencyValue } from "utils/formatter";
 
 import styles from "./market-watch.module.scss";
 
 interface Props {
+  isFavorite?: boolean;
   eventTime: number;
   quoteAsset: TerminalCurrency;
   baseAsset: TerminalCurrency;
@@ -23,6 +29,7 @@ interface Props {
 
 export const MarketWatchRow: React.FC<Props> = React.memo(
   ({
+    isFavorite,
     eventTime,
     quoteAsset,
     baseAsset,
@@ -33,7 +40,8 @@ export const MarketWatchRow: React.FC<Props> = React.memo(
     priceChange,
     priceChangePercent
   }) => {
-    const { setSymbol } = useContext(TerminalInfoContext);
+    const isAuthenticated = useSelector(isAuthenticatedSelector);
+    const { exchangeAccountId, setSymbol } = useContext(TerminalInfoContext);
 
     const handleClick = useCallback(() => {
       setSymbol({ quoteAsset, baseAsset });
@@ -46,9 +54,22 @@ export const MarketWatchRow: React.FC<Props> = React.memo(
         onClick={handleClick}
       >
         <td className={styles["market-watch__cell"]}>
-          <Text muted size={"small"}>
-            {symbol}
-          </Text>
+          <Center>
+            {isAuthenticated && exchangeAccountId && (
+              <RowItem size={"xsmall"}>
+                <MarketWatchFavoriteButton
+                  isFavorite={!!isFavorite}
+                  id={exchangeAccountId}
+                  symbol={symbol}
+                />
+              </RowItem>
+            )}
+            <RowItem>
+              <Text muted size={"small"}>
+                {symbol}
+              </Text>
+            </RowItem>
+          </Center>
         </td>
         <td className={styles["market-watch__cell"]}>
           <TradeStatefulValue

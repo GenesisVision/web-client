@@ -15,7 +15,7 @@ interface Props {
 }
 
 const _FundsFRow: React.FC<Props> = ({ asset, available, locked }) => {
-  const ticker = useContext(TerminalTickerContext);
+  const { items: ticker } = useContext(TerminalTickerContext);
   const { tickSize, terminalType } = useContext(TerminalInfoContext);
   const symbol = getSymbol(asset, "BTC");
   // const price = ticker ? getSymbolPrice(ticker, symbol) : 0;
