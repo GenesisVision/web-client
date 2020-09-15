@@ -148,7 +148,7 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
           count={tradesCount}
         />
         <GVTab
-          visible={isExchange && !!periodHistory && isProgram}
+          visible={!!isExchange && !!periodHistory && isProgram}
           value={TABS.ANALYTICS}
           label={t("program-details-page:history.tabs.analytics")}
           count={periodHistoryCount}
