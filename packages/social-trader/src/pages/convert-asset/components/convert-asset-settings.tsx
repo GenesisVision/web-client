@@ -179,18 +179,26 @@ const _ConvertAssetSettings: React.FC<IConvertAssetSettingsProps> = props => {
             <FeesSettings
               title={t("create-account:settings.investment-program-fees")}
               firstFeeLabel={t("asset-settings:fields.management-fee")}
-              firstFeeUnderText={t(
-                "create-account:settings.hints.management-fee"
-              )}
+              firstFeeUnderText={
+                isExchange
+                  ? t(
+                      "create-account:settings.hints.exchange-management-fee-description"
+                    )
+                  : t("create-account:settings.hints.management-fee")
+              }
               firstFeeName={CONVERT_ASSET_FIELDS.managementFee}
               firstFeeDescription={t(
                 "create-account:settings.hints.management-fee-description"
               )}
               secondFeeName={CONVERT_ASSET_FIELDS.successFee}
               secondFeeLabel={t("asset-settings:fields.success-fee")}
-              secondFeeUnderText={t(
-                "create-account:settings.hints.success-fee"
-              )}
+              secondFeeUnderText={
+                isExchange
+                  ? t(
+                      "create-account:settings.hints.exchange-success-fee-description"
+                    )
+                  : t("create-account:settings.hints.success-fee")
+              }
               secondFeeDescription={t(
                 "create-account:settings.hints.success-fee-description"
               )}
