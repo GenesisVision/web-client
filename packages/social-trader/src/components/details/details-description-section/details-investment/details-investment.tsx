@@ -16,6 +16,7 @@ import dynamic from "next/dynamic";
 import {
   EVENT_LOCATION,
   fetchPortfolioEventsCount,
+  fetchProgramReports,
   getEvents
 } from "pages/invest/programs/program-details/service/program-details.service";
 import * as React from "react";
@@ -30,6 +31,11 @@ import {
   InvestmentType
 } from "./details-investment.helpers";
 
+const ReportTable = dynamic(() =>
+  import(
+    "components/details/details-description-section/details-investment/reports/reports-table"
+  )
+);
 const SubscriptionContainer = dynamic(() =>
   import(
     "components/details/details-description-section/details-investment/subscription/subscription.container"
@@ -61,6 +67,7 @@ interface Props {
 }
 
 enum TABS {
+  REPORTS = "REPORTS",
   SUBSCRIPTION = "SUBSCRIPTION",
   INVESTMENT = "INVESTMENT",
   EVENTS = "EVENTS"
@@ -102,6 +109,7 @@ const _DetailsInvestment: React.FC<Props> = ({
   followPersonalDetails
 }) => {
   const isAuthenticated = useSelector(isAuthenticatedSelector);
+
   const { data: eventsCount = 0 } = useApiRequest({
     request: () =>
       fetchPortfolioEventsCount(EVENT_LOCATION.Asset, {
@@ -109,6 +117,14 @@ const _DetailsInvestment: React.FC<Props> = ({
       }),
     fetchOnMount: isAuthenticated
   });
+
+  const { data: reportsCount = 0 } = useApiRequest({
+    request: () =>
+      fetchProgramReports(id, { take: 0 }).then(({ total }) => total),
+    fetchOnMount:
+      !isOwnAsset && isAuthenticated && asset === ASSET.PROGRAM && isExchange
+  });
+
   const subscriptionsCount = followPersonalDetails
     ? followPersonalDetails.subscribedAccounts
     : 0;
@@ -169,6 +185,11 @@ const _DetailsInvestment: React.FC<Props> = ({
           value={TABS.EVENTS}
           label={t("asset-details:investment.tabs.events")}
         />
+        <GVTab
+          visible={reportsCount > 0}
+          value={TABS.REPORTS}
+          label={t("asset-details:investment.tabs.reports")}
+        />
       </DetailsBlockTabs>
       {tab === TABS.SUBSCRIPTION && showSubscription && (
         <SubscriptionContainer
@@ -205,6 +226,7 @@ const _DetailsInvestment: React.FC<Props> = ({
           dateRangeStartLabel={t("filters.date-range.program-start")}
         />
       )}
+      {tab === TABS.REPORTS && <ReportTable id={id} currency={currency} />}
     </DefaultTableBlock>
   );
 };
