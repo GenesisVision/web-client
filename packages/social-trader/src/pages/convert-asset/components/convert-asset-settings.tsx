@@ -130,11 +130,16 @@ const _ConvertAssetSettings: React.FC<IConvertAssetSettingsProps> = props => {
           <Row onlyOffset size={"large"}>
             {isExchange && (
               <Row>
-                <Processing
-                  realtimeValue={isProcessingRealTime}
-                  checkboxName={CONVERT_ASSET_FIELDS.isProcessingRealTime}
-                  selectName={CONVERT_ASSET_FIELDS.hourProcessing}
-                />
+                <Row>
+                  <h4>{t("asset-settings:fields.processing")}</h4>
+                </Row>
+                <Row size={"small"}>
+                  <Processing
+                    realtimeValue={isProcessingRealTime}
+                    checkboxName={CONVERT_ASSET_FIELDS.isProcessingRealTime}
+                    selectName={CONVERT_ASSET_FIELDS.hourProcessing}
+                  />
+                </Row>
               </Row>
             )}
             <Row>

@@ -42,6 +42,7 @@ const getMethod = (asset: CloseableAssetType) => {
       return closeTradingAccount;
     case CLOSEABLE_ASSET.FUND:
       return closeFund;
+    case CLOSEABLE_ASSET.EXCHANGE_PROGRAM:
     case CLOSEABLE_ASSET.PROGRAM:
     case "SignalProgram":
     case "Program":
