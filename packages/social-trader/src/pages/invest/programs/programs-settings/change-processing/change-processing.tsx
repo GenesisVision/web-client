@@ -18,12 +18,14 @@ interface IChangeProcessingFormFields {
 }
 
 export interface IChangeProcessingProps {
+  hourProcessing?: number;
   editError?: boolean;
   isProcessingRealTimeCurrent?: boolean;
   onSubmit: (data: IChangeProcessingFormFields) => void;
 }
 
 const _ChangeProcessing: React.FC<IChangeProcessingProps> = ({
+  hourProcessing = 0,
   editError,
   onSubmit,
   isProcessingRealTimeCurrent
@@ -31,7 +33,7 @@ const _ChangeProcessing: React.FC<IChangeProcessingProps> = ({
   const [t] = useTranslation();
   const form = useForm<IChangeProcessingFormFields>({
     defaultValues: {
-      [FIELDS.hourProcessing]: 0,
+      [FIELDS.hourProcessing]: hourProcessing,
       [FIELDS.isProcessingRealTime]: isProcessingRealTimeCurrent
     },
     mode: "onChange"

@@ -115,6 +115,9 @@ const _ProgramSettings: React.FC<Props> = ({
           />
           {isExchange && (
             <ChangeProcessing
+              hourProcessing={
+                programDetails?.dailyPeriodDetails?.hourProcessing
+              }
               editError={editError}
               isProcessingRealTimeCurrent={
                 programDetails?.dailyPeriodDetails?.isProcessingRealTime
