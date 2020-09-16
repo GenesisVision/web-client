@@ -51,6 +51,8 @@ const _ProgramsEditPage: React.FC = () => {
 
 export type TUpdateProgramFunc = (
   values: {
+    isProcessingRealTime?: boolean;
+    hourProcessing?: number;
     tradesDelay?: TradesDelay;
     description?: string;
     logo?: IImageValue;

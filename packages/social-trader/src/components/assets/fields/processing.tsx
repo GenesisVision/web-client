@@ -1,8 +1,12 @@
+import styles from "components/assets/asset-fields/asset-form-field.module.scss";
 import GVCheckbox from "components/gv-checkbox/gv-checkbox";
 import { GVHookFormField } from "components/gv-hook-form-field";
+import Hint from "components/hint/hint";
+import { VERTICAL_POPOVER_POS } from "components/popover/popover";
 import { Row } from "components/row/row";
 import Select from "components/select/select";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
+import { Text } from "components/text/text";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -14,6 +18,7 @@ type HourType = {
 };
 
 interface Props {
+  wide?: boolean;
   realtimeValue?: boolean;
   checkboxName: string;
   selectName: string;
@@ -29,6 +34,7 @@ const HOURS: HourType[] = Array(24)
   }));
 
 const _Processing: React.FC<Props> = ({
+  wide,
   realtimeValue,
   selectName,
   checkboxName
@@ -48,10 +54,10 @@ const _Processing: React.FC<Props> = ({
       </Row>
       <Row hide={realtimeValue}>
         <GVHookFormField
-          wide
+          wide={wide}
           name={selectName}
           component={SimpleTextField}
-          label={t("asset-settings:fields.processing")}
+          label={t("asset-settings:fields.time")}
           InputComponent={Select}
         >
           {HOURS.map(({ hour, label }: HourType) => (
@@ -60,6 +66,16 @@ const _Processing: React.FC<Props> = ({
             </option>
           ))}
         </GVHookFormField>
+      </Row>
+      <Row>
+        <Text muted size={"small"}>
+          <Hint
+            content={t("asset-settings:hints.processing-label")}
+            className={styles["asset-form-field__hint"]}
+            vertical={VERTICAL_POPOVER_POS.BOTTOM}
+            tooltipContent={t("asset-settings:hints.processing-text")}
+          />
+        </Text>
       </Row>
     </AssetField>
   );

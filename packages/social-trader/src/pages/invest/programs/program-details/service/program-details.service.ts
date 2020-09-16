@@ -50,6 +50,15 @@ type ClosePositionMethodType = (
   }
 ) => Promise<any>;
 
+export const fetchProgramReports = (
+  id: string,
+  filters?: ComposeFiltersAllType
+) =>
+  api
+    .programs()
+    .getProgramPeriods(id, { ...filters, showInvestorReport: true })
+    .then(({ periods, total }) => ({ items: periods, total }));
+
 export const fetchLevelParameters = (currency: CurrencyEnum) =>
   api.platform().getProgramLevelsParams({ currency });
 

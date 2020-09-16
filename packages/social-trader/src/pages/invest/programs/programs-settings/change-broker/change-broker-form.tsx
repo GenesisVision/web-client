@@ -23,7 +23,18 @@ import { HookForm } from "utils/hook-form.helpers";
 
 import ConfirmChangeBroker from "./confirm-change-broker";
 
+export interface Props {
+  isExchange?: boolean;
+  errorMessage?: string;
+  data: BrokersProgramInfo;
+  isSignalProgram: boolean;
+  onSubmit: (values: ChangeBrokerFormValues) => void;
+  id: string;
+  currentLeverage: number;
+}
+
 const _ChangeBrokerForm: React.FC<Props> = ({
+  isExchange,
   errorMessage,
   isSignalProgram,
   currentLeverage,
@@ -169,9 +180,13 @@ const _ChangeBrokerForm: React.FC<Props> = ({
         to={selectedBroker.name}
         isSignalProgram={isSignalProgram}
       />
-      <Row>
-        <FormTextField>{t("asset-settings:broker.text-change")}</FormTextField>
-      </Row>
+      {!isExchange && (
+        <Row>
+          <FormTextField>
+            {t("asset-settings:broker.text-change")}
+          </FormTextField>
+        </Row>
+      )}
       <Row size={"large"}>
         <Button
           onClick={setChangeBrokerOpen}
@@ -205,15 +220,6 @@ const _ChangeBrokerForm: React.FC<Props> = ({
     </HookForm>
   );
 };
-
-export interface Props {
-  errorMessage?: string;
-  data: BrokersProgramInfo;
-  isSignalProgram: boolean;
-  onSubmit: (values: ChangeBrokerFormValues) => void;
-  id: string;
-  currentLeverage: number;
-}
 
 const ChangeBrokerForm = withBlurLoader(React.memo(_ChangeBrokerForm));
 export default ChangeBrokerForm;

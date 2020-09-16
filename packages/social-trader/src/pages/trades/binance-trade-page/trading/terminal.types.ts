@@ -140,7 +140,11 @@ export interface IBinanceKline {
   };
 }
 
-export interface ITerminalMethods {
+export interface IGVTerminalMethods {
+  getFavorites: (id?: string) => Promise<Array<string>>;
+}
+
+export interface ITerminalMethods extends IGVTerminalMethods {
   getMarkPrice?: (options: { symbol: string }) => Observable<MarkPrice>;
   getServerTime: () => Promise<{ serverTime: number }>;
   getBalancesForTransfer?: (options: {
@@ -1154,7 +1158,7 @@ export interface ExecutionReport extends Message {
   price: string;
   executionType: ExecutionType;
   stopPrice: string;
-  icebergQuantity: string;
+  icebergQty: string;
   status?: OrderStatus;
   orderStatus: OrderStatus;
   orderRejectReason: string;
@@ -1162,15 +1166,15 @@ export interface ExecutionReport extends Message {
   transactionTime: number;
   orderCreationTime: number;
   executedQty: string;
-  lastTradeQuantity: string;
-  totalTradeQuantity: string;
+  lastTradeQty: string;
+  totalTradeQty: string;
   priceLastTrade: string;
   commission: string;
   commissionAsset: string;
   tradeId: number;
   isOrderWorking: boolean;
   isBuyerMaker: boolean;
-  totalQuoteTradeQuantity: string;
+  totalQuoteTradeQty: string;
 }
 
 export interface TradeResult {

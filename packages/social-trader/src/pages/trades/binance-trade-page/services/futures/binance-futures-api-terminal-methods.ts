@@ -1,3 +1,4 @@
+import { GVTerminalMethods } from "pages/trades/binance-trade-page/services/gv/gv-api-terminal-methods";
 import { ITerminalMethods } from "pages/trades/binance-trade-page/trading/terminal.types";
 
 import {
@@ -34,6 +35,7 @@ import {
 } from "./binance-futures-ws.service";
 
 export const BinanceFuturesTerminalMethods: ITerminalMethods = {
+  ...GVTerminalMethods,
   markPriceSocket,
   getMarkPrice,
   getServerTime,

@@ -1,4 +1,12 @@
 {
+  "reports": {
+    "dateFrom": "Date start",
+    "periodLength": "Period length",
+    "balance": "Balance",
+    "profit": "Profit",
+    "fees": "Commissions",
+    "deposit-withdraw": "Deposit/Withdraw"
+  },
   "copytrading-tables": {
     "title": "Trades",
     "open-trades": "Open trades",

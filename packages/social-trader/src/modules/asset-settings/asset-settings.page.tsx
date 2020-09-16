@@ -9,6 +9,18 @@ import { useTranslation } from "react-i18next";
 import { AssetDescriptionType, TUpdateAssetFunc } from "./asset-settings.types";
 import { editAsset } from "./services/asset-settings.service";
 
+interface Props {
+  redirectToAsset: (id: string) => void;
+  asset: CLOSEABLE_ASSET;
+  description: AssetDescriptionType;
+  dispatchDescription: () => void;
+  settingsBlocks: (
+    editAsset: TUpdateProgramFunc,
+    closeAsset: () => void,
+    errorMessage?: string
+  ) => JSX.Element;
+}
+
 const _AssetsEditPage: React.FC<Props> = ({
   dispatchDescription,
   asset,
@@ -32,9 +44,11 @@ const _AssetsEditPage: React.FC<Props> = ({
         values.investmentLimit !== undefined
           ? values.investmentLimit
           : description.programDetails?.availableInvestmentLimit;
-      const logo =
-        values.logo?.image?.cropped !== undefined ? values.logo : undefined;
       const currentValues = {
+        hourProcessing:
+          description?.programDetails?.dailyPeriodDetails?.hourProcessing,
+        isProcessingRealTime:
+          description?.programDetails?.dailyPeriodDetails?.isProcessingRealTime,
         logo: { src: description.publicInfo.logo },
         tradesDelay: description.tradesDelay,
         exitFee: description.exitFeeSelected, //exitFee
@@ -66,18 +80,6 @@ const _AssetsEditPage: React.FC<Props> = ({
     </Page>
   );
 };
-
-interface Props {
-  redirectToAsset: (id: string) => void;
-  asset: CLOSEABLE_ASSET;
-  description: AssetDescriptionType;
-  dispatchDescription: () => void;
-  settingsBlocks: (
-    editAsset: TUpdateProgramFunc,
-    closeAsset: () => void,
-    errorMessage?: string
-  ) => JSX.Element;
-}
 
 const AssetSettingsPage = React.memo(Crashable(_AssetsEditPage));
 export default AssetSettingsPage;

@@ -9,6 +9,27 @@ import { useTranslation } from "react-i18next";
 import styles from "../asset-settings.module.scss";
 import ConfirmCloseAssetContainer from "./confirm-close-asset-container";
 
+interface Props {
+  isExchange?: boolean;
+  asset: CloseableAssetType;
+  canClose: boolean;
+  onApply: () => void;
+  id: string;
+}
+
+export enum CLOSEABLE_ASSET {
+  FOLLOW = "Follow",
+  EXCHANGE_PROGRAM = "Exchange-program",
+  PROGRAM = "Program",
+  FUND = "Fund",
+  TRADING_ACCOUNT = "Trading-account"
+}
+
+export type CloseableAssetType =
+  | CLOSEABLE_ASSET
+  | PrivateTradingAccountType
+  | AssetTypeExt;
+
 const _CloseAsset: React.FC<Props> = ({ asset, id, onApply, canClose }) => {
   const [t] = useTranslation();
   const [isCloseAssetOpen, setCloseAssetOpen, setCloseAssetClose] = useIsOpen();
@@ -38,25 +59,6 @@ const _CloseAsset: React.FC<Props> = ({ asset, id, onApply, canClose }) => {
     </>
   );
 };
-
-interface Props {
-  asset: CloseableAssetType;
-  canClose: boolean;
-  onApply: () => void;
-  id: string;
-}
-
-export enum CLOSEABLE_ASSET {
-  FOLLOW = "Follow",
-  PROGRAM = "Program",
-  FUND = "Fund",
-  TRADING_ACCOUNT = "Trading-account"
-}
-
-export type CloseableAssetType =
-  | CLOSEABLE_ASSET
-  | PrivateTradingAccountType
-  | AssetTypeExt;
 
 const CloseAsset = React.memo(_CloseAsset);
 export default CloseAsset;
