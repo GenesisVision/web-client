@@ -27,9 +27,15 @@ const StyledButton = styled.button<IButtonProps>`
 `;
 
 const _Button: React.FC<IButtonProps> = props => {
-  const { isSuccessful, successSymbol = true, children, testId } = props;
+  const {
+    type = "button",
+    isSuccessful,
+    successSymbol = true,
+    children,
+    testId
+  } = props;
   return (
-    <StyledButton data-test-id={testId} {...props}>
+    <StyledButton data-test-id={testId} {...props} type={type}>
       <Label isSuccessful={isSuccessful}>{children}</Label>
       {successSymbol && (
         <SuccessMark isSuccessful={isSuccessful}>✔</SuccessMark>
