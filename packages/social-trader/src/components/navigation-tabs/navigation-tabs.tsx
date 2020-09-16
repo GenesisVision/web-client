@@ -33,7 +33,7 @@ const _NavigationTabs: React.FC<Props> = ({
           value={exploreTabName}
           label={
             <Link
-              white
+              noColor
               to={linkCreator(
                 replaceParams(tabRoute, {
                   ":tab": exploreTabName
@@ -48,7 +48,7 @@ const _NavigationTabs: React.FC<Props> = ({
           value={favoritesTabName}
           label={
             <Link
-              white
+              noColor
               to={linkCreator(
                 replaceParams(tabRoute, {
                   ":tab": favoritesTabName
