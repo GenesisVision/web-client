@@ -22,9 +22,20 @@ import { NOTIFICATIONS_ROUTE } from "../notifications.routes";
 import styles from "./notifications.module.scss";
 import { SettingsIcon } from "./settings-icon/settings-icon";
 
+interface Props {
+  isPending: boolean;
+  getNotifications: VoidFunction;
+  closeNotifications: VoidFunction;
+  count: number;
+  total: number;
+  notifications?: NotificationViewModel[];
+}
+
+const initNotifications: NotificationViewModel[] = [];
+
 const _Notifications: React.FC<Props> = ({
   isPending,
-  notifications = [],
+  notifications = initNotifications,
   total = 0,
   count,
   getNotifications,
@@ -101,12 +112,3 @@ const _Notifications: React.FC<Props> = ({
 
 const Notifications = React.memo(_Notifications);
 export default Notifications;
-
-interface Props {
-  isPending: boolean;
-  getNotifications: VoidFunction;
-  closeNotifications: VoidFunction;
-  count: number;
-  total: number;
-  notifications?: NotificationViewModel[];
-}
