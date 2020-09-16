@@ -1,8 +1,11 @@
+import { DescriptionControlIcon } from "components/details/details-description-section/details-description/controls/description-control-icon";
+import { DetailsDescriptionControlButton } from "components/details/details-description-section/details-description/controls/details-description-control";
 import { mediaBreakpointTablet } from "components/gv-styles/gv-media";
 import {
   $paddingXsmall,
   $paddingXsmallMobile
 } from "components/gv-styles/gv-sizes";
+import { SettingsIcon } from "components/icon/settings-icon";
 import { ToType } from "components/link/link";
 import { Row } from "components/row/row";
 import { ASSET } from "constants/constants";
@@ -78,10 +81,13 @@ const _DetailsSettingsButtons: React.FC<Props> = ({
       )}
       {systemUrl && (
         <SettingsItem>
-          <DetailsSettingControl
-            to={{ pathname: systemUrl }}
-            text={"Admin panel"}
-          />
+          <a href={systemUrl}>
+            <DetailsDescriptionControlButton text={"Admin panel"}>
+              <DescriptionControlIcon>
+                <SettingsIcon />
+              </DescriptionControlIcon>
+            </DetailsDescriptionControlButton>
+          </a>
         </SettingsItem>
       )}
     </SettingsContainer>
