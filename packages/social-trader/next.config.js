@@ -28,13 +28,6 @@ function create(path) {
       apiUrl: process.env.REACT_APP_API_URL
     },
     webpack(config) {
-      config.devtool = false;
-      for (const r of config.module.rules) {
-        if (r.loader === "babel-loader") {
-          r.options.sourceMaps = false;
-        }
-      }
-
       config.resolve.alias = {
         ...config.resolve.alias,
         "lodash.throttle": "lodash/throttle",
