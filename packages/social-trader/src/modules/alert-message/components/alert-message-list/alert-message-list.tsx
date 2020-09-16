@@ -20,7 +20,7 @@ const List = styled.div`
   position: fixed;
   top: 0;
   right: 0;
-  padding: ${$paddingSmall / 2};
+  padding: ${$paddingSmall / 2}px;
   z-index: 9999;
   pointer-events: none;
 
