@@ -23,6 +23,21 @@ const Control = styled(Row)`
   justify-content: flex-end;
 `;
 
+export const DetailsDescriptionControlButton: React.FC<{
+  text?: string;
+}> = ({ children, text }) => {
+  return (
+    <Control>
+      <TextRowItem>
+        <Text color={"white"} weight={"bold"} wrap={false}>
+          {text}
+        </Text>
+      </TextRowItem>
+      {children}
+    </Control>
+  );
+};
+
 const DetailsDescriptionControl: React.FC<IDetailsDescriptionControlProps> = ({
   children,
   text,
@@ -32,14 +47,9 @@ const DetailsDescriptionControl: React.FC<IDetailsDescriptionControlProps> = ({
 }) => {
   return (
     <Link white onClick={onClick} to={to}>
-      <Control>
-        <TextRowItem>
-          <Text color={"white"} weight={"bold"} wrap={false}>
-            {text}
-          </Text>
-        </TextRowItem>
+      <DetailsDescriptionControlButton text={text}>
         {children}
-      </Control>
+      </DetailsDescriptionControlButton>
     </Link>
   );
 };
