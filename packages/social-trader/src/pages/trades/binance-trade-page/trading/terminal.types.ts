@@ -142,6 +142,8 @@ export interface IBinanceKline {
 
 export interface IGVTerminalMethods {
   getFavorites: (id?: string) => Promise<Array<string>>;
+  getGVOpenOrders: (id: string) => Observable<ExecutionReport[]>;
+  getGVHistory: (id: string) => Observable<ExecutionReport[]>;
 }
 
 export interface ITerminalMethods extends IGVTerminalMethods {
