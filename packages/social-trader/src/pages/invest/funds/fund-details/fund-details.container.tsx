@@ -1,8 +1,6 @@
 import DetailsDescriptionSection from "components/details/details-description-section/details-description/details-description-section";
 import DetailsInvestment from "components/details/details-description-section/details-investment/details-investment";
 import { DetailsDivider } from "components/details/details-divider.block";
-import { DETAILS_TYPE } from "components/details/details.types";
-import { FUND_ASSET_TYPE } from "components/fund-asset/fund-asset";
 import FundAssetContainer from "components/fund-asset/fund-asset-container";
 import Page from "components/page/page";
 import { Row } from "components/row/row";
@@ -14,7 +12,6 @@ import React, { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import {
-  composeFundBannerUrl,
   createFundNotificationsToUrl,
   createFundSettingsToUrl
 } from "utils/compose-url";
@@ -89,7 +86,7 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
         </h4>
         <Row>
           <FundAssetContainer
-            type={FUND_ASSET_TYPE.LARGE}
+            type={"large"}
             assets={description.assetsStructure}
             size={7}
           />
@@ -132,7 +129,6 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
       previewImage={banner}
     >
       <DetailsDescriptionSection
-        detailsType={DETAILS_TYPE.ASSET}
         personalDetails={description.personalDetails}
         isOwnAsset={description.publicInfo.isOwnAsset}
         id={description.id}

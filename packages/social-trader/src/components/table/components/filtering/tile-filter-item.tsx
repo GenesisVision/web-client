@@ -1,9 +1,39 @@
+import { $panelBackgroundColor } from "components/gv-styles/gv-colors/gv-colors";
+import { $closeButtonSize } from "components/gv-styles/gv-sizes";
 import { CloseIcon } from "components/icon/close-icon";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import * as React from "react";
+import styled from "styled-components";
 
-import styles from "./tile-filter-item.module.scss";
+const Item = styled(Row)`
+  position: relative;
+`;
+
+const IconContainer = styled.div`
+  height: 6px;
+  width: 6px;
+`;
+
+const RemoveButton = styled.div`
+  padding: ${$closeButtonSize / 4}px;
+  cursor: pointer;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: ${$closeButtonSize}px;
+  height: ${$closeButtonSize}px;
+  background-color: #293842;
+  border: 2px solid ${$panelBackgroundColor};
+  border-radius: 50%;
+  top: -${$closeButtonSize / 2}px;
+  right: -${$closeButtonSize / 2}px;
+  &:hover {
+    background-color: #161b20;
+  }
+`;
 
 const _TileFilterItem: React.FC<ITileFilterItemProps> = ({
   bottomOffset = true,
@@ -15,19 +45,16 @@ const _TileFilterItem: React.FC<ITileFilterItemProps> = ({
 }) => {
   return (
     <RowItem bottomOffset={bottomOffset}>
-      <Row className={styles["tile-filter-item"]}>
+      <Item>
         {children}
         {!mandatory && removable && (
-          <div
-            className={styles["tile-filter-item__button-remove"]}
-            onClick={() => removeTile!(id)}
-          >
-            <div className={styles["tile-filter-item__icon"]}>
+          <RemoveButton onClick={() => removeTile!(id)}>
+            <IconContainer>
               <CloseIcon />
-            </div>
-          </div>
+            </IconContainer>
+          </RemoveButton>
         )}
-      </Row>
+      </Item>
     </RowItem>
   );
 };

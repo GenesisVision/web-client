@@ -1,5 +1,9 @@
-import clsx from "clsx";
 import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
+import { $panelBackgroundColor } from "components/gv-styles/gv-colors/gv-colors";
+import {
+  $fontSizeParagraph,
+  $paddingXsmall
+} from "components/gv-styles/gv-sizes";
 import { LogoutIcon } from "components/icon/logout-icon";
 import NavigationItem from "components/navigation/navigation-item";
 import { ProfileHeaderViewModel } from "gv-api-web";
@@ -7,9 +11,39 @@ import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { LOGIN_ROUTE } from "routes/app.routes";
 import { TMenuItem } from "routes/menu";
+import styled from "styled-components";
 
 import { MenuNavigationItem } from "../menu-navigation-item";
-import styles from "../navigation.module.scss";
+
+const NavigationMobileContainer = styled.div`
+  box-sizing: border-box;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+`;
+const MobileHeader = styled.div`
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  padding: ${$paddingXsmall}px;
+  align-items: center;
+  background-color: ${$panelBackgroundColor};
+`;
+const MobileEmail = styled.div`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: 0.4px;
+  font-size: ${$fontSizeParagraph}px;
+`;
+const MobileTop = styled.div`
+  padding: 10px 0;
+`;
+const AvatarContainer = styled.div`
+  flex-shrink: 0;
+  margin-right: 15px;
+`;
 
 const _NavigationMobile: React.FC<Props> = ({
   onClose,
@@ -21,18 +55,19 @@ const _NavigationMobile: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   return (
-    <div className={clsx(styles["navigation__mobile"], styles["mobile"])}>
+    <NavigationMobileContainer>
       {isAuthenticated && profileHeader && (
-        <div className={styles["mobile__header"]}>
-          <ProfileAvatar
-            url={profileHeader.logoUrl}
-            alt={profileHeader.email}
-            className={styles["mobile__avatar"]}
-          />
-          <div className={styles["mobile__email"]}>{profileHeader.email}</div>
-        </div>
+        <MobileHeader>
+          <AvatarContainer>
+            <ProfileAvatar
+              url={profileHeader.logoUrl}
+              alt={profileHeader.email}
+            />
+          </AvatarContainer>
+          <MobileEmail>{profileHeader.email}</MobileEmail>
+        </MobileHeader>
       )}
-      <div className={styles["mobile__top"]} onClick={onClose}>
+      <MobileTop onClick={onClose}>
         {mobileMenuItems.map(item => (
           <MenuNavigationItem item={item} key={item.label} />
         ))}
@@ -51,8 +86,8 @@ const _NavigationMobile: React.FC<Props> = ({
             {t("navigation.login")}
           </NavigationItem>
         )}
-      </div>
-    </div>
+      </MobileTop>
+    </NavigationMobileContainer>
   );
 };
 

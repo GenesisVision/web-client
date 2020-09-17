@@ -1,22 +1,30 @@
 import { DetailsInfo } from "components/details/details-description-section/details-description/details-info.block";
 import { DetailsSettingsButtons } from "components/details/details-description-section/details-description/details-settings-buttons.block";
-import {
-  DETAILS_TYPE,
-  PersonalDetailsType
-} from "components/details/details.types";
+import { PersonalDetailsType } from "components/details/details.types";
+import { mediaBreakpointTablet } from "components/gv-styles/gv-media";
 import { ToType } from "components/link/link";
 import { ASSET } from "constants/constants";
 import { ProgramDetailsFull, SocialLinkViewModel } from "gv-api-web";
 import * as React from "react";
 import { managerToPathCreator } from "routes/manager.routes";
+import styled from "styled-components";
 import { CurrencyEnum } from "utils/types";
 
-import styles from "./details-description.module.scss";
 import { DetailsLimitsAvatar } from "./details-limits-avatar.block";
 
+const Container = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  ${mediaBreakpointTablet(`
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+  `)}
+`;
+
 interface Props {
+  className?: string;
   descriptionTitle?: string;
-  detailsType: DETAILS_TYPE;
   personalDetails?: PersonalDetailsType;
   isOwnAsset?: boolean;
   id: string;
@@ -37,8 +45,8 @@ interface Props {
 }
 
 const _DetailsDescription: React.FC<Props> = ({
+  className,
   descriptionTitle,
-  detailsType,
   personalDetails,
   isOwnAsset,
   id,
@@ -58,9 +66,8 @@ const _DetailsDescription: React.FC<Props> = ({
   settingsUrl
 }) => {
   return (
-    <div className={styles["details-description__main"]}>
+    <Container>
       <DetailsLimitsAvatar
-        detailsType={detailsType}
         logo={logo}
         level={programDetails ? programDetails.level : undefined}
         levelProgress={
@@ -96,7 +103,7 @@ const _DetailsDescription: React.FC<Props> = ({
           settingsUrl={settingsUrl}
         />
       )}
-    </div>
+    </Container>
   );
 };
 

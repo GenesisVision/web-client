@@ -6,6 +6,8 @@ import CookieMessage from "pages/landing-page/components/cookie-message/cookie-m
 import LPFooter from "pages/landing-page/components/lp-footer/lp-footer";
 import LPHeader from "pages/landing-page/components/lp-header/lp-header";
 import React from "react";
+import { createGlobalStyle } from "styled-components";
+import { LandingPageRootStyle } from "styles/root-styles";
 import {
   commonMeta,
   descriptionMeta,
@@ -14,6 +16,10 @@ import {
   schema,
   titleMeta
 } from "utils/seo";
+
+const GlobalStyle = createGlobalStyle`
+  ${LandingPageRootStyle}
+`;
 
 const _Layout: React.FC<Props> = ({
   cookieAccept,
@@ -35,6 +41,7 @@ const _Layout: React.FC<Props> = ({
         {titleMeta(t("landing-page:genesis-vision"))}
         {descriptionMeta(description || t("landing-page:short-description"))}
       </Head>
+      <GlobalStyle />
       <TitleContext.Provider value={title}>
         <LPHeader />
         {children}

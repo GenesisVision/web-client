@@ -1,17 +1,20 @@
 import { Text } from "components/text/text";
 import React from "react";
+import styled from "styled-components";
 
-import styles from "./details-investment-block.module.scss";
+const Container = styled.div`
+  text-transform: uppercase;
+`;
 
 const _DetailsInvestmentHeading: React.FC<React.HTMLAttributes<
   HTMLDivElement
 >> = ({ children }) => {
   return (
-    <div className={styles["details-investment-heading"]}>
+    <Container>
       <Text muted>
         <h5>{children}</h5>
       </Text>
-    </div>
+    </Container>
   );
 };
 

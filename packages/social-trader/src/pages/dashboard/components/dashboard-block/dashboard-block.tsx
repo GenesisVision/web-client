@@ -28,7 +28,11 @@ const DashboardBlock: React.FC<Props> = ({
             {label && <h3>{label}</h3>}
             {all && (
               <div className={styles["dashboard-block__see-all"]}>
-                <Link className={styles["dashboard-block__link"]} to={all}>
+                <Link
+                  noColor
+                  className={styles["dashboard-block__link"]}
+                  to={all}
+                >
                   &rsaquo;
                 </Link>
               </div>

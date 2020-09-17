@@ -30,7 +30,7 @@ const _Limits: React.FC<ILimitsProps> = ({ investmentsLimits, currency }) => {
       {investmentsLimits.map(levelInfo => (
         <Row key={levelInfo.level}>
           <RowItem>
-            <LevelIcon levelInfo={levelInfo} />
+            <LevelIcon level={levelInfo.level} />
           </RowItem>
           <LabeledValue label={t("about-levels-page:titles.limit")}>
             <Text weight={"bold"}>

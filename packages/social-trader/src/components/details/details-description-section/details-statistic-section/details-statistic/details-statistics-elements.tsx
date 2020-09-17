@@ -1,18 +1,23 @@
-import clsx from "clsx";
 import {
   ChartPeriodType,
   TChartPeriod
 } from "components/chart/chart-period/chart-period.helpers";
-import styles from "components/details/details-description-section/details-statistic-section/details-statistic/details-statistics.module.scss";
 import { Row } from "components/row/row";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
+import styled from "styled-components";
 
 interface Props {
   Current: React.ComponentType;
   Particular: React.ComponentType;
   periodType: TChartPeriod;
 }
+
+const ParticularInformation = styled(Row)`
+  justify-content: space-between;
+  align-items: flex-start;
+  align-content: stretch;
+`;
 
 const _DetailsStatisticsElements: React.FC<Props> = ({
   Current,
@@ -24,27 +29,18 @@ const _DetailsStatisticsElements: React.FC<Props> = ({
     <>
       <Row onlyOffset>
         <h5>{t("asset-details:statistics.current")}</h5>
-        <Row
-          wrap
-          className={clsx(
-            styles["details-statistics__particular-information"],
-            styles["details-statistics__particular-information--current"]
-          )}
-        >
+        <ParticularInformation wrap>
           <Current />
-        </Row>
+        </ParticularInformation>
       </Row>
       <Row size={"large"} onlyOffset>
         <h5>
           {t("asset-details:statistics.for")}{" "}
           {t(`asset-details:chart-period.${ChartPeriodType[periodType]}`)}
         </h5>
-        <Row
-          wrap
-          className={styles["details-statistics__particular-information"]}
-        >
+        <ParticularInformation wrap>
           <Particular />
-        </Row>
+        </ParticularInformation>
       </Row>
     </>
   );

@@ -12,14 +12,35 @@ import * as React from "react";
 import { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import styled from "styled-components";
 import { HookForm, postponeCallback } from "utils/hook-form.helpers";
+import { transition } from "utils/style/style-mixins";
 import { object, string } from "yup";
-
-import styles from "./social-link.module.scss";
 
 enum FORM_FIELD {
   value = "value"
 }
+
+interface Props {
+  errorMessage?: string;
+  socialLink: SocialLinkViewModel;
+  onSubmit: TOnEditLinkSubmitFunc;
+}
+
+interface ISignalLinkFormValues {
+  [FORM_FIELD.value]: string;
+}
+
+const Container = styled(Row)`
+  align-items: flex-start;
+  ${transition("height")};
+  height: auto;
+`;
+
+const InputWrapper = styled.div`
+  min-width: 150px;
+  width: 100%;
+`;
 
 const _SocialLinkForm: React.FC<Props> = ({
   errorMessage,
@@ -59,13 +80,13 @@ const _SocialLinkForm: React.FC<Props> = ({
   );
 
   return (
-    <Row className={styles["social-link"]}>
+    <Container>
       <RowItem>
         <SocialLinkImage url={logoUrl} alt={name} />
       </RowItem>
       <RowItem>
         <HookForm resetOnSuccess form={form} onSubmit={handleSubmit}>
-          <div className={styles["social-input__wrapper"]}>
+          <InputWrapper>
             <GVHookFormField
               component={SimpleTextField}
               type="text"
@@ -78,7 +99,7 @@ const _SocialLinkForm: React.FC<Props> = ({
               }}
               autoComplete="off"
             />
-          </div>
+          </InputWrapper>
           {isButtonsVisible && (
             <Row>
               <RowItem>
@@ -99,19 +120,9 @@ const _SocialLinkForm: React.FC<Props> = ({
           )}
         </HookForm>
       </RowItem>
-    </Row>
+    </Container>
   );
 };
-
-interface Props {
-  errorMessage?: string;
-  socialLink: SocialLinkViewModel;
-  onSubmit: TOnEditLinkSubmitFunc;
-}
-
-interface ISignalLinkFormValues {
-  [FORM_FIELD.value]: string;
-}
 
 const SocialLinkForm = React.memo(_SocialLinkForm);
 export default SocialLinkForm;

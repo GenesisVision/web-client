@@ -1,8 +1,7 @@
-import styles from "components/details/details-description-section/details-statistic-section/details-history/trades.module.scss";
+import { TradesComponentsCell } from "components/details/details-description-section/details-statistic-section/details-history/trades-components";
 import BaseProfitability from "components/profitability/base-profitability";
 import Profitability from "components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "components/profitability/profitability.helper";
-import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import Tooltip from "components/tooltip/tooltip";
 import { TooltipContent } from "components/tooltip/tooltip-content";
@@ -23,7 +22,7 @@ const _ProgramTradesRow: React.FC<Props> = ({
   const volume = +formatValue(trade.volume, DEFAULT_DECIMAL_SCALE / 2);
   return (
     <TableRow stripy>
-      <TableCell className={styles["details-trades__cell"]}>
+      <TradesComponentsCell>
         <BaseProfitability
           isPositive={trade.direction === "Buy"}
           isNegative={trade.direction === "Sell"}
@@ -31,26 +30,24 @@ const _ProgramTradesRow: React.FC<Props> = ({
           {trade.direction}
         </BaseProfitability>
         {` / ${trade.entry}`}
-      </TableCell>
-      <TableCell className={styles["details-trades__cell"]}>
-        {trade.symbol}
-      </TableCell>
-      <TableCell className={styles["details-trades__cell"]}>
+      </TradesComponentsCell>
+      <TradesComponentsCell>{trade.symbol}</TradesComponentsCell>
+      <TradesComponentsCell>
         <Tooltip
           disable={trade.volume >= volume}
           render={() => <TooltipContent>{trade.volume}</TooltipContent>}
         >
           <span>{trade.volume < volume ? `< ${volume}` : volume}</span>
         </Tooltip>
-      </TableCell>
-      <TableCell className={styles["details-trades__cell"]}>
+      </TradesComponentsCell>
+      <TradesComponentsCell>
         <NumberFormat
           value={formatValue(trade.price, DEFAULT_DECIMAL_SCALE)}
           displayType="text"
           thousandSeparator=" "
         />
-      </TableCell>
-      <TableCell className={styles["details-trades__cell"]}>
+      </TradesComponentsCell>
+      <TradesComponentsCell>
         <Profitability
           value={formatValue(trade.profit, DEFAULT_DECIMAL_SCALE)}
           prefix={PROFITABILITY_PREFIX.SIGN}
@@ -62,28 +59,20 @@ const _ProgramTradesRow: React.FC<Props> = ({
             displayType="text"
           />
         </Profitability>
-      </TableCell>
-      <TableCell className={styles["details-trades__cell"]}>
+      </TradesComponentsCell>
+      <TradesComponentsCell>
         <TradesHistoryFeesTooltipWithOwner trade={trade} />
-      </TableCell>
-      {showSwaps && (
-        <TableCell className={styles["details-trades__cell"]}>
-          {trade.swap}
-        </TableCell>
-      )}
-      <TableCell className={styles["details-trades__cell"]}>
-        {formatDate(trade.date)}
-      </TableCell>
+      </TradesComponentsCell>
+      {showSwaps && <TradesComponentsCell>{trade.swap}</TradesComponentsCell>}
+      <TradesComponentsCell>{formatDate(trade.date)}</TradesComponentsCell>
       {showTickets && (
-        <TableCell className={styles["details-trades__cell"]}>
-          {trade.ticket}
-        </TableCell>
+        <TradesComponentsCell>{trade.ticket}</TradesComponentsCell>
       )}
-      <TableCell className={styles["details-trades__cell"]}>
+      <TradesComponentsCell>
         {!!trade.providers.length && (
           <ProvidersButton providers={trade.providers} />
         )}
-      </TableCell>
+      </TradesComponentsCell>
     </TableRow>
   );
 };

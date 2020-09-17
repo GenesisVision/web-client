@@ -1,4 +1,3 @@
-import clsx from "clsx";
 import { ConversationImage } from "components/conversation/conversation-image/conversation-image";
 import { getImageSize } from "components/conversation/conversation-image/conversation-image.helpers";
 import { ConversationUser } from "components/conversation/conversation-user/conversation-user";
@@ -11,13 +10,15 @@ import {
   ExcludedTagsUnderText,
   generateTagsComponents
 } from "components/conversation/message/message.helpers";
+import { mediaBreakpointLandscapePhone } from "components/gv-styles/gv-media";
+import { $paddingXsmall } from "components/gv-styles/gv-sizes";
 import { HorizontalShadowList } from "components/horizontal-list-shadow-container/horizontal-shadow-list";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { PostTag, SocialPostTagType } from "gv-api-web";
 import React from "react";
-
-import styles from "./message.module.scss";
+import styled from "styled-components";
+import { adaptiveMargin } from "utils/style/style-mixins";
 
 export interface IMessageProps {
   excludedTagsUnderText?: SocialPostTagType[];
@@ -31,6 +32,22 @@ export interface IMessageProps {
   text?: string;
   date: string | Date;
 }
+
+export const MessageContainer = styled.div<{ row?: boolean }>`
+  width: 100%;
+  flex-wrap: wrap;
+  ${mediaBreakpointLandscapePhone("flex-wrap: nowrap;")};
+  ${({ row }) =>
+    row &&
+    `
+    display: flex;
+    ${adaptiveMargin("bottom", -$paddingXsmall)};
+  `};
+`;
+
+export const MessageImages = styled(Row)`
+  ${adaptiveMargin("bottom", -$paddingXsmall)};
+`;
 
 const _Message: React.FC<IMessageProps> = ({
   excludedTagsUnderText: excludedTagsUnderTextProp = [],
@@ -49,19 +66,16 @@ const _Message: React.FC<IMessageProps> = ({
       ![...ExcludedTagsUnderText, ...excludedTagsUnderTextProp].includes(type)
   );
   const repostTag = tags?.filter(({ type }) => type === "Post");
-  const MessageItem = row ? RowItem : Row;
+  const MessageItem = styled(row ? RowItem : Row)<{ bottomOffset?: boolean }>`
+    width: auto;
+  `;
+  const MessageItemText = styled(MessageItem)`
+    overflow: hidden;
+  `;
   return (
     <div>
-      <div
-        className={clsx(styles["message"], {
-          [styles["message--row"]]: row
-        })}
-      >
-        <MessageItem
-          bottomOffset
-          center={false}
-          className={styles["message__user"]}
-        >
+      <MessageContainer row={row}>
+        <MessageItem bottomOffset center={false}>
           <RowItem wide>
             <ConversationUser
               postUrl={url}
@@ -73,11 +87,7 @@ const _Message: React.FC<IMessageProps> = ({
           </RowItem>
           <RowItem>{settingsBlock}</RowItem>
         </MessageItem>
-        <MessageItem
-          className={styles["message--content"]}
-          bottomOffset
-          onlyOffset
-        >
+        <MessageItemText bottomOffset onlyOffset>
           <MessageText
             key={text}
             text={text}
@@ -85,7 +95,7 @@ const _Message: React.FC<IMessageProps> = ({
             reduceLargeText={reduceLargeText}
           />
           {!!images.length && (
-            <Row wrap size={"small"} className={styles["message__images"]}>
+            <MessageImages wrap size={"small"}>
               {images.map((image, index) => (
                 <RowItem bottomOffset key={index}>
                   <ConversationImage
@@ -95,10 +105,10 @@ const _Message: React.FC<IMessageProps> = ({
                   />
                 </RowItem>
               ))}
-            </Row>
+            </MessageImages>
           )}
-        </MessageItem>
-      </div>
+        </MessageItemText>
+      </MessageContainer>
       {!!tagsUnderText?.length && (
         <Row>
           <HorizontalShadowList withScroll={false}>

@@ -1,11 +1,14 @@
 import ChartTooltip from "components/chart/chart-tooltip/chart-tooltip";
-import styles from "components/details/details-statistic-section/details-chart-section/details-chart-section.module.scss";
+import {
+  DetailsChartTooltipStatistic,
+  DetailsChartTooltipValue
+} from "components/details/details-statistic-section/details-chart-section/details-chart-tooltip";
 import * as React from "react";
 
 const TooltipBody: React.FC<{ equity: string }> = React.memo(({ equity }) => (
-  <div className={styles["details-tooltip__statistic"]}>
-    <div className={styles["details-tooltip__value"]}>{equity}</div>
-  </div>
+  <DetailsChartTooltipStatistic>
+    <DetailsChartTooltipValue>{equity}</DetailsChartTooltipValue>
+  </DetailsChartTooltipStatistic>
 ));
 
 const ProgramProfitTooltip: React.FC<Props> = ({ active, label, payload }) => {
@@ -16,7 +19,6 @@ const ProgramProfitTooltip: React.FC<Props> = ({ active, label, payload }) => {
     <ChartTooltip
       body={<TooltipBody equity={equity} />}
       date={new Date(label)}
-      className={styles["details-tooltip"]}
     />
   );
 };

@@ -2,11 +2,9 @@ import TagItemWithTooltip from "components/tags/tag-item/tag-item-with-tooltip";
 import { Tag } from "gv-api-web";
 import React from "react";
 
-import styles from "./tag-item.module.scss";
-
 const _TagItemList: React.FC<Props> = ({ tags }) => {
   return (
-    <div className={styles["tag-item-list"]}>
+    <div>
       {tags.map((tag, idx) => (
         <TagItemWithTooltip name={tag.name} color={tag.color} key={idx} />
       ))}

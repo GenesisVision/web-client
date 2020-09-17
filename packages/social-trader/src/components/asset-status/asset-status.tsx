@@ -12,13 +12,12 @@ import AssetStatusLabel from "./asset-status-label";
 import AssetStatusRequestsContainer from "./asset-status-requests.container";
 
 interface Props {
-  className?: string;
   status: STATUS;
   id: string;
   onCancel: () => void;
 }
 
-const _AssetStatus: React.FC<Props> = ({ className, status, id, onCancel }) => {
+const _AssetStatus: React.FC<Props> = ({ status, id, onCancel }) => {
   const { anchor, setAnchor, clearAnchor } = useAnchor();
   const handleOpenDropdown = useCallback(
     (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
@@ -29,11 +28,9 @@ const _AssetStatus: React.FC<Props> = ({ className, status, id, onCancel }) => {
   );
   return (
     <>
-      <AssetStatusLabel
-        status={status}
-        className={className}
-        onClick={handleOpenDropdown}
-      />
+      <AssetStatusLabel status={status} onClick={handleOpenDropdown}>
+        {status}
+      </AssetStatusLabel>
       <Popover
         orientation={ORIENTATION_POPOVER.LEFT}
         horizontal={HORIZONTAL_POPOVER_POS.RIGHT}

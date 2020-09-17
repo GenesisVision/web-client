@@ -5,10 +5,6 @@
   @include adaptive-margin(bottom, $padding-xxsmall);
   padding: 10px 0 30px;
 
-  &__substrate {
-    background-color: rgba($main-color, 0.1) !important;
-  }
-
   &__label {
     @include font-size($font-size-small);
     @include adaptive-margin(bottom, $padding-xxsmall);

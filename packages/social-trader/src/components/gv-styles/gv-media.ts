@@ -8,8 +8,8 @@ import {
   TABLET_LANDSCAPE
 } from "utils/breakpoints";
 
-const createMediaQueryCSS = (content: string, breakpoint: number) => css`
-  @media (min-width: ${breakpoint}) {
+const createMediaQueryCSS = (content: string, breakpoint: number) => `
+  @media (min-width: ${breakpoint}px) {
     ${content}
   }
 `;

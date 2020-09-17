@@ -1,3 +1,8 @@
+import { $textAccentColor } from "components/gv-styles/gv-colors/gv-colors";
+import {
+  $fontSizeCommon,
+  $paddingXxxsmall
+} from "components/gv-styles/gv-sizes";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
@@ -5,12 +10,35 @@ import Popover, {
 import { RowItem } from "components/row-item/row-item";
 import { Text } from "components/text/text";
 import useAnchor from "hooks/anchor.hook";
+import useFlag from "hooks/flag.hook";
 import * as React from "react";
 import { useCallback } from "react";
+import styled from "styled-components";
+import { fontSize } from "utils/style/style-mixins";
 
 import { UpdateFilterFunc } from "../table.types";
 import FilterArrowIcon from "./filter-arrow-icon";
-import styles from "./filter.module.scss";
+
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
+  label: string;
+  value: any;
+  renderValueText(value: any): string;
+  updateFilter?: UpdateFilterFunc;
+  name: string;
+}
+
+const Container = styled.div`
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  ${fontSize($fontSizeCommon)};
+`;
+const Value = styled.div`
+  letter-spacing: 0.2px;
+  color: ${$textAccentColor};
+  padding: 0 ${$paddingXxxsmall}px;
+  white-space: nowrap;
+`;
 
 const _Filter: React.FC<Props> = ({
   label,
@@ -20,6 +48,7 @@ const _Filter: React.FC<Props> = ({
   updateFilter,
   name
 }) => {
+  const [hover, setHover, setLeave] = useFlag();
   const { anchor, setAnchor, clearAnchor } = useAnchor();
   const handleChangeFilter = useCallback(
     (value: any) => {
@@ -35,11 +64,15 @@ const _Filter: React.FC<Props> = ({
   });
   return (
     <RowItem>
-      <div className={styles["filter"]} onClick={setAnchor}>
+      <Container
+        onMouseEnter={setHover}
+        onMouseLeave={setLeave}
+        onClick={setAnchor}
+      >
         <Text muted>{label}</Text>
-        <div className={styles["filter__value"]}>{renderValueText(value)}</div>
-        <FilterArrowIcon isOpen={anchor !== undefined} />
-      </div>
+        <Value>{renderValueText(value)}</Value>
+        <FilterArrowIcon hover={hover} isOpen={anchor !== undefined} />
+      </Container>
       <Popover
         vertical={VERTICAL_POPOVER_POS.BOTTOM}
         fixedVertical
@@ -53,14 +86,6 @@ const _Filter: React.FC<Props> = ({
     </RowItem>
   );
 };
-
-interface Props extends React.HTMLAttributes<HTMLDivElement> {
-  label: string;
-  value: any;
-  renderValueText(value: any): string;
-  updateFilter?: UpdateFilterFunc;
-  name: string;
-}
 
 const Filter = React.memo(_Filter);
 export default Filter;

@@ -1,4 +1,5 @@
 import Chip, { CHIP_TYPE } from "components/chip/chip";
+import { $paddingXsmall } from "components/gv-styles/gv-sizes";
 import { RingIcon } from "components/icon/ring-icon";
 import InfinityScroll from "components/infinity-scroll/inifinity-scroll";
 import Link from "components/link/link";
@@ -17,14 +18,38 @@ import Spinner from "components/spiner/spiner";
 import { NotificationViewModel } from "gv-api-web";
 import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import styled from "styled-components";
+import {
+  adaptiveFullPadding,
+  horizontalPaddings
+} from "utils/style/style-mixins";
 
 import { NOTIFICATIONS_ROUTE } from "../notifications.routes";
-import styles from "./notifications.module.scss";
 import { SettingsIcon } from "./settings-icon/settings-icon";
+
+interface Props {
+  isPending: boolean;
+  getNotifications: VoidFunction;
+  closeNotifications: VoidFunction;
+  count: number;
+  total: number;
+  notifications?: NotificationViewModel[];
+}
+
+const initNotifications: NotificationViewModel[] = [];
+
+const Header = styled(Row)`
+  justify-content: space-between;
+  ${adaptiveFullPadding($paddingXsmall)};
+`;
+
+const Content = styled.div`
+  ${horizontalPaddings($paddingXsmall)};
+`;
 
 const _Notifications: React.FC<Props> = ({
   isPending,
-  notifications = [],
+  notifications = initNotifications,
   total = 0,
   count,
   getNotifications,
@@ -64,10 +89,10 @@ const _Notifications: React.FC<Props> = ({
   const hasMore = total > mergedNotifications.length;
   const hasNotifications = count > 0;
   return (
-    <div className={styles["notifications"]}>
+    <div>
       <InfinityScroll loadMore={fetchNotification} hasMore={hasMore}>
-        <Row className={styles["notifications__header"]}>
-          <RowItem className={styles["notifications__ring"]}>
+        <Header>
+          <RowItem>
             <RingIcon />
           </RowItem>
           <RowItem>
@@ -87,13 +112,13 @@ const _Notifications: React.FC<Props> = ({
           >
             <SettingsIcon />
           </Link>
-        </Row>
-        <div className={styles["notifications__content"]}>
+        </Header>
+        <Content>
           {Object.keys(groups)
             .sort(sortGroups)
             .map<React.ReactNode>(renderGroups(groups))}
           <Spinner isShown={isPending} />
-        </div>
+        </Content>
       </InfinityScroll>
     </div>
   );
@@ -101,12 +126,3 @@ const _Notifications: React.FC<Props> = ({
 
 const Notifications = React.memo(_Notifications);
 export default Notifications;
-
-interface Props {
-  isPending: boolean;
-  getNotifications: VoidFunction;
-  closeNotifications: VoidFunction;
-  count: number;
-  total: number;
-  notifications?: NotificationViewModel[];
-}

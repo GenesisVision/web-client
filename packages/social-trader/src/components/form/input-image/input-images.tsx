@@ -16,6 +16,7 @@ interface IInputImagesProps extends IDropZoneWrapperProps {
   mode?: INPUT_IMAGES_MODE;
   [key: string]: any;
 }
+
 export const InputImages: React.FC<IInputImagesProps> = props => {
   const {
     maxImages = Number.MAX_SAFE_INTEGER,

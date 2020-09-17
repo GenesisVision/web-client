@@ -1,8 +1,15 @@
 import { Icon, IIconProps } from "components/icon/icon";
 import * as React from "react";
+import styled from "styled-components";
+
+const StyledIcon = styled(Icon)`
+  svg [fill] {
+    fill: none;
+  }
+`;
 
 export const SecurityIcon: React.FC<IIconProps> = props => (
-  <Icon type={"security"} {...props}>
+  <StyledIcon {...props}>
     <svg
       width="13"
       height="13"
@@ -42,5 +49,5 @@ export const SecurityIcon: React.FC<IIconProps> = props => (
         </g>
       </g>
     </svg>
-  </Icon>
+  </StyledIcon>
 );

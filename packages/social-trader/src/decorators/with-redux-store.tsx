@@ -1,6 +1,7 @@
 import authActions from "actions/auth-actions";
 import { AppType } from "next/dist/next-server/lib/utils";
 import React, { Component } from "react";
+import { Provider } from "react-redux";
 import { RootState } from "reducers/root-reducer";
 import { Store } from "redux";
 import { AppWithReduxContext, InitializeStoreType } from "utils/types";
@@ -32,7 +33,8 @@ const withReduxStore = (
     static async getInitialProps(ctx: AppWithReduxContext) {
       const reduxStore = getOrCreateStore();
 
-      ctx.ctx.reduxStore = reduxStore;
+      if (ctx.ctx) ctx.ctx.reduxStore = reduxStore;
+      else ctx.reduxStore = reduxStore;
 
       const componentProps =
         WrappedComponent.getInitialProps &&
@@ -67,7 +69,11 @@ const withReduxStore = (
 
     render() {
       const { initialReduxState, actions, ...props } = this.props;
-      return <WrappedComponent {...props} reduxStore={this.reduxStore} />;
+      return (
+        <Provider store={this.reduxStore}>
+          <WrappedComponent {...props} reduxStore={this.reduxStore} />
+        </Provider>
+      );
     }
   };
 };

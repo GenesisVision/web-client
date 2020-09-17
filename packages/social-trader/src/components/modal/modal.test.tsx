@@ -22,7 +22,7 @@ describe("Modal tests", () => {
     expect(component.find(".modal--position-absolute")).toHaveLength(1);
   });
   test("should not set position-absolute modificator", () => {
-    const component = shallow(<Modal open fixed noAbsolute />);
+    const component = shallow(<Modal open fixed absolute={false} />);
     expect(component.find(".modal--position-absolute")).not.toHaveLength(1);
   });
   test("should not set backdrop--transparent modificator", () => {

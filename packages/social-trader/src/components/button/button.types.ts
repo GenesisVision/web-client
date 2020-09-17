@@ -1,7 +1,9 @@
 import React from "react";
 import { Sizeable } from "utils/types";
 
-export interface IButtonProps extends Sizeable {
+export interface IButtonProps
+  extends Sizeable,
+    React.HTMLAttributes<HTMLButtonElement> {
   isSuccessful?: boolean;
   isPending?: boolean;
   testId?: string;
@@ -22,10 +24,8 @@ export interface IButtonProps extends Sizeable {
 
 export interface ILabelProps {
   isSuccessful?: boolean;
-  className?: string;
 }
 
 export interface ISuccessMarkProps {
   isSuccessful?: boolean;
-  className?: string;
 }

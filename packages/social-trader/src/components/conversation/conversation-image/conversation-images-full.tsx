@@ -1,6 +1,10 @@
-import clsx from "clsx";
-import ImageBase from "components/avatar/image-base";
 import { getImageUrlByQuality } from "components/conversation/conversation-image/conversation-image.helpers";
+import {
+  ConversationImagesFullButton,
+  ConversationImagesFullContainer,
+  ConversationImagesFullImage,
+  ConversationImagesFullWrapper
+} from "components/conversation/conversation-image/conversation-image.styles";
 import { IConversationImage } from "components/conversation/conversation.types";
 import { GalleryLeftIcon } from "components/conversation/icons/gallery-left.icon";
 import { GalleryRightIcon } from "components/conversation/icons/gallery-right.icon";
@@ -8,8 +12,6 @@ import Modal, { BodyFix } from "components/modal/modal";
 import useIsOpen from "hooks/is-open.hook";
 import React, { useCallback, useState } from "react";
 import EventListener from "react-event-listener";
-
-import styles from "./conversation-image.module.scss";
 
 interface Props {
   initIndex: number;
@@ -41,19 +43,18 @@ const _ConversationImagesFull: React.FC<Props> = ({
 
   return (
     <Modal open={open} onClose={onClose} fixed>
-      <div
+      <ConversationImagesFullContainer
         onClick={handleBackdropClick}
         onMouseDown={handleMouseDown}
-        className={styles["conversation-images-full__wrapper"]}
       >
         <BodyFix />
-        <div className={styles["conversation-image-full__wrapper"]}>
+        <ConversationImagesFullWrapper>
           <ConversationImagesFullContent
             initIndex={initIndex}
             images={images}
           />
-        </div>
-      </div>
+        </ConversationImagesFullWrapper>
+      </ConversationImagesFullContainer>
     </Modal>
   );
 };
@@ -88,42 +89,29 @@ const ConversationImagesFullContent: React.FC<{
   const isButtonsShow = isOver && images.length > 1;
   return (
     <EventListener target={"document"} onKeyUp={handleKeyPress}>
-      <div
-        className={styles["conversation-image-full__container"]}
-        onMouseEnter={setOver}
-        onMouseLeave={setLeave}
-      >
-        <ImageBase
+      <div onMouseEnter={setOver} onMouseLeave={setLeave}>
+        <ConversationImagesFullImage
           onClick={handleNext}
           quality={"High"}
-          className={styles["conversation-image-full"]}
           src={getImageUrlByQuality(
             images[currentImageIndex].resizes,
             "Original"
           )}
         />
-        <div
+        <ConversationImagesFullButton
+          left
+          show={isButtonsShow}
           onClick={handlePrev}
-          className={clsx(
-            styles["conversation-image-full__button--left"],
-            styles["conversation-image-full__button"],
-            {
-              [styles["conversation-image-full__button--show"]]: isButtonsShow
-            }
-          )}
         >
           <GalleryLeftIcon />
-        </div>
-        <div
+        </ConversationImagesFullButton>
+        <ConversationImagesFullButton
+          right
+          show={isButtonsShow}
           onClick={handleNext}
-          className={clsx(
-            styles["conversation-image-full__button--right"],
-            styles["conversation-image-full__button"],
-            { [styles["conversation-image-full__button--show"]]: isButtonsShow }
-          )}
         >
           <GalleryRightIcon />
-        </div>
+        </ConversationImagesFullButton>
       </div>
     </EventListener>
   );

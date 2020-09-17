@@ -1,9 +1,15 @@
-import clsx from "clsx";
 import Portal from "components/portal/portal";
 import React, { useCallback, useEffect } from "react";
 import EventListener from "react-event-listener";
+import styled from "styled-components";
 
-import styles from "./modal.module.scss";
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
+  onClose?: (event: React.MouseEvent<HTMLElement>) => void;
+  open: boolean;
+  absolute?: boolean;
+  transparentBackdrop?: boolean;
+  fixed?: boolean;
+}
 
 export const BodyFix = () => {
   useEffect(() => {
@@ -13,10 +19,45 @@ export const BodyFix = () => {
   return null;
 };
 
+const Backdrop = styled.div<{
+  black?: boolean;
+}>`
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  opacity: 0.7;
+  ${({ black }) =>
+    black &&
+    `
+    background-color: black;
+   `};
+`;
+
+const Container = styled.div<{
+  absolute?: boolean;
+  fixed?: boolean;
+}>`
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1300;
+  position: ${({ fixed, absolute }) => {
+    if (fixed) return "fixed";
+    if (absolute) return "absolute";
+  }};
+`;
+
 const _Modal: React.FC<Props> = ({
   onClose,
   open,
-  noAbsolute,
+  absolute = true,
   transparentBackdrop,
   children,
   fixed
@@ -39,33 +80,18 @@ const _Modal: React.FC<Props> = ({
 
   return (
     <Portal open={open}>
-      <div
-        className={clsx(styles["modal"], {
-          [styles["modal--position-absolute"]]: !noAbsolute,
-          [styles["modal--position-fixed"]]: fixed
-        })}
-      >
+      <Container absolute={absolute} fixed={fixed}>
         <EventListener target={"document"} onKeyUp={handleKeyPress}>
-          <div
-            className={clsx(styles["modal__backdrop"], {
-              [styles["modal__backdrop--transparent"]]: transparentBackdrop
-            })}
+          <Backdrop
+            black={!transparentBackdrop}
             onClick={handleBackdropClick}
           />
         </EventListener>
         {children}
-      </div>
+      </Container>
     </Portal>
   );
 };
-
-interface Props extends React.HTMLAttributes<HTMLDivElement> {
-  onClose?: (event: React.MouseEvent<HTMLElement>) => void;
-  open: boolean;
-  noAbsolute?: boolean;
-  transparentBackdrop?: boolean;
-  fixed?: boolean;
-}
 
 const Modal = React.memo(_Modal);
 export default Modal;

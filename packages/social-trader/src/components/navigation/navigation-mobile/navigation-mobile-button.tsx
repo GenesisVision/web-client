@@ -1,4 +1,7 @@
-import { Icon } from "components/icon/icon";
+import { mediaBreakpointLandscapeTablet } from "components/gv-styles/gv-media";
+import { $paddingMedium, $walletItemSize } from "components/gv-styles/gv-sizes";
+import { $boxShadow4 } from "components/gv-styles/gv-style-constants";
+import { MenuIcon } from "components/icon/menu-icon";
 import NavigationMobileContainer from "components/navigation/navigation-mobile/navigation-mobile.container";
 import { ProfileHeaderViewModel } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
@@ -7,8 +10,34 @@ import * as React from "react";
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { TMenuItem } from "routes/menu";
+import styled from "styled-components";
+import { adaptiveMargin } from "utils/style/style-mixins";
 
-import styles from "../navigation.module.scss";
+interface Props {
+  mobileMenuItems: TMenuItem[];
+  backPath: string;
+  isAuthenticated: boolean;
+  profileHeader?: ProfileHeaderViewModel;
+}
+
+const Container = styled.div`
+  padding: 0;
+  min-height: ${$walletItemSize}px;
+  min-width: ${$walletItemSize}px;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  ${adaptiveMargin("right", $paddingMedium)}
+
+  &:hover {
+    box-shadow: ${$boxShadow4};
+  }
+
+  ${mediaBreakpointLandscapeTablet("display: none !important;")}
+`;
 
 const _NavigationMobileButton: React.FC<Props> = ({
   mobileMenuItems,
@@ -21,9 +50,9 @@ const _NavigationMobileButton: React.FC<Props> = ({
   const handlerLogout = useCallback(() => dispatch(logout), []);
   return (
     <>
-      <div className={styles["navigation__menu"]} onClick={setOpen}>
-        <Icon type="menu" />
-      </div>
+      <Container onClick={setOpen}>
+        <MenuIcon />
+      </Container>
       <NavigationMobileContainer
         mobileMenuItems={mobileMenuItems}
         backPath={backPath}
@@ -36,13 +65,6 @@ const _NavigationMobileButton: React.FC<Props> = ({
     </>
   );
 };
-
-interface Props {
-  mobileMenuItems: TMenuItem[];
-  backPath: string;
-  isAuthenticated: boolean;
-  profileHeader?: ProfileHeaderViewModel;
-}
 
 const NavigationMobileButton = React.memo(_NavigationMobileButton);
 export default NavigationMobileButton;

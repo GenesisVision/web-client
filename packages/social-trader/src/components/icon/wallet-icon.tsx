@@ -1,8 +1,15 @@
 import { Icon, IIconProps } from "components/icon/icon";
 import * as React from "react";
+import styled from "styled-components";
+
+const StyledIcon = styled(Icon)`
+  path {
+    fill: transparent;
+  }
+`;
 
 export const WalletIcon: React.FC<IIconProps> = props => (
-  <Icon type={"wallet"} {...props}>
+  <StyledIcon {...props}>
     <svg width="18px" height="16px" viewBox="0 0 18 16" version="1.1">
       <g
         stroke="none"
@@ -30,5 +37,5 @@ export const WalletIcon: React.FC<IIconProps> = props => (
         </g>
       </g>
     </svg>
-  </Icon>
+  </StyledIcon>
 );

@@ -1,3 +1,5 @@
+import { $primaryColor } from "components/gv-styles/gv-colors/gv-colors";
+import { $fontSizeCommon } from "components/gv-styles/gv-sizes";
 import HeaderIcon from "components/header/header-icon";
 import { WalletIcon } from "components/icon/wallet-icon";
 import Popover from "components/popover/popover";
@@ -11,13 +13,32 @@ import WalletDeposit, {
 } from "modules/wallet-deposit/wallet-deposit";
 import dynamic from "next/dist/next-server/lib/dynamic";
 import * as React from "react";
+import styled from "styled-components";
 import { formatCurrencyValue } from "utils/formatter";
-
-import styles from "./wallet-widget.module.scss";
 
 const WalletWidgetPopoverContent = dynamic(() =>
   import("components/wallet-widget/wallet-widget-popover-content")
 );
+
+const WalletContainer = styled(Row)`
+  font-size: ${$fontSizeCommon}px;
+  cursor: pointer;
+
+  &:hover {
+    svg [stroke] {
+      stroke: ${$primaryColor};
+    }
+  }
+`;
+
+const IconContainer = styled.div`
+  height: 20px;
+  width: 20px;
+`;
+
+const Amount = styled.div`
+  white-space: nowrap;
+`;
 
 const _WalletWidget: React.FC<Props> = ({
   data: { currency, available, invested, trading, total }
@@ -27,16 +48,17 @@ const _WalletWidget: React.FC<Props> = ({
     <>
       <Row>
         <RowItem>
-          <Row className={styles["wallet-widget__wallet"]} onClick={setAnchor}>
+          <WalletContainer onClick={setAnchor}>
             <HeaderIcon>
-              <div className={styles["wallet-widget__icon"]}>
+              <IconContainer>
                 <WalletIcon primary={anchor !== undefined} />
-              </div>
+              </IconContainer>
             </HeaderIcon>
-            <div
-              className={styles["wallet-widget__amount"]}
-            >{`${formatCurrencyValue(available, currency)} ${currency}`}</div>
-          </Row>
+            <Amount>{`${formatCurrencyValue(
+              available,
+              currency
+            )} ${currency}`}</Amount>
+          </WalletContainer>
         </RowItem>
         <RowItem>
           <HeaderIcon>

@@ -7,9 +7,8 @@ import useIsOpen from "hooks/is-open.hook";
 import WalletAddFundsPopup from "modules/wallet-add-funds/wallet-add-funds-popup";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import styled from "styled-components";
 import { Clickable, CurrencyEnum } from "utils/types";
-
-import styles from "./wallet-deposit.module.scss";
 
 const _WalletDeposit: React.FC<Props> = ({
   type,
@@ -35,6 +34,10 @@ interface IFullButtonProps extends Clickable {
   disabled?: boolean;
 }
 
+const Icon = styled(RowItem)`
+  font-size: 18px;
+`;
+
 const FullButton: React.FC<IFullButtonProps> = React.memo(
   ({ disabled, onClick }) => {
     const [t] = useTranslation();
@@ -47,12 +50,7 @@ const FullButton: React.FC<IFullButtonProps> = React.memo(
         onClick={onClick}
       >
         <Center>
-          <RowItem
-            size={"small"}
-            className={styles["wallet-deposit__full-button-icon"]}
-          >
-            +
-          </RowItem>
+          <Icon size={"small"}>+</Icon>
           <RowItem>{label}</RowItem>
         </Center>
       </Button>

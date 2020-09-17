@@ -1,15 +1,25 @@
+import { $fontSizeCommon, $paddingSmall } from "components/gv-styles/gv-sizes";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
+import styled from "styled-components";
+import { fontSize } from "utils/style/style-mixins";
 import { TagType } from "utils/types";
 
 import { LIST_VIEW } from "../table.constants";
-import styles from "./table.module.scss";
 import {
   RenderBodyItemFuncType,
   UpdateItemsFuncType,
   UpdateRowFuncType
 } from "./table.types";
+
+const TableMessage = styled.div`
+  padding: ${$paddingSmall}px;
+  text-align: center;
+  width: 100%;
+  ${fontSize($fontSizeCommon)};
+  box-sizing: border-box;
+`;
 
 const _TableBody: React.FC<ITableBodyExternalProps & ITableBodyInnerProps> = ({
   updateItems,
@@ -48,18 +58,14 @@ const _EmptyMessage: React.FC<{ view: LIST_VIEW }> = ({ view }) => {
   const [t] = useTranslation();
   switch (view) {
     case LIST_VIEW.CARDS:
-      return (
-        <div className={styles["table-message"]}>{t("table.no-items")}</div>
-      );
+      return <TableMessage>{t("table.no-items")}</TableMessage>;
     case LIST_VIEW.TABLE:
     default:
       return (
         <tbody>
           <tr>
             <td colSpan={11}>
-              <div className={styles["table-message"]}>
-                {t("table.no-items")}
-              </div>
+              <TableMessage>{t("table.no-items")}</TableMessage>
             </td>
           </tr>
         </tbody>

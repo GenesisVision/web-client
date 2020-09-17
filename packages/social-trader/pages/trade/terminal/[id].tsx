@@ -1,4 +1,6 @@
 import withBetaTesting from "decorators/with-beta-testing";
+import withReduxStore from "decorators/with-redux-store";
+import withToken from "decorators/with-token";
 import withTradeLayout from "decorators/with-trade-layout";
 import { BrokerTradeServerType } from "gv-api-web";
 import { TYPE_PARAM_NAME } from "pages/trades/binance-trade-page/binance-trade.helpers";
@@ -12,7 +14,9 @@ import {
 } from "pages/trades/binance-trade-page/trading/terminal.types";
 import { TerminalPage } from "pages/trades/terminal.page";
 import React from "react";
+import { compose } from "redux";
 import { api } from "services/api-client/swagger-custom-client";
+import { initializeStore } from "store";
 import { getParamsFromCtxWithSplit } from "utils/ssr-helpers";
 import { NextPageWithRedux } from "utils/types";
 
@@ -76,4 +80,9 @@ Page.getInitialProps = async ctx => {
   };
 };
 
-export default withTradeLayout(withBetaTesting("TradingTerminal")(Page));
+export default compose(
+  withReduxStore(initializeStore),
+  withToken,
+  withTradeLayout,
+  withBetaTesting("TradingTerminal")
+)(Page);

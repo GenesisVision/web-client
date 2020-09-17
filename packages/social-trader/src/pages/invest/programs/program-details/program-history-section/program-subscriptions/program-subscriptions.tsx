@@ -1,6 +1,4 @@
-import clsx from "clsx";
 import { ACTION_STATUS_FILTER_VALUES } from "components/dashboard/dashboard-assets/dashboard-programs/dashboard-programs.helpers";
-import styles from "components/details/details-description-section/details-statistic-section/details-history/trades.module.scss";
 import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import { FilteringType } from "components/table/components/filtering/filter.type";
 import SelectFilter from "components/table/components/filtering/select-filter/select-filter";
@@ -11,6 +9,7 @@ import {
   TableSelectorType,
   UpdateFilterFunc
 } from "components/table/components/table.types";
+import { Text } from "components/text/text";
 import Tooltip from "components/tooltip/tooltip";
 import { TooltipContent } from "components/tooltip/tooltip-content";
 import { SignalSubscriber } from "gv-api-web";
@@ -31,14 +30,7 @@ const _ProgramSubscriptions: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   const renderCell = (name: string) => (
-    <span
-      className={clsx(
-        styles["details-trades__head-cell"],
-        styles[`program-details-trades__cell--${name}`]
-      )}
-    >
-      {t(`program-details-page:history.subscriptions.${name}`)}
-    </span>
+    <Text>{t(`program-details-page:history.subscriptions.${name}`)}</Text>
   );
   return (
     <TableContainer

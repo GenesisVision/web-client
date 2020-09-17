@@ -29,14 +29,7 @@ const _TagBrokerContainer: React.FC<Props & WithLoaderProps> = ({
       )}
       {remainder && (
         <RowItem>
-          <Tooltip
-            render={() => (
-              <TagItemTooltip
-                tags={tags}
-                className={styles["tag-broker-container__tooltip"]}
-              />
-            )}
-          >
+          <Tooltip render={() => <TagItemTooltip tags={tags} />}>
             <div className={styles["tag-broker-container__others"]}>...</div>
           </Tooltip>
         </RowItem>

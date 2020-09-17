@@ -1,11 +1,10 @@
-import clsx from "clsx";
-import styles from "components/details/details-description-section/details-statistic-section/details-history/trades.module.scss";
 import TableContainer from "components/table/components/table-container";
 import {
   GetItemsFuncActionType,
   TableSelectorType
 } from "components/table/components/table.types";
 import { DEFAULT_PAGING } from "components/table/reducers/table-paging.reducer";
+import { Text } from "components/text/text";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -22,14 +21,7 @@ const _ProgramTradingLog: React.FC<Props> = ({ getItems, dataSelector }) => {
       paging={DEFAULT_PAGING}
       columns={PROGRAM_TRADING_LOG_COLUMNS}
       renderHeader={column => (
-        <span
-          className={clsx(
-            styles["details-trades__head-cell"],
-            styles[`program-details-trades__cell--${column.name}`]
-          )}
-        >
-          {t(`program-details-page:history.trading-log.${column.name}`)}
-        </span>
+        <Text>{t(`program-details-page:history.trading-log.${column}`)}</Text>
       )}
       renderBodyRow={trade => <ProgramTradingLogRow trade={trade} />}
     />

@@ -19,6 +19,7 @@ const _ManagersTableRow: React.FC<IManagersTableRowProps> = ({ manager }) => {
     <TableRow>
       <TableCell>
         <Link
+          noColor
           to={createToUrl(
             composeManagerDetailsUrl(manager.url),
             composeManagerDetailsUrl(manager.url),

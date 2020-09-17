@@ -1,7 +1,12 @@
+import { mediaBreakpointLandscapePhone } from "components/gv-styles/gv-media";
+import { $paddingBig } from "components/gv-styles/gv-sizes";
 import * as React from "react";
+import styled from "styled-components";
 
-import styles from "./details-divider.block.module.scss";
+const StyledDiv = styled.div`
+  ${mediaBreakpointLandscapePhone(`padding-bottom: ${$paddingBig}px`)}
+`;
 
 export const DetailsDivider: React.FC = () => {
-  return <div className={styles["details-divider"]} />;
+  return <StyledDiv />;
 };

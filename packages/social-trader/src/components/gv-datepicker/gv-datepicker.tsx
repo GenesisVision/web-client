@@ -6,8 +6,42 @@ import {
   FocusEventHandler,
   useCallback
 } from "react";
+import styled from "styled-components";
 
-import styles from "./gv-datepicker.module.scss";
+interface Props {
+  value?: string;
+  onChange: ChangeEventHandler<HTMLInputElement>;
+  minDate?: string;
+  maxDate?: string;
+  disabled: boolean;
+  onFocus: FocusEventHandler<HTMLInputElement>;
+  onBlur: FocusEventHandler<HTMLInputElement>;
+  name: string;
+  lng: string;
+  className?: string;
+}
+
+const Container = styled.div`
+  display: inline-flex;
+  width: 100%;
+
+  button {
+    text-align: left;
+  }
+
+  > div,
+  .react-datepicker-wrapper,
+  .react-datepicker__input-container {
+    display: flex;
+    width: 100%;
+  }
+
+  & input[type="date"] {
+    &::-webkit-calendar-picker-indicator {
+      margin: 0;
+    }
+  }
+`;
 
 const _GVDatePicker = React.forwardRef<HTMLInputElement, Props>(
   (
@@ -53,7 +87,7 @@ const _GVDatePicker = React.forwardRef<HTMLInputElement, Props>(
       [onFocus]
     );
     return (
-      <div className={styles["gv-datepicker"]}>
+      <Container>
         <input
           ref={ref}
           onBlur={handleBlur}
@@ -67,23 +101,10 @@ const _GVDatePicker = React.forwardRef<HTMLInputElement, Props>(
           disabled={disabled}
           className={className}
         />
-      </div>
+      </Container>
     );
   }
 );
 
 const GVDatePicker = React.memo(_GVDatePicker);
 export default GVDatePicker;
-
-interface Props {
-  value?: string;
-  onChange: ChangeEventHandler<HTMLInputElement>;
-  minDate?: string;
-  maxDate?: string;
-  disabled: boolean;
-  onFocus: FocusEventHandler<HTMLInputElement>;
-  onBlur: FocusEventHandler<HTMLInputElement>;
-  name: string;
-  lng: string;
-  className?: string;
-}

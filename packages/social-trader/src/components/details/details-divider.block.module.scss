@@ -1,7 +1,0 @@
-@import "styles/_sizes";
-
-.details-divider {
-  @include media-breakpoint-landscape-phone() {
-    padding-bottom: $padding-big;
-  }
-}

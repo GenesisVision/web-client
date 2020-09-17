@@ -1,11 +1,29 @@
-import clsx from "clsx";
 import { Button } from "components/button/button";
+import { $primaryColor } from "components/gv-styles/gv-colors/gv-colors";
 import { PopoverContentListItem } from "components/popover/popover-content";
 import React, { useCallback } from "react";
+import styled from "styled-components";
 
-import styles from "./select.module.scss";
+interface Props {
+  value: string;
+  isSelected: boolean;
+  name?: string;
+  className?: string;
+  onClick: (props: { event: SelectItemClick; isSelected: boolean }) => void;
+  children: string;
+}
+
+interface SelectItemClick
+  extends React.MouseEvent<HTMLButtonElement, MouseEvent> {}
 
 export const getSelectItemSelector = (value: string) => `select-item-${value}`;
+
+const StyledButton = styled(Button)<{ selected?: boolean }>`
+  &:hover {
+    opacity: 0.9;
+  }
+  ${({ selected }) => selected && `color: ${$primaryColor};`};
+`;
 
 const SelectItem: React.FC<Props> = React.memo(
   ({ isSelected, className, children, name, onClick, value }) => {
@@ -14,33 +32,20 @@ const SelectItem: React.FC<Props> = React.memo(
       [onClick, isSelected]
     );
     return (
-      <Button
+      <StyledButton
+        selected={isSelected}
         testId={getSelectItemSelector(value)}
         variant="text"
         color="secondary"
         noPadding
-        className={clsx(styles["select__option"], className, {
-          [styles["select__option--selected"]]: isSelected
-        })}
+        className={className}
         onClick={handleClick}
         name={name}
       >
         <PopoverContentListItem>{children}</PopoverContentListItem>
-      </Button>
+      </StyledButton>
     );
   }
 );
 
 export default SelectItem;
-
-interface Props {
-  value: string;
-  isSelected: boolean;
-  name?: string;
-  className?: string;
-  onClick(props: { event: SelectItemClick; isSelected: boolean }): void;
-  children: string;
-}
-
-interface SelectItemClick
-  extends React.MouseEvent<HTMLButtonElement, MouseEvent> {}

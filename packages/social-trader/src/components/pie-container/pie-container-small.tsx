@@ -22,7 +22,7 @@ const _PieContainerSmall: React.FC<IPieContainer> = ({
     <RowItem size={"small"}>
       <GVProgramPeriod start={start} end={end} value={value} variant="pie" />
     </RowItem>
-    <RowItem className={styles["program-period-pie__text"]}>
+    <RowItem>
       {value} {suffix}
     </RowItem>
   </Center>

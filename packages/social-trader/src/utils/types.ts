@@ -122,6 +122,8 @@ export interface NextPageWithReduxContext extends NextPageWithTokenContext {
 
 export interface AppWithReduxContext extends AppContextType {
   ctx: NextPageWithReduxContext;
+  reduxStore?: any;
+  token?: any;
 }
 
 export type NextPageWithToken<P = void, IP = P> = NextComponentType<

@@ -4,8 +4,8 @@ import { ToType } from "components/link/link";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 
+import { DescriptionControlIcon } from "./description-control-icon";
 import DetailsDescriptionControl from "./details-description-control";
-import styles from "./details-description-control.module.scss";
 
 interface Props {
   hasNotifications: boolean;
@@ -20,10 +20,9 @@ const _DetailsNotification: React.FC<Props> = ({ to, hasNotifications }) => {
         to={to}
         text={t("asset-details:description.notifications")}
       >
-        <RingIcon
-          selected={hasNotifications}
-          className={styles["details-description-control__icon"]}
-        />
+        <DescriptionControlIcon>
+          <RingIcon selected={hasNotifications} />
+        </DescriptionControlIcon>
       </DetailsDescriptionControl>
     </Button>
   );

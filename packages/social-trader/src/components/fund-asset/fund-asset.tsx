@@ -1,18 +1,24 @@
-import clsx from "clsx";
-import { CurrencyItem } from "components/currency-item/currency-item";
+import {
+  FundAssetCurrencyItem,
+  FundAssetRemoveButton,
+  FundAssetRow
+} from "components/fund-asset/fund-asset.styles";
+import { FundAssetViewType } from "components/fund-asset/fund-asset.types";
 import { RowItem } from "components/row-item/row-item";
-import { Row } from "components/row/row";
 import { Currency, FundAssetInfo } from "gv-api-web";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 
-import styles from "./fund-asset.module.scss";
-
-export enum FUND_ASSET_TYPE {
-  LARGE = "large",
-  MIDDLE = "middle",
-  SHORT = "short",
-  TEXT = "text"
+interface Props extends FundAssetInfo {
+  bottomOffset?: boolean;
+  currency: Currency;
+  type: FundAssetViewType;
+  last: boolean;
+  removable?: boolean;
+  lightTheme?: boolean;
+  removeHandle?: (
+    currency: Currency
+  ) => (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
 
 const _FundAsset: React.FC<Props> = ({
@@ -26,25 +32,15 @@ const _FundAsset: React.FC<Props> = ({
   removable,
   removeHandle,
   logoUrl,
-  className,
   lightTheme,
   asset: name,
   ...other
 }) => {
   const currencyName =
-    type === FUND_ASSET_TYPE.LARGE
-      ? name
-      : type !== FUND_ASSET_TYPE.SHORT
-      ? currency
-      : "";
-  const currencyClassName =
-    type === FUND_ASSET_TYPE.LARGE
-      ? styles["fund-asset__currency-full"]
-      : type !== FUND_ASSET_TYPE.SHORT
-      ? styles["fund-asset__currency-short"]
-      : "";
+    type === "large" ? name : type !== "short" ? currency : "";
+
   switch (type) {
-    case FUND_ASSET_TYPE.TEXT:
+    case "text":
       return (
         <div {...other}>
           {currency}
@@ -54,60 +50,30 @@ const _FundAsset: React.FC<Props> = ({
     default:
       return (
         <RowItem size={"small"} bottomOffset={bottomOffset}>
-          <Row
-            {...other}
-            className={clsx(
-              styles["fund-asset"],
-              styles["fund-asset--default"],
-              className,
-              {
-                [styles["fund-asset--large"]]: type === FUND_ASSET_TYPE.LARGE,
-                [styles["fund-asset--light"]]: lightTheme
-              }
-            )}
-          >
+          <FundAssetRow {...other} lightTheme={lightTheme}>
             <RowItem size={"small"}>
-              <CurrencyItem
+              <FundAssetCurrencyItem
                 url={url}
                 logo={logoUrl}
                 small
                 name={!!currency && currencyName}
                 symbol={currency}
-                className={clsx(
-                  styles["fund-asset__currency"],
-                  currencyClassName
-                )}
+                type={type}
               />
             </RowItem>
             {percent !== undefined && (
               <NumberFormat value={percent} suffix="%" displayType="text" />
             )}
             {percent > mandatoryFundPercent && removable && removeHandle && (
-              <div
-                className={styles["fund-asset__remove-button"]}
-                onClick={removeHandle(currency)}
-              >
+              <FundAssetRemoveButton onClick={removeHandle(currency)}>
                 +
-              </div>
+              </FundAssetRemoveButton>
             )}
-          </Row>
+          </FundAssetRow>
         </RowItem>
       );
   }
 };
-
-interface Props extends FundAssetInfo {
-  bottomOffset?: boolean;
-  currency: Currency;
-  type: FUND_ASSET_TYPE;
-  last: boolean;
-  removable?: boolean;
-  lightTheme?: boolean;
-  removeHandle?: (
-    currency: Currency
-  ) => (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-  className?: string;
-}
 
 const FundAsset = React.memo(_FundAsset);
 export default FundAsset;

@@ -1,10 +1,10 @@
-import clsx from "clsx";
-import PagerLinkButton from "components/pager/pager-link-button";
+import {
+  PagerStyledButton,
+  PagerStyledLink
+} from "components/pager/pager.styled-components";
 import { RowItem } from "components/row-item/row-item";
 import * as React from "react";
 import { useCallback } from "react";
-
-import styles from "./pager.module.scss";
 
 export const _PagerButton: React.FC<Props> = ({
   asLink = false,
@@ -21,27 +21,23 @@ export const _PagerButton: React.FC<Props> = ({
     [page, clickHandle]
   );
 
-  const classname = clsx(styles["pager__button"], {
-    [styles["pager__button--current"]]: page === current
-  });
-
   const value = label || page;
 
   const renderButtonContent = () => {
     if (asLink) {
       return (
-        <PagerLinkButton
+        <PagerStyledLink
+          current={page === current}
           page={page}
           value={value}
           callback={callback}
-          classname={classname}
         />
       );
     } else {
       return (
-        <div className={classname} onClick={callback}>
+        <PagerStyledButton current={page === current} onClick={callback}>
           {value}
-        </div>
+        </PagerStyledButton>
       );
     }
   };

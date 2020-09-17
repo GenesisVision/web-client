@@ -45,6 +45,7 @@ const ProfileLayout: React.FC<Props> = ({ route, children }) => {
               key={value}
               label={
                 <Link
+                  noColor
                   to={{
                     pathname
                   }}

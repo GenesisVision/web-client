@@ -1,46 +1,10 @@
-import clsx from "clsx";
 import { Center } from "components/center/center";
+import { RowStyledCenter } from "components/row/row.style";
 import React from "react";
-import { Sizeable } from "utils/types";
+import styled from "styled-components";
 
-import styles from "./row.module.scss";
+import { IRowProps } from "./row.types";
 
-export const Row: React.FC<Props> = ({
-  size = "middle",
-  onlyOffset,
-  center = true,
-  wide,
-  hide,
-  className,
-  children,
-  ...otherProps
-}) => {
-  return (
-    <Center
-      {...otherProps}
-      center={center && !onlyOffset}
-      className={clsx(styles["row"], className, {
-        [styles["row--pointer"]]: !!otherProps.onClick,
-        [styles["row--flex"]]: !onlyOffset,
-        [styles["row--wide"]]: wide,
-        [styles["row--hidden"]]: hide,
-        [styles["row--xsmall"]]: size === "xsmall",
-        [styles["row--small"]]: size === "small",
-        [styles["row--middle"]]: size === "middle",
-        [styles["row--xlarge"]]: size === "xlarge",
-        [styles["row--large"]]: size === "large"
-      })}
-    >
-      {children}
-    </Center>
-  );
+export const Row: React.FC<IRowProps> = props => {
+  return <RowStyledCenter {...props} />;
 };
-
-interface Props extends React.HTMLAttributes<HTMLDivElement>, Sizeable {
-  onlyOffset?: boolean;
-  wide?: boolean;
-  hide?: boolean;
-  center?: boolean;
-  className?: string;
-  wrap?: boolean;
-}

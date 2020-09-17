@@ -1,5 +1,4 @@
 import AssetAvatarWithName from "components/avatar/asset-avatar/asset-avatar-with-name";
-import { FUND_ASSET_TYPE } from "components/fund-asset/fund-asset";
 import FundAssetContainer from "components/fund-asset/fund-asset-container";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
@@ -54,7 +53,7 @@ const _ManagerFundHistoryRow: React.FC<IManagerHistoryRowProps> = ({
         <FundAssetContainer
           noWrap
           assets={asset.topFundAssets}
-          type={FUND_ASSET_TYPE.SHORT}
+          type={"short"}
           size={3}
           length={asset.totalAssetsCount}
         />

@@ -2,9 +2,8 @@ import {
   $iconColor,
   $labelColor
 } from "components/gv-styles/gv-colors/gv-colors";
-import { withStyles } from "decorators/withStyles";
 import * as React from "react";
-import { css } from "styled-components";
+import styled from "styled-components";
 import { OptionalClickable } from "utils/types";
 
 interface Props extends OptionalClickable {
@@ -12,51 +11,30 @@ interface Props extends OptionalClickable {
   className?: string;
 }
 
-const styleTable = {
-  background: "none",
-  padding: "0",
-  "box-sizing": "border-box",
-  width: {
-    value: "15",
-    unit: "px"
-  },
-  height: {
-    value: "15",
-    unit: "px"
-  },
-  border: `1px solid ${$iconColor}`,
-  "border-radius": {
-    value: "50",
-    unit: "%"
-  },
-  "line-height": {
-    value: "15",
-    unit: "px"
-  },
-  "text-align": "center",
-  "font-size": {
-    value: "8",
-    unit: "px"
-  },
-  "font-weight": "700",
-  outline: "none",
-  cursor: "pointer"
-};
-
-const additionalStyles = css`
+const StyledDiv = styled.div<{ muted?: boolean }>`
+  background: none;
+  padding: 0;
+  box-sizing: border-box;
+  width: 15px;
+  height: 15px;
+  border: 1px solid ${$iconColor};
+  border-radius: 50%;
+  line-height: 15px;
+  text-align: center;
+  font-size: 8px;
+  font-weight: 700;
+  outline: none;
+  cursor: pointer;
   border-color: ${({ muted }: Props) => (muted ? $labelColor : $iconColor)};
   color: ${({ muted }: Props) => (muted ? $labelColor : $iconColor)};
 `;
 
-const HelpButton: React.FC<Props> = ({ muted, className, onClick }) => {
+const HelpButton: React.FC<Props> = ({ muted, onClick }) => {
   return (
-    <div className={className} onClick={onClick}>
+    <StyledDiv muted={muted} onClick={onClick}>
       ?
-    </div>
+    </StyledDiv>
   );
 };
 
-export default withStyles<Props>({
-  staticStyles: styleTable,
-  dynamicStyles: additionalStyles
-})(HelpButton);
+export default HelpButton;

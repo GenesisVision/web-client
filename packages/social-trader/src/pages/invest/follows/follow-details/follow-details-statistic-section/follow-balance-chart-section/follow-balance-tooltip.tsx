@@ -1,12 +1,15 @@
 import ChartTooltip from "components/chart/chart-tooltip/chart-tooltip";
-import styles from "components/details/details-statistic-section/details-chart-section/details-chart-section.module.scss";
+import {
+  DetailsChartTooltipStatistic,
+  DetailsChartTooltipValue
+} from "components/details/details-statistic-section/details-chart-section/details-chart-tooltip";
 import * as React from "react";
 import { formatCurrencyValue } from "utils/formatter";
 
 const _TooltipBody: React.FC<ITooltipBodyProps> = ({ value }) => (
-  <div className={styles["details-tooltip__statistic"]}>
-    <div className={styles["details-tooltip__value"]}>{value}</div>
-  </div>
+  <DetailsChartTooltipStatistic>
+    <DetailsChartTooltipValue>{value}</DetailsChartTooltipValue>
+  </DetailsChartTooltipStatistic>
 );
 const TooltipBody = React.memo(_TooltipBody);
 
@@ -22,11 +25,7 @@ const FollowBalanceTooltip: React.FC<IProgramBalanceTooltipProps> = ({
   }`;
 
   return (
-    <ChartTooltip
-      body={<TooltipBody value={value} />}
-      date={new Date(label)}
-      className={styles["details-tooltip"]}
-    />
+    <ChartTooltip body={<TooltipBody value={value} />} date={new Date(label)} />
   );
 };
 

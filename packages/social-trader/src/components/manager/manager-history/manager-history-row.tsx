@@ -1,5 +1,6 @@
 import { Center } from "components/center/center";
 import { DefaultBlock } from "components/default.block/default.block";
+import { mediaBreakpointLandscapePhone } from "components/gv-styles/gv-media";
 import { LabeledValue } from "components/labeled-value/labeled-value";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
@@ -8,6 +9,7 @@ import { ASSET } from "constants/constants";
 import { IconFavoriteButton } from "modules/toggle-asset-favorite-button/icon-favorite-button";
 import { ToggleableAssetType } from "modules/toggle-asset-favorite-button/toggle-asset-favorite-button.types";
 import React from "react";
+import styled from "styled-components";
 
 import styles from "./manager-history-row.module.scss";
 
@@ -22,6 +24,15 @@ interface IManagerHistoryRowProps {
   asset: ToggleableAssetType;
   assetType: ASSET;
 }
+
+const FavoriteIcon = styled(RowItem)`
+  width: 20px;
+  height: 19px;
+  ${mediaBreakpointLandscapePhone(`
+    width: 28px;
+    height: 27px;
+  `)}
+`;
 
 export const ManagerHistoryItem: React.FC<IManagerHistoryItemProps> = React.memo(
   ({ label, children }) => {
@@ -55,9 +66,9 @@ export const ManagerHistoryRow: React.FC<IManagerHistoryRowProps> = ({
               </Center>
             </RowItem>
             {asset.personalDetails && (
-              <RowItem>
+              <FavoriteIcon>
                 <IconFavoriteButton asset={asset} assetType={assetType} />
-              </RowItem>
+              </FavoriteIcon>
             )}
           </Row>
           <Row className={styles["manager-history-row__data"]}>{dataBlock}</Row>

@@ -1,12 +1,18 @@
 import * as React from "react";
+import styled from "styled-components";
 
 import DetailsChart, {
   IDetailsChartProps
 } from "./details-chart-section/details-chart";
-import styles from "./details-statistic-section.module.scss";
 import DetailsStatisticsContainer, {
   IDetailsStatisticsProps
 } from "./details-statistics/details-statistics.container";
+
+const Container = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+`;
 
 const _DetailsStatisticSection: React.FC<Props> = ({
   renderAbsoluteProfitChart,
@@ -22,7 +28,7 @@ const _DetailsStatisticSection: React.FC<Props> = ({
   useChartPeriod,
   renderDetailsStatisticsElements
 }) => (
-  <div className={styles["details-statistic-section"]}>
+  <Container>
     <DetailsStatisticsContainer
       profitChartSelector={profitChartSelector}
       statisticCurrencySelector={statisticCurrencySelector}
@@ -41,7 +47,7 @@ const _DetailsStatisticSection: React.FC<Props> = ({
       profitChartSelector={profitChartSelector}
       renderProfitValue={renderProfitValue}
     />
-  </div>
+  </Container>
 );
 
 interface Props extends IDetailsStatisticsProps, IDetailsChartProps {}

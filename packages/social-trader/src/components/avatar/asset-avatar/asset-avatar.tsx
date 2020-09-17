@@ -1,6 +1,5 @@
-import GVProgramAvatar, {
-  GVProgramAvatarProps
-} from "components/gv-program-avatar";
+import GVProgramAvatar from "components/gv-program-avatar";
+import { GVProgramAvatarProps } from "components/gv-program-avatar/gv-program-avatar.styles";
 import { ILevelTooltip } from "components/level-tooltip/level-tooltip";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
@@ -40,7 +39,7 @@ const _AssetAvatar: React.FC<IAssetAvatarProps> = props => {
       />
       {tooltip && (
         <Popover
-          noAbsolute
+          absolute={false}
           noPadding
           anchorEl={anchor}
           className="tooltip__popover"

@@ -1,9 +1,8 @@
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { Text } from "components/text/text";
 import * as React from "react";
 import { OptionalClickable, Sizeable } from "utils/types";
-
-import styles from "./avatar-with-name.module.scss";
 
 interface Props extends Sizeable, OptionalClickable {
   className?: string;
@@ -25,7 +24,9 @@ const _AvatarWithName: React.FC<Props> = ({
           <Row>{avatar}</Row>
         </RowItem>
       )}
-      <RowItem className={styles["avatar-with-name__name"]}>{name}</RowItem>
+      <RowItem>
+        <Text wrap={false}>{name}</Text>
+      </RowItem>
     </Row>
   );
 };

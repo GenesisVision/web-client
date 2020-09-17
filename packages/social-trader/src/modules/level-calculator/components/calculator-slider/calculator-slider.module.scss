@@ -44,12 +44,4 @@
     @include font-size(15px);
     padding-bottom: $padding-xxsmall / 2;
   }
-
-  &__editable-value-input {
-    text-align: right;
-    @include font-size(15px);
-    line-height: normal;
-    padding: 0;
-    font-weight: 600;
-  }
 }

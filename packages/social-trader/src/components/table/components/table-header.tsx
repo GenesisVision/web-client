@@ -11,7 +11,6 @@ import {
 import { SortingColumn } from "./filtering/filter.type";
 import TableHeadCell from "./table-head-cell";
 import TableRow from "./table-row";
-import styles from "./table.module.scss";
 import { TRenderHeaderFunc, UpdateSortingFuncType } from "./table.types";
 
 const _TableHeader: React.FC<ITableHeaderProps> = ({
@@ -20,8 +19,8 @@ const _TableHeader: React.FC<ITableHeaderProps> = ({
   columns,
   renderHeader
 }) => (
-  <thead className={styles["table__head"]}>
-    <TableRow className={styles["table__row--head"]}>
+  <thead>
+    <TableRow head>
       <TableColumns
         condition={!!columns}
         columns={columns!}

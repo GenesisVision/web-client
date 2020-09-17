@@ -4,12 +4,16 @@ import { useToLink } from "components/link/link.helper";
 import { PopoverContentCardBlock } from "components/popover/popover-card.block";
 import { PopoverContent } from "components/popover/popover-content";
 import { Row } from "components/row/row";
-import styles from "components/wallet-widget/wallet-widget.module.scss";
 import { WALLET_TOTAL_PAGE_ROUTE } from "pages/wallet/wallet.paths";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import styled from "styled-components";
 import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
+
+const StyledPopoverContentCardBlock = styled(PopoverContentCardBlock)`
+  min-width: 200px;
+`;
 
 const _WalletWidgetPopoverContent: React.FC<Props> = ({
   total,
@@ -23,10 +27,7 @@ const _WalletWidgetPopoverContent: React.FC<Props> = ({
   const [t] = useTranslation();
   return (
     <PopoverContent>
-      <PopoverContentCardBlock
-        className={styles["wallet-widget__popover"]}
-        stretched
-      >
+      <StyledPopoverContentCardBlock stretched>
         <Row>
           <LabeledValue label={t("wallet-widget.total-balance")}>
             {`${formatCurrencyValue(total, currency)} ${currency}`}
@@ -52,7 +53,7 @@ const _WalletWidgetPopoverContent: React.FC<Props> = ({
             {t("wallet-widget.details")} ›
           </Link>
         </Row>
-      </PopoverContentCardBlock>
+      </StyledPopoverContentCardBlock>
     </PopoverContent>
   );
 };

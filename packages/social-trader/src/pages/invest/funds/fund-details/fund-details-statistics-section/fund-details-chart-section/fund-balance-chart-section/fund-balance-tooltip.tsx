@@ -1,5 +1,4 @@
 import ChartTooltip from "components/chart/chart-tooltip/chart-tooltip";
-import styles from "components/details/details-statistic-section/details-chart-section/details-chart-section.module.scss";
 import { LabeledValue } from "components/labeled-value/labeled-value";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
@@ -73,7 +72,6 @@ const FundBalanceTooltip: React.FC<IFundBalanceTooltipProps> = ({
         />
       }
       date={new Date(label)}
-      className={styles["details-tooltip"]}
     />
   );
 };

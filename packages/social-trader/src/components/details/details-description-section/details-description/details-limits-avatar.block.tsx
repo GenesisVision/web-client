@@ -1,13 +1,15 @@
-import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
 import DetailsAssetAvatar from "components/details/details-description-section/details-description/details-asset-avatar";
-import { DETAILS_TYPE } from "components/details/details.types";
+import { mediaBreakpointTablet } from "components/gv-styles/gv-media";
+import {
+  $paddingXsmall,
+  $paddingXsmallMobile
+} from "components/gv-styles/gv-sizes";
 import * as React from "react";
+import styled from "styled-components";
+import { width } from "utils/style/style-mixins";
 import { CurrencyEnum } from "utils/types";
 
-import styles from "./details-description.module.scss";
-
 interface Props {
-  detailsType: DETAILS_TYPE;
   logo: string;
   title: string;
   color?: string;
@@ -17,16 +19,18 @@ interface Props {
   currency?: CurrencyEnum;
 }
 
+const AvatarContainer = styled.div`
+  cursor: pointer;
+  margin: ${$paddingXsmallMobile}px 0 ${$paddingXsmall}px;
+  ${width(120)}
+  ${mediaBreakpointTablet("padding: 0;")}
+`;
+
 const _DetailsLimitsAvatar: React.FC<Props> = props => {
-  const { detailsType, logo, title } = props;
   return (
-    <div className={styles["details-description__avatar"]}>
-      {detailsType === DETAILS_TYPE.ASSET ? (
-        <DetailsAssetAvatar {...props} />
-      ) : (
-        <ProfileAvatar big url={logo} alt={title} />
-      )}
-    </div>
+    <AvatarContainer>
+      <DetailsAssetAvatar {...props} />
+    </AvatarContainer>
   );
 };
 

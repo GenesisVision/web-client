@@ -5,7 +5,7 @@ import * as React from "react";
 
 export const _PagerLinkButton: React.FC<Props> = ({
   page,
-  classname,
+  className,
   callback,
   value
 }) => {
@@ -14,7 +14,7 @@ export const _PagerLinkButton: React.FC<Props> = ({
   const link = page === 1 ? pathname : `${pathname}?${query}`;
 
   return (
-    <Link className={classname} to={link} onClick={callback}>
+    <Link className={className} to={link} onClick={callback}>
       {value}
     </Link>
   );
@@ -24,7 +24,7 @@ export default PagerLinkButton;
 
 interface Props {
   page: number;
-  classname: string;
+  className?: string;
   callback: (e: any) => void;
   value: string | number;
 }

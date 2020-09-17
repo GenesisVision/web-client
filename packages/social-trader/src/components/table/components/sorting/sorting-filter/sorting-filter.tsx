@@ -13,7 +13,6 @@ import {
   TFilter
 } from "../../filtering/filter.type";
 import SelectFilter from "../../filtering/select-filter/select-filter";
-import styles from "./sorting-filter.module.scss";
 
 export const SORTING_FILTER_NAME = "sorting";
 
@@ -64,9 +63,9 @@ const _SortingFilter: React.FC<ISortingFilterProps> = ({
         onChange={handleOnSelectChange}
       />
       <Button
+        noPadding
         variant="text"
         color="secondary"
-        className={styles["sorting-filter__btn"]}
         onClick={handleOnDirectionChange(!isAsc())}
       >
         {isAsc() ? <span>&uarr;</span> : <span>&darr;</span>}

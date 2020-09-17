@@ -6,8 +6,17 @@ import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
+import styled from "styled-components";
 
-import styles from "./level-filter.module.scss";
+interface Props {
+  value: number[];
+  cancel?: () => void;
+  changeFilter?: (value: number[]) => void;
+}
+
+const Container = styled(PopoverContent)`
+  width: 250px;
+`;
 
 const _LevelFilterPopover: React.FC<Props> = ({
   cancel,
@@ -26,7 +35,7 @@ const _LevelFilterPopover: React.FC<Props> = ({
     changeFilter
   ]);
   return (
-    <PopoverContent className={styles["level-filter"]}>
+    <Container>
       <PopoverContentCardBlock>
         <Row onlyOffset>
           <Range
@@ -63,15 +72,9 @@ const _LevelFilterPopover: React.FC<Props> = ({
           </RowItem>
         </Row>
       </PopoverContentCardBlock>
-    </PopoverContent>
+    </Container>
   );
 };
-
-interface Props {
-  value: number[];
-  cancel?: () => void;
-  changeFilter?: (value: number[]) => void;
-}
 
 const LevelFilterPopover = React.memo(_LevelFilterPopover);
 export default LevelFilterPopover;

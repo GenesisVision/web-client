@@ -1,6 +1,9 @@
-import styles from "components/conversation/tag/tag-components.module.scss";
+import { $borderColor } from "components/gv-styles/gv-colors/gv-colors";
+import { $paddingXsmall } from "components/gv-styles/gv-sizes";
 import React from "react";
+import styled from "styled-components";
 
-export const RepostTagContainer: React.FC = ({ children }) => {
-  return <div className={styles["repost-tag-container"]}>{children}</div>;
-};
+export const RepostTagContainer = styled.div`
+  padding-left: ${$paddingXsmall}px;
+  border-left: 1px solid ${$borderColor};
+`;

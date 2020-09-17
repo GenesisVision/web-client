@@ -1,8 +1,6 @@
 import { BlurContainer } from "components/blur-container/blur-container";
-import {
-  ILabeledValueProps,
-  LabeledValue
-} from "components/labeled-value/labeled-value";
+import { LabeledValue } from "components/labeled-value/labeled-value";
+import { ILabeledValueProps } from "components/labeled-value/labeled-value.types";
 import React from "react";
 
 interface Props extends ILabeledValueProps {

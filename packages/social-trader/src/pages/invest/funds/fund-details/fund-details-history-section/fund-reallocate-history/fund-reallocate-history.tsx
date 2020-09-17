@@ -44,7 +44,7 @@ const _FundReallocateHistory: React.FC<Props> = ({ id }) => {
               <FundAssetContainer
                 noWrap
                 assets={item.parts}
-                type={FUND_ASSET_TYPE.SHORT}
+                type={"short"}
                 size={13}
                 length={item.parts.length}
                 hasPopoverList

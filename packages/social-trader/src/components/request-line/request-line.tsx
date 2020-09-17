@@ -1,6 +1,7 @@
 import { Center } from "components/center/center";
 import PortfolioEventLogo from "components/dashboard/dashboard-portfolio-events/dashboard-portfolio-event-logo/dashboard-portfolio-event-logo";
 import { CancelRequestButton } from "components/request-line/cancel-request-button";
+import { RequestLineContainer } from "components/request-line/request-line-container";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
@@ -11,7 +12,10 @@ import NumberFormat from "react-number-format";
 import { localizedDate } from "utils/dates";
 import { formatCurrencyValue } from "utils/formatter";
 
-import styles from "./request-line.module.scss";
+interface Props {
+  request: AssetInvestmentRequest;
+  onApplyCancelRequest: () => void;
+}
 
 const RequestLineItem: React.FC<{ label: string | JSX.Element }> = ({
   children,
@@ -47,7 +51,7 @@ const _RequestLine: React.FC<Props> = ({
   } = assetDetails;
   const [t] = useTranslation();
   return (
-    <Center className={styles["request-line"]}>
+    <RequestLineContainer>
       <RowItem size={"small"}>
         <PortfolioEventLogo withAsset assetDetails={assetDetails} icon={""} />
       </RowItem>
@@ -160,14 +164,9 @@ const _RequestLine: React.FC<Props> = ({
           />
         </RowItem>
       )}
-    </Center>
+    </RequestLineContainer>
   );
 };
-
-interface Props {
-  request: AssetInvestmentRequest;
-  onApplyCancelRequest: () => void;
-}
 
 const RequestLine = React.memo(_RequestLine);
 export default RequestLine;
