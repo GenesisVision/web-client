@@ -22,6 +22,8 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
   vertical?: VERTICAL_POPOVER_POS;
 }
 
+const CONTAINER_CLASS_NAME = "CONTAINER_CLASS_NAME";
+
 const Container = styled.div`
   padding: ${$paddingXxsmall}px 0;
 `;
@@ -46,16 +48,36 @@ const MenuTooltip: React.FC<Props> = ({ render, children, disable }) => {
   const handlePopoverMouseEnter = useCallback(() => {
     setInPopover();
   }, []);
-  const handlePopoverMouseLeave = useCallback(() => {
-    setOutPopover();
-  }, [inLabel]);
+  const handlePopoverMouseLeave = useCallback(
+    (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+      if (
+        // @ts-ignore
+        typeof e?.relatedTarget?.className === "string" &&
+        // @ts-ignore
+        e?.relatedTarget?.className?.includes(CONTAINER_CLASS_NAME)
+      )
+        setInLabel();
+      setOutPopover();
+    },
+    [inLabel]
+  );
 
   const handleLabelMouseEnter = useCallback(() => {
     setInLabel();
   }, []);
-  const handleLabelMouseLeave = useCallback(() => {
-    setOutLabel();
-  }, [inPopover]);
+  const handleLabelMouseLeave = useCallback(
+    (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+      if (
+        // @ts-ignore
+        typeof e?.relatedTarget?.className === "string" &&
+        // @ts-ignore
+        e?.relatedTarget?.className?.includes("popover")
+      )
+        setInPopover();
+      setOutLabel();
+    },
+    []
+  );
 
   useEffect(() => {
     if (!inLabel && !inPopover) clearAnchor();
@@ -64,6 +86,7 @@ const MenuTooltip: React.FC<Props> = ({ render, children, disable }) => {
   const child = React.Children.only(children)! as JSX.Element;
   return (
     <Container
+      className={CONTAINER_CLASS_NAME}
       onMouseEnter={handleLabelMouseEnter}
       onMouseLeave={handleLabelMouseLeave}
     >
