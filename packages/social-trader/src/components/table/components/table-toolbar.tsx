@@ -19,16 +19,13 @@ import {
 
 const $viewSvgSize = 15;
 
-const SortingFilterContainer = styled.div`
+const TableToolbarItem = styled.div`
   margin-right: auto;
 `;
 const TableTitle = styled.h3`
   padding: 0;
   justify-self: flex-start;
   white-space: nowrap;
-`;
-const TableMapping = styled.div`
-  margin-right: auto;
 `;
 const TableToolbarContainer = styled(Row)`
   width: 100%;
@@ -83,16 +80,16 @@ const _TableToolbar: React.FC<ITableToolbarExternalProps &
     <TableToolbarContainer>
       {!showTitle && !showMappings && !showSortingFilter && <div />}
       {showTitle && (
-        <RowItem>
+        <TableToolbarItem>
           <TableTitle>{title}</TableTitle>
-        </RowItem>
+        </TableToolbarItem>
       )}
       {showMappings && (
-        <TableMapping>
+        <TableToolbarItem>
           <Row wrap>{renderMappings!(updateFilter!, filtering!)}</Row>
-        </TableMapping>
+        </TableToolbarItem>
       )}
-      <SortingFilterContainer>
+      <TableToolbarItem>
         {showSortingFilter && (
           <SortingFilter
             sorting={sorting}
@@ -101,7 +98,7 @@ const _TableToolbar: React.FC<ITableToolbarExternalProps &
             renderValueText={renderSorting}
           />
         )}
-      </SortingFilterContainer>
+      </TableToolbarItem>
       <RowItem>
         <Row>
           <RowItem>
