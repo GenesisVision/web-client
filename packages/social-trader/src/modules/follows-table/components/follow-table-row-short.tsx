@@ -85,7 +85,7 @@ const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
   return (
     <TableRow>
       <TableCell>
-        <Link to={linkProps}>
+        <Link noColor to={linkProps}>
           <AssetAvatarWithName
             url={logoUrl}
             alt={follow.title}

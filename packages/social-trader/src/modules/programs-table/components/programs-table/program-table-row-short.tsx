@@ -93,7 +93,7 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
   return (
     <TableRow>
       <TableCell height={"small"}>
-        <Link to={programLinkProps} white>
+        <Link to={programLinkProps} noColor>
           <AssetAvatarWithName
             url={logoUrl}
             level={level}

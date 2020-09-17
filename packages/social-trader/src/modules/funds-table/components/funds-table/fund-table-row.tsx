@@ -57,7 +57,7 @@ const _FundsTableRow: React.FC<Props> = ({ fund }) => {
   return (
     <TableRow>
       <TableCell height={"small"}>
-        <Link to={link}>
+        <Link noColor to={link}>
           <AssetAvatarWithName
             url={fund.logoUrl}
             alt={fund.title}
