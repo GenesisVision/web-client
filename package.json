@@ -31,6 +31,7 @@
     "next-transpile-modules": "^4.1.0",
     "nextjs-fonts": "^0.22.0",
     "node-sass": "^4.13.1",
+    "preact": "^10.4.8",
     "qrcode.react": "^0.9.3",
     "qs": "^6.9.0",
     "raf": "^3.4.1",
