@@ -22,7 +22,6 @@ export enum ORIENTATION_POPOVER {
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   onMouseEnter?: VoidFunction;
-  onMouseLeave?: VoidFunction;
   fixedHorizontal?: boolean;
   fixedVertical?: boolean;
   orientation?: ORIENTATION_POPOVER;
