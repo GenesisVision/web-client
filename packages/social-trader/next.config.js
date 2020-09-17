@@ -30,6 +30,9 @@ function create(path) {
     webpack(config) {
       config.resolve.alias = {
         ...config.resolve.alias,
+        react: "preact/compat",
+        "react-dom/test-utils": "preact/test-utils",
+        "react-dom": "preact/compat",
         "lodash.throttle": "lodash/throttle",
         "lodash.debounce": "lodash/debounce"
       };
