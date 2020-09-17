@@ -21,6 +21,10 @@ function create(path) {
   dotenv.config({ path: ".env" });
 
   const nextConfig = {
+    experimental: {
+      modern: true,
+      polyfillsOptimization: true
+    },
     serverRuntimeConfig: {
       apiUrl: process.env.SERVER_API_URL
     },
