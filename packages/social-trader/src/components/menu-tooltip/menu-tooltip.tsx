@@ -23,6 +23,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const CONTAINER_CLASS_NAME = "CONTAINER_CLASS_NAME";
+const POPOVER_CLASS_NAME = "POPOVER_CLASS_NAME";
 
 const Container = styled.div`
   padding: ${$paddingXxsmall}px 0;
@@ -71,7 +72,7 @@ const MenuTooltip: React.FC<Props> = ({ render, children, disable }) => {
         // @ts-ignore
         typeof e?.relatedTarget?.className === "string" &&
         // @ts-ignore
-        e?.relatedTarget?.className?.includes("popover")
+        e?.relatedTarget?.className?.includes(POPOVER_CLASS_NAME)
       )
         setInPopover();
       setOutLabel();
@@ -98,6 +99,7 @@ const MenuTooltip: React.FC<Props> = ({ render, children, disable }) => {
         onClick={clearAnchor}
       />
       <StyledPopover
+        className={POPOVER_CLASS_NAME}
         fixedHorizontal
         onMouseEnter={handlePopoverMouseEnter}
         onMouseLeave={handlePopoverMouseLeave}
