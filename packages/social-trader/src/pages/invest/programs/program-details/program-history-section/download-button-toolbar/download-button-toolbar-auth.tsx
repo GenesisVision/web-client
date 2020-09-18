@@ -6,13 +6,19 @@ import * as React from "react";
 import { useCallback } from "react";
 
 interface Props {
-  method: (id: string, dateRange: DateRangeFilterType) => Promise<Blob>;
+  timeframe?: string;
+  method: (
+    id: string,
+    dateRange: DateRangeFilterType,
+    timeframe?: string
+  ) => Promise<Blob>;
   dateRange: DateRangeFilterType;
   id: string;
   title: string;
 }
 
 const _DownloadButtonToolbarAuth: React.FC<Props> = ({
+  timeframe,
   method,
   dateRange,
   id,
@@ -20,7 +26,7 @@ const _DownloadButtonToolbarAuth: React.FC<Props> = ({
 }) => {
   const loadFile = useCallback(() => {
     const dateNow = dayjs(new Date()).format("YYYY-MM-DD_HH-mm-ss");
-    method(id, dateRange).then(blob =>
+    method(id, dateRange, timeframe).then(blob =>
       saveAs(blob, `${title}_statistic_${dateNow}.xlsx`)
     );
   }, [id, dateRange, title]);
