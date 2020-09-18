@@ -38,7 +38,7 @@ const _ReportsTableRow: React.FC<IReportsTableRowProps> = ({
     }
   }
 }) => {
-  const fees = formatValue(
+  const fees = +formatValue(
     platformSuccessFee + managerSuccessFee + managerManagementFee,
     DEFAULT_DECIMAL_SCALE
   );
