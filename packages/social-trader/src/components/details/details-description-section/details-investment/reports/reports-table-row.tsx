@@ -42,6 +42,10 @@ const _ReportsTableRow: React.FC<IReportsTableRowProps> = ({
     platformSuccessFee + managerSuccessFee + managerManagementFee,
     DEFAULT_DECIMAL_SCALE
   );
+  const depositsWithdrawals = +formatValue(
+    deposits + withdrawals,
+    DEFAULT_DECIMAL_SCALE
+  );
   return (
     <TableRow>
       <TableCell>{formatDate(dateFrom)}</TableCell>
@@ -99,7 +103,41 @@ const _ReportsTableRow: React.FC<IReportsTableRowProps> = ({
         )}
       </TableCell>
       <TableCell>
-        {deposits + withdrawals} {currency}
+        {depositsWithdrawals > 0 ? (
+          <Tooltip
+            horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
+            render={() => (
+              <TooltipContent>
+                {deposits > 0 && (
+                  <Row size={"small"}>
+                    <FeeCommission
+                      title={"Deposits"}
+                      value={deposits}
+                      currency={currency}
+                    />
+                  </Row>
+                )}
+                {withdrawals > 0 && (
+                  <Row size={"small"}>
+                    <FeeCommission
+                      title={"Withdrawals"}
+                      value={withdrawals}
+                      currency={currency}
+                    />
+                  </Row>
+                )}
+              </TooltipContent>
+            )}
+          >
+            <HelpFees>
+              {depositsWithdrawals} {currency}
+            </HelpFees>
+          </Tooltip>
+        ) : (
+          <>
+            {depositsWithdrawals} {currency}
+          </>
+        )}
       </TableCell>
     </TableRow>
   );
