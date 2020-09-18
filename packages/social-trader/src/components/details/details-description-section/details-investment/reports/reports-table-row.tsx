@@ -5,10 +5,12 @@ import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import Tooltip from "components/tooltip/tooltip";
 import { TooltipContent } from "components/tooltip/tooltip-content";
+import { DEFAULT_DECIMAL_SCALE } from "constants/constants";
 import { ProgramPeriodViewModel } from "gv-api-web";
 import React from "react";
 import styled from "styled-components";
 import { formatDate, humanizeDate } from "utils/dates";
+import { formatValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 
 export interface IReportsTableRowProps {
@@ -36,7 +38,10 @@ const _ReportsTableRow: React.FC<IReportsTableRowProps> = ({
     }
   }
 }) => {
-  const fees = platformSuccessFee + managerSuccessFee + managerManagementFee;
+  const fees = formatValue(
+    platformSuccessFee + managerSuccessFee + managerManagementFee,
+    DEFAULT_DECIMAL_SCALE
+  );
   return (
     <TableRow>
       <TableCell>{formatDate(dateFrom)}</TableCell>
