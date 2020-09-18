@@ -62,7 +62,7 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
       <DownloadButtonToolbarAuth
         method={filesService.getStatisticExportFile}
         dateRange={filtering!.dateRange}
-        programId={id}
+        id={id}
         title={title}
       />
     ),

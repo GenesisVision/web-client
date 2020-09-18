@@ -60,7 +60,7 @@ const _ProgramTrades: React.FC<Props> = ({
             <DownloadButtonToolbarAuth
               method={filesService.getAccountTradesExportFileUrl}
               dateRange={filtering!.dateRange}
-              programId={programId}
+              id={programId}
               title={title}
             />
           ) : (
