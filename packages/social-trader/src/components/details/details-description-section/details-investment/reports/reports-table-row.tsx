@@ -25,15 +25,15 @@ const _ReportsTableRow: React.FC<IReportsTableRowProps> = ({
   data: {
     dateFrom,
     periodLength,
-    balance,
-    profit,
     investorStatistic: {
+      deposits,
+      withdrawals,
+      balance,
+      profit,
       managerManagementFee,
       managerSuccessFee,
       platformSuccessFee
-    },
-    investorsDeposit,
-    investorsWithdraw
+    }
   }
 }) => {
   const fees = platformSuccessFee + managerSuccessFee + managerManagementFee;
@@ -82,7 +82,7 @@ const _ReportsTableRow: React.FC<IReportsTableRowProps> = ({
         </Tooltip>
       </TableCell>
       <TableCell>
-        {investorsDeposit + investorsWithdraw} {currency}
+        {deposits + withdrawals} {currency}
       </TableCell>
     </TableRow>
   );
