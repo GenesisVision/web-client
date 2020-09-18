@@ -40,7 +40,7 @@ const _ProgramFinancialStatisticRow: React.FC<Props> = ({
   } = period;
 
   const depositsWithdrawals = +formatValue(
-    managerDeposit + managerWithdraw,
+    managerDeposit - managerWithdraw,
     DEFAULT_DECIMAL_SCALE
   );
   return (

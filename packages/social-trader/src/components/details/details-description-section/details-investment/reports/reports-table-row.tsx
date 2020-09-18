@@ -43,7 +43,7 @@ const _ReportsTableRow: React.FC<IReportsTableRowProps> = ({
     DEFAULT_DECIMAL_SCALE
   );
   const depositsWithdrawals = +formatValue(
-    deposits + withdrawals,
+    deposits - withdrawals,
     DEFAULT_DECIMAL_SCALE
   );
   return (
