@@ -6,6 +6,15 @@ import { Row } from "components/row/row";
 import * as React from "react";
 import styled from "styled-components";
 
+export interface ITileFilterItemProps
+  extends React.HTMLAttributes<HTMLDivElement> {
+  bottomOffset?: boolean;
+  removable?: boolean;
+  id: string;
+  removeTile?: (id: string) => void;
+  mandatory?: boolean;
+}
+
 const Item = styled(Row)`
   position: relative;
 `;
@@ -29,7 +38,7 @@ const RemoveButton = styled.div`
   border: 2px solid ${$panelBackgroundColor};
   border-radius: 50%;
   top: -${$closeButtonSize / 2}px;
-  right: -${$closeButtonSize / 2}px;
+  right: -${$closeButtonSize / 1.2}px;
   &:hover {
     background-color: #161b20;
   }
@@ -61,12 +70,3 @@ const _TileFilterItem: React.FC<ITileFilterItemProps> = ({
 
 const TileFilterItem = React.memo(_TileFilterItem);
 export default TileFilterItem;
-
-export interface ITileFilterItemProps
-  extends React.HTMLAttributes<HTMLDivElement> {
-  bottomOffset?: boolean;
-  removable?: boolean;
-  id: string;
-  removeTile?(id: string): void;
-  mandatory?: boolean;
-}
