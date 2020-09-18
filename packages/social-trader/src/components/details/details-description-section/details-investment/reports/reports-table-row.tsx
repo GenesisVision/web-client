@@ -48,38 +48,50 @@ const _ReportsTableRow: React.FC<IReportsTableRowProps> = ({
         {profit} {currency}
       </TableCell>
       <TableCell>
-        <Tooltip
-          horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
-          render={() => (
-            <TooltipContent>
-              <Row size={"small"}>
-                <FeeCommission
-                  title={"Success fee"}
-                  value={managerSuccessFee}
-                  currency={currency}
-                />
-              </Row>
-              <Row size={"small"}>
-                <FeeCommission
-                  title={"Platform Success fee"}
-                  value={platformSuccessFee}
-                  currency={currency}
-                />
-              </Row>
-              <Row size={"small"}>
-                <FeeCommission
-                  title={"Management fee "}
-                  value={managerManagementFee}
-                  currency={currency}
-                />
-              </Row>
-            </TooltipContent>
-          )}
-        >
-          <HelpFees>
+        {fees > 0 ? (
+          <Tooltip
+            horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
+            render={() => (
+              <TooltipContent>
+                {managerSuccessFee > 0 && (
+                  <Row size={"small"}>
+                    <FeeCommission
+                      title={"Success fee"}
+                      value={managerSuccessFee}
+                      currency={currency}
+                    />
+                  </Row>
+                )}
+                {platformSuccessFee > 0 && (
+                  <Row size={"small"}>
+                    <FeeCommission
+                      title={"Platform Success fee"}
+                      value={platformSuccessFee}
+                      currency={currency}
+                    />
+                  </Row>
+                )}
+                {managerManagementFee > 0 && (
+                  <Row size={"small"}>
+                    <FeeCommission
+                      title={"Management fee "}
+                      value={managerManagementFee}
+                      currency={currency}
+                    />
+                  </Row>
+                )}
+              </TooltipContent>
+            )}
+          >
+            <HelpFees>
+              {fees} {currency}
+            </HelpFees>
+          </Tooltip>
+        ) : (
+          <>
             {fees} {currency}
-          </HelpFees>
-        </Tooltip>
+          </>
+        )}
       </TableCell>
       <TableCell>
         {deposits + withdrawals} {currency}
