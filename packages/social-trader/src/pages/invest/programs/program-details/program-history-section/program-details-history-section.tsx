@@ -240,6 +240,7 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
       )}
       {tab === TABS.ANALYTICS && periodHistory && (
         <ProgramAnalytics
+          title={title}
           getItems={periodHistory.getItems(programId)}
           dataSelector={periodHistory.dataSelector}
           id={programId}

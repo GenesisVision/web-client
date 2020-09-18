@@ -10,7 +10,10 @@ import { DEFAULT_PAGING } from "components/table/reducers/table-paging.reducer";
 import { Text } from "components/text/text";
 import Tooltip from "components/tooltip/tooltip";
 import { TooltipContent } from "components/tooltip/tooltip-content";
-import { IntervalFilter } from "pages/invest/programs/program-details/program-history-section/interval-filter";
+import {
+  INTERVAL_FILTER_NAME,
+  IntervalFilter
+} from "pages/invest/programs/program-details/program-history-section/interval-filter";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import filesService from "services/file-service";
@@ -60,8 +63,13 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
   const exportButtonToolbarRender = useCallback(
     (filtering: any) => (
       <DownloadButtonToolbarAuth
-        method={filesService.getStatisticExportFile}
-        dateRange={filtering!.dateRange}
+        method={
+          isExchange
+            ? filesService.getFinancialStatisticExportFileUrl
+            : filesService.getStatisticExportFile
+        }
+        timeframe={filtering![INTERVAL_FILTER_NAME]}
+        dateRange={filtering![DATE_RANGE_FILTER_NAME]}
         id={id}
         title={title}
       />

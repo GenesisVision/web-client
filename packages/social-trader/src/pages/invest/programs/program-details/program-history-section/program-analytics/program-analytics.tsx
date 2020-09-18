@@ -10,7 +10,11 @@ import { DEFAULT_PAGING } from "components/table/reducers/table-paging.reducer";
 import { Text } from "components/text/text";
 import Tooltip from "components/tooltip/tooltip";
 import { TooltipContent } from "components/tooltip/tooltip-content";
-import { IntervalFilter } from "pages/invest/programs/program-details/program-history-section/interval-filter";
+import DownloadButtonToolbarAuth from "pages/invest/programs/program-details/program-history-section/download-button-toolbar/download-button-toolbar-auth";
+import {
+  INTERVAL_FILTER_NAME,
+  IntervalFilter
+} from "pages/invest/programs/program-details/program-history-section/interval-filter";
 import { ProgramAnalyticsRow } from "pages/invest/programs/program-details/program-history-section/program-analytics/program-analytics-row";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
@@ -21,6 +25,7 @@ import { PROGRAM_ANALYTICS } from "../../program-details.constants";
 import DownloadButtonToolbar from "../download-button-toolbar/download-button-toolbar";
 
 interface Props {
+  title: string;
   getItems: GetItemsFuncActionType;
   dataSelector: TableSelectorType;
   id: string;
@@ -28,6 +33,7 @@ interface Props {
 }
 
 const _ProgramAnalytics: React.FC<Props> = ({
+  title,
   getItems,
   dataSelector,
   currency,
@@ -42,10 +48,12 @@ const _ProgramAnalytics: React.FC<Props> = ({
   );
   const exportButtonToolbarRender = useCallback(
     (filtering: any) => (
-      <DownloadButtonToolbar
-        filtering={filtering!.dateRange}
-        programId={id}
-        getExportFileUrl={filesService.getPeriodExportFileUrl}
+      <DownloadButtonToolbarAuth
+        method={filesService.getAnalyticsExportFileUrl}
+        timeframe={filtering![INTERVAL_FILTER_NAME]}
+        dateRange={filtering![DATE_RANGE_FILTER_NAME]}
+        id={id}
+        title={title}
       />
     ),
     [id]
