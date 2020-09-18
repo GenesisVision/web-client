@@ -34,8 +34,12 @@ const getDateFiltersForQuery = (
     SERVER_QUERY_DATE_RANGE_MAX_FILTER_NAME
   )(dateRange);
 
-const getDateRangeQueryString = (dateRange: DateRangeFilterType) => {
+const getDateRangeQueryString = (
+  dateRange: DateRangeFilterType,
+  timeframe?: string
+) => {
   const filter = getDateFiltersForQuery(dateRange);
+  if (timeframe) filter.Timeframe = timeframe;
   return "?" + qs.stringify(filter);
 };
 
