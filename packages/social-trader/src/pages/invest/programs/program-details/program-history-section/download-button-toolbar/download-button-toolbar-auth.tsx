@@ -29,7 +29,7 @@ const _DownloadButtonToolbarAuth: React.FC<Props> = ({
     method(id, dateRange, timeframe).then(blob =>
       saveAs(blob, `${title}_statistic_${dateNow}.xlsx`)
     );
-  }, [id, dateRange, title]);
+  }, [timeframe, id, dateRange, title]);
   return <DownloadButton authHandle={loadFile} />;
 };
 
