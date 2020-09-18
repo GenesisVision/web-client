@@ -51,6 +51,39 @@ const getDateFiltersForRequest = (
     SERVER_REQUEST_DATE_RANGE_MAX_FILTER_NAME
   )(dateRange);
 
+const getReportsExportFileUrl = (
+  id: string,
+  dateRange: DateRangeFilterType,
+  timeframe?: string
+): Promise<Blob> => {
+  const queryString = getDateRangeQueryString(dateRange, timeframe);
+  return fetchBlob(
+    `/v2.0/programs/${id}/periods/export/investorreport${queryString}`
+  );
+};
+
+const getFinancialStatisticExportFileUrl = (
+  id: string,
+  dateRange: DateRangeFilterType,
+  timeframe?: string
+): Promise<Blob> => {
+  const queryString = getDateRangeQueryString(dateRange, timeframe);
+  return fetchBlob(
+    `/v2.0/programs/${id}/periods/export/financialstatistic${queryString}`
+  );
+};
+
+const getAnalyticsExportFileUrl = (
+  id: string,
+  dateRange: DateRangeFilterType,
+  timeframe?: string
+): Promise<Blob> => {
+  const queryString = getDateRangeQueryString(dateRange, timeframe);
+  return fetchBlob(
+    `/v2.0/programs/${id}/periods/export/analytics${queryString}`
+  );
+};
+
 const getProgramTradesExportFileUrl = (
   id: string,
   dateRange: DateRangeFilterType
@@ -113,6 +146,9 @@ const uploadDocument = (uploadedFile: File): Promise<string> =>
     .then((response: any) => response.id);
 
 const filesService = {
+  getReportsExportFileUrl,
+  getFinancialStatisticExportFileUrl,
+  getAnalyticsExportFileUrl,
   getAccountTradesExportFileUrl,
   getReferralHistoryFile,
   getProgramTradesExportFileUrl,
