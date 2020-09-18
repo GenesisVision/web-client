@@ -18,6 +18,7 @@ import { DashboardPrivateCardActions } from "pages/dashboard/components/dashboar
 import { DashboardPrivateCardTransfer } from "pages/dashboard/components/dashboard-trading/dashboard-private-card/dashboard-private-card-transfer";
 import * as React from "react";
 import NumberFormat from "react-number-format";
+import { ACCOUNT_DETAILS_ROUTE } from "routes/accounts.routes";
 import { composeAccountDetailsUrl } from "utils/compose-url";
 import { convertDateToShortFormat, distanceDate } from "utils/dates";
 import { formatValueDifferentDecimalScale } from "utils/formatter";
@@ -32,7 +33,10 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
       asset={asset}
     />
   );
-  const detailsLink = linkCreator(composeAccountDetailsUrl(asset.id));
+  const detailsLink = linkCreator(
+    composeAccountDetailsUrl(asset.id),
+    ACCOUNT_DETAILS_ROUTE
+  );
   return (
     <TableCard
       subTitle={t(
