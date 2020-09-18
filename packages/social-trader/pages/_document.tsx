@@ -32,6 +32,10 @@ class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Montserrat:200,400,500,600,700,800&display=swap"
+          />
           <link rel="icon" sizes="192x192" href="/icon.png" />
           <link rel="apple-touch-icon" href="/icon.png" />
           <link rel="shortcut icon" href="/favicon.ico" />
