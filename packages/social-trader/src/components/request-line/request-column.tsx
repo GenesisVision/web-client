@@ -1,5 +1,5 @@
 import { CancelRequestButton } from "components/request-line/cancel-request-button";
-import { RequestLineContainer } from "components/request-line/request-line-container";
+import { RequestColumnContainer } from "components/request-line/request-line-container";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
@@ -41,7 +41,7 @@ const _RequestColumn: React.FC<Props> = ({
   } = assetDetails;
   const [t] = useTranslation();
   return (
-    <RequestLineContainer>
+    <RequestColumnContainer>
       <RequestColumnItem label={type}>{localizedDate(date)}</RequestColumnItem>
       <RequestColumnItem label={t("Value")}>
         {assetDetails.isWithdrawAll ? (
@@ -113,7 +113,7 @@ const _RequestColumn: React.FC<Props> = ({
           />
         </Row>
       )}
-    </RequestLineContainer>
+    </RequestColumnContainer>
   );
 };
 
