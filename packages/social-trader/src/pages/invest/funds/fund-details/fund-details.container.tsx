@@ -148,6 +148,7 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
       />
       <DetailsDivider />
       <DetailsInvestment
+        title={description.publicInfo.title}
         hasTradingSchedule={hasTradingSchedule}
         investmentMessage={hasTradingSchedule ? investmentMessage : undefined}
         withdrawMessage={hasTradingSchedule ? investMessage : undefined}

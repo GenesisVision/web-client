@@ -51,6 +51,7 @@ const PortfolioEventsTableContainer = dynamic(() =>
 );
 
 interface Props {
+  title: string;
   hasTradingSchedule?: boolean;
   investmentMessage?: string;
   withdrawMessage?: string;
@@ -92,6 +93,7 @@ interface Props {
 }
 
 const _DetailsInvestment: React.FC<Props> = ({
+  title,
   isExchange,
   isProcessingRealTime,
   investmentMessage,
@@ -226,7 +228,9 @@ const _DetailsInvestment: React.FC<Props> = ({
           dateRangeStartLabel={t("filters.date-range.program-start")}
         />
       )}
-      {tab === TABS.REPORTS && <ReportTable id={id} currency={currency} />}
+      {tab === TABS.REPORTS && (
+        <ReportTable title={title} id={id} currency={currency} />
+      )}
     </DefaultTableBlock>
   );
 };
