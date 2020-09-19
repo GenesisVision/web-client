@@ -9,6 +9,7 @@ import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
 } from "components/popover/popover";
+import { RowItem } from "components/row-item/row-item";
 import {
   FundAssetInfo,
   FundAssetPartWithIcon,
@@ -169,11 +170,13 @@ const HidedFundAssets: React.FC<IHidedFundAssetsProps> = React.memo(
     );
     return (
       <>
-        <HidedAssetsLabel
-          count={(length || assets.length) - size}
-          type={type}
-          handleOpen={handleOpen}
-        />
+        <RowItem size={"small"} bottomOffset={bottomOffset}>
+          <HidedAssetsLabel
+            count={(length || assets.length) - size}
+            type={type}
+            handleOpen={handleOpen}
+          />
+        </RowItem>
         <Popover
           horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
           vertical={VERTICAL_POPOVER_POS.TOP}
