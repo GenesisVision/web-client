@@ -57,6 +57,43 @@ interface IHidedFundAssetsProps {
   hoveringAsset?: string;
 }
 
+const getVisibleAssets = (size: number) => (
+  asset: FundAssetType,
+  idx: number
+) => idx < size;
+
+const getHidedAssets = (size: number) => (asset: FundAssetType, idx: number) =>
+  idx >= size;
+
+const renderFundAsset = ({
+  bottomOffset,
+  type,
+  removable,
+  removeHandle,
+  lightTheme,
+  assetsLength
+}: {
+  bottomOffset?: boolean;
+  type: FundAssetViewType;
+  removable?: boolean;
+  lightTheme?: boolean;
+  removeHandle?: FundAssetRemoveType;
+  hoveringAsset?: string;
+  assetsLength: number;
+}) => (asset: FundAssetType, idx: number) => (
+  <FundAssetTooltipContainer
+    bottomOffset={bottomOffset}
+    key={idx}
+    asset={asset as PlatformAssetFull}
+    idx={idx}
+    assetsLength={assetsLength}
+    type={type}
+    removable={removable}
+    lightTheme={lightTheme}
+    removeHandle={removeHandle}
+  />
+);
+
 const _FundAssetContainer: React.FC<IFundAssetContainerProps> = ({
   noWrap,
   assets = [],
@@ -160,42 +197,6 @@ const HidedFundAssets: React.FC<IHidedFundAssetsProps> = React.memo(
       </>
     );
   }
-);
-const getVisibleAssets = (size: number) => (
-  asset: FundAssetType,
-  idx: number
-) => idx < size;
-
-const getHidedAssets = (size: number) => (asset: FundAssetType, idx: number) =>
-  idx >= size;
-
-const renderFundAsset = ({
-  bottomOffset,
-  type,
-  removable,
-  removeHandle,
-  lightTheme,
-  assetsLength
-}: {
-  bottomOffset?: boolean;
-  type: FundAssetViewType;
-  removable?: boolean;
-  lightTheme?: boolean;
-  removeHandle?: FundAssetRemoveType;
-  hoveringAsset?: string;
-  assetsLength: number;
-}) => (asset: FundAssetType, idx: number) => (
-  <FundAssetTooltipContainer
-    bottomOffset={bottomOffset}
-    key={idx}
-    asset={asset as PlatformAssetFull}
-    idx={idx}
-    assetsLength={assetsLength}
-    type={type}
-    removable={removable}
-    lightTheme={lightTheme}
-    removeHandle={removeHandle}
-  />
 );
 
 const FundAssetContainer = React.memo(_FundAssetContainer);
