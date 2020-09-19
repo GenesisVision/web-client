@@ -11,7 +11,6 @@ export const GvInputWrapper = styled.div<Props>`
   display: inline-flex;
   flex-direction: column;
   min-width: 0;
-  width: 100%;
-  ${({ wide }: Props) => wide && "margin-left: 0;"}
-  ${({ margin }: Props) => !margin && "margin: 0;"}
+  ${({ wide }: Props) => wide && "margin-left: 0; width: 100%;"};
+  ${({ margin }: Props) => !margin && "margin: 0;"};
 `;
