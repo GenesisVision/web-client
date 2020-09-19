@@ -14,16 +14,12 @@ const ListContainer = styled.div<{ withScroll?: boolean }>`
   width: 100%;
   scrollbar-width: 0;
   &::-webkit-scrollbar {
-    width: ${({ withScroll }) => (withScroll ? "6px" : 0)};
-    height: ${({ withScroll }) => (withScroll ? "6px" : 0)};
+    width: ${({ withScroll = true }) => (withScroll ? "6px" : 0)};
+    height: ${({ withScroll = true }) => (withScroll ? "6px" : 0)};
   }
 `;
 
-const _HorizontalShadowList: React.FC<Props> = ({
-  withScroll = true,
-  darkShadow,
-  children
-}) => {
+const _HorizontalShadowList: React.FC<Props> = ({ darkShadow, children }) => {
   const { scrollData, ref, handleScroll } = useShadow();
   return (
     <HorizontalListShadowContainer
