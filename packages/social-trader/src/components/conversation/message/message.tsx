@@ -17,7 +17,7 @@ import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { PostTag, SocialPostTagType } from "gv-api-web";
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { adaptiveMargin } from "utils/style/style-mixins";
 
 export interface IMessageProps {
@@ -49,6 +49,24 @@ export const MessageImages = styled(Row)`
   ${adaptiveMargin("bottom", -$paddingXsmall)};
 `;
 
+interface IMessageItemStyleProps {
+  onlyOffset?: boolean;
+  bottomOffset?: boolean;
+  overflowHidden?: boolean;
+}
+
+const MessageItemStyle = css<IMessageItemStyleProps>`
+  width: auto;
+  ${({ overflowHidden }) => overflowHidden && "overflow: hidden;"};
+`;
+
+const MessageRowItem = styled(Row)<IMessageItemStyleProps>`
+  ${MessageItemStyle}
+`;
+const MessageRowItemItem = styled(RowItem)<IMessageItemStyleProps>`
+  ${MessageItemStyle}
+`;
+
 const _Message: React.FC<IMessageProps> = ({
   excludedTagsUnderText: excludedTagsUnderTextProp = [],
   reduceLargeText = true,
@@ -66,12 +84,9 @@ const _Message: React.FC<IMessageProps> = ({
       ![...ExcludedTagsUnderText, ...excludedTagsUnderTextProp].includes(type)
   );
   const repostTag = tags?.filter(({ type }) => type === "Post");
-  const MessageItem = styled(row ? RowItem : Row)<{ bottomOffset?: boolean }>`
-    width: auto;
-  `;
-  const MessageItemText = styled(MessageItem)`
-    overflow: hidden;
-  `;
+  const MessageItem = (row
+    ? MessageRowItemItem
+    : MessageRowItem) as React.ComponentType<any>;
   return (
     <div>
       <MessageContainer row={row}>
@@ -87,7 +102,7 @@ const _Message: React.FC<IMessageProps> = ({
           </RowItem>
           <RowItem>{settingsBlock}</RowItem>
         </MessageItem>
-        <MessageItemText bottomOffset onlyOffset>
+        <MessageItem overflowHidden bottomOffset onlyOffset>
           <MessageText
             key={text}
             text={text}
@@ -107,7 +122,7 @@ const _Message: React.FC<IMessageProps> = ({
               ))}
             </MessageImages>
           )}
-        </MessageItemText>
+        </MessageItem>
       </MessageContainer>
       {!!tagsUnderText?.length && (
         <Row>
