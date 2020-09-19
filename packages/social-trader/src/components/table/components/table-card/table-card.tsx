@@ -141,7 +141,8 @@ export const TableCardTitle: React.FC<{
 
 const SubtitleContainer = styled.div`
   max-width: 130px;
-  word-break: break-all;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 `;
 const NameLink = styled(Link)`
   ${link($primaryColor)};
