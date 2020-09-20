@@ -79,7 +79,7 @@ export const ButtonDynamicStyles = css`
   border-width: ${({ variant = "contained" }: IButtonProps) =>
     variant === "outlined" ? "0.1em" : 0};
   opacity: ${({ disabled, isSuccessful }: IButtonProps) =>
-    !disabled || isSuccessful ? 1 : 0.5};
+    !disabled || isSuccessful ? 1 : 0.4};
   cursor: ${({ disabled }: IButtonProps) => (disabled ? "default" : "pointer")};
   color: ${({ variant = "contained", color = "primary" }: IButtonProps) => {
     switch (variant) {
