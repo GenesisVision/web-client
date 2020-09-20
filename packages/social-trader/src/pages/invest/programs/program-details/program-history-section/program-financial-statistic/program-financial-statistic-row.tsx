@@ -116,7 +116,7 @@ const _ProgramFinancialStatisticRow: React.FC<Props> = ({
                 value={depositsWithdrawals}
               >
                 <NumberFormat
-                  value={depositsWithdrawals}
+                  value={Math.abs(depositsWithdrawals)}
                   thousandSeparator=" "
                   displayType="text"
                   suffix={` ${currency}`}
@@ -130,7 +130,7 @@ const _ProgramFinancialStatisticRow: React.FC<Props> = ({
             value={depositsWithdrawals}
           >
             <NumberFormat
-              value={depositsWithdrawals}
+              value={Math.abs(depositsWithdrawals)}
               thousandSeparator=" "
               displayType="text"
               suffix={` ${currency}`}
