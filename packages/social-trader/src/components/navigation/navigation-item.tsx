@@ -29,15 +29,6 @@ interface INavigationItemProps
   onClick?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 }
 
-const staticStyles = {
-  cursor: "pointer",
-  display: "flex",
-  "align-items": "center",
-  padding: `${$paddingSmall / 2}px ${$paddingSmall}px`,
-  "text-decoration": "none",
-  position: "relative"
-};
-
 interface IStyleProps {
   router: NextRouter;
   href?: string | ToType;
@@ -66,21 +57,25 @@ const dynamicStyles = css`
 `;
 
 const styles = css<IStyleProps>`
-  ${parseStyles({ styleTable: staticStyles })}
-  ${dynamicStyles}
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: ${$paddingSmall / 2}px ${$paddingSmall}px;
+  text-decoration: none;
+  position: relative;
+  ${dynamicStyles};
 `;
 
 const StyledLink = styled(Link)<IStyleProps>`
   ${styles}
 `;
 
-const StyledButton = styled(Link)<IStyleProps>`
+const StyledButton = styled.div<IStyleProps>`
   ${styles}
 `;
 
 const _NavigationItem: React.FC<INavigationItemProps> = ({
   router,
-  className,
   small,
   onClick,
   href,
