@@ -9,7 +9,6 @@ import { TRADE_ASSET_TYPE } from "constants/constants";
 import { useAccountCurrency } from "hooks/account-currency.hook";
 import useTab from "hooks/tab.hook";
 import dynamic from "next/dynamic";
-import ProgramAnalytics from "pages/invest/programs/program-details/program-history-section/program-analytics/program-analytics";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,6 +17,9 @@ import { RootState } from "reducers/root-reducer";
 import { Dispatch } from "redux";
 import { CurrencyEnum } from "utils/types";
 
+const ProgramAnalytics = dynamic(() =>
+  import("./program-analytics/program-analytics")
+);
 const ProgramFinancialStatistic = dynamic(() =>
   import("./program-financial-statistic/program-financial-statistic")
 );
