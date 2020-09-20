@@ -22,7 +22,7 @@ const StyledDiv = styled.div<{ muted?: boolean }>`
   line-height: 15px;
   text-align: center;
   font-size: 8px;
-  font-weight: 700;
+  font-weight: 800;
   outline: none;
   cursor: pointer;
   border-color: ${({ muted }: Props) => (muted ? $labelColor : $iconColor)};

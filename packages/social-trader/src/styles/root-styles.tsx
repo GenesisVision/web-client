@@ -78,7 +78,7 @@ export const RootStyle = css`
 
   h2 {
     ${fontSize($fontSizeH2)};
-    font-weight: 500;
+    font-weight: 600;
     color: ${$textLightColor};
     margin-top: 0;
     margin-bottom: 0;
@@ -95,7 +95,7 @@ export const RootStyle = css`
 
   h4 {
     ${fontSize($fontSizeH4)};
-    font-weight: 700;
+    font-weight: 800;
     margin-top: 0;
     margin-bottom: 0;
   }
@@ -177,7 +177,7 @@ export const LandingPageRootStyle = css`
     }
 
     h1 {
-      font-weight: 700;
+      font-weight: 800;
       font-size: 28px;
       line-height: 1.6;
       padding-bottom: 0;

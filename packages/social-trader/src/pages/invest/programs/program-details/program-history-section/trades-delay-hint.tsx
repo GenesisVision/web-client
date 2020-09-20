@@ -14,7 +14,7 @@ import styled from "styled-components";
 const Question = styled.div`
   cursor: help;
   box-sizing: border-box;
-  font-weight: 700;
+  font-weight: 800;
   line-height: 15px;
   text-align: center;
   font-size: 8px;

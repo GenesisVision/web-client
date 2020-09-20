@@ -33,7 +33,7 @@ const CloseContainer = styled.div`
 
 const CloseButton = styled.div`
   transform: rotate(45deg);
-  font-weight: 700;
+  font-weight: 800;
   font-size: ${$fontSizeH4 * 1.5}px;
   line-height: ${$fontSizeH4}px;
 `;

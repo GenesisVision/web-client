@@ -30,7 +30,7 @@ const Container = styled.div`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-weight: 500;
+  font-weight: 600;
   text-transform: uppercase;
   line-height: 16px;
   white-space: nowrap;

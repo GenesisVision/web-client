@@ -10,7 +10,7 @@ h1 {
 
 h2 {
   @include font-size($font-size-h2);
-  font-weight: 500;
+  font-weight: 600;
   color: $text-light-color;
   margin-top: 0;
   margin-bottom: 0;
@@ -27,7 +27,7 @@ h3 {
 
 h4 {
   @include font-size($font-size-h4);
-  font-weight: 700;
+  font-weight: 800;
   margin-top: 0;
   margin-bottom: 0;
 }

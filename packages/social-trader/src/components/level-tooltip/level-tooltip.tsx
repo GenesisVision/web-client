@@ -17,7 +17,7 @@ export interface ILevelTooltip {
 const Level = styled.div`
   ${adaptivePadding("bottom", $paddingXxsmall)};
   ${fontSize(16)};
-  font-weight: 700;
+  font-weight: 800;
   color: ${$primaryColor};
   letter-spacing: 0.23px;
 

@@ -22,7 +22,7 @@ const commonStyles = css`
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  font-weight: 700;
+  font-weight: 800;
   color: ${$labelColor};
   ${fontSize($fontSizeCommon)}
   ${width($pagerButtonSize)};

@@ -22,7 +22,7 @@ const _TagBubble = styled.div<Props>`
   display: inline-block;
   position: relative;
   cursor: default;
-  font-weight: 500;
+  font-weight: 600;
   text-transform: uppercase;
   white-space: nowrap;
   ${fontSize($fontSizeXsmall)};

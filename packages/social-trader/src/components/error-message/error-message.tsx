@@ -14,7 +14,7 @@ interface IErrorMessageProps {
 }
 
 const ErrorMessage = styled.span<IErrorMessageProps>`
-  font-weight: 500;
+  font-weight: 600;
   color: ${$negativeColor};
   ${fontSize($fontSizeSmall)};
   ${({ type }) => type === MESSAGE_TYPES.OVER && "position: absolute;"}

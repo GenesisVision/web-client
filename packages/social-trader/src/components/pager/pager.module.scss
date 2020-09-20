@@ -14,7 +14,7 @@ $pager-button-size-mobile: $pager-button-size/$divider-text;
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
-    font-weight: 700;
+    font-weight: 800;
     @include width($pager-button-size);
     @include height($pager-button-size);
     @include font-size($font-size-common);
