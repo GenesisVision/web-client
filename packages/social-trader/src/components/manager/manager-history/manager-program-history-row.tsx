@@ -42,7 +42,7 @@ const _ManagerProgramHistoryRow: React.FC<IManagerHistoryRowProps> = ({
       asset={asset}
       assetType={ASSET.PROGRAM}
       avatarBlock={
-        <Link to={programLinkProps}>
+        <Link noColor to={programLinkProps}>
           <AssetAvatarWithName
             url={asset.logoUrl}
             level={asset.level}

@@ -40,7 +40,7 @@ const _ManagerFundHistoryRow: React.FC<IManagerHistoryRowProps> = ({
       asset={asset}
       assetType={ASSET.PROGRAM}
       avatarBlock={
-        <Link to={linkProps}>
+        <Link noColor to={linkProps}>
           <AssetAvatarWithName
             url={asset.logoUrl}
             alt={asset.title}
