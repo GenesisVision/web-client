@@ -47,6 +47,11 @@ const Content = styled.div`
   ${horizontalPaddings($paddingXsmall)};
 `;
 
+const IconContainer = styled.div`
+  width: 16px;
+  height: 16px;
+`;
+
 const _Notifications: React.FC<Props> = ({
   isPending,
   notifications = initNotifications,
@@ -93,7 +98,9 @@ const _Notifications: React.FC<Props> = ({
       <InfinityScroll loadMore={fetchNotification} hasMore={hasMore}>
         <Header>
           <RowItem>
-            <RingIcon />
+            <IconContainer>
+              <RingIcon />
+            </IconContainer>
           </RowItem>
           <RowItem>
             <h4>{t("notifications-aside.header")}</h4>

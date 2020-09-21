@@ -3,6 +3,7 @@ import ChipButton from "components/chip/chip-button";
 import { $fontSizeCommon } from "components/gv-styles/gv-sizes";
 import HeaderIcon from "components/header/header-icon";
 import { fetchProfileHeaderInfo } from "components/header/header.service";
+import { Icon } from "components/icon/icon";
 import { RingIcon } from "components/icon/ring-icon";
 import NotificationsSidebar from "components/notifications/components/notifications-sidebar";
 import { withBlurLoader } from "decorators/with-blur-loader";
@@ -15,6 +16,11 @@ import { fontSize } from "utils/style/style-mixins";
 
 const NotificationsCount = styled.div`
   ${fontSize($fontSizeCommon)}
+`;
+
+const IconContainer = styled.div`
+  width: 16px;
+  height: 16px;
 `;
 
 const _NotificationsWidget: React.FC<Props> = ({
@@ -40,7 +46,9 @@ const _NotificationsWidget: React.FC<Props> = ({
           }
           label={
             <HeaderIcon>
-              <RingIcon />
+              <IconContainer>
+                <RingIcon />
+              </IconContainer>
             </HeaderIcon>
           }
         />
