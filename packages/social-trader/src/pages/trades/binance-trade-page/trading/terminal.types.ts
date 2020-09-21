@@ -145,42 +145,8 @@ export interface IGVTerminalMethods {
 }
 
 export interface ITerminalMethods extends IGVTerminalMethods {
-  getMarkPrice?: (options: { symbol: string }) => Observable<MarkPrice>;
   getServerTime: () => Promise<{ serverTime: number }>;
-  getBalancesForTransfer?: (options: {
-    authData: TerminalAuthDataType;
-  }) => Promise<BalancesForTransfer>;
-  newFutureAccountTransfer?: (options: {
-    asset: TerminalCurrency;
-    amount: number;
-    type: number; // 1 | 2
-    authData: TerminalAuthDataType;
-  }) => Promise<HttpResponse>;
-  getPositionMode?: (options: {
-    authData: TerminalAuthDataType;
-  }) => Promise<PositionModeType>;
-  changePositionMode?: (options: {
-    dualSidePosition: PositionModeType;
-    authData: TerminalAuthDataType;
-  }) => Promise<HttpResponse>;
   getKlines: (params: KlineParams) => Promise<Bar[]>;
-  getPositionInformation?: (options: {
-    authData: TerminalAuthDataType;
-  }) => Observable<FuturesPositionInformation[]>;
-  getLeverageBrackets?: (options: {
-    symbol: string;
-    authData: TerminalAuthDataType;
-  }) => Promise<SymbolLeverageBrackets[]>;
-  changeLeverage?: (options: {
-    leverage: number;
-    symbol: string;
-    authData: TerminalAuthDataType;
-  }) => Promise<ChangeLeverageResponse>;
-  changeMarginMode?: (options: {
-    mode: MarginModeType;
-    symbol: string;
-    authData: TerminalAuthDataType;
-  }) => Promise<HttpResponse>;
   getExchangeInfo: () => Promise<ExchangeInfo>;
   getOpenOrders: (
     symbol: string,
@@ -214,6 +180,43 @@ export interface ITerminalMethods extends IGVTerminalMethods {
     authData: TerminalAuthDataType;
     side: OrderSide;
   }) => Promise<QueryOrderResult>;
+
+  // Futures
+
+  getMarkPrice?: (options: { symbol: string }) => Observable<MarkPrice>;
+  getPositionInformation?: (options: {
+    authData: TerminalAuthDataType;
+  }) => Observable<FuturesPositionInformation[]>;
+  getBalancesForTransfer?: (options: {
+    authData: TerminalAuthDataType;
+  }) => Promise<BalancesForTransfer>;
+  newFutureAccountTransfer?: (options: {
+    asset: TerminalCurrency;
+    amount: number;
+    type: number; // 1 | 2
+    authData: TerminalAuthDataType;
+  }) => Promise<HttpResponse>;
+  getPositionMode?: (options: {
+    authData: TerminalAuthDataType;
+  }) => Promise<PositionModeType>;
+  changePositionMode?: (options: {
+    dualSidePosition: PositionModeType;
+    authData: TerminalAuthDataType;
+  }) => Promise<HttpResponse>;
+  getLeverageBrackets?: (options: {
+    symbol: string;
+    authData: TerminalAuthDataType;
+  }) => Promise<SymbolLeverageBrackets[]>;
+  changeLeverage?: (options: {
+    leverage: number;
+    symbol: string;
+    authData: TerminalAuthDataType;
+  }) => Promise<ChangeLeverageResponse>;
+  changeMarginMode?: (options: {
+    mode: MarginModeType;
+    symbol: string;
+    authData: TerminalAuthDataType;
+  }) => Promise<HttpResponse>;
 
   // Sockets
 
