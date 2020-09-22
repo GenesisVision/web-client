@@ -103,7 +103,8 @@ export const ChartContainer: React.FC = () => {
         interval,
         emptyCallback
       );
-      widget.chart().createStudy("Volume", false, false, [99]);
+      if (widget.chart().getAllStudies().length === 0)
+        widget.chart().createStudy("Volume", false, false, [99]);
     });
   }, [widget, symbol.quoteAsset, symbol.baseAsset, emptyCallback]);
 
