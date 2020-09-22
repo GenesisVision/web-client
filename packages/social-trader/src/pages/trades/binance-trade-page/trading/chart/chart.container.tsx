@@ -6,7 +6,7 @@ import {
 } from "components/gv-styles/gv-colors/gv-colors";
 import { TerminalInfoContext } from "pages/trades/binance-trade-page/trading/terminal-info.context";
 import { TerminalMethodsContext } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
-import React from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { useSockets } from "services/websocket.service";
 
 import styles from "./chart.module.scss";
@@ -14,17 +14,18 @@ import TradingView, { Timezone } from "./charting_library/charting_library.min";
 import Datafeed from "./datafeed";
 
 export const ChartContainer: React.FC = () => {
-  const TradingInfo = React.useContext(TerminalInfoContext);
-  const [widget, setWidget] = React.useState<
-    TradingView.IChartingLibraryWidget
-  >();
+  const { symbol, exchangeInfo, terminalType } = useContext(
+    TerminalInfoContext
+  );
+  const [widget, setWidget] = useState<TradingView.IChartingLibraryWidget>();
   const { connectSocket } = useSockets();
-  const methods = React.useContext(TerminalMethodsContext);
-  const { symbol, exchangeInfo, terminalType } = TradingInfo;
+  const { getServerTime, getKlines, klineSocket } = useContext(
+    TerminalMethodsContext
+  );
 
-  const emptyCallback = React.useCallback(() => {}, []);
+  const emptyCallback = useCallback(() => {}, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     import("./charting_library/charting_library.min").then(TradingView => {
       if (!exchangeInfo) return;
       let timezone = "Asia/Shanghai" as Timezone;
@@ -43,9 +44,9 @@ export const ChartContainer: React.FC = () => {
         toolbar_bg: $backgroundColor,
         datafeed: Datafeed({
           symbols: exchangeInfo?.symbols || [],
-          getServerTime: methods.getServerTime,
-          getKlines: methods.getKlines,
-          klineSocket: methods.klineSocket(connectSocket)
+          getServerTime,
+          getKlines,
+          klineSocket: klineSocket(connectSocket)
         }),
         locale: "en",
         library_path: "/static/charting_library/",
@@ -92,7 +93,7 @@ export const ChartContainer: React.FC = () => {
     });
   }, [exchangeInfo?.symbols, terminalType]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!widget) return;
 
     widget.onChartReady(() => {
