@@ -19,9 +19,7 @@ import {
 
 const $viewSvgSize = 15;
 
-const TableToolbarItem = styled.div`
-  margin-right: auto;
-`;
+const TableToolbarItem = RowItem;
 const TableTitle = styled.h3`
   padding: 0;
   justify-self: flex-start;
