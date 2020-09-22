@@ -32,7 +32,7 @@ export const tableCardTitleStyles = css`
   ${fontSize($fontSizeParagraph)};
   word-break: break-word;
   display: block;
-  padding-bottom: 26px;
+  padding-bottom: 10px;
   ${mediaBreakpointLandscapePhone(`padding-bottom: 0;`)}
 `;
 
