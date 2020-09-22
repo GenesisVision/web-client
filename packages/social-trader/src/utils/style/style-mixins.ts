@@ -1,10 +1,43 @@
 import {
   mediaBreakpointLandscapePhone,
-  mediaBreakpointLandscapeTablet
+  mediaBreakpointLandscapeTablet,
+  mediaBreakpointLargeDesktop
 } from "components/gv-styles/gv-media";
 import { $dividerPadding, $dividerText } from "components/gv-styles/gv-sizes";
 import { css } from "styled-components";
 import { AnyObjectType } from "utils/types";
+
+export const $gridMaxWidth = 1400;
+
+export const landingContainer = css`
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  min-width: 320px;
+  max-width: ${$gridMaxWidth};
+  padding-left: 20px;
+  padding-right: 20px;
+  ${mediaBreakpointLargeDesktop(`
+    max-width: 1600px;
+    padding-left: 100px;
+    padding-right: 100px;
+    `)}
+`;
+
+export const landingResetLink = css`
+  text-decoration: none;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+
+  &:hover,
+  &:active,
+  &:focus {
+    text-decoration: none;
+    color: inherit;
+    outline: none;
+  }
+`;
 
 export const unselectable = css`
   -moz-user-select: none;
