@@ -247,7 +247,7 @@ const _CreateProgramSettings: React.FC<Props> = ({
         <>
           <CreateProgramDepositBlock
             hide={!accountType.isDepositRequired}
-            blockNumber={2}
+            blockNumber={4}
             setAvailable={setAvailable}
             setRate={setRate}
             walletFieldName={CREATE_PROGRAM_FIELDS.depositWalletId}
