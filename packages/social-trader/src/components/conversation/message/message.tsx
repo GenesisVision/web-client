@@ -1,5 +1,5 @@
-import { ConversationImage } from "components/conversation/conversation-image/conversation-image";
 import { getImageSize } from "components/conversation/conversation-image/conversation-image.helpers";
+import { ConversationImages } from "components/conversation/conversation-image/conversation-images";
 import { ConversationUser } from "components/conversation/conversation-user/conversation-user";
 import {
   IConversationImage,
@@ -111,15 +111,10 @@ const _Message: React.FC<IMessageProps> = ({
           />
           {!!images.length && (
             <MessageImages wrap size={"small"}>
-              {images.map((image, index) => (
-                <RowItem bottomOffset key={index}>
-                  <ConversationImage
-                    index={index}
-                    images={images}
-                    size={getImageSize(images.length)}
-                  />
-                </RowItem>
-              ))}
+              <ConversationImages
+                images={images}
+                size={getImageSize(images.length)}
+              />
             </MessageImages>
           )}
         </MessageItem>
