@@ -34,9 +34,15 @@ export const DEFAULT_SYMBOL: SymbolState = {
 const TRADE_AUTH_DATA_KEY = "TRADE_AUTH_DATA_KEY";
 const initialState = { publicKey: "", privateKey: "" };
 
-export const updateTerminalUrl = (url: string, updates?: Object) => {
-  const params = getLocation().search.slice(1);
-  const parsedParams = qs.parse(params || "");
+const updateUrl = ({
+  parsedParams,
+  updates,
+  url
+}: {
+  url: string;
+  updates?: Object;
+  parsedParams: AnyObjectType | null;
+}) => {
   const updatedParams = qs.stringify({ ...parsedParams, ...updates });
   const ulrWithParams = `${TERMINAL_ROUTE}/${url}${
     updatedParams.length ? `?${updatedParams}` : ""
@@ -44,19 +50,21 @@ export const updateTerminalUrl = (url: string, updates?: Object) => {
   Push(TERMINAL_FOLDER_ROUTE, ulrWithParams);
 };
 
+export const updateTerminalUrl = (url: string, updates?: Object) => {
+  const params = getLocation().search.slice(1);
+  const parsedParams = qs.parse(params || "");
+  updateUrl({ parsedParams, updates, url });
+};
+
 export const useUpdateTerminalUrlParams = () => {
   const { parsedParams } = useParams();
-  const updateUrl = useCallback(
+  const handleUpdate = useCallback(
     (url: string, updates?: Object) => {
-      const updatedParams = qs.stringify({ ...parsedParams, ...updates });
-      const ulrWithParams = `${TERMINAL_ROUTE}/${url}${
-        updatedParams.length ? `?${updatedParams}` : ""
-      }`;
-      Push(TERMINAL_FOLDER_ROUTE, ulrWithParams);
+      updateUrl({ parsedParams, updates, url });
     },
     [parsedParams]
   );
-  return { updateUrl };
+  return { updateUrl: handleUpdate };
 };
 
 export const transformKline = (data: string[]): Bar => ({
