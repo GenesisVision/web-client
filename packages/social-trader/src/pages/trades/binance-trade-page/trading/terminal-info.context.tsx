@@ -26,7 +26,6 @@ import React, {
   useMemo,
   useState
 } from "react";
-import { TERMINAL_ROUTE } from "routes/trade.routes";
 import { Observable } from "rxjs";
 import { useSockets } from "services/websocket.service";
 
@@ -142,8 +141,7 @@ export const TerminalInfoContextProvider: React.FC<Props> = ({
   const handleSetSymbol = useCallback(
     (newSymbol: SymbolState) => {
       const symbolPath = stringifySymbolFromToParam(newSymbol);
-      const route = `${TERMINAL_ROUTE}/${symbolPath}`;
-      updateUrl(route, { type: terminalType });
+      updateUrl(symbolPath, { type: terminalType });
     },
     [terminalType, updateUrl]
   );

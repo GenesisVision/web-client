@@ -17,7 +17,6 @@ import {
   TerminalType
 } from "pages/trades/binance-trade-page/trading/terminal.types";
 import React, { useContext, useEffect, useMemo, useState } from "react";
-import { TERMINAL_ROUTE } from "routes/trade.routes";
 
 export interface ITerminalContainerProps {
   exchangeAccountId?: string;
@@ -80,9 +79,7 @@ const _TerminalContainer: React.FC<ITerminalContainerProps> = ({
 
   useEffect(() => {
     if (isSymbolCorrect === false) {
-      const route = `${TERMINAL_ROUTE}/${stringifySymbolFromToParam(
-        SymbolInitialState
-      )}`;
+      const route = stringifySymbolFromToParam(SymbolInitialState);
       updateTerminalUrl(route);
       setCheckInfo(false);
     } else if (isSymbolCorrect === true) {

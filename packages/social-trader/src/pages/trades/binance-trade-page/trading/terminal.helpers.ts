@@ -16,7 +16,7 @@ import {
 } from "pages/trades/binance-trade-page/trading/terminal.types";
 import qs from "qs";
 import { useCallback, useEffect, useState } from "react";
-import { TERMINAL_FOLDER_ROUTE } from "routes/trade.routes";
+import { TERMINAL_FOLDER_ROUTE, TERMINAL_ROUTE } from "routes/trade.routes";
 import { Observable } from "rxjs";
 import { filter } from "rxjs/operators";
 import { cookieServiceCreator } from "utils/cookie-service.creator";
@@ -38,7 +38,7 @@ export const updateTerminalUrl = (url: string, updates?: Object) => {
   const params = getLocation().search.slice(1);
   const parsedParams = qs.parse(params || "");
   const updatedParams = qs.stringify({ ...parsedParams, ...updates });
-  const ulrWithParams = `${url}${
+  const ulrWithParams = `${TERMINAL_ROUTE}/${url}${
     updatedParams.length ? `?${updatedParams}` : ""
   }`;
   Push(TERMINAL_FOLDER_ROUTE, ulrWithParams);
@@ -49,7 +49,7 @@ export const useUpdateTerminalUrlParams = () => {
   const updateUrl = useCallback(
     (url: string, updates?: Object) => {
       const updatedParams = qs.stringify({ ...parsedParams, ...updates });
-      const ulrWithParams = `${url}${
+      const ulrWithParams = `${TERMINAL_ROUTE}/${url}${
         updatedParams.length ? `?${updatedParams}` : ""
       }`;
       Push(TERMINAL_FOLDER_ROUTE, ulrWithParams);
