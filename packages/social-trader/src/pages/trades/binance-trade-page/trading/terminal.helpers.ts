@@ -21,7 +21,7 @@ import { Observable } from "rxjs";
 import { filter } from "rxjs/operators";
 import { cookieServiceCreator } from "utils/cookie-service.creator";
 import { formatValue } from "utils/formatter";
-import { safeGetElemFromArray } from "utils/helpers";
+import { changeLocation, safeGetElemFromArray } from "utils/helpers";
 import { getLocation } from "utils/location";
 import { AnyObjectType } from "utils/types";
 
@@ -35,10 +35,12 @@ const TRADE_AUTH_DATA_KEY = "TRADE_AUTH_DATA_KEY";
 const initialState = { publicKey: "", privateKey: "" };
 
 const updateUrl = ({
+  reloadPage,
   parsedParams,
   updates,
   url
 }: {
+  reloadPage?: boolean;
   url: string;
   updates?: Object;
   parsedParams: AnyObjectType | null;
@@ -47,20 +49,29 @@ const updateUrl = ({
   const ulrWithParams = `${TERMINAL_ROUTE}/${url}${
     updatedParams.length ? `?${updatedParams}` : ""
   }`;
-  Push(TERMINAL_FOLDER_ROUTE, ulrWithParams);
+  if (reloadPage) Push(TERMINAL_FOLDER_ROUTE, ulrWithParams);
+  else changeLocation(ulrWithParams);
 };
 
 export const updateTerminalUrl = (url: string, updates?: Object) => {
   const params = getLocation().search.slice(1);
   const parsedParams = qs.parse(params || "");
-  updateUrl({ parsedParams, updates, url });
+  updateUrl({ parsedParams, updates, url, reloadPage: true });
 };
 
 export const useUpdateTerminalUrlParams = () => {
   const { parsedParams } = useParams();
   const handleUpdate = useCallback(
-    (url: string, updates?: Object) => {
-      updateUrl({ parsedParams, updates, url });
+    ({
+      reloadPage,
+      url,
+      updates
+    }: {
+      reloadPage?: boolean;
+      url: string;
+      updates?: Object;
+    }) => {
+      updateUrl({ parsedParams, updates, url, reloadPage });
     },
     [parsedParams]
   );
