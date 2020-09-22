@@ -78,7 +78,7 @@ export const TerminalInfoContextProvider: React.FC<Props> = ({
   exchangeAccountId,
   exchangeInfo,
   authData,
-  outerSymbol: symbol = SymbolInitialState,
+  outerSymbol = SymbolInitialState,
   terminalType,
   children
 }) => {
@@ -91,6 +91,7 @@ export const TerminalInfoContextProvider: React.FC<Props> = ({
   } = useContext(TerminalMethodsContext);
   const { connectSocket } = useSockets();
 
+  const [symbol, setSymbol] = useState<SymbolState>(outerSymbol);
   const [tickSize, setTickSize] = useState<string>("0.01");
   const [stepSize, setStepSize] = useState<string>("0.01");
   const [userStreamKey, setUserStreamKey] = useState<string | undefined>();
@@ -141,7 +142,8 @@ export const TerminalInfoContextProvider: React.FC<Props> = ({
   const handleSetSymbol = useCallback(
     (newSymbol: SymbolState) => {
       const symbolPath = stringifySymbolFromToParam(newSymbol);
-      updateUrl(symbolPath, { type: terminalType });
+      setSymbol(newSymbol);
+      updateUrl({ url: symbolPath, updates: { type: terminalType } });
     },
     [terminalType, updateUrl]
   );
