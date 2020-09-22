@@ -1,7 +1,9 @@
 import { $panelBackgroundColor } from "components/gv-styles/gv-colors/gv-colors";
-import { $closeButtonSize } from "components/gv-styles/gv-sizes";
+import {
+  $closeButtonSize,
+  $paddingXsmall
+} from "components/gv-styles/gv-sizes";
 import { CloseIcon } from "components/icon/close-icon";
-import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import * as React from "react";
 import styled from "styled-components";
@@ -14,6 +16,8 @@ export interface ITileFilterItemProps
   removeTile?: (id: string) => void;
   mandatory?: boolean;
 }
+
+export const TileFilterItemMarginBottom = $paddingXsmall / 2;
 
 const Item = styled(Row)`
   position: relative;
@@ -38,14 +42,22 @@ const RemoveButton = styled.div`
   border: 2px solid ${$panelBackgroundColor};
   border-radius: 50%;
   top: -${$closeButtonSize / 2}px;
-  right: -${$closeButtonSize / 1.2}px;
+  right: -${$closeButtonSize / 1.3}px;
   &:hover {
     background-color: #161b20;
   }
 `;
 
+export const TileFilterItemContainer = styled.div<{ bottomOffset?: boolean }>`
+  &:not(:last-child) {
+    margin-right: ${$paddingXsmall}px;
+  }
+  ${({ bottomOffset = true }) =>
+    bottomOffset && `margin-bottom: ${TileFilterItemMarginBottom}px;`};
+`;
+
 const _TileFilterItem: React.FC<ITileFilterItemProps> = ({
-  bottomOffset = true,
+  bottomOffset,
   removable = true,
   mandatory,
   id,
@@ -53,7 +65,7 @@ const _TileFilterItem: React.FC<ITileFilterItemProps> = ({
   children
 }) => {
   return (
-    <RowItem bottomOffset={bottomOffset}>
+    <TileFilterItemContainer bottomOffset={bottomOffset}>
       <Item>
         {children}
         {!mandatory && removable && (
@@ -64,7 +76,7 @@ const _TileFilterItem: React.FC<ITileFilterItemProps> = ({
           </RemoveButton>
         )}
       </Item>
-    </RowItem>
+    </TileFilterItemContainer>
   );
 };
 

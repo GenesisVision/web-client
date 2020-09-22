@@ -39,12 +39,7 @@ const _ChartCurrencySelectorItem: React.FC<Props> = ({
   onChange
 }) => {
   return (
-    <TileFilterItem
-      bottomOffset={false}
-      removable={i > 0}
-      id={name}
-      removeTile={onRemove}
-    >
+    <TileFilterItem removable={i > 0} id={name} removeTile={onRemove}>
       <TagBubble color={color}>
         <Center>
           <RowItem size={"small"}>

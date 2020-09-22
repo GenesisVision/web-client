@@ -1,4 +1,3 @@
-import { $paddingXsmall } from "components/gv-styles/gv-sizes";
 import Popover, { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
@@ -9,7 +8,10 @@ import styled from "styled-components";
 
 import { UpdateFilterFunc } from "../table.types";
 import TileFilterButton from "./tile-filter-button";
-import { ITileFilterItemProps } from "./tile-filter-item";
+import {
+  ITileFilterItemProps,
+  TileFilterItemMarginBottom
+} from "./tile-filter-item";
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   value: string[];
@@ -20,7 +22,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const Items = styled(Row)`
-  margin-bottom: -${$paddingXsmall}px;
+  margin-bottom: -${TileFilterItemMarginBottom}px;
   flex-wrap: wrap;
 `;
 
