@@ -3,6 +3,7 @@ import withReduxStore from "decorators/with-redux-store";
 import withToken from "decorators/with-token";
 import withTradeLayout from "decorators/with-trade-layout";
 import { BrokerTradeServerType } from "gv-api-web";
+import { TerminalPage } from "pages/trade/terminal.page";
 import { TYPE_PARAM_NAME } from "pages/trades/binance-trade-page/binance-trade.helpers";
 import { getTerminalApiMethods } from "pages/trades/binance-trade-page/services/api.helpers";
 import { SymbolState } from "pages/trades/binance-trade-page/trading/terminal-info.context";
@@ -12,7 +13,6 @@ import {
   TerminalAuthDataType,
   TerminalType
 } from "pages/trades/binance-trade-page/trading/terminal.types";
-import { TerminalPage } from "pages/trades/terminal.page";
 import React from "react";
 import { compose } from "redux";
 import { api } from "services/api-client/swagger-custom-client";
