@@ -153,7 +153,7 @@ export const usePlaceOrderFormReset = ({
   balances: AssetBalance[];
   quantityName: string;
 }) => {
-  const { terminalType } = useContext(TerminalInfoContext);
+  const { terminalType, symbol } = useContext(TerminalInfoContext);
   const { quantity, total, price } = watch();
   const { sliderValue, setSliderValue } = useTradeSlider({
     watch,
@@ -197,7 +197,7 @@ export const usePlaceOrderFormReset = ({
       stopPrice: outerPrice,
       price: outerPrice
     });
-  }, [terminalType]);
+  }, [symbol, terminalType]);
 
   useEffect(() => {
     setPrevFormState({ ...watch(), sliderValue });
