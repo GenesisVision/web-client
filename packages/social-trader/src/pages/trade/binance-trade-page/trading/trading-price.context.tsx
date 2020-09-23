@@ -44,7 +44,7 @@ export const TradingPriceContextProvider: React.FC = ({ children }) => {
   const [socketDataBuffer, setSocketDataBuffer] = useState<Trade[]>([]);
 
   useEffect(() => {
-    setPrice(PriceInitialState);
+    if (!price) setPrice(PriceInitialState);
     setList([]);
     setSocketData(undefined);
     const symbol = getSymbol(baseAsset, quoteAsset);
@@ -72,9 +72,7 @@ export const TradingPriceContextProvider: React.FC = ({ children }) => {
   }, [socketData]);
 
   useEffect(() => {
-    if (+price === 0 && list[0]) {
-      setPrice(list[0].price);
-    }
+    if (list[0]) setPrice(list[0].price);
   }, [list]);
 
   const value = useMemo(
