@@ -3,16 +3,16 @@ import withReduxStore from "decorators/with-redux-store";
 import withToken from "decorators/with-token";
 import withTradeLayout from "decorators/with-trade-layout";
 import { BrokerTradeServerType } from "gv-api-web";
-import { TerminalPage } from "pages/trade/terminal.page";
-import { TYPE_PARAM_NAME } from "pages/trades/binance-trade-page/binance-trade.helpers";
-import { getTerminalApiMethods } from "pages/trades/binance-trade-page/services/api.helpers";
-import { SymbolState } from "pages/trades/binance-trade-page/trading/terminal-info.context";
-import { TerminalMethodsContextProvider } from "pages/trades/binance-trade-page/trading/terminal-methods.context";
-import { parseSymbolFromUrlParam } from "pages/trades/binance-trade-page/trading/terminal.helpers";
+import { TYPE_PARAM_NAME } from "pages/trade/binance-trade-page/binance-trade.helpers";
+import { getTerminalApiMethods } from "pages/trade/binance-trade-page/services/api.helpers";
+import { SymbolState } from "pages/trade/binance-trade-page/trading/terminal-info.context";
+import { TerminalMethodsContextProvider } from "pages/trade/binance-trade-page/trading/terminal-methods.context";
+import { parseSymbolFromUrlParam } from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import {
   TerminalAuthDataType,
   TerminalType
-} from "pages/trades/binance-trade-page/trading/terminal.types";
+} from "pages/trade/binance-trade-page/trading/terminal.types";
+import { TerminalPage } from "pages/trade/terminal.page";
 import React from "react";
 import { compose } from "redux";
 import { api } from "services/api-client/swagger-custom-client";
