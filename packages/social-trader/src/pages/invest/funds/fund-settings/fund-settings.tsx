@@ -35,7 +35,7 @@ const _FundSettings: React.FC<Props> = ({
   editAsset
 }) => {
   const [t] = useTranslation();
-  const isPublic = true;
+  const isPublic = details.publicInfo.typeExt === "Fund";
   return (
     <>
       <Reallocation
