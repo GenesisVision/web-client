@@ -69,6 +69,10 @@
     "title": "In requests"
   },
   "trading": {
+    "tabs": {
+      "accounts": "Trading accounts",
+      "self-managed-funds": "Self managed funds"
+    },
     "tooltips": {
       "is-not-enough-money": "Insufficient balance. Minimum deposit to create a program is {{value}}."
     },
@@ -86,6 +90,7 @@
     "title": "Trading",
     "follow-them": "Follow them",
     "actions": {
+      "make-public-fund": "Make a public fund",
       "make-signal": "Make a signal provider",
       "make-program": "Make program",
       "make-signal-account": "Make signal account",

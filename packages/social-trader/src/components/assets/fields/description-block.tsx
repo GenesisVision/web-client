@@ -7,6 +7,7 @@ import DescriptionField from "./description-field";
 import TitleField from "./title-field";
 
 interface Props {
+  showDescription?: boolean;
   asset?: ASSET;
   titleName: string;
   descriptionName: string;
@@ -15,6 +16,7 @@ interface Props {
 }
 
 const _DescriptionBlock: React.FC<Props> = ({
+  showDescription = true,
   asset = ASSET.FUND,
   titleName,
   descriptionName,
@@ -23,14 +25,16 @@ const _DescriptionBlock: React.FC<Props> = ({
 }) => {
   const { t } = useTranslation();
   return (
-    <>
+    <div>
       <TitleField name={titleName} />
-      <DescriptionField name={descriptionName} description={description} />
+      {showDescription && (
+        <DescriptionField name={descriptionName} description={description} />
+      )}
       <LogoField
         name={logoName}
         title={t(`asset-settings:fields.upload-logo`)}
       />
-    </>
+    </div>
   );
 };
 
