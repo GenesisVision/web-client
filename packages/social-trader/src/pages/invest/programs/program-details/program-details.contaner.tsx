@@ -17,7 +17,6 @@ import { getSchema } from "pages/invest/programs/program-details/program-schema"
 import * as React from "react";
 import { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import LazyHydrate from "react-lazy-hydration";
 import { useDispatch } from "react-redux";
 import {
   createFollowNotificationsToUrl,
@@ -265,50 +264,48 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
         Controls={renderControls}
       />
       <DetailsDivider />
-      <LazyHydrate whenVisible>
-        <DetailsInvestment
-          title={description.publicInfo.title}
-          isExchange={isExchange}
-          isProcessingRealTime={
-            programDetails?.dailyPeriodDetails?.isProcessingRealTime
-          }
-          isOwnAsset={isOwnAsset}
-          fees={fees}
-          dispatchDescription={handleDispatchDescription}
-          asset={assetType}
-          selector={programEventsTableSelector}
-          id={id}
-          currency={currency}
-          programPersonalDetails={programPersonalDetails}
-          followPersonalDetails={followPersonalDetails}
-        />
-        {showFollowStatistic && (
-          <Row onlyOffset>
-            <FollowDetailsStatisticSection />
-          </Row>
-        )}
-        {showProgramStatistic && (
-          <Row onlyOffset>
-            <ProgramDetailsStatisticSection showPeriod={!isExchange} />
-          </Row>
-        )}
-        <ProgramDetailsHistorySection
-          isExchange={isExchange}
-          assetType={(route as unknown) as TRADE_ASSET_TYPE}
-          canCloseOpenPositions={ownerActions?.canCloseOpenPositions}
-          getHistoryCounts={getHistoryCounts}
-          tablesData={tablesData}
-          showCommissionRebateSometime={
-            brokerDetails.showCommissionRebateSometime
-          }
-          isOwnProgram={isOwnAsset}
-          showSwaps={brokerDetails.showSwaps}
-          showTickets={brokerDetails.showTickets}
-          programId={id}
-          programCurrency={currency}
-          title={title}
-        />
-      </LazyHydrate>
+      <DetailsInvestment
+        title={description.publicInfo.title}
+        isExchange={isExchange}
+        isProcessingRealTime={
+          programDetails?.dailyPeriodDetails?.isProcessingRealTime
+        }
+        isOwnAsset={isOwnAsset}
+        fees={fees}
+        dispatchDescription={handleDispatchDescription}
+        asset={assetType}
+        selector={programEventsTableSelector}
+        id={id}
+        currency={currency}
+        programPersonalDetails={programPersonalDetails}
+        followPersonalDetails={followPersonalDetails}
+      />
+      {showFollowStatistic && (
+        <Row onlyOffset>
+          <FollowDetailsStatisticSection />
+        </Row>
+      )}
+      {showProgramStatistic && (
+        <Row onlyOffset>
+          <ProgramDetailsStatisticSection showPeriod={!isExchange} />
+        </Row>
+      )}
+      <ProgramDetailsHistorySection
+        isExchange={isExchange}
+        assetType={(route as unknown) as TRADE_ASSET_TYPE}
+        canCloseOpenPositions={ownerActions?.canCloseOpenPositions}
+        getHistoryCounts={getHistoryCounts}
+        tablesData={tablesData}
+        showCommissionRebateSometime={
+          brokerDetails.showCommissionRebateSometime
+        }
+        isOwnProgram={isOwnAsset}
+        showSwaps={brokerDetails.showSwaps}
+        showTickets={brokerDetails.showTickets}
+        programId={id}
+        programCurrency={currency}
+        title={title}
+      />
     </Page>
   );
 };
