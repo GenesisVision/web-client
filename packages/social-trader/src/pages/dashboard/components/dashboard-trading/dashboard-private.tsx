@@ -3,15 +3,16 @@ import GVTabs from "components/gv-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
 import { Row } from "components/row/row";
 import { ToolbarButton } from "components/table/components/toolbar-button";
-import { DashboardTradingAsset, FundInvestingDetailsList } from "gv-api-web";
+import { DashboardTradingAsset } from "gv-api-web";
+import { useAccountCurrency } from "hooks/account-currency.hook";
 import useTab from "hooks/tab.hook";
 import { ATTACH_ACCOUNT_PAGE_ROUTE } from "pages/attach-account/attach-account.constants";
 import { CREATE_ACCOUNT_PAGE_ROUTE } from "pages/create-account/create-account.constants";
 import { CREATE_SELF_MANAGED_FUND_PAGE_ROUTE } from "pages/create-fund/create-fund.constants";
 import DashboardBlock from "pages/dashboard/components/dashboard-block/dashboard-block";
-import DashboardFundCard from "pages/dashboard/components/dashboard-investing/dashboard-fund-card";
 import DashboardPrivateCard from "pages/dashboard/components/dashboard-trading/dashboard-private-card/dashboard-private-card";
 import DashboardPrivateTable from "pages/dashboard/components/dashboard-trading/dashboard-private-table";
+import DashboardPublicCard from "pages/dashboard/components/dashboard-trading/dashboard-public-card";
 import {
   DASHBOARD_PUBLIC_DEFAULT_FILTERS,
   DASHBOARD_PUBLIC_FILTERING
@@ -33,6 +34,7 @@ const TableTab: React.FC<{ selected?: boolean }> = ({ selected, children }) => {
 };
 
 const _DashboardPrivate: React.FC = () => {
+  const showIn = useAccountCurrency();
   const { tab, setTab } = useTab<TABS>(TABS.ACCOUNTS);
   const { updateData } = useContext(DataStorageContext);
   const [t] = useTranslation();
@@ -99,17 +101,17 @@ const _DashboardPrivate: React.FC = () => {
               route={CREATE_SELF_MANAGED_FUND_PAGE_ROUTE}
             />
           }
-          getItems={getSelfManagedFunds}
+          getItems={getSelfManagedFunds(showIn)}
           title={tabs}
           renderBodyCard={(
-            asset: FundInvestingDetailsList,
+            asset: DashboardTradingAsset,
             updateRow,
             updateItems
           ) => (
-            <DashboardFundCard
-              updateRow={handleUpdateItems(updateItems)}
+            <DashboardPublicCard
+              asset={asset}
               updateItems={handleUpdateItems(updateItems!)}
-              fund={asset}
+              ownAsset
             />
           )}
         />

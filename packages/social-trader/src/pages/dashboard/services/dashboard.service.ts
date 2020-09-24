@@ -65,10 +65,10 @@ export const getPrivateAssets = (
     ...getDefaultDateRange()
   });
 
-export const getSelfManagedFunds = (
+export const getSelfManagedFunds = (showIn: CurrencyEnum) => (
   filters?: ComposeFiltersAllType
-): Promise<FundInvestingDetailsListItemsViewModel> =>
-  Promise.resolve({ items: [], total: 0 });
+): Promise<DashboardTradingAssetItemsViewModel> =>
+  api.dashboard().getSelfManagedFunds({ ...filters, showIn });
 
 export const getPublicAssets = (
   filters?: ComposeFiltersAllType
