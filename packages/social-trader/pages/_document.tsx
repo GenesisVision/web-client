@@ -33,6 +33,11 @@ class MyDocument extends Document {
       <Html lang="en">
         <Head>
           <link
+            as="style"
+            rel="preload"
+            href="https://fonts.googleapis.com/css?family=Montserrat:200,400,500,600,700,800&display=swap"
+          />
+          <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Montserrat:200,400,500,600,700,800&display=swap"
           />
