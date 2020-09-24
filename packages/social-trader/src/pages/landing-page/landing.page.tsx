@@ -27,7 +27,6 @@ import {
 } from "pages/landing-page/static-data/brokers";
 import { useUtm } from "pages/landing-page/utils";
 import React from "react";
-import LazyHydrate from "react-lazy-hydration";
 
 const _LandingPage: React.FC<Props> = ({
   cookieAccept,
@@ -51,55 +50,53 @@ const _LandingPage: React.FC<Props> = ({
             <FirstScreen news={news} />
           </HomeContainer>
         </HomeSection>
-        <LazyHydrate whenVisible>
-          <HomeSection bgColor="white">
-            <HomeContainer>
-              <EventsContainer events={events} />
-            </HomeContainer>
-          </HomeSection>
-          <HomeSection bgColor="gray">
-            <HomeContainer>
-              <FundsContainer funds={funds.items} />
-            </HomeContainer>
-          </HomeSection>
-          <section className="home__section">
-            <HomeContainer>
-              <ProgramsContainer programs={programs.items} />
-            </HomeContainer>
-          </section>
-          <HomeSection bgColor="gray">
-            <HomeContainer>
-              <FollowsContainer follows={follows.items} />
-            </HomeContainer>
-          </HomeSection>
-          <HomeSection id="info" bgColor="white">
-            <HomeContainer>
-              <InfoContainer />
-            </HomeContainer>
-          </HomeSection>
-          <HomeSection bgColor="gray">
-            <HomeContainer>
-              <DownloadContainer />
-            </HomeContainer>
-          </HomeSection>
-          <HomeSection bgColor="white">
-            <AdvantagesContainer />
-          </HomeSection>
-          <HomeSection bgColor="gray" hasPadding>
-            <HomeContainer>
-              <BrokersContainer
-                brokersInfo={brokersInfo}
-                brokersTabs={brokersTabs}
-                title={t("landing-page:brokers.title")}
-              />
-            </HomeContainer>
-          </HomeSection>
-          <HomeSection isLast>
-            <HomeContainer>
-              <SocialContainer />
-            </HomeContainer>
-          </HomeSection>
-        </LazyHydrate>
+        <HomeSection bgColor="white">
+          <HomeContainer>
+            <EventsContainer events={events} />
+          </HomeContainer>
+        </HomeSection>
+        <HomeSection bgColor="gray">
+          <HomeContainer>
+            <FundsContainer funds={funds.items} />
+          </HomeContainer>
+        </HomeSection>
+        <section className="home__section">
+          <HomeContainer>
+            <ProgramsContainer programs={programs.items} />
+          </HomeContainer>
+        </section>
+        <HomeSection bgColor="gray">
+          <HomeContainer>
+            <FollowsContainer follows={follows.items} />
+          </HomeContainer>
+        </HomeSection>
+        <HomeSection id="info" bgColor="white">
+          <HomeContainer>
+            <InfoContainer />
+          </HomeContainer>
+        </HomeSection>
+        <HomeSection bgColor="gray">
+          <HomeContainer>
+            <DownloadContainer />
+          </HomeContainer>
+        </HomeSection>
+        <HomeSection bgColor="white">
+          <AdvantagesContainer />
+        </HomeSection>
+        <HomeSection bgColor="gray" hasPadding>
+          <HomeContainer>
+            <BrokersContainer
+              brokersInfo={brokersInfo}
+              brokersTabs={brokersTabs}
+              title={t("landing-page:brokers.title")}
+            />
+          </HomeContainer>
+        </HomeSection>
+        <HomeSection isLast>
+          <HomeContainer>
+            <SocialContainer />
+          </HomeContainer>
+        </HomeSection>
       </main>
     </Layout>
   );
