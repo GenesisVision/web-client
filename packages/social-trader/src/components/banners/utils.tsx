@@ -1,5 +1,5 @@
 import { PostPreview } from "components/banners/post-preview";
-import { getImageUrlByQuality } from "components/conversation/conversation-image/conversation-image.helpers";
+import { getImageByQuality } from "components/conversation/conversation-image/conversation-image.helpers";
 import { getPost } from "components/conversation/conversation.service";
 import { ASSET } from "constants/constants";
 import {
@@ -213,7 +213,7 @@ export const createPostPreviewApi = () => {
       const { images } = await getPost({ id: id as string });
 
       const previewImage = images.length
-        ? getImageUrlByQuality(images[0].resizes, "Low")
+        ? getImageByQuality(images[0].resizes, "Low").logoUrl
         : "";
 
       const banner = await createPostPreview(previewImage);

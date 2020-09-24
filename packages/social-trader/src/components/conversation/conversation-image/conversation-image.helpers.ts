@@ -3,25 +3,24 @@ import { ImageQuality, PostImageResize } from "gv-api-web";
 import { safeGetElemFromArray } from "utils/helpers";
 import { SizesType } from "utils/types";
 
-export const getImageUrlByQuality = (
+export const getImageByQuality = (
   resizes: Array<PostImageResize>,
   qualityArg: ImageQuality
-): string =>
-  safeGetElemFromArray(resizes, ({ quality }) => quality === qualityArg)
-    .logoUrl;
+): PostImageResize =>
+  safeGetElemFromArray(resizes, ({ quality }) => quality === qualityArg);
 
-export const getImageUrlBySize = (
+export const getImageBySize = (
   image: IConversationImage,
   size: SizesType
-): string => {
+): PostImageResize => {
   switch (size) {
     case "xlarge":
     case "large":
-      return getImageUrlByQuality(image.resizes, "Original");
+      return getImageByQuality(image.resizes, "Original");
     case "middle":
     case "small":
     default:
-      return getImageUrlByQuality(image.resizes, "Low");
+      return getImageByQuality(image.resizes, "Low");
   }
 };
 

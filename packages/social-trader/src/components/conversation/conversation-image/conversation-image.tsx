@@ -1,19 +1,17 @@
-import { getImageUrlBySize } from "components/conversation/conversation-image/conversation-image.helpers";
 import {
   ConversationImageEmptyImageContainer,
   ConversationImageImageBaseElement
 } from "components/conversation/conversation-image/conversation-image.styles";
-import { ConversationImagesFull } from "components/conversation/conversation-image/conversation-images-full";
-import { IConversationImage } from "components/conversation/conversation.types";
 import { Text } from "components/text/text";
-import useIsOpen from "hooks/is-open.hook";
 import React from "react";
 import { SizesType } from "utils/types";
 
-interface Props {
-  index: number;
+export interface IConversationImageProps {
+  width?: number;
+  height?: number;
   size: SizesType;
-  images: IConversationImage[];
+  onClick: VoidFunction;
+  src: string;
 }
 
 const EmptyImage: React.FC<{ size: SizesType }> = ({ size }) => {
@@ -24,24 +22,22 @@ const EmptyImage: React.FC<{ size: SizesType }> = ({ size }) => {
   );
 };
 
-const _ConversationImage: React.FC<Props> = ({ images, size, index }) => {
-  const [open, setOpen, setClose] = useIsOpen();
-
+const _ConversationImage: React.FC<IConversationImageProps> = ({
+  width,
+  height,
+  size,
+  onClick,
+  src
+}) => {
   return (
-    <>
-      <ConversationImageImageBaseElement
-        size={size}
-        onClick={setOpen}
-        DefaultImageComponent={EmptyImage}
-        src={getImageUrlBySize(images[index], size)}
-      />
-      <ConversationImagesFull
-        open={open}
-        onClose={setClose}
-        images={images}
-        initIndex={index}
-      />
-    </>
+    <ConversationImageImageBaseElement
+      width={width}
+      height={height}
+      size={size}
+      onClick={onClick}
+      DefaultImageComponent={EmptyImage}
+      src={src}
+    />
   );
 };
 

@@ -1,4 +1,4 @@
-import { getImageUrlByQuality } from "components/conversation/conversation-image/conversation-image.helpers";
+import { getImageByQuality } from "components/conversation/conversation-image/conversation-image.helpers";
 import { ConversationPost } from "components/conversation/conversation.types";
 import { PostContainer } from "components/conversation/post/post-container";
 import {
@@ -20,7 +20,7 @@ export const PostPage: React.FC<Props> = ({ post }) => {
     map: inTextComponentsMap
   }) as string).trim();
   const previewImage = post.images.length
-    ? getImageUrlByQuality(post.images[0].resizes, "Original")
+    ? getImageByQuality(post.images[0].resizes, "Original").logoUrl
     : undefined;
   return (
     <Page

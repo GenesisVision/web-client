@@ -1,12 +1,8 @@
-import { getImageUrlBySize } from "components/conversation/conversation-image/conversation-image.helpers";
-import {
-  ConversationImageEmptyImageContainer,
-  ConversationImageImageBaseElement
-} from "components/conversation/conversation-image/conversation-image.styles";
+import { ConversationImage } from "components/conversation/conversation-image/conversation-image";
+import { getImageBySize } from "components/conversation/conversation-image/conversation-image.helpers";
 import { ConversationImagesFull } from "components/conversation/conversation-image/conversation-images-full";
 import { IConversationImage } from "components/conversation/conversation.types";
 import { RowItem } from "components/row-item/row-item";
-import { Text } from "components/text/text";
 import React, { useCallback, useState } from "react";
 import { SizesType } from "utils/types";
 
@@ -14,14 +10,6 @@ interface Props {
   size: SizesType;
   images: IConversationImage[];
 }
-
-const EmptyImage: React.FC<{ size: SizesType }> = ({ size }) => {
-  return (
-    <ConversationImageEmptyImageContainer size={size}>
-      <Text muted>Image not found</Text>
-    </ConversationImageEmptyImageContainer>
-  );
-};
 
 const _ConversationImages: React.FC<Props> = ({ images, size }) => {
   const [openedImage, setOpenedImage] = useState<number | undefined>();
@@ -36,16 +24,20 @@ const _ConversationImages: React.FC<Props> = ({ images, size }) => {
   );
   return (
     <>
-      {images.map((image, index) => (
-        <RowItem bottomOffset key={index}>
-          <ConversationImageImageBaseElement
-            size={size}
-            onClick={setOpen(index)}
-            DefaultImageComponent={EmptyImage}
-            src={getImageUrlBySize(image, size)}
-          />
-        </RowItem>
-      ))}
+      {images.map((image, index) => {
+        const { height, width, logoUrl } = getImageBySize(image, size);
+        return (
+          <RowItem bottomOffset key={index}>
+            <ConversationImage
+              height={height}
+              width={width}
+              size={size}
+              onClick={setOpen(index)}
+              src={logoUrl}
+            />
+          </RowItem>
+        );
+      })}
       <ConversationImagesFull
         open={openedImage !== undefined}
         onClose={setClose}
