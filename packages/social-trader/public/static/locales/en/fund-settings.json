@@ -1,4 +1,7 @@
 {
+  "make-public-fund-form": {
+    "success-alert-message": "success-alert-message"
+  },
   "reallocation": {
     "confirm-title": "Reallocate fund",
     "confirm-text": "Do you really want to Reallocate Fund?",

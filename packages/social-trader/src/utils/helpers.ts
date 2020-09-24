@@ -1,6 +1,10 @@
 import { NumberFormatValues } from "react-number-format";
 import { Nullable } from "utils/types";
 
+export const changeLocation = (url: string) => {
+  window.history.pushState(null, "", url);
+};
+
 export const getSymbolIndexByTurn = ({
   text,
   symbol,

@@ -1,4 +1,5 @@
 import { Row } from "components/row/row";
+import { TileFilterItemContainer } from "components/table/components/filtering/tile-filter-item";
 import { ChartCurrencySelectorItem } from "modules/chart-currency-selector/chart-currency-selector-item";
 import {
   TAddChartCurrency,
@@ -31,7 +32,7 @@ const _ChartCurrencySelector: React.FC<Props> = ({
   onChange
 }) => {
   return (
-    <Row>
+    <Row wrap>
       {chartCurrencies.map(({ name, color }, i) => (
         <ChartCurrencySelectorItem
           key={i}
@@ -45,7 +46,9 @@ const _ChartCurrencySelector: React.FC<Props> = ({
         />
       ))}
       {chartCurrencies.length < maxCharts && (
-        <AddCurrencyButton onAdd={onAdd} currencies={selectCurrencies} />
+        <TileFilterItemContainer>
+          <AddCurrencyButton onAdd={onAdd} currencies={selectCurrencies} />
+        </TileFilterItemContainer>
       )}
     </Row>
   );

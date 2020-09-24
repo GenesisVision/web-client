@@ -1,6 +1,6 @@
 import { AvatarWithName } from "components/avatar/avatar-with-name/avatar-with-name";
 import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
-import { getImageUrlByQuality } from "components/conversation/conversation-image/conversation-image.helpers";
+import { getImageByQuality } from "components/conversation/conversation-image/conversation-image.helpers";
 import styles from "components/conversation/conversation-user/conversation-user.module.scss";
 import { DefaultBlock } from "components/default.block/default.block";
 import { PlateFeedCard } from "components/plate-feed/plate-feed-card";
@@ -116,7 +116,7 @@ const NewsCardContent: React.FC<Props> = React.memo(
 
 const _NewsCard: React.FC<Props> = ({ updateItems, post }) => {
   const cardImage = post.image
-    ? getImageUrlByQuality(post.image.resizes, "Original")
+    ? getImageByQuality(post.image.resizes, "Original").logoUrl
     : undefined;
   return (
     <PlateFeedCard

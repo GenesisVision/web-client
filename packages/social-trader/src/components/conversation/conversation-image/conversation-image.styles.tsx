@@ -16,42 +16,50 @@ import {
 } from "utils/style/style-mixins";
 import { SizesType } from "utils/types";
 
-const $imageHeightSmall = "100px";
-const $imageHeightMiddle = "200px";
-const $imageHeightLarge = "600px";
+const $imageHeightSmall = 100;
+const $imageHeightMiddle = 200;
+const $imageHeightLarge = 600;
 const $imageHeightFull = "90vh";
 const $imageWidthFull = "90vw";
 const $imageFullButtonSize = 30;
 
-const imageStyles = css<{ size: SizesType }>`
+interface IImageStylesProps {
+  size: SizesType;
+  height?: number;
+  width?: number;
+}
+
+const imageStyles = css<IImageStylesProps>`
   display: block;
   ${adaptiveBorderRadius($borderRadius)};
   cursor: pointer;
-  ${({ size }) => {
+  ${({ size, height, width }) => {
     switch (size) {
       case "small":
-        return `height: ${$imageHeightSmall};`;
+        return `height: ${$imageHeightSmall}px;`;
       case "middle":
-        return `height: ${$imageHeightMiddle};`;
+        return `height: ${$imageHeightMiddle}px;`;
       case "large":
+        if (height && width && height >= width)
+          return `height: ${Math.min($imageHeightLarge, height)}px;`;
         return `
         max-width: 100%;
-        min-height: ${$imageHeightSmall};
-        max-height: ${$imageHeightLarge};
+        min-height: ${$imageHeightSmall}px;
+        max-height: ${$imageHeightLarge}px;
         `;
     }
   }};
 `;
 
-export const ConversationImageImageBaseElement = styled(ImageBaseElement)<{
-  size: SizesType;
-}>`
+export const ConversationImageImageBaseElement = styled(ImageBaseElement)<
+  IImageStylesProps
+>`
   ${imageStyles};
 `;
 
-export const ConversationImageEmptyImageContainer = styled.div<{
-  size: SizesType;
-}>`
+export const ConversationImageEmptyImageContainer = styled.div<
+  IImageStylesProps
+>`
   ${imageStyles};
   ${unselectable};
   cursor: default;

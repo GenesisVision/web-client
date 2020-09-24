@@ -1,0 +1,102 @@
+@import "styles/_sizes";
+@import "din-pro-font";
+
+$header-height: 44px + $padding-xxsmall * 2;
+$market-watch-mobile-height: 300px;
+$chart-mobile-height: 300px;
+$chart-tablet-height: 300px;
+$order-book-tablet-height: 200px;
+$tables-mobile-height: 300px;
+$bottom-block-height: 300px;
+$market-watch-width: 250px;
+$trades-width: 250px;
+$place-order-width: 250px;
+
+.trading-grid {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-areas:
+    "header"
+    "symbol-summary"
+    "chart"
+    "tables"
+    "place-orders";
+  grid-template-rows:
+    auto
+    auto
+    $chart-mobile-height
+    $tables-mobile-height
+    1fr;
+  grid-template-columns: 1fr;
+  @include media-breakpoint-tablet() {
+    grid-template-areas:
+      "header header header"
+      "symbol-summary symbol-summary symbol-summary"
+      "chart chart place-orders"
+      "order-book trades place-orders"
+      "tables tables place-orders";
+    grid-template-rows: auto auto $chart-tablet-height $order-book-tablet-height 1fr;
+    grid-template-columns: 1fr 1fr $place-order-width;
+  }
+  @include media-breakpoint-desktop() {
+    grid-template-areas:
+      "header header header header"
+      "chart chart order-book place-orders"
+      "tables tables trades place-orders";
+    grid-template-rows:
+      $header-height calc(100% - #{$bottom-block-height+$header-height})
+      $bottom-block-height;
+    grid-template-columns: 1fr 1fr $trades-width $place-order-width;
+  }
+  @include media-breakpoint-large-desktop() {
+    grid-template-areas:
+      "header header header header"
+      "market-watch chart order-book place-orders"
+      "tables tables trades place-orders";
+    grid-template-rows:
+      $header-height calc(100% - #{$bottom-block-height+$header-height})
+      $bottom-block-height;
+    grid-template-columns: $market-watch-width 1fr $trades-width $place-order-width;
+  }
+  @include media-breakpoint-tablet() {
+  }
+}
+
+.header-grid-elem {
+  grid-area: header;
+  height: $header-height;
+  @include horizontal-paddings($padding-xsmall);
+  @include vertical-paddings($padding-xxsmall);
+}
+
+.symbol-summary-grid-elem {
+  grid-area: symbol-summary;
+}
+
+.market-watch-grid-elem {
+  grid-area: market-watch;
+}
+
+.chart-grid-elem {
+  grid-area: chart;
+}
+
+.order-book-grid-elem {
+  grid-area: order-book;
+}
+
+.trades-grid-elem {
+  grid-area: trades;
+  overflow: hidden;
+}
+
+.tables-grid-elem {
+  grid-area: tables;
+  overflow: hidden;
+  //overflow-x: auto;
+}
+
+.place-orders-grid-elem {
+  grid-area: place-orders;
+}

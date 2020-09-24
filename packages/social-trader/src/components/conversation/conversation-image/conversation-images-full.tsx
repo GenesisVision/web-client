@@ -1,4 +1,4 @@
-import { getImageUrlByQuality } from "components/conversation/conversation-image/conversation-image.helpers";
+import { getImageByQuality } from "components/conversation/conversation-image/conversation-image.helpers";
 import {
   ConversationImagesFullButton,
   ConversationImagesFullContainer,
@@ -93,10 +93,10 @@ const ConversationImagesFullContent: React.FC<{
         <ConversationImagesFullImage
           onClick={handleNext}
           quality={"High"}
-          src={getImageUrlByQuality(
-            images[currentImageIndex].resizes,
-            "Original"
-          )}
+          src={
+            getImageByQuality(images[currentImageIndex].resizes, "Original")
+              .logoUrl
+          }
         />
         <ConversationImagesFullButton
           left

@@ -1,6 +1,6 @@
 import * as crypto from "crypto-js";
 import fetch from "isomorphic-unfetch";
-import { TimeInForce } from "pages/trades/binance-trade-page/trading/terminal.types";
+import { TimeInForce } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { from } from "rxjs";
 import { AnyObjectType } from "utils/types";
 
