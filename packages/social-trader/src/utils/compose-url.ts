@@ -60,6 +60,7 @@ export const composeAssetDetailsUrl = (
   slugUrl: string
 ): string => {
   switch (assetType) {
+    case "SelfManagedFund":
     case "Fund":
       return composeFundsDetailsUrl(slugUrl);
     case "Program":
