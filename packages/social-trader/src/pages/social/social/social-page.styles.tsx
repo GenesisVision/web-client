@@ -29,8 +29,8 @@ const leftBlockStyles = css`
 `;
 
 const rightBlockStyles = css`
-  display: block;
-  ${mediaBreakpointLandscapeTablet(`display: none;`)}
+  display: none;
+  ${mediaBreakpointDesktop(`display: block;`)}
 `;
 
 export const SocialPageLeftBlock = styled(RowItem)`
