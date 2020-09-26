@@ -57,7 +57,7 @@ class NextScriptCustom extends NextScript {
             console.log(err);
           }
         });
-      }, 1250);
+      }, 1800);
     `;
 
     return (
