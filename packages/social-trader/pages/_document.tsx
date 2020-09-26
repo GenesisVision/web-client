@@ -1,9 +1,14 @@
-import Document, { Html, Main } from "next/document";
+import Document, { Head, Html, Main, NextScript } from "next/document";
 import React from "react";
 import { ServerStyleSheet } from "styled-components";
 
-import Head from "./head-custom";
-import NextScript from "./next-script-custom";
+import CustomHead from "./head-custom";
+import CustomNextScript from "./next-script-custom";
+
+const isProd = process.env.NODE_ENV === "production";
+
+const HeadElement = isProd ? CustomHead : Head;
+const NextScriptElement = isProd ? CustomNextScript : NextScript;
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: any) {
@@ -35,7 +40,7 @@ class MyDocument extends Document {
   render() {
     return (
       <Html lang="en">
-        <Head>
+        <HeadElement>
           <link
             as="style"
             rel="preload"
@@ -58,10 +63,10 @@ class MyDocument extends Document {
         })(window,document,'script','dataLayer','GTM-NJLM6BD');}`
             }}
           />
-        </Head>
+        </HeadElement>
         <body>
           <Main />
-          <NextScript />
+          <NextScriptElement />
           <noscript>
             <iframe
               src="https://www.googletagmanager.com/ns.html?id=GTM-NJLM6BD"
