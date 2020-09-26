@@ -14,6 +14,7 @@ Page.getInitialProps = async () => ({
     "create-fund-page",
     "create-account",
     "profile-page",
+    "fund-settings",
     "asset-settings",
     "transfer",
     "asset-details",
