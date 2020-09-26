@@ -1,4 +1,6 @@
 import ImageBaseElement from "components/avatar/image-base.element";
+import { mediaBreakpointTablet } from "components/gv-styles/gv-media";
+import { LogoIcon } from "components/icon/logo-icon";
 import Link from "components/link/link";
 import { useTranslation } from "i18n";
 import logo from "media/logo.svg";
@@ -11,8 +13,16 @@ import React from "react";
 import { HOME_ROUTE } from "routes/app.routes";
 import { OVERVIEW_ROUTE } from "routes/dashboard.routes";
 import authService from "services/auth-service";
+import styled from "styled-components";
 
 import styles from "./lp-header.module.scss";
+
+const logoHeight = 27;
+
+const LogoIconContainer = styled.div`
+  height: ${logoHeight * 1.57}px;
+  ${mediaBreakpointTablet(`height: ${logoHeight}px;`)};
+`;
 
 const LPHeader: React.FC = () => {
   const { t } = useTranslation();
@@ -34,9 +44,11 @@ const LPHeader: React.FC = () => {
               }}
             >
               <div className={styles["lp-header__combo-logo"]}>
-                <ImageBaseElement src={logo} />
+                <LogoIconContainer>
+                  <LogoIcon primary />
+                </LogoIconContainer>
                 <h1 className={styles["lp-header__text-logo"]}>
-                  {t("landing-page:genesis-vision")}
+                  Genesis Vision
                 </h1>
               </div>
             </Link>

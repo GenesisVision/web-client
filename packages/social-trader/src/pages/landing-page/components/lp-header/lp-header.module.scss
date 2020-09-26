@@ -27,14 +27,8 @@ $logo-divider: 1.57;
     display: flex;
     align-items: center;
     width: $combo-logo-width/$logo-divider;
-    & img {
-      height: $combo-logo-img-height/$logo-divider;
-    }
     @include media-breakpoint-tablet() {
       width: $combo-logo-width;
-      & img {
-        height: $combo-logo-img-height;
-      }
     }
   }
 
