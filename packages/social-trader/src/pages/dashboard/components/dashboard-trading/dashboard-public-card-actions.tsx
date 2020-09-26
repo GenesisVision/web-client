@@ -8,7 +8,6 @@ import { DashboardTradingAsset } from "gv-api-web";
 import { TAnchor } from "hooks/anchor.hook";
 import { useTranslation } from "i18n";
 import ClosePeriodButton from "modules/asset-settings/close-period/close-period-button";
-import { generateDetailsForPublicFundCardOption } from "modules/fund-public-popup/components/fund-public-edit-form/fund-public-edit-form.service";
 import { MakePublicFundCardOption } from "modules/fund-public-popup/make-public-fund.button";
 import MakeSignalButton from "modules/program-signal-popup/make-signal.button";
 import { CONVERT_ASSET } from "pages/convert-asset/convert-asset.contants";
@@ -86,9 +85,9 @@ const _DashboardPublicCardActions: React.FC<IDashboardPublicCardActionsProps> = 
   return (
     <TableCardActions anchor={anchor} clearAnchor={clearAnchor}>
       <MakePublicFundCardOption
+        id={id}
         onApply={handleOnApply}
         title={asset.publicInfo.title}
-        details={generateDetailsForPublicFundCardOption(asset)}
       />
       {canMakeSignalProviderFromProgram && (
         <MakeSignalButton onApply={handleOnApply} id={id} programName={title} />
