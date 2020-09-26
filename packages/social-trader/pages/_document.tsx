@@ -1,7 +1,8 @@
-import Document, { Head, Html, Main } from "next/document";
+import Document, { Html, Main } from "next/document";
 import React from "react";
 import { ServerStyleSheet } from "styled-components";
 
+import Head from "./head-custom";
 import NextScript from "./next-script-custom";
 
 class MyDocument extends Document {
