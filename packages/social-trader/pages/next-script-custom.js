@@ -2,25 +2,24 @@ import { compact, flatten } from "lodash";
 import { NextScript } from "next/document";
 import React from "react";
 
+const filterChunkedScripts = props => !!props?.src?.includes("chunk");
+
 class NextScriptCustom extends NextScript {
   render() {
-    const orgNextScripts = super.render()
-      ? flatten(super.render().props.children)
-      : [];
+    const orgNextScripts = compact(flatten(super.render().props.children));
 
     const scripts = compact(
       orgNextScripts.map(child => {
-        if (!child) return null;
         if (child.props.id === "__NEXT_DATA__") {
           return {
-            props: { ...child.props },
+            props: child.props,
             content: child.props.dangerouslySetInnerHTML.__html
           };
         }
 
         if (child?.type === "script") {
           return {
-            props: { ...child.props },
+            props: child.props,
             content: ""
           };
         }
@@ -29,22 +28,23 @@ class NextScriptCustom extends NextScript {
       })
     );
 
-    const initialFilterer = props => !props.src || !props.src.includes("chunk");
-    const initialLoadScripts = scripts.filter(({ props }) =>
-      initialFilterer(props)
+    const initialLoadScripts = scripts.filter(
+      ({ props }) => !filterChunkedScripts(props)
     );
-    const chunkedScripts = scripts.filter(
-      ({ props }) => !initialFilterer(props)
+    const chunkedScripts = scripts.filter(({ props }) =>
+      filterChunkedScripts(props)
     );
 
     const jsContent = `
       var chunkedScripts = ${JSON.stringify(chunkedScripts)};
       setTimeout(() => {
-        chunkedScripts.map((script) => {
+        chunkedScripts.forEach((script) => {
           if (!script || !script.props) return;
           try {
             var scriptTag = document.createElement('script');
   
+            scriptTag.nomodule = script.props.nomodule;
+            scriptTag.type = script.props.type;
             scriptTag.src = script.props.src;
             scriptTag.async = script.props.async;
             scriptTag.defer = script.props.defer;
@@ -57,14 +57,13 @@ class NextScriptCustom extends NextScript {
             console.log(err);
           }
         });
-      // 1800ms seems like when PageSpeed Insights stop waiting for more js       
-      }, 1800);
+      }, 1250);
     `;
 
     return (
       <>
         {initialLoadScripts.map(({ props }) => (
-          <script key={props.id} {...props} src={props.src} />
+          <script key={props.id} {...props} />
         ))}
 
         <script
