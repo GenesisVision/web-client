@@ -9,6 +9,7 @@ export const HomeContainer: React.FC = ({ children }) => {
 };
 
 export const HomeSection: React.FC<HomeSectionProps> = ({
+  whenVisible = true,
   children,
   id,
   bgColor,
@@ -17,7 +18,7 @@ export const HomeSection: React.FC<HomeSectionProps> = ({
   hasPadding
 }) => {
   return (
-    <LazyHydrate whenVisible>
+    <LazyHydrate whenVisible={whenVisible}>
       <section
         id={id}
         className={clsx(styles["home__section"], {
@@ -35,6 +36,7 @@ export const HomeSection: React.FC<HomeSectionProps> = ({
 };
 
 interface HomeSectionProps {
+  whenVisible?: boolean;
   id?: string;
   bgColor?: "gray" | "white";
   isFirst?: boolean;

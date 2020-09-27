@@ -45,7 +45,7 @@ const _LandingPage: React.FC<Props> = ({
       title={t("landing-page:title")}
     >
       <main>
-        <HomeSection isFirst>
+        <HomeSection whenVisible={false} isFirst>
           <HomeContainer>
             <FirstScreen news={news} />
           </HomeContainer>
