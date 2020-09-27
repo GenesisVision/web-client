@@ -11,6 +11,11 @@ import { useTranslation } from "react-i18next";
 import { PROGRAM_TRADING_LOG_COLUMNS } from "../../program-details.constants";
 import ProgramTradingLogRow from "./program-trading-log-row";
 
+interface Props {
+  getItems: GetItemsFuncActionType;
+  dataSelector: TableSelectorType;
+}
+
 const _ProgramTradingLog: React.FC<Props> = ({ getItems, dataSelector }) => {
   const [t] = useTranslation();
   return (
@@ -20,18 +25,13 @@ const _ProgramTradingLog: React.FC<Props> = ({ getItems, dataSelector }) => {
       isFetchOnMount={true}
       paging={DEFAULT_PAGING}
       columns={PROGRAM_TRADING_LOG_COLUMNS}
-      renderHeader={column => (
-        <Text>{t(`program-details-page:history.trading-log.${column}`)}</Text>
+      renderHeader={({ name }) => (
+        <Text>{t(`program-details-page:history.trading-log.${name}`)}</Text>
       )}
       renderBodyRow={trade => <ProgramTradingLogRow trade={trade} />}
     />
   );
 };
-
-interface Props {
-  getItems: GetItemsFuncActionType;
-  dataSelector: TableSelectorType;
-}
 
 const ProgramTradingLog = React.memo(_ProgramTradingLog);
 export default ProgramTradingLog;

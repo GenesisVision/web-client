@@ -1,4 +1,5 @@
 import { DefaultBlock } from "components/default.block/default.block";
+import { $paddingXxsmall } from "components/gv-styles/gv-sizes";
 import { useToLink } from "components/link/link.helper";
 import { Row } from "components/row/row";
 import { Separator } from "components/separator/separator";
@@ -7,13 +8,18 @@ import { getAssetFolderRoute } from "pages/dashboard/components/dashboard-tradin
 import { SocialPageTradersItem } from "pages/social/social/social-page-traders/social-page-traders-item";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import styled from "styled-components";
 import { composeAssetDetailsUrl } from "utils/compose-url";
-
-import styles from "./social-page-traders.module.scss";
 
 interface Props {
   assets: SocialSummaryStrategy[];
 }
+
+const Container = styled(Row)`
+  height: 500px;
+  overflow: scroll;
+  padding-right: ${$paddingXxsmall}px;
+`;
 
 const _SocialPageTradersBlock: React.FC<Props> = ({ assets }) => {
   const [t] = useTranslation();
@@ -23,7 +29,7 @@ const _SocialPageTradersBlock: React.FC<Props> = ({ assets }) => {
       <Row>
         <h3>{t("Top strategies")}</h3>
       </Row>
-      <Row size={"large"} onlyOffset className={styles["social-page-traders"]}>
+      <Container size={"large"} onlyOffset>
         {assets.map(
           (
             {
@@ -64,7 +70,7 @@ const _SocialPageTradersBlock: React.FC<Props> = ({ assets }) => {
             );
           }
         )}
-      </Row>
+      </Container>
     </DefaultBlock>
   );
 };

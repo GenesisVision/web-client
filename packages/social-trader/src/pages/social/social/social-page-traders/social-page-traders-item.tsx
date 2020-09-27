@@ -1,5 +1,4 @@
 import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
-import { AvatarWithName } from "components/avatar/avatar-with-name/avatar-with-name";
 import { LabeledValue } from "components/labeled-value/labeled-value";
 import Link, { ToType } from "components/link/link";
 import { RowItem } from "components/row-item/row-item";
@@ -11,8 +10,7 @@ import {
 } from "pages/social/social/feed.context";
 import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
-
-import styles from "./social-page-traders.module.scss";
+import styled from "styled-components";
 
 interface Props {
   color: string;
@@ -23,6 +21,10 @@ interface Props {
   logoUrl: string;
   title: string;
 }
+
+const Container = styled.div`
+  width: 100%;
+`;
 
 const _SocialPageTradersItem: React.FC<Props> = ({
   color,
@@ -43,7 +45,7 @@ const _SocialPageTradersItem: React.FC<Props> = ({
     });
   }, [url]);
   return (
-    <div className={styles["social-page-traders__item"]}>
+    <Container>
       <Row>
         <RowItem>
           <Link to={url}>
@@ -55,11 +57,8 @@ const _SocialPageTradersItem: React.FC<Props> = ({
             />
           </Link>
         </RowItem>
-        <RowItem
-          onClick={handleClick}
-          className={styles["social-page-traders__avatar-name"]}
-        >
-          {title}
+        <RowItem onClick={handleClick}>
+          <Text>{title}</Text>
         </RowItem>
       </Row>
       <Row>
@@ -72,7 +71,7 @@ const _SocialPageTradersItem: React.FC<Props> = ({
           <LabeledValue label={t("Investors")}>{investorsCount}</LabeledValue>
         </RowItem>
       </Row>
-    </div>
+    </Container>
   );
 };
 

@@ -77,6 +77,7 @@
       "is-not-enough-money": "Insufficient balance. Minimum deposit to create a program is {{value}}."
     },
     "asset-types": {
+      "SelfManagedFund": "Self managed fund",
       "ExchangeAccount": "Exchange account",
       "Fund": "Fund",
       "Program": "Program",

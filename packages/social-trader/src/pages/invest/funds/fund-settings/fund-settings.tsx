@@ -18,15 +18,17 @@ import { TUpdateFundFunc } from "./fund-settings.page";
 import Reallocation from "./reallocation/reallocation";
 
 interface Props {
+  updateDescription: VoidFunction;
   createFundInfo: FundCreateAssetPlatformInfo;
-  reallocate: () => void;
+  reallocate: VoidFunction;
   platformAssets: PlatformAsset[];
   details: FundDetailsFull;
-  closeAsset: () => void;
+  closeAsset: VoidFunction;
   editAsset: TUpdateFundFunc;
 }
 
 const _FundSettings: React.FC<Props> = ({
+  updateDescription,
   createFundInfo: { maxExitFee, maxEntryFee },
   reallocate,
   platformAssets,
@@ -68,8 +70,9 @@ const _FundSettings: React.FC<Props> = ({
       {!isPublic && (
         <SettingsBlock>
           <MakePublicFundButton
-            onSubmit={editAsset}
-            name={details.publicInfo.title}
+            id={details.id}
+            onApply={updateDescription}
+            title={details.publicInfo.title}
           />
         </SettingsBlock>
       )}
