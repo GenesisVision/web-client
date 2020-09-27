@@ -99,7 +99,11 @@ const _InvestmentProgramInfo: React.FC<IInvestmentProgramInfoProps> = ({
       <InvestmentItem
         label={
           <TooltipLabel
-            tooltipContent={t("program-details-page:tooltip.management-fee")}
+            tooltipContent={
+              isExchange
+                ? t("program-details-page:tooltip.management-fee-exchange")
+                : t("program-details-page:tooltip.management-fee")
+            }
             labelText={t("asset-details:description.management-fee")}
           />
         }

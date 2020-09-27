@@ -55,7 +55,11 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
   const renderCell = useCallback(
     (name: string) => (
       <Text>
-        {t(`program-details-page:history.financial-statistic.${name}`)}
+        {t(
+          `program-details-page:history.financial-statistic${
+            isExchange ? "-exchange" : ""
+          }.${name}`
+        )}
       </Text>
     ),
     []

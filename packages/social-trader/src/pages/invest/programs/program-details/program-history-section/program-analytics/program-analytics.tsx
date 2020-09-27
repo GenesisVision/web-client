@@ -22,7 +22,6 @@ import filesService from "services/file-service";
 import { CurrencyEnum } from "utils/types";
 
 import { PROGRAM_ANALYTICS } from "../../program-details.constants";
-import DownloadButtonToolbar from "../download-button-toolbar/download-button-toolbar";
 
 interface Props {
   title: string;
@@ -75,7 +74,7 @@ const _ProgramAnalytics: React.FC<Props> = ({
   const renderTooltip = useCallback(
     (name: string) => () => (
       <TooltipContent>
-        {t(`program-details-page:history.period-history.tooltips.${name}`)}
+        {t(`program-details-page:history.analytics.tooltips.${name}`)}
       </TooltipContent>
     ),
     []
