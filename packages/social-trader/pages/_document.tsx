@@ -7,8 +7,8 @@ import CustomNextScript from "./next-script-custom";
 
 const isProd = process.env.NODE_ENV === "production";
 
-const HeadElement = isProd ? CustomHead : Head;
-const NextScriptElement = isProd ? CustomNextScript : NextScript;
+const HeadElement = false ? CustomHead : Head;
+const NextScriptElement = false ? CustomNextScript : NextScript;
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: any) {
