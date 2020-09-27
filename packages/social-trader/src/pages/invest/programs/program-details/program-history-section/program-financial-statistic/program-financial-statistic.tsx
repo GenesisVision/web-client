@@ -62,7 +62,7 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
         )}
       </Text>
     ),
-    []
+    [isExchange]
   );
   const exportButtonToolbarRender = useCallback(
     (filtering: any) => (
@@ -99,10 +99,14 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
   const renderTooltip = useCallback(
     (name: string) => () => (
       <TooltipContent>
-        {t(`program-details-page:history.financial-statistic.tooltips.${name}`)}
+        {t(
+          `program-details-page:history.financial-statistic${
+            isExchange ? "-exchange" : ""
+          }.tooltips.${name}`
+        )}
       </TooltipContent>
     ),
-    []
+    [isExchange]
   );
   const renderHeader = useCallback(
     column =>
