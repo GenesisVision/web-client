@@ -22,6 +22,7 @@ Page.getInitialProps = async ctx => {
   });
   return {
     namespacesRequired: [
+      "dashboard-page",
       "create-fund-page",
       "form-fields",
       "asset-settings",
