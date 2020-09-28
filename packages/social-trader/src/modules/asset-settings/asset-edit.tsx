@@ -40,7 +40,7 @@ interface Props {
 }
 
 const _AssetEdit: React.FC<Props> = ({
-  showDescription,
+  showDescription = true,
   editError,
   onSubmit,
   title,

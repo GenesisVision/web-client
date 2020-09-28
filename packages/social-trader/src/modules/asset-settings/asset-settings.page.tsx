@@ -44,6 +44,10 @@ const _AssetsEditPage: React.FC<Props> = ({
         values.investmentLimit !== undefined
           ? values.investmentLimit
           : description.programDetails?.availableInvestmentLimit;
+      const logo =
+        values.logo?.image?.cropped !== undefined
+          ? values.logo
+          : { src: description.publicInfo.logo };
       const currentValues = {
         hourProcessing:
           description?.programDetails?.dailyPeriodDetails?.hourProcessing,
@@ -63,6 +67,7 @@ const _AssetsEditPage: React.FC<Props> = ({
         editAssetData: {
           ...currentValues,
           ...values,
+          logo,
           investmentLimit
         }
       }).finally(resetForm);
