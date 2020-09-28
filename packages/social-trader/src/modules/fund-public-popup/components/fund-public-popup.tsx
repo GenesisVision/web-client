@@ -19,7 +19,12 @@ const _FundPublicPopup: React.FC<Props> = ({ id, onApply, name }) => {
         subtitle={name}
       />
       <DialogBottom>
-        <FundPublicEditFormContainer id={id} inDialog onApply={onApply} />
+        <FundPublicEditFormContainer
+          title={name}
+          id={id}
+          inDialog
+          onApply={onApply}
+        />
       </DialogBottom>
     </>
   );

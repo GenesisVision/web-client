@@ -8,12 +8,14 @@ import { createFundInfoSelector } from "reducers/platform-reducer";
 import { postponeCallback } from "utils/hook-form.helpers";
 
 interface Props {
+  title: string;
   id: string;
   inDialog?: boolean;
   onApply: VoidFunction;
 }
 
 const _FundPublicEditFormContainer: React.FC<Props> = ({
+  title,
   id,
   inDialog,
   onApply
@@ -29,6 +31,7 @@ const _FundPublicEditFormContainer: React.FC<Props> = ({
   const createFundInfo = useSelector(createFundInfoSelector);
   return (
     <FundPublicEdit
+      title={title}
       createFundInfo={createFundInfo}
       inDialog={inDialog}
       onSubmit={handleOnSubmit}
