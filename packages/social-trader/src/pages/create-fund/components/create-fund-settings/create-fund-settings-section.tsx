@@ -15,7 +15,7 @@ interface Props {
 const _CreateFundSettingsSection: React.FC<Props> = ({ selfManaged }) => {
   const createFundInfo = useSelector(createFundInfoSelector);
   const { handleCreate, errorMessage } = useCreateAssetSubmit({
-    asset: CREATE_ASSET.SELF_MANAGED_FUND
+    asset: selfManaged ? CREATE_ASSET.SELF_MANAGED_FUND : CREATE_ASSET.FUND
   });
   const wallets = useSelector(walletsSelector);
 
