@@ -43,6 +43,7 @@ const _DashboardPublicCardActions: React.FC<IDashboardPublicCardActionsProps> = 
   const {
     accountInfo: { currency },
     broker,
+    assetTypeExt,
     assetType,
     id,
     publicInfo: { title, url },
@@ -82,13 +83,16 @@ const _DashboardPublicCardActions: React.FC<IDashboardPublicCardActionsProps> = 
     clearAnchor();
     onApply();
   }, []);
+  const isSelfManagedFund = assetTypeExt === "SelfManagedFund";
   return (
     <TableCardActions anchor={anchor} clearAnchor={clearAnchor}>
-      <MakePublicFundCardOption
-        id={id}
-        onApply={handleOnApply}
-        title={asset.publicInfo.title}
-      />
+      {isSelfManagedFund && (
+        <MakePublicFundCardOption
+          id={id}
+          onApply={handleOnApply}
+          title={asset.publicInfo.title}
+        />
+      )}
       {canMakeSignalProviderFromProgram && (
         <MakeSignalButton onApply={handleOnApply} id={id} programName={title} />
       )}
