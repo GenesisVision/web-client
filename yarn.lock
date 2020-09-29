@@ -1910,7 +1910,7 @@
   dependencies:
     regenerator-runtime "^0.12.0"
 
-"@babel/runtime@7.11.2", "@babel/runtime@^7.9.2":
+"@babel/runtime@7.11.2":
   version "7.11.2"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.11.2.tgz#f549c13c754cc40b87644b9fa9f09a6a95fe0736"
   integrity sha512-TeWkU52so0mPtDcaCTxNBI/IHiz0pZgr8VEFqXFtZWpYD08ZB6FaSwVAS8MKRQAP3bYKiVjwysOJgMFY28o6Tw==
@@ -13601,13 +13601,6 @@ react-is@^16.12.0, react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.4, react-i
   version "16.13.0"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.0.tgz#0f37c3613c34fe6b37cd7f763a0d6293ab15c527"
   integrity sha512-GFMtL0vHkiBv9HluwNZTggSn/sCyEt9n02aM0dSAjGGyqyNlAyftYm4phPxdvCigG15JreC5biwxCgTAJZ7yAA==
-
-react-lazy-hydration@^0.0.10:
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/react-lazy-hydration/-/react-lazy-hydration-0.0.10.tgz#464aa5283a561452da7e31e3b87c7ad7bbaa062e"
-  integrity sha512-hBnW3/QpLl7zS7UmzmxF6CfC2LnJa1GjngKDsuZsSPhN2gMpxNOPRUpYuM4G3PkyZjVbMuYz7B8De2BYKmu5WQ==
-  dependencies:
-    "@babel/runtime" "^7.9.2"
 
 react-lifecycles-compat@^3.0.4:
   version "3.0.4"
