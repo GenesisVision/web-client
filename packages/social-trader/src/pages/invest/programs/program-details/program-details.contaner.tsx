@@ -2,6 +2,7 @@ import DetailsDescriptionSection from "components/details/details-description-se
 import { DetailsTags } from "components/details/details-description-section/details-description/details-tags.block";
 import DetailsInvestment from "components/details/details-description-section/details-investment/details-investment";
 import { DetailsDivider } from "components/details/details-divider.block";
+import LazyHydrate from "components/lazy-hydrate/lazy-hydrate";
 import Page from "components/page/page";
 import { Row } from "components/row/row";
 import { ASSET, TRADE_ASSET_TYPE } from "constants/constants";
@@ -17,7 +18,6 @@ import { getSchema } from "pages/invest/programs/program-details/program-schema"
 import * as React from "react";
 import { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import LazyHydrate from "react-lazy-hydration";
 import { useDispatch } from "react-redux";
 import {
   createFollowNotificationsToUrl,
@@ -265,7 +265,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
         Controls={renderControls}
       />
       <DetailsDivider />
-      <LazyHydrate whenVisible>
+      <LazyHydrate>
         <DetailsInvestment
           title={description.publicInfo.title}
           isExchange={isExchange}
@@ -282,6 +282,8 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
           programPersonalDetails={programPersonalDetails}
           followPersonalDetails={followPersonalDetails}
         />
+      </LazyHydrate>
+      <LazyHydrate>
         {showFollowStatistic && (
           <Row onlyOffset>
             <FollowDetailsStatisticSection />
@@ -292,6 +294,8 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
             <ProgramDetailsStatisticSection showPeriod={!isExchange} />
           </Row>
         )}
+      </LazyHydrate>
+      <LazyHydrate>
         <ProgramDetailsHistorySection
           isExchange={isExchange}
           assetType={(route as unknown) as TRADE_ASSET_TYPE}

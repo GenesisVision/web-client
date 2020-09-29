@@ -1,3 +1,4 @@
+import LazyHydrate from "components/lazy-hydrate/lazy-hydrate";
 import { ResponsiveContainer } from "components/responsive-container/responsive-container";
 import { Row } from "components/row/row";
 import { UpperBlock } from "components/upper-block/upper-block";
@@ -15,7 +16,6 @@ import {
   SocialPageStyledContainer
 } from "pages/social/social/social-page.styles";
 import React from "react";
-import LazyHydrate from "react-lazy-hydration";
 
 interface Props {
   initFeedData?: PostItemsViewModel;
@@ -32,7 +32,7 @@ export const SocialPageContainer: React.FC<Props> = ({
         <ResponsiveContainer
           enabledScreens={["landscape-tablet", "desktop", "large-desktop"]}
         >
-          <LazyHydrate whenVisible>
+          <LazyHydrate>
             <SocialPageLeftBlock>
               <Row>
                 <SocialPageTradersBlock assets={data?.topStrategies} />
@@ -56,7 +56,7 @@ export const SocialPageContainer: React.FC<Props> = ({
           <SocialPageFeedBlock initData={initFeedData} />
         </SocialPageFeedContainer>
         <ResponsiveContainer enabledScreens={["large-desktop", "desktop"]}>
-          <LazyHydrate whenVisible>
+          <LazyHydrate>
             <SocialPageRightBlock>
               <Row>
                 <SocialPageTopicsBlock topics={data?.hotTopics} />

@@ -9,7 +9,8 @@ import { useTranslation } from "i18n";
 import FirstScreen from "pages/landing-page/components/first-screen/first-screen";
 import {
   HomeContainer,
-  HomeSection
+  HomeSection,
+  LazyHomeSection
 } from "pages/landing-page/components/home/home.blocks";
 import AdvantagesContainer from "pages/landing-page/containers/advantages-container/advantages-container";
 import BrokersContainer from "pages/landing-page/containers/brokers-container/brokers-container";
@@ -45,45 +46,45 @@ const _LandingPage: React.FC<Props> = ({
       title={t("landing-page:title")}
     >
       <main>
-        <HomeSection whenVisible={false} isFirst>
+        <HomeSection isFirst>
           <HomeContainer>
             <FirstScreen news={news} />
           </HomeContainer>
         </HomeSection>
-        <HomeSection bgColor="white">
+        <LazyHomeSection bgColor="white">
           <HomeContainer>
             <EventsContainer events={events} />
           </HomeContainer>
-        </HomeSection>
-        <HomeSection bgColor="gray">
+        </LazyHomeSection>
+        <LazyHomeSection bgColor="gray">
           <HomeContainer>
             <FundsContainer funds={funds.items} />
           </HomeContainer>
-        </HomeSection>
+        </LazyHomeSection>
         <section className="home__section">
           <HomeContainer>
             <ProgramsContainer programs={programs.items} />
           </HomeContainer>
         </section>
-        <HomeSection bgColor="gray">
+        <LazyHomeSection bgColor="gray">
           <HomeContainer>
             <FollowsContainer follows={follows.items} />
           </HomeContainer>
-        </HomeSection>
-        <HomeSection id="info" bgColor="white">
+        </LazyHomeSection>
+        <LazyHomeSection id="info" bgColor="white">
           <HomeContainer>
             <InfoContainer />
           </HomeContainer>
-        </HomeSection>
-        <HomeSection bgColor="gray">
+        </LazyHomeSection>
+        <LazyHomeSection bgColor="gray">
           <HomeContainer>
             <DownloadContainer />
           </HomeContainer>
-        </HomeSection>
-        <HomeSection bgColor="white">
+        </LazyHomeSection>
+        <LazyHomeSection bgColor="white">
           <AdvantagesContainer />
-        </HomeSection>
-        <HomeSection bgColor="gray" hasPadding>
+        </LazyHomeSection>
+        <LazyHomeSection bgColor="gray" hasPadding>
           <HomeContainer>
             <BrokersContainer
               brokersInfo={brokersInfo}
@@ -91,12 +92,12 @@ const _LandingPage: React.FC<Props> = ({
               title={t("landing-page:brokers.title")}
             />
           </HomeContainer>
-        </HomeSection>
-        <HomeSection isLast>
+        </LazyHomeSection>
+        <LazyHomeSection isLast>
           <HomeContainer>
             <SocialContainer />
           </HomeContainer>
-        </HomeSection>
+        </LazyHomeSection>
       </main>
     </Layout>
   );
