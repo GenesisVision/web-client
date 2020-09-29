@@ -76,7 +76,7 @@ const Link: React.FC<LinkProps> = props => {
   );
   const linkTitle = title || (typeof children === "string" && children) || "";
   return (
-    <NextLink href={normalizedTo.pathname} as={normalizedTo.as}>
+    <NextLink href={normalizedTo.as || normalizedTo.pathname}>
       <StyledA {...props} title={linkTitle} onClick={handleClick} />
     </NextLink>
   );

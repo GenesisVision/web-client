@@ -12,13 +12,7 @@ export const pushHistoryState = (to: ToType) => {
 };
 
 export const normalizeTo = (to: ToType | string): ToType => {
-  return typeof to === "string"
-    ? { pathname: to }
-    : {
-        ...to,
-        as: to.as,
-        pathname: to.pathname
-      };
+  return typeof to === "string" ? { pathname: to } : to;
 };
 
 export const normalizeLinkFrom = (to: ToType | string): string => {
