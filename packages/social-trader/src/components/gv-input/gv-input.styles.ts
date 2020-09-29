@@ -31,6 +31,11 @@ export interface IPropsGvInput {
 export const GVInputStyles = css`
   display: inline-flex;
   position: relative;
+
+  & input {
+    width: 100%;
+  }
+
   ${({ label }: IPropsGvInput) =>
     !!label && `margin-top: ${$paddingSmall / 2}px;`}
 
