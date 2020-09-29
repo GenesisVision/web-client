@@ -14,6 +14,14 @@ import {
 } from "./date-range-filter.constants";
 import { dateToInput } from "./date-range-filter.helpers";
 
+interface IDateRangeFilterValuesProps {
+  onChange: (type: keyof IDataRangeFilterValue, date: string) => void;
+  type: DATA_RANGE_FILTER_TYPES;
+  [DATE_RANGE_MIN_FILTER_NAME]?: string;
+  [DATE_RANGE_MAX_FILTER_NAME]?: string;
+  startLabel: string;
+}
+
 const DateInput = styled(RowItem)`
   width: 140px;
 `;
@@ -109,6 +117,7 @@ const _FirstInput: React.FC<{ value: string }> = ({ value }) => {
     //@ts-ignore TODO сделать фикс GVTextField
     <DateInput>
       <GVTextField
+        wide
         type="text"
         name="startDate"
         label={t("filters.date-range.start")}
@@ -125,6 +134,7 @@ const _SecondInput: React.FC = () => {
   return (
     <DateInput>
       <GVTextField
+        wide
         type="text"
         name="endDate"
         label={t("filters.date-range.end")}
@@ -138,11 +148,3 @@ const SecondInput = React.memo(_SecondInput);
 
 const DateRangeFilterValues = React.memo(_DateRangeFilterValues);
 export default DateRangeFilterValues;
-
-interface IDateRangeFilterValuesProps {
-  onChange(type: keyof IDataRangeFilterValue, date: string): void;
-  type: DATA_RANGE_FILTER_TYPES;
-  [DATE_RANGE_MIN_FILTER_NAME]?: string;
-  [DATE_RANGE_MAX_FILTER_NAME]?: string;
-  startLabel: string;
-}
