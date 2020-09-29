@@ -1,5 +1,6 @@
 import AssetFormField from "components/assets/asset-fields/asset-form-field";
 import DescriptionField from "components/assets/fields/description-field";
+import TitleField from "components/assets/fields/title-field";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { Row } from "components/row/row";
 import { SimpleNumberField } from "components/simple-fields/simple-number-field";
@@ -17,6 +18,7 @@ import { allowPositiveValuesNumberFormat } from "utils/helpers";
 import { HookForm } from "utils/hook-form.helpers";
 
 interface Props {
+  title: string;
   createFundInfo: FundCreateAssetPlatformInfo;
   editError?: boolean;
   inDialog?: boolean;
@@ -24,6 +26,7 @@ interface Props {
 }
 
 const _FundPublicEdit: React.FC<Props> = ({
+  title,
   createFundInfo: { maxEntryFee, maxExitFee },
   editError,
   inDialog,
@@ -32,6 +35,7 @@ const _FundPublicEdit: React.FC<Props> = ({
   const [t] = useTranslation();
 
   const form = useForm<IFundPublicFormValues>({
+    defaultValues: { title },
     validationSchema: fundPublicValidationSchema({
       t,
       maxEntryFee,
@@ -49,6 +53,7 @@ const _FundPublicEdit: React.FC<Props> = ({
   );
   return (
     <HookForm resetOnSuccess form={form} onSubmit={onSubmit}>
+      <TitleField name={FUND_PUBLIC_FORM_FIELDS.title} />
       <DescriptionField
         name={FUND_PUBLIC_FORM_FIELDS.description}
         description={description}

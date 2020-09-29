@@ -1,5 +1,5 @@
+import { Button } from "components/button/button";
 import Dialog from "components/dialog/dialog";
-import GVButton from "components/gv-button";
 import { TableCardActionsItem } from "components/table/components/table-card/table-card-actions";
 import useIsOpen from "hooks/is-open.hook";
 import dynamic from "next/dist/next-server/lib/dynamic";
@@ -37,9 +37,9 @@ const _MakePublicFundButton: React.FC<Props> = ({ id, title, onApply }) => {
 
   return (
     <>
-      <GVButton onClick={setIsOpenPopup}>
+      <Button onClick={setIsOpenPopup}>
         {t("dashboard-page:trading.actions.make-public-fund")}
-      </GVButton>
+      </Button>
       <Dialog open={isOpenPopup} onClose={setIsClosePopup}>
         <FundPublicPopup id={id} onApply={onApply} name={title} />
       </Dialog>

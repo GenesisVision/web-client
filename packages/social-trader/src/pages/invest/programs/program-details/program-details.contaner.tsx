@@ -3,7 +3,9 @@ import { DetailsTags } from "components/details/details-description-section/deta
 import DetailsInvestment from "components/details/details-description-section/details-investment/details-investment";
 import { DetailsDivider } from "components/details/details-divider.block";
 import LazyHydrate from "components/lazy-hydrate/lazy-hydrate";
+import { $paddingMedium } from "components/gv-styles/gv-sizes";
 import Page from "components/page/page";
+import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { ASSET, TRADE_ASSET_TYPE } from "constants/constants";
 import { LevelsParamsInfo } from "gv-api-web";
@@ -19,6 +21,7 @@ import * as React from "react";
 import { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
+import styled from "styled-components";
 import {
   createFollowNotificationsToUrl,
   createProgramNotificationsToUrl,
@@ -57,6 +60,10 @@ const InvestmentProgramControls = dynamic(() =>
 const FollowControls = dynamic(() =>
   import("pages/invest/follows/follow-details/follow-controls/follow-controls")
 );
+
+const ControlsRow = styled(Row)`
+  margin-bottom: ${-$paddingMedium}px;
+`;
 
 const _ProgramDetailsContainer: React.FC<Props> = ({
   levelsParameters,
@@ -155,23 +162,25 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
 
   const renderControls = useCallback(
     () => (
-      <>
+      <ControlsRow wrap center={false}>
         {description.programDetails && (
-          <InvestmentProgramControls
-            isExchange={isExchange}
-            currency={description.tradingAccountInfo.currency}
-            id={description.id}
-            programDetails={description.programDetails}
-            publicInfo={description.publicInfo}
-            brokerDetails={description.brokerDetails}
-            tradingAccountInfo={description.tradingAccountInfo}
-            onApply={handleDispatchDescription}
-            isOwnProgram={isOwnAsset}
-            levelsParameters={levelsParameters!}
-          />
+          <RowItem bottomOffset>
+            <InvestmentProgramControls
+              isExchange={isExchange}
+              currency={description.tradingAccountInfo.currency}
+              id={description.id}
+              programDetails={description.programDetails}
+              publicInfo={description.publicInfo}
+              brokerDetails={description.brokerDetails}
+              tradingAccountInfo={description.tradingAccountInfo}
+              onApply={handleDispatchDescription}
+              isOwnProgram={isOwnAsset}
+              levelsParameters={levelsParameters!}
+            />
+          </RowItem>
         )}
-        {description.followDetails &&
-          description.followDetails.signalSettings && (
+        {description.followDetails && description.followDetails.signalSettings && (
+          <RowItem bottomOffset>
             <FollowControls
               isOwnAsset={isOwnAsset}
               onApply={handleDispatchDescription}
@@ -181,15 +190,19 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
               id={description.id}
               brokerDetails={description.brokerDetails}
             />
-          )}
-        {isOwnAsset && description.ownerActions?.canTransferMoney && (
-          <InvestmentAccountControls
-            transferableItem={mapProgramFollowToTransferItemType(description)}
-            accountType={description.publicInfo.typeExt}
-            onApply={handleDispatchDescription}
-          />
+          </RowItem>
         )}
-      </>
+
+        {isOwnAsset && description.ownerActions?.canTransferMoney && (
+          <RowItem bottomOffset>
+            <InvestmentAccountControls
+              transferableItem={mapProgramFollowToTransferItemType(description)}
+              accountType={description.publicInfo.typeExt}
+              onApply={handleDispatchDescription}
+            />
+          </RowItem>
+        )}
+      </ControlsRow>
     ),
     [description, handleDispatchDescription, isOwnAsset, levelsParameters]
   );
