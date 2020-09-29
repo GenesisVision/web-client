@@ -3,11 +3,7 @@ import Router from "next/router";
 import React, { useCallback } from "react";
 import styled from "styled-components";
 
-import {
-  normalizeTo,
-  normalizeUrlString,
-  pushHistoryState
-} from "./link.helper";
+import { normalizeTo, pushHistoryState } from "./link.helper";
 
 export type ToType = {
   pathname: string;
@@ -31,8 +27,7 @@ export const Push = (
   as?: string,
   options?: {}
 ): Promise<boolean> => {
-  const newUrl = normalizeUrlString(url);
-  return Router.push(newUrl, as, options);
+  return Router.push(url, as, options);
 };
 
 const StyledA = styled.a<LinkProps>`
