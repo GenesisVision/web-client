@@ -35,6 +35,30 @@ import { convertDateToShortFormat, distanceDate } from "utils/dates";
 import { formatValueDifferentDecimalScale } from "utils/formatter";
 import { VoidFuncType } from "utils/types";
 
+export const getAssetFolderRoute = (assetType: AssetTypeExt | AssetType) => {
+  switch (assetType) {
+    case "SignalTradingAccount":
+    case "ExternalSignalTradingAccount":
+    case "SignalProgram":
+      return FOLLOW_DETAILS_FOLDER_ROUTE;
+    case "SelfManagedFund":
+    case "Fund":
+      return FUND_DETAILS_FOLDER_ROUTE;
+    case "Program":
+    default:
+      return PROGRAM_DETAILS_FOLDER_ROUTE;
+  }
+};
+
+interface Props extends IWithOffset {
+  showWithdraw?: boolean;
+  showInvest?: boolean;
+  showActions?: boolean;
+  ownAsset?: boolean;
+  updateItems: VoidFuncType;
+  asset: DashboardTradingAsset;
+}
+
 const _DashboardPublicCard: React.FC<Props> = ({
   withOffset,
   showWithdraw = true,
@@ -73,18 +97,10 @@ const _DashboardPublicCard: React.FC<Props> = ({
     clearAnchor: VoidFunction;
   }) => (
     <DashboardPublicCardActions
-      currency={asset.accountInfo.currency}
-      brokerType={asset.broker && asset.broker.type}
-      onApply={updateItems}
-      name={asset.publicInfo.title}
-      actions={asset.actions}
-      assetType={asset.assetType}
+      asset={asset}
       anchor={anchor}
       clearAnchor={clearAnchor}
-      id={asset.id}
-      url={asset.publicInfo && asset.publicInfo.url}
-      showClosePeriod={asset.assetType === ASSET.PROGRAM}
-      showTerminal={asset.actions.hasTerminal}
+      onApply={updateItems}
     />
   );
   const { programDetails, fundDetails } = asset.publicInfo;
@@ -251,29 +267,6 @@ const _DashboardPublicCard: React.FC<Props> = ({
     </TableCard>
   );
 };
-
-export const getAssetFolderRoute = (assetType: AssetTypeExt | AssetType) => {
-  switch (assetType) {
-    case "SignalTradingAccount":
-    case "ExternalSignalTradingAccount":
-    case "SignalProgram":
-      return FOLLOW_DETAILS_FOLDER_ROUTE;
-    case "Fund":
-      return FUND_DETAILS_FOLDER_ROUTE;
-    case "Program":
-    default:
-      return PROGRAM_DETAILS_FOLDER_ROUTE;
-  }
-};
-
-interface Props extends IWithOffset {
-  showWithdraw?: boolean;
-  showInvest?: boolean;
-  showActions?: boolean;
-  ownAsset?: boolean;
-  updateItems: VoidFuncType;
-  asset: DashboardTradingAsset;
-}
 
 const DashboardPublicCard = React.memo(_DashboardPublicCard);
 export default DashboardPublicCard;
