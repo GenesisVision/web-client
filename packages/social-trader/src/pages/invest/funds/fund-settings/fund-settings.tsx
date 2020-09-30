@@ -1,11 +1,7 @@
 import SettingsBlock from "components/settings-block/settings-block";
 import { ASSET } from "constants/constants";
 import withLoader from "decorators/with-loader";
-import {
-  FundCreateAssetPlatformInfo,
-  FundDetailsFull,
-  PlatformAsset
-} from "gv-api-web";
+import { FundCreateAssetPlatformInfo, FundDetailsFull, PlatformAsset } from "gv-api-web";
 import AssetEdit from "modules/asset-settings/asset-edit";
 import { CLOSEABLE_ASSET } from "modules/asset-settings/close-asset/close-asset";
 import CloseAssetBlock from "modules/asset-settings/close-asset/close-asset-block";
@@ -41,6 +37,7 @@ const _FundSettings: React.FC<Props> = ({
   return (
     <>
       <Reallocation
+        isPublic={isPublic}
         condition={details.personalDetails.ownerActions.canReallocate}
         availableReallocationPercents={
           details.personalDetails.availableReallocationPercents

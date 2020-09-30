@@ -30,7 +30,21 @@ enum FIELDS {
   assets = "assets"
 }
 
+export interface IReallocateFormValues {
+  [FIELDS.assets]: PlatformAssetFull[];
+}
+
+export interface Props {
+  isPublic?: boolean;
+  availableReallocationPercents: number;
+  fundAssets: FundAssetInfo[];
+  platformAssets: PlatformAsset[];
+  onSubmit: (values: IReallocateFormValues) => void;
+  errorMessage?: string;
+}
+
 const _ReallocateForm: React.FC<Props> = ({
+  isPublic,
   fundAssets,
   onSubmit,
   availableReallocationPercents,
@@ -129,18 +143,6 @@ const _ReallocateForm: React.FC<Props> = ({
     </HookForm>
   );
 };
-
-export interface IReallocateFormValues {
-  [FIELDS.assets]: PlatformAssetFull[];
-}
-
-export interface Props {
-  availableReallocationPercents: number;
-  fundAssets: FundAssetInfo[];
-  platformAssets: PlatformAsset[];
-  onSubmit(values: IReallocateFormValues): void;
-  errorMessage?: string;
-}
 
 const ReallocateForm = withLoader(React.memo(_ReallocateForm));
 export default ReallocateForm;
