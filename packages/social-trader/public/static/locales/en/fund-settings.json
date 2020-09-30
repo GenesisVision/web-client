@@ -6,8 +6,8 @@
     "confirm-title": "Reallocate fund",
     "confirm-text": "Do you really want to Reallocate Fund?",
     "title": "Reallocation",
-    "text-1-public": "Reallocation available — ",
-    "text-1": "Reallocation available* — ",
+    "text-1-public": "Reallocation available* — ",
+    "text-1": "Reallocation available — ",
     "text-2": "There is a mandatory 1% GVT allocation per Fund.",
     "text-3": "* You are able to reallocate 3% of the Fund per day (cumulative). Example: you will be able to change 30% of the Fund's allocation after 10 days."
   },
