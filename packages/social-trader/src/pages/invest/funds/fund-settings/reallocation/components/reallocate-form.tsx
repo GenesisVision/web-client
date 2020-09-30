@@ -89,7 +89,9 @@ const _ReallocateForm: React.FC<Props> = ({
   return (
     <HookForm resetOnSuccess form={form}>
       <FormTextField>
-        {t("fund-settings:reallocation.text-1")}
+        {isPublic
+          ? t("fund-settings:reallocation.text-1-public")
+          : t("fund-settings:reallocation.text-1")}
         {availableReallocationPercents}%
       </FormTextField>
       <Row>
@@ -121,9 +123,13 @@ const _ReallocateForm: React.FC<Props> = ({
           <DialogError error={errorMessage} />
         </Row>
       )}
-      <Row>
-        <FormTextField>{t("fund-settings:reallocation.text-3")}</FormTextField>
-      </Row>
+      {isPublic && (
+        <Row>
+          <FormTextField>
+            {t("fund-settings:reallocation.text-3")}
+          </FormTextField>
+        </Row>
+      )}
       <Row size={"large"}>
         <GVButton
           isPending={isSubmitting}
