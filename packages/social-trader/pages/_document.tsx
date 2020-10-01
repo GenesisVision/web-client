@@ -1,3 +1,4 @@
+import { DocumentContext } from "next/dist/next-server/lib/utils";
 import Document, { Head, Html, Main, NextScript } from "next/document";
 import React from "react";
 import { ServerStyleSheet } from "styled-components";
@@ -7,11 +8,10 @@ import CustomNextScript from "./next-script-custom";
 
 const isProd = process.env.NODE_ENV === "production";
 
-const HeadElement = false ? CustomHead : Head;
-const NextScriptElement = false ? CustomNextScript : NextScript;
+const HACKED_PAGES = ["/"];
 
-class MyDocument extends Document {
-  static async getInitialProps(ctx: any) {
+class MyDocument extends Document<{ pathname: string }> {
+  static async getInitialProps(ctx: DocumentContext) {
     const sheet = new ServerStyleSheet();
     const originalRenderPage = ctx.renderPage;
 
@@ -25,6 +25,7 @@ class MyDocument extends Document {
       const initialProps = await Document.getInitialProps(ctx);
       return {
         ...initialProps,
+        pathname: ctx.pathname,
         styles: (
           <>
             {initialProps.styles}
@@ -38,6 +39,9 @@ class MyDocument extends Document {
   }
 
   render() {
+    const isHackedPage = HACKED_PAGES.includes(this.props.pathname) && isProd;
+    const HeadElement = isHackedPage ? CustomHead : Head;
+    const NextScriptElement = isHackedPage ? CustomNextScript : NextScript;
     return (
       <Html lang="en">
         <HeadElement>
