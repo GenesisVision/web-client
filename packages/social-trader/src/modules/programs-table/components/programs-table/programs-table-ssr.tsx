@@ -75,7 +75,7 @@ const _ProgramsTableSSR: React.FC<Props> = ({
           value={filtering && filtering[DATE_RANGE_FILTER_NAME]}
           onChange={updateFilter}
           label={t("filters.date-range.for")}
-          startLabel={t("filters.date-range.fund-start")}
+          startLabel={t("filters.date-range.program-start")}
         />
       </>
     ),

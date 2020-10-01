@@ -4,6 +4,7 @@ import {
   DashboardTradingAsset,
   DashboardTradingAssetItemsViewModel,
   FollowDetailsListItem,
+  FundInvestingDetailsListItemsViewModel,
   PrivateTradingAccountFull,
   ProgramFollowDetailsFull
 } from "gv-api-web";
@@ -63,6 +64,11 @@ export const getPrivateAssets = (
     ...filters,
     ...getDefaultDateRange()
   });
+
+export const getSelfManagedFunds = (showIn: CurrencyEnum) => (
+  filters?: ComposeFiltersAllType
+): Promise<DashboardTradingAssetItemsViewModel> =>
+  api.dashboard().getSelfManagedFunds({ ...filters, showIn });
 
 export const getPublicAssets = (
   filters?: ComposeFiltersAllType

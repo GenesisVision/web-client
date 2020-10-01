@@ -6,7 +6,17 @@ import { useTranslation } from "react-i18next";
 import DescriptionField from "./description-field";
 import TitleField from "./title-field";
 
+interface Props {
+  showDescription?: boolean;
+  asset?: ASSET;
+  titleName: string;
+  descriptionName: string;
+  logoName: string;
+  description: string;
+}
+
 const _DescriptionBlock: React.FC<Props> = ({
+  showDescription = true,
   asset = ASSET.FUND,
   titleName,
   descriptionName,
@@ -15,24 +25,18 @@ const _DescriptionBlock: React.FC<Props> = ({
 }) => {
   const { t } = useTranslation();
   return (
-    <>
+    <div>
       <TitleField name={titleName} />
-      <DescriptionField name={descriptionName} description={description} />
+      {showDescription && (
+        <DescriptionField name={descriptionName} description={description} />
+      )}
       <LogoField
         name={logoName}
         title={t(`asset-settings:fields.upload-logo`)}
       />
-    </>
+    </div>
   );
 };
-
-interface Props {
-  asset?: ASSET;
-  titleName: string;
-  descriptionName: string;
-  logoName: string;
-  description: string;
-}
 
 const DescriptionBlock = React.memo(_DescriptionBlock);
 export default DescriptionBlock;

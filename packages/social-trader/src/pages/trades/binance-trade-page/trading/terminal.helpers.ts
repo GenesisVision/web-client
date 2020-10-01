@@ -15,7 +15,7 @@ import {
   TerminalCurrency
 } from "pages/trades/binance-trade-page/trading/terminal.types";
 import qs from "qs";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { TERMINAL_FOLDER_ROUTE } from "routes/trade.routes";
 import { Observable } from "rxjs";
 import { filter } from "rxjs/operators";
@@ -46,13 +46,17 @@ export const updateTerminalUrl = (url: string, updates?: Object) => {
 
 export const useUpdateTerminalUrlParams = () => {
   const { parsedParams } = useParams();
-  return (url: string, updates?: Object) => {
-    const updatedParams = qs.stringify({ ...parsedParams, ...updates });
-    const ulrWithParams = `${url}${
-      updatedParams.length ? `?${updatedParams}` : ""
-    }`;
-    Push(TERMINAL_FOLDER_ROUTE, ulrWithParams);
-  };
+  const updateUrl = useCallback(
+    (url: string, updates?: Object) => {
+      const updatedParams = qs.stringify({ ...parsedParams, ...updates });
+      const ulrWithParams = `${url}${
+        updatedParams.length ? `?${updatedParams}` : ""
+      }`;
+      Push(TERMINAL_FOLDER_ROUTE, ulrWithParams);
+    },
+    [parsedParams]
+  );
+  return { updateUrl };
 };
 
 export const transformKline = (data: string[]): Bar => ({

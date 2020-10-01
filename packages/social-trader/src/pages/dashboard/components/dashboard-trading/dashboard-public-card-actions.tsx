@@ -3,14 +3,12 @@ import {
   TableCardActions,
   TableCardActionsItem
 } from "components/table/components/table-card/table-card-actions";
-import {
-  AssetType,
-  BrokerTradeServerType,
-  DashboardTradingAssetActions
-} from "gv-api-web";
+import { ASSET } from "constants/constants";
+import { DashboardTradingAsset } from "gv-api-web";
 import { TAnchor } from "hooks/anchor.hook";
 import { useTranslation } from "i18n";
 import ClosePeriodButton from "modules/asset-settings/close-period/close-period-button";
+import { MakePublicFundCardOption } from "modules/fund-public-popup/make-public-fund.button";
 import MakeSignalButton from "modules/program-signal-popup/make-signal.button";
 import { CONVERT_ASSET } from "pages/convert-asset/convert-asset.contants";
 import { makeProgramLinkCreator } from "pages/convert-asset/convert-asset.routes";
@@ -28,41 +26,50 @@ import {
   createFundSettingsToUrl,
   createProgramSettingsToUrl
 } from "utils/compose-url";
-import { CurrencyEnum } from "utils/types";
+
+interface IDashboardPublicCardActionsProps {
+  asset: DashboardTradingAsset;
+  onApply: VoidFunction;
+  clearAnchor: VoidFunction;
+  anchor?: TAnchor;
+}
 
 const _DashboardPublicCardActions: React.FC<IDashboardPublicCardActionsProps> = ({
-  currency,
-  brokerType,
+  asset,
   onApply,
-  name,
-  assetType,
-  actions: {
-    canConfirm2FA,
-    isEnoughMoneyToCreateProgram,
-    canMakeSignalProviderFromProgram,
-    canMakeProgramFromPrivateTradingAccount,
-    canMakeProgramFromSignalProvider,
-    canChangePassword
-  },
   anchor,
-  clearAnchor,
-  url,
-  id,
-  showTerminal,
-  showClosePeriod
+  clearAnchor
 }) => {
+  const {
+    accountInfo: { currency },
+    broker,
+    assetTypeExt,
+    assetType,
+    id,
+    publicInfo: { title, url },
+    actions: {
+      hasTerminal,
+      canConfirm2FA,
+      isEnoughMoneyToCreateProgram,
+      canMakeSignalProviderFromProgram,
+      canMakeProgramFromPrivateTradingAccount,
+      canMakeProgramFromSignalProvider,
+      canChangePassword
+    }
+  } = asset;
+  const showClosePeriod = assetType === ASSET.PROGRAM;
   const programMinDepositAmounts = useSelector(
     programMinDepositAmountsSelector
   );
   const minDepositCreateProgram = getMinDepositCreateProgram(
     programMinDepositAmounts,
-    brokerType,
+    broker?.type,
     currency
   );
   const { linkCreator, contextTitle } = useToLink();
   const [t] = useTranslation();
-  const terminalLink = brokerType
-    ? linkCreator(getTerminalLink(brokerType))
+  const terminalLink = broker?.type
+    ? linkCreator(getTerminalLink(broker?.type))
     : "";
   const createSettingsToUrlMethod =
     assetType === "Fund" ? createFundSettingsToUrl : createProgramSettingsToUrl;
@@ -76,10 +83,18 @@ const _DashboardPublicCardActions: React.FC<IDashboardPublicCardActionsProps> = 
     clearAnchor();
     onApply();
   }, []);
+  const isSelfManagedFund = assetTypeExt === "SelfManagedFund";
   return (
     <TableCardActions anchor={anchor} clearAnchor={clearAnchor}>
+      {isSelfManagedFund && (
+        <MakePublicFundCardOption
+          id={id}
+          onApply={handleOnApply}
+          title={asset.publicInfo.title}
+        />
+      )}
       {canMakeSignalProviderFromProgram && (
-        <MakeSignalButton onApply={handleOnApply} id={id} programName={name} />
+        <MakeSignalButton onApply={handleOnApply} id={id} programName={title} />
       )}
       {(canMakeProgramFromPrivateTradingAccount ||
         canMakeProgramFromSignalProvider) && (
@@ -94,7 +109,7 @@ const _DashboardPublicCardActions: React.FC<IDashboardPublicCardActionsProps> = 
       <TableCardActionsItem to={settingsLink} onClick={clearAnchor}>
         {t("dashboard-page:trading.actions.settings")}
       </TableCardActionsItem>
-      {showTerminal && (
+      {hasTerminal && (
         <TableCardActionsItem to={terminalLink} onClick={clearAnchor}>
           {t("dashboard-page:trading.actions.terminal")}
         </TableCardActionsItem>
@@ -107,21 +122,6 @@ const _DashboardPublicCardActions: React.FC<IDashboardPublicCardActionsProps> = 
     </TableCardActions>
   );
 };
-
-interface IDashboardPublicCardActionsProps {
-  currency: CurrencyEnum;
-  brokerType: BrokerTradeServerType;
-  onApply: VoidFunction;
-  name: string;
-  actions: DashboardTradingAssetActions;
-  assetType: AssetType;
-  clearAnchor: VoidFunction;
-  anchor?: TAnchor;
-  url?: string;
-  id: string;
-  showTerminal: boolean;
-  showClosePeriod: boolean;
-}
 
 export const DashboardPublicCardActions = React.memo(
   _DashboardPublicCardActions

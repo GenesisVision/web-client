@@ -7,12 +7,20 @@ import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { postponeCallback } from "utils/hook-form.helpers";
 
-import ReallocateForm, {
-  IReallocateFormValues
-} from "./components/reallocate-form";
+import ReallocateForm, { IReallocateFormValues } from "./components/reallocate-form";
 import { updateAssets } from "./services/reallocate.services";
 
+interface Props {
+  isPublic?: boolean;
+  availableReallocationPercents: number;
+  id: string;
+  platformAssets: PlatformAsset[];
+  fundAssets: FundAssetInfo[];
+  onApply: () => void;
+}
+
 const _Reallocation: React.FC<Props> = ({
+  isPublic,
   availableReallocationPercents,
   onApply,
   platformAssets,
@@ -34,6 +42,7 @@ const _Reallocation: React.FC<Props> = ({
   return (
     <SettingsBlock label={t("fund-settings:reallocation.title")}>
       <ReallocateForm
+        isPublic={isPublic}
         condition={!!fundAssets.length}
         availableReallocationPercents={availableReallocationPercents}
         fundAssets={fundAssets}
@@ -44,14 +53,6 @@ const _Reallocation: React.FC<Props> = ({
     </SettingsBlock>
   );
 };
-
-interface Props {
-  availableReallocationPercents: number;
-  id: string;
-  platformAssets: PlatformAsset[];
-  fundAssets: FundAssetInfo[];
-  onApply: () => void;
-}
 
 const Reallocation = withLoader(React.memo(Crashable(_Reallocation)));
 export default Reallocation;

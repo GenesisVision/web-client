@@ -14,7 +14,7 @@ import {
   assetDescriptionShape,
   assetTitleShape
 } from "utils/validators/validators";
-import { object } from "yup";
+import { object, string } from "yup";
 
 import styles from "./asset-settings.module.scss";
 
@@ -24,7 +24,23 @@ enum FIELDS {
   description = "description"
 }
 
+export interface AssetEditFormValues {
+  [FIELDS.title]: string;
+  [FIELDS.description]: string;
+  [FIELDS.logo]: IImageValue;
+}
+
+interface Props {
+  showDescription?: boolean;
+  editError?: boolean;
+  logo: IImageValue;
+  title: string;
+  description: string;
+  onSubmit: (values: AssetEditFormValues) => void;
+}
+
 const _AssetEdit: React.FC<Props> = ({
+  showDescription = true,
   editError,
   onSubmit,
   title,
@@ -43,7 +59,9 @@ const _AssetEdit: React.FC<Props> = ({
     },
     validationSchema: object().shape({
       [FIELDS.title]: assetTitleShape(t),
-      [FIELDS.description]: assetDescriptionShape(t),
+      [FIELDS.description]: showDescription
+        ? assetDescriptionShape(t)
+        : string(),
       [FIELDS.logo]: inputImageShape(t)
     }),
     mode: "onBlur"
@@ -70,19 +88,21 @@ const _AssetEdit: React.FC<Props> = ({
             <TitleField name={FIELDS.title} />
           </Row>
         </Row>
-        <Row
-          size={"large"}
-          onlyOffset
-          className={styles["asset-settings__block-wrapper"]}
-        >
-          <h3>{t("asset-settings:strategy.title")}</h3>
-          <Row onlyOffset>
-            <DescriptionField
-              name={FIELDS.description}
-              description={description}
-            />
+        {showDescription && (
+          <Row
+            size={"large"}
+            onlyOffset
+            className={styles["asset-settings__block-wrapper"]}
+          >
+            <h3>{t("asset-settings:strategy.title")}</h3>
+            <Row onlyOffset>
+              <DescriptionField
+                name={FIELDS.description}
+                description={description}
+              />
+            </Row>
           </Row>
-        </Row>
+        )}
         <Row size={"large"} onlyOffset>
           <SubmitButton isSuccessful={!editError}>
             {t("asset-settings:buttons.save")}
@@ -92,20 +112,6 @@ const _AssetEdit: React.FC<Props> = ({
     </SettingsBlock>
   );
 };
-
-export interface AssetEditFormValues {
-  [FIELDS.title]: string;
-  [FIELDS.description]: string;
-  [FIELDS.logo]: IImageValue;
-}
-
-interface Props {
-  editError?: boolean;
-  logo: IImageValue;
-  title: string;
-  description: string;
-  onSubmit: (values: AssetEditFormValues) => void;
-}
 
 const AssetEdit = React.memo(_AssetEdit);
 export default AssetEdit;

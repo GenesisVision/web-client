@@ -32,7 +32,16 @@ export enum CREATE_FUND_FIELDS {
   exitFee = "exitFee"
 }
 
+interface Props {
+  selfManaged?: boolean;
+  errorMessage?: string;
+  wallets: WalletData[];
+  data: FundCreateAssetPlatformInfo;
+  onSubmit: (values: ICreateFundSettingsFormValues) => void;
+}
+
 const _CreateFundSettings: React.FC<Props> = ({
+  selfManaged,
   wallets,
   data,
   onSubmit,
@@ -46,12 +55,15 @@ const _CreateFundSettings: React.FC<Props> = ({
 
   const form = useForm<ICreateFundSettingsFormValues>({
     defaultValues: {
+      [CREATE_FUND_FIELDS.entryFee]: selfManaged ? 0 : undefined,
+      [CREATE_FUND_FIELDS.exitFee]: selfManaged ? 0 : undefined,
       [CREATE_FUND_FIELDS.depositWalletId]: safeGetElemFromArray(
         wallets,
         ({ currency }) => currency === "GVT"
       ).id
     },
     validationSchema: createFundSettingsValidationSchema({
+      selfManaged,
       available,
       rate,
       wallets,
@@ -70,6 +82,7 @@ const _CreateFundSettings: React.FC<Props> = ({
         blockNumber={"01"}
       >
         <DescriptionBlock
+          showDescription={!selfManaged}
           asset={ASSET.FUND}
           titleName={CREATE_FUND_FIELDS.title}
           descriptionName={CREATE_FUND_FIELDS.description}
@@ -84,6 +97,7 @@ const _CreateFundSettings: React.FC<Props> = ({
         <AssetsField name={CREATE_FUND_FIELDS.assets} />
       </SettingsBlock>
       <SettingsBlock
+        hide={selfManaged}
         label={t("create-fund-page:settings.fees-settings")}
         blockNumber={"03"}
       >
@@ -109,7 +123,7 @@ const _CreateFundSettings: React.FC<Props> = ({
       <DepositDetailsBlock
         setAvailable={setAvailable}
         setRate={setRate}
-        blockNumber={4}
+        blockNumber={selfManaged ? 3 : 4}
         walletFieldName={CREATE_FUND_FIELDS.depositWalletId}
         inputName={CREATE_FUND_FIELDS.depositAmount}
         depositAmount={depositAmount}
@@ -142,10 +156,3 @@ export interface ICreateFundSettingsFormValues {
 
 const CreateFundSettings = withBlurLoader(React.memo(_CreateFundSettings));
 export default CreateFundSettings;
-
-interface Props {
-  errorMessage?: string;
-  wallets: WalletData[];
-  data: FundCreateAssetPlatformInfo;
-  onSubmit: (values: ICreateFundSettingsFormValues) => void;
-}
