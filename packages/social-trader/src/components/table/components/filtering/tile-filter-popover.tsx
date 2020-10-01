@@ -31,6 +31,7 @@ export type TileFilterPopoverItemType = {
 
 const Header = styled(Center)`
   align-items: flex-end;
+  min-width: 500px; // TODO
 `;
 
 const _TileFilterPopover: React.FC<Props<any>> = ({

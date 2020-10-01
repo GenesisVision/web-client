@@ -224,6 +224,7 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
       {tab === TABS.FINANCIAL_STATISTIC && financialStatistic && (
         <ProgramFinancialStatistic
           isExchange={isExchange}
+          assetType={assetType}
           getItems={financialStatistic.getItems(programId)}
           dataSelector={financialStatistic.dataSelector}
           showCommissionRebateSometime={showCommissionRebateSometime}
@@ -234,6 +235,7 @@ const _ProgramDetailsHistorySection: React.FC<Props> = ({
       )}
       {tab === TABS.PERIOD_HISTORY && periodHistory && (
         <ProgramPeriodHistory
+          assetType={assetType}
           getItems={periodHistory.getItems(programId)}
           dataSelector={periodHistory.dataSelector}
           id={programId}

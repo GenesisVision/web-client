@@ -30,7 +30,21 @@ enum FIELDS {
   assets = "assets"
 }
 
+export interface IReallocateFormValues {
+  [FIELDS.assets]: PlatformAssetFull[];
+}
+
+export interface Props {
+  isPublic?: boolean;
+  availableReallocationPercents: number;
+  fundAssets: FundAssetInfo[];
+  platformAssets: PlatformAsset[];
+  onSubmit: (values: IReallocateFormValues) => void;
+  errorMessage?: string;
+}
+
 const _ReallocateForm: React.FC<Props> = ({
+  isPublic,
   fundAssets,
   onSubmit,
   availableReallocationPercents,
@@ -75,7 +89,9 @@ const _ReallocateForm: React.FC<Props> = ({
   return (
     <HookForm resetOnSuccess form={form}>
       <FormTextField>
-        {t("fund-settings:reallocation.text-1")}
+        {isPublic
+          ? t("fund-settings:reallocation.text-1-public")
+          : t("fund-settings:reallocation.text-1")}
         {availableReallocationPercents}%
       </FormTextField>
       <Row>
@@ -107,9 +123,13 @@ const _ReallocateForm: React.FC<Props> = ({
           <DialogError error={errorMessage} />
         </Row>
       )}
-      <Row>
-        <FormTextField>{t("fund-settings:reallocation.text-3")}</FormTextField>
-      </Row>
+      {isPublic && (
+        <Row>
+          <FormTextField>
+            {t("fund-settings:reallocation.text-3")}
+          </FormTextField>
+        </Row>
+      )}
       <Row size={"large"}>
         <Button
           isPending={isSubmitting}
@@ -129,18 +149,6 @@ const _ReallocateForm: React.FC<Props> = ({
     </HookForm>
   );
 };
-
-export interface IReallocateFormValues {
-  [FIELDS.assets]: PlatformAssetFull[];
-}
-
-export interface Props {
-  availableReallocationPercents: number;
-  fundAssets: FundAssetInfo[];
-  platformAssets: PlatformAsset[];
-  onSubmit(values: IReallocateFormValues): void;
-  errorMessage?: string;
-}
 
 const ReallocateForm = withLoader(React.memo(_ReallocateForm));
 export default ReallocateForm;

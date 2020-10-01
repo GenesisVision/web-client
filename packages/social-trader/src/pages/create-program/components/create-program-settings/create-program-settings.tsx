@@ -152,61 +152,63 @@ const _CreateProgramSettings: React.FC<Props> = ({
         label={t("create-account:settings.main-settings")}
         blockNumber={"01"}
       >
-        <DescriptionBlock
-          asset={ASSET.PROGRAM}
-          titleName={CREATE_PROGRAM_FIELDS.title}
-          descriptionName={CREATE_PROGRAM_FIELDS.description}
-          logoName={CREATE_PROGRAM_FIELDS.logo}
-          description={description}
-        />
-        <Row onlyOffset size={"large"}>
-          <Row>
-            <RowItem>
-              <BrokerAccount
-                setAccountType={(value: string) =>
-                  setValue(CREATE_PROGRAM_FIELDS.brokerAccountTypeId, value)
-                }
-                setLeverage={(value: number) =>
-                  setValue(CREATE_PROGRAM_FIELDS.leverage, value)
-                }
-                setCurrency={(value: string) =>
-                  setValue(CREATE_PROGRAM_FIELDS.currency, value)
-                }
-                name={CREATE_PROGRAM_FIELDS.brokerAccountTypeId}
-                accountTypes={broker.accountTypes}
-              />
-            </RowItem>
-            <RowItem>
-              <Currency
-                name={CREATE_PROGRAM_FIELDS.currency}
-                disabled={accountType === undefined}
-                accountCurrencies={accountType.currencies as CurrencyEnum[]}
-              />
-            </RowItem>
+        <div>
+          <DescriptionBlock
+            asset={ASSET.PROGRAM}
+            titleName={CREATE_PROGRAM_FIELDS.title}
+            descriptionName={CREATE_PROGRAM_FIELDS.description}
+            logoName={CREATE_PROGRAM_FIELDS.logo}
+            description={description}
+          />
+          <Row onlyOffset size={"xlarge"}>
+            <Row>
+              <RowItem>
+                <BrokerAccount
+                  setAccountType={(value: string) =>
+                    setValue(CREATE_PROGRAM_FIELDS.brokerAccountTypeId, value)
+                  }
+                  setLeverage={(value: number) =>
+                    setValue(CREATE_PROGRAM_FIELDS.leverage, value)
+                  }
+                  setCurrency={(value: string) =>
+                    setValue(CREATE_PROGRAM_FIELDS.currency, value)
+                  }
+                  name={CREATE_PROGRAM_FIELDS.brokerAccountTypeId}
+                  accountTypes={broker.accountTypes}
+                />
+              </RowItem>
+              <RowItem>
+                <Currency
+                  name={CREATE_PROGRAM_FIELDS.currency}
+                  disabled={accountType === undefined}
+                  accountCurrencies={accountType.currencies as CurrencyEnum[]}
+                />
+              </RowItem>
+            </Row>
+            <Row>
+              <RowItem>
+                <Leverage
+                  name={CREATE_PROGRAM_FIELDS.leverage}
+                  accountLeverages={accountType.leverages}
+                />
+              </RowItem>
+              <RowItem>
+                <PeriodLength
+                  periods={periods}
+                  name={CREATE_PROGRAM_FIELDS.periodLength}
+                />
+              </RowItem>
+            </Row>
+            <Row>
+              <RowItem>
+                <StopOutField name={CREATE_PROGRAM_FIELDS.stopOutLevel} />
+              </RowItem>
+              <RowItem>
+                <TradesDelay name={CREATE_PROGRAM_FIELDS.tradesDelay} />
+              </RowItem>
+            </Row>
           </Row>
-          <Row>
-            <RowItem>
-              <Leverage
-                name={CREATE_PROGRAM_FIELDS.leverage}
-                accountLeverages={accountType.leverages}
-              />
-            </RowItem>
-            <RowItem>
-              <PeriodLength
-                periods={periods}
-                name={CREATE_PROGRAM_FIELDS.periodLength}
-              />
-            </RowItem>
-          </Row>
-          <Row>
-            <RowItem>
-              <StopOutField name={CREATE_PROGRAM_FIELDS.stopOutLevel} />
-            </RowItem>
-            <RowItem>
-              <TradesDelay name={CREATE_PROGRAM_FIELDS.tradesDelay} />
-            </RowItem>
-          </Row>
-        </Row>
+        </div>
       </SettingsBlock>
       <SettingsBlock
         label={t("create-account:settings.fees-settings")}
@@ -247,7 +249,7 @@ const _CreateProgramSettings: React.FC<Props> = ({
         <>
           <CreateProgramDepositBlock
             hide={!accountType.isDepositRequired}
-            blockNumber={2}
+            blockNumber={4}
             setAvailable={setAvailable}
             setRate={setRate}
             walletFieldName={CREATE_PROGRAM_FIELDS.depositWalletId}

@@ -41,6 +41,7 @@ const _FundSettings: React.FC<Props> = ({
   return (
     <>
       <Reallocation
+        isPublic={isPublic}
         condition={details.personalDetails.ownerActions.canReallocate}
         availableReallocationPercents={
           details.personalDetails.availableReallocationPercents
@@ -61,6 +62,7 @@ const _FundSettings: React.FC<Props> = ({
         />
       )}
       <AssetEdit
+        key={details.id + isPublic}
         showDescription={isPublic}
         title={details.publicInfo.title}
         logo={{ src: details.publicInfo.logoUrl }}

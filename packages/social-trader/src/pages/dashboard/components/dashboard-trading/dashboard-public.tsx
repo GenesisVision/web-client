@@ -61,6 +61,7 @@ const _DashboardPublic: React.FC<Props> = () => {
         updateItems
       ) => (
         <DashboardPublicCard
+          showActions={asset.accountInfo.status !== "Disabled"}
           asset={asset}
           updateItems={handleUpdateItems(updateItems!)}
           ownAsset
