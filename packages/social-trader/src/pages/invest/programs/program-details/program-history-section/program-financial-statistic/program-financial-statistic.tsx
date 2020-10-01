@@ -10,6 +10,7 @@ import { DEFAULT_PAGING } from "components/table/reducers/table-paging.reducer";
 import { Text } from "components/text/text";
 import Tooltip from "components/tooltip/tooltip";
 import { TooltipContent } from "components/tooltip/tooltip-content";
+import { TRADE_ASSET_TYPE } from "constants/constants";
 import {
   INTERVAL_FILTER_NAME,
   IntervalFilter
@@ -41,6 +42,7 @@ const getColumns = ({
 };
 
 const _ProgramFinancialStatistic: React.FC<Props> = ({
+  assetType = TRADE_ASSET_TYPE.PROGRAM,
   isExchange,
   getItems,
   dataSelector,
@@ -90,7 +92,11 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
           name={DATE_RANGE_FILTER_NAME}
           value={filtering[DATE_RANGE_FILTER_NAME]}
           onChange={updateFilter}
-          startLabel={t("filters.date-range.program-start")}
+          startLabel={t(
+            `filters.date-range.${
+              assetType === TRADE_ASSET_TYPE.PROGRAM ? "program" : "follow"
+            }-start`
+          )}
         />
       </>
     ),
@@ -151,6 +157,7 @@ const _ProgramFinancialStatistic: React.FC<Props> = ({
 };
 
 interface Props {
+  assetType?: TRADE_ASSET_TYPE;
   isExchange?: boolean;
   getItems: GetItemsFuncActionType;
   dataSelector: TableSelectorType;

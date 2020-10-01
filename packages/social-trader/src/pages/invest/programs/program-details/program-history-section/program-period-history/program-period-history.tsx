@@ -10,6 +10,7 @@ import { DEFAULT_PAGING } from "components/table/reducers/table-paging.reducer";
 import { Text } from "components/text/text";
 import Tooltip from "components/tooltip/tooltip";
 import { TooltipContent } from "components/tooltip/tooltip-content";
+import { TRADE_ASSET_TYPE } from "constants/constants";
 import { ProgramPeriodHistoryRow } from "pages/invest/programs/program-details/program-history-section/program-period-history/program-period-history-row";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
@@ -20,6 +21,7 @@ import { PROGRAM_PERIOD_HISTORY } from "../../program-details.constants";
 import DownloadButtonToolbar from "../download-button-toolbar/download-button-toolbar";
 
 const _ProgramPeriodHistory: React.FC<Props> = ({
+  assetType = TRADE_ASSET_TYPE.PROGRAM,
   getItems,
   dataSelector,
   currency,
@@ -48,7 +50,11 @@ const _ProgramPeriodHistory: React.FC<Props> = ({
         name={DATE_RANGE_FILTER_NAME}
         value={filtering[DATE_RANGE_FILTER_NAME]}
         onChange={updateFilter}
-        startLabel={t("filters.date-range.program-start")}
+        startLabel={t(
+          `filters.date-range.${
+            assetType === TRADE_ASSET_TYPE.PROGRAM ? "program" : "follow"
+          }-start`
+        )}
       />
     ),
     []
@@ -96,6 +102,7 @@ const _ProgramPeriodHistory: React.FC<Props> = ({
 };
 
 interface Props {
+  assetType?: TRADE_ASSET_TYPE;
   getItems: GetItemsFuncActionType;
   dataSelector: TableSelectorType;
   id: string;
