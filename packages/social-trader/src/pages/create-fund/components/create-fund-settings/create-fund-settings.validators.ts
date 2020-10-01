@@ -14,7 +14,7 @@ import {
   entryFeeShape,
   exitFeeShape
 } from "utils/validators/validators";
-import { array, lazy, number, object } from "yup";
+import { array, lazy, number, object, string } from "yup";
 
 import {
   CREATE_FUND_FIELDS,
@@ -22,12 +22,14 @@ import {
 } from "./create-fund-settings";
 
 const createFundSettingsValidationSchema = ({
+  selfManaged,
   available,
   rate,
   wallets,
   t,
   data: { maxExitFee, maxEntryFee, minDeposit }
 }: {
+  selfManaged?: boolean;
   available: number;
   rate: number;
   wallets: WalletData[];
@@ -55,9 +57,15 @@ const createFundSettingsValidationSchema = ({
         .max(available, t("validations.amount-is-large")),
       [CREATE_FUND_FIELDS.logo]: inputImageShape(t),
       [CREATE_FUND_FIELDS.title]: assetTitleShape(t),
-      [CREATE_FUND_FIELDS.description]: assetDescriptionShape(t),
-      [CREATE_FUND_FIELDS.entryFee]: entryFeeShape(t, maxEntryFee),
-      [CREATE_FUND_FIELDS.exitFee]: exitFeeShape(t, maxExitFee),
+      [CREATE_FUND_FIELDS.description]: selfManaged
+        ? string()
+        : assetDescriptionShape(t),
+      [CREATE_FUND_FIELDS.entryFee]: selfManaged
+        ? number()
+        : entryFeeShape(t, maxEntryFee),
+      [CREATE_FUND_FIELDS.exitFee]: selfManaged
+        ? number()
+        : exitFeeShape(t, maxExitFee),
       [CREATE_FUND_FIELDS.assets]: assetsShape(t)
     });
   });

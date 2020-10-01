@@ -8,7 +8,7 @@
   font-weight: 600;
   font-style: normal;
   letter-spacing: 0.1px;
-  @include adaptive-padding(bottom, $padding-xxxsmall);
+  //@include adaptive-padding(bottom, $padding-xxxsmall);
   @include transition(color);
   &::after {
     @include transition(width);

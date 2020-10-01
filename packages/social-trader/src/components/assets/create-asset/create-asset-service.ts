@@ -76,6 +76,11 @@ const getCreateMethod = (
         api.assets().createTradingAccount({
           body: request as NewTradingAccountRequest
         });
+    case CREATE_ASSET.SELF_MANAGED_FUND:
+      return (request: NewAssetRequest) =>
+        api.assets().createSelfManagedFund({
+          body: request as NewFundRequest
+        });
     case CREATE_ASSET.FUND:
     default:
       return (request: NewAssetRequest) =>

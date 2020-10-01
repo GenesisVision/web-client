@@ -6,6 +6,12 @@ import ProgramDefaultImage from "media/program-default-image.svg";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 
+interface Props {
+  name: string;
+  title?: string;
+  defaultImage?: string;
+}
+
 const _LogoField: React.FC<Props> = ({
   name,
   title,
@@ -13,7 +19,7 @@ const _LogoField: React.FC<Props> = ({
 }) => {
   const { t } = useTranslation();
   return (
-    <>
+    <div>
       {title && <h5>{title}</h5>}
       <Row wide>
         <Text muted size={"small"}>
@@ -27,15 +33,9 @@ const _LogoField: React.FC<Props> = ({
           defaultImage={defaultImage}
         />
       </Row>
-    </>
+    </div>
   );
 };
-
-interface Props {
-  name: string;
-  title?: string;
-  defaultImage?: string;
-}
 
 const LogoField = React.memo(_LogoField);
 export default LogoField;

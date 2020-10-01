@@ -11,6 +11,7 @@ import DetailsSettingControl from "./controls/details-setting-control";
 import styles from "./details-description.module.scss";
 
 const _DetailsSettingsButtons: React.FC<Props> = ({
+  systemUrl,
   isOwnAsset,
   asset,
   personalDetails,
@@ -48,6 +49,14 @@ const _DetailsSettingsButtons: React.FC<Props> = ({
           />
         </Row>
       )}
+      {systemUrl && (
+        <Row>
+          <DetailsSettingControl
+            to={{ pathname: systemUrl }}
+            text={"Admin panel"}
+          />
+        </Row>
+      )}
     </div>
   );
 };
@@ -57,6 +66,7 @@ interface Props {
   asset?: ASSET;
   personalDetails?: PersonalDetailsType;
   id: string;
+  systemUrl?: string;
   notificationsUrl?: ToType;
   settingsUrl?: ToType;
 }

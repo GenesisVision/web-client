@@ -39,7 +39,7 @@ const _GvInput: React.FC<Props> = ({
               focused || adornment || (value !== undefined && value !== "")
           })}
         >
-          <Text muted size={"large"}>
+          <Text wrap={false} muted size={"large"}>
             {label}
           </Text>
         </label>

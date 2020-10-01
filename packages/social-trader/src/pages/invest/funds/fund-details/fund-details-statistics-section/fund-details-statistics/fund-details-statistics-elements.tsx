@@ -52,7 +52,7 @@ const _FundDetailsStatisticsElements: React.FC<IFundDetailsStatisticsElementsPro
                 />
               }
             >
-              {localizedDate(statistic.creationDate)}
+              <Text wrap={false}>{localizedDate(statistic.creationDate)}</Text>
             </DetailsStatisticElement>
           </DetailsStatisticColumn>
           <DetailsStatisticColumn>

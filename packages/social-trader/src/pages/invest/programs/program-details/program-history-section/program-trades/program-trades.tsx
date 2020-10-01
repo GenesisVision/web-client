@@ -89,7 +89,11 @@ const _ProgramTrades: React.FC<Props> = ({
         name={DATE_RANGE_FILTER_NAME}
         value={filtering[DATE_RANGE_FILTER_NAME]}
         onChange={updateFilter}
-        startLabel={t("filters.date-range.program-start")}
+        startLabel={t(
+          `filters.date-range.${
+            assetType === TRADE_ASSET_TYPE.PROGRAM ? "program" : "follow"
+          }-start`
+        )}
       />
     ),
     []
