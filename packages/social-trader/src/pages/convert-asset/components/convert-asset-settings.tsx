@@ -1,4 +1,3 @@
-import { AssetFields } from "components/assets/asset-fields/asset-field";
 import CreateAssetNavigation from "components/assets/fields/create-asset-navigation";
 import Currency from "components/assets/fields/currency";
 import DescriptionBlock from "components/assets/fields/description-block";
@@ -78,34 +77,36 @@ const _ConvertAssetSettings: React.FC<IConvertAssetSettingsProps> = props => {
         label={t("create-account:settings.main-settings")}
         blockNumber={"01"}
       >
-        {showDescriptionBlock && (
-          <DescriptionBlock
-            asset={ASSET.PROGRAM}
-            titleName={CONVERT_ASSET_FIELDS.title}
-            descriptionName={CONVERT_ASSET_FIELDS.description}
-            logoName={CONVERT_ASSET_FIELDS.logo}
-            description={description}
-          />
-        )}
-        {showProgramFields && (
-          <Row size={"large"}>
-            <AssetFields>
-              <Currency
-                hide={!showCurrency}
-                name={CONVERT_ASSET_FIELDS.currency}
-                accountCurrencies={["GVT", "BTC", "ETH"]}
-              />
-              <PeriodLength
-                periods={periods}
-                name={CONVERT_ASSET_FIELDS.periodLength}
-              />
-              <StopOutField name={CONVERT_ASSET_FIELDS.stopOutLevel} />
-              <Row onlyOffset>
-                <TradesDelay name={CONVERT_ASSET_FIELDS.tradesDelay} />
-              </Row>
-            </AssetFields>
-          </Row>
-        )}
+        <div>
+          {showDescriptionBlock && (
+            <DescriptionBlock
+              asset={ASSET.PROGRAM}
+              titleName={CONVERT_ASSET_FIELDS.title}
+              descriptionName={CONVERT_ASSET_FIELDS.description}
+              logoName={CONVERT_ASSET_FIELDS.logo}
+              description={description}
+            />
+          )}
+          {showProgramFields && (
+            <Row size={"large"}>
+              <div>
+                <Currency
+                  hide={!showCurrency}
+                  name={CONVERT_ASSET_FIELDS.currency}
+                  accountCurrencies={["GVT", "BTC", "ETH"]}
+                />
+                <PeriodLength
+                  periods={periods}
+                  name={CONVERT_ASSET_FIELDS.periodLength}
+                />
+                <StopOutField name={CONVERT_ASSET_FIELDS.stopOutLevel} />
+                <Row onlyOffset size={"large"}>
+                  <TradesDelay name={CONVERT_ASSET_FIELDS.tradesDelay} />
+                </Row>
+              </div>
+            </Row>
+          )}
+        </div>
       </SettingsBlock>
       {showProgramFields && (
         <>
