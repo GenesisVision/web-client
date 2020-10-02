@@ -1,4 +1,3 @@
-import clsx from "clsx";
 import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
 import { DefaultBlock } from "components/default.block/default.block";
 import { FollowUserBlock } from "components/manager/components/follow-user-block";
@@ -8,10 +7,18 @@ import { Text } from "components/text/text";
 import { PublicProfile } from "gv-api-web";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import styled from "styled-components";
 import { localizedDate } from "utils/dates";
 import { getLongWordsCount } from "utils/helpers";
 
-import styles from "./manager-info.module.scss";
+interface Props {
+  profile: PublicProfile;
+}
+
+const About = styled(Row)<{ hasLongWords?: boolean }>`
+  white-space: pre-wrap;
+  ${({ hasLongWords }) => hasLongWords && "overflow-wrap: anywhere;"};
+`;
 
 const _ManagerInfo: React.FC<Props> = ({ profile }) => {
   const { username, about, logoUrl, regDate, socialLinks } = profile;
@@ -20,7 +27,7 @@ const _ManagerInfo: React.FC<Props> = ({ profile }) => {
     regDate
   )}`;
 
-  const hasLongWords = about && !!getLongWordsCount(about);
+  const hasLongWords = !!about && !!getLongWordsCount(about);
   return (
     <>
       <DefaultBlock solid size={"large"}>
@@ -56,13 +63,7 @@ const _ManagerInfo: React.FC<Props> = ({ profile }) => {
               <Row>
                 <h3>{t("manager-page:about")}</h3>
               </Row>
-              <Row
-                className={clsx(styles["manager-info__about"], {
-                  [styles["manager-info__about--break-word"]]: hasLongWords
-                })}
-              >
-                {about}
-              </Row>
+              <About hasLongWords={hasLongWords}>{about}</About>
             </Row>
           )}
         </DefaultBlock>
@@ -70,9 +71,5 @@ const _ManagerInfo: React.FC<Props> = ({ profile }) => {
     </>
   );
 };
-
-interface Props {
-  profile: PublicProfile;
-}
 
 export const ManagerInfo = React.memo(_ManagerInfo);
