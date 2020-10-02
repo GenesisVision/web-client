@@ -1,19 +1,23 @@
-import clsx from "clsx";
 import React from "react";
-
-import styles from "./separator.module.scss";
+import styled from "styled-components";
 
 interface Props {
   direction?: "horizontal" | "vertical";
 }
 
-export const Separator: React.FC<Props> = ({ direction = "horizontal" }) => {
-  return (
-    <div
-      className={clsx(styles["separator"], {
-        [styles["separator--horizontal"]]: direction === "horizontal",
-        [styles["separator--vertical"]]: direction === "vertical"
-      })}
-    />
-  );
-};
+export const Separator = styled.div<Props>`
+  ${({ direction }) => {
+    switch (direction) {
+      case "horizontal":
+        return `
+          width: 100%;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      `;
+      case "vertical":
+        return `
+          height: 100%;
+          border-left: 1px solid rgba(255, 255, 255, 0.05);
+      `;
+    }
+  }}
+`;
