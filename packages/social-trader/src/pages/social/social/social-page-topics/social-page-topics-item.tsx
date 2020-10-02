@@ -7,14 +7,17 @@ import {
 } from "pages/social/social/feed.context";
 import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
-
-import styles from "./social-page-topics.module.scss";
+import styled from "styled-components";
 
 interface Props {
   hashTag: string;
   impressionsCount: number;
   discussCount: number;
 }
+
+const Container = styled.div`
+  width: 100%;
+`;
 
 const _SocialPageTopicsItem: React.FC<Props> = ({
   hashTag,
@@ -32,7 +35,7 @@ const _SocialPageTopicsItem: React.FC<Props> = ({
     });
   }, [hashTag]);
   return (
-    <div className={styles["social-page-topics__item"]}>
+    <Container>
       <Row onClick={handleClick}>{hashTag}</Row>
       <Row size={"small"}>
         <RowItem wide>
@@ -42,7 +45,7 @@ const _SocialPageTopicsItem: React.FC<Props> = ({
           <LabeledValue label={t("Discuss")}>{discussCount}</LabeledValue>
         </RowItem>
       </Row>
-    </div>
+    </Container>
   );
 };
 
