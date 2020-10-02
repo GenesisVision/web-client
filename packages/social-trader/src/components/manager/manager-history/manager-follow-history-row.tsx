@@ -16,15 +16,19 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { FOLLOW_DETAILS_FOLDER_ROUTE } from "routes/invest.routes";
+import styled from "styled-components";
 import { composeFollowDetailsUrl } from "utils/compose-url";
 import { distanceDate } from "utils/dates";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
 
-import styles from "./manager-history-row.module.scss";
-
 interface IManagerHistoryRowProps {
   asset: FollowDetailsListItem;
 }
+
+export const ChartContainer = styled(RowItem)`
+  max-width: 120px;
+  width: 120px;
+`;
 
 const _ManagerFollowHistoryRow: React.FC<IManagerHistoryRowProps> = ({
   asset
@@ -91,12 +95,9 @@ const _ManagerFollowHistoryRow: React.FC<IManagerHistoryRowProps> = ({
               />
             </Profitability>
           </ManagerHistoryItem>
-          <RowItem
-            bottomOffset
-            className={styles["manager-history-row__chart"]}
-          >
+          <ChartContainer bottomOffset>
             <ProgramSimpleChart data={asset.statistic?.chart} />
-          </RowItem>
+          </ChartContainer>
         </>
       }
     />
