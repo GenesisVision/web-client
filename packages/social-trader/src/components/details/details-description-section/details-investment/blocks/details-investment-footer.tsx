@@ -2,8 +2,6 @@ import { Center } from "components/center/center";
 import React from "react";
 import styled from "styled-components";
 
-import styles from "./details-investment-block.module.scss";
-
 const StyledCenter = styled(Center)`
   justify-content: space-between;
 `;
