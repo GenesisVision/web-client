@@ -1,10 +1,13 @@
-import clsx from "clsx";
+import {
+  mediaBreakpointLandscapeTablet,
+  mediaBreakpointTablet
+} from "components/gv-styles/gv-media";
 import { PlatformEvent } from "gv-api-web";
 import EventItem from "pages/landing-page/components/events-list/event-item";
 import EventLastItem from "pages/landing-page/components/events-list/event-last-item";
+import { resetList } from "pages/landing-page/styles/landing-styles";
 import React, { useCallback, useEffect, useState } from "react";
-
-import styles from "./events-list.module.scss";
+import styled from "styled-components";
 
 const TIME_DELAY = 5000;
 const COUNT_SHOWING_ITEMS = 5;
@@ -13,6 +16,15 @@ interface Props {
   className?: string;
   events: PlatformEvent[];
 }
+
+const StyledUl = styled.ul<{ height: number }>`
+  ${mediaBreakpointTablet("grid-column: 3/11;")}
+  ${mediaBreakpointLandscapeTablet("grid-column: 4/10;")}
+  ${resetList}
+  position: relative;
+  min-height: 600px;
+  height: ${({ height }) => height}px;
+`;
 
 const _EventsList: React.FC<Props> = ({ className, events }) => {
   const countItems = events.length;
@@ -41,10 +53,7 @@ const _EventsList: React.FC<Props> = ({ className, events }) => {
   }, [minHeightItem, heightList]);
 
   return (
-    <ul
-      className={clsx(styles["events-list"], className)}
-      style={{ height: `${heightList}px` }}
-    >
+    <StyledUl height={heightList}>
       {events.map((event, index) => (
         <EventItem
           key={index}
@@ -58,7 +67,7 @@ const _EventsList: React.FC<Props> = ({ className, events }) => {
         />
       ))}
       <EventLastItem minHeight={minHeightItem} />
-    </ul>
+    </StyledUl>
   );
 };
 
