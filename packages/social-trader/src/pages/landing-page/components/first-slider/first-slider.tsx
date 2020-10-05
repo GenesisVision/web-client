@@ -18,11 +18,10 @@ import React, { useCallback, useState } from "react";
 import styles from "./first-slider.module.scss";
 
 interface Props {
-  className?: string;
   slidesItems: TSlide[];
 }
 
-const _FirstSlider: React.FC<Props> = ({ className, slidesItems }) => {
+const _FirstSlider: React.FC<Props> = ({ slidesItems }) => {
   const { t } = useTranslation();
   const [index, setIndex] = useState(0);
   const countsSlides = slidesItems.length;
@@ -35,7 +34,7 @@ const _FirstSlider: React.FC<Props> = ({ className, slidesItems }) => {
     []
   );
   return (
-    <SliderMainWrapper className={className}>
+    <SliderMainWrapper>
       <SliderImgWrapper>
         <div className={styles["slider__img-animate"]}>
           <SliderImg item={slidesItems[index]} />
