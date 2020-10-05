@@ -11,6 +11,38 @@ export const $gridColumns = 12;
 export const $gridGap = 40;
 export const $gridGapMobile = 14;
 
+export const resetButton = css`
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  overflow: visible;
+  text-align: inherit;
+  outline: none;
+  cursor: pointer;
+  background-color: transparent;
+
+  /* inherit font & color from ancestor */
+  color: inherit;
+  font: inherit;
+
+  /* Normalize \`line-height\`. Cannot be changed from \`normal\` in Firefox 4+. */
+  line-height: normal;
+
+  /* Corrects font smoothing for webkit */
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+
+  /* Corrects inability to style clickable \`input\` types in iOS */
+  -webkit-appearance: none;
+
+  /* Remove excess padding and border in Firefox 4+ */
+  &::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+  }
+`;
+
 export const landingContainerStyles = css`
   margin-left: auto;
   margin-right: auto;
