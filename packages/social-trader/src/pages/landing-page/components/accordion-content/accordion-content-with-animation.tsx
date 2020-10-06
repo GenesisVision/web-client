@@ -1,8 +1,10 @@
+import { $rowColor } from "components/gv-styles/gv-colors/gv-colors";
+import { mediaBreakpointDesktop } from "components/gv-styles/gv-media";
+import AccordionContent from "pages/landing-page/components/accordion-content/accordion-content";
 import { getElementHeight } from "pages/landing-page/utils";
 import React, { useRef } from "react";
 import { animated, useTransition } from "react-spring";
-
-import styles from "../accordion/accordion.module.scss";
+import styled from "styled-components";
 
 const visibleStyle = { height: "auto", opacity: 1, overflow: "visible" };
 const hiddenStyle = { opacity: 0, height: 0, overflow: "hidden" };
@@ -10,12 +12,20 @@ const hiddenStyle = { opacity: 0, height: 0, overflow: "hidden" };
 interface Props {
   forceSlideIn?: boolean;
   isVisible: boolean;
-  content?: JSX.Element;
 }
 
-const _AccordionContent: React.FC<Props> = ({
+const Content = styled.div`
+  border-top: 1px solid ${$rowColor}4d;
+  padding: 10px 20px;
+  ${mediaBreakpointDesktop("padding: 15px 25px;")}
+  p:last-child {
+    margin-bottom: 0;
+  }
+`;
+
+const AccordionContentWithAnimation: React.FC<Props> = ({
   isVisible,
-  content,
+  children,
   forceSlideIn
 }) => {
   const isVisibleOnMount = useRef(isVisible && !forceSlideIn);
@@ -49,17 +59,12 @@ const _AccordionContent: React.FC<Props> = ({
   return transitions.map(({ item, props, key }) => {
     return item ? (
       <animated.div ref={containerRef} key={key} style={props}>
-        <div ref={innerRef} className={styles["accordion__content"]}>
-          {content}
-        </div>
+        <AccordionContent isVisible refProp={innerRef}>
+          {children}
+        </AccordionContent>
       </animated.div>
     ) : null;
   });
 };
 
-_AccordionContent.defaultProps = {
-  forceSlideIn: false
-};
-
-const AccordionContent = React.memo(_AccordionContent);
-export default AccordionContent;
+export default AccordionContentWithAnimation;
