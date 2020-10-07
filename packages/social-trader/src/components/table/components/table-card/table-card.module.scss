@@ -95,7 +95,8 @@ $action-offset-size: 5px;
 
   &__subtitle {
     max-width: 130px;
-    word-break: break-all;
+    overflow-wrap: anywhere;
+    word-break: break-word;
   }
 
   &__main-info {
