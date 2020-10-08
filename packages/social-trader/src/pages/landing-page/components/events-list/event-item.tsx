@@ -1,18 +1,22 @@
-import ImageBase from "components/avatar/image-base";
 import GVProgramDefaultAvatar from "components/gv-program-avatar/gv-propgram-default-avatar";
 import { useToLink } from "components/link/link.helper";
 import { PlatformEvent } from "gv-api-web";
 import { useTranslation } from "i18n";
 import {
   EventItemAvatarContainer,
+  EventItemDate,
+  EventItemImage,
+  EventItemInfo,
   EventItemLi,
-  EventItemLink
+  EventItemLink,
+  EventItemNumber,
+  EventItemText,
+  EventItemTitle,
+  EventItemValues
 } from "pages/landing-page/components/events-list/events-list.styles";
 import { getElementHeight } from "pages/landing-page/utils";
 import React, { useEffect, useRef, useState } from "react";
 import { composeManagerDetailsUrl, getAssetLink } from "utils/compose-url";
-
-import styles from "./events-list.module.scss";
 
 interface Props extends PlatformEvent {
   startIndex: number;
@@ -149,17 +153,15 @@ const _EventItem: React.FC<Props> = ({
         to={linkAsset}
       >
         <EventItemAvatarContainer>
-          <ImageBase
+          <EventItemImage
             DefaultImageComponent={GVProgramDefaultAvatar}
-            defaultImageClassName={styles["events-list__item-image--default"]}
             alt={title}
             color={color}
-            className={styles["events-list__item-image"]}
             src={logoUrl}
           />
         </EventItemAvatarContainer>
       </EventItemLink>
-      <div className={styles["events-list__item-info"]}>
+      <EventItemInfo>
         <EventItemLink
           title={t("landing-page:links.title", {
             title: userUrl,
@@ -167,20 +169,14 @@ const _EventItem: React.FC<Props> = ({
           })}
           to={linkUser}
         >
-          <div className={styles["events-list__item-title"]}>{title}</div>
+          <EventItemTitle>{title}</EventItemTitle>
         </EventItemLink>
-        <div className={styles["events-list__item-text"]}>{text}</div>
-      </div>
-      <div className={styles["events-list__item-values"]}>
-        {value && (
-          <div className={styles["events-list__item-number"]}>{value}</div>
-        )}
-        {date && (
-          <div className={styles["events-list__item-date"]}>
-            {timeConversion(date)}
-          </div>
-        )}
-      </div>
+        <EventItemText>{text}</EventItemText>
+      </EventItemInfo>
+      <EventItemValues>
+        {value && <EventItemNumber>{value}</EventItemNumber>}
+        {date && <EventItemDate>{timeConversion(date)}</EventItemDate>}
+      </EventItemValues>
     </EventItemLi>
   );
 };
