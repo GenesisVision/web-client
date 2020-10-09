@@ -1,9 +1,10 @@
-import { mediaBreakpointDesktop } from "components/gv-styles/gv-media";
 import NavItem from "pages/landing-page/components/nav/nav-item";
+import {
+  NavListContainer,
+  NavListStyledUl
+} from "pages/landing-page/components/nav/nav.styles";
 import { TNavHeader } from "pages/landing-page/static-data/nav-links";
-import { resetList } from "pages/landing-page/styles/landing-styles";
 import React from "react";
-import styled from "styled-components";
 
 export interface Props {
   menuItems: TNavHeader[];
@@ -12,31 +13,14 @@ export interface Props {
   onClick?: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
 }
 
-const Container = styled.nav<{ isMobile?: boolean }>`
-  ${({ isMobile }) =>
-    !isMobile &&
-    `
-      display: none;
-      ${mediaBreakpointDesktop(`
-        display: block;
-        grid-column: 3/11;
-        justify-self: end;
-      `)}`};
-`;
-
-const StyledUl = styled.ul`
-  ${resetList};
-  ${mediaBreakpointDesktop("display: grid; grid-auto-flow: column;")}
-`;
-
 const _NavList: React.FC<Props> = ({
   menuItems,
   onClick,
   subNavOpen,
   isMobile
 }) => (
-  <Container isMobile={isMobile}>
-    <StyledUl>
+  <NavListContainer isMobile={isMobile}>
+    <NavListStyledUl>
       {menuItems.map((item, index) => (
         <NavItem
           isMobile={isMobile}
@@ -50,8 +34,8 @@ const _NavList: React.FC<Props> = ({
           subNavOpen={subNavOpen}
         />
       ))}
-    </StyledUl>
-  </Container>
+    </NavListStyledUl>
+  </NavListContainer>
 );
 
 const NavList = React.memo(_NavList);
