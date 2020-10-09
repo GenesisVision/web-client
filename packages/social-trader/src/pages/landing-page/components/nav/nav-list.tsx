@@ -1,11 +1,9 @@
-import clsx from "clsx";
 import { mediaBreakpointDesktop } from "components/gv-styles/gv-media";
 import NavItem from "pages/landing-page/components/nav/nav-item";
 import { TNavHeader } from "pages/landing-page/static-data/nav-links";
+import { resetList } from "pages/landing-page/styles/landing-styles";
 import React from "react";
 import styled from "styled-components";
-
-import styles from "./nav-list.module.scss";
 
 export interface Props {
   menuItems: TNavHeader[];
@@ -26,6 +24,11 @@ const Container = styled.nav<{ isMobile?: boolean }>`
       `)}`};
 `;
 
+const StyledUl = styled.ul`
+  ${resetList};
+  ${mediaBreakpointDesktop("display: grid; grid-auto-flow: column;")}
+`;
+
 const _NavList: React.FC<Props> = ({
   menuItems,
   onClick,
@@ -33,13 +36,10 @@ const _NavList: React.FC<Props> = ({
   isMobile
 }) => (
   <Container isMobile={isMobile}>
-    <ul
-      className={clsx(styles["nav-list"], {
-        [styles["nav-list--is-mobile"]]: isMobile
-      })}
-    >
+    <StyledUl>
       {menuItems.map((item, index) => (
         <NavItem
+          isMobile={isMobile}
           key={index}
           name={item.name}
           href={item.href}
@@ -50,7 +50,7 @@ const _NavList: React.FC<Props> = ({
           subNavOpen={subNavOpen}
         />
       ))}
-    </ul>
+    </StyledUl>
   </Container>
 );
 
