@@ -11,6 +11,22 @@ export const $gridColumns = 12;
 export const $gridGap = 40;
 export const $gridGapMobile = 14;
 
+export const landingContainer = css`
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  min-width: 320px;
+  max-width: ${$gridMaxWidth};
+  padding-left: 20px;
+  padding-right: 20px;
+
+  ${mediaBreakpointLargeDesktop(`
+    max-width: 1600px;
+    padding-left: 100px;
+    padding-right: 100px;
+  `)}
+`;
+
 export const resetButton = css`
   border: none;
   margin: 0;
