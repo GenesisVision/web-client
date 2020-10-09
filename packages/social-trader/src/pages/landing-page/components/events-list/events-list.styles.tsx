@@ -158,7 +158,7 @@ export const EventItemAdaptiveElem = styled.div<{
     if (desktop)
       return `
       display: none;
-      ${mediaBreakpointTablet("display: none;")}
+      ${mediaBreakpointTablet("display: inline-block;")}
     `;
   }};
 `;
