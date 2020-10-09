@@ -21,7 +21,7 @@ const _EventLastItem: React.FC<Props> = ({ minHeight }) => {
   const { t } = useTranslation();
   return (
     <EventItemLi last minHeight={minHeight}>
-      <EventItemAvatarContainer>
+      <EventItemAvatarContainer last>
         <EventItemImage last src={LogoIcon} alt="Genesis Vision" />
       </EventItemAvatarContainer>
       <EventItemInfo>

@@ -57,16 +57,18 @@ export const EventItemLink = styled(Link)`
   }
 `;
 
-export const EventItemAvatarContainer = styled.div`
+export const EventItemAvatarContainer = styled.div<{ last?: boolean }>`
   width: 40px;
   height: 40px;
   margin-right: 20px;
-  background-color: ${$landingColorIcon};
+  background: ${({ last }) =>
+    last ? "linear-gradient(0deg, #f7f7f7, #f7f7f7);" : $landingColorIcon};
   border-radius: 10px;
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+
   ${mediaBreakpointTablet(`
     width: 60px;
     height: 60px;
@@ -83,7 +85,7 @@ export const EventItemImage = styled(ImageBase)<{ last?: boolean }>`
   width: ${({ last }) => (last ? "36px" : "100%")};
   height: ${({ last }) => (last ? "20px" : "auto")};
 
-  ${mediaBreakpointTablet("border-radius: 15px;")}
+  ${({ last }) => !last && mediaBreakpointTablet("border-radius: 15px;")};
 `;
 
 export const EventItemInfo = styled.div`
