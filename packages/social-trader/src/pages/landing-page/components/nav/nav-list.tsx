@@ -1,18 +1,38 @@
 import clsx from "clsx";
+import { mediaBreakpointDesktop } from "components/gv-styles/gv-media";
 import NavItem from "pages/landing-page/components/nav/nav-item";
 import { TNavHeader } from "pages/landing-page/static-data/nav-links";
 import React from "react";
+import styled from "styled-components";
 
 import styles from "./nav-list.module.scss";
 
+export interface Props {
+  menuItems: TNavHeader[];
+  subNavOpen?: boolean;
+  isMobile?: boolean;
+  onClick?: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
+}
+
+const Container = styled.nav<{ isMobile?: boolean }>`
+  ${({ isMobile }) =>
+    !isMobile &&
+    `
+      display: none;
+      ${mediaBreakpointDesktop(`
+        display: block;
+        grid-column: 3/11;
+        justify-self: end;
+      `)}`};
+`;
+
 const _NavList: React.FC<Props> = ({
   menuItems,
-  className,
   onClick,
   subNavOpen,
   isMobile
 }) => (
-  <nav className={className}>
+  <Container isMobile={isMobile}>
     <ul
       className={clsx(styles["nav-list"], {
         [styles["nav-list--is-mobile"]]: isMobile
@@ -31,16 +51,8 @@ const _NavList: React.FC<Props> = ({
         />
       ))}
     </ul>
-  </nav>
+  </Container>
 );
-
-export interface Props {
-  menuItems: TNavHeader[];
-  className?: string;
-  subNavOpen?: boolean;
-  isMobile?: boolean;
-  onClick?(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void;
-}
 
 const NavList = React.memo(_NavList);
 export default NavList;
