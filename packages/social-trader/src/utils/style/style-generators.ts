@@ -31,6 +31,11 @@ export type GetPropsStylesFuncType = (
   callback: (props: AnyObjectType) => string
 ) => GetPropsStylesFuncOutputType;
 
+export const getHEXA = (color: string, alpha: number): string => {
+  const alphaInHEX = (alpha * 255 + 0x10000).toString(16).substr(-2);
+  return color + alphaInHEX;
+};
+
 export const getPropsStyles: GetPropsStylesFuncType = (
   field: string,
   callback: (props: AnyObjectType) => string
