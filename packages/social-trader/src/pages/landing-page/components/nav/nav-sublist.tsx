@@ -1,19 +1,26 @@
-import clsx from "clsx";
 import NavSubItem from "pages/landing-page/components/nav/nav-subitem";
-import { TNavHeader, TSubNav } from "pages/landing-page/static-data/nav-links";
+import { NavSubListStyledUl } from "pages/landing-page/components/nav/nav.styles";
+import { TSubNav } from "pages/landing-page/static-data/nav-links";
 import React from "react";
 
-import styles from "./nav-list.module.scss";
+export interface Props {
+  subNav: TSubNav[];
+  isMobile?: boolean;
+  subNavOpen?: boolean;
+  onClick?: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
+}
 
-const _NavSubList: React.FC<Props> = ({ subNav, subNavOpen, onClick }) => (
-  <ul
-    className={clsx(styles["nav-list"], styles["nav-list--sub"], {
-      [styles["nav-list--sub-open"]]: subNavOpen
-    })}
-  >
+const _NavSubList: React.FC<Props> = ({
+  isMobile,
+  subNav,
+  subNavOpen,
+  onClick
+}) => (
+  <NavSubListStyledUl subNavOpen={subNavOpen}>
     {subNavOpen &&
       subNav.map((item, index) => (
         <NavSubItem
+          isMobile={isMobile}
           key={index}
           name={item.name}
           href={item.href}
@@ -22,14 +29,8 @@ const _NavSubList: React.FC<Props> = ({ subNav, subNavOpen, onClick }) => (
           onClick={onClick}
         />
       ))}
-  </ul>
+  </NavSubListStyledUl>
 );
-
-export interface Props {
-  subNav: TSubNav[];
-  subNavOpen?: boolean;
-  onClick?(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void;
-}
 
 const NavSubList = React.memo(_NavSubList);
 export default NavSubList;
