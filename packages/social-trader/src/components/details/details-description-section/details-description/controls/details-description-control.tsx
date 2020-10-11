@@ -9,7 +9,6 @@ import styled from "styled-components";
 interface IDetailsDescriptionControlProps
   extends React.HTMLAttributes<HTMLDivElement> {
   text: string;
-  className?: string;
   onClick?: VoidFunction;
   to?: ToType;
 }
@@ -41,7 +40,6 @@ export const DetailsDescriptionControlButton: React.FC<{
 const DetailsDescriptionControl: React.FC<IDetailsDescriptionControlProps> = ({
   children,
   text,
-  className,
   onClick,
   to
 }) => {

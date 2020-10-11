@@ -21,7 +21,6 @@ const HeaderSearchInput = dynamic(() =>
 );
 
 export interface Props {
-  className?: string;
   profileHeader?: ProfileHeaderViewModel;
 }
 
@@ -33,7 +32,7 @@ const Container = styled.div`
   padding-right: ${$paddingMedium}px;
 `;
 
-const _HeaderLeft: React.FC<Props> = ({ className, profileHeader }) => {
+const _HeaderLeft: React.FC<Props> = ({ profileHeader }) => {
   const { route, asPath } = useRouter();
   const backPath = asPath ? asPath : route;
   const isAuthenticated = useSelector(isAuthenticatedSelector);

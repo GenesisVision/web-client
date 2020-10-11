@@ -5,20 +5,13 @@ import * as React from "react";
 import { OptionalClickable, Sizeable } from "utils/types";
 
 interface Props extends Sizeable, OptionalClickable {
-  className?: string;
   avatar?: React.ReactNode;
   name: string | JSX.Element | React.ReactNode;
 }
 
-const _AvatarWithName: React.FC<Props> = ({
-  className,
-  onClick,
-  size,
-  avatar,
-  name
-}) => {
+const _AvatarWithName: React.FC<Props> = ({ onClick, size, avatar, name }) => {
   return (
-    <Row className={className} onClick={onClick}>
+    <Row onClick={onClick}>
       {avatar && (
         <RowItem size={size}>
           <Row>{avatar}</Row>

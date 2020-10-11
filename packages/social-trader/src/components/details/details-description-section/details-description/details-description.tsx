@@ -23,7 +23,6 @@ const Container = styled.div`
 `;
 
 interface Props {
-  className?: string;
   descriptionTitle?: string;
   personalDetails?: PersonalDetailsType;
   isOwnAsset?: boolean;
@@ -45,7 +44,6 @@ interface Props {
 }
 
 const _DetailsDescription: React.FC<Props> = ({
-  className,
   descriptionTitle,
   personalDetails,
   isOwnAsset,

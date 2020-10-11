@@ -24,7 +24,6 @@ interface Props {
   component: React.ComponentType<any>;
   label: string;
   name: string;
-  className?: string;
   disabled?: boolean;
 }
 
@@ -38,7 +37,6 @@ export const _AssetFormField: React.FC<React.HTMLAttributes<HTMLDivElement> &
   label,
   component,
   caption,
-  className,
   adornment,
   type,
   hintContent,
@@ -47,7 +45,7 @@ export const _AssetFormField: React.FC<React.HTMLAttributes<HTMLDivElement> &
 }) => {
   const trimmedLength = (typeof value === "string" ? value : "").trim().length;
   return (
-    <div className={className}>
+    <div>
       <GVHookFormField
         showCorrect
         wide={wide}
