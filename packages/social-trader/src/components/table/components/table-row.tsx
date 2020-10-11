@@ -16,7 +16,7 @@ interface Props {
   children: ReactNode;
 }
 
-const Tr = styled.tr<{ hoverable?: boolean; stripy?: boolean; head?: boolean }>`
+const TableRow = styled.tr<Props>`
   ${transition("background-color")}
   ${cursorPointer}
    ${({ hoverable = true, stripy, head }) => {
@@ -34,24 +34,5 @@ const Tr = styled.tr<{ hoverable?: boolean; stripy?: boolean; head?: boolean }>`
      `;
    }}
 `;
-
-const TableRow: React.FC<Props> = ({
-  head,
-  hoverable = true,
-  className = "",
-  stripy,
-  children,
-  ...other
-}) => (
-  <Tr
-    head={head}
-    hoverable={hoverable}
-    stripy={stripy}
-    className={className}
-    {...other}
-  >
-    {children}
-  </Tr>
-);
 
 export default React.memo(TableRow);
