@@ -1,26 +1,23 @@
+import { AnyTag } from "components/conversation/tag/tag-components/any-tag";
+import { EventTag } from "components/conversation/tag/tag-components/event-tag";
+import { EmptyTag } from "components/conversation/tag/tag-components/export-tag";
+import { FollowLink } from "components/conversation/tag/tag-components/follow-link";
+import { FollowTagCard } from "components/conversation/tag/tag-components/follow-tag-card";
+import { FundLink } from "components/conversation/tag/tag-components/fund-link";
+import { FundTagCard } from "components/conversation/tag/tag-components/fund-tag-card";
+import { PlatformAssetTagComponent } from "components/conversation/tag/tag-components/platform-asset-tag";
+import { ProgramLink } from "components/conversation/tag/tag-components/program-link";
+import { ProgramTagCard } from "components/conversation/tag/tag-components/program-tag-card";
+import { RepostTagComponent } from "components/conversation/tag/tag-components/repost-tag";
+import { TagToComponentType } from "components/conversation/tag/tag-components/tag-components.types";
+import { UrlTagComponent } from "components/conversation/tag/tag-components/url-tag";
+import { UserLink } from "components/conversation/tag/tag-components/user-link";
+import { UserTagCard } from "components/conversation/tag/tag-components/user-tag-card";
 import Link from "components/link/link";
 import { PostTag } from "gv-api-web";
 import { getTagsUrl } from "pages/tags/tags.routes";
 import React from "react";
 import { safeGetElemFromArray } from "utils/helpers";
-
-import {
-  AnyTag,
-  EmptyTag,
-  EventTag,
-  FollowLink,
-  FollowTagCard,
-  FundLink,
-  FundTagCard,
-  PlatformAssetTagComponent,
-  ProgramLink,
-  ProgramTagCard,
-  RepostTagComponent,
-  TagToComponentType,
-  UrlTagComponent,
-  UserLink,
-  UserTagCard
-} from "./tag-components";
 
 export const inTextComponentsMap: TagToComponentType[] = [
   { tagType: "Url", Component: UrlTagComponent },
