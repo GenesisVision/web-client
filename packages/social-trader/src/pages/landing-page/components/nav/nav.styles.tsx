@@ -1,15 +1,12 @@
-import {
-  $landingLinkHover,
-  $mainColor
-} from "components/gv-styles/gv-colors/gv-colors";
+import Link from "components/link/link";
+import { resetList } from "pages/landing-page/styles/landing-styles";
+import styled, { css, keyframes } from "styled-components";
+import { $landingLinkHover, $mainColor } from "utils/style/colors";
 import {
   mediaBreakpointDesktop,
   mediaBreakpointLargeDesktop,
   mediaBreakpointTablet
-} from "components/gv-styles/gv-media";
-import Link from "components/link/link";
-import { resetList } from "pages/landing-page/styles/landing-styles";
-import styled, { css, keyframes } from "styled-components";
+} from "utils/style/media";
 import { getHEXA } from "utils/style/style-generators";
 import { landingResetLink, transition } from "utils/style/style-mixins";
 

@@ -1,8 +1,8 @@
-import { $fontSizeParagraph } from "components/gv-styles/gv-sizes";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
 import * as React from "react";
 import styled from "styled-components";
+import { $fontSizeParagraph } from "utils/style/sizes";
 import { fontSize } from "utils/style/style-mixins";
 
 const StyledRow = styled(Row)`

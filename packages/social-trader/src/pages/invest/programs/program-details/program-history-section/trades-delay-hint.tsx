@@ -1,4 +1,3 @@
-import { $labelColor } from "components/gv-styles/gv-colors/gv-colors";
 import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
@@ -10,6 +9,7 @@ import { DELAYS_LABELS } from "pages/invest/programs/program-details/program-his
 import React from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
+import { $labelColor } from "utils/style/colors";
 
 const Question = styled.div`
   cursor: help;

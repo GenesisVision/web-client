@@ -1,15 +1,12 @@
 import { Center } from "components/center/center";
-import {
-  $mainColor,
-  $panelBackgroundColor
-} from "components/gv-styles/gv-colors/gv-colors";
-import { $fontSizeSmall, $paddingSmall } from "components/gv-styles/gv-sizes";
 import { LabeledValue } from "components/labeled-value/labeled-value";
 import { RowItem } from "components/row-item/row-item";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import withLoader from "decorators/with-loader";
 import * as React from "react";
 import styled from "styled-components";
+import { $mainColor, $panelBackgroundColor } from "utils/style/colors";
+import { $fontSizeSmall, $paddingSmall } from "utils/style/sizes";
 import { fontSize } from "utils/style/style-mixins";
 
 interface Props {

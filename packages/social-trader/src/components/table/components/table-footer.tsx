@@ -1,10 +1,10 @@
-import { $paddingSmall } from "components/gv-styles/gv-sizes";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import withLoader from "decorators/with-loader";
 import * as React from "react";
 import { useCallback } from "react";
 import styled from "styled-components";
+import { $paddingSmall } from "utils/style/sizes";
 import { horizontalPaddings } from "utils/style/style-mixins";
 
 import { IPaging } from "../helpers/paging.helpers";

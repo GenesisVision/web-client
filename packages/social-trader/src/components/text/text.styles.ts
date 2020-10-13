@@ -1,19 +1,19 @@
+import { ITextProps } from "components/text/text.types";
+import { css } from "styled-components";
 import {
   $labelColor,
   $negativeColor,
   $positiveColor,
   $textLightColor,
   $yellow
-} from "components/gv-styles/gv-colors/gv-colors";
+} from "utils/style/colors";
 import {
   $fontSizeCommon,
   $fontSizeH2,
   $fontSizeH4,
   $fontSizeSmall,
   $fontSizeXsmall
-} from "components/gv-styles/gv-sizes";
-import { ITextProps } from "components/text/text.types";
-import { css } from "styled-components";
+} from "utils/style/sizes";
 import { fontSize } from "utils/style/style-mixins";
 
 export const dynamicTextStyles = css`

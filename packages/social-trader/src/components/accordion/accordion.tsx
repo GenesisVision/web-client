@@ -1,11 +1,11 @@
 import { Center } from "components/center/center";
 import { DefaultBlock } from "components/default.block/default.block";
-import { $backgroundColor } from "components/gv-styles/gv-colors/gv-colors";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import FilterArrowIcon from "components/table/components/filtering/filter-arrow-icon";
 import React, { useCallback, useState } from "react";
 import styled from "styled-components";
+import { $backgroundColor } from "utils/style/colors";
 
 interface Props {
   label: string | JSX.Element;

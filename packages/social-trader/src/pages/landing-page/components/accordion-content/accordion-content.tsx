@@ -1,7 +1,7 @@
-import { $rowColor } from "components/gv-styles/gv-colors/gv-colors";
-import { mediaBreakpointDesktop } from "components/gv-styles/gv-media";
 import React, { RefObject } from "react";
 import styled from "styled-components";
+import { $rowColor } from "utils/style/colors";
+import { mediaBreakpointDesktop } from "utils/style/media";
 
 interface Props {
   refProp?: RefObject<any>;

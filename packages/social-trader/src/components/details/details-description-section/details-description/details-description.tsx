@@ -1,13 +1,13 @@
 import { DetailsInfo } from "components/details/details-description-section/details-description/details-info.block";
 import { DetailsSettingsButtons } from "components/details/details-description-section/details-description/details-settings-buttons.block";
 import { PersonalDetailsType } from "components/details/details.types";
-import { mediaBreakpointTablet } from "components/gv-styles/gv-media";
 import { ToType } from "components/link/link";
 import { ASSET } from "constants/constants";
 import { ProgramDetailsFull, SocialLinkViewModel } from "gv-api-web";
 import * as React from "react";
 import { managerToPathCreator } from "routes/manager.routes";
 import styled from "styled-components";
+import { mediaBreakpointTablet } from "utils/style/media";
 import { CurrencyEnum } from "utils/types";
 
 import { DetailsLimitsAvatar } from "./details-limits-avatar.block";

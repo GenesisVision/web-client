@@ -1,4 +1,3 @@
-import { $secondaryBackgroundColor } from "components/gv-styles/gv-colors/gv-colors";
 import { PieCircle } from "components/pie-container/pie-circle";
 import { PieCircleContainer } from "components/pie-container/pie-circle-container";
 import {
@@ -7,6 +6,7 @@ import {
   CircleDataType
 } from "components/pie-container/pie.helpers";
 import * as React from "react";
+import { $secondaryBackgroundColor } from "utils/style/colors";
 
 export enum PIE_DIRECTION {
   CLOCKWISE = "CLOCKWISE",

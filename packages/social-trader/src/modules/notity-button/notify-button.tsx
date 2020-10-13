@@ -1,7 +1,6 @@
 import { Button } from "components/button/button";
 import { Center } from "components/center/center";
 import { getMinProgramDeposit } from "components/deposit/services/program-deposit.service";
-import { $mainColor } from "components/gv-styles/gv-colors/gv-colors";
 import { RowItem } from "components/row-item/row-item";
 import Tooltip from "components/tooltip/tooltip";
 import { TooltipContent } from "components/tooltip/tooltip-content";
@@ -12,6 +11,7 @@ import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { programMinDepositAmountsSelector } from "reducers/platform-reducer";
 import styled from "styled-components";
+import { $mainColor } from "utils/style/colors";
 import { CurrencyEnum } from "utils/types";
 
 interface Props {

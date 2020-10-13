@@ -1,15 +1,17 @@
+import React from "react";
+import { css } from "styled-components";
 import {
   $backgroundColor,
   $primaryColor,
   $textDarkColor,
   $textLightColor
-} from "components/gv-styles/gv-colors/gv-colors";
+} from "utils/style/colors";
 import {
   mediaBreakpointDesktop,
   mediaBreakpointLandscapeTablet,
   mediaBreakpointLargeDesktop,
   mediaBreakpointTablet
-} from "components/gv-styles/gv-media";
+} from "utils/style/media";
 import {
   $fontSizeCommon,
   $fontSizeH1,
@@ -18,9 +20,7 @@ import {
   $fontSizeH4,
   $fontSizeParagraph,
   $paddingXxsmall
-} from "components/gv-styles/gv-sizes";
-import React from "react";
-import { css } from "styled-components";
+} from "utils/style/sizes";
 import { adaptivePadding, fontSize } from "utils/style/style-mixins";
 
 export const RootStyle = css`

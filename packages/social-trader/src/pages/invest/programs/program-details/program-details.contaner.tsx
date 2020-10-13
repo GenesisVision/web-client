@@ -2,7 +2,6 @@ import DetailsDescriptionSection from "components/details/details-description-se
 import { DetailsTags } from "components/details/details-description-section/details-description/details-tags.block";
 import DetailsInvestment from "components/details/details-description-section/details-investment/details-investment";
 import { DetailsDivider } from "components/details/details-divider.block";
-import { $paddingMedium } from "components/gv-styles/gv-sizes";
 import Page from "components/page/page";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
@@ -26,6 +25,7 @@ import {
   createProgramNotificationsToUrl,
   createProgramSettingsToUrl
 } from "utils/compose-url";
+import { $paddingMedium } from "utils/style/sizes";
 
 import ProgramDetailsHistorySection, {
   TProgramTablesData

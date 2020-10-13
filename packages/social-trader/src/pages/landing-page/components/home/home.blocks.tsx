@@ -1,18 +1,18 @@
+import { landingContainerStyles } from "pages/landing-page/styles/landing-styles";
+import React from "react";
+import styled from "styled-components";
 import {
   $landingBg,
   $landingBgGray,
   $mainColor,
   $rowColor
-} from "components/gv-styles/gv-colors/gv-colors";
+} from "utils/style/colors";
 import {
   mediaBreakpointDesktop,
   mediaBreakpointLandscapeTablet,
   mediaBreakpointLargeDesktop,
   mediaBreakpointTablet
-} from "components/gv-styles/gv-media";
-import { landingContainerStyles } from "pages/landing-page/styles/landing-styles";
-import React from "react";
-import styled from "styled-components";
+} from "utils/style/media";
 
 import joinBg2 from "../../images/common/join-bg-2.svg";
 import joinBgMob1 from "../../images/common/join-bg-mob-1.svg";

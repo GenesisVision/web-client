@@ -1,13 +1,13 @@
 import { Center } from "components/center/center";
+import React from "react";
+import styled from "styled-components";
 import {
   $paddingMedium,
   $paddingSmall,
   $paddingXsmall,
   $paddingXxsmall,
   $paddingXxxsmall
-} from "components/gv-styles/gv-sizes";
-import React from "react";
-import styled from "styled-components";
+} from "utils/style/sizes";
 import { adaptiveMargin } from "utils/style/style-mixins";
 
 import { IRowProps } from "./row.types";

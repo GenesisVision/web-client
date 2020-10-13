@@ -1,8 +1,8 @@
+import { css } from "styled-components";
 import {
   mediaBreakpointLargeDesktop,
   mediaBreakpointTablet
-} from "components/gv-styles/gv-media";
-import { css } from "styled-components";
+} from "utils/style/media";
 
 export const $gridMaxWidth = 1400;
 

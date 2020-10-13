@@ -1,10 +1,7 @@
 import { Center } from "components/center/center";
-import {
-  $borderColor,
-  $textAccentColor
-} from "components/gv-styles/gv-colors/gv-colors";
-import { $paddingXxsmall } from "components/gv-styles/gv-sizes";
 import styled, { css } from "styled-components";
+import { $borderColor, $textAccentColor } from "utils/style/colors";
+import { $paddingXxsmall } from "utils/style/sizes";
 
 const style = css`
   padding: ${$paddingXxsmall}px 0;

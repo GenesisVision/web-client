@@ -1,15 +1,5 @@
 import ImageBase from "components/avatar/image-base";
 import { DefaultBlock } from "components/default.block/default.block";
-import { $primaryColor } from "components/gv-styles/gv-colors/gv-colors";
-import {
-  mediaBreakpointDesktop,
-  mediaBreakpointLandscapePhone
-} from "components/gv-styles/gv-media";
-import { $paddingSmall } from "components/gv-styles/gv-sizes";
-import {
-  $boxShadow1,
-  $boxShadow4
-} from "components/gv-styles/gv-style-constants";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import { Row } from "components/row/row";
@@ -17,6 +7,13 @@ import { Text } from "components/text/text";
 import { AssetFacet } from "gv-api-web";
 import * as React from "react";
 import styled from "styled-components";
+import { $primaryColor } from "utils/style/colors";
+import {
+  mediaBreakpointDesktop,
+  mediaBreakpointLandscapePhone
+} from "utils/style/media";
+import { $boxShadow1, $boxShadow4 } from "utils/style/shadow";
+import { $paddingSmall } from "utils/style/sizes";
 import { transition } from "utils/style/style-mixins";
 
 import facetImg from "./facet.png";

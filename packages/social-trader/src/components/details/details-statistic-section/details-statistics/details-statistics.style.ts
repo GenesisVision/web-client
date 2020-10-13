@@ -1,11 +1,11 @@
 import { DefaultBlock } from "components/default.block/default.block";
-import { $textLightColor } from "components/gv-styles/gv-colors/gv-colors";
-import { mediaBreakpointLandscapePhone } from "components/gv-styles/gv-media";
+import styled from "styled-components";
+import { $textLightColor } from "utils/style/colors";
+import { mediaBreakpointLandscapePhone } from "utils/style/media";
 import {
   $detailsStatisticSectionWidth,
   $paddingXsmall
-} from "components/gv-styles/gv-sizes";
-import styled from "styled-components";
+} from "utils/style/sizes";
 
 export const StyledDetailsStatisticsBlock = styled(DefaultBlock)`
   box-sizing: border-box;

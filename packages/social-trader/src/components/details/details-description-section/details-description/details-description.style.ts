@@ -2,7 +2,7 @@ import {
   $avatarSize,
   $paddingSmall,
   $paddingUpperMedium
-} from "components/gv-styles/gv-sizes";
+} from "utils/style/sizes";
 
 export const $avatarBigSize = 120;
 export const $paddingInfoLeft = $paddingUpperMedium;

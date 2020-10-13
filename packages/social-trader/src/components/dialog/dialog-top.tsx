@@ -1,8 +1,8 @@
-import { $fontSizeCommon, $paddingXsmall } from "components/gv-styles/gv-sizes";
 import { PopoverContentCardBlock } from "components/popover/popover-card.block";
 import { Row } from "components/row/row";
 import * as React from "react";
 import styled from "styled-components";
+import { $fontSizeCommon, $paddingXsmall } from "utils/style/sizes";
 import { adaptivePadding, fontSize } from "utils/style/style-mixins";
 
 interface Props {

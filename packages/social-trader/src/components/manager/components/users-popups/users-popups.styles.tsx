@@ -1,12 +1,12 @@
 import { Center } from "components/center/center";
 import Dialog from "components/dialog/dialog";
+import { RowItem } from "components/row-item/row-item";
+import styled from "styled-components";
 import {
   $fontSizeSmall,
   $popoverPaddingMedium,
   $popoverPaddingSmall
-} from "components/gv-styles/gv-sizes";
-import { RowItem } from "components/row-item/row-item";
-import styled from "styled-components";
+} from "utils/style/sizes";
 import { horizontalPaddings, verticalPaddings } from "utils/style/style-mixins";
 
 export const UserPopupList = styled.div`

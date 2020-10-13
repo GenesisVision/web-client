@@ -2,7 +2,6 @@ import ImageBaseElement from "components/avatar/image-base.element";
 import { Button } from "components/button/button";
 import { Center } from "components/center/center";
 import ChipButton from "components/chip/chip-button";
-import { mediaBreakpointLandscapePhone } from "components/gv-styles/gv-media";
 import { RowItem } from "components/row-item/row-item";
 import useIsOpen from "hooks/is-open.hook";
 import ConvertIcon from "media/convert.svg";
@@ -11,6 +10,7 @@ import TransferPopup from "modules/transfer/transfer-popup";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
+import { mediaBreakpointLandscapePhone } from "utils/style/media";
 import { Clickable, Sizeable } from "utils/types";
 
 export enum WALLET_BUTTON_TYPE {

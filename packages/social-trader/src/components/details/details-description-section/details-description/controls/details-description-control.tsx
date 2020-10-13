@@ -1,10 +1,10 @@
-import { mediaBreakpointPhone } from "components/gv-styles/gv-media";
 import Link, { ToType } from "components/link/link";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
 import React from "react";
 import styled from "styled-components";
+import { mediaBreakpointPhone } from "utils/style/media";
 
 interface IDetailsDescriptionControlProps
   extends React.HTMLAttributes<HTMLDivElement> {

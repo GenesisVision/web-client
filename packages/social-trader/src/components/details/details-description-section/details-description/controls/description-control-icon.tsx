@@ -1,7 +1,7 @@
-import { $labelColor } from "components/gv-styles/gv-colors/gv-colors";
-import { mediaBreakpointLandscapePhone } from "components/gv-styles/gv-media";
 import React from "react";
 import styled from "styled-components";
+import { $labelColor } from "utils/style/colors";
+import { mediaBreakpointLandscapePhone } from "utils/style/media";
 
 export const DescriptionControlIcon = styled.div`
   width: 20px;

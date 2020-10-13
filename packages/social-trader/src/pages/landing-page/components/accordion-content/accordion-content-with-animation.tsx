@@ -1,10 +1,10 @@
-import { $rowColor } from "components/gv-styles/gv-colors/gv-colors";
-import { mediaBreakpointDesktop } from "components/gv-styles/gv-media";
 import AccordionContent from "pages/landing-page/components/accordion-content/accordion-content";
 import { getElementHeight } from "pages/landing-page/utils";
 import React, { useRef } from "react";
 import { animated, useTransition } from "react-spring";
 import styled from "styled-components";
+import { $rowColor } from "utils/style/colors";
+import { mediaBreakpointDesktop } from "utils/style/media";
 
 const visibleStyle = { height: "auto", opacity: 1, overflow: "visible" };
 const hiddenStyle = { opacity: 0, height: 0, overflow: "hidden" };

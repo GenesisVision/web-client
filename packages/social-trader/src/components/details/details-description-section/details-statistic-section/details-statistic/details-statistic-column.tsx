@@ -1,13 +1,13 @@
+import React from "react";
+import styled from "styled-components";
 import {
   mediaBreakpointLandscapePhone,
   mediaBreakpointPhone
-} from "components/gv-styles/gv-media";
+} from "utils/style/media";
 import {
   $detailsStatisticSectionWidth,
   $paddingSmall
-} from "components/gv-styles/gv-sizes";
-import React from "react";
-import styled from "styled-components";
+} from "utils/style/sizes";
 
 export const DetailsStatisticColumn = styled.div`
   display: flex;

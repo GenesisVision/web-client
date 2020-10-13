@@ -1,8 +1,3 @@
-import {
-  $dividerText,
-  $paddingXxsmall,
-  $tooltipPadding
-} from "components/gv-styles/gv-sizes";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
   ORIENTATION_POPOVER,
@@ -13,6 +8,11 @@ import useIsOpen from "hooks/is-open.hook";
 import * as React from "react";
 import { useCallback, useEffect } from "react";
 import styled from "styled-components";
+import {
+  $dividerText,
+  $paddingXxsmall,
+  $tooltipPadding
+} from "utils/style/sizes";
 import { horizontalPaddings, verticalPaddings } from "utils/style/style-mixins";
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {

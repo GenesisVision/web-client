@@ -1,5 +1,4 @@
 import { CurrencyItem } from "components/currency-item/currency-item";
-import { $paddingXxsmall } from "components/gv-styles/gv-sizes";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
@@ -7,6 +6,7 @@ import { PlatformAsset, ProviderPlatformAssets } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
+import { $paddingXxsmall } from "utils/style/sizes";
 import { adaptivePadding } from "utils/style/style-mixins";
 
 import TileFilterPopover from "../tile-filter-popover";

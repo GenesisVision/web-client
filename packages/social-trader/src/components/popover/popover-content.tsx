@@ -1,6 +1,6 @@
-import { $paddingSmall, $paddingXxsmall } from "components/gv-styles/gv-sizes";
 import React from "react";
 import styled from "styled-components";
+import { $paddingSmall, $paddingXxsmall } from "utils/style/sizes";
 import { horizontalPaddings, verticalPaddings } from "utils/style/style-mixins";
 
 interface Props {

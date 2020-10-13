@@ -1,11 +1,3 @@
-import {
-  $landingBg,
-  $mainColor
-} from "components/gv-styles/gv-colors/gv-colors";
-import {
-  mediaBreakpointDesktop,
-  mediaBreakpointTablet
-} from "components/gv-styles/gv-media";
 import { LogoIcon } from "components/icon/logo-icon";
 import Link from "components/link/link";
 import { useTranslation } from "i18n";
@@ -25,6 +17,11 @@ import { HOME_ROUTE } from "routes/app.routes";
 import { OVERVIEW_ROUTE } from "routes/dashboard.routes";
 import authService from "services/auth-service";
 import styled from "styled-components";
+import { $landingBg, $mainColor } from "utils/style/colors";
+import {
+  mediaBreakpointDesktop,
+  mediaBreakpointTablet
+} from "utils/style/media";
 import { getHEXA } from "utils/style/style-generators";
 import { landingResetLink, transition } from "utils/style/style-mixins";
 

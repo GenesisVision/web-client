@@ -1,12 +1,12 @@
+import * as React from "react";
+import { ReactNode } from "react";
+import styled, { css } from "styled-components";
 import {
   $fontSizeCommon,
   $paddingSmall,
   $paddingXsmall,
   $paddingXxsmall
-} from "components/gv-styles/gv-sizes";
-import * as React from "react";
-import { ReactNode } from "react";
-import styled, { css } from "styled-components";
+} from "utils/style/sizes";
 import {
   adaptivePadding,
   fontSize,

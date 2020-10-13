@@ -1,4 +1,6 @@
-import { $secondaryBackgroundColor } from "components/gv-styles/gv-colors/gv-colors";
+import React from "react";
+import styled from "styled-components";
+import { $secondaryBackgroundColor } from "utils/style/colors";
 import {
   $fontSizeCommon,
   $modalWidth,
@@ -7,9 +9,7 @@ import {
   $popoverPaddingLarge,
   $popoverPaddingMedium,
   $popoverPaddingSmall
-} from "components/gv-styles/gv-sizes";
-import React from "react";
-import styled from "styled-components";
+} from "utils/style/sizes";
 import {
   adaptiveFullPadding,
   fontSize,

@@ -1,17 +1,17 @@
 import DetailsDescription from "components/details/details-description-section/details-description/details-description";
 import { $paddingControlsLeft } from "components/details/details-description-section/details-description/details-description.style";
 import { PersonalDetailsType } from "components/details/details.types";
-import {
-  mediaBreakpointDesktop,
-  mediaBreakpointTablet
-} from "components/gv-styles/gv-media";
-import { $paddingXxsmall } from "components/gv-styles/gv-sizes";
 import { ToType } from "components/link/link";
 import { Row } from "components/row/row";
 import { ASSET } from "constants/constants";
 import { ProgramDetailsFull, SocialLinkViewModel } from "gv-api-web";
 import * as React from "react";
 import styled from "styled-components";
+import {
+  mediaBreakpointDesktop,
+  mediaBreakpointTablet
+} from "utils/style/media";
+import { $paddingXxsmall } from "utils/style/sizes";
 import { CurrencyEnum } from "utils/types";
 
 interface Props {

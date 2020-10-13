@@ -1,21 +1,17 @@
 import ImageBaseElement from "components/avatar/image-base.element";
-import {
-  $landingBgGray,
-  $mainColor,
-  $primaryColor
-} from "components/gv-styles/gv-colors/gv-colors";
-import {
-  mediaBreakpointDesktop,
-  mediaBreakpointLandscapeTablet,
-  mediaBreakpointLargeDesktop,
-  mediaBreakpointTablet
-} from "components/gv-styles/gv-media";
 import { Arrow } from "pages/landing-page/components/common-icons/arrow";
 import { TSlide } from "pages/landing-page/static-data/slides";
 import { grid, resetButton } from "pages/landing-page/styles/landing-styles";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import styled, { css, keyframes } from "styled-components";
+import { $landingBgGray, $mainColor, $primaryColor } from "utils/style/colors";
+import {
+  mediaBreakpointDesktop,
+  mediaBreakpointLandscapeTablet,
+  mediaBreakpointLargeDesktop,
+  mediaBreakpointTablet
+} from "utils/style/media";
 import { transition } from "utils/style/style-mixins";
 
 interface ISliderImgProps {

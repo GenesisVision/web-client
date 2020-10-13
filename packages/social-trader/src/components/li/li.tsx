@@ -1,10 +1,7 @@
-import {
-  $backgroundColor,
-  $primaryColor
-} from "components/gv-styles/gv-colors/gv-colors";
-import { $paddingSmall, $paddingXsmall } from "components/gv-styles/gv-sizes";
 import React from "react";
 import styled from "styled-components";
+import { $backgroundColor, $primaryColor } from "utils/style/colors";
+import { $paddingSmall, $paddingXsmall } from "utils/style/sizes";
 import { Sizeable } from "utils/types";
 
 interface Props extends Sizeable {}

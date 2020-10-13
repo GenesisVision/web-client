@@ -1,8 +1,3 @@
-import { $textAccentColor } from "components/gv-styles/gv-colors/gv-colors";
-import {
-  $fontSizeCommon,
-  $paddingXxxsmall
-} from "components/gv-styles/gv-sizes";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
@@ -14,6 +9,8 @@ import useFlag from "hooks/flag.hook";
 import * as React from "react";
 import { useCallback } from "react";
 import styled from "styled-components";
+import { $textAccentColor } from "utils/style/colors";
+import { $fontSizeCommon, $paddingXxxsmall } from "utils/style/sizes";
 import { fontSize } from "utils/style/style-mixins";
 
 import { UpdateFilterFunc } from "../table.types";

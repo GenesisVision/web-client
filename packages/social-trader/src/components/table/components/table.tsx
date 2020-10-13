@@ -1,5 +1,3 @@
-import { mediaBreakpointLandscapePhone } from "components/gv-styles/gv-media";
-import { $paddingSmall, $paddingXsmall } from "components/gv-styles/gv-sizes";
 import { ITableBodyContainerExternalProps } from "components/table/components/table-body";
 import TableFooter, {
   ITableFooterProps
@@ -13,6 +11,8 @@ import TableToolbar, {
 import { LIST_VIEW } from "components/table/table.constants";
 import React, { useCallback, useState } from "react";
 import styled, { css } from "styled-components";
+import { mediaBreakpointLandscapePhone } from "utils/style/media";
+import { $paddingSmall, $paddingXsmall } from "utils/style/sizes";
 import { adaptivePadding } from "utils/style/style-mixins";
 import { setTableView } from "utils/table-view";
 

@@ -1,4 +1,3 @@
-import { $paddingSmall, $paddingXsmall } from "components/gv-styles/gv-sizes";
 import { SortableIcon } from "components/table/components/sortable-icon";
 import {
   tableCellFirstOffsetStyle,
@@ -7,6 +6,7 @@ import {
 import { Text } from "components/text/text";
 import * as React from "react";
 import styled from "styled-components";
+import { $paddingSmall, $paddingXsmall } from "utils/style/sizes";
 import { adaptivePadding, verticalPaddings } from "utils/style/style-mixins";
 
 import { SORTING_DIRECTION } from "../helpers/sorting.helpers";

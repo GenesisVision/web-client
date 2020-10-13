@@ -1,4 +1,3 @@
-import { $positiveColor } from "components/gv-styles/gv-colors/gv-colors";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import TagBubble from "components/tags/tag-item/tag-bubble";
@@ -6,6 +5,7 @@ import TagItemWithTooltip from "components/tags/tag-item/tag-item-with-tooltip";
 import Tooltip from "components/tooltip/tooltip";
 import { Tag } from "gv-api-web";
 import * as React from "react";
+import { $positiveColor } from "utils/style/colors";
 
 import TagItemTooltip from "../tag-item/tag-item-tooltip";
 

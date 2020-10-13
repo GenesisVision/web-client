@@ -1,19 +1,16 @@
-import {
-  $rowColor,
-  $textAccentColor
-} from "components/gv-styles/gv-colors/gv-colors";
+import { IWithOffset } from "components/table/components/table-card/table-card";
+import { css } from "styled-components";
+import { $rowColor, $textAccentColor } from "utils/style/colors";
 import {
   mediaBreakpointLandscapePhone,
   mediaBreakpointTablet
-} from "components/gv-styles/gv-media";
+} from "utils/style/media";
 import {
   $borderRadiusMiddle,
   $fontSizeParagraph,
   $paddingSmall,
   $paddingXsmall
-} from "components/gv-styles/gv-sizes";
-import { IWithOffset } from "components/table/components/table-card/table-card";
-import { css } from "styled-components";
+} from "utils/style/sizes";
 import { fontSize, height, link } from "utils/style/style-mixins";
 
 const $actionSize = 30;

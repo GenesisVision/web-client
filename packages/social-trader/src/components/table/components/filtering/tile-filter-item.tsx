@@ -1,12 +1,9 @@
-import { $panelBackgroundColor } from "components/gv-styles/gv-colors/gv-colors";
-import {
-  $closeButtonSize,
-  $paddingXsmall
-} from "components/gv-styles/gv-sizes";
 import { CloseIcon } from "components/icon/close-icon";
 import { Row } from "components/row/row";
 import * as React from "react";
 import styled from "styled-components";
+import { $panelBackgroundColor } from "utils/style/colors";
+import { $closeButtonSize, $paddingXsmall } from "utils/style/sizes";
 
 export interface ITileFilterItemProps
   extends React.HTMLAttributes<HTMLDivElement> {

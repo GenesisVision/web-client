@@ -1,7 +1,3 @@
-import {
-  mediaBreakpointLandscapePhone,
-  mediaBreakpointLandscapeTablet
-} from "components/gv-styles/gv-media";
 import { ManagerData } from "components/manager/components/manager-data";
 import { ManagerInfo } from "components/manager/components/manager-info";
 import { getManagerSchema } from "components/manager/manager.schema";
@@ -15,6 +11,10 @@ import { PublicProfile } from "gv-api-web";
 import { SocialPageContextProvider } from "pages/social/social/feed.context";
 import * as React from "react";
 import styled from "styled-components";
+import {
+  mediaBreakpointLandscapePhone,
+  mediaBreakpointLandscapeTablet
+} from "utils/style/media";
 
 interface Props {
   cookieShowEvents?: boolean;

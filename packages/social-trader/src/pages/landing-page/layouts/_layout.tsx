@@ -1,7 +1,3 @@
-import {
-  $landingBg,
-  $mainColor
-} from "components/gv-styles/gv-colors/gv-colors";
 import { TitleContext } from "components/link/link.helper";
 import { useRefLink } from "hooks/ref-link";
 import { useTranslation } from "i18n";
@@ -20,6 +16,7 @@ import {
   schema,
   titleMeta
 } from "utils/seo";
+import { $landingBg, $mainColor } from "utils/style/colors";
 
 const GlobalStyle = createGlobalStyle`
   ${LandingPageRootStyle}

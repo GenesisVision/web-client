@@ -1,13 +1,3 @@
-import {
-  mediaBreakpointDesktop,
-  mediaBreakpointLandscapeTablet,
-  mediaBreakpointLargeDesktop
-} from "components/gv-styles/gv-media";
-import {
-  $paddingBig,
-  $paddingSmall,
-  $paddingXsmall
-} from "components/gv-styles/gv-sizes";
 import Link, { ToType } from "components/link/link";
 import NavigationIconWithName from "components/navigation/navigation-icon-with-name";
 import { NextRouter } from "next/dist/client/router";
@@ -15,7 +5,12 @@ import { WithRouterProps } from "next/dist/client/with-router";
 import { withRouter } from "next/router";
 import React from "react";
 import styled, { css } from "styled-components";
-import { parseStyles } from "utils/style/style-generators";
+import {
+  mediaBreakpointDesktop,
+  mediaBreakpointLandscapeTablet,
+  mediaBreakpointLargeDesktop
+} from "utils/style/media";
+import { $paddingBig, $paddingSmall, $paddingXsmall } from "utils/style/sizes";
 
 import { normalizeLinkFrom } from "../link/link.helper";
 

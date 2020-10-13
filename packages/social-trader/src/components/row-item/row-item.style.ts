@@ -1,12 +1,12 @@
+import { IRowItemProps } from "components/row-item/row-item.types";
+import { css } from "styled-components";
 import {
   $paddingMedium,
   $paddingSmall,
   $paddingXsmall,
   $paddingXxsmall,
   $paddingXxxsmall
-} from "components/gv-styles/gv-sizes";
-import { IRowItemProps } from "components/row-item/row-item.types";
-import { css } from "styled-components";
+} from "utils/style/sizes";
 import { adaptiveMargin, cursorPointer } from "utils/style/style-mixins";
 
 export const RowItemStaticStyles = {

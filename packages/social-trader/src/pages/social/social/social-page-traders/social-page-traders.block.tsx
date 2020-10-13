@@ -1,5 +1,4 @@
 import { DefaultBlock } from "components/default.block/default.block";
-import { $paddingXxsmall } from "components/gv-styles/gv-sizes";
 import { useToLink } from "components/link/link.helper";
 import { Row } from "components/row/row";
 import { Separator } from "components/separator/separator";
@@ -10,6 +9,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { composeAssetDetailsUrl } from "utils/compose-url";
+import { $paddingXxsmall } from "utils/style/sizes";
 
 interface Props {
   assets: SocialSummaryStrategy[];

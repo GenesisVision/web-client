@@ -3,6 +3,8 @@ import {
   ILabelProps,
   ISuccessMarkProps
 } from "components/button/button.types";
+import { css, keyframes } from "styled-components";
+import { pSBC } from "utils/psbc";
 import {
   $negativeColor,
   $positiveColor,
@@ -10,7 +12,7 @@ import {
   $secondaryColor,
   $textAccentColor,
   $textColor
-} from "components/gv-styles/gv-colors/gv-colors";
+} from "utils/style/colors";
 import {
   $btnHeight,
   $btnHeightSmall,
@@ -21,9 +23,7 @@ import {
   $fontSizeXxsmall,
   $paddingSmall,
   $paddingXxsmall
-} from "components/gv-styles/gv-sizes";
-import { css, keyframes } from "styled-components";
-import { pSBC } from "utils/psbc";
+} from "utils/style/sizes";
 import { getBoxShadowValue, transition } from "utils/style/style-mixins";
 
 const pending = keyframes`

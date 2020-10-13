@@ -1,7 +1,7 @@
-import { $primaryColor } from "components/gv-styles/gv-colors/gv-colors";
 import { Icon, IIconProps } from "components/icon/icon";
 import * as React from "react";
 import styled from "styled-components";
+import { $primaryColor } from "utils/style/colors";
 
 const StyledIcon = styled(Icon)`
   width: 21px;

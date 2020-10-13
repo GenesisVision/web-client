@@ -1,20 +1,20 @@
 import ImageBase from "components/avatar/image-base";
+import Link from "components/link/link";
+import { resetList } from "pages/landing-page/styles/landing-styles";
+import styled from "styled-components";
 import {
   $landingBgGray2,
   $landingColorIcon,
   $mainColor,
   $primaryColor,
   $rowColor
-} from "components/gv-styles/gv-colors/gv-colors";
+} from "utils/style/colors";
 import {
   mediaBreakpointDesktop,
   mediaBreakpointLandscapeTablet,
   mediaBreakpointLargeDesktop,
   mediaBreakpointTablet
-} from "components/gv-styles/gv-media";
-import Link from "components/link/link";
-import { resetList } from "pages/landing-page/styles/landing-styles";
-import styled from "styled-components";
+} from "utils/style/media";
 import { transition } from "utils/style/style-mixins";
 
 export const EventsListUl = styled.ul<{ height: number }>`

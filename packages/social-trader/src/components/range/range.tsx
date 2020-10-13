@@ -1,15 +1,14 @@
-import {
-  $popoverBackground,
-  $primaryColor,
-  $textAccentColor,
-  $textColor
-} from "components/gv-styles/gv-colors/gv-colors";
 import SliderPlugin, {
   Range as RangePlugin,
   RangeProps,
   SliderProps
 } from "rc-slider";
 import React from "react";
+import {
+  $popoverBackground,
+  $primaryColor,
+  $textColor
+} from "utils/style/colors";
 
 interface IRangeProps extends RangeProps {}
 

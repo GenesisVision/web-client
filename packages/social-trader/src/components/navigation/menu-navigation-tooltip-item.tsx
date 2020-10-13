@@ -1,8 +1,8 @@
-import { $paddingSmall } from "components/gv-styles/gv-sizes";
 import MenuTooltip from "components/menu-tooltip/menu-tooltip";
 import { VERTICAL_POPOVER_POS } from "components/popover/popover";
 import * as React from "react";
 import styled from "styled-components";
+import { $paddingSmall } from "utils/style/sizes";
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   havePopover?: boolean;

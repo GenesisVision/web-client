@@ -3,7 +3,6 @@ import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogTop } from "components/dialog/dialog-top";
 import GVqr from "components/gv-qr/gv-qr";
-import { $fontSizeParagraphMobile } from "components/gv-styles/gv-sizes";
 import { LabeledValue } from "components/labeled-value/labeled-value";
 import { Row } from "components/row/row";
 import { ISelectChangeEvent } from "components/select/select";
@@ -14,6 +13,7 @@ import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { safeGetElemFromArray } from "utils/helpers";
+import { $fontSizeParagraphMobile } from "utils/style/sizes";
 import { fontSize } from "utils/style/style-mixins";
 
 const Bottom = styled(DialogBottom)`

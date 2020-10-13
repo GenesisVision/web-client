@@ -1,3 +1,5 @@
+import * as React from "react";
+import styled from "styled-components";
 import {
   $levelColor1,
   $levelColor2,
@@ -7,10 +9,8 @@ import {
   $levelColor6,
   $levelColor7,
   $mainColor
-} from "components/gv-styles/gv-colors/gv-colors";
-import { $fontSizeSmall } from "components/gv-styles/gv-sizes";
-import * as React from "react";
-import styled from "styled-components";
+} from "utils/style/colors";
+import { $fontSizeSmall } from "utils/style/sizes";
 
 interface Props {
   level: number;

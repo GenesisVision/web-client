@@ -1,4 +1,3 @@
-import { $paddingSmall } from "components/gv-styles/gv-sizes";
 import { HorizontalListShadowContainer } from "components/horizontal-list-shadow-container/horizontal-list-shadow-container";
 import { useShadow } from "components/horizontal-list-shadow-container/shadow.hook";
 import { RowItem } from "components/row-item/row-item";
@@ -8,6 +7,7 @@ import useIsOpen from "hooks/is-open.hook";
 import * as React from "react";
 import { useCallback } from "react";
 import styled from "styled-components";
+import { $paddingSmall } from "utils/style/sizes";
 import { adaptiveMargin } from "utils/style/style-mixins";
 
 import FacetCard, {

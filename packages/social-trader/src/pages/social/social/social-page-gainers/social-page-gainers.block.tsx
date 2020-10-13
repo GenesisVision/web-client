@@ -1,5 +1,4 @@
 import { DefaultBlock } from "components/default.block/default.block";
-import { $paddingXxsmall } from "components/gv-styles/gv-sizes";
 import { Row } from "components/row/row";
 import { Separator } from "components/separator/separator";
 import { SocialPostPlatformAsset } from "gv-api-web";
@@ -7,6 +6,7 @@ import { SocialPageGainersItem } from "pages/social/social/social-page-gainers/s
 import React from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
+import { $paddingXxsmall } from "utils/style/sizes";
 
 interface Props {
   assets: SocialPostPlatformAsset[];

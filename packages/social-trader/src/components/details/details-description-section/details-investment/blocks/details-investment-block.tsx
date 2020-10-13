@@ -1,6 +1,6 @@
-import { $paddingSmall } from "components/gv-styles/gv-sizes";
 import React from "react";
 import styled from "styled-components";
+import { $paddingSmall } from "utils/style/sizes";
 import { horizontalPaddings } from "utils/style/style-mixins";
 
 const Container = styled.div`

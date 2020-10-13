@@ -1,6 +1,5 @@
 import { Center } from "components/center/center";
 import { DefaultBlock } from "components/default.block/default.block";
-import { $separatorColor } from "components/gv-styles/gv-colors/gv-colors";
 import Link from "components/link/link";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
@@ -10,6 +9,7 @@ import { AppleIcon } from "pages/landing-page/components/app-icons/apple-icon";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
+import { $separatorColor } from "utils/style/colors";
 
 const Item = styled(DefaultBlock)`
   background: rgba(255, 255, 255, 0.04);

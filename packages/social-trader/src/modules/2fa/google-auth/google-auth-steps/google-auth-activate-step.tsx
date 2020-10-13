@@ -1,6 +1,5 @@
 import FormError from "components/form/form-error/form-error";
 import { GVHookFormField } from "components/gv-hook-form-field";
-import { $paddingUpperMedium } from "components/gv-styles/gv-sizes";
 import { Row } from "components/row/row";
 import { SimpleNumberField } from "components/simple-fields/simple-number-field";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
@@ -14,7 +13,6 @@ import * as React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
-import styled from "styled-components";
 import { HookForm } from "utils/hook-form.helpers";
 import { object, string } from "yup";
 

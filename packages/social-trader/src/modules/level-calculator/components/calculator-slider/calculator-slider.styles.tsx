@@ -1,11 +1,8 @@
 import { Center } from "components/center/center";
-import {
-  $mainColor,
-  $textLightColor
-} from "components/gv-styles/gv-colors/gv-colors";
-import { mediaBreakpointLandscapePhone } from "components/gv-styles/gv-media";
-import { $fontSizeSmall, $paddingXxsmall } from "components/gv-styles/gv-sizes";
 import styled from "styled-components";
+import { $mainColor, $textLightColor } from "utils/style/colors";
+import { mediaBreakpointLandscapePhone } from "utils/style/media";
+import { $fontSizeSmall, $paddingXxsmall } from "utils/style/sizes";
 import { fontSize } from "utils/style/style-mixins";
 
 export const CalculatorSliderTitle = styled(Center)`

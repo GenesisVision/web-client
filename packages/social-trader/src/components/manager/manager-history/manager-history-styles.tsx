@@ -1,14 +1,14 @@
-import { $tableBackgroundSubColor } from "components/gv-styles/gv-colors/gv-colors";
-import {
-  mediaBreakpointLandscapePhone,
-  mediaBreakpointLandscapeTablet
-} from "components/gv-styles/gv-media";
 import { LabeledValue } from "components/labeled-value/labeled-value";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
 import React from "react";
 import styled from "styled-components";
+import { $tableBackgroundSubColor } from "utils/style/colors";
+import {
+  mediaBreakpointLandscapePhone,
+  mediaBreakpointLandscapeTablet
+} from "utils/style/media";
 
 interface IManagerHistoryItemProps {
   label: string;

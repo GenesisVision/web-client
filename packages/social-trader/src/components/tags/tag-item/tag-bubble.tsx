@@ -1,9 +1,6 @@
-import {
-  $fontSizeXsmall,
-  $paddingXxsmall
-} from "components/gv-styles/gv-sizes";
 import * as React from "react";
 import styled from "styled-components";
+import { $fontSizeXsmall, $paddingXxsmall } from "utils/style/sizes";
 import {
   adaptiveBorderRadius,
   fontSize,

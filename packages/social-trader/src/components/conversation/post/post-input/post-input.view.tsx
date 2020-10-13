@@ -6,15 +6,15 @@ import { PostInputImagePreview } from "components/conversation/post/post-input/p
 import { SearchPanel } from "components/conversation/search-panel/search-panel";
 import ErrorMessage from "components/error-message/error-message";
 import { IImageValue } from "components/form/input-image/input-image";
-import {
-  $borderRadiusMiddle,
-  $paddingSmall,
-  $paddingXsmall
-} from "components/gv-styles/gv-sizes";
 import { RowItem } from "components/row-item/row-item";
 import { SubmitButton } from "components/submit-button/submit-button";
 import React from "react";
 import styled from "styled-components";
+import {
+  $borderRadiusMiddle,
+  $paddingSmall,
+  $paddingXsmall
+} from "utils/style/sizes";
 import {
   adaptiveBorderRadius,
   horizontalPaddings,

@@ -1,9 +1,5 @@
 import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
 import { Center } from "components/center/center";
-import {
-  $fontSizeCommon,
-  $paddingXxsmall
-} from "components/gv-styles/gv-sizes";
 import { DetailsIcon } from "components/icon/details-icon";
 import { LogoutIcon } from "components/icon/logout-icon";
 import { ReferrerIcon } from "components/icon/referrer-icon";
@@ -31,6 +27,7 @@ import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { $fontSizeCommon, $paddingXxsmall } from "utils/style/sizes";
 
 const Content = styled(Center)`
   cursor: pointer;

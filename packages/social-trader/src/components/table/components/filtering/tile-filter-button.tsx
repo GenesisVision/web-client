@@ -1,15 +1,12 @@
-import {
-  $mainColor,
-  $panelBackgroundColor
-} from "components/gv-styles/gv-colors/gv-colors";
+import * as React from "react";
+import styled from "styled-components";
+import { $mainColor, $panelBackgroundColor } from "utils/style/colors";
 import {
   $fontSizeH3,
   $fontSizeXsmall,
   $paddingXxsmall,
   $paddingXxxsmall
-} from "components/gv-styles/gv-sizes";
-import * as React from "react";
-import styled from "styled-components";
+} from "utils/style/sizes";
 import {
   adaptiveBorderRadius,
   fontSize,

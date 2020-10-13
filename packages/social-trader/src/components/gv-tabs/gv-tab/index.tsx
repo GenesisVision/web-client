@@ -1,16 +1,13 @@
+import { RowItem } from "components/row-item/row-item";
+import React, { useCallback } from "react";
+import styled from "styled-components";
 import {
   $labelColor,
   $primaryColor,
   $secondaryColor,
   $textLightColor
-} from "components/gv-styles/gv-colors/gv-colors";
-import {
-  $fontSizeCommon,
-  $paddingXxxsmall
-} from "components/gv-styles/gv-sizes";
-import { RowItem } from "components/row-item/row-item";
-import React, { useCallback } from "react";
-import styled from "styled-components";
+} from "utils/style/colors";
+import { $fontSizeCommon, $paddingXxxsmall } from "utils/style/sizes";
 import {
   adaptiveBorderRadius,
   adaptiveMargin,

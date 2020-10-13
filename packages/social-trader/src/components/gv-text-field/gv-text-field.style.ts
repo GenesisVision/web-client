@@ -1,13 +1,13 @@
 import { IPropsGvInput } from "components/gv-input/gv-input.styles";
+import React, { ReactNode } from "react";
+import { NumberFormatValues } from "react-number-format";
+import { css } from "styled-components";
 import {
   $panelBackgroundColor,
   $textDarkColor,
   $textLightColor
-} from "components/gv-styles/gv-colors/gv-colors";
-import { $fontSizeCommon, $fontSizeH4 } from "components/gv-styles/gv-sizes";
-import React, { ReactNode } from "react";
-import { NumberFormatValues } from "react-number-format";
-import { css } from "styled-components";
+} from "utils/style/colors";
+import { $fontSizeCommon, $fontSizeH4 } from "utils/style/sizes";
 import { Sizeable } from "utils/types";
 
 export interface GVTextFieldProps extends IPropsGvInput, Sizeable {

@@ -1,10 +1,10 @@
-import {
-  mediaBreakpointDesktop,
-  mediaBreakpointLandscapeTablet
-} from "components/gv-styles/gv-media";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import styled, { css } from "styled-components";
+import {
+  mediaBreakpointDesktop,
+  mediaBreakpointLandscapeTablet
+} from "utils/style/media";
 import { transition } from "utils/style/style-mixins";
 
 const $desktopCenterWidth = "60%";

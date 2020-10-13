@@ -1,7 +1,7 @@
-import { $boxShadow4 } from "components/gv-styles/gv-style-constants";
 import { CloseIcon } from "components/icon/close-icon";
 import React from "react";
 import styled from "styled-components";
+import { $boxShadow4 } from "utils/style/shadow";
 import { transition } from "utils/style/style-mixins";
 import { Clickable } from "utils/types";
 

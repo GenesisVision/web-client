@@ -5,14 +5,14 @@ import AbsoluteProfitChartSection, {
   IAbsoluteProfitChartSectionProps
 } from "components/details/details-statistic-section/details-chart-section/absolute-profit-chart-section/absolute-profit-chart-section";
 import { detailsBlockHorizontalPaddings } from "components/details/details.constants";
-import { mediaBreakpointLandscapePhone } from "components/gv-styles/gv-media";
-import { $paddingXsmall } from "components/gv-styles/gv-sizes";
 import GVTab from "components/gv-tabs/gv-tab";
 import { Row } from "components/row/row";
 import useTab from "hooks/tab.hook";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
+import { mediaBreakpointLandscapePhone } from "utils/style/media";
+import { $paddingXsmall } from "utils/style/sizes";
 
 import BalanceChartSection, {
   IBalanceChartSectionProps

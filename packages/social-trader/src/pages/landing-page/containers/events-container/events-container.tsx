@@ -1,7 +1,3 @@
-import {
-  mediaBreakpointLandscapeTablet,
-  mediaBreakpointTablet
-} from "components/gv-styles/gv-media";
 import { PlatformEvent } from "gv-api-web";
 import { useTranslation } from "i18n";
 import EventsList from "pages/landing-page/components/events-list/events-list";
@@ -11,6 +7,10 @@ import {
 } from "pages/landing-page/styles/landing-styles";
 import React from "react";
 import styled from "styled-components";
+import {
+  mediaBreakpointLandscapeTablet,
+  mediaBreakpointTablet
+} from "utils/style/media";
 
 interface Props {
   events: PlatformEvent[];

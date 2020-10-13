@@ -1,16 +1,16 @@
-import { $rowColor } from "components/gv-styles/gv-colors/gv-colors";
-import {
-  mediaBreakpointDesktop,
-  mediaBreakpointLandscapeTablet,
-  mediaBreakpointLargeDesktop,
-  mediaBreakpointTablet
-} from "components/gv-styles/gv-media";
 import { useNetworkStatusInWindow } from "hooks/network-status";
 import dynamic from "next/dynamic";
 import AccordionContent from "pages/landing-page/components/accordion-content/accordion-content";
 import { Arrow } from "pages/landing-page/components/common-icons/arrow";
 import React, { useCallback, useState } from "react";
 import styled from "styled-components";
+import { $rowColor } from "utils/style/colors";
+import {
+  mediaBreakpointDesktop,
+  mediaBreakpointLandscapeTablet,
+  mediaBreakpointLargeDesktop,
+  mediaBreakpointTablet
+} from "utils/style/media";
 import { transition } from "utils/style/style-mixins";
 
 const AccordionContentWithAnimation = dynamic(() =>

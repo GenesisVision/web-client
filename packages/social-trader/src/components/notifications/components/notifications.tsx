@@ -1,5 +1,4 @@
 import Chip, { CHIP_TYPE } from "components/chip/chip";
-import { $paddingXsmall } from "components/gv-styles/gv-sizes";
 import { RingIcon } from "components/icon/ring-icon";
 import InfinityScroll from "components/infinity-scroll/inifinity-scroll";
 import Link from "components/link/link";
@@ -19,6 +18,7 @@ import { NotificationViewModel } from "gv-api-web";
 import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
+import { $paddingXsmall } from "utils/style/sizes";
 import {
   adaptiveFullPadding,
   horizontalPaddings

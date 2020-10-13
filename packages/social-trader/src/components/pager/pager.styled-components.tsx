@@ -1,12 +1,9 @@
-import {
-  $labelColor,
-  $textLightColor
-} from "components/gv-styles/gv-colors/gv-colors";
-import { $fontSizeCommon } from "components/gv-styles/gv-sizes";
 import PagerLinkButton from "components/pager/pager-link-button";
 import { RowItem } from "components/row-item/row-item";
 import React from "react";
 import styled, { css } from "styled-components";
+import { $labelColor, $textLightColor } from "utils/style/colors";
+import { $fontSizeCommon } from "utils/style/sizes";
 import {
   adaptiveBorderRadius,
   fontSize,

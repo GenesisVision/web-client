@@ -1,5 +1,4 @@
 import AssetAvatarWithName from "components/avatar/asset-avatar/asset-avatar-with-name";
-import { mediaBreakpointLandscapePhone } from "components/gv-styles/gv-media";
 import LevelTooltip from "components/level-tooltip/level-tooltip";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
@@ -24,6 +23,7 @@ import styled from "styled-components";
 import { composeProgramDetailsUrl } from "utils/compose-url";
 import { distanceDate } from "utils/dates";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
+import { mediaBreakpointLandscapePhone } from "utils/style/media";
 import { transition } from "utils/style/style-mixins";
 
 interface IProgramTableRowShortProps {

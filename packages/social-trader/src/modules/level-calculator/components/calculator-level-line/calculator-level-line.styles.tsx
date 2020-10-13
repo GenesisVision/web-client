@@ -1,10 +1,6 @@
-import {
-  $primaryColor,
-  $textColor,
-  $textLightColor
-} from "components/gv-styles/gv-colors/gv-colors";
-import { $fontSizeSmall, $paddingXxsmall } from "components/gv-styles/gv-sizes";
 import styled from "styled-components";
+import { $primaryColor, $textColor, $textLightColor } from "utils/style/colors";
+import { $fontSizeSmall, $paddingXxsmall } from "utils/style/sizes";
 import { adaptiveMargin, fontSize } from "utils/style/style-mixins";
 
 export const CalculatorLevelLineContainer = styled.div`

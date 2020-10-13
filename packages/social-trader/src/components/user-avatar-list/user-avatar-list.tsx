@@ -1,12 +1,12 @@
 import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
 import { Center } from "components/center/center";
-import { $smallAvatarSize } from "components/gv-styles/gv-sizes";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import { ProfilePublicShort } from "gv-api-web";
 import React from "react";
 import { managerToPathCreator } from "routes/manager.routes";
 import styled from "styled-components";
+import { $smallAvatarSize } from "utils/style/sizes";
 
 export interface IUserAvatarListProps {
   onClickRemainder?: VoidFunction;

@@ -1,13 +1,10 @@
-import {
-  $backgroundColor,
-  $mainColor
-} from "components/gv-styles/gv-colors/gv-colors";
 import Modal, { BodyFix } from "components/modal/modal";
 import { NextComponentType } from "next";
 import Router from "next/router";
 import * as React from "react";
 import { useCallback, useEffect } from "react";
 import styled from "styled-components";
+import { $backgroundColor, $mainColor } from "utils/style/colors";
 
 export enum SIDEBAR_POSITION {
   LEFT = "left",

@@ -1,10 +1,7 @@
-import {
-  $labelColor,
-  $textAccentColor
-} from "components/gv-styles/gv-colors/gv-colors";
 import { Icon } from "components/icon/icon";
 import * as React from "react";
 import styled from "styled-components";
+import { $labelColor, $textAccentColor } from "utils/style/colors";
 
 const StyledIcon = styled(Icon)`
   cursor: pointer;

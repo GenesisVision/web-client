@@ -1,9 +1,11 @@
 import { IDefaultBlockProps } from "components/default.block/default.block.types";
+import { css } from "styled-components";
+import { pSBC } from "utils/psbc";
 import {
   $mainColor,
   $panelBackgroundColor,
   $secondaryBackgroundColor
-} from "components/gv-styles/gv-colors/gv-colors";
+} from "utils/style/colors";
 import {
   $borderRadius,
   $borderRadiusMiddle,
@@ -11,9 +13,7 @@ import {
   $paddingSmall,
   $paddingXsmall,
   $paddingXxsmall
-} from "components/gv-styles/gv-sizes";
-import { css } from "styled-components";
-import { pSBC } from "utils/psbc";
+} from "utils/style/sizes";
 import {
   adaptiveBorderRadius,
   horizontalPaddings,

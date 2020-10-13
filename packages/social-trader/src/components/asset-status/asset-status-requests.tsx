@@ -1,10 +1,10 @@
-import { $paddingXsmall } from "components/gv-styles/gv-sizes";
 import { PopoverContent } from "components/popover/popover-content";
 import RequestColumn from "components/request-line/request-column";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import { AssetInvestmentRequest } from "gv-api-web";
 import React from "react";
 import styled from "styled-components";
+import { $paddingXsmall } from "utils/style/sizes";
 
 interface Props {
   data: AssetInvestmentRequest[];

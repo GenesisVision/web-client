@@ -1,4 +1,3 @@
-import { $paddingSmall } from "components/gv-styles/gv-sizes";
 import { CardsIcon } from "components/icon/cards-icon";
 import { TableIcon } from "components/icon/table-icon";
 import { RowItem } from "components/row-item/row-item";
@@ -6,6 +5,7 @@ import { Row } from "components/row/row";
 import SortingFilter from "components/table/components/sorting/sorting-filter/sorting-filter";
 import React, { useCallback } from "react";
 import styled from "styled-components";
+import { $paddingSmall } from "utils/style/sizes";
 import { adaptiveMargin, horizontalPaddings } from "utils/style/style-mixins";
 
 import { LIST_VIEW } from "../table.constants";

@@ -1,8 +1,8 @@
-import { $textAccentColor } from "components/gv-styles/gv-colors/gv-colors";
-import { mediaBreakpointLandscapePhone } from "components/gv-styles/gv-media";
-import { $fontSizeH4, $fontSizeH4Mobile } from "components/gv-styles/gv-sizes";
 import React from "react";
 import styled from "styled-components";
+import { $textAccentColor } from "utils/style/colors";
+import { mediaBreakpointLandscapePhone } from "utils/style/media";
+import { $fontSizeH4, $fontSizeH4Mobile } from "utils/style/sizes";
 
 export const DetailsChartTooltipStatistic = styled.div`
   padding: 5px 0;

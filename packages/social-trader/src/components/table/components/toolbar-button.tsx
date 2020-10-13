@@ -1,9 +1,9 @@
-import { $fontSizeParagraph } from "components/gv-styles/gv-sizes";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import { RowItem } from "components/row-item/row-item";
 import React from "react";
 import styled from "styled-components";
+import { $fontSizeParagraph } from "utils/style/sizes";
 import { fontSize } from "utils/style/style-mixins";
 
 const StyledLink = styled(Link)`

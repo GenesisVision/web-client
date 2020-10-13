@@ -1,6 +1,4 @@
 import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
-import { $labelColor } from "components/gv-styles/gv-colors/gv-colors";
-import { $fontSizeH2 } from "components/gv-styles/gv-sizes";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import { FollowUserButton } from "components/manager/components/follow-user-buttom";
@@ -18,6 +16,8 @@ import { managerToPathCreator } from "routes/manager.routes";
 import styled from "styled-components";
 import { distanceDate } from "utils/dates";
 import { formatCurrencyValue } from "utils/formatter";
+import { $labelColor } from "utils/style/colors";
+import { $fontSizeH2 } from "utils/style/sizes";
 import { transition } from "utils/style/style-mixins";
 
 const USER_TABLE_ROW_CURRENCY = "USD";

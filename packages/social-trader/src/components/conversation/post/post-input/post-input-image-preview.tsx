@@ -1,11 +1,11 @@
 import ImageBaseElement from "components/avatar/image-base.element";
 import { IImageValue } from "components/form/input-image/input-image";
-import { $popoverBackground } from "components/gv-styles/gv-colors/gv-colors";
-import { $borderRadius, $closeButtonSize } from "components/gv-styles/gv-sizes";
 import { CloseIcon } from "components/icon/close-icon";
 import React from "react";
 import styled from "styled-components";
 import { pSBC } from "utils/psbc";
+import { $popoverBackground } from "utils/style/colors";
+import { $borderRadius, $closeButtonSize } from "utils/style/sizes";
 import { adaptiveBorderRadius, transition } from "utils/style/style-mixins";
 
 interface Props {

@@ -1,12 +1,12 @@
 import ImageBase from "components/avatar/image-base";
 import ImageBaseElement from "components/avatar/image-base.element";
-import { $panelBackgroundColor } from "components/gv-styles/gv-colors/gv-colors";
+import styled, { css } from "styled-components";
+import { $panelBackgroundColor } from "utils/style/colors";
 import {
   $borderRadius,
   $fontSizeXsmall,
   $paddingXxsmall
-} from "components/gv-styles/gv-sizes";
-import styled, { css } from "styled-components";
+} from "utils/style/sizes";
 import {
   adaptiveBorderRadius,
   adaptiveFullPadding,

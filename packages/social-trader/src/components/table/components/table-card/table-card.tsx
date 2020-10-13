@@ -1,12 +1,6 @@
 import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
 import ImageBase from "components/avatar/image-base";
 import { Center } from "components/center/center";
-import { $primaryColor } from "components/gv-styles/gv-colors/gv-colors";
-import {
-  $fontSizeCommon,
-  $paddingSmall,
-  $paddingXxsmall
-} from "components/gv-styles/gv-sizes";
 import { ActionsCircleIcon } from "components/icon/actions-circle-icon";
 import LevelTooltip from "components/level-tooltip/level-tooltip";
 import Link, { ToType } from "components/link/link";
@@ -31,6 +25,12 @@ import React from "react";
 import NumberFormat from "react-number-format";
 import styled from "styled-components";
 import { formatValue } from "utils/formatter";
+import { $primaryColor } from "utils/style/colors";
+import {
+  $fontSizeCommon,
+  $paddingSmall,
+  $paddingXxsmall
+} from "utils/style/sizes";
 import { fontSize, link, width } from "utils/style/style-mixins";
 
 export interface IWithOffset {
