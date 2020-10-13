@@ -10,18 +10,18 @@ import {
 } from "utils/style/colors";
 import { mediaBreakpointLandscapePhone } from "utils/style/media";
 import {
-  $borderRadiusMiddle,
-  $fontSizeSmall,
-  $paddingXsmall,
-  $paddingXxsmall
-} from "utils/style/sizes";
-import {
   adaptiveBorderRadius,
   adaptiveFullPadding,
   fontSize,
   height,
   lineHeight
-} from "utils/style/style-mixins";
+} from "utils/style/mixins";
+import {
+  $borderRadiusMiddle,
+  $fontSizeSmall,
+  $paddingXsmall,
+  $paddingXxsmall
+} from "utils/style/sizes";
 
 const $assetHeight = 40;
 const $removeButtonSize = 18;

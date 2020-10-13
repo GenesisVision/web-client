@@ -7,6 +7,12 @@ import {
   $secondaryBackgroundColor
 } from "utils/style/colors";
 import {
+  adaptiveBorderRadius,
+  horizontalPaddings,
+  transition,
+  verticalPaddings
+} from "utils/style/mixins";
+import {
   $borderRadius,
   $borderRadiusMiddle,
   $paddingMedium,
@@ -14,12 +20,6 @@ import {
   $paddingXsmall,
   $paddingXxsmall
 } from "utils/style/sizes";
-import {
-  adaptiveBorderRadius,
-  horizontalPaddings,
-  transition,
-  verticalPaddings
-} from "utils/style/style-mixins";
 
 export const defaultBlockDynamicStyles = css`
   box-sizing: border-box;

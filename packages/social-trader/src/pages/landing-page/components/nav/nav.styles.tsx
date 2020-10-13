@@ -2,13 +2,13 @@ import Link from "components/link/link";
 import { resetList } from "pages/landing-page/styles/landing-styles";
 import styled, { css, keyframes } from "styled-components";
 import { $landingLinkHover, $mainColor } from "utils/style/colors";
+import { getHEXA } from "utils/style/generators";
 import {
   mediaBreakpointDesktop,
   mediaBreakpointLargeDesktop,
   mediaBreakpointTablet
 } from "utils/style/media";
-import { getHEXA } from "utils/style/style-generators";
-import { landingResetLink, transition } from "utils/style/style-mixins";
+import { landingResetLink, transition } from "utils/style/mixins";
 
 const appear = keyframes`
   0% {

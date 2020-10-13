@@ -17,8 +17,8 @@ import styled from "styled-components";
 import { distanceDate } from "utils/dates";
 import { formatCurrencyValue } from "utils/formatter";
 import { $labelColor } from "utils/style/colors";
+import { transition } from "utils/style/mixins";
 import { $fontSizeH2 } from "utils/style/sizes";
-import { transition } from "utils/style/style-mixins";
 
 const USER_TABLE_ROW_CURRENCY = "USD";
 

@@ -15,7 +15,7 @@ import {
   mediaBreakpointLargeDesktop,
   mediaBreakpointTablet
 } from "utils/style/media";
-import { transition } from "utils/style/style-mixins";
+import { transition } from "utils/style/mixins";
 
 export const EventsListUl = styled.ul<{ height: number }>`
   ${mediaBreakpointTablet("grid-column: 3/11;")}

@@ -3,8 +3,8 @@ import {
   $backgroundColor,
   $secondaryBackgroundColor
 } from "utils/style/colors";
+import { adaptivePadding } from "utils/style/mixins";
 import { $paddingUpperMedium, $paddingXxsmall } from "utils/style/sizes";
-import { adaptivePadding } from "utils/style/style-mixins";
 
 export const GoogleAuthStepContainer = styled.div<{
   altColor?: boolean;

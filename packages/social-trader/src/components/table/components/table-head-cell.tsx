@@ -6,8 +6,8 @@ import {
 import { Text } from "components/text/text";
 import * as React from "react";
 import styled from "styled-components";
+import { adaptivePadding, verticalPaddings } from "utils/style/mixins";
 import { $paddingSmall, $paddingXsmall } from "utils/style/sizes";
-import { adaptivePadding, verticalPaddings } from "utils/style/style-mixins";
 
 import { SORTING_DIRECTION } from "../helpers/sorting.helpers";
 

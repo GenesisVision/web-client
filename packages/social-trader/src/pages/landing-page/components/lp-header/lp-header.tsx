@@ -18,12 +18,12 @@ import { OVERVIEW_ROUTE } from "routes/dashboard.routes";
 import authService from "services/auth-service";
 import styled from "styled-components";
 import { $landingBg, $mainColor } from "utils/style/colors";
+import { getHEXA } from "utils/style/generators";
 import {
   mediaBreakpointDesktop,
   mediaBreakpointTablet
 } from "utils/style/media";
-import { getHEXA } from "utils/style/style-generators";
-import { landingResetLink, transition } from "utils/style/style-mixins";
+import { landingResetLink, transition } from "utils/style/mixins";
 
 const logoHeight = 27;
 const $comboLogoWidth = 135;

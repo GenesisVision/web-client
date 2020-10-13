@@ -5,8 +5,8 @@ import { Row } from "components/row/row";
 import SortingFilter from "components/table/components/sorting/sorting-filter/sorting-filter";
 import React, { useCallback } from "react";
 import styled from "styled-components";
+import { adaptiveMargin, horizontalPaddings } from "utils/style/mixins";
 import { $paddingSmall } from "utils/style/sizes";
-import { adaptiveMargin, horizontalPaddings } from "utils/style/style-mixins";
 
 import { LIST_VIEW } from "../table.constants";
 import { FilteringType, SortingColumn } from "./filtering/filter.type";

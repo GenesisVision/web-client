@@ -10,8 +10,8 @@ import {
   mediaBreakpointDesktop,
   mediaBreakpointTablet
 } from "utils/style/media";
+import { fontSize } from "utils/style/mixins";
 import { $fontSizeParagraph, $paddingSmall } from "utils/style/sizes";
-import { fontSize } from "utils/style/style-mixins";
 
 export const DetailsStatisticContainer = styled.div`
   display: inline-flex;

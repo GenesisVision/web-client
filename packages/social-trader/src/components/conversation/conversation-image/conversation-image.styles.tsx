@@ -3,17 +3,17 @@ import ImageBaseElement from "components/avatar/image-base.element";
 import styled, { css } from "styled-components";
 import { $panelBackgroundColor } from "utils/style/colors";
 import {
-  $borderRadius,
-  $fontSizeXsmall,
-  $paddingXxsmall
-} from "utils/style/sizes";
-import {
   adaptiveBorderRadius,
   adaptiveFullPadding,
   fontSize,
   transition,
   unselectable
-} from "utils/style/style-mixins";
+} from "utils/style/mixins";
+import {
+  $borderRadius,
+  $fontSizeXsmall,
+  $paddingXxsmall
+} from "utils/style/sizes";
 import { SizesType } from "utils/types";
 
 const $imageHeightSmall = 100;

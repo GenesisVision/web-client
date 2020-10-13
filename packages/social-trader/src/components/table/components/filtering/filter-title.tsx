@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { $mainColor } from "utils/style/colors";
+import { fontSize } from "utils/style/mixins";
 import { $fontSizeParagraph } from "utils/style/sizes";
-import { fontSize } from "utils/style/style-mixins";
 
 export const FilterTitle = styled.div`
   ${fontSize($fontSizeParagraph)};

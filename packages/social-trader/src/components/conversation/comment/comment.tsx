@@ -8,8 +8,8 @@ import { Row } from "components/row/row";
 import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { $borderColor } from "utils/style/colors";
+import { adaptivePadding } from "utils/style/mixins";
 import { $paddingSmall, $paddingXsmall } from "utils/style/sizes";
-import { adaptivePadding } from "utils/style/style-mixins";
 
 interface Props {
   canReply?: boolean;

@@ -14,7 +14,7 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { HookForm, postponeCallback } from "utils/hook-form.helpers";
-import { transition } from "utils/style/style-mixins";
+import { transition } from "utils/style/mixins";
 import { object, string } from "yup";
 
 enum FORM_FIELD {

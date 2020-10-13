@@ -4,7 +4,7 @@ import styled, {
   FlattenInterpolation,
   StyledComponent
 } from "styled-components";
-import { IStyleTable, parseStyles } from "utils/style/style-generators";
+import { IStyleTable, parseStyles } from "utils/style/generators";
 
 export interface WithStylesOptions {
   staticStyles?: IStyleTable;

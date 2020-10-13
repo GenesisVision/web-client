@@ -8,12 +8,12 @@ import useIsOpen from "hooks/is-open.hook";
 import * as React from "react";
 import { useCallback, useEffect } from "react";
 import styled from "styled-components";
+import { horizontalPaddings, verticalPaddings } from "utils/style/mixins";
 import {
   $dividerText,
   $paddingXxsmall,
   $tooltipPadding
 } from "utils/style/sizes";
-import { horizontalPaddings, verticalPaddings } from "utils/style/style-mixins";
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   render: (clearAnchor?: VoidFunction) => JSX.Element | undefined;

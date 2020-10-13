@@ -1,8 +1,8 @@
 import * as React from "react";
 import styled from "styled-components";
 import { $negativeColor } from "utils/style/colors";
+import { fontSize } from "utils/style/mixins";
 import { $fontSizeH4, $fontSizeSmall } from "utils/style/sizes";
-import { fontSize } from "utils/style/style-mixins";
 
 export interface IFormErrorProps {
   small?: boolean;

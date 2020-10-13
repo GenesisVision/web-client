@@ -4,7 +4,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 import { $landingLinkHover, $mainColor } from "utils/style/colors";
 import { mediaBreakpointTablet } from "utils/style/media";
-import { transition } from "utils/style/style-mixins";
+import { transition } from "utils/style/mixins";
 
 import styles from "./seo-list.module.scss";
 

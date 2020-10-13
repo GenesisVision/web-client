@@ -6,8 +6,8 @@ import * as React from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { $primaryColor } from "utils/style/colors";
+import { adaptivePadding, fontSize } from "utils/style/mixins";
 import { $paddingXxsmall } from "utils/style/sizes";
-import { adaptivePadding, fontSize } from "utils/style/style-mixins";
 
 export interface ILevelTooltip {
   level: number;

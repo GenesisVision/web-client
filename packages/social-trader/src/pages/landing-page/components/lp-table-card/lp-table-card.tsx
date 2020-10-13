@@ -23,7 +23,7 @@ import {
   mediaBreakpointLargeDesktop,
   mediaBreakpointTablet
 } from "utils/style/media";
-import { transition } from "utils/style/style-mixins";
+import { transition } from "utils/style/mixins";
 
 import styles from "./lp-table-card.module.scss";
 

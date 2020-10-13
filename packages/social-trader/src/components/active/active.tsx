@@ -10,8 +10,8 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { $primaryColor } from "utils/style/colors";
+import { fontSize } from "utils/style/mixins";
 import { $fontSizeParagraph } from "utils/style/sizes";
-import { fontSize } from "utils/style/style-mixins";
 
 import SocialLinksBlock from "../social-links-block/social-links-block";
 import TagItemList from "../tags/tag-item/tag-item-list";

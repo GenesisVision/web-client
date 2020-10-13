@@ -26,12 +26,12 @@ import NumberFormat from "react-number-format";
 import styled from "styled-components";
 import { formatValue } from "utils/formatter";
 import { $primaryColor } from "utils/style/colors";
+import { fontSize, link, width } from "utils/style/mixins";
 import {
   $fontSizeCommon,
   $paddingSmall,
   $paddingXxsmall
 } from "utils/style/sizes";
-import { fontSize, link, width } from "utils/style/style-mixins";
 
 export interface IWithOffset {
   withOffset?: boolean;

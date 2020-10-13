@@ -5,6 +5,11 @@ import styled from "styled-components";
 import { $popoverBackground, $primaryColor } from "utils/style/colors";
 import { mediaBreakpointLandscapePhone } from "utils/style/media";
 import {
+  adaptiveMargin,
+  horizontalPaddings,
+  verticalPaddings
+} from "utils/style/mixins";
+import {
   $fontSizeH4,
   $fontSizeSmall,
   $paddingSmall,
@@ -12,11 +17,6 @@ import {
   $paddingXxlarge,
   $paddingXxsmall
 } from "utils/style/sizes";
-import {
-  adaptiveMargin,
-  horizontalPaddings,
-  verticalPaddings
-} from "utils/style/style-mixins";
 
 export const LevelCalculatorPopupHeader = styled(Center)`
   justify-content: space-between;

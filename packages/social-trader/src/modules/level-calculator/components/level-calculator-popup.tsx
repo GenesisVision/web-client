@@ -31,8 +31,8 @@ import NumberFormat from "react-number-format";
 import styled from "styled-components";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
 import { mediaBreakpointLandscapePhone } from "utils/style/media";
+import { adaptiveMargin } from "utils/style/mixins";
 import { $paddingSmall } from "utils/style/sizes";
-import { adaptiveMargin } from "utils/style/style-mixins";
 
 import CalculatorLevelLine from "../components/calculator-level-line/calculator-level-line";
 import CalculatorOutput from "../components/calculator-output/calculator-output";

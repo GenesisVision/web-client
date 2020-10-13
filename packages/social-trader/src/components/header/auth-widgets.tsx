@@ -6,7 +6,7 @@ import { ProfileHeaderViewModel } from "gv-api-web";
 import React from "react";
 import styled from "styled-components";
 import { getRandomInteger } from "utils/helpers";
-import { hideOnLandscapeTablet } from "utils/style/style-mixins";
+import { hideOnLandscapeTablet } from "utils/style/mixins";
 
 const DesktopWidget = styled.div`
   ${hideOnLandscapeTablet("flex")}

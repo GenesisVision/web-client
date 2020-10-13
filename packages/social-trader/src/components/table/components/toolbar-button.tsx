@@ -3,8 +3,8 @@ import { useToLink } from "components/link/link.helper";
 import { RowItem } from "components/row-item/row-item";
 import React from "react";
 import styled from "styled-components";
+import { fontSize } from "utils/style/mixins";
 import { $fontSizeParagraph } from "utils/style/sizes";
-import { fontSize } from "utils/style/style-mixins";
 
 const StyledLink = styled(Link)`
   ${fontSize($fontSizeParagraph)};

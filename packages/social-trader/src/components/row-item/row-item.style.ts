@@ -1,5 +1,6 @@
 import { IRowItemProps } from "components/row-item/row-item.types";
 import { css } from "styled-components";
+import { adaptiveMargin, cursorPointer } from "utils/style/mixins";
 import {
   $paddingMedium,
   $paddingSmall,
@@ -7,7 +8,6 @@ import {
   $paddingXxsmall,
   $paddingXxxsmall
 } from "utils/style/sizes";
-import { adaptiveMargin, cursorPointer } from "utils/style/style-mixins";
 
 export const RowItemStaticStyles = {
   "box-sizing": "border-box"

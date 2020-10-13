@@ -7,6 +7,7 @@ import {
   $textLightColor,
   $yellow
 } from "utils/style/colors";
+import { fontSize } from "utils/style/mixins";
 import {
   $fontSizeCommon,
   $fontSizeH2,
@@ -14,7 +15,6 @@ import {
   $fontSizeSmall,
   $fontSizeXsmall
 } from "utils/style/sizes";
-import { fontSize } from "utils/style/style-mixins";
 
 export const dynamicTextStyles = css`
   white-space: ${({ wrap = true, preWrap }: ITextProps) => {

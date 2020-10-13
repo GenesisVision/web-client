@@ -6,7 +6,7 @@ import Pending from "media/transactions/pending.svg";
 import Success from "media/transactions/success.svg";
 import * as React from "react";
 import styled from "styled-components";
-import { height, width } from "utils/style/style-mixins";
+import { height, width } from "utils/style/mixins";
 
 const statuses = {
   Done: Success,

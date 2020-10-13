@@ -1,8 +1,8 @@
 import * as React from "react";
 import styled from "styled-components";
 import { $negativeColor } from "utils/style/colors";
+import { fontSize } from "utils/style/mixins";
 import { $fontSizeSmall } from "utils/style/sizes";
-import { fontSize } from "utils/style/style-mixins";
 
 export enum MESSAGE_TYPES {
   DEFAULT = "DEFAULT",

@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { $popoverBackground } from "utils/style/colors";
+import { adaptiveBorderRadius } from "utils/style/mixins";
 import { $boxShadow4 } from "utils/style/shadow";
 import { $borderRadius } from "utils/style/sizes";
-import { adaptiveBorderRadius } from "utils/style/style-mixins";
 
 export const PopoverElement = styled.div`
   opacity: 0;

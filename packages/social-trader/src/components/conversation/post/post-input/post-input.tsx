@@ -16,8 +16,8 @@ import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { HookForm, postponeFunc } from "utils/hook-form.helpers";
 import { $panelBackgroundColor } from "utils/style/colors";
+import { adaptiveBorderRadius } from "utils/style/mixins";
 import { $borderRadiusMiddle } from "utils/style/sizes";
-import { adaptiveBorderRadius } from "utils/style/style-mixins";
 import { object } from "yup";
 
 const MAX_IMAGES = 10;

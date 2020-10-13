@@ -1,5 +1,5 @@
+import { adaptiveMargin, adaptivePadding } from "utils/style/mixins";
 import { $paddingSmall } from "utils/style/sizes";
-import { adaptiveMargin, adaptivePadding } from "utils/style/style-mixins";
 
 export const detailsBlockLeftPadding = adaptivePadding("left", $paddingSmall);
 

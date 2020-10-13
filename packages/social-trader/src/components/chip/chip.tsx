@@ -12,8 +12,6 @@ import {
   $warningBackgroundColor,
   $warningColor
 } from "utils/style/colors";
-import { $boxShadow1 } from "utils/style/shadow";
-import { $fontSizeCommon, $fontSizeH3 } from "utils/style/sizes";
 import {
   adaptiveBorderRadius,
   fontSize,
@@ -22,7 +20,9 @@ import {
   transition,
   verticalPaddings,
   width
-} from "utils/style/style-mixins";
+} from "utils/style/mixins";
+import { $boxShadow1 } from "utils/style/shadow";
+import { $fontSizeCommon, $fontSizeH3 } from "utils/style/sizes";
 import { Sizeable } from "utils/types";
 
 export enum CHIP_TYPE {

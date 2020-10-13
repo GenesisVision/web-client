@@ -13,6 +13,7 @@ import {
   $textAccentColor,
   $textColor
 } from "utils/style/colors";
+import { getBoxShadowValue, transition } from "utils/style/mixins";
 import {
   $btnHeight,
   $btnHeightSmall,
@@ -24,7 +25,6 @@ import {
   $paddingSmall,
   $paddingXxsmall
 } from "utils/style/sizes";
-import { getBoxShadowValue, transition } from "utils/style/style-mixins";
 
 const pending = keyframes`
   0% {

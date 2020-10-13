@@ -7,6 +7,7 @@ import useIsOpen from "hooks/is-open.hook";
 import React, { useCallback } from "react";
 import styled, { css } from "styled-components";
 import { $textLightColor } from "utils/style/colors";
+import { fontSize, height, width } from "utils/style/mixins";
 import { $boxShadow1 } from "utils/style/shadow";
 import {
   $dividerTitle,
@@ -14,7 +15,6 @@ import {
   $fontSizeSmall,
   $walletItemSize
 } from "utils/style/sizes";
-import { fontSize, height, width } from "utils/style/style-mixins";
 import { CurrencyEnum } from "utils/types";
 
 export interface ICurrencyItemProps {

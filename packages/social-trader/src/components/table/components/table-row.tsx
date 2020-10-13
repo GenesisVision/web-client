@@ -2,7 +2,7 @@ import * as React from "react";
 import { ReactNode } from "react";
 import styled from "styled-components";
 import { $rowColor, $tableBackgroundSubColor } from "utils/style/colors";
-import { cursorPointer, transition } from "utils/style/style-mixins";
+import { cursorPointer, transition } from "utils/style/mixins";
 
 interface Props {
   head?: boolean;

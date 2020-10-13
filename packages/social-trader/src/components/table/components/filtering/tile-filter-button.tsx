@@ -2,18 +2,18 @@ import * as React from "react";
 import styled from "styled-components";
 import { $mainColor, $panelBackgroundColor } from "utils/style/colors";
 import {
-  $fontSizeH3,
-  $fontSizeXsmall,
-  $paddingXxsmall,
-  $paddingXxxsmall
-} from "utils/style/sizes";
-import {
   adaptiveBorderRadius,
   fontSize,
   height,
   horizontalPaddings,
   lineHeight
-} from "utils/style/style-mixins";
+} from "utils/style/mixins";
+import {
+  $fontSizeH3,
+  $fontSizeXsmall,
+  $paddingXxsmall,
+  $paddingXxxsmall
+} from "utils/style/sizes";
 import { OptionalClickable } from "utils/types";
 
 const Container = styled.div`

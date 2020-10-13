@@ -10,8 +10,8 @@ import * as React from "react";
 import { useCallback } from "react";
 import styled from "styled-components";
 import { $textAccentColor } from "utils/style/colors";
+import { fontSize } from "utils/style/mixins";
 import { $fontSizeCommon, $paddingXxxsmall } from "utils/style/sizes";
-import { fontSize } from "utils/style/style-mixins";
 
 import { UpdateFilterFunc } from "../table.types";
 import FilterArrowIcon from "./filter-arrow-icon";

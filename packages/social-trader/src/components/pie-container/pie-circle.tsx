@@ -1,7 +1,7 @@
 import { PIE_DIRECTION } from "components/pie-container/pie";
 import * as React from "react";
 import styled from "styled-components";
-import { transition } from "utils/style/style-mixins";
+import { transition } from "utils/style/mixins";
 
 const StyledCircle = styled.circle`
   ${transition("stroke-width")};

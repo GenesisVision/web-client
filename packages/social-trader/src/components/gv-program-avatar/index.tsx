@@ -10,10 +10,7 @@ import GVColors from "components/gv-styles/gv-colors";
 import PieContainer from "components/pie-container/pie-container";
 import React from "react";
 import styled from "styled-components";
-import {
-  adaptiveBorderRadius,
-  adaptivePadding
-} from "utils/style/style-mixins";
+import { adaptiveBorderRadius, adaptivePadding } from "utils/style/mixins";
 import { SizesType } from "utils/types";
 
 import GVProgramDefaultAvatar from "./gv-propgram-default-avatar";

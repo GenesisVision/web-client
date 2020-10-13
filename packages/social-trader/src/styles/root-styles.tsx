@@ -12,6 +12,7 @@ import {
   mediaBreakpointLargeDesktop,
   mediaBreakpointTablet
 } from "utils/style/media";
+import { adaptivePadding, fontSize } from "utils/style/mixins";
 import {
   $fontSizeCommon,
   $fontSizeH1,
@@ -21,7 +22,6 @@ import {
   $fontSizeParagraph,
   $paddingXxsmall
 } from "utils/style/sizes";
-import { adaptivePadding, fontSize } from "utils/style/style-mixins";
 
 export const RootStyle = css`
   body {

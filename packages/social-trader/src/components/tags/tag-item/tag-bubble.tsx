@@ -1,13 +1,13 @@
 import * as React from "react";
 import styled from "styled-components";
-import { $fontSizeXsmall, $paddingXxsmall } from "utils/style/sizes";
 import {
   adaptiveBorderRadius,
   fontSize,
   height,
   horizontalPaddings,
   lineHeight
-} from "utils/style/style-mixins";
+} from "utils/style/mixins";
+import { $fontSizeXsmall, $paddingXxsmall } from "utils/style/sizes";
 
 interface Props {
   clickable?: boolean;

@@ -12,7 +12,7 @@ import {
   mediaBreakpointLargeDesktop,
   mediaBreakpointTablet
 } from "utils/style/media";
-import { transition } from "utils/style/style-mixins";
+import { transition } from "utils/style/mixins";
 
 interface ISliderImgProps {
   item: TSlide;

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { $labelColor } from "utils/style/colors";
-import { transition } from "utils/style/style-mixins";
+import { transition } from "utils/style/mixins";
 
 interface Props {
   className?: string;

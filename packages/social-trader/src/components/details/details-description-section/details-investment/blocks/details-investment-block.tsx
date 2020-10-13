@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import { horizontalPaddings } from "utils/style/mixins";
 import { $paddingSmall } from "utils/style/sizes";
-import { horizontalPaddings } from "utils/style/style-mixins";
 
 const Container = styled.div`
   ${horizontalPaddings($paddingSmall)}

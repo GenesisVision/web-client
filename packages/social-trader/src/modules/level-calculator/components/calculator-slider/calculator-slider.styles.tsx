@@ -2,8 +2,8 @@ import { Center } from "components/center/center";
 import styled from "styled-components";
 import { $mainColor, $textLightColor } from "utils/style/colors";
 import { mediaBreakpointLandscapePhone } from "utils/style/media";
+import { fontSize } from "utils/style/mixins";
 import { $fontSizeSmall, $paddingXxsmall } from "utils/style/sizes";
-import { fontSize } from "utils/style/style-mixins";
 
 export const CalculatorSliderTitle = styled(Center)`
   ${fontSize($fontSizeSmall)};

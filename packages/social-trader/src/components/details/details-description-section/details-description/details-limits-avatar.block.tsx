@@ -2,8 +2,8 @@ import DetailsAssetAvatar from "components/details/details-description-section/d
 import * as React from "react";
 import styled from "styled-components";
 import { mediaBreakpointTablet } from "utils/style/media";
+import { width } from "utils/style/mixins";
 import { $paddingXsmall, $paddingXsmallMobile } from "utils/style/sizes";
-import { width } from "utils/style/style-mixins";
 import { CurrencyEnum } from "utils/types";
 
 interface Props {

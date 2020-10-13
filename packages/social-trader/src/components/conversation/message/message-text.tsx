@@ -12,8 +12,8 @@ import { PostTag } from "gv-api-web";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { getLongWordsCount } from "utils/helpers";
+import { fontSize } from "utils/style/mixins";
 import { $fontSizeParagraph } from "utils/style/sizes";
-import { fontSize } from "utils/style/style-mixins";
 
 interface Props {
   reduceLargeText?: boolean;

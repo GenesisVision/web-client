@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import { horizontalPaddings, verticalPaddings } from "utils/style/mixins";
 import { $paddingSmall, $paddingXxsmall } from "utils/style/sizes";
-import { horizontalPaddings, verticalPaddings } from "utils/style/style-mixins";
 
 interface Props {
   leftAlign?: boolean;

@@ -7,7 +7,6 @@ import {
   $secondaryColor,
   $textLightColor
 } from "utils/style/colors";
-import { $fontSizeCommon, $paddingXxxsmall } from "utils/style/sizes";
 import {
   adaptiveBorderRadius,
   adaptiveMargin,
@@ -16,7 +15,8 @@ import {
   horizontalPaddings,
   transition,
   verticalPaddings
-} from "utils/style/style-mixins";
+} from "utils/style/mixins";
+import { $fontSizeCommon, $paddingXxxsmall } from "utils/style/sizes";
 
 export interface GVTabProps {
   label: React.ReactNode;

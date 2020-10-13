@@ -23,7 +23,7 @@ import { composeFollowDetailsUrl } from "utils/compose-url";
 import { distanceDate } from "utils/dates";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
 import { mediaBreakpointLandscapePhone } from "utils/style/media";
-import { transition } from "utils/style/style-mixins";
+import { transition } from "utils/style/mixins";
 
 interface IProgramTableRowShortProps {
   follow: FollowDetailsListItem;

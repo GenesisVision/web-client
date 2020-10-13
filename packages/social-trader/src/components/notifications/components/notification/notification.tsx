@@ -26,17 +26,17 @@ import {
   $negativeColor
 } from "utils/style/colors";
 import {
-  $fontSizeCommon,
-  $paddingXsmall,
-  $paddingXxsmall
-} from "utils/style/sizes";
-import {
   adaptiveMargin,
   adaptivePadding,
   fontSize,
   height,
   width
-} from "utils/style/style-mixins";
+} from "utils/style/mixins";
+import {
+  $fontSizeCommon,
+  $paddingXsmall,
+  $paddingXxsmall
+} from "utils/style/sizes";
 
 enum TYPE {
   PROFILE = "profile",

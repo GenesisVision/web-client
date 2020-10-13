@@ -12,8 +12,8 @@ import { LIST_VIEW } from "components/table/table.constants";
 import React, { useCallback, useState } from "react";
 import styled, { css } from "styled-components";
 import { mediaBreakpointLandscapePhone } from "utils/style/media";
+import { adaptivePadding } from "utils/style/mixins";
 import { $paddingSmall, $paddingXsmall } from "utils/style/sizes";
-import { adaptivePadding } from "utils/style/style-mixins";
 import { setTableView } from "utils/table-view";
 
 import { FilteringType } from "./filtering/filter.type";

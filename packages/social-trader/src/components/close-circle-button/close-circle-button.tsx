@@ -1,8 +1,8 @@
 import { CloseIcon } from "components/icon/close-icon";
 import React from "react";
 import styled from "styled-components";
+import { transition } from "utils/style/mixins";
 import { $boxShadow4 } from "utils/style/shadow";
-import { transition } from "utils/style/style-mixins";
 import { Clickable } from "utils/types";
 
 interface Props extends Clickable {}

@@ -9,9 +9,9 @@ import { useDispatch } from "react-redux";
 import { TMenuItem } from "routes/menu";
 import styled from "styled-components";
 import { mediaBreakpointLandscapeTablet } from "utils/style/media";
+import { adaptiveMargin } from "utils/style/mixins";
 import { $boxShadow4 } from "utils/style/shadow";
 import { $paddingMedium, $walletItemSize } from "utils/style/sizes";
-import { adaptiveMargin } from "utils/style/style-mixins";
 
 interface Props {
   mobileMenuItems: TMenuItem[];

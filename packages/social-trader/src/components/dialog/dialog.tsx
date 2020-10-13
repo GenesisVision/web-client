@@ -5,8 +5,8 @@ import React, { ReactNode, useCallback, useState } from "react";
 import styled from "styled-components";
 import { $secondaryBackgroundColor } from "utils/style/colors";
 import { mediaBreakpointLandscapePhone } from "utils/style/media";
+import { adaptiveFullPadding } from "utils/style/mixins";
 import { $modalWidth, $paddingSmall, $paddingXxsmall } from "utils/style/sizes";
-import { adaptiveFullPadding } from "utils/style/style-mixins";
 
 export interface IDialogProps extends IDialogOuterProps {
   showClose?: boolean;

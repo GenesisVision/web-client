@@ -17,8 +17,8 @@ import { PostTag, SocialPostTagType } from "gv-api-web";
 import React from "react";
 import styled, { css } from "styled-components";
 import { mediaBreakpointLandscapePhone } from "utils/style/media";
+import { adaptiveMargin } from "utils/style/mixins";
 import { $paddingXsmall } from "utils/style/sizes";
-import { adaptiveMargin } from "utils/style/style-mixins";
 
 export interface IMessageProps {
   excludedTagsUnderText?: SocialPostTagType[];

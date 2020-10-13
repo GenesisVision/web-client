@@ -2,7 +2,7 @@ import { debounce } from "lodash";
 import React, { useCallback, useEffect, useState } from "react";
 import EventListener from "react-event-listener";
 import styled from "styled-components";
-import { transition } from "utils/style/style-mixins";
+import { transition } from "utils/style/mixins";
 
 export const UpperButtonContainer: React.FC = () => {
   const [windowHeight, setWindowHeight] = useState<number>(0);

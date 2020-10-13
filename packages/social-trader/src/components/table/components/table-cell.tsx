@@ -2,16 +2,16 @@ import * as React from "react";
 import { ReactNode } from "react";
 import styled, { css } from "styled-components";
 import {
+  adaptivePadding,
+  fontSize,
+  verticalPaddings
+} from "utils/style/mixins";
+import {
   $fontSizeCommon,
   $paddingSmall,
   $paddingXsmall,
   $paddingXxsmall
 } from "utils/style/sizes";
-import {
-  adaptivePadding,
-  fontSize,
-  verticalPaddings
-} from "utils/style/style-mixins";
 import { SizesType } from "utils/types";
 
 interface Props {

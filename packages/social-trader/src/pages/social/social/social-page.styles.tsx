@@ -5,7 +5,7 @@ import {
   mediaBreakpointDesktop,
   mediaBreakpointLandscapeTablet
 } from "utils/style/media";
-import { transition } from "utils/style/style-mixins";
+import { transition } from "utils/style/mixins";
 
 const $desktopCenterWidth = "60%";
 const $desktopSideBlockWidth = `calc((100% - ${$desktopCenterWidth}) / 2)`;

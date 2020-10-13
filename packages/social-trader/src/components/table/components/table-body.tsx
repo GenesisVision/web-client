@@ -2,8 +2,8 @@ import { withBlurLoader } from "decorators/with-blur-loader";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
+import { fontSize } from "utils/style/mixins";
 import { $fontSizeCommon, $paddingSmall } from "utils/style/sizes";
-import { fontSize } from "utils/style/style-mixins";
 import { TagType } from "utils/types";
 
 import { LIST_VIEW } from "../table.constants";

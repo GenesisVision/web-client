@@ -12,9 +12,9 @@ import {
   mediaBreakpointDesktop,
   mediaBreakpointLandscapePhone
 } from "utils/style/media";
+import { transition } from "utils/style/mixins";
 import { $boxShadow1, $boxShadow4 } from "utils/style/shadow";
 import { $paddingSmall } from "utils/style/sizes";
-import { transition } from "utils/style/style-mixins";
 
 import facetImg from "./facet.png";
 

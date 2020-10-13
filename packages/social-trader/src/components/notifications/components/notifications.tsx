@@ -18,11 +18,8 @@ import { NotificationViewModel } from "gv-api-web";
 import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
+import { adaptiveFullPadding, horizontalPaddings } from "utils/style/mixins";
 import { $paddingXsmall } from "utils/style/sizes";
-import {
-  adaptiveFullPadding,
-  horizontalPaddings
-} from "utils/style/style-mixins";
 
 import { NOTIFICATIONS_ROUTE } from "../notifications.routes";
 import { SettingsIcon } from "./settings-icon/settings-icon";

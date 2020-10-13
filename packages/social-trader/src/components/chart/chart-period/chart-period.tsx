@@ -10,8 +10,8 @@ import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { localizedDate } from "utils/dates";
 import { $textAccentColor, $textColor } from "utils/style/colors";
+import { adaptiveMargin } from "utils/style/mixins";
 import { $fontSizeParagraph, $paddingXsmall } from "utils/style/sizes";
-import { adaptiveMargin } from "utils/style/style-mixins";
 import { HandlePeriodChangeType } from "utils/types";
 
 import {

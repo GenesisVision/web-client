@@ -1,8 +1,8 @@
 import * as React from "react";
 import styled from "styled-components";
 import { $textLightColor } from "utils/style/colors";
+import { fontSize, height, width } from "utils/style/mixins";
 import { $fontSizeSmall } from "utils/style/sizes";
-import { fontSize, height, width } from "utils/style/style-mixins";
 
 import Pie, { PIE_DIRECTION } from "./pie";
 

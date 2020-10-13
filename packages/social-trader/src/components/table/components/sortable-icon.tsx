@@ -1,7 +1,7 @@
 import { SORTING_DIRECTION } from "components/table/helpers/sorting.helpers";
 import React from "react";
 import styled, { css } from "styled-components";
-import { transition } from "utils/style/style-mixins";
+import { transition } from "utils/style/mixins";
 
 interface Props {
   className?: string;

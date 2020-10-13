@@ -23,17 +23,17 @@ import {
   $separatorColor
 } from "utils/style/colors";
 import {
+  adaptiveMargin,
+  horizontalPaddings,
+  transition,
+  verticalPaddings
+} from "utils/style/mixins";
+import {
   $borderRadiusMiddle,
   $paddingSmall,
   $paddingXsmall,
   $paddingXxxsmall
 } from "utils/style/sizes";
-import {
-  adaptiveMargin,
-  horizontalPaddings,
-  transition,
-  verticalPaddings
-} from "utils/style/style-mixins";
 
 interface Props {
   isOpenSearchPanel?: boolean;

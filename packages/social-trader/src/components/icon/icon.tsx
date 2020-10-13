@@ -5,7 +5,7 @@ import {
   $primaryColor,
   $textAccentColor
 } from "utils/style/colors";
-import { transition } from "utils/style/style-mixins";
+import { transition } from "utils/style/mixins";
 
 export interface IIconProps {
   onClick?: (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void;

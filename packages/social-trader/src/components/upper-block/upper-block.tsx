@@ -1,7 +1,7 @@
 import { UpperButtonArrow } from "components/upper-button/upper-button";
 import React, { useCallback } from "react";
 import styled from "styled-components";
-import { transition } from "utils/style/style-mixins";
+import { transition } from "utils/style/mixins";
 
 const Container = styled.div`
   position: sticky;

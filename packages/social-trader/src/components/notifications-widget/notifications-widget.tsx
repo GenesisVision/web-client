@@ -10,8 +10,8 @@ import * as React from "react";
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { fontSize } from "utils/style/mixins";
 import { $fontSizeCommon } from "utils/style/sizes";
-import { fontSize } from "utils/style/style-mixins";
 
 const NotificationsCount = styled.div`
   ${fontSize($fontSizeCommon)}

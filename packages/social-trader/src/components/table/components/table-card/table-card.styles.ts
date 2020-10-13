@@ -5,13 +5,13 @@ import {
   mediaBreakpointLandscapePhone,
   mediaBreakpointTablet
 } from "utils/style/media";
+import { fontSize, height, link } from "utils/style/mixins";
 import {
   $borderRadiusMiddle,
   $fontSizeParagraph,
   $paddingSmall,
   $paddingXsmall
 } from "utils/style/sizes";
-import { fontSize, height, link } from "utils/style/style-mixins";
 
 const $actionSize = 30;
 

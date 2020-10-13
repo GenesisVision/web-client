@@ -2,6 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import { $secondaryBackgroundColor } from "utils/style/colors";
 import {
+  adaptiveFullPadding,
+  fontSize,
+  horizontalPaddings,
+  verticalPaddings
+} from "utils/style/mixins";
+import {
   $fontSizeCommon,
   $modalWidth,
   $paddingSmall,
@@ -10,12 +16,6 @@ import {
   $popoverPaddingMedium,
   $popoverPaddingSmall
 } from "utils/style/sizes";
-import {
-  adaptiveFullPadding,
-  fontSize,
-  horizontalPaddings,
-  verticalPaddings
-} from "utils/style/style-mixins";
 import { SizesType } from "utils/types";
 
 interface IPopoverContentCardBlockProps

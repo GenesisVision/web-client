@@ -5,8 +5,8 @@ import React from "react";
 import styled from "styled-components";
 import { pSBC } from "utils/psbc";
 import { $popoverBackground } from "utils/style/colors";
+import { adaptiveBorderRadius, transition } from "utils/style/mixins";
 import { $borderRadius, $closeButtonSize } from "utils/style/sizes";
-import { adaptiveBorderRadius, transition } from "utils/style/style-mixins";
 
 interface Props {
   onRemove: (id?: string) => void;

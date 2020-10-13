@@ -9,8 +9,8 @@ import { Text } from "components/text/text";
 import React from "react";
 import styled from "styled-components";
 import { $negativeColor } from "utils/style/colors";
+import { fontSize } from "utils/style/mixins";
 import { $fontSizeXsmall } from "utils/style/sizes";
-import { fontSize } from "utils/style/style-mixins";
 
 interface Props extends IPropsGvInput {
   inputElement: JSX.Element;

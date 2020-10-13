@@ -1,6 +1,7 @@
 import { css } from "styled-components";
 import { LARGE_DESKTOP } from "utils/breakpoints";
 import { mediaBreakpointLandscapePhone } from "utils/style/media";
+import { adaptiveMargin } from "utils/style/mixins";
 import {
   $paddingBig,
   $paddingBigMobile,
@@ -8,7 +9,6 @@ import {
   $paddingXsmall,
   $paddingXsmallMobile
 } from "utils/style/sizes";
-import { adaptiveMargin } from "utils/style/style-mixins";
 
 const PAGE_WIDTH = LARGE_DESKTOP - 40;
 

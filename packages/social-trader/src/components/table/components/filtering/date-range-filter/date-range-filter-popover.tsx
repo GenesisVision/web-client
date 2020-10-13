@@ -12,8 +12,8 @@ import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { $textDarkColor } from "utils/style/colors";
 import { mediaBreakpointLandscapePhone } from "utils/style/media";
+import { fontSize } from "utils/style/mixins";
 import { $fontSizeParagraph } from "utils/style/sizes";
-import { fontSize } from "utils/style/style-mixins";
 import { Clickable } from "utils/types";
 
 import DateRangeFilterValues from "./date-range-filter-values";

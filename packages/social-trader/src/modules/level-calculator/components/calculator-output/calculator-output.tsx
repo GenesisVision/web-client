@@ -6,8 +6,8 @@ import withLoader from "decorators/with-loader";
 import * as React from "react";
 import styled from "styled-components";
 import { $mainColor, $panelBackgroundColor } from "utils/style/colors";
+import { fontSize } from "utils/style/mixins";
 import { $fontSizeSmall, $paddingSmall } from "utils/style/sizes";
-import { fontSize } from "utils/style/style-mixins";
 
 interface Props {
   label: string;

@@ -10,13 +10,8 @@ import styled, { css } from "styled-components";
 import { getAssetLink } from "utils/compose-url";
 import { $panelBackgroundColor } from "utils/style/colors";
 import { mediaBreakpointLandscapePhone } from "utils/style/media";
+import { adaptiveMargin, height, lineHeight, width } from "utils/style/mixins";
 import { $dividerText, $smallAvatarSize } from "utils/style/sizes";
-import {
-  adaptiveMargin,
-  height,
-  lineHeight,
-  width
-} from "utils/style/style-mixins";
 
 interface Props {
   assetDetails: AssetDetails;

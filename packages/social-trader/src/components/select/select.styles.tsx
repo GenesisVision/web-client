@@ -1,12 +1,12 @@
 import { RowItem } from "components/row-item/row-item";
 import styled from "styled-components";
 import { $mainColor, $textColor, $textDarkColor } from "utils/style/colors";
+import { fontSize, height } from "utils/style/mixins";
 import {
   $fontSizeH4,
   $fontSizeSmall,
   $fontSizeXsmall
 } from "utils/style/sizes";
-import { fontSize, height } from "utils/style/style-mixins";
 import { SizesType } from "utils/types";
 
 export const SelectValue = styled.button<{

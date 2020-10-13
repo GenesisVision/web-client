@@ -11,15 +11,15 @@ import { SubmitButton } from "components/submit-button/submit-button";
 import React from "react";
 import styled from "styled-components";
 import {
+  adaptiveBorderRadius,
+  horizontalPaddings,
+  verticalPaddings
+} from "utils/style/mixins";
+import {
   $borderRadiusMiddle,
   $paddingSmall,
   $paddingXsmall
 } from "utils/style/sizes";
-import {
-  adaptiveBorderRadius,
-  horizontalPaddings,
-  verticalPaddings
-} from "utils/style/style-mixins";
 
 interface Props {
   name: string;

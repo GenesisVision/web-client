@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { $primaryColor, $textColor, $textLightColor } from "utils/style/colors";
+import { adaptiveMargin, fontSize } from "utils/style/mixins";
 import { $fontSizeSmall, $paddingXxsmall } from "utils/style/sizes";
-import { adaptiveMargin, fontSize } from "utils/style/style-mixins";
 
 export const CalculatorLevelLineContainer = styled.div`
   ${adaptiveMargin("bottom", $paddingXxsmall)};

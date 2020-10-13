@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { cursorPointer } from "utils/style/style-mixins";
+import { cursorPointer } from "utils/style/mixins";
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   onlyOffset?: boolean;

@@ -13,8 +13,8 @@ import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { safeGetElemFromArray } from "utils/helpers";
+import { fontSize } from "utils/style/mixins";
 import { $fontSizeParagraphMobile } from "utils/style/sizes";
-import { fontSize } from "utils/style/style-mixins";
 
 const Bottom = styled(DialogBottom)`
   display: flex;
