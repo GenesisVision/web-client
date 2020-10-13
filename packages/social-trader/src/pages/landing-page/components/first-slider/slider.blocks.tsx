@@ -6,6 +6,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import styled, { css, keyframes } from "styled-components";
 import { $landingBgGray, $mainColor, $primaryColor } from "utils/style/colors";
+import { getHEXA } from "utils/style/generators";
 import {
   mediaBreakpointDesktop,
   mediaBreakpointLandscapeTablet,
@@ -110,7 +111,7 @@ export const SliderTitle: React.FC = ({ children }) => {
 
 export const SliderText = styled.p`
   font-weight: 500;
-  color: ${$landingBgGray}cc;
+  color: ${getHEXA($landingBgGray, 0.5)};
 `;
 
 export const SliderImgWrapper = styled.div`
@@ -176,7 +177,7 @@ export const SliderArrow = styled.button`
     height: 10px;
   }
   &:hover {
-    border-color: ${$mainColor}33;
+    border-color: ${getHEXA($mainColor, 0.2)};
     stroke: ${$primaryColor};
   }
   &:active {

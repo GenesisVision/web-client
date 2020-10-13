@@ -1,5 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
+import { getHEXA } from "utils/style/generators";
 import {
   adaptiveBorderRadius,
   fontSize,
@@ -30,7 +31,7 @@ const _TagBubble = styled.div<Props>`
   ${({ clickable }) => clickable && "cursor:pointer;"}
   ${({ color }) => `
     color: ${color};
-    background-color: ${color}1a;
+    background-color: ${getHEXA(color, 0.1)};
   `}
 `;
 
