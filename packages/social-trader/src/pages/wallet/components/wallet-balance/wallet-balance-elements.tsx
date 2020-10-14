@@ -1,4 +1,3 @@
-import GVColors from "components/gv-styles/gv-colors";
 import { LabeledValue } from "components/labeled-value/labeled-value";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
@@ -9,6 +8,7 @@ import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
+import { $primaryColor } from "utils/style/colors";
 import { CurrencyEnum } from "utils/types";
 
 import styles from "./wallet-balance.module.scss";
@@ -64,7 +64,7 @@ const _WalletBalanceElements: React.FC<Props> = ({
           total={total!}
           label={t("wallet-page:invested")}
           suffix={currency}
-          color={GVColors.$primaryColor}
+          color={$primaryColor}
           tooltipContentLabel={t("wallet-page:tooltip.invested")}
         />
         <PieStatisticItem

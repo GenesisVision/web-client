@@ -1,6 +1,5 @@
 import chartXAxis from "components/chart/chart-components/chart-xaxis";
 import { ChartDataType } from "components/details/details-statistic-section/details.chart.types";
-import GVColors from "components/gv-styles/gv-colors";
 import ProgramAbsoluteProfitTooltip from "pages/invest/programs/program-details/program-details-statistic-section/program-details-chart-section/program-absolute-profit-chart-section/program-absolute-profit-tooltip";
 import * as React from "react";
 import {
@@ -11,6 +10,7 @@ import {
   Tooltip,
   YAxis
 } from "recharts";
+import { $labelColor, $negativeColor } from "utils/style/colors";
 import { CurrencyEnum } from "utils/types";
 
 const _ProgramAbsoluteProfitChart: React.FC<Props> = ({
@@ -29,18 +29,14 @@ const _ProgramAbsoluteProfitChart: React.FC<Props> = ({
             height="4"
             patternTransform="scale(2 2) rotate(30)"
           >
-            <path
-              d="M0,0 l0,4"
-              stroke={GVColors.$negativeColor}
-              strokeWidth={1}
-            />
+            <path d="M0,0 l0,4" stroke={$negativeColor} strokeWidth={1} />
           </pattern>
         </defs>
         {chartXAxis(chart[0].date, chart[chart.length - 1].date)}
         <YAxis
           axisLine={false}
           orientation="right"
-          tick={{ fill: GVColors.$labelColor, fontSize: "12" }}
+          tick={{ fill: $labelColor, fontSize: "12" }}
           tickFormatter={x => +x.toFixed(4)}
           unit={currency}
           width={60}

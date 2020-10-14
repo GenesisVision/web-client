@@ -1,7 +1,7 @@
-import GVColors from "components/gv-styles/gv-colors";
 import QRCode from "qrcode.react";
 import * as React from "react";
 import styled from "styled-components";
+import { $backgroundColor } from "utils/style/colors";
 
 interface IGVqr {
   value: number | string;
@@ -26,7 +26,7 @@ const Container = styled.div<{
 const GVqr: React.FC<IGVqr> = ({
   value,
   size = 180,
-  figureColor = GVColors.$backgroundColor,
+  figureColor = $backgroundColor,
   backgroundColor = "white"
 }) => (
   <Container size={size} backgroundColor={backgroundColor}>

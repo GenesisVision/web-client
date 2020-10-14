@@ -1,9 +1,9 @@
-import GVColors from "components/gv-styles/gv-colors";
 import { max, min } from "d3-array";
 import { scaleLinear } from "d3-scale";
 import { line } from "d3-shape";
 import { SimpleChartPoint } from "gv-api-web";
 import * as React from "react";
+import { $negativeColor, $positiveColor } from "utils/style/colors";
 
 interface Props {
   data: SimpleChartPoint[];
@@ -22,9 +22,7 @@ const lineFunction = line()
   .y(data => data[1]);
 
 const getChartColor = (minValue: number, maxValue: number) => {
-  return maxValue - minValue >= 0
-    ? GVColors.$positiveColor
-    : GVColors.$negativeColor;
+  return maxValue - minValue >= 0 ? $positiveColor : $negativeColor;
 };
 
 const _SimpleChart: React.FC<Props> = ({
