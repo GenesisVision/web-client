@@ -4,7 +4,7 @@ import { convertToCurrency } from "utils/currency-converter";
 import { formatCurrencyValue } from "utils/formatter";
 import { safeGetElemFromArray } from "utils/helpers";
 import { CurrencyEnum } from "utils/types";
-import { lazy, number, object } from "yup";
+import { lazy, number, object, Schema } from "yup";
 
 import {
   CREATE_EXCHANGE_ACCOUNT_FIELDS,
@@ -45,7 +45,7 @@ const CreateExchangeAccountSettingsValidationSchema = ({
           })
         )
         .max(available, t("validations.amount-is-large"))
-    });
+    }) as Schema<ICreateExchangeAccountSettingsFormValues>;
   });
 };
 

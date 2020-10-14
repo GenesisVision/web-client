@@ -6,7 +6,7 @@ import {
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { safeGetElemFromArray } from "utils/helpers";
 import { minMaxNumberShape } from "utils/validators/validators";
-import { lazy, number, object, string } from "yup";
+import { lazy, number, object, Schema, string } from "yup";
 
 export const ENABLE_TRANSFER_ACCOUNTS = [
   { asset: "BNB", title: "BNB" },
@@ -57,7 +57,7 @@ export const futuresTransferValidationSchema = ({
   balances: BalancesForTransfer;
   t: TFunction;
 }) => {
-  return lazy(({ asset, type }: TransferFormValues) => {
+  return lazy<TransferFormValues>(({ asset, type }) => {
     const max = getMaxValueForFuturesTransfer({
       type,
       asset,
@@ -71,6 +71,6 @@ export const futuresTransferValidationSchema = ({
       }),
       [TRANSFER_FORM_FIELDS.asset]: string(),
       [TRANSFER_FORM_FIELDS.type]: number()
-    });
+    }) as Schema<TransferFormValues>;
   });
 };
