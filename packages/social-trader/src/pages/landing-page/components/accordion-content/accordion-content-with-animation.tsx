@@ -44,15 +44,19 @@ const AccordionContentWithAnimation: React.FC<Props> = ({
   });
 
   //@ts-ignore
-  return transitions.map(({ item, props, key }) => {
-    return item ? (
-      <animated.div ref={containerRef} key={key} style={props}>
-        <AccordionContent isVisible refProp={innerRef}>
-          {children}
-        </AccordionContent>
-      </animated.div>
-    ) : null;
-  });
+  return (
+    <>
+      {transitions.map(({ item, props, key }) => {
+        return item ? (
+          <animated.div ref={containerRef} key={key} style={props}>
+            <AccordionContent isVisible refProp={innerRef}>
+              {children}
+            </AccordionContent>
+          </animated.div>
+        ) : null;
+      })}
+    </>
+  );
 };
 
 export default AccordionContentWithAnimation;
