@@ -30,9 +30,9 @@ const StyledLink = styled(Link)`
   color: ${$textLightColor};
   display: inline-block;
   text-align: center;
-  font-size: ${$fontSizeH1};
-  line-height: ${$fontSizeH2};
-  width: ${$fontSizeH2};
+  font-size: ${$fontSizeH1}px;
+  line-height: ${$fontSizeH2}px;
+  width: ${$fontSizeH2}px;
 `;
 
 const Container = styled.div<{ orientation?: DashboardBlockOrientation }>`
@@ -41,13 +41,13 @@ const Container = styled.div<{ orientation?: DashboardBlockOrientation }>`
     ${({ orientation }) => {
       switch (orientation) {
         case "tablet":
-          return mediaBreakpointTablet(`margin-right: ${$paddingXsmall}`);
+          return mediaBreakpointTablet(`margin-right: ${$paddingXsmall}px;`);
         case "landscapeTablet":
           return mediaBreakpointLandscapeTablet(
-            `margin-right: ${$paddingXsmall}`
+            `margin-right: ${$paddingXsmall}px;`
           );
       }
-    }}
+    }};
   }
 `;
 
