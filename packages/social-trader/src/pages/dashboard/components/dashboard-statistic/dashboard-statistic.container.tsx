@@ -11,7 +11,6 @@ import {
   TDashboardTradingStatistic
 } from "../../dashboard.types";
 import DashboardStatistic from "./dashboard-statistic";
-import styles from "./dashboard-statistic.module.scss";
 
 interface Props {
   orientation?: DashboardBlockOrientation;
@@ -43,16 +42,13 @@ const _DashboardStatisticContainer: React.FC<Props> = ({
   });
   return (
     <DashboardBlock orientation={orientation} label={label} all={all}>
-      <div className={styles["dashboard-statistic__container"]}>
-        <DashboardStatistic
-          className={styles["dashboard-statistic__data"]}
-          EmptyBlock={EmptyBlock}
-          currency={currency}
-          renderValues={renderValues}
-          loaderData={getTradingStatisticLoaderData()}
-          data={data!}
-        />
-      </div>
+      <DashboardStatistic
+        EmptyBlock={EmptyBlock}
+        currency={currency}
+        renderValues={renderValues}
+        loaderData={getTradingStatisticLoaderData()}
+        data={data!}
+      />
     </DashboardBlock>
   );
 };
