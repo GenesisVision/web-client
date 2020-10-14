@@ -380,7 +380,7 @@ export const faqPrograms: TAccordion[] = [
     title: "How to choose a Program to invest in?",
     content: (
       <p>
-        Click on <b>Invest > Programs</b>. Choose the Programs that fit your
+        Click on <b>Invest &gt; Programs</b>. Choose the Programs that fit your
         investment profile by using the various filters (currency type, risk
         level, trading history etc.) and key performance indicators - age of the
         Program, equity, drawdown, leverage, fees, stop out level,{" "}

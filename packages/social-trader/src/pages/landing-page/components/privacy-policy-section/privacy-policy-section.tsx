@@ -240,7 +240,7 @@ const PrivacyPolicySection: React.FC = () => {
           your data to the third-parties for marketing purposes, you can
           configure your preferences. Such configuring can be done when (i)
           opening an account or (ii) when receiving such advertising content or
-          (iii) by logging in and going to My Account > Personal Details. You
+          (iii) by logging in and going to My Account &gt; Personal Details. You
           may also send to the Company, at any time, an email to{" "}
           <a title={"Write a email"} href="mailto:support@genesis.vision">
             support@genesis.vision
