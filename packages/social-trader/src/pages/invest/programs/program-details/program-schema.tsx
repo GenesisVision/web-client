@@ -6,7 +6,7 @@ const isFollow = (description: ProgramDescriptionDataType) => {
 
 export const getSchema = (details: ProgramDescriptionDataType) => ({
   "@context": "https://schema.org",
-  "@type": isFollow ? "FinancialProduct" : "DepositAccount",
+  "@type": isFollow(details) ? "FinancialProduct" : "DepositAccount",
   identifier: details.id,
   provider: details.owner.username,
   name: details.publicInfo.title,
