@@ -2,9 +2,6 @@ import AccordionContent from "pages/landing-page/components/accordion-content/ac
 import { getElementHeight } from "pages/landing-page/utils";
 import React, { useRef } from "react";
 import { animated, useTransition } from "react-spring";
-import styled from "styled-components";
-import { $rowColor } from "utils/style/colors";
-import { mediaBreakpointDesktop } from "utils/style/media";
 
 const visibleStyle = { height: "auto", opacity: 1, overflow: "visible" };
 const hiddenStyle = { opacity: 0, height: 0, overflow: "hidden" };
@@ -13,15 +10,6 @@ interface Props {
   forceSlideIn?: boolean;
   isVisible: boolean;
 }
-
-const Content = styled.div`
-  border-top: 1px solid ${$rowColor}4d;
-  padding: 10px 20px;
-  ${mediaBreakpointDesktop("padding: 15px 25px;")}
-  p:last-child {
-    margin-bottom: 0;
-  }
-`;
 
 const AccordionContentWithAnimation: React.FC<Props> = ({
   isVisible,
