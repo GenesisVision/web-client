@@ -3,6 +3,7 @@ import DashboardBlock, {
   DashboardBlockOrientation
 } from "pages/dashboard/components/dashboard-block/dashboard-block";
 import React from "react";
+import styled from "styled-components";
 import { CurrencyEnum } from "utils/types";
 
 import { getTradingStatisticLoaderData } from "../../dashboard.loaders-data";
@@ -24,6 +25,10 @@ interface Props {
   all?: string;
 }
 
+const StyledDashboardStatistic = styled(DashboardStatistic)`
+  height: 100%;
+`;
+
 const _DashboardStatisticContainer: React.FC<Props> = ({
   orientation,
   EmptyBlock,
@@ -42,7 +47,7 @@ const _DashboardStatisticContainer: React.FC<Props> = ({
   });
   return (
     <DashboardBlock orientation={orientation} label={label} all={all}>
-      <DashboardStatistic
+      <StyledDashboardStatistic
         EmptyBlock={EmptyBlock}
         currency={currency}
         renderValues={renderValues}

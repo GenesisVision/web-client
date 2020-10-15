@@ -26,6 +26,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const Container = styled.div`
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
