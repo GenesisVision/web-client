@@ -11,7 +11,7 @@ import {
   SortingColumn
 } from "components/table/components/filtering/filter.type";
 import TableModule from "components/table/components/table-module";
-import { DEFAULT_PAGING } from "components/table/reducers/table-paging.reducer";
+import { DEFAULT_EVENTS_PAGING } from "components/table/reducers/table-paging.reducer";
 import { ProgramPeriodViewModel } from "gv-api-web";
 import DownloadButtonToolbarAuth from "pages/invest/programs/program-details/program-history-section/download-button-toolbar/download-button-toolbar-auth";
 import {
@@ -85,7 +85,7 @@ const _ReportTable: React.FC<IReportTableProps> = ({ title, id, currency }) => {
       loaderData={[]}
       getItems={getItems}
       renderFilters={renderFilters}
-      paging={DEFAULT_PAGING}
+      paging={DEFAULT_EVENTS_PAGING}
       columns={REPORTS_TABLE_COLUMNS}
       renderHeader={renderCell}
       renderBodyRow={renderBodyRow}
