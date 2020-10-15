@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import { hideOnLandscapeTablet, transition } from "utils/style/style-mixins";
+import { hideOnLandscapeTablet, transition } from "utils/style/mixins";
 
 interface Props {
   openSearch?: boolean;

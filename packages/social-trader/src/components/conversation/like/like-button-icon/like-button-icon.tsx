@@ -1,12 +1,9 @@
 import { LikeIcon } from "components/conversation/icons/like.icon";
-import {
-  $labelColor,
-  $primaryColor
-} from "components/gv-styles/gv-colors/gv-colors";
 import React from "react";
 import styled from "styled-components";
 import { pSBC } from "utils/psbc";
-import { transition } from "utils/style/style-mixins";
+import { $labelColor, $primaryColor } from "utils/style/colors";
+import { transition } from "utils/style/mixins";
 
 interface Props {
   disabled?: boolean;

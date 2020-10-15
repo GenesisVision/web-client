@@ -1,6 +1,9 @@
 import useApiRequest from "hooks/api-request.hook";
-import DashboardBlock from "pages/dashboard/components/dashboard-block/dashboard-block";
+import DashboardBlock, {
+  DashboardBlockOrientation
+} from "pages/dashboard/components/dashboard-block/dashboard-block";
 import React from "react";
+import styled from "styled-components";
 import { CurrencyEnum } from "utils/types";
 
 import { getTradingStatisticLoaderData } from "../../dashboard.loaders-data";
@@ -9,11 +12,25 @@ import {
   TDashboardTradingStatistic
 } from "../../dashboard.types";
 import DashboardStatistic from "./dashboard-statistic";
-import styles from "./dashboard-statistic.module.scss";
+
+interface Props {
+  orientation?: DashboardBlockOrientation;
+  EmptyBlock: React.ComponentType;
+  currency: CurrencyEnum;
+  renderValues: (
+    statistic: TDashboardTradingStatistic & TDashboardInvestingStatistic
+  ) => JSX.Element;
+  label: string;
+  request: (...args: any) => any;
+  all?: string;
+}
+
+const StyledDashboardStatistic = styled(DashboardStatistic)`
+  height: 100%;
+`;
 
 const _DashboardStatisticContainer: React.FC<Props> = ({
-  landscapeTablet,
-  tablet,
+  orientation,
   EmptyBlock,
   currency,
   label,
@@ -29,15 +46,8 @@ const _DashboardStatisticContainer: React.FC<Props> = ({
     fetchOnMountData: { currency }
   });
   return (
-    <DashboardBlock
-      landscapeTablet={landscapeTablet}
-      tablet={tablet}
-      label={label}
-      all={all}
-      className={styles["dashboard-statistic__container"]}
-    >
-      <DashboardStatistic
-        className={styles["dashboard-statistic__data"]}
+    <DashboardBlock orientation={orientation} label={label} all={all}>
+      <StyledDashboardStatistic
         EmptyBlock={EmptyBlock}
         currency={currency}
         renderValues={renderValues}
@@ -47,19 +57,6 @@ const _DashboardStatisticContainer: React.FC<Props> = ({
     </DashboardBlock>
   );
 };
-
-interface Props {
-  landscapeTablet?: boolean;
-  tablet?: boolean;
-  EmptyBlock: React.ComponentType;
-  currency: CurrencyEnum;
-  renderValues: (
-    statistic: TDashboardTradingStatistic & TDashboardInvestingStatistic
-  ) => JSX.Element;
-  label: string;
-  request: (...args: any) => any;
-  all?: string;
-}
 
 const DashboardStatisticContainer = React.memo(_DashboardStatisticContainer);
 export default DashboardStatisticContainer;

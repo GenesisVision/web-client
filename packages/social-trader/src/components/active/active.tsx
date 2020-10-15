@@ -1,6 +1,4 @@
 import { CurrencyItem } from "components/currency-item/currency-item";
-import { $primaryColor } from "components/gv-styles/gv-colors/gv-colors";
-import { $fontSizeParagraph } from "components/gv-styles/gv-sizes";
 import { Row } from "components/row/row";
 import TradingViewWidget, {
   Themes
@@ -11,7 +9,9 @@ import { useNetworkStatusInWindow } from "hooks/network-status";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
-import { fontSize } from "utils/style/style-mixins";
+import { $primaryColor } from "utils/style/colors";
+import { fontSize } from "utils/style/mixins";
+import { $fontSizeParagraph } from "utils/style/sizes";
 
 import SocialLinksBlock from "../social-links-block/social-links-block";
 import TagItemList from "../tags/tag-item/tag-item-list";

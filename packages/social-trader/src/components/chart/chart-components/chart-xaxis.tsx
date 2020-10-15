@@ -1,6 +1,6 @@
-import GVColors from "components/gv-styles/gv-colors";
 import * as React from "react";
 import { XAxis } from "recharts";
+import { $labelColor } from "utils/style/colors";
 
 import { composeTicks, dateTickFormatter } from "./chart-components.helpers";
 
@@ -10,7 +10,7 @@ const chartXAxis = (start: Date | number, end: Date | number): JSX.Element => (
     domain={["dataMin", "dataMax"]}
     type="number"
     tick={{
-      fill: GVColors.$labelColor,
+      fill: $labelColor,
       fontSize: "12",
       transform: "translate(0, 8)"
     }}

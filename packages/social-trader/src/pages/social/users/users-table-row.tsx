@@ -13,12 +13,29 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { managerToPathCreator } from "routes/manager.routes";
+import styled from "styled-components";
 import { distanceDate } from "utils/dates";
 import { formatCurrencyValue } from "utils/formatter";
-
-import styles from "./users-table-row.module.scss";
+import { $labelColor } from "utils/style/colors";
+import { transition } from "utils/style/mixins";
+import { $fontSizeH2 } from "utils/style/sizes";
 
 const USER_TABLE_ROW_CURRENCY = "USD";
+
+const StyledTableRow = styled(TableRow)`
+  ${transition("background-color")}
+`;
+
+const AboutCell = styled(TableCell)`
+  max-width: 350px;
+`;
+
+const About = styled(Row)`
+  ${transition("opacity")};
+  white-space: normal;
+  color: ${$labelColor};
+  line-height: ${$fontSizeH2};
+`;
 
 export const UsersTableRow: React.FC<{ user: UserDetailsList }> = ({
   user: {
@@ -49,8 +66,8 @@ export const UsersTableRow: React.FC<{ user: UserDetailsList }> = ({
 
   const renderHidden = () => <Text muted>{t("Hidden")}</Text>;
   return (
-    <TableRow className={styles["users-table-row"]}>
-      <TableCell className={styles["users-table-row__about-cell"]}>
+    <StyledTableRow>
+      <AboutCell>
         <Row center={false}>
           <RowItem>
             <Link to={profileUrl}>
@@ -63,12 +80,10 @@ export const UsersTableRow: React.FC<{ user: UserDetailsList }> = ({
                 <b>{username}</b>
               </Link>
             </Row>
-            <Row size={"small"} className={styles["users-table-row__about"]}>
-              {slicedAbout}
-            </Row>
+            <About size={"small"}>{slicedAbout}</About>
           </RowItem>
         </Row>
-      </TableCell>
+      </AboutCell>
       <TableCell>
         {followers.length ? (
           <UserAvatarList count={followersCount} list={followers} />
@@ -115,6 +130,6 @@ export const UsersTableRow: React.FC<{ user: UserDetailsList }> = ({
           />
         </TableCell>
       )}
-    </TableRow>
+    </StyledTableRow>
   );
 };

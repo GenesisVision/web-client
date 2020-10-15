@@ -1,15 +1,6 @@
 import clsx from "clsx";
 import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
 import { Center } from "components/center/center";
-import {
-  $labelColor,
-  $primaryColor
-} from "components/gv-styles/gv-colors/gv-colors";
-import {
-  mediaBreakpointDesktop,
-  mediaBreakpointLargeDesktop,
-  mediaBreakpointTablet
-} from "components/gv-styles/gv-media";
 import LevelTooltip from "components/level-tooltip/level-tooltip";
 import Link, { ToType } from "components/link/link";
 import Profitability from "components/profitability/profitability";
@@ -26,7 +17,13 @@ import React from "react";
 import NumberFormat from "react-number-format";
 import styled from "styled-components";
 import { formatValue } from "utils/formatter";
-import { transition } from "utils/style/style-mixins";
+import { $labelColor, $primaryColor } from "utils/style/colors";
+import {
+  mediaBreakpointDesktop,
+  mediaBreakpointLargeDesktop,
+  mediaBreakpointTablet
+} from "utils/style/media";
+import { transition } from "utils/style/mixins";
 
 import styles from "./lp-table-card.module.scss";
 

@@ -1,12 +1,12 @@
 import { $paddingInfoLeft } from "components/details/details-description-section/details-description/details-description.style";
 import { DetailsStrategy } from "components/details/details-description-section/details-description/details-structure-blocks";
-import { mediaBreakpointTablet } from "components/gv-styles/gv-media";
 import { ToType } from "components/link/link";
 import { Row } from "components/row/row";
 import SocialLinksBlock from "components/social-links-block/social-links-block";
 import { SocialLinkViewModel } from "gv-api-web";
 import * as React from "react";
 import styled from "styled-components";
+import { mediaBreakpointTablet } from "utils/style/media";
 
 import { DetailsSubtitle } from "./details-subtitle.block";
 

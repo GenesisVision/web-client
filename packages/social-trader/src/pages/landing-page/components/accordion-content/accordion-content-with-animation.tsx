@@ -1,8 +1,7 @@
+import AccordionContent from "pages/landing-page/components/accordion-content/accordion-content";
 import { getElementHeight } from "pages/landing-page/utils";
 import React, { useRef } from "react";
 import { animated, useTransition } from "react-spring";
-
-import styles from "../accordion/accordion.module.scss";
 
 const visibleStyle = { height: "auto", opacity: 1, overflow: "visible" };
 const hiddenStyle = { opacity: 0, height: 0, overflow: "hidden" };
@@ -10,12 +9,11 @@ const hiddenStyle = { opacity: 0, height: 0, overflow: "hidden" };
 interface Props {
   forceSlideIn?: boolean;
   isVisible: boolean;
-  content?: JSX.Element;
 }
 
-const _AccordionContent: React.FC<Props> = ({
+const AccordionContentWithAnimation: React.FC<Props> = ({
   isVisible,
-  content,
+  children,
   forceSlideIn
 }) => {
   const isVisibleOnMount = useRef(isVisible && !forceSlideIn);
@@ -46,20 +44,19 @@ const _AccordionContent: React.FC<Props> = ({
   });
 
   //@ts-ignore
-  return transitions.map(({ item, props, key }) => {
-    return item ? (
-      <animated.div ref={containerRef} key={key} style={props}>
-        <div ref={innerRef} className={styles["accordion__content"]}>
-          {content}
-        </div>
-      </animated.div>
-    ) : null;
-  });
+  return (
+    <>
+      {transitions.map(({ item, props, key }) => {
+        return item ? (
+          <animated.div ref={containerRef} key={key} style={props}>
+            <AccordionContent isVisible refProp={innerRef}>
+              {children}
+            </AccordionContent>
+          </animated.div>
+        ) : null;
+      })}
+    </>
+  );
 };
 
-_AccordionContent.defaultProps = {
-  forceSlideIn: false
-};
-
-const AccordionContent = React.memo(_AccordionContent);
-export default AccordionContent;
+export default AccordionContentWithAnimation;

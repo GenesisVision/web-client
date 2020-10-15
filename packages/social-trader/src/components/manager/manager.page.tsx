@@ -10,8 +10,38 @@ import { UpperButtonContainer } from "components/upper-button/upper-button";
 import { PublicProfile } from "gv-api-web";
 import { SocialPageContextProvider } from "pages/social/social/feed.context";
 import * as React from "react";
+import styled from "styled-components";
+import {
+  mediaBreakpointLandscapePhone,
+  mediaBreakpointLandscapeTablet
+} from "utils/style/media";
 
-import styles from "./manager.page.module.scss";
+interface Props {
+  cookieShowEvents?: boolean;
+  profile: PublicProfile;
+}
+
+const Container = styled(Row)`
+  position: relative;
+  flex-direction: column;
+  ${mediaBreakpointLandscapeTablet("flex-direction: row;")};
+`;
+
+const Info = styled(RowItem)`
+  width: 100%;
+  ${mediaBreakpointLandscapeTablet("width: 30%;")};
+`;
+
+const InfoRow = styled(Row)`
+  flex-direction: column;
+  ${mediaBreakpointLandscapePhone("flex-direction: row;")};
+  ${mediaBreakpointLandscapeTablet("flex-direction: column;")};
+`;
+
+const Data = styled(RowItem)`
+  width: 100%;
+  ${mediaBreakpointLandscapeTablet("width: 70%;")};
+`;
 
 const _ManagerPage: React.FC<Props> = ({ cookieShowEvents, profile }) => {
   const title = profile.username;
@@ -23,24 +53,24 @@ const _ManagerPage: React.FC<Props> = ({ cookieShowEvents, profile }) => {
       previewImage={profile.logoUrl}
     >
       <SocialPageContextProvider cookieShowEvents={cookieShowEvents}>
-        <Row className={styles["manager-page__container"]} center={false} wide>
-          <RowItem className={styles["manager-page__info"]} bottomOffset>
-            <Row className={styles["manager-page__info-row"]} center={false}>
+        <Container center={false} wide>
+          <Info bottomOffset>
+            <InfoRow center={false}>
               <ManagerInfo profile={profile} />
-            </Row>
+            </InfoRow>
             <ResponsiveContainer
               enabledScreens={["landscape-tablet", "desktop"]}
             >
               <UpperBlock />
             </ResponsiveContainer>
-          </RowItem>
-          <RowItem className={styles["manager-page__data"]} bottomOffset>
+          </Info>
+          <Data bottomOffset>
             <ManagerData
               canWritePost={profile.personalDetails?.canWritePost}
               id={profile.id}
             />
-          </RowItem>
-        </Row>
+          </Data>
+        </Container>
         <ResponsiveContainer
           enabledScreens={["phone", "landscape-phone", "tablet"]}
         >
@@ -50,11 +80,6 @@ const _ManagerPage: React.FC<Props> = ({ cookieShowEvents, profile }) => {
     </Page>
   );
 };
-
-interface Props {
-  cookieShowEvents?: boolean;
-  profile: PublicProfile;
-}
 
 const ManagerPage = React.memo(_ManagerPage);
 export default ManagerPage;

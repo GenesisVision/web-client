@@ -1,4 +1,3 @@
-import GVColors from "components/gv-styles/gv-colors";
 import { LabeledValue } from "components/labeled-value/labeled-value";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
@@ -18,6 +17,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { formatCurrencyValue } from "utils/formatter";
+import { $primaryColor } from "utils/style/colors";
 import { CurrencyEnum } from "utils/types";
 
 import { TDashboardTotal } from "../../dashboard.types";
@@ -67,11 +67,12 @@ const _DashboardTotal: React.FC<Props> = ({
           </Row>
           <Row>
             <StatisticItemList
+              wrap={false}
               className={styles["dashboard-total__main-block-pie-item-list"]}
             >
               <PieStatisticItem
                 suffix={currency}
-                color={GVColors.$primaryColor}
+                color={$primaryColor}
                 tooltipContentLabel={t(
                   "dashboard-page:tooltips.total.invested"
                 )}

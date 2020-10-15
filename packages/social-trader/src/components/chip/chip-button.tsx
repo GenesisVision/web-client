@@ -1,9 +1,9 @@
 import Chip, { CHIP_TYPE } from "components/chip/chip";
-import { $primaryColor } from "components/gv-styles/gv-colors/gv-colors";
 import useFlag from "hooks/flag.hook";
 import * as React from "react";
 import { ReactNode } from "react";
 import styled from "styled-components";
+import { $primaryColor } from "utils/style/colors";
 import { Clickable, Sizeable } from "utils/types";
 
 interface Props extends Sizeable, Clickable {

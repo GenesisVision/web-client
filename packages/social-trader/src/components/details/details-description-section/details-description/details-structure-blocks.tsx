@@ -1,20 +1,17 @@
 import ImageBase from "components/avatar/image-base";
 import { $paddingControlsLeft } from "components/details/details-description-section/details-description/details-description.style";
-import {
-  mediaBreakpointDesktop,
-  mediaBreakpointTablet
-} from "components/gv-styles/gv-media";
-import {
-  $fontSizeParagraph,
-  $paddingSmall
-} from "components/gv-styles/gv-sizes";
 import { Row } from "components/row/row";
 import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
 import { Text } from "components/text/text";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
-import { fontSize } from "utils/style/style-mixins";
+import {
+  mediaBreakpointDesktop,
+  mediaBreakpointTablet
+} from "utils/style/media";
+import { fontSize } from "utils/style/mixins";
+import { $fontSizeParagraph, $paddingSmall } from "utils/style/sizes";
 
 export const DetailsStatisticContainer = styled.div`
   display: inline-flex;

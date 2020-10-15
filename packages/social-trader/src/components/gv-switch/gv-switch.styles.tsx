@@ -1,11 +1,11 @@
 import { Center } from "components/center/center";
+import { RowItem } from "components/row-item/row-item";
+import styled from "styled-components";
 import {
   $primaryColor,
   $secondaryColor,
   $switchHandlerColor
-} from "components/gv-styles/gv-colors/gv-colors";
-import { RowItem } from "components/row-item/row-item";
-import styled from "styled-components";
+} from "utils/style/colors";
 
 export const GVSwitchTrack = styled.span<{
   checked?: boolean;

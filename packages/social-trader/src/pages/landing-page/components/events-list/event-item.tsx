@@ -1,23 +1,31 @@
-import ImageBase from "components/avatar/image-base";
 import GVProgramDefaultAvatar from "components/gv-program-avatar/gv-propgram-default-avatar";
-import { $primaryColor } from "components/gv-styles/gv-colors/gv-colors";
-import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import { PlatformEvent } from "gv-api-web";
 import { useTranslation } from "i18n";
+import {
+  EventItemAvatarContainer,
+  EventItemDate,
+  EventItemImage,
+  EventItemInfo,
+  EventItemLi,
+  EventItemLink,
+  EventItemNumber,
+  EventItemText,
+  EventItemTitle,
+  EventItemValues
+} from "pages/landing-page/components/events-list/events-list.styles";
 import { getElementHeight } from "pages/landing-page/utils";
 import React, { useEffect, useRef, useState } from "react";
-import styled from "styled-components";
 import { composeManagerDetailsUrl, getAssetLink } from "utils/compose-url";
 
-import styles from "./events-list.module.scss";
-
-const ItemLink = styled(Link)`
-  color: inherit;
-  &:hover {
-    color: ${$primaryColor};
-  }
-`;
+interface Props extends PlatformEvent {
+  startIndex: number;
+  index: number;
+  countItems: number;
+  countShowingItems: number;
+  minHeight: number;
+  updateMinHeight: (currentHeight: number) => void;
+}
 
 const timeConversion = (date: Date) => {
   const MS_IN_ONE_SEC = 1000;
@@ -134,67 +142,44 @@ const _EventItem: React.FC<Props> = ({
     setTransformElement(`translate3d(0,${translate3d}px,0) scale(${scale})`);
   }, [currentHeight, currentIndex]);
   return (
-    <li
-      className={styles["events-list__item"]}
-      style={{
-        transition: `transform 0.5s, opacity 0.5s`,
-        opacity: isShow ? "1" : "0",
-        transform: transformElement,
-        minHeight: `${minHeight}px`
-      }}
+    <EventItemLi
+      isShow={isShow}
+      transform={transformElement}
+      minHeight={minHeight}
       ref={itemRef}
     >
-      <Link
+      <EventItemLink
         title={t("landing-page:links.title", { title, page: "details" })}
-        className={styles["events-list__item-link"]}
         to={linkAsset}
       >
-        <div className={styles["events-list__item-avatar"]}>
-          <ImageBase
+        <EventItemAvatarContainer>
+          <EventItemImage
             DefaultImageComponent={GVProgramDefaultAvatar}
-            defaultImageClassName={styles["events-list__item-image--default"]}
             alt={title}
             color={color}
-            className={styles["events-list__item-image"]}
             src={logoUrl}
           />
-        </div>
-      </Link>
-      <div className={styles["events-list__item-info"]}>
-        <ItemLink
+        </EventItemAvatarContainer>
+      </EventItemLink>
+      <EventItemInfo>
+        <EventItemLink
           title={t("landing-page:links.title", {
             title: userUrl,
             page: "user"
           })}
-          className={styles["events-list__item-link"]}
           to={linkUser}
         >
-          <div className={styles["events-list__item-title"]}>{title}</div>
-        </ItemLink>
-        <div className={styles["events-list__item-text"]}>{text}</div>
-      </div>
-      <div className={styles["events-list__item-values"]}>
-        {value && (
-          <div className={styles["events-list__item-number"]}>{value}</div>
-        )}
-        {date && (
-          <div className={styles["events-list__item-date"]}>
-            {timeConversion(date)}
-          </div>
-        )}
-      </div>
-    </li>
+          <EventItemTitle>{title}</EventItemTitle>
+        </EventItemLink>
+        <EventItemText>{text}</EventItemText>
+      </EventItemInfo>
+      <EventItemValues>
+        {value && <EventItemNumber>{value}</EventItemNumber>}
+        {date && <EventItemDate>{timeConversion(date)}</EventItemDate>}
+      </EventItemValues>
+    </EventItemLi>
   );
 };
-
-interface Props extends PlatformEvent {
-  startIndex: number;
-  index: number;
-  countItems: number;
-  countShowingItems: number;
-  minHeight: number;
-  updateMinHeight: (currentHeight: number) => void;
-}
 
 const EventItem = React.memo(_EventItem);
 export default EventItem;

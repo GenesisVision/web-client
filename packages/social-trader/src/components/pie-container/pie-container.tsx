@@ -1,8 +1,8 @@
-import { $textLightColor } from "components/gv-styles/gv-colors/gv-colors";
-import { $fontSizeSmall } from "components/gv-styles/gv-sizes";
 import * as React from "react";
 import styled from "styled-components";
-import { fontSize, height, width } from "utils/style/style-mixins";
+import { $textLightColor } from "utils/style/colors";
+import { fontSize, height, width } from "utils/style/mixins";
+import { $fontSizeSmall } from "utils/style/sizes";
 
 import Pie, { PIE_DIRECTION } from "./pie";
 

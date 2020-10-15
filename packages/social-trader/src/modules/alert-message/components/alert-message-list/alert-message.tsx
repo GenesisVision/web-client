@@ -1,20 +1,17 @@
-import {
-  $panelBackgroundColor,
-  $positiveColor
-} from "components/gv-styles/gv-colors/gv-colors";
-import { mediaBreakpointLandscapePhone } from "components/gv-styles/gv-media";
+import { ALERT_MESSAGE } from "modules/alert-message/actions/alert-message-actions.constants";
+import React, { useCallback } from "react";
+import { useTranslation } from "react-i18next";
+import styled from "styled-components";
+import { $panelBackgroundColor, $positiveColor } from "utils/style/colors";
+import { mediaBreakpointLandscapePhone } from "utils/style/media";
+import { $boxShadow4 } from "utils/style/shadow";
 import {
   $borderRadiusMiddle,
   $fontSizeCommon,
   $fontSizeH4,
   $fontSizeSmall,
   $paddingSmall
-} from "components/gv-styles/gv-sizes";
-import { $boxShadow4 } from "components/gv-styles/gv-style-constants";
-import { ALERT_MESSAGE } from "modules/alert-message/actions/alert-message-actions.constants";
-import React, { useCallback } from "react";
-import { useTranslation } from "react-i18next";
-import styled from "styled-components";
+} from "utils/style/sizes";
 
 import { IMessage } from "../../reducers/alert-message-reducers";
 

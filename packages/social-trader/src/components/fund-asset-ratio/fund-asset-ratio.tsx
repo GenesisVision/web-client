@@ -1,9 +1,9 @@
-import { $fontSizeSmallMobile } from "components/gv-styles/gv-sizes";
 import { Row } from "components/row/row";
 import { FundAssetPartWithIcon } from "gv-api-web";
 import * as React from "react";
 import styled from "styled-components";
-import { fontSize } from "utils/style/style-mixins";
+import { fontSize } from "utils/style/mixins";
+import { $fontSizeSmallMobile } from "utils/style/sizes";
 
 interface IRatioFieldProps {
   handleHover?: (

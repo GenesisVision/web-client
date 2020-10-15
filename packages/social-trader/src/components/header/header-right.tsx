@@ -1,4 +1,3 @@
-import { mediaBreakpointLandscapeTablet } from "components/gv-styles/gv-media";
 import AuthWidgets from "components/header/auth-widgets";
 import UnauthLinks from "components/header/unauth-links";
 import { ProfileHeaderViewModel } from "gv-api-web";
@@ -7,6 +6,7 @@ import * as React from "react";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import styled from "styled-components";
+import { mediaBreakpointLandscapeTablet } from "utils/style/media";
 
 export interface Props {
   profileHeader?: ProfileHeaderViewModel;

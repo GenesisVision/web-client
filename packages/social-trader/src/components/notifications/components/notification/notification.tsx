@@ -1,16 +1,5 @@
 import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
 import ImageBaseElement from "components/avatar/image-base.element";
-import {
-  $borderColor,
-  $labelColor,
-  $negativeBackgroundColor,
-  $negativeColor
-} from "components/gv-styles/gv-colors/gv-colors";
-import {
-  $fontSizeCommon,
-  $paddingXsmall,
-  $paddingXxsmall
-} from "components/gv-styles/gv-sizes";
 import Link, { LinkProps } from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import { RowItem } from "components/row-item/row-item";
@@ -31,12 +20,23 @@ import {
   composeProgramDetailsUrl
 } from "utils/compose-url";
 import {
+  $borderColor,
+  $labelColor,
+  $negativeBackgroundColor,
+  $negativeColor
+} from "utils/style/colors";
+import {
   adaptiveMargin,
   adaptivePadding,
   fontSize,
   height,
   width
-} from "utils/style/style-mixins";
+} from "utils/style/mixins";
+import {
+  $fontSizeCommon,
+  $paddingXsmall,
+  $paddingXxsmall
+} from "utils/style/sizes";
 
 enum TYPE {
   PROFILE = "profile",

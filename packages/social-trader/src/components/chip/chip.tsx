@@ -1,3 +1,6 @@
+import * as React from "react";
+import styled from "styled-components";
+import { pSBC } from "utils/psbc";
 import {
   $backgroundChipNegative,
   $backgroundChipPositive,
@@ -8,12 +11,7 @@ import {
   $textLightColor,
   $warningBackgroundColor,
   $warningColor
-} from "components/gv-styles/gv-colors/gv-colors";
-import { $fontSizeCommon, $fontSizeH3 } from "components/gv-styles/gv-sizes";
-import { $boxShadow1 } from "components/gv-styles/gv-style-constants";
-import * as React from "react";
-import styled from "styled-components";
-import { pSBC } from "utils/psbc";
+} from "utils/style/colors";
 import {
   adaptiveBorderRadius,
   fontSize,
@@ -22,7 +20,9 @@ import {
   transition,
   verticalPaddings,
   width
-} from "utils/style/style-mixins";
+} from "utils/style/mixins";
+import { $boxShadow1 } from "utils/style/shadow";
+import { $fontSizeCommon, $fontSizeH3 } from "utils/style/sizes";
 import { Sizeable } from "utils/types";
 
 export enum CHIP_TYPE {

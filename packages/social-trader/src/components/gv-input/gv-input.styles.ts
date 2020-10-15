@@ -1,11 +1,7 @@
-import {
-  $negativeColor,
-  $positiveColor,
-  $textColor
-} from "components/gv-styles/gv-colors/gv-colors";
-import { $paddingSmall } from "components/gv-styles/gv-sizes";
 import React from "react";
 import { css } from "styled-components";
+import { $negativeColor, $positiveColor, $textColor } from "utils/style/colors";
+import { $paddingSmall } from "utils/style/sizes";
 
 export interface IPropsGvInput {
   onPaste?: VoidFunction;

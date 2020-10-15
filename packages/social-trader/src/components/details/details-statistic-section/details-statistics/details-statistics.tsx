@@ -9,21 +9,19 @@ import * as React from "react";
 import { useTranslation } from "react-i18next";
 
 interface Props {
-  className?: string;
   period: ChartDefaultPeriod;
   statisticData?: IStatisticData;
   renderDetailsStatisticsElements: TRenderDetailsStatisticsElements;
 }
 
 const _DetailsStatistics: React.FC<Props> = ({
-  className,
   period,
   statisticData,
   renderDetailsStatisticsElements
 }) => {
   const [t] = useTranslation();
   return (
-    <StyledDetailsStatisticsBlock size={"large"} solid className={className}>
+    <StyledDetailsStatisticsBlock size={"large"} solid>
       <Row>
         <h3>{t("asset-details:statistics.heading")}</h3>
       </Row>

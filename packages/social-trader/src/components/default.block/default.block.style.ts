@@ -1,9 +1,17 @@
 import { IDefaultBlockProps } from "components/default.block/default.block.types";
+import { css } from "styled-components";
+import { pSBC } from "utils/psbc";
 import {
   $mainColor,
   $panelBackgroundColor,
   $secondaryBackgroundColor
-} from "components/gv-styles/gv-colors/gv-colors";
+} from "utils/style/colors";
+import {
+  adaptiveBorderRadius,
+  horizontalPaddings,
+  transition,
+  verticalPaddings
+} from "utils/style/mixins";
 import {
   $borderRadius,
   $borderRadiusMiddle,
@@ -11,17 +19,12 @@ import {
   $paddingSmall,
   $paddingXsmall,
   $paddingXxsmall
-} from "components/gv-styles/gv-sizes";
-import { css } from "styled-components";
-import { pSBC } from "utils/psbc";
-import {
-  adaptiveBorderRadius,
-  horizontalPaddings,
-  transition,
-  verticalPaddings
-} from "utils/style/style-mixins";
+} from "utils/style/sizes";
 
 export const defaultBlockDynamicStyles = css`
+  ${({ tall }: IDefaultBlockProps) => {
+    if (tall) return "height: 100%;";
+  }};
   box-sizing: border-box;
   background-color: ${({ light, solid }: IDefaultBlockProps) => {
     if (light) return pSBC(0.02, $secondaryBackgroundColor);

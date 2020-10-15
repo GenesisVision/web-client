@@ -1,4 +1,3 @@
-import GVColors from "components/gv-styles/gv-colors";
 import { FundAssetPartWithIcon, SimpleChartPoint } from "gv-api-web";
 import * as React from "react";
 import {
@@ -11,6 +10,7 @@ import {
   TooltipProps,
   YAxis
 } from "recharts";
+import { $labelColor } from "utils/style/colors";
 
 import chartXAxis from "./chart-components/chart-xaxis";
 import { getStrokeColor } from "./chart-gradient/chart-gradient";
@@ -59,7 +59,7 @@ const _ProfitChart: React.FC<Props> = ({
           orientation="right"
           dataKey="value"
           axisLine={false}
-          tick={{ fill: GVColors.$labelColor, fontSize: "12" }}
+          tick={{ fill: $labelColor, fontSize: "12" }}
           tickFormatter={(x: number) => +x.toFixed(2)}
           unit="%"
           width={35}

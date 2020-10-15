@@ -1,16 +1,12 @@
 import { Button } from "components/button/button";
-import { $secondaryBackgroundColor } from "components/gv-styles/gv-colors/gv-colors";
-import { mediaBreakpointLandscapePhone } from "components/gv-styles/gv-media";
-import {
-  $modalWidth,
-  $paddingSmall,
-  $paddingXxsmall
-} from "components/gv-styles/gv-sizes";
 import { CloseIcon } from "components/icon/close-icon";
 import Modal, { BodyFix } from "components/modal/modal";
 import React, { ReactNode, useCallback, useState } from "react";
 import styled from "styled-components";
-import { adaptiveFullPadding } from "utils/style/style-mixins";
+import { $secondaryBackgroundColor } from "utils/style/colors";
+import { mediaBreakpointLandscapePhone } from "utils/style/media";
+import { adaptiveFullPadding } from "utils/style/mixins";
+import { $modalWidth, $paddingSmall, $paddingXxsmall } from "utils/style/sizes";
 
 export interface IDialogProps extends IDialogOuterProps {
   showClose?: boolean;

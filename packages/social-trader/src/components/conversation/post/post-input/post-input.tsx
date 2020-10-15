@@ -7,8 +7,6 @@ import { PostInputView } from "components/conversation/post/post-input/post-inpu
 import { useSearchPanel } from "components/conversation/search-panel/search-panel.hook";
 import { IImageValue } from "components/form/input-image/input-image";
 import { HookFormInputImages } from "components/form/input-image/input-images";
-import { $panelBackgroundColor } from "components/gv-styles/gv-colors/gv-colors";
-import { $borderRadiusMiddle } from "components/gv-styles/gv-sizes";
 import { NewPostImage } from "gv-api-web";
 import { API_REQUEST_STATUS } from "hooks/api-request.hook";
 import useIsOpen from "hooks/is-open.hook";
@@ -17,7 +15,9 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { HookForm, postponeFunc } from "utils/hook-form.helpers";
-import { adaptiveBorderRadius } from "utils/style/style-mixins";
+import { $panelBackgroundColor } from "utils/style/colors";
+import { adaptiveBorderRadius } from "utils/style/mixins";
+import { $borderRadiusMiddle } from "utils/style/sizes";
 import { object } from "yup";
 
 const MAX_IMAGES = 10;

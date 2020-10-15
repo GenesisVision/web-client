@@ -1,13 +1,13 @@
-import {
-  $textLightColor,
-  $tooltipBackgroundColor,
-  $tooltipShadowColor
-} from "components/gv-styles/gv-colors/gv-colors";
-import { $fontSizeH4, $paddingXsmall } from "components/gv-styles/gv-sizes";
 import { Text } from "components/text/text";
 import * as React from "react";
 import styled from "styled-components";
 import { formatDate } from "utils/dates";
+import {
+  $textLightColor,
+  $tooltipBackgroundColor,
+  $tooltipShadowColor
+} from "utils/style/colors";
+import { $fontSizeH4, $paddingXsmall } from "utils/style/sizes";
 
 interface Props {
   body: JSX.Element;

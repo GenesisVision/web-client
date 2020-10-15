@@ -1,11 +1,11 @@
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
 import {
   leftDarkShadow,
   leftShadow,
   rightDarkShadow,
   rightShadow
-} from "components/gv-styles/shadow";
-import React, { useEffect, useState } from "react";
-import styled, { FlattenSimpleInterpolation } from "styled-components";
+} from "utils/style/shadow";
 
 export type ScrollDataType = {
   scroll: number;

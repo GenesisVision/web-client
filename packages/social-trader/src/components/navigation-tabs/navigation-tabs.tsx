@@ -1,5 +1,4 @@
 import { $facetTranslateSize } from "components/facet-cards/facet-card";
-import { $paddingSmall } from "components/gv-styles/gv-sizes";
 import GVTabs from "components/gv-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
 import Link from "components/link/link";
@@ -10,6 +9,7 @@ import * as React from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import replaceParams from "utils/replace-params";
+import { $paddingSmall } from "utils/style/sizes";
 
 const Container = styled.div`
   padding-bottom: ${$paddingSmall - $facetTranslateSize}px;

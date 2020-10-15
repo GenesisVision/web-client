@@ -1,8 +1,8 @@
-import { $mainColor } from "components/gv-styles/gv-colors/gv-colors";
-import { $fontSizeParagraph } from "components/gv-styles/gv-sizes";
 import HeaderIcon from "components/header/header-icon";
 import React from "react";
 import styled from "styled-components";
+import { $mainColor } from "utils/style/colors";
+import { $fontSizeParagraph } from "utils/style/sizes";
 
 interface Props extends React.HTMLAttributes<HTMLAnchorElement> {
   small?: boolean;

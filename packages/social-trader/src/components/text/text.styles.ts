@@ -1,20 +1,20 @@
+import { ITextProps } from "components/text/text.types";
+import { css } from "styled-components";
 import {
   $labelColor,
   $negativeColor,
   $positiveColor,
   $textLightColor,
   $yellow
-} from "components/gv-styles/gv-colors/gv-colors";
+} from "utils/style/colors";
+import { fontSize } from "utils/style/mixins";
 import {
   $fontSizeCommon,
   $fontSizeH2,
   $fontSizeH4,
   $fontSizeSmall,
   $fontSizeXsmall
-} from "components/gv-styles/gv-sizes";
-import { ITextProps } from "components/text/text.types";
-import { css } from "styled-components";
-import { fontSize } from "utils/style/style-mixins";
+} from "utils/style/sizes";
 
 export const dynamicTextStyles = css`
   white-space: ${({ wrap = true, preWrap }: ITextProps) => {

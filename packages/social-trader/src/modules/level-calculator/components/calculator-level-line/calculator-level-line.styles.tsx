@@ -1,11 +1,7 @@
-import {
-  $primaryColor,
-  $textColor,
-  $textLightColor
-} from "components/gv-styles/gv-colors/gv-colors";
-import { $fontSizeSmall, $paddingXxsmall } from "components/gv-styles/gv-sizes";
 import styled from "styled-components";
-import { adaptiveMargin, fontSize } from "utils/style/style-mixins";
+import { $primaryColor, $textColor, $textLightColor } from "utils/style/colors";
+import { adaptiveMargin, fontSize } from "utils/style/mixins";
+import { $fontSizeSmall, $paddingXxsmall } from "utils/style/sizes";
 
 export const CalculatorLevelLineContainer = styled.div`
   ${adaptiveMargin("bottom", $paddingXxsmall)};

@@ -1,7 +1,7 @@
-import { $primaryColor } from "components/gv-styles/gv-colors/gv-colors";
 import { calcPercent } from "components/pie-container/pie.helpers";
 import React from "react";
 import styled from "styled-components";
+import { $primaryColor } from "utils/style/colors";
 
 interface GVProgramPeriodProps {
   className?: string;

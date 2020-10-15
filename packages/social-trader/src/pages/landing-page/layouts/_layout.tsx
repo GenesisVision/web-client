@@ -6,7 +6,7 @@ import CookieMessage from "pages/landing-page/components/cookie-message/cookie-m
 import LPFooter from "pages/landing-page/components/lp-footer/lp-footer";
 import LPHeader from "pages/landing-page/components/lp-header/lp-header";
 import React from "react";
-import { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 import { LandingPageRootStyle } from "styles/root-styles";
 import {
   commonMeta,
@@ -16,9 +16,21 @@ import {
   schema,
   titleMeta
 } from "utils/seo";
+import { $landingBg, $mainColor } from "utils/style/colors";
 
 const GlobalStyle = createGlobalStyle`
   ${LandingPageRootStyle}
+`;
+
+const Container = styled.div`
+  background-color: ${$landingBg};
+  color: ${$mainColor};
+
+  *,
+  *:before,
+  *:after {
+    box-sizing: border-box;
+  }
 `;
 
 const _Layout: React.FC<Props> = ({
@@ -30,7 +42,7 @@ const _Layout: React.FC<Props> = ({
   const { t } = useTranslation();
   useRefLink();
   return (
-    <div className="landing-page">
+    <Container className="landing-page">
       <Head>
         <title>{title}</title>
         {schema([ORGANIZATION_SCHEMA])}
@@ -49,7 +61,7 @@ const _Layout: React.FC<Props> = ({
       </TitleContext.Provider>
       <CookieMessage cookieAccept={cookieAccept} />
       <div id="modal-root" />
-    </div>
+    </Container>
   );
 };
 

@@ -5,12 +5,12 @@ import {
   GVInputStyles,
   IPropsGvInput
 } from "components/gv-input/gv-input.styles";
-import { $negativeColor } from "components/gv-styles/gv-colors/gv-colors";
-import { $fontSizeXsmall } from "components/gv-styles/gv-sizes";
 import { Text } from "components/text/text";
 import React from "react";
 import styled from "styled-components";
-import { fontSize } from "utils/style/style-mixins";
+import { $negativeColor } from "utils/style/colors";
+import { fontSize } from "utils/style/mixins";
+import { $fontSizeXsmall } from "utils/style/sizes";
 
 interface Props extends IPropsGvInput {
   inputElement: JSX.Element;

@@ -1,8 +1,5 @@
 import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
 import ImageBase from "components/avatar/image-base";
-import { $panelBackgroundColor } from "components/gv-styles/gv-colors/gv-colors";
-import { mediaBreakpointLandscapePhone } from "components/gv-styles/gv-media";
-import { $dividerText, $smallAvatarSize } from "components/gv-styles/gv-sizes";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import Crashable from "decorators/crashable";
@@ -11,12 +8,10 @@ import SocialLink from "media/social-link.svg";
 import React from "react";
 import styled, { css } from "styled-components";
 import { getAssetLink } from "utils/compose-url";
-import {
-  adaptiveMargin,
-  height,
-  lineHeight,
-  width
-} from "utils/style/style-mixins";
+import { $panelBackgroundColor } from "utils/style/colors";
+import { mediaBreakpointLandscapePhone } from "utils/style/media";
+import { adaptiveMargin, height, lineHeight, width } from "utils/style/mixins";
+import { $dividerText, $smallAvatarSize } from "utils/style/sizes";
 
 interface Props {
   assetDetails: AssetDetails;

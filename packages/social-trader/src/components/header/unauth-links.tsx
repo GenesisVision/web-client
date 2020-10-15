@@ -7,7 +7,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { LOGIN_ROUTE, SIGNUP_ROUTE } from "routes/app.routes";
 import styled from "styled-components";
-import { hideOnLandscapeTablet } from "utils/style/style-mixins";
+import { hideOnLandscapeTablet } from "utils/style/mixins";
 
 interface Props {
   className?: string;

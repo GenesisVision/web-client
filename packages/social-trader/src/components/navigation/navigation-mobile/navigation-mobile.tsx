@@ -1,9 +1,4 @@
 import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
-import { $panelBackgroundColor } from "components/gv-styles/gv-colors/gv-colors";
-import {
-  $fontSizeParagraph,
-  $paddingXsmall
-} from "components/gv-styles/gv-sizes";
 import { LogoutIcon } from "components/icon/logout-icon";
 import NavigationItem from "components/navigation/navigation-item";
 import { ProfileHeaderViewModel } from "gv-api-web";
@@ -12,6 +7,8 @@ import { useTranslation } from "react-i18next";
 import { LOGIN_ROUTE } from "routes/app.routes";
 import { TMenuItem } from "routes/menu";
 import styled from "styled-components";
+import { $panelBackgroundColor } from "utils/style/colors";
+import { $fontSizeParagraph, $paddingXsmall } from "utils/style/sizes";
 
 import { MenuNavigationItem } from "../menu-navigation-item";
 
