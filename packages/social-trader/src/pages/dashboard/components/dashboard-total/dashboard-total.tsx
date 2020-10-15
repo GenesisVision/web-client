@@ -67,6 +67,7 @@ const _DashboardTotal: React.FC<Props> = ({
           </Row>
           <Row>
             <StatisticItemList
+              wrap={false}
               className={styles["dashboard-total__main-block-pie-item-list"]}
             >
               <PieStatisticItem
