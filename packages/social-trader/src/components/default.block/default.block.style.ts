@@ -22,6 +22,9 @@ import {
 } from "utils/style/sizes";
 
 export const defaultBlockDynamicStyles = css`
+  ${({ tall }: IDefaultBlockProps) => {
+    if (tall) return "height: 100%;";
+  }};
   box-sizing: border-box;
   background-color: ${({ light, solid }: IDefaultBlockProps) => {
     if (light) return pSBC(0.02, $secondaryBackgroundColor);
