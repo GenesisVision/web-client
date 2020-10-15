@@ -36,7 +36,7 @@ const StyledLink = styled(Link)`
 `;
 
 const Container = styled.div<{ orientation?: DashboardBlockOrientation }>`
-  margin-bottom: ${$paddingXsmall};
+  margin-bottom: ${$paddingXsmall}px;
   &:not(:last-child) {
     ${({ orientation }) => {
       switch (orientation) {
@@ -59,7 +59,7 @@ const DashboardBlock: React.FC<Props> = ({
 }) => {
   return (
     <Container orientation={orientation}>
-      <DefaultTableBlock table>
+      <DefaultTableBlock table tall>
         {(label || all) && (
           <DetailsBlockTitleBox>
             <Header>
