@@ -26,8 +26,7 @@ const Header = styled.div`
   ${adaptiveMargin("bottom", $paddingXsmall)};
 `;
 
-const StyledLink = styled(Link)`
-  color: ${$textLightColor};
+const Arrow = styled.div`
   display: inline-block;
   text-align: center;
   font-size: ${$fontSizeH1}px;
@@ -61,18 +60,14 @@ const DashboardBlock: React.FC<Props> = ({
     <Container orientation={orientation}>
       <DefaultTableBlock table tall>
         {(label || all) && (
-          <DetailsBlockTitleBox>
-            <Header>
-              {label && <h3>{label}</h3>}
-              {all && (
-                <div>
-                  <StyledLink noColor to={all}>
-                    &rsaquo;
-                  </StyledLink>
-                </div>
-              )}
-            </Header>
-          </DetailsBlockTitleBox>
+          <Link to={all} noColor>
+            <DetailsBlockTitleBox>
+              <Header>
+                {label && <h3>{label}</h3>}
+                {all && <Arrow>&rsaquo;</Arrow>}
+              </Header>
+            </DetailsBlockTitleBox>
+          </Link>
         )}
         {children}
       </DefaultTableBlock>
