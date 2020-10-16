@@ -2371,6 +2371,10 @@
     "@nodelib/fs.scandir" "2.1.3"
     fastq "^1.6.0"
 
+"@pavelzubov/use-api-request@pavelzubov/use-api-request":
+  version "1.0.0"
+  resolved "https://codeload.github.com/pavelzubov/use-api-request/tar.gz/66f1db7da9cc1c4cec1a764a3d1234a0f4280e30"
+
 "@popmotion/easing@^1.0.1":
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/@popmotion/easing/-/easing-1.0.2.tgz#17d925c45b4bf44189e5a38038d149df42d8c0b4"

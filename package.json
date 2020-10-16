@@ -2,6 +2,7 @@
   "private": true,
   "workspaces": ["packages/*"],
   "dependencies": {
+    "@pavelzubov/use-api-request": "pavelzubov/use-api-request",
     "@zeit/next-workers": "^1.0.1-canary.1",
     "browser-image-compression": "^1.0.8",
     "cacheable-response": "^1.10.0",
