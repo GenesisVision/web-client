@@ -182,6 +182,7 @@
     "last": "Last"
   },
   "navigation": {
+    "feed": "Feed",
     "media": "Media",
     "users": "Users",
     "social": "Social",
