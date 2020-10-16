@@ -1,14 +1,14 @@
-import { useAlerts } from "hooks/alert.hook";
-import { useMemo } from "react";
-import { ResponseError } from "utils/types";
-
-import useApiRequestConstructor, {
+import useApiRequestConstructor from "@pavelzubov/use-api-request";
+import {
   API_REQUEST_STATUS as API_REQUEST_STATUS_TYPE,
   IAlert,
   IAlertService,
   TUseApiRequestOutput,
   TUseApiRequestProps
-} from "./api-request.hook.constructor";
+} from "@pavelzubov/use-api-request/dist/hooks/useApiRequest";
+import { useAlerts } from "hooks/alert.hook";
+import { useMemo } from "react";
+import { ResponseError } from "utils/types";
 
 export type API_REQUEST_STATUS = API_REQUEST_STATUS_TYPE;
 
