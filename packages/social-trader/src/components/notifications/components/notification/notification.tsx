@@ -52,9 +52,10 @@ interface IAssetAvatarContainerProps {
   light?: boolean;
 }
 
-type INotificationProps = NotificationViewModel &
-  INotificationOwnProps &
-  IAssetAvatarContainerProps;
+interface INotificationProps
+  extends NotificationViewModel,
+    INotificationOwnProps,
+    IAssetAvatarContainerProps {}
 
 const getStaticIconUrl = (type: string): string | null => {
   return type.indexOf(TYPE.PROFILE) !== -1
@@ -92,11 +93,8 @@ const _NotificationAssetAvatar: React.FC<INotificationProps> = ({
   dark,
   light,
   type,
-  url,
-  logoUrl,
-  color,
   closeNotifications,
-  assetType
+  assetDetails: { url, logoUrl, color, assetType }
 }) => {
   const { linkCreator } = useToLink();
   const Tag: React.ComponentType<LinkProps | any> | string = url
