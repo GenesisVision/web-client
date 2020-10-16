@@ -168,8 +168,7 @@ export const usePlaceOrderFormReset = ({
   >();
 
   useEffect(() => {
-    if (status === API_REQUEST_STATUS.SUCCESS)
-      postponeFunc(() => setReset(true));
+    if (status === "SUCCESS") postponeFunc(() => setReset(true));
   }, [status]);
 
   useEffect(() => {

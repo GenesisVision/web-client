@@ -162,7 +162,7 @@ const _StopLimitTradeForm: React.FC<IStopLimitTradeFormProps & {
       </Row>
       <Row>
         <PlaceOrderSubmitButton
-          isSuccessful={status === API_REQUEST_STATUS.SUCCESS}
+          isSuccessful={status === "SUCCESS"}
           side={side}
           asset={baseAsset}
         />
