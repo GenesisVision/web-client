@@ -4,12 +4,7 @@ import { ResponseError } from "utils/types";
 
 import { TErrorMessage } from "./error-message.hook";
 
-export enum API_REQUEST_STATUS {
-  WAIT = "WAIT",
-  PENDING = "PENDING",
-  SUCCESS = "SUCCESS",
-  FAIL = "FAIL"
-}
+export type API_REQUEST_STATUS = "WAIT" | "PENDING" | "SUCCESS" | "FAIL";
 
 type TNullValue = undefined;
 export const nullValue = undefined;
@@ -64,9 +59,7 @@ const useApiRequest = <T extends any>({
   defaultData,
   catchCallback
 }: TUseApiRequestProps<T>): TUseApiRequestOutput<T> => {
-  const [status, setStatus] = useState<API_REQUEST_STATUS>(
-    API_REQUEST_STATUS.WAIT
-  );
+  const [status, setStatus] = useState<API_REQUEST_STATUS>("WAIT");
   const [data, setData] = useState<T | TNullValue>(defaultData || nullValue);
   const [errorMessage, setErrorMessageState] = useState<string>("");
   const setErrorMessage = (error: any) =>
@@ -78,7 +71,7 @@ const useApiRequest = <T extends any>({
   const sendSuccessMessage = (res: any) => {
     if (successMessage && alertService)
       alertService.successAlert({ content: successMessage });
-    setStatus(API_REQUEST_STATUS.SUCCESS);
+    setStatus("SUCCESS");
     return res;
   };
 
@@ -91,13 +84,13 @@ const useApiRequest = <T extends any>({
 
   const sendRequest = (props?: any) => {
     setIsPending(true);
-    setStatus(API_REQUEST_STATUS.PENDING);
+    setStatus("PENDING");
     return ((setPromiseMiddleware(
       request(props),
       middlewareList
     ) as unknown) as Promise<any>)
       .catch((errorMessage: ResponseError) => {
-        setStatus(API_REQUEST_STATUS.FAIL);
+        setStatus("FAIL");
         setErrorMessage(errorMessage);
         if (alertService)
           alertService.errorAlert({ content: errorMessage.errorMessage });

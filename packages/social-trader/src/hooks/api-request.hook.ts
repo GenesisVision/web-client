@@ -3,18 +3,14 @@ import { useMemo } from "react";
 import { ResponseError } from "utils/types";
 
 import useApiRequestConstructor, {
+  API_REQUEST_STATUS as API_REQUEST_STATUS_TYPE,
   IAlert,
   IAlertService,
   TUseApiRequestOutput,
   TUseApiRequestProps
 } from "./api-request.hook.constructor";
 
-export enum API_REQUEST_STATUS {
-  WAIT = "WAIT",
-  PENDING = "PENDING",
-  SUCCESS = "SUCCESS",
-  FAIL = "FAIL"
-}
+export type API_REQUEST_STATUS = API_REQUEST_STATUS_TYPE;
 
 const getErrorMessageCallback = ({ errorMessage }: ResponseError) =>
   errorMessage;

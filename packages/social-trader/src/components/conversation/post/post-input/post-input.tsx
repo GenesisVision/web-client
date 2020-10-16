@@ -82,7 +82,7 @@ const _PostInput: React.FC<Props> = ({
     formState: { isSubmitted }
   } = form;
   const { text, images } = watch();
-  const isSuccessful = status === API_REQUEST_STATUS.SUCCESS;
+  const isSuccessful = status === "SUCCESS";
 
   const {
     isSearchPending,
