@@ -131,7 +131,7 @@ export const navFooter: TNavHeader[] = [
   },
   {
     name: "landing-page:links.knowledge-base",
-    href: "https://feedback.genesis.vision/knowledge-bases/2-knowledge-base"
+    href: "https://genesisvision.freshdesk.com/support/solutions"
   },
   {
     name: "landing-page:links.glossary",
