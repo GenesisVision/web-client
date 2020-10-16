@@ -20,13 +20,18 @@ export const DetailsStatisticContainer = styled.div`
   min-width: 100%;
   ${mediaBreakpointDesktop(`min-width: auto;`)}
 `;
-export const DetailsPerformanceData = styled(StatisticItemList)`
+export const DetailsPerformanceDataContainer = styled.div`
   padding-left: 0;
   ${mediaBreakpointTablet(`
     padding-left: ${$paddingSmall}px;
     margin-left: ${$paddingControlsLeft}px;
   `)}
 `;
+export const DetailsPerformanceData: React.FC = ({ children }) => (
+  <DetailsPerformanceDataContainer>
+    <StatisticItemList>{children}</StatisticItemList>
+  </DetailsPerformanceDataContainer>
+);
 
 const StyledImageBase = styled(ImageBase)`
   width: 100%;
