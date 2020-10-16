@@ -23,10 +23,10 @@ export const Li = styled.li<Props>`
     left: 0;
     box-sizing: border-box;
   }
-  ${({ size }) => {
+  ${({ size = "small" }) => {
     switch (size) {
       case "small":
-        return `margin-top: ${$paddingSmall};`;
+        return `margin-top: ${$paddingSmall}px;`;
     }
   }}
 `;
