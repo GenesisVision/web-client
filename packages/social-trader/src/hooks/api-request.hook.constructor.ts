@@ -1,8 +1,5 @@
 import { useEffect, useState } from "react";
 import { MiddlewareType, setPromiseMiddleware } from "utils/promise-middleware";
-import { ResponseError } from "utils/types";
-
-import { TErrorMessage } from "./error-message.hook";
 
 export type API_REQUEST_STATUS = "WAIT" | "PENDING" | "SUCCESS" | "FAIL";
 
@@ -17,7 +14,7 @@ export interface TUseApiRequestProps<T = any> {
   fetchOnMountData?: any;
   request: (...args: any) => TRequest<T>;
   defaultData?: T;
-  catchCallback?: (error: ResponseError) => void;
+  catchCallback?: (error: any) => void;
   successMessage?: string;
   middleware?: MiddlewareType[];
   fetchOnMount?: boolean;
@@ -26,7 +23,7 @@ export interface TUseApiRequestProps<T = any> {
 export interface TUseApiRequestOutput<T> {
   setData: (data: T | TNullValue) => void;
   status: API_REQUEST_STATUS;
-  errorMessage: TErrorMessage;
+  errorMessage: string;
   isPending: boolean;
   data: T | TNullValue;
   sendRequest: (props?: any) => TRequest<any>;
@@ -89,12 +86,12 @@ const useApiRequest = <T extends any>({
       request(props),
       middlewareList
     ) as unknown) as Promise<any>)
-      .catch((errorMessage: ResponseError) => {
+      .catch((error: any) => {
+        const errorMessage = getErrorMessageCallback(error);
         setStatus("FAIL");
         setErrorMessage(errorMessage);
-        if (alertService)
-          alertService.errorAlert({ content: errorMessage.errorMessage });
-        catchCallback && catchCallback(errorMessage);
+        if (alertService) alertService.errorAlert({ content: errorMessage });
+        catchCallback && catchCallback(error);
       })
       .finally(() => {
         setIsPending(false);
