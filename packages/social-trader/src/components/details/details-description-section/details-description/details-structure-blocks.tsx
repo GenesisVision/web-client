@@ -38,7 +38,7 @@ const StyledImageBase = styled(ImageBase)`
 `;
 
 const BrokerImageContainer = styled.div`
-  height: 20px;
+  height: 26px;
   width: 100px;
   overflow: hidden;
 `;
