@@ -59,7 +59,7 @@
     }
   },
   "investing": {
-    "most-profitable": "The most profitable programs and funds",
+    "most-profitable": "The most profitable Programs and Funds",
     "title": "Investments",
     "public-page": "Public page",
     "funds": "Funds",
@@ -126,18 +126,18 @@
           "button": "Create account"
         },
         "right-field": {
-          "text": "Create your first fund",
-          "button": "Create fund"
+          "text": "Create your first Fund",
+          "button": "Create Fund"
         }
       },
       "investing": {
         "left-field": {
           "text": "",
-          "text-2": "Find programs",
+          "text-2": "Find Programs",
           "button": "Programs"
         },
         "right-field": {
-          "text": "Find funds",
+          "text": "Find Funds",
           "button": "Funds"
         }
       }
@@ -146,7 +146,7 @@
     "get-started-title": "Get started.",
     "get-started-invest": "There's no such data right now. Find programs or the funds to invest.",
     "get-started-account": "Create trading account and start trading.",
-    "get-started-fund": "Create your first fund",
+    "get-started-fund": "Create your first Fund",
     "total": "Total",
     "AUM": "AUM",
     "programs": "Programs",

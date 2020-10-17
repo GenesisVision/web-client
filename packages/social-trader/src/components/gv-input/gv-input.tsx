@@ -51,7 +51,7 @@ const _GvInput: React.FC<Props> = props => {
             !!focused || !!adornment || (value !== undefined && value !== "")
           }
         >
-          <Text muted size={"large"}>
+          <Text wrap={false} muted size={"large"}>
             {label}
           </Text>
         </GvInputLabel>

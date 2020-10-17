@@ -16,7 +16,7 @@
   "withdrawal-fee": "Withdrawal fee",
   "text-2": "The fee charged upon withdrawing funds from the platform. The commission rate depends on the currency used for withdrawing funds",
   "withdrawal-table-head": "Wallet\tGenesis Vision Token\tEthereum\tBitcoin\tTether",
-  "withdrawal-table-row": "Fee\t1 GVT\t0,01 ETH\t0,0005 BTC\t2 USDT",
+  "withdrawal-table-row": "Fee\t3.5 GVT\t0.01 ETH\t0.0005 BTC\t4 USDT",
   "crypto": "Crypto",
   "amount": "Amount",
   "discount": "Discount",
