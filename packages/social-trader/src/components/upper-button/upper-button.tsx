@@ -4,12 +4,22 @@ import EventListener from "react-event-listener";
 import styled from "styled-components";
 import { transition } from "utils/style/mixins";
 
-export const UpperButtonContainer: React.FC = () => {
+export interface IUpperButtonProps {
+  visible: boolean;
+}
+
+interface IUpperButtonContainerProps {
+  Button?: React.ComponentType<IUpperButtonProps>;
+}
+
+export const UpperButtonContainer: React.FC<IUpperButtonContainerProps> = ({
+  Button = UpperButton
+}) => {
   const [windowHeight, setWindowHeight] = useState<number>(0);
   const [scrollTop, setScrollTop] = useState<number>(0);
   const [visible, setVisible] = useState(false);
   const debouncedSetScrollFunc = useCallback(
-    debounce(() => setScrollTop(window.scrollY), 300),
+    debounce(() => setScrollTop(window.scrollY), 100),
     []
   );
   const handleScroll = useCallback(() => debouncedSetScrollFunc(), []);
@@ -27,14 +37,10 @@ export const UpperButtonContainer: React.FC = () => {
   return (
     <>
       <EventListener target={"window"} onScroll={handleScroll} />
-      <UpperButton visible={visible} />
+      <Button visible={visible} />
     </>
   );
 };
-
-interface IUpperButtonProps {
-  visible?: boolean;
-}
 
 const BUTTON_SIZE = 60;
 

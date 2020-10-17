@@ -1,8 +1,10 @@
 import { TitleContext } from "components/link/link.helper";
+import { UpperButtonContainer } from "components/upper-button/upper-button";
 import { useRefLink } from "hooks/ref-link";
 import { useTranslation } from "i18n";
 import Head from "next/head";
 import CookieMessage from "pages/landing-page/components/cookie-message/cookie-message";
+import { LandingUpperButton } from "pages/landing-page/components/landing-upper-button/landing-upper-button";
 import LPFooter from "pages/landing-page/components/lp-footer/lp-footer";
 import LPHeader from "pages/landing-page/components/lp-header/lp-header";
 import React from "react";
@@ -61,6 +63,7 @@ const _Layout: React.FC<Props> = ({
       </TitleContext.Provider>
       <CookieMessage cookieAccept={cookieAccept} />
       <div id="modal-root" />
+      <UpperButtonContainer Button={LandingUpperButton} />
     </Container>
   );
 };
