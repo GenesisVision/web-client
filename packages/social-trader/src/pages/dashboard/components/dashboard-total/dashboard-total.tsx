@@ -1,4 +1,5 @@
 import { LabeledValue } from "components/labeled-value/labeled-value";
+import { Push } from "components/link/link";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
@@ -13,15 +14,22 @@ import {
   $pieAvailableColor,
   $piePendingColor
 } from "pages/wallet/components/wallet-balance/wallet-balance-elements";
-import React from "react";
+import { WALLET_TOTAL_PAGE_ROUTE } from "pages/wallet/wallet.paths";
+import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
+import { INVESTMENTS_ROUTE, TRADING_ROUTE } from "routes/dashboard.routes";
 import { formatCurrencyValue } from "utils/formatter";
 import { $primaryColor } from "utils/style/colors";
 import { CurrencyEnum } from "utils/types";
 
 import { TDashboardTotal } from "../../dashboard.types";
 import styles from "./dashboard-total.module.scss";
+
+interface Props {
+  currency: CurrencyEnum;
+  data: TDashboardTotal;
+}
 
 const _DashboardTotal: React.FC<Props> = ({
   currency,
@@ -71,6 +79,7 @@ const _DashboardTotal: React.FC<Props> = ({
               className={styles["dashboard-total__main-block-pie-item-list"]}
             >
               <PieStatisticItem
+                onClick={useCallback(() => Push(INVESTMENTS_ROUTE), [])}
                 suffix={currency}
                 color={$primaryColor}
                 tooltipContentLabel={t(
@@ -81,6 +90,7 @@ const _DashboardTotal: React.FC<Props> = ({
                 total={total}
               />
               <PieStatisticItem
+                onClick={useCallback(() => Push(TRADING_ROUTE), [])}
                 suffix={currency}
                 color={$piePendingColor}
                 tooltipContentLabel={t("dashboard-page:tooltips.total.trading")}
@@ -89,6 +99,7 @@ const _DashboardTotal: React.FC<Props> = ({
                 total={total}
               />
               <PieStatisticItem
+                onClick={useCallback(() => Push(WALLET_TOTAL_PAGE_ROUTE), [])}
                 suffix={currency}
                 color={$pieAvailableColor}
                 tooltipContentLabel={t("dashboard-page:tooltips.total.wallet")}
@@ -133,11 +144,6 @@ const _DashboardTotal: React.FC<Props> = ({
     </div>
   );
 };
-
-interface Props {
-  currency: CurrencyEnum;
-  data: TDashboardTotal;
-}
 
 const DashboardTotal = withBlurLoader(React.memo(_DashboardTotal));
 export default DashboardTotal;
