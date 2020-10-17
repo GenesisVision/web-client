@@ -14,6 +14,7 @@ import { $fontSizeH1, $fontSizeH2, $paddingXsmall } from "utils/style/sizes";
 export type DashboardBlockOrientation = "landscapeTablet" | "tablet";
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
+  headerButton?: ReactNode;
   orientation?: DashboardBlockOrientation;
   label?: string;
   all?: string;
@@ -51,6 +52,7 @@ const Container = styled.div<{ orientation?: DashboardBlockOrientation }>`
 `;
 
 const DashboardBlock: React.FC<Props> = ({
+  headerButton,
   orientation,
   label,
   all,
@@ -65,6 +67,7 @@ const DashboardBlock: React.FC<Props> = ({
               <Header>
                 {label && <h3>{label}</h3>}
                 {all && <Arrow>&rsaquo;</Arrow>}
+                {headerButton}
               </Header>
             </DetailsBlockTitleBox>
           </Link>
