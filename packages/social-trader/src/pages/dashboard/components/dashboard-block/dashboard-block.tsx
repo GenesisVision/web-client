@@ -1,9 +1,8 @@
 import { DefaultTableBlock } from "components/default.block/default-table.block";
 import DetailsBlockTitleBox from "components/details/details-block-title-box";
 import Link from "components/link/link";
-import React from "react";
+import React, { ReactNode } from "react";
 import styled from "styled-components";
-import { $textLightColor } from "utils/style/colors";
 import {
   mediaBreakpointLandscapeTablet,
   mediaBreakpointTablet
