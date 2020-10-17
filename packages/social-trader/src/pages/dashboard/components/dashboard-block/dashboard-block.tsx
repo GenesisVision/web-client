@@ -2,11 +2,12 @@ import clsx from "clsx";
 import DetailsBlock from "components/details/details-block";
 import DetailsBlockTitleBox from "components/details/details-block-title-box";
 import Link from "components/link/link";
-import React from "react";
+import React, { ReactNode } from "react";
 
 import styles from "./dashboard-block.module.scss";
 
 const DashboardBlock: React.FC<Props> = ({
+  headerButton,
   landscapeTablet,
   tablet,
   label,
@@ -33,6 +34,7 @@ const DashboardBlock: React.FC<Props> = ({
                   </div>
                 </div>
               )}
+              {headerButton}
             </div>
           </Link>
         </DetailsBlockTitleBox>
@@ -43,6 +45,7 @@ const DashboardBlock: React.FC<Props> = ({
 };
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
+  headerButton?: ReactNode;
   landscapeTablet?: boolean;
   tablet?: boolean;
   label?: string;
