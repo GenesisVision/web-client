@@ -3,9 +3,9 @@ import {
   GVTextFieldProps,
   gvTextFieldStyle
 } from "components/gv-text-field/gv-text-field.style";
-import { withStyles } from "decorators/withStyles";
 import useIsOpen from "hooks/is-open.hook";
 import React, { useCallback, useEffect, useRef } from "react";
+import styled from "styled-components";
 
 import GVTextArea from "./gv-text-area";
 
@@ -66,7 +66,9 @@ const _GVTextField: React.FC<GVTextFieldProps> = props => {
   );
 };
 
-const GVTextField = withStyles<GVTextFieldProps>({
-  dynamicStyles: gvTextFieldStyle
-})(React.memo(_GVTextField));
+const StyledGVTextField = styled(_GVTextField)`
+  ${gvTextFieldStyle}
+`;
+
+const GVTextField = React.memo(StyledGVTextField);
 export default GVTextField;
