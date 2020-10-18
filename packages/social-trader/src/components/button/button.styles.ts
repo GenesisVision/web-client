@@ -52,30 +52,25 @@ export const SuccessMarkDynamicStyles = css`
   opacity: ${({ isSuccessful }: ISuccessMarkProps) => (isSuccessful ? 1 : 0)};
 `;
 
-export const ButtonStyles = {
-  "box-sizing": "border-box",
-  position: "relative",
-  display: "flex",
-  "align-items": "center",
-  "justify-content": "center",
-  "white-space": "nowrap",
-  border: "0",
-  outline: "none",
-  "background-color": "transparent",
-  "text-decoration": "none",
-  "border-radius": { value: 2, unit: "em" },
-  "border-style": "solid",
-  ...transition(
+export const ButtonDynamicStyles = css`
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  outline: none;
+  text-decoration: none;
+  border-radius: 2em;
+  border-style: solid;
+  ${transition(
     "filter",
     "background-color",
     "box-shadow",
     "color",
     "opacity",
     "padding"
-  )
-};
-
-export const ButtonDynamicStyles = css`
+  )};
   border-width: ${({ variant = "contained" }: IButtonProps) =>
     variant === "outlined" ? "0.1em" : 0};
   opacity: ${({ disabled, isSuccessful }: IButtonProps) =>
