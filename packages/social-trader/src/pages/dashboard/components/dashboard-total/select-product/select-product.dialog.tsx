@@ -1,7 +1,8 @@
+import clsx from "clsx";
 import Dialog, { IDialogOuterProps } from "components/dialog/dialog";
-import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogTop } from "components/dialog/dialog-top";
-import Link from "components/link/link";
+import { Push } from "components/link/link";
+import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
 import { ATTACH_ACCOUNT_PAGE_ROUTE } from "pages/attach-account/attach-account.constants";
@@ -11,6 +12,7 @@ import {
   CREATE_SELF_MANAGED_FUND_PAGE_ROUTE
 } from "pages/create-fund/create-fund.constants";
 import { CREATE_PROGRAM_PAGE_ROUTE } from "pages/create-program/create-program.constants";
+import styles from "pages/dashboard/components/dashboard-total/dashboard-total.module.scss";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -53,29 +55,41 @@ const SelectProductContainer: React.FC = () => {
   return (
     <>
       <DialogTop title={t("dashboard-page:select-product.title")} />
-      <DialogBottom fixed={false}>
-        <Row>
+      <div className={styles["select-product__block"]}>
+        <div className={styles["select-product__item"]}>
           <Text muted>{t("dashboard-page:select-product.text")}</Text>
-        </Row>
-        <Row onlyOffset>
-          <div style={{ maxWidth: 500 }}>
-            {Object.values(PRODUCTS).map(({ path, title }) => (
-              <Row onlyOffset>
-                <Row>
-                  <Link to={path}>
+        </div>
+        <div>
+          {Object.values(PRODUCTS).map(({ path, title }, i) => (
+            <div
+              className={clsx(
+                styles["select-product__item"],
+                styles["select-product__item--clickable"],
+                {
+                  [styles["select-product__item--even"]]: !(i % 2)
+                }
+              )}
+              onClick={() => Push(path)}
+            >
+              <Row>
+                <RowItem>
+                  <Row>
                     <h5>{t(`dashboard-page:select-product.${title}.title`)}</h5>
-                  </Link>
-                </Row>
-                <Row size={"small"}>
-                  <Text muted preWrap>
-                    {t(`dashboard-page:select-product.${title}.description`)}
-                  </Text>
-                </Row>
+                  </Row>
+                  <Row size={"small"}>
+                    <Text muted preWrap>
+                      {t(`dashboard-page:select-product.${title}.description`)}
+                    </Text>
+                  </Row>
+                </RowItem>
+                <RowItem className={styles["select-product__arrow"]}>
+                  &rsaquo;
+                </RowItem>
               </Row>
-            ))}
-          </div>
-        </Row>
-      </DialogBottom>
+            </div>
+          ))}
+        </div>
+      </div>
     </>
   );
 };

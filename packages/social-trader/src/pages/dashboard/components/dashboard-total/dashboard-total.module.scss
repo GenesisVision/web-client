@@ -2,6 +2,34 @@
 @import "styles/_breakpoint";
 @import "styles/_sizes";
 
+.select-product {
+  &__block {
+    max-width: 500px;
+    background-color: lighten($secondary-background-color, 2%);
+  }
+  &__item {
+    @include horizontal-paddings($popover-padding-large);
+    @include vertical-paddings($popover-padding-medium);
+    &--clickable {
+      background-color: lighten($secondary-background-color, 3%);
+      cursor: pointer;
+      &:hover {
+        background-color: lighten($secondary-background-color, 2%);
+      }
+    }
+    &--even {
+      background-color: $tooltip-background-color;
+    }
+  }
+  &__arrow {
+    font-size: $font-size-h1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
 .dashboard-total {
   &__main-block-pie-item-list {
     @include media-breakpoint-landscape-tablet() {
