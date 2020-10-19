@@ -64,8 +64,9 @@ const _VerificationStatus: React.FC<IStatusProps> = ({
         type = CHIP_TYPE.NEGATIVE;
         break;
       default:
-        Icon = OkIcon;
+        Icon = ErrorIcon;
         value = t("profile-page:verification-status.not-verified");
+        type = CHIP_TYPE.NEGATIVE;
     }
   }
 
