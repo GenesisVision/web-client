@@ -91,6 +91,11 @@ const mainMenuItemsUnion = [
     route: OVERVIEW_ROUTE,
     children: [
       {
+        Icon: DashboardIcon,
+        label: "navigation.overview",
+        route: OVERVIEW_ROUTE
+      },
+      {
         Icon: InvestIcon,
         route: INVESTMENTS_ROUTE,
         label: "navigation.investments"
@@ -113,6 +118,7 @@ const mainMenuItemsUnion = [
     label: "navigation.social",
     route: SOCIAL_ROUTE,
     children: [
+      { Icon: SocialIcon, label: "navigation.feed", route: SOCIAL_ROUTE },
       {
         Icon: UsersIcon,
         route: USERS_ROUTE,
