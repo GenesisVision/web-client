@@ -222,7 +222,19 @@ const _FeesGeneral: React.FC = () => {
                   styles["fees-info__note-item--star"]
                 )}
               >
-                {t("fees:list-last-item")}
+                {t("fees:list-last-item-1")}{" "}
+                <Text wrap={false} size={"large"}>
+                  {t("fees:1000-gvt")}
+                </Text>
+                {t("fees:list-last-item-2")}{" "}
+                <Text wrap={false} size={"large"}>
+                  {t("fees:1000-gvt")}
+                </Text>
+                {t("fees:list-last-item-3")}{" "}
+                <Text wrap={false} size={"large"}>
+                  {t("fees:10000-gvt")}
+                </Text>
+                {t("fees:list-last-item-4")}
               </li>
             </ul>
           </div>
@@ -416,14 +428,32 @@ const _FeesGeneral: React.FC = () => {
                 .split("\n")
                 .map((line, index) => (
                   <li key={index} className={styles["fees-info__note-item"]}>
-                    {line}
+                    {line.split("\t").map((subline, index) =>
+                      !index ? (
+                        <Text size={"large"} weight={"bold"}>
+                          {subline}
+                        </Text>
+                      ) : (
+                        <>{subline}</>
+                      )
+                    )}
                   </li>
                 ))}
               <li className={styles["fees-info__note-item"]}>
                 {t("fees:trading-fees-list-last-item")
                   .split("\n")
                   .map((line, index) => (
-                    <div key={index}>{line}</div>
+                    <div key={index}>
+                      {line.split("\t").map(subline =>
+                        subline === t("fees:gv-commission") ? (
+                          <Text size={"large"} weight={"bold"}>
+                            {subline}
+                          </Text>
+                        ) : (
+                          <>{subline}</>
+                        )
+                      )}
+                    </div>
                   ))}
               </li>
             </ul>
