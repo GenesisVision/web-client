@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import Chip, { CHIP_TYPE } from "components/chip/chip";
 import { UserVerificationStatus } from "gv-api-web";
 import * as React from "react";
@@ -47,7 +48,10 @@ const _VerificationStatus: React.FC<IStatusProps & WithTranslation> = ({
   }
 
   return (
-    <Chip type={type} className={styles[`verification verification--${type}`]}>
+    <Chip
+      type={type}
+      className={clsx(styles[`verification`], styles[`verification--${type}`])}
+    >
       {value}
     </Chip>
   );
