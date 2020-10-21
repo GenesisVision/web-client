@@ -42,6 +42,7 @@ const _VerificationStatus: React.FC<IStatusProps & WithTranslation> = ({
         break;
       default:
         value = t("profile-page:verification-status.not-verified");
+        type = CHIP_TYPE.NEGATIVE;
     }
   }
 
