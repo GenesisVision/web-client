@@ -3,6 +3,16 @@ import { NextPageContext } from "next";
 import { cookieServiceCreator } from "utils/cookie-service.creator";
 import { GV_TOKEN_KEY } from "utils/get-token-name";
 
+const LOGGED_KEY = "LOGGED_KEY";
+
+export const {
+  get: getLogged,
+  set: setLogged,
+  clear: clearLogged
+} = cookieServiceCreator({
+  key: LOGGED_KEY
+});
+
 export type TokenDto = {
   exp: number;
 };
@@ -30,6 +40,7 @@ const decodeToken = (token: string): TokenDto | null => {
 };
 
 const storeToken = (token: string): void => {
+  setLogged("true");
   setToken(token);
 };
 

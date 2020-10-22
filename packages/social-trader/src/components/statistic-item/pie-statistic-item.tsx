@@ -9,7 +9,18 @@ import React from "react";
 import NumberFormat from "react-number-format";
 import { getPercentageValue } from "utils/helpers";
 
+interface Props {
+  onClick?: VoidFunction;
+  tooltipContentLabel?: string;
+  color: string;
+  label: string;
+  total: number;
+  value: number;
+  suffix: string;
+}
+
 const _PieStatisticItem: React.FC<Props> = ({
+  onClick,
   tooltipContentLabel,
   total,
   label,
@@ -34,7 +45,7 @@ const _PieStatisticItem: React.FC<Props> = ({
     value
   );
   return (
-    <RowItem size={"xlarge"}>
+    <RowItem onClick={onClick} size={"xlarge"}>
       <Center>
         <RowItem>
           <PieContainer
@@ -54,14 +65,5 @@ const _PieStatisticItem: React.FC<Props> = ({
     </RowItem>
   );
 };
-
-interface Props {
-  tooltipContentLabel?: string;
-  color: string;
-  label: string;
-  total: number;
-  value: number;
-  suffix: string;
-}
 
 export const PieStatisticItem = withLoader(React.memo(_PieStatisticItem));
