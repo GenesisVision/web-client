@@ -40,32 +40,25 @@ export const useSymbolData = () => {
 };
 
 export const getTickerSymbolLoaderData = (): SymbolSummaryData => {
-  return {
+  return ({
     tickerData: {
       baseAsset: "BTC",
       baseAssetPrecision: 0,
       baseCommissionPrecision: 0,
-      filters: [],
-      icebergAllowed: false,
+      iceBergAllowed: false,
       isMarginTradingAllowed: false,
       isSpotTradingAllowed: false,
       ocoAllowed: false,
-      orderTypes: ["LIMIT"],
+      orderTypes: ["Limit"],
       quoteAsset: "USDT",
       quoteCommissionPrecision: 0,
-      quoteOrderQtyMarketAllowed: false,
-      quotePrecision: 0,
-      status: "0",
+      status: "AuctionMatch",
       symbol: "BTCUSDT",
-      eventType: "0",
       eventTime: 0,
-      priceChange: "0",
-      priceChangePercent: "0",
-      weightedAvgPrice: "0",
-      prevClosePrice: "0",
-      lastPrice: "0",
-      lastQty: "0",
-      bestBid: "0",
+      priceChange: 0,
+      priceChangePercent: 0,
+      lastPrice: 0,
+      lastQuantity: 0,
       bestBidQnt: "0",
       bestAsk: "0",
       bestAskQnt: "0",
@@ -74,11 +67,11 @@ export const getTickerSymbolLoaderData = (): SymbolSummaryData => {
       low: "0",
       volume: "0",
       volumeQuote: "0",
-      openTime: 0,
-      closeTime: 0,
+      openTime: new Date(),
+      closeTime: new Date(),
       firstTradeId: 0,
       lastTradeId: 0,
       totalTrades: 0
     }
-  };
+  } as unknown) as SymbolSummaryData;
 };

@@ -1,4 +1,23 @@
 import {
+  BinanceExecutionType,
+  BinanceOrderStatus,
+  BinanceRaw24HPrice,
+  BinanceRawAccountInfo,
+  BinanceRawBinanceBalance,
+  BinanceRawCancelOrder,
+  BinanceRawCancelOrderId,
+  BinanceRawExchangeInfo,
+  BinanceRawKlineInterval,
+  BinanceRawOrder,
+  BinanceRawOrderBook,
+  BinanceRawOrderBookEntry,
+  BinanceRawOrderSide,
+  BinanceRawOrderType,
+  BinanceRawRecentTrade,
+  BinanceRawSymbol,
+  BinanceRawTimeInForce
+} from "gv-api-web";
+import {
   FuturesAccountEventType,
   FuturesAsset
 } from "pages/trade/binance-trade-page/services/futures/binance-futures.types";
@@ -145,41 +164,36 @@ export interface IGVTerminalMethods {
 }
 
 export interface ITerminalMethods extends IGVTerminalMethods {
-  getServerTime: () => Promise<{ serverTime: number }>;
+  getServerTime: () => Promise<{ date: number }>;
   getKlines: (params: KlineParams) => Promise<Bar[]>;
   getExchangeInfo: () => Promise<ExchangeInfo>;
   getOpenOrders: (
     symbol: string,
-    authData: TerminalAuthDataType
-  ) => Observable<QueryOrderResult[]>;
+    accountId?: string
+  ) => Observable<UnitedOrder[]>;
   getAllOrders: (
     symbol: string,
-    authData: TerminalAuthDataType
-  ) => Observable<QueryOrderResult[]>;
-  getUserStreamKey: (
-    authData: TerminalAuthDataType
-  ) => Observable<{ listenKey: string }>;
-  getAccountInformation: (
-    authData: TerminalAuthDataType
-  ) => Observable<Account>;
-  getTrades: (symbol: string, limit?: number) => Observable<Trade[]>;
+    accountId?: string
+  ) => Observable<UnitedOrder[]>;
+  getUserStreamKey: (accountId?: string) => Observable<{ listenKey: string }>;
+  getAccountInformation: (accountId?: string) => Observable<Account>;
+  getTrades: (symbol: string, limit?: number) => Observable<UnitedTrade[]>;
   getTickers: (symbol?: string) => Observable<Ticker[]>;
-  getDepth: (symbol: string, limit?: number) => Observable<Depth>;
+  getDepth: (symbol: string, limit?: number) => Observable<CorrectedRestDepth>;
   cancelAllOrders: (
     options: { symbol: string; useServerTime?: boolean },
-    authData: TerminalAuthDataType
-  ) => Promise<CancelOrderResult>;
+    accountId?: string
+  ) => Promise<BinanceRawCancelOrderId[]>;
   cancelOrder: (
     options: { symbol: string; orderId: string; useServerTime?: boolean },
-    authData: TerminalAuthDataType
-  ) => Promise<CancelOrderResult>;
+    accountId?: string
+  ) => Promise<BinanceRawCancelOrder>;
   tradeRequest: ({
     side,
     ...options
-  }: TradeRequest & {
-    authData: TerminalAuthDataType;
-    side: OrderSide;
-  }) => Promise<QueryOrderResult>;
+  }: TradeRequest & { accountId?: string; side: OrderSide }) => Promise<
+    QueryOrderResult
+  >;
 
   // Futures
 
@@ -227,7 +241,7 @@ export interface ITerminalMethods extends IGVTerminalMethods {
   tradeSocket: (
     connectSocketMethod: ConnectSocketMethodType,
     symbol: TerminalCurrency
-  ) => Observable<Trade>;
+  ) => Observable<UnitedTrade>;
   depthSocket: (
     connectSocketMethod: ConnectSocketMethodType,
     symbol: TerminalCurrency
@@ -442,7 +456,8 @@ export interface IChartData {
 
 export type TerminalCurrency = string;
 
-export type MergedTickerSymbolType = Ticker & Symbol;
+export type MergedTickerSymbolType = StreamTicker &
+  Symbol & { isFavorite?: boolean };
 
 export enum ErrorCodes {
   UNKNOWN = -1000,
@@ -487,18 +502,7 @@ export enum ErrorCodes {
   REJECTED_MBX_KEY = -2015
 }
 
-export interface Account {
-  positions?: FuturesPosition[];
-  balances: AssetBalance[];
-  buyerCommission: number;
-  canDeposit: boolean;
-  canTrade: boolean;
-  canWithdraw: boolean;
-  makerCommission: number;
-  sellerCommission: number;
-  takerCommission: number;
-  updateTime: number;
-}
+export type Account = BinanceRawAccountInfo;
 
 export interface TradeFee {
   symbol: string;
@@ -523,11 +527,8 @@ export interface AggregatedTrade {
   wasBestPrice: boolean;
 }
 
-export interface AssetBalance {
+export interface AssetBalance extends BinanceRawBinanceBalance {
   futuresAsset?: FuturesAsset;
-  asset: string;
-  free: string;
-  locked: string;
 }
 
 export interface DepositAddress {
@@ -597,112 +598,6 @@ export interface AssetDetail {
   };
 }
 
-export interface Binance {
-  accountInfo(options?: { useServerTime: boolean }): Promise<Account>;
-
-  tradeFee(): Promise<TradeFeeResult>;
-
-  aggTrades(options?: {
-    symbol: string;
-    fromId?: string;
-    startTime?: number;
-    endTime?: number;
-    limit?: number;
-  }): Promise<AggregatedTrade[]>;
-
-  allBookTickers(): Promise<{ [key: string]: Ticker }>;
-
-  book(options: { symbol: string; limit?: number }): Promise<OrderBook>;
-
-  exchangeInfo(): Promise<ExchangeInfo>;
-
-  order(options: NewOrder): Promise<Order>;
-
-  orderTest(options: NewOrder): Promise<Order>;
-
-  orderOco(options: NewOcoOrder): Promise<OcoOrder>;
-
-  ping(): Promise<boolean>;
-
-  prices(): Promise<{ [index: string]: string }>;
-
-  avgPrice(options?: {
-    symbol: string;
-  }): Promise<AvgPriceResult | AvgPriceResult[]>;
-
-  time(): Promise<number>;
-
-  trades(options: { symbol: string; limit?: number }): Promise<TradeResult[]>;
-
-  ws: WebSocket;
-
-  myTrades(options: {
-    symbol: string;
-    limit?: number;
-    fromId?: number;
-    useServerTime?: boolean;
-  }): Promise<MyTrade[]>;
-
-  getOrder(options: {
-    symbol: string;
-    orderId: number;
-    useServerTime?: boolean;
-  }): Promise<QueryOrderResult>;
-
-  cancelOrder(options: {
-    symbol: string;
-    orderId: number;
-    useServerTime?: boolean;
-  }): Promise<CancelOrderResult>;
-
-  openOrders(options: {
-    symbol?: string;
-    useServerTime?: boolean;
-  }): Promise<QueryOrderResult[]>;
-
-  allOrders(options: {
-    symbol?: string;
-    useServerTime?: boolean;
-  }): Promise<QueryOrderResult[]>;
-
-  dailyStats(options?: {
-    symbol: string;
-  }): Promise<DailyStatsResult | DailyStatsResult[]>;
-
-  candles(options: CandlesOptions): Promise<CandleChartResult[]>;
-
-  tradesHistory(options: {
-    symbol: string;
-    limit?: number;
-    fromId?: number;
-  }): Promise<Trade[]>;
-
-  depositAddress(options: { asset: string }): Promise<DepositAddress>;
-
-  withdraw(options: {
-    asset: string;
-    address: string;
-    amount: number;
-    name?: string;
-  }): Promise<WithdrawResponse>;
-
-  assetDetail(): Promise<AssetDetail>;
-
-  withdrawHistory(options: {
-    asset: string;
-    status?: number;
-    startTime?: number;
-    endTime?: number;
-  }): Promise<WithdrawHistoryResponse>;
-
-  depositHistory(options: {
-    asset: string;
-    status?: number;
-    startTime?: number;
-    endTime?: number;
-  }): Promise<DepositHistoryResponse>;
-}
-
 export interface ChangeLeverageResponse {
   leverage: number;
   maxNotionalValue: string;
@@ -717,45 +612,6 @@ export interface HttpResponse {
 export interface HttpError extends Error {
   code: number;
   url: string;
-}
-
-export interface WebSocket {
-  depth: (
-    pair: string | string[],
-    callback: (depth: Depth) => void
-  ) => ReconnectingWebSocketHandler;
-  partialDepth: (
-    options:
-      | { symbol: string; level: number }
-      | { symbol: string; level: number }[],
-    callback: (depth: PartialDepth) => void
-  ) => ReconnectingWebSocketHandler;
-  ticker: (
-    pair: string | string[],
-    callback: (ticker: Ticker) => void
-  ) => ReconnectingWebSocketHandler;
-  allTickers: (
-    callback: (tickers: Ticker[]) => void
-  ) => ReconnectingWebSocketHandler;
-  candles: (
-    pair: string | string[],
-    period: string,
-    callback: (ticker: Candle) => void
-  ) => ReconnectingWebSocketHandler;
-  trades: (
-    pairs: string | string[],
-    callback: (trade: Trade) => void
-  ) => ReconnectingWebSocketHandler;
-  aggTrades: (
-    pairs: string | string[],
-    callback: (trade: Trade) => void
-  ) => ReconnectingWebSocketHandler;
-  user: (
-    callback: (msg: OutboundAccountInfo | ExecutionReport) => void
-  ) => Function;
-  marginUser: (
-    callback: (msg: OutboundAccountInfo | ExecutionReport) => void
-  ) => Function;
 }
 
 export type ReconnectingWebSocketHandler = (options?: {
@@ -856,36 +712,13 @@ export type SymbolFilter =
   | SymbolMaxNumOrdersFilter
   | SymbolMaxAlgoOrdersFilter;
 
-export interface Symbol {
-  isFavorite?: boolean;
-  baseAsset: string;
-  baseAssetPrecision: number;
-  baseCommissionPrecision: number;
-  filters: SymbolFilter[];
-  icebergAllowed: boolean;
-  isMarginTradingAllowed: boolean;
-  isSpotTradingAllowed: boolean;
-  ocoAllowed: boolean;
-  orderTypes: OrderType[];
-  quoteAsset: string;
-  quoteCommissionPrecision: number;
-  quoteOrderQtyMarketAllowed: boolean;
-  quotePrecision: number;
-  status: string;
-  symbol: string;
-}
+export type Symbol = BinanceRawSymbol;
 
-export interface ExchangeInfo {
-  timezone: string;
-  serverTime: number;
-  rateLimits: ExchangeInfoRateLimit[];
-  exchangeFilters: ExchangeFilter[];
-  symbols: Symbol[];
-}
+export type ExchangeInfo = BinanceRawExchangeInfo;
 
 export interface KlineParams {
   symbol: string;
-  interval: string;
+  interval: BinanceRawKlineInterval;
   startTime: number;
   endTime: number;
   limit: number;
@@ -968,7 +801,7 @@ export interface OcoOrder {
   orderReports: Order[];
 }
 
-export type OrderSide = "BUY" | "SELL";
+export type OrderSide = BinanceRawOrderSide;
 
 export type OrderStatus =
   | "CANCELED"
@@ -979,14 +812,7 @@ export type OrderStatus =
   | "PENDING_CANCEL"
   | "REJECTED";
 
-export type OrderType =
-  | "LIMIT"
-  | "LIMIT_MAKER"
-  | "MARKET"
-  | "STOP_LOSS"
-  | "STOP_LOSS_LIMIT"
-  | "TAKE_PROFIT"
-  | "TAKE_PROFIT_LIMIT";
+export type OrderType = BinanceRawOrderType;
 
 export type ListOrderStatus = "EXECUTING" | "ALL_DONE" | "REJECT";
 
@@ -996,7 +822,7 @@ export type ContingencyType = "OCO";
 
 export type NewOrderRespType = "ACK" | "RESULT" | "FULL";
 
-export type TimeInForce = "GTX" | "GTC" | "IOC" | "FOK";
+export type TimeInForce = BinanceRawTimeInForce;
 
 export type ExecutionType =
   | "NEW"
@@ -1011,8 +837,8 @@ export type EventType =
   | FuturesAccountEventType;
 
 export interface DepthMain {
-  eventType: string;
-  eventTime: number;
+  eventType?: string;
+  eventTime?: number;
   symbol: string;
   firstUpdateId: number;
   lastUpdateId: number;
@@ -1026,10 +852,16 @@ export interface NormalizedDepth extends DepthMain {
   asks: NormalizedDepthList;
 }
 
-export interface Depth extends DepthMain {
-  bids: StringBidDepth[];
-  asks: StringBidDepth[];
-}
+export type RestDepth = BinanceRawOrderBook;
+export type CorrectedRestDepth = {
+  symbol: string;
+  lastUpdateId: number;
+  firstUpdateId: number;
+  bids: Array<StringBidDepth>;
+  asks: Array<StringBidDepth>;
+};
+
+export type Depth = CorrectedRestDepth & DepthMain;
 
 export type StringBidDepth = Array<string>;
 
@@ -1050,57 +882,8 @@ export interface Bid {
   quantity: string;
 }
 
-export interface TickerWS {
-  e: string;
-  E: number;
-  s: string;
-  p: string;
-  P: string;
-  w: string;
-  x: string;
-  c: string;
-  Q: string;
-  b: string;
-  B: string;
-  a: string;
-  A: string;
-  o: string;
-  h: string;
-  l: string;
-  v: string;
-  q: string;
-  O: number;
-  C: number;
-  F: number;
-  L: number;
-  n: number;
-}
-
-export interface Ticker {
-  eventType: string;
-  eventTime: number;
-  symbol: string;
-  priceChange: string;
-  priceChangePercent: string;
-  weightedAvgPrice: string;
-  prevClosePrice: string;
-  lastPrice: string;
-  lastQty: string;
-  bestBid: string;
-  bestBidQnt: string;
-  bestAsk: string;
-  bestAskQnt: string;
-  open: string;
-  high: string;
-  low: string;
-  volume: string;
-  volumeQuote: string;
-  openTime: number;
-  closeTime: number;
-  firstTradeId: number;
-  lastTradeId: number;
-  totalTrades: number;
-}
+export type Ticker = BinanceRaw24HPrice;
+export type StreamTicker = Ticker & { eventTime?: number };
 
 export interface Candle {
   eventType: string;
@@ -1190,14 +973,14 @@ export interface TradeResult {
   isBestMatch?: boolean;
 }
 
-export interface Trade extends TradeResult {
-  buyerOrderId: string;
-  sellerOrderId: string;
-  eventType: string;
-  eventTime: number;
-  symbol: string;
-  maker: boolean;
-}
+export type Trade = BinanceRawRecentTrade;
+
+export type UnitedTrade = {
+  quantity: number;
+  price: number;
+  orderId: number;
+  tradeTime: Date;
+};
 
 export interface MyTrade {
   id: number;
@@ -1214,26 +997,21 @@ export interface MyTrade {
   isBestMatch: boolean;
 }
 
-export interface QueryOrderResult {
-  origQuoteOrderQty: string;
-  orderListId: number;
-  clientOrderId: string;
-  cummulativeQuoteQty: string;
-  executedQty: string;
-  icebergQty: string;
-  isWorking: boolean;
-  orderId: number;
-  origQty: string;
-  price: string;
-  side: OrderSide;
-  status: OrderStatus;
-  stopPrice: string;
+export type QueryOrderResult = BinanceRawOrder;
+
+export type UnitedOrder = {
+  executionType?: BinanceExecutionType;
+  orderStatus?: BinanceOrderStatus;
+  eventType?: EventType;
+  executedQuantity: number;
+  id: number;
+  time: number | Date;
   symbol: string;
-  time: number;
-  timeInForce: TimeInForce;
-  type: OrderType;
-  updateTime: number;
-}
+  type: string;
+  side: OrderSide;
+  price: number;
+  quantity: number;
+};
 
 export interface CancelOrderResult {
   symbol: string;

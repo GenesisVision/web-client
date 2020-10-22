@@ -54,9 +54,9 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
       quoteAsset,
       priceChangePercent,
       priceChange,
-      high,
-      low,
-      volume
+      highPrice,
+      lowPrice,
+      baseVolume
     }
   }
 }) => {
@@ -168,21 +168,25 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
       <RowItem>
         <BlurableLabeledValue
           size={"xsmall"}
-          isPending={!high}
+          isPending={!highPrice}
           label={"24 High"}
         >
           <Text size={"xsmall"}>
             <MonoText>
-              {terminalMoneyFormat({ amount: high, tickSize })}
+              {terminalMoneyFormat({ amount: highPrice, tickSize })}
             </MonoText>
           </Text>
         </BlurableLabeledValue>
       </RowItem>
       <RowItem>
-        <BlurableLabeledValue size={"xsmall"} isPending={!low} label={"24 Low"}>
+        <BlurableLabeledValue
+          size={"xsmall"}
+          isPending={!lowPrice}
+          label={"24 Low"}
+        >
           <Text size={"xsmall"}>
             <MonoText>
-              {terminalMoneyFormat({ amount: low, tickSize })}
+              {terminalMoneyFormat({ amount: lowPrice, tickSize })}
             </MonoText>
           </Text>
         </BlurableLabeledValue>
@@ -191,7 +195,7 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
         <LabeledValue size={"xsmall"} label={"24 Volume"}>
           <Text size={"xsmall"}>
             <MonoText>
-              {terminalMoneyFormat({ amount: volume, tickSize: stepSize })}{" "}
+              {terminalMoneyFormat({ amount: baseVolume, tickSize: stepSize })}{" "}
               {quoteAsset}
             </MonoText>
           </Text>

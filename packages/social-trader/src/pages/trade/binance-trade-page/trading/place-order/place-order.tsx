@@ -18,7 +18,7 @@ import {
   OrderType
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { TradingPriceContext } from "pages/trade/binance-trade-page/trading/trading-price.context";
-import React, { useCallback, useContext, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 
 import { LimitTradeForm } from "./limit-trade-form";
 import { MarketTradeForm } from "./market-trade-form";
@@ -32,17 +32,18 @@ import styles from "./place-order.module.scss";
 const _PlaceOrder: React.FC = () => {
   const { tradeRequest } = useContext(TerminalMethodsContext);
   const { price } = useContext(TradingPriceContext);
+  const [innerPrice, setInnerPrice] = useState(0);
 
   const {
     terminalType,
-    authData,
+    exchangeAccountId,
     exchangeInfo,
     accountInfo,
     symbol: { baseAsset, quoteAsset }
   } = useContext(TerminalInfoContext);
 
-  const [side, setSide] = useState<OrderSide>("BUY");
-  const { tab, setTab } = useTab<OrderType>("LIMIT");
+  const [side, setSide] = useState<OrderSide>("Buy");
+  const { tab, setTab } = useTab<OrderType>("Limit");
 
   const { sendRequest, status } = useApiRequest({
     request: tradeRequest
@@ -52,17 +53,25 @@ const _PlaceOrder: React.FC = () => {
     (values: IPlaceOrderFormValues) => {
       return sendRequest({
         ...values,
+        accountId: exchangeAccountId,
         side,
         type: tab,
-        symbol: getSymbol(baseAsset, quoteAsset),
-        authData
+        symbol: getSymbol(baseAsset, quoteAsset)
       });
     },
-    [sendRequest, tradeRequest, authData, baseAsset, quoteAsset, side, tab]
+    [
+      exchangeAccountId,
+      sendRequest,
+      tradeRequest,
+      baseAsset,
+      quoteAsset,
+      side,
+      tab
+    ]
   );
 
   const walletAsset =
-    side === "BUY" || terminalType === "futures" ? quoteAsset : baseAsset;
+    side === "Buy" || terminalType === "futures" ? quoteAsset : baseAsset;
   const balance = accountInfo
     ? getBalance(accountInfo.balances, walletAsset)
     : 0;
@@ -70,31 +79,35 @@ const _PlaceOrder: React.FC = () => {
     ? accountInfo.balances
     : getBalancesLoaderData(quoteAsset);
 
+  useEffect(() => {
+    if (price! && !innerPrice) setInnerPrice(+price);
+  }, [price]);
+
   return (
     <TerminalDefaultBlock>
       <Row>
         <DoubleButton
           size={"small"}
           first={{
-            selected: side === "BUY",
-            enable: side !== "BUY",
-            handleClick: () => setSide("BUY"),
+            selected: side === "Buy",
+            enable: side !== "Buy",
+            handleClick: () => setSide("Buy"),
             label: "BUY"
           }}
           second={{
             color: "danger",
-            selected: side === "SELL",
-            enable: side !== "SELL",
-            handleClick: () => setSide("SELL"),
+            selected: side === "Sell",
+            enable: side !== "Sell",
+            handleClick: () => setSide("Sell"),
             label: "SELL"
           }}
         />
       </Row>
       <Row>
         <GVTabs value={tab} onChange={setTab}>
-          <GVTab value={"LIMIT"} label={"LIMIT"} />
+          <GVTab value={"Limit"} label={"LIMIT"} />
           <GVTab value={"MARKET"} label={"MARKET"} />
-          <GVTab value={"STOP_LOSS_LIMIT"} label={"STOP LIMIT"} />
+          <GVTab value={"StopLossLimit"} label={"STOP LIMIT"} />
         </GVTabs>
       </Row>
       <Row>
@@ -111,32 +124,32 @@ const _PlaceOrder: React.FC = () => {
       </Row>
       {exchangeInfo && (
         <Row>
-          {tab === "LIMIT" && (
+          {tab === "Limit" && (
             <LimitTradeForm
               status={status}
               exchangeInfo={exchangeInfo}
               balances={balances}
-              outerPrice={+price}
+              outerPrice={innerPrice}
               onSubmit={handleSubmit}
               side={side}
             />
           )}
-          {tab === "MARKET" && (
+          {tab === "Market" && (
             <MarketTradeForm
               status={status}
               exchangeInfo={exchangeInfo}
               balances={balances}
-              outerPrice={+price}
+              outerPrice={innerPrice}
               onSubmit={handleSubmit}
               side={side}
             />
           )}
-          {tab === "STOP_LOSS_LIMIT" && (
+          {tab === "StopLossLimit" && (
             <StopLimitTradeForm
               status={status}
               exchangeInfo={exchangeInfo}
               balances={balances}
-              outerPrice={+price}
+              outerPrice={innerPrice}
               onSubmit={handleSubmit}
               side={side}
             />

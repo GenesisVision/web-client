@@ -2,6 +2,13 @@ import { GVTerminalMethods } from "pages/trade/binance-trade-page/services/gv/gv
 import { ITerminalMethods } from "pages/trade/binance-trade-page/trading/terminal.types";
 
 import {
+  depthSocket,
+  getUserStreamSocket,
+  klineSocket,
+  marketTicketsSocket,
+  tradeSocket
+} from "../spot/binance-spot-ws.service";
+import {
   cancelAllOrders,
   cancelOrder,
   getAccountInformation,
@@ -15,16 +22,9 @@ import {
   getTrades,
   getUserStreamKey,
   tradeRequest
-} from "./binance-spot-http.service";
-import {
-  depthSocket,
-  getUserStreamSocket,
-  klineSocket,
-  marketTicketsSocket,
-  tradeSocket
-} from "./binance-spot-ws.service";
+} from "./gv-spot-http.service";
 
-export const BinanceSpotTerminalMethods: ITerminalMethods = ({
+export const GVSpotTerminalMethods: ITerminalMethods = {
   ...GVTerminalMethods,
   getExchangeInfo,
   getOpenOrders,
@@ -34,14 +34,14 @@ export const BinanceSpotTerminalMethods: ITerminalMethods = ({
   getTrades,
   getKlines,
   getServerTime,
-  klineSocket,
   getTickers,
   getDepth,
   cancelAllOrders,
   cancelOrder,
   tradeRequest,
+  klineSocket,
   tradeSocket,
   depthSocket,
   marketTicketsSocket,
   getUserStreamSocket
-} as unknown) as ITerminalMethods;
+};

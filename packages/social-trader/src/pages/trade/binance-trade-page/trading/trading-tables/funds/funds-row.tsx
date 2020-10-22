@@ -10,8 +10,8 @@ import React, { useContext } from "react";
 
 interface Props {
   asset: string;
-  available: string;
-  locked: string;
+  available: number;
+  locked: number;
 }
 
 const _FundsFRow: React.FC<Props> = ({ asset, available, locked }) => {
