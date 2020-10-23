@@ -57,11 +57,11 @@ export const TerminalOpenOrdersContextProvider: React.FC = ({ children }) => {
     if (!socketData) return;
     const updatedList = { ...list };
     if (
-      socketData.orderStatus === "Expired" ||
-      socketData.orderStatus === "Filled" ||
-      socketData.orderStatus === "Canceled" ||
-      socketData.executionType === "Canceled" ||
-      socketData.executionType === "Expired"
+      socketData.orderStatus?.toLowerCase() === "expired" ||
+      socketData.orderStatus?.toLowerCase() === "filled" ||
+      socketData.orderStatus?.toLowerCase() === "canceled" ||
+      socketData.executionType?.toLowerCase() === "canceled" ||
+      socketData.executionType?.toLowerCase() === "expired"
     )
       delete updatedList[socketData.id];
     else
