@@ -4,6 +4,8 @@ import React from "react";
 
 const filterChunkedScripts = props => !!props?.src?.includes("chunk");
 
+const TIMEOUT = process.env.LOAD_TIMEOUT || 1800;
+
 class NextScriptCustom extends NextScript {
   render() {
     const orgNextScripts = compact(flatten(super.render().props.children));
@@ -57,7 +59,7 @@ class NextScriptCustom extends NextScript {
             console.log(err);
           }
         });
-      }, 1800);
+      }, ${TIMEOUT});
     `;
 
     return (
