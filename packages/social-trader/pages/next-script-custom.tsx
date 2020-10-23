@@ -2,13 +2,15 @@ import { compact, flatten } from "lodash";
 import { NextScript } from "next/document";
 import React from "react";
 
-const filterChunkedScripts = props => !!props?.src?.includes("chunk");
+const filterChunkedScripts = (props: any) => !!props?.src?.includes("chunk");
 
 const TIMEOUT = process.env.LOAD_TIMEOUT || 1800;
 
 class NextScriptCustom extends NextScript {
   render() {
-    const orgNextScripts = compact(flatten(super.render().props.children));
+    const orgNextScripts = compact(
+      flatten(super.render()!.props.children)
+    ) as any[];
 
     const scripts = compact(
       orgNextScripts.map(child => {
