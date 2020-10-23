@@ -7,13 +7,13 @@ import {
   inTextComponentsMap,
   parseToTsx
 } from "components/conversation/tag/parse-to-tsx";
-import { $fontSizeParagraph } from "components/gv-styles/gv-sizes";
 import { Row } from "components/row/row";
 import { PostTag } from "gv-api-web";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { getLongWordsCount } from "utils/helpers";
-import { fontSize, lineHeight } from "utils/style/style-mixins";
+import { fontSize } from "utils/style/mixins";
+import { $fontSizeParagraph } from "utils/style/sizes";
 
 interface Props {
   reduceLargeText?: boolean;

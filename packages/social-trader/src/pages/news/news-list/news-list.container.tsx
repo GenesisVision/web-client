@@ -4,7 +4,7 @@ import {
   TAKE_COUNT
 } from "components/notifications/components/notifications.helpers";
 import { MediaPostItemsViewModel } from "gv-api-web";
-import useApiRequest, { API_REQUEST_STATUS } from "hooks/api-request.hook";
+import useApiRequest from "hooks/api-request.hook";
 import useIsOpen from "hooks/is-open.hook";
 import { NewsList } from "pages/news/news-list/news-list";
 import React, { useCallback, useEffect, useState } from "react";
@@ -45,14 +45,13 @@ const _NewsListContainer: React.FC<INewsListContainerProps> = ({
   });
   const hasMore = data ? data.total > options.skip : false;
   const [canLoadMore, setCanLoadMore] = useState(
-    hasMore && status !== API_REQUEST_STATUS.PENDING
+    hasMore && status !== "PENDING"
   );
 
   useEffect(() => {
     const changeCanLoadMoreFunc = () =>
-      setCanLoadMore(hasMore && status !== API_REQUEST_STATUS.PENDING);
-    if (status === API_REQUEST_STATUS.SUCCESS)
-      postponeFunc(changeCanLoadMoreFunc);
+      setCanLoadMore(hasMore && status !== "PENDING");
+    if (status === "SUCCESS") postponeFunc(changeCanLoadMoreFunc);
     else changeCanLoadMoreFunc();
   }, [hasMore, status]);
 

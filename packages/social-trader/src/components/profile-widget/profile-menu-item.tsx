@@ -1,12 +1,12 @@
 import { Button } from "components/button/button";
 import { Center } from "components/center/center";
-import { $textLightColor } from "components/gv-styles/gv-colors/gv-colors";
-import { $fontSizeCommon } from "components/gv-styles/gv-sizes";
 import Link, { ToType } from "components/link/link";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import * as React from "react";
 import styled from "styled-components";
+import { $textLightColor } from "utils/style/colors";
+import { $fontSizeCommon } from "utils/style/sizes";
 import { Clickable } from "utils/types";
 
 interface IProfileMenuItemProps extends Clickable {

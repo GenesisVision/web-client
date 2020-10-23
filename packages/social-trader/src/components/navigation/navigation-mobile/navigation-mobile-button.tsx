@@ -1,6 +1,3 @@
-import { mediaBreakpointLandscapeTablet } from "components/gv-styles/gv-media";
-import { $paddingMedium, $walletItemSize } from "components/gv-styles/gv-sizes";
-import { $boxShadow4 } from "components/gv-styles/gv-style-constants";
 import { MenuIcon } from "components/icon/menu-icon";
 import NavigationMobileContainer from "components/navigation/navigation-mobile/navigation-mobile.container";
 import { ProfileHeaderViewModel } from "gv-api-web";
@@ -11,7 +8,10 @@ import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { TMenuItem } from "routes/menu";
 import styled from "styled-components";
-import { adaptiveMargin } from "utils/style/style-mixins";
+import { mediaBreakpointLandscapeTablet } from "utils/style/media";
+import { adaptiveMargin } from "utils/style/mixins";
+import { $boxShadow4 } from "utils/style/shadow";
+import { $paddingMedium, $walletItemSize } from "utils/style/sizes";
 
 interface Props {
   mobileMenuItems: TMenuItem[];

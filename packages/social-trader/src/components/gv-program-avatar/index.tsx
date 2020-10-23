@@ -6,14 +6,19 @@ import {
   GVProgramAvatarProps,
   GVProgramAvatarStyles
 } from "components/gv-program-avatar/gv-program-avatar.styles";
-import GVColors from "components/gv-styles/gv-colors";
 import PieContainer from "components/pie-container/pie-container";
 import React from "react";
 import styled from "styled-components";
 import {
-  adaptiveBorderRadius,
-  adaptivePadding
-} from "utils/style/style-mixins";
+  $levelColor1,
+  $levelColor2,
+  $levelColor3,
+  $levelColor4,
+  $levelColor5,
+  $levelColor6,
+  $levelColor7
+} from "utils/style/colors";
+import { adaptiveBorderRadius, adaptivePadding } from "utils/style/mixins";
 import { SizesType } from "utils/types";
 
 import GVProgramDefaultAvatar from "./gv-propgram-default-avatar";
@@ -22,6 +27,28 @@ interface IContainerProps {
   level?: number;
   size?: SizesType | "full";
 }
+
+const getLevelColor = (level?: string | number) => {
+  switch (level) {
+    case "1":
+      return $levelColor1;
+    case "2":
+      return $levelColor2;
+    case "3":
+      return $levelColor3;
+    case "4":
+      return $levelColor4;
+    case "5":
+      return $levelColor5;
+    case "6":
+      return $levelColor6;
+    case "7":
+      return $levelColor7;
+    case undefined:
+    default:
+      return "";
+  }
+};
 
 const Container = styled.div<IContainerProps>`
   ${({ level, size = "small" }: IContainerProps) =>
@@ -76,7 +103,7 @@ const _GVProgramAvatar: React.FC<GVProgramAvatarProps> = ({
           >
             <PieContainer
               small
-              color={(GVColors as any)[`$levelColor${level}`]}
+              color={getLevelColor(level)}
               label={String(level)}
               value={levelProgress}
             />

@@ -3,7 +3,6 @@ import { RowItem } from "components/row-item/row-item";
 import * as React from "react";
 
 import GVProgramPeriod from "../gv-program-period";
-import styles from "./pie-container.module.scss";
 
 export interface IPieContainer {
   end: number;

@@ -1,16 +1,14 @@
 import { Center } from "components/center/center";
-import {
-  $mainColor,
-  $panelBackgroundColor
-} from "components/gv-styles/gv-colors/gv-colors";
-import { $fontSizeSmall, $paddingSmall } from "components/gv-styles/gv-sizes";
 import { LabeledValue } from "components/labeled-value/labeled-value";
 import { RowItem } from "components/row-item/row-item";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import withLoader from "decorators/with-loader";
 import * as React from "react";
 import styled from "styled-components";
-import { fontSize } from "utils/style/style-mixins";
+import { $mainColor, $panelBackgroundColor } from "utils/style/colors";
+import { getHEXA } from "utils/style/generators";
+import { fontSize } from "utils/style/mixins";
+import { $fontSizeSmall, $paddingSmall } from "utils/style/sizes";
 
 interface Props {
   label: string;
@@ -28,7 +26,7 @@ const Value = styled.div`
   ${fontSize(15)};
   display: inline-block;
   padding: 6px 22px;
-  background-color: ${$panelBackgroundColor}a1;
+  background-color: ${getHEXA($panelBackgroundColor, 0.63)};
   border-radius: 4px;
   color: ${$mainColor};
 `;

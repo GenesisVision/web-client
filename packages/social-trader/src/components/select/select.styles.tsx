@@ -1,16 +1,12 @@
-import {
-  $mainColor,
-  $textColor,
-  $textDarkColor
-} from "components/gv-styles/gv-colors/gv-colors";
+import { RowItem } from "components/row-item/row-item";
+import styled from "styled-components";
+import { $mainColor, $textColor, $textDarkColor } from "utils/style/colors";
+import { fontSize, height } from "utils/style/mixins";
 import {
   $fontSizeH4,
   $fontSizeSmall,
   $fontSizeXsmall
-} from "components/gv-styles/gv-sizes";
-import { RowItem } from "components/row-item/row-item";
-import styled from "styled-components";
-import { fontSize, height } from "utils/style/style-mixins";
+} from "utils/style/sizes";
 import { SizesType } from "utils/types";
 
 export const SelectValue = styled.button<{

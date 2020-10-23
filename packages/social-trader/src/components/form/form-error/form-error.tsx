@@ -1,8 +1,8 @@
-import { $negativeColor } from "components/gv-styles/gv-colors/gv-colors";
-import { $fontSizeH4, $fontSizeSmall } from "components/gv-styles/gv-sizes";
 import * as React from "react";
 import styled from "styled-components";
-import { fontSize } from "utils/style/style-mixins";
+import { $negativeColor } from "utils/style/colors";
+import { fontSize } from "utils/style/mixins";
+import { $fontSizeH4, $fontSizeSmall } from "utils/style/sizes";
 
 export interface IFormErrorProps {
   small?: boolean;

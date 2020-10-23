@@ -1,7 +1,5 @@
 import { Button } from "components/button/button";
 import { Center } from "components/center/center";
-import { mediaBreakpointLandscapePhone } from "components/gv-styles/gv-media";
-import { $paddingSmall } from "components/gv-styles/gv-sizes";
 import { CloseIcon } from "components/icon/close-icon";
 import { useToLink } from "components/link/link.helper";
 import { KYC_ROUTE } from "components/profile/profile.constants";
@@ -32,7 +30,9 @@ import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import styled from "styled-components";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
-import { adaptiveMargin } from "utils/style/style-mixins";
+import { mediaBreakpointLandscapePhone } from "utils/style/media";
+import { adaptiveMargin } from "utils/style/mixins";
+import { $paddingSmall } from "utils/style/sizes";
 
 import CalculatorLevelLine from "../components/calculator-level-line/calculator-level-line";
 import CalculatorOutput from "../components/calculator-output/calculator-output";

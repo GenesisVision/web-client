@@ -1,9 +1,6 @@
-import {
-  $iconColor,
-  $labelColor
-} from "components/gv-styles/gv-colors/gv-colors";
 import * as React from "react";
 import styled from "styled-components";
+import { $iconColor, $labelColor } from "utils/style/colors";
 import { OptionalClickable } from "utils/types";
 
 interface Props extends OptionalClickable {

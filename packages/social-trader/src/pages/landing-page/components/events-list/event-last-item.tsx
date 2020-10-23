@@ -1,53 +1,47 @@
-import clsx from "clsx";
-import ImageBaseElement from "components/avatar/image-base.element";
 import { useTranslation } from "i18n";
+import {
+  EventItemAdaptiveElem,
+  EventItemAvatarContainer,
+  EventItemButton,
+  EventItemImage,
+  EventItemInfo,
+  EventItemLi,
+  EventItemTitle
+} from "pages/landing-page/components/events-list/events-list.styles";
 import { JoinButton } from "pages/landing-page/components/join-button";
 import LogoIcon from "pages/landing-page/images/logos/logo.svg";
 import React from "react";
 import { INVEST_ROUTE } from "routes/invest.routes";
 
-import styles from "./events-list.module.scss";
+interface Props {
+  minHeight: number;
+}
 
 const _EventLastItem: React.FC<Props> = ({ minHeight }) => {
   const { t } = useTranslation();
   return (
-    <li
-      className={clsx(
-        styles["events-list__item"],
-        styles["events-list__item--last"]
-      )}
-      style={{
-        minHeight: `${minHeight}px`
-      }}
-    >
-      <div className={styles["events-list__item-avatar"]}>
-        <ImageBaseElement
-          className={styles["events-list__item-image"]}
-          src={LogoIcon}
-          alt="Genesis Vision"
-        />
-      </div>
-      <div className={styles["events-list__item-info"]}>
-        <div className={styles["events-list__item-title"]}>Genesis Vision</div>
-      </div>
-      <div className={styles["events-list__item-button"]}>
+    <EventItemLi last minHeight={minHeight}>
+      <EventItemAvatarContainer last>
+        <EventItemImage last src={LogoIcon} alt="Genesis Vision" />
+      </EventItemAvatarContainer>
+      <EventItemInfo>
+        <EventItemTitle>Genesis Vision</EventItemTitle>
+      </EventItemInfo>
+      <EventItemButton>
         <JoinButton href={INVEST_ROUTE}>
           <>
-            <span className={styles["events-list__only-mob"]}>
+            <EventItemAdaptiveElem mobile>
               {t("landing-page:buttons.join")}
-            </span>
-            <span className={styles["events-list__only-desktop"]}>
+            </EventItemAdaptiveElem>
+            <EventItemAdaptiveElem desktop>
               {t("landing-page:buttons.discover")}
-            </span>
+            </EventItemAdaptiveElem>
           </>
         </JoinButton>
-      </div>
-    </li>
+      </EventItemButton>
+    </EventItemLi>
   );
 };
-interface Props {
-  minHeight: number;
-}
 
 const EventLastItem = React.memo(_EventLastItem);
 export default EventLastItem;

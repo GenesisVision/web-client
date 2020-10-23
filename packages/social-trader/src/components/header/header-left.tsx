@@ -1,5 +1,4 @@
 import { Center } from "components/center/center";
-import { $paddingMedium } from "components/gv-styles/gv-sizes";
 import HeaderIcon from "components/header/header-icon";
 import { useMenuItems } from "components/header/header.service";
 import NavigationContainer from "components/header/navigation.container";
@@ -15,13 +14,13 @@ import * as React from "react";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import styled from "styled-components";
+import { $paddingMedium } from "utils/style/sizes";
 
 const HeaderSearchInput = dynamic(() =>
   import("components/header/header-search-input")
 );
 
 export interface Props {
-  className?: string;
   profileHeader?: ProfileHeaderViewModel;
 }
 
@@ -33,7 +32,7 @@ const Container = styled.div`
   padding-right: ${$paddingMedium}px;
 `;
 
-const _HeaderLeft: React.FC<Props> = ({ className, profileHeader }) => {
+const _HeaderLeft: React.FC<Props> = ({ profileHeader }) => {
   const { route, asPath } = useRouter();
   const backPath = asPath ? asPath : route;
   const isAuthenticated = useSelector(isAuthenticatedSelector);

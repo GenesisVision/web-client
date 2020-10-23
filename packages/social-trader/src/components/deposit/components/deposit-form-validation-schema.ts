@@ -8,7 +8,7 @@ import { WalletBaseData } from "gv-api-web";
 import { TFunction } from "i18next";
 import { convertToCurrency } from "utils/currency-converter";
 import { safeGetElemFromArray } from "utils/helpers";
-import { lazy, number, object } from "yup";
+import { lazy, number, object, Schema } from "yup";
 
 export const depositValidationSchema = ({
   rate,
@@ -51,5 +51,5 @@ export const depositValidationSchema = ({
             ? t("validations.amount-more-than-available")
             : t("validations.amount-exceeds-limit")
         )
-    });
+    }) as Schema<IDepositFormValues>;
   });

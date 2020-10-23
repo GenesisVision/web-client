@@ -1,14 +1,6 @@
 import { Button } from "components/button/button";
 import { IButtonProps } from "components/button/button.types";
 import { Center } from "components/center/center";
-import {
-  $textAccentColor,
-  $textColor
-} from "components/gv-styles/gv-colors/gv-colors";
-import {
-  $fontSizeParagraph,
-  $paddingXsmall
-} from "components/gv-styles/gv-sizes";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
@@ -17,7 +9,9 @@ import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { localizedDate } from "utils/dates";
-import { adaptiveMargin } from "utils/style/style-mixins";
+import { $textAccentColor, $textColor } from "utils/style/colors";
+import { adaptiveMargin } from "utils/style/mixins";
+import { $fontSizeParagraph, $paddingXsmall } from "utils/style/sizes";
 import { HandlePeriodChangeType } from "utils/types";
 
 import {

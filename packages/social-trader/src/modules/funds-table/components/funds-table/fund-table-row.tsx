@@ -1,7 +1,6 @@
 import AssetAvatarWithName from "components/avatar/asset-avatar/asset-avatar-with-name";
 import FavoriteIcon from "components/favorite-asset/favorite-icon/favorite-icon";
 import FundAssetContainer from "components/fund-asset/fund-asset-container";
-import { mediaBreakpointLandscapePhone } from "components/gv-styles/gv-media";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import Profitability from "components/profitability/profitability";
@@ -23,6 +22,7 @@ import styled from "styled-components";
 import { composeFundsDetailsUrl } from "utils/compose-url";
 import { distanceDate } from "utils/dates";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
+import { mediaBreakpointLandscapePhone } from "utils/style/media";
 
 interface Props {
   fund: FundDetailsListItem;

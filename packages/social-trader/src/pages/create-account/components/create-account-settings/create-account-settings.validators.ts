@@ -3,8 +3,7 @@ import { TFunction } from "i18next";
 import { convertToCurrency } from "utils/currency-converter";
 import { formatCurrencyValue } from "utils/formatter";
 import { safeGetElemFromArray } from "utils/helpers";
-import { CurrencyEnum } from "utils/types";
-import { lazy, mixed, number, object } from "yup";
+import { lazy, mixed, number, object, Schema } from "yup";
 
 import {
   CREATE_ACCOUNT_FIELDS,
@@ -45,7 +44,7 @@ const createAccountSettingsValidationSchema = ({
             )
             .max(available, t("validations.amount-is-large"))
         : mixed()
-    });
+    }) as Schema<ICreateAccountSettingsFormValues>;
   });
 };
 

@@ -24,7 +24,7 @@ import {
   tradeSocket
 } from "./binance-spot-ws.service";
 
-export const BinanceSpotTerminalMethods: ITerminalMethods = {
+export const BinanceSpotTerminalMethods: ITerminalMethods = ({
   ...GVTerminalMethods,
   getExchangeInfo,
   getOpenOrders,
@@ -44,4 +44,4 @@ export const BinanceSpotTerminalMethods: ITerminalMethods = {
   depthSocket,
   marketTicketsSocket,
   getUserStreamSocket
-};
+} as unknown) as ITerminalMethods;

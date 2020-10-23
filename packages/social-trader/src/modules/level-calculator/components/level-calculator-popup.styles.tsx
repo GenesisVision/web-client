@@ -1,10 +1,14 @@
 import { Center } from "components/center/center";
 import Dialog from "components/dialog/dialog";
+import Link from "components/link/link";
+import styled from "styled-components";
+import { $popoverBackground, $primaryColor } from "utils/style/colors";
+import { mediaBreakpointLandscapePhone } from "utils/style/media";
 import {
-  $popoverBackground,
-  $primaryColor
-} from "components/gv-styles/gv-colors/gv-colors";
-import { mediaBreakpointLandscapePhone } from "components/gv-styles/gv-media";
+  adaptiveMargin,
+  horizontalPaddings,
+  verticalPaddings
+} from "utils/style/mixins";
 import {
   $fontSizeH4,
   $fontSizeSmall,
@@ -12,14 +16,7 @@ import {
   $paddingXsmall,
   $paddingXxlarge,
   $paddingXxsmall
-} from "components/gv-styles/gv-sizes";
-import Link from "components/link/link";
-import styled from "styled-components";
-import {
-  adaptiveMargin,
-  horizontalPaddings,
-  verticalPaddings
-} from "utils/style/style-mixins";
+} from "utils/style/sizes";
 
 export const LevelCalculatorPopupHeader = styled(Center)`
   justify-content: space-between;

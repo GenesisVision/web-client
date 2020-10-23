@@ -1,5 +1,5 @@
-import { $paddingSmall } from "components/gv-styles/gv-sizes";
-import { adaptiveMargin, adaptivePadding } from "utils/style/style-mixins";
+import { adaptiveMargin, adaptivePadding } from "utils/style/mixins";
+import { $paddingSmall } from "utils/style/sizes";
 
 export const detailsBlockLeftPadding = adaptivePadding("left", $paddingSmall);
 

@@ -1,11 +1,11 @@
+import * as React from "react";
+import styled from "styled-components";
 import {
   $iconColor,
   $primaryColor,
   $textAccentColor
-} from "components/gv-styles/gv-colors/gv-colors";
-import * as React from "react";
-import styled from "styled-components";
-import { transition } from "utils/style/style-mixins";
+} from "utils/style/colors";
+import { transition } from "utils/style/mixins";
 
 export interface IIconProps {
   onClick?: (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void;

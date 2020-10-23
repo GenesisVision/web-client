@@ -1,5 +1,6 @@
 @import "styles/_colors";
 @import "styles/_breakpoint";
+@import "styles/_sizes";
 @import "../../styles/mixins";
 @import "../../styles/grid";
 
@@ -27,7 +28,7 @@
 
   &__notes {
     grid-column: 2/12;
-    margin-top: 100px;
+    margin-top: 60px;
     &--withoutOffset {
       margin-top: 0;
     }
@@ -57,15 +58,10 @@
   }
 
   &__note-item {
+    @include font-size($font-size-h4);
     margin-bottom: 30px;
     position: relative;
-    font-size: 13px;
     padding-left: 40px;
-
-    @include media-breakpoint-tablet() {
-      font-size: 16px;
-      //padding-left: 0;
-    }
 
     &:last-child {
       margin-bottom: 0;
@@ -179,6 +175,14 @@
     &--width-bg,
     &--width-bg:first-child {
       width: 350px;
+    }
+
+    &--width-quarter {
+      max-width: 25%;
+
+      &:first-child {
+        width: 25%;
+      }
     }
   }
 

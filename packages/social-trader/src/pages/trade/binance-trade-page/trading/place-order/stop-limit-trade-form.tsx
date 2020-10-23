@@ -58,7 +58,7 @@ const _StopLimitTradeForm: React.FC<IStopLimitTradeFormProps & {
   const {
     minPrice,
     maxPrice,
-    minQty,
+    minQuantity,
     minNotional,
     maxQuantityWithWallet,
     maxTotalWithWallet
@@ -80,11 +80,11 @@ const _StopLimitTradeForm: React.FC<IStopLimitTradeFormProps & {
       maxPrice: +maxPrice,
       minPrice: +minPrice,
       maxQuantity: maxQuantityWithWallet,
-      minQuantity: +minQty,
+      minQuantity: +minQuantity,
       minNotional: +minNotional
     }),
     defaultValues: {
-      [TRADE_FORM_FIELDS.timeInForce]: TIME_IN_FORCE_VALUES[0],
+      [TRADE_FORM_FIELDS.timeInForce]: TIME_IN_FORCE_VALUES[0].value,
       [TRADE_FORM_FIELDS.stopPrice]: outerPrice,
       [TRADE_FORM_FIELDS.price]: outerPrice
     },
@@ -162,14 +162,14 @@ const _StopLimitTradeForm: React.FC<IStopLimitTradeFormProps & {
       </Row>
       <Row>
         <PlaceOrderSubmitButton
-          isSuccessful={status === API_REQUEST_STATUS.SUCCESS}
+          isSuccessful={status === "SUCCESS"}
           side={side}
           asset={baseAsset}
         />
       </Row>
       <Row size={"small"}>
         <RowItem wide>
-          <TimeInForceField orderType={"STOP_LOSS_LIMIT"} />
+          <TimeInForceField orderType={"StopLossLimit"} />
         </RowItem>
         {isFutures && currentPositionMode === false && (
           <RowItem wide>

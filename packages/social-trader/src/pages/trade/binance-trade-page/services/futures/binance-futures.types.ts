@@ -6,8 +6,7 @@ import {
   OrderType,
   PositionSideType,
   TerminalCurrency,
-  TimeInForce,
-  Trade
+  TimeInForce
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 
 export type FuturesAccountEventType =
@@ -115,7 +114,7 @@ export interface FuturesTradeOrder {
   orderLastFilledQuantity: string; // Order Last Filled Quantity
   orderFilledAccumulatedQuantity: string; // Order Filled Accumulated Quantity
   lastFilledPrice: string; // Last Filled Price
-  commissionAsset: Trade; // Commission Asset, will not push if no commission
+  commissionAsset: any; // Commission Asset, will not push if no commission
   commission: string; // Commission, will not push if no commission
   orderTradeTime: number; // Order Trade Time
   tradeId: number; // Trade Id

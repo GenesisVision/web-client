@@ -1,10 +1,10 @@
+import { css } from "styled-components";
 import {
   mediaBreakpointLandscapePhone,
   mediaBreakpointLandscapeTablet,
   mediaBreakpointLargeDesktop
-} from "components/gv-styles/gv-media";
-import { $dividerPadding, $dividerText } from "components/gv-styles/gv-sizes";
-import { css } from "styled-components";
+} from "utils/style/media";
+import { $dividerPadding, $dividerText } from "utils/style/sizes";
 import { AnyObjectType } from "utils/types";
 
 export const $gridMaxWidth = 1400;

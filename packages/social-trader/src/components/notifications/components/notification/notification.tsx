@@ -1,16 +1,5 @@
 import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
 import ImageBaseElement from "components/avatar/image-base.element";
-import {
-  $borderColor,
-  $labelColor,
-  $negativeBackgroundColor,
-  $negativeColor
-} from "components/gv-styles/gv-colors/gv-colors";
-import {
-  $fontSizeCommon,
-  $paddingXsmall,
-  $paddingXxsmall
-} from "components/gv-styles/gv-sizes";
 import Link, { LinkProps } from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import { RowItem } from "components/row-item/row-item";
@@ -31,12 +20,23 @@ import {
   composeProgramDetailsUrl
 } from "utils/compose-url";
 import {
+  $borderColor,
+  $labelColor,
+  $negativeBackgroundColor,
+  $negativeColor
+} from "utils/style/colors";
+import {
   adaptiveMargin,
   adaptivePadding,
   fontSize,
   height,
   width
-} from "utils/style/style-mixins";
+} from "utils/style/mixins";
+import {
+  $fontSizeCommon,
+  $paddingXsmall,
+  $paddingXxsmall
+} from "utils/style/sizes";
 
 enum TYPE {
   PROFILE = "profile",
@@ -52,9 +52,10 @@ interface IAssetAvatarContainerProps {
   light?: boolean;
 }
 
-type INotificationProps = NotificationViewModel &
-  INotificationOwnProps &
-  IAssetAvatarContainerProps;
+interface INotificationProps
+  extends NotificationViewModel,
+    INotificationOwnProps,
+    IAssetAvatarContainerProps {}
 
 const getStaticIconUrl = (type: string): string | null => {
   return type.indexOf(TYPE.PROFILE) !== -1
@@ -92,11 +93,8 @@ const _NotificationAssetAvatar: React.FC<INotificationProps> = ({
   dark,
   light,
   type,
-  url,
-  logoUrl,
-  color,
   closeNotifications,
-  assetType
+  assetDetails: { url, logoUrl, color, assetType }
 }) => {
   const { linkCreator } = useToLink();
   const Tag: React.ComponentType<LinkProps | any> | string = url

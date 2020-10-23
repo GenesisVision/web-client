@@ -1,10 +1,10 @@
-import { $paddingXxsmall } from "components/gv-styles/gv-sizes";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { TooltipContent } from "components/tooltip/tooltip-content";
 import { Tag } from "gv-api-web";
 import * as React from "react";
 import styled from "styled-components";
+import { $paddingXxsmall } from "utils/style/sizes";
 
 import TagItem from "./tag-item";
 

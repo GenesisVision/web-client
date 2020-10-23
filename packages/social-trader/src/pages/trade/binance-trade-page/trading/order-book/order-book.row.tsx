@@ -85,7 +85,7 @@ const _OrderBookRow: React.FC<Props> = ({
     <Tooltip
       onMouseEnter={() => setHoveredRow(index)}
       onMouseLeave={() => setHoveredRow(undefined)}
-      onClick={() => setPrice(price)}
+      onClick={() => setPrice(String(price))}
       horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
       render={() => (
         <TooltipContent fixed={false}>

@@ -14,7 +14,7 @@ import {
   entryFeeShape,
   exitFeeShape
 } from "utils/validators/validators";
-import { array, lazy, number, object, string } from "yup";
+import { array, lazy, number, object, Schema, string, TestFunction } from "yup";
 
 import {
   CREATE_FUND_FIELDS,
@@ -67,18 +67,16 @@ const createFundSettingsValidationSchema = ({
         ? number()
         : exitFeeShape(t, maxExitFee),
       [CREATE_FUND_FIELDS.assets]: assetsShape(t)
-    });
+    }) as Schema<ICreateFundSettingsFormValues>;
   });
 
 export const assetsShape = (t: TFunction) => {
   return array()
-    .test(
-      CREATE_FUND_FIELDS.assets,
-      t("validations.assets-share"),
-      (val: FundAssetPart[] = []) => {
-        return val.reduce((acc, next) => acc + next.percent, 0) === 100;
-      }
-    )
+    .test(CREATE_FUND_FIELDS.assets, t("validations.assets-share"), ((
+      val: FundAssetPart[] = []
+    ) => {
+      return val.reduce((acc, next) => acc + next.percent, 0) === 100;
+    }) as TestFunction<any>)
     .required(t("validations.assets-count"))
     .min(2, t("validations.assets-count"));
 };

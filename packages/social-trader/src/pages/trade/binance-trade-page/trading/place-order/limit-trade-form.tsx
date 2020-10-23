@@ -58,7 +58,7 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
   const {
     minPrice,
     maxPrice,
-    minQty,
+    minQuantity,
     minNotional,
     maxQuantityWithWallet,
     maxTotalWithWallet
@@ -79,11 +79,11 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
       maxPrice: +maxPrice,
       minPrice: +minPrice,
       maxQuantity: maxQuantityWithWallet,
-      minQuantity: +minQty,
+      minQuantity: +minQuantity,
       minNotional: +minNotional
     }),
     defaultValues: {
-      [TRADE_FORM_FIELDS.timeInForce]: TIME_IN_FORCE_VALUES[0],
+      [TRADE_FORM_FIELDS.timeInForce]: TIME_IN_FORCE_VALUES[0].value,
       [TRADE_FORM_FIELDS.price]: outerPrice
     },
     mode: "onChange"
@@ -152,14 +152,14 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
       </Row>
       <Row>
         <PlaceOrderSubmitButton
-          isSuccessful={status === API_REQUEST_STATUS.SUCCESS}
+          isSuccessful={status === "SUCCESS"}
           side={side}
           asset={baseAsset}
         />
       </Row>
       <Row size={"small"}>
         <RowItem wide>
-          <TimeInForceField orderType={"LIMIT"} />
+          <TimeInForceField orderType={"Limit"} />
         </RowItem>
         {isFutures && currentPositionMode === false && (
           <RowItem wide>

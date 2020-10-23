@@ -54,7 +54,7 @@ const _ReportsTableRow: React.FC<IReportsTableRowProps> = ({
         {balance} {currency}
       </TableCell>
       <TableCell>
-        {profit} {currency}
+        {formatValue(profit, DEFAULT_DECIMAL_SCALE)} {currency}
       </TableCell>
       <TableCell>
         {fees > 0 ? (
@@ -93,12 +93,12 @@ const _ReportsTableRow: React.FC<IReportsTableRowProps> = ({
             )}
           >
             <HelpFees>
-              {fees} {currency}
+              {formatValue(fees, DEFAULT_DECIMAL_SCALE)} {currency}
             </HelpFees>
           </Tooltip>
         ) : (
           <>
-            {fees} {currency}
+            {formatValue(fees, DEFAULT_DECIMAL_SCALE)} {currency}
           </>
         )}
       </TableCell>

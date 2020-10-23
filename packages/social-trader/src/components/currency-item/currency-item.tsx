@@ -1,20 +1,20 @@
 import { getActiveUrl } from "components/active/active.helpers";
 import ActivePopup from "components/active/active.popup";
 import WalletImage from "components/avatar/wallet-image/wallet-image";
-import { $textLightColor } from "components/gv-styles/gv-colors/gv-colors";
-import {
-  $dividerTitle,
-  $fontSizeParagraph,
-  $fontSizeSmall,
-  $walletItemSize
-} from "components/gv-styles/gv-sizes";
-import { $boxShadow1 } from "components/gv-styles/gv-style-constants";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import useIsOpen from "hooks/is-open.hook";
 import React, { useCallback } from "react";
 import styled, { css } from "styled-components";
-import { fontSize, height, width } from "utils/style/style-mixins";
+import { $textLightColor } from "utils/style/colors";
+import { fontSize, height, width } from "utils/style/mixins";
+import { $boxShadow1 } from "utils/style/shadow";
+import {
+  $dividerTitle,
+  $fontSizeParagraph,
+  $fontSizeSmall,
+  $walletItemSize
+} from "utils/style/sizes";
 import { CurrencyEnum } from "utils/types";
 
 export interface ICurrencyItemProps {

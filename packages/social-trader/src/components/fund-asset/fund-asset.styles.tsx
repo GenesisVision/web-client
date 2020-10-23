@@ -1,28 +1,27 @@
 import { CurrencyItem } from "components/currency-item/currency-item";
 import { FundAssetViewType } from "components/fund-asset/fund-asset.types";
+import { RowItem } from "components/row-item/row-item";
+import { Row } from "components/row/row";
+import styled, { css } from "styled-components";
 import {
   $landingBgGray,
   $landingItemBg,
   $textLightColor
-} from "components/gv-styles/gv-colors/gv-colors";
-import { mediaBreakpointLandscapePhone } from "components/gv-styles/gv-media";
-import {
-  $borderRadiusMiddle,
-  $dividerText,
-  $fontSizeSmall,
-  $paddingXsmall,
-  $paddingXxsmall
-} from "components/gv-styles/gv-sizes";
-import { RowItem } from "components/row-item/row-item";
-import { Row } from "components/row/row";
-import styled, { css } from "styled-components";
+} from "utils/style/colors";
+import { mediaBreakpointLandscapePhone } from "utils/style/media";
 import {
   adaptiveBorderRadius,
   adaptiveFullPadding,
   fontSize,
   height,
   lineHeight
-} from "utils/style/style-mixins";
+} from "utils/style/mixins";
+import {
+  $borderRadiusMiddle,
+  $fontSizeSmall,
+  $paddingXsmall,
+  $paddingXxsmall
+} from "utils/style/sizes";
 
 const $assetHeight = 40;
 const $removeButtonSize = 18;

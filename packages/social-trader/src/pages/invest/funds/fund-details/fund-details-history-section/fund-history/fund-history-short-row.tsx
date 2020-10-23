@@ -10,7 +10,7 @@ import { IFundHistoryDataItem } from "pages/invest/funds/fund-details/fund-detai
 import React from "react";
 import styled from "styled-components";
 import { formatDate } from "utils/dates";
-import { height, width } from "utils/style/style-mixins";
+import { height, width } from "utils/style/mixins";
 
 interface Props {
   isOpen: boolean;

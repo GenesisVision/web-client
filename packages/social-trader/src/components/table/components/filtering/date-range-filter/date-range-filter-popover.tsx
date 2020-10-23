@@ -1,8 +1,5 @@
 import { Button } from "components/button/button";
 import { Center } from "components/center/center";
-import { $textDarkColor } from "components/gv-styles/gv-colors/gv-colors";
-import { mediaBreakpointLandscapePhone } from "components/gv-styles/gv-media";
-import { $fontSizeParagraph } from "components/gv-styles/gv-sizes";
 import { PopoverContentCardBlock } from "components/popover/popover-card.block";
 import { PopoverContent } from "components/popover/popover-content";
 import { RowItem } from "components/row-item/row-item";
@@ -13,7 +10,10 @@ import * as React from "react";
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
-import { fontSize } from "utils/style/style-mixins";
+import { $textDarkColor } from "utils/style/colors";
+import { mediaBreakpointLandscapePhone } from "utils/style/media";
+import { fontSize } from "utils/style/mixins";
+import { $fontSizeParagraph } from "utils/style/sizes";
 import { Clickable } from "utils/types";
 
 import DateRangeFilterValues from "./date-range-filter-values";

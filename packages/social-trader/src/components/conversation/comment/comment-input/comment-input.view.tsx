@@ -12,28 +12,28 @@ import { PostInputImagePreview } from "components/conversation/post/post-input/p
 import { IPostContextReplyState } from "components/conversation/post/post.context";
 import { SearchPanel } from "components/conversation/search-panel/search-panel";
 import { IImageValue } from "components/form/input-image/input-image";
-import {
-  $borderColor,
-  $panelBackgroundColor,
-  $separatorColor
-} from "components/gv-styles/gv-colors/gv-colors";
-import {
-  $borderRadiusMiddle,
-  $paddingSmall,
-  $paddingXsmall,
-  $paddingXxxsmall
-} from "components/gv-styles/gv-sizes";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
 import React from "react";
 import styled from "styled-components";
 import {
+  $borderColor,
+  $panelBackgroundColor,
+  $separatorColor
+} from "utils/style/colors";
+import {
   adaptiveMargin,
   horizontalPaddings,
   transition,
   verticalPaddings
-} from "utils/style/style-mixins";
+} from "utils/style/mixins";
+import {
+  $borderRadiusMiddle,
+  $paddingSmall,
+  $paddingXsmall,
+  $paddingXxxsmall
+} from "utils/style/sizes";
 
 interface Props {
   isOpenSearchPanel?: boolean;

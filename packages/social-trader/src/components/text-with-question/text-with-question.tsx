@@ -7,10 +7,25 @@ import {
 import { RowItem } from "components/row-item/row-item";
 import Tooltip from "components/tooltip/tooltip";
 import * as React from "react";
+import styled from "styled-components";
+import { fontSize } from "utils/style/mixins";
+import { $fontSizeCommon } from "utils/style/sizes";
 
-import styles from "./text-with-question.module.scss";
+interface IHelpContainerProps extends React.HTMLAttributes<HTMLDivElement> {
+  tooltipContent?: string | JSX.Element;
+}
 
-const _SwitchWithQuestion: React.FC<Props> = ({
+interface ISwitchWithQuestionProps extends IHelpContainerProps {
+  label: string;
+  onClickHelp?: VoidFunction;
+}
+
+const Label = styled(RowItem)`
+  ${fontSize($fontSizeCommon)};
+  font-weight: 600;
+`;
+
+const _SwitchWithQuestion: React.FC<ISwitchWithQuestionProps> = ({
   tooltipContent,
   onClickHelp,
   label
@@ -22,16 +37,19 @@ const _SwitchWithQuestion: React.FC<Props> = ({
           <HelpButton muted onClick={onClickHelp} />
         </HelpContainer>
       </RowItem>
-      <RowItem size={"small"} className={styles["text-with-question__label"]}>
-        {label}
-      </RowItem>
+      <Label size={"small"}>{label}</Label>
     </Center>
   );
 };
 
-const HelpContainer: React.FC<{
-  tooltipContent?: string | JSX.Element;
-} & React.HTMLAttributes<HTMLDivElement>> = ({ tooltipContent, children }) => {
+const QuestionContainer = styled.div`
+  display: flex;
+`;
+
+const HelpContainer: React.FC<IHelpContainerProps> = ({
+  tooltipContent,
+  children
+}) => {
   switch (!!tooltipContent) {
     case true:
       return (
@@ -40,9 +58,7 @@ const HelpContainer: React.FC<{
           vertical={VERTICAL_POPOVER_POS.BOTTOM}
           render={() => tooltipContent}
         >
-          <div className={styles["text-with-question__question-container"]}>
-            {children}
-          </div>
+          <QuestionContainer>{children}</QuestionContainer>
         </Tooltip>
       );
     case false:
@@ -50,12 +66,6 @@ const HelpContainer: React.FC<{
       return <>{children}</>;
   }
 };
-
-interface Props {
-  label: string;
-  onClickHelp?: VoidFunction;
-  tooltipContent?: string | JSX.Element;
-}
 
 const TextWithQuestion = React.memo(_SwitchWithQuestion);
 export default TextWithQuestion;

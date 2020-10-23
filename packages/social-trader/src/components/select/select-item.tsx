@@ -1,8 +1,8 @@
 import { Button } from "components/button/button";
-import { $primaryColor } from "components/gv-styles/gv-colors/gv-colors";
 import { PopoverContentListItem } from "components/popover/popover-content";
 import React, { useCallback } from "react";
 import styled from "styled-components";
+import { $primaryColor } from "utils/style/colors";
 
 interface Props {
   value: string;

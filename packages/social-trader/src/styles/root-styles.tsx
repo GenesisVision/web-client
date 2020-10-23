@@ -1,18 +1,18 @@
+import React from "react";
+import { css } from "styled-components";
 import {
   $backgroundColor,
-  $landingBg,
-  $landingColorIcon,
-  $mainColor,
   $primaryColor,
   $textDarkColor,
   $textLightColor
-} from "components/gv-styles/gv-colors/gv-colors";
+} from "utils/style/colors";
 import {
   mediaBreakpointDesktop,
   mediaBreakpointLandscapeTablet,
   mediaBreakpointLargeDesktop,
   mediaBreakpointTablet
-} from "components/gv-styles/gv-media";
+} from "utils/style/media";
+import { adaptivePadding, fontSize } from "utils/style/mixins";
 import {
   $fontSizeCommon,
   $fontSizeH1,
@@ -21,10 +21,7 @@ import {
   $fontSizeH4,
   $fontSizeParagraph,
   $paddingXxsmall
-} from "components/gv-styles/gv-sizes";
-import React from "react";
-import { css } from "styled-components";
-import { adaptivePadding, fontSize } from "utils/style/style-mixins";
+} from "utils/style/sizes";
 
 export const RootStyle = css`
   body {
@@ -143,82 +140,64 @@ export const RootStyle = css`
 `;
 
 export const LandingPageRootStyle = css`
-  .landing-page {
-    background-color: ${$landingBg};
-    color: ${$mainColor};
+  a,
+  label {
+    -webkit-tap-highlight-color: transparent;
+  }
 
-    *,
-    *:before,
-    *:after {
-      box-sizing: border-box;
-    }
+  p {
+    font-size: 13px;
+    line-height: 1.6;
+    padding-bottom: 0;
 
-    .popover,
-    .dialog,
-    .tooltip__popover,
-    .popover-content__block {
-      background-color: ${$landingColorIcon};
-    }
+    ${mediaBreakpointTablet(`font-size: 18px;`)}
+    ${mediaBreakpointLandscapeTablet(`font-size: 14px;`)};
+    ${mediaBreakpointDesktop(`font-size: 16px;`)};
+    ${mediaBreakpointLargeDesktop(`font-size: 18px;`)};
+  }
 
-    a,
-    label {
-      -webkit-tap-highlight-color: transparent;
-    }
+  h1 {
+    font-weight: 800;
+    font-size: 28px;
+    line-height: 1.6;
+    padding-bottom: 0;
+    margin-bottom: 16px;
 
-    p {
-      font-size: 13px;
-      line-height: 1.6;
-      padding-bottom: 0;
+    ${mediaBreakpointTablet(`font-size: 38px;`)};
+    ${mediaBreakpointLandscapeTablet(`font-size: 26px;`)};
+    ${mediaBreakpointDesktop(`font-size: 30px;`)};
+    ${mediaBreakpointLargeDesktop(`font-size: 38px;`)};
+  }
 
-      ${mediaBreakpointTablet(`font-size: 18px;`)}
-      ${mediaBreakpointLandscapeTablet(`font-size: 14px;`)};
-      ${mediaBreakpointDesktop(`font-size: 16px;`)};
-      ${mediaBreakpointLargeDesktop(`font-size: 18px;`)};
-    }
+  h1,
+  h2,
+  h3 {
+    color: inherit;
+  }
 
-    h1 {
-      font-weight: 800;
-      font-size: 28px;
-      line-height: 1.6;
-      padding-bottom: 0;
-      margin-bottom: 16px;
+  h2 {
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 1.6;
+    padding-bottom: 0;
+    margin-bottom: 16px;
 
-      ${mediaBreakpointTablet(`font-size: 38px;`)};
-      ${mediaBreakpointLandscapeTablet(`font-size: 26px;`)};
-      ${mediaBreakpointDesktop(`font-size: 30px;`)};
-      ${mediaBreakpointLargeDesktop(`font-size: 38px;`)};
-    }
+    ${mediaBreakpointTablet(`font-size: 38px;`)};
+    ${mediaBreakpointLandscapeTablet(`font-size: 26px;`)};
+    ${mediaBreakpointDesktop(`font-size: 30px;`)};
+    ${mediaBreakpointLargeDesktop(`font-size: 38px;`)};
+  }
 
-    h1,
-    h2,
-    h3 {
-      color: inherit;
-    }
+  h3 {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 30px;
+    padding-bottom: 0;
 
-    h2 {
-      font-weight: 600;
-      font-size: 28px;
-      line-height: 1.6;
-      padding-bottom: 0;
-      margin-bottom: 16px;
-
-      ${mediaBreakpointTablet(`font-size: 38px;`)};
-      ${mediaBreakpointLandscapeTablet(`font-size: 26px;`)};
-      ${mediaBreakpointDesktop(`font-size: 30px;`)};
-      ${mediaBreakpointLargeDesktop(`font-size: 38px;`)};
-    }
-
-    h3 {
-      font-weight: 600;
-      font-size: 20px;
-      line-height: 30px;
-      padding-bottom: 0;
-
-      ${mediaBreakpointTablet(`font-size: 24px;
+    ${mediaBreakpointTablet(`font-size: 24px;
         line-height: 40px;`)};
-      ${mediaBreakpointLandscapeTablet(`font-size: 20px;
+    ${mediaBreakpointLandscapeTablet(`font-size: 20px;
         line-height: 32px;`)};
-      ${mediaBreakpointLargeDesktop(`font-size: 22px;`)};
-    }
+    ${mediaBreakpointLargeDesktop(`font-size: 22px;`)};
   }
 `;

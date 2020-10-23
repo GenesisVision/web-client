@@ -24,7 +24,7 @@ const RealSubmit: React.FC<Props> = ({ isSuccessful, side, asset }) => {
     <SubmitButton
       checkDirty={false}
       isSuccessful={isSuccessful}
-      color={side === "SELL" ? "danger" : "primary"}
+      color={side === "Sell" ? "danger" : "primary"}
       wide
     >
       <>
@@ -39,7 +39,7 @@ const UnAuthButton: React.FC<Props> = ({ side, asset }) => {
   return (
     <>
       <Button
-        color={side === "SELL" ? "danger" : "primary"}
+        color={side === "Sell" ? "danger" : "primary"}
         wide
         onClick={setOpen}
       >
@@ -55,7 +55,7 @@ const UnAuthButton: React.FC<Props> = ({ side, asset }) => {
 const WithoutAccountButton: React.FC<Props> = ({ side, asset }) => {
   return (
     <Button
-      color={side === "SELL" ? "danger" : "primary"}
+      color={side === "Sell" ? "danger" : "primary"}
       wide
       onClick={() => Push(composeCreateAccountRouteWithBroker("Binance"))}
     >
@@ -68,10 +68,10 @@ const WithoutAccountButton: React.FC<Props> = ({ side, asset }) => {
 
 const _PlaceOrderSubmitButton: React.FC<Props> = props => {
   const isAuthenticated = useSelector(isAuthenticatedSelector);
-  const { authData } = useContext(TerminalInfoContext);
+  const { exchangeAccountId } = useContext(TerminalInfoContext);
 
   if (!isAuthenticated) return <UnAuthButton {...props} />;
-  if (!authData?.publicKey) return <WithoutAccountButton {...props} />;
+  if (!exchangeAccountId) return <WithoutAccountButton {...props} />;
   return <RealSubmit {...props} />;
 };
 

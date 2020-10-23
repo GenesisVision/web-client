@@ -138,10 +138,10 @@ const Select: React.FC<Props> = ({
     if (isSelected) displayValue = child.props.children;
     return (
       <SelectItem
-        key={child.props.value}
         isSelected={isSelected}
         onClick={handleChildClick(child)}
         {...child.props}
+        key={child.props.value}
         name={name}
       >
         {child.props.children}

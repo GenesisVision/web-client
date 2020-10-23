@@ -1,6 +1,6 @@
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogTop } from "components/dialog/dialog-top";
-import useApiRequest, { API_REQUEST_STATUS } from "hooks/api-request.hook";
+import useApiRequest from "hooks/api-request.hook";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
 import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/terminal-methods.context";
 import { TerminalCurrency } from "pages/trade/binance-trade-page/trading/terminal.types";
@@ -51,7 +51,7 @@ const _TransferContainer: React.FC<ITransferContainerProps> = ({
         {data && (
           <TransferForm
             asset={asset}
-            isSuccessful={status === API_REQUEST_STATUS.SUCCESS}
+            isSuccessful={status === "SUCCESS"}
             data={data}
             onSubmit={handleSubmit}
           />

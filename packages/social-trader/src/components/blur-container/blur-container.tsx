@@ -23,6 +23,6 @@ export const BlurContainer = styled(_BlurContainer)<Props>`
     & * {
       user-select: none;
     }
-  `}
-   filter: blur(${({ blur }) => (blur ? 7 : 0)}px);
+  `};
+  filter: blur(${({ blur }) => (blur ? 7 : 0)}px);
 `;

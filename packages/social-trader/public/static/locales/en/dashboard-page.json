@@ -1,4 +1,28 @@
 {
+  "select-product": {
+    "title": "Select product",
+    "text": "Please select a product:",
+    "fund": {
+      "title": "Fund",
+      "description": "Diversify your capital across hundreds of cryptocurrencies. \n1. Create a fund by percentage allocating capital to crypto assets that meet your strategy.\n2. Attract investors to your fund and earn commissions\n3. Track and manage your fund by re-allocating assets."
+    },
+    "self-managed-fund": {
+      "title": "Self-managed Fund",
+      "description": "Create your own portfolio with crypto assets that match your strategy. You can change its entire structure at any time. Self-managed Funds are private so you cannot attract investor capital. All re-allocation history, profits and losses are kept private. You can always change your fund to Public to attract investment."
+    },
+    "program": {
+      "title": "Program",
+      "description": "Programs are similar to PAMM accounts. \n1. Create a program and raise capital for ongoing trading by attracting investors.\n2. Trade using the assets under management (AUM) and earn profit. Any profits generated will be divided among all participants who have joined your program.\n3. Set your own commissions and receive a percentage of the investors' profit."
+    },
+    "trading-account": {
+      "title": "Trading account",
+      "description": "Create a trading account and get access to a variety of instruments (depending on your desired broker.) Trade Forex, Crypto, CFD, Stocks, Metals, Indices and Commodities."
+    },
+    "attach-external-account": {
+      "title": "Attach external account",
+      "description": "Add your Binance account to the platform to copy trades opened and managed by another trader, while having complete control over your capital. You can also make your account a signal provider at any time."
+    }
+  },
   "kyc-limit": {
     "text-1": "Without KYC you can:",
     "text-2": "Verify to remove the limit",
@@ -59,7 +83,7 @@
     }
   },
   "investing": {
-    "most-profitable": "The most profitable programs and funds",
+    "most-profitable": "The most profitable Programs and Funds",
     "title": "Investments",
     "public-page": "Public page",
     "funds": "Funds",
@@ -126,18 +150,18 @@
           "button": "Create account"
         },
         "right-field": {
-          "text": "Create your first fund",
-          "button": "Create fund"
+          "text": "Create your first Fund",
+          "button": "Create Fund"
         }
       },
       "investing": {
         "left-field": {
           "text": "",
-          "text-2": "Find programs",
+          "text-2": "Find Programs",
           "button": "Programs"
         },
         "right-field": {
-          "text": "Find funds",
+          "text": "Find Funds",
           "button": "Funds"
         }
       }
@@ -146,7 +170,7 @@
     "get-started-title": "Get started.",
     "get-started-invest": "There's no such data right now. Find programs or the funds to invest.",
     "get-started-account": "Create trading account and start trading.",
-    "get-started-fund": "Create your first fund",
+    "get-started-fund": "Create your first Fund",
     "total": "Total",
     "AUM": "AUM",
     "programs": "Programs",

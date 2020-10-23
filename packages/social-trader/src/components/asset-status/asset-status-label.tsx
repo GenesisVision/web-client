@@ -1,12 +1,12 @@
+import { STATUS } from "constants/constants";
+import * as React from "react";
+import styled from "styled-components";
 import {
   $levelColor4,
   $primaryColor,
   $textDarkColor,
   $textLightColor
-} from "components/gv-styles/gv-colors/gv-colors";
-import { STATUS } from "constants/constants";
-import * as React from "react";
-import styled from "styled-components";
+} from "utils/style/colors";
 import { OptionalClickable } from "utils/types";
 
 interface Props extends OptionalClickable {

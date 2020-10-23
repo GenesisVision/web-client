@@ -6,11 +6,6 @@ import { PostInputImagePreview } from "components/conversation/post/post-input/p
 import { SearchPanel } from "components/conversation/search-panel/search-panel";
 import ErrorMessage from "components/error-message/error-message";
 import { IImageValue } from "components/form/input-image/input-image";
-import {
-  $borderRadiusMiddle,
-  $paddingSmall,
-  $paddingXsmall
-} from "components/gv-styles/gv-sizes";
 import { RowItem } from "components/row-item/row-item";
 import { SubmitButton } from "components/submit-button/submit-button";
 import React from "react";
@@ -19,7 +14,12 @@ import {
   adaptiveBorderRadius,
   horizontalPaddings,
   verticalPaddings
-} from "utils/style/style-mixins";
+} from "utils/style/mixins";
+import {
+  $borderRadiusMiddle,
+  $paddingSmall,
+  $paddingXsmall
+} from "utils/style/sizes";
 
 interface Props {
   name: string;

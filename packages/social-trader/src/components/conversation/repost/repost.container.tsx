@@ -1,7 +1,7 @@
 import { sendShareEvent } from "components/conversation/conversation.ga";
 import { rePost } from "components/conversation/conversation.service";
 import { PostInput } from "components/conversation/post/post-input/post-input";
-import { RepostTagComponent } from "components/conversation/tag/tag-components";
+import { RepostTagComponent } from "components/conversation/tag/tag-components/repost-tag";
 import { DefaultBlock } from "components/default.block/default.block";
 import { DialogTop } from "components/dialog/dialog-top";
 import { Row } from "components/row/row";

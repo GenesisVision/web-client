@@ -1,6 +1,5 @@
 import AssetAvatarWithName from "components/avatar/asset-avatar/asset-avatar-with-name";
 import FavoriteIcon from "components/favorite-asset/favorite-icon/favorite-icon";
-import { mediaBreakpointLandscapePhone } from "components/gv-styles/gv-media";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import Profitability from "components/profitability/profitability";
@@ -23,7 +22,8 @@ import styled from "styled-components";
 import { composeFollowDetailsUrl } from "utils/compose-url";
 import { distanceDate } from "utils/dates";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
-import { transition } from "utils/style/style-mixins";
+import { mediaBreakpointLandscapePhone } from "utils/style/media";
+import { transition } from "utils/style/mixins";
 
 interface IProgramTableRowShortProps {
   follow: FollowDetailsListItem;

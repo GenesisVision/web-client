@@ -1,17 +1,18 @@
+import { transformSymbols } from "pages/trade/binance-trade-page/trading/chart/chart.helpers";
+import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
+import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/terminal-methods.context";
+import React, { useCallback, useContext, useEffect, useState } from "react";
+import { useSockets } from "services/websocket.service";
 import {
   $backgroundColor,
   $negativeColor,
   $positiveColor,
   $textAccentColor
-} from "components/gv-styles/gv-colors/gv-colors";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
-import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/terminal-methods.context";
-import React, { useCallback, useContext, useEffect, useState } from "react";
-import { useSockets } from "services/websocket.service";
+} from "utils/style/colors";
 
 import styles from "./chart.module.scss";
 import TradingView, { Timezone } from "./charting_library/charting_library.min";
-import Datafeed from "./datafeed";
+import { Datafeed } from "./datafeed";
 
 export const ChartContainer: React.FC = () => {
   const { symbol, exchangeInfo, terminalType } = useContext(
@@ -43,7 +44,7 @@ export const ChartContainer: React.FC = () => {
         timezone,
         toolbar_bg: $backgroundColor,
         datafeed: Datafeed({
-          symbols: exchangeInfo?.symbols || [],
+          symbols: exchangeInfo ? exchangeInfo.symbols : [],
           getServerTime,
           getKlines,
           klineSocket: klineSocket(connectSocket)

@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
-import { height } from "utils/style/style-mixins";
+import { height } from "utils/style/mixins";
 
 import image from "./media/background.svg";
 

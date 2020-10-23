@@ -1,6 +1,5 @@
 import chartXAxis from "components/chart/chart-components/chart-xaxis";
 import { BalanceChartElementType } from "components/details/details-statistic-section/details.chart.types";
-import GVColors from "components/gv-styles/gv-colors";
 import * as React from "react";
 import {
   Area,
@@ -10,6 +9,7 @@ import {
   Tooltip,
   YAxis
 } from "recharts";
+import { $labelColor, $negativeColor } from "utils/style/colors";
 import { CurrencyEnum } from "utils/types";
 
 import ProgramBalanceTooltip from "./program-balance-tooltip";
@@ -30,11 +30,7 @@ const _ProgramBalanceChart: React.FC<Props> = ({
             height="4"
             patternTransform="scale(2 2) rotate(30)"
           >
-            <path
-              d="M0,0 l0,4"
-              stroke={GVColors.$negativeColor}
-              strokeWidth={1}
-            />
+            <path d="M0,0 l0,4" stroke={$negativeColor} strokeWidth={1} />
           </pattern>
         </defs>
         {chartXAxis(
@@ -44,7 +40,7 @@ const _ProgramBalanceChart: React.FC<Props> = ({
         <YAxis
           axisLine={false}
           orientation="right"
-          tick={{ fill: GVColors.$labelColor, fontSize: "12" }}
+          tick={{ fill: $labelColor, fontSize: "12" }}
           tickFormatter={x => +x.toFixed(4)}
           unit={currency}
           width={60}
