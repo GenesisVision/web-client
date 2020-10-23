@@ -207,10 +207,13 @@ export const cancelAllOrders = (
   api.terminal().cancelAllOrders({ symbol, accountId });
 
 export const cancelOrder = (
-  { symbol }: { symbol: string; useServerTime?: boolean },
+  {
+    symbol,
+    orderId
+  }: { orderId: string; symbol: string; useServerTime?: boolean },
   accountId?: string
 ): Promise<BinanceRawCancelOrder> =>
-  api.terminal().cancelOrder({ symbol, accountId });
+  api.terminal().cancelOrder({ orderId, symbol, accountId });
 
 export const postBuy = ({
   reduceOnly,
