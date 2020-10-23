@@ -1,6 +1,10 @@
 import * as crypto from "crypto-js";
+import {
+  BinanceRawOrderSide,
+  BinanceRawOrderType,
+  BinanceRawTimeInForce
+} from "gv-api-web";
 import fetch from "isomorphic-unfetch";
-import { TimeInForce } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { from } from "rxjs";
 import { AnyObjectType } from "utils/types";
 
@@ -19,12 +23,12 @@ export enum REQUEST_TYPE {
 }
 
 export interface OrderRequest extends AnyObjectType {
-  symbol?: string;
+  symbol: string;
   price?: string;
   quantity?: string;
-  timeInForce?: TimeInForce;
-  side?: string;
-  type?: string;
+  timeInForce?: BinanceRawTimeInForce;
+  side: BinanceRawOrderSide;
+  type: BinanceRawOrderType;
   timestamp?: string;
   interval?: string;
   startTime?: number;
@@ -60,12 +64,12 @@ export const handleErrors = async (response: Response) => {
   }
 };
 
-const parseOptions = (options: OrderRequest) =>
+const parseOptions = (options: AnyObjectType) =>
   Object.entries(options)
     .map(([name, value]) => `${name}=${String(value)}`)
     .join("&");
 
-const signOptions = (options: OrderRequest, privateKey?: string): string =>
+const signOptions = (options: AnyObjectType, privateKey?: string): string =>
   String(crypto.HmacSHA256(parseOptions(options), privateKey));
 
 export const sendRequest = ({

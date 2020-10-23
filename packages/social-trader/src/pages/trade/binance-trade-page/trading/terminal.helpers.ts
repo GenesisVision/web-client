@@ -12,7 +12,8 @@ import {
   ExecutionReport,
   SymbolFilter,
   TerminalAuthDataType,
-  TerminalCurrency
+  TerminalCurrency,
+  UnitedOrder
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import qs from "qs";
 import { useCallback, useEffect, useState } from "react";
@@ -95,11 +96,27 @@ export const transformKlineWrapper = async (promise: Promise<string[][]>) => {
 export const getSymbolFilters = (
   exchangeInfo: ExchangeInfo,
   symbol: string
-): SymbolFilter[] => {
-  return safeGetElemFromArray(
-    exchangeInfo.symbols,
-    item => item.symbol === symbol
-  ).filters;
+) => {
+  const {
+    iceBergPartsFilter,
+    lotSizeFilter,
+    marketLotSizeFilter,
+    maxAlgorithmicOrdersFilter,
+    maxOrdersFilter,
+    minNotionalFilter,
+    priceFilter,
+    pricePercentFilter
+  } = safeGetElemFromArray(exchangeInfo.symbols, item => item.name === symbol);
+  return {
+    iceBergPartsFilter,
+    lotSizeFilter,
+    marketLotSizeFilter,
+    maxAlgorithmicOrdersFilter,
+    maxOrdersFilter,
+    minNotionalFilter,
+    priceFilter,
+    pricePercentFilter
+  };
 };
 
 export const authCookieService = (ctx?: NextPageContext) =>
@@ -138,7 +155,7 @@ export const filterOutboundAccountInfoStream = (
 
 export const filterOrderEventsStream = (
   userStream: Observable<any>
-): Observable<ExecutionReport> =>
+): Observable<UnitedOrder> =>
   userStream.pipe(filter(info => info.eventType === "executionReport"));
 
 const normalizeBalanceList = (

@@ -7,7 +7,7 @@ import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/t
 import { getSymbolFromState } from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import {
   QueryOrderResult,
-  TerminalAuthDataType
+  UnitedOrder
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
@@ -17,28 +17,29 @@ import { OPEN_ORDERS_TABLE_COLUMNS } from "./open-orders.helpers";
 import styles from "./open-orders.module.scss";
 
 interface Props {
-  items?: QueryOrderResult[];
+  items?: UnitedOrder[];
 }
 
 export const OpenOrders: React.FC<Props> = ({ items }) => {
+  console.log(items);
   const { cancelAllOrders } = useContext(TerminalMethodsContext);
   const [t] = useTranslation();
-  const { authData, symbol } = useContext(TerminalInfoContext);
+  const { exchangeAccountId, symbol } = useContext(TerminalInfoContext);
   const { sendRequest, isPending } = useApiRequest({
     request: ({
       options,
-      authData
+      exchangeAccountId
     }: {
       options: { symbol: string; useServerTime?: boolean };
-      authData: TerminalAuthDataType;
-    }) => cancelAllOrders(options, authData)
+      exchangeAccountId: string;
+    }) => cancelAllOrders(options, exchangeAccountId)
   });
   const handleCancel = useCallback(() => {
     return sendRequest({
       options: { symbol: getSymbolFromState(symbol) },
-      authData
+      exchangeAccountId
     });
-  }, [symbol, authData]);
+  }, [symbol, exchangeAccountId]);
   return (
     <TradeTable
       className={styles["open-orders__table"]}
@@ -68,27 +69,28 @@ export const OpenOrders: React.FC<Props> = ({ items }) => {
         </th>
       )}
       renderRow={({
-        executedQty,
-        origQty,
-        orderId,
+        quantity,
+        id,
         time,
         symbol,
         type,
         side,
         price
-      }: QueryOrderResult) => (
-        <OpenOrdersRow
-          orderId={orderId}
-          time={time}
-          symbol={symbol}
-          type={type}
-          side={side}
-          price={price}
-          origQty={origQty}
-          filled={(+executedQty / +origQty) * 100}
-          total={+origQty * +price}
-        />
-      )}
+      }: UnitedOrder) => {
+        return (
+          <OpenOrdersRow
+            orderId={id}
+            time={time}
+            symbol={symbol}
+            type={type}
+            side={side}
+            price={String(price)}
+            origQty={String(quantity)}
+            filled={quantity * 100}
+            total={+quantity * +price}
+          />
+        );
+      }}
     />
   );
 };

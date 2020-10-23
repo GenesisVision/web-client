@@ -16,15 +16,15 @@ import styles from "./market-watch.module.scss";
 
 interface Props {
   isFavorite?: boolean;
-  eventTime: number;
+  eventTime?: number;
   quoteAsset: TerminalCurrency;
   baseAsset: TerminalCurrency;
   column: string;
-  volume: string;
+  volume: number;
   symbol: string;
-  lastPrice: string;
-  priceChange: string;
-  priceChangePercent: string;
+  lastPrice: number;
+  priceChange: number;
+  priceChangePercent: number;
 }
 
 export const MarketWatchRow: React.FC<Props> = React.memo(

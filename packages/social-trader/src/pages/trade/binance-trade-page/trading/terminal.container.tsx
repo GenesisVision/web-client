@@ -1,3 +1,4 @@
+import { BinanceRawSymbol } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
 import { Terminal } from "pages/trade/binance-trade-page/trading/terminal";
 import {
@@ -7,7 +8,6 @@ import {
 } from "pages/trade/binance-trade-page/trading/terminal-info.context";
 import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/terminal-methods.context";
 import {
-  getSymbolFromState,
   stringifySymbolFromToParam,
   updateTerminalUrl
 } from "pages/trade/binance-trade-page/trading/terminal.helpers";
@@ -71,7 +71,9 @@ const _TerminalContainer: React.FC<ITerminalContainerProps> = ({
     const isSymbolCorrect =
       !!symbol &&
       !!exchangeInfo.symbols.find(
-        item => item.symbol === getSymbolFromState(symbol)
+        (item: BinanceRawSymbol) =>
+          item.quoteAsset === symbol.quoteAsset &&
+          item.baseAsset === symbol.baseAsset
       );
     setIsSymbolCorrect(isSymbolCorrect);
     setUpdateExchangeInfo(false);

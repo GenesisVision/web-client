@@ -1,13 +1,13 @@
 import { Text } from "components/text/text";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
-import { Trade } from "pages/trade/binance-trade-page/trading/terminal.types";
+import { UnitedTrade } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { TradesRow } from "pages/trade/binance-trade-page/trading/trades/trades-row";
 import React, { useContext } from "react";
 
 import styles from "./trades.module.scss";
 
 interface Props {
-  items: Trade[];
+  items: UnitedTrade[];
 }
 
 const _Trades: React.FC<Props> = ({ items }) => {
@@ -40,12 +40,12 @@ const _Trades: React.FC<Props> = ({ items }) => {
       <div className={styles["trades__items-container"]}>
         <table className={styles["trades__table"]}>
           <tbody>
-            {items.map(({ price, qty, time }, i) => (
+            {items.map(({ price, quantity, tradeTime }, i) => (
               <TradesRow
                 price={price}
                 prevPrice={items[i + 1]?.price}
-                amount={qty}
-                time={time}
+                amount={quantity}
+                time={tradeTime}
               />
             ))}
           </tbody>

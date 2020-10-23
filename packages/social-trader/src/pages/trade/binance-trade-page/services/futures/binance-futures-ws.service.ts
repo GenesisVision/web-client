@@ -13,7 +13,7 @@ import {
   MarkPrice,
   TerminalCurrency,
   Ticker,
-  Trade
+  UnitedTrade
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
@@ -54,7 +54,7 @@ export const markPriceSocket = (
 export const tradeSocket = (
   connectSocketMethod: ConnectSocketMethodType,
   symbol: TerminalCurrency
-): Observable<Trade> => {
+): Observable<UnitedTrade> => {
   const socketType = "trade";
   const socketName = `${symbol.toLowerCase()}@${socketType}`;
   const url = `${BINANCE_FUTURES_WS_API_URL}/${BINANCE_WS_API_TYPE.WS}/${socketName}`;

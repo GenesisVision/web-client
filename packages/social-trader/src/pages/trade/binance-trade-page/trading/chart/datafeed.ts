@@ -1,3 +1,5 @@
+import dayjs from "dayjs";
+import { BinanceRawKlineInterval } from "gv-api-web";
 import {
   IBasicDataFeed,
   SearchSymbolResultItem
@@ -15,7 +17,27 @@ import {
   Symbol
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 
-const formatTimeResolution = (resolution: string) => {
+const formatTimeResolution = (resolution: string): BinanceRawKlineInterval => {
+  const time: { [key: string]: BinanceRawKlineInterval } = {
+    "1": "OneMinute",
+    "3": "ThreeMinutes",
+    "5": "FiveMinutes",
+    "15": "FifteenMinutes",
+    "30": "ThirtyMinutes",
+    "60": "OneHour",
+    "120": "TwoHour",
+    "240": "FourHour",
+    "360": "SixHour",
+    "720": "TwelveHour",
+    "1D": "OneDay",
+    "3D": "ThreeDay",
+    "1W": "OneWeek",
+    "1M": "OneMonth"
+  };
+  return time[resolution];
+};
+
+const formatTimeResolutionBinance = (resolution: string) => {
   const time: { [key: string]: string } = {
     "1": "1m",
     "3": "3m",
@@ -66,13 +88,13 @@ const configurationData = {
 };
 
 type Params = {
-  getServerTime: () => Promise<{ serverTime: number }>;
+  getServerTime: () => Promise<{ date: number }>;
   symbols: Symbol[];
   getKlines: (params: KlineParams) => Promise<Bar[]>;
   klineSocket: KlineSocketType;
 };
 
-export default ({
+export const Datafeed = ({
   getServerTime,
   symbols,
   getKlines,
@@ -80,9 +102,9 @@ export default ({
 }: Params): IBasicDataFeed => ({
   getServerTime: async (callback: ServerTimeCallback) => {
     try {
-      const { serverTime } = await getServerTime();
+      const { date } = await getServerTime();
       setTimeout(() => {
-        callback(Math.floor(serverTime / 1000));
+        callback(date);
       }, 0);
     } catch (e) {}
   },
@@ -93,12 +115,12 @@ export default ({
     const items: SearchSymbolResultItem[] = symbols
       .filter(sym => sym.baseAsset === userInput)
       .map(symbolItem => ({
-        symbol: symbolItem.symbol,
-        full_name: symbolItem.symbol,
+        symbol: symbolItem.name,
+        full_name: symbolItem.name,
         description: `Binance:${symbolItem.baseAsset}/${symbolItem.quoteAsset}`,
         exchange,
         type,
-        ticker: symbolItem.symbol
+        ticker: symbolItem.name
       }));
     setTimeout(() => onResultReadyCallback(items));
   },
@@ -107,19 +129,15 @@ export default ({
     onSymbolResolvedCallback,
     onResolveErrorCallback
   ) => {
-    const symbolItem = symbols.find(({ symbol }) => symbol === symbolName);
+    const symbolItem = symbols.find(({ name }) => name === symbolName);
     if (!symbolItem) {
       onResolveErrorCallback("cannot resolve symbol");
       return;
     }
+    const { tickSize } = symbolItem.priceFilter;
+    const { stepSize } = symbolItem.lotSizeFilter;
 
-    const filters = symbolItem.filters.find(function(e) {
-      //@ts-ignore
-      return e.tickSize || e.stepSize;
-    });
-
-    //@ts-ignore;
-    const size = filters.stepSize || filters.tickSize;
+    const size = stepSize || tickSize;
 
     const symbolInfo: LibrarySymbolInfo = {
       name: `${symbolItem.baseAsset}/${symbolItem.quoteAsset}`,
@@ -161,7 +179,7 @@ export default ({
     const endTime = to * 1000;
     const limit = 1000;
     const interval = formatTimeResolution(resolution);
-
+    console.log(interval);
     const urlParameters = {
       symbol: symbolInfo.full_name,
       interval,
@@ -172,7 +190,6 @@ export default ({
 
     try {
       const bars = await getKlines(urlParameters);
-
       if (bars.length > 0) {
         onHistoryCallback(bars, { noData: false });
       } else {
@@ -184,9 +201,11 @@ export default ({
   },
   subscribeBars: (symbolInfo, resolution, onRealtimeCallback) => {
     const { full_name } = symbolInfo;
+
+    console.log(formatTimeResolutionBinance(resolution));
     klineSocket(
       full_name.toLowerCase(),
-      formatTimeResolution(resolution)
+      formatTimeResolutionBinance(resolution)
     ).subscribe(data => {
       onRealtimeCallback(data);
     });

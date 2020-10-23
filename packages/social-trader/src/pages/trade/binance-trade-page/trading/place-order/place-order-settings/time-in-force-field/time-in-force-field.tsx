@@ -8,21 +8,26 @@ import {
   TimeInForce as TimeInForceType
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useContext } from "react";
-import { useTranslation } from "react-i18next";
 
 interface Props {
   orderType: OrderType;
 }
 
-export const TIME_IN_FORCE_VALUES: TimeInForceType[] = ["GTC", "IOC", "FOK"];
+export const TIME_IN_FORCE_VALUES: {
+  value: TimeInForceType;
+  label: string;
+}[] = [
+  { label: "GTC", value: "GoodTillCancel" },
+  { label: "IOC", value: "ImmediateOrCancel" },
+  { label: "FOK", value: "FillOrKill" }
+];
 
 const _TimeInForceField: React.FC<Props> = ({ orderType }) => {
   const { terminalType } = useContext(TerminalInfoContext);
-  const values: TimeInForceType[] =
-    terminalType === "spot" || orderType === "STOP_LOSS_LIMIT"
+  const values =
+    terminalType === "spot" || orderType === "StopLossLimit"
       ? TIME_IN_FORCE_VALUES
-      : [...TIME_IN_FORCE_VALUES, "GTX"];
-  const [t] = useTranslation();
+      : [...TIME_IN_FORCE_VALUES, { value: "GoodTillCrossing", label: "GTX" }];
   return (
     <GVHookFormField
       fixedWidth={false}
@@ -32,8 +37,8 @@ const _TimeInForceField: React.FC<Props> = ({ orderType }) => {
       InputComponent={Select}
     >
       {values.map(value => (
-        <option value={value} key={value}>
-          {value}
+        <option value={value.value} key={value.value}>
+          {value.label}
         </option>
       ))}
     </GVHookFormField>

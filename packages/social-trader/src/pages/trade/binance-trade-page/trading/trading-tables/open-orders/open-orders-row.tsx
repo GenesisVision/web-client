@@ -14,7 +14,7 @@ import { formatDate } from "utils/dates";
 
 interface Props {
   orderId: number;
-  time: number;
+  time: number | Date;
   symbol: string;
   type: string;
   side: OrderSide;
@@ -36,22 +36,27 @@ const _OpenOrdersRow: React.FC<Props> = ({
   total
 }) => {
   const { cancelOrder } = useContext(TerminalMethodsContext);
-  const { authData, tickSize, stepSize } = useContext(TerminalInfoContext);
+  const { exchangeAccountId, tickSize, stepSize } = useContext(
+    TerminalInfoContext
+  );
   const { sendRequest, isPending } = useApiRequest({
     request: ({
       options,
-      authData
+      exchangeAccountId
     }: {
       options: { symbol: string; orderId: string; useServerTime?: boolean };
-      authData: TerminalAuthDataType;
-    }) => cancelOrder(options, authData)
+      exchangeAccountId: string;
+    }) => cancelOrder(options, exchangeAccountId)
   });
   const handleCancel = useCallback(() => {
-    sendRequest({ options: { symbol, orderId: String(orderId) }, authData });
-  }, [symbol, orderId, authData]);
+    sendRequest({
+      options: { symbol, orderId: String(orderId) },
+      exchangeAccountId
+    });
+  }, [symbol, orderId, exchangeAccountId]);
   return (
     <TableRow>
-      <TableCell firstOffset={false}>{formatDate(time)}</TableCell>
+      <TableCell firstOffset={false}>{formatDate(new Date(time))}</TableCell>
       <TableCell>{symbol}</TableCell>
       <TableCell>{type}</TableCell>
       <TableCell>{side}</TableCell>

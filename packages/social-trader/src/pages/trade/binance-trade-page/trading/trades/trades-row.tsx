@@ -6,10 +6,10 @@ import React, { useContext } from "react";
 import { formatTime } from "utils/dates";
 
 interface Props {
-  prevPrice?: string;
-  price: string;
-  amount: string;
-  time: number;
+  prevPrice?: number;
+  price: number;
+  amount: number;
+  time: number | Date;
 }
 
 const _TradesRow: React.FC<Props> = ({ prevPrice, price, amount, time }) => {
