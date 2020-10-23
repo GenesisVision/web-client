@@ -37,8 +37,8 @@ const StyledA = styled.a<LinkProps>`
     `display: block;
     width: 100%;`};
   color: ${({ white, noColor }) => {
-    if (white) return `white;`;
-    if (noColor) return `inherit;`;
+    if (white) return `white`;
+    if (noColor) return `inherit`;
     return "#03bdaf";
   }};
 `;
