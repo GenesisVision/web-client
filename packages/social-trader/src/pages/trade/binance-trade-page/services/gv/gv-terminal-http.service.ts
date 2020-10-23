@@ -4,6 +4,6 @@ export const getFavorites = async (id?: string) =>
   id
     ? await api
         .terminal()
-        .getTradingPlatformFavoriteSymbols(id)
+        .getFavoriteSymbols(id)
         .then(({ items }) => items)
     : [];

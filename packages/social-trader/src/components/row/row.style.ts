@@ -1,14 +1,14 @@
 import { Center } from "components/center/center";
+import { IRowProps } from "components/row/row.types";
+import styled from "styled-components";
+import { adaptiveMargin } from "utils/style/mixins";
 import {
   $paddingMedium,
   $paddingSmall,
   $paddingXsmall,
   $paddingXxsmall,
   $paddingXxxsmall
-} from "components/gv-styles/gv-sizes";
-import { IRowProps } from "components/row/row.types";
-import styled from "styled-components";
-import { adaptiveMargin } from "utils/style/style-mixins";
+} from "utils/style/sizes";
 
 export const RowStyledCenter = styled(Center)<IRowProps>`
   width: ${({ wide }: IRowProps) => (wide ? "100%" : "auto")};

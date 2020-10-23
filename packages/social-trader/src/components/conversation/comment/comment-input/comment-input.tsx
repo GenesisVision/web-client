@@ -60,7 +60,7 @@ const _CommentInput: React.FC<Props> = ({ onSubmit, status, errorMessage }) => {
     formState: { isSubmitting }
   } = form;
   const { text, images } = watch();
-  const isSuccessful = status === API_REQUEST_STATUS.SUCCESS;
+  const isSuccessful = status === "SUCCESS";
 
   const {
     isSearchPending,

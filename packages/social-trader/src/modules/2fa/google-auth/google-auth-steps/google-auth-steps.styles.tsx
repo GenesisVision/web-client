@@ -1,13 +1,10 @@
+import styled from "styled-components";
 import {
   $backgroundColor,
   $secondaryBackgroundColor
-} from "components/gv-styles/gv-colors/gv-colors";
-import {
-  $paddingUpperMedium,
-  $paddingXxsmall
-} from "components/gv-styles/gv-sizes";
-import styled from "styled-components";
-import { adaptivePadding } from "utils/style/style-mixins";
+} from "utils/style/colors";
+import { adaptivePadding } from "utils/style/mixins";
+import { $paddingUpperMedium, $paddingXxsmall } from "utils/style/sizes";
 
 export const GoogleAuthStepContainer = styled.div<{
   altColor?: boolean;

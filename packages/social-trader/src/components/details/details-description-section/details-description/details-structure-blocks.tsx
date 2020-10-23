@@ -1,20 +1,17 @@
 import ImageBase from "components/avatar/image-base";
 import { $paddingControlsLeft } from "components/details/details-description-section/details-description/details-description.style";
-import {
-  mediaBreakpointDesktop,
-  mediaBreakpointTablet
-} from "components/gv-styles/gv-media";
-import {
-  $fontSizeParagraph,
-  $paddingSmall
-} from "components/gv-styles/gv-sizes";
 import { Row } from "components/row/row";
 import { StatisticItemList } from "components/statistic-item-list/statistic-item-list";
 import { Text } from "components/text/text";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
-import { fontSize } from "utils/style/style-mixins";
+import {
+  mediaBreakpointDesktop,
+  mediaBreakpointTablet
+} from "utils/style/media";
+import { fontSize } from "utils/style/mixins";
+import { $fontSizeParagraph, $paddingSmall } from "utils/style/sizes";
 
 export const DetailsStatisticContainer = styled.div`
   display: inline-flex;
@@ -23,20 +20,25 @@ export const DetailsStatisticContainer = styled.div`
   min-width: 100%;
   ${mediaBreakpointDesktop(`min-width: auto;`)}
 `;
-export const DetailsPerformanceData = styled(StatisticItemList)`
+export const DetailsPerformanceDataContainer = styled.div`
   padding-left: 0;
   ${mediaBreakpointTablet(`
     padding-left: ${$paddingSmall}px;
     margin-left: ${$paddingControlsLeft}px;
   `)}
 `;
+export const DetailsPerformanceData: React.FC = ({ children }) => (
+  <DetailsPerformanceDataContainer>
+    <StatisticItemList>{children}</StatisticItemList>
+  </DetailsPerformanceDataContainer>
+);
 
 const StyledImageBase = styled(ImageBase)`
   width: 100%;
 `;
 
 const BrokerImageContainer = styled.div`
-  height: 20px;
+  height: 26px;
   width: 100px;
   overflow: hidden;
 `;

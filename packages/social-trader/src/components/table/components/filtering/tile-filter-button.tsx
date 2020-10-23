@@ -1,22 +1,19 @@
-import {
-  $mainColor,
-  $panelBackgroundColor
-} from "components/gv-styles/gv-colors/gv-colors";
-import {
-  $fontSizeH3,
-  $fontSizeXsmall,
-  $paddingXxsmall,
-  $paddingXxxsmall
-} from "components/gv-styles/gv-sizes";
 import * as React from "react";
 import styled from "styled-components";
+import { $mainColor, $panelBackgroundColor } from "utils/style/colors";
 import {
   adaptiveBorderRadius,
   fontSize,
   height,
   horizontalPaddings,
   lineHeight
-} from "utils/style/style-mixins";
+} from "utils/style/mixins";
+import {
+  $fontSizeH3,
+  $fontSizeXsmall,
+  $paddingXxsmall,
+  $paddingXxxsmall
+} from "utils/style/sizes";
 import { OptionalClickable } from "utils/types";
 
 const Container = styled.div`

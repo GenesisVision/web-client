@@ -1,9 +1,6 @@
-import {
-  $iconColor,
-  $primaryColor
-} from "components/gv-styles/gv-colors/gv-colors";
 import * as React from "react";
 import styled from "styled-components";
+import { $iconColor, $primaryColor } from "utils/style/colors";
 
 interface Props {
   isOpen?: boolean;

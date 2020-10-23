@@ -30,6 +30,22 @@ export enum ATTACH_ACCOUNT_FIELDS {
   key = "key"
 }
 
+export interface IAttachAccountSettingsFormValues {
+  [ATTACH_ACCOUNT_FIELDS.brokerName]: string;
+  [ATTACH_ACCOUNT_FIELDS.brokerAccountTypeId]: string;
+  [ATTACH_ACCOUNT_FIELDS.secret]: string;
+  [ATTACH_ACCOUNT_FIELDS.key]: string;
+}
+
+interface Props {
+  isPending?: boolean;
+  success?: boolean;
+  errorMessage?: string;
+  requestBrokerName?: string;
+  data: Broker[];
+  onSubmit: (values: IAttachAccountSettingsFormValues) => void;
+}
+
 const _AttachAccountSettings: React.FC<Props> = ({
   success,
   isPending,
@@ -122,7 +138,6 @@ const _AttachAccountSettings: React.FC<Props> = ({
         <Row wide>
           <GVHookFormField
             showCorrect
-            wide
             className={styles["attach-account-settings__api-field"]}
             type="text"
             name={ATTACH_ACCOUNT_FIELDS.key}
@@ -134,7 +149,6 @@ const _AttachAccountSettings: React.FC<Props> = ({
         <Row wide>
           <GVHookFormField
             showCorrect
-            wide
             className={styles["attach-account-settings__api-field"]}
             type="text"
             name={ATTACH_ACCOUNT_FIELDS.secret}
@@ -154,22 +168,6 @@ const _AttachAccountSettings: React.FC<Props> = ({
     </HookForm>
   );
 };
-
-export interface IAttachAccountSettingsFormValues {
-  [ATTACH_ACCOUNT_FIELDS.brokerName]: string;
-  [ATTACH_ACCOUNT_FIELDS.brokerAccountTypeId]: string;
-  [ATTACH_ACCOUNT_FIELDS.secret]: string;
-  [ATTACH_ACCOUNT_FIELDS.key]: string;
-}
-
-interface Props {
-  isPending?: boolean;
-  success?: boolean;
-  errorMessage?: string;
-  requestBrokerName?: string;
-  data: Broker[];
-  onSubmit: (values: IAttachAccountSettingsFormValues) => void;
-}
 
 const AttachAccountSettings = withLoader(React.memo(_AttachAccountSettings));
 export default AttachAccountSettings;

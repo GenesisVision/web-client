@@ -1,20 +1,17 @@
-import {
-  $rowColor,
-  $textAccentColor
-} from "components/gv-styles/gv-colors/gv-colors";
+import { IWithOffset } from "components/table/components/table-card/table-card";
+import { css } from "styled-components";
+import { $rowColor, $textAccentColor } from "utils/style/colors";
 import {
   mediaBreakpointLandscapePhone,
   mediaBreakpointTablet
-} from "components/gv-styles/gv-media";
+} from "utils/style/media";
+import { fontSize, height, link } from "utils/style/mixins";
 import {
   $borderRadiusMiddle,
   $fontSizeParagraph,
   $paddingSmall,
   $paddingXsmall
-} from "components/gv-styles/gv-sizes";
-import { IWithOffset } from "components/table/components/table-card/table-card";
-import { css } from "styled-components";
-import { fontSize, height, link } from "utils/style/style-mixins";
+} from "utils/style/sizes";
 
 const $actionSize = 30;
 
@@ -33,7 +30,7 @@ export const tableCardTitleStyles = css`
   word-break: break-word;
   display: block;
   padding-bottom: 10px;
-  ${mediaBreakpointLandscapePhone(`padding-bottom: 0;`)}
+  ${mediaBreakpointLandscapePhone(`padding-bottom: 0;`)};
 `;
 
 export const tableCardContainerStyles = css<IWithOffset>`
@@ -50,8 +47,8 @@ export const tableCardContainerStyles = css<IWithOffset>`
     min-width: 312px;
     width: calc(50% - ${$paddingSmall}px / 2);
     padding: ${$paddingSmall}px ${$paddingXsmall}px;
-    `)}
-  ${mediaBreakpointTablet(`flex-grow: 0;`)} 
+    `)};
+  ${mediaBreakpointTablet(`flex-grow: 0;`)};
   @media (min-width: 1075px) {
     width: calc(33.33% - ${$paddingSmall}px / 2);
   }
@@ -66,5 +63,5 @@ export const tableCardContainerStyles = css<IWithOffset>`
       margin-right: ${$paddingSmall / 2}px
       `)};
     `
-      : `margin:0;`}
+      : `margin:0;`};
 `;

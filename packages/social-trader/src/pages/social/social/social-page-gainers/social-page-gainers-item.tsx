@@ -8,7 +8,6 @@ import {
   FeedContext,
   SocialSearchInitialState
 } from "pages/social/social/feed.context";
-import styles from "pages/social/social/social-page-gainers/social-page-gainers.module.scss";
 import React, { useCallback, useContext } from "react";
 import { formatCurrencyValue } from "utils/formatter";
 
@@ -37,7 +36,7 @@ const _SocialPageGainersItem: React.FC<Props> = ({
   }, [title]);
   return (
     <div>
-      <Row className={styles["social-page-gainers__item-label"]}>
+      <Row>
         <RowItem size={"small"}>
           <Text size={"xsmall"}>
             <CurrencyItem symbol={title} small logo={logoUrl} />
@@ -47,7 +46,7 @@ const _SocialPageGainersItem: React.FC<Props> = ({
           <Text size={"small"}>{title}</Text>
         </RowItem>
       </Row>
-      <Row className={styles["social-page-gainers__item-value"]}>
+      <Row>
         <RowItem>
           <Text size={"small"}>$ {formatCurrencyValue(price, title)}</Text>
         </RowItem>

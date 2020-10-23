@@ -1,4 +1,12 @@
-import { $secondaryBackgroundColor } from "components/gv-styles/gv-colors/gv-colors";
+import React from "react";
+import styled from "styled-components";
+import { $secondaryBackgroundColor } from "utils/style/colors";
+import {
+  adaptiveFullPadding,
+  fontSize,
+  horizontalPaddings,
+  verticalPaddings
+} from "utils/style/mixins";
 import {
   $fontSizeCommon,
   $modalWidth,
@@ -7,15 +15,7 @@ import {
   $popoverPaddingLarge,
   $popoverPaddingMedium,
   $popoverPaddingSmall
-} from "components/gv-styles/gv-sizes";
-import React from "react";
-import styled from "styled-components";
-import {
-  adaptiveFullPadding,
-  fontSize,
-  horizontalPaddings,
-  verticalPaddings
-} from "utils/style/style-mixins";
+} from "utils/style/sizes";
 import { SizesType } from "utils/types";
 
 interface IPopoverContentCardBlockProps

@@ -1,10 +1,10 @@
-import { $textColor } from "components/gv-styles/gv-colors/gv-colors";
 import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import Tooltip from "components/tooltip/tooltip";
 import { TooltipContent } from "components/tooltip/tooltip-content";
 import * as React from "react";
 import { useCallback } from "react";
 import styled from "styled-components";
+import { $textColor } from "utils/style/colors";
 
 interface Props {
   pointer?: boolean;

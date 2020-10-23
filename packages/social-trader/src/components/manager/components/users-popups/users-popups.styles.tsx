@@ -1,13 +1,13 @@
 import { Center } from "components/center/center";
 import Dialog from "components/dialog/dialog";
+import { RowItem } from "components/row-item/row-item";
+import styled from "styled-components";
+import { horizontalPaddings, verticalPaddings } from "utils/style/mixins";
 import {
   $fontSizeSmall,
   $popoverPaddingMedium,
   $popoverPaddingSmall
-} from "components/gv-styles/gv-sizes";
-import { RowItem } from "components/row-item/row-item";
-import styled from "styled-components";
-import { horizontalPaddings, verticalPaddings } from "utils/style/style-mixins";
+} from "utils/style/sizes";
 
 export const UserPopupList = styled.div`
   max-height: 456px;

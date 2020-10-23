@@ -1,12 +1,8 @@
-import {
-  $landingBg,
-  $mainColor,
-  $primaryColor
-} from "components/gv-styles/gv-colors/gv-colors";
 import LPButton from "pages/landing-page/components/lp-button/lp-button";
 import React, { useCallback, useState } from "react";
 import styled from "styled-components";
-import { landingContainer, landingResetLink } from "utils/style/style-mixins";
+import { $landingBg, $mainColor, $primaryColor } from "utils/style/colors";
+import { landingContainer, landingResetLink } from "utils/style/mixins";
 
 import { setAccept } from "./cookie-message.helpers";
 

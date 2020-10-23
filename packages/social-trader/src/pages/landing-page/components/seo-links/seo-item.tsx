@@ -1,13 +1,10 @@
-import {
-  $landingLinkHover,
-  $mainColor
-} from "components/gv-styles/gv-colors/gv-colors";
-import { mediaBreakpointTablet } from "components/gv-styles/gv-media";
 import Link from "components/link/link";
 import { useTranslation } from "i18n";
 import React from "react";
 import styled, { css } from "styled-components";
-import { transition } from "utils/style/style-mixins";
+import { $landingLinkHover, $mainColor } from "utils/style/colors";
+import { mediaBreakpointTablet } from "utils/style/media";
+import { transition } from "utils/style/mixins";
 
 import styles from "./seo-list.module.scss";
 

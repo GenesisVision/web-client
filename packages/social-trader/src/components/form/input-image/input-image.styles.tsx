@@ -1,13 +1,12 @@
+import { Text } from "components/text/text";
+import styled from "styled-components";
 import {
   $negativeColor,
   $panelBackgroundColor,
   $primaryColor,
   $separatorColor
-} from "components/gv-styles/gv-colors/gv-colors";
-import { mediaBreakpointTablet } from "components/gv-styles/gv-media";
-import { Text } from "components/text/text";
-import styled from "styled-components";
-import { width } from "utils/style/style-mixins";
+} from "utils/style/colors";
+import { mediaBreakpointTablet } from "utils/style/media";
 
 export const InputImageContainer = styled.div<{ error?: boolean }>`
   width: 200px;

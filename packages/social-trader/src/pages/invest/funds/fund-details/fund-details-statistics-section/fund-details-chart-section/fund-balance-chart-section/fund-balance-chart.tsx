@@ -1,6 +1,5 @@
 import chartXAxis from "components/chart/chart-components/chart-xaxis";
 import { BalanceChartElementType } from "components/details/details-statistic-section/details.chart.types";
-import GVColors from "components/gv-styles/gv-colors";
 import { CURRENCIES } from "modules/currency-select/currency-select.constants";
 import * as React from "react";
 import {
@@ -11,6 +10,7 @@ import {
   Tooltip,
   YAxis
 } from "recharts";
+import { $labelColor } from "utils/style/colors";
 
 import FundBalanceTooltip from "./fund-balance-tooltip";
 
@@ -29,7 +29,7 @@ const _FundBalanceChart: React.FC<Props> = ({
         <YAxis
           axisLine={false}
           orientation="right"
-          tick={{ fill: GVColors.$labelColor, fontSize: "12" }}
+          tick={{ fill: $labelColor, fontSize: "12" }}
           tickFormatter={x => +x.toFixed(4)}
           unit={currency}
           width={60}

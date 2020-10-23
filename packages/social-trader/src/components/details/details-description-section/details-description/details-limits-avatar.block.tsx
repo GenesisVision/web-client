@@ -1,12 +1,9 @@
 import DetailsAssetAvatar from "components/details/details-description-section/details-description/details-asset-avatar";
-import { mediaBreakpointTablet } from "components/gv-styles/gv-media";
-import {
-  $paddingXsmall,
-  $paddingXsmallMobile
-} from "components/gv-styles/gv-sizes";
 import * as React from "react";
 import styled from "styled-components";
-import { width } from "utils/style/style-mixins";
+import { mediaBreakpointTablet } from "utils/style/media";
+import { width } from "utils/style/mixins";
+import { $paddingXsmall, $paddingXsmallMobile } from "utils/style/sizes";
 import { CurrencyEnum } from "utils/types";
 
 interface Props {

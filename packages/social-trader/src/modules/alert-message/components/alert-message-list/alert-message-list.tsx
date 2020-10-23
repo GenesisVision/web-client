@@ -1,5 +1,4 @@
 import { Button } from "components/button/button";
-import { $paddingSmall } from "components/gv-styles/gv-sizes";
 import AlertMessage from "modules/alert-message/components/alert-message-list/alert-message";
 import Router from "next/router";
 import * as React from "react";
@@ -8,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "reducers/root-reducer";
 import styled from "styled-components";
+import { $paddingSmall } from "utils/style/sizes";
 
 import { alertMessageActions } from "../../actions/alert-message-actions";
 

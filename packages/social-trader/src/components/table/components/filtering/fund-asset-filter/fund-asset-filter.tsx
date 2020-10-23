@@ -1,13 +1,10 @@
 import { CurrencyItem } from "components/currency-item/currency-item";
-import {
-  $fontSizeCommon,
-  $paddingXxsmall
-} from "components/gv-styles/gv-sizes";
 import { PlatformAsset, ProviderPlatformAssets } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
-import { adaptivePadding, fontSize } from "utils/style/style-mixins";
+import { adaptivePadding, fontSize } from "utils/style/mixins";
+import { $fontSizeCommon, $paddingXxsmall } from "utils/style/sizes";
 
 import { UpdateFilterFunc } from "../../table.types";
 import TileFilter from "../tile-filter";

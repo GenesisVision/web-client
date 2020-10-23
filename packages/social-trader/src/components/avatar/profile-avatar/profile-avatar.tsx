@@ -1,10 +1,10 @@
-import { $secondaryColor } from "components/gv-styles/gv-colors/gv-colors";
-import { $avatarSize, $smallAvatarSize } from "components/gv-styles/gv-sizes";
-import { $boxShadow1 } from "components/gv-styles/gv-style-constants";
 import { UserAvatarIcon } from "components/icon/user-avatar-icon";
 import * as React from "react";
 import styled from "styled-components";
-import { height, transition, width } from "utils/style/style-mixins";
+import { $secondaryColor } from "utils/style/colors";
+import { height, transition, width } from "utils/style/mixins";
+import { $boxShadow1 } from "utils/style/shadow";
+import { $avatarSize, $smallAvatarSize } from "utils/style/sizes";
 
 import ImageBase, { IImageProps } from "../image-base";
 

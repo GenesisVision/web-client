@@ -1,5 +1,4 @@
 import GVProgramPeriod from "components/gv-program-period";
-import { $mainColor } from "components/gv-styles/gv-colors/gv-colors";
 import {
   CalculatorLevelLineContainer,
   CalculatorLevelLineLabel,
@@ -9,6 +8,7 @@ import {
 } from "modules/level-calculator/components/calculator-level-line/calculator-level-line.styles";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
+import { $mainColor } from "utils/style/colors";
 
 interface Props {
   start: number;

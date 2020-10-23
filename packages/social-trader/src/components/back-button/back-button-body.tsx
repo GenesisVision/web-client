@@ -1,11 +1,11 @@
+import * as React from "react";
+import { useTranslation } from "react-i18next";
+import styled from "styled-components";
 import {
   $fontSizeCommon,
   $fontSizeSmall,
   $paddingXsmall
-} from "components/gv-styles/gv-sizes";
-import * as React from "react";
-import { useTranslation } from "react-i18next";
-import styled from "styled-components";
+} from "utils/style/sizes";
 import { Clickable } from "utils/types";
 
 interface Props extends Clickable {

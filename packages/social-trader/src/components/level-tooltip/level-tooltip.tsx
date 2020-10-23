@@ -1,5 +1,3 @@
-import { $primaryColor } from "components/gv-styles/gv-colors/gv-colors";
-import { $paddingXxsmall } from "components/gv-styles/gv-sizes";
 import { LabeledValue } from "components/labeled-value/labeled-value";
 import { PopoverContentCardBlock } from "components/popover/popover-card.block";
 import { PopoverContent } from "components/popover/popover-content";
@@ -7,7 +5,9 @@ import { Text } from "components/text/text";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
-import { adaptivePadding, fontSize } from "utils/style/style-mixins";
+import { $primaryColor } from "utils/style/colors";
+import { adaptivePadding, fontSize } from "utils/style/mixins";
+import { $paddingXxsmall } from "utils/style/sizes";
 
 export interface ILevelTooltip {
   level: number;

@@ -1,17 +1,25 @@
-import clsx from "clsx";
 import { Center } from "components/center/center";
 import { DefaultBlock } from "components/default.block/default.block";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import FilterArrowIcon from "components/table/components/filtering/filter-arrow-icon";
 import React, { useCallback, useState } from "react";
-
-import styles from "./accordion.module.scss";
+import styled from "styled-components";
+import { $backgroundColor } from "utils/style/colors";
 
 interface Props {
   label: string | JSX.Element;
   text: string | JSX.Element;
 }
+
+const Container = styled(DefaultBlock)`
+  cursor: pointer;
+  background: ${$backgroundColor};
+`;
+
+const IconContainer = styled(Center)<{ open?: boolean }>`
+  ${({ open }) => open && "transform: scale(1, -1);"};
+`;
 
 export const Accordion: React.FC<Props> = ({ label, text }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,16 +30,12 @@ export const Accordion: React.FC<Props> = ({ label, text }) => {
     setIsOpen(false);
   }, []);
   return (
-    <DefaultBlock wide size={"small"} className={clsx(styles["accordion"])}>
-      <Row onClick={handleClickLabel} className={styles["accordion__label"]}>
+    <Container wide size={"small"}>
+      <Row onClick={handleClickLabel}>
         <RowItem size={"small"}>
-          <Center
-            className={clsx(styles["accordion__icon"], {
-              [styles["accordion__icon--open"]]: isOpen
-            })}
-          >
+          <IconContainer open={isOpen}>
             <FilterArrowIcon isOpen={isOpen} />
-          </Center>
+          </IconContainer>
         </RowItem>
         <RowItem>{label}</RowItem>
       </Row>
@@ -40,6 +44,6 @@ export const Accordion: React.FC<Props> = ({ label, text }) => {
           {text}
         </Row>
       )}
-    </DefaultBlock>
+    </Container>
   );
 };

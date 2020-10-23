@@ -6,7 +6,6 @@ import { GVTabProps } from "./gv-tab";
 
 export interface GVTabsProps {
   value: string;
-  className?: string;
   onChange?: (e: React.SyntheticEvent<EventTarget>, value: string) => void;
   children: Array<React.ReactElement<GVTabProps>>;
 }

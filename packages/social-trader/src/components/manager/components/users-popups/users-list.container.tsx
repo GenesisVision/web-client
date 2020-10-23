@@ -9,8 +9,7 @@ import {
   initialOptions
 } from "components/notifications/components/notifications.helpers";
 import { PopoverContentCardBlock } from "components/popover/popover-card.block";
-import { NotificationList } from "gv-api-web";
-import useApiRequest, { API_REQUEST_STATUS } from "hooks/api-request.hook";
+import useApiRequest from "hooks/api-request.hook";
 import React, { useCallback, useEffect, useState } from "react";
 
 export interface IUsersListContainerOuterProps {
@@ -34,7 +33,7 @@ interface Props
 const _UsersListContainer: React.FC<Props> = ({ id, request, title }) => {
   const [options, setOptions] = useState(initialOptions);
   const [total, setTotal] = useState(0);
-  const updateStateMiddleware = (res: NotificationList) => {
+  const updateStateMiddleware = (res: any) => {
     const newOptions = calculateOptions(options, res.total);
     setOptions(newOptions);
     setTotal(res.total);
@@ -51,7 +50,7 @@ const _UsersListContainer: React.FC<Props> = ({ id, request, title }) => {
   }, [data]);
 
   const handleLoadMore = useCallback(() => {
-    if (status !== API_REQUEST_STATUS.PENDING) sendRequest({ id, ...options });
+    if (status !== "PENDING") sendRequest({ id, ...options });
   }, [id, status, options]);
 
   const hasMore = total > usersList.length;

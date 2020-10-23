@@ -1,9 +1,7 @@
 import { CHIP_TYPE } from "components/chip/chip";
 import ChipButton from "components/chip/chip-button";
-import { $fontSizeCommon } from "components/gv-styles/gv-sizes";
 import HeaderIcon from "components/header/header-icon";
 import { fetchProfileHeaderInfo } from "components/header/header.service";
-import { Icon } from "components/icon/icon";
 import { RingIcon } from "components/icon/ring-icon";
 import NotificationsSidebar from "components/notifications/components/notifications-sidebar";
 import { withBlurLoader } from "decorators/with-blur-loader";
@@ -12,7 +10,8 @@ import * as React from "react";
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { fontSize } from "utils/style/style-mixins";
+import { fontSize } from "utils/style/mixins";
+import { $fontSizeCommon } from "utils/style/sizes";
 
 const NotificationsCount = styled.div`
   ${fontSize($fontSizeCommon)}

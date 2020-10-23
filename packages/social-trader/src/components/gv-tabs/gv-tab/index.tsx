@@ -1,16 +1,12 @@
+import { RowItem } from "components/row-item/row-item";
+import React, { useCallback } from "react";
+import styled from "styled-components";
 import {
   $labelColor,
   $primaryColor,
   $secondaryColor,
   $textLightColor
-} from "components/gv-styles/gv-colors/gv-colors";
-import {
-  $fontSizeCommon,
-  $paddingXxxsmall
-} from "components/gv-styles/gv-sizes";
-import { RowItem } from "components/row-item/row-item";
-import React, { useCallback } from "react";
-import styled from "styled-components";
+} from "utils/style/colors";
 import {
   adaptiveBorderRadius,
   adaptiveMargin,
@@ -19,7 +15,8 @@ import {
   horizontalPaddings,
   transition,
   verticalPaddings
-} from "utils/style/style-mixins";
+} from "utils/style/mixins";
+import { $fontSizeCommon, $paddingXxxsmall } from "utils/style/sizes";
 
 export interface GVTabProps {
   label: React.ReactNode;
@@ -27,8 +24,6 @@ export interface GVTabProps {
   count?: number;
   selected?: boolean;
   visible?: boolean;
-  className?: string;
-  countClassName?: string;
   onChange?: (e: React.SyntheticEvent<EventTarget>, value: string) => void;
   onClick?: (e: React.SyntheticEvent<EventTarget>) => void;
 }
@@ -75,7 +70,7 @@ const Tab = styled.div<{ selected?: boolean }>`
   }};
 
   &::after {
-    ${transition("width")}
+    ${transition("width")};
     content: "";
     display: block;
     padding-top: 0.2em;

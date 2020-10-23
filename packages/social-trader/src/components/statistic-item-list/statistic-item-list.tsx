@@ -5,7 +5,6 @@ import styled from "styled-components";
 interface Props {
   wrap?: boolean;
   vertical?: boolean;
-  className?: string;
 }
 
 const StyledCenter = styled(Center)<{ vertical?: boolean }>`
@@ -14,17 +13,11 @@ const StyledCenter = styled(Center)<{ vertical?: boolean }>`
 
 export const StatisticItemList: React.FC<Props &
   React.HTMLAttributes<HTMLDivElement>> = ({
-  className,
   wrap = true,
   children,
   vertical
 }) => (
-  <StyledCenter
-    className={className}
-    wrap={wrap}
-    vertical={vertical}
-    center={false}
-  >
+  <StyledCenter wrap={wrap} vertical={vertical} center={false}>
     {children}
   </StyledCenter>
 );

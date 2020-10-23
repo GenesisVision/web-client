@@ -1,12 +1,12 @@
+import * as React from "react";
+import styled from "styled-components";
 import {
   $labelColor,
   $negativeColor,
   $positiveColor
-} from "components/gv-styles/gv-colors/gv-colors";
-import { mediaBreakpointLandscapePhone } from "components/gv-styles/gv-media";
-import { $fontSizeCommon } from "components/gv-styles/gv-sizes";
-import * as React from "react";
-import styled from "styled-components";
+} from "utils/style/colors";
+import { mediaBreakpointLandscapePhone } from "utils/style/media";
+import { $fontSizeCommon } from "utils/style/sizes";
 
 import { PROFITABILITY_VARIANT } from "./profitability.helper";
 

@@ -1,8 +1,8 @@
-import { $popoverBackground } from "components/gv-styles/gv-colors/gv-colors";
-import { $borderRadius } from "components/gv-styles/gv-sizes";
-import { $boxShadow4 } from "components/gv-styles/gv-style-constants";
 import styled from "styled-components";
-import { adaptiveBorderRadius } from "utils/style/style-mixins";
+import { $popoverBackground } from "utils/style/colors";
+import { adaptiveBorderRadius } from "utils/style/mixins";
+import { $boxShadow4 } from "utils/style/shadow";
+import { $borderRadius } from "utils/style/sizes";
 
 export const PopoverElement = styled.div`
   opacity: 0;

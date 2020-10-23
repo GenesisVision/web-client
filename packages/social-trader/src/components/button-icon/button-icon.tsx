@@ -1,7 +1,7 @@
-import { $labelColor } from "components/gv-styles/gv-colors/gv-colors";
 import React from "react";
 import styled from "styled-components";
-import { transition } from "utils/style/style-mixins";
+import { $labelColor } from "utils/style/colors";
+import { transition } from "utils/style/mixins";
 
 interface Props {
   className?: string;

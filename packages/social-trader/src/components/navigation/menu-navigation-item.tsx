@@ -1,4 +1,3 @@
-import { $paddingMedium } from "components/gv-styles/gv-sizes";
 import { useToLink } from "components/link/link.helper";
 import { MenuNavigationTooltipItem } from "components/navigation/menu-navigation-tooltip-item";
 import { Row } from "components/row/row";
@@ -6,6 +5,7 @@ import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { TMenuItem } from "routes/menu";
 import styled from "styled-components";
+import { $paddingMedium } from "utils/style/sizes";
 
 import NavigationItem from "./navigation-item";
 

@@ -9,7 +9,7 @@ import { Row } from "components/row/row";
 import { Text } from "components/text/text";
 import React from "react";
 import styled from "styled-components";
-import { transition } from "utils/style/style-mixins";
+import { transition } from "utils/style/mixins";
 import { Clickable } from "utils/types";
 
 interface Props extends Clickable {

@@ -1,16 +1,14 @@
-import {
-  $fontSizeXsmall,
-  $paddingXxsmall
-} from "components/gv-styles/gv-sizes";
 import * as React from "react";
 import styled from "styled-components";
+import { getHEXA } from "utils/style/generators";
 import {
   adaptiveBorderRadius,
   fontSize,
   height,
   horizontalPaddings,
   lineHeight
-} from "utils/style/style-mixins";
+} from "utils/style/mixins";
+import { $fontSizeXsmall, $paddingXxsmall } from "utils/style/sizes";
 
 interface Props {
   clickable?: boolean;
@@ -33,7 +31,7 @@ const _TagBubble = styled.div<Props>`
   ${({ clickable }) => clickable && "cursor:pointer;"}
   ${({ color }) => `
     color: ${color};
-    background-color: ${color}1a;
+    background-color: ${getHEXA(color, 0.1)};
   `}
 `;
 

@@ -3,13 +3,13 @@ import { LikeContainer } from "components/conversation/like/like-container";
 import { Message } from "components/conversation/message/message";
 import { MessageActions } from "components/conversation/message/message-actions/message-actions";
 import { Reply } from "components/conversation/reply/reply";
-import { $borderColor } from "components/gv-styles/gv-colors/gv-colors";
-import { $paddingSmall, $paddingXsmall } from "components/gv-styles/gv-sizes";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
-import { adaptivePadding } from "utils/style/style-mixins";
+import { $borderColor } from "utils/style/colors";
+import { adaptivePadding } from "utils/style/mixins";
+import { $paddingSmall, $paddingXsmall } from "utils/style/sizes";
 
 interface Props {
   canReply?: boolean;

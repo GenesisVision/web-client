@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { height, right, width } from "utils/style/style-mixins";
+import { height, right, width } from "utils/style/mixins";
 import { SizesType } from "utils/types";
 
 export interface GVProgramAvatarProps {

@@ -10,15 +10,15 @@ import {
   ExcludedTagsUnderText,
   generateTagsComponents
 } from "components/conversation/message/message.helpers";
-import { mediaBreakpointLandscapePhone } from "components/gv-styles/gv-media";
-import { $paddingXsmall } from "components/gv-styles/gv-sizes";
 import { HorizontalShadowList } from "components/horizontal-list-shadow-container/horizontal-shadow-list";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { PostTag, SocialPostTagType } from "gv-api-web";
 import React from "react";
 import styled, { css } from "styled-components";
-import { adaptiveMargin } from "utils/style/style-mixins";
+import { mediaBreakpointLandscapePhone } from "utils/style/media";
+import { adaptiveMargin } from "utils/style/mixins";
+import { $paddingXsmall } from "utils/style/sizes";
 
 export interface IMessageProps {
   excludedTagsUnderText?: SocialPostTagType[];

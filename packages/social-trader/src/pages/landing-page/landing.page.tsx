@@ -8,9 +8,10 @@ import {
 import { useTranslation } from "i18n";
 import FirstScreen from "pages/landing-page/components/first-screen/first-screen";
 import {
+  FirstScreenHomeSection,
   HomeContainer,
   HomeSection,
-  LazyHomeSection
+  LastScreenHomeSection
 } from "pages/landing-page/components/home/home.blocks";
 import AdvantagesContainer from "pages/landing-page/containers/advantages-container/advantages-container";
 import BrokersContainer from "pages/landing-page/containers/brokers-container/brokers-container";
@@ -29,6 +30,16 @@ import {
 import { useUtm } from "pages/landing-page/utils";
 import React from "react";
 
+interface Props {
+  cookieAccept?: string;
+  refLink?: string;
+  programs: ProgramDetailsListItemItemsViewModel;
+  funds: FundDetailsListItemItemsViewModel;
+  follows: FollowDetailsListItemItemsViewModel;
+  events: Array<PlatformEvent>;
+  news: Array<PlatformNews>;
+}
+
 const _LandingPage: React.FC<Props> = ({
   cookieAccept,
   programs,
@@ -46,45 +57,45 @@ const _LandingPage: React.FC<Props> = ({
       title={t("landing-page:title")}
     >
       <main>
-        <HomeSection isFirst>
-          <HomeContainer>
+        <FirstScreenHomeSection>
+          <HomeContainer tall>
             <FirstScreen news={news} />
           </HomeContainer>
-        </HomeSection>
-        <LazyHomeSection bgColor="white">
+        </FirstScreenHomeSection>
+        <HomeSection bgColor="white">
           <HomeContainer>
             <EventsContainer events={events} />
           </HomeContainer>
-        </LazyHomeSection>
-        <LazyHomeSection bgColor="gray">
+        </HomeSection>
+        <HomeSection bgColor="gray">
           <HomeContainer>
             <FundsContainer funds={funds.items} />
           </HomeContainer>
-        </LazyHomeSection>
+        </HomeSection>
         <section className="home__section">
           <HomeContainer>
             <ProgramsContainer programs={programs.items} />
           </HomeContainer>
         </section>
-        <LazyHomeSection bgColor="gray">
+        <HomeSection bgColor="gray">
           <HomeContainer>
             <FollowsContainer follows={follows.items} />
           </HomeContainer>
-        </LazyHomeSection>
-        <LazyHomeSection id="info" bgColor="white">
+        </HomeSection>
+        <HomeSection id="info" bgColor="white">
           <HomeContainer>
             <InfoContainer />
           </HomeContainer>
-        </LazyHomeSection>
-        <LazyHomeSection bgColor="gray">
+        </HomeSection>
+        <HomeSection bgColor="gray">
           <HomeContainer>
             <DownloadContainer />
           </HomeContainer>
-        </LazyHomeSection>
-        <LazyHomeSection bgColor="white">
+        </HomeSection>
+        <HomeSection bgColor="white">
           <AdvantagesContainer />
-        </LazyHomeSection>
-        <LazyHomeSection bgColor="gray" hasPadding>
+        </HomeSection>
+        <HomeSection bgColor="gray" hasPadding>
           <HomeContainer>
             <BrokersContainer
               brokersInfo={brokersInfo}
@@ -92,24 +103,15 @@ const _LandingPage: React.FC<Props> = ({
               title={t("landing-page:brokers.title")}
             />
           </HomeContainer>
-        </LazyHomeSection>
-        <LazyHomeSection isLast>
+        </HomeSection>
+        <LastScreenHomeSection>
           <HomeContainer>
             <SocialContainer />
           </HomeContainer>
-        </LazyHomeSection>
+        </LastScreenHomeSection>
       </main>
     </Layout>
   );
 };
 
-interface Props {
-  cookieAccept?: string;
-  refLink?: string;
-  programs: ProgramDetailsListItemItemsViewModel;
-  funds: FundDetailsListItemItemsViewModel;
-  follows: FollowDetailsListItemItemsViewModel;
-  events: Array<PlatformEvent>;
-  news: Array<PlatformNews>;
-}
 export const LandingPage = React.memo(_LandingPage);

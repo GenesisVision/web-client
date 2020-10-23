@@ -16,7 +16,7 @@ import {
   entryFeeShape,
   successFeeShape
 } from "utils/validators/validators";
-import { lazy, number, object } from "yup";
+import { lazy, number, object, Schema } from "yup";
 
 import {
   CREATE_PROGRAM_FIELDS,
@@ -85,7 +85,7 @@ const createProgramSettingsValidationSchema = ({
           })
         )
         .max(available, t("validations.amount-is-large"))
-    });
+    }) as Schema<ICreateProgramSettingsFormValues>;
   });
 };
 

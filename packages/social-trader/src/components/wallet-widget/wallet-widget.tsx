@@ -1,5 +1,3 @@
-import { $primaryColor } from "components/gv-styles/gv-colors/gv-colors";
-import { $fontSizeCommon } from "components/gv-styles/gv-sizes";
 import HeaderIcon from "components/header/header-icon";
 import { WalletIcon } from "components/icon/wallet-icon";
 import Popover from "components/popover/popover";
@@ -15,6 +13,8 @@ import dynamic from "next/dist/next-server/lib/dynamic";
 import * as React from "react";
 import styled from "styled-components";
 import { formatCurrencyValue } from "utils/formatter";
+import { $primaryColor } from "utils/style/colors";
+import { $fontSizeCommon } from "utils/style/sizes";
 
 const WalletWidgetPopoverContent = dynamic(() =>
   import("components/wallet-widget/wallet-widget-popover-content")

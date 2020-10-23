@@ -30,7 +30,7 @@ import { safeGetElemFromArray, tableLoaderCreator } from "utils/helpers";
 import { postponeFunc } from "utils/hook-form.helpers";
 import { AnyObjectType } from "utils/types";
 import { minMaxNumberShape } from "utils/validators/validators";
-import { lazy, number, object } from "yup";
+import { lazy, number, object, Schema } from "yup";
 
 type PlaceOrderFormSetValueType = (
   name: string,
@@ -168,8 +168,7 @@ export const usePlaceOrderFormReset = ({
   >();
 
   useEffect(() => {
-    if (status === API_REQUEST_STATUS.SUCCESS)
-      postponeFunc(() => setReset(true));
+    if (status === "SUCCESS") postponeFunc(() => setReset(true));
   }, [status]);
 
   useEffect(() => {
@@ -451,7 +450,7 @@ export const placeOrderStopLimitValidationSchema = ({
   minQuantity: number;
   minNotional: number;
 }) =>
-  lazy((values: IStopLimitFormValues) => {
+  lazy<IStopLimitFormValues>(values => {
     const minPriceValue =
       side === "BUY"
         ? Math.max(minPrice, values[TRADE_FORM_FIELDS.stopPrice])
@@ -489,7 +488,7 @@ export const placeOrderStopLimitValidationSchema = ({
         quoteAsset,
         maxQuantity
       })
-    });
+    }) as Schema<IStopLimitFormValues>;
   });
 
 export const placeOrderDefaultValidationSchema = ({

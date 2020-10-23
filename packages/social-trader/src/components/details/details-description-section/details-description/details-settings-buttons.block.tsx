@@ -1,10 +1,5 @@
 import { DescriptionControlIcon } from "components/details/details-description-section/details-description/controls/description-control-icon";
 import { DetailsDescriptionControlButton } from "components/details/details-description-section/details-description/controls/details-description-control";
-import { mediaBreakpointTablet } from "components/gv-styles/gv-media";
-import {
-  $paddingXsmall,
-  $paddingXsmallMobile
-} from "components/gv-styles/gv-sizes";
 import { SettingsIcon } from "components/icon/settings-icon";
 import { ToType } from "components/link/link";
 import { Row } from "components/row/row";
@@ -12,6 +7,8 @@ import { ASSET } from "constants/constants";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
+import { mediaBreakpointTablet } from "utils/style/media";
+import { $paddingXsmall, $paddingXsmallMobile } from "utils/style/sizes";
 
 import { PersonalDetailsType } from "../../details.types";
 import DetailsFavorite from "./controls/details-favorite";

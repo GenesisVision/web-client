@@ -1,13 +1,13 @@
+import { IRowItemProps } from "components/row-item/row-item.types";
+import { css } from "styled-components";
+import { adaptiveMargin, cursorPointer } from "utils/style/mixins";
 import {
   $paddingMedium,
   $paddingSmall,
   $paddingXsmall,
   $paddingXxsmall,
   $paddingXxxsmall
-} from "components/gv-styles/gv-sizes";
-import { IRowItemProps } from "components/row-item/row-item.types";
-import { css } from "styled-components";
-import { adaptiveMargin, cursorPointer } from "utils/style/style-mixins";
+} from "utils/style/sizes";
 
 export const RowItemStaticStyles = {
   "box-sizing": "border-box"

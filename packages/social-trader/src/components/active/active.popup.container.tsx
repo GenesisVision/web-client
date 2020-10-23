@@ -1,8 +1,8 @@
-import { $paddingBig, $paddingLarge } from "components/gv-styles/gv-sizes";
 import useApiRequest from "hooks/api-request.hook";
 import React from "react";
 import styled from "styled-components";
-import { horizontalPaddings, verticalPaddings } from "utils/style/style-mixins";
+import { horizontalPaddings, verticalPaddings } from "utils/style/mixins";
+import { $paddingBig, $paddingLarge } from "utils/style/sizes";
 
 import Active from "./active";
 import { fetchActive, getActiveLoaderData } from "./service/active.service";

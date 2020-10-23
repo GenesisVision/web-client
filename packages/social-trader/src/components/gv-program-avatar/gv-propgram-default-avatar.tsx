@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { adaptiveBorderRadius } from "utils/style/style-mixins";
+import { adaptiveBorderRadius } from "utils/style/mixins";
 
 export interface GVProgramDefaultAvatarProps {
   color?: string;

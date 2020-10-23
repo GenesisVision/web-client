@@ -1,11 +1,8 @@
-import {
-  $rowColor,
-  $tableBackgroundSubColor
-} from "components/gv-styles/gv-colors/gv-colors";
 import * as React from "react";
 import { ReactNode } from "react";
 import styled from "styled-components";
-import { cursorPointer, transition } from "utils/style/style-mixins";
+import { $rowColor, $tableBackgroundSubColor } from "utils/style/colors";
+import { cursorPointer, transition } from "utils/style/mixins";
 
 interface Props {
   head?: boolean;
@@ -16,7 +13,7 @@ interface Props {
   children: ReactNode;
 }
 
-const Tr = styled.tr<{ hoverable?: boolean; stripy?: boolean; head?: boolean }>`
+const TableRow = styled.tr<Props>`
   ${transition("background-color")}
   ${cursorPointer}
    ${({ hoverable = true, stripy, head }) => {
@@ -34,24 +31,5 @@ const Tr = styled.tr<{ hoverable?: boolean; stripy?: boolean; head?: boolean }>`
      `;
    }}
 `;
-
-const TableRow: React.FC<Props> = ({
-  head,
-  hoverable = true,
-  className = "",
-  stripy,
-  children,
-  ...other
-}) => (
-  <Tr
-    head={head}
-    hoverable={hoverable}
-    stripy={stripy}
-    className={className}
-    {...other}
-  >
-    {children}
-  </Tr>
-);
 
 export default React.memo(TableRow);
