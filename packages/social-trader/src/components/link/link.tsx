@@ -2,6 +2,7 @@ import NextLink from "next/link";
 import Router from "next/router";
 import React, { useCallback } from "react";
 import styled from "styled-components";
+import { $primaryColor } from "utils/style/colors";
 
 import { normalizeTo, pushHistoryState } from "./link.helper";
 
@@ -39,7 +40,7 @@ const StyledA = styled.a<LinkProps>`
   color: ${({ white, noColor }) => {
     if (white) return `white`;
     if (noColor) return `inherit`;
-    return "#03bdaf";
+    return $primaryColor;
   }};
 `;
 
