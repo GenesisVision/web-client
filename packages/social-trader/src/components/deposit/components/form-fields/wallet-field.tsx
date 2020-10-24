@@ -4,6 +4,7 @@ import {
   ItemsType,
   WalletItemType
 } from "components/wallet-select/wallet-select";
+import { transformWalletItemToCommon } from "components/wallet-select/wallet-select.helpers";
 import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
@@ -37,7 +38,7 @@ const _HookFormWalletField: React.FC<Props> = ({
     <HookFormWalletSelect
       name={name}
       label={label || t("follow-program.create-account.from")}
-      items={wallets}
+      items={wallets.map(transformWalletItemToCommon)}
       onChange={onChangeCurrencyFrom}
     />
   );
