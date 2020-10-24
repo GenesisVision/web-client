@@ -13,6 +13,7 @@ import InputAmountField from "components/input-amount-field/hook-form-amount-fie
 import { Row } from "components/row/row";
 import { SubmitButton } from "components/submit-button/submit-button";
 import { WalletItemType } from "components/wallet-select/wallet-select";
+import { WalletSelectContainer } from "components/wallet-select/wallet-select.container";
 import { ASSET } from "constants/constants";
 import { WalletBaseData } from "gv-api-web";
 import { useGetRate } from "hooks/get-rate.hook";
@@ -30,7 +31,6 @@ import { depositValidationSchema } from "./deposit-form-validation-schema";
 import { MinDepositType, TFees } from "./deposit.types";
 import { ConvertCurrency } from "./form-fields/convert-currency";
 import { InvestorFees } from "./form-fields/investor-fees";
-import { HookFormWalletField as WalletField } from "./form-fields/wallet-field";
 
 export interface Props {
   infoMessage?: string;
@@ -110,7 +110,7 @@ const _DepositForm: React.FC<Props> = ({
         [DEPOSIT_FORM_FIELDS.walletId]: id,
         [DEPOSIT_FORM_FIELDS.amount]: ""
       });
-      setWallet(safeGetElemFromArray(wallets, wallet => id === wallet.id));
+      setWallet(wallet);
     },
     [wallets, reset]
   );
@@ -119,8 +119,7 @@ const _DepositForm: React.FC<Props> = ({
     <HookForm form={form} onSubmit={onSubmit}>
       <DialogBottom>
         <Row>
-          <WalletField
-            wallets={wallets}
+          <WalletSelectContainer
             name={DEPOSIT_FORM_FIELDS.walletId}
             onChange={onWalletChange}
           />

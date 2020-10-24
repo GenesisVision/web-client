@@ -1,10 +1,10 @@
-import { HookFormWalletField as WalletField } from "components/deposit/components/form-fields/wallet-field";
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import InputAmountField from "components/input-amount-field/hook-form-amount-field";
 import { Row } from "components/row/row";
 import { SubmitButton } from "components/submit-button/submit-button";
 import { WalletItemType } from "components/wallet-select/wallet-select";
+import { WalletSelectContainer } from "components/wallet-select/wallet-select.container";
 import { WalletData } from "gv-api-web";
 import { useGetRate } from "hooks/get-rate.hook";
 import * as React from "react";
@@ -22,11 +22,23 @@ import {
   safeGetElemFromArray
 } from "utils/helpers";
 import { HookForm } from "utils/hook-form.helpers";
-import { Clickable, CurrencyEnum } from "utils/types";
+import { CurrencyEnum } from "utils/types";
 
 import CreateAccountFormValidationSchema, {
   CREATE_ACCOUNT_FORM_FIELDS
 } from "./follow-popup-create-account.validators";
+
+export interface CreateAccountFormProps {
+  minDeposit: number;
+  wallets: WalletData[];
+  followCurrency: CurrencyEnum;
+  onClick: (values: CreateAccountFormValues) => void;
+}
+
+export interface CreateAccountFormValues {
+  [CREATE_ACCOUNT_FORM_FIELDS.depositWalletId]: string;
+  [CREATE_ACCOUNT_FORM_FIELDS.depositAmount]: number | string;
+}
 
 const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
   minDeposit,
@@ -90,8 +102,7 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
     <HookForm form={form} onSubmit={onClick}>
       <DialogBottom>
         <Row>
-          <WalletField
-            wallets={wallets}
+          <WalletSelectContainer
             name={CREATE_ACCOUNT_FORM_FIELDS.depositWalletId}
             label={t("follow-program.create-account.from")}
             onChange={onChangeCurrencyFrom}
@@ -129,18 +140,6 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
     </HookForm>
   );
 };
-
-export interface CreateAccountFormProps {
-  minDeposit: number;
-  wallets: WalletData[];
-  followCurrency: CurrencyEnum;
-  onClick: (values: CreateAccountFormValues) => void;
-}
-
-export interface CreateAccountFormValues {
-  [CREATE_ACCOUNT_FORM_FIELDS.depositWalletId]: string;
-  [CREATE_ACCOUNT_FORM_FIELDS.depositAmount]: number | string;
-}
 
 const FollowCreateAccount = React.memo(_FollowCreateAccount);
 export default FollowCreateAccount;

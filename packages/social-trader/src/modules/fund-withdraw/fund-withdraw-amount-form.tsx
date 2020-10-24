@@ -1,4 +1,3 @@
-import { HookFormWalletField as WalletSelect } from "components/deposit/components/form-fields/wallet-field";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogInfo } from "components/dialog/dialog-info";
 import InputAmountField from "components/input-amount-field/hook-form-amount-field";
@@ -6,6 +5,7 @@ import { LabeledValue } from "components/labeled-value/labeled-value";
 import { Row } from "components/row/row";
 import { SubmitButton } from "components/submit-button/submit-button";
 import { WalletItemType } from "components/wallet-select/wallet-select";
+import { WalletSelectContainer } from "components/wallet-select/wallet-select.container";
 import { WalletBaseData } from "gv-api-web";
 import {
   fundWithdrawAmountFormValidationSchema,
@@ -98,22 +98,19 @@ const _FundWithdrawAmountForm: React.FC<Props> = ({
   );
 
   const changeWalletCallback = useCallback(
-    ({ id }: WalletItemType) => {
+    ({ id, currency }: WalletItemType) => {
       setValue(FUND_WITHDRAW_FIELDS.walletId, id, true);
-      const currency = safeGetElemFromArray(wallets, wallet => id === wallet.id)
-        .currency;
       setCurrency(currency);
     },
-    [wallets, setValue, setCurrency]
+    [setValue, setCurrency]
   );
 
   return (
     <HookForm form={form} onSubmit={onSubmit}>
       <Row>
-        <WalletSelect
+        <WalletSelectContainer
           label={t("labels.to")}
           name={FUND_WITHDRAW_FIELDS.walletId}
-          wallets={wallets}
           onChange={changeWalletCallback}
         />
       </Row>
