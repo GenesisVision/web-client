@@ -34,6 +34,7 @@ import { HookForm } from "utils/hook-form.helpers";
 import styles from "./transfer-form.module.scss";
 
 const _TransferForm: React.FC<ITransferFormProps> = ({
+  updateWallets,
   fixedSelects,
   currentItem,
   currentItemContainer,
@@ -161,6 +162,7 @@ const _TransferForm: React.FC<ITransferFormProps> = ({
       <DialogTop title={title}>
         <Row size={"large"}>
           <TransferSelectField
+            onClickUpdate={sourceType === "Wallet" ? updateWallets : undefined}
             currency={selectedSourceItem.currency}
             name={TRANSFER_FORM_FIELDS.sourceId}
             value={formattedAvailableSourceItem}
@@ -173,6 +175,9 @@ const _TransferForm: React.FC<ITransferFormProps> = ({
       </DialogTop>
       <DialogBottom>
         <TransferSelectField
+          onClickUpdate={
+            destinationType === "Wallet" ? updateWallets : undefined
+          }
           currency={selectedDestinationItem.currency}
           name={TRANSFER_FORM_FIELDS.destinationId}
           value={formattedAvailableDestinationItem}
