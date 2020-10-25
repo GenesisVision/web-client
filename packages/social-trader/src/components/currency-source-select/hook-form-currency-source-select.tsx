@@ -3,11 +3,14 @@ import {
   getCurrencySourceSelectItems
 } from "components/currency-source-select/currency-source-select-items";
 import { GVHookFormField } from "components/gv-hook-form-field";
-import GVTextField from "components/gv-text-field";
+import {
+  IUpdatableGvTextFieldProps,
+  UpdatableGvTextField
+} from "components/gv-text-field/updatable-gv-text-field";
 import Select, { ISelectChangeEvent } from "components/select/select";
 import React from "react";
 
-interface Props {
+interface Props extends IUpdatableGvTextFieldProps {
   items: CurrencySourceSelectItemsType;
   label: string;
   name: string;
@@ -16,6 +19,7 @@ interface Props {
 }
 
 const _CurrencySourceSelect: React.FC<Props> = ({
+  onClickUpdate,
   disabled,
   items,
   onChange,
@@ -24,11 +28,12 @@ const _CurrencySourceSelect: React.FC<Props> = ({
 }) => {
   return (
     <GVHookFormField
+      onClickUpdate={onClickUpdate}
       disableIfSingle
       wide
       disabled={disabled}
       name={name}
-      component={GVTextField}
+      component={UpdatableGvTextField}
       label={label}
       InputComponent={Select}
       onChange={onChange}
