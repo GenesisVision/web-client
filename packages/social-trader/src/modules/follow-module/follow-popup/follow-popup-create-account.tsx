@@ -29,6 +29,7 @@ import CreateAccountFormValidationSchema, {
 } from "./follow-popup-create-account.validators";
 
 export interface CreateAccountFormProps {
+  followCurrencyWalletId: string;
   minDeposit: number;
   wallets: WalletData[];
   followCurrency: CurrencyEnum;
@@ -41,16 +42,14 @@ export interface CreateAccountFormValues {
 }
 
 const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
+  followCurrencyWalletId,
   minDeposit,
   onClick,
   wallets,
   followCurrency
 }) => {
   const { rate, getRate } = useGetRate();
-  const followCurrencyWalletId = safeGetElemFromArray(
-    wallets,
-    wallet => wallet.currency === followCurrency
-  ).id;
+
   const [t] = useTranslation();
 
   const form = useForm<CreateAccountFormValues>({
