@@ -1,4 +1,5 @@
 import { CurrencySourceSelect as HookFormCurrencySourceSelect } from "components/currency-source-select/hook-form-currency-source-select";
+import { IUpdatableGvTextFieldProps } from "components/gv-text-field/updatable-gv-text-field";
 import { ISelectChangeEvent } from "components/select/select";
 import { AssetDetails, Currency, WalletBaseData, WalletData } from "gv-api-web";
 import { TransferItemType } from "modules/transfer/transfer.types";
@@ -23,13 +24,14 @@ export interface IWalletSelectProps {
   disabled?: boolean;
 }
 
-interface Props extends IWalletSelectProps {
+interface Props extends IWalletSelectProps, IUpdatableGvTextFieldProps {
   onChange?: (event: ISelectChangeEvent, child: JSX.Element) => void;
   label: string;
   items: CommonWalletType[];
 }
 
 const _HookFormWalletSelect: React.FC<Props> = ({
+  onClickUpdate,
   items,
   onChange,
   label,
@@ -37,6 +39,7 @@ const _HookFormWalletSelect: React.FC<Props> = ({
   disabled
 }) => (
   <HookFormCurrencySourceSelect
+    onClickUpdate={onClickUpdate}
     disabled={disabled}
     label={label}
     items={items}

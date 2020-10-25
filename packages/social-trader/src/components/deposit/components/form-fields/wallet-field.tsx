@@ -1,3 +1,4 @@
+import { IUpdatableGvTextFieldProps } from "components/gv-text-field/updatable-gv-text-field";
 import { ISelectChangeEvent } from "components/select/select";
 import {
   HookFormWalletSelect,
@@ -10,7 +11,7 @@ import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { safeGetElemFromArray } from "utils/helpers";
 
-interface Props {
+interface Props extends IUpdatableGvTextFieldProps {
   label?: string;
   wallets: ItemsType;
   name: string;
@@ -18,6 +19,7 @@ interface Props {
 }
 
 const _HookFormWalletField: React.FC<Props> = ({
+  onClickUpdate,
   label,
   name,
   wallets,
@@ -36,6 +38,7 @@ const _HookFormWalletField: React.FC<Props> = ({
   );
   return (
     <HookFormWalletSelect
+      onClickUpdate={onClickUpdate}
       name={name}
       label={label || t("follow-program.create-account.from")}
       items={wallets.map(transformWalletItemToCommon)}
