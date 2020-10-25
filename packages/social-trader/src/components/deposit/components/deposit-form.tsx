@@ -2,7 +2,6 @@ import {
   DEPOSIT_FORM_FIELDS,
   getMinDepositFromAmounts,
   IDepositFormValues,
-  INIT_WALLET_CURRENCY,
   isAllow
 } from "components/deposit/components/deposit.helpers";
 import { DialogBottom } from "components/dialog/dialog-bottom";
@@ -12,7 +11,7 @@ import { DialogInfo } from "components/dialog/dialog-info";
 import InputAmountField from "components/input-amount-field/hook-form-amount-field";
 import { Row } from "components/row/row";
 import { SubmitButton } from "components/submit-button/submit-button";
-import { WalletItemType } from "components/wallet-select/wallet-select";
+import { CommonWalletType } from "components/wallet-select/wallet-select";
 import { WalletSelectContainer } from "components/wallet-select/wallet-select.container";
 import { ASSET } from "constants/constants";
 import { WalletBaseData } from "gv-api-web";
@@ -23,7 +22,6 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { convertToCurrency } from "utils/currency-converter";
 import { formatCurrencyValue } from "utils/formatter";
-import { safeGetElemFromArray } from "utils/helpers";
 import { HookForm } from "utils/hook-form.helpers";
 import { CurrencyEnum } from "utils/types";
 
@@ -38,7 +36,7 @@ export interface Props {
   ownAsset?: boolean;
   fees: TFees;
   availableToInvest?: number;
-  wallets: WalletBaseData[];
+  initWallet: WalletBaseData;
   asset: ASSET;
   hasEntryFee: boolean;
   currency: CurrencyEnum;
@@ -52,7 +50,7 @@ const _DepositForm: React.FC<Props> = ({
   minDeposit,
   fees,
   availableToInvest: availableToInvestInAsset = Number.MAX_SAFE_INTEGER,
-  wallets,
+  initWallet,
   asset,
   hasEntryFee,
   currency,
@@ -60,12 +58,7 @@ const _DepositForm: React.FC<Props> = ({
   ownAsset
 }) => {
   const [t] = useTranslation();
-  const [wallet, setWallet] = useState<WalletBaseData>(
-    safeGetElemFromArray(
-      wallets,
-      ({ currency }) => currency === INIT_WALLET_CURRENCY
-    )
-  );
+  const [wallet, setWallet] = useState<CommonWalletType>(initWallet);
   const { rate, getRate } = useGetRate();
 
   const form = useForm<IDepositFormValues>({
@@ -74,7 +67,7 @@ const _DepositForm: React.FC<Props> = ({
     },
     validationSchema: depositValidationSchema({
       rate,
-      wallets,
+      wallet,
       availableToInvestInAsset,
       minDeposit,
       t
@@ -105,16 +98,15 @@ const _DepositForm: React.FC<Props> = ({
   }, [minDeposit, rate, wallet, setValue]);
 
   const onWalletChange = useCallback(
-    ({ id }: WalletItemType) => {
+    (wallet: CommonWalletType) => {
       reset({
-        [DEPOSIT_FORM_FIELDS.walletId]: id,
+        [DEPOSIT_FORM_FIELDS.walletId]: wallet.id,
         [DEPOSIT_FORM_FIELDS.amount]: ""
       });
       setWallet(wallet);
     },
-    [wallets, reset]
+    [reset]
   );
-
   return (
     <HookForm form={form} onSubmit={onSubmit}>
       <DialogBottom>
