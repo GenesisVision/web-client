@@ -3,6 +3,7 @@ import {
   WalletItemType
 } from "components/wallet-select/wallet-select";
 import { WalletBaseData, WalletData } from "gv-api-web";
+import { getUnique } from "utils/array";
 
 export const transformWalletItemToCommon = ({
   id,
@@ -59,7 +60,7 @@ export const mergeNormalizedList = (
   list1: Record<string, CommonWalletType>,
   list2: Record<string, CommonWalletType>
 ): Record<string, CommonWalletType> =>
-  Object.keys(list1).reduce(
+  getUnique([...Object.keys(list1), ...Object.keys(list2)]).reduce(
     (prev, curr) => ({ ...prev, [curr]: { ...list1[curr], ...list2[curr] } }),
     {}
   );
