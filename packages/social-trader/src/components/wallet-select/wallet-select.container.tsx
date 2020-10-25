@@ -10,13 +10,15 @@ import {
   transformAccountWalletToCommon,
   transformAvailableWalletToCommon
 } from "components/wallet-select/wallet-select.helpers";
+import { useAccountCurrency } from "hooks/account-currency.hook";
+import { fetchWalletsByCurrencyAvailableAction } from "pages/wallet/actions/wallet.actions";
 import {
   walletsAvailableSelector,
   walletsSelector
 } from "pages/wallet/reducers/wallet.reducers";
 import React, { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { safeGetElemFromArray } from "utils/helpers";
 
 export interface IWalletSelectContainerProps extends IWalletSelectProps {
@@ -27,6 +29,8 @@ export interface IWalletSelectContainerProps extends IWalletSelectProps {
 
 const _WalletSelectContainer: React.FC<IWalletSelectContainerProps> = props => {
   const { onChange, label, filterFunc = () => true } = props;
+  const dispatch = useDispatch();
+  const accountCurrency = useAccountCurrency();
   const [t] = useTranslation();
   const accountWallets = useSelector(walletsSelector);
   const availableWallets = useSelector(walletsAvailableSelector);
@@ -53,9 +57,14 @@ const _WalletSelectContainer: React.FC<IWalletSelectContainerProps> = props => {
     [items]
   );
 
+  const handleUpdate = useCallback(() => {
+    dispatch(fetchWalletsByCurrencyAvailableAction(accountCurrency));
+  }, [accountCurrency]);
+
   return (
     <HookFormWalletSelect
       {...props}
+      onClickUpdate={handleUpdate}
       label={label || t("follow-program.create-account.from")}
       items={items}
       onChange={handleChange}
