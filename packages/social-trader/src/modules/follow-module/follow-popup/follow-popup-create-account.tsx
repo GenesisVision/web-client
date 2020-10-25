@@ -3,12 +3,14 @@ import { DialogButtons } from "components/dialog/dialog-buttons";
 import InputAmountField from "components/input-amount-field/hook-form-amount-field";
 import { Row } from "components/row/row";
 import { SubmitButton } from "components/submit-button/submit-button";
-import { WalletItemType } from "components/wallet-select/wallet-select";
+import {
+  CommonWalletType,
+  WalletItemType
+} from "components/wallet-select/wallet-select";
 import { WalletSelectContainer } from "components/wallet-select/wallet-select.container";
-import { WalletData } from "gv-api-web";
 import { useGetRate } from "hooks/get-rate.hook";
 import * as React from "react";
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
@@ -17,10 +19,7 @@ import {
   CURRENCY_FRACTIONS
 } from "utils/currency-converter";
 import { formatCurrencyValue } from "utils/formatter";
-import {
-  allowPositiveValuesNumberFormat,
-  safeGetElemFromArray
-} from "utils/helpers";
+import { allowPositiveValuesNumberFormat } from "utils/helpers";
 import { HookForm } from "utils/hook-form.helpers";
 import { CurrencyEnum } from "utils/types";
 
@@ -29,9 +28,8 @@ import CreateAccountFormValidationSchema, {
 } from "./follow-popup-create-account.validators";
 
 export interface CreateAccountFormProps {
-  followCurrencyWalletId: string;
+  wallet: CommonWalletType;
   minDeposit: number;
-  wallets: WalletData[];
   followCurrency: CurrencyEnum;
   onClick: (values: CreateAccountFormValues) => void;
 }
@@ -42,60 +40,53 @@ export interface CreateAccountFormValues {
 }
 
 const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
-  followCurrencyWalletId,
+  wallet: externalWallet,
   minDeposit,
   onClick,
-  wallets,
   followCurrency
 }) => {
+  const [wallet, setWallet] = useState(externalWallet);
+
   const { rate, getRate } = useGetRate();
 
   const [t] = useTranslation();
 
   const form = useForm<CreateAccountFormValues>({
     defaultValues: {
-      [CREATE_ACCOUNT_FORM_FIELDS.depositWalletId]: followCurrencyWalletId
+      [CREATE_ACCOUNT_FORM_FIELDS.depositWalletId]: externalWallet.id
     },
     validationSchema: CreateAccountFormValidationSchema({
       rate,
       minDeposit,
-      wallets,
+      wallet,
       t
     }),
     mode: "onChange"
   });
   const { reset, watch, setValue } = form;
 
-  const { depositWalletId, depositAmount } = watch();
-
-  const wallet = safeGetElemFromArray(
-    wallets,
-    ({ id }) => id === depositWalletId
-  );
-  const { currency } = wallet;
+  const { depositAmount } = watch();
 
   useEffect(() => {
     followCurrency &&
-      currency &&
-      getRate({ from: followCurrency as CurrencyEnum, to: currency });
-  }, [followCurrency, currency]);
+      wallet.currency &&
+      getRate({ from: followCurrency as CurrencyEnum, to: wallet.currency });
+  }, [followCurrency, wallet.currency]);
 
-  const onChangeCurrencyFrom = useCallback(
-    ({ id }: WalletItemType) => {
-      reset({
-        [CREATE_ACCOUNT_FORM_FIELDS.depositWalletId]: id,
-        [CREATE_ACCOUNT_FORM_FIELDS.depositAmount]: ""
-      });
-    },
-    [wallets]
-  );
+  const onChangeCurrencyFrom = useCallback((wallet: WalletItemType) => {
+    setWallet(wallet);
+    reset({
+      [CREATE_ACCOUNT_FORM_FIELDS.depositWalletId]: wallet.id,
+      [CREATE_ACCOUNT_FORM_FIELDS.depositAmount]: ""
+    });
+  }, []);
   const setMaxAmount = useCallback(() => {
     setValue(
       CREATE_ACCOUNT_FORM_FIELDS.depositAmount,
       formatCurrencyValue(wallet.available, followCurrency),
       true
     );
-  }, [followCurrency, wallet]);
+  }, [followCurrency, wallet.available]);
 
   return (
     <HookForm form={form} onSubmit={onClick}>
@@ -110,14 +101,14 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
         <InputAmountField
           wide
           isAllowed={allowPositiveValuesNumberFormat(
-            CURRENCY_FRACTIONS(currency)
+            CURRENCY_FRACTIONS(wallet.currency)
           )}
           name={CREATE_ACCOUNT_FORM_FIELDS.depositAmount}
           label={t("follow-program.create-account.amount")}
-          currency={currency}
+          currency={wallet.currency}
           setMax={setMaxAmount}
         />
-        {followCurrency !== currency && (
+        {followCurrency !== wallet.currency && (
           <Row>
             <NumberFormat
               value={formatCurrencyValue(

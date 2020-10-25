@@ -1,3 +1,4 @@
+import { transformAccountWalletToCommon } from "components/wallet-select/wallet-select.helpers";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import {
   AttachToSignalProvider,
@@ -119,6 +120,10 @@ const _FollowForm: React.FC<Props> = ({
     wallet => wallet.currency === currency
   ).id;
 
+  const wallet = transformAccountWalletToCommon(
+    safeGetElemFromArray(wallets, ({ id }) => id === followCurrencyWalletId)
+  );
+
   return (
     <>
       <FollowTop step={adaptStep} />
@@ -134,9 +139,8 @@ const _FollowForm: React.FC<Props> = ({
           <FollowCreateExternalAccount onClick={createdCopytradingAccount} />
         ) : (
           <FollowCreateAccount
-            followCurrencyWalletId={followCurrencyWalletId}
+            wallet={wallet}
             minDeposit={minDeposit}
-            wallets={wallets}
             followCurrency={currency!}
             onClick={createdCopytradingAccount}
           />
