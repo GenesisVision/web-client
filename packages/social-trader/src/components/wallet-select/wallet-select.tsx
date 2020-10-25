@@ -12,6 +12,7 @@ export interface CommonWalletType {
   logoUrl?: string;
   currency: Currency;
   available: number;
+  depositAddress?: string;
   asset?: AssetDetails;
   rate?: number;
   isWithdrawalEnabled?: boolean;
