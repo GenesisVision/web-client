@@ -46,7 +46,7 @@ const useAssetSection = ({
         ({ currency }) => currency === assetCurrency
       )
     );
-  }, [wallets, assetCurrency]);
+  }, [wallets.length, assetCurrency]);
 
   const fetchRate = useCallback(debounce(getRate, 100), []);
 
