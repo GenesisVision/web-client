@@ -9,12 +9,7 @@ export const createUseObserverVisible = (
   const [isVisible, setIsVisible] = useFlag();
 
   useEffect(() => {
-    if (!ref.current || isVisible) return;
-
-    if (!ref.current.childElementCount) {
-      setIsVisible();
-      return;
-    }
+    if (!ref.current || !ref.current.childElementCount || isVisible) return;
 
     const io = new IntersectionObserver((entries, observer) => {
       entries.forEach(({ isIntersecting }) => {
