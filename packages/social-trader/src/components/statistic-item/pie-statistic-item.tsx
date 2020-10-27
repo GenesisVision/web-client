@@ -45,7 +45,7 @@ const _PieStatisticItem: React.FC<Props> = ({
     value
   );
   return (
-    <RowItem onClick={onClick} size={"xlarge"}>
+    <RowItem bottomOffset onClick={onClick} size={"xlarge"}>
       <Center>
         <RowItem>
           <PieContainer

@@ -4,6 +4,7 @@ import Link, { ToType } from "components/link/link";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
+import { AssetType } from "gv-api-web";
 import {
   FeedContext,
   SocialSearchInitialState
@@ -13,8 +14,10 @@ import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 
 interface Props {
+  assetType: AssetType;
   color: string;
   id: string;
+  subscribersCount: number;
   investorsCount: number;
   profit: number;
   url: string | ToType;
@@ -27,6 +30,8 @@ const Container = styled.div`
 `;
 
 const _SocialPageTradersItem: React.FC<Props> = ({
+  subscribersCount,
+  assetType,
   color,
   id,
   investorsCount,
@@ -68,7 +73,13 @@ const _SocialPageTradersItem: React.FC<Props> = ({
           </LabeledValue>
         </RowItem>
         <RowItem wide>
-          <LabeledValue label={t("Investors")}>{investorsCount}</LabeledValue>
+          {assetType === "Follow" ? (
+            <LabeledValue label={t("Subscribers")}>
+              {subscribersCount}
+            </LabeledValue>
+          ) : (
+            <LabeledValue label={t("Investors")}>{investorsCount}</LabeledValue>
+          )}
         </RowItem>
       </Row>
     </Container>

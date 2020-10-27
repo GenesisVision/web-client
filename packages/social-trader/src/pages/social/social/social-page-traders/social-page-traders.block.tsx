@@ -36,6 +36,7 @@ const _SocialPageTradersBlock: React.FC<Props> = ({ assets }) => {
               assetType,
               color,
               id,
+              subscribersCount,
               investorsCount,
               profitPercent,
               url,
@@ -52,8 +53,10 @@ const _SocialPageTradersBlock: React.FC<Props> = ({ assets }) => {
               <>
                 <Row>
                   <SocialPageTradersItem
+                    assetType={assetType}
                     color={color}
                     id={id}
+                    subscribersCount={subscribersCount}
                     investorsCount={investorsCount}
                     profit={profitPercent}
                     url={detailsLink}

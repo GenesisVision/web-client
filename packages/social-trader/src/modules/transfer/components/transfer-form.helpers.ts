@@ -138,6 +138,7 @@ export const getTransferFormLoaderData = (
 };
 
 export interface ITransferFormProps {
+  updateWallets?: VoidFunction;
   fixedSelects?: boolean;
   data: TransferFormItemsType;
   onSubmit: (values: InternalTransferRequest) => void;
