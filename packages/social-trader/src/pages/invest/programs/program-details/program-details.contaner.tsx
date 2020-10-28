@@ -2,7 +2,6 @@ import DetailsDescriptionSection from "components/details/details-description-se
 import { DetailsTags } from "components/details/details-description-section/details-description/details-tags.block";
 import DetailsInvestment from "components/details/details-description-section/details-investment/details-investment";
 import { DetailsDivider } from "components/details/details-divider.block";
-import LazyHydrate from "components/lazy-hydrate/lazy-hydrate";
 import Page from "components/page/page";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
@@ -278,56 +277,48 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
         Controls={renderControls}
       />
       <DetailsDivider />
-      <LazyHydrate>
-        <DetailsInvestment
-          title={description.publicInfo.title}
-          isExchange={isExchange}
-          isProcessingRealTime={
-            programDetails?.dailyPeriodDetails?.isProcessingRealTime
-          }
-          isOwnAsset={isOwnAsset}
-          fees={fees}
-          dispatchDescription={handleDispatchDescription}
-          asset={assetType}
-          selector={programEventsTableSelector}
-          id={id}
-          currency={currency}
-          programPersonalDetails={programPersonalDetails}
-          followPersonalDetails={followPersonalDetails}
-        />
-      </LazyHydrate>
+      <DetailsInvestment
+        title={description.publicInfo.title}
+        isExchange={isExchange}
+        isProcessingRealTime={
+          programDetails?.dailyPeriodDetails?.isProcessingRealTime
+        }
+        isOwnAsset={isOwnAsset}
+        fees={fees}
+        dispatchDescription={handleDispatchDescription}
+        asset={assetType}
+        selector={programEventsTableSelector}
+        id={id}
+        currency={currency}
+        programPersonalDetails={programPersonalDetails}
+        followPersonalDetails={followPersonalDetails}
+      />
       {showFollowStatistic && (
         <Row onlyOffset>
-          <LazyHydrate>
-            <FollowDetailsStatisticSection />
-          </LazyHydrate>
+          <FollowDetailsStatisticSection />
         </Row>
       )}
       {showProgramStatistic && (
         <Row onlyOffset>
-          <LazyHydrate>
-            <ProgramDetailsStatisticSection showPeriod={!isExchange} />
-          </LazyHydrate>
+          <ProgramDetailsStatisticSection showPeriod={!isExchange} />
         </Row>
       )}
-      <LazyHydrate>
-        <ProgramDetailsHistorySection
-          isExchange={isExchange}
-          assetType={(route as unknown) as TRADE_ASSET_TYPE}
-          canCloseOpenPositions={ownerActions?.canCloseOpenPositions}
-          getHistoryCounts={getHistoryCounts}
-          tablesData={tablesData}
-          showCommissionRebateSometime={
-            brokerDetails.showCommissionRebateSometime
-          }
-          isOwnProgram={isOwnAsset}
-          showSwaps={brokerDetails.showSwaps}
-          showTickets={brokerDetails.showTickets}
-          programId={id}
-          programCurrency={currency}
-          title={title}
-        />
-      </LazyHydrate>
+      <ProgramDetailsHistorySection
+        isExchange={isExchange}
+        assetType={(route as unknown) as TRADE_ASSET_TYPE}
+        canCloseOpenPositions={ownerActions?.canCloseOpenPositions}
+        getHistoryCounts={getHistoryCounts}
+        tablesData={tablesData}
+        showCommissionRebateSometime={
+          brokerDetails.showCommissionRebateSometime
+        }
+        isOwnProgram={isOwnAsset}
+        showSwaps={brokerDetails.showSwaps}
+        showTickets={brokerDetails.showTickets}
+        programId={id}
+        programCurrency={currency}
+        title={title}
+      />
     </Page>
   );
 };
