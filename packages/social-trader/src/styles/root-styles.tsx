@@ -24,10 +24,14 @@ import {
 } from "utils/style/sizes";
 
 export const RootStyle = css`
+  html,
   body {
-    color: white;
+    height: 100%;
     margin: 0;
     padding: 0;
+  }
+  body {
+    color: white;
     background-color: ${$backgroundColor};
     font-family: "Montserrat", sans-serif;
     backface-visibility: hidden;
@@ -56,7 +60,7 @@ export const RootStyle = css`
   }
 
   #__next {
-    height: 100vh; // TODO why?
+    height: 100%;
     color: white;
   }
 
