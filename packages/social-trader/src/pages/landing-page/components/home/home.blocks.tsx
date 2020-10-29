@@ -1,4 +1,3 @@
-import LazyHydrate from "components/lazy-hydrate/lazy-hydrate";
 import { landingContainerStyles } from "pages/landing-page/styles/landing-styles";
 import React from "react";
 import styled from "styled-components";
@@ -37,7 +36,7 @@ export const HomeContainer = styled.div<{ tall?: boolean }>`
   `};
 `;
 
-export const DefaultHomeSection = styled.section<HomeSectionProps>`
+export const HomeSection = styled.section<HomeSectionProps>`
   background-color: ${({ bgColor }) => {
     switch (bgColor) {
       case "white":
@@ -69,14 +68,6 @@ export const DefaultHomeSection = styled.section<HomeSectionProps>`
         padding-bottom: 140px;
       `)}`}
 `;
-
-export const HomeSection: React.FC<HomeSectionProps> = props => {
-  return (
-    <LazyHydrate>
-      <DefaultHomeSection {...props} />
-    </LazyHydrate>
-  );
-};
 
 export const FirstScreenHomeSection = styled(HomeSection)<HomeSectionProps>`
   ${mediaBreakpointTablet(`
