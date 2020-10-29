@@ -2,6 +2,7 @@ import { IRowItemProps } from "components/row-item/row-item.types";
 import { css } from "styled-components";
 import { adaptiveMargin, cursorPointer } from "utils/style/mixins";
 import {
+  $paddingBig,
   $paddingMedium,
   $paddingSmall,
   $paddingXsmall,
@@ -37,6 +38,8 @@ export const RowItemDynamicStyles = css`
         return getOffset($paddingSmall, !!bottomOffset);
       case "xlarge":
         return getOffset($paddingMedium, !!bottomOffset);
+      case "xxlarge":
+        return getOffset($paddingBig, !!bottomOffset);
     }
   }}
 `;

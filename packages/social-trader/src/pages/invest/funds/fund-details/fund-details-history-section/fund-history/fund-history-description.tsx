@@ -21,7 +21,7 @@ const _FundHistoryDescription: React.FC<IFundHistoryDescriptionProps> = ({
           noWrap
           assets={assets}
           type={"short"}
-          size={12}
+          size={11}
           length={assets.length}
           hasPopoverList
         />
