@@ -37,11 +37,8 @@ const getStaticIconUrl = (type: string): string | null => {
 
 const _NotificationAssetAvatar: React.FC<INotificationProps> = ({
   type,
-  url,
-  logoUrl,
-  color,
   closeNotifications,
-  assetType
+  assetDetails: { url, logoUrl, color, assetType }
 }) => {
   const { linkCreator } = useToLink();
   const Tag: React.ComponentType<LinkProps | any> | string = url ? Link : "div";

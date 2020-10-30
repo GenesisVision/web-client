@@ -9,7 +9,7 @@ import {
   initialOptions
 } from "components/notifications/components/notifications.helpers";
 import { PopoverContentCardBlock } from "components/popover/popover-card.block";
-import { NotificationList } from "gv-api-web";
+import { NotificationViewModelItemsViewModel } from "gv-api-web";
 import useApiRequest, { API_REQUEST_STATUS } from "hooks/api-request.hook";
 import React, { useCallback, useEffect, useState } from "react";
 
@@ -34,7 +34,7 @@ interface Props
 const _UsersListContainer: React.FC<Props> = ({ id, request, title }) => {
   const [options, setOptions] = useState(initialOptions);
   const [total, setTotal] = useState(0);
-  const updateStateMiddleware = (res: NotificationList) => {
+  const updateStateMiddleware = (res: NotificationViewModelItemsViewModel) => {
     const newOptions = calculateOptions(options, res.total);
     setOptions(newOptions);
     setTotal(res.total);

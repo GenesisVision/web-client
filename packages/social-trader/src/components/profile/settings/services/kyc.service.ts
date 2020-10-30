@@ -6,7 +6,7 @@ export const loadKycIFrame = (externalUserId: string) => {
     if (!(window as any).idensic.init) return;
     api
       .profile()
-      .getVerificationToken()
+      .getWebVerificationToken()
       .then(data => {
         (window as any).idensic.init(
           // selector of an IFrame container (see above)
@@ -15,7 +15,7 @@ export const loadKycIFrame = (externalUserId: string) => {
           {
             clientId: "Genesis",
             externalUserId,
-            accessToken: data,
+            accessToken: data.accessToken,
             excludedCountries: ["USA"],
             lang: "en",
             applicantDataPage: {
