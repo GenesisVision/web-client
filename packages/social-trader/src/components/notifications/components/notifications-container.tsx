@@ -4,7 +4,7 @@ import {
   initialOptions
 } from "components/notifications/components/notifications.helpers";
 import { fetchNotifications } from "components/notifications/services/notifications.services";
-import { NotificationList } from "gv-api-web";
+import { NotificationViewModelItemsViewModel } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
 import * as React from "react";
 import { useCallback, useState } from "react";
@@ -15,7 +15,7 @@ const _NotificationsContainer: React.FC<Props> = ({ setClose }) => {
   const [options, setOptions] = useState(initialOptions);
   const [total, setTotal] = useState(0);
   const count = useSelector(notificationsCountSelector);
-  const updateStateMiddleware = (res: NotificationList) => {
+  const updateStateMiddleware = (res: NotificationViewModelItemsViewModel) => {
     const newOptions = calculateOptions(options, res.total);
     setOptions(newOptions);
     setTotal(res.total);
@@ -37,7 +37,7 @@ const _NotificationsContainer: React.FC<Props> = ({ setClose }) => {
       getNotifications={getNotifications}
       count={count}
       total={total}
-      notifications={data?.notifications}
+      notifications={data?.items}
       closeNotifications={setClose}
     />
   );
