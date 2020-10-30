@@ -1754,6 +1754,11 @@
   dependencies:
     any-observable "^0.3.0"
 
+"@sumsub/websdk@^1.0.11":
+  version "1.0.11"
+  resolved "https://registry.yarnpkg.com/@sumsub/websdk/-/websdk-1.0.11.tgz#1ba237d32d03e2236035bb0d73952116774328c6"
+  integrity sha512-Ne7b4tWxoFN/NtCn8kRgjXCuvdPx8RRlo0v5bpGi0QLN2BQLh8rnAZarEV8gcc0z+gIospB3TOhnLE/jDWXJaQ==
+
 "@svgr/babel-plugin-add-jsx-attribute@^4.2.0":
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/@svgr/babel-plugin-add-jsx-attribute/-/babel-plugin-add-jsx-attribute-4.2.0.tgz#dadcb6218503532d6884b210e7f3c502caaa44b1"
