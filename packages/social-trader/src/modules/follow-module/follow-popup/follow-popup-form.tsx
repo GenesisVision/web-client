@@ -1,3 +1,4 @@
+import { transformAccountWalletToCommon } from "components/wallet-select/wallet-select.helpers";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import {
   AttachToSignalProvider,
@@ -10,6 +11,7 @@ import FollowCreateExternalAccount from "modules/follow-module/follow-popup/foll
 import React, { useCallback, useState } from "react";
 import { useSelector } from "react-redux";
 import { subscribeFixedCurrenciesSelector } from "reducers/platform-reducer";
+import { safeGetElemFromArray } from "utils/helpers";
 import { CurrencyEnum } from "utils/types";
 
 import FollowCreateAccount from "./follow-popup-create-account";
@@ -25,6 +27,26 @@ const initRequestParams = {
   fixedVolume: 100,
   fixedCurrency: "USD" as CurrencyEnum
 };
+
+enum TABS {
+  SELECT_ACCOUNT = "CREATE_ACCOUNT",
+  PARAMS = "PARAMS"
+}
+
+interface Props {
+  errorMessage?: string;
+  isExternal: boolean;
+  data: TradingAccountDetails[];
+  rate: number;
+  minDeposit: number;
+  submitMethod: (
+    programId: string,
+    requestParams: AttachToSignalProvider
+  ) => void;
+  id: string;
+  wallets: WalletData[];
+  currency?: CurrencyEnum;
+}
 
 const _FollowForm: React.FC<Props> = ({
   errorMessage,
@@ -93,6 +115,15 @@ const _FollowForm: React.FC<Props> = ({
         : "create-account"
       : "params";
 
+  const followCurrencyWalletId = safeGetElemFromArray(
+    wallets,
+    wallet => wallet.currency === currency
+  ).id;
+
+  const wallet = transformAccountWalletToCommon(
+    safeGetElemFromArray(wallets, ({ id }) => id === followCurrencyWalletId)
+  );
+
   return (
     <>
       <FollowTop step={adaptStep} />
@@ -108,8 +139,8 @@ const _FollowForm: React.FC<Props> = ({
           <FollowCreateExternalAccount onClick={createdCopytradingAccount} />
         ) : (
           <FollowCreateAccount
+            wallet={wallet}
             minDeposit={minDeposit}
-            wallets={wallets}
             followCurrency={currency!}
             onClick={createdCopytradingAccount}
           />
@@ -127,26 +158,6 @@ const _FollowForm: React.FC<Props> = ({
     </>
   );
 };
-
-enum TABS {
-  SELECT_ACCOUNT = "CREATE_ACCOUNT",
-  PARAMS = "PARAMS"
-}
-
-interface Props {
-  errorMessage?: string;
-  isExternal: boolean;
-  data: TradingAccountDetails[];
-  rate: number;
-  minDeposit: number;
-  submitMethod: (
-    programId: string,
-    requestParams: AttachToSignalProvider
-  ) => void;
-  id: string;
-  wallets: WalletData[];
-  currency?: CurrencyEnum;
-}
 
 const FollowForm = withBlurLoader(React.memo(_FollowForm));
 export default FollowForm;

@@ -1,4 +1,3 @@
-import { HookFormWalletField as WalletSelect } from "components/deposit/components/form-fields/wallet-field";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogInfo } from "components/dialog/dialog-info";
 import InputAmountField from "components/input-amount-field/hook-form-amount-field";
@@ -6,7 +5,7 @@ import { LabeledValue } from "components/labeled-value/labeled-value";
 import { Row } from "components/row/row";
 import { SubmitButton } from "components/submit-button/submit-button";
 import { WalletItemType } from "components/wallet-select/wallet-select";
-import { WalletBaseData } from "gv-api-web";
+import { WalletSelectContainer } from "components/wallet-select/wallet-select.container";
 import {
   fundWithdrawAmountFormValidationSchema,
   MIN_FUND_WITHDRAW_VALUE
@@ -28,16 +27,27 @@ import { CurrencyEnum } from "utils/types";
 
 import { FundWithdrawResult } from "./fund-withdraw-result";
 
+interface Props {
+  infoMessage?: string;
+  isPending: boolean;
+  currency: CurrencyEnum;
+  setCurrency: (id: CurrencyEnum) => void;
+  initWalletId: string;
+  onSubmit: (values: FundWithDrawFormValues) => void;
+  exitFee: number;
+  availableToWithdraw: number;
+}
+
 const getMinPercent = (value: number, total: number) =>
   Math.max((value / total) * 100, MIN_FUND_WITHDRAW_VALUE);
 
 const _FundWithdrawAmountForm: React.FC<Props> = ({
+  initWalletId,
   infoMessage,
   onSubmit,
   isPending,
   currency,
   setCurrency,
-  wallets,
   availableToWithdraw,
   exitFee
 }) => {
@@ -52,7 +62,7 @@ const _FundWithdrawAmountForm: React.FC<Props> = ({
 
   const form = useForm<FundWithDrawFormValues>({
     defaultValues: {
-      [FUND_WITHDRAW_FIELDS.walletId]: wallets[0].id,
+      [FUND_WITHDRAW_FIELDS.walletId]: initWalletId,
       [FUND_WITHDRAW_FIELDS.percent]: minPercent
     },
     validationSchema: fundWithdrawAmountFormValidationSchema(t, minPercent),
@@ -98,22 +108,19 @@ const _FundWithdrawAmountForm: React.FC<Props> = ({
   );
 
   const changeWalletCallback = useCallback(
-    ({ id }: WalletItemType) => {
+    ({ id, currency }: WalletItemType) => {
       setValue(FUND_WITHDRAW_FIELDS.walletId, id, true);
-      const currency = safeGetElemFromArray(wallets, wallet => id === wallet.id)
-        .currency;
       setCurrency(currency);
     },
-    [wallets, setValue, setCurrency]
+    [setValue, setCurrency]
   );
 
   return (
     <HookForm form={form} onSubmit={onSubmit}>
       <Row>
-        <WalletSelect
+        <WalletSelectContainer
           label={t("labels.to")}
           name={FUND_WITHDRAW_FIELDS.walletId}
-          wallets={wallets}
           onChange={changeWalletCallback}
         />
       </Row>
@@ -151,17 +158,6 @@ const _FundWithdrawAmountForm: React.FC<Props> = ({
     </HookForm>
   );
 };
-
-interface Props {
-  infoMessage?: string;
-  isPending: boolean;
-  currency: CurrencyEnum;
-  setCurrency: (id: CurrencyEnum) => void;
-  wallets: WalletBaseData[];
-  onSubmit: (values: FundWithDrawFormValues) => void;
-  exitFee: number;
-  availableToWithdraw: number;
-}
 
 const FundWithdrawAmountForm = React.memo(_FundWithdrawAmountForm);
 export default FundWithdrawAmountForm;

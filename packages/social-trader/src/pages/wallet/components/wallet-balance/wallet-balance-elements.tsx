@@ -8,13 +8,20 @@ import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
+import styled from "styled-components";
 import { $primaryColor } from "utils/style/colors";
+import { adaptiveMargin } from "utils/style/mixins";
+import { $paddingMedium } from "utils/style/sizes";
 import { CurrencyEnum } from "utils/types";
 
 import styles from "./wallet-balance.module.scss";
 
 export const $piePendingColor = "#f7931a";
 export const $pieAvailableColor = "#5758a5";
+
+const ItemListContainer = styled(Row)`
+  ${adaptiveMargin("bottom", -$paddingMedium)}
+`;
 
 const _WalletBalanceElements: React.FC<Props> = ({
   pending,
@@ -25,7 +32,7 @@ const _WalletBalanceElements: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   return (
-    <Row size={"large"}>
+    <ItemListContainer size={"large"}>
       <StatisticItemList>
         {total !== undefined && (
           <RowItem size={"xlarge"}>
@@ -77,7 +84,7 @@ const _WalletBalanceElements: React.FC<Props> = ({
           tooltipContentLabel={t("wallet-page:tooltip.trading")}
         />
       </StatisticItemList>
-    </Row>
+    </ItemListContainer>
   );
 };
 

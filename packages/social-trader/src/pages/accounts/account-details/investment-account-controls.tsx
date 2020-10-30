@@ -12,6 +12,14 @@ import { WithdrawTransferButton } from "modules/transfer/withdraw-transfer-butto
 import { transformAmountWithCurrencyToTransferItem } from "pages/dashboard/components/dashboard-trading/dashboard-private-card.helpers";
 import * as React from "react";
 
+interface Props {
+  id?: string;
+  balances?: AmountWithCurrency[];
+  transferableItem: WalletItemType;
+  accountType?: PrivateTradingAccountType | AssetTypeExt;
+  onApply: VoidFunction;
+}
+
 const _InvestmentAccountControls: React.FC<Props> = ({
   id,
   balances,
@@ -29,7 +37,7 @@ const _InvestmentAccountControls: React.FC<Props> = ({
       ? transformAmountWithCurrencyToTransferItem(balances[0])
       : transferableItem;
   return (
-    <DefaultBlock size={"large"} bordered>
+    <DefaultBlock size={"large"} bordered tall>
       <Row>
         <DetailsBlockRowItem>
           <DepositTransferButton
@@ -57,14 +65,6 @@ const _InvestmentAccountControls: React.FC<Props> = ({
     </DefaultBlock>
   );
 };
-
-interface Props {
-  id?: string;
-  balances?: AmountWithCurrency[];
-  transferableItem: WalletItemType;
-  accountType?: PrivateTradingAccountType | AssetTypeExt;
-  onApply: VoidFunction;
-}
 
 const InvestmentAccountControls = React.memo(_InvestmentAccountControls);
 export default InvestmentAccountControls;

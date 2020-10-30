@@ -17,7 +17,13 @@ import { Action, AnyAction, Dispatch, Store } from "redux";
 import { ThunkAction, ThunkDispatch } from "redux-thunk";
 import Token from "services/api-client/token";
 
-export type SizesType = "xsmall" | "small" | "middle" | "large" | "xlarge";
+export type SizesType =
+  | "xsmall"
+  | "small"
+  | "middle"
+  | "large"
+  | "xlarge"
+  | "xxlarge";
 
 export interface Childrenable {
   children?: ReactNode | ReactNode[];

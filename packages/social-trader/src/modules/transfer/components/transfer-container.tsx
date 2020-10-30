@@ -20,6 +20,21 @@ import {
 } from "../transfer.types";
 import TransferForm from "./transfer-form";
 
+export interface TransferContainerProps {
+  fixedSelects?: boolean;
+  accountId?: string;
+  outerCurrentItemContainerItems?: WalletItemType[];
+  successMessage?: string;
+  singleCurrentItemContainer?: boolean;
+  onApply?: VoidFunction;
+  currentItem: WalletItemType;
+  onClose?: VoidFunction;
+  sourceType: InternalTransferRequestType;
+  destinationType: InternalTransferRequestType;
+  title?: string;
+  currentItemContainer: TRANSFER_CONTAINER;
+}
+
 const _TransferContainer: React.FC<TransferContainerProps> = ({
   fixedSelects,
   accountId,
@@ -91,6 +106,7 @@ const _TransferContainer: React.FC<TransferContainerProps> = ({
   if (!items) return null;
   return (
     <TransferForm
+      updateWallets={updateWalletMiddleware}
       fixedSelects={fixedSelects}
       data={items}
       sourceType={sourceType}
@@ -103,21 +119,6 @@ const _TransferContainer: React.FC<TransferContainerProps> = ({
     />
   );
 };
-
-export interface TransferContainerProps {
-  fixedSelects?: boolean;
-  accountId?: string;
-  outerCurrentItemContainerItems?: WalletItemType[];
-  successMessage?: string;
-  singleCurrentItemContainer?: boolean;
-  onApply?: VoidFunction;
-  currentItem: WalletItemType;
-  onClose?: VoidFunction;
-  sourceType: InternalTransferRequestType;
-  destinationType: InternalTransferRequestType;
-  title?: string;
-  currentItemContainer: TRANSFER_CONTAINER;
-}
 
 const TransferContainer = React.memo(_TransferContainer);
 export default TransferContainer;

@@ -34,7 +34,7 @@ const About = styled(Row)`
   ${transition("opacity")};
   white-space: normal;
   color: ${$labelColor};
-  line-height: ${$fontSizeH2};
+  line-height: ${$fontSizeH2}px;
 `;
 
 export const UsersTableRow: React.FC<{ user: UserDetailsList }> = ({

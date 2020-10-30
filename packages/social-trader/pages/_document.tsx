@@ -1,9 +1,17 @@
+import { DocumentContext } from "next/dist/next-server/lib/utils";
 import Document, { Head, Html, Main, NextScript } from "next/document";
 import React from "react";
 import { ServerStyleSheet } from "styled-components";
 
-class MyDocument extends Document {
-  static async getInitialProps(ctx: any) {
+import CustomHead from "./head-custom";
+import CustomNextScript from "./next-script-custom";
+
+const isProd = process.env.NODE_ENV === "production";
+
+const HACKED_PAGES = ["/"];
+
+class MyDocument extends Document<{ pathname: string }> {
+  static async getInitialProps(ctx: DocumentContext) {
     const sheet = new ServerStyleSheet();
     const originalRenderPage = ctx.renderPage;
 
@@ -17,6 +25,7 @@ class MyDocument extends Document {
       const initialProps = await Document.getInitialProps(ctx);
       return {
         ...initialProps,
+        pathname: ctx.pathname,
         styles: (
           <>
             {initialProps.styles}
@@ -28,10 +37,14 @@ class MyDocument extends Document {
       sheet.seal();
     }
   }
+
   render() {
+    const isHackedPage = HACKED_PAGES.includes(this.props.pathname) && isProd;
+    const HeadElement = isHackedPage ? CustomHead : Head;
+    const NextScriptElement = isHackedPage ? CustomNextScript : NextScript;
     return (
       <Html lang="en">
-        <Head>
+        <HeadElement>
           <link
             as="style"
             rel="preload"
@@ -54,10 +67,10 @@ class MyDocument extends Document {
         })(window,document,'script','dataLayer','GTM-NJLM6BD');}`
             }}
           />
-        </Head>
+        </HeadElement>
         <body>
           <Main />
-          <NextScript />
+          <NextScriptElement />
           <noscript>
             <iframe
               src="https://www.googletagmanager.com/ns.html?id=GTM-NJLM6BD"
