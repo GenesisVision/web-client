@@ -1,9 +1,12 @@
+import { Footer } from "components/footer/footer";
 import {
   GlobalSearchContext,
   GlobalSearchContextProvider
 } from "components/global-search/global-search-context";
 import HeaderContainer from "components/header/header.container";
 import {
+  appFooterContainerStyles,
+  appFooterStyles,
   appHeaderStyles,
   appMainStyles,
   appStyles,
@@ -36,6 +39,14 @@ const AppMain = styled.div`
   ${appMainStyles}
 `;
 
+const AppFooter = styled.div`
+  ${appFooterStyles}
+`;
+
+const AppFooterContainer = styled.div`
+  ${appFooterContainerStyles}
+`;
+
 const PageContent: React.FC = ({ children }) => {
   const { searchValue } = useContext(GlobalSearchContext);
   return !!searchValue ? (
@@ -58,6 +69,11 @@ const AppLayout: ComponentType = ({ children }) => {
           </AppMain>
           <AlertMessageList />
         </App>
+        <AppFooterContainer>
+          <AppFooter>
+            <Footer />
+          </AppFooter>
+        </AppFooterContainer>
         <div id="modal-root" />
       </AppWrapper>
     </GlobalSearchContextProvider>

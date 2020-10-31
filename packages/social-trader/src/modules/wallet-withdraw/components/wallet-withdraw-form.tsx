@@ -1,4 +1,3 @@
-import { HookFormWalletField as WalletSelect } from "components/deposit/components/form-fields/wallet-field";
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogError } from "components/dialog/dialog-error";
@@ -11,25 +10,39 @@ import { Row } from "components/row/row";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
 import { SubmitButton } from "components/submit-button/submit-button";
 import { WalletItemType } from "components/wallet-select/wallet-select";
+import { WalletSelectContainer } from "components/wallet-select/wallet-select.container";
 import { WalletData } from "gv-api-web";
 import {
   WALLET_WITHDRAW_FIELDS,
   walletWithdrawValidationSchema
 } from "modules/wallet-withdraw/components/wallet-withdraw-form.helpers";
 import * as React from "react";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
 import { formatCurrencyValue, validateFraction } from "utils/formatter";
-import { safeGetElemFromArray } from "utils/helpers";
 import { HookForm } from "utils/hook-form.helpers";
 import { CurrencyEnum } from "utils/types";
+
+export interface IWalletWithdrawFormValues {
+  [WALLET_WITHDRAW_FIELDS.currency]: CurrencyEnum;
+  [WALLET_WITHDRAW_FIELDS.id]: string;
+  [WALLET_WITHDRAW_FIELDS.amount]: string;
+  [WALLET_WITHDRAW_FIELDS.address]: string;
+  [WALLET_WITHDRAW_FIELDS.twoFactorCode]: string;
+}
+
+interface Props {
+  twoFactorEnabled: boolean;
+  currentWallet: WalletData;
+  onSubmit: (data: IWalletWithdrawFormValues) => void;
+  errorMessage?: string;
+}
 
 const _WalletWithdrawForm: React.FC<Props> = ({
   onSubmit,
   twoFactorEnabled,
-  wallets,
   errorMessage,
   currentWallet
 }) => {
@@ -51,11 +64,7 @@ const _WalletWithdrawForm: React.FC<Props> = ({
   });
   const { reset, watch, setValue } = form;
 
-  const { amount, id } = watch();
-
-  useEffect(() => {
-    setSelected(safeGetElemFromArray(wallets, wallet => wallet.id === id));
-  }, [id]);
+  const { amount } = watch();
 
   const onChangeCurrency = useCallback(
     (wallet: WalletItemType) => {
@@ -98,10 +107,10 @@ const _WalletWithdrawForm: React.FC<Props> = ({
     <HookForm form={form} onSubmit={handleSubmit}>
       <DialogTop title={t("wallet-withdraw:title")}>
         <Row size={"large"}>
-          <WalletSelect
+          <WalletSelectContainer
+            filterFunc={(wallet: WalletData) => wallet.isWithdrawalEnabled}
             name={WALLET_WITHDRAW_FIELDS.id}
             label={t("wallet-withdraw:select-currency")}
-            wallets={wallets}
             onChange={onChangeCurrency}
           />
         </Row>
@@ -161,22 +170,6 @@ const _WalletWithdrawForm: React.FC<Props> = ({
     </HookForm>
   );
 };
-
-export interface IWalletWithdrawFormValues {
-  [WALLET_WITHDRAW_FIELDS.currency]: CurrencyEnum;
-  [WALLET_WITHDRAW_FIELDS.id]: string;
-  [WALLET_WITHDRAW_FIELDS.amount]: string;
-  [WALLET_WITHDRAW_FIELDS.address]: string;
-  [WALLET_WITHDRAW_FIELDS.twoFactorCode]: string;
-}
-
-interface Props {
-  twoFactorEnabled: boolean;
-  wallets: WalletData[];
-  currentWallet: WalletData;
-  onSubmit: (data: IWalletWithdrawFormValues) => void;
-  errorMessage?: string;
-}
 
 const WalletWithdrawForm = React.memo(_WalletWithdrawForm);
 export default WalletWithdrawForm;
