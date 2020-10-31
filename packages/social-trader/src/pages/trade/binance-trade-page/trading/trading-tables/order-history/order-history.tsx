@@ -25,7 +25,7 @@ export const OrderHistory: React.FC<Props> = ({ items }) => {
         </th>
       )}
       renderRow={({
-        executedQuantity,
+        quantityFilled,
         quantity,
         time,
         symbol,
@@ -40,7 +40,7 @@ export const OrderHistory: React.FC<Props> = ({ items }) => {
           side={side}
           price={price}
           origQty={quantity}
-          filled={(+executedQuantity / +quantity) * 100}
+          filled={(+quantity / +quantityFilled) * 100}
           total={+quantity * +price}
         />
       )}
