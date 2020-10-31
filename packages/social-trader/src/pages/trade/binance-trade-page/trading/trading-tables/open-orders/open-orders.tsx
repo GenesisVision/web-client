@@ -69,6 +69,7 @@ export const OpenOrders: React.FC<Props> = ({ items }) => {
         </th>
       )}
       renderRow={({
+        quantityFilled,
         quantity,
         id,
         time,
@@ -86,7 +87,7 @@ export const OpenOrders: React.FC<Props> = ({ items }) => {
             side={side}
             price={String(price)}
             origQty={String(quantity)}
-            filled={quantity * 100}
+            filled={(quantity / quantityFilled) * 100}
             total={+quantity * +price}
           />
         );
