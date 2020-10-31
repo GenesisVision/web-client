@@ -1010,6 +1010,7 @@ export type UnitedOrder = {
   type: string;
   side: OrderSide;
   price: number;
+  quantityFilled: number;
   quantity: number;
 };
 

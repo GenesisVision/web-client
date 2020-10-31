@@ -88,7 +88,8 @@ const transformToUnitedOrder = ({
   side,
   price,
   quantity,
-  quoteQuantity
+  quoteQuantity,
+  quantityFilled
 }: BinanceRawOrder): UnitedOrder => ({
   executedQuantity: quoteQuantity,
   id: orderId,
@@ -97,6 +98,7 @@ const transformToUnitedOrder = ({
   type,
   side,
   price,
+  quantityFilled,
   quantity
 });
 
