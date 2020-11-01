@@ -1,8 +1,10 @@
 import { css } from "styled-components";
 import { LARGE_DESKTOP } from "utils/breakpoints";
 import { mediaBreakpointLandscapePhone } from "utils/style/media";
-import { adaptiveMargin } from "utils/style/mixins";
+import { adaptiveMargin, horizontalPaddings } from "utils/style/mixins";
 import {
+  $fontSizeCommon,
+  $fontSizeCommonMobile,
   $paddingBig,
   $paddingBigMobile,
   $paddingSmallMobile,
@@ -51,8 +53,24 @@ export const appHeaderStyles = css`
 
 export const appMainStyles = css`
   ${appHorizontalPaddings}
-  padding-bottom: ${$paddingBigMobile}px;
+  padding-bottom: ${2 * $paddingBigMobile + $fontSizeCommonMobile}px;
 
+  ${mediaBreakpointLandscapePhone(`
+    padding-bottom: ${2 * $paddingBig + $fontSizeCommon}px;
+  `)}
+`;
+
+export const appFooterContainerStyles = css`
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+`;
+
+export const appFooterStyles = css`
+  ${horizontalPaddings($paddingBig)}
+  ${appStyles}
+  
+  padding-bottom: ${$paddingBigMobile}px;
   ${mediaBreakpointLandscapePhone(`
     padding-bottom: ${$paddingBig}px;
   `)}

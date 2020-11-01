@@ -2,6 +2,7 @@ import NextLink from "next/link";
 import Router from "next/router";
 import React, { useCallback } from "react";
 import styled from "styled-components";
+import { $primaryColor } from "utils/style/colors";
 
 import { normalizeTo, pushHistoryState } from "./link.helper";
 
@@ -37,9 +38,9 @@ const StyledA = styled.a<LinkProps>`
     `display: block;
     width: 100%;`};
   color: ${({ white, noColor }) => {
-    if (white) return `white;`;
-    if (noColor) return `inherit;`;
-    return "#03bdaf";
+    if (white) return `white`;
+    if (noColor) return `inherit`;
+    return $primaryColor;
   }};
 `;
 
@@ -75,9 +76,10 @@ const Link: React.FC<LinkProps> = props => {
     [normalizedTo, onClick]
   );
   const linkTitle = title || (typeof children === "string" && children) || "";
+  const href = normalizedTo.as || normalizedTo.pathname;
   return (
-    <NextLink href={normalizedTo.as || normalizedTo.pathname}>
-      <StyledA {...props} title={linkTitle} onClick={handleClick} />
+    <NextLink href={href}>
+      <StyledA {...props} href={href} title={linkTitle} onClick={handleClick} />
     </NextLink>
   );
 };

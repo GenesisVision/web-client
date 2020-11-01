@@ -11,7 +11,7 @@ const KYCContainer: React.FC = () => {
   useEffect(() => {
     loadKycIFrame(id);
   }, [id]);
-  return <div id="idensic" className={styles["idensic"]} />;
+  return <div id="sumsub-websdk-container" className={styles["idensic"]} />;
 };
 
 export default KYCContainer;

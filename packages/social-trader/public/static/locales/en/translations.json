@@ -1,4 +1,9 @@
 {
+  "footer": {
+    "faq": "FAQ",
+    "partners": "Referral program",
+    "fees": "Fees"
+  },
   "actions-status-filter": {
     "label": "Status",
     "values": {

@@ -94,25 +94,31 @@ const _NotificationAssetAvatar: React.FC<INotificationProps> = ({
   light,
   type,
   closeNotifications,
-  assetDetails: { url, logoUrl, color, assetType }
+  platformAssetDetails,
+  userDetails,
+  assetDetails
 }) => {
+  const logoUrl =
+    assetDetails?.logoUrl ||
+    userDetails?.logoUrl ||
+    platformAssetDetails?.logoUrl;
   const { linkCreator } = useToLink();
-  const Tag: React.ComponentType<LinkProps | any> | string = url
+  const Tag: React.ComponentType<LinkProps | any> | string = assetDetails?.url
     ? AssetAvatarLinkContainer
     : AssetAvatarDivContainer;
-  const to = url
+  const to = assetDetails?.url
     ? linkCreator(
-        assetType === "Program"
-          ? composeProgramDetailsUrl(url)
-          : composeFundsDetailsUrl(url),
-        assetType === "Program"
+        assetDetails?.assetType === "Program"
+          ? composeProgramDetailsUrl(assetDetails?.url)
+          : composeFundsDetailsUrl(assetDetails?.url),
+        assetDetails?.assetType === "Program"
           ? PROGRAM_DETAILS_FOLDER_ROUTE
           : FUND_DETAILS_FOLDER_ROUTE
       )
     : null;
   return (
     <Tag to={to} onClick={closeNotifications} dark={dark} light={light}>
-      <AssetAvatar url={logoUrl} alt={type} color={color} />
+      <AssetAvatar url={logoUrl} alt={type} color={assetDetails?.color} />
     </Tag>
   );
 };

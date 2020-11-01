@@ -11,6 +11,7 @@ const Page: NextPage = () => {
 
 Page.getInitialProps = async () => ({
   namespacesRequired: [
+    "follow-details-page",
     "create-fund-page",
     "create-account",
     "profile-page",
