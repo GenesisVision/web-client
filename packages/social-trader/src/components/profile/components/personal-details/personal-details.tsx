@@ -3,7 +3,9 @@ import { LabeledValue } from "components/labeled-value/labeled-value";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import { KYC_ROUTE } from "components/profile/profile.constants";
+import { Row } from "components/row/row";
 import SettingsBlock from "components/settings-block/settings-block";
+import { Text } from "components/text/text";
 import withLoader from "decorators/with-loader";
 import { ProfileFullViewModel } from "gv-api-web";
 import * as React from "react";
@@ -24,11 +26,24 @@ const _PersonalDetails: React.FC<IProfileOwnProps> = ({ info }) => {
         verificationStatus={info.verificationStatus}
       >
         {info.verificationStatus === "NotVerified" && (
-          <Link to={linkCreator(KYC_ROUTE)}>
-            <GVButton color="primary" variant="outlined">
-              {t("buttons.verify")}
-            </GVButton>
-          </Link>
+          <div>
+            <Row>
+              <div style={{ maxWidth: 500 }}>
+                <Text muted>
+                  KYC is an authentication mechanism required in the financial
+                  industry to help ensure companies are compliant with anti
+                  money laundering regulations.
+                </Text>
+              </div>
+            </Row>
+            <Row>
+              <Link to={linkCreator(KYC_ROUTE)}>
+                <GVButton color="primary" variant="outlined">
+                  {t("buttons.verify")}
+                </GVButton>
+              </Link>
+            </Row>
+          </div>
         )}
       </SettingsBlock>
     </>

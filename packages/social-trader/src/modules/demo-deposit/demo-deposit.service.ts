@@ -6,7 +6,7 @@ export type DemoDepositResponse = Promise<void>;
 
 export const depositToDemo = ({ id, amount }: any): DemoDepositResponse => {
   return (api.assets().makeDemoTradingAccountDeposit(id, {
-    body: { amount, id }
+    body: { amount }
   }) as unknown) as DemoDepositResponse;
 };
 

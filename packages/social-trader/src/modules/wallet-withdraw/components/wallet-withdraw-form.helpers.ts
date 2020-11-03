@@ -27,6 +27,7 @@ export const walletWithdrawValidationSchema = ({
   switch (currency) {
     case "GVT":
     case "ETH":
+    case "USDC":
     case "USDT":
       return object().shape({
         [WALLET_WITHDRAW_FIELDS.address]: ethGvtWalletValidator.required(
@@ -37,6 +38,7 @@ export const walletWithdrawValidationSchema = ({
           twoFactorEnabled
         )
       });
+    case "BTC":
     default:
       return object().shape({
         [WALLET_WITHDRAW_FIELDS.address]: btcWalletValidator.required(
