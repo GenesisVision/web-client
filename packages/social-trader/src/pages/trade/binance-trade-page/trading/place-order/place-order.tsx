@@ -83,6 +83,10 @@ const _PlaceOrder: React.FC = () => {
     if (price! && !innerPrice) setInnerPrice(+price);
   }, [price]);
 
+  useEffect(() => {
+    setInnerPrice(0);
+  }, [baseAsset, quoteAsset]);
+
   return (
     <TerminalDefaultBlock>
       <Row>
@@ -106,7 +110,7 @@ const _PlaceOrder: React.FC = () => {
       <Row>
         <GVTabs value={tab} onChange={setTab}>
           <GVTab value={"Limit"} label={"LIMIT"} />
-          <GVTab value={"MARKET"} label={"MARKET"} />
+          <GVTab value={"Market"} label={"MARKET"} />
           <GVTab value={"StopLossLimit"} label={"STOP LIMIT"} />
         </GVTabs>
       </Row>

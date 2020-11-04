@@ -1,4 +1,3 @@
-import dayjs from "dayjs";
 import { BinanceRawKlineInterval } from "gv-api-web";
 import {
   IBasicDataFeed,
@@ -135,9 +134,6 @@ export const Datafeed = ({
       return;
     }
     const { tickSize } = symbolItem.priceFilter;
-    const { stepSize } = symbolItem.lotSizeFilter;
-
-    const size = stepSize || tickSize;
 
     const symbolInfo: LibrarySymbolInfo = {
       name: `${symbolItem.baseAsset}/${symbolItem.quoteAsset}`,
@@ -151,7 +147,7 @@ export const Datafeed = ({
       minmov: 1,
       minmove2: 0,
       fractional: false,
-      pricescale: Math.pow(10, Math.abs(Math.log10(size))),
+      pricescale: Math.pow(10, Math.abs(Math.log10(tickSize))),
       has_intraday: true,
       has_no_volume: true,
       has_daily: true,
@@ -179,7 +175,6 @@ export const Datafeed = ({
     const endTime = to * 1000;
     const limit = 1000;
     const interval = formatTimeResolution(resolution);
-    console.log(interval);
     const urlParameters = {
       symbol: symbolInfo.full_name,
       interval,
@@ -202,7 +197,6 @@ export const Datafeed = ({
   subscribeBars: (symbolInfo, resolution, onRealtimeCallback) => {
     const { full_name } = symbolInfo;
 
-    console.log(formatTimeResolutionBinance(resolution));
     klineSocket(
       full_name.toLowerCase(),
       formatTimeResolutionBinance(resolution)

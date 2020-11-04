@@ -5,10 +5,7 @@ import { TradeTable } from "pages/trade/binance-trade-page/trading/components/tr
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
 import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/terminal-methods.context";
 import { getSymbolFromState } from "pages/trade/binance-trade-page/trading/terminal.helpers";
-import {
-  QueryOrderResult,
-  UnitedOrder
-} from "pages/trade/binance-trade-page/trading/terminal.types";
+import { UnitedOrder } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -21,7 +18,6 @@ interface Props {
 }
 
 export const OpenOrders: React.FC<Props> = ({ items }) => {
-  console.log(items);
   const { cancelAllOrders } = useContext(TerminalMethodsContext);
   const [t] = useTranslation();
   const { exchangeAccountId, symbol } = useContext(TerminalInfoContext);
