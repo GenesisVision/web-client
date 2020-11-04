@@ -134,9 +134,6 @@ export const Datafeed = ({
       return;
     }
     const { tickSize } = symbolItem.priceFilter;
-    const { stepSize } = symbolItem.lotSizeFilter;
-
-    const size = stepSize || tickSize;
 
     const symbolInfo: LibrarySymbolInfo = {
       name: `${symbolItem.baseAsset}/${symbolItem.quoteAsset}`,
@@ -150,7 +147,7 @@ export const Datafeed = ({
       minmov: 1,
       minmove2: 0,
       fractional: false,
-      pricescale: Math.pow(10, Math.abs(Math.log10(size))),
+      pricescale: Math.pow(10, Math.abs(Math.log10(tickSize))),
       has_intraday: true,
       has_no_volume: true,
       has_daily: true,
