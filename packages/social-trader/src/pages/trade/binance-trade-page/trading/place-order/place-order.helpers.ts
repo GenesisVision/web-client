@@ -311,7 +311,10 @@ export const useTradeSlider = ({
 export const getBalance = (
   balances: AssetBalance[],
   currency: TerminalCurrency
-) => safeGetElemFromArray(balances, ({ asset }) => asset === currency).free;
+) => {
+  const wallet = balances.find(({ asset }) => asset === currency);
+  return wallet ? wallet.free : 0;
+};
 
 export const getMinNotionalFilter = (filters: SymbolFilter[]) => {
   return (filters.find(({ filterType }) => filterType === "MIN_NOTIONAL") || {
