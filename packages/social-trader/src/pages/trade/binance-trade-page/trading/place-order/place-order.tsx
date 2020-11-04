@@ -83,6 +83,10 @@ const _PlaceOrder: React.FC = () => {
     if (price! && !innerPrice) setInnerPrice(+price);
   }, [price]);
 
+  useEffect(() => {
+    setInnerPrice(0);
+  }, [baseAsset, quoteAsset]);
+
   return (
     <TerminalDefaultBlock>
       <Row>
