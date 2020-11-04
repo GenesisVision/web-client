@@ -106,7 +106,7 @@ const _PlaceOrder: React.FC = () => {
       <Row>
         <GVTabs value={tab} onChange={setTab}>
           <GVTab value={"Limit"} label={"LIMIT"} />
-          <GVTab value={"MARKET"} label={"MARKET"} />
+          <GVTab value={"Market"} label={"MARKET"} />
           <GVTab value={"StopLossLimit"} label={"STOP LIMIT"} />
         </GVTabs>
       </Row>
