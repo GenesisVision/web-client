@@ -8,6 +8,7 @@ import {
 } from "@pavelzubov/use-api-request/dist/hooks/useApiRequest";
 import { useAlerts } from "hooks/alert.hook";
 import { useMemo } from "react";
+import Token from "services/api-client/token";
 import { ResponseError } from "utils/types";
 
 export type API_REQUEST_STATUS = API_REQUEST_STATUS_TYPE;
@@ -29,6 +30,7 @@ const useApiRequest = <T extends any>(
   );
   return useApiRequestConstructor({
     ...props,
+    token: Token.create().value,
     alertService,
     getErrorMessageCallback
   });

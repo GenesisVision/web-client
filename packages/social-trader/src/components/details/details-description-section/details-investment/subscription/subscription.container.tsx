@@ -10,6 +10,8 @@ const _SubscriptionContainer: React.FC<Props> = ({
   subscribedAccounts
 }) => {
   const { data, sendRequest } = useApiRequest({
+    name: "SubscriptionContainer",
+    cache: true,
     request: fetchSubscriptions
   });
   const updateInfo = useCallback(() => {

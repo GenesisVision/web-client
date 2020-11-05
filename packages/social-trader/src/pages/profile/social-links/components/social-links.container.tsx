@@ -43,6 +43,8 @@ interface ILinksProps {
 const _SocialLinksContainer: React.FC = () => {
   const [t] = useTranslation();
   const { data: socialLinks, sendRequest: getSocialLinks } = useApiRequest({
+    name: "fetchSocialLinks",
+    cache: true,
     request: fetchSocialLinks,
     fetchOnMount: true
   });

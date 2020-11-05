@@ -21,6 +21,7 @@ const _DashboardTradingStatistic: React.FC<Props> = ({ orientation }) => {
   const currency = useAccountCurrency();
   return (
     <DashboardStatisticContainer
+      name={"DashboardTradingStatistic"}
       orientation={orientation}
       EmptyBlock={DashboardTradingEmpty}
       currency={currency}

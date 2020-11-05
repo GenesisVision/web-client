@@ -2408,9 +2408,9 @@
   dependencies:
     mkdirp "^1.0.4"
 
-"@pavelzubov/use-api-request@pavelzubov/use-api-request":
-  version "1.0.0"
-  resolved "https://codeload.github.com/pavelzubov/use-api-request/tar.gz/66f1db7da9cc1c4cec1a764a3d1234a0f4280e30"
+"@pavelzubov/use-api-request@pavelzubov/use-api-request#1.1.0":
+  version "1.1.0"
+  resolved "https://codeload.github.com/pavelzubov/use-api-request/tar.gz/b92445d39fd8bdad4acfff1e6ed09851aac21d63"
 
 "@popmotion/easing@^1.0.1":
   version "1.0.2"
