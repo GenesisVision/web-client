@@ -4,6 +4,7 @@ import { RefreshIcon } from "components/icon/refresh-icon";
 import { debounce } from "lodash";
 import React, { useCallback } from "react";
 import styled from "styled-components";
+import { transition } from "utils/style/mixins";
 
 export interface IUpdatableGvTextFieldProps {
   onClickUpdate?: VoidFunction;
@@ -25,6 +26,10 @@ const ButtonContainer = styled.div`
   top: 0;
   width: 15px;
   height: 15px;
+  &:hover {
+    opacity: 0.4;
+  }
+  ${transition("opacity")}
 `;
 
 const _UpdatableGvTextField: React.FC<Props> = props => {
