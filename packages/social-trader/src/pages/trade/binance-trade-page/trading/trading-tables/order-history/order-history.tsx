@@ -40,7 +40,7 @@ export const OrderHistory: React.FC<Props> = ({ items }) => {
           side={side}
           price={price}
           origQty={quantity}
-          filled={(+quantity / +quantityFilled) * 100}
+          filled={(+quantityFilled / +quantity) * 100}
           total={+quantity * +price}
         />
       )}
