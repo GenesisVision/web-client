@@ -21,6 +21,8 @@ const _ProgramWithdrawDialog: React.FC<Props> = ({
   assetCurrency
 }) => {
   const { data, sendRequest } = useApiRequest<ProgramWithdrawInfo>({
+    name: "getProgramWithdrawInfo",
+    cache: true,
     request: getProgramWithdrawInfo
   });
   useEffect(() => {

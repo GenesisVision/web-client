@@ -21,6 +21,8 @@ const _DepositPopupContainer: React.FC<IDepositPopupContainerProps> = props => {
   const { data, sendRequest: getInvestInfo } = useApiRequest<
     TWalletsAvailableData
   >({
+    name: "DepositPopupContainer",
+    cache: true,
     fetchOnMountData: { currency },
     fetchOnMount: true,
     request: fetchAvailableWallets

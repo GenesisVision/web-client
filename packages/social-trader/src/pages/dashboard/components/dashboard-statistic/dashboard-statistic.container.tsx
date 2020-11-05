@@ -14,6 +14,7 @@ import {
 import DashboardStatistic from "./dashboard-statistic";
 
 interface Props {
+  name: string;
   orientation?: DashboardBlockOrientation;
   EmptyBlock: React.ComponentType;
   currency: CurrencyEnum;
@@ -30,6 +31,7 @@ const StyledDashboardStatistic = styled(DashboardStatistic)`
 `;
 
 const _DashboardStatisticContainer: React.FC<Props> = ({
+  name,
   orientation,
   EmptyBlock,
   currency,
@@ -41,6 +43,8 @@ const _DashboardStatisticContainer: React.FC<Props> = ({
   const { data } = useApiRequest<
     TDashboardTradingStatistic & TDashboardInvestingStatistic
   >({
+    name,
+    cache: true,
     request,
     fetchOnMount: true,
     fetchOnMountData: { currency }

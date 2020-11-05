@@ -24,6 +24,8 @@ const _FundsWeeklyContainer: React.FC = () => {
   const [t] = useTranslation();
 
   const { data, sendRequest: getFundsChallengeWinner } = useApiRequest({
+    name: "fetchFundsChallengeWinner",
+    cache: true,
     request: fetchFundsChallengeWinner,
     fetchOnMount: true
   });

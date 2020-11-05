@@ -12,6 +12,8 @@ const _DashboardInvestingMostProfitableContainer: React.FC = () => {
   const [t] = useTranslation();
   const currency = useAccountCurrency();
   const { data, sendRequest } = useApiRequest({
+    name: "DashboardInvestingMostProfitableContainer",
+    cache: true,
     request: () => getInvestingMostProfitable({ showIn: currency }),
     fetchOnMount: true
   });

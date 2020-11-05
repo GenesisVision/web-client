@@ -33,6 +33,8 @@ const _AttachAccountPage: React.FC<Props> = ({ requestBrokerName }) => {
     request: attachAccount
   });
   const { data: exchanges } = useApiRequest<Broker[]>({
+    name: "fetchExchanges",
+    cache: true,
     fetchOnMount: true,
     request: fetchExchanges
   });
