@@ -29,7 +29,7 @@ const _NotificationsWidget: React.FC<Props> = ({
   const [isOpen, setOpen, setClose] = useIsOpen();
   const hasNotifications: boolean = notificationsCount > 0;
   const handleClose = useCallback(() => {
-    dispatch(ProfileHeaderInfoAction);
+    dispatch(ProfileHeaderInfoAction());
     setClose();
   }, []);
   return (

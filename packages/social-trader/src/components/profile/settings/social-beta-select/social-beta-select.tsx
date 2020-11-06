@@ -26,7 +26,7 @@ const _SocialBetaSelect: React.FC = () => {
   }, [isBetaTester]);
   const request = isTester ? setSocialTesterOff : setSocialTesterOn;
   const updateHeaderMiddleware = () => {
-    dispatch(ProfileHeaderInfoAction);
+    dispatch(ProfileHeaderInfoAction());
   };
   const setMiddleware = () => {
     setTesterValue(!isTester);

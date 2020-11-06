@@ -3,7 +3,7 @@ import { getHeader } from "components/header/services/header.service";
 import { ProfileHeaderViewModel } from "gv-api-web";
 import { ApiAction } from "utils/types";
 
-export const ProfileHeaderInfoAction: ApiAction<ProfileHeaderViewModel> = {
+export const ProfileHeaderInfoAction = (): ApiAction<ProfileHeaderViewModel> => ({
   type: PROFILE_HEADER,
   payload: getHeader()
-};
+});

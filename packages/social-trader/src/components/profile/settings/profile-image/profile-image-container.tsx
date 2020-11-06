@@ -10,7 +10,7 @@ import ProfileImage, { IProfileImageFormValues } from "./profile-image";
 
 const _ProfileImageContainer: React.FC = () => {
   const fetchProfileMiddleware = () => {
-    dispatch(ProfileHeaderInfoAction);
+    dispatch(ProfileHeaderInfoAction());
   };
   const { sendRequest, errorMessage } = useApiRequest({
     middleware: [fetchProfileMiddleware],

@@ -30,7 +30,7 @@ export const useHeaderInfo = () => {
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   const headerAccountCurrency = useAccountCurrency();
   useEffect(() => {
-    if (isAuthenticated) dispatch(ProfileHeaderInfoAction);
+    if (isAuthenticated) dispatch(ProfileHeaderInfoAction());
     if (headerAccountCurrency) updateCurrency(headerAccountCurrency);
   }, [isAuthenticated, headerAccountCurrency]);
   return useSelector(headerSelector);

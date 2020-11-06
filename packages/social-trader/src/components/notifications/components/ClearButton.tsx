@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 const ClearButton: React.FC<Props> = ({ onApply }) => {
   const dispatch = useDispatch();
   const [t] = useTranslation();
-  const updateHeaderButton = () => dispatch(ProfileHeaderInfoAction);
+  const updateHeaderButton = () => dispatch(ProfileHeaderInfoAction());
   const middleware = [onApply, updateHeaderButton];
   const { sendRequest, isPending } = useApiRequest({
     request: clearAll,
