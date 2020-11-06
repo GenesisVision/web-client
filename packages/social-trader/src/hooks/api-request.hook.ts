@@ -13,6 +13,8 @@ import { ResponseError } from "utils/types";
 
 export type API_REQUEST_STATUS = API_REQUEST_STATUS_TYPE;
 
+export const DEFAULT_INTERVAL = 30;
+
 const getErrorMessageCallback = ({ errorMessage }: ResponseError) =>
   errorMessage;
 
