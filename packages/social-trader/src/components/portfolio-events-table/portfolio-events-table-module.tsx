@@ -21,6 +21,17 @@ import { allEventsSelector } from "reducers/platform-reducer";
 import { DashboardPortfolioEventsLoaderData } from "../dashboard/dashboard.loaders-data";
 import PortfolioEventsTableRow from "./portfolio-events-table-row";
 
+export interface IPortfolioEventsTableOwnProps {
+  assetTypeValues: SelectFilterValue<string>[];
+  historyType: THistoryType;
+  columns: SortingColumn[];
+  getItems: GetItemsFuncType;
+  eventLocation: EVENT_LOCATION;
+  dateRangeStartLabel: string;
+  className?: string;
+  title?: string;
+}
+
 const _PortfolioEventsTableModule: React.FC<IPortfolioEventsTableOwnProps> = ({
   assetTypeValues,
   historyType,
@@ -35,6 +46,8 @@ const _PortfolioEventsTableModule: React.FC<IPortfolioEventsTableOwnProps> = ({
   return (
     <div className={className}>
       <TableModule
+        name={"PortfolioEventsTableModule"}
+        cache
         filtering={DASHBOARD_PORTFOLIO_EVENTS_DEFAULT_FILTERING}
         defaultFilters={DASHBOARD_PORTFOLIO_EVENTS_FILTERS}
         loaderData={DashboardPortfolioEventsLoaderData}
@@ -66,17 +79,6 @@ const _PortfolioEventsTableModule: React.FC<IPortfolioEventsTableOwnProps> = ({
     </div>
   );
 };
-
-export interface IPortfolioEventsTableOwnProps {
-  assetTypeValues: SelectFilterValue<string>[];
-  historyType: THistoryType;
-  columns: SortingColumn[];
-  getItems: GetItemsFuncType;
-  eventLocation: EVENT_LOCATION;
-  dateRangeStartLabel: string;
-  className?: string;
-  title?: string;
-}
 
 const PortfolioEventsTableModule = React.memo(_PortfolioEventsTableModule);
 export default PortfolioEventsTableModule;

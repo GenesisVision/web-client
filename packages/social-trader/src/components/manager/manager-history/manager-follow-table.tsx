@@ -15,6 +15,12 @@ import {
 } from "../manager.constants";
 import { fetchManagerFollow } from "../services/manager.service";
 
+interface Props {
+  subscriberId?: string;
+  ownerId?: string;
+  title: string;
+}
+
 const _ManagerFollow: React.FC<Props> = ({ title, subscriberId, ownerId }) => {
   const [t] = useTranslation();
   const getManagerFollow: GetItemsFuncType = useCallback(
@@ -24,6 +30,8 @@ const _ManagerFollow: React.FC<Props> = ({ title, subscriberId, ownerId }) => {
 
   return (
     <TableModule
+      name={"ManagerFollow" + ownerId}
+      cache
       loaderData={userFollowListLoaderData}
       columns={[{ name: "" }]}
       title={title}
@@ -44,12 +52,6 @@ const _ManagerFollow: React.FC<Props> = ({ title, subscriberId, ownerId }) => {
     />
   );
 };
-
-interface Props {
-  subscriberId?: string;
-  ownerId?: string;
-  title: string;
-}
 
 const ManagerFollow = React.memo(_ManagerFollow);
 export default ManagerFollow;
