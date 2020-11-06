@@ -8,6 +8,10 @@ import FollowTableRow from "./follow-table-row-short";
 import { followListLoaderData } from "./follow-table.loader-data";
 import { FOLLOW_COLUMNS } from "./follows.constants";
 
+interface Props extends ITableModuleProps {
+  title?: string;
+}
+
 const FollowsTableModule: React.FC<Props> = React.memo(
   ({
     renderMappings,
@@ -23,6 +27,8 @@ const FollowsTableModule: React.FC<Props> = React.memo(
   }) => {
     return (
       <TableModule
+        name={"FollowsTableModule"}
+        cache
         loaderData={followListLoaderData}
         renderMappings={renderMappings}
         disableTitle={disableTitle}
@@ -40,9 +46,5 @@ const FollowsTableModule: React.FC<Props> = React.memo(
     );
   }
 );
-
-interface Props extends ITableModuleProps {
-  title?: string;
-}
 
 export default FollowsTableModule;

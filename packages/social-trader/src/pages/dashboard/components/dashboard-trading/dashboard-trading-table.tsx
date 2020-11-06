@@ -20,6 +20,15 @@ import DashboardBlock from "pages/dashboard/components/dashboard-block/dashboard
 import React from "react";
 import { useTranslation } from "react-i18next";
 
+interface Props {
+  filtering?: FilteringType;
+  defaultFilters?: TDefaultFilters;
+  getItems: GetItemsFuncType;
+  createButtonToolbar?: JSX.Element;
+  title: string;
+  renderBodyCard?: RenderBodyItemFuncType;
+}
+
 const _DashboardTradingTable: React.FC<Props> = ({
   defaultFilters,
   filtering,
@@ -32,6 +41,8 @@ const _DashboardTradingTable: React.FC<Props> = ({
   return (
     <DashboardBlock>
       <TableModule
+        name={"DashboardTradingTable"}
+        cache
         defaultFilters={defaultFilters}
         filtering={filtering}
         paging={DEFAULT_CARD_PAGING}
@@ -58,15 +69,6 @@ const _DashboardTradingTable: React.FC<Props> = ({
     </DashboardBlock>
   );
 };
-
-interface Props {
-  filtering?: FilteringType;
-  defaultFilters?: TDefaultFilters;
-  getItems: GetItemsFuncType;
-  createButtonToolbar?: JSX.Element;
-  title: string;
-  renderBodyCard?: RenderBodyItemFuncType;
-}
 
 const DashboardTradingTable = React.memo(_DashboardTradingTable);
 export default DashboardTradingTable;

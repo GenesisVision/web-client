@@ -79,6 +79,8 @@ const _ReportTable: React.FC<IReportTableProps> = ({ title, id, currency }) => {
   );
   return (
     <TableModule
+      name={"ReportTable"}
+      cache
       exportButtonToolbarRender={exportButtonToolbarRender}
       filtering={REPORTS_TABLE_FILTERS}
       defaultFilters={REPORTS_TABLE_DEFAULT_FILTERS}

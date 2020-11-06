@@ -24,6 +24,8 @@ const _ManagerPrograms: React.FC<Props> = ({ title, investorId, ownerId }) => {
 
   return (
     <TableModule
+      name={"ManagerPrograms" + ownerId}
+      cache
       loaderData={userProgramListLoaderData}
       columns={[{ name: "" }]}
       title={title}

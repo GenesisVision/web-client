@@ -26,6 +26,8 @@ export const UsersTable: React.FC = () => {
   return (
     <div>
       <TableModule
+        name={"UsersTable"}
+        cache
         loaderData={[]}
         filtering={USERS_TABLE_DEFAULT_FILTERING}
         defaultFilters={USERS_TABLE_FILTERS}

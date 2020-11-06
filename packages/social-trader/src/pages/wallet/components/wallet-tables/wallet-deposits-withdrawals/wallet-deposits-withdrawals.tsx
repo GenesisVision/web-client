@@ -27,6 +27,12 @@ import { fetchMultiTransactionsExternal } from "../../../services/wallet.service
 import { walletTransactionsLoaderData } from "../wallet-transactions/wallet-transactions.loader-data";
 import styles from "./wallet-deposits-withdrawals.module.scss";
 
+interface Props {
+  renderBodyRow: RenderBodyItemFuncType;
+  columns: SortingColumn[];
+  currency?: Currency;
+}
+
 const TRANSACTIONS_FILTERS = {
   dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE
 };
@@ -57,6 +63,8 @@ const _WalletDepositsWithdrawals: React.FC<Props> = ({
   const { walletExternalTransactions } = platformData.filters;
   return (
     <TableModule
+      name={"WalletDepositsWithdrawals" + currency}
+      cache
       loaderData={walletTransactionsLoaderData}
       timestamp={new Date(timestamp || 0).getMilliseconds()}
       defaultFilters={DEFAULT_FILTERS}
@@ -98,12 +106,6 @@ const _WalletDepositsWithdrawals: React.FC<Props> = ({
     />
   );
 };
-
-interface Props {
-  renderBodyRow: RenderBodyItemFuncType;
-  columns: SortingColumn[];
-  currency?: Currency;
-}
 
 const WalletDepositsWithdrawals = React.memo(_WalletDepositsWithdrawals);
 export default WalletDepositsWithdrawals;

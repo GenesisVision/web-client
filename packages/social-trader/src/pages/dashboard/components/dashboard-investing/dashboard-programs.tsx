@@ -32,6 +32,7 @@ const _DashboardInvestingPrograms: React.FC = () => {
   );
   return (
     <DashboardInvestingTable
+      name={"DashboardInvestingPrograms"}
       columns={COLUMNS}
       sorting={INIT_SORTING}
       filtering={DASHBOARD_INVESTMENTS_FILTERING}
