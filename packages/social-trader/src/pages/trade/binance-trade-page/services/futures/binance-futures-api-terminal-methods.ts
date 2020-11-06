@@ -34,7 +34,7 @@ import {
   tradeSocket
 } from "./binance-futures-ws.service";
 
-export const BinanceFuturesTerminalMethods: ITerminalMethods = {
+export const BinanceFuturesTerminalMethods = ({
   ...GVTerminalMethods,
   markPriceSocket,
   getMarkPrice,
@@ -64,4 +64,4 @@ export const BinanceFuturesTerminalMethods: ITerminalMethods = {
   depthSocket,
   marketTicketsSocket,
   getUserStreamSocket
-};
+} as unknown) as ITerminalMethods;

@@ -10,7 +10,7 @@ import styles from "./order-book.module.scss";
 
 interface Props {
   tradeId?: number;
-  price: string;
+  price: number;
   equivalent?: string;
   equivalentCurrency: TerminalCurrency;
 }

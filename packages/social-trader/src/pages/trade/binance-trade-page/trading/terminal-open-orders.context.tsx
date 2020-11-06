@@ -4,10 +4,7 @@ import {
   filterOrderEventsStream,
   getSymbol
 } from "pages/trade/binance-trade-page/trading/terminal.helpers";
-import {
-  ExecutionReport,
-  QueryOrderResult
-} from "pages/trade/binance-trade-page/trading/terminal.types";
+import { UnitedOrder } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { normalizeOpenOrdersList } from "pages/trade/binance-trade-page/trading/trading-tables/open-orders/open-orders.helpers";
 import React, {
   createContext,
@@ -18,7 +15,7 @@ import React, {
 } from "react";
 import { map } from "rxjs/operators";
 
-type TerminalOpenOrdersContextState = { openOrders?: QueryOrderResult[] };
+type TerminalOpenOrdersContextState = { openOrders?: UnitedOrder[] };
 
 export const TerminalOpenOrdersInitialState = {} as TerminalOpenOrdersContextState;
 
@@ -30,22 +27,22 @@ export const TerminalOpenOrdersContextProvider: React.FC = ({ children }) => {
   const { getOpenOrders } = useContext(TerminalMethodsContext);
 
   const {
+    exchangeAccountId,
     terminalType,
-    authData,
     userStream,
     symbol: { baseAsset, quoteAsset }
   } = useContext(TerminalInfoContext);
 
   const [list, setList] = useState<{
-    [key: string]: QueryOrderResult;
+    [key: string]: UnitedOrder;
   }>({});
-  const [socketData, setSocketData] = useState<ExecutionReport | undefined>();
+  const [socketData, setSocketData] = useState<UnitedOrder | undefined>();
 
   useEffect(() => {
-    if (!authData?.publicKey || !userStream) return;
+    if (!exchangeAccountId || !userStream) return;
     const openOrders = getOpenOrders(
       getSymbol(baseAsset, quoteAsset),
-      authData
+      exchangeAccountId
     );
     openOrders.pipe(map(normalizeOpenOrdersList)).subscribe(data => {
       setList(data);
@@ -54,22 +51,22 @@ export const TerminalOpenOrdersContextProvider: React.FC = ({ children }) => {
     openOrdersStream.subscribe(data => {
       setSocketData(data);
     });
-  }, [authData, baseAsset, quoteAsset, terminalType, userStream]);
+  }, [exchangeAccountId, baseAsset, quoteAsset, terminalType, userStream]);
 
   useEffect(() => {
     if (!socketData) return;
     const updatedList = { ...list };
     if (
-      socketData.orderStatus === "EXPIRED" ||
-      socketData.orderStatus === "FILLED" ||
-      socketData.orderStatus === "CANCELED" ||
-      socketData.executionType === "CANCELED" ||
-      socketData.executionType === "EXPIRED"
+      socketData.orderStatus?.toLowerCase() === "expired" ||
+      socketData.orderStatus?.toLowerCase() === "filled" ||
+      socketData.orderStatus?.toLowerCase() === "canceled" ||
+      socketData.executionType?.toLowerCase() === "canceled" ||
+      socketData.executionType?.toLowerCase() === "expired"
     )
-      delete updatedList[socketData.orderId];
+      delete updatedList[socketData.id];
     else
-      updatedList[socketData.orderId] = {
-        ...updatedList[socketData.orderId],
+      updatedList[socketData.id] = {
+        ...updatedList[socketData.id],
         ...socketData
       };
     setList(updatedList);

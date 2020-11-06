@@ -67,8 +67,9 @@ export const getBalanceLoaderData = (
   asset: string = "BTC"
 ) => (): AssetBalance => ({
   asset,
-  free: "0",
-  locked: "0"
+  total: 0,
+  free: 0,
+  locked: 0
 });
 
 export const getBalancesLoaderData = (asset: string) =>
@@ -225,31 +226,31 @@ export const usePlaceOrderInfo = ({
     exchangeInfo,
     getSymbol(baseAsset, quoteAsset)
   );
-  const { minPrice, maxPrice } = getSymbolPriceFilter(filters);
-  const { minQty, maxQty } = getLotSizeFilter(filters);
-  const { minNotional } = getMinNotionalFilter(filters);
+  const { minPrice, maxPrice } = filters.priceFilter;
+  const { minQuantity, maxQuantity } = filters.lotSizeFilter;
+  const { minNotional } = filters.minNotionalFilter;
 
   const maxQuantityWithWallet = useMemo(() => {
-    return side === "BUY"
-      ? +maxQty
+    return side === "Buy"
+      ? +maxQuantity
       : Math.min(
-          +maxQty,
+          +maxQuantity,
           +getBalance(
             balances,
             terminalType === "futures" ? quoteAsset : baseAsset
           )
         );
-  }, [side, maxQty, balances, baseAsset]);
+  }, [side, maxQuantity, balances, baseAsset]);
 
   const maxTotalWithWallet = useMemo(() => {
-    return side === "BUY"
+    return side === "Buy"
       ? +getBalance(balances, quoteAsset)
       : Number.MAX_SAFE_INTEGER;
   }, [side, balances, quoteAsset]);
   return {
     minPrice,
     maxPrice,
-    minQty,
+    minQuantity,
     minNotional,
     maxQuantityWithWallet,
     maxTotalWithWallet
@@ -278,7 +279,7 @@ export const useTradeSlider = ({
   useEffect(() => {
     if (sliderValue === undefined) return;
     const percentValue = parseInt(RANGE_MARKS[sliderValue]);
-    if (side === "BUY") {
+    if (side === "Buy") {
       const { price } = watch();
       const walletAvailable = +getBalance(balances, quoteAsset);
       const fullTotal = calculatePercentage(walletAvailable, percentValue);
@@ -288,7 +289,7 @@ export const useTradeSlider = ({
       );
       setValue(quantityName, newAmount, true);
     }
-    if (side === "SELL") {
+    if (side === "Sell") {
       const walletAvailable = +getBalance(
         balances,
         terminalType === "futures" ? quoteAsset : baseAsset
@@ -311,7 +312,10 @@ export const useTradeSlider = ({
 export const getBalance = (
   balances: AssetBalance[],
   currency: TerminalCurrency
-) => safeGetElemFromArray(balances, ({ asset }) => asset === currency).free;
+) => {
+  const wallet = balances.find(({ asset }) => asset === currency);
+  return wallet ? wallet.free : 0;
+};
 
 export const getMinNotionalFilter = (filters: SymbolFilter[]) => {
   return (filters.find(({ filterType }) => filterType === "MIN_NOTIONAL") || {
@@ -452,11 +456,11 @@ export const placeOrderStopLimitValidationSchema = ({
 }) =>
   lazy<IStopLimitFormValues>(values => {
     const minPriceValue =
-      side === "BUY"
+      side === "Buy"
         ? Math.max(minPrice, values[TRADE_FORM_FIELDS.stopPrice])
         : minPrice;
     const maxPriceValue =
-      side === "SELL"
+      side === "Sell"
         ? Math.min(maxPrice, values[TRADE_FORM_FIELDS.stopPrice])
         : maxPrice;
     return object().shape({

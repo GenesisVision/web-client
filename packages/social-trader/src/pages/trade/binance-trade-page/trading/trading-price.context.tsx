@@ -1,7 +1,7 @@
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
 import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/terminal-methods.context";
 import { getSymbol } from "pages/trade/binance-trade-page/trading/terminal.helpers";
-import { Trade } from "pages/trade/binance-trade-page/trading/terminal.types";
+import { UnitedTrade } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, {
   createContext,
   useContext,
@@ -12,7 +12,7 @@ import React, {
 import { useSockets } from "services/websocket.service";
 
 type TradingPriceState = {
-  trades: Trade[];
+  trades: UnitedTrade[];
   setPrice: (price: string) => void;
   price: string;
 };
@@ -39,9 +39,9 @@ export const TradingPriceContextProvider: React.FC = ({ children }) => {
 
   const { connectSocket } = useSockets();
   const [price, setPrice] = useState<string>(PriceInitialState);
-  const [list, setList] = useState<Trade[]>([]);
-  const [socketData, setSocketData] = useState<Trade | undefined>();
-  const [socketDataBuffer, setSocketDataBuffer] = useState<Trade[]>([]);
+  const [list, setList] = useState<UnitedTrade[]>([]);
+  const [socketData, setSocketData] = useState<UnitedTrade | undefined>();
+  const [socketDataBuffer, setSocketDataBuffer] = useState<UnitedTrade[]>([]);
 
   useEffect(() => {
     if (!price) setPrice(PriceInitialState);
@@ -72,7 +72,7 @@ export const TradingPriceContextProvider: React.FC = ({ children }) => {
   }, [socketData]);
 
   useEffect(() => {
-    if (list[0]) setPrice(list[0].price);
+    if (list[0]) setPrice(String(list[0].price));
   }, [list]);
 
   const value = useMemo(

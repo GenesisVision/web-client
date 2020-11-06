@@ -24,6 +24,7 @@ import { filter } from "rxjs/operators";
 export const transformAccountToBalanceForTransfer = ({
   balances
 }: Account): BalanceForTransfer[] => {
+  // @ts-ignore
   return balances.map(({ asset, free }) => ({ asset, free }));
 };
 
@@ -36,6 +37,7 @@ export const transformMarkPriceWS = (m: any): MarkPrice => ({
 });
 
 export const transformFuturesTickerSymbolWS = (m: any): Ticker => ({
+  // @ts-ignore
   eventType: m.e,
   eventTime: m.E,
   symbol: m.s,
@@ -68,10 +70,13 @@ export const transformFuturesTickerSymbol = (
     eventType: "",
     eventTime: 0,
     symbol: futuresSymbol.symbol,
+    // @ts-ignore
     priceChange: futuresSymbol.priceChange,
+    // @ts-ignore
     priceChangePercent: futuresSymbol.priceChangePercent,
     weightedAvgPrice: futuresSymbol.weightedAvgPrice,
     prevClosePrice: futuresSymbol.prevClosePrice,
+    // @ts-ignore
     lastPrice: futuresSymbol.lastPrice,
     lastQty: futuresSymbol.lastQty,
     bestBid: "",
@@ -83,7 +88,9 @@ export const transformFuturesTickerSymbol = (
     low: futuresSymbol.volume,
     volume: futuresSymbol.volume,
     volumeQuote: futuresSymbol.quoteVolume,
+    // @ts-ignore
     openTime: futuresSymbol.openTime,
+    // @ts-ignore
     closeTime: futuresSymbol.closeTime,
     firstTradeId: futuresSymbol.firstId,
     lastTradeId: futuresSymbol.lastId,
@@ -97,7 +104,9 @@ export const transformFuturesBalance = (
   return {
     futuresAsset,
     asset: futuresAsset.asset,
+    // @ts-ignore
     free: futuresAsset.maxWithdrawAmount,
+    // @ts-ignore
     locked: "0"
   };
 };
@@ -114,6 +123,7 @@ export const transformFuturesAccount = (
     makerCommission: 0,
     sellerCommission: 0,
     takerCommission: 0,
+    // @ts-ignore
     updateTime: futuresAccount.updateTime
   };
 };

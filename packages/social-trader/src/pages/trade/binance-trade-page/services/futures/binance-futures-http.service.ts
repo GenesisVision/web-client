@@ -22,12 +22,13 @@ import {
   PositionModeResponse,
   PositionModeType,
   QueryOrderResult,
+  RestDepth,
   SymbolLeverageBrackets,
   TerminalAuthDataType,
   TerminalCurrency,
   Ticker,
-  Trade,
-  TradeRequest
+  TradeRequest,
+  UnitedTrade
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
@@ -199,6 +200,7 @@ export const getKlines = async (params: KlineParams): Promise<Bar[]> => {
     }
   };
 
+  // @ts-ignore
   await sendRequest(params.startTime);
   return bars;
 };
@@ -307,7 +309,7 @@ export const getAccountInformation = (
 export const getTrades = (
   symbol: string,
   limit: number = 50
-): Observable<Trade[]> =>
+): Observable<UnitedTrade[]> =>
   requestService.get({
     url: `${API_ROUTE}/trades`,
     params: { symbol: symbol.toUpperCase(), limit: String(limit) }
@@ -328,7 +330,7 @@ export const getTickers = (symbol?: string): Observable<Ticker[]> =>
 export const getDepth = (
   symbol: string,
   limit: number = 1000
-): Observable<Depth> =>
+): Observable<RestDepth> =>
   requestService.get({
     url: `${API_ROUTE}/depth`,
     params: { symbol, limit: String(limit) }
@@ -391,16 +393,19 @@ export const postBuy = ({
   newOrder(
     {
       reduceOnly,
-      stopPrice: type === "STOP_LOSS_LIMIT" ? String(stopPrice) : undefined,
+      // @ts-ignore
+      stopPrice: type === "StopLossLimit" ? String(stopPrice) : undefined,
       symbol,
       type,
       price:
-        type === "LIMIT" || type === "STOP_LOSS_LIMIT"
+        // @ts-ignore
+        type === "Limit" || type === "StopLossLimit"
           ? String(price)
           : undefined,
       quantity: String(quantity),
       timeInForce,
-      side: "BUY"
+      // @ts-ignore
+      side: "Buy"
     },
     authData
   );
@@ -420,22 +425,26 @@ export const postSell = ({
   newOrder(
     {
       reduceOnly,
-      stopPrice: type === "STOP_LOSS_LIMIT" ? String(stopPrice) : undefined,
+      // @ts-ignore
+      stopPrice: type === "StopLossLimit" ? String(stopPrice) : undefined,
       symbol,
       type,
       price:
-        type === "LIMIT" || type === "STOP_LOSS_LIMIT"
+        // @ts-ignore
+        type === "Limit" || type === "StopLossLimit"
           ? String(price)
           : undefined,
       quantity: String(quantity),
       timeInForce,
-      side: "SELL"
+      // @ts-ignore
+      side: "Sell"
     },
     authData
   );
 
 export const getTradeMethod = (side: OrderSide) =>
-  side === "BUY" ? postBuy : postSell;
+  // @ts-ignore
+  side === "Buy" ? postBuy : postSell;
 
 export const tradeRequest = ({
   side,
