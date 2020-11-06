@@ -100,15 +100,15 @@ export const TerminalInfoContextProvider: React.FC<Props> = ({
   const [socketData, setSocketData] = useState<Account | undefined>(undefined);
 
   useEffect(() => {
-    if (!authData?.publicKey) return;
-    const accountInfo = getAccountInformation(authData);
+    if (!exchangeAccountId) return;
+    const accountInfo = getAccountInformation(exchangeAccountId);
     accountInfo.subscribe(data => {
       setAccountInfo(data);
     });
-    getUserStreamKey(authData).subscribe(({ listenKey }) =>
+    getUserStreamKey(exchangeAccountId).subscribe(({ listenKey }) =>
       setUserStreamKey(listenKey)
     );
-  }, [authData, getAccountInformation, getUserStreamKey]);
+  }, [getAccountInformation, getUserStreamKey]);
 
   useEffect(() => {
     if (!userStreamKey) return;
@@ -132,10 +132,10 @@ export const TerminalInfoContextProvider: React.FC<Props> = ({
         exchangeInfo,
         getSymbolFromState(symbol)
       );
-      const { tickSize } = getSymbolPriceFilter(symbolFilters);
-      const { stepSize } = getLotSizeFilter(symbolFilters);
-      setTickSize(tickSize);
-      setStepSize(stepSize);
+      const { tickSize } = symbolFilters.priceFilter;
+      const { stepSize } = symbolFilters.lotSizeFilter;
+      setTickSize(String(tickSize));
+      setStepSize(String(stepSize));
     }
   }, [exchangeInfo, symbol]);
 

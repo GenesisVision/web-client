@@ -7,19 +7,17 @@ import React, { useContext } from "react";
 import { formatDate } from "utils/dates";
 
 interface Props {
-  orderId: number;
-  time: number;
+  time: number | Date;
   symbol: string;
   type: string;
   side: OrderSide;
-  price: string;
-  origQty: string;
+  price: number;
+  origQty: number;
   filled: number;
   total: number;
 }
 
 const _OrderHistoryRow: React.FC<Props> = ({
-  orderId,
   time,
   symbol,
   type,

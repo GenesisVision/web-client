@@ -1,14 +1,12 @@
 import { USER_STREAM_ACCOUNT_UPDATE_EVENT_TYPE } from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import {
-  Account,
   Depth,
-  ExecutionReport,
   IBinanceKline,
   IKline,
   OutboundAccountInfo,
-  Ticker,
-  TickerWS,
-  Trade
+  StreamTicker,
+  UnitedOrder,
+  UnitedTrade
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 
 export const tradeTransform = ({
@@ -19,23 +17,15 @@ export const tradeTransform = ({
   p,
   q,
   m,
-  M,
   t,
   a,
   b
-}: any): Trade => {
+}: any): UnitedTrade => {
   return {
-    eventType: e,
-    eventTime: E,
-    time: T,
-    symbol: s,
+    tradeTime: T,
     price: p,
-    qty: q,
-    isBuyerMaker: m,
-    maker: M,
-    id: t,
-    sellerOrderId: a,
-    buyerOrderId: b
+    quantity: q,
+    orderId: t
   };
 };
 
@@ -75,59 +65,47 @@ export const transformOutboundAccountInfo = (m: any): OutboundAccountInfo => ({
   balances: m.B.map(({ f, l, a }: any) => ({ free: f, locked: l, asset: a }))
 });
 
-export const transformExecutionReport = (m: any): ExecutionReport => ({
+export const transformExecutionReport = (m: any): UnitedOrder => ({
+  quantityFilled: m.z,
   eventType: "executionReport",
-  eventTime: m.E,
+  executedQuantity: m.l,
+  id: m.i,
+  time: m.O,
   symbol: m.s,
-  newClientOrderId: m.c,
-  originalClientOrderId: m.C,
-  side: m.S,
   type: m.o,
-  orderType: m.o,
-  timeInForce: m.f,
-  quantity: m.q,
-  origQty: m.q,
+  side: m.S,
   price: m.p,
+  quantity: m.q,
   executionType: m.x,
-  stopPrice: m.P,
-  icebergQty: m.F,
-  status: m.X,
-  orderStatus: m.X,
-  orderRejectReason: m.r,
-  orderId: m.i,
-  transactionTime: m.T,
-  executedQty: m.l,
-  lastTradeQty: m.l,
-  totalTradeQty: m.z,
-  priceLastTrade: m.L,
-  commission: m.n,
-  commissionAsset: m.N,
-  tradeId: m.t,
-  isOrderWorking: m.w,
-  isBuyerMaker: m.m,
-  orderCreationTime: m.O,
-  totalQuoteTradeQty: m.Z
+  orderStatus: m.X
 });
 
-export const tickerTransform = (m: TickerWS): Ticker => ({
-  eventType: m.e,
+export const tickerTransform = (m: any): StreamTicker => ({
   eventTime: m.E,
+  askPrice: m.a,
+  askQuantity: m.A,
+  bidPrice: m.b,
+  bidQuantity: m.B,
+  prevDayClosePrice: 0,
+  weightedAveragePrice: 0,
+  // eventType: m.e,
+  // eventTime: m.E,
   symbol: m.s,
   priceChange: m.p,
   priceChangePercent: m.P,
-  weightedAvgPrice: m.w,
-  prevClosePrice: m.x,
+  // weightedAvgPrice: m.w,
+  // prevClosePrice: m.x,
   lastPrice: m.c,
-  lastQty: m.Q,
-  bestBid: m.b,
-  bestBidQnt: m.B,
-  bestAsk: m.a,
-  bestAskQnt: m.A,
-  open: m.o,
-  high: m.h,
-  low: m.l,
-  volume: m.v,
-  volumeQuote: m.q,
+  lastQuantity: m.Q,
+  // bestBid: m.b,
+  // bestBidQnt: m.B,
+  // bestAsk: m.a,
+  // bestAskQnt: m.A,
+  openPrice: m.o,
+  highPrice: m.h,
+  lowPrice: m.l,
+  baseVolume: m.v,
+  quoteVolume: m.q,
   openTime: m.O,
   closeTime: m.C,
   firstTradeId: m.F,

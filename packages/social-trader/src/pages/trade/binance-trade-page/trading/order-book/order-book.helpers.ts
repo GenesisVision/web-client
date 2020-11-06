@@ -1,7 +1,4 @@
 import { SortingColumn } from "components/table/components/filtering/filter.type";
-import { getSymbolPriceFilter } from "pages/trade/binance-trade-page/trading/place-order/place-order.helpers";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
-import { getSymbol } from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import {
   Depth,
   NormalizedDepth,
@@ -9,9 +6,7 @@ import {
   StringBidDepth,
   TerminalType
 } from "pages/trade/binance-trade-page/trading/terminal.types";
-import { useContext } from "react";
 import { formatValue } from "utils/formatter";
-import { safeGetElemFromArray } from "utils/helpers";
 import { AnyObjectType } from "utils/types";
 
 type DividerPartsType = { intLength?: number; fracLength?: number };
@@ -144,20 +139,20 @@ export const collapseItems = (
   return collapsedItems;
 };
 
-export const useSymbolTick = () => {
-  const {
-    exchangeInfo,
-    symbol: { baseAsset, quoteAsset }
-  } = useContext(TerminalInfoContext);
-  if (!exchangeInfo) return;
-
-  const { filters } = safeGetElemFromArray(
-    exchangeInfo!.symbols,
-    symbol => symbol.symbol === getSymbol(baseAsset, quoteAsset)
-  );
-  const { tickSize } = getSymbolPriceFilter(filters);
-  return tickSize;
-};
+// export const useSymbolTick = () => {
+//   const {
+//     exchangeInfo,
+//     symbol: { baseAsset, quoteAsset }
+//   } = useContext(TerminalInfoContext);
+//   if (!exchangeInfo) return;
+//
+//   const { filters } = safeGetElemFromArray(
+//     exchangeInfo!.symbols,
+//     symbol => symbol.symbol === getSymbol(baseAsset, quoteAsset)
+//   );
+//   const { tickSize } = getSymbolPriceFilter(filters);
+//   return tickSize;
+// };
 
 export const getTickValues = (tick: number) => [
   formatValue(tick),

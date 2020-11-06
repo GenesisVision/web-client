@@ -1,6 +1,6 @@
 import { Text } from "components/text/text";
 import { TradeTable } from "pages/trade/binance-trade-page/trading/components/trade-table/trade-table";
-import { QueryOrderResult } from "pages/trade/binance-trade-page/trading/terminal.types";
+import { UnitedOrder } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { OrderHistoryRow } from "pages/trade/binance-trade-page/trading/trading-tables/order-history/order-history-row";
 import { ORDER_HISTORY_TABLE_COLUMNS } from "pages/trade/binance-trade-page/trading/trading-tables/order-history/order-history.helpers";
 import React from "react";
@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 import styles from "./order-history.module.scss";
 
 interface Props {
-  items: QueryOrderResult[];
+  items: UnitedOrder[];
 }
 
 export const OrderHistory: React.FC<Props> = ({ items }) => {
@@ -25,25 +25,23 @@ export const OrderHistory: React.FC<Props> = ({ items }) => {
         </th>
       )}
       renderRow={({
-        executedQty,
-        origQty,
-        orderId,
+        quantityFilled,
+        quantity,
         time,
         symbol,
         type,
         side,
         price
-      }: QueryOrderResult) => (
+      }: UnitedOrder) => (
         <OrderHistoryRow
-          orderId={orderId}
           time={time}
           symbol={symbol}
           type={type}
           side={side}
           price={price}
-          origQty={origQty}
-          filled={(+executedQty / +origQty) * 100}
-          total={+origQty * +price}
+          origQty={quantity}
+          filled={(+quantityFilled / +quantity) * 100}
+          total={+quantity * +price}
         />
       )}
     />

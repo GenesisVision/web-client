@@ -56,7 +56,7 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
   const {
     minPrice,
     maxPrice,
-    minQty,
+    minQuantity,
     minNotional,
     maxQuantityWithWallet,
     maxTotalWithWallet
@@ -77,7 +77,7 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
       maxPrice: +maxPrice,
       minPrice: +minPrice,
       maxQuantity: maxQuantityWithWallet,
-      minQuantity: +minQty,
+      minQuantity: +minQuantity,
       minNotional: +minNotional
     }),
     mode: "onChange"
@@ -138,7 +138,7 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
           name={TRADE_FORM_FIELDS.total}
         />
       </Row>
-      {side === "SELL" && (
+      {side === "Sell" && (
         <Row wide onlyOffset>
           <Slider
             dots

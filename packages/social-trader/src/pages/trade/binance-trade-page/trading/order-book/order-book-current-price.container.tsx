@@ -30,7 +30,7 @@ export const OrderBookCurrentPriceContainer: React.FC = () => {
   if (!lastTrade) return null;
   return (
     <OrderBookCurrentPrice
-      tradeId={lastTrade.id}
+      tradeId={lastTrade.orderId}
       price={lastTrade.price}
       equivalent={
         accountCurrencySymbolPrice
