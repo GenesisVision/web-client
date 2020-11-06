@@ -5,10 +5,8 @@ import useApiRequest from "hooks/api-request.hook";
 import { terminalMoneyFormat } from "pages/trade/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
 import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/terminal-methods.context";
-import {
-  OrderSide,
-  TerminalAuthDataType
-} from "pages/trade/binance-trade-page/trading/terminal.types";
+import { getSymbolFilters } from "pages/trade/binance-trade-page/trading/terminal.helpers";
+import { OrderSide } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useCallback, useContext } from "react";
 import { formatDate } from "utils/dates";
 
@@ -36,9 +34,7 @@ const _OpenOrdersRow: React.FC<Props> = ({
   total
 }) => {
   const { cancelOrder } = useContext(TerminalMethodsContext);
-  const { exchangeAccountId, tickSize, stepSize } = useContext(
-    TerminalInfoContext
-  );
+  const { exchangeAccountId, exchangeInfo } = useContext(TerminalInfoContext);
   const { sendRequest, isPending } = useApiRequest({
     request: ({
       options,
@@ -54,19 +50,26 @@ const _OpenOrdersRow: React.FC<Props> = ({
       exchangeAccountId
     });
   }, [symbol, orderId, exchangeAccountId]);
+
+  if (!exchangeInfo) return;
+  const symbolFilters = getSymbolFilters(exchangeInfo, symbol);
+  const { tickSize } = symbolFilters.priceFilter;
+  const { stepSize } = symbolFilters.lotSizeFilter;
   return (
     <TableRow>
       <TableCell firstOffset={false}>{formatDate(new Date(time))}</TableCell>
       <TableCell>{symbol}</TableCell>
       <TableCell>{type}</TableCell>
       <TableCell>{side}</TableCell>
-      <TableCell>{terminalMoneyFormat({ amount: price, tickSize })}</TableCell>
       <TableCell>
-        {terminalMoneyFormat({ amount: origQty, tickSize: stepSize })}
+        {terminalMoneyFormat({ amount: price, tickSize: String(tickSize) })}
+      </TableCell>
+      <TableCell>
+        {terminalMoneyFormat({ amount: origQty, tickSize: String(stepSize) })}
       </TableCell>
       <TableCell>{filled}</TableCell>
       <TableCell>
-        {terminalMoneyFormat({ amount: total, tickSize: stepSize })}
+        {terminalMoneyFormat({ amount: total, tickSize: String(stepSize) })}
       </TableCell>
       <TableCell>
         <Button
