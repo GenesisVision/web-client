@@ -27,7 +27,7 @@ const FollowsTableModule: React.FC<Props> = React.memo(
   }) => {
     return (
       <TableModule
-        name={"FollowsTableModule"}
+        name={"FollowsTableModule" + title}
         cache
         loaderData={followListLoaderData}
         renderMappings={renderMappings}

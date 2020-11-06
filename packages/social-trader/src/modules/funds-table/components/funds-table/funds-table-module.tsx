@@ -23,7 +23,7 @@ const FundsTableModule: React.FC<Props> = React.memo(
   }) => {
     return (
       <TableModule
-        name={"FundsTableModule"}
+        name={"FundsTableModule" + title}
         cache
         loaderData={fundListLoaderData}
         disableTitle={disableTitle}
