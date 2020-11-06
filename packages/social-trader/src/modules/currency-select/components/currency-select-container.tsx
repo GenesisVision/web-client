@@ -19,7 +19,7 @@ const _CurrencySelectContainer: React.FC<Props> = ({ className }) => {
     updateCurrency(currency);
   };
   const updateHeaderMiddleware = () => {
-    dispatch(ProfileHeaderInfoAction);
+    dispatch(ProfileHeaderInfoAction());
   };
 
   const { sendRequest } = useApiRequest({

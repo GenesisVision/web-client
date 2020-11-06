@@ -21,7 +21,7 @@ const _PasswordChange: React.FC = () => {
     authService.storeToken(response);
     dispatch(authActions.updateTokenAction(true));
     Push(SECURITY_ROUTE);
-    dispatch(ProfileHeaderInfoAction);
+    dispatch(ProfileHeaderInfoAction());
   };
   const { errorMessage, sendRequest } = useApiRequest({
     middleware: [successMiddleware],
