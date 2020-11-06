@@ -1,4 +1,4 @@
-import { fetchProfileHeaderInfoAction } from "components/header/actions/header-actions";
+import { ProfileHeaderInfoAction } from "components/header/actions/header-actions";
 import useApiRequest from "hooks/api-request.hook";
 import * as React from "react";
 import { useCallback } from "react";
@@ -10,7 +10,7 @@ import ProfileImage, { IProfileImageFormValues } from "./profile-image";
 
 const _ProfileImageContainer: React.FC = () => {
   const fetchProfileMiddleware = () => {
-    dispatch(fetchProfileHeaderInfoAction());
+    dispatch(ProfileHeaderInfoAction);
   };
   const { sendRequest, errorMessage } = useApiRequest({
     middleware: [fetchProfileMiddleware],
