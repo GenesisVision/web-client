@@ -51,7 +51,7 @@ const _OpenOrdersRow: React.FC<Props> = ({
     });
   }, [symbol, orderId, exchangeAccountId]);
 
-  if (!exchangeInfo) return;
+  if (!exchangeInfo) return null;
   const symbolFilters = getSymbolFilters(exchangeInfo, symbol);
   const { tickSize } = symbolFilters.priceFilter;
   const { stepSize } = symbolFilters.lotSizeFilter;

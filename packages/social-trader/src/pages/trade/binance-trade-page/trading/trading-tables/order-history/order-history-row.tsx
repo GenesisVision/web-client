@@ -29,7 +29,7 @@ const _OrderHistoryRow: React.FC<Props> = ({
   total
 }) => {
   const { exchangeInfo } = useContext(TerminalInfoContext);
-  if (!exchangeInfo) return;
+  if (!exchangeInfo) return null;
   const symbolFilters = getSymbolFilters(exchangeInfo, symbol);
   const { tickSize } = symbolFilters.priceFilter;
   const { stepSize } = symbolFilters.lotSizeFilter;
