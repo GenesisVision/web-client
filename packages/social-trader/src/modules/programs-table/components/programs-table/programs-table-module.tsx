@@ -26,7 +26,7 @@ const _ProgramTableModule: React.FC<Props> = ({
 }) => {
   return (
     <TableModule
-      name={"ProgramTableModule"}
+      name={"ProgramTableModule" + title}
       cache
       loaderData={programListLoaderData}
       renderMappings={renderMappings}

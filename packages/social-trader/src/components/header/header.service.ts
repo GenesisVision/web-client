@@ -1,7 +1,8 @@
 import { useAccountCurrency } from "hooks/account-currency.hook";
+import useDispatch from "hooks/cache-dispatch.hook";
 import { updateCurrency } from "modules/currency-select/services/currency-select.service";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import {
   betaTesterSelector,
