@@ -28,7 +28,7 @@ const useApiRequest = <T extends any>(
     }),
     []
   );
-  return useApiRequestConstructor({
+  return useApiRequestConstructor.useApiRequest({
     ...props,
     token: Token.create().value,
     alertService,
