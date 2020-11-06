@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import Page from "components/page/page";
-import useApiRequest from "hooks/api-request.hook";
+import useApiRequest, { DEFAULT_INTERVAL } from "hooks/api-request.hook";
 import dynamic from "next/dist/next-server/lib/dynamic";
 import DashboardAssets from "pages/dashboard/components/dashboard-pie-chart/dashboard-assets";
 import DashboardPortfolio from "pages/dashboard/components/dashboard-pie-chart/dashboard-portfolio";
@@ -22,6 +22,7 @@ const DashboardInRequestsContainer = dynamic(() =>
 
 const _DashboardPage: React.FC = () => {
   const { data: requestCount } = useApiRequest({
+    interval: DEFAULT_INTERVAL,
     name: "getRequestsCount",
     cache: true,
     request: getRequestsCount,

@@ -1,4 +1,4 @@
-import useApiRequest from "hooks/api-request.hook";
+import useApiRequest, { DEFAULT_INTERVAL } from "hooks/api-request.hook";
 import DashboardPieChart from "pages/dashboard/components/dashboard-pie-chart/dashboard-pie-chart";
 import React, { useEffect } from "react";
 
@@ -22,6 +22,7 @@ const _DashboardPieChartBlock: React.FC<Props> = ({
   loaderData
 }) => {
   const { data, sendRequest } = useApiRequest<any>({
+    interval: DEFAULT_INTERVAL,
     name,
     cache: true,
     request

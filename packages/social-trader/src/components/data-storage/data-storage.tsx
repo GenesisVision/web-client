@@ -3,6 +3,7 @@ import React, { createContext, useCallback, useMemo } from "react";
 import { AnyObjectType } from "utils/types";
 
 interface Props {
+  interval?: number;
   name: string;
   fetchOnMountData?: any;
   request: (...args: any[]) => Promise<any>;
@@ -23,12 +24,14 @@ export const DataStorageContext = createContext<DataStorageContextState>(
 );
 
 export const DataStorageContextProvider: React.FC<Props> = ({
+  interval,
   name,
   fetchOnMountData,
   children,
   request
 }) => {
   const { data, sendRequest, status } = useApiRequest({
+    interval,
     cache: true,
     name,
     request,

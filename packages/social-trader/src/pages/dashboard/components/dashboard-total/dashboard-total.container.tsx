@@ -1,5 +1,5 @@
 import { useAccountCurrency } from "hooks/account-currency.hook";
-import useApiRequest from "hooks/api-request.hook";
+import useApiRequest, { DEFAULT_INTERVAL } from "hooks/api-request.hook";
 import DashboardBlock from "pages/dashboard/components/dashboard-block/dashboard-block";
 import DashboardTotal from "pages/dashboard/components/dashboard-total/dashboard-total";
 import { SelectProductButton } from "pages/dashboard/components/dashboard-total/select-product/select-product.button";
@@ -11,6 +11,7 @@ import React from "react";
 const _DashboardTotalContainer: React.FC<Props> = ({ label }) => {
   const currency = useAccountCurrency();
   const { data } = useApiRequest<TDashboardTotal>({
+    interval: DEFAULT_INTERVAL,
     name: "DashboardTotalContainer",
     cache: true,
     fetchOnMount: true,

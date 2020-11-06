@@ -1,4 +1,4 @@
-import useApiRequest from "hooks/api-request.hook";
+import useApiRequest, { DEFAULT_INTERVAL } from "hooks/api-request.hook";
 import DashboardBlock, {
   DashboardBlockOrientation
 } from "pages/dashboard/components/dashboard-block/dashboard-block";
@@ -43,6 +43,7 @@ const _DashboardStatisticContainer: React.FC<Props> = ({
   const { data } = useApiRequest<
     TDashboardTradingStatistic & TDashboardInvestingStatistic
   >({
+    interval: DEFAULT_INTERVAL,
     name,
     cache: true,
     request,

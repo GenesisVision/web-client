@@ -1,4 +1,4 @@
-import useApiRequest from "hooks/api-request.hook";
+import useApiRequest, { DEFAULT_INTERVAL } from "hooks/api-request.hook";
 import { getInRequestsLoadersData } from "pages/dashboard/dashboard.loaders-data";
 import { TDashboardInRequests } from "pages/dashboard/dashboard.types";
 import { fetchInRequests } from "pages/dashboard/services/dashboard.service";
@@ -11,6 +11,7 @@ import DashboardInRequests from "./dashboard-in-requests";
 const _DashboardInRequestsContainer: React.FC = () => {
   const [t] = useTranslation();
   const { data, sendRequest } = useApiRequest<TDashboardInRequests>({
+    interval: DEFAULT_INTERVAL,
     name: "DashboardInRequestsContainer",
     cache: true,
     request: fetchInRequests,

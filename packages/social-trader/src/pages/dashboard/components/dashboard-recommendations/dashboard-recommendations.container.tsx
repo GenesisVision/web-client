@@ -1,5 +1,5 @@
 import { useAccountCurrency } from "hooks/account-currency.hook";
-import useApiRequest from "hooks/api-request.hook";
+import useApiRequest, { DEFAULT_INTERVAL } from "hooks/api-request.hook";
 import DashboardBlock from "pages/dashboard/components/dashboard-block/dashboard-block";
 import DashboardRecommendations from "pages/dashboard/components/dashboard-recommendations/dashboard-recommendations";
 import { getRecommendationLoaderData } from "pages/dashboard/dashboard.loaders-data";
@@ -13,6 +13,7 @@ const _DashboardRecommendationsContainer: React.FC = () => {
   const currency = useAccountCurrency();
   const [t] = useTranslation();
   const { data } = useApiRequest<TDashboardRecommendations>({
+    interval: DEFAULT_INTERVAL,
     name: "DashboardRecommendationsContainer",
     cache: true,
     fetchOnMount: true,

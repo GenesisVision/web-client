@@ -1,5 +1,5 @@
 import { DataStorageContext } from "components/data-storage/data-storage";
-import useApiRequest from "hooks/api-request.hook";
+import useApiRequest, { DEFAULT_INTERVAL } from "hooks/api-request.hook";
 import DashboardBlock from "pages/dashboard/components/dashboard-block/dashboard-block";
 import DashboardFollowThem from "pages/dashboard/components/dashboard-trading/dashboard-follow-them";
 import { getFollowThem } from "pages/dashboard/services/dashboard.service";
@@ -10,6 +10,7 @@ const _DashboardFollowThemContainer: React.FC<Props> = () => {
   const { updateData } = useContext(DataStorageContext);
   const [t] = useTranslation();
   const { data, sendRequest } = useApiRequest({
+    interval: DEFAULT_INTERVAL,
     name: "DashboardFollowThemContainer",
     cache: true,
     request: getFollowThem,
