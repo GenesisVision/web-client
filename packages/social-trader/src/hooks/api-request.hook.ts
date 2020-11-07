@@ -30,6 +30,7 @@ const useApiRequest = <T extends any>(
   );
   return useApiRequestConstructor.useApiRequest({
     ...props,
+    cacheMaxAge: 100 * 60 * 60 * 24,
     token: Token.create().value,
     alertService,
     getErrorMessageCallback
