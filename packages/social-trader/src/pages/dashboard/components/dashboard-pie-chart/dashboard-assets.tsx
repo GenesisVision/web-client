@@ -13,6 +13,7 @@ const _DashboardAssets: React.FC<Props> = ({ orientation }) => {
   const [t] = useTranslation();
   return (
     <DashboardPieChartBlock
+      name={"DashboardAssets"}
       orientation={orientation}
       label={t("dashboard-page:portfolio.title")}
       request={getAssetsPercents}

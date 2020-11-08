@@ -22,6 +22,8 @@ const DashboardInRequestsContainer = dynamic(() =>
 
 const _DashboardPage: React.FC = () => {
   const { data: requestCount } = useApiRequest({
+    name: "getRequestsCount",
+    cache: true,
     request: getRequestsCount,
     fetchOnMount: true
   });

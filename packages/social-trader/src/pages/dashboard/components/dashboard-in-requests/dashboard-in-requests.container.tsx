@@ -11,6 +11,8 @@ import DashboardInRequests from "./dashboard-in-requests";
 const _DashboardInRequestsContainer: React.FC = () => {
   const [t] = useTranslation();
   const { data, sendRequest } = useApiRequest<TDashboardInRequests>({
+    name: "DashboardInRequestsContainer",
+    cache: true,
     request: fetchInRequests,
     fetchOnMount: true
   });
