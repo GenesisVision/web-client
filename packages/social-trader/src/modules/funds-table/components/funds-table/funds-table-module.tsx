@@ -12,6 +12,7 @@ interface Props extends ITableModuleProps {}
 
 const FundsTableModule: React.FC<Props> = React.memo(
   ({
+    name,
     getItems,
     renderMappings,
     sorting,
@@ -23,7 +24,7 @@ const FundsTableModule: React.FC<Props> = React.memo(
   }) => {
     return (
       <TableModule
-        name={"FundsTableModule" + title}
+        name={"FundsTableModule" + name}
         cache
         loaderData={fundListLoaderData}
         disableTitle={disableTitle}

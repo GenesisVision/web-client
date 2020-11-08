@@ -24,6 +24,7 @@ import {
 } from "./programs-facet.constants";
 
 export interface IProgramsFacetTableProps {
+  name: string;
   currency?: Currency;
   currencies?: PlatformCurrencyInfo[];
   title?: string;
@@ -35,6 +36,7 @@ export interface IProgramsFacetTableProps {
 }
 
 const _ProgramsFacetTable: React.FC<IProgramsFacetTableProps> = ({
+  name,
   currencies,
   title,
   sorting,
@@ -56,6 +58,7 @@ const _ProgramsFacetTable: React.FC<IProgramsFacetTableProps> = ({
 
   return (
     <ProgramTableModule
+      name={name}
       loaderData={fundListLoaderData}
       renderMappings={(updateFilter, filtering) => (
         <>

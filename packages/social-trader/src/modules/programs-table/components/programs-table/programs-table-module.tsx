@@ -13,6 +13,7 @@ interface Props extends ITableModuleProps {
 }
 
 const _ProgramTableModule: React.FC<Props> = ({
+  name,
   renderMappings,
   getItems,
   renderFilters,
@@ -26,7 +27,7 @@ const _ProgramTableModule: React.FC<Props> = ({
 }) => {
   return (
     <TableModule
-      name={"ProgramTableModule" + title}
+      name={"ProgramTableModule" + name}
       cache
       loaderData={programListLoaderData}
       renderMappings={renderMappings}

@@ -14,6 +14,7 @@ interface Props extends ITableModuleProps {
 
 const FollowsTableModule: React.FC<Props> = React.memo(
   ({
+    name,
     renderMappings,
     getItems,
     renderFilters,
@@ -27,7 +28,7 @@ const FollowsTableModule: React.FC<Props> = React.memo(
   }) => {
     return (
       <TableModule
-        name={"FollowsTableModule" + title}
+        name={"FollowsTableModule" + name}
         cache
         loaderData={followListLoaderData}
         renderMappings={renderMappings}
