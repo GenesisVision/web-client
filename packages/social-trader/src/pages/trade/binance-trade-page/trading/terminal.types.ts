@@ -10,7 +10,6 @@ import {
   BinanceRawKlineInterval,
   BinanceRawOrder,
   BinanceRawOrderBook,
-  BinanceRawOrderBookEntry,
   BinanceRawOrderSide,
   BinanceRawOrderType,
   BinanceRawRecentTrade,
@@ -718,7 +717,7 @@ export type ExchangeInfo = BinanceRawExchangeInfo;
 
 export interface KlineParams {
   symbol: string;
-  interval: BinanceRawKlineInterval;
+  interval: BinanceRawKlineInterval | string;
   startTime: number;
   endTime: number;
   limit: number;
