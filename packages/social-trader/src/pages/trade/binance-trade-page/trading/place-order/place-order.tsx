@@ -18,7 +18,7 @@ import {
   OrderType
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { TradingPriceContext } from "pages/trade/binance-trade-page/trading/trading-price.context";
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useState } from "react";
 
 import { LimitTradeForm } from "./limit-trade-form";
 import { MarketTradeForm } from "./market-trade-form";
@@ -32,7 +32,6 @@ import styles from "./place-order.module.scss";
 const _PlaceOrder: React.FC = () => {
   const { tradeRequest } = useContext(TerminalMethodsContext);
   const { price } = useContext(TradingPriceContext);
-  const [innerPrice, setInnerPrice] = useState(0);
 
   const {
     terminalType,
@@ -78,14 +77,6 @@ const _PlaceOrder: React.FC = () => {
   const balances = accountInfo
     ? accountInfo.balances
     : getBalancesLoaderData(quoteAsset);
-
-  useEffect(() => {
-    if (price! && !innerPrice) setInnerPrice(+price);
-  }, [price]);
-
-  useEffect(() => {
-    setInnerPrice(0);
-  }, [baseAsset, quoteAsset]);
 
   return (
     <TerminalDefaultBlock>
@@ -133,7 +124,7 @@ const _PlaceOrder: React.FC = () => {
               status={status}
               exchangeInfo={exchangeInfo}
               balances={balances}
-              outerPrice={innerPrice}
+              outerPrice={+price}
               onSubmit={handleSubmit}
               side={side}
             />
@@ -143,7 +134,7 @@ const _PlaceOrder: React.FC = () => {
               status={status}
               exchangeInfo={exchangeInfo}
               balances={balances}
-              outerPrice={innerPrice}
+              outerPrice={+price}
               onSubmit={handleSubmit}
               side={side}
             />
@@ -153,7 +144,7 @@ const _PlaceOrder: React.FC = () => {
               status={status}
               exchangeInfo={exchangeInfo}
               balances={balances}
-              outerPrice={innerPrice}
+              outerPrice={+price}
               onSubmit={handleSubmit}
               side={side}
             />
