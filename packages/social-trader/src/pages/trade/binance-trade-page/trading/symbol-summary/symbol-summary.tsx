@@ -59,6 +59,7 @@ const _SymbolSummaryView: React.FC<Props> = ({
       priceChange,
       highPrice,
       lowPrice,
+      quoteVolume,
       baseVolume
     }
   }
@@ -161,9 +162,15 @@ const _SymbolSummaryView: React.FC<Props> = ({
                 : 0}
             </MonoText>
           </SymbolSummaryLine>
-          <SymbolSummaryLine label={"24h Volume"}>
+          <SymbolSummaryLine label={`24h Volume (${baseAsset})`}>
             <MonoText>
               {terminalMoneyFormat({ amount: baseVolume, tickSize: stepSize })}{" "}
+              {baseAsset}
+            </MonoText>
+          </SymbolSummaryLine>
+          <SymbolSummaryLine label={`24h Volume (${quoteAsset})`}>
+            <MonoText>
+              {terminalMoneyFormat({ amount: quoteVolume, tickSize: tickSize })}{" "}
               {quoteAsset}
             </MonoText>
           </SymbolSummaryLine>

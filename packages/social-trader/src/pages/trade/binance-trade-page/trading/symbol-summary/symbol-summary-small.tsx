@@ -56,6 +56,7 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
       priceChange,
       highPrice,
       lowPrice,
+      quoteVolume,
       baseVolume
     }
   }
@@ -192,10 +193,20 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
         </BlurableLabeledValue>
       </RowItem>
       <RowItem>
-        <LabeledValue size={"xsmall"} label={"24h Volume"}>
+        <LabeledValue size={"xsmall"} label={`24h Volume (${baseAsset})`}>
           <Text size={"xsmall"}>
             <MonoText>
               {terminalMoneyFormat({ amount: baseVolume, tickSize: stepSize })}{" "}
+              {baseAsset}
+            </MonoText>
+          </Text>
+        </LabeledValue>
+      </RowItem>
+      <RowItem>
+        <LabeledValue size={"xsmall"} label={`24h Volume (${quoteAsset})`}>
+          <Text size={"xsmall"}>
+            <MonoText>
+              {terminalMoneyFormat({ amount: quoteVolume, tickSize: tickSize })}{" "}
               {quoteAsset}
             </MonoText>
           </Text>
