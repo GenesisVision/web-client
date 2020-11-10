@@ -135,7 +135,7 @@ const _SymbolSummaryView: React.FC<Props> = ({
               </SymbolSummaryLine>
             </>
           )}
-          <SymbolSummaryLine label={"24 Change"}>
+          <SymbolSummaryLine label={"24h Change"}>
             <MonoText>
               <Text
                 size={"xlarge"}
@@ -147,21 +147,21 @@ const _SymbolSummaryView: React.FC<Props> = ({
               </Text>
             </MonoText>
           </SymbolSummaryLine>
-          <SymbolSummaryLine label={"24 High"}>
+          <SymbolSummaryLine label={"24h High"}>
             <MonoText>
               {highPrice
                 ? terminalMoneyFormat({ amount: highPrice, tickSize })
                 : 0}
             </MonoText>
           </SymbolSummaryLine>
-          <SymbolSummaryLine label={"24 Low"}>
+          <SymbolSummaryLine label={"24h Low"}>
             <MonoText>
               {lowPrice
                 ? terminalMoneyFormat({ amount: lowPrice, tickSize })
                 : 0}
             </MonoText>
           </SymbolSummaryLine>
-          <SymbolSummaryLine label={"24 Volume"}>
+          <SymbolSummaryLine label={"24h Volume"}>
             <MonoText>
               {terminalMoneyFormat({ amount: baseVolume, tickSize: stepSize })}{" "}
               {quoteAsset}
