@@ -83,7 +83,7 @@ export const MarketWatchRow: React.FC<Props> = React.memo(
               {priceChangePercent} %
             </Text>
           ) : (
-            <Text color={getTextColor(+volume)}>{volume} %</Text>
+            <Text color={getTextColor(+volume)}>{volume}</Text>
           )}
         </td>
       </tr>

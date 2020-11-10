@@ -200,7 +200,7 @@ const _MarketWatch: React.FC<Props> = ({ items }) => {
                   eventTime,
                   quoteAsset,
                   baseAsset,
-                  baseVolume,
+                  quoteVolume,
                   name,
                   lastPrice,
                   priceChange,
@@ -212,7 +212,7 @@ const _MarketWatch: React.FC<Props> = ({ items }) => {
                     quoteAsset={quoteAsset}
                     baseAsset={baseAsset}
                     column={column}
-                    volume={baseVolume}
+                    volume={quoteVolume}
                     symbol={name}
                     lastPrice={lastPrice}
                     priceChange={priceChange}
