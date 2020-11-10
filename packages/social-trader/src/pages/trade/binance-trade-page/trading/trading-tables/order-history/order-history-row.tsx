@@ -1,6 +1,7 @@
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import { Text } from "components/text/text";
+import { BinanceOrderStatus } from "gv-api-web";
 import { terminalMoneyFormat } from "pages/trade/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
 import { getSymbolFilters } from "pages/trade/binance-trade-page/trading/terminal.helpers";
@@ -9,6 +10,7 @@ import React, { useContext } from "react";
 import { formatDate } from "utils/dates";
 
 interface Props {
+  orderStatus?: BinanceOrderStatus;
   time: number | Date;
   symbol: string;
   type: string;
@@ -21,6 +23,7 @@ interface Props {
 }
 
 const _OrderHistoryRow: React.FC<Props> = ({
+  orderStatus,
   time,
   symbol,
   type,
@@ -57,6 +60,7 @@ const _OrderHistoryRow: React.FC<Props> = ({
       <TableCell>
         {terminalMoneyFormat({ amount: stopPrice, tickSize: String(tickSize) })}
       </TableCell>
+      <TableCell>{orderStatus}</TableCell>
     </TableRow>
   );
 };

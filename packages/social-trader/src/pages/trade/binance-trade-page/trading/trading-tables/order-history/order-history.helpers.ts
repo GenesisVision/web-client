@@ -27,5 +27,8 @@ export const ORDER_HISTORY_TABLE_COLUMNS: SortingColumn[] = [
   },
   {
     name: "trigger conditions"
+  },
+  {
+    name: "status"
   }
 ];
