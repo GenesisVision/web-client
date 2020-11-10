@@ -1008,6 +1008,7 @@ export type UnitedOrder = {
   symbol: string;
   type: string;
   side: OrderSide;
+  stopPrice: number;
   price: number;
   quantityFilled: number;
   quantity: number;

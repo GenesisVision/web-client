@@ -24,5 +24,8 @@ export const ORDER_HISTORY_TABLE_COLUMNS: SortingColumn[] = [
   },
   {
     name: "total"
+  },
+  {
+    name: "trigger conditions"
   }
 ];

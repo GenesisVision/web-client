@@ -56,6 +56,7 @@ const transformToUnitedOrder = ({
   symbol,
   type,
   side,
+  stopPrice,
   price,
   quantity,
   quoteQuantity,
@@ -67,6 +68,7 @@ const transformToUnitedOrder = ({
   symbol,
   type,
   side,
+  stopPrice,
   price,
   quantityFilled,
   quantity

@@ -1,5 +1,6 @@
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
+import { Text } from "components/text/text";
 import { terminalMoneyFormat } from "pages/trade/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
 import { getSymbolFilters } from "pages/trade/binance-trade-page/trading/terminal.helpers";
@@ -13,6 +14,7 @@ interface Props {
   type: string;
   side: OrderSide;
   price: number;
+  stopPrice: number;
   origQty: number;
   filled: number;
   total: number;
@@ -24,6 +26,7 @@ const _OrderHistoryRow: React.FC<Props> = ({
   type,
   side,
   price,
+  stopPrice,
   origQty,
   filled,
   total
@@ -38,7 +41,9 @@ const _OrderHistoryRow: React.FC<Props> = ({
       <TableCell firstOffset={false}>{formatDate(time)}</TableCell>
       <TableCell>{symbol}</TableCell>
       <TableCell>{type}</TableCell>
-      <TableCell>{side}</TableCell>
+      <TableCell>
+        <Text color={side === "Buy" ? "green" : "red"}>{side}</Text>
+      </TableCell>
       <TableCell>
         {terminalMoneyFormat({ amount: price, tickSize: String(tickSize) })}
       </TableCell>
@@ -48,6 +53,9 @@ const _OrderHistoryRow: React.FC<Props> = ({
       <TableCell>{filled}</TableCell>
       <TableCell>
         {terminalMoneyFormat({ amount: total, tickSize: String(stepSize) })}
+      </TableCell>
+      <TableCell>
+        {terminalMoneyFormat({ amount: stopPrice, tickSize: String(tickSize) })}
       </TableCell>
     </TableRow>
   );

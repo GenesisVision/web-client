@@ -31,6 +31,7 @@ export const OrderHistory: React.FC<Props> = ({ items }) => {
         symbol,
         type,
         side,
+        stopPrice,
         price
       }: UnitedOrder) => (
         <OrderHistoryRow
@@ -38,6 +39,7 @@ export const OrderHistory: React.FC<Props> = ({ items }) => {
           symbol={symbol}
           type={type}
           side={side}
+          stopPrice={stopPrice}
           price={price}
           origQty={quantity}
           filled={(+quantityFilled / +quantity) * 100}
