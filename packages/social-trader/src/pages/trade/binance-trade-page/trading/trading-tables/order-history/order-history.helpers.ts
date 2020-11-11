@@ -17,10 +17,10 @@ export const ORDER_HISTORY_TABLE_COLUMNS: SortingColumn[] = [
     name: "price"
   },
   {
-    name: "amount"
+    name: "executed"
   },
   {
-    name: "filled"
+    name: "amount"
   },
   {
     name: "total"
