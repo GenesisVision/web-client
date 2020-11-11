@@ -63,10 +63,15 @@ const _OrderHistoryRow: React.FC<Props> = ({
       </TableCell>
       <TableCell>{filled}</TableCell>
       <TableCell>
-        {terminalMoneyFormat({ amount: total, tickSize: String(stepSize) })}
+        {terminalMoneyFormat({ amount: total, tickSize: String(tickSize) })}
       </TableCell>
       <TableCell>
-        {terminalMoneyFormat({ amount: stopPrice, tickSize: String(tickSize) })}
+        {stopPrice
+          ? terminalMoneyFormat({
+              amount: stopPrice,
+              tickSize: String(tickSize)
+            })
+          : "—"}
       </TableCell>
       <TableCell>{orderStatus}</TableCell>
     </TableRow>

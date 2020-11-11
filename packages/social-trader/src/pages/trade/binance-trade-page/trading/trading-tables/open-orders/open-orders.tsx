@@ -72,6 +72,7 @@ export const OpenOrders: React.FC<Props> = ({ items }) => {
         symbol,
         type,
         side,
+        stopPrice,
         price
       }: UnitedOrder) => {
         return (
@@ -81,9 +82,10 @@ export const OpenOrders: React.FC<Props> = ({ items }) => {
             symbol={symbol}
             type={type}
             side={side}
+            stopPrice={String(stopPrice)}
             price={String(price)}
             origQty={String(quantity)}
-            filled={(quantityFilled / quantity) * 100}
+            filled={quantity ? (quantityFilled / quantity) * 100 : 0}
             total={+quantity * +price}
           />
         );

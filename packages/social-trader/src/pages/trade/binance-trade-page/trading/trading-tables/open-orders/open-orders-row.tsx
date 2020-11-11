@@ -1,6 +1,7 @@
 import { Button } from "components/button/button";
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
+import { Text } from "components/text/text";
 import useApiRequest from "hooks/api-request.hook";
 import { terminalMoneyFormat } from "pages/trade/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
@@ -16,6 +17,7 @@ interface Props {
   symbol: string;
   type: string;
   side: OrderSide;
+  stopPrice: string;
   price: string;
   origQty: string;
   filled: number;
@@ -28,6 +30,7 @@ const _OpenOrdersRow: React.FC<Props> = ({
   symbol,
   type,
   side,
+  stopPrice,
   price,
   origQty,
   filled,
@@ -60,7 +63,9 @@ const _OpenOrdersRow: React.FC<Props> = ({
       <TableCell firstOffset={false}>{formatDate(new Date(time))}</TableCell>
       <TableCell>{symbol}</TableCell>
       <TableCell>{type}</TableCell>
-      <TableCell>{side}</TableCell>
+      <TableCell>
+        <Text color={side === "Buy" ? "green" : "red"}>{side}</Text>
+      </TableCell>
       <TableCell>
         {terminalMoneyFormat({ amount: price, tickSize: String(tickSize) })}
       </TableCell>
@@ -69,7 +74,15 @@ const _OpenOrdersRow: React.FC<Props> = ({
       </TableCell>
       <TableCell>{filled}</TableCell>
       <TableCell>
-        {terminalMoneyFormat({ amount: total, tickSize: String(stepSize) })}
+        {terminalMoneyFormat({ amount: total, tickSize: String(tickSize) })}
+      </TableCell>
+      <TableCell>
+        {stopPrice
+          ? terminalMoneyFormat({
+              amount: stopPrice,
+              tickSize: String(tickSize)
+            })
+          : "—"}
       </TableCell>
       <TableCell>
         <Button
