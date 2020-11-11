@@ -7,6 +7,7 @@ import { Row } from "components/row/row";
 import { Text } from "components/text/text";
 import { API_REQUEST_STATUS } from "hooks/api-request.hook";
 import { ReduceOnlyField } from "pages/trade/binance-trade-page/trading/place-order/place-order-settings/reduce-only-field/reduce-only-field";
+import { PlaceOrderSlider } from "pages/trade/binance-trade-page/trading/place-order/place-order-slider";
 import { PlaceOrderSubmitButton } from "pages/trade/binance-trade-page/trading/place-order/place-order-submit-button";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
 import { TerminalPlaceOrderContext } from "pages/trade/binance-trade-page/trading/terminal-place-order.context";
@@ -126,6 +127,9 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
           currency={baseAsset}
           name={TRADE_FORM_FIELDS.quantity}
         />
+      </Row>
+      <Row wide onlyOffset>
+        <PlaceOrderSlider value={sliderValue} setValue={setSliderValue} />
       </Row>
       <Row>
         <HookFormAmountField

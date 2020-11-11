@@ -9,6 +9,7 @@ import {
   TIME_IN_FORCE_VALUES,
   TimeInForceField
 } from "pages/trade/binance-trade-page/trading/place-order/place-order-settings/time-in-force-field/time-in-force-field";
+import { PlaceOrderSlider } from "pages/trade/binance-trade-page/trading/place-order/place-order-slider";
 import { PlaceOrderSubmitButton } from "pages/trade/binance-trade-page/trading/place-order/place-order-submit-button";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
 import { TerminalPlaceOrderContext } from "pages/trade/binance-trade-page/trading/terminal-place-order.context";
@@ -149,6 +150,9 @@ const _StopLimitTradeForm: React.FC<IStopLimitTradeFormProps & {
           value={sliderValue}
           onChange={setSliderValue}
         />
+      </Row>
+      <Row wide onlyOffset>
+        <PlaceOrderSlider value={sliderValue} setValue={setSliderValue} />
       </Row>
       <Row size={"small"}>
         <HookFormAmountField
