@@ -79,7 +79,13 @@ export const generateMessage = ({
   }
 };
 
-export const RANGE_MARKS = ["0%", "25%", "50%", "75%", "100%"];
+export const RANGE_MARKS = {
+  0: "0%",
+  25: "25%",
+  50: "50%",
+  75: "75%",
+  100: "100%"
+};
 
 export const getBalanceLoaderData = (
   asset: string = "BTC"
@@ -296,11 +302,10 @@ export const useTradeSlider = ({
   const [sliderValue, setSliderValue] = useState<number | undefined>();
   useEffect(() => {
     if (sliderValue === undefined) return;
-    const percentValue = parseInt(RANGE_MARKS[sliderValue]);
     if (side === "Buy") {
       const { price } = watch();
       const walletAvailable = +getBalance(balances, quoteAsset);
-      const fullTotal = calculatePercentage(walletAvailable, percentValue);
+      const fullTotal = calculatePercentage(walletAvailable, sliderValue);
       const newAmount = truncated(
         fullTotal / price,
         getDecimalScale(formatValue(stepSize))
@@ -312,7 +317,7 @@ export const useTradeSlider = ({
         balances,
         terminalType === "futures" ? quoteAsset : baseAsset
       );
-      const percentAmount = calculatePercentage(walletAvailable, percentValue);
+      const percentAmount = calculatePercentage(walletAvailable, sliderValue);
       if (
         truncated(percentAmount, getDecimalScale(formatValue(stepSize))) === 0
       )

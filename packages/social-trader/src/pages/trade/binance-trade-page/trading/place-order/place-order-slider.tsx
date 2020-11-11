@@ -13,9 +13,9 @@ const _PlaceOrderSlider: React.FC<IPlaceOrderSliderProps> = ({
 }) => {
   return (
     <Slider
-      dots
+      included={false}
       min={0}
-      max={RANGE_MARKS.length - 1}
+      max={100}
       marks={RANGE_MARKS}
       value={value}
       onChange={setValue}
