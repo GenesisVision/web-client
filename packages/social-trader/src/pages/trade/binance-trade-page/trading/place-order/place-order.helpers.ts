@@ -15,6 +15,7 @@ import {
   AssetBalance,
   ExchangeInfo,
   OrderSide,
+  OrderType,
   SymbolFilter,
   SymbolLotSizeFilter,
   SymbolMinNotionalFilter,
@@ -60,6 +61,23 @@ export interface IStopLimitFormValues extends IPlaceOrderDefaultFormValues {
 }
 
 export interface IPlaceOrderFormValues extends IPlaceOrderDefaultFormValues {}
+
+export const generateMessage = ({
+  side,
+  type,
+  symbol,
+  quantity
+}: {
+  side: OrderSide;
+  type: OrderType;
+  symbol: string;
+  quantity: number;
+}) => {
+  switch (type) {
+    default:
+      return `Submitted exchange ${type.toLowerCase()} ${side.toLowerCase()} order for ${quantity} ${symbol}`;
+  }
+};
 
 export const RANGE_MARKS = ["0%", "25%", "50%", "75%", "100%"];
 
