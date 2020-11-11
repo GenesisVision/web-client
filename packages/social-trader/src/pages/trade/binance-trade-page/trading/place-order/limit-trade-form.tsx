@@ -1,6 +1,5 @@
 import { isAllow } from "components/deposit/components/deposit.helpers";
 import HookFormAmountField from "components/input-amount-field/hook-form-amount-field";
-import { Slider } from "components/range/range";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { API_REQUEST_STATUS } from "hooks/api-request.hook";
@@ -9,6 +8,7 @@ import {
   TIME_IN_FORCE_VALUES,
   TimeInForceField
 } from "pages/trade/binance-trade-page/trading/place-order/place-order-settings/time-in-force-field/time-in-force-field";
+import { PlaceOrderSlider } from "pages/trade/binance-trade-page/trading/place-order/place-order-slider";
 import { PlaceOrderSubmitButton } from "pages/trade/binance-trade-page/trading/place-order/place-order-submit-button";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
 import { TerminalPlaceOrderContext } from "pages/trade/binance-trade-page/trading/terminal-place-order.context";
@@ -25,7 +25,6 @@ import { HookForm } from "utils/hook-form.helpers";
 import {
   IPlaceOrderFormValues,
   placeOrderDefaultValidationSchema,
-  RANGE_MARKS,
   TRADE_FORM_FIELDS,
   usePlaceOrderAutoFill,
   usePlaceOrderFormReset,
@@ -131,14 +130,7 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
         />
       </Row>
       <Row wide onlyOffset>
-        <Slider
-          dots
-          min={0}
-          max={RANGE_MARKS.length - 1}
-          marks={RANGE_MARKS}
-          value={sliderValue}
-          onChange={setSliderValue}
-        />
+        <PlaceOrderSlider value={sliderValue} setValue={setSliderValue} />
       </Row>
       <Row size={"small"}>
         <HookFormAmountField
