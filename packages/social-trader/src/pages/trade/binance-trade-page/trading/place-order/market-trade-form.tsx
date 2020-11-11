@@ -1,7 +1,6 @@
 import { isAllow } from "components/deposit/components/deposit.helpers";
 import HookFormAmountField from "components/input-amount-field/hook-form-amount-field";
 import { LabeledValue } from "components/labeled-value/labeled-value";
-import { Slider } from "components/range/range";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
@@ -24,7 +23,6 @@ import { HookForm } from "utils/hook-form.helpers";
 import {
   IPlaceOrderFormValues,
   placeOrderDefaultValidationSchema,
-  RANGE_MARKS,
   TRADE_FORM_FIELDS,
   usePlaceOrderAutoFill,
   usePlaceOrderFormReset,
@@ -128,9 +126,6 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
           name={TRADE_FORM_FIELDS.quantity}
         />
       </Row>
-      <Row wide onlyOffset>
-        <PlaceOrderSlider value={sliderValue} setValue={setSliderValue} />
-      </Row>
       <Row>
         <HookFormAmountField
           disabled={true}
@@ -142,18 +137,9 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
           name={TRADE_FORM_FIELDS.total}
         />
       </Row>
-      {side === "Sell" && (
-        <Row wide onlyOffset>
-          <Slider
-            dots
-            min={0}
-            max={RANGE_MARKS.length - 1}
-            marks={RANGE_MARKS}
-            value={sliderValue}
-            onChange={setSliderValue}
-          />
-        </Row>
-      )}
+      <Row wide onlyOffset>
+        <PlaceOrderSlider value={sliderValue} setValue={setSliderValue} />
+      </Row>
       <Row>
         <PlaceOrderSubmitButton
           isSuccessful={status === "SUCCESS"}

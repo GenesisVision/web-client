@@ -1,6 +1,5 @@
 import { isAllow } from "components/deposit/components/deposit.helpers";
 import HookFormAmountField from "components/input-amount-field/hook-form-amount-field";
-import { Slider } from "components/range/range";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { API_REQUEST_STATUS } from "hooks/api-request.hook";
@@ -26,7 +25,6 @@ import { HookForm } from "utils/hook-form.helpers";
 import {
   IStopLimitFormValues,
   placeOrderStopLimitValidationSchema,
-  RANGE_MARKS,
   TRADE_FORM_FIELDS,
   usePlaceOrderAutoFill,
   usePlaceOrderFormReset,
@@ -139,16 +137,6 @@ const _StopLimitTradeForm: React.FC<IStopLimitTradeFormProps & {
           label={t("Amount")}
           currency={baseAsset}
           name={TRADE_FORM_FIELDS.quantity}
-        />
-      </Row>
-      <Row wide onlyOffset>
-        <Slider
-          dots
-          min={0}
-          max={RANGE_MARKS.length - 1}
-          marks={RANGE_MARKS}
-          value={sliderValue}
-          onChange={setSliderValue}
         />
       </Row>
       <Row wide onlyOffset>
