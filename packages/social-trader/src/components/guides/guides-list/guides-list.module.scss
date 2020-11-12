@@ -50,6 +50,7 @@
   flex-wrap: wrap;
 
   &__number {
+    @include adaptive-margin(left, $padding-xxsmall);
     font-size: 14px;
     font-weight: 400;
     color: rgba($main-color, 0.3);
