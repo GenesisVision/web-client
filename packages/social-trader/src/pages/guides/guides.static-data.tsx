@@ -1,3 +1,8 @@
+import ImageBaseElement from "components/avatar/image-base.element";
+import Deposit1 from "media/guides/guides-1/Deposit1.png";
+import Deposit2 from "media/guides/guides-1/Deposit2.png";
+import Deposit3 from "media/guides/guides-1/Deposit3.png";
+import Withdrawal1 from "media/guides/guides-1/Withdrawal1.png";
 import React from "react";
 
 export type TGuide = {
@@ -20,85 +25,91 @@ export const navGuides: TNavGuide[] = [
     name: "Deposit & Withdrawal",
     guides: [
       {
-        id: "general-1",
-        canonicalName: "general-1",
-        name: "What is Genesis Vision?",
+        id: "deposit-1",
+        canonicalName: "deposit-via-crypto-wallet",
+        name: "Deposit via crypto wallet",
         content: (
           <>
-            <p>
-              Genesis Vision is a multimarket social trading platform that
-              provides a wide variety of opportunities for both traders and
-              investors, including:
-            </p>
-            <ul>
+            <h3>
+              In order to deposit via crypto wallet simply follow the steps
+              below:
+            </h3>
+            <ol>
+              <li>Log in to your account.</li>
+
               <li>
-                Trade Cryptocurrencies, Forex, Metals, Stocks, Indices and
-                Commodities on any brokerage/exchange within the Genesis Vision
-                partnership network
+                Open your <strong>GV wallet</strong>.
               </li>
-              <li>Create and manage asset management Programs or Funds</li>
-              <li>Provide copy trading signals with GV Follow</li>
-              <li>Invest in Programs or Funds</li>
-              <li>Copy successful trading strategies with GV Follow</li>
-            </ul>
+
+              <li>Press “+” for the deposit through the crypto wallet</li>
+
+              <li>
+                Copy your wallet address and head over to your external crypto
+                wallet to use it for the transfer.
+              </li>
+            </ol>
+            <p>The deposit will appear in your GV wallet instantly.</p>
+            <ImageBaseElement
+              alt={"Deposit via crypto wallet"}
+              src={Deposit1}
+            />
           </>
         )
       },
       {
-        id: "general-2",
-        canonicalName: "general-2",
-        name: "What is this platform for?",
+        id: "deposit-2",
+        canonicalName: "deposit-via-bank-card",
+        name: "Deposit via bank card",
         content: (
           <>
-            <p>
-              Genesis Vision helps traders monetize their skills while providing
-              a wide variety of investment opportunities. Our clients can be
-              both traders and/or investors on our platform.
-            </p>
-            <p>
-              If you are already familiar with trading, you can create your own
-              asset management Program or Fund and attract investors to join.
-              You can also create a signal trading account so other users can
-              subscribe and copy your trades.
-            </p>
-            <p>
-              If you are an inexperienced trader, you can practice trading on
-              your personal trading account and/or copy trading strategies of
-              Follow Leaders, or you can choose any Program or Fund to invest
-              in.
-            </p>
+            <h3>To deposit using a fiat bank card follow the steps:</h3>
+            <ol>
+              <li>Log in to your account.</li>
+              <li>
+                Open your <strong>GV wallet</strong>.
+              </li>
+              <li>
+                Click “<strong>Buy with card</strong>”. You will be redirected
+                to the
+                <strong>
+                  <a href="https://www.moonpay.io/">
+                    Moonpay payment processor.
+                  </a>
+                </strong>
+              </li>
+              <li>
+                Fill in all the required details. The system will remember this
+                information for future deposits.
+              </li>
+            </ol>
+            <ImageBaseElement alt={"Deposit via bank card"} src={Deposit2} />
+            <ImageBaseElement alt={"Deposit via bank card"} src={Deposit3} />
           </>
         )
-      }
-    ]
-  },
-  {
-    id: "guides-2",
-    name: "Investing",
-    guides: [
+      },
       {
-        id: "general-3",
-        canonicalName: "general-3",
-        name: "What is this platform for?",
+        id: "deposit-3",
+        canonicalName: "withdrawal",
+        name: "Withdrawal",
         content: (
           <>
-            <p>
-              Genesis Vision helps traders monetize their skills while providing
-              a wide variety of investment opportunities. Our clients can be
-              both traders and/or investors on our platform.
-            </p>
-            <p>
-              If you are already familiar with trading, you can create your own
-              asset management Program or Fund and attract investors to join.
-              You can also create a signal trading account so other users can
-              subscribe and copy your trades.
-            </p>
-            <p>
-              If you are an inexperienced trader, you can practice trading on
-              your personal trading account and/or copy trading strategies of
-              Follow Leaders, or you can choose any Program or Fund to invest
-              in.
-            </p>
+            <h3>To withdraw from your GV wallet follow the simple steps:</h3>
+            <ol>
+              <li>Log in to your account.</li>
+              <li>
+                Open your <strong>GV wallet</strong>.
+              </li>
+              <li>
+                Press the “<strong>↑</strong>” sign and fill in the data in the
+                window opened: your crypto wallet address and the amount to
+                withdraw.
+              </li>
+              <li>
+                <strong>Confirm</strong> your withdrawal in the confirmation
+                email sent to your e-mail address.
+              </li>
+            </ol>
+            <ImageBaseElement alt={"Deposit via bank card"} src={Withdrawal1} />
           </>
         )
       }
