@@ -114,7 +114,7 @@ const _PlaceOrder: React.FC = () => {
         <GVTabs value={tab} onChange={setTab}>
           <GVTab value={"Limit"} label={"LIMIT"} />
           <GVTab value={"Market"} label={"MARKET"} />
-          <GVTab value={"StopLossLimit"} label={"STOP LIMIT"} />
+          <GVTab value={"TakeProfitLimit"} label={"STOP LIMIT"} />
         </GVTabs>
       </Row>
       <Row>
@@ -151,7 +151,7 @@ const _PlaceOrder: React.FC = () => {
               side={side}
             />
           )}
-          {tab === "StopLossLimit" && (
+          {tab === "TakeProfitLimit" && (
             <StopLimitTradeForm
               status={status}
               exchangeInfo={exchangeInfo}
