@@ -137,9 +137,10 @@ export const usePlaceOrderAutoFill = ({
         tickSize: tickSize
       });
       if (isNaN(value)) return;
-      if (value > 0 || String(quantity) === "0")
+      if (value > 0 || String(quantity) === "0") {
         setValue(totalName, value, true);
-      setAutoFill(true);
+        setAutoFill(true);
+      }
     } else setAutoFill(false);
   }, [quantity]);
   useEffect(() => {
