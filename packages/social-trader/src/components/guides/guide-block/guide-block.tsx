@@ -7,33 +7,38 @@ import { useTranslation } from "react-i18next";
 
 import styles from "./guide-block.module.scss";
 
+export type IPrevNextGuide = {
+  link: string;
+  name: string;
+};
+
 interface Props {
   guide: TGuide;
-  prevGuideName?: string;
-  nextGuideName?: string;
+  prevGuide: IPrevNextGuide | null;
+  nextGuide: IPrevNextGuide | null;
 }
 
-const _GuideBlock: React.FC<Props> = ({
-  guide,
-  nextGuideName,
-  prevGuideName
-}) => {
+const _GuideBlock: React.FC<Props> = ({ guide, nextGuide, prevGuide }) => {
   const [t] = useTranslation();
   return (
     <DefaultBlock size={"xlarge"} solid className={styles["guide-block"]}>
       <h3 className={styles["guide-block__subtitle"]}>{guide.name}</h3>
       <div className={styles["guide-block__content"]}>{guide.content}</div>
       <div className={styles["guide-block__controls"]}>
-        {prevGuideName && (
-          <GuideBlockLink guideCanonicalName={prevGuideName}>
+        {prevGuide && (
+          <GuideBlockLink guideLink={prevGuide.link} guideName={prevGuide.name}>
             {t("guides:controls.back")}
           </GuideBlockLink>
         )}
         <Button className={styles["guide-block__button"]}>
           {t("guides:controls.done")}
         </Button>
-        {nextGuideName && (
-          <GuideBlockLink guideCanonicalName={nextGuideName} isNext>
+        {nextGuide && (
+          <GuideBlockLink
+            guideLink={nextGuide.link}
+            guideName={nextGuide.name}
+            isNext
+          >
             {t("guides:controls.next")}
           </GuideBlockLink>
         )}
