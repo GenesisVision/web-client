@@ -22,7 +22,7 @@ const _GuideBlock: React.FC<Props> = ({ guide, nextGuide, prevGuide }) => {
   const [t] = useTranslation();
   return (
     <DefaultBlock size={"xlarge"} solid className={styles["guide-block"]}>
-      <h3 className={styles["guide-block__subtitle"]}>{guide.name}</h3>
+      <h2 className={styles["guide-block__subtitle"]}>{guide.name}</h2>
       <div className={styles["guide-block__content"]}>{guide.content}</div>
       <div className={styles["guide-block__controls"]}>
         {prevGuide && (

@@ -1,7 +1,6 @@
 import clsx from "clsx";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
-import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import Tooltip from "components/tooltip/tooltip";
 import { TooltipContent } from "components/tooltip/tooltip-content";
 import { GUIDES_TOTAL_PAGE_ROUTE } from "pages/guides/guides.paths";
@@ -25,19 +24,16 @@ const _GuideBlockLink: React.FC<Props> = ({
   const { linkCreator } = useToLink();
   return (
     <Tooltip render={() => <TooltipContent>{guideName}</TooltipContent>}>
-      <span
+      <Link
         className={clsx(styles["guide-block__link"], {
           [styles["guide-block__link--next"]]: isNext
         })}
+        wide
+        white
+        to={linkCreator(`${GUIDES_TOTAL_PAGE_ROUTE}#${guideLink}`)}
       >
-        <Link
-          wide
-          white
-          to={linkCreator(`${GUIDES_TOTAL_PAGE_ROUTE}#${guideLink}`)}
-        >
-          {children}
-        </Link>
-      </span>
+        <span>{children}</span>
+      </Link>
     </Tooltip>
   );
 };

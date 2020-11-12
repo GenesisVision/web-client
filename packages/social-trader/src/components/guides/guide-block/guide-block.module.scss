@@ -33,6 +33,11 @@
   &__content {
     @include adaptive-padding(bottom, $padding-medium);
     @include font-size($font-size-paragraph);
+
+    img {
+      @include adaptive-margin(top, $padding-xsmall);
+      max-width: 100%;
+    }
   }
 
   &__controls {
@@ -58,7 +63,7 @@
     text-align: center;
 
     @include media-breakpoint-landscape-phone() {
-      width: auto;
+      width: auto !important;
       margin-bottom: 0;
       margin-right: 116px;
     }
