@@ -1,13 +1,13 @@
-import { Guide, GuidesCategory } from "gv-api-web";
+import { TGuide, TNavGuide } from "pages/guides/guides.static-data";
 import { safeGetElemFromArray } from "utils/helpers";
 
-export const getAllGuides = (navGuides: GuidesCategory[]): Guide[] => {
-  return navGuides.reduce((acc: Guide[], current) => {
+export const getAllGuides = (navGuides: TNavGuide[]): TGuide[] => {
+  return navGuides.reduce((acc: TGuide[], current) => {
     return [...acc, ...current.guides];
   }, []);
 };
 
-export const getCurrentGuide = (allGuides: Guide[], tab: string): Guide => {
+export const getCurrentGuide = (allGuides: TGuide[], tab: string): TGuide => {
   return safeGetElemFromArray(
     allGuides,
     guide => guide.canonicalName === tab.slice(1, tab.length)
@@ -20,8 +20,8 @@ export interface IPrevNextGuidesNamesProps {
 }
 
 export const getPrevNextGuidesNames = (
-  allGuides: Guide[],
-  currentGuide: Guide
+  allGuides: TGuide[],
+  currentGuide: TGuide
 ): IPrevNextGuidesNamesProps => {
   const currentIndex = allGuides.indexOf(currentGuide);
   const nextIndex = currentIndex + 1;

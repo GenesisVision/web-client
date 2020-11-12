@@ -1,32 +1,23 @@
 import { Button } from "components/button/button";
 import { DefaultBlock } from "components/default.block/default.block";
 import GuideBlockLink from "components/guides/guide-block/guide-block-link";
-import { Guide } from "gv-api-web";
-import React, { useCallback } from "react";
+import { TGuide } from "pages/guides/guides.static-data";
+import React from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
-import { isAuthenticatedSelector } from "reducers/auth-reducer";
 
 import styles from "./guide-block.module.scss";
 
 interface Props {
-  guide: Guide;
+  guide: TGuide;
   prevGuideName?: string;
   nextGuideName?: string;
-  onClickPass: (id: string) => void;
 }
 
 const _GuideBlock: React.FC<Props> = ({
   guide,
   nextGuideName,
-  prevGuideName,
-  onClickPass
+  prevGuideName
 }) => {
-  const isAuthenticated = useSelector(isAuthenticatedSelector);
-  const handlePass = useCallback(() => {
-    if (guide.isPassed) return null;
-    onClickPass(guide.id);
-  }, [guide]);
   const [t] = useTranslation();
   return (
     <DefaultBlock size={"xlarge"} solid className={styles["guide-block"]}>
@@ -38,16 +29,9 @@ const _GuideBlock: React.FC<Props> = ({
             {t("guides:controls.back")}
           </GuideBlockLink>
         )}
-        {isAuthenticated && (
-          <Button
-            className={styles["guide-block__button"]}
-            onClick={handlePass}
-            isSuccessful={guide.isPassed}
-            disabled={guide.isPassed}
-          >
-            {t("guides:controls.done")}
-          </Button>
-        )}
+        <Button className={styles["guide-block__button"]}>
+          {t("guides:controls.done")}
+        </Button>
         {nextGuideName && (
           <GuideBlockLink guideCanonicalName={nextGuideName} isNext>
             {t("guides:controls.next")}

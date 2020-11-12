@@ -1,24 +1,22 @@
 import GuideBlock from "components/guides/guide-block/guide-block";
 import GuidesNav from "components/guides/guides-nav/guides-nav";
 import { IPrevNextGuidesNamesProps } from "components/guides/guides.helpers";
-import { Guide, GuidesCategory } from "gv-api-web";
+import { TGuide, TNavGuide } from "pages/guides/guides.static-data";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
 import styles from "./guides-section.module.scss";
 
 interface Props {
-  navGuides: GuidesCategory[];
-  currentGuide?: Guide;
+  navGuides: TNavGuide[];
+  currentGuide?: TGuide;
   prevNextGuidesNames: IPrevNextGuidesNamesProps;
-  onClickPass: (id: string) => void;
 }
 
 const _GuidesSection: React.FC<Props> = ({
   navGuides,
   currentGuide,
-  prevNextGuidesNames,
-  onClickPass
+  prevNextGuidesNames
 }) => {
   const [t] = useTranslation();
 
@@ -32,7 +30,6 @@ const _GuidesSection: React.FC<Props> = ({
       {currentGuide && (
         <GuideBlock
           guide={currentGuide}
-          onClickPass={onClickPass}
           prevGuideName={prevNextGuidesNames.prev}
           nextGuideName={prevNextGuidesNames.next}
         />

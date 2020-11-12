@@ -1,4 +1,3 @@
-import { Guide } from "gv-api-web";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -23,14 +22,14 @@ const _GuidesListHeader: React.FC<Props> = ({
       ? `${guidesTotal} ${t("guides:step")}`
       : `${guidesTotal} ${t("guides:steps")}`;
   return (
-    <h3 className={styles["guides-list-header"]} onClick={onClick}>
+    <h4 className={styles["guides-list-header"]} onClick={onClick}>
       {name}
       {!isVisibleList && (
         <span className={styles["guides-list-header__number"]}>
           {countsText}
         </span>
       )}
-    </h3>
+    </h4>
   );
 };
 
