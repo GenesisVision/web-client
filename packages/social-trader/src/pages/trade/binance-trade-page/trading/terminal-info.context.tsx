@@ -1,3 +1,4 @@
+import { useAccountCurrency } from "hooks/account-currency.hook";
 import {
   getLotSizeFilter,
   getSymbolPriceFilter
@@ -82,6 +83,7 @@ export const TerminalInfoContextProvider: React.FC<Props> = ({
   terminalType,
   children
 }) => {
+  const currency = useAccountCurrency();
   const { updateUrl } = useUpdateTerminalUrlParams();
 
   const {
@@ -101,7 +103,7 @@ export const TerminalInfoContextProvider: React.FC<Props> = ({
 
   useEffect(() => {
     if (!exchangeAccountId) return;
-    const accountInfo = getAccountInformation(exchangeAccountId);
+    const accountInfo = getAccountInformation(exchangeAccountId, currency);
     accountInfo.subscribe(data => {
       setAccountInfo(data);
     });
