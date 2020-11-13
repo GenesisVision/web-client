@@ -47,10 +47,12 @@ export const navGuides: TNavGuide[] = [
               <li>Log in to your account.</li>
 
               <li>
-                Open your <strong>GV wallet</strong>.
+                Open your <b>GV wallet</b>.
               </li>
 
-              <li>Press “+” for the deposit through the crypto wallet</li>
+              <li>
+                Press <b>“+”</b> for the deposit through the crypto wallet
+              </li>
 
               <li>
                 Copy your wallet address and head over to your external crypto
@@ -76,12 +78,11 @@ export const navGuides: TNavGuide[] = [
             <ol>
               <li>Log in to your account.</li>
               <li>
-                Open your <strong>GV wallet</strong>.
+                Open your <b>GV wallet</b>.
               </li>
               <li>
-                Click <strong>“Buy with card“</strong>. You will be redirected
-                to the{" "}
-                <strong>
+                Click <b>“Buy with card“</b>. You will be redirected to the{" "}
+                <b>
                   <a
                     href="https://www.moonpay.io/"
                     target="_blank"
@@ -89,7 +90,7 @@ export const navGuides: TNavGuide[] = [
                   >
                     Moonpay payment processor.
                   </a>
-                </strong>
+                </b>
               </li>
               <li>
                 Fill in all the required details. The system will remember this
@@ -112,16 +113,15 @@ export const navGuides: TNavGuide[] = [
             <ol>
               <li>Log in to your account.</li>
               <li>
-                Open your <strong>GV wallet</strong>.
+                Open your <b>GV wallet</b>.
               </li>
               <li>
-                Press the <strong>“↑“</strong> sign and fill in the data in the
-                window opened: your crypto wallet address and the amount to
-                withdraw.
+                Press the <b>“↑“</b> sign and fill in the data in the window
+                opened: your crypto wallet address and the amount to withdraw.
               </li>
               <li>
-                <strong>Confirm</strong> your withdrawal in the confirmation
-                email sent to your e-mail address.
+                <b>Confirm</b> your withdrawal in the confirmation email sent to
+                your e-mail address.
               </li>
             </ol>
             <ImageBaseElement alt={"Deposit via bank card"} src={Withdrawal1} />
