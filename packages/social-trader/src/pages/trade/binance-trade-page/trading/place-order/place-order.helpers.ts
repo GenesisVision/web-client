@@ -91,6 +91,7 @@ export const getBalanceLoaderData = (
   asset: string = "BTC"
 ) => (): AssetBalance => ({
   asset,
+  amountInCurrency: 0,
   total: 0,
   free: 0,
   locked: 0
