@@ -79,10 +79,14 @@ export const navGuides: TNavGuide[] = [
                 Open your <strong>GV wallet</strong>.
               </li>
               <li>
-                Click “<strong>Buy with card</strong>”. You will be redirected
-                to the
+                Click <strong>“Buy with card“</strong>. You will be redirected
+                to the{" "}
                 <strong>
-                  <a href="https://www.moonpay.io/">
+                  <a
+                    href="https://www.moonpay.io/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     Moonpay payment processor.
                   </a>
                 </strong>
@@ -111,7 +115,7 @@ export const navGuides: TNavGuide[] = [
                 Open your <strong>GV wallet</strong>.
               </li>
               <li>
-                Press the “<strong>↑</strong>” sign and fill in the data in the
+                Press the <strong>“↑“</strong> sign and fill in the data in the
                 window opened: your crypto wallet address and the amount to
                 withdraw.
               </li>
