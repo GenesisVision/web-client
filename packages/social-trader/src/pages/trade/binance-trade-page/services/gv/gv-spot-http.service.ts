@@ -26,6 +26,7 @@ import {
 import { from, Observable } from "rxjs";
 import { api } from "services/api-client/swagger-custom-client";
 import { OrderRequest } from "services/request.service";
+import { CurrencyEnum } from "utils/types";
 
 export const getExchangeInfo = (): Promise<ExchangeInfo> =>
   api.terminal().getExchangeInfo();
@@ -113,9 +114,12 @@ export const getUserStreamKey = (
   );
 
 export const getAccountInformation = (
-  accountId?: string
+  accountId?: string,
+  currency?: CurrencyEnum
 ): Observable<Account> =>
-  from(api.terminal().getAccountInfo({ accountId }) as Promise<Account>);
+  from(
+    api.terminal().getAccountInfo({ accountId, currency }) as Promise<Account>
+  );
 
 export const getTrades = (
   symbol: string,

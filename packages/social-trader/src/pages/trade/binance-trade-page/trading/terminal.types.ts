@@ -23,7 +23,7 @@ import {
 import { Bar } from "pages/trade/binance-trade-page/trading/chart/charting_library/datafeed-api";
 import { Observable } from "rxjs";
 import { ConnectSocketMethodType } from "services/websocket.service";
-import { AnyObjectType } from "utils/types";
+import { AnyObjectType, CurrencyEnum } from "utils/types";
 
 export type MarginModeType = "ISOLATED" | "CROSSED";
 
@@ -175,7 +175,10 @@ export interface ITerminalMethods extends IGVTerminalMethods {
     accountId?: string
   ) => Observable<UnitedOrder[]>;
   getUserStreamKey: (accountId?: string) => Observable<{ listenKey: string }>;
-  getAccountInformation: (accountId?: string) => Observable<Account>;
+  getAccountInformation: (
+    accountId?: string,
+    currency?: CurrencyEnum
+  ) => Observable<Account>;
   getTrades: (symbol: string, limit?: number) => Observable<UnitedTrade[]>;
   getTickers: (symbol?: string) => Observable<Ticker[]>;
   getDepth: (symbol: string, limit?: number) => Observable<CorrectedRestDepth>;
@@ -1006,7 +1009,7 @@ export type UnitedOrder = {
   id: number;
   time: number | Date;
   symbol: string;
-  type: string;
+  type: OrderType;
   side: OrderSide;
   stopPrice: number;
   price: number;
