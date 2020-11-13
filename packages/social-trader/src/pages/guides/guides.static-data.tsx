@@ -3,6 +3,7 @@ import Deposit1 from "media/guides/guides-1/Deposit1.png";
 import Deposit2 from "media/guides/guides-1/Deposit2.png";
 import Deposit3 from "media/guides/guides-1/Deposit3.png";
 import Withdrawal1 from "media/guides/guides-1/Withdrawal1.png";
+import { WALLET_TOTAL_PAGE_ROUTE } from "pages/wallet/wallet.paths";
 import React from "react";
 
 export type TGuide = {
@@ -10,13 +11,21 @@ export type TGuide = {
   canonicalName: string;
   name: string;
   content: JSX.Element;
-  button?: JSX.Element;
+  linkInfo?: {
+    link: string;
+    label: string;
+  };
 };
 
 export type TNavGuide = {
   id: string;
   name: string;
   guides: TGuide[];
+};
+
+const linkInfoDeposit = {
+  link: WALLET_TOTAL_PAGE_ROUTE,
+  label: "Deposit"
 };
 
 export const navGuides: TNavGuide[] = [
@@ -54,7 +63,8 @@ export const navGuides: TNavGuide[] = [
               src={Deposit1}
             />
           </>
-        )
+        ),
+        linkInfo: linkInfoDeposit
       },
       {
         id: "deposit-2",
@@ -85,7 +95,8 @@ export const navGuides: TNavGuide[] = [
             <ImageBaseElement alt={"Deposit via bank card"} src={Deposit2} />
             <ImageBaseElement alt={"Deposit via bank card"} src={Deposit3} />
           </>
-        )
+        ),
+        linkInfo: linkInfoDeposit
       },
       {
         id: "deposit-3",
@@ -111,7 +122,8 @@ export const navGuides: TNavGuide[] = [
             </ol>
             <ImageBaseElement alt={"Deposit via bank card"} src={Withdrawal1} />
           </>
-        )
+        ),
+        linkInfo: linkInfoDeposit
       }
     ]
   }
