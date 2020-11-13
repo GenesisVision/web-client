@@ -10,7 +10,7 @@ import { TerminalCurrency } from "pages/trade/binance-trade-page/trading/termina
 import React, { useCallback, useContext } from "react";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
-import { formatCurrencyValue } from "utils/formatter";
+import { formatCurrencyValue, formatValue } from "utils/formatter";
 
 import styles from "./market-watch.module.scss";
 
@@ -83,7 +83,7 @@ export const MarketWatchRow: React.FC<Props> = React.memo(
               {priceChangePercent} %
             </Text>
           ) : (
-            <Text color={getTextColor(+volume)}>{volume}</Text>
+            <Text color={getTextColor(+volume)}>{Math.round(volume)}</Text>
           )}
         </td>
       </tr>
