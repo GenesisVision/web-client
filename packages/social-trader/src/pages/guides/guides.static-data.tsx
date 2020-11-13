@@ -124,7 +124,7 @@ export const navGuides: TNavGuide[] = [
                 your e-mail address.
               </li>
             </ol>
-            <ImageBaseElement alt={"Deposit via bank card"} src={Withdrawal1} />
+            <ImageBaseElement alt={"Withdrawal"} src={Withdrawal1} />
           </>
         ),
         linkInfo: linkInfoDeposit
