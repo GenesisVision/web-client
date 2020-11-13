@@ -33,10 +33,15 @@
   &__content {
     @include adaptive-padding(bottom, $padding-medium);
     @include font-size($font-size-paragraph);
+    line-height: 1.7;
 
     img {
       @include adaptive-margin(top, $padding-xsmall);
       max-width: 100%;
+
+      ~ img {
+        margin-top: 0;
+      }
     }
   }
 
