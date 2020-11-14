@@ -1,55 +1,59 @@
 import { Button } from "components/button/button";
 import { DefaultBlock } from "components/default.block/default.block";
 import GuideBlockLink from "components/guides/guide-block/guide-block-link";
-import { Guide } from "gv-api-web";
-import React, { useCallback } from "react";
+import Link from "components/link/link";
+import { useToLink } from "components/link/link.helper";
+import { TGuide } from "pages/guides/guides.static-data";
+import React from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
-import { isAuthenticatedSelector } from "reducers/auth-reducer";
 
 import styles from "./guide-block.module.scss";
 
+export type IPrevNextGuide = {
+  link: string;
+  name: string;
+};
+
 interface Props {
-  guide: Guide;
-  prevGuideName?: string;
-  nextGuideName?: string;
-  onClickPass: (id: string) => void;
+  guide: TGuide;
+  prevGuide: IPrevNextGuide | null;
+  nextGuide: IPrevNextGuide | null;
 }
 
 const _GuideBlock: React.FC<Props> = ({
-  guide,
-  nextGuideName,
-  prevGuideName,
-  onClickPass
+  guide: { name, content, linkInfo },
+  nextGuide,
+  prevGuide
 }) => {
-  const isAuthenticated = useSelector(isAuthenticatedSelector);
-  const handlePass = useCallback(() => {
-    if (guide.isPassed) return null;
-    onClickPass(guide.id);
-  }, [guide]);
   const [t] = useTranslation();
+  const { linkCreator } = useToLink();
   return (
     <DefaultBlock size={"xlarge"} solid className={styles["guide-block"]}>
-      <h3 className={styles["guide-block__subtitle"]}>{guide.name}</h3>
-      <div className={styles["guide-block__content"]}>{guide.content}</div>
+      <h2 className={styles["guide-block__subtitle"]}>{name}</h2>
+      <div className={styles["guide-block__content"]}>{content}</div>
       <div className={styles["guide-block__controls"]}>
-        {prevGuideName && (
-          <GuideBlockLink guideCanonicalName={prevGuideName}>
+        {prevGuide && (
+          <GuideBlockLink guideLink={prevGuide.link} guideName={prevGuide.name}>
             {t("guides:controls.back")}
           </GuideBlockLink>
         )}
-        {isAuthenticated && (
-          <Button
-            className={styles["guide-block__button"]}
-            onClick={handlePass}
-            isSuccessful={guide.isPassed}
-            disabled={guide.isPassed}
-          >
-            {t("guides:controls.done")}
-          </Button>
+        {linkInfo && (
+          <Link to={linkCreator(linkInfo.link)}>
+            <Button
+              className={styles["guide-block__button"]}
+              size={"middle"}
+              color="primary"
+            >
+              {linkInfo.label}
+            </Button>
+          </Link>
         )}
-        {nextGuideName && (
-          <GuideBlockLink guideCanonicalName={nextGuideName} isNext>
+        {nextGuide && (
+          <GuideBlockLink
+            guideLink={nextGuide.link}
+            guideName={nextGuide.name}
+            isNext
+          >
             {t("guides:controls.next")}
           </GuideBlockLink>
         )}

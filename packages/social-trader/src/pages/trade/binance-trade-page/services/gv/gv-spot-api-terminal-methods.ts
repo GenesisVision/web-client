@@ -1,4 +1,5 @@
 import { GVTerminalMethods } from "pages/trade/binance-trade-page/services/gv/gv-api-terminal-methods";
+import { getKlines } from "pages/trade/binance-trade-page/services/spot/binance-spot-http.service";
 import { ITerminalMethods } from "pages/trade/binance-trade-page/trading/terminal.types";
 
 import {
@@ -15,7 +16,6 @@ import {
   getAllOrders,
   getDepth,
   getExchangeInfo,
-  getKlines,
   getOpenOrders,
   getServerTime,
   getTickers,

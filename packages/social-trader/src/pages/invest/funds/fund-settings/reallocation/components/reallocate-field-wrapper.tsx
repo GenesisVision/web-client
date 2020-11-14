@@ -9,6 +9,8 @@ const _ReallocateFieldWrapper: React.FC<Props> = props => {
   const { setFieldValue, name } = props;
 
   const { data: platformAssets } = useApiRequest({
+    name: "getTradingAssets",
+    cache: true,
     request: getTradingAssets,
     fetchOnMount: true
   });

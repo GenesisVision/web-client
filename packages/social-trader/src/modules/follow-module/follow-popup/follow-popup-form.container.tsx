@@ -54,6 +54,8 @@ const _FollowPopupFormContainer: React.FC<Props> = ({
 
   const getAccountsMethod = isExternal ? fetchExternalAccounts : fetchAccounts;
   const { data: accounts } = useApiRequest({
+    name: "FollowPopupFormContainer",
+    cache: true,
     request: () => getAccountsMethod({ id }),
     fetchOnMount: true
   });

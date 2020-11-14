@@ -15,6 +15,8 @@ const _FundWithdrawPopupContainer: React.FC<IFundWithdrawPopupProps> = ({
   onClose
 }) => {
   const { data, errorMessage } = useApiRequest({
+    name: "FundWithdrawPopupContainer",
+    cache: true,
     request: () => getFundWithdrawInfo({ id }),
     fetchOnMount: true
   });

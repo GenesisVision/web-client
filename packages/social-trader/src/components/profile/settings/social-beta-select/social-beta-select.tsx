@@ -1,4 +1,4 @@
-import { fetchProfileHeaderInfo } from "components/header/header.service";
+import { ProfileHeaderInfoAction } from "components/header/actions/header-actions";
 import SwitchWithQuestion from "components/switch-with-question/switch-with-question";
 import { TooltipContent } from "components/tooltip/tooltip-content";
 import useApiRequest from "hooks/api-request.hook";
@@ -26,7 +26,7 @@ const _SocialBetaSelect: React.FC = () => {
   }, [isBetaTester]);
   const request = isTester ? setSocialTesterOff : setSocialTesterOn;
   const updateHeaderMiddleware = () => {
-    dispatch(fetchProfileHeaderInfo);
+    dispatch(ProfileHeaderInfoAction());
   };
   const setMiddleware = () => {
     setTesterValue(!isTester);

@@ -32,6 +32,8 @@ const _ManagerData: React.FC<Props> = ({ canWritePost, id }) => {
   const { sendRequest, data = UserDataInitialCount } = useApiRequest<
     IAssetsCountModel
   >({
+    name: "ManagerData",
+    cache: true,
     request: fetchManagerAssetsCount
   });
 

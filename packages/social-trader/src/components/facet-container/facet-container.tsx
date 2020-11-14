@@ -15,34 +15,6 @@ import { RootState } from "reducers/root-reducer";
 import { createSelector } from "reselect";
 import { CurrencyEnum } from "utils/types";
 
-const _FacetContainer: React.FC<Props> = props => {
-  const { initCurrency, TableContainer, getItems, title } = props;
-  const facets = useSelector((state: RootState) =>
-    facetsSelector(state, props)
-  );
-  const facet = useSelector((state: RootState) => facetSelector(state, props));
-  const currencies = useSelector(platformCurrenciesSelector);
-  const currency = useAccountCurrency();
-  const getFacetItems = useCallback(
-    filtering => getItems({ ...filtering, facetId: facet!.id }),
-    [facet, getItems]
-  );
-  if (!facets) return null;
-  if (!facet) return <NotFoundPage />;
-  const { sorting, timeframe } = facet!;
-  return (
-    <TableContainer
-      initCurrency={initCurrency}
-      title={title}
-      sorting={sorting}
-      timeframe={timeframe}
-      getItems={getFacetItems}
-      currency={currency}
-      currencies={currencies}
-    />
-  );
-};
-
 const facetsSelector = createSelector<
   RootState,
   Props,
@@ -90,6 +62,35 @@ export enum FACET_ASSET {
   FUNDS = "fundInfo",
   FOLLOWS = "followInfo"
 }
+
+const _FacetContainer: React.FC<Props> = props => {
+  const { id, initCurrency, TableContainer, getItems, title } = props;
+  const facets = useSelector((state: RootState) =>
+    facetsSelector(state, props)
+  );
+  const facet = useSelector((state: RootState) => facetSelector(state, props));
+  const currencies = useSelector(platformCurrenciesSelector);
+  const currency = useAccountCurrency();
+  const getFacetItems = useCallback(
+    filtering => getItems({ ...filtering, facetId: facet!.id }),
+    [facet, getItems]
+  );
+  if (!facets) return null;
+  if (!facet) return <NotFoundPage />;
+  const { sorting, timeframe } = facet!;
+  return (
+    <TableContainer
+      name={id}
+      initCurrency={initCurrency}
+      title={title}
+      sorting={sorting}
+      timeframe={timeframe}
+      getItems={getFacetItems}
+      currency={currency}
+      currencies={currencies}
+    />
+  );
+};
 
 const FacetContainer = React.memo(_FacetContainer);
 export default FacetContainer;

@@ -73,7 +73,7 @@ export const TradingPriceContextProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     if (list[0]) setPrice(String(list[0].price));
-  }, [list]);
+  }, [baseAsset, quoteAsset, list.length === 0]);
 
   const value = useMemo(
     () => ({

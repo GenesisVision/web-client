@@ -1,12 +1,12 @@
 import GuidesListHeader from "components/guides/guides-list/guides-list-header";
 import GuidesListItem from "components/guides/guides-list/guides-list-item";
-import { Guide } from "gv-api-web";
+import { TGuide } from "pages/guides/guides.static-data";
 import React, { useCallback, useEffect, useState } from "react";
 
 import styles from "./guides-list.module.scss";
 
 interface Props {
-  guides: Guide[];
+  guides: TGuide[];
   name: string;
   currentId?: string;
 }

@@ -36,6 +36,8 @@ const _ManagerFunds: React.FC<Props> = ({ title, investorId, ownerId }) => {
 
   return (
     <TableModule
+      name={"ManagerFunds" + ownerId}
+      cache
       loaderData={userFundListLoaderData}
       columns={[{ name: "" }]}
       title={title}

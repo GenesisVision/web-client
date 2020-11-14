@@ -51,9 +51,13 @@ const _ProgramDeposit: React.FC<Props> = ({
     broker
   );
   const { data: minDeposits, sendRequest: getMinDeposits } = useApiRequest({
+    name: "getMinProgramDeposits",
+    cache: true,
     request: getMinProgramDeposits
   });
   const { data: withdrawInfo, sendRequest: getWithdrawInfo } = useApiRequest({
+    name: "getProgramWithdrawInfo",
+    cache: true,
     request: getProgramWithdrawInfo
   });
   useEffect(() => {

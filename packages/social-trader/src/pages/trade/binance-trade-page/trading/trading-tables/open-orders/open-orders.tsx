@@ -83,7 +83,7 @@ export const OpenOrders: React.FC<Props> = ({ items }) => {
             side={side}
             price={String(price)}
             origQty={String(quantity)}
-            filled={(quantity / quantityFilled) * 100}
+            filled={(quantityFilled / quantity) * 100}
             total={+quantity * +price}
           />
         );

@@ -7,6 +7,7 @@ import DashboardBlock, {
 } from "../dashboard-block/dashboard-block";
 
 interface Props {
+  name: string;
   orientation?: DashboardBlockOrientation;
   label: string;
   loaderData: any;
@@ -14,12 +15,15 @@ interface Props {
 }
 
 const _DashboardPieChartBlock: React.FC<Props> = ({
+  name,
   orientation,
   label,
   request,
   loaderData
 }) => {
   const { data, sendRequest } = useApiRequest<any>({
+    name,
+    cache: true,
     request
   });
   useEffect(() => {

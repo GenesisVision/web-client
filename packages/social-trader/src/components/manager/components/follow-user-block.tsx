@@ -19,6 +19,8 @@ const _FollowUserBlock: React.FC<Props> = ({
   profile: { id, personalDetails, followers, following }
 }) => {
   const { data, sendRequest } = useApiRequest({
+    name: "FollowUserBlock",
+    cache: true,
     request: () => getUserProfile(id)
   });
   const isOwnPage = useIsOwnPage(id);

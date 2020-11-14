@@ -10,6 +10,8 @@ const _DashboardFollowThemContainer: React.FC<Props> = () => {
   const { updateData } = useContext(DataStorageContext);
   const [t] = useTranslation();
   const { data, sendRequest } = useApiRequest({
+    name: "DashboardFollowThemContainer",
+    cache: true,
     request: getFollowThem,
     fetchOnMount: true
   });
