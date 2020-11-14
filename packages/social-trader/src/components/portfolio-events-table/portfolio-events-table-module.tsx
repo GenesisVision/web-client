@@ -46,7 +46,7 @@ const _PortfolioEventsTableModule: React.FC<IPortfolioEventsTableOwnProps> = ({
   return (
     <div className={className}>
       <TableModule
-        name={"PortfolioEventsTableModule" + historyType}
+        name={"PortfolioEventsTableModule"}
         cache
         filtering={DASHBOARD_PORTFOLIO_EVENTS_DEFAULT_FILTERING}
         defaultFilters={DASHBOARD_PORTFOLIO_EVENTS_FILTERS}
