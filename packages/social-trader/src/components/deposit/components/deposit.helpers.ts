@@ -14,11 +14,13 @@ export const isAllow = (currency: string) => ({
   (formattedValue === "" || validateFraction(value, currency)) && value !== ".";
 
 export enum DEPOSIT_FORM_FIELDS {
+  availableInWallet = "availableInWallet",
   amount = "amount",
   walletId = "walletId"
 }
 
 export interface IDepositFormValues {
+  [DEPOSIT_FORM_FIELDS.availableInWallet]: number;
   [DEPOSIT_FORM_FIELDS.amount]: number | string;
   [DEPOSIT_FORM_FIELDS.walletId]: string;
 }
