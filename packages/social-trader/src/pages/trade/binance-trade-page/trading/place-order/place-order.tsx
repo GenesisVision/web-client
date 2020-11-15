@@ -6,7 +6,6 @@ import { WalletIcon } from "components/icon/wallet-icon";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
-import { useAlerts } from "hooks/alert.hook";
 import useApiRequest from "hooks/api-request.hook";
 import useTab from "hooks/tab.hook";
 import { TerminalDefaultBlock } from "pages/trade/binance-trade-page/trading/components/terminal-default-block/terminal-default-block";
@@ -24,16 +23,13 @@ import React, { useCallback, useContext, useState } from "react";
 import { LimitTradeForm } from "./limit-trade-form";
 import { MarketTradeForm } from "./market-trade-form";
 import {
-  generateMessage,
   getBalance,
   getBalancesLoaderData,
-  IPlaceOrderFormValues,
-  TRADE_FORM_FIELDS
+  IPlaceOrderFormValues
 } from "./place-order.helpers";
 import styles from "./place-order.module.scss";
 
 const _PlaceOrder: React.FC = () => {
-  const { successAlert } = useAlerts();
   const { tradeRequest } = useContext(TerminalMethodsContext);
   const { price } = useContext(TradingPriceContext);
 
@@ -60,14 +56,6 @@ const _PlaceOrder: React.FC = () => {
         side,
         type: tab,
         symbol: getSymbol(baseAsset, quoteAsset)
-      }).then(() => {
-        const message = generateMessage({
-          quantity: values[TRADE_FORM_FIELDS.quantity],
-          side,
-          type: tab,
-          symbol: getSymbol(baseAsset, quoteAsset)
-        });
-        successAlert(message);
       });
     },
     [

@@ -22,14 +22,11 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
 
-import {
-  IStopLimitFormValues,
-  placeOrderStopLimitValidationSchema,
-  TRADE_FORM_FIELDS,
-  usePlaceOrderAutoFill,
-  usePlaceOrderFormReset,
-  usePlaceOrderInfo
-} from "./place-order.helpers";
+import { usePlaceOrderAutoFill } from "./place-order-auto-fill.hook";
+import { usePlaceOrderFormReset } from "./place-order-form-reset.hook";
+import { usePlaceOrderInfo } from "./place-order-info-hook";
+import { placeOrderStopLimitValidationSchema } from "./place-order-validation";
+import { IStopLimitFormValues, TRADE_FORM_FIELDS } from "./place-order.helpers";
 
 export interface IStopLimitTradeFormProps {
   status: API_REQUEST_STATUS;

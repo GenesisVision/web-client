@@ -1,8 +1,4 @@
 import { useAccountCurrency } from "hooks/account-currency.hook";
-import {
-  getLotSizeFilter,
-  getSymbolPriceFilter
-} from "pages/trade/binance-trade-page/trading/place-order/place-order.helpers";
 import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/terminal-methods.context";
 import {
   filterOutboundAccountInfoStream,
