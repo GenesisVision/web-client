@@ -26,7 +26,11 @@ import { usePlaceOrderAutoFill } from "./place-order-auto-fill.hook";
 import { usePlaceOrderFormReset } from "./place-order-form-reset.hook";
 import { usePlaceOrderInfo } from "./place-order-info-hook";
 import { placeOrderStopLimitValidationSchema } from "./place-order-validation";
-import { IStopLimitFormValues, TRADE_FORM_FIELDS } from "./place-order.helpers";
+import {
+  getBalance,
+  IStopLimitFormValues,
+  TRADE_FORM_FIELDS
+} from "./place-order.helpers";
 
 export interface IStopLimitTradeFormProps {
   status: API_REQUEST_STATUS;
@@ -102,6 +106,10 @@ const _StopLimitTradeForm: React.FC<IStopLimitTradeFormProps & {
   });
 
   usePlaceOrderAutoFill({
+    buyWalletAvailable: getBalance(balances, quoteAsset),
+    sellWalletAvailable: getBalance(balances, baseAsset),
+    setSliderValue,
+    side,
     totalName: TRADE_FORM_FIELDS.total,
     quantityName: TRADE_FORM_FIELDS.quantity,
     setValue,

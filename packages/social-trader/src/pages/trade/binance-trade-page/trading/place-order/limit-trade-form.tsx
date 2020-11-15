@@ -27,6 +27,7 @@ import { usePlaceOrderFormReset } from "./place-order-form-reset.hook";
 import { usePlaceOrderInfo } from "./place-order-info-hook";
 import { placeOrderDefaultValidationSchema } from "./place-order-validation";
 import {
+  getBalance,
   IPlaceOrderFormValues,
   TRADE_FORM_FIELDS
 } from "./place-order.helpers";
@@ -103,6 +104,10 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
   });
 
   usePlaceOrderAutoFill({
+    buyWalletAvailable: getBalance(balances, quoteAsset),
+    sellWalletAvailable: getBalance(balances, baseAsset),
+    setSliderValue,
+    side,
     totalName: TRADE_FORM_FIELDS.total,
     quantityName: TRADE_FORM_FIELDS.quantity,
     setValue,

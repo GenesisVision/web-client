@@ -1,10 +1,11 @@
 import { Slider } from "components/range/range";
 import { RANGE_MARKS } from "pages/trade/binance-trade-page/trading/place-order/place-order.helpers";
-import React from "react";
+import { SetSliderValueFunc } from "pages/trade/binance-trade-page/trading/place-order/trade-slider.hook";
+import React, { useCallback } from "react";
 
 export interface IPlaceOrderSliderProps {
   value?: number;
-  setValue: (value: number) => void;
+  setValue: SetSliderValueFunc;
 }
 
 const _PlaceOrderSlider: React.FC<IPlaceOrderSliderProps> = ({
@@ -18,7 +19,9 @@ const _PlaceOrderSlider: React.FC<IPlaceOrderSliderProps> = ({
       max={100}
       marks={RANGE_MARKS}
       value={value}
-      onChange={setValue}
+      onChange={useCallback((value: number) => setValue(value, false), [
+        setValue
+      ])}
     />
   );
 };

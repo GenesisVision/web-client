@@ -8,12 +8,17 @@ import {
   AssetBalance,
   OrderSide
 } from "pages/trade/binance-trade-page/trading/terminal.types";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { calculatePercentage } from "utils/currency-converter";
 import { formatValue } from "utils/formatter";
 import { AnyObjectType } from "utils/types";
 
 import { getBalance } from "./place-order.helpers";
+
+export type SetSliderValueFunc = (
+  sliderValue?: number,
+  shouldUpdate?: boolean
+) => void;
 
 export const useTradeSlider = ({
   watch,
@@ -33,11 +38,16 @@ export const useTradeSlider = ({
     stepSize,
     terminalType
   } = useContext(TerminalInfoContext);
+  const { price } = watch();
   const [sliderValue, setSliderValue] = useState<number | undefined>();
-  useEffect(() => {
-    if (sliderValue === undefined) return;
+
+  const handleSetSlider: SetSliderValueFunc = (
+    sliderValue,
+    shouldUpdate = true
+  ) => {
+    setSliderValue(sliderValue);
+    if (sliderValue === undefined || !shouldUpdate) return;
     if (side === "Buy") {
-      const { price } = watch();
       const walletAvailable = +getBalance(balances, quoteAsset);
       const fullTotal = calculatePercentage(walletAvailable, sliderValue);
       const newAmount = truncated(
@@ -62,6 +72,6 @@ export const useTradeSlider = ({
       });
       setValue(quantityName, newQuantity, true);
     }
-  }, [sliderValue]);
-  return { sliderValue, setSliderValue };
+  };
+  return { sliderValue, setSliderValue: handleSetSlider };
 };
