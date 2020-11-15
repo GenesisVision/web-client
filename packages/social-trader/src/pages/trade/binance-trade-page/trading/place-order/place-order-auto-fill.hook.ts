@@ -30,6 +30,7 @@ export const usePlaceOrderAutoFill = ({
         tickSize: stepSize
       });
       if (isNaN(value)) return;
+      if (value === quantity) return;
       if (value > 0 || String(total) === "0") {
         setValue(quantityName, value, true);
         setAutoFill(true);
@@ -43,6 +44,7 @@ export const usePlaceOrderAutoFill = ({
         tickSize: tickSize
       });
       if (isNaN(value)) return;
+      if (value === total) return;
       if (value > 0 || String(quantity) === "0") {
         setValue(totalName, value, true);
         setAutoFill(true);
@@ -57,6 +59,7 @@ export const usePlaceOrderAutoFill = ({
           tickSize: tickSize
         });
         if (isNaN(value)) return;
+        if (value === total) return;
         setValue(totalName, value, true);
         setAutoFill(true);
       }
