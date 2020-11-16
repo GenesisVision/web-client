@@ -72,7 +72,7 @@ const _OpenOrdersRow: React.FC<Props> = ({
       <TableCell>
         {terminalMoneyFormat({ amount: origQty, tickSize: String(stepSize) })}
       </TableCell>
-      <TableCell>{filled}</TableCell>
+      <TableCell>{filled}%</TableCell>
       <TableCell>
         {terminalMoneyFormat({ amount: total, tickSize: String(tickSize) })}
       </TableCell>
