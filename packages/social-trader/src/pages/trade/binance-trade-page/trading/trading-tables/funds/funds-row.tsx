@@ -1,4 +1,3 @@
-import { getSymbolPrice } from "pages/trade/binance-trade-page/trading/market-watch/market-watch.helpers";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
 import { TerminalTickerContext } from "pages/trade/binance-trade-page/trading/terminal-ticker.context";
 import {
@@ -26,7 +25,7 @@ const _FundsFRow: React.FC<Props> = ({ asset, available, locked }) => {
     <tr>
       <td>{asset}</td>
       <td>{total}</td>
-      <td>{available}</td>
+      <td>{formatValueWithTick(available, "0.00000001")}</td>
       <td>{locked}</td>
       <td>{btcValue}</td>
       {terminalType === "futures" && (
