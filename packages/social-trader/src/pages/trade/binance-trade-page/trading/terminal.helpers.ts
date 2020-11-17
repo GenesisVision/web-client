@@ -9,8 +9,7 @@ import {
   Account,
   AssetBalance,
   ExchangeInfo,
-  ExecutionReport,
-  SymbolFilter,
+  MergedTickerSymbolType,
   TerminalAuthDataType,
   TerminalCurrency,
   UnitedOrder
@@ -34,6 +33,15 @@ export const DEFAULT_SYMBOL: SymbolState = {
 };
 const TRADE_AUTH_DATA_KEY = "TRADE_AUTH_DATA_KEY";
 const initialState = { publicKey: "", privateKey: "" };
+
+export const getSymbolData = (
+  symbolList: MergedTickerSymbolType[],
+  symbol: string
+): SymbolState | undefined => {
+  const symbolData = symbolList.find(data => data.symbol === symbol);
+  if (!symbolData) return;
+  return { baseAsset: symbolData.baseAsset, quoteAsset: symbolData.quoteAsset };
+};
 
 const updateUrl = ({
   reloadPage,
