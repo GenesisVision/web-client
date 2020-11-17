@@ -112,7 +112,7 @@ export const faqGeneral: TAccordion[] = [
         </a>
         <br />
         Or you can use a web version (you need to disable your ad blocker for
-        trading)
+        trading){" "}
         <a
           target="_blank"
           rel="noopener noreferrer"
@@ -210,7 +210,7 @@ export const faqGeneral: TAccordion[] = [
     content: (
       <p>
         You can deposit using one of the following cryptocurrencies: BTC, ETH,
-        GVT, or USDT.
+        GVT, USDT or USDC.
       </p>
     )
   },
@@ -219,9 +219,18 @@ export const faqGeneral: TAccordion[] = [
     title: "Can I deposit with a credit card?",
     content: (
       <p>
-        Yes, you can deposit BTC, ETH, or USDT directly into your Genesis Vision
-        account using your credit/debit card through our payment processor
-        MoonPay. It holds the transaction in EUR and then converts to the
+        Yes, you can deposit BTC, ETH, USDT or USDC directly into your Genesis
+        Vision account using your credit/debit card through our payment
+        processor{" "}
+        <a
+          target="_blank"
+          title="MoonPay"
+          rel="noopener noreferrer"
+          href="https://www.moonpay.io/"
+        >
+          MoonPay
+        </a>
+        . It holds the transaction in EUR and then converts to the
         cryptocurrency you choose to deposit. The option «Buy with card» can be
         found in your wallet.
       </p>
@@ -332,7 +341,7 @@ export const faqGeneral: TAccordion[] = [
     content: (
       <p>
         If you wish to close your account, please send a request using the email
-        address you have registered your account with to our support team:
+        address you have registered your account with to our support team:{" "}
         <a
           title={"Write a email to Genesis Vision support"}
           href="mailto:support@genesis.vision"
@@ -368,8 +377,8 @@ export const faqPrograms: TAccordion[] = [
         <p>
           The manager trades with his own and investors’ cumulative balance.
           Profits or losses are equally distributed among the investors based on
-          their share of the program (note that an investor’s request to
-          withdraw their capital from a program can only be executed at the end
+          their share of the Program (note that an investor’s request to
+          withdraw their capital from a Program can only be executed at the end
           of each period).
         </p>
       </>
@@ -460,7 +469,7 @@ export const faqPrograms: TAccordion[] = [
       <p>
         Yes, you can cancel your investment request unless it’s already
         processed. You can cancel it from the dashboard section or directly on
-        the program page.
+        the Program page.
       </p>
     )
   },
@@ -470,17 +479,22 @@ export const faqPrograms: TAccordion[] = [
     content: (
       <>
         <p>There are two fees the trader sets for their Program:</p>
-        <p>Entry fee - the commission for investment.</p>
+        <p>
+          Management fee - the commission that is paid to the manager by an
+          investor for the actual asset management period. Management fee is
+          defined in annual percentage and is charged at the end of each
+          reporting period.
+        </p>
         <p>
           Success fee - the commission charged from the profit. It is calculated
           as a percentage of the profits earned over a certain period. If there
           is no profit, then there is no success fee charged.
         </p>
         <p>
-          Besides the trader’s entry and success fees, there is also a platform
-          entry fee of 0.5% charged on any new investment and a 10% platform
-          success fee from the profit of the Programs. All success fees are
-          subject to the{" "}
+          Besides the trader’s management and success fees, there is also a
+          platform GV commission of 0.5% charged on any new investment and a 10%
+          platform success fee from the profit of the Programs. All success fees
+          are subject to the{" "}
           <a
             target="_blank"
             rel="noopener noreferrer"
@@ -512,7 +526,7 @@ export const faqPrograms: TAccordion[] = [
     content: (
       <p>
         If you are not happy with your current investment, you can always
-        request a withdrawal from the program. You can withdraw a certain amount
+        request a withdrawal from the Program. You can withdraw a certain amount
         or choose the “Withdraw all” option if you want to withdraw all your
         funds. Processing of your request will occur at the end of the Program’s
         reporting period.
@@ -613,18 +627,16 @@ export const faqPrograms: TAccordion[] = [
         A stop out is a compulsory closing of positions at current market prices
         when a loss reaches the stop out level. The period is automatically
         closed, and all investments are distributed to investors minus the loss.
-        Investors who had investments in the program when the stop out triggered
-        will not pay any entry fee if they invest in the following period.
       </p>
     )
   },
   {
     id: "programs-17",
-    title: "How do I create a program?",
+    title: "How do I create a Program?",
     content: (
       <p>
         You will first need to create a private trading account. You can do that
-        in the <b>Trade</b> section on the platform. Once this is created, you
+        in the <b>Trading</b> section on the platform. Once this is created, you
         can upgrade your private trading account to either: Program or signal
         account (Follow). Now your trading account is public and can attract
         investments or followers.
@@ -704,7 +716,7 @@ export const faqPrograms: TAccordion[] = [
     content: (
       <p>
         Yes, you can set a maximum investment amount for your Program. You can
-        change this after you have created the program. The investment limit can
+        change this after you have created the Program. The investment limit can
         be set in the Program settings.
       </p>
     )
@@ -754,10 +766,10 @@ export const faqFunds: TAccordion[] = [
       <>
         <p>GV Funds are asset portfolios, assembled by traders.</p>
         <p>
-          To create a fund, you can choose any number of assets and set their
+          To create a Fund, you can choose any number of assets and set their
           target, which is an initial percentage allocation (the manager decides
           the total weight of each asset in their portfolio). When you invest in
-          a GV Fund, you purchase all the assets included in the fund in the
+          a GV Fund, you purchase all the assets included in the Fund in the
           defined proportions.
         </p>
         <p>
@@ -800,8 +812,8 @@ export const faqFunds: TAccordion[] = [
         the Genesis Vision Fund, the proportion of the allocated funds may
         change. The desired percentage selected by the trader is called{" "}
         <b>Target</b>, while <b>Current</b> shows the current allocation of
-        Funds. Rebalancing of the Funds occurs automatically each week to meet
-        their target allocation values.
+        Funds. Rebalancing of the Funds occurs automatically every three days to
+        meet their target allocation values.
       </p>
     )
   },
@@ -821,7 +833,7 @@ export const faqFunds: TAccordion[] = [
         </p>
         <p>
           Besides the trader’s entry and exit fee, there is a Genesis Vision
-          commission of 0.5% charged from every investment in funds.
+          commission of 0.5% charged from every investment in Funds.
         </p>
       </>
     )
@@ -832,10 +844,10 @@ export const faqFunds: TAccordion[] = [
     content: (
       <p>
         To set up a Genesis Vision Fund, there is a requirement for the trader
-        to invest 50 GVT (or an equivalent amount of BTC/ETH/USDT) of their own
-        funds. Once the Fund is created, the trader will profit from the Fund on
-        the same basis as their investors, with additional profit coming from
-        entry and exit commissions.
+        to invest 50 GVT (or an equivalent amount of BTC/ETH/USDT/USDC) of their
+        own funds. Once the Fund is created, the trader will profit from the
+        Fund on the same basis as their investors, with additional profit coming
+        from entry and exit commissions.
       </p>
     )
   },
@@ -882,12 +894,12 @@ export const faqFunds: TAccordion[] = [
     content: (
       <>
         <p>
-          The trader can reallocate 3% of their fund per day (cumulative).
-          Example: you can change 30% of the fund's allocation after 10 days.
+          The trader can reallocate 3% of their Fund per day (cumulative).
+          Example: you can change 30% of the Fund's allocation after 10 days.
         </p>
         <p>
           Apart from that you can always change fees values as well as title,
-          description and avatar
+          description and avatar.
         </p>
       </>
     )
@@ -936,7 +948,7 @@ export const faqFunds: TAccordion[] = [
 export const faqFollow: TAccordion[] = [
   {
     id: "follow-1",
-    title: "What is Genesis Vision Follow",
+    title: "What is Genesis Vision Follow?",
     content: (
       <>
         <p>
@@ -1063,6 +1075,24 @@ export const faqFollow: TAccordion[] = [
           opens a trade with a volume of 10 USD. Subscriber balance = 20 USD,
           this means it will open the position for the same asset but with a
           volume of 5 times lower which is 2 USD.
+          <br />
+          It is a little different if you follow Binance traders. When choosing
+          by balance subscription, the volume of the position opened is
+          proportional to the coin balance of the leader and the follower.
+          <br />
+          For example, Provider has 100 USDT and 20 GVT on the External account
+          (in this example 1 GVT = 2 USDT).
+          <br />
+          Provider balance = 140 USDT (100 + 20 * 2)
+          <br />
+          The subscriber has 30 USDT and 20 GVT.
+          <br />
+          Subscriber balance = 70 USDT (30 + 20 * 2)
+          <br />
+          Provider opens a trade to buy ADAUSDT, volume = 100.
+          <br />
+          The subscriber will copy the position for the same asset (ADAUSDT) but
+          with a volume of 30.
         </p>
         <p>
           <b>Percentage.</b> When you choose this subscription, you set the
@@ -1109,8 +1139,9 @@ export const faqFollow: TAccordion[] = [
           You can cancel your subscription on the trader’s page or in your
           dashboard.
           <br />
-          There are three ways to cancel your subscription: close only, close
-          all immediately, and manual closing.
+          There are three ways to cancel your subscription to Genesis Markets
+          trader: close only, close all immediately, and manual closing. For
+          Binance trader the only available way is manual closing.
         </p>
         <p>
           <b>Close only.</b> The new trades will stop opening, and the remaining
