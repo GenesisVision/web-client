@@ -14,7 +14,6 @@ const _PlaceOrderSlider: React.FC<IPlaceOrderSliderProps> = ({
 }) => {
   return (
     <Slider
-      included={false}
       min={0}
       max={100}
       marks={RANGE_MARKS}
