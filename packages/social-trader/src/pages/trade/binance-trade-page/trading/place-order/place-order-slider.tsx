@@ -19,9 +19,7 @@ const _PlaceOrderSlider: React.FC<IPlaceOrderSliderProps> = ({
       max={100}
       marks={RANGE_MARKS}
       value={value}
-      onChange={useCallback((value: number) => setValue(value, false), [
-        setValue
-      ])}
+      onChange={useCallback((value: number) => setValue(value), [setValue])}
     />
   );
 };
