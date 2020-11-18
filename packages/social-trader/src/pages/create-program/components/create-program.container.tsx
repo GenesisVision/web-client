@@ -32,7 +32,7 @@ const _CreateProgramContainer: React.FC<Props> = ({
     ({ name }) => name.toLowerCase() === requestBrokerName.toLowerCase()
   );
   const [selectedBroker, setSelectedBroker] = useState<BrokerCardType>(
-    broker || brokers[0]
+    broker || exchanges[0]
   );
 
   const confirmNavigateToBroker = useCallback(() => {
