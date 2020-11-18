@@ -58,7 +58,7 @@ const _CreateProgramContainer: React.FC<Props> = ({
       <Row size={"large"}>
         {tab === TAB.BROKER && (
           <BrokerSelectContainer
-            brokers={[...brokers, ...exchanges]}
+            brokers={[...exchanges, ...brokers]}
             setSelectedBroker={setSelectedBroker}
             navigateToSettings={navigateToSettings}
             selectedBroker={selectedBroker}
