@@ -35,8 +35,13 @@ const _Funds: React.FC<Props> = ({ items }) => {
           </Text>
         </th>
       )}
-      renderRow={({ asset, free, locked }: AssetBalance) => (
-        <FundsRow asset={asset} available={free} locked={locked} />
+      renderRow={({ asset, free, locked, amountInCurrency }: AssetBalance) => (
+        <FundsRow
+          amountInCurrency={amountInCurrency}
+          asset={asset}
+          available={free}
+          locked={locked}
+        />
       )}
     />
   );
