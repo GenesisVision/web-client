@@ -6,7 +6,7 @@ import Withdrawal1 from "media/guides/guides-1/Withdrawal1.png";
 import { WALLET_TOTAL_PAGE_ROUTE } from "pages/wallet/wallet.paths";
 import React from "react";
 
-export type TGuide = {
+export interface IGuide {
   id: string;
   canonicalName: string;
   name: string;
@@ -15,12 +15,12 @@ export type TGuide = {
     link: string;
     label: string;
   };
-};
+}
 
 export type TNavGuide = {
   id: string;
   name: string;
-  guides: TGuide[];
+  guides: IGuide[];
 };
 
 const linkInfoDeposit = {

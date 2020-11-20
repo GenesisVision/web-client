@@ -26,17 +26,12 @@ const _GuidesSection: React.FC<Props> = ({ navGuides }) => {
   return (
     <section className={styles["guides-section"]}>
       <h1 className={styles["guides-section__title"]}>{t("guides:title")}</h1>
-      <GuidesNav
-        navGuides={navGuides}
-        currentId={currentGuide && currentGuide.id}
+      <GuidesNav navGuides={navGuides} currentId={currentGuide.id} />
+      <GuideBlock
+        guide={currentGuide}
+        prevGuide={prevGuide}
+        nextGuide={nextGuide}
       />
-      {currentGuide && (
-        <GuideBlock
-          guide={currentGuide}
-          prevGuide={prevGuide}
-          nextGuide={nextGuide}
-        />
-      )}
     </section>
   );
 };

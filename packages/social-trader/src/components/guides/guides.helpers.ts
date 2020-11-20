@@ -1,18 +1,20 @@
 import { IPrevNextGuide } from "components/guides/guide-block/guide-block";
-import { TGuide, TNavGuide } from "pages/guides/guides.static-data";
+import { IGuide, TNavGuide } from "pages/guides/guides.static-data";
 import { safeGetElemFromArray } from "utils/helpers";
 
-export const getAllGuides = (navGuides: TNavGuide[]): TGuide[] => {
-  return navGuides.reduce((acc: TGuide[], current) => {
+export const getAllGuides = (navGuides: TNavGuide[]): IGuide[] => {
+  return navGuides.reduce((acc: IGuide[], current) => {
     return [...acc, ...current.guides];
   }, []);
 };
 
-export const getCurrentGuide = (allGuides: TGuide[], tab: string): TGuide => {
-  return safeGetElemFromArray(
-    allGuides,
-    guide => guide.canonicalName === tab.slice(1, tab.length)
-  );
+export const getCurrentGuide = (allGuides: IGuide[], tab?: string): IGuide => {
+  return tab
+    ? safeGetElemFromArray(
+        allGuides,
+        guide => guide.canonicalName === tab.slice(1, tab.length)
+      )
+    : allGuides[0];
 };
 
 interface IPrevNextGuidesProps {
@@ -21,8 +23,8 @@ interface IPrevNextGuidesProps {
 }
 
 export const getPrevNextGuides = (
-  allGuides: TGuide[],
-  currentGuide: TGuide
+  allGuides: IGuide[],
+  currentGuide: IGuide
 ): IPrevNextGuidesProps => {
   const currentIndex = allGuides.indexOf(currentGuide);
   const nextIndex = currentIndex + 1;

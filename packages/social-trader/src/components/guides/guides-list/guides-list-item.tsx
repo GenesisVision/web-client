@@ -2,13 +2,13 @@ import clsx from "clsx";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import { GUIDES_TOTAL_PAGE_ROUTE } from "pages/guides/guides.paths";
-import { TGuide } from "pages/guides/guides.static-data";
+import { IGuide } from "pages/guides/guides.static-data";
 import React from "react";
 
 import styles from "./guides-list.module.scss";
 
 interface Props {
-  guide: TGuide;
+  guide: IGuide;
   currentGuideId?: string;
 }
 
