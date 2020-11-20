@@ -3,7 +3,6 @@ import HookFormAmountField from "components/input-amount-field/hook-form-amount-
 import { LabeledValue } from "components/labeled-value/labeled-value";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
-import { Text } from "components/text/text";
 import { API_REQUEST_STATUS } from "hooks/api-request.hook";
 import { ReduceOnlyField } from "pages/trade/binance-trade-page/trading/place-order/place-order-settings/reduce-only-field/reduce-only-field";
 import { PlaceOrderSlider } from "pages/trade/binance-trade-page/trading/place-order/place-order-slider";
@@ -120,9 +119,7 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
           name={TRADE_FORM_FIELDS.price}
         />
       </Row>
-      <LabeledValue label={t("Price")}>
-        {t("Market price")} <Text muted>(≈ {outerPrice})</Text>
-      </LabeledValue>
+      <LabeledValue label={t("Price")}>{t("Market price")}</LabeledValue>
       <Row>
         <HookFormAmountField
           autoFocus={false}
