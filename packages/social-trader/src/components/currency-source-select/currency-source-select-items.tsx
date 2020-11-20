@@ -24,6 +24,7 @@ export const getCurrencySourceSelectItems = (
     return (
       <option value={id} key={id}>
         <CurrencyItemWithAmount
+          showName
           available={available}
           symbol={currency}
           logo={logo}
