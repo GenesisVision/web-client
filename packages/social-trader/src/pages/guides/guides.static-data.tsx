@@ -17,18 +17,18 @@ export interface IGuide {
   };
 }
 
-export type TNavGuide = {
+export interface INavGuide {
   id: string;
   name: string;
   guides: IGuide[];
-};
+}
 
 const linkInfoDeposit = {
   link: WALLET_TOTAL_PAGE_ROUTE,
   label: "Deposit"
 };
 
-export const navGuides: TNavGuide[] = [
+export const navGuides: INavGuide[] = [
   {
     id: "guides-1",
     name: "Deposit & Withdrawal",

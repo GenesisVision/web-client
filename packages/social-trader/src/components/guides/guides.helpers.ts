@@ -1,8 +1,8 @@
 import { IPrevNextGuide } from "components/guides/guide-block/guide-block";
-import { IGuide, TNavGuide } from "pages/guides/guides.static-data";
+import { IGuide, INavGuide } from "pages/guides/guides.static-data";
 import { safeGetElemFromArray } from "utils/helpers";
 
-export const getAllGuides = (navGuides: TNavGuide[]): IGuide[] => {
+export const getAllGuides = (navGuides: INavGuide[]): IGuide[] => {
   return navGuides.reduce((acc: IGuide[], current) => {
     return [...acc, ...current.guides];
   }, []);
