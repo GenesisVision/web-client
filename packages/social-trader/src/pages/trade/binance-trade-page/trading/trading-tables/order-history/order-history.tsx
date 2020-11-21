@@ -25,6 +25,7 @@ export const OrderHistory: React.FC<Props> = ({ items }) => {
         </th>
       )}
       renderRow={({
+        quoteQuantityFilled,
         executedQuantity,
         orderStatus,
         quantityFilled,
@@ -37,6 +38,7 @@ export const OrderHistory: React.FC<Props> = ({ items }) => {
         price
       }: UnitedOrder) => (
         <OrderHistoryRow
+          quoteQuantityFilled={quoteQuantityFilled}
           executedQuantity={executedQuantity}
           orderStatus={orderStatus}
           time={time}

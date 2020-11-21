@@ -17,6 +17,7 @@ interface Props {
   side: OrderSide;
   price: number;
   stopPrice: number;
+  quoteQuantityFilled: number;
   executedQuantity: number;
   origQty: number;
   filled: number;
@@ -24,6 +25,7 @@ interface Props {
 }
 
 const _OrderHistoryRow: React.FC<Props> = ({
+  quoteQuantityFilled,
   executedQuantity,
   orderStatus,
   time,
@@ -32,8 +34,6 @@ const _OrderHistoryRow: React.FC<Props> = ({
   side,
   price,
   stopPrice,
-  origQty,
-  filled,
   total
 }) => {
   const { exchangeInfo } = useContext(TerminalInfoContext);
@@ -54,14 +54,16 @@ const _OrderHistoryRow: React.FC<Props> = ({
       </TableCell>
       <TableCell>
         {terminalMoneyFormat({
-          amount: executedQuantity,
+          amount: quoteQuantityFilled,
           tickSize: String(stepSize)
         })}
       </TableCell>
       <TableCell>
-        {terminalMoneyFormat({ amount: origQty, tickSize: String(stepSize) })}
+        {terminalMoneyFormat({
+          amount: executedQuantity,
+          tickSize: String(stepSize)
+        })}
       </TableCell>
-      <TableCell>{filled}</TableCell>
       <TableCell>
         {terminalMoneyFormat({ amount: total, tickSize: String(tickSize) })}
       </TableCell>
