@@ -88,14 +88,21 @@ export const getOpenOrders = (
       ) as Promise<UnitedOrder[]>
   );
 
-export const getAllOrders = (
-  symbol: string,
-  accountId?: string
-): Observable<UnitedOrder[]> =>
+export const getAllTrades = (accountId?: string): Observable<UnitedOrder[]> =>
   from(
     api
       .terminal()
-      .getTradesHistory({ accountId })
+      .getTradesHistory({ accountId, mode: "TradeHistory" })
+      .then(({ items }: BinanceRawOrderItemsViewModel) =>
+        items.map(transformToUnitedOrder)
+      ) as Promise<UnitedOrder[]>
+  );
+
+export const getAllOrders = (accountId?: string): Observable<UnitedOrder[]> =>
+  from(
+    api
+      .terminal()
+      .getTradesHistory({ accountId, mode: "OrderHistory" })
       .then(({ items }: BinanceRawOrderItemsViewModel) =>
         items.map(transformToUnitedOrder)
       ) as Promise<UnitedOrder[]>
