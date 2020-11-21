@@ -170,10 +170,8 @@ export interface ITerminalMethods extends IGVTerminalMethods {
     symbol: string,
     accountId?: string
   ) => Observable<UnitedOrder[]>;
-  getAllOrders: (
-    symbol: string,
-    accountId?: string
-  ) => Observable<UnitedOrder[]>;
+  getAllTrades: (accountId?: string) => Observable<UnitedOrder[]>;
+  getAllOrders: (accountId?: string) => Observable<UnitedOrder[]>;
   getUserStreamKey: (accountId?: string) => Observable<{ listenKey: string }>;
   getAccountInformation: (
     accountId?: string,
@@ -1002,6 +1000,8 @@ export interface MyTrade {
 export type QueryOrderResult = BinanceRawOrder;
 
 export type UnitedOrder = {
+  commission: number;
+  quoteQuantityFilled: number;
   executionType?: BinanceExecutionType;
   orderStatus?: BinanceOrderStatus;
   eventType?: EventType;
