@@ -1,8 +1,6 @@
 import { TTabsItem } from "pages/landing-page/components/tab-controls/tab-controls";
 import BinanceLogo from "pages/landing-page/images/brokers/binance.png";
 import ExanteLogo from "pages/landing-page/images/brokers/exante.png";
-import GMBg from "pages/landing-page/images/brokers/gm-bg.svg";
-import GMLogo from "pages/landing-page/images/brokers/gm.svg";
 import HuobiLogo from "pages/landing-page/images/brokers/huobi.png";
 import RoboforexLogo from "pages/landing-page/images/brokers/roboforex.svg";
 
@@ -32,33 +30,26 @@ export const brokersTabs: TTabsItem[] = [
   {
     id: 0,
     image: {
-      link: GMLogo,
-      title: BROKERS.GM
-    }
-  },
-  {
-    id: 1,
-    image: {
       link: BinanceLogo,
       title: BROKERS.BINANCE
     }
   },
   {
-    id: 2,
+    id: 1,
     image: {
       link: RoboforexLogo,
       title: BROKERS.ROBOFOREX
     }
   },
   {
-    id: 3,
+    id: 2,
     image: {
       link: ExanteLogo,
       title: BROKERS.EXANTE
     }
   },
   {
-    id: 4,
+    id: 3,
     image: {
       link: HuobiLogo,
       title: BROKERS.HUOBI
@@ -68,36 +59,8 @@ export const brokersTabs: TTabsItem[] = [
 
 export const brokersInfo: TBrokerInfo[] = [
   {
-    id: 0,
-    title: BROKERS.GM,
-    description: "landing-page:brokers.description-gm",
-    listItems: [
-      {
-        text: "landing-page:brokers.text-gm-1"
-      },
-      {
-        text: "landing-page:brokers.text-gm-2"
-      },
-      {
-        text: "landing-page:brokers.text-gm-3",
-        imageBg: GMBg
-      },
-      {
-        text: "landing-page:brokers.text-gm-4"
-      },
-      {
-        number: "landing-page:brokers.number-gm-1",
-        text: "landing-page:brokers.text-gm-5"
-      },
-      {
-        number: "landing-page:brokers.number-gm-2",
-        text: "landing-page:brokers.text-gm-6"
-      }
-    ]
-  },
-  {
     type: "Attach",
-    id: 1,
+    id: 0,
     title: BROKERS.BINANCE,
     description: "landing-page:brokers.description-binance",
     listItems: [
@@ -117,7 +80,7 @@ export const brokersInfo: TBrokerInfo[] = [
     ]
   },
   {
-    id: 2,
+    id: 1,
     title: BROKERS.ROBOFOREX,
     description: "landing-page:brokers.description-rf",
     listItems: [
@@ -140,7 +103,7 @@ export const brokersInfo: TBrokerInfo[] = [
     ]
   },
   {
-    id: 3,
+    id: 2,
     title: BROKERS.EXANTE,
     description: "landing-page:brokers.description-exante",
     listItems: [
@@ -160,7 +123,7 @@ export const brokersInfo: TBrokerInfo[] = [
     ]
   },
   {
-    id: 4,
+    id: 3,
     title: BROKERS.HUOBI,
     description: "landing-page:brokers.description-huobi",
     listItems: [
