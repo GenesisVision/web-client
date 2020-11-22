@@ -1,4 +1,5 @@
 import ImageBaseElement from "components/avatar/image-base.element";
+import { ConversationImages } from "components/conversation/conversation-image/conversation-images";
 import Deposit1 from "media/guides/guides-1/Deposit1.png";
 import Deposit2 from "media/guides/guides-1/Deposit2.png";
 import Deposit3 from "media/guides/guides-1/Deposit3.png";
@@ -23,10 +24,10 @@ export interface INavGuide {
   guides: IGuide[];
 }
 
-const linkInfoDeposit = {
+const getLinkInfoDeposit = (label: string) => ({
   link: WALLET_TOTAL_PAGE_ROUTE,
-  label: "Deposit"
-};
+  label
+});
 
 export const navGuides: INavGuide[] = [
   {
@@ -60,13 +61,31 @@ export const navGuides: INavGuide[] = [
               </li>
             </ol>
             <p>The deposit will appear in your GV wallet instantly.</p>
-            <ImageBaseElement
-              alt={"Deposit via crypto wallet"}
-              src={Deposit1}
+            <ConversationImages
+              size={"large"}
+              images={[
+                {
+                  id: Deposit1,
+                  resizes: [
+                    {
+                      height: 0,
+                      width: 0,
+                      logoUrl: Deposit1,
+                      quality: "Original"
+                    },
+                    {
+                      height: 0,
+                      width: 0,
+                      logoUrl: Deposit1,
+                      quality: "Low"
+                    }
+                  ]
+                }
+              ]}
             />
           </>
         ),
-        linkInfo: linkInfoDeposit
+        linkInfo: getLinkInfoDeposit("Deposit")
       },
       {
         id: "deposit-2",
@@ -97,11 +116,48 @@ export const navGuides: INavGuide[] = [
                 information for future deposits.
               </li>
             </ol>
-            <ImageBaseElement alt={"Deposit via bank card"} src={Deposit2} />
-            <ImageBaseElement alt={"Deposit via bank card"} src={Deposit3} />
+            <ConversationImages
+              size={"large"}
+              images={[
+                {
+                  id: Deposit2,
+                  resizes: [
+                    {
+                      height: 0,
+                      width: 0,
+                      logoUrl: Deposit2,
+                      quality: "Original"
+                    },
+                    {
+                      height: 0,
+                      width: 0,
+                      logoUrl: Deposit2,
+                      quality: "Low"
+                    }
+                  ]
+                },
+                {
+                  id: Deposit3,
+                  resizes: [
+                    {
+                      height: 0,
+                      width: 0,
+                      logoUrl: Deposit3,
+                      quality: "Original"
+                    },
+                    {
+                      height: 0,
+                      width: 0,
+                      logoUrl: Deposit3,
+                      quality: "Low"
+                    }
+                  ]
+                }
+              ]}
+            />
           </>
         ),
-        linkInfo: linkInfoDeposit
+        linkInfo: getLinkInfoDeposit("Deposit")
       },
       {
         id: "deposit-3",
@@ -124,10 +180,31 @@ export const navGuides: INavGuide[] = [
                 your e-mail address.
               </li>
             </ol>
-            <ImageBaseElement alt={"Withdrawal"} src={Withdrawal1} />
+            <ConversationImages
+              size={"large"}
+              images={[
+                {
+                  id: Withdrawal1,
+                  resizes: [
+                    {
+                      height: 0,
+                      width: 0,
+                      logoUrl: Withdrawal1,
+                      quality: "Original"
+                    },
+                    {
+                      height: 0,
+                      width: 0,
+                      logoUrl: Withdrawal1,
+                      quality: "Low"
+                    }
+                  ]
+                }
+              ]}
+            />
           </>
         ),
-        linkInfo: linkInfoDeposit
+        linkInfo: getLinkInfoDeposit("Withdrawal")
       }
     ]
   }
