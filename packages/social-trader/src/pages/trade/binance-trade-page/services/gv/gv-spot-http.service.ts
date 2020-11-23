@@ -219,11 +219,11 @@ export const postBuy = ({
   newOrder(
     {
       reduceOnly,
-      stopPrice: type === "StopLossLimit" ? String(stopPrice) : undefined,
+      stopPrice: type === "TakeProfitLimit" ? String(stopPrice) : undefined,
       symbol,
       type,
       price:
-        type === "Limit" || type === "StopLossLimit"
+        type === "Limit" || type === "TakeProfitLimit"
           ? String(price)
           : undefined,
       quantity: String(quantity),
@@ -248,11 +248,11 @@ export const postSell = ({
   newOrder(
     {
       reduceOnly,
-      stopPrice: type === "StopLossLimit" ? String(stopPrice) : undefined,
+      stopPrice: type === "TakeProfitLimit" ? String(stopPrice) : undefined,
       symbol,
       type,
       price:
-        type === "Limit" || type === "StopLossLimit"
+        type === "Limit" || type === "TakeProfitLimit"
           ? String(price)
           : undefined,
       quantity: String(quantity),
