@@ -43,6 +43,25 @@
         margin-top: 0;
       }
     }
+
+    h3 {
+      @include adaptive-margin(bottom, $padding-xxsmall);
+    }
+
+    ol,
+    ul {
+      margin-top: 0;
+    }
+
+    table {
+      width: 100%;
+
+      th,
+      td {
+        @include adaptive-full-padding($padding-xxsmall);
+        text-align: left;
+      }
+    }
   }
 
   &__controls {
