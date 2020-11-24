@@ -48,12 +48,7 @@ const _TradeHistoryRow: React.FC<Props> = ({
           tickSize: String(stepSize)
         })}
       </TableCell>
-      <TableCell>
-        {terminalMoneyFormat({
-          amount: commission,
-          tickSize: String(stepSize)
-        })}
-      </TableCell>
+      <TableCell>{commission}</TableCell>
       <TableCell>
         {terminalMoneyFormat({ amount: total, tickSize: String(tickSize) })}
       </TableCell>
