@@ -1,12 +1,12 @@
 import GuidesListHeader from "components/guides/guides-list/guides-list-header";
 import GuidesListItem from "components/guides/guides-list/guides-list-item";
-import { TGuide } from "pages/guides/guides.static-data";
+import { IGuide } from "pages/guides/guides.static-data";
 import React, { useCallback, useEffect, useState } from "react";
 
 import styles from "./guides-list.module.scss";
 
 interface Props {
-  guides: TGuide[];
+  guides: IGuide[];
   name: string;
   currentId?: string;
 }

@@ -1,12 +1,12 @@
 import { DefaultBlock } from "components/default.block/default.block";
 import GuidesList from "components/guides/guides-list/guides-list";
-import { TNavGuide } from "pages/guides/guides.static-data";
+import { INavGuide } from "pages/guides/guides.static-data";
 import React from "react";
 
 import styles from "./guides-nav.module.scss";
 
 interface Props {
-  navGuides: TNavGuide[];
+  navGuides: INavGuide[];
   currentId?: string;
 }
 

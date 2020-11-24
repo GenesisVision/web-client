@@ -3,7 +3,7 @@ import { DefaultBlock } from "components/default.block/default.block";
 import GuideBlockLink from "components/guides/guide-block/guide-block-link";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
-import { TGuide } from "pages/guides/guides.static-data";
+import { IGuide } from "pages/guides/guides.static-data";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -15,7 +15,7 @@ export type IPrevNextGuide = {
 };
 
 interface Props {
-  guide: TGuide;
+  guide: IGuide;
   prevGuide: IPrevNextGuide | null;
   nextGuide: IPrevNextGuide | null;
 }

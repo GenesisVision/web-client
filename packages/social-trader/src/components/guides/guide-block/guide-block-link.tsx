@@ -23,18 +23,18 @@ const _GuideBlockLink: React.FC<Props> = ({
 }) => {
   const { linkCreator } = useToLink();
   return (
-    <Tooltip render={() => <TooltipContent>{guideName}</TooltipContent>}>
-      <Link
-        className={clsx(styles["guide-block__link"], {
-          [styles["guide-block__link--next"]]: isNext
-        })}
-        wide
-        white
-        to={linkCreator(`${GUIDES_TOTAL_PAGE_ROUTE}#${guideLink}`)}
-      >
+    <Link
+      className={clsx(styles["guide-block__link"], {
+        [styles["guide-block__link--next"]]: isNext
+      })}
+      wide
+      white
+      to={linkCreator(`${GUIDES_TOTAL_PAGE_ROUTE}#${guideLink}`)}
+    >
+      <Tooltip render={() => <TooltipContent>{guideName}</TooltipContent>}>
         <span>{children}</span>
-      </Link>
-    </Tooltip>
+      </Tooltip>
+    </Link>
   );
 };
 
