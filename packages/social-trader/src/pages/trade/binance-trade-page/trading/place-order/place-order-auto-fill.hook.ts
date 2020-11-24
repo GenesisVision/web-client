@@ -37,7 +37,7 @@ export const usePlaceOrderAutoFill = ({
     if (!autoFill) {
       const value = +terminalMoneyFormat({
         amount: total / price,
-        tickSize: tickSize
+        tickSize: stepSize
       });
       if (isNaN(value)) return;
       if (value === quantity) return;
