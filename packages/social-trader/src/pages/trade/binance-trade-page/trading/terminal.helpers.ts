@@ -35,7 +35,7 @@ export const DEFAULT_SYMBOL: SymbolState = {
 const TRADE_AUTH_DATA_KEY = "TRADE_AUTH_DATA_KEY";
 const initialState = { publicKey: "", privateKey: "" };
 
-const setUpperFirstLetter = ([firstLetter, ...rest]: string = "") =>
+export const setUpperFirstLetter = ([firstLetter, ...rest]: string = "") =>
   firstLetter.toUpperCase() + rest.join("").toLowerCase();
 
 export const generateOrderMessage = (

@@ -4,7 +4,10 @@ import { Text } from "components/text/text";
 import { BinanceOrderStatus } from "gv-api-web";
 import { terminalMoneyFormat } from "pages/trade/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
-import { getSymbolFilters } from "pages/trade/binance-trade-page/trading/terminal.helpers";
+import {
+  getSymbolFilters,
+  setUpperFirstLetter
+} from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import { OrderSide } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useContext } from "react";
 import { formatDate } from "utils/dates";
@@ -47,7 +50,9 @@ const _OrderHistoryRow: React.FC<Props> = ({
       <TableCell>{symbol}</TableCell>
       <TableCell>{type}</TableCell>
       <TableCell>
-        <Text color={side === "Buy" ? "green" : "red"}>{side}</Text>
+        <Text color={setUpperFirstLetter(side) === "Buy" ? "green" : "red"}>
+          {side}
+        </Text>
       </TableCell>
       <TableCell>
         {terminalMoneyFormat({ amount: price, tickSize: String(tickSize) })}

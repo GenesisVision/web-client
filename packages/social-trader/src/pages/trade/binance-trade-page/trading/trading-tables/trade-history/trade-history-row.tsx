@@ -3,7 +3,10 @@ import TableRow from "components/table/components/table-row";
 import { Text } from "components/text/text";
 import { terminalMoneyFormat } from "pages/trade/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
-import { getSymbolFilters } from "pages/trade/binance-trade-page/trading/terminal.helpers";
+import {
+  getSymbolFilters,
+  setUpperFirstLetter
+} from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import { OrderSide } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useContext } from "react";
 import { formatDate } from "utils/dates";
@@ -37,7 +40,9 @@ const _TradeHistoryRow: React.FC<Props> = ({
       <TableCell firstOffset={false}>{formatDate(time)}</TableCell>
       <TableCell>{symbol}</TableCell>
       <TableCell>
-        <Text color={side === "Buy" ? "green" : "red"}>{side}</Text>
+        <Text color={setUpperFirstLetter(side) === "Buy" ? "green" : "red"}>
+          {side}
+        </Text>
       </TableCell>
       <TableCell>
         {terminalMoneyFormat({ amount: price, tickSize: String(tickSize) })}
