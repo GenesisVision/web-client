@@ -52,6 +52,7 @@ export const getServerTime = () => {
 };
 
 const transformToUnitedOrder = ({
+  status,
   commission,
   quoteQuantityFilled,
   orderId,
@@ -65,6 +66,7 @@ const transformToUnitedOrder = ({
   quoteQuantity,
   quantityFilled
 }: BinanceRawOrder): UnitedOrder => ({
+  orderStatus: status,
   commission,
   quoteQuantityFilled,
   executedQuantity: quoteQuantity,

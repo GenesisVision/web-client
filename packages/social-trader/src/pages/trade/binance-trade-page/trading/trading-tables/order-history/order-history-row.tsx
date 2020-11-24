@@ -17,16 +17,16 @@ interface Props {
   side: OrderSide;
   price: number;
   stopPrice: number;
-  quoteQuantityFilled: number;
-  executedQuantity: number;
   origQty: number;
   filled: number;
   total: number;
+  executed: number;
+  amount: number;
 }
 
 const _OrderHistoryRow: React.FC<Props> = ({
-  quoteQuantityFilled,
-  executedQuantity,
+  executed,
+  amount,
   orderStatus,
   time,
   symbol,
@@ -54,13 +54,13 @@ const _OrderHistoryRow: React.FC<Props> = ({
       </TableCell>
       <TableCell>
         {terminalMoneyFormat({
-          amount: quoteQuantityFilled,
+          amount: executed,
           tickSize: String(stepSize)
         })}
       </TableCell>
       <TableCell>
         {terminalMoneyFormat({
-          amount: executedQuantity,
+          amount: amount,
           tickSize: String(stepSize)
         })}
       </TableCell>
