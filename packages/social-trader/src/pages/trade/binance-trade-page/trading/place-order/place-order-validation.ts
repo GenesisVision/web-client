@@ -98,11 +98,11 @@ export const placeOrderStopLimitValidationSchema = ({
   lazy<IStopLimitFormValues>(values => {
     const minPriceValue =
       side === "Buy"
-        ? Math.max(minPrice, values[TRADE_FORM_FIELDS.stopPrice])
+        ? minPrice //Math.max(minPrice, values[TRADE_FORM_FIELDS.stopPrice])
         : minPrice;
     const maxPriceValue =
       side === "Sell"
-        ? Math.min(maxPrice, values[TRADE_FORM_FIELDS.stopPrice])
+        ? maxPrice // Math.min(maxPrice, values[TRADE_FORM_FIELDS.stopPrice])
         : maxPrice;
     return object().shape({
       [TRADE_FORM_FIELDS.stopPrice]: tradeNumberShape({
