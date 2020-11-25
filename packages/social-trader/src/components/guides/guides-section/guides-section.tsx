@@ -1,15 +1,14 @@
 import GuideBlock from "components/guides/guide-block/guide-block";
 import GuidesNav from "components/guides/guides-nav/guides-nav";
 import { IPrevNextGuidesNamesProps } from "components/guides/guides.helpers";
-import { Guide, GuidesCategory } from "gv-api-web";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
 import styles from "./guides-section.module.scss";
 
 interface Props {
-  navGuides: GuidesCategory[];
-  currentGuide?: Guide;
+  navGuides: any[];
+  currentGuide?: any;
   prevNextGuidesNames: IPrevNextGuidesNamesProps;
   onClickPass: (id: string) => void;
 }

@@ -1,13 +1,12 @@
-import { Guide, GuidesCategory } from "gv-api-web";
 import { safeGetElemFromArray } from "utils/helpers";
 
-export const getAllGuides = (navGuides: GuidesCategory[]): Guide[] => {
-  return navGuides.reduce((acc: Guide[], current) => {
+export const getAllGuides = (navGuides: any[]): any[] => {
+  return navGuides.reduce((acc: any[], current) => {
     return [...acc, ...current.guides];
   }, []);
 };
 
-export const getCurrentGuide = (allGuides: Guide[], tab: string): Guide => {
+export const getCurrentGuide = (allGuides: any[], tab: string): any => {
   return safeGetElemFromArray(
     allGuides,
     guide => guide.canonicalName === tab.slice(1, tab.length)
@@ -20,8 +19,8 @@ export interface IPrevNextGuidesNamesProps {
 }
 
 export const getPrevNextGuidesNames = (
-  allGuides: Guide[],
-  currentGuide: Guide
+  allGuides: any[],
+  currentGuide: any
 ): IPrevNextGuidesNamesProps => {
   const currentIndex = allGuides.indexOf(currentGuide);
   const nextIndex = currentIndex + 1;
