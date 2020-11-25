@@ -74,7 +74,7 @@ export const TerminalOpenOrdersContextProvider: React.FC = ({ children }) => {
         ...updatedList[socketData.id],
         ...socketData
       };
-    if (symbols) {
+    if (socketData.eventType === "executionReport" && symbols) {
       const symbolData = symbols.find(
         data => data.symbol === socketData.symbol
       );
