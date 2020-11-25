@@ -8,6 +8,7 @@ import { Row } from "components/row/row";
 import { Text } from "components/text/text";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import { withBlurLoader } from "decorators/with-blur-loader";
+import { AccountSelectorContainer } from "pages/trade/binance-trade-page/trading/components/account-selector/account-selector.container";
 import { MonoText } from "pages/trade/binance-trade-page/trading/components/mono-text/mono-text";
 import { terminalMoneyFormat } from "pages/trade/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
 import { TradeStatefulValue } from "pages/trade/binance-trade-page/trading/components/trade-stateful-value/trade-stateful-value";
@@ -16,7 +17,6 @@ import {
   getTickerSymbolLoaderData,
   useSymbolData
 } from "pages/trade/binance-trade-page/trading/symbol-summary/symbol-summary.helpers";
-import { TerminalTypeSwitcher } from "pages/trade/binance-trade-page/trading/symbol-summary/terminal-type-switcher";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
 import { SymbolSummaryData } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useContext } from "react";
@@ -62,7 +62,9 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
     }
   }
 }) => {
-  const { stepSize, tickSize } = useContext(TerminalInfoContext);
+  const { exchangeAccountId, stepSize, tickSize } = useContext(
+    TerminalInfoContext
+  );
   const renderSymbol = () => (
     <h5>
       {baseAsset}/{quoteAsset}
@@ -229,7 +231,7 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
         </LabeledValue>
       </RowItem>
       <RowItem>
-        <TerminalTypeSwitcher />
+        <AccountSelectorContainer currentAccount={exchangeAccountId} />
       </RowItem>
     </Center>
   );
