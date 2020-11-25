@@ -1,12 +1,11 @@
 import { DefaultBlock } from "components/default.block/default.block";
 import GuidesList from "components/guides/guides-list/guides-list";
-import { GuidesCategory } from "gv-api-web";
 import React from "react";
 
 import styles from "./guides-nav.module.scss";
 
 interface Props {
-  navGuides: GuidesCategory[];
+  navGuides: any[];
   currentId?: string;
 }
 
