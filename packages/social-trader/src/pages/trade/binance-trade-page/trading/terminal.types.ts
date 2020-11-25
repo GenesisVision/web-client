@@ -1,6 +1,8 @@
 import {
   BinanceExecutionType,
+  BinanceOrderSide as BinanceRawOrderSide,
   BinanceOrderStatus,
+  BinanceOrderType as BinanceRawOrderType,
   BinanceRaw24HPrice,
   BinanceRawAccountInfo,
   BinanceRawBinanceBalance,
@@ -10,11 +12,9 @@ import {
   BinanceRawKlineInterval,
   BinanceRawOrder,
   BinanceRawOrderBook,
-  BinanceRawOrderSide,
-  BinanceRawOrderType,
   BinanceRawRecentTrade,
   BinanceRawSymbol,
-  BinanceRawTimeInForce
+  BinanceTimeInForce as BinanceRawTimeInForce
 } from "gv-api-web";
 import {
   FuturesAccountEventType,
