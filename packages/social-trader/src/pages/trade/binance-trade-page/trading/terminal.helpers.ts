@@ -58,7 +58,7 @@ export const generateOrderMessage = (
       : order.executionType?.toLowerCase() === "trade"
       ? "filled"
       : order.executionType;
-  return `${orderType} order ${order.side.toLowerCase()} ${executionTypeTitle?.toLowerCase()}\n\n${setUpperFirstLetter(
+  return `${orderType} ${order.side.toLowerCase()} order ${executionTypeTitle?.toLowerCase()}\n\n${setUpperFirstLetter(
     executionTypeDescription
   )} exchange ${orderType.toLowerCase()} ${order.side.toLowerCase()} order for ${terminalMoneyFormat(
     {
