@@ -1,7 +1,6 @@
 import { Button } from "components/button/button";
 import { DefaultBlock } from "components/default.block/default.block";
 import GuideBlockLink from "components/guides/guide-block/guide-block-link";
-import { Guide } from "gv-api-web";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
@@ -10,7 +9,7 @@ import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import styles from "./guide-block.module.scss";
 
 interface Props {
-  guide: Guide;
+  guide: any;
   prevGuideName?: string;
   nextGuideName?: string;
   onClickPass: (id: string) => void;

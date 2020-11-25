@@ -1,4 +1,3 @@
-import { Guide } from "gv-api-web";
 import React from "react";
 import { useTranslation } from "react-i18next";
 

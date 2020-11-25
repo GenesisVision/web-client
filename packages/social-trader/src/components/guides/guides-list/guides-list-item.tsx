@@ -2,7 +2,6 @@ import clsx from "clsx";
 import ImageBaseElement from "components/avatar/image-base.element";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
-import { Guide } from "gv-api-web";
 import Ok from "media/ok.svg";
 import { GUIDES_TOTAL_PAGE_ROUTE } from "pages/guides/guides.paths";
 import React from "react";
@@ -10,7 +9,7 @@ import React from "react";
 import styles from "./guides-list.module.scss";
 
 interface Props {
-  guide: Guide;
+  guide: any;
   currentGuideId?: string;
 }
 
