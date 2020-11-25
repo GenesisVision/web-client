@@ -8,7 +8,7 @@ import CustomNextScript from "./next-script-custom";
 
 const isProd = process.env.NODE_ENV === "production";
 
-const HACKED_PAGES = ["/"];
+const HACKED_PAGES: string[] = [];
 
 class MyDocument extends Document<{ pathname: string }> {
   static async getInitialProps(ctx: DocumentContext) {
