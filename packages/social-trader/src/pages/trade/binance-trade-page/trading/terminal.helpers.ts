@@ -43,9 +43,10 @@ export const generateOrderMessage = (
   symbol: MergedTickerSymbolType
 ): string => {
   const { stepSize } = symbol.lotSizeFilter;
-  return `${setUpperFirstLetter(
-    order.type
-  )} order ${order.executionType?.toLowerCase()}\n\n${setUpperFirstLetter(
+  const orderType = setUpperFirstLetter(order.type)
+    .split("_")
+    .join(" ");
+  return `${orderType} order ${order.executionType?.toLowerCase()}\n\n${setUpperFirstLetter(
     order.executionType
   )} exchange ${order.type.toLowerCase()} ${order.side.toLowerCase()} order for ${terminalMoneyFormat(
     {
