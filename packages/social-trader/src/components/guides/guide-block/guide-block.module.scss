@@ -52,14 +52,17 @@
 
     ol,
     ul {
+      @include adaptive-padding(left, $padding-xsmall);
       margin-top: 0;
     }
 
     table {
       @include adaptive-margin(top, $padding-xsmall);
-      @include adaptive-margin(bottom, $padding-small);
       width: 100%;
       border-collapse: collapse;
+      &:not(:last-child) {
+        @include adaptive-margin(bottom, $padding-small);
+      }
     }
 
     th,
@@ -74,9 +77,13 @@
 
     th {
       text-align: center;
+
+      @include media-breakpoint-tablet() {
+        min-width: 150px;
+      }
     }
 
-    section {
+    section:not(:last-child) {
       @include adaptive-padding(bottom, $padding-small);
     }
 
