@@ -179,15 +179,13 @@ export const navGuides: INavGuide[] = [
               </li>
               <li>
                 Click <b>“Buy with card“</b>. You will be redirected to the{" "}
-                <b>
-                  <a
-                    href="https://www.moonpay.io/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Moonpay payment processor.
-                  </a>
-                </b>
+                <a
+                  href="https://www.moonpay.io/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <b>Moonpay payment processor</b>.
+                </a>
                 <ConversationImages
                   size={"large"}
                   images={[
@@ -1605,7 +1603,7 @@ export const navGuides: INavGuide[] = [
                 </li>
 
                 <li>
-                  Press the “Place” button.
+                  Press the <b>“Place”</b> button.
                   <ConversationImages
                     size={"large"}
                     images={[
