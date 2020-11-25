@@ -55,7 +55,7 @@ const _TerminalContainer: React.FC<ITerminalContainerProps> = ({
 
   useEffect(() => {
     setCheckInfo(true);
-  }, [type, symbol]);
+  }, [type, symbol, exchangeAccountId]);
 
   useEffect(() => {
     if (checkInfo) setUpdateExchangeInfo(true);
@@ -114,6 +114,7 @@ const _TerminalContainer: React.FC<ITerminalContainerProps> = ({
 
   return (
     <Terminal
+      key={exchangeAccountId}
       exchangeAccountId={exchangeAccountId}
       exchangeInfo={exchangeInfoProp}
       authData={authDataProp}
