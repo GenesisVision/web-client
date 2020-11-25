@@ -50,10 +50,18 @@
       @include adaptive-padding(bottom, $padding-xxsmall);
     }
 
+    ul {
+      list-style: disc;
+    }
+
     ol,
     ul {
       @include adaptive-padding(left, $padding-xsmall);
       margin-top: 0;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
     }
 
     table {

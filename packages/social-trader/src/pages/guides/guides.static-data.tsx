@@ -26,15 +26,27 @@ import SelfmanagedFunds1 from "media/guides/guides-3/SelfmanagedFunds1.png";
 import SLTP1 from "media/guides/guides-3/SLTP1.png";
 import TradingAccount1 from "media/guides/guides-3/TradingAccount1.png";
 import TradingAccount2 from "media/guides/guides-3/TradingAccount2.png";
+import ManFunds1 from "media/guides/guides-4/Funds1.png";
+import ManFunds2 from "media/guides/guides-4/Funds2.png";
+import ManFunds3 from "media/guides/guides-4/Funds3.png";
+import Programs1 from "media/guides/guides-4/Programs1.png";
+import Programs2 from "media/guides/guides-4/Programs2.png";
+import Programs3 from "media/guides/guides-4/Programs3.png";
+import Signalproviding1 from "media/guides/guides-4/Signalproviding1.png";
 import { ATTACH_ACCOUNT_PAGE_ROUTE } from "pages/attach-account/attach-account.constants";
 import { CREATE_ACCOUNT_PAGE_ROUTE } from "pages/create-account/create-account.constants";
-import { CREATE_SELF_MANAGED_FUND_PAGE_ROUTE } from "pages/create-fund/create-fund.constants";
+import {
+  CREATE_FUND_PAGE_ROUTE,
+  CREATE_SELF_MANAGED_FUND_PAGE_ROUTE
+} from "pages/create-fund/create-fund.constants";
+import { CREATE_PROGRAM_PAGE_ROUTE } from "pages/create-program/create-program.constants";
 import { WALLET_TOTAL_PAGE_ROUTE } from "pages/wallet/wallet.paths";
 import React from "react";
-import { DASHBOARD_ROUTE } from "routes/dashboard.routes";
+import { DASHBOARD_ROUTE, TRADING_ROUTE } from "routes/dashboard.routes";
 import { FUNDS_ROUTE } from "routes/funds.routes";
 import { GV_FOLLOW_ROUTE } from "routes/invest.routes";
 import { PROGRAMS_ROUTE } from "routes/programs.routes";
+import { SOCIAL_ROUTE } from "routes/social.routes";
 
 export interface IGuide {
   id: string;
@@ -315,7 +327,7 @@ export const navGuides: INavGuide[] = [
     guides: [
       {
         id: "investing-1",
-        canonicalName: "funds",
+        canonicalName: "investing-funds",
         name: "Funds",
         content: (
           <>
@@ -454,7 +466,7 @@ export const navGuides: INavGuide[] = [
       },
       {
         id: "investing-2",
-        canonicalName: "programs",
+        canonicalName: "investing-programs",
         name: "Programs",
         content: (
           <>
@@ -2066,6 +2078,621 @@ export const navGuides: INavGuide[] = [
             </section>
           </>
         )
+      }
+    ]
+  },
+  {
+    id: "guides-4",
+    name: "Managing",
+    guides: [
+      {
+        id: "managing-1",
+        canonicalName: "managing-funds",
+        name: "Funds",
+        content: (
+          <>
+            <section>
+              <h3>
+                Diversify your capital across hundreds of cryptocurrencies.
+              </h3>
+              <ol>
+                <li>
+                  Create a Fund by percentage allocating capital to crypto
+                  assets that meet your strategy.
+                </li>
+                <li>Attract investors to your Fund and earn commissions</li>
+                <li>Track and manage your Fund by reallocating assets.</li>
+              </ol>
+            </section>
+
+            <section>
+              <h3>How to create a Fund?</h3>
+              <ol>
+                <li>
+                  Login to your account and follow to the{" "}
+                  <GuideLink link={DASHBOARD_ROUTE}>
+                    <b>Dashboard</b>
+                  </GuideLink>
+                  .
+                </li>
+
+                <li>
+                  Find the button <b>“Select product”</b> on the right.
+                </li>
+
+                <li>
+                  Choose “Fund”. The description could be seen there as well.
+                  <ConversationImages
+                    size={"large"}
+                    images={[
+                      {
+                        id: ManFunds1,
+                        resizes: [
+                          {
+                            height: 0,
+                            width: 0,
+                            logoUrl: ManFunds1,
+                            quality: "Original"
+                          },
+                          {
+                            height: 0,
+                            width: 0,
+                            logoUrl: ManFunds1,
+                            quality: "Low"
+                          }
+                        ]
+                      }
+                    ]}
+                  />
+                </li>
+                <li>
+                  Fill in all the required details: name of the Fund,
+                  description, the assets, etc.
+                  <br />
+                  Access assets from Binance and Huobi (summary 319 coins).
+                </li>
+                <li>
+                  Set the assets allocation. Please note that there is a
+                  mandatory<b> minimum of 1% GVT allocation per Fund.</b>
+                </li>
+
+                <li>Set up Entry and Exit fees for investors.</li>
+
+                <li>
+                  Choose the currency and amount for the initial deposit. The
+                  minimal initial deposit is an equivalent of 50 GVT.
+                </li>
+
+                <li>
+                  Click <b>“Create Fund”</b>.
+                  <ConversationImages
+                    size={"large"}
+                    images={[
+                      {
+                        id: ManFunds2,
+                        resizes: [
+                          {
+                            height: 0,
+                            width: 0,
+                            logoUrl: ManFunds2,
+                            quality: "Original"
+                          },
+                          {
+                            height: 0,
+                            width: 0,
+                            logoUrl: ManFunds2,
+                            quality: "Low"
+                          }
+                        ]
+                      }
+                    ]}
+                  />
+                  To help you build your crypto portfolio, you can access a full
+                  description of the asset, social media links and its price
+                  history.
+                  <ConversationImages
+                    size={"large"}
+                    images={[
+                      {
+                        id: ManFunds3,
+                        resizes: [
+                          {
+                            height: 0,
+                            width: 0,
+                            logoUrl: ManFunds3,
+                            quality: "Original"
+                          },
+                          {
+                            height: 0,
+                            width: 0,
+                            logoUrl: ManFunds3,
+                            quality: "Low"
+                          }
+                        ]
+                      }
+                    ]}
+                  />
+                </li>
+              </ol>
+            </section>
+
+            <section>
+              <h3>Few important moments to remember:</h3>
+              <ul>
+                <li>
+                  You have to have at least <b>1% of GVT</b> in your Fund.
+                </li>
+
+                <li>You can change the settings of your Fund anytime.</li>
+
+                <li>
+                  The trader can<b> Reallocate</b> <b>3%</b> of their Fund{" "}
+                  <b>per day</b> (cumulative). Example: you can change 30% of
+                  the Fund's allocation after 10 days.
+                </li>
+
+                <li>
+                  Automatic <b>Fund rebalance </b>takes place{" "}
+                  <b>every three days.</b> If there was a reallocation, the
+                  rebalance will happen in three days after it, not after the
+                  last rebalance session.
+                </li>
+
+                <li>
+                  Manager can withdraw his own investment from a Fund but he
+                  needs to leave at least <b>50 GVT</b> to keep the Fund
+                  running. In order to withdraw the whole amount the manager
+                  will have to close the Fund.
+                </li>
+
+                <li>
+                  In the History tab you can see all the events that happened to
+                  the Fund, such as investments, withdrawals, reallocations,
+                  rebalancing, Funds challenge winners.
+                </li>
+              </ul>
+            </section>
+
+            <section>
+              <h3>Fees</h3>
+              <p>
+                The manager sets <b>entry fee</b> and <b>exit fee</b> by
+                himself.
+              </p>
+              <p>
+                <b>Entry fee</b> is the commission the investor pays to the
+                manager for investing in the Fund. Set by the manager and
+                calculated as a percentage of the amount invested. Fee range is
+                0-10%.
+              </p>
+              <p>
+                <b>Exit fee</b> is the commission that the investor pays the
+                manager for withdrawing funds from the Fund. Set by the manager
+                and calculated as a percentage of the amount invested. Fee range
+                is 0-10%. Both entry and exit fees get added to the manager’s
+                share in his Fund. Note: if you close the Fund the investor will
+                not have to pay an exit fee in order to withdraw his investment.
+              </p>
+            </section>
+
+            <section>
+              <h3>Fund closing</h3>
+              <p>
+                At <b>any time</b> you can close your Fund. In this case, your
+                own funds are withdrawn and Fund becomes unavailable for new
+                investments. Existing investors can keep their money as long as
+                they want. Withdrawals from the closed Fund are not subjected to
+                exit fee.
+              </p>
+            </section>
+          </>
+        ),
+        linkInfo: {
+          link: CREATE_FUND_PAGE_ROUTE,
+          label: "Create Fund"
+        }
+      },
+      {
+        id: "managing-2",
+        canonicalName: "managing-programs",
+        name: "Programs",
+        content: (
+          <>
+            <section>
+              <h3>How to create a Program?</h3>
+              <ol>
+                <li>
+                  Login to your account and follow to the{" "}
+                  <GuideLink link={DASHBOARD_ROUTE}>
+                    <b>Dashboard</b>
+                  </GuideLink>
+                  .
+                </li>
+                <li>
+                  Find the button <b>“Select product”</b> on the right and
+                  choose Program. Choose the <b>broker</b>{" "}
+                  <em>(Current brokers are Roboforex, Exante, Huobi)</em>.
+                  <ConversationImages
+                    size={"large"}
+                    images={[
+                      {
+                        id: Programs1,
+                        resizes: [
+                          {
+                            height: 0,
+                            width: 0,
+                            logoUrl: Programs1,
+                            quality: "Original"
+                          },
+                          {
+                            height: 0,
+                            width: 0,
+                            logoUrl: Programs1,
+                            quality: "Low"
+                          }
+                        ]
+                      }
+                    ]}
+                  />
+                </li>
+                <li>
+                  Fill in the required details:
+                  <ul>
+                    <li>
+                      <b>Base currency</b> of his trading account
+                    </li>
+                    <li>Name, Description and Avatar for this Program</li>
+                    <li>
+                      <b>Period</b> (duration of the reporting period is up to a
+                      maximum of 90 days)
+                    </li>
+                    <li>
+                      <b>Stop out</b> level (10-100%).{" "}
+                      <b>Stop out is the maximum drawdown level</b> for the
+                      reporting period at which the Program is stopped, and all
+                      investments return to investors
+                    </li>
+                    <li>
+                      <b>Trades delay</b> (5, 10 minutes,...,6 hours). Managers
+                      have the ability to delay the public display of their
+                      trades and open positions to protect their strategy.
+                      <ConversationImages
+                        size={"large"}
+                        images={[
+                          {
+                            id: Programs2,
+                            resizes: [
+                              {
+                                height: 0,
+                                width: 0,
+                                logoUrl: Programs2,
+                                quality: "Original"
+                              },
+                              {
+                                height: 0,
+                                width: 0,
+                                logoUrl: Programs2,
+                                quality: "Low"
+                              }
+                            ]
+                          }
+                        ]}
+                      />
+                    </li>
+                    <li>
+                      <b>Management fee</b> (0-20%) The manager can set his own
+                      fee, which is charged for the actual asset management
+                      period. Management fee is defined in annual percentage and
+                      is charged at the end of each reporting period.
+                    </li>
+                    <li>
+                      <b>Success fee</b> (0-50%). A fee charged upon the total
+                      profit made within the reporting period. It is calculated
+                      according to the HWM system
+                    </li>
+                    <li>
+                      <b>Investment Limit.</b> At any time you can enter or
+                      cancel certain limitations on av. to invest, or even
+                      prohibit new investments if your Investment limit is 0. If
+                      the investment limit you've entered is larger than the av.
+                      to invest value calculated for your current level, then
+                      you will only be able to attract the av. to invest value.
+                    </li>
+                  </ul>
+                </li>
+                <li>Make at least a minimum investment to your Program.</li>
+                <li>
+                  Click <b>“Create Program”</b>.
+                  <ConversationImages
+                    size={"large"}
+                    images={[
+                      {
+                        id: Programs3,
+                        resizes: [
+                          {
+                            height: 0,
+                            width: 0,
+                            logoUrl: Programs3,
+                            quality: "Original"
+                          },
+                          {
+                            height: 0,
+                            width: 0,
+                            logoUrl: Programs3,
+                            quality: "Low"
+                          }
+                        ]
+                      }
+                    ]}
+                  />
+                </li>
+              </ol>
+            </section>
+
+            <section>
+              <h3>
+                How much money from investors can I attract for management?
+              </h3>
+              <p>
+                If the manager trades <b>without KYC</b> the limit is{" "}
+                <b>1000 USD</b>{" "}
+                <em>(or the equivalent in the account currency).</em> Otherwise,
+                the available limit is set in the range from <b>5000 USD</b> to{" "}
+                <b>300 000 USD.</b>
+              </p>
+              <p>
+                The amount of funds available for investment in each particular
+                Program depends on several factors:
+              </p>
+              <ul>
+                <li>
+                  The <b>age</b> of the Program
+                </li>
+                <li>
+                  The manager’s <b>balance</b>
+                </li>
+                <li>
+                  Trading <b>volume</b> and <b>success</b> of the trading
+                  manager
+                </li>
+                <li>
+                  You can get the exact number by using the <b>calculator</b>{" "}
+                  available on the Program’s Settings page.
+                </li>
+              </ul>
+              <p>
+                More information can be found in{" "}
+                <a
+                  href="https://blog.genesis.vision/genesis-vision-update-a-level-up-d01ef51c42a"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  the article
+                </a>
+                .
+              </p>
+            </section>
+
+            <section>
+              <h3>What happens at the end of the reporting period?</h3>
+              <p>
+                At the end of each reporting period (either after the set
+                interval or forced by the manager) the following operations are
+                performed:
+              </p>
+              <ol>
+                <li>All the manager’s open positions are closed</li>
+                <li>Profit/Losses are calculated and distributed</li>
+                <li>Manager and platform success fees are charged</li>
+                <li>Investment and Withdrawal requests are processed</li>
+              </ol>
+              <p>
+                All the open trades get automatically closed at the end of the
+                period. If it is a Forex Program and the reporting period ends
+                during the weekend, the period will be closed on the following
+                Monday, as soon as the Forex market opens.
+              </p>
+            </section>
+
+            <section>
+              <h3>Some important notes to consider:</h3>
+              <ul>
+                <li>
+                  All investment requests get accepted automatically at the end
+                  of the current period.
+                </li>
+                <li>
+                  Withdrawal requests get processed at the end of the current
+                  period.
+                </li>
+
+                <li>
+                  The period could be closed early, it could be done in the
+                  Settings.
+                </li>
+
+                <li>
+                  A manager can’t withdraw all of his own funds from a Program,
+                  the minimum investment has to stay.
+                </li>
+                <li>
+                  After the creation of the Program, you can edit all of the
+                  settings except for t<b>he period of the Program</b> and{" "}
+                  <b>the leverage</b>. You can also change a broker to any
+                  available one, it is done in the Program Settings.
+                </li>
+                <li>
+                  Post about your strategies and plans in{" "}
+                  <GuideLink link={SOCIAL_ROUTE}>
+                    <b>Social</b>
+                  </GuideLink>{" "}
+                  to build your investor’s loyalty.
+                </li>
+              </ul>
+            </section>
+
+            <section>
+              <h3>Program closing</h3>
+              <p>
+                Manager can close the Program. It can be done in the Program
+                settings. After pressing the button <b>“Сlose program”</b> all
+                of the invested funds remaining in the Program are returned to
+                the investors and the manager.
+              </p>
+              <p>
+                Read more about the GV Programs in this{" "}
+                <a
+                  href="https://blog.genesis.vision/genesis-vision-programs-9700fe637f5d"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  article
+                </a>
+                .
+              </p>
+            </section>
+          </>
+        ),
+        linkInfo: {
+          link: CREATE_PROGRAM_PAGE_ROUTE,
+          label: "Create Program"
+        }
+      },
+      {
+        id: "managing-3",
+        canonicalName: "signal-providing",
+        name: "Signal providing",
+        content: (
+          <>
+            <section>
+              <h3>How can I become a signal provider?</h3>
+              <p>
+                First of all, you need to have a Binance account. If you don’t
+                please find out how to register on Binance{" "}
+                <a
+                  href="https://www.binance.com/en/support/faq/115003764911"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <b>here</b>
+                </a>{" "}
+                and create a new account. Now you need to follow these steps to
+                make your Binance account a signal provider:
+              </p>
+              <ol>
+                <li>
+                  Attach your Binance account to your GV account. You can read
+                  how to do that here.
+                </li>
+                <li>
+                  Find your Binance account in the{" "}
+                  <GuideLink link={TRADING_ROUTE}>
+                    <b>trading section</b>
+                  </GuideLink>{" "}
+                  and press three dots on the right upper corner.
+                  <ConversationImages
+                    size={"large"}
+                    images={[
+                      {
+                        id: Signalproviding1,
+                        resizes: [
+                          {
+                            height: 0,
+                            width: 0,
+                            logoUrl: Signalproviding1,
+                            quality: "Original"
+                          },
+                          {
+                            height: 0,
+                            width: 0,
+                            logoUrl: Signalproviding1,
+                            quality: "Low"
+                          }
+                        ]
+                      }
+                    ]}
+                  />
+                </li>
+                <li>
+                  Choose <b>“Make signal account”</b>.
+                </li>
+                <li>Fill in the required information and set the fees.</li>
+                <li>
+                  Press the <b>“Create signal account”</b> button.
+                </li>
+              </ol>
+              <p>
+                Your account will appear as “Pending Binance account” for a few
+                minutes before it becomes active.
+              </p>
+              <p>
+                Tip: you can access the Binance terminal fast in the trading
+                account menu.
+              </p>
+            </section>
+
+            <section>
+              <h3>Notes:</h3>
+              <ul>
+                <li>
+                  If you are providing signals - you <b>do not</b> need to keep
+                  money in the GV platform.
+                </li>
+                <li>
+                  You <b>do not require KYC</b> if you are using your external
+                  accounts with GV Follow.
+                </li>
+                <li>
+                  You can <b>revoke the API</b> key at any time through the
+                  exchange interface and trades will no longer be copied.
+                </li>
+              </ul>
+            </section>
+
+            <section>
+              <h3>Fees</h3>
+              <p>
+                The signal provider sets the following fees to his signal
+                trading account/Program:
+              </p>
+              <ol>
+                <li>
+                  <b>Success fee</b> is the fee charged on profits from a trade
+                  transaction when Copy Trading. It is calculated according to
+                  the{" "}
+                  <a
+                    href="https://www.investopedia.com/terms/h/highwatermark.asp"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <b>HWM system</b>
+                  </a>{" "}
+                  as a percentage of the profit received from a trade
+                  transaction when copy trading. Success fee varies from 0 to
+                  50%.
+                </li>
+                <li>
+                  The <b>volume fee</b> is a volume commission charged for each
+                  transaction. It varies from 0 to 30% of the amount of paid
+                  trading fee by the trader.
+                </li>
+              </ol>
+              <p>
+                You can see the commission you get from each subscriber on your
+                signal trading account/Program page in the tab “Subscribers”
+                along with the other information about a subscription.
+              </p>
+              <p>
+                You <b>get the commission in GVT</b> and it is added{" "}
+                <b>to your wallet</b>.
+              </p>
+            </section>
+          </>
+        ),
+        linkInfo: {
+          link: ATTACH_ACCOUNT_PAGE_ROUTE,
+          label: "Attach Binance account"
+        }
       }
     ]
   }
