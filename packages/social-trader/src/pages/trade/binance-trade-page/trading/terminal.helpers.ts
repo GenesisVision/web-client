@@ -46,9 +46,21 @@ export const generateOrderMessage = (
   const orderType = setUpperFirstLetter(order.type)
     .split("_")
     .join(" ");
-  return `${orderType} order ${order.executionType?.toLowerCase()}\n\n${setUpperFirstLetter(
-    order.executionType
-  )} exchange ${order.type.toLowerCase()} ${order.side.toLowerCase()} order for ${terminalMoneyFormat(
+  const executionTypeTitle =
+    order.executionType?.toLowerCase() === "new"
+      ? "Created"
+      : order.executionType?.toLowerCase() === "trade"
+      ? "filled"
+      : order.executionType;
+  const executionTypeDescription =
+    order.executionType?.toLowerCase() === "new"
+      ? "Submitted"
+      : order.executionType?.toLowerCase() === "trade"
+      ? "filled"
+      : order.executionType;
+  return `${orderType} order ${order.side.toLowerCase()} ${executionTypeTitle?.toLowerCase()}\n\n${setUpperFirstLetter(
+    executionTypeDescription
+  )} exchange ${orderType.toLowerCase()} ${order.side.toLowerCase()} order for ${terminalMoneyFormat(
     {
       amount: order.quantity,
       tickSize: String(stepSize)
