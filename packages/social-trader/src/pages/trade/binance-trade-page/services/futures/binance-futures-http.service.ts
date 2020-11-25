@@ -11,7 +11,6 @@ import {
   BalancesForTransfer,
   CancelOrderResult,
   ChangeLeverageResponse,
-  Depth,
   ExchangeInfo,
   FuturesPositionInformation,
   HttpResponse,
@@ -394,7 +393,7 @@ export const postBuy = ({
     {
       reduceOnly,
       // @ts-ignore
-      stopPrice: type === "StopLossLimit" ? String(stopPrice) : undefined,
+      stopPrice: type === "StopLossLimit" ? stopPrice : undefined,
       symbol,
       type,
       price:
@@ -426,7 +425,7 @@ export const postSell = ({
     {
       reduceOnly,
       // @ts-ignore
-      stopPrice: type === "StopLossLimit" ? String(stopPrice) : undefined,
+      stopPrice: type === "StopLossLimit" ? stopPrice : undefined,
       symbol,
       type,
       price:

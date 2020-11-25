@@ -1,7 +1,10 @@
+import { useAlerts } from "hooks/alert.hook";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
 import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/terminal-methods.context";
+import { TerminalTickerContext } from "pages/trade/binance-trade-page/trading/terminal-ticker.context";
 import {
   filterOrderEventsStream,
+  generateOrderMessage,
   getSymbol
 } from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import { UnitedOrder } from "pages/trade/binance-trade-page/trading/terminal.types";
@@ -24,6 +27,8 @@ export const TerminalOpenOrdersContext = createContext<
 >(TerminalOpenOrdersInitialState);
 
 export const TerminalOpenOrdersContextProvider: React.FC = ({ children }) => {
+  const { successAlert } = useAlerts();
+  const { items: symbols } = useContext(TerminalTickerContext);
   const { getOpenOrders } = useContext(TerminalMethodsContext);
 
   const {
@@ -69,6 +74,15 @@ export const TerminalOpenOrdersContextProvider: React.FC = ({ children }) => {
         ...updatedList[socketData.id],
         ...socketData
       };
+    if (symbols) {
+      const symbolData = symbols.find(
+        data => data.symbol === socketData.symbol
+      );
+      if (symbolData) {
+        const message = generateOrderMessage(socketData, symbolData);
+        successAlert(message);
+      }
+    }
     setList(updatedList);
   }, [socketData]);
 

@@ -20,6 +20,7 @@ import { TerminalTypeSwitcher } from "pages/trade/binance-trade-page/trading/sym
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
 import { SymbolSummaryData } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useContext } from "react";
+import NumberFormat from "react-number-format";
 import { diffDate } from "utils/dates";
 
 interface Props {
@@ -95,6 +96,7 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
         </Row>
         <Row size={"xsmall"}>
           <Text muted>
+            $
             <MonoText>
               {terminalMoneyFormat({ amount: lastPrice, tickSize })}
             </MonoText>
@@ -196,8 +198,15 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
         <LabeledValue size={"xsmall"} label={`24h Volume (${baseAsset})`}>
           <Text size={"xsmall"}>
             <MonoText>
-              {terminalMoneyFormat({ amount: baseVolume, tickSize: stepSize })}{" "}
-              {baseAsset}
+              <NumberFormat
+                value={terminalMoneyFormat({
+                  amount: baseVolume,
+                  tickSize: stepSize
+                })}
+                thousandSeparator={","}
+                displayType="text"
+                suffix={` ${baseAsset}`}
+              />
             </MonoText>
           </Text>
         </LabeledValue>
@@ -206,8 +215,15 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
         <LabeledValue size={"xsmall"} label={`24h Volume (${quoteAsset})`}>
           <Text size={"xsmall"}>
             <MonoText>
-              {terminalMoneyFormat({ amount: quoteVolume, tickSize: tickSize })}{" "}
-              {quoteAsset}
+              <NumberFormat
+                value={terminalMoneyFormat({
+                  amount: quoteVolume,
+                  tickSize: tickSize
+                })}
+                thousandSeparator={","}
+                displayType="text"
+                suffix={` ${quoteAsset}`}
+              />
             </MonoText>
           </Text>
         </LabeledValue>

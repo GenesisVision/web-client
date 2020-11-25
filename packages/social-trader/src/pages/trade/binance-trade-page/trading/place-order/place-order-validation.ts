@@ -107,7 +107,7 @@ export const placeOrderStopLimitValidationSchema = ({
     return object().shape({
       [TRADE_FORM_FIELDS.stopPrice]: tradeNumberShape({
         t,
-        min: minPrice,
+        min: 0,
         max: maxPrice,
         divider: tickSize,
         currency: quoteAsset

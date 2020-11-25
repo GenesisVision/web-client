@@ -16,6 +16,7 @@ import { TerminalTypeSwitcher } from "pages/trade/binance-trade-page/trading/sym
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
 import { SymbolSummaryData } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useContext } from "react";
+import NumberFormat from "react-number-format";
 import { diffDate } from "utils/dates";
 
 import styles from "./symbol-summary.module.scss";
@@ -92,7 +93,7 @@ const _SymbolSummaryView: React.FC<Props> = ({
           <Row>
             <Text muted>
               <MonoText>
-                {terminalMoneyFormat({ amount: lastPrice, tickSize })}
+                ${terminalMoneyFormat({ amount: lastPrice, tickSize })}
               </MonoText>
             </Text>
           </Row>
@@ -164,14 +165,28 @@ const _SymbolSummaryView: React.FC<Props> = ({
           </SymbolSummaryLine>
           <SymbolSummaryLine label={`24h Volume (${baseAsset})`}>
             <MonoText>
-              {terminalMoneyFormat({ amount: baseVolume, tickSize: stepSize })}{" "}
-              {baseAsset}
+              <NumberFormat
+                value={terminalMoneyFormat({
+                  amount: baseVolume,
+                  tickSize: stepSize
+                })}
+                thousandSeparator={","}
+                displayType="text"
+                suffix={` ${baseAsset}`}
+              />
             </MonoText>
           </SymbolSummaryLine>
           <SymbolSummaryLine label={`24h Volume (${quoteAsset})`}>
             <MonoText>
-              {terminalMoneyFormat({ amount: quoteVolume, tickSize: tickSize })}{" "}
-              {quoteAsset}
+              <NumberFormat
+                value={terminalMoneyFormat({
+                  amount: quoteVolume,
+                  tickSize: tickSize
+                })}
+                thousandSeparator={","}
+                displayType="text"
+                suffix={` ${quoteAsset}`}
+              />
             </MonoText>
           </SymbolSummaryLine>
         </RowItem>

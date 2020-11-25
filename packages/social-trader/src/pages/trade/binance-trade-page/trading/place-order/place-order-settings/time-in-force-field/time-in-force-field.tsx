@@ -25,7 +25,7 @@ export const TIME_IN_FORCE_VALUES: {
 const _TimeInForceField: React.FC<Props> = ({ orderType }) => {
   const { terminalType } = useContext(TerminalInfoContext);
   const values =
-    terminalType === "spot" || orderType === "StopLossLimit"
+    terminalType === "spot" || orderType === "TakeProfitLimit"
       ? TIME_IN_FORCE_VALUES
       : [...TIME_IN_FORCE_VALUES, { value: "GoodTillCrossing", label: "GTX" }];
   return (

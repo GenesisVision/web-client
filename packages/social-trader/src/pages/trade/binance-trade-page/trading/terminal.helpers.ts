@@ -3,6 +3,7 @@ import { Push } from "components/link/link";
 import { useParams } from "hooks/location";
 import { NextPageContext } from "next";
 import { Bar } from "pages/trade/binance-trade-page/trading/chart/charting_library/datafeed-api";
+import { terminalMoneyFormat } from "pages/trade/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
 import { getDividerParts } from "pages/trade/binance-trade-page/trading/order-book/order-book.helpers";
 import { SymbolState } from "pages/trade/binance-trade-page/trading/terminal-info.context";
 import {
@@ -33,6 +34,26 @@ export const DEFAULT_SYMBOL: SymbolState = {
 };
 const TRADE_AUTH_DATA_KEY = "TRADE_AUTH_DATA_KEY";
 const initialState = { publicKey: "", privateKey: "" };
+
+export const setUpperFirstLetter = ([firstLetter, ...rest]: string = "") =>
+  firstLetter.toUpperCase() + rest.join("").toLowerCase();
+
+export const generateOrderMessage = (
+  order: UnitedOrder,
+  symbol: MergedTickerSymbolType
+): string => {
+  const { stepSize } = symbol.lotSizeFilter;
+  return `${setUpperFirstLetter(
+    order.type
+  )} order ${order.executionType?.toLowerCase()}\n\n${setUpperFirstLetter(
+    order.executionType
+  )} exchange ${order.type.toLowerCase()} ${order.side.toLowerCase()} order for ${terminalMoneyFormat(
+    {
+      amount: order.quantity,
+      tickSize: String(stepSize)
+    }
+  )} ${symbol.baseAsset} by using ${symbol.quoteAsset}`;
+};
 
 export const getSymbolData = (
   symbolList: MergedTickerSymbolType[],

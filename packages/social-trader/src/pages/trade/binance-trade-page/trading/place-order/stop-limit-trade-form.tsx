@@ -166,7 +166,7 @@ const _StopLimitTradeForm: React.FC<IStopLimitTradeFormProps & {
       </Row>
       <Row size={"small"}>
         <RowItem wide>
-          <TimeInForceField orderType={"StopLossLimit"} />
+          <TimeInForceField orderType={"TakeProfitLimit"} />
         </RowItem>
         {isFutures && currentPositionMode === false && (
           <RowItem wide>
