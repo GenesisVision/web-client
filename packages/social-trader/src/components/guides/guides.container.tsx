@@ -5,7 +5,6 @@ import {
   getPrevNextGuidesNames,
   IPrevNextGuidesNamesProps
 } from "components/guides/guides.helpers";
-import { Guide, GuidesCategory } from "gv-api-web";
 import useHashTab from "pages/wallet/services/hashTab.hook";
 import React, { useEffect, useState } from "react";
 
@@ -15,14 +14,14 @@ const initialPrevNextGuidesNames = {
 };
 
 interface Props {
-  navGuides: GuidesCategory[];
+  navGuides: any[];
   onClickPass: (id: string) => void;
 }
 
 const _GuidesContainer: React.FC<Props> = ({ navGuides, onClickPass }) => {
   const { tab } = useHashTab("");
-  const [allGuides, setAllGuides] = useState<Guide[] | undefined>();
-  const [currentGuide, setCurrentGuide] = useState<Guide | undefined>();
+  const [allGuides, setAllGuides] = useState<any[] | undefined>();
+  const [currentGuide, setCurrentGuide] = useState<any | undefined>();
   const [prevNextGuidesNames, setPrevNextGuidesNames] = useState<
     IPrevNextGuidesNamesProps
   >(initialPrevNextGuidesNames);
