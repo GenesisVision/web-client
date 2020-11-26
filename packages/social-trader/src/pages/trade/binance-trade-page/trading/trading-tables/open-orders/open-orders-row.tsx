@@ -75,7 +75,9 @@ const _OpenOrdersRow: React.FC<Props> = ({
       <TableCell>{symbol}</TableCell>
       <TableCell>{type}</TableCell>
       <TableCell>
-        <Text color={side === "Buy" ? "green" : "red"}>{side}</Text>
+        <Text color={side.toLowerCase() === "buy" ? "green" : "red"}>
+          {side}
+        </Text>
       </TableCell>
       <TableCell>
         {terminalMoneyFormat({ amount: price, tickSize: String(tickSize) })}
