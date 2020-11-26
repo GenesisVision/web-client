@@ -56,7 +56,7 @@ export const TerminalOpenOrdersContextProvider: React.FC = ({ children }) => {
     openOrdersStream.subscribe(data => {
       setSocketData(data);
     });
-  }, [exchangeAccountId, baseAsset, quoteAsset, terminalType, userStream]);
+  }, [exchangeAccountId, terminalType, userStream]);
 
   useEffect(() => {
     if (!socketData) return;
