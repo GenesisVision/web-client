@@ -1,14 +1,11 @@
 import { SortingColumn } from "components/table/components/filtering/filter.type";
 
-export const ORDER_HISTORY_TABLE_COLUMNS: SortingColumn[] = [
+export const TRADE_HISTORY_TABLE_COLUMNS: SortingColumn[] = [
   {
     name: "date"
   },
   {
     name: "pair"
-  },
-  {
-    name: "type"
   },
   {
     name: "side"
@@ -20,15 +17,9 @@ export const ORDER_HISTORY_TABLE_COLUMNS: SortingColumn[] = [
     name: "executed"
   },
   {
-    name: "amount"
+    name: "fee"
   },
   {
     name: "total"
-  },
-  {
-    name: "trigger conditions"
-  },
-  {
-    name: "status"
   }
 ];

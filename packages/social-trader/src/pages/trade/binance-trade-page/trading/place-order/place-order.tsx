@@ -12,7 +12,10 @@ import { TerminalDefaultBlock } from "pages/trade/binance-trade-page/trading/com
 import { StopLimitTradeForm } from "pages/trade/binance-trade-page/trading/place-order/stop-limit-trade-form";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
 import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/terminal-methods.context";
-import { getSymbol } from "pages/trade/binance-trade-page/trading/terminal.helpers";
+import {
+  formatValueWithTick,
+  getSymbol
+} from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import {
   OrderSide,
   OrderType
@@ -25,7 +28,8 @@ import { MarketTradeForm } from "./market-trade-form";
 import {
   getBalance,
   getBalancesLoaderData,
-  IPlaceOrderFormValues
+  IPlaceOrderFormValues,
+  TRADE_FORM_FIELDS
 } from "./place-order.helpers";
 import styles from "./place-order.module.scss";
 
@@ -34,6 +38,7 @@ const _PlaceOrder: React.FC = () => {
   const { price } = useContext(TradingPriceContext);
 
   const {
+    stepSize,
     terminalType,
     exchangeAccountId,
     exchangeInfo,
@@ -50,8 +55,13 @@ const _PlaceOrder: React.FC = () => {
 
   const handleSubmit = useCallback(
     (values: IPlaceOrderFormValues) => {
+      const quantity = formatValueWithTick(
+        values[TRADE_FORM_FIELDS.quantity],
+        stepSize
+      );
       return sendRequest({
         ...values,
+        quantity,
         accountId: exchangeAccountId,
         side,
         type: tab,
@@ -59,6 +69,7 @@ const _PlaceOrder: React.FC = () => {
       });
     },
     [
+      stepSize,
       exchangeAccountId,
       sendRequest,
       tradeRequest,
@@ -102,7 +113,7 @@ const _PlaceOrder: React.FC = () => {
         <GVTabs value={tab} onChange={setTab}>
           <GVTab value={"Limit"} label={"LIMIT"} />
           <GVTab value={"Market"} label={"MARKET"} />
-          <GVTab value={"StopLossLimit"} label={"STOP LIMIT"} />
+          <GVTab value={"TakeProfitLimit"} label={"STOP LIMIT"} />
         </GVTabs>
       </Row>
       <Row>
@@ -139,7 +150,7 @@ const _PlaceOrder: React.FC = () => {
               side={side}
             />
           )}
-          {tab === "StopLossLimit" && (
+          {tab === "TakeProfitLimit" && (
             <StopLimitTradeForm
               status={status}
               exchangeInfo={exchangeInfo}

@@ -9,6 +9,8 @@ const withTM = require("next-transpile-modules")(["shared", "gv-api-web"]);
 
 const isProd = process.env.NODE_ENV === "production";
 
+const enablePreact = false;
+
 const analyzer = withBundleAnalyzer({
   enabled: process.env.ANALYZE === "true"
 });
@@ -32,7 +34,7 @@ function create(path) {
       apiUrl: process.env.REACT_APP_API_URL
     },
     webpack(config, { isServer }) {
-      if (isServer) {
+      if (isServer && enablePreact) {
         // Move Preact into the framework chunk instead of duplicating in routes:
         const splitChunks =
           config.optimization && config.optimization.splitChunks;
@@ -54,7 +56,7 @@ function create(path) {
         );
       }
 
-      if (isServer) {
+      if (isServer && enablePreact) {
         config.resolve.alias = {
           ...config.resolve.alias,
           react: "preact/compat",

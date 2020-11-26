@@ -1,7 +1,4 @@
-import {
-  getLotSizeFilter,
-  getSymbolPriceFilter
-} from "pages/trade/binance-trade-page/trading/place-order/place-order.helpers";
+import { useAccountCurrency } from "hooks/account-currency.hook";
 import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/terminal-methods.context";
 import {
   filterOutboundAccountInfoStream,
@@ -82,6 +79,7 @@ export const TerminalInfoContextProvider: React.FC<Props> = ({
   terminalType,
   children
 }) => {
+  const currency = useAccountCurrency();
   const { updateUrl } = useUpdateTerminalUrlParams();
 
   const {
@@ -101,7 +99,7 @@ export const TerminalInfoContextProvider: React.FC<Props> = ({
 
   useEffect(() => {
     if (!exchangeAccountId) return;
-    const accountInfo = getAccountInformation(exchangeAccountId);
+    const accountInfo = getAccountInformation(exchangeAccountId, currency);
     accountInfo.subscribe(data => {
       setAccountInfo(data);
     });

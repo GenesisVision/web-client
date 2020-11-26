@@ -41,11 +41,7 @@ import {
   GV_PROGRAMS_ROUTE,
   INVEST_ROUTE
 } from "./invest.routes";
-import {
-  META_TRADER_5_ROUTE,
-  TERMINAL_ROUTE,
-  TRADE_ROUTE
-} from "./trade.routes";
+import { TERMINAL_ROUTE, TRADE_ROUTE } from "./trade.routes";
 
 export type TMenuItem = {
   isBeta?: boolean;
@@ -168,11 +164,6 @@ const mainMenuItemsUnion = [
         Icon: Mt5Icon,
         route: TERMINAL_ROUTE,
         label: "navigation.terminal"
-      },
-      {
-        Icon: Mt5Icon,
-        route: META_TRADER_5_ROUTE,
-        label: "navigation.mt5"
       }
     ]
   }

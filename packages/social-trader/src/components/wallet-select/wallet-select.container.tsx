@@ -16,19 +16,20 @@ import {
   walletsAvailableSelector,
   walletsSelector
 } from "pages/wallet/reducers/wallet.reducers";
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { safeGetElemFromArray } from "utils/helpers";
 
 export interface IWalletSelectContainerProps extends IWalletSelectProps {
+  currentId?: string;
   label?: string;
   onChange: (wallet: CommonWalletType) => void;
   filterFunc?: (wallet: any) => boolean;
 }
 
 const _WalletSelectContainer: React.FC<IWalletSelectContainerProps> = props => {
-  const { onChange, label, filterFunc = () => true } = props;
+  const { currentId, onChange, label, filterFunc = () => true } = props;
   const dispatch = useDispatch();
   const accountCurrency = useAccountCurrency();
   const [t] = useTranslation();
@@ -60,6 +61,16 @@ const _WalletSelectContainer: React.FC<IWalletSelectContainerProps> = props => {
   const handleUpdate = useCallback(() => {
     dispatch(fetchWalletsByCurrencyAvailableAction(accountCurrency));
   }, [accountCurrency]);
+
+  useEffect(() => {
+    if (currentId) {
+      const wallet = safeGetElemFromArray(
+        items,
+        wallet => wallet.id === currentId
+      );
+      onChange(wallet);
+    }
+  }, [items]);
 
   return (
     <HookFormWalletSelect

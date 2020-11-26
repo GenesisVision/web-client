@@ -34,6 +34,9 @@ export const OPEN_ORDERS_TABLE_COLUMNS: SortingColumn[] = [
     name: "total"
   },
   {
+    name: "trigger conditions"
+  },
+  {
     name: "cancel-all"
   }
 ];

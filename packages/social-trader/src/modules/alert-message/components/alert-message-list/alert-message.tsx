@@ -36,6 +36,7 @@ const CloseButton = styled.div`
 `;
 
 const Text = styled.div`
+  white-space: pre-wrap;
   word-wrap: break-word;
   max-width: 300px;
   padding: ${$paddingSmall / 4}px;

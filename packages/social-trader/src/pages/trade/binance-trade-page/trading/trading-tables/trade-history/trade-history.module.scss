@@ -1,0 +1,14 @@
+$COLUMNS_COUNT: 8;
+$column-width: 100px;
+
+.trade-history {
+  &__table {
+    & th,
+    & td {
+      width: $column-width;
+      min-width: $column-width;
+      max-width: $column-width;
+      box-sizing: border-box;
+    }
+  }
+}

@@ -26,6 +26,7 @@ import {
 import { from, Observable } from "rxjs";
 import { api } from "services/api-client/swagger-custom-client";
 import { OrderRequest } from "services/request.service";
+import { CurrencyEnum } from "utils/types";
 
 export const getExchangeInfo = (): Promise<ExchangeInfo> =>
   api.terminal().getExchangeInfo();
@@ -51,22 +52,30 @@ export const getServerTime = () => {
 };
 
 const transformToUnitedOrder = ({
+  status,
+  commission,
+  quoteQuantityFilled,
   orderId,
   createTime,
   symbol,
   type,
   side,
+  stopPrice,
   price,
   quantity,
   quoteQuantity,
   quantityFilled
 }: BinanceRawOrder): UnitedOrder => ({
+  orderStatus: status,
+  commission,
+  quoteQuantityFilled,
   executedQuantity: quoteQuantity,
   id: orderId,
   time: createTime,
   symbol,
   type,
   side,
+  stopPrice,
   price,
   quantityFilled,
   quantity
@@ -85,14 +94,21 @@ export const getOpenOrders = (
       ) as Promise<UnitedOrder[]>
   );
 
-export const getAllOrders = (
-  symbol: string,
-  accountId?: string
-): Observable<UnitedOrder[]> =>
+export const getAllTrades = (accountId?: string): Observable<UnitedOrder[]> =>
   from(
     api
       .terminal()
-      .getTradesHistory({ accountId })
+      .getTradesHistory({ accountId, mode: "TradeHistory" })
+      .then(({ items }: BinanceRawOrderItemsViewModel) =>
+        items.map(transformToUnitedOrder)
+      ) as Promise<UnitedOrder[]>
+  );
+
+export const getAllOrders = (accountId?: string): Observable<UnitedOrder[]> =>
+  from(
+    api
+      .terminal()
+      .getTradesHistory({ accountId, mode: "OrderHistory" })
       .then(({ items }: BinanceRawOrderItemsViewModel) =>
         items.map(transformToUnitedOrder)
       ) as Promise<UnitedOrder[]>
@@ -111,9 +127,12 @@ export const getUserStreamKey = (
   );
 
 export const getAccountInformation = (
-  accountId?: string
+  accountId?: string,
+  currency?: CurrencyEnum
 ): Observable<Account> =>
-  from(api.terminal().getAccountInfo({ accountId }) as Promise<Account>);
+  from(
+    api.terminal().getAccountInfo({ accountId, currency }) as Promise<Account>
+  );
 
 export const getTrades = (
   symbol: string,
@@ -202,11 +221,11 @@ export const postBuy = ({
   newOrder(
     {
       reduceOnly,
-      stopPrice: type === "StopLossLimit" ? String(stopPrice) : undefined,
+      stopPrice: type === "TakeProfitLimit" ? stopPrice : undefined,
       symbol,
       type,
       price:
-        type === "Limit" || type === "StopLossLimit"
+        type === "Limit" || type === "TakeProfitLimit"
           ? String(price)
           : undefined,
       quantity: String(quantity),
@@ -231,11 +250,11 @@ export const postSell = ({
   newOrder(
     {
       reduceOnly,
-      stopPrice: type === "StopLossLimit" ? String(stopPrice) : undefined,
+      stopPrice: type === "TakeProfitLimit" ? stopPrice : undefined,
       symbol,
       type,
       price:
-        type === "Limit" || type === "StopLossLimit"
+        type === "Limit" || type === "TakeProfitLimit"
           ? String(price)
           : undefined,
       quantity: String(quantity),

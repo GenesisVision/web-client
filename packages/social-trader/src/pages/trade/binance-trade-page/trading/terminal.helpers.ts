@@ -3,14 +3,14 @@ import { Push } from "components/link/link";
 import { useParams } from "hooks/location";
 import { NextPageContext } from "next";
 import { Bar } from "pages/trade/binance-trade-page/trading/chart/charting_library/datafeed-api";
+import { terminalMoneyFormat } from "pages/trade/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
 import { getDividerParts } from "pages/trade/binance-trade-page/trading/order-book/order-book.helpers";
 import { SymbolState } from "pages/trade/binance-trade-page/trading/terminal-info.context";
 import {
   Account,
   AssetBalance,
   ExchangeInfo,
-  ExecutionReport,
-  SymbolFilter,
+  MergedTickerSymbolType,
   TerminalAuthDataType,
   TerminalCurrency,
   UnitedOrder
@@ -34,6 +34,48 @@ export const DEFAULT_SYMBOL: SymbolState = {
 };
 const TRADE_AUTH_DATA_KEY = "TRADE_AUTH_DATA_KEY";
 const initialState = { publicKey: "", privateKey: "" };
+
+export const setUpperFirstLetter = ([firstLetter, ...rest]: string = "") =>
+  firstLetter.toUpperCase() + rest.join("").toLowerCase();
+
+export const generateOrderMessage = (
+  order: UnitedOrder,
+  symbol: MergedTickerSymbolType
+): string => {
+  const { stepSize } = symbol.lotSizeFilter;
+  const orderType = setUpperFirstLetter(order.type)
+    .split("_")
+    .join(" ");
+  const executionTypeTitle =
+    order.executionType?.toLowerCase() === "new"
+      ? "Created"
+      : order.executionType?.toLowerCase() === "trade"
+      ? "filled"
+      : order.executionType;
+  const executionTypeDescription =
+    order.executionType?.toLowerCase() === "new"
+      ? "Submitted"
+      : order.executionType?.toLowerCase() === "trade"
+      ? "filled"
+      : order.executionType;
+  return `${orderType} ${order.side.toLowerCase()} order ${executionTypeTitle?.toLowerCase()}\n\n${setUpperFirstLetter(
+    executionTypeDescription
+  )} exchange ${orderType.toLowerCase()} ${order.side.toLowerCase()} order for ${terminalMoneyFormat(
+    {
+      amount: order.quantity,
+      tickSize: String(stepSize)
+    }
+  )} ${symbol.baseAsset} by using ${symbol.quoteAsset}`;
+};
+
+export const getSymbolData = (
+  symbolList: MergedTickerSymbolType[],
+  symbol: string
+): SymbolState | undefined => {
+  const symbolData = symbolList.find(data => data.symbol === symbol);
+  if (!symbolData) return;
+  return { baseAsset: symbolData.baseAsset, quoteAsset: symbolData.quoteAsset };
+};
 
 const updateUrl = ({
   reloadPage,

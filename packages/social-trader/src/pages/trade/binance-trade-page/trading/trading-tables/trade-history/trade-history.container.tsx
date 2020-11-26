@@ -6,10 +6,10 @@ import { normalizeOpenOrdersList } from "pages/trade/binance-trade-page/trading/
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { map } from "rxjs/operators";
 
-import { OrderHistory } from "./order-history";
+import { TradeHistory } from "./trade-history";
 
-export const OrderHistoryContainer: React.FC = () => {
-  const { getAllOrders } = useContext(TerminalMethodsContext);
+export const TradeHistoryContainer: React.FC = () => {
+  const { getAllTrades } = useContext(TerminalMethodsContext);
 
   const { exchangeAccountId, userStream } = useContext(TerminalInfoContext);
 
@@ -20,7 +20,7 @@ export const OrderHistoryContainer: React.FC = () => {
 
   useEffect(() => {
     if (!exchangeAccountId || !userStream) return;
-    const openOrders = getAllOrders(exchangeAccountId);
+    const openOrders = getAllTrades(exchangeAccountId);
     openOrders.pipe(map(normalizeOpenOrdersList)).subscribe(data => {
       setList(data);
     });
@@ -58,5 +58,5 @@ export const OrderHistoryContainer: React.FC = () => {
         }),
     [list]
   );
-  return <OrderHistory items={items} />;
+  return <TradeHistory items={items} />;
 };
