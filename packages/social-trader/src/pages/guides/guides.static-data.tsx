@@ -1648,11 +1648,7 @@ export const navGuides: INavGuide[] = [
               </ol>
             </section>
           </>
-        ),
-        linkInfo: {
-          link: CREATE_SELF_MANAGED_FUND_PAGE_ROUTE,
-          label: "Create self-managed Fund"
-        }
+        )
       },
       {
         id: "trading-5",
