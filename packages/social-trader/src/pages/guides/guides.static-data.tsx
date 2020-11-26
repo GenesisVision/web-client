@@ -33,6 +33,12 @@ import Programs1 from "media/guides/guides-4/Programs1.png";
 import Programs2 from "media/guides/guides-4/Programs2.png";
 import Programs3 from "media/guides/guides-4/Programs3.png";
 import Signalproviding1 from "media/guides/guides-4/Signalproviding1.png";
+import Social1 from "media/guides/guides-5/Social1.png";
+import Social2 from "media/guides/guides-5/Social2.png";
+import Social3 from "media/guides/guides-5/Social3.png";
+import Social4 from "media/guides/guides-5/Social4.png";
+import Social5 from "media/guides/guides-5/Social5.png";
+import Social6 from "media/guides/guides-5/Social6.png";
 import { ATTACH_ACCOUNT_PAGE_ROUTE } from "pages/attach-account/attach-account.constants";
 import { CREATE_ACCOUNT_PAGE_ROUTE } from "pages/create-account/create-account.constants";
 import {
@@ -2692,6 +2698,224 @@ export const navGuides: INavGuide[] = [
         linkInfo: {
           link: ATTACH_ACCOUNT_PAGE_ROUTE,
           label: "Attach Binance account"
+        }
+      }
+    ]
+  },
+  {
+    id: "guides-5",
+    name: "Social",
+    guides: [
+      {
+        id: "social-1",
+        canonicalName: "social",
+        name: "Social",
+        content: (
+          <>
+            <section>
+              <h3>How to use GV Social?</h3>
+              <p>
+                <b>GV Social</b> is an internal social network for traders and
+                investors to communicate, share news, and information.
+              </p>
+              <p>
+                GV Social has 4 sections: Feed, Users, your Profile, and Media.
+              </p>
+              <ConversationImages
+                size={"large"}
+                images={[
+                  {
+                    id: Social1,
+                    resizes: [
+                      {
+                        height: 230,
+                        width: 100,
+                        logoUrl: Social1,
+                        quality: "Original"
+                      },
+                      {
+                        height: 0,
+                        width: 0,
+                        logoUrl: Social1,
+                        quality: "Low"
+                      }
+                    ]
+                  }
+                ]}
+              />
+              <p>
+                Feed shows all the posts on the platform, the most popular ones,
+                and the ones of the accounts you are subscribed to.
+              </p>
+              <ConversationImages
+                size={"large"}
+                images={[
+                  {
+                    id: Social2,
+                    resizes: [
+                      {
+                        height: 100,
+                        width: 100,
+                        logoUrl: Social2,
+                        quality: "Original"
+                      },
+                      {
+                        height: 0,
+                        width: 0,
+                        logoUrl: Social2,
+                        quality: "Low"
+                      }
+                    ]
+                  }
+                ]}
+              />
+              <p>
+                Apart from that, you can find Top strategies, Hot topics, and
+                Trending assets in the Feed section.
+              </p>
+              <ConversationImages
+                size={"large"}
+                images={[
+                  {
+                    id: Social3,
+                    resizes: [
+                      {
+                        height: 0,
+                        width: 0,
+                        logoUrl: Social3,
+                        quality: "Original"
+                      },
+                      {
+                        height: 0,
+                        width: 0,
+                        logoUrl: Social3,
+                        quality: "Low"
+                      }
+                    ]
+                  }
+                ]}
+              />
+              <p>
+                Users section allows you to see all the users, the number of
+                subscribers, and AUM (Assets under management).
+              </p>
+              <p>
+                My profile section will lead you to your personal account page
+                where you can manage your posts and your personal information.
+              </p>
+              <p>
+                The media page shows the latest world blockchain and crypto news
+                to help you stay tuned.
+              </p>
+            </section>
+
+            <section>
+              <h3>How do I make a post?</h3>
+              <p>
+                You can create a new post from both your profile page and the
+                feed. To create a post follow these easy steps:
+              </p>
+              <ol>
+                <li>
+                  Open Feed or My profile section and click on the{" "}
+                  <b>“What’s new”</b> field.
+                </li>
+                <li>
+                  Type any text you like. You can tag a particular Program or a
+                  Fund if you type @ and then the name of the product. Select
+                  the needed one from the opened menu and it will appear in your
+                  post.
+                </li>
+                <li>
+                  Click on the image icon near the “Send” button to attach an
+                  image from your device if needed.
+                </li>
+                <li>
+                  Press Enter or <b>“Send”</b> button.
+                  <ConversationImages
+                    size={"large"}
+                    images={[
+                      {
+                        id: Social4,
+                        resizes: [
+                          {
+                            height: 0,
+                            width: 0,
+                            logoUrl: Social4,
+                            quality: "Original"
+                          },
+                          {
+                            height: 0,
+                            width: 0,
+                            logoUrl: Social4,
+                            quality: "Low"
+                          }
+                        ]
+                      }
+                    ]}
+                  />
+                </li>
+              </ol>
+              <p>
+                You can edit your post during a few hours after the publication.
+                The option could be found on the menu when you click three dots
+                on the right upper corner of your post. You will also be able to
+                pin your post, delete it or share it on the same menu.
+              </p>
+              <ConversationImages
+                size={"large"}
+                images={[
+                  {
+                    id: Social5,
+                    resizes: [
+                      {
+                        height: 270,
+                        width: 100,
+                        logoUrl: Social5,
+                        quality: "Original"
+                      },
+                      {
+                        height: 0,
+                        width: 0,
+                        logoUrl: Social5,
+                        quality: "Low"
+                      }
+                    ]
+                  }
+                ]}
+              />
+              <p>
+                If you deleted your post by accident, you can restore it by
+                clicking “Undo” right away.
+              </p>
+              <ConversationImages
+                size={"large"}
+                images={[
+                  {
+                    id: Social6,
+                    resizes: [
+                      {
+                        height: 100,
+                        width: 50,
+                        logoUrl: Social6,
+                        quality: "Original"
+                      },
+                      {
+                        height: 0,
+                        width: 0,
+                        logoUrl: Social6,
+                        quality: "Low"
+                      }
+                    ]
+                  }
+                ]}
+              />
+            </section>
+          </>
+        ),
+        linkInfo: {
+          link: SOCIAL_ROUTE,
+          label: "Social"
         }
       }
     ]
