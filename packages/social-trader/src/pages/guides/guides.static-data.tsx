@@ -1278,9 +1278,13 @@ export const navGuides: INavGuide[] = [
               <li>
                 After you press the button fill in the API key and API secret.
                 The instructions on how to do that could be found{" "}
-                <GuideLink link={GV_FOLLOW_ROUTE}>
+                <a
+                  href="https://binance.zendesk.com/hc/en-us/articles/360002502072"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <b>here</b>
-                </GuideLink>
+                </a>
                 . Important: if you are attaching the account for signal
                 providing purposes create an API key without the trading rights,
                 if you are planning to use the account to follow other traders
@@ -2481,7 +2485,7 @@ export const navGuides: INavGuide[] = [
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  the article
+                  <b>the article</b>
                 </a>
                 .
               </p>
@@ -2560,7 +2564,7 @@ export const navGuides: INavGuide[] = [
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  article
+                  <b>article</b>
                 </a>
                 .
               </p>
