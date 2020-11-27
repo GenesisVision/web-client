@@ -90,7 +90,7 @@
   "list-4": "There must be more than 1 GVT stored in the wallet",
   "conditions": "Conditions for obtaining discounts",
   "wallet": "Wallet",
-  "discounts-table": "From 1 GVT up to 10\t30%\nUp to 25 GVT\t35%\nUp to 50 GVT\t40%\nUp to 100 GVT\t45%\nUp to 500 GVT\t50%\n500 GVT+\t55%",
+  "discounts-table": "From 1 GVT up to 25\t5%\nUp to 50 GVT\t10%\nUp to 100 GVT\t15%\nUp to 500 GVT\t20%\n500 GVT+\t25%",
   "note": "Note",
   "list-5": "If you switch this function off, the fee will become \"Regular\" and charge 100%.\nIf you have enabled the \"Using GVT to pay for fees\" function but have an insufficient amount of GVT stored in the wallet, this function will no longer work and the fee will become Regular.\nFor managers the commission for trading will be debited from the manager’s GVT wallet. At the end of the reporting period, the manager will receive a refund of the commission at the expense of increasing the share of own funds in management."
 }
