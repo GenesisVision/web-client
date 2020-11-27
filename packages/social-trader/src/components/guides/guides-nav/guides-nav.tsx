@@ -1,11 +1,12 @@
 import { DefaultBlock } from "components/default.block/default.block";
 import GuidesList from "components/guides/guides-list/guides-list";
+import { INavGuide } from "pages/guides/guides.static-data";
 import React from "react";
 
 import styles from "./guides-nav.module.scss";
 
 interface Props {
-  navGuides: any[];
+  navGuides: INavGuide[];
   currentId?: string;
 }
 
@@ -16,7 +17,7 @@ const _GuidesNav: React.FC<Props> = ({ navGuides, currentId }) => (
         solid
         size={"xlarge"}
         className={styles["guides-nav__item"]}
-        key={navGuide.name}
+        key={navGuide.id}
       >
         <GuidesList
           name={navGuide.name}

@@ -7,7 +7,6 @@
   width: 100%;
   padding-left: $padding-small !important;
   padding-right: $padding-small !important;
-
   margin-bottom: $padding-xsmall;
   &:not(:last-child) {
     @include media-breakpoint-landscape-phone() {
@@ -16,13 +15,15 @@
   }
 
   @include media-breakpoint-tablet() {
-    width: calc(100% - 250px);
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 250px) !important;
   }
 
   @include media-breakpoint-landscape-tablet() {
     padding-left: $padding-xxlarge !important;
     padding-right: $padding-xxlarge !important;
-    width: calc(100% - 347px);
+    width: calc(100% - 347px) !important;
   }
 
   &__subtitle {
@@ -31,6 +32,72 @@
 
   &__content {
     @include adaptive-padding(bottom, $padding-medium);
+    @include font-size($font-size-paragraph);
+    line-height: 1.7;
+
+    img {
+      @include adaptive-padding(top, $padding-xsmall);
+      margin-left: auto;
+      margin-right: auto;
+      min-height: 50px;
+
+      ~ img {
+        margin-top: 0;
+      }
+    }
+
+    h3 {
+      @include adaptive-padding(bottom, $padding-xxsmall);
+    }
+
+    ul {
+      list-style: disc;
+    }
+
+    ol,
+    ul {
+      @include adaptive-padding(left, $padding-xsmall);
+      margin-top: 0;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    table {
+      @include adaptive-margin(top, $padding-xsmall);
+      width: 100%;
+      border-collapse: collapse;
+      &:not(:last-child) {
+        @include adaptive-margin(bottom, $padding-small);
+      }
+    }
+
+    th,
+    td {
+      @include adaptive-full-padding($padding-xxsmall);
+      border: 1px solid $main-color;
+    }
+
+    td {
+      text-align: left;
+    }
+
+    th {
+      text-align: center;
+
+      @include media-breakpoint-large-desktop() {
+        min-width: 150px;
+      }
+    }
+
+    section:not(:last-child) {
+      @include adaptive-padding(bottom, $padding-small);
+    }
+
+    b {
+      font-weight: 600;
+    }
   }
 
   &__controls {
@@ -38,6 +105,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    margin-top: auto;
 
     @include media-breakpoint-landscape-phone() {
       justify-content: space-between;
@@ -55,7 +123,7 @@
     text-align: center;
 
     @include media-breakpoint-landscape-phone() {
-      width: auto;
+      width: auto !important;
       margin-bottom: 0;
       margin-right: 116px;
     }
@@ -78,7 +146,7 @@
 
   &__button {
     @include media-breakpoint-landscape-phone() {
-      position: absolute;
+      position: absolute !important;
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%);
