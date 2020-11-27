@@ -43,15 +43,22 @@
 }
 
 .guides-list-header {
-  @include adaptive-padding(bottom, $padding-medium);
+  @include font-size($font-size-h4);
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
+  font-weight: 600;
+  cursor: pointer;
 
   &__number {
+    @include adaptive-margin(left, $padding-xxsmall);
     font-size: 14px;
     font-weight: 400;
     color: rgba($main-color, 0.3);
+  }
+
+  &--is-visible-list {
+    @include adaptive-padding(bottom, $padding-medium);
   }
 }

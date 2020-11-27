@@ -2,7 +2,8 @@
   "footer": {
     "faq": "FAQ",
     "partners": "Referral program",
-    "fees": "Fees"
+    "fees": "Fees",
+    "guides": "Guides"
   },
   "actions-status-filter": {
     "label": "Status",

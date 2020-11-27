@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -22,14 +23,19 @@ const _GuidesListHeader: React.FC<Props> = ({
       ? `${guidesTotal} ${t("guides:step")}`
       : `${guidesTotal} ${t("guides:steps")}`;
   return (
-    <h3 className={styles["guides-list-header"]} onClick={onClick}>
+    <div
+      className={clsx(styles["guides-list-header"], {
+        [styles["guides-list-header--is-visible-list"]]: isVisibleList
+      })}
+      onClick={onClick}
+    >
       {name}
       {!isVisibleList && (
         <span className={styles["guides-list-header__number"]}>
           {countsText}
         </span>
       )}
-    </h3>
+    </div>
   );
 };
 
