@@ -20,6 +20,8 @@ export type SetSliderValueFunc = (
   shouldUpdate?: boolean
 ) => void;
 
+export const MAX_TRADE_SLIDER_VALUE = 100;
+
 export const useTradeSlider = ({
   watch,
   setValue,
@@ -45,11 +47,14 @@ export const useTradeSlider = ({
     sliderValue,
     shouldUpdate = true
   ) => {
-    setSliderValue(sliderValue);
-    if (sliderValue === undefined || !shouldUpdate) return;
+    const newValue = !!sliderValue
+      ? Math.min(sliderValue, MAX_TRADE_SLIDER_VALUE)
+      : sliderValue;
+    setSliderValue(newValue);
+    if (newValue === undefined || !shouldUpdate) return;
     if (side === "Buy") {
       const walletAvailable = +getBalance(balances, quoteAsset);
-      const fullTotal = calculatePercentage(walletAvailable, sliderValue);
+      const fullTotal = calculatePercentage(walletAvailable, newValue);
       const newAmount = truncated(
         fullTotal / price,
         getDecimalScale(formatValue(stepSize))
@@ -61,7 +66,7 @@ export const useTradeSlider = ({
         balances,
         terminalType === "futures" ? quoteAsset : baseAsset
       );
-      const percentAmount = calculatePercentage(walletAvailable, sliderValue);
+      const percentAmount = calculatePercentage(walletAvailable, newValue);
       if (
         truncated(percentAmount, getDecimalScale(formatValue(stepSize))) === 0
       )
