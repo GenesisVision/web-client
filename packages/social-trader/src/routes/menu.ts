@@ -160,7 +160,6 @@ const mainMenuItemsUnion = [
     route: TRADE_ROUTE,
     children: [
       {
-        isBeta: true,
         Icon: Mt5Icon,
         route: TERMINAL_ROUTE,
         label: "navigation.terminal"
