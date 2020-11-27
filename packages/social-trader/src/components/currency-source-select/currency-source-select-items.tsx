@@ -1,6 +1,7 @@
 import { CurrencyItemWithAmount } from "components/currency-item/currency-item-with-amount";
 import { AssetDetails } from "gv-api-web";
 import React from "react";
+import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 
 export type CurrencySourceSelectItemsType = Array<CurrencySourceSelectItemType>;
@@ -24,7 +25,9 @@ export const getCurrencySourceSelectItems = (
     return (
       <option value={id} key={id}>
         <CurrencyItemWithAmount
-          available={available}
+          available={
+            available ? +formatCurrencyValue(+available, currency) : undefined
+          }
           symbol={currency}
           logo={logo}
           name={name}
