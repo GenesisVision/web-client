@@ -22,12 +22,14 @@ export const getCurrencySourceSelectItems = (
       ? asset.title
       : `${title ? `${title} | ` : ""}${currency}`;
     const logo = asset ? asset.logoUrl : logoUrl;
+    const availableValue =
+      available !== undefined
+        ? +formatCurrencyValue(+available, currency)
+        : undefined;
     return (
       <option value={id} key={id}>
         <CurrencyItemWithAmount
-          available={
-            available ? +formatCurrencyValue(+available, currency) : undefined
-          }
+          available={availableValue}
           symbol={currency}
           logo={logo}
           name={name}
