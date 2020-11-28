@@ -3,7 +3,11 @@ import TableRow from "components/table/components/table-row";
 import { Text } from "components/text/text";
 import { terminalMoneyFormat } from "pages/trade/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
-import { getSymbolFilters } from "pages/trade/binance-trade-page/trading/terminal.helpers";
+import { TerminalTickerContext } from "pages/trade/binance-trade-page/trading/terminal-ticker.context";
+import {
+  getSymbolData,
+  getSymbolFilters
+} from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import { OrderSide } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useContext } from "react";
 import { formatDate } from "utils/dates";
@@ -13,12 +17,14 @@ interface Props {
   symbol: string;
   side: OrderSide;
   price: number;
+  commissionAsset: string;
   commission: number;
   quantity: number;
   total: number;
 }
 
 const _TradeHistoryRow: React.FC<Props> = ({
+  commissionAsset,
   commission,
   quantity,
   time,
@@ -27,11 +33,15 @@ const _TradeHistoryRow: React.FC<Props> = ({
   price,
   total
 }) => {
+  const { items } = useContext(TerminalTickerContext);
   const { exchangeInfo } = useContext(TerminalInfoContext);
-  if (!exchangeInfo) return null;
+  if (!exchangeInfo || !items) return null;
   const symbolFilters = getSymbolFilters(exchangeInfo, symbol);
   const { tickSize } = symbolFilters.priceFilter;
   const { stepSize } = symbolFilters.lotSizeFilter;
+
+  const symbolData = getSymbolData(items, symbol);
+
   return (
     <TableRow>
       <TableCell firstOffset={false}>{formatDate(time)}</TableCell>
@@ -50,9 +60,14 @@ const _TradeHistoryRow: React.FC<Props> = ({
           tickSize: String(stepSize)
         })}
       </TableCell>
-      <TableCell>{commission}</TableCell>
       <TableCell>
-        {terminalMoneyFormat({ amount: total, tickSize: String(tickSize) })}
+        {commission} {commissionAsset}
+      </TableCell>
+      <TableCell>
+        {`${terminalMoneyFormat({
+          amount: total,
+          tickSize: String(tickSize)
+        })} ${symbolData?.quoteAsset}`}
       </TableCell>
     </TableRow>
   );
