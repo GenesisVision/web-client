@@ -1000,6 +1000,7 @@ export interface MyTrade {
 export type QueryOrderResult = BinanceRawOrder;
 
 export type UnitedOrder = {
+  commissionAsset: string;
   commission: number;
   quoteQuantityFilled: number;
   executionType?: BinanceExecutionType;
