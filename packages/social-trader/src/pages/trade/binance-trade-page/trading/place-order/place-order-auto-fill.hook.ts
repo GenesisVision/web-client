@@ -65,7 +65,7 @@ export const usePlaceOrderAutoFill = ({
           setSliderValue(newSliderValue, false);
         }
         if (side === "Buy" && buyWalletAvailable) {
-          const newSliderValue = (total / buyWalletAvailable) * 100;
+          const newSliderValue = (value / buyWalletAvailable) * 100;
           setSliderValue(newSliderValue, false);
         }
       }
