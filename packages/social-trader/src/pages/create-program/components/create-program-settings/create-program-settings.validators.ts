@@ -74,7 +74,12 @@ const createProgramSettingsValidationSchema = ({
       [CREATE_PROGRAM_FIELDS.stopOutLevel]: isExchange
         ? number()
         : stopOutLevelShape(t),
-      [CREATE_PROGRAM_FIELDS.entryFee]: entryFeeShape(t, maxManagementFee),
+      [CREATE_PROGRAM_FIELDS.managementFee]: isExchange
+        ? entryFeeShape(t, maxManagementFee)
+        : number(),
+      [CREATE_PROGRAM_FIELDS.entryFee]: isExchange
+        ? number()
+        : entryFeeShape(t, maxManagementFee),
       [CREATE_PROGRAM_FIELDS.successFee]: successFeeShape(t, maxSuccessFee),
       [CREATE_PROGRAM_FIELDS.investmentLimit]: investmentLimitShape(
         hasInvestmentLimit,
