@@ -47,6 +47,7 @@ export enum CREATE_PROGRAM_FIELDS {
   stopOutLevel = "stopOutLevel",
   investmentLimit = "investmentLimit",
   tradesDelay = "tradesDelay",
+  managementFee = "managementFee",
   entryFee = "entryFee",
   successFee = "successFee",
   depositWalletId = "depositWalletId",
@@ -252,7 +253,11 @@ const _CreateProgramSettings: React.FC<Props> = ({
           title={t("create-account:settings.investment-program-fees")}
           firstFeeLabel={t("asset-settings:fields.management-fee")}
           firstFeeUnderText={t("create-account:settings.hints.management-fee")}
-          firstFeeName={CREATE_PROGRAM_FIELDS.entryFee}
+          firstFeeName={
+            isExchange
+              ? CREATE_PROGRAM_FIELDS.managementFee
+              : CREATE_PROGRAM_FIELDS.entryFee
+          }
           firstFeeDescription={t(
             "create-account:settings.hints.management-fee-description"
           )}
