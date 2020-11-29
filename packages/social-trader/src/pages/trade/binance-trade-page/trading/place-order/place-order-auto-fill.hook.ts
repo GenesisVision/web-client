@@ -44,11 +44,6 @@ export const usePlaceOrderAutoFill = ({
       if (value > 0 || String(total) === "0") {
         setValue(quantityName, value, true);
 
-        if (side === "Buy" && buyWalletAvailable) {
-          const newSliderValue = (total / buyWalletAvailable) * 100;
-          setSliderValue(newSliderValue, false);
-        }
-
         setAutoFill(true);
       }
     } else setAutoFill(false);
@@ -67,6 +62,10 @@ export const usePlaceOrderAutoFill = ({
 
         if (side === "Sell" && sellWalletAvailable) {
           const newSliderValue = (quantity / sellWalletAvailable) * 100;
+          setSliderValue(newSliderValue, false);
+        }
+        if (side === "Buy" && buyWalletAvailable) {
+          const newSliderValue = (total / buyWalletAvailable) * 100;
           setSliderValue(newSliderValue, false);
         }
       }
