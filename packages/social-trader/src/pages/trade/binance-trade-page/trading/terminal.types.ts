@@ -182,7 +182,7 @@ export interface ITerminalMethods extends IGVTerminalMethods {
   getDepth: (
     symbol: string,
     tickSize?: string,
-    limit?: string
+    limit?: number
   ) => Observable<CorrectedRestDepth>;
   cancelAllOrders: (
     options: { symbol: string; useServerTime?: boolean },
