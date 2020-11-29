@@ -36,7 +36,6 @@ export const AML_MANUAL_ROUTE = "/aml-manual";
 export const WHITE_PAPER_ROUTE = "/white-paper-eng.pdf";
 export const PRIVACY_POLICY_ROUTE = "/privacy-policy";
 export const TERMS_ROUTE = "/terms";
-export const DOWNLOADS_ROUTE = "/downloads";
 
 export const navHeader: TNavHeader[] = [
   {
@@ -152,10 +151,6 @@ export const navFooter: TNavHeader[] = [
   {
     name: "landing-page:links.terms",
     href: TERMS_ROUTE
-  },
-  {
-    name: "landing-page:links.download",
-    href: DOWNLOADS_ROUTE
   }
 ];
 
