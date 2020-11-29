@@ -56,11 +56,15 @@ const _OrderBookTable: React.FC<Props> = ({
 
   const limitOrders = openOrders
     ? openOrders
-        .filter(({ type }) => type === "Limit")
-        .filter(({ orderStatus }) => orderStatus === "New")
+        .filter(({ type }) => type.toUpperCase() === "LIMIT")
+        .filter(
+          ({ orderStatus }) =>
+            orderStatus && orderStatus.toUpperCase() === "NEW"
+        )
         .filter(
           ({ side }) =>
-            (reverse && side === "Sell") || (!reverse && side === "Buy")
+            (reverse && side === "Sell") ||
+            (!reverse && side.toUpperCase() === "BUY")
         )
         .map(({ price }) => +price)
     : [];

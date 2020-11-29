@@ -9,7 +9,7 @@ import {
 import { formatValue } from "utils/formatter";
 import { AnyObjectType } from "utils/types";
 
-type DividerPartsType = { intLength?: number; fracLength?: number };
+export type DividerPartsType = { intLength?: number; fracLength?: number };
 
 export const ORDER_BOOK_ROW_HEIGHT = 16;
 
@@ -96,7 +96,7 @@ export const getDividerParts = (
   return { intLength, fracLength };
 };
 
-const getNewPriceWithDivider = (
+export const getNewPriceWithDivider = (
   price: string,
   { intLength, fracLength }: DividerPartsType,
   add?: boolean
