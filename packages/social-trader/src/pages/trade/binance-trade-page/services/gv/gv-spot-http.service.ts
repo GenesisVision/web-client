@@ -12,6 +12,10 @@ import {
 } from "gv-api-web";
 import { Bar } from "pages/trade/binance-trade-page/trading/chart/charting_library/datafeed-api";
 import {
+  DividerPartsType,
+  getDividerParts
+} from "pages/trade/binance-trade-page/trading/order-book/order-book.helpers";
+import {
   Account,
   CorrectedRestDepth,
   ExchangeInfo,
@@ -157,28 +161,43 @@ export const getTrades = (
 export const getTickers = (symbol: string = ""): Observable<Ticker[]> =>
   from(api.terminal().get24HPrices(symbol) as Promise<Ticker[]>);
 
-const transformDepthToString = ({
+const getPriceWithCorrectFrac = (
+  price: string,
+  correctFracLength: number = 8
+) => {
+  const [int, frac = ""] = price.split(".");
+  const correctFrac = frac + "0".repeat(correctFracLength - frac.length);
+  return [int, correctFrac].join(".");
+};
+
+const transformDepthToString = (dividerParts: DividerPartsType) => ({
   price,
   quantity
-}: BinanceRawOrderBookEntry): StringBidDepth => [
-  String(price),
-  String(quantity)
-];
+}: BinanceRawOrderBookEntry): StringBidDepth => {
+  const newPrice = getPriceWithCorrectFrac(
+    String(price),
+    dividerParts.fracLength
+  );
+  return [newPrice, String(quantity)];
+};
 
 export const getDepth = (
   symbol: string,
-  limit: number = 1000
-): Observable<CorrectedRestDepth> =>
-  from(
+  tickSize: string = "0.00000001",
+  limit: number = 100
+): Observable<CorrectedRestDepth> => {
+  const dividerParts = getDividerParts(tickSize);
+  return from(
     api
       .terminal()
       .getOrderBook(symbol, { limit })
       .then((data: BinanceRawOrderBook) => ({
         ...data,
-        asks: data.asks.map(transformDepthToString),
-        bids: data.bids.map(transformDepthToString)
+        asks: data.asks.map(transformDepthToString(dividerParts)),
+        bids: data.bids.map(transformDepthToString(dividerParts))
       })) as Promise<CorrectedRestDepth>
   );
+};
 
 export const newOrder = (
   options: OrderRequest,

@@ -328,7 +328,7 @@ export const getTickers = (symbol?: string): Observable<Ticker[]> =>
 
 export const getDepth = (
   symbol: string,
-  limit: number = 1000
+  limit?: string
 ): Observable<RestDepth> =>
   requestService.get({
     url: `${API_ROUTE}/depth`,

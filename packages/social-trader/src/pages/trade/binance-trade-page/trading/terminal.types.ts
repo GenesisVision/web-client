@@ -179,7 +179,11 @@ export interface ITerminalMethods extends IGVTerminalMethods {
   ) => Observable<Account>;
   getTrades: (symbol: string, limit?: number) => Observable<UnitedTrade[]>;
   getTickers: (symbol?: string) => Observable<Ticker[]>;
-  getDepth: (symbol: string, limit?: number) => Observable<CorrectedRestDepth>;
+  getDepth: (
+    symbol: string,
+    tickSize?: string,
+    limit?: string
+  ) => Observable<CorrectedRestDepth>;
   cancelAllOrders: (
     options: { symbol: string; useServerTime?: boolean },
     accountId?: string
