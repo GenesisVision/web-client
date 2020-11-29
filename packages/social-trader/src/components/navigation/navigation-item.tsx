@@ -17,6 +17,7 @@ import { normalizeLinkFrom } from "../link/link.helper";
 interface INavigationItemProps
   extends React.HTMLAttributes<HTMLAnchorElement>,
     WithRouterProps {
+  mobile?: boolean;
   small?: boolean;
   href?: string | ToType;
   icon: JSX.Element;
@@ -25,6 +26,7 @@ interface INavigationItemProps
 }
 
 interface IStyleProps {
+  mobile?: boolean;
   router: NextRouter;
   href?: string | ToType;
 }
@@ -35,20 +37,23 @@ const dynamicStyles = css`
   &:hover {
     opacity: 1;
   }
-  ${mediaBreakpointLandscapeTablet(
-    `padding: 0;
+  ${({ mobile }) =>
+    mediaBreakpointLandscapeTablet(
+      `${!mobile && "padding: 0"};
       margin-right: ${$paddingXsmall}px;`
-  )}
-  ${mediaBreakpointDesktop(
-    `padding: 0;
+    )}
+  ${({ mobile }) =>
+    mediaBreakpointDesktop(
+      `${!mobile && "padding: 0"};
       margin-right: ${$paddingBig}px;`
-  )}
-  ${mediaBreakpointLargeDesktop(
-    `margin-right: 70px;
+    )}
+  ${({ mobile }) =>
+    mediaBreakpointLargeDesktop(
+      `margin-right: 70px;
     &:first-child {
         margin-right: ${$paddingBig}px;
     }`
-  )}
+    )}
 `;
 
 const styles = css<IStyleProps>`
@@ -70,6 +75,7 @@ const StyledButton = styled.div<IStyleProps>`
 `;
 
 const _NavigationItem: React.FC<INavigationItemProps> = ({
+  mobile,
   router,
   small,
   onClick,
@@ -77,6 +83,7 @@ const _NavigationItem: React.FC<INavigationItemProps> = ({
   icon,
   children
 }) => {
+  console.log(mobile);
   const renderIconWithName = () => (
     <NavigationIconWithName small={small} icon={icon}>
       {children}
@@ -84,11 +91,16 @@ const _NavigationItem: React.FC<INavigationItemProps> = ({
   );
   return (
     (!!href && (
-      <StyledLink href={href} router={router} to={href}>
+      <StyledLink mobile={mobile} href={href} router={router} to={href}>
         {renderIconWithName()}
       </StyledLink>
     )) || (
-      <StyledButton href={href} router={router} onClick={onClick}>
+      <StyledButton
+        mobile={mobile}
+        href={href}
+        router={router}
+        onClick={onClick}
+      >
         {renderIconWithName()}
       </StyledButton>
     )
