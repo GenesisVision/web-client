@@ -4,6 +4,7 @@ import {
   getCurrency,
   getLeverage
 } from "components/assets/asset.helpers";
+import { BrokerCardType } from "components/assets/broker-select/broker-select.types";
 import BrokerAccount from "components/assets/fields/broker-account";
 import CreateAssetNavigation from "components/assets/fields/create-asset-navigation";
 import CreateProgramDepositBlock from "components/assets/fields/create-program-deposit-block";
@@ -13,6 +14,7 @@ import FeesSettings from "components/assets/fields/fees-settings";
 import InvestmentLimitField from "components/assets/fields/investment-limit-field";
 import Leverage from "components/assets/fields/leverage";
 import PeriodLength from "components/assets/fields/period-length";
+import Processing from "components/assets/fields/processing";
 import StopOutField from "components/assets/fields/stop-out-field";
 import TradesDelay from "components/assets/fields/trades-delay";
 import { IImageValue } from "components/form/input-image/input-image";
@@ -20,7 +22,8 @@ import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import SettingsBlock from "components/settings-block/settings-block";
 import { ASSET } from "constants/constants";
-import { Broker, ProgramAssetPlatformInfo } from "gv-api-web";
+import { BrokerAccountType, ProgramAssetPlatformInfo } from "gv-api-web";
+import { CONVERT_ASSET_FIELDS } from "pages/convert-asset/components/convert-asset-settings.helpers";
 import { KycRequiredBlock } from "pages/create-account/components/create-account-settings/kyc-required-block";
 import * as React from "react";
 import { useEffect, useState } from "react";
@@ -35,6 +38,8 @@ import { CurrencyEnum } from "utils/types";
 import createProgramSettingsValidationSchema from "./create-program-settings.validators";
 
 export enum CREATE_PROGRAM_FIELDS {
+  hourProcessing = "hourProcessing",
+  isProcessingRealTime = "isProcessingRealTime",
   title = "title",
   description = "description",
   logo = "logo",
@@ -52,6 +57,8 @@ export enum CREATE_PROGRAM_FIELDS {
 }
 
 export interface ICreateProgramSettingsFormValues {
+  [CREATE_PROGRAM_FIELDS.hourProcessing]?: number;
+  [CREATE_PROGRAM_FIELDS.isProcessingRealTime]?: boolean;
   [CREATE_PROGRAM_FIELDS.title]: string;
   [CREATE_PROGRAM_FIELDS.description]: string;
   [CREATE_PROGRAM_FIELDS.logo]: IImageValue;
@@ -71,7 +78,7 @@ export interface ICreateProgramSettingsFormValues {
 interface Props {
   programsInfo: ProgramAssetPlatformInfo;
   errorMessage?: string;
-  broker: Broker;
+  broker: BrokerCardType;
   onSubmit: (values: ICreateProgramSettingsFormValues) => void;
 }
 
@@ -85,6 +92,8 @@ const _CreateProgramSettings: React.FC<Props> = ({
   broker,
   onSubmit
 }) => {
+  const isExchange = !("leverageMin" in broker);
+
   const [hasInvestmentLimit, setHasInvestmentLimit] = useState(false);
   const [available, setAvailable] = useState(0);
   const [rate, setRate] = useState(1);
@@ -105,6 +114,7 @@ const _CreateProgramSettings: React.FC<Props> = ({
       [CREATE_PROGRAM_FIELDS.depositAmount]: undefined
     },
     validationSchema: createProgramSettingsValidationSchema({
+      isExchange,
       minInvestAmounts,
       maxManagementFee,
       maxSuccessFee,
@@ -122,7 +132,13 @@ const _CreateProgramSettings: React.FC<Props> = ({
     setValue,
     formState: { isValid }
   } = form;
-  const { description, brokerAccountTypeId, depositAmount, currency } = watch();
+  const {
+    isProcessingRealTime,
+    description,
+    brokerAccountTypeId,
+    depositAmount,
+    currency
+  } = watch();
 
   useEffect(() => {
     triggerValidation();
@@ -161,8 +177,22 @@ const _CreateProgramSettings: React.FC<Props> = ({
             description={description}
           />
           <Row onlyOffset size={"xlarge"}>
+            {isExchange && (
+              <Row onlyOffset>
+                <Row>
+                  <h4>{t("asset-settings:fields.processing")}</h4>
+                </Row>
+                <Row>
+                  <Processing
+                    realtimeValue={isProcessingRealTime}
+                    checkboxName={CONVERT_ASSET_FIELDS.isProcessingRealTime}
+                    selectName={CONVERT_ASSET_FIELDS.hourProcessing}
+                  />
+                </Row>
+              </Row>
+            )}
             <Row>
-              <RowItem>
+              <RowItem hide={isExchange}>
                 <BrokerAccount
                   setAccountType={(value: string) =>
                     setValue(CREATE_PROGRAM_FIELDS.brokerAccountTypeId, value)
@@ -174,7 +204,7 @@ const _CreateProgramSettings: React.FC<Props> = ({
                     setValue(CREATE_PROGRAM_FIELDS.currency, value)
                   }
                   name={CREATE_PROGRAM_FIELDS.brokerAccountTypeId}
-                  accountTypes={broker.accountTypes}
+                  accountTypes={broker.accountTypes as BrokerAccountType[]}
                 />
               </RowItem>
               <RowItem>
@@ -186,13 +216,17 @@ const _CreateProgramSettings: React.FC<Props> = ({
               </RowItem>
             </Row>
             <Row>
-              <RowItem>
+              <RowItem hide={isExchange}>
                 <Leverage
                   name={CREATE_PROGRAM_FIELDS.leverage}
-                  accountLeverages={accountType.leverages}
+                  accountLeverages={
+                    isExchange
+                      ? []
+                      : (accountType as BrokerAccountType).leverages
+                  }
                 />
               </RowItem>
-              <RowItem>
+              <RowItem hide={isExchange}>
                 <PeriodLength
                   periods={periods}
                   name={CREATE_PROGRAM_FIELDS.periodLength}
@@ -200,7 +234,7 @@ const _CreateProgramSettings: React.FC<Props> = ({
               </RowItem>
             </Row>
             <Row>
-              <RowItem>
+              <RowItem hide={isExchange}>
                 <StopOutField name={CREATE_PROGRAM_FIELDS.stopOutLevel} />
               </RowItem>
               <RowItem>

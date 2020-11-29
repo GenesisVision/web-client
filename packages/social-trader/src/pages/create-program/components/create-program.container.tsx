@@ -44,7 +44,6 @@ const _CreateProgramContainer: React.FC<Props> = ({
     setTab(null, TAB.SETTINGS);
   }, []);
 
-  const isBroker = "leverageMin" in selectedBroker;
   return (
     <div>
       <GVTabs value={tab}>
@@ -64,8 +63,10 @@ const _CreateProgramContainer: React.FC<Props> = ({
             selectedBroker={selectedBroker}
           />
         )}
-        {tab === TAB.SETTINGS && isBroker && (
-          <CreateProgramSettingsSection broker={selectedBroker as Broker} />
+        {tab === TAB.SETTINGS && (
+          <CreateProgramSettingsSection
+            broker={selectedBroker as BrokerCardType}
+          />
         )}
       </Row>
     </div>
