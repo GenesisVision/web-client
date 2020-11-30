@@ -22,6 +22,8 @@ const DashboardInRequestsContainer = dynamic(() =>
 
 const _DashboardPage: React.FC = () => {
   const { data: requestCount } = useApiRequest({
+    name: "getRequestsCount",
+    cache: true,
     request: getRequestsCount,
     fetchOnMount: true
   });
@@ -44,8 +46,8 @@ const _DashboardPage: React.FC = () => {
           styles["dashboard__statistic-block--landscape-tablet"]
         )}
       >
-        <DashboardTradingStatistic landscapeTablet />
-        <DashboardInvestingStatistic landscapeTablet />
+        <DashboardTradingStatistic orientation={"landscapeTablet"} />
+        <DashboardInvestingStatistic orientation={"landscapeTablet"} />
       </div>
       {notNewUser && (
         <div
@@ -54,8 +56,8 @@ const _DashboardPage: React.FC = () => {
             styles["dashboard__statistic-block--tablet"]
           )}
         >
-          <DashboardPortfolio tablet />
-          <DashboardAssets tablet />
+          <DashboardPortfolio orientation={"tablet"} />
+          <DashboardAssets orientation={"tablet"} />
         </div>
       )}
       <DashboardRecommendationsContainer />

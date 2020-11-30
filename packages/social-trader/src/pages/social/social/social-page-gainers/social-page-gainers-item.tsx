@@ -3,11 +3,11 @@ import Profitability from "components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "components/profitability/profitability.helper";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { Text } from "components/text/text";
 import {
   FeedContext,
   SocialSearchInitialState
 } from "pages/social/social/feed.context";
-import styles from "pages/social/social/social-page-gainers/social-page-gainers.module.scss";
 import React, { useCallback, useContext } from "react";
 import { formatCurrencyValue } from "utils/formatter";
 
@@ -36,19 +36,27 @@ const _SocialPageGainersItem: React.FC<Props> = ({
   }, [title]);
   return (
     <div>
-      <Row className={styles["social-page-gainers__item-label"]}>
+      <Row>
         <RowItem size={"small"}>
-          <CurrencyItem symbol={title} small logo={logoUrl} />
+          <Text size={"xsmall"}>
+            <CurrencyItem symbol={title} small logo={logoUrl} />
+          </Text>
         </RowItem>
-        <RowItem onClick={handleClick}>{title}</RowItem>
+        <RowItem onClick={handleClick}>
+          <Text size={"small"}>{title}</Text>
+        </RowItem>
       </Row>
-      <Row className={styles["social-page-gainers__item-value"]}>
-        <RowItem>$ {formatCurrencyValue(price, title)}</RowItem>
+      <Row>
+        <RowItem>
+          <Text size={"small"}>$ {formatCurrencyValue(price, title)}</Text>
+        </RowItem>
         {change !== null && change !== undefined && (
           <RowItem>
-            <Profitability prefix={PROFITABILITY_PREFIX.SIGN} value={change}>
-              {Math.abs(change)} %
-            </Profitability>
+            <Text size={"small"}>
+              <Profitability prefix={PROFITABILITY_PREFIX.SIGN} value={change}>
+                {Math.abs(change)} %
+              </Profitability>
+            </Text>
           </RowItem>
         )}
       </Row>

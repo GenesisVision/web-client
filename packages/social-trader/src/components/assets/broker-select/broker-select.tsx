@@ -37,7 +37,7 @@ const _BrokerSelectBroker: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   return (
-    <Row className={styles["broker-select"]}>
+    <Row center={false}>
       <RowItem>
         <Row wrap wide className={styles["broker-select__list"]}>
           {data.map((broker, i) => (

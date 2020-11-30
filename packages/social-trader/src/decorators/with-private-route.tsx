@@ -1,5 +1,4 @@
 import { Push } from "components/link/link";
-import { normalizeUrlString } from "components/link/link.helper";
 import { NextPage } from "next";
 import qs from "qs";
 import React, { Component } from "react";
@@ -29,7 +28,7 @@ const withPrivateRoute = (WrappedComponent: NextPage<any>): any =>
           clearToken: clearToken ? true : undefined
         };
         const redirectUrl = `${LOGIN_ROUTE}?${qs.stringify(params)}`;
-        ctx.res.writeHead(302, { Location: normalizeUrlString(redirectUrl) });
+        ctx.res.writeHead(302, { Location: redirectUrl });
         ctx.res.end();
         return;
       }

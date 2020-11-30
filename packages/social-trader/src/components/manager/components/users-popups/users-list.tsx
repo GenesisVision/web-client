@@ -3,6 +3,11 @@ import { Center } from "components/center/center";
 import { Push } from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import { FollowUserButton } from "components/manager/components/follow-user-buttom";
+import {
+  UserPopupItem,
+  UserPopupList,
+  UserPopupName
+} from "components/manager/components/users-popups/users-popups.styles";
 import { UsersListItemType } from "components/manager/components/users-popups/users-popups.types";
 import { RowItem } from "components/row-item/row-item";
 import { ProfilePublicShort } from "gv-api-web";
@@ -10,8 +15,6 @@ import React, { useCallback } from "react";
 import InfiniteScroll from "react-infinite-scroller";
 import { managerToPathCreator } from "routes/manager.routes";
 import { OptionalClickable } from "utils/types";
-
-import styles from "./users-popups.module.scss";
 
 interface IUsersListItemProps extends OptionalClickable {
   onChange?: (user: ProfilePublicShort) => void;
@@ -44,15 +47,13 @@ export const UsersListItem: React.FC<IUsersListItemProps> = React.memo(
       onClick && onClick();
     }, [link]);
     return (
-      <Center className={styles["users-list__item"]}>
+      <UserPopupItem>
         <RowItem wide onClick={handleClick}>
           <Center>
             <RowItem>
               <ProfileAvatar url={logoUrl} />
             </RowItem>
-            <RowItem wide className={styles["users-list__name"]}>
-              {username}
-            </RowItem>
+            <UserPopupName>{username}</UserPopupName>
           </Center>
         </RowItem>
         {personalDetails && (
@@ -63,23 +64,24 @@ export const UsersListItem: React.FC<IUsersListItemProps> = React.memo(
               size={"small"}
               id={id}
               value={personalDetails.isFollow}
+              wide={false}
             />
           </RowItem>
         )}
-      </Center>
+      </UserPopupItem>
     );
   }
 );
 
 const _UsersList: React.FC<IUsersListProps> = ({ loadMode, hasMore, data }) => {
   return (
-    <div className={styles["users-list"]}>
+    <UserPopupList>
       <InfiniteScroll useWindow={false} loadMore={loadMode} hasMore={hasMore}>
         {data.map(user => (
           <UsersListItem user={user} />
         ))}
       </InfiniteScroll>
-    </div>
+    </UserPopupList>
   );
 };
 

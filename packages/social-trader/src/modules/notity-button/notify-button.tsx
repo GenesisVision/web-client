@@ -1,6 +1,6 @@
+import { Button } from "components/button/button";
 import { Center } from "components/center/center";
 import { getMinProgramDeposit } from "components/deposit/services/program-deposit.service";
-import GVButton from "components/gv-button";
 import { RowItem } from "components/row-item/row-item";
 import Tooltip from "components/tooltip/tooltip";
 import { TooltipContent } from "components/tooltip/tooltip-content";
@@ -10,9 +10,29 @@ import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { programMinDepositAmountsSelector } from "reducers/platform-reducer";
+import styled from "styled-components";
+import { $mainColor } from "utils/style/colors";
 import { CurrencyEnum } from "utils/types";
 
-import styles from "./notify-button.module.scss";
+interface Props {
+  broker: string;
+  assetId: string;
+  currency: CurrencyEnum;
+  canInvest: boolean;
+}
+
+const Hint = styled.div`
+  border: 1px solid ${$mainColor};
+  border-radius: 100%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 15px;
+  height: 15px;
+  font-size: 8px;
+  color: ${$mainColor};
+  cursor: help;
+`;
 
 const _NotifyButton: React.FC<Props> = ({
   broker,
@@ -36,13 +56,13 @@ const _NotifyButton: React.FC<Props> = ({
   return (
     <Center>
       <RowItem>
-        <GVButton
+        <Button
           size={"xlarge"}
           onClick={handleClick}
           disabled={Boolean(data || isPending || !canInvest)}
         >
           {t("buttons.notify")}
-        </GVButton>
+        </Button>
       </RowItem>
       <Tooltip
         render={() => (
@@ -51,18 +71,11 @@ const _NotifyButton: React.FC<Props> = ({
           </TooltipContent>
         )}
       >
-        <div className={styles["notify-button__hint"]}>?</div>
+        <Hint>?</Hint>
       </Tooltip>
     </Center>
   );
 };
-
-interface Props {
-  broker: string;
-  assetId: string;
-  currency: CurrencyEnum;
-  canInvest: boolean;
-}
 
 const NotifyButton = React.memo(_NotifyButton);
 export default NotifyButton;

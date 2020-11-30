@@ -1,5 +1,5 @@
+import { Button } from "components/button/button";
 import InvestmentUnauthPopup from "components/details/details-description-section/investment-unauth-popup/investment-unauth-popup";
-import GVButton from "components/gv-button";
 import { ASSET } from "constants/constants";
 import useIsOpen from "hooks/is-open.hook";
 import { useTranslation } from "i18n";
@@ -10,7 +10,23 @@ import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import { CurrencyEnum, Sizeable } from "utils/types";
 
+interface Props extends Sizeable {
+  isProcessingRealTime?: boolean;
+  infoMessage?: string;
+  disabled?: boolean;
+  title: string;
+  onApply?: VoidFunction;
+  ownAsset?: boolean;
+  entryFee?: number;
+  availableToInvest?: number;
+  broker?: string;
+  type: ASSET;
+  id: string;
+  currency?: CurrencyEnum;
+}
+
 const _DepositButton: React.FC<Props> = ({
+  isProcessingRealTime,
   infoMessage,
   disabled,
   title,
@@ -51,6 +67,7 @@ const _DepositButton: React.FC<Props> = ({
       />
     ) : (
       <ProgramDeposit
+        isProcessingRealTime={isProcessingRealTime}
         title={title}
         onApply={onApply}
         ownAsset={ownAsset}
@@ -69,7 +86,7 @@ const _DepositButton: React.FC<Props> = ({
     : setIsOpenUnAuthInvestPopup;
   return (
     <>
-      <GVButton
+      <Button
         testId={label}
         className={label}
         disabled={disabled}
@@ -77,7 +94,7 @@ const _DepositButton: React.FC<Props> = ({
         onClick={openPopupMethod}
       >
         {label}
-      </GVButton>
+      </Button>
       {deposit}
       <InvestmentUnauthPopup
         message={t(`asset-details:unauth-popup.${type.toLowerCase()}`)}
@@ -91,20 +108,6 @@ const _DepositButton: React.FC<Props> = ({
     </>
   );
 };
-
-interface Props extends Sizeable {
-  infoMessage?: string;
-  disabled?: boolean;
-  title: string;
-  onApply?: VoidFunction;
-  ownAsset?: boolean;
-  entryFee?: number;
-  availableToInvest?: number;
-  broker?: string;
-  type: ASSET;
-  id: string;
-  currency?: CurrencyEnum;
-}
 
 const DepositButton = React.memo(_DepositButton);
 export default DepositButton;

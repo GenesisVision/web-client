@@ -13,6 +13,8 @@ const _DashboardRecommendationsContainer: React.FC = () => {
   const currency = useAccountCurrency();
   const [t] = useTranslation();
   const { data } = useApiRequest<TDashboardRecommendations>({
+    name: "DashboardRecommendationsContainer",
+    cache: true,
     fetchOnMount: true,
     fetchOnMountData: { currency },
     request: getRecommendations

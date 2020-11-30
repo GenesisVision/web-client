@@ -1,5 +1,14 @@
 import React from "react";
 
+type TextProps = {
+  x: number;
+  y: number;
+  fontSize: number;
+  bold?: boolean;
+  position?: "start" | "middle" | "end";
+  color: string;
+};
+
 export default function Text({
   children,
   x,
@@ -31,12 +40,3 @@ export default function Text({
     </text>
   );
 }
-
-type TextProps = {
-  x: number;
-  y: number;
-  fontSize: number;
-  bold?: boolean;
-  position?: "start" | "middle" | "end";
-  color: string;
-};

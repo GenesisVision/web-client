@@ -8,8 +8,10 @@ import {
 import { useTranslation } from "i18n";
 import FirstScreen from "pages/landing-page/components/first-screen/first-screen";
 import {
+  FirstScreenHomeSection,
   HomeContainer,
-  HomeSection
+  HomeSection,
+  LastScreenHomeSection
 } from "pages/landing-page/components/home/home.blocks";
 import AdvantagesContainer from "pages/landing-page/containers/advantages-container/advantages-container";
 import BrokersContainer from "pages/landing-page/containers/brokers-container/brokers-container";
@@ -28,6 +30,16 @@ import {
 import { useUtm } from "pages/landing-page/utils";
 import React from "react";
 
+interface Props {
+  cookieAccept?: string;
+  refLink?: string;
+  programs: ProgramDetailsListItemItemsViewModel;
+  funds: FundDetailsListItemItemsViewModel;
+  follows: FollowDetailsListItemItemsViewModel;
+  events: Array<PlatformEvent>;
+  news: Array<PlatformNews>;
+}
+
 const _LandingPage: React.FC<Props> = ({
   cookieAccept,
   programs,
@@ -45,11 +57,11 @@ const _LandingPage: React.FC<Props> = ({
       title={t("landing-page:title")}
     >
       <main>
-        <HomeSection isFirst>
-          <HomeContainer>
+        <FirstScreenHomeSection>
+          <HomeContainer tall>
             <FirstScreen news={news} />
           </HomeContainer>
-        </HomeSection>
+        </FirstScreenHomeSection>
         <HomeSection bgColor="white">
           <HomeContainer>
             <EventsContainer events={events} />
@@ -92,23 +104,14 @@ const _LandingPage: React.FC<Props> = ({
             />
           </HomeContainer>
         </HomeSection>
-        <HomeSection isLast>
+        <LastScreenHomeSection>
           <HomeContainer>
             <SocialContainer />
           </HomeContainer>
-        </HomeSection>
+        </LastScreenHomeSection>
       </main>
     </Layout>
   );
 };
 
-interface Props {
-  cookieAccept?: string;
-  refLink?: string;
-  programs: ProgramDetailsListItemItemsViewModel;
-  funds: FundDetailsListItemItemsViewModel;
-  follows: FollowDetailsListItemItemsViewModel;
-  events: Array<PlatformEvent>;
-  news: Array<PlatformNews>;
-}
 export const LandingPage = React.memo(_LandingPage);

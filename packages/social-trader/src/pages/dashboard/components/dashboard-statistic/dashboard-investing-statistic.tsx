@@ -1,5 +1,6 @@
 import { Text } from "components/text/text";
 import { useAccountCurrency } from "hooks/account-currency.hook";
+import { DashboardBlockOrientation } from "pages/dashboard/components/dashboard-block/dashboard-block";
 import { DashboardInvestingCounts } from "pages/dashboard/components/dashboard-statistic/dashboard-investing-counts";
 import { DashboardNewUserBlock } from "pages/dashboard/components/dashboard-statistic/dashboard-new-user.block";
 import DashboardStatisticContainer from "pages/dashboard/components/dashboard-statistic/dashboard-statistic.container";
@@ -11,16 +12,17 @@ import { GV_FUNDS_ROUTE, GV_PROGRAMS_ROUTE } from "routes/invest.routes";
 
 import { getTotalInvestingStatistic } from "../../services/dashboard.service";
 
-const _DashboardInvestingStatistic: React.FC<Props> = ({
-  landscapeTablet,
-  tablet
-}) => {
+interface Props {
+  orientation?: DashboardBlockOrientation;
+}
+
+const _DashboardInvestingStatistic: React.FC<Props> = ({ orientation }) => {
   const currency = useAccountCurrency();
   const [t] = useTranslation();
   return (
     <DashboardStatisticContainer
-      landscapeTablet={landscapeTablet}
-      tablet={tablet}
+      name={"DashboardInvestingStatistic"}
+      orientation={orientation}
       EmptyBlock={DashboardInvestingEmpty}
       currency={currency}
       label={t("dashboard-page:statistic.investing")}
@@ -41,11 +43,6 @@ const _DashboardInvestingStatistic: React.FC<Props> = ({
     />
   );
 };
-
-interface Props {
-  landscapeTablet?: boolean;
-  tablet?: boolean;
-}
 
 const DashboardInvestingEmpty: React.FC = React.memo(() => {
   const [t] = useTranslation();

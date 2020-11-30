@@ -1,4 +1,4 @@
-import GVButton from "components/gv-button";
+import { Button } from "components/button/button";
 import * as React from "react";
 
 interface IDepositButtonStateProps {
@@ -6,7 +6,7 @@ interface IDepositButtonStateProps {
 }
 
 interface IDepositButtonProps {
-  onSubmit?(): void;
+  onSubmit?: VoidFunction;
   disabled?: boolean;
   deposit: number;
   available: number;
@@ -16,11 +16,10 @@ interface IDepositButtonProps {
 
 const DepositButton: React.FC<IDepositButtonProps &
   IDepositButtonStateProps> = ({ onSubmit, children, title, disabled }) => (
-  <GVButton title={title} onClick={onSubmit} disabled={disabled}>
+  <Button title={title} onClick={onSubmit} disabled={disabled}>
     {children}
-  </GVButton>
+  </Button>
 );
 
 const DepositButtonContainer = React.memo(DepositButton);
-
 export default DepositButtonContainer;

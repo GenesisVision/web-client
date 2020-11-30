@@ -1,6 +1,4 @@
-import DetailsBlock, {
-  DETAILS_BLOCK_TYPE
-} from "components/details/details-block";
+import { DefaultBlock } from "components/default.block/default.block";
 import { DetailsStatisticContainer } from "components/details/details-description-section/details-description/details-structure-blocks";
 import InvestmentProgramInfo from "components/details/details-description-section/investment-program-info";
 import { Row } from "components/row/row";
@@ -19,7 +17,21 @@ import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import { CurrencyEnum } from "utils/types";
 
+interface Props {
+  isExchange?: boolean;
+  currency: CurrencyEnum;
+  id: string;
+  programDetails: ProgramDetailsFull;
+  publicInfo: AssetPublicDetails;
+  brokerDetails: BrokerDetails;
+  tradingAccountInfo: ProgramFollowDetailsFullTradingAccountDetails;
+  onApply: VoidFunction;
+  isOwnProgram: boolean;
+  levelsParameters: LevelsParamsInfo;
+}
+
 const _InvestmentProgramControls: React.FC<Props> = ({
+  isExchange,
   currency,
   onApply,
   isOwnProgram,
@@ -36,8 +48,9 @@ const _InvestmentProgramControls: React.FC<Props> = ({
       programDetails.personalDetails.canInvest
     : true;
   return (
-    <DetailsBlock type={DETAILS_BLOCK_TYPE.BORDERED}>
+    <DefaultBlock size={"large"} bordered>
       <InvestmentProgramInfo
+        isExchange={isExchange}
         id={id}
         currency={tradingAccountInfo.currency}
         title={publicInfo.title}
@@ -58,6 +71,9 @@ const _InvestmentProgramControls: React.FC<Props> = ({
             />
           ) : (
             <DepositButton
+              isProcessingRealTime={
+                programDetails.dailyPeriodDetails?.isProcessingRealTime
+              }
               disabled={!canInvest}
               title={publicInfo.title}
               onApply={onApply}
@@ -73,21 +89,9 @@ const _InvestmentProgramControls: React.FC<Props> = ({
           )}
         </DetailsStatisticContainer>
       </Row>
-    </DetailsBlock>
+    </DefaultBlock>
   );
 };
-
-interface Props {
-  currency: CurrencyEnum;
-  id: string;
-  programDetails: ProgramDetailsFull;
-  publicInfo: AssetPublicDetails;
-  brokerDetails: BrokerDetails;
-  tradingAccountInfo: ProgramFollowDetailsFullTradingAccountDetails;
-  onApply: VoidFunction;
-  isOwnProgram: boolean;
-  levelsParameters: LevelsParamsInfo;
-}
 
 const InvestmentProgramControls = React.memo(_InvestmentProgramControls);
 export default InvestmentProgramControls;

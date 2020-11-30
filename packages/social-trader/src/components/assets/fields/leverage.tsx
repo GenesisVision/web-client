@@ -6,6 +6,11 @@ import { useTranslation } from "react-i18next";
 
 import AssetField from "../asset-fields/asset-field";
 
+interface Props {
+  name: string;
+  accountLeverages: number[];
+}
+
 const _Leverage: React.FC<Props> = ({ name, accountLeverages }) => {
   const [t] = useTranslation();
   return (
@@ -27,11 +32,6 @@ const _Leverage: React.FC<Props> = ({ name, accountLeverages }) => {
     </AssetField>
   );
 };
-
-interface Props {
-  name: string;
-  accountLeverages: number[];
-}
 
 const Leverage = React.memo(_Leverage);
 export default Leverage;

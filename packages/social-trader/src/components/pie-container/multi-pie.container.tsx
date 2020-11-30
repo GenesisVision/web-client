@@ -1,8 +1,18 @@
-import clsx from "clsx";
 import React, { useCallback } from "react";
+import styled from "styled-components";
 
 import { MultiPie } from "./pie";
-import styles from "./pie-container.module.scss";
+
+interface Props {
+  setOverItem?: (name?: string) => void;
+  over?: string;
+  data: any[];
+}
+
+const Container = styled.div`
+  position: relative;
+  height: 100%;
+`;
 
 const _MultiPieContainer: React.FC<Props> = ({ data, over, setOverItem }) => {
   const handleOver = useCallback(
@@ -21,25 +31,17 @@ const _MultiPieContainer: React.FC<Props> = ({ data, over, setOverItem }) => {
     return { ...item, begin, end: 100 };
   });
   return (
-    <div className={styles["multi-pie-container"]}>
-      <div className={clsx(styles["multi-pie-container__chart"])}>
-        <MultiPie
-          over={over}
-          circles={dataWithBegin}
-          onMouseOver={handleOver}
-          onMouseLeave={handleLeave}
-          withSubstrate={false}
-        />
-      </div>
-    </div>
+    <Container>
+      <MultiPie
+        over={over}
+        circles={dataWithBegin}
+        onMouseOver={handleOver}
+        onMouseLeave={handleLeave}
+        withSubstrate={false}
+      />
+    </Container>
   );
 };
-
-interface Props {
-  setOverItem?: (name?: string) => void;
-  over?: string;
-  data: any[];
-}
 
 const MultiPieContainer = React.memo(_MultiPieContainer);
 export default MultiPieContainer;

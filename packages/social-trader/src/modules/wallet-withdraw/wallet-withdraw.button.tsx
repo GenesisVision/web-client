@@ -1,7 +1,7 @@
 import ImageBaseElement from "components/avatar/image-base.element";
+import { Button } from "components/button/button";
 import { Center } from "components/center/center";
 import ChipButton from "components/chip/chip-button";
-import GVButton from "components/gv-button";
 import { RowItem } from "components/row-item/row-item";
 import useIsOpen from "hooks/is-open.hook";
 import ArrowIcon from "media/arrow-up.svg";
@@ -47,7 +47,7 @@ const FullButton: React.FC<IFullButtonProps> = React.memo(
     const [t] = useTranslation();
     const label = t("wallet-page:withdraw");
     return (
-      <GVButton
+      <Button
         className={label}
         size={"large"}
         color="secondary"
@@ -65,7 +65,7 @@ const FullButton: React.FC<IFullButtonProps> = React.memo(
           </RowItem>
           <RowItem>{label}</RowItem>
         </Center>
-      </GVButton>
+      </Button>
     );
   }
 );

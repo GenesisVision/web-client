@@ -1,3 +1,4 @@
+import { INIT_WALLET_CURRENCY } from "components/deposit/components/deposit.helpers";
 import { fundInvest } from "components/deposit/services/fund-deposit.service";
 import { programInvest } from "components/deposit/services/program-deposit.service";
 import { ASSET } from "constants/constants";
@@ -18,6 +19,28 @@ import { CurrencyEnum } from "utils/types";
 import DepositForm from "./deposit-form";
 import DepositTop from "./deposit-top";
 import { MinDepositType, TFees } from "./deposit.types";
+
+const getRequestMethod = (asset: ASSET) =>
+  asset === ASSET.FUND ? fundInvest : programInvest;
+
+export interface IDepositContainerProps {
+  infoMessage?: string;
+  title: string;
+  availableToInvest?: number;
+  fees: TFees;
+  minDeposit: MinDepositType;
+  id: string;
+  onClose: (param?: any) => void;
+  onApply: () => void;
+  currency: CurrencyEnum;
+  asset: ASSET;
+  hasEntryFee?: boolean;
+  ownAsset?: boolean;
+}
+
+interface Props extends IDepositContainerProps {
+  data: TWalletsAvailableData;
+}
 
 const _DepositPopup: React.FC<Props> = ({
   infoMessage,
@@ -75,6 +98,11 @@ const _DepositPopup: React.FC<Props> = ({
     [id, asset, sendEventToGA]
   );
 
+  const initWallet = safeGetElemFromArray(
+    wallets,
+    ({ currency }) => currency === INIT_WALLET_CURRENCY
+  );
+
   return (
     <>
       <DepositTop
@@ -90,7 +118,7 @@ const _DepositPopup: React.FC<Props> = ({
         minDeposit={minDeposit}
         availableToInvest={ownAsset ? undefined : availableToInvest}
         fees={fees}
-        wallets={wallets}
+        initWallet={initWallet}
         hasEntryFee={hasEntryFee}
         asset={asset}
         errorMessage={errorMessage}
@@ -100,28 +128,6 @@ const _DepositPopup: React.FC<Props> = ({
     </>
   );
 };
-
-const getRequestMethod = (asset: ASSET) =>
-  asset === ASSET.FUND ? fundInvest : programInvest;
-
-export interface IDepositContainerProps {
-  infoMessage?: string;
-  title: string;
-  availableToInvest?: number;
-  fees: TFees;
-  minDeposit: MinDepositType;
-  id: string;
-  onClose: (param?: any) => void;
-  onApply: () => void;
-  currency: CurrencyEnum;
-  asset: ASSET;
-  hasEntryFee?: boolean;
-  ownAsset?: boolean;
-}
-
-interface Props extends IDepositContainerProps {
-  data: TWalletsAvailableData;
-}
 
 const DepositPopup = withBlurLoader(React.memo(_DepositPopup));
 export default DepositPopup;

@@ -14,6 +14,16 @@ const InvestmentLimitsPopover = dynamic(() =>
   )
 );
 
+interface Props {
+  logo: string;
+  title: string;
+  color?: string;
+  level?: number;
+  levelProgress?: number;
+  totalAvailableInvestment?: number;
+  currency?: CurrencyEnum;
+}
+
 const _DetailsAssetAvatar: React.FC<Props> = ({
   logo,
   level,
@@ -56,16 +66,6 @@ const _DetailsAssetAvatar: React.FC<Props> = ({
     </>
   );
 };
-
-interface Props {
-  logo: string;
-  title: string;
-  color?: string;
-  level?: number;
-  levelProgress?: number;
-  totalAvailableInvestment?: number;
-  currency?: CurrencyEnum;
-}
 
 const DetailsAssetAvatar = React.memo(_DetailsAssetAvatar);
 export default DetailsAssetAvatar;

@@ -6,7 +6,7 @@
   &__level {
     @include adaptive-padding(bottom, $padding-xxsmall);
     @include font-size(16px);
-    font-weight: 700;
+    font-weight: 800;
     color: $primary-color;
     letter-spacing: 0.23px;
 

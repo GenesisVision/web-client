@@ -1,4 +1,4 @@
-import DetailsBlock from "components/details/details-block";
+import { DefaultTableBlock } from "components/default.block/default-table.block";
 import DetailsBlockTabs from "components/details/details-block-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
 import { Row } from "components/row/row";
@@ -16,6 +16,7 @@ import dynamic from "next/dynamic";
 import {
   EVENT_LOCATION,
   fetchPortfolioEventsCount,
+  fetchProgramReports,
   getEvents
 } from "pages/invest/programs/program-details/service/program-details.service";
 import * as React from "react";
@@ -30,6 +31,11 @@ import {
   InvestmentType
 } from "./details-investment.helpers";
 
+const ReportTable = dynamic(() =>
+  import(
+    "components/details/details-description-section/details-investment/reports/reports-table"
+  )
+);
 const SubscriptionContainer = dynamic(() =>
   import(
     "components/details/details-description-section/details-investment/subscription/subscription.container"
@@ -44,13 +50,52 @@ const PortfolioEventsTableContainer = dynamic(() =>
   import("components/portfolio-events-table/portfolio-events-table-container")
 );
 
+interface Props {
+  title: string;
+  hasTradingSchedule?: boolean;
+  investmentMessage?: string;
+  withdrawMessage?: string;
+  isOwnAsset: boolean;
+  fees: FeesType;
+  asset: ASSET;
+  dispatchDescription: () => void;
+  selector: TableSelectorType;
+  currency: CurrencyEnum;
+  id: string;
+  personalFundDetails?: PersonalFundDetails;
+  programPersonalDetails?: PersonalProgramDetails;
+  followPersonalDetails?: PersonalFollowDetailsFull;
+}
+
 enum TABS {
+  REPORTS = "REPORTS",
   SUBSCRIPTION = "SUBSCRIPTION",
   INVESTMENT = "INVESTMENT",
   EVENTS = "EVENTS"
 }
 
+interface Props {
+  isExchange?: boolean;
+  isProcessingRealTime?: boolean;
+  hasTradingSchedule?: boolean;
+  investmentMessage?: string;
+  withdrawMessage?: string;
+  isOwnAsset: boolean;
+  fees: FeesType;
+  asset: ASSET;
+  dispatchDescription: () => void;
+  selector: TableSelectorType;
+  currency: CurrencyEnum;
+  id: string;
+  personalFundDetails?: PersonalFundDetails;
+  programPersonalDetails?: PersonalProgramDetails;
+  followPersonalDetails?: PersonalFollowDetailsFull;
+}
+
 const _DetailsInvestment: React.FC<Props> = ({
+  title,
+  isExchange,
+  isProcessingRealTime,
   investmentMessage,
   hasTradingSchedule,
   withdrawMessage,
@@ -66,13 +111,26 @@ const _DetailsInvestment: React.FC<Props> = ({
   followPersonalDetails
 }) => {
   const isAuthenticated = useSelector(isAuthenticatedSelector);
+
   const { data: eventsCount = 0 } = useApiRequest({
+    name: "eventsCount",
+    cache: true,
     request: () =>
       fetchPortfolioEventsCount(EVENT_LOCATION.Asset, {
         assetId: id
       }),
     fetchOnMount: isAuthenticated
   });
+
+  const { data: reportsCount = 0 } = useApiRequest({
+    name: "reportsCount",
+    cache: true,
+    request: () =>
+      fetchProgramReports(id, { take: 0 }).then(({ total }) => total),
+    fetchOnMount:
+      !isOwnAsset && isAuthenticated && asset === ASSET.PROGRAM && isExchange
+  });
+
   const subscriptionsCount = followPersonalDetails
     ? followPersonalDetails.subscribedAccounts
     : 0;
@@ -112,7 +170,7 @@ const _DetailsInvestment: React.FC<Props> = ({
 
   if (!haveEvents && !showInvestment && !showSubscription) return null;
   return (
-    <DetailsBlock table wide>
+    <DefaultTableBlock>
       <DetailsBlockTabs value={tab} onChange={setTab}>
         <GVTab
           visible={showSubscription}
@@ -123,13 +181,20 @@ const _DetailsInvestment: React.FC<Props> = ({
           visible={showInvestment}
           value={TABS.INVESTMENT}
           label={t(
-            `asset-details:investment.tabs.investment.${asset.toLowerCase()}`
+            `asset-details:investment.tabs.investment.${
+              isExchange ? "exchange-" : ""
+            }${asset.toLowerCase()}`
           )}
         />
         <GVTab
           visible={haveEvents}
           value={TABS.EVENTS}
           label={t("asset-details:investment.tabs.events")}
+        />
+        <GVTab
+          visible={reportsCount > 0}
+          value={TABS.REPORTS}
+          label={t("asset-details:investment.tabs.reports")}
         />
       </DetailsBlockTabs>
       {tab === TABS.SUBSCRIPTION && showSubscription && (
@@ -142,6 +207,8 @@ const _DetailsInvestment: React.FC<Props> = ({
       {tab === TABS.INVESTMENT && showInvestment && (
         <Row onlyOffset>
           <Investment
+            isExchange={isExchange}
+            isProcessingRealTime={isProcessingRealTime}
             hasTradingSchedule={hasTradingSchedule}
             investmentMessage={investmentMessage}
             withdrawMessage={withdrawMessage}
@@ -165,25 +232,12 @@ const _DetailsInvestment: React.FC<Props> = ({
           dateRangeStartLabel={t("filters.date-range.program-start")}
         />
       )}
-    </DetailsBlock>
+      {tab === TABS.REPORTS && (
+        <ReportTable title={title} id={id} currency={currency} />
+      )}
+    </DefaultTableBlock>
   );
 };
-
-interface Props {
-  hasTradingSchedule?: boolean;
-  investmentMessage?: string;
-  withdrawMessage?: string;
-  isOwnAsset: boolean;
-  fees: FeesType;
-  asset: ASSET;
-  dispatchDescription: () => void;
-  selector: TableSelectorType;
-  currency: CurrencyEnum;
-  id: string;
-  personalFundDetails?: PersonalFundDetails;
-  programPersonalDetails?: PersonalProgramDetails;
-  followPersonalDetails?: PersonalFollowDetailsFull;
-}
 
 const DetailsInvestment = React.memo(_DetailsInvestment);
 export default DetailsInvestment;

@@ -1,8 +1,14 @@
 import { Icon, IIconProps } from "components/icon/icon";
 import * as React from "react";
+import styled from "styled-components";
+
+const StyledIcon = styled(Icon)`
+  width: 13px;
+  height: 13px;
+`;
 
 export const ReferrerIcon: React.FC<IIconProps> = props => (
-  <Icon type={"referrer"} {...props}>
+  <StyledIcon {...props}>
     <svg
       width="20"
       height="20"
@@ -23,5 +29,5 @@ export const ReferrerIcon: React.FC<IIconProps> = props => (
       <path d="M17 14V20" stroke="#525E67" strokeWidth="1.5" />
       <path d="M20 17L14 17" stroke="#525E67" strokeWidth="1.5" />
     </svg>
-  </Icon>
+  </StyledIcon>
 );

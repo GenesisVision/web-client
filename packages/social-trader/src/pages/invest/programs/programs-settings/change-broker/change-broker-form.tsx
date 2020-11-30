@@ -1,7 +1,7 @@
 import { BROKER_CARD_EXTRA_STATE } from "components/assets/asset.constants";
 import BrokerCard from "components/assets/broker-select/broker-card/broker-card";
 import FormTextField from "components/assets/fields/form-text-field";
-import GVButton from "components/gv-button";
+import { Button } from "components/button/button";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
@@ -23,7 +23,18 @@ import { HookForm } from "utils/hook-form.helpers";
 
 import ConfirmChangeBroker from "./confirm-change-broker";
 
+export interface Props {
+  isExchange?: boolean;
+  errorMessage?: string;
+  data: BrokersProgramInfo;
+  isSignalProgram: boolean;
+  onSubmit: (values: ChangeBrokerFormValues) => void;
+  id: string;
+  currentLeverage: number;
+}
+
 const _ChangeBrokerForm: React.FC<Props> = ({
+  isExchange,
   errorMessage,
   isSignalProgram,
   currentLeverage,
@@ -169,11 +180,15 @@ const _ChangeBrokerForm: React.FC<Props> = ({
         to={selectedBroker.name}
         isSignalProgram={isSignalProgram}
       />
-      <Row>
-        <FormTextField>{t("asset-settings:broker.text-change")}</FormTextField>
-      </Row>
+      {!isExchange && (
+        <Row>
+          <FormTextField>
+            {t("asset-settings:broker.text-change")}
+          </FormTextField>
+        </Row>
+      )}
       <Row size={"large"}>
-        <GVButton
+        <Button
           onClick={setChangeBrokerOpen}
           color="primary"
           isSuccessful={isSubmitted && !errorMessage}
@@ -185,7 +200,7 @@ const _ChangeBrokerForm: React.FC<Props> = ({
           }
         >
           {t("asset-settings:buttons.change-broker")}
-        </GVButton>
+        </Button>
       </Row>
       <ConfirmChangeBroker
         onApply={handleOnApply}
@@ -205,15 +220,6 @@ const _ChangeBrokerForm: React.FC<Props> = ({
     </HookForm>
   );
 };
-
-export interface Props {
-  errorMessage?: string;
-  data: BrokersProgramInfo;
-  isSignalProgram: boolean;
-  onSubmit: (values: ChangeBrokerFormValues) => void;
-  id: string;
-  currentLeverage: number;
-}
 
 const ChangeBrokerForm = withBlurLoader(React.memo(_ChangeBrokerForm));
 export default ChangeBrokerForm;

@@ -1,5 +1,5 @@
 import BannerPreview from "components/banner-preview/banner-preview";
-import DetailsBlock from "components/details/details-block";
+import { DefaultBlock } from "components/default.block/default.block";
 import Page from "components/page/page";
 import withDefaultLayout from "decorators/with-default-layout";
 import { ProgramFollowDetailsFull } from "gv-api-web";
@@ -29,13 +29,13 @@ const _Page: NextPage<{ program: ProgramFollowDetailsFull }> = ({
 
   return (
     <Page description={title} title={title}>
-      <DetailsBlock horizontalPaddings>
+      <DefaultBlock solid>
         <h3>PNG banners</h3>
         <BannerPreview url={banner250png} title={program.publicInfo.title} />
         <BannerPreview url={banner728png} title={program.publicInfo.title} />
         <BannerPreview url={banner240png} title={program.publicInfo.title} />
-      </DetailsBlock>
-      <DetailsBlock horizontalPaddings>
+      </DefaultBlock>
+      <DefaultBlock solid>
         <h3>SVG banners</h3>
         <BannerPreview
           url={banner250svg}
@@ -52,7 +52,7 @@ const _Page: NextPage<{ program: ProgramFollowDetailsFull }> = ({
           title={program.publicInfo.title}
           type={"svg"}
         />
-      </DetailsBlock>
+      </DefaultBlock>
     </Page>
   );
 };

@@ -3,6 +3,7 @@ import { Row } from "components/row/row";
 import SettingsBlock from "components/settings-block/settings-block";
 import { SubmitButton } from "components/submit-button/submit-button";
 import { ASSET } from "constants/constants";
+import { TFunction } from "i18next";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -20,7 +21,75 @@ enum FIELDS {
   successFee = "successFee"
 }
 
+export interface InvesmentLimitFormValues {
+  [FIELDS.exitFee]?: number;
+  [FIELDS.entryFee]: number;
+  [FIELDS.successFee]?: number;
+}
+
+interface Props {
+  isExchange?: boolean;
+  editError?: boolean;
+  asset: ASSET;
+  maxExitFee?: number;
+  maxEntryFee?: number;
+  maxSuccessFee?: number;
+  exitFee?: number;
+  entryFee: number;
+  successFee?: number;
+  onSubmit: (values: InvesmentLimitFormValues) => void;
+}
+
+const getFirstDescription = ({
+  t,
+  maxFee,
+  asset,
+  isExchange
+}: {
+  t: TFunction;
+  asset: ASSET;
+  maxFee?: number;
+  isExchange?: boolean;
+}) => {
+  switch (asset) {
+    case ASSET.FOLLOW:
+    case ASSET.PROGRAM:
+      return isExchange
+        ? t("create-account:settings.hints.exchange-management-fee-description")
+        : t("create-account:settings.hints.management-fee-description");
+    case ASSET.FUND:
+      return t("create-fund-page:settings.hints.entry-fee-description", {
+        maxFee
+      });
+  }
+};
+
+const getSecondDescription = ({
+  t,
+  maxFee,
+  asset,
+  isExchange
+}: {
+  t: TFunction;
+  asset: ASSET;
+  maxFee?: number;
+  isExchange?: boolean;
+}) => {
+  switch (asset) {
+    case ASSET.FOLLOW:
+    case ASSET.PROGRAM:
+      return isExchange
+        ? t("create-account:settings.hints.exchange-success-fee-description")
+        : t("create-account:settings.hints.success-fee-description");
+    case ASSET.FUND:
+      return t("create-fund-page:settings.hints.exit-fee-description", {
+        maxFee
+      });
+  }
+};
+
 const _InvestmentFees: React.FC<Props> = ({
+  isExchange,
   onSubmit,
   editError,
   entryFee,
@@ -63,15 +132,19 @@ const _InvestmentFees: React.FC<Props> = ({
               "create-account:settings.hints.management-fee"
             )}
             firstFeeName={FIELDS.entryFee}
-            firstFeeDescription={t(
-              "create-account:settings.hints.management-fee-description"
-            )}
+            firstFeeDescription={getFirstDescription({
+              isExchange,
+              t,
+              asset: ASSET.PROGRAM
+            })}
             secondFeeName={FIELDS.successFee}
             secondFeeLabel={t("asset-settings:fields.success-fee")}
             secondFeeUnderText={t("create-account:settings.hints.success-fee")}
-            secondFeeDescription={t(
-              "create-account:settings.hints.success-fee-description"
-            )}
+            secondFeeDescription={getSecondDescription({
+              isExchange,
+              t,
+              asset: ASSET.PROGRAM
+            })}
           />
         )}
         {asset === ASSET.FUND && (
@@ -79,19 +152,19 @@ const _InvestmentFees: React.FC<Props> = ({
             firstFeeLabel={t("asset-settings:fields.entry-fee")}
             firstFeeUnderText={t("create-fund-page:settings.hints.entry-fee")}
             firstFeeName={FIELDS.entryFee}
-            firstFeeDescription={t(
-              "create-fund-page:settings.hints.entry-fee-description",
-              { maxFee: maxEntryFee }
-            )}
+            firstFeeDescription={getFirstDescription({
+              t,
+              asset: ASSET.FUND,
+              maxFee: maxEntryFee
+            })}
             secondFeeName={FIELDS.exitFee}
             secondFeeLabel={t("create-fund-page:settings.fields.exit-fee")}
             secondFeeUnderText={t("create-fund-page:settings.hints.exit-fee")}
-            secondFeeDescription={t(
-              "create-fund-page:settings.hints.exit-fee-description",
-              {
-                maxFee: maxExitFee
-              }
-            )}
+            secondFeeDescription={getSecondDescription({
+              t,
+              asset: ASSET.FUND,
+              maxFee: maxSuccessFee
+            })}
           />
         )}
         <Row size={"large"}>
@@ -103,24 +176,6 @@ const _InvestmentFees: React.FC<Props> = ({
     </SettingsBlock>
   );
 };
-
-export interface InvesmentLimitFormValues {
-  [FIELDS.exitFee]?: number;
-  [FIELDS.entryFee]: number;
-  [FIELDS.successFee]?: number;
-}
-
-interface Props {
-  editError?: boolean;
-  asset: ASSET;
-  maxExitFee?: number;
-  maxEntryFee?: number;
-  maxSuccessFee?: number;
-  exitFee?: number;
-  entryFee: number;
-  successFee?: number;
-  onSubmit: (values: InvesmentLimitFormValues) => void;
-}
 
 const InvestmentFees = React.memo(_InvestmentFees);
 export default InvestmentFees;

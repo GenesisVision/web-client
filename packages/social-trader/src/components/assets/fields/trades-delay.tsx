@@ -9,6 +9,10 @@ import { DELAYS } from "pages/invest/programs/program-details/program-history-se
 import React from "react";
 import { useTranslation } from "react-i18next";
 
+interface Props {
+  name: string;
+}
+
 const _TradesDelay: React.FC<Props> = ({ name }) => {
   const [t] = useTranslation();
   return (
@@ -38,10 +42,6 @@ const _TradesDelay: React.FC<Props> = ({ name }) => {
     </>
   );
 };
-
-interface Props {
-  name: string;
-}
 
 const TradesDelay = React.memo(_TradesDelay);
 export default TradesDelay;

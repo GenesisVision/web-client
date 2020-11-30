@@ -1,28 +1,10 @@
 import SettingsBlock from "components/settings-block/settings-block";
 import React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 import CloseAsset, { CloseableAssetType } from "./close-asset";
 
-const _CloseAssetBlock: React.FC<Props> = ({
-  asset,
-  t,
-  label = t("asset-settings:close-asset.title"),
-  id,
-  canCloseAsset,
-  closeAsset
-}) => (
-  <SettingsBlock label={label}>
-    <CloseAsset
-      asset={asset}
-      canClose={canCloseAsset}
-      onApply={closeAsset}
-      id={id}
-    />
-  </SettingsBlock>
-);
-
-interface Props extends WithTranslation {
+interface Props {
   label?: string;
   asset: CloseableAssetType;
   id: string;
@@ -30,5 +12,25 @@ interface Props extends WithTranslation {
   closeAsset: () => void;
 }
 
-const CloseAssetBlock = translate()(React.memo(_CloseAssetBlock));
+const _CloseAssetBlock: React.FC<Props> = ({
+  asset,
+  label,
+  id,
+  canCloseAsset,
+  closeAsset
+}) => {
+  const [t] = useTranslation();
+  return (
+    <SettingsBlock label={label || t("asset-settings:close-asset.title")}>
+      <CloseAsset
+        asset={asset}
+        canClose={canCloseAsset}
+        onApply={closeAsset}
+        id={id}
+      />
+    </SettingsBlock>
+  );
+};
+
+const CloseAssetBlock = React.memo(_CloseAssetBlock);
 export default CloseAssetBlock;

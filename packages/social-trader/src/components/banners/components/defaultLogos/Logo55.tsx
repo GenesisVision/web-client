@@ -1,5 +1,11 @@
 import React from "react";
 
+type LogoType = {
+  x: number;
+  y: number;
+  color: string;
+};
+
 export default function Logo55({ x, y, color }: LogoType) {
   return (
     <svg
@@ -35,9 +41,3 @@ export default function Logo55({ x, y, color }: LogoType) {
     </svg>
   );
 }
-
-type LogoType = {
-  x: number;
-  y: number;
-  color: string;
-};

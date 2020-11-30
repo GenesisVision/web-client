@@ -1,4 +1,3 @@
-import clsx from "clsx";
 import { ITableBodyContainerExternalProps } from "components/table/components/table-body";
 import TableFooter, {
   ITableFooterProps
@@ -11,13 +10,46 @@ import TableToolbar, {
 } from "components/table/components/table-toolbar";
 import { LIST_VIEW } from "components/table/table.constants";
 import React, { useCallback, useState } from "react";
+import styled, { css } from "styled-components";
+import { mediaBreakpointLandscapePhone } from "utils/style/media";
+import { adaptivePadding } from "utils/style/mixins";
+import { $paddingSmall, $paddingXsmall } from "utils/style/sizes";
 import { setTableView } from "utils/table-view";
 
 import { FilteringType } from "./filtering/filter.type";
 import TableBodyContainer from "./table-body";
-import cardsStyles from "./table-cards.module.scss";
-import tableStyles from "./table.module.scss";
 import { RenderBodyItemFuncType } from "./table.types";
+
+const Scroll = styled.div`
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+`;
+
+const TableStyles = css`
+  width: 100%;
+  border-spacing: 0;
+`;
+
+const CardsContaniner = styled.div`
+  ${TableStyles}
+`;
+
+const TablesContaniner = styled.table`
+  ${TableStyles}
+`;
+
+const CardsTableBodyContainer = styled(TableBodyContainer)`
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding-left: 0;
+  ${adaptivePadding("top", $paddingXsmall)};
+  ${mediaBreakpointLandscapePhone(`padding-left: ${$paddingSmall}px;
+    padding-right: ${$paddingSmall - $paddingSmall / 2}px;`)}
+`;
 
 const _Table: React.FC<ITableProps> = ({
   outerView,
@@ -62,7 +94,7 @@ const _Table: React.FC<ITableProps> = ({
   const renderBodyItem =
     view === LIST_VIEW.CARDS ? renderBodyCard : renderBodyRow;
   return (
-    <div className={tableStyles["table-wrapper"]}>
+    <div>
       <TableToolbar
         hide={hideToolbar}
         disableTitle={disableTitle}
@@ -83,24 +115,23 @@ const _Table: React.FC<ITableProps> = ({
           exportButtonToolbarRender && exportButtonToolbarRender(filtering)
         }
       />
-      <div className={tableStyles["table__scroll"]}>
+      <Scroll>
         {view === LIST_VIEW.CARDS && (
-          <div className={clsx(tableStyles["table"], className)}>
-            <TableBodyContainer
+          <CardsContaniner className={className}>
+            <CardsTableBodyContainer
               updateRow={updateRow}
               updateItems={updateItems}
               loaderData={loaderData}
               isPending={isPending}
               items={items}
-              className={cardsStyles["table-cards"]}
               tag="div"
               view={view}
               renderBodyItem={renderBodyItem!}
             />
-          </div>
+          </CardsContaniner>
         )}
         {view === LIST_VIEW.TABLE && (
-          <table className={clsx(tableStyles["table"], className)}>
+          <TablesContaniner className={className}>
             <TableHeader
               columns={columns}
               sorting={sorting}
@@ -111,16 +142,15 @@ const _Table: React.FC<ITableProps> = ({
               loaderData={loaderData}
               isPending={isPending}
               items={items}
-              className={tableStyles["table__body"]}
               tag="tbody"
               view={view}
               updateRow={updateRow}
               updateItems={updateItems}
               renderBodyItem={renderBodyItem!}
             />
-          </table>
+          </TablesContaniner>
         )}
-      </div>
+      </Scroll>
       <TableFooter
         asLinkPagination={asLinkPagination}
         condition={!!paging && !!(paging.totalPages && paging.totalPages >= 2)}

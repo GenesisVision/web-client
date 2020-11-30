@@ -21,6 +21,14 @@
       }
     }
   }
+  &__table {
+    margin-bottom: $padding-xsmall;
+    &:not(:last-child) {
+      @include media-breakpoint-landscape-phone() {
+        margin-right: $padding-xsmall;
+      }
+    }
+  }
   &__tables {
     justify-content: stretch;
     flex-direction: column;

@@ -1,7 +1,9 @@
 import * as React from "react";
+import styled from "styled-components";
+import { mediaBreakpointLandscapePhone } from "utils/style/media";
+import { $paddingBig, $paddingXsmall } from "utils/style/sizes";
 
-import styles from "./details-divider.block.module.scss";
-
-export const DetailsDivider: React.FC = () => {
-  return <div className={styles["details-divider"]} />;
-};
+export const DetailsDivider = styled.div`
+  padding-bottom: ${$paddingXsmall}px;
+  ${mediaBreakpointLandscapePhone(`padding-bottom: ${$paddingBig}px`)};
+`;

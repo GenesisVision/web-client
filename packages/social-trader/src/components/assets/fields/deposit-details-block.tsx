@@ -20,6 +20,20 @@ interface Props extends IDepositDetailsDefaultBlockProps {
   broker?: BrokerTradeServerType;
 }
 
+interface Props {
+  broker?: BrokerTradeServerType;
+  hide?: boolean;
+  setRate: (value: number) => void;
+  setAvailable: (value: number) => void;
+  blockNumber?: number;
+  walletFieldName: string;
+  inputName: string;
+  depositAmount?: number | string;
+  minimumDepositAmount: number;
+  setFieldValue: Function;
+  assetCurrency: CurrencyEnum;
+}
+
 const hasMinAmount = (
   tradingAccountMinDepositAmounts: TradingAccountMinCreateAmount[],
   currency: CurrencyEnum,

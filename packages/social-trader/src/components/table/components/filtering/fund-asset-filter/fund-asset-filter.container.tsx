@@ -9,6 +9,8 @@ export interface IFundAssetFilterContainerProps extends IFundAssetFilterProps {}
 
 const _FundAssetFilterContainer: React.FC<IFundAssetFilterContainerProps> = props => {
   const { data: platformAssets } = useApiRequest({
+    name: "FundAssetFilterContainer",
+    cache: true,
     request: getTradingAssets,
     fetchOnMount: true
   });

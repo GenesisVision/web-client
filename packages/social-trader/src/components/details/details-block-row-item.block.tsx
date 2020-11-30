@@ -1,9 +1,13 @@
 import * as React from "react";
+import styled from "styled-components";
+import { $paddingXsmall } from "utils/style/sizes";
 
-import styles from "./details-row-item.block.module.scss";
+const StyledDiv = styled.div`
+  padding-right: ${$paddingXsmall}px;
+`;
 
 export const DetailsBlockRowItem: React.FC<React.HTMLAttributes<
   HTMLDivElement
 >> = ({ children }) => {
-  return <div className={styles["details-row-item"]}>{children}</div>;
+  return <StyledDiv>{children}</StyledDiv>;
 };

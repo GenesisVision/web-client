@@ -1,4 +1,3 @@
-import { FUND_ASSET_TYPE } from "components/fund-asset/fund-asset";
 import FundAssetContainer from "components/fund-asset/fund-asset-container";
 import { FundAssetPartWithIcon, FundHistoryEventType } from "gv-api-web";
 import React from "react";
@@ -21,7 +20,7 @@ const _FundHistoryDescription: React.FC<IFundHistoryDescriptionProps> = ({
         <FundAssetContainer
           noWrap
           assets={assets}
-          type={FUND_ASSET_TYPE.SHORT}
+          type={"short"}
           size={11}
           length={assets.length}
           hasPopoverList

@@ -1,10 +1,19 @@
-import clsx from "clsx";
 import { VERTICAL_POPOVER_POS } from "components/popover/popover";
 import Tooltip from "components/tooltip/tooltip";
 import { TooltipContent } from "components/tooltip/tooltip-content";
 import * as React from "react";
+import styled from "styled-components";
 
-import styles from "./hint.module.scss";
+interface Props {
+  content: React.ReactNode;
+  tooltipContent: React.ReactNode;
+  className?: string;
+  vertical: VERTICAL_POPOVER_POS;
+}
+
+const Content = styled.div`
+  cursor: help;
+`;
 
 const _Hint: React.FC<Props> = ({
   content,
@@ -13,12 +22,12 @@ const _Hint: React.FC<Props> = ({
   vertical
 }) => {
   return (
-    <div className={clsx(styles["hint"], className)}>
+    <div className={className}>
       <Tooltip
         vertical={vertical}
         render={() => <TooltipContent>{tooltipContent}</TooltipContent>}
       >
-        <div className={styles["hint__content"]}>{content}</div>
+        <Content>{content}</Content>
       </Tooltip>
     </div>
   );
@@ -26,10 +35,3 @@ const _Hint: React.FC<Props> = ({
 
 const Hint = React.memo(_Hint);
 export default Hint;
-
-interface Props {
-  content: React.ReactNode;
-  tooltipContent: React.ReactNode;
-  className?: string;
-  vertical: VERTICAL_POPOVER_POS;
-}

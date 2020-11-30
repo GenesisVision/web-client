@@ -1,5 +1,6 @@
 import ChartPeriod from "components/chart/chart-period/chart-period";
 import { ChartDefaultPeriod } from "components/chart/chart-period/chart-period.helpers";
+import { DetailsChartContainer } from "components/details/details-statistic-section/details-chart-section/details-chart-container";
 import {
   BalanceChartElementType,
   BalanceChartType
@@ -26,7 +27,24 @@ import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum, HandlePeriodChangeType } from "utils/types";
 
 import { useChartData } from "../../details.chart.helpers";
-import styles from "../details-chart-section.module.scss";
+
+export type TRenderBalanceChart = (props: {
+  color: string;
+  balanceChart: BalanceChartElementType;
+  currency: CurrencyEnum;
+}) => JSX.Element;
+
+interface Props {
+  renderBalanceChart: TRenderBalanceChart;
+  period: ChartDefaultPeriod;
+  setPeriod: HandlePeriodChangeType;
+  selectedCurrencies: TChartCurrency[];
+  balanceChart: BalanceChartType;
+  addCurrency: TAddChartCurrency;
+  removeCurrency: TRemoveChartCurrency;
+  changeCurrency: TChangeChartCurrency;
+  selectCurrencies: TChartCurrency[];
+}
 
 export const BALANCE_CHART_TEST_ID = "BALANCE_CHART_TEST_ID";
 
@@ -70,38 +88,17 @@ const _BalanceChartElements: React.FC<Props> = ({
         onRemove={removeCurrency}
         onChange={changeCurrency}
       />
-      <div
-        data-test-id={BALANCE_CHART_TEST_ID}
-        className={styles["details-chart__profit"]}
-      >
+      <DetailsChartContainer data-test-id={BALANCE_CHART_TEST_ID}>
         {chart.length &&
           renderBalanceChart({
             balanceChart: chart,
             currency: name,
             color
           })}
-      </div>
+      </DetailsChartContainer>
     </>
   );
 };
-
-export type TRenderBalanceChart = (props: {
-  color: string;
-  balanceChart: BalanceChartElementType;
-  currency: CurrencyEnum;
-}) => JSX.Element;
-
-interface Props {
-  renderBalanceChart: TRenderBalanceChart;
-  period: ChartDefaultPeriod;
-  setPeriod: HandlePeriodChangeType;
-  selectedCurrencies: TChartCurrency[];
-  balanceChart: BalanceChartType;
-  addCurrency: TAddChartCurrency;
-  removeCurrency: TRemoveChartCurrency;
-  changeCurrency: TChangeChartCurrency;
-  selectCurrencies: TChartCurrency[];
-}
 
 const BalanceChartElements = withLoader(React.memo(_BalanceChartElements));
 export default BalanceChartElements;

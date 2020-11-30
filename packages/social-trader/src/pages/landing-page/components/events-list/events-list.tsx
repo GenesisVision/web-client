@@ -1,20 +1,17 @@
-import clsx from "clsx";
 import { PlatformEvent } from "gv-api-web";
 import EventItem from "pages/landing-page/components/events-list/event-item";
 import EventLastItem from "pages/landing-page/components/events-list/event-last-item";
+import { EventsListUl } from "pages/landing-page/components/events-list/events-list.styles";
 import React, { useCallback, useEffect, useState } from "react";
-
-import styles from "./events-list.module.scss";
 
 const TIME_DELAY = 5000;
 const COUNT_SHOWING_ITEMS = 5;
 
 interface Props {
-  className?: string;
   events: PlatformEvent[];
 }
 
-const _EventsList: React.FC<Props> = ({ className, events }) => {
+const _EventsList: React.FC<Props> = ({ events }) => {
   const countItems = events.length;
   const [startIndex, setStartIndex] = useState(0);
   const [minHeightItem, setMinHeightItem] = useState(0);
@@ -41,10 +38,7 @@ const _EventsList: React.FC<Props> = ({ className, events }) => {
   }, [minHeightItem, heightList]);
 
   return (
-    <ul
-      className={clsx(styles["events-list"], className)}
-      style={{ height: `${heightList}px` }}
-    >
+    <EventsListUl height={heightList}>
       {events.map((event, index) => (
         <EventItem
           key={index}
@@ -58,7 +52,7 @@ const _EventsList: React.FC<Props> = ({ className, events }) => {
         />
       ))}
       <EventLastItem minHeight={minHeightItem} />
-    </ul>
+    </EventsListUl>
   );
 };
 

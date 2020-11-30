@@ -1,9 +1,7 @@
-import clsx from "clsx";
 import Modal from "components/modal/modal";
+import { PopoverElement } from "components/popover/popover-element";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import EventListener from "react-event-listener";
-
-import styles from "./popover.module.scss";
 
 export enum VERTICAL_POPOVER_POS {
   TOP = "top",
@@ -21,6 +19,29 @@ export enum ORIENTATION_POPOVER {
   RIGHT = "right",
   CENTER = "center"
 }
+
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
+  onMouseEnter?: VoidFunction;
+  fixedHorizontal?: boolean;
+  fixedVertical?: boolean;
+  orientation?: ORIENTATION_POPOVER;
+  onClose?: (event: React.MouseEvent<HTMLElement>) => void;
+  horizontal?: HORIZONTAL_POPOVER_POS;
+  vertical?: VERTICAL_POPOVER_POS;
+  anchorEl?: anchorElType;
+  noPadding?: boolean;
+  absolute?: boolean;
+  className?: string;
+  fixed?: boolean;
+  ownWidth?: boolean;
+}
+
+export type anchorElType = EventTarget | Function | HTMLElement;
+
+const MARGIN_OFFSET = 10;
+
+const getAnchorEl = (el?: anchorElType) =>
+  typeof el === "function" ? el() : el;
 
 const Popover: React.FC<Props> = props => {
   const {
@@ -158,42 +179,16 @@ const Popover: React.FC<Props> = props => {
   return (
     <Modal open={Boolean(anchorEl)} transparentBackdrop {...props}>
       <EventListener target={"window"} onScroll={handleScroll} />
-      <div
+      <PopoverElement
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
-        className={clsx(styles["popover"], className, {
-          [styles["popover--no-padding"]]: noPadding
-        })}
+        className={className}
         ref={popover}
       >
         {children}
-      </div>
+      </PopoverElement>
     </Modal>
   );
 };
 
-const MARGIN_OFFSET = 10;
-
-const getAnchorEl = (el?: anchorElType) =>
-  typeof el === "function" ? el() : el;
-
 export default Popover;
-
-interface Props extends React.HTMLAttributes<HTMLDivElement> {
-  onMouseEnter?: VoidFunction;
-  onMouseLeave?: VoidFunction;
-  fixedHorizontal?: boolean;
-  fixedVertical?: boolean;
-  orientation?: ORIENTATION_POPOVER;
-  onClose?(event: React.MouseEvent<HTMLElement>): void;
-  horizontal?: HORIZONTAL_POPOVER_POS;
-  vertical?: VERTICAL_POPOVER_POS;
-  anchorEl?: anchorElType;
-  noPadding?: boolean;
-  noAbsolute?: boolean;
-  className?: string;
-  fixed?: boolean;
-  ownWidth?: boolean;
-}
-
-export type anchorElType = EventTarget | Function | HTMLElement;

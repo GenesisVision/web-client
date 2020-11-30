@@ -9,6 +9,8 @@ const withTM = require("next-transpile-modules")(["shared", "gv-api-web"]);
 
 const isProd = process.env.NODE_ENV === "production";
 
+const enablePreact = false;
+
 const analyzer = withBundleAnalyzer({
   enabled: process.env.ANALYZE === "true"
 });
@@ -21,18 +23,46 @@ function create(path) {
   dotenv.config({ path: ".env" });
 
   const nextConfig = {
+    experimental: {
+      modern: true,
+      polyfillsOptimization: true
+    },
     serverRuntimeConfig: {
       apiUrl: process.env.SERVER_API_URL
     },
     publicRuntimeConfig: {
       apiUrl: process.env.REACT_APP_API_URL
     },
-    webpack(config) {
-      config.devtool = false;
-      for (const r of config.module.rules) {
-        if (r.loader === "babel-loader") {
-          r.options.sourceMaps = false;
+    webpack(config, { isServer }) {
+      if (isServer && enablePreact) {
+        // Move Preact into the framework chunk instead of duplicating in routes:
+        const splitChunks =
+          config.optimization && config.optimization.splitChunks;
+        if (splitChunks) {
+          const cacheGroups = splitChunks.cacheGroups;
+          const test = /[\\/]node_modules[\\/](preact|preact-render-to-string|preact-context-provider)[\\/]/;
+          if (cacheGroups.framework) {
+            cacheGroups.preact = Object.assign({}, cacheGroups.framework, {
+              test
+            });
+            // if you want to merge the 2 small commons+framework chunks:
+            // cacheGroups.commons.name = 'framework';
+          }
         }
+
+        // mark `preact` stuffs as external for server bundle to prevent duplicate copies of preact
+        config.externals.push(
+          /^(preact|preact-render-to-string|preact-context-provider)([\\/]|$)/
+        );
+      }
+
+      if (isServer && enablePreact) {
+        config.resolve.alias = {
+          ...config.resolve.alias,
+          react: "preact/compat",
+          "react-dom/test-utils": "preact/test-utils",
+          "react-dom": "preact/compat"
+        };
       }
 
       config.resolve.alias = {

@@ -2,11 +2,13 @@ import { CurrencyItem } from "components/currency-item/currency-item";
 import { PlatformAsset, ProviderPlatformAssets } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
+import styled from "styled-components";
+import { adaptivePadding, fontSize } from "utils/style/mixins";
+import { $fontSizeCommon, $paddingXxsmall } from "utils/style/sizes";
 
 import { UpdateFilterFunc } from "../../table.types";
 import TileFilter from "../tile-filter";
 import TileFilterItem from "../tile-filter-item";
-import styles from "./fund-asset-filter.module.scss";
 import FundAssetPopover from "./fund-asset-popover";
 
 export interface IFundAssetFilterProps {
@@ -22,6 +24,11 @@ interface OwnProps {
 
 interface Props extends IFundAssetFilterProps, OwnProps {}
 
+const StyledCurrencyItem = styled(CurrencyItem)`
+  ${fontSize($fontSizeCommon)};
+  ${adaptivePadding("right", $paddingXxsmall)};
+`;
+
 const _FundAssetFilter: React.FC<Props> = ({
   providers,
   name,
@@ -34,12 +41,7 @@ const _FundAssetFilter: React.FC<Props> = ({
     .filter(x => value.includes(x.asset))
     .map(asset => (
       <TileFilterItem key={asset.id} id={asset.asset}>
-        <CurrencyItem
-          className={styles["fund-asset-filter__asset-name"]}
-          logo={asset.logoUrl}
-          name={asset.asset}
-          small
-        />
+        <StyledCurrencyItem logo={asset.logoUrl} name={asset.asset} small />
       </TileFilterItem>
     ));
   const notSelectedAssets = values.filter(x => !value.includes(x.asset));

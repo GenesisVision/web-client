@@ -1,5 +1,5 @@
+import { Button } from "components/button/button";
 import { PostContext } from "components/conversation/post/post.context";
-import GVButton from "components/gv-button";
 import { ProfilePublic } from "gv-api-web";
 import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
@@ -19,9 +19,9 @@ const _Reply: React.FC<Props> = ({ author }) => {
   }, [author]);
 
   return (
-    <GVButton variant={"text"} noPadding onClick={handleClick}>
+    <Button variant={"text"} noPadding onClick={handleClick}>
       {t("Reply")}
-    </GVButton>
+    </Button>
   );
 };
 

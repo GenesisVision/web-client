@@ -1,4 +1,3 @@
-import clsx from "clsx";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
   ORIENTATION_POPOVER,
@@ -8,15 +7,35 @@ import useAnchor from "hooks/anchor.hook";
 import useIsOpen from "hooks/is-open.hook";
 import * as React from "react";
 import { useCallback, useEffect } from "react";
+import styled from "styled-components";
+import { horizontalPaddings, verticalPaddings } from "utils/style/mixins";
+import {
+  $dividerText,
+  $paddingXxsmall,
+  $tooltipPadding
+} from "utils/style/sizes";
 
-import styles from "./menu-tooltip.module.scss";
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
+  render: (clearAnchor?: VoidFunction) => JSX.Element | undefined;
+  disable?: boolean;
+  horizontal?: HORIZONTAL_POPOVER_POS;
+  vertical?: VERTICAL_POPOVER_POS;
+}
 
-const MenuTooltip: React.FC<Props> = ({
-  render,
-  className,
-  children,
-  disable
-}) => {
+const CONTAINER_CLASS_NAME = "CONTAINER_CLASS_NAME";
+const POPOVER_CLASS_NAME = "POPOVER_CLASS_NAME";
+
+const Container = styled.div`
+  padding: ${$paddingXxsmall}px 0;
+`;
+
+const StyledPopover = styled(Popover)`
+  ${horizontalPaddings($tooltipPadding, $dividerText)};
+  ${verticalPaddings($tooltipPadding, $dividerText)};
+  color: white;
+`;
+
+const MenuTooltip: React.FC<Props> = ({ render, children, disable }) => {
   const { anchor, setAnchor, clearAnchor } = useAnchor();
   const [inPopover, setInPopover, setOutPopover] = useIsOpen();
   const [inLabel, setInLabel, setOutLabel] = useIsOpen();
@@ -30,16 +49,36 @@ const MenuTooltip: React.FC<Props> = ({
   const handlePopoverMouseEnter = useCallback(() => {
     setInPopover();
   }, []);
-  const handlePopoverMouseLeave = useCallback(() => {
-    setOutPopover();
-  }, [inLabel]);
+  const handlePopoverMouseLeave = useCallback(
+    (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+      if (
+        // @ts-ignore
+        typeof e?.relatedTarget?.className === "string" &&
+        // @ts-ignore
+        e?.relatedTarget?.className?.includes(CONTAINER_CLASS_NAME)
+      )
+        setInLabel();
+      setOutPopover();
+    },
+    [inLabel]
+  );
 
   const handleLabelMouseEnter = useCallback(() => {
     setInLabel();
   }, []);
-  const handleLabelMouseLeave = useCallback(() => {
-    setOutLabel();
-  }, [inPopover]);
+  const handleLabelMouseLeave = useCallback(
+    (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+      if (
+        // @ts-ignore
+        typeof e?.relatedTarget?.className === "string" &&
+        // @ts-ignore
+        e?.relatedTarget?.className?.includes(POPOVER_CLASS_NAME)
+      )
+        setInPopover();
+      setOutLabel();
+    },
+    []
+  );
 
   useEffect(() => {
     if (!inLabel && !inPopover) clearAnchor();
@@ -47,10 +86,10 @@ const MenuTooltip: React.FC<Props> = ({
 
   const child = React.Children.only(children)! as JSX.Element;
   return (
-    <div
+    <Container
+      className={CONTAINER_CLASS_NAME}
       onMouseEnter={handleLabelMouseEnter}
       onMouseLeave={handleLabelMouseLeave}
-      className={styles["menu-tooltip__label"]}
     >
       <child.type
         {...child.props}
@@ -58,32 +97,23 @@ const MenuTooltip: React.FC<Props> = ({
         onTouchStart={handleButtonMouseEnter}
         onTouchEnd={clearAnchor}
         onClick={clearAnchor}
-        className={styles["menu-tooltip__label-child"]}
       />
-      <Popover
+      <StyledPopover
+        className={POPOVER_CLASS_NAME}
         fixedHorizontal
         onMouseEnter={handlePopoverMouseEnter}
         onMouseLeave={handlePopoverMouseLeave}
-        noAbsolute
+        absolute={false}
         noPadding
         anchorEl={anchor}
-        className={clsx(styles["menu-tooltip__popover"], className)}
         vertical={VERTICAL_POPOVER_POS.BOTTOM}
         horizontal={HORIZONTAL_POPOVER_POS.CENTER}
         orientation={ORIENTATION_POPOVER.CENTER}
       >
         {render(clearAnchor)}
-      </Popover>
-    </div>
+      </StyledPopover>
+    </Container>
   );
 };
-
-interface Props extends React.HTMLAttributes<HTMLDivElement> {
-  render: (clearAnchor?: VoidFunction) => JSX.Element | undefined;
-  disable?: boolean;
-  horizontal?: HORIZONTAL_POPOVER_POS;
-  vertical?: VERTICAL_POPOVER_POS;
-  className?: string;
-}
 
 export default MenuTooltip;

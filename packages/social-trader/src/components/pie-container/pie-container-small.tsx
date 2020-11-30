@@ -3,7 +3,6 @@ import { RowItem } from "components/row-item/row-item";
 import * as React from "react";
 
 import GVProgramPeriod from "../gv-program-period";
-import styles from "./pie-container.module.scss";
 
 export interface IPieContainer {
   end: number;
@@ -22,7 +21,7 @@ const _PieContainerSmall: React.FC<IPieContainer> = ({
     <RowItem size={"small"}>
       <GVProgramPeriod start={start} end={end} value={value} variant="pie" />
     </RowItem>
-    <RowItem className={styles["program-period-pie__text"]}>
+    <RowItem>
       {value} {suffix}
     </RowItem>
   </Center>

@@ -30,7 +30,7 @@ const _WalletTablesTotal: React.FC<Props> = ({ wallets }) => {
         <GVTab
           value={TABS.WALLETS_TAB}
           label={
-            <Link to={`${WALLET_TOTAL_PAGE_ROUTE}${TABS.WALLETS_TAB}`}>
+            <Link noColor to={`${WALLET_TOTAL_PAGE_ROUTE}${TABS.WALLETS_TAB}`}>
               {t("wallet-page:tabs.wallets")}
             </Link>
           }
@@ -47,6 +47,7 @@ const _WalletTablesTotal: React.FC<Props> = ({ wallets }) => {
               )}
             >
               <Link
+                noColor
                 to={linkCreator(
                   `${WALLET_TOTAL_PAGE_ROUTE}${TABS.TRANSACTIONS_TAB}`
                 )}
@@ -69,6 +70,7 @@ const _WalletTablesTotal: React.FC<Props> = ({ wallets }) => {
                 )}
               >
                 <Link
+                  noColor
                   to={linkCreator(
                     `${WALLET_TOTAL_PAGE_ROUTE}${TABS.EXTERNAL_TAB}`
                   )}
@@ -85,6 +87,7 @@ const _WalletTablesTotal: React.FC<Props> = ({ wallets }) => {
                 )}
               >
                 <Link
+                  noColor
                   to={linkCreator(
                     `${WALLET_TOTAL_PAGE_ROUTE}${TABS.EXTERNAL_TAB}`
                   )}

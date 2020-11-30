@@ -1,17 +1,28 @@
-import React from "react";
-
-import styles from "../accordion/accordion.module.scss";
+import React, { RefObject } from "react";
+import styled from "styled-components";
+import { $rowColor } from "utils/style/colors";
+import { mediaBreakpointDesktop } from "utils/style/media";
 
 interface Props {
-  isVisible: boolean;
-  content?: JSX.Element;
+  refProp?: RefObject<any>;
+  isVisible?: boolean;
 }
 
-const _AccordionContent: React.FC<Props> = ({ isVisible, content }) => {
-  return isVisible ? (
-    <div className={styles["accordion__content"]}>{content}</div>
-  ) : null;
+const Content = styled.div`
+  border-top: 1px solid ${$rowColor}4d;
+  padding: 10px 20px;
+  ${mediaBreakpointDesktop("padding: 15px 25px;")}
+  p:last-child {
+    margin-bottom: 0;
+  }
+`;
+
+const AccordionContent: React.FC<Props> = ({
+  refProp,
+  isVisible,
+  children
+}) => {
+  return isVisible ? <Content ref={refProp}>{children}</Content> : null;
 };
 
-const AccordionContent = React.memo(_AccordionContent);
 export default AccordionContent;

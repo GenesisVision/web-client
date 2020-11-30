@@ -1,4 +1,4 @@
-import GVButton from "components/gv-button";
+import { Button } from "components/button/button";
 import GVSwitch from "components/gv-switch";
 import GVTextField from "components/gv-text-field";
 import { Row } from "components/row/row";
@@ -75,7 +75,7 @@ const _CustomNotification: React.FC<Props> = ({ onSuccess, settings }) => {
             adornment={settings.conditionType === "Profit" ? "%" : undefined}
             InputComponent={NumberFormat}
           />
-          <GVButton
+          <Button
             noPadding
             variant="text"
             color="danger"
@@ -83,7 +83,7 @@ const _CustomNotification: React.FC<Props> = ({ onSuccess, settings }) => {
             onClick={handleDelete}
           >
             {t("buttons.delete")}
-          </GVButton>
+          </Button>
         </div>
       </Row>
     </div>

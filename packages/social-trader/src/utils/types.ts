@@ -17,7 +17,13 @@ import { Action, AnyAction, Dispatch, Store } from "redux";
 import { ThunkAction, ThunkDispatch } from "redux-thunk";
 import Token from "services/api-client/token";
 
-export type SizesType = "xsmall" | "small" | "middle" | "large" | "xlarge";
+export type SizesType =
+  | "xsmall"
+  | "small"
+  | "middle"
+  | "large"
+  | "xlarge"
+  | "xxlarge";
 
 export interface Childrenable {
   children?: ReactNode | ReactNode[];
@@ -122,6 +128,8 @@ export interface NextPageWithReduxContext extends NextPageWithTokenContext {
 
 export interface AppWithReduxContext extends AppContextType {
   ctx: NextPageWithReduxContext;
+  reduxStore?: any;
+  token?: any;
 }
 
 export type NextPageWithToken<P = void, IP = P> = NextComponentType<

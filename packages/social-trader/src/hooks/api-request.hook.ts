@@ -1,107 +1,39 @@
+import useApiRequestConstructor from "@pavelzubov/use-api-request";
+import {
+  API_REQUEST_STATUS as API_REQUEST_STATUS_TYPE,
+  IAlert,
+  IAlertService,
+  TUseApiRequestOutput,
+  TUseApiRequestProps
+} from "@pavelzubov/use-api-request/dist/hooks/useApiRequest";
 import { useAlerts } from "hooks/alert.hook";
-import { useEffect, useState } from "react";
-import { MiddlewareType, setPromiseMiddleware } from "utils/promise-middleware";
+import { useMemo } from "react";
+import Token from "services/api-client/token";
 import { ResponseError } from "utils/types";
 
-import useErrorMessage, { TErrorMessage } from "./error-message.hook";
-import useIsOpen from "./is-open.hook";
+export type API_REQUEST_STATUS = API_REQUEST_STATUS_TYPE;
 
-export enum API_REQUEST_STATUS {
-  WAIT = "WAIT",
-  PENDING = "PENDING",
-  SUCCESS = "SUCCESS",
-  FAIL = "FAIL"
-}
+const getErrorMessageCallback = (error: ResponseError) => error?.errorMessage;
 
-type TNullValue = undefined;
-export const nullValue = undefined;
-
-type TRequest<T> = Promise<T>;
-
-export type TUseApiRequestProps<T = any> = {
-  fetchOnMountData?: any;
-  request: (...args: any) => TRequest<T>;
-  defaultData?: T;
-  catchCallback?: (error: ResponseError) => void;
-  successMessage?: string;
-  middleware?: MiddlewareType[];
-  fetchOnMount?: boolean;
-};
-
-type TUseApiRequestOutput<T> = {
-  setData: (data: T | TNullValue) => void;
-  status: API_REQUEST_STATUS;
-  errorMessage: TErrorMessage;
-  isPending: boolean;
-  data: T | TNullValue;
-  sendRequest: (props?: any) => TRequest<any>;
-  cleanErrorMessage: () => void;
-};
-
-const useApiRequest = <T extends any>({
-  fetchOnMountData,
-  fetchOnMount,
-  middleware = [],
-  successMessage,
-  request,
-  defaultData,
-  catchCallback
-}: TUseApiRequestProps<T>): TUseApiRequestOutput<T> => {
-  const { successAlert, errorAlert } = useAlerts();
-  const [status, setStatus] = useState<API_REQUEST_STATUS>(
-    API_REQUEST_STATUS.WAIT
+const useApiRequest = <T extends any>(
+  props: TUseApiRequestProps<T>
+): TUseApiRequestOutput<T> => {
+  const { successAlert, errorAlert, warningAlert } = useAlerts();
+  const alertService: IAlertService = useMemo(
+    () => ({
+      successAlert: ({ content }: IAlert) => successAlert(content),
+      errorAlert: ({ content }: IAlert) => errorAlert(content),
+      warningAlert: ({ content }: IAlert) => warningAlert(content)
+    }),
+    []
   );
-  const [data, setData] = useState<T | TNullValue>(defaultData || nullValue);
-  const {
-    errorMessage,
-    setErrorMessage,
-    cleanErrorMessage
-  } = useErrorMessage();
-  const [isPending, setIsPending, setIsNotPending] = useIsOpen();
-
-  const sendSuccessMessage = (res: any) => {
-    successMessage && successAlert(successMessage);
-    setStatus(API_REQUEST_STATUS.SUCCESS);
-    return res;
-  };
-
-  const middlewareList: MiddlewareType[] = [
-    ...middleware,
-    setData,
-    cleanErrorMessage,
-    sendSuccessMessage
-  ];
-
-  const sendRequest = (props?: any) => {
-    setIsPending();
-    setStatus(API_REQUEST_STATUS.PENDING);
-    return ((setPromiseMiddleware(
-      request(props),
-      middlewareList
-    ) as unknown) as Promise<any>)
-      .catch((errorMessage: ResponseError) => {
-        setStatus(API_REQUEST_STATUS.FAIL);
-        setErrorMessage(errorMessage);
-        errorAlert(errorMessage.errorMessage);
-        catchCallback && catchCallback(errorMessage);
-      })
-      .finally(() => {
-        setIsNotPending();
-      }) as TRequest<T>;
-  };
-
-  useEffect(() => {
-    if (fetchOnMount) sendRequest(fetchOnMountData);
-  }, []);
-
-  return {
-    setData,
-    status,
-    errorMessage,
-    cleanErrorMessage,
-    isPending,
-    data,
-    sendRequest
-  };
+  return useApiRequestConstructor.useApiRequest({
+    ...props,
+    cacheMaxAge: 100 * 60 * 60 * 24,
+    token: Token.create().value,
+    alertService,
+    getErrorMessageCallback
+  });
 };
+
 export default useApiRequest;

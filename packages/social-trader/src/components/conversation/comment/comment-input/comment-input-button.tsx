@@ -1,18 +1,17 @@
+import { $commentInputButtonSize } from "components/conversation/comment/comment-input/comment-input.styles";
 import React from "react";
-import { OptionalClickable } from "utils/types";
+import styled from "styled-components";
 
-import styles from "./comment-input.module.scss";
+const _CommentInputButton = styled.div`
+  cursor: pointer;
+  width: ${$commentInputButtonSize}px;
+  height: ${$commentInputButtonSize}px;
 
-const _CommentInputButton: React.FC<Props> = ({ children, onClick }) => {
-  return (
-    <div className={styles["comment-input__button"]} onClick={onClick}>
-      {children}
-    </div>
-  );
-};
-
-interface Props extends OptionalClickable {
-  children?: string | JSX.Element;
-}
+  & > img,
+  & > svg {
+    width: 100%;
+    height: 100%;
+  }
+`;
 
 export const CommentInputButton = React.memo(_CommentInputButton);

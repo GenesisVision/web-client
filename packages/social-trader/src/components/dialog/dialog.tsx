@@ -1,10 +1,54 @@
-import clsx from "clsx";
-import GVButton from "components/gv-button";
+import { Button } from "components/button/button";
 import { CloseIcon } from "components/icon/close-icon";
 import Modal, { BodyFix } from "components/modal/modal";
 import React, { ReactNode, useCallback, useState } from "react";
+import styled from "styled-components";
+import { $secondaryBackgroundColor } from "utils/style/colors";
+import { mediaBreakpointLandscapePhone } from "utils/style/media";
+import { adaptiveFullPadding } from "utils/style/mixins";
+import { $modalWidth, $paddingSmall, $paddingXxsmall } from "utils/style/sizes";
 
-import styles from "./dialog.module.scss";
+export interface IDialogProps extends IDialogOuterProps {
+  showClose?: boolean;
+  children?: ReactNode;
+  className?: string;
+  top?: boolean;
+}
+
+export interface IDialogOuterProps {
+  open: boolean;
+  onClose: (param?: any) => void;
+}
+
+const CloseButton = styled(Button)`
+  position: absolute;
+  width: 30px;
+  z-index: 2;
+  right: 10px;
+  top: 15px;
+  ${adaptiveFullPadding($paddingXxsmall)};
+`;
+
+const Wrapper = styled.div`
+  overflow-y: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Container = styled.div`
+  position: relative;
+  background-color: ${$secondaryBackgroundColor};
+  z-index: 1300;
+  margin: ${$paddingSmall}px auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+  min-width: 100%;
+  ${mediaBreakpointLandscapePhone(`
+    min-width: ${$modalWidth}px;
+    border-radius: 8px;
+    `)}
+`;
 
 export const Dialog: React.FC<IDialogProps> = ({
   showClose = true,
@@ -31,44 +75,19 @@ export const Dialog: React.FC<IDialogProps> = ({
 
   return (
     <Modal open={open} fixed onClose={onClose}>
-      <div
-        className={styles["dialog-wrapper"]}
-        onClick={handleBackdropClick}
-        onMouseDown={handleMouseDown}
-      >
+      <Wrapper onClick={handleBackdropClick} onMouseDown={handleMouseDown}>
         <BodyFix />
-        <div
-          className={clsx(styles["dialog"], className, {
-            [styles["dialog--top"]]: top
-          })}
-        >
+        <Container className={className}>
           {showClose && (
-            <GVButton
-              variant="text"
-              color="secondary"
-              className={styles["dialog__close"]}
-              onClick={onClose}
-            >
+            <CloseButton variant="text" color="secondary" onClick={onClose}>
               <CloseIcon />
-            </GVButton>
+            </CloseButton>
           )}
           {children}
-        </div>
-      </div>
+        </Container>
+      </Wrapper>
     </Modal>
   );
 };
 
 export default Dialog;
-
-export interface IDialogProps extends IDialogOuterProps {
-  showClose?: boolean;
-  children?: ReactNode;
-  className?: string;
-  top?: boolean;
-}
-
-export interface IDialogOuterProps {
-  open: boolean;
-  onClose: (param?: any) => void;
-}

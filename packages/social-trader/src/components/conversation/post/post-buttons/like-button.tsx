@@ -1,9 +1,7 @@
 import React from "react";
 
-const _LikeButton: React.FC<Props> = ({}) => {
+const _LikeButton: React.FC = () => {
   return <div>Like</div>;
 };
-
-interface Props {}
 
 export const LikeButton = React.memo(_LikeButton);

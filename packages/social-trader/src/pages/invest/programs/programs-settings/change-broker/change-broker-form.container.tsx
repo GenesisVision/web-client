@@ -8,8 +8,16 @@ import { postponeCallback } from "utils/hook-form.helpers";
 import ChangeBrokerForm from "./change-broker-form";
 import { ChangeBrokerFormValues } from "./change-broker-form.helpers";
 
+export interface IChangeBrokerFormContainerProps {
+  isExchange?: boolean;
+  onApply: VoidFunction;
+  isSignalProgram: boolean;
+  id: string;
+  currentLeverage: number;
+}
+
 const _ChangeBrokerForm: React.FC<IChangeBrokerFormContainerProps> = props => {
-  const { id, onApply } = props;
+  const { isExchange, id, onApply } = props;
   const onCloseMiddleware = postponeCallback(onApply);
   const { sendRequest: changeBroker, errorMessage } = useApiRequest({
     middleware: [onCloseMiddleware],
@@ -32,6 +40,7 @@ const _ChangeBrokerForm: React.FC<IChangeBrokerFormContainerProps> = props => {
   if (!data) return null;
   return (
     <ChangeBrokerForm
+      isExchange={isExchange}
       errorMessage={errorMessage}
       loaderData={getBrokersProgramInfoLoaderData()}
       data={data}
@@ -42,6 +51,7 @@ const _ChangeBrokerForm: React.FC<IChangeBrokerFormContainerProps> = props => {
 };
 
 export interface IChangeBrokerFormContainerProps {
+  isExchange?: boolean;
   onApply: VoidFunction;
   isSignalProgram: boolean;
   id: string;

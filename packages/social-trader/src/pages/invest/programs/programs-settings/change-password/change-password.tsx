@@ -1,16 +1,21 @@
 import FormTextField from "components/assets/fields/form-text-field";
-import GVButton from "components/gv-button";
+import { Button } from "components/button/button";
 import { Row } from "components/row/row";
 import SettingsBlock from "components/settings-block/settings-block";
-import withLoader, { WithLoaderProps } from "decorators/with-loader";
+import withLoader from "decorators/with-loader";
 import useIsOpen from "hooks/is-open.hook";
 import React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
-import { compose } from "redux";
+import { useTranslation } from "react-i18next";
 
 import ChangePasswordTradingAccountPopup from "./change-password-trading-account-popup";
 
-const _ChangePassword: React.FC<Props> = ({ id, t, title }) => {
+interface Props {
+  title: string;
+  id: string;
+}
+
+const _ChangePassword: React.FC<Props> = ({ id, title }) => {
+  const [t] = useTranslation();
   const [
     isChangePasswordOpen,
     setChangePasswordOpen,
@@ -21,9 +26,9 @@ const _ChangePassword: React.FC<Props> = ({ id, t, title }) => {
       <div>
         <FormTextField>{t("asset-settings:password.text")}</FormTextField>
         <Row size={"large"}>
-          <GVButton color="primary" onClick={setChangePasswordOpen}>
+          <Button color="primary" onClick={setChangePasswordOpen}>
             {t("asset-details:description.change-password")}
-          </GVButton>
+          </Button>
         </Row>
       </div>
       <ChangePasswordTradingAccountPopup
@@ -36,16 +41,5 @@ const _ChangePassword: React.FC<Props> = ({ id, t, title }) => {
   );
 };
 
-interface Props extends OwnProps, WithTranslation {}
-
-interface OwnProps {
-  title: string;
-  id: string;
-}
-
-const ChangePassword = compose<React.ComponentType<OwnProps & WithLoaderProps>>(
-  withLoader,
-  translate(),
-  React.memo
-)(_ChangePassword);
+const ChangePassword = withLoader(React.memo(_ChangePassword));
 export default ChangePassword;

@@ -1,14 +1,28 @@
-import clsx from "clsx";
 import {
   IImageChangeEvent,
   IImageValue
 } from "components/form/input-image/input-image";
 import { asyncLoadFiles } from "components/form/input-image/input-image.helpers";
+import {
+  DropZoneWrapperContainer,
+  DropZoneWrapperHelper,
+  DropZoneWrapperIndicator
+} from "components/form/input-image/input-image.styles";
 import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { useTranslation } from "react-i18next";
 
-import styles from "./input-image.module.scss";
+export interface IDropZoneWrapperProps {
+  showIndicator?: boolean;
+  noDrag?: boolean;
+  disabled?: boolean;
+  name: string;
+  onChange?: (event: IImageChangeEvent) => void;
+  content: (options: {
+    open: VoidFunction;
+    onPaste: (e?: any) => void;
+  }) => JSX.Element;
+}
 
 type FileWithPreview = any;
 
@@ -18,8 +32,7 @@ export const DropZoneWrapper: React.FC<IDropZoneWrapperProps> = ({
   disabled,
   onChange,
   name,
-  content,
-  className
+  content
 }) => {
   const [t] = useTranslation();
   const [indicatorValue, setIndicatorValue] = useState<number>(0);
@@ -69,42 +82,20 @@ export const DropZoneWrapper: React.FC<IDropZoneWrapperProps> = ({
     accept: "image/gif, image/jpeg, image/png"
   });
   return (
-    <div
-      {...getRootProps({
-        className: clsx(styles["input-image__dropzone-container"], className)
-      })}
-    >
-      {showIndicator && (
-        <div
-          className={styles["input-image__indicator"]}
-          style={{ width: `${indicatorValue}%` }}
-        />
-      )}
+    <DropZoneWrapperContainer {...getRootProps({})}>
+      {showIndicator && <DropZoneWrapperIndicator width={indicatorValue} />}
       <input {...getInputProps()} />
       {isDragAccept && (
-        <div className={styles["input-image__dropzone-helper"]}>
+        <DropZoneWrapperHelper>
           {t("form-fields:input-image.drop-files")}
-        </div>
+        </DropZoneWrapperHelper>
       )}
       {isDragReject && (
-        <div className={styles["input-image__dropzone-helper"]}>
+        <DropZoneWrapperHelper>
           {t("Some files will be rejected")}
-        </div>
+        </DropZoneWrapperHelper>
       )}
       {content({ open, onPaste })}
-    </div>
+    </DropZoneWrapperContainer>
   );
 };
-
-export interface IDropZoneWrapperProps {
-  showIndicator?: boolean;
-  noDrag?: boolean;
-  disabled?: boolean;
-  className?: string;
-  name: string;
-  onChange?: (event: IImageChangeEvent) => void;
-  content: (options: {
-    open: VoidFunction;
-    onPaste: (e?: any) => void;
-  }) => JSX.Element;
-}

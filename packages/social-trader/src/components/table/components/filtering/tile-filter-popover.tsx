@@ -8,8 +8,7 @@ import { FilterTitle } from "components/table/components/filtering/filter-title"
 import useTab from "hooks/tab.hook";
 import * as React from "react";
 import { useCallback, useEffect, useState } from "react";
-
-import styles from "./tile-filter.module.scss";
+import styled from "styled-components";
 
 interface Props<T extends TileFilterPopoverItemType> {
   tabs?: string[];
@@ -29,6 +28,11 @@ export type TileFilterPopoverItemType = {
   id: string;
   searchValue: string;
 };
+
+const Header = styled(Center)`
+  align-items: flex-end;
+  min-width: 500px; // TODO
+`;
 
 const _TileFilterPopover: React.FC<Props<any>> = ({
   tabCountField,
@@ -70,7 +74,7 @@ const _TileFilterPopover: React.FC<Props<any>> = ({
   return (
     <PopoverContentCardBlock>
       <FilterTitle>{header}</FilterTitle>
-      <Center className={styles["tile-filter__header"]}>
+      <Header>
         {tabs && (
           <RowItem>
             <GVTabs value={tab} onChange={setTab}>
@@ -99,7 +103,7 @@ const _TileFilterPopover: React.FC<Props<any>> = ({
             onChange={search}
           />
         </RowItem>
-      </Center>
+      </Header>
       {children(filteredItems, handleClick, tab)}
     </PopoverContentCardBlock>
   );

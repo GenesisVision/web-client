@@ -4,6 +4,7 @@ import {
 } from "components/table//helpers/paging.helpers";
 import { updateFilter } from "components/table/helpers/filtering.helpers";
 import { IDataModel } from "constants/constants";
+import useApiRequest from "hooks/api-request.hook";
 import useIsOpen from "hooks/is-open.hook";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
@@ -16,8 +17,22 @@ import {
 import Table, { ITableProps } from "./table";
 import { GetItemsFuncType } from "./table.types";
 
+const defaultData: IDataModel = { items: null, total: 0 };
+
+export interface ITableModuleProps extends ITableProps {
+  name?: string;
+  cache?: boolean;
+  getItems: GetItemsFuncType;
+  defaultFilters?: TDefaultFilters;
+  loader?: boolean;
+  data?: IDataModel;
+  timestamp?: number;
+}
+
 const _TableModule: React.FC<ITableModuleProps> = props => {
   const {
+    name,
+    cache,
     paging: pagingProp,
     sorting: sortingProp,
     filtering: filteringProp,
@@ -32,8 +47,28 @@ const _TableModule: React.FC<ITableModuleProps> = props => {
   const [filtering, setFiltering] = useState<FilteringType | undefined>(
     filteringProp
   );
-  const [data, setData] = useState<IDataModel>(defaultData);
   const [isPending, setIsPending, setIsNotPending] = useIsOpen();
+
+  const updateItems = useCallback(() => {
+    if (loader) setIsPending();
+    const filters = composeRequestFilters({
+      paging,
+      sorting,
+      filtering,
+      defaultFilters
+    });
+    return getItems(filters).finally(setIsNotPending);
+  }, [loader, paging, sorting, filtering, timestamp]);
+
+  const { data = defaultData, setData, sendRequest } = useApiRequest({
+    cache,
+    name,
+    request: updateItems
+  });
+
+  useEffect(() => {
+    sendRequest();
+  }, [paging, sorting, filtering, timestamp]);
 
   useEffect(() => {
     if (dataProp && pagingProp) {
@@ -45,23 +80,6 @@ const _TableModule: React.FC<ITableModuleProps> = props => {
       setPaging({ ...pagingProp, totalPages });
     }
   }, []);
-
-  useEffect(() => {
-    updateItems();
-  }, [paging, sorting, filtering, timestamp]);
-
-  const updateItems = useCallback(() => {
-    if (loader) setIsPending();
-    const filters = composeRequestFilters({
-      paging,
-      sorting,
-      filtering,
-      defaultFilters
-    });
-    getItems(filters)
-      .then(setData)
-      .finally(setIsNotPending);
-  }, [loader, paging, sorting, filtering, timestamp]);
 
   const handleUpdateSorting = useCallback(
     (sorting: string) => {
@@ -134,16 +152,6 @@ const _TableModule: React.FC<ITableModuleProps> = props => {
     />
   );
 };
-
-const defaultData: IDataModel = { items: null, total: 0 };
-
-export interface ITableModuleProps extends ITableProps {
-  getItems: GetItemsFuncType;
-  defaultFilters?: TDefaultFilters;
-  loader?: boolean;
-  data?: IDataModel;
-  timestamp?: number;
-}
 
 const TableModule = React.memo(_TableModule);
 export default TableModule;

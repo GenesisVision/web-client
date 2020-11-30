@@ -1,8 +1,12 @@
-import clsx from "clsx";
 import { PIE_DIRECTION } from "components/pie-container/pie";
 import * as React from "react";
+import styled from "styled-components";
+import { transition } from "utils/style/mixins";
 
-import styles from "./pie-container.module.scss";
+const StyledCircle = styled.circle`
+  ${transition("stroke-width")};
+  cursor: pointer;
+`;
 
 export const PieCircle: React.FC<IPieCircleProps> = React.memo(
   ({
@@ -17,10 +21,7 @@ export const PieCircle: React.FC<IPieCircleProps> = React.memo(
     circleSize
   }) => {
     return (
-      <circle
-        className={clsx(styles["pie-circle"], {
-          [styles["pie-circle--selected"]]: selected
-        })}
+      <StyledCircle
         onMouseLeave={onMouseLeave}
         onMouseEnter={onMouseOver}
         cx={circleCenter}
@@ -28,7 +29,7 @@ export const PieCircle: React.FC<IPieCircleProps> = React.memo(
         r="15.91549430918954"
         fill={"none"}
         stroke={color}
-        strokeWidth="2"
+        strokeWidth={selected ? 4 : 2}
         strokeDasharray={strokeDasharray}
         strokeDashoffset={25}
         transform={`rotate(${begin},${circleCenter},${circleCenter})${

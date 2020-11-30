@@ -1,25 +1,43 @@
-import clsx from "clsx";
 import React from "react";
-
-import styles from "./button-icon.module.scss";
+import styled from "styled-components";
+import { $labelColor } from "utils/style/colors";
+import { transition } from "utils/style/mixins";
 
 interface Props {
   className?: string;
   disabled?: boolean;
 }
 
-export const ButtonIcon: React.FC<Props> = ({
-  children,
-  disabled,
-  className
-}) => {
-  return (
-    <div
-      className={clsx(styles["button-icon"], className, {
-        [styles["button-icon--disabled"]]: disabled
-      })}
-    >
-      {children}
-    </div>
-  );
-};
+export const ButtonIcon = styled.div<Props>`
+  &,
+  & svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    cursor: ${({ disabled }) => (disabled ? "default" : "pointer")};
+    opacity: ${({ disabled }) => (disabled ? "0.5" : "1")};
+  }
+
+  svg [stroke] {
+    ${transition("stroke")};
+    stroke: ${$labelColor};
+  }
+
+  svg [fill] {
+    ${transition("fill")};
+    fill: ${$labelColor};
+  }
+
+  &:hover {
+    ${({ disabled }) =>
+      !disabled &&
+      `
+      svg [stroke] {
+        stroke: white;
+      }
+      svg [fill] {
+        fill: white;
+      }
+    `};
+  }
+`;

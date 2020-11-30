@@ -2,18 +2,22 @@ import {
   CurrencySourceSelectItemsType,
   getCurrencySourceSelectItems
 } from "components/currency-source-select/currency-source-select-items";
-import GVTextField, { GVTextFieldProps } from "components/gv-text-field";
+import { GVTextFieldProps } from "components/gv-text-field/gv-text-field.style";
+import {
+  IUpdatableGvTextFieldProps,
+  UpdatableGvTextField
+} from "components/gv-text-field/updatable-gv-text-field";
 import Select from "components/select/select";
 import React from "react";
 
-const _CurrencySourceSelect: React.FC<Props> = props => (
-  <GVTextField {...props} fixedVertical InputComponent={Select}>
-    {getCurrencySourceSelectItems(props.items)}
-  </GVTextField>
-);
-
-interface Props extends GVTextFieldProps {
+interface Props extends GVTextFieldProps, IUpdatableGvTextFieldProps {
   items: CurrencySourceSelectItemsType;
 }
+
+const _CurrencySourceSelect: React.FC<Props> = props => (
+  <UpdatableGvTextField {...props} fixedVertical InputComponent={Select}>
+    {getCurrencySourceSelectItems(props.items)}
+  </UpdatableGvTextField>
+);
 
 export const CurrencySourceSelectElement = React.memo(_CurrencySourceSelect);

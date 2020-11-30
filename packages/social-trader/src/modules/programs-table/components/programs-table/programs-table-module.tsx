@@ -8,7 +8,12 @@ import ProgramTableRow from "./program-table-row-short";
 import { programListLoaderData } from "./program-table.loader-data";
 import { PROGRAMS_COLUMNS } from "./programs.constants";
 
+interface Props extends ITableModuleProps {
+  title?: string;
+}
+
 const _ProgramTableModule: React.FC<Props> = ({
+  name,
   renderMappings,
   getItems,
   renderFilters,
@@ -22,6 +27,8 @@ const _ProgramTableModule: React.FC<Props> = ({
 }) => {
   return (
     <TableModule
+      name={"ProgramTableModule" + name}
+      cache
       loaderData={programListLoaderData}
       renderMappings={renderMappings}
       disableTitle={disableTitle}
@@ -38,10 +45,6 @@ const _ProgramTableModule: React.FC<Props> = ({
     />
   );
 };
-
-interface Props extends ITableModuleProps {
-  title?: string;
-}
 
 const ProgramTableModule = React.memo(_ProgramTableModule);
 export default ProgramTableModule;

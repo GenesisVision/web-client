@@ -5,9 +5,11 @@ import {
   ProgramFollowDetailsFull
 } from "gv-api-web";
 import AssetEdit from "modules/asset-settings/asset-edit";
+import { CLOSEABLE_ASSET } from "modules/asset-settings/close-asset/close-asset";
 import CloseAssetBlock from "modules/asset-settings/close-asset/close-asset-block";
 import ClosePeriodBlock from "modules/asset-settings/close-period/close-period-block";
 import InvestmentFees from "modules/asset-settings/investment-fees";
+import { ChangeProcessing } from "pages/invest/programs/programs-settings/change-processing/change-processing";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { compose } from "redux";
@@ -21,6 +23,15 @@ import SignalingEdit from "./signaling-edit";
 import StopOutLevel from "./stop-out-level";
 import TradesUpdating from "./trades-updating";
 import TwoFactorConfirm from "./two-factor-confirm";
+
+interface Props {
+  editError?: boolean;
+  createProgramInfo: ProgramCreateAssetPlatformInfo;
+  description: ProgramFollowDetailsFull;
+  updateDescription: VoidFunction;
+  closeProgram: VoidFunction;
+  editProgram: TUpdateProgramFunc;
+}
 
 const _ProgramSettings: React.FC<Props> = ({
   editError,
@@ -41,6 +52,7 @@ const _ProgramSettings: React.FC<Props> = ({
       ? followDetails.signalSettings.signalVolumeFee
       : undefined;
   const isSignalProgram = !!description.followDetails;
+  const isExchange = description?.programDetails?.type === "DailyPeriod";
   const assetType = description.publicInfo.typeExt;
   const closeId =
     assetType === "Program" || assetType === "SignalProgram"
@@ -62,11 +74,13 @@ const _ProgramSettings: React.FC<Props> = ({
             condition={programDetails.personalDetails.showTwoFactorButton}
             id={description.id}
           />
-          <ClosePeriodBlock
-            condition={description.ownerActions.canClosePeriod}
-            id={description.id}
-            closePeriod={updateDescription}
-          />
+          {!isExchange && (
+            <ClosePeriodBlock
+              condition={description.ownerActions.canClosePeriod}
+              id={description.id}
+              closePeriod={updateDescription}
+            />
+          )}
           <CancelChangeBroker
             onApply={updateDescription}
             id={description.id}
@@ -76,6 +90,7 @@ const _ProgramSettings: React.FC<Props> = ({
             leverage={description.tradingAccountInfo.leverageMax}
           />
           <ChangeBroker
+            isExchange={isExchange}
             onApply={updateDescription}
             condition={!programDetails.personalDetails.migration}
             isSignalProgram={isSignalProgram}
@@ -83,6 +98,7 @@ const _ProgramSettings: React.FC<Props> = ({
             currentLeverage={description.tradingAccountInfo.leverageMax}
           />
           <InvestmentFees
+            isExchange={isExchange}
             editError={editError}
             asset={ASSET.PROGRAM}
             maxSuccessFee={maxSuccessFee}
@@ -97,11 +113,25 @@ const _ProgramSettings: React.FC<Props> = ({
             tradesDelay={programDetails.tradesDelay}
             onSubmit={editProgram}
           />
-          <StopOutLevel
-            editError={editError}
-            stopOutLevel={programDetails.stopOutLevelCurrent}
-            onSubmit={editProgram}
-          />
+          {isExchange && (
+            <ChangeProcessing
+              hourProcessing={
+                programDetails?.dailyPeriodDetails?.hourProcessing
+              }
+              editError={editError}
+              isProcessingRealTimeCurrent={
+                programDetails?.dailyPeriodDetails?.isProcessingRealTime
+              }
+              onSubmit={editProgram}
+            />
+          )}
+          {!isExchange && (
+            <StopOutLevel
+              editError={editError}
+              stopOutLevel={programDetails.stopOutLevelCurrent}
+              onSubmit={editProgram}
+            />
+          )}
           <InvestmentLimit
             editError={editError}
             currency={description.tradingAccountInfo.currency}
@@ -136,7 +166,7 @@ const _ProgramSettings: React.FC<Props> = ({
       )}
       <CloseAssetBlock
         label={t(`asset-settings:close-${assetType.toLowerCase()}.title`)}
-        asset={assetType}
+        asset={isExchange ? CLOSEABLE_ASSET.EXCHANGE_PROGRAM : assetType}
         canCloseAsset={description.ownerActions.canClose}
         id={closeId}
         closeAsset={closeProgram}
@@ -144,15 +174,6 @@ const _ProgramSettings: React.FC<Props> = ({
     </>
   );
 };
-
-interface Props {
-  editError?: boolean;
-  createProgramInfo: ProgramCreateAssetPlatformInfo;
-  description: ProgramFollowDetailsFull;
-  updateDescription: VoidFunction;
-  closeProgram: VoidFunction;
-  editProgram: TUpdateProgramFunc;
-}
 
 const ProgramSettings = compose<React.ComponentType<Props & WithLoaderProps>>(
   withLoader,

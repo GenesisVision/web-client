@@ -1,4 +1,3 @@
-import GVColors from "components/gv-styles/gv-colors";
 import { select } from "d3";
 import { max, min } from "d3-array";
 import { scaleLinear } from "d3-scale";
@@ -6,13 +5,20 @@ import { area, line } from "d3-shape";
 import { SimpleChartPoint } from "gv-api-web";
 import { JSDOM } from "jsdom";
 import React from "react";
+import { $negativeColor, $positiveColor } from "utils/style/colors";
+
+interface Props {
+  data: SimpleChartPoint[];
+  width: number;
+  height: number;
+  x: number;
+  y: number;
+}
 
 const MARGIN_TOP = 1;
 
 const getChartColor = (minValue: number, maxValue: number) => {
-  return maxValue - minValue >= 0
-    ? GVColors.$positiveColor
-    : GVColors.$negativeColor;
+  return maxValue - minValue >= 0 ? $positiveColor : $negativeColor;
 };
 
 const getGradientColor = (minValue: number, maxValue: number) => {
@@ -135,13 +141,5 @@ const BannerChart: React.FC<Props> = ({
     />
   );
 };
-
-interface Props {
-  data: SimpleChartPoint[];
-  width: number;
-  height: number;
-  x: number;
-  y: number;
-}
 
 export default BannerChart;

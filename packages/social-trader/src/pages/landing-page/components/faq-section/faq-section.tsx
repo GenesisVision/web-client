@@ -22,7 +22,7 @@ const FaqSection: React.FC = () => {
           <AccordionContainer accordions={faqGeneral} />
         </InternalArticle>
         <InternalArticle className={styles["faq-section__article"]}>
-          <h2>Genesis Vision Program</h2>
+          <h2>Genesis Vision Programs</h2>
           <AccordionContainer accordions={faqPrograms} />
         </InternalArticle>
         <InternalArticle className={styles["faq-section__article"]}>

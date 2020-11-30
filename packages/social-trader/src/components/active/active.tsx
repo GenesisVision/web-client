@@ -8,10 +8,33 @@ import { AssetInfo } from "gv-api-web";
 import { useNetworkStatusInWindow } from "hooks/network-status";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import styled from "styled-components";
+import { $primaryColor } from "utils/style/colors";
+import { fontSize } from "utils/style/mixins";
+import { $fontSizeParagraph } from "utils/style/sizes";
 
 import SocialLinksBlock from "../social-links-block/social-links-block";
 import TagItemList from "../tags/tag-item/tag-item-list";
-import styles from "./active.module.scss";
+
+interface Props {
+  data: AssetInfo;
+}
+
+const Title = styled.h2`
+  text-transform: uppercase;
+  font-weight: 600;
+  color: ${$primaryColor};
+  ${fontSize($fontSizeParagraph)};
+`;
+
+const ChartContainer = styled(Row)`
+  height: 300px;
+`;
+
+const Description = styled(Row)`
+  font-size: ${$fontSizeParagraph}px;
+  line-height: 1.8;
+`;
 
 const _Active: React.FC<Props> = ({
   data: { name, description, tags, chartSymbol, logoUrl, socialLinks }
@@ -31,9 +54,9 @@ const _Active: React.FC<Props> = ({
       <Row size={"large"}>{tags && <TagItemList tags={tags} />}</Row>
       <Row size={"large"} onlyOffset>
         <Row>
-          <h2 className={styles.active__title}>{t("active.chart")}</h2>
+          <Title>{t("active.chart")}</Title>
         </Row>
-        <Row className={styles.active__chart_container}>
+        <ChartContainer>
           {!isServer && isGoodNetwork && (
             <TradingViewWidget
               symbol={chartSymbol}
@@ -41,15 +64,15 @@ const _Active: React.FC<Props> = ({
               theme={Themes.DARK}
             />
           )}
-        </Row>
+        </ChartContainer>
       </Row>
       <Row size={"large"} onlyOffset>
         <Row>
-          <h2 className={styles.active__title}>
+          <Title>
             {t("active.about")} {name}
-          </h2>
+          </Title>
         </Row>
-        <Row className={styles.active__description}>{description}</Row>
+        <Description>{description}</Description>
       </Row>
       <Row size={"large"}>
         {socialLinks && <SocialLinksBlock socialLinks={socialLinks} />}
@@ -57,10 +80,6 @@ const _Active: React.FC<Props> = ({
     </div>
   );
 };
-
-interface Props {
-  data: AssetInfo;
-}
 
 const Active = withBlurLoader(React.memo(_Active));
 export default Active;

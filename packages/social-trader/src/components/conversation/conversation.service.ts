@@ -1,4 +1,4 @@
-import { getImageUrlByQuality } from "components/conversation/conversation-image/conversation-image.helpers";
+import { getImageByQuality } from "components/conversation/conversation-image/conversation-image.helpers";
 import { IPostMessageValues } from "components/conversation/conversation-input/conversation-input.helpers";
 import {
   AssetSearchResult,
@@ -171,7 +171,7 @@ export const getPostForEdit = ({
     .getOriginalPost(id)
     .then((post: EditablePost) => {
       const images = post.images.map(({ id, resizes }) => {
-        const src = getImageUrlByQuality(resizes, "Low");
+        const src = getImageByQuality(resizes, "Low").logoUrl;
         return ({
           image: id,
           id,

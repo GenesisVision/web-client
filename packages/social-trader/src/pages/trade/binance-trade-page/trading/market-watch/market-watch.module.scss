@@ -1,0 +1,115 @@
+@import "styles/_sizes";
+@import "styles/_constants";
+
+.market-watch {
+  @include terminal-table(small);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &__tooltip-data {
+    height: 100%;
+    overflow-y: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__tooltip {
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+  }
+
+  &__table-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__header-container {
+    width: calc(100% - 5px);
+  }
+
+  &__items-container {
+    height: 100%;
+    overflow-y: auto;
+  }
+
+  &__table {
+    @include terminal-table(small);
+    & th,
+    & td {
+      width: 33.3%;
+    }
+    & th:last-child,
+    & td:last-child {
+      text-align: right;
+    }
+  }
+
+  &__th {
+    cursor: pointer;
+    &--asc,
+    &--desc {
+      position: relative;
+
+      &::before {
+        @include transition(width);
+        @extend %sortable-border-icon;
+        height: 4px;
+      }
+
+      &::after {
+        @include transition(width);
+        @extend %sortable-border-icon;
+      }
+    }
+
+    &--desc {
+      &::before {
+        width: 10px;
+      }
+
+      &::after {
+        width: 5px;
+      }
+    }
+
+    &--asc {
+      &::before {
+        width: 5px;
+      }
+
+      &::after {
+        width: 10px;
+      }
+    }
+  }
+
+  &__table-value {
+    text-align: right;
+  }
+
+  &__cell {
+    cursor: pointer;
+  }
+}
+
+%sortable-border-icon {
+  position: absolute;
+  right: -15px;
+  bottom: 5px;
+  content: "";
+  border-top: 1px solid white;
+}
+
+.market-watch-favorite-button {
+  cursor: pointer;
+  width: 10px;
+  height: 10px;
+  & > div,
+  svg {
+    width: 100% !important;
+    height: 100% !important;
+  }
+}

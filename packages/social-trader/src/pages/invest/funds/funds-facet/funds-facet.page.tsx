@@ -7,11 +7,16 @@ import { ComposeFiltersAllType } from "components/table/components/filtering/fil
 import { IDataModel } from "constants/constants";
 import { fetchFunds } from "modules/funds-table/services/funds-table.service";
 import React, { useCallback } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 import FundsFacetTable from "./components/funds-facet-table";
 
-const _FundsFacetPage: React.FC<Props> = ({ id, t }) => {
+interface Props {
+  id: string;
+}
+
+const _FundsFacetPage: React.FC<Props> = ({ id }) => {
+  const [t] = useTranslation();
   const getFunds = useCallback(
     (filters: ComposeFiltersAllType): Promise<IDataModel> =>
       fetchFunds(filters),
@@ -37,9 +42,5 @@ const _FundsFacetPage: React.FC<Props> = ({ id, t }) => {
   );
 };
 
-interface Props extends WithTranslation {
-  id: string;
-}
-
-const FundsFacetPage = translate()(React.memo(_FundsFacetPage));
+const FundsFacetPage = React.memo(_FundsFacetPage);
 export default FundsFacetPage;

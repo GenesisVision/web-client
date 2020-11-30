@@ -1,16 +1,20 @@
+import { Button } from "components/button/button";
 import DepositTop, {
   DepositTopOwnProps
 } from "components/deposit/components/deposit-top";
 import Dialog, { IDialogProps } from "components/dialog/dialog";
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
-import GVButton from "components/gv-button";
 import Link from "components/link/link";
 import { Row } from "components/row/row";
 import { useRouter } from "next/router";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { LOGIN_ROUTE, SIGNUP_ROUTE } from "routes/app.routes";
+
+interface Props extends DepositTopOwnProps, IDialogProps {
+  message: string;
+}
 
 const _InvestmentUnauthPopup: React.FC<Props> = ({
   header,
@@ -39,10 +43,10 @@ const _InvestmentUnauthPopup: React.FC<Props> = ({
         <Row>{message}</Row>
         <DialogButtons>
           <Link title={t("buttons.login")} to={`${LOGIN_ROUTE}${redirect}`}>
-            <GVButton>{t("buttons.login")}</GVButton>
+            <Button>{t("buttons.login")}</Button>
           </Link>
           <Link title={t("buttons.signup")} to={SIGNUP_ROUTE}>
-            <GVButton>{t("buttons.signup")}</GVButton>
+            <Button>{t("buttons.signup")}</Button>
           </Link>
         </DialogButtons>
       </DialogBottom>
@@ -52,7 +56,3 @@ const _InvestmentUnauthPopup: React.FC<Props> = ({
 
 const InvestmentUnauthPopup = React.memo(_InvestmentUnauthPopup);
 export default InvestmentUnauthPopup;
-
-interface Props extends DepositTopOwnProps, IDialogProps {
-  message: string;
-}

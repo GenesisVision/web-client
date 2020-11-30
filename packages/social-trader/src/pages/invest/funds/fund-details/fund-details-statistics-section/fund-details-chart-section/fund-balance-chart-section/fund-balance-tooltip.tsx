@@ -1,19 +1,29 @@
 import ChartTooltip from "components/chart/chart-tooltip/chart-tooltip";
-import styles from "components/details/details-statistic-section/details-chart-section/details-chart-section.module.scss";
 import { LabeledValue } from "components/labeled-value/labeled-value";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
 import { statisticCurrencySelector } from "pages/invest/funds/fund-details/reducers/statistic-currency.reducer";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { formatCurrencyValue } from "utils/formatter";
 
-const _TooltipBody: React.FC<ITooltipBodyProps & WithTranslation> = ({
-  t,
+interface ITooltipBodyProps {
+  managersFunds: number;
+  investorsFunds: number;
+  profit: string;
+}
+interface IFundBalanceTooltipProps {
+  active: boolean;
+  label: string;
+  payload: any[];
+}
+
+const _TooltipBody: React.FC<ITooltipBodyProps> = ({
   managersFunds,
   investorsFunds
 }) => {
+  const [t] = useTranslation();
   const statisticCurrency = useSelector(statisticCurrencySelector);
   const formattedManagersFunds = `${formatCurrencyValue(
     managersFunds,
@@ -42,7 +52,7 @@ const _TooltipBody: React.FC<ITooltipBodyProps & WithTranslation> = ({
     </>
   );
 };
-const TooltipBody = translate()(React.memo(_TooltipBody));
+const TooltipBody = React.memo(_TooltipBody);
 
 const FundBalanceTooltip: React.FC<IFundBalanceTooltipProps> = ({
   active,
@@ -62,20 +72,8 @@ const FundBalanceTooltip: React.FC<IFundBalanceTooltipProps> = ({
         />
       }
       date={new Date(label)}
-      className={styles["details-tooltip"]}
     />
   );
 };
-
-interface ITooltipBodyProps {
-  managersFunds: number;
-  investorsFunds: number;
-  profit: string;
-}
-interface IFundBalanceTooltipProps {
-  active: boolean;
-  label: string;
-  payload: any[];
-}
 
 export default FundBalanceTooltip;

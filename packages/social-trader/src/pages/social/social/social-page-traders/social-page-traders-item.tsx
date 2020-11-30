@@ -1,22 +1,23 @@
 import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
-import { AvatarWithName } from "components/avatar/avatar-with-name/avatar-with-name";
 import { LabeledValue } from "components/labeled-value/labeled-value";
 import Link, { ToType } from "components/link/link";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
+import { AssetType } from "gv-api-web";
 import {
   FeedContext,
   SocialSearchInitialState
 } from "pages/social/social/feed.context";
 import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
-
-import styles from "./social-page-traders.module.scss";
+import styled from "styled-components";
 
 interface Props {
+  assetType: AssetType;
   color: string;
   id: string;
+  subscribersCount: number;
   investorsCount: number;
   profit: number;
   url: string | ToType;
@@ -24,7 +25,13 @@ interface Props {
   title: string;
 }
 
+const Container = styled.div`
+  width: 100%;
+`;
+
 const _SocialPageTradersItem: React.FC<Props> = ({
+  subscribersCount,
+  assetType,
   color,
   id,
   investorsCount,
@@ -43,7 +50,7 @@ const _SocialPageTradersItem: React.FC<Props> = ({
     });
   }, [url]);
   return (
-    <div className={styles["social-page-traders__item"]}>
+    <Container>
       <Row>
         <RowItem>
           <Link to={url}>
@@ -55,11 +62,8 @@ const _SocialPageTradersItem: React.FC<Props> = ({
             />
           </Link>
         </RowItem>
-        <RowItem
-          onClick={handleClick}
-          className={styles["social-page-traders__avatar-name"]}
-        >
-          {title}
+        <RowItem onClick={handleClick}>
+          <Text>{title}</Text>
         </RowItem>
       </Row>
       <Row>
@@ -69,10 +73,16 @@ const _SocialPageTradersItem: React.FC<Props> = ({
           </LabeledValue>
         </RowItem>
         <RowItem wide>
-          <LabeledValue label={t("Investors")}>{investorsCount}</LabeledValue>
+          {assetType === "Follow" ? (
+            <LabeledValue label={t("Subscribers")}>
+              {subscribersCount}
+            </LabeledValue>
+          ) : (
+            <LabeledValue label={t("Investors")}>{investorsCount}</LabeledValue>
+          )}
         </RowItem>
       </Row>
-    </div>
+    </Container>
   );
 };
 

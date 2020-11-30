@@ -2,10 +2,13 @@ import { changeLocationAction } from "actions/location.actions";
 import platformActions from "actions/platform-actions";
 import AppLayout from "components/layouts/app-layout/app-layout";
 import ServerErrorPage from "components/server-error-page/server-error-page";
+import withReduxStore from "decorators/with-redux-store";
+import withToken from "decorators/with-token";
 import { ErrorViewModel, PlatformInfo } from "gv-api-web";
 import { NextPage } from "next";
 import React, { Component } from "react";
-import { Dispatch } from "redux";
+import { compose, Dispatch } from "redux";
+import { initializeStore } from "store";
 import { NextPageWithReduxContext } from "utils/types";
 
 const withDefaultLayout = (WrappedComponent: NextPage<any>) =>
@@ -48,4 +51,8 @@ const withDefaultLayout = (WrappedComponent: NextPage<any>) =>
     }
   };
 
-export default withDefaultLayout;
+export default compose(
+  withReduxStore(initializeStore),
+  withToken,
+  withDefaultLayout
+);

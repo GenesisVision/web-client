@@ -6,7 +6,7 @@ import {
   TAKE_COUNT
 } from "components/notifications/components/notifications.helpers";
 import { PostItemsViewModel } from "gv-api-web";
-import useApiRequest, { API_REQUEST_STATUS } from "hooks/api-request.hook";
+import useApiRequest from "hooks/api-request.hook";
 import useIsOpen from "hooks/is-open.hook";
 import { debounce } from "lodash";
 import React, { useCallback, useEffect, useState } from "react";
@@ -72,7 +72,7 @@ const _PostListContainer: React.FC<IPostListContainerProps> = ({
   }, []);
 
   const hasMore = data ? data.total > options.skip : false;
-  const canLoadMore = hasMore && status !== API_REQUEST_STATUS.PENDING;
+  const canLoadMore = hasMore && status !== "PENDING";
 
   return (
     <PostList

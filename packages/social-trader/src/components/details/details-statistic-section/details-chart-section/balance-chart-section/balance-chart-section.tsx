@@ -11,6 +11,13 @@ import BalanceChartElements, {
   TRenderBalanceChart
 } from "./balance-chart-elements";
 
+export interface IBalanceChartSectionProps {
+  useChartStateValues: TUseChartStateValues;
+  balanceChartSelector: TBalanceChartSelector;
+  useChartPeriod: TUseChartPeriod;
+  renderBalanceChart: TRenderBalanceChart;
+}
+
 const _BalanceChartSection: React.FC<IBalanceChartSectionProps> = ({
   useChartPeriod,
   renderBalanceChart,
@@ -41,13 +48,6 @@ const _BalanceChartSection: React.FC<IBalanceChartSectionProps> = ({
     />
   );
 };
-
-export interface IBalanceChartSectionProps {
-  useChartStateValues: TUseChartStateValues;
-  balanceChartSelector: TBalanceChartSelector;
-  useChartPeriod: TUseChartPeriod;
-  renderBalanceChart: TRenderBalanceChart;
-}
 
 const BalanceChartSection = React.memo(_BalanceChartSection);
 export default BalanceChartSection;

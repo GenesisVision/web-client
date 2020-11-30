@@ -1,5 +1,6 @@
 import ChartPeriod from "components/chart/chart-period/chart-period";
 import { ChartDefaultPeriod } from "components/chart/chart-period/chart-period.helpers";
+import { DetailsChartContainer } from "components/details/details-statistic-section/details-chart-section/details-chart-container";
 import {
   AbsoluteProfitChartDataType,
   ChartDataType,
@@ -25,9 +26,33 @@ import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum, HandlePeriodChangeType } from "utils/types";
 
 import { useChartData } from "../../details.chart.helpers";
-import styles from "../details-chart-section.module.scss";
 
 export const ABSOLUTE_PROFIT_CHART_TEST_ID = "ABSOLUTE_PROFIT_CHART_TEST_ID";
+
+export type TRenderAbsoluteProfitValue = (props: {
+  statistic: StatisticDataType;
+}) => JSX.Element;
+
+export type TRenderAbsoluteProfitChart = (props: {
+  color: string;
+  chart: ChartDataType;
+  currency: CurrencyEnum;
+}) => JSX.Element;
+
+interface OwnProps {
+  renderChart: TRenderAbsoluteProfitChart;
+  renderValue: TRenderAbsoluteProfitValue;
+  period: ChartDefaultPeriod;
+  setPeriod: HandlePeriodChangeType;
+  data: AbsoluteProfitChartDataType;
+  selectedCurrencies: TChartCurrency[];
+  addCurrency: TAddChartCurrency;
+  removeCurrency: TRemoveChartCurrency;
+  changeCurrency: TChangeChartCurrency;
+  selectCurrencies: TChartCurrency[];
+}
+
+interface Props extends OwnProps {}
 
 const _AbsoluteProfitChartElements: React.FC<Props> = ({
   renderChart,
@@ -74,45 +99,17 @@ const _AbsoluteProfitChartElements: React.FC<Props> = ({
         onRemove={removeCurrency}
         onChange={changeCurrency}
       />
-      <div
-        data-test-id={ABSOLUTE_PROFIT_CHART_TEST_ID}
-        className={styles["details-chart__profit"]}
-      >
+      <DetailsChartContainer data-test-id={ABSOLUTE_PROFIT_CHART_TEST_ID}>
         {chart.length &&
           renderChart({
             chart: chart,
             currency: name,
             color
           })}
-      </div>
+      </DetailsChartContainer>
     </>
   );
 };
-
-export type TRenderAbsoluteProfitValue = (props: {
-  statistic: StatisticDataType;
-}) => JSX.Element;
-
-export type TRenderAbsoluteProfitChart = (props: {
-  color: string;
-  chart: ChartDataType;
-  currency: CurrencyEnum;
-}) => JSX.Element;
-
-interface OwnProps {
-  renderChart: TRenderAbsoluteProfitChart;
-  renderValue: TRenderAbsoluteProfitValue;
-  period: ChartDefaultPeriod;
-  setPeriod: HandlePeriodChangeType;
-  data: AbsoluteProfitChartDataType;
-  selectedCurrencies: TChartCurrency[];
-  addCurrency: TAddChartCurrency;
-  removeCurrency: TRemoveChartCurrency;
-  changeCurrency: TChangeChartCurrency;
-  selectCurrencies: TChartCurrency[];
-}
-
-interface Props extends OwnProps {}
 
 const AbsoluteProfitChartElements = withBlurLoader(
   React.memo(_AbsoluteProfitChartElements)

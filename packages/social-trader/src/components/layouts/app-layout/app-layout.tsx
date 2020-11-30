@@ -1,20 +1,51 @@
-import clsx from "clsx";
+import { Footer } from "components/footer/footer";
 import {
   GlobalSearchContext,
   GlobalSearchContextProvider
 } from "components/global-search/global-search-context";
 import HeaderContainer from "components/header/header.container";
+import {
+  appFooterContainerStyles,
+  appFooterStyles,
+  appHeaderStyles,
+  appMainStyles,
+  appStyles,
+  appWrapperStyles
+} from "components/layouts/app-layout/app-layout.style";
 import AlertMessageList from "modules/alert-message/components/alert-message-list/alert-message-list";
 import dynamic from "next/dist/next-server/lib/dynamic";
 import React, { ComponentType, useContext } from "react";
-
-import styles from "./app-layout.module.scss";
+import styled from "styled-components";
 
 const GlobalSearchResultContainer = dynamic(() =>
   import(
     "components/global-search/components/global-search-result/global-search-result-container"
   )
 );
+
+const App = styled.div`
+  ${appStyles}
+`;
+
+const AppWrapper = styled.div`
+  ${appWrapperStyles}
+`;
+
+const AppHeader = styled.div`
+  ${appHeaderStyles}
+`;
+
+const AppMain = styled.div`
+  ${appMainStyles}
+`;
+
+const AppFooter = styled.div`
+  ${appFooterStyles}
+`;
+
+const AppFooterContainer = styled.div`
+  ${appFooterContainerStyles}
+`;
 
 const PageContent: React.FC = ({ children }) => {
   const { searchValue } = useContext(GlobalSearchContext);
@@ -25,26 +56,28 @@ const PageContent: React.FC = ({ children }) => {
   );
 };
 
-const _AppLayout: ComponentType<Props> = ({ children }) => {
+const AppLayout: ComponentType = ({ children }) => {
   return (
     <GlobalSearchContextProvider>
-      <div className={clsx(styles["app__wrapper"], "root")}>
-        <div className={styles["app"]}>
-          <div className={styles["app__header"]}>
+      <AppWrapper>
+        <App>
+          <AppHeader>
             <HeaderContainer />
-          </div>
-          <div className={styles["app__main"]}>
+          </AppHeader>
+          <AppMain>
             <PageContent>{children}</PageContent>
-          </div>
+          </AppMain>
           <AlertMessageList />
-        </div>
+        </App>
+        <AppFooterContainer>
+          <AppFooter>
+            <Footer />
+          </AppFooter>
+        </AppFooterContainer>
         <div id="modal-root" />
-      </div>
+      </AppWrapper>
     </GlobalSearchContextProvider>
   );
 };
 
-interface Props {}
-
-const AppLayout = React.memo(_AppLayout);
 export default AppLayout;

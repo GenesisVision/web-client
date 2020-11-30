@@ -1,15 +1,20 @@
+import { DashboardBlockOrientation } from "pages/dashboard/components/dashboard-block/dashboard-block";
 import DashboardPieChartBlock from "pages/dashboard/components/dashboard-pie-chart/dashboard-pie-chart-block";
 import { assetsLoaderData } from "pages/dashboard/dashboard.loaders-data";
 import { getAssetsPercents } from "pages/dashboard/services/dashboard.service";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-const _DashboardAssets: React.FC<Props> = ({ landscapeTablet, tablet }) => {
+interface Props {
+  orientation?: DashboardBlockOrientation;
+}
+
+const _DashboardAssets: React.FC<Props> = ({ orientation }) => {
   const [t] = useTranslation();
   return (
     <DashboardPieChartBlock
-      landscapeTablet={landscapeTablet}
-      tablet={tablet}
+      name={"DashboardAssets"}
+      orientation={orientation}
       label={t("dashboard-page:portfolio.title")}
       request={getAssetsPercents}
       loaderData={assetsLoaderData()}
@@ -17,9 +22,5 @@ const _DashboardAssets: React.FC<Props> = ({ landscapeTablet, tablet }) => {
   );
 };
 
-interface Props {
-  landscapeTablet?: boolean;
-  tablet?: boolean;
-}
 const DashboardAssets = React.memo(_DashboardAssets);
 export default DashboardAssets;

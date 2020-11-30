@@ -11,6 +11,14 @@ import { safeGetElemFromArray } from "utils/helpers";
 
 import { getCurrency, getLeverage } from "../asset.helpers";
 
+interface Props {
+  setLeverage: (value: number) => void;
+  setCurrency: (value: string) => void;
+  setAccountType: (value: string) => void;
+  name: string;
+  accountTypes: BrokerAccountType[];
+}
+
 const _BrokerAccount: React.FC<Props> = ({
   name,
   accountTypes,
@@ -51,14 +59,6 @@ const _BrokerAccount: React.FC<Props> = ({
     </AssetField>
   );
 };
-
-interface Props {
-  setLeverage: (value: number) => void;
-  setCurrency: (value: string) => void;
-  setAccountType: (value: string) => void;
-  name: string;
-  accountTypes: BrokerAccountType[];
-}
 
 const BrokerAccount = React.memo(Crashable(_BrokerAccount));
 export default BrokerAccount;

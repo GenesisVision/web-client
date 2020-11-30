@@ -7,6 +7,13 @@ import { CurrencyEnum } from "utils/types";
 
 import AssetField from "../asset-fields/asset-field";
 
+interface Props {
+  name: string;
+  hide?: boolean;
+  disabled?: boolean;
+  accountCurrencies: CurrencyEnum[];
+}
+
 const _Currency: React.FC<Props> = ({
   name,
   disabled,
@@ -34,13 +41,6 @@ const _Currency: React.FC<Props> = ({
     </AssetField>
   );
 };
-
-interface Props {
-  name: string;
-  hide?: boolean;
-  disabled?: boolean;
-  accountCurrencies: CurrencyEnum[];
-}
 
 const Currency = React.memo(_Currency);
 export default Currency;

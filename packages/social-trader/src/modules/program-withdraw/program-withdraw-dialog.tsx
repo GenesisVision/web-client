@@ -12,6 +12,7 @@ import { getProgramWithdrawInfo } from "./services/program-withdraw.services";
 const ProgramWithdrawPopup = dynamic(() => import("./program-withdraw-popup"));
 
 const _ProgramWithdrawDialog: React.FC<Props> = ({
+  isProcessingRealTime,
   onApply,
   id,
   open,
@@ -20,6 +21,8 @@ const _ProgramWithdrawDialog: React.FC<Props> = ({
   assetCurrency
 }) => {
   const { data, sendRequest } = useApiRequest<ProgramWithdrawInfo>({
+    name: "getProgramWithdrawInfo",
+    cache: true,
     request: getProgramWithdrawInfo
   });
   useEffect(() => {
@@ -28,6 +31,7 @@ const _ProgramWithdrawDialog: React.FC<Props> = ({
   return (
     <Dialog open={open} onClose={onClose}>
       <ProgramWithdrawPopup
+        isProcessingRealTime={isProcessingRealTime}
         onApply={onApply}
         id={id}
         onClose={onClose}

@@ -8,8 +8,21 @@ import { Row } from "components/row/row";
 import React from "react";
 import { managerToPathCreator } from "routes/manager.routes";
 import { postToPathCreator } from "routes/social.routes";
+import styled from "styled-components";
 
-import styles from "./conversation-user.module.scss";
+interface Props {
+  postUrl: string;
+  authorUrl: string;
+  avatar: string;
+  username: string;
+  date: string | Date;
+}
+
+const Name = styled(RowItem)`
+  color: white;
+  word-break: break-all;
+  white-space: normal;
+`;
 
 const _ConversationUser: React.FC<Props> = ({
   postUrl,
@@ -30,9 +43,7 @@ const _ConversationUser: React.FC<Props> = ({
         <>
           <Row>
             <Link to={managerToPathCreator(authorUrl, contextTitle)}>
-              <RowItem className={styles["conversation-user__name"]}>
-                {username}
-              </RowItem>
+              <Name>{username}</Name>
             </Link>
           </Row>
           <Row size={"small"}>
@@ -45,13 +56,5 @@ const _ConversationUser: React.FC<Props> = ({
     />
   );
 };
-
-interface Props {
-  postUrl: string;
-  authorUrl: string;
-  avatar: string;
-  username: string;
-  date: string | Date;
-}
 
 export const ConversationUser = React.memo(_ConversationUser);

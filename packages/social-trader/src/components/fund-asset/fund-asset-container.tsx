@@ -1,11 +1,15 @@
-import clsx from "clsx";
 import FundAssetTooltipContainer from "components/fund-asset/fund-asset-tooltip/fund-asset-tooltip-container";
+import {
+  FundAssetRemainder,
+  FundAssets,
+  FundAssetsContainer
+} from "components/fund-asset/fund-asset.styles";
+import { FundAssetViewType } from "components/fund-asset/fund-asset.types";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
 } from "components/popover/popover";
 import { RowItem } from "components/row-item/row-item";
-import { Row } from "components/row/row";
 import {
   FundAssetInfo,
   FundAssetPartWithIcon,
@@ -15,9 +19,81 @@ import useAnchor from "hooks/anchor.hook";
 import React, { useCallback, useEffect, useState } from "react";
 import { PlatformAssetFull } from "utils/types";
 
-import { FUND_ASSET_TYPE } from "./fund-asset";
-import styles from "./fund-asset.module.scss";
 import HidedAssetsLabel from "./hided-assets-label";
+
+export type FundAssetRemoveType = (
+  currency: string
+) => (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+
+export interface IFundAssetContainerProps {
+  noWrap?: boolean;
+  assets?: Array<FundAssetType>;
+  type: FundAssetViewType;
+  size?: number;
+  length?: number;
+  removable?: boolean;
+  lightTheme?: boolean;
+  removeHandle?: FundAssetRemoveType;
+  remainder?: number;
+  hoveringAsset?: string;
+  hasPopoverList?: boolean;
+}
+
+export type FundAssetType =
+  | PlatformAssetFull
+  | FundAssetInfo
+  | FundAssetPartWithIcon
+  | FundAssetPercent;
+
+interface IHidedFundAssetsProps {
+  bottomOffset?: boolean;
+  length?: number;
+  assets: Array<FundAssetType>;
+  type: FundAssetViewType;
+  size: number;
+  hasPopoverList?: boolean;
+  setSize: (size: number) => void;
+  removable?: boolean;
+  removeHandle?: FundAssetRemoveType;
+  hoveringAsset?: string;
+}
+
+const getVisibleAssets = (size: number) => (
+  asset: FundAssetType,
+  idx: number
+) => idx < size;
+
+const getHidedAssets = (size: number) => (asset: FundAssetType, idx: number) =>
+  idx >= size;
+
+const renderFundAsset = ({
+  bottomOffset,
+  type,
+  removable,
+  removeHandle,
+  lightTheme,
+  assetsLength
+}: {
+  bottomOffset?: boolean;
+  type: FundAssetViewType;
+  removable?: boolean;
+  lightTheme?: boolean;
+  removeHandle?: FundAssetRemoveType;
+  hoveringAsset?: string;
+  assetsLength: number;
+}) => (asset: FundAssetType, idx: number) => (
+  <FundAssetTooltipContainer
+    bottomOffset={bottomOffset}
+    key={idx}
+    asset={asset as PlatformAssetFull}
+    idx={idx}
+    assetsLength={assetsLength}
+    type={type}
+    removable={removable}
+    lightTheme={lightTheme}
+    removeHandle={removeHandle}
+  />
+);
 
 const _FundAssetContainer: React.FC<IFundAssetContainerProps> = ({
   noWrap,
@@ -37,7 +113,7 @@ const _FundAssetContainer: React.FC<IFundAssetContainerProps> = ({
     if (hasPopoverList) setSize(sizeProp);
   });
   return (
-    <Row wrap={!noWrap} className={styles["fund-assets"]}>
+    <FundAssets wrap={!noWrap}>
       {assets.filter(getVisibleAssets(size || assets.length)).map(
         renderFundAsset({
           bottomOffset: !noWrap,
@@ -64,18 +140,11 @@ const _FundAssetContainer: React.FC<IFundAssetContainerProps> = ({
         />
       )}
       {remainder > 0 && (
-        <RowItem
-          size={"small"}
-          bottomOffset
-          className={clsx(
-            styles["fund-asset"],
-            styles["fund-asset--remainder"]
-          )}
-        >
+        <FundAssetRemainder size={"small"} bottomOffset>
           {remainder} %
-        </RowItem>
+        </FundAssetRemainder>
       )}
-    </Row>
+    </FundAssets>
   );
 };
 
@@ -101,11 +170,13 @@ const HidedFundAssets: React.FC<IHidedFundAssetsProps> = React.memo(
     );
     return (
       <>
-        <HidedAssetsLabel
-          count={(length || assets.length) - size}
-          type={type}
-          handleOpen={handleOpen}
-        />
+        <RowItem size={"small"} bottomOffset={bottomOffset}>
+          <HidedAssetsLabel
+            count={(length || assets.length) - size}
+            type={type}
+            handleOpen={handleOpen}
+          />
+        </RowItem>
         <Popover
           horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
           vertical={VERTICAL_POPOVER_POS.TOP}
@@ -113,7 +184,7 @@ const HidedFundAssets: React.FC<IHidedFundAssetsProps> = React.memo(
           noPadding
           onClose={clearAnchor}
         >
-          <div className={styles["fund-assets__container"]}>
+          <FundAssetsContainer>
             {assets.filter(getHidedAssets(size)).map(
               renderFundAsset({
                 bottomOffset,
@@ -124,86 +195,12 @@ const HidedFundAssets: React.FC<IHidedFundAssetsProps> = React.memo(
                 assetsLength: assets.length
               })
             )}
-          </div>
+          </FundAssetsContainer>
         </Popover>
       </>
     );
   }
 );
-
-interface IHidedFundAssetsProps {
-  bottomOffset?: boolean;
-  length?: number;
-  assets: Array<FundAssetType>;
-  type: FUND_ASSET_TYPE;
-  size: number;
-  hasPopoverList?: boolean;
-  setSize: (size: number) => void;
-  removable?: boolean;
-  removeHandle?: FundAssetRemoveType;
-  hoveringAsset?: string;
-}
-
-const getVisibleAssets = (size: number) => (
-  asset: FundAssetType,
-  idx: number
-) => idx < size;
-
-const getHidedAssets = (size: number) => (asset: FundAssetType, idx: number) =>
-  idx >= size;
-
-const renderFundAsset = ({
-  bottomOffset,
-  type,
-  removable,
-  removeHandle,
-  lightTheme,
-  assetsLength
-}: {
-  bottomOffset?: boolean;
-  type: FUND_ASSET_TYPE;
-  removable?: boolean;
-  lightTheme?: boolean;
-  removeHandle?: FundAssetRemoveType;
-  hoveringAsset?: string;
-  assetsLength: number;
-}) => (asset: FundAssetType, idx: number) => (
-  <FundAssetTooltipContainer
-    bottomOffset={bottomOffset}
-    key={idx}
-    asset={asset as PlatformAssetFull}
-    idx={idx}
-    assetsLength={assetsLength}
-    type={type}
-    removable={removable}
-    lightTheme={lightTheme}
-    removeHandle={removeHandle}
-  />
-);
-
-export type FundAssetRemoveType = (
-  currency: string
-) => (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-
-export interface IFundAssetContainerProps {
-  noWrap?: boolean;
-  assets?: Array<FundAssetType>;
-  type: FUND_ASSET_TYPE;
-  size?: number;
-  length?: number;
-  removable?: boolean;
-  lightTheme?: boolean;
-  removeHandle?: FundAssetRemoveType;
-  remainder?: number;
-  hoveringAsset?: string;
-  hasPopoverList?: boolean;
-}
-
-export type FundAssetType =
-  | PlatformAssetFull
-  | FundAssetInfo
-  | FundAssetPartWithIcon
-  | FundAssetPercent;
 
 const FundAssetContainer = React.memo(_FundAssetContainer);
 export default FundAssetContainer;

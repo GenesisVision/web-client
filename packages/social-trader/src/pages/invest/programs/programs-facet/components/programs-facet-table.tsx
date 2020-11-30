@@ -16,23 +16,35 @@ import { composeCurrencyMap } from "modules/programs-table/components/programs-t
 import ProgramTableModule from "modules/programs-table/components/programs-table/programs-table-module";
 import { CURRENCY_MAP_NAME } from "modules/programs-table/components/programs-table/programs.constants";
 import React, { useCallback } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 import {
   PROGRAMS_FACET_PAGING,
   PROGRAMS_FACET_TABLE_FILTERS
 } from "./programs-facet.constants";
 
-const _ProgramsFacetTable: React.FC<IProgramsFacetTableProps &
-  WithTranslation> = ({
+export interface IProgramsFacetTableProps {
+  name: string;
+  currency?: Currency;
+  currencies?: PlatformCurrencyInfo[];
+  title?: string;
+  sorting: string;
+  timeframe: Timeframe;
+  getItems: GetItemsFuncType;
+  level?: number;
+  columns?: SortingColumn[];
+}
+
+const _ProgramsFacetTable: React.FC<IProgramsFacetTableProps> = ({
+  name,
   currencies,
-  t,
   title,
   sorting,
   getItems,
   timeframe,
   columns
 }) => {
+  const [t] = useTranslation();
   const composeFiltering = useCallback(
     () =>
       ({
@@ -46,6 +58,7 @@ const _ProgramsFacetTable: React.FC<IProgramsFacetTableProps &
 
   return (
     <ProgramTableModule
+      name={name}
       loaderData={fundListLoaderData}
       renderMappings={(updateFilter, filtering) => (
         <>
@@ -76,16 +89,5 @@ const _ProgramsFacetTable: React.FC<IProgramsFacetTableProps &
   );
 };
 
-export interface IProgramsFacetTableProps {
-  currency?: Currency;
-  currencies?: PlatformCurrencyInfo[];
-  title?: string;
-  sorting: string;
-  timeframe: Timeframe;
-  getItems: GetItemsFuncType;
-  level?: number;
-  columns?: SortingColumn[];
-}
-
-const ProgramsFacetTable = translate()(React.memo(_ProgramsFacetTable));
+const ProgramsFacetTable = React.memo(_ProgramsFacetTable);
 export default ProgramsFacetTable;

@@ -4,28 +4,33 @@ import { ProfileWidgetLoader } from "components/profile-widget/profile-widget.lo
 import WalletWidgetContainer from "components/wallet-widget/wallet-widget-container";
 import { ProfileHeaderViewModel } from "gv-api-web";
 import React from "react";
+import styled from "styled-components";
 import { getRandomInteger } from "utils/helpers";
+import { hideOnLandscapeTablet } from "utils/style/mixins";
 
-import styles from "./header.module.scss";
+const DesktopWidget = styled.div`
+  ${hideOnLandscapeTablet("flex")}
+`;
 
 const AuthWidgets: React.FC<Props> = ({ showWallet = true, profileHeader }) => {
   return (
     <>
       {showWallet && (
-        <div className={styles["header__wallet"]}>
+        <DesktopWidget>
           <WalletWidgetContainer />
-        </div>
+        </DesktopWidget>
       )}
       <NotificationsWidget
         loaderData={getRandomInteger(0, 1000)}
         data={profileHeader && profileHeader.notificationsCount}
       />
-      <ProfileWidget
-        condition={!!profileHeader}
-        loader={<ProfileWidgetLoader className={styles["header__profile"]} />}
-        profileHeader={profileHeader!}
-        className={styles["header__profile"]}
-      />
+      <DesktopWidget>
+        <ProfileWidget
+          condition={!!profileHeader}
+          loader={<ProfileWidgetLoader />}
+          profileHeader={profileHeader!}
+        />
+      </DesktopWidget>
     </>
   );
 };

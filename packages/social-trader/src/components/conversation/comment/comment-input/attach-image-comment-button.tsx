@@ -3,6 +3,8 @@ import { MediaIcon } from "components/conversation/icons/media.icon";
 import React, { useCallback } from "react";
 import { Clickable } from "utils/types";
 
+interface Props extends Clickable {}
+
 const _AttachImageCommentButton: React.FC<Props> = ({ onClick }) => {
   const handleClick = useCallback(() => {
     onClick();
@@ -14,7 +16,5 @@ const _AttachImageCommentButton: React.FC<Props> = ({ onClick }) => {
     </CommentInputButton>
   );
 };
-
-interface Props extends Clickable {}
 
 export const AttachImageCommentButton = React.memo(_AttachImageCommentButton);

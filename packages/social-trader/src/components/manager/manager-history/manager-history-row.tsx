@@ -1,19 +1,16 @@
 import { Center } from "components/center/center";
 import { DefaultBlock } from "components/default.block/default.block";
-import { LabeledValue } from "components/labeled-value/labeled-value";
+import {
+  ManagerHistoryFavoriteIcon,
+  ManagerHistoryRowContainer,
+  ManagerHistoryRowData
+} from "components/manager/manager-history/manager-history-styles";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
-import { Text } from "components/text/text";
 import { ASSET } from "constants/constants";
 import { IconFavoriteButton } from "modules/toggle-asset-favorite-button/icon-favorite-button";
 import { ToggleableAssetType } from "modules/toggle-asset-favorite-button/toggle-asset-favorite-button.types";
 import React from "react";
-
-import styles from "./manager-history-row.module.scss";
-
-interface IManagerHistoryItemProps {
-  label: string;
-}
 
 interface IManagerHistoryRowProps {
   avatarBlock: JSX.Element;
@@ -23,18 +20,6 @@ interface IManagerHistoryRowProps {
   assetType: ASSET;
 }
 
-export const ManagerHistoryItem: React.FC<IManagerHistoryItemProps> = React.memo(
-  ({ label, children }) => {
-    return (
-      <RowItem size={"xlarge"} bottomOffset>
-        <LabeledValue label={label}>
-          <Text wrap={false}>{children}</Text>
-        </LabeledValue>
-      </RowItem>
-    );
-  }
-);
-
 export const ManagerHistoryRow: React.FC<IManagerHistoryRowProps> = ({
   avatarBlock,
   tileBlock,
@@ -43,7 +28,7 @@ export const ManagerHistoryRow: React.FC<IManagerHistoryRowProps> = ({
   assetType
 }) => {
   return (
-    <tr className={styles["manager-history-row"]}>
+    <ManagerHistoryRowContainer>
       <td>
         <DefaultBlock verticalOffsets={false} size={"large"}>
           <Row />
@@ -55,14 +40,14 @@ export const ManagerHistoryRow: React.FC<IManagerHistoryRowProps> = ({
               </Center>
             </RowItem>
             {asset.personalDetails && (
-              <RowItem>
+              <ManagerHistoryFavoriteIcon>
                 <IconFavoriteButton asset={asset} assetType={assetType} />
-              </RowItem>
+              </ManagerHistoryFavoriteIcon>
             )}
           </Row>
-          <Row className={styles["manager-history-row__data"]}>{dataBlock}</Row>
+          <ManagerHistoryRowData>{dataBlock}</ManagerHistoryRowData>
         </DefaultBlock>
       </td>
-    </tr>
+    </ManagerHistoryRowContainer>
   );
 };

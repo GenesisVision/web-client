@@ -10,6 +10,13 @@
   width: 100px;
   min-height: 400px;
 
+  margin-bottom: $padding-xsmall;
+  &:not(:last-child) {
+    @include media-breakpoint-landscape-phone() {
+      margin-right: $padding-xsmall;
+    }
+  }
+
   &__container {
     @include details-block-horizontal-paddings();
     height: 490px;

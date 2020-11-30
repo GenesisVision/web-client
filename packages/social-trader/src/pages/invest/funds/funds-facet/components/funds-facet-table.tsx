@@ -20,7 +20,19 @@ import {
   FUNDS_FACET_TABLE_FILTERS
 } from "./funds-facet.constants";
 
+export interface IFundsFacetTableProps {
+  name: string;
+  initCurrency?: CurrencyEnum;
+  title?: string;
+  sorting: string;
+  timeframe: Timeframe;
+  getItems: GetItemsFuncType;
+  currencies?: PlatformCurrencyInfo[];
+  currency?: CurrencyEnum;
+}
+
 const _FundsFacetTable: React.FC<IFundsFacetTableProps> = ({
+  name,
   initCurrency,
   title,
   sorting,
@@ -44,6 +56,7 @@ const _FundsFacetTable: React.FC<IFundsFacetTableProps> = ({
 
   return (
     <FundsTableModule
+      name={name}
       renderMappings={(updateFilter, filtering) => (
         <>
           <SelectFilter
@@ -71,16 +84,6 @@ const _FundsFacetTable: React.FC<IFundsFacetTableProps> = ({
     />
   );
 };
-
-export interface IFundsFacetTableProps {
-  initCurrency?: CurrencyEnum;
-  title?: string;
-  sorting: string;
-  timeframe: Timeframe;
-  getItems: GetItemsFuncType;
-  currencies?: PlatformCurrencyInfo[];
-  currency?: CurrencyEnum;
-}
 
 const FundsFacetTable = React.memo(_FundsFacetTable);
 export default FundsFacetTable;

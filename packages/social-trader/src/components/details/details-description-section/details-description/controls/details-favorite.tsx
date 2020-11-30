@@ -4,8 +4,14 @@ import { ToggleAssetFavoriteButton } from "modules/toggle-asset-favorite-button/
 import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import { DescriptionControlIcon } from "./description-control-icon";
 import DetailsDescriptionControl from "./details-description-control";
-import styles from "./details-description-control.module.scss";
+
+interface Props {
+  asset?: ASSET;
+  id: string;
+  isFavorite: boolean;
+}
 
 const _DetailsFavorite: React.FC<Props> = ({
   asset,
@@ -28,20 +34,13 @@ const _DetailsFavorite: React.FC<Props> = ({
       <DetailsDescriptionControl
         text={t("asset-details:description.addToFavorites")}
       >
-        <FavoriteIcon
-          className={styles["details-description-control__icon"]}
-          selected={isFavorite}
-        />
+        <DescriptionControlIcon>
+          <FavoriteIcon selected={isFavorite} />
+        </DescriptionControlIcon>
       </DetailsDescriptionControl>
     </ToggleAssetFavoriteButton>
   );
 };
-
-interface Props {
-  asset?: ASSET;
-  id: string;
-  isFavorite: boolean;
-}
 
 const DetailsFavorite = React.memo(_DetailsFavorite);
 export default DetailsFavorite;

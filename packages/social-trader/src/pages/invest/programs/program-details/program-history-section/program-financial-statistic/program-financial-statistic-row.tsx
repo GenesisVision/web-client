@@ -1,14 +1,33 @@
+import FeeCommission from "components/fee-commission/fee-commission";
+import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import Profitability from "components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "components/profitability/profitability.helper";
+import { Row } from "components/row/row";
 import { TableCell, TableRow } from "components/table/components";
+import Tooltip from "components/tooltip/tooltip";
+import { TooltipContent } from "components/tooltip/tooltip-content";
+import { DEFAULT_DECIMAL_SCALE } from "constants/constants";
 import { ProgramPeriodViewModel } from "gv-api-web";
 import React from "react";
 import NumberFormat from "react-number-format";
-import { formatDate } from "utils/dates";
+import styled from "styled-components";
+import { formatDate, humanizeDate } from "utils/dates";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 
+interface Props {
+  isExchange?: boolean;
+  showCommissionRebateSometime: boolean;
+  period: ProgramPeriodViewModel;
+  currency: CurrencyEnum;
+}
+
+const HelpFees = styled.span`
+  cursor: help;
+`;
+
 const _ProgramFinancialStatisticRow: React.FC<Props> = ({
+  isExchange,
   period,
   currency,
   showCommissionRebateSometime
@@ -20,10 +39,17 @@ const _ProgramFinancialStatisticRow: React.FC<Props> = ({
     managerCommissionRebate
   } = period;
 
+  const depositsWithdrawals = +formatValue(
+    managerDeposit - managerWithdraw,
+    DEFAULT_DECIMAL_SCALE
+  );
   return (
     <TableRow stripy>
-      <TableCell>{period.number}</TableCell>
+      {!isExchange && <TableCell>{period.number}</TableCell>}
       <TableCell>{formatDate(period.dateFrom)}</TableCell>
+      {isExchange && (
+        <TableCell>{humanizeDate(0, period.periodLength)}</TableCell>
+      )}
       <TableCell>
         <NumberFormat
           value={formatCurrencyValue(balance, currency)}
@@ -58,25 +84,53 @@ const _ProgramFinancialStatisticRow: React.FC<Props> = ({
         />
       </TableCell>
       <TableCell>
-        {managerWithdraw ? (
-          <Profitability
-            prefix={PROFITABILITY_PREFIX.SIGN}
-            value={`-${formatCurrencyValue(managerWithdraw, currency)}`}
+        {depositsWithdrawals > 0 ? (
+          <Tooltip
+            horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
+            render={() => (
+              <TooltipContent>
+                {managerDeposit > 0 && (
+                  <Row size={"small"}>
+                    <FeeCommission
+                      title={"Deposits"}
+                      value={managerDeposit}
+                      currency={currency}
+                    />
+                  </Row>
+                )}
+                {managerWithdraw > 0 && (
+                  <Row size={"small"}>
+                    <FeeCommission
+                      title={"Withdrawals"}
+                      value={managerWithdraw}
+                      currency={currency}
+                    />
+                  </Row>
+                )}
+              </TooltipContent>
+            )}
           >
-            <NumberFormat
-              value={formatCurrencyValue(managerWithdraw, currency)}
-              thousandSeparator=" "
-              displayType="text"
-              suffix={` ${currency}`}
-            />
-          </Profitability>
+            <HelpFees>
+              <Profitability
+                prefix={PROFITABILITY_PREFIX.SIGN}
+                value={depositsWithdrawals}
+              >
+                <NumberFormat
+                  value={Math.abs(depositsWithdrawals)}
+                  thousandSeparator=" "
+                  displayType="text"
+                  suffix={` ${currency}`}
+                />
+              </Profitability>
+            </HelpFees>
+          </Tooltip>
         ) : (
           <Profitability
             prefix={PROFITABILITY_PREFIX.SIGN}
-            value={formatCurrencyValue(managerDeposit, currency)}
+            value={depositsWithdrawals}
           >
             <NumberFormat
-              value={formatCurrencyValue(managerDeposit, currency)}
+              value={Math.abs(depositsWithdrawals)}
               thousandSeparator=" "
               displayType="text"
               suffix={` ${currency}`}
@@ -96,12 +150,6 @@ const _ProgramFinancialStatisticRow: React.FC<Props> = ({
     </TableRow>
   );
 };
-
-interface Props {
-  showCommissionRebateSometime: boolean;
-  period: ProgramPeriodViewModel;
-  currency: CurrencyEnum;
-}
 
 const ProgramFinancialStatisticRow = React.memo(_ProgramFinancialStatisticRow);
 export default ProgramFinancialStatisticRow;

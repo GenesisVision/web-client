@@ -1,0 +1,30 @@
+@import "styles/_colors";
+@import "styles/_breakpoint";
+@import "styles/_sizes";
+@import "styles/_constants";
+
+.guides-nav {
+  width: 100%;
+
+  @include media-breakpoint-tablet() {
+    width: 250px;
+  }
+
+  @include media-breakpoint-landscape-tablet() {
+    width: 347px;
+  }
+
+  h3 {
+    cursor: pointer;
+
+    &:last-child {
+      padding-bottom: 5px;
+    }
+  }
+  &__item {
+    margin-bottom: $padding-xsmall;
+    @include media-breakpoint-tablet() {
+      margin-right: $padding-xsmall;
+    }
+  }
+}

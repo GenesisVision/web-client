@@ -1,18 +1,13 @@
-import clsx from "clsx";
+import {
+  dynamicLabeledValueStyles,
+  StyleProps
+} from "components/labeled-value/labeled-value.style";
+import { ILabeledValueProps } from "components/labeled-value/labeled-value.types";
 import { Row } from "components/row/row";
-import { Text, TextWeight } from "components/text/text";
+import { Text } from "components/text/text";
 import React from "react";
-import { Sizeable, SizesType } from "utils/types";
-
-import styles from "./labeled-value.module.scss";
-
-export type LabeledValueDirection = "column" | "row";
-
-export interface ILabeledValueProps extends Sizeable {
-  weight?: TextWeight;
-  direction?: LabeledValueDirection;
-  label: string | React.ReactNode | JSX.Element;
-}
+import styled from "styled-components";
+import { SizesType } from "utils/types";
 
 const getChildOffsetValue = (size: SizesType): SizesType => {
   switch (size) {
@@ -26,6 +21,10 @@ const getChildOffsetValue = (size: SizesType): SizesType => {
   }
 };
 
+const Container = styled.div<StyleProps>`
+  ${dynamicLabeledValueStyles}
+`;
+
 export const LabeledValue: React.FC<ILabeledValueProps> = ({
   weight,
   direction = "column",
@@ -34,12 +33,7 @@ export const LabeledValue: React.FC<ILabeledValueProps> = ({
   children
 }) => {
   return (
-    <div
-      className={clsx(styles["labeled-value"], {
-        [styles["labeled-value--column"]]: direction === "column",
-        [styles["labeled-value--row"]]: direction === "row"
-      })}
-    >
+    <Container direction={direction}>
       <Row onlyOffset>
         <Text wrap={false} muted size={size}>
           {label}
@@ -49,13 +43,10 @@ export const LabeledValue: React.FC<ILabeledValueProps> = ({
         onlyOffset
         size={direction !== "row" ? getChildOffsetValue(size) : undefined}
       >
-        <Text
-          weight={weight}
-          sizeValue={size === "middle" ? "14px" : undefined}
-        >
+        <Text weight={weight} sizeValue={size === "middle" ? "14" : undefined}>
           {children}
         </Text>
       </Row>
-    </div>
+    </Container>
   );
 };

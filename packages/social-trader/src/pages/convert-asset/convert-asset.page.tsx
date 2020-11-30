@@ -1,9 +1,10 @@
 import Page from "components/page/page";
 import { IConvertAssetSettingsFormOwnProps } from "pages/convert-asset/components/convert-asset-settings";
+import { ConvertAssetSettingsSection } from "pages/convert-asset/components/convert-asset-settings-section";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 
-import ConvertAssetContainer from "./components/convert-asset.container";
+interface Props extends IConvertAssetSettingsFormOwnProps {}
 
 const _ConvertAssetPage: React.FC<Props> = ({
   fromTo,
@@ -17,18 +18,15 @@ const _ConvertAssetPage: React.FC<Props> = ({
   );
   return (
     <Page showTitle title={title}>
-      <ConvertAssetContainer
+      <ConvertAssetSettingsSection
         currency={currency}
         fromTo={fromTo}
-        title={title}
         id={id}
         broker={broker}
       />
     </Page>
   );
 };
-
-interface Props extends IConvertAssetSettingsFormOwnProps {}
 
 const ConvertAssetPage = React.memo(_ConvertAssetPage);
 export default ConvertAssetPage;

@@ -8,39 +8,3 @@
   justify-content: flex-end;
   height: 48px;
 }
-
-.details-investment-block {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  margin-top: $padding-xxsmall;
-  @include media-breakpoint-landscape-phone() {
-    margin-top: $padding-xsmall;
-  }
-
-  &:nth-child(2) {
-    @include media-breakpoint-landscape-tablet() {
-      margin-left: $padding-medium;
-      padding-left: $padding-medium;
-      border-left: 2px solid $separator-color;
-    }
-    @include media-breakpoint-desktop() {
-      margin-left: $padding-large;
-      padding-left: $padding-large;
-    }
-  }
-}
-
-.details-investment-heading {
-  text-transform: uppercase;
-}
-
-.details-investment-footer {
-  justify-content: space-between;
-}
-
-.details-investment-container {
-  display: flex;
-  flex-wrap: wrap;
-  @include horizontal-paddings($padding-small);
-}

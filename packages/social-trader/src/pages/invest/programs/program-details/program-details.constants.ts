@@ -6,6 +6,10 @@ import {
 } from "components/table/components/filtering/date-range-filter/date-range-filter.helpers";
 import { SortingColumn } from "components/table/components/filtering/filter.type";
 import { FILTER_TYPE } from "components/table/helpers/filtering.helpers";
+import {
+  INTERVAL_FILTER_NAME,
+  INTERVAL_FILTER_VALUES
+} from "pages/invest/programs/program-details/program-history-section/interval-filter";
 
 export const SERVER_DATE_RANGE_MIN_FILTER_NAME = "dateFrom";
 export const SERVER_DATE_RANGE_MAX_FILTER_NAME = "dateTo";
@@ -161,6 +165,37 @@ export const PROGRAM_SUBSCRIBERS_COLUMNS: SortingColumn[] = [
   }
 ];
 
+export const EXCHANGE_PROGRAM_FINANCIAL_STATISTIC_COLUMNS: SortingColumn[] = [
+  {
+    name: "date-start",
+    tooltip: true
+  },
+  {
+    name: "period-length",
+    tooltip: true
+  },
+  {
+    name: "balance",
+    tooltip: true
+  },
+  {
+    name: "profit",
+    tooltip: true
+  },
+  {
+    name: "success-fee",
+    tooltip: true
+  },
+  {
+    name: "management-fee",
+    tooltip: true
+  },
+  {
+    name: "deposit-withdraw",
+    tooltip: true
+  }
+];
+
 export const PROGRAM_FINANCIAL_STATISTIC_COLUMNS: SortingColumn[] = [
   {
     name: "period",
@@ -200,6 +235,29 @@ export const PROGRAM_GM_FINANCIAL_STATISTIC_COLUMNS: SortingColumn[] = [
   }
 ];
 
+export const PROGRAM_ANALYTICS: SortingColumn[] = [
+  {
+    name: "date-start",
+    tooltip: true
+  },
+  {
+    name: "period-length",
+    tooltip: true
+  },
+  {
+    name: "balance",
+    tooltip: true
+  },
+  {
+    name: "profit",
+    tooltip: true
+  },
+  {
+    name: "investors-max",
+    tooltip: true
+  }
+];
+
 export const PROGRAM_PERIOD_HISTORY: SortingColumn[] = [
   {
     name: "period",
@@ -227,7 +285,31 @@ export const PROGRAM_PERIOD_HISTORY: SortingColumn[] = [
   }
 ];
 
+export const PROGRAM_FINANCIAL_STATISTIC_DEFAULT_FILTERS = [
+  {
+    name: INTERVAL_FILTER_NAME,
+    type: FILTER_TYPE.GENERAL
+  },
+  {
+    ...composeDefaultDateRangeFilter({
+      composeApiRequestValue: composeRequestValueFunc(
+        SERVER_DATE_RANGE_MIN_FILTER_NAME,
+        SERVER_DATE_RANGE_MAX_FILTER_NAME
+      )
+    })
+  }
+];
+
+export const PROGRAM_FINANCIAL_STATISTIC_FILTERS = {
+  [INTERVAL_FILTER_NAME]: INTERVAL_FILTER_VALUES[0].value,
+  dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE
+};
+
 export const PROGRAM_TRADES_DEFAULT_FILTERS = [
+  {
+    name: INTERVAL_FILTER_NAME,
+    type: FILTER_TYPE.GENERAL
+  },
   {
     ...composeDefaultDateRangeFilter({
       composeApiRequestValue: composeRequestValueFunc(
@@ -239,6 +321,7 @@ export const PROGRAM_TRADES_DEFAULT_FILTERS = [
 ];
 
 export const PROGRAM_TRADES_FILTERS = {
+  [INTERVAL_FILTER_NAME]: INTERVAL_FILTER_VALUES[0].value,
   dateRange: DEFAULT_DATE_RANGE_FILTER_VALUE
 };
 

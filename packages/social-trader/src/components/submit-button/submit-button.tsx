@@ -1,4 +1,5 @@
-import GVButton, { GVButtonProps } from "components/gv-button";
+import { Button } from "components/button/button";
+import { IButtonProps } from "components/button/button.types";
 import React from "react";
 import { useFormContext } from "react-hook-form";
 
@@ -26,7 +27,7 @@ export const SubmitButton: React.FC<Props> = ({
     isSuccessfulInner ||
     disabled;
   return (
-    <GVButton
+    <Button
       {...props}
       type={type}
       isPending={isPendingInner}
@@ -34,11 +35,11 @@ export const SubmitButton: React.FC<Props> = ({
       disabled={disabledInner}
     >
       {children}
-    </GVButton>
+    </Button>
   );
 };
 
-interface Props extends GVButtonProps {
+interface Props extends IButtonProps {
   checkSubmitted?: boolean;
   checkValid?: boolean;
   checkDirty?: boolean;
