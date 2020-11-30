@@ -91,14 +91,14 @@ export const navHeader: TNavHeader[] = [
         href: REFERRAL_PROGRAM_ROUTE
       },
       {
-        name: "landing-page:links.guides",
-        hideMobile: true,
-        href: GUIDES_TOTAL_PAGE_ROUTE
-      },
-      {
         name: "landing-page:links.faq",
         hideMobile: true,
         href: FAQ_ROUTE
+      },
+      {
+        name: "landing-page:links.guides",
+        hideMobile: true,
+        href: GUIDES_TOTAL_PAGE_ROUTE
       },
       {
         name: "landing-page:links.feedback",
@@ -121,6 +121,10 @@ export const navFooter: TNavHeader[] = [
   {
     name: "landing-page:links.faq",
     href: FAQ_ROUTE
+  },
+  {
+    name: "landing-page:links.guides",
+    href: GUIDES_TOTAL_PAGE_ROUTE
   },
   {
     name: "landing-page:links.blog",
@@ -153,10 +157,6 @@ export const navFooter: TNavHeader[] = [
   {
     name: "landing-page:links.terms",
     href: TERMS_ROUTE
-  },
-  {
-    name: "landing-page:links.download",
-    href: DOWNLOADS_ROUTE
   }
 ];
 
