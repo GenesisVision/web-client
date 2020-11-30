@@ -76,7 +76,8 @@ export const brokersInfo: TBrokerInfo[] = [
         text: "landing-page:brokers.text-gm-1"
       },
       {
-        text: "landing-page:brokers.text-gm-2"
+        number: "landing-page:brokers.number-gm-1",
+        text: "landing-page:brokers.text-gm-5"
       },
       {
         text: "landing-page:brokers.text-gm-3",
@@ -84,10 +85,6 @@ export const brokersInfo: TBrokerInfo[] = [
       },
       {
         text: "landing-page:brokers.text-gm-4"
-      },
-      {
-        number: "landing-page:brokers.number-gm-1",
-        text: "landing-page:brokers.text-gm-5"
       }
     ]
   },
