@@ -118,6 +118,7 @@ export const navGuides: INavGuide[] = [
                 </GuideLink>
                 .
                 <ConversationImages
+                  bottomOffset={false}
                   size={"large"}
                   images={[
                     {
@@ -143,6 +144,7 @@ export const navGuides: INavGuide[] = [
               <li>
                 Press <b>“+”</b> for the deposit through the crypto wallet
                 <ConversationImages
+                  bottomOffset={false}
                   size={"large"}
                   images={[
                     {
@@ -205,6 +207,7 @@ export const navGuides: INavGuide[] = [
                   <b>Moonpay payment processor</b>.
                 </a>
                 <ConversationImages
+                  bottomOffset={false}
                   size={"large"}
                   images={[
                     {
@@ -264,6 +267,7 @@ export const navGuides: INavGuide[] = [
                 Press the <b>“↑“</b> sign and fill in the data in the window
                 opened: your crypto wallet address and the amount to withdraw.
                 <ConversationImages
+                  bottomOffset={false}
                   size={"large"}
                   images={[
                     {
@@ -298,6 +302,7 @@ export const navGuides: INavGuide[] = [
                 is confirmed in the blockchain the status of the transaction
                 will be changed to “Done”.
                 <ConversationImages
+                  bottomOffset={false}
                   size={"large"}
                   images={[
                     {
@@ -359,58 +364,55 @@ export const navGuides: INavGuide[] = [
               </p>
             </section>
 
-            <section>
-              <h3>
-                A few important notes to consider before investing in a Fund:
-              </h3>
-              <ul>
-                <li>Check the fees before investing.</li>
-                <li>
-                  Check the history tab. You will see the whole story of the
-                  Fund, all the rebalancing story, the investing, and the
-                  withdrawals.
-                </li>
-                <li>
-                  Check the chart to see the performance of the Fund. You can
-                  choose different time frames to see the profitability of the
-                  Fund.
-                </li>
-                <li>
-                  You can withdraw at any time. The exit fee will be applying
-                  when you withdraw.
-                </li>
-              </ul>
-              <p>
-                Every <b>Thursday</b> we announce a winner of our{" "}
-                <b>GV Funds Weekly Challenge</b>. The Fund that shows the best
-                performance during the week becomes the winner. We have also
-                prepared a section with the most profitable Funds in the
-                investing section to make it easier to choose a suitable Fund to
-                invest in.
-              </p>
-              <ConversationImages
-                size={"large"}
-                images={[
-                  {
-                    id: Funds1,
-                    resizes: [
-                      {
-                        height: 0,
-                        width: 0,
-                        logoUrl: Funds1,
-                        quality: "Original"
-                      },
-                      {
-                        height: 0,
-                        width: 0,
-                        logoUrl: Funds1,
-                        quality: "Low"
-                      }
-                    ]
-                  }
-                ]}
-              />
-            </section>
+            <h3>
+              A few important notes to consider before investing in a Fund:
+            </h3>
+            <ul>
+              <li>Check the fees before investing.</li>
+              <li>
+                Check the history tab. You will see the whole story of the Fund,
+                all the rebalancing story, the investing, and the withdrawals.
+              </li>
+              <li>
+                Check the chart to see the performance of the Fund. You can
+                choose different time frames to see the profitability of the
+                Fund.
+              </li>
+              <li>
+                You can withdraw at any time. The exit fee will be applying when
+                you withdraw.
+              </li>
+            </ul>
+            <p>
+              Every <b>Thursday</b> we announce a winner of our{" "}
+              <b>GV Funds Weekly Challenge</b>. The Fund that shows the best
+              performance during the week becomes the winner. We have also
+              prepared a section with the most profitable Funds in the investing
+              section to make it easier to choose a suitable Fund to invest in.
+            </p>
+            <ConversationImages
+              bottomOffset={false}
+              size={"large"}
+              images={[
+                {
+                  id: Funds1,
+                  resizes: [
+                    {
+                      height: 0,
+                      width: 0,
+                      logoUrl: Funds1,
+                      quality: "Original"
+                    },
+                    {
+                      height: 0,
+                      width: 0,
+                      logoUrl: Funds1,
+                      quality: "Low"
+                    }
+                  ]
+                }
+              ]}
+            />
 
             <section>
               <h3>How is the profit of a Fund calculated?</h3>
@@ -783,6 +785,7 @@ export const navGuides: INavGuide[] = [
                   . Important: to follow a trader with your Binance account
                   create an API key <b>with the trading rights</b>.
                   <ConversationImages
+                    bottomOffset={false}
                     size={"large"}
                     images={[
                       {
@@ -822,6 +825,7 @@ export const navGuides: INavGuide[] = [
                   subscription below) and a tolerance percentage (maximum
                   possible deviation of the trade price from 0% to 20%).
                   <ConversationImages
+                    bottomOffset={false}
                     size={"large"}
                     images={[
                       {
@@ -1022,6 +1026,7 @@ export const navGuides: INavGuide[] = [
                   Scroll down to the Subscription section and press the{" "}
                   <b>“Unfollow” button</b>.
                   <ConversationImages
+                    bottomOffset={false}
                     size={"large"}
                     images={[
                       {
@@ -1134,6 +1139,7 @@ export const navGuides: INavGuide[] = [
                   <b>“Open trading account”</b> or press <b>“Select product”</b>{" "}
                   in the overview section and choose the Trading account.
                   <ConversationImages
+                    bottomOffset={false}
                     size={"large"}
                     images={[
                       {
@@ -1165,6 +1171,7 @@ export const navGuides: INavGuide[] = [
                 <li>
                   Press the button <b>“Create account”</b>.
                   <ConversationImages
+                    bottomOffset={false}
                     size={"large"}
                     images={[
                       {
@@ -1188,7 +1195,6 @@ export const navGuides: INavGuide[] = [
                   />
                 </li>
               </ol>
-              <p></p>
               <p>
                 The credentials to your trading account will be sent to your
                 email address. You will find your login, password, and server
@@ -1246,6 +1252,7 @@ export const navGuides: INavGuide[] = [
                 Press <b>“Select product”</b> in the Overview section and choose
                 Attach external account.
                 <ConversationImages
+                  bottomOffset={false}
                   size={"large"}
                   images={[
                     {
@@ -1271,9 +1278,13 @@ export const navGuides: INavGuide[] = [
               <li>
                 After you press the button fill in the API key and API secret.
                 The instructions on how to do that could be found{" "}
-                <GuideLink link={GV_FOLLOW_ROUTE}>
+                <a
+                  href="https://binance.zendesk.com/hc/en-us/articles/360002502072"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <b>here</b>
-                </GuideLink>
+                </a>
                 . Important: if you are attaching the account for signal
                 providing purposes create an API key without the trading rights,
                 if you are planning to use the account to follow other traders
@@ -1286,6 +1297,7 @@ export const navGuides: INavGuide[] = [
             </ol>
             <p>Your Binance account will appear in your trading section.</p>
             <ConversationImages
+              bottomOffset={false}
               size={"large"}
               images={[
                 {
@@ -1353,6 +1365,7 @@ export const navGuides: INavGuide[] = [
                   Press <b>“Select product”</b> in the Overview section and
                   choose the Self-managed Fund.
                   <ConversationImages
+                    bottomOffset={false}
                     size={"large"}
                     images={[
                       {
@@ -1383,6 +1396,7 @@ export const navGuides: INavGuide[] = [
                 <li>
                   Press the <b>“Create Fund”</b> button.
                   <ConversationImages
+                    bottomOffset={false}
                     size={"large"}
                     images={[
                       {
@@ -1442,31 +1456,30 @@ export const navGuides: INavGuide[] = [
         name: "Placing an order",
         content: (
           <>
-            <section>
-              <p>In general, there are just two order types: sell and buy.</p>
-              <ConversationImages
-                size={"large"}
-                images={[
-                  {
-                    id: PlacingAnOrder1,
-                    resizes: [
-                      {
-                        height: 0,
-                        width: 0,
-                        logoUrl: PlacingAnOrder1,
-                        quality: "Original"
-                      },
-                      {
-                        height: 0,
-                        width: 0,
-                        logoUrl: PlacingAnOrder1,
-                        quality: "Low"
-                      }
-                    ]
-                  }
-                ]}
-              />
-            </section>
+            <p>In general, there are just two order types: sell and buy.</p>
+            <ConversationImages
+              bottomOffset={false}
+              size={"large"}
+              images={[
+                {
+                  id: PlacingAnOrder1,
+                  resizes: [
+                    {
+                      height: 0,
+                      width: 0,
+                      logoUrl: PlacingAnOrder1,
+                      quality: "Original"
+                    },
+                    {
+                      height: 0,
+                      width: 0,
+                      logoUrl: PlacingAnOrder1,
+                      quality: "Low"
+                    }
+                  ]
+                }
+              ]}
+            />
 
             <section>
               <h3>Market order</h3>
@@ -1623,6 +1636,7 @@ export const navGuides: INavGuide[] = [
                 <li>
                   Press the <b>“Place”</b> button.
                   <ConversationImages
+                    bottomOffset={false}
                     size={"large"}
                     images={[
                       {
@@ -1691,6 +1705,7 @@ export const navGuides: INavGuide[] = [
                 order window when creating an order:
               </p>
               <ConversationImages
+                bottomOffset={false}
                 size={"large"}
                 images={[
                   {
@@ -1782,6 +1797,7 @@ export const navGuides: INavGuide[] = [
               particular period of time.
             </p>
             <ConversationImages
+              bottomOffset={false}
               size={"large"}
               images={[
                 {
@@ -1839,158 +1855,152 @@ export const navGuides: INavGuide[] = [
               <p>Here are the top most popular indicators:</p>
             </section>
 
-            <section>
-              <h3>1. Moving average (MA)</h3>
-              <p>
-                The MA – or ‘simple moving average’ (SMA) – is an indicator
-                traders use for the identification of the direction of a current
-                price trend, without the interference of shorter-term price
-                spikes. The moving average indicator combines price points of a
-                financial instrument over a specified time frame and divides it
-                by the number of data points to present a single trend line.
-              </p>
-              <p>
-                The length of MA defines which data is being used. For example,
-                a 200-day MA requires 200 days of data. By using the MA
-                indicator, you can study levels of support and resistance and
-                see previous price action (the history of the market). This
-                means you can also determine possible future patterns.
-              </p>
-              <ConversationImages
-                size={"large"}
-                images={[
-                  {
-                    id: IndicatorsMA1,
-                    resizes: [
-                      {
-                        height: 0,
-                        width: 0,
-                        logoUrl: IndicatorsMA1,
-                        quality: "Original"
-                      },
-                      {
-                        height: 0,
-                        width: 0,
-                        logoUrl: IndicatorsMA1,
-                        quality: "Low"
-                      }
-                    ]
-                  }
-                ]}
-              />
-            </section>
+            <h3>1. Moving average (MA)</h3>
+            <p>
+              The MA – or ‘simple moving average’ (SMA) – is an indicator
+              traders use for the identification of the direction of a current
+              price trend, without the interference of shorter-term price
+              spikes. The moving average indicator combines price points of a
+              financial instrument over a specified time frame and divides it by
+              the number of data points to present a single trend line.
+            </p>
+            <p>
+              The length of MA defines which data is being used. For example, a
+              200-day MA requires 200 days of data. By using the MA indicator,
+              you can study levels of support and resistance and see previous
+              price action (the history of the market). This means you can also
+              determine possible future patterns.
+            </p>
+            <ConversationImages
+              bottomOffset={false}
+              size={"large"}
+              images={[
+                {
+                  id: IndicatorsMA1,
+                  resizes: [
+                    {
+                      height: 0,
+                      width: 0,
+                      logoUrl: IndicatorsMA1,
+                      quality: "Original"
+                    },
+                    {
+                      height: 0,
+                      width: 0,
+                      logoUrl: IndicatorsMA1,
+                      quality: "Low"
+                    }
+                  ]
+                }
+              ]}
+            />
 
-            <section>
-              <h3>2. Exponential moving average (EMA)</h3>
-              <p>
-                EMA is another form of moving average. Unlike the SMA, it places
-                a greater weight on recent data points, which makes data more
-                responsive to new information. When traders use EMA with other
-                indicators it can be quite helpful to confirm significant market
-                moves and gauge their legitimacy.
-              </p>
-              <p>
-                The most popular EMAs are 12- and 26-day EMAs for short-term
-                averages, whereas the 50- and 200-day EMAs are used as long-term
-                trend indicators.
-              </p>
-              <ConversationImages
-                size={"large"}
-                images={[
-                  {
-                    id: IndicatorsMA2,
-                    resizes: [
-                      {
-                        height: 0,
-                        width: 0,
-                        logoUrl: IndicatorsMA2,
-                        quality: "Original"
-                      },
-                      {
-                        height: 0,
-                        width: 0,
-                        logoUrl: IndicatorsMA2,
-                        quality: "Low"
-                      }
-                    ]
-                  }
-                ]}
-              />
-            </section>
+            <h3>2. Exponential moving average (EMA)</h3>
+            <p>
+              EMA is another form of moving average. Unlike the SMA, it places a
+              greater weight on recent data points, which makes data more
+              responsive to new information. When traders use EMA with other
+              indicators it can be quite helpful to confirm significant market
+              moves and gauge their legitimacy.
+            </p>
+            <p>
+              The most popular EMAs are 12- and 26-day EMAs for short-term
+              averages, whereas the 50- and 200-day EMAs are used as long-term
+              trend indicators.
+            </p>
+            <ConversationImages
+              bottomOffset={false}
+              size={"large"}
+              images={[
+                {
+                  id: IndicatorsMA2,
+                  resizes: [
+                    {
+                      height: 0,
+                      width: 0,
+                      logoUrl: IndicatorsMA2,
+                      quality: "Original"
+                    },
+                    {
+                      height: 0,
+                      width: 0,
+                      logoUrl: IndicatorsMA2,
+                      quality: "Low"
+                    }
+                  ]
+                }
+              ]}
+            />
 
-            <section>
-              <h3>3. Stochastic oscillator</h3>
-              <p>
-                A stochastic oscillator is an indicator that compares a specific
-                closing price of an asset to a range of its prices over time –
-                showing momentum and trend strength. It uses a scale of 0 to
-                100. A reading below 20 generally represents an oversold market
-                and a reading above 80 an overbought market. However, if a
-                strong trend is present, a correction or rally will not
-                necessarily ensue.
-              </p>
-              <ConversationImages
-                size={"large"}
-                images={[
-                  {
-                    id: IndicatorsSO3,
-                    resizes: [
-                      {
-                        height: 0,
-                        width: 0,
-                        logoUrl: IndicatorsSO3,
-                        quality: "Original"
-                      },
-                      {
-                        height: 0,
-                        width: 0,
-                        logoUrl: IndicatorsSO3,
-                        quality: "Low"
-                      }
-                    ]
-                  }
-                ]}
-              />
-            </section>
+            <h3>3. Stochastic oscillator</h3>
+            <p>
+              A stochastic oscillator is an indicator that compares a specific
+              closing price of an asset to a range of its prices over time –
+              showing momentum and trend strength. It uses a scale of 0 to 100.
+              A reading below 20 generally represents an oversold market and a
+              reading above 80 an overbought market. However, if a strong trend
+              is present, a correction or rally will not necessarily ensue.
+            </p>
+            <ConversationImages
+              bottomOffset={false}
+              size={"large"}
+              images={[
+                {
+                  id: IndicatorsSO3,
+                  resizes: [
+                    {
+                      height: 0,
+                      width: 0,
+                      logoUrl: IndicatorsSO3,
+                      quality: "Original"
+                    },
+                    {
+                      height: 0,
+                      width: 0,
+                      logoUrl: IndicatorsSO3,
+                      quality: "Low"
+                    }
+                  ]
+                }
+              ]}
+            />
 
-            <section>
-              <h3>4. Moving average convergence divergence (MACD)</h3>
-              <p>
-                MACD is an indicator that detects changes in momentum by
-                comparing two moving averages. Traders use it to identify
-                possible buy and sell opportunities around support and
-                resistance levels.
-              </p>
-              <p>
-                ‘Convergence’ means that two moving averages are coming
-                together, while ‘divergence’ means that they’re moving away from
-                each other. In case moving averages are converging, it means
-                momentum is decreasing, whereas if the moving averages are
-                diverging, momentum is increasing.
-              </p>
-              <ConversationImages
-                size={"large"}
-                images={[
-                  {
-                    id: IndicatorsMACD4,
-                    resizes: [
-                      {
-                        height: 0,
-                        width: 0,
-                        logoUrl: IndicatorsMACD4,
-                        quality: "Original"
-                      },
-                      {
-                        height: 0,
-                        width: 0,
-                        logoUrl: IndicatorsMACD4,
-                        quality: "Low"
-                      }
-                    ]
-                  }
-                ]}
-              />
-            </section>
+            <h3>4. Moving average convergence divergence (MACD)</h3>
+            <p>
+              MACD is an indicator that detects changes in momentum by comparing
+              two moving averages. Traders use it to identify possible buy and
+              sell opportunities around support and resistance levels.
+            </p>
+            <p>
+              ‘Convergence’ means that two moving averages are coming together,
+              while ‘divergence’ means that they’re moving away from each other.
+              In case moving averages are converging, it means momentum is
+              decreasing, whereas if the moving averages are diverging, momentum
+              is increasing.
+            </p>
+            <ConversationImages
+              bottomOffset={false}
+              size={"large"}
+              images={[
+                {
+                  id: IndicatorsMACD4,
+                  resizes: [
+                    {
+                      height: 0,
+                      width: 0,
+                      logoUrl: IndicatorsMACD4,
+                      quality: "Original"
+                    },
+                    {
+                      height: 0,
+                      width: 0,
+                      logoUrl: IndicatorsMACD4,
+                      quality: "Low"
+                    }
+                  ]
+                }
+              ]}
+            />
 
             <section>
               <h3>5. Bollinger bands</h3>
@@ -2012,6 +2022,7 @@ export const navGuides: INavGuide[] = [
                 band, it could be oversold.
               </p>
               <ConversationImages
+                bottomOffset={false}
                 size={"large"}
                 images={[
                   {
@@ -2039,45 +2050,44 @@ export const navGuides: INavGuide[] = [
               </p>
             </section>
 
-            <section>
-              <h3>Relative strength index (RSI)</h3>
-              <p>
-                Traders mostly use RSI to identify momentum, market conditions,
-                and warning signals for dangerous price movements. RSI is
-                expressed as a figure between 0 and 100. If the asset is around
-                70 level it is usually considered overbought, if it is at or
-                near 30 the asset is usually considered oversold.
-              </p>
-              <p>
-                An overbought signal suggests that short-term gains may be
-                reaching a point of maturity and assets may be in for a price
-                correction. On the other hand, an oversold signal could mean
-                that short-term declines are reaching maturity and assets may be
-                in for a rally.
-              </p>
-              <ConversationImages
-                size={"large"}
-                images={[
-                  {
-                    id: IndicatorsRSI6,
-                    resizes: [
-                      {
-                        height: 0,
-                        width: 0,
-                        logoUrl: IndicatorsRSI6,
-                        quality: "Original"
-                      },
-                      {
-                        height: 0,
-                        width: 0,
-                        logoUrl: IndicatorsRSI6,
-                        quality: "Low"
-                      }
-                    ]
-                  }
-                ]}
-              />
-            </section>
+            <h3>6. Relative strength index (RSI)</h3>
+            <p>
+              Traders mostly use RSI to identify momentum, market conditions,
+              and warning signals for dangerous price movements. RSI is
+              expressed as a figure between 0 and 100. If the asset is around 70
+              level it is usually considered overbought, if it is at or near 30
+              the asset is usually considered oversold.
+            </p>
+            <p>
+              An overbought signal suggests that short-term gains may be
+              reaching a point of maturity and assets may be in for a price
+              correction. On the other hand, an oversold signal could mean that
+              short-term declines are reaching maturity and assets may be in for
+              a rally.
+            </p>
+            <ConversationImages
+              bottomOffset={false}
+              size={"large"}
+              images={[
+                {
+                  id: IndicatorsRSI6,
+                  resizes: [
+                    {
+                      height: 0,
+                      width: 0,
+                      logoUrl: IndicatorsRSI6,
+                      quality: "Original"
+                    },
+                    {
+                      height: 0,
+                      width: 0,
+                      logoUrl: IndicatorsRSI6,
+                      quality: "Low"
+                    }
+                  ]
+                }
+              ]}
+            />
           </>
         )
       }
@@ -2125,6 +2135,7 @@ export const navGuides: INavGuide[] = [
                 <li>
                   Choose “Fund”. The description could be seen there as well.
                   <ConversationImages
+                    bottomOffset={false}
                     size={"large"}
                     images={[
                       {
@@ -2168,6 +2179,7 @@ export const navGuides: INavGuide[] = [
                 <li>
                   Click <b>“Create Fund”</b>.
                   <ConversationImages
+                    bottomOffset={false}
                     size={"large"}
                     images={[
                       {
@@ -2193,6 +2205,7 @@ export const navGuides: INavGuide[] = [
                   description of the asset, social media links and its price
                   history.
                   <ConversationImages
+                    bottomOffset={false}
                     size={"large"}
                     images={[
                       {
@@ -2315,6 +2328,7 @@ export const navGuides: INavGuide[] = [
                   choose Program. Choose the <b>broker</b>{" "}
                   <em>(Current brokers are Roboforex, Exante, Huobi)</em>.
                   <ConversationImages
+                    bottomOffset={false}
                     size={"large"}
                     images={[
                       {
@@ -2359,6 +2373,7 @@ export const navGuides: INavGuide[] = [
                       have the ability to delay the public display of their
                       trades and open positions to protect their strategy.
                       <ConversationImages
+                        bottomOffset={false}
                         size={"large"}
                         images={[
                           {
@@ -2406,6 +2421,7 @@ export const navGuides: INavGuide[] = [
                 <li>
                   Click <b>“Create Program”</b>.
                   <ConversationImages
+                    bottomOffset={false}
                     size={"large"}
                     images={[
                       {
@@ -2469,7 +2485,7 @@ export const navGuides: INavGuide[] = [
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  the article
+                  <b>the article</b>
                 </a>
                 .
               </p>
@@ -2548,7 +2564,7 @@ export const navGuides: INavGuide[] = [
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  article
+                  <b>article</b>
                 </a>
                 .
               </p>
@@ -2593,6 +2609,7 @@ export const navGuides: INavGuide[] = [
                   </GuideLink>{" "}
                   and press three dots on the right upper corner.
                   <ConversationImages
+                    bottomOffset={false}
                     size={"large"}
                     images={[
                       {
@@ -2718,6 +2735,7 @@ export const navGuides: INavGuide[] = [
                 GV Social has 4 sections: Feed, Users, your Profile, and Media.
               </p>
               <ConversationImages
+                bottomOffset={false}
                 size={"large"}
                 images={[
                   {
@@ -2744,6 +2762,7 @@ export const navGuides: INavGuide[] = [
                 and the ones of the accounts you are subscribed to.
               </p>
               <ConversationImages
+                bottomOffset={false}
                 size={"large"}
                 images={[
                   {
@@ -2770,6 +2789,7 @@ export const navGuides: INavGuide[] = [
                 Trending assets in the Feed section.
               </p>
               <ConversationImages
+                bottomOffset={false}
                 size={"large"}
                 images={[
                   {
@@ -2829,6 +2849,7 @@ export const navGuides: INavGuide[] = [
                 <li>
                   Press Enter or <b>“Send”</b> button.
                   <ConversationImages
+                    bottomOffset={false}
                     size={"large"}
                     images={[
                       {
@@ -2859,6 +2880,7 @@ export const navGuides: INavGuide[] = [
                 pin your post, delete it or share it on the same menu.
               </p>
               <ConversationImages
+                bottomOffset={false}
                 size={"large"}
                 images={[
                   {
@@ -2885,6 +2907,7 @@ export const navGuides: INavGuide[] = [
                 clicking “Undo” right away.
               </p>
               <ConversationImages
+                bottomOffset={false}
                 size={"large"}
                 images={[
                   {
