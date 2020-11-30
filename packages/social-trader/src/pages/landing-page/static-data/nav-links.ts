@@ -32,7 +32,6 @@ export const AML_MANUAL_ROUTE = "/aml-manual";
 export const WHITE_PAPER_ROUTE = "/white-paper-eng.pdf";
 export const PRIVACY_POLICY_ROUTE = "/privacy-policy";
 export const TERMS_ROUTE = "/terms";
-export const DOWNLOADS_ROUTE = "/downloads";
 
 export const navHeader: TNavHeader[] = [
   {
