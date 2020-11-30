@@ -47,7 +47,9 @@ const _AssetsEditPage: React.FC<Props> = ({
       const logo =
         values.logo?.image?.cropped !== undefined
           ? values.logo
-          : { src: description.publicInfo.logo };
+          : values.logo?.src
+          ? { src: description.publicInfo.logo }
+          : {};
       const currentValues = {
         hourProcessing:
           description?.programDetails?.dailyPeriodDetails?.hourProcessing,
