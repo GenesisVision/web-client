@@ -86,53 +86,13 @@ export const faqGeneral: TAccordion[] = [
     )
   },
   {
-    id: "general-5",
-    title: "What is Genesis Markets?",
-    content: (
-      <p>
-        Genesis Markets is our own broker that provides direct access to crypto
-        exchanges, Forex and CFD through the popular MetaTrader 5 terminal.
-      </p>
-    )
-  },
-  {
-    id: "general-6",
-    title: "What is MetaTrader 5? Where can I get it?",
-    content: (
-      <p>
-        MetaTrader 5 is the most popular trading terminal.
-        <br />
-        You can download it here:{" "}
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://genesis.vision/downloads"
-        >
-          https://genesis.vision/downloads
-        </a>
-        <br />
-        Or you can use a web version (you need to disable your ad blocker for
-        trading){" "}
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://genesis.vision/trade/mt5"
-        >
-          https://genesis.vision/trade/mt5
-        </a>
-      </p>
-    )
-  },
-  {
     id: "general-7",
-    title: "Is MetaTrader 5 the only option for trading?",
+    title: "Which trading terminal can I use for trading?",
     content: (
       <>
-        <p>
-          No, apart from MetaTrader you can use the trading platforms of our
-          partners, such as:
-        </p>
+        <p>For trading you can use:</p>
         <ul>
+          <li>GV Trading terminal</li>
           <li>MetaTrader 4</li>
           <li>Exante Trading Terminal</li>
           <li>Binance</li>
@@ -1064,30 +1024,20 @@ export const faqFollow: TAccordion[] = [
     title: "What types of subscription are available?",
     content: (
       <>
-        <p>
-          There are three types of subscription available: by balance,
-          percentage and fixed.
-        </p>
+        <p>There are three available subscription types:</p>
         <p>
           <b>By balance.</b> When choosing this subscription, the volume of the
-          position opened is proportional to the trading account balance of the
-          leader and the follower. For example, Provider balance = 100 USD, he
-          opens a trade with a volume of 10 USD. Subscriber balance = 20 USD,
-          this means it will open the position for the same asset but with a
-          volume of 5 times lower which is 2 USD.
-          <br />
-          It is a little different if you follow Binance traders. When choosing
-          by balance subscription, the volume of the position opened is
-          proportional to the coin balance of the leader and the follower.
+          position opened is proportional to the coin balance of the leader and
+          the follower.
           <br />
           For example, Provider has 100 USDT and 20 GVT on the External account
           (in this example 1 GVT = 2 USDT).
           <br />
-          Provider balance = 140 USDT (100 + 20 * 2)
+          Provider balance = 140 USDT (100 + 20 * 2).
           <br />
           The subscriber has 30 USDT and 20 GVT.
           <br />
-          Subscriber balance = 70 USDT (30 + 20 * 2)
+          Subscriber balance = 70 USDT (30 + 20 * 2).
           <br />
           Provider opens a trade to buy ADAUSDT, volume = 100.
           <br />
@@ -1098,8 +1048,8 @@ export const faqFollow: TAccordion[] = [
           <b>Percentage.</b> When you choose this subscription, you set the
           volume percentage of the Provider’s opened position that the
           subscription will copy. Meaning if the Provider has opened a trade for
-          100 USD while the percentage the Subscriber has set is 30%, it will
-          open the trade on the Subscriber trade account for 30 USD.
+          100 GVTBTC while the percentage the Subscriber has set is 30%, it will
+          open the trade on the Subscriber trade account for 30 GVTBTC.
         </p>
         <p>
           <b>Fixed.</b> By choosing this subscription type, the positions will
@@ -1137,19 +1087,8 @@ export const faqFollow: TAccordion[] = [
       <>
         <p>
           You can cancel your subscription on the trader’s page or in your
-          dashboard.
-          <br />
-          There are three ways to cancel your subscription to Genesis Markets
-          trader: close only, close all immediately, and manual closing. For
-          Binance trader the only available way is manual closing.
-        </p>
-        <p>
-          <b>Close only.</b> The new trades will stop opening, and the remaining
-          opened trades are closed when the Provider closes their trades.
-        </p>
-        <p>
-          <b>Close all immediately.</b> The signal provider subscription gets
-          cancelled, and all the opened trades are closed immediately.
+          dashboard. For Binance Follow accounts the only available way is
+          manual closing.
         </p>
         <p>
           <b>Manual closing.</b> You unsubscribe from the signal provider, but
@@ -1206,7 +1145,7 @@ export const faqGVT: TAccordion[] = [
             reduction from the platform success fee;
           </li>
           <li>
-            Genesis Vision clients can reach up to 55% Genesis Markets trading
+            Genesis Vision clients can reach up to 25% Genesis Markets trading
             fee reduction by holding up to 500 GVT.
           </li>
         </ul>
@@ -1219,57 +1158,30 @@ export const faqGVT: TAccordion[] = [
           </thead>
           <tbody>
             <tr>
-              <td>From 1 GVT up to 10</td>
-              <td>30%</td>
-            </tr>
-            <tr>
-              <td>Up to 25 GVT</td>
-              <td>35%</td>
+              <td>From 1 GVT up to 25</td>
+              <td>5%</td>
             </tr>
             <tr>
               <td>Up to 50 GVT</td>
-              <td>40%</td>
+              <td>10%</td>
             </tr>
             <tr>
               <td>Up to 100 GVT</td>
-              <td>45%</td>
+              <td>15%</td>
             </tr>
             <tr>
               <td>Up to 500 GVT</td>
-              <td>50%</td>
+              <td>20%</td>
             </tr>
             <tr>
               <td>500 GVT+</td>
-              <td>55%</td>
+              <td>25%</td>
             </tr>
           </tbody>
         </InternalTableWrapper>
         <p>To be eligible for a trading discount</p>
         <ul>
           <li>There must be more than 1 GVT stored in the wallet</li>
-          <li>
-            The "Using GVT to pay for fees" function must be enabled. The fee
-            will be charged at a discount depending on the amount of GVT stored
-            in the wallet.
-          </li>
-          <li>
-            The discounted fee will be charged from the GVT wallet, not from the
-            trading account.
-          </li>
-        </ul>
-        <p>
-          <b>Note</b>
-        </p>
-        <ul>
-          <li>
-            If you switch this function off, the fee will become "Regular" and
-            charge 100%.
-          </li>
-          <li>
-            If you have enabled the "Using GVT to pay for fees" function but
-            have an insufficient amount of GVT stored in the wallet, this
-            function will no longer work and the fee will become Regular.
-          </li>
         </ul>
         <p>
           There are also other purposes for storing GVT on a Genesis Vision

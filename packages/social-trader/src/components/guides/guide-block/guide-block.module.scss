@@ -33,17 +33,14 @@
   &__content {
     @include adaptive-padding(bottom, $padding-medium);
     @include font-size($font-size-paragraph);
-    line-height: 1.7;
+    line-height: 2;
 
     img {
       @include adaptive-padding(top, $padding-xsmall);
+      @include adaptive-padding(bottom, $padding-small);
       margin-left: auto;
       margin-right: auto;
       min-height: 50px;
-
-      ~ img {
-        margin-top: 0;
-      }
     }
 
     h3 {
@@ -68,6 +65,7 @@
       @include adaptive-margin(top, $padding-xsmall);
       width: 100%;
       border-collapse: collapse;
+
       &:not(:last-child) {
         @include adaptive-margin(bottom, $padding-small);
       }
