@@ -22,7 +22,7 @@ export const editAsset = ({
   editAssetData: IAssetEditFormValues;
 }): Promise<Response> => {
   let promise = Promise.resolve("");
-  if (editAssetData.logo.image?.cropped)
+  if (editAssetData.logo?.image?.cropped)
     promise = filesService.uploadFile(editAssetData.logo.image.cropped);
   return promise.then(response => {
     const body = {

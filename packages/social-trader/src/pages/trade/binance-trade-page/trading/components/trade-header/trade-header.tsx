@@ -2,7 +2,6 @@ import { Center } from "components/center/center";
 import AuthWidgets from "components/header/auth-widgets";
 import { useHeaderInfo, useMenuItems } from "components/header/header.service";
 import UnauthLinks from "components/header/unauth-links";
-import { GvRootItem } from "components/navigation/gv-root-item";
 import NavigationMobileButton from "components/navigation/navigation-mobile/navigation-mobile-button";
 import { ResponsiveContainer } from "components/responsive-container/responsive-container";
 import { ProfileHeaderViewModel } from "gv-api-web";
@@ -31,14 +30,12 @@ const _TradeHeader: React.FC<Props> = ({ profileHeader }) => {
   return (
     <Center className={styles["trade-header"]}>
       <NavigationMobileButton
+        hideOnDesktop={false}
         mobileMenuItems={showedMobileMenuItems}
         backPath={backPath}
         profileHeader={profileHeader}
         isAuthenticated={isAuthenticated}
       />
-      <div className={styles["trade-header__root-menu-item"]}>
-        <GvRootItem />
-      </div>
       <ResponsiveContainer enabledScreens={["desktop", "large-desktop"]}>
         <SymbolSummarySmallContainer />
       </ResponsiveContainer>

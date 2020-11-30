@@ -66,6 +66,7 @@ export const transformOutboundAccountInfo = (m: any): OutboundAccountInfo => ({
 });
 
 export const transformExecutionReport = (m: any): UnitedOrder => ({
+  commissionAsset: m.N,
   commission: m.n,
   quoteQuantityFilled: m.Z,
   quantityFilled: m.z,

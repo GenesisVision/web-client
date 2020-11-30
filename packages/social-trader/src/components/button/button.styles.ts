@@ -173,6 +173,7 @@ export const ButtonDynamicStyles = css`
         return `${$paddingXxsmall}px ${$paddingSmall}px`;
       case "large":
       case "middle":
+      case "small":
         return "10px 32px";
       case "xsmall":
         return `0 ${$paddingXxsmall}`;

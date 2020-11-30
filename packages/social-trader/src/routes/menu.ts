@@ -5,12 +5,12 @@ import { FollowIcon } from "components/icon/follow-icon";
 import { FundsIcon } from "components/icon/funds-icon";
 import { HistoryIcon } from "components/icon/history-icon";
 import { InvestIcon } from "components/icon/invest-icon";
-import { Mt5Icon } from "components/icon/mt5-icon";
 import { MyProfileIcon } from "components/icon/my-profile-icon";
 import { NewsIcon } from "components/icon/news-icon";
 import { ProgramsIcon } from "components/icon/programs-icon";
 import { SettingsIcon } from "components/icon/settings-icon";
 import { SocialIcon } from "components/icon/social-icon";
+import { TerminalIcon } from "components/icon/terminal-icon";
 import { TradeArrowsIcon } from "components/icon/trade-arrows-icon";
 import { TradeIcon } from "components/icon/trade-icon";
 import { UsersIcon } from "components/icon/users-icon";
@@ -160,8 +160,7 @@ const mainMenuItemsUnion = [
     route: TRADE_ROUTE,
     children: [
       {
-        isBeta: true,
-        Icon: Mt5Icon,
+        Icon: TerminalIcon,
         route: TERMINAL_ROUTE,
         label: "navigation.terminal"
       }

@@ -1,4 +1,3 @@
-import withBetaTesting from "decorators/with-beta-testing";
 import withReduxStore from "decorators/with-redux-store";
 import withToken from "decorators/with-token";
 import withTradeLayout from "decorators/with-trade-layout";
@@ -15,7 +14,6 @@ import {
 import { TerminalPage } from "pages/trade/terminal.page";
 import React from "react";
 import { compose } from "redux";
-import { api } from "services/api-client/swagger-custom-client";
 import { initializeStore } from "store";
 import { getParamsFromCtxWithSplit } from "utils/ssr-helpers";
 import { NextPageWithRedux } from "utils/types";
@@ -72,6 +70,5 @@ Page.getInitialProps = async ctx => {
 export default compose(
   withReduxStore(initializeStore),
   withToken,
-  withTradeLayout,
-  withBetaTesting("TradingTerminal")
+  withTradeLayout
 )(Page);

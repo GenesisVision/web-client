@@ -1,4 +1,3 @@
-import Regulator from "components/regulator/regulator";
 import { OrderBook } from "pages/trade/binance-trade-page/trading/order-book/order-book";
 import {
   collapseItems,
@@ -72,7 +71,7 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
     depthStream.subscribe(data => {
       setDepthSocketData(data);
     });
-    timer(2000)
+    timer(3000)
       .pipe(
         switchMap(() => {
           console.log("get snapshot");
@@ -180,36 +179,14 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
   }, [list, asksDivider, bidsDivider]);
 
   return (
-    <>
-      <Regulator
-        size={"small"}
-        remainder={10000}
-        minValue={1}
-        value={asksDivider}
-        handleDown={() => setAsksDivider(asksDivider - 1)}
-        handleUp={() => setAsksDivider(asksDivider + 1)}
-      >
-        <>{asksDivider}</>
-      </Regulator>
-      <Regulator
-        size={"small"}
-        remainder={10000}
-        minValue={1}
-        value={bidsDivider}
-        handleDown={() => setBidsDivider(bidsDivider - 1)}
-        handleUp={() => setBidsDivider(bidsDivider + 1)}
-      >
-        <>{bidsDivider}</>
-      </Regulator>
-      <OrderBook
-        listAmount={listAmount}
-        tickValue={tickValue}
-        setTickValue={setTickValue}
-        tablesBlockRef={ref}
-        asks={asks}
-        bids={bids}
-      />
-    </>
+    <OrderBook
+      listAmount={listAmount}
+      tickValue={tickValue}
+      setTickValue={setTickValue}
+      tablesBlockRef={ref}
+      asks={asks}
+      bids={bids}
+    />
   );
 };
 

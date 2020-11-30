@@ -5,7 +5,16 @@ import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Sizeable } from "utils/types";
 
+interface Props extends Sizeable {
+  onChange?: VoidFunction;
+  disabled?: boolean;
+  id: string;
+  value: boolean;
+  wide?: boolean;
+}
+
 const _FollowUserButton: React.FC<Props> = ({
+  wide = true,
   onChange,
   size = "xlarge",
   id,
@@ -27,7 +36,7 @@ const _FollowUserButton: React.FC<Props> = ({
     <Button
       variant={innerValue ? "outlined" : "contained"}
       color={innerValue ? "secondary" : "primary"}
-      wide
+      wide={wide}
       size={size}
       onClick={handleClick}
       disabled={isPending || disabled}
@@ -36,12 +45,5 @@ const _FollowUserButton: React.FC<Props> = ({
     </Button>
   );
 };
-
-interface Props extends Sizeable {
-  onChange?: VoidFunction;
-  disabled?: boolean;
-  id: string;
-  value: boolean;
-}
 
 export const FollowUserButton = React.memo(_FollowUserButton);

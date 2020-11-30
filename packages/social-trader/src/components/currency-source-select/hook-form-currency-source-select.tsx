@@ -3,6 +3,7 @@ import {
   getCurrencySourceSelectItems
 } from "components/currency-source-select/currency-source-select-items";
 import { GVHookFormField } from "components/gv-hook-form-field";
+import GVTextField from "components/gv-text-field";
 import {
   IUpdatableGvTextFieldProps,
   UpdatableGvTextField
@@ -33,7 +34,7 @@ const _CurrencySourceSelect: React.FC<Props> = ({
       wide
       disabled={disabled}
       name={name}
-      component={UpdatableGvTextField}
+      component={GVTextField}
       label={label}
       InputComponent={Select}
       onChange={onChange}

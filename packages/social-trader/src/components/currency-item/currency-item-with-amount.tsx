@@ -10,7 +10,7 @@ import styled from "styled-components";
 
 interface Props extends ICurrencyItemProps {
   showName?: boolean;
-  available?: number;
+  available?: number | string;
 }
 
 const Name = styled(RowItem)`

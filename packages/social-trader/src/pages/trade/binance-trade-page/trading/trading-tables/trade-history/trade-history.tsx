@@ -25,6 +25,7 @@ export const TradeHistory: React.FC<Props> = ({ items }) => {
         </th>
       )}
       renderRow={({
+        commissionAsset,
         commission,
         quantity,
         time,
@@ -33,6 +34,7 @@ export const TradeHistory: React.FC<Props> = ({ items }) => {
         price
       }: UnitedOrder) => (
         <TradeHistoryRow
+          commissionAsset={commissionAsset}
           commission={commission}
           quantity={quantity}
           time={time}

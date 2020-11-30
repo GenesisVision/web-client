@@ -26,6 +26,7 @@ const _OrderBookCurrentPrice: React.FC<Props> = ({
     <Center className={styles["order-book__current-price"]}>
       <RowItem size={"large"}>
         <TradeStatefulValue
+          showArrow
           value={terminalMoneyFormat({ amount: price, tickSize })}
           trigger={tradeId}
         />

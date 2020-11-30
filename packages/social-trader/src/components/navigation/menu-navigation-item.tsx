@@ -10,6 +10,7 @@ import { $paddingMedium } from "utils/style/sizes";
 import NavigationItem from "./navigation-item";
 
 interface Props {
+  mobile?: boolean;
   popover?: boolean;
   item: TMenuItem;
 }
@@ -19,6 +20,7 @@ const SecondLevel = styled.div`
 `;
 
 export const MenuNavigationItem: React.FC<Props> = ({
+  mobile,
   item: { Icon, route = "", label, children },
   popover
 }) => {
@@ -29,6 +31,7 @@ export const MenuNavigationItem: React.FC<Props> = ({
     return (
       <RowTag>
         <NavigationItem
+          mobile={mobile}
           small={!!popover}
           icon={<Icon primary />}
           href={linkCreator(route)}
@@ -47,7 +50,11 @@ export const MenuNavigationItem: React.FC<Props> = ({
         havePopover={havePopover}
         secondLevel={children && children.map(renderNavigationItem)}
       >
-        <NavigationItem icon={<Icon primary />} href={linkCreator(route)}>
+        <NavigationItem
+          mobile={mobile}
+          icon={<Icon primary />}
+          href={linkCreator(route)}
+        >
           {label && t(label)}
         </NavigationItem>
       </MenuNavigationTooltipItem>

@@ -13,8 +13,7 @@ import { ResponseError } from "utils/types";
 
 export type API_REQUEST_STATUS = API_REQUEST_STATUS_TYPE;
 
-const getErrorMessageCallback = ({ errorMessage }: ResponseError) =>
-  errorMessage;
+const getErrorMessageCallback = (error: ResponseError) => error?.errorMessage;
 
 const useApiRequest = <T extends any>(
   props: TUseApiRequestProps<T>

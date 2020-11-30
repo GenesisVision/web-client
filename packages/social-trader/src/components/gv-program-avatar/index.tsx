@@ -29,7 +29,8 @@ interface IContainerProps {
 }
 
 const getLevelColor = (level?: string | number) => {
-  switch (level) {
+  const stringLevel = String(level);
+  switch (stringLevel) {
     case "1":
       return $levelColor1;
     case "2":
@@ -82,6 +83,7 @@ const _GVProgramAvatar: React.FC<GVProgramAvatarProps> = ({
   onClickLevel
 }) => {
   const haveLevel = level !== undefined && level !== 0;
+  console.log(getLevelColor(level), level);
   return (
     <Container level={level} size={size}>
       <Avatar size={size}>
