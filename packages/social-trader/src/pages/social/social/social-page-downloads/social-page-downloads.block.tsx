@@ -8,19 +8,32 @@ import { AndroidIcon } from "pages/landing-page/components/app-icons/android-ico
 import { AppleIcon } from "pages/landing-page/components/app-icons/apple-icon";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import styled from "styled-components";
+import { $separatorColor } from "utils/style/colors";
 
-import styles from "./social-page-downloads.module.scss";
+const Item = styled(DefaultBlock)`
+  background: rgba(255, 255, 255, 0.04);
+`;
 
-interface Props {}
+const IconContainer = styled(Center)`
+  width: 30px;
+  height: 30px;
+  svg {
+    height: 100%;
+    width: 100%;
+    fill: white;
+    stroke: ${$separatorColor};
+  }
+`;
 
-const _SocialPageDownloadsBlock: React.FC<Props> = () => {
+const _SocialPageDownloadsBlock: React.FC = () => {
   const [t] = useTranslation();
   return (
     <DefaultBlock wide solid>
       <Row>
-        <h3 className={styles["social-page-downloads__title"]}>
-          {t("Genesis Vision App")}
-        </h3>
+        <Text wrap={false}>
+          <h3>{t("Genesis Vision App")}</h3>
+        </Text>
       </Row>
       <Row size={"large"} onlyOffset>
         <Row wide size={"small"}>
@@ -32,12 +45,12 @@ const _SocialPageDownloadsBlock: React.FC<Props> = () => {
                 "https://itunes.apple.com/app/genesis-vision-investor/id1369865290"
             }}
           >
-            <DefaultBlock className={styles["social-page-downloads__item"]}>
+            <Item>
               <Center>
                 <RowItem>
-                  <Center className={styles["social-page-downloads__icon"]}>
+                  <IconContainer>
                     <AppleIcon />
-                  </Center>
+                  </IconContainer>
                 </RowItem>
                 <RowItem size={"small"}>
                   <Row size={"small"}>
@@ -46,7 +59,7 @@ const _SocialPageDownloadsBlock: React.FC<Props> = () => {
                   <Row size={"small"}>App Store</Row>
                 </RowItem>
               </Center>
-            </DefaultBlock>
+            </Item>
           </Link>
         </Row>
         <Row wide size={"small"}>
@@ -58,12 +71,12 @@ const _SocialPageDownloadsBlock: React.FC<Props> = () => {
                 "https://play.google.com/store/apps/details?id=vision.genesis.clientapp.investor"
             }}
           >
-            <DefaultBlock className={styles["social-page-downloads__item"]}>
+            <Item>
               <Center>
                 <RowItem>
-                  <Center className={styles["social-page-downloads__icon"]}>
+                  <IconContainer>
                     <AndroidIcon />
-                  </Center>
+                  </IconContainer>
                 </RowItem>
                 <RowItem size={"small"}>
                   <Row size={"small"}>
@@ -72,7 +85,7 @@ const _SocialPageDownloadsBlock: React.FC<Props> = () => {
                   <Row size={"small"}>Google Play</Row>
                 </RowItem>
               </Center>
-            </DefaultBlock>
+            </Item>
           </Link>
         </Row>
       </Row>

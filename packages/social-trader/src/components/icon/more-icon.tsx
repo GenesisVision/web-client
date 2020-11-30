@@ -2,7 +2,7 @@ import { Icon, IIconProps } from "components/icon/icon";
 import * as React from "react";
 
 export const MoreIcon: React.FC<IIconProps> = props => (
-  <Icon type={"more"} {...props}>
+  <Icon {...props}>
     <svg
       width="18"
       height="8"

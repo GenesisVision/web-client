@@ -1,11 +1,8 @@
 import { SignalSubscription, SubscriptionMode } from "gv-api-web";
 import { TFunction } from "i18next";
-import {
-  FollowParamsFormValues,
-  IFollowParamsProps
-} from "modules/follow-module/follow-popup/follow-popup-params";
+import { FollowParamsFormValues } from "modules/follow-module/follow-popup/follow-popup-params";
 import { CurrencyEnum } from "utils/types";
-import { lazy, number, object } from "yup";
+import { lazy, number, object, Schema } from "yup";
 
 export enum FOLLOW_PARAMS_FIELDS {
   fixedCurrency = "fixedCurrency",
@@ -96,7 +93,7 @@ export const followParamsValidationSchema = (t: TFunction) =>
         .required(t("validations.tolerance-required"))
         .min(0.01, t("validations.tolerance-percent-min"))
         .max(20, t("validations.tolerance-percent-max"))
-    });
+    }) as Schema<FollowParamsFormValues>;
   });
 
 export const getInfoText = (currency: CurrencyEnum): string => {

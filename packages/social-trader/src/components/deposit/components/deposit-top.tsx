@@ -8,6 +8,15 @@ import { useTranslation } from "react-i18next";
 import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 
+export interface DepositTopOwnProps {
+  ownAsset?: boolean;
+  currency?: CurrencyEnum;
+  title?: string;
+  availableToInvest?: number;
+  asset: ASSET;
+  header?: string;
+}
+
 const _DepositTop: React.FC<DepositTopOwnProps> = ({
   ownAsset,
   header,
@@ -35,15 +44,6 @@ const _DepositTop: React.FC<DepositTopOwnProps> = ({
     </DialogTop>
   );
 };
-
-export interface DepositTopOwnProps {
-  ownAsset?: boolean;
-  currency?: CurrencyEnum;
-  title?: string;
-  availableToInvest?: number;
-  asset: ASSET;
-  header?: string;
-}
 
 const DepositTop = React.memo(_DepositTop);
 export default DepositTop;

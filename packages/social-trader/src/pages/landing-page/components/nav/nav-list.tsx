@@ -1,25 +1,29 @@
-import clsx from "clsx";
 import NavItem from "pages/landing-page/components/nav/nav-item";
+import {
+  NavListContainer,
+  NavListStyledUl
+} from "pages/landing-page/components/nav/nav.styles";
 import { TNavHeader } from "pages/landing-page/static-data/nav-links";
 import React from "react";
 
-import styles from "./nav-list.module.scss";
+export interface Props {
+  menuItems: TNavHeader[];
+  subNavOpen?: boolean;
+  isMobile?: boolean;
+  onClick?: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
+}
 
 const _NavList: React.FC<Props> = ({
   menuItems,
-  className,
   onClick,
   subNavOpen,
   isMobile
 }) => (
-  <nav className={className}>
-    <ul
-      className={clsx(styles["nav-list"], {
-        [styles["nav-list--is-mobile"]]: isMobile
-      })}
-    >
+  <NavListContainer isMobile={isMobile}>
+    <NavListStyledUl>
       {menuItems.map((item, index) => (
         <NavItem
+          isMobile={isMobile}
           key={index}
           name={item.name}
           href={item.href}
@@ -30,17 +34,9 @@ const _NavList: React.FC<Props> = ({
           subNavOpen={subNavOpen}
         />
       ))}
-    </ul>
-  </nav>
+    </NavListStyledUl>
+  </NavListContainer>
 );
-
-export interface Props {
-  menuItems: TNavHeader[];
-  className?: string;
-  subNavOpen?: boolean;
-  isMobile?: boolean;
-  onClick?(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void;
-}
 
 const NavList = React.memo(_NavList);
 export default NavList;

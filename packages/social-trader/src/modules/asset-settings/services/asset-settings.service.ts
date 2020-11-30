@@ -22,7 +22,7 @@ export const editAsset = ({
   editAssetData: IAssetEditFormValues;
 }): Promise<Response> => {
   let promise = Promise.resolve("");
-  if (editAssetData.logo.image?.cropped)
+  if (editAssetData.logo?.image?.cropped)
     promise = filesService.uploadFile(editAssetData.logo.image.cropped);
   return promise.then(response => {
     const body = {
@@ -45,6 +45,10 @@ export const closeFund: TCloseAsset = ({ id, twoFactorCode }) => {
   return api.assets().closeFund(id, {
     body: { twoFactorCode: twoFactorCode! }
   });
+};
+
+export const closeTradingExchangeAccount: TCloseAsset = ({ id }) => {
+  return api.assets().closeExchangeAccount(id);
 };
 
 export const closeTradingAccount: TCloseAsset = ({ id }) => {

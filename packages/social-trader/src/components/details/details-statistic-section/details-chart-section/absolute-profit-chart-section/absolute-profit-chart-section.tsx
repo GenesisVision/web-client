@@ -14,6 +14,15 @@ import AbsoluteProfitChartElements, {
   TRenderAbsoluteProfitChart
 } from "./absolute-profit-chart-elements";
 
+export interface IAbsoluteProfitChartSectionProps {
+  loaderData?: ProfitChartDataType;
+  useChartStateValues: TUseChartStateValues;
+  useChartPeriod: TUseChartPeriod;
+  renderAbsoluteProfitChart: TRenderAbsoluteProfitChart;
+  absoluteProfitChartSelector: TAbsoluteProfitChartSelector;
+  renderProfitValue: TRenderProfitValue;
+}
+
 const _AbsoluteProfitChartSection: React.FC<IAbsoluteProfitChartSectionProps> = ({
   loaderData,
   renderAbsoluteProfitChart,
@@ -52,15 +61,6 @@ const _AbsoluteProfitChartSection: React.FC<IAbsoluteProfitChartSectionProps> = 
     />
   );
 };
-
-export interface IAbsoluteProfitChartSectionProps {
-  loaderData?: ProfitChartDataType;
-  useChartStateValues: TUseChartStateValues;
-  useChartPeriod: TUseChartPeriod;
-  renderAbsoluteProfitChart: TRenderAbsoluteProfitChart;
-  absoluteProfitChartSelector: TAbsoluteProfitChartSelector;
-  renderProfitValue: TRenderProfitValue;
-}
 
 const AbsoluteProfitChartSection = React.memo(_AbsoluteProfitChartSection);
 export default AbsoluteProfitChartSection;

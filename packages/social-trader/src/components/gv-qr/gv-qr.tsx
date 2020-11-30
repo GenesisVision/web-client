@@ -1,36 +1,35 @@
-import clsx from "clsx";
-import GVColors from "components/gv-styles/gv-colors";
 import QRCode from "qrcode.react";
 import * as React from "react";
-
-import styles from "./gv-qr.module.scss";
+import styled from "styled-components";
+import { $backgroundColor } from "utils/style/colors";
 
 interface IGVqr {
   value: number | string;
   size?: number;
   figureColor?: string;
   backgroundColor?: string;
-  className?: string;
 }
 
 const PADDING_SIZE = 2;
 
+const Container = styled.div<{
+  size?: number;
+  backgroundColor?: string;
+}>`
+  display: inline-flex;
+  padding: ${PADDING_SIZE}px;
+  background: ${({ backgroundColor = "white" }) => backgroundColor};
+  width: ${({ size = 180 }) => size + PADDING_SIZE * 2}px;
+  height: ${({ size = 180 }) => size + PADDING_SIZE * 2}px;
+`;
+
 const GVqr: React.FC<IGVqr> = ({
   value,
   size = 180,
-  figureColor = GVColors.$backgroundColor,
-  backgroundColor = "white",
-  className
+  figureColor = $backgroundColor,
+  backgroundColor = "white"
 }) => (
-  <div
-    className={clsx(styles["gv-qr"], className)}
-    style={{
-      padding: `${PADDING_SIZE}px`,
-      background: backgroundColor,
-      width: `${size + PADDING_SIZE * 2}px`,
-      height: `${size + PADDING_SIZE * 2}px`
-    }}
-  >
+  <Container size={size} backgroundColor={backgroundColor}>
     {value ? (
       <QRCode
         value={value.toString()}
@@ -39,7 +38,7 @@ const GVqr: React.FC<IGVqr> = ({
         size={size}
       />
     ) : null}
-  </div>
+  </Container>
 );
 
 export default GVqr;

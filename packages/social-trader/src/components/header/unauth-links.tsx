@@ -1,19 +1,30 @@
+import { Button } from "components/button/button";
 import { Center } from "components/center/center";
-import GVButton from "components/gv-button";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import { RowItem } from "components/row-item/row-item";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { LOGIN_ROUTE, SIGNUP_ROUTE } from "routes/app.routes";
+import styled from "styled-components";
+import { hideOnLandscapeTablet } from "utils/style/mixins";
 
-import styles from "./header.module.scss";
+interface Props {
+  className?: string;
+  backPath: string;
+}
 
-const UnauthLinks: React.FC<Props> = ({ backPath }) => {
+const StyledCenter = styled(Center)`
+  width: 100%;
+  justify-content: flex-end;
+  ${hideOnLandscapeTablet("flex")}
+`;
+
+const UnauthLinks: React.FC<Props> = ({ className, backPath }) => {
   const { linkCreator } = useToLink();
   const [t] = useTranslation();
   return (
-    <Center className={styles["header__buttons"]}>
+    <StyledCenter className={className}>
       <RowItem>
         <Link
           to={{
@@ -21,24 +32,20 @@ const UnauthLinks: React.FC<Props> = ({ backPath }) => {
             state: backPath
           }}
         >
-          <GVButton variant="outlined" color="secondary">
+          <Button variant="outlined" color="secondary">
             {t("buttons.login")}
-          </GVButton>
+          </Button>
         </Link>
       </RowItem>
       <RowItem>
         <Link to={linkCreator(SIGNUP_ROUTE)}>
-          <GVButton variant="contained" color="primary">
+          <Button variant="contained" color="primary">
             {t("buttons.signup")}
-          </GVButton>
+          </Button>
         </Link>
       </RowItem>
-    </Center>
+    </StyledCenter>
   );
 };
 
-interface Props {
-  backPath: string;
-}
-
-export default UnauthLinks;
+export default React.memo(UnauthLinks);

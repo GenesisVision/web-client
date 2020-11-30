@@ -7,30 +7,6 @@ $padding-info-left: $padding-upper-medium;
 $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
 
 .details-description {
-  &__section {
-    background: $background-color;
-  }
-
-  &__main {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-
-    @include media-breakpoint-tablet() {
-      flex-wrap: nowrap;
-      justify-content: flex-start;
-    }
-  }
-
-  &__avatar {
-    cursor: pointer;
-    margin: $padding-xsmall-mobile 0 $padding-xsmall;
-    @include width($avatar-big-size);
-    @include media-breakpoint-tablet() {
-      padding: 0;
-    }
-  }
-
   &__info {
     order: 99;
     width: 100%;
@@ -44,6 +20,10 @@ $padding-controls-left: $avatar-size + $padding-info-left - $padding-small;
 }
 
 .asset-details-description {
+  &__settings-item {
+    justify-content: flex-end;
+  }
+
   &__settings {
     padding: $padding-xsmall-mobile 0 $padding-xsmall;
 

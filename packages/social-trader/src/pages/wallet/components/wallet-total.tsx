@@ -1,27 +1,40 @@
 import Page from "components/page/page";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
-import {
-  withBlurLoader,
-  WithBlurLoaderProps
-} from "decorators/with-blur-loader";
+import { withBlurLoader } from "decorators/with-blur-loader";
 import { WalletSummary } from "gv-api-web";
 import WalletSettingsContainer from "pages/wallet/components/wallet-settings/wallet-settings-container";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import { compose } from "redux";
+import styled from "styled-components";
+import { mediaBreakpointLandscapePhone } from "utils/style/media";
+import {
+  $dividerPadding,
+  $paddingMedium,
+  $paddingXsmall
+} from "utils/style/sizes";
 
 import WalletBalanceElements from "./wallet-balance/wallet-balance-elements";
 import WalletTablesTotal from "./wallet-tables/wallet-tables-total";
-import styles from "./wallet-title-block.module.scss";
+
+interface Props {
+  data: WalletSummary;
+}
+
+const TitleBlock = styled.div`
+  padding: 0 ${$paddingXsmall / $dividerPadding}px;
+  ${mediaBreakpointLandscapePhone(`
+    padding: 0 0 ${$paddingMedium}px;
+  `)}
+`;
 
 const _WalletTotal: React.FC<Props> = ({ data: wallet }) => {
   const [t] = useTranslation();
   return (
     <Page title={t("wallet-page:title")}>
-      <div className={styles["wallet-title-block"]}>
+      <TitleBlock>
         <Row wrap>
-          <RowItem className={styles["wallet-title-block__title"]}>
+          <RowItem>
             <h1>{t("wallet-page:title")}</h1>
           </RowItem>
           <RowItem>
@@ -39,20 +52,11 @@ const _WalletTotal: React.FC<Props> = ({ data: wallet }) => {
           invested={wallet.grandTotal.invested}
           currency={wallet.grandTotal.currency}
         />
-      </div>
+      </TitleBlock>
       <WalletTablesTotal wallets={wallet.wallets} />
     </Page>
   );
 };
 
-interface Props {
-  data: WalletSummary;
-}
-
-const WalletTotal = compose<
-  React.ComponentType<Props & WithBlurLoaderProps<WalletSummary>>
->(
-  withBlurLoader,
-  React.memo
-)(_WalletTotal);
+const WalletTotal = withBlurLoader(React.memo(_WalletTotal));
 export default WalletTotal;

@@ -3,11 +3,13 @@ import { Row } from "components/row/row";
 import withLoader from "decorators/with-loader";
 import * as React from "react";
 import { useCallback } from "react";
+import styled from "styled-components";
+import { horizontalPaddings } from "utils/style/mixins";
+import { $paddingSmall } from "utils/style/sizes";
 
 import { IPaging } from "../helpers/paging.helpers";
 import Paging from "./paging/paging";
 import ItemsCounter from "./table-items-counter";
-import styles from "./table.module.scss";
 import { UpdatePagingFuncType } from "./table.types";
 
 export interface ITableFooterProps {
@@ -16,6 +18,14 @@ export interface ITableFooterProps {
   updatePaging?: UpdatePagingFuncType;
   asLinkPagination?: boolean;
 }
+
+const Container = styled(Row)`
+  ${horizontalPaddings($paddingSmall)}
+`;
+
+const PagingContainer = styled(RowItem)`
+  margin-left: auto;
+`;
 
 const _TableFooter: React.FC<ITableFooterProps> = ({
   isPending,
@@ -28,9 +38,9 @@ const _TableFooter: React.FC<ITableFooterProps> = ({
     [updatePaging]
   );
   return (
-    <Row className={styles["table__footer"]}>
+    <Container>
       <ItemsCounter {...paging} condition={!!paging.totalItems} />
-      <RowItem className={styles["table__paging"]}>
+      <PagingContainer>
         <Paging
           asLink={asLinkPagination}
           condition={paging.totalPages !== 0}
@@ -38,8 +48,8 @@ const _TableFooter: React.FC<ITableFooterProps> = ({
           hidden={isPending}
           updatePaging={handleUpdate}
         />
-      </RowItem>
-    </Row>
+      </PagingContainer>
+    </Container>
   );
 };
 

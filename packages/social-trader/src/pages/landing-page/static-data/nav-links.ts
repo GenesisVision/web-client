@@ -1,15 +1,11 @@
+import { GUIDES_TOTAL_PAGE_ROUTE } from "pages/guides/guides.paths";
 import {
   GV_FOLLOW_ROUTE,
   GV_FUNDS_ROUTE,
   GV_PROGRAMS_ROUTE,
   INVEST_ROUTE
 } from "routes/invest.routes";
-import {
-  MEDIA_ROUTE,
-  MY_PROFILE_ROUTE,
-  SOCIAL_ROUTE,
-  USERS_ROUTE
-} from "routes/social.routes";
+import { MEDIA_ROUTE, SOCIAL_ROUTE, USERS_ROUTE } from "routes/social.routes";
 import { TRADE_ROUTE } from "routes/trade.routes";
 
 export type TNavFooter = {
@@ -99,6 +95,11 @@ export const navHeader: TNavHeader[] = [
         href: FAQ_ROUTE
       },
       {
+        name: "landing-page:links.guides",
+        hideMobile: true,
+        href: GUIDES_TOTAL_PAGE_ROUTE
+      },
+      {
         name: "landing-page:links.feedback",
         hideMobile: true,
         href: "https://feedback.genesis.vision/"
@@ -119,6 +120,10 @@ export const navFooter: TNavHeader[] = [
   {
     name: "landing-page:links.faq",
     href: FAQ_ROUTE
+  },
+  {
+    name: "landing-page:links.guides",
+    href: GUIDES_TOTAL_PAGE_ROUTE
   },
   {
     name: "landing-page:links.blog",

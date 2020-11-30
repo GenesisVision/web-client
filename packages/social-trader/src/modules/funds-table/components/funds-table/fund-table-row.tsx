@@ -1,7 +1,5 @@
-import clsx from "clsx";
 import AssetAvatarWithName from "components/avatar/asset-avatar/asset-avatar-with-name";
 import FavoriteIcon from "components/favorite-asset/favorite-icon/favorite-icon";
-import { FUND_ASSET_TYPE } from "components/fund-asset/fund-asset";
 import FundAssetContainer from "components/fund-asset/fund-asset-container";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
@@ -10,6 +8,7 @@ import { PROFITABILITY_PREFIX } from "components/profitability/profitability.hel
 import ProgramSimpleChart from "components/program-simple-chart/program-simple-chart";
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
+import { Text } from "components/text/text";
 import { ASSET } from "constants/constants";
 import { FundDetailsListItem } from "gv-api-web";
 import { ToggleAssetFavoriteButton } from "modules/toggle-asset-favorite-button/toggle-asset-favorite-button";
@@ -19,11 +18,30 @@ import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import { FUND_DETAILS_FOLDER_ROUTE } from "routes/funds.routes";
+import styled from "styled-components";
 import { composeFundsDetailsUrl } from "utils/compose-url";
 import { distanceDate } from "utils/dates";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
+import { mediaBreakpointLandscapePhone } from "utils/style/media";
 
-import styles from "./funds-table.module.scss";
+interface Props {
+  fund: FundDetailsListItem;
+}
+
+const FavoriteIconContainer = styled.div`
+  width: 20px;
+  height: 19px;
+  ${mediaBreakpointLandscapePhone(`
+    width: 28px;
+    height: 27px;
+  `)}
+`;
+
+const ChartCell = styled(TableCell)`
+  min-width: 50px;
+  max-width: 100px;
+  ${mediaBreakpointLandscapePhone(`min-width: 100px;max-width: 200px;`)};
+`;
 
 const _FundsTableRow: React.FC<Props> = ({ fund }) => {
   const [fundState, setFundState] = useState(fund);
@@ -38,8 +56,8 @@ const _FundsTableRow: React.FC<Props> = ({ fund }) => {
   }, []);
   return (
     <TableRow>
-      <TableCell height={"small"} className={styles["funds-table__cell"]}>
-        <Link to={link}>
+      <TableCell height={"small"}>
+        <Link noColor to={link}>
           <AssetAvatarWithName
             url={fund.logoUrl}
             alt={fund.title}
@@ -48,44 +66,37 @@ const _FundsTableRow: React.FC<Props> = ({ fund }) => {
           />
         </Link>
       </TableCell>
-      <TableCell
-        className={clsx(
-          styles["funds-table__cell"],
-          styles["funds-table__cell--amount"]
-        )}
-      >
-        <NumberFormat
-          value={formatCurrencyValue(
-            fund.balance.amount,
-            fund.balance.currency
-          )}
-          suffix={` ${fund.balance.currency}`}
-          displayType="text"
-        />
+      <TableCell>
+        <Text wrap={false}>
+          <NumberFormat
+            value={formatCurrencyValue(
+              fund.balance.amount,
+              fund.balance.currency
+            )}
+            suffix={` ${fund.balance.currency}`}
+            displayType="text"
+          />
+        </Text>
       </TableCell>
-      <TableCell className={styles["funds-table__cell"]}>
+      <TableCell>
         <FundAssetContainer
           noWrap
           assets={fund.topFundAssets}
-          type={FUND_ASSET_TYPE.SHORT}
+          type={"short"}
           size={3}
           length={fund.totalAssetsCount}
         />
       </TableCell>
-      <TableCell className={styles["funds-table__cell"]}>
-        {fund.investorsCount}
-      </TableCell>
-      <TableCell className={styles["programs-table__cell"]}>
-        {distanceDate(fund.creationDate)}
-      </TableCell>
-      <TableCell className={styles["funds-table__cell"]}>
+      <TableCell>{fund.investorsCount}</TableCell>
+      <TableCell>{distanceDate(fund.creationDate)}</TableCell>
+      <TableCell>
         <NumberFormat
           value={formatValue(fund.statistic.drawdown, 2)}
           suffix="%"
           displayType="text"
         />
       </TableCell>
-      <TableCell className={styles["funds-table__cell"]}>
+      <TableCell>
         <Profitability
           value={formatValue(fund.statistic.profit, 2)}
           prefix={PROFITABILITY_PREFIX.SIGN}
@@ -98,35 +109,27 @@ const _FundsTableRow: React.FC<Props> = ({ fund }) => {
           />
         </Profitability>
       </TableCell>
-      <TableCell
-        height={"small"}
-        className={clsx(
-          styles["funds-table__cell"],
-          styles["funds-table__cell--chart"]
-        )}
-      >
+      <ChartCell height={"small"}>
         <ProgramSimpleChart data={fund?.statistic?.chart} />
-      </TableCell>
+      </ChartCell>
       {isAuthenticated && fund.personalDetails && (
-        <TableCell className={styles["funds-table__cell"]}>
-          <ToggleAssetFavoriteButton
-            asset={fundState}
-            updateRow={handleUpdateRow}
-            assetType={ASSET.FUND}
-            id={fund.id}
-            isFavorite={fundState.personalDetails.isFavorite}
-          >
-            <FavoriteIcon selected={fundState.personalDetails.isFavorite} />
-          </ToggleAssetFavoriteButton>
+        <TableCell>
+          <FavoriteIconContainer>
+            <ToggleAssetFavoriteButton
+              asset={fundState}
+              updateRow={handleUpdateRow}
+              assetType={ASSET.FUND}
+              id={fund.id}
+              isFavorite={fundState.personalDetails.isFavorite}
+            >
+              <FavoriteIcon selected={fundState.personalDetails.isFavorite} />
+            </ToggleAssetFavoriteButton>
+          </FavoriteIconContainer>
         </TableCell>
       )}
     </TableRow>
   );
 };
-
-interface Props {
-  fund: FundDetailsListItem;
-}
 
 const FundsTableRow = React.memo(_FundsTableRow);
 export default FundsTableRow;

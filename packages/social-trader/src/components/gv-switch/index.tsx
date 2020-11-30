@@ -1,109 +1,98 @@
-import clsx from "clsx";
-import { Center } from "components/center/center";
+import {
+  GVSwitchContainer,
+  GVSwitchError,
+  GVSwitchHandler,
+  GVSwitchInput,
+  GVSwitchInputWrapper,
+  GVSwitchLabel,
+  GVSwitchSwitchWrapper,
+  GVSwitchTrack
+} from "components/gv-switch/gv-switch.styles";
 import { RowItem } from "components/row-item/row-item";
 import { Text } from "components/text/text";
-import React from "react";
-
-import styles from "./style.module.scss";
-
-class GVSwitch extends React.PureComponent<GVSwitchProps> {
-  static propTypes: any;
-  static defaultProps: any;
-  checkbox: React.RefObject<HTMLInputElement>;
-
-  constructor(props: GVSwitchProps) {
-    super(props);
-    this.checkbox = React.createRef();
-  }
-
-  handleClick = (e: any) => {
-    if (this.checkbox.current !== null) {
-      e.stopPropagation();
-      this.checkbox.current.click();
-    }
-  };
-
-  handleInputClick = (e: any) => {
-    e.stopPropagation();
-  };
-
-  renderError = () => {
-    const { touched, error } = this.props;
-    if (!touched || !error) return null;
-
-    return (
-      <RowItem>
-        <span className={styles["gv-switch__error"]}>{error}</span>
-      </RowItem>
-    );
-  };
-
-  render() {
-    const {
-      name,
-      className,
-      color,
-      value,
-      label,
-      touched,
-      disabled,
-      ...other
-    } = this.props;
-    return (
-      <Center className={styles["gv-switch-wrapper"]}>
-        {label && (
-          <RowItem
-            size={"small"}
-            className={styles["gv-switch__label"]}
-            onClick={this.handleClick}
-          >
-            <Text muted size={"large"}>
-              {label}
-            </Text>
-          </RowItem>
-        )}
-        <RowItem>
-          <span
-            className={clsx(styles["gv-switch"], className, {
-              [styles["gv-switch--checked"]]: value,
-              [styles["gv-switch--primary"]]: color === "primary",
-              [styles["gv-switch--secondary"]]: color === "secondary",
-              [styles["gv-switch--disabled"]]: disabled
-            })}
-            onClick={this.handleClick}
-          >
-            <span className={styles["gv-switch__input-wrapper"]}>
-              <span className={styles["gv-switch__handler"]} />
-              <input
-                ref={this.checkbox}
-                type="checkbox"
-                name={name}
-                className={styles["gv-switch__input"]}
-                checked={value}
-                onClick={this.handleInputClick}
-                disabled={disabled}
-                {...other}
-              />
-            </span>
-            <span className={styles["gv-switch__track"]} />
-          </span>
-        </RowItem>
-        {this.renderError()}
-      </Center>
-    );
-  }
-}
-
-export default GVSwitch;
+import React, { useCallback, useRef } from "react";
 
 interface GVSwitchProps {
+  onChange?: any;
   name?: string;
   checked?: boolean;
   color?: string;
-  className?: string;
   touched: boolean;
   value: boolean;
   error?: string;
   label?: string | React.ReactNode;
   disabled?: boolean;
 }
+
+const _GVSwitch: React.FC<GVSwitchProps> = ({
+  touched,
+  error,
+  name,
+  color,
+  value,
+  label,
+  disabled,
+  ...other
+}) => {
+  const checkbox = useRef<HTMLInputElement>(null);
+
+  const handleClick = useCallback(
+    (e: any) => {
+      if (checkbox.current !== null) {
+        e.stopPropagation();
+        checkbox.current.click();
+      }
+    },
+    [checkbox.current]
+  );
+
+  const handleInputClick = useCallback((e: any) => {
+    e.stopPropagation();
+  }, []);
+
+  const renderError = useCallback(() => {
+    if (!touched || !error) return null;
+    return (
+      <RowItem>
+        <GVSwitchError>{error}</GVSwitchError>
+      </RowItem>
+    );
+  }, []);
+
+  return (
+    <GVSwitchContainer>
+      {label && (
+        <GVSwitchLabel size={"small"} onClick={handleClick}>
+          <Text muted size={"large"}>
+            {label}
+          </Text>
+        </GVSwitchLabel>
+      )}
+      <RowItem>
+        <GVSwitchSwitchWrapper
+          color={color}
+          disabled={disabled}
+          onClick={handleClick}
+        >
+          <GVSwitchInputWrapper checked={!!value}>
+            <GVSwitchHandler />
+            <GVSwitchInput
+              ref={checkbox}
+              type="checkbox"
+              name={name}
+              checked={value}
+              onClick={handleInputClick}
+              disabled={disabled}
+              {...other}
+            />
+          </GVSwitchInputWrapper>
+          <GVSwitchTrack checked={!!value} />
+        </GVSwitchSwitchWrapper>
+      </RowItem>
+      {renderError()}
+    </GVSwitchContainer>
+  );
+};
+
+const GVSwitch = React.memo(_GVSwitch);
+export default GVSwitch;

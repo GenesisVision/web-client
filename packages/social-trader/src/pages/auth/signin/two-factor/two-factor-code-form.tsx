@@ -1,5 +1,5 @@
+import { Button } from "components/button/button";
 import FormError from "components/form/form-error/form-error";
-import GVButton from "components/gv-button";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
@@ -99,14 +99,14 @@ const _TwoFactorCodeForm: React.FC<Props> = ({
         <Text muted>{t("auth:login.two-factor.recovery-info")}</Text>
       </Row>
       <Row size={"small"}>
-        <GVButton noPadding variant="text">
+        <Button noPadding variant="text">
           <Link
             onClick={handleRecoveryClick}
             to={linkCreator(LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE)}
           >
             {t("auth:login.two-factor.link-to-recovery")}
           </Link>
-        </GVButton>
+        </Button>
       </Row>
       {error && (
         <Row>

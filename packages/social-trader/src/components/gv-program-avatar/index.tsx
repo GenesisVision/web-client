@@ -1,12 +1,73 @@
-import clsx from "clsx";
 import ImageBase from "components/avatar/image-base";
-import GVColors from "components/gv-styles/gv-colors";
+import {
+  $avatarSmallShift,
+  $levelBorder,
+  GVProgramAvatarLevel,
+  GVProgramAvatarProps,
+  GVProgramAvatarStyles
+} from "components/gv-program-avatar/gv-program-avatar.styles";
 import PieContainer from "components/pie-container/pie-container";
 import React from "react";
+import styled from "styled-components";
+import {
+  $levelColor1,
+  $levelColor2,
+  $levelColor3,
+  $levelColor4,
+  $levelColor5,
+  $levelColor6,
+  $levelColor7
+} from "utils/style/colors";
+import { adaptiveBorderRadius, adaptivePadding } from "utils/style/mixins";
 import { SizesType } from "utils/types";
 
 import GVProgramDefaultAvatar from "./gv-propgram-default-avatar";
-import styles from "./style.module.scss";
+
+interface IContainerProps {
+  level?: number;
+  size?: SizesType | "full";
+}
+
+const getLevelColor = (level?: string | number) => {
+  const stringLevel = String(level);
+  switch (stringLevel) {
+    case "1":
+      return $levelColor1;
+    case "2":
+      return $levelColor2;
+    case "3":
+      return $levelColor3;
+    case "4":
+      return $levelColor4;
+    case "5":
+      return $levelColor5;
+    case "6":
+      return $levelColor6;
+    case "7":
+      return $levelColor7;
+    case undefined:
+    default:
+      return "";
+  }
+};
+
+const Container = styled.div<IContainerProps>`
+  ${({ level, size = "small" }: IContainerProps) =>
+    level !== undefined &&
+    level !== 0 &&
+    size === "small" &&
+    adaptivePadding("right", $avatarSmallShift - $levelBorder)}
+`;
+
+const StyledImageBase = styled(ImageBase)`
+  max-width: 100%;
+  max-height: 100%;
+  ${adaptiveBorderRadius(7)};
+`;
+
+const Avatar = styled.div<{ size?: SizesType | "full" }>`
+  ${GVProgramAvatarStyles}
+`;
 
 const _GVProgramAvatar: React.FC<GVProgramAvatarProps> = ({
   levelColor = "#1c2730",
@@ -15,77 +76,45 @@ const _GVProgramAvatar: React.FC<GVProgramAvatarProps> = ({
   level,
   levelProgress = 0,
   size = "small",
-  className,
   color,
-  imageClassName,
   onMouseOverLevel,
   onMouseEnterLevel,
   onMouseLeaveLevel,
   onClickLevel
 }) => {
   const haveLevel = level !== undefined && level !== 0;
+  console.log(getLevelColor(level), level);
   return (
-    <div
-      className={clsx(styles["program-avatar__container"], className, {
-        [styles["program-avatar__container--with-level"]]:
-          haveLevel && size === "small"
-      })}
-    >
-      <div
-        className={clsx(styles["program-avatar"], className, {
-          [styles["program-avatar--full"]]: size === "full",
-          [styles["program-avatar--xsmall"]]: size === "xsmall",
-          [styles["program-avatar--small"]]: size === "small",
-          [styles["program-avatar--medium"]]: size === "middle",
-          [styles["program-avatar--big"]]: size === "large"
-        })}
-      >
-        <ImageBase
+    <Container level={level} size={size}>
+      <Avatar size={size}>
+        <StyledImageBase
           quality={size === "large" ? "Medium" : "Low"}
           DefaultImageComponent={GVProgramDefaultAvatar}
           src={url}
           color={color}
-          className={clsx(styles["program-avatar__image"], imageClassName)}
           alt={alt}
         />
         {haveLevel && (
-          <div
+          <GVProgramAvatarLevel
+            size={size}
             style={{ background: levelColor }}
             onMouseOver={onMouseOverLevel}
             onMouseEnter={onMouseEnterLevel}
             onMouseLeave={onMouseLeaveLevel}
             onClick={onClickLevel}
-            className={styles["program-avatar__level"]}
           >
             <PieContainer
               small
-              color={(GVColors as any)[`$levelColor${level}`]}
+              color={getLevelColor(level)}
               label={String(level)}
               value={levelProgress}
             />
-          </div>
+          </GVProgramAvatarLevel>
         )}
-      </div>
-    </div>
+      </Avatar>
+    </Container>
   );
 };
-
-export interface GVProgramAvatarProps {
-  levelColor?: string;
-  url?: string;
-  alt: string;
-  level?: number;
-  levelProgress?: number;
-  size?: SizesType | "full";
-  className?: string;
-  color?: string;
-  imageClassName?: string;
-  levelClassName?: string;
-  onMouseOverLevel?: (e: any) => void;
-  onMouseEnterLevel?: (e: any) => void;
-  onMouseLeaveLevel?: (e: any) => void;
-  onClickLevel?: (e: any) => void;
-}
 
 const GVProgramAvatar = React.memo(_GVProgramAvatar);
 export default GVProgramAvatar;

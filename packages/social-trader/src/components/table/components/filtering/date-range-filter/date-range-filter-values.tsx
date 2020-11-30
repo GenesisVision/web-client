@@ -3,6 +3,7 @@ import GVTextField from "components/gv-text-field";
 import { RowItem } from "components/row-item/row-item";
 import React, { FocusEvent, useCallback } from "react";
 import { useTranslation } from "react-i18next";
+import styled from "styled-components";
 import { localizedDate, subtractDate } from "utils/dates";
 
 import {
@@ -12,7 +13,18 @@ import {
   IDataRangeFilterValue
 } from "./date-range-filter.constants";
 import { dateToInput } from "./date-range-filter.helpers";
-import styles from "./date-range-filter.module.scss";
+
+interface IDateRangeFilterValuesProps {
+  onChange: (type: keyof IDataRangeFilterValue, date: string) => void;
+  type: DATA_RANGE_FILTER_TYPES;
+  [DATE_RANGE_MIN_FILTER_NAME]?: string;
+  [DATE_RANGE_MAX_FILTER_NAME]?: string;
+  startLabel: string;
+}
+
+const DateInput = styled(RowItem)`
+  width: 140px;
+`;
 
 const _DateRangeFilterValues: React.FC<IDateRangeFilterValuesProps> = props => {
   const { type, startLabel, onChange } = props;
@@ -24,12 +36,15 @@ const _DateRangeFilterValues: React.FC<IDateRangeFilterValuesProps> = props => {
     [onChange]
   );
 
-  const handleBlur = useCallback((event: FocusEvent<HTMLInputElement>) => {
-    const type = event.target.name as keyof IDataRangeFilterValue;
-    if (event.target.value.length === 0) {
-      onChange(type, props[type]!);
-    }
-  }, []);
+  const handleBlur = useCallback(
+    (event: FocusEvent<HTMLInputElement>) => {
+      const type = event.target.name as keyof IDataRangeFilterValue;
+      if (event.target.value.length === 0) {
+        onChange(type, props[type]!);
+      }
+    },
+    [onChange]
+  );
 
   switch (type) {
     case DATA_RANGE_FILTER_TYPES.ALL:
@@ -61,10 +76,9 @@ const _DateRangeFilterValues: React.FC<IDateRangeFilterValuesProps> = props => {
     default:
       return (
         <>
-          <RowItem>
+          <DateInput>
             <GVTextField
               onBlur={handleBlur}
-              wrapperClassName={styles["date-range-filter__date-input"]}
               type="text"
               name={DATE_RANGE_MIN_FILTER_NAME}
               label={t("filters.date-range.start")}
@@ -76,10 +90,9 @@ const _DateRangeFilterValues: React.FC<IDateRangeFilterValuesProps> = props => {
               maxDate={dateToInput(new Date())}
               onChange={handleOnChange(DATE_RANGE_MIN_FILTER_NAME)}
             />
-          </RowItem>
-          <RowItem>
+          </DateInput>
+          <DateInput>
             <GVTextField
-              wrapperClassName={styles["date-range-filter__date-input"]}
               type="text"
               name={DATE_RANGE_MAX_FILTER_NAME}
               label={t("filters.date-range.end")}
@@ -92,7 +105,7 @@ const _DateRangeFilterValues: React.FC<IDateRangeFilterValuesProps> = props => {
               maxDate={dateToInput(new Date())}
               onChange={handleOnChange(DATE_RANGE_MAX_FILTER_NAME)}
             />
-          </RowItem>
+          </DateInput>
         </>
       );
   }
@@ -102,16 +115,16 @@ const _FirstInput: React.FC<{ value: string }> = ({ value }) => {
   const [t] = useTranslation();
   return (
     //@ts-ignore TODO сделать фикс GVTextField
-    <RowItem>
+    <DateInput>
       <GVTextField
-        wrapperClassName={styles["date-range-filter__date-input"]}
+        wide
         type="text"
         name="startDate"
         label={t("filters.date-range.start")}
         value={value}
         disabled
       />
-    </RowItem>
+    </DateInput>
   );
 };
 const FirstInput = React.memo(_FirstInput);
@@ -119,27 +132,19 @@ const FirstInput = React.memo(_FirstInput);
 const _SecondInput: React.FC = () => {
   const [t] = useTranslation();
   return (
-    <RowItem>
+    <DateInput>
       <GVTextField
-        wrapperClassName={styles["date-range-filter__date-input"]}
+        wide
         type="text"
         name="endDate"
         label={t("filters.date-range.end")}
         value={t<string>("filters.date-range.today")}
         disabled
       />
-    </RowItem>
+    </DateInput>
   );
 };
 const SecondInput = React.memo(_SecondInput);
 
 const DateRangeFilterValues = React.memo(_DateRangeFilterValues);
 export default DateRangeFilterValues;
-
-interface IDateRangeFilterValuesProps {
-  onChange(type: keyof IDataRangeFilterValue, date: string): void;
-  type: DATA_RANGE_FILTER_TYPES;
-  [DATE_RANGE_MIN_FILTER_NAME]?: string;
-  [DATE_RANGE_MAX_FILTER_NAME]?: string;
-  startLabel: string;
-}

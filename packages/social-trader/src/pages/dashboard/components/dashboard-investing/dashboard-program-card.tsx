@@ -113,14 +113,16 @@ const _DashboardProgramCard: React.FC<Props> = ({
             />
           </LabeledValue>
         </TableCardTableColumn>
-        <TableCardTableColumn>
-          <LabeledValue label={t("header-fields.period")}>
-            <ProgramPeriodPie
-              start={program.periodStarts}
-              end={program.periodEnds}
-            />
-          </LabeledValue>
-        </TableCardTableColumn>
+        {program.type === "FixedPeriod" && (
+          <TableCardTableColumn>
+            <LabeledValue label={t("header-fields.period")}>
+              <ProgramPeriodPie
+                start={program.periodStarts}
+                end={program.periodEnds}
+              />
+            </LabeledValue>
+          </TableCardTableColumn>
+        )}
       </TableCardTable>
       <TableCardTable>
         <TableCardTableColumn>
@@ -130,16 +132,18 @@ const _DashboardProgramCard: React.FC<Props> = ({
             onCancel={updateItems}
           />
         </TableCardTableColumn>
-        {program.personalDetails.canChangeReinvest && (
-          <TableCardTableColumn>
-            <ProgramReinvestingContainer
-              id={program.id}
-              isReinvesting={program.personalDetails.isReinvest}
-            />
-          </TableCardTableColumn>
-        )}
+        {program.type === "FixedPeriod" &&
+          program.personalDetails.canChangeReinvest && (
+            <TableCardTableColumn>
+              <ProgramReinvestingContainer
+                id={program.id}
+                isReinvesting={program.personalDetails.isReinvest}
+              />
+            </TableCardTableColumn>
+          )}
       </TableCardTable>
       <DepositWithdrawButtons
+        isProcessingRealTime={program.dailyPeriodDetails?.isProcessingRealTime}
         entryFee={program.managementFeeCurrent}
         availableToInvest={program.availableToInvest}
         title={program.title}

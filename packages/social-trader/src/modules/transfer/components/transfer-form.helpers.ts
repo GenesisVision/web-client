@@ -71,7 +71,7 @@ export const transferFormValidationSchema = ({
       );
       return object().shape({
         [TRANSFER_FORM_FIELDS.amount]: number()
-          .moreThan(0, t("validations.amount-is-zero"))
+          .moreThan(0, t("validations.greater-zero"))
           .max(
             +formatCurrencyValue(available, currency),
             t("validations.amount-more-than-wallet-balance")
@@ -138,6 +138,7 @@ export const getTransferFormLoaderData = (
 };
 
 export interface ITransferFormProps {
+  updateWallets?: VoidFunction;
   fixedSelects?: boolean;
   data: TransferFormItemsType;
   onSubmit: (values: InternalTransferRequest) => void;

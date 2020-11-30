@@ -1,12 +1,11 @@
+import { Button } from "components/button/button";
 import { Comment } from "components/conversation/comment/comment";
-import GVButton from "components/gv-button";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
 import { Post } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
 import React from "react";
-
-import styles from "./comments-list.module.scss";
+import styled from "styled-components";
 
 interface Props {
   canReply?: boolean;
@@ -16,6 +15,14 @@ interface Props {
 }
 
 const VISIBLE_COMMENTS_COUNT = 3;
+
+const Container = styled.div`
+  width: 100%;
+`;
+
+const AllButton = styled(Row)`
+  justify-content: center;
+`;
 
 const _CommentsList: React.FC<Props> = ({
   canReply,
@@ -32,20 +39,20 @@ const _CommentsList: React.FC<Props> = ({
     ? comments
     : comments.slice(comments.length - visibleCommentsCountInner);
   return (
-    <div className={styles["comments-list__comments"]}>
+    <Container>
       {!isViewAll && (
-        <Row className={styles["comments-list__view-all-button-container"]}>
-          <GVButton
+        <AllButton>
+          <Button
             noPadding
             variant={"text"}
             size={"xlarge"}
             onClick={setViewAll}
           >
             View all
-          </GVButton>
+          </Button>
           &nbsp;
           <Text muted> ({comments.length - visibleCommentsCountInner})</Text>
-        </Row>
+        </AllButton>
       )}
       <Row onlyOffset>
         {visibleComments.map(comment => (
@@ -57,7 +64,7 @@ const _CommentsList: React.FC<Props> = ({
           />
         ))}
       </Row>
-    </div>
+    </Container>
   );
 };
 

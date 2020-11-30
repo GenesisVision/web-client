@@ -6,6 +6,11 @@ import Logo21 from "./defaultLogos/Logo21";
 import Logo25 from "./defaultLogos/Logo25";
 import Logo55 from "./defaultLogos/Logo55";
 
+type LogoProps = LogoOptions & {
+  href?: string;
+  color: string;
+};
+
 const BANNER_LOGO_RADIUS = 7;
 
 export default function LogoPlaceholder({
@@ -54,8 +59,3 @@ export default function LogoPlaceholder({
     </svg>
   );
 }
-
-type LogoProps = LogoOptions & {
-  href?: string;
-  color: string;
-};

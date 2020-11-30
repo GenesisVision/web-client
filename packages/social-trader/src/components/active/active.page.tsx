@@ -5,6 +5,10 @@ import React from "react";
 import Active from "./active";
 import { getActiveLoaderData } from "./service/active.service";
 
+interface Props {
+  data: AssetInfo;
+}
+
 const _ActivePage: React.FC<Props> = ({ data }) => {
   return (
     <Page
@@ -16,10 +20,6 @@ const _ActivePage: React.FC<Props> = ({ data }) => {
     </Page>
   );
 };
-
-interface Props {
-  data: AssetInfo;
-}
 
 const ActivePage = React.memo(_ActivePage);
 export default ActivePage;

@@ -9,7 +9,28 @@ import WithdrawButton from "modules/withdraw/withdraw.button";
 import React from "react";
 import { CurrencyEnum } from "utils/types";
 
+interface Props {
+  isProcessingRealTime?: boolean;
+  infoMessage?: string;
+  accountType?: PrivateTradingAccountType | AssetTypeExt;
+  transferableItem?: WalletItemType;
+  canTransfer?: boolean;
+  showInvest?: boolean;
+  title: string;
+  onApply: VoidFunction;
+  canWithdraw?: boolean;
+  canInvest?: boolean;
+  ownAsset?: boolean;
+  entryFee?: number;
+  availableToInvest?: number;
+  broker: string;
+  type: ASSET;
+  id: string;
+  currency: CurrencyEnum;
+}
+
 const _DepositWithdrawButtons: React.FC<Props> = ({
+  isProcessingRealTime,
   infoMessage,
   accountType,
   transferableItem,
@@ -34,6 +55,7 @@ const _DepositWithdrawButtons: React.FC<Props> = ({
     >
       {canInvest && (
         <DepositButton
+          isProcessingRealTime={isProcessingRealTime}
           infoMessage={infoMessage}
           title={title}
           onApply={onApply}
@@ -48,6 +70,7 @@ const _DepositWithdrawButtons: React.FC<Props> = ({
       )}
       {canWithdraw && (
         <WithdrawButton
+          isProcessingRealTime={isProcessingRealTime}
           infoMessage={infoMessage}
           onApply={onApply}
           type={type}
@@ -72,25 +95,6 @@ const _DepositWithdrawButtons: React.FC<Props> = ({
     </TableCardRow>
   );
 };
-
-interface Props {
-  infoMessage?: string;
-  accountType?: PrivateTradingAccountType | AssetTypeExt;
-  transferableItem?: WalletItemType;
-  canTransfer?: boolean;
-  showInvest?: boolean;
-  title: string;
-  onApply: VoidFunction;
-  canWithdraw?: boolean;
-  canInvest?: boolean;
-  ownAsset?: boolean;
-  entryFee?: number;
-  availableToInvest?: number;
-  broker: string;
-  type: ASSET;
-  id: string;
-  currency: CurrencyEnum;
-}
 
 const DepositWithdrawButtons = React.memo(_DepositWithdrawButtons);
 export default DepositWithdrawButtons;

@@ -1,7 +1,7 @@
+import { Button } from "components/button/button";
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogInfo } from "components/dialog/dialog-info";
-import GVButton from "components/gv-button";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import InputAmountField from "components/input-amount-field/hook-form-amount-field";
 import { Row } from "components/row/row";
@@ -149,9 +149,9 @@ const _FollowParams: React.FC<IFollowParamsProps> = ({
         </Row>
         <DialogButtons>
           {onPrevStep && (
-            <GVButton onClick={onPrevStep} color="secondary" variant="outlined">
+            <Button onClick={onPrevStep} color="secondary" variant="outlined">
               {t("follow-program.params.back")}
-            </GVButton>
+            </Button>
           )}
           <SubmitButton
             wide={!onPrevStep}

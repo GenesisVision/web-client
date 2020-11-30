@@ -125,7 +125,9 @@ export default class TradingViewWidget extends PureComponent<TradingViewProps> {
     const config = { ...widgetConfig, container_id: this.containerId };
 
     if (config.autosize) {
+      //@ts-ignore
       delete config.width;
+      //@ts-ignore
       delete config.height;
     }
 

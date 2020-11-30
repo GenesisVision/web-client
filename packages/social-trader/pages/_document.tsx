@@ -1,12 +1,59 @@
+import { DocumentContext } from "next/dist/next-server/lib/utils";
 import Document, { Head, Html, Main, NextScript } from "next/document";
 import React from "react";
+import { ServerStyleSheet } from "styled-components";
 
-class MyDocument extends Document {
+import CustomHead from "./head-custom";
+import CustomNextScript from "./next-script-custom";
+
+const isProd = process.env.NODE_ENV === "production";
+
+const HACKED_PAGES: string[] = [];
+
+class MyDocument extends Document<{ pathname: string }> {
+  static async getInitialProps(ctx: DocumentContext) {
+    const sheet = new ServerStyleSheet();
+    const originalRenderPage = ctx.renderPage;
+
+    try {
+      ctx.renderPage = () =>
+        originalRenderPage({
+          enhanceApp: (App: any) => (props: any) =>
+            sheet.collectStyles(<App {...props} />)
+        });
+
+      const initialProps = await Document.getInitialProps(ctx);
+      return {
+        ...initialProps,
+        pathname: ctx.pathname,
+        styles: (
+          <>
+            {initialProps.styles}
+            {sheet.getStyleElement()}
+          </>
+        )
+      };
+    } finally {
+      sheet.seal();
+    }
+  }
+
   render() {
+    const isHackedPage = HACKED_PAGES.includes(this.props.pathname) && isProd;
+    const HeadElement = isHackedPage ? CustomHead : Head;
+    const NextScriptElement = isHackedPage ? CustomNextScript : NextScript;
     return (
       <Html lang="en">
-        <Head>
-          <style>{"body {color: white}; a, a:visited {color: #03bdaf}"}</style>
+        <HeadElement>
+          <link
+            as="style"
+            rel="preload"
+            href="https://fonts.googleapis.com/css?family=Montserrat:200,400,500,600,700,800&display=swap"
+          />
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Montserrat:200,400,500,600,700,800&display=swap"
+          />
           <link rel="icon" sizes="192x192" href="/icon.png" />
           <link rel="apple-touch-icon" href="/icon.png" />
           <link rel="shortcut icon" href="/favicon.ico" />
@@ -20,10 +67,10 @@ class MyDocument extends Document {
         })(window,document,'script','dataLayer','GTM-NJLM6BD');}`
             }}
           />
-        </Head>
+        </HeadElement>
         <body>
           <Main />
-          <NextScript />
+          <NextScriptElement />
           <noscript>
             <iframe
               src="https://www.googletagmanager.com/ns.html?id=GTM-NJLM6BD"

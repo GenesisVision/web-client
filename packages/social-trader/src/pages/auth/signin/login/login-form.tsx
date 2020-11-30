@@ -1,5 +1,5 @@
+import { Button } from "components/button/button";
 import FormError from "components/form/form-error/form-error";
-import GVButton from "components/gv-button";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import Link from "components/link/link";
 import { Row } from "components/row/row";
@@ -60,9 +60,9 @@ const _LoginForm: React.FC<Props> = ({ errorMessage, onSubmit }) => {
 
       <Row size={"large"}>
         <Link to={FORGOT_PASSWORD_ROUTE}>
-          <GVButton noPadding variant="text">
+          <Button noPadding variant="text">
             {t("auth:login.forgot")}
-          </GVButton>
+          </Button>
         </Link>
       </Row>
       {errorMessage && (

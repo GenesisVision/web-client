@@ -27,6 +27,8 @@ const _ReferralHistoryTable: React.FC = () => {
   const [t] = useTranslation();
   return (
     <TableModule
+      name={"ReferralHistoryTable"}
+      cache
       loaderData={ReferralHistoryLoaderData}
       exportButtonToolbarRender={(filtering: any) => (
         <DownloadReferralHistoryButton dateRange={filtering!.dateRange} />

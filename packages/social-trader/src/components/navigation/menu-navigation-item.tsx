@@ -1,15 +1,26 @@
 import { useToLink } from "components/link/link.helper";
-import MenuTooltip from "components/menu-tooltip/menu-tooltip";
-import { VERTICAL_POPOVER_POS } from "components/popover/popover";
+import { MenuNavigationTooltipItem } from "components/navigation/menu-navigation-tooltip-item";
 import { Row } from "components/row/row";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { TMenuItem } from "routes/menu";
+import styled from "styled-components";
+import { $paddingMedium } from "utils/style/sizes";
 
 import NavigationItem from "./navigation-item";
-import styles from "./navigation.module.scss";
+
+interface Props {
+  mobile?: boolean;
+  popover?: boolean;
+  item: TMenuItem;
+}
+
+const SecondLevel = styled.div`
+  padding-left: ${$paddingMedium}px;
+`;
 
 export const MenuNavigationItem: React.FC<Props> = ({
+  mobile,
   item: { Icon, route = "", label, children },
   popover
 }) => {
@@ -20,6 +31,7 @@ export const MenuNavigationItem: React.FC<Props> = ({
     return (
       <RowTag>
         <NavigationItem
+          mobile={mobile}
           small={!!popover}
           icon={<Icon primary />}
           href={linkCreator(route)}
@@ -38,46 +50,17 @@ export const MenuNavigationItem: React.FC<Props> = ({
         havePopover={havePopover}
         secondLevel={children && children.map(renderNavigationItem)}
       >
-        <NavigationItem icon={<Icon primary />} href={linkCreator(route)}>
+        <NavigationItem
+          mobile={mobile}
+          icon={<Icon primary />}
+          href={linkCreator(route)}
+        >
           {label && t(label)}
         </NavigationItem>
       </MenuNavigationTooltipItem>
       {haveSecondLevel && (
-        <div className={styles["navigation__second-level"]}>
-          {children!.map(renderNavigationItem)}
-        </div>
+        <SecondLevel>{children!.map(renderNavigationItem)}</SecondLevel>
       )}
     </>
   );
-};
-
-interface Props {
-  popover?: boolean;
-  item: TMenuItem;
-}
-
-const MenuNavigationTooltipItem: React.FC<{
-  havePopover?: boolean;
-  secondLevel?: JSX.Element[];
-} & React.HTMLAttributes<HTMLDivElement>> = ({
-  children,
-  secondLevel,
-  havePopover
-}) => {
-  switch (!!secondLevel && havePopover) {
-    case true:
-      return (
-        <MenuTooltip
-          vertical={VERTICAL_POPOVER_POS.BOTTOM}
-          render={() => (
-            <div className={styles["navigation__popover"]}>{secondLevel}</div>
-          )}
-        >
-          <div>{children}</div>
-        </MenuTooltip>
-      );
-    case false:
-    default:
-      return <>{children}</>;
-  }
 };

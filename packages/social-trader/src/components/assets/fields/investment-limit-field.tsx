@@ -8,6 +8,15 @@ import { NumberFormatValues } from "react-number-format";
 import { validateFraction } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 
+interface Props {
+  wide?: boolean;
+  setHasInvestmentLimit: (value: boolean) => void;
+  checkboxName: string;
+  inputName: string;
+  currency: CurrencyEnum;
+  hasInvestmentLimit: boolean;
+}
+
 const isAmountAllow = (currency: CurrencyEnum) => ({
   value
 }: NumberFormatValues) => validateFraction(value, currency);
@@ -50,15 +59,6 @@ const _InvestmentLimitField: React.FC<Props> = ({
     </>
   );
 };
-
-interface Props {
-  wide?: boolean;
-  setHasInvestmentLimit: (value: boolean) => void;
-  checkboxName: string;
-  inputName: string;
-  currency: CurrencyEnum;
-  hasInvestmentLimit: boolean;
-}
 
 const InvestmentLimitField = React.memo(_InvestmentLimitField);
 export default InvestmentLimitField;

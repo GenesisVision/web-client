@@ -36,6 +36,7 @@ $facet-height: 280px;
   overflow: hidden;
   box-shadow: $box-shadow-1;
 
+  &:hover,
   &--hovered {
     transform: translateY(-$translate-size);
     box-shadow: $box-shadow-4;

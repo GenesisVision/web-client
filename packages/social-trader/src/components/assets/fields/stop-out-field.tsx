@@ -4,6 +4,10 @@ import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { allowPositiveValuesNumberFormat } from "utils/helpers";
 
+interface Props {
+  name: string;
+}
+
 const _StopOutField: React.FC<Props> = ({ name }) => {
   const { t } = useTranslation();
   return (
@@ -21,10 +25,6 @@ const _StopOutField: React.FC<Props> = ({ name }) => {
     />
   );
 };
-
-interface Props {
-  name: string;
-}
 
 const StopOutField = React.memo(_StopOutField);
 export default StopOutField;

@@ -4,10 +4,12 @@ import DescriptionBlock from "components/assets/fields/description-block";
 import FeesSettings from "components/assets/fields/fees-settings";
 import InvestmentLimitField from "components/assets/fields/investment-limit-field";
 import PeriodLength from "components/assets/fields/period-length";
+import Processing from "components/assets/fields/processing";
 import SignalsFeeFormPartial from "components/assets/fields/signals-fee-form.partial";
 import StopOutField from "components/assets/fields/stop-out-field";
 import TradesDelay from "components/assets/fields/trades-delay";
 import { IImageValue } from "components/form/input-image/input-image";
+import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import SettingsBlock from "components/settings-block/settings-block";
 import { ASSET } from "constants/constants";
@@ -30,6 +32,38 @@ import convertAssetSettingsValidationSchema, {
   CONVERT_ASSET_FIELDS
 } from "./convert-asset-settings.helpers";
 
+export interface IConvertAssetSettingsFormOwnProps {
+  currency?: CurrencyEnum;
+  id: string;
+  broker?: string;
+  fromTo: TAssetFromTo;
+}
+
+export interface IConvertAssetSettingsProps
+  extends IConvertAssetSettingsFormOwnProps {
+  errorMessage?: string;
+  followInfo: FollowCreateAssetPlatformInfo;
+  programsInfo: ProgramAssetPlatformInfo;
+  onSubmit: (data: IConvertAssetSettingsFormValues) => void;
+}
+
+export interface IConvertAssetSettingsFormValues {
+  [CONVERT_ASSET_FIELDS.hourProcessing]?: number;
+  [CONVERT_ASSET_FIELDS.isProcessingRealTime]?: boolean;
+  [CONVERT_ASSET_FIELDS.currency]: string;
+  [CONVERT_ASSET_FIELDS.tradesDelay]: TradesDelayType;
+  [CONVERT_ASSET_FIELDS.periodLength]?: number;
+  [CONVERT_ASSET_FIELDS.successFee]?: number;
+  [CONVERT_ASSET_FIELDS.stopOutLevel]: number;
+  [CONVERT_ASSET_FIELDS.successFee]?: number;
+  [CONVERT_ASSET_FIELDS.volumeFee]?: number;
+  [CONVERT_ASSET_FIELDS.title]: string;
+  [CONVERT_ASSET_FIELDS.description]: string;
+  [CONVERT_ASSET_FIELDS.logo]: IImageValue;
+  [CONVERT_ASSET_FIELDS.managementFee]?: number;
+  [CONVERT_ASSET_FIELDS.investmentLimit]?: number;
+}
+
 const _ConvertAssetSettings: React.FC<IConvertAssetSettingsProps> = props => {
   const [isSignalProgram] = useState(true);
   const [hasInvestmentLimit, setHasInvestmentLimit] = useState(false);
@@ -42,12 +76,17 @@ const _ConvertAssetSettings: React.FC<IConvertAssetSettingsProps> = props => {
     errorMessage
   } = props;
   const [t] = useTranslation();
+  const isExchange = assetFrom === CONVERT_ASSET.EXCHANGE_ACCOUNT;
+  const currencies = (isExchange
+    ? ["BTC", "USDT"]
+    : ["GVT", "BTC", "ETH"]) as CurrencyEnum[];
 
   const form = useForm<IConvertAssetSettingsFormValues>({
     defaultValues: {
+      [CONVERT_ASSET_FIELDS.hourProcessing]: 0,
       [CONVERT_ASSET_FIELDS.tradesDelay]: "None",
       [CONVERT_ASSET_FIELDS.stopOutLevel]: 100,
-      [CONVERT_ASSET_FIELDS.currency]: currencyProp || "GVT",
+      [CONVERT_ASSET_FIELDS.currency]: currencyProp || currencies[0],
       [CONVERT_ASSET_FIELDS.periodLength]:
         periods.length === 1 ? periods[0] : undefined
     },
@@ -60,7 +99,7 @@ const _ConvertAssetSettings: React.FC<IConvertAssetSettingsProps> = props => {
     mode: "onChange"
   });
   const { watch, triggerValidation } = form;
-  const { description, currency } = watch();
+  const { description, currency, isProcessingRealTime } = watch();
 
   useEffect(() => {
     triggerValidation();
@@ -69,7 +108,7 @@ const _ConvertAssetSettings: React.FC<IConvertAssetSettingsProps> = props => {
   const showDescriptionBlock = assetFrom !== CONVERT_ASSET.SIGNAL;
   const showSignalFees = assetTo === CONVERT_ASSET.SIGNAL;
   const showProgramFields = assetTo === CONVERT_ASSET.PROGRAM;
-  const showCurrency = broker === "Huobi";
+  const showCurrency = broker === "Huobi" || isExchange;
 
   return (
     <HookForm form={form} onSubmit={onSubmit}>
@@ -88,22 +127,46 @@ const _ConvertAssetSettings: React.FC<IConvertAssetSettingsProps> = props => {
             />
           )}
           {showProgramFields && (
-            <Row size={"large"}>
-              <div>
-                <Currency
-                  hide={!showCurrency}
-                  name={CONVERT_ASSET_FIELDS.currency}
-                  accountCurrencies={["GVT", "BTC", "ETH"]}
-                />
-                <PeriodLength
-                  periods={periods}
-                  name={CONVERT_ASSET_FIELDS.periodLength}
-                />
-                <StopOutField name={CONVERT_ASSET_FIELDS.stopOutLevel} />
-                <Row onlyOffset size={"large"}>
-                  <TradesDelay name={CONVERT_ASSET_FIELDS.tradesDelay} />
+            <Row onlyOffset size={"large"}>
+              {isExchange && (
+                <Row onlyOffset>
+                  <Row>
+                    <h4>{t("asset-settings:fields.processing")}</h4>
+                  </Row>
+                  <Row>
+                    <Processing
+                      realtimeValue={isProcessingRealTime}
+                      checkboxName={CONVERT_ASSET_FIELDS.isProcessingRealTime}
+                      selectName={CONVERT_ASSET_FIELDS.hourProcessing}
+                    />
+                  </Row>
                 </Row>
-              </div>
+              )}
+              <Row>
+                <div>
+                  <Currency
+                    hide={!showCurrency}
+                    name={CONVERT_ASSET_FIELDS.currency}
+                    accountCurrencies={currencies}
+                  />
+                  {!isExchange && (
+                    <RowItem>
+                      <PeriodLength
+                        periods={periods}
+                        name={CONVERT_ASSET_FIELDS.periodLength}
+                      />
+                    </RowItem>
+                  )}
+                  {!isExchange && (
+                    <RowItem>
+                      <StopOutField name={CONVERT_ASSET_FIELDS.stopOutLevel} />
+                    </RowItem>
+                  )}
+                  <RowItem>
+                    <TradesDelay name={CONVERT_ASSET_FIELDS.tradesDelay} />
+                  </RowItem>
+                </div>
+              </Row>
             </Row>
           )}
         </div>
@@ -120,18 +183,28 @@ const _ConvertAssetSettings: React.FC<IConvertAssetSettingsProps> = props => {
               firstFeeUnderText={t(
                 "create-account:settings.hints.management-fee"
               )}
-              firstFeeName={CONVERT_ASSET_FIELDS.entryFee}
-              firstFeeDescription={t(
-                "create-account:settings.hints.management-fee-description"
-              )}
+              firstFeeName={CONVERT_ASSET_FIELDS.managementFee}
+              firstFeeDescription={
+                isExchange
+                  ? t(
+                      "create-account:settings.hints.exchange-management-fee-description"
+                    )
+                  : t(
+                      "create-account:settings.hints.management-fee-description"
+                    )
+              }
               secondFeeName={CONVERT_ASSET_FIELDS.successFee}
               secondFeeLabel={t("asset-settings:fields.success-fee")}
               secondFeeUnderText={t(
                 "create-account:settings.hints.success-fee"
               )}
-              secondFeeDescription={t(
-                "create-account:settings.hints.success-fee-description"
-              )}
+              secondFeeDescription={
+                isExchange
+                  ? t(
+                      "create-account:settings.hints.exchange-success-fee-description"
+                    )
+                  : t("create-account:settings.hints.success-fee-description")
+              }
             />
           </SettingsBlock>
           <SettingsBlock
@@ -166,36 +239,6 @@ const _ConvertAssetSettings: React.FC<IConvertAssetSettingsProps> = props => {
     </HookForm>
   );
 };
-
-export interface IConvertAssetSettingsFormOwnProps {
-  currency?: CurrencyEnum;
-  id: string;
-  broker?: string;
-  fromTo: TAssetFromTo;
-}
-
-export interface IConvertAssetSettingsProps
-  extends IConvertAssetSettingsFormOwnProps {
-  errorMessage?: string;
-  followInfo: FollowCreateAssetPlatformInfo;
-  programsInfo: ProgramAssetPlatformInfo;
-  onSubmit: (data: IConvertAssetSettingsFormValues) => void;
-}
-
-export interface IConvertAssetSettingsFormValues {
-  [CONVERT_ASSET_FIELDS.currency]: string;
-  [CONVERT_ASSET_FIELDS.tradesDelay]: TradesDelayType;
-  [CONVERT_ASSET_FIELDS.periodLength]?: number;
-  [CONVERT_ASSET_FIELDS.successFee]?: number;
-  [CONVERT_ASSET_FIELDS.stopOutLevel]: number;
-  [CONVERT_ASSET_FIELDS.successFee]?: number;
-  [CONVERT_ASSET_FIELDS.volumeFee]?: number;
-  [CONVERT_ASSET_FIELDS.title]: string;
-  [CONVERT_ASSET_FIELDS.description]: string;
-  [CONVERT_ASSET_FIELDS.logo]: IImageValue;
-  [CONVERT_ASSET_FIELDS.entryFee]?: number;
-  [CONVERT_ASSET_FIELDS.investmentLimit]?: number;
-}
 
 const ConvertAssetSettings = withLoader(React.memo(_ConvertAssetSettings));
 export default ConvertAssetSettings;

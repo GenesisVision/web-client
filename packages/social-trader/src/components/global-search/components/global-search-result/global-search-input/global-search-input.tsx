@@ -1,4 +1,4 @@
-import GVButton from "components/gv-button";
+import { Button } from "components/button/button";
 import GVTextField from "components/gv-text-field";
 import { CloseIcon } from "components/icon/close-icon";
 import SearchIcon from "components/icon/search-icon/search-icon";
@@ -47,15 +47,11 @@ export const SearchInputField: React.FC<ISearchInputFieldProps> = ({
         />
       </RowItem>
       {canClose && (
-        <GVButton
-          className={styles["global-search-input__close-icon"]}
-          noPadding
-          variant="text"
-          color="secondary"
-          onClick={onCancel}
-        >
-          <CloseIcon />
-        </GVButton>
+        <div className={styles["global-search-input__close-icon"]}>
+          <Button noPadding variant="text" color="secondary" onClick={onCancel}>
+            <CloseIcon />
+          </Button>
+        </div>
       )}
     </Row>
   );

@@ -1,28 +1,18 @@
-import clsx from "clsx";
 import * as React from "react";
 import { ReactNode } from "react";
+import styled, { css } from "styled-components";
+import {
+  adaptivePadding,
+  fontSize,
+  verticalPaddings
+} from "utils/style/mixins";
+import {
+  $fontSizeCommon,
+  $paddingSmall,
+  $paddingXsmall,
+  $paddingXxsmall
+} from "utils/style/sizes";
 import { SizesType } from "utils/types";
-
-import styles from "./table.module.scss";
-
-const TableCell: React.FC<Props> = ({
-  firstOffset = true,
-  height = "medium",
-  className = "",
-  children
-}) => {
-  return (
-    <td
-      className={clsx(styles["table__cell"], className, {
-        [styles["table__cell--first-offset"]]: firstOffset,
-        [styles["table__cell--medium"]]: height === "medium",
-        [styles["table__cell--low"]]: height === "small"
-      })}
-    >
-      {children}
-    </td>
-  );
-};
 
 interface Props {
   firstOffset?: boolean;
@@ -31,4 +21,44 @@ interface Props {
   children?: ReactNode; // TODO fix React.memo type
 }
 
-export default React.memo<React.FC<Props>>(TableCell);
+export const tableCellStyle = css`
+  text-align: left;
+  cursor: default;
+  box-sizing: border-box;
+  align-items: center;
+  flex-grow: 1;
+  overflow: hidden; // Or flex might break
+  list-style: none;
+  font-weight: normal;
+  white-space: nowrap;
+  ${fontSize($fontSizeCommon)};
+  ${adaptivePadding("right", $paddingXsmall, 2)};
+
+  &:last-child {
+    ${adaptivePadding("right", $paddingSmall)};
+  }
+`;
+
+export const tableCellFirstOffsetStyle = css`
+  &:first-child {
+    ${adaptivePadding("left", $paddingSmall)};
+  }
+`;
+
+const TableCell = styled.td<Props>`
+  ${tableCellStyle};
+
+  ${({ firstOffset = true }) => {
+    if (firstOffset) return tableCellFirstOffsetStyle;
+  }};
+  ${({ height = "middle" }) => {
+    switch (height) {
+      case "small":
+        return verticalPaddings($paddingXxsmall);
+      case "middle":
+        return verticalPaddings($paddingXsmall);
+    }
+  }}
+`;
+
+export default TableCell;

@@ -5,9 +5,27 @@ import { Text } from "components/text/text";
 import { PlatformAsset, ProviderPlatformAssets } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
+import styled from "styled-components";
+import { adaptivePadding } from "utils/style/mixins";
+import { $paddingXxsmall } from "utils/style/sizes";
 
 import TileFilterPopover from "../tile-filter-popover";
-import styles from "./fund-asset-filter.module.scss";
+
+interface Props {
+  providers: Array<ProviderPlatformAssets>;
+  values: PlatformAsset[];
+  changeFilter?(value: string): void;
+}
+
+const AssetsBlock = styled(Row)`
+  max-height: 180px;
+  overflow-y: auto;
+`;
+
+const Item = styled(Row)`
+  cursor: pointer;
+  ${adaptivePadding("right", $paddingXxsmall)};
+`;
 
 const _FundAssetPopover: React.FC<Props> = ({
   providers,
@@ -32,11 +50,10 @@ const _FundAssetPopover: React.FC<Props> = ({
       {(filteredAssets, handleClick, tab) => {
         const items = filteredAssets.filter(({ provider }) => provider === tab);
         return (
-          <Row onlyOffset className={styles["fund-asset-filter__assets-block"]}>
+          <AssetsBlock onlyOffset>
             {items.map((asset, idx) => (
-              <Row
+              <Item
                 size={"small"}
-                className={styles["fund-asset-filter__asset-item"]}
                 key={idx}
                 onClick={() => handleClick(asset.asset)}
               >
@@ -49,9 +66,9 @@ const _FundAssetPopover: React.FC<Props> = ({
                   />
                 </RowItem>
                 <Text muted>{asset.asset}</Text>
-              </Row>
+              </Item>
             ))}
-          </Row>
+          </AssetsBlock>
         );
       }}
     </TileFilterPopover>
@@ -60,9 +77,3 @@ const _FundAssetPopover: React.FC<Props> = ({
 
 const FundAssetPopover = React.memo(_FundAssetPopover);
 export default FundAssetPopover;
-
-interface Props {
-  providers: Array<ProviderPlatformAssets>;
-  values: PlatformAsset[];
-  changeFilter?(value: string): void;
-}

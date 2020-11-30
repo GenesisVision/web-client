@@ -127,6 +127,7 @@
   "history": {
     "heading": "History",
     "tabs": {
+      "analytics": "Analytics",
       "trades": "Trades",
       "events": "My history",
       "open-positions": "Open positions",
@@ -172,6 +173,15 @@
       "status": "Status"
     },
     "financial-statistic": {
+      "interval-filter": {
+        "name": "Interval",
+        "values": {
+          "day": "Day",
+          "week": "Week",
+          "month": "Month"
+        }
+      },
+      "period-length": "Period length",
       "period": "Period",
       "date-start": "Date start",
       "balance": "Balance",

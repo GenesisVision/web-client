@@ -14,6 +14,16 @@ import { CurrencyEnum } from "utils/types";
 
 import { TFees } from "../deposit.types";
 
+interface Props {
+  asset: ASSET;
+  fees: TFees;
+  hasEntryFee: boolean;
+  amount: number;
+  rate: number;
+  currency: CurrencyEnum;
+  walletCurrency: CurrencyEnum;
+}
+
 const _InvestorFees: React.FC<Props> = ({
   asset,
   fees: { gvCommission, entryFee = 0 },
@@ -81,15 +91,5 @@ const _InvestorFees: React.FC<Props> = ({
     </DialogList>
   );
 };
-
-interface Props {
-  asset: ASSET;
-  fees: TFees;
-  hasEntryFee: boolean;
-  amount: number;
-  rate: number;
-  currency: CurrencyEnum;
-  walletCurrency: CurrencyEnum;
-}
 
 export const InvestorFees = React.memo(Crashable(_InvestorFees));

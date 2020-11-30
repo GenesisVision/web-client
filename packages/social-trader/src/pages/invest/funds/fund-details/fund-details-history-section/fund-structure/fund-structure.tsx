@@ -6,17 +6,14 @@ import TableRow from "components/table/components/table-row";
 import { FundAssetInfo } from "gv-api-web";
 import { FUND_STRUCTURE_COLUMNS } from "pages/invest/funds/fund-details/fund-details.constants";
 import React from "react";
-import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
 import { formatValue } from "utils/formatter";
 
 import { fundStructureTableSelector } from "../../reducers/fund-structure.reducer";
-import styles from "../fund-reallocate-history/fund-reallocate-history.module.scss";
 import FundStructureHeaderCell from "./fund-structure-header-cell";
 
 const _FundStructure: React.FC = () => {
-  const [t] = useTranslation();
   const items = useSelector(fundStructureTableSelector);
   return (
     <Table
@@ -27,10 +24,8 @@ const _FundStructure: React.FC = () => {
       )}
       renderBodyRow={(item: FundAssetInfo) => (
         <TableRow stripy>
-          <TableCell className={styles["details-structure__cell"]}>
-            {item.asset}
-          </TableCell>
-          <TableCell className={styles["details-structure__cell"]}>
+          <TableCell>{item.asset}</TableCell>
+          <TableCell>
             <CurrencyItem
               url={item.url}
               logo={item.logoUrl}
@@ -38,20 +33,20 @@ const _FundStructure: React.FC = () => {
               small
             />
           </TableCell>
-          <TableCell className={styles["details-structure__cell"]}>
+          <TableCell>
             <NumberFormat
               value={formatValue(item.currentAmount)}
               displayType="text"
             />
           </TableCell>
-          <TableCell className={styles["details-structure__cell"]}>
+          <TableCell>
             <NumberFormat
               value={formatValue(item.target)}
               suffix={"%"}
               displayType="text"
             />
           </TableCell>
-          <TableCell className={styles["details-structure__cell"]}>
+          <TableCell>
             <NumberFormat
               value={formatValue(item.current, 2)}
               suffix={"%"}

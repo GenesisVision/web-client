@@ -36,7 +36,11 @@ const ProgramProfitChart = dynamic(() =>
   )
 );
 
-const _ProgramDetailsStatisticSection: React.FC = () => {
+interface Props {
+  showPeriod?: boolean;
+}
+
+const _ProgramDetailsStatisticSection: React.FC<Props> = ({ showPeriod }) => {
   const status = useSelector(programStatusSelector);
   const statisticCurrency = useSelector(statisticCurrencySelector);
 
@@ -86,6 +90,7 @@ const _ProgramDetailsStatisticSection: React.FC = () => {
     ({ period, statisticData }) => {
       return (
         <ProgramDetailsStatisticsElements
+          showPeriod={showPeriod}
           loaderData={statisticDataLoaderData}
           status={status}
           data={statisticData! as IProgramStatisticData}

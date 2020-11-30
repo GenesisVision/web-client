@@ -1,9 +1,21 @@
 import { Icon, IIconProps } from "components/icon/icon";
-import withLoader from "decorators/with-loader";
 import * as React from "react";
+import styled from "styled-components";
+import { $labelColor, $panelBackgroundColor } from "utils/style/colors";
+
+const StyledIcon = styled(Icon)`
+  circle[fill] {
+    fill: ${({ primary }: IIconProps) =>
+      primary ? "white" : `${$labelColor}70`};
+  }
+  g[fill] {
+    fill: ${({ primary }: IIconProps) =>
+      primary ? $panelBackgroundColor : "white"};
+  }
+`;
 
 export const _ActionsCircleIcon: React.FC<IIconProps> = props => (
-  <Icon type={"actions-circle"} {...props}>
+  <StyledIcon {...props}>
     <svg
       width="31"
       height="31"
@@ -40,7 +52,7 @@ export const _ActionsCircleIcon: React.FC<IIconProps> = props => (
         </g>
       </g>
     </svg>
-  </Icon>
+  </StyledIcon>
 );
 
-export const ActionsCircleIcon = withLoader(React.memo(_ActionsCircleIcon));
+export const ActionsCircleIcon = React.memo(_ActionsCircleIcon);

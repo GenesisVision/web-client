@@ -1,4 +1,4 @@
-import GVButton from "components/gv-button";
+import { Button } from "components/button/button";
 import {
   PopoverContent,
   PopoverContentListItem
@@ -8,6 +8,12 @@ import { useTranslation } from "react-i18next";
 
 import { SelectFilterValue } from "../filter.type";
 import { ComposedRequestSelectValue } from "./select-filter.constants";
+
+interface Props {
+  changeFilter?(value: ComposedRequestSelectValue): void;
+  values: SelectFilterValue<ComposedRequestSelectValue>[];
+  value?: ComposedRequestSelectValue;
+}
 
 const _SelectFilterPopover: React.FC<Props> = ({
   values,
@@ -32,7 +38,7 @@ const _SelectFilterPopover: React.FC<Props> = ({
       {values.map((x, idx) => {
         const selected = x.value === value;
         return (
-          <GVButton
+          <Button
             noPadding
             variant="text"
             color={selected ? "primary" : "secondary"}
@@ -41,18 +47,12 @@ const _SelectFilterPopover: React.FC<Props> = ({
             onClick={handleClick(x.value)}
           >
             <PopoverContentListItem>{renderLabel(x)} </PopoverContentListItem>
-          </GVButton>
+          </Button>
         );
       })}
     </PopoverContent>
   );
 };
-
-interface Props {
-  changeFilter?(value: ComposedRequestSelectValue): void;
-  values: SelectFilterValue<ComposedRequestSelectValue>[];
-  value?: ComposedRequestSelectValue;
-}
 
 const SelectFilterPopover = React.memo(_SelectFilterPopover);
 export default SelectFilterPopover;

@@ -1,5 +1,6 @@
+import { BrokerCardType } from "components/assets/broker-select/broker-select.types";
 import inputImageShape from "components/form/input-image/input-image.validation";
-import { Broker, ProgramMinInvestAmount } from "gv-api-web";
+import { ProgramMinInvestAmount } from "gv-api-web";
 import { TFunction } from "i18next";
 import {
   currencyShape,
@@ -16,7 +17,7 @@ import {
   entryFeeShape,
   successFeeShape
 } from "utils/validators/validators";
-import { lazy, number, object } from "yup";
+import { lazy, number, object, Schema } from "yup";
 
 import {
   CREATE_PROGRAM_FIELDS,
@@ -24,6 +25,7 @@ import {
 } from "./create-program-settings";
 
 const createProgramSettingsValidationSchema = ({
+  isExchange,
   minInvestAmounts,
   maxManagementFee,
   maxSuccessFee,
@@ -33,6 +35,7 @@ const createProgramSettingsValidationSchema = ({
   broker,
   t
 }: {
+  isExchange: boolean;
   minInvestAmounts: Array<ProgramMinInvestAmount>;
   maxManagementFee: number;
   maxSuccessFee: number;
@@ -40,7 +43,7 @@ const createProgramSettingsValidationSchema = ({
   rate: number;
   available: number;
   t: TFunction;
-  broker: Broker;
+  broker: BrokerCardType;
 }) => {
   return lazy<ICreateProgramSettingsFormValues>(values => {
     const currency = values[CREATE_PROGRAM_FIELDS.currency];
@@ -65,9 +68,18 @@ const createProgramSettingsValidationSchema = ({
     );
     return object<ICreateProgramSettingsFormValues>().shape({
       [CREATE_PROGRAM_FIELDS.currency]: currencyShape(t),
-      [CREATE_PROGRAM_FIELDS.periodLength]: periodLengthShape(t),
-      [CREATE_PROGRAM_FIELDS.stopOutLevel]: stopOutLevelShape(t),
-      [CREATE_PROGRAM_FIELDS.entryFee]: entryFeeShape(t, maxManagementFee),
+      [CREATE_PROGRAM_FIELDS.periodLength]: isExchange
+        ? number()
+        : periodLengthShape(t),
+      [CREATE_PROGRAM_FIELDS.stopOutLevel]: isExchange
+        ? number()
+        : stopOutLevelShape(t),
+      [CREATE_PROGRAM_FIELDS.managementFee]: isExchange
+        ? entryFeeShape(t, maxManagementFee)
+        : number(),
+      [CREATE_PROGRAM_FIELDS.entryFee]: isExchange
+        ? number()
+        : entryFeeShape(t, maxManagementFee),
       [CREATE_PROGRAM_FIELDS.successFee]: successFeeShape(t, maxSuccessFee),
       [CREATE_PROGRAM_FIELDS.investmentLimit]: investmentLimitShape(
         hasInvestmentLimit,
@@ -85,7 +97,7 @@ const createProgramSettingsValidationSchema = ({
           })
         )
         .max(available, t("validations.amount-is-large"))
-    });
+    }) as Schema<ICreateProgramSettingsFormValues>;
   });
 };
 

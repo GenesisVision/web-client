@@ -1,17 +1,17 @@
 import { useAccountCurrency } from "hooks/account-currency.hook";
+import useDispatch from "hooks/cache-dispatch.hook";
 import { updateCurrency } from "modules/currency-select/services/currency-select.service";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import {
   betaTesterSelector,
   headerSelector,
   isTerminalBetaTester
 } from "reducers/header-reducer";
-import { Dispatch } from "redux";
 import { filterMenuForBeta, mobileMenuItems, topMenuItems } from "routes/menu";
 
-import { fetchProfileHeaderInfoAction } from "./actions/header-actions";
+import { ProfileHeaderInfoAction } from "./actions/header-actions";
 
 export const useMenuItems = () => {
   const betaTester = useSelector(betaTesterSelector);
@@ -30,12 +30,8 @@ export const useHeaderInfo = () => {
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   const headerAccountCurrency = useAccountCurrency();
   useEffect(() => {
-    if (isAuthenticated) dispatch(fetchProfileHeaderInfo);
+    if (isAuthenticated) dispatch(ProfileHeaderInfoAction());
     if (headerAccountCurrency) updateCurrency(headerAccountCurrency);
   }, [isAuthenticated, headerAccountCurrency]);
   return useSelector(headerSelector);
-};
-
-export const fetchProfileHeaderInfo = (dispatch: Dispatch) => {
-  dispatch(fetchProfileHeaderInfoAction());
 };

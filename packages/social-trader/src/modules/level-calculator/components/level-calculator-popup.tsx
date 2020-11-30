@@ -1,7 +1,6 @@
+import { Button } from "components/button/button";
 import { Center } from "components/center/center";
-import GVButton from "components/gv-button";
 import { CloseIcon } from "components/icon/close-icon";
-import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import { KYC_ROUTE } from "components/profile/profile.constants";
 import { RowItem } from "components/row-item/row-item";
@@ -13,12 +12,27 @@ import {
   ProgramLevelInfo,
   ProgramsLevelsInfo
 } from "gv-api-web";
+import {
+  LevelCalculatorPopupCloseButton,
+  LevelCalculatorPopupControls,
+  LevelCalculatorPopupHeader,
+  LevelCalculatorPopupHeading,
+  LevelCalculatorPopupKYCDisclaimer,
+  LevelCalculatorPopupProgramLabel,
+  LevelCalculatorPopupProgramName,
+  LevelCalculatorPopupProgramTitle,
+  LevelCalculatorPopupVerifyButton
+} from "modules/level-calculator/components/level-calculator-popup.styles";
 import { ILevelCalculatorProps } from "pages/invest/programs/program-details/program-details.types";
 import * as React from "react";
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
+import styled from "styled-components";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
+import { mediaBreakpointLandscapePhone } from "utils/style/media";
+import { adaptiveMargin } from "utils/style/mixins";
+import { $paddingSmall } from "utils/style/sizes";
 
 import CalculatorLevelLine from "../components/calculator-level-line/calculator-level-line";
 import CalculatorOutput from "../components/calculator-output/calculator-output";
@@ -29,7 +43,19 @@ import {
   calcNewAvailableToInvest
 } from "../services/level-calculator.helper";
 import CalculatorLogarithmicSlider from "./calculator-slider/calculator-logarithmic-slider";
-import styles from "./level-calculator.module.scss";
+
+interface Props extends ILevelCalculatorProps {
+  programLevelInfo: ProgramLevelInfo;
+  platformLevels: ProgramsLevelsInfo;
+  onClose: () => void;
+}
+
+type TValues = {
+  genesisRatio: number;
+  programAge: number;
+  weightedVolumeScale: number;
+  managerBalance: number;
+};
 
 const getDefaultValues = (
   programLevelInfo: ProgramLevelInfo,
@@ -48,6 +74,12 @@ const getDefaultValues = (
     )
   };
 };
+
+const SliderWrapper = styled.div`
+  ${adaptiveMargin("bottom", $paddingSmall)};
+  width: 100%;
+  ${mediaBreakpointLandscapePhone(`max-width: 255px;`)};
+`;
 
 const _LevelCalculatorPopup: React.FC<Props> = ({
   title,
@@ -100,122 +132,112 @@ const _LevelCalculatorPopup: React.FC<Props> = ({
 
   return (
     <div>
-      <Center className={styles["level-calculator-popup__header"]}>
-        <h2 className={styles["level-calculator-popup__heading"]}>
+      <LevelCalculatorPopupHeader>
+        <LevelCalculatorPopupHeading>
           {t("program-details-page:level-calculator.title")}
-        </h2>
+        </LevelCalculatorPopupHeading>
         <Center>
           <RowItem>
-            <GVButton
+            <Button
               size={"small"}
               color={"secondary"}
               onClick={handleResetForm}
             >
-              <span
-                className={styles["level-calculator-popup__reset-button-text"]}
-              >
-                {t("buttons.reset")}
-              </span>
-            </GVButton>
+              <Text muted>{t("buttons.reset")}</Text>
+            </Button>
           </RowItem>
-          <GVButton
-            className={styles["level-calculator-popup__close-button"]}
-            noPadding
-            variant="text"
-            color="secondary"
-            onClick={onClose}
-          >
-            <CloseIcon />
-          </GVButton>
+          <LevelCalculatorPopupCloseButton>
+            <Button
+              noPadding
+              variant="text"
+              color="secondary"
+              onClick={onClose}
+            >
+              <CloseIcon />
+            </Button>
+          </LevelCalculatorPopupCloseButton>
         </Center>
-      </Center>
+      </LevelCalculatorPopupHeader>
 
-      <div className={styles["level-calculator-popup__program-name"]}>
-        <div className={styles["level-calculator-popup__program-label"]}>
+      <LevelCalculatorPopupProgramName>
+        <LevelCalculatorPopupProgramLabel>
           {t("program-details-page:level-calculator.program")}
-        </div>
-        <div className={styles["level-calculator-popup__program-title"]}>
+        </LevelCalculatorPopupProgramLabel>
+        <LevelCalculatorPopupProgramTitle>
           {title}
-        </div>
-      </div>
-      <div className={styles["level-calculator-popup__controls"]}>
-        <CalculatorSlider
-          name="genesisRatio"
-          className={styles["level-calculator-popup__calculator-slider"]}
-          valueClassName={
-            styles["level-calculator-popup__calculator-slider-value"]
-          }
-          title={t("program-details-page:level-calculator.genesis-ratio")}
-          tooltipContent={t(
-            "program-details-page:level-calculator.genesis-ratio-tooltip"
-          )}
-          value={genesisRatio}
-          editableValue
-          min={levelsParameters.genesisRatioMin}
-          max={levelsParameters.genesisRatioMax}
-          step={0.01}
-          onChange={handleSliderChange}
-        />
-        <CalculatorSlider
-          name="programAge"
-          className={styles["level-calculator-popup__calculator-slider"]}
-          valueClassName={
-            styles["level-calculator-popup__calculator-slider-value"]
-          }
-          title={t("program-details-page:level-calculator.age")}
-          tooltipContent={t(
-            "program-details-page:level-calculator.age-tooltip"
-          )}
-          value={programAge}
-          editableValue
-          min={0}
-          max={levelsParameters.programAgeMax}
-          maxLabel={
-            <NumberFormat
-              value={levelsParameters.programAgeMax}
-              displayType="text"
-              suffix="+"
-            />
-          }
-          step={1}
-          onChange={handleSliderChange}
-        />
-        <CalculatorSlider
-          name="weightedVolumeScale"
-          className={styles["level-calculator-popup__calculator-slider"]}
-          valueClassName={
-            styles["level-calculator-popup__calculator-slider-value"]
-          }
-          title={t(
-            "program-details-page:level-calculator.weighted-volume-scale"
-          )}
-          tooltipContent={t(
-            "program-details-page:level-calculator.weighted-volume-scale-tooltip"
-          )}
-          value={weightedVolumeScale}
-          editableValue
-          min={levelsParameters.volumeScaleMin}
-          max={levelsParameters.volumeScaleMax}
-          step={0.01}
-          onChange={handleSliderChange}
-        />
-        <CalculatorLogarithmicSlider
-          name="managerBalance"
-          className={styles["level-calculator-popup__calculator-slider"]}
-          title={t("program-details-page:level-calculator.manager-balance")}
-          tooltipContent={t(
-            "program-details-page:level-calculator.manager-balance-tooltip"
-          )}
-          value={+formatValue(managerBalance, 2)}
-          valueAdornment={` ${currency}`}
-          max={levelsParameters.maxAvailableToInvest}
-          onChange={handleSliderChange}
-        />
-      </div>
-
-      <div className={styles["level-calculator-popup__controls"]}>
+        </LevelCalculatorPopupProgramTitle>
+      </LevelCalculatorPopupProgramName>
+      <LevelCalculatorPopupControls>
+        <SliderWrapper>
+          <CalculatorSlider
+            name="genesisRatio"
+            title={t("program-details-page:level-calculator.genesis-ratio")}
+            tooltipContent={t(
+              "program-details-page:level-calculator.genesis-ratio-tooltip"
+            )}
+            value={genesisRatio}
+            editableValue
+            min={levelsParameters.genesisRatioMin}
+            max={levelsParameters.genesisRatioMax}
+            step={0.01}
+            onChange={handleSliderChange}
+          />
+        </SliderWrapper>
+        <SliderWrapper>
+          <CalculatorSlider
+            name="programAge"
+            title={t("program-details-page:level-calculator.age")}
+            tooltipContent={t(
+              "program-details-page:level-calculator.age-tooltip"
+            )}
+            value={programAge}
+            editableValue
+            min={0}
+            max={levelsParameters.programAgeMax}
+            maxLabel={
+              <NumberFormat
+                value={levelsParameters.programAgeMax}
+                displayType="text"
+                suffix="+"
+              />
+            }
+            step={1}
+            onChange={handleSliderChange}
+          />{" "}
+        </SliderWrapper>
+        <SliderWrapper>
+          <CalculatorSlider
+            name="weightedVolumeScale"
+            title={t(
+              "program-details-page:level-calculator.weighted-volume-scale"
+            )}
+            tooltipContent={t(
+              "program-details-page:level-calculator.weighted-volume-scale-tooltip"
+            )}
+            value={weightedVolumeScale}
+            editableValue
+            min={levelsParameters.volumeScaleMin}
+            max={levelsParameters.volumeScaleMax}
+            step={0.01}
+            onChange={handleSliderChange}
+          />
+        </SliderWrapper>
+        <SliderWrapper>
+          <CalculatorLogarithmicSlider
+            name="managerBalance"
+            title={t("program-details-page:level-calculator.manager-balance")}
+            tooltipContent={t(
+              "program-details-page:level-calculator.manager-balance-tooltip"
+            )}
+            value={+formatValue(managerBalance, 2)}
+            valueAdornment={` ${currency}`}
+            max={levelsParameters.maxAvailableToInvest}
+            onChange={handleSliderChange}
+          />
+        </SliderWrapper>
+      </LevelCalculatorPopupControls>
+      <LevelCalculatorPopupControls>
         <CalculatorOutput
-          className={styles["level-calculator-popup__statistic-item"]}
           label={t(
             "program-details-page:level-calculator.current-av-to-invest"
           )}
@@ -234,9 +256,7 @@ const _LevelCalculatorPopup: React.FC<Props> = ({
             />
           }
         />
-
         <CalculatorOutput
-          className={styles["level-calculator-popup__statistic-item"]}
           label={t(
             "program-details-page:level-calculator.current-investment-scale"
           )}
@@ -251,7 +271,6 @@ const _LevelCalculatorPopup: React.FC<Props> = ({
           }
         />
         <CalculatorOutput
-          className={styles["level-calculator-popup__statistic-item"]}
           label={t("program-details-page:level-calculator.new-av-to-invest")}
           tooltipContent={t(
             "program-details-page:level-calculator.new-av-to-invest-tooltip"
@@ -266,7 +285,6 @@ const _LevelCalculatorPopup: React.FC<Props> = ({
           }
         />
         <CalculatorOutput
-          className={styles["level-calculator-popup__statistic-item"]}
           label={t(
             "program-details-page:level-calculator.new-investment-scale"
           )}
@@ -280,30 +298,25 @@ const _LevelCalculatorPopup: React.FC<Props> = ({
             />
           }
         />
-      </div>
-      <div className={styles["level-calculator-popup__level-progress"]}>
-        <CalculatorLevelLine
-          start={1}
-          end={7}
-          level={level}
-          levelProgress={progress}
-        />
-      </div>
+      </LevelCalculatorPopupControls>
+      <CalculatorLevelLine
+        start={1}
+        end={7}
+        level={level}
+        levelProgress={progress}
+      />
       {!isKycConfirmed && (
         <>
-          <div className={styles["level-calculator-popup__kyc-disclaimer"]}>
+          <LevelCalculatorPopupKYCDisclaimer>
             <Text muted size={"small"}>
               {t("program-details-page:level-calculator.kyc-disclaimer")}
             </Text>
-          </div>
-          <Link
-            className={styles["level-calculator-popup__btn-verify"]}
-            to={linkCreator(KYC_ROUTE, title)}
-          >
-            <GVButton color="primary" variant="outlined">
+          </LevelCalculatorPopupKYCDisclaimer>
+          <LevelCalculatorPopupVerifyButton to={linkCreator(KYC_ROUTE, title)}>
+            <Button color="primary" variant="outlined">
               {t("buttons.verify")}
-            </GVButton>
-          </Link>
+            </Button>
+          </LevelCalculatorPopupVerifyButton>
         </>
       )}
     </div>
@@ -314,16 +327,3 @@ const LevelCalculatorPopup = withLoader(
   React.memo(Crashable(_LevelCalculatorPopup))
 );
 export default LevelCalculatorPopup;
-
-interface Props extends ILevelCalculatorProps {
-  programLevelInfo: ProgramLevelInfo;
-  platformLevels: ProgramsLevelsInfo;
-  onClose: () => void;
-}
-
-type TValues = {
-  genesisRatio: number;
-  programAge: number;
-  weightedVolumeScale: number;
-  managerBalance: number;
-};

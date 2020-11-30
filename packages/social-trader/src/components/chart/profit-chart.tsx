@@ -1,4 +1,3 @@
-import GVColors from "components/gv-styles/gv-colors";
 import { FundAssetPartWithIcon, SimpleChartPoint } from "gv-api-web";
 import * as React from "react";
 import {
@@ -11,9 +10,30 @@ import {
   TooltipProps,
   YAxis
 } from "recharts";
+import { $labelColor } from "utils/style/colors";
 
 import chartXAxis from "./chart-components/chart-xaxis";
 import { getStrokeColor } from "./chart-gradient/chart-gradient";
+
+interface Props {
+  tooltip?:
+    | React.ReactElement
+    | React.StatelessComponent<any>
+    | ContentRenderer<TooltipProps>;
+  equityCharts: EquityChartType[];
+  equities: EquityChartType[];
+  colors?: TChartColor[];
+}
+
+export type TChartColor = {
+  name?: string;
+  color: string;
+};
+
+export type EquityChartElementType = SimpleChartPoint & {
+  assets?: FundAssetPartWithIcon[];
+};
+export type EquityChartType = Array<EquityChartElementType>;
 
 const _ProfitChart: React.FC<Props> = ({
   tooltip,
@@ -39,7 +59,7 @@ const _ProfitChart: React.FC<Props> = ({
           orientation="right"
           dataKey="value"
           axisLine={false}
-          tick={{ fill: GVColors.$labelColor, fontSize: "12" }}
+          tick={{ fill: $labelColor, fontSize: "12" }}
           tickFormatter={(x: number) => +x.toFixed(2)}
           unit="%"
           width={35}
@@ -65,26 +85,6 @@ const _ProfitChart: React.FC<Props> = ({
     </ResponsiveContainer>
   );
 };
-
-interface Props {
-  tooltip?:
-    | React.ReactElement
-    | React.StatelessComponent<any>
-    | ContentRenderer<TooltipProps>;
-  equityCharts: EquityChartType[];
-  equities: EquityChartType[];
-  colors?: TChartColor[];
-}
-
-export type TChartColor = {
-  name?: string;
-  color: string;
-};
-
-export type EquityChartElementType = SimpleChartPoint & {
-  assets?: FundAssetPartWithIcon[];
-};
-export type EquityChartType = Array<EquityChartElementType>;
 
 const ProfitChart = React.memo(_ProfitChart);
 export default ProfitChart;

@@ -1,4 +1,3 @@
-import GVColors from "components/gv-styles/gv-colors";
 import { LabeledValue } from "components/labeled-value/labeled-value";
 import { Push } from "components/link/link";
 import { RowItem } from "components/row-item/row-item";
@@ -20,7 +19,11 @@ import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { INVESTMENTS_ROUTE, TRADING_ROUTE } from "routes/dashboard.routes";
+import styled from "styled-components";
 import { formatCurrencyValue } from "utils/formatter";
+import { $primaryColor } from "utils/style/colors";
+import { adaptiveMargin } from "utils/style/mixins";
+import { $paddingMedium } from "utils/style/sizes";
 import { CurrencyEnum } from "utils/types";
 
 import { TDashboardTotal } from "../../dashboard.types";
@@ -30,6 +33,10 @@ interface Props {
   currency: CurrencyEnum;
   data: TDashboardTotal;
 }
+
+const ItemListContainer = styled.div`
+  ${adaptiveMargin("bottom", -$paddingMedium)}
+`;
 
 const _DashboardTotal: React.FC<Props> = ({
   currency,
@@ -74,44 +81,48 @@ const _DashboardTotal: React.FC<Props> = ({
             </LabeledValue>
           </Row>
           <Row>
-            <StatisticItemList
-              className={styles["dashboard-total__main-block-pie-item-list"]}
-            >
-              <PieStatisticItem
-                onClick={useCallback(() => Push(INVESTMENTS_ROUTE), [])}
-                suffix={currency}
-                color={GVColors.$primaryColor}
-                tooltipContentLabel={t(
-                  "dashboard-page:tooltips.total.invested"
+            <ItemListContainer>
+              <StatisticItemList>
+                <PieStatisticItem
+                  onClick={useCallback(() => Push(INVESTMENTS_ROUTE), [])}
+                  suffix={currency}
+                  color={$primaryColor}
+                  tooltipContentLabel={t(
+                    "dashboard-page:tooltips.total.invested"
+                  )}
+                  label={t("dashboard-page:total.invested")}
+                  value={invested}
+                  total={total}
+                />
+                <PieStatisticItem
+                  onClick={useCallback(() => Push(TRADING_ROUTE), [])}
+                  suffix={currency}
+                  color={$piePendingColor}
+                  tooltipContentLabel={t(
+                    "dashboard-page:tooltips.total.trading"
+                  )}
+                  label={t("dashboard-page:total.pending")}
+                  value={trading}
+                  total={total}
+                />
+                <PieStatisticItem
+                  onClick={useCallback(() => Push(WALLET_TOTAL_PAGE_ROUTE), [])}
+                  suffix={currency}
+                  color={$pieAvailableColor}
+                  tooltipContentLabel={t(
+                    "dashboard-page:tooltips.total.wallet"
+                  )}
+                  label={t("dashboard-page:total.wallet")}
+                  value={wallets}
+                  total={total}
+                />
+                {!hasMoney && (
+                  <RowItem>
+                    <WalletDeposit />
+                  </RowItem>
                 )}
-                label={t("dashboard-page:total.invested")}
-                value={invested}
-                total={total}
-              />
-              <PieStatisticItem
-                onClick={useCallback(() => Push(TRADING_ROUTE), [])}
-                suffix={currency}
-                color={$piePendingColor}
-                tooltipContentLabel={t("dashboard-page:tooltips.total.trading")}
-                label={t("dashboard-page:total.pending")}
-                value={trading}
-                total={total}
-              />
-              <PieStatisticItem
-                onClick={useCallback(() => Push(WALLET_TOTAL_PAGE_ROUTE), [])}
-                suffix={currency}
-                color={$pieAvailableColor}
-                tooltipContentLabel={t("dashboard-page:tooltips.total.wallet")}
-                label={t("dashboard-page:total.wallet")}
-                value={wallets}
-                total={total}
-              />
-              {!hasMoney && (
-                <RowItem>
-                  <WalletDeposit />
-                </RowItem>
-              )}
-            </StatisticItemList>
+              </StatisticItemList>
+            </ItemListContainer>
           </Row>
         </RowItem>
         <RowItem

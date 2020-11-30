@@ -4,11 +4,27 @@ import { Row } from "components/row/row";
 import useAnchor from "hooks/anchor.hook";
 import * as React from "react";
 import { useCallback } from "react";
+import styled from "styled-components";
 
 import { UpdateFilterFunc } from "../table.types";
 import TileFilterButton from "./tile-filter-button";
-import { ITileFilterItemProps } from "./tile-filter-item";
-import styles from "./tile-filter.module.scss";
+import {
+  ITileFilterItemProps,
+  TileFilterItemMarginBottom
+} from "./tile-filter-item";
+
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
+  value: string[];
+  updateFilter: UpdateFilterFunc;
+  name: string;
+  buttonTitle: string;
+  selectedTiles: React.ReactElement<ITileFilterItemProps>[];
+}
+
+const Items = styled(Row)`
+  margin-bottom: -${TileFilterItemMarginBottom}px;
+  flex-wrap: wrap;
+`;
 
 const TileFilter: React.FC<Props> = ({
   selectedTiles,
@@ -52,7 +68,7 @@ const TileFilter: React.FC<Props> = ({
     <RowItem>
       <Row>
         <RowItem size={"large"}>
-          <Row className={styles["tile-filter__items"]}>{selectedItems}</Row>
+          <Items>{selectedItems}</Items>
         </RowItem>
         <RowItem>
           <TileFilterButton
@@ -75,11 +91,3 @@ const TileFilter: React.FC<Props> = ({
 };
 
 export default TileFilter;
-
-interface Props extends React.HTMLAttributes<HTMLDivElement> {
-  value: string[];
-  updateFilter: UpdateFilterFunc;
-  name: string;
-  buttonTitle: string;
-  selectedTiles: React.ReactElement<ITileFilterItemProps>[];
-}

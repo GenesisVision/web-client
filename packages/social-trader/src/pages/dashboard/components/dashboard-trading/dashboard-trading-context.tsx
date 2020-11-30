@@ -7,6 +7,7 @@ export const DashboardTradingContext: React.FC = ({ children }) => {
   const currency = useAccountCurrency();
   return (
     <DataStorageContextProvider
+      name={"DashboardTradingContext"}
       request={fetchTradingTotalStatistic}
       fetchOnMountData={{ currency }}
     >

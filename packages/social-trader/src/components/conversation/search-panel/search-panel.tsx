@@ -8,13 +8,23 @@ import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
 import React from "react";
+import styled from "styled-components";
+import { transition } from "utils/style/mixins";
 import { Clickable } from "utils/types";
-
-import styles from "./search-panel.module.scss";
 
 interface Props extends Clickable {
   asset: AssetSearchResult;
 }
+
+const RowContainer = styled(Row)`
+  cursor: pointer;
+  &:hover {
+    & span {
+      ${transition("color")};
+      color: white !important;
+    }
+  }
+`;
 
 const SearchResultRow: React.FC<Props> = ({
   asset: { color, avatar, name, type },
@@ -28,7 +38,7 @@ const SearchResultRow: React.FC<Props> = ({
     );
   };
   return (
-    <Row onClick={onClick} className={styles["search-panel__row"]}>
+    <RowContainer onClick={onClick}>
       <AvatarWithName
         avatar={renderAvatar()}
         name={
@@ -40,7 +50,7 @@ const SearchResultRow: React.FC<Props> = ({
           </Center>
         }
       />
-    </Row>
+    </RowContainer>
   );
 };
 
@@ -49,13 +59,23 @@ interface ISearchPanelProps extends Clickable {
   searchResult?: AssetSearchResult[];
 }
 
+const Container = styled.div`
+  max-height: 160px;
+  overflow-y: scroll;
+`;
+
+const Spinner = styled(ImageBaseElement)`
+  width: 30px;
+  height: 30px;
+`;
+
 const _SearchPanel: React.FC<ISearchPanelProps> = ({
   isSearchPending,
   searchResult,
   onClick
 }) => {
   return (
-    <div className={styles["search-panel"]}>
+    <Container>
       {!!searchResult?.length &&
         searchResult?.map(asset => (
           <SearchResultRow
@@ -66,8 +86,7 @@ const _SearchPanel: React.FC<ISearchPanelProps> = ({
         ))}
       {isSearchPending && (
         <Row>
-          <ImageBaseElement
-            className={styles["search-panel__spinner"]}
+          <Spinner
             src={
               "https://thumbs.gfycat.com/TediousCookedFunnelweaverspider-max-1mb.gif"
             }
@@ -77,7 +96,7 @@ const _SearchPanel: React.FC<ISearchPanelProps> = ({
       {!isSearchPending && !searchResult?.length && (
         <Text muted>Not found assets or managers</Text>
       )}
-    </div>
+    </Container>
   );
 };
 

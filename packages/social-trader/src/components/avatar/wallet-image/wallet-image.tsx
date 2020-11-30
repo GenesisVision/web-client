@@ -3,6 +3,10 @@ import * as React from "react";
 
 import ImageBase, { IImageProps } from "../image-base";
 
+interface Props extends IImageProps {
+  imageClassName?: string;
+}
+
 const _WalletImage: React.FC<Props> = ({ url, alt, imageClassName }) => {
   return (
     <ImageBase
@@ -16,7 +20,3 @@ const _WalletImage: React.FC<Props> = ({ url, alt, imageClassName }) => {
 
 const WalletImage = React.memo(_WalletImage);
 export default WalletImage;
-
-interface Props extends IImageProps {
-  imageClassName?: string;
-}

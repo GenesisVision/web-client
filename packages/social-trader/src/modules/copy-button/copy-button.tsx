@@ -1,4 +1,4 @@
-import GVButton from "components/gv-button";
+import { Button } from "components/button/button";
 import CopyIcon from "components/icon/copy-icon";
 import { Row } from "components/row/row";
 import useCopy from "hooks/copy.hook";
@@ -12,7 +12,7 @@ const _CopyButton: React.FC<Props> = ({ value, text, wide }) => {
     copy(value);
   }, [value]);
   return (
-    <GVButton
+    <Button
       isSuccessful={isSuccess}
       wide={wide}
       noPadding={!!text}
@@ -25,7 +25,7 @@ const _CopyButton: React.FC<Props> = ({ value, text, wide }) => {
         &nbsp;
         {t("buttons.copy")}
       </Row>
-    </GVButton>
+    </Button>
   );
 };
 

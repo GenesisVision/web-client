@@ -1,35 +1,36 @@
 import ChartTooltip from "components/chart/chart-tooltip/chart-tooltip";
-import styles from "components/details/details-statistic-section/details-chart-section/details-chart-section.module.scss";
 import { LabeledValue } from "components/labeled-value/labeled-value";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { formatCurrencyValue } from "utils/formatter";
 
-const _TooltipBody: React.FC<ITooltipBodyProps & WithTranslation> = ({
-  t,
+const _TooltipBody: React.FC<ITooltipBodyProps> = ({
   managersFunds,
   investorsFunds
-}) => (
-  <>
-    <Row>
-      <LabeledValue
-        label={t("asset-details:statistics.tooltip.investors-funds")}
-      >
-        <Text weight={"bold"}>{investorsFunds}</Text>
-      </LabeledValue>
-    </Row>
-    <Row>
-      <LabeledValue
-        label={t("asset-details:statistics.tooltip.managers-funds")}
-      >
-        <Text weight={"bold"}>{managersFunds}</Text>
-      </LabeledValue>
-    </Row>
-  </>
-);
-const TooltipBody = translate()(React.memo(_TooltipBody));
+}) => {
+  const [t] = useTranslation();
+  return (
+    <>
+      <Row>
+        <LabeledValue
+          label={t("asset-details:statistics.tooltip.investors-funds")}
+        >
+          <Text weight={"bold"}>{investorsFunds}</Text>
+        </LabeledValue>
+      </Row>
+      <Row>
+        <LabeledValue
+          label={t("asset-details:statistics.tooltip.managers-funds")}
+        >
+          <Text weight={"bold"}>{managersFunds}</Text>
+        </LabeledValue>
+      </Row>
+    </>
+  );
+};
+const TooltipBody = React.memo(_TooltipBody);
 
 const ProgramBalanceTooltip: React.FC<IProgramBalanceTooltipProps> = ({
   active,
@@ -57,7 +58,6 @@ const ProgramBalanceTooltip: React.FC<IProgramBalanceTooltipProps> = ({
         />
       }
       date={new Date(label)}
-      className={styles["details-tooltip"]}
     />
   );
 };

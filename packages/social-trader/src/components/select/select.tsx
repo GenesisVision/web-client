@@ -1,8 +1,13 @@
-import clsx from "clsx";
 import { Center } from "components/center/center";
 import Popover, { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import { PopoverContent } from "components/popover/popover-content";
 import { RowItem } from "components/row-item/row-item";
+import {
+  SelectContainer,
+  SelectIcon,
+  SelectText,
+  SelectValue
+} from "components/select/select.styles";
 import FilterArrowIcon from "components/table/components/filtering/filter-arrow-icon";
 import useAnchor from "hooks/anchor.hook";
 import * as React from "react";
@@ -10,7 +15,34 @@ import { useCallback, useEffect, useRef } from "react";
 import { Sizeable } from "utils/types";
 
 import SelectItem from "./select-item";
-import styles from "./select.module.scss";
+
+export interface ISelectChangeEvent {
+  target: { value: string; name: string };
+}
+
+interface ChildOwnProps {
+  value: string;
+  key: string;
+  children: string;
+}
+
+interface SelectChild extends React.ReactElement<ChildOwnProps> {}
+
+interface Props extends Sizeable {
+  fixedWidth?: boolean;
+  bottomLine?: boolean;
+  fixedVertical?: boolean;
+  className?: string;
+  value: string;
+  name: string;
+  fullWidthPopover?: boolean;
+  disabled?: boolean;
+  disableIfSingle?: boolean;
+  children: SelectChild[];
+  onChange: (event: ISelectChangeEvent, child: JSX.Element) => void;
+  onFocus?: (event: React.FocusEvent<HTMLButtonElement>) => void;
+  onBlur?: (event: React.FocusEvent<HTMLButtonElement>) => void;
+}
 
 const Select: React.FC<Props> = ({
   fixedWidth = true,
@@ -106,10 +138,10 @@ const Select: React.FC<Props> = ({
     if (isSelected) displayValue = child.props.children;
     return (
       <SelectItem
-        key={child.props.value}
         isSelected={isSelected}
         onClick={handleChildClick(child)}
         {...child.props}
+        key={child.props.value}
         name={name}
       >
         {child.props.children}
@@ -118,20 +150,12 @@ const Select: React.FC<Props> = ({
   });
 
   return (
-    <div
-      className={clsx(styles["select"], className, {
-        [styles["select--fixed-width"]]: fixedWidth,
-        [styles["select--middle"]]: size === "middle",
-        [styles["select--small"]]: size === "small",
-        [styles["select--disabled"]]: isDisabled
-      })}
-    >
-      <button
+    <SelectContainer className={className} fixedWidth={fixedWidth}>
+      <SelectValue
+        size={size}
+        bottomLine={bottomLine}
         name={name}
         onClick={handleClick}
-        className={clsx(styles["select__value"], {
-          [styles["select__value--bottom-line"]]: bottomLine
-        })}
         onBlur={handleBlur}
         onFocus={handleFocus}
         ref={input}
@@ -140,14 +164,14 @@ const Select: React.FC<Props> = ({
         <Center>
           {displayValue && (
             <RowItem size={"small"}>
-              <span className={styles["select__text"]}>{displayValue}</span>
+              <SelectText size={size}>{displayValue}</SelectText>
             </RowItem>
           )}
-          <RowItem className={styles["select__icon"]}>
+          <SelectIcon>
             {!isDisabled && <FilterArrowIcon isOpen={Boolean(anchor)} />}
-          </RowItem>
+          </SelectIcon>
         </Center>
-      </button>
+      </SelectValue>
       <input type="hidden" value={value} name={name} />
       <Popover
         fixedVertical={fixedVertical}
@@ -160,36 +184,8 @@ const Select: React.FC<Props> = ({
           {items}
         </PopoverContent>
       </Popover>
-    </div>
+    </SelectContainer>
   );
 };
-
-export interface ISelectChangeEvent {
-  target: { value: string; name: string };
-}
-
-interface ChildOwnProps {
-  value: string;
-  key: string;
-  children: string;
-}
-
-interface SelectChild extends React.ReactElement<ChildOwnProps> {}
-
-interface Props extends Sizeable {
-  fixedWidth?: boolean;
-  bottomLine?: boolean;
-  fixedVertical?: boolean;
-  value: string;
-  name: string;
-  className?: string;
-  fullWidthPopover?: boolean;
-  disabled?: boolean;
-  disableIfSingle?: boolean;
-  children: SelectChild[];
-  onChange(event: ISelectChangeEvent, child: JSX.Element): void;
-  onFocus?(event: React.FocusEvent<HTMLButtonElement>): void;
-  onBlur?(event: React.FocusEvent<HTMLButtonElement>): void;
-}
 
 export default Select;

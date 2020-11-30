@@ -1,7 +1,7 @@
 import DetailsDescriptionSection from "components/details/details-description-section/details-description/details-description-section";
 import { DetailsDivider } from "components/details/details-divider.block";
-import { DETAILS_TYPE } from "components/details/details.types";
 import Page from "components/page/page";
+import { Row } from "components/row/row";
 import { ASSET, TRADE_ASSET_TYPE } from "constants/constants";
 import Crashable from "decorators/crashable";
 import dynamic from "next/dynamic";
@@ -87,7 +87,6 @@ const _AccountDetailsContainer: React.FC<Props> = ({ data: description }) => {
   return (
     <Page title={title}>
       <DetailsDescriptionSection
-        detailsType={DETAILS_TYPE.ASSET}
         isOwnAsset={true}
         logo={description.brokerDetails.logoUrl}
         title={title}
@@ -104,7 +103,9 @@ const _AccountDetailsContainer: React.FC<Props> = ({ data: description }) => {
           assetCurrency={description.tradingAccountInfo.currency}
         />
       )}
-      <AccountDetailsStatisticSection />
+      <Row onlyOffset>
+        <AccountDetailsStatisticSection />
+      </Row>
       <ProgramDetailsHistorySection
         isFollower={description.tradingAccountInfo.showTradingLog}
         canCloseOpenPositions={description.ownerActions?.canCloseOpenPositions}

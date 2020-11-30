@@ -11,6 +11,22 @@ import * as React from "react";
 
 import styles from "./asset-form-field.module.scss";
 
+interface Props {
+  wide?: boolean;
+  isAllowed?: (values: TextInputValues) => boolean;
+  max?: number;
+  value?: string | null;
+  hintContent?: string;
+  hintTooltipContent?: string;
+  adornment?: string;
+  type?: string;
+  caption?: string;
+  component: React.ComponentType<any>;
+  label: string;
+  name: string;
+  disabled?: boolean;
+}
+
 export const _AssetFormField: React.FC<React.HTMLAttributes<HTMLDivElement> &
   Props> = ({
   wide,
@@ -21,7 +37,6 @@ export const _AssetFormField: React.FC<React.HTMLAttributes<HTMLDivElement> &
   label,
   component,
   caption,
-  className,
   adornment,
   type,
   hintContent,
@@ -30,7 +45,7 @@ export const _AssetFormField: React.FC<React.HTMLAttributes<HTMLDivElement> &
 }) => {
   const trimmedLength = (typeof value === "string" ? value : "").trim().length;
   return (
-    <div className={className}>
+    <div>
       <GVHookFormField
         showCorrect
         wide={wide}
@@ -78,23 +93,6 @@ export const _AssetFormField: React.FC<React.HTMLAttributes<HTMLDivElement> &
     </div>
   );
 };
-
-interface Props {
-  wide?: boolean;
-  isAllowed?: (values: TextInputValues) => boolean;
-  max?: number;
-  value?: string | null;
-  hintContent?: string;
-  hintTooltipContent?: string;
-  adornment?: string;
-  type?: string;
-  caption?: string;
-  component: React.ComponentType<any>;
-  label: string;
-  name: string;
-  className?: string;
-  disabled?: boolean;
-}
 
 const AssetFormField = React.memo(_AssetFormField);
 export default AssetFormField;

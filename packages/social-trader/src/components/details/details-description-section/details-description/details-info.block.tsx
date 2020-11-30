@@ -1,12 +1,33 @@
+import { $paddingInfoLeft } from "components/details/details-description-section/details-description/details-description.style";
 import { DetailsStrategy } from "components/details/details-description-section/details-description/details-structure-blocks";
 import { ToType } from "components/link/link";
 import { Row } from "components/row/row";
 import SocialLinksBlock from "components/social-links-block/social-links-block";
 import { SocialLinkViewModel } from "gv-api-web";
 import * as React from "react";
+import styled from "styled-components";
+import { mediaBreakpointTablet } from "utils/style/media";
 
-import styles from "./details-description.module.scss";
 import { DetailsSubtitle } from "./details-subtitle.block";
+
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
+  descriptionTitle?: string;
+  title: string;
+  subtitleUrl?: ToType;
+  subtitle?: string;
+  socialLinks?: SocialLinkViewModel[];
+  description?: string;
+}
+
+const InfoContainer = styled.div`
+  order: 99;
+  width: 100%;
+  ${mediaBreakpointTablet(`
+    order: 0;
+    width: auto;
+    margin-left: ${$paddingInfoLeft}px;
+  `)}
+`;
 
 const _DetailsInfo: React.FC<Props> = ({
   descriptionTitle,
@@ -18,7 +39,7 @@ const _DetailsInfo: React.FC<Props> = ({
   children
 }) => {
   return (
-    <div className={styles["details-description__info"]}>
+    <InfoContainer>
       <h1>{title}</h1>
       {subtitle && (
         <Row>
@@ -36,17 +57,8 @@ const _DetailsInfo: React.FC<Props> = ({
           <DetailsStrategy title={descriptionTitle} description={description} />
         </Row>
       )}
-    </div>
+    </InfoContainer>
   );
 };
-
-interface Props extends React.HTMLAttributes<HTMLDivElement> {
-  descriptionTitle?: string;
-  title: string;
-  subtitleUrl?: ToType;
-  subtitle?: string;
-  socialLinks?: SocialLinkViewModel[];
-  description?: string;
-}
 
 export const DetailsInfo = React.memo(_DetailsInfo);

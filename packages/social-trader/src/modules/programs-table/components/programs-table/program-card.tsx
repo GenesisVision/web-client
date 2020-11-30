@@ -151,10 +151,14 @@ const _ProgramCard: React.FC<Props> = ({ program }) => {
                 />
               }
             >
-              <ProgramPeriodPie
-                start={program.periodStarts}
-                end={program.periodEnds}
-              />
+              {program.type === "FixedPeriod" ? (
+                <ProgramPeriodPie
+                  start={program.periodStarts}
+                  end={program.periodEnds}
+                />
+              ) : (
+                "—"
+              )}
             </LabeledValue>
           </Row>
         </TableCardTableColumn>

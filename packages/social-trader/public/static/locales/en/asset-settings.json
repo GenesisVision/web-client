@@ -1,4 +1,8 @@
 {
+  "hints": {
+    "processing-label": "Description about Processing is here",
+    "processing-text": "Managers have the opportunity to choose when requests for investment / withdrawal of funds in the program will be processed. This can be in real time or every day at a scheduled time (for example, you can set a withdrawal at 5 pm)."
+  },
   "password-change-trading-account": {
     "title": "Change trading account password",
     "new-password": "New password",
@@ -43,6 +47,9 @@
     "title": "Signal provider"
   },
   "fields": {
+    "time": "Time",
+    "realtime": "Real time",
+    "processing": "Processing",
     "exchange": "Exchange",
     "api-secret": "API secret",
     "api-key": "API key",
@@ -105,9 +112,13 @@
     "title": "Close asset",
     "notifications": {
       "fund": "Request to close the fund was sent successfully.",
+      "exchangeaccount": "Request to close the trading account was sent successfully.",
+      "externalsignaltradingaccount": "Request to close the trading account was sent successfully.",
       "signaltradingaccount": "Request to close the trading account was sent successfully.",
+      "exchange-program": "Request to close the program was sent successfully.",
       "signalprogram": "Request to close the program was sent successfully.",
       "program": "Request to close the program was sent successfully.",
+      "tradingaccount": "Request to close the trading account was sent successfully.",
       "trading-account": "Request to close the trading account was sent successfully."
     }
   },
@@ -132,6 +143,7 @@
   "title": "Settings",
   "period-and-closing": {
     "title": "Period and closing",
+    "text-exchange-program": "The investment program will be closed after pressing the button. Current investment requests will be cancelled, and new requests won’t be accepted. Profit and funds from the trading account will be distributed between investors and manager according to their shares within the aforementioned program.",
     "text-signaltradingaccount": "The signal trading account will be terminated after confirmation. All open positions will be automatically closed.",
     "text-externalsignaltradingaccount": "The signal trading account will be terminated after confirmation. All open positions will be automatically closed.",
     "text-account": "The investment program will be closed after this reporting period. Current investment requests will be cancelled, and new requests won’t be accepted. Profit and funds from the trading account will be distributed between investors and manager according to their shares within the aforementioned program.",
@@ -156,7 +168,9 @@
     "close-confirm-notification-fund": "Are you sure you want to close this Fund? This action is irreversible.",
     "close-confirm-title-signalprogram": "Close Program",
     "close-confirm-notification-signalprogram": "Investment program will be closed after this reporting period. Current investment requests will be cancelled, and new requests won’t be accepted. Profit and funds from the trading account will be deposited to investors and manager according to their shares.",
+    "close-confirm-title-exchange-program": "Close Program",
     "close-confirm-title-program": "Close Program",
+    "close-confirm-notification-exchange-program": "Investment program will be closed after pressing the button. Current investment requests will be cancelled, and new requests won’t be accepted. Profit and funds from the trading account will be deposited to investors and manager according to their shares.",
     "close-confirm-notification-program": "Investment program will be closed after this reporting period. Current investment requests will be cancelled, and new requests won’t be accepted. Profit and funds from the trading account will be deposited to investors and manager according to their shares."
   },
   "strategy": {
@@ -173,11 +187,15 @@
     "cancel-broker": "Cancel",
     "change-broker": "Change broker",
     "close-externalsignaltradingaccount": "Close trading account",
+    "close-tradingaccount": "Close trading account",
+    "close-externaltradingaccount": "Close trading account",
+    "close-exchangeaccount": "Close trading account",
     "close-signaltradingaccount": "Close trading account",
     "close-signalprogram": "Close signal program",
     "close-trading-account": "Close trading account",
     "close-account": "Close account",
     "close-follow": "Close follow",
+    "close-exchange-program": "Close program",
     "close-program": "Close program",
     "close-fund": "Close fund",
     "save": "Save"

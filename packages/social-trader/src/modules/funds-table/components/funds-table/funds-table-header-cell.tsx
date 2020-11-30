@@ -7,8 +7,6 @@ import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
 
-import styles from "./funds-table.module.scss";
-
 interface Props {
   column: SortingColumn;
 }
@@ -17,11 +15,7 @@ const _FundsTableHeaderCell: React.FC<Props> = ({ column }) => {
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   const { t } = useTranslation();
   if (!isAuthenticated && column.name === "favorite") return null;
-  const renderCell = () => (
-    <span className={styles["funds-table__cell"]}>
-      {t(`header-fields.${column.name}`)}
-    </span>
-  );
+  const renderCell = () => <span>{t(`header-fields.${column.name}`)}</span>;
   return column.tooltip ? (
     <Tooltip
       horizontal={HORIZONTAL_POPOVER_POS.LEFT}

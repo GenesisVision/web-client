@@ -1,28 +1,9 @@
-import clsx from "clsx";
 import React from "react";
+import styled from "styled-components";
+import { cursorPointer } from "utils/style/mixins";
 
-import styles from "./center.module.scss";
-
-export const Center: React.FC<Props> = ({
-  wrap,
-  className,
-  children,
-  center = true,
-  ...otherProps
-}) => {
-  return (
-    <div
-      {...otherProps}
-      className={clsx(className, {
-        [styles["center"]]: center,
-        [styles["center--wrap"]]: wrap
-      })}
-    >
-      {children}
-    </div>
-  );
-};
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
+  onlyOffset?: boolean;
   hide?: boolean;
   center?: boolean;
   className?: string;
@@ -31,3 +12,14 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
   middle?: boolean;
   large?: boolean;
 }
+
+export const Center = styled.div<Props>`
+  display: ${({ hide, onlyOffset }: Props) => {
+    if (hide) return "none";
+    if (onlyOffset) return "block";
+    return "flex";
+  }};
+  ${({ center = true }: Props) => center && "align-items: center"};
+  flex-wrap: ${({ wrap }: Props) => (wrap ? "wrap" : "nowrap")};
+  ${cursorPointer}
+`;

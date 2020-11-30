@@ -1,5 +1,3 @@
-import clsx from "clsx";
-import styles from "components/details/details-description-section/details-statistic-section/details-history/trades.module.scss";
 import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import { Row } from "components/row/row";
 import DateRangeFilter from "components/table/components/filtering/date-range-filter/date-range-filter";
@@ -10,6 +8,7 @@ import {
   TableSelectorType
 } from "components/table/components/table.types";
 import { DEFAULT_PAGING } from "components/table/reducers/table-paging.reducer";
+import { Text } from "components/text/text";
 import Tooltip from "components/tooltip/tooltip";
 import { TooltipContent } from "components/tooltip/tooltip-content";
 import { TRADE_ASSET_TYPE } from "constants/constants";
@@ -48,14 +47,7 @@ const _ProgramTrades: React.FC<Props> = ({
   const delay = data && data.tradesDelay ? data.tradesDelay : "None";
   const renderCell = useCallback(
     (name: string) => (
-      <span
-        className={clsx(
-          styles[`details-trades__head-cell`],
-          styles[`program-details-trades__cell--${name}`]
-        )}
-      >
-        {t(`program-details-page:history.trades.${name}`)}
-      </span>
+      <Text>{t(`program-details-page:history.trades.${name}`)}</Text>
     ),
     []
   );
@@ -68,7 +60,7 @@ const _ProgramTrades: React.FC<Props> = ({
             <DownloadButtonToolbarAuth
               method={filesService.getAccountTradesExportFileUrl}
               dateRange={filtering!.dateRange}
-              programId={programId}
+              id={programId}
               title={title}
             />
           ) : (

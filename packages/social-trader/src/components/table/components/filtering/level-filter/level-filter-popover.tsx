@@ -1,4 +1,4 @@
-import GVButton from "components/gv-button";
+import { Button } from "components/button/button";
 import { PopoverContentCardBlock } from "components/popover/popover-card.block";
 import { PopoverContent } from "components/popover/popover-content";
 import { Range } from "components/range/range";
@@ -6,8 +6,17 @@ import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
+import styled from "styled-components";
 
-import styles from "./level-filter.module.scss";
+interface Props {
+  value: number[];
+  cancel?: () => void;
+  changeFilter?: (value: number[]) => void;
+}
+
+const Container = styled(PopoverContent)`
+  width: 250px;
+`;
 
 const _LevelFilterPopover: React.FC<Props> = ({
   cancel,
@@ -26,7 +35,7 @@ const _LevelFilterPopover: React.FC<Props> = ({
     changeFilter
   ]);
   return (
-    <PopoverContent className={styles["level-filter"]}>
+    <Container>
       <PopoverContentCardBlock>
         <Row onlyOffset>
           <Range
@@ -41,17 +50,17 @@ const _LevelFilterPopover: React.FC<Props> = ({
         </Row>
         <Row>
           <RowItem>
-            <GVButton
+            <Button
               size={"xlarge"}
               noPadding
               variant="text"
               onClick={handleSubmit}
             >
               {t("buttons.apply")}
-            </GVButton>
+            </Button>
           </RowItem>
           <RowItem>
-            <GVButton
+            <Button
               size={"xlarge"}
               noPadding
               variant="text"
@@ -59,19 +68,13 @@ const _LevelFilterPopover: React.FC<Props> = ({
               onClick={cancel}
             >
               {t("buttons.cancel")}
-            </GVButton>
+            </Button>
           </RowItem>
         </Row>
       </PopoverContentCardBlock>
-    </PopoverContent>
+    </Container>
   );
 };
-
-interface Props {
-  value: number[];
-  cancel?: () => void;
-  changeFilter?: (value: number[]) => void;
-}
 
 const LevelFilterPopover = React.memo(_LevelFilterPopover);
 export default LevelFilterPopover;

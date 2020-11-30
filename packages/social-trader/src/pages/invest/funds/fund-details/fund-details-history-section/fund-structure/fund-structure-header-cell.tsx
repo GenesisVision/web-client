@@ -4,11 +4,12 @@ import { SortingColumn } from "components/table/components/filtering/filter.type
 import Tooltip from "components/tooltip/tooltip";
 import { TooltipContent } from "components/tooltip/tooltip-content";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
-export const _FundStructureHeaderCell: React.FC<WithTranslation & {
+export const _FundStructureHeaderCell: React.FC<{
   column: SortingColumn;
-}> = ({ t, column }) => {
+}> = ({ column }) => {
+  const [t] = useTranslation();
   const renderCell = () => (
     <span
       className={clsx(
@@ -37,7 +38,5 @@ export const _FundStructureHeaderCell: React.FC<WithTranslation & {
   );
 };
 
-const FundStructureHeaderCell = React.memo(
-  translate()(_FundStructureHeaderCell)
-);
+const FundStructureHeaderCell = React.memo(_FundStructureHeaderCell);
 export default FundStructureHeaderCell;

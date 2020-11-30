@@ -15,7 +15,15 @@ import { Text } from "components/text/text";
 import { SimpleChartPoint } from "gv-api-web";
 import React from "react";
 import NumberFormat from "react-number-format";
+import styled from "styled-components";
 import { formatValue } from "utils/formatter";
+import { $labelColor, $primaryColor } from "utils/style/colors";
+import {
+  mediaBreakpointDesktop,
+  mediaBreakpointLargeDesktop,
+  mediaBreakpointTablet
+} from "utils/style/media";
+import { transition } from "utils/style/mixins";
 
 import styles from "./lp-table-card.module.scss";
 
@@ -84,6 +92,7 @@ export const LPTableCardTitle: React.FC<{
   const title = typeof children === "string" ? children : "";
   return url ? (
     <Link
+      white
       title={`Open ${title} details`}
       className={styles["lp-table-card__title"]}
       to={url}
@@ -95,25 +104,33 @@ export const LPTableCardTitle: React.FC<{
   );
 };
 
+const StyledText = styled(Text)`
+  ${transition("color", "opacity")};
+  color: ${$labelColor};
+  font-size: 10px;
+
+  &:hover {
+    color: ${$primaryColor};
+    opacity: 0.4;
+  }
+  ${mediaBreakpointTablet(`font-size: 14px;`)};
+  ${mediaBreakpointDesktop(`font-size: 15px;`)};
+  ${mediaBreakpointLargeDesktop(`font-size: 16px;`)};
+`;
+
 export const LPTableCardSubTitle: React.FC<{
   url?: ToType | string;
 } & React.HTMLAttributes<HTMLDivElement>> = ({ children, url }) => {
   const title = typeof children === "string" ? children : "";
   return (
     <div className={styles["lp-table-card__subtitle"]}>
-      <Text muted>
-        {url ? (
-          <Link
-            title={`Open ${title} user page`}
-            className={styles["lp-table-card__name"]}
-            to={url}
-          >
-            {children}
-          </Link>
-        ) : (
-          children
-        )}
-      </Text>
+      {url ? (
+        <Link title={`Open ${title} user page`} to={url}>
+          <StyledText muted>{children}</StyledText>
+        </Link>
+      ) : (
+        <StyledText muted>{children}</StyledText>
+      )}
     </div>
   );
 };

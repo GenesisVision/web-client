@@ -65,9 +65,16 @@ export const subtractDate = (
     .toDate();
 };
 
-export type TTimeUnitName = "month" | "day" | "hour" | "minute" | "week";
+export type TTimeUnitName =
+  | "year"
+  | "month"
+  | "day"
+  | "hour"
+  | "minute"
+  | "week";
 
 export const TimeUnitName = {
+  YEARS: "year" as TTimeUnitName,
   MONTHS: "month" as TTimeUnitName,
   DAYS: "day" as TTimeUnitName,
   HOURS: "hour" as TTimeUnitName,
@@ -75,6 +82,7 @@ export const TimeUnitName = {
 };
 
 export const timeUnits = {
+  [TimeUnitName.YEARS]: 0,
   [TimeUnitName.MONTHS]: 0,
   [TimeUnitName.DAYS]: 0,
   [TimeUnitName.HOURS]: 0,

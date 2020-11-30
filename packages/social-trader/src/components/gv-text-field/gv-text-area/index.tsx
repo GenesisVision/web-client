@@ -1,8 +1,6 @@
-import clsx from "clsx";
 import useIsOpen from "hooks/is-open.hook";
 import React, { useCallback, useEffect, useRef, useState } from "react";
-
-import styles from "./style.module.scss";
+import styled from "styled-components";
 
 export type TextareaChangeEvent = React.ChangeEvent<HTMLTextAreaElement>;
 
@@ -11,11 +9,6 @@ export type TextareaKeyDownEventExtended = TextareaKeyDownEvent & {
   ref: HTMLTextAreaElement;
 };
 
-const ARROW_KEYS = [37, 38, 39, 40];
-const CHANGE_CARET_KEYS = [...ARROW_KEYS];
-
-const ROWS_HEIGHT = 22;
-
 interface GVTextAreaProps {
   focusTrigger?: any;
   outerCaret?: number;
@@ -23,11 +16,37 @@ interface GVTextAreaProps {
   onKeyDown?: (e: TextareaKeyDownEventExtended) => void;
   ref?: any;
   className?: string;
-  textAreaClassName?: string;
   value: string;
   rows?: number;
   onChange: (e: any) => void;
 }
+
+const ARROW_KEYS = [37, 38, 39, 40];
+const CHANGE_CARET_KEYS = [...ARROW_KEYS];
+
+const ROWS_HEIGHT = 22;
+
+const Wrapper = styled.div`
+  &,
+  & textarea {
+    overflow: hidden;
+  }
+  width: 100%;
+`;
+
+const Field = styled.textarea`
+  box-sizing: border-box !important;
+  resize: none;
+  width: 100%;
+`;
+
+const HiddenField = styled(Field)`
+  overflow: hidden;
+  visibility: hidden;
+  position: absolute;
+  height: auto;
+  white-space: pre-wrap;
+`;
 
 const _GVTextArea: React.FC<GVTextAreaProps> = ({
   focusTrigger,
@@ -35,7 +54,6 @@ const _GVTextArea: React.FC<GVTextAreaProps> = ({
   onChangeCaret,
   rows = 1,
   onKeyDown,
-  textAreaClassName,
   onChange,
   className,
   value,
@@ -122,23 +140,19 @@ const _GVTextArea: React.FC<GVTextAreaProps> = ({
   }, []);
 
   return (
-    <div className={clsx(styles["gv-text-area"], textAreaClassName)}>
-      <textarea
-        className={clsx(
-          styles["gv-text-area__hidden"],
-          styles["gv-text-area__gv-text-field"],
-          className
-        )}
+    <Wrapper>
+      <HiddenField
+        className={className}
         readOnly
         ref={shadowRef}
         rows={rows}
         tabIndex={-1}
         value={value}
       />
-      <textarea
+      <Field
+        className={className}
         onClick={handleClick}
         rows={rows}
-        className={clsx(styles["gv-text-area__gv-text-field"], className)}
         value={value}
         ref={textareaRef}
         style={{ height }}
@@ -146,7 +160,7 @@ const _GVTextArea: React.FC<GVTextAreaProps> = ({
         {...otherProps}
         onKeyDown={handleKeyDown}
       />
-    </div>
+    </Wrapper>
   );
 };
 

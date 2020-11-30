@@ -1,4 +1,4 @@
-import GVButton from "components/gv-button";
+import { Button } from "components/button/button";
 import useIsOpen from "hooks/is-open.hook";
 import { IDemoDepositContainerProps } from "modules/demo-deposit/demo-deposit.container";
 import { DemoDepositDialog } from "modules/demo-deposit/demo-deposit.dialog";
@@ -51,7 +51,7 @@ export const FullButton: React.FC<IFullButtonProps & Clickable> = React.memo(
     const [t] = useTranslation();
     const labelText = label || t("wallet-page:deposit");
     return (
-      <GVButton
+      <Button
         size={size}
         color={color || "primary"}
         variant={variant || "contained"}
@@ -59,7 +59,7 @@ export const FullButton: React.FC<IFullButtonProps & Clickable> = React.memo(
         onClick={onClick}
       >
         {labelText}
-      </GVButton>
+      </Button>
     );
   }
 );

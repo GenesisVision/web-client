@@ -1,13 +1,21 @@
-import clsx from "clsx";
 import * as React from "react";
+import styled from "styled-components";
+import { $iconColor, $primaryColor } from "utils/style/colors";
 
-import styles from "./filter.module.scss";
+interface Props {
+  isOpen?: boolean;
+  hover?: boolean;
+}
 
-const _FilterArrowIcon: React.FC<{ isOpen?: boolean }> = ({ isOpen }) => (
-  <svg
-    className={clsx(styles["filter__arrow"], {
-      [styles["filter__arrow__is-open"]]: isOpen
-    })}
+const StyledSvg = styled.svg<Props>`
+  stroke: ${({ isOpen, hover }) =>
+    isOpen || hover ? $primaryColor : $iconColor};
+`;
+
+const _FilterArrowIcon: React.FC<Props> = ({ hover, isOpen }) => (
+  <StyledSvg
+    hover={hover}
+    isOpen={isOpen}
     width="6"
     height="4"
     viewBox="0 0 6 4"
@@ -20,7 +28,7 @@ const _FilterArrowIcon: React.FC<{ isOpen?: boolean }> = ({ isOpen }) => (
       strokeLinecap="round"
       strokeLinejoin="round"
     />
-  </svg>
+  </StyledSvg>
 );
 
 const FilterArrowIcon = React.memo(_FilterArrowIcon);

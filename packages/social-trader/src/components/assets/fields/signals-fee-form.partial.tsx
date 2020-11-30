@@ -2,6 +2,7 @@ import AssetFormField from "components/assets/asset-fields/asset-form-field";
 import AssetRow from "components/assets/asset-fields/asset-row";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { IRowProps } from "components/row/row.types";
 import { SimpleNumberField } from "components/simple-fields/simple-number-field";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
@@ -20,7 +21,7 @@ const _SignalsFeeFormPartial: React.FC<ISignalsFeeFormPartialProps> = ({
   volumeFeeFieldName
 }) => {
   const [t] = useTranslation();
-  const ContainerElem = inDialog ? Row : RowItem;
+  const ContainerElem = (inDialog ? Row : RowItem) as React.FC<IRowProps>;
   return (
     <AssetRow>
       <ContainerElem onlyOffset wide={inDialog}>

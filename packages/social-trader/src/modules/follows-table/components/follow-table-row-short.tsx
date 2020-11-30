@@ -1,4 +1,3 @@
-import clsx from "clsx";
 import AssetAvatarWithName from "components/avatar/asset-avatar/asset-avatar-with-name";
 import FavoriteIcon from "components/favorite-asset/favorite-icon/favorite-icon";
 import Link from "components/link/link";
@@ -9,9 +8,9 @@ import ProgramSimpleChart from "components/program-simple-chart/program-simple-c
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import TagProgramContainer from "components/tags/tag-program-container/tag-program-container";
+import { Text } from "components/text/text";
 import { ASSET } from "constants/constants";
 import { FollowDetailsListItem } from "gv-api-web";
-import styles from "modules/programs-table/components/programs-table/programs-table.module.scss";
 import { ToggleAssetFavoriteButton } from "modules/toggle-asset-favorite-button/toggle-asset-favorite-button";
 import * as React from "react";
 import { useCallback, useState } from "react";
@@ -19,9 +18,43 @@ import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import { FOLLOW_DETAILS_FOLDER_ROUTE } from "routes/invest.routes";
+import styled from "styled-components";
 import { composeFollowDetailsUrl } from "utils/compose-url";
 import { distanceDate } from "utils/dates";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
+import { mediaBreakpointLandscapePhone } from "utils/style/media";
+import { transition } from "utils/style/mixins";
+
+interface IProgramTableRowShortProps {
+  follow: FollowDetailsListItem;
+}
+
+const LinkName = styled(Text)`
+  margin-bottom: 3px;
+  word-break: break-all;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: block;
+  &:hover {
+    opacity: 0.4;
+  }
+  ${transition("opacity")}
+`;
+
+const ChartCell = styled(TableCell)`
+  max-width: 136px;
+  width: 136px;
+`;
+
+const FavoriteIconContainer = styled.div`
+  width: 20px;
+  height: 19px;
+  ${mediaBreakpointLandscapePhone(`
+    width: 28px;
+    height: 27px;
+  `)}
+`;
 
 const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
   follow
@@ -51,27 +84,22 @@ const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
   }, []);
   return (
     <TableRow>
-      <TableCell className={styles["programs-table__cell"]}>
-        <Link to={linkProps}>
+      <TableCell>
+        <Link noColor to={linkProps}>
           <AssetAvatarWithName
             url={logoUrl}
             alt={follow.title}
             color={color}
             name={
               <div>
-                <Link
-                  className={styles["programs-table__cell--link"]}
-                  to={linkProps}
-                >
-                  {follow.title}
-                </Link>
+                <LinkName sizeValue={"14"}>{follow.title}</LinkName>
                 <TagProgramContainer tags={tags} />
               </div>
             }
           />
         </Link>
       </TableCell>
-      <TableCell className={styles["programs-table__cell"]}>
+      <TableCell>
         {balance && (
           <NumberFormat
             value={formatCurrencyValue(balance.amount, balance.currency)}
@@ -80,23 +108,17 @@ const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
           />
         )}
       </TableCell>
-      <TableCell className={styles["programs-table__cell"]}>
-        {subscribersCount}
-      </TableCell>
-      <TableCell className={styles["programs-table__cell"]}>
-        {distanceDate(creationDate)}
-      </TableCell>
-      <TableCell className={styles["programs-table__cell"]}>
-        {tradesCount}
-      </TableCell>
-      <TableCell className={styles["programs-table__cell"]}>
+      <TableCell>{subscribersCount}</TableCell>
+      <TableCell>{distanceDate(creationDate)}</TableCell>
+      <TableCell>{tradesCount}</TableCell>
+      <TableCell>
         <NumberFormat
           value={formatValue(statistic.drawdown, 2)}
           suffix="%"
           displayType="text"
         />
       </TableCell>
-      <TableCell className={styles["programs-table__cell"]}>
+      <TableCell>
         <Profitability
           value={formatValue(statistic.profit, 2)}
           prefix={PROFITABILITY_PREFIX.SIGN}
@@ -109,34 +131,27 @@ const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
           />
         </Profitability>
       </TableCell>
-      <TableCell
-        className={clsx(
-          styles["programs-table__cell"],
-          styles["programs-table__cell--chart"]
-        )}
-      >
+      <ChartCell>
         <ProgramSimpleChart data={statistic?.chart} />
-      </TableCell>
+      </ChartCell>
       {isAuthenticated && personalDetails && (
-        <TableCell className={styles["programs-table__cell"]}>
-          <ToggleAssetFavoriteButton
-            asset={followState}
-            updateRow={handleUpdateRow}
-            assetType={ASSET.FOLLOW}
-            id={id}
-            isFavorite={followState.personalDetails.isFavorite}
-          >
-            <FavoriteIcon selected={followState.personalDetails.isFavorite} />
-          </ToggleAssetFavoriteButton>
+        <TableCell>
+          <FavoriteIconContainer>
+            <ToggleAssetFavoriteButton
+              asset={followState}
+              updateRow={handleUpdateRow}
+              assetType={ASSET.FOLLOW}
+              id={id}
+              isFavorite={followState.personalDetails.isFavorite}
+            >
+              <FavoriteIcon selected={followState.personalDetails.isFavorite} />
+            </ToggleAssetFavoriteButton>
+          </FavoriteIconContainer>
         </TableCell>
       )}
     </TableRow>
   );
 };
-
-interface IProgramTableRowShortProps {
-  follow: FollowDetailsListItem;
-}
 
 const FollowTableRowShort = React.memo(_FollowTableRowShort);
 export default FollowTableRowShort;

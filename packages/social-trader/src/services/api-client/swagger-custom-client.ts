@@ -20,6 +20,7 @@ import {
   SignalApi,
   SocialApi,
   TradingaccountApi,
+  TradingplatformApi,
   UsersApi,
   WalletApi
 } from "gv-api-web";
@@ -66,6 +67,9 @@ const client = new ApiClient(apiUrl);
 export default client;
 
 export class Api {
+  terminal = (token?: Token): TradingplatformApi =>
+    withApiProxy(new TradingplatformApi(Client.create(token)));
+
   exchanges = (token?: Token): ExchangesApi =>
     withApiProxy(new ExchangesApi(Client.create(token)));
 

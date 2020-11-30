@@ -45,6 +45,7 @@ const _SubscriptionsTableRow: React.FC<Props> = ({
     <TableRow stripy>
       <TableCell>
         <Link
+          noColor
           to={linkCreator(
             composeFollowDetailsUrl(url),
             FOLLOW_DETAILS_FOLDER_ROUTE

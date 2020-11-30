@@ -1,19 +1,22 @@
-import DetailsBlock from "components/details/details-block";
+import { DefaultBlock } from "components/default.block/default.block";
 import DetailsBlockTabs from "components/details/details-block-tabs";
 import DetailsBlockTitleBox from "components/details/details-block-title-box";
 import AbsoluteProfitChartSection, {
   IAbsoluteProfitChartSectionProps
 } from "components/details/details-statistic-section/details-chart-section/absolute-profit-chart-section/absolute-profit-chart-section";
+import { detailsBlockHorizontalPaddings } from "components/details/details.constants";
 import GVTab from "components/gv-tabs/gv-tab";
 import { Row } from "components/row/row";
 import useTab from "hooks/tab.hook";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
+import styled from "styled-components";
+import { mediaBreakpointLandscapePhone } from "utils/style/media";
+import { $paddingXsmall } from "utils/style/sizes";
 
 import BalanceChartSection, {
   IBalanceChartSectionProps
 } from "./balance-chart-section/balance-chart-section";
-import styles from "./details-chart-section.module.scss";
 import ProfitChartSection, {
   IProfitChartSectionProps
 } from "./profit-chart-section/profit-chart-section";
@@ -23,6 +26,25 @@ export enum DETAILS_CHART_TABS {
   PROFIT = "profit",
   BALANCE = "balance"
 }
+
+const StyledBlock = styled(DefaultBlock)`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100px;
+  min-height: 400px;
+
+  margin-bottom: ${$paddingXsmall}px;
+  &:not(:last-child) {
+    ${mediaBreakpointLandscapePhone(`margin-right: ${$paddingXsmall}px;`)}
+  }
+`;
+
+const ChartContainer = styled(Row)`
+  ${detailsBlockHorizontalPaddings};
+  height: 490px;
+`;
 
 const _DetailsChart: React.FC<IDetailsChartProps> = ({
   renderAbsoluteProfitChart,
@@ -39,7 +61,7 @@ const _DetailsChart: React.FC<IDetailsChartProps> = ({
   const [t] = useTranslation();
   const { tab, setTab } = useTab<DETAILS_CHART_TABS>(DETAILS_CHART_TABS.PROFIT);
   return (
-    <DetailsBlock className={styles["details-chart"]}>
+    <StyledBlock horizontalOffsets={false} size={"large"} solid>
       <DetailsBlockTitleBox>
         <h3>{t("asset-details:chart.heading")}</h3>
       </DetailsBlockTitleBox>
@@ -59,7 +81,7 @@ const _DetailsChart: React.FC<IDetailsChartProps> = ({
           />
         </DetailsBlockTabs>
       </Row>
-      <Row onlyOffset className={styles["details-chart__container"]}>
+      <ChartContainer onlyOffset>
         {tab === DETAILS_CHART_TABS.PROFIT && (
           <ProfitChartSection
             loaderData={loaderData}
@@ -88,8 +110,8 @@ const _DetailsChart: React.FC<IDetailsChartProps> = ({
             renderBalanceChart={renderBalanceChart}
           />
         )}
-      </Row>
-    </DetailsBlock>
+      </ChartContainer>
+    </StyledBlock>
   );
 };
 

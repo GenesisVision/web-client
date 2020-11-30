@@ -3,8 +3,17 @@ import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { SocialLinkViewModel } from "gv-api-web";
 import * as React from "react";
+import styled from "styled-components";
 
-import styles from "./social-links-block.module.scss";
+const StyledA = styled.a`
+  display: inline-flex;
+
+  &:hover {
+    transform: translateY(-0.5px);
+    box-shadow: 0 6px 6px -3px rgb(0, 0, 0);
+    border-radius: 50%;
+  }
+`;
 
 const _SocialLinksBlock: React.FC<Props> = ({ socialLinks }) => {
   return (
@@ -13,16 +22,15 @@ const _SocialLinksBlock: React.FC<Props> = ({ socialLinks }) => {
         const value = "value" in socialLink ? socialLink.value : 0;
         return (
           <RowItem bottomOffset size={"small"} key={socialLink.name}>
-            <a
+            <StyledA
               title={socialLink.name}
               key={socialLink.type}
               href={socialLink.url + value}
               target="_blank"
               rel="noopener noreferrer"
-              className={styles["social-links-block__social-link"]}
             >
               <SocialLinkImage url={socialLink.logoUrl} alt={socialLink.name} />
-            </a>
+            </StyledA>
           </RowItem>
         );
       })}

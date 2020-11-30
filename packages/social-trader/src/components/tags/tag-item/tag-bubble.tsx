@@ -1,27 +1,39 @@
-import clsx from "clsx";
 import * as React from "react";
-
-import styles from "./tag-item.module.scss";
-
-const _TagBubble: React.FC<Props> = ({ color, content, clickable }) => {
-  const styleTag = { color, backgroundColor: `${color}1a` };
-  return (
-    <div
-      className={clsx(styles["tag-item"], styles["tag-button"], {
-        [styles["tag-button--clickable"]]: clickable
-      })}
-      style={styleTag}
-    >
-      {content}
-    </div>
-  );
-};
+import styled from "styled-components";
+import { getHEXA } from "utils/style/generators";
+import {
+  adaptiveBorderRadius,
+  fontSize,
+  height,
+  horizontalPaddings,
+  lineHeight
+} from "utils/style/mixins";
+import { $fontSizeXsmall, $paddingXxsmall } from "utils/style/sizes";
 
 interface Props {
   clickable?: boolean;
   color: string;
   content: JSX.Element | string;
 }
+
+const _TagBubble = styled.div<Props>`
+  display: inline-block;
+  position: relative;
+  cursor: default;
+  font-weight: 600;
+  text-transform: uppercase;
+  white-space: nowrap;
+  ${fontSize($fontSizeXsmall)};
+  ${adaptiveBorderRadius(19.5)};
+  ${height(18)};
+  ${lineHeight(18)};
+  ${horizontalPaddings($paddingXxsmall)};
+  ${({ clickable }) => clickable && "cursor:pointer;"}
+  ${({ color }) => `
+    color: ${color};
+    background-color: ${getHEXA(color, 0.1)};
+  `}
+`;
 
 const TagBubble = React.memo(_TagBubble);
 export default TagBubble;

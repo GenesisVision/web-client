@@ -1,4 +1,3 @@
-import clsx from "clsx";
 import ImageBase from "components/avatar/image-base";
 import { Center } from "components/center/center";
 import ShortArrow from "components/icon/short-arrow/short-arrow";
@@ -9,9 +8,9 @@ import SocialLink from "media/social-link.svg";
 import { FundHistoryDescription } from "pages/invest/funds/fund-details/fund-details-history-section/fund-history/fund-history-description";
 import { IFundHistoryDataItem } from "pages/invest/funds/fund-details/fund-details.types";
 import React from "react";
+import styled from "styled-components";
 import { formatDate } from "utils/dates";
-
-import styles from "./fund-history.module.scss";
+import { height, width } from "utils/style/mixins";
 
 interface Props {
   isOpen: boolean;
@@ -19,28 +18,40 @@ interface Props {
   item: IFundHistoryDataItem;
 }
 
+const StyledRow = styled(TableRow)<{ clickable?: boolean }>`
+  & td {
+    cursor: pointer;
+  }
+`;
+
+const LogoContainer = styled(RowItem)<{ clickable?: boolean }>`
+  ${height(28)};
+  ${width(28)};
+  & img {
+    width: 100%;
+    height: 100%;
+  }
+`;
+
+const ExpandIcon = styled(RowItem)<{ clickable?: boolean }>`
+  width: 10px;
+  height: 10px;
+`;
+
 const _FundHistoryShortRow: React.FC<Props> = ({ isOpen, setOpen, item }) => {
   const hasTrades = !!item.trades.length;
   return (
-    <TableRow
-      onClick={setOpen}
-      className={clsx({
-        [styles["fund-history__short-row"]]: hasTrades
-      })}
-    >
+    <StyledRow onClick={setOpen} clickable={hasTrades}>
       <TableCell>{formatDate(item.date)}</TableCell>
       <TableCell>
         <Center>
-          <RowItem
-            size={"small"}
-            className={styles["fund-history__event-logo-icon"]}
-          >
+          <LogoContainer size={"small"}>
             <ImageBase
               src={item.logoUrl}
               alt={item.type}
               defaultImage={SocialLink}
             />
-          </RowItem>
+          </LogoContainer>
           <RowItem> {item.type}</RowItem>
         </Center>
       </TableCell>
@@ -54,13 +65,13 @@ const _FundHistoryShortRow: React.FC<Props> = ({ isOpen, setOpen, item }) => {
             />
           </RowItem>
           {hasTrades && (
-            <RowItem className={styles["fund-history__expand-icon"]}>
+            <ExpandIcon>
               <ShortArrow direction={isOpen ? "top" : "bottom"} />
-            </RowItem>
+            </ExpandIcon>
           )}
         </Center>
       </TableCell>
-    </TableRow>
+    </StyledRow>
   );
 };
 

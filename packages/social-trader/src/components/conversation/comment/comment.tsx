@@ -1,4 +1,3 @@
-import clsx from "clsx";
 import { ConversationComment } from "components/conversation/conversation.types";
 import { LikeContainer } from "components/conversation/like/like-container";
 import { Message } from "components/conversation/message/message";
@@ -7,8 +6,46 @@ import { Reply } from "components/conversation/reply/reply";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import React, { useEffect, useRef } from "react";
+import styled from "styled-components";
+import { $borderColor } from "utils/style/colors";
+import { adaptivePadding } from "utils/style/mixins";
+import { $paddingSmall, $paddingXsmall } from "utils/style/sizes";
 
-import styles from "./comment.module.scss";
+interface Props {
+  canReply?: boolean;
+  updateData: VoidFunction;
+  comment: ConversationComment;
+}
+
+const Container = styled.div<{ highlighted?: boolean }>`
+  ${adaptivePadding("top", $paddingXsmall)};
+  ${adaptivePadding("left", $paddingSmall)};
+  border-top: 1px solid ${$borderColor};
+  flex-direction: column;
+
+  &:not(:last-child) {
+    ${adaptivePadding("bottom", $paddingXsmall)};
+  }
+  ${({ highlighted }) =>
+    highlighted &&
+    `
+      background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.02) 0%,
+        rgba(0, 0, 0, 0) 100%
+      );
+  `};
+`;
+
+const MessageContainer = styled(Row)`
+  width: 100%;
+  justify-content: space-between;
+`;
+
+const Buttons = styled(Row)`
+  width: 100%;
+  justify-content: flex-end;
+`;
 
 const _Comment: React.FC<Props> = ({
   canReply,
@@ -36,13 +73,8 @@ const _Comment: React.FC<Props> = ({
   }, [ref.current]);
 
   return (
-    <div
-      ref={ref}
-      className={clsx(styles["comment"], {
-        [styles["comment--highlighted"]]: isHighlighted
-      })}
-    >
-      <Row className={styles["comment__message"]} center={false}>
+    <Container highlighted={isHighlighted} ref={ref}>
+      <MessageContainer center={false}>
         <RowItem wide>
           <Message
             row={false}
@@ -64,8 +96,8 @@ const _Comment: React.FC<Props> = ({
             author={author}
           />
         </RowItem>
-      </Row>
-      <Row className={styles["comment__buttons"]}>
+      </MessageContainer>
+      <Buttons>
         <RowItem wide>{canReply && <Reply author={author} />}</RowItem>
         <RowItem>
           <LikeContainer
@@ -76,15 +108,9 @@ const _Comment: React.FC<Props> = ({
             liked={personalDetails?.isLiked}
           />
         </RowItem>
-      </Row>
-    </div>
+      </Buttons>
+    </Container>
   );
 };
-
-interface Props {
-  canReply?: boolean;
-  updateData: VoidFunction;
-  comment: ConversationComment;
-}
 
 export const Comment = React.memo(_Comment);

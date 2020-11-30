@@ -1,26 +1,12 @@
-import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
 import DetailsAssetAvatar from "components/details/details-description-section/details-description/details-asset-avatar";
-import { DETAILS_TYPE } from "components/details/details.types";
 import * as React from "react";
+import styled from "styled-components";
+import { mediaBreakpointTablet } from "utils/style/media";
+import { width } from "utils/style/mixins";
+import { $paddingXsmall, $paddingXsmallMobile } from "utils/style/sizes";
 import { CurrencyEnum } from "utils/types";
 
-import styles from "./details-description.module.scss";
-
-const _DetailsLimitsAvatar: React.FC<Props> = props => {
-  const { detailsType, logo, title } = props;
-  return (
-    <div className={styles["details-description__avatar"]}>
-      {detailsType === DETAILS_TYPE.ASSET ? (
-        <DetailsAssetAvatar {...props} />
-      ) : (
-        <ProfileAvatar big url={logo} alt={title} />
-      )}
-    </div>
-  );
-};
-
 interface Props {
-  detailsType: DETAILS_TYPE;
   logo: string;
   title: string;
   color?: string;
@@ -29,5 +15,20 @@ interface Props {
   totalAvailableInvestment?: number;
   currency?: CurrencyEnum;
 }
+
+const AvatarContainer = styled.div`
+  cursor: pointer;
+  margin: ${$paddingXsmallMobile}px 0 ${$paddingXsmall}px;
+  ${width(120)}
+  ${mediaBreakpointTablet("padding: 0;")}
+`;
+
+const _DetailsLimitsAvatar: React.FC<Props> = props => {
+  return (
+    <AvatarContainer>
+      <DetailsAssetAvatar {...props} />
+    </AvatarContainer>
+  );
+};
 
 export const DetailsLimitsAvatar = React.memo(_DetailsLimitsAvatar);

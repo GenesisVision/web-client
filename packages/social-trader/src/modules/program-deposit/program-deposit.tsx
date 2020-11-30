@@ -8,13 +8,29 @@ import { IDialogProps } from "components/dialog/dialog";
 import { ASSET } from "constants/constants";
 import withLoader from "decorators/with-loader";
 import useApiRequest from "hooks/api-request.hook";
+import { getProgramWithdrawInfo } from "modules/program-withdraw/services/program-withdraw.services";
 import * as React from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { programMinDepositAmountsSelector } from "reducers/platform-reducer";
 import { CurrencyEnum } from "utils/types";
 
-const _ProgramDeposit: React.FC<OwnProps & IDialogProps> = ({
+interface OwnProps {
+  isProcessingRealTime?: boolean;
+  title: string;
+  entryFee?: number;
+  ownAsset?: boolean;
+  availableToInvest?: number;
+  broker: string;
+  id: string;
+  currency: CurrencyEnum;
+  onApply?: () => void;
+}
+
+interface Props extends OwnProps, IDialogProps {}
+
+const _ProgramDeposit: React.FC<Props> = ({
+  isProcessingRealTime,
   title,
   entryFee,
   availableToInvest,
@@ -34,14 +50,33 @@ const _ProgramDeposit: React.FC<OwnProps & IDialogProps> = ({
     currency,
     broker
   );
-  const { data: minDeposits, sendRequest } = useApiRequest({
+  const { data: minDeposits, sendRequest: getMinDeposits } = useApiRequest({
+    name: "getMinProgramDeposits",
+    cache: true,
     request: getMinProgramDeposits
   });
+  const { data: withdrawInfo, sendRequest: getWithdrawInfo } = useApiRequest({
+    name: "getProgramWithdrawInfo",
+    cache: true,
+    request: getProgramWithdrawInfo
+  });
   useEffect(() => {
-    open && sendRequest({ minDeposit, programCurrency: currency });
+    if (open) {
+      getWithdrawInfo({ id });
+      getMinDeposits({ minDeposit, programCurrency: currency });
+    }
   }, [open]);
+
+  const infoMessage =
+    withdrawInfo && !isProcessingRealTime
+      ? `Your request will be processed at ${new Date(
+          withdrawInfo?.periodEnds
+        ).toUTCString()}`
+      : undefined;
+
   return (
     <DepositContainer
+      infoMessage={infoMessage}
       title={title}
       ownAsset={ownAsset}
       availableToInvest={availableToInvest}
@@ -60,14 +95,3 @@ const _ProgramDeposit: React.FC<OwnProps & IDialogProps> = ({
 
 const ProgramDeposit = withLoader(React.memo(_ProgramDeposit));
 export default ProgramDeposit;
-
-interface OwnProps {
-  title: string;
-  entryFee?: number;
-  ownAsset?: boolean;
-  availableToInvest?: number;
-  broker: string;
-  id: string;
-  currency: CurrencyEnum;
-  onApply?: () => void;
-}

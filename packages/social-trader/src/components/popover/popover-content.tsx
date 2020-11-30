@@ -1,26 +1,7 @@
-import clsx from "clsx";
 import React from "react";
-
-import styles from "./popover-content.module.scss";
-
-export const PopoverContent: React.FC<Props &
-  React.HTMLAttributes<HTMLDivElement>> = ({
-  type,
-  children,
-  className,
-  leftAlign
-}) => {
-  return (
-    <div
-      className={clsx(styles["popover-content"], className, {
-        [styles["popover-content__list--left-align"]]: leftAlign,
-        [styles["popover-content__list"]]: type === "list"
-      })}
-    >
-      {children}
-    </div>
-  );
-};
+import styled from "styled-components";
+import { horizontalPaddings, verticalPaddings } from "utils/style/mixins";
+import { $paddingSmall, $paddingXxsmall } from "utils/style/sizes";
 
 interface Props {
   leftAlign?: boolean;
@@ -28,6 +9,25 @@ interface Props {
   type?: "list";
 }
 
-export const PopoverContentListItem: React.FC = ({ children }) => {
-  return <div className={styles["popover-content__list-item"]}>{children}</div>;
-};
+export const PopoverContent = styled.div<Props>`
+  box-sizing: border-box;
+  max-height: 50vh;
+  overflow: auto;
+  ${({ type }) =>
+    type === "list" &&
+    `
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    overflow-x: auto;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  `}
+`;
+
+export const PopoverContentListItem = styled.div`
+  box-sizing: border-box;
+  width: 100%;
+  ${horizontalPaddings($paddingSmall)};
+  ${verticalPaddings($paddingXxsmall)};
+`;

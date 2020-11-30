@@ -2,6 +2,11 @@ import TextAreaField from "components/assets/fields/text-area-field";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 
+interface Props {
+  name: string;
+  description: string;
+}
+
 const _AboutField: React.FC<Props> = ({ name, description }) => {
   const { t } = useTranslation();
   return (
@@ -13,11 +18,6 @@ const _AboutField: React.FC<Props> = ({ name, description }) => {
     />
   );
 };
-
-interface Props {
-  name: string;
-  description: string;
-}
 
 const AboutField = React.memo(_AboutField);
 export default AboutField;

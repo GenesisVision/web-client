@@ -1,7 +1,7 @@
+import { Button } from "components/button/button";
 import { CurrencySourceSelectElement } from "components/currency-source-select/currency-source-select.element";
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
-import GVButton from "components/gv-button";
 import { Row } from "components/row/row";
 import { ISelectChangeEvent } from "components/select/select";
 import { TradingAccountDetails } from "gv-api-web";
@@ -32,9 +32,9 @@ const _FollowSelectAccount: React.FC<Props> = ({ accounts, onSelect }) => {
           />
         </Row>
         <DialogButtons>
-          <GVButton wide onClick={handleNext}>
+          <Button wide onClick={handleNext}>
             {t("follow-program.create-account.next")}
-          </GVButton>
+          </Button>
         </DialogButtons>
       </DialogBottom>
     </form>

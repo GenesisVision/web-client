@@ -1,3 +1,4 @@
+import { $facetTranslateSize } from "components/facet-cards/facet-card";
 import GVTabs from "components/gv-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
 import Link from "components/link/link";
@@ -6,9 +7,13 @@ import isAuthenticated from "decorators/is-authenticated";
 import { useRouter } from "next/router";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
+import styled from "styled-components";
 import replaceParams from "utils/replace-params";
+import { $paddingSmall } from "utils/style/sizes";
 
-import styles from "./navigation-tabs.module.scss";
+const Container = styled.div`
+  padding-bottom: ${$paddingSmall - $facetTranslateSize}px;
+`;
 
 const _NavigationTabs: React.FC<Props> = ({
   exploreTabName,
@@ -22,12 +27,13 @@ const _NavigationTabs: React.FC<Props> = ({
     ? favoritesTabName
     : exploreTabName;
   return (
-    <div className={styles["navigation-tabs"]}>
+    <Container>
       <GVTabs value={tab}>
         <GVTab
           value={exploreTabName}
           label={
             <Link
+              noColor
               to={linkCreator(
                 replaceParams(tabRoute, {
                   ":tab": exploreTabName
@@ -42,6 +48,7 @@ const _NavigationTabs: React.FC<Props> = ({
           value={favoritesTabName}
           label={
             <Link
+              noColor
               to={linkCreator(
                 replaceParams(tabRoute, {
                   ":tab": favoritesTabName
@@ -53,7 +60,7 @@ const _NavigationTabs: React.FC<Props> = ({
           }
         />
       </GVTabs>
-    </div>
+    </Container>
   );
 };
 

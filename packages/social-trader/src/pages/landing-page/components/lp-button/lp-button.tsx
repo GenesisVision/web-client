@@ -59,7 +59,13 @@ const _LPButton: React.FC<LPButtonProps> = ({
       );
     case !!href:
       return (
-        <Link title={title} className={classname} onClick={onClick} to={href}>
+        <Link
+          white
+          title={title}
+          className={classname}
+          onClick={onClick}
+          to={href}
+        >
           {children}
         </Link>
       );

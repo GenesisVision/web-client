@@ -1,6 +1,4 @@
-import clsx from "clsx";
 import { ResponsiveContainer } from "components/responsive-container/responsive-container";
-import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { UpperBlock } from "components/upper-block/upper-block";
 import { UpperButtonContainer } from "components/upper-button/upper-button";
@@ -10,9 +8,13 @@ import { SocialPageFeedBlock } from "pages/social/social/social-page-feed/social
 import { SocialPageGainersBlock } from "pages/social/social/social-page-gainers/social-page-gainers.block";
 import { SocialPageTopicsBlock } from "pages/social/social/social-page-topics/social-page-topics.block";
 import { SocialPageTradersBlock } from "pages/social/social/social-page-traders/social-page-traders.block";
+import {
+  SocialPageFeedContainer,
+  SocialPageLeftBlock,
+  SocialPageRightBlock,
+  SocialPageStyledContainer
+} from "pages/social/social/social-page.styles";
 import React from "react";
-
-import styles from "./social-page.module.scss";
 
 interface Props {
   initFeedData?: PostItemsViewModel;
@@ -25,16 +27,11 @@ export const SocialPageContainer: React.FC<Props> = ({
 }) => {
   return (
     <>
-      <Row center={false} className={styles["social-page__main-container"]}>
+      <SocialPageStyledContainer center={false}>
         <ResponsiveContainer
           enabledScreens={["landscape-tablet", "desktop", "large-desktop"]}
         >
-          <RowItem
-            className={clsx(
-              styles["social-page__side-block"],
-              styles["social-page__left-block"]
-            )}
-          >
+          <SocialPageLeftBlock>
             <Row>
               <SocialPageTradersBlock assets={data?.topStrategies} />
             </Row>
@@ -50,27 +47,22 @@ export const SocialPageContainer: React.FC<Props> = ({
               </Row>
             </ResponsiveContainer>
             <UpperBlock />
-          </RowItem>
+          </SocialPageLeftBlock>
         </ResponsiveContainer>
-        <RowItem className={styles["social-page__feed-container"]}>
+        <SocialPageFeedContainer>
           <SocialPageFeedBlock initData={initFeedData} />
-        </RowItem>
+        </SocialPageFeedContainer>
         <ResponsiveContainer enabledScreens={["large-desktop", "desktop"]}>
-          <RowItem
-            className={clsx(
-              styles["social-page__side-block"],
-              styles["social-page__right-block"]
-            )}
-          >
+          <SocialPageRightBlock>
             <Row>
               <SocialPageTopicsBlock topics={data?.hotTopics} />
             </Row>
             <Row>
               <SocialPageDownloadsBlock />
             </Row>
-          </RowItem>
+          </SocialPageRightBlock>
         </ResponsiveContainer>
-      </Row>
+      </SocialPageStyledContainer>
       <ResponsiveContainer
         enabledScreens={["phone", "landscape-phone", "tablet"]}
       >

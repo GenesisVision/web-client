@@ -4,16 +4,44 @@ import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import SortingFilter from "components/table/components/sorting/sorting-filter/sorting-filter";
 import React, { useCallback } from "react";
+import styled from "styled-components";
+import { adaptiveMargin, horizontalPaddings } from "utils/style/mixins";
+import { $paddingSmall } from "utils/style/sizes";
 
 import { LIST_VIEW } from "../table.constants";
 import { FilteringType, SortingColumn } from "./filtering/filter.type";
-import styles from "./table.module.scss";
 import {
   RenderFiltersFuncType,
   RenderSortingFuncType,
   UpdateFilterFunc,
   UpdateSortingFuncType
 } from "./table.types";
+
+const $viewSvgSize = 15;
+
+const TableToolbarItem = RowItem;
+const TableTitle = styled.h3`
+  padding: 0;
+  justify-self: flex-start;
+  white-space: nowrap;
+`;
+const TableToolbarContainer = styled(Row)`
+  width: 100%;
+  justify-content: space-between;
+  ${horizontalPaddings($paddingSmall)};
+`;
+const TableToggle = styled(Row)`
+  justify-content: space-between;
+`;
+const TableToggleIcon = styled.div`
+  cursor: pointer;
+  line-height: 0;
+  width: ${$viewSvgSize / 1.2}px;
+  height: 18px;
+  &:not(:last-child) {
+    ${adaptiveMargin("right", $viewSvgSize * 2)};
+  }
+`;
 
 const _TableToolbar: React.FC<ITableToolbarExternalProps &
   ITableToolbarInnerProps> = ({
@@ -47,19 +75,19 @@ const _TableToolbar: React.FC<ITableToolbarExternalProps &
   const showMappings = renderMappings && updateFilter && filtering;
   const showSortingFilter = view === LIST_VIEW.CARDS && sorting !== undefined;
   return (
-    <Row className={styles["table__toolbar"]}>
+    <TableToolbarContainer>
       {!showTitle && !showMappings && !showSortingFilter && <div />}
       {showTitle && (
-        <RowItem>
-          <h3 className={styles["table__title"]}>{title}</h3>
-        </RowItem>
+        <TableToolbarItem>
+          <TableTitle>{title}</TableTitle>
+        </TableToolbarItem>
       )}
       {showMappings && (
-        <div className={styles["table__mapping"]}>
+        <TableToolbarItem>
           <Row wrap>{renderMappings!(updateFilter!, filtering!)}</Row>
-        </div>
+        </TableToolbarItem>
       )}
-      <div className={styles["table__sorting-filter"]}>
+      <TableToolbarItem>
         {showSortingFilter && (
           <SortingFilter
             sorting={sorting}
@@ -68,7 +96,7 @@ const _TableToolbar: React.FC<ITableToolbarExternalProps &
             renderValueText={renderSorting}
           />
         )}
-      </div>
+      </TableToolbarItem>
       <RowItem>
         <Row>
           <RowItem>
@@ -83,25 +111,19 @@ const _TableToolbar: React.FC<ITableToolbarExternalProps &
           </RowItem>
           {isViewSwitchEnabled && (
             <RowItem>
-              <Row className={styles["table__toggle"]}>
-                <div
-                  className={styles["table__toggle-icon"]}
-                  onClick={handleIconClick(LIST_VIEW.CARDS)}
-                >
+              <TableToggle>
+                <TableToggleIcon onClick={handleIconClick(LIST_VIEW.CARDS)}>
                   <CardsIcon primary={view === LIST_VIEW.CARDS} />
-                </div>
-                <div
-                  className={styles["table__toggle-icon"]}
-                  onClick={handleIconClick(LIST_VIEW.TABLE)}
-                >
+                </TableToggleIcon>
+                <TableToggleIcon onClick={handleIconClick(LIST_VIEW.TABLE)}>
                   <TableIcon primary={view === LIST_VIEW.TABLE} />
-                </div>
-              </Row>
+                </TableToggleIcon>
+              </TableToggle>
             </RowItem>
           )}
         </Row>
       </RowItem>
-    </Row>
+    </TableToolbarContainer>
   );
 };
 

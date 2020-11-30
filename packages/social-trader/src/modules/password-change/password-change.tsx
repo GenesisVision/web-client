@@ -1,6 +1,6 @@
 import authActions from "actions/auth-actions";
-import GVButton from "components/gv-button";
-import { fetchProfileHeaderInfoAction } from "components/header/actions/header-actions";
+import { Button } from "components/button/button";
+import { ProfileHeaderInfoAction } from "components/header/actions/header-actions";
 import { Push } from "components/link/link";
 import { SECURITY_ROUTE } from "components/profile/profile.constants";
 import { ChangePasswordViewModel } from "gv-api-web";
@@ -21,7 +21,7 @@ const _PasswordChange: React.FC = () => {
     authService.storeToken(response);
     dispatch(authActions.updateTokenAction(true));
     Push(SECURITY_ROUTE);
-    dispatch(fetchProfileHeaderInfoAction());
+    dispatch(ProfileHeaderInfoAction());
   };
   const { errorMessage, sendRequest } = useApiRequest({
     middleware: [successMiddleware],
@@ -37,9 +37,9 @@ const _PasswordChange: React.FC = () => {
   return (
     <>
       {!isOpen && (
-        <GVButton onClick={setIsOpen}>
+        <Button onClick={setIsOpen}>
           {t("profile-page:settings.change-password")}
-        </GVButton>
+        </Button>
       )}
       {isOpen && (
         <PasswordChangeForm

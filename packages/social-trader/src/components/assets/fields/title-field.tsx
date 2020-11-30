@@ -5,6 +5,10 @@ import { useTranslation } from "react-i18next";
 
 import AssetField from "../asset-fields/asset-field";
 
+interface Props {
+  name: string;
+}
+
 const _TitleField: React.FC<Props> = ({ name }) => {
   const { t } = useTranslation();
   return (
@@ -20,10 +24,6 @@ const _TitleField: React.FC<Props> = ({ name }) => {
     </AssetField>
   );
 };
-
-interface Props {
-  name: string;
-}
 
 const TitleField = React.memo(_TitleField);
 export default TitleField;
