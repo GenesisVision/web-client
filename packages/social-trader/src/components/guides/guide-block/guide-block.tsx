@@ -29,7 +29,7 @@ const _GuideBlock: React.FC<Props> = ({
   const { linkCreator } = useToLink();
   return (
     <DefaultBlock size={"xlarge"} solid className={styles["guide-block"]}>
-      <h2 id={`#${canonicalName}`} className={styles["guide-block__subtitle"]}>
+      <h2 id={canonicalName} className={styles["guide-block__subtitle"]}>
         {name}
       </h2>
       <div className={styles["guide-block__content"]}>{content}</div>
