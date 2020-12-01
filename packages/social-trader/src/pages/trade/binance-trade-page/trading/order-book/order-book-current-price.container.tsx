@@ -12,12 +12,17 @@ export const OrderBookCurrentPriceContainer: React.FC = () => {
   const {
     symbol: { quoteAsset }
   } = useContext(TerminalInfoContext);
-  const accountCurrency = useAccountCurrency();
+  const accountCurrency = "USDT"; //useAccountCurrency();
   const { items: tickerItems } = useContext(TerminalTickerContext);
   const accountCurrencySymbolPrice = useMemo(() => {
     const rateBaseAsset = quoteAsset;
-    const rateQuoteAsset = accountCurrency === "USD" ? "USDT" : accountCurrency;
-    if (!tickerItems?.length || !rateQuoteAsset) return;
+    const rateQuoteAsset = accountCurrency; // === "USD" ? "USDT" : accountCurrency;
+    if (
+      !tickerItems?.length ||
+      !rateQuoteAsset ||
+      accountCurrency === quoteAsset
+    )
+      return;
     if (rateBaseAsset === rateQuoteAsset) return 1;
     const accountCurrencySymbol = `${rateBaseAsset}${rateQuoteAsset}`.toUpperCase();
     return safeGetElemFromArray(
