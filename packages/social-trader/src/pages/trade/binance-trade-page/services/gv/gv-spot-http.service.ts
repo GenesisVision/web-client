@@ -3,6 +3,7 @@ import {
   BinanceRawCancelOrder,
   BinanceRawCancelOrderId,
   BinanceRawKline,
+  BinanceRawKlineItemsViewModel,
   BinanceRawOrder,
   BinanceRawOrderBook,
   BinanceRawOrderBookEntry,
@@ -19,6 +20,7 @@ import {
   Account,
   CorrectedRestDepth,
   ExchangeInfo,
+  KlineParams,
   OrderSide,
   QueryOrderResult,
   StringBidDepth,
@@ -50,6 +52,34 @@ const transformKlineBar = ({
   time: dayjs(openTime).unix() * 1000,
   volume: baseVolume
 });
+
+export const getKlines = async (params: KlineParams): Promise<Bar[]> => {
+  let bars: Bar[] = [];
+  const sendRequest = async (startTime: number) => {
+    const data = await api
+      .terminal()
+      .getKlines(params.symbol, {
+        ...params,
+        endTime: new Date(params.endTime),
+        startTime: new Date(startTime)
+      })
+      .then(({ items }: BinanceRawKlineItemsViewModel) =>
+        items.map(transformKlineBar)
+      );
+    bars.push.apply(bars, data);
+    const length = bars.length;
+
+    if (length === 1000) {
+      const lastBar = bars[bars.length - 1];
+      const nextTime = lastBar.time + 1;
+      await sendRequest(nextTime);
+    }
+  };
+
+  await sendRequest(params.startTime);
+
+  return bars;
+};
 
 export const getServerTime = () => {
   return api.terminal().getExchangeTime();

@@ -722,7 +722,7 @@ export type ExchangeInfo = BinanceRawExchangeInfo;
 
 export interface KlineParams {
   symbol: string;
-  interval: BinanceRawKlineInterval | string;
+  interval: BinanceRawKlineInterval;
   startTime: number;
   endTime: number;
   limit: number;
