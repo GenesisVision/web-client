@@ -12,9 +12,6 @@ import {
   BinanceRawKlineInterval,
   BinanceRawOrder,
   BinanceRawOrderBook,
-  BinanceRawOrderBookEntry,
-  BinanceRawOrderSide,
-  BinanceRawOrderType,
   BinanceRawRecentTrade,
   BinanceRawSymbol,
   BinanceTimeInForce as BinanceRawTimeInForce
