@@ -68,7 +68,6 @@ const uploadImages = async (images?: IImageValue[]) => {
 const mockRequest = (values: any) =>
   new Promise((resolve, reject) => {
     setTimeout(() => {
-      console.log(values);
       const success = getRandomBoolean();
       success ? resolve() : reject({ errorMessage: "Failed" });
     }, 1000);

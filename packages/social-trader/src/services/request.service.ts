@@ -50,7 +50,6 @@ export const handleErrors = async (response: Response) => {
   }
   try {
     const body = await response.json();
-    console.log(body);
     return Promise.reject({
       body,
       errorMessage: body.msg,

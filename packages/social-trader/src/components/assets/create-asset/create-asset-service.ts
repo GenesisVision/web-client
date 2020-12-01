@@ -61,7 +61,6 @@ export const createAsset = ({
 const getCreateMethod = (
   asset: CREATE_ASSET
 ): ((request: NewAssetRequest) => Promise<any>) => {
-  console.log(asset);
   switch (asset) {
     case CREATE_ASSET.EXCHANGE_PROGRAM:
       return (request: NewAssetRequest) =>
