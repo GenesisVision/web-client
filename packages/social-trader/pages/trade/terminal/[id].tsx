@@ -59,6 +59,7 @@ Page.getInitialProps = async ctx => {
   let authData;
 
   return {
+    namespacesRequired: ["auth"],
     exchangeAccountId,
     brokerType,
     authData,
