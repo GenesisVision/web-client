@@ -4,9 +4,12 @@ import {
   GlobalSearchInitialState
 } from "components/global-search/global-search-context";
 import useIsOpen from "hooks/is-open.hook";
+import { useRouter } from "next/router";
 import React, { useCallback, useContext, useEffect } from "react";
 
 const _HeaderSearchInput: React.FC<Props> = ({ setSearchIsClose }) => {
+  const { asPath } = useRouter();
+
   const [cancelSearch, setSearchIsCancel, setSearchIsNotCancel] = useIsOpen();
   const { searchValue, setSearchValue } = useContext(GlobalSearchContext);
   const handleSearchInput = useCallback(
@@ -27,6 +30,10 @@ const _HeaderSearchInput: React.FC<Props> = ({ setSearchIsClose }) => {
   useEffect(() => {
     if (cancelSearch && !searchValue) setSearchIsClose();
   }, [cancelSearch, searchValue]);
+
+  useEffect(() => {
+    if (searchValue) handleSearchCancel();
+  }, [asPath]);
 
   return (
     <SearchInputField

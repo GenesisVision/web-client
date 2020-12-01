@@ -79,7 +79,7 @@ const _OrderBook: React.FC<Props> = ({
               items={asks}
             />
           </Row>
-          <Row size={"small"}>
+          <Row size={"small"} wide>
             <OrderBookCurrentPriceContainer />
           </Row>
           <Row
