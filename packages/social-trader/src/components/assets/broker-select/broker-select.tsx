@@ -97,7 +97,7 @@ const _BrokerSelectBroker: React.FC<Props> = ({
             <LabeledValue
               label={t("create-account:broker-info.trading-platform")}
             >
-              {selectedBroker.accountTypes[0].type}
+              {selectedBroker.accountTypes[0].typeTitle}
             </LabeledValue>
           </Row>
           <Row>
