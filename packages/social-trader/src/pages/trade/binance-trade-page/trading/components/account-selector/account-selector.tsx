@@ -1,5 +1,6 @@
 import { CurrencySourceSelectItemType } from "components/currency-source-select/currency-source-select-items";
 import { CurrencySourceSelectElement } from "components/currency-source-select/currency-source-select.element";
+import GVProgramDefaultAvatar from "components/gv-program-avatar/gv-program-default-avatar.svg";
 import { ISelectChangeEvent } from "components/select/select";
 import { ExchangeAsset } from "gv-api-web";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
@@ -26,7 +27,7 @@ const mapExchangeAssetToCurrencySourceSelectItem = ({
   available: balance,
   id,
   currency,
-  logoUrl: asset?.logoUrl,
+  logoUrl: asset?.logoUrl || GVProgramDefaultAvatar,
   title
 });
 
