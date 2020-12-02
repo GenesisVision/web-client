@@ -80,15 +80,19 @@ const _BrokerSelectBroker: React.FC<Props> = ({
               {selectedBroker.description}
             </LabeledValue>
           </Row>
-          <Row>
-            <LabeledValue label={t("create-account:broker-info.account-type")}>
-              {"leverageMin" in selectedBroker
-                ? getBrokerAccountTypes(
-                    selectedBroker.accountTypes as BrokerAccountType[]
-                  )
-                : getExchangeAccountTypes(selectedBroker.accountTypes)}
-            </LabeledValue>
-          </Row>
+          {selectedBroker.name !== "Genesis Markets" && (
+            <Row>
+              <LabeledValue
+                label={t("create-account:broker-info.account-type")}
+              >
+                {"leverageMin" in selectedBroker
+                  ? getBrokerAccountTypes(
+                      selectedBroker.accountTypes as BrokerAccountType[]
+                    )
+                  : getExchangeAccountTypes(selectedBroker.accountTypes)}
+              </LabeledValue>
+            </Row>
+          )}
           <Row>
             <LabeledValue
               label={t("create-account:broker-info.trading-platform")}
