@@ -21,7 +21,7 @@ export const getCurrencySourceSelectItems = (
     const name = asset
       ? asset.title
       : `${title ? `${title} | ` : ""}${currency}`;
-    const logo = asset ? asset.logoUrl : logoUrl;
+    const logo = asset?.logoUrl || logoUrl;
     const availableValue =
       available !== undefined
         ? formatCurrencyValue(+available, currency)

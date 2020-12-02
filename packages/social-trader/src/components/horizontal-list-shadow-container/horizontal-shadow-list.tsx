@@ -19,14 +19,18 @@ const ListContainer = styled.div<{ withScroll?: boolean }>`
   }
 `;
 
-const _HorizontalShadowList: React.FC<Props> = ({ darkShadow, children }) => {
+const _HorizontalShadowList: React.FC<Props> = ({
+  withScroll,
+  darkShadow,
+  children
+}) => {
   const { scrollData, ref, handleScroll } = useShadow();
   return (
     <HorizontalListShadowContainer
       darkShadow={darkShadow}
       scrollData={scrollData}
     >
-      <ListContainer ref={ref} onScroll={handleScroll}>
+      <ListContainer withScroll={withScroll} ref={ref} onScroll={handleScroll}>
         {children}
       </ListContainer>
     </HorizontalListShadowContainer>
