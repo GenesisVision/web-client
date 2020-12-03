@@ -25,7 +25,7 @@ const mapExchangeAssetToCurrencySourceSelectItem = ({
 }: ExchangeAsset): CurrencySourceSelectItemType => ({
   asset,
   available: balance,
-  id,
+  id: asset?.id || id,
   currency,
   logoUrl: asset?.logoUrl || GVProgramDefaultAvatar,
   title
