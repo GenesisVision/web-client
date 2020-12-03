@@ -11,6 +11,7 @@ import {
 import { OrderSide } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useContext } from "react";
 import { formatDate } from "utils/dates";
+import { formatCurrencyValue } from "utils/formatter";
 
 interface Props {
   time: number | Date;
@@ -61,7 +62,7 @@ const _TradeHistoryRow: React.FC<Props> = ({
         })}
       </TableCell>
       <TableCell>
-        {commission} {commissionAsset}
+        {formatCurrencyValue(commission, commissionAsset)} {commissionAsset}
       </TableCell>
       <TableCell>
         {`${terminalMoneyFormat({

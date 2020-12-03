@@ -25,7 +25,7 @@ const mapExchangeAssetToCurrencySourceSelectItem = ({
 }: ExchangeAsset): CurrencySourceSelectItemType => ({
   asset,
   available: balance,
-  id,
+  id: asset?.id || id,
   currency,
   logoUrl: asset?.logoUrl || GVProgramDefaultAvatar,
   title
@@ -55,6 +55,7 @@ const _AccountSelector: React.FC<IAccountSelectorProps> = ({
 
   return (
     <CurrencySourceSelectElement
+      options={{ showName: true, showSymbol: true }}
       wide
       value={account}
       name={""}

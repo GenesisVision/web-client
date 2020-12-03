@@ -54,7 +54,7 @@ export const TradingPriceContextProvider: React.FC = ({ children }) => {
     });
     const trade = getTrades(symbol);
     trade.subscribe(data => {
-      const updatedData = [...socketDataBuffer, ...data];
+      const updatedData = [...socketDataBuffer, ...data.reverse()];
       setList(updatedData);
       setSocketDataBuffer([]);
     });

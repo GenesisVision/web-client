@@ -12,11 +12,12 @@ import React from "react";
 
 interface Props extends GVTextFieldProps, IUpdatableGvTextFieldProps {
   items: CurrencySourceSelectItemsType;
+  options?: { showName?: boolean; showSymbol?: boolean };
 }
 
 const _CurrencySourceSelect: React.FC<Props> = props => (
   <UpdatableGvTextField {...props} fixedVertical InputComponent={Select}>
-    {getCurrencySourceSelectItems(props.items)}
+    {getCurrencySourceSelectItems(props.items, props.options)}
   </UpdatableGvTextField>
 );
 

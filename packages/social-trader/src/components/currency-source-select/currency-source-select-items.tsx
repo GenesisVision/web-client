@@ -15,11 +15,14 @@ export interface CurrencySourceSelectItemType {
 }
 
 export const getCurrencySourceSelectItems = (
-  items: CurrencySourceSelectItemsType
+  items: CurrencySourceSelectItemsType,
+  options?: { showName?: boolean; showSymbol?: boolean }
 ): JSX.Element[] =>
   items.map(({ logoUrl, currency, title, id, available, asset }) => {
     const name = asset
       ? asset.title
+      : options?.showName
+      ? title
       : `${title ? `${title} | ` : ""}${currency}`;
     const logo = asset?.logoUrl || logoUrl;
     const availableValue =
@@ -29,6 +32,8 @@ export const getCurrencySourceSelectItems = (
     return (
       <option value={id} key={id}>
         <CurrencyItemWithAmount
+          showSymbol={options?.showSymbol}
+          showName={options?.showName}
           available={availableValue}
           symbol={currency}
           logo={logo}
