@@ -55,6 +55,7 @@ const _AccountSelector: React.FC<IAccountSelectorProps> = ({
 
   return (
     <CurrencySourceSelectElement
+      options={{ showName: true, showSymbol: true }}
       wide
       value={account}
       name={""}
