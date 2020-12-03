@@ -19,7 +19,7 @@ const _AccountSelectorContainer: React.FC<IAccountSelectorProps> = ({
     fetchOnMount: isAuthenticated
   });
 
-  if (!isAuthenticated || !data || data.total < 2) return null;
+  if (!isAuthenticated || !data || data.total === 0) return null;
   return <AccountSelector items={data.items} currentAccount={currentAccount} />;
 };
 

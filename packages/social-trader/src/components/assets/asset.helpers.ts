@@ -71,6 +71,7 @@ export const getBrokerLoaderData = (): Broker => ({
   leverageMax: getRandomInteger(0, 100),
   accountTypes: [
     {
+      typeTitle: "",
       isCountryNotUSRequired: false,
       isDepositRequired: false,
       isKycRequired: false,

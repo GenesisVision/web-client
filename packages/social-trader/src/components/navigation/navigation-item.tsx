@@ -83,7 +83,6 @@ const _NavigationItem: React.FC<INavigationItemProps> = ({
   icon,
   children
 }) => {
-  console.log(mobile);
   const renderIconWithName = () => (
     <NavigationIconWithName small={small} icon={icon}>
       {children}
