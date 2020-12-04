@@ -6,6 +6,7 @@ import { WalletIcon } from "components/icon/wallet-icon";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
+import { DEFAULT_DECIMAL_SCALE } from "constants/constants";
 import useApiRequest from "hooks/api-request.hook";
 import useTab from "hooks/tab.hook";
 import { TerminalDefaultBlock } from "pages/trade/binance-trade-page/trading/components/terminal-default-block/terminal-default-block";
@@ -22,6 +23,7 @@ import {
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { TradingPriceContext } from "pages/trade/binance-trade-page/trading/trading-price.context";
 import React, { useCallback, useContext, useState } from "react";
+import { formatValue } from "utils/formatter";
 
 import { LimitTradeForm } from "./limit-trade-form";
 import { MarketTradeForm } from "./market-trade-form";
@@ -124,7 +126,7 @@ const _PlaceOrder: React.FC = () => {
         </RowItem>
         <RowItem>
           <Text muted>
-            {balance} {walletAsset}
+            {formatValue(balance, DEFAULT_DECIMAL_SCALE)} {walletAsset}
           </Text>
         </RowItem>
       </Row>
