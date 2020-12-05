@@ -52,6 +52,14 @@ const _PlaceOrder: React.FC = () => {
   const { tab, setTab } = useTab<OrderType>("Limit");
 
   const { sendRequest, status } = useApiRequest({
+    errorAlertHandler: error => {
+      if (
+        error ===
+        "Failed (-2015 Invalid API-key, IP, or permissions for action.)"
+      )
+        return "Trading is currently unavailable";
+      return error;
+    },
     request: tradeRequest
   });
 
