@@ -15,14 +15,20 @@ export type API_REQUEST_STATUS = API_REQUEST_STATUS_TYPE;
 
 const getErrorMessageCallback = (error: ResponseError) => error?.errorMessage;
 
+interface Props<T> extends TUseApiRequestProps<T> {
+  errorAlertHandler?: (error: string) => string;
+}
+
 const useApiRequest = <T extends any>(
-  props: TUseApiRequestProps<T>
+  props: Props<T>
 ): TUseApiRequestOutput<T> => {
+  const { errorAlertHandler = (error: string) => error } = props;
   const { successAlert, errorAlert, warningAlert } = useAlerts();
   const alertService: IAlertService = useMemo(
     () => ({
       successAlert: ({ content }: IAlert) => successAlert(content),
-      errorAlert: ({ content }: IAlert) => errorAlert(content),
+      errorAlert: ({ content }: IAlert) =>
+        errorAlert(errorAlertHandler(content)),
       warningAlert: ({ content }: IAlert) => warningAlert(content)
     }),
     []
