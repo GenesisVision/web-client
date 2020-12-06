@@ -21,7 +21,6 @@ import {
   OrderSide,
   OrderType
 } from "pages/trade/binance-trade-page/trading/terminal.types";
-import { TradingPriceContext } from "pages/trade/binance-trade-page/trading/trading-price.context";
 import React, { useCallback, useContext, useState } from "react";
 import { formatValue } from "utils/formatter";
 
@@ -31,9 +30,12 @@ import { getBalance, getBalancesLoaderData } from "./place-order.helpers";
 import styles from "./place-order.module.scss";
 import { IPlaceOrderFormValues, TRADE_FORM_FIELDS } from "./place-order.types";
 
-const _PlaceOrder: React.FC = () => {
+interface Props {
+  price: string;
+}
+
+const _PlaceOrder: React.FC<Props> = ({ price }) => {
   const { tradeRequest } = useContext(TerminalMethodsContext);
-  const { price } = useContext(TradingPriceContext);
 
   const {
     stepSize,
