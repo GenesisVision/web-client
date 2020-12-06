@@ -1,9 +1,4 @@
 import ImgFirstBanner from "pages/landing-page/images/slider/banner.webp";
-import ImgBoxing1 from "pages/landing-page/images/slider/boxing-1.svg";
-import ImgBoxing2 from "pages/landing-page/images/slider/boxing-2.svg";
-import ImgBoxing3 from "pages/landing-page/images/slider/boxing-3.svg";
-import ImgBoxingBg from "pages/landing-page/images/slider/boxing-bg.svg";
-import ImgBoxingOptimization from "pages/landing-page/images/slider/boxing.svg";
 import ImgCreditCard from "pages/landing-page/images/slider/credit-card-1.svg";
 import ImgCreditCardBg from "pages/landing-page/images/slider/credit-card-bg.svg";
 import ImgCreditCardOptimization from "pages/landing-page/images/slider/credit-card.svg";
@@ -14,9 +9,6 @@ import ImgPeopleBg from "pages/landing-page/images/slider/people-bg.svg";
 import ImgPeopleOptimization from "pages/landing-page/images/slider/people.svg";
 import { REFERRAL_PROGRAM_ROUTE } from "pages/landing-page/static-data/nav-links";
 import { WALLET_TOTAL_PAGE_ROUTE } from "pages/wallet/wallet.paths";
-
-const CREATE_ACCOUNT_BROKER_ROUTE =
-  "create-account?broker=Genesis%20Markets%20Demo";
 
 export type TSlide = {
   id: number;
@@ -38,15 +30,6 @@ export const slides: TSlide[] = [
   },
   {
     id: 1,
-    title: "landing-page:slider.slide-1-title",
-    text: "landing-page:slider.slide-1-text",
-    imageBg: ImgBoxingBg,
-    images: [ImgBoxing1, ImgBoxing2, ImgBoxing3],
-    imageOptimization: ImgBoxingOptimization,
-    link: CREATE_ACCOUNT_BROKER_ROUTE
-  },
-  {
-    id: 2,
     title: "landing-page:slider.slide-2-title",
     text: "landing-page:slider.slide-2-text",
     imageBg: ImgCreditCardBg,
@@ -55,7 +38,7 @@ export const slides: TSlide[] = [
     link: WALLET_TOTAL_PAGE_ROUTE
   },
   {
-    id: 3,
+    id: 2,
     title: "landing-page:slider.slide-3-title",
     text: "landing-page:slider.slide-3-text",
     imageBg: ImgPeopleBg,

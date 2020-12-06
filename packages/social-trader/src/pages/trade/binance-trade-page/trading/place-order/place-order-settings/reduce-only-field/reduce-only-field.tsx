@@ -1,8 +1,9 @@
 import GVCheckbox from "components/gv-checkbox/gv-checkbox";
 import { GVHookFormField } from "components/gv-hook-form-field";
-import { TRADE_FORM_FIELDS } from "pages/trade/binance-trade-page/trading/place-order/place-order.helpers";
 import React from "react";
 import { useTranslation } from "react-i18next";
+
+import { TRADE_FORM_FIELDS } from "../../place-order.types";
 
 const _ReduceOnlyField: React.FC = () => {
   const [t] = useTranslation();

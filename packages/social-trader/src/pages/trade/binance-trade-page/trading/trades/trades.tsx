@@ -21,12 +21,12 @@ const _Trades: React.FC<Props> = ({ items }) => {
           <thead>
             <th>
               <Text muted size={"small"}>
-                Price ({baseAsset})
+                Price ({quoteAsset})
               </Text>
             </th>
             <th>
               <Text muted size={"small"}>
-                Amount ({quoteAsset})
+                Amount ({baseAsset})
               </Text>
             </th>
             <th>

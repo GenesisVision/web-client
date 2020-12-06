@@ -6,7 +6,7 @@ interface Props {
 }
 
 export const Separator = styled.div<Props>`
-  ${({ direction }) => {
+  ${({ direction = "horizontal" }) => {
     switch (direction) {
       case "horizontal":
         return `

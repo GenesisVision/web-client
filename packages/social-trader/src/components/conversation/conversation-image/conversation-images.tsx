@@ -9,9 +9,14 @@ import { SizesType } from "utils/types";
 interface Props {
   size: SizesType;
   images: IConversationImage[];
+  bottomOffset?: boolean;
 }
 
-const _ConversationImages: React.FC<Props> = ({ images, size }) => {
+const _ConversationImages: React.FC<Props> = ({
+  images,
+  size,
+  bottomOffset = true
+}) => {
   const [openedImage, setOpenedImage] = useState<number | undefined>();
   const setClose = useCallback(() => {
     setOpenedImage(undefined);
@@ -27,7 +32,7 @@ const _ConversationImages: React.FC<Props> = ({ images, size }) => {
       {images.map((image, index) => {
         const { height, width, logoUrl } = getImageBySize(image, size);
         return (
-          <RowItem bottomOffset key={index}>
+          <RowItem bottomOffset={bottomOffset} key={index}>
             <ConversationImage
               height={height}
               width={width}

@@ -60,6 +60,7 @@ export enum CREATE_ASSET {
   EXCHANGE_ACCOUNT = "ExchangeAccount",
   ACCOUNT = "Account",
   PROGRAM = "Program",
+  EXCHANGE_PROGRAM = "ExchangeProgram",
   SELF_MANAGED_FUND = "SelfManagedFund",
   FUND = "Fund"
 }

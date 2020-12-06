@@ -1,8 +1,8 @@
 import * as crypto from "crypto-js";
 import {
-  BinanceRawOrderSide,
-  BinanceRawOrderType,
-  BinanceRawTimeInForce
+  BinanceOrderSide as BinanceRawOrderSide,
+  BinanceOrderType as BinanceRawOrderType,
+  BinanceTimeInForce as BinanceRawTimeInForce
 } from "gv-api-web";
 import fetch from "isomorphic-unfetch";
 import { from } from "rxjs";
@@ -50,7 +50,6 @@ export const handleErrors = async (response: Response) => {
   }
   try {
     const body = await response.json();
-    console.log(body);
     return Promise.reject({
       body,
       errorMessage: body.msg,

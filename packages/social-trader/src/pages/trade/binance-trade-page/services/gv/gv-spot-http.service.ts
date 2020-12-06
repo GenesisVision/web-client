@@ -1,8 +1,10 @@
+import { DEFAULT_DECIMAL_SCALE } from "constants/constants";
 import dayjs from "dayjs";
 import {
   BinanceRawCancelOrder,
   BinanceRawCancelOrderId,
   BinanceRawKline,
+  BinanceRawKlineItemsViewModel,
   BinanceRawOrder,
   BinanceRawOrderBook,
   BinanceRawOrderBookEntry,
@@ -12,9 +14,14 @@ import {
 } from "gv-api-web";
 import { Bar } from "pages/trade/binance-trade-page/trading/chart/charting_library/datafeed-api";
 import {
+  DividerPartsType,
+  getDividerParts
+} from "pages/trade/binance-trade-page/trading/order-book/order-book.helpers";
+import {
   Account,
   CorrectedRestDepth,
   ExchangeInfo,
+  KlineParams,
   OrderSide,
   QueryOrderResult,
   StringBidDepth,
@@ -26,6 +33,8 @@ import {
 import { from, Observable } from "rxjs";
 import { api } from "services/api-client/swagger-custom-client";
 import { OrderRequest } from "services/request.service";
+import { formatValue } from "utils/formatter";
+import { CurrencyEnum } from "utils/types";
 
 export const getExchangeInfo = (): Promise<ExchangeInfo> =>
   api.terminal().getExchangeInfo();
@@ -46,27 +55,65 @@ const transformKlineBar = ({
   volume: baseVolume
 });
 
+export const getKlines = async (params: KlineParams): Promise<Bar[]> => {
+  let bars: Bar[] = [];
+  const sendRequest = async (startTime: number) => {
+    const data = await api
+      .terminal()
+      .getKlines(params.symbol, {
+        ...params,
+        endTime: new Date(params.endTime),
+        startTime: new Date(startTime)
+      })
+      .then(({ items }: BinanceRawKlineItemsViewModel) =>
+        items.map(transformKlineBar)
+      );
+    bars.push.apply(bars, data);
+    const length = bars.length;
+
+    if (length === 1000) {
+      const lastBar = bars[bars.length - 1];
+      const nextTime = lastBar.time + 1;
+      await sendRequest(nextTime);
+    }
+  };
+
+  await sendRequest(params.startTime);
+
+  return bars;
+};
+
 export const getServerTime = () => {
   return api.terminal().getExchangeTime();
 };
 
 const transformToUnitedOrder = ({
+  commissionAsset,
+  status,
+  commission,
+  quoteQuantityFilled,
   orderId,
   createTime,
   symbol,
   type,
   side,
+  stopPrice,
   price,
   quantity,
   quoteQuantity,
   quantityFilled
 }: BinanceRawOrder): UnitedOrder => ({
+  commissionAsset,
+  orderStatus: status,
+  commission,
+  quoteQuantityFilled,
   executedQuantity: quoteQuantity,
   id: orderId,
   time: createTime,
   symbol,
   type,
   side,
+  stopPrice,
   price,
   quantityFilled,
   quantity
@@ -85,14 +132,21 @@ export const getOpenOrders = (
       ) as Promise<UnitedOrder[]>
   );
 
-export const getAllOrders = (
-  symbol: string,
-  accountId?: string
-): Observable<UnitedOrder[]> =>
+export const getAllTrades = (accountId?: string): Observable<UnitedOrder[]> =>
   from(
     api
       .terminal()
-      .getTradesHistory({ accountId })
+      .getTradesHistory({ accountId, mode: "TradeHistory" })
+      .then(({ items }: BinanceRawOrderItemsViewModel) =>
+        items.map(transformToUnitedOrder)
+      ) as Promise<UnitedOrder[]>
+  );
+
+export const getAllOrders = (accountId?: string): Observable<UnitedOrder[]> =>
+  from(
+    api
+      .terminal()
+      .getTradesHistory({ accountId, mode: "OrderHistory" })
       .then(({ items }: BinanceRawOrderItemsViewModel) =>
         items.map(transformToUnitedOrder)
       ) as Promise<UnitedOrder[]>
@@ -111,9 +165,12 @@ export const getUserStreamKey = (
   );
 
 export const getAccountInformation = (
-  accountId?: string
+  accountId?: string,
+  currency?: CurrencyEnum
 ): Observable<Account> =>
-  from(api.terminal().getAccountInfo({ accountId }) as Promise<Account>);
+  from(
+    api.terminal().getAccountInfo({ accountId, currency }) as Promise<Account>
+  );
 
 export const getTrades = (
   symbol: string,
@@ -136,28 +193,43 @@ export const getTrades = (
 export const getTickers = (symbol: string = ""): Observable<Ticker[]> =>
   from(api.terminal().get24HPrices(symbol) as Promise<Ticker[]>);
 
-const transformDepthToString = ({
+const getPriceWithCorrectFrac = (
+  price: string,
+  correctFracLength: number = 8
+) => {
+  const [int, frac = ""] = price.split(".");
+  const correctFrac = frac + "0".repeat(correctFracLength - frac.length);
+  return [int, correctFrac].join(".");
+};
+
+const transformDepthToString = (dividerParts: DividerPartsType) => ({
   price,
   quantity
-}: BinanceRawOrderBookEntry): StringBidDepth => [
-  String(price),
-  String(quantity)
-];
+}: BinanceRawOrderBookEntry): StringBidDepth => {
+  const newPrice = getPriceWithCorrectFrac(
+    formatValue(price, DEFAULT_DECIMAL_SCALE),
+    dividerParts.fracLength
+  );
+  return [newPrice, String(quantity)];
+};
 
 export const getDepth = (
   symbol: string,
-  limit: number = 1000
-): Observable<CorrectedRestDepth> =>
-  from(
+  tickSize: string = "0.00000001",
+  limit: number = 100
+): Observable<CorrectedRestDepth> => {
+  const dividerParts = getDividerParts(tickSize);
+  return from(
     api
       .terminal()
       .getOrderBook(symbol, { limit })
       .then((data: BinanceRawOrderBook) => ({
         ...data,
-        asks: data.asks.map(transformDepthToString),
-        bids: data.bids.map(transformDepthToString)
+        asks: data.asks.map(transformDepthToString(dividerParts)),
+        bids: data.bids.map(transformDepthToString(dividerParts))
       })) as Promise<CorrectedRestDepth>
   );
+};
 
 export const newOrder = (
   options: OrderRequest,
@@ -202,11 +274,11 @@ export const postBuy = ({
   newOrder(
     {
       reduceOnly,
-      stopPrice: type === "StopLossLimit" ? String(stopPrice) : undefined,
+      stopPrice: type === "TakeProfitLimit" ? stopPrice : undefined,
       symbol,
       type,
       price:
-        type === "Limit" || type === "StopLossLimit"
+        type === "Limit" || type === "TakeProfitLimit"
           ? String(price)
           : undefined,
       quantity: String(quantity),
@@ -231,11 +303,11 @@ export const postSell = ({
   newOrder(
     {
       reduceOnly,
-      stopPrice: type === "StopLossLimit" ? String(stopPrice) : undefined,
+      stopPrice: type === "TakeProfitLimit" ? stopPrice : undefined,
       symbol,
       type,
       price:
-        type === "Limit" || type === "StopLossLimit"
+        type === "Limit" || type === "TakeProfitLimit"
           ? String(price)
           : undefined,
       quantity: String(quantity),

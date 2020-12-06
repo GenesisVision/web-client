@@ -9,11 +9,9 @@ import {
   $primaryColor,
   $textColor
 } from "utils/style/colors";
+import { $fontSizeSmall, $paddingXsmall } from "utils/style/sizes";
 
 interface IRangeProps extends RangeProps {}
-
-const $paddingXSmall = "20px";
-const $fontSizeSmall = "12px";
 
 export const SliderStyleWrapper: React.FC = ({ children }) => {
   return (
@@ -277,7 +275,7 @@ export const SliderStyleWrapper: React.FC = ({ children }) => {
         }
 
         .range {
-          padding: 0 7px ${$paddingXSmall};
+          padding: 0 7px ${$paddingXsmall}px;
         }
 
         .range .rc-slider-track {
@@ -296,7 +294,7 @@ export const SliderStyleWrapper: React.FC = ({ children }) => {
           border-color: ${$primaryColor};
         }
         .calculator-slider__slider-element {
-          margin-bottom: ${$paddingXSmall};
+          margin-bottom: ${$paddingXsmall}px;
         }
 
         .calculator-slider__slider-element .rc-slider-track {

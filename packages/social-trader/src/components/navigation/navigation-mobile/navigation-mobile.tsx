@@ -8,7 +8,11 @@ import { LOGIN_ROUTE } from "routes/app.routes";
 import { TMenuItem } from "routes/menu";
 import styled from "styled-components";
 import { $panelBackgroundColor } from "utils/style/colors";
-import { $fontSizeParagraph, $paddingXsmall } from "utils/style/sizes";
+import {
+  $fontSizeParagraph,
+  $paddingSmall,
+  $paddingXsmall
+} from "utils/style/sizes";
 
 import { MenuNavigationItem } from "../menu-navigation-item";
 
@@ -42,6 +46,10 @@ const AvatarContainer = styled.div`
   margin-right: 15px;
 `;
 
+const MenuNavigationItemContainer = styled.div`
+  padding: ${$paddingSmall / 2}px ${$paddingSmall}px;
+`;
+
 const _NavigationMobile: React.FC<Props> = ({
   onClose,
   isAuthenticated,
@@ -66,14 +74,15 @@ const _NavigationMobile: React.FC<Props> = ({
       )}
       <MobileTop onClick={onClose}>
         {mobileMenuItems.map(item => (
-          <MenuNavigationItem item={item} key={item.label} />
+          <MenuNavigationItem mobile item={item} key={item.label} />
         ))}
         {isAuthenticated ? (
-          <NavigationItem icon={<LogoutIcon primary />} onClick={logout}>
+          <NavigationItem mobile icon={<LogoutIcon primary />} onClick={logout}>
             {t("navigation.logout")}
           </NavigationItem>
         ) : (
           <NavigationItem
+            mobile
             icon={<LogoutIcon primary rotate />}
             href={{
               pathname: LOGIN_ROUTE,

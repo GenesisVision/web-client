@@ -11,7 +11,6 @@ import {
   BalancesForTransfer,
   CancelOrderResult,
   ChangeLeverageResponse,
-  Depth,
   ExchangeInfo,
   FuturesPositionInformation,
   HttpResponse,
@@ -329,7 +328,7 @@ export const getTickers = (symbol?: string): Observable<Ticker[]> =>
 
 export const getDepth = (
   symbol: string,
-  limit: number = 1000
+  limit?: string
 ): Observable<RestDepth> =>
   requestService.get({
     url: `${API_ROUTE}/depth`,
@@ -394,7 +393,7 @@ export const postBuy = ({
     {
       reduceOnly,
       // @ts-ignore
-      stopPrice: type === "StopLossLimit" ? String(stopPrice) : undefined,
+      stopPrice: type === "StopLossLimit" ? stopPrice : undefined,
       symbol,
       type,
       price:
@@ -426,7 +425,7 @@ export const postSell = ({
     {
       reduceOnly,
       // @ts-ignore
-      stopPrice: type === "StopLossLimit" ? String(stopPrice) : undefined,
+      stopPrice: type === "StopLossLimit" ? stopPrice : undefined,
       symbol,
       type,
       price:

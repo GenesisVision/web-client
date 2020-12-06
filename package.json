@@ -2,7 +2,7 @@
   "private": true,
   "workspaces": ["packages/*"],
   "dependencies": {
-    "@pavelzubov/use-api-request": "pavelzubov/use-api-request#1.4.0",
+    "@pavelzubov/use-api-request": "pavelzubov/use-api-request#1.4.2",
     "@sumsub/websdk": "^1.0.11",
     "@zeit/next-workers": "^1.0.1-canary.1",
     "browser-image-compression": "^1.0.8",

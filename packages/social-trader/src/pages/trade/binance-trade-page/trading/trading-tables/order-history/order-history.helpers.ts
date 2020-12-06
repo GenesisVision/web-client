@@ -17,12 +17,18 @@ export const ORDER_HISTORY_TABLE_COLUMNS: SortingColumn[] = [
     name: "price"
   },
   {
+    name: "executed"
+  },
+  {
     name: "amount"
   },
   {
-    name: "filled"
+    name: "total"
   },
   {
-    name: "total"
+    name: "trigger conditions"
+  },
+  {
+    name: "status"
   }
 ];

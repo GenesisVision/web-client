@@ -1,8 +1,13 @@
 import React from "react";
 
-export const UserAvatarIcon: React.FC = () => {
+interface Props {
+  className?: string;
+}
+
+export const UserAvatarIcon: React.FC<Props> = ({ className }) => {
   return (
     <svg
+      className={className}
       width="12"
       height="14"
       viewBox="0 0 12 14"

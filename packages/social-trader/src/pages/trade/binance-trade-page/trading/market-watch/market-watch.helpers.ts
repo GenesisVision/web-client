@@ -155,7 +155,7 @@ export const getFilteringFunction = (
 
 export const filterForSearch = (
   query: string,
-  field: keyof MergedTickerSymbolType = "baseAsset"
+  field: keyof MergedTickerSymbolType = "symbol"
 ) => (item: MergedTickerSymbolType): boolean => {
   if (!query) return true;
   return String(item[field])

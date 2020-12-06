@@ -63,18 +63,19 @@ const _DepositForm: React.FC<Props> = ({
 
   const form = useForm<IDepositFormValues>({
     defaultValues: {
+      [DEPOSIT_FORM_FIELDS.availableInWallet]: wallet.available,
       [DEPOSIT_FORM_FIELDS.walletId]: wallet.id
     },
     validationSchema: depositValidationSchema({
       rate,
-      wallet,
+      walletCurrency: wallet.currency,
       availableToInvestInAsset,
       minDeposit,
       t
     }),
     mode: "onChange"
   });
-  const { reset, watch, setValue } = form;
+  const { reset, watch, setValue, triggerValidation } = form;
   const { amount = 0 } = watch();
 
   useEffect(() => {
@@ -90,7 +91,13 @@ const _DepositForm: React.FC<Props> = ({
       wallet.currency
     );
     setValue(DEPOSIT_FORM_FIELDS.amount, max, true);
-  }, [availableToInvestInAsset, wallet, setValue]);
+  }, [
+    availableToInvestInAsset,
+    wallet.available,
+    wallet.currency,
+    setValue,
+    rate
+  ]);
 
   const setMinAmount = useCallback((): void => {
     const min = getMinDepositFromAmounts(minDeposit, wallet.currency);
@@ -98,24 +105,38 @@ const _DepositForm: React.FC<Props> = ({
   }, [minDeposit, rate, wallet, setValue]);
 
   const onWalletChange = useCallback(
-    (wallet: CommonWalletType) => {
-      reset({
-        [DEPOSIT_FORM_FIELDS.walletId]: wallet.id,
-        [DEPOSIT_FORM_FIELDS.amount]: ""
-      });
-      setWallet(wallet);
+    (newWallet: CommonWalletType) => {
+      if (wallet.id !== newWallet.id)
+        reset({
+          [DEPOSIT_FORM_FIELDS.availableInWallet]: newWallet.available,
+          [DEPOSIT_FORM_FIELDS.walletId]: newWallet.id,
+          [DEPOSIT_FORM_FIELDS.amount]: ""
+        });
+      else
+        setValue(
+          DEPOSIT_FORM_FIELDS.availableInWallet,
+          newWallet.available,
+          true
+        );
+      setWallet(newWallet);
     },
-    [reset]
+    [amount, reset, triggerValidation, setValue]
   );
   return (
     <HookForm form={form} onSubmit={onSubmit}>
       <DialogBottom>
         <Row>
           <WalletSelectContainer
+            currentId={wallet.id}
             name={DEPOSIT_FORM_FIELDS.walletId}
             onChange={onWalletChange}
           />
         </Row>
+        <InputAmountField
+          currency={currency}
+          hide
+          name={DEPOSIT_FORM_FIELDS.availableInWallet}
+        />
         <InputAmountField
           setMin={setMinAmount}
           name={DEPOSIT_FORM_FIELDS.amount}
@@ -142,7 +163,7 @@ const _DepositForm: React.FC<Props> = ({
         )}
         {errorMessage && <DialogError error={errorMessage} />}
         <DialogButtons>
-          <SubmitButton isSuccessful={!errorMessage} wide>
+          <SubmitButton checkDirty={false} isSuccessful={!errorMessage} wide>
             {t("deposit-asset.confirm")}
           </SubmitButton>
         </DialogButtons>

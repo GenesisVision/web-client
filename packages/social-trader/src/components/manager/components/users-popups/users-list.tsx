@@ -64,6 +64,7 @@ export const UsersListItem: React.FC<IUsersListItemProps> = React.memo(
               size={"small"}
               id={id}
               value={personalDetails.isFollow}
+              wide={false}
             />
           </RowItem>
         )}

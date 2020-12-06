@@ -24,15 +24,19 @@ const _OrderBookCurrentPrice: React.FC<Props> = ({
   const { tickSize } = useContext(TerminalInfoContext);
   return (
     <Center className={styles["order-book__current-price"]}>
-      <RowItem size={"large"}>
+      <RowItem
+        size={"large"}
+        className={styles["order-book__current-original-price"]}
+      >
         <TradeStatefulValue
+          showArrow
           value={terminalMoneyFormat({ amount: price, tickSize })}
           trigger={tradeId}
         />
       </RowItem>
       {equivalent && (
         <RowItem>
-          {equivalent} {equivalentCurrency}
+          {equivalent}&nbsp;{equivalentCurrency}
         </RowItem>
       )}
     </Center>

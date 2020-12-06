@@ -1,6 +1,5 @@
 import Link, { ToType } from "components/link/link";
 import NavigationIconWithName from "components/navigation/navigation-icon-with-name";
-import { NextRouter } from "next/dist/client/router";
 import { WithRouterProps } from "next/dist/client/with-router";
 import { withRouter } from "next/router";
 import React from "react";
@@ -17,6 +16,7 @@ import { normalizeLinkFrom } from "../link/link.helper";
 interface INavigationItemProps
   extends React.HTMLAttributes<HTMLAnchorElement>,
     WithRouterProps {
+  mobile?: boolean;
   small?: boolean;
   href?: string | ToType;
   icon: JSX.Element;
@@ -25,30 +25,32 @@ interface INavigationItemProps
 }
 
 interface IStyleProps {
-  router: NextRouter;
-  href?: string | ToType;
+  mobile?: boolean;
+  isCurrent?: boolean;
 }
 
 const dynamicStyles = css`
-  opacity: ${({ router, href }: IStyleProps) =>
-    !!href && router.route.startsWith(normalizeLinkFrom(href)) ? 1 : 0.4};
+  opacity: ${({ isCurrent }: IStyleProps) => (isCurrent ? 1 : 0.4)};
   &:hover {
     opacity: 1;
   }
-  ${mediaBreakpointLandscapeTablet(
-    `padding: 0;
+  ${({ mobile }) =>
+    mediaBreakpointLandscapeTablet(
+      `${!mobile && "padding: 0"};
       margin-right: ${$paddingXsmall}px;`
-  )}
-  ${mediaBreakpointDesktop(
-    `padding: 0;
+    )}
+  ${({ mobile }) =>
+    mediaBreakpointDesktop(
+      `${!mobile && "padding: 0"};
       margin-right: ${$paddingBig}px;`
-  )}
-  ${mediaBreakpointLargeDesktop(
-    `margin-right: 70px;
+    )}
+  ${({ mobile }) =>
+    mediaBreakpointLargeDesktop(
+      `margin-right: 70px;
     &:first-child {
         margin-right: ${$paddingBig}px;
     }`
-  )}
+    )}
 `;
 
 const styles = css<IStyleProps>`
@@ -70,6 +72,7 @@ const StyledButton = styled.div<IStyleProps>`
 `;
 
 const _NavigationItem: React.FC<INavigationItemProps> = ({
+  mobile,
   router,
   small,
   onClick,
@@ -82,16 +85,17 @@ const _NavigationItem: React.FC<INavigationItemProps> = ({
       {children}
     </NavigationIconWithName>
   );
-  return (
-    (!!href && (
-      <StyledLink href={href} router={router} to={href}>
-        {renderIconWithName()}
-      </StyledLink>
-    )) || (
-      <StyledButton href={href} router={router} onClick={onClick}>
-        {renderIconWithName()}
-      </StyledButton>
-    )
+
+  const isCurrent = !!href && router.route.startsWith(normalizeLinkFrom(href));
+
+  return !!href ? (
+    <StyledLink mobile={mobile} isCurrent={isCurrent} to={href}>
+      {renderIconWithName()}
+    </StyledLink>
+  ) : (
+    <StyledButton mobile={mobile} isCurrent={isCurrent} onClick={onClick}>
+      {renderIconWithName()}
+    </StyledButton>
   );
 };
 const NavigationItem = withRouter(React.memo(_NavigationItem));
