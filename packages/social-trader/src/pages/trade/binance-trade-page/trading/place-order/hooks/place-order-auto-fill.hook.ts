@@ -1,8 +1,10 @@
+import { DEFAULT_DECIMAL_SCALE } from "constants/constants";
 import { terminalMoneyFormat } from "pages/trade/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
 import { TerminalPlaceOrderContext } from "pages/trade/binance-trade-page/trading/terminal-place-order.context";
 import { OrderSide } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { useContext, useEffect, useState } from "react";
+import { formatValue } from "utils/formatter";
 
 import {
   PlaceOrderFormSetValueType,
@@ -41,13 +43,13 @@ export const usePlaceOrderAutoFill = ({
   useEffect(() => {
     if (!autoFill) {
       const value = +terminalMoneyFormat({
-        amount: total / price,
+        amount: +total / +price,
         tickSize: stepSize
       });
       if (isNaN(value)) return;
-      if (value === quantity) return;
+      if (value === +quantity) return;
       if (value > 0 || String(total) === "0") {
-        setValue(quantityName, value, true);
+        setValue(quantityName, formatValue(value, DEFAULT_DECIMAL_SCALE), true);
 
         setAutoFill(true);
       }
@@ -56,17 +58,17 @@ export const usePlaceOrderAutoFill = ({
   useEffect(() => {
     if (!autoFill) {
       const value = +terminalMoneyFormat({
-        amount: leverage * quantity * price,
+        amount: leverage * +quantity * +price,
         tickSize: tickSize
       });
       if (isNaN(value)) return;
-      if (value === total) return;
+      if (value === +total) return;
       if (value > 0 || String(quantity) === "0") {
-        setValue(totalName, value, true);
+        setValue(totalName, formatValue(value, DEFAULT_DECIMAL_SCALE), true);
         setAutoFill(true);
 
         if (side === "Sell" && sellWalletAvailable) {
-          const newSliderValue = (quantity / sellWalletAvailable) * 100;
+          const newSliderValue = (+quantity / sellWalletAvailable) * 100;
           setSliderValue(newSliderValue, false);
         }
         if (side === "Buy" && buyWalletAvailable) {
@@ -80,12 +82,12 @@ export const usePlaceOrderAutoFill = ({
     if (!autoFill) {
       if (quantity && price) {
         const value = +terminalMoneyFormat({
-          amount: leverage * quantity * price,
+          amount: leverage * +quantity * +price,
           tickSize: tickSize
         });
         if (isNaN(value)) return;
-        if (value === total) return;
-        setValue(totalName, value, true);
+        if (value === +total) return;
+        setValue(totalName, formatValue(value, DEFAULT_DECIMAL_SCALE), true);
         setAutoFill(true);
       }
     } else setAutoFill(false);

@@ -1,12 +1,12 @@
 import { TimeInForce } from "pages/trade/binance-trade-page/trading/terminal.types";
 
-export type QuantityType = number;
-export type TotalType = number;
-export type PriceType = number;
+export type QuantityType = string;
+export type TotalType = string;
+export type PriceType = string;
 
 export type PlaceOrderFormSetValueType = (
   name: string,
-  value?: number,
+  value?: QuantityType | TotalType | PriceType,
   shouldValidate?: boolean
 ) => void;
 

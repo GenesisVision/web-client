@@ -31,7 +31,7 @@ import { IStopLimitFormValues, TRADE_FORM_FIELDS } from "./place-order.types";
 
 export interface IStopLimitTradeFormProps {
   status: API_REQUEST_STATUS;
-  outerPrice: number;
+  outerPrice: string;
   side: OrderSide;
   onSubmit: (values: IStopLimitFormValues) => any;
 }
