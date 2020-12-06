@@ -1,15 +1,13 @@
 import { TFunction } from "i18next";
 import {
-  IStopLimitFormValues,
-  TRADE_FORM_FIELDS
-} from "pages/trade/binance-trade-page/trading/place-order/place-order.helpers";
-import {
   OrderSide,
   TerminalCurrency
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { formatCurrencyValue } from "utils/formatter";
 import { minMaxNumberShape } from "utils/validators/validators";
 import { lazy, number, object, Schema } from "yup";
+
+import { IStopLimitFormValues, TRADE_FORM_FIELDS } from "./place-order.types";
 
 const placeOrderTotalShape = ({
   t,

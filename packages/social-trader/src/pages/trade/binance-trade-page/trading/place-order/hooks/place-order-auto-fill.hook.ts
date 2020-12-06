@@ -4,7 +4,7 @@ import { TerminalPlaceOrderContext } from "pages/trade/binance-trade-page/tradin
 import { OrderSide } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { useContext, useEffect, useState } from "react";
 
-import { PlaceOrderFormSetValueType } from "../place-order.helpers";
+import { PlaceOrderFormSetValueType } from "../place-order.types";
 import { SetSliderValueFunc } from "./trade-slider.hook";
 
 export const usePlaceOrderAutoFill = ({

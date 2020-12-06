@@ -23,11 +23,8 @@ import { usePlaceOrderAutoFill } from "./hooks/place-order-auto-fill.hook";
 import { usePlaceOrderFormReset } from "./hooks/place-order-form-reset.hook";
 import { usePlaceOrderInfo } from "./hooks/place-order-info-hook";
 import { placeOrderDefaultValidationSchema } from "./place-order-validation";
-import {
-  getBalance,
-  IPlaceOrderFormValues,
-  TRADE_FORM_FIELDS
-} from "./place-order.helpers";
+import { getBalance } from "./place-order.helpers";
+import { IPlaceOrderFormValues, TRADE_FORM_FIELDS } from "./place-order.types";
 
 export interface IMarketTradeFormProps {
   status: API_REQUEST_STATUS;

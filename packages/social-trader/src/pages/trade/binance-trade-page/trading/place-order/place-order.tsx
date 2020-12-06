@@ -27,13 +27,9 @@ import { formatValue } from "utils/formatter";
 
 import { LimitTradeForm } from "./limit-trade-form";
 import { MarketTradeForm } from "./market-trade-form";
-import {
-  getBalance,
-  getBalancesLoaderData,
-  IPlaceOrderFormValues,
-  TRADE_FORM_FIELDS
-} from "./place-order.helpers";
+import { getBalance, getBalancesLoaderData } from "./place-order.helpers";
 import styles from "./place-order.module.scss";
+import { IPlaceOrderFormValues, TRADE_FORM_FIELDS } from "./place-order.types";
 
 const _PlaceOrder: React.FC = () => {
   const { tradeRequest } = useContext(TerminalMethodsContext);
