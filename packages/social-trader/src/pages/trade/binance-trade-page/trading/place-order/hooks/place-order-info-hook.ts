@@ -10,7 +10,7 @@ import {
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { useContext, useMemo } from "react";
 
-import { getBalance } from "./place-order.helpers";
+import { getBalance } from "../place-order.helpers";
 
 export const usePlaceOrderInfo = ({
   exchangeInfo,

@@ -13,7 +13,7 @@ import { calculatePercentage } from "utils/currency-converter";
 import { formatValue } from "utils/formatter";
 import { AnyObjectType } from "utils/types";
 
-import { getBalance } from "./place-order.helpers";
+import { getBalance } from "../place-order.helpers";
 
 export type SetSliderValueFunc = (
   sliderValue?: number,

@@ -1,11 +1,11 @@
 import { terminalMoneyFormat } from "pages/trade/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
-import { SetSliderValueFunc } from "pages/trade/binance-trade-page/trading/place-order/trade-slider.hook";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
 import { TerminalPlaceOrderContext } from "pages/trade/binance-trade-page/trading/terminal-place-order.context";
 import { OrderSide } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { useContext, useEffect, useState } from "react";
 
-import { PlaceOrderFormSetValueType } from "./place-order.helpers";
+import { PlaceOrderFormSetValueType } from "../place-order.helpers";
+import { SetSliderValueFunc } from "./trade-slider.hook";
 
 export const usePlaceOrderAutoFill = ({
   buyWalletAvailable,
