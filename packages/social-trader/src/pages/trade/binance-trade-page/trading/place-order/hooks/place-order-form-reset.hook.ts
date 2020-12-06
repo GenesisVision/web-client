@@ -1,4 +1,5 @@
 import { API_REQUEST_STATUS } from "hooks/api-request.hook";
+import { PriceType } from "pages/trade/binance-trade-page/trading/place-order/place-order.types";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
 import {
   AssetBalance,
@@ -25,7 +26,7 @@ export const usePlaceOrderFormReset = ({
   triggerValidation: VoidFunction;
   watch: () => AnyObjectType;
   reset: (values: any) => void;
-  outerPrice: number;
+  outerPrice: PriceType;
   setValue: (name: string, value?: number, shouldValidate?: boolean) => void;
   side: OrderSide;
   balances: AssetBalance[];

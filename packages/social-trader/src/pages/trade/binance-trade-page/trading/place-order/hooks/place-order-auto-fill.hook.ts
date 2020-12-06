@@ -4,7 +4,12 @@ import { TerminalPlaceOrderContext } from "pages/trade/binance-trade-page/tradin
 import { OrderSide } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { useContext, useEffect, useState } from "react";
 
-import { PlaceOrderFormSetValueType } from "../place-order.types";
+import {
+  PlaceOrderFormSetValueType,
+  PriceType,
+  QuantityType,
+  TotalType
+} from "../place-order.types";
 import { SetSliderValueFunc } from "./trade-slider.hook";
 
 export const usePlaceOrderAutoFill = ({
@@ -23,9 +28,9 @@ export const usePlaceOrderAutoFill = ({
   sellWalletAvailable: number;
   setSliderValue: SetSliderValueFunc;
   side: OrderSide;
-  total: number;
-  price: number;
-  quantity: number;
+  total: TotalType;
+  price: PriceType;
+  quantity: QuantityType;
   setValue: PlaceOrderFormSetValueType;
   totalName: string;
   quantityName: string;

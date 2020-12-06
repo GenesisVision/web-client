@@ -1,5 +1,9 @@
 import { TimeInForce } from "pages/trade/binance-trade-page/trading/terminal.types";
 
+export type QuantityType = number;
+export type TotalType = number;
+export type PriceType = number;
+
 export type PlaceOrderFormSetValueType = (
   name: string,
   value?: number,
@@ -18,13 +22,13 @@ export enum TRADE_FORM_FIELDS {
 export interface IPlaceOrderDefaultFormValues {
   [TRADE_FORM_FIELDS.reduceOnly]?: boolean;
   [TRADE_FORM_FIELDS.timeInForce]?: TimeInForce;
-  [TRADE_FORM_FIELDS.quantity]: number;
-  [TRADE_FORM_FIELDS.total]: number;
-  [TRADE_FORM_FIELDS.price]: number;
+  [TRADE_FORM_FIELDS.quantity]: QuantityType;
+  [TRADE_FORM_FIELDS.total]: TotalType;
+  [TRADE_FORM_FIELDS.price]: PriceType;
 }
 
 export interface IStopLimitFormValues extends IPlaceOrderDefaultFormValues {
-  [TRADE_FORM_FIELDS.stopPrice]: number;
+  [TRADE_FORM_FIELDS.stopPrice]: PriceType;
 }
 
 export interface IPlaceOrderFormValues extends IPlaceOrderDefaultFormValues {}
