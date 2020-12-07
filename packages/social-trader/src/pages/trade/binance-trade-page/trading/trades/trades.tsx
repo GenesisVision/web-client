@@ -12,6 +12,8 @@ interface Props {
 
 const _Trades: React.FC<Props> = ({ items }) => {
   const {
+    stepSize,
+    tickSize,
     symbol: { baseAsset, quoteAsset }
   } = useContext(TerminalInfoContext);
   return (
@@ -42,6 +44,9 @@ const _Trades: React.FC<Props> = ({ items }) => {
           <tbody>
             {items.map(({ price, quantity, tradeTime }, i) => (
               <TradesRow
+                stepSize={stepSize}
+                tickSize={tickSize}
+                key={price}
                 price={price}
                 prevPrice={items[i + 1]?.price}
                 amount={quantity}
