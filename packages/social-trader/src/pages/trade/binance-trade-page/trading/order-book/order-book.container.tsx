@@ -180,6 +180,8 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
 
   return (
     <OrderBook
+      baseAsset={baseAsset}
+      quoteAsset={quoteAsset}
       listAmount={listAmount}
       tickValue={tickValue}
       setTickValue={setTickValue}
