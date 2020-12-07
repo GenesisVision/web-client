@@ -143,7 +143,7 @@ const _PlaceOrder: React.FC<Props> = ({ price }) => {
               status={status}
               exchangeInfo={exchangeInfo}
               balances={balances}
-              outerPrice={+price}
+              outerPrice={price}
               onSubmit={handleSubmit}
               side={side}
             />
@@ -153,7 +153,7 @@ const _PlaceOrder: React.FC<Props> = ({ price }) => {
               status={status}
               exchangeInfo={exchangeInfo}
               balances={balances}
-              outerPrice={+price}
+              outerPrice={price}
               onSubmit={handleSubmit}
               side={side}
             />
@@ -163,7 +163,7 @@ const _PlaceOrder: React.FC<Props> = ({ price }) => {
               status={status}
               exchangeInfo={exchangeInfo}
               balances={balances}
-              outerPrice={+price}
+              outerPrice={price}
               onSubmit={handleSubmit}
               side={side}
             />

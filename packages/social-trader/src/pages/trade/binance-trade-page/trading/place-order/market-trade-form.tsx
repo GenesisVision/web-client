@@ -28,7 +28,7 @@ import { IPlaceOrderFormValues, TRADE_FORM_FIELDS } from "./place-order.types";
 
 export interface IMarketTradeFormProps {
   status: API_REQUEST_STATUS;
-  outerPrice: number;
+  outerPrice: string;
   side: OrderSide;
   onSubmit: (values: IPlaceOrderFormValues) => any;
 }
