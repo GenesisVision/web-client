@@ -4,17 +4,18 @@ import { Text } from "components/text/text";
 import { TradeStatefulValue } from "pages/trade/binance-trade-page/trading/components/trade-stateful-value/trade-stateful-value";
 import { MarketWatchFavoriteButton } from "pages/trade/binance-trade-page/trading/market-watch/market-watch-favorite-button";
 import { CHANGE_COLUMN } from "pages/trade/binance-trade-page/trading/market-watch/market-watch.helpers";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
+import { SymbolState } from "pages/trade/binance-trade-page/trading/terminal-info.context";
 import { getTextColor } from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import { TerminalCurrency } from "pages/trade/binance-trade-page/trading/terminal.types";
-import React, { useCallback, useContext } from "react";
-import { useSelector } from "react-redux";
-import { isAuthenticatedSelector } from "reducers/auth-reducer";
-import { formatCurrencyValue, formatValue } from "utils/formatter";
+import React, { useCallback } from "react";
+import { formatCurrencyValue } from "utils/formatter";
 
 import styles from "./market-watch.module.scss";
 
 interface Props {
+  isAuthenticated?: boolean;
+  exchangeAccountId?: string;
+  setSymbol: (symbol: SymbolState) => void;
   isFavorite?: boolean;
   eventTime?: number;
   quoteAsset: TerminalCurrency;
@@ -29,6 +30,9 @@ interface Props {
 
 export const MarketWatchRow: React.FC<Props> = React.memo(
   ({
+    isAuthenticated,
+    exchangeAccountId,
+    setSymbol,
     isFavorite,
     eventTime,
     quoteAsset,
@@ -40,19 +44,12 @@ export const MarketWatchRow: React.FC<Props> = React.memo(
     priceChange,
     priceChangePercent
   }) => {
-    const isAuthenticated = useSelector(isAuthenticatedSelector);
-    const { exchangeAccountId, setSymbol } = useContext(TerminalInfoContext);
-
     const handleClick = useCallback(() => {
       setSymbol({ quoteAsset, baseAsset });
     }, [quoteAsset, baseAsset]);
 
     return (
-      <tr
-        className={styles["market-watch__row"]}
-        key={symbol}
-        onClick={handleClick}
-      >
+      <tr className={styles["market-watch__row"]} onClick={handleClick}>
         <td className={styles["market-watch__cell"]}>
           <Center>
             {isAuthenticated && exchangeAccountId && (
