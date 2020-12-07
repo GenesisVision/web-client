@@ -9,7 +9,7 @@ const withTM = require("next-transpile-modules")(["shared", "gv-api-web"]);
 
 const isProd = process.env.NODE_ENV === "production";
 
-const enablePreact = false;
+const enablePreact = true;
 
 const analyzer = withBundleAnalyzer({
   enabled: process.env.ANALYZE === "true"
@@ -56,7 +56,7 @@ function create(path) {
         );
       }
 
-      if (isServer && enablePreact) {
+      if (true && enablePreact) {
         config.resolve.alias = {
           ...config.resolve.alias,
           react: "preact/compat",
