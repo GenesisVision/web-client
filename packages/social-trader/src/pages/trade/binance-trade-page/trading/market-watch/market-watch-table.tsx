@@ -9,8 +9,9 @@ import {
   sortMarketWatchItems
 } from "pages/trade/binance-trade-page/trading/market-watch/market-watch.helpers";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
+import { TerminalTickerContext } from "pages/trade/binance-trade-page/trading/terminal-ticker.context";
 import { MergedTickerSymbolType } from "pages/trade/binance-trade-page/trading/terminal.types";
-import React, { useContext, useState } from "react";
+import React, { useContext, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
 
@@ -29,6 +30,7 @@ const _MarketWatchTable: React.FC<Props> = ({
   search,
   filteringFunction
 }) => {
+  const { getFavorites: getFavoritesFunc } = useContext(TerminalTickerContext);
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   const { exchangeAccountId, setSymbol } = useContext(TerminalInfoContext);
 
@@ -37,6 +39,8 @@ const _MarketWatchTable: React.FC<Props> = ({
     direction: SORTING_DIRECTION.ASC,
     field: "name"
   });
+
+  const getFavorites = useMemo(() => getFavoritesFunc, []);
 
   return (
     <>
@@ -101,6 +105,7 @@ const _MarketWatchTable: React.FC<Props> = ({
                   priceChangePercent
                 }) => (
                   <MarketWatchRow
+                    getFavorites={getFavorites}
                     isAuthenticated={isAuthenticated}
                     exchangeAccountId={exchangeAccountId}
                     setSymbol={setSymbol}

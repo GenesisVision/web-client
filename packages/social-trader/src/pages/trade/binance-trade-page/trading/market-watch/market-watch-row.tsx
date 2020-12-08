@@ -13,6 +13,7 @@ import { formatCurrencyValue } from "utils/formatter";
 import styles from "./market-watch.module.scss";
 
 interface Props {
+  getFavorites: VoidFunction;
   isAuthenticated?: boolean;
   exchangeAccountId?: string;
   setSymbol: (symbol: SymbolState) => void;
@@ -30,6 +31,7 @@ interface Props {
 
 export const MarketWatchRow: React.FC<Props> = React.memo(
   ({
+    getFavorites,
     isAuthenticated,
     exchangeAccountId,
     setSymbol,
@@ -55,6 +57,7 @@ export const MarketWatchRow: React.FC<Props> = React.memo(
             {isAuthenticated && exchangeAccountId && (
               <RowItem size={"xsmall"}>
                 <MarketWatchFavoriteButton
+                  getFavorites={getFavorites}
                   isFavorite={!!isFavorite}
                   id={exchangeAccountId}
                   symbol={symbol}
