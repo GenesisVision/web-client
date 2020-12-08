@@ -56,7 +56,7 @@ function create(path) {
         );
       }
 
-      if (true && enablePreact) {
+      if (isServer && enablePreact) {
         config.resolve.alias = {
           ...config.resolve.alias,
           react: "preact/compat",
