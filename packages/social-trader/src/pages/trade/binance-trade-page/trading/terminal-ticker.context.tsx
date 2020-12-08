@@ -105,7 +105,9 @@ export const TerminalTickerContextProvider: React.FC = ({ children }) => {
     if (!Object.values(socketData).length) return;
     const updatedList = { ...list };
     Object.keys(socketData).forEach(name => {
-      updatedList[name] = { ...updatedList[name], ...socketData[name] };
+      Object.keys(socketData[name]).forEach(field => {
+        updatedList[name][field] = socketData[name][field];
+      });
     });
     setList(updatedList);
   }, [socketData]);
