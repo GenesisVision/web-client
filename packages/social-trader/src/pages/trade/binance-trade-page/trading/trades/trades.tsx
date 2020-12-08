@@ -46,7 +46,7 @@ const _Trades: React.FC<Props> = ({ items }) => {
               <TradesRow
                 stepSize={stepSize}
                 tickSize={tickSize}
-                key={price}
+                key={`${i}${price}${tradeTime}`}
                 price={price}
                 prevPrice={items[i + 1]?.price}
                 amount={quantity}
