@@ -42,11 +42,11 @@ const _Trades: React.FC<Props> = ({ items }) => {
       <div className={styles["trades__items-container"]}>
         <table className={styles["trades__table"]}>
           <tbody>
-            {items.map(({ price, quantity, tradeTime }, i) => (
+            {items.map(({ orderId, price, quantity, tradeTime }, i) => (
               <TradesRow
                 stepSize={stepSize}
                 tickSize={tickSize}
-                key={`${i}${price}${tradeTime}`}
+                key={orderId}
                 price={price}
                 prevPrice={items[i + 1]?.price}
                 amount={quantity}
