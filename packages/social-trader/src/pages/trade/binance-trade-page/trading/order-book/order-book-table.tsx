@@ -1,4 +1,5 @@
 import { ColoredTextColor } from "components/colored-text/colored-text";
+import { isOrderInLine } from "pages/trade/binance-trade-page/trading/order-book/order-book.helpers";
 import {
   LevelsSum,
   OrderBookRow
@@ -81,17 +82,7 @@ const _OrderBookTable: React.FC<Props> = ({
     <table className={styles["order-book__table"]}>
       <tbody>
         {items.map(([price, amount], i) => {
-          const hasOrder =
-            i === 0
-              ? !!limitOrders.find(limitOrderPrice => {
-                  return limitOrderPrice >= +price;
-                })
-              : !!limitOrders.find(limitOrderPrice => {
-                  return (
-                    limitOrderPrice < +items[i - 1][0] &&
-                    limitOrderPrice >= +price
-                  );
-                });
+          const hasOrder = isOrderInLine({ items, i, limitOrders, price });
           const total = +price * +amount;
           return (
             <OrderBookRow

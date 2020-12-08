@@ -13,6 +13,26 @@ export type DividerPartsType = { intLength?: number; fracLength?: number };
 
 export const ORDER_BOOK_ROW_HEIGHT = 16;
 
+export const isOrderInLine = ({
+  i,
+  items,
+  limitOrders,
+  price
+}: {
+  i: number;
+  items: StringBidDepth[];
+  limitOrders: number[];
+  price: string;
+}) => {
+  return i === 0
+    ? !!limitOrders.find(limitOrderPrice => {
+        return limitOrderPrice >= +price;
+      })
+    : !!limitOrders.find(limitOrderPrice => {
+        return limitOrderPrice < +items[i - 1][0] && limitOrderPrice >= +price;
+      });
+};
+
 export const sortDepthList = (
   [priceA]: StringBidDepth,
   [priceB]: StringBidDepth
