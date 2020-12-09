@@ -71,7 +71,7 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
     depthStream.subscribe(data => {
       setDepthSocketData(data);
     });
-    timer(3000)
+    timer(2000)
       .pipe(
         switchMap(() => {
           console.log("get snapshot");
