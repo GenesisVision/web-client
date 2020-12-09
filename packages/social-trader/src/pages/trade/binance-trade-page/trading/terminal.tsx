@@ -2,10 +2,7 @@ import { Center } from "components/center/center";
 import { ResponsiveContainer } from "components/responsive-container/responsive-container";
 import { ChartBlock } from "pages/trade/binance-trade-page/trading/chart/chart-block";
 import { TradeHeaderContainer } from "pages/trade/binance-trade-page/trading/components/trade-header/trade-header";
-import {
-  SymbolState,
-  TerminalInfoContextProvider
-} from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
+import { TerminalInfoContextProvider } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import { TerminalOpenOrdersContextProvider } from "pages/trade/binance-trade-page/trading/contexts/terminal-open-orders.context";
 import { TerminalPlaceOrderContextProvider } from "pages/trade/binance-trade-page/trading/contexts/terminal-place-order.context";
 import { TerminalTickerContextProvider } from "pages/trade/binance-trade-page/trading/contexts/terminal-ticker.context";
@@ -19,6 +16,7 @@ import { SymbolSummaryContainer } from "pages/trade/binance-trade-page/trading/s
 import { SymbolSummarySmallBlock } from "pages/trade/binance-trade-page/trading/symbol-summary/symbol-summary-small";
 import {
   ExchangeInfo,
+  SymbolState,
   TerminalAuthDataType,
   TerminalType
 } from "pages/trade/binance-trade-page/trading/terminal.types";

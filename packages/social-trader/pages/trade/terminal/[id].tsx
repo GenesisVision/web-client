@@ -4,10 +4,10 @@ import withTradeLayout from "decorators/with-trade-layout";
 import { BrokerTradeServerType } from "gv-api-web";
 import { TYPE_PARAM_NAME } from "pages/trade/binance-trade-page/binance-trade.helpers";
 import { getTerminalApiMethods } from "pages/trade/binance-trade-page/services/api.helpers";
-import { SymbolState } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import { TerminalMethodsContextProvider } from "pages/trade/binance-trade-page/trading/contexts/terminal-methods.context";
 import { parseSymbolFromUrlParam } from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import {
+  SymbolState,
   TerminalAuthDataType,
   TerminalType
 } from "pages/trade/binance-trade-page/trading/terminal.types";

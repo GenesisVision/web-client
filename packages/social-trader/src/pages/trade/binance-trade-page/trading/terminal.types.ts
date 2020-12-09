@@ -25,6 +25,11 @@ import { Observable } from "rxjs";
 import { ConnectSocketMethodType } from "services/websocket.service";
 import { AnyObjectType, CurrencyEnum } from "utils/types";
 
+export type SymbolState = {
+  quoteAsset: TerminalCurrency;
+  baseAsset: TerminalCurrency;
+};
+
 export type MarginModeType = "ISOLATED" | "CROSSED";
 
 export type TerminalType = "spot" | "futures";
