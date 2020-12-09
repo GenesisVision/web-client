@@ -1,12 +1,12 @@
 import { Button } from "components/button/button";
 import FavoriteIcon from "components/favorite-asset/favorite-icon/favorite-icon";
 import { RowItem } from "components/row-item/row-item";
+import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import {
   FILTERING_CURRENCIES,
   FilteringType,
   FilteringVariant
 } from "pages/trade/binance-trade-page/trading/market-watch/market-watch.helpers";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
 import React, { useContext } from "react";
 
 import styles from "./market-watch.module.scss";

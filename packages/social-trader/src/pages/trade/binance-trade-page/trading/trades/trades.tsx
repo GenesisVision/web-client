@@ -1,5 +1,5 @@
 import { Text } from "components/text/text";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
+import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import { UnitedTrade } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { TradesRow } from "pages/trade/binance-trade-page/trading/trades/trades-row";
 import React, { useContext } from "react";

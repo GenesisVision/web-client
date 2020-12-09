@@ -1,6 +1,6 @@
 import { useAccountCurrency } from "hooks/account-currency.hook";
 import { useGetRate } from "hooks/get-rate.hook";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
+import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import { formatValueWithTick } from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import { TransferButton } from "pages/trade/binance-trade-page/trading/transfer/transfer.button";
 import React, { useContext, useEffect } from "react";

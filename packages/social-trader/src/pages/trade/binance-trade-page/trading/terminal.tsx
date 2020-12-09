@@ -2,6 +2,14 @@ import { Center } from "components/center/center";
 import { ResponsiveContainer } from "components/responsive-container/responsive-container";
 import { ChartBlock } from "pages/trade/binance-trade-page/trading/chart/chart-block";
 import { TradeHeaderContainer } from "pages/trade/binance-trade-page/trading/components/trade-header/trade-header";
+import {
+  SymbolState,
+  TerminalInfoContextProvider
+} from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
+import { TerminalOpenOrdersContextProvider } from "pages/trade/binance-trade-page/trading/contexts/terminal-open-orders.context";
+import { TerminalPlaceOrderContextProvider } from "pages/trade/binance-trade-page/trading/contexts/terminal-place-order.context";
+import { TerminalTickerContextProvider } from "pages/trade/binance-trade-page/trading/contexts/terminal-ticker.context";
+import { TradingPriceContextProvider } from "pages/trade/binance-trade-page/trading/contexts/trading-price.context";
 import { MarginRatioBlock } from "pages/trade/binance-trade-page/trading/margin-ratio/margin-ratio.block";
 import { MarketWatchBlock } from "pages/trade/binance-trade-page/trading/market-watch/market-watch.block";
 import { OrderBookBlock } from "pages/trade/binance-trade-page/trading/order-book/order-book.block";
@@ -10,19 +18,11 @@ import { PlaceOrderContainer } from "pages/trade/binance-trade-page/trading/plac
 import { SymbolSummaryContainer } from "pages/trade/binance-trade-page/trading/symbol-summary/symbol-summary";
 import { SymbolSummarySmallBlock } from "pages/trade/binance-trade-page/trading/symbol-summary/symbol-summary-small";
 import {
-  SymbolState,
-  TerminalInfoContextProvider
-} from "pages/trade/binance-trade-page/trading/terminal-info.context";
-import { TerminalOpenOrdersContextProvider } from "pages/trade/binance-trade-page/trading/terminal-open-orders.context";
-import { TerminalPlaceOrderContextProvider } from "pages/trade/binance-trade-page/trading/terminal-place-order.context";
-import { TerminalTickerContextProvider } from "pages/trade/binance-trade-page/trading/terminal-ticker.context";
-import {
   ExchangeInfo,
   TerminalAuthDataType,
   TerminalType
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { TradesBlock } from "pages/trade/binance-trade-page/trading/trades/trades.block";
-import { TradingPriceContextProvider } from "pages/trade/binance-trade-page/trading/trading-price.context";
 import { TradingTables } from "pages/trade/binance-trade-page/trading/trading-tables/trading-tables";
 import React from "react";
 

@@ -4,8 +4,8 @@ import { useParams } from "hooks/location";
 import { NextPageContext } from "next";
 import { Bar } from "pages/trade/binance-trade-page/trading/chart/charting_library/datafeed-api";
 import { terminalMoneyFormat } from "pages/trade/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
+import { SymbolState } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import { getDividerParts } from "pages/trade/binance-trade-page/trading/order-book/order-book.helpers";
-import { SymbolState } from "pages/trade/binance-trade-page/trading/terminal-info.context";
 import {
   Account,
   AssetBalance,

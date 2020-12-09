@@ -10,9 +10,9 @@ import { DEFAULT_DECIMAL_SCALE } from "constants/constants";
 import useApiRequest from "hooks/api-request.hook";
 import useTab from "hooks/tab.hook";
 import { TerminalDefaultBlock } from "pages/trade/binance-trade-page/trading/components/terminal-default-block/terminal-default-block";
+import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
+import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-methods.context";
 import { StopLimitTradeForm } from "pages/trade/binance-trade-page/trading/place-order/stop-limit-trade-form";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
-import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/terminal-methods.context";
 import {
   formatValueWithTick,
   getSymbol

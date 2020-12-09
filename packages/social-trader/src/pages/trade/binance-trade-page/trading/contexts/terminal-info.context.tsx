@@ -1,5 +1,5 @@
 import { useAccountCurrency } from "hooks/account-currency.hook";
-import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/terminal-methods.context";
+import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-methods.context";
 import {
   filterOutboundAccountInfoStream,
   getSymbolFilters,

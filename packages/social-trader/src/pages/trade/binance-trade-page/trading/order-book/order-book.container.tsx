@@ -1,3 +1,5 @@
+import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
+import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-methods.context";
 import { OrderBook } from "pages/trade/binance-trade-page/trading/order-book/order-book";
 import {
   collapseItems,
@@ -9,8 +11,6 @@ import {
   updateOrderBookFromBufferLogger,
   updateOrderBookFromSocketLogger
 } from "pages/trade/binance-trade-page/trading/order-book/order-book.helpers";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
-import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/terminal-methods.context";
 import { getSymbol } from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import {
   Depth,

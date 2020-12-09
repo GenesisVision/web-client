@@ -1,5 +1,7 @@
 import { Row } from "components/row/row";
 import { SORTING_DIRECTION } from "components/table/helpers/sorting.helpers";
+import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
+import { TerminalTickerContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-ticker.context";
 import { MarketWatchHeaderCell } from "pages/trade/binance-trade-page/trading/market-watch/market-watch-header-cell";
 import { MarketWatchRow } from "pages/trade/binance-trade-page/trading/market-watch/market-watch-row";
 import {
@@ -8,8 +10,6 @@ import {
   SortingType,
   sortMarketWatchItems
 } from "pages/trade/binance-trade-page/trading/market-watch/market-watch.helpers";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
-import { TerminalTickerContext } from "pages/trade/binance-trade-page/trading/terminal-ticker.context";
 import { MergedTickerSymbolType } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useContext, useMemo, useState } from "react";
 import { useSelector } from "react-redux";

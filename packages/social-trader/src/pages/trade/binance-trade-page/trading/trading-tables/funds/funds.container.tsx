@@ -1,6 +1,6 @@
 import { filterPositionEventsStream } from "pages/trade/binance-trade-page/services/futures/binance-futures.helpers";
 import { FuturesAccountUpdateEvent } from "pages/trade/binance-trade-page/services/futures/binance-futures.types";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
+import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import { AssetBalance } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { normalizeFundsList } from "pages/trade/binance-trade-page/trading/trading-tables/funds/funds.helpers";
 import React, { useContext, useEffect, useMemo, useState } from "react";

@@ -1,11 +1,11 @@
 import useApiRequest from "hooks/api-request.hook";
+import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
+import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-methods.context";
 import {
   filterTrading,
   normalizeMarketList,
   normalizeSymbolsList
 } from "pages/trade/binance-trade-page/trading/market-watch/market-watch.helpers";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
-import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/terminal-methods.context";
 import {
   MergedTickerSymbolType,
   Symbol,

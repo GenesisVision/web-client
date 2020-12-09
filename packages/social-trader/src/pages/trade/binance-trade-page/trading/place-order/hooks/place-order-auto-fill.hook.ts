@@ -1,7 +1,7 @@
 import { DEFAULT_DECIMAL_SCALE } from "constants/constants";
 import { terminalMoneyFormat } from "pages/trade/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
-import { TerminalPlaceOrderContext } from "pages/trade/binance-trade-page/trading/terminal-place-order.context";
+import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
+import { TerminalPlaceOrderContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-place-order.context";
 import { OrderSide } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { useContext, useEffect, useState } from "react";
 import { formatValue } from "utils/formatter";

@@ -2,7 +2,7 @@ import {
   terminalMoneyFormat,
   truncated
 } from "pages/trade/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
+import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import { getDecimalScale } from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import {
   AssetBalance,

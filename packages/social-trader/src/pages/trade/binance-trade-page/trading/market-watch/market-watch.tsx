@@ -1,5 +1,6 @@
 import GlobalSearchInput from "components/global-search/components/global-search-result/global-search-input/global-search-input";
 import { Row } from "components/row/row";
+import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import { MarketWatchColumn } from "pages/trade/binance-trade-page/trading/market-watch/market-watch-column";
 import { MarketWatchCurrencies } from "pages/trade/binance-trade-page/trading/market-watch/market-watch-currencies";
 import { MarketWatchTable } from "pages/trade/binance-trade-page/trading/market-watch/market-watch-table";
@@ -9,7 +10,6 @@ import {
   FilteringVariant,
   getFilteringFunction
 } from "pages/trade/binance-trade-page/trading/market-watch/market-watch.helpers";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
 import { MergedTickerSymbolType } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useContext, useMemo, useState } from "react";
 

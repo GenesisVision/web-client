@@ -1,5 +1,5 @@
+import { TerminalTickerContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-ticker.context";
 import { MarketWatch } from "pages/trade/binance-trade-page/trading/market-watch/market-watch";
-import { TerminalTickerContext } from "pages/trade/binance-trade-page/trading/terminal-ticker.context";
 import React, { useContext } from "react";
 
 const _MarketWatchContainer: React.FC = () => {

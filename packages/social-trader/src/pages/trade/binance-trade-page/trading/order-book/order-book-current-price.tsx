@@ -2,7 +2,7 @@ import { Center } from "components/center/center";
 import { RowItem } from "components/row-item/row-item";
 import { terminalMoneyFormat } from "pages/trade/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
 import { TradeStatefulValue } from "pages/trade/binance-trade-page/trading/components/trade-stateful-value/trade-stateful-value";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
+import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import { TerminalCurrency } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useContext } from "react";
 

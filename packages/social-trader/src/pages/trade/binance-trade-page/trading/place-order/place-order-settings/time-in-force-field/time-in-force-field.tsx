@@ -1,7 +1,7 @@
 import { GVHookFormField } from "components/gv-hook-form-field";
 import Select from "components/select/select";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
+import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import {
   OrderType,
   TimeInForce as TimeInForceType

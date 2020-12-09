@@ -1,5 +1,5 @@
+import { TradingPriceContext } from "pages/trade/binance-trade-page/trading/contexts/trading-price.context";
 import { PlaceOrder } from "pages/trade/binance-trade-page/trading/place-order/place-order";
-import { TradingPriceContext } from "pages/trade/binance-trade-page/trading/trading-price.context";
 import React, { useContext } from "react";
 
 const _PlaceOrderContainer: React.FC = () => {

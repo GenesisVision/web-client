@@ -3,6 +3,8 @@ import HookFormAmountField from "components/input-amount-field/hook-form-amount-
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { API_REQUEST_STATUS } from "hooks/api-request.hook";
+import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
+import { TerminalPlaceOrderContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-place-order.context";
 import { ReduceOnlyField } from "pages/trade/binance-trade-page/trading/place-order/place-order-settings/reduce-only-field/reduce-only-field";
 import {
   TIME_IN_FORCE_VALUES,
@@ -10,8 +12,6 @@ import {
 } from "pages/trade/binance-trade-page/trading/place-order/place-order-settings/time-in-force-field/time-in-force-field";
 import { PlaceOrderSlider } from "pages/trade/binance-trade-page/trading/place-order/place-order-slider";
 import { PlaceOrderSubmitButton } from "pages/trade/binance-trade-page/trading/place-order/place-order-submit-button";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
-import { TerminalPlaceOrderContext } from "pages/trade/binance-trade-page/trading/terminal-place-order.context";
 import {
   AssetBalance,
   ExchangeInfo,
