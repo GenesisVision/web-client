@@ -253,7 +253,8 @@ export interface ITerminalMethods extends IGVTerminalMethods {
   ) => Observable<UnitedTrade>;
   depthSocket: (
     connectSocketMethod: ConnectSocketMethodType,
-    symbol: TerminalCurrency
+    symbol: TerminalCurrency,
+    openCallback?: VoidFunction
   ) => Observable<Depth>;
   marketTicketsSocket: (
     connectSocketMethod: ConnectSocketMethodType
