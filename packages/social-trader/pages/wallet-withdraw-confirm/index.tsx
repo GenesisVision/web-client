@@ -4,6 +4,11 @@ import { WalletWithdrawConfirmPage } from "pages/wallet/wallet-withdraw-confirm/
 import React from "react";
 import { getParamsFromCtx } from "utils/ssr-helpers";
 
+interface Props {
+  requestId: string;
+  code: string;
+}
+
 const Page: NextPage<Props> = ({ requestId, code }) => {
   return <WalletWithdrawConfirmPage requestId={requestId} code={code} />;
 };
@@ -11,14 +16,9 @@ Page.getInitialProps = async (ctx: NextPageContext) => {
   const { requestId, code } = getParamsFromCtx(ctx);
   return {
     namespacesRequired: ["wallet-withdraw"],
-    requestId,
-    code
+    requestId: requestId as string,
+    code: code as string
   };
 };
-
-interface Props {
-  requestId: string;
-  code: string;
-}
 
 export default withDefaultLayout(Page);
