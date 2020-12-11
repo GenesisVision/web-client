@@ -85,7 +85,7 @@ const BannerChart: React.FC<Props> = ({
 
   const areaFunction = area()
     .x(data => data[0])
-    .y(valueScale(minValue))
+    .y(valueScale(minValue)!)
     .y1(data => data[1]);
 
   const areaPath = areaFunction(points);
@@ -97,9 +97,9 @@ const BannerChart: React.FC<Props> = ({
       .attr("id", "temperature-gradient")
       .attr("gradientUnits", "userSpaceOnUse")
       .attr("x1", 0)
-      .attr("y1", valueScale(minValue))
+      .attr("y1", valueScale(minValue)!)
       .attr("x2", 0)
-      .attr("y2", valueScale(maxValue))
+      .attr("y2", valueScale(maxValue)!)
       .selectAll("stop")
       .data(gradient)
       .enter()
