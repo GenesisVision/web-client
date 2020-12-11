@@ -268,13 +268,19 @@ export const postBuy = ({
   type
 }: TradeRequest & {
   accountId?: string;
-}): Promise<QueryOrderResult> =>
-  newOrder(
+}): Promise<QueryOrderResult> => {
+  const orderType =
+    type === "TakeProfitLimit"
+      ? +stopPrice! < +price
+        ? "TakeProfitLimit"
+        : "StopLossLimit"
+      : type;
+  return newOrder(
     {
       reduceOnly,
       stopPrice: type === "TakeProfitLimit" ? stopPrice : undefined,
       symbol,
-      type,
+      type: orderType,
       price:
         type === "Limit" || type === "TakeProfitLimit"
           ? String(price)
@@ -285,6 +291,7 @@ export const postBuy = ({
     },
     accountId
   );
+};
 
 export const postSell = ({
   reduceOnly,
@@ -297,13 +304,19 @@ export const postSell = ({
   type
 }: TradeRequest & {
   accountId?: string;
-}): Promise<QueryOrderResult> =>
-  newOrder(
+}): Promise<QueryOrderResult> => {
+  const orderType =
+    type === "TakeProfitLimit"
+      ? +stopPrice! > +price
+        ? "TakeProfitLimit"
+        : "StopLossLimit"
+      : type;
+  return newOrder(
     {
       reduceOnly,
       stopPrice: type === "TakeProfitLimit" ? stopPrice : undefined,
       symbol,
-      type,
+      type: orderType,
       price:
         type === "Limit" || type === "TakeProfitLimit"
           ? String(price)
@@ -314,6 +327,7 @@ export const postSell = ({
     },
     accountId
   );
+};
 
 export const getTradeMethod = (side: OrderSide) =>
   side === "Buy" ? postBuy : postSell;
