@@ -9,19 +9,23 @@ import { SIGNUP_ROUTE } from "routes/app.routes";
 import { initializeStore } from "store";
 import { getParamsFromCtx } from "utils/ssr-helpers";
 
+interface Props {
+  userId: string;
+  code: string;
+}
+
 const Page: NextPage<Props> = ({ userId, code }) => {
   return <PasswordRestorePage userId={userId} code={code} />;
 };
 
 Page.getInitialProps = async (ctx: NextPageContext) => {
   const { userId, code } = getParamsFromCtx(ctx);
-  return { namespacesRequired: ["auth"], userId, code };
+  return {
+    namespacesRequired: ["auth"],
+    userId: userId as string,
+    code: code as string
+  };
 };
-
-interface Props {
-  userId: string;
-  code: string;
-}
 
 export default compose(
   withReduxStore(initializeStore),
