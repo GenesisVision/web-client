@@ -7,10 +7,7 @@ import { getTerminalApiMethods } from "pages/trade/binance-trade-page/services/a
 import { SymbolState } from "pages/trade/binance-trade-page/trading/terminal-info.context";
 import { TerminalMethodsContextProvider } from "pages/trade/binance-trade-page/trading/terminal-methods.context";
 import { parseSymbolFromUrlParam } from "pages/trade/binance-trade-page/trading/terminal.helpers";
-import {
-  TerminalAuthDataType,
-  TerminalType
-} from "pages/trade/binance-trade-page/trading/terminal.types";
+import { TerminalAuthDataType, TerminalType } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { TerminalPage } from "pages/trade/terminal.page";
 import React from "react";
 import { compose } from "redux";
@@ -49,9 +46,9 @@ const Page: NextPageWithRedux<Props> = ({
 Page.getInitialProps = async ctx => {
   const { id } = ctx.query;
   const params = getParamsFromCtxWithSplit(ctx);
-  const exchangeAccountId = params["id"];
+  const exchangeAccountId = params["id"] as string;
   const terminalType = params[TYPE_PARAM_NAME]
-    ? params[TYPE_PARAM_NAME].toLowerCase()
+    ? ((params[TYPE_PARAM_NAME] as string).toLowerCase() as TerminalType)
     : undefined;
   const symbol = id ? parseSymbolFromUrlParam(String(id)) : undefined;
 
