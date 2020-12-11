@@ -1,7 +1,7 @@
+import { Button } from "components/button/button";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogError } from "components/dialog/dialog-error";
 import { DialogListItem } from "components/dialog/dialog-list-item";
-import GVButton from "components/gv-button";
 import { SubmitButton } from "components/submit-button/submit-button";
 import useApiRequest from "hooks/api-request.hook";
 import React, { useCallback } from "react";
@@ -91,14 +91,14 @@ const _FundWithdrawConfirmForm: React.FC<Props> = ({
       />
       <DialogError error={errorMessage} />
       <DialogButtons>
-        <GVButton
+        <Button
           onClick={onBackClick}
           color="secondary"
           variant="outlined"
           title={t("buttons.back")}
         >
           {t("buttons.back")}
-        </GVButton>
+        </Button>
         <SubmitButton
           checkValid={false}
           checkDirty={false}

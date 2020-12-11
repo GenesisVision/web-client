@@ -1,9 +1,21 @@
-import clsx from "clsx";
 import GVProgramPeriod from "components/gv-program-period";
+import {
+  CalculatorLevelLineContainer,
+  CalculatorLevelLineLabel,
+  CalculatorLevelLineMark,
+  CalculatorLevelLineMarks,
+  CalculatorLevelLineValue
+} from "modules/level-calculator/components/calculator-level-line/calculator-level-line.styles";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
+import { $mainColor } from "utils/style/colors";
 
-import styles from "./calculator-level-line.module.scss";
+interface Props {
+  start: number;
+  end: number;
+  level: number;
+  levelProgress?: number;
+}
 
 const getMarks = (start: number, end: number, value: number) =>
   new Array(end - start + 1).fill(start).reduce((acc, curr, idx) => {
@@ -17,59 +29,45 @@ const calcProgressValue = (level: number, levelProgress: number) => {
   return level + levelProgress / 100;
 };
 
-const _CalculatorLevelLine: React.FC<Props & WithTranslation> = ({
-  t,
+const _CalculatorLevelLine: React.FC<Props> = ({
   start,
   end,
-  className,
   level,
   levelProgress = 0
 }) => {
+  const [t] = useTranslation();
   const value = calcProgressValue(level, levelProgress);
   const marksItems = getMarks(start, end, value);
   const marks = Object.keys(marksItems);
   return (
-    <div className={clsx(styles["calculator-level-line"], className)}>
-      <div className={styles["calculator-level-line__label"]}>
-        <span className={styles["calculator-level-line__title"]}>
-          {t("program-details-page:calculator.level")}
-        </span>
-        <span className={styles["calculator-level-line__value"]}>{level}</span>
-      </div>
+    <CalculatorLevelLineContainer>
+      <CalculatorLevelLineLabel>
+        <span>{t("program-details-page:calculator.level")}</span>
+        <CalculatorLevelLineValue>{level}</CalculatorLevelLineValue>
+      </CalculatorLevelLineLabel>
       <GVProgramPeriod
-        className={styles["calculator-level-line__substrate"]}
+        bgColor={`${$mainColor}10`}
         start={start}
         end={end}
         value={value}
         variant="line"
       />
-      <div className={styles["calculator-level-line__marks"]}>
+      <CalculatorLevelLineMarks>
         {marks.map(mark => {
           return (
-            <span
-              className={clsx(styles["calculator-level-line__mark"], {
-                [styles["calculator-level-line__mark--active"]]:
-                  marksItems[mark].active
-              })}
+            <CalculatorLevelLineMark
+              active={marksItems[mark].active}
+              left={marksItems[mark].positionMark}
               key={mark}
-              style={{ left: `${marksItems[mark].positionMark}%` }}
             >
               {mark}
-            </span>
+            </CalculatorLevelLineMark>
           );
         })}
-      </div>
-    </div>
+      </CalculatorLevelLineMarks>
+    </CalculatorLevelLineContainer>
   );
 };
 
-interface Props {
-  start: number;
-  end: number;
-  level: number;
-  levelProgress?: number;
-  className?: string;
-}
-
-const CalculatorLevelLine = translate()(React.memo(_CalculatorLevelLine));
+const CalculatorLevelLine = React.memo(_CalculatorLevelLine);
 export default CalculatorLevelLine;

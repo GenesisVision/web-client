@@ -1,10 +1,25 @@
 import { Center } from "components/center/center";
 import { LikeButtonIcon } from "components/conversation/like/like-button-icon/like-button-icon";
 import { RowItem } from "components/row-item/row-item";
+import { Text } from "components/text/text";
 import React, { useCallback } from "react";
+import styled from "styled-components";
 import { Clickable } from "utils/types";
 
-import styles from "./like.module.scss";
+interface Props extends Clickable {
+  count: number;
+  disable?: boolean;
+  liked?: boolean;
+}
+
+const Container = styled(Center)`
+  cursor: pointer;
+`;
+
+const Icon = styled.div`
+  width: 15px;
+  height: 15px;
+`;
 
 export const _Like: React.FC<Props> = ({ count, onClick, disable, liked }) => {
   const clickHandle = useCallback(() => {
@@ -12,23 +27,19 @@ export const _Like: React.FC<Props> = ({ count, onClick, disable, liked }) => {
   }, [disable, onClick]);
 
   return (
-    <Center className={styles["like"]} onClick={clickHandle}>
+    <Container onClick={clickHandle}>
       <RowItem size={"small"}>
-        <div className={styles["like__icon"]}>
+        <Icon>
           <LikeButtonIcon liked={!!liked} disabled={disable} />
-        </div>
+        </Icon>
       </RowItem>
       {count > 0 && (
-        <RowItem className={styles["like__count"]}>{count}</RowItem>
+        <RowItem>
+          <Text>{count}</Text>
+        </RowItem>
       )}
-    </Center>
+    </Container>
   );
 };
-
-interface Props extends Clickable {
-  count: number;
-  disable?: boolean;
-  liked?: boolean;
-}
 
 export const Like = React.memo(_Like);

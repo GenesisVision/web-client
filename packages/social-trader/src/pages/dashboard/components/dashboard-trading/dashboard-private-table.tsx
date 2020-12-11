@@ -20,6 +20,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 interface Props {
+  name: string;
   filtering?: FilteringType;
   defaultFilters?: TDefaultFilters;
   getItems: GetItemsFuncType;
@@ -29,6 +30,7 @@ interface Props {
 }
 
 const _DashboardPrivateTable: React.FC<Props> = ({
+  name,
   defaultFilters,
   filtering,
   createButtonToolbar,
@@ -39,6 +41,8 @@ const _DashboardPrivateTable: React.FC<Props> = ({
   const [t] = useTranslation();
   return (
     <TableModule
+      name={name}
+      cache
       defaultFilters={defaultFilters}
       filtering={filtering}
       paging={DEFAULT_CARD_PAGING}

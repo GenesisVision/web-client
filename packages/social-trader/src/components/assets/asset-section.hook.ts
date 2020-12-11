@@ -1,3 +1,4 @@
+import { WalletItemType } from "components/wallet-select/wallet-select";
 import { WalletBaseData } from "gv-api-web";
 import { useAccountCurrency } from "hooks/account-currency.hook";
 import { useGetRate } from "hooks/get-rate.hook";
@@ -18,7 +19,7 @@ export type AssetSectionWalletType = WalletBaseData;
 export type TUseAssetSectionOutput = {
   isRatePending?: boolean;
   rate: number;
-  handleWalletChange: (walletId: string) => void;
+  handleWalletChange: (wallet: WalletItemType) => void;
   wallet: AssetSectionWalletType;
   wallets: AssetSectionWalletType[];
 };
@@ -45,7 +46,7 @@ const useAssetSection = ({
         ({ currency }) => currency === assetCurrency
       )
     );
-  }, [wallets, assetCurrency]);
+  }, [wallets.length, assetCurrency]);
 
   const fetchRate = useCallback(debounce(getRate, 100), []);
 
@@ -54,9 +55,8 @@ const useAssetSection = ({
   }, [assetCurrency, wallet]);
 
   const handleWalletChange = useCallback(
-    (walletId: string) =>
-      setWallet(safeGetElemFromArray(wallets, ({ id }) => id === walletId)),
-    [wallets]
+    (wallet: WalletItemType) => setWallet(wallet as AssetSectionWalletType),
+    []
   );
   return { isRatePending, rate, handleWalletChange, wallet, wallets };
 };

@@ -1,7 +1,39 @@
-import clsx from "clsx";
 import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import {
+  leftDarkShadow,
+  leftShadow,
+  rightDarkShadow,
+  rightShadow
+} from "utils/style/shadow";
 
-import styles from "./horizontal-list-shadow-container.module.scss";
+export type ScrollDataType = {
+  scroll: number;
+  endOfList: number;
+};
+
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
+  scrollData: ScrollDataType;
+  darkShadow?: boolean;
+}
+
+const inBefore = (style: string) => `&:before {${style}}`;
+const inAfter = (style: string) => `&:after {${style}}`;
+
+const Container = styled.div<{
+  right?: boolean;
+  left?: boolean;
+  dark?: boolean;
+}>`
+  display: flex;
+  position: relative;
+  overflow-y: hidden;
+  width: 100%;
+  ${({ right, left, dark }) => {
+    if (right) return inAfter(dark ? rightDarkShadow() : rightShadow());
+    if (left) return inBefore(dark ? leftDarkShadow() : leftShadow());
+  }};
+`;
 
 export const HorizontalListShadowContainer: React.FC<Props> = ({
   scrollData: { scroll, endOfList },
@@ -17,24 +49,8 @@ export const HorizontalListShadowContainer: React.FC<Props> = ({
     if (scroll >= endOfList) setRightShadow(false);
   }, [scroll, endOfList]);
   return (
-    <div
-      className={clsx(styles["horizontal-list-shadow-container"], {
-        [styles["horizontal-list-shadow-container--right"]]: rightShadow,
-        [styles["horizontal-list-shadow-container--left"]]: leftShadow,
-        [styles["horizontal-list-shadow-container--dark-shadow"]]: darkShadow
-      })}
-    >
+    <Container right={rightShadow} left={leftShadow} dark={darkShadow}>
       {children}
-    </div>
+    </Container>
   );
 };
-
-export type ScrollDataType = {
-  scroll: number;
-  endOfList: number;
-};
-
-interface Props extends React.HTMLAttributes<HTMLDivElement> {
-  scrollData: ScrollDataType;
-  darkShadow?: boolean;
-}

@@ -1,46 +1,33 @@
-import clsx from "clsx";
 import { Center } from "components/center/center";
 import React from "react";
-import { Sizeable } from "utils/types";
+import styled from "styled-components";
+import { adaptiveMargin } from "utils/style/mixins";
+import {
+  $paddingMedium,
+  $paddingSmall,
+  $paddingXsmall,
+  $paddingXxsmall,
+  $paddingXxxsmall
+} from "utils/style/sizes";
 
-import styles from "./row.module.scss";
+import { IRowProps } from "./row.types";
 
-export const Row: React.FC<Props> = ({
-  size = "middle",
-  onlyOffset,
-  center = true,
-  wide,
-  hide,
-  className,
-  children,
-  ...otherProps
-}) => {
-  return (
-    <Center
-      {...otherProps}
-      center={center && !onlyOffset}
-      className={clsx(styles["row"], className, {
-        [styles["row--pointer"]]: !!otherProps.onClick,
-        [styles["row--flex"]]: !onlyOffset,
-        [styles["row--wide"]]: wide,
-        [styles["row--hidden"]]: hide,
-        [styles["row--xsmall"]]: size === "xsmall",
-        [styles["row--small"]]: size === "small",
-        [styles["row--middle"]]: size === "middle",
-        [styles["row--xlarge"]]: size === "xlarge",
-        [styles["row--large"]]: size === "large"
-      })}
-    >
-      {children}
-    </Center>
-  );
-};
-
-interface Props extends React.HTMLAttributes<HTMLDivElement>, Sizeable {
-  onlyOffset?: boolean;
-  wide?: boolean;
-  hide?: boolean;
-  center?: boolean;
-  className?: string;
-  wrap?: boolean;
-}
+export const Row = styled(Center)<IRowProps>`
+  width: ${({ wide }: IRowProps) => (wide ? "100%" : "auto")};
+  &:not(:first-child) {
+    ${({ size = "middle" }: IRowProps) => {
+      switch (size) {
+        case "xsmall":
+          return adaptiveMargin("top", $paddingXxxsmall);
+        case "small":
+          return adaptiveMargin("top", $paddingXxsmall);
+        case "middle":
+          return adaptiveMargin("top", $paddingXsmall);
+        case "large":
+          return adaptiveMargin("top", $paddingSmall);
+        case "xlarge":
+          return adaptiveMargin("top", $paddingMedium);
+      }
+    }}
+  }
+`;

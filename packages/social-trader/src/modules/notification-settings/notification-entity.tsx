@@ -4,8 +4,12 @@ import { useToLink } from "components/link/link.helper";
 import { Row } from "components/row/row";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
+import styled from "styled-components";
 
-import styles from "./notification-settings.module.scss";
+const Container = styled(Row)`
+  justify-content: space-between;
+  width: 344px;
+`;
 
 const _NotificationEntity: React.FC<Props> = ({
   levelProgress,
@@ -20,8 +24,11 @@ const _NotificationEntity: React.FC<Props> = ({
   const [t] = useTranslation();
   const { linkCreator } = useToLink();
   return (
-    <Row className={styles["notification-entity"]} wide>
-      <Link to={linkCreator(href, pathname, t("notifications-page:title"))}>
+    <Container wide>
+      <Link
+        noColor
+        to={linkCreator(href, pathname, t("notifications-page:title"))}
+      >
         <AssetAvatarWithName
           levelColor={"#131e26"}
           levelProgress={levelProgress}
@@ -33,7 +40,7 @@ const _NotificationEntity: React.FC<Props> = ({
         />
       </Link>
       <div>{count}</div>
-    </Row>
+    </Container>
   );
 };
 

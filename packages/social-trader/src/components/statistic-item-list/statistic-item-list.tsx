@@ -1,28 +1,23 @@
-import clsx from "clsx";
 import { Center } from "components/center/center";
 import * as React from "react";
+import styled from "styled-components";
 
-import styles from "./statistic-item-list.module.scss";
+interface Props {
+  wrap?: boolean;
+  vertical?: boolean;
+}
+
+const StyledCenter = styled(Center)<{ vertical?: boolean }>`
+  ${({ vertical }) => (vertical ? ` flex-direction: column;` : "")};
+`;
 
 export const StatisticItemList: React.FC<Props &
   React.HTMLAttributes<HTMLDivElement>> = ({
   wrap = true,
   children,
-  className,
   vertical
 }) => (
-  <Center
-    wrap={wrap}
-    className={clsx(styles["statistics-item-list"], className, {
-      [styles["statistics-item-list--vertical"]]: vertical
-    })}
-  >
+  <StyledCenter wrap={wrap} vertical={vertical} center={false}>
     {children}
-  </Center>
+  </StyledCenter>
 );
-
-interface Props {
-  wrap?: boolean;
-  vertical?: boolean;
-  className?: string;
-}

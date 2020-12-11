@@ -1,13 +1,23 @@
-import clsx from "clsx";
-import HeaderIcon from "components/header/header-icon";
 import Link, { ToType } from "components/link/link";
-import { useRouter } from "next/router";
+import NavigationIconWithName from "components/navigation/navigation-icon-with-name";
+import { NextRouter } from "next/dist/client/router";
+import { WithRouterProps } from "next/dist/client/with-router";
+import { withRouter } from "next/router";
 import React from "react";
+import styled, { css } from "styled-components";
+import {
+  mediaBreakpointDesktop,
+  mediaBreakpointLandscapeTablet,
+  mediaBreakpointLargeDesktop
+} from "utils/style/media";
+import { $paddingBig, $paddingSmall, $paddingXsmall } from "utils/style/sizes";
 
 import { normalizeLinkFrom } from "../link/link.helper";
-import styles from "./navigation.module.scss";
 
-interface INavigationItemProps extends React.HTMLAttributes<HTMLAnchorElement> {
+interface INavigationItemProps
+  extends React.HTMLAttributes<HTMLAnchorElement>,
+    WithRouterProps {
+  mobile?: boolean;
   small?: boolean;
   href?: string | ToType;
   icon: JSX.Element;
@@ -15,47 +25,85 @@ interface INavigationItemProps extends React.HTMLAttributes<HTMLAnchorElement> {
   onClick?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 }
 
+interface IStyleProps {
+  mobile?: boolean;
+  router: NextRouter;
+  href?: string | ToType;
+}
+
+const dynamicStyles = css`
+  opacity: ${({ router, href }: IStyleProps) =>
+    !!href && router.route.startsWith(normalizeLinkFrom(href)) ? 1 : 0.4};
+  &:hover {
+    opacity: 1;
+  }
+  ${({ mobile }) =>
+    mediaBreakpointLandscapeTablet(
+      `${!mobile && "padding: 0"};
+      margin-right: ${$paddingXsmall}px;`
+    )}
+  ${({ mobile }) =>
+    mediaBreakpointDesktop(
+      `${!mobile && "padding: 0"};
+      margin-right: ${$paddingBig}px;`
+    )}
+  ${({ mobile }) =>
+    mediaBreakpointLargeDesktop(
+      `margin-right: 70px;
+    &:first-child {
+        margin-right: ${$paddingBig}px;
+    }`
+    )}
+`;
+
+const styles = css<IStyleProps>`
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: ${$paddingSmall / 2}px ${$paddingSmall}px;
+  text-decoration: none;
+  position: relative;
+  ${dynamicStyles};
+`;
+
+const StyledLink = styled(Link)<IStyleProps>`
+  ${styles}
+`;
+
+const StyledButton = styled.div<IStyleProps>`
+  ${styles}
+`;
+
 const _NavigationItem: React.FC<INavigationItemProps> = ({
+  mobile,
+  router,
   small,
   onClick,
   href,
   icon,
   children
 }) => {
-  const { route } = useRouter();
   const renderIconWithName = () => (
-    <>
-      <HeaderIcon>
-        <div
-          className={clsx({
-            [styles["navigation__icon--medium"]]: !small,
-            [styles["navigation__icon--small"]]: small
-          })}
-        >
-          {<icon.type {...icon.props} />}
-        </div>
-      </HeaderIcon>
-      <span className={styles["navigation__link"]}>{children}</span>
-    </>
+    <NavigationIconWithName small={small} icon={icon}>
+      {children}
+    </NavigationIconWithName>
   );
   return (
     (!!href && (
-      <Link
-        to={href}
-        className={clsx(styles["navigation__item"], {
-          [styles["navigation__item--active"]]: route.startsWith(
-            normalizeLinkFrom(href)
-          )
-        })}
+      <StyledLink mobile={mobile} href={href} router={router} to={href}>
+        {renderIconWithName()}
+      </StyledLink>
+    )) || (
+      <StyledButton
+        mobile={mobile}
+        href={href}
+        router={router}
+        onClick={onClick}
       >
         {renderIconWithName()}
-      </Link>
-    )) || (
-      <div className={styles["navigation__item"]} onClick={onClick}>
-        {renderIconWithName()}
-      </div>
+      </StyledButton>
     )
   );
 };
-const NavigationItem = React.memo(_NavigationItem);
+const NavigationItem = withRouter(React.memo(_NavigationItem));
 export default NavigationItem;

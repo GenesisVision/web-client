@@ -2,7 +2,7 @@ import { BROKER_CARD_EXTRA_STATE } from "components/assets/asset.constants";
 import BrokerCard from "components/assets/broker-select/broker-card/broker-card";
 import styles from "components/assets/broker-select/broker-card/broker-card.module.scss";
 import FormTextField from "components/assets/fields/form-text-field";
-import GVButton from "components/gv-button";
+import { Button } from "components/button/button";
 import { LabeledValue } from "components/labeled-value/labeled-value";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
@@ -105,9 +105,9 @@ const _CancelChangeBrokerForm: React.FC<Props> = ({
         </FormTextField>
       </Row>
       <Row size={"large"}>
-        <GVButton color="primary" onClick={setCancelChangeBrokerOpen}>
+        <Button color="primary" onClick={setCancelChangeBrokerOpen}>
           {t("asset-settings:buttons.cancel-broker")}
-        </GVButton>
+        </Button>
       </Row>
       <ConfirmCancelChangeBroker
         errorMessage={errorMessage}

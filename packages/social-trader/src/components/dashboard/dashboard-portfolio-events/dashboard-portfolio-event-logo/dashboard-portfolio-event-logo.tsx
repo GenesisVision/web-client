@@ -1,4 +1,3 @@
-import clsx from "clsx";
 import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
 import ImageBase from "components/avatar/image-base";
 import Link from "components/link/link";
@@ -7,9 +6,80 @@ import Crashable from "decorators/crashable";
 import { AssetDetails } from "gv-api-web";
 import SocialLink from "media/social-link.svg";
 import React from "react";
+import styled, { css } from "styled-components";
 import { getAssetLink } from "utils/compose-url";
+import { $panelBackgroundColor } from "utils/style/colors";
+import { mediaBreakpointLandscapePhone } from "utils/style/media";
+import { adaptiveMargin, height, lineHeight, width } from "utils/style/mixins";
+import { $dividerText, $smallAvatarSize } from "utils/style/sizes";
 
-import styles from "./dashboard-portfolio-event-logo.module.scss";
+interface Props {
+  assetDetails: AssetDetails;
+  icon: string;
+  withAsset?: boolean;
+}
+const $typeSize = 18;
+const $transitionSize = $typeSize / $dividerText;
+
+const Container = styled.div<{ withAsset?: boolean }>`
+  position: relative;
+  ${({ withAsset }) => {
+    if (withAsset)
+      return `
+      width: ${$smallAvatarSize}px;
+      height: ${$smallAvatarSize}px;
+    `;
+  }};
+`;
+
+const photoStyle = css`
+  display: block;
+  ${adaptiveMargin("right", $transitionSize)};
+  box-sizing: border-box;
+  ${height(32)};
+  ${width(32)};
+  border: solid 2px ${$panelBackgroundColor};
+  border-radius: 50%;
+  background-color: #27323a;
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  ${lineHeight(28)};
+  text-align: center;
+  overflow: hidden;
+`;
+
+const StyledLink = styled(Link)`
+  ${photoStyle}
+`;
+
+const PhotoContainer = styled.div`
+  ${photoStyle}
+`;
+
+const Type = styled.div<{ withAsset?: boolean }>`
+  box-sizing: border-box;
+  border-radius: 50%;
+  text-align: center;
+  & img {
+    ${height(28)};
+    ${width(28)};
+  }
+  ${({ withAsset }) => {
+    if (withAsset)
+      return `
+      position: absolute;
+      top: ${$transitionSize}px;
+      left: ${$transitionSize}px;
+      z-index: 1;
+      ${mediaBreakpointLandscapePhone(`
+        top: ${$typeSize}px;
+        left: ${$typeSize}px;
+      `)}
+    `;
+  }};
+`;
 
 const _PortfolioEventLogo: React.FC<Props> = ({
   withAsset = true,
@@ -31,39 +101,19 @@ const _PortfolioEventLogo: React.FC<Props> = ({
     />
   );
   return (
-    <div
-      className={clsx(styles["portfolio-event-logo"], {
-        [styles["portfolio-event-logo--with-asset"]]: icon && withAsset
-      })}
-    >
+    <Container withAsset={!!icon && withAsset}>
       {withAsset &&
         ((assetDetails.url && (
-          <Link to={to} className={styles["portfolio-event-logo__photo"]}>
-            {renderAvatar()}
-          </Link>
-        )) || (
-          <div className={styles["portfolio-event-logo__photo"]}>
-            {renderAvatar()}
-          </div>
-        ))}
+          <StyledLink to={to}>{renderAvatar()}</StyledLink>
+        )) || <PhotoContainer>{renderAvatar()}</PhotoContainer>)}
       {icon && (
-        <div
-          className={clsx(styles["portfolio-event-logo__type"], {
-            [styles["portfolio-event-logo__type--with-asset"]]: withAsset
-          })}
-        >
+        <Type withAsset={withAsset}>
           <ImageBase src={icon} alt={"event logo"} defaultImage={SocialLink} />
-        </div>
+        </Type>
       )}
-    </div>
+    </Container>
   );
 };
-
-interface Props {
-  assetDetails: AssetDetails;
-  icon: string;
-  withAsset?: boolean;
-}
 
 const PortfolioEventLogo = React.memo(Crashable(_PortfolioEventLogo));
 export default PortfolioEventLogo;

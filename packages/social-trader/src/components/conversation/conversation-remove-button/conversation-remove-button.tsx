@@ -4,6 +4,11 @@ import useApiRequest from "hooks/api-request.hook";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
+interface Props {
+  id: string;
+  onSuccess: VoidFunction;
+}
+
 const _ConversationRemoveButton: React.FC<Props> = ({ id, onSuccess }) => {
   const [t] = useTranslation();
   const updateMiddleware = () => onSuccess();
@@ -17,10 +22,5 @@ const _ConversationRemoveButton: React.FC<Props> = ({ id, onSuccess }) => {
     </TableCardActionsItem>
   );
 };
-
-interface Props {
-  id: string;
-  onSuccess: VoidFunction;
-}
 
 export const ConversationRemoveButton = React.memo(_ConversationRemoveButton);

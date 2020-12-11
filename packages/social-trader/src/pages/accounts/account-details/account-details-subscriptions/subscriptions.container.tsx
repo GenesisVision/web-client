@@ -8,6 +8,8 @@ import SubscriptionsTable from "./subscriptions-table";
 
 const _SubscriptionsContainer: React.FC<Props> = ({ id, assetCurrency }) => {
   const { data, sendRequest } = useApiRequest({
+    name: "fetchAccountSubscriptions",
+    cache: true,
     request: fetchAccountSubscriptions,
     fetchOnMount: true,
     fetchOnMountData: id

@@ -1,6 +1,5 @@
-import GVProgramAvatar, {
-  GVProgramAvatarProps
-} from "components/gv-program-avatar";
+import GVProgramAvatar from "components/gv-program-avatar";
+import { GVProgramAvatarProps } from "components/gv-program-avatar/gv-program-avatar.styles";
 import { ILevelTooltip } from "components/level-tooltip/level-tooltip";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
@@ -9,6 +8,15 @@ import Popover, {
 import useAnchor from "hooks/anchor.hook";
 import * as React from "react";
 import { useCallback } from "react";
+
+export interface IAssetAvatarProps extends GVProgramAvatarProps {
+  tooltip?: React.ReactElement<ILevelTooltip>;
+  click?: boolean;
+  vertical?: VERTICAL_POPOVER_POS;
+  horizontal?: HORIZONTAL_POPOVER_POS;
+  onClickLevel?: (e: any) => void;
+  alt: string;
+}
 
 const _AssetAvatar: React.FC<IAssetAvatarProps> = props => {
   const { tooltip, onClickLevel, click, vertical, horizontal } = props;
@@ -31,7 +39,7 @@ const _AssetAvatar: React.FC<IAssetAvatarProps> = props => {
       />
       {tooltip && (
         <Popover
-          noAbsolute
+          absolute={false}
           noPadding
           anchorEl={anchor}
           className="tooltip__popover"
@@ -44,15 +52,6 @@ const _AssetAvatar: React.FC<IAssetAvatarProps> = props => {
     </>
   );
 };
-
-export interface IAssetAvatarProps extends GVProgramAvatarProps {
-  tooltip?: React.ReactElement<ILevelTooltip>;
-  click?: boolean;
-  vertical?: VERTICAL_POPOVER_POS;
-  horizontal?: HORIZONTAL_POPOVER_POS;
-  onClickLevel?: (e: any) => void;
-  alt: string;
-}
 
 const AssetAvatar = React.memo(_AssetAvatar);
 export default AssetAvatar;

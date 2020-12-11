@@ -1,5 +1,6 @@
-import styles from "components/details/details-description-section/details-statistic-section/details-history/trades.module.scss";
-import GVButton from "components/gv-button";
+import { Button } from "components/button/button";
+import { Center } from "components/center/center";
+import { TradesComponentsPopupItemName } from "components/details/details-description-section/details-statistic-section/details-history/trades-components";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
   ORIENTATION_POPOVER
@@ -22,14 +23,14 @@ const _ProgramPeriodHistoryPopupItem: React.FC<{
   currency: CurrencyEnum;
 }> = ({ label, value, currency }) => (
   <PopoverContentListItem>
-    <div className={styles["details-trades__history-popup-item"]}>
-      <div className={styles["details-trades__history-popup-item-name"]}>
+    <Center>
+      <TradesComponentsPopupItemName>
         <Text muted>{label}</Text>
-      </div>
-      <div className={styles["details-trades__history-popup-item-value"]}>
+      </TradesComponentsPopupItemName>
+      <Text wrap={false}>
         {value} {currency}
-      </div>
-    </div>
+      </Text>
+    </Center>
   </PopoverContentListItem>
 );
 const ProgramPeriodHistoryPopupItem = withLoader(
@@ -127,9 +128,9 @@ const _ProgramPeriodHistoryDetailsButton: React.FC<IProgramPeriodHistoryDetailsB
   const [t] = useTranslation();
   return (
     <>
-      <GVButton size={"small"} color="secondary" onClick={setAnchor}>
+      <Button size={"small"} color="secondary" onClick={setAnchor}>
         {t("my-history.details")}
-      </GVButton>
+      </Button>
       <ProgramPeriodHistoryPopup
         period={period}
         currency={currency}

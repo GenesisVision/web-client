@@ -1,4 +1,4 @@
-import GVButton from "components/gv-button";
+import { Button } from "components/button/button";
 import { ASSET } from "constants/constants";
 import { useAccountCurrency } from "hooks/account-currency.hook";
 import useIsOpen from "hooks/is-open.hook";
@@ -6,9 +6,20 @@ import { useTranslation } from "i18n";
 import { FundWithdrawDialog } from "modules/fund-withdraw/fund-withdraw-dialog";
 import ProgramWithdrawDialog from "modules/program-withdraw/program-withdraw-dialog";
 import React from "react";
-import { CurrencyEnum, Sizeable, SizesType } from "utils/types";
+import { CurrencyEnum, Sizeable } from "utils/types";
+
+interface Props extends Sizeable {
+  isProcessingRealTime?: boolean;
+  infoMessage?: string;
+  disabled?: boolean;
+  onApply?: VoidFunction;
+  type: ASSET;
+  id: string;
+  currency: CurrencyEnum;
+}
 
 const _WithdrawButton: React.FC<Props> = ({
+  isProcessingRealTime,
   infoMessage,
   size,
   onApply,
@@ -32,6 +43,7 @@ const _WithdrawButton: React.FC<Props> = ({
       />
     ) : (
       <ProgramWithdrawDialog
+        isProcessingRealTime={isProcessingRealTime}
         onApply={onApply}
         open={isOpenPopup}
         id={id}
@@ -42,7 +54,7 @@ const _WithdrawButton: React.FC<Props> = ({
     );
   return (
     <>
-      <GVButton
+      <Button
         testId={label}
         className={label}
         size={size}
@@ -52,20 +64,11 @@ const _WithdrawButton: React.FC<Props> = ({
         onClick={setIsOpenPopup}
       >
         {label}
-      </GVButton>
+      </Button>
       {withdraw}
     </>
   );
 };
-
-interface Props extends Sizeable {
-  infoMessage?: string;
-  disabled?: boolean;
-  onApply?: VoidFunction;
-  type: ASSET;
-  id: string;
-  currency: CurrencyEnum;
-}
 
 const WithdrawButton = React.memo(_WithdrawButton);
 export default WithdrawButton;

@@ -3,7 +3,6 @@ import AssetRow from "components/assets/asset-fields/asset-row";
 import { Center } from "components/center/center";
 import FormError from "components/form/form-error/form-error";
 import FundAssetRatio from "components/fund-asset-ratio/fund-asset-ratio";
-import { FUND_ASSET_TYPE } from "components/fund-asset/fund-asset";
 import FundAssetContainer, {
   FundAssetRemoveType
 } from "components/fund-asset/fund-asset-container";
@@ -50,7 +49,7 @@ const _AssetsComponent: React.FC<Props> = ({
         <AssetRow>
           <FundAssetContainer
             assets={assets}
-            type={FUND_ASSET_TYPE.MIDDLE}
+            type={"middle"}
             removable={canChange}
             removeHandle={removeHandle}
             remainder={remainder}

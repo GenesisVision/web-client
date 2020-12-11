@@ -40,11 +40,6 @@
     right: 10px;
     top: 15px;
 
-    @include transition(opacity);
-    &:hover {
-      opacity: 0.4;
-    }
-
     &--wider {
       @include media-breakpoint-tablet() {
         display: none;

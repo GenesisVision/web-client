@@ -8,6 +8,8 @@ import GoogleAuthDesktop, {
 } from "./google-auth-steps-desktop";
 import GoogleAuthMobile from "./google-auth-steps-mobile";
 
+interface Props extends IGoogleAuthProps {}
+
 const GoogleAuthSteps: React.FC<Props> = props => {
   const [innerWidth, setInnerWidth] = useState(0);
   useEffect(() => {
@@ -20,8 +22,6 @@ const GoogleAuthSteps: React.FC<Props> = props => {
     <GoogleAuthDesktop {...props} />
   );
 };
-
-interface Props extends IGoogleAuthProps {}
 
 const GoogleAuthStepsContainer = React.memo(GoogleAuthSteps);
 export default GoogleAuthStepsContainer;

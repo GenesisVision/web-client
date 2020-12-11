@@ -5,6 +5,7 @@ import {
 import { DataStorageContext } from "components/data-storage/data-storage";
 import {
   FilteringType,
+  SortingColumn,
   TDefaultFilters
 } from "components/table/components/filtering/filter.type";
 import SelectFilter from "components/table/components/filtering/select-filter/select-filter";
@@ -22,7 +23,21 @@ import DashboardBlock from "pages/dashboard/components/dashboard-block/dashboard
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+interface Props {
+  name: string;
+  columns?: SortingColumn[];
+  sorting?: string;
+  filtering?: FilteringType;
+  defaultFilters?: TDefaultFilters;
+  getItemsFunc: GetItemsFuncType;
+  title: string;
+  renderBodyCard?: RenderBodyItemFuncType;
+}
+
 const _DashboardInvestingTable: React.FC<Props> = ({
+  name,
+  columns,
+  sorting,
   filtering,
   defaultFilters,
   getItemsFunc,
@@ -56,10 +71,15 @@ const _DashboardInvestingTable: React.FC<Props> = ({
   return (
     <DashboardBlock>
       <TableModule
+        name={name}
+        cache
+        columns={columns}
+        sorting={sorting}
         filtering={filtering}
         defaultFilters={defaultFilters}
         paging={DEFAULT_CARD_PAGING}
         timestamp={timestamp}
+        renderSorting={column => <>{t(`header-fields.${column.name}`)}</>}
         renderFilters={(
           updateFilter: UpdateFilterFunc,
           filtering: FilteringType
@@ -82,14 +102,6 @@ const _DashboardInvestingTable: React.FC<Props> = ({
     </DashboardBlock>
   );
 };
-
-interface Props {
-  filtering?: FilteringType;
-  defaultFilters?: TDefaultFilters;
-  getItemsFunc: GetItemsFuncType;
-  title: string;
-  renderBodyCard?: RenderBodyItemFuncType;
-}
 
 const DashboardInvestingTable = React.memo(_DashboardInvestingTable);
 export default DashboardInvestingTable;

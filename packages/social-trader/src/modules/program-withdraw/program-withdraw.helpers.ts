@@ -12,9 +12,11 @@ export interface IProgramWithdrawAmountFormValues {
 }
 
 export const programWithdrawAmountValidationSchema = ({
+  withdrawInPercent,
   t,
   availableToWithdraw
 }: {
+  withdrawInPercent?: boolean;
   t: TFunction;
   availableToWithdraw: number;
 }) =>
@@ -27,7 +29,7 @@ export const programWithdrawAmountValidationSchema = ({
         then: number()
           .moreThan(0, t("validations.amount-is-zero"))
           .max(
-            availableToWithdraw,
+            withdrawInPercent ? 100 : availableToWithdraw,
             t("validations.amount-more-than-account-balance")
           )
       }

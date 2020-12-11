@@ -1,4 +1,4 @@
-import DetailsBlock from "components/details/details-block";
+import { DefaultTableBlock } from "components/default.block/default-table.block";
 import ProfileLayout from "components/profile/profile-layout";
 import { REFERRAL_PROGRAM } from "components/profile/profile.constants";
 import { Row } from "components/row/row";
@@ -51,12 +51,12 @@ const _ReferralProgramPage: React.FC = () => {
         size={"large"}
         className={styles["referral-program__tables"]}
       >
-        <DetailsBlock table>
+        <DefaultTableBlock className={styles["referral-program__table"]}>
           <ReferralFriendsTable />
-        </DetailsBlock>
-        <DetailsBlock table>
+        </DefaultTableBlock>
+        <DefaultTableBlock className={styles["referral-program__table"]}>
           <ReferralHistoryTable />
-        </DetailsBlock>
+        </DefaultTableBlock>
       </Row>
     </ProfileLayout>
   );

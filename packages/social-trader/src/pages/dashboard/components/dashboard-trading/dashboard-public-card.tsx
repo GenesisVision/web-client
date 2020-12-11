@@ -1,4 +1,3 @@
-import { FUND_ASSET_TYPE } from "components/fund-asset/fund-asset";
 import FundAssetContainer, {
   FundAssetType
 } from "components/fund-asset/fund-asset-container";
@@ -242,13 +241,17 @@ const _DashboardPublicCard: React.FC<Props> = ({
           <FundAssetContainer
             noWrap
             assets={topFundAssets as FundAssetType[]}
-            type={FUND_ASSET_TYPE.SHORT}
+            type={"short"}
             size={3}
             length={totalAssetsCount}
           />
         </TableCardTableRow>
       )}
       <DepositWithdrawButtons
+        isProcessingRealTime={
+          asset.publicInfo?.programDetails?.dailyPeriodDetails
+            ?.isProcessingRealTime
+        }
         entryFee={fee}
         infoMessage={hasTradingSchedule ? investMessage : undefined}
         accountType={asset.assetTypeExt}

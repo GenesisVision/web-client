@@ -1,14 +1,25 @@
+import { Button } from "components/button/button";
 import { IDialogProps } from "components/dialog/dialog";
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogTop } from "components/dialog/dialog-top";
-import GVButton from "components/gv-button";
 import { Row } from "components/row/row";
 import { SubmitButton } from "components/submit-button/submit-button";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
+
+export interface IConfirmPopupContentProps extends IDialogProps {
+  errorMessage?: string;
+  onApply: () => void;
+  onCancel?: () => void;
+  header?: string;
+  body?: React.ReactNode;
+  applyButtonText?: string;
+  cancelButtonText?: string;
+  disabled?: boolean;
+}
 
 const _ConfirmPopupContent: React.ComponentType<IConfirmPopupContentProps> = ({
   errorMessage,
@@ -37,9 +48,9 @@ const _ConfirmPopupContent: React.ComponentType<IConfirmPopupContentProps> = ({
             {applyButtonText || t("buttons.apply")}
           </SubmitButton>
           {onCancel && (
-            <GVButton color="secondary" variant="outlined" onClick={onCancel}>
+            <Button color="secondary" variant="outlined" onClick={onCancel}>
               {cancelButtonText || t("buttons.cancel")}
-            </GVButton>
+            </Button>
           )}
         </DialogButtons>
       </DialogBottom>
@@ -49,14 +60,3 @@ const _ConfirmPopupContent: React.ComponentType<IConfirmPopupContentProps> = ({
 
 const ConfirmPopupContent = React.memo(_ConfirmPopupContent);
 export default ConfirmPopupContent;
-
-export interface IConfirmPopupContentProps extends IDialogProps {
-  errorMessage?: string;
-  onApply: () => void;
-  onCancel?: () => void;
-  header?: string;
-  body?: React.ReactNode;
-  applyButtonText?: string;
-  cancelButtonText?: string;
-  disabled?: boolean;
-}

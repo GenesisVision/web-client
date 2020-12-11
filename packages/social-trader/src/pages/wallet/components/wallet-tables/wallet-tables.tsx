@@ -42,6 +42,7 @@ const _WalletTables: React.FC<Props> = ({ currency }) => {
               )}
             >
               <Link
+                noColor
                 to={linkCreator(
                   composeWalletCurrencyUrl(currency.toLowerCase()) +
                     TABS.TRANSACTIONS_TAB,
@@ -67,6 +68,7 @@ const _WalletTables: React.FC<Props> = ({ currency }) => {
                 )}
               >
                 <Link
+                  noColor
                   to={linkCreator(
                     composeWalletCurrencyUrl(currency.toLowerCase()) +
                       TABS.EXTERNAL_TAB,
@@ -86,6 +88,7 @@ const _WalletTables: React.FC<Props> = ({ currency }) => {
                 )}
               >
                 <Link
+                  noColor
                   to={linkCreator(
                     composeWalletCurrencyUrl(currency.toLowerCase()) +
                       TABS.EXTERNAL_TAB,

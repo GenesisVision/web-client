@@ -1,5 +1,4 @@
 import { DefaultTableBlock } from "components/default.block/default-table.block";
-import DetailsBlock from "components/details/details-block";
 import FacetContainer, {
   FACET_ASSET
 } from "components/facet-container/facet-container";
@@ -25,6 +24,8 @@ const _FundsWeeklyContainer: React.FC = () => {
   const [t] = useTranslation();
 
   const { data, sendRequest: getFundsChallengeWinner } = useApiRequest({
+    name: "fetchFundsChallengeWinner",
+    cache: true,
     request: fetchFundsChallengeWinner,
     fetchOnMount: true
   });

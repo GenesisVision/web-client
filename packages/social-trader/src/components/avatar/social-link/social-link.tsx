@@ -1,16 +1,17 @@
 import SocialLink from "media/social-link.svg";
 import * as React from "react";
+import styled from "styled-components";
 
 import ImageBase, { IImageProps } from "../image-base";
-import styles from "./social-link.module.scss";
+
+const StyledImageBase = styled(ImageBase)`
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+`;
 
 const _SocialLinkImage: React.FC<IImageProps> = ({ url, alt }) => (
-  <ImageBase
-    className={styles["social-link-image"]}
-    src={url}
-    alt={alt}
-    defaultImage={SocialLink}
-  />
+  <StyledImageBase src={url} alt={alt} defaultImage={SocialLink} />
 );
 
 const SocialLinkImage = React.memo(_SocialLinkImage);

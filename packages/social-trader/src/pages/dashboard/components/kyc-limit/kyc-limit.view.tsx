@@ -1,4 +1,4 @@
-import GVButton from "components/gv-button";
+import { Button } from "components/button/button";
 import GVProgramPeriod from "components/gv-program-period";
 import { LabeledValue } from "components/labeled-value/labeled-value";
 import Link from "components/link/link";
@@ -57,7 +57,7 @@ const _KYCLimitView: React.FC<IKYCLimitViewProps> = ({
           <Link
             to={linkCreator(KYC_ROUTE, KYC_ROUTE, t("create-account:title"))}
           >
-            <GVButton color="primary">{t("Remove the limit")}</GVButton>
+            <Button color="primary">{t("Remove the limit")}</Button>
           </Link>
         </RowItem>
       </Row>

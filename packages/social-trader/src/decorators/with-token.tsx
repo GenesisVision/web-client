@@ -2,12 +2,12 @@ import { AppType } from "next/dist/next-server/lib/utils";
 import React, { Component } from "react";
 import { api } from "services/api-client/swagger-custom-client";
 import Token from "services/api-client/token";
-import { AppWithReduxContext } from "utils/types";
+import { AppWithReduxContext, NextPageWithReduxContext } from "utils/types";
 
 const withToken = (WrappedComponent: AppType | any) => {
   return class extends Component {
     static async getInitialProps(ctx: AppWithReduxContext) {
-      const token = Token.create(ctx.ctx);
+      const token = Token.create((ctx as unknown) as NextPageWithReduxContext);
 
       if (token.isExpiring()) {
         try {
@@ -20,7 +20,7 @@ const withToken = (WrappedComponent: AppType | any) => {
 
       const isTokenExist = token.isExist();
 
-      ctx.ctx.token = token;
+      ctx.token = token;
 
       const componentProps =
         WrappedComponent.getInitialProps &&

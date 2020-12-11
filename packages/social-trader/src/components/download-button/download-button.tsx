@@ -1,9 +1,9 @@
-import GVButton from "components/gv-button";
+import { Button } from "components/button/button";
+import { Center } from "components/center/center";
 import { ExportIcon } from "components/icon/export-icon";
+import { Text } from "components/text/text";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-
-import styles from "./download-button.module.scss";
 
 const _DownloadButton: React.FC<Props> = ({
   title,
@@ -14,21 +14,16 @@ const _DownloadButton: React.FC<Props> = ({
   return (
     <a
       title={title || t("buttons.download")}
-      className={styles["download-button__container"]}
       href={getExportFileUrl && getExportFileUrl()}
     >
-      <GVButton
-        noPadding
-        className={styles["download-button"]}
-        color="primary"
-        variant="text"
-        onClick={authHandle}
-      >
+      <Button noPadding color="primary" variant="text" onClick={authHandle}>
         <>
-          {title || t("buttons.export")}
-          <ExportIcon />
+          <Center>
+            <Text weight={"bold"}>{title || t("buttons.export")}</Text>
+            <ExportIcon />
+          </Center>
         </>
-      </GVButton>
+      </Button>
     </a>
   );
 };

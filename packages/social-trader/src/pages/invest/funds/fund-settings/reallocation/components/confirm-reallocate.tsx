@@ -1,5 +1,4 @@
 import ConfirmPopup from "components/confirm-popup/confirm-popup";
-import { FUND_ASSET_TYPE } from "components/fund-asset/fund-asset";
 import FundAssetContainer from "components/fund-asset/fund-asset-container";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
@@ -25,7 +24,7 @@ const _ConfirmReallocate: React.FC<Props> = ({
       header={t("fund-settings:reallocation.confirm-title")}
       body={
         <>
-          <FundAssetContainer assets={assets} type={FUND_ASSET_TYPE.MIDDLE} />
+          <FundAssetContainer assets={assets} type={"middle"} />
           {t("fund-settings:reallocation.confirm-text")}
         </>
       }

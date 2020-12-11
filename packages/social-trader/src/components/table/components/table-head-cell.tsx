@@ -1,15 +1,31 @@
-import clsx from "clsx";
+import { SortableIcon } from "components/table/components/sortable-icon";
+import {
+  tableCellFirstOffsetStyle,
+  tableCellStyle
+} from "components/table/components/table-cell";
 import { Text } from "components/text/text";
 import * as React from "react";
+import styled from "styled-components";
+import { adaptivePadding, verticalPaddings } from "utils/style/mixins";
+import { $paddingSmall, $paddingXsmall } from "utils/style/sizes";
 
 import { SORTING_DIRECTION } from "../helpers/sorting.helpers";
-import styles from "./table.module.scss";
 
 interface ITableHeadCellProps extends React.HTMLAttributes<HTMLDivElement> {
   sortable: boolean;
   sortingDirection: SORTING_DIRECTION;
   className?: string;
 }
+
+const StyledTh = styled.th`
+  ${tableCellStyle}
+  ${tableCellFirstOffsetStyle}
+  ${verticalPaddings($paddingXsmall)}
+  ${adaptivePadding("right", $paddingSmall / 2)};
+  &:last-child {
+    ${adaptivePadding("right", $paddingSmall)};
+  }
+`;
 
 const _TableHeadCell: React.FC<ITableHeadCellProps> = ({
   sortable,
@@ -19,31 +35,15 @@ const _TableHeadCell: React.FC<ITableHeadCellProps> = ({
   children
 }) => {
   return (
-    <th
-      className={clsx(
-        styles["table__cell--first-offset"],
-        styles["table__cell"],
-        styles["table__cell--medium"],
-        styles["table__cell--head"],
-        className
-      )}
-      onClick={sortable ? onClick : undefined}
-    >
+    <StyledTh className={className} onClick={sortable ? onClick : undefined}>
       {sortable ? (
-        <span
-          className={clsx({
-            [styles["sortable-asc"]]:
-              sortingDirection === SORTING_DIRECTION.ASC,
-            [styles["sortable-desc"]]:
-              sortingDirection === SORTING_DIRECTION.DESC
-          })}
-        >
+        <SortableIcon sortingDirection={sortingDirection}>
           {children}
-        </span>
+        </SortableIcon>
       ) : (
         <Text muted>{children}</Text>
       )}
-    </th>
+    </StyledTh>
   );
 };
 

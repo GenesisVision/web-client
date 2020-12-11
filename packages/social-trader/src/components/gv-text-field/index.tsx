@@ -1,23 +1,23 @@
-import clsx from "clsx";
-import { GvInput, IPropsGvInput } from "components/gv-input/gv-input";
+import { GvInput } from "components/gv-input/gv-input";
+import {
+  GVTextFieldProps,
+  gvTextFieldStyle
+} from "components/gv-text-field/gv-text-field.style";
 import useIsOpen from "hooks/is-open.hook";
-import React, { ReactNode, useCallback, useEffect, useRef } from "react";
-import { NumberFormatValues } from "react-number-format";
-import { Sizeable } from "utils/types";
+import React, { useCallback, useEffect, useRef } from "react";
+import styled from "styled-components";
 
 import GVTextArea from "./gv-text-area";
-import styles from "./style.module.scss";
 
 const _GVTextField: React.FC<GVTextFieldProps> = props => {
   const {
-    size = "middle",
+    className,
     onFocus,
-    adornmentPosition = "end",
     onBlur,
     autoFocus,
     type = "text",
-    inputClassName,
-    InputComponent = "input"
+    InputComponent = "input",
+    ...otherProps
   } = props;
   const input = useRef<HTMLInputElement | HTMLTextAreaElement>(null);
   const [focused, setFocused, setNotFocused] = useIsOpen();
@@ -54,10 +54,7 @@ const _GVTextField: React.FC<GVTextFieldProps> = props => {
         {...props}
         ref={input}
         type={type}
-        className={clsx(styles["gv-text-field"], inputClassName, {
-          [styles["gv-text-field--small"]]: size === "small",
-          [styles["gv-text-field--middle"]]: size === "middle"
-        })}
+        className={className}
         onFocus={handleFocus}
         onBlur={handleBlur}
       />
@@ -65,31 +62,13 @@ const _GVTextField: React.FC<GVTextFieldProps> = props => {
   };
 
   return (
-    <GvInput
-      {...props}
-      adornmentPosition={adornmentPosition}
-      inputElement={renderInput()}
-      focused={focused}
-    />
+    <GvInput {...otherProps} inputElement={renderInput()} focused={focused} />
   );
 };
 
-export interface GVTextFieldProps extends IPropsGvInput, Sizeable {
-  maxlength?: number;
-  fixedVertical?: boolean;
-  children?: ReactNode;
-  name: string;
-  type?: string;
-  placeholder?: string;
-  autoComplete?: string;
-  InputComponent?: React.ComponentType<any> | string;
-  inputClassName?: string;
-  onBlur?: (e: any) => void;
-  onChange?: (e: React.ChangeEvent<any>) => void;
-  onValueChange?: (e: NumberFormatValues) => void;
-  form?: any;
-  autoFocus?: boolean;
-}
+const StyledGVTextField = styled(_GVTextField)`
+  ${gvTextFieldStyle}
+`;
 
-const GVTextField = React.memo(_GVTextField);
+const GVTextField = React.memo(StyledGVTextField);
 export default GVTextField;

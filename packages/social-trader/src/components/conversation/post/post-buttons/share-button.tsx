@@ -1,9 +1,9 @@
 import React from "react";
 
+interface Props {}
+
 const _ShareButton: React.FC<Props> = ({}) => {
   return <div>Share</div>;
 };
-
-interface Props {}
 
 export const ShareButton = React.memo(_ShareButton);

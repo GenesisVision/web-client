@@ -1,16 +1,19 @@
-import clsx from "clsx";
-import Link from "components/link/link";
 import { useTranslation } from "i18n";
+import {
+  NavSubItemA,
+  NavSubItemContainer,
+  NavSubItemLink
+} from "pages/landing-page/components/nav/nav.styles";
 import { TNavHeader } from "pages/landing-page/static-data/nav-links";
 import React from "react";
 
-import styles from "./nav-list.module.scss";
-
 interface INavSubItemProps extends TNavHeader {
-  onClick?(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void;
+  isMobile?: boolean;
+  onClick?: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
 }
 
 const _NavSubItem: React.FC<INavSubItemProps> = ({
+  isMobile,
   href,
   name,
   icon,
@@ -20,33 +23,26 @@ const _NavSubItem: React.FC<INavSubItemProps> = ({
 }) => {
   const { t } = useTranslation();
   return (
-    <li
-      className={clsx(styles["nav-list__item"], {
-        [styles["nav-list__item--hide-mobile"]]: hideMobile
-      })}
-    >
+    <NavSubItemContainer isMobile={isMobile} hideMobile={hideMobile}>
       {href && href.includes("http") ? (
-        <a title={name} href={href} className={styles["nav-list__link"]}>
-          {icon && (
-            <span className={styles["nav-list__link-icon"]}>{icon}</span>
-          )}
+        <NavSubItemA isMobile={isMobile} title={name} href={href}>
+          {icon && <span>{icon}</span>}
           {t(name)}
-        </a>
+        </NavSubItemA>
       ) : (
-        <Link
+        <NavSubItemLink
+          isMobile={isMobile}
           title={t(name)}
           onClick={onClick}
           to={{ pathname: href as string, state }}
-          className={styles["nav-list__link"]}
         >
-          {icon && (
-            <span className={styles["nav-list__link-icon"]}>{icon}</span>
-          )}
+          {icon && <span>{icon}</span>}
           {t(name)}
-        </Link>
+        </NavSubItemLink>
       )}
-    </li>
+    </NavSubItemContainer>
   );
 };
+
 const NavSubItem = React.memo(_NavSubItem);
 export default NavSubItem;

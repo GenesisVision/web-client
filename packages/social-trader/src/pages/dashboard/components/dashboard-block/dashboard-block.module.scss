@@ -3,6 +3,21 @@
 @import "styles/_shadow";
 
 .dashboard-block {
+  margin-bottom: $padding-xsmall;
+  &--tablet {
+    &:not(:last-child) {
+      @include media-breakpoint-tablet() {
+        margin-right: $padding-xsmall;
+      }
+    }
+  }
+  &--landscape-tablet {
+    &:not(:last-child) {
+      @include media-breakpoint-landscape-tablet() {
+        margin-right: $padding-xsmall;
+      }
+    }
+  }
   &__header {
     display: flex;
     justify-content: space-between;

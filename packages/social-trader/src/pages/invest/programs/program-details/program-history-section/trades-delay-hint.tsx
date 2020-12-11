@@ -1,4 +1,3 @@
-import styles from "components/details/details-description-section/details-statistic-section/details-history/trades.module.scss";
 import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
@@ -9,6 +8,21 @@ import { TradesDelay } from "gv-api-web";
 import { DELAYS_LABELS } from "pages/invest/programs/program-details/program-history-section/program-open-positions/program-open-positions.helpers";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import styled from "styled-components";
+import { $labelColor } from "utils/style/colors";
+
+const Question = styled.div`
+  cursor: help;
+  box-sizing: border-box;
+  font-weight: 800;
+  line-height: 15px;
+  text-align: center;
+  font-size: 8px;
+  border: 1px solid ${$labelColor};
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+`;
 
 const _TradesDelayHint: React.FC<{ delay: TradesDelay }> = ({ delay }) => {
   const [t] = useTranslation();
@@ -34,7 +48,7 @@ const _TradesDelayHint: React.FC<{ delay: TradesDelay }> = ({ delay }) => {
               </TooltipContent>
             )}
           >
-            <div className={styles["details-trades__delay-question"]}>?</div>
+            <Question>?</Question>
           </Tooltip>
         </Row>
       </Text>

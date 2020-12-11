@@ -16,8 +16,6 @@ import { TSlide } from "pages/landing-page/static-data/slides";
 import React, { useCallback, useState } from "react";
 import { animated, useTransition } from "react-spring";
 
-import styles from "./first-slider.module.scss";
-
 interface Props {
   className?: string;
   slidesItems: TSlide[];
@@ -63,8 +61,7 @@ const _FirstSliderWithAnimation: React.FC<Props> = ({ slidesItems }) => {
         {transitions.map(({ item, props: { transform, ...rest }, key }) => (
           <animated.div
             key={key}
-            className={styles["slider__img-animate"]}
-            style={rest as any}
+            style={{ top: 0, left: 0, width: "100%", ...rest } as any}
           >
             <SliderImg item={item} animation />
           </animated.div>
@@ -74,9 +71,8 @@ const _FirstSliderWithAnimation: React.FC<Props> = ({ slidesItems }) => {
         <SliderInfo>
           {transitions.map(({ item, props: { transform, ...rest }, key }) => (
             <animated.div
-              className={styles["slider__info-animate"]}
               key={key}
-              style={rest as any}
+              style={{ top: 0, left: 0, width: "100%", ...rest } as any}
             >
               <animated.div style={{ transform }}>
                 <SliderTitle>{t(item.title)}</SliderTitle>

@@ -1,0 +1,64 @@
+@import "styles/_colors";
+@import "styles/_breakpoint";
+@import "styles/_sizes";
+@import "styles/_constants";
+
+.guides-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  &__item {
+    margin-bottom: $padding-xxsmall;
+  }
+
+  &__item-link {
+    @include transition(background-color);
+    @include adaptive-border-radius(25px);
+    @include horizontal-paddings(16px);
+    @include vertical-paddings(13px);
+    background-color: transparent;
+    color: inherit;
+    display: flex;
+    font-size: 14px;
+    line-height: 24px;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+
+    &:hover:not(.guides-list__item-link--disabled) {
+      background-color: rgba($main-color, 0.02);
+    }
+
+    &--active {
+      background-color: rgba($main-color, 0.02);
+      cursor: default;
+    }
+
+    &--disabled {
+      opacity: 0.3;
+      cursor: default;
+    }
+  }
+}
+
+.guides-list-header {
+  @include font-size($font-size-h4);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  font-weight: 600;
+  cursor: pointer;
+
+  &__number {
+    @include adaptive-margin(left, $padding-xxsmall);
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba($main-color, 0.3);
+  }
+
+  &--is-visible-list {
+    @include adaptive-padding(bottom, $padding-medium);
+  }
+}

@@ -1,4 +1,5 @@
-import GVTextField, { GVTextFieldProps } from "components/gv-text-field";
+import GVTextField from "components/gv-text-field";
+import { GVTextFieldProps } from "components/gv-text-field/gv-text-field.style";
 import useIsOpen from "hooks/is-open.hook";
 import React, { useCallback, useState } from "react";
 

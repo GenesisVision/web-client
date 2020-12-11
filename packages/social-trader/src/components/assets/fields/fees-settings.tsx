@@ -6,6 +6,18 @@ import { SimpleNumberField } from "components/simple-fields/simple-number-field"
 import React from "react";
 import { allowPositiveValuesNumberFormat } from "utils/helpers";
 
+interface Props {
+  firstFeeLabel: string;
+  firstFeeUnderText: string;
+  firstFeeName: string;
+  firstFeeDescription: string;
+  secondFeeName: string;
+  secondFeeLabel: string;
+  secondFeeUnderText: string;
+  secondFeeDescription: string;
+  title?: string;
+}
+
 const _FeesSettings: React.FC<Props> = ({
   title,
   firstFeeLabel,
@@ -53,18 +65,6 @@ const _FeesSettings: React.FC<Props> = ({
     </div>
   );
 };
-
-interface Props {
-  firstFeeLabel: string;
-  firstFeeUnderText: string;
-  firstFeeName: string;
-  firstFeeDescription: string;
-  secondFeeName: string;
-  secondFeeLabel: string;
-  secondFeeUnderText: string;
-  secondFeeDescription: string;
-  title?: string;
-}
 
 const FeesSettings = React.memo(_FeesSettings);
 export default FeesSettings;

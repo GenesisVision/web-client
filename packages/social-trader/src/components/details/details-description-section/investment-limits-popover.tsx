@@ -1,4 +1,4 @@
-import GVButton from "components/gv-button";
+import { Button } from "components/button/button";
 import { LabeledValue } from "components/labeled-value/labeled-value";
 import { PopoverContentCardBlock } from "components/popover/popover-card.block";
 import { PopoverContent } from "components/popover/popover-content";
@@ -70,7 +70,7 @@ const _InvestmentLimitsPopover: React.FC<Props> = ({
             <Text muted>{t("program-details-page:popover.text")}</Text>
           </Row>
           <Row>
-            <GVButton
+            <Button
               size={"xlarge"}
               noPadding
               variant="text"
@@ -78,7 +78,7 @@ const _InvestmentLimitsPopover: React.FC<Props> = ({
               color="secondary"
             >
               <>{t("program-details-page:popover.about-levels")} &#8250;</>
-            </GVButton>
+            </Button>
           </Row>
         </PopoverContentCardBlock>
       </PopoverContent>
@@ -98,7 +98,7 @@ interface Props {
   currency: CurrencyEnum;
   level: number;
   canLevelUp: boolean;
-  closePopover(): void;
+  closePopover: VoidFunction;
 }
 
 const InvestmentLimitsPopover = React.memo(_InvestmentLimitsPopover);

@@ -1,17 +1,15 @@
-import clsx from "clsx";
 import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
 import { Center } from "components/center/center";
-import GVButton from "components/gv-button";
 import { DetailsIcon } from "components/icon/details-icon";
 import { LogoutIcon } from "components/icon/logout-icon";
 import { ReferrerIcon } from "components/icon/referrer-icon";
 import { SecurityIcon } from "components/icon/security-icon";
 import { SettingsIcon } from "components/icon/settings-icon";
-import Link, { ToType } from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import Popover, { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import { PopoverContentCardBlock } from "components/popover/popover-card.block";
 import { PopoverContent } from "components/popover/popover-content";
+import { ProfileMenuItem } from "components/profile-widget/profile-menu-item";
 import {
   PROFILE_ROUTE,
   REFERRAL_PROGRAM_ROUTE,
@@ -19,7 +17,6 @@ import {
   SETTINGS_ROUTE
 } from "components/profile/profile.constants";
 import { RowItem } from "components/row-item/row-item";
-import { Row } from "components/row/row";
 import FilterArrowIcon from "components/table/components/filtering/filter-arrow-icon";
 import withLoader from "decorators/with-loader";
 import { ProfileHeaderViewModel } from "gv-api-web";
@@ -29,43 +26,21 @@ import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import { Clickable } from "utils/types";
+import styled from "styled-components";
+import { $fontSizeCommon, $paddingXxsmall } from "utils/style/sizes";
 
-import styles from "./profile-widget.module.scss";
+const Content = styled(Center)`
+  cursor: pointer;
+`;
 
-interface IProfileMenuItemProps extends Clickable {
-  to?: ToType | string;
-  label: any;
-  Icon: React.ComponentType;
-}
+const Separator = styled.div`
+  padding: ${$paddingXxsmall}px 0;
+`;
 
-const ProfileMenuItem: React.FC<IProfileMenuItemProps> = React.memo(
-  ({ Icon, to, onClick, label }) => {
-    const renderLabel = () => (
-      <Row>
-        <RowItem>
-          <Center className={styles["profile-menu__item-icon"]}>
-            <Icon />
-          </Center>
-        </RowItem>
-        <RowItem className={styles["profile-menu__item-label"]}>
-          {label}
-        </RowItem>
-      </Row>
-    );
-    const renderButton = () =>
-      to ? (
-        <Link to={to} onClick={onClick}>
-          {renderLabel()}
-        </Link>
-      ) : (
-        <GVButton variant="text" color={"danger"} noPadding onClick={onClick}>
-          {renderLabel()}
-        </GVButton>
-      );
-    return <Row className={styles["profile-menu__item"]}>{renderButton()}</Row>;
-  }
-);
+const Header = styled.div`
+  font-size: ${$fontSizeCommon}px;
+  padding: ${$paddingXxsmall}px 0;
+`;
 
 const _ProfileWidget: React.FC<Props> = ({ profileHeader, className }) => {
   const dispatch = useDispatch();
@@ -74,8 +49,8 @@ const _ProfileWidget: React.FC<Props> = ({ profileHeader, className }) => {
   const [t] = useTranslation();
   const { anchor, setAnchor, clearAnchor } = useAnchor();
   return (
-    <div className={clsx(styles["profile-widget"], className)}>
-      <Center className={styles["profile-widget__content"]} onClick={setAnchor}>
+    <div>
+      <Content onClick={setAnchor}>
         <RowItem size={"small"}>
           <ProfileAvatar
             url={profileHeader.logoUrl}
@@ -83,7 +58,7 @@ const _ProfileWidget: React.FC<Props> = ({ profileHeader, className }) => {
           />
         </RowItem>
         <FilterArrowIcon isOpen={!!anchor} />
-      </Center>
+      </Content>
       <Popover
         anchorEl={anchor}
         onClose={clearAnchor}
@@ -91,9 +66,7 @@ const _ProfileWidget: React.FC<Props> = ({ profileHeader, className }) => {
       >
         <PopoverContent>
           <PopoverContentCardBlock dark>
-            <div className={styles["profile-menu__header"]}>
-              {profileHeader.email}
-            </div>
+            <Header>{profileHeader.email}</Header>
           </PopoverContentCardBlock>
           <PopoverContentCardBlock>
             <ProfileMenuItem
@@ -120,7 +93,7 @@ const _ProfileWidget: React.FC<Props> = ({ profileHeader, className }) => {
               onClick={clearAnchor}
               label={t("profile-widget.referral-program")}
             />
-            <div className={styles["profile-menu__separator"]} />
+            <Separator />
             <ProfileMenuItem
               Icon={LogoutIcon}
               onClick={handlerLogout}

@@ -4,31 +4,6 @@
 
 .details-description-control {
   justify-content: flex-end;
-  &--button {
-    cursor: pointer;
-    border: none;
-    margin-top: 0;
-    margin-left: 0;
-    margin-right: 0;
-    padding: 0;
-    width: 100%;
-    overflow: visible;
-    outline: none;
-    background-color: transparent;
-    line-height: normal;
-    -webkit-font-smoothing: inherit;
-    -moz-osx-font-smoothing: inherit;
-    -webkit-appearance: none;
-    &::-moz-focus-inner {
-      border: 0;
-      padding: 0;
-    }
-  }
-  &:hover {
-    svg [stroke] {
-      stroke: $main-color;
-    }
-  }
   &__icon {
     width: 20px;
     height: 20px;

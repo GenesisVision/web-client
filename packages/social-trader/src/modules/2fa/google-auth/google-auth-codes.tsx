@@ -7,32 +7,45 @@ import { RecoveryCode } from "gv-api-web";
 import CopyButton from "modules/copy-button/copy-button";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
+import styled from "styled-components";
 
-import styles from "./google-auth.module.scss";
-
-const CodeItem: React.FC<{ code: string }> = React.memo(({ code }) => (
-  <div className={styles["codes__item"]} key={code}>
-    {code}
-  </div>
-));
-
-const CodeList: React.FC<{ codes: RecoveryCode[] }> = React.memo(
-  ({ codes }) => (
-    <Row wrap className={styles["codes__list"]}>
-      {codes.map(code => (
-        <CodeItem code={code.code} />
-      ))}
-    </Row>
-  )
-);
+interface Props {
+  codes: RecoveryCode[];
+}
 
 const getCodesString = (codes: RecoveryCode[]): string =>
   codes.map(code => code.code).join("\n");
 
+const CodeItem = styled.div`
+  font-size: 1.1rem;
+  box-sizing: border-box;
+  flex: 1 0 50%;
+  padding: 5px;
+`;
+
+const CodesList = styled(Row)`
+  text-align: center;
+`;
+
+const CodeList: React.FC<{ codes: RecoveryCode[] }> = React.memo(
+  ({ codes }) => (
+    <CodesList wrap>
+      {codes.map(({ code }) => (
+        <CodeItem key={code}>{code}</CodeItem>
+      ))}
+    </CodesList>
+  )
+);
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 const _GoogleAuthCodes: React.FC<Props> = ({ codes }) => {
   const [t] = useTranslation();
   return (
-    <div className={styles["recovery-codes-container"]}>
+    <Container>
       <DialogTop title={t("profile-page:2fa-page.codes.title")} />
       <DialogBottom>
         <Row>{t("profile-page:2fa-page.codes.recovery_codes")}</Row>
@@ -43,12 +56,9 @@ const _GoogleAuthCodes: React.FC<Props> = ({ codes }) => {
         </DialogButtons>
         <DialogInfo>{t("profile-page:2fa-page.codes.warning")}</DialogInfo>
       </DialogBottom>
-    </div>
+    </Container>
   );
 };
 
-interface Props {
-  codes: RecoveryCode[];
-}
 const GoogleAuthCodes = React.memo(_GoogleAuthCodes);
 export default GoogleAuthCodes;

@@ -88,14 +88,16 @@ const _LPProgramCard: React.FC<Props> = ({ program, className }) => {
               />
             </LabeledValue>
           </Row>
-          <Row>
-            <LabeledValue label={t("header-fields.period")}>
-              <ProgramPeriodPie
-                start={program.periodStarts}
-                end={program.periodEnds}
-              />
-            </LabeledValue>
-          </Row>
+          {program.type === "FixedPeriod" && (
+            <Row>
+              <LabeledValue label={t("header-fields.period")}>
+                <ProgramPeriodPie
+                  start={program.periodStarts}
+                  end={program.periodEnds}
+                />
+              </LabeledValue>
+            </Row>
+          )}
         </LPTableCardTableColumn>
         <LPTableCardTableColumn>
           <Row>

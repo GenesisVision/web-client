@@ -1,19 +1,21 @@
-import clsx from "clsx";
-import Link from "components/link/link";
 import { useTranslation } from "i18n";
-import { useRouter } from "next/router";
 import NavSubList from "pages/landing-page/components/nav/nav-sublist";
+import {
+  NavItemA,
+  NavItemContainer,
+  NavItemLink
+} from "pages/landing-page/components/nav/nav.styles";
 import { TNavHeader } from "pages/landing-page/static-data/nav-links";
 import React, { useCallback, useState } from "react";
 
-import styles from "./nav-list.module.scss";
-
 interface INavItemProps extends TNavHeader {
+  isMobile?: boolean;
   subNavOpen?: boolean;
-  onClick?(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void;
+  onClick?: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
 }
 
 const _NavItem: React.FC<INavItemProps> = ({
+  isMobile,
   href,
   name,
   icon,
@@ -40,41 +42,43 @@ const _NavItem: React.FC<INavItemProps> = ({
     [subOpen]
   );
   return (
-    <li
-      className={clsx(styles["nav-list__item"], {
-        [styles["nav-list__item--hide-mobile"]]: hideMobile,
-        [styles["nav-list__item--sub-open"]]: subOpen
-      })}
+    <NavItemContainer
+      isMobile={isMobile}
+      hideMobile={hideMobile}
+      subOpen={subOpen}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
       <>
         {href && href.includes("http") ? (
-          <a title={name} href={href} className={styles["nav-list__link"]}>
-            {icon && (
-              <span className={styles["nav-list__link-icon"]}>{icon}</span>
-            )}
+          <NavItemA isMobile={isMobile} title={name} href={href}>
+            {icon && <span>{icon}</span>}
             {t(name)}
-          </a>
+          </NavItemA>
         ) : (
-          <Link
+          <NavItemLink
+            isMobile={isMobile}
+            white
             title={t(name)}
             onClick={onClick}
             to={{ pathname: href as string, state }}
-            className={styles["nav-list__link"]}
           >
-            {icon && (
-              <span className={styles["nav-list__link-icon"]}>{icon}</span>
-            )}
+            {icon && <span>{icon}</span>}
             {t(name)}
-          </Link>
+          </NavItemLink>
         )}
         {subNav && (
-          <NavSubList subNav={subNav} onClick={onClick} subNavOpen={subOpen} />
+          <NavSubList
+            isMobile={isMobile}
+            subNav={subNav}
+            onClick={onClick}
+            subNavOpen={subOpen}
+          />
         )}
       </>
-    </li>
+    </NavItemContainer>
   );
 };
+
 const NavItem = React.memo(_NavItem);
 export default NavItem;

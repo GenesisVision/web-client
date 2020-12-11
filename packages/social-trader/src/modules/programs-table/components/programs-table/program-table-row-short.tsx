@@ -1,4 +1,3 @@
-import clsx from "clsx";
 import AssetAvatarWithName from "components/avatar/asset-avatar/asset-avatar-with-name";
 import LevelTooltip from "components/level-tooltip/level-tooltip";
 import Link from "components/link/link";
@@ -10,6 +9,7 @@ import ProgramSimpleChart from "components/program-simple-chart/program-simple-c
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import TagProgramContainer from "components/tags/tag-program-container/tag-program-container";
+import { Text } from "components/text/text";
 import { ASSET, STATUS } from "constants/constants";
 import { ProgramDetailsListItem } from "gv-api-web";
 import { useTranslation } from "i18n";
@@ -19,11 +19,49 @@ import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import { PROGRAM_DETAILS_FOLDER_ROUTE } from "routes/programs.routes";
+import styled from "styled-components";
 import { composeProgramDetailsUrl } from "utils/compose-url";
 import { distanceDate } from "utils/dates";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
+import { mediaBreakpointLandscapePhone } from "utils/style/media";
+import { transition } from "utils/style/mixins";
 
-import styles from "./programs-table.module.scss";
+interface IProgramTableRowShortProps {
+  program: ProgramDetailsListItem;
+}
+
+const LinkName = styled(Text)`
+  margin-bottom: 3px;
+  word-break: break-all;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: block;
+  &:hover {
+    opacity: 0.4;
+  }
+  ${transition("opacity")}
+`;
+
+const ChartCell = styled(TableCell)`
+  max-width: 136px;
+  width: 136px;
+`;
+
+const DailyPeriod = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const FavoriteIcon = styled.div`
+  width: 20px;
+  height: 19px;
+  ${mediaBreakpointLandscapePhone(`
+    width: 28px;
+    height: 27px;
+  `)}
+`;
 
 const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
   program
@@ -42,7 +80,7 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
     statistic,
     personalDetails,
     availableToInvest,
-    id,
+    type,
     tags,
     balance,
     investorsCount
@@ -54,8 +92,8 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
   const { currency, amount } = balance;
   return (
     <TableRow>
-      <TableCell height={"small"} className={styles["programs-table__cell"]}>
-        <Link to={programLinkProps}>
+      <TableCell height={"small"}>
+        <Link to={programLinkProps} noColor>
           <AssetAvatarWithName
             url={logoUrl}
             level={level}
@@ -65,9 +103,7 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
             tooltip={<LevelTooltip level={level} canLevelUp={false} />}
             name={
               <>
-                <div className={styles["programs-table__cell--link"]}>
-                  {program.title}
-                </div>
+                <LinkName sizeValue={"14"}>{program.title}</LinkName>
                 <div>
                   <TagProgramContainer tags={tags} />
                 </div>
@@ -76,74 +112,46 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
           />
         </Link>
       </TableCell>
-      <TableCell className={styles["programs-table__cell"]}>
+      <TableCell>
         <NumberFormat
           value={formatCurrencyValue(amount, currency)}
           suffix={` ${currency}`}
           displayType="text"
         />
       </TableCell>
-      <TableCell
-        className={clsx(
-          styles["programs-table__cell"],
-          styles["programs-table__cell--investors"]
-        )}
-      >
-        {investorsCount}
-      </TableCell>
-      <TableCell
-        className={clsx(
-          styles["programs-table__cell"],
-          styles["programs-table__cell--available-to-invest"]
-        )}
-      >
+      <TableCell>{investorsCount}</TableCell>
+      <TableCell>
         <NumberFormat
           value={formatCurrencyValue(availableToInvest, currency)}
           suffix={` ${currency}`}
           displayType="text"
         />
       </TableCell>
-      <TableCell
-        className={clsx(
-          styles["programs-table__cell"],
-          styles["programs-table__cell--period"]
-        )}
-      >
-        {periodStarts && (
-          <ProgramPeriodPie
-            condition={status !== STATUS.CLOSED}
-            loader={t("program-period.program-closed")}
-            start={periodStarts}
-            end={periodEnds}
-          />
+      <TableCell>
+        {type === "FixedPeriod" ? (
+          <>
+            {periodStarts && (
+              <ProgramPeriodPie
+                condition={status !== STATUS.CLOSED}
+                loader={t("program-period.program-closed")}
+                start={periodStarts}
+                end={periodEnds}
+              />
+            )}
+          </>
+        ) : (
+          <DailyPeriod>—</DailyPeriod>
         )}
       </TableCell>
-      <TableCell
-        className={clsx(
-          styles["programs-table__cell"],
-          styles["programs-table__cell--trades"]
-        )}
-      >
-        {distanceDate(program.creationDate)}
-      </TableCell>
-      <TableCell
-        className={clsx(
-          styles["programs-table__cell"],
-          styles["programs-table__cell--drawdown"]
-        )}
-      >
+      <TableCell>{distanceDate(program.creationDate)}</TableCell>
+      <TableCell>
         <NumberFormat
           value={formatValue(statistic.drawdown, 2)}
           suffix="%"
           displayType="text"
         />
       </TableCell>
-      <TableCell
-        className={clsx(
-          styles["programs-table__cell"],
-          styles["programs-table__cell--profit"]
-        )}
-      >
+      <TableCell>
         <Profitability
           value={formatValue(statistic.profit, 2)} /*statistic.profitPercent*/
           prefix={PROFITABILITY_PREFIX.SIGN}
@@ -156,32 +164,19 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
           />
         </Profitability>
       </TableCell>
-      <TableCell
-        height={"small"}
-        className={clsx(
-          styles["programs-table__cell"],
-          styles["programs-table__cell--chart"]
-        )}
-      >
+      <ChartCell height={"small"}>
         <ProgramSimpleChart data={statistic?.chart} />
-      </TableCell>
+      </ChartCell>
       {isAuthenticated && personalDetails && (
-        <TableCell
-          className={clsx(
-            styles["programs-table__cell"],
-            styles["programs-table__cell--favorite"]
-          )}
-        >
-          <IconFavoriteButton asset={program} assetType={ASSET.PROGRAM} />
+        <TableCell>
+          <FavoriteIcon>
+            <IconFavoriteButton asset={program} assetType={ASSET.PROGRAM} />
+          </FavoriteIcon>
         </TableCell>
       )}
     </TableRow>
   );
 };
-
-interface IProgramTableRowShortProps {
-  program: ProgramDetailsListItem;
-}
 
 const ProgramTableRowShort = React.memo(_ProgramTableRowShort);
 export default ProgramTableRowShort;

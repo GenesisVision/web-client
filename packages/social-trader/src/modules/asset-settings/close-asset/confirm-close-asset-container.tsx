@@ -12,11 +12,44 @@ import { postponeCallback } from "utils/hook-form.helpers";
 import {
   closeFund,
   closeProgram,
-  closeTradingAccount
+  closeTradingAccount,
+  closeTradingExchangeAccount
 } from "../services/asset-settings.service";
 import { ICloseAssetFormValues } from "./close-asset-form";
 
 const CloseAssetForm = dynamic(() => import("./close-asset-form"));
+
+interface Props {
+  assetName?: string;
+  asset: CloseableAssetType;
+  open: boolean;
+  onClose: () => void;
+  onApply: () => void;
+  id: string;
+}
+
+const getMethod = (asset: CloseableAssetType) => {
+  switch (asset) {
+    case "ExchangeAccount":
+      return closeTradingExchangeAccount;
+    case "Follow":
+    case "TradingAccount":
+    case "Trading-account":
+    case "SignalTradingAccount":
+    case "ExternalTradingAccount":
+    case "ExternalSignalTradingAccount":
+    case CLOSEABLE_ASSET.TRADING_ACCOUNT:
+      return closeTradingAccount;
+    case CLOSEABLE_ASSET.FUND:
+      return closeFund;
+    case CLOSEABLE_ASSET.EXCHANGE_PROGRAM:
+    case CLOSEABLE_ASSET.PROGRAM:
+    case "SignalProgram":
+    case "Program":
+    default:
+      return closeProgram;
+  }
+};
 
 const _ConfirmCloseAssetContainer: React.FC<Props> = ({
   assetName,
@@ -51,35 +84,6 @@ const _ConfirmCloseAssetContainer: React.FC<Props> = ({
     </Dialog>
   );
 };
-
-const getMethod = (asset: CloseableAssetType) => {
-  switch (asset) {
-    case "Follow":
-    case "TradingAccount":
-    case "Trading-account":
-    case "SignalTradingAccount":
-    case "ExternalTradingAccount":
-    case "ExternalSignalTradingAccount":
-    case CLOSEABLE_ASSET.TRADING_ACCOUNT:
-      return closeTradingAccount;
-    case CLOSEABLE_ASSET.FUND:
-      return closeFund;
-    case CLOSEABLE_ASSET.PROGRAM:
-    case "SignalProgram":
-    case "Program":
-    default:
-      return closeProgram;
-  }
-};
-
-interface Props {
-  assetName?: string;
-  asset: CloseableAssetType;
-  open: boolean;
-  onClose: () => void;
-  onApply: () => void;
-  id: string;
-}
 
 const ConfirmCloseAssetContainer = React.memo(_ConfirmCloseAssetContainer);
 export default ConfirmCloseAssetContainer;

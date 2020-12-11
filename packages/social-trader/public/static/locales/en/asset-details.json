@@ -113,10 +113,12 @@
   },
   "investment": {
     "tabs": {
+      "reports": "Reports",
       "subscription": "Subscription details",
       "investment": {
         "follow": "Current period investment",
         "program": "Current period investment",
+        "exchange-program": "Current investment",
         "fund": "Current investment"
       },
       "events": "My history"

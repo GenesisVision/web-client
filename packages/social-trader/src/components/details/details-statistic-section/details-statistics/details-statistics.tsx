@@ -1,10 +1,9 @@
 import { ChartDefaultPeriod } from "components/chart/chart-period/chart-period.helpers";
-import DetailsBlock from "components/details/details-block";
-import styles from "components/details/details-description-section/details-statistic-section/details-statistic/details-statistics.module.scss";
 import {
   IStatisticData,
   TRenderDetailsStatisticsElements
 } from "components/details/details-statistic-section/details-statistics/details-statistics.container";
+import { StyledDetailsStatisticsBlock } from "components/details/details-statistic-section/details-statistics/details-statistics.style";
 import { Row } from "components/row/row";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
@@ -22,7 +21,7 @@ const _DetailsStatistics: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   return (
-    <DetailsBlock horizontalPaddings className={styles["details-statistics"]}>
+    <StyledDetailsStatisticsBlock size={"large"} solid>
       <Row>
         <h3>{t("asset-details:statistics.heading")}</h3>
       </Row>
@@ -32,7 +31,7 @@ const _DetailsStatistics: React.FC<Props> = ({
           statisticData
         })}
       </Row>
-    </DetailsBlock>
+    </StyledDetailsStatisticsBlock>
   );
 };
 

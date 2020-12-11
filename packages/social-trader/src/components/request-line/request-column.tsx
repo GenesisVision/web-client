@@ -1,4 +1,5 @@
 import { CancelRequestButton } from "components/request-line/cancel-request-button";
+import { RequestColumnContainer } from "components/request-line/request-line-container";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
@@ -8,8 +9,6 @@ import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { localizedDate } from "utils/dates";
 import { formatCurrencyValue } from "utils/formatter";
-
-import styles from "./request-line.module.scss";
 
 const RequestColumnItem: React.FC<{ label: string | JSX.Element }> = ({
   children,
@@ -42,7 +41,7 @@ const _RequestColumn: React.FC<Props> = ({
   } = assetDetails;
   const [t] = useTranslation();
   return (
-    <div className={styles["request-line"]}>
+    <RequestColumnContainer>
       <RequestColumnItem label={type}>{localizedDate(date)}</RequestColumnItem>
       <RequestColumnItem label={t("Value")}>
         {assetDetails.isWithdrawAll ? (
@@ -114,7 +113,7 @@ const _RequestColumn: React.FC<Props> = ({
           />
         </Row>
       )}
-    </div>
+    </RequestColumnContainer>
   );
 };
 

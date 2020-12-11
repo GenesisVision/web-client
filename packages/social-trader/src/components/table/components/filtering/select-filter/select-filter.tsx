@@ -1,19 +1,27 @@
 import React, { useCallback } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 import Filter from "../filter";
 import { SelectFilterValue, TFilter } from "../filter.type";
 import SelectFilterPopover from "./select-filter-popover";
 import { SelectFilterType } from "./select-filter.constants";
 
-const _SelectFilter: React.FC<Props & WithTranslation> = ({
-  t,
+interface Props {
+  name: string;
+  label: string;
+  value: SelectFilterType;
+  values: SelectFilterValue[];
+  onChange: (value: TFilter<SelectFilterType>) => void;
+}
+
+const _SelectFilter: React.FC<Props> = ({
   label,
   name,
   value,
   onChange,
   values
 }) => {
+  const [t] = useTranslation();
   const renderValueText = useCallback(
     (value: SelectFilterType) => {
       const selectedValue = values.find(x => x.value === value);
@@ -38,13 +46,5 @@ const _SelectFilter: React.FC<Props & WithTranslation> = ({
   );
 };
 
-interface Props {
-  name: string;
-  label: string;
-  value: SelectFilterType;
-  values: SelectFilterValue[];
-  onChange: (value: TFilter<SelectFilterType>) => void;
-}
-
-const SelectFilter = translate()(React.memo(_SelectFilter));
+const SelectFilter = React.memo(_SelectFilter);
 export default SelectFilter;

@@ -2,15 +2,15 @@ import AssetAvatarWithName from "components/avatar/asset-avatar/asset-avatar-wit
 import LevelTooltip from "components/level-tooltip/level-tooltip";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
+import { ManagerHistoryRow } from "components/manager/manager-history/manager-history-row";
 import {
-  ManagerHistoryItem,
-  ManagerHistoryRow
-} from "components/manager/manager-history/manager-history-row";
+  ManagerHistoryChartContainer,
+  ManagerHistoryItem
+} from "components/manager/manager-history/manager-history-styles";
 import Profitability from "components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "components/profitability/profitability.helper";
 import ProgramPeriodPie from "components/program-period/program-period-pie/program-period-pie";
 import ProgramSimpleChart from "components/program-simple-chart/program-simple-chart";
-import { RowItem } from "components/row-item/row-item";
 import TagProgramContainer from "components/tags/tag-program-container/tag-program-container";
 import { ASSET, STATUS } from "constants/constants";
 import { ProgramDetailsListItem } from "gv-api-web";
@@ -21,8 +21,6 @@ import { PROGRAM_DETAILS_FOLDER_ROUTE } from "routes/programs.routes";
 import { composeProgramDetailsUrl } from "utils/compose-url";
 import { distanceDate } from "utils/dates";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
-
-import styles from "./manager-history-row.module.scss";
 
 interface IManagerHistoryRowProps {
   asset: ProgramDetailsListItem;
@@ -42,7 +40,7 @@ const _ManagerProgramHistoryRow: React.FC<IManagerHistoryRowProps> = ({
       asset={asset}
       assetType={ASSET.PROGRAM}
       avatarBlock={
-        <Link to={programLinkProps}>
+        <Link noColor to={programLinkProps}>
           <AssetAvatarWithName
             url={asset.logoUrl}
             level={asset.level}
@@ -113,12 +111,9 @@ const _ManagerProgramHistoryRow: React.FC<IManagerHistoryRowProps> = ({
               />
             </Profitability>
           </ManagerHistoryItem>
-          <RowItem
-            bottomOffset
-            className={styles["manager-history-row__chart"]}
-          >
+          <ManagerHistoryChartContainer bottomOffset>
             <ProgramSimpleChart data={asset.statistic?.chart} />
-          </RowItem>
+          </ManagerHistoryChartContainer>
         </>
       }
     />

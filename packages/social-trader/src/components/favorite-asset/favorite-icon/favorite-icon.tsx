@@ -1,13 +1,26 @@
 import { Icon } from "components/icon/icon";
 import * as React from "react";
+import styled from "styled-components";
+import { $labelColor, $textAccentColor } from "utils/style/colors";
+
+const StyledIcon = styled(Icon)`
+  cursor: pointer;
+  svg [stroke] {
+    stroke: ${$labelColor};
+  }
+  svg [fill] {
+    fill: none;
+  }
+  &:hover {
+    svg [stroke] {
+      stroke: ${$textAccentColor};
+    }
+  }
+`;
 
 const FavoriteIcon: React.FC<Props> = React.memo(({ selected, className }) => {
   return (
-    <Icon
-      type={"favorite"} // TODO change to enum
-      selected={selected}
-      className={className}
-    >
+    <StyledIcon selected={selected} className={className}>
       <svg
         width="28px"
         height="27px"
@@ -22,7 +35,7 @@ const FavoriteIcon: React.FC<Props> = React.memo(({ selected, className }) => {
           fill="none"
         />
       </svg>
-    </Icon>
+    </StyledIcon>
   );
 });
 

@@ -13,13 +13,5 @@
     border-radius: 0.25rem;
     width: 100%;
     position: relative;
-
-    .gv-program-period__value {
-      position: absolute;
-      top: -1px;
-      height: 4px;
-      background-color: $primary-color;
-      border-radius: 0.25rem;
-    }
   }
 }

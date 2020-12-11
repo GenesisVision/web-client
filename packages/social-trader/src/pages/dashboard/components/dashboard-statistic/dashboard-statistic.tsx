@@ -1,3 +1,4 @@
+import { detailsBlockHorizontalPaddings } from "components/details/details.constants";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import { withBlurLoader } from "decorators/with-blur-loader";
@@ -6,13 +7,42 @@ import DashboardStatisticTable from "pages/dashboard/components/dashboard-statis
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { EVENTS_ROUTE } from "routes/dashboard.routes";
+import styled from "styled-components";
+import { $fontSizeCommon, $paddingXsmall } from "utils/style/sizes";
 import { CurrencyEnum } from "utils/types";
 
 import {
   TDashboardInvestingStatistic,
   TDashboardTradingStatistic
 } from "../../dashboard.types";
-import styles from "./dashboard-statistic.module.scss";
+
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
+  EmptyBlock: React.ComponentType;
+  currency: CurrencyEnum;
+  data: TDashboardTradingStatistic & TDashboardInvestingStatistic;
+  renderValues: (
+    statistic: TDashboardTradingStatistic & TDashboardInvestingStatistic
+  ) => JSX.Element;
+}
+
+const Container = styled.div`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+const Values = styled.div`
+  ${detailsBlockHorizontalPaddings}
+`;
+
+const SeeAll = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: ${$paddingXsmall}px;
+  font-size: ${$fontSizeCommon}px;
+`;
 
 const _DashboardStatistic: React.FC<Props> = ({
   EmptyBlock,
@@ -31,35 +61,26 @@ const _DashboardStatistic: React.FC<Props> = ({
   const hasNotAssets = hasNotInvesting && hasNotTrading;
   if (hasNotAssets) return <EmptyBlock />;
   return (
-    <>
+    <Container>
       <div>
-        <div className={styles["dashboard-statistic__values"]}>
+        <Values>
           {renderValues(data)}
           <DashboardStatisticPeriods
             withProfitability
             currency={currency}
             data={profits}
           />
-        </div>
+        </Values>
         <DashboardStatisticTable data={events.items} />
       </div>
-      <div className={styles["dashboard-statistic__see-all"]}>
+      <SeeAll>
         <Link to={linkCreator(EVENTS_ROUTE)}>
           {t("dashboard-page:statistic.see-all")}
         </Link>
-      </div>
-    </>
+      </SeeAll>
+    </Container>
   );
 };
-
-interface Props extends React.HTMLAttributes<HTMLDivElement> {
-  EmptyBlock: React.ComponentType;
-  currency: CurrencyEnum;
-  data: TDashboardTradingStatistic & TDashboardInvestingStatistic;
-  renderValues: (
-    statistic: TDashboardTradingStatistic & TDashboardInvestingStatistic
-  ) => JSX.Element;
-}
 
 const DashboardStatistic = withBlurLoader(React.memo(_DashboardStatistic));
 export default DashboardStatistic;

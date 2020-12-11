@@ -2,5 +2,6 @@
   "convert-signal-to-program": "Make program from signal account",
   "convert-account-to-program": "Make program from account",
   "convert-account-to-signal": "Make signal account from account",
+  "convert-exchangeaccount-to-program": "Make Exchange program from account",
   "convert-externalaccount-to-signal": "Make signal account from external account"
 }

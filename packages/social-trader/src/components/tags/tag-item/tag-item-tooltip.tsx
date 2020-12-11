@@ -1,22 +1,25 @@
-import clsx from "clsx";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { TooltipContent } from "components/tooltip/tooltip-content";
 import { Tag } from "gv-api-web";
 import * as React from "react";
+import styled from "styled-components";
+import { $paddingXxsmall } from "utils/style/sizes";
 
 import TagItem from "./tag-item";
-import styles from "./tag-item.module.scss";
 
 interface Props {
   tags: Tag[];
-  className?: string;
 }
 
-const _TagItemTooltip: React.FC<Props> = ({ tags, className }) => {
+const Container = styled(Row)`
+  padding: ${$paddingXxsmall / 2}px 0;
+`;
+
+const _TagItemTooltip: React.FC<Props> = ({ tags }) => {
   return (
     <TooltipContent>
-      <Row wrap className={clsx(styles["tag-item-tooltip"], className)}>
+      <Container wrap>
         {tags
           .filter((tag, idx) => idx > 0)
           .map((tag, idx) => (
@@ -24,7 +27,7 @@ const _TagItemTooltip: React.FC<Props> = ({ tags, className }) => {
               <TagItem name={tag.name} color={tag.color} key={idx} />
             </RowItem>
           ))}
-      </Row>
+      </Container>
     </TooltipContent>
   );
 };

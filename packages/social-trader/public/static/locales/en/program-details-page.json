@@ -1,4 +1,12 @@
 {
+  "reports": {
+    "dateFrom": "Date start",
+    "periodLength": "Period length",
+    "balance": "Balance",
+    "profit": "Profit",
+    "fees": "Commissions",
+    "deposit-withdraw": "Deposit/Withdraw"
+  },
   "copytrading-tables": {
     "title": "Trades",
     "open-trades": "Open trades",
@@ -66,7 +74,8 @@
   },
   "title": "Program detail",
   "tooltip": {
-    "management-fee": "The сommission that is paid to the manager by an investor for the actual asset management period. Management fee is defined in annual percentage and is charged at the end of each reporting period.",
+    "management-fee-exchange": "The commission that is paid to the manager by an investor for the actual asset management period. Management fee is defined in annual percentage.",
+    "management-fee": "The commission that is paid to the manager by an investor for the actual asset management period. Management fee is defined in annual percentage and is charged at the end of each reporting period.",
     "auto-join": {
       "text": "In the event a program hits the Stop-Out limit:",
       "li-1": "“Ignore SO” is turned off → your investment (minus losses) is returned to your wallet.",
@@ -102,6 +111,7 @@
   "history": {
     "heading": "History",
     "tabs": {
+      "analytics": "Analytics",
       "trading-log": "Trading log",
       "trades": "Trades",
       "events": "My history",
@@ -181,6 +191,15 @@
       }
     },
     "financial-statistic": {
+      "interval-filter": {
+        "name": "Interval",
+        "values": {
+          "day": "Day",
+          "week": "Week",
+          "month": "Month"
+        }
+      },
+      "period-length": "Period length",
       "period": "Period",
       "date-start": "Date start",
       "balance": "Balance",
@@ -201,6 +220,62 @@
         "commission-rebate": "Amount of the compensated commission (Trading Fee) paid from the GVT wallet"
       }
     },
+    "financial-statistic-exchange": {
+      "interval-filter": {
+        "name": "Interval",
+        "values": {
+          "day": "Day",
+          "week": "Week",
+          "month": "Month"
+        }
+      },
+      "period-length": "Period length",
+      "period": "Period",
+      "date-start": "Date start",
+      "balance": "Balance",
+      "profit": "Profit",
+      "success-fee": "Success fee",
+      "management-fee": "Management fee",
+      "entry-fee": "Entry fee",
+      "deposit-withdraw": "Deposit/Withdraw",
+      "commission-rebate": "GV commission rebate",
+      "tooltips": {
+        "period-length": "Duration of the selected program period",
+        "period": "Program period number",
+        "date-start": "Program period start date",
+        "balance": "Manager balance at the end of the period.",
+        "profit": "Program profit for the period (including commissions)",
+        "success-fee": "Total amount of success fees that the manager received in this period",
+        "management-fee": "Total amount of management fees that the manager received in this period",
+        "deposit-withdraw": "Total amount of funds invested or withdrawn by the manager in this period",
+        "commission-rebate": "Amount of the compensated commission (Trading Fee) paid from the GVT wallet"
+      }
+    },
+    "analytics": {
+      "investors-deposit": "Investors Invest",
+      "investors-withdraw": "Investors Withdrawal",
+      "manager-deposit": "Manager Investment",
+      "manager-withdraw": "Manager Withdrawal",
+      "investors-profit-withdraw": "Investors Withdrawal Profit",
+      "platform-success-fee": "Platform Success Fee",
+      "manager-commission-rebate": "GV commission rebate",
+      "period": "Period",
+      "date-start": "Date start",
+      "period-length": "Period length",
+      "balance": "Program balance",
+      "profit": "Profit",
+      "investors-max": "Investors (max)",
+      "investors": "Investors",
+      "tooltips": {
+        "period": "Program period number",
+        "date-start": "Program period start date",
+        "period-length": "Duration of the selected program period",
+        "balance": "Program balance at the end of the period",
+        "profit": "Program profit for the period (including commissions)",
+        "investors-max": "The maximum number of investors in the program for the selected period.",
+        "investors": "Number of investors in the program"
+      }
+    },
     "period-history": {
       "investors-deposit": "Investors Invest",
       "investors-withdraw": "Investors Withdrawal",
@@ -214,6 +289,7 @@
       "period-length": "Period length",
       "balance": "Program balance",
       "profit": "Profit",
+      "investors-max": "Investors (max)",
       "investors": "Investors",
       "tooltips": {
         "period": "Program period number",

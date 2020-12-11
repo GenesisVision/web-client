@@ -1,3 +1,4 @@
+import { Button } from "components/button/button";
 import { Center } from "components/center/center";
 import { CommentInputContainer } from "components/conversation/comment/comment-input/comment-input-container";
 import { restorePost } from "components/conversation/conversation.service";
@@ -8,7 +9,6 @@ import { MessageActions } from "components/conversation/message/message-actions/
 import { CommentsList } from "components/conversation/post/comments-list/comments-list";
 import { PostButtons } from "components/conversation/post/post-buttons/post-buttons";
 import { DefaultBlock } from "components/default.block/default.block";
-import GVButton from "components/gv-button";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
@@ -16,8 +16,14 @@ import useApiRequest from "hooks/api-request.hook";
 import useIsOpen from "hooks/is-open.hook";
 import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
+import styled from "styled-components";
 
-import styles from "./post.module.scss";
+interface Props {
+  visibleCommentsCount?: number;
+  reduceLargeText?: boolean;
+  updateData: VoidFunction;
+  post: ConversationPost;
+}
 
 const DeletedPost: React.FC<{
   id: string;
@@ -36,18 +42,18 @@ const DeletedPost: React.FC<{
           {t("Post is deleted")}
         </Text>
         &nbsp;
-        <GVButton
-          size={"xlarge"}
-          variant={"text"}
-          noPadding
-          onClick={handleUndo}
-        >
+        <Button size={"xlarge"} variant={"text"} noPadding onClick={handleUndo}>
           {t("Undo")}
-        </GVButton>
+        </Button>
       </Center>
     </DefaultBlock>
   );
 };
+
+const PinIconContainer = styled(RowItem)`
+  width: 15px;
+  height: 15px;
+`;
 
 const _Post: React.FC<Props> = ({
   visibleCommentsCount,
@@ -81,9 +87,9 @@ const _Post: React.FC<Props> = ({
             settingsBlock={
               <Row>
                 {isPinnedInner && (
-                  <RowItem className={styles["post__pin-icon"]}>
+                  <PinIconContainer>
                     <PinIcon />
-                  </RowItem>
+                  </PinIconContainer>
                 )}
                 <RowItem>
                   <MessageActions
@@ -135,12 +141,5 @@ const _Post: React.FC<Props> = ({
     </DefaultBlock>
   );
 };
-
-interface Props {
-  visibleCommentsCount?: number;
-  reduceLargeText?: boolean;
-  updateData: VoidFunction;
-  post: ConversationPost;
-}
 
 export const Post = React.memo(_Post);

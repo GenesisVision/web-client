@@ -8,6 +8,8 @@ import { LandingUpperButton } from "pages/landing-page/components/landing-upper-
 import LPFooter from "pages/landing-page/components/lp-footer/lp-footer";
 import LPHeader from "pages/landing-page/components/lp-header/lp-header";
 import React from "react";
+import styled, { createGlobalStyle } from "styled-components";
+import { LandingPageRootStyle } from "styles/root-styles";
 import {
   commonMeta,
   descriptionMeta,
@@ -16,6 +18,22 @@ import {
   schema,
   titleMeta
 } from "utils/seo";
+import { $landingBg, $mainColor } from "utils/style/colors";
+
+const GlobalStyle = createGlobalStyle`
+  ${LandingPageRootStyle}
+`;
+
+const Container = styled.div`
+  background-color: ${$landingBg};
+  color: ${$mainColor};
+
+  *,
+  *:before,
+  *:after {
+    box-sizing: border-box;
+  }
+`;
 
 const _Layout: React.FC<Props> = ({
   cookieAccept,
@@ -26,7 +44,7 @@ const _Layout: React.FC<Props> = ({
   const { t } = useTranslation();
   useRefLink();
   return (
-    <div className="landing-page">
+    <Container className="landing-page">
       <Head>
         <title>{title}</title>
         {schema([ORGANIZATION_SCHEMA])}
@@ -37,6 +55,7 @@ const _Layout: React.FC<Props> = ({
         {titleMeta(t("landing-page:genesis-vision"))}
         {descriptionMeta(description || t("landing-page:short-description"))}
       </Head>
+      <GlobalStyle />
       <TitleContext.Provider value={title}>
         <LPHeader />
         {children}
@@ -45,7 +64,7 @@ const _Layout: React.FC<Props> = ({
       <CookieMessage cookieAccept={cookieAccept} />
       <div id="modal-root" />
       <UpperButtonContainer Button={LandingUpperButton} />
-    </div>
+    </Container>
   );
 };
 

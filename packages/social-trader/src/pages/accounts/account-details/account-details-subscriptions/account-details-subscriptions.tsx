@@ -1,4 +1,4 @@
-import DetailsBlock from "components/details/details-block";
+import { DefaultTableBlock } from "components/default.block/default-table.block";
 import DetailsBlockTitleBox from "components/details/details-block-title-box";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -13,12 +13,12 @@ const _AccountDetailsSubscriptions: React.FC<Props> = ({
   const [t] = useTranslation();
   return (
     <div>
-      <DetailsBlock table wide>
+      <DefaultTableBlock wide>
         <DetailsBlockTitleBox>
           <h3>{t("account-details-page:subscriptions.title")}</h3>
         </DetailsBlockTitleBox>
         <SubscriptionsContainer id={id} assetCurrency={assetCurrency} />
-      </DetailsBlock>
+      </DefaultTableBlock>
     </div>
   );
 };

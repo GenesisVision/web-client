@@ -1,0 +1,9 @@
+{
+  "title": "Genesis Vision Guides",
+  "controls": {
+    "back": "Back",
+    "next": "Next"
+  },
+  "step": "step",
+  "steps": "steps"
+}

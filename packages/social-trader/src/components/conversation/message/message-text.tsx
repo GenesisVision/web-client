@@ -1,18 +1,19 @@
-import clsx from "clsx";
+import { Button } from "components/button/button";
 import {
   reduceByBreaks,
   reduceBySymbolsCount
 } from "components/conversation/message/message.helpers";
-import styles from "components/conversation/message/message.module.scss";
 import {
   inTextComponentsMap,
   parseToTsx
 } from "components/conversation/tag/parse-to-tsx";
-import GVButton from "components/gv-button";
 import { Row } from "components/row/row";
 import { PostTag } from "gv-api-web";
 import React, { useEffect, useState } from "react";
+import styled from "styled-components";
 import { getLongWordsCount } from "utils/helpers";
+import { fontSize } from "utils/style/mixins";
+import { $fontSizeParagraph } from "utils/style/sizes";
 
 interface Props {
   reduceLargeText?: boolean;
@@ -31,6 +32,16 @@ const getTextToRender = ({
   return reduceLargeText ? reduceByBreaks(reduceBySymbolsCount(text)) : text;
 };
 
+const Container = styled.div<{ hasLongWords?: boolean }>`
+  ${fontSize($fontSizeParagraph)};
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.75);
+  width: 100%;
+  white-space: pre-wrap;
+  ${({ hasLongWords }) =>
+    hasLongWords && "overflow-wrap: anywhere; word-break: break-word;"};
+`;
+
 const _MessageText: React.FC<Props> = ({ tags, reduceLargeText, text }) => {
   const [textToRender, setTextToRender] = useState<string | undefined>(
     getTextToRender({
@@ -46,13 +57,9 @@ const _MessageText: React.FC<Props> = ({ tags, reduceLargeText, text }) => {
     if (isTextExpanded) setTextToRender(text);
   }, [isTextExpanded]);
 
-  const hasLongWords = textToRender && !!getLongWordsCount(textToRender);
+  const hasLongWords = !!textToRender && !!getLongWordsCount(textToRender);
   return (
-    <div
-      className={clsx(styles["message__text"], {
-        [styles["message__text--break-word"]]: hasLongWords
-      })}
-    >
+    <Container hasLongWords={hasLongWords}>
       {textToRender && (
         <Row>
           <div>
@@ -62,18 +69,18 @@ const _MessageText: React.FC<Props> = ({ tags, reduceLargeText, text }) => {
               map: inTextComponentsMap
             })}
             {isTextExpanded === false && (
-              <GVButton
+              <Button
                 noPadding
                 variant={"text"}
                 onClick={() => setTextExpandState(true)}
               >
                 <b>Expand</b>
-              </GVButton>
+              </Button>
             )}
           </div>
         </Row>
       )}
-    </div>
+    </Container>
   );
 };
 

@@ -1,21 +1,23 @@
 import ProfileLayout from "components/profile/profile-layout";
 import { SETTINGS } from "components/profile/profile.constants";
-import SocialBetaSelect from "components/profile/settings/social-beta-select/social-beta-select";
 import SettingsBlock from "components/settings-block/settings-block";
 import CurrencySelectContainer from "modules/currency-select/components/currency-select-container";
 import * as React from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
-const _SettingsPage: React.FC<WithTranslation> = ({ t }) => (
-  <ProfileLayout route={SETTINGS}>
-    <SettingsBlock label={t("profile-page:settings.platform-currency")}>
-      <CurrencySelectContainer />
-    </SettingsBlock>
-    {/*<SettingsBlock>
+const _SettingsPage: React.FC = () => {
+  const [t] = useTranslation();
+  return (
+    <ProfileLayout route={SETTINGS}>
+      <SettingsBlock label={t("profile-page:settings.platform-currency")}>
+        <CurrencySelectContainer />
+      </SettingsBlock>
+      {/*<SettingsBlock>
       <SocialBetaSelect />
     </SettingsBlock>*/}
-  </ProfileLayout>
-);
+    </ProfileLayout>
+  );
+};
 
-const SettingsPage = translate()(React.memo(_SettingsPage));
+const SettingsPage = React.memo(_SettingsPage);
 export default SettingsPage;

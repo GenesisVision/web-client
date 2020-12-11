@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { WithTranslation, withTranslation as translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 import { UpdateFilterFunc } from "../../table.types";
 import Filter from "../filter";
@@ -17,14 +17,14 @@ interface IDateRangeFilterProps {
   startLabel: string;
 }
 
-const _DateRangeFilter: React.FC<IDateRangeFilterProps & WithTranslation> = ({
-  t,
+const _DateRangeFilter: React.FC<IDateRangeFilterProps> = ({
   name,
   value,
   onChange,
   label,
   startLabel
 }) => {
+  const [t] = useTranslation();
   const renderValueText = useCallback(
     (value: IDataRangeFilterValue): string => {
       switch (value.type) {
@@ -54,5 +54,5 @@ const _DateRangeFilter: React.FC<IDateRangeFilterProps & WithTranslation> = ({
   );
 };
 
-const DateRangeFilter = translate()(React.memo(_DateRangeFilter));
+const DateRangeFilter = React.memo(_DateRangeFilter);
 export default DateRangeFilter;

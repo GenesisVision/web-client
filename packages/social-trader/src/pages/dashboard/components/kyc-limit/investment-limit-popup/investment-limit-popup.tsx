@@ -1,6 +1,6 @@
+import { Button } from "components/button/button";
 import Dialog from "components/dialog/dialog";
 import { DialogBottom } from "components/dialog/dialog-bottom";
-import GVButton from "components/gv-button";
 import { Li } from "components/li/li";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
@@ -11,20 +11,25 @@ import { Text } from "components/text/text";
 import { Ul } from "components/ul/ul";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-
-import styles from "./investment-limit-popup.module.scss";
+import styled from "styled-components";
 
 interface Props {
   open: boolean;
   onClose: () => void;
 }
 
+const StyledDialogBottom = styled(DialogBottom)`
+  width: auto;
+  min-width: 550px;
+  max-width: 800px;
+`;
+
 const _InvestmentLimitPopup: React.FC<Props> = ({ open, onClose }) => {
   const { linkCreator } = useToLink();
   const [t] = useTranslation();
   return (
     <Dialog open={open} onClose={onClose}>
-      <DialogBottom className={styles["investment-limit-popup"]}>
+      <StyledDialogBottom>
         <Row />
         <Row>
           <RowItem wide>
@@ -32,9 +37,9 @@ const _InvestmentLimitPopup: React.FC<Props> = ({ open, onClose }) => {
           </RowItem>
           <RowItem>
             <Link to={linkCreator(KYC_ROUTE, KYC_ROUTE)}>
-              <GVButton color="primary">
+              <Button color="primary">
                 {t("dashboard-page:kyc-limit.text-2")}
-              </GVButton>
+              </Button>
             </Link>
           </RowItem>
         </Row>
@@ -79,7 +84,7 @@ const _InvestmentLimitPopup: React.FC<Props> = ({ open, onClose }) => {
         <Row size={"xlarge"}>
           <Text muted>{t("dashboard-page:kyc-limit.text-13")}</Text>
         </Row>
-      </DialogBottom>
+      </StyledDialogBottom>
     </Dialog>
   );
 };

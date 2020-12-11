@@ -1,29 +1,24 @@
-import { Center } from "components/center/center";
-import { ConversationInput } from "components/conversation/conversation-input/conversation-input";
 import {
   ConversationInputShape,
   getPostMessageDefaultOptions
 } from "components/conversation/conversation-input/conversation-input.helpers";
 import { OnMessageSendFunc } from "components/conversation/conversation.types";
-import { AttachImagePostButton } from "components/conversation/post/post-input/attach-image-post-button";
-import { PostInputImagePreview } from "components/conversation/post/post-input/post-input-image-preview";
-import { SearchPanel } from "components/conversation/search-panel/search-panel";
+import { PostInputView } from "components/conversation/post/post-input/post-input.view";
 import { useSearchPanel } from "components/conversation/search-panel/search-panel.hook";
-import ErrorMessage from "components/error-message/error-message";
 import { IImageValue } from "components/form/input-image/input-image";
 import { HookFormInputImages } from "components/form/input-image/input-images";
-import { RowItem } from "components/row-item/row-item";
-import { SubmitButton } from "components/submit-button/submit-button";
 import { NewPostImage } from "gv-api-web";
 import { API_REQUEST_STATUS } from "hooks/api-request.hook";
 import useIsOpen from "hooks/is-open.hook";
 import React, { useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import styled from "styled-components";
 import { HookForm, postponeFunc } from "utils/hook-form.helpers";
+import { $panelBackgroundColor } from "utils/style/colors";
+import { adaptiveBorderRadius } from "utils/style/mixins";
+import { $borderRadiusMiddle } from "utils/style/sizes";
 import { object } from "yup";
-
-import styles from "./post-input.module.scss";
 
 const MAX_IMAGES = 10;
 
@@ -48,6 +43,13 @@ interface Props {
   status?: API_REQUEST_STATUS;
   onSubmit: OnMessageSendFunc;
 }
+
+const Container = styled.div`
+  width: 100%;
+  position: relative;
+  ${adaptiveBorderRadius($borderRadiusMiddle)};
+  background-color: ${$panelBackgroundColor};
+`;
 
 const _PostInput: React.FC<Props> = ({
   submitLabel = "Send",
@@ -80,7 +82,7 @@ const _PostInput: React.FC<Props> = ({
     formState: { isSubmitted }
   } = form;
   const { text, images } = watch();
-  const isSuccessful = status === API_REQUEST_STATUS.SUCCESS;
+  const isSuccessful = status === "SUCCESS";
 
   const {
     isSearchPending,
@@ -120,89 +122,45 @@ const _PostInput: React.FC<Props> = ({
     isOpenSearchPanel;
   const errorText = errorMessage || errors[FORM_FIELDS.text]?.message;
   return (
-    <HookForm
-      form={form}
-      onSubmit={onSubmit}
-      className={styles["post-input__form"]}
-    >
-      <HookFormInputImages
-        maxImages={MAX_IMAGES}
-        disabled={disabledImages}
-        className={styles["post-input__container"]}
-        name={FORM_FIELDS.images}
-        content={({ open, onPaste }) => {
-          const handleOnPaste = (event?: any) => {
-            onPaste([...event.clipboardData?.files]);
-          };
-          return (
-            <>
-              <Center className={styles["post-input__input-container"]}>
-                <ConversationInput
-                  onPaste={handleOnPaste}
-                  disabled={isSubmitted}
-                  outerCaret={fixedCaretPosition}
-                  onChangeCaret={onChangeCaret}
-                  setFocused={setFocused}
-                  submitForm={inputSubmit()}
-                  name={FORM_FIELDS.text}
-                  placeholder={placeholder}
-                />
-                {!text.length && !disabledImages && (
-                  <AttachImagePostButton onClick={open} />
-                )}
-              </Center>
-              {isOpenEditPanel && (
-                <div>
-                  {isOpenSearchPanel && (
-                    <div className={styles["post-input__search-panel"]}>
-                      <SearchPanel
-                        isSearchPending={isSearchPending}
-                        onClick={handleSearchItemSelect}
-                        searchResult={searchResult}
-                      />
-                    </div>
-                  )}
-                  <Center
-                    className={styles["post-input__edit-panel-container"]}
-                  >
-                    <RowItem wide>
-                      <Center wrap>
-                        {images &&
-                          images.map(image => (
-                            <RowItem key={image.id} bottomOffset>
-                              <PostInputImagePreview
-                                onRemove={handleRemoveImage}
-                                image={image}
-                              />
-                            </RowItem>
-                          ))}
-                      </Center>
-                    </RowItem>
-                    <RowItem className={styles["post-input__errors"]}>
-                      {errorText && <ErrorMessage error={errorText} />}
-                    </RowItem>
-                    {!!text.length && (
-                      <RowItem>
-                        <AttachImagePostButton size={"small"} onClick={open} />
-                      </RowItem>
-                    )}
-                    <RowItem className={styles["post-input__send-buttons"]}>
-                      <SubmitButton
-                        isSuccessful={isSuccessful}
-                        checkDirty={false}
-                        checkValid={false}
-                        disabled={disabled}
-                      >
-                        {submitLabel}
-                      </SubmitButton>
-                    </RowItem>
-                  </Center>
-                </div>
-              )}
-            </>
-          );
-        }}
-      />
+    <HookForm form={form} onSubmit={onSubmit}>
+      <Container>
+        <HookFormInputImages
+          maxImages={MAX_IMAGES}
+          disabled={disabledImages}
+          name={FORM_FIELDS.images}
+          content={({ open, onPaste }) => {
+            const handleOnPaste = (event?: any) => {
+              onPaste([...event.clipboardData?.files]);
+            };
+            return (
+              <PostInputView
+                name={FORM_FIELDS.text}
+                handleOnPaste={handleOnPaste}
+                isSubmitted={isSubmitted}
+                fixedCaretPosition={fixedCaretPosition}
+                onChangeCaret={onChangeCaret}
+                setFocused={setFocused}
+                inputSubmit={inputSubmit}
+                placeholder={placeholder}
+                disabledImages={disabledImages}
+                open={open}
+                isOpenEditPanel={isOpenEditPanel}
+                isOpenSearchPanel={isOpenSearchPanel}
+                isSearchPending={isSearchPending}
+                handleSearchItemSelect={handleSearchItemSelect}
+                searchResult={searchResult}
+                images={images}
+                handleRemoveImage={handleRemoveImage}
+                errorText={errorText}
+                text={text}
+                isSuccessful={isSuccessful}
+                disabled={disabled}
+                submitLabel={submitLabel}
+              />
+            );
+          }}
+        />
+      </Container>
     </HookForm>
   );
 };

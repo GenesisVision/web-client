@@ -1,6 +1,5 @@
-import { onSelectChange } from "components/select/select.test-helpers";
 import SettingsBlock from "components/settings-block/settings-block";
-import { HookFormWalletSelect as WalletSelect } from "components/wallet-select/wallet-select";
+import { WalletSelectContainer } from "components/wallet-select/wallet-select.container";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { CurrencyEnum } from "utils/types";
@@ -42,13 +41,7 @@ const _DepositDetailsDefaultBlock: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
 
-  const {
-    isRatePending,
-    rate,
-    handleWalletChange,
-    wallet,
-    wallets
-  } = assetSection;
+  const { isRatePending, rate, handleWalletChange, wallet } = assetSection;
   useEffect(() => {
     setRate && setRate(rate);
   }, [rate]);
@@ -67,12 +60,11 @@ const _DepositDetailsDefaultBlock: React.FC<Props> = ({
       withBorder={false}
     >
       <div>
-        <WalletSelect
+        <WalletSelectContainer
           disabled={isRatePending}
           name={walletFieldName}
           label={t("transfer:from")}
-          items={wallets}
-          onChange={onSelectChange(handleWalletChange)}
+          onChange={handleWalletChange}
         />
         <InputDepositAmount
           disabled={isRatePending}

@@ -12,20 +12,12 @@ export const pushHistoryState = (to: ToType) => {
 };
 
 export const normalizeTo = (to: ToType | string): ToType => {
-  return typeof to === "string"
-    ? { pathname: normalizeUrlString(to) }
-    : {
-        ...to,
-        as: to.as && normalizeUrlString(to.as),
-        pathname: normalizeUrlString(to.pathname)
-      };
+  return typeof to === "string" ? { pathname: to } : to;
 };
 
 export const normalizeLinkFrom = (to: ToType | string): string => {
   return typeof to === "string" ? to : to.pathname;
 };
-
-export const normalizeUrlString = (url: string): string => url;
 
 export const createToUrl = (
   as: string,
@@ -54,7 +46,7 @@ export const useToLink = (): {
     title: string = ""
   ) => {
     const state = title || contextTitle;
-    return state ? createToUrl(as, pathname, state) : as;
+    return state ? createToUrl(as, pathname || as, state) : as;
   };
   return { contextTitle, linkCreator };
 };

@@ -1,4 +1,3 @@
-import clsx from "clsx";
 import { IPostListContainerInitData } from "components/conversation/post-list/post-list.container";
 import GVTabs from "components/gv-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
@@ -14,7 +13,11 @@ import {
   SocialSearchInitialState
 } from "pages/social/social/feed.context";
 import { HashTagsBlock } from "pages/social/social/social-page-feed/hash-tags-block";
-import styles from "pages/social/social/social-page.module.scss";
+import {
+  SocialPageSearchButton,
+  SocialPageSearchContainer,
+  SocialPageTabsContainer
+} from "pages/social/social/social-page.styles";
 import React, { useContext, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
@@ -59,11 +62,7 @@ const _SocialPageFeedBlock: React.FC<Props> = ({ initData }) => {
   return (
     <>
       <Row>
-        <div
-          className={clsx(styles["social-page__tabs-container"], {
-            [styles["social-page__tabs-container--search"]]: openSearch
-          })}
-        >
+        <SocialPageTabsContainer open={!openSearch}>
           <GVTabs value={tab} onChange={setTab}>
             <GVTab value={TABS.LIVE} label={t("Live")} />
             <GVTab value={TABS.HOT} label={t("Hot")} />
@@ -73,21 +72,16 @@ const _SocialPageFeedBlock: React.FC<Props> = ({ initData }) => {
               label={t("Feed")}
             />
           </GVTabs>
-        </div>
-        <div
-          onClick={setSearchIsOpen}
-          className={clsx(styles["social-page__search-container"], {
-            [styles["social-page__search-container--search"]]: openSearch
-          })}
-        >
+        </SocialPageTabsContainer>
+        <SocialPageSearchContainer open={openSearch} onClick={setSearchIsOpen}>
           {openSearch ? (
             <SocialSearchInput setSearchIsClose={setSearchIsClose} />
           ) : (
-            <div className={styles["social-page__search-button"]}>
+            <SocialPageSearchButton>
               <SearchIcon />
-            </div>
+            </SocialPageSearchButton>
           )}
-        </div>
+        </SocialPageSearchContainer>
       </Row>
       <Row>
         <RowItem wide>

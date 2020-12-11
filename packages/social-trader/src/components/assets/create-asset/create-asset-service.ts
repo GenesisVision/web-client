@@ -1,5 +1,6 @@
 import { CREATE_ASSET } from "constants/constants";
 import {
+  MakeExchangeProgram,
   MakeProgram,
   NewExchangeAccountRequest,
   NewFundRequest,
@@ -61,6 +62,11 @@ const getCreateMethod = (
   asset: CREATE_ASSET
 ): ((request: NewAssetRequest) => Promise<any>) => {
   switch (asset) {
+    case CREATE_ASSET.EXCHANGE_PROGRAM:
+      return (request: NewAssetRequest) =>
+        api.assets().makeExchangeProgram({
+          body: request as MakeExchangeProgram
+        });
     case CREATE_ASSET.PROGRAM:
       return (request: NewAssetRequest) =>
         api.assets().makeProgram({

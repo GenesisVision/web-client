@@ -1,8 +1,8 @@
+import { Button } from "components/button/button";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogError } from "components/dialog/dialog-error";
 import { DialogList } from "components/dialog/dialog-list";
 import { DialogListItem } from "components/dialog/dialog-list-item";
-import GVButton from "components/gv-button";
 import { SubmitButton } from "components/submit-button/submit-button";
 import useApiRequest from "hooks/api-request.hook";
 import { IProgramWithdrawAmountFormValues } from "modules/program-withdraw/program-withdraw.helpers";
@@ -16,9 +16,31 @@ import { HookForm, postponeCallback } from "utils/hook-form.helpers";
 
 import { withdrawProgramById } from "./services/program-withdraw.services";
 
+interface ProgramWithdrawConfirmProps {
+  withdrawInPercent?: boolean;
+  onApply?: VoidFunction;
+  id: string;
+  onClose: (param?: any) => void;
+  formValues: IProgramWithdrawAmountFormValues;
+  onBackClick: () => void;
+  periodEnds: Date;
+  programCurrency: string;
+}
+
+interface Props {
+  withdrawInPercent?: boolean;
+  formValues: IProgramWithdrawAmountFormValues;
+  errorMessage?: string;
+  onSubmit: (e: any) => void;
+  onBackClick: () => void;
+  periodEnds: Date;
+  programCurrency: string;
+}
+
 export const WITHDRAW_FORM_SUBMIT = "programWithdrawFormSubmit";
 
 const _ProgramWithdrawConfirm: React.FC<ProgramWithdrawConfirmProps> = ({
+  withdrawInPercent,
   onApply = () => {},
   onClose,
   id,
@@ -40,6 +62,7 @@ const _ProgramWithdrawConfirm: React.FC<ProgramWithdrawConfirmProps> = ({
 
   return (
     <ProgramWithdrawConfirmForm
+      withdrawInPercent={withdrawInPercent}
       errorMessage={errorMessage}
       formValues={formValues}
       onSubmit={handleSubmit}
@@ -51,17 +74,8 @@ const _ProgramWithdrawConfirm: React.FC<ProgramWithdrawConfirmProps> = ({
 };
 export const ProgramWithdrawConfirm = React.memo(_ProgramWithdrawConfirm);
 
-interface ProgramWithdrawConfirmProps {
-  onApply?: VoidFunction;
-  id: string;
-  onClose: (param?: any) => void;
-  formValues: IProgramWithdrawAmountFormValues;
-  onBackClick: () => void;
-  periodEnds: Date;
-  programCurrency: string;
-}
-
 const _ProgramWithdrawConfirmForm: React.FC<Props> = ({
+  withdrawInPercent,
   onSubmit,
   programCurrency,
   formValues: { amount, withdrawAll },
@@ -73,15 +87,16 @@ const _ProgramWithdrawConfirmForm: React.FC<Props> = ({
 
   const form = useForm();
 
+  const value = withdrawInPercent
+    ? amount
+    : formatCurrencyValue(+amount, programCurrency);
+  const suff = withdrawInPercent ? "%" : programCurrency;
   return (
     <HookForm form={form} onSubmit={onSubmit}>
       <DialogList>
         <DialogListItem label={t("withdraw-program.withdrawing")}>
           {amount && !withdrawAll
-            ? `${formatCurrencyValue(
-                +amount,
-                programCurrency
-              )} ${programCurrency}`
+            ? `${value} ${suff}`
             : t("withdraw-program.all")}
         </DialogListItem>
         <DialogListItem label={t("withdraw-program.payout-date")}>
@@ -90,14 +105,14 @@ const _ProgramWithdrawConfirmForm: React.FC<Props> = ({
       </DialogList>
       <DialogError error={errorMessage} />
       <DialogButtons>
-        <GVButton
+        <Button
           onClick={onBackClick}
           color="secondary"
           variant="outlined"
           title={"back"}
         >
           {t("withdraw-program.back")}
-        </GVButton>
+        </Button>
         <SubmitButton
           checkDirty={false}
           checkValid={false}
@@ -110,15 +125,6 @@ const _ProgramWithdrawConfirmForm: React.FC<Props> = ({
     </HookForm>
   );
 };
-
-interface Props {
-  formValues: IProgramWithdrawAmountFormValues;
-  errorMessage?: string;
-  onSubmit: (e: any) => void;
-  onBackClick: () => void;
-  periodEnds: Date;
-  programCurrency: string;
-}
 
 const ProgramWithdrawConfirmForm = React.memo(_ProgramWithdrawConfirmForm);
 export default ProgramWithdrawConfirmForm;

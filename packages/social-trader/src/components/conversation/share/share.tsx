@@ -7,12 +7,29 @@ import { UsersDialog } from "components/conversation/users-list-tooltip/users-li
 import MenuTooltip from "components/menu-tooltip/menu-tooltip";
 import { VERTICAL_POPOVER_POS } from "components/popover/popover";
 import { RowItem } from "components/row-item/row-item";
+import { Text } from "components/text/text";
 import { Post as PostType } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
+import styled from "styled-components";
 
-import styles from "./share.module.scss";
+interface Props {
+  post: PostType;
+  count: number;
+  id: string;
+  onApply: VoidFunction;
+  disable?: boolean;
+}
+
+const Container = styled(Center)`
+  cursor: pointer;
+`;
+
+const Icon = styled(RowItem)`
+  width: 18px;
+  height: 18px;
+`;
 
 export const _Share: React.FC<Props> = ({
   post,
@@ -31,17 +48,16 @@ export const _Share: React.FC<Props> = ({
 
   const renderShareButton = useCallback(
     () => (
-      <Center
-        className={styles["share"]}
-        onClick={() => !disable && setIsOpenRePost()}
-      >
-        <RowItem className={styles["share__icon"]} size={"small"}>
+      <Container onClick={() => !disable && setIsOpenRePost()}>
+        <Icon size={"small"}>
           <ShareIcon disabled={disable} />
-        </RowItem>
+        </Icon>
         {count > 0 && (
-          <RowItem className={styles["share__count"]}>{count}</RowItem>
+          <RowItem>
+            <Text>{count}</Text>
+          </RowItem>
         )}
-      </Center>
+      </Container>
     ),
     [disable, count]
   );
@@ -93,13 +109,5 @@ export const _Share: React.FC<Props> = ({
     </>
   );
 };
-
-interface Props {
-  post: PostType;
-  count: number;
-  id: string;
-  onApply: VoidFunction;
-  disable?: boolean;
-}
 
 export const Share = React.memo(_Share);

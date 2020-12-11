@@ -1,7 +1,7 @@
 import { CHIP_TYPE } from "components/chip/chip";
 import ChipButton from "components/chip/chip-button";
+import { ProfileHeaderInfoAction } from "components/header/actions/header-actions";
 import HeaderIcon from "components/header/header-icon";
-import { fetchProfileHeaderInfo } from "components/header/header.service";
 import { RingIcon } from "components/icon/ring-icon";
 import NotificationsSidebar from "components/notifications/components/notifications-sidebar";
 import { withBlurLoader } from "decorators/with-blur-loader";
@@ -9,8 +9,18 @@ import useIsOpen from "hooks/is-open.hook";
 import * as React from "react";
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
+import styled from "styled-components";
+import { fontSize } from "utils/style/mixins";
+import { $fontSizeCommon } from "utils/style/sizes";
 
-import styles from "./notifications-widget.module.scss";
+const NotificationsCount = styled.div`
+  ${fontSize($fontSizeCommon)}
+`;
+
+const IconContainer = styled.div`
+  width: 16px;
+  height: 16px;
+`;
 
 const _NotificationsWidget: React.FC<Props> = ({
   data: notificationsCount = 0
@@ -19,7 +29,7 @@ const _NotificationsWidget: React.FC<Props> = ({
   const [isOpen, setOpen, setClose] = useIsOpen();
   const hasNotifications: boolean = notificationsCount > 0;
   const handleClose = useCallback(() => {
-    dispatch(fetchProfileHeaderInfo);
+    dispatch(ProfileHeaderInfoAction());
     setClose();
   }, []);
   return (
@@ -31,13 +41,13 @@ const _NotificationsWidget: React.FC<Props> = ({
           onClick={setOpen}
           type={hasNotifications ? CHIP_TYPE.NEGATIVE : undefined}
           chipLabel={
-            <div className={styles["notifications-count"]}>
-              {notificationsCount}
-            </div>
+            <NotificationsCount>{notificationsCount}</NotificationsCount>
           }
           label={
             <HeaderIcon>
-              <RingIcon />
+              <IconContainer>
+                <RingIcon />
+              </IconContainer>
             </HeaderIcon>
           }
         />

@@ -9,8 +9,7 @@ import { TableCardActions } from "components/table/components/table-card/table-c
 import { PostPersonalDetails } from "gv-api-web";
 import useAnchor from "hooks/anchor.hook";
 import React from "react";
-
-import styles from "./message-actions.module.scss";
+import styled from "styled-components";
 
 interface Props {
   url: string;
@@ -22,11 +21,23 @@ interface Props {
   actions?: PostPersonalDetails;
 }
 
-const hasActions = (actions: PostPersonalDetails) =>
-  !!Object.entries(actions)
-    .filter(([name]) => name !== "canComment")
-    .filter(([name]) => name !== "isLiked")
-    .filter(([name, value]) => value).length;
+const $actionIconSize = 15;
+
+const Container = styled.div`
+  position: relative;
+  width: ${$actionIconSize}px;
+  height: ${$actionIconSize}px;
+`;
+const Actions = styled.div`
+  position: absolute;
+  right: -${$actionIconSize}px;
+  top: 0;
+  cursor: pointer;
+`;
+const Icon = styled.div`
+  width: ${$actionIconSize * 2}px;
+  height: ${$actionIconSize}px;
+`;
 
 const _MessageActions: React.FC<Props> = ({
   url,
@@ -40,11 +51,11 @@ const _MessageActions: React.FC<Props> = ({
   const { anchor, setAnchor, clearAnchor } = useAnchor();
 
   return (
-    <div className={styles["message-actions__container"]}>
-      <div className={styles["message-actions"]}>
-        <div onClick={setAnchor} className={styles["message-actions__icon"]}>
+    <Container>
+      <Actions>
+        <Icon onClick={setAnchor}>
           <ActionsIcon primary={!!anchor} />
-        </div>
+        </Icon>
         <TableCardActions anchor={anchor} clearAnchor={clearAnchor}>
           {actions?.canEdit && (
             <PostEditButton
@@ -70,8 +81,8 @@ const _MessageActions: React.FC<Props> = ({
           )}
           <SocialShareButton url={url} clearAnchor={clearAnchor} />
         </TableCardActions>
-      </div>
-    </div>
+      </Actions>
+    </Container>
   );
 };
 

@@ -5,8 +5,7 @@ import SimpleUserList, {
 import { UsersListItemType } from "components/manager/components/users-popups/users-popups.types";
 import useIsOpen from "hooks/is-open.hook";
 import React, { useCallback, useEffect } from "react";
-
-import styles from "./users-list.module.scss";
+import styled from "styled-components";
 
 export interface IUsersDialogProps
   extends IDialogOuterProps,
@@ -14,6 +13,11 @@ export interface IUsersDialogProps
   request: () => Promise<UsersListItemType[]>;
   dialogTitle: string;
 }
+
+const StyledDialog = styled(Dialog)`
+  width: 80vh;
+  max-width: 500px;
+`;
 
 export const UsersDialog: React.FC<IUsersDialogProps> = ({
   request,
@@ -33,17 +37,13 @@ export const UsersDialog: React.FC<IUsersDialogProps> = ({
     onClose();
   }, [isChanged, onChange, onClose]);
   return (
-    <Dialog
-      className={styles["users-list__dialog"]}
-      open={open}
-      onClose={handleClose}
-    >
+    <StyledDialog open={open} onClose={handleClose}>
       <SimpleUserList
         onChange={setIsChanged}
         request={request}
         onClick={onClose}
         title={dialogTitle}
       />
-    </Dialog>
+    </StyledDialog>
   );
 };

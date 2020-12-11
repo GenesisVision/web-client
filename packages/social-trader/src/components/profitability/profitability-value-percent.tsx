@@ -7,10 +7,13 @@ import {
 import { RowItem } from "components/row-item/row-item";
 import React from "react";
 import NumberFormat from "react-number-format";
+import styled from "styled-components";
 import { formatCurrencyValue, roundPercents } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 
-import styles from "./profitability.module.scss";
+const Container = styled(Center)`
+  margin-top: -4px;
+`;
 
 const _ProfitabilityValuePercent: React.FC<Props> = ({
   value,
@@ -18,7 +21,7 @@ const _ProfitabilityValuePercent: React.FC<Props> = ({
   percent
 }) => {
   return (
-    <Center className={styles["profitability-value-percent"]}>
+    <Container>
       <RowItem size={"small"}>
         <Profitability
           value={formatCurrencyValue(value, currency)}
@@ -35,7 +38,7 @@ const _ProfitabilityValuePercent: React.FC<Props> = ({
       <Profitability value={`${percent}`} variant={PROFITABILITY_VARIANT.CHIPS}>
         {roundPercents(percent)}
       </Profitability>
-    </Center>
+    </Container>
   );
 };
 

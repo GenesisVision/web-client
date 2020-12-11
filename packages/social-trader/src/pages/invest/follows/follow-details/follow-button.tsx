@@ -1,4 +1,4 @@
-import GVButton from "components/gv-button";
+import { Button } from "components/button/button";
 import { BrokerTradeServerType } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
 import FollowModuleContainer from "modules/follow-module/follow-module-container";
@@ -25,14 +25,14 @@ const _FollowButton: React.FC<Props> = ({
   }, [id]);
   return (
     <>
-      <GVButton
+      <Button
         className={label}
         disabled={!canFollow}
         size={"xlarge"}
         onClick={setIsOpenFollow}
       >
         {t("asset-details:description.follow-trade")}
-      </GVButton>
+      </Button>
       <FollowModuleContainer
         leverage={leverage}
         isExternal={isExternal}

@@ -3,8 +3,18 @@ import { Row } from "components/row/row";
 import { Text } from "components/text/text";
 import { FundAssetPartWithIcon } from "gv-api-web";
 import * as React from "react";
+import styled from "styled-components";
 
-import styles from "./fund-assets-list.module.scss";
+interface Props {
+  values: FundAssetPartWithIcon[];
+}
+
+const Bubble = styled.div<{ color: string }>`
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: ${({ color }) => color};
+`;
 
 const _FundAssetList: React.FC<Props> = ({ values }) => (
   <Row wrap size={"small"}>
@@ -12,10 +22,7 @@ const _FundAssetList: React.FC<Props> = ({ values }) => (
       <RowItem key={item.name}>
         <Row>
           <RowItem size={"small"}>
-            <div
-              className={styles["fund-asset-list__bubble"]}
-              style={{ background: item.color }}
-            />
+            <Bubble color={item.color} />
           </RowItem>
           <RowItem size={"small"}>
             <Text size={"small"} muted>
@@ -27,10 +34,6 @@ const _FundAssetList: React.FC<Props> = ({ values }) => (
     ))}
   </Row>
 );
-
-interface Props {
-  values: FundAssetPartWithIcon[];
-}
 
 const FundAssetList = React.memo(_FundAssetList);
 export default FundAssetList;

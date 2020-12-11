@@ -1,8 +1,6 @@
 import clsx from "clsx";
-import DetailsBlock, {
-  DETAILS_BLOCK_TYPE
-} from "components/details/details-block";
-import GVButton from "components/gv-button";
+import { Button } from "components/button/button";
+import { DefaultBlock } from "components/default.block/default.block";
 import Link, { ToType } from "components/link/link";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
@@ -13,6 +11,12 @@ import { useTranslation } from "react-i18next";
 import { ListChildComponentProps } from "react-window";
 
 import styles from "./asset-block.module.scss";
+
+export enum DETAILS_BLOCK_TYPE {
+  SOLID = "SOLID",
+  BORDERED = "BORDERED",
+  TRANSPARENT = "TRANSPARENT"
+}
 
 const ASSET_WIDTH = 312;
 const ASSET_HEIGHT = 390;
@@ -33,9 +37,10 @@ export const AssetBlock: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   return (
-    <DetailsBlock
+    <DefaultBlock
+      size={"large"}
       wide
-      type={blockType}
+      solid={!blockType}
       className={clsx(styles["asset-block"], {
         [styles["asset-block--left"]]: left,
         [styles["asset-block--side"]]: side
@@ -58,9 +63,9 @@ export const AssetBlock: React.FC<Props> = ({
         </Row>
         <Row size={"xlarge"}>
           <Link to={investLink}>
-            <GVButton size={"large"} color="primary">
+            <Button size={"large"} color="primary">
               {buttonLabel || t("invest:invest-button")}
-            </GVButton>
+            </Button>
           </Link>
         </Row>
       </div>
@@ -74,7 +79,7 @@ export const AssetBlock: React.FC<Props> = ({
           renderItem={renderCard}
         />
       </div>
-    </DetailsBlock>
+    </DefaultBlock>
   );
 };
 

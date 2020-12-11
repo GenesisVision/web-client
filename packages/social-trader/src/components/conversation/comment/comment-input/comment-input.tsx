@@ -1,23 +1,17 @@
-import clsx from "clsx";
-import { Center } from "components/center/center";
-import { AttachImageCommentButton } from "components/conversation/comment/comment-input/attach-image-comment-button";
-import { CommentInputReply } from "components/conversation/comment/comment-input/comment-input-reply";
-import { ConversationInput } from "components/conversation/conversation-input/conversation-input";
+import {
+  CommentInputMessage,
+  CommentInputView
+} from "components/conversation/comment/comment-input/comment-input.view";
 import {
   ConversationInputShape,
   postMessageDefaultOptions
 } from "components/conversation/conversation-input/conversation-input.helpers";
 import { OnMessageSendFunc } from "components/conversation/conversation.types";
-import { SendIcon } from "components/conversation/icons/send.icon";
-import { PostInputImagePreview } from "components/conversation/post/post-input/post-input-image-preview";
 import { PostContext } from "components/conversation/post/post.context";
-import { SearchPanel } from "components/conversation/search-panel/search-panel";
 import { useSearchPanel } from "components/conversation/search-panel/search-panel.hook";
 import ErrorMessage from "components/error-message/error-message";
 import { IImageValue } from "components/form/input-image/input-image";
 import { HookFormInputImages } from "components/form/input-image/input-images";
-import { RowItem } from "components/row-item/row-item";
-import { Row } from "components/row/row";
 import { Text } from "components/text/text";
 import { PostTag } from "gv-api-web";
 import { API_REQUEST_STATUS } from "hooks/api-request.hook";
@@ -26,8 +20,6 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
 import { object } from "yup";
-
-import styles from "./comment-input.module.scss";
 
 const MAX_IMAGES = 1;
 
@@ -68,7 +60,7 @@ const _CommentInput: React.FC<Props> = ({ onSubmit, status, errorMessage }) => {
     formState: { isSubmitting }
   } = form;
   const { text, images } = watch();
-  const isSuccessful = status === API_REQUEST_STATUS.SUCCESS;
+  const isSuccessful = status === "SUCCESS";
 
   const {
     isSearchPending,
@@ -115,131 +107,48 @@ const _CommentInput: React.FC<Props> = ({ onSubmit, status, errorMessage }) => {
   const isOpenPanel = !!images?.length || isOpenSearchPanel;
   const errorText = errorMessage || errors[FORM_FIELDS.text]?.message;
   return (
-    <HookForm
-      form={form}
-      onSubmit={formSubmit}
-      className={styles["comment-input__form"]}
-    >
+    <HookForm form={form} onSubmit={formSubmit}>
       <HookFormInputImages
         showIndicator={false}
         noDrag
         maxImages={MAX_IMAGES}
         disabled={disabledImages}
-        className={styles["comment-input__drop-zone"]}
         name={FORM_FIELDS.images}
         content={({ open, onPaste }) => {
           const handleOnPaste = (event?: any) => {
             onPaste([...event.clipboardData?.files]);
           };
           return (
-            <div className={styles["comment-input__block"]}>
-              <CommentInputReply />
-              <Row wide size={"small"}>
-                <RowItem
-                  className={styles["comment-input__input-container-row-item"]}
-                >
-                  <div
-                    className={clsx(
-                      styles["comment-input__input-and-panel-container"],
-                      {
-                        [styles[
-                          "comment-input__input-and-panel-container--open"
-                        ]]: isOpenPanel
-                      }
-                    )}
-                  >
-                    <Center
-                      className={styles["comment-input__input-container"]}
-                    >
-                      <ConversationInput
-                        focusTrigger={replyState}
-                        onPaste={handleOnPaste}
-                        outerCaret={fixedCaretPosition}
-                        onChangeCaret={onChangeCaret}
-                        submitForm={inputSubmit()}
-                        name={FORM_FIELDS.text}
-                      />
-                      {!disabledImages && (
-                        <AttachImageCommentButton onClick={open} />
-                      )}
-                    </Center>
-                    {isOpenPanel && (
-                      <div>
-                        {isOpenSearchPanel && (
-                          <div
-                            className={styles["comment-input__search-panel"]}
-                          >
-                            <SearchPanel
-                              isSearchPending={isSearchPending}
-                              onClick={handleSearchItemSelect}
-                              searchResult={searchResult}
-                            />
-                          </div>
-                        )}
-                        {!!images?.length && (
-                          <Center
-                            wrap
-                            className={styles["comment-input__panel-container"]}
-                          >
-                            {images.map(image => (
-                              <RowItem key={image.id}>
-                                <PostInputImagePreview
-                                  onRemove={handleRemoveImage}
-                                  image={image}
-                                />
-                              </RowItem>
-                            ))}
-                          </Center>
-                        )}
-                      </div>
-                    )}
-                  </div>
-                </RowItem>
-                <RowItem>
-                  <button
-                    type="submit"
-                    disabled={disabled}
-                    className={clsx(styles["comment-input__send-button"], {
-                      [styles["comment-input__send-button--disable"]]: disabled
-                    })}
-                  >
-                    <SendIcon
-                      className={clsx(
-                        styles["comment-input__send-button-icon"]
-                      )}
-                      disabled={disabled}
-                    />
-                  </button>
-                </RowItem>
-              </Row>
-            </div>
+            <CommentInputView
+              isOpenSearchPanel={isOpenSearchPanel}
+              isOpenPanel={isOpenPanel}
+              replyState={replyState}
+              handleOnPaste={handleOnPaste}
+              fixedCaretPosition={fixedCaretPosition}
+              onChangeCaret={onChangeCaret}
+              inputSubmit={inputSubmit}
+              name={FORM_FIELDS.text}
+              disabledImages={disabledImages}
+              open={open}
+              isSearchPending={isSearchPending}
+              handleSearchItemSelect={handleSearchItemSelect}
+              searchResult={searchResult}
+              images={images}
+              handleRemoveImage={handleRemoveImage}
+              disabled={disabled}
+            />
           );
         }}
       />
       <CommentInputMessage disable={disabled || !!errorText}>
-        <Text muted>Enter to send</Text>
+        <Text size={"small"} muted>
+          Enter to send
+        </Text>
       </CommentInputMessage>
       <CommentInputMessage disable={!errorText}>
-        {errorText && <ErrorMessage error={errorText} />}
+        {errorText && <ErrorMessage>{errorText}</ErrorMessage>}
       </CommentInputMessage>
     </HookForm>
-  );
-};
-
-const CommentInputMessage: React.FC<{ disable: boolean }> = ({
-  children,
-  disable
-}) => {
-  return (
-    <div className={styles["comment-input__send-text-container"]}>
-      <Center
-        className={clsx(styles["comment-input__send-text"], {
-          [styles["comment-input__send-text--disable"]]: disable
-        })}
-      >
-        {children}
-      </Center>
-    </div>
   );
 };
 

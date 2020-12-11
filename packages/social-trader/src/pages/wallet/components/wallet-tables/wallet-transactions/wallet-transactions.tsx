@@ -39,6 +39,12 @@ const DEFAULT_FILTERS = [
   }
 ];
 
+interface Props {
+  renderBodyRow: RenderBodyItemFuncType;
+  columns: SortingColumn[];
+  currency?: CurrencyEnum;
+}
+
 const _WalletTransactions: React.FC<Props> = ({
   renderBodyRow,
   columns,
@@ -59,6 +65,8 @@ const _WalletTransactions: React.FC<Props> = ({
   const { walletTransactions } = platformData.filters;
   return (
     <TableModule
+      name={"WalletTransactions" + currency}
+      cache
       loaderData={walletTransactionsLoaderData}
       timestamp={new Date(timestamp || 0).getMilliseconds()}
       defaultFilters={DEFAULT_FILTERS}
@@ -102,12 +110,6 @@ const _WalletTransactions: React.FC<Props> = ({
     />
   );
 };
-
-interface Props {
-  renderBodyRow: RenderBodyItemFuncType;
-  columns: SortingColumn[];
-  currency?: CurrencyEnum;
-}
 
 const WalletTransactions = React.memo(_WalletTransactions);
 export default WalletTransactions;

@@ -1,8 +1,9 @@
-import GVButton from "components/gv-button";
+import { Button } from "components/button/button";
 import Hint from "components/hint/hint";
 import { ToType } from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import { VERTICAL_POPOVER_POS } from "components/popover/popover";
+import { PopoverContentListItem } from "components/popover/popover-content";
 import { TableCardActionsItem } from "components/table/components/table-card/table-card-actions";
 import { Text } from "components/text/text";
 import {
@@ -30,6 +31,7 @@ export const transformAmountWithCurrencyToTransferItem = ({
 });
 
 export const MakeProgramButton: React.FC<{
+  isExchange?: boolean;
   makeProgramLink?: string | ToType;
   necessaryMoney: string;
   isEnoughMoney: boolean;
@@ -37,6 +39,7 @@ export const MakeProgramButton: React.FC<{
   clearAnchor: (event: TEvent) => void;
 }> = React.memo(
   ({
+    isExchange,
     makeProgramLink: makeProgramLinkProp,
     isEnoughMoney,
     id,
@@ -46,7 +49,9 @@ export const MakeProgramButton: React.FC<{
     const { linkCreator } = useToLink();
     const [t] = useTranslation();
     const makeProgramLinkMethod = makeProgramLinkCreator({
-      assetFrom: CONVERT_ASSET.ACCOUNT,
+      assetFrom: isExchange
+        ? CONVERT_ASSET.EXCHANGE_ACCOUNT
+        : CONVERT_ASSET.ACCOUNT,
       assetTo: CONVERT_ASSET.PROGRAM
     });
     const makeProgramLink =
@@ -57,8 +62,8 @@ export const MakeProgramButton: React.FC<{
         {label}
       </TableCardActionsItem>
     ) : (
-      <GVButton variant="text" color="secondary">
-        <Text muted>
+      <PopoverContentListItem>
+        <Button disabled={true} variant="text" noPadding color={"secondary"}>
           <Hint
             content={label}
             vertical={VERTICAL_POPOVER_POS.BOTTOM}
@@ -67,8 +72,8 @@ export const MakeProgramButton: React.FC<{
               { value: necessaryMoney }
             )}
           />
-        </Text>
-      </GVButton>
+        </Button>
+      </PopoverContentListItem>
     );
   }
 );

@@ -56,7 +56,9 @@ const _ProgramSubscriptionsRow: React.FC<Props> = ({
         formatDate(subscription.unsubscriptionDate)}
     </TableCell>
     <TableCell>
-      <AssetStatusLabel status={subscription.status as STATUS} />
+      <AssetStatusLabel status={subscription.status as STATUS}>
+        {subscription.status}
+      </AssetStatusLabel>
     </TableCell>
   </TableRow>
 );

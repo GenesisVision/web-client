@@ -1,5 +1,5 @@
-import GVButton from "components/gv-button";
-import { fetchProfileHeaderInfo } from "components/header/header.service";
+import { Button } from "components/button/button";
+import { ProfileHeaderInfoAction } from "components/header/actions/header-actions";
 import { clearAll } from "components/notifications/services/notifications.services";
 import useApiRequest from "hooks/api-request.hook";
 import React, { useCallback } from "react";
@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 const ClearButton: React.FC<Props> = ({ onApply }) => {
   const dispatch = useDispatch();
   const [t] = useTranslation();
-  const updateHeaderButton = () => dispatch(fetchProfileHeaderInfo);
+  const updateHeaderButton = () => dispatch(ProfileHeaderInfoAction());
   const middleware = [onApply, updateHeaderButton];
   const { sendRequest, isPending } = useApiRequest({
     request: clearAll,
@@ -20,7 +20,7 @@ const ClearButton: React.FC<Props> = ({ onApply }) => {
   }, []);
 
   return (
-    <GVButton
+    <Button
       size={"xlarge"}
       noPadding
       variant={"text"}
@@ -28,7 +28,7 @@ const ClearButton: React.FC<Props> = ({ onApply }) => {
       disabled={isPending}
     >
       {t("notifications-aside.clear")}
-    </GVButton>
+    </Button>
   );
 };
 

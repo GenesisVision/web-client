@@ -1,6 +1,6 @@
 import FormTextField from "components/assets/fields/form-text-field";
+import { Button } from "components/button/button";
 import { DialogError } from "components/dialog/dialog-error";
-import GVButton from "components/gv-button";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import { LabeledValue } from "components/labeled-value/labeled-value";
 import { Row } from "components/row/row";
@@ -131,14 +131,14 @@ const _ReallocateForm: React.FC<Props> = ({
         </Row>
       )}
       <Row size={"large"}>
-        <GVButton
+        <Button
           isPending={isSubmitting}
           isSuccessful={isSuccessful}
           disabled={disabled}
           onClick={setIsOpenConfirm}
         >
           {t("fund-settings:buttons.reallocation")}
-        </GVButton>
+        </Button>
       </Row>
       <ConfirmReallocate
         assets={assets}

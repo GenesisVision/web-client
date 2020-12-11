@@ -2,10 +2,6 @@ import { ConversationInputComponent } from "components/conversation/conversation
 import { GVHookFormField } from "components/gv-hook-form-field";
 import React from "react";
 
-export const ConversationInput: React.FC<Props> = props => {
-  return <GVHookFormField {...props} component={ConversationInputComponent} />;
-};
-
 interface Props {
   focusTrigger?: any;
   onPaste?: VoidFunction;
@@ -19,3 +15,7 @@ interface Props {
   submitForm: VoidFunction;
   name: string;
 }
+
+export const ConversationInput: React.FC<Props> = props => {
+  return <GVHookFormField {...props} component={ConversationInputComponent} />;
+};

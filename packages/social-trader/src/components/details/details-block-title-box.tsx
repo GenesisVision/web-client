@@ -1,11 +1,9 @@
+import { detailsBlockHorizontalPaddings } from "components/details/details.constants";
 import React from "react";
+import styled from "styled-components";
 
-import styles from "./details-block-title-box.module.scss";
-
-const DetailsBlockTitleBox: React.FC<Props> = ({ children }) => {
-  return <div className={styles["details-block-title-box"]}>{children}</div>;
-};
-
-interface Props extends React.HTMLAttributes<HTMLDivElement> {}
+const DetailsBlockTitleBox = styled.div`
+  ${detailsBlockHorizontalPaddings}
+`;
 
 export default DetailsBlockTitleBox;

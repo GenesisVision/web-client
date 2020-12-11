@@ -3,6 +3,16 @@ import { TAssetFromTo } from "pages/convert-asset/convert-asset.types";
 import { SLUG_URL_PARAM_NAME } from "routes/app.routes";
 import replaceParams from "utils/replace-params";
 
+export const MAKE_EXCHANGE_PROGRAM_FROM_PAGE_ROUTE =
+  "/make-exchange-program-from-account";
+export const MAKE_EXCHANGE_PROGRAM_FROM_PAGE_SLUG_ROUTE = `${MAKE_EXCHANGE_PROGRAM_FROM_PAGE_ROUTE}/:${SLUG_URL_PARAM_NAME}`;
+export const composeMakeExchangeProgramFromAccountUrl = (
+  slugUrl: string
+): string =>
+  replaceParams(`${MAKE_EXCHANGE_PROGRAM_FROM_PAGE_SLUG_ROUTE}`, {
+    [`:${SLUG_URL_PARAM_NAME}`]: slugUrl
+  });
+
 export const MAKE_PROGRAM_FROM_SIGNAL_PAGE_ROUTE = "/make-program-from-signal";
 export const MAKE_PROGRAM_FROM_SIGNAL_PAGE_SLUG_ROUTE = `${MAKE_PROGRAM_FROM_SIGNAL_PAGE_ROUTE}/:${SLUG_URL_PARAM_NAME}`;
 export const composeMakeProgramFromSignalUrl = (slugUrl: string): string =>
@@ -40,6 +50,8 @@ export const makeProgramLinkCreator = ({
   assetFrom
 }: TAssetFromTo) => {
   switch (assetFrom + assetTo) {
+    case CONVERT_ASSET.EXCHANGE_ACCOUNT + CONVERT_ASSET.PROGRAM:
+      return composeMakeExchangeProgramFromAccountUrl;
     case CONVERT_ASSET.SIGNAL + CONVERT_ASSET.PROGRAM:
       return composeMakeProgramFromSignalUrl;
     case CONVERT_ASSET.ACCOUNT + CONVERT_ASSET.PROGRAM:

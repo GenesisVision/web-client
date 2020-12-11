@@ -1,16 +1,43 @@
-import clsx from "clsx";
 import Modal, { BodyFix } from "components/modal/modal";
 import { NextComponentType } from "next";
 import Router from "next/router";
 import * as React from "react";
 import { useCallback, useEffect } from "react";
-
-import styles from "./sidebar.module.scss";
+import styled from "styled-components";
+import { $backgroundColor, $mainColor } from "utils/style/colors";
 
 export enum SIDEBAR_POSITION {
   LEFT = "left",
   RIGHT = "right"
 }
+
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
+  open: boolean;
+  onClose?: (event?: React.MouseEvent<HTMLElement>) => void;
+  position?: SIDEBAR_POSITION;
+}
+
+const SidebarContainer = styled.div<{ position?: SIDEBAR_POSITION }>`
+  position: fixed;
+  overflow: auto;
+  top: 0;
+  bottom: 0;
+  width: 400px;
+  max-width: 90%;
+  background-color: ${$backgroundColor};
+  display: flex;
+  box-sizing: border-box;
+  color: ${$mainColor};
+  -webkit-overflow-scrolling: touch;
+  ${({ position }) => {
+    switch (position) {
+      case SIDEBAR_POSITION.LEFT:
+        return "left: 0;";
+      case SIDEBAR_POSITION.RIGHT:
+        return "right: 0;";
+    }
+  }}
+`;
 
 const _Sidebar: NextComponentType<{}, {}, Props> = ({
   open,
@@ -31,18 +58,10 @@ const _Sidebar: NextComponentType<{}, {}, Props> = ({
   return (
     <Modal open={open} onClose={onClose}>
       <BodyFix />
-      <div className={clsx(styles["sidebar"], styles[`sidebar--${position}`])}>
-        {children}
-      </div>
+      <SidebarContainer position={position}>{children}</SidebarContainer>
     </Modal>
   );
 };
 
 const Sidebar = React.memo(_Sidebar);
 export default Sidebar;
-
-interface Props extends React.HTMLAttributes<HTMLDivElement> {
-  open: boolean;
-  onClose?: (event?: React.MouseEvent<HTMLElement>) => void;
-  position?: SIDEBAR_POSITION;
-}

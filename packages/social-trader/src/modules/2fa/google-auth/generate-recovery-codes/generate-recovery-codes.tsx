@@ -1,5 +1,5 @@
+import { Button } from "components/button/button";
 import Dialog from "components/dialog/dialog";
-import GVButton from "components/gv-button";
 import { PasswordModel, RecoveryCodesViewModel } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
 import useIsOpen from "hooks/is-open.hook";
@@ -23,9 +23,9 @@ const _GenerateRecoveryCode: React.FC<Props> = ({ disabled }) => {
   if (!disabled) return null;
   return (
     <div>
-      <GVButton noPadding variant="text" type="button" onClick={setOpenPopup}>
+      <Button noPadding variant="text" type="button" onClick={setOpenPopup}>
         {t("profile-page:2fa-page.codes.generate-recovery-codes")}
-      </GVButton>
+      </Button>
       <Dialog open={isOpenPopup} onClose={setClosePopup}>
         {data ? (
           <GoogleAuthCodes codes={(data as RecoveryCodesViewModel).codes} />
