@@ -63,8 +63,8 @@ const useRouteFilters = (
 
   return [
     filters,
-    sorting,
-    parseInt(page),
+    sorting as string,
+    parseInt(page as string),
     updateFilter,
     updateSorting,
     updatePaging
