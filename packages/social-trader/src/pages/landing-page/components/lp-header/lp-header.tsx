@@ -13,9 +13,10 @@ import {
   landingContainer
 } from "pages/landing-page/styles/landing-styles";
 import React from "react";
+import { useSelector } from "react-redux";
+import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import { HOME_ROUTE } from "routes/app.routes";
 import { OVERVIEW_ROUTE } from "routes/dashboard.routes";
-import authService from "services/auth-service";
 import styled from "styled-components";
 import { $landingBg, $mainColor } from "utils/style/colors";
 import { getHEXA } from "utils/style/generators";
@@ -117,7 +118,7 @@ const ButtonsContainer = styled.div`
 
 const LPHeader: React.FC = () => {
   const { t } = useTranslation();
-  const isAuthenticated = authService.isAuthenticated();
+  const isAuthenticated = useSelector(isAuthenticatedSelector);
   return (
     <Container>
       <MobileNavContainer>
