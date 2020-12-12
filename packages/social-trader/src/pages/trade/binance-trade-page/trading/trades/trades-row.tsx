@@ -2,6 +2,7 @@ import { Text } from "components/text/text";
 import { terminalMoneyFormat } from "pages/trade/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
 import { getTextColor } from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import React from "react";
+import NumberFormat from "react-number-format";
 import { formatTime } from "utils/dates";
 
 interface Props {
@@ -36,7 +37,11 @@ const _TradesRow: React.FC<Props> = ({
           size={"xsmall"}
           color={getTextColor(+price - +(prevPrice ? prevPrice : price))}
         >
-          {formattedPrice}
+          <NumberFormat
+            displayType="text"
+            thousandSeparator={","}
+            value={formattedPrice}
+          />
         </Text>
       </td>
       <td>{formattedAmount}</td>

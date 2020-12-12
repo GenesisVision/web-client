@@ -75,6 +75,7 @@ export const MarketWatchRow: React.FC<Props> = React.memo(
         </td>
         <td className={styles["market-watch__cell"]}>
           <TradeStatefulValue
+            thousandSeparator={","}
             value={formatCurrencyValue(+lastPrice, quoteAsset)}
             trigger={eventTime}
           />

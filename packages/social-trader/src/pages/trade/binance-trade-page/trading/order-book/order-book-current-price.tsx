@@ -5,6 +5,7 @@ import { TradeStatefulValue } from "pages/trade/binance-trade-page/trading/compo
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import { TerminalCurrency } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useContext } from "react";
+import NumberFormat from "react-number-format";
 
 import styles from "./order-book.module.scss";
 
@@ -29,6 +30,7 @@ const _OrderBookCurrentPrice: React.FC<Props> = ({
         className={styles["order-book__current-original-price"]}
       >
         <TradeStatefulValue
+          thousandSeparator={","}
           showArrow
           value={terminalMoneyFormat({ amount: price, tickSize })}
           trigger={tradeId}
@@ -36,7 +38,12 @@ const _OrderBookCurrentPrice: React.FC<Props> = ({
       </RowItem>
       {equivalent && (
         <RowItem>
-          {equivalent}&nbsp;{equivalentCurrency}
+          <NumberFormat
+            displayType="text"
+            thousandSeparator={","}
+            value={equivalent}
+            suffix={equivalentCurrency}
+          />
         </RowItem>
       )}
     </Center>
