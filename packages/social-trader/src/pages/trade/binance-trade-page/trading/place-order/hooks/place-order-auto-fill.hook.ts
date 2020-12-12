@@ -12,7 +12,7 @@ import {
   QuantityType,
   TotalType
 } from "../place-order.types";
-import { SetSliderValueFunc } from "./trade-slider.hook";
+import { SetSliderValueFunc } from "./place-order-slider.hook";
 
 export const usePlaceOrderAutoFill = ({
   buyWalletAvailable,
