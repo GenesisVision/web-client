@@ -1,10 +1,10 @@
 import { Slider } from "components/range/range";
-import React, { useCallback } from "react";
-
 import {
   MAX_TRADE_SLIDER_VALUE,
   SetSliderValueFunc
-} from "./hooks/trade-slider.hook";
+} from "pages/trade/binance-trade-page/trading/place-order/hooks/place-order-slider.hook";
+import React, { useCallback } from "react";
+
 import { RANGE_MARKS } from "./place-order.helpers";
 
 export interface IPlaceOrderSliderProps {
