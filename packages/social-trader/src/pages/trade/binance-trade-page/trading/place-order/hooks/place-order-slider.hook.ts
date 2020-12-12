@@ -71,10 +71,13 @@ export const useTradeSlider = ({
         truncated(percentAmount, getDecimalScale(formatValue(stepSize))) === 0
       )
         return;
-      const newQuantity = +terminalMoneyFormat({
-        amount: percentAmount,
-        tickSize: stepSize
-      });
+      const newQuantity =
+        newValue === MAX_TRADE_SLIDER_VALUE
+          ? +getBalance(balances, baseAsset)
+          : +terminalMoneyFormat({
+              amount: percentAmount,
+              tickSize: stepSize
+            });
       setValue(quantityName, newQuantity, true);
     }
   };
