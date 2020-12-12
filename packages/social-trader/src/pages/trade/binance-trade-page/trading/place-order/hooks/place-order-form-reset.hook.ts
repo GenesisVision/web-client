@@ -1,5 +1,6 @@
 import { API_REQUEST_STATUS } from "hooks/api-request.hook";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
+import { useTradeSlider } from "pages/trade/binance-trade-page/trading/place-order/hooks/place-order-slider.hook";
 import { PriceType } from "pages/trade/binance-trade-page/trading/place-order/place-order.types";
 import {
   AssetBalance,
@@ -8,8 +9,6 @@ import {
 import { useContext, useEffect, useState } from "react";
 import { postponeFunc } from "utils/hook-form.helpers";
 import { AnyObjectType } from "utils/types";
-
-import { useTradeSlider } from "./trade-slider.hook";
 
 export const usePlaceOrderFormReset = ({
   status,
