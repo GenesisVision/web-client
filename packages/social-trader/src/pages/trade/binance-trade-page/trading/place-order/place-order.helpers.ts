@@ -4,6 +4,35 @@ import {
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { tableLoaderCreator } from "utils/helpers";
 
+export interface IPlaceOrderHandleSubmitValues extends IPlaceOrderFormValues {
+  type: OrderType;
+}
+
+export const getTradeType = ({
+  type,
+  side,
+  currentPrice,
+  price
+}: {
+  type: OrderType;
+  side: OrderSide;
+  currentPrice: number | string;
+  price: number | string;
+}): OrderType => {
+  switch (type) {
+    case "TakeProfitLimit":
+      switch (side) {
+        case "Buy":
+          return +price < +currentPrice ? "TakeProfitLimit" : "StopLossLimit";
+        case "Sell":
+          return +price > +currentPrice ? "TakeProfitLimit" : "StopLossLimit";
+      }
+      break;
+    default:
+      return type;
+  }
+};
+
 export const RANGE_MARKS = {
   0: "0%",
   25: "25%",

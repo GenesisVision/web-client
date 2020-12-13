@@ -24,13 +24,17 @@ import { usePlaceOrderFormReset } from "./hooks/place-order-form-reset.hook";
 import { usePlaceOrderInfo } from "./hooks/place-order-info-hook";
 import { placeOrderDefaultValidationSchema } from "./place-order-validation";
 import { getBalance } from "./place-order.helpers";
-import { IPlaceOrderFormValues, TRADE_FORM_FIELDS } from "./place-order.types";
+import {
+  IPlaceOrderFormValues,
+  IPlaceOrderHandleSubmitValues,
+  TRADE_FORM_FIELDS
+} from "./place-order.types";
 
 export interface IMarketTradeFormProps {
   status: API_REQUEST_STATUS;
   outerPrice: string;
   side: OrderSide;
-  onSubmit: (values: IPlaceOrderFormValues) => any;
+  onSubmit: (values: IPlaceOrderHandleSubmitValues) => any;
 }
 
 const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
@@ -107,7 +111,10 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
   });
 
   return (
-    <HookForm form={form} onSubmit={onSubmit}>
+    <HookForm
+      form={form}
+      onSubmit={values => onSubmit({ ...values, type: "Market" })}
+    >
       <Row hide>
         <HookFormAmountField
           autoFocus={false}

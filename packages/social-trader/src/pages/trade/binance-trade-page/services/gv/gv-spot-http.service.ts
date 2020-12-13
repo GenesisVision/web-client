@@ -270,15 +270,20 @@ export const postBuy = ({
   type
 }: TradeRequest & {
   accountId?: string;
-}): Promise<QueryOrderResult> =>
-  newOrder(
+}): Promise<QueryOrderResult> => {
+  return newOrder(
     {
       reduceOnly,
-      stopPrice: type === "TakeProfitLimit" ? stopPrice : undefined,
+      stopPrice:
+        type === "TakeProfitLimit" || type === "StopLossLimit"
+          ? stopPrice
+          : undefined,
       symbol,
       type,
       price:
-        type === "Limit" || type === "TakeProfitLimit"
+        type === "Limit" ||
+        type === "TakeProfitLimit" ||
+        type === "StopLossLimit"
           ? String(price)
           : undefined,
       quantity: String(quantity),
@@ -287,6 +292,7 @@ export const postBuy = ({
     },
     accountId
   );
+};
 
 export const postSell = ({
   reduceOnly,
@@ -299,15 +305,20 @@ export const postSell = ({
   type
 }: TradeRequest & {
   accountId?: string;
-}): Promise<QueryOrderResult> =>
-  newOrder(
+}): Promise<QueryOrderResult> => {
+  return newOrder(
     {
       reduceOnly,
-      stopPrice: type === "TakeProfitLimit" ? stopPrice : undefined,
+      stopPrice:
+        type === "TakeProfitLimit" || type === "StopLossLimit"
+          ? stopPrice
+          : undefined,
       symbol,
       type,
       price:
-        type === "Limit" || type === "TakeProfitLimit"
+        type === "Limit" ||
+        type === "TakeProfitLimit" ||
+        type === "StopLossLimit"
           ? String(price)
           : undefined,
       quantity: String(quantity),
@@ -316,6 +327,7 @@ export const postSell = ({
     },
     accountId
   );
+};
 
 export const getTradeMethod = (side: OrderSide) =>
   side === "Buy" ? postBuy : postSell;
