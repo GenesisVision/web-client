@@ -1,8 +1,15 @@
-import { TimeInForce } from "pages/trade/binance-trade-page/trading/terminal.types";
+import {
+  OrderType,
+  TimeInForce
+} from "pages/trade/binance-trade-page/trading/terminal.types";
 
 export type QuantityType = string;
 export type TotalType = string;
 export type PriceType = string;
+
+export interface IPlaceOrderHandleSubmitValues extends IPlaceOrderFormValues {
+  type: OrderType;
+}
 
 export type PlaceOrderFormSetValueType = (
   name: string,

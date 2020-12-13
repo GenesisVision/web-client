@@ -29,9 +29,7 @@ import { MarketTradeForm } from "./market-trade-form";
 import {
   getBalance,
   getBalancesLoaderData,
-  getTradeType,
-  IPlaceOrderFormValues,
-  TRADE_FORM_FIELDS
+  getTradeType
 } from "./place-order.helpers";
 import styles from "./place-order.module.scss";
 import { IPlaceOrderFormValues, TRADE_FORM_FIELDS } from "./place-order.types";
@@ -73,7 +71,7 @@ const _PlaceOrder: React.FC<Props> = ({ lastTrade, price }) => {
       const type = getTradeType({
         side,
         type: tab,
-        currentPrice: lastTrade.price,
+        currentPrice: lastTrade,
         price: values[TRADE_FORM_FIELDS.price]
       });
       const quantity = formatValueWithTick(

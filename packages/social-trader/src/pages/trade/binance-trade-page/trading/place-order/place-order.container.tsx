@@ -3,9 +3,11 @@ import { PlaceOrder } from "pages/trade/binance-trade-page/trading/place-order/p
 import React, { useContext } from "react";
 
 const _PlaceOrderContainer: React.FC = () => {
-  const { price } = useContext(TradingPriceContext);
+  const { price, trades } = useContext(TradingPriceContext);
 
-  return !!+price ? <PlaceOrder price={price} /> : null;
+  return !!+price ? (
+    <PlaceOrder price={price} lastTrade={trades[0].price} />
+  ) : null;
 };
 
 export const PlaceOrderContainer = React.memo(_PlaceOrderContainer);

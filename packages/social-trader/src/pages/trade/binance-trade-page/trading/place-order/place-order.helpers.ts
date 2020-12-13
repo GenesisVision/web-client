@@ -1,12 +1,10 @@
 import {
   AssetBalance,
+  OrderSide,
+  OrderType,
   TerminalCurrency
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { tableLoaderCreator } from "utils/helpers";
-
-export interface IPlaceOrderHandleSubmitValues extends IPlaceOrderFormValues {
-  type: OrderType;
-}
 
 export const getTradeType = ({
   type,
