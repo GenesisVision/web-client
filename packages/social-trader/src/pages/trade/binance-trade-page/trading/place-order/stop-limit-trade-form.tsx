@@ -28,6 +28,7 @@ import { usePlaceOrderInfo } from "./place-order-info-hook";
 import { placeOrderStopLimitValidationSchema } from "./place-order-validation";
 import {
   getBalance,
+  IPlaceOrderHandleSubmitValues,
   IStopLimitFormValues,
   TRADE_FORM_FIELDS
 } from "./place-order.helpers";
@@ -36,7 +37,7 @@ export interface IStopLimitTradeFormProps {
   status: API_REQUEST_STATUS;
   outerPrice: number;
   side: OrderSide;
-  onSubmit: (values: IStopLimitFormValues) => any;
+  onSubmit: (values: IPlaceOrderHandleSubmitValues) => any;
 }
 
 const _StopLimitTradeForm: React.FC<IStopLimitTradeFormProps & {
@@ -119,7 +120,11 @@ const _StopLimitTradeForm: React.FC<IStopLimitTradeFormProps & {
   });
 
   return (
-    <HookForm resetOnSuccess form={form} onSubmit={onSubmit}>
+    <HookForm
+      resetOnSuccess
+      form={form}
+      onSubmit={values => onSubmit({ ...values, type: "TakeProfitLimit" })}
+    >
       <Row>
         <HookFormAmountField
           autoFocus={false}
