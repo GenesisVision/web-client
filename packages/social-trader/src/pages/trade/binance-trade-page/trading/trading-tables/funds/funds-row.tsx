@@ -20,7 +20,7 @@ const _FundsRow: React.FC<Props> = ({
   locked
 }) => {
   const currency = useAccountCurrency();
-  const { rate, getRate } = useGetRate();
+  const { rate, getRate, isRatePending } = useGetRate();
   const { terminalType } = useContext(TerminalInfoContext);
   const total = formatValueWithTick(+available + +locked, "0.00000001");
 
@@ -34,7 +34,7 @@ const _FundsRow: React.FC<Props> = ({
       <td>{total}</td>
       <td>{formatValueWithTick(available, "0.00000001")}</td>
       <td>{locked}</td>
-      <td>{formatCurrencyValue(+total * rate, currency)}</td>
+      <td>{!isRatePending && formatCurrencyValue(+total * rate, currency)}</td>
       {terminalType === "futures" && (
         <td>
           <TransferButton asset={asset} />
