@@ -9,6 +9,7 @@ import React from "react";
 import styled from "styled-components";
 
 interface Props extends ICurrencyItemProps {
+  showSymbol?: boolean;
   showName?: boolean;
   available?: number | string;
 }
@@ -18,6 +19,7 @@ const Name = styled(RowItem)`
 `;
 
 const _CurrencyItemWithAmount: React.FC<Props> = ({
+  showSymbol,
   showName,
   available,
   symbol,
@@ -34,7 +36,9 @@ const _CurrencyItemWithAmount: React.FC<Props> = ({
         />
       </Name>
       <RowItem>
-        <Text muted>{available}</Text>
+        <Text muted>
+          {available} {showSymbol && <>{symbol}</>}
+        </Text>
       </RowItem>
     </Row>
   );

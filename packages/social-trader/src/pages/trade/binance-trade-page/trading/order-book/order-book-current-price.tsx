@@ -36,7 +36,7 @@ const _OrderBookCurrentPrice: React.FC<Props> = ({
       </RowItem>
       {equivalent && (
         <RowItem>
-          {equivalent} {equivalentCurrency}
+          {equivalent}&nbsp;{equivalentCurrency}
         </RowItem>
       )}
     </Center>
