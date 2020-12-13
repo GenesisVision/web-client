@@ -28,6 +28,7 @@ import { MarketTradeForm } from "./market-trade-form";
 import {
   getBalance,
   getBalancesLoaderData,
+  getTradeType,
   IPlaceOrderFormValues,
   TRADE_FORM_FIELDS
 } from "./place-order.helpers";
@@ -35,7 +36,7 @@ import styles from "./place-order.module.scss";
 
 const _PlaceOrder: React.FC = () => {
   const { tradeRequest } = useContext(TerminalMethodsContext);
-  const { price } = useContext(TradingPriceContext);
+  const { price, trades } = useContext(TradingPriceContext);
 
   const {
     stepSize,
@@ -53,8 +54,16 @@ const _PlaceOrder: React.FC = () => {
     request: tradeRequest
   });
 
+  const lastTrade = trades[0];
+
   const handleSubmit = useCallback(
     (values: IPlaceOrderFormValues) => {
+      const type = getTradeType({
+        side,
+        type: tab,
+        currentPrice: lastTrade.price,
+        price: values[TRADE_FORM_FIELDS.price]
+      });
       const quantity = formatValueWithTick(
         values[TRADE_FORM_FIELDS.quantity],
         stepSize
@@ -64,7 +73,7 @@ const _PlaceOrder: React.FC = () => {
         quantity,
         accountId: exchangeAccountId,
         side,
-        type: tab,
+        type,
         symbol: getSymbol(baseAsset, quoteAsset)
       });
     },
@@ -76,7 +85,8 @@ const _PlaceOrder: React.FC = () => {
       baseAsset,
       quoteAsset,
       side,
-      tab
+      tab,
+      lastTrade
     ]
   );
 

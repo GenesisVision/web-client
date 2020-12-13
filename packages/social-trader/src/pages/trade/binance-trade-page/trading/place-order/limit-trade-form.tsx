@@ -29,6 +29,7 @@ import { placeOrderDefaultValidationSchema } from "./place-order-validation";
 import {
   getBalance,
   IPlaceOrderFormValues,
+  IPlaceOrderHandleSubmitValues,
   TRADE_FORM_FIELDS
 } from "./place-order.helpers";
 
@@ -36,7 +37,7 @@ export interface ILimitTradeFormProps {
   status: API_REQUEST_STATUS;
   outerPrice: number;
   side: OrderSide;
-  onSubmit: (values: IPlaceOrderFormValues) => any;
+  onSubmit: (values: IPlaceOrderHandleSubmitValues) => any;
 }
 
 const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
@@ -117,7 +118,10 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
   });
 
   return (
-    <HookForm form={form} onSubmit={onSubmit}>
+    <HookForm
+      form={form}
+      onSubmit={values => onSubmit({ ...values, type: "Limit" })}
+    >
       <Row>
         <HookFormAmountField
           autoFocus={false}
