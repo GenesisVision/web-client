@@ -5,7 +5,7 @@ import React, { useContext } from "react";
 const _PlaceOrderContainer: React.FC = () => {
   const { price, trades } = useContext(TradingPriceContext);
 
-  return !!+price ? (
+  return !!+price && trades && trades[0] ? (
     <PlaceOrder price={price} lastTrade={trades[0].price} />
   ) : null;
 };
