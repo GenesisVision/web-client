@@ -6,10 +6,9 @@ import { composeCreateAccountRouteWithBroker } from "pages/create-account/create
 import { JoinButton } from "pages/landing-page/components/join-button";
 import { TBrokerInfo } from "pages/landing-page/static-data/brokers";
 import React from "react";
-import { useSelector } from "react-redux";
-import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import { LOGIN_ROUTE } from "routes/app.routes";
 import { TRADE_ROUTE } from "routes/trade.routes";
+import authService from "services/auth-service";
 
 import BrokerAdvantage from "./broker-advantage";
 import styles from "./broker-info.module.scss";
@@ -29,7 +28,7 @@ const _BrokerInfo: React.FC<Props> = ({
 }) => {
   const { t } = useTranslation();
   const { linkCreator } = useToLink();
-  const isAuthenticated = useSelector(isAuthenticatedSelector);
+  const isAuthenticated = authService.isAuthenticated();
   const tradingLink = isAuthenticated
     ? type === "Attach"
       ? composeAttachAccountRouteWithBroker(title)
