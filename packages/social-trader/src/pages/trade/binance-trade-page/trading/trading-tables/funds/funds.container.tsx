@@ -33,8 +33,12 @@ export const FundsContainer: React.FC = () => {
     if (!socketData) return;
     const updatedList = { ...list };
     const socketDataBalances = socketData.balances;
-    socketDataBalances.forEach(({ asset, free }) => {
-      updatedList[asset] = { ...updatedList[asset], free: +free };
+    socketDataBalances.forEach(update => {
+      updatedList[update.asset] = {
+        ...updatedList[update.asset],
+        ...update,
+        free: +update.free
+      };
     });
     setList(updatedList);
   }, [socketData]);
