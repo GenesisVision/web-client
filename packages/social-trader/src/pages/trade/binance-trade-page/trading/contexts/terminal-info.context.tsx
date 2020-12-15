@@ -1,5 +1,5 @@
 import { useAccountCurrency } from "hooks/account-currency.hook";
-import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/terminal-methods.context";
+import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-methods.context";
 import {
   filterOutboundAccountInfoStream,
   getSymbolFilters,
@@ -11,8 +11,8 @@ import {
 import {
   Account,
   ExchangeInfo,
+  SymbolState,
   TerminalAuthDataType,
-  TerminalCurrency,
   TerminalType
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, {
@@ -33,11 +33,6 @@ interface Props {
   outerSymbol?: SymbolState;
   terminalType: TerminalType;
 }
-
-export type SymbolState = {
-  quoteAsset: TerminalCurrency;
-  baseAsset: TerminalCurrency;
-};
 
 type TerminalAccountInfoState = {
   exchangeAccountId?: string;

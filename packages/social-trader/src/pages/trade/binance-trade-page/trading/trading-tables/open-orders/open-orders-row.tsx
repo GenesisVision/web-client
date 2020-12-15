@@ -4,9 +4,9 @@ import TableRow from "components/table/components/table-row";
 import { Text } from "components/text/text";
 import useApiRequest from "hooks/api-request.hook";
 import { terminalMoneyFormat } from "pages/trade/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
-import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/terminal-methods.context";
-import { TerminalTickerContext } from "pages/trade/binance-trade-page/trading/terminal-ticker.context";
+import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
+import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-methods.context";
+import { TerminalTickerContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-ticker.context";
 import {
   getSymbolData,
   getSymbolFilters

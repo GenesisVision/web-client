@@ -1,9 +1,12 @@
 import { ColoredTextColor } from "components/colored-text/colored-text";
+import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
+import { TerminalOpenOrdersContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-open-orders.context";
+import { TradingPriceContext } from "pages/trade/binance-trade-page/trading/contexts/trading-price.context";
+import { isOrderInLine } from "pages/trade/binance-trade-page/trading/order-book/order-book.helpers";
 import {
   LevelsSum,
   OrderBookRow
 } from "pages/trade/binance-trade-page/trading/order-book/order-book.row";
-import { TerminalOpenOrdersContext } from "pages/trade/binance-trade-page/trading/terminal-open-orders.context";
 import { StringBidDepth } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useContext, useEffect, useState } from "react";
 import { getPercentageValue } from "utils/helpers";
@@ -26,6 +29,12 @@ const _OrderBookTable: React.FC<Props> = ({
   items = []
 }) => {
   const { openOrders } = useContext(TerminalOpenOrdersContext);
+  const { setPrice } = useContext(TradingPriceContext);
+  const {
+    stepSize,
+    tickSize,
+    symbol: { baseAsset, quoteAsset }
+  } = useContext(TerminalInfoContext);
 
   const [hoveredRow, setHoveredRow] = useState<number | undefined>();
   const [levelSum, setLevelSum] = useState<LevelsSum>({
@@ -73,20 +82,16 @@ const _OrderBookTable: React.FC<Props> = ({
     <table className={styles["order-book__table"]}>
       <tbody>
         {items.map(([price, amount], i) => {
-          const hasOrder =
-            i === 0
-              ? !!limitOrders.find(limitOrderPrice => {
-                  return limitOrderPrice >= +price;
-                })
-              : !!limitOrders.find(limitOrderPrice => {
-                  return (
-                    limitOrderPrice < +items[i - 1][0] &&
-                    limitOrderPrice >= +price
-                  );
-                });
+          const hasOrder = isOrderInLine({ items, i, limitOrders, price });
           const total = +price * +amount;
           return (
             <OrderBookRow
+              setPrice={setPrice}
+              stepSize={stepSize}
+              tickSize={tickSize}
+              baseAsset={baseAsset}
+              quoteAsset={quoteAsset}
+              key={price}
               hasOrder={hasOrder}
               barPercent={100 - getPercentageValue(total, fullAmount)}
               tableTickSize={tableTickSize}

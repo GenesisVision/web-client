@@ -1,5 +1,5 @@
 import Select, { ISelectChangeEvent } from "components/select/select";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
+import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import React, { useContext, useEffect } from "react";
 import { formatValue } from "utils/formatter";
 

@@ -49,12 +49,15 @@ export const tradeSocket = (
 
 export const depthSocket = (
   connectSocketMethod: ConnectSocketMethodType,
-  symbol: TerminalCurrency
+  symbol: TerminalCurrency,
+  openCallback?: VoidFunction
 ): Observable<Depth> => {
   const socketType = "depth";
   const socketName = `${symbol.toLowerCase()}@${socketType}`;
   const url = `${BINANCE_WS_API_URL}/${BINANCE_WS_API_TYPE.WS}/${socketName}`;
-  return connectSocketMethod(socketType, url).pipe(map(depthTransform));
+  return connectSocketMethod(socketType, url, openCallback).pipe(
+    map(depthTransform)
+  );
 };
 
 export const marketTicketsSocket = (

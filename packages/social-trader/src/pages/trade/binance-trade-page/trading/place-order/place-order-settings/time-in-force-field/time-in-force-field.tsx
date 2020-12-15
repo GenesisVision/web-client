@@ -1,13 +1,14 @@
 import { GVHookFormField } from "components/gv-hook-form-field";
 import Select from "components/select/select";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
-import { TRADE_FORM_FIELDS } from "pages/trade/binance-trade-page/trading/place-order/place-order.helpers";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
+import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import {
   OrderType,
   TimeInForce as TimeInForceType
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useContext } from "react";
+
+import { TRADE_FORM_FIELDS } from "../../place-order.types";
 
 interface Props {
   orderType: OrderType;

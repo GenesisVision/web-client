@@ -1,7 +1,7 @@
 import { DoubleButton } from "components/double-button/double-button";
 import { Push } from "components/link/link";
 import { useParams } from "hooks/location";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
+import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import { stringifySymbolFromToParam } from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import { TerminalType } from "pages/trade/binance-trade-page/trading/terminal.types";
 import * as qs from "qs";

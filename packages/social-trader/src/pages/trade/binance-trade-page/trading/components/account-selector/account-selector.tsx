@@ -3,7 +3,7 @@ import { CurrencySourceSelectElement } from "components/currency-source-select/c
 import GVProgramDefaultAvatar from "components/gv-program-avatar/gv-program-default-avatar.svg";
 import { ISelectChangeEvent } from "components/select/select";
 import { ExchangeAsset } from "gv-api-web";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
+import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import {
   stringifySymbolFromToParam,
   useUpdateTerminalUrlParams

@@ -14,19 +14,24 @@ interface SocketInterface {
 
 export type ConnectSocketMethodType = (
   type: string,
-  url: string
+  url: string,
+  openCallback?: VoidFunction
 ) => Observable<any>;
 
 export const useSockets = () => {
   const [sockets, setSockets] = useState<{ [key: string]: SocketInterface }>(
     {}
   );
-  const connectSocket = (type: string, url: string): Observable<any> => {
+  const connectSocket: ConnectSocketMethodType = (
+    type: string,
+    url: string,
+    openCallback?: VoidFunction
+  ): Observable<any> => {
     if (sockets[type]) {
       if (sockets[type].url !== url) sockets[type].reconnect(url);
       return sockets[type].subscribe();
     } else {
-      const socket = new Socket(url);
+      const socket = new Socket(url, openCallback);
       setSockets({ ...sockets, [type]: socket });
       return socket.subscribe();
     }
@@ -47,14 +52,23 @@ export class Socket implements SocketInterface {
   readonly reconnectInterval = 5000;
   readonly reconnectAttempts = 10;
   public url: string;
+  private openCallback?: VoidFunction;
 
-  constructor(url: string) {
+  constructor(url: string, openCallback?: VoidFunction) {
     this.url = url;
-    this.connect(url);
+    this.connect(url, openCallback);
   }
 
-  private connect = (url: string) => {
-    this.websocket = new WebSocketSubject(url);
+  private connect = (url: string, openCallback?: VoidFunction) => {
+    this.openCallback = openCallback;
+    this.websocket = new WebSocketSubject({
+      url,
+      openObserver: {
+        next: () => {
+          openCallback?.();
+        }
+      }
+    });
     this.wsMessages = new Subject<any>();
     this.url = url;
     this.websocket.subscribe(
@@ -66,7 +80,7 @@ export class Socket implements SocketInterface {
             takeWhile(
               (v, index) => index < this.reconnectAttempts && !this.websocket
             ),
-            map(() => this.connect(url))
+            map(() => this.connect(url, this.openCallback))
           );
         }
       }
@@ -80,7 +94,7 @@ export class Socket implements SocketInterface {
 
   public reconnect = (url: string) => {
     this.disconnect();
-    this.connect(url);
+    this.connect(url, this.openCallback);
   };
 
   public subscribe = () => this.wsMessages!;

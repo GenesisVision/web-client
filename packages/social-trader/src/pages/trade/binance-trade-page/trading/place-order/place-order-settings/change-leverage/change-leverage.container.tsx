@@ -1,8 +1,8 @@
 import useApiRequest from "hooks/api-request.hook";
+import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
+import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-methods.context";
+import { TerminalPlaceOrderContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-place-order.context";
 import { ChangeLeverage } from "pages/trade/binance-trade-page/trading/place-order/place-order-settings/change-leverage/change-leverage";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
-import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/terminal-methods.context";
-import { TerminalPlaceOrderContext } from "pages/trade/binance-trade-page/trading/terminal-place-order.context";
 import { getSymbolFromState } from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import { ChangeLeverageResponse } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useCallback, useContext, useEffect } from "react";

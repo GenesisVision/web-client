@@ -1,8 +1,8 @@
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogTop } from "components/dialog/dialog-top";
 import useApiRequest from "hooks/api-request.hook";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
-import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/terminal-methods.context";
+import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
+import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-methods.context";
 import { TerminalCurrency } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { TransferForm } from "pages/trade/binance-trade-page/trading/transfer/transfer-form";
 import { TransferFormValues } from "pages/trade/binance-trade-page/trading/transfer/transfer.helpers";

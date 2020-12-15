@@ -1,6 +1,5 @@
 import Link, { ToType } from "components/link/link";
 import NavigationIconWithName from "components/navigation/navigation-icon-with-name";
-import { NextRouter } from "next/dist/client/router";
 import { WithRouterProps } from "next/dist/client/with-router";
 import { withRouter } from "next/router";
 import React from "react";
@@ -27,13 +26,11 @@ interface INavigationItemProps
 
 interface IStyleProps {
   mobile?: boolean;
-  router: NextRouter;
-  href?: string | ToType;
+  isCurrent?: boolean;
 }
 
 const dynamicStyles = css`
-  opacity: ${({ router, href }: IStyleProps) =>
-    !!href && router.route.startsWith(normalizeLinkFrom(href)) ? 1 : 0.4};
+  opacity: ${({ isCurrent }: IStyleProps) => (isCurrent ? 1 : 0.4)};
   &:hover {
     opacity: 1;
   }
@@ -88,21 +85,17 @@ const _NavigationItem: React.FC<INavigationItemProps> = ({
       {children}
     </NavigationIconWithName>
   );
-  return (
-    (!!href && (
-      <StyledLink mobile={mobile} href={href} router={router} to={href}>
-        {renderIconWithName()}
-      </StyledLink>
-    )) || (
-      <StyledButton
-        mobile={mobile}
-        href={href}
-        router={router}
-        onClick={onClick}
-      >
-        {renderIconWithName()}
-      </StyledButton>
-    )
+
+  const isCurrent = !!href && router.route.startsWith(normalizeLinkFrom(href));
+
+  return !!href ? (
+    <StyledLink mobile={mobile} isCurrent={isCurrent} to={href}>
+      {renderIconWithName()}
+    </StyledLink>
+  ) : (
+    <StyledButton mobile={mobile} isCurrent={isCurrent} onClick={onClick}>
+      {renderIconWithName()}
+    </StyledButton>
   );
 };
 const NavigationItem = withRouter(React.memo(_NavigationItem));

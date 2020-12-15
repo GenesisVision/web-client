@@ -1,9 +1,8 @@
-import { useAccountCurrency } from "hooks/account-currency.hook";
+import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
+import { TerminalTickerContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-ticker.context";
+import { TradingPriceContext } from "pages/trade/binance-trade-page/trading/contexts/trading-price.context";
 import { OrderBookCurrentPrice } from "pages/trade/binance-trade-page/trading/order-book/order-book-current-price";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
-import { TerminalTickerContext } from "pages/trade/binance-trade-page/trading/terminal-ticker.context";
-import { TradingPriceContext } from "pages/trade/binance-trade-page/trading/trading-price.context";
-import React, { useContext, useMemo } from "react";
+import React, { useContext } from "react";
 import { formatValue } from "utils/formatter";
 import { safeGetElemFromArray } from "utils/helpers";
 
