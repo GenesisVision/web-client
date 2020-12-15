@@ -25,7 +25,7 @@ const _FundsRow: React.FC<Props> = ({
   const total = formatValueWithTick(+available + +locked, "0.00000001");
 
   useEffect(() => {
-    getRate({ from: asset, to: currency });
+    if (asset && currency) getRate({ from: asset, to: currency });
   }, [currency, asset]);
 
   return (
