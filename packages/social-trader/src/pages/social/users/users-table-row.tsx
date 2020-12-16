@@ -123,6 +123,7 @@ export const UsersTableRow: React.FC<{ user: UserDetailsList }> = ({
       {personalDetails && (
         <TableCell>
           <FollowUserButton
+            wide={false}
             disabled={!personalDetails.allowFollow}
             size={"small"}
             id={userId}
