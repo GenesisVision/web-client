@@ -7,7 +7,7 @@ import CookieMessage from "pages/landing-page/components/cookie-message/cookie-m
 import { LandingUpperButton } from "pages/landing-page/components/landing-upper-button/landing-upper-button";
 import LPFooter from "pages/landing-page/components/lp-footer/lp-footer";
 import LPHeader from "pages/landing-page/components/lp-header/lp-header";
-import React from "react";
+import React, { useEffect } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import { LandingPageRootStyle } from "styles/root-styles";
 import {
@@ -19,6 +19,7 @@ import {
   titleMeta
 } from "utils/seo";
 import { $landingBg, $mainColor } from "utils/style/colors";
+import { logVersion } from "utils/version";
 
 const GlobalStyle = createGlobalStyle`
   ${LandingPageRootStyle}
@@ -43,6 +44,11 @@ const _Layout: React.FC<Props> = ({
 }) => {
   const { t } = useTranslation();
   useRefLink();
+
+  useEffect(() => {
+    logVersion();
+  }, []);
+
   return (
     <Container className="landing-page">
       <Head>

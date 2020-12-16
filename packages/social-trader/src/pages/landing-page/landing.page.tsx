@@ -28,8 +28,7 @@ import {
   brokersTabs
 } from "pages/landing-page/static-data/brokers";
 import { useUtm } from "pages/landing-page/utils";
-import React, { useEffect } from "react";
-import { logVersion } from "utils/version";
+import React from "react";
 
 interface Props {
   cookieAccept?: string;
@@ -51,11 +50,6 @@ const _LandingPage: React.FC<Props> = ({
 }) => {
   const { t } = useTranslation();
   useUtm();
-
-  useEffect(() => {
-    logVersion();
-  }, []);
-
   return (
     <Layout
       cookieAccept={cookieAccept}
