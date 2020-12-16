@@ -15,8 +15,6 @@ const GlobalStyle = createGlobalStyle`
   ${RootStyle}
 `;
 
-if (process.env.APP_VERSION) console.log(process.env.APP_VERSION);
-
 class CustomApp extends App<Props> {
   render() {
     const { Component, pageProps } = this.props;
