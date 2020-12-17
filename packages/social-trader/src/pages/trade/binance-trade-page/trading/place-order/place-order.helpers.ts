@@ -6,6 +6,17 @@ import {
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { tableLoaderCreator } from "utils/helpers";
 
+export const mapPlaceOrderErrors = (error: string) => {
+  switch (error) {
+    case "Failed (-2015 Invalid API-key, IP, or permissions for action.)":
+      return "Trading is currently unavailable";
+    case "Failed (-2010 Account has insufficient balance for requested action.)":
+      return "Order failed: insufficient balance";
+    default:
+      return error;
+  }
+};
+
 export const getTradeType = ({
   type,
   side,
