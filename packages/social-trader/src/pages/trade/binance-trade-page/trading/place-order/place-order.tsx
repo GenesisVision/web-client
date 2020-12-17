@@ -29,7 +29,8 @@ import { MarketTradeForm } from "./market-trade-form";
 import {
   getBalance,
   getBalancesLoaderData,
-  getTradeType
+  getTradeType,
+  mapPlaceOrderErrors
 } from "./place-order.helpers";
 import styles from "./place-order.module.scss";
 import { IPlaceOrderFormValues, TRADE_FORM_FIELDS } from "./place-order.types";
@@ -55,14 +56,7 @@ const _PlaceOrder: React.FC<Props> = ({ lastTrade, price }) => {
   const { tab, setTab } = useTab<OrderType>("Limit");
 
   const { sendRequest, status } = useApiRequest({
-    errorAlertHandler: error => {
-      if (
-        error ===
-        "Failed (-2015 Invalid API-key, IP, or permissions for action.)"
-      )
-        return "Trading is currently unavailable";
-      return error;
-    },
+    errorAlertHandler: mapPlaceOrderErrors,
     request: tradeRequest
   });
 
