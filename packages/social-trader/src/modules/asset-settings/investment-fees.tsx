@@ -21,7 +21,7 @@ enum FIELDS {
   successFee = "successFee"
 }
 
-export interface InvesmentLimitFormValues {
+export interface InvestmentLimitFormValues {
   [FIELDS.exitFee]?: number;
   [FIELDS.entryFee]: number;
   [FIELDS.successFee]?: number;
@@ -37,7 +37,7 @@ interface Props {
   exitFee?: number;
   entryFee: number;
   successFee?: number;
-  onSubmit: (values: InvesmentLimitFormValues) => void;
+  onSubmit: (values: InvestmentLimitFormValues) => void;
 }
 
 const getFirstDescription = ({
@@ -102,7 +102,7 @@ const _InvestmentFees: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
 
-  const form = useForm<InvesmentLimitFormValues>({
+  const form = useForm<InvestmentLimitFormValues>({
     defaultValues: {
       [FIELDS.exitFee]: exitFee,
       [FIELDS.entryFee]: entryFee,
