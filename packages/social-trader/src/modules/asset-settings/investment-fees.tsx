@@ -72,7 +72,7 @@ const getSecondDescription = ({
 }: {
   t: TFunction;
   asset: ASSET;
-  maxFee?: number;
+  maxFee: number;
   isExchange?: boolean;
 }) => {
   switch (asset) {
@@ -141,6 +141,7 @@ const _InvestmentFees: React.FC<Props> = ({
             secondFeeLabel={t("asset-settings:fields.success-fee")}
             secondFeeUnderText={t("create-account:settings.hints.success-fee")}
             secondFeeDescription={getSecondDescription({
+              maxFee: maxSuccessFee,
               isExchange,
               t,
               asset: ASSET.PROGRAM
@@ -163,7 +164,7 @@ const _InvestmentFees: React.FC<Props> = ({
             secondFeeDescription={getSecondDescription({
               t,
               asset: ASSET.FUND,
-              maxFee: maxSuccessFee
+              maxFee: maxExitFee
             })}
           />
         )}
