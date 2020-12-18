@@ -56,6 +56,7 @@ const _PlaceOrder: React.FC<Props> = ({ lastTrade, price }) => {
   const { tab, setTab } = useTab<OrderType>("Limit");
 
   const { sendRequest, status } = useApiRequest({
+    isUseLocalizationOnError: false,
     errorAlertHandler: mapPlaceOrderErrors,
     request: tradeRequest
   });
