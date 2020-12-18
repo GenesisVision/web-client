@@ -9,6 +9,7 @@ import React from "react";
 import { CurrencyEnum, Sizeable } from "utils/types";
 
 interface Props extends Sizeable {
+  GM?: boolean;
   isProcessingRealTime?: boolean;
   infoMessage?: string;
   disabled?: boolean;
@@ -19,6 +20,7 @@ interface Props extends Sizeable {
 }
 
 const _WithdrawButton: React.FC<Props> = ({
+  GM,
   isProcessingRealTime,
   infoMessage,
   size,
@@ -43,6 +45,7 @@ const _WithdrawButton: React.FC<Props> = ({
       />
     ) : (
       <ProgramWithdrawDialog
+        GM={GM}
         isProcessingRealTime={isProcessingRealTime}
         onApply={onApply}
         open={isOpenPopup}
