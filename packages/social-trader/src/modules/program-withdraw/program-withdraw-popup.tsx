@@ -26,6 +26,7 @@ interface OwnProps {
 }
 
 export interface IProgramWithdrawPopupProps {
+  GM?: boolean;
   isProcessingRealTime?: boolean;
   onApply?: VoidFunction;
   id: string;
@@ -40,6 +41,7 @@ export type ProgramWithdrawType = {
 };
 
 const _ProgramWithdrawPopup: React.FC<Props> = ({
+  GM,
   isProcessingRealTime,
   onApply,
   id,
@@ -95,6 +97,7 @@ const _ProgramWithdrawPopup: React.FC<Props> = ({
       <DialogBottom>
         {tab === PROGRAM_WITHDRAW_FORM.ENTER_AMOUNT && (
           <ProgramWithdrawAmountForm
+            GM={GM}
             withdrawInPercent={withdrawInPercent}
             isOwner={isOwner}
             formValues={formValues}
