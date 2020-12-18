@@ -4,7 +4,7 @@ import { SubmitButton } from "components/submit-button/submit-button";
 import useIsOpen from "hooks/is-open.hook";
 import SignupDialog from "pages/auth/signup/signup-popup/signup-dialog";
 import { composeCreateAccountRouteWithBroker } from "pages/create-account/create-account.constants";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
+import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import {
   OrderSide,
   TerminalCurrency

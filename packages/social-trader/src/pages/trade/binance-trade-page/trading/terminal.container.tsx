@@ -1,18 +1,18 @@
 import { BinanceRawSymbol } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
-import { Terminal } from "pages/trade/binance-trade-page/trading/terminal";
 import {
   SymbolInitialState,
-  SymbolState,
   TerminalTypeInitialState
-} from "pages/trade/binance-trade-page/trading/terminal-info.context";
-import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/terminal-methods.context";
+} from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
+import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-methods.context";
+import { Terminal } from "pages/trade/binance-trade-page/trading/terminal";
 import {
   stringifySymbolFromToParam,
   updateTerminalUrl
 } from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import {
   ExchangeInfo,
+  SymbolState,
   TerminalAuthDataType,
   TerminalType
 } from "pages/trade/binance-trade-page/trading/terminal.types";

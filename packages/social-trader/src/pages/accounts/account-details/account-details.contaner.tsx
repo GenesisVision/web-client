@@ -37,7 +37,12 @@ const InvestmentAccountControls = dynamic(() =>
   import("pages/accounts/account-details/investment-account-controls")
 );
 
+interface Props {
+  data: AccountDetailsDataType;
+}
+
 const _AccountDetailsContainer: React.FC<Props> = ({ data: description }) => {
+  const isExchange = description.tradingAccountInfo.type === "ExchangeAccount";
   const dispatch = useDispatch();
   const tablesData: TProgramTablesData = useMemo(
     () => ({
@@ -107,6 +112,7 @@ const _AccountDetailsContainer: React.FC<Props> = ({ data: description }) => {
         <AccountDetailsStatisticSection />
       </Row>
       <ProgramDetailsHistorySection
+        isExchange={isExchange}
         isFollower={description.tradingAccountInfo.showTradingLog}
         canCloseOpenPositions={description.ownerActions?.canCloseOpenPositions}
         assetType={TRADE_ASSET_TYPE.ACCOUNT}
@@ -126,10 +132,6 @@ const _AccountDetailsContainer: React.FC<Props> = ({ data: description }) => {
     </Page>
   );
 };
-
-interface Props {
-  data: AccountDetailsDataType;
-}
 
 const AccountDetailsContainer = React.memo(Crashable(_AccountDetailsContainer));
 export default AccountDetailsContainer;

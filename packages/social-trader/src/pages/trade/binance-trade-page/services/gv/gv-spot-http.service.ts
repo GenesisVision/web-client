@@ -1,3 +1,4 @@
+import { DEFAULT_DECIMAL_SCALE } from "constants/constants";
 import dayjs from "dayjs";
 import {
   BinanceRawCancelOrder,
@@ -32,6 +33,7 @@ import {
 import { from, Observable } from "rxjs";
 import { api } from "services/api-client/swagger-custom-client";
 import { OrderRequest } from "services/request.service";
+import { formatValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 
 export const getExchangeInfo = (): Promise<ExchangeInfo> =>
@@ -205,7 +207,7 @@ const transformDepthToString = (dividerParts: DividerPartsType) => ({
   quantity
 }: BinanceRawOrderBookEntry): StringBidDepth => {
   const newPrice = getPriceWithCorrectFrac(
-    String(price),
+    formatValue(price, DEFAULT_DECIMAL_SCALE),
     dividerParts.fracLength
   );
   return [newPrice, String(quantity)];

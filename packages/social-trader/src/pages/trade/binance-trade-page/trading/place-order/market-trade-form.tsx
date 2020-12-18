@@ -4,11 +4,11 @@ import { LabeledValue } from "components/labeled-value/labeled-value";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { API_REQUEST_STATUS } from "hooks/api-request.hook";
+import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
+import { TerminalPlaceOrderContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-place-order.context";
 import { ReduceOnlyField } from "pages/trade/binance-trade-page/trading/place-order/place-order-settings/reduce-only-field/reduce-only-field";
 import { PlaceOrderSlider } from "pages/trade/binance-trade-page/trading/place-order/place-order-slider";
 import { PlaceOrderSubmitButton } from "pages/trade/binance-trade-page/trading/place-order/place-order-submit-button";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
-import { TerminalPlaceOrderContext } from "pages/trade/binance-trade-page/trading/terminal-place-order.context";
 import {
   AssetBalance,
   ExchangeInfo,
@@ -19,20 +19,20 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
 
-import { usePlaceOrderAutoFill } from "./place-order-auto-fill.hook";
-import { usePlaceOrderFormReset } from "./place-order-form-reset.hook";
-import { usePlaceOrderInfo } from "./place-order-info-hook";
+import { usePlaceOrderAutoFill } from "./hooks/place-order-auto-fill.hook";
+import { usePlaceOrderFormReset } from "./hooks/place-order-form-reset.hook";
+import { usePlaceOrderInfo } from "./hooks/place-order-info-hook";
 import { placeOrderDefaultValidationSchema } from "./place-order-validation";
+import { getBalance } from "./place-order.helpers";
 import {
-  getBalance,
   IPlaceOrderFormValues,
   IPlaceOrderHandleSubmitValues,
   TRADE_FORM_FIELDS
-} from "./place-order.helpers";
+} from "./place-order.types";
 
 export interface IMarketTradeFormProps {
   status: API_REQUEST_STATUS;
-  outerPrice: number;
+  outerPrice: string;
   side: OrderSide;
   onSubmit: (values: IPlaceOrderHandleSubmitValues) => any;
 }

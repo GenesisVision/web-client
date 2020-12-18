@@ -1,8 +1,8 @@
 import useApiRequest from "hooks/api-request.hook";
+import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
+import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-methods.context";
+import { TerminalPlaceOrderContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-place-order.context";
 import { PositionMode } from "pages/trade/binance-trade-page/trading/place-order/place-order-settings/position-mode/position-mode";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
-import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/terminal-methods.context";
-import { TerminalPlaceOrderContext } from "pages/trade/binance-trade-page/trading/terminal-place-order.context";
 import { PositionModeType } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useCallback, useContext, useEffect, useState } from "react";
 

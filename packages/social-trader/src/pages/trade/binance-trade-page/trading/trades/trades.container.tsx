@@ -1,5 +1,5 @@
+import { TradingPriceContext } from "pages/trade/binance-trade-page/trading/contexts/trading-price.context";
 import { Trades } from "pages/trade/binance-trade-page/trading/trades/trades";
-import { TradingPriceContext } from "pages/trade/binance-trade-page/trading/trading-price.context";
 import React, { useContext } from "react";
 
 const _TradesContainer: React.FC = () => {

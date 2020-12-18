@@ -6,12 +6,13 @@ import { WalletIcon } from "components/icon/wallet-icon";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
+import { DEFAULT_DECIMAL_SCALE } from "constants/constants";
 import useApiRequest from "hooks/api-request.hook";
 import useTab from "hooks/tab.hook";
 import { TerminalDefaultBlock } from "pages/trade/binance-trade-page/trading/components/terminal-default-block/terminal-default-block";
+import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
+import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-methods.context";
 import { StopLimitTradeForm } from "pages/trade/binance-trade-page/trading/place-order/stop-limit-trade-form";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
-import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/terminal-methods.context";
 import {
   formatValueWithTick,
   getSymbol
@@ -20,8 +21,8 @@ import {
   OrderSide,
   OrderType
 } from "pages/trade/binance-trade-page/trading/terminal.types";
-import { TradingPriceContext } from "pages/trade/binance-trade-page/trading/trading-price.context";
 import React, { useCallback, useContext, useState } from "react";
+import { formatValue } from "utils/formatter";
 
 import { LimitTradeForm } from "./limit-trade-form";
 import { MarketTradeForm } from "./market-trade-form";
@@ -29,14 +30,18 @@ import {
   getBalance,
   getBalancesLoaderData,
   getTradeType,
-  IPlaceOrderFormValues,
-  TRADE_FORM_FIELDS
+  mapPlaceOrderErrors
 } from "./place-order.helpers";
 import styles from "./place-order.module.scss";
+import { IPlaceOrderFormValues, TRADE_FORM_FIELDS } from "./place-order.types";
 
-const _PlaceOrder: React.FC = () => {
+interface Props {
+  price: string;
+  lastTrade: number;
+}
+
+const _PlaceOrder: React.FC<Props> = ({ lastTrade, price }) => {
   const { tradeRequest } = useContext(TerminalMethodsContext);
-  const { price, trades } = useContext(TradingPriceContext);
 
   const {
     stepSize,
@@ -51,17 +56,16 @@ const _PlaceOrder: React.FC = () => {
   const { tab, setTab } = useTab<OrderType>("Limit");
 
   const { sendRequest, status } = useApiRequest({
+    errorAlertHandler: mapPlaceOrderErrors,
     request: tradeRequest
   });
-
-  const lastTrade = trades[0];
 
   const handleSubmit = useCallback(
     (values: IPlaceOrderFormValues) => {
       const type = getTradeType({
         side,
         type: tab,
-        currentPrice: lastTrade.price,
+        currentPrice: lastTrade,
         price: values[TRADE_FORM_FIELDS.price]
       });
       const quantity = formatValueWithTick(
@@ -134,7 +138,7 @@ const _PlaceOrder: React.FC = () => {
         </RowItem>
         <RowItem>
           <Text muted>
-            {balance} {walletAsset}
+            {formatValue(balance, DEFAULT_DECIMAL_SCALE)} {walletAsset}
           </Text>
         </RowItem>
       </Row>
@@ -145,7 +149,7 @@ const _PlaceOrder: React.FC = () => {
               status={status}
               exchangeInfo={exchangeInfo}
               balances={balances}
-              outerPrice={+price}
+              outerPrice={price}
               onSubmit={handleSubmit}
               side={side}
             />
@@ -155,7 +159,7 @@ const _PlaceOrder: React.FC = () => {
               status={status}
               exchangeInfo={exchangeInfo}
               balances={balances}
-              outerPrice={+price}
+              outerPrice={price}
               onSubmit={handleSubmit}
               side={side}
             />
@@ -165,7 +169,7 @@ const _PlaceOrder: React.FC = () => {
               status={status}
               exchangeInfo={exchangeInfo}
               balances={balances}
-              outerPrice={+price}
+              outerPrice={price}
               onSubmit={handleSubmit}
               side={side}
             />

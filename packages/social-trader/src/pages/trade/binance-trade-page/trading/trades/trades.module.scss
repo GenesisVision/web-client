@@ -12,6 +12,7 @@
   }
   &__header-container {
     width: calc(100% - 5px);
+    margin-bottom: $padding-xxxsmall;
   }
   &__items-container {
     height: 100%;

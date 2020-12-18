@@ -2,6 +2,7 @@ import { DocumentContext } from "next/dist/next-server/lib/utils";
 import Document, { Head, Html, Main, NextScript } from "next/document";
 import React from "react";
 import { ServerStyleSheet } from "styled-components";
+import { VERSION_ID } from "utils/version";
 
 import CustomHead from "./head-custom";
 import CustomNextScript from "./next-script-custom";
@@ -69,6 +70,13 @@ class MyDocument extends Document<{ pathname: string }> {
           />
         </HeadElement>
         <body>
+          {process.env.APP_VERSION && (
+            <div
+              id={VERSION_ID}
+              data-version={process.env.APP_VERSION}
+              style={{ display: "none" }}
+            />
+          )}
           <Main />
           <NextScriptElement />
           <noscript>

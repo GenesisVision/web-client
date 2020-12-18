@@ -28,7 +28,8 @@ const _BrokerInfo: React.FC<Props> = ({
 }) => {
   const { t } = useTranslation();
   const { linkCreator } = useToLink();
-  const tradingLink = authService.isAuthenticated()
+  const isAuthenticated = authService.isAuthenticated();
+  const tradingLink = isAuthenticated
     ? type === "Attach"
       ? composeAttachAccountRouteWithBroker(title)
       : composeCreateAccountRouteWithBroker(title)

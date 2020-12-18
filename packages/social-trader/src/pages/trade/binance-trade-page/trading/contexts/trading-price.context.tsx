@@ -1,6 +1,9 @@
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
-import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/terminal-methods.context";
-import { getSymbol } from "pages/trade/binance-trade-page/trading/terminal.helpers";
+import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
+import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-methods.context";
+import {
+  formatValueWithTick,
+  getSymbol
+} from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import { UnitedTrade } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, {
   createContext,
@@ -33,6 +36,7 @@ export const TradingPriceContextProvider: React.FC = ({ children }) => {
   const TRADE_LIST_SIZE = 50;
   const { tradeSocket, getTrades } = useContext(TerminalMethodsContext);
   const {
+    tickSize,
     terminalType,
     symbol: { baseAsset, quoteAsset }
   } = useContext(TerminalInfoContext);
@@ -79,9 +83,9 @@ export const TradingPriceContextProvider: React.FC = ({ children }) => {
     () => ({
       trades: list,
       setPrice,
-      price
+      price: formatValueWithTick(price, tickSize)
     }),
-    [setPrice, price, list]
+    [setPrice, price, list, tickSize]
   );
 
   return (

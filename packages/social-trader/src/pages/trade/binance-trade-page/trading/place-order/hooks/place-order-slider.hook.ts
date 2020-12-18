@@ -2,7 +2,7 @@ import {
   terminalMoneyFormat,
   truncated
 } from "pages/trade/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
+import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import { getDecimalScale } from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import {
   AssetBalance,
@@ -13,7 +13,7 @@ import { calculatePercentage } from "utils/currency-converter";
 import { formatValue } from "utils/formatter";
 import { AnyObjectType } from "utils/types";
 
-import { getBalance } from "./place-order.helpers";
+import { getBalance } from "../place-order.helpers";
 
 export type SetSliderValueFunc = (
   sliderValue?: number,
@@ -71,10 +71,13 @@ export const useTradeSlider = ({
         truncated(percentAmount, getDecimalScale(formatValue(stepSize))) === 0
       )
         return;
-      const newQuantity = +terminalMoneyFormat({
-        amount: percentAmount,
-        tickSize: stepSize
-      });
+      const newQuantity =
+        newValue === MAX_TRADE_SLIDER_VALUE
+          ? +getBalance(balances, baseAsset)
+          : +terminalMoneyFormat({
+              amount: percentAmount,
+              tickSize: stepSize
+            });
       setValue(quantityName, newQuantity, true);
     }
   };

@@ -1,15 +1,18 @@
 import { Text } from "components/text/text";
 import { getTextColor } from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import React, { useEffect, useState } from "react";
+import NumberFormat from "react-number-format";
 
 interface Props {
   showArrow?: boolean;
+  thousandSeparator?: string;
   suffix?: string;
   trigger: any;
   value: number | string;
 }
 
 const _TradeStatefulValue: React.FC<Props> = ({
+  thousandSeparator,
   showArrow,
   suffix,
   value,
@@ -27,7 +30,12 @@ const _TradeStatefulValue: React.FC<Props> = ({
 
   return (
     <Text color={color}>
-      {value} {suffix}
+      <NumberFormat
+        displayType="text"
+        thousandSeparator={thousandSeparator}
+        value={value}
+        suffix={suffix ? ` ${suffix}` : undefined}
+      />
       {showArrow && color === "green" && <>&uarr;</>}
       {showArrow && color === "red" && <>&darr;</>}
     </Text>
