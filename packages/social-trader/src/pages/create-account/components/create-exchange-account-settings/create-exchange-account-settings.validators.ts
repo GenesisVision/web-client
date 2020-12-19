@@ -1,4 +1,4 @@
-import { ExchangeInfo } from "gv-api-web";
+import { BrokerAccountType, ExchangeInfo } from "gv-api-web";
 import { TFunction } from "i18next";
 import { convertToCurrency } from "utils/currency-converter";
 import { formatCurrencyValue } from "utils/formatter";
@@ -26,7 +26,7 @@ const CreateExchangeAccountSettingsValidationSchema = ({
 }) => {
   return lazy<ICreateExchangeAccountSettingsFormValues>(values => {
     const accountType = safeGetElemFromArray(
-      exchange.accountTypes,
+      exchange.accountTypes as BrokerAccountType[],
       ({ id }) =>
         values[CREATE_EXCHANGE_ACCOUNT_FIELDS.brokerAccountTypeId] === id
     );
