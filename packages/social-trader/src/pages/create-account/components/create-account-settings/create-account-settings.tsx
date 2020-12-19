@@ -34,6 +34,20 @@ export enum CREATE_ACCOUNT_FIELDS {
   brokerAccountTypeId = "brokerAccountTypeId"
 }
 
+export interface ICreateAccountSettingsFormValues {
+  [CREATE_ACCOUNT_FIELDS.brokerAccountTypeId]: string;
+  [CREATE_ACCOUNT_FIELDS.leverage]: number;
+  [CREATE_ACCOUNT_FIELDS.currency]: string;
+  [CREATE_ACCOUNT_FIELDS.depositWalletId]: string;
+  [CREATE_ACCOUNT_FIELDS.depositAmount]?: number | string;
+}
+
+interface Props {
+  errorMessage?: string;
+  broker: Broker;
+  onSubmit: (values: ICreateAccountSettingsFormValues) => void;
+}
+
 const _CreateAccountSettings: React.FC<Props> = ({
   errorMessage,
   broker,
@@ -144,20 +158,6 @@ const _CreateAccountSettings: React.FC<Props> = ({
     </HookForm>
   );
 };
-
-export interface ICreateAccountSettingsFormValues {
-  [CREATE_ACCOUNT_FIELDS.brokerAccountTypeId]: string;
-  [CREATE_ACCOUNT_FIELDS.leverage]: number;
-  [CREATE_ACCOUNT_FIELDS.currency]: string;
-  [CREATE_ACCOUNT_FIELDS.depositWalletId]: string;
-  [CREATE_ACCOUNT_FIELDS.depositAmount]?: number | string;
-}
-
-interface Props {
-  errorMessage?: string;
-  broker: Broker;
-  onSubmit: (values: ICreateAccountSettingsFormValues) => void;
-}
 
 const CreateAccountSettings = React.memo(_CreateAccountSettings);
 export default CreateAccountSettings;
