@@ -146,7 +146,7 @@ const _CreateProgramSettings: React.FC<Props> = ({
   }, [hasInvestmentLimit]);
 
   const accountType = safeGetElemFromArray(
-    broker.accountTypes,
+    broker.accountTypes as BrokerAccountType[],
     ({ id }) => brokerAccountTypeId === id
   );
 
