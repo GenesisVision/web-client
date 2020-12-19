@@ -25,8 +25,8 @@ const CreateExchangeAccountSettingsValidationSchema = ({
   exchange: ExchangeInfo;
 }) => {
   return lazy<ICreateExchangeAccountSettingsFormValues>(values => {
-    const accountType = safeGetElemFromArray(
-      exchange.accountTypes as BrokerAccountType[],
+    const accountType = safeGetElemFromArray<BrokerAccountType>(
+      exchange.accountTypes,
       ({ id }) =>
         values[CREATE_EXCHANGE_ACCOUNT_FIELDS.brokerAccountTypeId] === id
     );
