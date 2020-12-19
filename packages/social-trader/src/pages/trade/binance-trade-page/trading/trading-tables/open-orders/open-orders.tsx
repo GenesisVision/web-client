@@ -26,7 +26,7 @@ export const OpenOrders: React.FC<Props> = ({ items }) => {
       options,
       exchangeAccountId
     }: {
-      options: { symbol: string; useServerTime?: boolean };
+      options: { symbol?: string; useServerTime?: boolean };
       exchangeAccountId: string;
     }) => cancelAllOrders(options, exchangeAccountId)
   });
