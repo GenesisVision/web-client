@@ -4,7 +4,6 @@ import useApiRequest from "hooks/api-request.hook";
 import { TradeTable } from "pages/trade/binance-trade-page/trading/components/trade-table/trade-table";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-methods.context";
-import { getSymbolFromState } from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import { UnitedOrder } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
@@ -32,7 +31,7 @@ export const OpenOrders: React.FC<Props> = ({ items }) => {
   });
   const handleCancel = useCallback(() => {
     return sendRequest({
-      options: { symbol: getSymbolFromState(symbol) },
+      options: {},
       exchangeAccountId
     });
   }, [symbol, exchangeAccountId]);
