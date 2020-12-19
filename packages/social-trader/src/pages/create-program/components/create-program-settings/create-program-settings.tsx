@@ -149,8 +149,8 @@ const _CreateProgramSettings: React.FC<Props> = ({
     triggerValidation();
   }, [hasInvestmentLimit]);
 
-  const accountType = safeGetElemFromArray<BrokerAccountType>(
-    broker.accountTypes,
+  const accountType = safeGetElemFromArray(
+    broker.accountTypes as BrokerAccountType[],
     ({ id }) => brokerAccountTypeId === id
   );
 
@@ -209,9 +209,7 @@ const _CreateProgramSettings: React.FC<Props> = ({
                     setValue(CREATE_PROGRAM_FIELDS.currency, value)
                   }
                   name={CREATE_PROGRAM_FIELDS.brokerAccountTypeId}
-                  accountTypes={
-                    (broker.accountTypes as unknown) as BrokerAccountType[]
-                  }
+                  accountTypes={broker.accountTypes as BrokerAccountType[]}
                 />
               </RowItem>
               <RowItem>
