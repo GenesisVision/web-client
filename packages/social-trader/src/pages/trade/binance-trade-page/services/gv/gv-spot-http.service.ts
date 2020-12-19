@@ -245,7 +245,7 @@ export const newOrder = (
   });
 
 export const cancelAllOrders = (
-  { symbol }: { symbol: string; useServerTime?: boolean },
+  { symbol }: { symbol?: string; useServerTime?: boolean },
   accountId?: string
 ): Promise<BinanceRawCancelOrderId[]> =>
   api.terminal().cancelAllOrders({ symbol, accountId });

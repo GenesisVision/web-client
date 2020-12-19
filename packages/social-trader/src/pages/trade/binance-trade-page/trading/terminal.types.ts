@@ -190,7 +190,7 @@ export interface ITerminalMethods extends IGVTerminalMethods {
     limit?: number
   ) => Observable<CorrectedRestDepth>;
   cancelAllOrders: (
-    options: { symbol: string; useServerTime?: boolean },
+    options: { symbol?: string; useServerTime?: boolean },
     accountId?: string
   ) => Promise<BinanceRawCancelOrderId[]>;
   cancelOrder: (
