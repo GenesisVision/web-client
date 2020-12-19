@@ -12,7 +12,7 @@ import DepositDetailsBlock from "components/assets/fields/deposit-details-block"
 import Leverage from "components/assets/fields/leverage";
 import { Row } from "components/row/row";
 import SettingsBlock from "components/settings-block/settings-block";
-import { Broker } from "gv-api-web";
+import { Broker, BrokerAccountType } from "gv-api-web";
 import { KycRequiredBlock } from "pages/create-account/components/create-account-settings/kyc-required-block";
 import * as React from "react";
 import { useState } from "react";
@@ -83,7 +83,7 @@ const _CreateAccountSettings: React.FC<Props> = ({
   const { brokerAccountTypeId, depositAmount, currency } = watch();
 
   const accountType = safeGetElemFromArray(
-    broker.accountTypes,
+    broker.accountTypes as BrokerAccountType[],
     ({ id }) => brokerAccountTypeId === id
   );
 
