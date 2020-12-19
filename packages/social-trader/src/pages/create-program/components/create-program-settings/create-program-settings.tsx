@@ -149,8 +149,8 @@ const _CreateProgramSettings: React.FC<Props> = ({
     triggerValidation();
   }, [hasInvestmentLimit]);
 
-  const accountType = safeGetElemFromArray<BrokerAccountType>(
-    broker.accountTypes,
+  const accountType = safeGetElemFromArray(
+    (broker.accountTypes as unknown) as BrokerAccountType[],
     ({ id }) => brokerAccountTypeId === id
   );
 
