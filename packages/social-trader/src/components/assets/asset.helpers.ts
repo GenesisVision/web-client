@@ -17,8 +17,9 @@ export const getLeverage = (
   accountType: BrokerAccountType | ExchangeAccountType
 ): number => ("leverages" in accountType ? accountType.leverages[0] : 0);
 
-export const getBrokerId = (accountTypes: ExchangeAccountType[]): string =>
-  accountTypes[0].id;
+export const getBrokerId = (
+  accountTypes: Array<BrokerAccountType | ExchangeAccountType>
+): string => accountTypes[0].id;
 
 export const getLeverageDescription = (
   leverageMin: number,
