@@ -87,7 +87,7 @@ const _BrokerSelectBroker: React.FC<Props> = ({
               >
                 {"leverageMin" in selectedBroker
                   ? getBrokerAccountTypes(
-                      selectedBroker.accountTypes as BrokerAccountType[]
+                      (selectedBroker.accountTypes as unknown) as BrokerAccountType[]
                     )
                   : getExchangeAccountTypes(selectedBroker.accountTypes)}
               </LabeledValue>
