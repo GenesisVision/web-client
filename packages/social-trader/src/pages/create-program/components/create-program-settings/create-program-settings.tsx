@@ -150,7 +150,7 @@ const _CreateProgramSettings: React.FC<Props> = ({
   }, [hasInvestmentLimit]);
 
   const accountType = safeGetElemFromArray(
-    broker.accountTypes as BrokerAccountType[],
+    (broker.accountTypes as unknown) as BrokerAccountType[],
     ({ id }) => brokerAccountTypeId === id
   );
 
@@ -209,7 +209,9 @@ const _CreateProgramSettings: React.FC<Props> = ({
                     setValue(CREATE_PROGRAM_FIELDS.currency, value)
                   }
                   name={CREATE_PROGRAM_FIELDS.brokerAccountTypeId}
-                  accountTypes={broker.accountTypes as BrokerAccountType[]}
+                  accountTypes={
+                    (broker.accountTypes as unknown) as BrokerAccountType[]
+                  }
                 />
               </RowItem>
               <RowItem>

@@ -48,7 +48,7 @@ const createProgramSettingsValidationSchema = ({
   return lazy<ICreateProgramSettingsFormValues>(values => {
     const currency = values[CREATE_PROGRAM_FIELDS.currency];
     const accountType = safeGetElemFromArray(
-      broker.accountTypes as BrokerAccountType[],
+      (broker.accountTypes as unknown) as BrokerAccountType[],
       ({ id }) => values[CREATE_PROGRAM_FIELDS.brokerAccountTypeId] === id
     );
     const minDepositCreateAssetArray = safeGetElemFromArray(

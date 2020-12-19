@@ -83,7 +83,7 @@ const _CreateAccountSettings: React.FC<Props> = ({
   const { brokerAccountTypeId, depositAmount, currency } = watch();
 
   const accountType = safeGetElemFromArray(
-    broker.accountTypes as BrokerAccountType[],
+    (broker.accountTypes as unknown) as BrokerAccountType[],
     ({ id }) => brokerAccountTypeId === id
   );
 

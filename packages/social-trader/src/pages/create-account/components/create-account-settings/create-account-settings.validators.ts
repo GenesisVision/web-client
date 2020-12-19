@@ -24,7 +24,7 @@ const createAccountSettingsValidationSchema = ({
   return lazy<ICreateAccountSettingsFormValues>(values => {
     const currency = values[CREATE_ACCOUNT_FIELDS.currency];
     const accountType = safeGetElemFromArray(
-      broker.accountTypes as BrokerAccountType[],
+      (broker.accountTypes as unknown) as BrokerAccountType[],
       ({ id }) => values[CREATE_ACCOUNT_FIELDS.brokerAccountTypeId] === id
     );
     const minimumDepositAmount = accountType.minimumDepositsAmount[currency];
