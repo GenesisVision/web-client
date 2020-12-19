@@ -1,6 +1,6 @@
 import { BrokerCardType } from "components/assets/broker-select/broker-select.types";
 import inputImageShape from "components/form/input-image/input-image.validation";
-import { ProgramMinInvestAmount } from "gv-api-web";
+import { BrokerAccountType, ProgramMinInvestAmount } from "gv-api-web";
 import { TFunction } from "i18next";
 import {
   currencyShape,
@@ -48,7 +48,7 @@ const createProgramSettingsValidationSchema = ({
   return lazy<ICreateProgramSettingsFormValues>(values => {
     const currency = values[CREATE_PROGRAM_FIELDS.currency];
     const accountType = safeGetElemFromArray(
-      broker.accountTypes,
+      broker.accountTypes as BrokerAccountType[],
       ({ id }) => values[CREATE_PROGRAM_FIELDS.brokerAccountTypeId] === id
     );
     const minDepositCreateAssetArray = safeGetElemFromArray(

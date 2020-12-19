@@ -1,4 +1,4 @@
-import { Broker } from "gv-api-web";
+import { Broker, BrokerAccountType } from "gv-api-web";
 import { TFunction } from "i18next";
 import { convertToCurrency } from "utils/currency-converter";
 import { formatCurrencyValue } from "utils/formatter";
@@ -24,7 +24,7 @@ const createAccountSettingsValidationSchema = ({
   return lazy<ICreateAccountSettingsFormValues>(values => {
     const currency = values[CREATE_ACCOUNT_FIELDS.currency];
     const accountType = safeGetElemFromArray(
-      broker.accountTypes,
+      broker.accountTypes as BrokerAccountType[],
       ({ id }) => values[CREATE_ACCOUNT_FIELDS.brokerAccountTypeId] === id
     );
     const minimumDepositAmount = accountType.minimumDepositsAmount[currency];
