@@ -59,7 +59,7 @@ export const usePlaceOrderAutoFill = ({
     if (!autoFill) {
       const value = +terminalMoneyFormat({
         amount: leverage * +quantity * +price,
-        tickSize: tickSize
+        tickSize: "0.00000001"
       });
       if (isNaN(value)) return;
       if (value === +total) return;
@@ -83,7 +83,7 @@ export const usePlaceOrderAutoFill = ({
       if (quantity && price) {
         const value = +terminalMoneyFormat({
           amount: leverage * +quantity * +price,
-          tickSize: tickSize
+          tickSize: "0.00000001"
         });
         if (isNaN(value)) return;
         if (value === +total) return;
