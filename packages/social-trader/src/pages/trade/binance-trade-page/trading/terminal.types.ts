@@ -1,4 +1,4 @@
-import { IDataModel } from "constants/constants";
+import { TableDataType } from "constants/constants";
 import {
   BinanceExecutionType,
   BinanceOrderSide as BinanceRawOrderSide,
@@ -185,7 +185,7 @@ export interface ITerminalMethods extends IGVTerminalMethods {
     symbol?: string;
     skip?: number;
     take?: number;
-  }) => Promise<IDataModel<UnitedOrder>>;
+  }) => Promise<TableDataType<UnitedOrder>>;
   getAllOrders: (filters: {
     accountId?: string;
     mode?: TradingPlatformBinanceOrdersMode;
@@ -194,7 +194,7 @@ export interface ITerminalMethods extends IGVTerminalMethods {
     symbol?: string;
     skip?: number;
     take?: number;
-  }) => Promise<IDataModel<UnitedOrder>>;
+  }) => Promise<TableDataType<UnitedOrder>>;
   getUserStreamKey: (accountId?: string) => Observable<{ listenKey: string }>;
   getAccountInformation: (
     accountId?: string,

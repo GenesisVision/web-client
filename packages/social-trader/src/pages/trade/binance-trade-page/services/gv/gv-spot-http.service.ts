@@ -1,4 +1,4 @@
-import { DEFAULT_DECIMAL_SCALE, IDataModel } from "constants/constants";
+import { DEFAULT_DECIMAL_SCALE, TableDataType } from "constants/constants";
 import dayjs from "dayjs";
 import {
   BinanceRawCancelOrder,
@@ -141,7 +141,7 @@ export const getAllTrades = (filters: {
   symbol?: string;
   skip?: number;
   take?: number;
-}): Promise<IDataModel<UnitedOrder>> =>
+}): Promise<TableDataType<UnitedOrder>> =>
   api
     .terminal()
     .getTradesHistory({ ...filters, mode: "TradeHistory" })
@@ -158,7 +158,7 @@ export const getAllOrders = (filters: {
   symbol?: string;
   skip?: number;
   take?: number;
-}): Promise<IDataModel<UnitedOrder>> =>
+}): Promise<TableDataType<UnitedOrder>> =>
   api
     .terminal()
     .getTradesHistory({ ...filters, mode: "OrderHistory" })
