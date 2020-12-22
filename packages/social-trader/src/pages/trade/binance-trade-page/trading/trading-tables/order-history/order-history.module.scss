@@ -2,6 +2,9 @@ $COLUMNS_COUNT: 8;
 $column-width: 100px;
 
 .order-history {
+  &__header-cell {
+    padding: 10px !important;
+  }
   &__table {
     & th,
     & td {

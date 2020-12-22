@@ -1,5 +1,24 @@
 import { SortingColumn } from "components/table/components/filtering/filter.type";
 import { BinanceExecutionType, BinanceOrderStatus } from "gv-api-web";
+import { UnitedOrder } from "pages/trade/binance-trade-page/trading/terminal.types";
+import { normalizeOpenOrdersList } from "pages/trade/binance-trade-page/trading/trading-tables/open-orders/open-orders.helpers";
+
+export const updateOrderHistoryData = (
+  data: UnitedOrder[],
+  updates: UnitedOrder[]
+): UnitedOrder[] => {
+  const normalizedData = normalizeOpenOrdersList(data);
+  updates.forEach(update => {
+    if (isOrderDeleted(update.orderStatus, update.executionType))
+      delete normalizedData[update!.id];
+    else
+      normalizedData[update.id] = {
+        ...normalizedData[update.id],
+        ...update
+      };
+  });
+  return Object.values(normalizedData);
+};
 
 export const isOrderDeleted = (
   orderStatus?: BinanceOrderStatus,
