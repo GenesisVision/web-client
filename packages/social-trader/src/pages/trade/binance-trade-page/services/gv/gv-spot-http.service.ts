@@ -1,4 +1,4 @@
-import { DEFAULT_DECIMAL_SCALE } from "constants/constants";
+import { DEFAULT_DECIMAL_SCALE, IDataModel } from "constants/constants";
 import dayjs from "dayjs";
 import {
   BinanceRawCancelOrder,
@@ -10,7 +10,8 @@ import {
   BinanceRawOrderBookEntry,
   BinanceRawOrderItemsViewModel,
   BinanceRawPlaceOrder,
-  BinanceRawRecentTrade
+  BinanceRawRecentTrade,
+  TradingPlatformBinanceOrdersMode
 } from "gv-api-web";
 import { Bar } from "pages/trade/binance-trade-page/trading/chart/charting_library/datafeed-api";
 import {
@@ -132,25 +133,39 @@ export const getOpenOrders = (
       ) as Promise<UnitedOrder[]>
   );
 
-export const getAllTrades = (accountId?: string): Observable<UnitedOrder[]> =>
-  from(
-    api
-      .terminal()
-      .getTradesHistory({ accountId, mode: "TradeHistory" })
-      .then(({ items }: BinanceRawOrderItemsViewModel) =>
-        items.map(transformToUnitedOrder)
-      ) as Promise<UnitedOrder[]>
-  );
+export const getAllTrades = (filters: {
+  accountId?: string;
+  mode?: TradingPlatformBinanceOrdersMode;
+  dateFrom?: Date;
+  dateTo?: Date;
+  symbol?: string;
+  skip?: number;
+  take?: number;
+}): Promise<IDataModel<UnitedOrder>> =>
+  api
+    .terminal()
+    .getTradesHistory({ ...filters, mode: "TradeHistory" })
+    .then(({ total, items }: BinanceRawOrderItemsViewModel) => ({
+      total,
+      items: items.map(transformToUnitedOrder)
+    }));
 
-export const getAllOrders = (accountId?: string): Observable<UnitedOrder[]> =>
-  from(
-    api
-      .terminal()
-      .getTradesHistory({ accountId, mode: "OrderHistory" })
-      .then(({ items }: BinanceRawOrderItemsViewModel) =>
-        items.map(transformToUnitedOrder)
-      ) as Promise<UnitedOrder[]>
-  );
+export const getAllOrders = (filters: {
+  accountId?: string;
+  mode?: TradingPlatformBinanceOrdersMode;
+  dateFrom?: Date;
+  dateTo?: Date;
+  symbol?: string;
+  skip?: number;
+  take?: number;
+}): Promise<IDataModel<UnitedOrder>> =>
+  api
+    .terminal()
+    .getTradesHistory({ ...filters, mode: "OrderHistory" })
+    .then(({ total, items }: BinanceRawOrderItemsViewModel) => ({
+      total,
+      items: items.map(transformToUnitedOrder)
+    }));
 
 export const getUserStreamKey = (
   accountId?: string

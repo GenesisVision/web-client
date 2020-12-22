@@ -1,3 +1,4 @@
+import { IDataModel } from "constants/constants";
 import {
   BinanceExecutionType,
   BinanceOrderSide as BinanceRawOrderSide,
@@ -14,7 +15,8 @@ import {
   BinanceRawOrderBook,
   BinanceRawRecentTrade,
   BinanceRawSymbol,
-  BinanceTimeInForce as BinanceRawTimeInForce
+  BinanceTimeInForce as BinanceRawTimeInForce,
+  TradingPlatformBinanceOrdersMode
 } from "gv-api-web";
 import {
   FuturesAccountEventType,
@@ -175,8 +177,24 @@ export interface ITerminalMethods extends IGVTerminalMethods {
     symbol: string,
     accountId?: string
   ) => Observable<UnitedOrder[]>;
-  getAllTrades: (accountId?: string) => Observable<UnitedOrder[]>;
-  getAllOrders: (accountId?: string) => Observable<UnitedOrder[]>;
+  getAllTrades: (filters: {
+    accountId?: string;
+    mode?: TradingPlatformBinanceOrdersMode;
+    dateFrom?: Date;
+    dateTo?: Date;
+    symbol?: string;
+    skip?: number;
+    take?: number;
+  }) => Promise<IDataModel<UnitedOrder>>;
+  getAllOrders: (filters: {
+    accountId?: string;
+    mode?: TradingPlatformBinanceOrdersMode;
+    dateFrom?: Date;
+    dateTo?: Date;
+    symbol?: string;
+    skip?: number;
+    take?: number;
+  }) => Promise<IDataModel<UnitedOrder>>;
   getUserStreamKey: (accountId?: string) => Observable<{ listenKey: string }>;
   getAccountInformation: (
     accountId?: string,
