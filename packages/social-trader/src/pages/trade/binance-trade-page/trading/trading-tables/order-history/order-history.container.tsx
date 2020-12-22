@@ -3,6 +3,7 @@ import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/c
 import { filterOrderEventsStream } from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import { UnitedOrder } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { normalizeOpenOrdersList } from "pages/trade/binance-trade-page/trading/trading-tables/open-orders/open-orders.helpers";
+import { isOrderDeleted } from "pages/trade/binance-trade-page/trading/trading-tables/order-history/order-history.helpers";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { map } from "rxjs/operators";
 
@@ -33,13 +34,7 @@ export const OrderHistoryContainer: React.FC = () => {
   useEffect(() => {
     if (!socketData) return;
     const updatedList = { ...list };
-    if (
-      socketData.orderStatus?.toLowerCase() === "expired" ||
-      socketData.orderStatus?.toLowerCase() === "filled" ||
-      socketData.orderStatus?.toLowerCase() === "canceled" ||
-      socketData.executionType?.toLowerCase() === "canceled" ||
-      socketData.executionType?.toLowerCase() === "expired"
-    )
+    if (isOrderDeleted(socketData.orderStatus, socketData.executionType))
       delete updatedList[socketData!.id];
     else
       updatedList[socketData.id] = {
