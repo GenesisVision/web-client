@@ -1,6 +1,7 @@
 import { ComposeFiltersAllType } from "components/table/components/filtering/filter.type";
 import TableModule from "components/table/components/table-module";
 import { DEFAULT_PAGING } from "components/table/reducers/table-paging.reducer";
+import { Text } from "components/text/text";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-methods.context";
 import { UnitedOrder } from "pages/trade/binance-trade-page/trading/terminal.types";
@@ -42,7 +43,7 @@ export const OrderHistory: React.FC<Props> = ({ updates }) => {
       loaderData={[]}
       getItems={getItems}
       columns={ORDER_HISTORY_TABLE_COLUMNS}
-      renderHeader={column => t(`${column.name}`)}
+      renderHeader={column => <Text wrap={false}>{t(`${column.name}`)}</Text>}
       renderBodyRow={({
         quoteQuantityFilled,
         orderStatus,
