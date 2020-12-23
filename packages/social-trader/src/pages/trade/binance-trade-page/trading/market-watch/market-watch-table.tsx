@@ -77,7 +77,7 @@ const _MarketWatchTable: React.FC<Props> = ({
                 dataType={"number"}
                 sorting={sorting}
                 setSorting={setSorting}
-                field={"baseVolume"}
+                field={"quoteVolume"}
               >
                 Volume
               </MarketWatchHeaderCell>
