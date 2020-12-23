@@ -65,6 +65,7 @@ const _MarketWatchTable: React.FC<Props> = ({
             </MarketWatchHeaderCell>
             {column === CHANGE_COLUMN ? (
               <MarketWatchHeaderCell
+                sortIcon={"left"}
                 dataType={"number"}
                 sorting={sorting}
                 setSorting={setSorting}
@@ -74,6 +75,7 @@ const _MarketWatchTable: React.FC<Props> = ({
               </MarketWatchHeaderCell>
             ) : (
               <MarketWatchHeaderCell
+                sortIcon={"left"}
                 dataType={"number"}
                 sorting={sorting}
                 setSorting={setSorting}
