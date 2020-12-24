@@ -1,6 +1,5 @@
 import { BinanceFuturesTerminalMethods } from "pages/trade/binance-trade-page/services/futures/binance-futures-api-terminal-methods";
-import { GVSpotTerminalMethods } from "pages/trade/binance-trade-page/services/gv/gv-spot-api-terminal-methods";
-import { BinanceSpotTerminalMethods } from "pages/trade/binance-trade-page/services/spot/binance-spot-api-terminal-methods";
+import { GVSpotTerminalMethods } from "pages/trade/binance-trade-page/services/gv/spot/gv-spot-api-terminal-methods";
 import {
   ITerminalMethods,
   TerminalType
