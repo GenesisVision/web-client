@@ -7,7 +7,7 @@ import {
   klineSocket,
   marketTicketsSocket,
   tradeSocket
-} from "../../spot/binance-spot-ws.service";
+} from "../../futures/binance-futures-ws.service";
 import {
   cancelAllOrders,
   cancelOrder,
