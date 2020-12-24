@@ -1,19 +1,25 @@
 import { DEFAULT_DECIMAL_SCALE } from "constants/constants";
 import dayjs from "dayjs";
 import {
+  BinanceRawFuturesPlacedOrder,
+  BinanceRawFuturesPlaceOrder,
   BinanceRawKline,
   BinanceRawOrder,
   BinanceRawOrderBookEntry,
+  BinanceRawPlaceOrder,
   BrokerTradeServerType
 } from "gv-api-web";
 import { getBinanceTerminalApiMethods } from "pages/trade/binance-trade-page/binance-trade.helpers";
 import { Bar } from "pages/trade/binance-trade-page/trading/chart/charting_library/datafeed-api";
 import { DividerPartsType } from "pages/trade/binance-trade-page/trading/order-book/order-book.helpers";
 import {
+  QueryOrderResult,
   StringBidDepth,
   TerminalType,
+  TradeRequest,
   UnitedOrder
 } from "pages/trade/binance-trade-page/trading/terminal.types";
+import { OrderRequest } from "services/request.service";
 import { formatValue } from "utils/formatter";
 
 export const getTerminalApiMethods = (
@@ -93,4 +99,98 @@ export const transformDepthToString = (dividerParts: DividerPartsType) => ({
     dividerParts.fracLength
   );
   return [newPrice, String(quantity)];
+};
+
+export type PlaceOrderRequest = (options: {
+  body?: BinanceRawFuturesPlaceOrder;
+  accountId?: string;
+}) => Promise<BinanceRawFuturesPlacedOrder>;
+
+export const newOrderRequestCreator = (request: PlaceOrderRequest) => (
+  options: OrderRequest,
+  accountId?: string
+) =>
+  request({
+    body: {
+      ...options,
+      price: +options.price!,
+      quantity: +options.quantity!
+    } as BinanceRawPlaceOrder,
+    accountId
+  });
+
+export const createPlaceBuySellOrderRequest = (request: PlaceOrderRequest) => {
+  const newOrder = newOrderRequestCreator(request);
+
+  const postBuy = ({
+    reduceOnly,
+    timeInForce,
+    stopPrice,
+    accountId,
+    symbol,
+    price,
+    quantity,
+    type
+  }: TradeRequest & {
+    accountId?: string;
+  }): Promise<QueryOrderResult> => {
+    return newOrder(
+      {
+        reduceOnly,
+        stopPrice:
+          type === "TakeProfitLimit" || type === "StopLossLimit"
+            ? stopPrice
+            : undefined,
+        symbol,
+        type,
+        price:
+          type === "Limit" ||
+          type === "TakeProfitLimit" ||
+          type === "StopLossLimit"
+            ? String(price)
+            : undefined,
+        quantity: String(quantity),
+        timeInForce,
+        side: "Buy"
+      },
+      accountId
+    );
+  };
+
+  const postSell = ({
+    reduceOnly,
+    timeInForce,
+    stopPrice,
+    accountId,
+    symbol,
+    price,
+    quantity,
+    type
+  }: TradeRequest & {
+    accountId?: string;
+  }): Promise<QueryOrderResult> => {
+    return newOrder(
+      {
+        reduceOnly,
+        stopPrice:
+          type === "TakeProfitLimit" || type === "StopLossLimit"
+            ? stopPrice
+            : undefined,
+        symbol,
+        type,
+        price:
+          type === "Limit" ||
+          type === "TakeProfitLimit" ||
+          type === "StopLossLimit"
+            ? String(price)
+            : undefined,
+        quantity: String(quantity),
+        timeInForce,
+        side: "Sell"
+      },
+      accountId
+    );
+  };
+
+  return { postBuy, postSell };
 };

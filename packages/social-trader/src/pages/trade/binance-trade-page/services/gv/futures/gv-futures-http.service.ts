@@ -5,7 +5,6 @@ import {
   BinanceRawKlineItemsViewModel,
   BinanceRawOrderBook,
   BinanceRawOrderItemsViewModel,
-  BinanceRawPlaceOrder,
   BinanceRawRecentTrade,
   TradingPlatformBinanceOrdersMode
 } from "gv-api-web";
@@ -17,7 +16,6 @@ import {
   ExchangeInfo,
   KlineParams,
   OrderSide,
-  QueryOrderResult,
   Ticker,
   TradeRequest,
   UnitedOrder,
@@ -25,10 +23,10 @@ import {
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { from, Observable } from "rxjs";
 import { api } from "services/api-client/swagger-custom-client";
-import { OrderRequest } from "services/request.service";
 import { CurrencyEnum } from "utils/types";
 
 import {
+  createPlaceBuySellOrderRequest,
   transformDepthToString,
   transformKlineBar,
   transformToUnitedOrder
@@ -177,19 +175,6 @@ export const getDepth = (
   );
 };
 
-export const newOrder = (
-  options: OrderRequest,
-  accountId?: string
-): Promise<any> =>
-  api.terminal().futuresPlaceOrder({
-    body: {
-      ...options,
-      price: +options.price!,
-      quantity: +options.quantity!
-    } as BinanceRawPlaceOrder,
-    accountId
-  });
-
 export const cancelAllOrders = (
   { symbol }: { symbol?: string; useServerTime?: boolean },
   accountId?: string
@@ -205,75 +190,9 @@ export const cancelOrder = (
 ): Promise<BinanceRawCancelOrder> =>
   api.terminal().futuresCancelOrder({ orderId, symbol, accountId });
 
-export const postBuy = ({
-  reduceOnly,
-  timeInForce,
-  stopPrice,
-  accountId,
-  symbol,
-  price,
-  quantity,
-  type
-}: TradeRequest & {
-  accountId?: string;
-}): Promise<QueryOrderResult> => {
-  return newOrder(
-    {
-      reduceOnly,
-      stopPrice:
-        type === "TakeProfitLimit" || type === "StopLossLimit"
-          ? stopPrice
-          : undefined,
-      symbol,
-      type,
-      price:
-        type === "Limit" ||
-        type === "TakeProfitLimit" ||
-        type === "StopLossLimit"
-          ? String(price)
-          : undefined,
-      quantity: String(quantity),
-      timeInForce,
-      side: "Buy"
-    },
-    accountId
-  );
-};
-
-export const postSell = ({
-  reduceOnly,
-  timeInForce,
-  stopPrice,
-  accountId,
-  symbol,
-  price,
-  quantity,
-  type
-}: TradeRequest & {
-  accountId?: string;
-}): Promise<QueryOrderResult> => {
-  return newOrder(
-    {
-      reduceOnly,
-      stopPrice:
-        type === "TakeProfitLimit" || type === "StopLossLimit"
-          ? stopPrice
-          : undefined,
-      symbol,
-      type,
-      price:
-        type === "Limit" ||
-        type === "TakeProfitLimit" ||
-        type === "StopLossLimit"
-          ? String(price)
-          : undefined,
-      quantity: String(quantity),
-      timeInForce,
-      side: "Sell"
-    },
-    accountId
-  );
-};
+const { postSell, postBuy } = createPlaceBuySellOrderRequest(
+  api.terminal().placeOrder
+);
 
 export const getTradeMethod = (side: OrderSide) =>
   side === "Buy" ? postBuy : postSell;
