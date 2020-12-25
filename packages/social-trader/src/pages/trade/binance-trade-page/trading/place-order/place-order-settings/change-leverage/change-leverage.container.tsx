@@ -13,7 +13,9 @@ const _ChangeLeverageContainer: React.FC = () => {
     changeLeverage: changeLeverageMethod,
     getLeverageBrackets: getLeverageBracketsMethod
   } = useContext(TerminalMethodsContext);
-  const { authData, symbol } = useContext(TerminalInfoContext);
+  const { authData, exchangeAccountId, symbol } = useContext(
+    TerminalInfoContext
+  );
   const { leverage, setLeverage } = useContext(TerminalPlaceOrderContext);
 
   const {
@@ -38,11 +40,11 @@ const _ChangeLeverageContainer: React.FC = () => {
     (leverage: number) => {
       changeLeverage({
         symbol: getSymbolFromState(symbol),
-        authData,
+        accountId: exchangeAccountId,
         leverage
       });
     },
-    [symbol, authData]
+    [symbol, exchangeAccountId]
   );
 
   const symbolBrackets = leverageBrackets

@@ -55,20 +55,20 @@ const MarginModeDialogContent: React.FC<Props> = ({
         <Row>
           <RowItem wide>
             <GvButtonWithMark
-              disabled={mode === "CROSSED"}
+              disabled={mode === "Cross"}
               wide
-              onClick={handleClickButton("CROSSED")}
-              selected={mode === "CROSSED"}
+              onClick={handleClickButton("Cross")}
+              selected={mode === "Cross"}
             >
               {t("Cross")}
             </GvButtonWithMark>
           </RowItem>
           <RowItem wide>
             <GvButtonWithMark
-              disabled={mode === "ISOLATED"}
+              disabled={mode === "Isolated"}
               wide
-              onClick={handleClickButton("ISOLATED")}
-              selected={mode === "ISOLATED"}
+              onClick={handleClickButton("Isolated")}
+              selected={mode === "Isolated"}
             >
               {t("Isolated")}
             </GvButtonWithMark>

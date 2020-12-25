@@ -1,7 +1,11 @@
 import { TableDataType } from "constants/constants";
 import {
+  BinanceFuturesMarginType,
+  BinancePositionMode,
   BinanceRawCancelOrder,
   BinanceRawCancelOrderId,
+  BinanceRawFuturesChangeMarginTypeResult,
+  BinanceRawFuturesPositionMode,
   BinanceRawKlineItemsViewModel,
   BinanceRawOrderBook,
   BinanceRawOrderItemsViewModel,
@@ -12,10 +16,13 @@ import { Bar } from "pages/trade/binance-trade-page/trading/chart/charting_libra
 import { getDividerParts } from "pages/trade/binance-trade-page/trading/order-book/order-book.helpers";
 import {
   Account,
+  ChangeLeverageResponse,
   CorrectedRestDepth,
   ExchangeInfo,
   KlineParams,
+  MarkPrice,
   OrderSide,
+  PositionModeType,
   Ticker,
   TradeRequest,
   UnitedOrder,
@@ -204,3 +211,38 @@ export const tradeRequest = ({
   const method = getTradeMethod(side);
   return method(options);
 };
+
+export const getMarkPrice = ({
+  symbol
+}: {
+  symbol: string;
+}): Promise<MarkPrice> =>
+  api
+    .terminal()
+    .getFuturesMarkPrices({ symbol })
+    .then(([price]: MarkPrice[]) => price);
+
+export const getPositionMode = (accountId: string): Promise<PositionModeType> =>
+  api
+    .terminal()
+    .getFuturesPositionMode({ accountId })
+    .then(({ positionMode }: BinanceRawFuturesPositionMode) => positionMode);
+
+export const changePositionMode = (options: {
+  accountId?: string;
+  mode?: BinancePositionMode;
+}): Promise<void> => api.terminal().setFuturesPositionMode(options);
+
+export const changeLeverage = (options: {
+  accountId?: string;
+  symbol?: string;
+  leverage?: number;
+}): Promise<ChangeLeverageResponse> =>
+  api.terminal().changeFuturesInitialLeverageAsync(options);
+
+export const changeMarginMode = (options: {
+  accountId?: string;
+  symbol?: string;
+  marginType?: BinanceFuturesMarginType;
+}): Promise<BinanceRawFuturesChangeMarginTypeResult> =>
+  api.terminal().changeFuturesMarginType(options);
