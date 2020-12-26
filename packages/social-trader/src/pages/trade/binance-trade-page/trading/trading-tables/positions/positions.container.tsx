@@ -4,14 +4,13 @@ import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/cont
 import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-methods.context";
 import { FuturesPositionInformation } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useContext, useEffect, useMemo, useState } from "react";
-import { map } from "rxjs/operators";
 
 import { Positions } from "./positions";
 import { normalizePositionsList } from "./positions.helpers";
 
 export const PositionsContainer: React.FC = () => {
   const { getPositionInformation } = useContext(TerminalMethodsContext);
-  const { authData } = useContext(TerminalInfoContext);
+  const { authData, exchangeAccountId } = useContext(TerminalInfoContext);
 
   const {
     userStream,
@@ -27,8 +26,8 @@ export const PositionsContainer: React.FC = () => {
 
   useEffect(() => {
     if (!authData?.publicKey || !userStream) return;
-    const positions = getPositionInformation!({ authData });
-    positions.pipe(map(normalizePositionsList)).subscribe(setList);
+    const positions = getPositionInformation!({ accountId: exchangeAccountId });
+    positions.then(normalizePositionsList).then(setList);
     const positionsStream = filterPositionEventsStream(userStream);
     positionsStream.subscribe(setSocketData);
   }, [authData, baseAsset, quoteAsset, userStream]);

@@ -37,8 +37,7 @@ export const transformMarkPriceWS = (m: any): MarkPrice => ({
 });
 
 export const transformFuturesTickerSymbolWS = (m: any): Ticker => ({
-  // @ts-ignore
-  eventType: m.e,
+  // eventType: m.e,
   eventTime: m.E,
   symbol: m.s,
   priceChange: m.p,
