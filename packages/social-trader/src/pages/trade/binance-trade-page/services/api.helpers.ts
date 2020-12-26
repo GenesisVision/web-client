@@ -1,11 +1,13 @@
 import { DEFAULT_DECIMAL_SCALE } from "constants/constants";
 import dayjs from "dayjs";
 import {
+  BinanceRawFuturesOrder,
   BinanceRawFuturesPlacedOrder,
   BinanceRawFuturesPlaceOrder,
   BinanceRawKline,
   BinanceRawOrder,
   BinanceRawOrderBookEntry,
+  BinanceRawPlacedOrder,
   BinanceRawPlaceOrder,
   BrokerTradeServerType
 } from "gv-api-web";
@@ -13,7 +15,6 @@ import { getBinanceTerminalApiMethods } from "pages/trade/binance-trade-page/bin
 import { Bar } from "pages/trade/binance-trade-page/trading/chart/charting_library/datafeed-api";
 import { DividerPartsType } from "pages/trade/binance-trade-page/trading/order-book/order-book.helpers";
 import {
-  QueryOrderResult,
   StringBidDepth,
   TerminalType,
   TradeRequest,
@@ -81,6 +82,30 @@ export const transformToUnitedOrder = ({
   quantity
 });
 
+export const transformFuturesToUnitedOrder = ({
+  status,
+  orderId,
+  createdTime,
+  symbol,
+  type,
+  side,
+  stopPrice,
+  price,
+  originalQuantity,
+  executedQuantity
+}: BinanceRawFuturesOrder): UnitedOrder => ({
+  orderStatus: status,
+  executedQuantity,
+  id: orderId,
+  time: createdTime,
+  symbol,
+  type,
+  side,
+  stopPrice,
+  price,
+  quantity: originalQuantity
+});
+
 export const getPriceWithCorrectFrac = (
   price: string,
   correctFracLength: number = 8
@@ -101,10 +126,16 @@ export const transformDepthToString = (dividerParts: DividerPartsType) => ({
   return [newPrice, String(quantity)];
 };
 
+export type PlaceOrderType = BinanceRawPlaceOrder | BinanceRawFuturesPlaceOrder;
+
+export type PlacedOrderType =
+  | BinanceRawPlacedOrder
+  | BinanceRawFuturesPlacedOrder;
+
 export type PlaceOrderRequest = (options: {
-  body?: BinanceRawFuturesPlaceOrder;
+  body?: PlaceOrderType;
   accountId?: string;
-}) => Promise<BinanceRawFuturesPlacedOrder>;
+}) => Promise<PlacedOrderType>;
 
 export const newOrderRequestCreator = (request: PlaceOrderRequest) => (
   options: OrderRequest,
@@ -115,7 +146,7 @@ export const newOrderRequestCreator = (request: PlaceOrderRequest) => (
       ...options,
       price: +options.price!,
       quantity: +options.quantity!
-    } as BinanceRawPlaceOrder,
+    } as PlaceOrderType,
     accountId
   });
 
@@ -133,7 +164,7 @@ export const createPlaceBuySellOrderRequest = (request: PlaceOrderRequest) => {
     type
   }: TradeRequest & {
     accountId?: string;
-  }): Promise<QueryOrderResult> => {
+  }): Promise<PlacedOrderType> => {
     return newOrder(
       {
         reduceOnly,
@@ -168,7 +199,7 @@ export const createPlaceBuySellOrderRequest = (request: PlaceOrderRequest) => {
     type
   }: TradeRequest & {
     accountId?: string;
-  }): Promise<QueryOrderResult> => {
+  }): Promise<PlacedOrderType> => {
     return newOrder(
       {
         reduceOnly,

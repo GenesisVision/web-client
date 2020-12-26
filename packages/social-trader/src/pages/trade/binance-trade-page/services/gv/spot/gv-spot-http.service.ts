@@ -27,6 +27,7 @@ import { CurrencyEnum } from "utils/types";
 
 import {
   createPlaceBuySellOrderRequest,
+  PlaceOrderRequest,
   transformDepthToString,
   transformKlineBar,
   transformToUnitedOrder
@@ -189,7 +190,7 @@ export const cancelOrder = (
   api.terminal().cancelOrder({ orderId, symbol, accountId });
 
 const { postSell, postBuy } = createPlaceBuySellOrderRequest(
-  api.terminal().placeOrder
+  (api.terminal().placeOrder as unknown) as PlaceOrderRequest
 );
 
 export const getTradeMethod = (side: OrderSide) =>

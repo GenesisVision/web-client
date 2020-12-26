@@ -164,7 +164,7 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
         <RowItem wide>
           <TimeInForceField orderType={"Limit"} />
         </RowItem>
-        {isFutures && currentPositionMode === false && (
+        {isFutures && currentPositionMode === "OneWay" && (
           <RowItem wide>
             <ReduceOnlyField />
           </RowItem>
