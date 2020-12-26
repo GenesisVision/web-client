@@ -84,7 +84,9 @@ export const OpenOrders: React.FC<Props> = ({ items }) => {
             stopPrice={String(stopPrice)}
             price={String(price)}
             origQty={String(quantity)}
-            filled={quantity ? (quantityFilled / quantity) * 100 : 0}
+            filled={
+              quantity && quantityFilled ? (quantityFilled / quantity) * 100 : 0
+            }
             total={+quantity * +price}
           />
         );
