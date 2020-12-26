@@ -19,10 +19,12 @@ import {
   ChangeLeverageResponse,
   CorrectedRestDepth,
   ExchangeInfo,
+  FuturesPositionInformation,
   KlineParams,
   MarkPrice,
   OrderSide,
   PositionModeType,
+  SymbolLeverageBrackets,
   Ticker,
   TradeRequest,
   UnitedOrder,
@@ -246,3 +248,46 @@ export const changeMarginMode = (options: {
   marginType?: BinanceFuturesMarginType;
 }): Promise<BinanceRawFuturesChangeMarginTypeResult> =>
   api.terminal().changeFuturesMarginType(options);
+
+const mockPositionInformation: FuturesPositionInformation = {
+  entryPrice: "0",
+  marginType: "Isolated",
+  isAutoAddMargin: "0",
+  isolatedMargin: "0",
+  leverage: "0",
+  liquidationPrice: "0",
+  markPrice: "0",
+  maxNotionalValue: "0",
+  positionAmt: "0",
+  symbol: "BTCUSDT",
+  unRealizedProfit: "0",
+  positionSide: "BOTH"
+};
+
+export const getPositionInformation = ({}: {
+  accountId?: string;
+}): Promise<FuturesPositionInformation[]> =>
+  Promise.resolve([mockPositionInformation]);
+
+const getMockLeverageBrackets = (symbol: string): SymbolLeverageBrackets => {
+  return {
+    symbol,
+    brackets: [
+      {
+        bracket: 0,
+        initialLeverage: 0,
+        notionalCap: 0,
+        notionalFloor: 0,
+        maintMarginRatio: 0
+      }
+    ]
+  };
+};
+
+export const getLeverageBrackets = ({
+  symbol
+}: {
+  symbol: string;
+  accountId?: string;
+}): Promise<SymbolLeverageBrackets[]> =>
+  Promise.resolve([getMockLeverageBrackets(symbol)]);

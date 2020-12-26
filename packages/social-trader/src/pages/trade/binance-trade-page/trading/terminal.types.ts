@@ -225,8 +225,8 @@ export interface ITerminalMethods extends IGVTerminalMethods {
 
   getMarkPrice?: (options: { symbol: string }) => Promise<MarkPrice>;
   getPositionInformation?: (options: {
-    authData: TerminalAuthDataType;
-  }) => Observable<FuturesPositionInformation[]>;
+    accountId?: string;
+  }) => Promise<FuturesPositionInformation[]>;
   getBalancesForTransfer?: (options: {
     authData: TerminalAuthDataType;
   }) => Promise<BalancesForTransfer>;
@@ -243,7 +243,7 @@ export interface ITerminalMethods extends IGVTerminalMethods {
   }) => Promise<void>;
   getLeverageBrackets?: (options: {
     symbol: string;
-    authData: TerminalAuthDataType;
+    accountId?: string;
   }) => Promise<SymbolLeverageBrackets[]>;
   changeLeverage?: (options: {
     accountId?: string;
