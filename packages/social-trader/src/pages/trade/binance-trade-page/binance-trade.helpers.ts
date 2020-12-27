@@ -1,4 +1,4 @@
-import { BinanceFuturesTerminalMethods } from "pages/trade/binance-trade-page/services/futures/binance-futures-api-terminal-methods";
+import { GVFuturesTerminalMethods } from "pages/trade/binance-trade-page/services/gv/futures/gv-futures-api-terminal-methods";
 import { GVSpotTerminalMethods } from "pages/trade/binance-trade-page/services/gv/spot/gv-spot-api-terminal-methods";
 import {
   ITerminalMethods,
@@ -12,7 +12,7 @@ export const getBinanceTerminalApiMethods = (
 ): ITerminalMethods => {
   switch (type) {
     case "futures":
-      return BinanceFuturesTerminalMethods;
+      return GVFuturesTerminalMethods;
     case "spot":
     default:
       return GVSpotTerminalMethods;
