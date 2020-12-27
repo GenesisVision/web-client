@@ -10,10 +10,11 @@ import { SymbolState, TerminalAuthDataType, TerminalType } from "pages/trade/bin
 import { TerminalPage } from "pages/trade/terminal.page";
 import React from "react";
 import { compose } from "redux";
+import { api } from "services/api-client/swagger-custom-client";
+import Token from "services/api-client/token";
 import { initializeStore } from "store";
 import { getParamsFromCtxWithSplit } from "utils/ssr-helpers";
 import { AnyObjectType, NextPageWithRedux } from "utils/types";
-import { api } from "services/api-client/swagger-custom-client";
 
 interface Props {
   exchangeAccountId?: string;
@@ -24,13 +25,18 @@ interface Props {
 }
 
 const getTerminalType = async (
-  params?: AnyObjectType
+  params: AnyObjectType,
+  token?: Token
 ): Promise<TerminalType> => {
   if (params?.["id"]) {
-    const accountInfo = await api
-      .terminal()
-      .getAccountInfo({ accountId: params?.["id"], currency: "USDT" });
-    return accountInfo.accountType.toLowerCase as TerminalType;
+    try {
+      const accountInfo = await api
+        .terminal(token)
+        .getAccountInfo({ accountId: params?.["id"], currency: "USDT" });
+      return accountInfo.accountType.toLowerCase as TerminalType;
+    } catch (e) {
+      console.error(e);
+    }
   }
   if (params?.[TYPE_PARAM_NAME]) return params[TYPE_PARAM_NAME].toLowerCase();
   return "spot";
@@ -60,7 +66,7 @@ Page.getInitialProps = async ctx => {
   const { id } = ctx.query;
   const params = getParamsFromCtxWithSplit(ctx);
   const exchangeAccountId = params["id"];
-  const terminalType = await getTerminalType(params);
+  const terminalType = await getTerminalType(params, ctx.token);
   const symbol = id ? parseSymbolFromUrlParam(String(id)) : undefined;
 
   let brokerType: BrokerTradeServerType | undefined;
