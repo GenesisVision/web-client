@@ -33,7 +33,7 @@ const getTerminalType = async (
       const accountInfo = await api
         .terminal(token)
         .getAccountInfo({ accountId: params?.["id"], currency: "USDT" });
-      return (accountInfo.accountType.toLowerCase as unknown) as TerminalType;
+      return (accountInfo.accountType.toLowerCase() as unknown) as TerminalType;
     } catch (e) {
       console.error(e);
     }
