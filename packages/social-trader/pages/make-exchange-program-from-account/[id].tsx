@@ -1,5 +1,7 @@
+import { fetchExchanges } from "components/assets/asset.service";
 import withDefaultLayout from "decorators/with-default-layout";
 import withPrivateRoute from "decorators/with-private-route";
+import { ExchangeAccountType, PrivateTradingAccountFull } from "gv-api-web";
 import { fetchAccountDescriptionCtx } from "pages/accounts/account-details/services/account-details.service";
 import { CONVERT_ASSET } from "pages/convert-asset/convert-asset.contants";
 import ConvertAssetPage from "pages/convert-asset/convert-asset.page";
@@ -35,10 +37,25 @@ Page.getInitialProps = async ctx => {
   const { id } = ctx.query;
   let broker;
   let accountCurrency;
+  const exchanges = await fetchExchanges();
   await fetchAccountDescriptionCtx(id as string, ctx).then(
-    ({ brokerDetails, tradingAccountInfo: { currency } }) => {
+    ({
+      brokerDetails,
+      tradingAccountInfo: { currency }
+    }: PrivateTradingAccountFull) => {
+      const brokerInfo = exchanges.find(({ accountTypes }) => {
+        return accountTypes.find(
+          ({ type }: ExchangeAccountType) => type === brokerDetails.type
+        );
+      });
+      const accountType = brokerInfo?.accountTypes.find(
+        ({ type }: ExchangeAccountType) => type === brokerDetails.type
+      );
+      const isSupportedCurrency = accountType?.currencies.includes(currency);
       broker = brokerDetails.type;
-      accountCurrency = currency;
+      accountCurrency = isSupportedCurrency
+        ? currency
+        : accountType?.currencies[0];
     }
   );
   return {
