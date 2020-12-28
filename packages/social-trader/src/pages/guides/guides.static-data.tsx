@@ -10,6 +10,9 @@ import CopyTrades1 from "media/guides/guides-2/CopyTrades1.png";
 import CopyTrades2 from "media/guides/guides-2/CopyTrades2.png";
 import CopyTrades3 from "media/guides/guides-2/CopyTrades3.png";
 import Funds1 from "media/guides/guides-2/Funds1.png";
+import ProgramsWP1 from "media/guides/guides-2/ProgramsWP1.png";
+import ProgramsWP2 from "media/guides/guides-2/ProgramsWP2.png";
+import ProgramsWP3 from "media/guides/guides-2/ProgramsWP3.png";
 import BaseTA1 from "media/guides/guides-3/BaseTA1.png";
 import ExternalAccount1 from "media/guides/guides-3/ExternalAccount1.png";
 import ExternalAccount2 from "media/guides/guides-3/ExternalAccount2.png";
@@ -475,7 +478,7 @@ export const navGuides: INavGuide[] = [
       {
         id: "investing-2",
         canonicalName: "investing-programs",
-        name: "Programs",
+        name: "Programs with periods",
         content: (
           <>
             <section>
@@ -737,6 +740,439 @@ export const navGuides: INavGuide[] = [
       },
       {
         id: "investing-3",
+        canonicalName: "investing-programs-without-periods",
+        name: "Programs without periods",
+        content: (
+          <>
+            <section>
+              <p>
+                <b>Genesis Markets</b> Programs now don’t have periods, which
+                means that the investor does not have to wait till the beginning
+                of the Program period to invest or withdraw.
+              </p>
+              <p>The main feature of these Programs:</p>
+              <ul>
+                <li>
+                  Programs <b>don’t have</b> <b>periods</b>.
+                </li>
+
+                <li>
+                  Investor and manager requests will be processed in{" "}
+                  <b>real time</b> or once a day at the chosen time by the
+                  manager.
+                </li>
+
+                <li>
+                  Investors will have <b>maximum control of their capital.</b>
+                </li>
+
+                <li>
+                  <b>Orders will not be closed</b> at the time of requests
+                  processing.
+                </li>
+              </ul>
+              <p>The rest stays the same:</p>
+              <ul>
+                <li>
+                  Programs are similar to PAMM accounts. A trader creates an
+                  investment program, where he sets the fees and other
+                  parameters.
+                </li>
+                <li>
+                  The manager trades with his own and investors’ cumulative
+                  balance. Profits or losses are equally distributed among the
+                  investors based on their share of the Program.
+                </li>
+              </ul>
+            </section>
+
+            <section>
+              <h3>How to invest in a Program?</h3>
+              <p>
+                Click the <b>"Invest"</b> button on the page of the desired{" "}
+                <b>Genesis Markets</b> <b>Program</b> that you want to use. You
+                can invest in a Program with any currency available in your
+                wallet.
+              </p>
+              <p>
+                Managers have the opportunity to choose when investment requests
+                in the Program will be processed. They can be processed in real
+                time or every day at a scheduled time (for example 5 pm each
+                day).
+              </p>
+              <p>
+                All invested funds are entered into the Program in the currency
+                of the trading account (USDT or BTC). Investors are given shares
+                in current assets according to their invested amount.
+              </p>
+            </section>
+
+            <section>
+              <h3>How to withdraw from a Program?</h3>
+              <p>To withdraw from a Program follow the steps:</p>
+              <ol>
+                <li>
+                  Click the “Withdraw” button near your investment on the
+                  Program page.
+                  <ConversationImages
+                    bottomOffset={false}
+                    size={"large"}
+                    images={[
+                      {
+                        id: ProgramsWP1,
+                        resizes: [
+                          {
+                            height: 0,
+                            width: 0,
+                            logoUrl: ProgramsWP1,
+                            quality: "Original"
+                          },
+                          {
+                            height: 0,
+                            width: 0,
+                            logoUrl: ProgramsWP1,
+                            quality: "Low"
+                          }
+                        ]
+                      }
+                    ]}
+                  />
+                </li>
+
+                <li>
+                  Choose the amount to withdraw. You can put a tick near
+                  “Withdraw all” if you want to withdraw all of your funds from
+                  the Program.
+                  <ConversationImages
+                    bottomOffset={false}
+                    size={"large"}
+                    images={[
+                      {
+                        id: ProgramsWP2,
+                        resizes: [
+                          {
+                            height: 0,
+                            width: 0,
+                            logoUrl: ProgramsWP2,
+                            quality: "Original"
+                          },
+                          {
+                            height: 0,
+                            width: 0,
+                            logoUrl: ProgramsWP2,
+                            quality: "Low"
+                          }
+                        ]
+                      }
+                    ]}
+                  />
+                </li>
+
+                <li>
+                  Press the “Next” button. You can see when your request will be
+                  processed under this button.
+                </li>
+
+                <li>
+                  Check all the information about the withdrawal request and
+                  click “Submit”.
+                  <ConversationImages
+                    bottomOffset={false}
+                    size={"large"}
+                    images={[
+                      {
+                        id: ProgramsWP3,
+                        resizes: [
+                          {
+                            height: 0,
+                            width: 0,
+                            logoUrl: ProgramsWP3,
+                            quality: "Original"
+                          },
+                          {
+                            height: 0,
+                            width: 0,
+                            logoUrl: ProgramsWP3,
+                            quality: "Low"
+                          }
+                        ]
+                      }
+                    ]}
+                  />
+                </li>
+              </ol>
+
+              <p>
+                The withdrawal requests processing time can also be set by the
+                manager in real time or at a scheduled time.
+              </p>
+              <p>
+                <em>Note: Withdrawal from Programs is made as a percentage.</em>
+              </p>
+            </section>
+
+            <section>
+              <h3>Fees</h3>
+              <p>
+                The table shows all the commissions paid by investors and a
+                manager in the program.
+              </p>
+
+              <table>
+                <tr>
+                  <td>
+                    <b>Type</b>
+                  </td>
+                  <td>
+                    <b>Fee</b>
+                  </td>
+                  <td>
+                    <b>For investors</b>
+                  </td>
+                  <td>
+                    <b>For manager</b>
+                  </td>
+                </tr>
+                <tr>
+                  <td colSpan={4}>
+                    <b>Platform fee</b>
+                  </td>
+                </tr>
+                <tr>
+                  <td>GV commission</td>
+                  <td>0.5%</td>
+                  {tableCellDone()}
+                  {tableCellNone()}
+                </tr>
+                <tr>
+                  <td>Success fee</td>
+                  <td>0 – 10%*</td>
+                  {tableCellDone()}
+                  {tableCellNone()}
+                </tr>
+                <tr>
+                  <td colSpan={4}>
+                    <b>Manager fee</b>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Management fee</td>
+                  <td>0 – 20% (annual)</td>
+                  {tableCellDone()}
+                  {tableCellNone()}
+                </tr>
+                <tr>
+                  <td>Success fee</td>
+                  <td>0 – 50%</td>
+                  {tableCellDone()}
+                  {tableCellNone()}
+                </tr>
+                <tr>
+                  <td>
+                    <b>Trading fee</b>
+                  </td>
+                  <td>
+                    All info is{" "}
+                    <a
+                      href="https://www.binance.com/en/fee/schedule"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <b>here</b>
+                    </a>
+                  </td>
+                  {tableCellDone()}
+                  {tableCellDone()}
+                </tr>
+              </table>
+
+              <ul>
+                <li>
+                  <b>GV commission</b> is the fee charged by the platform that
+                  is a percentage of the initial amount invested in a Program.
+                </li>
+
+                <li>
+                  <b>Platform Success fee</b> is the fee charged on any profits
+                  generated by Programs. It is calculated according to the{" "}
+                  <a
+                    href="https://www.investopedia.com/terms/h/highwatermark.asp"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <b>HWM system</b>
+                  </a>{" "}
+                  as a percentage of the profit received from a program during
+                  the reporting period or from a trade transaction when copy
+                  trading. We do not charge a Success Fee if there were no
+                  profits made.
+                </li>
+
+                <li>
+                  <b>Management fee.</b> The commission that is paid to the
+                  manager by an investor for the actual asset management period.
+                  Management fee is defined in annual percentage and is charged
+                  at the end of each reporting period.
+                </li>
+
+                <li>
+                  <b>Success fee</b> is the fee charged on profits generated by
+                  Programs. It is calculated according to the{" "}
+                  <a
+                    href="https://www.investopedia.com/terms/h/highwatermark.asp"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <b>HWM system</b>
+                  </a>{" "}
+                  as a percentage of the profit received from a program during
+                  the reporting period. No profit means no Success fee is
+                  charged.
+                </li>
+
+                <li>
+                  <b>Trading fee</b> is divided among all program participants.
+                </li>
+              </ul>
+              <p>
+                * This percentage depends on the amount of GVT stored in the
+                wallet. The maximum Success fee without any discounts applied is
+                10%. For every 1 000 GVT stored in the wallet reduces the
+                success fee by 1% (i.e. an investor holding 1 000 GVT will only
+                pay a 9% Success Fee, an investor holding 10 000 GVT will pay no
+                Success Fees).
+              </p>
+            </section>
+
+            <section>
+              <h3>
+                What is the difference between Programs with and without
+                periods?
+              </h3>
+              <table>
+                <tr>
+                  <td></td>
+                  <td>
+                    <b>Genesis Markets Program (without periods)</b>
+                  </td>
+                  <td>
+                    <b>Program with periods</b>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Investments</b>
+                  </td>
+                  <td>
+                    Investments are accepted in <b>Real time</b> or{" "}
+                    <b>Every day</b> at a scheduled time (for example, you can
+                    set an investment/withdrawal at 5 pm)
+                  </td>
+                  <td>
+                    Investments are accepted at the end of the reporting period
+                    (maximum of 90 days)
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Investment limit</b>
+                  </td>
+                  <td>
+                    <b>Without KYC</b> the limit is <b>1000 USD</b> Otherwise
+                    the available limit is set in the range from <b>5000 USD</b>{" "}
+                    to <b>300 000 USD</b>
+                  </td>
+                  <td>
+                    <b>Without KYC</b> the limit is <b>1000 USD</b> Otherwise
+                    the available limit is set in the range from <b>5000 USD</b>{" "}
+                    to <b>300 000 USD</b>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Withdrawals </b>
+                  </td>
+                  <td>
+                    All withdrawals are accepted in <b>Real time</b> or{" "}
+                    <b>Every day</b> at a scheduled time.
+                    <br />
+                    Manager needs to leave min Deposit
+                  </td>
+                  <td>
+                    All withdrawals are accepted at the end of the reporting
+                    period
+                    <br />
+                    Manager needs to leave min Deposit
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Stop out (income protection)</b>
+                  </td>
+                  <td>Stop out doesn’t apply</td>
+                  <td>
+                    Manager sets Stop out level
+                    <br />
+                    It can vary from 10 to 100% and can only be changed downward
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Reinvest profit</b>
+                  </td>
+                  <td>Profit is reinvested automatically</td>
+                  <td>
+                    It depends on whether you have the{" "}
+                    <b>reinvestment trigger (Reinvest profit) </b>switched to
+                    “on” or “off”
+                    <br />
+                    <b>“on” -</b> all the profits at the end of the reporting
+                    period will be reinvested into the same Program
+                    <br />
+                    <b>“off”</b> - all profits are paid in GVT at the end of the
+                    reporting period and transferred to your wallet
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Commissions</b>
+                  </td>
+                  <td>
+                    <b>Management fee</b> 0-20%
+                    <br />
+                    <b>Success fee</b> 0-50% (HWM system)
+                    <br />
+                    <b>Platform Success fee</b> 0-10% *
+                    <br />
+                    (HWM system)
+                    <br />
+                    <b>GV commission</b> - 0.5% charged from every investment in
+                    the program.
+                  </td>
+                  <td>
+                    <b>Management fee</b> 0-20%
+                    <br />
+                    <b>Success fee</b> 0-50% (HWM system)
+                    <br />
+                    <b>Platform Success fee</b> 0-10% *
+                    <br />
+                    (HWM system)
+                    <br />
+                    <b>GV commission</b> - 0.5% charged from every investment in
+                    the program.
+                  </td>
+                </tr>
+              </table>
+            </section>
+          </>
+        ),
+        linkInfo: {
+          link: PROGRAMS_ROUTE,
+          label: "Programs"
+        }
+      },
+      {
+        id: "investing-4",
         canonicalName: "copy-trades",
         name: "Copy trades",
         content: (
