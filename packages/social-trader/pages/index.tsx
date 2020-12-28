@@ -1,3 +1,4 @@
+import withReduxStore from "decorators/with-redux-store";
 import {
   FollowDetailsListItemItemsViewModel,
   FundDetailsListItemItemsViewModel,
@@ -13,6 +14,8 @@ import {
   landingAssetsDefaultData
 } from "pages/landing-page/services/landing.service";
 import React from "react";
+import { compose } from "redux";
+import { initializeStore } from "store";
 
 const IndexPage: NextPage<Props> = props => {
   return <LandingPage {...props} />;
@@ -51,4 +54,4 @@ interface Props {
   news: Array<PlatformNews>;
 }
 
-export default IndexPage;
+export default compose(withReduxStore(initializeStore))(IndexPage);
