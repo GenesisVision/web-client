@@ -1,6 +1,8 @@
+import { Center } from "components/center/center";
 import { ConversationImages } from "components/conversation/conversation-image/conversation-images";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
+import { RowItem } from "components/row-item/row-item";
 import Deposit1 from "media/guides/guides-1/Deposit1.png";
 import Deposit2 from "media/guides/guides-1/Deposit2.png";
 import Deposit3 from "media/guides/guides-1/Deposit3.png";
@@ -27,6 +29,15 @@ import PlacingAnOrder2 from "media/guides/guides-3/PlacingAnOrder2.png";
 import SelfManagedFund2 from "media/guides/guides-3/SelfManagedFund2.png";
 import SelfmanagedFunds1 from "media/guides/guides-3/SelfmanagedFunds1.png";
 import SLTP1 from "media/guides/guides-3/SLTP1.png";
+import Terminal1 from "media/guides/guides-3/Terminal1.jpg";
+import Terminal2 from "media/guides/guides-3/Terminal2.png";
+import Terminal3 from "media/guides/guides-3/Terminal3.png";
+import Terminal4 from "media/guides/guides-3/Terminal4.png";
+import Terminal5 from "media/guides/guides-3/Terminal5.png";
+import Terminal6 from "media/guides/guides-3/Terminal6.png";
+import Terminal7 from "media/guides/guides-3/Terminal7.png";
+import Terminal8 from "media/guides/guides-3/Terminal8.png";
+import Terminal9 from "media/guides/guides-3/Terminal9.png";
 import TradingAccount1 from "media/guides/guides-3/TradingAccount1.png";
 import TradingAccount2 from "media/guides/guides-3/TradingAccount2.png";
 import ManFunds1 from "media/guides/guides-4/Funds1.png";
@@ -1545,6 +1556,320 @@ export const navGuides: INavGuide[] = [
     guides: [
       {
         id: "trading-1",
+        canonicalName: "gv-trading-terminal",
+        name: "GV Trading terminal",
+        content: (
+          <>
+            <p>GV Terminal has 6 sections:</p>
+            <ConversationImages
+              bottomOffset={false}
+              size={"large"}
+              images={[
+                {
+                  id: Terminal1,
+                  resizes: [
+                    {
+                      height: 0,
+                      width: 0,
+                      logoUrl: Terminal1,
+                      quality: "Original"
+                    },
+                    {
+                      height: 0,
+                      width: 0,
+                      logoUrl: Terminal1,
+                      quality: "Low"
+                    }
+                  ]
+                }
+              ]}
+            />
+            <ol>
+              <li>
+                Here you choose the asset you are interested in. You can use the
+                search bar or choose one of four sections (BTC, BNB, ALTS and
+                FIATS) and scroll down to find the desired asset.
+              </li>
+
+              <li>
+                The heading of the terminal. Here you can see the main
+                statistics of the chosen asset as well as your trading account
+                number and it’s current balance. You can switch to another
+                trading account by pressing the small arrow near the balance and
+                choosing the trading account from the opened list of available
+                ones.
+                <ConversationImages
+                  bottomOffset={false}
+                  size={"large"}
+                  images={[
+                    {
+                      id: Terminal2,
+                      resizes: [
+                        {
+                          height: 0,
+                          width: 0,
+                          logoUrl: Terminal2,
+                          quality: "Original"
+                        },
+                        {
+                          height: 0,
+                          width: 0,
+                          logoUrl: Terminal2,
+                          quality: "Low"
+                        }
+                      ]
+                    }
+                  ]}
+                />
+                <Center justifyCenter>
+                  <RowItem bottomOffset>Account switch</RowItem>
+                </Center>
+              </li>
+              <li>
+                The chart of the chosen asset. Here you can see the price
+                movement of the asset through the period of time. You can set
+                the type of chart, the time frames and the indicators here.
+                <Center justifyCenter>
+                  <ConversationImages
+                    bottomOffset={false}
+                    size={"large"}
+                    images={[
+                      {
+                        id: Terminal3,
+                        resizes: [
+                          {
+                            height: 0,
+                            width: 0,
+                            logoUrl: Terminal3,
+                            quality: "Original"
+                          },
+                          {
+                            height: 0,
+                            width: 0,
+                            logoUrl: Terminal3,
+                            quality: "Low"
+                          }
+                        ]
+                      },
+                      {
+                        id: Terminal4,
+                        resizes: [
+                          {
+                            height: 0,
+                            width: 0,
+                            logoUrl: Terminal4,
+                            quality: "Original"
+                          },
+                          {
+                            height: 0,
+                            width: 0,
+                            logoUrl: Terminal4,
+                            quality: "Low"
+                          }
+                        ]
+                      }
+                    ]}
+                  />
+                </Center>
+                <Center justifyCenter>
+                  <RowItem bottomOffset>Time frames Chart type</RowItem>
+                </Center>
+                <ConversationImages
+                  bottomOffset={false}
+                  size={"large"}
+                  images={[
+                    {
+                      id: Terminal5,
+                      resizes: [
+                        {
+                          height: 0,
+                          width: 0,
+                          logoUrl: Terminal5,
+                          quality: "Original"
+                        },
+                        {
+                          height: 0,
+                          width: 0,
+                          logoUrl: Terminal5,
+                          quality: "Low"
+                        }
+                      ]
+                    }
+                  ]}
+                />
+                <Center justifyCenter>
+                  <RowItem bottomOffset>Indicators</RowItem>
+                </Center>
+                <p>
+                  On the right you can find the settings where you can set the
+                  chart properties according to your needs.
+                </p>
+                <ConversationImages
+                  bottomOffset={false}
+                  size={"large"}
+                  images={[
+                    {
+                      id: Terminal6,
+                      resizes: [
+                        {
+                          height: 0,
+                          width: 0,
+                          logoUrl: Terminal6,
+                          quality: "Original"
+                        },
+                        {
+                          height: 0,
+                          width: 0,
+                          logoUrl: Terminal6,
+                          quality: "Low"
+                        }
+                      ]
+                    }
+                  ]}
+                />
+                <Center justifyCenter>
+                  <RowItem bottomOffset>Chart Properties</RowItem>
+                </Center>
+              </li>
+              <li>
+                Order book. The order book is a list of the open buy and sell
+                orders for an asset at the time, they are organized by price.
+                <ConversationImages
+                  bottomOffset={false}
+                  size={"large"}
+                  images={[
+                    {
+                      id: Terminal7,
+                      resizes: [
+                        {
+                          height: 0,
+                          width: 0,
+                          logoUrl: Terminal7,
+                          quality: "Original"
+                        },
+                        {
+                          height: 0,
+                          width: 0,
+                          logoUrl: Terminal7,
+                          quality: "Low"
+                        }
+                      ]
+                    }
+                  ]}
+                />
+                <p>
+                  The orders which are colored in green show buy orders at
+                  particular price levels, and the orders in red show sell
+                  orders.
+                </p>
+                <p>
+                  The market price of the asset is shown here. You can set the
+                  number of digits after the comma in the left upper corner.
+                </p>
+                <ConversationImages
+                  bottomOffset={false}
+                  size={"large"}
+                  images={[
+                    {
+                      id: Terminal8,
+                      resizes: [
+                        {
+                          height: 0,
+                          width: 0,
+                          logoUrl: Terminal8,
+                          quality: "Original"
+                        },
+                        {
+                          height: 0,
+                          width: 0,
+                          logoUrl: Terminal8,
+                          quality: "Low"
+                        }
+                      ]
+                    }
+                  ]}
+                />
+                <Center justifyCenter>
+                  <RowItem bottomOffset>Numbers after comma</RowItem>
+                </Center>
+              </li>
+              <li>
+                This is the section where you place your order. You choose Buy
+                or Sell, the type of the order (limit, market or stop limit) and
+                the amount. For the amount, you can type the number or simply
+                choose it as a percentage of the current balance of your trading
+                account (25%, 50%, 75%, 100%).
+                <p>
+                  And finally you set the TIF (time in force), it is set as GTC
+                  by default.
+                </p>
+                <p>
+                  Good till cancelled (GTC): The order will remain valid until
+                  it is fully executed or manually cancelled by the trader. GTC
+                  is suitable for traders who are willing to wait for all
+                  contracts to be completed at a specified price and can
+                  flexibly cancel unconcluded contracts at any time.
+                </p>
+                <p>
+                  Immediate or Cancel (IOC): The order must be filled
+                  immediately at the order limit price or better. If the order
+                  cannot be filled immediately, the unfilled contracts will be
+                  cancelled. IOC is usually used to avoid large orders being
+                  executed at a price that deviates from the ideal price. With
+                  this set, the contracts that fail to trade at the specified
+                  price will be cancelled.
+                </p>
+                <p>
+                  Fill or Kill (FOK): The order must be immediately executed at
+                  the order price or better, otherwise, it will be completely
+                  cancelled and partially filled contracts will not be allowed.
+                  This execution strategy is more commonly used by scalping
+                  traders or day traders looking for short-term market
+                  opportunities.
+                </p>
+                <ConversationImages
+                  bottomOffset={false}
+                  size={"large"}
+                  images={[
+                    {
+                      id: Terminal9,
+                      resizes: [
+                        {
+                          height: 0,
+                          width: 0,
+                          logoUrl: Terminal9,
+                          quality: "Original"
+                        },
+                        {
+                          height: 0,
+                          width: 0,
+                          logoUrl: Terminal9,
+                          quality: "Low"
+                        }
+                      ]
+                    }
+                  ]}
+                />
+                <Center justifyCenter>
+                  <RowItem bottomOffset>Time in frame</RowItem>
+                </Center>
+                <p>To place an order press Buy/Sell button.</p>
+              </li>
+              <li>
+                This is your journal. Here you can see the information about
+                your open orders, order history, trade history and the status of
+                the funds of your trading account.
+              </li>
+            </ol>
+          </>
+        ),
+        linkInfo: {
+          link: CREATE_ACCOUNT_PAGE_ROUTE,
+          label: "Create trading account"
+        }
+      },
+      {
+        id: "trading-2",
         canonicalName: "trading-account",
         name: "Trading account",
         content: (
@@ -1662,7 +1987,7 @@ export const navGuides: INavGuide[] = [
         }
       },
       {
-        id: "trading-2",
+        id: "trading-3",
         canonicalName: "external-account",
         name: "External account",
         content: (
@@ -1763,7 +2088,7 @@ export const navGuides: INavGuide[] = [
         }
       },
       {
-        id: "trading-3",
+        id: "trading-4",
         canonicalName: "self-managed-fund",
         name: "Self-managed Fund",
         content: (
@@ -1887,7 +2212,7 @@ export const navGuides: INavGuide[] = [
         }
       },
       {
-        id: "trading-4",
+        id: "trading-5",
         canonicalName: "placing-an-order",
         name: "Placing an order",
         content: (
@@ -2101,7 +2426,7 @@ export const navGuides: INavGuide[] = [
         )
       },
       {
-        id: "trading-5",
+        id: "trading-6",
         canonicalName: "stop-loss-and-take-profit",
         name: "Stop Loss and Take Profit",
         content: (
@@ -2168,7 +2493,7 @@ export const navGuides: INavGuide[] = [
         )
       },
       {
-        id: "trading-6",
+        id: "trading-7",
         canonicalName: "base-ta",
         name: "Base TA",
         content: (
@@ -2265,7 +2590,7 @@ export const navGuides: INavGuide[] = [
         )
       },
       {
-        id: "trading-7",
+        id: "trading-8",
         canonicalName: "base-indicators",
         name: "Base indicators",
         content: (
