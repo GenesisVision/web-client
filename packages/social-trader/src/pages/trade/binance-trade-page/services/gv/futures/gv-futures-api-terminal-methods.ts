@@ -6,26 +6,32 @@ import {
   getUserStreamSocket,
   klineSocket,
   marketTicketsSocket,
+  markPriceSocket,
   tradeSocket
-} from "../spot/binance-spot-ws.service";
+} from "../../futures/binance-futures-ws.service";
 import {
   cancelAllOrders,
   cancelOrder,
+  changeLeverage,
+  changeMarginMode,
+  changePositionMode,
   getAccountInformation,
   getAllOrders,
   getAllTrades,
   getDepth,
   getExchangeInfo,
   getKlines,
+  getMarkPrice,
   getOpenOrders,
+  getPositionMode,
   getServerTime,
   getTickers,
   getTrades,
   getUserStreamKey,
   tradeRequest
-} from "./gv-spot-http.service";
+} from "./gv-futures-http.service";
 
-export const GVSpotTerminalMethods: ITerminalMethods = {
+export const GVFuturesTerminalMethods: ITerminalMethods = {
   ...GVTerminalMethods,
   getExchangeInfo,
   getOpenOrders,
@@ -41,6 +47,14 @@ export const GVSpotTerminalMethods: ITerminalMethods = {
   cancelAllOrders,
   cancelOrder,
   tradeRequest,
+
+  getMarkPrice,
+  getPositionMode,
+  changePositionMode,
+  changeLeverage,
+  changeMarginMode,
+
+  markPriceSocket,
   klineSocket,
   tradeSocket,
   depthSocket,

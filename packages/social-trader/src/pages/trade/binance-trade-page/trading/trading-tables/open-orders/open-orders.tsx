@@ -4,7 +4,6 @@ import useApiRequest from "hooks/api-request.hook";
 import { TradeTable } from "pages/trade/binance-trade-page/trading/components/trade-table/trade-table";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-methods.context";
-import { getSymbolFromState } from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import { UnitedOrder } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
@@ -26,13 +25,13 @@ export const OpenOrders: React.FC<Props> = ({ items }) => {
       options,
       exchangeAccountId
     }: {
-      options: { symbol: string; useServerTime?: boolean };
+      options: { symbol?: string; useServerTime?: boolean };
       exchangeAccountId: string;
     }) => cancelAllOrders(options, exchangeAccountId)
   });
   const handleCancel = useCallback(() => {
     return sendRequest({
-      options: { symbol: getSymbolFromState(symbol) },
+      options: {},
       exchangeAccountId
     });
   }, [symbol, exchangeAccountId]);
@@ -85,7 +84,9 @@ export const OpenOrders: React.FC<Props> = ({ items }) => {
             stopPrice={String(stopPrice)}
             price={String(price)}
             origQty={String(quantity)}
-            filled={quantity ? (quantityFilled / quantity) * 100 : 0}
+            filled={
+              quantity && quantityFilled ? (quantityFilled / quantity) * 100 : 0
+            }
             total={+quantity * +price}
           />
         );

@@ -143,6 +143,7 @@ const _DashboardProgramCard: React.FC<Props> = ({
           )}
       </TableCardTable>
       <DepositWithdrawButtons
+        GM={program?.type === "DailyPeriod"}
         isProcessingRealTime={program.dailyPeriodDetails?.isProcessingRealTime}
         entryFee={program.managementFeeCurrent}
         availableToInvest={program.availableToInvest}

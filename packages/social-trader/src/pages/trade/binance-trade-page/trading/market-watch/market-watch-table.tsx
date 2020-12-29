@@ -65,6 +65,7 @@ const _MarketWatchTable: React.FC<Props> = ({
             </MarketWatchHeaderCell>
             {column === CHANGE_COLUMN ? (
               <MarketWatchHeaderCell
+                sortIcon={"left"}
                 dataType={"number"}
                 sorting={sorting}
                 setSorting={setSorting}
@@ -74,10 +75,11 @@ const _MarketWatchTable: React.FC<Props> = ({
               </MarketWatchHeaderCell>
             ) : (
               <MarketWatchHeaderCell
+                sortIcon={"left"}
                 dataType={"number"}
                 sorting={sorting}
                 setSorting={setSorting}
-                field={"baseVolume"}
+                field={"quoteVolume"}
               >
                 Volume
               </MarketWatchHeaderCell>
@@ -89,7 +91,7 @@ const _MarketWatchTable: React.FC<Props> = ({
         <table className={styles["market-watch__table"]}>
           <tbody>
             {items
-              .filter(filteringFunction)
+              .filter(search ? () => true : filteringFunction)
               .filter(filterForSearch(search))
               .sort(sortMarketWatchItems(sorting))
               .map(

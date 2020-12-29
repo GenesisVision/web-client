@@ -31,6 +31,7 @@
   }
 
   &__items-container {
+    margin-top: $padding-xxxsmall;
     height: 100%;
     overflow-y: auto;
   }
@@ -49,6 +50,22 @@
 
   &__th {
     cursor: pointer;
+    &--left {
+      &::before {
+        left: -15px;
+      }
+      &::after {
+        left: -15px;
+      }
+    }
+    &--right {
+      &::before {
+        right: -15px;
+      }
+      &::after {
+        right: -15px;
+      }
+    }
     &--asc,
     &--desc {
       position: relative;
@@ -97,8 +114,7 @@
 
 %sortable-border-icon {
   position: absolute;
-  right: -15px;
-  bottom: 5px;
+  bottom: 3px;
   content: "";
   border-top: 1px solid white;
 }

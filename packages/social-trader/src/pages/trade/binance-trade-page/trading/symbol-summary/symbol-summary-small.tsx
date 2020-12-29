@@ -143,7 +143,7 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
             >
               <Text size={"xsmall"}>
                 <MonoText>
-                  {+markPrice.lastFundingRate} %{" "}
+                  {+markPrice.fundingRate} %{" "}
                   {diffDate(new Date(), markPrice.nextFundingTime).format(
                     "HH:mm:ss"
                   )}
@@ -178,7 +178,14 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
         >
           <Text size={"xsmall"}>
             <MonoText>
-              {terminalMoneyFormat({ amount: highPrice, tickSize })}
+              <NumberFormat
+                value={terminalMoneyFormat({
+                  amount: highPrice,
+                  tickSize
+                })}
+                thousandSeparator={","}
+                displayType="text"
+              />
             </MonoText>
           </Text>
         </BlurableLabeledValue>
@@ -191,7 +198,14 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
         >
           <Text size={"xsmall"}>
             <MonoText>
-              {terminalMoneyFormat({ amount: lowPrice, tickSize })}
+              <NumberFormat
+                value={terminalMoneyFormat({
+                  amount: lowPrice,
+                  tickSize
+                })}
+                thousandSeparator={","}
+                displayType="text"
+              />
             </MonoText>
           </Text>
         </BlurableLabeledValue>

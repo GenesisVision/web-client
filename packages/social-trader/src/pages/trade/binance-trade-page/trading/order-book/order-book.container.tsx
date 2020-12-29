@@ -9,8 +9,7 @@ import {
   ORDER_BOOK_ROW_HEIGHT,
   sortDepthList,
   updateDepthList,
-  updateOrderBookFromBufferLogger,
-  updateOrderBookFromSocketLogger
+  updateOrderBookFromBufferLogger
 } from "pages/trade/binance-trade-page/trading/order-book/order-book.helpers";
 import { getSymbol } from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import {
@@ -119,19 +118,10 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
         const newBuffer = [...depthSocketDataBuffer, depthSocketData];
         setDepthSocketDataBuffer(newBuffer);
       } else if (list) {
-        const asks = updateDepthList(list.asks, depthSocketData.asks);
-        const bids = updateDepthList(list.bids, depthSocketData.bids);
-        updateOrderBookFromSocketLogger({
-          terminalType,
-          depthSocketData,
-          list,
-          asks,
-          bids
-        });
         setList({
           ...list,
-          asks,
-          bids,
+          asks: updateDepthList(list.asks, depthSocketData.asks),
+          bids: updateDepthList(list.bids, depthSocketData.bids),
           lastUpdateId: depthSocketData.lastUpdateId,
           firstUpdateId: depthSocketData.firstUpdateId
         });

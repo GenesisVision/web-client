@@ -11,7 +11,12 @@ import { getProgramWithdrawInfo } from "./services/program-withdraw.services";
 
 const ProgramWithdrawPopup = dynamic(() => import("./program-withdraw-popup"));
 
+interface Props extends IDialogProps, IProgramWithdrawPopupProps {
+  id: string;
+}
+
 const _ProgramWithdrawDialog: React.FC<Props> = ({
+  GM,
   isProcessingRealTime,
   onApply,
   id,
@@ -31,6 +36,7 @@ const _ProgramWithdrawDialog: React.FC<Props> = ({
   return (
     <Dialog open={open} onClose={onClose}>
       <ProgramWithdrawPopup
+        GM={GM}
         isProcessingRealTime={isProcessingRealTime}
         onApply={onApply}
         id={id}
@@ -43,10 +49,6 @@ const _ProgramWithdrawDialog: React.FC<Props> = ({
     </Dialog>
   );
 };
-
-interface Props extends IDialogProps, IProgramWithdrawPopupProps {
-  id: string;
-}
 
 const ProgramWithdrawDialog = React.memo(_ProgramWithdrawDialog);
 export default ProgramWithdrawDialog;

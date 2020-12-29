@@ -1,30 +1,21 @@
-import { DEFAULT_DECIMAL_SCALE } from "constants/constants";
-import dayjs from "dayjs";
+import { TableDataType } from "constants/constants";
 import {
   BinanceRawCancelOrder,
   BinanceRawCancelOrderId,
-  BinanceRawKline,
   BinanceRawKlineItemsViewModel,
-  BinanceRawOrder,
   BinanceRawOrderBook,
-  BinanceRawOrderBookEntry,
   BinanceRawOrderItemsViewModel,
-  BinanceRawPlaceOrder,
-  BinanceRawRecentTrade
+  BinanceRawRecentTrade,
+  TradingPlatformBinanceOrdersMode
 } from "gv-api-web";
 import { Bar } from "pages/trade/binance-trade-page/trading/chart/charting_library/datafeed-api";
-import {
-  DividerPartsType,
-  getDividerParts
-} from "pages/trade/binance-trade-page/trading/order-book/order-book.helpers";
+import { getDividerParts } from "pages/trade/binance-trade-page/trading/order-book/order-book.helpers";
 import {
   Account,
   CorrectedRestDepth,
   ExchangeInfo,
   KlineParams,
   OrderSide,
-  QueryOrderResult,
-  StringBidDepth,
   Ticker,
   TradeRequest,
   UnitedOrder,
@@ -32,28 +23,18 @@ import {
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { from, Observable } from "rxjs";
 import { api } from "services/api-client/swagger-custom-client";
-import { OrderRequest } from "services/request.service";
-import { formatValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
+
+import {
+  createPlaceBuySellOrderRequest,
+  PlaceOrderRequest,
+  transformDepthToString,
+  transformKlineBar,
+  transformToUnitedOrder
+} from "../../api.helpers";
 
 export const getExchangeInfo = (): Promise<ExchangeInfo> =>
   api.terminal().getExchangeInfo();
-
-const transformKlineBar = ({
-  close,
-  high,
-  low,
-  open,
-  openTime,
-  baseVolume
-}: BinanceRawKline): Bar => ({
-  close,
-  high,
-  low,
-  open,
-  time: dayjs(openTime).unix() * 1000,
-  volume: baseVolume
-});
 
 export const getKlines = async (params: KlineParams): Promise<Bar[]> => {
   let bars: Bar[] = [];
@@ -87,38 +68,6 @@ export const getServerTime = () => {
   return api.terminal().getExchangeTime();
 };
 
-const transformToUnitedOrder = ({
-  commissionAsset,
-  status,
-  commission,
-  quoteQuantityFilled,
-  orderId,
-  createTime,
-  symbol,
-  type,
-  side,
-  stopPrice,
-  price,
-  quantity,
-  quoteQuantity,
-  quantityFilled
-}: BinanceRawOrder): UnitedOrder => ({
-  commissionAsset,
-  orderStatus: status,
-  commission,
-  quoteQuantityFilled,
-  executedQuantity: quoteQuantity,
-  id: orderId,
-  time: createTime,
-  symbol,
-  type,
-  side,
-  stopPrice,
-  price,
-  quantityFilled,
-  quantity
-});
-
 export const getOpenOrders = (
   symbol: string,
   accountId?: string
@@ -132,25 +81,39 @@ export const getOpenOrders = (
       ) as Promise<UnitedOrder[]>
   );
 
-export const getAllTrades = (accountId?: string): Observable<UnitedOrder[]> =>
-  from(
-    api
-      .terminal()
-      .getTradesHistory({ accountId, mode: "TradeHistory" })
-      .then(({ items }: BinanceRawOrderItemsViewModel) =>
-        items.map(transformToUnitedOrder)
-      ) as Promise<UnitedOrder[]>
-  );
+export const getAllTrades = (filters: {
+  accountId?: string;
+  mode?: TradingPlatformBinanceOrdersMode;
+  dateFrom?: Date;
+  dateTo?: Date;
+  symbol?: string;
+  skip?: number;
+  take?: number;
+}): Promise<TableDataType<UnitedOrder>> =>
+  api
+    .terminal()
+    .getTradesHistory({ ...filters, mode: "TradeHistory" })
+    .then(({ total, items }: BinanceRawOrderItemsViewModel) => ({
+      total,
+      items: items.map(transformToUnitedOrder)
+    }));
 
-export const getAllOrders = (accountId?: string): Observable<UnitedOrder[]> =>
-  from(
-    api
-      .terminal()
-      .getTradesHistory({ accountId, mode: "OrderHistory" })
-      .then(({ items }: BinanceRawOrderItemsViewModel) =>
-        items.map(transformToUnitedOrder)
-      ) as Promise<UnitedOrder[]>
-  );
+export const getAllOrders = (filters: {
+  accountId?: string;
+  mode?: TradingPlatformBinanceOrdersMode;
+  dateFrom?: Date;
+  dateTo?: Date;
+  symbol?: string;
+  skip?: number;
+  take?: number;
+}): Promise<TableDataType<UnitedOrder>> =>
+  api
+    .terminal()
+    .getTradesHistory({ ...filters, mode: "OrderHistory" })
+    .then(({ total, items }: BinanceRawOrderItemsViewModel) => ({
+      total,
+      items: items.map(transformToUnitedOrder)
+    }));
 
 export const getUserStreamKey = (
   accountId?: string
@@ -193,26 +156,6 @@ export const getTrades = (
 export const getTickers = (symbol: string = ""): Observable<Ticker[]> =>
   from(api.terminal().get24HPrices(symbol) as Promise<Ticker[]>);
 
-const getPriceWithCorrectFrac = (
-  price: string,
-  correctFracLength: number = 8
-) => {
-  const [int, frac = ""] = price.split(".");
-  const correctFrac = frac + "0".repeat(correctFracLength - frac.length);
-  return [int, correctFrac].join(".");
-};
-
-const transformDepthToString = (dividerParts: DividerPartsType) => ({
-  price,
-  quantity
-}: BinanceRawOrderBookEntry): StringBidDepth => {
-  const newPrice = getPriceWithCorrectFrac(
-    formatValue(price, DEFAULT_DECIMAL_SCALE),
-    dividerParts.fracLength
-  );
-  return [newPrice, String(quantity)];
-};
-
 export const getDepth = (
   symbol: string,
   tickSize: string = "0.00000001",
@@ -231,21 +174,8 @@ export const getDepth = (
   );
 };
 
-export const newOrder = (
-  options: OrderRequest,
-  accountId?: string
-): Promise<any> =>
-  api.terminal().placeOrder({
-    body: {
-      ...options,
-      price: +options.price!,
-      quantity: +options.quantity!
-    } as BinanceRawPlaceOrder,
-    accountId
-  });
-
 export const cancelAllOrders = (
-  { symbol }: { symbol: string; useServerTime?: boolean },
+  { symbol }: { symbol?: string; useServerTime?: boolean },
   accountId?: string
 ): Promise<BinanceRawCancelOrderId[]> =>
   api.terminal().cancelAllOrders({ symbol, accountId });
@@ -259,75 +189,9 @@ export const cancelOrder = (
 ): Promise<BinanceRawCancelOrder> =>
   api.terminal().cancelOrder({ orderId, symbol, accountId });
 
-export const postBuy = ({
-  reduceOnly,
-  timeInForce,
-  stopPrice,
-  accountId,
-  symbol,
-  price,
-  quantity,
-  type
-}: TradeRequest & {
-  accountId?: string;
-}): Promise<QueryOrderResult> => {
-  return newOrder(
-    {
-      reduceOnly,
-      stopPrice:
-        type === "TakeProfitLimit" || type === "StopLossLimit"
-          ? stopPrice
-          : undefined,
-      symbol,
-      type,
-      price:
-        type === "Limit" ||
-        type === "TakeProfitLimit" ||
-        type === "StopLossLimit"
-          ? String(price)
-          : undefined,
-      quantity: String(quantity),
-      timeInForce,
-      side: "Buy"
-    },
-    accountId
-  );
-};
-
-export const postSell = ({
-  reduceOnly,
-  timeInForce,
-  stopPrice,
-  accountId,
-  symbol,
-  price,
-  quantity,
-  type
-}: TradeRequest & {
-  accountId?: string;
-}): Promise<QueryOrderResult> => {
-  return newOrder(
-    {
-      reduceOnly,
-      stopPrice:
-        type === "TakeProfitLimit" || type === "StopLossLimit"
-          ? stopPrice
-          : undefined,
-      symbol,
-      type,
-      price:
-        type === "Limit" ||
-        type === "TakeProfitLimit" ||
-        type === "StopLossLimit"
-          ? String(price)
-          : undefined,
-      quantity: String(quantity),
-      timeInForce,
-      side: "Sell"
-    },
-    accountId
-  );
-};
+const { postSell, postBuy } = createPlaceBuySellOrderRequest(
+  (api.terminal().placeOrder as unknown) as PlaceOrderRequest
+);
 
 export const getTradeMethod = (side: OrderSide) =>
   side === "Buy" ? postBuy : postSell;

@@ -22,7 +22,11 @@ import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import SettingsBlock from "components/settings-block/settings-block";
 import { ASSET } from "constants/constants";
-import { BrokerAccountType, ProgramAssetPlatformInfo } from "gv-api-web";
+import {
+  BrokerAccountType,
+  ProgramAssetPlatformInfo,
+  ProgramMinInvestAmount
+} from "gv-api-web";
 import { CONVERT_ASSET_FIELDS } from "pages/convert-asset/components/convert-asset-settings.helpers";
 import { KycRequiredBlock } from "pages/create-account/components/create-account-settings/kyc-required-block";
 import * as React from "react";
@@ -146,17 +150,17 @@ const _CreateProgramSettings: React.FC<Props> = ({
   }, [hasInvestmentLimit]);
 
   const accountType = safeGetElemFromArray(
-    broker.accountTypes,
+    (broker.accountTypes as unknown) as BrokerAccountType[],
     ({ id }) => brokerAccountTypeId === id
   );
 
   const isKycConfirmed = useSelector(kycConfirmedSelector);
   const kycRequired = !isKycConfirmed && accountType.isKycRequired;
 
-  const minDepositCreateAssetArray = safeGetElemFromArray(
-    minInvestAmounts,
-    ({ serverType }) => serverType === accountType.type
-  ).minDepositCreateAsset;
+  const minDepositCreateAssetArray = safeGetElemFromArray<
+    ProgramMinInvestAmount
+  >(minInvestAmounts, ({ serverType }) => serverType === accountType.type)
+    .minDepositCreateAsset;
 
   const validateAndSubmit = useAssetValidate({
     handleSubmit: onSubmit,
@@ -205,7 +209,9 @@ const _CreateProgramSettings: React.FC<Props> = ({
                     setValue(CREATE_PROGRAM_FIELDS.currency, value)
                   }
                   name={CREATE_PROGRAM_FIELDS.brokerAccountTypeId}
-                  accountTypes={broker.accountTypes as BrokerAccountType[]}
+                  accountTypes={
+                    (broker.accountTypes as unknown) as BrokerAccountType[]
+                  }
                 />
               </RowItem>
               <RowItem>

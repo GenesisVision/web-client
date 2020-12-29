@@ -20,6 +20,7 @@ import {
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { allowPositiveValuesNumberFormat } from "utils/helpers";
 import { HookForm } from "utils/hook-form.helpers";
 
 import { usePlaceOrderAutoFill } from "./hooks/place-order-auto-fill.hook";
@@ -132,6 +133,7 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
       </Row>
       <Row>
         <HookFormAmountField
+          isAllowed={allowPositiveValuesNumberFormat(Number.MAX_SAFE_INTEGER)}
           autoFocus={false}
           label={t("Amount")}
           currency={baseAsset}
@@ -162,7 +164,7 @@ const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
         <RowItem wide>
           <TimeInForceField orderType={"Limit"} />
         </RowItem>
-        {isFutures && currentPositionMode === false && (
+        {isFutures && currentPositionMode === "OneWay" && (
           <RowItem wide>
             <ReduceOnlyField />
           </RowItem>

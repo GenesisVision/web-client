@@ -9,7 +9,7 @@
 
   &--middle {
     & th {
-      font-size: $font-size-xsmall;
+      font-size: $font-size-common;
       @include adaptive-full-padding($padding-xxsmall);
     }
     & td {
