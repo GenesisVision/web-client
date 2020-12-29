@@ -71,6 +71,7 @@ import { FUNDS_ROUTE } from "routes/funds.routes";
 import { GV_FOLLOW_ROUTE } from "routes/invest.routes";
 import { PROGRAMS_ROUTE } from "routes/programs.routes";
 import { SOCIAL_ROUTE } from "routes/social.routes";
+import { TERMINAL_ROUTE } from "routes/trade.routes";
 
 export interface IGuide {
   id: string;
@@ -1180,7 +1181,11 @@ export const navGuides: INavGuide[] = [
               </table>
             </section>
           </>
-        )
+        ),
+        linkInfo: {
+          link: PROGRAMS_ROUTE,
+          label: "Programs"
+        }
       },
       {
         id: "investing-4",
@@ -1863,7 +1868,11 @@ export const navGuides: INavGuide[] = [
               </li>
             </ol>
           </>
-        )
+        ),
+        linkInfo: {
+          link: TERMINAL_ROUTE,
+          label: "Trading Terminal "
+        }
       },
       {
         id: "trading-2",
@@ -3876,7 +3885,11 @@ export const navGuides: INavGuide[] = [
               </table>
             </section>
           </>
-        )
+        ),
+        linkInfo: {
+          link: CREATE_PROGRAM_PAGE_ROUTE,
+          label: "Create Program"
+        }
       },
       {
         id: "managing-4",
