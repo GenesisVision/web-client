@@ -1,5 +1,4 @@
 import { DialogButtons } from "components/dialog/dialog-buttons";
-import { DialogInfo } from "components/dialog/dialog-info";
 import GVCheckbox from "components/gv-checkbox/gv-checkbox";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import InputAmountField from "components/input-amount-field/hook-form-amount-field";
@@ -20,6 +19,7 @@ import { formatCurrencyValue, validateFraction } from "utils/formatter";
 import { HookForm } from "utils/hook-form.helpers";
 
 interface Props {
+  GM?: boolean;
   withdrawInPercent?: boolean;
   formValues: IProgramWithdrawAmountFormValues;
   onSubmit: (values: IProgramWithdrawAmountFormValues) => void;
@@ -31,6 +31,7 @@ interface Props {
 }
 
 const _ProgramWithdrawAmountForm: React.FC<Props> = ({
+  GM,
   withdrawInPercent,
   onSubmit,
   formValues,
@@ -100,7 +101,11 @@ const _ProgramWithdrawAmountForm: React.FC<Props> = ({
       )}
       {withdrawAll && (
         <Row>
-          <Text muted>{t("withdraw-program.all-text")}</Text>
+          <Text muted>
+            {GM
+              ? t("withdraw-program.gm-all-text")
+              : t("withdraw-program.all-text")}
+          </Text>
         </Row>
       )}
       <Row onlyOffset hide={withdrawAll}>
@@ -112,7 +117,7 @@ const _ProgramWithdrawAmountForm: React.FC<Props> = ({
           setMax={isOwner || withdrawInPercent ? setMaxAmount : undefined}
         />
       </Row>
-      {programCurrency !== accountCurrency && amount !== 0 && (
+      {!GM && programCurrency !== accountCurrency && amount !== 0 && (
         <Row>
           <Text muted>
             <NumberFormat

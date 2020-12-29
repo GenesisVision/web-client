@@ -1,4 +1,10 @@
 {
+  "footer": {
+    "faq": "FAQ",
+    "partners": "Referral program",
+    "fees": "Fees",
+    "guides": "Guides"
+  },
   "actions-status-filter": {
     "label": "Status",
     "values": {
@@ -55,6 +61,7 @@
     "stop-out-more-current": "Can't be more than a current value",
     "amount-required": "Amount is required",
     "amount-is-large": "Must be available in Wallet",
+    "greater-zero": "Amount must be greater than zero",
     "amount-is-zero": "Must be greater or equal {{min}}",
     "title-required": "Title is required",
     "title-is-long": "Title is too long",
@@ -367,6 +374,7 @@
   },
   "withdraw-program": {
     "end": "the end of the reporting period.",
+    "gm-all-text": "You are withdrawing the entire amount that will be available in the Program at the moment the request is processed",
     "all-text": "You are withdrawing the entire amount that will be available in the program at the end of the period",
     "title": "Withdraw",
     "available-to-withdraw": "Available for withdrawal",

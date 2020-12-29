@@ -15,7 +15,6 @@ import { RootState } from "reducers/root-reducer";
 import { Dispatch } from "redux";
 import { api } from "services/api-client/swagger-custom-client";
 import Token from "services/api-client/token";
-import authService from "services/auth-service";
 import {
   ApiActionResponse,
   CurrencyEnum,
@@ -164,12 +163,10 @@ export const fetchInvestmentsLevels = (
     .getProgramLevels({ currency })
     .then(({ levels }) => levels);
 
-export const getProgramHistoryCounts = (isProgram: boolean) => (id: string) => (
-  dispatch: Dispatch,
-  getState: () => RootState
-) => {
-  const isAuthenticated = authService.isAuthenticated();
-
+export const getProgramHistoryCounts = (
+  isProgram: boolean,
+  isAuthenticated: boolean
+) => (id: string) => (dispatch: Dispatch, getState: () => RootState) => {
   const commonFiltering = { take: 0 };
 
   const tradesFilters = composeRequestFiltersByTableState(

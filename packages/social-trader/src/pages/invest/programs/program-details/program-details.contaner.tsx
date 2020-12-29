@@ -18,7 +18,8 @@ import { getSchema } from "pages/invest/programs/program-details/program-schema"
 import * as React from "react";
 import { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import styled from "styled-components";
 import {
   createFollowNotificationsToUrl,
@@ -69,6 +70,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
   data: description,
   route
 }) => {
+  const isAuthenticated = useSelector(isAuthenticatedSelector);
   const [t] = useTranslation();
   const dispatch = useDispatch();
   const {
@@ -239,8 +241,8 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
 
   const hasProgramDetails = !!programDetails;
   const getHistoryCounts = useMemo(
-    () => getProgramHistoryCounts(hasProgramDetails),
-    [hasProgramDetails]
+    () => getProgramHistoryCounts(hasProgramDetails, isAuthenticated),
+    [hasProgramDetails, isAuthenticated]
   );
 
   return (

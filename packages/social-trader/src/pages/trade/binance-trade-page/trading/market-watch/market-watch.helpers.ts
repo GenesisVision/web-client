@@ -55,13 +55,13 @@ export const COLUMN_VALUES = [
 export const getSymbolPrice = (
   items: MergedTickerSymbolType[],
   symbol: TerminalCurrency
-): string => {
+) => {
   return safeGetElemFromArray(items, filterForSymbol(symbol)).lastPrice;
 };
 
 export const normalizeSymbolsList = (list: Symbol[]) => {
   const initObject: AnyObjectType = {};
-  list.forEach(item => (initObject[item.symbol] = item));
+  list.forEach(item => (initObject[item.name] = item));
   return initObject;
 };
 
@@ -72,7 +72,7 @@ export const normalizeMarketList = (list: Ticker[]) => {
 };
 
 const getCorrectValue = (value: any, dataType: "number" | "string") => {
-  return dataType === "string" ? value.toLowerCase() : +value;
+  return dataType === "string" ? (value ? value.toLowerCase() : value) : +value;
 };
 
 export const sortMarketWatchItems = ({
@@ -99,7 +99,7 @@ export const sortMarketWatchItems = ({
 };
 
 export const filterTrading = ({ status }: MergedTickerSymbolType) => {
-  return status === "TRADING";
+  return status === "Trading";
 };
 
 export const filterForSymbol = (value: string) => (
@@ -155,7 +155,7 @@ export const getFilteringFunction = (
 
 export const filterForSearch = (
   query: string,
-  field: keyof MergedTickerSymbolType = "baseAsset"
+  field: keyof MergedTickerSymbolType = "symbol"
 ) => (item: MergedTickerSymbolType): boolean => {
   if (!query) return true;
   return String(item[field])

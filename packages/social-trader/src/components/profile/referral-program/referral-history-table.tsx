@@ -8,6 +8,7 @@ import TableCell from "components/table/components/table-cell";
 import TableModule from "components/table/components/table-module";
 import TableRow from "components/table/components/table-row";
 import { DEFAULT_PAGING } from "components/table/reducers/table-paging.reducer";
+import { DEFAULT_DECIMAL_SCALE } from "constants/constants";
 import dayjs from "dayjs";
 import { saveAs } from "file-saver";
 import { RewardDetails } from "gv-api-web";
@@ -19,6 +20,7 @@ import {
 } from "reducers/profile-reducer";
 import filesService from "services/file-service";
 import { formatDate } from "utils/dates";
+import { formatValue } from "utils/formatter";
 import { getRandomInteger, tableLoaderCreator } from "utils/helpers";
 
 import { getHistoryTable } from "./services/referral-program-services";
@@ -27,6 +29,8 @@ const _ReferralHistoryTable: React.FC = () => {
   const [t] = useTranslation();
   return (
     <TableModule
+      name={"ReferralHistoryTable"}
+      cache
       loaderData={ReferralHistoryLoaderData}
       exportButtonToolbarRender={(filtering: any) => (
         <DownloadReferralHistoryButton dateRange={filtering!.dateRange} />
@@ -53,7 +57,8 @@ const _ReferralHistoryTable: React.FC = () => {
       renderBodyRow={(reward: RewardDetails) => (
         <TableRow stripy>
           <TableCell>
-            {reward.amount} {reward.currency}
+            {formatValue(reward.amount, DEFAULT_DECIMAL_SCALE)}{" "}
+            {reward.currency}
           </TableCell>
           <TableCell>{formatDate(reward.date)}</TableCell>
         </TableRow>

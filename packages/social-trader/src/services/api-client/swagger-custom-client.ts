@@ -9,7 +9,6 @@ import {
   FileApi,
   FollowApi,
   FundsApi,
-  GuidesApi,
   InvestmentsApi,
   NotificationsApi,
   PartnershipApi,
@@ -68,9 +67,6 @@ const client = new ApiClient(apiUrl);
 export default client;
 
 export class Api {
-  guides = (token?: Token): GuidesApi =>
-    withApiProxy(new GuidesApi(Client.create(token)));
-
   terminal = (token?: Token): TradingplatformApi =>
     withApiProxy(new TradingplatformApi(Client.create(token)));
 

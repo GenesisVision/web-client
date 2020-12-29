@@ -21,6 +21,7 @@ const _DashboardInvestingStatistic: React.FC<Props> = ({ orientation }) => {
   const [t] = useTranslation();
   return (
     <DashboardStatisticContainer
+      name={"DashboardInvestingStatistic"}
       orientation={orientation}
       EmptyBlock={DashboardInvestingEmpty}
       currency={currency}

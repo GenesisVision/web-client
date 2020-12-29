@@ -63,6 +63,7 @@ const _DashboardPrivate: React.FC = () => {
     <DashboardBlock label={t("dashboard-page:trading.private")}>
       <TableTab selected={tab === TABS.ACCOUNTS}>
         <DashboardPrivateTable
+          name={"getPrivateAssets"}
           filtering={DASHBOARD_PUBLIC_FILTERING}
           defaultFilters={DASHBOARD_PUBLIC_DEFAULT_FILTERS}
           createButtonToolbar={
@@ -93,6 +94,7 @@ const _DashboardPrivate: React.FC = () => {
       </TableTab>
       <TableTab selected={tab === TABS.SELF_MANAGED_FUNDS}>
         <DashboardPrivateTable
+          name={"getSelfManagedFunds"}
           filtering={DASHBOARD_PUBLIC_FILTERING}
           defaultFilters={DASHBOARD_PUBLIC_DEFAULT_FILTERS}
           createButtonToolbar={

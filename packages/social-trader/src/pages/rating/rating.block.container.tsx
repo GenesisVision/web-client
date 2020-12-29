@@ -17,6 +17,8 @@ export const RatingBlockContainer: React.FC<Props> = ({
   valueField
 }) => {
   const { data } = useApiRequest<UserDetailsList[]>({
+    name: "getUsersRating",
+    cache: true,
     request: getUsersRating,
     fetchOnMount: true,
     fetchOnMountData: { sorting }

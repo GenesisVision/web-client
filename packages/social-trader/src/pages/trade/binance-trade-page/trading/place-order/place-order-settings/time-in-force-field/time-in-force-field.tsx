@@ -1,28 +1,34 @@
 import { GVHookFormField } from "components/gv-hook-form-field";
 import Select from "components/select/select";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
-import { TRADE_FORM_FIELDS } from "pages/trade/binance-trade-page/trading/place-order/place-order.helpers";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
+import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import {
   OrderType,
   TimeInForce as TimeInForceType
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useContext } from "react";
-import { useTranslation } from "react-i18next";
+
+import { TRADE_FORM_FIELDS } from "../../place-order.types";
 
 interface Props {
   orderType: OrderType;
 }
 
-export const TIME_IN_FORCE_VALUES: TimeInForceType[] = ["GTC", "IOC", "FOK"];
+export const TIME_IN_FORCE_VALUES: {
+  value: TimeInForceType;
+  label: string;
+}[] = [
+  { label: "GTC", value: "GoodTillCancel" },
+  { label: "IOC", value: "ImmediateOrCancel" },
+  { label: "FOK", value: "FillOrKill" }
+];
 
 const _TimeInForceField: React.FC<Props> = ({ orderType }) => {
   const { terminalType } = useContext(TerminalInfoContext);
-  const values: TimeInForceType[] =
-    terminalType === "spot" || orderType === "STOP_LOSS_LIMIT"
+  const values =
+    terminalType === "spot" || orderType === "TakeProfitLimit"
       ? TIME_IN_FORCE_VALUES
-      : [...TIME_IN_FORCE_VALUES, "GTX"];
-  const [t] = useTranslation();
+      : [...TIME_IN_FORCE_VALUES, { value: "GoodTillCrossing", label: "GTX" }];
   return (
     <GVHookFormField
       fixedWidth={false}
@@ -32,8 +38,8 @@ const _TimeInForceField: React.FC<Props> = ({ orderType }) => {
       InputComponent={Select}
     >
       {values.map(value => (
-        <option value={value} key={value}>
-          {value}
+        <option value={value.value} key={value.value}>
+          {value.label}
         </option>
       ))}
     </GVHookFormField>

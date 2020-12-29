@@ -1,30 +1,36 @@
-import { Icon, IIconProps } from "components/icon/icon";
 import * as React from "react";
 
-export const RefreshIcon: React.FC<IIconProps> = props => (
-  <Icon type={"refresh"} {...props}>
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      version="1.1"
-      id="Capa_1"
-      x="0px"
-      y="0px"
-      viewBox="0 0 491.236 491.236"
-      style={{
-        backgroundColor: "transparent",
-        // enableBackground: "new 0 0 491.236 491.236",
-        color: "black",
-        width: "16px"
-      }}
-      width="13px"
-      height="13px"
-    >
-      <g>
-        <path
-          d="M55.89,262.818c-3-26-0.5-51.1,6.3-74.3c22.6-77.1,93.5-133.8,177.6-134.8v-50.4c0-2.8,3.5-4.3,5.8-2.6l103.7,76.2    c1.7,1.3,1.7,3.9,0,5.1l-103.6,76.2c-2.4,1.7-5.8,0.2-5.8-2.6v-50.3c-55.3,0.9-102.5,35-122.8,83.2c-7.7,18.2-11.6,38.3-10.5,59.4    c1.5,29,12.4,55.7,29.6,77.3c9.2,11.5,7,28.3-4.9,37c-11.3,8.3-27.1,6-35.8-5C74.19,330.618,59.99,298.218,55.89,262.818z     M355.29,166.018c17.3,21.5,28.2,48.3,29.6,77.3c1.1,21.2-2.9,41.3-10.5,59.4c-20.3,48.2-67.5,82.4-122.8,83.2v-50.3    c0-2.8-3.5-4.3-5.8-2.6l-103.7,76.2c-1.7,1.3-1.7,3.9,0,5.1l103.6,76.2c2.4,1.7,5.8,0.2,5.8-2.6v-50.4    c84.1-0.9,155.1-57.6,177.6-134.8c6.8-23.2,9.2-48.3,6.3-74.3c-4-35.4-18.2-67.8-39.5-94.4c-8.8-11-24.5-13.3-35.8-5    C348.29,137.718,346.09,154.518,355.29,166.018z"
-          fill="#FFFFFF"
-        />
-      </g>
-    </svg>
-  </Icon>
+export const RefreshIcon: React.FC = () => (
+  <svg
+    width="15"
+    height="18"
+    viewBox="0 0 15 18"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M5.00065 6.01562L7.51562 3.50739L5.00065 0.99915"
+      stroke="white"
+      strokeWidth="2"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M7.13521 3C3.9 3 1.27734 5.62266 1.27734 8.85786C1.27734 10.4755 1.93301 11.9399 2.99307 13"
+      stroke="white"
+      strokeWidth="2"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M9.99935 11.9844L7.48438 14.4926L9.99935 17.0009"
+      stroke="white"
+      strokeWidth="2"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M7.86479 15C11.1 15 13.7227 12.3773 13.7227 9.14214C13.7227 7.52453 13.067 6.06006 12.0069 5"
+      stroke="white"
+      strokeWidth="2"
+      strokeLinejoin="round"
+    />
+  </svg>
 );

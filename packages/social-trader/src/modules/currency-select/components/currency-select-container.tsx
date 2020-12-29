@@ -1,5 +1,4 @@
-import clsx from "clsx";
-import { fetchProfileHeaderInfo } from "components/header/header.service";
+import { ProfileHeaderInfoAction } from "components/header/actions/header-actions";
 import { ISelectChangeEvent } from "components/select/select";
 import { useAccountCurrency } from "hooks/account-currency.hook";
 import useApiRequest from "hooks/api-request.hook";
@@ -20,7 +19,7 @@ const _CurrencySelectContainer: React.FC<Props> = ({ className }) => {
     updateCurrency(currency);
   };
   const updateHeaderMiddleware = () => {
-    dispatch(fetchProfileHeaderInfo);
+    dispatch(ProfileHeaderInfoAction());
   };
 
   const { sendRequest } = useApiRequest({

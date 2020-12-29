@@ -11,6 +11,7 @@ import React, { useCallback } from "react";
 import styles from "./market-watch.module.scss";
 
 interface Props {
+  sortIcon?: "left" | "right";
   dataType: "number" | "string";
   setSorting: (sorting: SortingType) => void;
   field: keyof MergedTickerSymbolType;
@@ -18,7 +19,7 @@ interface Props {
 }
 
 export const MarketWatchHeaderCell: React.FC<Props> = React.memo(
-  ({ dataType, field, sorting, children, setSorting }) => {
+  ({ sortIcon = "right", dataType, field, sorting, children, setSorting }) => {
     const handleChangeSorting = useCallback(
       (field: keyof MergedTickerSymbolType) => () => {
         const direction =
@@ -37,6 +38,8 @@ export const MarketWatchHeaderCell: React.FC<Props> = React.memo(
       >
         <span
           className={clsx({
+            [styles["market-watch__th--left"]]: sortIcon === "left",
+            [styles["market-watch__th--right"]]: sortIcon === "right",
             [styles["market-watch__th--asc"]]:
               isSelected && sorting.direction === SORTING_DIRECTION.ASC,
             [styles["market-watch__th--desc"]]:

@@ -2,13 +2,9 @@ import { Button } from "components/button/button";
 import { Text } from "components/text/text";
 import useApiRequest from "hooks/api-request.hook";
 import { TradeTable } from "pages/trade/binance-trade-page/trading/components/trade-table/trade-table";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
-import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/terminal-methods.context";
-import { getSymbolFromState } from "pages/trade/binance-trade-page/trading/terminal.helpers";
-import {
-  QueryOrderResult,
-  TerminalAuthDataType
-} from "pages/trade/binance-trade-page/trading/terminal.types";
+import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
+import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-methods.context";
+import { UnitedOrder } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -17,28 +13,28 @@ import { OPEN_ORDERS_TABLE_COLUMNS } from "./open-orders.helpers";
 import styles from "./open-orders.module.scss";
 
 interface Props {
-  items?: QueryOrderResult[];
+  items?: UnitedOrder[];
 }
 
 export const OpenOrders: React.FC<Props> = ({ items }) => {
   const { cancelAllOrders } = useContext(TerminalMethodsContext);
   const [t] = useTranslation();
-  const { authData, symbol } = useContext(TerminalInfoContext);
+  const { exchangeAccountId, symbol } = useContext(TerminalInfoContext);
   const { sendRequest, isPending } = useApiRequest({
     request: ({
       options,
-      authData
+      exchangeAccountId
     }: {
-      options: { symbol: string; useServerTime?: boolean };
-      authData: TerminalAuthDataType;
-    }) => cancelAllOrders(options, authData)
+      options: { symbol?: string; useServerTime?: boolean };
+      exchangeAccountId: string;
+    }) => cancelAllOrders(options, exchangeAccountId)
   });
   const handleCancel = useCallback(() => {
     return sendRequest({
-      options: { symbol: getSymbolFromState(symbol) },
-      authData
+      options: {},
+      exchangeAccountId
     });
-  }, [symbol, authData]);
+  }, [symbol, exchangeAccountId]);
   return (
     <TradeTable
       className={styles["open-orders__table"]}
@@ -68,27 +64,33 @@ export const OpenOrders: React.FC<Props> = ({ items }) => {
         </th>
       )}
       renderRow={({
-        executedQty,
-        origQty,
-        orderId,
+        quantityFilled,
+        quantity,
+        id,
         time,
         symbol,
         type,
         side,
+        stopPrice,
         price
-      }: QueryOrderResult) => (
-        <OpenOrdersRow
-          orderId={orderId}
-          time={time}
-          symbol={symbol}
-          type={type}
-          side={side}
-          price={price}
-          origQty={origQty}
-          filled={(+executedQty / +origQty) * 100}
-          total={+origQty * +price}
-        />
-      )}
+      }: UnitedOrder) => {
+        return (
+          <OpenOrdersRow
+            orderId={id}
+            time={time}
+            symbol={symbol}
+            type={type}
+            side={side}
+            stopPrice={String(stopPrice)}
+            price={String(price)}
+            origQty={String(quantity)}
+            filled={
+              quantity && quantityFilled ? (quantityFilled / quantity) * 100 : 0
+            }
+            total={+quantity * +price}
+          />
+        );
+      }}
     />
   );
 };

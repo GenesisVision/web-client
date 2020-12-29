@@ -11,6 +11,8 @@ import React from "react";
 const _DashboardTotalContainer: React.FC<Props> = ({ label }) => {
   const currency = useAccountCurrency();
   const { data } = useApiRequest<TDashboardTotal>({
+    name: "DashboardTotalContainer",
+    cache: true,
     fetchOnMount: true,
     fetchOnMountData: { currency },
     request: getTotal

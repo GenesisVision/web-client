@@ -48,6 +48,7 @@ const _DashboardPublicCardActions: React.FC<IDashboardPublicCardActionsProps> = 
     id,
     publicInfo: { title, url },
     actions: {
+      canClosePeriod,
       hasTerminal,
       canConfirm2FA,
       isEnoughMoneyToCreateProgram,
@@ -57,7 +58,7 @@ const _DashboardPublicCardActions: React.FC<IDashboardPublicCardActionsProps> = 
       canChangePassword
     }
   } = asset;
-  const showClosePeriod = assetType === ASSET.PROGRAM;
+  const showClosePeriod = assetType === ASSET.PROGRAM && canClosePeriod;
   const programMinDepositAmounts = useSelector(
     programMinDepositAmountsSelector
   );

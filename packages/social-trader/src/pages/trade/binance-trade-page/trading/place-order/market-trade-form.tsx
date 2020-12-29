@@ -1,15 +1,14 @@
 import { isAllow } from "components/deposit/components/deposit.helpers";
 import HookFormAmountField from "components/input-amount-field/hook-form-amount-field";
 import { LabeledValue } from "components/labeled-value/labeled-value";
-import { Slider } from "components/range/range";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
-import { Text } from "components/text/text";
 import { API_REQUEST_STATUS } from "hooks/api-request.hook";
+import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
+import { TerminalPlaceOrderContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-place-order.context";
 import { ReduceOnlyField } from "pages/trade/binance-trade-page/trading/place-order/place-order-settings/reduce-only-field/reduce-only-field";
+import { PlaceOrderSlider } from "pages/trade/binance-trade-page/trading/place-order/place-order-slider";
 import { PlaceOrderSubmitButton } from "pages/trade/binance-trade-page/trading/place-order/place-order-submit-button";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
-import { TerminalPlaceOrderContext } from "pages/trade/binance-trade-page/trading/terminal-place-order.context";
 import {
   AssetBalance,
   ExchangeInfo,
@@ -20,21 +19,22 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
 
+import { usePlaceOrderAutoFill } from "./hooks/place-order-auto-fill.hook";
+import { usePlaceOrderFormReset } from "./hooks/place-order-form-reset.hook";
+import { usePlaceOrderInfo } from "./hooks/place-order-info-hook";
+import { placeOrderDefaultValidationSchema } from "./place-order-validation";
+import { getBalance } from "./place-order.helpers";
 import {
   IPlaceOrderFormValues,
-  placeOrderDefaultValidationSchema,
-  RANGE_MARKS,
-  TRADE_FORM_FIELDS,
-  usePlaceOrderAutoFill,
-  usePlaceOrderFormReset,
-  usePlaceOrderInfo
-} from "./place-order.helpers";
+  IPlaceOrderHandleSubmitValues,
+  TRADE_FORM_FIELDS
+} from "./place-order.types";
 
 export interface IMarketTradeFormProps {
   status: API_REQUEST_STATUS;
-  outerPrice: number;
+  outerPrice: string;
   side: OrderSide;
-  onSubmit: (values: IPlaceOrderFormValues) => any;
+  onSubmit: (values: IPlaceOrderHandleSubmitValues) => any;
 }
 
 const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
@@ -56,7 +56,7 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
   const {
     minPrice,
     maxPrice,
-    minQty,
+    minQuantity,
     minNotional,
     maxQuantityWithWallet,
     maxTotalWithWallet
@@ -77,7 +77,7 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
       maxPrice: +maxPrice,
       minPrice: +minPrice,
       maxQuantity: maxQuantityWithWallet,
-      minQuantity: +minQty,
+      minQuantity: +minQuantity,
       minNotional: +minNotional
     }),
     mode: "onChange"
@@ -98,6 +98,10 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
   });
 
   usePlaceOrderAutoFill({
+    buyWalletAvailable: getBalance(balances, quoteAsset),
+    sellWalletAvailable: getBalance(balances, baseAsset),
+    setSliderValue,
+    side,
     totalName: TRADE_FORM_FIELDS.total,
     quantityName: TRADE_FORM_FIELDS.quantity,
     setValue,
@@ -107,7 +111,10 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
   });
 
   return (
-    <HookForm form={form} onSubmit={onSubmit}>
+    <HookForm
+      form={form}
+      onSubmit={values => onSubmit({ ...values, type: "Market" })}
+    >
       <Row hide>
         <HookFormAmountField
           autoFocus={false}
@@ -116,9 +123,7 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
           name={TRADE_FORM_FIELDS.price}
         />
       </Row>
-      <LabeledValue label={t("Price")}>
-        {t("Market price")} <Text muted>(≈ {outerPrice})</Text>
-      </LabeledValue>
+      <LabeledValue label={t("Price")}>{t("Market price")}</LabeledValue>
       <Row>
         <HookFormAmountField
           autoFocus={false}
@@ -138,18 +143,9 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
           name={TRADE_FORM_FIELDS.total}
         />
       </Row>
-      {side === "SELL" && (
-        <Row wide onlyOffset>
-          <Slider
-            dots
-            min={0}
-            max={RANGE_MARKS.length - 1}
-            marks={RANGE_MARKS}
-            value={sliderValue}
-            onChange={setSliderValue}
-          />
-        </Row>
-      )}
+      <Row wide onlyOffset>
+        <PlaceOrderSlider value={sliderValue} setValue={setSliderValue} />
+      </Row>
       <Row>
         <PlaceOrderSubmitButton
           isSuccessful={status === "SUCCESS"}
@@ -157,7 +153,7 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
           asset={baseAsset}
         />
       </Row>
-      {isFutures && currentPositionMode === false && (
+      {isFutures && currentPositionMode === "OneWay" && (
         <Row size={"small"}>
           <RowItem>
             <ReduceOnlyField />

@@ -29,7 +29,8 @@ interface IContainerProps {
 }
 
 const getLevelColor = (level?: string | number) => {
-  switch (level) {
+  const stringLevel = String(level);
+  switch (stringLevel) {
     case "1":
       return $levelColor1;
     case "2":

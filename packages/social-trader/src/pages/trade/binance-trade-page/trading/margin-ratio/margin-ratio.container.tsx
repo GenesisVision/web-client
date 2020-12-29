@@ -1,9 +1,9 @@
+import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import {
   getMarginInfo,
   getMarginRatioLoaderData,
   MARGIN_INFO_ASSET
 } from "pages/trade/binance-trade-page/trading/margin-ratio/margin-ratio.helpers";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
 import React, { useContext } from "react";
 
 import { MarginRatio } from "./margin-ratio";

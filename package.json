@@ -2,7 +2,8 @@
   "private": true,
   "workspaces": ["packages/*"],
   "dependencies": {
-    "@pavelzubov/use-api-request": "pavelzubov/use-api-request",
+    "@pavelzubov/use-api-request": "pavelzubov/use-api-request#1.4.2",
+    "@sumsub/websdk": "^1.0.11",
     "@zeit/next-workers": "^1.0.1-canary.1",
     "browser-image-compression": "^1.0.8",
     "cacheable-response": "^1.10.0",
@@ -24,6 +25,7 @@
     "lazysizes": "^5.2.0",
     "lodash": "^4.17.11",
     "lodash-es": "^4.17.11",
+    "majestic": "^1.8.0",
     "memoize-one": "^5.1.1",
     "next-compose-plugins": "^2.2.0",
     "next-cookies": "^1.1.2",

@@ -10,6 +10,7 @@ import React from "react";
 import { CurrencyEnum } from "utils/types";
 
 interface Props {
+  GM?: boolean;
   isProcessingRealTime?: boolean;
   infoMessage?: string;
   accountType?: PrivateTradingAccountType | AssetTypeExt;
@@ -30,6 +31,7 @@ interface Props {
 }
 
 const _DepositWithdrawButtons: React.FC<Props> = ({
+  GM,
   isProcessingRealTime,
   infoMessage,
   accountType,
@@ -70,6 +72,7 @@ const _DepositWithdrawButtons: React.FC<Props> = ({
       )}
       {canWithdraw && (
         <WithdrawButton
+          GM={GM}
           isProcessingRealTime={isProcessingRealTime}
           infoMessage={infoMessage}
           onApply={onApply}

@@ -1,7 +1,4 @@
 import { SortingColumn } from "components/table/components/filtering/filter.type";
-import { getSymbolPriceFilter } from "pages/trade/binance-trade-page/trading/place-order/place-order.helpers";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
-import { getSymbol } from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import {
   Depth,
   NormalizedDepth,
@@ -9,14 +6,32 @@ import {
   StringBidDepth,
   TerminalType
 } from "pages/trade/binance-trade-page/trading/terminal.types";
-import { useContext } from "react";
 import { formatValue } from "utils/formatter";
-import { safeGetElemFromArray } from "utils/helpers";
 import { AnyObjectType } from "utils/types";
 
-type DividerPartsType = { intLength?: number; fracLength?: number };
+export type DividerPartsType = { intLength?: number; fracLength?: number };
 
 export const ORDER_BOOK_ROW_HEIGHT = 16;
+
+export const isOrderInLine = ({
+  i,
+  items,
+  limitOrders,
+  price
+}: {
+  i: number;
+  items: StringBidDepth[];
+  limitOrders: number[];
+  price: string;
+}) => {
+  return i === 0
+    ? !!limitOrders.find(limitOrderPrice => {
+        return limitOrderPrice >= +price;
+      })
+    : !!limitOrders.find(limitOrderPrice => {
+        return limitOrderPrice < +items[i - 1][0] && limitOrderPrice >= +price;
+      });
+};
 
 export const sortDepthList = (
   [priceA]: StringBidDepth,
@@ -101,7 +116,7 @@ export const getDividerParts = (
   return { intLength, fracLength };
 };
 
-const getNewPriceWithDivider = (
+export const getNewPriceWithDivider = (
   price: string,
   { intLength, fracLength }: DividerPartsType,
   add?: boolean
@@ -144,20 +159,20 @@ export const collapseItems = (
   return collapsedItems;
 };
 
-export const useSymbolTick = () => {
-  const {
-    exchangeInfo,
-    symbol: { baseAsset, quoteAsset }
-  } = useContext(TerminalInfoContext);
-  if (!exchangeInfo) return;
-
-  const { filters } = safeGetElemFromArray(
-    exchangeInfo!.symbols,
-    symbol => symbol.symbol === getSymbol(baseAsset, quoteAsset)
-  );
-  const { tickSize } = getSymbolPriceFilter(filters);
-  return tickSize;
-};
+// export const useSymbolTick = () => {
+//   const {
+//     exchangeInfo,
+//     symbol: { baseAsset, quoteAsset }
+//   } = useContext(TerminalInfoContext);
+//   if (!exchangeInfo) return;
+//
+//   const { filters } = safeGetElemFromArray(
+//     exchangeInfo!.symbols,
+//     symbol => symbol.symbol === getSymbol(baseAsset, quoteAsset)
+//   );
+//   const { tickSize } = getSymbolPriceFilter(filters);
+//   return tickSize;
+// };
 
 export const getTickValues = (tick: number) => [
   formatValue(tick),

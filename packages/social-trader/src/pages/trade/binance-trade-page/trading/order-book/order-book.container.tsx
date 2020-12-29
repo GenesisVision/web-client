@@ -1,4 +1,6 @@
-import Regulator from "components/regulator/regulator";
+import useFlag from "hooks/flag.hook";
+import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
+import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-methods.context";
 import { OrderBook } from "pages/trade/binance-trade-page/trading/order-book/order-book";
 import {
   collapseItems,
@@ -7,19 +9,14 @@ import {
   ORDER_BOOK_ROW_HEIGHT,
   sortDepthList,
   updateDepthList,
-  updateOrderBookFromBufferLogger,
-  updateOrderBookFromSocketLogger
+  updateOrderBookFromBufferLogger
 } from "pages/trade/binance-trade-page/trading/order-book/order-book.helpers";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
-import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/terminal-methods.context";
 import { getSymbol } from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import {
   Depth,
   NormalizedDepth
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
-import { timer } from "rxjs";
-import { switchMap } from "rxjs/operators";
 import { useSockets } from "services/websocket.service";
 
 interface Props {}
@@ -42,6 +39,7 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
     symbol: { baseAsset, quoteAsset }
   } = useContext(TerminalInfoContext);
 
+  const [socketOpened, setSocketOpened, setSocketClosed] = useFlag();
   const [tickValue, setTickValue] = useState<
     { value: string; default: boolean } | undefined
   >();
@@ -63,30 +61,31 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
   }, [ref.current?.clientHeight]);
 
   useEffect(() => {
+    setSocketClosed();
     setList(undefined);
     setDepthSocketData(undefined);
     setDepthSocketDataBuffer([]);
     const symbol = getSymbol(baseAsset, quoteAsset);
-    const depthStream = depthSocket(connectSocket, symbol);
     console.log("open stream");
+    const depthStream = depthSocket(connectSocket, symbol, () => {
+      setSocketOpened();
+    });
     depthStream.subscribe(data => {
       setDepthSocketData(data);
     });
-    timer(2000)
-      .pipe(
-        switchMap(() => {
-          console.log("get snapshot");
-          return getDepth(getSymbol(baseAsset, quoteAsset));
-        })
-      )
-      .subscribe(data => {
-        setList({
-          ...data,
-          asks: normalizeDepthList(data.asks),
-          bids: normalizeDepthList(data.bids)
-        });
-      });
   }, [baseAsset, quoteAsset, terminalType]);
+
+  useEffect(() => {
+    if (!socketOpened) return;
+    console.log("get snapshot");
+    getDepth(getSymbol(baseAsset, quoteAsset)).subscribe(data => {
+      setList({
+        ...data,
+        asks: normalizeDepthList(data.asks),
+        bids: normalizeDepthList(data.bids)
+      });
+    });
+  }, [socketOpened]);
 
   useEffect(() => {
     if (list && depthSocketDataBuffer?.length) {
@@ -119,19 +118,10 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
         const newBuffer = [...depthSocketDataBuffer, depthSocketData];
         setDepthSocketDataBuffer(newBuffer);
       } else if (list) {
-        const asks = updateDepthList(list.asks, depthSocketData.asks);
-        const bids = updateDepthList(list.bids, depthSocketData.bids);
-        updateOrderBookFromSocketLogger({
-          terminalType,
-          depthSocketData,
-          list,
-          asks,
-          bids
-        });
         setList({
           ...list,
-          asks,
-          bids,
+          asks: updateDepthList(list.asks, depthSocketData.asks),
+          bids: updateDepthList(list.bids, depthSocketData.bids),
           lastUpdateId: depthSocketData.lastUpdateId,
           firstUpdateId: depthSocketData.firstUpdateId
         });
@@ -180,36 +170,16 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
   }, [list, asksDivider, bidsDivider]);
 
   return (
-    <>
-      <Regulator
-        size={"small"}
-        remainder={10000}
-        minValue={1}
-        value={asksDivider}
-        handleDown={() => setAsksDivider(asksDivider - 1)}
-        handleUp={() => setAsksDivider(asksDivider + 1)}
-      >
-        <>{asksDivider}</>
-      </Regulator>
-      <Regulator
-        size={"small"}
-        remainder={10000}
-        minValue={1}
-        value={bidsDivider}
-        handleDown={() => setBidsDivider(bidsDivider - 1)}
-        handleUp={() => setBidsDivider(bidsDivider + 1)}
-      >
-        <>{bidsDivider}</>
-      </Regulator>
-      <OrderBook
-        listAmount={listAmount}
-        tickValue={tickValue}
-        setTickValue={setTickValue}
-        tablesBlockRef={ref}
-        asks={asks}
-        bids={bids}
-      />
-    </>
+    <OrderBook
+      baseAsset={baseAsset}
+      quoteAsset={quoteAsset}
+      listAmount={listAmount}
+      tickValue={tickValue}
+      setTickValue={setTickValue}
+      tablesBlockRef={ref}
+      asks={asks}
+      bids={bids}
+    />
   );
 };
 

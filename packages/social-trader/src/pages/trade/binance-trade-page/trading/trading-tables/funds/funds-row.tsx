@@ -1,34 +1,40 @@
-import { getSymbolPrice } from "pages/trade/binance-trade-page/trading/market-watch/market-watch.helpers";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
-import { TerminalTickerContext } from "pages/trade/binance-trade-page/trading/terminal-ticker.context";
-import {
-  formatValueWithTick,
-  getSymbol
-} from "pages/trade/binance-trade-page/trading/terminal.helpers";
+import { useAccountCurrency } from "hooks/account-currency.hook";
+import { useGetRate } from "hooks/get-rate.hook";
+import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
+import { formatValueWithTick } from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import { TransferButton } from "pages/trade/binance-trade-page/trading/transfer/transfer.button";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
+import { formatCurrencyValue } from "utils/formatter";
 
 interface Props {
   asset: string;
-  available: string;
-  locked: string;
+  amountInCurrency: number;
+  available: number;
+  locked: number;
 }
 
-const _FundsFRow: React.FC<Props> = ({ asset, available, locked }) => {
-  const { items: ticker } = useContext(TerminalTickerContext);
-  const { tickSize, terminalType } = useContext(TerminalInfoContext);
-  const symbol = getSymbol(asset, "BTC");
-  // const price = ticker ? getSymbolPrice(ticker, symbol) : 0;
-  const price = "0";
+const _FundsRow: React.FC<Props> = ({
+  amountInCurrency,
+  asset,
+  available,
+  locked
+}) => {
+  const currency = useAccountCurrency();
+  const { rate, getRate, isRatePending } = useGetRate();
+  const { terminalType } = useContext(TerminalInfoContext);
   const total = formatValueWithTick(+available + +locked, "0.00000001");
-  const btcValue = formatValueWithTick(+total * +price, tickSize);
+
+  useEffect(() => {
+    if (asset && currency) getRate({ from: asset, to: currency });
+  }, [currency, asset]);
+
   return (
     <tr>
       <td>{asset}</td>
       <td>{total}</td>
-      <td>{available}</td>
+      <td>{formatValueWithTick(available, "0.00000001")}</td>
       <td>{locked}</td>
-      <td>{btcValue}</td>
+      <td>{!isRatePending && formatCurrencyValue(+total * rate, currency)}</td>
       {terminalType === "futures" && (
         <td>
           <TransferButton asset={asset} />
@@ -38,4 +44,4 @@ const _FundsFRow: React.FC<Props> = ({ asset, available, locked }) => {
   );
 };
 
-export const FundsRow = React.memo(_FundsFRow);
+export const FundsRow = React.memo(_FundsRow);

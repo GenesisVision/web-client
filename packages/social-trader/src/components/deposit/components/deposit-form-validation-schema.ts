@@ -4,30 +4,26 @@ import {
   IDepositFormValues
 } from "components/deposit/components/deposit.helpers";
 import { MinDepositType } from "components/deposit/components/deposit.types";
-import { WalletBaseData } from "gv-api-web";
 import { TFunction } from "i18next";
 import { convertToCurrency } from "utils/currency-converter";
-import { safeGetElemFromArray } from "utils/helpers";
+import { CurrencyEnum } from "utils/types";
 import { lazy, number, object, Schema } from "yup";
 
 export const depositValidationSchema = ({
   rate,
-  wallets,
+  walletCurrency,
   availableToInvestInAsset,
   minDeposit,
   t
 }: {
   rate: number;
-  wallets: WalletBaseData[];
+  walletCurrency: CurrencyEnum;
   t: TFunction;
   minDeposit: MinDepositType;
   availableToInvestInAsset: number;
-}) =>
-  lazy<IDepositFormValues>(values => {
-    const walletId = values[DEPOSIT_FORM_FIELDS.walletId];
-    const wallet = safeGetElemFromArray(wallets, ({ id }) => id === walletId);
-    const walletCurrency = wallet.currency;
-    const availableInWallet = wallet.available;
+}) => {
+  return lazy((values: IDepositFormValues) => {
+    const availableInWallet = values[DEPOSIT_FORM_FIELDS.availableInWallet];
     const availableToInvest = Math.min(
       availableInWallet,
       convertToCurrency(availableToInvestInAsset, rate)
@@ -53,3 +49,4 @@ export const depositValidationSchema = ({
         )
     }) as Schema<IDepositFormValues>;
   });
+};

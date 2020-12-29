@@ -10,7 +10,7 @@ const Page: NextPage = () => {
 };
 
 Page.getInitialProps = async () => ({
-  namespacesRequired: ["profile-page"]
+  namespacesRequired: ["auth", "profile-page"]
 });
 
 export default compose(withDefaultLayout, withPrivateRoute)(Page);

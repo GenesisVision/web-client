@@ -14,13 +14,14 @@ import { $boxShadow4 } from "utils/style/shadow";
 import { $paddingMedium, $walletItemSize } from "utils/style/sizes";
 
 interface Props {
+  hideOnDesktop?: boolean;
   mobileMenuItems: TMenuItem[];
   backPath: string;
   isAuthenticated: boolean;
   profileHeader?: ProfileHeaderViewModel;
 }
 
-const Container = styled.div`
+const Container = styled.div<{ hideOnDesktop?: boolean }>`
   padding: 0;
   min-height: ${$walletItemSize}px;
   min-width: ${$walletItemSize}px;
@@ -36,10 +37,14 @@ const Container = styled.div`
     box-shadow: ${$boxShadow4};
   }
 
-  ${mediaBreakpointLandscapeTablet("display: none !important;")}
+  ${({ hideOnDesktop }) =>
+    hideOnDesktop
+      ? mediaBreakpointLandscapeTablet("display: none !important;")
+      : ""}
 `;
 
 const _NavigationMobileButton: React.FC<Props> = ({
+  hideOnDesktop = true,
   mobileMenuItems,
   isAuthenticated,
   profileHeader,
@@ -50,7 +55,7 @@ const _NavigationMobileButton: React.FC<Props> = ({
   const handlerLogout = useCallback(() => dispatch(logout), []);
   return (
     <>
-      <Container onClick={setOpen}>
+      <Container hideOnDesktop={hideOnDesktop} onClick={setOpen}>
         <MenuIcon />
       </Container>
       <NavigationMobileContainer

@@ -8,18 +8,19 @@ import { Row } from "components/row/row";
 import { Text } from "components/text/text";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import { withBlurLoader } from "decorators/with-blur-loader";
+import { AccountSelectorContainer } from "pages/trade/binance-trade-page/trading/components/account-selector/account-selector.container";
 import { MonoText } from "pages/trade/binance-trade-page/trading/components/mono-text/mono-text";
 import { terminalMoneyFormat } from "pages/trade/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
 import { TradeStatefulValue } from "pages/trade/binance-trade-page/trading/components/trade-stateful-value/trade-stateful-value";
+import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import { MarketWatchTooltipButton } from "pages/trade/binance-trade-page/trading/market-watch/market-watch.tooltip";
 import {
   getTickerSymbolLoaderData,
   useSymbolData
 } from "pages/trade/binance-trade-page/trading/symbol-summary/symbol-summary.helpers";
-import { TerminalTypeSwitcher } from "pages/trade/binance-trade-page/trading/symbol-summary/terminal-type-switcher";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
 import { SymbolSummaryData } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useContext } from "react";
+import NumberFormat from "react-number-format";
 import { diffDate } from "utils/dates";
 
 interface Props {
@@ -54,13 +55,16 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
       quoteAsset,
       priceChangePercent,
       priceChange,
-      high,
-      low,
-      volume
+      highPrice,
+      lowPrice,
+      quoteVolume,
+      baseVolume
     }
   }
 }) => {
-  const { stepSize, tickSize } = useContext(TerminalInfoContext);
+  const { exchangeAccountId, stepSize, tickSize } = useContext(
+    TerminalInfoContext
+  );
   const renderSymbol = () => (
     <h5>
       {baseAsset}/{quoteAsset}
@@ -94,6 +98,7 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
         </Row>
         <Row size={"xsmall"}>
           <Text muted>
+            $
             <MonoText>
               {terminalMoneyFormat({ amount: lastPrice, tickSize })}
             </MonoText>
@@ -138,7 +143,7 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
             >
               <Text size={"xsmall"}>
                 <MonoText>
-                  {+markPrice.lastFundingRate} %{" "}
+                  {+markPrice.fundingRate} %{" "}
                   {diffDate(new Date(), markPrice.nextFundingTime).format(
                     "HH:mm:ss"
                   )}
@@ -149,7 +154,7 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
         </>
       )}
       <RowItem>
-        <LabeledValue size={"xsmall"} label={"24 Change"}>
+        <LabeledValue size={"xsmall"} label={"24h Change"}>
           <MonoText>
             <Text
               size={"xsmall"}
@@ -168,37 +173,79 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
       <RowItem>
         <BlurableLabeledValue
           size={"xsmall"}
-          isPending={!high}
-          label={"24 High"}
+          isPending={!highPrice}
+          label={"24h High"}
         >
           <Text size={"xsmall"}>
             <MonoText>
-              {terminalMoneyFormat({ amount: high, tickSize })}
+              <NumberFormat
+                value={terminalMoneyFormat({
+                  amount: highPrice,
+                  tickSize
+                })}
+                thousandSeparator={","}
+                displayType="text"
+              />
             </MonoText>
           </Text>
         </BlurableLabeledValue>
       </RowItem>
       <RowItem>
-        <BlurableLabeledValue size={"xsmall"} isPending={!low} label={"24 Low"}>
+        <BlurableLabeledValue
+          size={"xsmall"}
+          isPending={!lowPrice}
+          label={"24h Low"}
+        >
           <Text size={"xsmall"}>
             <MonoText>
-              {terminalMoneyFormat({ amount: low, tickSize })}
+              <NumberFormat
+                value={terminalMoneyFormat({
+                  amount: lowPrice,
+                  tickSize
+                })}
+                thousandSeparator={","}
+                displayType="text"
+              />
             </MonoText>
           </Text>
         </BlurableLabeledValue>
       </RowItem>
       <RowItem>
-        <LabeledValue size={"xsmall"} label={"24 Volume"}>
+        <LabeledValue size={"xsmall"} label={`24h Volume (${baseAsset})`}>
           <Text size={"xsmall"}>
             <MonoText>
-              {terminalMoneyFormat({ amount: volume, tickSize: stepSize })}{" "}
-              {quoteAsset}
+              <NumberFormat
+                value={terminalMoneyFormat({
+                  amount: baseVolume,
+                  tickSize: stepSize
+                })}
+                thousandSeparator={","}
+                displayType="text"
+                suffix={` ${baseAsset}`}
+              />
             </MonoText>
           </Text>
         </LabeledValue>
       </RowItem>
       <RowItem>
-        <TerminalTypeSwitcher />
+        <LabeledValue size={"xsmall"} label={`24h Volume (${quoteAsset})`}>
+          <Text size={"xsmall"}>
+            <MonoText>
+              <NumberFormat
+                value={terminalMoneyFormat({
+                  amount: quoteVolume,
+                  tickSize: tickSize
+                })}
+                thousandSeparator={","}
+                displayType="text"
+                suffix={` ${quoteAsset}`}
+              />
+            </MonoText>
+          </Text>
+        </LabeledValue>
+      </RowItem>
+      <RowItem>
+        <AccountSelectorContainer currentAccount={exchangeAccountId} />
       </RowItem>
     </Center>
   );

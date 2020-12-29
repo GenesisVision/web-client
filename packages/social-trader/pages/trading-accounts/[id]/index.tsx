@@ -30,6 +30,7 @@ Page.getInitialProps = async ctx => {
   });
   return {
     namespacesRequired: [
+      "dashboard-page",
       "portfolio-events",
       "transfer",
       "asset-details",

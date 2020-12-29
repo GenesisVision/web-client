@@ -1,6 +1,7 @@
 import Page from "components/page/page";
 import Crashable from "decorators/crashable";
 import useApiRequest from "hooks/api-request.hook";
+import { getLogoValue } from "modules/asset-settings/asset-settings.helpers";
 import { CLOSEABLE_ASSET } from "modules/asset-settings/close-asset/close-asset";
 import { TUpdateProgramFunc } from "pages/invest/programs/programs-settings/program-settings.page";
 import React, { useCallback, useEffect } from "react";
@@ -44,16 +45,12 @@ const _AssetsEditPage: React.FC<Props> = ({
         values.investmentLimit !== undefined
           ? values.investmentLimit
           : description.programDetails?.availableInvestmentLimit;
-      const logo =
-        values.logo?.image?.cropped !== undefined
-          ? values.logo
-          : { src: description.publicInfo.logo };
+      const logo = getLogoValue(values, description);
       const currentValues = {
         hourProcessing:
           description?.programDetails?.dailyPeriodDetails?.hourProcessing,
         isProcessingRealTime:
           description?.programDetails?.dailyPeriodDetails?.isProcessingRealTime,
-        logo: { src: description.publicInfo.logo },
         tradesDelay: description.tradesDelay,
         exitFee: description.exitFeeSelected, //exitFee
         entryFee: description.entryFeeSelected, //entryFee

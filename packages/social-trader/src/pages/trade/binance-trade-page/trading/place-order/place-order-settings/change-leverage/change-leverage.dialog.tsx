@@ -6,7 +6,7 @@ import { Slider } from "components/range/range";
 import Regulator from "components/regulator/regulator";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
-import { TerminalPlaceOrderContext } from "pages/trade/binance-trade-page/trading/terminal-place-order.context";
+import { TerminalPlaceOrderContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-place-order.context";
 import { LeverageBracket } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";

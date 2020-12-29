@@ -1,6 +1,7 @@
 import { Text } from "components/text/text";
+import { useAccountCurrency } from "hooks/account-currency.hook";
 import { TradeTable } from "pages/trade/binance-trade-page/trading/components/trade-table/trade-table";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
+import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import { AssetBalance } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { FundsRow } from "pages/trade/binance-trade-page/trading/trading-tables/funds/funds-row";
 import {
@@ -17,6 +18,7 @@ interface Props {
 }
 
 const _Funds: React.FC<Props> = ({ items }) => {
+  const currency = useAccountCurrency();
   const [t] = useTranslation();
   const { terminalType } = useContext(TerminalInfoContext);
   const columns =
@@ -28,11 +30,18 @@ const _Funds: React.FC<Props> = ({ items }) => {
       columns={columns}
       renderHeaderCell={({ name }) => (
         <th>
-          <Text muted>{t(name)}</Text>
+          <Text muted>
+            {name === "-value" ? `${currency}${name}` : t(name)}
+          </Text>
         </th>
       )}
-      renderRow={({ asset, free, locked }: AssetBalance) => (
-        <FundsRow asset={asset} available={free} locked={locked} />
+      renderRow={({ asset, free, locked, amountInCurrency }: AssetBalance) => (
+        <FundsRow
+          amountInCurrency={amountInCurrency}
+          asset={asset}
+          available={free}
+          locked={locked}
+        />
       )}
     />
   );

@@ -14,6 +14,8 @@ const _ReferralFriendsTable: React.FC = () => {
   const [t] = useTranslation();
   return (
     <TableModule
+      name={"ReferralFriendsTable"}
+      cache
       loaderData={ReferralFriendsLoaderData}
       title={t("profile-page:referral-program.referral-friends.title")}
       getItems={getFriendsTable}

@@ -3,17 +3,19 @@ import { Row } from "components/row/row";
 import { Text } from "components/text/text";
 import { OrderBookCurrentPriceContainer } from "pages/trade/binance-trade-page/trading/order-book/order-book-current-price.container";
 import { OrderBookTickSizeSelect } from "pages/trade/binance-trade-page/trading/order-book/order-book-tick-size-select";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
 import {
   DepthFullAmount,
-  StringBidDepth
+  StringBidDepth,
+  TerminalCurrency
 } from "pages/trade/binance-trade-page/trading/terminal.types";
-import React, { RefObject, useContext } from "react";
+import React, { RefObject } from "react";
 
 import { OrderBookTable } from "./order-book-table";
 import styles from "./order-book.module.scss";
 
 interface Props {
+  quoteAsset: TerminalCurrency;
+  baseAsset: TerminalCurrency;
   listAmount: DepthFullAmount;
   tickValue?: { value: string; default: boolean };
   setTickValue: (value: { value: string; default: boolean }) => void;
@@ -23,6 +25,8 @@ interface Props {
 }
 
 const _OrderBook: React.FC<Props> = ({
+  quoteAsset,
+  baseAsset,
   listAmount,
   tickValue,
   setTickValue,
@@ -30,9 +34,6 @@ const _OrderBook: React.FC<Props> = ({
   asks,
   bids
 }) => {
-  const {
-    symbol: { baseAsset, quoteAsset }
-  } = useContext(TerminalInfoContext);
   return (
     <>
       <Row size={"small"}>
@@ -43,12 +44,12 @@ const _OrderBook: React.FC<Props> = ({
           <thead>
             <th>
               <Text muted size={"small"}>
-                Price ({baseAsset})
+                Price ({quoteAsset})
               </Text>
             </th>
             <th>
               <Text muted size={"small"}>
-                Amount ({quoteAsset})
+                Amount ({baseAsset})
               </Text>
             </th>
             <th>
@@ -79,7 +80,7 @@ const _OrderBook: React.FC<Props> = ({
               items={asks}
             />
           </Row>
-          <Row size={"small"}>
+          <Row size={"small"} wide>
             <OrderBookCurrentPriceContainer />
           </Row>
           <Row

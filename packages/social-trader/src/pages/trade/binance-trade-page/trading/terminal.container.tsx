@@ -1,18 +1,18 @@
+import { BinanceRawSymbol } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
-import { Terminal } from "pages/trade/binance-trade-page/trading/terminal";
 import {
   SymbolInitialState,
-  SymbolState,
   TerminalTypeInitialState
-} from "pages/trade/binance-trade-page/trading/terminal-info.context";
-import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/terminal-methods.context";
+} from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
+import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-methods.context";
+import { Terminal } from "pages/trade/binance-trade-page/trading/terminal";
 import {
-  getSymbolFromState,
   stringifySymbolFromToParam,
   updateTerminalUrl
 } from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import {
   ExchangeInfo,
+  SymbolState,
   TerminalAuthDataType,
   TerminalType
 } from "pages/trade/binance-trade-page/trading/terminal.types";
@@ -55,7 +55,7 @@ const _TerminalContainer: React.FC<ITerminalContainerProps> = ({
 
   useEffect(() => {
     setCheckInfo(true);
-  }, [type, symbol]);
+  }, [type, symbol, exchangeAccountId]);
 
   useEffect(() => {
     if (checkInfo) setUpdateExchangeInfo(true);
@@ -71,7 +71,9 @@ const _TerminalContainer: React.FC<ITerminalContainerProps> = ({
     const isSymbolCorrect =
       !!symbol &&
       !!exchangeInfo.symbols.find(
-        item => item.symbol === getSymbolFromState(symbol)
+        (item: BinanceRawSymbol) =>
+          item.quoteAsset === symbol.quoteAsset &&
+          item.baseAsset === symbol.baseAsset
       );
     setIsSymbolCorrect(isSymbolCorrect);
     setUpdateExchangeInfo(false);
@@ -112,6 +114,7 @@ const _TerminalContainer: React.FC<ITerminalContainerProps> = ({
 
   return (
     <Terminal
+      key={exchangeAccountId}
       exchangeAccountId={exchangeAccountId}
       exchangeInfo={exchangeInfoProp}
       authData={authDataProp}

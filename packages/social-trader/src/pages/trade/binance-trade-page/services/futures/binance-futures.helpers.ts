@@ -24,36 +24,36 @@ import { filter } from "rxjs/operators";
 export const transformAccountToBalanceForTransfer = ({
   balances
 }: Account): BalanceForTransfer[] => {
+  // @ts-ignore
   return balances.map(({ asset, free }) => ({ asset, free }));
 };
 
 export const transformMarkPriceWS = (m: any): MarkPrice => ({
   symbol: m.s,
   markPrice: m.p,
-  lastFundingRate: m.r,
+  fundingRate: m.r,
   nextFundingTime: m.T,
   time: m.E
 });
 
 export const transformFuturesTickerSymbolWS = (m: any): Ticker => ({
-  eventType: m.e,
-  eventTime: m.E,
+  // eventType: m.e,
   symbol: m.s,
   priceChange: m.p,
   priceChangePercent: m.P,
-  weightedAvgPrice: m.w,
-  prevClosePrice: m.x,
+  weightedAveragePrice: m.w,
+  prevDayClosePrice: m.x,
   lastPrice: m.c,
-  lastQty: m.Q,
-  bestBid: m.b,
-  bestBidQnt: m.B,
-  bestAsk: m.a,
-  bestAskQnt: m.A,
-  open: m.o,
-  high: m.h,
-  low: m.l,
-  volume: m.v,
-  volumeQuote: m.q,
+  lastQuantity: m.Q,
+  bidPrice: m.b,
+  bidQuantity: m.B,
+  askPrice: m.a,
+  askQuantity: m.A,
+  openPrice: m.o,
+  highPrice: m.h,
+  lowPrice: m.l,
+  baseVolume: m.v,
+  quoteVolume: m.q,
   openTime: m.O,
   closeTime: m.C,
   firstTradeId: m.F,
@@ -68,10 +68,13 @@ export const transformFuturesTickerSymbol = (
     eventType: "",
     eventTime: 0,
     symbol: futuresSymbol.symbol,
+    // @ts-ignore
     priceChange: futuresSymbol.priceChange,
+    // @ts-ignore
     priceChangePercent: futuresSymbol.priceChangePercent,
     weightedAvgPrice: futuresSymbol.weightedAvgPrice,
     prevClosePrice: futuresSymbol.prevClosePrice,
+    // @ts-ignore
     lastPrice: futuresSymbol.lastPrice,
     lastQty: futuresSymbol.lastQty,
     bestBid: "",
@@ -83,7 +86,9 @@ export const transformFuturesTickerSymbol = (
     low: futuresSymbol.volume,
     volume: futuresSymbol.volume,
     volumeQuote: futuresSymbol.quoteVolume,
+    // @ts-ignore
     openTime: futuresSymbol.openTime,
+    // @ts-ignore
     closeTime: futuresSymbol.closeTime,
     firstTradeId: futuresSymbol.firstId,
     lastTradeId: futuresSymbol.lastId,
@@ -97,7 +102,9 @@ export const transformFuturesBalance = (
   return {
     futuresAsset,
     asset: futuresAsset.asset,
+    // @ts-ignore
     free: futuresAsset.maxWithdrawAmount,
+    // @ts-ignore
     locked: "0"
   };
 };
@@ -114,6 +121,7 @@ export const transformFuturesAccount = (
     makerCommission: 0,
     sellerCommission: 0,
     takerCommission: 0,
+    // @ts-ignore
     updateTime: futuresAccount.updateTime
   };
 };

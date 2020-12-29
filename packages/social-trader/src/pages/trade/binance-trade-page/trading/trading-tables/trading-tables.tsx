@@ -3,11 +3,12 @@ import GVTabs from "components/gv-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
 import useTab from "hooks/tab.hook";
 import { TerminalDefaultBlock } from "pages/trade/binance-trade-page/trading/components/terminal-default-block/terminal-default-block";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
+import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import { FundsContainer } from "pages/trade/binance-trade-page/trading/trading-tables/funds/funds.container";
 import { OpenOrdersContainer } from "pages/trade/binance-trade-page/trading/trading-tables/open-orders/open-orders.container";
 import { OrderHistoryContainer } from "pages/trade/binance-trade-page/trading/trading-tables/order-history/order-history.container";
 import { PositionsContainer } from "pages/trade/binance-trade-page/trading/trading-tables/positions/positions.container";
+import { TradeHistoryContainer } from "pages/trade/binance-trade-page/trading/trading-tables/trade-history/trade-history.container";
 import React, { useContext, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -51,6 +52,7 @@ const _TradingTables: React.FC<Props> = () => {
         </GVTabs>
       </DefaultBlock>
       <div className={styles["trading-tables__tables-container"]}>
+        {tab === TABS.TRADE_HISTORY && <TradeHistoryContainer />}
         {tab === TABS.POSITIONS && isFutures && <PositionsContainer />}
         {tab === TABS.OPEN_ORDERS && <OpenOrdersContainer />}
         {tab === TABS.ORDER_HISTORY && <OrderHistoryContainer />}

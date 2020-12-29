@@ -21,7 +21,7 @@ enum FIELDS {
   successFee = "successFee"
 }
 
-export interface InvesmentLimitFormValues {
+export interface InvestmentLimitFormValues {
   [FIELDS.exitFee]?: number;
   [FIELDS.entryFee]: number;
   [FIELDS.successFee]?: number;
@@ -37,7 +37,7 @@ interface Props {
   exitFee?: number;
   entryFee: number;
   successFee?: number;
-  onSubmit: (values: InvesmentLimitFormValues) => void;
+  onSubmit: (values: InvestmentLimitFormValues) => void;
 }
 
 const getFirstDescription = ({
@@ -72,7 +72,7 @@ const getSecondDescription = ({
 }: {
   t: TFunction;
   asset: ASSET;
-  maxFee?: number;
+  maxFee: number;
   isExchange?: boolean;
 }) => {
   switch (asset) {
@@ -102,7 +102,7 @@ const _InvestmentFees: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
 
-  const form = useForm<InvesmentLimitFormValues>({
+  const form = useForm<InvestmentLimitFormValues>({
     defaultValues: {
       [FIELDS.exitFee]: exitFee,
       [FIELDS.entryFee]: entryFee,
@@ -141,6 +141,7 @@ const _InvestmentFees: React.FC<Props> = ({
             secondFeeLabel={t("asset-settings:fields.success-fee")}
             secondFeeUnderText={t("create-account:settings.hints.success-fee")}
             secondFeeDescription={getSecondDescription({
+              maxFee: maxSuccessFee,
               isExchange,
               t,
               asset: ASSET.PROGRAM
@@ -163,7 +164,7 @@ const _InvestmentFees: React.FC<Props> = ({
             secondFeeDescription={getSecondDescription({
               t,
               asset: ASSET.FUND,
-              maxFee: maxSuccessFee
+              maxFee: maxExitFee
             })}
           />
         )}

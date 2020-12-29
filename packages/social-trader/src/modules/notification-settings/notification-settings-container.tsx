@@ -7,6 +7,8 @@ import NotificationSettings from "./notification-settings";
 
 const NotificationSettingsContainer: React.FC = () => {
   const { data: settings, sendRequest } = useApiRequest({
+    name: "settings",
+    cache: true,
     request: fetchNotificationSettings,
     fetchOnMount: true
   });

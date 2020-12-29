@@ -43,6 +43,7 @@ const Container = styled.div<{ middle?: boolean; big?: boolean }>`
 
 const StyledUserIcon = styled(UserAvatarIcon)`
   height: 40%;
+  width: 40%;
 `;
 
 const StyledImageBase = styled(ImageBase)`

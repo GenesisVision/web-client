@@ -16,7 +16,7 @@ export const FUNDS_TABLE_COLUMNS: SortingColumn[] = [
     name: "in-order"
   },
   {
-    name: "btc-value"
+    name: "-value"
   }
 ];
 

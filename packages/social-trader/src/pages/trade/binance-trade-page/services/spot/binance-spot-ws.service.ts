@@ -6,7 +6,7 @@ import {
   KlineSocketType,
   TerminalCurrency,
   Ticker,
-  Trade
+  UnitedTrade
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
@@ -40,7 +40,7 @@ export enum ORDER_STATUSES {
 export const tradeSocket = (
   connectSocketMethod: ConnectSocketMethodType,
   symbol: TerminalCurrency
-): Observable<Trade> => {
+): Observable<UnitedTrade> => {
   const socketType = "trade";
   const socketName = `${symbol.toLowerCase()}@${socketType}`;
   const url = `${BINANCE_WS_API_URL}/${BINANCE_WS_API_TYPE.WS}/${socketName}`;
@@ -49,12 +49,15 @@ export const tradeSocket = (
 
 export const depthSocket = (
   connectSocketMethod: ConnectSocketMethodType,
-  symbol: TerminalCurrency
+  symbol: TerminalCurrency,
+  openCallback?: VoidFunction
 ): Observable<Depth> => {
   const socketType = "depth";
   const socketName = `${symbol.toLowerCase()}@${socketType}`;
   const url = `${BINANCE_WS_API_URL}/${BINANCE_WS_API_TYPE.WS}/${socketName}`;
-  return connectSocketMethod(socketType, url).pipe(map(depthTransform));
+  return connectSocketMethod(socketType, url, openCallback).pipe(
+    map(depthTransform)
+  );
 };
 
 export const marketTicketsSocket = (

@@ -24,7 +24,20 @@ import {
   PROGRAMS_FACET_TABLE_FILTERS
 } from "./follows-facet.constants";
 
+export interface IProgramsFacetTableProps {
+  name: string;
+  currency?: CurrencyEnum;
+  currencies?: PlatformCurrencyInfo[];
+  title?: string;
+  sorting: string;
+  timeframe: Timeframe;
+  getItems: GetItemsFuncType;
+  level?: number;
+  columns?: SortingColumn[];
+}
+
 const _FollowsFacetTable: React.FC<IProgramsFacetTableProps> = ({
+  name,
   currencies,
   title,
   sorting,
@@ -47,6 +60,7 @@ const _FollowsFacetTable: React.FC<IProgramsFacetTableProps> = ({
 
   return (
     <FollowsTableModule
+      name={name}
       loaderData={fundListLoaderData}
       renderMappings={(updateFilter, filtering) => (
         <>
@@ -76,17 +90,6 @@ const _FollowsFacetTable: React.FC<IProgramsFacetTableProps> = ({
     />
   );
 };
-
-export interface IProgramsFacetTableProps {
-  currency?: CurrencyEnum;
-  currencies?: PlatformCurrencyInfo[];
-  title?: string;
-  sorting: string;
-  timeframe: Timeframe;
-  getItems: GetItemsFuncType;
-  level?: number;
-  columns?: SortingColumn[];
-}
 
 const FollowsFacetTable = React.memo(_FollowsFacetTable);
 export default FollowsFacetTable;

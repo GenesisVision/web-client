@@ -1,10 +1,10 @@
 import { SortingColumn } from "components/table/components/filtering/filter.type";
-import { QueryOrderResult } from "pages/trade/binance-trade-page/trading/terminal.types";
+import { UnitedOrder } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { AnyObjectType } from "utils/types";
 
-export const normalizeOpenOrdersList = (list: QueryOrderResult[]) => {
+export const normalizeOpenOrdersList = (list: UnitedOrder[]) => {
   const initObject: AnyObjectType = {};
-  list.forEach(item => (initObject[item.orderId] = item));
+  list.forEach(item => (initObject[item.id] = item));
   return initObject;
 };
 
@@ -32,6 +32,9 @@ export const OPEN_ORDERS_TABLE_COLUMNS: SortingColumn[] = [
   },
   {
     name: "total"
+  },
+  {
+    name: "trigger conditions"
   },
   {
     name: "cancel-all"

@@ -1,24 +1,20 @@
-import withBetaTesting from "decorators/with-beta-testing";
 import withReduxStore from "decorators/with-redux-store";
 import withToken from "decorators/with-token";
 import withTradeLayout from "decorators/with-trade-layout";
 import { BrokerTradeServerType } from "gv-api-web";
 import { TYPE_PARAM_NAME } from "pages/trade/binance-trade-page/binance-trade.helpers";
 import { getTerminalApiMethods } from "pages/trade/binance-trade-page/services/api.helpers";
-import { SymbolState } from "pages/trade/binance-trade-page/trading/terminal-info.context";
-import { TerminalMethodsContextProvider } from "pages/trade/binance-trade-page/trading/terminal-methods.context";
+import { TerminalMethodsContextProvider } from "pages/trade/binance-trade-page/trading/contexts/terminal-methods.context";
 import { parseSymbolFromUrlParam } from "pages/trade/binance-trade-page/trading/terminal.helpers";
-import {
-  TerminalAuthDataType,
-  TerminalType
-} from "pages/trade/binance-trade-page/trading/terminal.types";
+import { SymbolState, TerminalAuthDataType, TerminalType } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { TerminalPage } from "pages/trade/terminal.page";
 import React from "react";
 import { compose } from "redux";
 import { api } from "services/api-client/swagger-custom-client";
+import Token from "services/api-client/token";
 import { initializeStore } from "store";
 import { getParamsFromCtxWithSplit } from "utils/ssr-helpers";
-import { NextPageWithRedux } from "utils/types";
+import { AnyObjectType, NextPageWithRedux } from "utils/types";
 
 interface Props {
   exchangeAccountId?: string;
@@ -27,6 +23,24 @@ interface Props {
   terminalType?: TerminalType;
   symbol?: SymbolState;
 }
+
+const getTerminalType = async (
+  params: AnyObjectType,
+  token?: Token
+): Promise<TerminalType> => {
+  if (params?.["id"]) {
+    try {
+      const accountInfo = await api
+        .terminal(token)
+        .getAccountInfo({ accountId: params?.["id"], currency: "USDT" });
+      return (accountInfo.accountType.toLowerCase() as unknown) as TerminalType;
+    } catch (e) {
+      console.error(e);
+    }
+  }
+  if (params?.[TYPE_PARAM_NAME]) return params[TYPE_PARAM_NAME].toLowerCase();
+  return "spot";
+};
 
 const Page: NextPageWithRedux<Props> = ({
   exchangeAccountId,
@@ -52,26 +66,14 @@ Page.getInitialProps = async ctx => {
   const { id } = ctx.query;
   const params = getParamsFromCtxWithSplit(ctx);
   const exchangeAccountId = params["id"];
-  const terminalType = params[TYPE_PARAM_NAME]
-    ? params[TYPE_PARAM_NAME].toLowerCase()
-    : undefined;
+  const terminalType = await getTerminalType(params, ctx.token);
   const symbol = id ? parseSymbolFromUrlParam(String(id)) : undefined;
 
   let brokerType: BrokerTradeServerType | undefined;
   let authData;
 
-  if (ctx.token.isExist()) {
-    const credentialsData = await api
-      .dashboard(ctx.token)
-      .getExchangeAccountCredentials({ exchangeAccountId });
-    brokerType = credentialsData?.broker?.type;
-    authData = {
-      publicKey: credentialsData?.credentials?.apiKey,
-      privateKey: credentialsData?.credentials?.apiSecret
-    };
-  }
-
   return {
+    namespacesRequired: ["auth"],
     exchangeAccountId,
     brokerType,
     authData,
@@ -83,6 +85,5 @@ Page.getInitialProps = async ctx => {
 export default compose(
   withReduxStore(initializeStore),
   withToken,
-  withTradeLayout,
-  withBetaTesting("TradingTerminal")
+  withTradeLayout
 )(Page);

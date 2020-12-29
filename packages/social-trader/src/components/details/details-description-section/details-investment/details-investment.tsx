@@ -113,6 +113,8 @@ const _DetailsInvestment: React.FC<Props> = ({
   const isAuthenticated = useSelector(isAuthenticatedSelector);
 
   const { data: eventsCount = 0 } = useApiRequest({
+    name: "eventsCount",
+    cache: true,
     request: () =>
       fetchPortfolioEventsCount(EVENT_LOCATION.Asset, {
         assetId: id
@@ -121,6 +123,8 @@ const _DetailsInvestment: React.FC<Props> = ({
   });
 
   const { data: reportsCount = 0 } = useApiRequest({
+    name: "reportsCount",
+    cache: true,
     request: () =>
       fetchProgramReports(id, { take: 0 }).then(({ total }) => total),
     fetchOnMount:

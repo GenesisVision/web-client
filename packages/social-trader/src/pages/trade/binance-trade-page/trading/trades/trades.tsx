@@ -1,17 +1,19 @@
 import { Text } from "components/text/text";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
-import { Trade } from "pages/trade/binance-trade-page/trading/terminal.types";
+import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
+import { UnitedTrade } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { TradesRow } from "pages/trade/binance-trade-page/trading/trades/trades-row";
 import React, { useContext } from "react";
 
 import styles from "./trades.module.scss";
 
 interface Props {
-  items: Trade[];
+  items: UnitedTrade[];
 }
 
 const _Trades: React.FC<Props> = ({ items }) => {
   const {
+    stepSize,
+    tickSize,
     symbol: { baseAsset, quoteAsset }
   } = useContext(TerminalInfoContext);
   return (
@@ -21,12 +23,12 @@ const _Trades: React.FC<Props> = ({ items }) => {
           <thead>
             <th>
               <Text muted size={"small"}>
-                Price ({baseAsset})
+                Price ({quoteAsset})
               </Text>
             </th>
             <th>
               <Text muted size={"small"}>
-                Amount ({quoteAsset})
+                Amount ({baseAsset})
               </Text>
             </th>
             <th>
@@ -40,12 +42,15 @@ const _Trades: React.FC<Props> = ({ items }) => {
       <div className={styles["trades__items-container"]}>
         <table className={styles["trades__table"]}>
           <tbody>
-            {items.map(({ price, qty, time }, i) => (
+            {items.map(({ orderId, price, quantity, tradeTime }, i) => (
               <TradesRow
+                stepSize={stepSize}
+                tickSize={tickSize}
+                key={orderId}
                 price={price}
                 prevPrice={items[i + 1]?.price}
-                amount={qty}
-                time={time}
+                amount={quantity}
+                time={tradeTime}
               />
             ))}
           </tbody>

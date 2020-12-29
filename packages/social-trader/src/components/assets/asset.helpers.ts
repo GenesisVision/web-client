@@ -9,14 +9,17 @@ import { CurrencyEnum } from "utils/types";
 
 import { BROKER_CARD_EXTRA_STATE } from "./asset.constants";
 
-export const getCurrency = (accountType: BrokerAccountType): CurrencyEnum =>
-  accountType.currencies[0] as CurrencyEnum; // TODO say to backend change type to CurrencyEnum[]
+export const getCurrency = (
+  accountType: BrokerAccountType | ExchangeAccountType
+): CurrencyEnum => accountType.currencies[0] as CurrencyEnum; // TODO say to backend change type to CurrencyEnum[]
 
-export const getLeverage = (accountType: BrokerAccountType): number =>
-  accountType.leverages[0];
+export const getLeverage = (
+  accountType: BrokerAccountType | ExchangeAccountType
+): number => ("leverages" in accountType ? accountType.leverages[0] : 0);
 
-export const getBrokerId = (accountTypes: ExchangeAccountType[]): string =>
-  accountTypes[0].id;
+export const getBrokerId = (
+  accountTypes: Array<BrokerAccountType | ExchangeAccountType>
+): string => accountTypes[0].id;
 
 export const getLeverageDescription = (
   leverageMin: number,
@@ -69,6 +72,7 @@ export const getBrokerLoaderData = (): Broker => ({
   leverageMax: getRandomInteger(0, 100),
   accountTypes: [
     {
+      typeTitle: "",
       isCountryNotUSRequired: false,
       isDepositRequired: false,
       isKycRequired: false,
