@@ -43,6 +43,9 @@ import TradingAccount2 from "media/guides/guides-3/TradingAccount2.png";
 import ManFunds1 from "media/guides/guides-4/Funds1.png";
 import ManFunds2 from "media/guides/guides-4/Funds2.png";
 import ManFunds3 from "media/guides/guides-4/Funds3.png";
+import ManProgramsWP1 from "media/guides/guides-4/ManProgramsWP1.png";
+import ManProgramsWP2 from "media/guides/guides-4/ManProgramsWP2.png";
+import ManProgramsWP3 from "media/guides/guides-4/ManProgramsWP3.png";
 import Programs1 from "media/guides/guides-4/Programs1.png";
 import Programs2 from "media/guides/guides-4/Programs2.png";
 import Programs3 from "media/guides/guides-4/Programs3.png";
@@ -1176,11 +1179,7 @@ export const navGuides: INavGuide[] = [
               </table>
             </section>
           </>
-        ),
-        linkInfo: {
-          link: PROGRAMS_ROUTE,
-          label: "Programs"
-        }
+        )
       },
       {
         id: "investing-4",
@@ -1862,11 +1861,7 @@ export const navGuides: INavGuide[] = [
               </li>
             </ol>
           </>
-        ),
-        linkInfo: {
-          link: CREATE_ACCOUNT_PAGE_ROUTE,
-          label: "Create trading account"
-        }
+        )
       },
       {
         id: "trading-2",
@@ -3071,7 +3066,7 @@ export const navGuides: INavGuide[] = [
       {
         id: "managing-2",
         canonicalName: "managing-programs",
-        name: "Programs",
+        name: "Programs with the periods",
         content: (
           <>
             <section>
@@ -3339,6 +3334,550 @@ export const navGuides: INavGuide[] = [
       },
       {
         id: "managing-3",
+        canonicalName: "managing-programs-without-periods",
+        name: "Programs without periods",
+        content: (
+          <>
+            <section>
+              <h3>About the Programs without periods</h3>
+              <p>
+                Programs are similar to PAMM accounts. A trader creates an
+                investment program, where he sets the fees and other parameters.
+              </p>
+              <p>
+                A trader will have the opportunity to trade cryptocurrency on{" "}
+                <b>Binance exchange</b> using <b>Trading terminal</b> on GV
+                platform to earn profits for himself and investors.
+              </p>
+              <p>
+                Programs without periods are now only available on{" "}
+                <b>Genesis Markets broker</b>.
+              </p>
+              <p>
+                The manager trades with his own and investors’ cumulative
+                balance. Profits or losses are equally distributed among the
+                investors based on their share of the program.
+              </p>
+              <p>The main feature of these Programs:</p>
+              <ul>
+                <li>
+                  Programs <b>don’t</b> <b>have periods</b>
+                </li>
+
+                <li>
+                  Investor and manager requests will be processed{" "}
+                  <b>in real time</b> or once a day at the chosen time by the
+                  manager
+                </li>
+
+                <li>
+                  Investors will have <b>maximum control of their capital</b>
+                </li>
+
+                <li>
+                  <b>Orders will not be closed</b> at the time of requests
+                  processing
+                </li>
+              </ul>
+            </section>
+
+            <section>
+              <h3>How to create a Program?</h3>
+              <ol>
+                <li>
+                  Login to your account and follow to the{" "}
+                  <a
+                    href="https://genesis.vision/dashboard"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <b>Dashboard</b>
+                  </a>
+                  .
+                </li>
+
+                <li>
+                  Find the button <b>“Select product”</b> on the right and
+                  choose Program. To create a Program without period choose{" "}
+                  <b>Genesis Markets broker</b>.
+                  <ConversationImages
+                    bottomOffset={false}
+                    size={"large"}
+                    images={[
+                      {
+                        id: ManProgramsWP1,
+                        resizes: [
+                          {
+                            height: 0,
+                            width: 0,
+                            logoUrl: ManProgramsWP1,
+                            quality: "Original"
+                          },
+                          {
+                            height: 0,
+                            width: 0,
+                            logoUrl: ManProgramsWP1,
+                            quality: "Low"
+                          }
+                        ]
+                      }
+                    ]}
+                  />
+                </li>
+
+                <li>
+                  Fill in the required details:
+                  <ul>
+                    <li>
+                      The<b> base currency</b> of his trading account
+                    </li>
+
+                    <li>Name, Description and Avatar for this Program</li>
+
+                    <li>
+                      <b>Processing</b>. <b>Real time</b> or every day{" "}
+                      <b>at a scheduled time</b> (for example, you can set an
+                      investment/withdrawal at 5 pm)
+                    </li>
+
+                    <li>
+                      <b>Trades delay</b> (5, 10 minutes,...,6 hours). Managers
+                      have the ability to delay the public display of their
+                      trades and open positions to protect their strategy.
+                      <ConversationImages
+                        bottomOffset={false}
+                        size={"large"}
+                        images={[
+                          {
+                            id: ManProgramsWP2,
+                            resizes: [
+                              {
+                                height: 0,
+                                width: 0,
+                                logoUrl: ManProgramsWP2,
+                                quality: "Original"
+                              },
+                              {
+                                height: 0,
+                                width: 0,
+                                logoUrl: ManProgramsWP2,
+                                quality: "Low"
+                              }
+                            ]
+                          }
+                        ]}
+                      />
+                    </li>
+
+                    <li>
+                      <b>Management fee</b> (0-20%) The manager can set his own
+                      fee, which is charged for the actual asset management
+                      period. Management fee is defined in annual percentage and
+                      is charged at the end of each reporting period.
+                    </li>
+
+                    <li>
+                      <b>Success fee</b> (0-50%). A fee charged upon the total
+                      profit made within the reporting period. It is calculated
+                      according to the HWM system
+                    </li>
+
+                    <li>
+                      <b>Investment Limit.</b> At any time you can enter or
+                      cancel certain limitations on av. to invest, or even
+                      prohibit new investments if your Investment limit is 0. If
+                      the investment limit you've entered is larger than the av.
+                      to invest value calculated for your current level, then
+                      you will only be able to attract the av. to invest value.
+                    </li>
+                  </ul>
+                </li>
+                <li>Make at least a minimum investment to your Program.</li>
+
+                <li>
+                  Click <b>“Create Program”</b>.
+                  <ConversationImages
+                    bottomOffset={false}
+                    size={"large"}
+                    images={[
+                      {
+                        id: ManProgramsWP3,
+                        resizes: [
+                          {
+                            height: 0,
+                            width: 0,
+                            logoUrl: ManProgramsWP3,
+                            quality: "Original"
+                          },
+                          {
+                            height: 0,
+                            width: 0,
+                            logoUrl: ManProgramsWP3,
+                            quality: "Low"
+                          }
+                        ]
+                      }
+                    ]}
+                  />
+                </li>
+              </ol>
+            </section>
+
+            <section>
+              <h3>
+                What happens during the processing of investment/withdrawal
+                request?
+              </h3>
+              <p>
+                During the processing investment/withdrawal request<b> </b>of
+                the following operations are performed:
+              </p>
+              <ol>
+                <li>Trading in the Program is temporarily suspended.</li>
+
+                <li>All Limit orders are cancelled.</li>
+
+                <li>Profit/Losses are calculated and distributed.</li>
+
+                <li>Management and platform Success fees are charged.</li>
+
+                <li>Investment and Withdrawal requests are processed.</li>
+
+                <li>
+                  Limit orders are placed back with reduced volume, proportional
+                  to all withdrawals.
+                </li>
+
+                <li>
+                  Trading in the Program resumes. The manager continues to
+                  trade.
+                </li>
+              </ol>
+              <p>
+                <em>
+                  Note: Processing of requests in real time takes several
+                  minutes.
+                </em>
+              </p>
+            </section>
+
+            <section>
+              <h3>Investing and withdrawing funds from the Program</h3>
+              <ol>
+                <li>
+                  <b>Invest in a Program</b>
+                  <p>
+                    Managers have the opportunity to choose when requests for
+                    the investment/withdrawal of funds in the Program will be
+                    processed. This can be in real time or every day at a
+                    scheduled time (for example, you can set an
+                    investment/withdrawal at 5 pm).
+                  </p>
+                  <p>
+                    All invested funds are entered into the Program in the
+                    currency of the trading account (USDT or BTC). Investors are
+                    given shares in current assets according to their invested
+                    amount.
+                  </p>
+                  <p>
+                    <em>
+                      Note: You can invest in a Program with any currency in
+                      your wallet.
+                    </em>
+                  </p>
+                  <p>
+                    For example:
+                    <br />
+                    Program balance now is 100 GVT (all money is in GVT). The
+                    currency of the Program (trading account) - USDT.
+                    <br />
+                    In program 2 investor. Investor-1 share 30%, Investor-2
+                    share 20% and Manager 50% (50 GVT).
+                    <br />
+                    Investor-3 input 100 USDT.
+                    <br />
+                    The account will have 100 USDT and 100 GVT. (1 GVT = 1
+                    USDT).
+                    <br />
+                    The shares will be distributed as follows:
+                    <br />
+                    Investor-1 - 15% (15 GVT, 15 USDT).
+                    <br />
+                    Investor-2 - 10% (10 GVT, 10 USDT).
+                    <br />
+                    Investor-3 - 50% (50 GVT, 50 USDT).
+                    <br />
+                    Manager - 25% (25 GVT, 25 USDT)
+                  </p>
+                </li>
+                <li>
+                  <b>Withdraw from the Program</b>
+                  <p>
+                    Current coins are partially sold, in proportion to the
+                    number of withdrawn shares.
+                  </p>
+                  <p>
+                    Next, we withdraw funds to the investor/manager (according
+                    to his application), the rest is distributed among all
+                    participants.
+                  </p>
+                  <p>
+                    All funds are withdrawn to users in the Program currency, to
+                    a similar wallet (USDT, BTC). After processing all
+                    withdrawal requests, the shares of the remaining
+                    participants are recalculated.
+                  </p>
+                  <p>
+                    <em>
+                      Note: Withdrawal from Programs is made as a percentage.
+                      This is due to all the underlying commissions, minimum lot
+                      size and conversions that take place upon submission of
+                      the trades to the selected withdrawal currency.
+                    </em>
+                  </p>
+                </li>
+              </ol>
+            </section>
+
+            <section>
+              <h3>Rebates from the Program</h3>
+              <p>
+                Genesis Vision Token holders who select <b>Genesis Markets</b>{" "}
+                as their broker will receive discounted transaction fees.
+              </p>
+              <p>Rate and general rules for obtaining the trading discount:</p>
+              <ul>
+                <li>
+                  Commission rate directly depends on the amount of GVT stored
+                  in the wallet
+                </li>
+
+                <li>There must be more than 1 GVT stored in the wallet</li>
+
+                <li>
+                  The wallet is checked for GVT balance
+                  <b> once per week at a random time</b>
+                </li>
+
+                <li>
+                  Manager will get these rebates <b>to his wallet</b> in a
+                  Program currency (BTC or USDT)
+                </li>
+              </ul>
+              <p>Conditions for obtaining discounts</p>
+
+              <table>
+                <tr>
+                  <td>
+                    <b>Wallet</b>
+                  </td>
+                  <td>
+                    <b>Amount</b>
+                  </td>
+                </tr>
+                <tr>
+                  <td>From 1 GVT up to 25</td>
+                  <td>5%</td>
+                </tr>
+                <tr>
+                  <td>Up to 50 GVT</td>
+                  <td>10%</td>
+                </tr>
+                <tr>
+                  <td>Up to 100 GVT</td>
+                  <td>15%</td>
+                </tr>
+                <tr>
+                  <td>Up to 500 GVT</td>
+                  <td>20%</td>
+                </tr>
+                <tr>
+                  <td>500 GVT+</td>
+                  <td>25%</td>
+                </tr>
+              </table>
+            </section>
+
+            <section>
+              <h3>
+                What is the difference between Programs with and without
+                periods?
+              </h3>
+              <table>
+                <tr>
+                  <td></td>
+                  <td>
+                    <b>Genesis Markets Program (without periods)</b>
+                  </td>
+                  <td>
+                    <b>Program with periods</b>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Min Deposit to create a Program</b>
+                  </td>
+                  <td>
+                    <b>Genesis Markets</b> 50 USD, 0,003 BTC
+                  </td>
+                  <td>
+                    <b>Roboforex</b> 100 USD
+                    <br />
+                    <b>Exante</b> 100 USD
+                    <br />
+                    <b>Huobi</b> 100 USDT 0.01 BTC 0.5 ETH
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Trading platform</b>
+                  </td>
+                  <td>
+                    <b>GV Trading terminal</b>
+                  </td>
+                  <td>
+                    <b>Roboforex</b> - MetaTrader 4
+                    <br />
+                    <b>Exante</b> - Exante terminal
+                    <br />
+                    <b>Huobi</b> - Huobi terminal
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Available instruments</b>
+                  </td>
+                  <td>
+                    Access assets from <b>Binance exchange</b>
+                  </td>
+                  <td>
+                    <b>Crypto, Forex, Metals, Commodities, Indices, Shares</b>
+                    <br />
+                    (depends on the broker)
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Investments attraction (AUM)</b>
+                  </td>
+                  <td>
+                    Investments are accepted in <b>Real time</b> or{" "}
+                    <b>Every day</b> at a scheduled time (for example, you can
+                    set an investment/withdrawal at 5 pm)
+                  </td>
+                  <td>
+                    Investments are accepted at the end of the reporting period
+                    (maximum of 90 days)
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Investment limit</b>
+                  </td>
+                  <td>
+                    <b>Without KYC</b> the limit is <b>1000 USD</b> Otherwise
+                    the available limit is set in the range from <b>5000 USD</b>{" "}
+                    to <b>300 000 USD</b>
+                  </td>
+                  <td>
+                    <b>Without KYC</b> the limit is <b>1000 USD</b> Otherwise
+                    the available limit is set in the range from <b>5000 USD</b>{" "}
+                    to <b>300 000 USD</b>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Deposits</b>
+                  </td>
+                  <td>
+                    Your deposit is accepted in <b>Real time</b> or{" "}
+                    <b>Every day</b> at a scheduled time.
+                  </td>
+                  <td>
+                    Your deposit is accepted at the end of the reporting period
+                    (maximum of 90 days)
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Withdrawals (for both manager and investor)</b>
+                  </td>
+                  <td>
+                    All withdrawals are accepted in <b>Real time</b> or{" "}
+                    <b>Every day</b> at a scheduled time.
+                    <br />
+                    Manager needs to leave min Deposit
+                  </td>
+                  <td>
+                    All withdrawals are accepted at the end of the reporting
+                    period
+                    <br />
+                    Manager needs to leave min Deposit
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Requests processing</b>
+                  </td>
+                  <td>
+                    <b>Deposit/Investment</b> - The balance of USDT or BTC
+                    increases by the size of the request
+                    <br />
+                    <b>Withdrawals</b> - Current coins are partially sold, in
+                    proportion to the number of withdrawn shares
+                  </td>
+                  <td>
+                    <b>Deposi</b>t<b>/ Investment</b> -{" "}
+                    <b>All open positions are closed</b> and then the period is
+                    processed
+                    <br />
+                    <b>Withdrawals</b> - <b>All open positions are closed</b>{" "}
+                    and then the period is processed
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Commissions (the manager gets)</b>
+                  </td>
+                  <td>
+                    <b>Management fee </b>0-20%
+                    <br />
+                    <b>Success fee</b> 0-50% (HWM system)
+                  </td>
+                  <td>
+                    <b>Management fee </b>0-20%
+                    <br />
+                    <b>Success fee</b> 0-50% (HWM system)
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Edit current Settings</b>
+                  </td>
+                  <td>
+                    After the creation of the Program, you can edit all of the
+                    settings except <b>the Broker</b>
+                  </td>
+                  <td>
+                    After the creation of the Program, you can edit all of the
+                    settings except for the <b>period of the Program</b> and
+                    <b> the leverage</b>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Ability to close the Program</b>
+                  </td>
+                  {tableCellDone()}
+                  {tableCellDone()}
+                </tr>
+              </table>
+            </section>
+          </>
+        )
+      },
+      {
+        id: "managing-4",
         canonicalName: "signal-providing",
         name: "Signal providing",
         content: (
