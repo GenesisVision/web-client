@@ -1,4 +1,5 @@
-import { Center } from "components/center/center";
+import { JustifyContentCenter } from "components/center/justify-content-center";
+import { JustifyContentSpaceAround } from "components/center/justify-content-space-around";
 import { ConversationImages } from "components/conversation/conversation-image/conversation-images";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
@@ -1620,15 +1621,15 @@ export const navGuides: INavGuide[] = [
                     }
                   ]}
                 />
-                <Center justifyCenter>
+                <JustifyContentCenter>
                   <RowItem bottomOffset>Account switch</RowItem>
-                </Center>
+                </JustifyContentCenter>
               </li>
               <li>
                 The chart of the chosen asset. Here you can see the price
                 movement of the asset through the period of time. You can set
                 the type of chart, the time frames and the indicators here.
-                <Center justifyCenter>
+                <JustifyContentCenter>
                   <ConversationImages
                     bottomOffset={false}
                     size={"large"}
@@ -1669,10 +1670,11 @@ export const navGuides: INavGuide[] = [
                       }
                     ]}
                   />
-                </Center>
-                <Center justifyCenter>
-                  <RowItem bottomOffset>Time frames Chart type</RowItem>
-                </Center>
+                </JustifyContentCenter>
+                <JustifyContentSpaceAround>
+                  <RowItem bottomOffset>Time frames</RowItem>
+                  <RowItem bottomOffset>Chart type</RowItem>
+                </JustifyContentSpaceAround>
                 <ConversationImages
                   bottomOffset={false}
                   size={"large"}
@@ -1696,9 +1698,9 @@ export const navGuides: INavGuide[] = [
                     }
                   ]}
                 />
-                <Center justifyCenter>
+                <JustifyContentCenter>
                   <RowItem bottomOffset>Indicators</RowItem>
-                </Center>
+                </JustifyContentCenter>
                 <p>
                   On the right you can find the settings where you can set the
                   chart properties according to your needs.
@@ -1726,9 +1728,9 @@ export const navGuides: INavGuide[] = [
                     }
                   ]}
                 />
-                <Center justifyCenter>
+                <JustifyContentCenter>
                   <RowItem bottomOffset>Chart Properties</RowItem>
-                </Center>
+                </JustifyContentCenter>
               </li>
               <li>
                 Order book. The order book is a list of the open buy and sell
@@ -1788,9 +1790,9 @@ export const navGuides: INavGuide[] = [
                     }
                   ]}
                 />
-                <Center justifyCenter>
+                <JustifyContentCenter>
                   <RowItem bottomOffset>Numbers after comma</RowItem>
-                </Center>
+                </JustifyContentCenter>
               </li>
               <li>
                 This is the section where you place your order. You choose Buy
@@ -1849,9 +1851,9 @@ export const navGuides: INavGuide[] = [
                     }
                   ]}
                 />
-                <Center justifyCenter>
+                <JustifyContentCenter>
                   <RowItem bottomOffset>Time in frame</RowItem>
-                </Center>
+                </JustifyContentCenter>
                 <p>To place an order press Buy/Sell button.</p>
               </li>
               <li>

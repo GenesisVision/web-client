@@ -11,7 +11,6 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
   small?: boolean;
   middle?: boolean;
   large?: boolean;
-  justifyCenter?: boolean;
 }
 
 export const Center = styled.div<Props>`
@@ -21,7 +20,6 @@ export const Center = styled.div<Props>`
     return "flex";
   }};
   ${({ center = true }: Props) => center && "align-items: center"};
-  ${({ justifyCenter }: Props) => justifyCenter && "justify-content: center"};
   flex-wrap: ${({ wrap }: Props) => (wrap ? "wrap" : "nowrap")};
   ${cursorPointer}
 `;
