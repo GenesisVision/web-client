@@ -226,6 +226,7 @@ const _Investment: React.FC<Props> = ({
       <Row>
         <DetailsInvestmentFooter>
           <WithdrawButton
+            GM={isExchange}
             isProcessingRealTime={isProcessingRealTime}
             infoMessage={withdrawMessage}
             size={"xlarge"}

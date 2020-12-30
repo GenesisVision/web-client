@@ -50,8 +50,16 @@ export const usePlaceOrderAutoFill = ({
       if (value === +quantity) return;
       if (value > 0 || String(total) === "0") {
         setValue(quantityName, formatValue(value, DEFAULT_DECIMAL_SCALE), true);
-
         setAutoFill(true);
+
+        if (side === "Sell" && sellWalletAvailable) {
+          const newSliderValue = (value / sellWalletAvailable) * 100;
+          setSliderValue(newSliderValue, false);
+        }
+        if (side === "Buy" && buyWalletAvailable) {
+          const newSliderValue = (+total / buyWalletAvailable) * 100;
+          setSliderValue(newSliderValue, false);
+        }
       }
     } else setAutoFill(false);
   }, [total]);
@@ -59,7 +67,7 @@ export const usePlaceOrderAutoFill = ({
     if (!autoFill) {
       const value = +terminalMoneyFormat({
         amount: leverage * +quantity * +price,
-        tickSize: tickSize
+        tickSize: "0.00000001"
       });
       if (isNaN(value)) return;
       if (value === +total) return;
@@ -83,7 +91,7 @@ export const usePlaceOrderAutoFill = ({
       if (quantity && price) {
         const value = +terminalMoneyFormat({
           amount: leverage * +quantity * +price,
-          tickSize: tickSize
+          tickSize: "0.00000001"
         });
         if (isNaN(value)) return;
         if (value === +total) return;

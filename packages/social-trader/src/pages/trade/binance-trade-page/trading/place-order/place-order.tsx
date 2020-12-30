@@ -10,11 +10,13 @@ import { DEFAULT_DECIMAL_SCALE } from "constants/constants";
 import useApiRequest from "hooks/api-request.hook";
 import useTab from "hooks/tab.hook";
 import { TerminalDefaultBlock } from "pages/trade/binance-trade-page/trading/components/terminal-default-block/terminal-default-block";
+import { truncated } from "pages/trade/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-methods.context";
 import { StopLimitTradeForm } from "pages/trade/binance-trade-page/trading/place-order/stop-limit-trade-form";
 import {
   formatValueWithTick,
+  getDecimalScale,
   getSymbol
 } from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import {
@@ -44,6 +46,7 @@ const _PlaceOrder: React.FC<Props> = ({ lastTrade, price }) => {
   const { tradeRequest } = useContext(TerminalMethodsContext);
 
   const {
+    tickSize,
     stepSize,
     terminalType,
     exchangeAccountId,
@@ -56,6 +59,7 @@ const _PlaceOrder: React.FC<Props> = ({ lastTrade, price }) => {
   const { tab, setTab } = useTab<OrderType>("Limit");
 
   const { sendRequest, status } = useApiRequest({
+    isUseLocalizationOnError: false,
     errorAlertHandler: mapPlaceOrderErrors,
     request: tradeRequest
   });
@@ -74,6 +78,10 @@ const _PlaceOrder: React.FC<Props> = ({ lastTrade, price }) => {
       );
       return sendRequest({
         ...values,
+        price: truncated(
+          +values[TRADE_FORM_FIELDS.price],
+          getDecimalScale(formatValue(tickSize))
+        ),
         quantity,
         accountId: exchangeAccountId,
         side,
@@ -82,6 +90,7 @@ const _PlaceOrder: React.FC<Props> = ({ lastTrade, price }) => {
       });
     },
     [
+      tickSize,
       stepSize,
       exchangeAccountId,
       sendRequest,

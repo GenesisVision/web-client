@@ -11,7 +11,7 @@ const _PositionModeContainer: React.FC = () => {
     TerminalPlaceOrderContext
   );
   const { changePositionMode } = useContext(TerminalMethodsContext);
-  const { authData, symbol } = useContext(TerminalInfoContext);
+  const { symbol, exchangeAccountId } = useContext(TerminalInfoContext);
   const { sendRequest: changePosition } = useApiRequest({
     request: changePositionMode!
   });
@@ -24,14 +24,14 @@ const _PositionModeContainer: React.FC = () => {
   const handleOnChange = useCallback(
     (dualSidePosition: PositionModeType) => {
       changePosition({
-        authData,
-        dualSidePosition
+        accountId: exchangeAccountId,
+        mode: dualSidePosition
       }).then(() => {
         setMode(dualSidePosition);
         updatePositionMode();
       });
     },
-    [symbol, authData]
+    [exchangeAccountId, symbol, exchangeAccountId]
   );
   return (
     <PositionMode

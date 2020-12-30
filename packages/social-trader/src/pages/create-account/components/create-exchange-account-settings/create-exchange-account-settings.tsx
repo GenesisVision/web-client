@@ -7,7 +7,7 @@ import { GVHookFormField } from "components/gv-hook-form-field";
 import GVTextField from "components/gv-text-field";
 import { Row } from "components/row/row";
 import SettingsBlock from "components/settings-block/settings-block";
-import { ExchangeInfo } from "gv-api-web";
+import { BrokerAccountType, ExchangeInfo } from "gv-api-web";
 import { KycRequiredBlock } from "pages/create-account/components/create-account-settings/kyc-required-block";
 import * as React from "react";
 import { useState } from "react";
@@ -61,7 +61,7 @@ const _CreateExchangeAccountSettings: React.FC<Props> = ({
   const { brokerAccountTypeId, depositAmount } = watch();
 
   const accountType = safeGetElemFromArray(
-    exchange.accountTypes,
+    (exchange.accountTypes as unknown) as BrokerAccountType[],
     ({ id }) => brokerAccountTypeId === id
   );
 

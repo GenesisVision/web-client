@@ -37,7 +37,7 @@ export const TerminalPlaceOrderContext = createContext<TradingAccountInfoState>(
 );
 
 export const TerminalPlaceOrderContextProvider: React.FC = ({ children }) => {
-  const { authData, terminalType } = useContext(TerminalInfoContext);
+  const { terminalType, exchangeAccountId } = useContext(TerminalInfoContext);
   const { getPositionMode } = useContext(TerminalMethodsContext);
 
   const [bracket, setBracket] = useState<LeverageBracket | undefined>();
@@ -59,14 +59,14 @@ export const TerminalPlaceOrderContextProvider: React.FC = ({ children }) => {
   }, [terminalType]);
 
   useEffect(() => {
-    if (getPositionMode && authData)
-      getPositionMode({ authData }).then(setCurrentPositionMode);
+    if (getPositionMode && exchangeAccountId)
+      getPositionMode(exchangeAccountId).then(setCurrentPositionMode);
   }, [getPositionMode]);
 
   const updatePositionMode = useCallback(() => {
-    if (getPositionMode && authData)
-      getPositionMode({ authData }).then(setCurrentPositionMode);
-  }, [getPositionMode, authData]);
+    if (getPositionMode && exchangeAccountId)
+      getPositionMode(exchangeAccountId).then(setCurrentPositionMode);
+  }, [getPositionMode, exchangeAccountId]);
 
   const value = useMemo(
     () => ({

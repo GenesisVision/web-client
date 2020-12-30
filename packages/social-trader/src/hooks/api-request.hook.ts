@@ -17,6 +17,7 @@ const getErrorMessageCallback = (error: ResponseError) => error?.errorMessage;
 
 interface Props<T> extends TUseApiRequestProps<T> {
   errorAlertHandler?: (error: string) => string;
+  isUseLocalizationOnError?: boolean;
 }
 
 const useApiRequest = <T extends any>(
@@ -28,7 +29,7 @@ const useApiRequest = <T extends any>(
     () => ({
       successAlert: ({ content }: IAlert) => successAlert(content),
       errorAlert: ({ content }: IAlert) =>
-        errorAlert(errorAlertHandler(content)),
+        errorAlert(errorAlertHandler(content), props.isUseLocalizationOnError),
       warningAlert: ({ content }: IAlert) => warningAlert(content)
     }),
     []

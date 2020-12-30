@@ -10,9 +10,12 @@ export const useAlerts = () => {
   const warningAlert = useCallback((text: string) => {
     dispatch(alertMessageActions.warning(text, true));
   }, []);
-  const errorAlert = useCallback((text: string) => {
-    dispatch(alertMessageActions.error(text, true));
-  }, []);
+  const errorAlert = useCallback(
+    (text: string, isUseLocalization: boolean = true) => {
+      dispatch(alertMessageActions.error(text, isUseLocalization));
+    },
+    []
+  );
   const clearAllAlerts = useCallback(() => {
     dispatch(alertMessageActions.clearAll());
   }, []);

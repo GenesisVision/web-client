@@ -1,30 +1,49 @@
-import { Text } from "components/text/text";
-import { TradeTable } from "pages/trade/binance-trade-page/trading/components/trade-table/trade-table";
+import { ComposeFiltersAllType } from "components/table/components/filtering/filter.type";
+import TableModule from "components/table/components/table-module";
+import { DEFAULT_PAGING } from "components/table/reducers/table-paging.reducer";
+import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
+import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-methods.context";
 import { UnitedOrder } from "pages/trade/binance-trade-page/trading/terminal.types";
-import { TradeHistoryRow } from "pages/trade/binance-trade-page/trading/trading-tables/trade-history/trade-history-row";
-import { TRADE_HISTORY_TABLE_COLUMNS } from "pages/trade/binance-trade-page/trading/trading-tables/trade-history/trade-history.helpers";
-import React from "react";
+import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
 
+import { TradeHistoryRow } from "./trade-history-row";
+import {
+  TRADE_HISTORY_TABLE_COLUMNS,
+  updateTradeHistoryData
+} from "./trade-history.helpers";
 import styles from "./trade-history.module.scss";
 
 interface Props {
-  items: UnitedOrder[];
+  updates?: UnitedOrder[];
 }
 
-export const TradeHistory: React.FC<Props> = ({ items }) => {
+export const TradeHistory: React.FC<Props> = ({ updates }) => {
+  const { getAllTrades } = useContext(TerminalMethodsContext);
+  const { exchangeAccountId } = useContext(TerminalInfoContext);
   const [t] = useTranslation();
+
+  const getItems = useCallback(
+    (filters?: ComposeFiltersAllType) => {
+      return getAllTrades({
+        ...filters,
+        accountId: exchangeAccountId
+      });
+    },
+    [exchangeAccountId, getAllTrades]
+  );
+
   return (
-    <TradeTable
-      className={styles["trade-history__table"]}
+    <TableModule
+      headerCellClassName={styles["trade-history__header-cell"]}
       columns={TRADE_HISTORY_TABLE_COLUMNS}
-      items={items}
-      renderHeaderCell={column => (
-        <th>
-          <Text muted>{t(`${column.name}`)}</Text>
-        </th>
-      )}
-      renderRow={({
+      paging={DEFAULT_PAGING}
+      updates={updates}
+      updateItemsFunc={updateTradeHistoryData}
+      loaderData={[]}
+      getItems={getItems}
+      renderHeader={column => t(`${column.name}`)}
+      renderBodyRow={({
         commissionAsset,
         commission,
         quantity,

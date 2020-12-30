@@ -12,7 +12,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { formatDate } from "utils/dates";
-import { formatValue } from "utils/formatter";
+import { formatCurrencyValue, formatValue } from "utils/formatter";
 
 interface Props {
   item: IFundHistoryDataItem;
@@ -52,7 +52,9 @@ const _FundHistoryFullRow: React.FC<Props> = ({ item }) => {
                 <TableCell>{formatDate(date)}</TableCell>
                 <TableCell>
                   <Center>
-                    <RowItem size={"small"}>{soldAmount}</RowItem>
+                    <RowItem size={"small"}>
+                      {formatCurrencyValue(soldAmount, soldAsset.asset)}
+                    </RowItem>
                     <RowItem size={"small"}>
                       <CurrencyItem
                         small
@@ -61,7 +63,9 @@ const _FundHistoryFullRow: React.FC<Props> = ({ item }) => {
                       />
                     </RowItem>
                     <RowItem size={"small"}>→</RowItem>
-                    <RowItem size={"small"}>{boughtAmount}</RowItem>
+                    <RowItem size={"small"}>
+                      {formatCurrencyValue(boughtAmount, boughtAsset.asset)}
+                    </RowItem>
                     <RowItem size={"small"}>
                       <CurrencyItem
                         small

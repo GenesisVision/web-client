@@ -374,6 +374,7 @@
   },
   "withdraw-program": {
     "end": "the end of the reporting period.",
+    "gm-all-text": "You are withdrawing the entire amount that will be available in the Program at the moment the request is processed",
     "all-text": "You are withdrawing the entire amount that will be available in the program at the end of the period",
     "title": "Withdraw",
     "available-to-withdraw": "Available for withdrawal",
