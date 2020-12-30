@@ -9,6 +9,7 @@ import styles from "./advantages-section.module.scss";
 
 const translate = (x: number, y: number) => `translate3d(${x}px,${y}px,0)`;
 const config = { tension: 1200, friction: 40 };
+const INDENT = 51;
 
 const AdvantagesSectionWithAnimation: React.FC = () => {
   const { t } = useTranslation();
@@ -31,7 +32,14 @@ const AdvantagesSectionWithAnimation: React.FC = () => {
         const deltaX = event.clientX - posSection.x;
         const deltaY = event.clientY - posSection.y;
         const deltaBottomY = posSection.bottom - event.clientY;
-        if (deltaY < 50 || deltaBottomY < 50) return;
+        const deltaRightX = posSection.right - event.clientX;
+        if (
+          deltaY < INDENT ||
+          deltaBottomY < INDENT ||
+          deltaRightX < INDENT ||
+          deltaX < INDENT
+        )
+          return;
         //@ts-ignore
         set({ xy: [deltaX, deltaY] });
       }
