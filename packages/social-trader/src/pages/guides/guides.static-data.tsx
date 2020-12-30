@@ -1,5 +1,4 @@
-import { JustifyContentCenter } from "components/center/justify-content-center";
-import { JustifyContentSpaceAround } from "components/center/justify-content-space-around";
+import { Center } from "components/center/center";
 import { ConversationImages } from "components/conversation/conversation-image/conversation-images";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
@@ -72,6 +71,7 @@ import { GV_FOLLOW_ROUTE } from "routes/invest.routes";
 import { PROGRAMS_ROUTE } from "routes/programs.routes";
 import { SOCIAL_ROUTE } from "routes/social.routes";
 import { TERMINAL_ROUTE } from "routes/trade.routes";
+import styled from "styled-components";
 
 export interface IGuide {
   id: string;
@@ -112,6 +112,14 @@ const tableCellDone = () => {
 const tableCellNone = () => {
   return <td style={{ textAlign: "center" }}>-</td>;
 };
+
+const JustifyContentCenter = styled(Center)`
+  justify-content: center;
+`;
+
+const JustifyContentSpaceAround = styled(Center)`
+  justify-content: space-around;
+`;
 
 export const navGuides: INavGuide[] = [
   {
