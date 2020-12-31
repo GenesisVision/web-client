@@ -20,6 +20,7 @@ import ProgramDetailsHistorySection, {
 import * as React from "react";
 import { useCallback, useMemo } from "react";
 import { useDispatch } from "react-redux";
+import { createAccountApiKeysToUrl } from "utils/compose-url";
 
 import PerformanceData from "./account-details-description/performance-data";
 import AccountDetailsStatisticSection from "./account-details-statistic-section/account-details-statistic-section";
@@ -89,9 +90,12 @@ const _AccountDetailsContainer: React.FC<Props> = ({ data: description }) => {
     [description, handleDispatchDescription]
   );
 
+  const apiKeysUrl = createAccountApiKeysToUrl(description.id, title);
+
   return (
     <Page title={title}>
       <DetailsDescriptionSection
+        apiKeysUrl={apiKeysUrl}
         isOwnAsset={true}
         logo={description.brokerDetails.logoUrl}
         title={title}
