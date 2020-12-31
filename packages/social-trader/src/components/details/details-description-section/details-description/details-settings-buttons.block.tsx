@@ -1,7 +1,7 @@
 import { DescriptionControlIcon } from "components/details/details-description-section/details-description/controls/description-control-icon";
 import { DetailsDescriptionControlButton } from "components/details/details-description-section/details-description/controls/details-description-control";
 import { SettingsIcon } from "components/icon/settings-icon";
-import { ToType } from "components/link/link";
+import Link, { ToType } from "components/link/link";
 import { Row } from "components/row/row";
 import { ASSET } from "constants/constants";
 import * as React from "react";
@@ -23,6 +23,7 @@ interface Props {
   systemUrl?: string;
   notificationsUrl?: ToType;
   settingsUrl?: ToType;
+  apiKeysUrl?: ToType;
 }
 
 const SettingsContainer = styled.div`
@@ -38,6 +39,7 @@ const SettingsItem = styled(Row)`
 `;
 
 const _DetailsSettingsButtons: React.FC<Props> = ({
+  apiKeysUrl,
   systemUrl,
   isOwnAsset,
   asset,
@@ -85,6 +87,17 @@ const _DetailsSettingsButtons: React.FC<Props> = ({
               </DescriptionControlIcon>
             </DetailsDescriptionControlButton>
           </a>
+        </SettingsItem>
+      )}
+      {apiKeysUrl && (
+        <SettingsItem>
+          <Link to={apiKeysUrl}>
+            <DetailsDescriptionControlButton text={"API keys"}>
+              <DescriptionControlIcon>
+                <SettingsIcon />
+              </DescriptionControlIcon>
+            </DetailsDescriptionControlButton>
+          </Link>
         </SettingsItem>
       )}
     </SettingsContainer>

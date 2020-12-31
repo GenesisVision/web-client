@@ -39,11 +39,13 @@ interface Props {
   systemUrl?: string;
   notificationsUrl?: ToType;
   settingsUrl?: ToType;
+  apiKeysUrl?: ToType;
   AssetDetailsExtraBlock?: React.ComponentType<any>;
   description?: string;
 }
 
 const _DetailsDescription: React.FC<Props> = ({
+  apiKeysUrl,
   descriptionTitle,
   personalDetails,
   isOwnAsset,
@@ -90,7 +92,7 @@ const _DetailsDescription: React.FC<Props> = ({
       >
         {AssetDetailsExtraBlock && <AssetDetailsExtraBlock />}
       </DetailsInfo>
-      {personalDetails && (
+      {(personalDetails || apiKeysUrl) && (
         <DetailsSettingsButtons
           isOwnAsset={isOwnAsset}
           asset={asset}
@@ -99,6 +101,7 @@ const _DetailsDescription: React.FC<Props> = ({
           systemUrl={systemUrl}
           notificationsUrl={notificationsUrl}
           settingsUrl={settingsUrl}
+          apiKeysUrl={apiKeysUrl}
         />
       )}
     </Container>
