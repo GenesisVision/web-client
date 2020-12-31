@@ -24,6 +24,7 @@ import { useSelector } from "react-redux";
 import { programMinDepositAmountsSelector } from "reducers/platform-reducer";
 import {
   createFundSettingsToUrl,
+  createProgramApiKeysToUrl,
   createProgramSettingsToUrl
 } from "utils/compose-url";
 
@@ -69,22 +70,30 @@ const _DashboardPublicCardActions: React.FC<IDashboardPublicCardActionsProps> = 
   );
   const { linkCreator, contextTitle } = useToLink();
   const [t] = useTranslation();
+
+  const apiKeysLink = createProgramApiKeysToUrl(id, contextTitle);
+
   const terminalLink = broker?.type
     ? linkCreator(getTerminalLink(broker?.type, id))
     : "";
+
   const createSettingsToUrlMethod =
     assetType === "Fund" ? createFundSettingsToUrl : createProgramSettingsToUrl;
   const settingsLink = url ? createSettingsToUrlMethod(url, contextTitle) : "";
+
   const makeProgramLinkMethod = makeProgramLinkCreator({
     assetFrom: CONVERT_ASSET.SIGNAL,
     assetTo: CONVERT_ASSET.PROGRAM
   });
   const makeProgramLink = linkCreator(makeProgramLinkMethod(id));
+
   const handleOnApply = useCallback(() => {
     clearAnchor();
     onApply();
   }, []);
+
   const isSelfManagedFund = assetTypeExt === "SelfManagedFund";
+
   return (
     <TableCardActions anchor={anchor} clearAnchor={clearAnchor}>
       {isSelfManagedFund && (
@@ -120,6 +129,11 @@ const _DashboardPublicCardActions: React.FC<IDashboardPublicCardActionsProps> = 
         <ChangeAccountPasswordButton id={id} title={contextTitle} />
       )}
       {canConfirm2FA && <ConfirmTFAButton onApply={handleOnApply} id={id} />}
+      {hasTerminal && (
+        <TableCardActionsItem to={apiKeysLink} onClick={clearAnchor}>
+          {t("dashboard-page:trading.actions.api-keys")}
+        </TableCardActionsItem>
+      )}
     </TableCardActions>
   );
 };
