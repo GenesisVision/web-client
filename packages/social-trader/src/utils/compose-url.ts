@@ -11,6 +11,8 @@ import {
 import { ASSET } from "constants/constants";
 import { AssetType, AssetTypeExt } from "gv-api-web";
 import {
+  ACCOUNT_API_KEYS,
+  ACCOUNT_API_KEYS_FOLDER_ROUTE,
   ACCOUNT_DETAILS_ROUTE,
   ACCOUNT_SETTINGS
 } from "routes/accounts.routes";
@@ -36,6 +38,8 @@ import {
   MANAGER_SLUG_URL_PARAM_NAME
 } from "routes/manager.routes";
 import {
+  PROGRAM_API_KEYS,
+  PROGRAM_API_KEYS_FOLDER_ROUTE,
   PROGRAM_BANNER_ROUTE,
   PROGRAM_BANNERS_ROUTE,
   PROGRAM_DETAILS_FOLDER_ROUTE,
@@ -249,3 +253,27 @@ export const getAssetLink = (
       );
   }
 };
+
+export const composeAccountApiKeysUrl = (slugUrl: string): string =>
+  replaceParams(`${ACCOUNT_DETAILS_ROUTE}/${ACCOUNT_API_KEYS}`, {
+    [`:${SLUG_URL_PARAM_NAME}`]: slugUrl
+  });
+
+export const createAccountApiKeysToUrl = (url: string, title: string): ToType =>
+  createToUrl(
+    composeAccountApiKeysUrl(url),
+    ACCOUNT_API_KEYS_FOLDER_ROUTE,
+    title
+  );
+
+export const composeProgramApiKeysUrl = (slugUrl: string): string =>
+  replaceParams(`${PROGRAM_DETAILS_ROUTE}/${PROGRAM_API_KEYS}`, {
+    [`:${PROGRAM_SLUG_URL_PARAM_NAME}`]: slugUrl
+  });
+
+export const createProgramApiKeysToUrl = (url: string, title: string): ToType =>
+  createToUrl(
+    composeProgramApiKeysUrl(url),
+    PROGRAM_API_KEYS_FOLDER_ROUTE,
+    title
+  );
