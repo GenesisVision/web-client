@@ -1,0 +1,33 @@
+{
+  "title": "Api keys",
+  "columns": {
+    "title": "Title",
+    "key": "API Key",
+    "secret": "API Secret",
+    "readonly": "Readonly",
+    "ipRestricted": "IP restricted",
+    "actions": "Actions"
+  },
+  "tooltips": {
+    "secret": "When you create your API Secret Key, it will only be displayed once for security reasons. You can always reset your API Key by deleting them and creating a new if you loose them"
+  },
+  "add-button": "Add API key",
+  "edit-button": "Edit",
+  "delete-button": "Delete",
+  "key-dialog": {
+    "delete-title": "Delete API key",
+    "delete-text": "Are you sure you want to permanently delete API",
+    "create-text": "When you create your API Secret Key, it will only be displayed once for security reasons. You can always reset your API Key by deleting them and creating a new if you loose them.",
+    "confirm": "Confirm",
+    "create": "Create",
+    "API-key": "API key",
+    "API-secret": "API secret",
+    "add-title": "Add API key",
+    "edit-title": "Edit API key",
+    "form": {
+      "title": "Title",
+      "ipRestricted": "IP restricted",
+      "isTradingEnabled": "Read only Key (Trading is disabled)"
+    }
+  }
+}

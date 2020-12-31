@@ -6,7 +6,6 @@ import {
   TableCardActionsItem
 } from "components/table/components/table-card/table-card-actions";
 import { DashboardTradingAsset } from "gv-api-web";
-import { CLOSEABLE_ASSET } from "modules/asset-settings/close-asset/close-asset";
 import CloseAssetButton from "modules/asset-settings/close-asset/close-asset-button";
 import { CONVERT_ASSET } from "pages/convert-asset/convert-asset.contants";
 import { makeProgramLinkCreator } from "pages/convert-asset/convert-asset.routes";
@@ -21,6 +20,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { programMinDepositAmountsSelector } from "reducers/platform-reducer";
+import { createAccountApiKeysToUrl } from "utils/compose-url";
 
 interface Props {
   updateItems: VoidFunction;
@@ -39,6 +39,11 @@ const _DashboardPrivateCardActions: React.FC<Props> = ({
     assetFrom: CONVERT_ASSET.ACCOUNT,
     assetTo: CONVERT_ASSET.SIGNAL
   });
+
+  const apiKeysLink = createAccountApiKeysToUrl(
+    asset.id,
+    asset.publicInfo?.title
+  );
   const terminalLink = linkCreator(
     getTerminalLink(asset.broker.type, asset.id)
   );
@@ -110,6 +115,11 @@ const _DashboardPrivateCardActions: React.FC<Props> = ({
       )}
       {asset.actions.canConfirm2FA && (
         <ConfirmTFAButton onApply={updateItems} id={asset.id} />
+      )}
+      {asset.actions.hasTerminal && (
+        <TableCardActionsItem to={apiKeysLink} onClick={clearAnchor}>
+          {t("dashboard-page:trading.actions.api-keys")}
+        </TableCardActionsItem>
       )}
     </TableCardActions>
   );

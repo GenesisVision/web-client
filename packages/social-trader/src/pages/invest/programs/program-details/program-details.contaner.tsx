@@ -23,6 +23,7 @@ import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import styled from "styled-components";
 import {
   createFollowNotificationsToUrl,
+  createProgramApiKeysToUrl,
   createProgramNotificationsToUrl,
   createProgramSettingsToUrl
 } from "utils/compose-url";
@@ -208,6 +209,17 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
     [description, handleDispatchDescription, isOwnAsset, levelsParameters]
   );
 
+  const apiKeysUrl = useMemo(
+    () =>
+      isExchange
+        ? createProgramApiKeysToUrl(
+            description.id,
+            description.publicInfo.title
+          )
+        : undefined,
+    [description, isExchange]
+  );
+
   const settingsUrl = useMemo(
     () =>
       description.publicInfo.status !== "Disabled" &&
@@ -272,6 +284,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
         programDetails={programDetails || followDetails}
         description={description.publicInfo.description}
         systemUrl={description.publicInfo.systemUrl}
+        apiKeysUrl={apiKeysUrl}
         notificationsUrl={notificationsUrl}
         settingsUrl={settingsUrl}
         AssetDetailsExtraBlock={renderAssetDetailsExtraBlock}
