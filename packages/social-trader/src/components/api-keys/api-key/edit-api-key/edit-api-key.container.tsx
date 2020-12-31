@@ -1,6 +1,5 @@
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogTop } from "components/dialog/dialog-top";
-import { ExchangeCredentials } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
@@ -22,7 +21,7 @@ const _EditApiKeyContainer: React.FC<IEditApiKeyContainerProps> = ({
 
   const isTwoFactorEnabled = useSelector(isTwoFactorEnabledSelector);
 
-  const { sendRequest } = useApiRequest<ExchangeCredentials>({
+  const { sendRequest } = useApiRequest({
     request: editApiKey
   });
 

@@ -9,7 +9,7 @@ export const addApiKey = ({
   isIpRestrict: boolean;
   allowedIps: Array<string>;
   isTradingEnabled: boolean;
-  twoFactorCode?: string;
+  twoFactorCode: string;
   title: string;
   id: string;
 }) => {

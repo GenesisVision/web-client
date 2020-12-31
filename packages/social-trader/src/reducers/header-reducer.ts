@@ -13,7 +13,7 @@ export const headerSelector = apiSelector<ProfileHeaderViewModel>(
 
 export const isTwoFactorEnabledSelector = apiFieldSelector(
   headerSelector,
-  fieldSelector(state => state.isTwoFactorEnabledSelector)
+  fieldSelector(state => state.isTwoFactorEnabled)
 );
 
 export const isBetaTesterByType = (selectType: BetaTestingType) => (
