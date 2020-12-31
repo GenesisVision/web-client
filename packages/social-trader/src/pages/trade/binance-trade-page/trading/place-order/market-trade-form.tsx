@@ -153,7 +153,7 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
           asset={baseAsset}
         />
       </Row>
-      {isFutures && currentPositionMode === false && (
+      {isFutures && currentPositionMode === "OneWay" && (
         <Row size={"small"}>
           <RowItem>
             <ReduceOnlyField />

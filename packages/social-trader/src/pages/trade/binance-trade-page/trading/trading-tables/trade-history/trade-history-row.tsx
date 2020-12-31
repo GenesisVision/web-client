@@ -19,8 +19,8 @@ interface Props {
   symbol: string;
   side: OrderSide;
   price: number;
-  commissionAsset: string;
-  commission: number;
+  commissionAsset?: string;
+  commission?: number;
   quantity: number;
   total: number;
 }
@@ -68,7 +68,10 @@ const _TradeHistoryRow: React.FC<Props> = ({
         })}
       </TableCell>
       <TableCell>
-        {formatCurrencyValue(commission, commissionAsset)} {commissionAsset}
+        {commission &&
+          commissionAsset &&
+          formatCurrencyValue(commission, commissionAsset)}{" "}
+        {commissionAsset}
       </TableCell>
       <TableCell>
         {`${terminalMoneyFormat({

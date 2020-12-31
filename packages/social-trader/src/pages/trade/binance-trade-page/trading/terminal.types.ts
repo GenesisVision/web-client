@@ -23,6 +23,7 @@ import {
   BinanceTimeInForce as BinanceRawTimeInForce,
   TradingPlatformBinanceOrdersMode
 } from "gv-api-web";
+import { PlacedOrderType } from "pages/trade/binance-trade-page/services/api.helpers";
 import {
   FuturesAccountEventType,
   FuturesAsset
@@ -218,7 +219,7 @@ export interface ITerminalMethods extends IGVTerminalMethods {
     side,
     ...options
   }: TradeRequest & { accountId?: string; side: OrderSide }) => Promise<
-    QueryOrderResult
+    PlacedOrderType
   >;
 
   // Futures
@@ -1021,9 +1022,9 @@ export interface MyTrade {
 export type QueryOrderResult = BinanceRawOrder;
 
 export type UnitedOrder = {
-  commissionAsset: string;
-  commission: number;
-  quoteQuantityFilled: number;
+  commissionAsset?: string;
+  commission?: number;
+  quoteQuantityFilled?: number;
   executionType?: BinanceExecutionType;
   orderStatus?: BinanceOrderStatus;
   eventType?: EventType;
@@ -1035,7 +1036,7 @@ export type UnitedOrder = {
   side: OrderSide;
   stopPrice: number;
   price: number;
-  quantityFilled: number;
+  quantityFilled?: number;
   quantity: number;
 };
 

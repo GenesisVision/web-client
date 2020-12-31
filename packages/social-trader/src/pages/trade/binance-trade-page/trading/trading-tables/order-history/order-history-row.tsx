@@ -20,8 +20,8 @@ interface Props {
   stopPrice: number;
   origQty: number;
   filled: number;
-  total: number;
-  executed: number;
+  total?: number;
+  executed?: number;
   amount: number;
 }
 
@@ -61,10 +61,11 @@ const _OrderHistoryRow: React.FC<Props> = ({
         {terminalMoneyFormat({ amount: price, tickSize: String(tickSize) })}
       </TableCell>
       <TableCell>
-        {terminalMoneyFormat({
-          amount: executed,
-          tickSize: String(stepSize)
-        })}
+        {executed &&
+          terminalMoneyFormat({
+            amount: executed,
+            tickSize: String(stepSize)
+          })}
       </TableCell>
       <TableCell>
         {terminalMoneyFormat({
@@ -73,7 +74,8 @@ const _OrderHistoryRow: React.FC<Props> = ({
         })}
       </TableCell>
       <TableCell>
-        {terminalMoneyFormat({ amount: total, tickSize: String(tickSize) })}
+        {total &&
+          terminalMoneyFormat({ amount: total, tickSize: String(tickSize) })}
       </TableCell>
       <TableCell>
         {stopPrice

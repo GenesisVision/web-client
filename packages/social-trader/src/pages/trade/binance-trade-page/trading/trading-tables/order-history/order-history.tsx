@@ -67,7 +67,7 @@ export const OrderHistory: React.FC<Props> = ({ updates }) => {
           stopPrice={stopPrice}
           price={price}
           origQty={quantity}
-          filled={(+quantityFilled / +quantity) * 100}
+          filled={quantityFilled ? (+quantityFilled / +quantity) * 100 : 0}
           total={quoteQuantityFilled}
         />
       )}

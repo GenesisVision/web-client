@@ -121,6 +121,6 @@ export const ConversationImagesFullButton = styled.div<{
   }};
   opacity: ${({ show }) => (show ? 0.5 : 0)};
   &:hover {
-    opacity: 0.8;
+    opacity: ${({ show }) => (show ? 0.8 : 0)};
   }
 `;

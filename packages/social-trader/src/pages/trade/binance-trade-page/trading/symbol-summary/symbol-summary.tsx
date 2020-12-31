@@ -131,7 +131,7 @@ const _SymbolSummaryView: React.FC<Props> = ({
                 }
               >
                 <MonoText>
-                  {+markPrice.lastFundingRate} %{" "}
+                  {+markPrice.fundingRate} %{" "}
                   {diffDate(new Date(), markPrice.nextFundingTime).format(
                     "HH:mm:ss"
                   )}
