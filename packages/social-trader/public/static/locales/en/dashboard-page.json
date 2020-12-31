@@ -115,6 +115,7 @@
     "title": "Trading",
     "follow-them": "Follow them",
     "actions": {
+      "api-keys": "API keys",
       "make-public-fund": "Make a public fund",
       "make-signal": "Make a signal provider",
       "make-program": "Make program",
