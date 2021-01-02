@@ -11,7 +11,6 @@ import { EditablePost, EditPost, Post, UserFeedMode } from "gv-api-web";
 import { api } from "services/api-client/swagger-custom-client";
 import Token from "services/api-client/token";
 import filesService from "services/file-service";
-import { getRandomBoolean } from "utils/helpers";
 import { AnyObjectType } from "utils/types";
 
 export const getPostLikesUsers = (id: string) => {
@@ -64,14 +63,6 @@ const uploadImages = async (images?: IImageValue[]) => {
   }
   return ids.map((image, position) => ({ image, position }));
 };
-
-const mockRequest = (values: any) =>
-  new Promise((resolve, reject) => {
-    setTimeout(() => {
-      const success = getRandomBoolean();
-      success ? resolve() : reject({ errorMessage: "Failed" });
-    }, 1000);
-  });
 
 const sendMessage = (values: IPostMessageValues) => {
   return uploadImages(values.images).then(images => {
