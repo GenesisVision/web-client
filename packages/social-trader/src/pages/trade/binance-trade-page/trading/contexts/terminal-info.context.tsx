@@ -12,7 +12,6 @@ import {
   Account,
   ExchangeInfo,
   SymbolState,
-  TerminalAuthDataType,
   TerminalType
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, {
@@ -29,7 +28,6 @@ import { useSockets } from "services/websocket.service";
 interface Props {
   exchangeAccountId?: string;
   exchangeInfo: ExchangeInfo;
-  authData?: TerminalAuthDataType;
   outerSymbol?: SymbolState;
   terminalType: TerminalType;
 }
@@ -38,7 +36,6 @@ type TerminalAccountInfoState = {
   exchangeAccountId?: string;
   stepSize: string;
   tickSize: string;
-  authData?: TerminalAuthDataType;
   terminalType: TerminalType;
   userStream?: Observable<any>;
   setSymbol: (symbol: SymbolState) => void;
@@ -69,7 +66,6 @@ export const TerminalInfoContext = createContext<TerminalAccountInfoState>(
 export const TerminalInfoContextProvider: React.FC<Props> = ({
   exchangeAccountId,
   exchangeInfo,
-  authData,
   outerSymbol = SymbolInitialState,
   terminalType,
   children
@@ -145,7 +141,6 @@ export const TerminalInfoContextProvider: React.FC<Props> = ({
       exchangeAccountId,
       tickSize,
       stepSize,
-      authData,
       terminalType,
       userStream,
       setSymbol: handleSetSymbol,
@@ -157,7 +152,6 @@ export const TerminalInfoContextProvider: React.FC<Props> = ({
       exchangeAccountId,
       tickSize,
       stepSize,
-      authData,
       terminalType,
       userStream,
       handleSetSymbol,

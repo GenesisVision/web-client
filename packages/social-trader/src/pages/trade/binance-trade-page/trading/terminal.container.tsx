@@ -13,28 +13,24 @@ import {
 import {
   ExchangeInfo,
   SymbolState,
-  TerminalAuthDataType,
   TerminalType
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 
 export interface ITerminalContainerProps {
   exchangeAccountId?: string;
-  authData?: TerminalAuthDataType;
   type?: TerminalType;
   symbol?: SymbolState;
 }
 
 interface ITerminalPropsData {
   exchangeInfo?: ExchangeInfo;
-  authData?: TerminalAuthDataType;
   terminalType?: TerminalType;
   symbol?: SymbolState;
 }
 
 const _TerminalContainer: React.FC<ITerminalContainerProps> = ({
   exchangeAccountId,
-  authData,
   type = TerminalTypeInitialState,
   symbol
 }) => {
@@ -87,7 +83,6 @@ const _TerminalContainer: React.FC<ITerminalContainerProps> = ({
     } else if (isSymbolCorrect === true) {
       if (exchangeInfo) {
         setTerminalPropsData({
-          authData,
           symbol,
           exchangeInfo,
           terminalType: type
@@ -98,9 +93,6 @@ const _TerminalContainer: React.FC<ITerminalContainerProps> = ({
   }, [isSymbolCorrect, exchangeInfo]);
 
   const exchangeInfoProp = useMemo(() => terminalPropsData.exchangeInfo, [
-    terminalPropsData
-  ]);
-  const authDataProp = useMemo(() => terminalPropsData.authData, [
     terminalPropsData
   ]);
   const symbolProp = useMemo(() => terminalPropsData.symbol, [
@@ -117,7 +109,6 @@ const _TerminalContainer: React.FC<ITerminalContainerProps> = ({
       key={exchangeAccountId}
       exchangeAccountId={exchangeAccountId}
       exchangeInfo={exchangeInfoProp}
-      authData={authDataProp}
       symbol={symbolProp}
       terminalType={terminalTypeProp}
     />

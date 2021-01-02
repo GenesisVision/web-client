@@ -6,7 +6,10 @@ import { TYPE_PARAM_NAME } from "pages/trade/binance-trade-page/binance-trade.he
 import { getTerminalApiMethods } from "pages/trade/binance-trade-page/services/api.helpers";
 import { TerminalMethodsContextProvider } from "pages/trade/binance-trade-page/trading/contexts/terminal-methods.context";
 import { parseSymbolFromUrlParam } from "pages/trade/binance-trade-page/trading/terminal.helpers";
-import { SymbolState, TerminalAuthDataType, TerminalType } from "pages/trade/binance-trade-page/trading/terminal.types";
+import {
+  SymbolState,
+  TerminalType
+} from "pages/trade/binance-trade-page/trading/terminal.types";
 import { TerminalPage } from "pages/trade/terminal.page";
 import React from "react";
 import { compose } from "redux";
@@ -19,7 +22,6 @@ import { AnyObjectType, NextPageWithRedux } from "utils/types";
 interface Props {
   exchangeAccountId?: string;
   brokerType?: BrokerTradeServerType;
-  authData?: TerminalAuthDataType;
   terminalType?: TerminalType;
   symbol?: SymbolState;
 }
@@ -45,7 +47,6 @@ const getTerminalType = async (
 const Page: NextPageWithRedux<Props> = ({
   exchangeAccountId,
   brokerType = "Binance",
-  authData,
   terminalType,
   symbol
 }) => {
@@ -54,7 +55,6 @@ const Page: NextPageWithRedux<Props> = ({
     <TerminalMethodsContextProvider methods={terminalMethods}>
       <TerminalPage
         exchangeAccountId={exchangeAccountId}
-        authData={authData}
         type={terminalType}
         symbol={symbol}
       />
@@ -70,13 +70,11 @@ Page.getInitialProps = async ctx => {
   const symbol = id ? parseSymbolFromUrlParam(String(id)) : undefined;
 
   let brokerType: BrokerTradeServerType | undefined;
-  let authData;
 
   return {
     namespacesRequired: ["auth"],
     exchangeAccountId,
     brokerType,
-    authData,
     symbol,
     terminalType
   };
