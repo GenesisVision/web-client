@@ -137,14 +137,10 @@ export const getUserStreamKey = (
     }>
   );
 
-export const getAccountInformation = (
-  accountId?: string
-): Observable<Account> =>
-  from(
-    (api.terminal().getFuturesAccountInfo({ accountId }) as unknown) as Promise<
-      Account
-    >
-  );
+export const getAccountInformation = (accountId?: string) =>
+  (api.terminal().getFuturesAccountInfo({ accountId }) as unknown) as Promise<
+    Account
+  >;
 
 export const getTrades = (
   symbol: string,

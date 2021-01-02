@@ -1,4 +1,5 @@
 import { useAccountCurrency } from "hooks/account-currency.hook";
+import useApiRequest from "hooks/api-request.hook";
 import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-methods.context";
 import {
   filterOutboundAccountInfoStream,
@@ -74,7 +75,7 @@ export const TerminalInfoContextProvider: React.FC<Props> = ({
   const { updateUrl } = useUpdateTerminalUrlParams();
 
   const {
-    getAccountInformation,
+    getAccountInformation: getAccountInformationRequest,
     getUserStreamKey,
     getUserStreamSocket
   } = useContext(TerminalMethodsContext);
@@ -85,15 +86,23 @@ export const TerminalInfoContextProvider: React.FC<Props> = ({
   const [stepSize, setStepSize] = useState<string>("0.01");
   const [userStreamKey, setUserStreamKey] = useState<string | undefined>();
   const [userStream, setUserStream] = useState<Observable<any> | undefined>();
-  const [accountInfo, setAccountInfo] = useState<Account | undefined>();
   const [socketData, setSocketData] = useState<Account | undefined>(undefined);
+
+  const {
+    sendRequest: getAccountInformation,
+    data: accountInfo,
+    setData: setAccountInfo
+  } = useApiRequest({
+    cacheMaxAge: 100 * 60 * 60 * 24 * 2,
+    name: "getAccountInformation",
+    cache: true,
+    request: ({ exchangeAccountId, currency }) =>
+      getAccountInformationRequest(exchangeAccountId, currency)
+  });
 
   useEffect(() => {
     if (!exchangeAccountId) return;
-    const accountInfo = getAccountInformation(exchangeAccountId, currency);
-    accountInfo.subscribe(data => {
-      setAccountInfo(data);
-    });
+    getAccountInformation({ exchangeAccountId, currency });
     getUserStreamKey(exchangeAccountId).subscribe(({ listenKey }) =>
       setUserStreamKey(listenKey)
     );
