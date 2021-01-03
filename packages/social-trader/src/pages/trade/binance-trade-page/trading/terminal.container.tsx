@@ -37,15 +37,17 @@ const _TerminalContainer: React.FC<ITerminalContainerProps> = ({
   const { getExchangeInfo } = useContext(TerminalMethodsContext);
 
   const [isSymbolCorrect, setIsSymbolCorrect] = useState<boolean | undefined>();
-  const [exchangeInfo, setExchangeInfo] = useState<ExchangeInfo | undefined>();
 
   const [checkInfo, setCheckInfo] = useState(false);
   const [updateExchangeInfo, setUpdateExchangeInfo] = useState(false);
-  const [terminalPropsData, setTerminalPropsData] = useState<
-    ITerminalPropsData
-  >({});
+  const [
+    terminalPropsData,
+    setTerminalPropsData
+  ] = useState<ITerminalPropsData>({});
 
-  const { sendRequest } = useApiRequest<ExchangeInfo>({
+  const { sendRequest, data: exchangeInfo } = useApiRequest<ExchangeInfo>({
+    cache: true,
+    name: "getExchangeInfo",
     request: getExchangeInfo
   });
 
@@ -59,7 +61,7 @@ const _TerminalContainer: React.FC<ITerminalContainerProps> = ({
   }, [checkInfo]);
 
   useEffect(() => {
-    if (updateExchangeInfo) sendRequest().then(setExchangeInfo);
+    if (updateExchangeInfo) sendRequest();
   }, [updateExchangeInfo]);
 
   useEffect(() => {
