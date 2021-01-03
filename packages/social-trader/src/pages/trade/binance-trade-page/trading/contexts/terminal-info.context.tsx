@@ -93,7 +93,6 @@ export const TerminalInfoContextProvider: React.FC<Props> = ({
     data: accountInfo,
     setData: setAccountInfo
   } = useApiRequest({
-    cacheMaxAge: 100 * 60 * 60 * 24 * 2,
     name: "getAccountInformation",
     cache: true,
     request: ({ exchangeAccountId, currency }) =>
