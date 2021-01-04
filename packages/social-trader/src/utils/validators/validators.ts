@@ -139,13 +139,10 @@ export const exitFeeShape = (t: TFunction, max: number) =>
       })
     );
 
-export const twoFactorValidator = (t: TFunction, twoFactorEnabled: boolean) => {
-  return twoFactorEnabled
-    ? string()
-        .trim()
-        .matches(/^\d{6}$/, t("validations.two-factor-6digits"))
-        .required(t("validations.two-factor-required"))
-    : string()
-        .trim()
-        .matches(/^\d{6}$/, t("validations.two-factor-6digits"));
-};
+export const twoFactorRules = (t: TFunction) => ({
+  pattern: {
+    value: /^\d{6}$/,
+    message: t("validations.two-factor-6digits")
+  },
+  required: t("profile-page:2fa-page.code-required")
+});
