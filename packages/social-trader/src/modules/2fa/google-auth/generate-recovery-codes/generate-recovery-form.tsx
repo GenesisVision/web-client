@@ -10,7 +10,6 @@ import * as React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
-import { object, string } from "yup";
 
 enum FIELDS {
   password = "password"
@@ -23,11 +22,6 @@ const _GenerateRecoveryForm: React.FC<Props> = ({ errorMessage, onSubmit }) => {
     defaultValues: {
       [FIELDS.password]: ""
     },
-    validationSchema: object().shape({
-      [FIELDS.password]: string().required(
-        t("profile-page:2fa-page.password-required")
-      )
-    }),
     mode: "onChange"
   });
 
@@ -45,6 +39,7 @@ const _GenerateRecoveryForm: React.FC<Props> = ({ errorMessage, onSubmit }) => {
             label={t("profile-page:2fa-page.password")}
             component={SimpleTextField}
             autoComplete="new-password"
+            rules={{ required: t("profile-page:2fa-page.password-required") }}
           />
           {errorMessage && <DialogError error={errorMessage} />}
           <DialogButtons>
