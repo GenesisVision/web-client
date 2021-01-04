@@ -18,7 +18,7 @@ import { useCallback, useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
-import { object, string } from "yup";
+import { twoFactorRules } from "utils/validators/validators";
 
 import { LOGIN_ROUTE_TWO_FACTOR_RECOVERY_ROUTE } from "../signin.constants";
 
@@ -38,12 +38,6 @@ const _TwoFactorCodeForm: React.FC<Props> = ({
 
   const form = useForm<ITwoFactorCodeFormValues>({
     defaultValues: { [FIELDS.code]: "", [FIELDS.email]: email },
-    validationSchema: object().shape({
-      [FIELDS.code]: string()
-        .trim()
-        .matches(/^\d{6}$/, t("validations.two-factor-6digits"))
-        .required(t("validations.two-factor-required"))
-    }),
     mode: "onChange"
   });
   const {
@@ -93,6 +87,7 @@ const _TwoFactorCodeForm: React.FC<Props> = ({
           autoFocus
           component={SimpleTextField}
           format="######"
+          rules={twoFactorRules(t)}
         />
       </Row>
       <Row size={"large"}>
