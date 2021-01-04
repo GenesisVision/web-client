@@ -13,6 +13,7 @@ import * as React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
+import { twoFactorRules } from "utils/validators/validators";
 
 enum FIELDS {
   recoveryCode = "recoveryCode",
@@ -61,13 +62,7 @@ const _DisableAuthForm: React.FC<Props> = ({ onSubmit, errorMessage }) => {
               autoComplete="off"
               allowNegative={false}
               format="######"
-              rules={{
-                pattern: {
-                  value: /^\d{6}$/,
-                  message: t("validations.two-factor-6digits")
-                },
-                required: t("profile-page:2fa-page.code-required")
-              }}
+              rules={twoFactorRules(t)}
             />
           )}
           {tab === TAB.RECOVERY && (
@@ -80,13 +75,7 @@ const _DisableAuthForm: React.FC<Props> = ({ onSubmit, errorMessage }) => {
               autoComplete="off"
               allowNegative={false}
               format="######"
-              rules={{
-                pattern: {
-                  value: /^\d{6}$/,
-                  message: t("validations.two-factor-6digits")
-                },
-                required: t("profile-page:2fa-page.code-required")
-              }}
+              rules={twoFactorRules(t)}
             />
           )}
         </Row>

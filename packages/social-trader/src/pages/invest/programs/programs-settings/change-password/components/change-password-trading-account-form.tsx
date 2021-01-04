@@ -10,6 +10,7 @@ import * as React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
+import { twoFactorRules } from "utils/validators/validators";
 
 import { ChangePasswordTradingAccountValidationSchema } from "./change-password-trading-account.validators";
 
@@ -80,6 +81,7 @@ const _ChangePasswordTradingAccountForm: React.FC<ChangePasswordTradingAccountFo
               label={t("labels.two-factor-code-label")}
               autoComplete="off"
               component={SimpleTextField}
+              rules={twoFactorRules(t)}
             />
           </Row>
         )}

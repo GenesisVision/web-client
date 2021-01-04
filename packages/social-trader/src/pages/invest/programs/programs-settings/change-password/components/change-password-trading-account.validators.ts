@@ -1,5 +1,4 @@
 import { TFunction, WithT } from "i18next";
-import { twoFactorValidator } from "utils/validators/validators";
 import { object, ref, string } from "yup";
 
 interface IChangePasswordTradingAccountValidationSchema {
@@ -41,7 +40,6 @@ export const ChangePasswordTradingAccountValidationSchema = ({
   twoFactorEnabled: boolean;
 }) =>
   object().shape({
-    twoFactorCode: twoFactorValidator(t, twoFactorEnabled),
     password: passwordValidator({ t }),
     confirmPassword: string()
       .oneOf(

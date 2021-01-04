@@ -14,6 +14,7 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { HookForm } from "utils/hook-form.helpers";
+import { twoFactorRules } from "utils/validators/validators";
 
 enum FIELDS {
   code = "code",
@@ -66,13 +67,7 @@ export const GoogleStep3: React.FC<Props> = ({
             InputComponent={NumberFormat}
             allowNegative={false}
             format="######"
-            rules={{
-              pattern: {
-                value: /^\d{6}$/,
-                message: t("validations.two-factor-6digits")
-              },
-              required: t("profile-page:2fa-page.code-required")
-            }}
+            rules={twoFactorRules(t)}
           />
         </Row>
         {enablePassword && (

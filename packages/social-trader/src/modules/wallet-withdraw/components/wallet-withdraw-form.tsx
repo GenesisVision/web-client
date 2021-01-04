@@ -24,6 +24,7 @@ import NumberFormat, { NumberFormatValues } from "react-number-format";
 import { formatCurrencyValue, validateFraction } from "utils/formatter";
 import { HookForm } from "utils/hook-form.helpers";
 import { CurrencyEnum } from "utils/types";
+import { twoFactorRules } from "utils/validators/validators";
 
 export interface IWalletWithdrawFormValues {
   [WALLET_WITHDRAW_FIELDS.currency]: CurrencyEnum;
@@ -141,6 +142,7 @@ const _WalletWithdrawForm: React.FC<Props> = ({
               label={t("labels.two-factor-code-label")}
               autoComplete="off"
               component={SimpleTextField}
+              rules={twoFactorRules(t)}
             />
           </Row>
         )}

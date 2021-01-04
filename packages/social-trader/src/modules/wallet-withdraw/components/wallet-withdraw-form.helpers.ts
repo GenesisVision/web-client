@@ -2,8 +2,7 @@ import { TFunction } from "i18next";
 import { CurrencyEnum } from "utils/types";
 import {
   btcWalletValidator,
-  ethGvtWalletValidator,
-  twoFactorValidator
+  ethGvtWalletValidator
 } from "utils/validators/validators";
 import { object } from "yup";
 
@@ -32,10 +31,6 @@ export const walletWithdrawValidationSchema = ({
       return object().shape({
         [WALLET_WITHDRAW_FIELDS.address]: ethGvtWalletValidator.required(
           t("validations.address-is-required")
-        ),
-        [WALLET_WITHDRAW_FIELDS.twoFactorCode]: twoFactorValidator(
-          t,
-          twoFactorEnabled
         )
       });
     case "BTC":
@@ -43,10 +38,6 @@ export const walletWithdrawValidationSchema = ({
       return object().shape({
         [WALLET_WITHDRAW_FIELDS.address]: btcWalletValidator.required(
           t("validations.address-is-required")
-        ),
-        [WALLET_WITHDRAW_FIELDS.twoFactorCode]: twoFactorValidator(
-          t,
-          twoFactorEnabled
         )
       });
   }
