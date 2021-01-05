@@ -86,7 +86,7 @@ const createProgramSettingsValidationSchema = ({
         t
       ),
       [CREATE_PROGRAM_FIELDS.logo]: inputImageShape(t),
-      [CREATE_PROGRAM_FIELDS.title]: assetTitleShape(t),
+      [CREATE_PROGRAM_FIELDS.title]: assetTitleShape(t), // TODO remove
       [CREATE_PROGRAM_FIELDS.description]: assetDescriptionShape(t),
       [CREATE_PROGRAM_FIELDS.depositAmount]: number()
         .required(t("validations.amount-required"))

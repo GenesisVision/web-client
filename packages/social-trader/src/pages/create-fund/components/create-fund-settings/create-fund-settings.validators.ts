@@ -56,7 +56,7 @@ const createFundSettingsValidationSchema = ({
         )
         .max(available, t("validations.amount-is-large")),
       [CREATE_FUND_FIELDS.logo]: inputImageShape(t),
-      [CREATE_FUND_FIELDS.title]: assetTitleShape(t),
+      [CREATE_FUND_FIELDS.title]: assetTitleShape(t), // TODO remove
       [CREATE_FUND_FIELDS.description]: selfManaged
         ? string()
         : assetDescriptionShape(t),

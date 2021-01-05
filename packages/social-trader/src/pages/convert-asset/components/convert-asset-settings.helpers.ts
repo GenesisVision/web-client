@@ -184,7 +184,7 @@ export const periodLengthShape = (t: TFunction) =>
 
 export const getPublicInfoShapes = (t: TFunction) => ({
   [CONVERT_ASSET_FIELDS.logo]: inputImageShape(t),
-  [CONVERT_ASSET_FIELDS.title]: assetTitleShape(t),
+  [CONVERT_ASSET_FIELDS.title]: assetTitleShape(t), // TODO remove
   [CONVERT_ASSET_FIELDS.description]: assetDescriptionShape(t)
 });
 
