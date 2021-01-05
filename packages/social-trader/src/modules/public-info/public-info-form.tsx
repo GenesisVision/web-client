@@ -7,8 +7,6 @@ import * as React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
-import { assetTitleShape } from "utils/validators/validators";
-import { object } from "yup";
 
 import styles from "./public-info.module.scss";
 
@@ -30,7 +28,6 @@ const _PublicInfoForm: React.FC<Props> = ({
       [FIELDS.userName]: userName,
       [FIELDS.about]: aboutProp
     },
-    validationSchema: object().shape({ [FIELDS.userName]: assetTitleShape(t) }),
     mode: "onBlur"
   });
   const { watch } = form;

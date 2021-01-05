@@ -10,10 +10,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
-import {
-  assetDescriptionShape,
-  assetTitleShape
-} from "utils/validators/validators";
+import { assetDescriptionShape } from "utils/validators/validators";
 import { object, string } from "yup";
 
 import styles from "./asset-settings.module.scss";
@@ -58,7 +55,6 @@ const _AssetEdit: React.FC<Props> = ({
       }
     },
     validationSchema: object().shape({
-      [FIELDS.title]: assetTitleShape(t),
       [FIELDS.description]: showDescription
         ? assetDescriptionShape(t)
         : string(),

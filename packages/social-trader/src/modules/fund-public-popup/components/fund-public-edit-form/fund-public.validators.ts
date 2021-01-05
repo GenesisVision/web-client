@@ -1,7 +1,6 @@
 import { TFunction } from "i18next";
 import {
   assetDescriptionShape,
-  assetTitleShape,
   entryFeeShape,
   exitFeeShape
 } from "utils/validators/validators";
@@ -33,7 +32,6 @@ export const fundPublicValidationSchema = ({
   t
 }: SignalValidationSchemaProps) =>
   object().shape({
-    [FUND_PUBLIC_FORM_FIELDS.title]: assetTitleShape(t),
     [FUND_PUBLIC_FORM_FIELDS.description]: assetDescriptionShape(t),
     [FUND_PUBLIC_FORM_FIELDS.entryFee]: entryFeeShape(t, maxEntryFee),
     [FUND_PUBLIC_FORM_FIELDS.exitFee]: exitFeeShape(t, maxExitFee)
