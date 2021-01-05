@@ -64,6 +64,22 @@ export const assetTitleShape = (t: TFunction) => {
     );
 };
 
+export const assetTitleRules = (t: TFunction) => ({
+  required: t("validations.title-required"),
+  minLength: {
+    value: 4,
+    message: t("validations.title-is-short")
+  },
+  maxLength: {
+    value: 20,
+    message: t("validations.title-is-long")
+  },
+  pattern: {
+    value: /^[-a-zA-Z0-9\s]{4,20}$/,
+    message: t("validations.title-is-latin-and-numbers")
+  }
+});
+
 export const assetDescriptionShape = (t: TFunction) => {
   return string()
     .trim()
