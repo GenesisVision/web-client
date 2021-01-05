@@ -3,11 +3,12 @@ import { GVHookFormField } from "components/gv-hook-form-field";
 import GVProgramPeriod from "components/gv-program-period";
 import Hint from "components/hint/hint";
 import { VERTICAL_POPOVER_POS } from "components/popover/popover";
-import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
-import { TextInputValues } from "components/text-input-component/text-input-component";
+import { RowItem } from "components/row-item/row-item";
 import { Text } from "components/text/text";
+import { TextInputValues } from "components/text-input-component/text-input-component";
 import * as React from "react";
+import { AnyObjectType } from "utils/types";
 
 import styles from "./asset-form-field.module.scss";
 
@@ -25,10 +26,13 @@ interface Props {
   label: string;
   name: string;
   disabled?: boolean;
+  rules?: AnyObjectType;
 }
 
-export const _AssetFormField: React.FC<React.HTMLAttributes<HTMLDivElement> &
-  Props> = ({
+export const _AssetFormField: React.FC<
+  React.HTMLAttributes<HTMLDivElement> & Props
+> = ({
+  rules,
   wide,
   isAllowed,
   max = 500,
@@ -57,6 +61,7 @@ export const _AssetFormField: React.FC<React.HTMLAttributes<HTMLDivElement> &
         autoComplete="off"
         component={component}
         disabled={disabled}
+        rules={rules}
       />
       {caption && (
         <Row className={styles["asset-form-field__caption"]}>
