@@ -165,3 +165,24 @@ export const twoFactorRules = (t: TFunction) => ({
   },
   required: t("profile-page:2fa-page.code-required")
 });
+
+export const depositAmountValidator = ({
+  t,
+  minValue,
+  minText,
+  max
+}: {
+  t: TFunction;
+  minValue: number;
+  minText?: number | string;
+  max: number;
+}) =>
+  number()
+    .required(t("validations.amount-required"))
+    .min(
+      minValue,
+      t("validations.amount-is-zero", {
+        min: minText || minValue
+      })
+    )
+    .max(max, t("validations.amount-is-large"));
