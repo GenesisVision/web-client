@@ -21,7 +21,7 @@ import { useTranslation } from "react-i18next";
 import { safeGetElemFromArray } from "utils/helpers";
 import { HookForm } from "utils/hook-form.helpers";
 import { PlatformAssetFull } from "utils/types";
-import { object } from "yup";
+import { convertShapeToRules } from "utils/validators/validators";
 
 import ConfirmReallocate from "./confirm-reallocate";
 
@@ -65,7 +65,6 @@ const _ReallocateForm: React.FC<Props> = ({
     defaultValues: {
       [FIELDS.assets]: initAssets
     },
-    validationSchema: object().shape({ [FIELDS.assets]: assetsShape(t) }),
     mode: "onBlur"
   });
   const {
@@ -115,6 +114,7 @@ const _ReallocateForm: React.FC<Props> = ({
             name={FIELDS.assets}
             component={ReallocateFieldWrapper}
             assets={platformAssets}
+            rules={convertShapeToRules(assetsShape(t))}
           />
         </LabeledValue>
       </Row>
