@@ -12,9 +12,12 @@ import { IApiKeyFormValues } from "../form/api-key.helpers";
 
 export interface IEditApiKeyContainerProps {
   defaultValues: Partial<IApiKeyFormValues>;
+
+  onClose: VoidFunction;
 }
 
 const _EditApiKeyContainer: React.FC<IEditApiKeyContainerProps> = ({
+  onClose,
   defaultValues
 }) => {
   const [t] = useTranslation();
@@ -22,7 +25,8 @@ const _EditApiKeyContainer: React.FC<IEditApiKeyContainerProps> = ({
   const isTwoFactorEnabled = useSelector(isTwoFactorEnabledSelector);
 
   const { sendRequest } = useApiRequest({
-    request: editApiKey
+    request: editApiKey,
+    middleware: [onClose]
   });
 
   const handleSubmit = useCallback((values: IApiKeyFormValues) => {

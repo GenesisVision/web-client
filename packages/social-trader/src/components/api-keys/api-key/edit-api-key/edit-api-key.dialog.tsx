@@ -23,7 +23,7 @@ export const EditApiKeyDialog: React.FC<IEditApiKeyDialogProps> = ({
 }) => {
   return (
     <StyledDialog open={open} onClose={onClose}>
-      <EditApiKeyContainer {...rest} />
+      <EditApiKeyContainer {...rest} onClose={onClose} />
     </StyledDialog>
   );
 };

@@ -11,11 +11,7 @@ import NumberFormat from "react-number-format";
 import { HookForm } from "utils/hook-form.helpers";
 
 import { AllowedIpsField } from "./allowed-ips-field";
-import {
-  ADD_API_KEY_FORM_FIELDS,
-  AddApiKeyFormValidationSchema,
-  IApiKeyFormValues
-} from "./api-key.helpers";
+import { ADD_API_KEY_FORM_FIELDS, IApiKeyFormValues } from "./api-key.helpers";
 
 export interface IApiKeyFormProps {
   submitLabel: string;
@@ -43,7 +39,6 @@ const _ApiKeyForm: React.FC<IApiKeyFormProps> = ({
   const [t] = useTranslation();
   const form = useForm<IApiKeyFormValues>({
     defaultValues,
-    validationSchema: AddApiKeyFormValidationSchema(t, showTitle),
     mode: "onChange"
   });
 
@@ -63,6 +58,13 @@ const _ApiKeyForm: React.FC<IApiKeyFormProps> = ({
             label={t("api-keys:key-dialog.form.title")}
             autoComplete="off"
             component={SimpleTextField}
+            rules={{
+              required: "Field is required",
+              maxLength: {
+                value: 30,
+                message: "Must be less 30 characters"
+              }
+            }}
           />
         </Row>
       )}

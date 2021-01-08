@@ -10,7 +10,7 @@ import { normalizePositionsList } from "./positions.helpers";
 
 export const PositionsContainer: React.FC = () => {
   const { getPositionInformation } = useContext(TerminalMethodsContext);
-  const { authData, exchangeAccountId } = useContext(TerminalInfoContext);
+  const { exchangeAccountId } = useContext(TerminalInfoContext);
 
   const {
     userStream,
@@ -25,12 +25,12 @@ export const PositionsContainer: React.FC = () => {
   >();
 
   useEffect(() => {
-    if (!authData?.publicKey || !userStream) return;
+    if (!exchangeAccountId || !userStream) return;
     const positions = getPositionInformation!({ accountId: exchangeAccountId });
     positions.then(normalizePositionsList).then(setList);
     const positionsStream = filterPositionEventsStream(userStream);
     positionsStream.subscribe(setSocketData);
-  }, [authData, baseAsset, quoteAsset, userStream]);
+  }, [exchangeAccountId, baseAsset, quoteAsset, userStream]);
 
   useEffect(() => {
     if (!socketData) return;

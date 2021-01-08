@@ -2,8 +2,9 @@
   "extends": "react-app",
   "plugins": ["simple-import-sort",  "prettier", "import"],
   "rules": {
-    "simple-import-sort/sort": "error",
+    "simple-import-sort/imports": "error",
     "sort-imports": "off",
+    "import/order": "off",
     "prettier/prettier": "error",
     "import/first": "error",
     "import/newline-after-import": "error",

@@ -13,43 +13,41 @@ import {
 import {
   ExchangeInfo,
   SymbolState,
-  TerminalAuthDataType,
   TerminalType
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 
 export interface ITerminalContainerProps {
   exchangeAccountId?: string;
-  authData?: TerminalAuthDataType;
   type?: TerminalType;
   symbol?: SymbolState;
 }
 
 interface ITerminalPropsData {
   exchangeInfo?: ExchangeInfo;
-  authData?: TerminalAuthDataType;
   terminalType?: TerminalType;
   symbol?: SymbolState;
 }
 
 const _TerminalContainer: React.FC<ITerminalContainerProps> = ({
   exchangeAccountId,
-  authData,
   type = TerminalTypeInitialState,
   symbol
 }) => {
   const { getExchangeInfo } = useContext(TerminalMethodsContext);
 
   const [isSymbolCorrect, setIsSymbolCorrect] = useState<boolean | undefined>();
-  const [exchangeInfo, setExchangeInfo] = useState<ExchangeInfo | undefined>();
 
   const [checkInfo, setCheckInfo] = useState(false);
   const [updateExchangeInfo, setUpdateExchangeInfo] = useState(false);
-  const [terminalPropsData, setTerminalPropsData] = useState<
-    ITerminalPropsData
-  >({});
+  const [
+    terminalPropsData,
+    setTerminalPropsData
+  ] = useState<ITerminalPropsData>({});
 
-  const { sendRequest } = useApiRequest<ExchangeInfo>({
+  const { sendRequest, data: exchangeInfo } = useApiRequest<ExchangeInfo>({
+    cache: true,
+    name: "getExchangeInfo",
     request: getExchangeInfo
   });
 
@@ -63,7 +61,7 @@ const _TerminalContainer: React.FC<ITerminalContainerProps> = ({
   }, [checkInfo]);
 
   useEffect(() => {
-    if (updateExchangeInfo) sendRequest().then(setExchangeInfo);
+    if (updateExchangeInfo) sendRequest();
   }, [updateExchangeInfo]);
 
   useEffect(() => {
@@ -87,7 +85,6 @@ const _TerminalContainer: React.FC<ITerminalContainerProps> = ({
     } else if (isSymbolCorrect === true) {
       if (exchangeInfo) {
         setTerminalPropsData({
-          authData,
           symbol,
           exchangeInfo,
           terminalType: type
@@ -98,9 +95,6 @@ const _TerminalContainer: React.FC<ITerminalContainerProps> = ({
   }, [isSymbolCorrect, exchangeInfo]);
 
   const exchangeInfoProp = useMemo(() => terminalPropsData.exchangeInfo, [
-    terminalPropsData
-  ]);
-  const authDataProp = useMemo(() => terminalPropsData.authData, [
     terminalPropsData
   ]);
   const symbolProp = useMemo(() => terminalPropsData.symbol, [
@@ -117,7 +111,6 @@ const _TerminalContainer: React.FC<ITerminalContainerProps> = ({
       key={exchangeAccountId}
       exchangeAccountId={exchangeAccountId}
       exchangeInfo={exchangeInfoProp}
-      authData={authDataProp}
       symbol={symbolProp}
       terminalType={terminalTypeProp}
     />

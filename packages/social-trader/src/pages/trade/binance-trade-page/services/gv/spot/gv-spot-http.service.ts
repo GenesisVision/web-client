@@ -11,7 +11,6 @@ import {
 import { Bar } from "pages/trade/binance-trade-page/trading/chart/charting_library/datafeed-api";
 import { getDividerParts } from "pages/trade/binance-trade-page/trading/order-book/order-book.helpers";
 import {
-  Account,
   CorrectedRestDepth,
   ExchangeInfo,
   KlineParams,
@@ -130,10 +129,7 @@ export const getUserStreamKey = (
 export const getAccountInformation = (
   accountId?: string,
   currency?: CurrencyEnum
-): Observable<Account> =>
-  from(
-    api.terminal().getAccountInfo({ accountId, currency }) as Promise<Account>
-  );
+) => api.terminal().getAccountInfo({ accountId, currency });
 
 export const getTrades = (
   symbol: string,

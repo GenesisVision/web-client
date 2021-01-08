@@ -1,8 +1,8 @@
 import { Button } from "components/button/button";
 import { Center } from "components/center/center";
 import { GVHookFormField } from "components/gv-hook-form-field";
-import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { RowItem } from "components/row-item/row-item";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
 import TileFilterItem from "components/table/components/filtering/tile-filter-item";
 import TagBubble from "components/tags/tag-item/tag-bubble";
@@ -10,7 +10,6 @@ import React, { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { HookForm } from "utils/hook-form.helpers";
 import { $yellow } from "utils/style/colors";
-import { object, string } from "yup";
 
 interface Props {
   name: string;
@@ -20,14 +19,6 @@ interface Props {
 
 const _AllowedIpsField: React.FC<Props> = ({ name, value = [], setValue }) => {
   const form = useForm<{ IP: string }>({
-    validationSchema: object().shape({
-      IP: string()
-        .matches(
-          /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/,
-          "Invalid IP"
-        )
-        .required()
-    }),
     mode: "onChange"
   });
 
@@ -84,6 +75,13 @@ const _AllowedIpsField: React.FC<Props> = ({ name, value = [], setValue }) => {
                 name={"IP"}
                 label={"IP"}
                 component={SimpleTextField}
+                rules={{
+                  required: "required",
+                  pattern: {
+                    value: /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/,
+                    message: "Invalid IP"
+                  }
+                }}
               />
             </RowItem>
             <RowItem>

@@ -6,8 +6,8 @@ import React, { useContext } from "react";
 interface Props {}
 
 const _PlaceOrderSettingsContainer: React.FC<Props> = () => {
-  const { authData } = useContext(TerminalInfoContext);
-  if (!authData) return null;
+  const { exchangeAccountId } = useContext(TerminalInfoContext);
+  if (!exchangeAccountId) return null;
   return (
     <DefaultBlock size={"small"} roundedBorder={false} bordered>
       <PlaceOrderSettings />
