@@ -13,7 +13,7 @@ import { IApiKeyFormValues } from "../form/api-key.helpers";
 export interface IEditApiKeyContainerProps {
   defaultValues: Partial<IApiKeyFormValues>;
 
-  onClose: VoidFunction;
+  onClose: (param?: any) => void;
 }
 
 const _EditApiKeyContainer: React.FC<IEditApiKeyContainerProps> = ({
