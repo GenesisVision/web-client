@@ -1,7 +1,6 @@
 import DescriptionField from "components/assets/fields/description-field";
 import TitleField from "components/assets/fields/title-field";
 import { IImageValue } from "components/form/input-image/input-image";
-import inputImageShape from "components/form/input-image/input-image.validation";
 import LogoField from "components/logo-field/logo-field";
 import { Row } from "components/row/row";
 import SettingsBlock from "components/settings-block/settings-block";
@@ -10,8 +9,6 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
-import { assetDescriptionShape } from "utils/validators/validators";
-import { object, string } from "yup";
 
 import styles from "./asset-settings.module.scss";
 
@@ -54,12 +51,6 @@ const _AssetEdit: React.FC<Props> = ({
         src: logo.src
       }
     },
-    validationSchema: object().shape({
-      [FIELDS.description]: showDescription
-        ? assetDescriptionShape(t)
-        : string(),
-      [FIELDS.logo]: inputImageShape(t)
-    }),
     mode: "onBlur"
   });
   const { watch } = form;
