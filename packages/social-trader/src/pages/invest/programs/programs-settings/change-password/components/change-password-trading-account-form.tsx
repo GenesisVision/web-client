@@ -10,14 +10,30 @@ import * as React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
-import { twoFactorRules } from "utils/validators/validators";
-
-import { ChangePasswordTradingAccountValidationSchema } from "./change-password-trading-account.validators";
+import {
+  convertShapeToRules,
+  getConfirmPasswordValidationRules,
+  passwordValidator,
+  twoFactorRules
+} from "utils/validators/validators";
 
 enum FORM_FIELDS {
   password = "password",
   confirmPassword = "confirmPassword",
   twoFactorCode = "twoFactorCode"
+}
+
+interface ChangePasswordTradingAccountFormProps {
+  twoFactorEnabled: boolean;
+  errorMessage: string;
+  programName: string;
+  onSubmit(values: IChangePasswordTradingAccountFormValues): void;
+}
+
+export interface IChangePasswordTradingAccountFormValues {
+  [FORM_FIELDS.password]: string;
+  [FORM_FIELDS.confirmPassword]: string;
+  [FORM_FIELDS.twoFactorCode]: string;
 }
 
 const _ChangePasswordTradingAccountForm: React.FC<ChangePasswordTradingAccountFormProps> = ({
@@ -33,12 +49,10 @@ const _ChangePasswordTradingAccountForm: React.FC<ChangePasswordTradingAccountFo
       [FORM_FIELDS.confirmPassword]: "",
       [FORM_FIELDS.twoFactorCode]: ""
     },
-    validationSchema: ChangePasswordTradingAccountValidationSchema({
-      t,
-      twoFactorEnabled
-    }),
     mode: "onBlur"
   });
+
+  const { watch } = form;
 
   return (
     <HookForm form={form} onSubmit={onSubmit}>
@@ -58,6 +72,7 @@ const _ChangePasswordTradingAccountForm: React.FC<ChangePasswordTradingAccountFo
             type="password"
             name={FORM_FIELDS.password}
             autoComplete="off"
+            rules={convertShapeToRules(passwordValidator(t))}
           />
         </Row>
         <Row onlyOffset>
@@ -70,6 +85,7 @@ const _ChangePasswordTradingAccountForm: React.FC<ChangePasswordTradingAccountFo
             type="password"
             name={FORM_FIELDS.confirmPassword}
             autoComplete="off"
+            rules={getConfirmPasswordValidationRules({ watch, t })}
           />
         </Row>
         {twoFactorEnabled && (
@@ -99,19 +115,6 @@ const _ChangePasswordTradingAccountForm: React.FC<ChangePasswordTradingAccountFo
     </HookForm>
   );
 };
-
-interface ChangePasswordTradingAccountFormProps {
-  twoFactorEnabled: boolean;
-  errorMessage: string;
-  programName: string;
-  onSubmit(values: IChangePasswordTradingAccountFormValues): void;
-}
-
-export interface IChangePasswordTradingAccountFormValues {
-  [FORM_FIELDS.password]: string;
-  [FORM_FIELDS.confirmPassword]: string;
-  [FORM_FIELDS.twoFactorCode]: string;
-}
 
 const ChangePasswordTradingAccountForm = React.memo(
   _ChangePasswordTradingAccountForm
