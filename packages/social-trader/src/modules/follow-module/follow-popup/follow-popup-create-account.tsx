@@ -22,9 +22,11 @@ import { formatCurrencyValue } from "utils/formatter";
 import { allowPositiveValuesNumberFormat } from "utils/helpers";
 import { HookForm } from "utils/hook-form.helpers";
 import { CurrencyEnum } from "utils/types";
+import { convertShapeToRules } from "utils/validators/validators";
 
-import CreateAccountFormValidationSchema, {
-  CREATE_ACCOUNT_FORM_FIELDS
+import {
+  CREATE_ACCOUNT_FORM_FIELDS,
+  depositAmountShape
 } from "./follow-popup-create-account.validators";
 
 export interface CreateAccountFormProps {
@@ -55,12 +57,6 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
     defaultValues: {
       [CREATE_ACCOUNT_FORM_FIELDS.depositWalletId]: externalWallet.id
     },
-    validationSchema: CreateAccountFormValidationSchema({
-      rate,
-      minDeposit,
-      wallet,
-      t
-    }),
     mode: "onChange"
   });
   const { reset, watch, setValue } = form;
@@ -107,6 +103,14 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
           label={t("follow-program.create-account.amount")}
           currency={wallet.currency}
           setMax={setMaxAmount}
+          rules={convertShapeToRules(
+            depositAmountShape({
+              wallet,
+              rate,
+              minDeposit,
+              t
+            })
+          )}
         />
         {followCurrency !== wallet.currency && (
           <Row>

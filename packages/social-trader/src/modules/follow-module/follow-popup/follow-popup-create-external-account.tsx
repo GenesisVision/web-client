@@ -9,8 +9,6 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
 
-import { CreateExternalAccountFormValidationSchema } from "./follow-popup-create-account.validators";
-
 export enum CREATE_EXTERNAL_ACCOUNT_FORM_FIELDS {
   secret = "secret",
   key = "key"
@@ -22,9 +20,6 @@ const _FollowCreateExternalAccount: React.FC<CreateAccountFormProps> = ({
   const [t] = useTranslation();
 
   const form = useForm<CreateAccountFormValues>({
-    validationSchema: CreateExternalAccountFormValidationSchema({
-      t
-    }),
     mode: "onChange"
   });
 
@@ -39,6 +34,9 @@ const _FollowCreateExternalAccount: React.FC<CreateAccountFormProps> = ({
             label={t("asset-settings:fields.api-key")}
             autoComplete="off"
             component={SimpleTextField}
+            rules={{
+              required: t("validations.api-key")
+            }}
           />
         </Row>
         <Row>
@@ -49,6 +47,9 @@ const _FollowCreateExternalAccount: React.FC<CreateAccountFormProps> = ({
             label={t("asset-settings:fields.api-secret")}
             autoComplete="off"
             component={SimpleTextField}
+            rules={{
+              required: t("validations.api-secret")
+            }}
           />
         </Row>
         <DialogButtons>

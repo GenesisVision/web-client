@@ -1,8 +1,7 @@
 import { SignalSubscription, SubscriptionMode } from "gv-api-web";
 import { TFunction } from "i18next";
-import { FollowParamsFormValues } from "modules/follow-module/follow-popup/follow-popup-params";
 import { CurrencyEnum } from "utils/types";
-import { lazy, number, object, Schema } from "yup";
+import { number } from "yup";
 
 export enum FOLLOW_PARAMS_FIELDS {
   fixedCurrency = "fixedCurrency",
@@ -62,39 +61,37 @@ export const followParamsMapPropsToValues = ({
   };
 };
 
-export const followParamsValidationSchema = (t: TFunction) =>
-  lazy<FollowParamsFormValues>(values => {
-    const fixedCurrency = values[FOLLOW_PARAMS_FIELDS.fixedCurrency];
-    const mode = values[FOLLOW_PARAMS_FIELDS.mode];
-    return object<FollowParamsFormValues>().shape({
-      [FOLLOW_PARAMS_FIELDS.fixedVolume]:
-        mode === modes.fixed.value
-          ? number()
-              .min(
-                0,
-                t("validations.fixedVolume-min", {
-                  fixedCurrency
-                })
-              )
-              .lessThan(
-                100000,
-                t("validations.fixedVolume-max", {
-                  fixedCurrency
-                })
-              )
-          : number(),
-      [FOLLOW_PARAMS_FIELDS.percent]:
-        mode === modes.percentage.value
-          ? number()
-              .min(1, t("validations.percent-min"))
-              .lessThan(1000, t("validations.percent-max"))
-          : number(),
-      [FOLLOW_PARAMS_FIELDS.openTolerancePercent]: number()
-        .required(t("validations.tolerance-required"))
-        .min(0.01, t("validations.tolerance-percent-min"))
-        .max(20, t("validations.tolerance-percent-max"))
-    }) as Schema<FollowParamsFormValues>;
-  });
+export const fixedVolumeShape = (t: TFunction, fixedCurrency: string) =>
+  number()
+    .min(
+      0,
+      t("validations.fixedVolume-min", {
+        fixedCurrency
+      })
+    )
+    .lessThan(
+      100000,
+      t("validations.fixedVolume-max", {
+        fixedCurrency
+      })
+    );
+
+export const percentShape = (t: TFunction) =>
+  number()
+    .min(1, t("validations.percent-min"))
+    .lessThan(1000, t("validations.percent-max"));
+
+export const openTolerancePercentRules = (t: TFunction) => ({
+  required: t("validations.tolerance-required"),
+  min: {
+    value: 0.01,
+    message: t("validations.tolerance-percent-min")
+  },
+  max: {
+    value: 20,
+    message: t("validations.tolerance-percent-max")
+  }
+});
 
 export const getInfoText = (currency: CurrencyEnum): string => {
   switch (currency) {
