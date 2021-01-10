@@ -24,9 +24,10 @@ import { convertToCurrency } from "utils/currency-converter";
 import { formatCurrencyValue } from "utils/formatter";
 import { HookForm } from "utils/hook-form.helpers";
 import { CurrencyEnum } from "utils/types";
+import { convertShapeToRules } from "utils/validators/validators";
 
-import { depositValidationSchema } from "./deposit-form-validation-schema";
 import { MinDepositType, TFees } from "./deposit.types";
+import { depositAmountValidator } from "./deposit-form-validation-schema";
 import { ConvertCurrency } from "./form-fields/convert-currency";
 import { InvestorFees } from "./form-fields/investor-fees";
 
@@ -66,17 +67,10 @@ const _DepositForm: React.FC<Props> = ({
       [DEPOSIT_FORM_FIELDS.availableInWallet]: wallet.available,
       [DEPOSIT_FORM_FIELDS.walletId]: wallet.id
     },
-    validationSchema: depositValidationSchema({
-      rate,
-      walletCurrency: wallet.currency,
-      availableToInvestInAsset,
-      minDeposit,
-      t
-    }),
     mode: "onChange"
   });
   const { reset, watch, setValue, triggerValidation } = form;
-  const { amount = 0 } = watch();
+  const { amount = 0, availableInWallet } = watch();
 
   useEffect(() => {
     getRate({ from: wallet.currency, to: currency });
@@ -122,6 +116,14 @@ const _DepositForm: React.FC<Props> = ({
     },
     [amount, reset, triggerValidation, setValue]
   );
+
+  const availableToInvest = Math.min(
+    availableInWallet,
+    convertToCurrency(availableToInvestInAsset, rate)
+  );
+
+  const min = getMinDepositFromAmounts(minDeposit, wallet.currency);
+
   return (
     <HookForm form={form} onSubmit={onSubmit}>
       <DialogBottom>
@@ -144,6 +146,16 @@ const _DepositForm: React.FC<Props> = ({
           currency={wallet.currency}
           isAllowed={isAllow(wallet.currency)}
           setMax={setMaxAmount}
+          rules={convertShapeToRules(
+            depositAmountValidator({
+              t,
+              currency: wallet.currency,
+              availableToInvestInAsset,
+              min,
+              availableToInvest,
+              availableInWallet
+            })
+          )}
         />
         {currency !== wallet.currency && (
           <Row>
