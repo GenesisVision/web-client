@@ -3,8 +3,8 @@ import FormError from "components/form/form-error/form-error";
 import GVCheckbox from "components/gv-checkbox/gv-checkbox";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import Link from "components/link/link";
-import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { RowItem } from "components/row-item/row-item";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
 import { SubmitButton } from "components/submit-button/submit-button";
 import { RegisterViewModel } from "gv-api-web";
@@ -22,10 +22,13 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { LOGIN_ROUTE } from "routes/app.routes";
 import { HookForm } from "utils/hook-form.helpers";
+import {
+  convertShapeToRules,
+  emailValidator,
+  passwordValidator
+} from "utils/validators/validators";
 
-import validationSchema, {
-  SIGN_UP_FORM_FIELDS
-} from "./signup-form.validators";
+import { SIGN_UP_FORM_FIELDS } from "./signup-form.validators";
 
 const _SignUpForm: React.FC<Props> = ({
   showLogin,
@@ -58,7 +61,6 @@ const _SignUpForm: React.FC<Props> = ({
       [SIGN_UP_FORM_FIELDS.acceptTerms]: false,
       [SIGN_UP_FORM_FIELDS.isAuto]: false //TODO remove when upgrade api
     },
-    validationSchema: validationSchema(t),
     mode: "onChange"
   });
 
@@ -76,6 +78,13 @@ const _SignUpForm: React.FC<Props> = ({
           autoComplete="off"
           autoFocus
           component={SimpleTextField}
+          rules={{
+            required: "Name is required",
+            pattern: {
+              value: /^[-A-Za-z0-9]{1,99}$/,
+              message: "Must contain from 1 to 99 letters, numbers or dashes"
+            }
+          }}
         />
       </Row>
       <Row onlyOffset>
@@ -87,6 +96,7 @@ const _SignUpForm: React.FC<Props> = ({
           label={t("auth:signup.email-field-text")}
           autoComplete="email"
           component={SimpleTextField}
+          rules={convertShapeToRules(emailValidator)}
         />
       </Row>
       <Row onlyOffset>
@@ -98,6 +108,7 @@ const _SignUpForm: React.FC<Props> = ({
           label={t("auth:signup.password-field-text")}
           component={SimpleTextField}
           autoComplete="new-password"
+          rules={convertShapeToRules(passwordValidator(t))}
         />
       </Row>
       <Row>
@@ -120,6 +131,10 @@ const _SignUpForm: React.FC<Props> = ({
             </span>
           }
           component={GVCheckbox}
+          rules={{
+            validate: (value: boolean) =>
+              value ? true : "Must Accept the Privacy Policy"
+          }}
         />
       </Row>
       <Row>
@@ -142,6 +157,10 @@ const _SignUpForm: React.FC<Props> = ({
             </span>
           }
           component={GVCheckbox}
+          rules={{
+            validate: (value: boolean) =>
+              value ? true : "Must Accept the Terms of Service"
+          }}
         />
       </Row>
       {error && (
