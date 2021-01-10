@@ -5,7 +5,6 @@ import { useGetRate } from "hooks/get-rate.hook";
 import {
   DEMO_DEPOSIT_FORM_FIELDS,
   DemoDepositResponse,
-  DemoDepositValidationSchema,
   IDemoDepositFormValues
 } from "modules/demo-deposit/demo-deposit.service";
 import React, { useCallback, useEffect } from "react";
@@ -32,7 +31,6 @@ const _DemoDepositForm: React.FC<Props> = ({
     currentDeposit;
   const [t] = useTranslation();
   const form = useForm<IDemoDepositFormValues>({
-    validationSchema: DemoDepositValidationSchema(t, maxAmount),
     mode: "onChange"
   });
   const { setValue } = form;
@@ -47,6 +45,13 @@ const _DemoDepositForm: React.FC<Props> = ({
         setMax={setMax}
         currency={currency}
         name={DEMO_DEPOSIT_FORM_FIELDS.amount}
+        rules={{
+          required: t("validations.required"),
+          max: {
+            value: maxAmount,
+            message: t("validations.max-amount", { maxAmount })
+          }
+        }}
       />
       <DialogButtons>
         <SubmitButton isSuccessful={!errorMessage} wide>
