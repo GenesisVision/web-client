@@ -1,12 +1,9 @@
-import { TFunction } from "i18next";
 import {
   BalancesForTransfer,
   BalancesItemName,
   TerminalCurrency
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { safeGetElemFromArray } from "utils/helpers";
-import { minMaxNumberShape } from "utils/validators/validators";
-import { lazy, number, object, Schema, string } from "yup";
 
 export const ENABLE_TRANSFER_ACCOUNTS = [
   { asset: "BNB", title: "BNB" },
@@ -48,29 +45,4 @@ export const getMaxValueForFuturesTransfer = ({
   const balance = balances[balanceType];
   return +safeGetElemFromArray(balance, balance => balance.asset === asset)
     .free;
-};
-
-export const futuresTransferValidationSchema = ({
-  balances,
-  t
-}: {
-  balances: BalancesForTransfer;
-  t: TFunction;
-}) => {
-  return lazy<TransferFormValues>(({ asset, type }) => {
-    const max = getMaxValueForFuturesTransfer({
-      type,
-      asset,
-      balances
-    });
-    return object().shape({
-      [TRANSFER_FORM_FIELDS.amount]: minMaxNumberShape({
-        min: 0,
-        max,
-        t
-      }),
-      [TRANSFER_FORM_FIELDS.asset]: string(),
-      [TRANSFER_FORM_FIELDS.type]: number()
-    }) as Schema<TransferFormValues>;
-  });
 };
