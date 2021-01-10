@@ -9,8 +9,8 @@ import SignalsFeeFormPartial from "components/assets/fields/signals-fee-form.par
 import StopOutField from "components/assets/fields/stop-out-field";
 import TradesDelay from "components/assets/fields/trades-delay";
 import { IImageValue } from "components/form/input-image/input-image";
-import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { RowItem } from "components/row-item/row-item";
 import SettingsBlock from "components/settings-block/settings-block";
 import { ASSET } from "constants/constants";
 import withLoader from "decorators/with-loader";
@@ -27,10 +27,13 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
 import { CurrencyEnum } from "utils/types";
+import {
+  convertShapeToRules,
+  entryFeeShape,
+  successFeeShape
+} from "utils/validators/validators";
 
-import convertAssetSettingsValidationSchema, {
-  CONVERT_ASSET_FIELDS
-} from "./convert-asset-settings.helpers";
+import { CONVERT_ASSET_FIELDS } from "./convert-asset-settings.helpers";
 
 export interface IConvertAssetSettingsFormOwnProps {
   currency?: CurrencyEnum;
@@ -65,14 +68,16 @@ export interface IConvertAssetSettingsFormValues {
 }
 
 const _ConvertAssetSettings: React.FC<IConvertAssetSettingsProps> = props => {
-  const [isSignalProgram] = useState(true);
   const [hasInvestmentLimit, setHasInvestmentLimit] = useState(false);
   const {
     currency: currencyProp,
     onSubmit,
     broker,
     fromTo: { assetTo, assetFrom },
-    programsInfo: { periods },
+    programsInfo: {
+      periods,
+      createProgramInfo: { maxManagementFee, maxSuccessFee }
+    },
     errorMessage
   } = props;
   const [t] = useTranslation();
@@ -90,12 +95,6 @@ const _ConvertAssetSettings: React.FC<IConvertAssetSettingsProps> = props => {
       [CONVERT_ASSET_FIELDS.periodLength]:
         periods.length === 1 ? periods[0] : undefined
     },
-    validationSchema: convertAssetSettingsValidationSchema({
-      ...props,
-      t,
-      hasInvestmentLimit,
-      isSignalProgram
-    }),
     mode: "onChange"
   });
   const { watch, triggerValidation } = form;
@@ -144,11 +143,12 @@ const _ConvertAssetSettings: React.FC<IConvertAssetSettingsProps> = props => {
               )}
               <Row>
                 <div>
-                  <Currency
-                    hide={!showCurrency}
-                    name={CONVERT_ASSET_FIELDS.currency}
-                    accountCurrencies={currencies}
-                  />
+                  {showCurrency && (
+                    <Currency
+                      name={CONVERT_ASSET_FIELDS.currency}
+                      accountCurrencies={currencies}
+                    />
+                  )}
                   {!isExchange && (
                     <RowItem>
                       <PeriodLength
@@ -184,6 +184,9 @@ const _ConvertAssetSettings: React.FC<IConvertAssetSettingsProps> = props => {
                 "create-account:settings.hints.management-fee"
               )}
               firstFeeName={CONVERT_ASSET_FIELDS.managementFee}
+              firstFeeRules={convertShapeToRules(
+                entryFeeShape(t, maxManagementFee)
+              )}
               firstFeeDescription={
                 isExchange
                   ? t(
@@ -205,6 +208,9 @@ const _ConvertAssetSettings: React.FC<IConvertAssetSettingsProps> = props => {
                     )
                   : t("create-account:settings.hints.success-fee-description")
               }
+              secondFeeRules={convertShapeToRules(
+                successFeeShape(t, maxSuccessFee)
+              )}
             />
           </SettingsBlock>
           <SettingsBlock
@@ -230,6 +236,10 @@ const _ConvertAssetSettings: React.FC<IConvertAssetSettingsProps> = props => {
           <SignalsFeeFormPartial
             volumeFeeFieldName={CONVERT_ASSET_FIELDS.volumeFee}
             successFeeFieldName={CONVERT_ASSET_FIELDS.successFee}
+            minSuccessFee={props.followInfo.minSuccessFee}
+            maxSuccessFee={props.followInfo.maxSuccessFee}
+            minVolumeFee={props.followInfo.minVolumeFee}
+            maxVolumeFee={props.followInfo.maxVolumeFee}
           />
         </SettingsBlock>
       )}
