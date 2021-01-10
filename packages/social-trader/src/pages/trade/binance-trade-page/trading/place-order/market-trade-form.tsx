@@ -1,8 +1,8 @@
 import { isAllow } from "components/deposit/components/deposit.helpers";
 import HookFormAmountField from "components/input-amount-field/hook-form-amount-field";
 import { LabeledValue } from "components/labeled-value/labeled-value";
-import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { RowItem } from "components/row-item/row-item";
 import { API_REQUEST_STATUS } from "hooks/api-request.hook";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import { TerminalPlaceOrderContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-place-order.context";
@@ -18,17 +18,18 @@ import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
+import { convertShapeToRules } from "utils/validators/validators";
 
 import { usePlaceOrderAutoFill } from "./hooks/place-order-auto-fill.hook";
 import { usePlaceOrderFormReset } from "./hooks/place-order-form-reset.hook";
 import { usePlaceOrderInfo } from "./hooks/place-order-info-hook";
-import { placeOrderDefaultValidationSchema } from "./place-order-validation";
 import { getBalance } from "./place-order.helpers";
 import {
   IPlaceOrderFormValues,
   IPlaceOrderHandleSubmitValues,
   TRADE_FORM_FIELDS
 } from "./place-order.types";
+import { tradeNumberShape } from "./place-order-validation";
 
 export interface IMarketTradeFormProps {
   status: API_REQUEST_STATUS;
@@ -37,10 +38,12 @@ export interface IMarketTradeFormProps {
   onSubmit: (values: IPlaceOrderHandleSubmitValues) => any;
 }
 
-const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
-  balances: AssetBalance[];
-  exchangeInfo: ExchangeInfo;
-}> = ({ status, balances, exchangeInfo, outerPrice, onSubmit, side }) => {
+const _MarketTradeForm: React.FC<
+  IMarketTradeFormProps & {
+    balances: AssetBalance[];
+    exchangeInfo: ExchangeInfo;
+  }
+> = ({ status, balances, exchangeInfo, outerPrice, onSubmit, side }) => {
   const [t] = useTranslation();
 
   const {
@@ -67,19 +70,6 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
   });
 
   const form = useForm<IPlaceOrderFormValues>({
-    validationSchema: placeOrderDefaultValidationSchema({
-      t,
-      quoteAsset,
-      baseAsset,
-      stepSize: +stepSize,
-      tickSize: +tickSize,
-      maxTotal: maxTotalWithWallet,
-      maxPrice: +maxPrice,
-      minPrice: +minPrice,
-      maxQuantity: maxQuantityWithWallet,
-      minQuantity: +minQuantity,
-      minNotional: +minNotional
-    }),
     mode: "onChange"
   });
   const { triggerValidation, watch, setValue, reset } = form;
@@ -121,6 +111,14 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
           label={t("Price")}
           currency={quoteAsset}
           name={TRADE_FORM_FIELDS.price}
+          rules={convertShapeToRules(
+            tradeNumberShape({
+              t,
+              min: minPrice,
+              max: maxPrice,
+              divider: +tickSize
+            })
+          )}
         />
       </Row>
       <LabeledValue label={t("Price")}>{t("Market price")}</LabeledValue>
@@ -130,6 +128,14 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
           label={t("Amount")}
           currency={baseAsset}
           name={TRADE_FORM_FIELDS.quantity}
+          rules={convertShapeToRules(
+            tradeNumberShape({
+              t,
+              min: minQuantity,
+              max: maxQuantityWithWallet,
+              divider: +stepSize
+            })
+          )}
         />
       </Row>
       <Row>
@@ -141,6 +147,13 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
           label={isFutures ? t("Cost") : t("Total")}
           currency={quoteAsset}
           name={TRADE_FORM_FIELDS.total}
+          rules={convertShapeToRules(
+            minMaxNumberShape({
+              t,
+              max: maxTotalWithWallet,
+              min: minNotional
+            })
+          )}
         />
       </Row>
       <Row wide onlyOffset>
