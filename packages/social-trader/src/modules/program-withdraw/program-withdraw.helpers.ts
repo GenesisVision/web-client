@@ -1,5 +1,4 @@
 import { TFunction } from "i18next";
-import { boolean, mixed, number, object } from "yup";
 
 export enum WITHDRAW_FORM_FIELDS {
   amount = "amount",
@@ -11,27 +10,25 @@ export interface IProgramWithdrawAmountFormValues {
   [WITHDRAW_FORM_FIELDS.withdrawAll]: boolean;
 }
 
-export const programWithdrawAmountValidationSchema = ({
-  withdrawInPercent,
+export const depositAmountRules = ({
   t,
+  watch,
+  withdrawInPercent,
   availableToWithdraw
 }: {
-  withdrawInPercent?: boolean;
   t: TFunction;
+  watch: () => IProgramWithdrawAmountFormValues;
+  withdrawInPercent?: boolean;
   availableToWithdraw: number;
-}) =>
-  object().shape({
-    [WITHDRAW_FORM_FIELDS.withdrawAll]: boolean(),
-    [WITHDRAW_FORM_FIELDS.amount]: mixed().when(
-      WITHDRAW_FORM_FIELDS.withdrawAll,
-      {
-        is: false,
-        then: number()
-          .moreThan(0, t("validations.amount-is-zero"))
-          .max(
-            withdrawInPercent ? 100 : availableToWithdraw,
-            t("validations.amount-more-than-account-balance")
-          )
-      }
-    )
-  });
+}) => {
+  return {
+    validate: (value: number) => {
+      const { withdrawAll } = watch();
+      if (withdrawAll) return true;
+      const max = withdrawInPercent ? 100 : availableToWithdraw;
+      if (value > max) return t("validations.amount-more-than-account-balance");
+      if (value === 0) return t("validations.amount-is-zero");
+      return true;
+    }
+  };
+};
