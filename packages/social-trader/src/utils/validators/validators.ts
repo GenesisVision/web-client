@@ -1,4 +1,5 @@
 import { TFunction } from "i18next";
+import { AnyObjectType } from "utils/types";
 import { number, Schema, string } from "yup";
 
 // eslint-disable-next-line no-control-regex
@@ -196,3 +197,21 @@ export const depositAmountValidator = ({
       })
     )
     .max(max, t("validations.amount-is-large"));
+
+export const getConfirmPasswordValidationRules = ({
+  t,
+  watch
+}: {
+  t: TFunction;
+  watch: () => AnyObjectType;
+}) => {
+  return {
+    required: t("auth:password-restore.validators.confirm-password-required"),
+    validate: (value: string) => {
+      const { password } = watch();
+      return value !== password
+        ? t("auth:password-restore.validators.password-dont-match")
+        : true;
+    }
+  };
+};
