@@ -1,5 +1,5 @@
-import useAssetValidate from "components/assets/asset-validate.hook";
 import { getBrokerId } from "components/assets/asset.helpers";
+import useAssetValidate from "components/assets/asset-validate.hook";
 import CreateAssetNavigation from "components/assets/fields/create-asset-navigation";
 import DepositDetailsBlock from "components/assets/fields/deposit-details-block";
 import { GVHookFormField } from "components/gv-hook-form-field";
@@ -11,15 +11,12 @@ import SettingsBlock from "components/settings-block/settings-block";
 import { ExchangeAccountType, ExchangeInfo } from "gv-api-web";
 import { KycRequiredBlock } from "pages/create-account/components/create-account-settings/kyc-required-block";
 import * as React from "react";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { kycConfirmedSelector } from "reducers/header-reducer";
 import { safeGetElemFromArray } from "utils/helpers";
 import { HookForm } from "utils/hook-form.helpers";
-
-import CreateExchangeAccountSettingsValidationSchema from "./create-exchange-account-settings.validators";
 
 export enum CREATE_EXCHANGE_ACCOUNT_FIELDS {
   depositWalletId = "depositWalletId",
@@ -45,8 +42,6 @@ const _CreateExchangeAccountSettings: React.FC<Props> = ({
   onSubmit
 }) => {
   const currency = "BTC";
-  const [available, setAvailable] = useState(0);
-  const [rate, setRate] = useState(1);
   const [t] = useTranslation();
 
   const form = useForm<ICreateExchangeAccountSettingsFormValues>({
@@ -57,13 +52,6 @@ const _CreateExchangeAccountSettings: React.FC<Props> = ({
       [CREATE_EXCHANGE_ACCOUNT_FIELDS.depositWalletId]: "",
       [CREATE_EXCHANGE_ACCOUNT_FIELDS.depositAmount]: undefined
     },
-    validationSchema: CreateExchangeAccountSettingsValidationSchema({
-      currency,
-      rate,
-      t,
-      exchange,
-      available
-    }),
     mode: "onChange"
   });
   const {
@@ -127,8 +115,6 @@ const _CreateExchangeAccountSettings: React.FC<Props> = ({
             broker={accountType.type}
             hide={!accountType.isDepositRequired}
             blockNumber={2}
-            setAvailable={setAvailable}
-            setRate={setRate}
             walletFieldName={CREATE_EXCHANGE_ACCOUNT_FIELDS.depositWalletId}
             inputName={CREATE_EXCHANGE_ACCOUNT_FIELDS.depositAmount}
             depositAmount={depositAmount}
