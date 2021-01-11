@@ -179,6 +179,11 @@ export const getRandomWords = (length: number = getRandomInteger(3, 8)) =>
 export const getRandomEmail = () =>
   `${getRandomWord()}@${getRandomWord()}.${getRandomWord()}`;
 
+export const hideEmail = (email: string): string => {
+  const [first, second] = email.split("@");
+  return `${first.slice(0, -3)}***@***${second.slice(3)}`;
+};
+
 export const getRandomColorNumber = () =>
   getRandomInteger(150, 255).toString(16);
 

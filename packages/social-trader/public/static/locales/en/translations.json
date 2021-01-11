@@ -34,6 +34,8 @@
     "address-is-required": "An address is required.",
     "two-factor-6digits": "Should contain at least 6 digits.",
     "two-factor-required": "Authentication code is required.",
+    "three-factor-6digits": "Should contain 6 digits.",
+    "three-factor-required": "Code is required.",
     "fixedVolume-min": "{{fixedCurrency}} equivalent must be greater than or equal to 0",
     "fixedVolume-max": "{{fixedCurrency}} equivalent must be less than or equal to 99999",
     "percent-min": "Percent must be greater than or equal to 1%",
