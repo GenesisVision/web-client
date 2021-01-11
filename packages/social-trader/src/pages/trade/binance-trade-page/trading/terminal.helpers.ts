@@ -1,7 +1,6 @@
 import { ColoredTextColor } from "components/colored-text/colored-text";
 import { Push } from "components/link/link";
 import { useParams } from "hooks/location";
-import { NextPageContext } from "next";
 import { Bar } from "pages/trade/binance-trade-page/trading/chart/charting_library/datafeed-api";
 import { terminalMoneyFormat } from "pages/trade/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
 import { getDividerParts } from "pages/trade/binance-trade-page/trading/order-book/order-book.helpers";
@@ -11,16 +10,14 @@ import {
   ExchangeInfo,
   MergedTickerSymbolType,
   SymbolState,
-  TerminalAuthDataType,
   TerminalCurrency,
   UnitedOrder
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import qs from "qs";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback } from "react";
 import { TERMINAL_FOLDER_ROUTE, TERMINAL_ROUTE } from "routes/trade.routes";
 import { Observable } from "rxjs";
 import { filter } from "rxjs/operators";
-import { cookieServiceCreator } from "utils/cookie-service.creator";
 import { formatValue } from "utils/formatter";
 import { changeLocation, safeGetElemFromArray } from "utils/helpers";
 import { getLocation } from "utils/location";
@@ -32,8 +29,6 @@ export const DEFAULT_SYMBOL: SymbolState = {
   baseAsset: "BTC",
   quoteAsset: "USDT"
 };
-const TRADE_AUTH_DATA_KEY = "TRADE_AUTH_DATA_KEY";
-const initialState = { publicKey: "", privateKey: "" };
 
 export const setUpperFirstLetter = ([firstLetter, ...rest]: string = "") =>
   firstLetter.toUpperCase() + rest.join("").toLowerCase();
@@ -158,31 +153,6 @@ export const getSymbolFilters = (
     minNotionalFilter,
     priceFilter,
     pricePercentFilter
-  };
-};
-
-export const authCookieService = (ctx?: NextPageContext) =>
-  cookieServiceCreator({
-    ctx,
-    key: TRADE_AUTH_DATA_KEY,
-    initialState,
-    parse: true
-  });
-
-export const useAuthCookieState = () => authCookieService();
-
-export const useTradeAuth = () => {
-  const [authData, setAuthData] = useState(initialState);
-  const { set, get } = useAuthCookieState();
-  useEffect(() => {
-    setAuthData(get());
-  }, []);
-  return {
-    set: (values: TerminalAuthDataType) => {
-      setAuthData(values);
-      set(values);
-    },
-    authData
   };
 };
 

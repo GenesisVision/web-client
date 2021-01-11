@@ -47,7 +47,7 @@ const _SignInContainer: React.FC<Props> = ({
   const [disable, setDisable] = useIsOpen();
   const { errorMessage, setErrorMessage } = useErrorMessage();
   const dispatch = useDispatch<ReduxDispatch>();
-  const successMiddleware = (value: string) => {
+  const storeTokenMiddleware = (value: string) => {
     if (!value) return;
     authService.storeToken(value);
     dispatch(authActions.updateTokenAction(true));
@@ -59,6 +59,10 @@ const _SignInContainer: React.FC<Props> = ({
         setAccountCurrency(platformCurrency);
       });
   };
+  const clearStorageMiddleware = () => {
+    if (typeof window !== "undefined" && typeof localStorage !== "undefined")
+      localStorage.clear();
+  };
 
   const { email, password = "" } = getTwoFactorState();
 
@@ -67,7 +71,11 @@ const _SignInContainer: React.FC<Props> = ({
   }, [email, password]);
 
   const { sendRequest } = useApiRequest({
-    middleware: [successMiddleware, saveAccountCurrencyMiddleware],
+    middleware: [
+      clearStorageMiddleware,
+      storeTokenMiddleware,
+      saveAccountCurrencyMiddleware
+    ],
     request: values => {
       return login({
         ...values,

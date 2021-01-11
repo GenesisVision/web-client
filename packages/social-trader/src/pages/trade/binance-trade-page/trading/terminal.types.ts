@@ -199,7 +199,7 @@ export interface ITerminalMethods extends IGVTerminalMethods {
   getAccountInformation: (
     accountId?: string,
     currency?: CurrencyEnum
-  ) => Observable<Account>;
+  ) => Promise<Account>;
   getTrades: (symbol: string, limit?: number) => Observable<UnitedTrade[]>;
   getTickers: (symbol?: string) => Observable<Ticker[]>;
   getDepth: (

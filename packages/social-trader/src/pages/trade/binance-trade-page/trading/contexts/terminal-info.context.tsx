@@ -1,4 +1,5 @@
 import { useAccountCurrency } from "hooks/account-currency.hook";
+import useApiRequest from "hooks/api-request.hook";
 import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-methods.context";
 import {
   filterOutboundAccountInfoStream,
@@ -12,7 +13,6 @@ import {
   Account,
   ExchangeInfo,
   SymbolState,
-  TerminalAuthDataType,
   TerminalType
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, {
@@ -29,7 +29,6 @@ import { useSockets } from "services/websocket.service";
 interface Props {
   exchangeAccountId?: string;
   exchangeInfo: ExchangeInfo;
-  authData?: TerminalAuthDataType;
   outerSymbol?: SymbolState;
   terminalType: TerminalType;
 }
@@ -38,7 +37,6 @@ type TerminalAccountInfoState = {
   exchangeAccountId?: string;
   stepSize: string;
   tickSize: string;
-  authData?: TerminalAuthDataType;
   terminalType: TerminalType;
   userStream?: Observable<any>;
   setSymbol: (symbol: SymbolState) => void;
@@ -69,7 +67,6 @@ export const TerminalInfoContext = createContext<TerminalAccountInfoState>(
 export const TerminalInfoContextProvider: React.FC<Props> = ({
   exchangeAccountId,
   exchangeInfo,
-  authData,
   outerSymbol = SymbolInitialState,
   terminalType,
   children
@@ -78,7 +75,7 @@ export const TerminalInfoContextProvider: React.FC<Props> = ({
   const { updateUrl } = useUpdateTerminalUrlParams();
 
   const {
-    getAccountInformation,
+    getAccountInformation: getAccountInformationRequest,
     getUserStreamKey,
     getUserStreamSocket
   } = useContext(TerminalMethodsContext);
@@ -89,15 +86,22 @@ export const TerminalInfoContextProvider: React.FC<Props> = ({
   const [stepSize, setStepSize] = useState<string>("0.01");
   const [userStreamKey, setUserStreamKey] = useState<string | undefined>();
   const [userStream, setUserStream] = useState<Observable<any> | undefined>();
-  const [accountInfo, setAccountInfo] = useState<Account | undefined>();
   const [socketData, setSocketData] = useState<Account | undefined>(undefined);
+
+  const {
+    sendRequest: getAccountInformation,
+    data: accountInfo,
+    setData: setAccountInfo
+  } = useApiRequest({
+    name: "getAccountInformation",
+    cache: true,
+    request: ({ exchangeAccountId, currency }) =>
+      getAccountInformationRequest(exchangeAccountId, currency)
+  });
 
   useEffect(() => {
     if (!exchangeAccountId) return;
-    const accountInfo = getAccountInformation(exchangeAccountId, currency);
-    accountInfo.subscribe(data => {
-      setAccountInfo(data);
-    });
+    getAccountInformation({ exchangeAccountId, currency });
     getUserStreamKey(exchangeAccountId).subscribe(({ listenKey }) =>
       setUserStreamKey(listenKey)
     );
@@ -145,7 +149,6 @@ export const TerminalInfoContextProvider: React.FC<Props> = ({
       exchangeAccountId,
       tickSize,
       stepSize,
-      authData,
       terminalType,
       userStream,
       setSymbol: handleSetSymbol,
@@ -157,7 +160,6 @@ export const TerminalInfoContextProvider: React.FC<Props> = ({
       exchangeAccountId,
       tickSize,
       stepSize,
-      authData,
       terminalType,
       userStream,
       handleSetSymbol,

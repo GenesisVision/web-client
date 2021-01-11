@@ -23,7 +23,7 @@ const _TransferContainer: React.FC<ITransferContainerProps> = ({
   const { getBalancesForTransfer, newFutureAccountTransfer } = useContext(
     TerminalMethodsContext
   );
-  const { authData, symbol } = useContext(TerminalInfoContext);
+  const { exchangeAccountId, symbol } = useContext(TerminalInfoContext);
   const { sendRequest: sendTransfer, status } = useApiRequest({
     request: newFutureAccountTransfer!,
     successMessage: "Success",
@@ -32,17 +32,16 @@ const _TransferContainer: React.FC<ITransferContainerProps> = ({
   const { data } = useApiRequest({
     request: getBalancesForTransfer!,
     fetchOnMount: true,
-    fetchOnMountData: { authData }
+    fetchOnMountData: { accountId: exchangeAccountId }
   });
 
   const handleSubmit = useCallback(
     (values: TransferFormValues) => {
       return sendTransfer({
-        authData,
         ...values
       });
     },
-    [symbol, authData]
+    [symbol]
   );
   return (
     <>

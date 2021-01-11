@@ -17,7 +17,6 @@ import { SymbolSummarySmallBlock } from "pages/trade/binance-trade-page/trading/
 import {
   ExchangeInfo,
   SymbolState,
-  TerminalAuthDataType,
   TerminalType
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { TradesBlock } from "pages/trade/binance-trade-page/trading/trades/trades.block";
@@ -30,7 +29,6 @@ import styles from "./terminal.module.scss";
 interface Props {
   exchangeAccountId?: string;
   exchangeInfo: ExchangeInfo;
-  authData?: TerminalAuthDataType;
   terminalType: TerminalType;
   symbol?: SymbolState;
 }
@@ -38,7 +36,6 @@ interface Props {
 const _Terminal: React.FC<Props> = ({
   exchangeAccountId,
   exchangeInfo,
-  authData,
   symbol,
   terminalType
 }) => {
@@ -46,7 +43,6 @@ const _Terminal: React.FC<Props> = ({
     <TerminalInfoContextProvider
       exchangeAccountId={exchangeAccountId}
       exchangeInfo={exchangeInfo}
-      authData={authData}
       outerSymbol={symbol}
       terminalType={terminalType}
     >
