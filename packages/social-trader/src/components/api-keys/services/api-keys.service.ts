@@ -1,6 +1,10 @@
 import { api } from "services/api-client/swagger-custom-client";
 
-export const getApiKeys = (id: string) => api.assets().getAccountApiKey(id);
+export const getApiKeys = (id: string) =>
+  api
+    .assets()
+    .getAccountApiKey(id)
+    .then(({ items }) => items.filter(({ isEnabled }) => isEnabled));
 
 export const addApiKey = ({
   id,
