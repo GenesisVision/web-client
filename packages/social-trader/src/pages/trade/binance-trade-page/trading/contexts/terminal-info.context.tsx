@@ -15,14 +15,7 @@ import {
   SymbolState,
   TerminalType
 } from "pages/trade/binance-trade-page/trading/terminal.types";
-import React, {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState
-} from "react";
+import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { Observable } from "rxjs";
 import { useSockets } from "services/websocket.service";
 
@@ -105,7 +98,7 @@ export const TerminalInfoContextProvider: React.FC<Props> = ({
     getUserStreamKey(exchangeAccountId).subscribe(({ listenKey }) =>
       setUserStreamKey(listenKey)
     );
-  }, [getAccountInformation, getUserStreamKey]);
+  }, [getAccountInformationRequest, getUserStreamKey]);
 
   useEffect(() => {
     if (!userStreamKey) return;
