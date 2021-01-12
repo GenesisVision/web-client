@@ -23,8 +23,6 @@ interface Props extends IDepositDetailsDefaultBlockProps {
 interface Props {
   broker?: BrokerTradeServerType;
   hide?: boolean;
-  setRate: (value: number) => void;
-  setAvailable: (value: number) => void;
   blockNumber?: number;
   walletFieldName: string;
   inputName: string;
@@ -52,8 +50,6 @@ const hasMinAmount = (
 const _DepositDetailsBlock: React.FC<Props> = ({
   broker,
   hide,
-  setAvailable,
-  setRate,
   blockNumber = 3,
   walletFieldName,
   inputName,
@@ -99,8 +95,6 @@ const _DepositDetailsBlock: React.FC<Props> = ({
     <DepositDetailsDefaultBlock
       assetSection={assetSection}
       hide={hide}
-      setRate={setRate}
-      setAvailable={setAvailable}
       blockNumber={blockNumber}
       walletFieldName={walletFieldName}
       inputName={inputName}
