@@ -1,5 +1,5 @@
 {
-  "title": "Api keys",
+  "title": "API keys",
   "columns": {
     "title": "Title",
     "key": "API Key",
@@ -11,19 +11,19 @@
   "tooltips": {
     "secret": "When you create your API Secret Key, it will only be displayed once for security reasons. You can always reset your API Key by deleting them and creating a new if you loose them"
   },
-  "add-button": "Add API key",
+  "add-button": "Add API Key",
   "edit-button": "Edit",
   "delete-button": "Delete",
   "key-dialog": {
-    "delete-title": "Delete API key",
+    "delete-title": "Delete API Key",
     "delete-text": "Are you sure you want to permanently delete API",
     "create-text": "When you create your API Secret Key, it will only be displayed once for security reasons. You can always reset your API Key by deleting them and creating a new if you loose them.",
     "confirm": "Confirm",
     "create": "Create",
-    "API-key": "API key",
+    "API-key": "API Key",
     "API-secret": "API secret",
-    "add-title": "Add API key",
-    "edit-title": "Edit API key",
+    "add-title": "Add API Key",
+    "edit-title": "Edit API Key",
     "form": {
       "title": "Title",
       "ipRestricted": "IP restricted",
