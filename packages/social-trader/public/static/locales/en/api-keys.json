@@ -4,7 +4,7 @@
     "title": "Title",
     "key": "API Key",
     "secret": "API Secret",
-    "readonly": "Readonly",
+    "readonly": "Read only",
     "ipRestricted": "IP restricted",
     "actions": "Actions"
   },

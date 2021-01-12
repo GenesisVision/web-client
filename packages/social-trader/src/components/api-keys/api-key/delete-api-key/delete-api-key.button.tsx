@@ -11,9 +11,10 @@ import { deleteApiKey } from "../../services/api-keys.service";
 interface Props {
   id: string;
   title: string;
+  key: string;
 }
 
-const _DeleteApiKeyButton: React.FC<Props> = ({ id, title }) => {
+const _DeleteApiKeyButton: React.FC<Props> = ({ id, title, key }) => {
   const [t] = useTranslation();
   const [isOpen, setIsOpen, setIsClose] = useFlag();
   const { updateTable } = useContext(ApiKeysContext);
@@ -25,7 +26,7 @@ const _DeleteApiKeyButton: React.FC<Props> = ({ id, title }) => {
 
   const handleApply = useCallback(sendRequest, [sendRequest]);
 
-  const body = `${t("api-keys:key-dialog.delete-text")} ${title} ?`;
+  const body = `${t("api-keys:key-dialog.delete-text")} ${title} ? ${key}`;
 
   return (
     <>
