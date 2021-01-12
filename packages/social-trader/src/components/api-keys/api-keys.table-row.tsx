@@ -55,7 +55,7 @@ const _ApiKeysTableRow: React.FC<Props> = ({
             <EditApiKeyButton defaultValues={defaultValues} />
           </RowItem>
           <RowItem>
-            <DeleteApiKeyButton key={apiKey} id={id} title={title} />
+            <DeleteApiKeyButton apiKey={apiKey} id={id} title={title} />
           </RowItem>
         </Row>
       </TableCell>
