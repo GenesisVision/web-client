@@ -1,8 +1,10 @@
 import { GVHookFormField } from "components/gv-hook-form-field";
 import Select from "components/select/select";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
+import { periodLengthShape } from "pages/convert-asset/components/convert-asset-settings.helpers";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { convertShapeToRules } from "utils/validators/validators";
 
 import AssetField from "../asset-fields/asset-field";
 
@@ -21,6 +23,7 @@ const _PeriodLength: React.FC<Props> = ({ name, periods }) => {
         component={SimpleTextField}
         label={t("asset-settings:fields.period")}
         InputComponent={Select}
+        rules={convertShapeToRules(periodLengthShape(t))}
       >
         {periods.map((period: any) => (
           <option value={period} key={period}>

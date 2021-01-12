@@ -1,9 +1,11 @@
 import { GVHookFormField } from "components/gv-hook-form-field";
 import Select from "components/select/select";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
+import { currencyShape } from "pages/convert-asset/components/convert-asset-settings.helpers";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { CurrencyEnum } from "utils/types";
+import { convertShapeToRules } from "utils/validators/validators";
 
 import AssetField from "../asset-fields/asset-field";
 
@@ -31,6 +33,7 @@ const _Currency: React.FC<Props> = ({
         InputComponent={Select}
         disabled={disabled}
         disableIfSingle
+        rules={convertShapeToRules(currencyShape(t))}
       >
         {accountCurrencies.map(currency => (
           <option value={currency} key={currency}>

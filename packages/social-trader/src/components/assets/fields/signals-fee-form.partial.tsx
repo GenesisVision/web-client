@@ -1,21 +1,34 @@
 import AssetFormField from "components/assets/asset-fields/asset-form-field";
 import AssetRow from "components/assets/asset-fields/asset-row";
-import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { IRowProps } from "components/row/row.types";
+import { RowItem } from "components/row-item/row-item";
 import { SimpleNumberField } from "components/simple-fields/simple-number-field";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { allowPositiveValuesNumberFormat } from "utils/helpers";
+import {
+  convertShapeToRules,
+  signalSuccessFeeShape,
+  signalVolumeFeeShape
+} from "utils/validators/validators";
 
 interface ISignalsFeeFormPartialProps {
   inDialog?: boolean;
   volumeFeeFieldName: string;
   successFeeFieldName: string;
   hasSubscriptionFeeAutofocus?: boolean;
+  minSuccessFee: number;
+  maxSuccessFee: number;
+  minVolumeFee: number;
+  maxVolumeFee: number;
 }
 
 const _SignalsFeeFormPartial: React.FC<ISignalsFeeFormPartialProps> = ({
+  minSuccessFee,
+  maxSuccessFee,
+  minVolumeFee,
+  maxVolumeFee,
   inDialog,
   successFeeFieldName,
   volumeFeeFieldName
@@ -36,6 +49,9 @@ const _SignalsFeeFormPartial: React.FC<ISignalsFeeFormPartialProps> = ({
             "create-account:settings.hints.signal-volume-fee-description"
           )}
           hintContent={t("create-account:settings.hints.signal-volume-fee")}
+          rules={convertShapeToRules(
+            signalSuccessFeeShape(t, minSuccessFee, maxSuccessFee)
+          )}
         />
       </ContainerElem>
       <ContainerElem onlyOffset wide={inDialog}>
@@ -50,6 +66,9 @@ const _SignalsFeeFormPartial: React.FC<ISignalsFeeFormPartialProps> = ({
             "create-account:settings.hints.signal-success-fee-description"
           )}
           hintContent={t("create-account:settings.hints.signal-success-fee")}
+          rules={convertShapeToRules(
+            signalVolumeFeeShape(t, minVolumeFee, maxVolumeFee)
+          )}
         />
       </ContainerElem>
     </AssetRow>
