@@ -22,7 +22,7 @@ const _SecurityVerificationContainer: React.FC<Props> = ({ code }) => {
   const { errorMessage, sendRequest, data } = useApiRequest({
     middleware: [updateTokenMiddleware],
     successMessage: "auth:security-verification.success-alert-message",
-    request: props => confirmThreeStepAuth(props)
+    request: confirmThreeStepAuth
   });
   useEffect(() => {
     if (data) {

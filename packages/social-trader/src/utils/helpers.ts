@@ -179,9 +179,16 @@ export const getRandomWords = (length: number = getRandomInteger(3, 8)) =>
 export const getRandomEmail = () =>
   `${getRandomWord()}@${getRandomWord()}.${getRandomWord()}`;
 
-export const hideEmail = (email: string): string => {
+export const partiallyHideEmail = (email: string): string => {
+  if (!email) {
+    return "";
+  }
   const [first, second] = email.split("@");
-  return `${first.slice(0, -3)}***@***${second.slice(3)}`;
+  const starsAmountBefore: number = Math.floor(first.length / 3);
+  const starsAmountAfter: number = Math.floor(second.length / 3);
+  return `${first.slice(0, first.length - starsAmountBefore)}${"*".repeat(
+    starsAmountBefore
+  )}@${"*".repeat(starsAmountAfter)}${second.slice(starsAmountAfter)}`;
 };
 
 export const getRandomColorNumber = () =>

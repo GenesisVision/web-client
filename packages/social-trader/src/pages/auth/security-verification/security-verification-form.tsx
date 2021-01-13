@@ -9,7 +9,7 @@ import * as React from "react";
 import { useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { hideEmail } from "utils/helpers";
+import { partiallyHideEmail } from "utils/helpers";
 import { HookForm } from "utils/hook-form.helpers";
 import { object, string } from "yup";
 
@@ -36,8 +36,7 @@ const _SecurityVerificationForm: React.FC<Props> = ({
     validationSchema: object().shape({
       [FIELDS.code]: string()
         .trim()
-        // Потом исправить на 6
-        .matches(/^\d{3}$/, t("validations.three-factor-6digits"))
+        .matches(/^\d{6}$/, t("validations.three-factor-6digits"))
         .required(t("validations.three-factor-required"))
     }),
     mode: "onChange"
@@ -51,8 +50,7 @@ const _SecurityVerificationForm: React.FC<Props> = ({
   const [isChecking, setIsChecking] = useIsOpen();
 
   useEffect(() => {
-    // Потом исправить на 6
-    if (!isChecking && code.length === 3) {
+    if (!isChecking && code.length === 6) {
       checkThreeFactor();
     }
   }, [code, isChecking]);
@@ -87,7 +85,7 @@ const _SecurityVerificationForm: React.FC<Props> = ({
       <Row>
         <Text muted>
           {t("auth:security-verification.message", {
-            email: email ? hideEmail(email) : email
+            email: partiallyHideEmail(email)
           })}
         </Text>
       </Row>
@@ -97,12 +95,7 @@ const _SecurityVerificationForm: React.FC<Props> = ({
         </Row>
       )}
       <Row size={"large"}>
-        <SubmitButton
-          checkSubmitted={false}
-          // isPending
-          // disabled
-          // isSuccessful
-        >
+        <SubmitButton checkSubmitted={false}>
           {t("auth:security-verification.submit-button-label")}
         </SubmitButton>
       </Row>
