@@ -53,7 +53,7 @@ const TransactionDetailsListItem: React.FC<{
           className={clsx({
             [styles[
               "transaction-details__details-list-statistic-item-value--long"
-            ]]: details.length > 40
+            ]]: details.length > 30
           })}
         >
           {url ? <Link to={linkCreator(url)}>{details}</Link> : details}
