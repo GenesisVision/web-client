@@ -95,7 +95,7 @@ const _SecurityVerificationForm: React.FC<Props> = ({
         </Row>
       )}
       <Row size={"large"}>
-        <SubmitButton checkSubmitted={false}>
+        <SubmitButton checkSubmitted={false} isPending={isSubmitting}>
           {t("auth:security-verification.submit-button-label")}
         </SubmitButton>
       </Row>
