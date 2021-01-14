@@ -1,7 +1,4 @@
-import {
-  dynamicLabeledValueStyles,
-  StyleProps
-} from "components/labeled-value/labeled-value.style";
+import { dynamicLabeledValueStyles, StyleProps } from "components/labeled-value/labeled-value.style";
 import { ILabeledValueProps } from "components/labeled-value/labeled-value.types";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
@@ -41,7 +38,7 @@ export const LabeledValue: React.FC<ILabeledValueProps> = ({
       </Row>
       <Row
         onlyOffset
-        size={direction !== "row" ? getChildOffsetValue(size) : undefined}
+        size={direction === "row" ? "zero" : getChildOffsetValue(size)}
       >
         <Text weight={weight} sizeValue={size === "middle" ? "14" : undefined}>
           {children}
