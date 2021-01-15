@@ -6,8 +6,8 @@ import { DialogTop } from "components/dialog/dialog-top";
 import { LabeledValue } from "components/labeled-value/labeled-value";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
-import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { RowItem } from "components/row-item/row-item";
 import Status from "components/status/status";
 import Crashable from "decorators/crashable";
 import {
@@ -53,7 +53,7 @@ const TransactionDetailsListItem: React.FC<{
           className={clsx({
             [styles[
               "transaction-details__details-list-statistic-item-value--long"
-            ]]: details.length > 40
+            ]]: details.length > 30
           })}
         >
           {url ? <Link to={linkCreator(url)}>{details}</Link> : details}
@@ -64,9 +64,11 @@ const TransactionDetailsListItem: React.FC<{
   );
 });
 
-const TransactionDetailsItem: React.FC<{
-  label: string;
-} & React.HTMLAttributes<HTMLDivElement>> = ({ label, children }) => {
+const TransactionDetailsItem: React.FC<
+  {
+    label: string;
+  } & React.HTMLAttributes<HTMLDivElement>
+> = ({ label, children }) => {
   return (
     <Row>
       <LabeledValue label={label}>{children}</LabeledValue>
@@ -112,12 +114,12 @@ const _TransactionWalletBlock: React.FC<{
       {walletSecond ? (
         <WalletConvert wallets={wallets} />
       ) : (
-        <CurrencyItem
-          logo={walletFirst.logoUrl}
-          name={walletFirst.currency}
-          clickable={false}
-        />
-      )}
+          <CurrencyItem
+            logo={walletFirst.logoUrl}
+            name={walletFirst.currency}
+            clickable={false}
+          />
+        )}
     </TransactionDetailsItem>
   );
 };

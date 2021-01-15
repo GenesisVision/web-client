@@ -5,6 +5,7 @@
   &__details-list-statistic-item-value {
     &--long {
       font-size: $font-size-xxxxsmall;
+      word-break: break-all;
     }
   }
 }
