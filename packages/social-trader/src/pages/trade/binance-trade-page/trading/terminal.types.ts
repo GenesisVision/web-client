@@ -872,7 +872,7 @@ export type ExecutionType =
   | "EXPIRED";
 
 export type EventType =
-  | ("executionReport" | "account" | "outboundAccountInfo")
+  | ("executionReport" | "account" | "outboundAccountPosition")
   | FuturesAccountEventType;
 
 export interface DepthMain {
