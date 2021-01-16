@@ -1,16 +1,9 @@
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
-import {
-  getSymbol,
-  getSymbolFilters
-} from "pages/trade/binance-trade-page/trading/terminal.helpers";
-import {
-  AssetBalance,
-  ExchangeInfo,
-  OrderSide
-} from "pages/trade/binance-trade-page/trading/terminal.types";
+import { getSymbol } from "pages/trade/binance-trade-page/trading/terminal.helpers";
+import { AssetBalance, ExchangeInfo, OrderSide } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { useContext, useMemo } from "react";
 
-import { getBalance } from "../place-order.helpers";
+import { getBalance, getFilterValues } from "../place-order.helpers";
 
 export const usePlaceOrderInfo = ({
   exchangeInfo,
@@ -25,13 +18,14 @@ export const usePlaceOrderInfo = ({
     symbol: { baseAsset, quoteAsset },
     terminalType
   } = useContext(TerminalInfoContext);
-  const filters = getSymbolFilters(
-    exchangeInfo,
-    getSymbol(baseAsset, quoteAsset)
-  );
-  const { minPrice, maxPrice } = filters.priceFilter;
-  const { minQuantity, maxQuantity } = filters.lotSizeFilter;
-  const { minNotional } = filters.minNotionalFilter;
+
+  const {
+    minPrice,
+    maxPrice,
+    minQuantity,
+    maxQuantity,
+    minNotional
+  } = getFilterValues(exchangeInfo, getSymbol(baseAsset, quoteAsset));
 
   const maxQuantityWithWallet = useMemo(() => {
     return side === "Buy"
