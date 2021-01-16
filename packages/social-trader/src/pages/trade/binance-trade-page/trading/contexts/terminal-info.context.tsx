@@ -133,9 +133,9 @@ export const TerminalInfoContextProvider: React.FC<Props> = ({
     (newSymbol: SymbolState) => {
       const symbolPath = stringifySymbolFromToParam(newSymbol);
       setSymbol(newSymbol);
-      updateUrl({ url: symbolPath, updates: { type: terminalType } });
+      updateUrl({ url: symbolPath });
     },
-    [terminalType, updateUrl]
+    [updateUrl]
   );
   const value = useMemo(
     () => ({
