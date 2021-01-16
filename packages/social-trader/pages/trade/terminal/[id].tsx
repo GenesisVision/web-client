@@ -1,15 +1,12 @@
 import withReduxStore from "decorators/with-redux-store";
 import withToken from "decorators/with-token";
 import withTradeLayout from "decorators/with-trade-layout";
-import { BrokerTradeServerType } from "gv-api-web";
+import { BrokerTradeServerType, TradingAccountPermission } from "gv-api-web";
 import { TYPE_PARAM_NAME } from "pages/trade/binance-trade-page/binance-trade.helpers";
 import { getTerminalApiMethods } from "pages/trade/binance-trade-page/services/api.helpers";
 import { TerminalMethodsContextProvider } from "pages/trade/binance-trade-page/trading/contexts/terminal-methods.context";
 import { parseSymbolFromUrlParam } from "pages/trade/binance-trade-page/trading/terminal.helpers";
-import {
-  SymbolState,
-  TerminalType
-} from "pages/trade/binance-trade-page/trading/terminal.types";
+import { SymbolState, TerminalType } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { TerminalPage } from "pages/trade/terminal.page";
 import React from "react";
 import { compose } from "redux";
@@ -32,10 +29,13 @@ const getTerminalType = async (
 ): Promise<TerminalType> => {
   if (params?.["id"]) {
     try {
-      const accountInfo = await api
-        .terminal(token)
-        .getAccountInfo({ accountId: params?.["id"], currency: "USDT" });
-      return (accountInfo.accountType.toLowerCase() as unknown) as TerminalType;
+      const {
+        tradingAccountInfo: { permissions }
+      } = await api.accounts(token).getTradingAccountDetails(params?.["id"]);
+      const isFutures = permissions.find(
+        (permission: TradingAccountPermission) => permission === "Futures"
+      );
+      return isFutures ? "futures" : "spot";
     } catch (e) {
       console.error(e);
     }
