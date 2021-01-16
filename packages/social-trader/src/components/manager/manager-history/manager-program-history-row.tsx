@@ -80,12 +80,16 @@ const _ManagerProgramHistoryRow: React.FC<IManagerHistoryRowProps> = ({
           </ManagerHistoryItem>
           {asset.periodStarts && (
             <ManagerHistoryItem label={t("header-fields.period")}>
-              <ProgramPeriodPie
-                condition={asset.status !== STATUS.CLOSED}
-                loader={t("program-period.program-closed")}
-                start={asset.periodStarts}
-                end={asset.periodEnds}
-              />
+              {asset.type === "FixedPeriod" ? (
+                <ProgramPeriodPie
+                  condition={asset.status !== STATUS.CLOSED}
+                  loader={t("program-period.program-closed")}
+                  start={asset.periodStarts}
+                  end={asset.periodEnds}
+                />
+              ) : (
+                  "—"
+                )}
             </ManagerHistoryItem>
           )}
           <ManagerHistoryItem label={t("header-fields.age")}>

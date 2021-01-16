@@ -4,6 +4,7 @@
     "title": "GENERAL",
     "news-updates": "News and updates",
     "emergency": "Emergency notifications",
+    "social": "Social notifications",
     "FundRebalancing": {
       "disabled-alert": "Disabled rebalancing notifications",
       "enabled-alert": "Enabled rebalancing notifications"
@@ -11,6 +12,10 @@
     "FundNewsAndUpdates": {
       "disabled-alert": "Disabled news and updates notifications",
       "enabled-alert": "Enabled news and updates notifications"
+    },
+    "Social": {
+      "disabled-alert": "Disabled social notifications",
+      "enabled-alert": "Enabled social notifications"
     },
     "FundEndOfPeriod": {
       "disabled-alert": "Disabled the end of period notifications",
