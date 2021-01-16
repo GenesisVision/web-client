@@ -7,6 +7,7 @@ import React, { useContext, useEffect, useMemo, useState } from "react";
 
 import { Positions } from "./positions";
 import { normalizePositionsList } from "./positions.helpers";
+import { getSymbol } from "pages/trade/binance-trade-page/trading/terminal.helpers";
 
 export const PositionsContainer: React.FC = () => {
   const { getPositionInformation } = useContext(TerminalMethodsContext);
@@ -26,7 +27,10 @@ export const PositionsContainer: React.FC = () => {
 
   useEffect(() => {
     if (!exchangeAccountId || !userStream) return;
-    const positions = getPositionInformation!({ accountId: exchangeAccountId });
+    const positions = getPositionInformation!({
+      accountId: exchangeAccountId,
+      symbol: getSymbol(baseAsset, quoteAsset)
+    });
     positions.then(normalizePositionsList).then(setList);
     const positionsStream = filterPositionEventsStream(userStream);
     positionsStream.subscribe(setSocketData);

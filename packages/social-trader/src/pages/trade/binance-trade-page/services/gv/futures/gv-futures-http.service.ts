@@ -16,7 +16,6 @@ import {
 import { Bar } from "pages/trade/binance-trade-page/trading/chart/charting_library/datafeed-api";
 import { getDividerParts } from "pages/trade/binance-trade-page/trading/order-book/order-book.helpers";
 import {
-  Account,
   ChangeLeverageResponse,
   CorrectedRestDepth,
   ExchangeInfo,
@@ -42,6 +41,11 @@ import {
   transformKlineBar,
   transformToUnitedOrder
 } from "../../api.helpers";
+import {
+  mapBinanceRawFuturesAccountInfoToAccount,
+  mapBinanceRawFuturesPositionToFuturesPositionInformation,
+  mapBinanceRawFuturesSymbolBracketToSymbolLeverageBrackets
+} from "pages/trade/binance-trade-page/services/gv/futures/gv-futures-helpers";
 
 export const getExchangeInfo = (): Promise<ExchangeInfo> =>
   (api.terminal().getFuturesExchangeInfo() as unknown) as Promise<ExchangeInfo>;
@@ -138,9 +142,10 @@ export const getUserStreamKey = (
   );
 
 export const getAccountInformation = (accountId?: string) =>
-  (api.terminal().getFuturesAccountInfo({ accountId }) as unknown) as Promise<
-    Account
-  >;
+  api
+    .terminal()
+    .getFuturesAccountInfo({ accountId })
+    .then(mapBinanceRawFuturesAccountInfoToAccount);
 
 export const getTrades = (
   symbol: string,
@@ -204,8 +209,17 @@ export const cancelOrder = (
     accountId
   }) as unknown) as Promise<BinanceRawCancelOrder>;
 
+const postFuturesOrder = (options: any) =>
+  api.terminal().futuresPlaceOrder({
+    ...options,
+    body: {
+      ...options.body,
+      positionSide: options.body.side === "Buy" ? "Long" : "Short"
+    }
+  });
+
 const { postSell, postBuy } = createPlaceBuySellOrderRequest(
-  (api.terminal().futuresPlaceOrder as unknown) as PlaceOrderRequest
+  (postFuturesOrder as unknown) as PlaceOrderRequest
 );
 
 export const getTradeMethod = (side: OrderSide) =>
@@ -254,45 +268,24 @@ export const changeMarginMode = (options: {
 }): Promise<BinanceRawFuturesChangeMarginTypeResult> =>
   api.terminal().changeFuturesMarginType(options);
 
-const mockPositionInformation: FuturesPositionInformation = {
-  entryPrice: "0",
-  marginType: "Isolated",
-  isAutoAddMargin: "0",
-  isolatedMargin: "0",
-  leverage: "0",
-  liquidationPrice: "0",
-  markPrice: "0",
-  maxNotionalValue: "0",
-  positionAmt: "0",
-  symbol: "BTCUSDT",
-  unRealizedProfit: "0",
-  positionSide: "BOTH"
-};
-
-export const getPositionInformation = ({}: {
+export const getPositionInformation = (options: {
+  symbol: string;
   accountId?: string;
 }): Promise<FuturesPositionInformation[]> =>
-  Promise.resolve([mockPositionInformation]);
+  api
+    .terminal()
+    .getFuturesPositionInformation(options)
+    .then(data =>
+      data.map(mapBinanceRawFuturesPositionToFuturesPositionInformation)
+    );
 
-const getMockLeverageBrackets = (symbol: string): SymbolLeverageBrackets => {
-  return {
-    symbol,
-    brackets: [
-      {
-        bracket: 0,
-        initialLeverage: 0,
-        notionalCap: 0,
-        notionalFloor: 0,
-        maintMarginRatio: 0
-      }
-    ]
-  };
-};
-
-export const getLeverageBrackets = ({
-  symbol
-}: {
+export const getLeverageBrackets = (options: {
   symbol: string;
   accountId?: string;
 }): Promise<SymbolLeverageBrackets[]> =>
-  Promise.resolve([getMockLeverageBrackets(symbol)]);
+  api
+    .terminal()
+    .getFuturesBrackets(options)
+    .then(data =>
+      data.map(mapBinanceRawFuturesSymbolBracketToSymbolLeverageBrackets)
+    );

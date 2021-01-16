@@ -11,7 +11,13 @@ interface Props {
 }
 
 const getPositionModeName = (mode: PositionModeType): string => {
-  return mode ? "Hedge mode" : "One way";
+  switch (mode) {
+    case "OneWay":
+      return "One way";
+    case "Hedge":
+    default:
+      return "Hedge mode";
+  }
 };
 
 const _PositionMode: React.FC<Props> = ({ data, onChange }) => {
