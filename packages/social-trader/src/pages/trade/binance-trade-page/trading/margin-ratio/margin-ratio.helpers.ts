@@ -23,7 +23,11 @@ export const getMarginInfo = (
   balances: ExtentedBinanceRawBinanceBalance[],
   currency: TerminalCurrency
 ) => {
-  return balances.find(({ asset }) => asset === currency);
+  const info = balances.find(({ asset }) => asset === currency);
+  return {
+    maintMargin: info?.maintMargin || 0,
+    marginBalance: info?.marginBalance || 0
+  };
 };
 
 export const getMarginRatioColor = (ratio: number): ColoredTextColor => {
