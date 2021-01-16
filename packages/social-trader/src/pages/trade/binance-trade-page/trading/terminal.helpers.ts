@@ -156,7 +156,7 @@ export const getSymbolFilters = (
   };
 };
 
-export const USER_STREAM_ACCOUNT_UPDATE_EVENT_TYPE = "outboundAccountInfo";
+export const USER_STREAM_ACCOUNT_UPDATE_EVENT_TYPE = "outboundAccountPosition";
 
 export const filterOutboundAccountInfoStream = (
   userStream: Observable<any>
