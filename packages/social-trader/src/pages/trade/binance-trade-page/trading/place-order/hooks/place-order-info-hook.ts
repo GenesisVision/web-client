@@ -5,6 +5,15 @@ import { useContext, useMemo } from "react";
 
 import { getBalance, getFilterValues } from "../place-order.helpers";
 
+export interface UsePlaceOrderInfoReturn {
+  minPrice: number;
+  maxPrice: number;
+  minQuantity: number;
+  minNotional: number;
+  maxQuantityWithWallet: number;
+  maxTotalWithWallet: number;
+}
+
 export const usePlaceOrderInfo = ({
   exchangeInfo,
   balances,
@@ -13,7 +22,7 @@ export const usePlaceOrderInfo = ({
   exchangeInfo: ExchangeInfo;
   side: OrderSide;
   balances: AssetBalance[];
-}) => {
+}): UsePlaceOrderInfoReturn => {
   const {
     symbol: { baseAsset, quoteAsset },
     terminalType
