@@ -28,13 +28,18 @@ export const usePlaceOrderInfo = ({
     terminalType
   } = useContext(TerminalInfoContext);
 
+  const filterValues = useMemo(
+    () => getFilterValues(exchangeInfo, getSymbol(baseAsset, quoteAsset)),
+    [baseAsset, quoteAsset]
+  );
+
   const {
     minPrice,
     maxPrice,
     minQuantity,
     maxQuantity,
     minNotional
-  } = getFilterValues(exchangeInfo, getSymbol(baseAsset, quoteAsset));
+  } = filterValues;
 
   const maxQuantityWithWallet = useMemo(() => {
     return side === "Buy"
@@ -53,12 +58,23 @@ export const usePlaceOrderInfo = ({
       ? +getBalance(balances, quoteAsset)
       : Number.MAX_SAFE_INTEGER;
   }, [side, balances, quoteAsset]);
-  return {
-    minPrice,
-    maxPrice,
-    minQuantity,
-    minNotional,
-    maxQuantityWithWallet,
-    maxTotalWithWallet
-  };
+
+  return useMemo(
+    () => ({
+      minPrice,
+      maxPrice,
+      minQuantity,
+      minNotional,
+      maxQuantityWithWallet,
+      maxTotalWithWallet
+    }),
+    [
+      minPrice,
+      maxPrice,
+      minQuantity,
+      minNotional,
+      maxQuantityWithWallet,
+      maxTotalWithWallet
+    ]
+  );
 };
