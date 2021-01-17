@@ -12,11 +12,7 @@ import {
 } from "pages/trade/binance-trade-page/trading/place-order/place-order-settings/time-in-force-field/time-in-force-field";
 import { PlaceOrderSlider } from "pages/trade/binance-trade-page/trading/place-order/place-order-slider";
 import { PlaceOrderSubmitButton } from "pages/trade/binance-trade-page/trading/place-order/place-order-submit-button";
-import {
-  AssetBalance,
-  ExchangeInfo,
-  OrderSide
-} from "pages/trade/binance-trade-page/trading/terminal.types";
+import { AssetBalance, ExchangeInfo, OrderSide } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -28,11 +24,7 @@ import { usePlaceOrderFormReset } from "./hooks/place-order-form-reset.hook";
 import { usePlaceOrderInfo } from "./hooks/place-order-info-hook";
 import { placeOrderDefaultValidationSchema } from "./place-order-validation";
 import { getBalance } from "./place-order.helpers";
-import {
-  IPlaceOrderFormValues,
-  IPlaceOrderHandleSubmitValues,
-  TRADE_FORM_FIELDS
-} from "./place-order.types";
+import { IPlaceOrderFormValues, IPlaceOrderHandleSubmitValues, TRADE_FORM_FIELDS } from "./place-order.types";
 
 export interface ILimitTradeFormProps {
   status: API_REQUEST_STATUS;
@@ -41,10 +33,19 @@ export interface ILimitTradeFormProps {
   onSubmit: (values: IPlaceOrderHandleSubmitValues) => any;
 }
 
-const _LimitTradeForm: React.FC<ILimitTradeFormProps & {
+interface Props extends ILimitTradeFormProps {
   balances: AssetBalance[];
   exchangeInfo: ExchangeInfo;
-}> = ({ status, balances, exchangeInfo, outerPrice, onSubmit, side }) => {
+}
+
+const _LimitTradeForm: React.FC<Props> = ({
+  status,
+  balances,
+  exchangeInfo,
+  outerPrice,
+  onSubmit,
+  side
+}) => {
   const [t] = useTranslation();
 
   const {
