@@ -85,8 +85,7 @@ const _SecurityVerificationForm: React.FC<Props> = ({
             <Row>
                 <Text muted>
                     {t("auth:security-verification.message", {
-                        // email: partiallyHideEmail(email)
-                        email
+                        email: partiallyHideEmail(email)
                     })}
                 </Text>
             </Row>

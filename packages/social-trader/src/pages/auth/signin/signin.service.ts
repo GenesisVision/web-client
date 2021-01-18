@@ -78,7 +78,7 @@ export const useTwoFactorState = (ctx?: NextPageContext) => {
 };
 
 export const initialThreeFactorState = {
-  email: "",
+  email: "test@email.com",
   tempToken: "",
   from: { HOME_ROUTE }
 };

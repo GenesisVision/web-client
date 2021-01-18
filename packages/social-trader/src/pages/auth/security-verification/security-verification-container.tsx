@@ -41,7 +41,7 @@ const _SecurityVerificationContainer: React.FC<Props> = ({ code }) => {
             Push(NOT_FOUND_PAGE_ROUTE);
         }
     }, []);
-    console.log(errorMessage);
+
     return (
         <SecurityVerificationForm
             onSubmit={sendRequest}
