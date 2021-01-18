@@ -51,8 +51,7 @@ interface INotificationOwnProps {
 }
 
 interface IAssetAvatarContainerProps {
-  dark?: boolean;
-  light?: boolean;
+  type?: string;
 }
 
 interface INotificationProps
@@ -82,10 +81,17 @@ const AssetAvatarContainerStyle = css<IAssetAvatarContainerProps>`
   flex-shrink: 0;
   ${height(32)};
   ${width(32)};
-  background-color: ${({ dark, light }) => {
-    if (dark) return $negativeBackgroundColor;
-    if (light) return $labelColor;
-    return $labelColor;
+  background-color: ${({ type }) => {
+    switch (type) {
+      case TYPE.PROFILE: {
+        return $negativeBackgroundColor;
+      }
+      case TYPE.PLATFORM: {
+        return $labelColor;
+      }
+      default:
+        return $labelColor;
+    }
   }};
 `;
 
@@ -98,8 +104,6 @@ const AssetAvatarDivContainer = styled.div<IAssetAvatarContainerProps>`
 `;
 
 const _NotificationAssetAvatar: React.FC<INotificationProps> = ({
-  dark,
-  light,
   type,
   closeNotifications,
   platformAssetDetails,
@@ -125,7 +129,7 @@ const _NotificationAssetAvatar: React.FC<INotificationProps> = ({
     )
     : null;
   return (
-    <Tag to={to} onClick={closeNotifications} dark={dark} light={light}>
+    <Tag to={to} onClick={closeNotifications} type={type}>
       <AssetAvatar url={logoUrl} alt={type} color={assetDetails?.color} />
     </Tag>
   );
@@ -165,19 +169,12 @@ const _Notification: React.FC<INotificationProps> = props => {
   return (
     <Container center={false}>
       <RowItem>
-        {staticIconUrl ? (
-          <AssetAvatarDivContainer
-            dark={type === TYPE.PROFILE}
-            light={type === TYPE.PLATFORM}
-          >
+        {!location ? (
+          <AssetAvatarDivContainer type={type}>
             <ImageBaseElement src={staticIconUrl} alt={type} />
           </AssetAvatarDivContainer>
         ) : (
-            <NotificationAssetAvatar
-              {...props}
-              dark={type === TYPE.PROFILE}
-              light={type === TYPE.PLATFORM}
-            />
+            <NotificationAssetAvatar {...props} type={type} />
           )}
       </RowItem>
 
