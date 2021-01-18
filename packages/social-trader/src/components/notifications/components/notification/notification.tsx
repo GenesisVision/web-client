@@ -2,8 +2,8 @@ import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
 import ImageBaseElement from "components/avatar/image-base.element";
 import Link, { LinkProps } from "components/link/link";
 import { useToLink } from "components/link/link.helper";
-import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { RowItem } from "components/row-item/row-item";
 import { Text } from "components/text/text";
 import dayjs from "dayjs";
 import { NotificationViewModel } from "gv-api-web";
@@ -39,8 +39,11 @@ import {
 } from "utils/style/sizes";
 
 enum TYPE {
-  PROFILE = "profile",
-  PLATFORM = "platform"
+  PROFILE = "Profile",
+  PLATFORM = "Platform",
+  SOCIAL = "Social",
+  ASSET = "Asset",
+  TRADING_ACCOUNT = "TradingAccount"
 }
 
 interface INotificationOwnProps {
@@ -54,15 +57,15 @@ interface IAssetAvatarContainerProps {
 
 interface INotificationProps
   extends NotificationViewModel,
-    INotificationOwnProps,
-    IAssetAvatarContainerProps {}
+  INotificationOwnProps,
+  IAssetAvatarContainerProps { }
 
 const getStaticIconUrl = (type: string): string | null => {
   return type.indexOf(TYPE.PROFILE) !== -1
     ? RedUserIcon
     : type.indexOf(TYPE.PLATFORM) !== -1
-    ? NewsIcon
-    : null;
+      ? NewsIcon
+      : null;
 };
 
 const AssetAvatarContainerStyle = css<IAssetAvatarContainerProps>`
@@ -81,7 +84,7 @@ const AssetAvatarContainerStyle = css<IAssetAvatarContainerProps>`
   }};
 `;
 
-const AssetAvatarLinkContainer = styled(Link)<IAssetAvatarContainerProps>`
+const AssetAvatarLinkContainer = styled(Link) <IAssetAvatarContainerProps>`
   ${AssetAvatarContainerStyle}
 `;
 
@@ -108,13 +111,13 @@ const _NotificationAssetAvatar: React.FC<INotificationProps> = ({
     : AssetAvatarDivContainer;
   const to = assetDetails?.url
     ? linkCreator(
-        assetDetails?.assetType === "Program"
-          ? composeProgramDetailsUrl(assetDetails?.url)
-          : composeFundsDetailsUrl(assetDetails?.url),
-        assetDetails?.assetType === "Program"
-          ? PROGRAM_DETAILS_FOLDER_ROUTE
-          : FUND_DETAILS_FOLDER_ROUTE
-      )
+      assetDetails?.assetType === "Program"
+        ? composeProgramDetailsUrl(assetDetails?.url)
+        : composeFundsDetailsUrl(assetDetails?.url),
+      assetDetails?.assetType === "Program"
+        ? PROGRAM_DETAILS_FOLDER_ROUTE
+        : FUND_DETAILS_FOLDER_ROUTE
+    )
     : null;
   return (
     <Tag to={to} onClick={closeNotifications} dark={dark} light={light}>
@@ -135,7 +138,7 @@ const Description = styled(Row)`
   letter-spacing: 0.2px;
 `;
 
-const Date = styled(Row)<{ unread?: boolean }>`
+const Date = styled(Row) <{ unread?: boolean }>`
   ${({ unread }) =>
     unread &&
     css`
@@ -151,25 +154,26 @@ const Content = styled.div`
 `;
 
 const _Notification: React.FC<INotificationProps> = props => {
-  const { date, text, isUnread, type } = props;
-  const staticIconUrl = getStaticIconUrl(type.toLowerCase());
+  const { date, text, isUnread, type, location } = props;
+  const staticIconUrl = getStaticIconUrl(type);
+
   return (
     <Container center={false}>
       <RowItem>
         {staticIconUrl ? (
           <AssetAvatarDivContainer
-            dark={type.toLowerCase().includes("profile")}
-            light={type.toLowerCase().includes("platform")}
+            dark={type === TYPE.PROFILE}
+            light={type === TYPE.PLATFORM}
           >
             <ImageBaseElement src={staticIconUrl} alt={type} />
           </AssetAvatarDivContainer>
         ) : (
-          <NotificationAssetAvatar
-            {...props}
-            dark={type.toLowerCase().includes("profile")}
-            light={type.toLowerCase().includes("platform")}
-          />
-        )}
+            <NotificationAssetAvatar
+              {...props}
+              dark={type === TYPE.PROFILE}
+              light={type === TYPE.PLATFORM}
+            />
+          )}
       </RowItem>
 
       <RowItem>
