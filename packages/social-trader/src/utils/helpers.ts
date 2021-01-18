@@ -180,11 +180,7 @@ export const getRandomEmail = () =>
   `${getRandomWord()}@${getRandomWord()}.${getRandomWord()}`;
 
 export const partiallyHideEmail = (email: string): string => {
-  if (!email) {
-    return "";
-  }
   const [first, second] = email.split("@");
-  return `${first.slice(0, -3)}***@***${second.slice(3)}`;
   const starsAmountBefore: number = Math.floor(first.length / 3);
   const starsAmountAfter: number = Math.floor(second.length / 3);
   return `${first.slice(0, first.length - starsAmountBefore)}${"*".repeat(
