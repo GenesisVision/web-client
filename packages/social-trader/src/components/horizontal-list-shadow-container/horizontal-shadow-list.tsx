@@ -11,7 +11,8 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 
 const ListContainer = styled.div<{ withScroll?: boolean }>`
   display: flex;
-  padding-bottom: ${$paddingXsmall}px;
+  padding-bottom: ${({ withScroll = true }) =>
+    withScroll ? `${$paddingXsmall}px` : ""};
   overflow-x: scroll;
   width: 100%;
   scrollbar-width: 0;
