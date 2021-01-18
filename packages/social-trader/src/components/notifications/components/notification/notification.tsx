@@ -61,11 +61,16 @@ interface INotificationProps
   IAssetAvatarContainerProps { }
 
 const getStaticIconUrl = (type: string): string | null => {
-  return type.indexOf(TYPE.PROFILE) !== -1
-    ? RedUserIcon
-    : type.indexOf(TYPE.PLATFORM) !== -1
-      ? NewsIcon
-      : null;
+  switch (type) {
+    case TYPE.PROFILE: {
+      return RedUserIcon;
+    }
+    case TYPE.PLATFORM: {
+      return NewsIcon;
+    }
+    default:
+      return null;
+  }
 };
 
 const AssetAvatarContainerStyle = css<IAssetAvatarContainerProps>`
