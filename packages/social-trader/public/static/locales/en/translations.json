@@ -206,7 +206,10 @@
     "gv-funds": "Funds",
     "gv-programs": "Programs",
     "trade": "Trade",
-    "terminal": "Trading terminal",
+    "terminal": {
+      "spot": "Trading terminal spot",
+      "futures": "Trading terminal futures"
+    },
     "mt4": "MetaTrader 4 Terminal",
     "mt5": "MetaTrader 5 Terminal",
     "coming-soon": "Coming soon",
