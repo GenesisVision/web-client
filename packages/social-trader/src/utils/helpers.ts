@@ -180,12 +180,7 @@ export const getRandomEmail = () =>
   `${getRandomWord()}@${getRandomWord()}.${getRandomWord()}`;
 
 export const partiallyHideEmail = (email: string): string => {
-  const [first, second] = email.split("@");
-  const starsAmountBefore: number = Math.floor(first.length / 3);
-  const starsAmountAfter: number = Math.floor(second.length / 3);
-  return `${first.slice(0, first.length - starsAmountBefore)}${"*".repeat(
-    starsAmountBefore
-  )}@${"*".repeat(starsAmountAfter)}${second.slice(starsAmountAfter)}`;
+  return email.replace(/(?<=^[A-Za-z0-9]{3}).*?(?=@)/, "***");
 };
 
 export const getRandomColorNumber = () =>
