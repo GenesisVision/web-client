@@ -207,8 +207,8 @@
     "gv-programs": "Programs",
     "trade": "Trade",
     "terminal": {
-      "spot": "Trading terminal spot",
-      "futures": "Trading terminal futures"
+      "spot": "Trading terminal Spot",
+      "futures": "Trading terminal Futures"
     },
     "mt4": "MetaTrader 4 Terminal",
     "mt5": "MetaTrader 5 Terminal",
