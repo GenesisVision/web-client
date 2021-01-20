@@ -9,15 +9,16 @@ import { SIGNUP_ROUTE } from "routes/app.routes";
 import { initializeStore } from "store";
 import { getParamsFromCtx } from "utils/ssr-helpers";
 
-const Page: NextPage<Props> = ({ code }) => {
-    return <SecurityVerificationContainer code={code} />;
+const Page: NextPage<Props> = ({ code, email }) => {
+    return <SecurityVerificationContainer code={code} email={email} />;
 };
 Page.getInitialProps = async (ctx: NextPageContext) => {
-    const { code } = getParamsFromCtx(ctx);
-    return { namespacesRequired: ["auth"], code };
+    const { code, email } = getParamsFromCtx(ctx);
+    return { namespacesRequired: ["auth"], code, email };
 };
 interface Props {
     code: string;
+    email: string;
 }
 
 export default compose(
