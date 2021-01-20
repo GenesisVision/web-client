@@ -4,6 +4,7 @@ import { AssetBalance, ExchangeInfo, OrderSide } from "pages/trade/binance-trade
 import { useContext, useMemo } from "react";
 
 import { getBalance, getFilterValues } from "../place-order.helpers";
+import { TerminalPlaceOrderContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-place-order.context";
 
 export interface UsePlaceOrderInfoReturn {
   minPrice: number;
@@ -23,6 +24,7 @@ export const usePlaceOrderInfo = ({
   side: OrderSide;
   balances: AssetBalance[];
 }): UsePlaceOrderInfoReturn => {
+  const { leverage } = useContext(TerminalPlaceOrderContext);
   const {
     symbol: { baseAsset, quoteAsset },
     terminalType
@@ -55,9 +57,9 @@ export const usePlaceOrderInfo = ({
 
   const maxTotalWithWallet = useMemo(() => {
     return side === "Buy"
-      ? +getBalance(balances, quoteAsset)
+      ? +getBalance(balances, quoteAsset) * leverage
       : Number.MAX_SAFE_INTEGER;
-  }, [side, balances, quoteAsset]);
+  }, [side, balances, quoteAsset, leverage]);
 
   return useMemo(
     () => ({
