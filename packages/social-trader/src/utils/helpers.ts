@@ -188,10 +188,7 @@ const getRandomColor = () =>
 export const tableLoaderCreator = (
   itemCreator: (...args: any) => any,
   count: number | undefined = 10
-) =>
-  Array(count)
-    .fill("")
-    .map(itemCreator);
+) => Array(count).fill("").map(itemCreator);
 
 export const rawUrlEncode = (str: string): string =>
   encodeURIComponent(str)
