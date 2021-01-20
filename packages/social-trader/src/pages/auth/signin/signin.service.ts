@@ -16,6 +16,7 @@ export enum CODE_TYPE {
 }
 
 export const TWO_FACTOR_KEY = "TWO_FACTOR_KEY";
+export const THREE_FACTOR_KEY = "THREE_FACTOR_KEY";
 
 export const client = "Web";
 
@@ -73,6 +74,31 @@ export const useTwoFactorState = (ctx?: NextPageContext) => {
     clearTwoFactorState: clear,
     storeTwoFactorState: set,
     getTwoFactorState: get
+  };
+};
+
+export const initialThreeFactorState = {
+  email: "",
+  tempToken: "",
+  from: { HOME_ROUTE }
+};
+
+export type ThreeFactorStateType = {
+  email: string;
+  tempToken: string;
+  from?: string | object;
+};
+
+export const useThreeFactorState = (ctx?: NextPageContext) => {
+  const { clear, get, set } = useCookieState<ThreeFactorStateType>({
+    ctx,
+    initialState: initialThreeFactorState,
+    key: THREE_FACTOR_KEY
+  });
+  return {
+    clearThreeFactorState: clear,
+    storeThreeFactorState: set,
+    getThreeFactorState: get
   };
 };
 
