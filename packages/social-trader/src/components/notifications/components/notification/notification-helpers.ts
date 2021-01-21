@@ -28,7 +28,7 @@ export const getStaticIconUrl = (type: string): string | null => {
 
 export const getLink = (location: NotificationLocationViewModel): string => {
   const { id } = location;
-  switch (location?.location) {
+  switch (location.location) {
     case LINKS.TRADING_ACCOUNT: {
       return composeAccountDetailsUrl(id);
     }

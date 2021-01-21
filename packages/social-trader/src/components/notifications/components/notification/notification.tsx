@@ -79,16 +79,10 @@ const AssetAvatarContainerStyle = css<IAssetAvatarContainerProps>`
   ${height(32)};
   ${width(32)};
   background-color: ${({ type }) => {
-    switch (type) {
-      case TYPE.PROFILE: {
-        return $negativeBackgroundColor;
-      }
-      case TYPE.PLATFORM: {
-        return $labelColor;
-      }
-      default:
-        return $labelColor;
+    if (type === TYPE.PROFILE) {
+      return $negativeBackgroundColor;
     }
+    return $labelColor;
   }};
 `;
 
