@@ -2,7 +2,6 @@ import { useAccountCurrency } from "hooks/account-currency.hook";
 import { useGetRate } from "hooks/get-rate.hook";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import { formatValueWithTick } from "pages/trade/binance-trade-page/trading/terminal.helpers";
-import { TransferButton } from "pages/trade/binance-trade-page/trading/transfer/transfer.button";
 import React, { useContext, useEffect } from "react";
 import { formatCurrencyValue } from "utils/formatter";
 
@@ -35,11 +34,6 @@ const _FundsRow: React.FC<Props> = ({
       <td>{formatValueWithTick(available, "0.00000001")}</td>
       <td>{locked}</td>
       <td>{!isRatePending && formatCurrencyValue(+total * rate, currency)}</td>
-      {terminalType === "futures" && (
-        <td>
-          <TransferButton asset={asset} />
-        </td>
-      )}
     </tr>
   );
 };
