@@ -10,6 +10,17 @@ import {
   composeManagerDetailsUrl,
   composeProgramDetailsUrl
 } from "utils/compose-url";
+import {
+  $notificationAssetColor,
+  $notificationDefaultColor,
+  $notificationPlatformAssetColor,
+  $notificationPlatformColor,
+  $notificationProfileColor,
+  $notificationSignalColor,
+  $notificationSocialColor,
+  $notificationTradingAccountColor,
+  $notificationUserColor
+} from "utils/style/colors";
 
 import { LINKS, TYPE } from "./notification";
 
@@ -61,30 +72,30 @@ export const getLink = (location: NotificationLocationViewModel): string => {
 export const getColor = (type: string): string => {
   switch (type) {
     case TYPE.PROFILE: {
-      return "#D6CE93";
+      return $notificationProfileColor;
     }
     case TYPE.PLATFORM: {
-      return "#D8A48F";
+      return $notificationPlatformColor;
     }
     case TYPE.ASSET: {
-      return "#6AB547";
+      return $notificationAssetColor;
     }
     case TYPE.SOCIAL: {
-      return "#EDD83D";
+      return $notificationSocialColor;
     }
     case TYPE.TRADING_ACCOUNT: {
-      return "#e81652";
+      return $notificationTradingAccountColor;
     }
     case TYPE.USER: {
-      return "#4381C1";
+      return $notificationUserColor;
     }
     case TYPE.SIGNAL: {
-      return "#FF7D00";
+      return $notificationSignalColor;
     }
     case TYPE.PLATFORM_ASSET: {
-      return "#3BF4FB";
+      return $notificationPlatformAssetColor;
     }
     default:
-      return "#FFFFFF";
+      return $notificationDefaultColor;
   }
 };
