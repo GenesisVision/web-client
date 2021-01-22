@@ -35,7 +35,6 @@ const _PositionsRow: React.FC<Props> = ({
         {(+positionAmt * +markPrice) / +leverage} ({marginType})
       </TableCell>
       <TableCell>{unRealizedProfit}</TableCell>
-      <TableCell>{"Close position"}</TableCell>
     </TableRow>
   );
 };
