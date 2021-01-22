@@ -150,7 +150,8 @@ const _ProgramDetailsStatisticsElements: React.FC<IProgramDetailsStatisticsEleme
             >
               <NumberFormat
                 value={
-                  statistic.profitFactor !== null || undefined
+                  statistic.profitFactor !== undefined &&
+                    statistic.profitFactor !== null
                     ? formatValue(statistic.profitFactor, 2)
                     : "-"
                 }
