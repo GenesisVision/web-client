@@ -5,12 +5,12 @@ import DetailsStatisticsElements from "components/details/details-description-se
 import { LabeledValue } from "components/labeled-value/labeled-value";
 import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import ProgramPeriodLine from "components/program-period/program-period-line/program-period-line";
-import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { RowItem } from "components/row-item/row-item";
 import { Text } from "components/text/text";
-import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import Tooltip from "components/tooltip/tooltip";
 import { TooltipContent } from "components/tooltip/tooltip-content";
+import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import { ProgramChartStatistic } from "gv-api-web";
 import React from "react";
@@ -150,7 +150,7 @@ const _ProgramDetailsStatisticsElements: React.FC<IProgramDetailsStatisticsEleme
             >
               <NumberFormat
                 value={
-                  statistic.profitFactor !== undefined
+                  statistic.profitFactor !== null || undefined
                     ? formatValue(statistic.profitFactor, 2)
                     : "-"
                 }
@@ -191,9 +191,9 @@ const _ProgramDetailsStatisticsElements: React.FC<IProgramDetailsStatisticsEleme
                 value={
                   statistic.tradingVolume !== undefined
                     ? formatCurrencyValue(
-                        statistic.tradingVolume,
-                        statisticCurrency //statistic.programCurrency
-                      )
+                      statistic.tradingVolume,
+                      statisticCurrency //statistic.programCurrency
+                    )
                     : "-"
                 }
                 displayType="text"
