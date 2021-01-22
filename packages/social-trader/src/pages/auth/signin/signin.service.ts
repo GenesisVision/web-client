@@ -85,7 +85,7 @@ export const initialThreeFactorState = {
 
 export type ThreeFactorStateType = {
   email: string;
-  tempToken: string;
+  tempToken?: string;
   from?: string | object;
 };
 
