@@ -101,12 +101,12 @@ const _SecurityVerificationForm: React.FC<Props> = ({
 export interface ISecurityVerificationFormValues {
     [FIELDS.code]: string;
     [FIELDS.email]: string;
-    [FIELDS.token]?: string;
+    [FIELDS.token]: string;
 }
 
 interface Props {
     email: string;
-    token?: string;
+    token: string;
     onSubmit: (values: ISecurityVerificationFormValues) => void;
     errorMessage: string;
     isChecking?: boolean;
