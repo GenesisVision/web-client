@@ -48,7 +48,7 @@ const _TradingTables: React.FC<Props> = () => {
           />
           <GVTab value={TABS.ORDER_HISTORY} label={t("Order history")} />
           <GVTab value={TABS.TRADE_HISTORY} label={t("Trade history")} />
-          <GVTab value={TABS.FUNDS} label={t("Funds")} />
+          <GVTab value={TABS.FUNDS} visible={!isFutures} label={t("Funds")} />
         </GVTabs>
       </DefaultBlock>
       <div className={styles["trading-tables__tables-container"]}>
