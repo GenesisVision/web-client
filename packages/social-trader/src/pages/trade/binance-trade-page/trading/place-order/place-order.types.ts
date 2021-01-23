@@ -1,7 +1,12 @@
-import {
-  OrderType,
-  TimeInForce
-} from "pages/trade/binance-trade-page/trading/terminal.types";
+import { OrderType, TimeInForce } from "pages/trade/binance-trade-page/trading/terminal.types";
+
+export interface FilterValues {
+  minPrice: number;
+  maxPrice: number;
+  minQuantity: number;
+  maxQuantity: number;
+  minNotional: number;
+}
 
 export type QuantityType = string;
 export type TotalType = string;
