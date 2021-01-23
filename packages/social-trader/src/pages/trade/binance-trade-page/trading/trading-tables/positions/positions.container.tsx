@@ -1,17 +1,19 @@
 import { filterPositionEventsStream } from "pages/trade/binance-trade-page/services/futures/binance-futures.helpers";
-import { FuturesAccountUpdateEvent } from "pages/trade/binance-trade-page/services/futures/binance-futures.types";
+import { FuturesAccountEventPosition } from "pages/trade/binance-trade-page/services/futures/binance-futures.types";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
-import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-methods.context";
 import { FuturesPositionInformation } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 
 import { Positions } from "./positions";
-import { normalizePositionsList } from "./positions.helpers";
+import {
+  mapBinanceRawFuturesAccountPositionToFuturesPositionInformation,
+  normalizePositionsList,
+  updateList
+} from "./positions.helpers";
 import { getSymbol } from "pages/trade/binance-trade-page/trading/terminal.helpers";
 
 export const PositionsContainer: React.FC = () => {
-  const { getPositionInformation } = useContext(TerminalMethodsContext);
-  const { exchangeAccountId } = useContext(TerminalInfoContext);
+  const { exchangeAccountId, accountInfo } = useContext(TerminalInfoContext);
 
   const {
     userStream,
@@ -21,30 +23,42 @@ export const PositionsContainer: React.FC = () => {
   const [list, setList] = useState<{
     [key: string]: FuturesPositionInformation;
   }>({});
-  const [socketData, setSocketData] = useState<
-    FuturesAccountUpdateEvent | undefined
-  >();
+  const [socketData, setSocketData] = useState<{
+    [key: string]: FuturesAccountEventPosition;
+  }>({});
 
   useEffect(() => {
-    if (!exchangeAccountId || !userStream) return;
-    const positions = getPositionInformation!({
-      accountId: exchangeAccountId,
-      symbol: getSymbol(baseAsset, quoteAsset)
-    });
-    positions.then(normalizePositionsList).then(setList);
+    if (!userStream) return;
     const positionsStream = filterPositionEventsStream(userStream);
-    positionsStream.subscribe(setSocketData);
+    positionsStream.subscribe(({ positions }) => {
+      setSocketData(normalizePositionsList(positions));
+    });
   }, [exchangeAccountId, baseAsset, quoteAsset, userStream]);
 
   useEffect(() => {
-    if (!socketData) return;
-    const updatedList = { ...list };
-    //
-    // Updating
-    //
+    if (Object.values(list).length || !accountInfo?.positions) return;
+    const positionsForSymbol = accountInfo.positions.filter(
+      ({ symbol }) => symbol === getSymbol(baseAsset, quoteAsset)
+    );
+    setList(
+      normalizePositionsList(
+        positionsForSymbol.map(
+          mapBinanceRawFuturesAccountPositionToFuturesPositionInformation
+        )
+      )
+    );
+  }, [accountInfo]);
+
+  useEffect(() => {
+    if (!Object.values(list).length || !list) return;
+    const updatedList = updateList(list, socketData);
     setList(updatedList);
   }, [socketData]);
 
-  const items = useMemo(() => Object.values(list), [list]);
+  const items = useMemo(
+    () => Object.values(list).filter(({ positionAmt }) => positionAmt > 0),
+    [list]
+  );
+
   return <Positions items={items} />;
 };
