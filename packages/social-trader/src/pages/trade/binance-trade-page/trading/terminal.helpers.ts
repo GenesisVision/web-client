@@ -8,6 +8,7 @@ import {
   Account,
   AssetBalance,
   ExchangeInfo,
+  FuturesPositionInformation,
   MergedTickerSymbolType,
   SymbolState,
   TerminalCurrency,
@@ -22,6 +23,11 @@ import { formatValue } from "utils/formatter";
 import { changeLocation, safeGetElemFromArray } from "utils/helpers";
 import { getLocation } from "utils/location";
 import { AnyObjectType } from "utils/types";
+import { BinanceRawFuturesAccountPosition } from "gv-api-web";
+import {
+  mapBinanceRawFuturesAccountPositionToFuturesPositionInformation,
+  updateList
+} from "pages/trade/binance-trade-page/trading/trading-tables/positions/positions.helpers";
 
 export const TERMINAL_ROUTE_SYMBOL_SEPARATOR = "_";
 
@@ -38,9 +44,7 @@ export const generateOrderMessage = (
   symbol: MergedTickerSymbolType
 ): string => {
   const { stepSize } = symbol.lotSizeFilter;
-  const orderType = setUpperFirstLetter(order.type)
-    .split("_")
-    .join(" ");
+  const orderType = setUpperFirstLetter(order.type).split("_").join(" ");
   const executionTypeTitle =
     order.executionType?.toLowerCase() === "new"
       ? "Created"
@@ -178,6 +182,14 @@ const normalizeBalanceList = (
   return initObject;
 };
 
+const normalizePositionsList = (
+  list: FuturesPositionInformation[]
+): { [keys: string]: BinanceRawFuturesAccountPosition } => {
+  const initObject: AnyObjectType = {};
+  list.forEach(item => (initObject[item.symbol] = item));
+  return initObject;
+};
+
 export const updateAccountInfo = (currentData: Account, updates: Account) => {
   const normalizedCurrentBalances = normalizeBalanceList(currentData.balances);
   const normalizedUpdatesBalances = normalizeBalanceList(
@@ -187,7 +199,23 @@ export const updateAccountInfo = (currentData: Account, updates: Account) => {
     ...normalizedCurrentBalances,
     ...normalizedUpdatesBalances
   });
-  return { ...currentData, ...updates, balances };
+
+  const normalizedCurrentPositions = normalizePositionsList(
+    currentData.positions?.map(
+      mapBinanceRawFuturesAccountPositionToFuturesPositionInformation
+    ) || []
+  );
+  const normalizedUpdatesPositions = normalizePositionsList(
+    updates.positions?.map(
+      mapBinanceRawFuturesAccountPositionToFuturesPositionInformation
+    ) || []
+  );
+
+  const positions = Object.values(
+    updateList(normalizedCurrentPositions, normalizedUpdatesPositions)
+  );
+
+  return { ...currentData, ...updates, balances, positions };
 };
 
 export const stringifySymbolFromToParam = (symbol: SymbolState): string => {
