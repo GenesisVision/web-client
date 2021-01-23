@@ -95,7 +95,7 @@ export const mapBinanceRawFuturesPositionToFuturesPositionInformation = ({
   leverage,
   liquidationPrice,
   markPrice,
-  maxNotionalValue,
+  maxNotionalValue: +maxNotionalValue,
   positionAmt: quantity,
   symbol,
   unRealizedProfit: unrealizedPnL,
