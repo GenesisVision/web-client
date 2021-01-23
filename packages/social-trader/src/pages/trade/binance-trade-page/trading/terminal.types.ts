@@ -84,7 +84,7 @@ export interface FuturesPositionInformation {
   leverage: number;
   liquidationPrice: number;
   markPrice: number;
-  maxNotionalValue: string;
+  maxNotionalValue: number;
   positionAmt: number;
   symbol: string;
   unRealizedProfit: number;
