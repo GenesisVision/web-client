@@ -2,7 +2,7 @@ import withReduxStore from "decorators/with-redux-store";
 import withToken from "decorators/with-token";
 import withTradeLayout from "decorators/with-trade-layout";
 import { BrokerTradeServerType, TradingAccountPermission } from "gv-api-web";
-import { getTerminalApiMethods, TYPE_PARAM_NAME } from "pages/trade/binance-trade-page/binance-trade.helpers";
+import { getTerminalApiMethods } from "pages/trade/binance-trade-page/binance-trade.helpers";
 import { TerminalMethodsContextProvider } from "pages/trade/binance-trade-page/trading/contexts/terminal-methods.context";
 import { parseSymbolFromUrlParam } from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import { SymbolState, TerminalType } from "pages/trade/binance-trade-page/trading/terminal.types";
@@ -39,7 +39,7 @@ const getTerminalType = async (
       console.error(e);
     }
   }
-  if (params?.[TYPE_PARAM_NAME]) return params[TYPE_PARAM_NAME].toLowerCase();
+  if (params?.["type"]) return params["type"].toLowerCase();
   return "spot";
 };
 
