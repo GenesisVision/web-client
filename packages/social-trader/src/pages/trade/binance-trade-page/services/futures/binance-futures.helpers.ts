@@ -10,12 +10,16 @@ import {
   FuturesTradeOrder,
   FuturesTradeOrderUpdateEvent
 } from "pages/trade/binance-trade-page/services/futures/binance-futures.types";
-import { USER_STREAM_ACCOUNT_UPDATE_EVENT_TYPE } from "pages/trade/binance-trade-page/trading/terminal.helpers";
+import {
+  setUpperFirstLetter,
+  USER_STREAM_ACCOUNT_UPDATE_EVENT_TYPE
+} from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import {
   Account,
   AssetBalance,
   BalanceForTransfer,
   MarkPrice,
+  PositionSideType,
   Ticker
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { Observable } from "rxjs";
@@ -137,7 +141,7 @@ export const futuresAccountEventPositionTransform = (
     unrealizedProfit: socketData.up,
     marginType: socketData.mt,
     isolatedWallet: socketData.iw,
-    positionSide: socketData.ps
+    positionSide: setUpperFirstLetter(socketData.ps) as PositionSideType
   };
 };
 
