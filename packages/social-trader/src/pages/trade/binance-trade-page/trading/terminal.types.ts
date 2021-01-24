@@ -40,6 +40,8 @@ export type SymbolState = {
   baseAsset: TerminalCurrency;
 };
 
+export type Position = BinanceRawFuturesAccountPosition;
+
 export type MarginModeType = BinanceFuturesMarginType;
 
 export type TerminalType = "spot" | "futures";
@@ -543,7 +545,7 @@ export interface ExtentedBinanceRawBinanceBalance {
 }
 
 export type Account = BinanceRawAccountInfo & {
-  positions?: Array<BinanceRawFuturesAccountPosition>;
+  positions?: Array<Position>;
   balances: Array<ExtentedBinanceRawBinanceBalance>;
 };
 
