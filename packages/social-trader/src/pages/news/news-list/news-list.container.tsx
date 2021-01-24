@@ -1,8 +1,4 @@
-import {
-  initialOptions,
-  SkipTake,
-  TAKE_COUNT
-} from "components/notifications/components/notifications.helpers";
+import { initialOptions, SkipTake, TAKE_COUNT } from "components/notifications/components/notifications.helpers";
 import { MediaPostItemsViewModel } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
 import useIsOpen from "hooks/is-open.hook";
@@ -65,7 +61,7 @@ const _NewsListContainer: React.FC<INewsListContainerProps> = ({
 
   useEffect(() => {
     if (isUpdatingPage) {
-      const newOptions = calculateOptions(options, data.total);
+      const newOptions = calculateOptions(options, data!.total);
       setOptions(newOptions);
       setNotUpdatingPage();
     }
