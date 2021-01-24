@@ -203,7 +203,7 @@ export const updatePositionList = (
   const updatedList = JSON.parse(JSON.stringify(list));
   Object.entries(updates).forEach(([symbol, data]) => {
     Object.keys(data).forEach(side => {
-      if (!updatedList[symbol]) updatedList[symbol] = {};
+      if (!updatedList[symbol]?.[side]) return;
       updatedList[symbol][side] = {
         ...updatedList[symbol][side],
         ...updates[symbol][side]
