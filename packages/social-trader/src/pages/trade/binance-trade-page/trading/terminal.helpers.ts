@@ -8,8 +8,8 @@ import {
   Account,
   AssetBalance,
   ExchangeInfo,
-  FuturesPositionInformation,
   MergedTickerSymbolType,
+  Position,
   SymbolState,
   TerminalCurrency,
   UnitedOrder
@@ -23,11 +23,6 @@ import { formatValue } from "utils/formatter";
 import { changeLocation, safeGetElemFromArray } from "utils/helpers";
 import { getLocation } from "utils/location";
 import { AnyObjectType } from "utils/types";
-import { BinanceRawFuturesAccountPosition } from "gv-api-web";
-import {
-  mapBinanceRawFuturesAccountPositionToFuturesPositionInformation,
-  updateList
-} from "pages/trade/binance-trade-page/trading/trading-tables/positions/positions.helpers";
 
 export const TERMINAL_ROUTE_SYMBOL_SEPARATOR = "_";
 
@@ -183,11 +178,39 @@ const normalizeBalanceList = (
 };
 
 const normalizePositionsList = (
-  list: FuturesPositionInformation[]
-): { [keys: string]: BinanceRawFuturesAccountPosition } => {
+  list: Position[]
+): { [keys: string]: Position } => {
   const initObject: AnyObjectType = {};
-  list.forEach(item => (initObject[item.symbol] = item));
+  list.forEach(item => {
+    if (!initObject[item.symbol]) initObject[item.symbol] = {};
+    initObject[item.symbol][item.positionSide] = item;
+  });
   return initObject;
+};
+
+const flatNormalizedPositions = (positions: {
+  [keys: string]: Position;
+}): Position[] => {
+  return Object.values(positions)
+    .map(item => Object.values(item))
+    .flat();
+};
+
+export const updatePositionList = (
+  list: AnyObjectType,
+  updates: AnyObjectType
+): AnyObjectType => {
+  const updatedList = JSON.parse(JSON.stringify(list));
+  Object.entries(updates).forEach(([symbol, data]) => {
+    Object.keys(data).forEach(side => {
+      if (!updatedList[symbol]) updatedList[symbol] = {};
+      updatedList[symbol][side] = {
+        ...updatedList[symbol][side],
+        ...updates[symbol][side]
+      };
+    });
+  });
+  return updatedList;
 };
 
 export const updateAccountInfo = (currentData: Account, updates: Account) => {
@@ -201,18 +224,14 @@ export const updateAccountInfo = (currentData: Account, updates: Account) => {
   });
 
   const normalizedCurrentPositions = normalizePositionsList(
-    currentData.positions?.map(
-      mapBinanceRawFuturesAccountPositionToFuturesPositionInformation
-    ) || []
+    currentData.positions || []
   );
   const normalizedUpdatesPositions = normalizePositionsList(
-    updates.positions?.map(
-      mapBinanceRawFuturesAccountPositionToFuturesPositionInformation
-    ) || []
+    updates.positions || []
   );
 
-  const positions = Object.values(
-    updateList(normalizedCurrentPositions, normalizedUpdatesPositions)
+  const positions = flatNormalizedPositions(
+    updatePositionList(normalizedCurrentPositions, normalizedUpdatesPositions)
   );
 
   return { ...currentData, ...updates, balances, positions };
