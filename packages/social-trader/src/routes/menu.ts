@@ -144,7 +144,7 @@ const mainMenuItemsUnion = [
       {
         Icon: TerminalIcon,
         route: TERMINAL_ROUTE,
-        label: "navigation.terminal"
+        label: "navigation.terminal.main"
       }
       /*{
         Icon: TerminalIcon,
