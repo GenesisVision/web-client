@@ -14,7 +14,10 @@ import { useThreeFactorState } from "../signin/signin.service";
 import SecurityVerificationForm from "./security-verification-form";
 import { confirmThreeStepAuth } from "./service/security-verification.service";
 
-const _SecurityVerificationContainer: React.FC<Props> = ({ code }) => {
+const _SecurityVerificationContainer: React.FC<Props> = ({
+    code,
+    email: urlEmail
+}) => {
     const dispatch = useDispatch<MiddlewareDispatch>();
     const { clearThreeFactorState, getThreeFactorState } = useThreeFactorState();
     const updateTokenMiddleware = (token: string): void => {
@@ -27,7 +30,8 @@ const _SecurityVerificationContainer: React.FC<Props> = ({ code }) => {
             Push(LOGIN_ROUTE);
         }
     };
-    const { email, tempToken: token } = getThreeFactorState();
+    const { email: cookieEmail, tempToken: token } = getThreeFactorState();
+    const email = urlEmail || cookieEmail;
     const { sendRequest, errorMessage } = useApiRequest({
         middleware: [updateTokenMiddleware],
         successMessage: "auth:security-verification.success-alert-message",
@@ -35,7 +39,7 @@ const _SecurityVerificationContainer: React.FC<Props> = ({ code }) => {
     });
 
     useEffect(() => {
-        if (code && email && token) {
+        if (code && urlEmail) {
             sendRequest({ email, token, code });
         } else if (!email || !token) {
             Push(NOT_FOUND_PAGE_ROUTE);
@@ -54,6 +58,7 @@ const _SecurityVerificationContainer: React.FC<Props> = ({ code }) => {
 
 interface Props {
     code: string;
+    email: string;
 }
 
 const SecurityVerificationContainer = React.memo(
