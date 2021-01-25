@@ -11,7 +11,7 @@ export const confirmThreeStepAuth = ({
 }) =>
   api.auth().confirmThreeStepAuth({
     body: {
-      token,
+      token: token!,
       email,
       code
     }
