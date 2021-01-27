@@ -11,8 +11,8 @@ import {
   parseDate,
   sortGroups
 } from "components/notifications/components/notifications.helpers";
-import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { RowItem } from "components/row-item/row-item";
 import Spinner from "components/spiner/spiner";
 import { NotificationViewModel } from "gv-api-web";
 import React, { useCallback, useEffect, useState } from "react";
@@ -91,40 +91,38 @@ const _Notifications: React.FC<Props> = ({
   const hasMore = total > mergedNotifications.length;
   const hasNotifications = count > 0;
   return (
-    <div>
-      <InfinityScroll loadMore={fetchNotification} hasMore={hasMore}>
-        <Header>
-          <RowItem>
-            <IconContainer>
-              <RingIcon />
-            </IconContainer>
-          </RowItem>
-          <RowItem>
-            <h4>{t("notifications-aside.header")}</h4>
-          </RowItem>
-          <RowItem>
-            <Chip type={hasNotifications ? CHIP_TYPE.NEGATIVE : undefined}>
-              {count}
-            </Chip>
-          </RowItem>
-          <RowItem>
-            {count !== 0 && <ClearButton onApply={getNotifications} />}
-          </RowItem>
-          <Link
-            to={linkCreator(NOTIFICATIONS_ROUTE)}
-            onClick={closeNotifications}
-          >
-            <SettingsIcon />
-          </Link>
-        </Header>
-        <Content>
-          {Object.keys(groups)
-            .sort(sortGroups)
-            .map<React.ReactNode>(renderGroups(groups))}
-          <Spinner isShown={isPending} />
-        </Content>
-      </InfinityScroll>
-    </div>
+    <InfinityScroll loadMore={fetchNotification} hasMore={hasMore}>
+      <Header>
+        <RowItem>
+          <IconContainer>
+            <RingIcon />
+          </IconContainer>
+        </RowItem>
+        <RowItem>
+          <h4>{t("notifications-aside.header")}</h4>
+        </RowItem>
+        <RowItem>
+          <Chip type={hasNotifications ? CHIP_TYPE.NEGATIVE : undefined}>
+            {count}
+          </Chip>
+        </RowItem>
+        <RowItem>
+          {count !== 0 && <ClearButton onApply={getNotifications} />}
+        </RowItem>
+        <Link
+          to={linkCreator(NOTIFICATIONS_ROUTE)}
+          onClick={closeNotifications}
+        >
+          <SettingsIcon />
+        </Link>
+      </Header>
+      <Content>
+        {Object.keys(groups)
+          .sort(sortGroups)
+          .map<React.ReactNode>(renderGroups(groups))}
+        <Spinner isShown={isPending} />
+      </Content>
+    </InfinityScroll>
   );
 };
 
