@@ -71,7 +71,8 @@ const _StopLimitTradeForm: React.FC<
     maxQuantityWithWallet,
     maxTotalWithWallet
   } = usePlaceOrderInfo({
-    balance: balanceQuote,
+    balanceBase,
+    balanceQuote,
     side,
     filterValues
   });

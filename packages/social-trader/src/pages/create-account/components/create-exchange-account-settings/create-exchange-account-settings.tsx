@@ -5,8 +5,6 @@ import DepositDetailsBlock from "components/assets/fields/deposit-details-block"
 import { GVHookFormField } from "components/gv-hook-form-field";
 import GVTextField from "components/gv-text-field";
 import { Row } from "components/row/row";
-import Select from "components/select/select";
-import { onSelectChange } from "components/select/select.test-helpers";
 import SettingsBlock from "components/settings-block/settings-block";
 import { ExchangeAccountType, ExchangeInfo } from "gv-api-web";
 import { KycRequiredBlock } from "pages/create-account/components/create-account-settings/kyc-required-block";
@@ -20,6 +18,7 @@ import { safeGetElemFromArray } from "utils/helpers";
 import { HookForm } from "utils/hook-form.helpers";
 
 import CreateExchangeAccountSettingsValidationSchema from "./create-exchange-account-settings.validators";
+import AssetField from "components/assets/asset-fields/asset-field";
 
 export enum CREATE_EXCHANGE_ACCOUNT_FIELDS {
   depositWalletId = "depositWalletId",
@@ -92,7 +91,14 @@ const _CreateExchangeAccountSettings: React.FC<Props> = ({
   return (
     <HookForm form={form} onSubmit={validateAndSubmit}>
       <SettingsBlock blockNumber={"01"} label={t("Exchange")}>
-        <div>
+        <AssetField hide>
+          <GVHookFormField
+            name={CREATE_EXCHANGE_ACCOUNT_FIELDS.brokerAccountTypeId}
+            component={GVTextField}
+          />
+        </AssetField>
+        <h5>{exchange.name}</h5>
+        {/*<div>
           <Row>
             <h5>{exchange.name}</h5>
           </Row>
@@ -117,7 +123,7 @@ const _CreateExchangeAccountSettings: React.FC<Props> = ({
               ))}
             </GVHookFormField>
           </Row>
-        </div>
+        </div>*/}
       </SettingsBlock>
       {kycRequired ? (
         <KycRequiredBlock />

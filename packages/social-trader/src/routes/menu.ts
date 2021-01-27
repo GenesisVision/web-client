@@ -23,7 +23,7 @@ import { MEDIA_ROUTE, MY_PROFILE_ROUTE, SOCIAL_ROUTE, USERS_ROUTE } from "routes
 import { HOME_ROUTE } from "./app.routes";
 import { EVENTS_ROUTE, INVESTMENTS_ROUTE, OVERVIEW_ROUTE, TRADING_ROUTE } from "./dashboard.routes";
 import { GV_FOLLOW_ROUTE, GV_FUNDS_ROUTE, GV_PROGRAMS_ROUTE, INVEST_ROUTE } from "./invest.routes";
-import { TERMINAL_FUTURES_ROUTE, TERMINAL_SPOT_ROUTE, TRADE_ROUTE } from "./trade.routes";
+import { TERMINAL_ROUTE, TRADE_ROUTE } from "./trade.routes";
 
 export type TMenuItem = {
   isBeta?: boolean;
@@ -143,6 +143,11 @@ const mainMenuItemsUnion = [
     children: [
       {
         Icon: TerminalIcon,
+        route: TERMINAL_ROUTE,
+        label: "navigation.terminal.main"
+      }
+      /*{
+        Icon: TerminalIcon,
         route: TERMINAL_SPOT_ROUTE,
         label: "navigation.terminal.spot"
       },
@@ -150,7 +155,7 @@ const mainMenuItemsUnion = [
         Icon: TerminalIcon,
         route: TERMINAL_FUTURES_ROUTE,
         label: "navigation.terminal.futures"
-      }
+      }*/
     ]
   }
 ];
