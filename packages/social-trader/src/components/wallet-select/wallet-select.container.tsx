@@ -1,9 +1,5 @@
 import { onSelectChange } from "components/select/select.test-helpers";
-import {
-  CommonWalletType,
-  HookFormWalletSelect,
-  IWalletSelectProps
-} from "components/wallet-select/wallet-select";
+import { CommonWalletType, HookFormWalletSelect, IWalletSelectProps } from "components/wallet-select/wallet-select";
 import {
   mergeNormalizedList,
   normalizeWalletList,
@@ -12,10 +8,7 @@ import {
 } from "components/wallet-select/wallet-select.helpers";
 import { useAccountCurrency } from "hooks/account-currency.hook";
 import { fetchWalletsByCurrencyAvailableAction } from "pages/wallet/actions/wallet.actions";
-import {
-  walletsAvailableSelector,
-  walletsSelector
-} from "pages/wallet/reducers/wallet.reducers";
+import { walletsAvailableSelector, walletsSelector } from "pages/wallet/reducers/wallet.reducers";
 import React, { useCallback, useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
@@ -55,7 +48,7 @@ const _WalletSelectContainer: React.FC<IWalletSelectContainerProps> = props => {
       const wallet = safeGetElemFromArray(items, wallet => wallet.id === id);
       onChange(wallet);
     }),
-    [items]
+    [items, onChange]
   );
 
   const handleUpdate = useCallback(() => {
