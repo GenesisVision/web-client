@@ -86,15 +86,11 @@ const AssetAvatarContainerStyle = css<IAssetAvatarContainerProps>`
     return $labelColor;
   }};
 
-  ${({ hasStaticIcon = false }) =>
-    !hasStaticIcon &&
-    css`
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-    `}
+  img {
+    width: ${({ hasStaticIcon = false }) => !hasStaticIcon && "100%"};
+    height: ${({ hasStaticIcon = false }) => !hasStaticIcon && "100%"};
+    object-fit: cover;
+  }
 `;
 
 const AssetAvatarLinkContainer = styled(Link) <IAssetAvatarContainerProps>`
