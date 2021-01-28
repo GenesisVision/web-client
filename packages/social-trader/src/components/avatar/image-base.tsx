@@ -19,7 +19,6 @@ export interface IImageBaseProps extends OptionalClickable {
   defaultImage?: string;
   className?: string;
   defaultImageClassName?: string;
-  fullSize?: boolean;
 }
 
 const _ImageBase: React.FC<IImageBaseProps> = ({
@@ -30,7 +29,6 @@ const _ImageBase: React.FC<IImageBaseProps> = ({
   DefaultImageComponent,
   src,
   alt,
-  fullSize,
   defaultImage,
   className,
   defaultImageClassName
@@ -46,7 +44,6 @@ const _ImageBase: React.FC<IImageBaseProps> = ({
       alt={alt}
       className={className}
       src={src}
-      fullSize={fullSize}
     />
   );
 };

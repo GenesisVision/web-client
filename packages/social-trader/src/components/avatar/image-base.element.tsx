@@ -5,7 +5,6 @@ import clsx from "clsx";
 import useIsOpen from "hooks/is-open.hook";
 import * as React from "react";
 import { useCallback, useEffect } from "react";
-import styled from "styled-components";
 import { OptionalClickable } from "utils/types";
 
 export interface IImageBaseElementProps extends OptionalClickable {
@@ -17,18 +16,7 @@ export interface IImageBaseElementProps extends OptionalClickable {
   defaultImage?: string;
   className?: string;
   defaultImageClassName?: string;
-  fullSize?: boolean;
 }
-
-const Img = styled.img<IImageBaseElementProps>`
-  ${({ fullSize = false }) =>
-    fullSize &&
-    `
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    `}
-`;
 
 const emptyImg =
   "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=";
@@ -41,7 +29,6 @@ const _ImageBaseElement: React.FC<IImageBaseElementProps> = ({
   src = "",
   alt,
   defaultImage,
-  fullSize,
   className,
   defaultImageClassName
 }) => {
@@ -72,7 +59,7 @@ const _ImageBaseElement: React.FC<IImageBaseElementProps> = ({
         />
       );
   return (
-    <Img
+    <img
       onClick={onClick}
       src={emptyImg}
       data-src={currentSrc}
@@ -80,7 +67,6 @@ const _ImageBaseElement: React.FC<IImageBaseElementProps> = ({
       alt={alt || "Image loading"}
       className={clsx("lazyload", className)}
       onError={handleError}
-      fullSize={fullSize}
     />
   );
 };

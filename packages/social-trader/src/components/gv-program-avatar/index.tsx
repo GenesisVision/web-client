@@ -22,6 +22,7 @@ import { adaptiveBorderRadius, adaptivePadding } from "utils/style/mixins";
 import { SizesType } from "utils/types";
 
 import GVProgramDefaultAvatar from "./gv-propgram-default-avatar";
+import styles from "./style.module.scss";
 
 interface IContainerProps {
   level?: number;
@@ -77,7 +78,6 @@ const _GVProgramAvatar: React.FC<GVProgramAvatarProps> = ({
   levelProgress = 0,
   size = "small",
   color,
-  fullSize,
   onMouseOverLevel,
   onMouseEnterLevel,
   onMouseLeaveLevel,
@@ -88,12 +88,12 @@ const _GVProgramAvatar: React.FC<GVProgramAvatarProps> = ({
     <Container level={level} size={size}>
       <Avatar size={size}>
         <StyledImageBase
+          className={styles["program-avatar__full-image"]}
           quality={size === "large" ? "Medium" : "Low"}
           DefaultImageComponent={GVProgramDefaultAvatar}
           src={url}
           color={color}
           alt={alt}
-          fullSize={fullSize}
         />
         {haveLevel && (
           <GVProgramAvatarLevel

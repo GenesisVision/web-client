@@ -106,7 +106,7 @@ const _NotificationAssetAvatar: React.FC<INotificationAssetAvatarProps> = ({
 
   return (
     <AssetAvatarLinkContainer to={to} onClick={closeNotifications} type={type}>
-      <AssetAvatar fullSize={true} url={logoUrl} alt={type} color={color} />
+      <AssetAvatar url={logoUrl} alt={type} color={color} />
     </AssetAvatarLinkContainer>
   );
 };
@@ -168,12 +168,7 @@ const _Notification: React.FC<INotificationProps> = props => {
             {staticIconUrl ? (
               <ImageBaseElement src={staticIconUrl} alt={type} />
             ) : (
-                <AssetAvatar
-                  fullSize={true}
-                  url={logoUrl}
-                  color={color}
-                  alt={type}
-                />
+                <AssetAvatar url={logoUrl} color={color} alt={type} />
               )}
           </AssetAvatarDivContainer>
         ) : (

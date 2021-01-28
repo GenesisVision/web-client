@@ -15,7 +15,6 @@ export interface IAssetAvatarProps extends GVProgramAvatarProps {
   vertical?: VERTICAL_POPOVER_POS;
   horizontal?: HORIZONTAL_POPOVER_POS;
   onClickLevel?: (e: any) => void;
-  fullSize?: boolean;
   alt: string;
 }
 
