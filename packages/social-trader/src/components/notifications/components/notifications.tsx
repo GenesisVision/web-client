@@ -106,9 +106,7 @@ const _Notifications: React.FC<Props> = ({
             {count}
           </Chip>
         </RowItem>
-        <RowItem>
-          {count !== 0 && <ClearButton onApply={getNotifications} />}
-        </RowItem>
+        <RowItem>{count !== 0 && <ClearButton />}</RowItem>
         <Link
           to={linkCreator(NOTIFICATIONS_ROUTE)}
           onClick={closeNotifications}
