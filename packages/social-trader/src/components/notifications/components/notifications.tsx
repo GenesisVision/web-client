@@ -11,8 +11,8 @@ import {
   parseDate,
   sortGroups
 } from "components/notifications/components/notifications.helpers";
-import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { RowItem } from "components/row-item/row-item";
 import Spinner from "components/spiner/spiner";
 import { NotificationViewModel } from "gv-api-web";
 import React, { useCallback, useEffect, useState } from "react";
@@ -107,9 +107,7 @@ const _Notifications: React.FC<Props> = ({
               {count}
             </Chip>
           </RowItem>
-          <RowItem>
-            {count !== 0 && <ClearButton onApply={getNotifications} />}
-          </RowItem>
+          <RowItem>{count !== 0 && <ClearButton />}</RowItem>
           <Link
             to={linkCreator(NOTIFICATIONS_ROUTE)}
             onClick={closeNotifications}
