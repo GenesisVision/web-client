@@ -1,9 +1,5 @@
-import { useAccountCurrency } from "hooks/account-currency.hook";
-import { useGetRate } from "hooks/get-rate.hook";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import { formatValueWithTick } from "pages/trade/binance-trade-page/trading/terminal.helpers";
-import React, { useContext, useEffect } from "react";
-import { formatCurrencyValue } from "utils/formatter";
+import React from "react";
 
 interface Props {
   asset: string;
@@ -18,14 +14,7 @@ const _FundsRow: React.FC<Props> = ({
   available,
   locked
 }) => {
-  const currency = useAccountCurrency();
-  const { rate, getRate, isRatePending } = useGetRate();
-  const { terminalType } = useContext(TerminalInfoContext);
   const total = formatValueWithTick(+available + +locked, "0.00000001");
-
-  useEffect(() => {
-    if (asset && currency) getRate({ from: asset, to: currency });
-  }, [currency, asset]);
 
   return (
     <tr>
@@ -33,7 +22,7 @@ const _FundsRow: React.FC<Props> = ({
       <td>{total}</td>
       <td>{formatValueWithTick(available, "0.00000001")}</td>
       <td>{locked}</td>
-      <td>{!isRatePending && formatCurrencyValue(+total * rate, currency)}</td>
+      <td>{amountInCurrency}</td>
     </tr>
   );
 };
