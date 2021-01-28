@@ -19,6 +19,7 @@ export interface IImageBaseProps extends OptionalClickable {
   defaultImage?: string;
   className?: string;
   defaultImageClassName?: string;
+  hasStaticIcon?: boolean;
 }
 
 const _ImageBase: React.FC<IImageBaseProps> = ({
@@ -29,6 +30,7 @@ const _ImageBase: React.FC<IImageBaseProps> = ({
   DefaultImageComponent,
   src,
   alt,
+  hasStaticIcon,
   defaultImage,
   className,
   defaultImageClassName
@@ -44,6 +46,7 @@ const _ImageBase: React.FC<IImageBaseProps> = ({
       alt={alt}
       className={className}
       src={src}
+      hasStaticIcon={hasStaticIcon}
     />
   );
 };

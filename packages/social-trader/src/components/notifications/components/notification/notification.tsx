@@ -58,7 +58,6 @@ interface INotificationOwnProps {
 
 interface IAssetAvatarContainerProps {
   type: string;
-  hasStaticIcon?: boolean;
 }
 
 interface INotificationProps
@@ -85,12 +84,6 @@ const AssetAvatarContainerStyle = css<IAssetAvatarContainerProps>`
     }
     return $labelColor;
   }};
-
-  img {
-    width: ${({ hasStaticIcon = false }) => !hasStaticIcon && "100%"};
-    height: ${({ hasStaticIcon = false }) => !hasStaticIcon && "100%"};
-    object-fit: cover;
-  }
 `;
 
 const AssetAvatarLinkContainer = styled(Link) <IAssetAvatarContainerProps>`
@@ -113,7 +106,12 @@ const _NotificationAssetAvatar: React.FC<INotificationAssetAvatarProps> = ({
 
   return (
     <AssetAvatarLinkContainer to={to} onClick={closeNotifications} type={type}>
-      <AssetAvatar url={logoUrl} alt={type} color={color} />
+      <AssetAvatar
+        hasStaticIcon={false}
+        url={logoUrl}
+        alt={type}
+        color={color}
+      />
     </AssetAvatarLinkContainer>
   );
 };
@@ -171,11 +169,16 @@ const _Notification: React.FC<INotificationProps> = props => {
     <Container center={false}>
       <RowItem>
         {!location ? (
-          <AssetAvatarDivContainer hasStaticIcon={!!staticIconUrl} type={type}>
+          <AssetAvatarDivContainer type={type}>
             {staticIconUrl ? (
               <ImageBaseElement src={staticIconUrl} alt={type} />
             ) : (
-                <AssetAvatar url={logoUrl} color={color} alt={type} />
+                <AssetAvatar
+                  hasStaticIcon={false}
+                  url={logoUrl}
+                  color={color}
+                  alt={type}
+                />
               )}
           </AssetAvatarDivContainer>
         ) : (

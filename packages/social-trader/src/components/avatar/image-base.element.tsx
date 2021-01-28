@@ -1,9 +1,11 @@
-import clsx from "clsx";
-import useIsOpen from "hooks/is-open.hook";
 import "lazysizes";
 import "lazysizes/plugins/attrchange/ls.attrchange";
+
+import clsx from "clsx";
+import useIsOpen from "hooks/is-open.hook";
 import * as React from "react";
 import { useCallback, useEffect } from "react";
+import styled from "styled-components";
 import { OptionalClickable } from "utils/types";
 
 export interface IImageBaseElementProps extends OptionalClickable {
@@ -15,7 +17,18 @@ export interface IImageBaseElementProps extends OptionalClickable {
   defaultImage?: string;
   className?: string;
   defaultImageClassName?: string;
+  hasStaticIcon?: boolean;
 }
+
+const Img = styled.img<IImageBaseElementProps>`
+  ${({ hasStaticIcon = true }) =>
+    !hasStaticIcon &&
+    `
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    `}
+`;
 
 const emptyImg =
   "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=";
@@ -28,6 +41,7 @@ const _ImageBaseElement: React.FC<IImageBaseElementProps> = ({
   src = "",
   alt,
   defaultImage,
+  hasStaticIcon,
   className,
   defaultImageClassName
 }) => {
@@ -41,6 +55,7 @@ const _ImageBaseElement: React.FC<IImageBaseElementProps> = ({
     e.target.onerror = null;
     setIsError();
   }, []);
+
   const currentSrc = isError ? (defaultImage ? defaultImage : emptyImg) : src;
   if (isError || !hasUrl)
     return DefaultImageComponent ? (
@@ -49,15 +64,15 @@ const _ImageBaseElement: React.FC<IImageBaseElementProps> = ({
         imageClassName={clsx(defaultImageClassName, className)}
       />
     ) : (
-      // eslint-disable-next-line jsx-a11y/img-redundant-alt
-      <img
-        src={defaultImage || emptyImg}
-        alt="Image not found"
-        className={clsx(defaultImageClassName, className)}
-      />
-    );
+        // eslint-disable-next-line jsx-a11y/img-redundant-alt
+        <img
+          src={defaultImage || emptyImg}
+          alt="Image not found"
+          className={clsx(defaultImageClassName, className)}
+        />
+      );
   return (
-    <img
+    <Img
       onClick={onClick}
       src={emptyImg}
       data-src={currentSrc}
@@ -65,6 +80,7 @@ const _ImageBaseElement: React.FC<IImageBaseElementProps> = ({
       alt={alt || "Image loading"}
       className={clsx("lazyload", className)}
       onError={handleError}
+      hasStaticIcon={hasStaticIcon}
     />
   );
 };
