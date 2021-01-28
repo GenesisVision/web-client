@@ -6,11 +6,11 @@ import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
-const ClearButton: React.FC<Props> = ({ onApply }) => {
+const ClearButton: React.FC = () => {
   const dispatch = useDispatch();
   const [t] = useTranslation();
   const updateHeaderButton = () => dispatch(ProfileHeaderInfoAction());
-  const middleware = [onApply, updateHeaderButton];
+  const middleware = [updateHeaderButton];
   const { sendRequest, isPending } = useApiRequest({
     request: clearAll,
     middleware
@@ -31,9 +31,5 @@ const ClearButton: React.FC<Props> = ({ onApply }) => {
     </Button>
   );
 };
-
-interface Props {
-  onApply: VoidFunction;
-}
 
 export default ClearButton;
