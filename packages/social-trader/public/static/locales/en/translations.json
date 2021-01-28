@@ -209,6 +209,7 @@
     "gv-programs": "Programs",
     "trade": "Trade",
     "terminal": {
+      "main": "Trading terminal",
       "spot": "Trading terminal Spot",
       "futures": "Trading terminal Futures"
     },

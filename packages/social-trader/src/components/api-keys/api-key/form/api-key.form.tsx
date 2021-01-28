@@ -59,10 +59,12 @@ const _ApiKeyForm: React.FC<IApiKeyFormProps> = ({
             autoComplete="off"
             component={SimpleTextField}
             rules={{
-              required: "Field is required",
-              maxLength: {
-                value: 30,
-                message: "Must be less 30 characters"
+              validate: (value: string) => {
+                const trimmedValue = value.trim();
+                if (trimmedValue.length >= 30)
+                  return "Must be less 30 characters";
+                if (!trimmedValue?.length) return "Field is required";
+                return true;
               }
             }}
           />

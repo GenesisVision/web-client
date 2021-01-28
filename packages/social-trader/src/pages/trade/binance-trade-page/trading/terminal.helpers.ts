@@ -213,15 +213,29 @@ export const updatePositionList = (
   return updatedList;
 };
 
+const updateBalancesList = (
+  list: AnyObjectType,
+  updates: AnyObjectType
+): AnyObjectType => {
+  const updatedList = { ...list };
+  Object.entries(updates).forEach(([symbol, data]) => {
+    updatedList[symbol] = {
+      ...updatedList[symbol],
+      ...data,
+      newAmountInCurrency: updatedList[symbol]?.newAmountInCurrency
+    };
+  });
+  return updatedList;
+};
+
 export const updateAccountInfo = (currentData: Account, updates: Account) => {
   const normalizedCurrentBalances = normalizeBalanceList(currentData.balances);
   const normalizedUpdatesBalances = normalizeBalanceList(
     updates.balances || []
   );
-  const balances = Object.values({
-    ...normalizedCurrentBalances,
-    ...normalizedUpdatesBalances
-  });
+  const balances = Object.values(
+    updateBalancesList(normalizedCurrentBalances, normalizedUpdatesBalances)
+  );
 
   const normalizedCurrentPositions = normalizePositionsList(
     currentData.positions || []

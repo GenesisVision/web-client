@@ -45,7 +45,6 @@ export const OrderHistory: React.FC<Props> = ({ updates }) => {
       columns={ORDER_HISTORY_TABLE_COLUMNS}
       renderHeader={column => <Text wrap={false}>{t(`${column.name}`)}</Text>}
       renderBodyRow={({
-        quoteQuantityFilled,
         orderStatus,
         quantityFilled,
         quantity,
@@ -68,7 +67,7 @@ export const OrderHistory: React.FC<Props> = ({ updates }) => {
           price={price}
           origQty={quantity}
           filled={quantityFilled ? (+quantityFilled / +quantity) * 100 : 0}
-          total={quoteQuantityFilled}
+          total={quantityFilled ? quantityFilled * price : 0}
         />
       )}
     />

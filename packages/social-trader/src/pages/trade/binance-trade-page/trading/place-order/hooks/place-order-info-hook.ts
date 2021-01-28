@@ -15,15 +15,18 @@ export interface UsePlaceOrderInfoReturn {
 
 export const usePlaceOrderInfo = ({
   filterValues,
-  balance,
+  balanceBase,
+  balanceQuote,
   side
 }: {
   filterValues: FilterValues;
   side: OrderSide;
-  balance: number;
+  balanceBase: number;
+  balanceQuote: number;
 }): UsePlaceOrderInfoReturn => {
   const { leverage } = useContext(TerminalPlaceOrderContext);
   const {
+    terminalType,
     symbol: { baseAsset, quoteAsset }
   } = useContext(TerminalInfoContext);
 
@@ -36,12 +39,17 @@ export const usePlaceOrderInfo = ({
   } = filterValues;
 
   const maxQuantityWithWallet = useMemo(() => {
-    return side === "Buy" ? +maxQuantity : Math.min(+maxQuantity, balance);
-  }, [side, maxQuantity, balance, baseAsset]);
+    return side === "Buy"
+      ? +maxQuantity
+      : Math.min(
+          +maxQuantity,
+          terminalType === "futures" ? balanceQuote : balanceBase
+        );
+  }, [side, maxQuantity, terminalType, balanceQuote, balanceBase, baseAsset]);
 
   const maxTotalWithWallet = useMemo(() => {
-    return side === "Buy" ? balance * leverage : Number.MAX_SAFE_INTEGER;
-  }, [side, balance, quoteAsset, leverage]);
+    return side === "Buy" ? balanceQuote * leverage : Number.MAX_SAFE_INTEGER;
+  }, [side, balanceQuote, quoteAsset, leverage]);
 
   return useMemo(
     () => ({
