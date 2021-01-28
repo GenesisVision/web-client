@@ -1,3 +1,4 @@
+import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import { RowItem } from "components/row-item/row-item";
 import Tooltip from "components/tooltip/tooltip";
 import { TooltipContent } from "components/tooltip/tooltip-content";
@@ -9,7 +10,10 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 
 export const _LineWalletButton: React.FC<Props> = ({ title, children }) => (
   <RowItem>
-    <Tooltip render={() => <TooltipContent>{title}</TooltipContent>}>
+    <Tooltip
+      horizontal={HORIZONTAL_POPOVER_POS.RIGHT}
+      render={() => <TooltipContent>{title}</TooltipContent>}
+    >
       <div>{children}</div>
     </Tooltip>
   </RowItem>
