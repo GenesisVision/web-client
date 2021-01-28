@@ -91,36 +91,36 @@ const _Notifications: React.FC<Props> = ({
   const hasMore = total > mergedNotifications.length;
   const hasNotifications = count > 0;
   return (
-    <InfinityScroll loadMore={fetchNotification} hasMore={hasMore}>
-      <Header>
-        <RowItem>
-          <IconContainer>
-            <RingIcon />
-          </IconContainer>
-        </RowItem>
-        <RowItem>
-          <h4>{t("notifications-aside.header")}</h4>
-        </RowItem>
-        <RowItem>
-          <Chip type={hasNotifications ? CHIP_TYPE.NEGATIVE : undefined}>
-            {count}
-          </Chip>
-        </RowItem>
-        <RowItem>{count !== 0 && <ClearButton />}</RowItem>
-        <Link
-          to={linkCreator(NOTIFICATIONS_ROUTE)}
-          onClick={closeNotifications}
-        >
-          <SettingsIcon />
-        </Link>
-      </Header>
-      <Content>
-        {Object.keys(groups)
-          .sort(sortGroups)
-          .map<React.ReactNode>(renderGroups(groups))}
-        <Spinner isShown={isPending} />
-      </Content>
-    </InfinityScroll>
+      <InfinityScroll loadMore={fetchNotification} hasMore={hasMore}>
+        <Header>
+          <RowItem>
+            <IconContainer>
+              <RingIcon />
+            </IconContainer>
+          </RowItem>
+          <RowItem>
+            <h4>{t("notifications-aside.header")}</h4>
+          </RowItem>
+          <RowItem>
+            <Chip type={hasNotifications ? CHIP_TYPE.NEGATIVE : undefined}>
+              {count}
+            </Chip>
+          </RowItem>
+          <RowItem>{count !== 0 && <ClearButton />}</RowItem>
+          <Link
+            to={linkCreator(NOTIFICATIONS_ROUTE)}
+            onClick={closeNotifications}
+          >
+            <SettingsIcon />
+          </Link>
+        </Header>
+        <Content>
+          {Object.keys(groups)
+            .sort(sortGroups)
+            .map<React.ReactNode>(renderGroups(groups))}
+          <Spinner isShown={isPending} />
+        </Content>
+      </InfinityScroll>
   );
 };
 
