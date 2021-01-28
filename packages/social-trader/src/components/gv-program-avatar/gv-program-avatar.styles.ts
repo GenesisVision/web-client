@@ -11,7 +11,7 @@ export interface GVProgramAvatarProps {
   levelProgress?: number;
   size?: SizesType | "full";
   color?: string;
-  hasStaticIcon?: boolean;
+  fullSize?: boolean;
   onMouseOverLevel?: (e: any) => void;
   onMouseEnterLevel?: (e: any) => void;
   onMouseLeaveLevel?: (e: any) => void;

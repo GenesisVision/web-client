@@ -17,12 +17,12 @@ export interface IImageBaseElementProps extends OptionalClickable {
   defaultImage?: string;
   className?: string;
   defaultImageClassName?: string;
-  hasStaticIcon?: boolean;
+  fullSize?: boolean;
 }
 
 const Img = styled.img<IImageBaseElementProps>`
-  ${({ hasStaticIcon = true }) =>
-    !hasStaticIcon &&
+  ${({ fullSize = false }) =>
+    fullSize &&
     `
       width: 100%;
       height: 100%;
@@ -41,7 +41,7 @@ const _ImageBaseElement: React.FC<IImageBaseElementProps> = ({
   src = "",
   alt,
   defaultImage,
-  hasStaticIcon,
+  fullSize,
   className,
   defaultImageClassName
 }) => {
@@ -80,7 +80,7 @@ const _ImageBaseElement: React.FC<IImageBaseElementProps> = ({
       alt={alt || "Image loading"}
       className={clsx("lazyload", className)}
       onError={handleError}
-      hasStaticIcon={hasStaticIcon}
+      fullSize={fullSize}
     />
   );
 };

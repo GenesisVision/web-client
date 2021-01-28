@@ -77,7 +77,7 @@ const _GVProgramAvatar: React.FC<GVProgramAvatarProps> = ({
   levelProgress = 0,
   size = "small",
   color,
-  hasStaticIcon,
+  fullSize,
   onMouseOverLevel,
   onMouseEnterLevel,
   onMouseLeaveLevel,
@@ -93,7 +93,7 @@ const _GVProgramAvatar: React.FC<GVProgramAvatarProps> = ({
           src={url}
           color={color}
           alt={alt}
-          hasStaticIcon={hasStaticIcon}
+          fullSize={fullSize}
         />
         {haveLevel && (
           <GVProgramAvatarLevel
