@@ -1,11 +1,7 @@
 import { IImageValue } from "components/form/input-image/input-image";
 import { TableDataType } from "constants/constants";
-import {
-  Post,
-  PostImage,
-  PostPersonalDetails,
-  ProfilePublic
-} from "gv-api-web";
+import { Post, PostImage, PostPersonalDetails, ProfilePublic } from "gv-api-web";
+import { IPostMessageValues } from "components/conversation/conversation-input/conversation-input.helpers";
 
 export enum SEARCH_ASSET_TYPE {
   program = "program",
@@ -27,7 +23,7 @@ export type AssetSearchResult = {
   name: string;
 };
 
-export type OnMessageSendFunc = (values: { text: string }) => Promise<void>;
+export type OnMessageSendFunc = (values: IPostMessageValues) => Promise<void>;
 
 export type IConversationImage = PostImage;
 

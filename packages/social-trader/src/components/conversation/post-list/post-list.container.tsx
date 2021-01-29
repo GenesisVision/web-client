@@ -1,10 +1,6 @@
 import { ConversationPostListLoaderData } from "components/conversation/conversation.loader";
 import { PostList } from "components/conversation/post-list/post-list";
-import {
-  initialOptions,
-  SkipTake,
-  TAKE_COUNT
-} from "components/notifications/components/notifications.helpers";
+import { initialOptions, SkipTake, TAKE_COUNT } from "components/notifications/components/notifications.helpers";
 import { PostItemsViewModel } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
 import useIsOpen from "hooks/is-open.hook";
@@ -61,7 +57,7 @@ const _PostListContainer: React.FC<IPostListContainerProps> = ({
 
   useEffect(() => {
     if (isUpdatingPage) {
-      const newOptions = calculateOptions(options, data.total);
+      const newOptions = calculateOptions(options, data!.total);
       if (newOptions.take) setOptions(newOptions);
       setNotUpdatingPage();
     }

@@ -42,6 +42,7 @@
 
   &__shadow-wrapper {
     @include details-block-left-margin();
+    @include details-block-right-margin();
   }
 }
 

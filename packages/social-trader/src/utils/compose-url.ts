@@ -11,6 +11,8 @@ import {
 import { ASSET } from "constants/constants";
 import { AssetType, AssetTypeExt } from "gv-api-web";
 import {
+  ACCOUNT_API_KEYS,
+  ACCOUNT_API_KEYS_FOLDER_ROUTE,
   ACCOUNT_DETAILS_ROUTE,
   ACCOUNT_SETTINGS
 } from "routes/accounts.routes";
@@ -31,17 +33,15 @@ import {
   PROGRAM_SETTINGS_FOLDER_ROUTE,
   SETTINGS
 } from "routes/invest.routes";
+import { MANAGER_DETAILS_ROUTE, MANAGER_SLUG_URL_PARAM_NAME } from "routes/manager.routes";
 import {
-  MANAGER_DETAILS_ROUTE,
-  MANAGER_SLUG_URL_PARAM_NAME
-} from "routes/manager.routes";
-import {
+  PROGRAM_API_KEYS,
+  PROGRAM_API_KEYS_FOLDER_ROUTE,
   PROGRAM_BANNER_ROUTE,
   PROGRAM_BANNERS_ROUTE,
   PROGRAM_DETAILS_FOLDER_ROUTE,
   PROGRAM_DETAILS_ROUTE,
   PROGRAM_SETTINGS,
-  PROGRAM_SLUG_URL_PARAM_NAME,
   PROGRAMS_FACET_ROUTE
 } from "routes/programs.routes";
 import { POST_PREVIEW_IMAGE_ROUTE } from "routes/social.routes";
@@ -88,12 +88,12 @@ export const composeFollowDetailsUrl = (slugUrl: string): string =>
 
 export const composeProgramDetailsUrl = (slugUrl: string): string =>
   replaceParams(PROGRAM_DETAILS_ROUTE, {
-    [`:${PROGRAM_SLUG_URL_PARAM_NAME}`]: slugUrl
+    [`:${SLUG_URL_PARAM_NAME}`]: slugUrl
   });
 
 export const composeProgramBannerUrl = (slugUrl: string): string =>
   replaceParams(PROGRAM_BANNER_ROUTE, {
-    [`:${PROGRAM_SLUG_URL_PARAM_NAME}`]: slugUrl
+    [`:${SLUG_URL_PARAM_NAME}`]: slugUrl
   });
 
 export const composeFundBannerUrl = (slugUrl: string): string =>
@@ -103,7 +103,7 @@ export const composeFundBannerUrl = (slugUrl: string): string =>
 
 export const composeProgramBannersUrl = (slugUrl: string): string =>
   replaceParams(PROGRAM_BANNERS_ROUTE, {
-    [`:${PROGRAM_SLUG_URL_PARAM_NAME}`]: slugUrl
+    [`:${SLUG_URL_PARAM_NAME}`]: slugUrl
   });
 
 export const composeManagerDetailsUrl = (slugUrl: string): string =>
@@ -123,7 +123,7 @@ export const composeProgramNotificationsUrl = (slugUrl: string): string =>
 
 export const composeProgramSettingsUrl = (slugUrl: string): string =>
   replaceParams(`${PROGRAM_DETAILS_ROUTE}/${PROGRAM_SETTINGS}`, {
-    [`:${PROGRAM_SLUG_URL_PARAM_NAME}`]: slugUrl
+    [`:${SLUG_URL_PARAM_NAME}`]: slugUrl
   });
 
 export const composeAccountSettingsUrl = (slugUrl: string): string =>
@@ -171,7 +171,7 @@ export const composeFollowFacetUrl = (slugUrl: string): string =>
 
 export const composeProgramFacetUrl = (slugUrl: string): string =>
   replaceParams(PROGRAMS_FACET_ROUTE, {
-    [`:${PROGRAM_SLUG_URL_PARAM_NAME}`]: slugUrl
+    [`:${SLUG_URL_PARAM_NAME}`]: slugUrl
   });
 
 export const composeFundFacetUrl = (slugUrl: string): string =>
@@ -249,3 +249,27 @@ export const getAssetLink = (
       );
   }
 };
+
+export const composeAccountApiKeysUrl = (slugUrl: string): string =>
+  replaceParams(`${ACCOUNT_DETAILS_ROUTE}/${ACCOUNT_API_KEYS}`, {
+    [`:${SLUG_URL_PARAM_NAME}`]: slugUrl
+  });
+
+export const createAccountApiKeysToUrl = (url: string, title: string): ToType =>
+  createToUrl(
+    composeAccountApiKeysUrl(url),
+    ACCOUNT_API_KEYS_FOLDER_ROUTE,
+    title
+  );
+
+export const composeProgramApiKeysUrl = (slugUrl: string): string =>
+  replaceParams(`${PROGRAM_DETAILS_ROUTE}/${PROGRAM_API_KEYS}`, {
+    [`:${SLUG_URL_PARAM_NAME}`]: slugUrl
+  });
+
+export const createProgramApiKeysToUrl = (url: string, title: string): ToType =>
+  createToUrl(
+    composeProgramApiKeysUrl(url),
+    PROGRAM_API_KEYS_FOLDER_ROUTE,
+    title
+  );

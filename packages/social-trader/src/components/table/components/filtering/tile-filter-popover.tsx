@@ -31,7 +31,7 @@ export type TileFilterPopoverItemType = {
 
 const Header = styled(Center)`
   align-items: flex-end;
-  min-width: 500px; // TODO
+  min-width: 200px;
 `;
 
 const _TileFilterPopover: React.FC<Props<any>> = ({
@@ -83,8 +83,8 @@ const _TileFilterPopover: React.FC<Props<any>> = ({
                   count={
                     tabCountField
                       ? filteredItems.filter(
-                          item => item[tabCountField] === tab
-                        ).length
+                        item => item[tabCountField] === tab
+                      ).length
                       : undefined
                   }
                   value={tab}

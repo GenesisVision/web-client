@@ -11,6 +11,11 @@ export const headerSelector = apiSelector<ProfileHeaderViewModel>(
   state => state.profileHeader
 );
 
+export const isTwoFactorEnabledSelector = apiFieldSelector(
+  headerSelector,
+  fieldSelector(state => state.isTwoFactorEnabled)
+);
+
 export const isBetaTesterByType = (selectType: BetaTestingType) => (
   types: Array<BetaTestingType> = []
 ): boolean => !!types.find(type => type === selectType);

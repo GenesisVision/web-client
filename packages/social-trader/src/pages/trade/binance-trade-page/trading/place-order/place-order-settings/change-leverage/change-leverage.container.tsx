@@ -13,9 +13,7 @@ const _ChangeLeverageContainer: React.FC = () => {
     changeLeverage: changeLeverageMethod,
     getLeverageBrackets: getLeverageBracketsMethod
   } = useContext(TerminalMethodsContext);
-  const { authData, exchangeAccountId, symbol } = useContext(
-    TerminalInfoContext
-  );
+  const { exchangeAccountId, symbol } = useContext(TerminalInfoContext);
   const { leverage, setLeverage } = useContext(TerminalPlaceOrderContext);
 
   const {
@@ -32,9 +30,12 @@ const _ChangeLeverageContainer: React.FC = () => {
   });
 
   useEffect(() => {
-    if (authData?.privateKey)
-      getLeverageBrackets({ authData, symbol: getSymbolFromState(symbol) });
-  }, [authData, symbol]);
+    if (exchangeAccountId)
+      getLeverageBrackets({
+        accountId: exchangeAccountId,
+        symbol: getSymbolFromState(symbol)
+      });
+  }, [exchangeAccountId, symbol]);
 
   const handleOnChange = useCallback(
     (leverage: number) => {

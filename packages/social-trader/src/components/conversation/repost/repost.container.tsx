@@ -29,7 +29,7 @@ const _RePostContainer: React.FC<IRePostContainerProps> = ({
 }) => {
   const [t] = useTranslation();
   const onApplyMiddleware = postponeCallback(onApply);
-  const { sendRequest, errorMessage, status } = useApiRequest({
+  const { sendRequest, errorMessage, status } = useApiRequest<void>({
     request: rePost,
     middleware: [sendShareEvent, onApplyMiddleware]
   });

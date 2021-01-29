@@ -1,9 +1,6 @@
 import { Center } from "components/center/center";
 import HelpButton from "components/help-button/help-button";
-import {
-  HORIZONTAL_POPOVER_POS,
-  VERTICAL_POPOVER_POS
-} from "components/popover/popover";
+import { HORIZONTAL_POPOVER_POS, VERTICAL_POPOVER_POS } from "components/popover/popover";
 import { RowItem } from "components/row-item/row-item";
 import Tooltip from "components/tooltip/tooltip";
 import * as React from "react";
@@ -12,6 +9,7 @@ import { fontSize } from "utils/style/mixins";
 import { $fontSizeCommon } from "utils/style/sizes";
 
 interface IHelpContainerProps extends React.HTMLAttributes<HTMLDivElement> {
+  horizontal?: HORIZONTAL_POPOVER_POS;
   tooltipContent?: string | JSX.Element;
 }
 
@@ -46,7 +44,8 @@ const QuestionContainer = styled.div`
   display: flex;
 `;
 
-const HelpContainer: React.FC<IHelpContainerProps> = ({
+export const HelpContainer: React.FC<IHelpContainerProps> = ({
+  horizontal = HORIZONTAL_POPOVER_POS.LEFT,
   tooltipContent,
   children
 }) => {
@@ -54,7 +53,7 @@ const HelpContainer: React.FC<IHelpContainerProps> = ({
     case true:
       return (
         <Tooltip
-          horizontal={HORIZONTAL_POPOVER_POS.LEFT}
+          horizontal={horizontal}
           vertical={VERTICAL_POPOVER_POS.BOTTOM}
           render={() => tooltipContent}
         >

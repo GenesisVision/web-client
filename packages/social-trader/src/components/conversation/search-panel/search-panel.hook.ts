@@ -26,7 +26,7 @@ export const useSearchPanel = ({
     sendRequest,
     data: searchResult,
     setData: setSearchData
-  } = useApiRequest({
+  } = useApiRequest<AssetSearchResult[]>({
     request: searchAsset
   });
   const [isOpenSearchPanel, openSearchPanel, closeSearchPanel] = useIsOpen();

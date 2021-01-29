@@ -16,14 +16,15 @@ import {
 import { Bar } from "pages/trade/binance-trade-page/trading/chart/charting_library/datafeed-api";
 import { getDividerParts } from "pages/trade/binance-trade-page/trading/order-book/order-book.helpers";
 import {
-  Account,
   ChangeLeverageResponse,
   CorrectedRestDepth,
   ExchangeInfo,
+  FuturesPositionInformation,
   KlineParams,
   MarkPrice,
   OrderSide,
   PositionModeType,
+  SymbolLeverageBrackets,
   Ticker,
   TradeRequest,
   UnitedOrder,
@@ -40,6 +41,11 @@ import {
   transformKlineBar,
   transformToUnitedOrder
 } from "../../api.helpers";
+import {
+  mapBinanceRawFuturesAccountInfoToAccount,
+  mapBinanceRawFuturesPositionToFuturesPositionInformation,
+  mapBinanceRawFuturesSymbolBracketToSymbolLeverageBrackets
+} from "pages/trade/binance-trade-page/services/gv/futures/gv-futures-helpers";
 
 export const getExchangeInfo = (): Promise<ExchangeInfo> =>
   (api.terminal().getFuturesExchangeInfo() as unknown) as Promise<ExchangeInfo>;
@@ -135,14 +141,11 @@ export const getUserStreamKey = (
     }>
   );
 
-export const getAccountInformation = (
-  accountId?: string
-): Observable<Account> =>
-  from(
-    (api.terminal().getFuturesAccountInfo({ accountId }) as unknown) as Promise<
-      Account
-    >
-  );
+export const getAccountInformation = (accountId?: string) =>
+  api
+    .terminal()
+    .getFuturesAccountInfo({ accountId })
+    .then(mapBinanceRawFuturesAccountInfoToAccount);
 
 export const getTrades = (
   symbol: string,
@@ -206,8 +209,17 @@ export const cancelOrder = (
     accountId
   }) as unknown) as Promise<BinanceRawCancelOrder>;
 
+const postFuturesOrder = (options: any) =>
+  api.terminal().futuresPlaceOrder({
+    ...options,
+    body: {
+      ...options.body,
+      positionSide: options.body.side === "Buy" ? "Long" : "Short"
+    }
+  });
+
 const { postSell, postBuy } = createPlaceBuySellOrderRequest(
-  (api.terminal().futuresPlaceOrder as unknown) as PlaceOrderRequest
+  (postFuturesOrder as unknown) as PlaceOrderRequest
 );
 
 export const getTradeMethod = (side: OrderSide) =>
@@ -255,3 +267,25 @@ export const changeMarginMode = (options: {
   marginType?: BinanceFuturesMarginType;
 }): Promise<BinanceRawFuturesChangeMarginTypeResult> =>
   api.terminal().changeFuturesMarginType(options);
+
+export const getPositionInformation = (options: {
+  symbol: string;
+  accountId?: string;
+}): Promise<FuturesPositionInformation[]> =>
+  api
+    .terminal()
+    .getFuturesPositionInformation(options)
+    .then(data =>
+      data.map(mapBinanceRawFuturesPositionToFuturesPositionInformation)
+    );
+
+export const getLeverageBrackets = (options: {
+  symbol: string;
+  accountId?: string;
+}): Promise<SymbolLeverageBrackets[]> =>
+  api
+    .terminal()
+    .getFuturesBrackets(options)
+    .then(data =>
+      data.map(mapBinanceRawFuturesSymbolBracketToSymbolLeverageBrackets)
+    );

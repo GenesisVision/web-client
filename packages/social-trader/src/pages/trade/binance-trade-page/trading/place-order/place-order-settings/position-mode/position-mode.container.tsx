@@ -12,9 +12,16 @@ const _PositionModeContainer: React.FC = () => {
   );
   const { changePositionMode } = useContext(TerminalMethodsContext);
   const { symbol, exchangeAccountId } = useContext(TerminalInfoContext);
+
+  const middleware = () => {
+    updatePositionMode();
+  };
+
   const { sendRequest: changePosition } = useApiRequest({
-    request: changePositionMode!
+    request: changePositionMode!,
+    middleware: [middleware]
   });
+
   const [mode, setMode] = useState<PositionModeType | undefined>(undefined);
 
   useEffect(() => {
@@ -26,13 +33,11 @@ const _PositionModeContainer: React.FC = () => {
       changePosition({
         accountId: exchangeAccountId,
         mode: dualSidePosition
-      }).then(() => {
-        setMode(dualSidePosition);
-        updatePositionMode();
       });
     },
     [exchangeAccountId, symbol, exchangeAccountId]
   );
+
   return (
     <PositionMode
       loaderData={false}

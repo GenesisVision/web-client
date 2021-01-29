@@ -1,8 +1,5 @@
 import { useToLink } from "components/link/link.helper";
-import {
-  TableCardActions,
-  TableCardActionsItem
-} from "components/table/components/table-card/table-card-actions";
+import { TableCardActions, TableCardActionsItem } from "components/table/components/table-card/table-card-actions";
 import { ASSET } from "constants/constants";
 import { DashboardTradingAsset } from "gv-api-web";
 import { TAnchor } from "hooks/anchor.hook";
@@ -18,14 +15,12 @@ import {
   MakeProgramButton
 } from "pages/dashboard/components/dashboard-trading/dashboard-private-card.helpers";
 import { getTerminalLink } from "pages/dashboard/dashboard.helpers";
-import ChangeAccountPasswordButton from "pages/invest/programs/programs-settings/change-password/change-password-trading-account.button";
+import ChangeAccountPasswordButton
+  from "pages/invest/programs/programs-settings/change-password/change-password-trading-account.button";
 import React, { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { programMinDepositAmountsSelector } from "reducers/platform-reducer";
-import {
-  createFundSettingsToUrl,
-  createProgramSettingsToUrl
-} from "utils/compose-url";
+import { createFundSettingsToUrl, createProgramApiKeysToUrl, createProgramSettingsToUrl } from "utils/compose-url";
 
 interface IDashboardPublicCardActionsProps {
   asset: DashboardTradingAsset;
@@ -69,22 +64,30 @@ const _DashboardPublicCardActions: React.FC<IDashboardPublicCardActionsProps> = 
   );
   const { linkCreator, contextTitle } = useToLink();
   const [t] = useTranslation();
+
+  const apiKeysLink = createProgramApiKeysToUrl(url, contextTitle);
+
   const terminalLink = broker?.type
     ? linkCreator(getTerminalLink(broker?.type, id))
     : "";
+
   const createSettingsToUrlMethod =
     assetType === "Fund" ? createFundSettingsToUrl : createProgramSettingsToUrl;
   const settingsLink = url ? createSettingsToUrlMethod(url, contextTitle) : "";
+
   const makeProgramLinkMethod = makeProgramLinkCreator({
     assetFrom: CONVERT_ASSET.SIGNAL,
     assetTo: CONVERT_ASSET.PROGRAM
   });
   const makeProgramLink = linkCreator(makeProgramLinkMethod(id));
+
   const handleOnApply = useCallback(() => {
     clearAnchor();
     onApply();
   }, []);
+
   const isSelfManagedFund = assetTypeExt === "SelfManagedFund";
+
   return (
     <TableCardActions anchor={anchor} clearAnchor={clearAnchor}>
       {isSelfManagedFund && (
@@ -120,6 +123,11 @@ const _DashboardPublicCardActions: React.FC<IDashboardPublicCardActionsProps> = 
         <ChangeAccountPasswordButton id={id} title={contextTitle} />
       )}
       {canConfirm2FA && <ConfirmTFAButton onApply={handleOnApply} id={id} />}
+      {hasTerminal && (
+        <TableCardActionsItem to={apiKeysLink} onClick={clearAnchor}>
+          {t("dashboard-page:trading.actions.api-keys")}
+        </TableCardActionsItem>
+      )}
     </TableCardActions>
   );
 };

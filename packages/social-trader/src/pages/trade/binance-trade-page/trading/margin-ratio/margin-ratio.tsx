@@ -1,22 +1,20 @@
 import { LabeledValue } from "components/labeled-value/labeled-value";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
-import { withBlurLoader } from "decorators/with-blur-loader";
-import { FuturesAsset } from "pages/trade/binance-trade-page/services/futures/binance-futures.types";
 import {
   getMarginRatioColor,
   MARGIN_INFO_ASSET
 } from "pages/trade/binance-trade-page/trading/margin-ratio/margin-ratio.helpers";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import withLoader from "decorators/with-loader";
 
 interface Props {
-  data: FuturesAsset;
+  maintMargin: number;
+  marginBalance: number;
 }
 
-const _MarginRatio: React.FC<Props> = ({
-  data: { maintMargin, marginBalance }
-}) => {
+const _MarginRatio: React.FC<Props> = ({ maintMargin, marginBalance }) => {
   const [t] = useTranslation();
   const marginRatio =
     +marginBalance > 0 ? (+maintMargin / +marginBalance) * 100 : 0;
@@ -47,4 +45,4 @@ const _MarginRatio: React.FC<Props> = ({
   );
 };
 
-export const MarginRatio = withBlurLoader(React.memo(_MarginRatio));
+export const MarginRatio = withLoader(React.memo(_MarginRatio));

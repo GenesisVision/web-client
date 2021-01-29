@@ -11,7 +11,7 @@ interface Props {
 
 const _CommentInputContainer: React.FC<Props> = ({ onSuccess, id }) => {
   const successMiddleware = () => onSuccess();
-  const { sendRequest, status, errorMessage } = useApiRequest({
+  const { sendRequest, status, errorMessage } = useApiRequest<void>({
     middleware: [sendCommentEvent, successMiddleware],
     request: values => sendComment({ ...values, postId: id })
   });

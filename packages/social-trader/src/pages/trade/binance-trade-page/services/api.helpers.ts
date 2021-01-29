@@ -8,31 +8,13 @@ import {
   BinanceRawOrder,
   BinanceRawOrderBookEntry,
   BinanceRawPlacedOrder,
-  BinanceRawPlaceOrder,
-  BrokerTradeServerType
+  BinanceRawPlaceOrder
 } from "gv-api-web";
-import { getBinanceTerminalApiMethods } from "pages/trade/binance-trade-page/binance-trade.helpers";
 import { Bar } from "pages/trade/binance-trade-page/trading/chart/charting_library/datafeed-api";
 import { DividerPartsType } from "pages/trade/binance-trade-page/trading/order-book/order-book.helpers";
-import {
-  StringBidDepth,
-  TerminalType,
-  TradeRequest,
-  UnitedOrder
-} from "pages/trade/binance-trade-page/trading/terminal.types";
+import { StringBidDepth, TradeRequest, UnitedOrder } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { OrderRequest } from "services/request.service";
 import { formatValue } from "utils/formatter";
-
-export const getTerminalApiMethods = (
-  brokerType?: BrokerTradeServerType,
-  type?: TerminalType
-) => {
-  switch (brokerType) {
-    case "Binance":
-    default:
-      return getBinanceTerminalApiMethods(type);
-  }
-};
 
 export const transformKlineBar = ({
   close,

@@ -2,13 +2,7 @@ import { Center } from "components/center/center";
 import React from "react";
 import styled from "styled-components";
 import { adaptiveMargin } from "utils/style/mixins";
-import {
-  $paddingMedium,
-  $paddingSmall,
-  $paddingXsmall,
-  $paddingXxsmall,
-  $paddingXxxsmall
-} from "utils/style/sizes";
+import { $paddingMedium, $paddingSmall, $paddingXsmall, $paddingXxsmall, $paddingXxxsmall } from "utils/style/sizes";
 
 import { IRowProps } from "./row.types";
 
@@ -17,6 +11,8 @@ export const Row = styled(Center)<IRowProps>`
   &:not(:first-child) {
     ${({ size = "middle" }: IRowProps) => {
       switch (size) {
+        case "zero":
+          return adaptiveMargin("top", 0);
         case "xsmall":
           return adaptiveMargin("top", $paddingXxxsmall);
         case "small":

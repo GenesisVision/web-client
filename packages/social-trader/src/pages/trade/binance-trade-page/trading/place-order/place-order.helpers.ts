@@ -1,10 +1,12 @@
 import {
   AssetBalance,
+  ExchangeInfo,
   OrderSide,
   OrderType,
   TerminalCurrency
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { tableLoaderCreator } from "utils/helpers";
+import { getSymbolFilters } from "pages/trade/binance-trade-page/trading/terminal.helpers";
 
 export const mapPlaceOrderErrors = (error: string) => {
   switch (error) {
@@ -67,6 +69,20 @@ export const getBalance = (
   balances: AssetBalance[],
   currency: TerminalCurrency
 ) => {
-  const wallet = balances.find(({ asset }) => asset === currency);
+  const wallet = balances?.find(({ asset }) => asset === currency);
   return wallet ? wallet.free : 0;
+};
+
+export const getFilterValues = (exchangeInfo: ExchangeInfo, symbol: string) => {
+  const { priceFilter, lotSizeFilter, minNotionalFilter } = getSymbolFilters(
+    exchangeInfo,
+    symbol
+  );
+  return {
+    minPrice: priceFilter ? priceFilter.minPrice : 0,
+    maxPrice: priceFilter ? priceFilter.maxPrice : 0,
+    minQuantity: lotSizeFilter ? lotSizeFilter.minQuantity : 0,
+    maxQuantity: lotSizeFilter ? lotSizeFilter.maxQuantity : 0,
+    minNotional: minNotionalFilter ? minNotionalFilter.minNotional : 0
+  };
 };

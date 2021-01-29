@@ -1,8 +1,5 @@
 import { sendEditEvent } from "components/conversation/conversation.ga";
-import {
-  editPost,
-  getPostForEdit
-} from "components/conversation/conversation.service";
+import { editPost, getPostForEdit } from "components/conversation/conversation.service";
 import { PostEdit } from "components/conversation/post/post-edit/post-edit";
 import { DefaultBlock } from "components/default.block/default.block";
 import { DialogTop } from "components/dialog/dialog-top";
@@ -14,6 +11,7 @@ import { idSelector } from "reducers/header-reducer";
 import { postponeCallback } from "utils/hook-form.helpers";
 
 import styles from "./post-edit.module.scss";
+import { IEditPostData } from "components/conversation/conversation.types";
 
 export interface IPostEditContainerProps {
   onApply?: VoidFunction;
@@ -30,11 +28,15 @@ const _PostEditContainer: React.FC<IPostEditContainerProps> = ({
 
   const onApplyMiddleware = postponeCallback(onApply);
 
-  const { sendRequest: submitEditPost, errorMessage, status } = useApiRequest({
+  const {
+    sendRequest: submitEditPost,
+    errorMessage,
+    status
+  } = useApiRequest<void>({
     request: editPost,
     middleware: [sendEditEvent, onApplyMiddleware]
   });
-  const { data } = useApiRequest({
+  const { data } = useApiRequest<IEditPostData>({
     request: getPostForEdit,
     fetchOnMount: true,
     fetchOnMountData: { id }
@@ -60,7 +62,7 @@ const _PostEditContainer: React.FC<IPostEditContainerProps> = ({
         horizontalOffsets={false}
         verticalOffsets={false}
       >
-        {data && (
+        {!!data && (
           <PostEdit
             data={data!}
             errorMessage={errorMessage}

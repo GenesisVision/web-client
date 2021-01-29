@@ -5,10 +5,7 @@ import { ASSET } from "constants/constants";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import { useAccountCurrency } from "hooks/account-currency.hook";
 import useApiRequest from "hooks/api-request.hook";
-import {
-  fetchWallets,
-  TWalletsAvailableData
-} from "pages/wallet/services/wallet.services";
+import { fetchWallets, TWalletsAvailableData } from "pages/wallet/services/wallet.services";
 import React, { useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { convertToStatisticCurrency, sendEventToGA } from "utils/ga";
@@ -18,7 +15,7 @@ import { CurrencyEnum } from "utils/types";
 
 import DepositForm from "./deposit-form";
 import DepositTop from "./deposit-top";
-import { MinDepositType, TFees } from "./deposit.types";
+import { MinDepositType, TAssetInvestCreatorArgs, TFees } from "./deposit.types";
 
 const getRequestMethod = (asset: ASSET) =>
   asset === ASSET.FUND ? fundInvest : programInvest;
@@ -79,7 +76,11 @@ const _DepositPopup: React.FC<Props> = ({
   });
   const handleInvest = useCallback(
     ({ amount, walletId }) => {
-      return sendRequest({ id, amount, walletId }).then(res => {
+      return sendRequest({
+        id,
+        amount,
+        walletId
+      } as TAssetInvestCreatorArgs).then(res => {
         if (!res) return;
         const walletCurrency = safeGetElemFromArray(
           wallets,
