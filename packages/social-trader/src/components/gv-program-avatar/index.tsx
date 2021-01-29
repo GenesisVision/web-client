@@ -62,9 +62,9 @@ const Container = styled.div<IContainerProps>`
 const StyledImageBase = styled(ImageBase)`
   max-width: 100%;
   max-height: 100%;
-  width: ${({ fullSize }) => fullSize && "100%"};
-  height: ${({ fullSize }) => fullSize && "100%"};
-  object-fit: ${({ fullSize }) => fullSize && "cover"};
+  width: ${({ fullSize }) => (fullSize ? "100%" : "")};
+  height: ${({ fullSize }) => (fullSize ? "100%" : "")};
+  object-fit: ${({ fullSize }) => (fullSize ? "cover" : "")};
   ${adaptiveBorderRadius(7)};
 `;
 
