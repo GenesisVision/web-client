@@ -16,6 +16,7 @@ export interface IImageBaseProps extends OptionalClickable {
   DefaultImageComponent?: React.ComponentType<any>;
   src?: string;
   alt?: string;
+  fullSize?: boolean;
   defaultImage?: string;
   className?: string;
   defaultImageClassName?: string;

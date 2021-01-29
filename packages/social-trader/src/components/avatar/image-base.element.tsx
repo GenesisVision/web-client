@@ -1,7 +1,8 @@
-import clsx from "clsx";
-import useIsOpen from "hooks/is-open.hook";
 import "lazysizes";
 import "lazysizes/plugins/attrchange/ls.attrchange";
+
+import clsx from "clsx";
+import useIsOpen from "hooks/is-open.hook";
 import * as React from "react";
 import { useCallback, useEffect } from "react";
 import { OptionalClickable } from "utils/types";
@@ -41,6 +42,7 @@ const _ImageBaseElement: React.FC<IImageBaseElementProps> = ({
     e.target.onerror = null;
     setIsError();
   }, []);
+
   const currentSrc = isError ? (defaultImage ? defaultImage : emptyImg) : src;
   if (isError || !hasUrl)
     return DefaultImageComponent ? (
@@ -49,13 +51,13 @@ const _ImageBaseElement: React.FC<IImageBaseElementProps> = ({
         imageClassName={clsx(defaultImageClassName, className)}
       />
     ) : (
-      // eslint-disable-next-line jsx-a11y/img-redundant-alt
-      <img
-        src={defaultImage || emptyImg}
-        alt="Image not found"
-        className={clsx(defaultImageClassName, className)}
-      />
-    );
+        // eslint-disable-next-line jsx-a11y/img-redundant-alt
+        <img
+          src={defaultImage || emptyImg}
+          alt="Image not found"
+          className={clsx(defaultImageClassName, className)}
+        />
+      );
   return (
     <img
       onClick={onClick}
