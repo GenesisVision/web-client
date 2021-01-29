@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import ImageBase from "components/avatar/image-base";
 import {
   $avatarSmallShift,
@@ -78,6 +79,7 @@ const _GVProgramAvatar: React.FC<GVProgramAvatarProps> = ({
   levelProgress = 0,
   size = "small",
   color,
+  fullSize,
   onMouseOverLevel,
   onMouseEnterLevel,
   onMouseLeaveLevel,
@@ -88,7 +90,9 @@ const _GVProgramAvatar: React.FC<GVProgramAvatarProps> = ({
     <Container level={level} size={size}>
       <Avatar size={size}>
         <StyledImageBase
-          className={styles["program-avatar__full-image"]}
+          className={clsx({
+            [styles["program-avatar__full-image"]]: fullSize
+          })}
           quality={size === "large" ? "Medium" : "Low"}
           DefaultImageComponent={GVProgramDefaultAvatar}
           src={url}
