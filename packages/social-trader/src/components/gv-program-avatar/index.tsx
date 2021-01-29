@@ -1,4 +1,3 @@
-import clsx from "clsx";
 import ImageBase from "components/avatar/image-base";
 import {
   $avatarSmallShift,
@@ -23,7 +22,6 @@ import { adaptiveBorderRadius, adaptivePadding } from "utils/style/mixins";
 import { SizesType } from "utils/types";
 
 import GVProgramDefaultAvatar from "./gv-propgram-default-avatar";
-import styles from "./style.module.scss";
 
 interface IContainerProps {
   level?: number;
@@ -64,6 +62,9 @@ const Container = styled.div<IContainerProps>`
 const StyledImageBase = styled(ImageBase)`
   max-width: 100%;
   max-height: 100%;
+  width: ${({ fullSize }) => fullSize && "100%"};
+  height: ${({ fullSize }) => fullSize && "100%"};
+  object-fit: ${({ fullSize }) => fullSize && "cover"};
   ${adaptiveBorderRadius(7)};
 `;
 
@@ -90,9 +91,7 @@ const _GVProgramAvatar: React.FC<GVProgramAvatarProps> = ({
     <Container level={level} size={size}>
       <Avatar size={size}>
         <StyledImageBase
-          className={clsx({
-            [styles["program-avatar__full-image"]]: fullSize
-          })}
+          fullSize={fullSize}
           quality={size === "large" ? "Medium" : "Low"}
           DefaultImageComponent={GVProgramDefaultAvatar}
           src={url}
