@@ -1,10 +1,8 @@
 import AssetFormField from "components/assets/asset-fields/asset-form-field";
 import { SimpleNumberField } from "components/simple-fields/simple-number-field";
-import { stopOutLevelShape } from "pages/convert-asset/components/convert-asset-settings.helpers";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { allowPositiveValuesNumberFormat } from "utils/helpers";
-import { convertShapeToRules } from "utils/validators/validators";
 
 interface Props {
   name: string;
@@ -25,7 +23,17 @@ const _StopOutField: React.FC<Props> = ({ currentValue, name }) => {
         "create-account:settings.hints.stop-out-level-description"
       )}
       hintContent={t("create-account:settings.hints.stop-out-level")}
-      rules={convertShapeToRules(stopOutLevelShape(t, currentValue))}
+      rules={{
+        required: t("validations.stop-out-required"),
+        min: {
+          value: 10,
+          message: t("validations.stop-out-is-zero")
+        },
+        max: {
+          value: currentValue || 100,
+          message: t("validations.stop-out-is-large")
+        }
+      }}
     />
   );
 };

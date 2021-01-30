@@ -2,13 +2,11 @@ import FormTextField from "components/assets/fields/form-text-field";
 import GVCheckbox from "components/gv-checkbox/gv-checkbox";
 import InputAmountField from "components/input-amount-field/hook-form-amount-field";
 import { Row } from "components/row/row";
-import { investmentLimitShape } from "pages/convert-asset/components/convert-asset-settings.helpers";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { NumberFormatValues } from "react-number-format";
 import { validateFraction } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
-import { convertShapeToRules } from "utils/validators/validators";
 
 interface Props {
   wide?: boolean;
@@ -52,7 +50,21 @@ const _InvestmentLimitField: React.FC<Props> = ({
         name={inputName}
         label={t("asset-settings:fields.enter-correct-amount")}
         currency={currency}
-        rules={convertShapeToRules(investmentLimitShape(hasInvestmentLimit, t))}
+        rules={
+          hasInvestmentLimit
+            ? {
+                required: t("validations.investment-limit-required"),
+                min: {
+                  value: 0,
+                  message: t("validations.investment-limit-min")
+                },
+                max: {
+                  value: 10000000000,
+                  message: "Investment Limit must be less than 10000000000"
+                }
+              }
+            : undefined
+        }
       />
       <Row wide size={"large"}>
         <FormTextField>
