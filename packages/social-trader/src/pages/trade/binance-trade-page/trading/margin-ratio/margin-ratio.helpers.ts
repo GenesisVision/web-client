@@ -1,10 +1,9 @@
 import { ColoredTextColor } from "components/colored-text/colored-text";
 import { FuturesAsset } from "pages/trade/binance-trade-page/services/futures/binance-futures.types";
 import {
-  AssetBalance,
+  ExtentedBinanceRawBinanceBalance,
   TerminalCurrency
 } from "pages/trade/binance-trade-page/trading/terminal.types";
-import { safeGetElemFromArray } from "utils/helpers";
 
 export const MARGIN_INFO_ASSET = "USDT";
 
@@ -21,11 +20,14 @@ export const getMarginRatioLoaderData = (): FuturesAsset => ({
 });
 
 export const getMarginInfo = (
-  balances: AssetBalance[],
+  balances: ExtentedBinanceRawBinanceBalance[],
   currency: TerminalCurrency
-): FuturesAsset => {
-  const balance = balances.find(({ asset }) => asset === currency);
-  return balance?.futuresAsset || ({} as FuturesAsset);
+) => {
+  const info = balances.find(({ asset }) => asset === currency);
+  return {
+    maintMargin: info?.maintMargin || 0,
+    marginBalance: info?.marginBalance || 0
+  };
 };
 
 export const getMarginRatioColor = (ratio: number): ColoredTextColor => {

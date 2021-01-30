@@ -62,6 +62,13 @@ const Container = styled.div<IContainerProps>`
 const StyledImageBase = styled(ImageBase)`
   max-width: 100%;
   max-height: 100%;
+  ${({ fullSize }) =>
+    fullSize &&
+    `
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  `}
   ${adaptiveBorderRadius(7)};
 `;
 
@@ -77,6 +84,7 @@ const _GVProgramAvatar: React.FC<GVProgramAvatarProps> = ({
   levelProgress = 0,
   size = "small",
   color,
+  fullSize,
   onMouseOverLevel,
   onMouseEnterLevel,
   onMouseLeaveLevel,
@@ -87,6 +95,7 @@ const _GVProgramAvatar: React.FC<GVProgramAvatarProps> = ({
     <Container level={level} size={size}>
       <Avatar size={size}>
         <StyledImageBase
+          fullSize={fullSize}
           quality={size === "large" ? "Medium" : "Low"}
           DefaultImageComponent={GVProgramDefaultAvatar}
           src={url}

@@ -12,11 +12,7 @@ import {
 } from "pages/trade/binance-trade-page/trading/place-order/place-order-settings/time-in-force-field/time-in-force-field";
 import { PlaceOrderSlider } from "pages/trade/binance-trade-page/trading/place-order/place-order-slider";
 import { PlaceOrderSubmitButton } from "pages/trade/binance-trade-page/trading/place-order/place-order-submit-button";
-import {
-  AssetBalance,
-  ExchangeInfo,
-  OrderSide
-} from "pages/trade/binance-trade-page/trading/terminal.types";
+import { OrderSide } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -29,8 +25,8 @@ import {
 import { usePlaceOrderAutoFill } from "./hooks/place-order-auto-fill.hook";
 import { usePlaceOrderFormReset } from "./hooks/place-order-form-reset.hook";
 import { usePlaceOrderInfo } from "./hooks/place-order-info-hook";
-import { getBalance } from "./place-order.helpers";
 import {
+  FilterValues,
   IPlaceOrderHandleSubmitValues,
   IStopLimitFormValues,
   TRADE_FORM_FIELDS
@@ -38,6 +34,7 @@ import {
 import { tradeNumberShape } from "./place-order-validation";
 
 export interface IStopLimitTradeFormProps {
+  filterValues: FilterValues;
   status: API_REQUEST_STATUS;
   outerPrice: string;
   side: OrderSide;
@@ -46,10 +43,18 @@ export interface IStopLimitTradeFormProps {
 
 const _StopLimitTradeForm: React.FC<
   IStopLimitTradeFormProps & {
-    balances: AssetBalance[];
-    exchangeInfo: ExchangeInfo;
+    balanceBase: number;
+    balanceQuote: number;
   }
-> = ({ status, balances, exchangeInfo, outerPrice, onSubmit, side }) => {
+> = ({
+  filterValues,
+  status,
+  balanceQuote,
+  balanceBase,
+  outerPrice,
+  onSubmit,
+  side
+}) => {
   const [t] = useTranslation();
 
   const {
@@ -70,9 +75,10 @@ const _StopLimitTradeForm: React.FC<
     maxQuantityWithWallet,
     maxTotalWithWallet
   } = usePlaceOrderInfo({
-    balances,
+    balanceBase,
+    balanceQuote,
     side,
-    exchangeInfo
+    filterValues
   });
 
   const form = useForm<IStopLimitFormValues>({
@@ -94,13 +100,14 @@ const _StopLimitTradeForm: React.FC<
     reset,
     side,
     setValue,
-    balances,
+    balanceBase,
+    balanceQuote,
     quantityName: TRADE_FORM_FIELDS.quantity
   });
 
   usePlaceOrderAutoFill({
-    buyWalletAvailable: getBalance(balances, quoteAsset),
-    sellWalletAvailable: getBalance(balances, baseAsset),
+    buyWalletAvailable: balanceQuote,
+    sellWalletAvailable: balanceBase,
     setSliderValue,
     side,
     totalName: TRADE_FORM_FIELDS.total,

@@ -36,7 +36,7 @@ const _AddApiKeyCredentials: React.FC<Props> = ({ data }) => {
           </RowItem>
         </Row>
         <Row>
-          <CopyButton value={data.apiKey} />
+          <CopyButton value={data.apiSecret} />
         </Row>
       </Row>
       <Row>

@@ -66,9 +66,12 @@ const uploadImages = async (images?: IImageValue[]) => {
 
 const sendMessage = (values: IPostMessageValues) => {
   return uploadImages(values.images).then(images => {
-    return api.social().addPost({
-      body: { ...values, images }
-    });
+    return api
+      .social()
+      .addPost({
+        body: { ...values, images }
+      })
+      .then(() => {});
   });
 };
 
@@ -192,9 +195,12 @@ export const editPost = (values: EditPost & { images?: IImageValue[] }) => {
     ({ image }: IImageValue) => !!image?.cropped
   ) as unknown) as IImageValue[];
   return uploadImages(newImages).then(images => {
-    return api.social().editPost({
-      body: { ...values, images: [...oldImages, ...images] }
-    });
+    return api
+      .social()
+      .editPost({
+        body: { ...values, images: [...oldImages, ...images] }
+      })
+      .then(() => {});
   });
 };
 

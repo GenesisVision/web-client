@@ -47,15 +47,15 @@ const _ApiKeysTableRow: React.FC<Props> = ({
         </Row>
       </TableCell>
       <TableCell>{apiSecret}</TableCell>
-      <TableCell>{readonly ? "✔" : ""}</TableCell>
-      <TableCell>{ipRestrict ? "✔" : ""}</TableCell>
+      <TableCell>{readonly ? "✔" : "—"}</TableCell>
+      <TableCell>{ipRestrict ? "✔" : "—"}</TableCell>
       <TableCell>
         <Row>
           <RowItem>
             <EditApiKeyButton defaultValues={defaultValues} />
           </RowItem>
           <RowItem>
-            <DeleteApiKeyButton id={id} title={title} />
+            <DeleteApiKeyButton apiKey={apiKey} id={id} title={title} />
           </RowItem>
         </Row>
       </TableCell>

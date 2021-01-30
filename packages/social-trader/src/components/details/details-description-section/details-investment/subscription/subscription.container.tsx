@@ -1,15 +1,17 @@
 import { fetchSubscriptions } from "components/details/details-description-section/details-investment/details-investment.service";
-import SubscriptionTable from "components/details/details-description-section/details-investment/subscription/subscription-table";
+import SubscriptionTable
+  from "components/details/details-description-section/details-investment/subscription/subscription-table";
 import useApiRequest from "hooks/api-request.hook";
 import React, { useCallback, useEffect } from "react";
 import { CurrencyEnum } from "utils/types";
+import { SignalSubscription } from "gv-api-web";
 
 const _SubscriptionContainer: React.FC<Props> = ({
   id,
   assetCurrency,
   subscribedAccounts
 }) => {
-  const { data, sendRequest } = useApiRequest({
+  const { data, sendRequest } = useApiRequest<SignalSubscription[]>({
     name: "SubscriptionContainer",
     cache: true,
     request: fetchSubscriptions

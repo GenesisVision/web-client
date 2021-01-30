@@ -32,7 +32,7 @@ const _EditApiKeyContainer: React.FC<IEditApiKeyContainerProps> = ({
   const handleSubmit = useCallback((values: IApiKeyFormValues) => {
     return sendRequest({
       ...values,
-      id: defaultValues.id,
+      id: defaultValues.id || "",
       twoFactorCode: values.twoFactorCode || ""
     });
   }, []);

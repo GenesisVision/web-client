@@ -9,6 +9,7 @@ import {
   AssetBalance,
   ExchangeInfo,
   MergedTickerSymbolType,
+  Position,
   SymbolState,
   TerminalCurrency,
   UnitedOrder
@@ -38,9 +39,7 @@ export const generateOrderMessage = (
   symbol: MergedTickerSymbolType
 ): string => {
   const { stepSize } = symbol.lotSizeFilter;
-  const orderType = setUpperFirstLetter(order.type)
-    .split("_")
-    .join(" ");
+  const orderType = setUpperFirstLetter(order.type).split("_").join(" ");
   const executionTypeTitle =
     order.executionType?.toLowerCase() === "new"
       ? "Created"
@@ -156,7 +155,7 @@ export const getSymbolFilters = (
   };
 };
 
-export const USER_STREAM_ACCOUNT_UPDATE_EVENT_TYPE = "outboundAccountInfo";
+export const USER_STREAM_ACCOUNT_UPDATE_EVENT_TYPE = "outboundAccountPosition";
 
 export const filterOutboundAccountInfoStream = (
   userStream: Observable<any>
@@ -178,16 +177,78 @@ const normalizeBalanceList = (
   return initObject;
 };
 
+const normalizePositionsList = (
+  list: Position[]
+): { [keys: string]: Position } => {
+  const initObject: AnyObjectType = {};
+  list.forEach(item => {
+    if (!initObject[item.symbol]) initObject[item.symbol] = {};
+    initObject[item.symbol][item.positionSide] = item;
+  });
+  return initObject;
+};
+
+const flatNormalizedPositions = (positions: {
+  [keys: string]: Position;
+}): Position[] => {
+  return Object.values(positions)
+    .map(item => Object.values(item))
+    .flat();
+};
+
+export const updatePositionList = (
+  list: AnyObjectType,
+  updates: AnyObjectType
+): AnyObjectType => {
+  const updatedList = JSON.parse(JSON.stringify(list));
+  Object.entries(updates).forEach(([symbol, data]) => {
+    Object.keys(data).forEach(side => {
+      if (!updatedList[symbol]?.[side]) return;
+      updatedList[symbol][side] = {
+        ...updatedList[symbol][side],
+        ...updates[symbol][side]
+      };
+    });
+  });
+  return updatedList;
+};
+
+const updateBalancesList = (
+  list: AnyObjectType,
+  updates: AnyObjectType
+): AnyObjectType => {
+  const updatedList = { ...list };
+  Object.entries(updates).forEach(([symbol, data]) => {
+    updatedList[symbol] = {
+      ...updatedList[symbol],
+      ...data,
+      newAmountInCurrency: updatedList[symbol]?.newAmountInCurrency
+    };
+  });
+  return updatedList;
+};
+
 export const updateAccountInfo = (currentData: Account, updates: Account) => {
   const normalizedCurrentBalances = normalizeBalanceList(currentData.balances);
   const normalizedUpdatesBalances = normalizeBalanceList(
     updates.balances || []
   );
-  const balances = Object.values({
-    ...normalizedCurrentBalances,
-    ...normalizedUpdatesBalances
-  });
-  return { ...currentData, ...updates, balances };
+  const balances = Object.values(
+    updateBalancesList(normalizedCurrentBalances, normalizedUpdatesBalances)
+  );
+
+  const normalizedCurrentPositions = normalizePositionsList(
+    currentData.positions || []
+  );
+  const normalizedUpdatesPositions = normalizePositionsList(
+    updates.positions || []
+  );
+
+  const positions = flatNormalizedPositions(
+    updatePositionList(normalizedCurrentPositions, normalizedUpdatesPositions)
+  );
+
+  return { ...currentData, ...updates, balances, positions };
 };
 
 export const stringifySymbolFromToParam = (symbol: SymbolState): string => {

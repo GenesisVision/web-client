@@ -1,61 +1,72 @@
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
-import {
-  getSymbol,
-  getSymbolFilters
-} from "pages/trade/binance-trade-page/trading/terminal.helpers";
-import {
-  AssetBalance,
-  ExchangeInfo,
-  OrderSide
-} from "pages/trade/binance-trade-page/trading/terminal.types";
+import { OrderSide } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { useContext, useMemo } from "react";
+import { TerminalPlaceOrderContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-place-order.context";
+import { FilterValues } from "pages/trade/binance-trade-page/trading/place-order/place-order.types";
 
-import { getBalance } from "../place-order.helpers";
+export interface UsePlaceOrderInfoReturn {
+  minPrice: number;
+  maxPrice: number;
+  minQuantity: number;
+  minNotional: number;
+  maxQuantityWithWallet: number;
+  maxTotalWithWallet: number;
+}
 
 export const usePlaceOrderInfo = ({
-  exchangeInfo,
-  balances,
+  filterValues,
+  balanceBase,
+  balanceQuote,
   side
 }: {
-  exchangeInfo: ExchangeInfo;
+  filterValues: FilterValues;
   side: OrderSide;
-  balances: AssetBalance[];
-}) => {
+  balanceBase: number;
+  balanceQuote: number;
+}): UsePlaceOrderInfoReturn => {
+  const { leverage } = useContext(TerminalPlaceOrderContext);
   const {
-    symbol: { baseAsset, quoteAsset },
-    terminalType
+    terminalType,
+    symbol: { baseAsset, quoteAsset }
   } = useContext(TerminalInfoContext);
-  const filters = getSymbolFilters(
-    exchangeInfo,
-    getSymbol(baseAsset, quoteAsset)
-  );
-  const { minPrice, maxPrice } = filters.priceFilter;
-  const { minQuantity, maxQuantity } = filters.lotSizeFilter;
-  const { minNotional } = filters.minNotionalFilter;
+
+  const {
+    minPrice,
+    maxPrice,
+    minQuantity,
+    maxQuantity,
+    minNotional
+  } = filterValues;
 
   const maxQuantityWithWallet = useMemo(() => {
     return side === "Buy"
       ? +maxQuantity
       : Math.min(
           +maxQuantity,
-          +getBalance(
-            balances,
-            terminalType === "futures" ? quoteAsset : baseAsset
-          )
+          terminalType === "futures" ? balanceQuote : balanceBase
         );
-  }, [side, maxQuantity, balances, baseAsset]);
+  }, [side, maxQuantity, terminalType, balanceQuote, balanceBase, baseAsset]);
 
   const maxTotalWithWallet = useMemo(() => {
-    return side === "Buy"
-      ? +getBalance(balances, quoteAsset)
-      : Number.MAX_SAFE_INTEGER;
-  }, [side, balances, quoteAsset]);
-  return {
-    minPrice,
-    maxPrice,
-    minQuantity,
-    minNotional,
-    maxQuantityWithWallet,
-    maxTotalWithWallet
-  };
+    return side === "Buy" ? balanceQuote * leverage : Number.MAX_SAFE_INTEGER;
+  }, [side, balanceQuote, quoteAsset, leverage]);
+
+  return useMemo(
+    () => ({
+      minPrice,
+      maxPrice,
+      minQuantity,
+      minNotional,
+      maxQuantityWithWallet,
+      maxTotalWithWallet
+    }),
+    [
+      minPrice,
+      maxPrice,
+      minQuantity,
+      minNotional,
+      maxQuantityWithWallet,
+      maxTotalWithWallet
+    ]
+  );
 };

@@ -22,7 +22,6 @@ const _NotificationsContainer: React.FC<Props> = ({ setClose }) => {
   };
   const { data, sendRequest, isPending } = useApiRequest({
     name: "NotificationsContainer",
-    cache: true,
     request: fetchNotifications,
     fetchOnMount: true,
     fetchOnMountData: options,

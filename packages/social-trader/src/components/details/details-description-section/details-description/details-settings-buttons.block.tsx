@@ -92,7 +92,7 @@ const _DetailsSettingsButtons: React.FC<Props> = ({
       {apiKeysUrl && (
         <SettingsItem>
           <Link to={apiKeysUrl}>
-            <DetailsDescriptionControlButton text={"API keys"}>
+            <DetailsDescriptionControlButton text={"API Keys"}>
               <DescriptionControlIcon>
                 <SettingsIcon />
               </DescriptionControlIcon>

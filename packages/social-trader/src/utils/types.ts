@@ -1,15 +1,7 @@
 import { ChartDefaultPeriod } from "components/chart/chart-period/chart-period.helpers";
-import {
-  Currency,
-  FundAssetPart,
-  PlatformAsset,
-  ProgramNotificationSettingList
-} from "gv-api-web";
+import { Currency, FundAssetPart, PlatformAsset, ProgramNotificationSettingList } from "gv-api-web";
 import { NextPageContext } from "next";
-import {
-  AppContextType,
-  NextComponentType
-} from "next/dist/next-server/lib/utils";
+import { AppContextType, NextComponentType } from "next/dist/next-server/lib/utils";
 import React, { ReactNode } from "react";
 import { AuthRootState as SocialTraderAuthRootState } from "reducers";
 import { RootState } from "reducers/root-reducer";
@@ -18,6 +10,7 @@ import { ThunkAction, ThunkDispatch } from "redux-thunk";
 import Token from "services/api-client/token";
 
 export type SizesType =
+  | "zero"
   | "xsmall"
   | "small"
   | "middle"

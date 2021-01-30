@@ -1,4 +1,5 @@
-import DetailsDescriptionSection from "components/details/details-description-section/details-description/details-description-section";
+import DetailsDescriptionSection
+  from "components/details/details-description-section/details-description/details-description-section";
 import { DetailsTags } from "components/details/details-description-section/details-description/details-tags.block";
 import DetailsInvestment from "components/details/details-description-section/details-investment/details-investment";
 import { DetailsDivider } from "components/details/details-divider.block";
@@ -9,9 +10,11 @@ import { ASSET, TRADE_ASSET_TYPE } from "constants/constants";
 import { LevelsParamsInfo } from "gv-api-web";
 import dynamic from "next/dynamic";
 import { mapProgramFollowToTransferItemType } from "pages/dashboard/services/dashboard.service";
-import FollowDetailsStatisticSection from "pages/invest/follows/follow-details/follow-details-statistic-section/follow-details-statistic-section";
+import FollowDetailsStatisticSection
+  from "pages/invest/follows/follow-details/follow-details-statistic-section/follow-details-statistic-section";
 import PerformanceData from "pages/invest/programs/program-details/program-details-description/performance-data";
-import ProgramDetailsStatisticSection from "pages/invest/programs/program-details/program-details-statistic-section/program-details-statistic-section";
+import ProgramDetailsStatisticSection
+  from "pages/invest/programs/program-details/program-details-statistic-section/program-details-statistic-section";
 import { levelsParamsLoaderData } from "pages/invest/programs/program-details/program-details.loader-data";
 import { ProgramDescriptionDataType } from "pages/invest/programs/program-details/program-details.types";
 import { getSchema } from "pages/invest/programs/program-details/program-schema";
@@ -29,9 +32,7 @@ import {
 } from "utils/compose-url";
 import { $paddingMedium } from "utils/style/sizes";
 
-import ProgramDetailsHistorySection, {
-  TProgramTablesData
-} from "./program-history-section/program-details-history-section";
+import ProgramDetailsHistorySection, { TProgramTablesData } from "./program-history-section/program-details-history-section";
 import {
   financialStatisticTableSelector,
   openPositionsSelector,
@@ -52,14 +53,17 @@ import {
   getTrades
 } from "./service/program-details.service";
 
-const InvestmentAccountControls = dynamic(() =>
-  import("pages/accounts/account-details/investment-account-controls")
+const InvestmentAccountControls = dynamic(
+  () => import("pages/accounts/account-details/investment-account-controls")
 );
-const InvestmentProgramControls = dynamic(() =>
-  import("./program-controls/investment-program-controls")
+const InvestmentProgramControls = dynamic(
+  () => import("./program-controls/investment-program-controls")
 );
-const FollowControls = dynamic(() =>
-  import("pages/invest/follows/follow-details/follow-controls/follow-controls")
+const FollowControls = dynamic(
+  () =>
+    import(
+      "pages/invest/follows/follow-details/follow-controls/follow-controls"
+    )
 );
 
 const ControlsRow = styled(Row)`
@@ -211,9 +215,9 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
 
   const apiKeysUrl = useMemo(
     () =>
-      isExchange
+      isExchange && isOwnAsset
         ? createProgramApiKeysToUrl(
-            description.id,
+            description.publicInfo.url,
             description.publicInfo.title
           )
         : undefined,

@@ -4,15 +4,13 @@ import { Text } from "components/text/text";
 import { terminalMoneyFormat } from "pages/trade/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import { TerminalTickerContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-ticker.context";
-import {
-  getSymbolData,
-  getSymbolFilters
-} from "pages/trade/binance-trade-page/trading/terminal.helpers";
+import { getSymbolData, getSymbolFilters } from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import { OrderSide } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useContext } from "react";
 import styled from "styled-components";
 import { formatDate } from "utils/dates";
-import { formatCurrencyValue } from "utils/formatter";
+import { formatValue } from "utils/formatter";
+import { DEFAULT_DECIMAL_SCALE } from "constants/constants";
 
 interface Props {
   time: number | Date;
@@ -70,7 +68,7 @@ const _TradeHistoryRow: React.FC<Props> = ({
       <TableCell>
         {commission &&
           commissionAsset &&
-          formatCurrencyValue(commission, commissionAsset)}{" "}
+          formatValue(commission, DEFAULT_DECIMAL_SCALE)}{" "}
         {commissionAsset}
       </TableCell>
       <TableCell>

@@ -2,10 +2,7 @@ import { API_REQUEST_STATUS } from "hooks/api-request.hook";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import { useTradeSlider } from "pages/trade/binance-trade-page/trading/place-order/hooks/place-order-slider.hook";
 import { PriceType } from "pages/trade/binance-trade-page/trading/place-order/place-order.types";
-import {
-  AssetBalance,
-  OrderSide
-} from "pages/trade/binance-trade-page/trading/terminal.types";
+import { OrderSide } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { useContext, useEffect, useState } from "react";
 import { postponeFunc } from "utils/hook-form.helpers";
 import { AnyObjectType } from "utils/types";
@@ -18,7 +15,8 @@ export const usePlaceOrderFormReset = ({
   watch,
   setValue,
   side,
-  balances,
+  balanceBase,
+  balanceQuote,
   quantityName
 }: {
   status: API_REQUEST_STATUS;
@@ -28,7 +26,8 @@ export const usePlaceOrderFormReset = ({
   outerPrice: PriceType;
   setValue: (name: string, value?: number, shouldValidate?: boolean) => void;
   side: OrderSide;
-  balances: AssetBalance[];
+  balanceBase: number;
+  balanceQuote: number;
   quantityName: string;
 }) => {
   const { terminalType, symbol } = useContext(TerminalInfoContext);
@@ -37,7 +36,8 @@ export const usePlaceOrderFormReset = ({
     watch,
     side,
     setValue,
-    balances,
+    balanceBase,
+    balanceQuote,
     quantityName
   });
   const [isReset, setReset] = useState<boolean | undefined>();

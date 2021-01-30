@@ -262,18 +262,26 @@ const _CreateProgramSettings: React.FC<Props> = ({
               ? CREATE_PROGRAM_FIELDS.managementFee
               : CREATE_PROGRAM_FIELDS.entryFee
           }
-          firstFeeDescription={t(
-            "create-account:settings.hints.management-fee-description"
-          )}
+          firstFeeDescription={
+            isExchange
+              ? t(
+                "create-account:settings.hints.exchange-management-fee-description"
+              )
+              : t("create-account:settings.hints.management-fee-description")
+          }
           firstFeeRules={convertShapeToRules(
             entryFeeShape(t, maxManagementFee)
           )}
           secondFeeName={CREATE_PROGRAM_FIELDS.successFee}
           secondFeeLabel={t("asset-settings:fields.success-fee")}
           secondFeeUnderText={t("create-account:settings.hints.success-fee")}
-          secondFeeDescription={t(
-            "create-account:settings.hints.success-fee-description"
-          )}
+          secondFeeDescription={
+            isExchange
+              ? t(
+                "create-account:settings.hints.exchange-success-fee-description"
+              )
+              : t("create-account:settings.hints.success-fee-description")
+          }
           secondFeeRules={convertShapeToRules(
             successFeeShape(t, maxSuccessFee)
           )}

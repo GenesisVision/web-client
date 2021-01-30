@@ -5,14 +5,12 @@ import { TradeStatefulValue } from "pages/trade/binance-trade-page/trading/compo
 import { MarketWatchFavoriteButton } from "pages/trade/binance-trade-page/trading/market-watch/market-watch-favorite-button";
 import { CHANGE_COLUMN } from "pages/trade/binance-trade-page/trading/market-watch/market-watch.helpers";
 import { getTextColor } from "pages/trade/binance-trade-page/trading/terminal.helpers";
-import {
-  SymbolState,
-  TerminalCurrency
-} from "pages/trade/binance-trade-page/trading/terminal.types";
+import { SymbolState, TerminalCurrency } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useCallback } from "react";
 import { formatCurrencyValue } from "utils/formatter";
 
 import styles from "./market-watch.module.scss";
+import NumberFormat from "react-number-format";
 
 interface Props {
   getFavorites: VoidFunction;
@@ -86,7 +84,13 @@ export const MarketWatchRow: React.FC<Props> = React.memo(
               {priceChangePercent} %
             </Text>
           ) : (
-            <Text color={getTextColor(+volume)}>{Math.round(volume)}</Text>
+            <Text color={getTextColor(+volume)}>
+              <NumberFormat
+                displayType="text"
+                thousandSeparator={","}
+                value={Math.round(volume)}
+              />
+            </Text>
           )}
         </td>
       </tr>

@@ -6,12 +6,14 @@ import {
   BinanceOrderStatus,
   BinanceOrderType as BinanceRawOrderType,
   BinancePositionMode,
+  BinancePositionSide,
   BinanceRaw24HPrice,
   BinanceRawAccountInfo,
   BinanceRawBinanceBalance,
   BinanceRawCancelOrder,
   BinanceRawCancelOrderId,
   BinanceRawExchangeInfo,
+  BinanceRawFuturesAccountPosition,
   BinanceRawFuturesChangeMarginTypeResult,
   BinanceRawFuturesInitialLeverageChangeResult,
   BinanceRawFuturesMarkPrice,
@@ -37,6 +39,8 @@ export type SymbolState = {
   quoteAsset: TerminalCurrency;
   baseAsset: TerminalCurrency;
 };
+
+export type Position = BinanceRawFuturesAccountPosition;
 
 export type MarginModeType = BinanceFuturesMarginType;
 
@@ -75,18 +79,18 @@ export interface PositionModeResponse {
 }
 
 export interface FuturesPositionInformation {
-  entryPrice: string;
+  entryPrice: number;
   marginType: MarginModeType;
-  isAutoAddMargin: string;
-  isolatedMargin: string;
-  leverage: string;
-  liquidationPrice: string;
-  markPrice: string;
-  maxNotionalValue: string;
-  positionAmt: string;
+  isAutoAddMargin: boolean;
+  isolatedMargin: number;
+  leverage: number;
+  liquidationPrice: number;
+  markPrice: number;
+  maxNotionalValue: number;
+  positionAmt: number;
   symbol: string;
-  unRealizedProfit: string;
-  positionSide: PositionSideType;
+  unRealizedProfit: number;
+  positionSide: BinancePositionSide;
 }
 
 export interface FuturesPosition {
@@ -218,14 +222,16 @@ export interface ITerminalMethods extends IGVTerminalMethods {
   tradeRequest: ({
     side,
     ...options
-  }: TradeRequest & { accountId?: string; side: OrderSide }) => Promise<
-    PlacedOrderType
-  >;
+  }: TradeRequest & {
+    accountId?: string;
+    side: OrderSide;
+  }) => Promise<PlacedOrderType>;
 
   // Futures
 
   getMarkPrice?: (options: { symbol: string }) => Promise<MarkPrice>;
   getPositionInformation?: (options: {
+    symbol: string;
     accountId?: string;
   }) => Promise<FuturesPositionInformation[]>;
   getBalancesForTransfer?: (options: {
@@ -528,7 +534,20 @@ export enum ErrorCodes {
   REJECTED_MBX_KEY = -2015
 }
 
-export type Account = BinanceRawAccountInfo;
+export interface ExtentedBinanceRawBinanceBalance {
+  asset: string;
+  free: number;
+  locked: number;
+  readonly total: number;
+  amountInCurrency: number;
+  maintMargin?: number;
+  marginBalance?: number;
+}
+
+export type Account = BinanceRawAccountInfo & {
+  positions?: Array<Position>;
+  balances: Array<ExtentedBinanceRawBinanceBalance>;
+};
 
 export interface TradeFee {
   symbol: string;
@@ -855,7 +874,7 @@ export type ExecutionType =
   | "EXPIRED";
 
 export type EventType =
-  | ("executionReport" | "account" | "outboundAccountInfo")
+  | ("executionReport" | "account" | "outboundAccountPosition")
   | FuturesAccountEventType;
 
 export interface DepthMain {

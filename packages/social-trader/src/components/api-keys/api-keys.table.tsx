@@ -2,10 +2,7 @@ import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import { Table } from "components/table/components";
 import Tooltip from "components/tooltip/tooltip";
 import { TooltipContent } from "components/tooltip/tooltip-content";
-import {
-  ExchangeCredentialsInfo,
-  ExchangeCredentialsInfoItemsViewModel
-} from "gv-api-web";
+import { ExchangeCredentialsInfo } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
 import React, { useContext, useEffect } from "react";
 import { useTranslation } from "react-i18next";
@@ -24,9 +21,11 @@ const _ApiKeysTable: React.FC<Props> = ({ id }) => {
 
   const { tableKey } = useContext(ApiKeysContext);
 
-  const { data, sendRequest } = useApiRequest<
-    ExchangeCredentialsInfoItemsViewModel
-  >({ name: "apiKeys", cache: true, request: () => getApiKeys(id) });
+  const { data, sendRequest } = useApiRequest<Array<ExchangeCredentialsInfo>>({
+    name: "apiKeys",
+    cache: true,
+    request: () => getApiKeys(id)
+  });
 
   useEffect(() => {
     sendRequest();
@@ -35,7 +34,7 @@ const _ApiKeysTable: React.FC<Props> = ({ id }) => {
   return (
     <Table
       title={t("api-keys:title")}
-      items={data?.items || []}
+      items={data || []}
       columns={API_KEYS_TABLE_COLUMNS}
       renderHeader={column =>
         column.tooltip ? (

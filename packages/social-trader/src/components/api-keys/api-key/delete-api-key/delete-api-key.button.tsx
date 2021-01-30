@@ -7,13 +7,21 @@ import { useTranslation } from "react-i18next";
 
 import { ApiKeysContext } from "../../api-keys.context";
 import { deleteApiKey } from "../../services/api-keys.service";
+import styled from "styled-components";
+import { Text } from "components/text/text";
 
 interface Props {
   id: string;
   title: string;
+  apiKey: string;
 }
 
-const _DeleteApiKeyButton: React.FC<Props> = ({ id, title }) => {
+const Key = styled(Text)`
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+`;
+
+const _DeleteApiKeyButton: React.FC<Props> = ({ id, title, apiKey }) => {
   const [t] = useTranslation();
   const [isOpen, setIsOpen, setIsClose] = useFlag();
   const { updateTable } = useContext(ApiKeysContext);
@@ -25,7 +33,16 @@ const _DeleteApiKeyButton: React.FC<Props> = ({ id, title }) => {
 
   const handleApply = useCallback(sendRequest, [sendRequest]);
 
-  const body = `${t("api-keys:key-dialog.delete-text")} ${title} ?`;
+  const body = (
+    <div>
+      {`${t("api-keys:key-dialog.delete-text")} ${title} ?`}
+      <br />
+      <br />
+      <Key muted size={"xsmall"}>
+        {apiKey}
+      </Key>
+    </div>
+  );
 
   return (
     <>

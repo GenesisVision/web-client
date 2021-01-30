@@ -1,3 +1,8 @@
+import {
+  ConversationInputShape,
+  getPostMessageDefaultOptions,
+  IPostMessageValues
+} from "components/conversation/conversation-input/conversation-input.helpers";
 import { OnMessageSendFunc } from "components/conversation/conversation.types";
 import { getPostMessageDefaultOptions } from "components/conversation/conversation-input/conversation-input.helpers";
 import { PostInputView } from "components/conversation/post/post-input/post-input.view";
@@ -93,7 +98,7 @@ const _PostInput: React.FC<Props> = ({
 
   const inputSubmit = useCallback(() => {
     return handleSubmit(values => {
-      return onSubmit(values);
+      return onSubmit(values as IPostMessageValues);
     });
   }, [onSubmit, handleSubmit]);
   const handleRemoveImage = useCallback(

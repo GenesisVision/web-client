@@ -19,30 +19,23 @@ import {
   getDecimalScale,
   getSymbol
 } from "pages/trade/binance-trade-page/trading/terminal.helpers";
-import {
-  OrderSide,
-  OrderType
-} from "pages/trade/binance-trade-page/trading/terminal.types";
+import { OrderSide, OrderType } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useCallback, useContext, useState } from "react";
 import { formatValue } from "utils/formatter";
 
 import { LimitTradeForm } from "./limit-trade-form";
 import { MarketTradeForm } from "./market-trade-form";
-import {
-  getBalance,
-  getBalancesLoaderData,
-  getTradeType,
-  mapPlaceOrderErrors
-} from "./place-order.helpers";
+import { getBalance, getTradeType, mapPlaceOrderErrors } from "./place-order.helpers";
 import styles from "./place-order.module.scss";
-import { IPlaceOrderFormValues, TRADE_FORM_FIELDS } from "./place-order.types";
+import { FilterValues, IPlaceOrderFormValues, TRADE_FORM_FIELDS } from "./place-order.types";
 
 interface Props {
   price: string;
   lastTrade: number;
+  filterValues: FilterValues;
 }
 
-const _PlaceOrder: React.FC<Props> = ({ lastTrade, price }) => {
+const _PlaceOrder: React.FC<Props> = ({ filterValues, lastTrade, price }) => {
   const { tradeRequest } = useContext(TerminalMethodsContext);
 
   const {
@@ -50,7 +43,6 @@ const _PlaceOrder: React.FC<Props> = ({ lastTrade, price }) => {
     stepSize,
     terminalType,
     exchangeAccountId,
-    exchangeInfo,
     accountInfo,
     symbol: { baseAsset, quoteAsset }
   } = useContext(TerminalInfoContext);
@@ -93,13 +85,10 @@ const _PlaceOrder: React.FC<Props> = ({ lastTrade, price }) => {
       tickSize,
       stepSize,
       exchangeAccountId,
-      sendRequest,
-      tradeRequest,
       baseAsset,
       quoteAsset,
       side,
       tab,
-      lastTrade
     ]
   );
 
@@ -108,9 +97,12 @@ const _PlaceOrder: React.FC<Props> = ({ lastTrade, price }) => {
   const balance = accountInfo
     ? getBalance(accountInfo.balances, walletAsset)
     : 0;
-  const balances = accountInfo
-    ? accountInfo.balances
-    : getBalancesLoaderData(quoteAsset);
+  const balanceBase = accountInfo
+    ? getBalance(accountInfo.balances, baseAsset)
+    : 0;
+  const balanceQuote = accountInfo
+    ? getBalance(accountInfo.balances, quoteAsset)
+    : 0;
 
   return (
     <TerminalDefaultBlock>
@@ -151,40 +143,41 @@ const _PlaceOrder: React.FC<Props> = ({ lastTrade, price }) => {
           </Text>
         </RowItem>
       </Row>
-      {exchangeInfo && (
-        <Row>
-          {tab === "Limit" && (
-            <LimitTradeForm
-              status={status}
-              exchangeInfo={exchangeInfo}
-              balances={balances}
-              outerPrice={price}
-              onSubmit={handleSubmit}
-              side={side}
-            />
-          )}
-          {tab === "Market" && (
-            <MarketTradeForm
-              status={status}
-              exchangeInfo={exchangeInfo}
-              balances={balances}
-              outerPrice={price}
-              onSubmit={handleSubmit}
-              side={side}
-            />
-          )}
-          {tab === "TakeProfitLimit" && (
-            <StopLimitTradeForm
-              status={status}
-              exchangeInfo={exchangeInfo}
-              balances={balances}
-              outerPrice={price}
-              onSubmit={handleSubmit}
-              side={side}
-            />
-          )}
-        </Row>
-      )}
+      <Row>
+        {tab === "Limit" && (
+          <LimitTradeForm
+            filterValues={filterValues}
+            status={status}
+            balanceBase={balanceBase}
+            balanceQuote={balanceQuote}
+            outerPrice={price}
+            onSubmit={handleSubmit}
+            side={side}
+          />
+        )}
+        {tab === "Market" && (
+          <MarketTradeForm
+            filterValues={filterValues}
+            status={status}
+            balanceBase={balanceBase}
+            balanceQuote={balanceQuote}
+            outerPrice={price}
+            onSubmit={handleSubmit}
+            side={side}
+          />
+        )}
+        {tab === "TakeProfitLimit" && (
+          <StopLimitTradeForm
+            filterValues={filterValues}
+            status={status}
+            balanceBase={balanceBase}
+            balanceQuote={balanceQuote}
+            outerPrice={price}
+            onSubmit={handleSubmit}
+            side={side}
+          />
+        )}
+      </Row>
     </TerminalDefaultBlock>
   );
 };

@@ -1,8 +1,8 @@
 import { getActiveUrl } from "components/active/active.helpers";
 import ActivePopup from "components/active/active.popup";
 import WalletImage from "components/avatar/wallet-image/wallet-image";
-import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { RowItem } from "components/row-item/row-item";
 import useIsOpen from "hooks/is-open.hook";
 import React, { useCallback } from "react";
 import styled, { css } from "styled-components";
@@ -18,6 +18,7 @@ import {
 import { CurrencyEnum } from "utils/types";
 
 export interface ICurrencyItemProps {
+  showTitle?: boolean;
   url?: string;
   symbol?: string | CurrencyEnum;
   big?: boolean;
@@ -28,7 +29,7 @@ export interface ICurrencyItemProps {
   name?: string | CurrencyEnum;
 }
 
-const Icon = styled(RowItem)<{ small?: boolean }>`
+const Icon = styled(RowItem) <{ small?: boolean }>`
   object-fit: cover;
   box-shadow: ${$boxShadow1};
   border-radius: 100%;
@@ -78,7 +79,8 @@ const _CurrencyItem: React.FC<ICurrencyItemProps> = ({
   logo,
   name,
   small,
-  clickable = true
+  clickable = true,
+  showTitle = true
 }) => {
   const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
   const openPopup = useCallback(
@@ -111,7 +113,7 @@ const _CurrencyItem: React.FC<ICurrencyItemProps> = ({
     (clickable && (
       <>
         <a
-          title={active}
+          title={showTitle ? active : ""}
           href={getActiveUrl(url || active)}
           onClick={openPopup}
         >

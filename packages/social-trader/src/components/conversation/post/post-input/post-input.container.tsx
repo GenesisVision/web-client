@@ -17,7 +17,7 @@ export const PostInputContainer: React.FC<Props> = ({
   onSuccess
 }) => {
   const successMiddleware = postponeCallback(onSuccess);
-  const { sendRequest, status, errorMessage } = useApiRequest({
+  const { sendRequest, status, errorMessage } = useApiRequest<void>({
     middleware: [sendPostEvent, successMiddleware],
     request: values => sendPost({ ...values, userId })
   });
