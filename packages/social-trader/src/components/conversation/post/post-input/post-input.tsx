@@ -1,10 +1,8 @@
 import {
-  ConversationInputShape,
   getPostMessageDefaultOptions,
   IPostMessageValues
 } from "components/conversation/conversation-input/conversation-input.helpers";
 import { OnMessageSendFunc } from "components/conversation/conversation.types";
-import { getPostMessageDefaultOptions } from "components/conversation/conversation-input/conversation-input.helpers";
 import { PostInputView } from "components/conversation/post/post-input/post-input.view";
 import { useSearchPanel } from "components/conversation/search-panel/search-panel.hook";
 import { IImageValue } from "components/form/input-image/input-image";
