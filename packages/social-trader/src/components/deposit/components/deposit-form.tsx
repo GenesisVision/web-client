@@ -24,10 +24,9 @@ import { convertToCurrency } from "utils/currency-converter";
 import { formatCurrencyValue } from "utils/formatter";
 import { HookForm } from "utils/hook-form.helpers";
 import { CurrencyEnum } from "utils/types";
-import { convertShapeToRules } from "utils/validators/validators";
 
 import { MinDepositType, TFees } from "./deposit.types";
-import { depositAmountValidator } from "./deposit-form-validation-schema";
+import { depositAmountRules } from "./deposit-form-validation-schema";
 import { ConvertCurrency } from "./form-fields/convert-currency";
 import { InvestorFees } from "./form-fields/investor-fees";
 
@@ -146,16 +145,14 @@ const _DepositForm: React.FC<Props> = ({
           currency={wallet.currency}
           isAllowed={isAllow(wallet.currency)}
           setMax={setMaxAmount}
-          rules={convertShapeToRules(
-            depositAmountValidator({
-              t,
-              currency: wallet.currency,
-              availableToInvestInAsset,
-              min,
-              availableToInvest,
-              availableInWallet
-            })
-          )}
+          rules={depositAmountRules({
+            t,
+            currency: wallet.currency,
+            availableToInvestInAsset,
+            min,
+            availableToInvest,
+            availableInWallet
+          })}
         />
         {currency !== wallet.currency && (
           <Row>

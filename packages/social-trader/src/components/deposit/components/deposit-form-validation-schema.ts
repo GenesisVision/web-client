@@ -1,8 +1,7 @@
 import { TFunction } from "i18next";
 import { CurrencyEnum } from "utils/types";
-import { number } from "yup";
 
-export const depositAmountValidator = ({
+export const depositAmountRules = ({
   t,
   min,
   currency,
@@ -16,19 +15,20 @@ export const depositAmountValidator = ({
   availableToInvest: number;
   availableInWallet: number;
   availableToInvestInAsset: number;
-}) =>
-  number()
-    .required()
-    .min(
-      +min,
-      t("validations.amount-min-value", {
-        min,
-        currency
-      })
-    )
-    .max(
-      availableToInvest,
+}) => ({
+  required: t("validations.required"),
+  min: {
+    value: min,
+    message: t("validations.amount-min-value", {
+      min,
+      currency
+    })
+  },
+  max: {
+    value: availableToInvest,
+    message:
       availableInWallet < availableToInvestInAsset
         ? t("validations.amount-more-than-available")
         : t("validations.amount-exceeds-limit")
-    );
+  }
+});
