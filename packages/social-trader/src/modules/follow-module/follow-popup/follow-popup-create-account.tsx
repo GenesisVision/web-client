@@ -3,10 +3,7 @@ import { DialogButtons } from "components/dialog/dialog-buttons";
 import InputAmountField from "components/input-amount-field/hook-form-amount-field";
 import { Row } from "components/row/row";
 import { SubmitButton } from "components/submit-button/submit-button";
-import {
-  CommonWalletType,
-  WalletItemType
-} from "components/wallet-select/wallet-select";
+import { CommonWalletType, WalletItemType } from "components/wallet-select/wallet-select";
 import { WalletSelectContainer } from "components/wallet-select/wallet-select.container";
 import { useGetRate } from "hooks/get-rate.hook";
 import * as React from "react";
@@ -14,20 +11,13 @@ import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
-import {
-  convertToCurrency,
-  CURRENCY_FRACTIONS
-} from "utils/currency-converter";
+import { convertToCurrency, CURRENCY_FRACTIONS } from "utils/currency-converter";
 import { formatCurrencyValue } from "utils/formatter";
 import { allowPositiveValuesNumberFormat } from "utils/helpers";
 import { HookForm } from "utils/hook-form.helpers";
 import { CurrencyEnum } from "utils/types";
-import { convertShapeToRules } from "utils/validators/validators";
 
-import {
-  CREATE_ACCOUNT_FORM_FIELDS,
-  depositAmountShape
-} from "./follow-popup-create-account.validators";
+import { CREATE_ACCOUNT_FORM_FIELDS, depositAmountRules } from "./follow-popup-create-account.validators";
 
 export interface CreateAccountFormProps {
   wallet: CommonWalletType;
@@ -103,14 +93,12 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
           label={t("follow-program.create-account.amount")}
           currency={wallet.currency}
           setMax={setMaxAmount}
-          rules={convertShapeToRules(
-            depositAmountShape({
-              wallet,
-              rate,
-              minDeposit,
-              t
-            })
-          )}
+          rules={depositAmountRules({
+            wallet,
+            rate,
+            minDeposit,
+            t
+          })}
         />
         {followCurrency !== wallet.currency && (
           <Row>

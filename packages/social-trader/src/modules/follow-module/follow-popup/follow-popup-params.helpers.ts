@@ -1,7 +1,7 @@
 import { SignalSubscription, SubscriptionMode } from "gv-api-web";
 import { TFunction } from "i18next";
 import { CurrencyEnum } from "utils/types";
-import { number } from "yup";
+import { lessThan } from "utils/validators/validators";
 
 export enum FOLLOW_PARAMS_FIELDS {
   fixedCurrency = "fixedCurrency",
@@ -61,25 +61,28 @@ export const followParamsMapPropsToValues = ({
   };
 };
 
-export const fixedVolumeShape = (t: TFunction, fixedCurrency: string) =>
-  number()
-    .min(
-      0,
-      t("validations.fixedVolume-min", {
-        fixedCurrency
-      })
-    )
-    .lessThan(
-      100000,
-      t("validations.fixedVolume-max", {
-        fixedCurrency
-      })
-    );
+export const fixedVolumeRules = (t: TFunction, fixedCurrency: string) => ({
+  min: {
+    value: 0,
+    message: t("validations.fixedVolume-min", {
+      fixedCurrency
+    })
+  },
+  validate: lessThan(
+    100000,
+    t("validations.fixedVolume-max", {
+      fixedCurrency
+    })
+  )
+});
 
-export const percentShape = (t: TFunction) =>
-  number()
-    .min(1, t("validations.percent-min"))
-    .lessThan(1000, t("validations.percent-max"));
+export const percentRules = (t: TFunction) => ({
+  min: {
+    value: 1,
+    message: t("validations.percent-min")
+  },
+  validate: lessThan(1000, t("validations.percent-max"))
+});
 
 export const openTolerancePercentRules = (t: TFunction) => ({
   required: t("validations.tolerance-required"),

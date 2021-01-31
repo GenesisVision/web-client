@@ -13,13 +13,13 @@ import { TooltipContent } from "components/tooltip/tooltip-content";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import { SignalSubscription, SubscriptionMode } from "gv-api-web";
 import {
-  fixedVolumeShape,
+  fixedVolumeRules,
   FOLLOW_PARAMS_FIELDS,
   followParamsMapPropsToValues,
   getInfoText,
   modes,
   openTolerancePercentRules,
-  percentShape
+  percentRules
 } from "modules/follow-module/follow-popup/follow-popup-params.helpers";
 import React, { useCallback } from "react";
 import { useForm } from "react-hook-form";
@@ -29,7 +29,6 @@ import { convertFromCurrency } from "utils/currency-converter";
 import { formatCurrencyValue } from "utils/formatter";
 import { HookForm } from "utils/hook-form.helpers";
 import { CurrencyEnum } from "utils/types";
-import { convertShapeToRules } from "utils/validators/validators";
 
 export interface FollowParamsFormValues {
   [FOLLOW_PARAMS_FIELDS.fixedCurrency]: string;
@@ -109,7 +108,7 @@ const _FollowParams: React.FC<IFollowParamsProps> = ({
               label={t("follow-program.params.volume-percent")}
               currency={"%"}
               setMax={setMaxVolumePercent}
-              rules={convertShapeToRules(percentShape(t))}
+              rules={percentRules(t)}
             />
           </Row>
         )}
@@ -137,7 +136,7 @@ const _FollowParams: React.FC<IFollowParamsProps> = ({
                 fixedCurrency
               })} *`}
               currency={fixedCurrency}
-              rules={convertShapeToRules(fixedVolumeShape(t, fixedCurrency))}
+              rules={fixedVolumeRules(t, fixedCurrency)}
             />
             {currency && (
               <Row wide>
