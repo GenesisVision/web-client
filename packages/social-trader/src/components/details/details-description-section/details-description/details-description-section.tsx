@@ -31,6 +31,7 @@ interface Props {
   systemUrl?: string;
   notificationsUrl?: ToType;
   settingsUrl?: ToType;
+  apiKeysUrl?: ToType;
   description?: string;
   AssetDetailsExtraBlock?: React.ComponentType<any>;
   PerformanceData?: React.ComponentType<any>;
@@ -49,6 +50,7 @@ const ControlsRow = styled(Row)`
 `;
 
 const _DetailsDescriptionSection: React.FC<Props> = ({
+  apiKeysUrl,
   descriptionTitle,
   personalDetails,
   isOwnAsset,
@@ -91,6 +93,7 @@ const _DetailsDescriptionSection: React.FC<Props> = ({
         systemUrl={systemUrl}
         notificationsUrl={notificationsUrl}
         settingsUrl={settingsUrl}
+        apiKeysUrl={apiKeysUrl}
       />
       {PerformanceData && (
         <Row size={"xlarge"}>

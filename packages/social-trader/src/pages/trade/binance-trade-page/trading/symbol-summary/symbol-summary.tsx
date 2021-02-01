@@ -8,12 +8,12 @@ import { MonoText } from "pages/trade/binance-trade-page/trading/components/mono
 import { TerminalDefaultBlock } from "pages/trade/binance-trade-page/trading/components/terminal-default-block/terminal-default-block";
 import { terminalMoneyFormat } from "pages/trade/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
 import { TradeStatefulValue } from "pages/trade/binance-trade-page/trading/components/trade-stateful-value/trade-stateful-value";
+import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import { MarketWatchTooltipButton } from "pages/trade/binance-trade-page/trading/market-watch/market-watch.tooltip";
 import {
   getTickerSymbolLoaderData,
   useSymbolData
 } from "pages/trade/binance-trade-page/trading/symbol-summary/symbol-summary.helpers";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
 import { SymbolSummaryData } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useContext } from "react";
 import NumberFormat from "react-number-format";
@@ -131,7 +131,7 @@ const _SymbolSummaryView: React.FC<Props> = ({
                 }
               >
                 <MonoText>
-                  {+markPrice.lastFundingRate} %{" "}
+                  {+markPrice.fundingRate} %{" "}
                   {diffDate(new Date(), markPrice.nextFundingTime).format(
                     "HH:mm:ss"
                   )}

@@ -13,23 +13,35 @@ import { ResponseError } from "utils/types";
 
 export type API_REQUEST_STATUS = API_REQUEST_STATUS_TYPE;
 
+const defaultCacheAge = 100 * 60 * 60 * 24;
+
 const getErrorMessageCallback = (error: ResponseError) => error?.errorMessage;
 
+interface Props<T> extends TUseApiRequestProps<T> {
+  errorAlertHandler?: (error: string) => string;
+  isUseLocalizationOnError?: boolean;
+}
+
 const useApiRequest = <T extends any>(
-  props: TUseApiRequestProps<T>
+  props: Props<T>
 ): TUseApiRequestOutput<T> => {
+  const {
+    errorAlertHandler = (error: string) => error,
+    cacheMaxAge = defaultCacheAge
+  } = props;
   const { successAlert, errorAlert, warningAlert } = useAlerts();
   const alertService: IAlertService = useMemo(
     () => ({
       successAlert: ({ content }: IAlert) => successAlert(content),
-      errorAlert: ({ content }: IAlert) => errorAlert(content),
+      errorAlert: ({ content }: IAlert) =>
+        errorAlert(errorAlertHandler(content), props.isUseLocalizationOnError),
       warningAlert: ({ content }: IAlert) => warningAlert(content)
     }),
     []
   );
   return useApiRequestConstructor.useApiRequest({
     ...props,
-    cacheMaxAge: 100 * 60 * 60 * 24,
+    cacheMaxAge,
     token: Token.create().value,
     alertService,
     getErrorMessageCallback

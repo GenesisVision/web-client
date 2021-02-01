@@ -1,13 +1,7 @@
 import { ITableBodyContainerExternalProps } from "components/table/components/table-body";
-import TableFooter, {
-  ITableFooterProps
-} from "components/table/components/table-footer";
-import TableHeader, {
-  ITableHeaderProps
-} from "components/table/components/table-header";
-import TableToolbar, {
-  ITableToolbarExternalProps
-} from "components/table/components/table-toolbar";
+import TableFooter, { ITableFooterProps } from "components/table/components/table-footer";
+import TableHeader, { ITableHeaderProps } from "components/table/components/table-header";
+import TableToolbar, { ITableToolbarExternalProps } from "components/table/components/table-toolbar";
 import { LIST_VIEW } from "components/table/table.constants";
 import React, { useCallback, useState } from "react";
 import styled, { css } from "styled-components";
@@ -52,6 +46,7 @@ const CardsTableBodyContainer = styled(TableBodyContainer)`
 `;
 
 const _Table: React.FC<ITableProps> = ({
+  headerCellClassName,
   outerView,
   loaderData,
   exportButtonToolbarRender,
@@ -133,6 +128,7 @@ const _Table: React.FC<ITableProps> = ({
         {view === LIST_VIEW.TABLE && (
           <TablesContaniner className={className}>
             <TableHeader
+              headerCellClassName={headerCellClassName}
               columns={columns}
               sorting={sorting}
               updateSorting={updateSorting}

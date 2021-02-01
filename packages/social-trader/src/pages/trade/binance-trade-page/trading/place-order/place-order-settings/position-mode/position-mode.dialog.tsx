@@ -59,8 +59,8 @@ const PositionModeDialogContent: React.FC<Props> = ({
         </Row>
         <Row>
           <RadioButton
-            selected={mode === false}
-            onClick={handleClickButton(false)}
+            selected={mode === "OneWay"}
+            onClick={handleClickButton("OneWay")}
             label={t("One-way Mode")}
           />
         </Row>
@@ -73,8 +73,8 @@ const PositionModeDialogContent: React.FC<Props> = ({
         </Row>
         <Row>
           <RadioButton
-            selected={mode === true}
-            onClick={handleClickButton(true)}
+            selected={mode === "Hedge"}
+            onClick={handleClickButton("Hedge")}
             label={t("Hedge Mode")}
           />
         </Row>

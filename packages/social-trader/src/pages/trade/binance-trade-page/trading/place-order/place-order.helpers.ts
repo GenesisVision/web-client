@@ -1,44 +1,23 @@
 import {
   AssetBalance,
+  ExchangeInfo,
   OrderSide,
   OrderType,
-  TerminalCurrency,
-  TimeInForce
+  TerminalCurrency
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { tableLoaderCreator } from "utils/helpers";
+import { getSymbolFilters } from "pages/trade/binance-trade-page/trading/terminal.helpers";
 
-export type PlaceOrderFormSetValueType = (
-  name: string,
-  value?: number,
-  shouldValidate?: boolean
-) => void;
-
-export enum TRADE_FORM_FIELDS {
-  reduceOnly = "reduceOnly",
-  timeInForce = "timeInForce",
-  stopPrice = "stopPrice",
-  price = "price",
-  quantity = "quantity",
-  total = "total"
-}
-
-export interface IPlaceOrderDefaultFormValues {
-  [TRADE_FORM_FIELDS.reduceOnly]?: boolean;
-  [TRADE_FORM_FIELDS.timeInForce]?: TimeInForce;
-  [TRADE_FORM_FIELDS.quantity]: number;
-  [TRADE_FORM_FIELDS.total]: number;
-  [TRADE_FORM_FIELDS.price]: number;
-}
-
-export interface IStopLimitFormValues extends IPlaceOrderDefaultFormValues {
-  [TRADE_FORM_FIELDS.stopPrice]: number;
-}
-
-export interface IPlaceOrderFormValues extends IPlaceOrderDefaultFormValues {}
-
-export interface IPlaceOrderHandleSubmitValues extends IPlaceOrderFormValues {
-  type: OrderType;
-}
+export const mapPlaceOrderErrors = (error: string) => {
+  switch (error) {
+    case "Failed (-2015 Invalid API-key, IP, or permissions for action.)":
+      return "Trading is currently unavailable";
+    case "Failed (-2010 Account has insufficient balance for requested action.)":
+      return "Order failed: insufficient balance";
+    default:
+      return error;
+  }
+};
 
 export const getTradeType = ({
   type,
@@ -90,6 +69,20 @@ export const getBalance = (
   balances: AssetBalance[],
   currency: TerminalCurrency
 ) => {
-  const wallet = balances.find(({ asset }) => asset === currency);
+  const wallet = balances?.find(({ asset }) => asset === currency);
   return wallet ? wallet.free : 0;
+};
+
+export const getFilterValues = (exchangeInfo: ExchangeInfo, symbol: string) => {
+  const { priceFilter, lotSizeFilter, minNotionalFilter } = getSymbolFilters(
+    exchangeInfo,
+    symbol
+  );
+  return {
+    minPrice: priceFilter ? priceFilter.minPrice : 0,
+    maxPrice: priceFilter ? priceFilter.maxPrice : 0,
+    minQuantity: lotSizeFilter ? lotSizeFilter.minQuantity : 0,
+    maxQuantity: lotSizeFilter ? lotSizeFilter.maxQuantity : 0,
+    minNotional: minNotionalFilter ? minNotionalFilter.minNotional : 0
+  };
 };

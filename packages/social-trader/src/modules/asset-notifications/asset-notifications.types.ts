@@ -8,6 +8,7 @@ export type NotificationsList = {
 export enum NOTIFICATIONS {
   PlatformNewsAndUpdates = "PlatformNewsAndUpdates",
   PlatformEmergency = "PlatformEmergency",
+  Social = "Social",
   FundNewsAndUpdates = "FundNewsAndUpdates",
   FundRebalancing = "FundRebalancing",
   FollowNewsAndUpdates = "FollowNewsAndUpdates",

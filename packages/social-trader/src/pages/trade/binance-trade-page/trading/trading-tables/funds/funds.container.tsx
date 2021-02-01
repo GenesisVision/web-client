@@ -1,20 +1,24 @@
 import { filterPositionEventsStream } from "pages/trade/binance-trade-page/services/futures/binance-futures.helpers";
 import { FuturesAccountUpdateEvent } from "pages/trade/binance-trade-page/services/futures/binance-futures.types";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
-import { AssetBalance } from "pages/trade/binance-trade-page/trading/terminal.types";
-import { normalizeFundsList } from "pages/trade/binance-trade-page/trading/trading-tables/funds/funds.helpers";
+import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
+import {
+  NormalizedFunds,
+  normalizeFundsList,
+  sortFundsFunc,
+  updateUsdValues
+} from "pages/trade/binance-trade-page/trading/trading-tables/funds/funds.helpers";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 
 import { Funds } from "./funds";
+import { useAccountCurrency } from "hooks/account-currency.hook";
 
 export const FundsContainer: React.FC = () => {
+  const currency = useAccountCurrency();
   const { accountInfo, userStream } = useContext(TerminalInfoContext);
   const [socketData, setSocketData] = useState<
     FuturesAccountUpdateEvent | undefined
   >();
-  const [list, setList] = useState<{
-    [key: string]: AssetBalance;
-  }>({});
+  const [list, setList] = useState<NormalizedFunds>({});
 
   useEffect(() => {
     if (!accountInfo) return;
@@ -33,12 +37,19 @@ export const FundsContainer: React.FC = () => {
     if (!socketData) return;
     const updatedList = { ...list };
     const socketDataBalances = socketData.balances;
-    socketDataBalances.forEach(({ asset, free }) => {
-      updatedList[asset] = { ...updatedList[asset], free: +free };
+    socketDataBalances.forEach(update => {
+      updatedList[update.asset] = {
+        ...updatedList[update.asset],
+        ...update,
+        free: +update.free
+      };
     });
-    setList(updatedList);
+    updateUsdValues(updatedList, currency).then(data => {
+      setList(data);
+    });
   }, [socketData]);
 
-  const items = useMemo(() => Object.values(list), [list]);
+  const items = useMemo(() => Object.values(list).sort(sortFundsFunc), [list]);
+
   return <Funds items={items} />;
 };

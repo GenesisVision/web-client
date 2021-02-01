@@ -1,7 +1,6 @@
 import {
   FuturesAccount,
   FuturesAccountEventBalance,
-  FuturesAccountEventPosition,
   FuturesAccountUpdateEvent,
   FuturesAsset,
   FuturesMarginCallEvent,
@@ -10,16 +9,21 @@ import {
   FuturesTradeOrder,
   FuturesTradeOrderUpdateEvent
 } from "pages/trade/binance-trade-page/services/futures/binance-futures.types";
-import { USER_STREAM_ACCOUNT_UPDATE_EVENT_TYPE } from "pages/trade/binance-trade-page/trading/terminal.helpers";
+import {
+  setUpperFirstLetter,
+  USER_STREAM_ACCOUNT_UPDATE_EVENT_TYPE
+} from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import {
   Account,
   AssetBalance,
   BalanceForTransfer,
   MarkPrice,
+  Position,
   Ticker
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { Observable } from "rxjs";
 import { filter } from "rxjs/operators";
+import { BinancePositionSide } from "gv-api-web";
 
 export const transformAccountToBalanceForTransfer = ({
   balances
@@ -31,31 +35,29 @@ export const transformAccountToBalanceForTransfer = ({
 export const transformMarkPriceWS = (m: any): MarkPrice => ({
   symbol: m.s,
   markPrice: m.p,
-  lastFundingRate: m.r,
+  fundingRate: m.r,
   nextFundingTime: m.T,
   time: m.E
 });
 
 export const transformFuturesTickerSymbolWS = (m: any): Ticker => ({
-  // @ts-ignore
-  eventType: m.e,
-  eventTime: m.E,
+  // eventType: m.e,
   symbol: m.s,
   priceChange: m.p,
   priceChangePercent: m.P,
-  weightedAvgPrice: m.w,
-  prevClosePrice: m.x,
+  weightedAveragePrice: m.w,
+  prevDayClosePrice: m.x,
   lastPrice: m.c,
-  lastQty: m.Q,
-  bestBid: m.b,
-  bestBidQnt: m.B,
-  bestAsk: m.a,
-  bestAskQnt: m.A,
-  open: m.o,
-  high: m.h,
-  low: m.l,
-  volume: m.v,
-  volumeQuote: m.q,
+  lastQuantity: m.Q,
+  bidPrice: m.b,
+  bidQuantity: m.B,
+  askPrice: m.a,
+  askQuantity: m.A,
+  openPrice: m.o,
+  highPrice: m.h,
+  lowPrice: m.l,
+  baseVolume: m.v,
+  quoteVolume: m.q,
   openTime: m.O,
   closeTime: m.C,
   firstTradeId: m.F,
@@ -130,17 +132,14 @@ export const transformFuturesAccount = (
 
 export const futuresAccountEventPositionTransform = (
   socketData: any
-): FuturesAccountEventPosition => {
+): Position => {
   return {
     symbol: socketData.s,
-    positionAmt: socketData.pa,
-    entryPrice: socketData.ep,
-    accumulatedRealized: socketData.cr,
     unrealizedProfit: socketData.up,
-    marginType: socketData.mt,
-    isolatedWallet: socketData.iw,
-    positionSide: socketData.ps
-  };
+    positionSide: setUpperFirstLetter(socketData.ps) as BinancePositionSide,
+    positionAmount: socketData.pa,
+    entryPrice: socketData.ep
+  } as Position;
 };
 
 export const futuresMarginCallEventPositionTransform = (

@@ -248,6 +248,7 @@ const _DashboardPublicCard: React.FC<Props> = ({
         </TableCardTableRow>
       )}
       <DepositWithdrawButtons
+        GM={asset.publicInfo?.programDetails?.type === "DailyPeriod"}
         isProcessingRealTime={
           asset.publicInfo?.programDetails?.dailyPeriodDetails
             ?.isProcessingRealTime

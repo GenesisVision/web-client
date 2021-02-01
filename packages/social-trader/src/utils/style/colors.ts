@@ -49,3 +49,13 @@ export const $levelColor4 = "#6e81e2";
 export const $levelColor5 = "#5094d1";
 export const $levelColor6 = "#34a6c1";
 export const $levelColor7 = $primaryColor;
+
+export const $notificationProfileColor = "#f0754d";
+export const $notificationPlatformColor = "#b0a6a4";
+export const $notificationSocialColor = "#a9e090";
+export const $notificationAssetColor = "#6c6aeb";
+export const $notificationTradingAccountColor = "#6b747b";
+export const $notificationUserColor = "#98edec";
+export const $notificationSignalColor = "#e7aff0";
+export const $notificationPlatformAssetColor = "#1ff289";
+export const $notificationDefaultColor = "#6c6aeb";

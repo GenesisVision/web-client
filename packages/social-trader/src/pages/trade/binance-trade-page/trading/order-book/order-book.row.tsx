@@ -8,9 +8,8 @@ import Tooltip from "components/tooltip/tooltip";
 import { TooltipContent } from "components/tooltip/tooltip-content";
 import { terminalMoneyFormat } from "pages/trade/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
 import { ORDER_BOOK_ROW_HEIGHT } from "pages/trade/binance-trade-page/trading/order-book/order-book.helpers";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
-import { TradingPriceContext } from "pages/trade/binance-trade-page/trading/trading-price.context";
-import React, { useContext } from "react";
+import { TerminalCurrency } from "pages/trade/binance-trade-page/trading/terminal.types";
+import React from "react";
 
 import styles from "./order-book.module.scss";
 
@@ -21,6 +20,11 @@ export interface LevelsSum {
 }
 
 interface Props {
+  stepSize: string;
+  tickSize: string;
+  setPrice: (price: string) => void;
+  quoteAsset: TerminalCurrency;
+  baseAsset: TerminalCurrency;
   hasOrder?: boolean;
   barPercent: number;
   tableTickSize?: string;
@@ -35,6 +39,11 @@ interface Props {
 }
 
 const _OrderBookRow: React.FC<Props> = ({
+  stepSize,
+  tickSize,
+  setPrice,
+  quoteAsset,
+  baseAsset,
   hasOrder,
   barPercent,
   tableTickSize,
@@ -51,12 +60,6 @@ const _OrderBookRow: React.FC<Props> = ({
   amount,
   total
 }) => {
-  const { setPrice } = useContext(TradingPriceContext);
-  const {
-    stepSize,
-    tickSize,
-    symbol: { baseAsset, quoteAsset }
-  } = useContext(TerminalInfoContext);
   const formattedPrice = terminalMoneyFormat({
     amount: price,
     tickSize: tableTickSize || tickSize

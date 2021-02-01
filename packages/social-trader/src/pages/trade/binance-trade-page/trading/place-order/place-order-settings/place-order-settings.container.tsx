@@ -1,13 +1,13 @@
 import { DefaultBlock } from "components/default.block/default.block";
+import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import { PlaceOrderSettings } from "pages/trade/binance-trade-page/trading/place-order/place-order-settings/place-order-settings";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
 import React, { useContext } from "react";
 
 interface Props {}
 
 const _PlaceOrderSettingsContainer: React.FC<Props> = () => {
-  const { authData } = useContext(TerminalInfoContext);
-  if (!authData) return null;
+  const { exchangeAccountId } = useContext(TerminalInfoContext);
+  if (!exchangeAccountId) return null;
   return (
     <DefaultBlock size={"small"} roundedBorder={false} bordered>
       <PlaceOrderSettings />

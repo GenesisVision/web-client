@@ -1,21 +1,31 @@
+import { TableDataType } from "constants/constants";
 import {
   BinanceExecutionType,
+  BinanceFuturesMarginType,
   BinanceOrderSide as BinanceRawOrderSide,
   BinanceOrderStatus,
   BinanceOrderType as BinanceRawOrderType,
+  BinancePositionMode,
+  BinancePositionSide,
   BinanceRaw24HPrice,
   BinanceRawAccountInfo,
   BinanceRawBinanceBalance,
   BinanceRawCancelOrder,
   BinanceRawCancelOrderId,
   BinanceRawExchangeInfo,
+  BinanceRawFuturesAccountPosition,
+  BinanceRawFuturesChangeMarginTypeResult,
+  BinanceRawFuturesInitialLeverageChangeResult,
+  BinanceRawFuturesMarkPrice,
   BinanceRawKlineInterval,
   BinanceRawOrder,
   BinanceRawOrderBook,
   BinanceRawRecentTrade,
   BinanceRawSymbol,
-  BinanceTimeInForce as BinanceRawTimeInForce
+  BinanceTimeInForce as BinanceRawTimeInForce,
+  TradingPlatformBinanceOrdersMode
 } from "gv-api-web";
+import { PlacedOrderType } from "pages/trade/binance-trade-page/services/api.helpers";
 import {
   FuturesAccountEventType,
   FuturesAsset
@@ -25,13 +35,20 @@ import { Observable } from "rxjs";
 import { ConnectSocketMethodType } from "services/websocket.service";
 import { AnyObjectType, CurrencyEnum } from "utils/types";
 
-export type MarginModeType = "ISOLATED" | "CROSSED";
+export type SymbolState = {
+  quoteAsset: TerminalCurrency;
+  baseAsset: TerminalCurrency;
+};
+
+export type Position = BinanceRawFuturesAccountPosition;
+
+export type MarginModeType = BinanceFuturesMarginType;
 
 export type TerminalType = "spot" | "futures";
 
 export type PositionSideType = "BOTH" | "LONG" | "SHORT";
 
-export type PositionModeType = boolean;
+export type PositionModeType = BinancePositionMode;
 
 export type BalancesItemName = "spot" | "futures";
 
@@ -45,13 +62,7 @@ export interface SymbolSummaryData {
   tickerData: MergedTickerSymbolType;
 }
 
-export interface MarkPrice {
-  symbol: string;
-  markPrice: string;
-  lastFundingRate: string; // This is the lasted funding rate
-  nextFundingTime: number;
-  time: number;
-}
+export type MarkPrice = BinanceRawFuturesMarkPrice;
 
 export interface BalanceForTransfer {
   asset: TerminalCurrency;
@@ -68,18 +79,18 @@ export interface PositionModeResponse {
 }
 
 export interface FuturesPositionInformation {
-  entryPrice: string;
+  entryPrice: number;
   marginType: MarginModeType;
-  isAutoAddMargin: string;
-  isolatedMargin: string;
-  leverage: string;
-  liquidationPrice: string;
-  markPrice: string;
-  maxNotionalValue: string;
-  positionAmt: string;
+  isAutoAddMargin: boolean;
+  isolatedMargin: number;
+  leverage: number;
+  liquidationPrice: number;
+  markPrice: number;
+  maxNotionalValue: number;
+  positionAmt: number;
   symbol: string;
-  unRealizedProfit: string;
-  positionSide: PositionSideType;
+  unRealizedProfit: number;
+  positionSide: BinancePositionSide;
 }
 
 export interface FuturesPosition {
@@ -170,13 +181,29 @@ export interface ITerminalMethods extends IGVTerminalMethods {
     symbol: string,
     accountId?: string
   ) => Observable<UnitedOrder[]>;
-  getAllTrades: (accountId?: string) => Observable<UnitedOrder[]>;
-  getAllOrders: (accountId?: string) => Observable<UnitedOrder[]>;
+  getAllTrades: (filters: {
+    accountId?: string;
+    mode?: TradingPlatformBinanceOrdersMode;
+    dateFrom?: Date;
+    dateTo?: Date;
+    symbol?: string;
+    skip?: number;
+    take?: number;
+  }) => Promise<TableDataType<UnitedOrder>>;
+  getAllOrders: (filters: {
+    accountId?: string;
+    mode?: TradingPlatformBinanceOrdersMode;
+    dateFrom?: Date;
+    dateTo?: Date;
+    symbol?: string;
+    skip?: number;
+    take?: number;
+  }) => Promise<TableDataType<UnitedOrder>>;
   getUserStreamKey: (accountId?: string) => Observable<{ listenKey: string }>;
   getAccountInformation: (
     accountId?: string,
     currency?: CurrencyEnum
-  ) => Observable<Account>;
+  ) => Promise<Account>;
   getTrades: (symbol: string, limit?: number) => Observable<UnitedTrade[]>;
   getTickers: (symbol?: string) => Observable<Ticker[]>;
   getDepth: (
@@ -185,7 +212,7 @@ export interface ITerminalMethods extends IGVTerminalMethods {
     limit?: number
   ) => Observable<CorrectedRestDepth>;
   cancelAllOrders: (
-    options: { symbol: string; useServerTime?: boolean },
+    options: { symbol?: string; useServerTime?: boolean },
     accountId?: string
   ) => Promise<BinanceRawCancelOrderId[]>;
   cancelOrder: (
@@ -195,16 +222,18 @@ export interface ITerminalMethods extends IGVTerminalMethods {
   tradeRequest: ({
     side,
     ...options
-  }: TradeRequest & { accountId?: string; side: OrderSide }) => Promise<
-    QueryOrderResult
-  >;
+  }: TradeRequest & {
+    accountId?: string;
+    side: OrderSide;
+  }) => Promise<PlacedOrderType>;
 
   // Futures
 
-  getMarkPrice?: (options: { symbol: string }) => Observable<MarkPrice>;
+  getMarkPrice?: (options: { symbol: string }) => Promise<MarkPrice>;
   getPositionInformation?: (options: {
-    authData: TerminalAuthDataType;
-  }) => Observable<FuturesPositionInformation[]>;
+    symbol: string;
+    accountId?: string;
+  }) => Promise<FuturesPositionInformation[]>;
   getBalancesForTransfer?: (options: {
     authData: TerminalAuthDataType;
   }) => Promise<BalancesForTransfer>;
@@ -214,27 +243,25 @@ export interface ITerminalMethods extends IGVTerminalMethods {
     type: number; // 1 | 2
     authData: TerminalAuthDataType;
   }) => Promise<HttpResponse>;
-  getPositionMode?: (options: {
-    authData: TerminalAuthDataType;
-  }) => Promise<PositionModeType>;
+  getPositionMode?: (accountId: string) => Promise<PositionModeType>;
   changePositionMode?: (options: {
-    dualSidePosition: PositionModeType;
-    authData: TerminalAuthDataType;
-  }) => Promise<HttpResponse>;
+    accountId?: string;
+    mode?: BinancePositionMode;
+  }) => Promise<void>;
   getLeverageBrackets?: (options: {
     symbol: string;
-    authData: TerminalAuthDataType;
+    accountId?: string;
   }) => Promise<SymbolLeverageBrackets[]>;
   changeLeverage?: (options: {
-    leverage: number;
-    symbol: string;
-    authData: TerminalAuthDataType;
+    accountId?: string;
+    symbol?: string;
+    leverage?: number;
   }) => Promise<ChangeLeverageResponse>;
   changeMarginMode?: (options: {
-    mode: MarginModeType;
-    symbol: string;
-    authData: TerminalAuthDataType;
-  }) => Promise<HttpResponse>;
+    accountId?: string;
+    symbol?: string;
+    marginType?: BinanceFuturesMarginType;
+  }) => Promise<BinanceRawFuturesChangeMarginTypeResult>;
 
   // Sockets
 
@@ -248,7 +275,8 @@ export interface ITerminalMethods extends IGVTerminalMethods {
   ) => Observable<UnitedTrade>;
   depthSocket: (
     connectSocketMethod: ConnectSocketMethodType,
-    symbol: TerminalCurrency
+    symbol: TerminalCurrency,
+    openCallback?: VoidFunction
   ) => Observable<Depth>;
   marketTicketsSocket: (
     connectSocketMethod: ConnectSocketMethodType
@@ -506,7 +534,20 @@ export enum ErrorCodes {
   REJECTED_MBX_KEY = -2015
 }
 
-export type Account = BinanceRawAccountInfo;
+export interface ExtentedBinanceRawBinanceBalance {
+  asset: string;
+  free: number;
+  locked: number;
+  readonly total: number;
+  amountInCurrency: number;
+  maintMargin?: number;
+  marginBalance?: number;
+}
+
+export type Account = BinanceRawAccountInfo & {
+  positions?: Array<Position>;
+  balances: Array<ExtentedBinanceRawBinanceBalance>;
+};
 
 export interface TradeFee {
   symbol: string;
@@ -602,11 +643,7 @@ export interface AssetDetail {
   };
 }
 
-export interface ChangeLeverageResponse {
-  leverage: number;
-  maxNotionalValue: string;
-  symbol: string;
-}
+export type ChangeLeverageResponse = BinanceRawFuturesInitialLeverageChangeResult;
 
 export interface HttpResponse {
   code: number;
@@ -837,7 +874,7 @@ export type ExecutionType =
   | "EXPIRED";
 
 export type EventType =
-  | ("executionReport" | "account" | "outboundAccountInfo")
+  | ("executionReport" | "account" | "outboundAccountPosition")
   | FuturesAccountEventType;
 
 export interface DepthMain {
@@ -1004,9 +1041,9 @@ export interface MyTrade {
 export type QueryOrderResult = BinanceRawOrder;
 
 export type UnitedOrder = {
-  commissionAsset: string;
-  commission: number;
-  quoteQuantityFilled: number;
+  commissionAsset?: string;
+  commission?: number;
+  quoteQuantityFilled?: number;
   executionType?: BinanceExecutionType;
   orderStatus?: BinanceOrderStatus;
   eventType?: EventType;
@@ -1018,7 +1055,7 @@ export type UnitedOrder = {
   side: OrderSide;
   stopPrice: number;
   price: number;
-  quantityFilled: number;
+  quantityFilled?: number;
   quantity: number;
 };
 

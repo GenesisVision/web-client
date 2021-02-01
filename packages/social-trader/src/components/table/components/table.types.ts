@@ -11,6 +11,8 @@ import {
   TFilter
 } from "./filtering/filter.type";
 
+export type UpdateItemsFunc<T = any> = (data: T[], updates: any[]) => T[];
+
 export type TRenderHeaderFunc = (
   column: SortingColumn,
   i?: number

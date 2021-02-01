@@ -1,6 +1,6 @@
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
-import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/terminal-methods.context";
-import { TerminalTickerContext } from "pages/trade/binance-trade-page/trading/terminal-ticker.context";
+import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
+import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-methods.context";
+import { TerminalTickerContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-ticker.context";
 import { getSymbolFromState } from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import {
   MarkPrice,
@@ -28,7 +28,7 @@ export const useSymbolData = () => {
       setMarkPrice(undefined);
       return;
     }
-    getMarkPrice({ symbol: textSymbol }).subscribe(data => {
+    getMarkPrice({ symbol: textSymbol }).then(data => {
       setMarkPrice(data);
       markPriceSocket!(connectSocket, textSymbol).subscribe(data => {
         setMarkPrice({ ...markPrice, ...data });

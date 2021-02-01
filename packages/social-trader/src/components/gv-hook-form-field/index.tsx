@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { FieldError, useFormContext } from "react-hook-form";
+import { AnyObjectType } from "utils/types";
 
 const getErrorMessage = (obj: FieldError) =>
   "message" in obj ? obj.message : obj;
 
 export const GVHookFormField: React.FC<GVHookFormFieldProps> = ({
+  rules,
   disabled,
   onChange = () => {},
   component: Component,
@@ -30,7 +32,7 @@ export const GVHookFormField: React.FC<GVHookFormFieldProps> = ({
     setError(error);
   }, [errors[name], errors, JSON.parse(JSON.stringify(errors))]);
   useEffect(() => {
-    register({ name });
+    register({ name }, rules);
     return () => unregister(name);
   }, [register]);
   return (
@@ -51,5 +53,6 @@ export const GVHookFormField: React.FC<GVHookFormFieldProps> = ({
 interface GVHookFormFieldProps {
   component: React.ComponentType<any>;
   name: string;
+  rules?: AnyObjectType;
   [key: string]: any;
 }

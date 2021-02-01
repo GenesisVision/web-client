@@ -1,4 +1,4 @@
-import { TerminalOpenOrdersContext } from "pages/trade/binance-trade-page/trading/terminal-open-orders.context";
+import { TerminalOpenOrdersContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-open-orders.context";
 import React, { useContext } from "react";
 
 import { OpenOrders } from "./open-orders";

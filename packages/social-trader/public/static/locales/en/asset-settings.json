@@ -52,7 +52,7 @@
     "processing": "Processing",
     "exchange": "Exchange",
     "api-secret": "API secret",
-    "api-key": "API key",
+    "api-key": "API Key",
     "mandatory-assets": "There is a mandatory 1% GVT allocation per Fund",
     "asset-description": "Total share of all assets should be equal to 100%",
     "exit-fee": "Exit fee",

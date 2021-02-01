@@ -1,5 +1,5 @@
 import { Text } from "components/text/text";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
+import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import { UnitedTrade } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { TradesRow } from "pages/trade/binance-trade-page/trading/trades/trades-row";
 import React, { useContext } from "react";
@@ -12,6 +12,8 @@ interface Props {
 
 const _Trades: React.FC<Props> = ({ items }) => {
   const {
+    stepSize,
+    tickSize,
     symbol: { baseAsset, quoteAsset }
   } = useContext(TerminalInfoContext);
   return (
@@ -40,8 +42,11 @@ const _Trades: React.FC<Props> = ({ items }) => {
       <div className={styles["trades__items-container"]}>
         <table className={styles["trades__table"]}>
           <tbody>
-            {items.map(({ price, quantity, tradeTime }, i) => (
+            {items.map(({ orderId, price, quantity, tradeTime }, i) => (
               <TradesRow
+                stepSize={stepSize}
+                tickSize={tickSize}
+                key={orderId}
                 price={price}
                 prevPrice={items[i + 1]?.price}
                 amount={quantity}

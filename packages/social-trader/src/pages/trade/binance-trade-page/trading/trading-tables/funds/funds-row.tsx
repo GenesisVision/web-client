@@ -1,7 +1,5 @@
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
 import { formatValueWithTick } from "pages/trade/binance-trade-page/trading/terminal.helpers";
-import { TransferButton } from "pages/trade/binance-trade-page/trading/transfer/transfer.button";
-import React, { useContext } from "react";
+import React from "react";
 
 interface Props {
   asset: string;
@@ -10,14 +8,14 @@ interface Props {
   locked: number;
 }
 
-const _FundsFRow: React.FC<Props> = ({
+const _FundsRow: React.FC<Props> = ({
   amountInCurrency,
   asset,
   available,
   locked
 }) => {
-  const { terminalType } = useContext(TerminalInfoContext);
   const total = formatValueWithTick(+available + +locked, "0.00000001");
+
   return (
     <tr>
       <td>{asset}</td>
@@ -25,13 +23,8 @@ const _FundsFRow: React.FC<Props> = ({
       <td>{formatValueWithTick(available, "0.00000001")}</td>
       <td>{locked}</td>
       <td>{amountInCurrency}</td>
-      {terminalType === "futures" && (
-        <td>
-          <TransferButton asset={asset} />
-        </td>
-      )}
     </tr>
   );
 };
 
-export const FundsRow = React.memo(_FundsFRow);
+export const FundsRow = React.memo(_FundsRow);

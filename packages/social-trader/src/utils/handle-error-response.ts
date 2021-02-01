@@ -1,10 +1,12 @@
 import { ErrorViewModel } from "gv-api-web";
 import authService from "services/auth-service";
+import { AnyObjectType } from "utils/types";
 
-export type ResponseError = {
+export interface ResponseError {
   errorMessage: string;
   code: string;
-};
+  payload?: AnyObjectType;
+}
 
 export const SERVER_CONNECTION_ERROR_CODE = "ServerConnectionError";
 
@@ -28,12 +30,14 @@ const handleErrorResponse: IHandleErrorResponseFunc = response => {
       window.location.reload();
     }
     if (response.body !== null && response.body.errors) {
+      const { errors, code, ...payload } = response.body;
       return {
-        errorMessage: response.body.errors
+        payload,
+        errorMessage: errors
           .filter((x: any) => !x.property)
           .map((x: any) => x.message)
           .join(", "),
-        code: response.body.code
+        code: code
       };
     }
   }

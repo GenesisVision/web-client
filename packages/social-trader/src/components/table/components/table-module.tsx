@@ -15,11 +15,13 @@ import {
   TFilter
 } from "./filtering/filter.type";
 import Table, { ITableProps } from "./table";
-import { GetItemsFuncType } from "./table.types";
+import { GetItemsFuncType, UpdateItemsFunc } from "./table.types";
 
 const defaultData: IDataModel = { items: null, total: 0 };
 
 export interface ITableModuleProps extends ITableProps {
+  updates?: any[];
+  updateItemsFunc?: UpdateItemsFunc;
   name?: string;
   cache?: boolean;
   getItems: GetItemsFuncType;
@@ -31,6 +33,8 @@ export interface ITableModuleProps extends ITableProps {
 
 const _TableModule: React.FC<ITableModuleProps> = props => {
   const {
+    updates,
+    updateItemsFunc,
     name,
     cache,
     paging: pagingProp,
@@ -136,13 +140,20 @@ const _TableModule: React.FC<ITableModuleProps> = props => {
       data.total
     ]
   );
+
+  const items = useMemo(() => {
+    return updateItemsFunc && updates
+      ? updateItemsFunc(data.items, updates)
+      : data.items;
+  }, [data.items, updateItemsFunc, updates]);
+
   return (
     <Table
       {...props}
       sorting={sorting}
       filtering={filtering}
       paging={newPaging}
-      items={data.items}
+      items={items}
       isPending={isPending}
       updateSorting={handleUpdateSorting}
       updatePaging={handleUpdatePaging}

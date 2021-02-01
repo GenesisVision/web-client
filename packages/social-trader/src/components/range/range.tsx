@@ -92,6 +92,7 @@ export const SliderStyleWrapper: React.FC = ({ children }) => {
           text-align: center;
           cursor: pointer;
           color: #999;
+          white-space: nowrap;
         }
         .rc-slider-mark-text-active {
           color: #666;
@@ -335,7 +336,6 @@ export const SliderStyleWrapper: React.FC = ({ children }) => {
         .calculator-slider__slider-element .rc-slider-mark-text-active {
           @include font-size(${$fontSizeSmall});
           color: ${$textColor};
-          white-space: nowrap;
         }
       `}</style>
       {children}

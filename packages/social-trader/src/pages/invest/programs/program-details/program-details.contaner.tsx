@@ -1,4 +1,5 @@
-import DetailsDescriptionSection from "components/details/details-description-section/details-description/details-description-section";
+import DetailsDescriptionSection
+  from "components/details/details-description-section/details-description/details-description-section";
 import { DetailsTags } from "components/details/details-description-section/details-description/details-tags.block";
 import DetailsInvestment from "components/details/details-description-section/details-investment/details-investment";
 import { DetailsDivider } from "components/details/details-divider.block";
@@ -9,27 +10,29 @@ import { ASSET, TRADE_ASSET_TYPE } from "constants/constants";
 import { LevelsParamsInfo } from "gv-api-web";
 import dynamic from "next/dynamic";
 import { mapProgramFollowToTransferItemType } from "pages/dashboard/services/dashboard.service";
-import FollowDetailsStatisticSection from "pages/invest/follows/follow-details/follow-details-statistic-section/follow-details-statistic-section";
+import FollowDetailsStatisticSection
+  from "pages/invest/follows/follow-details/follow-details-statistic-section/follow-details-statistic-section";
 import PerformanceData from "pages/invest/programs/program-details/program-details-description/performance-data";
-import ProgramDetailsStatisticSection from "pages/invest/programs/program-details/program-details-statistic-section/program-details-statistic-section";
+import ProgramDetailsStatisticSection
+  from "pages/invest/programs/program-details/program-details-statistic-section/program-details-statistic-section";
 import { levelsParamsLoaderData } from "pages/invest/programs/program-details/program-details.loader-data";
 import { ProgramDescriptionDataType } from "pages/invest/programs/program-details/program-details.types";
 import { getSchema } from "pages/invest/programs/program-details/program-schema";
 import * as React from "react";
 import { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import styled from "styled-components";
 import {
   createFollowNotificationsToUrl,
+  createProgramApiKeysToUrl,
   createProgramNotificationsToUrl,
   createProgramSettingsToUrl
 } from "utils/compose-url";
 import { $paddingMedium } from "utils/style/sizes";
 
-import ProgramDetailsHistorySection, {
-  TProgramTablesData
-} from "./program-history-section/program-details-history-section";
+import ProgramDetailsHistorySection, { TProgramTablesData } from "./program-history-section/program-details-history-section";
 import {
   financialStatisticTableSelector,
   openPositionsSelector,
@@ -50,14 +53,17 @@ import {
   getTrades
 } from "./service/program-details.service";
 
-const InvestmentAccountControls = dynamic(() =>
-  import("pages/accounts/account-details/investment-account-controls")
+const InvestmentAccountControls = dynamic(
+  () => import("pages/accounts/account-details/investment-account-controls")
 );
-const InvestmentProgramControls = dynamic(() =>
-  import("./program-controls/investment-program-controls")
+const InvestmentProgramControls = dynamic(
+  () => import("./program-controls/investment-program-controls")
 );
-const FollowControls = dynamic(() =>
-  import("pages/invest/follows/follow-details/follow-controls/follow-controls")
+const FollowControls = dynamic(
+  () =>
+    import(
+      "pages/invest/follows/follow-details/follow-controls/follow-controls"
+    )
 );
 
 const ControlsRow = styled(Row)`
@@ -69,6 +75,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
   data: description,
   route
 }) => {
+  const isAuthenticated = useSelector(isAuthenticatedSelector);
   const [t] = useTranslation();
   const dispatch = useDispatch();
   const {
@@ -206,6 +213,17 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
     [description, handleDispatchDescription, isOwnAsset, levelsParameters]
   );
 
+  const apiKeysUrl = useMemo(
+    () =>
+      isExchange && isOwnAsset
+        ? createProgramApiKeysToUrl(
+            description.publicInfo.url,
+            description.publicInfo.title
+          )
+        : undefined,
+    [description, isExchange]
+  );
+
   const settingsUrl = useMemo(
     () =>
       description.publicInfo.status !== "Disabled" &&
@@ -239,8 +257,8 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
 
   const hasProgramDetails = !!programDetails;
   const getHistoryCounts = useMemo(
-    () => getProgramHistoryCounts(hasProgramDetails),
-    [hasProgramDetails]
+    () => getProgramHistoryCounts(hasProgramDetails, isAuthenticated),
+    [hasProgramDetails, isAuthenticated]
   );
 
   return (
@@ -270,6 +288,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
         programDetails={programDetails || followDetails}
         description={description.publicInfo.description}
         systemUrl={description.publicInfo.systemUrl}
+        apiKeysUrl={apiKeysUrl}
         notificationsUrl={notificationsUrl}
         settingsUrl={settingsUrl}
         AssetDetailsExtraBlock={renderAssetDetailsExtraBlock}

@@ -1,26 +1,24 @@
 import { ColoredTextColor } from "components/colored-text/colored-text";
 import { Push } from "components/link/link";
 import { useParams } from "hooks/location";
-import { NextPageContext } from "next";
 import { Bar } from "pages/trade/binance-trade-page/trading/chart/charting_library/datafeed-api";
 import { terminalMoneyFormat } from "pages/trade/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
 import { getDividerParts } from "pages/trade/binance-trade-page/trading/order-book/order-book.helpers";
-import { SymbolState } from "pages/trade/binance-trade-page/trading/terminal-info.context";
 import {
   Account,
   AssetBalance,
   ExchangeInfo,
   MergedTickerSymbolType,
-  TerminalAuthDataType,
+  Position,
+  SymbolState,
   TerminalCurrency,
   UnitedOrder
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import qs from "qs";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback } from "react";
 import { TERMINAL_FOLDER_ROUTE, TERMINAL_ROUTE } from "routes/trade.routes";
 import { Observable } from "rxjs";
 import { filter } from "rxjs/operators";
-import { cookieServiceCreator } from "utils/cookie-service.creator";
 import { formatValue } from "utils/formatter";
 import { changeLocation, safeGetElemFromArray } from "utils/helpers";
 import { getLocation } from "utils/location";
@@ -32,8 +30,6 @@ export const DEFAULT_SYMBOL: SymbolState = {
   baseAsset: "BTC",
   quoteAsset: "USDT"
 };
-const TRADE_AUTH_DATA_KEY = "TRADE_AUTH_DATA_KEY";
-const initialState = { publicKey: "", privateKey: "" };
 
 export const setUpperFirstLetter = ([firstLetter, ...rest]: string = "") =>
   firstLetter.toUpperCase() + rest.join("").toLowerCase();
@@ -43,9 +39,7 @@ export const generateOrderMessage = (
   symbol: MergedTickerSymbolType
 ): string => {
   const { stepSize } = symbol.lotSizeFilter;
-  const orderType = setUpperFirstLetter(order.type)
-    .split("_")
-    .join(" ");
+  const orderType = setUpperFirstLetter(order.type).split("_").join(" ");
   const executionTypeTitle =
     order.executionType?.toLowerCase() === "new"
       ? "Created"
@@ -161,32 +155,7 @@ export const getSymbolFilters = (
   };
 };
 
-export const authCookieService = (ctx?: NextPageContext) =>
-  cookieServiceCreator({
-    ctx,
-    key: TRADE_AUTH_DATA_KEY,
-    initialState,
-    parse: true
-  });
-
-export const useAuthCookieState = () => authCookieService();
-
-export const useTradeAuth = () => {
-  const [authData, setAuthData] = useState(initialState);
-  const { set, get } = useAuthCookieState();
-  useEffect(() => {
-    setAuthData(get());
-  }, []);
-  return {
-    set: (values: TerminalAuthDataType) => {
-      setAuthData(values);
-      set(values);
-    },
-    authData
-  };
-};
-
-export const USER_STREAM_ACCOUNT_UPDATE_EVENT_TYPE = "outboundAccountInfo";
+export const USER_STREAM_ACCOUNT_UPDATE_EVENT_TYPE = "outboundAccountPosition";
 
 export const filterOutboundAccountInfoStream = (
   userStream: Observable<any>
@@ -208,16 +177,78 @@ const normalizeBalanceList = (
   return initObject;
 };
 
+const normalizePositionsList = (
+  list: Position[]
+): { [keys: string]: Position } => {
+  const initObject: AnyObjectType = {};
+  list.forEach(item => {
+    if (!initObject[item.symbol]) initObject[item.symbol] = {};
+    initObject[item.symbol][item.positionSide] = item;
+  });
+  return initObject;
+};
+
+const flatNormalizedPositions = (positions: {
+  [keys: string]: Position;
+}): Position[] => {
+  return Object.values(positions)
+    .map(item => Object.values(item))
+    .flat();
+};
+
+export const updatePositionList = (
+  list: AnyObjectType,
+  updates: AnyObjectType
+): AnyObjectType => {
+  const updatedList = JSON.parse(JSON.stringify(list));
+  Object.entries(updates).forEach(([symbol, data]) => {
+    Object.keys(data).forEach(side => {
+      if (!updatedList[symbol]?.[side]) return;
+      updatedList[symbol][side] = {
+        ...updatedList[symbol][side],
+        ...updates[symbol][side]
+      };
+    });
+  });
+  return updatedList;
+};
+
+const updateBalancesList = (
+  list: AnyObjectType,
+  updates: AnyObjectType
+): AnyObjectType => {
+  const updatedList = { ...list };
+  Object.entries(updates).forEach(([symbol, data]) => {
+    updatedList[symbol] = {
+      ...updatedList[symbol],
+      ...data,
+      newAmountInCurrency: updatedList[symbol]?.newAmountInCurrency
+    };
+  });
+  return updatedList;
+};
+
 export const updateAccountInfo = (currentData: Account, updates: Account) => {
   const normalizedCurrentBalances = normalizeBalanceList(currentData.balances);
   const normalizedUpdatesBalances = normalizeBalanceList(
     updates.balances || []
   );
-  const balances = Object.values({
-    ...normalizedCurrentBalances,
-    ...normalizedUpdatesBalances
-  });
-  return { ...currentData, ...updates, balances };
+  const balances = Object.values(
+    updateBalancesList(normalizedCurrentBalances, normalizedUpdatesBalances)
+  );
+
+  const normalizedCurrentPositions = normalizePositionsList(
+    currentData.positions || []
+  );
+  const normalizedUpdatesPositions = normalizePositionsList(
+    updates.positions || []
+  );
+
+  const positions = flatNormalizedPositions(
+    updatePositionList(normalizedCurrentPositions, normalizedUpdatesPositions)
+  );
+
+  return { ...currentData, ...updates, balances, positions };
 };
 
 export const stringifySymbolFromToParam = (symbol: SymbolState): string => {

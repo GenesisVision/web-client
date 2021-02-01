@@ -1,8 +1,8 @@
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogTop } from "components/dialog/dialog-top";
 import useApiRequest from "hooks/api-request.hook";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
-import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/terminal-methods.context";
+import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
+import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-methods.context";
 import { TerminalCurrency } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { TransferForm } from "pages/trade/binance-trade-page/trading/transfer/transfer-form";
 import { TransferFormValues } from "pages/trade/binance-trade-page/trading/transfer/transfer.helpers";
@@ -23,7 +23,7 @@ const _TransferContainer: React.FC<ITransferContainerProps> = ({
   const { getBalancesForTransfer, newFutureAccountTransfer } = useContext(
     TerminalMethodsContext
   );
-  const { authData, symbol } = useContext(TerminalInfoContext);
+  const { exchangeAccountId, symbol } = useContext(TerminalInfoContext);
   const { sendRequest: sendTransfer, status } = useApiRequest({
     request: newFutureAccountTransfer!,
     successMessage: "Success",
@@ -32,17 +32,16 @@ const _TransferContainer: React.FC<ITransferContainerProps> = ({
   const { data } = useApiRequest({
     request: getBalancesForTransfer!,
     fetchOnMount: true,
-    fetchOnMountData: { authData }
+    fetchOnMountData: { accountId: exchangeAccountId }
   });
 
   const handleSubmit = useCallback(
     (values: TransferFormValues) => {
       return sendTransfer({
-        authData,
         ...values
       });
     },
-    [symbol, authData]
+    [symbol]
   );
   return (
     <>

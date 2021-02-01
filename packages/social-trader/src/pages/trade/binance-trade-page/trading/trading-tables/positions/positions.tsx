@@ -1,11 +1,11 @@
 import { Text } from "components/text/text";
 import { TradeTable } from "pages/trade/binance-trade-page/trading/components/trade-table/trade-table";
+import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import {
   getMarginInfo,
   MARGIN_INFO_ASSET
 } from "pages/trade/binance-trade-page/trading/margin-ratio/margin-ratio.helpers";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
-import { FuturesPositionInformation } from "pages/trade/binance-trade-page/trading/terminal.types";
+import { Position } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -14,7 +14,7 @@ import { POSITIONS_TABLE_COLUMNS } from "./positions.helpers";
 import styles from "./positions.module.scss";
 
 interface Props {
-  items?: FuturesPositionInformation[];
+  items?: Position[];
 }
 
 export const Positions: React.FC<Props> = ({ items }) => {
@@ -40,7 +40,7 @@ export const Positions: React.FC<Props> = ({ items }) => {
           <Text muted>{t(`${name}`)}</Text>
         </th>
       )}
-      renderRow={(position: FuturesPositionInformation) => (
+      renderRow={(position: Position) => (
         <PositionsRow marginRatio={marginRatio} position={position} />
       )}
     />

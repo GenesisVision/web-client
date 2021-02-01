@@ -3,7 +3,7 @@ import GVTabs from "components/gv-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
 import useTab from "hooks/tab.hook";
 import { TerminalDefaultBlock } from "pages/trade/binance-trade-page/trading/components/terminal-default-block/terminal-default-block";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
+import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import { FundsContainer } from "pages/trade/binance-trade-page/trading/trading-tables/funds/funds.container";
 import { OpenOrdersContainer } from "pages/trade/binance-trade-page/trading/trading-tables/open-orders/open-orders.container";
 import { OrderHistoryContainer } from "pages/trade/binance-trade-page/trading/trading-tables/order-history/order-history.container";
@@ -48,7 +48,7 @@ const _TradingTables: React.FC<Props> = () => {
           />
           <GVTab value={TABS.ORDER_HISTORY} label={t("Order history")} />
           <GVTab value={TABS.TRADE_HISTORY} label={t("Trade history")} />
-          <GVTab value={TABS.FUNDS} label={t("Funds")} />
+          <GVTab value={TABS.FUNDS} visible={!isFutures} label={t("Funds")} />
         </GVTabs>
       </DefaultBlock>
       <div className={styles["trading-tables__tables-container"]}>

@@ -2,8 +2,8 @@ import { Row } from "components/row/row";
 import { ASSET } from "constants/constants";
 import withLoader from "decorators/with-loader";
 import { NotificationSettingList } from "gv-api-web";
-import AssetNotificationsGeneral from "modules/asset-notifications/asset-notifications-general";
 import { NOTIFICATIONS } from "modules/asset-notifications/asset-notifications.types";
+import AssetNotificationsGeneral from "modules/asset-notifications/asset-notifications-general";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -23,6 +23,10 @@ const _NotificationSettings: React.FC<Props> = ({
     {
       name: NOTIFICATIONS.PlatformEmergency,
       label: t("notifications-page:general.emergency")
+    },
+    {
+      name: NOTIFICATIONS.Social,
+      label: t("notifications-page:general.social")
     }
   ];
   return (

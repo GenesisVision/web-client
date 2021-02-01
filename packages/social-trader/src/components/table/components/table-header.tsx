@@ -13,7 +13,20 @@ import TableHeadCell from "./table-head-cell";
 import TableRow from "./table-row";
 import { TRenderHeaderFunc, UpdateSortingFuncType } from "./table.types";
 
+interface IColumnsProps {
+  headerCellClassName?: string;
+  sorting?: string;
+  columns: SortingColumn[];
+  updateSorting?: UpdateSortingFuncType;
+  renderHeader?: TRenderHeaderFunc;
+}
+
+type HandleSortingType = (
+  sortingName?: string
+) => () => ((dispatch: Dispatch, getState: TGetState) => void) | void;
+
 const _TableHeader: React.FC<ITableHeaderProps> = ({
+  headerCellClassName,
   sorting,
   updateSorting,
   columns,
@@ -22,6 +35,7 @@ const _TableHeader: React.FC<ITableHeaderProps> = ({
   <thead>
     <TableRow head>
       <TableColumns
+        headerCellClassName={headerCellClassName}
         condition={!!columns}
         columns={columns!}
         updateSorting={updateSorting}
@@ -33,6 +47,7 @@ const _TableHeader: React.FC<ITableHeaderProps> = ({
 );
 
 export interface ITableHeaderProps {
+  headerCellClassName?: string;
   sorting?: string;
   updateSorting?: UpdateSortingFuncType;
   columns?: SortingColumn[];
@@ -49,6 +64,7 @@ const getSortingDirection = (
 const isSortable = (sortingName?: string): boolean => sortingName !== undefined;
 
 const _TableColumns: React.FC<IColumnsProps> = ({
+  headerCellClassName,
   columns,
   updateSorting,
   renderHeader,
@@ -70,6 +86,7 @@ const _TableColumns: React.FC<IColumnsProps> = ({
     <>
       {columns.map(column => (
         <TableHeadCell
+          className={headerCellClassName}
           key={column.name}
           sortable={!!updateSorting && isSortable(column.sortingName)}
           onClick={handleSorting(column.sortingName)}
@@ -82,17 +99,6 @@ const _TableColumns: React.FC<IColumnsProps> = ({
   );
 };
 const TableColumns = React.memo(withLoader(_TableColumns));
-
-interface IColumnsProps {
-  sorting?: string;
-  columns: SortingColumn[];
-  updateSorting?: UpdateSortingFuncType;
-  renderHeader?: TRenderHeaderFunc;
-}
-
-type HandleSortingType = (
-  sortingName?: string
-) => () => ((dispatch: Dispatch, getState: TGetState) => void) | void;
 
 const TableHeader = React.memo(_TableHeader);
 export default TableHeader;

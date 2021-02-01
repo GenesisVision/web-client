@@ -1,10 +1,15 @@
-import Popover, {
-  HORIZONTAL_POPOVER_POS,
-  VERTICAL_POPOVER_POS
-} from "components/popover/popover";
+import Popover, { HORIZONTAL_POPOVER_POS, VERTICAL_POPOVER_POS } from "components/popover/popover";
 import useAnchor from "hooks/anchor.hook";
 import * as React from "react";
 import { useCallback } from "react";
+
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
+  render: Function;
+  disable?: boolean;
+  horizontal?: HORIZONTAL_POPOVER_POS;
+  vertical?: VERTICAL_POPOVER_POS;
+  className?: string;
+}
 
 const Tooltip: React.FC<Props> = ({
   onClick,
@@ -63,13 +68,5 @@ const Tooltip: React.FC<Props> = ({
     </>
   );
 };
-
-interface Props extends React.HTMLAttributes<HTMLDivElement> {
-  render: Function;
-  disable?: boolean;
-  horizontal?: HORIZONTAL_POPOVER_POS;
-  vertical?: VERTICAL_POPOVER_POS;
-  className?: string;
-}
 
 export default Tooltip;

@@ -185,6 +185,10 @@ $avatar-size-mobile: $avatar-size/$divider-title;
   @include adaptive-margin(left, $details-block-padding);
 }
 
+@mixin details-block-right-margin() {
+  @include adaptive-margin(right, $details-block-padding);
+}
+
 @mixin details-block-right-padding() {
   @include adaptive-padding(right, $details-block-padding);
 }
@@ -210,7 +214,7 @@ $avatar-size-mobile: $avatar-size/$divider-title;
     @if $size == middle {
       &,
       & span {
-        font-size: $font-size-xsmall;
+        font-size: $font-size-common;
       }
     }
     @if $size == small {

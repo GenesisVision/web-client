@@ -7,7 +7,7 @@ import { GvButtonWithMark } from "components/gv-button/gv-button-with-mark/gv-bu
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
+import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import { getSymbolFromState } from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import { MarginModeType } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useCallback, useContext, useState } from "react";
@@ -55,20 +55,20 @@ const MarginModeDialogContent: React.FC<Props> = ({
         <Row>
           <RowItem wide>
             <GvButtonWithMark
-              disabled={mode === "CROSSED"}
+              disabled={mode === "Cross"}
               wide
-              onClick={handleClickButton("CROSSED")}
-              selected={mode === "CROSSED"}
+              onClick={handleClickButton("Cross")}
+              selected={mode === "Cross"}
             >
               {t("Cross")}
             </GvButtonWithMark>
           </RowItem>
           <RowItem wide>
             <GvButtonWithMark
-              disabled={mode === "ISOLATED"}
+              disabled={mode === "Isolated"}
               wide
-              onClick={handleClickButton("ISOLATED")}
-              selected={mode === "ISOLATED"}
+              onClick={handleClickButton("Isolated")}
+              selected={mode === "Isolated"}
             >
               {t("Isolated")}
             </GvButtonWithMark>

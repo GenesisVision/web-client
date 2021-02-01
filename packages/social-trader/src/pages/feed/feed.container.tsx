@@ -12,6 +12,7 @@ import React, { useCallback, useContext } from "react";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import Token from "services/api-client/token";
+import { AnyObjectType } from "utils/types";
 
 export enum FEED_TYPE {
   ALL = "ALL",
@@ -38,10 +39,10 @@ const getFeedMethod = ({
 }) => {
   if (searchValue) return searchInFeed(searchValue);
   if (showTop)
-    return (values?: Object) => getTopPosts({ ...values, showEvents });
+    return (values?: AnyObjectType) => getTopPosts({ ...values, showEvents });
   if (feedType === FEED_TYPE.PERSONAL)
-    return (values?: Object) => getNewsFeed({ ...values, showEvents });
-  return (values?: Object, token?: Token) =>
+    return (values?: AnyObjectType) => getNewsFeed({ ...values, showEvents });
+  return (values?: AnyObjectType, token?: Token) =>
     getGlobalFeed({ ...values, showEvents }, token);
 };
 

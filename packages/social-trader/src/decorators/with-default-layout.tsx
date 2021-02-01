@@ -10,6 +10,7 @@ import React, { Component } from "react";
 import { compose, Dispatch } from "redux";
 import { initializeStore } from "store";
 import { NextPageWithReduxContext } from "utils/types";
+import { logVersion } from "utils/version";
 
 const withDefaultLayout = (WrappedComponent: NextPage<any>) =>
   class extends Component<{
@@ -42,6 +43,7 @@ const withDefaultLayout = (WrappedComponent: NextPage<any>) =>
       };
     }
     render() {
+      logVersion();
       const { ex, ...others } = this.props;
       return (
         <AppLayout>

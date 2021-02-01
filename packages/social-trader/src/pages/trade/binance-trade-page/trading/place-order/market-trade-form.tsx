@@ -4,43 +4,51 @@ import { LabeledValue } from "components/labeled-value/labeled-value";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import { API_REQUEST_STATUS } from "hooks/api-request.hook";
+import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
+import { TerminalPlaceOrderContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-place-order.context";
 import { ReduceOnlyField } from "pages/trade/binance-trade-page/trading/place-order/place-order-settings/reduce-only-field/reduce-only-field";
 import { PlaceOrderSlider } from "pages/trade/binance-trade-page/trading/place-order/place-order-slider";
 import { PlaceOrderSubmitButton } from "pages/trade/binance-trade-page/trading/place-order/place-order-submit-button";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/terminal-info.context";
-import { TerminalPlaceOrderContext } from "pages/trade/binance-trade-page/trading/terminal-place-order.context";
-import {
-  AssetBalance,
-  ExchangeInfo,
-  OrderSide
-} from "pages/trade/binance-trade-page/trading/terminal.types";
+import { OrderSide } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
 
-import { usePlaceOrderAutoFill } from "./place-order-auto-fill.hook";
-import { usePlaceOrderFormReset } from "./place-order-form-reset.hook";
-import { usePlaceOrderInfo } from "./place-order-info-hook";
+import { usePlaceOrderAutoFill } from "./hooks/place-order-auto-fill.hook";
+import { usePlaceOrderFormReset } from "./hooks/place-order-form-reset.hook";
+import { usePlaceOrderInfo } from "./hooks/place-order-info-hook";
 import { placeOrderDefaultValidationSchema } from "./place-order-validation";
 import {
-  getBalance,
+  FilterValues,
   IPlaceOrderFormValues,
   IPlaceOrderHandleSubmitValues,
   TRADE_FORM_FIELDS
-} from "./place-order.helpers";
+} from "./place-order.types";
+import { MarketTotalLabel } from "pages/trade/binance-trade-page/trading/place-order/market-total-label";
 
 export interface IMarketTradeFormProps {
+  filterValues: FilterValues;
   status: API_REQUEST_STATUS;
-  outerPrice: number;
+  outerPrice: string;
   side: OrderSide;
   onSubmit: (values: IPlaceOrderHandleSubmitValues) => any;
 }
 
-const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
-  balances: AssetBalance[];
-  exchangeInfo: ExchangeInfo;
-}> = ({ status, balances, exchangeInfo, outerPrice, onSubmit, side }) => {
+const _MarketTradeForm: React.FC<
+  IMarketTradeFormProps & {
+    balanceBase: number;
+    balanceQuote: number;
+  }
+> = ({
+  balanceQuote,
+  balanceBase,
+  filterValues,
+  status,
+  outerPrice,
+  onSubmit,
+  side
+}) => {
   const [t] = useTranslation();
 
   const {
@@ -61,9 +69,10 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
     maxQuantityWithWallet,
     maxTotalWithWallet
   } = usePlaceOrderInfo({
-    balances,
+    balanceBase,
+    balanceQuote,
     side,
-    exchangeInfo
+    filterValues
   });
 
   const form = useForm<IPlaceOrderFormValues>({
@@ -93,13 +102,14 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
     reset,
     side,
     setValue,
-    balances,
+    balanceBase,
+    balanceQuote,
     quantityName: TRADE_FORM_FIELDS.quantity
   });
 
   usePlaceOrderAutoFill({
-    buyWalletAvailable: getBalance(balances, quoteAsset),
-    sellWalletAvailable: getBalance(balances, baseAsset),
+    buyWalletAvailable: balanceQuote,
+    sellWalletAvailable: balanceBase,
     setSliderValue,
     side,
     totalName: TRADE_FORM_FIELDS.total,
@@ -138,7 +148,7 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
           externalDirty={true}
           autoFocus={false}
           isAllowed={isAllow("BTC")}
-          label={isFutures ? t("Cost") : t("Total")}
+          label={isFutures ? t("Cost") : <MarketTotalLabel />}
           currency={quoteAsset}
           name={TRADE_FORM_FIELDS.total}
         />
@@ -153,7 +163,7 @@ const _MarketTradeForm: React.FC<IMarketTradeFormProps & {
           asset={baseAsset}
         />
       </Row>
-      {isFutures && currentPositionMode === false && (
+      {isFutures && currentPositionMode === "OneWay" && (
         <Row size={"small"}>
           <RowItem>
             <ReduceOnlyField />
