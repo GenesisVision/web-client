@@ -1,6 +1,6 @@
 import { DeleteApiKeyButton } from "components/api-keys/api-key/delete-api-key/delete-api-key.button";
 import { EditApiKeyButton } from "components/api-keys/api-key/edit-api-key/edit-api-key.button";
-import { IApiKeyFormValues } from "components/api-keys/api-key/form/api-key.helpers";
+import { ADD_API_KEY_FORM_FIELDS, IApiKeyFormValues } from "components/api-keys/api-key/form/api-key.helpers";
 import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
 import TableCell from "components/table/components/table-cell";
@@ -29,10 +29,10 @@ const _ApiKeysTableRow: React.FC<Props> = ({
   readonly
 }) => {
   const defaultValues: Partial<IApiKeyFormValues> = {
-    isIpRestrict: ipRestrict,
-    allowedIps: allowedIps.map(({ ip }) => ip),
-    isTradingEnabled: readonly,
-    id
+    [ADD_API_KEY_FORM_FIELDS.isIpRestrict]: ipRestrict,
+    [ADD_API_KEY_FORM_FIELDS.allowedIps]: allowedIps.map(({ ip }) => ip),
+    [ADD_API_KEY_FORM_FIELDS.isTradingDisabled]: readonly,
+    [ADD_API_KEY_FORM_FIELDS.id]: id
   };
   const formattedApiKey = `${apiKey.slice(0, 4)}...${apiKey.slice(-4)}`;
   return (
