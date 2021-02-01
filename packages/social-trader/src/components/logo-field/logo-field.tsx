@@ -1,4 +1,3 @@
-import inputImageShape from "components/form/input-image/input-image.validation";
 import { InputImageWrapper } from "components/form/input-image/input-image-wrapper";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import { Row } from "components/row/row";
@@ -6,7 +5,7 @@ import { Text } from "components/text/text";
 import ProgramDefaultImage from "media/program-default-image.svg";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import { convertShapeToRules } from "utils/validators/validators";
+import { inputImageRules } from "components/form/input-image/input-image.validation";
 
 interface Props {
   name: string;
@@ -33,7 +32,7 @@ const _LogoField: React.FC<Props> = ({
           name={name}
           component={InputImageWrapper}
           defaultImage={defaultImage}
-          rules={convertShapeToRules(inputImageShape(t))}
+          rules={inputImageRules(t)}
         />
       </Row>
     </div>
