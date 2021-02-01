@@ -69,7 +69,7 @@ const _ApiKeysTable: React.FC<Props> = ({ id }) => {
           apiSecret={apiSecret}
           title={title}
           ipRestrict={isIpRestrict}
-          readonly={isTradingEnabled}
+          readonly={!isTradingEnabled}
         />
       )}
     />
