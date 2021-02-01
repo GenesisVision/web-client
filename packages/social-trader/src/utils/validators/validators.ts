@@ -8,7 +8,7 @@ export const emailRegex = /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\u
 export const lessThan = (limit: number, message?: string) => (
   value: number
 ) => {
-  if (!value || value < limit) return message || false;
+  if (!value || value >= limit) return message || false;
   return true;
 };
 
