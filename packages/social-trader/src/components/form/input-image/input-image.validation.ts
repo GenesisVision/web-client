@@ -1,12 +1,12 @@
 import { TFunction } from "i18next";
-import { number, object } from "yup";
+import { AnyObjectType } from "utils/types";
 
-const inputImageShape = (t: TFunction) =>
-  object().shape({
-    image: object().shape({
-      width: number().min(300, t("validations.resolution")),
-      height: number().min(300, t("validations.resolution"))
-    })
-  });
-
-export default inputImageShape;
+export const inputImageRules = (t: TFunction) => ({
+  validate: (data: AnyObjectType) => {
+    if (!data?.image || isNaN(data.image.height) || isNaN(data.image.width))
+      return "Invalid image";
+    if (data.image.height < 300 || data.image.width < 300)
+      return t("validations.resolution");
+    return true;
+  }
+});

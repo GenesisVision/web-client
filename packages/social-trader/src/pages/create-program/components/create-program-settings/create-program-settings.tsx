@@ -1,9 +1,9 @@
-import useAssetValidate from "components/assets/asset-validate.hook";
 import {
   getBrokerId,
   getCurrency,
   getLeverage
 } from "components/assets/asset.helpers";
+import useAssetValidate from "components/assets/asset-validate.hook";
 import { BrokerCardType } from "components/assets/broker-select/broker-select.types";
 import BrokerAccount from "components/assets/fields/broker-account";
 import CreateAssetNavigation from "components/assets/fields/create-asset-navigation";
@@ -18,8 +18,8 @@ import Processing from "components/assets/fields/processing";
 import StopOutField from "components/assets/fields/stop-out-field";
 import TradesDelay from "components/assets/fields/trades-delay";
 import { IImageValue } from "components/form/input-image/input-image";
-import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { RowItem } from "components/row-item/row-item";
 import SettingsBlock from "components/settings-block/settings-block";
 import { ASSET } from "constants/constants";
 import {
@@ -38,8 +38,11 @@ import { kycConfirmedSelector } from "reducers/header-reducer";
 import { safeGetElemFromArray } from "utils/helpers";
 import { HookForm } from "utils/hook-form.helpers";
 import { CurrencyEnum } from "utils/types";
-
-import createProgramSettingsValidationSchema from "./create-program-settings.validators";
+import {
+  convertShapeToRules,
+  entryFeeShape,
+  successFeeShape
+} from "utils/validators/validators";
 
 export enum CREATE_PROGRAM_FIELDS {
   hourProcessing = "hourProcessing",
@@ -100,8 +103,6 @@ const _CreateProgramSettings: React.FC<Props> = ({
   const isExchange = !("leverageMin" in broker);
 
   const [hasInvestmentLimit, setHasInvestmentLimit] = useState(false);
-  const [available, setAvailable] = useState(0);
-  const [rate, setRate] = useState(1);
   const [t] = useTranslation();
 
   const form = useForm<ICreateProgramSettingsFormValues>({
@@ -118,25 +119,16 @@ const _CreateProgramSettings: React.FC<Props> = ({
       [CREATE_PROGRAM_FIELDS.depositWalletId]: "",
       [CREATE_PROGRAM_FIELDS.depositAmount]: undefined
     },
-    validationSchema: createProgramSettingsValidationSchema({
-      isExchange,
-      minInvestAmounts,
-      maxManagementFee,
-      maxSuccessFee,
-      hasInvestmentLimit,
-      rate,
-      t,
-      broker,
-      available
-    }),
     mode: "onChange"
   });
+
   const {
     triggerValidation,
     watch,
     setValue,
     formState: { isValid }
   } = form;
+
   const {
     isProcessingRealTime,
     description,
@@ -157,10 +149,10 @@ const _CreateProgramSettings: React.FC<Props> = ({
   const isKycConfirmed = useSelector(kycConfirmedSelector);
   const kycRequired = !isKycConfirmed && accountType.isKycRequired;
 
-  const minDepositCreateAssetArray = safeGetElemFromArray<
-    ProgramMinInvestAmount
-  >(minInvestAmounts, ({ serverType }) => serverType === accountType.type)
-    .minDepositCreateAsset;
+  const minDepositCreateAssetArray = safeGetElemFromArray<ProgramMinInvestAmount>(
+    minInvestAmounts,
+    ({ serverType }) => serverType === accountType.type
+  ).minDepositCreateAsset;
 
   const validateAndSubmit = useAssetValidate({
     handleSubmit: onSubmit,
@@ -197,23 +189,25 @@ const _CreateProgramSettings: React.FC<Props> = ({
               </Row>
             )}
             <Row>
-              <RowItem hide={isExchange}>
-                <BrokerAccount
-                  setAccountType={(value: string) =>
-                    setValue(CREATE_PROGRAM_FIELDS.brokerAccountTypeId, value)
-                  }
-                  setLeverage={(value: number) =>
-                    setValue(CREATE_PROGRAM_FIELDS.leverage, value)
-                  }
-                  setCurrency={(value: string) =>
-                    setValue(CREATE_PROGRAM_FIELDS.currency, value)
-                  }
-                  name={CREATE_PROGRAM_FIELDS.brokerAccountTypeId}
-                  accountTypes={
-                    (broker.accountTypes as unknown) as BrokerAccountType[]
-                  }
-                />
-              </RowItem>
+              {!isExchange && (
+                <RowItem>
+                  <BrokerAccount
+                    setAccountType={(value: string) =>
+                      setValue(CREATE_PROGRAM_FIELDS.brokerAccountTypeId, value)
+                    }
+                    setLeverage={(value: number) =>
+                      setValue(CREATE_PROGRAM_FIELDS.leverage, value)
+                    }
+                    setCurrency={(value: string) =>
+                      setValue(CREATE_PROGRAM_FIELDS.currency, value)
+                    }
+                    name={CREATE_PROGRAM_FIELDS.brokerAccountTypeId}
+                    accountTypes={
+                      (broker.accountTypes as unknown) as BrokerAccountType[]
+                    }
+                  />
+                </RowItem>
+              )}
               <RowItem>
                 <Currency
                   name={CREATE_PROGRAM_FIELDS.currency}
@@ -222,28 +216,32 @@ const _CreateProgramSettings: React.FC<Props> = ({
                 />
               </RowItem>
             </Row>
+            {!isExchange && (
+              <Row>
+                <RowItem>
+                  <Leverage
+                    name={CREATE_PROGRAM_FIELDS.leverage}
+                    accountLeverages={
+                      isExchange
+                        ? []
+                        : (accountType as BrokerAccountType).leverages
+                    }
+                  />
+                </RowItem>
+                <RowItem>
+                  <PeriodLength
+                    periods={periods}
+                    name={CREATE_PROGRAM_FIELDS.periodLength}
+                  />
+                </RowItem>
+              </Row>
+            )}
             <Row>
-              <RowItem hide={isExchange}>
-                <Leverage
-                  name={CREATE_PROGRAM_FIELDS.leverage}
-                  accountLeverages={
-                    isExchange
-                      ? []
-                      : (accountType as BrokerAccountType).leverages
-                  }
-                />
-              </RowItem>
-              <RowItem hide={isExchange}>
-                <PeriodLength
-                  periods={periods}
-                  name={CREATE_PROGRAM_FIELDS.periodLength}
-                />
-              </RowItem>
-            </Row>
-            <Row>
-              <RowItem hide={isExchange}>
-                <StopOutField name={CREATE_PROGRAM_FIELDS.stopOutLevel} />
-              </RowItem>
+              {!isExchange && (
+                <RowItem>
+                  <StopOutField name={CREATE_PROGRAM_FIELDS.stopOutLevel} />
+                </RowItem>
+              )}
               <RowItem>
                 <TradesDelay name={CREATE_PROGRAM_FIELDS.tradesDelay} />
               </RowItem>
@@ -271,6 +269,9 @@ const _CreateProgramSettings: React.FC<Props> = ({
               )
               : t("create-account:settings.hints.management-fee-description")
           }
+          firstFeeRules={convertShapeToRules(
+            entryFeeShape(t, maxManagementFee)
+          )}
           secondFeeName={CREATE_PROGRAM_FIELDS.successFee}
           secondFeeLabel={t("asset-settings:fields.success-fee")}
           secondFeeUnderText={t("create-account:settings.hints.success-fee")}
@@ -281,6 +282,9 @@ const _CreateProgramSettings: React.FC<Props> = ({
               )
               : t("create-account:settings.hints.success-fee-description")
           }
+          secondFeeRules={convertShapeToRules(
+            successFeeShape(t, maxSuccessFee)
+          )}
         />
       </SettingsBlock>
       <SettingsBlock
@@ -300,18 +304,17 @@ const _CreateProgramSettings: React.FC<Props> = ({
         <KycRequiredBlock />
       ) : (
         <>
-          <CreateProgramDepositBlock
-            hide={!accountType.isDepositRequired}
-            blockNumber={4}
-            setAvailable={setAvailable}
-            setRate={setRate}
-            walletFieldName={CREATE_PROGRAM_FIELDS.depositWalletId}
-            inputName={CREATE_PROGRAM_FIELDS.depositAmount}
-            depositAmount={depositAmount}
-            minimumDepositAmounts={minDepositCreateAssetArray}
-            setFieldValue={setValue}
-            assetCurrency={currency as CurrencyEnum}
-          />
+          {accountType.isDepositRequired && (
+            <CreateProgramDepositBlock
+              blockNumber={4}
+              walletFieldName={CREATE_PROGRAM_FIELDS.depositWalletId}
+              inputName={CREATE_PROGRAM_FIELDS.depositAmount}
+              depositAmount={depositAmount}
+              minimumDepositAmounts={minDepositCreateAssetArray}
+              setFieldValue={setValue}
+              assetCurrency={currency as CurrencyEnum}
+            />
+          )}
           <Row size={"large"}>
             <CreateAssetNavigation
               asset={ASSET.PROGRAM}

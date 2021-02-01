@@ -1,5 +1,26 @@
 import { TFunction } from "i18next";
-import { number, string } from "yup";
+import { AnyObjectType } from "utils/types";
+import { number, Schema, string } from "yup";
+
+// eslint-disable-next-line no-control-regex
+export const emailRegex = /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$/i;
+
+export const lessThan = (limit: number, message?: string) => (
+  value: number
+) => {
+  if (!value || value < limit) return message || false;
+  return true;
+};
+
+export const convertShapeToRules = (shape: Schema<any>) => ({
+  validate: (value: any) => {
+    try {
+      shape.validateSync(value);
+    } catch (e) {
+      return e.message;
+    }
+  }
+});
 
 export const minMaxNumberShape = ({
   t,
@@ -60,6 +81,22 @@ export const assetTitleShape = (t: TFunction) => {
       t("validations.title-is-latin-and-numbers")
     );
 };
+
+export const assetTitleRules = (t: TFunction) => ({
+  required: t("validations.title-required"),
+  minLength: {
+    value: 4,
+    message: t("validations.title-is-short")
+  },
+  maxLength: {
+    value: 20,
+    message: t("validations.title-is-long")
+  },
+  pattern: {
+    value: /^[-a-zA-Z0-9\s]{4,20}$/,
+    message: t("validations.title-is-latin-and-numbers")
+  }
+});
 
 export const assetDescriptionShape = (t: TFunction) => {
   return string()
@@ -139,13 +176,49 @@ export const exitFeeShape = (t: TFunction, max: number) =>
       })
     );
 
-export const twoFactorValidator = (t: TFunction, twoFactorEnabled: boolean) => {
-  return twoFactorEnabled
-    ? string()
-        .trim()
-        .matches(/^\d{6}$/, t("validations.two-factor-6digits"))
-        .required(t("validations.two-factor-required"))
-    : string()
-        .trim()
-        .matches(/^\d{6}$/, t("validations.two-factor-6digits"));
+export const twoFactorRules = (t: TFunction) => ({
+  pattern: {
+    value: /^\d{6}$/,
+    message: t("validations.two-factor-6digits")
+  },
+  required: t("profile-page:2fa-page.code-required")
+});
+
+export const depositAmountValidator = ({
+  t,
+  minValue,
+  minText,
+  max
+}: {
+  t: TFunction;
+  minValue: number;
+  minText?: number | string;
+  max: number;
+}) =>
+  number()
+    .required(t("validations.amount-required"))
+    .min(
+      minValue,
+      t("validations.amount-is-zero", {
+        min: minText || minValue
+      })
+    )
+    .max(max, t("validations.amount-is-large"));
+
+export const getConfirmPasswordValidationRules = ({
+  t,
+  watch
+}: {
+  t: TFunction;
+  watch: () => AnyObjectType;
+}) => {
+  return {
+    required: t("auth:password-restore.validators.confirm-password-required"),
+    validate: (value: string) => {
+      const { password } = watch();
+      return value !== password
+        ? t("auth:password-restore.validators.password-dont-match")
+        : true;
+    }
+  };
 };

@@ -1,9 +1,5 @@
 import { IImageValue } from "components/form/input-image/input-image";
 import { NewPost, NewPostImage } from "gv-api-web";
-import { TFunction } from "i18next";
-import { string } from "yup";
-
-export const ConversationInputShape = (t: TFunction) => string();
 
 export enum CONVERSATION_SUBMIT_TYPE {
   ENTER = "ENTER",

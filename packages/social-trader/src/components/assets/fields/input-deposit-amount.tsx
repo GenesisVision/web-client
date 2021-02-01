@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
 import { convertFromCurrency } from "utils/currency-converter";
 import { formatCurrencyValue, validateFraction } from "utils/formatter";
-import { CurrencyEnum } from "utils/types";
+import { AnyObjectType, CurrencyEnum } from "utils/types";
 
 interface Props {
   minAmount: number;
@@ -17,9 +17,11 @@ interface Props {
   walletCurrency: CurrencyEnum;
   depositAmount?: number | string;
   disabled?: boolean;
+  rules?: AnyObjectType;
 }
 
 const _InputDepositAmount: React.FC<Props> = ({
+  rules,
   minAmount,
   disabled,
   rate,
@@ -59,6 +61,7 @@ const _InputDepositAmount: React.FC<Props> = ({
         isAllowed={isAmountAllow(walletCurrency)}
         setMax={setMax}
         setMin={setMin}
+        rules={rules}
       />
       {assetCurrency !== walletCurrency && depositAmount && (
         <Row>

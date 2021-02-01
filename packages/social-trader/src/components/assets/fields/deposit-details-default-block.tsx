@@ -2,15 +2,19 @@ import SettingsBlock from "components/settings-block/settings-block";
 import { WalletSelectContainer } from "components/wallet-select/wallet-select.container";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { convertToCurrency } from "utils/currency-converter";
+import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
+import {
+  convertShapeToRules,
+  depositAmountValidator
+} from "utils/validators/validators";
 
 import { TUseAssetSectionOutput } from "../asset-section.hook";
 import InputDepositAmount from "./input-deposit-amount";
 
 export interface IDepositDetailsDefaultBlockProps {
   hide?: boolean;
-  setRate?: (value: number) => void;
-  setAvailable: (value: number) => void;
   blockNumber?: number;
   walletFieldName: string;
   inputName: string;
@@ -29,8 +33,6 @@ interface Props extends IDepositDetailsDefaultBlockProps, OwnProps {}
 const _DepositDetailsDefaultBlock: React.FC<Props> = ({
   assetSection,
   hide,
-  setAvailable,
-  setRate,
   blockNumber = 3,
   walletFieldName,
   inputName,
@@ -42,15 +44,17 @@ const _DepositDetailsDefaultBlock: React.FC<Props> = ({
   const [t] = useTranslation();
 
   const { isRatePending, rate, handleWalletChange, wallet } = assetSection;
-  useEffect(() => {
-    setRate && setRate(rate);
-  }, [rate]);
+
   useEffect(() => {
     if (!wallet) return;
     setFieldValue(inputName, undefined, true);
-    setAvailable(wallet.available);
     setFieldValue(walletFieldName, wallet.id, true);
   }, [wallet]);
+
+  const minDepositInCur = convertToCurrency(minimumDepositAmount, rate);
+  const minDepositInCurText = parseFloat(
+    formatCurrencyValue(minDepositInCur, wallet.currency)
+  );
 
   return (
     <SettingsBlock
@@ -76,6 +80,14 @@ const _DepositDetailsDefaultBlock: React.FC<Props> = ({
           depositAmount={depositAmount}
           rate={rate}
           setFieldValue={setFieldValue}
+          rules={convertShapeToRules(
+            depositAmountValidator({
+              t,
+              minValue: minDepositInCur,
+              minText: minDepositInCurText,
+              max: wallet.available
+            })
+          )}
         />
       </div>
     </SettingsBlock>

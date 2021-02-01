@@ -6,7 +6,6 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
-import { number, object } from "yup";
 
 enum FIELDS {
   stopOutLevel = "stopOutLevel"
@@ -23,19 +22,13 @@ const _StopOutLevel: React.FC<Props> = ({
     defaultValues: {
       [FIELDS.stopOutLevel]: stopOutLevel || 100
     },
-    validationSchema: object().shape({
-      [FIELDS.stopOutLevel]: number()
-        .required(t("validations.stop-out-required"))
-        .min(10, t("validations.stop-out-less-ten"))
-        .max(stopOutLevel || 100, t("validations.stop-out-more-current"))
-    }),
     mode: "onBlur"
   });
 
   return (
     <SettingsBlock label={t("asset-settings:fields.stop-out-level")}>
       <HookForm resetOnSuccess form={form} onSubmit={onSubmit}>
-        <StopOutField name={FIELDS.stopOutLevel} />
+        <StopOutField currentValue={stopOutLevel} name={FIELDS.stopOutLevel} />
         <Row size={"large"}>
           <SubmitButton isSuccessful={!editError}>
             {t("asset-settings:buttons.save")}

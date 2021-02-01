@@ -8,8 +8,8 @@ import { Row } from "components/row/row";
 import { SubmitButton } from "components/submit-button/submit-button";
 import { WalletItemType } from "components/wallet-select/wallet-select";
 import { useGetRate } from "hooks/get-rate.hook";
-import { TransferSelectField } from "modules/transfer/components/transfer-form-select-field";
 import {
+  amountRules,
   formatWalletItemValue,
   getCurrencyByIdInWalletItem,
   getIdByCurrencyInWalletItem,
@@ -17,9 +17,9 @@ import {
   ITransferFormProps,
   TRANSFER_FORM_FIELDS,
   transferFormMapPropsToValues,
-  transferFormValidationSchema,
   TransferFormValues
 } from "modules/transfer/components/transfer-form.helpers";
+import { TransferSelectField } from "modules/transfer/components/transfer-form-select-field";
 import {
   getItem,
   getOtherItems,
@@ -55,7 +55,6 @@ const _TransferForm: React.FC<ITransferFormProps> = ({
       currentItem,
       currentItemContainer
     }),
-    validationSchema: transferFormValidationSchema({ sourceItems, t }),
     mode: "onChange"
   });
   const { reset, watch, setValue } = form;
@@ -153,6 +152,8 @@ const _TransferForm: React.FC<ITransferFormProps> = ({
     [sourceItems, onSubmit, sourceType, destinationType]
   );
 
+  const { available, currency } = getItem(sourceItems, sourceId);
+
   return (
     <HookForm
       className={styles["transfer-popup"]}
@@ -192,6 +193,11 @@ const _TransferForm: React.FC<ITransferFormProps> = ({
           currency={selectedSourceItem.currency}
           setMax={setMax}
           isAllowed={isAmountAllow(sourceItems, sourceId)}
+          rules={amountRules({
+            t,
+            available,
+            currency
+          })}
         />
         {!!amount &&
           selectedDestinationItem.currency !== selectedSourceItem.currency && (
