@@ -75,7 +75,7 @@ const _ApiKeyForm: React.FC<IApiKeyFormProps> = ({
           wide
           type="checkbox"
           color="primary"
-          name={ADD_API_KEY_FORM_FIELDS.isTradingEnabled}
+          name={ADD_API_KEY_FORM_FIELDS.isTradingDisabled}
           label={t("api-keys:key-dialog.form.isTradingEnabled")}
           component={GVCheckbox}
         />
