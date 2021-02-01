@@ -2,8 +2,63 @@ import { TFunction } from "i18next";
 import { AnyObjectType } from "utils/types";
 import { number, Schema, string } from "yup";
 
+export interface Rule {
+  value: number | string | RegExp;
+  message: string;
+}
+
 // eslint-disable-next-line no-control-regex
 export const emailRegex = /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$/i;
+
+export const generateRules = ({
+  min,
+  minLength,
+  lessThan,
+  max,
+  maxLength,
+  moreThan,
+  pattern,
+  required
+}: {
+  min?: Rule;
+  minLength?: Rule;
+  lessThan?: Rule;
+  max?: Rule;
+  maxLength?: Rule;
+  moreThan?: Rule;
+  pattern?: Rule;
+  required?: string;
+}) => {
+  return {
+    validate: (value: any) => {
+      if (required && !value) return required;
+      if (min !== undefined && value < min.value) return min.message;
+      if (moreThan !== undefined && value <= moreThan.value)
+        return moreThan.message;
+      if (
+        minLength !== undefined &&
+        value &&
+        value.trim().length < minLength.value
+      )
+        return minLength.message;
+      if (lessThan !== undefined && value >= lessThan.value)
+        return lessThan.message;
+      if (max !== undefined && value > max.value) return max.message;
+      if (
+        maxLength !== undefined &&
+        value &&
+        value.trim().length > maxLength.value
+      )
+        return maxLength.message;
+      if (
+        pattern !== undefined &&
+        !((pattern.value as unknown) as RegExp).test(value)
+      )
+        return pattern.message;
+      return true;
+    }
+  };
+};
 
 export const lessThan = (limit: number, message?: string) => (
   value: number
