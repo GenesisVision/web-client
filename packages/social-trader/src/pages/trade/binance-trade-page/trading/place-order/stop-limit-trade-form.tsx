@@ -16,7 +16,7 @@ import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
-import { convertShapeToRules } from "utils/validators/validators";
+import { minMaxNumberRules } from "utils/validators/validators";
 
 import { usePlaceOrderAutoFill } from "./hooks/place-order-auto-fill.hook";
 import { usePlaceOrderFormReset } from "./hooks/place-order-form-reset.hook";
@@ -27,7 +27,6 @@ import {
   IStopLimitFormValues,
   TRADE_FORM_FIELDS
 } from "./place-order.types";
-import { tradeNumberShape } from "./place-order-validation";
 import { TotalField } from "pages/trade/binance-trade-page/trading/place-order/forms/fields/total-field";
 import { QuantityField } from "pages/trade/binance-trade-page/trading/place-order/forms/fields/quantity-field";
 import { PriceField } from "pages/trade/binance-trade-page/trading/place-order/forms/fields/price-field";
@@ -57,8 +56,6 @@ const _StopLimitTradeForm: React.FC<
   const [t] = useTranslation();
 
   const {
-    tickSize,
-    stepSize,
     symbol: { baseAsset, quoteAsset },
     terminalType
   } = useContext(TerminalInfoContext);
@@ -129,30 +126,18 @@ const _StopLimitTradeForm: React.FC<
           label={t("Stop")}
           currency={quoteAsset}
           name={TRADE_FORM_FIELDS.stopPrice}
-          rules={convertShapeToRules(
-            tradeNumberShape({
-              t,
-              min: 0,
-              max: Number.MAX_SAFE_INTEGER,
-              divider: +tickSize
-            })
-          )}
+          rules={minMaxNumberRules({
+            t,
+            min: 0,
+            max: Number.MAX_SAFE_INTEGER
+          })}
         />
       </Row>
       <Row>
-        <PriceField
-          label={t("Limit")}
-          min={minPrice}
-          max={maxPrice}
-          divider={+tickSize}
-        />
+        <PriceField label={t("Limit")} min={minPrice} max={maxPrice} />
       </Row>
       <Row>
-        <QuantityField
-          min={minQuantity}
-          max={maxQuantityWithWallet}
-          divider={+stepSize}
-        />
+        <QuantityField min={minQuantity} max={maxQuantityWithWallet} />
       </Row>
       <Row wide onlyOffset>
         <PlaceOrderSlider value={sliderValue} setValue={setSliderValue} />

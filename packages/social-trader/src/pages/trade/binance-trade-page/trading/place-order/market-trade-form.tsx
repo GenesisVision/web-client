@@ -52,8 +52,6 @@ const _MarketTradeForm: React.FC<
   const [t] = useTranslation();
 
   const {
-    tickSize,
-    stepSize,
     symbol: { baseAsset },
     terminalType
   } = useContext(TerminalInfoContext);
@@ -113,15 +111,11 @@ const _MarketTradeForm: React.FC<
       onSubmit={values => onSubmit({ ...values, type: "Market" })}
     >
       <Row hide>
-        <PriceField min={minPrice} max={maxPrice} divider={+tickSize} />
+        <PriceField min={minPrice} max={maxPrice} />
       </Row>
       <LabeledValue label={t("Price")}>{t("Market price")}</LabeledValue>
       <Row>
-        <QuantityField
-          min={minQuantity}
-          max={maxQuantityWithWallet}
-          divider={+stepSize}
-        />
+        <QuantityField min={minQuantity} max={maxQuantityWithWallet} />
       </Row>
       <Row>
         <TotalField

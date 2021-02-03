@@ -52,8 +52,6 @@ const _LimitTradeForm: React.FC<Props> = ({
   side
 }) => {
   const {
-    tickSize,
-    stepSize,
     symbol: { baseAsset },
     terminalType
   } = useContext(TerminalInfoContext);
@@ -117,14 +115,13 @@ const _LimitTradeForm: React.FC<Props> = ({
       onSubmit={values => onSubmit({ ...values, type: "Limit" })}
     >
       <Row>
-        <PriceField min={minPrice} max={maxPrice} divider={+tickSize} />
+        <PriceField min={minPrice} max={maxPrice} />
       </Row>
       <Row>
         <QuantityField
           isAllowed={allowPositiveValuesNumberFormat(Number.MAX_SAFE_INTEGER)}
           min={minQuantity}
           max={maxQuantityWithWallet}
-          divider={+stepSize}
         />
       </Row>
       <Row wide onlyOffset>

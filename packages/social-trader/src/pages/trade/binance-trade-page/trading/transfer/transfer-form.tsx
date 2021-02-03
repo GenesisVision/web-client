@@ -10,10 +10,7 @@ import Select from "components/select/select";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
 import { SubmitButton } from "components/submit-button/submit-button";
 import { Text } from "components/text/text";
-import {
-  BalancesForTransfer,
-  TerminalCurrency
-} from "pages/trade/binance-trade-page/trading/terminal.types";
+import { BalancesForTransfer, TerminalCurrency } from "pages/trade/binance-trade-page/trading/terminal.types";
 import {
   ENABLE_TRANSFER_ACCOUNTS,
   getBalanceNameFromNumber,
@@ -25,10 +22,7 @@ import React, { useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
-import {
-  convertShapeToRules,
-  minMaxNumberShape
-} from "utils/validators/validators";
+import { minMaxNumberRules } from "utils/validators/validators";
 
 import styles from "./transfer.module.scss";
 
@@ -162,13 +156,11 @@ const _TransferForm: React.FC<Props> = ({
           label={t("Amount")}
           currency={asset}
           name={TRANSFER_FORM_FIELDS.amount}
-          rules={convertShapeToRules(
-            minMaxNumberShape({
-              min: 0,
-              max: maxAmount,
-              t
-            })
-          )}
+          rules={minMaxNumberRules({
+            min: 0,
+            max: maxAmount,
+            t
+          })}
         />
       </Row>
       <Row>
