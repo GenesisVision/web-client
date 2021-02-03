@@ -114,6 +114,7 @@
       "fund": "Request to close the fund was sent successfully.",
       "exchangeaccount": "Request to close the trading account was sent successfully.",
       "externalsignaltradingaccount": "Request to close the trading account was sent successfully.",
+      "externaltradingaccount": "Request to close the external trading account was sent successfully.",
       "signaltradingaccount": "Request to close the trading account was sent successfully.",
       "exchange-program": "Request to close the program was sent successfully.",
       "signalprogram": "Request to close the program was sent successfully.",
