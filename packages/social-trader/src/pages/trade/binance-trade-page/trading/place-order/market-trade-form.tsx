@@ -14,10 +14,7 @@ import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
-import {
-  convertShapeToRules,
-  minMaxNumberShape
-} from "utils/validators/validators";
+import { convertShapeToRules, minMaxNumberShape } from "utils/validators/validators";
 
 import { usePlaceOrderAutoFill } from "./hooks/place-order-auto-fill.hook";
 import { usePlaceOrderFormReset } from "./hooks/place-order-form-reset.hook";
@@ -162,7 +159,7 @@ const _MarketTradeForm: React.FC<
             minMaxNumberShape({
               t,
               max: maxTotalWithWallet,
-              min: minNotional
+              min: isFutures ? undefined : minNotional
             })
           )}
         />
