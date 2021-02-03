@@ -8,25 +8,15 @@ import { RowItem } from "components/row-item/row-item";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
 import { SubmitButton } from "components/submit-button/submit-button";
 import { RegisterViewModel } from "gv-api-web";
-import {
-  CAPTCHA_STATUS,
-  CaptchaStatusContext
-} from "pages/auth/captcha-container";
-import {
-  PRIVACY_POLICY_ROUTE,
-  TERMS_ROUTE
-} from "pages/landing-page/static-data/nav-links";
+import { CAPTCHA_STATUS, CaptchaStatusContext } from "pages/auth/captcha-container";
+import { PRIVACY_POLICY_ROUTE, TERMS_ROUTE } from "pages/landing-page/static-data/nav-links";
 import * as React from "react";
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { LOGIN_ROUTE } from "routes/app.routes";
 import { HookForm } from "utils/hook-form.helpers";
-import {
-  convertShapeToRules,
-  emailValidator,
-  passwordValidator
-} from "utils/validators/validators";
+import { convertShapeToRules, emailRules, passwordValidator } from "utils/validators/validators";
 
 import { SIGN_UP_FORM_FIELDS } from "./signup-form.validators";
 
@@ -96,7 +86,7 @@ const _SignUpForm: React.FC<Props> = ({
           label={t("auth:signup.email-field-text")}
           autoComplete="email"
           component={SimpleTextField}
-          rules={convertShapeToRules(emailValidator)}
+          rules={emailRules}
         />
       </Row>
       <Row onlyOffset>

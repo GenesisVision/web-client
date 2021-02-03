@@ -5,19 +5,12 @@ import Link from "components/link/link";
 import { Row } from "components/row/row";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
 import { SubmitButton } from "components/submit-button/submit-button";
-import {
-  CAPTCHA_STATUS,
-  CaptchaStatusContext
-} from "pages/auth/captcha-container";
+import { CAPTCHA_STATUS, CaptchaStatusContext } from "pages/auth/captcha-container";
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
-import {
-  convertShapeToRules,
-  emailValidator,
-  passwordValidator
-} from "utils/validators/validators";
+import { convertShapeToRules, emailRules, passwordValidator } from "utils/validators/validators";
 
 import { FORGOT_PASSWORD_ROUTE } from "../../forgot-password/forgot-password.routes";
 
@@ -59,7 +52,7 @@ const _LoginForm: React.FC<Props> = ({ errorMessage, onSubmit }) => {
         label={t("auth:login.placeholder.email")}
         autoComplete="email"
         component={SimpleTextField}
-        rules={convertShapeToRules(emailValidator)}
+        rules={emailRules}
       />
       <Row onlyOffset>
         <GVHookFormField
