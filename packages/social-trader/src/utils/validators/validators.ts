@@ -103,9 +103,13 @@ export const minMaxNumberRules = ({
   });
 };
 
-export const emailValidator = string()
-  .email("Invalid email address.")
-  .required("Email is required.");
+export const emailRules = {
+  required: "Email is required.",
+  pattern: {
+    value: emailRegex,
+    message: "Invalid email address."
+  }
+};
 
 export const passwordValidator = (t: TFunction) =>
   string()
