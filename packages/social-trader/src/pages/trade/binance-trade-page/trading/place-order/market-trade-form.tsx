@@ -1,5 +1,3 @@
-import { isAllow } from "components/deposit/components/deposit.helpers";
-import HookFormAmountField from "components/input-amount-field/hook-form-amount-field";
 import { LabeledValue } from "components/labeled-value/labeled-value";
 import { Row } from "components/row/row";
 import { RowItem } from "components/row-item/row-item";
@@ -14,7 +12,6 @@ import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
-import { convertShapeToRules, minMaxNumberShape } from "utils/validators/validators";
 
 import { usePlaceOrderAutoFill } from "./hooks/place-order-auto-fill.hook";
 import { usePlaceOrderFormReset } from "./hooks/place-order-form-reset.hook";
@@ -26,7 +23,9 @@ import {
   TRADE_FORM_FIELDS
 } from "./place-order.types";
 import { MarketTotalLabel } from "pages/trade/binance-trade-page/trading/place-order/market-total-label";
-import { tradeNumberShape } from "./place-order-validation";
+import { TotalField } from "pages/trade/binance-trade-page/trading/place-order/forms/fields/total-field";
+import { QuantityField } from "pages/trade/binance-trade-page/trading/place-order/forms/fields/quantity-field";
+import { PriceField } from "pages/trade/binance-trade-page/trading/place-order/forms/fields/price-field";
 
 export interface IMarketTradeFormProps {
   filterValues: FilterValues;
@@ -55,7 +54,7 @@ const _MarketTradeForm: React.FC<
   const {
     tickSize,
     stepSize,
-    symbol: { baseAsset, quoteAsset },
+    symbol: { baseAsset },
     terminalType
   } = useContext(TerminalInfoContext);
   const { currentPositionMode } = useContext(TerminalPlaceOrderContext);
@@ -114,54 +113,22 @@ const _MarketTradeForm: React.FC<
       onSubmit={values => onSubmit({ ...values, type: "Market" })}
     >
       <Row hide>
-        <HookFormAmountField
-          autoFocus={false}
-          label={t("Price")}
-          currency={quoteAsset}
-          name={TRADE_FORM_FIELDS.price}
-          rules={convertShapeToRules(
-            tradeNumberShape({
-              t,
-              min: minPrice,
-              max: maxPrice,
-              divider: +tickSize
-            })
-          )}
-        />
+        <PriceField min={minPrice} max={maxPrice} divider={+tickSize} />
       </Row>
       <LabeledValue label={t("Price")}>{t("Market price")}</LabeledValue>
       <Row>
-        <HookFormAmountField
-          autoFocus={false}
-          label={t("Amount")}
-          currency={baseAsset}
-          name={TRADE_FORM_FIELDS.quantity}
-          rules={convertShapeToRules(
-            tradeNumberShape({
-              t,
-              min: minQuantity,
-              max: maxQuantityWithWallet,
-              divider: +stepSize
-            })
-          )}
+        <QuantityField
+          min={minQuantity}
+          max={maxQuantityWithWallet}
+          divider={+stepSize}
         />
       </Row>
       <Row>
-        <HookFormAmountField
-          disabled={true}
-          externalDirty={true}
-          autoFocus={false}
-          isAllowed={isAllow("BTC")}
-          label={isFutures ? t("Cost") : <MarketTotalLabel />}
-          currency={quoteAsset}
-          name={TRADE_FORM_FIELDS.total}
-          rules={convertShapeToRules(
-            minMaxNumberShape({
-              t,
-              max: maxTotalWithWallet,
-              min: isFutures ? undefined : minNotional
-            })
-          )}
+        <TotalField
+          max={maxTotalWithWallet}
+          min={minNotional}
+          label={<MarketTotalLabel />}
+          disabled
         />
       </Row>
       <Row wide onlyOffset>

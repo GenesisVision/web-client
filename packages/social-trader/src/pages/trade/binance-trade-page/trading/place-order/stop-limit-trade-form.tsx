@@ -1,4 +1,3 @@
-import { isAllow } from "components/deposit/components/deposit.helpers";
 import HookFormAmountField from "components/input-amount-field/hook-form-amount-field";
 import { Row } from "components/row/row";
 import { RowItem } from "components/row-item/row-item";
@@ -17,7 +16,7 @@ import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
-import { convertShapeToRules, minMaxNumberShape } from "utils/validators/validators";
+import { convertShapeToRules } from "utils/validators/validators";
 
 import { usePlaceOrderAutoFill } from "./hooks/place-order-auto-fill.hook";
 import { usePlaceOrderFormReset } from "./hooks/place-order-form-reset.hook";
@@ -29,6 +28,9 @@ import {
   TRADE_FORM_FIELDS
 } from "./place-order.types";
 import { tradeNumberShape } from "./place-order-validation";
+import { TotalField } from "pages/trade/binance-trade-page/trading/place-order/forms/fields/total-field";
+import { QuantityField } from "pages/trade/binance-trade-page/trading/place-order/forms/fields/quantity-field";
+import { PriceField } from "pages/trade/binance-trade-page/trading/place-order/forms/fields/price-field";
 
 export interface IStopLimitTradeFormProps {
   filterValues: FilterValues;
@@ -138,56 +140,25 @@ const _StopLimitTradeForm: React.FC<
         />
       </Row>
       <Row>
-        <HookFormAmountField
-          autoFocus={false}
+        <PriceField
           label={t("Limit")}
-          currency={quoteAsset}
-          name={TRADE_FORM_FIELDS.price}
-          rules={convertShapeToRules(
-            tradeNumberShape({
-              t,
-              min: minPrice,
-              max: maxPrice,
-              divider: +tickSize
-            })
-          )}
+          min={minPrice}
+          max={maxPrice}
+          divider={+tickSize}
         />
       </Row>
       <Row>
-        <HookFormAmountField
-          autoFocus={false}
-          label={t("Amount")}
-          currency={baseAsset}
-          name={TRADE_FORM_FIELDS.quantity}
-          rules={convertShapeToRules(
-            tradeNumberShape({
-              t,
-              min: minQuantity,
-              max: maxQuantityWithWallet,
-              divider: +stepSize
-            })
-          )}
+        <QuantityField
+          min={minQuantity}
+          max={maxQuantityWithWallet}
+          divider={+stepSize}
         />
       </Row>
       <Row wide onlyOffset>
         <PlaceOrderSlider value={sliderValue} setValue={setSliderValue} />
       </Row>
       <Row size={"small"}>
-        <HookFormAmountField
-          externalDirty={true}
-          autoFocus={false}
-          isAllowed={isAllow("BTC")}
-          label={isFutures ? t("Cost") : t("Total")}
-          currency={quoteAsset}
-          name={TRADE_FORM_FIELDS.total}
-          rules={convertShapeToRules(
-            minMaxNumberShape({
-              t,
-              max: maxTotalWithWallet,
-              min: isFutures ? undefined : minNotional
-            })
-          )}
-        />
+        <TotalField max={maxTotalWithWallet} min={minNotional} />
       </Row>
       <Row>
         <PlaceOrderSubmitButton

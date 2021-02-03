@@ -1,5 +1,3 @@
-import { isAllow } from "components/deposit/components/deposit.helpers";
-import HookFormAmountField from "components/input-amount-field/hook-form-amount-field";
 import { Row } from "components/row/row";
 import { RowItem } from "components/row-item/row-item";
 import { API_REQUEST_STATUS } from "hooks/api-request.hook";
@@ -15,10 +13,8 @@ import { PlaceOrderSubmitButton } from "pages/trade/binance-trade-page/trading/p
 import { OrderSide } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
 import { allowPositiveValuesNumberFormat } from "utils/helpers";
 import { HookForm } from "utils/hook-form.helpers";
-import { convertShapeToRules, minMaxNumberShape } from "utils/validators/validators";
 
 import { usePlaceOrderAutoFill } from "./hooks/place-order-auto-fill.hook";
 import { usePlaceOrderFormReset } from "./hooks/place-order-form-reset.hook";
@@ -29,7 +25,9 @@ import {
   IPlaceOrderHandleSubmitValues,
   TRADE_FORM_FIELDS
 } from "./place-order.types";
-import { tradeNumberShape } from "./place-order-validation";
+import { TotalField } from "pages/trade/binance-trade-page/trading/place-order/forms/fields/total-field";
+import { QuantityField } from "pages/trade/binance-trade-page/trading/place-order/forms/fields/quantity-field";
+import { PriceField } from "pages/trade/binance-trade-page/trading/place-order/forms/fields/price-field";
 
 export interface ILimitTradeFormProps {
   filterValues: FilterValues;
@@ -53,12 +51,10 @@ const _LimitTradeForm: React.FC<Props> = ({
   onSubmit,
   side
 }) => {
-  const [t] = useTranslation();
-
   const {
     tickSize,
     stepSize,
-    symbol: { baseAsset, quoteAsset },
+    symbol: { baseAsset },
     terminalType
   } = useContext(TerminalInfoContext);
   const { currentPositionMode } = useContext(TerminalPlaceOrderContext);
@@ -121,57 +117,21 @@ const _LimitTradeForm: React.FC<Props> = ({
       onSubmit={values => onSubmit({ ...values, type: "Limit" })}
     >
       <Row>
-        <HookFormAmountField
-          autoFocus={false}
-          label={t("Price")}
-          currency={quoteAsset}
-          name={TRADE_FORM_FIELDS.price}
-          rules={convertShapeToRules(
-            tradeNumberShape({
-              t,
-              min: minPrice,
-              max: maxPrice,
-              divider: +tickSize
-            })
-          )}
-        />
+        <PriceField min={minPrice} max={maxPrice} divider={+tickSize} />
       </Row>
       <Row>
-        <HookFormAmountField
+        <QuantityField
           isAllowed={allowPositiveValuesNumberFormat(Number.MAX_SAFE_INTEGER)}
-          autoFocus={false}
-          label={t("Amount")}
-          currency={baseAsset}
-          name={TRADE_FORM_FIELDS.quantity}
-          rules={convertShapeToRules(
-            tradeNumberShape({
-              t,
-              min: minQuantity,
-              max: maxQuantityWithWallet,
-              divider: +stepSize
-            })
-          )}
+          min={minQuantity}
+          max={maxQuantityWithWallet}
+          divider={+stepSize}
         />
       </Row>
       <Row wide onlyOffset>
         <PlaceOrderSlider value={sliderValue} setValue={setSliderValue} />
       </Row>
       <Row size={"small"}>
-        <HookFormAmountField
-          externalDirty={true}
-          autoFocus={false}
-          isAllowed={isAllow("BTC")}
-          label={isFutures ? t("Cost") : t("Total")}
-          currency={quoteAsset}
-          name={TRADE_FORM_FIELDS.total}
-          rules={convertShapeToRules(
-            minMaxNumberShape({
-              t,
-              max: maxTotalWithWallet,
-              min: isFutures ? undefined : minNotional
-            })
-          )}
-        />
+        <TotalField max={maxTotalWithWallet} min={minNotional} />
       </Row>
       <Row>
         <PlaceOrderSubmitButton
