@@ -77,7 +77,7 @@ export const convertShapeToRules = (shape: Schema<any>) => ({
   }
 });
 
-export const minMaxNumberShape = ({
+export const minMaxNumberRules = ({
   t,
   min = 0,
   max
@@ -85,21 +85,23 @@ export const minMaxNumberShape = ({
   t: TFunction;
   min?: number;
   max: number;
-}) =>
-  number()
-    .required(t("validations.required"))
-    .min(
-      min,
-      t("validations.min", {
+}) => {
+  return generateRules({
+    required: t("validations.required"),
+    min: {
+      message: t("validations.min", {
         min
-      })
-    )
-    .max(
-      max,
-      t("validations.max", {
+      }),
+      value: min
+    },
+    max: {
+      message: t("validations.max", {
         max
-      })
-    );
+      }),
+      value: max
+    }
+  });
+};
 
 export const emailValidator = string()
   .email("Invalid email address.")
