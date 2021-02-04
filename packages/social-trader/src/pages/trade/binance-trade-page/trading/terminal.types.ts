@@ -60,6 +60,7 @@ export interface DepthFullAmount {
 export interface SymbolSummaryData {
   markPrice?: MarkPrice;
   tickerData: MergedTickerSymbolType;
+  usdRate?: number;
 }
 
 export type MarkPrice = BinanceRawFuturesMarkPrice;
