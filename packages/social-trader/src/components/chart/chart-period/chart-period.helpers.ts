@@ -6,7 +6,8 @@ export type TChartPeriod =
   | "month"
   | "quarter"
   | "year"
-  | "all";
+  | "all"
+  | "custom";
 
 export const ChartPeriodType = {
   day: "day" as TChartPeriod,
@@ -14,13 +15,17 @@ export const ChartPeriodType = {
   month: "month" as TChartPeriod,
   quarter: "quarter" as TChartPeriod,
   year: "year" as TChartPeriod,
-  all: "all" as TChartPeriod
+  all: "all" as TChartPeriod,
+  custom: "custom" as TChartPeriod
 };
 
 export const ChartPeriodTypeValues = Object.values(ChartPeriodType);
 
 export const getPeriodStartDate = (periodType: TChartPeriod) => {
-  if (periodType === ChartPeriodType.all) {
+  if (
+    periodType === ChartPeriodType.all ||
+    periodType === ChartPeriodType.custom
+  ) {
     return undefined;
   }
   return subtractDate(new Date(), 1, periodType as any);
