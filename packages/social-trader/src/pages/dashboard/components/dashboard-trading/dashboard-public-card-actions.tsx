@@ -43,6 +43,7 @@ const _DashboardPublicCardActions: React.FC<IDashboardPublicCardActionsProps> = 
     id,
     publicInfo: { title, url },
     actions: {
+      canCreateApiKeys,
       canClosePeriod,
       hasTerminal,
       canConfirm2FA,
@@ -123,7 +124,7 @@ const _DashboardPublicCardActions: React.FC<IDashboardPublicCardActionsProps> = 
         <ChangeAccountPasswordButton id={id} title={contextTitle} />
       )}
       {canConfirm2FA && <ConfirmTFAButton onApply={handleOnApply} id={id} />}
-      {hasTerminal && (
+      {canCreateApiKeys && (
         <TableCardActionsItem to={apiKeysLink} onClick={clearAnchor}>
           {t("dashboard-page:trading.actions.api-keys")}
         </TableCardActionsItem>
