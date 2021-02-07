@@ -1,6 +1,5 @@
 import { TFunction } from "i18next";
 import { AnyObjectType } from "utils/types";
-import { number, Schema, string } from "yup";
 
 export interface Rule {
   value: number | string | RegExp;
@@ -67,16 +66,6 @@ export const lessThan = (limit: number, message?: string) => (
   return true;
 };
 
-export const convertShapeToRules = (shape: Schema<any>) => ({
-  validate: (value: any) => {
-    try {
-      shape.validateSync(value);
-    } catch (e) {
-      return e.message;
-    }
-  }
-});
-
 export const minMaxNumberRules = ({
   t,
   min = 0,
@@ -111,37 +100,33 @@ export const emailRules = {
   }
 };
 
-export const passwordValidator = (t: TFunction) =>
-  string()
-    .min(
-      6,
-      t("auth:password-restore.validators.password-is-short", {
-        count: 6
-      })
-    )
-    .required(t("auth:password-restore.validators.password-required"));
+export const passwordRules = (t: TFunction) => ({
+  required: t("auth:password-restore.validators.password-required"),
+  minLength: {
+    value: 6,
+    message: t("auth:password-restore.validators.password-is-short", {
+      count: 6
+    })
+  }
+});
 
-export const ethGvtWalletValidator = string().matches(
-  /^0x[a-fA-F0-9]{40}$/,
-  "Invalid wallet address"
-);
+export const ethGvtWalletRules = (t: TFunction) =>
+  generateRules({
+    required: t("validations.address-is-required"),
+    pattern: {
+      value: /^0x[a-fA-F0-9]{40}$/,
+      message: "Invalid wallet address"
+    }
+  });
 
-export const btcWalletValidator = string().matches(
-  /^[13][a-km-zA-HJ-NP-Z1-9]{25,34}$/,
-  "Invalid wallet address"
-);
-
-export const assetTitleShape = (t: TFunction) => {
-  return string()
-    .trim()
-    .required(t("validations.title-required"))
-    .min(4, t("validations.title-is-short"))
-    .max(20, t("validations.title-is-long"))
-    .matches(
-      /^[-a-zA-Z0-9\s]{4,20}$/,
-      t("validations.title-is-latin-and-numbers")
-    );
-};
+export const btcGvtWalletRules = (t: TFunction) =>
+  generateRules({
+    required: t("validations.address-is-required"),
+    pattern: {
+      value: /^[13][a-km-zA-HJ-NP-Z1-9]{25,34}$/,
+      message: "Invalid wallet address"
+    }
+  });
 
 export const assetTitleRules = (t: TFunction) => ({
   required: t("validations.title-required"),
@@ -159,83 +144,98 @@ export const assetTitleRules = (t: TFunction) => ({
   }
 });
 
-export const assetDescriptionShape = (t: TFunction) => {
-  return string()
-    .trim()
-    .required(t("validations.description-required"))
-    .min(20, t("validations.description-is-short"))
-    .max(500, t("validations.description-is-long"));
-};
+export const assetDescriptionRules = (t: TFunction) =>
+  generateRules({
+    required: t("validations.description-required"),
+    minLength: {
+      value: 20,
+      message: t("validations.description-is-short")
+    },
+    maxLength: {
+      value: 500,
+      message: t("validations.description-is-long")
+    }
+  });
 
-export const signalSuccessFeeShape = (
+export const signalSuccessFeeRules = (
   t: TFunction,
   min: number,
   max: number
-) => {
-  return number()
-    .min(min, t("validations.success-fee-min"))
-    .required(t("validations.success-fee-required"))
-    .max(
-      max,
-      t("validations.success-fee-max", {
-        max
-      })
-    );
-};
+) => ({
+  required: t("validations.success-fee-required"),
+  min: {
+    value: min,
+    message: t("validations.success-fee-min")
+  },
+  max: {
+    value: max,
+    message: t("validations.success-fee-max", {
+      max
+    })
+  }
+});
 
-export const signalVolumeFeeShape = (
+export const signalVolumeFeeRules = (
   t: TFunction,
   min: number = 0,
   max: number = 0.1
-) => {
-  return number()
-    .required(t("validations.signal-volume-fee-required"))
-    .min(
-      min,
-      t("validations.signal-volume-fee-min", {
-        min
-      })
-    )
-    .max(
-      max,
-      t("validations.signal-volume-fee-max", {
-        max
-      })
-    );
-};
+) => ({
+  required: t("validations.signal-volume-fee-required"),
+  min: {
+    value: min,
+    message: t("validations.signal-volume-fee-min", {
+      min
+    })
+  },
+  max: {
+    value: max,
+    message: t("validations.signal-volume-fee-max", {
+      max
+    })
+  }
+});
 
-export const entryFeeShape = (t: TFunction, max: number) =>
-  number()
-    .required(t("validations.entry-fee-required"))
-    .min(0, t("validations.entry-fee-min"))
-    .max(
-      max,
-      t("validations.entry-fee-max", {
-        max
-      })
-    );
+export const entryFeeRules = (t: TFunction, max: number) => ({
+  required: t("validations.entry-fee-required"),
+  min: {
+    value: 0,
+    message: t("validations.entry-fee-min")
+  },
+  max: {
+    value: max,
+    message: t("validations.entry-fee-max", {
+      max
+    })
+  }
+});
 
-export const successFeeShape = (t: TFunction, max: number) =>
-  number()
-    .required(t("validations.success-fee-required"))
-    .min(0, t("validations.success-fee-min"))
-    .max(
-      max,
-      t("validations.success-fee-max", {
-        max
-      })
-    );
+export const successFeeRules = (t: TFunction, max: number) => ({
+  required: t("validations.success-fee-required"),
+  min: {
+    value: 0,
+    message: t("validations.success-fee-min")
+  },
+  max: {
+    value: max,
+    message: t("validations.success-fee-max", {
+      max
+    })
+  }
+});
 
-export const exitFeeShape = (t: TFunction, max: number) =>
-  number()
-    .required(t("validations.exit-fee-required"))
-    .min(0, t("validations.exit-fee-min"))
-    .max(
-      max,
-      t("validations.exit-fee-max", {
-        max
-      })
-    );
+export const exitFeeRules = (t: TFunction, max: number) => ({
+  required: t("validations.exit-fee-required"),
+  min: {
+    value: 0,
+    message: t("validations.exit-fee-min")
+  },
+  max: {
+    value: max,
+    message: t("validations.exit-fee-max", {
+      max
+    })
+  }
+});
 
 export const twoFactorRules = (t: TFunction) => ({
   pattern: {
@@ -245,7 +245,7 @@ export const twoFactorRules = (t: TFunction) => ({
   required: t("profile-page:2fa-page.code-required")
 });
 
-export const depositAmountValidator = ({
+export const depositAmountRules = ({
   t,
   minValue,
   minText,
@@ -255,16 +255,19 @@ export const depositAmountValidator = ({
   minValue: number;
   minText?: number | string;
   max: number;
-}) =>
-  number()
-    .required(t("validations.amount-required"))
-    .min(
-      minValue,
-      t("validations.amount-is-zero", {
-        min: minText || minValue
-      })
-    )
-    .max(max, t("validations.amount-is-large"));
+}) => ({
+  required: t("validations.amount-required"),
+  min: {
+    value: minValue,
+    message: t("validations.amount-is-zero", {
+      min: minText || minValue
+    })
+  },
+  max: {
+    value: max,
+    message: t("validations.amount-is-large")
+  }
+});
 
 export const getConfirmPasswordValidationRules = ({
   t,
