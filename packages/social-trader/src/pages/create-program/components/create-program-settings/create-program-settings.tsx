@@ -1,8 +1,4 @@
-import {
-  getBrokerId,
-  getCurrency,
-  getLeverage
-} from "components/assets/asset.helpers";
+import { getBrokerId, getCurrency, getLeverage } from "components/assets/asset.helpers";
 import useAssetValidate from "components/assets/asset-validate.hook";
 import { BrokerCardType } from "components/assets/broker-select/broker-select.types";
 import BrokerAccount from "components/assets/fields/broker-account";
@@ -22,11 +18,7 @@ import { Row } from "components/row/row";
 import { RowItem } from "components/row-item/row-item";
 import SettingsBlock from "components/settings-block/settings-block";
 import { ASSET } from "constants/constants";
-import {
-  BrokerAccountType,
-  ProgramAssetPlatformInfo,
-  ProgramMinInvestAmount
-} from "gv-api-web";
+import { BrokerAccountType, ProgramAssetPlatformInfo, ProgramMinInvestAmount } from "gv-api-web";
 import { CONVERT_ASSET_FIELDS } from "pages/convert-asset/components/convert-asset-settings.helpers";
 import { KycRequiredBlock } from "pages/create-account/components/create-account-settings/kyc-required-block";
 import * as React from "react";
@@ -38,11 +30,7 @@ import { kycConfirmedSelector } from "reducers/header-reducer";
 import { safeGetElemFromArray } from "utils/helpers";
 import { HookForm } from "utils/hook-form.helpers";
 import { CurrencyEnum } from "utils/types";
-import {
-  convertShapeToRules,
-  entryFeeShape,
-  successFeeShape
-} from "utils/validators/validators";
+import { entryFeeRules, successFeeRules } from "utils/validators/validators";
 
 export enum CREATE_PROGRAM_FIELDS {
   hourProcessing = "hourProcessing",
@@ -265,26 +253,22 @@ const _CreateProgramSettings: React.FC<Props> = ({
           firstFeeDescription={
             isExchange
               ? t(
-                "create-account:settings.hints.exchange-management-fee-description"
-              )
+                  "create-account:settings.hints.exchange-management-fee-description"
+                )
               : t("create-account:settings.hints.management-fee-description")
           }
-          firstFeeRules={convertShapeToRules(
-            entryFeeShape(t, maxManagementFee)
-          )}
+          firstFeeRules={entryFeeRules(t, maxManagementFee)}
           secondFeeName={CREATE_PROGRAM_FIELDS.successFee}
           secondFeeLabel={t("asset-settings:fields.success-fee")}
           secondFeeUnderText={t("create-account:settings.hints.success-fee")}
           secondFeeDescription={
             isExchange
               ? t(
-                "create-account:settings.hints.exchange-success-fee-description"
-              )
+                  "create-account:settings.hints.exchange-success-fee-description"
+                )
               : t("create-account:settings.hints.success-fee-description")
           }
-          secondFeeRules={convertShapeToRules(
-            successFeeShape(t, maxSuccessFee)
-          )}
+          secondFeeRules={successFeeRules(t, maxSuccessFee)}
         />
       </SettingsBlock>
       <SettingsBlock

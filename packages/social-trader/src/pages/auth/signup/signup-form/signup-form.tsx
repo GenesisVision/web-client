@@ -16,7 +16,7 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { LOGIN_ROUTE } from "routes/app.routes";
 import { HookForm } from "utils/hook-form.helpers";
-import { convertShapeToRules, emailRules, passwordValidator } from "utils/validators/validators";
+import { emailRules, passwordRules } from "utils/validators/validators";
 
 import { SIGN_UP_FORM_FIELDS } from "./signup-form.validators";
 
@@ -98,7 +98,7 @@ const _SignUpForm: React.FC<Props> = ({
           label={t("auth:signup.password-field-text")}
           component={SimpleTextField}
           autoComplete="new-password"
-          rules={convertShapeToRules(passwordValidator(t))}
+          rules={passwordRules(t)}
         />
       </Row>
       <Row>

@@ -13,11 +13,7 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { safeGetElemFromArray } from "utils/helpers";
 import { HookForm } from "utils/hook-form.helpers";
-import {
-  convertShapeToRules,
-  entryFeeShape,
-  exitFeeShape
-} from "utils/validators/validators";
+import { entryFeeRules, exitFeeRules } from "utils/validators/validators";
 
 import { FUND_CURRENCY } from "../../create-fund.constants";
 import { AssetsField } from "./assets-field";
@@ -102,7 +98,7 @@ const _CreateFundSettings: React.FC<Props> = ({
             "create-fund-page:settings.hints.entry-fee-description",
             { maxFee: maxEntryFee }
           )}
-          firstFeeRules={convertShapeToRules(entryFeeShape(t, maxEntryFee))}
+          firstFeeRules={entryFeeRules(t, maxEntryFee)}
           secondFeeName={CREATE_FUND_FIELDS.exitFee}
           secondFeeLabel={t("create-fund-page:settings.fields.exit-fee")}
           secondFeeUnderText={t("create-fund-page:settings.hints.exit-fee")}
@@ -112,7 +108,7 @@ const _CreateFundSettings: React.FC<Props> = ({
               maxFee: maxExitFee
             }
           )}
-          secondFeeRules={convertShapeToRules(exitFeeShape(t, maxExitFee))}
+          secondFeeRules={exitFeeRules(t, maxExitFee)}
         />
       </SettingsBlock>
       <DepositDetailsBlock

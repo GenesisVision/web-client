@@ -7,11 +7,7 @@ import * as React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
-import {
-  convertShapeToRules,
-  getConfirmPasswordValidationRules,
-  passwordValidator
-} from "utils/validators/validators";
+import { getConfirmPasswordValidationRules, passwordRules } from "utils/validators/validators";
 
 enum FIELDS {
   password = "password",
@@ -39,7 +35,7 @@ const _RestorePassword: React.FC<Props> = ({ errorMessage, onSubmit }) => {
         name={FIELDS.password}
         label={t("auth:password-restore.new-password.password-field-text")}
         component={SimpleTextField}
-        rules={convertShapeToRules(passwordValidator(t))}
+        rules={passwordRules(t)}
       />
       <Row onlyOffset>
         <GVHookFormField

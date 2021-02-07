@@ -10,12 +10,7 @@ import * as React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
-import {
-  convertShapeToRules,
-  getConfirmPasswordValidationRules,
-  passwordValidator,
-  twoFactorRules
-} from "utils/validators/validators";
+import { getConfirmPasswordValidationRules, passwordRules, twoFactorRules } from "utils/validators/validators";
 
 enum FORM_FIELDS {
   password = "password",
@@ -72,7 +67,7 @@ const _ChangePasswordTradingAccountForm: React.FC<ChangePasswordTradingAccountFo
             type="password"
             name={FORM_FIELDS.password}
             autoComplete="off"
-            rules={convertShapeToRules(passwordValidator(t))}
+            rules={passwordRules(t)}
           />
         </Row>
         <Row onlyOffset>

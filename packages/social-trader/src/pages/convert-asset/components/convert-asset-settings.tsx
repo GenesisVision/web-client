@@ -14,11 +14,7 @@ import { RowItem } from "components/row-item/row-item";
 import SettingsBlock from "components/settings-block/settings-block";
 import { ASSET } from "constants/constants";
 import withLoader from "decorators/with-loader";
-import {
-  FollowCreateAssetPlatformInfo,
-  ProgramAssetPlatformInfo,
-  TradesDelay as TradesDelayType
-} from "gv-api-web";
+import { FollowCreateAssetPlatformInfo, ProgramAssetPlatformInfo, TradesDelay as TradesDelayType } from "gv-api-web";
 import { CONVERT_ASSET } from "pages/convert-asset/convert-asset.contants";
 import { TAssetFromTo } from "pages/convert-asset/convert-asset.types";
 import * as React from "react";
@@ -27,11 +23,7 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
 import { CurrencyEnum } from "utils/types";
-import {
-  convertShapeToRules,
-  entryFeeShape,
-  successFeeShape
-} from "utils/validators/validators";
+import { entryFeeRules, successFeeRules } from "utils/validators/validators";
 
 import { CONVERT_ASSET_FIELDS } from "./convert-asset-settings.helpers";
 
@@ -184,9 +176,7 @@ const _ConvertAssetSettings: React.FC<IConvertAssetSettingsProps> = props => {
                 "create-account:settings.hints.management-fee"
               )}
               firstFeeName={CONVERT_ASSET_FIELDS.managementFee}
-              firstFeeRules={convertShapeToRules(
-                entryFeeShape(t, maxManagementFee)
-              )}
+              firstFeeRules={entryFeeRules(t, maxManagementFee)}
               firstFeeDescription={
                 isExchange
                   ? t(
@@ -208,9 +198,7 @@ const _ConvertAssetSettings: React.FC<IConvertAssetSettingsProps> = props => {
                     )
                   : t("create-account:settings.hints.success-fee-description")
               }
-              secondFeeRules={convertShapeToRules(
-                successFeeShape(t, maxSuccessFee)
-              )}
+              secondFeeRules={successFeeRules(t, maxSuccessFee)}
             />
           </SettingsBlock>
           <SettingsBlock

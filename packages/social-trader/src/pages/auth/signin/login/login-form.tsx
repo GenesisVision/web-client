@@ -10,7 +10,7 @@ import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
-import { convertShapeToRules, emailRules, passwordValidator } from "utils/validators/validators";
+import { emailRules, passwordRules } from "utils/validators/validators";
 
 import { FORGOT_PASSWORD_ROUTE } from "../../forgot-password/forgot-password.routes";
 
@@ -62,7 +62,7 @@ const _LoginForm: React.FC<Props> = ({ errorMessage, onSubmit }) => {
           label={t("auth:login.placeholder.password")}
           autoComplete="current-password"
           component={SimpleTextField}
-          rules={convertShapeToRules(passwordValidator(t))}
+          rules={passwordRules(t)}
         />
       </Row>
 
