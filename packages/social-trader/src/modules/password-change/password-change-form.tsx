@@ -10,11 +10,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
-import {
-  convertShapeToRules,
-  getConfirmPasswordValidationRules,
-  passwordValidator
-} from "utils/validators/validators";
+import { getConfirmPasswordValidationRules, passwordRules } from "utils/validators/validators";
 
 export enum PASSWORD_CHANGE_FORM_FIELDS {
   oldPassword = "oldPassword",
@@ -64,7 +60,7 @@ const _PasswordChangeForm: React.FC<IPasswordChangeFormOwnProps> = ({
           type="password"
           autoComplete="new-password"
           autoFocus
-          rules={convertShapeToRules(passwordValidator(t))}
+          rules={passwordRules(t)}
         />
       </Row>
       <Row>
@@ -76,7 +72,7 @@ const _PasswordChangeForm: React.FC<IPasswordChangeFormOwnProps> = ({
             type="password"
             name={PASSWORD_CHANGE_FORM_FIELDS.password}
             autoComplete="new-password"
-            rules={convertShapeToRules(passwordValidator(t))}
+            rules={passwordRules(t)}
           />
         </RowItem>
         <RowItem>

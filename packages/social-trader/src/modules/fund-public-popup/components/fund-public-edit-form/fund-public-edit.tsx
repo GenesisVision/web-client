@@ -15,11 +15,7 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { allowPositiveValuesNumberFormat } from "utils/helpers";
 import { HookForm } from "utils/hook-form.helpers";
-import {
-  convertShapeToRules,
-  entryFeeShape,
-  exitFeeShape
-} from "utils/validators/validators";
+import { entryFeeRules, exitFeeRules } from "utils/validators/validators";
 
 interface Props {
   title: string;
@@ -70,7 +66,7 @@ const _FundPublicEdit: React.FC<Props> = ({
             { maxFee: maxEntryFee }
           )}
           hintContent={t("create-fund-page:settings.hints.entry-fee")}
-          rules={convertShapeToRules(entryFeeShape(t, maxEntryFee))}
+          rules={entryFeeRules(t, maxEntryFee)}
         />
       </Row>
       <Row onlyOffset>
@@ -88,7 +84,7 @@ const _FundPublicEdit: React.FC<Props> = ({
             }
           )}
           hintContent={t("create-fund-page:settings.hints.exit-fee")}
-          rules={convertShapeToRules(exitFeeShape(t, maxExitFee))}
+          rules={exitFeeRules(t, maxExitFee)}
         />
       </Row>
       {inDialog ? (

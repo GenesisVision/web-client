@@ -1,9 +1,6 @@
 import { TFunction } from "i18next";
 import { IWalletWithdrawFormValues } from "modules/wallet-withdraw/components/wallet-withdraw-form";
-import {
-  btcWalletValidator,
-  ethGvtWalletValidator
-} from "utils/validators/validators";
+import { btcGvtWalletRules, ethGvtWalletRules } from "utils/validators/validators";
 
 export enum WALLET_WITHDRAW_FIELDS {
   id = "id",
@@ -27,11 +24,9 @@ export const getWalletWithdrawValidationSchema = ({
     case "ETH":
     case "USDC":
     case "USDT":
-      return ethGvtWalletValidator.required(
-        t("validations.address-is-required")
-      );
+      return ethGvtWalletRules(t);
     case "BTC":
     default:
-      return btcWalletValidator.required(t("validations.address-is-required"));
+      return btcGvtWalletRules(t);
   }
 };
