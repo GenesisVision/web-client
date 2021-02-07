@@ -73,8 +73,7 @@
     "sitemap": "^5.1.0",
     "styled-components": "^5.2.0",
     "url": "^0.11.0",
-    "uuid": "^3.2.1",
-    "yup": "^0.29.3"
+    "uuid": "^3.2.1"
   },
   "devDependencies": {
     "@hot-loader/react-dom": "^16.8.6",
@@ -115,7 +114,6 @@
     "@types/sharp": "^0.24.0",
     "@types/styled-components": "^5.1.2",
     "@types/uuid": "^3.4.4",
-    "@types/yup": "^0.29.8",
     "@typescript-eslint/eslint-plugin": "^4.11.1",
     "@typescript-eslint/parser": "^4.11.1",
     "cross-env": "^5.2.0",
