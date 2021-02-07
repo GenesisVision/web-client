@@ -7,11 +7,7 @@ import { SimpleNumberField } from "components/simple-fields/simple-number-field"
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { allowPositiveValuesNumberFormat } from "utils/helpers";
-import {
-  convertShapeToRules,
-  signalSuccessFeeShape,
-  signalVolumeFeeShape
-} from "utils/validators/validators";
+import { signalSuccessFeeRules, signalVolumeFeeRules } from "utils/validators/validators";
 
 interface ISignalsFeeFormPartialProps {
   inDialog?: boolean;
@@ -49,9 +45,7 @@ const _SignalsFeeFormPartial: React.FC<ISignalsFeeFormPartialProps> = ({
             "create-account:settings.hints.signal-volume-fee-description"
           )}
           hintContent={t("create-account:settings.hints.signal-volume-fee")}
-          rules={convertShapeToRules(
-            signalSuccessFeeShape(t, minSuccessFee, maxSuccessFee)
-          )}
+          rules={signalSuccessFeeRules(t, minSuccessFee, maxSuccessFee)}
         />
       </ContainerElem>
       <ContainerElem onlyOffset wide={inDialog}>
@@ -66,9 +60,7 @@ const _SignalsFeeFormPartial: React.FC<ISignalsFeeFormPartialProps> = ({
             "create-account:settings.hints.signal-success-fee-description"
           )}
           hintContent={t("create-account:settings.hints.signal-success-fee")}
-          rules={convertShapeToRules(
-            signalVolumeFeeShape(t, minVolumeFee, maxVolumeFee)
-          )}
+          rules={signalVolumeFeeRules(t, minVolumeFee, maxVolumeFee)}
         />
       </ContainerElem>
     </AssetRow>

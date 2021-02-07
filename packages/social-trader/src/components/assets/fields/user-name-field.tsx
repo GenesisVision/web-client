@@ -2,10 +2,7 @@ import AssetFormField from "components/assets/asset-fields/asset-form-field";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import {
-  assetTitleShape,
-  convertShapeToRules
-} from "utils/validators/validators";
+import { assetTitleRules } from "utils/validators/validators";
 
 import AssetField from "../asset-fields/asset-field";
 
@@ -23,7 +20,7 @@ const _UserNameField: React.FC<Props> = ({ name }) => {
         label={t("profile-page:login")}
         component={SimpleTextField}
         caption={t("asset-settings:fields.name-requirements")}
-        rules={convertShapeToRules(assetTitleShape(t))}
+        rules={assetTitleRules(t)}
       />
     </AssetField>
   );

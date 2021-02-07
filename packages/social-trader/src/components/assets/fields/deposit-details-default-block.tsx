@@ -5,10 +5,7 @@ import { useTranslation } from "react-i18next";
 import { convertToCurrency } from "utils/currency-converter";
 import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
-import {
-  convertShapeToRules,
-  depositAmountValidator
-} from "utils/validators/validators";
+import { depositAmountRules } from "utils/validators/validators";
 
 import { TUseAssetSectionOutput } from "../asset-section.hook";
 import InputDepositAmount from "./input-deposit-amount";
@@ -80,14 +77,12 @@ const _DepositDetailsDefaultBlock: React.FC<Props> = ({
           depositAmount={depositAmount}
           rate={rate}
           setFieldValue={setFieldValue}
-          rules={convertShapeToRules(
-            depositAmountValidator({
-              t,
-              minValue: minDepositInCur,
-              minText: minDepositInCurText,
-              max: wallet.available
-            })
-          )}
+          rules={depositAmountRules({
+            t,
+            minValue: minDepositInCur,
+            minText: minDepositInCurText,
+            max: wallet.available
+          })}
         />
       </div>
     </SettingsBlock>
