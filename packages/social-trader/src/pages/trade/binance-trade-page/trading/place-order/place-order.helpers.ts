@@ -3,7 +3,9 @@ import {
   ExchangeInfo,
   OrderSide,
   OrderType,
-  TerminalCurrency
+  PositionModeType,
+  TerminalCurrency,
+  TerminalType
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { tableLoaderCreator } from "utils/helpers";
 import { getSymbolFilters } from "pages/trade/binance-trade-page/trading/terminal.helpers";
@@ -85,4 +87,19 @@ export const getFilterValues = (exchangeInfo: ExchangeInfo, symbol: string) => {
     maxQuantity: lotSizeFilter ? lotSizeFilter.maxQuantity : 0,
     minNotional: minNotionalFilter ? minNotionalFilter.minNotional : 0
   };
+};
+
+export const getPositionSide = ({
+  positionMode,
+  side,
+  terminalType
+}: {
+  side: OrderSide;
+  terminalType: TerminalType;
+  positionMode: PositionModeType | undefined;
+}) => {
+  if (terminalType === "futures") return undefined;
+  if (positionMode === "OneWay") return "Both";
+  if (side === "Buy") return "Long";
+  else return "Short";
 };
