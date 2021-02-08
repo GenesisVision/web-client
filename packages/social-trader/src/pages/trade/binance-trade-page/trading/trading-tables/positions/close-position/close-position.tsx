@@ -44,22 +44,21 @@ const _ClosePosition: React.FC<Props> = ({
   });
 
   const handleSubmit = (values: ClosePositionSubmitValues) => {
-    console.log(values);
-    const quantity = formatValueWithTick(
-      values[CLOSE_POSITION_FIELDS.amount],
-      stepSize
+    const quantity = Math.abs(
+      +formatValueWithTick(values[CLOSE_POSITION_FIELDS.amount], stepSize)
     );
     const requestPrice = truncated(
       +values[CLOSE_POSITION_FIELDS.price],
       getDecimalScale(formatValue(tickSize))
     );
+    const side = values[CLOSE_POSITION_FIELDS.amount] > 0 ? "Sell" : "Buy";
     return sendRequest({
       timeInForce: "GoodTillCancel",
       positionSide,
       price: requestPrice,
       quantity,
       accountId: exchangeAccountId,
-      side: "Sell",
+      side,
       type: values.type,
       symbol
     });
