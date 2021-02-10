@@ -51,7 +51,7 @@ const _OrderHistoryRow: React.FC<Props> = ({
     <TableRow>
       <TableCell firstOffset={false}>{formatDate(time)}</TableCell>
       <TableCell>{symbol}</TableCell>
-      <TableCell>{type}</TableCell>
+      <TableCell>{setUpperFirstLetter(type)}</TableCell>
       <TableCell>
         <Text color={side.toLowerCase() === "buy" ? "green" : "red"}>
           {setUpperFirstLetter(side)}
