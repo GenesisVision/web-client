@@ -17,7 +17,9 @@ export const updateTradeHistoryData = (
         ...update
       };
   });
-  return Object.values(normalizedData);
+  return Object.values(normalizedData).sort(
+    (a, b) => +new Date(b.time) - +new Date(a.time)
+  );
 };
 
 export const TRADE_HISTORY_TABLE_COLUMNS: SortingColumn[] = [
