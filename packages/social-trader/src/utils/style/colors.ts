@@ -20,6 +20,7 @@ export const $yellow = "#ecdf75";
 export const $mainColor = "#ffffff";
 export const $iconColor = "#d8d8d8";
 export const $popoverBackground = "#273642";
+export const $dialogBackgroundColor = "#1D2731";
 
 export const $primaryColor = "#03bdaf";
 export const $secondaryColor = "#2a353f";

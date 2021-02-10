@@ -17,7 +17,6 @@ const _ProgramDetailsPage: React.FC<Props> = ({ levelsParameters, route }) => {
     CurrencyEnum | undefined
   >();
   const [programId, setProgramId] = useState<string | undefined>();
-
   useEffect(() => {
     if (!description) return;
     const { currency } = description.tradingAccountInfo;

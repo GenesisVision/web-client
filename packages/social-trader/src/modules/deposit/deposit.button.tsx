@@ -11,6 +11,14 @@ import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import { CurrencyEnum, Sizeable } from "utils/types";
 
 interface Props extends Sizeable {
+  AssetDetailsExtraBlock: React.ComponentType<any>;
+  renderFees?: React.ReactNode;
+  assetLevel?: number;
+  assetOwner: string;
+  ownerUrl: string;
+  assetLogo: string;
+  brokerName?: string;
+  brokerLogo?: string;
   isProcessingRealTime?: boolean;
   infoMessage?: string;
   disabled?: boolean;
@@ -23,9 +31,23 @@ interface Props extends Sizeable {
   type: ASSET;
   id: string;
   currency?: CurrencyEnum;
+  totalAvailableInvestment?: number;
+  assetColor: string;
+  assetLevelProgress?: number;
 }
 
 const _DepositButton: React.FC<Props> = ({
+  ownerUrl,
+  totalAvailableInvestment,
+  assetColor,
+  assetLevelProgress,
+  assetLevel,
+  renderFees,
+  assetLogo,
+  AssetDetailsExtraBlock,
+  assetOwner,
+  brokerLogo,
+  brokerName,
   isProcessingRealTime,
   infoMessage,
   disabled,
@@ -55,6 +77,12 @@ const _DepositButton: React.FC<Props> = ({
   const deposit =
     type === ASSET.FUND ? (
       <FundDepositContainer
+        ownerUrl={ownerUrl}
+        fundColor={assetColor}
+        fundOwner={assetOwner}
+        fundLogo={assetLogo}
+        AssetDetailsExtraBlock={AssetDetailsExtraBlock}
+        renderFees={renderFees}
         infoMessage={infoMessage}
         title={title}
         ownAsset={ownAsset}
@@ -66,20 +94,31 @@ const _DepositButton: React.FC<Props> = ({
         onClose={setIsDepositClosePopup}
       />
     ) : (
-      <ProgramDeposit
-        isProcessingRealTime={isProcessingRealTime}
-        title={title}
-        onApply={onApply}
-        ownAsset={ownAsset}
-        entryFee={entryFee}
-        availableToInvest={availableToInvest}
-        broker={broker!}
-        currency={currency!}
-        open={isOpenDepositPopup}
-        id={id}
-        onClose={setIsDepositClosePopup}
-      />
-    );
+        <ProgramDeposit
+          ownerUrl={ownerUrl}
+          totalAvailableInvestment={totalAvailableInvestment}
+          programColor={assetColor}
+          programLevelProgress={assetLevelProgress}
+          programLevel={assetLevel}
+          programLogo={assetLogo}
+          renderFees={renderFees}
+          AssetDetailsExtraBlock={AssetDetailsExtraBlock}
+          brokerName={brokerName}
+          brokerLogo={brokerLogo}
+          programOwner={assetOwner}
+          isProcessingRealTime={isProcessingRealTime}
+          title={title}
+          onApply={onApply}
+          ownAsset={ownAsset}
+          entryFee={entryFee}
+          availableToInvest={availableToInvest}
+          broker={broker!}
+          currency={currency!}
+          open={isOpenDepositPopup}
+          id={id}
+          onClose={setIsDepositClosePopup}
+        />
+      );
   const label = ownAsset ? t("buttons.deposit") : t("buttons.invest");
   const openPopupMethod = isAuthenticated
     ? setIsOpenDepositPopup

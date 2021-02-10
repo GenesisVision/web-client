@@ -101,6 +101,25 @@ export const adaptiveMargin = (
     ${mediaBreakpointLandscapePhone(`margin-${direction}: ${marginSize}px;`)}
   `;
 };
+
+export const adaptiveGridGap = (
+  size: number,
+  direction?: "column" | "row",
+  divider: number = $dividerPadding
+) => {
+  switch (direction) {
+    case "column":
+      return `column-gap: ${size / divider}px;
+      ${mediaBreakpointLandscapePhone(`column-gap: ${size}px;`)}`;
+    case "row":
+      return `row-gap: ${size / divider}px;
+      ${mediaBreakpointLandscapePhone(`row-gap: ${size}px;`)}`;
+    default:
+      return `gap: ${size / divider}px;
+      ${mediaBreakpointLandscapePhone(`gap: ${size}px;`)}`;
+  }
+};
+
 export const right = (value: number) => {
   return `
     right: ${value / $dividerText}px;

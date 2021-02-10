@@ -8,11 +8,19 @@ import { useSelector } from "react-redux";
 import { gvInvestFeeSelector } from "reducers/platform-reducer";
 import { CurrencyEnum } from "utils/types";
 
-const DepositPopupContainer = dynamic(() =>
-  import("./deposit-popup.container")
+const DepositPopupContainer = dynamic(
+  () => import("./deposit-popup.container")
 );
 
 interface Props extends IDialogProps {
+  AssetDetailsExtraBlock?: React.ComponentType<any>;
+  renderFees?: React.ReactNode;
+  assetLevel?: number;
+  assetLogo: string;
+  assetOwner: string;
+  ownerUrl: string;
+  brokerLogo?: string;
+  brokerName?: string;
   infoMessage?: string;
   title: string;
   availableToInvest?: number;
@@ -24,9 +32,23 @@ interface Props extends IDialogProps {
   hasEntryFee?: boolean;
   currency?: CurrencyEnum;
   ownAsset?: boolean;
+  totalAvailableInvestment?: number;
+  assetColor: string;
+  assetLevelProgress?: number;
 }
 
 const _DepositContainer: React.FC<Props> = ({
+  ownerUrl,
+  totalAvailableInvestment,
+  assetColor,
+  assetLevelProgress,
+  assetLevel,
+  assetLogo,
+  renderFees,
+  AssetDetailsExtraBlock,
+  brokerName,
+  brokerLogo,
+  assetOwner,
   infoMessage,
   title,
   availableToInvest,
@@ -52,6 +74,17 @@ const _DepositContainer: React.FC<Props> = ({
   return (
     <Dialog open={open} onClose={onClose}>
       <DepositPopupContainer
+        ownerUrl={ownerUrl}
+        totalAvailableInvestment={totalAvailableInvestment}
+        assetColor={assetColor}
+        assetLevelProgress={assetLevelProgress}
+        assetLevel={assetLevel}
+        assetLogo={assetLogo}
+        brokerName={brokerName}
+        brokerLogo={brokerLogo}
+        AssetDetailsExtraBlock={AssetDetailsExtraBlock}
+        renderFees={renderFees}
+        assetOwner={assetOwner}
         infoMessage={infoMessage}
         title={title}
         ownAsset={ownAsset}

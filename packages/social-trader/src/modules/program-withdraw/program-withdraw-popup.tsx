@@ -5,6 +5,7 @@ import { ProgramWithdrawInfo } from "gv-api-web";
 import { useGetRate } from "hooks/get-rate.hook";
 import useTab from "hooks/tab.hook";
 import { IProgramWithdrawAmountFormValues } from "modules/program-withdraw/program-withdraw.helpers";
+import InvestDefaultPopupContainer from "pages/invest/invest-default-popup-container";
 import * as React from "react";
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -19,7 +20,7 @@ enum PROGRAM_WITHDRAW_FORM {
   CONFIRM = "CONFIRM"
 }
 
-interface Props extends OwnProps, IProgramWithdrawPopupProps {}
+interface Props extends OwnProps, IProgramWithdrawPopupProps { }
 
 interface OwnProps {
   data: ProgramWithdrawInfo;
@@ -58,9 +59,13 @@ const _ProgramWithdrawPopup: React.FC<Props> = ({
   const { tab, setTab } = useTab<PROGRAM_WITHDRAW_FORM>(
     PROGRAM_WITHDRAW_FORM.ENTER_AMOUNT
   );
-  const [formValues, setFormValues] = useState<
-    IProgramWithdrawAmountFormValues
-  >({ amount: "", withdrawAll: false });
+  const [
+    formValues,
+    setFormValues
+  ] = useState<IProgramWithdrawAmountFormValues>({
+    amount: "",
+    withdrawAll: false
+  });
 
   const handleEnterAmountSubmit = useCallback(
     (values: IProgramWithdrawAmountFormValues) => {
@@ -87,6 +92,7 @@ const _ProgramWithdrawPopup: React.FC<Props> = ({
 
   return (
     <>
+      {/* <InvestDefaultPopupContainer form={} /> */}
       <ProgramWithdrawTop
         rate={rate}
         title={title}

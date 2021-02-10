@@ -17,6 +17,10 @@ export const dynamicLabeledValueStyles = css`
         return "column";
       case "row":
         return "row";
+      case "column-reverse":
+        return "column-reverse";
+      case "row-reverse":
+        return "row-reverse";
     }
   }};
   ${({ direction = "column" }: StyleProps) =>

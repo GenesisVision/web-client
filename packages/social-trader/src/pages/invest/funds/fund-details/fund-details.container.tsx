@@ -44,9 +44,8 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
     "trading-schedule.post-create-fund"
   )} \n${schedule}`;
 
-  const title = `${t("fund-details-page:title")} - ${
-    description.publicInfo.title
-  }`;
+  const title = `${t("fund-details-page:title")} - ${description.publicInfo.title
+    }`;
 
   const banner = useMemo(
     // () => composeFundBannerUrl(description.publicInfo.url),
@@ -66,11 +65,11 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
   const settingsUrl = useMemo(
     () =>
       description.publicInfo.status !== "Disabled" &&
-      description.publicInfo.status !== "Closed"
+        description.publicInfo.status !== "Closed"
         ? createFundSettingsToUrl(
-            description.publicInfo.url,
-            description.publicInfo.title
-          )
+          description.publicInfo.url,
+          description.publicInfo.title
+        )
         : undefined,
     [description]
   );
@@ -84,7 +83,7 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
             labelText={t("asset-details:description.assets")}
           />
         </h4>
-        <Row>
+        <Row wrap>
           <FundAssetContainer
             type={"large"}
             assets={description.assetsStructure}
@@ -95,6 +94,7 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
     ),
     [description]
   );
+
   const renderControls = useCallback(
     () => (
       <InvestmentFundControls
@@ -102,6 +102,7 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
         infoMessage={investMessage}
         fundDescription={description}
         onApply={handleDispatchDescription}
+        AssetDetailsExtraBlock={renderAssetDetailsExtraBlock}
       />
     ),
     [description, handleDispatchDescription]
@@ -117,15 +118,13 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
     }),
     [description]
   );
-
   return (
     <Page
       type={"article"}
       title={title}
       schemas={schemas}
-      description={`${t("funds-page:title")} ${
-        description.publicInfo.title
-      } - ${description.publicInfo.description}`}
+      description={`${t("funds-page:title")} ${description.publicInfo.title
+        } - ${description.publicInfo.description}`}
       previewImage={banner}
     >
       <DetailsDescriptionSection
