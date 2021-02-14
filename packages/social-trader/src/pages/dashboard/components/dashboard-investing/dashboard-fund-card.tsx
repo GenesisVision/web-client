@@ -1,4 +1,5 @@
 import { useToLink } from "components/link/link.helper";
+import { UpdateRowFuncType } from "components/table/components/table.types";
 import TableCard from "components/table/components/table-card/table-card";
 import {
   IRenderActionsArgs,
@@ -6,10 +7,10 @@ import {
   TableCardActionsItem,
   TableCardFavoriteActionItem
 } from "components/table/components/table-card/table-card-actions";
-import { UpdateRowFuncType } from "components/table/components/table.types";
 import { ASSET, FUND_CURRENCY } from "constants/constants";
 import { FundInvestingDetailsList } from "gv-api-web";
 import { FundCardTable } from "modules/funds-table/components/funds-table/fund-card";
+import InvestDefaultPopup from "modules/invest-popup/invest-default-popup";
 import DepositWithdrawButtons from "pages/dashboard/components/dashboard-trading/deposit-withdraw-buttons";
 import { generateScheduleText } from "pages/invest/funds/fund-details/services/fund-details.service";
 import * as React from "react";
@@ -30,6 +31,22 @@ const _DashboardFundCard: React.FC<Props> = ({
   const hasTradingSchedule = fund.tradingSchedule.hasTradingSchedule;
   const schedule = generateScheduleText(fund.tradingSchedule);
   const investMessage = `${t("trading-schedule.invest-fund")} \n ${schedule}`;
+
+  const renderFundPopup = (popupTop: JSX.Element, form: JSX.Element) => {
+    return (
+      <InvestDefaultPopup
+        popupTop={popupTop}
+        ownerUrl={fund.owner.url}
+        assetColor={fund.color}
+        assetLogo={fund.logoUrl}
+        // AssetDetailsExtraBlock={renderAssetDetailsExtraBlock}
+        // AssetFeesBlock={renderAssetFeesBlock}
+        title={fund.title}
+        assetOwner={fund.owner.username}
+        form={form}
+      />
+    );
+  };
 
   const renderActions = ({ clearAnchor, anchor }: IRenderActionsArgs) => (
     <TableCardActions anchor={anchor} clearAnchor={clearAnchor}>
@@ -81,6 +98,7 @@ const _DashboardFundCard: React.FC<Props> = ({
         amountTitleTooltip={t("dashboard-page:tooltips.investing.size")}
       />
       <DepositWithdrawButtons
+        renderAssetPopup={renderFundPopup}
         entryFee={fund.entryFeeCurrent}
         infoMessage={hasTradingSchedule ? investMessage : undefined}
         title={fund.title}

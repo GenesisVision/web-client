@@ -1,6 +1,3 @@
-import DepositTop, {
-    DepositTopOwnProps
-} from "components/deposit/components/deposit-top";
 import { Row } from "components/row/row";
 import React from "react";
 import styled from "styled-components";
@@ -22,23 +19,26 @@ import {
     $paddingSmall,
     $paddingUpperMedium
 } from "utils/style/sizes";
+import { CurrencyEnum } from "utils/types";
 
-import InvestPopupOverviewContainer from "./invest-popup-overview-container";
+import InvestPopupInfo from "./invest-popup-info";
 
-interface Props extends DepositTopOwnProps {
+interface Props {
     ownerUrl: string;
     assetLogo: string;
     title: string;
     assetLevel?: number;
-    form: React.ComponentType<any>;
+    form: JSX.Element;
     assetOwner: string;
     brokerLogo?: string;
     brokerName?: string;
     AssetDetailsExtraBlock?: React.ComponentType<any>;
-    renderFees?: React.ReactNode;
+    popupTop: JSX.Element;
+    AssetFeesBlock?: React.ComponentType<any>;
     totalAvailableInvestment?: number;
     assetColor: string;
     assetLevelProgress?: number;
+    currency?: CurrencyEnum;
 }
 
 const MainContentContainer = styled.div`
@@ -67,48 +67,40 @@ const Container = styled.div`
   max-width: 480px;
 `)} */
   ${mediaBreakpointLandscapePhone(`
-  max-width: 480px;
+  width: 480px;
 `)}
   ${mediaBreakpointTablet(`
-  max-width: 650px;
+  width: 650px;
 `)}
 ${mediaBreakpointLandscapeTablet(`
-  max-width: 750px;
+  width: 750px;
 `)}
 `;
 
-const _InvestDefaultPopupContainer: React.FC<Props> = ({
-    ownerUrl,
-    totalAvailableInvestment,
-    assetColor,
-    assetLevelProgress,
-    assetLevel,
-    assetLogo,
-    form,
-    AssetDetailsExtraBlock,
-    renderFees,
-    brokerName,
-    brokerLogo,
-    asset,
-    availableToInvest,
-    currency,
-    title,
-    header,
-    assetOwner,
-    ownAsset
-}) => {
+const _InvestDefaultPopup: React.FC<Props> = props => {
+    const {
+        ownerUrl,
+        totalAvailableInvestment,
+        assetColor,
+        assetLevelProgress,
+        assetLevel,
+        assetLogo,
+        form,
+        AssetDetailsExtraBlock,
+        AssetFeesBlock,
+        brokerName,
+        brokerLogo,
+        currency,
+        title,
+        assetOwner,
+        popupTop
+    } = props;
+    console.log(props);
     return (
         <Container>
-            <DepositTop
-                asset={asset}
-                availableToInvest={availableToInvest}
-                currency={currency}
-                title={title}
-                header={header}
-                ownAsset={ownAsset}
-            />
+            {popupTop}
             <MainContentContainer>
-                <InvestPopupOverviewContainer
+                <InvestPopupInfo
                     ownerUrl={ownerUrl}
                     totalAvailableInvestment={totalAvailableInvestment}
                     assetColor={assetColor}
@@ -116,7 +108,7 @@ const _InvestDefaultPopupContainer: React.FC<Props> = ({
                     assetLevel={assetLevel}
                     assetLogo={assetLogo}
                     currency={currency!}
-                    renderFees={renderFees}
+                    AssetFeesBlock={AssetFeesBlock}
                     AssetDetailsExtraBlock={AssetDetailsExtraBlock}
                     brokerLogo={brokerLogo}
                     brokerName={brokerName}
@@ -129,5 +121,5 @@ const _InvestDefaultPopupContainer: React.FC<Props> = ({
     );
 };
 
-const InvestDefaultPopupContainer = React.memo(_InvestDefaultPopupContainer);
-export default InvestDefaultPopupContainer;
+const InvestDefaultPopup = React.memo(_InvestDefaultPopup);
+export default InvestDefaultPopup;

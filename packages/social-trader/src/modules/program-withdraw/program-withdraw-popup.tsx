@@ -1,11 +1,9 @@
-import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogInfo } from "components/dialog/dialog-info";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import { ProgramWithdrawInfo } from "gv-api-web";
 import { useGetRate } from "hooks/get-rate.hook";
 import useTab from "hooks/tab.hook";
 import { IProgramWithdrawAmountFormValues } from "modules/program-withdraw/program-withdraw.helpers";
-import InvestDefaultPopupContainer from "pages/invest/invest-default-popup-container";
 import * as React from "react";
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -27,6 +25,7 @@ interface OwnProps {
 }
 
 export interface IProgramWithdrawPopupProps {
+  renderAssetPopup: (popupTop: JSX.Element, form: JSX.Element) => JSX.Element;
   GM?: boolean;
   isProcessingRealTime?: boolean;
   onApply?: VoidFunction;
@@ -42,6 +41,7 @@ export type ProgramWithdrawType = {
 };
 
 const _ProgramWithdrawPopup: React.FC<Props> = ({
+  renderAssetPopup,
   GM,
   isProcessingRealTime,
   onApply,
@@ -90,47 +90,44 @@ const _ProgramWithdrawPopup: React.FC<Props> = ({
     time
   });
 
-  return (
+  return renderAssetPopup(
+    <ProgramWithdrawTop
+      rate={rate}
+      title={title}
+      availableToWithdraw={availableToWithdraw}
+      programCurrency={assetCurrency}
+      accountCurrency={accountCurrency}
+    />,
     <>
-      {/* <InvestDefaultPopupContainer form={} /> */}
-      <ProgramWithdrawTop
-        rate={rate}
-        title={title}
-        availableToWithdraw={availableToWithdraw}
-        programCurrency={assetCurrency}
-        accountCurrency={accountCurrency}
-      />
-      <DialogBottom>
-        {tab === PROGRAM_WITHDRAW_FORM.ENTER_AMOUNT && (
-          <ProgramWithdrawAmountForm
-            GM={GM}
+      {tab === PROGRAM_WITHDRAW_FORM.ENTER_AMOUNT && (
+        <ProgramWithdrawAmountForm
+          GM={GM}
+          withdrawInPercent={withdrawInPercent}
+          isOwner={isOwner}
+          formValues={formValues}
+          rate={rate}
+          programCurrency={assetCurrency}
+          accountCurrency={accountCurrency}
+          availableToWithdraw={availableToWithdraw}
+          onSubmit={handleEnterAmountSubmit}
+        />
+      )}
+      {tab === PROGRAM_WITHDRAW_FORM.CONFIRM &&
+        isAvailableProgramConfirmForm && (
+          <ProgramWithdrawConfirm
             withdrawInPercent={withdrawInPercent}
-            isOwner={isOwner}
+            onApply={onApply}
+            id={id}
+            onClose={onClose}
             formValues={formValues}
-            rate={rate}
+            onBackClick={handleGoToEnterAmountStep}
             programCurrency={assetCurrency}
-            accountCurrency={accountCurrency}
-            availableToWithdraw={availableToWithdraw}
-            onSubmit={handleEnterAmountSubmit}
+            periodEnds={periodEnds}
           />
         )}
-        {tab === PROGRAM_WITHDRAW_FORM.CONFIRM &&
-          isAvailableProgramConfirmForm && (
-            <ProgramWithdrawConfirm
-              withdrawInPercent={withdrawInPercent}
-              onApply={onApply}
-              id={id}
-              onClose={onClose}
-              formValues={formValues}
-              onBackClick={handleGoToEnterAmountStep}
-              programCurrency={assetCurrency}
-              periodEnds={periodEnds}
-            />
-          )}
-        {(!withdrawInPercent || !isProcessingRealTime) && (
-          <DialogInfo>{infoMessage}</DialogInfo>
-        )}
-      </DialogBottom>
+      {(!withdrawInPercent || !isProcessingRealTime) && (
+        <DialogInfo>{infoMessage}</DialogInfo>
+      )}
     </>
   );
 };

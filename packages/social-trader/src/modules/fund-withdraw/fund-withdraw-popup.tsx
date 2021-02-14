@@ -1,4 +1,3 @@
-import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogError } from "components/dialog/dialog-error";
 import { FUND_CURRENCY } from "constants/constants";
 import { withBlurLoader } from "decorators/with-blur-loader";
@@ -9,13 +8,13 @@ import { useCallback, useEffect, useState } from "react";
 import { convertFromCurrency } from "utils/currency-converter";
 import { CurrencyEnum } from "utils/types";
 
-import FundWithdrawAmountForm from "./fund-withdraw-amount-form";
-import { FundWithdrawConfirm } from "./fund-withdraw-confirm-form";
-import { FundWithdrawTop } from "./fund-withdraw-top";
 import {
   FundWithDrawFormValues,
   FundWithdrawInfoResponse
 } from "./fund-withdraw.types";
+import FundWithdrawAmountForm from "./fund-withdraw-amount-form";
+import { FundWithdrawConfirm } from "./fund-withdraw-confirm-form";
+import { FundWithdrawTop } from "./fund-withdraw-top";
 
 enum FUND_WITHDRAW_FORM {
   ENTER_AMOUNT = "ENTER_AMOUNT",
@@ -23,6 +22,7 @@ enum FUND_WITHDRAW_FORM {
 }
 
 const _FundWithdrawPopup: React.FC<Props> = ({
+  renderAssetPopup,
   infoMessage,
   errorMessage,
   onApply,
@@ -57,50 +57,49 @@ const _FundWithdrawPopup: React.FC<Props> = ({
     rate!
   );
 
-  return (
+  return renderAssetPopup(
+    <FundWithdrawTop
+      isPending={isRatePending}
+      title={withdrawInfo.title}
+      availableToWithdraw={availableToWithdraw}
+      currency={currency}
+    />,
     <>
-      <FundWithdrawTop
-        isPending={isRatePending}
-        title={withdrawInfo.title}
-        availableToWithdraw={availableToWithdraw}
-        currency={currency}
-      />
-      <DialogBottom>
-        {tab === FUND_WITHDRAW_FORM.ENTER_AMOUNT && (
-          <FundWithdrawAmountForm
-            infoMessage={infoMessage}
-            isPending={isRatePending}
-            currency={currency}
-            setCurrency={setCurrency}
-            initWalletId={wallets[0].id}
-            availableToWithdraw={availableToWithdraw}
-            exitFee={withdrawInfo.exitFee}
-            onSubmit={handleEnterAmountSubmit}
-          />
-        )}
-        {tab === FUND_WITHDRAW_FORM.CONFIRM && percent !== undefined && (
-          <FundWithdrawConfirm
-            onApply={onApply}
-            onClose={onClose}
-            id={id}
-            availableToWithdraw={availableToWithdraw}
-            percent={percent}
-            currency={currency}
-            exitFee={withdrawInfo.exitFee}
-            onBackClick={goToEnterAmountStep}
-          />
-        )}
-        {errorMessage && <DialogError error={errorMessage} />}
-      </DialogBottom>
+      {tab === FUND_WITHDRAW_FORM.ENTER_AMOUNT && (
+        <FundWithdrawAmountForm
+          infoMessage={infoMessage}
+          isPending={isRatePending}
+          currency={currency}
+          setCurrency={setCurrency}
+          initWalletId={wallets[0].id}
+          availableToWithdraw={availableToWithdraw}
+          exitFee={withdrawInfo.exitFee}
+          onSubmit={handleEnterAmountSubmit}
+        />
+      )}
+      {tab === FUND_WITHDRAW_FORM.CONFIRM && percent !== undefined && (
+        <FundWithdrawConfirm
+          onApply={onApply}
+          onClose={onClose}
+          id={id}
+          availableToWithdraw={availableToWithdraw}
+          percent={percent}
+          currency={currency}
+          exitFee={withdrawInfo.exitFee}
+          onBackClick={goToEnterAmountStep}
+        />
+      )}
+      {errorMessage && <DialogError error={errorMessage} />}
     </>
   );
 };
 
 export const FundWithdrawPopup = withBlurLoader(React.memo(_FundWithdrawPopup));
 
-interface Props extends IFundWithdrawPopupProps, IFundWithdrawPopupOwnProps {}
+interface Props extends IFundWithdrawPopupProps, IFundWithdrawPopupOwnProps { }
 
 export interface IFundWithdrawPopupProps {
+  renderAssetPopup: (popupTop: JSX.Element, form: JSX.Element) => JSX.Element;
   infoMessage?: string;
   errorMessage?: string;
   onApply?: VoidFunction;

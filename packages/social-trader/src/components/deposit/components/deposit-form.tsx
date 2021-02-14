@@ -4,7 +4,6 @@ import {
   IDepositFormValues,
   isAllow
 } from "components/deposit/components/deposit.helpers";
-import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogError } from "components/dialog/dialog-error";
 import { DialogInfo } from "components/dialog/dialog-info";

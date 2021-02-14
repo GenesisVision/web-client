@@ -11,14 +11,7 @@ import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import { CurrencyEnum, Sizeable } from "utils/types";
 
 interface Props extends Sizeable {
-  AssetDetailsExtraBlock: React.ComponentType<any>;
-  renderFees?: React.ReactNode;
-  assetLevel?: number;
-  assetOwner: string;
-  ownerUrl: string;
-  assetLogo: string;
-  brokerName?: string;
-  brokerLogo?: string;
+  renderAssetPopup: (popupTop: JSX.Element, form: JSX.Element) => JSX.Element;
   isProcessingRealTime?: boolean;
   infoMessage?: string;
   disabled?: boolean;
@@ -31,23 +24,10 @@ interface Props extends Sizeable {
   type: ASSET;
   id: string;
   currency?: CurrencyEnum;
-  totalAvailableInvestment?: number;
-  assetColor: string;
-  assetLevelProgress?: number;
 }
 
 const _DepositButton: React.FC<Props> = ({
-  ownerUrl,
-  totalAvailableInvestment,
-  assetColor,
-  assetLevelProgress,
-  assetLevel,
-  renderFees,
-  assetLogo,
-  AssetDetailsExtraBlock,
-  assetOwner,
-  brokerLogo,
-  brokerName,
+  renderAssetPopup,
   isProcessingRealTime,
   infoMessage,
   disabled,
@@ -77,12 +57,7 @@ const _DepositButton: React.FC<Props> = ({
   const deposit =
     type === ASSET.FUND ? (
       <FundDepositContainer
-        ownerUrl={ownerUrl}
-        fundColor={assetColor}
-        fundOwner={assetOwner}
-        fundLogo={assetLogo}
-        AssetDetailsExtraBlock={AssetDetailsExtraBlock}
-        renderFees={renderFees}
+        renderAssetPopup={renderAssetPopup}
         infoMessage={infoMessage}
         title={title}
         ownAsset={ownAsset}
@@ -95,17 +70,7 @@ const _DepositButton: React.FC<Props> = ({
       />
     ) : (
         <ProgramDeposit
-          ownerUrl={ownerUrl}
-          totalAvailableInvestment={totalAvailableInvestment}
-          programColor={assetColor}
-          programLevelProgress={assetLevelProgress}
-          programLevel={assetLevel}
-          programLogo={assetLogo}
-          renderFees={renderFees}
-          AssetDetailsExtraBlock={AssetDetailsExtraBlock}
-          brokerName={brokerName}
-          brokerLogo={brokerLogo}
-          programOwner={assetOwner}
+          renderAssetPopup={renderAssetPopup}
           isProcessingRealTime={isProcessingRealTime}
           title={title}
           onApply={onApply}

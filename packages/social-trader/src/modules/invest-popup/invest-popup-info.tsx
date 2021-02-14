@@ -31,7 +31,7 @@ import { CurrencyEnum } from "utils/types";
 
 interface Props {
     AssetDetailsExtraBlock?: React.ComponentType<any>;
-    renderFees?: React.ReactNode;
+    AssetFeesBlock?: React.ComponentType<any>;
     ownerUrl: string;
     assetLevel?: number;
     assetLogo: string;
@@ -72,7 +72,7 @@ const AvatarText = styled(RowItem)`
   word-break: break-word;
 `;
 
-const _InvestPopupOverviewContainer: React.FC<Props> = ({
+const _InvestPopupInfo: React.FC<Props> = ({
     ownerUrl,
     assetLevelProgress,
     assetColor,
@@ -81,7 +81,7 @@ const _InvestPopupOverviewContainer: React.FC<Props> = ({
     assetLogo,
     assetOwner,
     AssetDetailsExtraBlock,
-    renderFees,
+    AssetFeesBlock,
     brokerLogo,
     currency,
     brokerName,
@@ -124,10 +124,10 @@ const _InvestPopupOverviewContainer: React.FC<Props> = ({
                     <DetailsBroker logoUrl={brokerLogo!} name={brokerName} />
                 </Row>
             )}
-            {renderFees && <FeesContainer>{renderFees}</FeesContainer>}
+            {AssetFeesBlock && <FeesContainer>{<AssetFeesBlock />}</FeesContainer>}
         </Container>
     );
 };
 
-const InvestPopupOverviewContainer = React.memo(_InvestPopupOverviewContainer);
-export default InvestPopupOverviewContainer;
+const InvestPopupInfo = React.memo(_InvestPopupInfo);
+export default InvestPopupInfo;

@@ -10,6 +10,7 @@ import React from "react";
 import { CurrencyEnum } from "utils/types";
 
 interface Props {
+  renderAssetPopup: (popupTop: JSX.Element, form: JSX.Element) => JSX.Element;
   GM?: boolean;
   isProcessingRealTime?: boolean;
   infoMessage?: string;
@@ -31,6 +32,7 @@ interface Props {
 }
 
 const _DepositWithdrawButtons: React.FC<Props> = ({
+  renderAssetPopup,
   GM,
   isProcessingRealTime,
   infoMessage,
@@ -57,6 +59,7 @@ const _DepositWithdrawButtons: React.FC<Props> = ({
     >
       {canInvest && (
         <DepositButton
+          renderAssetPopup={renderAssetPopup}
           isProcessingRealTime={isProcessingRealTime}
           infoMessage={infoMessage}
           title={title}
@@ -72,6 +75,7 @@ const _DepositWithdrawButtons: React.FC<Props> = ({
       )}
       {canWithdraw && (
         <WithdrawButton
+          renderAssetPopup={renderAssetPopup}
           GM={GM}
           isProcessingRealTime={isProcessingRealTime}
           infoMessage={infoMessage}

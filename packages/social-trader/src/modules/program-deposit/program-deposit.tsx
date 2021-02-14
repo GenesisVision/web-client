@@ -16,14 +16,7 @@ import { programMinDepositAmountsSelector } from "reducers/platform-reducer";
 import { CurrencyEnum } from "utils/types";
 
 interface OwnProps {
-  AssetDetailsExtraBlock: React.ComponentType<any>;
-  ownerUrl: string;
-  renderFees?: React.ReactNode;
-  programLevel: number;
-  programLogo: string;
-  programOwner: string;
-  brokerName: string;
-  brokerLogo: string;
+  renderAssetPopup: (popupTop: JSX.Element, form: JSX.Element) => JSX.Element;
   isProcessingRealTime?: boolean;
   title: string;
   entryFee?: number;
@@ -33,25 +26,12 @@ interface OwnProps {
   id: string;
   currency: CurrencyEnum;
   onApply?: () => void;
-  totalAvailableInvestment?: number;
-  programColor: string;
-  programLevelProgress?: number;
 }
 
 interface Props extends OwnProps, IDialogProps { }
 
 const _ProgramDeposit: React.FC<Props> = ({
-  ownerUrl,
-  totalAvailableInvestment,
-  programColor,
-  programLevelProgress,
-  programLevel,
-  programLogo,
-  renderFees,
-  AssetDetailsExtraBlock,
-  brokerLogo,
-  brokerName,
-  programOwner,
+  renderAssetPopup,
   isProcessingRealTime,
   title,
   entryFee,
@@ -98,17 +78,7 @@ const _ProgramDeposit: React.FC<Props> = ({
 
   return (
     <DepositContainer
-      ownerUrl={ownerUrl}
-      totalAvailableInvestment={totalAvailableInvestment}
-      assetColor={programColor}
-      assetLevelProgress={programLevelProgress}
-      assetLevel={programLevel}
-      assetLogo={programLogo}
-      AssetDetailsExtraBlock={AssetDetailsExtraBlock}
-      renderFees={renderFees}
-      brokerName={brokerName}
-      brokerLogo={brokerLogo}
-      assetOwner={programOwner}
+      renderAssetPopup={renderAssetPopup}
       infoMessage={infoMessage}
       title={title}
       ownAsset={ownAsset}

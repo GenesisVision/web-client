@@ -5,7 +5,6 @@ import { ASSET } from "constants/constants";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import { useAccountCurrency } from "hooks/account-currency.hook";
 import useApiRequest from "hooks/api-request.hook";
-import InvestDefaultPopupContainer from "pages/invest/invest-default-popup-container";
 import {
   fetchWallets,
   TWalletsAvailableData
@@ -23,19 +22,13 @@ import {
   TFees
 } from "./deposit.types";
 import DepositForm from "./deposit-form";
+import DepositTop from "./deposit-top";
 
 const getRequestMethod = (asset: ASSET) =>
   asset === ASSET.FUND ? fundInvest : programInvest;
 
 export interface IDepositContainerProps {
-  AssetDetailsExtraBlock?: React.ComponentType<any>;
-  renderFees?: React.ReactNode;
-  assetLevel?: number;
-  ownerUrl: string;
-  assetLogo: string;
-  assetOwner: string;
-  brokerName?: string;
-  brokerLogo?: string;
+  renderAssetPopup: (popupTop: JSX.Element, form: JSX.Element) => JSX.Element;
   infoMessage?: string;
   title: string;
   availableToInvest?: number;
@@ -48,9 +41,6 @@ export interface IDepositContainerProps {
   asset: ASSET;
   hasEntryFee?: boolean;
   ownAsset?: boolean;
-  totalAvailableInvestment?: number;
-  assetColor: string;
-  assetLevelProgress?: number;
 }
 
 interface Props extends IDepositContainerProps {
@@ -58,17 +48,7 @@ interface Props extends IDepositContainerProps {
 }
 
 const _DepositPopup: React.FC<Props> = ({
-  ownerUrl,
-  totalAvailableInvestment,
-  assetLevelProgress,
-  assetColor,
-  assetLevel,
-  assetLogo,
-  AssetDetailsExtraBlock,
-  renderFees,
-  brokerLogo,
-  brokerName,
-  assetOwner,
+  renderAssetPopup,
   infoMessage,
   title,
   availableToInvest,
@@ -132,39 +112,26 @@ const _DepositPopup: React.FC<Props> = ({
     wallets,
     ({ currency }) => currency === INIT_WALLET_CURRENCY
   );
-  return (
-    <InvestDefaultPopupContainer
-      ownerUrl={ownerUrl}
-      totalAvailableInvestment={totalAvailableInvestment}
-      assetColor={assetColor}
-      assetLevelProgress={assetLevelProgress}
-      assetLevel={assetLevel}
-      assetLogo={assetLogo}
-      AssetDetailsExtraBlock={AssetDetailsExtraBlock}
-      renderFees={renderFees}
-      assetOwner={assetOwner}
-      brokerName={brokerName}
-      brokerLogo={brokerLogo}
-      ownAsset={ownAsset}
-      title={title}
-      availableToInvest={availableToInvest}
+  return renderAssetPopup(
+    <DepositTop
       asset={asset}
+      availableToInvest={availableToInvest}
       currency={currency}
-      form={
-        <DepositForm
-          infoMessage={infoMessage}
-          ownAsset={ownAsset}
-          minDeposit={minDeposit}
-          availableToInvest={ownAsset ? undefined : availableToInvest}
-          fees={fees}
-          initWallet={initWallet}
-          hasEntryFee={hasEntryFee}
-          asset={asset}
-          errorMessage={errorMessage}
-          currency={currency}
-          onSubmit={handleInvest}
-        />
-      }
+      title={title}
+      ownAsset={ownAsset}
+    />,
+    <DepositForm
+      infoMessage={infoMessage}
+      ownAsset={ownAsset}
+      minDeposit={minDeposit}
+      availableToInvest={ownAsset ? undefined : availableToInvest}
+      fees={fees}
+      initWallet={initWallet}
+      hasEntryFee={hasEntryFee}
+      asset={asset}
+      errorMessage={errorMessage}
+      currency={currency}
+      onSubmit={handleInvest}
     />
   );
 };

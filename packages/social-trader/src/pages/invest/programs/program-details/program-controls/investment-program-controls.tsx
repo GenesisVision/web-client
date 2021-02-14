@@ -1,9 +1,7 @@
 import { DefaultBlock } from "components/default.block/default.block";
 import { DetailsStatisticContainer } from "components/details/details-description-section/details-description/details-structure-blocks";
-import { InvestmentItem } from "components/details/details-description-section/details-investment/investment-item";
 import InvestmentProgramInfo from "components/details/details-description-section/investment-program-info";
 import { Row } from "components/row/row";
-import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import { ASSET } from "constants/constants";
 import {
   AssetPublicDetails,
@@ -15,16 +13,12 @@ import {
 import DepositButton from "modules/deposit/deposit.button";
 import NotifyButton from "modules/notity-button/notify-button";
 import * as React from "react";
-import { useTranslation } from "react-i18next";
-import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
-import { formatValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 
 interface Props {
-  ownerUrl: string;
-  programOwner: string;
+  renderAssetPopup: (popupTop: JSX.Element, form: JSX.Element) => JSX.Element;
   isExchange?: boolean;
   currency: CurrencyEnum;
   id: string;
@@ -35,26 +29,21 @@ interface Props {
   onApply: VoidFunction;
   isOwnProgram: boolean;
   levelsParameters: LevelsParamsInfo;
-  AssetDetailsExtraBlock: React.ComponentType<any>;
 }
 
-const _InvestmentProgramControls: React.FC<Props> = props => {
-  const [t] = useTranslation();
-  const {
-    AssetDetailsExtraBlock,
-    isExchange,
-    currency,
-    onApply,
-    isOwnProgram,
-    id,
-    programDetails,
-    publicInfo,
-    brokerDetails,
-    tradingAccountInfo,
-    levelsParameters,
-    programOwner,
-    ownerUrl
-  } = props;
+const _InvestmentProgramControls: React.FC<Props> = ({
+  renderAssetPopup,
+  isExchange,
+  currency,
+  onApply,
+  isOwnProgram,
+  id,
+  programDetails,
+  publicInfo,
+  brokerDetails,
+  tradingAccountInfo,
+  levelsParameters
+}) => {
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   const canInvest = isAuthenticated
     ? !!programDetails.personalDetails &&
@@ -85,82 +74,7 @@ const _InvestmentProgramControls: React.FC<Props> = props => {
               />
             ) : (
               <DepositButton
-                renderFees={
-                  <>
-                    <InvestmentItem
-                      label={
-                        <TooltipLabel
-                          tooltipContent={t(
-                            "asset-details:description.tooltips.currency"
-                          )}
-                          labelText={t("asset-details:description.currency")}
-                        />
-                      }
-                    >
-                      {currency}
-                    </InvestmentItem>
-                    <InvestmentItem
-                      label={
-                        <TooltipLabel
-                          tooltipContent={t(
-                            "program-details-page:tooltip.management-fee"
-                          )}
-                          labelText={t(
-                            "asset-details:description.management-fee"
-                          )}
-                        />
-                      }
-                    >
-                      <NumberFormat
-                        value={formatValue(programDetails.managementFeeCurrent)}
-                        displayType="text"
-                        suffix=" %"
-                      />
-                    </InvestmentItem>
-                    <InvestmentItem
-                      label={
-                        <TooltipLabel
-                          tooltipContent={t(
-                            "program-details-page:tooltip.success-fee"
-                          )}
-                          labelText={t("asset-details:description.successFee")}
-                        />
-                      }
-                    >
-                      <NumberFormat
-                        value={formatValue(programDetails.successFeeCurrent)}
-                        displayType="text"
-                        suffix=" %"
-                      />
-                    </InvestmentItem>
-                    <InvestmentItem
-                      label={
-                        <TooltipLabel
-                          tooltipContent={t(
-                            "program-details-page:tooltip.stop-out-level"
-                          )}
-                          labelText={t(
-                            "asset-details:description.stop-out-level"
-                          )}
-                        />
-                      }
-                    >
-                      <NumberFormat
-                        value={formatValue(programDetails.stopOutLevelCurrent)}
-                        displayType="text"
-                        suffix=" %"
-                      />
-                    </InvestmentItem>
-                  </>
-                }
-                assetColor={publicInfo.color}
-                totalAvailableInvestment={programDetails.totalAvailableInvestment}
-                assetLevelProgress={programDetails.levelProgress}
-                assetLevel={programDetails.level}
-                assetLogo={publicInfo.logoUrl}
-                AssetDetailsExtraBlock={AssetDetailsExtraBlock}
-                assetOwner={programOwner}
-                ownerUrl={ownerUrl}
+                renderAssetPopup={renderAssetPopup}
                 isProcessingRealTime={
                   programDetails.dailyPeriodDetails?.isProcessingRealTime
                 }
@@ -172,8 +86,6 @@ const _InvestmentProgramControls: React.FC<Props> = props => {
                 entryFee={programDetails.managementFeeCurrent}
                 availableToInvest={programDetails.availableInvestmentBase}
                 broker={brokerDetails.type}
-                brokerName={brokerDetails.name}
-                brokerLogo={brokerDetails.logoUrl}
                 type={ASSET.PROGRAM}
                 id={id}
                 currency={tradingAccountInfo.currency}

@@ -7,6 +7,7 @@ import { Row } from "components/row/row";
 import { RowItem } from "components/row-item/row-item";
 import { ASSET, TRADE_ASSET_TYPE } from "constants/constants";
 import { LevelsParamsInfo } from "gv-api-web";
+import InvestDefaultPopup from "modules/invest-popup/invest-default-popup";
 import dynamic from "next/dynamic";
 import { mapProgramFollowToTransferItemType } from "pages/dashboard/services/dashboard.service";
 import FollowDetailsStatisticSection from "pages/invest/follows/follow-details/follow-details-statistic-section/follow-details-statistic-section";
@@ -32,6 +33,7 @@ import { $paddingMedium } from "utils/style/sizes";
 import ProgramDetailsHistorySection, {
   TProgramTablesData
 } from "./program-history-section/program-details-history-section";
+import ProgramFeesBlock from "./program-popup/program-fees-block";
 import {
   financialStatisticTableSelector,
   openPositionsSelector,
@@ -147,6 +149,43 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
     () => <DetailsTags tags={tags} />,
     [tags]
   );
+
+  const renderAssetFeesBlock = useCallback(
+    () => (
+      <ProgramFeesBlock
+        currency={description.tradingAccountInfo.currency}
+        successFee={description.programDetails.successFeeCurrent}
+        stopOut={description.programDetails.stopOutLevelCurrent}
+        managementFee={description.programDetails.managementFeeCurrent}
+      />
+    ),
+    [description]
+  );
+
+  const renderProgramPopup = (popupTop: JSX.Element, form: JSX.Element) => {
+    return (
+      <InvestDefaultPopup
+        popupTop={popupTop}
+        ownerUrl={description.owner.url}
+        totalAvailableInvestment={
+          description.programDetails.totalAvailableInvestment
+        }
+        assetColor={description.publicInfo.color}
+        assetLevelProgress={description.programDetails.levelProgress}
+        assetLevel={description.programDetails.level}
+        assetLogo={description.publicInfo.logoUrl}
+        AssetDetailsExtraBlock={renderAssetDetailsExtraBlock}
+        AssetFeesBlock={renderAssetFeesBlock}
+        brokerName={description.brokerDetails.name}
+        brokerLogo={description.brokerDetails.logoUrl}
+        currency={description.tradingAccountInfo.currency}
+        title={description.publicInfo.title}
+        assetOwner={description.owner.username}
+        form={form}
+      />
+    );
+  };
+
   const renderPerformanceData = useCallback(
     () => (
       <PerformanceData
@@ -170,8 +209,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
         {description.programDetails && (
           <RowItem bottomOffset>
             <InvestmentProgramControls
-              programOwner={description.owner.username}
-              ownerUrl={description.owner.url}
+              renderAssetPopup={renderProgramPopup}
               isExchange={isExchange}
               currency={description.tradingAccountInfo.currency}
               id={description.id}
@@ -181,7 +219,6 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
               tradingAccountInfo={description.tradingAccountInfo}
               onApply={handleDispatchDescription}
               isOwnProgram={isOwnAsset}
-              AssetDetailsExtraBlock={renderAssetDetailsExtraBlock}
               levelsParameters={levelsParameters!}
             />
           </RowItem>
@@ -236,7 +273,6 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
         : undefined,
     [description]
   );
-
   const notificationsUrl = useMemo(
     () =>
       assetType === "Follow"
@@ -297,6 +333,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
       />
       <DetailsDivider />
       <DetailsInvestment
+        renderAssetPopup={renderProgramPopup}
         title={description.publicInfo.title}
         isExchange={isExchange}
         isProcessingRealTime={

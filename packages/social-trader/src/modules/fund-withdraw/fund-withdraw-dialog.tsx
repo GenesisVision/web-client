@@ -4,11 +4,12 @@ import * as React from "react";
 
 import { IFundWithdrawPopupProps } from "./fund-withdraw-popup";
 
-const FundWithdrawPopupContainer = dynamic(() =>
-  import("modules/fund-withdraw/fund-withdraw-popup.container")
+const FundWithdrawPopupContainer = dynamic(
+  () => import("modules/fund-withdraw/fund-withdraw-popup.container")
 );
 
 const _FundWithdrawDialog: React.FC<IFundWithdrawDialogProps> = ({
+  renderAssetPopup,
   infoMessage,
   onApply,
   id,
@@ -18,6 +19,7 @@ const _FundWithdrawDialog: React.FC<IFundWithdrawDialogProps> = ({
   return (
     <Dialog open={open} onClose={onClose}>
       <FundWithdrawPopupContainer
+        renderAssetPopup={renderAssetPopup}
         infoMessage={infoMessage}
         onApply={onApply}
         onClose={onClose}
@@ -29,7 +31,7 @@ const _FundWithdrawDialog: React.FC<IFundWithdrawDialogProps> = ({
 
 export interface IFundWithdrawDialogProps
   extends IDialogProps,
-    IFundWithdrawPopupProps {
+  IFundWithdrawPopupProps {
   id: string;
 }
 

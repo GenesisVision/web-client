@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { CurrencyEnum } from "utils/types";
 
 import { statisticCurrencyAction } from "./actions/program-details.actions";
-import ProgramDetailsContainer from "./program-details.contaner";
+import ProgramDetailsContainer from "./program-details.container";
 import { programDescriptionSelector } from "./reducers/description.reducer";
 
 const _ProgramDetailsPage: React.FC<Props> = ({ levelsParameters, route }) => {
@@ -17,6 +17,7 @@ const _ProgramDetailsPage: React.FC<Props> = ({ levelsParameters, route }) => {
     CurrencyEnum | undefined
   >();
   const [programId, setProgramId] = useState<string | undefined>();
+
   useEffect(() => {
     if (!description) return;
     const { currency } = description.tradingAccountInfo;

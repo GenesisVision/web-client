@@ -31,41 +31,28 @@ import {
   InvestmentType
 } from "./details-investment.helpers";
 
-const ReportTable = dynamic(() =>
-  import(
-    "components/details/details-description-section/details-investment/reports/reports-table"
-  )
+const ReportTable = dynamic(
+  () =>
+    import(
+      "components/details/details-description-section/details-investment/reports/reports-table"
+    )
 );
-const SubscriptionContainer = dynamic(() =>
-  import(
-    "components/details/details-description-section/details-investment/subscription/subscription.container"
-  )
+const SubscriptionContainer = dynamic(
+  () =>
+    import(
+      "components/details/details-description-section/details-investment/subscription/subscription.container"
+    )
 );
-const Investment = dynamic(() =>
-  import(
-    "components/details/details-description-section/details-investment/investment"
-  )
+const Investment = dynamic(
+  () =>
+    import(
+      "components/details/details-description-section/details-investment/investment"
+    )
 );
-const PortfolioEventsTableContainer = dynamic(() =>
-  import("components/portfolio-events-table/portfolio-events-table-container")
+const PortfolioEventsTableContainer = dynamic(
+  () =>
+    import("components/portfolio-events-table/portfolio-events-table-container")
 );
-
-interface Props {
-  title: string;
-  hasTradingSchedule?: boolean;
-  investmentMessage?: string;
-  withdrawMessage?: string;
-  isOwnAsset: boolean;
-  fees: FeesType;
-  asset: ASSET;
-  dispatchDescription: () => void;
-  selector: TableSelectorType;
-  currency: CurrencyEnum;
-  id: string;
-  personalFundDetails?: PersonalFundDetails;
-  programPersonalDetails?: PersonalProgramDetails;
-  followPersonalDetails?: PersonalFollowDetailsFull;
-}
 
 enum TABS {
   REPORTS = "REPORTS",
@@ -75,6 +62,8 @@ enum TABS {
 }
 
 interface Props {
+  renderAssetPopup: (popupTop: JSX.Element, form: JSX.Element) => JSX.Element;
+  title: string;
   isExchange?: boolean;
   isProcessingRealTime?: boolean;
   hasTradingSchedule?: boolean;
@@ -93,6 +82,7 @@ interface Props {
 }
 
 const _DetailsInvestment: React.FC<Props> = ({
+  renderAssetPopup,
   title,
   isExchange,
   isProcessingRealTime,
@@ -181,8 +171,7 @@ const _DetailsInvestment: React.FC<Props> = ({
           visible={showInvestment}
           value={TABS.INVESTMENT}
           label={t(
-            `asset-details:investment.tabs.investment.${
-              isExchange ? "exchange-" : ""
+            `asset-details:investment.tabs.investment.${isExchange ? "exchange-" : ""
             }${asset.toLowerCase()}`
           )}
         />
@@ -207,6 +196,7 @@ const _DetailsInvestment: React.FC<Props> = ({
       {tab === TABS.INVESTMENT && showInvestment && (
         <Row onlyOffset>
           <Investment
+            renderAssetPopup={renderAssetPopup}
             isExchange={isExchange}
             isProcessingRealTime={isProcessingRealTime}
             hasTradingSchedule={hasTradingSchedule}

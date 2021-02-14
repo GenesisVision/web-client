@@ -18,6 +18,7 @@ import {
 import { AssetType, AssetTypeExt, DashboardTradingAsset } from "gv-api-web";
 import { TAnchor } from "hooks/anchor.hook";
 import { useTranslation } from "i18n";
+import InvestDefaultPopup from "modules/invest-popup/invest-default-popup";
 import { DashboardPublicCardActions } from "pages/dashboard/components/dashboard-trading/dashboard-public-card-actions";
 import DepositWithdrawButtons from "pages/dashboard/components/dashboard-trading/deposit-withdraw-buttons";
 import { mapAccountToTransferItemType } from "pages/dashboard/services/dashboard.service";
@@ -87,6 +88,48 @@ const _DashboardPublicCard: React.FC<Props> = ({
     asset.publicInfo?.fundDetails?.tradingSchedule
   );
   const investMessage = `${t("trading-schedule.invest-fund")} \n ${schedule}`;
+
+  // need ownerUrl, totalAvailableInvestment, program currency
+
+  const renderAssetPopup =
+    asset.assetType === ASSET.PROGRAM
+      ? (popupTop: JSX.Element, form: JSX.Element) => {
+        return (
+          <InvestDefaultPopup
+            popupTop={popupTop}
+            ownerUrl={"fix it later"}
+            // totalAvailableInvestment={0}
+            assetColor={asset.publicInfo.color}
+            assetLevelProgress={asset.publicInfo.programDetails.levelProgress}
+            assetLevel={asset.publicInfo.programDetails.level}
+            assetLogo={asset.publicInfo.logoUrl}
+            // AssetDetailsExtraBlock={renderAssetDetailsExtraBlock}
+            // AssetFeesBlock={renderAssetFeesBlock}
+            brokerName={asset.broker.name}
+            brokerLogo={asset.broker.logoUrl}
+            // currency={description.tradingAccountInfo.currency}
+            title={asset.publicInfo.title}
+            assetOwner={"fix it later"}
+            form={form}
+          />
+        );
+      }
+      : (popupTop: JSX.Element, form: JSX.Element) => {
+        return (
+          <InvestDefaultPopup
+            popupTop={popupTop}
+            ownerUrl={"fix it later"}
+            assetColor={asset.publicInfo.color}
+            assetLogo={asset.publicInfo.logoUrl}
+            // AssetDetailsExtraBlock={renderAssetDetailsExtraBlock}
+            // AssetFeesBlock={renderAssetFeesBlock}
+            // currency={description.tradingAccountInfo.currency}
+            title={asset.publicInfo.title}
+            assetOwner={"fix it later"}
+            form={form}
+          />
+        );
+      };
 
   const renderActions = ({
     anchor,
@@ -248,6 +291,7 @@ const _DashboardPublicCard: React.FC<Props> = ({
         </TableCardTableRow>
       )}
       <DepositWithdrawButtons
+        renderAssetPopup={renderAssetPopup}
         GM={asset.publicInfo?.programDetails?.type === "DailyPeriod"}
         isProcessingRealTime={
           asset.publicInfo?.programDetails?.dailyPeriodDetails
