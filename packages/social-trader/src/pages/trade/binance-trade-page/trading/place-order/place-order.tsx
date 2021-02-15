@@ -27,7 +27,7 @@ import { LimitTradeForm } from "./limit-trade-form";
 import { MarketTradeForm } from "./market-trade-form";
 import { getBalance, getTradeType, mapPlaceOrderErrors } from "./place-order.helpers";
 import styles from "./place-order.module.scss";
-import { FilterValues, IPlaceOrderFormValues, TRADE_FORM_FIELDS } from "./place-order.types";
+import { FilterValues, IPlaceOrderFormValues, IStopLimitFormValues, TRADE_FORM_FIELDS } from "./place-order.types";
 
 interface Props {
   price: string;
@@ -57,8 +57,9 @@ const _PlaceOrder: React.FC<Props> = ({ filterValues, lastTrade, price }) => {
   });
 
   const handleSubmit = useCallback(
-    (values: IPlaceOrderFormValues) => {
+    (values: IStopLimitFormValues | IPlaceOrderFormValues) => {
       const type = getTradeType({
+        stopPrice: "stopPrice" in values ? values.stopPrice : undefined,
         side,
         type: tab,
         currentPrice: lastTrade,
@@ -81,15 +82,7 @@ const _PlaceOrder: React.FC<Props> = ({ filterValues, lastTrade, price }) => {
         symbol: getSymbol(baseAsset, quoteAsset)
       });
     },
-    [
-      tickSize,
-      stepSize,
-      exchangeAccountId,
-      baseAsset,
-      quoteAsset,
-      side,
-      tab,
-    ]
+    [tickSize, stepSize, exchangeAccountId, baseAsset, quoteAsset, side, tab]
   );
 
   const walletAsset =

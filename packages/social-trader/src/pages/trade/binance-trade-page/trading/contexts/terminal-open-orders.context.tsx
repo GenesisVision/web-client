@@ -9,22 +9,16 @@ import {
 } from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import { UnitedOrder } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { normalizeOpenOrdersList } from "pages/trade/binance-trade-page/trading/trading-tables/open-orders/open-orders.helpers";
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useMemo,
-  useState
-} from "react";
+import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { map } from "rxjs/operators";
 
 type TerminalOpenOrdersContextState = { openOrders?: UnitedOrder[] };
 
 export const TerminalOpenOrdersInitialState = {} as TerminalOpenOrdersContextState;
 
-export const TerminalOpenOrdersContext = createContext<
-  TerminalOpenOrdersContextState
->(TerminalOpenOrdersInitialState);
+export const TerminalOpenOrdersContext = createContext<TerminalOpenOrdersContextState>(
+  TerminalOpenOrdersInitialState
+);
 
 export const TerminalOpenOrdersContextProvider: React.FC = ({ children }) => {
   const { successAlert } = useAlerts();
@@ -88,7 +82,9 @@ export const TerminalOpenOrdersContextProvider: React.FC = ({ children }) => {
 
   const items = useMemo(
     () => ({
-      openOrders: Object.values(list)
+      openOrders: Object.values(list).sort(
+        (a, b) => +new Date(b.time) - +new Date(a.time)
+      )
     }),
     [list]
   );
