@@ -1,19 +1,10 @@
 import { BlurContainer } from "components/blur-container/blur-container";
-import { LabeledValue } from "components/labeled-value/labeled-value";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
 import * as React from "react";
 import styled from "styled-components";
+import { adaptivePadding, horizontalPaddings } from "utils/style/mixins";
 import {
-    adaptiveMargin,
-    adaptivePadding,
-    fontSize,
-    horizontalPaddings,
-    verticalPaddings
-} from "utils/style/mixins";
-import {
-    $fontSizeCommon,
-    $paddingBig,
     $paddingMedium,
     $paddingSmall,
     $paddingUpperMedium
@@ -31,22 +22,15 @@ const Container = styled.div`
   background: #202a34;
   ${horizontalPaddings($paddingSmall)};
   ${adaptivePadding("bottom", $paddingMedium)};
-  ${adaptivePadding("top", 50)};
+  ${adaptivePadding("top", $paddingUpperMedium, 1.2)};
 `;
 
-const Subtitle = styled(Row)`
-  ${fontSize($fontSizeCommon)};
+const Subtitle = styled(Text)`
   letter-spacing: 0.4px;
-  color: #e8eff3;
 `;
 
-const Roww = styled(Row)`
+const RowBlock = styled(Row)`
   justify-content: space-between;
-  /* ${adaptiveMargin("top", 12)}; */
-`;
-
-const TitleBlock = styled.div`
-  margin-right: 30px;
 `;
 
 const _InvestPopupTop: React.FC<InvestPopupProps> = ({
@@ -58,35 +42,18 @@ const _InvestPopupTop: React.FC<InvestPopupProps> = ({
 }) => {
     return (
         <Container>
-            <Roww wide>
+            <RowBlock wide>
                 <h2>{title}</h2>
-                <BlurContainer blur={!!isPending}>
-                    <Text size={"xlarge"} wrap>
-                        {text}
-                    </Text>
-                </BlurContainer>
-            </Roww>
-            <Roww wide>
-                <Subtitle size={"small"}>{subtitle}</Subtitle>
-                <Text wrap muted>
-                    {labelText}
-                </Text>
-            </Roww>
-            {/* <TitleBlock>
-                <Row>
-                    <h2>{title}</h2>
-                </Row>
-                <Subtitle size={"small"}>{subtitle}</Subtitle>
-            </TitleBlock>
-            {text && labelText && (
-                <div>
-                    <LabeledValue label={labelText}>
-                        <BlurContainer blur={!!isPending}>
-                            <Text size={"xlarge"}>{text}</Text>
-                        </BlurContainer>
-                    </LabeledValue>
-                </div>
-            )} */}
+                {text && (
+                    <BlurContainer blur={!!isPending}>
+                        <Text size={"xlarge"}>{text}</Text>
+                    </BlurContainer>
+                )}
+            </RowBlock>
+            <RowBlock wide>
+                <Subtitle color={"white"}>{subtitle}</Subtitle>
+                {labelText && <Text muted>{labelText}</Text>}
+            </RowBlock>
         </Container>
     );
 };

@@ -1,66 +1,46 @@
-import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
 import DetailsAssetAvatar from "components/details/details-description-section/details-description/details-asset-avatar";
-import { DetailsLimitsAvatar } from "components/details/details-description-section/details-description/details-limits-avatar.block";
 import { DetailsBroker } from "components/details/details-description-section/details-description/details-structure-blocks";
 import { DetailsSubtitle } from "components/details/details-description-section/details-description/details-subtitle.block";
-import {
-    PopoverContent,
-    PopoverContentListItem
-} from "components/popover/popover-content";
 import { Row } from "components/row/row";
 import { RowItem } from "components/row-item/row-item";
 import { Text } from "components/text/text";
 import React from "react";
 import { managerToPathCreator } from "routes/manager.routes";
 import styled from "styled-components";
-import { $dialogBackgroundColor } from "utils/style/colors";
-import { mediaBreakpointPhone, mediaBreakpointTablet } from "utils/style/media";
-import {
-    adaptiveGridGap,
-    adaptiveMargin,
-    adaptivePadding,
-    horizontalPaddings,
-    verticalPaddings
-} from "utils/style/mixins";
-import {
-    $paddingMedium,
-    $paddingSmall,
-    $paddingXsmall
-} from "utils/style/sizes";
+import { mediaBreakpointTablet } from "utils/style/media";
+import { adaptiveGridGap, horizontalPaddings } from "utils/style/mixins";
+import { $paddingMedium, $paddingSmall } from "utils/style/sizes";
 import { CurrencyEnum } from "utils/types";
 
 interface Props {
+    ownerUrl: string;
+    assetOwner: string;
+    assetLogo: string;
+    assetColor: string;
+    currency: CurrencyEnum;
+    title: string;
     AssetDetailsExtraBlock?: React.ComponentType<any>;
     AssetFeesBlock?: React.ComponentType<any>;
-    ownerUrl: string;
     assetLevel?: number;
-    assetLogo: string;
-    assetOwner: string;
-    title: string;
+    assetLevelProgress?: number;
     level?: number;
     brokerLogo?: string;
     brokerName?: string;
-    currency: CurrencyEnum;
     totalAvailableInvestment?: number;
-    assetColor: string;
-    assetLevelProgress?: number;
 }
 
 const Container = styled.div`
-  box-sizing: border-box;
-  padding: 20px;
-  ${mediaBreakpointPhone(`
-    padding: 30px 20px;
-  `)};
+  ${horizontalPaddings($paddingSmall)}
+  padding-top: ${$paddingSmall}px;
+  padding-bottom: ${$paddingMedium}px;
   ${mediaBreakpointTablet(`
     padding: 0px;
   `)};
 `;
 
-const FeesContainer = styled.div`
+const FeesContainer = styled(Row)`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  ${adaptiveMargin("top", $paddingSmall)};
   ${adaptiveGridGap($paddingSmall, "row")};
 `;
 
@@ -119,12 +99,14 @@ const _InvestPopupInfo: React.FC<Props> = ({
                     {AssetDetailsExtraBlock && <AssetDetailsExtraBlock />}
                 </RowItem>
             </Row>
-            {brokerName && (
+            {brokerName && brokerLogo && (
                 <Row size={"large"}>
-                    <DetailsBroker logoUrl={brokerLogo!} name={brokerName} />
+                    <DetailsBroker logoUrl={brokerLogo} name={brokerName} />
                 </Row>
             )}
-            {AssetFeesBlock && <FeesContainer>{<AssetFeesBlock />}</FeesContainer>}
+            {AssetFeesBlock && (
+                <FeesContainer size={"large"}>{<AssetFeesBlock />}</FeesContainer>
+            )}
         </Container>
     );
 };

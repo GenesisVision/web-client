@@ -60,7 +60,7 @@ const _DashboardProgramCard: React.FC<Props> = ({
     ),
     [program]
   );
-  // need program.stopOut and totalAvailableInvestment
+  // totalAvailableInvestment stopOut
   const renderProgramPopup = (popupTop: JSX.Element, form: JSX.Element) => {
     return (
       <InvestDefaultPopup

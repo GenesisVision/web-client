@@ -1,51 +1,44 @@
-import { Row } from "components/row/row";
 import React from "react";
 import styled from "styled-components";
-import { $dialogBackgroundColor } from "utils/style/colors";
+import { $investPopupBackground } from "utils/style/colors";
 import {
-    mediaBreakpointLandscapePhone,
-    mediaBreakpointLandscapeTablet,
-    mediaBreakpointPhone,
-    mediaBreakpointTablet
+  mediaBreakpointLandscapePhone,
+  mediaBreakpointLandscapeTablet,
+  mediaBreakpointTablet
 } from "utils/style/media";
 import {
-    adaptiveFullPadding,
-    adaptiveGridGap,
-    horizontalPaddings,
-    verticalPaddings
+  adaptiveFullPadding,
+  horizontalPaddings,
+  verticalPaddings
 } from "utils/style/mixins";
-import {
-    $paddingMedium,
-    $paddingSmall,
-    $paddingUpperMedium
-} from "utils/style/sizes";
+import { $paddingSmall, $paddingUpperMedium } from "utils/style/sizes";
 import { CurrencyEnum } from "utils/types";
 
 import InvestPopupInfo from "./invest-popup-info";
 
 interface Props {
-    ownerUrl: string;
-    assetLogo: string;
-    title: string;
-    assetLevel?: number;
-    form: JSX.Element;
-    assetOwner: string;
-    brokerLogo?: string;
-    brokerName?: string;
-    AssetDetailsExtraBlock?: React.ComponentType<any>;
-    popupTop: JSX.Element;
-    AssetFeesBlock?: React.ComponentType<any>;
-    totalAvailableInvestment?: number;
-    assetColor: string;
-    assetLevelProgress?: number;
-    currency?: CurrencyEnum;
+  ownerUrl: string;
+  assetOwner: string;
+  assetLogo: string;
+  assetColor: string;
+  title: string;
+  form: JSX.Element;
+  popupTop: JSX.Element;
+  assetLevel?: number;
+  assetLevelProgress?: number;
+  brokerLogo?: string;
+  brokerName?: string;
+  AssetDetailsExtraBlock?: React.ComponentType<any>;
+  AssetFeesBlock?: React.ComponentType<any>;
+  totalAvailableInvestment?: number;
+  currency?: CurrencyEnum;
 }
 
 const MainContentContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   align-items: center;
-  background-color: ${$dialogBackgroundColor};
+  background-color: ${$investPopupBackground};
   ${mediaBreakpointTablet(`
     grid-template-columns: 1fr minmax(50%,1fr);
     column-gap: 30px;
@@ -63,9 +56,6 @@ const FormContainer = styled.div`
 `;
 
 const Container = styled.div`
-  /* ${mediaBreakpointPhone(`
-  max-width: 480px;
-`)} */
   ${mediaBreakpointLandscapePhone(`
   width: 480px;
 `)}
@@ -77,48 +67,46 @@ ${mediaBreakpointLandscapeTablet(`
 `)}
 `;
 
-const _InvestDefaultPopup: React.FC<Props> = props => {
-    const {
-        ownerUrl,
-        totalAvailableInvestment,
-        assetColor,
-        assetLevelProgress,
-        assetLevel,
-        assetLogo,
-        form,
-        AssetDetailsExtraBlock,
-        AssetFeesBlock,
-        brokerName,
-        brokerLogo,
-        currency,
-        title,
-        assetOwner,
-        popupTop
-    } = props;
-    console.log(props);
-    return (
-        <Container>
-            {popupTop}
-            <MainContentContainer>
-                <InvestPopupInfo
-                    ownerUrl={ownerUrl}
-                    totalAvailableInvestment={totalAvailableInvestment}
-                    assetColor={assetColor}
-                    assetLevelProgress={assetLevelProgress}
-                    assetLevel={assetLevel}
-                    assetLogo={assetLogo}
-                    currency={currency!}
-                    AssetFeesBlock={AssetFeesBlock}
-                    AssetDetailsExtraBlock={AssetDetailsExtraBlock}
-                    brokerLogo={brokerLogo}
-                    brokerName={brokerName}
-                    assetOwner={assetOwner}
-                    title={title}
-                />
-                <FormContainer>{form}</FormContainer>
-            </MainContentContainer>
-        </Container>
-    );
+const _InvestDefaultPopup: React.FC<Props> = ({
+  ownerUrl,
+  totalAvailableInvestment,
+  assetColor,
+  assetLevelProgress,
+  assetLevel,
+  assetLogo,
+  form,
+  AssetDetailsExtraBlock,
+  AssetFeesBlock,
+  brokerName,
+  brokerLogo,
+  currency,
+  title,
+  assetOwner,
+  popupTop
+}) => {
+  return (
+    <Container>
+      {popupTop}
+      <MainContentContainer>
+        <InvestPopupInfo
+          ownerUrl={ownerUrl}
+          totalAvailableInvestment={totalAvailableInvestment}
+          assetColor={assetColor}
+          assetLevelProgress={assetLevelProgress}
+          assetLevel={assetLevel}
+          assetLogo={assetLogo}
+          currency={currency!}
+          AssetFeesBlock={AssetFeesBlock}
+          AssetDetailsExtraBlock={AssetDetailsExtraBlock}
+          brokerLogo={brokerLogo}
+          brokerName={brokerName}
+          assetOwner={assetOwner}
+          title={title}
+        />
+        <FormContainer>{form}</FormContainer>
+      </MainContentContainer>
+    </Container>
+  );
 };
 
 const InvestDefaultPopup = React.memo(_InvestDefaultPopup);

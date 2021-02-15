@@ -20,6 +20,7 @@ import { CurrencyEnum } from "utils/types";
 
 import FundDetailsHistorySection from "./fund-details-history-section/fund-details-history-section";
 import FundDetailsStatisticSection from "./fund-details-statistics-section/fund-details-statistic-section";
+import FundAssetsBlock from "./fund-popup/fund-assets-block";
 import FundFeesBlock from "./fund-popup/fund-fees-block";
 import { getFundSchema } from "./fund-schema";
 import InvestmentFundControls from "./investment-fund-controls/investment-fund-controls";
@@ -77,24 +78,8 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
   );
 
   const renderAssetDetailsExtraBlock = useCallback(
-    () => (
-      <>
-        <h4>
-          <TooltipLabel
-            tooltipContent={t("fund-details-page:tooltip.assets")}
-            labelText={t("asset-details:description.assets")}
-          />
-        </h4>
-        <Row>
-          <FundAssetContainer
-            type={"large"}
-            assets={description.assetsStructure}
-            size={7}
-          />
-        </Row>
-      </>
-    ),
-    [description]
+    () => <FundAssetsBlock assets={description.assetsStructure} />,
+    [description.assetsStructure]
   );
 
   const renderAssetFeesBlock = useCallback(

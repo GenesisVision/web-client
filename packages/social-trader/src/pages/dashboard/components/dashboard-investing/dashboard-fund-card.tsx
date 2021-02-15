@@ -12,6 +12,8 @@ import { FundInvestingDetailsList } from "gv-api-web";
 import { FundCardTable } from "modules/funds-table/components/funds-table/fund-card";
 import InvestDefaultPopup from "modules/invest-popup/invest-default-popup";
 import DepositWithdrawButtons from "pages/dashboard/components/dashboard-trading/deposit-withdraw-buttons";
+import FundAssetsBlock from "pages/invest/funds/fund-details/fund-popup/fund-assets-block";
+import FundFeesBlock from "pages/invest/funds/fund-details/fund-popup/fund-fees-block";
 import { generateScheduleText } from "pages/invest/funds/fund-details/services/fund-details.service";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
@@ -33,14 +35,22 @@ const _DashboardFundCard: React.FC<Props> = ({
   const investMessage = `${t("trading-schedule.invest-fund")} \n ${schedule}`;
 
   const renderFundPopup = (popupTop: JSX.Element, form: JSX.Element) => {
+    // fundAssets???
     return (
       <InvestDefaultPopup
         popupTop={popupTop}
         ownerUrl={fund.owner.url}
         assetColor={fund.color}
         assetLogo={fund.logoUrl}
-        // AssetDetailsExtraBlock={renderAssetDetailsExtraBlock}
-        // AssetFeesBlock={renderAssetFeesBlock}
+        AssetDetailsExtraBlock={() => (
+          <FundAssetsBlock assets={fund.topFundAssets} />
+        )}
+        AssetFeesBlock={() => (
+          <FundFeesBlock
+            entryFee={fund.entryFeeCurrent}
+            exitFee={fund.exitFeeCurrent}
+          />
+        )}
         title={fund.title}
         assetOwner={fund.owner.username}
         form={form}

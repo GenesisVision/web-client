@@ -1,3 +1,4 @@
+import { DetailsTags } from "components/details/details-description-section/details-description/details-tags.block";
 import FundAssetContainer, {
   FundAssetType
 } from "components/fund-asset/fund-asset-container";
@@ -22,7 +23,10 @@ import InvestDefaultPopup from "modules/invest-popup/invest-default-popup";
 import { DashboardPublicCardActions } from "pages/dashboard/components/dashboard-trading/dashboard-public-card-actions";
 import DepositWithdrawButtons from "pages/dashboard/components/dashboard-trading/deposit-withdraw-buttons";
 import { mapAccountToTransferItemType } from "pages/dashboard/services/dashboard.service";
+import FundAssetsBlock from "pages/invest/funds/fund-details/fund-popup/fund-assets-block";
+import FundFeesBlock from "pages/invest/funds/fund-details/fund-popup/fund-fees-block";
 import { generateScheduleText } from "pages/invest/funds/fund-details/services/fund-details.service";
+import ProgramFeesBlock from "pages/invest/programs/program-details/program-popup/program-fees-block";
 import React from "react";
 import NumberFormat from "react-number-format";
 import {
@@ -89,22 +93,30 @@ const _DashboardPublicCard: React.FC<Props> = ({
   );
   const investMessage = `${t("trading-schedule.invest-fund")} \n ${schedule}`;
 
-  // need ownerUrl, totalAvailableInvestment, program currency
-
   const renderAssetPopup =
     asset.assetType === ASSET.PROGRAM
       ? (popupTop: JSX.Element, form: JSX.Element) => {
+        // totalAvailableInvestment ownerUrl currency stopOut assetOwner
         return (
           <InvestDefaultPopup
             popupTop={popupTop}
             ownerUrl={"fix it later"}
-            // totalAvailableInvestment={0}
+            // totalAvailableInvestment={}
             assetColor={asset.publicInfo.color}
             assetLevelProgress={asset.publicInfo.programDetails.levelProgress}
             assetLevel={asset.publicInfo.programDetails.level}
             assetLogo={asset.publicInfo.logoUrl}
-            // AssetDetailsExtraBlock={renderAssetDetailsExtraBlock}
-            // AssetFeesBlock={renderAssetFeesBlock}
+            AssetDetailsExtraBlock={() => <DetailsTags tags={asset.tags} />}
+            AssetFeesBlock={() => (
+              <ProgramFeesBlock
+                currency={"USDT"}
+                successFee={asset.publicInfo.programDetails.successFeeCurrent}
+                stopOut={9999}
+                managementFee={
+                  asset.publicInfo.programDetails.managementFeeCurrent
+                }
+              />
+            )}
             brokerName={asset.broker.name}
             brokerLogo={asset.broker.logoUrl}
             // currency={description.tradingAccountInfo.currency}
@@ -115,15 +127,24 @@ const _DashboardPublicCard: React.FC<Props> = ({
         );
       }
       : (popupTop: JSX.Element, form: JSX.Element) => {
+        // ownerUrl assetOwner fundAssets????
         return (
           <InvestDefaultPopup
             popupTop={popupTop}
             ownerUrl={"fix it later"}
             assetColor={asset.publicInfo.color}
             assetLogo={asset.publicInfo.logoUrl}
-            // AssetDetailsExtraBlock={renderAssetDetailsExtraBlock}
-            // AssetFeesBlock={renderAssetFeesBlock}
-            // currency={description.tradingAccountInfo.currency}
+            AssetDetailsExtraBlock={() => (
+              <FundAssetsBlock
+                assets={asset.publicInfo.fundDetails.topFundAssets}
+              />
+            )}
+            AssetFeesBlock={() => (
+              <FundFeesBlock
+                entryFee={asset.publicInfo.fundDetails.entryFeeCurrent}
+                exitFee={asset.publicInfo.fundDetails.exitFeeCurrent}
+              />
+            )}
             title={asset.publicInfo.title}
             assetOwner={"fix it later"}
             form={form}
