@@ -1,14 +1,15 @@
 import SettingsBlock from "components/settings-block/settings-block";
 import { WalletSelectContainer } from "components/wallet-select/wallet-select.container";
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { convertToCurrency } from "utils/currency-converter";
+import { convertFromCurrency } from "utils/currency-converter";
 import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 import { depositAmountRules } from "utils/validators/validators";
 
 import { TUseAssetSectionOutput } from "../asset-section.hook";
 import InputDepositAmount from "./input-deposit-amount";
+import { useRulesValues } from "components/assets/fields/use-rules-values.hook";
 
 export interface IDepositDetailsDefaultBlockProps {
   hide?: boolean;
@@ -39,7 +40,6 @@ const _DepositDetailsDefaultBlock: React.FC<Props> = ({
   setFieldValue
 }) => {
   const [t] = useTranslation();
-
   const { isRatePending, rate, handleWalletChange, wallet } = assetSection;
 
   useEffect(() => {
@@ -48,10 +48,21 @@ const _DepositDetailsDefaultBlock: React.FC<Props> = ({
     setFieldValue(walletFieldName, wallet.id, true);
   }, [wallet]);
 
-  const minDepositInCur = convertToCurrency(minimumDepositAmount, rate);
+  const minDepositInCur = convertFromCurrency(minimumDepositAmount, rate);
   const minDepositInCurText = parseFloat(
     formatCurrencyValue(minDepositInCur, wallet.currency)
   );
+
+  const rules = useMemo(
+    () => ({
+      minValue: minDepositInCur,
+      minText: minDepositInCurText,
+      max: wallet.available
+    }),
+    [minDepositInCur, minDepositInCurText, wallet]
+  );
+
+  const { getValues } = useRulesValues(rules);
 
   return (
     <SettingsBlock
@@ -79,9 +90,7 @@ const _DepositDetailsDefaultBlock: React.FC<Props> = ({
           setFieldValue={setFieldValue}
           rules={depositAmountRules({
             t,
-            minValue: minDepositInCur,
-            minText: minDepositInCurText,
-            max: wallet.available
+            getValues
           })}
         />
       </div>

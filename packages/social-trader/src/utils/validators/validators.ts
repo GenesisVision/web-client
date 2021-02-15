@@ -246,28 +246,24 @@ export const twoFactorRules = (t: TFunction) => ({
 });
 
 export const depositAmountRules = ({
-  t,
-  minValue,
-  minText,
-  max
+  getValues,
+  t
 }: {
+  getValues: () => any;
   t: TFunction;
-  minValue: number;
-  minText?: number | string;
-  max: number;
-}) => ({
-  required: t("validations.amount-required"),
-  min: {
-    value: minValue,
-    message: t("validations.amount-is-zero", {
-      min: minText || minValue
-    })
-  },
-  max: {
-    value: max,
-    message: t("validations.amount-is-large")
-  }
-});
+}) => {
+  return {
+    validate: (value: number) => {
+      const { minValue, minText, max } = getValues();
+      if (value === undefined) return t("validations.amount-required");
+      if (value > max) return t("validations.amount-is-large");
+      if (value < minValue)
+        return t("validations.amount-is-zero", {
+          min: minText || minValue
+        });
+    }
+  };
+};
 
 export const getConfirmPasswordValidationRules = ({
   t,
