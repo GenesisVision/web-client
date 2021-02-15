@@ -45,13 +45,13 @@ const _DateRangeFilterCustom: React.FC<Props> = ({
     return (
         <>
             <Row>
-                <RowItem>{children}</RowItem>
                 <RowItem>
                     <Container
                         onClick={setAnchor}
                         onMouseEnter={setHover}
                         onMouseLeave={setLeave}
                     >
+                        <RowItem>{children}</RowItem>
                         <FilterArrowIcon hover={hover} isOpen={anchor !== undefined} />
                     </Container>
                 </RowItem>
