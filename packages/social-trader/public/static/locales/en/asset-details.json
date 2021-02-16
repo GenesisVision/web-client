@@ -38,6 +38,10 @@
       "period": "Reporting period is the interval of time in which the trader is to conduct trading operations of their Program and report the resulting profit or loss. Investments made by the investors appear on the Program balance at the beginning of the reporting period, while all of the resulting profit is distributed at the end of the reporting period.",
       "age": "Age of the program"
     },
+    "processing": {
+      "title": "Processing",
+      "real-time": "Real time"
+    },
     "personal-management-fee": "Management fee",
     "management-fee": "Management fee",
     "auto-join": "Ignore SO",
