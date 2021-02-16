@@ -177,25 +177,23 @@ const _CreateProgramSettings: React.FC<Props> = ({
               </Row>
             )}
             <Row>
-              {!isExchange && (
-                <RowItem>
-                  <BrokerAccount
-                    setAccountType={(value: string) =>
-                      setValue(CREATE_PROGRAM_FIELDS.brokerAccountTypeId, value)
-                    }
-                    setLeverage={(value: number) =>
-                      setValue(CREATE_PROGRAM_FIELDS.leverage, value)
-                    }
-                    setCurrency={(value: string) =>
-                      setValue(CREATE_PROGRAM_FIELDS.currency, value)
-                    }
-                    name={CREATE_PROGRAM_FIELDS.brokerAccountTypeId}
-                    accountTypes={
-                      (broker.accountTypes as unknown) as BrokerAccountType[]
-                    }
-                  />
-                </RowItem>
-              )}
+              <RowItem hide={isExchange}>
+                <BrokerAccount
+                  setAccountType={(value: string) =>
+                    setValue(CREATE_PROGRAM_FIELDS.brokerAccountTypeId, value)
+                  }
+                  setLeverage={(value: number) =>
+                    setValue(CREATE_PROGRAM_FIELDS.leverage, value)
+                  }
+                  setCurrency={(value: string) =>
+                    setValue(CREATE_PROGRAM_FIELDS.currency, value)
+                  }
+                  name={CREATE_PROGRAM_FIELDS.brokerAccountTypeId}
+                  accountTypes={
+                    (broker.accountTypes as unknown) as BrokerAccountType[]
+                  }
+                />
+              </RowItem>
               <RowItem>
                 <Currency
                   name={CREATE_PROGRAM_FIELDS.currency}
