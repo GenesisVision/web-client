@@ -99,10 +99,12 @@ const _DashboardPublicCard: React.FC<Props> = ({
         return (
           <InvestDefaultPopup
             popupTop={popupTop}
-            ownerUrl={asset.publicInfo.owner.url}
-            totalAvailableInvestment={
-              asset.publicInfo.programDetails.totalAvailableInvestment
-            }
+            ownerUrl={"test"}
+            // ownerUrl={asset.publicInfo.owner.url}
+            // totalAvailableInvestment={
+            //   asset.publicInfo.programDetails.totalAvailableInvestment
+            // }
+            totalAvailableInvestment={5000}
             assetColor={asset.publicInfo.color}
             assetLevelProgress={asset.publicInfo.programDetails.levelProgress}
             assetLevel={asset.publicInfo.programDetails.level}
@@ -110,9 +112,11 @@ const _DashboardPublicCard: React.FC<Props> = ({
             AssetDetailsExtraBlock={() => <DetailsTags tags={asset.tags} />}
             AssetFeesBlock={() => (
               <ProgramFeesBlock
-                currency={asset.accountInfo.originalCurrency}
+                currency={"USDT"}
+                // currency={asset.accountInfo.originalCurrency}
                 successFee={asset.publicInfo.programDetails.successFeeCurrent}
-                stopOut={asset.publicInfo.programDetails.stopOutLevelCurrent}
+                stopOut={0}
+                // stopOut={asset.publicInfo.programDetails.stopOutLevelCurrent}>
                 managementFee={
                   asset.publicInfo.programDetails.managementFeeCurrent
                 }
@@ -120,9 +124,11 @@ const _DashboardPublicCard: React.FC<Props> = ({
             )}
             brokerName={asset.broker.name}
             brokerLogo={asset.broker.logoUrl}
-            currency={asset.accountInfo.originalCurrency}
+            currency={"USDT"}
+            // currency={asset.accountInfo.originalCurrency}
             title={asset.publicInfo.title}
-            assetOwner={asset.publicInfo.owner.username}
+            assetOwner={"test"}
+            // assetOwner={asset.publicInfo.owner.username}
             form={form}
           />
         );
@@ -131,7 +137,8 @@ const _DashboardPublicCard: React.FC<Props> = ({
         return (
           <InvestDefaultPopup
             popupTop={popupTop}
-            ownerUrl={asset.publicInfo.owner.url}
+            ownerUrl={"test"}
+            // ownerUrl={asset.publicInfo.owner.url}
             assetColor={asset.publicInfo.color}
             assetLogo={asset.publicInfo.logoUrl}
             AssetDetailsExtraBlock={() => (
@@ -146,7 +153,8 @@ const _DashboardPublicCard: React.FC<Props> = ({
               />
             )}
             title={asset.publicInfo.title}
-            assetOwner={asset.publicInfo.owner.username}
+            assetOwner={"test"}
+            // assetOwner={asset.publicInfo.owner.username}
             form={form}
           />
         );
