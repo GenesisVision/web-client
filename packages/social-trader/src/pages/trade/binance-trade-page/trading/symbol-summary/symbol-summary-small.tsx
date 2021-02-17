@@ -147,7 +147,7 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
               {serverTime && (
                 <Text size={"xsmall"}>
                   <Text wrap={false}>
-                    <MonoText>{+markPrice.fundingRate} % </MonoText>
+                    <MonoText>{+markPrice.fundingRate * 100} % </MonoText>
                   </Text>
                   <MonoText>
                     {diffDate(
