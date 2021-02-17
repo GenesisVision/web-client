@@ -48,6 +48,7 @@ export const SymbolSummarySmallContainer: React.FC = () => {
 
 const _SymbolSummarySmallView: React.FC<Props> = ({
   data: {
+    serverTime,
     usdRate,
     markPrice,
     tickerData: {
@@ -67,6 +68,7 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
   const { exchangeAccountId, stepSize, tickSize } = useContext(
     TerminalInfoContext
   );
+  console.log(serverTime, serverTime && new Date(serverTime.date));
   const renderSymbol = () => (
     <h5>
       {baseAsset}/{quoteAsset}
@@ -142,14 +144,19 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
                 />
               }
             >
-              <Text size={"xsmall"}>
-                <MonoText>
-                  {+markPrice.fundingRate} %{" "}
-                  {diffDate(new Date(), markPrice.nextFundingTime).format(
-                    "HH:mm:ss"
-                  )}
-                </MonoText>
-              </Text>
+              {serverTime && (
+                <Text size={"xsmall"}>
+                  <Text wrap={false}>
+                    <MonoText>{+markPrice.fundingRate} % </MonoText>
+                  </Text>
+                  <MonoText>
+                    {diffDate(
+                      new Date(serverTime.date),
+                      markPrice.nextFundingTime
+                    ).format("HH:mm:ss")}
+                  </MonoText>
+                </Text>
+              )}
             </LabeledValue>
           </RowItem>
         </>

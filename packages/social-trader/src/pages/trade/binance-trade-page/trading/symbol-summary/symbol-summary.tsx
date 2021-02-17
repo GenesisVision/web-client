@@ -51,6 +51,7 @@ const SymbolSummaryLine: React.FC<{ label: string | JSX.Element }> = React.memo(
 
 const _SymbolSummaryView: React.FC<Props> = ({
   data: {
+    serverTime,
     usdRate,
     markPrice,
     tickerData: {
@@ -132,12 +133,15 @@ const _SymbolSummaryView: React.FC<Props> = ({
                   />
                 }
               >
-                <MonoText>
-                  {+markPrice.fundingRate} %{" "}
-                  {diffDate(new Date(), markPrice.nextFundingTime).format(
-                    "HH:mm:ss"
-                  )}
-                </MonoText>
+                {serverTime && (
+                  <MonoText>
+                    {+markPrice.fundingRate} %{" "}
+                    {diffDate(
+                      new Date(serverTime.date),
+                      markPrice.nextFundingTime
+                    ).format("HH:mm:ss")}
+                  </MonoText>
+                )}
               </SymbolSummaryLine>
             </>
           )}

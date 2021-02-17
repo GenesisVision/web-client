@@ -7,6 +7,7 @@ import { useContext, useEffect, useState } from "react";
 import { useSockets } from "services/websocket.service";
 import { safeGetElemFromArray } from "utils/helpers";
 import { useGetRate } from "hooks/get-rate.hook";
+import useApiRequest from "hooks/api-request.hook";
 
 export const useSymbolData = (): SymbolSummaryData | undefined => {
   const { rate, getRate } = useGetRate();
@@ -14,13 +15,20 @@ export const useSymbolData = (): SymbolSummaryData | undefined => {
 
   const [markPrice, setMarkPrice] = useState<MarkPrice | undefined>();
 
-  const { markPriceSocket, getMarkPrice } = useContext(TerminalMethodsContext);
+  const { getServerTime, markPriceSocket, getMarkPrice } = useContext(
+    TerminalMethodsContext
+  );
   const { items } = useContext(TerminalTickerContext);
   const { symbol, terminalType } = useContext(TerminalInfoContext);
   const textSymbol = getSymbolFromState(symbol);
   const tickerData = items
     ? safeGetElemFromArray(items, item => item.symbol === textSymbol)
     : undefined;
+
+  const { data: serverTime } = useApiRequest({
+    request: getServerTime,
+    fetchOnMount: true
+  });
 
   useEffect(() => {
     getRate({ from: symbol.baseAsset, to: "USDT" });
@@ -39,7 +47,14 @@ export const useSymbolData = (): SymbolSummaryData | undefined => {
     });
   }, [getMarkPrice, symbol, terminalType]);
 
-  return tickerData ? { tickerData, markPrice, usdRate: rate } : undefined;
+  return tickerData
+    ? {
+        serverTime,
+        tickerData,
+        markPrice,
+        usdRate: rate
+      }
+    : undefined;
 };
 
 export const getTickerSymbolLoaderData = (): SymbolSummaryData => {
