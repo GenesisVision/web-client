@@ -1,22 +1,12 @@
-import { DialogInfo } from "components/dialog/dialog-info";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import { ProgramWithdrawInfo } from "gv-api-web";
 import { useGetRate } from "hooks/get-rate.hook";
-import useTab from "hooks/tab.hook";
-import { IProgramWithdrawAmountFormValues } from "modules/program-withdraw/program-withdraw.helpers";
 import * as React from "react";
-import { useCallback, useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { useEffect } from "react";
 import { CurrencyEnum } from "utils/types";
 
-import ProgramWithdrawAmountForm from "./program-withdraw-amount-form";
-import { ProgramWithdrawConfirm } from "./program-withdraw-confirm-form";
+import ProgramWithdrawForm from "./program-withdraw-form";
 import ProgramWithdrawTop from "./program-withdraw-top";
-
-enum PROGRAM_WITHDRAW_FORM {
-  ENTER_AMOUNT = "ENTER_AMOUNT",
-  CONFIRM = "CONFIRM"
-}
 
 interface Props extends OwnProps, IProgramWithdrawPopupProps { }
 
@@ -55,40 +45,6 @@ const _ProgramWithdrawPopup: React.FC<Props> = ({
   useEffect(() => {
     getRate({ from: assetCurrency, to: accountCurrency });
   }, [assetCurrency, accountCurrency]);
-  const [t] = useTranslation();
-  const { tab, setTab } = useTab<PROGRAM_WITHDRAW_FORM>(
-    PROGRAM_WITHDRAW_FORM.ENTER_AMOUNT
-  );
-  const [
-    formValues,
-    setFormValues
-  ] = useState<IProgramWithdrawAmountFormValues>({
-    amount: "",
-    withdrawAll: false
-  });
-
-  const handleEnterAmountSubmit = useCallback(
-    (values: IProgramWithdrawAmountFormValues) => {
-      setFormValues(values);
-      setTab(null, PROGRAM_WITHDRAW_FORM.CONFIRM);
-    },
-    []
-  );
-
-  const handleGoToEnterAmountStep = useCallback(() => {
-    setTab(null, PROGRAM_WITHDRAW_FORM.ENTER_AMOUNT);
-  }, []);
-
-  const isAvailableProgramConfirmForm =
-    formValues.amount || formValues.withdrawAll;
-
-  const time = withdrawInPercent
-    ? new Date(periodEnds).toUTCString()
-    : t("withdraw-program.end");
-
-  const infoMessage = t("withdraw-program.info", {
-    time
-  });
 
   return renderAssetPopup(
     <ProgramWithdrawTop
@@ -98,37 +54,20 @@ const _ProgramWithdrawPopup: React.FC<Props> = ({
       programCurrency={assetCurrency}
       accountCurrency={accountCurrency}
     />,
-    <>
-      {tab === PROGRAM_WITHDRAW_FORM.ENTER_AMOUNT && (
-        <ProgramWithdrawAmountForm
-          GM={GM}
-          withdrawInPercent={withdrawInPercent}
-          isOwner={isOwner}
-          formValues={formValues}
-          rate={rate}
-          programCurrency={assetCurrency}
-          accountCurrency={accountCurrency}
-          availableToWithdraw={availableToWithdraw}
-          onSubmit={handleEnterAmountSubmit}
-        />
-      )}
-      {tab === PROGRAM_WITHDRAW_FORM.CONFIRM &&
-        isAvailableProgramConfirmForm && (
-          <ProgramWithdrawConfirm
-            withdrawInPercent={withdrawInPercent}
-            onApply={onApply}
-            id={id}
-            onClose={onClose}
-            formValues={formValues}
-            onBackClick={handleGoToEnterAmountStep}
-            programCurrency={assetCurrency}
-            periodEnds={periodEnds}
-          />
-        )}
-      {(!withdrawInPercent || !isProcessingRealTime) && (
-        <DialogInfo>{infoMessage}</DialogInfo>
-      )}
-    </>
+    <ProgramWithdrawForm
+      isProcessingRealTime={isProcessingRealTime}
+      withdrawInPercent={withdrawInPercent}
+      programCurrency={assetCurrency}
+      GM={GM}
+      isOwner={isOwner}
+      rate={rate}
+      accountCurrency={accountCurrency}
+      availableToWithdraw={availableToWithdraw}
+      onApply={onApply}
+      id={id}
+      onClose={onClose}
+      periodEnds={periodEnds}
+    />
   );
 };
 

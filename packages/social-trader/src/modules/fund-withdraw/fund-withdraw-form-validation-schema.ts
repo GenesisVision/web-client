@@ -4,7 +4,7 @@ import { number, object } from "yup";
 
 export const MIN_FUND_WITHDRAW_VALUE = 0.01;
 
-export const fundWithdrawAmountFormValidationSchema = (
+export const fundWithdrawFormValidationSchema = (
   t: TFunction,
   minAmount: number
 ) =>

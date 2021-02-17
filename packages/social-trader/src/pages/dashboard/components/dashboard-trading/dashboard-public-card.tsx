@@ -96,12 +96,13 @@ const _DashboardPublicCard: React.FC<Props> = ({
   const renderAssetPopup =
     asset.assetType === ASSET.PROGRAM
       ? (popupTop: JSX.Element, form: JSX.Element) => {
-        // totalAvailableInvestment ownerUrl currency stopOut assetOwner
         return (
           <InvestDefaultPopup
             popupTop={popupTop}
-            ownerUrl={"fix it later"}
-            // totalAvailableInvestment={}
+            ownerUrl={asset.publicInfo.owner.url}
+            totalAvailableInvestment={
+              asset.publicInfo.programDetails.totalAvailableInvestment
+            }
             assetColor={asset.publicInfo.color}
             assetLevelProgress={asset.publicInfo.programDetails.levelProgress}
             assetLevel={asset.publicInfo.programDetails.level}
@@ -109,9 +110,9 @@ const _DashboardPublicCard: React.FC<Props> = ({
             AssetDetailsExtraBlock={() => <DetailsTags tags={asset.tags} />}
             AssetFeesBlock={() => (
               <ProgramFeesBlock
-                currency={"USDT"}
+                currency={asset.accountInfo.originalCurrency}
                 successFee={asset.publicInfo.programDetails.successFeeCurrent}
-                stopOut={9999}
+                stopOut={asset.publicInfo.programDetails.stopOutLevelCurrent}
                 managementFee={
                   asset.publicInfo.programDetails.managementFeeCurrent
                 }
@@ -119,19 +120,18 @@ const _DashboardPublicCard: React.FC<Props> = ({
             )}
             brokerName={asset.broker.name}
             brokerLogo={asset.broker.logoUrl}
-            // currency={description.tradingAccountInfo.currency}
+            currency={asset.accountInfo.originalCurrency}
             title={asset.publicInfo.title}
-            assetOwner={"fix it later"}
+            assetOwner={asset.publicInfo.owner.username}
             form={form}
           />
         );
       }
       : (popupTop: JSX.Element, form: JSX.Element) => {
-        // ownerUrl assetOwner fundAssets????
         return (
           <InvestDefaultPopup
             popupTop={popupTop}
-            ownerUrl={"fix it later"}
+            ownerUrl={asset.publicInfo.owner.url}
             assetColor={asset.publicInfo.color}
             assetLogo={asset.publicInfo.logoUrl}
             AssetDetailsExtraBlock={() => (
@@ -146,7 +146,7 @@ const _DashboardPublicCard: React.FC<Props> = ({
               />
             )}
             title={asset.publicInfo.title}
-            assetOwner={"fix it later"}
+            assetOwner={asset.publicInfo.owner.username}
             form={form}
           />
         );

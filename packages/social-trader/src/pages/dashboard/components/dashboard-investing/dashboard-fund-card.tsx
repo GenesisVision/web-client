@@ -35,7 +35,6 @@ const _DashboardFundCard: React.FC<Props> = ({
   const investMessage = `${t("trading-schedule.invest-fund")} \n ${schedule}`;
 
   const renderFundPopup = (popupTop: JSX.Element, form: JSX.Element) => {
-    // fundAssets???
     return (
       <InvestDefaultPopup
         popupTop={popupTop}
