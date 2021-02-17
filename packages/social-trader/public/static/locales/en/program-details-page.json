@@ -81,6 +81,7 @@
       "li-1": "“Ignore SO” is turned off → your investment (minus losses) is returned to your wallet.",
       "li-2": "“Ignore SO” is turned on → your investment (minus losses) is reinvested in the program keeping all configured conditions saved."
     },
+    "processing": "Managers have the opportunity to choose when requests for investment / withdrawal of funds in the program will be processed. This can be in real time or every day at a scheduled time (for example, you can set a withdrawal at 5 pm).",
     "investment-scale": "The current value of the indicator, which depends on the Age, Volume Scale and Genesis Ratio. The indicator is set in a range from 1 to 20. Av. to invest = Investment scale * Manager Balance",
     "volume-scale": "This is a multiplier of the volume traded by the manager relative to the program balance for all periods. It is calculated similarly to the Genesis Ratio, being a weighted average over all given periods.",
     "genesis-ratio": "The ratio of the profit of the program against its risk. It is set in the range from 0 to 1. If Genesis Ratio <0.2, then the program is high risk and the InvScale is limited to 1, meaning that the manager can attract no more than his own deposit.",
