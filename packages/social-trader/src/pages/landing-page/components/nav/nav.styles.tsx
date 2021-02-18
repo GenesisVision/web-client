@@ -44,7 +44,6 @@ const linkStyles = css<INavLinkProps>`
   color: ${$mainColor};
 
   &:hover,
-  &:focus,
   &:active {
     color: ${$landingLinkHover};
   }
