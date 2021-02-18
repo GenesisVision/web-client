@@ -9,6 +9,7 @@ import { useContext, useState } from "react";
 import { calculatePercentage } from "utils/currency-converter";
 import { formatValue } from "utils/formatter";
 import { AnyObjectType } from "utils/types";
+import { TerminalPlaceOrderContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-place-order.context";
 
 export type SetSliderValueFunc = (
   sliderValue?: number,
@@ -32,6 +33,7 @@ export const useTradeSlider = ({
   balanceQuote: number;
   quantityName: string;
 }) => {
+  const { leverage } = useContext(TerminalPlaceOrderContext);
   const { stepSize, terminalType } = useContext(TerminalInfoContext);
   const { price } = watch();
   const [sliderValue, setSliderValue] = useState<number | undefined>();
@@ -46,7 +48,7 @@ export const useTradeSlider = ({
     setSliderValue(newValue);
     if (newValue === undefined || !shouldUpdate) return;
     if (side === "Buy") {
-      const fullTotal = calculatePercentage(balanceQuote, newValue);
+      const fullTotal = calculatePercentage(balanceQuote, newValue) * leverage;
       const newAmount = truncated(
         fullTotal / price,
         getDecimalScale(formatValue(stepSize))
@@ -54,21 +56,30 @@ export const useTradeSlider = ({
       setValue(quantityName, newAmount, true);
     }
     if (side === "Sell") {
-      const walletAvailable =
-        terminalType === "futures" ? balanceQuote : balanceBase;
-      const percentAmount = calculatePercentage(walletAvailable, newValue);
-      if (
-        truncated(percentAmount, getDecimalScale(formatValue(stepSize))) === 0
-      )
-        return;
-      const newQuantity =
-        newValue === MAX_TRADE_SLIDER_VALUE
-          ? balanceBase
-          : +terminalMoneyFormat({
-              amount: percentAmount,
-              tickSize: stepSize
-            });
-      setValue(quantityName, newQuantity, true);
+      if (terminalType === "spot") {
+        const percentAmount = calculatePercentage(balanceBase, newValue);
+        if (
+          truncated(percentAmount, getDecimalScale(formatValue(stepSize))) === 0
+        )
+          return;
+        const newQuantity =
+          newValue === MAX_TRADE_SLIDER_VALUE
+            ? balanceBase
+            : +terminalMoneyFormat({
+                amount: percentAmount,
+                tickSize: stepSize
+              });
+        setValue(quantityName, newQuantity, true);
+      }
+      if (terminalType === "futures") {
+        const percentAmount =
+          calculatePercentage(balanceQuote, newValue) * leverage;
+        const newAmount = truncated(
+          percentAmount / price,
+          getDecimalScale(formatValue(stepSize))
+        );
+        setValue(quantityName, newAmount, true);
+      }
     }
   };
   return { sliderValue, setSliderValue: handleSetSlider };

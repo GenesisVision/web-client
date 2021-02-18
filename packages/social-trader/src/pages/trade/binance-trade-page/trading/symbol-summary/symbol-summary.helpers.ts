@@ -2,26 +2,37 @@ import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/cont
 import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-methods.context";
 import { TerminalTickerContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-ticker.context";
 import { getSymbolFromState } from "pages/trade/binance-trade-page/trading/terminal.helpers";
-import {
-  MarkPrice,
-  SymbolSummaryData
-} from "pages/trade/binance-trade-page/trading/terminal.types";
+import { MarkPrice, SymbolSummaryData } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { useContext, useEffect, useState } from "react";
 import { useSockets } from "services/websocket.service";
 import { safeGetElemFromArray } from "utils/helpers";
+import { useGetRate } from "hooks/get-rate.hook";
+import useApiRequest from "hooks/api-request.hook";
 
-export const useSymbolData = () => {
+export const useSymbolData = (): SymbolSummaryData | undefined => {
+  const { rate, getRate } = useGetRate();
   const { connectSocket } = useSockets();
 
   const [markPrice, setMarkPrice] = useState<MarkPrice | undefined>();
 
-  const { markPriceSocket, getMarkPrice } = useContext(TerminalMethodsContext);
+  const { getServerTime, markPriceSocket, getMarkPrice } = useContext(
+    TerminalMethodsContext
+  );
   const { items } = useContext(TerminalTickerContext);
   const { symbol, terminalType } = useContext(TerminalInfoContext);
   const textSymbol = getSymbolFromState(symbol);
   const tickerData = items
     ? safeGetElemFromArray(items, item => item.symbol === textSymbol)
     : undefined;
+
+  const { data: serverTime } = useApiRequest({
+    request: getServerTime,
+    fetchOnMount: true
+  });
+
+  useEffect(() => {
+    getRate({ from: symbol.baseAsset, to: "USDT" });
+  }, [symbol]);
 
   useEffect(() => {
     if (!getMarkPrice) {
@@ -36,7 +47,14 @@ export const useSymbolData = () => {
     });
   }, [getMarkPrice, symbol, terminalType]);
 
-  return tickerData ? { tickerData, markPrice } : undefined;
+  return tickerData
+    ? {
+        serverTime,
+        tickerData,
+        markPrice,
+        usdRate: rate
+      }
+    : undefined;
 };
 
 export const getTickerSymbolLoaderData = (): SymbolSummaryData => {

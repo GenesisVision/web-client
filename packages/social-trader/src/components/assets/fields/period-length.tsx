@@ -21,6 +21,9 @@ const _PeriodLength: React.FC<Props> = ({ name, periods }) => {
         component={SimpleTextField}
         label={t("asset-settings:fields.period")}
         InputComponent={Select}
+        rules={{
+          required: t("validations.period-required")
+        }}
       >
         {periods.map((period: any) => (
           <option value={period} key={period}>

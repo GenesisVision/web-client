@@ -9,15 +9,14 @@ import { ASSET } from "constants/constants";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import { FundCreateAssetPlatformInfo, WalletData } from "gv-api-web";
 import * as React from "react";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { safeGetElemFromArray } from "utils/helpers";
 import { HookForm } from "utils/hook-form.helpers";
+import { entryFeeRules, exitFeeRules } from "utils/validators/validators";
 
 import { FUND_CURRENCY } from "../../create-fund.constants";
 import { AssetsField } from "./assets-field";
-import createFundSettingsValidationSchema from "./create-fund-settings.validators";
 
 export enum CREATE_FUND_FIELDS {
   available = "available",
@@ -48,8 +47,6 @@ const _CreateFundSettings: React.FC<Props> = ({
   errorMessage
 }) => {
   const { maxExitFee, maxEntryFee, minDeposit } = data;
-  const [available, setAvailable] = useState(0);
-  const [rate, setRate] = useState(1);
 
   const [t] = useTranslation();
 
@@ -62,14 +59,6 @@ const _CreateFundSettings: React.FC<Props> = ({
         ({ currency }) => currency === "GVT"
       ).id
     },
-    validationSchema: createFundSettingsValidationSchema({
-      selfManaged,
-      available,
-      rate,
-      wallets,
-      t,
-      data
-    }),
     mode: "onChange"
   });
   const { watch, setValue } = form;
@@ -109,6 +98,7 @@ const _CreateFundSettings: React.FC<Props> = ({
             "create-fund-page:settings.hints.entry-fee-description",
             { maxFee: maxEntryFee }
           )}
+          firstFeeRules={entryFeeRules(t, maxEntryFee)}
           secondFeeName={CREATE_FUND_FIELDS.exitFee}
           secondFeeLabel={t("create-fund-page:settings.fields.exit-fee")}
           secondFeeUnderText={t("create-fund-page:settings.hints.exit-fee")}
@@ -118,11 +108,10 @@ const _CreateFundSettings: React.FC<Props> = ({
               maxFee: maxExitFee
             }
           )}
+          secondFeeRules={exitFeeRules(t, maxExitFee)}
         />
       </SettingsBlock>
       <DepositDetailsBlock
-        setAvailable={setAvailable}
-        setRate={setRate}
         blockNumber={selfManaged ? 3 : 4}
         walletFieldName={CREATE_FUND_FIELDS.depositWalletId}
         inputName={CREATE_FUND_FIELDS.depositAmount}

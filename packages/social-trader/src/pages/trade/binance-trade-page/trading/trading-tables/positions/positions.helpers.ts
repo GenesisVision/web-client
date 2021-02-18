@@ -24,5 +24,8 @@ export const POSITIONS_TABLE_COLUMNS: SortingColumn[] = [
   },
   {
     name: "pnl"
+  },
+  {
+    name: "close-position"
   }
 ];

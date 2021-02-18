@@ -1,10 +1,10 @@
-import { AssetFields } from "components/assets/asset-fields/asset-field";
-import useAssetValidate from "components/assets/asset-validate.hook";
 import {
   getBrokerId,
   getCurrency,
   getLeverage
 } from "components/assets/asset.helpers";
+import { AssetFields } from "components/assets/asset-fields/asset-field";
+import useAssetValidate from "components/assets/asset-validate.hook";
 import BrokerAccount from "components/assets/fields/broker-account";
 import CreateAssetNavigation from "components/assets/fields/create-asset-navigation";
 import Currency from "components/assets/fields/currency";
@@ -15,7 +15,6 @@ import SettingsBlock from "components/settings-block/settings-block";
 import { Broker, BrokerAccountType } from "gv-api-web";
 import { KycRequiredBlock } from "pages/create-account/components/create-account-settings/kyc-required-block";
 import * as React from "react";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
@@ -23,8 +22,6 @@ import { kycConfirmedSelector } from "reducers/header-reducer";
 import { safeGetElemFromArray } from "utils/helpers";
 import { HookForm } from "utils/hook-form.helpers";
 import { CurrencyEnum } from "utils/types";
-
-import createAccountSettingsValidationSchema from "./create-account-settings.validators";
 
 export enum CREATE_ACCOUNT_FIELDS {
   depositWalletId = "depositWalletId",
@@ -53,8 +50,6 @@ const _CreateAccountSettings: React.FC<Props> = ({
   broker,
   onSubmit
 }) => {
-  const [available, setAvailable] = useState(0);
-  const [rate, setRate] = useState(1);
   const [t] = useTranslation();
 
   const form = useForm<ICreateAccountSettingsFormValues>({
@@ -67,12 +62,6 @@ const _CreateAccountSettings: React.FC<Props> = ({
       [CREATE_ACCOUNT_FIELDS.depositWalletId]: "",
       [CREATE_ACCOUNT_FIELDS.depositAmount]: undefined
     },
-    validationSchema: createAccountSettingsValidationSchema({
-      rate,
-      t,
-      broker,
-      available
-    }),
     mode: "onChange"
   });
   const {
@@ -137,8 +126,6 @@ const _CreateAccountSettings: React.FC<Props> = ({
             broker={accountType.type}
             hide={!accountType.isDepositRequired}
             blockNumber={2}
-            setAvailable={setAvailable}
-            setRate={setRate}
             walletFieldName={CREATE_ACCOUNT_FIELDS.depositWalletId}
             inputName={CREATE_ACCOUNT_FIELDS.depositAmount}
             depositAmount={depositAmount}

@@ -6,12 +6,7 @@ import { OrderSide } from "pages/trade/binance-trade-page/trading/terminal.types
 import { useContext, useEffect, useState } from "react";
 import { formatValue } from "utils/formatter";
 
-import {
-  PlaceOrderFormSetValueType,
-  PriceType,
-  QuantityType,
-  TotalType
-} from "../place-order.types";
+import { PlaceOrderFormSetValueType, PriceType, QuantityType, TotalType } from "../place-order.types";
 import { SetSliderValueFunc } from "./place-order-slider.hook";
 
 export const usePlaceOrderAutoFill = ({
@@ -66,7 +61,7 @@ export const usePlaceOrderAutoFill = ({
   useEffect(() => {
     if (!autoFill) {
       const value = +terminalMoneyFormat({
-        amount: leverage * +quantity * +price,
+        amount: (+quantity * +price) / leverage,
         tickSize: "0.00000001"
       });
       if (isNaN(value)) return;

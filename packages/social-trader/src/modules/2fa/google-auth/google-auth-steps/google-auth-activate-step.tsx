@@ -14,7 +14,7 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { HookForm } from "utils/hook-form.helpers";
-import { object, string } from "yup";
+import { twoFactorRules } from "utils/validators/validators";
 
 enum FIELDS {
   code = "code",
@@ -45,15 +45,6 @@ export const GoogleStep3: React.FC<Props> = ({
       [FIELDS.code]: "",
       [FIELDS.password]: ""
     },
-    validationSchema: object().shape({
-      [FIELDS.code]: string()
-        .trim()
-        .matches(/^\d{6}$/, t("validations.two-factor-6digits"))
-        .required(t("profile-page:2fa-page.code-required")),
-      [FIELDS.password]: enablePassword
-        ? string().required(t("profile-page:2fa-page.password-required"))
-        : string()
-    }),
     mode: "onChange"
   });
 
@@ -76,6 +67,7 @@ export const GoogleStep3: React.FC<Props> = ({
             InputComponent={NumberFormat}
             allowNegative={false}
             format="######"
+            rules={twoFactorRules(t)}
           />
         </Row>
         {enablePassword && (
@@ -86,6 +78,9 @@ export const GoogleStep3: React.FC<Props> = ({
               label={t("profile-page:2fa-page.password")}
               component={SimpleTextField}
               autocomplete="new-password"
+              rules={{
+                required: t("profile-page:2fa-page.password-required")
+              }}
             />
           </Row>
         )}

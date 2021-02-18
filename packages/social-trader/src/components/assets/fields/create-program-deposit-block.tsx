@@ -15,8 +15,6 @@ interface Props extends IDepositDetailsDefaultBlockProps {
 
 const _CreateProgramDepositBlock: React.FC<Props> = ({
   hide,
-  setAvailable,
-  setRate,
   blockNumber = 3,
   walletFieldName,
   inputName,
@@ -53,8 +51,6 @@ const _CreateProgramDepositBlock: React.FC<Props> = ({
     <DepositDetailsDefaultBlock
       assetSection={assetSection}
       hide={hide}
-      setRate={setRate}
-      setAvailable={setAvailable}
       blockNumber={blockNumber}
       walletFieldName={walletFieldName}
       inputName={inputName}

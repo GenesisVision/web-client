@@ -18,6 +18,7 @@ export interface CommonWalletType {
   rate?: number;
   isWithdrawalEnabled?: boolean;
   withdrawalCommission?: number;
+
 }
 
 export interface IWalletSelectProps {

@@ -42,7 +42,7 @@ const _OrderBookCurrentPrice: React.FC<Props> = ({
             displayType="text"
             thousandSeparator={","}
             value={equivalent}
-            suffix={equivalentCurrency}
+            suffix={` ${equivalentCurrency}`}
           />
         </RowItem>
       )}

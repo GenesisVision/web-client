@@ -7,8 +7,7 @@ import * as React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
-import { passwordValidator } from "utils/validators/validators";
-import { object, ref, string } from "yup";
+import { getConfirmPasswordValidationRules, passwordRules } from "utils/validators/validators";
 
 enum FIELDS {
   password = "password",
@@ -22,19 +21,10 @@ const _RestorePassword: React.FC<Props> = ({ errorMessage, onSubmit }) => {
       [FIELDS.password]: "",
       [FIELDS.confirmPassword]: ""
     },
-    validationSchema: object().shape({
-      [FIELDS.password]: passwordValidator(t),
-      [FIELDS.confirmPassword]: string()
-        .oneOf(
-          [ref(FIELDS.password)],
-          t("auth:password-restore.validators.password-dont-match")
-        )
-        .required(
-          t("auth:password-restore.validators.confirm-password-required")
-        )
-    }),
     mode: "onChange"
   });
+
+  const { watch } = form;
 
   return (
     <HookForm form={form} onSubmit={onSubmit}>
@@ -45,6 +35,7 @@ const _RestorePassword: React.FC<Props> = ({ errorMessage, onSubmit }) => {
         name={FIELDS.password}
         label={t("auth:password-restore.new-password.password-field-text")}
         component={SimpleTextField}
+        rules={passwordRules(t)}
       />
       <Row onlyOffset>
         <GVHookFormField
@@ -56,6 +47,7 @@ const _RestorePassword: React.FC<Props> = ({ errorMessage, onSubmit }) => {
             "auth:password-restore.new-password.password-confirm-field-text"
           )}
           component={SimpleTextField}
+          rules={getConfirmPasswordValidationRules({ watch, t })}
         />
       </Row>
       {errorMessage && (

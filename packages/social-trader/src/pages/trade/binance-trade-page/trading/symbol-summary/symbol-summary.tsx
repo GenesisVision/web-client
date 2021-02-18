@@ -20,6 +20,7 @@ import NumberFormat from "react-number-format";
 import { diffDate } from "utils/dates";
 
 import styles from "./symbol-summary.module.scss";
+import { formatCurrencyValue } from "utils/formatter";
 
 interface Props {
   data: SymbolSummaryData;
@@ -50,6 +51,8 @@ const SymbolSummaryLine: React.FC<{ label: string | JSX.Element }> = React.memo(
 
 const _SymbolSummaryView: React.FC<Props> = ({
   data: {
+    serverTime,
+    usdRate,
     markPrice,
     tickerData: {
       eventTime,
@@ -92,13 +95,13 @@ const _SymbolSummaryView: React.FC<Props> = ({
               </MonoText>
             </h4>
           </Row>
-          <Row>
-            <Text muted>
-              <MonoText>
-                ${terminalMoneyFormat({ amount: lastPrice, tickSize })}
-              </MonoText>
-            </Text>
-          </Row>
+          {usdRate && (
+            <Row>
+              <Text muted>
+                <MonoText>${formatCurrencyValue(usdRate, "USD")}</MonoText>
+              </Text>
+            </Row>
+          )}
         </RowItem>
         <RowItem wide>
           {markPrice && (
@@ -130,12 +133,15 @@ const _SymbolSummaryView: React.FC<Props> = ({
                   />
                 }
               >
-                <MonoText>
-                  {+markPrice.fundingRate} %{" "}
-                  {diffDate(new Date(), markPrice.nextFundingTime).format(
-                    "HH:mm:ss"
-                  )}
-                </MonoText>
+                {serverTime && (
+                  <MonoText>
+                    {+markPrice.fundingRate * 100} %{" "}
+                    {diffDate(
+                      new Date(serverTime.date),
+                      markPrice.nextFundingTime
+                    ).format("HH:mm:ss")}
+                  </MonoText>
+                )}
               </SymbolSummaryLine>
             </>
           )}

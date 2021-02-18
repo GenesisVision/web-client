@@ -210,13 +210,7 @@ export const cancelOrder = (
   }) as unknown) as Promise<BinanceRawCancelOrder>;
 
 const postFuturesOrder = (options: any) =>
-  api.terminal().futuresPlaceOrder({
-    ...options,
-    body: {
-      ...options.body,
-      positionSide: options.body.side === "Buy" ? "Long" : "Short"
-    }
-  });
+  api.terminal().futuresPlaceOrder(options);
 
 const { postSell, postBuy } = createPlaceBuySellOrderRequest(
   (postFuturesOrder as unknown) as PlaceOrderRequest

@@ -3,8 +3,8 @@ import CreateAssetNavigation from "components/assets/fields/create-asset-navigat
 import { Center } from "components/center/center";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import GVTextField from "components/gv-text-field";
-import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { RowItem } from "components/row-item/row-item";
 import Select, { ISelectChangeEvent } from "components/select/select";
 import SettingsBlock from "components/settings-block/settings-block";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
@@ -18,10 +18,7 @@ import { safeGetElemFromArray } from "utils/helpers";
 import { HookForm } from "utils/hook-form.helpers";
 
 import styles from "./attach-account-settings.module.scss";
-import {
-  attachAccountSettingsMapPropsToValues,
-  attachAccountSettingsValidationSchema
-} from "./attach-account-settings.validators";
+import { attachAccountSettingsMapPropsToValues } from "./attach-account-settings.validators";
 
 export enum ATTACH_ACCOUNT_FIELDS {
   brokerName = "brokerName",
@@ -60,7 +57,6 @@ const _AttachAccountSettings: React.FC<Props> = ({
       exchanges,
       requestBrokerName
     }),
-    validationSchema: attachAccountSettingsValidationSchema(t),
     mode: "onChange"
   });
   const {
@@ -144,6 +140,9 @@ const _AttachAccountSettings: React.FC<Props> = ({
             label={t("asset-settings:fields.api-key")}
             autoComplete="off"
             component={SimpleTextField}
+            rules={{
+              required: t("validations.api-key")
+            }}
           />
         </Row>
         <Row wide>
@@ -155,6 +154,9 @@ const _AttachAccountSettings: React.FC<Props> = ({
             label={t("asset-settings:fields.api-secret")}
             autoComplete="off"
             component={SimpleTextField}
+            rules={{
+              required: t("validations.api-secret")
+            }}
           />
         </Row>
       </SettingsBlock>

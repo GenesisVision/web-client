@@ -6,9 +6,10 @@ import { allowPositiveValuesNumberFormat } from "utils/helpers";
 
 interface Props {
   name: string;
+  currentValue?: number;
 }
 
-const _StopOutField: React.FC<Props> = ({ name }) => {
+const _StopOutField: React.FC<Props> = ({ currentValue, name }) => {
   const { t } = useTranslation();
   return (
     <AssetFormField
@@ -22,6 +23,17 @@ const _StopOutField: React.FC<Props> = ({ name }) => {
         "create-account:settings.hints.stop-out-level-description"
       )}
       hintContent={t("create-account:settings.hints.stop-out-level")}
+      rules={{
+        required: t("validations.stop-out-required"),
+        min: {
+          value: 10,
+          message: t("validations.stop-out-is-zero")
+        },
+        max: {
+          value: currentValue || 100,
+          message: t("validations.stop-out-is-large")
+        }
+      }}
     />
   );
 };

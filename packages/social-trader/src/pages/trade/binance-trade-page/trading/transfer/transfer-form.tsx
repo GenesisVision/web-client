@@ -4,19 +4,15 @@ import { CurrencyItem } from "components/currency-item/currency-item";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import HookFormAmountField from "components/input-amount-field/hook-form-amount-field";
 import { LabeledValue } from "components/labeled-value/labeled-value";
-import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { RowItem } from "components/row-item/row-item";
 import Select from "components/select/select";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
 import { SubmitButton } from "components/submit-button/submit-button";
 import { Text } from "components/text/text";
-import {
-  BalancesForTransfer,
-  TerminalCurrency
-} from "pages/trade/binance-trade-page/trading/terminal.types";
+import { BalancesForTransfer, TerminalCurrency } from "pages/trade/binance-trade-page/trading/terminal.types";
 import {
   ENABLE_TRANSFER_ACCOUNTS,
-  futuresTransferValidationSchema,
   getBalanceNameFromNumber,
   getMaxValueForFuturesTransfer,
   TRANSFER_FORM_FIELDS,
@@ -26,6 +22,7 @@ import React, { useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
+import { minMaxNumberRules } from "utils/validators/validators";
 
 import styles from "./transfer.module.scss";
 
@@ -48,10 +45,6 @@ const _TransferForm: React.FC<Props> = ({
       [TRANSFER_FORM_FIELDS.type]: 1,
       [TRANSFER_FORM_FIELDS.asset]: assetProp
     },
-    validationSchema: futuresTransferValidationSchema({
-      t,
-      balances: data
-    }),
     mode: "onChange"
   });
   const { watch, setValue, reset } = form;
@@ -163,6 +156,11 @@ const _TransferForm: React.FC<Props> = ({
           label={t("Amount")}
           currency={asset}
           name={TRANSFER_FORM_FIELDS.amount}
+          rules={minMaxNumberRules({
+            min: 0,
+            max: maxAmount,
+            t
+          })}
         />
       </Row>
       <Row>

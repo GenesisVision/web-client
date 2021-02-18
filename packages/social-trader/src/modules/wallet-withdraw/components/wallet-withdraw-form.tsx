@@ -13,8 +13,8 @@ import { WalletItemType } from "components/wallet-select/wallet-select";
 import { WalletSelectContainer } from "components/wallet-select/wallet-select.container";
 import { WalletData } from "gv-api-web";
 import {
-  WALLET_WITHDRAW_FIELDS,
-  walletWithdrawValidationSchema
+  getWalletWithdrawValidationSchema,
+  WALLET_WITHDRAW_FIELDS
 } from "modules/wallet-withdraw/components/wallet-withdraw-form.helpers";
 import * as React from "react";
 import { useCallback, useState } from "react";
@@ -24,6 +24,7 @@ import NumberFormat, { NumberFormatValues } from "react-number-format";
 import { formatCurrencyValue, validateFraction } from "utils/formatter";
 import { HookForm } from "utils/hook-form.helpers";
 import { CurrencyEnum } from "utils/types";
+import { twoFactorRules } from "utils/validators/validators";
 
 export interface IWalletWithdrawFormValues {
   [WALLET_WITHDRAW_FIELDS.currency]: CurrencyEnum;
@@ -55,11 +56,6 @@ const _WalletWithdrawForm: React.FC<Props> = ({
       [WALLET_WITHDRAW_FIELDS.id]: selected.id,
       [WALLET_WITHDRAW_FIELDS.currency]: selected.currency
     },
-    validationSchema: walletWithdrawValidationSchema({
-      t,
-      twoFactorEnabled,
-      currency
-    }),
     mode: "onChange"
   });
   const { reset, watch, setValue } = form;
@@ -114,6 +110,15 @@ const _WalletWithdrawForm: React.FC<Props> = ({
             onChange={onChangeCurrency}
           />
         </Row>
+        <Row hide>
+          <GVHookFormField
+            wide
+            name={WALLET_WITHDRAW_FIELDS.currency}
+            label={t("wallet-withdraw:address")}
+            component={SimpleTextField}
+            autoComplete="off"
+          />
+        </Row>
       </DialogTop>
       <DialogBottom>
         <Row>
@@ -123,6 +128,10 @@ const _WalletWithdrawForm: React.FC<Props> = ({
             label={t("wallet-withdraw:address")}
             component={SimpleTextField}
             autoComplete="off"
+            rules={getWalletWithdrawValidationSchema({
+              t,
+              watch
+            })}
           />
         </Row>
         <InputAmountField
@@ -141,6 +150,7 @@ const _WalletWithdrawForm: React.FC<Props> = ({
               label={t("labels.two-factor-code-label")}
               autoComplete="off"
               component={SimpleTextField}
+              rules={twoFactorRules(t)}
             />
           </Row>
         )}

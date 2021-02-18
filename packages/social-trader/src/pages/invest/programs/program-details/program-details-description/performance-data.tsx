@@ -9,6 +9,7 @@ import ProgramPeriodPie from "components/program-period/program-period-pie/progr
 import { RowItem } from "components/row-item/row-item";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import { STATUS } from "constants/constants";
+import dayjs from "dayjs";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import {
   BrokerDetails,
@@ -17,6 +18,7 @@ import {
 } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
+import { localizedDate } from "utils/dates";
 import { CurrencyEnum } from "utils/types";
 
 interface Props {
@@ -110,6 +112,28 @@ const _PerformanceData: React.FC<Props> = ({
                   start={programDetails.periodStarts}
                   end={programDetails.periodEnds}
                 />
+              </LabeledValue>
+            </RowItem>
+          )}
+          {programDetails && programDetails.type === "DailyPeriod" && (
+            <RowItem size={"xlarge"} bottomOffset>
+              <LabeledValue
+                label={
+                  <TooltipLabel
+                    tooltipContent={t(
+                      "program-details-page:tooltip.processing"
+                    )}
+                    labelText={t("asset-details:description.processing.title")}
+                  />
+                }
+              >
+                {programDetails.dailyPeriodDetails.isProcessingRealTime
+                  ? t("asset-details:description.processing.real-time")
+                  : `${localizedDate(
+                    programDetails.dailyPeriodDetails.nextProcessingDate
+                  )} ${dayjs(
+                    programDetails.dailyPeriodDetails.nextProcessingDate
+                  ).format("HH:mm")}`}
               </LabeledValue>
             </RowItem>
           )}

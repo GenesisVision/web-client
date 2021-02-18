@@ -18,7 +18,6 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { NumberFormatValues } from "react-number-format";
 import { HookForm } from "utils/hook-form.helpers";
-import { number, object } from "yup";
 
 enum FIELDS {
   type = "type",
@@ -30,6 +29,18 @@ enum CONDITION_TYPE_VALUES {
   Profit = "Profit",
   Level = "Level",
   AvailableToInvest = "AvailableToInvest"
+}
+
+interface Props {
+  asset: ProgramNotificationSettingList;
+  onSubmit: (values: ICustomNotificationCreateFormValues) => void;
+  errorMessage?: string;
+}
+
+export interface ICustomNotificationCreateFormValues {
+  [FIELDS.type]: NotificationType;
+  [FIELDS.conditionType]: NotificationSettingConditionType;
+  [FIELDS.conditionAmount]?: number;
 }
 
 const _CustomNotificationCreateForm: React.FC<Props> = ({
@@ -44,11 +55,6 @@ const _CustomNotificationCreateForm: React.FC<Props> = ({
       [FIELDS.conditionType]: CONDITION_TYPE_VALUES.Profit,
       [FIELDS.conditionAmount]: undefined
     },
-    validationSchema: object().shape({
-      [FIELDS.conditionAmount]: number().required(
-        t("notifications-page:create.amount-required")
-      )
-    }),
     mode: "onChange"
   });
 
@@ -108,6 +114,9 @@ const _CustomNotificationCreateForm: React.FC<Props> = ({
                 }
                 return true;
               }}
+              rules={{
+                required: t("notifications-page:create.amount-required")
+              }}
             />
           </Row>
           <DialogError error={errorMessage} />
@@ -124,15 +133,3 @@ const _CustomNotificationCreateForm: React.FC<Props> = ({
 
 const CustomNotificationCreateForm = React.memo(_CustomNotificationCreateForm);
 export default CustomNotificationCreateForm;
-
-interface Props {
-  asset: ProgramNotificationSettingList;
-  onSubmit: (values: ICustomNotificationCreateFormValues) => void;
-  errorMessage?: string;
-}
-
-export interface ICustomNotificationCreateFormValues {
-  [FIELDS.type]: NotificationType;
-  [FIELDS.conditionType]: NotificationSettingConditionType;
-  [FIELDS.conditionAmount]?: number;
-}

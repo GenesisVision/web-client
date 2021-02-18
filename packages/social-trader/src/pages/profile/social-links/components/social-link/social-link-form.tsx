@@ -1,8 +1,8 @@
 import SocialLinkImage from "components/avatar/social-link/social-link";
 import { Button } from "components/button/button";
 import { GVHookFormField } from "components/gv-hook-form-field";
-import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { RowItem } from "components/row-item/row-item";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
 import { SubmitButton } from "components/submit-button/submit-button";
 import { SocialLinkViewModel } from "gv-api-web";
@@ -15,7 +15,6 @@ import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { HookForm, postponeCallback } from "utils/hook-form.helpers";
 import { transition } from "utils/style/mixins";
-import { object, string } from "yup";
 
 enum FORM_FIELD {
   value = "value"
@@ -53,11 +52,6 @@ const _SocialLinkForm: React.FC<Props> = ({
     defaultValues: {
       [FORM_FIELD.value]: valueProp || ""
     },
-    validationSchema: object().shape({
-      [FORM_FIELD.value]: string()
-        .trim()
-        .max(100, t("validations.link-max-length"))
-    }),
     mode: "onChange"
   });
 
@@ -98,6 +92,12 @@ const _SocialLinkForm: React.FC<Props> = ({
                 if (!isButtonsVisible) setButtonsVisible();
               }}
               autoComplete="off"
+              rules={{
+                max: {
+                  value: 100,
+                  message: t("validations.link-max-length")
+                }
+              }}
             />
           </InputWrapper>
           {isButtonsVisible && (

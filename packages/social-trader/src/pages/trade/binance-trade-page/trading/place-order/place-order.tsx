@@ -25,9 +25,10 @@ import { formatValue } from "utils/formatter";
 
 import { LimitTradeForm } from "./limit-trade-form";
 import { MarketTradeForm } from "./market-trade-form";
-import { getBalance, getTradeType, mapPlaceOrderErrors } from "./place-order.helpers";
+import { getBalance, getPositionSide, getTradeType, mapPlaceOrderErrors } from "./place-order.helpers";
 import styles from "./place-order.module.scss";
 import { FilterValues, IPlaceOrderFormValues, TRADE_FORM_FIELDS } from "./place-order.types";
+import { TerminalPlaceOrderContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-place-order.context";
 
 interface Props {
   price: string;
@@ -46,6 +47,7 @@ const _PlaceOrder: React.FC<Props> = ({ filterValues, lastTrade, price }) => {
     accountInfo,
     symbol: { baseAsset, quoteAsset }
   } = useContext(TerminalInfoContext);
+  const { currentPositionMode } = useContext(TerminalPlaceOrderContext);
 
   const [side, setSide] = useState<OrderSide>("Buy");
   const { tab, setTab } = useTab<OrderType>("Limit");
@@ -68,8 +70,14 @@ const _PlaceOrder: React.FC<Props> = ({ filterValues, lastTrade, price }) => {
         values[TRADE_FORM_FIELDS.quantity],
         stepSize
       );
+      const positionSide = getPositionSide({
+        side,
+        positionMode: currentPositionMode,
+        terminalType
+      });
       return sendRequest({
         ...values,
+        positionSide,
         price: truncated(
           +values[TRADE_FORM_FIELDS.price],
           getDecimalScale(formatValue(tickSize))
@@ -81,15 +89,7 @@ const _PlaceOrder: React.FC<Props> = ({ filterValues, lastTrade, price }) => {
         symbol: getSymbol(baseAsset, quoteAsset)
       });
     },
-    [
-      tickSize,
-      stepSize,
-      exchangeAccountId,
-      baseAsset,
-      quoteAsset,
-      side,
-      tab,
-    ]
+    [tickSize, stepSize, exchangeAccountId, baseAsset, quoteAsset, side, tab]
   );
 
   const walletAsset =
