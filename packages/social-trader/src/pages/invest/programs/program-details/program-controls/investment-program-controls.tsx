@@ -45,7 +45,7 @@ const _InvestmentProgramControls: React.FC<Props> = ({
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   const canInvest = isAuthenticated
     ? !!programDetails.personalDetails &&
-      programDetails.personalDetails.canInvest
+    programDetails.personalDetails.canInvest
     : true;
   return (
     <DefaultBlock size={"large"} bordered>
@@ -61,32 +61,33 @@ const _InvestmentProgramControls: React.FC<Props> = ({
       <Row>
         <DetailsStatisticContainer>
           {programDetails.availableInvestmentBase === 0 &&
-          isAuthenticated &&
-          !isOwnProgram ? (
-            <NotifyButton
-              broker={brokerDetails.type}
-              canInvest={programDetails.personalDetails.canInvest}
-              currency={currency}
-              assetId={id}
-            />
-          ) : (
-            <DepositButton
-              isProcessingRealTime={
-                programDetails.dailyPeriodDetails?.isProcessingRealTime
-              }
-              disabled={!canInvest}
-              title={publicInfo.title}
-              onApply={onApply}
-              size={"xlarge"}
-              ownAsset={isOwnProgram}
-              entryFee={programDetails.managementFeeCurrent}
-              availableToInvest={programDetails.availableInvestmentBase}
-              broker={brokerDetails.type}
-              type={ASSET.PROGRAM}
-              id={id}
-              currency={tradingAccountInfo.currency}
-            />
-          )}
+            isAuthenticated &&
+            !isOwnProgram ? (
+              <NotifyButton
+                hasNotifications={programDetails.personalDetails.hasNotifications}
+                broker={brokerDetails.type}
+                canInvest={programDetails.personalDetails.canInvest}
+                currency={currency}
+                assetId={id}
+              />
+            ) : (
+              <DepositButton
+                isProcessingRealTime={
+                  programDetails.dailyPeriodDetails?.isProcessingRealTime
+                }
+                disabled={!canInvest}
+                title={publicInfo.title}
+                onApply={onApply}
+                size={"xlarge"}
+                ownAsset={isOwnProgram}
+                entryFee={programDetails.managementFeeCurrent}
+                availableToInvest={programDetails.availableInvestmentBase}
+                broker={brokerDetails.type}
+                type={ASSET.PROGRAM}
+                id={id}
+                currency={tradingAccountInfo.currency}
+              />
+            )}
         </DetailsStatisticContainer>
       </Row>
     </DefaultBlock>

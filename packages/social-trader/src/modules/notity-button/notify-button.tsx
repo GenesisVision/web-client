@@ -19,6 +19,7 @@ interface Props {
   assetId: string;
   currency: CurrencyEnum;
   canInvest: boolean;
+  hasNotifications: boolean;
 }
 
 const Hint = styled.div`
@@ -35,6 +36,7 @@ const Hint = styled.div`
 `;
 
 const _NotifyButton: React.FC<Props> = ({
+  hasNotifications,
   broker,
   canInvest,
   assetId,
@@ -59,7 +61,9 @@ const _NotifyButton: React.FC<Props> = ({
         <Button
           size={"xlarge"}
           onClick={handleClick}
-          disabled={Boolean(data || isPending || !canInvest)}
+          disabled={Boolean(
+            data || isPending || !canInvest || hasNotifications
+          )}
         >
           {t("buttons.notify")}
         </Button>
