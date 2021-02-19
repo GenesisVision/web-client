@@ -139,7 +139,9 @@ const _SymbolSummaryView: React.FC<Props> = ({
                     {diffDate(
                       new Date(serverTime.date),
                       markPrice.nextFundingTime
-                    ).format("HH:mm:ss")}
+                    )
+                      .utc()
+                      .format("HH:mm:ss")}
                   </MonoText>
                 )}
               </SymbolSummaryLine>

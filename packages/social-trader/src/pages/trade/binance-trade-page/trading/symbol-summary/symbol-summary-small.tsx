@@ -68,7 +68,7 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
   const { exchangeAccountId, stepSize, tickSize } = useContext(
     TerminalInfoContext
   );
-  console.log(serverTime, serverTime && new Date(serverTime.date));
+
   const renderSymbol = () => (
     <h5>
       {baseAsset}/{quoteAsset}
@@ -153,7 +153,9 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
                     {diffDate(
                       new Date(serverTime.date),
                       markPrice.nextFundingTime
-                    ).format("HH:mm:ss")}
+                    )
+                      .utc()
+                      .format("HH:mm:ss")}
                   </MonoText>
                 </Text>
               )}
