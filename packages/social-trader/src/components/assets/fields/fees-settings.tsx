@@ -1,20 +1,23 @@
 import AssetFormField from "components/assets/asset-fields/asset-form-field";
 import AssetRow from "components/assets/asset-fields/asset-row";
-import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { RowItem } from "components/row-item/row-item";
 import { SimpleNumberField } from "components/simple-fields/simple-number-field";
 import React from "react";
 import { allowPositiveValuesNumberFormat } from "utils/helpers";
+import { AnyObjectType } from "utils/types";
 
 interface Props {
   firstFeeLabel: string;
   firstFeeUnderText: string;
   firstFeeName: string;
   firstFeeDescription: string;
+  firstFeeRules?: AnyObjectType;
   secondFeeName: string;
   secondFeeLabel: string;
   secondFeeUnderText: string;
   secondFeeDescription: string;
+  secondFeeRules?: AnyObjectType;
   title?: string;
 }
 
@@ -24,10 +27,12 @@ const _FeesSettings: React.FC<Props> = ({
   firstFeeUnderText,
   firstFeeName,
   firstFeeDescription,
+  firstFeeRules,
   secondFeeName,
   secondFeeLabel,
   secondFeeUnderText,
-  secondFeeDescription
+  secondFeeDescription,
+  secondFeeRules
 }) => {
   return (
     <div>
@@ -47,6 +52,7 @@ const _FeesSettings: React.FC<Props> = ({
             isAllowed={allowPositiveValuesNumberFormat(4)}
             hintTooltipContent={firstFeeDescription}
             hintContent={firstFeeUnderText}
+            rules={firstFeeRules}
           />
         </RowItem>
         <RowItem>
@@ -59,6 +65,7 @@ const _FeesSettings: React.FC<Props> = ({
             isAllowed={allowPositiveValuesNumberFormat(4)}
             hintTooltipContent={secondFeeDescription}
             hintContent={secondFeeUnderText}
+            rules={secondFeeRules}
           />
         </RowItem>
       </AssetRow>

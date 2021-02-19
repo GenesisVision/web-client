@@ -1,10 +1,10 @@
 import cookie from "js-cookie";
-import { NextPageContext } from "next";
+import { GetServerSidePropsContext, NextPageContext } from "next";
 import nextCookie from "next-cookies";
 
 export const getCookie = (
   name: string,
-  ctx?: NextPageContext
+  ctx?: NextPageContext | GetServerSidePropsContext
 ): string | undefined => {
   return ctx ? nextCookie(ctx)[name] : cookie.get(name);
 };

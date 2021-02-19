@@ -50,7 +50,8 @@ const _PasswordRestoreContainer: React.FC<Props> = ({ userId, code }) => {
     [userId, code]
   );
 
-  if (!userId || !code) Push(NOT_FOUND_PAGE_ROUTE);
+  // if ((!userId || !code) && typeof window !== "undefined")
+  //   Push(NOT_FOUND_PAGE_ROUTE);
 
   return (
     <PasswordRestore errorMessage={errorMessage} onSubmit={handleSubmit} />

@@ -1,8 +1,6 @@
-import { isAllow } from "components/deposit/components/deposit.helpers";
-import HookFormAmountField from "components/input-amount-field/hook-form-amount-field";
 import { LabeledValue } from "components/labeled-value/labeled-value";
-import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { RowItem } from "components/row-item/row-item";
 import { API_REQUEST_STATUS } from "hooks/api-request.hook";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import { TerminalPlaceOrderContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-place-order.context";
@@ -18,7 +16,6 @@ import { HookForm } from "utils/hook-form.helpers";
 import { usePlaceOrderAutoFill } from "./hooks/place-order-auto-fill.hook";
 import { usePlaceOrderFormReset } from "./hooks/place-order-form-reset.hook";
 import { usePlaceOrderInfo } from "./hooks/place-order-info-hook";
-import { placeOrderDefaultValidationSchema } from "./place-order-validation";
 import {
   FilterValues,
   IPlaceOrderFormValues,
@@ -26,6 +23,9 @@ import {
   TRADE_FORM_FIELDS
 } from "./place-order.types";
 import { MarketTotalLabel } from "pages/trade/binance-trade-page/trading/place-order/market-total-label";
+import { TotalField } from "pages/trade/binance-trade-page/trading/place-order/forms/fields/total-field";
+import { QuantityField } from "pages/trade/binance-trade-page/trading/place-order/forms/fields/quantity-field";
+import { PriceField } from "pages/trade/binance-trade-page/trading/place-order/forms/fields/price-field";
 
 export interface IMarketTradeFormProps {
   filterValues: FilterValues;
@@ -52,9 +52,7 @@ const _MarketTradeForm: React.FC<
   const [t] = useTranslation();
 
   const {
-    tickSize,
-    stepSize,
-    symbol: { baseAsset, quoteAsset },
+    symbol: { baseAsset },
     terminalType
   } = useContext(TerminalInfoContext);
   const { currentPositionMode } = useContext(TerminalPlaceOrderContext);
@@ -76,19 +74,6 @@ const _MarketTradeForm: React.FC<
   });
 
   const form = useForm<IPlaceOrderFormValues>({
-    validationSchema: placeOrderDefaultValidationSchema({
-      t,
-      quoteAsset,
-      baseAsset,
-      stepSize: +stepSize,
-      tickSize: +tickSize,
-      maxTotal: maxTotalWithWallet,
-      maxPrice: +maxPrice,
-      minPrice: +minPrice,
-      maxQuantity: maxQuantityWithWallet,
-      minQuantity: +minQuantity,
-      minNotional: +minNotional
-    }),
     mode: "onChange"
   });
   const { triggerValidation, watch, setValue, reset } = form;
@@ -126,31 +111,18 @@ const _MarketTradeForm: React.FC<
       onSubmit={values => onSubmit({ ...values, type: "Market" })}
     >
       <Row hide>
-        <HookFormAmountField
-          autoFocus={false}
-          label={t("Price")}
-          currency={quoteAsset}
-          name={TRADE_FORM_FIELDS.price}
-        />
+        <PriceField min={minPrice} max={maxPrice} />
       </Row>
       <LabeledValue label={t("Price")}>{t("Market price")}</LabeledValue>
       <Row>
-        <HookFormAmountField
-          autoFocus={false}
-          label={t("Amount")}
-          currency={baseAsset}
-          name={TRADE_FORM_FIELDS.quantity}
-        />
+        <QuantityField min={minQuantity} max={maxQuantityWithWallet} />
       </Row>
       <Row>
-        <HookFormAmountField
-          disabled={true}
-          externalDirty={true}
-          autoFocus={false}
-          isAllowed={isAllow("BTC")}
-          label={isFutures ? t("Cost") : <MarketTotalLabel />}
-          currency={quoteAsset}
-          name={TRADE_FORM_FIELDS.total}
+        <TotalField
+          max={maxTotalWithWallet}
+          min={minNotional}
+          label={<MarketTotalLabel />}
+          disabled
         />
       </Row>
       <Row wide onlyOffset>

@@ -1,5 +1,4 @@
 import { IImageValue } from "components/form/input-image/input-image";
-import imageValidationSchema from "components/form/input-image/input-image.validation";
 import LogoField from "components/logo-field/logo-field";
 import { Row } from "components/row/row";
 import { SubmitButton } from "components/submit-button/submit-button";
@@ -8,10 +7,19 @@ import * as React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
-import { object } from "yup";
 
 enum FIELDS {
   logo = "logo"
+}
+
+interface Props {
+  errorMessage?: string;
+  avatar: string;
+  onSubmit: (image: IProfileImageFormValues) => void;
+}
+
+export interface IProfileImageFormValues {
+  logo: IImageValue;
 }
 
 const _ProfileImage: React.FC<Props> = ({ onSubmit, avatar, errorMessage }) => {
@@ -22,9 +30,6 @@ const _ProfileImage: React.FC<Props> = ({ onSubmit, avatar, errorMessage }) => {
         src: avatar
       }
     },
-    validationSchema: object().shape({
-      [FIELDS.logo]: imageValidationSchema(t)
-    }),
     mode: "onBlur"
   });
 
@@ -45,13 +50,3 @@ const _ProfileImage: React.FC<Props> = ({ onSubmit, avatar, errorMessage }) => {
 };
 const ProfileImage = React.memo(_ProfileImage);
 export default ProfileImage;
-
-interface Props {
-  errorMessage?: string;
-  avatar: string;
-  onSubmit: (image: IProfileImageFormValues) => void;
-}
-
-export interface IProfileImageFormValues {
-  logo: IImageValue;
-}

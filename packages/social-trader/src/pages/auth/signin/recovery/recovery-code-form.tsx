@@ -13,7 +13,6 @@ import { useCallback, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
-import { object, string } from "yup";
 
 enum FIELDS {
   code = "code",
@@ -30,11 +29,6 @@ const _RecoveryCodeForm: React.FC<Props> = ({
     defaultValues: {
       [FIELDS.code]: ""
     },
-    validationSchema: object().shape({
-      [FIELDS.code]: string()
-        .trim()
-        .required(t("validations.recovery-is-required"))
-    }),
     mode: "onChange"
   });
 
@@ -58,6 +52,9 @@ const _RecoveryCodeForm: React.FC<Props> = ({
           placeholder="Recovery code"
           autoFocus
           component={SimpleTextField}
+          rules={{
+            required: t("validations.recovery-is-required")
+          }}
         />
       </Row>
       {errorMessage && (

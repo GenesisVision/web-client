@@ -2,11 +2,8 @@ import {
   CommentInputMessage,
   CommentInputView
 } from "components/conversation/comment/comment-input/comment-input.view";
-import {
-  ConversationInputShape,
-  postMessageDefaultOptions
-} from "components/conversation/conversation-input/conversation-input.helpers";
 import { OnMessageSendFunc } from "components/conversation/conversation.types";
+import { postMessageDefaultOptions } from "components/conversation/conversation-input/conversation-input.helpers";
 import { PostContext } from "components/conversation/post/post.context";
 import { useSearchPanel } from "components/conversation/search-panel/search-panel.hook";
 import ErrorMessage from "components/error-message/error-message";
@@ -17,9 +14,7 @@ import { PostTag } from "gv-api-web";
 import { API_REQUEST_STATUS } from "hooks/api-request.hook";
 import React, { useCallback, useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
-import { object } from "yup";
 
 const MAX_IMAGES = 1;
 
@@ -43,12 +38,8 @@ interface Props {
 
 const _CommentInput: React.FC<Props> = ({ onSubmit, status, errorMessage }) => {
   const { replyState, setReplyState } = useContext(PostContext);
-  const [t] = useTranslation();
   const form = useForm<CommentInputFormValues>({
     defaultValues: postMessageDefaultOptions,
-    validationSchema: object().shape({
-      [FORM_FIELDS.text]: ConversationInputShape(t)
-    }),
     mode: "onChange"
   });
   const {

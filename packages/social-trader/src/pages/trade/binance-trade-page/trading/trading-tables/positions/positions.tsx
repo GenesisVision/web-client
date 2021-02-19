@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next";
 
 import { PositionsRow } from "./positions-row";
 import { POSITIONS_TABLE_COLUMNS } from "./positions.helpers";
-import styles from "./positions.module.scss";
+import { StyledTh } from "pages/trade/binance-trade-page/trading/trading-tables/positions/positions.styles";
 
 interface Props {
   items?: Position[];
@@ -32,13 +32,12 @@ export const Positions: React.FC<Props> = ({ items }) => {
     +marginBalance > 0 ? (+maintMargin / +marginBalance) * 100 : 0;
   return (
     <TradeTable
-      className={styles["positions__table"]}
       columns={POSITIONS_TABLE_COLUMNS}
       items={items}
       renderHeaderCell={({ name }) => (
-        <th>
+        <StyledTh>
           <Text muted>{t(`${name}`)}</Text>
-        </th>
+        </StyledTh>
       )}
       renderRow={(position: Position) => (
         <PositionsRow marginRatio={marginRatio} position={position} />

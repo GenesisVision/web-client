@@ -2,8 +2,8 @@ import { Button } from "components/button/button";
 import FormError from "components/form/form-error/form-error";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import Link from "components/link/link";
-import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { RowItem } from "components/row-item/row-item";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
 import { SubmitButton } from "components/submit-button/submit-button";
 import {
@@ -15,7 +15,7 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { LOGIN_ROUTE } from "routes/app.routes";
 import { HookForm } from "utils/hook-form.helpers";
-import { object, string } from "yup";
+import { emailRegex } from "utils/validators/validators";
 
 export enum FORGOT_PASSWORD_FORM_FIELDS {
   captchaCheckResult = "captchaCheckResult",
@@ -31,11 +31,6 @@ const _ForgotPasswordForm: React.FC<Props> = ({ onSubmit, errorMessage }) => {
     defaultValues: {
       [FORGOT_PASSWORD_FORM_FIELDS.email]: ""
     },
-    validationSchema: object().shape({
-      [FORGOT_PASSWORD_FORM_FIELDS.email]: string()
-        .email(t("auth:password-restore.validators.email-invalid"))
-        .required(t("auth:password-restore.validators.email-required"))
-    }),
     mode: "onChange"
   });
 
@@ -50,6 +45,13 @@ const _ForgotPasswordForm: React.FC<Props> = ({ onSubmit, errorMessage }) => {
         autoComplete="email"
         autoFocus
         component={SimpleTextField}
+        rules={{
+          required: t("auth:password-restore.validators.email-required"),
+          pattern: {
+            value: emailRegex,
+            message: t("auth:password-restore.validators.email-invalid")
+          }
+        }}
       />
       {errorMessage && (
         <Row>

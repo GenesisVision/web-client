@@ -1,5 +1,4 @@
 import {
-  ConversationInputShape,
   getPostMessageDefaultOptions,
   IPostMessageValues
 } from "components/conversation/conversation-input/conversation-input.helpers";
@@ -13,13 +12,11 @@ import { API_REQUEST_STATUS } from "hooks/api-request.hook";
 import useIsOpen from "hooks/is-open.hook";
 import React, { useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { HookForm, postponeFunc } from "utils/hook-form.helpers";
 import { $panelBackgroundColor } from "utils/style/colors";
 import { adaptiveBorderRadius } from "utils/style/mixins";
 import { $borderRadiusMiddle } from "utils/style/sizes";
-import { object } from "yup";
 
 const MAX_IMAGES = 10;
 
@@ -62,15 +59,11 @@ const _PostInput: React.FC<Props> = ({
   onSubmit,
   status
 }) => {
-  const [t] = useTranslation();
   const [isFocused, _, __, setFocused] = useIsOpen();
   const form = useForm<PostInputFormValues>({
     defaultValues: getPostMessageDefaultOptions({
       text: propText,
       images: propImages
-    }),
-    validationSchema: object().shape({
-      [FORM_FIELDS.text]: ConversationInputShape(t)
     }),
     mode: "onChange"
   });

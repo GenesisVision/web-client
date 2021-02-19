@@ -1,8 +1,8 @@
 import clsx from "clsx";
 import FormError from "components/form/form-error/form-error";
 import { GVHookFormField } from "components/gv-hook-form-field";
-import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { RowItem } from "components/row-item/row-item";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
 import { SubmitButton } from "components/submit-button/submit-button";
 import { ChangePasswordViewModel } from "gv-api-web";
@@ -10,8 +10,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
-
-import { passwordChangeValidationSchema } from "./password-change.validators";
+import { getConfirmPasswordValidationRules, passwordRules } from "utils/validators/validators";
 
 export enum PASSWORD_CHANGE_FORM_FIELDS {
   oldPassword = "oldPassword",
@@ -35,7 +34,6 @@ const _PasswordChangeForm: React.FC<IPasswordChangeFormOwnProps> = ({
       [PASSWORD_CHANGE_FORM_FIELDS.password]: "",
       [PASSWORD_CHANGE_FORM_FIELDS.confirmPassword]: ""
     },
-    validationSchema: passwordChangeValidationSchema(t),
     mode: "onBlur"
   });
   const {
@@ -62,6 +60,7 @@ const _PasswordChangeForm: React.FC<IPasswordChangeFormOwnProps> = ({
           type="password"
           autoComplete="new-password"
           autoFocus
+          rules={passwordRules(t)}
         />
       </Row>
       <Row>
@@ -73,6 +72,7 @@ const _PasswordChangeForm: React.FC<IPasswordChangeFormOwnProps> = ({
             type="password"
             name={PASSWORD_CHANGE_FORM_FIELDS.password}
             autoComplete="new-password"
+            rules={passwordRules(t)}
           />
         </RowItem>
         <RowItem>
@@ -83,6 +83,7 @@ const _PasswordChangeForm: React.FC<IPasswordChangeFormOwnProps> = ({
             type="password"
             name={PASSWORD_CHANGE_FORM_FIELDS.confirmPassword}
             autoComplete="new-password"
+            rules={getConfirmPasswordValidationRules({ watch, t })}
           />
         </RowItem>
       </Row>

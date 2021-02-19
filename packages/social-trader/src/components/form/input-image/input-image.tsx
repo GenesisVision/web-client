@@ -1,5 +1,4 @@
 import { DropZoneWrapper } from "components/form/input-image/drop-zone-wrapper";
-import { InputImageCropper } from "components/form/input-image/input-image-cropper";
 import {
   InputImageClearButton,
   InputImageContainer,
@@ -9,6 +8,7 @@ import {
   InputImageStyledSpan,
   InputImageStyledText
 } from "components/form/input-image/input-image.styles";
+import { InputImageCropper } from "components/form/input-image/input-image-cropper";
 import * as React from "react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
@@ -65,7 +65,7 @@ const _InputImage: React.FC<IInputImageProps> = ({
     [onChange]
   );
 
-  const hasSizeError = error && error.image.size;
+  const hasSizeError = error && error?.image?.size;
   return (
     <InputImageContainer error={!!error}>
       <DropZoneWrapper
@@ -108,9 +108,7 @@ const _InputImage: React.FC<IInputImageProps> = ({
       )}
       {error && (
         <div>
-          {Object.values(error.image).map((error: any) => (
-            <InputImageError>{error.message}</InputImageError>
-          ))}
+          <InputImageError>{error}</InputImageError>
         </div>
       )}
     </InputImageContainer>

@@ -8,10 +8,7 @@ import {
 import { NextPage } from "next";
 import { getAccept } from "pages/landing-page/components/cookie-message/cookie-message.helpers";
 import { LandingPage } from "pages/landing-page/landing.page";
-import {
-  getLandingAssets,
-  landingAssetsDefaultData
-} from "pages/landing-page/services/landing.service";
+import { getLandingAssets, landingAssetsDefaultData } from "pages/landing-page/services/landing.service";
 import React from "react";
 
 const IndexPage: NextPage<Props> = props => {

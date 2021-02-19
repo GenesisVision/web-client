@@ -31,6 +31,9 @@ const _Currency: React.FC<Props> = ({
         InputComponent={Select}
         disabled={disabled}
         disableIfSingle
+        rules={{
+          required: t("validations.currency-required")
+        }}
       >
         {accountCurrencies.map(currency => (
           <option value={currency} key={currency}>

@@ -1,19 +1,6 @@
 import { Broker } from "gv-api-web";
-import { TFunction } from "i18next";
-import { object, string } from "yup";
 
-import {
-  ATTACH_ACCOUNT_FIELDS,
-  IAttachAccountSettingsFormValues
-} from "./attach-account-settings";
-
-export const attachAccountSettingsValidationSchema = (t: TFunction) =>
-  object<IAttachAccountSettingsFormValues>().shape({
-    [ATTACH_ACCOUNT_FIELDS.secret]: string().required(
-      t("validations.api-secret")
-    ),
-    [ATTACH_ACCOUNT_FIELDS.key]: string().required(t("validations.api-key"))
-  });
+import { ATTACH_ACCOUNT_FIELDS } from "./attach-account-settings";
 
 export const attachAccountSettingsMapPropsToValues = ({
   exchanges,

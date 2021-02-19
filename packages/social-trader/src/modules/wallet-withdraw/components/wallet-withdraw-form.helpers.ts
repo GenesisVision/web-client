@@ -1,11 +1,6 @@
 import { TFunction } from "i18next";
-import { CurrencyEnum } from "utils/types";
-import {
-  btcWalletValidator,
-  ethGvtWalletValidator,
-  twoFactorValidator
-} from "utils/validators/validators";
-import { object } from "yup";
+import { IWalletWithdrawFormValues } from "modules/wallet-withdraw/components/wallet-withdraw-form";
+import { btcGvtWalletRules, ethGvtWalletRules } from "utils/validators/validators";
 
 export enum WALLET_WITHDRAW_FIELDS {
   id = "id",
@@ -15,39 +10,23 @@ export enum WALLET_WITHDRAW_FIELDS {
   twoFactorCode = "twoFactorCode"
 }
 
-export const walletWithdrawValidationSchema = ({
+export const getWalletWithdrawValidationSchema = ({
   t,
-  twoFactorEnabled,
-  currency
+  watch
 }: {
   t: TFunction;
-  twoFactorEnabled: boolean;
-  currency: CurrencyEnum;
+  watch: () => IWalletWithdrawFormValues;
 }) => {
+  const { currency } = watch();
+
   switch (currency) {
     case "GVT":
     case "ETH":
     case "USDC":
     case "USDT":
-      return object().shape({
-        [WALLET_WITHDRAW_FIELDS.address]: ethGvtWalletValidator.required(
-          t("validations.address-is-required")
-        ),
-        [WALLET_WITHDRAW_FIELDS.twoFactorCode]: twoFactorValidator(
-          t,
-          twoFactorEnabled
-        )
-      });
+      return ethGvtWalletRules(t);
     case "BTC":
     default:
-      return object().shape({
-        [WALLET_WITHDRAW_FIELDS.address]: btcWalletValidator.required(
-          t("validations.address-is-required")
-        ),
-        [WALLET_WITHDRAW_FIELDS.twoFactorCode]: twoFactorValidator(
-          t,
-          twoFactorEnabled
-        )
-      });
+      return btcGvtWalletRules(t);
   }
 };

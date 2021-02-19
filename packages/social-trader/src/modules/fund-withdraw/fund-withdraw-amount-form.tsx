@@ -7,13 +7,10 @@ import { SubmitButton } from "components/submit-button/submit-button";
 import { WalletItemType } from "components/wallet-select/wallet-select";
 import { WalletSelectContainer } from "components/wallet-select/wallet-select.container";
 import {
-  fundWithdrawAmountFormValidationSchema,
-  MIN_FUND_WITHDRAW_VALUE
-} from "modules/fund-withdraw/fund-withdraw-amount-form-validation-schema";
-import {
   FUND_WITHDRAW_FIELDS,
   FundWithDrawFormValues
 } from "modules/fund-withdraw/fund-withdraw.types";
+import { MIN_FUND_WITHDRAW_VALUE } from "modules/fund-withdraw/fund-withdraw-amount-form-validation-schema";
 import React, { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -65,7 +62,6 @@ const _FundWithdrawAmountForm: React.FC<Props> = ({
       [FUND_WITHDRAW_FIELDS.walletId]: initWalletId,
       [FUND_WITHDRAW_FIELDS.percent]: minPercent
     },
-    validationSchema: fundWithdrawAmountFormValidationSchema(t, minPercent),
     mode: "onChange"
   });
   const { watch, setValue } = form;
@@ -133,6 +129,13 @@ const _FundWithdrawAmountForm: React.FC<Props> = ({
           isAllowed={isAllow}
           setMax={setMax}
           setMin={setMin}
+          rules={{
+            required: t("validations.required"),
+            min: {
+              value: minPercent,
+              message: t("validations.min-value", { minAmount: minPercent })
+            }
+          }}
         />
       </Row>
       {minPercent === 100 && (

@@ -7,7 +7,6 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
 import { CurrencyEnum } from "utils/types";
-import { number, object } from "yup";
 
 enum FIELDS {
   hasInvestmentLimit = "hasInvestmentLimit",
@@ -30,17 +29,6 @@ const _InvestmentLimit: React.FC<Props> = ({
     defaultValues: {
       [FIELDS.investmentLimit]: investmentLimit
     },
-    validationSchema: object().shape({
-      [FIELDS.investmentLimit]: hasInvestmentLimit
-        ? number()
-            .min(0, t("validations.investment-limit-min"))
-            .lessThan(
-              10000000000,
-              "Investment Limit must be less than 10000000000"
-            )
-            .required(t("validations.investment-limit-required"))
-        : number()
-    }),
     mode: "onChange"
   });
 

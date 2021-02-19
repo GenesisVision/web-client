@@ -8,8 +8,6 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
 
-import { SignalValidationSchema } from "./program-signal.validators";
-
 enum FORM_FIELDS {
   successFee = "successFee",
   volumeFee = "volumeFee"
@@ -30,7 +28,6 @@ const _SignalingEdit: React.FC<Props> = ({
       [FORM_FIELDS.successFee]: successFee,
       [FORM_FIELDS.volumeFee]: volumeFee
     },
-    validationSchema: SignalValidationSchema({ followInfo, t }),
     mode: "onBlur"
   });
 
@@ -48,6 +45,10 @@ const _SignalingEdit: React.FC<Props> = ({
           inDialog={inDialog}
           volumeFeeFieldName={FORM_FIELDS.volumeFee}
           successFeeFieldName={FORM_FIELDS.successFee}
+          minSuccessFee={followInfo.minSuccessFee}
+          maxSuccessFee={followInfo.maxSuccessFee}
+          minVolumeFee={followInfo.minVolumeFee}
+          maxVolumeFee={followInfo.maxVolumeFee}
         />
       )}
 
