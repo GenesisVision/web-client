@@ -25,7 +25,6 @@ const linkStyle = css`
   color: ${$mainColor};
 
   &:hover,
-  &:focus,
   &:active {
     color: ${$landingLinkHover};
   }
