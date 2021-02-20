@@ -1,8 +1,7 @@
 import { LabeledValue } from "components/labeled-value/labeled-value";
-import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { RowItem } from "components/row-item/row-item";
 import { Text } from "components/text/text";
-import { withBlurLoader } from "decorators/with-blur-loader";
 import { PartnershipDetails } from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
@@ -45,6 +44,4 @@ interface Props {
   currency: CurrencyEnum;
 }
 
-export const ReferralRewardsBlock = withBlurLoader(
-  React.memo(_ReferralRewardsBlock)
-);
+export const ReferralRewardsBlock = React.memo(_ReferralRewardsBlock);
