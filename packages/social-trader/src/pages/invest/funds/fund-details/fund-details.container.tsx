@@ -1,10 +1,8 @@
 import DetailsDescriptionSection from "components/details/details-description-section/details-description/details-description-section";
 import DetailsInvestment from "components/details/details-description-section/details-investment/details-investment";
 import { DetailsDivider } from "components/details/details-divider.block";
-import FundAssetContainer from "components/fund-asset/fund-asset-container";
 import Page from "components/page/page";
 import { Row } from "components/row/row";
-import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import { ASSET } from "constants/constants";
 import { FundDetailsFull } from "gv-api-web";
 import { useAccountCurrency } from "hooks/account-currency.hook";
@@ -78,7 +76,12 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
   );
 
   const renderAssetDetailsExtraBlock = useCallback(
-    () => <FundAssetsBlock assets={description.assetsStructure} />,
+    (canExpand: boolean) => (
+      <FundAssetsBlock
+        canExpand={canExpand}
+        assets={description.assetsStructure}
+      />
+    ),
     [description.assetsStructure]
   );
 
@@ -99,7 +102,7 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
         ownerUrl={description.owner.url}
         assetColor={description.publicInfo.color}
         assetLogo={description.publicInfo.logoUrl}
-        AssetDetailsExtraBlock={renderAssetDetailsExtraBlock}
+        AssetDetailsExtraBlock={() => renderAssetDetailsExtraBlock(false)}
         AssetFeesBlock={renderAssetFeesBlock}
         title={description.publicInfo.title}
         assetOwner={description.owner.username}
