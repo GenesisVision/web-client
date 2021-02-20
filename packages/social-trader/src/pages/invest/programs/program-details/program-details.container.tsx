@@ -167,9 +167,6 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
       <InvestDefaultPopup
         popupTop={popupTop}
         ownerUrl={description.owner.url}
-        totalAvailableInvestment={
-          description.programDetails.totalAvailableInvestment
-        }
         assetColor={description.publicInfo.color}
         assetLevelProgress={description.programDetails.levelProgress}
         assetLevel={description.programDetails.level}
@@ -178,7 +175,6 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
         AssetFeesBlock={renderAssetFeesBlock}
         brokerName={description.brokerDetails.name}
         brokerLogo={description.brokerDetails.logoUrl}
-        currency={description.tradingAccountInfo.currency}
         title={description.publicInfo.title}
         assetOwner={description.owner.username}
         form={form}

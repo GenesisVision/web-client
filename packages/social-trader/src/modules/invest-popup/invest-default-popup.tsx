@@ -12,7 +12,6 @@ import {
   verticalPaddings
 } from "utils/style/mixins";
 import { $paddingSmall, $paddingUpperMedium } from "utils/style/sizes";
-import { CurrencyEnum } from "utils/types";
 
 import InvestPopupInfo from "./invest-popup-info";
 
@@ -30,8 +29,6 @@ interface Props {
   brokerName?: string;
   AssetDetailsExtraBlock?: React.ComponentType<any>;
   AssetFeesBlock?: React.ComponentType<any>;
-  totalAvailableInvestment?: number;
-  currency?: CurrencyEnum;
 }
 
 const MainContentContainer = styled.div`
@@ -69,7 +66,6 @@ ${mediaBreakpointLandscapeTablet(`
 
 const _InvestDefaultPopup: React.FC<Props> = ({
   ownerUrl,
-  totalAvailableInvestment,
   assetColor,
   assetLevelProgress,
   assetLevel,
@@ -79,7 +75,6 @@ const _InvestDefaultPopup: React.FC<Props> = ({
   AssetFeesBlock,
   brokerName,
   brokerLogo,
-  currency,
   title,
   assetOwner,
   popupTop
@@ -90,12 +85,10 @@ const _InvestDefaultPopup: React.FC<Props> = ({
       <MainContentContainer>
         <InvestPopupInfo
           ownerUrl={ownerUrl}
-          totalAvailableInvestment={totalAvailableInvestment}
           assetColor={assetColor}
           assetLevelProgress={assetLevelProgress}
           assetLevel={assetLevel}
           assetLogo={assetLogo}
-          currency={currency!}
           AssetFeesBlock={AssetFeesBlock}
           AssetDetailsExtraBlock={AssetDetailsExtraBlock}
           brokerLogo={brokerLogo}

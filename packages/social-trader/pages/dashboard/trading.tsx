@@ -13,7 +13,6 @@ Page.getInitialProps = async () => ({
   namespacesRequired: [
     "follow-details-page",
     "program-details-page",
-    "about-levels-page",
     "create-fund-page",
     "create-account",
     "profile-page",

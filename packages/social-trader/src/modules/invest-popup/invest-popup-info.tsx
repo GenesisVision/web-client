@@ -1,6 +1,7 @@
-import DetailsAssetAvatar from "components/details/details-description-section/details-description/details-asset-avatar";
+import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
 import { DetailsBroker } from "components/details/details-description-section/details-description/details-structure-blocks";
 import { DetailsSubtitle } from "components/details/details-description-section/details-description/details-subtitle.block";
+import LevelTooltip from "components/level-tooltip/level-tooltip";
 import { Row } from "components/row/row";
 import { RowItem } from "components/row-item/row-item";
 import { Text } from "components/text/text";
@@ -10,14 +11,12 @@ import styled from "styled-components";
 import { mediaBreakpointTablet } from "utils/style/media";
 import { adaptiveGridGap, horizontalPaddings } from "utils/style/mixins";
 import { $paddingMedium, $paddingSmall } from "utils/style/sizes";
-import { CurrencyEnum } from "utils/types";
 
 interface Props {
     ownerUrl: string;
     assetOwner: string;
     assetLogo: string;
     assetColor: string;
-    currency: CurrencyEnum;
     title: string;
     AssetDetailsExtraBlock?: React.ComponentType<any>;
     AssetFeesBlock?: React.ComponentType<any>;
@@ -26,7 +25,6 @@ interface Props {
     level?: number;
     brokerLogo?: string;
     brokerName?: string;
-    totalAvailableInvestment?: number;
 }
 
 const Container = styled.div`
@@ -56,14 +54,12 @@ const _InvestPopupInfo: React.FC<Props> = ({
     ownerUrl,
     assetLevelProgress,
     assetColor,
-    totalAvailableInvestment,
     assetLevel,
     assetLogo,
     assetOwner,
     AssetDetailsExtraBlock,
     AssetFeesBlock,
     brokerLogo,
-    currency,
     brokerName,
     title
 }) => {
@@ -71,15 +67,19 @@ const _InvestPopupInfo: React.FC<Props> = ({
         <Container>
             <Row>
                 <AvatarContainer size={"xlarge"}>
-                    <DetailsAssetAvatar
-                        logo={assetLogo}
-                        title={title}
-                        color={assetColor}
-                        currency={currency}
+                    <AssetAvatar
+                        levelColor={"#131e26"}
+                        url={assetLogo}
                         level={assetLevel}
                         levelProgress={assetLevelProgress}
-                        totalAvailableInvestment={totalAvailableInvestment}
+                        alt={title}
+                        color={assetColor}
                         size={"middle"}
+                        tooltip={
+                            assetLevel ? (
+                                <LevelTooltip level={assetLevel} canLevelUp={false} />
+                            ) : undefined
+                        }
                     />
                 </AvatarContainer>
                 <AvatarText>

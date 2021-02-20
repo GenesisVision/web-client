@@ -101,10 +101,6 @@ const _DashboardPublicCard: React.FC<Props> = ({
             popupTop={popupTop}
             ownerUrl={"test"}
             // ownerUrl={asset.publicInfo.owner.url}
-            // totalAvailableInvestment={
-            //   asset.publicInfo.programDetails.totalAvailableInvestment
-            // }
-            totalAvailableInvestment={5000}
             assetColor={asset.publicInfo.color}
             assetLevelProgress={asset.publicInfo.programDetails.levelProgress}
             assetLevel={asset.publicInfo.programDetails.level}
@@ -124,8 +120,6 @@ const _DashboardPublicCard: React.FC<Props> = ({
             )}
             brokerName={asset.broker.name}
             brokerLogo={asset.broker.logoUrl}
-            currency={"USDT"}
-            // currency={asset.accountInfo.originalCurrency}
             title={asset.publicInfo.title}
             assetOwner={"test"}
             // assetOwner={asset.publicInfo.owner.username}

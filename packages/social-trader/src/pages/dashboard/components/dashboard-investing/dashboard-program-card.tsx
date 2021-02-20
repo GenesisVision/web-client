@@ -67,8 +67,6 @@ const _DashboardProgramCard: React.FC<Props> = ({
       <InvestDefaultPopup
         popupTop={popupTop}
         ownerUrl={program.owner.url}
-        totalAvailableInvestment={5000}
-        // totalAvailableInvestment={program.totalAvailableInvestment}
         assetColor={program.color}
         assetLevelProgress={program.levelProgress}
         assetLevel={program.level}
@@ -77,7 +75,6 @@ const _DashboardProgramCard: React.FC<Props> = ({
         AssetFeesBlock={renderAssetFeesBlock}
         brokerName={program.brokerDetails.name}
         brokerLogo={program.brokerDetails.logoUrl}
-        currency={program.currency}
         title={program.title}
         assetOwner={program.owner.username}
         form={form}
