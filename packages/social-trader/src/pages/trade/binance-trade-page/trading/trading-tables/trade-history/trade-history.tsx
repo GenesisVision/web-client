@@ -8,23 +8,24 @@ import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
 
 import { TradeHistoryRow } from "./trade-history-row";
-import {
-  TRADE_HISTORY_TABLE_COLUMNS,
-  updateTradeHistoryData
-} from "./trade-history.helpers";
+import { TRADE_HISTORY_TABLE_COLUMNS, updateTradeHistoryData } from "./trade-history.helpers";
 import styles from "./trade-history.module.scss";
+import { useSelector } from "react-redux";
+import { isAuthenticatedSelector } from "reducers/auth-reducer";
 
 interface Props {
   updates?: UnitedOrder[];
 }
 
 export const TradeHistory: React.FC<Props> = ({ updates }) => {
+  const isAuthenticated = useSelector(isAuthenticatedSelector);
   const { getAllTrades } = useContext(TerminalMethodsContext);
   const { exchangeAccountId } = useContext(TerminalInfoContext);
   const [t] = useTranslation();
 
   const getItems = useCallback(
     (filters?: ComposeFiltersAllType) => {
+      if (!isAuthenticated) return Promise.resolve({ items: [], total: 0 });
       return getAllTrades({
         ...filters,
         accountId: exchangeAccountId
