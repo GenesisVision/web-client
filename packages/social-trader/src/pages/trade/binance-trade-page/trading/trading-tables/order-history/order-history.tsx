@@ -14,18 +14,22 @@ import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
 
 import styles from "./order-history.module.scss";
+import { useSelector } from "react-redux";
+import { isAuthenticatedSelector } from "reducers/auth-reducer";
 
 interface Props {
   updates?: UnitedOrder[];
 }
 
 export const OrderHistory: React.FC<Props> = ({ updates }) => {
+  const isAuthenticated = useSelector(isAuthenticatedSelector);
   const { getAllOrders } = useContext(TerminalMethodsContext);
   const { exchangeAccountId } = useContext(TerminalInfoContext);
   const [t] = useTranslation();
 
   const getItems = useCallback(
     (filters?: ComposeFiltersAllType) => {
+      if (!isAuthenticated) return Promise.resolve({ items: [], total: 0 });
       return getAllOrders({
         ...filters,
         accountId: exchangeAccountId

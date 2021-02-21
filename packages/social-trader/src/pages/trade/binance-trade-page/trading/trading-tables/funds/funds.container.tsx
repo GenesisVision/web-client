@@ -49,7 +49,13 @@ export const FundsContainer: React.FC = () => {
     });
   }, [socketData]);
 
-  const items = useMemo(() => Object.values(list).sort(sortFundsFunc), [list]);
+  const items = useMemo(
+    () =>
+      Object.values(list)
+        .sort(sortFundsFunc)
+        .filter(({ free, locked }) => free - locked > 0),
+    [list]
+  );
 
   return <Funds items={items} />;
 };
