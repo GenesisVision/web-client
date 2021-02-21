@@ -1,6 +1,5 @@
 import clsx from "clsx";
 import { SortingColumn } from "components/table/components/filtering/filter.type";
-import { Text } from "components/text/text";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Sizeable } from "utils/types";
@@ -37,7 +36,7 @@ const _TradeTable: React.FC<Props> = ({
       <tr>
         <td colSpan={11}>
           <div className={styles["trade-table__empty-message"]}>
-            <Text muted>{t("table.no-items")}</Text>
+            {t("table.no-items")}
           </div>
         </td>
       </tr>
