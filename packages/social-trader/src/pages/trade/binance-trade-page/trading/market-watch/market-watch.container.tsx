@@ -4,7 +4,11 @@ import React, { useContext } from "react";
 
 const _MarketWatchContainer: React.FC = () => {
   const { items } = useContext(TerminalTickerContext);
-  return items?.length ? <MarketWatch items={items} /> : null;
+  return items?.length ? (
+    <MarketWatch
+      items={items.filter(({ permissions }) => permissions.includes("Spot"))}
+    />
+  ) : null;
 };
 
 export const MarketWatchContainer = React.memo(_MarketWatchContainer);
