@@ -1,14 +1,13 @@
-import { DialogTop } from "components/dialog/dialog-top";
+import InvestPopupTop from "modules/invest-popup/invest-popup-top";
 import React from "react";
-import { useTranslation } from "react-i18next";
 
 export interface IFollowTop {
-  step: string;
+  title: string;
+  header: string;
 }
 
-const _FollowTop: React.FC<IFollowTop> = ({ step }) => {
-  const [t] = useTranslation();
-  return <DialogTop title={t(`follow-program.${step}.title`)} />;
+const _FollowTop: React.FC<IFollowTop> = ({ title: subtitle, header }) => {
+  return <InvestPopupTop title={header} subtitle={subtitle} />;
 };
 
 const FollowTop = React.memo(_FollowTop);

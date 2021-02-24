@@ -18,6 +18,7 @@ import SignalInfo from "../follow-details-description/signal-info";
 import SignalProviderButtons from "../signal-provider-buttons";
 
 const _FollowControls: React.FC<Props> = ({
+  renderAssetPopup,
   isOwnAsset,
   onApply,
   publicInfo: { title },
@@ -39,6 +40,8 @@ const _FollowControls: React.FC<Props> = ({
           {isAuthenticated ? (
             !isOwnAsset && (
               <SignalProviderButtons
+                title={title}
+                renderAssetPopup={renderAssetPopup}
                 onApply={onApply}
                 guestActions={personalDetails && personalDetails.guestActions}
                 leverage={leverageMax}
@@ -49,14 +52,14 @@ const _FollowControls: React.FC<Props> = ({
               />
             )
           ) : (
-            <InvestmentUnauthButton
-              label={t("asset-details:description.follow-trade")}
-              asset={ASSET.FOLLOW}
-              header={t("asset-details:description.follow-trade")}
-              message={t("asset-details:unauth-popup.follow")}
-              title={title}
-            />
-          )}
+              <InvestmentUnauthButton
+                label={t("asset-details:description.follow-trade")}
+                asset={ASSET.FOLLOW}
+                header={t("asset-details:description.follow-trade")}
+                message={t("asset-details:unauth-popup.follow")}
+                title={title}
+              />
+            )}
         </DetailsStatisticContainer>
       </Row>
     </SignalProviderControls>
@@ -64,6 +67,7 @@ const _FollowControls: React.FC<Props> = ({
 };
 
 interface Props {
+  renderAssetPopup: (popupTop: JSX.Element, form: JSX.Element) => JSX.Element;
   isOwnAsset: boolean;
   onApply: VoidFunction;
   publicInfo: AssetPublicDetails;

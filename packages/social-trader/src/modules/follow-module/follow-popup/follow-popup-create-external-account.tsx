@@ -30,33 +30,31 @@ const _FollowCreateExternalAccount: React.FC<CreateAccountFormProps> = ({
 
   return (
     <HookForm form={form} onSubmit={onClick}>
-      <DialogBottom>
-        <Row>
-          <GVHookFormField
-            wide
-            type="text"
-            name={CREATE_EXTERNAL_ACCOUNT_FORM_FIELDS.key}
-            label={t("asset-settings:fields.api-key")}
-            autoComplete="off"
-            component={SimpleTextField}
-          />
-        </Row>
-        <Row>
-          <GVHookFormField
-            wide
-            type="text"
-            name={CREATE_EXTERNAL_ACCOUNT_FORM_FIELDS.secret}
-            label={t("asset-settings:fields.api-secret")}
-            autoComplete="off"
-            component={SimpleTextField}
-          />
-        </Row>
-        <DialogButtons>
-          <SubmitButton wide>
-            {t("follow-program.create-account.next")}
-          </SubmitButton>
-        </DialogButtons>
-      </DialogBottom>
+      <Row>
+        <GVHookFormField
+          wide
+          type="text"
+          name={CREATE_EXTERNAL_ACCOUNT_FORM_FIELDS.key}
+          label={t("asset-settings:fields.api-key")}
+          autoComplete="off"
+          component={SimpleTextField}
+        />
+      </Row>
+      <Row>
+        <GVHookFormField
+          wide
+          type="text"
+          name={CREATE_EXTERNAL_ACCOUNT_FORM_FIELDS.secret}
+          label={t("asset-settings:fields.api-secret")}
+          autoComplete="off"
+          component={SimpleTextField}
+        />
+      </Row>
+      <DialogButtons>
+        <SubmitButton wide>
+          {t("follow-program.create-account.next")}
+        </SubmitButton>
+      </DialogButtons>
     </HookForm>
   );
 };

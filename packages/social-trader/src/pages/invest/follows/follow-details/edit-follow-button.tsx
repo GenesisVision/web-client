@@ -8,6 +8,8 @@ import { useTranslation } from "react-i18next";
 import { CurrencyEnum, Sizeable } from "utils/types";
 
 const _EditFollowButton: React.FC<Props> = ({
+  title,
+  renderAssetPopup,
   size = "xlarge",
   signalSubscription,
   onApply,
@@ -26,6 +28,8 @@ const _EditFollowButton: React.FC<Props> = ({
         {t("buttons.edit")}
       </Button>
       <EditFollowModuleContainer
+        title={title}
+        renderAssetPopup={renderAssetPopup}
         signalSubscription={signalSubscription}
         tradingAccountId={tradingAccountId}
         id={id}
@@ -39,6 +43,8 @@ const _EditFollowButton: React.FC<Props> = ({
 };
 
 interface Props extends Sizeable {
+  title: string;
+  renderAssetPopup: (popupTop: JSX.Element, form: JSX.Element) => JSX.Element;
   signalSubscription: SignalSubscription;
   onApply: VoidFunction;
   tradingAccountId: string;

@@ -5,9 +5,9 @@ import { useToLink } from "components/link/link.helper";
 import { RowItem } from "components/row-item/row-item";
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
-import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import Tooltip from "components/tooltip/tooltip";
 import { TooltipContent } from "components/tooltip/tooltip-content";
+import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import { SignalSubscription } from "gv-api-web";
 import EditFollowButton from "pages/invest/follows/follow-details/edit-follow-button";
 import UnFollowButton from "pages/invest/follows/follow-details/unfollow-button";
@@ -24,6 +24,8 @@ import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 
 const _SubscriptionTableRow: React.FC<Props> = ({
+  title,
+  renderAssetPopup,
   id,
   onApply,
   data: subscriptionInfo,
@@ -33,15 +35,15 @@ const _SubscriptionTableRow: React.FC<Props> = ({
   const { linkCreator } = useToLink();
   const link = subscriptionInfo.subscriberInfo.asset
     ? linkCreator(
-        composeFollowDetailsUrl(subscriptionInfo.subscriberInfo.asset.url),
-        FOLLOW_DETAILS_FOLDER_ROUTE
-      )
+      composeFollowDetailsUrl(subscriptionInfo.subscriberInfo.asset.url),
+      FOLLOW_DETAILS_FOLDER_ROUTE
+    )
     : linkCreator(
-        composeAccountDetailsUrl(
-          subscriptionInfo.subscriberInfo.tradingAccountId
-        ),
-        ACCOUNT_DETAILS_FOLDER_ROUTE
-      );
+      composeAccountDetailsUrl(
+        subscriptionInfo.subscriberInfo.tradingAccountId
+      ),
+      ACCOUNT_DETAILS_FOLDER_ROUTE
+    );
   const name = subscriptionInfo.subscriberInfo.asset ? (
     <AssetAvatarWithName
       url={subscriptionInfo.subscriberInfo.asset.logoUrl}
@@ -54,8 +56,8 @@ const _SubscriptionTableRow: React.FC<Props> = ({
       name={subscriptionInfo.subscriberInfo.asset.title}
     />
   ) : (
-    subscriptionInfo.subscriberInfo.tradingAccountLogin
-  );
+      subscriptionInfo.subscriberInfo.tradingAccountLogin
+    );
   return (
     <TableRow>
       <TableCell>
@@ -117,6 +119,8 @@ const _SubscriptionTableRow: React.FC<Props> = ({
         <Center>
           <RowItem>
             <EditFollowButton
+              title={title}
+              renderAssetPopup={renderAssetPopup}
               size={"middle"}
               signalSubscription={subscriptionInfo}
               onApply={onApply}
@@ -129,6 +133,8 @@ const _SubscriptionTableRow: React.FC<Props> = ({
           </RowItem>
           <RowItem>
             <UnFollowButton
+              title={title}
+              renderAssetPopup={renderAssetPopup}
               size={"middle"}
               onApply={onApply}
               id={id}
@@ -145,6 +151,8 @@ const _SubscriptionTableRow: React.FC<Props> = ({
 };
 
 interface Props {
+  title: string;
+  renderAssetPopup: (popupTop: JSX.Element, form: JSX.Element) => JSX.Element;
   assetCurrency: CurrencyEnum;
   data: SignalSubscription;
   onApply: VoidFunction;

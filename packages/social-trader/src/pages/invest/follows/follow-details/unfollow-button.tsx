@@ -9,6 +9,8 @@ import { useDispatch } from "react-redux";
 import { Sizeable } from "utils/types";
 
 const _UnFollowButton: React.FC<Props> = ({
+  title,
+  renderAssetPopup,
   size = "xlarge",
   onApply,
   id,
@@ -33,6 +35,8 @@ const _UnFollowButton: React.FC<Props> = ({
         {t("asset-details:description.unfollow")}
       </Button>
       <UnfollowContainer
+        renderAssetPopup={renderAssetPopup}
+        title={title}
         tradingAccountId={tradingAccountId}
         isExternal={isExternal}
         open={isOpenUnFollow}
@@ -45,6 +49,8 @@ const _UnFollowButton: React.FC<Props> = ({
 };
 
 interface Props extends Sizeable {
+  title: string;
+  renderAssetPopup: (popupTop: JSX.Element, form: JSX.Element) => JSX.Element;
   onApply: VoidFunction;
   tradingAccountId: string;
   isExternal: boolean;

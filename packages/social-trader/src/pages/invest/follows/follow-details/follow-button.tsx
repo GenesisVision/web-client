@@ -8,6 +8,8 @@ import { useTranslation } from "react-i18next";
 import { CurrencyEnum } from "utils/types";
 
 const _FollowButton: React.FC<Props> = ({
+  title,
+  renderAssetPopup,
   canFollow,
   onApply,
   leverage,
@@ -34,6 +36,8 @@ const _FollowButton: React.FC<Props> = ({
         {t("asset-details:description.follow-trade")}
       </Button>
       <FollowModuleContainer
+        title={title}
+        renderAssetPopup={renderAssetPopup}
         leverage={leverage}
         isExternal={isExternal}
         brokerId={brokerId}
@@ -49,6 +53,8 @@ const _FollowButton: React.FC<Props> = ({
 };
 
 interface Props {
+  title: string;
+  renderAssetPopup: (popupTop: JSX.Element, form: JSX.Element) => JSX.Element;
   canFollow?: boolean;
   onApply?: VoidFunction;
   leverage: number;

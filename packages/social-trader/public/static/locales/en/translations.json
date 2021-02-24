@@ -421,6 +421,8 @@
     }
   },
   "follow-program": {
+    "title": "Follow trades",
+    "edit-title": "Trading settings",
     "info": {
       "ETH": "The minimum order size on Binance is 0.01 ETH ",
       "BTC": "The minimum order size on Binance is 0.001 BTC",

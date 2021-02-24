@@ -33,34 +33,32 @@ const _UnfollowForm: React.FC<Props> = ({
   const modesList = (isExternal && [MODE_NONE]) || Object.keys(modes);
   return (
     <HookForm form={form} onSubmit={onSubmit}>
-      <DialogTop title={t("unfollow-program.title")} />
-      <DialogBottom>
-        <GVHookFormField
-          wide
-          disableIfSingle
-          name={FIELDS.mode}
-          component={SimpleTextField}
-          label={t("unfollow-program.type")}
-          InputComponent={Select}
-        >
-          {modesList.map((mode: string) => (
-            <option value={modes[mode].value} key={modes[mode].value}>
-              <Tooltip
-                render={() => (
-                  <TooltipContent>{t(modes[mode].tooltip)}</TooltipContent>
-                )}
-              >
-                <span>{t(modes[mode].label)}</span>
-              </Tooltip>
-            </option>
-          ))}
-        </GVHookFormField>
-        <DialogButtons>
-          <SubmitButton wide checkDirty={false} isSuccessful={!errorMessage}>
-            {t("unfollow-program.submit")}
-          </SubmitButton>
-        </DialogButtons>
-      </DialogBottom>
+      {/* <DialogTop title={t("unfollow-program.title")} /> */}
+      <GVHookFormField
+        wide
+        disableIfSingle
+        name={FIELDS.mode}
+        component={SimpleTextField}
+        label={t("unfollow-program.type")}
+        InputComponent={Select}
+      >
+        {modesList.map((mode: string) => (
+          <option value={modes[mode].value} key={modes[mode].value}>
+            <Tooltip
+              render={() => (
+                <TooltipContent>{t(modes[mode].tooltip)}</TooltipContent>
+              )}
+            >
+              <span>{t(modes[mode].label)}</span>
+            </Tooltip>
+          </option>
+        ))}
+      </GVHookFormField>
+      <DialogButtons>
+        <SubmitButton wide checkDirty={false} isSuccessful={!errorMessage}>
+          {t("unfollow-program.submit")}
+        </SubmitButton>
+      </DialogButtons>
     </HookForm>
   );
 };

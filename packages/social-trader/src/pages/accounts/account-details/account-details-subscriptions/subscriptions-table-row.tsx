@@ -1,5 +1,6 @@
 import AssetAvatarWithName from "components/avatar/asset-avatar/asset-avatar-with-name";
 import { Center } from "components/center/center";
+import { DetailsTags } from "components/details/details-description-section/details-description/details-tags.block";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import Profitability from "components/profitability/profitability";
@@ -7,10 +8,12 @@ import { PROFITABILITY_PREFIX } from "components/profitability/profitability.hel
 import { RowItem } from "components/row-item/row-item";
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
+import InvestDefaultPopup from "modules/invest-popup/invest-default-popup";
 import { AccountSubscriptionsDataType } from "pages/accounts/account-details/services/account-details.types";
 import EditFollowButton from "pages/invest/follows/follow-details/edit-follow-button";
+import FollowFeesBlock from "pages/invest/follows/follow-details/follow-popup/follow-fees-block";
 import UnFollowButton from "pages/invest/follows/follow-details/unfollow-button";
-import React from "react";
+import React, { useCallback } from "react";
 import { FOLLOW_DETAILS_FOLDER_ROUTE } from "routes/invest.routes";
 import { composeFollowDetailsUrl } from "utils/compose-url";
 import { formatDate } from "utils/dates";
@@ -41,6 +44,45 @@ const _SubscriptionsTableRow: React.FC<Props> = ({
   const levelProgress = programDetails
     ? programDetails.levelProgress
     : undefined;
+
+  const renderAssetDetailsExtraBlock = useCallback(
+    () => (
+      <DetailsTags
+        tags={[
+          { name: "CRYPTO", color: "#B7C400" },
+          { name: "GM", color: "#FFA500" }
+        ]}
+      />
+    ),
+    [provider]
+  );
+
+  const renderAssetFeesBlock = useCallback(
+    () => <FollowFeesBlock currency={"USDT"} successFee={10} volumeFee={10} />,
+    [provider]
+  );
+
+  const renderAssetPopup = useCallback(
+    (popupTop: JSX.Element, form: JSX.Element) => (
+      <InvestDefaultPopup
+        popupTop={popupTop}
+        ownerUrl={"backend"}
+        assetColor={color}
+        assetLogo={logoUrl}
+        AssetDetailsExtraBlock={renderAssetDetailsExtraBlock}
+        AssetFeesBlock={renderAssetFeesBlock}
+        brokerName={"backend"}
+        brokerLogo={
+          "https://red-s3.genesis.vision/img/opt/5be222ec-bf7c-4db5-91ac-e93d9b5e92cb.png"
+        }
+        title={title}
+        assetOwner={"backend"}
+        form={form}
+      />
+    ),
+    [provider]
+  );
+
   return (
     <TableRow stripy>
       <TableCell>
@@ -85,6 +127,8 @@ const _SubscriptionsTableRow: React.FC<Props> = ({
           <Center>
             <RowItem size={"large"}>
               <EditFollowButton
+                renderAssetPopup={renderAssetPopup}
+                title={title}
                 size={"middle"}
                 signalSubscription={provider}
                 onApply={onApply}
@@ -95,6 +139,8 @@ const _SubscriptionsTableRow: React.FC<Props> = ({
             </RowItem>
             <RowItem size={"large"}>
               <UnFollowButton
+                renderAssetPopup={renderAssetPopup}
+                title={title}
                 size={"middle"}
                 onApply={onApply}
                 id={provider.asset.id}

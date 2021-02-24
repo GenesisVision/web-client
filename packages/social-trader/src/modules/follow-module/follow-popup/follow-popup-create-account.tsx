@@ -90,43 +90,41 @@ const _FollowCreateAccount: React.FC<CreateAccountFormProps> = ({
 
   return (
     <HookForm form={form} onSubmit={onClick}>
-      <DialogBottom>
+      <Row>
+        <WalletSelectContainer
+          name={CREATE_ACCOUNT_FORM_FIELDS.depositWalletId}
+          label={t("follow-program.create-account.from")}
+          onChange={onChangeCurrencyFrom}
+        />
+      </Row>
+      <InputAmountField
+        wide
+        isAllowed={allowPositiveValuesNumberFormat(
+          CURRENCY_FRACTIONS(wallet.currency)
+        )}
+        name={CREATE_ACCOUNT_FORM_FIELDS.depositAmount}
+        label={t("follow-program.create-account.amount")}
+        currency={wallet.currency}
+        setMax={setMaxAmount}
+      />
+      {followCurrency !== wallet.currency && (
         <Row>
-          <WalletSelectContainer
-            name={CREATE_ACCOUNT_FORM_FIELDS.depositWalletId}
-            label={t("follow-program.create-account.from")}
-            onChange={onChangeCurrencyFrom}
+          <NumberFormat
+            value={formatCurrencyValue(
+              convertToCurrency(+depositAmount, rate),
+              followCurrency
+            )}
+            prefix="≈ "
+            suffix={` ${followCurrency}`}
+            displayType="text"
           />
         </Row>
-        <InputAmountField
-          wide
-          isAllowed={allowPositiveValuesNumberFormat(
-            CURRENCY_FRACTIONS(wallet.currency)
-          )}
-          name={CREATE_ACCOUNT_FORM_FIELDS.depositAmount}
-          label={t("follow-program.create-account.amount")}
-          currency={wallet.currency}
-          setMax={setMaxAmount}
-        />
-        {followCurrency !== wallet.currency && (
-          <Row>
-            <NumberFormat
-              value={formatCurrencyValue(
-                convertToCurrency(+depositAmount, rate),
-                followCurrency
-              )}
-              prefix="≈ "
-              suffix={` ${followCurrency}`}
-              displayType="text"
-            />
-          </Row>
-        )}
-        <DialogButtons>
-          <SubmitButton wide>
-            {t("follow-program.create-account.next")}
-          </SubmitButton>
-        </DialogButtons>
-      </DialogBottom>
+      )}
+      <DialogButtons>
+        <SubmitButton wide>
+          {t("follow-program.create-account.next")}
+        </SubmitButton>
+      </DialogButtons>
     </HookForm>
   );
 };

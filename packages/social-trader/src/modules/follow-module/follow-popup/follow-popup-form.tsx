@@ -126,7 +126,8 @@ const _FollowForm: React.FC<Props> = ({
 
   return (
     <>
-      <FollowTop step={adaptStep} />
+      {/* <FollowTop step={adaptStep} /> */}
+      {/* <DialogTop title={t(`follow-program.${step}.title`)} /> -- это из бывшего followtop */}
       {hasAccounts && tab === TABS.SELECT_ACCOUNT && (
         <FollowSelectAccount
           accounts={accounts}
@@ -138,13 +139,13 @@ const _FollowForm: React.FC<Props> = ({
         (isExternal ? (
           <FollowCreateExternalAccount onClick={createdCopytradingAccount} />
         ) : (
-          <FollowCreateAccount
-            wallet={wallet}
-            minDeposit={minDeposit}
-            followCurrency={currency!}
-            onClick={createdCopytradingAccount}
-          />
-        ))}
+            <FollowCreateAccount
+              wallet={wallet}
+              minDeposit={minDeposit}
+              followCurrency={currency!}
+              onClick={createdCopytradingAccount}
+            />
+          ))}
       {tab === TABS.PARAMS && (
         <FollowParams
           errorMessage={errorMessage}

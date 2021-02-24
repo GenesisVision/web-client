@@ -5,10 +5,12 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { CurrencyEnum } from "utils/types";
 
-import { SubscriptionTableRow } from "./subscription-table-row";
 import { SUBSCRIPTION_COLUMNS } from "./subscription.helpers";
+import { SubscriptionTableRow } from "./subscription-table-row";
 
 const _SubscriptionTable: React.FC<Props> = ({
+  title,
+  renderAssetPopup,
   id,
   data,
   onApply,
@@ -27,6 +29,8 @@ const _SubscriptionTable: React.FC<Props> = ({
       )}
       renderBodyRow={(data: SignalSubscription) => (
         <SubscriptionTableRow
+          title={title}
+          renderAssetPopup={renderAssetPopup}
           id={id}
           assetCurrency={assetCurrency}
           onApply={onApply}
@@ -38,6 +42,8 @@ const _SubscriptionTable: React.FC<Props> = ({
 };
 
 interface Props {
+  title: string;
+  renderAssetPopup: (popupTop: JSX.Element, form: JSX.Element) => JSX.Element;
   assetCurrency: CurrencyEnum;
   onApply: VoidFunction;
   data: SignalSubscription[];

@@ -11,6 +11,7 @@ import InvestDefaultPopup from "modules/invest-popup/invest-default-popup";
 import dynamic from "next/dynamic";
 import { mapProgramFollowToTransferItemType } from "pages/dashboard/services/dashboard.service";
 import FollowDetailsStatisticSection from "pages/invest/follows/follow-details/follow-details-statistic-section/follow-details-statistic-section";
+import FollowFeesBlock from "pages/invest/follows/follow-details/follow-popup/follow-fees-block";
 import { levelsParamsLoaderData } from "pages/invest/programs/program-details/program-details.loader-data";
 import { ProgramDescriptionDataType } from "pages/invest/programs/program-details/program-details.types";
 import PerformanceData from "pages/invest/programs/program-details/program-details-description/performance-data";
@@ -150,13 +151,24 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
     [tags]
   );
 
-  const renderAssetFeesBlock = useCallback(
+  const renderProgramFeesBlock = useCallback(
     () => (
       <ProgramFeesBlock
         currency={description.tradingAccountInfo.currency}
         successFee={description.programDetails.successFeeCurrent}
         stopOut={description.programDetails.stopOutLevelCurrent}
         managementFee={description.programDetails.managementFeeCurrent}
+      />
+    ),
+    [description]
+  );
+
+  const renderFollowFeesBlock = useCallback(
+    () => (
+      <FollowFeesBlock
+        currency={description.tradingAccountInfo.currency}
+        successFee={description.followDetails.signalSettings.signalSuccessFee}
+        volumeFee={description.followDetails.signalSettings.signalVolumeFee}
       />
     ),
     [description]
@@ -172,7 +184,26 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
         assetLevel={description.programDetails.level}
         assetLogo={description.publicInfo.logoUrl}
         AssetDetailsExtraBlock={renderAssetDetailsExtraBlock}
-        AssetFeesBlock={renderAssetFeesBlock}
+        AssetFeesBlock={renderProgramFeesBlock}
+        brokerName={description.brokerDetails.name}
+        brokerLogo={description.brokerDetails.logoUrl}
+        title={description.publicInfo.title}
+        assetOwner={description.owner.username}
+        form={form}
+      />
+    ),
+    [description]
+  );
+
+  const renderFollowPopup = useCallback(
+    (popupTop: JSX.Element, form: JSX.Element) => (
+      <InvestDefaultPopup
+        popupTop={popupTop}
+        ownerUrl={description.owner.url}
+        assetColor={description.publicInfo.color}
+        assetLogo={description.publicInfo.logoUrl}
+        AssetDetailsExtraBlock={renderAssetDetailsExtraBlock}
+        AssetFeesBlock={renderFollowFeesBlock}
         brokerName={description.brokerDetails.name}
         brokerLogo={description.brokerDetails.logoUrl}
         title={description.publicInfo.title}
@@ -223,6 +254,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
         {description.followDetails && description.followDetails.signalSettings && (
           <RowItem bottomOffset>
             <FollowControls
+              renderAssetPopup={renderFollowPopup}
               isOwnAsset={isOwnAsset}
               onApply={handleDispatchDescription}
               publicInfo={description.publicInfo}
@@ -330,7 +362,9 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
       />
       <DetailsDivider />
       <DetailsInvestment
-        renderAssetPopup={renderProgramPopup}
+        renderAssetPopup={
+          assetType === ASSET.PROGRAM ? renderProgramPopup : renderFollowPopup
+        }
         title={description.publicInfo.title}
         isExchange={isExchange}
         isProcessingRealTime={
