@@ -175,7 +175,7 @@ const _ProgramWithdrawForm: React.FC<Props> = ({
             <DialogList>
                 <DialogListItem label={t("withdraw-program.withdrawing")}>
                     {!amount && !withdrawAll
-                        ? "—"
+                        ? ""
                         : amount && !withdrawAll
                             ? `${value} ${suff}`
                             : t("withdraw-program.all")}

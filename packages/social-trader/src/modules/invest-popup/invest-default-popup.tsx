@@ -1,4 +1,12 @@
+import AssetAvatar from "components/avatar/asset-avatar/asset-avatar";
+import { DetailsBroker } from "components/details/details-description-section/details-description/details-structure-blocks";
+import { DetailsSubtitle } from "components/details/details-description-section/details-description/details-subtitle.block";
+import LevelTooltip from "components/level-tooltip/level-tooltip";
+import { Row } from "components/row/row";
+import { RowItem } from "components/row-item/row-item";
+import { Text } from "components/text/text";
 import React from "react";
+import { managerToPathCreator } from "routes/manager.routes";
 import styled from "styled-components";
 import { $investPopupBackground } from "utils/style/colors";
 import {
@@ -8,12 +16,15 @@ import {
 } from "utils/style/media";
 import {
   adaptiveFullPadding,
+  adaptiveGridGap,
   horizontalPaddings,
   verticalPaddings
 } from "utils/style/mixins";
-import { $paddingSmall, $paddingUpperMedium } from "utils/style/sizes";
-
-import InvestPopupInfo from "./invest-popup-info";
+import {
+  $paddingMedium,
+  $paddingSmall,
+  $paddingUpperMedium
+} from "utils/style/sizes";
 
 interface Props {
   ownerUrl: string;
@@ -30,6 +41,18 @@ interface Props {
   AssetDetailsExtraBlock?: React.ComponentType<any>;
   AssetFeesBlock?: React.ComponentType<any>;
 }
+
+const Container = styled.div`
+  ${mediaBreakpointLandscapePhone(`
+  width: 480px;
+`)}
+  ${mediaBreakpointTablet(`
+  width: 650px;
+`)}
+${mediaBreakpointLandscapeTablet(`
+  width: 750px;
+`)}
+`;
 
 const MainContentContainer = styled.div`
   display: grid;
@@ -52,16 +75,27 @@ const FormContainer = styled.div`
   ${horizontalPaddings($paddingSmall)};
 `;
 
-const Container = styled.div`
-  ${mediaBreakpointLandscapePhone(`
-  width: 480px;
-`)}
+const InfoBlock = styled.div`
+  ${horizontalPaddings($paddingSmall)}
+  padding-top: ${$paddingSmall}px;
+  padding-bottom: ${$paddingMedium}px;
   ${mediaBreakpointTablet(`
-  width: 650px;
-`)}
-${mediaBreakpointLandscapeTablet(`
-  width: 750px;
-`)}
+    padding: 0px;
+  `)};
+`;
+
+const FeesContainer = styled(Row)`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  ${adaptiveGridGap($paddingSmall, "row")};
+`;
+
+const AvatarContainer = styled(RowItem)`
+  cursor: pointer;
+`;
+
+const AvatarText = styled(RowItem)`
+  word-break: break-word;
 `;
 
 const _InvestDefaultPopup: React.FC<Props> = ({
@@ -83,19 +117,50 @@ const _InvestDefaultPopup: React.FC<Props> = ({
     <Container>
       {popupTop}
       <MainContentContainer>
-        <InvestPopupInfo
-          ownerUrl={ownerUrl}
-          assetColor={assetColor}
-          assetLevelProgress={assetLevelProgress}
-          assetLevel={assetLevel}
-          assetLogo={assetLogo}
-          AssetFeesBlock={AssetFeesBlock}
-          AssetDetailsExtraBlock={AssetDetailsExtraBlock}
-          brokerLogo={brokerLogo}
-          brokerName={brokerName}
-          assetOwner={assetOwner}
-          title={title}
-        />
+        <InfoBlock>
+          <Row>
+            <AvatarContainer size={"xlarge"}>
+              <AssetAvatar
+                levelColor={"#131e26"}
+                url={assetLogo}
+                level={assetLevel}
+                levelProgress={assetLevelProgress}
+                alt={title}
+                color={assetColor}
+                size={"middle"}
+                tooltip={
+                  assetLevel ? (
+                    <LevelTooltip level={assetLevel} canLevelUp={false} />
+                  ) : undefined
+                }
+              />
+            </AvatarContainer>
+            <AvatarText>
+              <Text weight={"bold"} size={"large"}>
+                {title}
+              </Text>
+              <Row>
+                <DetailsSubtitle
+                  to={managerToPathCreator(ownerUrl, title)}
+                  text={assetOwner}
+                />
+              </Row>
+            </AvatarText>
+          </Row>
+          <Row size={"large"}>
+            <RowItem>
+              {AssetDetailsExtraBlock && <AssetDetailsExtraBlock />}
+            </RowItem>
+          </Row>
+          {brokerName && brokerLogo && (
+            <Row size={"large"}>
+              <DetailsBroker logoUrl={brokerLogo} name={brokerName} />
+            </Row>
+          )}
+          {AssetFeesBlock && (
+            <FeesContainer size={"large"}>{<AssetFeesBlock />}</FeesContainer>
+          )}
+        </InfoBlock>
         <FormContainer>{form}</FormContainer>
       </MainContentContainer>
     </Container>
