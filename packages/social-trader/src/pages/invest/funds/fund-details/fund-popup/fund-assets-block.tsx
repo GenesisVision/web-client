@@ -11,7 +11,7 @@ interface Props {
     canExpand?: boolean;
 }
 
-const FundAssetsBlock: React.FC<Props> = ({ assets, canExpand }) => {
+const _FundAssetsBlock: React.FC<Props> = ({ assets, canExpand }) => {
     const [t] = useTranslation();
     return (
         <>
@@ -33,4 +33,5 @@ const FundAssetsBlock: React.FC<Props> = ({ assets, canExpand }) => {
     );
 };
 
+const FundAssetsBlock = React.memo(_FundAssetsBlock);
 export default FundAssetsBlock;

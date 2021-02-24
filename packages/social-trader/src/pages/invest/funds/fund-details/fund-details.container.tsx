@@ -76,11 +76,13 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
   );
 
   const renderAssetDetailsExtraBlock = useCallback(
-    (canExpand: boolean) => (
-      <FundAssetsBlock
-        canExpand={canExpand}
-        assets={description.assetsStructure}
-      />
+    () => <FundAssetsBlock assets={description.assetsStructure} />,
+    [description.assetsStructure]
+  );
+
+  const renderPopupAssetDetailsExtraBlock = useCallback(
+    () => (
+      <FundAssetsBlock canExpand={false} assets={description.assetsStructure} />
     ),
     [description.assetsStructure]
   );
@@ -95,21 +97,22 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
     [description]
   );
 
-  const renderFundPopup = (popupTop: JSX.Element, form: JSX.Element) => {
-    return (
+  const renderFundPopup = useCallback(
+    (popupTop: JSX.Element, form: JSX.Element) => (
       <InvestDefaultPopup
         popupTop={popupTop}
         ownerUrl={description.owner.url}
         assetColor={description.publicInfo.color}
         assetLogo={description.publicInfo.logoUrl}
-        AssetDetailsExtraBlock={() => renderAssetDetailsExtraBlock(false)}
+        AssetDetailsExtraBlock={renderPopupAssetDetailsExtraBlock}
         AssetFeesBlock={renderAssetFeesBlock}
         title={description.publicInfo.title}
         assetOwner={description.owner.username}
         form={form}
       />
-    );
-  };
+    ),
+    [description]
+  );
 
   const renderControls = useCallback(
     () => (

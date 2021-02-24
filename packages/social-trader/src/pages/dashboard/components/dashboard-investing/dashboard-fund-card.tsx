@@ -15,7 +15,7 @@ import DepositWithdrawButtons from "pages/dashboard/components/dashboard-trading
 import FundAssetsBlock from "pages/invest/funds/fund-details/fund-popup/fund-assets-block";
 import FundFeesBlock from "pages/invest/funds/fund-details/fund-popup/fund-fees-block";
 import { generateScheduleText } from "pages/invest/funds/fund-details/services/fund-details.service";
-import * as React from "react";
+import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { FUND_DETAILS_FOLDER_ROUTE } from "routes/invest.routes";
 import { managerToPathCreator } from "routes/manager.routes";
@@ -34,28 +34,37 @@ const _DashboardFundCard: React.FC<Props> = ({
   const schedule = generateScheduleText(fund.tradingSchedule);
   const investMessage = `${t("trading-schedule.invest-fund")} \n ${schedule}`;
 
-  const renderFundPopup = (popupTop: JSX.Element, form: JSX.Element) => {
-    return (
+  const renderAssetDetailsExtraBlock = useCallback(
+    () => <FundAssetsBlock assets={fund.topFundAssets} />,
+    [fund.topFundAssets]
+  );
+
+  const renderAssetFeesBlock = useCallback(
+    () => (
+      <FundFeesBlock
+        entryFee={fund.entryFeeCurrent}
+        exitFee={fund.exitFeeCurrent}
+      />
+    ),
+    [fund]
+  );
+
+  const renderFundPopup = useCallback(
+    (popupTop: JSX.Element, form: JSX.Element) => (
       <InvestDefaultPopup
         popupTop={popupTop}
         ownerUrl={fund.owner.url}
         assetColor={fund.color}
         assetLogo={fund.logoUrl}
-        AssetDetailsExtraBlock={() => (
-          <FundAssetsBlock assets={fund.topFundAssets} />
-        )}
-        AssetFeesBlock={() => (
-          <FundFeesBlock
-            entryFee={fund.entryFeeCurrent}
-            exitFee={fund.exitFeeCurrent}
-          />
-        )}
+        AssetDetailsExtraBlock={renderAssetDetailsExtraBlock}
+        AssetFeesBlock={renderAssetFeesBlock}
         title={fund.title}
         assetOwner={fund.owner.username}
         form={form}
       />
-    );
-  };
+    ),
+    [fund]
+  );
 
   const renderActions = ({ clearAnchor, anchor }: IRenderActionsArgs) => (
     <TableCardActions anchor={anchor} clearAnchor={clearAnchor}>

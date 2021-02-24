@@ -162,8 +162,8 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
     [description]
   );
 
-  const renderProgramPopup = (popupTop: JSX.Element, form: JSX.Element) => {
-    return (
+  const renderProgramPopup = useCallback(
+    (popupTop: JSX.Element, form: JSX.Element) => (
       <InvestDefaultPopup
         popupTop={popupTop}
         ownerUrl={description.owner.url}
@@ -179,8 +179,9 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
         assetOwner={description.owner.username}
         form={form}
       />
-    );
-  };
+    ),
+    [description]
+  );
 
   const renderPerformanceData = useCallback(
     () => (

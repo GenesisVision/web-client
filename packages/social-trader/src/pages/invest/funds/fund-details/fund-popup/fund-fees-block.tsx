@@ -10,7 +10,7 @@ interface Props {
     exitFee: number;
 }
 
-const FundFeesBlock: React.FC<Props> = ({ entryFee, exitFee }) => {
+const _FundFeesBlock: React.FC<Props> = ({ entryFee, exitFee }) => {
     const [t] = useTranslation();
     return (
         <>
@@ -46,4 +46,5 @@ const FundFeesBlock: React.FC<Props> = ({ entryFee, exitFee }) => {
     );
 };
 
+const FundFeesBlock = React.memo(_FundFeesBlock);
 export default FundFeesBlock;

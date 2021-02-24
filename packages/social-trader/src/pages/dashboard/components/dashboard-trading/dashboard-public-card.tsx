@@ -27,7 +27,7 @@ import FundAssetsBlock from "pages/invest/funds/fund-details/fund-popup/fund-ass
 import FundFeesBlock from "pages/invest/funds/fund-details/fund-popup/fund-fees-block";
 import { generateScheduleText } from "pages/invest/funds/fund-details/services/fund-details.service";
 import ProgramFeesBlock from "pages/invest/programs/program-details/program-popup/program-fees-block";
-import React from "react";
+import React, { useCallback } from "react";
 import NumberFormat from "react-number-format";
 import {
   FOLLOW_DETAILS_FOLDER_ROUTE,
@@ -93,6 +93,13 @@ const _DashboardPublicCard: React.FC<Props> = ({
   );
   const investMessage = `${t("trading-schedule.invest-fund")} \n ${schedule}`;
 
+  const renderFundAssetBlock = useCallback(
+    () => (
+      <FundAssetsBlock assets={asset.publicInfo.fundDetails.topFundAssets} />
+    ),
+    [asset]
+  );
+
   const renderAssetPopup =
     asset.assetType === ASSET.PROGRAM
       ? (popupTop: JSX.Element, form: JSX.Element) => {
@@ -135,11 +142,7 @@ const _DashboardPublicCard: React.FC<Props> = ({
             // ownerUrl={asset.publicInfo.owner.url}
             assetColor={asset.publicInfo.color}
             assetLogo={asset.publicInfo.logoUrl}
-            AssetDetailsExtraBlock={() => (
-              <FundAssetsBlock
-                assets={asset.publicInfo.fundDetails.topFundAssets}
-              />
-            )}
+            AssetDetailsExtraBlock={renderFundAssetBlock}
             AssetFeesBlock={() => (
               <FundFeesBlock
                 entryFee={asset.publicInfo.fundDetails.entryFeeCurrent}

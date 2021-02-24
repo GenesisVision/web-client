@@ -62,8 +62,8 @@ const _DashboardProgramCard: React.FC<Props> = ({
     [program]
   );
 
-  const renderProgramPopup = (popupTop: JSX.Element, form: JSX.Element) => {
-    return (
+  const renderProgramPopup = useCallback(
+    (popupTop: JSX.Element, form: JSX.Element) => (
       <InvestDefaultPopup
         popupTop={popupTop}
         ownerUrl={program.owner.url}
@@ -79,8 +79,9 @@ const _DashboardProgramCard: React.FC<Props> = ({
         assetOwner={program.owner.username}
         form={form}
       />
-    );
-  };
+    ),
+    [program]
+  );
 
   const renderActions = ({ clearAnchor, anchor }: IRenderActionsArgs) => (
     <TableCardActions anchor={anchor} clearAnchor={clearAnchor}>

@@ -13,7 +13,7 @@ interface Props {
     stopOut: number;
 }
 
-const ProgramFeesBlock: React.FC<Props> = ({
+const _ProgramFeesBlock: React.FC<Props> = ({
     currency,
     managementFee,
     successFee,
@@ -78,4 +78,5 @@ const ProgramFeesBlock: React.FC<Props> = ({
     );
 };
 
+const ProgramFeesBlock = React.memo(_ProgramFeesBlock);
 export default ProgramFeesBlock;
