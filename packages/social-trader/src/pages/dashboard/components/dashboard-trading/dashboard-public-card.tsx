@@ -95,7 +95,12 @@ const _DashboardPublicCard: React.FC<Props> = ({
 
   const renderFundAssetBlock = useCallback(
     () => (
-      <FundAssetsBlock assets={asset.publicInfo.fundDetails.topFundAssets} />
+      <FundAssetsBlock
+        size={3}
+        canExpand={false}
+        length={totalAssetsCount}
+        assets={asset.publicInfo.fundDetails.topFundAssets}
+      />
     ),
     [asset]
   );

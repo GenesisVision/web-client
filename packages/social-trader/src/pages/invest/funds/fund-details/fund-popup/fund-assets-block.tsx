@@ -9,9 +9,16 @@ import { useTranslation } from "react-i18next";
 interface Props {
     assets: Array<FundAssetType>;
     canExpand?: boolean;
+    length?: number;
+    size?: number;
 }
 
-const _FundAssetsBlock: React.FC<Props> = ({ assets, canExpand }) => {
+const _FundAssetsBlock: React.FC<Props> = ({
+    assets,
+    canExpand,
+    length,
+    size = 7
+}) => {
     const [t] = useTranslation();
     return (
         <>
@@ -23,10 +30,11 @@ const _FundAssetsBlock: React.FC<Props> = ({ assets, canExpand }) => {
             </h4>
             <Row>
                 <FundAssetContainer
+                    length={length}
                     canExpand={canExpand}
                     type={"large"}
                     assets={assets}
-                    size={7}
+                    size={size}
                 />
             </Row>
         </>

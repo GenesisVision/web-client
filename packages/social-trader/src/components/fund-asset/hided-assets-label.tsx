@@ -17,10 +17,10 @@ const _HidedAssets: React.FC<Props> = ({
     default:
       return canExpand ? (
         <HidedAssetsContainer onClick={handleOpen}>
-          <HidedAssetsCount>+{count}</HidedAssetsCount>
+          <HidedAssetsCount canExpand={canExpand}>+{count}</HidedAssetsCount>
         </HidedAssetsContainer>
       ) : (
-          <HidedAssetsCount>+{count}</HidedAssetsCount>
+          <HidedAssetsCount canExpand={canExpand}>+{count}</HidedAssetsCount>
         );
   }
 };

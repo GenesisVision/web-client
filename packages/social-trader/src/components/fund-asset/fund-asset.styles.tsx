@@ -1,7 +1,7 @@
 import { CurrencyItem } from "components/currency-item/currency-item";
 import { FundAssetViewType } from "components/fund-asset/fund-asset.types";
-import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { RowItem } from "components/row-item/row-item";
 import styled, { css } from "styled-components";
 import {
   $landingBgGray,
@@ -28,7 +28,7 @@ const $removeButtonSize = 18;
 const $removeButtonSizeMobile = $removeButtonSize / 1.2;
 const $removeButtonColor = "#293842";
 
-export const FundAssetCurrencyItem = styled(CurrencyItem)<{
+export const FundAssetCurrencyItem = styled(CurrencyItem) <{
   type: FundAssetViewType;
 }>`
   ${({ type }) => {
@@ -82,7 +82,7 @@ export const fundAssetStyle = css`
   }
 `;
 
-export const FundAssetRow = styled(Row)<{ lightTheme?: boolean }>`
+export const FundAssetRow = styled(Row) <{ lightTheme?: boolean }>`
   ${fundAssetStyle};
   background: rgba(255, 255, 255, 0.02);
   color: ${$textLightColor};
@@ -125,10 +125,17 @@ export const HidedAssetsContainer = styled.div`
   cursor: pointer;
 `;
 
-export const HidedAssetsCount = styled(Row)`
+export const HidedAssetsCount = styled(Row) <{ canExpand?: boolean }>`
   ${fundAssetStyle};
+  ${({ canExpand }) =>
+    canExpand
+      ? `
   cursor: pointer;
   &:hover {
     background: rgba(255, 255, 255, 0.02);
+  }`
+      : `  &:hover {
+    background: none;
   }
+  }`}
 `;

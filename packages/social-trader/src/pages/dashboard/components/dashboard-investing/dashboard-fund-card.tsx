@@ -35,7 +35,14 @@ const _DashboardFundCard: React.FC<Props> = ({
   const investMessage = `${t("trading-schedule.invest-fund")} \n ${schedule}`;
 
   const renderAssetDetailsExtraBlock = useCallback(
-    () => <FundAssetsBlock assets={fund.topFundAssets} />,
+    () => (
+      <FundAssetsBlock
+        size={3}
+        canExpand={false}
+        length={fund.totalAssetsCount}
+        assets={fund.topFundAssets}
+      />
+    ),
     [fund.topFundAssets]
   );
 
