@@ -1,3 +1,4 @@
+import { DetailsTags } from "components/details/details-description-section/details-description/details-tags.block";
 import { LabeledValue } from "components/labeled-value/labeled-value";
 import { useToLink } from "components/link/link.helper";
 import TableCard, {
@@ -16,7 +17,9 @@ import TagProgramContainer from "components/tags/tag-program-container/tag-progr
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import { ASSET } from "constants/constants";
 import { FollowDetailsListItem } from "gv-api-web";
+import InvestDefaultPopup from "modules/invest-popup/invest-default-popup";
 import FollowButton from "pages/invest/follows/follow-details/follow-button";
+import FollowFeesBlock from "pages/invest/follows/follow-details/follow-popup/follow-fees-block";
 import * as React from "react";
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -49,6 +52,43 @@ const _FollowCard: React.FC<Props> = ({
   const handleUpdateRow = useCallback(follow => {
     setFollowState(follow);
   }, []);
+
+  const renderFollowTagsBlock = useCallback(() => <DetailsTags tags={tags} />, [
+    tags
+  ]);
+
+  const renderFollowFeesBlock = useCallback(
+    () => (
+      <FollowFeesBlock
+        currency={follow.currency}
+        successFee={0}
+        volumeFee={0}
+      />
+    ),
+    [follow]
+  );
+
+  const renderFollowPopup = useCallback(
+    (popupTop: JSX.Element, form: JSX.Element) => (
+      <InvestDefaultPopup
+        popupTop={popupTop}
+        ownerUrl={follow.owner.url}
+        assetColor={follow.color}
+        assetLogo={follow.logoUrl}
+        AssetDetailsExtraBlock={renderFollowTagsBlock}
+        AssetFeesBlock={renderFollowFeesBlock}
+        brokerName={"backend"}
+        brokerLogo={
+          "https://red-s3.genesis.vision/img/opt/5be222ec-bf7c-4db5-91ac-e93d9b5e92cb.png"
+        }
+        title={follow.title}
+        assetOwner={follow.owner.username}
+        form={form}
+      />
+    ),
+    [follow]
+  );
+
   const renderActions = ({ clearAnchor, anchor }: IRenderActionsArgs) => (
     <TableCardActions anchor={anchor} clearAnchor={clearAnchor}>
       <TableCardActionsItem to={linkProps} onClick={clearAnchor}>
@@ -136,6 +176,8 @@ const _FollowCard: React.FC<Props> = ({
       {withFollowButton && (
         <TableCardTableButtons>
           <FollowButton
+            renderAssetPopup={renderFollowPopup}
+            title={follow.title}
             canFollow={true}
             onApply={onApply}
             id={follow.id}
