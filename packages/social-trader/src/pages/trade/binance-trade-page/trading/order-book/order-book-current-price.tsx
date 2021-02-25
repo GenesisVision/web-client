@@ -8,6 +8,7 @@ import React, { useContext } from "react";
 import NumberFormat from "react-number-format";
 
 import styles from "./order-book.module.scss";
+import { Text } from "components/text/text";
 
 interface Props {
   tradeId?: number;
@@ -38,12 +39,14 @@ const _OrderBookCurrentPrice: React.FC<Props> = ({
       </RowItem>
       {equivalent && (
         <RowItem>
-          <NumberFormat
-            displayType="text"
-            thousandSeparator={","}
-            value={equivalent}
-            suffix={` ${equivalentCurrency}`}
-          />
+          <Text wrap={false}>
+            <NumberFormat
+              displayType="text"
+              thousandSeparator={","}
+              value={equivalent}
+              suffix={` ${equivalentCurrency}`}
+            />
+          </Text>
         </RowItem>
       )}
     </Center>
