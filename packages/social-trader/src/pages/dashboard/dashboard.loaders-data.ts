@@ -2,6 +2,7 @@ import { ownerLoaderData } from "components/details/details.loader-data";
 import { getEquityChartLoaderData } from "components/multi-chart/service/multi-chart.service";
 import { ASSET } from "constants/constants";
 import { AssetType, LimitWithoutKyc, MoneyLocation } from "gv-api-web";
+import { brokerDetailsLoaderData } from "modules/follows-table/components/follow-table.loader-data";
 import {
   TDashboardEvent,
   TDashboardInRequests,
@@ -142,13 +143,15 @@ const getRandomAsset = () =>
 export const getRecommendationLoaderData = (): TRecommendation => {
   return {
     balance: { amount: 0, currency: "GVT" },
-    brokerType: "MetaTrader5",
+    brokerDetails: brokerDetailsLoaderData,
     tags: [],
     personalDetails: {
       isOwnAsset: false,
       isFavorite: false
     },
     owner: ownerLoaderData,
+    successFee: 0,
+    volumeFee: 0,
     status: "",
     tradesCount: 0,
     subscribersCount: 0,
@@ -157,7 +160,6 @@ export const getRecommendationLoaderData = (): TRecommendation => {
     isExternal: false,
     leverageMax: getRandomInteger(-10000, 10000),
     leverageMin: getRandomInteger(-10000, 10000),
-    brokerId: "",
     currency: "GVT",
     statistic: {
       chart: getEquityChartLoaderData(),
