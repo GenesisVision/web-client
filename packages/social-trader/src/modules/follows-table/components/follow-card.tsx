@@ -61,8 +61,8 @@ const _FollowCard: React.FC<Props> = ({
     () => (
       <FollowFeesBlock
         currency={follow.currency}
-        successFee={0}
-        volumeFee={0}
+        successFee={follow.successFee}
+        volumeFee={follow.volumeFee}
       />
     ),
     [follow]
@@ -77,10 +77,8 @@ const _FollowCard: React.FC<Props> = ({
         assetLogo={follow.logoUrl}
         AssetDetailsExtraBlock={renderFollowTagsBlock}
         AssetFeesBlock={renderFollowFeesBlock}
-        brokerName={"backend"}
-        brokerLogo={
-          "https://red-s3.genesis.vision/img/opt/5be222ec-bf7c-4db5-91ac-e93d9b5e92cb.png"
-        }
+        brokerName={follow.brokerDetails.name}
+        brokerLogo={follow.brokerDetails.logoUrl}
         title={follow.title}
         assetOwner={follow.owner.username}
         form={form}
@@ -183,8 +181,8 @@ const _FollowCard: React.FC<Props> = ({
             id={follow.id}
             currency={follow.currency}
             isExternal={follow.isExternal}
-            broker={follow.brokerType}
-            brokerId={follow.brokerId}
+            broker={follow.brokerDetails.type}
+            brokerId={follow.brokerDetails.id}
             leverage={follow.leverageMax}
           />
         </TableCardTableButtons>

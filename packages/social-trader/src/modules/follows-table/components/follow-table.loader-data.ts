@@ -1,9 +1,8 @@
 import {
-  managerLoaderData,
   mockDate,
   ownerLoaderData
 } from "components/details/details.loader-data";
-import { FollowDetailsListItem } from "gv-api-web";
+import { BrokerDetails, FollowDetailsListItem } from "gv-api-web";
 import {
   personalProgramDetailsLoaderData,
   statisticListLoaderData
@@ -18,16 +17,34 @@ const tagLoaderDataCreator = () => ({
   name: getRandomWord(),
   color: getRandomColor()
 });
-const tagsLoaderDataCreator = () => tableLoaderCreator(tagLoaderDataCreator);
+export const tagsLoaderDataCreator = () =>
+  tableLoaderCreator(tagLoaderDataCreator);
+
+export const brokerDetailsLoaderData: BrokerDetails = {
+  id: "",
+  logoUrl: "",
+  name: getRandomWord(),
+  type: "BinanceFollow",
+  isKycRequired: false,
+  showSwaps: false,
+  showTickets: false,
+  showCommissionRebate: false,
+  isSignalsAvailable: false,
+  isKycRequiredSometime: false,
+  showSwapsSometime: false,
+  showTicketsSometime: false,
+  showCommissionRebateSometime: false
+};
 
 export const followDetailsLoaderDataCreator = (): FollowDetailsListItem => ({
   tradesCount: 0,
   subscribersCount: 0,
   leverageMax: 0,
   leverageMin: 0,
+  successFee: 0,
+  volumeFee: 0,
   isExternal: false,
-  brokerType: "BinanceFollow",
-  brokerId: "",
+  brokerDetails: brokerDetailsLoaderData,
   balance: { amount: 0, currency: "GVT" },
   currency: "GVT",
   statistic: statisticListLoaderData,

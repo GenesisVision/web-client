@@ -54,8 +54,7 @@ const _DashboardProgramCard: React.FC<Props> = ({
       <ProgramFeesBlock
         currency={program.currency}
         successFee={program.successFeeCurrent}
-        stopOut={0}
-        // stopOut={program.stopOutLevelCurrent}
+        stopOut={program.stopOutLevelCurrent}
         managementFee={program.managementFeeCurrent}
       />
     ),

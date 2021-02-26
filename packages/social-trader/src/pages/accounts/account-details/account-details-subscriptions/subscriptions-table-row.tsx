@@ -26,6 +26,9 @@ const _SubscriptionsTableRow: React.FC<Props> = ({
   assetCurrency
 }) => {
   const {
+    assetOwner,
+    assetBrokerDetails,
+    assetTags,
     volumeFeePersonal,
     successFeePersonal,
     fixedVolume,
@@ -46,19 +49,18 @@ const _SubscriptionsTableRow: React.FC<Props> = ({
     : undefined;
 
   const renderAssetDetailsExtraBlock = useCallback(
-    () => (
-      <DetailsTags
-        tags={[
-          { name: "CRYPTO", color: "#B7C400" },
-          { name: "GM", color: "#FFA500" }
-        ]}
-      />
-    ),
+    () => <DetailsTags tags={assetTags} />,
     [provider]
   );
 
   const renderAssetFeesBlock = useCallback(
-    () => <FollowFeesBlock currency={"USDT"} successFee={10} volumeFee={10} />,
+    () => (
+      <FollowFeesBlock
+        currency={"USDT"}
+        successFee={provider.successFee}
+        volumeFee={provider.volumeFee}
+      />
+    ),
     [provider]
   );
 
@@ -66,17 +68,15 @@ const _SubscriptionsTableRow: React.FC<Props> = ({
     (popupTop: JSX.Element, form: JSX.Element) => (
       <InvestDefaultPopup
         popupTop={popupTop}
-        ownerUrl={"backend"}
+        ownerUrl={assetOwner.logoUrl}
         assetColor={color}
         assetLogo={logoUrl}
         AssetDetailsExtraBlock={renderAssetDetailsExtraBlock}
         AssetFeesBlock={renderAssetFeesBlock}
-        brokerName={"backend"}
-        brokerLogo={
-          "https://red-s3.genesis.vision/img/opt/5be222ec-bf7c-4db5-91ac-e93d9b5e92cb.png"
-        }
+        brokerName={assetBrokerDetails.name}
+        brokerLogo={assetBrokerDetails.logoUrl}
         title={title}
-        assetOwner={"backend"}
+        assetOwner={assetOwner.username}
         form={form}
       />
     ),
