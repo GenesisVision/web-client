@@ -1,5 +1,4 @@
 import { Button } from "components/button/button";
-import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogInfo } from "components/dialog/dialog-info";
 import { GVHookFormField } from "components/gv-hook-form-field";
@@ -13,11 +12,13 @@ import { TooltipContent } from "components/tooltip/tooltip-content";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import { SignalSubscription, SubscriptionMode } from "gv-api-web";
 import {
+  fixedVolumeRules,
   FOLLOW_PARAMS_FIELDS,
   followParamsMapPropsToValues,
-  followParamsValidationSchema,
   getInfoText,
-  modes
+  modes,
+  openTolerancePercentRules,
+  percentRules
 } from "modules/follow-module/follow-popup/follow-popup-params.helpers";
 import React, { useCallback } from "react";
 import { useForm } from "react-hook-form";
@@ -27,6 +28,24 @@ import { convertFromCurrency } from "utils/currency-converter";
 import { formatCurrencyValue } from "utils/formatter";
 import { HookForm } from "utils/hook-form.helpers";
 import { CurrencyEnum } from "utils/types";
+
+export interface FollowParamsFormValues {
+  [FOLLOW_PARAMS_FIELDS.fixedCurrency]: string;
+  [FOLLOW_PARAMS_FIELDS.mode]: SubscriptionMode;
+  [FOLLOW_PARAMS_FIELDS.openTolerancePercent]: number;
+  [FOLLOW_PARAMS_FIELDS.percent]: number;
+  [FOLLOW_PARAMS_FIELDS.fixedVolume]: number;
+}
+
+export interface IFollowParamsProps {
+  errorMessage?: string;
+  subscribeFixedCurrencies: string[];
+  rate: number;
+  currency?: CurrencyEnum;
+  paramsSubscription?: SignalSubscription;
+  onSubmit: (values: FollowParamsFormValues) => void;
+  onPrevStep?: () => void;
+}
 
 const _FollowParams: React.FC<IFollowParamsProps> = ({
   errorMessage,
@@ -43,7 +62,6 @@ const _FollowParams: React.FC<IFollowParamsProps> = ({
       paramsSubscription,
       subscribeFixedCurrencies
     }),
-    validationSchema: followParamsValidationSchema(t),
     mode: "onBlur"
   });
   const { setValue, watch } = form;
@@ -56,6 +74,7 @@ const _FollowParams: React.FC<IFollowParamsProps> = ({
   const setMaxVolumePercent = useCallback(() => {
     setValue(FOLLOW_PARAMS_FIELDS.percent, 999, true);
   }, [setValue]);
+
   return (
     <HookForm form={form} onSubmit={onSubmit}>
       <Row>
@@ -87,6 +106,7 @@ const _FollowParams: React.FC<IFollowParamsProps> = ({
             label={t("follow-program.params.volume-percent")}
             currency={"%"}
             setMax={setMaxVolumePercent}
+            rules={percentRules(t)}
           />
         </Row>
       )}
@@ -111,9 +131,10 @@ const _FollowParams: React.FC<IFollowParamsProps> = ({
             wide
             name={FOLLOW_PARAMS_FIELDS.fixedVolume}
             label={`${t("follow-program.params.fixed-currency-equivalent", {
-              fixedCurrency: fixedCurrency
+              fixedCurrency
             })} *`}
             currency={fixedCurrency}
+            rules={fixedVolumeRules(t, fixedCurrency)}
           />
           {currency && (
             <Row wide>
@@ -144,6 +165,7 @@ const _FollowParams: React.FC<IFollowParamsProps> = ({
           }
           currency={"%"}
           setMax={setMaxOpenTolerancePercent}
+          rules={openTolerancePercentRules}
         />
       </Row>
       <DialogButtons>
@@ -166,24 +188,6 @@ const _FollowParams: React.FC<IFollowParamsProps> = ({
     </HookForm>
   );
 };
-
-export interface FollowParamsFormValues {
-  [FOLLOW_PARAMS_FIELDS.fixedCurrency]: string;
-  [FOLLOW_PARAMS_FIELDS.mode]: SubscriptionMode;
-  [FOLLOW_PARAMS_FIELDS.openTolerancePercent]: number;
-  [FOLLOW_PARAMS_FIELDS.percent]: number;
-  [FOLLOW_PARAMS_FIELDS.fixedVolume]: number;
-}
-
-export interface IFollowParamsProps {
-  errorMessage?: string;
-  subscribeFixedCurrencies: string[];
-  rate: number;
-  currency?: CurrencyEnum;
-  paramsSubscription?: SignalSubscription;
-  onSubmit: (values: FollowParamsFormValues) => void;
-  onPrevStep?: () => void;
-}
 
 const FollowParams = React.memo(_FollowParams);
 export default FollowParams;

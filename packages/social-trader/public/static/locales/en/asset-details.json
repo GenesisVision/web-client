@@ -28,7 +28,9 @@
     "year-short": "1Y",
     "year": "a Year",
     "all-short": "All",
-    "all": "All Time"
+    "all": "All Time",
+    "custom-short": "Custom",
+    "custom": "Selected Date"
   },
   "description": {
     "tooltips": {
@@ -37,6 +39,10 @@
       "leverage": "Set leverage of the program. Trading with leverage allows the trader to open positions larger than their own capital",
       "period": "Reporting period is the interval of time in which the trader is to conduct trading operations of their Program and report the resulting profit or loss. Investments made by the investors appear on the Program balance at the beginning of the reporting period, while all of the resulting profit is distributed at the end of the reporting period.",
       "age": "Age of the program"
+    },
+    "processing": {
+      "title": "Processing",
+      "real-time": "Real time"
     },
     "personal-management-fee": "Management fee",
     "management-fee": "Management fee",

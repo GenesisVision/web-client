@@ -8,7 +8,6 @@ import { SubmitButton } from "components/submit-button/submit-button";
 import { FundCreateAssetPlatformInfo } from "gv-api-web";
 import {
   FUND_PUBLIC_FORM_FIELDS,
-  fundPublicValidationSchema,
   IFundPublicFormValues
 } from "modules/fund-public-popup/components/fund-public-edit-form/fund-public.validators";
 import React from "react";
@@ -16,6 +15,7 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { allowPositiveValuesNumberFormat } from "utils/helpers";
 import { HookForm } from "utils/hook-form.helpers";
+import { entryFeeRules, exitFeeRules } from "utils/validators/validators";
 
 interface Props {
   title: string;
@@ -36,11 +36,6 @@ const _FundPublicEdit: React.FC<Props> = ({
 
   const form = useForm<IFundPublicFormValues>({
     defaultValues: { title },
-    validationSchema: fundPublicValidationSchema({
-      t,
-      maxEntryFee,
-      maxExitFee
-    }),
     mode: "onBlur"
   });
 
@@ -71,6 +66,7 @@ const _FundPublicEdit: React.FC<Props> = ({
             { maxFee: maxEntryFee }
           )}
           hintContent={t("create-fund-page:settings.hints.entry-fee")}
+          rules={entryFeeRules(t, maxEntryFee)}
         />
       </Row>
       <Row onlyOffset>
@@ -88,6 +84,7 @@ const _FundPublicEdit: React.FC<Props> = ({
             }
           )}
           hintContent={t("create-fund-page:settings.hints.exit-fee")}
+          rules={exitFeeRules(t, maxExitFee)}
         />
       </Row>
       {inDialog ? (

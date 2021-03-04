@@ -67,6 +67,7 @@ const _InvestmentProgramControls: React.FC<Props> = ({
             isAuthenticated &&
             !isOwnProgram ? (
               <NotifyButton
+                hasNotifications={programDetails.personalDetails.hasNotifications}
                 broker={brokerDetails.type}
                 canInvest={programDetails.personalDetails.canInvest}
                 currency={currency}

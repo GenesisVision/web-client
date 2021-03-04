@@ -1,7 +1,6 @@
-import { isAllow } from "components/deposit/components/deposit.helpers";
 import HookFormAmountField from "components/input-amount-field/hook-form-amount-field";
-import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { RowItem } from "components/row-item/row-item";
 import { API_REQUEST_STATUS } from "hooks/api-request.hook";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import { TerminalPlaceOrderContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-place-order.context";
@@ -17,17 +16,20 @@ import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
+import { minMaxNumberRules } from "utils/validators/validators";
 
 import { usePlaceOrderAutoFill } from "./hooks/place-order-auto-fill.hook";
 import { usePlaceOrderFormReset } from "./hooks/place-order-form-reset.hook";
 import { usePlaceOrderInfo } from "./hooks/place-order-info-hook";
-import { placeOrderStopLimitValidationSchema } from "./place-order-validation";
 import {
   FilterValues,
   IPlaceOrderHandleSubmitValues,
   IStopLimitFormValues,
   TRADE_FORM_FIELDS
 } from "./place-order.types";
+import { TotalField } from "pages/trade/binance-trade-page/trading/place-order/forms/fields/total-field";
+import { QuantityField } from "pages/trade/binance-trade-page/trading/place-order/forms/fields/quantity-field";
+import { PriceField } from "pages/trade/binance-trade-page/trading/place-order/forms/fields/price-field";
 
 export interface IStopLimitTradeFormProps {
   filterValues: FilterValues;
@@ -54,8 +56,6 @@ const _StopLimitTradeForm: React.FC<
   const [t] = useTranslation();
 
   const {
-    tickSize,
-    stepSize,
     symbol: { baseAsset, quoteAsset },
     terminalType
   } = useContext(TerminalInfoContext);
@@ -78,20 +78,6 @@ const _StopLimitTradeForm: React.FC<
   });
 
   const form = useForm<IStopLimitFormValues>({
-    validationSchema: placeOrderStopLimitValidationSchema({
-      side,
-      t,
-      quoteAsset,
-      baseAsset,
-      stepSize: +stepSize,
-      tickSize: +tickSize,
-      maxTotal: maxTotalWithWallet,
-      maxPrice: +maxPrice,
-      minPrice: +minPrice,
-      maxQuantity: maxQuantityWithWallet,
-      minQuantity: +minQuantity,
-      minNotional: +minNotional
-    }),
     defaultValues: {
       [TRADE_FORM_FIELDS.timeInForce]: TIME_IN_FORCE_VALUES[0].value,
       [TRADE_FORM_FIELDS.stopPrice]: outerPrice,
@@ -140,36 +126,24 @@ const _StopLimitTradeForm: React.FC<
           label={t("Stop")}
           currency={quoteAsset}
           name={TRADE_FORM_FIELDS.stopPrice}
+          rules={minMaxNumberRules({
+            t,
+            min: 0,
+            max: Number.MAX_SAFE_INTEGER
+          })}
         />
       </Row>
       <Row>
-        <HookFormAmountField
-          autoFocus={false}
-          label={t("Limit")}
-          currency={quoteAsset}
-          name={TRADE_FORM_FIELDS.price}
-        />
+        <PriceField label={t("Limit")} min={minPrice} max={maxPrice} />
       </Row>
       <Row>
-        <HookFormAmountField
-          autoFocus={false}
-          label={t("Amount")}
-          currency={baseAsset}
-          name={TRADE_FORM_FIELDS.quantity}
-        />
+        <QuantityField min={minQuantity} max={maxQuantityWithWallet} />
       </Row>
       <Row wide onlyOffset>
         <PlaceOrderSlider value={sliderValue} setValue={setSliderValue} />
       </Row>
       <Row size={"small"}>
-        <HookFormAmountField
-          externalDirty={true}
-          autoFocus={false}
-          isAllowed={isAllow("BTC")}
-          label={isFutures ? t("Cost") : t("Total")}
-          currency={quoteAsset}
-          name={TRADE_FORM_FIELDS.total}
-        />
+        <TotalField max={maxTotalWithWallet} min={minNotional} />
       </Row>
       <Row>
         <PlaceOrderSubmitButton

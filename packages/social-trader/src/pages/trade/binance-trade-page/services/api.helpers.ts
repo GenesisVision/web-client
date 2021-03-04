@@ -143,12 +143,14 @@ export const createPlaceBuySellOrderRequest = (request: PlaceOrderRequest) => {
     symbol,
     price,
     quantity,
-    type
+    type,
+    ...rest
   }: TradeRequest & {
     accountId?: string;
   }): Promise<PlacedOrderType> => {
     return newOrder(
       {
+        ...rest,
         reduceOnly,
         stopPrice:
           type === "TakeProfitLimit" || type === "StopLossLimit"
@@ -178,12 +180,14 @@ export const createPlaceBuySellOrderRequest = (request: PlaceOrderRequest) => {
     symbol,
     price,
     quantity,
-    type
+    type,
+    ...rest
   }: TradeRequest & {
     accountId?: string;
   }): Promise<PlacedOrderType> => {
     return newOrder(
       {
+        ...rest,
         reduceOnly,
         stopPrice:
           type === "TakeProfitLimit" || type === "StopLossLimit"

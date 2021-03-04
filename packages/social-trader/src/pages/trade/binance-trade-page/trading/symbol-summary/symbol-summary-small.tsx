@@ -22,6 +22,7 @@ import { SymbolSummaryData } from "pages/trade/binance-trade-page/trading/termin
 import React, { useContext } from "react";
 import NumberFormat from "react-number-format";
 import { diffDate } from "utils/dates";
+import { formatCurrencyValue } from "utils/formatter";
 
 interface Props {
   data: SymbolSummaryData;
@@ -47,6 +48,8 @@ export const SymbolSummarySmallContainer: React.FC = () => {
 
 const _SymbolSummarySmallView: React.FC<Props> = ({
   data: {
+    serverTime,
+    usdRate,
     markPrice,
     tickerData: {
       eventTime,
@@ -65,6 +68,7 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
   const { exchangeAccountId, stepSize, tickSize } = useContext(
     TerminalInfoContext
   );
+
   const renderSymbol = () => (
     <h5>
       {baseAsset}/{quoteAsset}
@@ -96,14 +100,13 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
             </MonoText>
           </h4>
         </Row>
-        <Row size={"xsmall"}>
-          <Text muted>
-            $
-            <MonoText>
-              {terminalMoneyFormat({ amount: lastPrice, tickSize })}
-            </MonoText>
-          </Text>
-        </Row>
+        {usdRate && (
+          <Row size={"xsmall"}>
+            <Text muted>
+              $<MonoText>{formatCurrencyValue(usdRate, "USD")}</MonoText>
+            </Text>
+          </Row>
+        )}
       </RowItem>
       {markPrice && (
         <>
@@ -141,14 +144,21 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
                 />
               }
             >
-              <Text size={"xsmall"}>
-                <MonoText>
-                  {+markPrice.fundingRate} %{" "}
-                  {diffDate(new Date(), markPrice.nextFundingTime).format(
-                    "HH:mm:ss"
-                  )}
-                </MonoText>
-              </Text>
+              {serverTime && (
+                <Text size={"xsmall"}>
+                  <Text wrap={false}>
+                    <MonoText>{+markPrice.fundingRate * 100} % </MonoText>
+                  </Text>
+                  <MonoText>
+                    {diffDate(
+                      new Date(serverTime.date),
+                      markPrice.nextFundingTime
+                    )
+                      .utc()
+                      .format("HH:mm:ss")}
+                  </MonoText>
+                </Text>
+              )}
             </LabeledValue>
           </RowItem>
         </>

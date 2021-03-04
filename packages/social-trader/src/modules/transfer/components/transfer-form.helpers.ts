@@ -19,7 +19,6 @@ import { NumberFormatValues } from "react-number-format";
 import { formatCurrencyValue, validateFraction } from "utils/formatter";
 import { safeGetElemFromArray } from "utils/helpers";
 import { CurrencyEnum } from "utils/types";
-import { lazy, number, object, Schema } from "yup";
 
 export enum TRANSFER_FORM_FIELDS {
   sourceId = "sourceId",
@@ -55,31 +54,22 @@ export const isAmountAllow = (sourceItems: any[], id: string) => ({
     (validateFraction(value, currency) && floatValue <= available)
   );
 };
-
-export const transferFormValidationSchema = ({
-  sourceItems,
-  t
+export const amountRules = ({
+  t,
+  available,
+  currency
 }: {
   t: TFunction;
-  sourceItems: ItemsType;
-}) => {
-  return lazy(
-    (values: TransferFormValues): Schema<any> => {
-      const { available, currency } = getItem(
-        sourceItems,
-        values[TRANSFER_FORM_FIELDS.sourceId]
-      );
-      return object().shape({
-        [TRANSFER_FORM_FIELDS.amount]: number()
-          .moreThan(0, t("validations.greater-zero"))
-          .max(
-            +formatCurrencyValue(available, currency),
-            t("validations.amount-more-than-wallet-balance")
-          )
-      });
-    }
-  );
-};
+  available: number;
+  currency: CurrencyEnum;
+}) => ({
+  validate: (value: number) =>
+    value === 0 ? t("validations.greater-zero") : true,
+  max: {
+    value: +formatCurrencyValue(available, currency),
+    message: t("validations.amount-more-than-wallet-balance")
+  }
+});
 
 export const transferFormMapPropsToValues = ({
   fixedSelects,

@@ -8,12 +8,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
-import {
-  entryFeeShape,
-  exitFeeShape,
-  successFeeShape
-} from "utils/validators/validators";
-import { number, object } from "yup";
+import { entryFeeRules, exitFeeRules, successFeeRules } from "utils/validators/validators";
 
 enum FIELDS {
   exitFee = "exitFee",
@@ -108,13 +103,6 @@ const _InvestmentFees: React.FC<Props> = ({
       [FIELDS.entryFee]: entryFee,
       [FIELDS.successFee]: successFee
     },
-    validationSchema: object().shape({
-      [FIELDS.entryFee]: entryFeeShape(t, maxEntryFee),
-      [FIELDS.exitFee]:
-        asset === ASSET.FUND ? exitFeeShape(t, maxExitFee) : number(),
-      [FIELDS.successFee]:
-        asset === ASSET.PROGRAM ? successFeeShape(t, maxSuccessFee) : number()
-    }),
     mode: "onBlur"
   });
 
@@ -137,6 +125,7 @@ const _InvestmentFees: React.FC<Props> = ({
               t,
               asset: ASSET.PROGRAM
             })}
+            firstFeeRules={entryFeeRules(t, maxEntryFee)}
             secondFeeName={FIELDS.successFee}
             secondFeeLabel={t("asset-settings:fields.success-fee")}
             secondFeeUnderText={t("create-account:settings.hints.success-fee")}
@@ -146,6 +135,7 @@ const _InvestmentFees: React.FC<Props> = ({
               t,
               asset: ASSET.PROGRAM
             })}
+            secondFeeRules={successFeeRules(t, maxSuccessFee)}
           />
         )}
         {asset === ASSET.FUND && (
@@ -158,6 +148,7 @@ const _InvestmentFees: React.FC<Props> = ({
               asset: ASSET.FUND,
               maxFee: maxEntryFee
             })}
+            firstFeeRules={entryFeeRules(t, maxEntryFee)}
             secondFeeName={FIELDS.exitFee}
             secondFeeLabel={t("create-fund-page:settings.fields.exit-fee")}
             secondFeeUnderText={t("create-fund-page:settings.hints.exit-fee")}
@@ -166,6 +157,7 @@ const _InvestmentFees: React.FC<Props> = ({
               asset: ASSET.FUND,
               maxFee: maxExitFee
             })}
+            secondFeeRules={exitFeeRules(t, maxExitFee)}
           />
         )}
         <Row size={"large"}>

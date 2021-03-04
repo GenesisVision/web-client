@@ -1,16 +1,18 @@
 import SettingsBlock from "components/settings-block/settings-block";
 import { WalletSelectContainer } from "components/wallet-select/wallet-select.container";
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
+import { convertFromCurrency } from "utils/currency-converter";
+import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
+import { depositAmountRules } from "utils/validators/validators";
 
 import { TUseAssetSectionOutput } from "../asset-section.hook";
 import InputDepositAmount from "./input-deposit-amount";
+import { useRulesValues } from "components/assets/fields/use-rules-values.hook";
 
 export interface IDepositDetailsDefaultBlockProps {
   hide?: boolean;
-  setRate?: (value: number) => void;
-  setAvailable: (value: number) => void;
   blockNumber?: number;
   walletFieldName: string;
   inputName: string;
@@ -29,8 +31,6 @@ interface Props extends IDepositDetailsDefaultBlockProps, OwnProps {}
 const _DepositDetailsDefaultBlock: React.FC<Props> = ({
   assetSection,
   hide,
-  setAvailable,
-  setRate,
   blockNumber = 3,
   walletFieldName,
   inputName,
@@ -40,17 +40,29 @@ const _DepositDetailsDefaultBlock: React.FC<Props> = ({
   setFieldValue
 }) => {
   const [t] = useTranslation();
-
   const { isRatePending, rate, handleWalletChange, wallet } = assetSection;
-  useEffect(() => {
-    setRate && setRate(rate);
-  }, [rate]);
+
   useEffect(() => {
     if (!wallet) return;
     setFieldValue(inputName, undefined, true);
-    setAvailable(wallet.available);
     setFieldValue(walletFieldName, wallet.id, true);
   }, [wallet]);
+
+  const minDepositInCur = convertFromCurrency(minimumDepositAmount, rate);
+  const minDepositInCurText = parseFloat(
+    formatCurrencyValue(minDepositInCur, wallet.currency)
+  );
+
+  const rules = useMemo(
+    () => ({
+      minValue: minDepositInCur,
+      minText: minDepositInCurText,
+      max: wallet.available
+    }),
+    [minDepositInCur, minDepositInCurText, wallet]
+  );
+
+  const { getValues } = useRulesValues(rules);
 
   return (
     <SettingsBlock
@@ -76,6 +88,10 @@ const _DepositDetailsDefaultBlock: React.FC<Props> = ({
           depositAmount={depositAmount}
           rate={rate}
           setFieldValue={setFieldValue}
+          rules={depositAmountRules({
+            t,
+            getValues
+          })}
         />
       </div>
     </SettingsBlock>

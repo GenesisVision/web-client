@@ -2,12 +2,14 @@ import dayjs, { OpUnitType } from "dayjs";
 import Calendar from "dayjs/plugin/calendar";
 import LocalizedFormat from "dayjs/plugin/localizedFormat";
 import RelativeTime from "dayjs/plugin/relativeTime";
+import Utc from "dayjs/plugin/utc";
 
 const DEFAULT_DATE_RANGE = "month";
 
 dayjs.extend(LocalizedFormat);
 dayjs.extend(RelativeTime);
 dayjs.extend(Calendar);
+dayjs.extend(Utc);
 
 export const localizedDate = (date: Date | number | string): string => {
   return dayjs(date).format("ll");

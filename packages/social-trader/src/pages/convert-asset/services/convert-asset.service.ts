@@ -26,7 +26,7 @@ export const convertAsset = ({
   fromTo: TAssetFromTo;
 }): Promise<any> => {
   let promise = (Promise.resolve("") as unknown) as Promise<any>;
-  if ("logo" in data && data.logo.image && data.logo.image.cropped) {
+  if ("logo" in data && data?.logo?.image?.cropped) {
     promise = filesService.uploadFile(data.logo.image.cropped) as Promise<any>;
   }
   const method = getCovertMethod(fromTo);

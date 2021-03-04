@@ -1,12 +1,17 @@
 import clsx from "clsx";
 import { Text } from "components/text/text";
+import { PlatformWithdrawalInfo } from "gv-api-web";
 import { useTranslation } from "i18n";
 import { Done } from "pages/landing-page/components/common-icons/done";
 import React from "react";
 
 import styles from "./fees-info.module.scss";
 
-const _FeesGeneral: React.FC = () => {
+interface Props {
+  platformWithdrawalInfo: Array<PlatformWithdrawalInfo>;
+}
+
+const _FeesGeneral: React.FC<Props> = ({ platformWithdrawalInfo }) => {
   const { t } = useTranslation();
   return (
     <div className={styles["fees-info"]}>
@@ -483,13 +488,16 @@ const _FeesGeneral: React.FC = () => {
               </thead>
               <tbody>
                 <tr className={styles["fees-table__row"]}>
-                  {t("fees:withdrawal-table-row")
-                    .split("\t")
-                    .map((line, index) => (
+                  <td className={styles["fees-table__cell"]}>
+                    {t("fees:withdrawal-table-row")}
+                  </td>
+                  {platformWithdrawalInfo.map(
+                    ({ currency, withdrawalFee }, index) => (
                       <td key={index} className={styles["fees-table__cell"]}>
-                        {line}
+                        {`${withdrawalFee} ${currency}`}
                       </td>
-                    ))}
+                    )
+                  )}
                 </tr>
               </tbody>
             </table>

@@ -11,8 +11,7 @@ import * as React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
-import { twoFactorValidator } from "utils/validators/validators";
-import { object } from "yup";
+import { twoFactorRules } from "utils/validators/validators";
 
 enum FIELDS {
   twoFactorCode = "twoFactorCode"
@@ -30,10 +29,7 @@ const _CloseAssetForm: React.FC<Props> = ({
   const form = useForm<ICloseAssetFormValues>({
     defaultValues: {
       [FIELDS.twoFactorCode]: ""
-    },
-    validationSchema: object().shape({
-      [FIELDS.twoFactorCode]: twoFactorValidator(t, twoFactorEnabled)
-    })
+    }
   });
   const {
     formState: { isSubmitting }
@@ -62,6 +58,7 @@ const _CloseAssetForm: React.FC<Props> = ({
               label={t("labels.two-factor-code-label")}
               autoComplete="off"
               component={SimpleTextField}
+              rules={twoFactorRules(t)}
             />
           </Row>
         )}

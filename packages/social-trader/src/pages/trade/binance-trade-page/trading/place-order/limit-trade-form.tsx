@@ -1,7 +1,5 @@
-import { isAllow } from "components/deposit/components/deposit.helpers";
-import HookFormAmountField from "components/input-amount-field/hook-form-amount-field";
-import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { RowItem } from "components/row-item/row-item";
 import { API_REQUEST_STATUS } from "hooks/api-request.hook";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import { TerminalPlaceOrderContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-place-order.context";
@@ -15,20 +13,21 @@ import { PlaceOrderSubmitButton } from "pages/trade/binance-trade-page/trading/p
 import { OrderSide } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
 import { allowPositiveValuesNumberFormat } from "utils/helpers";
 import { HookForm } from "utils/hook-form.helpers";
 
 import { usePlaceOrderAutoFill } from "./hooks/place-order-auto-fill.hook";
 import { usePlaceOrderFormReset } from "./hooks/place-order-form-reset.hook";
 import { usePlaceOrderInfo } from "./hooks/place-order-info-hook";
-import { placeOrderDefaultValidationSchema } from "./place-order-validation";
 import {
   FilterValues,
   IPlaceOrderFormValues,
   IPlaceOrderHandleSubmitValues,
   TRADE_FORM_FIELDS
 } from "./place-order.types";
+import { TotalField } from "pages/trade/binance-trade-page/trading/place-order/forms/fields/total-field";
+import { QuantityField } from "pages/trade/binance-trade-page/trading/place-order/forms/fields/quantity-field";
+import { PriceField } from "pages/trade/binance-trade-page/trading/place-order/forms/fields/price-field";
 
 export interface ILimitTradeFormProps {
   filterValues: FilterValues;
@@ -52,12 +51,8 @@ const _LimitTradeForm: React.FC<Props> = ({
   onSubmit,
   side
 }) => {
-  const [t] = useTranslation();
-
   const {
-    tickSize,
-    stepSize,
-    symbol: { baseAsset, quoteAsset },
+    symbol: { baseAsset },
     terminalType
   } = useContext(TerminalInfoContext);
   const { currentPositionMode } = useContext(TerminalPlaceOrderContext);
@@ -79,19 +74,6 @@ const _LimitTradeForm: React.FC<Props> = ({
   });
 
   const form = useForm<IPlaceOrderFormValues>({
-    validationSchema: placeOrderDefaultValidationSchema({
-      t,
-      quoteAsset,
-      baseAsset,
-      stepSize: +stepSize,
-      tickSize: +tickSize,
-      maxTotal: maxTotalWithWallet,
-      maxPrice: +maxPrice,
-      minPrice: +minPrice,
-      maxQuantity: maxQuantityWithWallet,
-      minQuantity: +minQuantity,
-      minNotional: +minNotional
-    }),
     defaultValues: {
       [TRADE_FORM_FIELDS.timeInForce]: TIME_IN_FORCE_VALUES[0].value,
       [TRADE_FORM_FIELDS.price]: outerPrice
@@ -133,34 +115,20 @@ const _LimitTradeForm: React.FC<Props> = ({
       onSubmit={values => onSubmit({ ...values, type: "Limit" })}
     >
       <Row>
-        <HookFormAmountField
-          autoFocus={false}
-          label={t("Price")}
-          currency={quoteAsset}
-          name={TRADE_FORM_FIELDS.price}
-        />
+        <PriceField min={minPrice} max={maxPrice} />
       </Row>
       <Row>
-        <HookFormAmountField
+        <QuantityField
           isAllowed={allowPositiveValuesNumberFormat(Number.MAX_SAFE_INTEGER)}
-          autoFocus={false}
-          label={t("Amount")}
-          currency={baseAsset}
-          name={TRADE_FORM_FIELDS.quantity}
+          min={minQuantity}
+          max={maxQuantityWithWallet}
         />
       </Row>
       <Row wide onlyOffset>
         <PlaceOrderSlider value={sliderValue} setValue={setSliderValue} />
       </Row>
       <Row size={"small"}>
-        <HookFormAmountField
-          externalDirty={true}
-          autoFocus={false}
-          isAllowed={isAllow("BTC")}
-          label={isFutures ? t("Cost") : t("Total")}
-          currency={quoteAsset}
-          name={TRADE_FORM_FIELDS.total}
-        />
+        <TotalField max={maxTotalWithWallet} min={minNotional} />
       </Row>
       <Row>
         <PlaceOrderSubmitButton

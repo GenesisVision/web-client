@@ -1,6 +1,5 @@
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
-import { DialogError } from "components/dialog/dialog-error";
 import { DialogTop } from "components/dialog/dialog-top";
 import FormError from "components/form/form-error/form-error";
 import { GVHookFormField } from "components/gv-hook-form-field";
@@ -14,7 +13,7 @@ import * as React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
-import { number, object, string } from "yup";
+import { twoFactorRules } from "utils/validators/validators";
 
 enum FIELDS {
   recoveryCode = "recoveryCode",
@@ -38,23 +37,6 @@ const _DisableAuthForm: React.FC<Props> = ({ onSubmit, errorMessage }) => {
       [FIELDS.twoFactorCode]: "",
       [FIELDS.password]: ""
     },
-    validationSchema: object().shape({
-      [FIELDS.recoveryCode]:
-        tab === TAB.RECOVERY
-          ? string()
-              .matches(/^\d{6}$/, t("validations.two-factor-6digits"))
-              .required(t("profile-page:2fa-page.code-required"))
-          : string(),
-      [FIELDS.twoFactorCode]:
-        tab === TAB.TFA
-          ? string()
-              .matches(/^\d{6}$/, t("validations.two-factor-6digits"))
-              .required(t("profile-page:2fa-page.code-required"))
-          : string(),
-      [FIELDS.password]: string().required(
-        t("profile-page:2fa-page.password-required")
-      )
-    }),
     mode: "onChange"
   });
 
@@ -80,6 +62,7 @@ const _DisableAuthForm: React.FC<Props> = ({ onSubmit, errorMessage }) => {
               autoComplete="off"
               allowNegative={false}
               format="######"
+              rules={twoFactorRules(t)}
             />
           )}
           {tab === TAB.RECOVERY && (
@@ -92,6 +75,7 @@ const _DisableAuthForm: React.FC<Props> = ({ onSubmit, errorMessage }) => {
               autoComplete="off"
               allowNegative={false}
               format="######"
+              rules={twoFactorRules(t)}
             />
           )}
         </Row>
@@ -103,6 +87,9 @@ const _DisableAuthForm: React.FC<Props> = ({ onSubmit, errorMessage }) => {
             label={t("profile-page:2fa-page.password")}
             component={SimpleTextField}
             autoComplete="new-password"
+            rules={{
+              required: t("profile-page:2fa-page.password-required")
+            }}
           />
         </Row>
         {errorMessage && (

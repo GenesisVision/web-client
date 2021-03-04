@@ -61,6 +61,7 @@ const _FundAsset: React.FC<Props> = ({
                 name={!!currency && currencyName}
                 symbol={currency}
                 type={type}
+                showTitle={false}
               />
             </RowItem>
             {percent !== undefined && (

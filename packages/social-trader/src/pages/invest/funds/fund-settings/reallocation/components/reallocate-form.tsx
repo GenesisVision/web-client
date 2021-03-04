@@ -7,7 +7,7 @@ import { Row } from "components/row/row";
 import withLoader from "decorators/with-loader";
 import { FundAssetInfo, PlatformAsset } from "gv-api-web";
 import useIsOpen from "hooks/is-open.hook";
-import { assetsShape } from "pages/create-fund/components/create-fund-settings/create-fund-settings.validators";
+import { assetsRules } from "pages/create-fund/components/create-fund-settings/create-fund-settings.validators";
 import AssetsComponent from "pages/invest/funds/fund-settings/reallocation/components/assets-block/assets-block";
 import { ReallocateFieldWrapper } from "pages/invest/funds/fund-settings/reallocation/components/reallocate-field-wrapper";
 import {
@@ -21,7 +21,6 @@ import { useTranslation } from "react-i18next";
 import { safeGetElemFromArray } from "utils/helpers";
 import { HookForm } from "utils/hook-form.helpers";
 import { PlatformAssetFull } from "utils/types";
-import { object } from "yup";
 
 import ConfirmReallocate from "./confirm-reallocate";
 
@@ -65,7 +64,6 @@ const _ReallocateForm: React.FC<Props> = ({
     defaultValues: {
       [FIELDS.assets]: initAssets
     },
-    validationSchema: object().shape({ [FIELDS.assets]: assetsShape(t) }),
     mode: "onBlur"
   });
   const {
@@ -115,6 +113,7 @@ const _ReallocateForm: React.FC<Props> = ({
             name={FIELDS.assets}
             component={ReallocateFieldWrapper}
             assets={platformAssets}
+            rules={assetsRules(t)}
           />
         </LabeledValue>
       </Row>

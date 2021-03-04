@@ -5,21 +5,28 @@ import Link from "components/link/link";
 import { Row } from "components/row/row";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
 import { SubmitButton } from "components/submit-button/submit-button";
-import {
-  CAPTCHA_STATUS,
-  CaptchaStatusContext
-} from "pages/auth/captcha-container";
+import { CAPTCHA_STATUS, CaptchaStatusContext } from "pages/auth/captcha-container";
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
+import { emailRules, passwordRules } from "utils/validators/validators";
 
 import { FORGOT_PASSWORD_ROUTE } from "../../forgot-password/forgot-password.routes";
-import validationSchema from "./login-form.validators";
 
 enum FIELDS {
   email = "email",
   password = "password"
+}
+
+interface Props {
+  onSubmit: (data: ILoginFormFormValues) => void;
+  errorMessage: string;
+}
+
+export interface ILoginFormFormValues {
+  [FIELDS.email]: string;
+  [FIELDS.password]: string;
 }
 
 const _LoginForm: React.FC<Props> = ({ errorMessage, onSubmit }) => {
@@ -30,7 +37,6 @@ const _LoginForm: React.FC<Props> = ({ errorMessage, onSubmit }) => {
       [FIELDS.email]: "",
       [FIELDS.password]: ""
     },
-    validationSchema: validationSchema(t),
     mode: "onChange"
   });
 
@@ -46,6 +52,7 @@ const _LoginForm: React.FC<Props> = ({ errorMessage, onSubmit }) => {
         label={t("auth:login.placeholder.email")}
         autoComplete="email"
         component={SimpleTextField}
+        rules={emailRules}
       />
       <Row onlyOffset>
         <GVHookFormField
@@ -55,6 +62,7 @@ const _LoginForm: React.FC<Props> = ({ errorMessage, onSubmit }) => {
           label={t("auth:login.placeholder.password")}
           autoComplete="current-password"
           component={SimpleTextField}
+          rules={passwordRules(t)}
         />
       </Row>
 
@@ -86,16 +94,6 @@ const _LoginForm: React.FC<Props> = ({ errorMessage, onSubmit }) => {
     </HookForm>
   );
 };
-
-interface Props {
-  onSubmit: (data: ILoginFormFormValues) => void;
-  errorMessage: string;
-}
-
-export interface ILoginFormFormValues {
-  [FIELDS.email]: string;
-  [FIELDS.password]: string;
-}
 
 const LoginForm = React.memo(_LoginForm);
 export default LoginForm;

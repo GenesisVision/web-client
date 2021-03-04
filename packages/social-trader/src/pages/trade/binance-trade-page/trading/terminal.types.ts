@@ -58,8 +58,10 @@ export interface DepthFullAmount {
 }
 
 export interface SymbolSummaryData {
+  serverTime?: { date: number };
   markPrice?: MarkPrice;
   tickerData: MergedTickerSymbolType;
+  usdRate?: number;
 }
 
 export type MarkPrice = BinanceRawFuturesMarkPrice;

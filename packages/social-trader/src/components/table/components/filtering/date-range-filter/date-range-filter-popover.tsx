@@ -1,28 +1,24 @@
 import { Button } from "components/button/button";
-import { Center } from "components/center/center";
 import { PopoverContentCardBlock } from "components/popover/popover-card.block";
 import { PopoverContent } from "components/popover/popover-content";
-import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
-import { FilterTitle } from "components/table/components/filtering/filter-title";
 import dayjs from "dayjs";
 import * as React from "react";
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { $textDarkColor } from "utils/style/colors";
-import { mediaBreakpointLandscapePhone } from "utils/style/media";
 import { fontSize } from "utils/style/mixins";
 import { $fontSizeParagraph } from "utils/style/sizes";
 import { Clickable } from "utils/types";
 
-import DateRangeFilterValues from "./date-range-filter-values";
 import {
   DATA_RANGE_FILTER_TYPES,
   DATE_RANGE_MAX_FILTER_NAME,
   DATE_RANGE_MIN_FILTER_NAME,
   IDataRangeFilterValue
 } from "./date-range-filter.constants";
+import DateRangeFilterDatesBase from "./date-range-filter-dates-base";
 
 interface Props {
   value?: IDataRangeFilterValue;
@@ -46,9 +42,7 @@ const getDateStart = (type: DATA_RANGE_FILTER_TYPES) => {
     case DATA_RANGE_FILTER_TYPES.ALL:
       return dayjs(0).toISOString();
     default:
-      return dayjs()
-        .subtract(1, subtract[type])
-        .toISOString();
+      return dayjs().subtract(1, subtract[type]).toISOString();
   }
 };
 
@@ -89,19 +83,6 @@ const TypeBlock = styled(PopoverContentCardBlock)`
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
-`;
-
-const Dates = styled(PopoverContentCardBlock)`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-`;
-
-const Values = styled(Center)`
-  flex-wrap: wrap;
-  ${mediaBreakpointLandscapePhone(`
-      flex-wrap:nowrap;
-  `)}
 `;
 
 const _DateRangeFilterPopover: React.FC<Props> = ({
@@ -178,39 +159,13 @@ const _DateRangeFilterPopover: React.FC<Props> = ({
           label={t("filters.date-range.custom")}
         />
       </TypeBlock>
-      <Dates>
-        <FilterTitle>{t("filters.date-range.label")}</FilterTitle>
-        <Values>
-          <DateRangeFilterValues
-            {...state}
-            onChange={handleChangeDate}
-            startLabel={startLabel}
-          />
-        </Values>
-        <Row>
-          <RowItem>
-            <Button
-              size={"xlarge"}
-              noPadding
-              variant="text"
-              onClick={handleSubmit}
-            >
-              {t("buttons.apply")}
-            </Button>
-          </RowItem>
-          <RowItem>
-            <Button
-              size={"xlarge"}
-              noPadding
-              variant="text"
-              color="secondary"
-              onClick={cancel}
-            >
-              {t("buttons.cancel")}
-            </Button>
-          </RowItem>
-        </Row>
-      </Dates>
+      <DateRangeFilterDatesBase
+        {...state}
+        cancel={cancel}
+        startLabel={startLabel}
+        handleSubmit={handleSubmit}
+        handleChangeDate={handleChangeDate}
+      />
     </Container>
   );
 };
