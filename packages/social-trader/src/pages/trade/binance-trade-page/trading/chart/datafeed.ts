@@ -1,4 +1,4 @@
-import { BinanceRawKlineInterval } from "gv-api-web";
+import { BinanceKlineInterval } from "gv-api-web";
 import {
   IBasicDataFeed,
   SearchSymbolResultItem
@@ -16,8 +16,8 @@ import {
   Symbol
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 
-const formatTimeResolution = (resolution: string): BinanceRawKlineInterval => {
-  const time: { [key: string]: BinanceRawKlineInterval } = {
+const formatTimeResolution = (resolution: string): BinanceKlineInterval => {
+  const time: { [key: string]: BinanceKlineInterval } = {
     "1": "OneMinute",
     "3": "ThreeMinutes",
     "5": "FiveMinutes",
