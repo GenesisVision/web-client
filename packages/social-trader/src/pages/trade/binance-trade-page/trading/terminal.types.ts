@@ -2,6 +2,7 @@ import { TableDataType } from "constants/constants";
 import {
   BinanceExecutionType,
   BinanceFuturesMarginType,
+  BinanceKlineInterval,
   BinanceOrderSide as BinanceRawOrderSide,
   BinanceOrderStatus,
   BinanceOrderType as BinanceRawOrderType,
@@ -17,7 +18,6 @@ import {
   BinanceRawFuturesInitialLeverageChangeResult,
   BinanceRawFuturesMarkPrice,
   BinanceRawFuturesPosition,
-  BinanceRawKline,
   BinanceRawOrder,
   BinanceRawOrderBook,
   BinanceRawRecentTrade,
@@ -761,7 +761,7 @@ export type ExchangeInfo = BinanceRawExchangeInfo;
 
 export interface KlineParams {
   symbol: string;
-  interval: BinanceRawKline;
+  interval: BinanceKlineInterval;
   startTime: number;
   endTime: number;
   limit: number;
