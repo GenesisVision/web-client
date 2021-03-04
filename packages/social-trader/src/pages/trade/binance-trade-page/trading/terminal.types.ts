@@ -13,11 +13,11 @@ import {
   BinanceRawCancelOrder,
   BinanceRawCancelOrderId,
   BinanceRawExchangeInfo,
-  BinanceRawFuturesAccountPosition,
   BinanceRawFuturesChangeMarginTypeResult,
   BinanceRawFuturesInitialLeverageChangeResult,
   BinanceRawFuturesMarkPrice,
-  BinanceRawKlineInterval,
+  BinanceRawFuturesPosition,
+  BinanceRawKline,
   BinanceRawOrder,
   BinanceRawOrderBook,
   BinanceRawRecentTrade,
@@ -40,7 +40,7 @@ export type SymbolState = {
   baseAsset: TerminalCurrency;
 };
 
-export type Position = BinanceRawFuturesAccountPosition;
+export type Position = BinanceRawFuturesPosition;
 
 export type MarginModeType = BinanceFuturesMarginType;
 
@@ -761,7 +761,7 @@ export type ExchangeInfo = BinanceRawExchangeInfo;
 
 export interface KlineParams {
   symbol: string;
-  interval: BinanceRawKlineInterval;
+  interval: BinanceRawKline;
   startTime: number;
   endTime: number;
   limit: number;
