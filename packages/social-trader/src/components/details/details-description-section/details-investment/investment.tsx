@@ -22,6 +22,7 @@ import { CurrencyEnum, FeesType } from "utils/types";
 import { InvestmentType } from "./details-investment.helpers";
 
 interface Props {
+  renderAssetPopup: (popupTop: JSX.Element, form: JSX.Element) => JSX.Element;
   isExchange?: boolean;
   isProcessingRealTime?: boolean;
   hasTradingSchedule?: boolean;
@@ -37,6 +38,7 @@ interface Props {
 }
 
 const _Investment: React.FC<Props> = ({
+  renderAssetPopup,
   isExchange,
   isProcessingRealTime,
   investmentMessage,
@@ -204,15 +206,15 @@ const _Investment: React.FC<Props> = ({
               {personalDetails.pendingOutputIsWithdrawAll ? (
                 t("withdraw-program.withdrawing-all")
               ) : (
-                <NumberFormat
-                  value={formatCurrencyValue(
-                    personalDetails.pendingOutput,
-                    pendingCurrency
-                  )}
-                  suffix={` ${pendingCurrency}`}
-                  displayType="text"
-                />
-              )}
+                  <NumberFormat
+                    value={formatCurrencyValue(
+                      personalDetails.pendingOutput,
+                      pendingCurrency
+                    )}
+                    suffix={` ${pendingCurrency}`}
+                    displayType="text"
+                  />
+                )}
             </InvestmentItem>
           )}
           {hasTradingSchedule &&
@@ -226,6 +228,7 @@ const _Investment: React.FC<Props> = ({
       <Row>
         <DetailsInvestmentFooter>
           <WithdrawButton
+            renderAssetPopup={renderAssetPopup}
             GM={isExchange}
             isProcessingRealTime={isProcessingRealTime}
             infoMessage={withdrawMessage}

@@ -1,4 +1,3 @@
-import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { GVHookFormField } from "components/gv-hook-form-field";
 import { Row } from "components/row/row";
@@ -25,39 +24,37 @@ const _FollowCreateExternalAccount: React.FC<CreateAccountFormProps> = ({
 
   return (
     <HookForm form={form} onSubmit={onClick}>
-      <DialogBottom>
-        <Row>
-          <GVHookFormField
-            wide
-            type="text"
-            name={CREATE_EXTERNAL_ACCOUNT_FORM_FIELDS.key}
-            label={t("asset-settings:fields.api-key")}
-            autoComplete="off"
-            component={SimpleTextField}
-            rules={{
-              required: t("validations.api-key")
-            }}
-          />
-        </Row>
-        <Row>
-          <GVHookFormField
-            wide
-            type="text"
-            name={CREATE_EXTERNAL_ACCOUNT_FORM_FIELDS.secret}
-            label={t("asset-settings:fields.api-secret")}
-            autoComplete="off"
-            component={SimpleTextField}
-            rules={{
-              required: t("validations.api-secret")
-            }}
-          />
-        </Row>
-        <DialogButtons>
-          <SubmitButton wide>
-            {t("follow-program.create-account.next")}
-          </SubmitButton>
-        </DialogButtons>
-      </DialogBottom>
+      <Row>
+        <GVHookFormField
+          wide
+          type="text"
+          name={CREATE_EXTERNAL_ACCOUNT_FORM_FIELDS.key}
+          label={t("asset-settings:fields.api-key")}
+          autoComplete="off"
+          component={SimpleTextField}
+          rules={{
+            required: t("validations.api-key")
+          }}
+        />
+      </Row>
+      <Row>
+        <GVHookFormField
+          wide
+          type="text"
+          name={CREATE_EXTERNAL_ACCOUNT_FORM_FIELDS.secret}
+          label={t("asset-settings:fields.api-secret")}
+          autoComplete="off"
+          component={SimpleTextField}
+          rules={{
+            required: t("validations.api-secret")
+          }}
+        />
+      </Row>
+      <DialogButtons>
+        <SubmitButton wide>
+          {t("follow-program.create-account.next")}
+        </SubmitButton>
+      </DialogButtons>
     </HookForm>
   );
 };

@@ -9,6 +9,7 @@ import React from "react";
 import { CurrencyEnum, Sizeable } from "utils/types";
 
 interface Props extends Sizeable {
+  renderAssetPopup: (popupTop: JSX.Element, form: JSX.Element) => JSX.Element;
   GM?: boolean;
   isProcessingRealTime?: boolean;
   infoMessage?: string;
@@ -20,6 +21,7 @@ interface Props extends Sizeable {
 }
 
 const _WithdrawButton: React.FC<Props> = ({
+  renderAssetPopup,
   GM,
   isProcessingRealTime,
   infoMessage,
@@ -37,6 +39,7 @@ const _WithdrawButton: React.FC<Props> = ({
   const withdraw =
     type === ASSET.FUND ? (
       <FundWithdrawDialog
+        renderAssetPopup={renderAssetPopup}
         infoMessage={infoMessage}
         onApply={onApply}
         open={isOpenPopup}
@@ -44,17 +47,18 @@ const _WithdrawButton: React.FC<Props> = ({
         onClose={setIsClosePopup}
       />
     ) : (
-      <ProgramWithdrawDialog
-        GM={GM}
-        isProcessingRealTime={isProcessingRealTime}
-        onApply={onApply}
-        open={isOpenPopup}
-        id={id}
-        accountCurrency={accountCurrency}
-        assetCurrency={currency}
-        onClose={setIsClosePopup}
-      />
-    );
+        <ProgramWithdrawDialog
+          renderAssetPopup={renderAssetPopup}
+          GM={GM}
+          isProcessingRealTime={isProcessingRealTime}
+          onApply={onApply}
+          open={isOpenPopup}
+          id={id}
+          accountCurrency={accountCurrency}
+          assetCurrency={currency}
+          onClose={setIsClosePopup}
+        />
+      );
   return (
     <>
       <Button

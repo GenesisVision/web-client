@@ -16,6 +16,7 @@ interface Props extends IDialogProps, IProgramWithdrawPopupProps {
 }
 
 const _ProgramWithdrawDialog: React.FC<Props> = ({
+  renderAssetPopup,
   GM,
   isProcessingRealTime,
   onApply,
@@ -36,6 +37,7 @@ const _ProgramWithdrawDialog: React.FC<Props> = ({
   return (
     <Dialog open={open} onClose={onClose}>
       <ProgramWithdrawPopup
+        renderAssetPopup={renderAssetPopup}
         GM={GM}
         isProcessingRealTime={isProcessingRealTime}
         onApply={onApply}

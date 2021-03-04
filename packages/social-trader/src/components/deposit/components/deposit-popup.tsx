@@ -5,7 +5,10 @@ import { ASSET } from "constants/constants";
 import { withBlurLoader } from "decorators/with-blur-loader";
 import { useAccountCurrency } from "hooks/account-currency.hook";
 import useApiRequest from "hooks/api-request.hook";
-import { fetchWallets, TWalletsAvailableData } from "pages/wallet/services/wallet.services";
+import {
+  fetchWallets,
+  TWalletsAvailableData
+} from "pages/wallet/services/wallet.services";
 import React, { useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { convertToStatisticCurrency, sendEventToGA } from "utils/ga";
@@ -13,14 +16,19 @@ import { safeGetElemFromArray } from "utils/helpers";
 import { postponeCallback } from "utils/hook-form.helpers";
 import { CurrencyEnum } from "utils/types";
 
+import {
+  MinDepositType,
+  TAssetInvestCreatorArgs,
+  TFees
+} from "./deposit.types";
 import DepositForm from "./deposit-form";
 import DepositTop from "./deposit-top";
-import { MinDepositType, TAssetInvestCreatorArgs, TFees } from "./deposit.types";
 
 const getRequestMethod = (asset: ASSET) =>
   asset === ASSET.FUND ? fundInvest : programInvest;
 
 export interface IDepositContainerProps {
+  renderAssetPopup: (popupTop: JSX.Element, form: JSX.Element) => JSX.Element;
   infoMessage?: string;
   title: string;
   availableToInvest?: number;
@@ -40,6 +48,7 @@ interface Props extends IDepositContainerProps {
 }
 
 const _DepositPopup: React.FC<Props> = ({
+  renderAssetPopup,
   infoMessage,
   title,
   availableToInvest,
@@ -103,30 +112,27 @@ const _DepositPopup: React.FC<Props> = ({
     wallets,
     ({ currency }) => currency === INIT_WALLET_CURRENCY
   );
-
-  return (
-    <>
-      <DepositTop
-        ownAsset={ownAsset}
-        title={title}
-        availableToInvest={availableToInvest}
-        asset={asset}
-        currency={currency}
-      />
-      <DepositForm
-        infoMessage={infoMessage}
-        ownAsset={ownAsset}
-        minDeposit={minDeposit}
-        availableToInvest={ownAsset ? undefined : availableToInvest}
-        fees={fees}
-        initWallet={initWallet}
-        hasEntryFee={hasEntryFee}
-        asset={asset}
-        errorMessage={errorMessage}
-        currency={currency}
-        onSubmit={handleInvest}
-      />
-    </>
+  return renderAssetPopup(
+    <DepositTop
+      asset={asset}
+      availableToInvest={availableToInvest}
+      currency={currency}
+      title={title}
+      ownAsset={ownAsset}
+    />,
+    <DepositForm
+      infoMessage={infoMessage}
+      ownAsset={ownAsset}
+      minDeposit={minDeposit}
+      availableToInvest={ownAsset ? undefined : availableToInvest}
+      fees={fees}
+      initWallet={initWallet}
+      hasEntryFee={hasEntryFee}
+      asset={asset}
+      errorMessage={errorMessage}
+      currency={currency}
+      onSubmit={handleInvest}
+    />
   );
 };
 

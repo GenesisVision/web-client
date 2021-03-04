@@ -35,6 +35,7 @@ const _FundAssetTooltipContainer: React.FC<Props> = ({
         target={asset.mandatoryFundPercent}
         symbol={asset.asset}
         asset={asset.asset}
+        name={asset.name}
         currency={asset.asset as CurrencyEnum} //TODO remove when api update
         type={type}
         last={idx === assetsLength - 1}
@@ -56,4 +57,4 @@ interface OwnProps {
   idx: number;
 }
 
-interface Props extends OwnProps, IFundAssetContainerProps {}
+interface Props extends OwnProps, IFundAssetContainerProps { }

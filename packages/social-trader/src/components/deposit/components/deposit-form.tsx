@@ -4,7 +4,6 @@ import {
   IDepositFormValues,
   isAllow
 } from "components/deposit/components/deposit.helpers";
-import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogError } from "components/dialog/dialog-error";
 import { DialogInfo } from "components/dialog/dialog-info";
@@ -125,59 +124,57 @@ const _DepositForm: React.FC<Props> = ({
 
   return (
     <HookForm form={form} onSubmit={onSubmit}>
-      <DialogBottom>
+      <Row>
+        <WalletSelectContainer
+          currentId={wallet.id}
+          name={DEPOSIT_FORM_FIELDS.walletId}
+          onChange={onWalletChange}
+        />
+      </Row>
+      <InputAmountField
+        currency={currency}
+        hide
+        name={DEPOSIT_FORM_FIELDS.availableInWallet}
+      />
+      <InputAmountField
+        setMin={setMinAmount}
+        name={DEPOSIT_FORM_FIELDS.amount}
+        label={t("deposit-asset.amount")}
+        currency={wallet.currency}
+        isAllowed={isAllow(wallet.currency)}
+        setMax={setMaxAmount}
+        rules={depositAmountRules({
+          t,
+          currency: wallet.currency,
+          availableToInvestInAsset,
+          min,
+          availableToInvest,
+          availableInWallet
+        })}
+      />
+      {currency !== wallet.currency && (
         <Row>
-          <WalletSelectContainer
-            currentId={wallet.id}
-            name={DEPOSIT_FORM_FIELDS.walletId}
-            onChange={onWalletChange}
-          />
+          <ConvertCurrency amount={+amount} rate={rate} currency={currency} />
         </Row>
-        <InputAmountField
+      )}
+      {!ownAsset && (
+        <InvestorFees
+          asset={asset}
+          fees={fees}
+          hasEntryFee={hasEntryFee}
+          amount={+amount}
+          rate={rate}
           currency={currency}
-          hide
-          name={DEPOSIT_FORM_FIELDS.availableInWallet}
+          walletCurrency={wallet.currency}
         />
-        <InputAmountField
-          setMin={setMinAmount}
-          name={DEPOSIT_FORM_FIELDS.amount}
-          label={t("deposit-asset.amount")}
-          currency={wallet.currency}
-          isAllowed={isAllow(wallet.currency)}
-          setMax={setMaxAmount}
-          rules={depositAmountRules({
-            t,
-            currency: wallet.currency,
-            availableToInvestInAsset,
-            min,
-            availableToInvest,
-            availableInWallet
-          })}
-        />
-        {currency !== wallet.currency && (
-          <Row>
-            <ConvertCurrency amount={+amount} rate={rate} currency={currency} />
-          </Row>
-        )}
-        {!ownAsset && (
-          <InvestorFees
-            asset={asset}
-            fees={fees}
-            hasEntryFee={hasEntryFee}
-            amount={+amount}
-            rate={rate}
-            currency={currency}
-            walletCurrency={wallet.currency}
-          />
-        )}
-        {errorMessage && <DialogError error={errorMessage} />}
-        <DialogButtons>
-          <SubmitButton checkDirty={false} isSuccessful={!errorMessage} wide>
-            {t("deposit-asset.confirm")}
-          </SubmitButton>
-        </DialogButtons>
-        {infoMessage && <DialogInfo>{infoMessage}</DialogInfo>}
-      </DialogBottom>
+      )}
+      {errorMessage && <DialogError error={errorMessage} />}
+      <DialogButtons>
+        <SubmitButton checkDirty={false} isSuccessful={!errorMessage} wide>
+          {t("deposit-asset.confirm")}
+        </SubmitButton>
+      </DialogButtons>
+      {infoMessage && <DialogInfo>{infoMessage}</DialogInfo>}
     </HookForm>
   );
 };

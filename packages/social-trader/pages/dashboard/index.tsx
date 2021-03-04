@@ -11,6 +11,7 @@ const Page: NextPage = () => {
 
 Page.getInitialProps = async () => ({
   namespacesRequired: [
+    "program-details-page",
     "asset-settings",
     "portfolio-events",
     "asset-details",

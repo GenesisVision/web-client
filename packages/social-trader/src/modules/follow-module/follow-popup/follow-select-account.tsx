@@ -20,23 +20,21 @@ const _FollowSelectAccount: React.FC<Props> = ({ accounts, onSelect }) => {
   );
   return (
     <form id="follow-select-account">
-      <DialogBottom>
-        <Row>
-          <CurrencySourceSelectElement
-            wide
-            value={account}
-            name={""}
-            label={t("follow-program.create-account.from")}
-            items={accounts.map(item => ({ ...item, title: item.login }))}
-            onChange={onChange}
-          />
-        </Row>
-        <DialogButtons>
-          <Button wide onClick={handleNext}>
-            {t("follow-program.create-account.next")}
-          </Button>
-        </DialogButtons>
-      </DialogBottom>
+      <Row>
+        <CurrencySourceSelectElement
+          wide
+          value={account}
+          name={""}
+          label={t("follow-program.create-account.from")}
+          items={accounts.map(item => ({ ...item, title: item.login }))}
+          onChange={onChange}
+        />
+      </Row>
+      <DialogButtons>
+        <Button wide onClick={handleNext}>
+          {t("follow-program.create-account.next")}
+        </Button>
+      </DialogButtons>
     </form>
   );
 };

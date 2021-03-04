@@ -1,10 +1,10 @@
-import FundAssetTooltipContainer from "components/fund-asset/fund-asset-tooltip/fund-asset-tooltip-container";
 import {
   FundAssetRemainder,
   FundAssets,
   FundAssetsContainer
 } from "components/fund-asset/fund-asset.styles";
 import { FundAssetViewType } from "components/fund-asset/fund-asset.types";
+import FundAssetTooltipContainer from "components/fund-asset/fund-asset-tooltip/fund-asset-tooltip-container";
 import Popover, {
   HORIZONTAL_POPOVER_POS,
   VERTICAL_POPOVER_POS
@@ -26,6 +26,7 @@ export type FundAssetRemoveType = (
 ) => (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 
 export interface IFundAssetContainerProps {
+  canExpand?: boolean;
   noWrap?: boolean;
   assets?: Array<FundAssetType>;
   type: FundAssetViewType;
@@ -46,6 +47,7 @@ export type FundAssetType =
   | FundAssetPercent;
 
 interface IHidedFundAssetsProps {
+  canExpand?: boolean;
   bottomOffset?: boolean;
   length?: number;
   assets: Array<FundAssetType>;
@@ -96,6 +98,7 @@ const renderFundAsset = ({
 );
 
 const _FundAssetContainer: React.FC<IFundAssetContainerProps> = ({
+  canExpand,
   noWrap,
   assets = [],
   type,
@@ -127,6 +130,7 @@ const _FundAssetContainer: React.FC<IFundAssetContainerProps> = ({
       )}
       {size && size < (length || assets.length) && (
         <HidedFundAssets
+          canExpand={canExpand}
           bottomOffset={!noWrap}
           assets={assets}
           setSize={setSize}
@@ -150,6 +154,7 @@ const _FundAssetContainer: React.FC<IFundAssetContainerProps> = ({
 
 const HidedFundAssets: React.FC<IHidedFundAssetsProps> = React.memo(
   ({
+    canExpand,
     bottomOffset,
     length,
     assets,
@@ -172,6 +177,7 @@ const HidedFundAssets: React.FC<IHidedFundAssetsProps> = React.memo(
       <>
         <RowItem size={"small"} bottomOffset={bottomOffset}>
           <HidedAssetsLabel
+            canExpand={canExpand}
             count={(length || assets.length) - size}
             type={type}
             handleOpen={handleOpen}

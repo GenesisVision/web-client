@@ -1,14 +1,15 @@
 import useApiRequest from "hooks/api-request.hook";
 import * as React from "react";
 
+import { FundWithdrawLoaderData } from "./fund-withdraw.loader";
 import {
   FundWithdrawPopup,
   IFundWithdrawPopupProps
 } from "./fund-withdraw-popup";
-import { FundWithdrawLoaderData } from "./fund-withdraw.loader";
 import { getFundWithdrawInfo } from "./services/fund-withdraw.services";
 
 const _FundWithdrawPopupContainer: React.FC<IFundWithdrawPopupProps> = ({
+  renderAssetPopup,
   infoMessage,
   onApply,
   id,
@@ -24,6 +25,7 @@ const _FundWithdrawPopupContainer: React.FC<IFundWithdrawPopupProps> = ({
   return (
     <>
       <FundWithdrawPopup
+        renderAssetPopup={renderAssetPopup}
         infoMessage={infoMessage}
         errorMessage={errorMessage}
         onApply={onApply}

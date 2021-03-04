@@ -1,5 +1,12 @@
-import { mockDate } from "components/details/details.loader-data";
+import {
+  managerLoaderData,
+  mockDate
+} from "components/details/details.loader-data";
 import { AssetDetails } from "gv-api-web";
+import {
+  brokerDetailsLoaderData,
+  tagsLoaderDataCreator
+} from "modules/follows-table/components/follow-table.loader-data";
 import { AccountSubscriptionsDataType } from "pages/accounts/account-details/services/account-details.types";
 import {
   getRandomInteger,
@@ -48,8 +55,13 @@ export const assetInfoLoaderData: AssetDetails = {
 };
 
 export const getAccountSubscriptionLoaderData = (): AccountSubscriptionsDataType => ({
+  assetOwner: managerLoaderData,
+  assetTags: tagsLoaderDataCreator(),
+  assetBrokerDetails: brokerDetailsLoaderData,
   successFeePersonal: 0,
   volumeFeePersonal: 0,
+  successFee: 0,
+  volumeFee: 0,
   detachMode: "None",
   unsubscriptionDate: new Date(),
   isExternal: false,

@@ -7,6 +7,8 @@ import { CurrencyEnum } from "utils/types";
 import FollowButton from "./follow-button";
 
 const _SignalProviderButtons: React.FC<Props> = ({
+  title,
+  renderAssetPopup,
   onApply,
   guestActions: {
     canSubscribeToExternalSignalCommonAccount,
@@ -27,6 +29,8 @@ const _SignalProviderButtons: React.FC<Props> = ({
   return (
     <DetailsStatisticContainer>
       <FollowButton
+        title={title}
+        renderAssetPopup={renderAssetPopup}
         canFollow={
           canSubscribeToExternalSignalCommonAccount ||
           canSubscribeToExternalSignalPrivateAccount ||
@@ -45,6 +49,8 @@ const _SignalProviderButtons: React.FC<Props> = ({
 };
 
 interface Props {
+  title: string;
+  renderAssetPopup: (popupTop: JSX.Element, form: JSX.Element) => JSX.Element;
   onApply: VoidFunction;
   guestActions?: AssetGuestActions;
   leverage: number;

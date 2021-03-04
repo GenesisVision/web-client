@@ -12,15 +12,16 @@ import {
 import React, { useEffect, useMemo } from "react";
 import { useSelector } from "react-redux";
 
-export interface IDepositPopupContainerProps extends IDepositContainerProps {}
+export interface IDepositPopupContainerProps extends IDepositContainerProps { }
 
 const _DepositPopupContainer: React.FC<IDepositPopupContainerProps> = props => {
   const stateWallets: WalletData[] = useSelector(walletsSelector);
 
   const currency = useAccountCurrency();
-  const { data, sendRequest: getInvestInfo } = useApiRequest<
-    TWalletsAvailableData
-  >({
+  const {
+    data,
+    sendRequest: getInvestInfo
+  } = useApiRequest<TWalletsAvailableData>({
     name: "DepositPopupContainer",
     cache: true,
     fetchOnMountData: { currency },

@@ -1,8 +1,5 @@
-import { DialogTop } from "components/dialog/dialog-top";
-import { LabeledValue } from "components/labeled-value/labeled-value";
-import { Row } from "components/row/row";
-import { Text } from "components/text/text";
 import { ASSET } from "constants/constants";
+import InvestPopupTop from "modules/invest-popup/invest-popup-top";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { formatCurrencyValue } from "utils/formatter";
@@ -29,20 +26,19 @@ const _DepositTop: React.FC<DepositTopOwnProps> = ({
   const title = ownAsset
     ? t("deposit-asset.own-title")
     : t("deposit-asset.title");
-  return (
-    <DialogTop title={header || title} subtitle={subtitle || asset}>
-      {asset === ASSET.PROGRAM && !ownAsset && !!availableToInvest && (
-        <Row size={"large"}>
-          <LabeledValue label={t("deposit-asset.program.available-to-invest")}>
-            <Text size={"xlarge"}>{`${formatCurrencyValue(
-              availableToInvest,
-              currency!
-            )} ${currency}`}</Text>
-          </LabeledValue>
-        </Row>
+
+  return asset === ASSET.PROGRAM && !ownAsset && !!availableToInvest ? (
+    <InvestPopupTop
+      title={header || title}
+      subtitle={subtitle || asset}
+      labelText={t("deposit-asset.program.available-to-invest")}
+      text={t(
+        `${formatCurrencyValue(availableToInvest, currency!)} ${currency}`
       )}
-    </DialogTop>
-  );
+    />
+  ) : (
+      <InvestPopupTop title={header || title} subtitle={subtitle || asset} />
+    );
 };
 
 const DepositTop = React.memo(_DepositTop);

@@ -6,12 +6,13 @@ import Popover, {
 import useAnchor from "hooks/anchor.hook";
 import dynamic from "next/dist/next-server/lib/dynamic";
 import React from "react";
-import { CurrencyEnum } from "utils/types";
+import { CurrencyEnum, SizesType } from "utils/types";
 
-const InvestmentLimitsPopover = dynamic(() =>
-  import(
-    "components/details/details-description-section/investment-limits-popover"
-  )
+const InvestmentLimitsPopover = dynamic(
+  () =>
+    import(
+      "components/details/details-description-section/investment-limits-popover"
+    )
 );
 
 interface Props {
@@ -22,9 +23,11 @@ interface Props {
   levelProgress?: number;
   totalAvailableInvestment?: number;
   currency?: CurrencyEnum;
+  size?: SizesType;
 }
 
 const _DetailsAssetAvatar: React.FC<Props> = ({
+  size = "large",
   logo,
   level,
   levelProgress,
@@ -42,7 +45,7 @@ const _DetailsAssetAvatar: React.FC<Props> = ({
         level={level}
         levelProgress={levelProgress}
         alt={title}
-        size="large"
+        size={size}
         color={color}
         onClickLevel={setAnchor}
       />

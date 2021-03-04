@@ -3,6 +3,7 @@ import useApiRequest from "hooks/api-request.hook";
 import { useGetRate } from "hooks/get-rate.hook";
 import { walletsSelector } from "pages/wallet/reducers/wallet.reducers";
 import React, { useCallback, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { tradingAccountMinDepositAmountsSelector } from "reducers/platform-reducer";
 import { sendEventToGA } from "utils/ga";
@@ -17,10 +18,13 @@ import {
   fetchExternalAccounts,
   getMinDeposit
 } from "../services/follow-module-service";
+import FollowTop from "./follow-popup-top";
 
 const DEFAULT_RATE_CURRENCY = "USD";
 
 const _FollowPopupFormContainer: React.FC<Props> = ({
+  title,
+  renderAssetPopup,
   leverage,
   brokerId,
   isExternal,
@@ -28,8 +32,9 @@ const _FollowPopupFormContainer: React.FC<Props> = ({
   id,
   currency,
   onClose,
-  onApply = () => {}
+  onApply = () => { }
 }) => {
+  const [t] = useTranslation();
   useEffect(() => {
     sendEventToGA({ eventCategory: "Button", eventAction: "ClickFollow" });
   }, []);
@@ -91,7 +96,8 @@ const _FollowPopupFormContainer: React.FC<Props> = ({
     },
     []
   );
-  return (
+  return renderAssetPopup(
+    <FollowTop title={title} header={t("follow-program.title")} />,
     <FollowPopupForm
       errorMessage={errorMessage}
       isExternal={isExternal}
@@ -111,6 +117,8 @@ const getApiRequest = (isExternal: boolean) =>
   isExternal ? attachToExternalSignal : attachToSignal;
 
 interface Props {
+  title: string;
+  renderAssetPopup: (popupTop: JSX.Element, form: JSX.Element) => JSX.Element;
   leverage: number;
   isExternal: boolean;
   brokerId: string;

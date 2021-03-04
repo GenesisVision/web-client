@@ -10,6 +10,7 @@ import * as React from "react";
 import NumberFormat from "react-number-format";
 
 interface Props extends FundAssetInfo {
+  name?: string;
   bottomOffset?: boolean;
   currency: Currency;
   type: FundAssetViewType;
@@ -33,11 +34,12 @@ const _FundAsset: React.FC<Props> = ({
   removeHandle,
   logoUrl,
   lightTheme,
-  asset: name,
+  asset,
+  name,
   ...other
 }) => {
   const currencyName =
-    type === "large" ? name : type !== "short" ? currency : "";
+    type === "large" ? name || asset : type !== "short" ? currency : "";
 
   switch (type) {
     case "text":

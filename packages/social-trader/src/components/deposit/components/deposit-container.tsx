@@ -8,11 +8,12 @@ import { useSelector } from "react-redux";
 import { gvInvestFeeSelector } from "reducers/platform-reducer";
 import { CurrencyEnum } from "utils/types";
 
-const DepositPopupContainer = dynamic(() =>
-  import("./deposit-popup.container")
+const DepositPopupContainer = dynamic(
+  () => import("./deposit-popup.container")
 );
 
 interface Props extends IDialogProps {
+  renderAssetPopup: (popupTop: JSX.Element, form: JSX.Element) => JSX.Element;
   infoMessage?: string;
   title: string;
   availableToInvest?: number;
@@ -27,6 +28,7 @@ interface Props extends IDialogProps {
 }
 
 const _DepositContainer: React.FC<Props> = ({
+  renderAssetPopup,
   infoMessage,
   title,
   availableToInvest,
@@ -52,6 +54,7 @@ const _DepositContainer: React.FC<Props> = ({
   return (
     <Dialog open={open} onClose={onClose}>
       <DepositPopupContainer
+        renderAssetPopup={renderAssetPopup}
         infoMessage={infoMessage}
         title={title}
         ownAsset={ownAsset}

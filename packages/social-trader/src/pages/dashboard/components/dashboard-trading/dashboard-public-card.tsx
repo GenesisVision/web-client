@@ -1,3 +1,4 @@
+import { DetailsTags } from "components/details/details-description-section/details-description/details-tags.block";
 import FundAssetContainer, {
   FundAssetType
 } from "components/fund-asset/fund-asset-container";
@@ -18,11 +19,15 @@ import {
 import { AssetType, AssetTypeExt, DashboardTradingAsset } from "gv-api-web";
 import { TAnchor } from "hooks/anchor.hook";
 import { useTranslation } from "i18n";
+import InvestDefaultPopup from "modules/invest-popup/invest-default-popup";
 import { DashboardPublicCardActions } from "pages/dashboard/components/dashboard-trading/dashboard-public-card-actions";
 import DepositWithdrawButtons from "pages/dashboard/components/dashboard-trading/deposit-withdraw-buttons";
 import { mapAccountToTransferItemType } from "pages/dashboard/services/dashboard.service";
+import FundAssetsBlock from "pages/invest/funds/fund-details/fund-popup/fund-assets-block";
+import FundFeesBlock from "pages/invest/funds/fund-details/fund-popup/fund-fees-block";
 import { generateScheduleText } from "pages/invest/funds/fund-details/services/fund-details.service";
-import React from "react";
+import ProgramFeesBlock from "pages/invest/programs/program-details/program-popup/program-fees-block";
+import React, { useCallback } from "react";
 import NumberFormat from "react-number-format";
 import {
   FOLLOW_DETAILS_FOLDER_ROUTE,
@@ -87,6 +92,69 @@ const _DashboardPublicCard: React.FC<Props> = ({
     asset.publicInfo?.fundDetails?.tradingSchedule
   );
   const investMessage = `${t("trading-schedule.invest-fund")} \n ${schedule}`;
+
+  const renderFundAssetBlock = useCallback(
+    () => (
+      <FundAssetsBlock
+        size={3}
+        canExpand={false}
+        length={totalAssetsCount}
+        assets={asset.publicInfo.fundDetails.topFundAssets}
+      />
+    ),
+    [asset]
+  );
+
+  const renderAssetPopup =
+    asset.assetType === ASSET.PROGRAM
+      ? (popupTop: JSX.Element, form: JSX.Element) => {
+        return (
+          <InvestDefaultPopup
+            popupTop={popupTop}
+            ownerUrl={asset.publicInfo.owner.url}
+            assetColor={asset.publicInfo.color}
+            assetLevelProgress={asset.publicInfo.programDetails.levelProgress}
+            assetLevel={asset.publicInfo.programDetails.level}
+            assetLogo={asset.publicInfo.logoUrl}
+            AssetDetailsExtraBlock={() => <DetailsTags tags={asset.tags} />}
+            AssetFeesBlock={() => (
+              <ProgramFeesBlock
+                currency={asset.accountInfo.originalCurrency}
+                successFee={asset.publicInfo.programDetails.successFeeCurrent}
+                stopOut={asset.publicInfo.programDetails.stopOutLevelCurrent}
+                managementFee={
+                  asset.publicInfo.programDetails.managementFeeCurrent
+                }
+              />
+            )}
+            brokerName={asset.broker.name}
+            brokerLogo={asset.broker.logoUrl}
+            title={asset.publicInfo.title}
+            assetOwner={asset.publicInfo.owner.username}
+            form={form}
+          />
+        );
+      }
+      : (popupTop: JSX.Element, form: JSX.Element) => {
+        return (
+          <InvestDefaultPopup
+            popupTop={popupTop}
+            ownerUrl={asset.publicInfo.owner.url}
+            assetColor={asset.publicInfo.color}
+            assetLogo={asset.publicInfo.logoUrl}
+            AssetDetailsExtraBlock={renderFundAssetBlock}
+            AssetFeesBlock={() => (
+              <FundFeesBlock
+                entryFee={asset.publicInfo.fundDetails.entryFeeCurrent}
+                exitFee={asset.publicInfo.fundDetails.exitFeeCurrent}
+              />
+            )}
+            title={asset.publicInfo.title}
+            assetOwner={asset.publicInfo.owner.username}
+            form={form}
+          />
+        );
+      };
 
   const renderActions = ({
     anchor,
@@ -248,6 +316,7 @@ const _DashboardPublicCard: React.FC<Props> = ({
         </TableCardTableRow>
       )}
       <DepositWithdrawButtons
+        renderAssetPopup={renderAssetPopup}
         GM={asset.publicInfo?.programDetails?.type === "DailyPeriod"}
         isProcessingRealTime={
           asset.publicInfo?.programDetails?.dailyPeriodDetails

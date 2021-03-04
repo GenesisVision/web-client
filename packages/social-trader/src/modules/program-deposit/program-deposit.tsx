@@ -16,6 +16,7 @@ import { programMinDepositAmountsSelector } from "reducers/platform-reducer";
 import { CurrencyEnum } from "utils/types";
 
 interface OwnProps {
+  renderAssetPopup: (popupTop: JSX.Element, form: JSX.Element) => JSX.Element;
   isProcessingRealTime?: boolean;
   title: string;
   entryFee?: number;
@@ -27,9 +28,10 @@ interface OwnProps {
   onApply?: () => void;
 }
 
-interface Props extends OwnProps, IDialogProps {}
+interface Props extends OwnProps, IDialogProps { }
 
 const _ProgramDeposit: React.FC<Props> = ({
+  renderAssetPopup,
   isProcessingRealTime,
   title,
   entryFee,
@@ -37,7 +39,7 @@ const _ProgramDeposit: React.FC<Props> = ({
   broker,
   id,
   currency,
-  onApply = () => {},
+  onApply = () => { },
   open,
   onClose,
   ownAsset
@@ -70,12 +72,13 @@ const _ProgramDeposit: React.FC<Props> = ({
   const infoMessage =
     withdrawInfo && !isProcessingRealTime
       ? `Your request will be processed at ${new Date(
-          withdrawInfo?.periodEnds
-        ).toUTCString()}`
+        withdrawInfo?.periodEnds
+      ).toUTCString()}`
       : undefined;
 
   return (
     <DepositContainer
+      renderAssetPopup={renderAssetPopup}
       infoMessage={infoMessage}
       title={title}
       ownAsset={ownAsset}

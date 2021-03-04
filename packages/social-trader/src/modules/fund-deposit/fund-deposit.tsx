@@ -7,12 +7,13 @@ import { useSelector } from "react-redux";
 import { fundMinDepositAmountSelector } from "reducers/platform-reducer";
 
 const _FundDeposit: React.FC<OwnProps & IDialogProps> = ({
+  renderAssetPopup,
   infoMessage,
   title,
   entryFee,
   availableToInvest,
   id,
-  onApply = () => {},
+  onApply = () => { },
   open,
   onClose,
   ownAsset
@@ -20,6 +21,7 @@ const _FundDeposit: React.FC<OwnProps & IDialogProps> = ({
   const fundMinDepositAmounts = useSelector(fundMinDepositAmountSelector);
   return (
     <DepositContainer
+      renderAssetPopup={renderAssetPopup}
       infoMessage={infoMessage}
       ownAsset={ownAsset}
       title={title}
@@ -41,6 +43,7 @@ const FundDeposit = withLoader(React.memo(_FundDeposit));
 export default FundDeposit;
 
 interface OwnProps {
+  renderAssetPopup: (popupTop: JSX.Element, form: JSX.Element) => JSX.Element;
   infoMessage?: string;
   title: string;
   entryFee?: number;

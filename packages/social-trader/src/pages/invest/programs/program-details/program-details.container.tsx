@@ -1,22 +1,21 @@
-import DetailsDescriptionSection
-  from "components/details/details-description-section/details-description/details-description-section";
+import DetailsDescriptionSection from "components/details/details-description-section/details-description/details-description-section";
 import { DetailsTags } from "components/details/details-description-section/details-description/details-tags.block";
 import DetailsInvestment from "components/details/details-description-section/details-investment/details-investment";
 import { DetailsDivider } from "components/details/details-divider.block";
 import Page from "components/page/page";
-import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { RowItem } from "components/row-item/row-item";
 import { ASSET, TRADE_ASSET_TYPE } from "constants/constants";
 import { LevelsParamsInfo } from "gv-api-web";
+import InvestDefaultPopup from "modules/invest-popup/invest-default-popup";
 import dynamic from "next/dynamic";
 import { mapProgramFollowToTransferItemType } from "pages/dashboard/services/dashboard.service";
-import FollowDetailsStatisticSection
-  from "pages/invest/follows/follow-details/follow-details-statistic-section/follow-details-statistic-section";
-import PerformanceData from "pages/invest/programs/program-details/program-details-description/performance-data";
-import ProgramDetailsStatisticSection
-  from "pages/invest/programs/program-details/program-details-statistic-section/program-details-statistic-section";
+import FollowDetailsStatisticSection from "pages/invest/follows/follow-details/follow-details-statistic-section/follow-details-statistic-section";
+import FollowFeesBlock from "pages/invest/follows/follow-details/follow-popup/follow-fees-block";
 import { levelsParamsLoaderData } from "pages/invest/programs/program-details/program-details.loader-data";
 import { ProgramDescriptionDataType } from "pages/invest/programs/program-details/program-details.types";
+import PerformanceData from "pages/invest/programs/program-details/program-details-description/performance-data";
+import ProgramDetailsStatisticSection from "pages/invest/programs/program-details/program-details-statistic-section/program-details-statistic-section";
 import { getSchema } from "pages/invest/programs/program-details/program-schema";
 import * as React from "react";
 import { useCallback, useMemo } from "react";
@@ -32,7 +31,10 @@ import {
 } from "utils/compose-url";
 import { $paddingMedium } from "utils/style/sizes";
 
-import ProgramDetailsHistorySection, { TProgramTablesData } from "./program-history-section/program-details-history-section";
+import ProgramDetailsHistorySection, {
+  TProgramTablesData
+} from "./program-history-section/program-details-history-section";
+import ProgramFeesBlock from "./program-popup/program-fees-block";
 import {
   financialStatisticTableSelector,
   openPositionsSelector,
@@ -110,9 +112,9 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
     () => ({
       financialStatistic: programDetails
         ? {
-            dataSelector: financialStatisticTableSelector,
-            getItems: getFinancialStatistics
-          }
+          dataSelector: financialStatisticTableSelector,
+          getItems: getFinancialStatistics
+        }
         : undefined,
       openPositions: {
         itemSelector: openPositionsSelector,
@@ -121,9 +123,9 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
       },
       periodHistory: programDetails
         ? {
-            dataSelector: periodHistoryTableSelector,
-            getItems: getPeriodHistory
-          }
+          dataSelector: periodHistoryTableSelector,
+          getItems: getPeriodHistory
+        }
         : undefined,
       subscriptions: {
         dataSelector: subscriptionsTableSelector,
@@ -149,6 +151,69 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
     [tags]
   );
 
+  const renderProgramFeesBlock = useCallback(
+    () => (
+      <ProgramFeesBlock
+        currency={description.tradingAccountInfo.currency}
+        successFee={description.programDetails.successFeeCurrent}
+        stopOut={description.programDetails.stopOutLevelCurrent}
+        managementFee={description.programDetails.managementFeeCurrent}
+      />
+    ),
+    [description]
+  );
+
+  const renderFollowFeesBlock = useCallback(
+    () => (
+      <FollowFeesBlock
+        currency={description.tradingAccountInfo.currency}
+        successFee={description.followDetails.signalSettings.signalSuccessFee}
+        volumeFee={description.followDetails.signalSettings.signalVolumeFee}
+      />
+    ),
+    [description]
+  );
+
+  const renderProgramPopup = useCallback(
+    (popupTop: JSX.Element, form: JSX.Element) => (
+      <InvestDefaultPopup
+        popupTop={popupTop}
+        ownerUrl={description.owner.url}
+        assetColor={description.publicInfo.color}
+        assetLevelProgress={description.programDetails.levelProgress}
+        assetLevel={description.programDetails.level}
+        assetLogo={description.publicInfo.logoUrl}
+        AssetDetailsExtraBlock={renderAssetDetailsExtraBlock}
+        AssetFeesBlock={renderProgramFeesBlock}
+        brokerName={description.brokerDetails.name}
+        brokerLogo={description.brokerDetails.logoUrl}
+        title={description.publicInfo.title}
+        assetOwner={description.owner.username}
+        form={form}
+      />
+    ),
+    [description]
+  );
+
+  const renderFollowPopup = useCallback(
+    (popupTop: JSX.Element, form: JSX.Element) => (
+      <InvestDefaultPopup
+        popupTop={popupTop}
+        ownerUrl={description.owner.url}
+        assetColor={description.publicInfo.color}
+        assetLogo={description.publicInfo.logoUrl}
+        AssetDetailsExtraBlock={renderAssetDetailsExtraBlock}
+        AssetFeesBlock={renderFollowFeesBlock}
+        brokerName={description.brokerDetails.name}
+        brokerLogo={description.brokerDetails.logoUrl}
+        title={description.publicInfo.title}
+        assetOwner={description.owner.username}
+        form={form}
+      />
+    ),
+    [description]
+  );
+
   const renderPerformanceData = useCallback(
     () => (
       <PerformanceData
@@ -172,6 +237,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
         {description.programDetails && (
           <RowItem bottomOffset>
             <InvestmentProgramControls
+              renderAssetPopup={renderProgramPopup}
               isExchange={isExchange}
               currency={description.tradingAccountInfo.currency}
               id={description.id}
@@ -188,6 +254,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
         {description.followDetails && description.followDetails.signalSettings && (
           <RowItem bottomOffset>
             <FollowControls
+              renderAssetPopup={renderFollowPopup}
               isOwnAsset={isOwnAsset}
               onApply={handleDispatchDescription}
               publicInfo={description.publicInfo}
@@ -217,9 +284,9 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
     () =>
       isExchange && isOwnAsset
         ? createProgramApiKeysToUrl(
-            description.publicInfo.url,
-            description.publicInfo.title
-          )
+          description.publicInfo.url,
+          description.publicInfo.title
+        )
         : undefined,
     [description, isExchange]
   );
@@ -227,15 +294,14 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
   const settingsUrl = useMemo(
     () =>
       description.publicInfo.status !== "Disabled" &&
-      description.publicInfo.status !== "Closed"
+        description.publicInfo.status !== "Closed"
         ? createProgramSettingsToUrl(
-            description.publicInfo.url,
-            description.publicInfo.title
-          )
+          description.publicInfo.url,
+          description.publicInfo.title
+        )
         : undefined,
     [description]
   );
-
   const notificationsUrl = useMemo(
     () =>
       assetType === "Follow"
@@ -264,11 +330,10 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
   return (
     <Page
       type={"article"}
-      title={`${
-        assetType === ASSET.FOLLOW
+      title={`${assetType === ASSET.FOLLOW
           ? t("follow-details-page:title")
           : t("program-details-page:title")
-      } - ${title}`}
+        } - ${title}`}
       description={`${assetType} ${description.publicInfo.title} - ${description.publicInfo.description}`}
       previewImage={banner}
       schemas={schemas}
@@ -297,6 +362,9 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
       />
       <DetailsDivider />
       <DetailsInvestment
+        renderAssetPopup={
+          assetType === ASSET.PROGRAM ? renderProgramPopup : renderFollowPopup
+        }
         title={description.publicInfo.title}
         isExchange={isExchange}
         isProcessingRealTime={

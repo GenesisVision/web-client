@@ -11,6 +11,7 @@ import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import { CurrencyEnum, Sizeable } from "utils/types";
 
 interface Props extends Sizeable {
+  renderAssetPopup: (popupTop: JSX.Element, form: JSX.Element) => JSX.Element;
   isProcessingRealTime?: boolean;
   infoMessage?: string;
   disabled?: boolean;
@@ -26,6 +27,7 @@ interface Props extends Sizeable {
 }
 
 const _DepositButton: React.FC<Props> = ({
+  renderAssetPopup,
   isProcessingRealTime,
   infoMessage,
   disabled,
@@ -55,6 +57,7 @@ const _DepositButton: React.FC<Props> = ({
   const deposit =
     type === ASSET.FUND ? (
       <FundDepositContainer
+        renderAssetPopup={renderAssetPopup}
         infoMessage={infoMessage}
         title={title}
         ownAsset={ownAsset}
@@ -66,20 +69,21 @@ const _DepositButton: React.FC<Props> = ({
         onClose={setIsDepositClosePopup}
       />
     ) : (
-      <ProgramDeposit
-        isProcessingRealTime={isProcessingRealTime}
-        title={title}
-        onApply={onApply}
-        ownAsset={ownAsset}
-        entryFee={entryFee}
-        availableToInvest={availableToInvest}
-        broker={broker!}
-        currency={currency!}
-        open={isOpenDepositPopup}
-        id={id}
-        onClose={setIsDepositClosePopup}
-      />
-    );
+        <ProgramDeposit
+          renderAssetPopup={renderAssetPopup}
+          isProcessingRealTime={isProcessingRealTime}
+          title={title}
+          onApply={onApply}
+          ownAsset={ownAsset}
+          entryFee={entryFee}
+          availableToInvest={availableToInvest}
+          broker={broker!}
+          currency={currency!}
+          open={isOpenDepositPopup}
+          id={id}
+          onClose={setIsDepositClosePopup}
+        />
+      );
   const label = ownAsset ? t("buttons.deposit") : t("buttons.invest");
   const openPopupMethod = isAuthenticated
     ? setIsOpenDepositPopup

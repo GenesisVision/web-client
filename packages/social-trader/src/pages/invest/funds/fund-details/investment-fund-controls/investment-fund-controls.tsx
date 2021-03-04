@@ -13,20 +13,23 @@ const _InvestmentFundControls: React.FC<Props> = ({
   hasTradingSchedule,
   infoMessage,
   fundDescription,
-  onApply
+  onApply,
+  renderAssetPopup
 }) => {
   const isOwnProgram = fundDescription.publicInfo.isOwnAsset;
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   const canInvest = isAuthenticated
     ? !!fundDescription.personalDetails &&
-      fundDescription.personalDetails.canInvest
+    fundDescription.personalDetails.canInvest
     : true;
+
   return (
     <DefaultBlock size={"large"} bordered>
       <InvestmentFundInfo fundDescription={fundDescription} />
       <Row>
         <DetailsStatisticContainer>
           <DepositButton
+            renderAssetPopup={renderAssetPopup}
             infoMessage={hasTradingSchedule ? infoMessage : undefined}
             disabled={!canInvest}
             title={fundDescription.publicInfo.title}
@@ -44,6 +47,7 @@ const _InvestmentFundControls: React.FC<Props> = ({
 };
 
 interface Props {
+  renderAssetPopup: (popupTop: JSX.Element, form: JSX.Element) => JSX.Element;
   hasTradingSchedule?: boolean;
   infoMessage?: string;
   fundDescription: FundDetailsFull;

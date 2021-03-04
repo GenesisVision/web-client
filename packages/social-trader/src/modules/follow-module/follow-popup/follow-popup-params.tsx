@@ -1,5 +1,4 @@
 import { Button } from "components/button/button";
-import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogInfo } from "components/dialog/dialog-info";
 import { GVHookFormField } from "components/gv-hook-form-field";
@@ -78,116 +77,114 @@ const _FollowParams: React.FC<IFollowParamsProps> = ({
 
   return (
     <HookForm form={form} onSubmit={onSubmit}>
-      <DialogBottom>
-        <Row>
-          <GVHookFormField
-            wide
-            name={FOLLOW_PARAMS_FIELDS.mode}
-            component={SimpleTextField}
-            label={t("follow-program.params.type")}
-            InputComponent={Select}
-          >
-            {Object.keys(modes).map((mode: string) => (
-              <option value={modes[mode].value} key={modes[mode].value}>
-                <Tooltip
-                  render={() => (
-                    <TooltipContent>{t(modes[mode].tooltip)}</TooltipContent>
-                  )}
-                >
-                  <span>{t(modes[mode].label)}</span>
-                </Tooltip>
-              </option>
-            ))}
-          </GVHookFormField>
-        </Row>
-        {mode === modes.percentage.value && (
-          <Row>
-            <InputAmountField
-              wide
-              name={FOLLOW_PARAMS_FIELDS.percent}
-              label={t("follow-program.params.volume-percent")}
-              currency={"%"}
-              setMax={setMaxVolumePercent}
-              rules={percentRules(t)}
-            />
-          </Row>
-        )}
-        <Row hide={subscribeFixedCurrencies.length < 2}>
-          <GVHookFormField
-            wide
-            name={FOLLOW_PARAMS_FIELDS.fixedCurrency}
-            component={SimpleTextField}
-            label={t("follow-program.params.fixed-currency")}
-            InputComponent={Select}
-          >
-            {subscribeFixedCurrencies.map((currency: string) => (
-              <option value={currency} key={currency}>
-                {currency}
-              </option>
-            ))}
-          </GVHookFormField>
-        </Row>
-        {mode === modes.fixed.value && (
-          <Row onlyOffset>
-            <InputAmountField
-              wide
-              name={FOLLOW_PARAMS_FIELDS.fixedVolume}
-              label={`${t("follow-program.params.fixed-currency-equivalent", {
-                fixedCurrency
-              })} *`}
-              currency={fixedCurrency}
-              rules={fixedVolumeRules(t, fixedCurrency)}
-            />
-            {currency && (
-              <Row wide>
-                <NumberFormat
-                  value={formatCurrencyValue(
-                    convertFromCurrency(fixedVolume!, rate),
-                    currency
-                  )}
-                  prefix="≈ "
-                  suffix={` ${currency}`}
-                  displayType="text"
-                />
-              </Row>
-            )}
-          </Row>
-        )}
+      <Row>
+        <GVHookFormField
+          wide
+          name={FOLLOW_PARAMS_FIELDS.mode}
+          component={SimpleTextField}
+          label={t("follow-program.params.type")}
+          InputComponent={Select}
+        >
+          {Object.keys(modes).map((mode: string) => (
+            <option value={modes[mode].value} key={modes[mode].value}>
+              <Tooltip
+                render={() => (
+                  <TooltipContent>{t(modes[mode].tooltip)}</TooltipContent>
+                )}
+              >
+                <span>{t(modes[mode].label)}</span>
+              </Tooltip>
+            </option>
+          ))}
+        </GVHookFormField>
+      </Row>
+      {mode === modes.percentage.value && (
         <Row>
           <InputAmountField
             wide
-            name={FOLLOW_PARAMS_FIELDS.openTolerancePercent}
-            label={
-              <TooltipLabel
-                tooltipContent={t(
-                  "follow-program.params.tolerance-percent-tooltip"
-                )}
-                labelText={t("follow-program.params.tolerance-percent")}
-              />
-            }
+            name={FOLLOW_PARAMS_FIELDS.percent}
+            label={t("follow-program.params.volume-percent")}
             currency={"%"}
-            setMax={setMaxOpenTolerancePercent}
-            rules={openTolerancePercentRules}
+            setMax={setMaxVolumePercent}
+            rules={percentRules(t)}
           />
         </Row>
-        <DialogButtons>
-          {onPrevStep && (
-            <Button onClick={onPrevStep} color="secondary" variant="outlined">
-              {t("follow-program.params.back")}
-            </Button>
+      )}
+      <Row hide={subscribeFixedCurrencies.length < 2}>
+        <GVHookFormField
+          wide
+          name={FOLLOW_PARAMS_FIELDS.fixedCurrency}
+          component={SimpleTextField}
+          label={t("follow-program.params.fixed-currency")}
+          InputComponent={Select}
+        >
+          {subscribeFixedCurrencies.map((currency: string) => (
+            <option value={currency} key={currency}>
+              {currency}
+            </option>
+          ))}
+        </GVHookFormField>
+      </Row>
+      {mode === modes.fixed.value && (
+        <Row onlyOffset>
+          <InputAmountField
+            wide
+            name={FOLLOW_PARAMS_FIELDS.fixedVolume}
+            label={`${t("follow-program.params.fixed-currency-equivalent", {
+              fixedCurrency
+            })} *`}
+            currency={fixedCurrency}
+            rules={fixedVolumeRules(t, fixedCurrency)}
+          />
+          {currency && (
+            <Row wide>
+              <NumberFormat
+                value={formatCurrencyValue(
+                  convertFromCurrency(fixedVolume!, rate),
+                  currency
+                )}
+                prefix="≈ "
+                suffix={` ${currency}`}
+                displayType="text"
+              />
+            </Row>
           )}
-          <SubmitButton
-            wide={!onPrevStep}
-            isSuccessful={!errorMessage}
-            checkDirty={!onPrevStep}
-          >
-            {t("follow-program.params.submit")}
-          </SubmitButton>
-        </DialogButtons>
-        {mode === modes.fixed.value && currency && (
-          <DialogInfo>* {t(getInfoText(currency))}</DialogInfo>
+        </Row>
+      )}
+      <Row>
+        <InputAmountField
+          wide
+          name={FOLLOW_PARAMS_FIELDS.openTolerancePercent}
+          label={
+            <TooltipLabel
+              tooltipContent={t(
+                "follow-program.params.tolerance-percent-tooltip"
+              )}
+              labelText={t("follow-program.params.tolerance-percent")}
+            />
+          }
+          currency={"%"}
+          setMax={setMaxOpenTolerancePercent}
+          rules={openTolerancePercentRules}
+        />
+      </Row>
+      <DialogButtons>
+        {onPrevStep && (
+          <Button onClick={onPrevStep} color="secondary" variant="outlined">
+            {t("follow-program.params.back")}
+          </Button>
         )}
-      </DialogBottom>
+        <SubmitButton
+          wide={!onPrevStep}
+          isSuccessful={!errorMessage}
+          checkDirty={!onPrevStep}
+        >
+          {t("follow-program.params.submit")}
+        </SubmitButton>
+      </DialogButtons>
+      {mode === modes.fixed.value && currency && (
+        <DialogInfo>* {t(getInfoText(currency))}</DialogInfo>
+      )}
     </HookForm>
   );
 };

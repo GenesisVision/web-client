@@ -18,6 +18,7 @@ import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import { CurrencyEnum } from "utils/types";
 
 interface Props {
+  renderAssetPopup: (popupTop: JSX.Element, form: JSX.Element) => JSX.Element;
   isExchange?: boolean;
   currency: CurrencyEnum;
   id: string;
@@ -31,6 +32,7 @@ interface Props {
 }
 
 const _InvestmentProgramControls: React.FC<Props> = ({
+  renderAssetPopup,
   isExchange,
   currency,
   onApply,
@@ -47,6 +49,7 @@ const _InvestmentProgramControls: React.FC<Props> = ({
     ? !!programDetails.personalDetails &&
     programDetails.personalDetails.canInvest
     : true;
+
   return (
     <DefaultBlock size={"large"} bordered>
       <InvestmentProgramInfo
@@ -72,6 +75,7 @@ const _InvestmentProgramControls: React.FC<Props> = ({
               />
             ) : (
               <DepositButton
+                renderAssetPopup={renderAssetPopup}
                 isProcessingRealTime={
                   programDetails.dailyPeriodDetails?.isProcessingRealTime
                 }

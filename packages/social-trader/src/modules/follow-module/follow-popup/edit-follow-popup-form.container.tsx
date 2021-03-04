@@ -6,6 +6,7 @@ import FollowParams, {
 } from "modules/follow-module/follow-popup/follow-popup-params";
 import FollowTop from "modules/follow-module/follow-popup/follow-popup-top";
 import React, { useCallback, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { subscribeFixedCurrenciesSelector } from "reducers/platform-reducer";
 import { postponeCallback } from "utils/hook-form.helpers";
@@ -16,6 +17,8 @@ import { getUpdateAttachMethod } from "../services/follow-module-service";
 const DEFAULT_RATE_CURRENCY = "USD";
 
 const _EditFollowModuleFormContainer: React.FC<Props> = ({
+  title,
+  renderAssetPopup,
   tradingAccountId,
   id,
   signalSubscription,
@@ -23,6 +26,7 @@ const _EditFollowModuleFormContainer: React.FC<Props> = ({
   onClose,
   onApply
 }) => {
+  const [t] = useTranslation();
   const subscribeFixedCurrencies = useSelector(
     subscribeFixedCurrenciesSelector
   );
@@ -48,22 +52,36 @@ const _EditFollowModuleFormContainer: React.FC<Props> = ({
     },
     [id, tradingAccountId]
   );
-  return (
-    <>
-      <FollowTop step={"params"} />
-      <FollowParams
-        errorMessage={errorMessage}
-        subscribeFixedCurrencies={subscribeFixedCurrencies}
-        rate={rate}
-        currency={currency}
-        paramsSubscription={signalSubscription}
-        onSubmit={submit}
-      />
-    </>
+  // return (
+  //   <>
+  //     <FollowTop step={"params"} />
+  //     <FollowParams
+  //       errorMessage={errorMessage}
+  //       subscribeFixedCurrencies={subscribeFixedCurrencies}
+  //       rate={rate}
+  //       currency={currency}
+  //       paramsSubscription={signalSubscription}
+  //       onSubmit={submit}
+  //     />
+  //   </>
+  // );
+
+  return renderAssetPopup(
+    <FollowTop title={title} header={t("follow-program.edit-title")} />,
+    <FollowParams
+      errorMessage={errorMessage}
+      subscribeFixedCurrencies={subscribeFixedCurrencies}
+      rate={rate}
+      currency={currency}
+      paramsSubscription={signalSubscription}
+      onSubmit={submit}
+    />
   );
 };
 
 interface Props {
+  title: string;
+  renderAssetPopup: (popupTop: JSX.Element, form: JSX.Element) => JSX.Element;
   tradingAccountId: string;
   onClose: () => void;
   onApply: () => void;

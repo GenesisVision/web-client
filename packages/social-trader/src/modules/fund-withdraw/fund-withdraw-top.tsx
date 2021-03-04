@@ -1,7 +1,4 @@
-import { DialogTop } from "components/dialog/dialog-top";
-import { BlurableLabeledValue } from "components/labeled-value/blurable-labeled-value";
-import { Row } from "components/row/row";
-import { Text } from "components/text/text";
+import InvestPopupTop from "modules/invest-popup/invest-popup-top";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { formatCurrencyValue } from "utils/formatter";
@@ -21,18 +18,13 @@ const _FundWithdrawTop: React.FC<IFundWithdrawTopProps> = ({
 }) => {
   const [t] = useTranslation();
   return (
-    <DialogTop title={t("withdraw-fund.title")} subtitle={title}>
-      <Row size={"large"}>
-        <BlurableLabeledValue
-          label={t("withdraw-fund.available-to-withdraw")}
-          isPending={isPending}
-        >
-          <Text size={"xlarge"}>
-            {formatCurrencyValue(availableToWithdraw, currency)} {currency}
-          </Text>
-        </BlurableLabeledValue>
-      </Row>
-    </DialogTop>
+    <InvestPopupTop
+      title={t("withdraw-fund.title")}
+      subtitle={title}
+      labelText={t("withdraw-fund.available-to-withdraw")}
+      text={`${formatCurrencyValue(availableToWithdraw, currency)} ${currency}`}
+      isPending={isPending}
+    />
   );
 };
 

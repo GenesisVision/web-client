@@ -4,11 +4,16 @@ import dynamic from "next/dynamic";
 import React from "react";
 import { CurrencyEnum } from "utils/types";
 
-const EditFollowModuleFormContainer = dynamic(() =>
-  import("modules/follow-module/follow-popup/edit-follow-popup-form.container")
+const EditFollowModuleFormContainer = dynamic(
+  () =>
+    import(
+      "modules/follow-module/follow-popup/edit-follow-popup-form.container"
+    )
 );
 
 const _EditFollowModuleContainer: React.FC<Props> = ({
+  title,
+  renderAssetPopup,
   signalSubscription,
   tradingAccountId,
   id,
@@ -20,6 +25,8 @@ const _EditFollowModuleContainer: React.FC<Props> = ({
   return (
     <Dialog open={open} onClose={onClose}>
       <EditFollowModuleFormContainer
+        title={title}
+        renderAssetPopup={renderAssetPopup}
         signalSubscription={signalSubscription}
         tradingAccountId={tradingAccountId}
         onApply={onApply}
@@ -32,6 +39,8 @@ const _EditFollowModuleContainer: React.FC<Props> = ({
 };
 
 interface Props {
+  title: string;
+  renderAssetPopup: (popupTop: JSX.Element, form: JSX.Element) => JSX.Element;
   signalSubscription: SignalSubscription;
   tradingAccountId: string;
   open: boolean;

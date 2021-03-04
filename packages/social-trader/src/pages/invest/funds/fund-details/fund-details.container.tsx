@@ -1,13 +1,12 @@
 import DetailsDescriptionSection from "components/details/details-description-section/details-description/details-description-section";
 import DetailsInvestment from "components/details/details-description-section/details-investment/details-investment";
 import { DetailsDivider } from "components/details/details-divider.block";
-import FundAssetContainer from "components/fund-asset/fund-asset-container";
 import Page from "components/page/page";
 import { Row } from "components/row/row";
-import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import { ASSET } from "constants/constants";
 import { FundDetailsFull } from "gv-api-web";
 import { useAccountCurrency } from "hooks/account-currency.hook";
+import InvestDefaultPopup from "modules/invest-popup/invest-default-popup";
 import React, { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
@@ -19,6 +18,8 @@ import { CurrencyEnum } from "utils/types";
 
 import FundDetailsHistorySection from "./fund-details-history-section/fund-details-history-section";
 import FundDetailsStatisticSection from "./fund-details-statistics-section/fund-details-statistic-section";
+import FundAssetsBlock from "./fund-popup/fund-assets-block";
+import FundFeesBlock from "./fund-popup/fund-fees-block";
 import { getFundSchema } from "./fund-schema";
 import InvestmentFundControls from "./investment-fund-controls/investment-fund-controls";
 import { fundEventsTableSelector } from "./reducers/fund-events.reducer";
@@ -44,9 +45,8 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
     "trading-schedule.post-create-fund"
   )} \n${schedule}`;
 
-  const title = `${t("fund-details-page:title")} - ${
-    description.publicInfo.title
-  }`;
+  const title = `${t("fund-details-page:title")} - ${description.publicInfo.title
+    }`;
 
   const banner = useMemo(
     // () => composeFundBannerUrl(description.publicInfo.url),
@@ -66,38 +66,58 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
   const settingsUrl = useMemo(
     () =>
       description.publicInfo.status !== "Disabled" &&
-      description.publicInfo.status !== "Closed"
+        description.publicInfo.status !== "Closed"
         ? createFundSettingsToUrl(
-            description.publicInfo.url,
-            description.publicInfo.title
-          )
+          description.publicInfo.url,
+          description.publicInfo.title
+        )
         : undefined,
     [description]
   );
 
   const renderAssetDetailsExtraBlock = useCallback(
+    () => <FundAssetsBlock assets={description.assetsStructure} />,
+    [description.assetsStructure]
+  );
+
+  const renderPopupAssetDetailsExtraBlock = useCallback(
     () => (
-      <>
-        <h4>
-          <TooltipLabel
-            tooltipContent={t("fund-details-page:tooltip.assets")}
-            labelText={t("asset-details:description.assets")}
-          />
-        </h4>
-        <Row>
-          <FundAssetContainer
-            type={"large"}
-            assets={description.assetsStructure}
-            size={7}
-          />
-        </Row>
-      </>
+      <FundAssetsBlock canExpand={false} assets={description.assetsStructure} />
+    ),
+    [description.assetsStructure]
+  );
+
+  const renderAssetFeesBlock = useCallback(
+    () => (
+      <FundFeesBlock
+        entryFee={description.entryFeeCurrent}
+        exitFee={description.exitFeeCurrent}
+      />
     ),
     [description]
   );
+
+  const renderFundPopup = useCallback(
+    (popupTop: JSX.Element, form: JSX.Element) => (
+      <InvestDefaultPopup
+        popupTop={popupTop}
+        ownerUrl={description.owner.url}
+        assetColor={description.publicInfo.color}
+        assetLogo={description.publicInfo.logoUrl}
+        AssetDetailsExtraBlock={renderPopupAssetDetailsExtraBlock}
+        AssetFeesBlock={renderAssetFeesBlock}
+        title={description.publicInfo.title}
+        assetOwner={description.owner.username}
+        form={form}
+      />
+    ),
+    [description]
+  );
+
   const renderControls = useCallback(
     () => (
       <InvestmentFundControls
+        renderAssetPopup={renderFundPopup}
         hasTradingSchedule={hasTradingSchedule}
         infoMessage={investMessage}
         fundDescription={description}
@@ -117,15 +137,13 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
     }),
     [description]
   );
-
   return (
     <Page
       type={"article"}
       title={title}
       schemas={schemas}
-      description={`${t("funds-page:title")} ${
-        description.publicInfo.title
-      } - ${description.publicInfo.description}`}
+      description={`${t("funds-page:title")} ${description.publicInfo.title
+        } - ${description.publicInfo.description}`}
       previewImage={banner}
     >
       <DetailsDescriptionSection
@@ -148,6 +166,7 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
       />
       <DetailsDivider />
       <DetailsInvestment
+        renderAssetPopup={renderFundPopup}
         title={description.publicInfo.title}
         hasTradingSchedule={hasTradingSchedule}
         investmentMessage={hasTradingSchedule ? investmentMessage : undefined}
