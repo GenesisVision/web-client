@@ -11,8 +11,8 @@ import { SubmitButton } from "components/submit-button/submit-button";
 import { Text } from "components/text/text";
 import useApiRequest from "hooks/api-request.hook";
 import {
+    depositAmountRules,
     IProgramWithdrawAmountFormValues,
-    programWithdrawAmountValidationSchema,
     WITHDRAW_FORM_FIELDS
 } from "modules/program-withdraw/program-withdraw.helpers";
 import React, { useCallback } from "react";
@@ -62,11 +62,6 @@ const _ProgramWithdrawForm: React.FC<Props> = ({
             [WITHDRAW_FORM_FIELDS.amount]: "",
             [WITHDRAW_FORM_FIELDS.withdrawAll]: false
         },
-        validationSchema: programWithdrawAmountValidationSchema({
-            withdrawInPercent,
-            availableToWithdraw,
-            t
-        }),
         mode: "onChange"
     });
 
@@ -155,6 +150,7 @@ const _ProgramWithdrawForm: React.FC<Props> = ({
                     currency={withdrawInPercent ? "%" : programCurrency}
                     isAllowed={isAllow}
                     setMax={isOwner || withdrawInPercent ? setMaxAmount : undefined}
+                    rules={depositAmountRules}
                 />
             </Row>
             {!GM && programCurrency !== accountCurrency && amount !== 0 && (
