@@ -1,3 +1,4 @@
+import { PlatformWithdrawalInfo } from "gv-api-web";
 import { useTranslation } from "i18n";
 import FeesGeneral from "pages/landing-page/components/fees-info/fees-general";
 import FeesTrading from "pages/landing-page/components/fees-info/fees-trading";
@@ -7,7 +8,11 @@ import React, { useCallback, useState } from "react";
 
 import styles from "./fees-section.module.scss";
 
-const FeesSection: React.FC = () => {
+interface Props {
+  platformWithdrawalInfo: Array<PlatformWithdrawalInfo>;
+}
+
+const FeesSection: React.FC<Props> = ({ platformWithdrawalInfo }) => {
   const { t } = useTranslation();
   const [currentTabId, setCurrentTab] = useState(0);
 
@@ -32,7 +37,9 @@ const FeesSection: React.FC = () => {
         </div>
       </div>
       <div className={styles["fees-section__tab-info"]}>
-        {currentTabId === 0 && <FeesGeneral />}
+        {currentTabId === 0 && (
+          <FeesGeneral platformWithdrawalInfo={platformWithdrawalInfo} />
+        )}
         {currentTabId === 1 && <FeesTrading />}
       </div>
     </section>
