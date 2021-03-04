@@ -1,11 +1,19 @@
 import { Button } from "components/button/button";
 import { IButtonProps } from "components/button/button.types";
 import { Center } from "components/center/center";
-import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { RowItem } from "components/row-item/row-item";
+import {
+  DATA_RANGE_FILTER_TYPES,
+  DATE_RANGE_MAX_FILTER_NAME,
+  DATE_RANGE_MIN_FILTER_NAME,
+  IDataRangeFilterValue
+} from "components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import DateRangeFilterCustom from "components/table/components/filtering/date-range-filter/date-range-filter-custom";
 import { Text } from "components/text/text";
+import dayjs from "dayjs";
 import * as React from "react";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { localizedDate } from "utils/dates";
@@ -27,12 +35,12 @@ interface Props {
   onChange: HandlePeriodChangeType;
 }
 
-const PeriodButton = styled(Button)<
+const PeriodButton = styled(Button) <
   IButtonProps & {
     periodType: TChartPeriod;
     period: TChartPeriod;
   }
->`
+  >`
   font-size: ${$fontSizeParagraph};
   cursor: ${({ periodType, period }) =>
     periodType === period ? "default" : "pointer"};
@@ -47,15 +55,35 @@ const Container = styled(Center)`
 `;
 
 const _ChartPeriod: React.FC<Props> = ({ period, onChange }) => {
-  const { type, start } = period;
+  const { type, start, end } = period;
+  const [customDates, setCustomDates] = useState<{
+    [DATE_RANGE_MIN_FILTER_NAME]: string;
+    [DATE_RANGE_MAX_FILTER_NAME]: string;
+  }>({
+    [DATE_RANGE_MIN_FILTER_NAME]: dayjs().toISOString(),
+    [DATE_RANGE_MAX_FILTER_NAME]: dayjs().toISOString()
+  });
   const { t } = useTranslation();
   const handleChangePeriod = useCallback(
     (newPeriodType: TChartPeriod) => () => {
-      const start = getPeriodStartDate(newPeriodType);
-      onChange({ type: newPeriodType, start });
+      let start = getPeriodStartDate(newPeriodType);
+      let end = new Date();
+      if (newPeriodType === DATA_RANGE_FILTER_TYPES.CUSTOM) {
+        start = new Date(customDates[DATE_RANGE_MIN_FILTER_NAME]);
+        end = new Date(customDates[DATE_RANGE_MAX_FILTER_NAME]);
+      }
+      onChange({ type: newPeriodType, start, end });
     },
-    []
+    [customDates]
   );
+
+  const handleChangeDate = useCallback(
+    (type: keyof IDataRangeFilterValue, date: string) => {
+      setCustomDates(prevCustomDates => ({ ...prevCustomDates, [type]: date }));
+    },
+    [customDates]
+  );
+
   return (
     <Row onlyOffset>
       <Container wrap>
@@ -77,9 +105,21 @@ const _ChartPeriod: React.FC<Props> = ({ period, onChange }) => {
                     color="secondary"
                     disabled={type === period}
                   >
-                    {t(
-                      `asset-details:chart-period.${ChartPeriodType[period]}-short`
-                    )}
+                    {period === "custom" ? (
+                      <DateRangeFilterCustom
+                        {...customDates}
+                        handleSubmit={handleChangePeriod(period)}
+                        handleChangeDate={handleChangeDate}
+                      >
+                        {t(
+                          `asset-details:chart-period.${ChartPeriodType[period]}-short`
+                        )}
+                      </DateRangeFilterCustom>
+                    ) : (
+                        t(
+                          `asset-details:chart-period.${ChartPeriodType[period]}-short`
+                        )
+                      )}
                   </PeriodButton>
                 </RowItem>
               ))}
@@ -89,7 +129,7 @@ const _ChartPeriod: React.FC<Props> = ({ period, onChange }) => {
         <RowItem bottomOffset>
           <Text muted weight={"bold"} wrap={false}>
             {type !== ChartPeriodType.all && (
-              <ChartPeriodDateLabel start={start!} />
+              <ChartPeriodDateLabel start={start!} end={end!} />
             )}
           </Text>
         </RowItem>
@@ -98,10 +138,13 @@ const _ChartPeriod: React.FC<Props> = ({ period, onChange }) => {
   );
 };
 
-const ChartPeriodDateLabel: React.FC<{ start: Date }> = ({ start }) => {
+const ChartPeriodDateLabel: React.FC<{ start: Date; end: Date }> = ({
+  start,
+  end
+}) => {
   return (
     <span>
-      {localizedDate(start)} - {localizedDate(new Date())}
+      {localizedDate(start)} - {localizedDate(end)}
     </span>
   );
 };

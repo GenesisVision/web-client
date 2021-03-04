@@ -19,7 +19,7 @@ interface IDateRangeFilterValuesProps {
   type: DATA_RANGE_FILTER_TYPES;
   [DATE_RANGE_MIN_FILTER_NAME]?: string;
   [DATE_RANGE_MAX_FILTER_NAME]?: string;
-  startLabel: string;
+  startLabel?: string;
 }
 
 const DateInput = styled(RowItem)`
@@ -50,7 +50,7 @@ const _DateRangeFilterValues: React.FC<IDateRangeFilterValuesProps> = props => {
     case DATA_RANGE_FILTER_TYPES.ALL:
       return (
         <>
-          <FirstInput value={startLabel} />
+          <FirstInput value={startLabel!} />
           <SecondInput />
         </>
       );

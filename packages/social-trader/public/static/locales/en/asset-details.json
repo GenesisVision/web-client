@@ -28,7 +28,9 @@
     "year-short": "1Y",
     "year": "a Year",
     "all-short": "All",
-    "all": "All Time"
+    "all": "All Time",
+    "custom-short": "Custom",
+    "custom": "Selected Date"
   },
   "description": {
     "tooltips": {
