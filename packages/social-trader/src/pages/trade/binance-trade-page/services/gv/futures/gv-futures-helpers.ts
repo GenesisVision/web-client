@@ -83,9 +83,9 @@ export const mapBinanceRawFuturesPositionToFuturesPositionInformation = ({
   liquidationPrice,
   markPrice,
   maxNotionalValue,
-  quantity,
+  positionAmount,
   symbol,
-  unrealizedPnL,
+  unrealizedProfit,
   positionSide
 }: BinanceRawFuturesPosition): FuturesPositionInformation => ({
   entryPrice,
@@ -96,8 +96,8 @@ export const mapBinanceRawFuturesPositionToFuturesPositionInformation = ({
   liquidationPrice,
   markPrice,
   maxNotionalValue: +maxNotionalValue,
-  positionAmt: quantity,
+  positionAmt: positionAmount,
   symbol,
-  unRealizedProfit: unrealizedPnL,
+  unRealizedProfit: unrealizedProfit,
   positionSide
 });
