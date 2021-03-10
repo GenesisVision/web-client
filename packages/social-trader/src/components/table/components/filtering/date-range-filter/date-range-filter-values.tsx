@@ -88,7 +88,7 @@ const _DateRangeFilterValues: React.FC<IDateRangeFilterValuesProps> = props => {
               //@ts-ignore
               horizontal="right"
               //@ts-ignore
-              minDate={dateToInput(firstInputMinDate)}
+              // minDate={dateToInput(firstInputMinDate)}
               maxDate={dateToInput(new Date())}
               onChange={handleOnChange(DATE_RANGE_MIN_FILTER_NAME)}
             />

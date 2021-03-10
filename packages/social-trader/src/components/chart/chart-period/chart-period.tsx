@@ -74,10 +74,12 @@ const _ChartPeriod: React.FC<Props> = ({ period, onChange, creationDate }) => {
         start = new Date(customDates[DATE_RANGE_MIN_FILTER_NAME]);
         end = new Date(customDates[DATE_RANGE_MAX_FILTER_NAME]);
       } else if (!customDatesTouched) {
-        setCustomDates(prevCustomDates => ({
-          ...prevCustomDates,
-          [DATE_RANGE_MIN_FILTER_NAME]: dayjs(start).toISOString()
-        }));
+        if (newPeriodType !== "all") {
+          setCustomDates(prevCustomDates => ({
+            ...prevCustomDates,
+            [DATE_RANGE_MIN_FILTER_NAME]: dayjs(start).toISOString()
+          }));
+        }
       }
       onChange({ type: newPeriodType, start, end });
     },
