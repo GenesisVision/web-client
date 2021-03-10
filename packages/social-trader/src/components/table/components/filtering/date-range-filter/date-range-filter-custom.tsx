@@ -27,6 +27,7 @@ const Container = styled.div`
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
     [DATE_RANGE_MIN_FILTER_NAME]: string;
     [DATE_RANGE_MAX_FILTER_NAME]: string;
+    minDate?: Date;
     handleChangeDate: (type: keyof IDataRangeFilterValue, date: string) => void;
     handleSubmit: () => void;
 }
