@@ -17,6 +17,7 @@ import { dateToInput } from "./date-range-filter.helpers";
 interface IDateRangeFilterValuesProps {
   onChange: (type: keyof IDataRangeFilterValue, date: string) => void;
   type: DATA_RANGE_FILTER_TYPES;
+  firstInputMinDate?: Date;
   [DATE_RANGE_MIN_FILTER_NAME]?: string;
   [DATE_RANGE_MAX_FILTER_NAME]?: string;
   startLabel?: string;
@@ -27,7 +28,7 @@ const DateInput = styled(RowItem)`
 `;
 
 const _DateRangeFilterValues: React.FC<IDateRangeFilterValuesProps> = props => {
-  const { type, startLabel, onChange } = props;
+  const { type, startLabel, onChange, firstInputMinDate } = props;
   const [t] = useTranslation();
   const handleOnChange = useCallback(
     (type: keyof IDataRangeFilterValue) => (e: React.ChangeEvent<any>) => {
@@ -87,6 +88,7 @@ const _DateRangeFilterValues: React.FC<IDateRangeFilterValuesProps> = props => {
               //@ts-ignore
               horizontal="right"
               //@ts-ignore
+              minDate={dateToInput(firstInputMinDate)}
               maxDate={dateToInput(new Date())}
               onChange={handleOnChange(DATE_RANGE_MIN_FILTER_NAME)}
             />

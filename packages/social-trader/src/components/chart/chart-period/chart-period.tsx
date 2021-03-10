@@ -31,6 +31,7 @@ import {
 } from "./chart-period.helpers";
 
 interface Props {
+  creationDate?: Date;
   period: ChartDefaultPeriod;
   onChange: HandlePeriodChangeType;
 }
@@ -54,13 +55,14 @@ const Container = styled(Center)`
   ${adaptiveMargin("bottom", -$paddingXsmall)};
 `;
 
-const _ChartPeriod: React.FC<Props> = ({ period, onChange }) => {
+const _ChartPeriod: React.FC<Props> = ({ period, onChange, creationDate }) => {
   const { type, start, end } = period;
+  const [customDatesTouched, setCustomDatesTouched] = useState<boolean>(false);
   const [customDates, setCustomDates] = useState<{
     [DATE_RANGE_MIN_FILTER_NAME]: string;
     [DATE_RANGE_MAX_FILTER_NAME]: string;
   }>({
-    [DATE_RANGE_MIN_FILTER_NAME]: dayjs().toISOString(),
+    [DATE_RANGE_MIN_FILTER_NAME]: dayjs(period.start).toISOString(),
     [DATE_RANGE_MAX_FILTER_NAME]: dayjs().toISOString()
   });
   const { t } = useTranslation();
@@ -71,6 +73,11 @@ const _ChartPeriod: React.FC<Props> = ({ period, onChange }) => {
       if (newPeriodType === DATA_RANGE_FILTER_TYPES.CUSTOM) {
         start = new Date(customDates[DATE_RANGE_MIN_FILTER_NAME]);
         end = new Date(customDates[DATE_RANGE_MAX_FILTER_NAME]);
+      } else if (!customDatesTouched) {
+        setCustomDates(prevCustomDates => ({
+          ...prevCustomDates,
+          [DATE_RANGE_MIN_FILTER_NAME]: dayjs(start).toISOString()
+        }));
       }
       onChange({ type: newPeriodType, start, end });
     },
@@ -80,6 +87,7 @@ const _ChartPeriod: React.FC<Props> = ({ period, onChange }) => {
   const handleChangeDate = useCallback(
     (type: keyof IDataRangeFilterValue, date: string) => {
       setCustomDates(prevCustomDates => ({ ...prevCustomDates, [type]: date }));
+      setCustomDatesTouched(true);
     },
     [customDates]
   );
@@ -108,6 +116,7 @@ const _ChartPeriod: React.FC<Props> = ({ period, onChange }) => {
                     {period === "custom" ? (
                       <DateRangeFilterCustom
                         {...customDates}
+                        minDate={creationDate}
                         handleSubmit={handleChangePeriod(period)}
                         handleChangeDate={handleChangeDate}
                       >
