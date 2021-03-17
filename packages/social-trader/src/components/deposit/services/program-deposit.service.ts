@@ -1,8 +1,5 @@
 import { AmountWithCurrency, ProgramMinInvestAmount } from "gv-api-web";
 import { api } from "services/api-client/swagger-custom-client";
-import { fetchRate } from "services/rate-service";
-import { convertToCurrency } from "utils/currency-converter";
-import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 
 import {
@@ -17,30 +14,17 @@ export const minProgramDepositsDefaultData: AmountWithCurrency[] = [
   { amount: 0, currency: "USDT" }
 ];
 
-export const getMinProgramDeposits = async ({
-  minDeposit,
-  programCurrency,
-  currencies = ["GVT", "BTC", "ETH", "USDT"]
+export const getMinProgramDeposits = ({
+  programMinDepositAmounts,
+  broker
 }: {
-  minDeposit: number;
-  programCurrency: CurrencyEnum;
-  currencies: CurrencyEnum[];
-}): Promise<AmountWithCurrency[]> => {
-  const rates = await Promise.all(
-    currencies.map(currency => {
-      return fetchRate(currency, programCurrency);
-    })
+  broker: string;
+  programMinDepositAmounts: ProgramMinInvestAmount[];
+}): AmountWithCurrency[] => {
+  const brokerIndex = programMinDepositAmounts.findIndex(
+    ({ serverType }) => serverType === broker
   );
-  return currencies.map((currency, i) => {
-    const rate = rates[i];
-    const amount =
-      currency === programCurrency
-        ? minDeposit
-        : +formatCurrencyValue(convertToCurrency(minDeposit, rate), currency, {
-            up: true
-          });
-    return { amount, currency };
-  });
+  return programMinDepositAmounts[brokerIndex].minInvestAmountIntoProgram;
 };
 
 export const getMinProgramDeposit = (
