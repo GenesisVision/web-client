@@ -1,15 +1,14 @@
+import { useRulesValues } from "components/assets/fields/use-rules-values.hook";
 import SettingsBlock from "components/settings-block/settings-block";
 import { WalletSelectContainer } from "components/wallet-select/wallet-select.container";
 import React, { useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { convertFromCurrency } from "utils/currency-converter";
 import { formatCurrencyValue } from "utils/formatter";
 import { CurrencyEnum } from "utils/types";
 import { depositAmountRules } from "utils/validators/validators";
 
 import { TUseAssetSectionOutput } from "../asset-section.hook";
 import InputDepositAmount from "./input-deposit-amount";
-import { useRulesValues } from "components/assets/fields/use-rules-values.hook";
 
 export interface IDepositDetailsDefaultBlockProps {
   hide?: boolean;
@@ -26,7 +25,7 @@ interface OwnProps {
   assetSection: TUseAssetSectionOutput;
 }
 
-interface Props extends IDepositDetailsDefaultBlockProps, OwnProps {}
+interface Props extends IDepositDetailsDefaultBlockProps, OwnProps { }
 
 const _DepositDetailsDefaultBlock: React.FC<Props> = ({
   assetSection,
@@ -48,18 +47,17 @@ const _DepositDetailsDefaultBlock: React.FC<Props> = ({
     setFieldValue(walletFieldName, wallet.id, true);
   }, [wallet]);
 
-  const minDepositInCur = convertFromCurrency(minimumDepositAmount, rate);
   const minDepositInCurText = parseFloat(
-    formatCurrencyValue(minDepositInCur, wallet.currency)
+    formatCurrencyValue(minimumDepositAmount, wallet.currency)
   );
 
   const rules = useMemo(
     () => ({
-      minValue: minDepositInCur,
+      minValue: minimumDepositAmount,
       minText: minDepositInCurText,
       max: wallet.available
     }),
-    [minDepositInCur, minDepositInCurText, wallet]
+    [minimumDepositAmount, minDepositInCurText, wallet]
   );
 
   const { getValues } = useRulesValues(rules);
