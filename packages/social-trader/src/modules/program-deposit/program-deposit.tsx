@@ -47,15 +47,10 @@ const _ProgramDeposit: React.FC<Props> = ({
   const programMinDepositAmounts = useSelector(
     programMinDepositAmountsSelector
   );
-  const minDeposit = getMinProgramDeposit(
-    programMinDepositAmounts,
-    currency,
-    broker
-  );
-  const { data: minDeposits, sendRequest: getMinDeposits } = useApiRequest({
-    name: "getMinProgramDeposits",
-    cache: true,
-    request: getMinProgramDeposits
+
+  const minDeposits = getMinProgramDeposits({
+    broker,
+    programMinDepositAmounts: programMinDepositAmounts
   });
   const { data: withdrawInfo, sendRequest: getWithdrawInfo } = useApiRequest({
     name: "getProgramWithdrawInfo",
@@ -65,7 +60,6 @@ const _ProgramDeposit: React.FC<Props> = ({
   useEffect(() => {
     if (open) {
       getWithdrawInfo({ id });
-      getMinDeposits({ minDeposit, programCurrency: currency });
     }
   }, [open]);
 
