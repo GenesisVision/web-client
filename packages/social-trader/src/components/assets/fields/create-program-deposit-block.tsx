@@ -3,8 +3,6 @@ import DepositDetailsDefaultBlock, {
 } from "components/assets/fields/deposit-details-default-block";
 import { AmountWithCurrency } from "gv-api-web";
 import React from "react";
-import { convertToCurrency } from "utils/currency-converter";
-import { formatCurrencyValue } from "utils/formatter";
 import { safeGetElemFromArray } from "utils/helpers";
 
 import useAssetSection from "../asset-section.hook";
@@ -26,26 +24,14 @@ const _CreateProgramDepositBlock: React.FC<Props> = ({
   const assetSection = useAssetSection({
     assetCurrency
   });
-  const { wallet, rate } = assetSection;
+  const { wallet } = assetSection;
 
   if (!wallet) return null;
 
   const minimumDepositAmount = safeGetElemFromArray(
     minimumDepositAmounts,
-    amountWithCurrency => amountWithCurrency.currency === assetCurrency
+    amountWithCurrency => amountWithCurrency.currency === wallet.currency
   ).amount;
-
-  const minimumDepositAmountInCurr = convertToCurrency(
-    minimumDepositAmount,
-    rate
-  );
-
-  const minimumDepositAmountInCurrFormatted =
-    wallet.currency === assetCurrency
-      ? minimumDepositAmountInCurr
-      : +formatCurrencyValue(minimumDepositAmountInCurr, wallet.currency, {
-          up: true
-        });
 
   return (
     <DepositDetailsDefaultBlock
@@ -55,7 +41,7 @@ const _CreateProgramDepositBlock: React.FC<Props> = ({
       walletFieldName={walletFieldName}
       inputName={inputName}
       depositAmount={depositAmount}
-      minimumDepositAmount={minimumDepositAmountInCurrFormatted}
+      minimumDepositAmount={minimumDepositAmount}
       setFieldValue={setFieldValue}
       assetCurrency={assetCurrency}
     />
