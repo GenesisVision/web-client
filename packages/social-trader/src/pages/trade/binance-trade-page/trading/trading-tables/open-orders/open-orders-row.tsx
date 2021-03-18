@@ -9,7 +9,8 @@ import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/c
 import { TerminalTickerContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-ticker.context";
 import {
   getSymbolData,
-  getSymbolFilters
+  getSymbolFilters,
+  setUpperFirstLetter
 } from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import { OrderSide } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useCallback, useContext } from "react";
@@ -76,7 +77,7 @@ const _OpenOrdersRow: React.FC<Props> = ({
       <TableCell>{type}</TableCell>
       <TableCell>
         <Text color={side.toLowerCase() === "buy" ? "green" : "red"}>
-          {side}
+          {setUpperFirstLetter(side)}
         </Text>
       </TableCell>
       <TableCell>

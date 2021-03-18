@@ -22,11 +22,11 @@ export interface IApiKeyFormProps {
 }
 
 const initialValues: Partial<IApiKeyFormValues> = {
-  isIpRestrict: false,
-  allowedIps: [],
-  isTradingEnabled: false,
-  twoFactorCode: "",
-  title: ""
+  [ADD_API_KEY_FORM_FIELDS.isIpRestrict]: false,
+  [ADD_API_KEY_FORM_FIELDS.allowedIps]: [],
+  [ADD_API_KEY_FORM_FIELDS.isTradingDisabled]: false,
+  [ADD_API_KEY_FORM_FIELDS.twoFactorCode]: "",
+  [ADD_API_KEY_FORM_FIELDS.title]: ""
 };
 
 const _ApiKeyForm: React.FC<IApiKeyFormProps> = ({
@@ -75,7 +75,7 @@ const _ApiKeyForm: React.FC<IApiKeyFormProps> = ({
           wide
           type="checkbox"
           color="primary"
-          name={ADD_API_KEY_FORM_FIELDS.isTradingEnabled}
+          name={ADD_API_KEY_FORM_FIELDS.isTradingDisabled}
           label={t("api-keys:key-dialog.form.isTradingEnabled")}
           component={GVCheckbox}
         />

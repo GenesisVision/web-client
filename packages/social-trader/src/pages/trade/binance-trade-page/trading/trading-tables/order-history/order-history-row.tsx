@@ -4,7 +4,7 @@ import { Text } from "components/text/text";
 import { BinanceOrderStatus } from "gv-api-web";
 import { terminalMoneyFormat } from "pages/trade/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
-import { getSymbolFilters } from "pages/trade/binance-trade-page/trading/terminal.helpers";
+import { getSymbolFilters, setUpperFirstLetter } from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import { OrderSide } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useContext } from "react";
 import styled from "styled-components";
@@ -51,10 +51,10 @@ const _OrderHistoryRow: React.FC<Props> = ({
     <TableRow>
       <TableCell firstOffset={false}>{formatDate(time)}</TableCell>
       <TableCell>{symbol}</TableCell>
-      <TableCell>{type}</TableCell>
+      <TableCell>{setUpperFirstLetter(type)}</TableCell>
       <TableCell>
         <Text color={side.toLowerCase() === "buy" ? "green" : "red"}>
-          {side}
+          {setUpperFirstLetter(side)}
         </Text>
       </TableCell>
       <TableCell>
@@ -78,14 +78,14 @@ const _OrderHistoryRow: React.FC<Props> = ({
           terminalMoneyFormat({ amount: total, tickSize: String(tickSize) })}
       </TableCell>
       <TableCell>
-        {stopPrice
+        {+stopPrice
           ? terminalMoneyFormat({
               amount: stopPrice,
               tickSize: String(tickSize)
             })
           : "—"}
       </TableCell>
-      <TableCell>{orderStatus}</TableCell>
+      <TableCell>{setUpperFirstLetter(orderStatus)}</TableCell>
     </TableRow>
   );
 };

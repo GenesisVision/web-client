@@ -28,7 +28,6 @@ export const isOrderDeleted = (
 ): boolean => {
   switch (orderStatus?.toLowerCase()) {
     case "expired":
-    case "filled":
     case "canceled":
       return true;
   }

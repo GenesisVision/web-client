@@ -1,5 +1,3 @@
-import { filterPositionEventsStream } from "pages/trade/binance-trade-page/services/futures/binance-futures.helpers";
-import { FuturesAccountUpdateEvent } from "pages/trade/binance-trade-page/services/futures/binance-futures.types";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import {
   NormalizedFunds,
@@ -14,42 +12,25 @@ import { useAccountCurrency } from "hooks/account-currency.hook";
 
 export const FundsContainer: React.FC = () => {
   const currency = useAccountCurrency();
-  const { accountInfo, userStream } = useContext(TerminalInfoContext);
-  const [socketData, setSocketData] = useState<
-    FuturesAccountUpdateEvent | undefined
-  >();
+  const { accountInfo } = useContext(TerminalInfoContext);
+
   const [list, setList] = useState<NormalizedFunds>({});
 
   useEffect(() => {
     if (!accountInfo) return;
-    setList(normalizeFundsList(accountInfo.balances));
-  }, [accountInfo]);
-
-  useEffect(() => {
-    if (!userStream) return;
-    const openOrdersStream = filterPositionEventsStream(userStream);
-    openOrdersStream.subscribe(data => {
-      setSocketData(data);
-    });
-  }, [userStream]);
-
-  useEffect(() => {
-    if (!socketData) return;
-    const updatedList = { ...list };
-    const socketDataBalances = socketData.balances;
-    socketDataBalances.forEach(update => {
-      updatedList[update.asset] = {
-        ...updatedList[update.asset],
-        ...update,
-        free: +update.free
-      };
-    });
-    updateUsdValues(updatedList, currency).then(data => {
+    const list = normalizeFundsList(accountInfo.balances);
+    updateUsdValues(list, currency).then(data => {
       setList(data);
     });
-  }, [socketData]);
+  }, [accountInfo]);
 
-  const items = useMemo(() => Object.values(list).sort(sortFundsFunc), [list]);
+  const items = useMemo(
+    () =>
+      Object.values(list)
+        .sort(sortFundsFunc)
+        .filter(({ free, locked }) => free - locked > 0),
+    [list]
+  );
 
   return <Funds items={items} />;
 };

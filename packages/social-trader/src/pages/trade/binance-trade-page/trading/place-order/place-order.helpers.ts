@@ -9,6 +9,7 @@ import {
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { tableLoaderCreator } from "utils/helpers";
 import { getSymbolFilters } from "pages/trade/binance-trade-page/trading/terminal.helpers";
+import { PriceType } from "pages/trade/binance-trade-page/trading/place-order/place-order.types";
 
 export const mapPlaceOrderErrors = (error: string) => {
   switch (error) {
@@ -22,11 +23,13 @@ export const mapPlaceOrderErrors = (error: string) => {
 };
 
 export const getTradeType = ({
+  stopPrice,
   type,
   side,
   currentPrice,
   price
 }: {
+  stopPrice?: PriceType;
   type: OrderType;
   side: OrderSide;
   currentPrice: number | string;
@@ -36,9 +39,24 @@ export const getTradeType = ({
     case "TakeProfitLimit":
       switch (side) {
         case "Buy":
-          return +price < +currentPrice ? "TakeProfitLimit" : "StopLossLimit";
+          if (+price < +currentPrice) {
+            if (stopPrice && +stopPrice < +currentPrice)
+              return "TakeProfitLimit";
+            else return "StopLossLimit";
+          } else {
+            if (stopPrice && +stopPrice < +currentPrice)
+              return "TakeProfitLimit";
+            else return "StopLossLimit";
+          }
         case "Sell":
-          return +price > +currentPrice ? "TakeProfitLimit" : "StopLossLimit";
+          if (+price > +currentPrice) {
+            if (stopPrice && +stopPrice > +currentPrice)
+              return "TakeProfitLimit";
+            else return "StopLossLimit";
+          } else {
+            if (stopPrice && +stopPrice < +currentPrice) return "StopLossLimit";
+            else return "TakeProfitLimit";
+          }
       }
       break;
     default:

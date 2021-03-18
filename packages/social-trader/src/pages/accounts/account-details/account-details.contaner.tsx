@@ -1,11 +1,13 @@
-import DetailsDescriptionSection from "components/details/details-description-section/details-description/details-description-section";
+import DetailsDescriptionSection
+  from "components/details/details-description-section/details-description/details-description-section";
 import { DetailsDivider } from "components/details/details-divider.block";
 import Page from "components/page/page";
 import { Row } from "components/row/row";
 import { ASSET, TRADE_ASSET_TYPE } from "constants/constants";
 import Crashable from "decorators/crashable";
 import dynamic from "next/dynamic";
-import AccountDetailsSubscriptions from "pages/accounts/account-details/account-details-subscriptions/account-details-subscriptions";
+import AccountDetailsSubscriptions
+  from "pages/accounts/account-details/account-details-subscriptions/account-details-subscriptions";
 import {
   dispatchAccountDescription,
   getAccountHistoryCounts,
@@ -14,9 +16,7 @@ import {
   getTradingLog
 } from "pages/accounts/account-details/services/account-details.service";
 import { mapProgramFollowToTransferItemType } from "pages/dashboard/services/dashboard.service";
-import ProgramDetailsHistorySection, {
-  TProgramTablesData
-} from "pages/invest/programs/program-details/program-history-section/program-details-history-section";
+import ProgramDetailsHistorySection, { TProgramTablesData } from "pages/invest/programs/program-details/program-history-section/program-details-history-section";
 import * as React from "react";
 import { useCallback, useMemo } from "react";
 import { useDispatch } from "react-redux";
@@ -34,8 +34,8 @@ import {
   tradingLogTableSelector
 } from "./reducers/account-history.reducer";
 
-const InvestmentAccountControls = dynamic(() =>
-  import("pages/accounts/account-details/investment-account-controls")
+const InvestmentAccountControls = dynamic(
+  () => import("pages/accounts/account-details/investment-account-controls")
 );
 
 interface Props {
@@ -90,7 +90,9 @@ const _AccountDetailsContainer: React.FC<Props> = ({ data: description }) => {
     [description, handleDispatchDescription]
   );
 
-  const apiKeysUrl = createAccountApiKeysToUrl(description.id, title);
+  const apiKeysUrl = description.ownerActions.canCreateApiKeys
+    ? createAccountApiKeysToUrl(description.id, title)
+    : undefined;
 
   return (
     <Page title={title}>

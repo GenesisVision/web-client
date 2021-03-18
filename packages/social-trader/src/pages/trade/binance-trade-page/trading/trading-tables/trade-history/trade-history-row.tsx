@@ -4,7 +4,11 @@ import { Text } from "components/text/text";
 import { terminalMoneyFormat } from "pages/trade/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import { TerminalTickerContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-ticker.context";
-import { getSymbolData, getSymbolFilters } from "pages/trade/binance-trade-page/trading/terminal.helpers";
+import {
+  getSymbolData,
+  getSymbolFilters,
+  setUpperFirstLetter
+} from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import { OrderSide } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useContext } from "react";
 import styled from "styled-components";
@@ -53,7 +57,7 @@ const _TradeHistoryRow: React.FC<Props> = ({
       <TableCell>{symbol}</TableCell>
       <TableCell>
         <Text color={side.toLowerCase() === "buy" ? "green" : "red"}>
-          {side}
+          {setUpperFirstLetter(side)}
         </Text>
       </TableCell>
       <TableCell>

@@ -18,9 +18,16 @@ export const updateUsdValues = async (
   currency: CurrencyEnum
 ): Promise<NormalizedFunds> => {
   const newList = { ...funds };
-  for (const item of Object.values(newList)) {
-    const { asset, free, locked } = item;
-    const rate = await fetchRate(asset as CurrencyEnum, currency);
+  const fundsList = Object.values(funds);
+  const rates = await Promise.all(
+    fundsList
+      .map(({ asset }) => asset)
+      .map(asset => fetchRate(asset as CurrencyEnum, currency))
+  );
+
+  for (let i = 0; i < fundsList.length; i++) {
+    const { asset, free, locked } = fundsList[i];
+    const rate = rates[i];
     const total = formatValueWithTick(+free + +locked, "0.00000001");
     const newAmountInCurrency = +formatCurrencyValue(+total * rate, currency);
     newList[asset] = {

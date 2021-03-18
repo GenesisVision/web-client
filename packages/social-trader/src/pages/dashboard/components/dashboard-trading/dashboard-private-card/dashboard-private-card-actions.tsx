@@ -114,7 +114,7 @@ const _DashboardPrivateCardActions: React.FC<Props> = ({
       {asset.actions.canConfirm2FA && (
         <ConfirmTFAButton onApply={updateItems} id={asset.id} />
       )}
-      {asset.actions.hasTerminal && (
+      {asset.actions.canCreateApiKeys && (
         <TableCardActionsItem to={apiKeysLink} onClick={clearAnchor}>
           {t("dashboard-page:trading.actions.api-keys")}
         </TableCardActionsItem>

@@ -8,7 +8,7 @@ import { isTwoFactorEnabledSelector } from "reducers/header-reducer";
 
 import { editApiKey } from "../../services/api-keys.service";
 import { ApiKeyForm } from "../form/api-key.form";
-import { IApiKeyFormValues } from "../form/api-key.helpers";
+import { ADD_API_KEY_FORM_FIELDS, IApiKeyFormValues } from "../form/api-key.helpers";
 
 export interface IEditApiKeyContainerProps {
   defaultValues: Partial<IApiKeyFormValues>;
@@ -32,8 +32,9 @@ const _EditApiKeyContainer: React.FC<IEditApiKeyContainerProps> = ({
   const handleSubmit = useCallback((values: IApiKeyFormValues) => {
     return sendRequest({
       ...values,
+      isTradingEnabled: !values[ADD_API_KEY_FORM_FIELDS.isTradingDisabled],
       id: defaultValues.id || "",
-      twoFactorCode: values.twoFactorCode || ""
+      twoFactorCode: values[ADD_API_KEY_FORM_FIELDS.twoFactorCode] || ""
     });
   }, []);
 

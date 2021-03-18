@@ -282,7 +282,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
 
   const apiKeysUrl = useMemo(
     () =>
-      isExchange && isOwnAsset
+      isOwnAsset && description.ownerActions.canCreateApiKeys
         ? createProgramApiKeysToUrl(
           description.publicInfo.url,
           description.publicInfo.title

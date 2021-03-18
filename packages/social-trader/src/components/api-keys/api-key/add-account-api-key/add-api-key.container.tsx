@@ -9,7 +9,7 @@ import { isTwoFactorEnabledSelector } from "reducers/header-reducer";
 
 import { addApiKey } from "../../services/api-keys.service";
 import { ApiKeyForm } from "../form/api-key.form";
-import { IApiKeyFormValues } from "../form/api-key.helpers";
+import { ADD_API_KEY_FORM_FIELDS, IApiKeyFormValues } from "../form/api-key.helpers";
 import { AddApiKeyCredentials } from "./add-api-key-credentials";
 
 export interface IAddApiKeyContainerProps {
@@ -29,6 +29,7 @@ const _AddApiKeyContainer: React.FC<IAddApiKeyContainerProps> = ({ id }) => {
     (values: IApiKeyFormValues) => {
       return sendRequest({
         ...values,
+        isTradingEnabled: !values[ADD_API_KEY_FORM_FIELDS.isTradingDisabled],
         id
       });
     },

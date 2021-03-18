@@ -35,6 +35,10 @@ export const useSymbolData = (): SymbolSummaryData | undefined => {
   }, [symbol]);
 
   useEffect(() => {
+    getRate({ from: symbol.baseAsset, to: "USDT" });
+  }, [symbol]);
+
+  useEffect(() => {
     if (!getMarkPrice) {
       setMarkPrice(undefined);
       return;
