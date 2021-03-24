@@ -56,7 +56,6 @@ const _SubscriptionsTableRow: React.FC<Props> = ({
   const renderAssetFeesBlock = useCallback(
     () => (
       <FollowFeesBlock
-        currency={"USDT"}
         successFee={provider.successFee}
         volumeFee={provider.volumeFee}
       />

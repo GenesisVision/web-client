@@ -166,7 +166,6 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
   const renderFollowFeesBlock = useCallback(
     () => (
       <FollowFeesBlock
-        currency={description.tradingAccountInfo.currency}
         successFee={description.followDetails.signalSettings.signalSuccessFee}
         volumeFee={description.followDetails.signalSettings.signalVolumeFee}
       />

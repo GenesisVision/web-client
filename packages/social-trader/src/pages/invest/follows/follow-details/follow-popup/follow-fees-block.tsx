@@ -3,32 +3,16 @@ import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
-import { CurrencyEnum } from "utils/types";
 
 interface Props {
-    currency: CurrencyEnum;
     volumeFee: number;
     successFee: number;
 }
 
-const _FollowFeesBlock: React.FC<Props> = ({
-    currency,
-    volumeFee,
-    successFee
-}) => {
+const _FollowFeesBlock: React.FC<Props> = ({ volumeFee, successFee }) => {
     const [t] = useTranslation();
     return (
         <>
-            <InvestmentItem
-                label={
-                    <TooltipLabel
-                        tooltipContent={t("asset-details:description.tooltips.currency")}
-                        labelText={t("asset-details:description.currency")}
-                    />
-                }
-            >
-                {currency}
-            </InvestmentItem>
             <InvestmentItem
                 label={
                     <TooltipLabel

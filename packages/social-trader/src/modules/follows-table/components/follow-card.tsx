@@ -60,7 +60,6 @@ const _FollowCard: React.FC<Props> = ({
   const renderFollowFeesBlock = useCallback(
     () => (
       <FollowFeesBlock
-        currency={follow.currency}
         successFee={follow.successFee}
         volumeFee={follow.volumeFee}
       />
