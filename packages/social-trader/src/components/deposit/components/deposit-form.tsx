@@ -58,7 +58,7 @@ const _DepositForm: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   const [wallet, setWallet] = useState<CommonWalletType>(initWallet);
-  const { rate, getRate } = useGetRate();
+  const { rate, getRate, isRatePending } = useGetRate();
 
   const form = useForm<IDepositFormValues>({
     defaultValues: {
@@ -136,22 +136,24 @@ const _DepositForm: React.FC<Props> = ({
         hide
         name={DEPOSIT_FORM_FIELDS.availableInWallet}
       />
-      <InputAmountField
-        setMin={setMinAmount}
-        name={DEPOSIT_FORM_FIELDS.amount}
-        label={t("deposit-asset.amount")}
-        currency={wallet.currency}
-        isAllowed={isAllow(wallet.currency)}
-        setMax={setMaxAmount}
-        rules={depositAmountRules({
-          t,
-          currency: wallet.currency,
-          availableToInvestInAsset,
-          min,
-          availableToInvest,
-          availableInWallet
-        })}
-      />
+      {!isRatePending && (
+        <InputAmountField
+          setMin={setMinAmount}
+          name={DEPOSIT_FORM_FIELDS.amount}
+          label={t("deposit-asset.amount")}
+          currency={wallet.currency}
+          isAllowed={isAllow(wallet.currency)}
+          setMax={setMaxAmount}
+          rules={depositAmountRules({
+            t,
+            currency: wallet.currency,
+            availableToInvestInAsset,
+            min,
+            availableToInvest,
+            availableInWallet
+          })}
+        />
+      )}
       {currency !== wallet.currency && (
         <Row>
           <ConvertCurrency amount={+amount} rate={rate} currency={currency} />
