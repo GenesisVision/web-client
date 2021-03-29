@@ -5,6 +5,7 @@ import ChipButton from "components/chip/chip-button";
 import { RowItem } from "components/row-item/row-item";
 import useIsOpen from "hooks/is-open.hook";
 import ArrowIcon from "media/arrow-up.svg";
+import WalletBnbWithdrawPopup from "modules/wallet-bnb-popup/wallet-bnb-withdraw-popup";
 import WalletWithdrawPopup from "modules/wallet-withdraw/wallet-withdraw-popup";
 import { walletsSelector } from "pages/wallet/reducers/wallet.reducers";
 import React from "react";
@@ -24,17 +25,28 @@ const _WalletWithdrawButton: React.FC<Props> = ({
   const wallets = useSelector(walletsSelector);
   const Button =
     type === WALLET_DEPOSIT_BUTTON_TYPE.SMALL ? SmallButton : FullButton;
+
+  const currentWallet = safeGetElemFromArray(
+    wallets,
+    wallet => wallet.currency === currency
+  );
+
   return (
     <>
       <Button disabled={disabled} onClick={setOpenPopup} />
-      <WalletWithdrawPopup
-        currentWallet={safeGetElemFromArray(
-          wallets,
-          wallet => wallet.currency === currency
+      {currency === "BNB" ? (
+        <WalletBnbWithdrawPopup
+          currentWallet={currentWallet}
+          open={isOpenPopup}
+          onClose={setClosePopup}
+        />
+      ) : (
+          <WalletWithdrawPopup
+            currentWallet={currentWallet}
+            open={isOpenPopup}
+            onClose={setClosePopup}
+          />
         )}
-        open={isOpenPopup}
-        onClose={setClosePopup}
-      />
     </>
   );
 };
