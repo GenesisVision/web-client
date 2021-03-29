@@ -5,6 +5,7 @@ import ChipButton from "components/chip/chip-button";
 import { RowItem } from "components/row-item/row-item";
 import useIsOpen from "hooks/is-open.hook";
 import WalletAddFundsPopup from "modules/wallet-add-funds/wallet-add-funds-popup";
+import WalletBnbDepositPopup from "modules/wallet-bnb-popup/wallet-bnb-deposit-popup";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
@@ -21,11 +22,19 @@ const _WalletDeposit: React.FC<Props> = ({
   return (
     <>
       <Button disabled={disabled} onClick={setOpenPopup} />
-      <WalletAddFundsPopup
-        currentCurrency={currency}
-        onClose={setClosePopup}
-        open={isOpenPopup}
-      />
+      {currency === "BNB" ? (
+        <WalletBnbDepositPopup
+          currentCurrency={currency}
+          onClose={setClosePopup}
+          open={isOpenPopup}
+        />
+      ) : (
+          <WalletAddFundsPopup
+            currentCurrency={currency}
+            onClose={setClosePopup}
+            open={isOpenPopup}
+          />
+        )}
     </>
   );
 };

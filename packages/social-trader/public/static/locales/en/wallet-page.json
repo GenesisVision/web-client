@@ -8,6 +8,7 @@
   "pending": "Pending",
   "deposit": "Deposit",
   "withdraw": "Withdraw",
+  "withdrawal": "Withdrawal",
   "transfer": "Transfer",
   "transactions-details": {
     "wallet": "Wallet",
@@ -136,7 +137,8 @@
   "buttons": {
     "internal-transfer": "Convert cryptocurrency within your GV Wallet between BTC, ETH, USDT and GVT",
     "deposit": "Send cryptocurrency from an external wallet address to your Genesis Vision Wallet address. The following cryptocurrencies are supported: BTC, ETH, USDT and GVT.",
-    "withdraw": "Send cryptocurrency from your GV Wallet address to an external wallet address."
+    "withdraw": "Send cryptocurrency from your GV Wallet address to an external wallet address.",
+    "understand": "I understand it"
   },
   "transaction-actions": {
     "resend-email": "Resend confirmation email",
@@ -160,5 +162,9 @@
   },
   "settings": {
     "label": "Your Genesis Markets Discount is {{percent}}%"
+  },
+  "bnb-popup-text": {
+    "withdrawal": "⚠️ Please ensure that the withdrawal address supports the Binance Smart Chain network (BSC). You will loose your assets if your chosen platform does not support BSC.",
+    "deposit": "⚠️ Please ensure that you are using Binance Smart Chain network (BSC) when depositing BNB to this address. You will loose your assets if you do not chose the correct network."
   }
 }
