@@ -1,6 +1,9 @@
 import { TFunction } from "i18next";
 import { IWalletWithdrawFormValues } from "modules/wallet-withdraw/components/wallet-withdraw-form";
-import { btcGvtWalletRules, ethGvtWalletRules } from "utils/validators/validators";
+import {
+  btcGvtWalletRules,
+  ethGvtWalletRules
+} from "utils/validators/validators";
 
 export enum WALLET_WITHDRAW_FIELDS {
   id = "id",
@@ -22,6 +25,7 @@ export const getWalletWithdrawValidationSchema = ({
   switch (currency) {
     case "GVT":
     case "ETH":
+    case "BNB":
     case "USDC":
     case "USDT":
       return ethGvtWalletRules(t);
