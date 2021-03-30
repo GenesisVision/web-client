@@ -14,7 +14,11 @@ import { RowItem } from "components/row-item/row-item";
 import SettingsBlock from "components/settings-block/settings-block";
 import { ASSET } from "constants/constants";
 import withLoader from "decorators/with-loader";
-import { FollowCreateAssetPlatformInfo, ProgramAssetPlatformInfo, TradesDelay as TradesDelayType } from "gv-api-web";
+import {
+  FollowCreateAssetPlatformInfo,
+  ProgramAssetPlatformInfo,
+  TradesDelay as TradesDelayType
+} from "gv-api-web";
 import { CONVERT_ASSET } from "pages/convert-asset/convert-asset.contants";
 import { TAssetFromTo } from "pages/convert-asset/convert-asset.types";
 import * as React from "react";
@@ -76,7 +80,9 @@ const _ConvertAssetSettings: React.FC<IConvertAssetSettingsProps> = props => {
   const isExchange = assetFrom === CONVERT_ASSET.EXCHANGE_ACCOUNT;
   const currencies = (isExchange
     ? ["BTC", "USDT"]
-    : ["GVT", "BTC", "ETH"]) as CurrencyEnum[];
+    : broker === "Huobi"
+      ? ["GVT", "BTC", "ETH"]
+      : [currencyProp]) as CurrencyEnum[];
 
   const form = useForm<IConvertAssetSettingsFormValues>({
     defaultValues: {
@@ -99,7 +105,6 @@ const _ConvertAssetSettings: React.FC<IConvertAssetSettingsProps> = props => {
   const showDescriptionBlock = assetFrom !== CONVERT_ASSET.SIGNAL;
   const showSignalFees = assetTo === CONVERT_ASSET.SIGNAL;
   const showProgramFields = assetTo === CONVERT_ASSET.PROGRAM;
-  const showCurrency = broker === "Huobi" || isExchange;
 
   return (
     <HookForm form={form} onSubmit={onSubmit}>
@@ -135,12 +140,10 @@ const _ConvertAssetSettings: React.FC<IConvertAssetSettingsProps> = props => {
               )}
               <Row>
                 <div>
-                  {showCurrency && (
-                    <Currency
-                      name={CONVERT_ASSET_FIELDS.currency}
-                      accountCurrencies={currencies}
-                    />
-                  )}
+                  <Currency
+                    name={CONVERT_ASSET_FIELDS.currency}
+                    accountCurrencies={currencies}
+                  />
                   {!isExchange && (
                     <RowItem>
                       <PeriodLength
@@ -180,11 +183,11 @@ const _ConvertAssetSettings: React.FC<IConvertAssetSettingsProps> = props => {
               firstFeeDescription={
                 isExchange
                   ? t(
-                      "create-account:settings.hints.exchange-management-fee-description"
-                    )
+                    "create-account:settings.hints.exchange-management-fee-description"
+                  )
                   : t(
-                      "create-account:settings.hints.management-fee-description"
-                    )
+                    "create-account:settings.hints.management-fee-description"
+                  )
               }
               secondFeeName={CONVERT_ASSET_FIELDS.successFee}
               secondFeeLabel={t("asset-settings:fields.success-fee")}
@@ -194,8 +197,8 @@ const _ConvertAssetSettings: React.FC<IConvertAssetSettingsProps> = props => {
               secondFeeDescription={
                 isExchange
                   ? t(
-                      "create-account:settings.hints.exchange-success-fee-description"
-                    )
+                    "create-account:settings.hints.exchange-success-fee-description"
+                  )
                   : t("create-account:settings.hints.success-fee-description")
               }
               secondFeeRules={successFeeRules(t, maxSuccessFee)}
