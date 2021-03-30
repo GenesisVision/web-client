@@ -19,6 +19,7 @@ import { TransferItemType } from "modules/transfer/transfer.types";
 import { CONVERT_ASSET } from "pages/convert-asset/convert-asset.contants";
 import { makeProgramLinkCreator } from "pages/convert-asset/convert-asset.routes";
 import * as React from "react";
+import { convertToStatisticCurrency } from "utils/ga";
 import { CurrencyEnum } from "utils/types";
 
 export const transformAmountWithCurrencyToTransferItem = ({
@@ -62,19 +63,19 @@ export const MakeProgramButton: React.FC<{
         {label}
       </TableCardActionsItem>
     ) : (
-      <PopoverContentListItem>
-        <Button disabled={true} variant="text" noPadding color={"secondary"}>
-          <Hint
-            content={label}
-            vertical={VERTICAL_POPOVER_POS.BOTTOM}
-            tooltipContent={t(
-              "dashboard-page:trading.tooltips.is-not-enough-money",
-              { value: necessaryMoney }
-            )}
-          />
-        </Button>
-      </PopoverContentListItem>
-    );
+        <PopoverContentListItem>
+          <Button disabled={true} variant="text" noPadding color={"secondary"}>
+            <Hint
+              content={label}
+              vertical={VERTICAL_POPOVER_POS.BOTTOM}
+              tooltipContent={t(
+                "dashboard-page:trading.tooltips.is-not-enough-money",
+                { value: necessaryMoney }
+              )}
+            />
+          </Button>
+        </PopoverContentListItem>
+      );
   }
 );
 
@@ -109,6 +110,12 @@ export const getMinDepositCreateProgram = (
   );
   const minDepositCreateAssetInCurr =
     !!broker &&
-    broker.minDepositCreateAsset.find(({ currency }) => currency === curr);
+    broker.minDepositCreateAsset.find(({ currency }) => {
+      if (curr === "USD" && currency === "USDT") {
+        return true;
+      }
+      return currency === curr;
+    });
+
   return minDepositCreateAssetInCurr ? minDepositCreateAssetInCurr.amount : 0;
 };
