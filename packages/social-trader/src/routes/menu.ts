@@ -15,15 +15,37 @@ import { TradeArrowsIcon } from "components/icon/trade-arrows-icon";
 import { TradeIcon } from "components/icon/trade-icon";
 import { UsersIcon } from "components/icon/users-icon";
 import { WalletIcon } from "components/icon/wallet-icon";
-import { PROFILE_ROUTE, SETTINGS_ROUTE } from "components/profile/profile.constants";
+import {
+  PROFILE_ROUTE,
+  SETTINGS_ROUTE
+} from "components/profile/profile.constants";
 import { WALLET_TOTAL_PAGE_ROUTE } from "pages/wallet/wallet.paths";
 import * as React from "react";
-import { MEDIA_ROUTE, MY_PROFILE_ROUTE, SOCIAL_ROUTE, USERS_ROUTE } from "routes/social.routes";
+import {
+  MEDIA_ROUTE,
+  MY_PROFILE_ROUTE,
+  SOCIAL_ROUTE,
+  USERS_ROUTE
+} from "routes/social.routes";
 
 import { HOME_ROUTE } from "./app.routes";
-import { EVENTS_ROUTE, INVESTMENTS_ROUTE, OVERVIEW_ROUTE, TRADING_ROUTE } from "./dashboard.routes";
-import { GV_FOLLOW_ROUTE, GV_FUNDS_ROUTE, GV_PROGRAMS_ROUTE, INVEST_ROUTE } from "./invest.routes";
-import { TERMINAL_FUTURES_ROUTE, TERMINAL_SPOT_ROUTE, TRADE_ROUTE } from "./trade.routes";
+import {
+  EVENTS_ROUTE,
+  INVESTMENTS_ROUTE,
+  OVERVIEW_ROUTE,
+  TRADING_ROUTE
+} from "./dashboard.routes";
+import {
+  GV_FOLLOW_ROUTE,
+  GV_FUNDS_ROUTE,
+  GV_PROGRAMS_ROUTE,
+  INVEST_ROUTE
+} from "./invest.routes";
+import {
+  TERMINAL_FUTURES_ROUTE,
+  TERMINAL_SPOT_ROUTE,
+  TRADE_ROUTE
+} from "./trade.routes";
 
 export type TMenuItem = {
   isBeta?: boolean;
@@ -145,12 +167,12 @@ const mainMenuItemsUnion = [
         Icon: TerminalIcon,
         route: TERMINAL_SPOT_ROUTE,
         label: "navigation.terminal.spot"
-      },
-      {
-        Icon: TerminalIcon,
-        route: TERMINAL_FUTURES_ROUTE,
-        label: "navigation.terminal.futures"
       }
+      // {
+      //   Icon: TerminalIcon,
+      //   route: TERMINAL_FUTURES_ROUTE,
+      //   label: "navigation.terminal.futures"
+      // }
     ]
   }
 ];
