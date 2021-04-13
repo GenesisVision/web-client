@@ -168,5 +168,8 @@
       "managers-funds": "Managers Funds",
       "trading-volume": "The total Trading volume for the selected period, divided by the leverage."
     }
+  },
+  "bsc-integration": {
+    "popup-title": "Invest via Binance Smart Chain"
   }
 }

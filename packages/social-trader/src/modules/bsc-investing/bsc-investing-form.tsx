@@ -1,0 +1,56 @@
+import { DialogButtons } from "components/dialog/dialog-buttons";
+import InputAmountField from "components/input-amount-field/hook-form-amount-field";
+import { SubmitButton } from "components/submit-button/submit-button";
+import * as React from "react";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { HookForm } from "utils/hook-form.helpers";
+
+import { investBSC } from "./bsc-investing.service";
+
+export enum BSC_INVESTING_FORM_FIELDS {
+  ASSET_ID = "assetId",
+  AMOUNT = "amount"
+}
+
+interface BTCInvestingFormValues {
+  [BSC_INVESTING_FORM_FIELDS.ASSET_ID]: string;
+  [BSC_INVESTING_FORM_FIELDS.AMOUNT]: number | string;
+}
+
+export interface Props {
+  id: string;
+}
+
+const _BSCInvestingForm: React.FC<Props> = ({ id }) => {
+  const [t] = useTranslation();
+
+  const form = useForm<BTCInvestingFormValues>({
+    defaultValues: {
+      [BSC_INVESTING_FORM_FIELDS.ASSET_ID]: id
+    },
+    mode: "onChange"
+  });
+
+  const { watch } = form;
+
+  const { amount = 0 } = watch();
+
+  return (
+    <HookForm form={form} onSubmit={() => investBSC(id, amount)}>
+      <InputAmountField
+        currency={"BNB"}
+        label={t("deposit-asset.amount")}
+        name={BSC_INVESTING_FORM_FIELDS.AMOUNT}
+      />
+      <DialogButtons>
+        <SubmitButton checkDirty={false} wide>
+          {t("deposit-asset.confirm")}
+        </SubmitButton>
+      </DialogButtons>
+    </HookForm>
+  );
+};
+
+const BSCInvestingForm = React.memo(_BSCInvestingForm);
+export default BSCInvestingForm;

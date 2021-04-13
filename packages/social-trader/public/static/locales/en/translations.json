@@ -140,7 +140,8 @@
     "save": "Save",
     "verify": "Verify",
     "resend-email": "Resend email",
-    "reset": "Reset"
+    "reset": "Reset",
+    "invest-bsc": "Invest via BSC"
   },
   "filters": {
     "level": {
