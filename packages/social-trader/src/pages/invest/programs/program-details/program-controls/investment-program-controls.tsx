@@ -2,6 +2,7 @@ import { DefaultBlock } from "components/default.block/default.block";
 import { DetailsStatisticContainer } from "components/details/details-description-section/details-description/details-structure-blocks";
 import InvestmentProgramInfo from "components/details/details-description-section/investment-program-info";
 import { Row } from "components/row/row";
+import { RowItem } from "components/row-item/row-item";
 import { ASSET } from "constants/constants";
 import {
   AssetPublicDetails,
@@ -10,6 +11,7 @@ import {
   ProgramDetailsFull,
   ProgramFollowDetailsFullTradingAccountDetails
 } from "gv-api-web";
+import BSCInvestingButton from "modules/bsc-investing/bsc-investing.button";
 import DepositButton from "modules/deposit/deposit.button";
 import NotifyButton from "modules/notity-button/notify-button";
 import * as React from "react";
@@ -47,7 +49,7 @@ const _InvestmentProgramControls: React.FC<Props> = ({
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   const canInvest = isAuthenticated
     ? !!programDetails.personalDetails &&
-    programDetails.personalDetails.canInvest
+      programDetails.personalDetails.canInvest
     : true;
 
   return (
@@ -63,11 +65,14 @@ const _InvestmentProgramControls: React.FC<Props> = ({
       />
       <Row>
         <DetailsStatisticContainer>
-          {programDetails.availableInvestmentBase === 0 &&
+          <RowItem>
+            {programDetails.availableInvestmentBase === 0 &&
             isAuthenticated &&
             !isOwnProgram ? (
               <NotifyButton
-                hasNotifications={programDetails.personalDetails.hasNotifications}
+                hasNotifications={
+                  programDetails.personalDetails.hasNotifications
+                }
                 broker={brokerDetails.type}
                 canInvest={programDetails.personalDetails.canInvest}
                 currency={currency}
@@ -92,6 +97,8 @@ const _InvestmentProgramControls: React.FC<Props> = ({
                 currency={tradingAccountInfo.currency}
               />
             )}
+          </RowItem>
+          <BSCInvestingButton assetId={id} />
         </DetailsStatisticContainer>
       </Row>
     </DefaultBlock>
