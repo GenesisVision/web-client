@@ -1,7 +1,11 @@
 import authActions from "actions/auth-actions";
 import platformActions from "actions/platform-actions";
 import { Push } from "components/link/link";
-import { CaptchaCheckResult, LoginViewModel } from "gv-api-web";
+import {
+  CaptchaCheckResult,
+  LoginSignViewModel,
+  LoginViewModel
+} from "gv-api-web";
 import { useCookieState } from "hooks/cookie-state";
 import { NextPageContext } from "next";
 import { Dispatch } from "redux";
@@ -115,3 +119,27 @@ export type LoginFuncType = (props: {
 }) => Promise<string>;
 
 type logoutFuncType = (dispatch: Dispatch) => void;
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// metamask
+
+export const getMetamaskMessage = () =>
+  api.auth().getMsgForAuthorizeBySignature();
+
+export const loginWithMetamask = ({
+  signature,
+  messageId,
+  address
+}: LoginSignViewModel) =>
+  api.auth().authorizeBySignature({
+    body: {
+      signature,
+      messageId,
+      address,
+      client: "metamask"
+    } as any
+  });
