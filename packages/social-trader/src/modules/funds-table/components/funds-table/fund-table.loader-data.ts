@@ -35,6 +35,7 @@ export const fundDetailsLoaderDataCreator = (): FundDetailsListItem => ({
     isOwnAsset: false
   },
   id: "",
+  index: 0,
   logoUrl: "",
   url: "",
   color: getRandomColor(),
