@@ -37,7 +37,17 @@ const _MetamaskLoginButton: React.FC<Props> = () => {
     Push(DASHBOARD_ROUTE);
   };
 
-  const { data, sendRequest: fetchMetamaskMessage } = useApiRequest({
+  const { sendRequest: fetchMetamaskMessage } = useApiRequest({
+    middleware: [
+      data =>
+        metamaskSign(data.message).then(res => {
+          sendRequest({
+            signature: res.signature,
+            messageId: data.id,
+            address: res.accountAddress
+          }).catch(err => console.log(err));
+        })
+    ],
     request: getMetamaskMessage
   });
 
@@ -52,20 +62,7 @@ const _MetamaskLoginButton: React.FC<Props> = () => {
 
   return (
     <>
-      <Button
-        noPadding
-        variant="text"
-        onClick={async () => {
-          await fetchMetamaskMessage();
-          metamaskSign(data?.message).then(res => {
-            sendRequest({
-              signature: res.signature,
-              messageId: data?.id,
-              address: res.accountAddress
-            }).catch(err => console.log(err));
-          });
-        }}
-      >
+      <Button noPadding variant="text" onClick={fetchMetamaskMessage}>
         {t("auth:login.metamask.button")}
       </Button>
     </>
