@@ -5,10 +5,7 @@ const initWeb3 = async address => {
   const { ethereum } = window;
   if (ethereum) {
     window.web3 = new window.Web3(ethereum);
-    await ethereum
-      .enable()
-      .then(res => console.log(res, "enableResponse"))
-      .catch(e => console.log(e));
+    await ethereum.enable();
     // can add from and price fields in contract
     const gatewayContract = new window.web3.eth.Contract(
       contractAbi.abi,
