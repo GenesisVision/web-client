@@ -19,7 +19,7 @@ const initWeb3 = async address => {
   alert("Install plugin!");
 };
 
-export const investBSC = async (assetId, amount) => {
+export const investBSC = async ({ assetIndex, amount }) => {
   const contract = await initWeb3("0x09ebbeae614d7c618bcd49dc62e73010bef12c7c");
   const newAmount = window.web3.utils.toWei(amount, "ether");
   window.web3.eth
@@ -30,7 +30,7 @@ export const investBSC = async (assetId, amount) => {
     })
     .then(account => {
       contract.methods
-        .investRequest(assetId)
+        .investRequest(assetIndex)
         // send method can be initialized in initWeb3 function
         .send({ from: account, value: newAmount })
         .then(res => console.log("Hash of the transaction: " + res))

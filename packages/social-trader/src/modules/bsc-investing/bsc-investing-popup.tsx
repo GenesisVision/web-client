@@ -7,17 +7,17 @@ import { useTranslation } from "react-i18next";
 import BSCInvestingForm from "./bsc-investing-form";
 
 interface Props extends IDialogProps {
-  id: string;
+  index: number;
 }
 
-const _BSCInvestingPopup: React.FC<Props> = ({ open, onClose, id }) => {
+const _BSCInvestingPopup: React.FC<Props> = ({ open, onClose, index }) => {
   const [t] = useTranslation();
 
   return (
     <Dialog open={open} onClose={onClose}>
       <DialogTop title={t("asset-details:bsc-integration.popup-title")} />
       <DialogBottom>
-        <BSCInvestingForm id={id} />
+        <BSCInvestingForm index={index} onClose={onClose} />
       </DialogBottom>
     </Dialog>
   );

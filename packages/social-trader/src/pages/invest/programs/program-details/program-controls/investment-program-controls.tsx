@@ -24,6 +24,7 @@ interface Props {
   isExchange?: boolean;
   currency: CurrencyEnum;
   id: string;
+  index: number;
   programDetails: ProgramDetailsFull;
   publicInfo: AssetPublicDetails;
   brokerDetails: BrokerDetails;
@@ -40,6 +41,7 @@ const _InvestmentProgramControls: React.FC<Props> = ({
   onApply,
   isOwnProgram,
   id,
+  index,
   programDetails,
   publicInfo,
   brokerDetails,
@@ -98,7 +100,7 @@ const _InvestmentProgramControls: React.FC<Props> = ({
               />
             )}
           </RowItem>
-          <BSCInvestingButton assetId={id} />
+          <BSCInvestingButton assetIndex={index} />
         </DetailsStatisticContainer>
       </Row>
     </DefaultBlock>
