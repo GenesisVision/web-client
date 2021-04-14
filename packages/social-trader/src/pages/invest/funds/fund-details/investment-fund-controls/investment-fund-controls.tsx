@@ -44,7 +44,7 @@ const _InvestmentFundControls: React.FC<Props> = ({
               id={fundDescription.id}
             />
           </RowItem>
-          <BSCInvestingButton assetIndex={fundDescription.id} />
+          <BSCInvestingButton assetIndex={fundDescription.publicInfo.index} />
         </DetailsStatisticContainer>
       </Row>
     </DefaultBlock>

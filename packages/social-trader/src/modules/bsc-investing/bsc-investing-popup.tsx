@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 import BSCInvestingForm from "./bsc-investing-form";
 
 interface Props extends IDialogProps {
-  index: string;
+  index: number;
 }
 
 const _BSCInvestingPopup: React.FC<Props> = ({ open, onClose, index }) => {

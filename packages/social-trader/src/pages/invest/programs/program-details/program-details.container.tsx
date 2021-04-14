@@ -112,9 +112,9 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
     () => ({
       financialStatistic: programDetails
         ? {
-          dataSelector: financialStatisticTableSelector,
-          getItems: getFinancialStatistics
-        }
+            dataSelector: financialStatisticTableSelector,
+            getItems: getFinancialStatistics
+          }
         : undefined,
       openPositions: {
         itemSelector: openPositionsSelector,
@@ -123,9 +123,9 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
       },
       periodHistory: programDetails
         ? {
-          dataSelector: periodHistoryTableSelector,
-          getItems: getPeriodHistory
-        }
+            dataSelector: periodHistoryTableSelector,
+            getItems: getPeriodHistory
+          }
         : undefined,
       subscriptions: {
         dataSelector: subscriptionsTableSelector,
@@ -240,6 +240,7 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
               isExchange={isExchange}
               currency={description.tradingAccountInfo.currency}
               id={description.id}
+              index={description.publicInfo.index}
               programDetails={description.programDetails}
               publicInfo={description.publicInfo}
               brokerDetails={description.brokerDetails}
@@ -283,9 +284,9 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
     () =>
       isOwnAsset && description.ownerActions.canCreateApiKeys
         ? createProgramApiKeysToUrl(
-          description.publicInfo.url,
-          description.publicInfo.title
-        )
+            description.publicInfo.url,
+            description.publicInfo.title
+          )
         : undefined,
     [description, isExchange]
   );
@@ -293,11 +294,11 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
   const settingsUrl = useMemo(
     () =>
       description.publicInfo.status !== "Disabled" &&
-        description.publicInfo.status !== "Closed"
+      description.publicInfo.status !== "Closed"
         ? createProgramSettingsToUrl(
-          description.publicInfo.url,
-          description.publicInfo.title
-        )
+            description.publicInfo.url,
+            description.publicInfo.title
+          )
         : undefined,
     [description]
   );
@@ -329,10 +330,11 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
   return (
     <Page
       type={"article"}
-      title={`${assetType === ASSET.FOLLOW
+      title={`${
+        assetType === ASSET.FOLLOW
           ? t("follow-details-page:title")
           : t("program-details-page:title")
-        } - ${title}`}
+      } - ${title}`}
       description={`${assetType} ${description.publicInfo.title} - ${description.publicInfo.description}`}
       previewImage={banner}
       schemas={schemas}

@@ -15,12 +15,12 @@ export enum BSC_INVESTING_FORM_FIELDS {
 }
 
 interface BTCInvestingFormValues {
-  [BSC_INVESTING_FORM_FIELDS.ASSET_INDEX]: string;
+  [BSC_INVESTING_FORM_FIELDS.ASSET_INDEX]: number;
   [BSC_INVESTING_FORM_FIELDS.AMOUNT]: number | string;
 }
 
 export interface Props {
-  index: string;
+  index: number;
   onClose: () => void;
 }
 

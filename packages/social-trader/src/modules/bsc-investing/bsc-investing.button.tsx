@@ -6,7 +6,7 @@ import React from "react";
 import BSCInvestingPopup from "./bsc-investing-popup";
 
 interface Props {
-  assetIndex: string;
+  assetIndex: number;
 }
 
 const _BSCInvestingButton: React.FC<Props> = ({ assetIndex }) => {
