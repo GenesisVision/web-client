@@ -98,7 +98,7 @@ const _InvestmentProgramControls: React.FC<Props> = ({
               />
             )}
           </RowItem>
-          <BSCInvestingButton assetId={id} />
+          <BSCInvestingButton assetIndex={id} />
         </DetailsStatisticContainer>
       </Row>
     </DefaultBlock>

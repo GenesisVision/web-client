@@ -6,10 +6,10 @@ import React from "react";
 import BSCInvestingPopup from "./bsc-investing-popup";
 
 interface Props {
-  assetId: string;
+  assetIndex: string;
 }
 
-const _BSCInvestingButton: React.FC<Props> = ({ assetId }) => {
+const _BSCInvestingButton: React.FC<Props> = ({ assetIndex }) => {
   const [t] = useTranslation();
   const [isOpen, setIsOpen, setIsClose] = useIsOpen();
 
@@ -18,7 +18,11 @@ const _BSCInvestingButton: React.FC<Props> = ({ assetId }) => {
       <Button size={"xlarge"} onClick={setIsOpen}>
         {t("buttons.invest-bsc")}
       </Button>
-      <BSCInvestingPopup id={assetId} open={isOpen} onClose={setIsClose} />
+      <BSCInvestingPopup
+        index={assetIndex}
+        open={isOpen}
+        onClose={setIsClose}
+      />
     </>
   );
 };
