@@ -38,6 +38,18 @@ export const investBSC = async ({ assetIndex, amount }) => {
     });
 };
 
+export const metamaskSign = async nonce => {
+  await initWeb3("0x09ebbeae614d7c618bcd49dc62e73010bef12c7c");
+  // const publicAddress = window.web3.eth.coinbase.toLowerCase();
+  const accountAddresses = await window.web3.eth.getAccounts();
+
+  const accountAddress = accountAddresses[0];
+
+  const signature = await window.web3.eth.personal.sign(nonce, accountAddress);
+
+  return { signature, accountAddress };
+};
+
 // var gatewayContract = new web3.eth.Contract(contractAbi.abi, '0x09ebbeae614d7c618bcd49dc62e73010bef12c7c');
 
 // function getAccounts(callback) {
@@ -72,5 +84,3 @@ export const investBSC = async ({ assetIndex, amount }) => {
 //               console.log("Hash of the transaction: " + res)
 //           })
 //   });
-
-// }
