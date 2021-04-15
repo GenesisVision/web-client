@@ -10,6 +10,7 @@ import InvestmentFundInfo from "pages/invest/funds/fund-details/fund-details-des
 import * as React from "react";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
+import { platformDataSelector } from "reducers/platform-reducer";
 
 const _InvestmentFundControls: React.FC<Props> = ({
   hasTradingSchedule,
@@ -20,6 +21,7 @@ const _InvestmentFundControls: React.FC<Props> = ({
 }) => {
   const isOwnProgram = fundDescription.publicInfo.isOwnAsset;
   const isAuthenticated = useSelector(isAuthenticatedSelector);
+  const platformData = useSelector(platformDataSelector);
   const canInvest = isAuthenticated
     ? !!fundDescription.personalDetails &&
       fundDescription.personalDetails.canInvest
@@ -44,7 +46,9 @@ const _InvestmentFundControls: React.FC<Props> = ({
               id={fundDescription.id}
             />
           </RowItem>
-          <BSCInvestingButton assetIndex={fundDescription.publicInfo.index} />
+          {platformData?.assetInfo.anonymousInfo.isInvestingBscEnabled && (
+            <BSCInvestingButton assetIndex={fundDescription.publicInfo.index} />
+          )}
         </DetailsStatisticContainer>
       </Row>
     </DefaultBlock>
