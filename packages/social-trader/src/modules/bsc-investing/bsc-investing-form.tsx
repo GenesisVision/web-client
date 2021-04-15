@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm, postponeCallback } from "utils/hook-form.helpers";
 
-import { investBSC } from "./bsc-investing.service";
+import { contractInvest, investBSC } from "./bsc-investing.service";
 
 export enum BSC_INVESTING_FORM_FIELDS {
   ASSET_INDEX = "assetIndex",
@@ -28,10 +28,15 @@ const _BSCInvestingForm: React.FC<Props> = ({ index, onClose }) => {
   const [t] = useTranslation();
 
   // To do add text to json
-  const { sendRequest } = useApiRequest({
+  const { sendRequest: invest } = useApiRequest({
     middleware: [postponeCallback(onClose)],
-    request: investBSC,
+    request: contractInvest,
     successMessage: "Transaction sent successfully"
+  });
+
+  const { sendRequest } = useApiRequest({
+    middleware: [res => invest(res)],
+    request: investBSC
   });
 
   const form = useForm<BTCInvestingFormValues>({

@@ -1,4 +1,6 @@
 import { Button } from "components/button/button";
+import Hint from "components/hint/hint";
+import { VERTICAL_POPOVER_POS } from "components/popover/popover";
 import useIsOpen from "hooks/is-open.hook";
 import { useTranslation } from "i18n";
 import React from "react";
@@ -15,9 +17,15 @@ const _BSCInvestingButton: React.FC<Props> = ({ assetIndex }) => {
 
   return (
     <>
-      <Button size={"xlarge"} onClick={setIsOpen}>
-        {t("buttons.invest-bsc")}
-      </Button>
+      <Hint
+        content={
+          <Button size={"xlarge"} onClick={setIsOpen} color={"secondary"}>
+            {t("buttons.invest-bsc")}
+          </Button>
+        }
+        vertical={VERTICAL_POPOVER_POS.TOP}
+        tooltipContent={t("asset-details:bsc-integration.tooltip-text")}
+      />
       <BSCInvestingPopup
         index={assetIndex}
         open={isOpen}

@@ -17,6 +17,7 @@ import NotifyButton from "modules/notity-button/notify-button";
 import * as React from "react";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
+import { platformDataSelector } from "reducers/platform-reducer";
 import { CurrencyEnum } from "utils/types";
 
 interface Props {
@@ -49,6 +50,7 @@ const _InvestmentProgramControls: React.FC<Props> = ({
   levelsParameters
 }) => {
   const isAuthenticated = useSelector(isAuthenticatedSelector);
+  const platformData = useSelector(platformDataSelector);
   const canInvest = isAuthenticated
     ? !!programDetails.personalDetails &&
       programDetails.personalDetails.canInvest
@@ -100,7 +102,9 @@ const _InvestmentProgramControls: React.FC<Props> = ({
               />
             )}
           </RowItem>
-          <BSCInvestingButton assetIndex={index} />
+          {platformData?.assetInfo.anonymousInfo.isInvestingBscEnabled && (
+            <BSCInvestingButton assetIndex={index} />
+          )}
         </DetailsStatisticContainer>
       </Row>
     </DefaultBlock>

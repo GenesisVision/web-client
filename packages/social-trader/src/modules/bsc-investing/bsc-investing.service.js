@@ -1,8 +1,18 @@
 // import Web3 from "web3";
-import { contractAbi } from "./abi";
+import * as contractAbi from "./GenesisVisionGateway.json";
+
+const smartContractAddress = "0xe958ce323ae1220de845a44364478afc9ca50b23";
+
+// class BSC {
+//   constructor(smartContractAddress, gatewayContract) {
+//     this.address = smartContractAddress;
+//     this.contract = gatewayContract;
+//   }
+// }
 
 const initWeb3 = async address => {
   const { ethereum } = window;
+
   if (ethereum) {
     window.web3 = new window.Web3(ethereum);
     await ethereum.enable();
@@ -16,27 +26,30 @@ const initWeb3 = async address => {
   alert("Install plugin!");
 };
 
+export const contractInvest = ({
+  contract,
+  assetIndex,
+  selectedAccount,
+  newAmount
+}) => {
+  return contract.methods
+    .investRequest(assetIndex)
+    .send({ from: selectedAccount, value: newAmount });
+  // .then(res => console.log("Hash of the transaction: " + res))
+  // .catch(err => console.log("An error occured", err))
+};
+
 export const investBSC = async ({ assetIndex, amount }) => {
-  const contract = await initWeb3("0x09ebbeae614d7c618bcd49dc62e73010bef12c7c");
+  const contract = await initWeb3(smartContractAddress);
   const newAmount = window.web3.utils.toWei(amount, "ether");
-  window.web3.eth
-    .getAccounts()
-    .then(res => {
-      console.log(res, "getAccountsResponse");
-      return res[0];
-    })
-    .then(account => {
-      contract.methods
-        .investRequest(assetIndex)
-        // send method can be initialized in initWeb3 function
-        .send({ from: account, value: newAmount })
-        .then(res => console.log("Hash of the transaction: " + res))
-        .catch(err => console.log("An error occured", err));
-    });
+  const accounts = await window.web3.eth.getAccounts();
+  const selectedAccount = accounts[0];
+
+  return { assetIndex, newAmount, selectedAccount, contract };
 };
 
 export const metamaskSign = async nonce => {
-  await initWeb3("0x09ebbeae614d7c618bcd49dc62e73010bef12c7c");
+  await initWeb3(smartContractAddress);
   // const publicAddress = window.web3.eth.coinbase.toLowerCase();
   const accountAddresses = await window.web3.eth.getAccounts();
 
@@ -46,38 +59,3 @@ export const metamaskSign = async nonce => {
 
   return { signature, accountAddress };
 };
-
-// var gatewayContract = new web3.eth.Contract(contractAbi.abi, '0x09ebbeae614d7c618bcd49dc62e73010bef12c7c');
-
-// function getAccounts(callback) {
-//   web3.eth.getAccounts((error,result) => {
-//       if (error) {
-//           console.log(error);
-//       } else {
-//           callback(result);
-//       }
-//   });
-// }
-
-// function invest(){
-//   debugger;
-//   // asset -- id program or id fund
-//   // sumstr = number
-//   var asset = $("#assetInvest").val();
-//   var sumStr = $("#sumInvest").val();
-//
-//   var sum = web3.utils.toWei(sumStr, 'ether');
-//   console.log("Invest " + sum + " to " + asset);
-
-//   getAccounts(function(result) {
-//       var account = result[0];
-//       console.log("metamask account - " + account);
-//       gatewayContract.methods.investRequest(asset)
-//           .send({from: account, value: sum}, function(err, res) {
-//               if (err) {
-//                   console.log("An error occured", err);
-//                   return;
-//               }
-//               console.log("Hash of the transaction: " + res)
-//           })
-//   });

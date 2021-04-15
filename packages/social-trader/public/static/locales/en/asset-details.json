@@ -170,6 +170,7 @@
     }
   },
   "bsc-integration": {
-    "popup-title": "Invest via Binance Smart Chain"
+    "popup-title": "Invest via Binance Smart Chain",
+    "tooltip-text": "Investing through the Binance Smart Chain smart contract."
   }
 }
