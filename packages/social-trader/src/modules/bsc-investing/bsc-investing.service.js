@@ -1,7 +1,7 @@
 // import Web3 from "web3";
 import * as contractAbi from "./GenesisVisionGateway.json";
 
-const smartContractAddress = "0xe958ce323ae1220de845a44364478afc9ca50b23";
+const smartContractAddress = "0x82aB9C13E3F21298296e5a7d4cB2E4aCe6541322";
 
 // class BSC {
 //   constructor(smartContractAddress, gatewayContract) {
