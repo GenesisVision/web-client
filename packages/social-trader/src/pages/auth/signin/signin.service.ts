@@ -127,8 +127,8 @@ type logoutFuncType = (dispatch: Dispatch) => void;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // metamask
 
-export const getMetamaskMessage = () =>
-  api.auth().getMsgForAuthorizeBySignature();
+export const getMetamaskMessageForLogin = () =>
+  api.platform().getMsgForSignature({ type: "Login" });
 
 export const loginWithMetamask = ({
   signature,
