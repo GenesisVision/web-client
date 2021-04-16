@@ -11,7 +11,10 @@ import { DASHBOARD_ROUTE } from "routes/dashboard.routes";
 import authService from "services/auth-service";
 import { setAccountCurrency } from "utils/account-currency";
 
-import { getMetamaskMessage, loginWithMetamask } from "../signin.service";
+import {
+  getMetamaskMessageForLogin,
+  loginWithMetamask
+} from "../signin.service";
 
 interface Props {}
 
@@ -48,7 +51,7 @@ const _MetamaskLoginButton: React.FC<Props> = () => {
           }).catch(err => console.log(err));
         })
     ],
-    request: getMetamaskMessage
+    request: getMetamaskMessageForLogin
   });
 
   const { sendRequest } = useApiRequest({
