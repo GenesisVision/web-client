@@ -29,12 +29,12 @@ const _WalletDeposit: React.FC<Props> = ({
           open={isOpenPopup}
         />
       ) : (
-          <WalletAddFundsPopup
-            currentCurrency={currency}
-            onClose={setClosePopup}
-            open={isOpenPopup}
-          />
-        )}
+        <WalletAddFundsPopup
+          currentCurrency={currency}
+          onClose={setClosePopup}
+          open={isOpenPopup}
+        />
+      )}
     </>
   );
 };
@@ -67,19 +67,26 @@ const FullButton: React.FC<IFullButtonProps> = React.memo(
   }
 );
 
-const SmallButton: React.FC<Clickable> = React.memo(({ onClick }) => {
-  const [t] = useTranslation();
-  const label = t("wallet-page:deposit");
-  return (
-    <ChipButton
-      className={label}
-      onClick={onClick}
-      size={"small"}
-      chipLabel={"+"}
-      type={CHIP_TYPE.POSITIVE}
-    />
-  );
-});
+interface ISmallButtonProps extends Clickable {
+  disabled?: boolean;
+}
+
+const SmallButton: React.FC<ISmallButtonProps> = React.memo(
+  ({ onClick, disabled }) => {
+    const [t] = useTranslation();
+    const label = t("wallet-page:deposit");
+    return (
+      <ChipButton
+        disabled={disabled}
+        className={label}
+        onClick={onClick}
+        size={"small"}
+        chipLabel={"+"}
+        type={CHIP_TYPE.POSITIVE}
+      />
+    );
+  }
+);
 
 interface Props {
   currency?: CurrencyEnum;
