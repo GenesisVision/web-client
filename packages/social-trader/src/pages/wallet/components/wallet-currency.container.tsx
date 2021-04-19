@@ -30,7 +30,8 @@ const walletSelector = createSelector<
   (data: WalletSummary | undefined, currency: string) => {
     if (!data) return undefined;
     return data.wallets.find(
-      (wallet: WalletData) => wallet.currency === currency.toUpperCase()
+      (wallet: WalletData) =>
+        wallet.currency.toUpperCase() === currency.toUpperCase()
     );
   }
 );
