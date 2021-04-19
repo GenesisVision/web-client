@@ -109,7 +109,7 @@ const _InvestmentProgramControls: React.FC<Props> = ({
           )}
           {platformData?.assetInfo.anonymousInfo.isInvestingXDaiEnabled && (
             <RowItem>
-              <BSCInvestingButton currency={"xDai"} assetIndex={index} />
+              <BSCInvestingButton currency={"DAI"} assetIndex={index} />
             </RowItem>
           )}
         </DetailsStatisticContainer>

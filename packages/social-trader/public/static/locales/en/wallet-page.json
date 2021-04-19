@@ -137,6 +137,7 @@
   "buttons": {
     "internal-transfer": "Convert cryptocurrency within your GV Wallet between BTC, ETH, USDT and GVT",
     "deposit": "Send cryptocurrency from an external wallet address to your Genesis Vision Wallet address. The following cryptocurrencies are supported: BTC, ETH, USDT and GVT.",
+    "xDai-deposit": "Send cryptocurrency from an external wallet address to your Genesis Vision Wallet address.",
     "withdraw": "Send cryptocurrency from your GV Wallet address to an external wallet address.",
     "understand": "I understand it"
   },
