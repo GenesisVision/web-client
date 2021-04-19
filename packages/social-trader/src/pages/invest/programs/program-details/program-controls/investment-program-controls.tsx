@@ -103,7 +103,14 @@ const _InvestmentProgramControls: React.FC<Props> = ({
             )}
           </RowItem>
           {platformData?.assetInfo.anonymousInfo.isInvestingBscEnabled && (
-            <BSCInvestingButton assetIndex={index} />
+            <RowItem>
+              <BSCInvestingButton currency={"BNB"} assetIndex={index} />
+            </RowItem>
+          )}
+          {platformData?.assetInfo.anonymousInfo.isInvestingXDaiEnabled && (
+            <RowItem>
+              <BSCInvestingButton currency={"DAI"} assetIndex={index} />
+            </RowItem>
           )}
         </DetailsStatisticContainer>
       </Row>

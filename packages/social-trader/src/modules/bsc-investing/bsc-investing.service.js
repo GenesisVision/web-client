@@ -1,7 +1,13 @@
 // import Web3 from "web3";
 import * as contractAbi from "./GenesisVisionGateway.json";
 
-const smartContractAddress = "0x82aB9C13E3F21298296e5a7d4cB2E4aCe6541322";
+// for BNB
+export const smartContractAddress =
+  "0x82aB9C13E3F21298296e5a7d4cB2E4aCe6541322";
+
+// for xDai
+export const smartContractAddressDai =
+  "0x03318813DA564193Ef603144c2ceAcDcdE8cFaFb";
 
 // class BSC {
 //   constructor(smartContractAddress, gatewayContract) {
@@ -39,8 +45,8 @@ export const contractInvest = ({
   // .catch(err => console.log("An error occured", err))
 };
 
-export const investBSC = async ({ assetIndex, amount }) => {
-  const contract = await initWeb3(smartContractAddress);
+export const investBSC = async ({ assetIndex, amount, contractAddress }) => {
+  const contract = await initWeb3(contractAddress);
   const newAmount = window.web3.utils.toWei(amount, "ether");
   const accounts = await window.web3.eth.getAccounts();
   const selectedAccount = accounts[0];

@@ -6,8 +6,14 @@ import * as React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm, postponeCallback } from "utils/hook-form.helpers";
+import { CurrencyEnum } from "utils/types";
 
-import { contractInvest, investBSC } from "./bsc-investing.service";
+import {
+  contractInvest,
+  investBSC,
+  smartContractAddress,
+  smartContractAddressDai
+} from "./bsc-investing.service";
 
 export enum BSC_INVESTING_FORM_FIELDS {
   ASSET_INDEX = "assetIndex",
@@ -20,18 +26,18 @@ interface BTCInvestingFormValues {
 }
 
 export interface Props {
+  currency: CurrencyEnum;
   index: number;
   onClose: () => void;
 }
 
-const _BSCInvestingForm: React.FC<Props> = ({ index, onClose }) => {
+const _BSCInvestingForm: React.FC<Props> = ({ index, onClose, currency }) => {
   const [t] = useTranslation();
 
-  // To do add text to json
   const { sendRequest: invest } = useApiRequest({
     middleware: [postponeCallback(onClose)],
     request: contractInvest,
-    successMessage: "Transaction sent successfully"
+    successMessage: "deposit-asset:successful-transaction"
   });
 
   const { sendRequest } = useApiRequest({
@@ -53,10 +59,17 @@ const _BSCInvestingForm: React.FC<Props> = ({ index, onClose }) => {
   return (
     <HookForm
       form={form}
-      onSubmit={() => sendRequest({ assetIndex: index, amount })}
+      onSubmit={() =>
+        sendRequest({
+          assetIndex: index,
+          amount,
+          contractAddress:
+            currency === "BNB" ? smartContractAddress : smartContractAddressDai
+        })
+      }
     >
       <InputAmountField
-        currency={"BNB"}
+        currency={currency === "BNB" ? "BNB" : "xDai"}
         label={t("deposit-asset.amount")}
         name={BSC_INVESTING_FORM_FIELDS.AMOUNT}
       />

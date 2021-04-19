@@ -141,7 +141,8 @@
     "verify": "Verify",
     "resend-email": "Resend email",
     "reset": "Reset",
-    "invest-bsc": "Invest via BSC"
+    "invest-bsc": "Invest via BSC",
+    "invest-xDai": "Invest via xDai"
   },
   "filters": {
     "level": {
@@ -344,6 +345,7 @@
     "investment-amount": "Investment amount",
     "disclaimer": "After clicking the \"Confirm\" button, the invested GVT will be immediately converted to {{currency}}. The transfer of {{currency}} over to the account manager will only occur at the end of the current reporting period.",
     "confirm": "Confirm",
+    "successful-transaction": "Transaction sent successfully",
     "program": {
       "available-to-invest": "Available to invest in program",
       "success-alert-message": "Successful request for investment in the program."

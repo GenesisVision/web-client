@@ -170,7 +170,13 @@
     }
   },
   "bsc-integration": {
-    "popup-title": "Invest via Binance Smart Chain",
-    "tooltip-text": "Investing through the Binance Smart Chain smart contract."
+    "bnb": {
+      "popup-title": "Invest via Binance Smart Chain",
+      "tooltip-text": "Investing through the Binance Smart Chain smart contract."
+    },
+    "xDai": {
+      "popup-title": "Invest via xDai",
+      "tooltip-text": "Investing through the xDai smart contract."
+    }
   }
 }
