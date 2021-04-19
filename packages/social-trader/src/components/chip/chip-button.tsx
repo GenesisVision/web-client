@@ -54,7 +54,7 @@ const ChipButton: React.FC<Props> = React.memo(
     return (
       <Container
         reverseOrder={reverseOrder}
-        onClick={onClick}
+        onClick={disabled ? undefined : onClick}
         onMouseEnter={setOver}
         onMouseLeave={setLeave}
       >

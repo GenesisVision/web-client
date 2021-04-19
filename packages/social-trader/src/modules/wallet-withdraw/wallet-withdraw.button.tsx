@@ -30,7 +30,6 @@ const _WalletWithdrawButton: React.FC<Props> = ({
     wallets,
     wallet => wallet.currency === currency
   );
-
   return (
     <>
       <Button disabled={disabled} onClick={setOpenPopup} />
@@ -41,12 +40,12 @@ const _WalletWithdrawButton: React.FC<Props> = ({
           onClose={setClosePopup}
         />
       ) : (
-          <WalletWithdrawPopup
-            currentWallet={currentWallet}
-            open={isOpenPopup}
-            onClose={setClosePopup}
-          />
-        )}
+        <WalletWithdrawPopup
+          currentWallet={currentWallet}
+          open={isOpenPopup}
+          onClose={setClosePopup}
+        />
+      )}
     </>
   );
 };
@@ -82,18 +81,25 @@ const FullButton: React.FC<IFullButtonProps> = React.memo(
   }
 );
 
-const SmallButton: React.FC<Clickable> = React.memo(({ onClick }) => {
-  const [t] = useTranslation();
-  const label = t("wallet-page:withdraw");
-  return (
-    <ChipButton
-      className={label}
-      onClick={onClick}
-      size={"small"}
-      chipLabel={<ImageBaseElement src={ArrowIcon} alt={label} />}
-    />
-  );
-});
+interface ISmallButtonProps extends Clickable {
+  disabled?: boolean;
+}
+
+const SmallButton: React.FC<ISmallButtonProps> = React.memo(
+  ({ onClick, disabled }) => {
+    const [t] = useTranslation();
+    const label = t("wallet-page:withdraw");
+    return (
+      <ChipButton
+        disabled={disabled}
+        className={label}
+        onClick={onClick}
+        size={"small"}
+        chipLabel={<ImageBaseElement src={ArrowIcon} alt={label} />}
+      />
+    );
+  }
+);
 
 interface Props {
   currency: CurrencyEnum;
