@@ -37,7 +37,7 @@ const _BSCInvestingForm: React.FC<Props> = ({ index, onClose, currency }) => {
   const { sendRequest: invest } = useApiRequest({
     middleware: [postponeCallback(onClose)],
     request: contractInvest,
-    successMessage: "deposit-asset:successful-transaction"
+    successMessage: "deposit-asset.successful-transaction"
   });
 
   const { sendRequest } = useApiRequest({
