@@ -26,7 +26,6 @@ const _InvestmentFundControls: React.FC<Props> = ({
     ? !!fundDescription.personalDetails &&
       fundDescription.personalDetails.canInvest
     : true;
-
   return (
     <DefaultBlock size={"large"} bordered>
       <InvestmentFundInfo fundDescription={fundDescription} />
@@ -47,7 +46,20 @@ const _InvestmentFundControls: React.FC<Props> = ({
             />
           </RowItem>
           {platformData?.assetInfo.anonymousInfo.isInvestingBscEnabled && (
-            <BSCInvestingButton assetIndex={fundDescription.publicInfo.index} />
+            <RowItem>
+              <BSCInvestingButton
+                currency={"BNB"}
+                assetIndex={fundDescription.publicInfo.index}
+              />
+            </RowItem>
+          )}
+          {platformData?.assetInfo.anonymousInfo.isInvestingXDaiEnabled && (
+            <RowItem>
+              <BSCInvestingButton
+                currency={"DAI"}
+                assetIndex={fundDescription.publicInfo.index}
+              />
+            </RowItem>
           )}
         </DetailsStatisticContainer>
       </Row>
