@@ -2,17 +2,15 @@ import clsx from "clsx";
 import { FundAssetCurrencyItem } from "components/fund-asset/fund-asset.styles";
 import { Text } from "components/text/text";
 import { Themes } from "components/trading-view/trading-view";
-import { PlatformWithdrawalInfo } from "gv-api-web";
+import {
+  PlatformWithdrawalInfo,
+  WalletWithdrawalCurrencyInfo
+} from "gv-api-web";
 import { useTranslation } from "i18n";
 import { Done } from "pages/landing-page/components/common-icons/done";
 import React from "react";
 
 import styles from "./fees-info.module.scss";
-
-interface ICommissions {
-  blockchain: string;
-  value: number;
-}
 
 interface Props {
   platformWithdrawalInfo: Array<PlatformWithdrawalInfo>;
@@ -502,7 +500,10 @@ const _FeesGeneral: React.FC<Props> = ({ platformWithdrawalInfo }) => {
               <tbody>
                 {platformWithdrawalInfo.map((info, key) =>
                   info.commissions.map(
-                    (commission: ICommissions, index: number) => (
+                    (
+                      commission: WalletWithdrawalCurrencyInfo,
+                      index: number
+                    ) => (
                       <tr
                         key={`${key}_${index}`}
                         className={styles["fees-table__row"]}
