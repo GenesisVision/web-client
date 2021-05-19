@@ -155,7 +155,7 @@
     padding: 18px;
     border-bottom: 1px solid $landing-bg-gray;
 
-    &:first-child {
+    &:first-child:not(.fees-table__cell--normal-weight) {
       font-weight: 600;
       width: 200px;
     }
