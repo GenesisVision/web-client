@@ -40,7 +40,7 @@
   "trading-fees-list-last-item": "For an external account, the \tGV Commission\t is 15% of the amount of the Trading Commission on Binance.\nFor example: Binance trading fee = 0.1%.\nGV Commission = 15% from the Binance commission.\nTotal trading fee = 0.115%",
   "withdrawal-fee": "Withdrawal fee",
   "text-2": "The fee charged upon withdrawing funds from the platform. The commission rate depends on the currency used for withdrawing funds",
-  "withdrawal-table-head": "Wallet\tBitcoin\tBinance Coin\tEthereum\tTether\tUSD Coin\tGenesis Vision Token",
+  "withdrawal-table-head": "Coin/Token\tWallet\tNetwork\tFee",
   "withdrawal-table-row": "Fee",
   "crypto": "Crypto",
   "amount": "Amount",

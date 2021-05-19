@@ -1,11 +1,18 @@
 import clsx from "clsx";
+import { FundAssetCurrencyItem } from "components/fund-asset/fund-asset.styles";
 import { Text } from "components/text/text";
+import { Themes } from "components/trading-view/trading-view";
 import { PlatformWithdrawalInfo } from "gv-api-web";
 import { useTranslation } from "i18n";
 import { Done } from "pages/landing-page/components/common-icons/done";
 import React from "react";
 
 import styles from "./fees-info.module.scss";
+
+interface ICommissions {
+  blockchain: string;
+  value: number;
+}
 
 interface Props {
   platformWithdrawalInfo: Array<PlatformWithdrawalInfo>;
@@ -480,25 +487,66 @@ const _FeesGeneral: React.FC<Props> = ({ platformWithdrawalInfo }) => {
                   {t("fees:withdrawal-table-head")
                     .split("\t")
                     .map((line, index) => (
-                      <th key={index} className={styles["fees-table__cell"]}>
+                      <th
+                        key={index}
+                        className={clsx(
+                          styles["fees-table__cell"],
+                          styles["fees-table__cell--width-quarter"]
+                        )}
+                      >
                         {line}
                       </th>
                     ))}
                 </tr>
               </thead>
               <tbody>
-                <tr className={styles["fees-table__row"]}>
-                  <td className={styles["fees-table__cell"]}>
-                    {t("fees:withdrawal-table-row")}
-                  </td>
-                  {platformWithdrawalInfo.map(
-                    ({ currency, withdrawalFee }, index) => (
-                      <td key={index} className={styles["fees-table__cell"]}>
-                        {`${withdrawalFee} ${currency}`}
-                      </td>
+                {platformWithdrawalInfo.map((info, key) =>
+                  info.commissions.map(
+                    (commission: ICommissions, index: number) => (
+                      <tr
+                        key={`${key}_${index}`}
+                        className={styles["fees-table__row"]}
+                      >
+                        {!index && (
+                          <td
+                            className={styles["fees-table__cell"]}
+                            rowSpan={info.commissions.length}
+                          >
+                            <FundAssetCurrencyItem
+                              logo={info.logoUrl}
+                              small
+                              name={info.currency}
+                              symbol={info.currency}
+                              type={"short"}
+                              clickable={false}
+                              theme={Themes.LIGHT}
+                            />
+                          </td>
+                        )}
+                        {!index && (
+                          <td
+                            className={styles["fees-table__cell"]}
+                            rowSpan={info.commissions.length}
+                          >
+                            {info.title}
+                          </td>
+                        )}
+                        <td
+                          className={
+                            styles[
+                              "fees-table__cell fees-table__cell--normal-weight"
+                            ]
+                          }
+                        >
+                          {commission.blockchain}
+                        </td>
+                        <td className={styles["fees-table__cell"]}>
+                          {commission.value}
+                        </td>
+                      </tr>
                     )
-                  )}
-                </tr>
+                  )
+                )}
               </tbody>
             </table>
           </div>

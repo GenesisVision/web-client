@@ -3,11 +3,11 @@ import * as contractAbi from "./GenesisVisionGateway.json";
 
 // for BNB
 export const smartContractAddress =
-  "0x82aB9C13E3F21298296e5a7d4cB2E4aCe6541322";
+  "0x2c0c588dc1bcbecf4fb00191ad636eefde961714";
 
 // for xDai
 export const smartContractAddressDai =
-  "0x03318813DA564193Ef603144c2ceAcDcdE8cFaFb";
+  "0x3b914f1EEb3b468839632De7fa5313632bb0fab1";
 
 // class BSC {
 //   constructor(smartContractAddress, gatewayContract) {
