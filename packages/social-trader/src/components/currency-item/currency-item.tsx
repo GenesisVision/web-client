@@ -3,10 +3,11 @@ import ActivePopup from "components/active/active.popup";
 import WalletImage from "components/avatar/wallet-image/wallet-image";
 import { Row } from "components/row/row";
 import { RowItem } from "components/row-item/row-item";
+import { Themes } from "components/trading-view/trading-view";
 import useIsOpen from "hooks/is-open.hook";
 import React, { useCallback } from "react";
 import styled, { css } from "styled-components";
-import { $textLightColor } from "utils/style/colors";
+import { $rowColor, $textLightColor } from "utils/style/colors";
 import { fontSize, height, width } from "utils/style/mixins";
 import { $boxShadow1 } from "utils/style/shadow";
 import {
@@ -17,7 +18,9 @@ import {
 } from "utils/style/sizes";
 import { CurrencyEnum } from "utils/types";
 
-export interface ICurrencyItemProps {
+type ThemePropsType = { theme?: Themes };
+
+export interface ICurrencyItemProps extends ThemePropsType {
   showTitle?: boolean;
   url?: string;
   symbol?: string | CurrencyEnum;
@@ -29,7 +32,7 @@ export interface ICurrencyItemProps {
   name?: string | CurrencyEnum;
 }
 
-const Icon = styled(RowItem) <{ small?: boolean }>`
+const Icon = styled(RowItem)<{ small?: boolean }>`
   object-fit: cover;
   box-shadow: ${$boxShadow1};
   border-radius: 100%;
@@ -50,10 +53,21 @@ const Icon = styled(RowItem) <{ small?: boolean }>`
   `}
 `;
 
-const nameStyle = css`
+const themeStyle = css<ThemePropsType>`
+  color: ${({ theme }) => {
+    switch (theme) {
+      case Themes.DARK:
+        return $textLightColor;
+      case Themes.LIGHT:
+        return $rowColor;
+    }
+  }};
+`;
+
+const nameStyle = css<ThemePropsType>`
   white-space: nowrap;
   letter-spacing: 0.6px;
-  color: ${$textLightColor};
+  ${themeStyle};
 `;
 
 const Name = styled.div`
@@ -66,9 +80,9 @@ const BigName = styled.h1`
   padding: 0;
 `;
 
-const Rate = styled.div`
+const Rate = styled.div<ThemePropsType>`
   ${fontSize($fontSizeSmall)};
-  color: ${$textLightColor};
+  ${themeStyle};
 `;
 
 const _CurrencyItem: React.FC<ICurrencyItemProps> = ({
@@ -79,6 +93,7 @@ const _CurrencyItem: React.FC<ICurrencyItemProps> = ({
   logo,
   name,
   small,
+  theme = Themes.DARK,
   clickable = true,
   showTitle = true
 }) => {
@@ -101,8 +116,12 @@ const _CurrencyItem: React.FC<ICurrencyItemProps> = ({
         )}
         {name && (
           <RowItem>
-            {big ? <BigName>{name}</BigName> : <Name>{name}</Name>}
-            {rate && <Rate>{rateString}</Rate>}
+            {big ? (
+              <BigName theme={theme}>{name}</BigName>
+            ) : (
+              <Name theme={theme}>{name}</Name>
+            )}
+            {rate && <Rate theme={theme}>{rateString}</Rate>}
           </RowItem>
         )}
       </Row>
