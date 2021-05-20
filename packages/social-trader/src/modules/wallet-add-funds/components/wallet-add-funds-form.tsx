@@ -7,17 +7,27 @@ import { LabeledValue } from "components/labeled-value/labeled-value";
 import { Row } from "components/row/row";
 import { ISelectChangeEvent } from "components/select/select";
 import withLoader from "decorators/with-loader";
-import { WalletData } from "gv-api-web";
+import { Blockchain, WalletData } from "gv-api-web";
 import { useAccountCurrency } from "hooks/account-currency.hook";
 import CopyButton from "modules/copy-button/copy-button";
 import { fetchWalletsAction } from "pages/wallet/actions/wallet.actions";
-import React, { useCallback, useState } from "react";
+import BlockchainSelectContainer from "pages/wallet/components/blockchain-select/blockchain-select-container";
+import React, { useCallback, useMemo, useState } from "react";
+import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { safeGetElemFromArray } from "utils/helpers";
+import { HookForm } from "utils/hook-form.helpers";
 import { fontSize } from "utils/style/mixins";
 import { $fontSizeParagraphMobile } from "utils/style/sizes";
+
+enum WALLET_ADD_FUNDS_FIELDS {
+  blockchain = "blockchain"
+}
+interface IWalletDepositFormValues {
+  [WALLET_ADD_FUNDS_FIELDS.blockchain]: Blockchain;
+}
 
 interface Props {
   wallets: WalletData[];
@@ -44,15 +54,41 @@ const _WalletAddFundsForm: React.FC<Props> = ({ wallets, currentWallet }) => {
   const accountCurrency = useAccountCurrency();
   const [t] = useTranslation();
   const [selected, setSelected] = useState<WalletData>(currentWallet);
-  const { depositAddress } = selected;
+  const { depositAddresses } = selected;
+
+  const form = useForm<IWalletDepositFormValues>({
+    defaultValues: {
+      [WALLET_ADD_FUNDS_FIELDS.blockchain]: depositAddresses[0].blockchain
+    },
+    mode: "onChange"
+  });
+
+  const { reset, watch } = form;
+
+  const { blockchain } = watch();
+
+  const depositAddress = useMemo(
+    () =>
+      safeGetElemFromArray(
+        depositAddresses,
+        depositAddress => depositAddress.blockchain === blockchain
+      ).address,
+    [depositAddresses, blockchain]
+  );
+
   const onChangeWallet = useCallback(
     (event: ISelectChangeEvent) => {
-      setSelected(
-        safeGetElemFromArray(
+      setSelected(() => {
+        const newWallet = safeGetElemFromArray(
           wallets,
           wallet => wallet.id === event.target.value
-        )
-      );
+        );
+        reset({
+          [WALLET_ADD_FUNDS_FIELDS.blockchain]:
+            newWallet.depositAddresses[0].blockchain
+        });
+        return newWallet;
+      });
     },
     [wallets, setSelected]
   );
@@ -61,7 +97,7 @@ const _WalletAddFundsForm: React.FC<Props> = ({ wallets, currentWallet }) => {
     dispatch(fetchWalletsAction(accountCurrency));
   }, []);
   return (
-    <div>
+    <HookForm form={form}>
       <DialogTop title={t("wallet-deposit.title")}>
         <Row size={"large"}>
           <CurrencySourceSelectElement
@@ -72,6 +108,12 @@ const _WalletAddFundsForm: React.FC<Props> = ({ wallets, currentWallet }) => {
             wide
             label={t("wallet-deposit.select-currency")}
             onChange={onChangeWallet}
+          />
+        </Row>
+        <Row size={"large"}>
+          <BlockchainSelectContainer
+            name={WALLET_ADD_FUNDS_FIELDS.blockchain}
+            values={depositAddresses.map(({ blockchain }) => blockchain)}
           />
         </Row>
       </DialogTop>
@@ -88,7 +130,7 @@ const _WalletAddFundsForm: React.FC<Props> = ({ wallets, currentWallet }) => {
           <CopyButton wide value={depositAddress} />
         </DialogButtons>
       </Bottom>
-    </div>
+    </HookForm>
   );
 };
 

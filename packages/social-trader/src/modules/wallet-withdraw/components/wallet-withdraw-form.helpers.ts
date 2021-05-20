@@ -10,6 +10,7 @@ export enum WALLET_WITHDRAW_FIELDS {
   currency = "currency",
   amount = "amount",
   address = "address",
+  blockchain = "blockchain",
   twoFactorCode = "twoFactorCode"
 }
 
