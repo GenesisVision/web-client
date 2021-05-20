@@ -20,7 +20,6 @@ export const transformWalletItemToCommon = ({
 });
 
 export const transformAccountWalletToCommon = ({
-  depositAddress,
   depositAddresses,
   id,
   title,
@@ -28,11 +27,10 @@ export const transformAccountWalletToCommon = ({
   currency,
   available,
   isWithdrawalEnabled,
-  withdrawalCommission
+  withdrawalCommissions
 }: WalletData): CommonWalletType => ({
   depositAddresses,
-  withdrawalCommission,
-  depositAddress,
+  withdrawalCommissions,
   id,
   title,
   logoUrl,

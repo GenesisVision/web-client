@@ -14,8 +14,8 @@ export const walletDataCreator = (): WalletData => ({
   logoUrl: "",
   isDepositEnabled: false,
   isWithdrawalEnabled: false,
-  withdrawalCommission: getRandomInteger(1, 1000),
-  depositAddress: getRandomWord(),
+  withdrawalCommissions: [],
+  depositAddresses: [],
   currency: "GVT" as CurrencyEnum,
   available: getRandomInteger(1, 1000),
   invested: getRandomInteger(1, 1000),
@@ -33,7 +33,5 @@ export const walletMultiSummaryLoaderData: WalletSummary = {
     trading: getRandomInteger(1, 1000),
     total: getRandomInteger(1, 1000)
   },
-  wallets: Array(4)
-    .fill("")
-    .map(walletDataCreator)
+  wallets: Array(4).fill("").map(walletDataCreator)
 };

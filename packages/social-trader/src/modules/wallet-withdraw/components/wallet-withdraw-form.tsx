@@ -23,6 +23,7 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
 import { formatCurrencyValue, validateFraction } from "utils/formatter";
+import { safeGetElemFromArray } from "utils/helpers";
 import { HookForm } from "utils/hook-form.helpers";
 import { CurrencyEnum } from "utils/types";
 import { twoFactorRules } from "utils/validators/validators";
@@ -52,7 +53,7 @@ const _WalletWithdrawForm: React.FC<Props> = ({
   const [selected, setSelected] = useState<WalletData>(currentWallet);
 
   const {
-    withdrawalCommission,
+    withdrawalCommissions,
     available,
     currency,
     depositAddresses
@@ -69,7 +70,7 @@ const _WalletWithdrawForm: React.FC<Props> = ({
   });
   const { reset, watch, setValue } = form;
 
-  const { amount } = watch();
+  const { amount, blockchain } = watch();
 
   const onChangeCurrency = useCallback(
     (wallet: CommonWalletType) => {
@@ -77,13 +78,22 @@ const _WalletWithdrawForm: React.FC<Props> = ({
         [WALLET_WITHDRAW_FIELDS.currency]: wallet.currency,
         [WALLET_WITHDRAW_FIELDS.id]: wallet.id,
         [WALLET_WITHDRAW_FIELDS.amount]: "",
-        [WALLET_WITHDRAW_FIELDS.blockchain]:
-          wallet.depositAddresses[0].blockchain
+        [WALLET_WITHDRAW_FIELDS.blockchain]: (wallet.depositAddresses![0]
+          .blockchain as unknown) as Blockchain
       });
       setSelected(wallet as WalletData);
     },
     [setValue, setSelected]
   );
+
+  // To fix
+  // const withdrawalCommission = safeGetElemFromArray(
+  //   withdrawalCommissions,
+  //   withdrawalCommission => withdrawalCommission.blockchain === blockchain
+  // ).value;
+
+  const withdrawalCommission = withdrawalCommissions[0].value;
+
   const willGet = Math.max(parseFloat(amount) - withdrawalCommission, 0);
   const isAllow = useCallback(
     (inputValues: NumberFormatValues) => {

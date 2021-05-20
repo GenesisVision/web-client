@@ -15,12 +15,10 @@ export interface CommonWalletType {
   logoUrl?: string;
   currency: Currency;
   available: number;
-  depositAddress?: string;
   depositAddresses?: Array<WalletDepositData>;
   asset?: AssetDetails;
   rate?: number;
   isWithdrawalEnabled?: boolean;
-  withdrawalCommission?: number;
   withdrawalCommissions?: Array<WalletWithdrawalCurrencyInfo>;
 }
 
