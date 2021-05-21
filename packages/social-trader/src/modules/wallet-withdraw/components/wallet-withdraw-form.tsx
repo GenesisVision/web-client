@@ -9,19 +9,21 @@ import InputAmountField from "components/input-amount-field/hook-form-amount-fie
 import { Row } from "components/row/row";
 import { SimpleTextField } from "components/simple-fields/simple-text-field";
 import { SubmitButton } from "components/submit-button/submit-button";
-import { WalletItemType } from "components/wallet-select/wallet-select";
+import { CommonWalletType } from "components/wallet-select/wallet-select";
 import { WalletSelectContainer } from "components/wallet-select/wallet-select.container";
-import { WalletData } from "gv-api-web";
+import { Blockchain, WalletData } from "gv-api-web";
 import {
   getWalletWithdrawValidationSchema,
   WALLET_WITHDRAW_FIELDS
 } from "modules/wallet-withdraw/components/wallet-withdraw-form.helpers";
+import BlockchainSelectContainer from "pages/wallet/components/blockchain-select/blockchain-select-container";
 import * as React from "react";
 import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import NumberFormat, { NumberFormatValues } from "react-number-format";
 import { formatCurrencyValue, validateFraction } from "utils/formatter";
+import { safeGetElemFromArray } from "utils/helpers";
 import { HookForm } from "utils/hook-form.helpers";
 import { CurrencyEnum } from "utils/types";
 import { twoFactorRules } from "utils/validators/validators";
@@ -31,6 +33,7 @@ export interface IWalletWithdrawFormValues {
   [WALLET_WITHDRAW_FIELDS.id]: string;
   [WALLET_WITHDRAW_FIELDS.amount]: string;
   [WALLET_WITHDRAW_FIELDS.address]: string;
+  [WALLET_WITHDRAW_FIELDS.blockchain]: Blockchain;
   [WALLET_WITHDRAW_FIELDS.twoFactorCode]: string;
 }
 
@@ -48,31 +51,49 @@ const _WalletWithdrawForm: React.FC<Props> = ({
   currentWallet
 }) => {
   const [selected, setSelected] = useState<WalletData>(currentWallet);
-  const { withdrawalCommission, available, currency } = selected;
+
+  const {
+    withdrawalCommissions,
+    available,
+    currency,
+    depositAddresses
+  } = selected;
 
   const [t] = useTranslation();
   const form = useForm<IWalletWithdrawFormValues>({
     defaultValues: {
       [WALLET_WITHDRAW_FIELDS.id]: selected.id,
-      [WALLET_WITHDRAW_FIELDS.currency]: selected.currency
+      [WALLET_WITHDRAW_FIELDS.currency]: selected.currency,
+      [WALLET_WITHDRAW_FIELDS.blockchain]: depositAddresses[0].blockchain
     },
     mode: "onChange"
   });
   const { reset, watch, setValue } = form;
 
-  const { amount } = watch();
+  const { amount, blockchain } = watch();
 
   const onChangeCurrency = useCallback(
-    (wallet: WalletItemType) => {
+    (wallet: CommonWalletType) => {
       reset({
         [WALLET_WITHDRAW_FIELDS.currency]: wallet.currency,
         [WALLET_WITHDRAW_FIELDS.id]: wallet.id,
-        [WALLET_WITHDRAW_FIELDS.amount]: ""
+        [WALLET_WITHDRAW_FIELDS.amount]: "",
+        [WALLET_WITHDRAW_FIELDS.blockchain]: (wallet.depositAddresses![0]
+          .blockchain as unknown) as Blockchain
       });
       setSelected(wallet as WalletData);
     },
     [setValue, setSelected]
   );
+
+  // To fix
+  // const withdrawalCommission = safeGetElemFromArray(
+  //   withdrawalCommissions,
+  //   withdrawalCommission => withdrawalCommission.blockchain === blockchain
+  // ).value;
+
+  const withdrawalCommission = withdrawalCommissions[0].value;
+
   const willGet = Math.max(parseFloat(amount) - withdrawalCommission, 0);
   const isAllow = useCallback(
     (inputValues: NumberFormatValues) => {
@@ -108,6 +129,12 @@ const _WalletWithdrawForm: React.FC<Props> = ({
             name={WALLET_WITHDRAW_FIELDS.id}
             label={t("wallet-withdraw:select-currency")}
             onChange={onChangeCurrency}
+          />
+        </Row>
+        <Row size={"large"}>
+          <BlockchainSelectContainer
+            name={WALLET_WITHDRAW_FIELDS.blockchain}
+            values={depositAddresses.map(({ blockchain }) => blockchain)}
           />
         </Row>
         <Row hide>

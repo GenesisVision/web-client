@@ -2,6 +2,8 @@ import { CurrencySourceSelect as HookFormCurrencySourceSelect } from "components
 import { IUpdatableGvTextFieldProps } from "components/gv-text-field/updatable-gv-text-field";
 import { ISelectChangeEvent } from "components/select/select";
 import { AssetDetails, Currency, WalletBaseData, WalletData } from "gv-api-web";
+import { WalletDepositData } from "gv-api-web/src/model/WalletDepositData";
+import { WalletWithdrawalCurrencyInfo } from "gv-api-web/src/model/WalletWithdrawalCurrencyInfo";
 import { TransferItemType } from "modules/transfer/transfer.types";
 import React from "react";
 
@@ -13,11 +15,11 @@ export interface CommonWalletType {
   logoUrl?: string;
   currency: Currency;
   available: number;
-  depositAddress?: string;
+  depositAddresses?: Array<WalletDepositData>;
   asset?: AssetDetails;
   rate?: number;
   isWithdrawalEnabled?: boolean;
-  withdrawalCommission?: number;
+  withdrawalCommissions?: Array<WalletWithdrawalCurrencyInfo>;
 }
 
 export interface IWalletSelectProps {
