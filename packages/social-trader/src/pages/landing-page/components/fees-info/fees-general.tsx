@@ -533,11 +533,10 @@ const _FeesGeneral: React.FC<Props> = ({ platformWithdrawalInfo }) => {
                           </td>
                         )}
                         <td
-                          className={
-                            styles[
-                              "fees-table__cell fees-table__cell--normal-weight"
-                            ]
-                          }
+                          className={clsx(
+                            styles["fees-table__cell"],
+                            styles["fees-table__cell--normal-weight"]
+                          )}
                         >
                           {commission.blockchain}
                         </td>
