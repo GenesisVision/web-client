@@ -155,9 +155,12 @@
     padding: 18px;
     border-bottom: 1px solid $landing-bg-gray;
 
+    &:first-child {
+      width: 200px;
+    }
+
     &:first-child:not(.fees-table__cell--normal-weight) {
       font-weight: 600;
-      width: 200px;
     }
 
     &--colspan {
@@ -178,11 +181,7 @@
     }
 
     &--width-quarter {
-      max-width: 25%;
-
-      &:first-child {
-        width: 25%;
-      }
+      width: 25%;
     }
   }
 
