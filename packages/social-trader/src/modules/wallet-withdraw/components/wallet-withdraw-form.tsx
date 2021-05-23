@@ -86,13 +86,10 @@ const _WalletWithdrawForm: React.FC<Props> = ({
     [setValue, setSelected]
   );
 
-  // To fix
-  // const withdrawalCommission = safeGetElemFromArray(
-  //   withdrawalCommissions,
-  //   withdrawalCommission => withdrawalCommission.blockchain === blockchain
-  // ).value;
-
-  const withdrawalCommission = withdrawalCommissions[0].value;
+  const withdrawalCommission = safeGetElemFromArray(
+    withdrawalCommissions,
+    withdrawalCommission => withdrawalCommission.blockchain === blockchain
+  ).value;
 
   const willGet = Math.max(parseFloat(amount) - withdrawalCommission, 0);
   const isAllow = useCallback(
