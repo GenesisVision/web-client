@@ -113,7 +113,7 @@ const _WalletAddFundsForm: React.FC<Props> = ({ wallets, currentWallet }) => {
         <Row size={"large"}>
           <BlockchainSelectContainer
             name={WALLET_ADD_FUNDS_FIELDS.blockchain}
-            values={depositAddresses.map(({ blockchain }) => blockchain)}
+            values={depositAddresses.map(item => item)}
           />
         </Row>
       </DialogTop>
