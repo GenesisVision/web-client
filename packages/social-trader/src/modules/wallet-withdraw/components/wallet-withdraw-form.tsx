@@ -131,7 +131,7 @@ const _WalletWithdrawForm: React.FC<Props> = ({
         <Row size={"large"}>
           <BlockchainSelectContainer
             name={WALLET_WITHDRAW_FIELDS.blockchain}
-            values={depositAddresses.map(({ blockchain }) => blockchain)}
+            values={depositAddresses.map(item => item)}
           />
         </Row>
         <Row hide>
