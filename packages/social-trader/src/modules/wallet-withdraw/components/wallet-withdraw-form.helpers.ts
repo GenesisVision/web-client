@@ -29,6 +29,7 @@ export const getWalletWithdrawValidationSchema = ({
     case "BNB":
     case "USDC":
     case "USDT":
+    case "DAI":
       return ethGvtWalletRules(t);
     case "BTC":
     default:
