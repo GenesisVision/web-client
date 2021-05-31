@@ -19,6 +19,7 @@ const _BlockchainSelectContainer: React.FC<Props> = ({ name, values }) => {
       component={SimpleTextField}
       label={t("wallet-deposit.select-blockchain")}
       InputComponent={Select}
+      disableIfSingle
     >
       {values.map(({ blockchain, blockchainTitle }) => (
         <option value={blockchain} key={blockchain}>
