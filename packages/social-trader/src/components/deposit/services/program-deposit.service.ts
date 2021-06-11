@@ -24,7 +24,7 @@ export const getMinProgramDeposits = ({
   const brokerIndex = programMinDepositAmounts.findIndex(
     ({ serverType }) => serverType === broker
   );
-  return programMinDepositAmounts[brokerIndex].minInvestAmountIntoProgram;
+  return programMinDepositAmounts[brokerIndex]?.minInvestAmountIntoProgram;
 };
 
 export const getMinProgramDeposit = (
