@@ -17,12 +17,16 @@ const Page = ({
   children,
   schemas,
   previewImage,
-  url
+  url,
+  noIndex,
+  noFollow
 }: PropsWithChildren<Props>) => {
   useRefLink();
   return (
     <TitleContext.Provider value={title}>
       <PageSeoWrapper
+        noFollow={noFollow}
+        noIndex={noIndex}
         type={type}
         url={url}
         schemas={schemas}

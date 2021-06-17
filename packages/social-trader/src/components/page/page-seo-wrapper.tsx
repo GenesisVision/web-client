@@ -18,7 +18,9 @@ export const PageSeoWrapper: React.FC<IPageSeoWrapperProps> = ({
   schemas,
   title,
   description,
-  previewImage
+  previewImage,
+  noFollow,
+  noIndex
 }) => {
   const [t] = useTranslation();
   const pageTitle = `${title} | ${t("app.title")}`;
@@ -32,6 +34,8 @@ export const PageSeoWrapper: React.FC<IPageSeoWrapperProps> = ({
         {titleMeta(title)}
         {descriptionMeta(description)}
         {imageMeta(previewImage)}
+        {noFollow && <meta name="robots" content="nofollow" />}
+        {noIndex && <meta name="robots" content="noindex" />}
       </Head>
       {children}
     </>
@@ -47,4 +51,6 @@ export interface IPageSeoWrapperProps
   description?: string;
   previewImage?: string;
   url?: string;
+  noIndex?: boolean;
+  noFollow?: boolean;
 }
