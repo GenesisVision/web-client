@@ -1,4 +1,8 @@
 const cacheableResponse = require("cacheable-response");
+const { SIGNUP_ROUTE, LOGIN_ROUTE } = require("../src/routes/app.routes");
+const {
+  FORGOT_PASSWORD_ROUTE
+} = require("../src/pages/auth/forgot-password/forgot-password.routes");
 
 const TTL_OK = 1000 * 60 * 60 * 24;
 const TTL_ERROR = 1000 * 3;
@@ -17,9 +21,22 @@ const robotTxt = dev => {
         const url = process.env.HOSTNAME;
         const userAgentLine = "User-agent: *";
         const siteMapLine = `Sitemap: ${url}/sitemap.xml`;
-        const disallowLine = "Disallow: /";
+        const dissalowLines = [
+          `Disallow: ${FORGOT_PASSWORD_ROUTE}`,
+          `Disallow: ${LOGIN_ROUTE}`,
+          `Disallow: ${SIGNUP_ROUTE}`,
+          "Disallow: /?gclid=",
+          "Disallow: /?utm_source=",
+          "Disallow: /?yclid=",
+          "Disallow: /_openstat"
+        ];
+        const disallowAllLine = "Disallow: /";
         const data =
-          userAgentLine + lineBreak + (url ? siteMapLine : disallowLine);
+          userAgentLine +
+          lineBreak +
+          (url
+            ? dissalowLines.join(lineBreak) + lineBreak + siteMapLine
+            : disallowAllLine);
         return {
           ttl: TTL_OK,
           data
