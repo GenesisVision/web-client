@@ -34,8 +34,12 @@ export const PageSeoWrapper: React.FC<IPageSeoWrapperProps> = ({
         {titleMeta(title)}
         {descriptionMeta(description)}
         {imageMeta(previewImage)}
-        {noFollow && <meta name="robots" content="nofollow" />}
-        {noIndex && <meta name="robots" content="noindex" />}
+        {(noFollow || noIndex) && (
+          <meta
+            name="robots"
+            content={`${noFollow && "nofollow, "}${noIndex && "noindex"}`}
+          />
+        )}
       </Head>
       {children}
     </>
