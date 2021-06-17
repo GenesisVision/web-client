@@ -3,8 +3,8 @@ import { ManagerInfo } from "components/manager/components/manager-info";
 import { getManagerSchema } from "components/manager/manager.schema";
 import Page from "components/page/page";
 import { ResponsiveContainer } from "components/responsive-container/responsive-container";
-import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { RowItem } from "components/row-item/row-item";
 import { UpperBlock } from "components/upper-block/upper-block";
 import { UpperButtonContainer } from "components/upper-button/upper-button";
 import { PublicProfile } from "gv-api-web";
@@ -51,6 +51,8 @@ const _ManagerPage: React.FC<Props> = ({ cookieShowEvents, profile }) => {
       schemas={[getManagerSchema(profile)]}
       description={profile.about || title}
       previewImage={profile.logoUrl}
+      noIndex
+      noFollow
     >
       <SocialPageContextProvider cookieShowEvents={cookieShowEvents}>
         <Container center={false} wide>

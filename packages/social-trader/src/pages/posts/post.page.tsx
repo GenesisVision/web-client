@@ -1,5 +1,5 @@
-import { getImageByQuality } from "components/conversation/conversation-image/conversation-image.helpers";
 import { ConversationPost } from "components/conversation/conversation.types";
+import { getImageByQuality } from "components/conversation/conversation-image/conversation-image.helpers";
 import { PostContainer } from "components/conversation/post/post-container";
 import {
   inTextComponentsMap,
@@ -36,6 +36,8 @@ export const PostPage: React.FC<Props> = ({ post }) => {
       previewImage={previewImage}
       description={description}
       title={title}
+      noIndex
+      noFollow
     >
       <PostContainer
         visibleCommentsCount={post.comments.length}
