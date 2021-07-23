@@ -21,9 +21,14 @@ const links = [
 const _Footer: React.FC = () => {
   const [t] = useTranslation();
   return (
-    <Center>
+    <Center wrap>
+      <RowItem size={"xlarge"}>
+        <Text weight={"bold"} muted>
+          Copyright © 2018 - {new Date().getFullYear()} genesis.vision
+        </Text>
+      </RowItem>
       {links.map(({ label, href }) => (
-        <RowItem size={"xxlarge"}>
+        <RowItem size={"xlarge"}>
           <Link to={href}>
             <Text weight={"bold"} muted>
               {t(label)}
