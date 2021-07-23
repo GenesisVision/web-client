@@ -1,3 +1,4 @@
+import BreadCrumbs from "components/breadcrumbs/breadcrumbs";
 import { DefaultTableBlock } from "components/default.block/default-table.block";
 import FacetCardsContainer, {
   ASSETS_FACETS
@@ -10,6 +11,7 @@ import { useTranslation } from "i18n";
 import ProgramsTableSSR from "modules/programs-table/components/programs-table/programs-table-ssr";
 import { NextPage } from "next";
 import React from "react";
+import { GV_PROGRAMS_ROUTE, INVEST_ROUTE } from "routes/invest.routes";
 import {
   PROGRAMS_EXPLORE_TAB_NAME,
   PROGRAMS_FACET_FOLDER_ROUTE,
@@ -42,6 +44,12 @@ const ProgramsPage: NextPage<Props> = ({ data, outerView }) => {
         }
       ]}
     >
+      <BreadCrumbs
+        items={[
+          { href: INVEST_ROUTE, label: t("navigation.invest") },
+          { href: GV_PROGRAMS_ROUTE, label: t("navigation.gv-programs") }
+        ]}
+      />
       <NavigationTabs
         exploreTabName={PROGRAMS_EXPLORE_TAB_NAME}
         tabRoute={PROGRAMS_TAB_ROUTE}

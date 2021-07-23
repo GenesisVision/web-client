@@ -1,3 +1,4 @@
+import BreadCrumbs from "components/breadcrumbs/breadcrumbs";
 import { DefaultTableBlock } from "components/default.block/default-table.block";
 import FacetCardsContainer, {
   ASSETS_FACETS
@@ -15,6 +16,7 @@ import {
   FUNDS_FAVORITES_TAB_NAME,
   FUNDS_TAB_ROUTE
 } from "routes/funds.routes";
+import { GV_FUNDS_ROUTE, INVEST_ROUTE } from "routes/invest.routes";
 import { composeFundFacetUrl } from "utils/compose-url";
 import { ORGANIZATION_SCHEMA } from "utils/seo";
 
@@ -41,6 +43,12 @@ const FundsPage: React.FC<Props> = ({ data, outerView }) => {
         }
       ]}
     >
+      <BreadCrumbs
+        items={[
+          { href: INVEST_ROUTE, label: t("navigation.invest") },
+          { href: GV_FUNDS_ROUTE, label: t("navigation.gv-funds") }
+        ]}
+      />
       <NavigationTabs
         exploreTabName={FUNDS_EXPLORE_TAB_NAME}
         tabRoute={FUNDS_TAB_ROUTE}
