@@ -7,6 +7,8 @@ import { useRouter } from "next/router";
 import React, { Fragment } from "react";
 import styled from "styled-components";
 import { $labelColor } from "utils/style/colors";
+import { adaptiveMargin } from "utils/style/mixins";
+import { $paddingSmall } from "utils/style/sizes";
 
 type BreadCrumbType = {
   href: string;
@@ -17,6 +19,11 @@ interface Props {
   items: BreadCrumbType[];
 }
 
+const Wrapper = styled.div`
+  display: flex;
+  ${adaptiveMargin("bottom", $paddingSmall)}
+`;
+
 const StyledLink = styled(Link)<{ isCurrent: boolean }>`
   color: ${props => (props.isCurrent ? "white" : $labelColor)};
 `;
@@ -25,7 +32,7 @@ const _BreadCrumbs: React.FC<Props> = ({ items }) => {
   const { linkCreator } = useToLink();
   const { asPath } = useRouter();
   return (
-    <Row>
+    <Wrapper>
       {items.map(({ href, label }, index) => {
         const isCurrent = asPath === normalizeLinkFrom(href);
         return (
@@ -43,7 +50,7 @@ const _BreadCrumbs: React.FC<Props> = ({ items }) => {
           </Fragment>
         );
       })}
-    </Row>
+    </Wrapper>
   );
 };
 
