@@ -1,3 +1,4 @@
+import BreadCrumbs from "components/breadcrumbs/breadcrumbs";
 import DetailsDescriptionSection from "components/details/details-description-section/details-description/details-description-section";
 import { DetailsTags } from "components/details/details-description-section/details-description/details-tags.block";
 import DetailsInvestment from "components/details/details-description-section/details-investment/details-investment";
@@ -22,8 +23,15 @@ import { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
+import {
+  GV_FOLLOW_ROUTE,
+  GV_PROGRAMS_ROUTE,
+  INVEST_ROUTE
+} from "routes/invest.routes";
 import styled from "styled-components";
 import {
+  composeFollowDetailsUrl,
+  composeProgramDetailsUrl,
   createFollowNotificationsToUrl,
   createProgramApiKeysToUrl,
   createProgramNotificationsToUrl,
@@ -339,6 +347,26 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
       previewImage={banner}
       schemas={schemas}
     >
+      <BreadCrumbs
+        items={[
+          { href: INVEST_ROUTE, label: t("navigation.invest") },
+          {
+            href:
+              assetType === ASSET.FOLLOW ? GV_FOLLOW_ROUTE : GV_PROGRAMS_ROUTE,
+            label:
+              assetType === ASSET.FOLLOW
+                ? t("navigation.gv-follow")
+                : t("navigation.gv-programs")
+          },
+          {
+            href:
+              assetType === ASSET.FOLLOW
+                ? composeFollowDetailsUrl(url)
+                : composeProgramDetailsUrl(url),
+            label: title
+          }
+        ]}
+      />
       <DetailsDescriptionSection
         personalDetails={personalDetails}
         isOwnAsset={isOwnAsset}

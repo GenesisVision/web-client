@@ -1,3 +1,4 @@
+import BreadCrumbs from "components/breadcrumbs/breadcrumbs";
 import DetailsDescriptionSection from "components/details/details-description-section/details-description/details-description-section";
 import DetailsInvestment from "components/details/details-description-section/details-investment/details-investment";
 import { DetailsDivider } from "components/details/details-divider.block";
@@ -10,7 +11,9 @@ import InvestDefaultPopup from "modules/invest-popup/invest-default-popup";
 import React, { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
+import { GV_FUNDS_ROUTE, INVEST_ROUTE } from "routes/invest.routes";
 import {
+  composeFundsDetailsUrl,
   createFundNotificationsToUrl,
   createFundSettingsToUrl
 } from "utils/compose-url";
@@ -45,8 +48,9 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
     "trading-schedule.post-create-fund"
   )} \n${schedule}`;
 
-  const title = `${t("fund-details-page:title")} - ${description.publicInfo.title
-    }`;
+  const title = `${t("fund-details-page:title")} - ${
+    description.publicInfo.title
+  }`;
 
   const banner = useMemo(
     // () => composeFundBannerUrl(description.publicInfo.url),
@@ -66,11 +70,11 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
   const settingsUrl = useMemo(
     () =>
       description.publicInfo.status !== "Disabled" &&
-        description.publicInfo.status !== "Closed"
+      description.publicInfo.status !== "Closed"
         ? createFundSettingsToUrl(
-          description.publicInfo.url,
-          description.publicInfo.title
-        )
+            description.publicInfo.url,
+            description.publicInfo.title
+          )
         : undefined,
     [description]
   );
@@ -142,10 +146,24 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
       type={"article"}
       title={title}
       schemas={schemas}
-      description={`${t("funds-page:title")} ${description.publicInfo.title
-        } - ${description.publicInfo.description}`}
+      description={`${t("funds-page:title")} ${
+        description.publicInfo.title
+      } - ${description.publicInfo.description}`}
       previewImage={banner}
     >
+      <BreadCrumbs
+        items={[
+          { href: INVEST_ROUTE, label: t("navigation.invest") },
+          {
+            href: GV_FUNDS_ROUTE,
+            label: t("navigation.gv-funds")
+          },
+          {
+            href: composeFundsDetailsUrl(description.publicInfo.url),
+            label: description.publicInfo.title
+          }
+        ]}
+      />
       <DetailsDescriptionSection
         personalDetails={description.personalDetails}
         isOwnAsset={description.publicInfo.isOwnAsset}

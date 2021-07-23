@@ -1,3 +1,4 @@
+import BreadCrumbs from "components/breadcrumbs/breadcrumbs";
 import { DefaultTableBlock } from "components/default.block/default-table.block";
 import FacetCardsContainer, {
   ASSETS_FACETS
@@ -13,7 +14,9 @@ import {
   EXPLORE_TAB_NAME,
   FAVORITES_TAB_NAME,
   FOLLOW_FACET_FOLDER_ROUTE,
-  FOLLOW_TAB_ROUTE
+  FOLLOW_TAB_ROUTE,
+  GV_FOLLOW_ROUTE,
+  INVEST_ROUTE
 } from "routes/invest.routes";
 import { composeFollowFacetUrl } from "utils/compose-url";
 import { ORGANIZATION_SCHEMA } from "utils/seo";
@@ -41,6 +44,12 @@ const FollowsPage: React.FC<Props> = ({ data, outerView }) => {
         }
       ]}
     >
+      <BreadCrumbs
+        items={[
+          { href: INVEST_ROUTE, label: t("navigation.invest") },
+          { href: GV_FOLLOW_ROUTE, label: t("navigation.gv-follow") }
+        ]}
+      />
       <NavigationTabs
         exploreTabName={EXPLORE_TAB_NAME}
         tabRoute={FOLLOW_TAB_ROUTE}
