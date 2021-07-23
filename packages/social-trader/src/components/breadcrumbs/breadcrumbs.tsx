@@ -23,11 +23,11 @@ const StyledLink = styled(Link)<{ isCurrent: boolean }>`
 
 const _BreadCrumbs: React.FC<Props> = ({ items }) => {
   const { linkCreator } = useToLink();
-  const { pathname } = useRouter();
+  const { asPath } = useRouter();
   return (
     <Row>
       {items.map(({ href, label }, index) => {
-        const isCurrent = pathname === normalizeLinkFrom(href);
+        const isCurrent = asPath === normalizeLinkFrom(href);
         return (
           <Fragment key={href}>
             {index !== 0 && (
