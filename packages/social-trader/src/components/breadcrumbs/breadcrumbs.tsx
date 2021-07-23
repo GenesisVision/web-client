@@ -19,8 +19,9 @@ interface Props {
   items: BreadCrumbType[];
 }
 
-const Wrapper = styled.div`
+const Wrapper = styled.ul`
   display: flex;
+  padding: 0px;
   ${adaptiveMargin("bottom", $paddingSmall)}
 `;
 
@@ -38,11 +39,11 @@ const _BreadCrumbs: React.FC<Props> = ({ items }) => {
         return (
           <Fragment key={href}>
             {index !== 0 && (
-              <RowItem>
+              <RowItem as={"li"}>
                 <Text muted>/</Text>
               </RowItem>
             )}
-            <RowItem>
+            <RowItem as={"li"}>
               <StyledLink to={linkCreator(href)} isCurrent={isCurrent}>
                 {label}
               </StyledLink>
