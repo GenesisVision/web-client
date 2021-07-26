@@ -14,7 +14,11 @@ const _Navigation: React.FC<INavigationProps> = ({ className, menuItems }) => {
   return (
     <>
       <GvRootItem />
-      <Center>
+      <Center
+        itemScope
+        itemType="http://www.schema.org/SiteNavigationElement"
+        as="nav"
+      >
         {menuItems.map(item => (
           <MenuNavigationItem
             item={item}

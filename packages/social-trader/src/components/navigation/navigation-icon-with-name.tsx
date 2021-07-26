@@ -33,7 +33,7 @@ const _NavigationIconWithName: React.FC<Props> = ({
       <HeaderIcon>
         <Container small={small}>{<icon.type {...icon.props} />}</Container>
       </HeaderIcon>
-      <NavigationLink>{children}</NavigationLink>
+      <NavigationLink itemProp={"name"}>{children}</NavigationLink>
     </>
   );
 };

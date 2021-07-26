@@ -89,11 +89,16 @@ const _NavigationItem: React.FC<INavigationItemProps> = ({
   const isCurrent = !!href && router.route.startsWith(normalizeLinkFrom(href));
 
   return !!href ? (
-    <StyledLink mobile={mobile} isCurrent={isCurrent} to={href}>
+    <StyledLink mobile={mobile} isCurrent={isCurrent} to={href} itemProp="url">
       {renderIconWithName()}
     </StyledLink>
   ) : (
-    <StyledButton mobile={mobile} isCurrent={isCurrent} onClick={onClick}>
+    <StyledButton
+      mobile={mobile}
+      isCurrent={isCurrent}
+      onClick={onClick}
+      itemProp="url"
+    >
       {renderIconWithName()}
     </StyledButton>
   );

@@ -13,7 +13,7 @@ export type ToType = {
   as?: string;
 };
 
-export interface LinkProps {
+export interface LinkProps extends React.HTMLAttributes<HTMLAnchorElement> {
   noColor?: boolean;
   wide?: boolean;
   white?: boolean;
@@ -51,6 +51,7 @@ const Link: React.FC<LinkProps> = props => {
   }
   const normalizedTo = normalizeTo(to);
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const handleClick = useCallback(
     (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
       e.stopPropagation();
