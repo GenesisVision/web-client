@@ -1,11 +1,18 @@
+import { TAccordion } from "pages/landing-page/components/accordion/accordion";
+import {
+  faqFollow,
+  faqFunds,
+  faqGeneral,
+  faqGVT,
+  faqICO,
+  faqPrograms
+} from "pages/landing-page/static-data/faq";
 import * as React from "react";
 
 export const schema = (() => {
-  let index = 0;
-
   return (schema?: Array<SchemaType>) => {
     return schema
-      ? schema.map(s => {
+      ? schema.map((s, index) => {
           return (
             <script
               dangerouslySetInnerHTML={{ __html: JSON.stringify(s) }}
@@ -87,4 +94,13 @@ export const ORGANIZATION_SCHEMA = {
   ]
 };
 
-export type SchemaType = { [key: string]: string | string[] | number };
+export const WEBSITE_SCHEMA = {
+  "@context": "http://www.schema.org",
+  "@type": "WebSite",
+  name: "Genesis Vision",
+  url: "https://genesis.vision/"
+};
+
+export type SchemaType = {
+  [key: string]: string | string[] | number | Object[];
+};
