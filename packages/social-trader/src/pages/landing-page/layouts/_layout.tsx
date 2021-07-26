@@ -16,7 +16,9 @@ import {
   imageMeta,
   ORGANIZATION_SCHEMA,
   schema,
-  titleMeta
+  SchemaType,
+  titleMeta,
+  WEBSITE_SCHEMA
 } from "utils/seo";
 import { $landingBg, $mainColor } from "utils/style/colors";
 import { logVersion } from "utils/version";
@@ -39,6 +41,7 @@ const Container = styled.div`
 const _Layout: React.FC<Props> = ({
   cookieAccept,
   description,
+  schemas,
   title,
   children
 }) => {
@@ -49,11 +52,13 @@ const _Layout: React.FC<Props> = ({
     logVersion();
   }, []);
 
+  const defaultSchemas = [ORGANIZATION_SCHEMA, WEBSITE_SCHEMA];
+
   return (
     <Container className="landing-page">
       <Head>
         <title>{title}</title>
-        {schema([ORGANIZATION_SCHEMA])}
+        {schema(schemas ? [...schemas, ...defaultSchemas] : defaultSchemas)}
         {commonMeta()}
         <meta property="og:url" content="https://genesis.vision" />
         {imageMeta("https://genesis.vision/platform.png")}
@@ -77,6 +82,7 @@ const _Layout: React.FC<Props> = ({
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   cookieAccept?: string;
   description?: string;
+  schemas?: Array<SchemaType>;
   title: string;
 }
 
