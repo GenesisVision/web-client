@@ -72,7 +72,11 @@ const _NavigationMobile: React.FC<Props> = ({
           <MobileEmail>{profileHeader.email}</MobileEmail>
         </MobileHeader>
       )}
-      <MobileTop onClick={onClose}>
+      <MobileTop
+        onClick={onClose}
+        itemScope
+        itemType="http://www.schema.org/SiteNavigationElement"
+      >
         {mobileMenuItems.map(item => (
           <MenuNavigationItem mobile item={item} key={item.label} />
         ))}
