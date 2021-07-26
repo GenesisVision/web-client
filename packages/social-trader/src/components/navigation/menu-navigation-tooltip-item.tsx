@@ -23,7 +23,15 @@ export const MenuNavigationTooltipItem: React.FC<Props> = ({
       return (
         <MenuTooltip
           vertical={VERTICAL_POPOVER_POS.BOTTOM}
-          render={() => <SecondLevel>{secondLevel}</SecondLevel>}
+          render={() => (
+            <SecondLevel
+              itemScope
+              itemType="http://www.schema.org/SiteNavigationElement"
+              as="nav"
+            >
+              {secondLevel}
+            </SecondLevel>
+          )}
         >
           <div>{children}</div>
         </MenuTooltip>
