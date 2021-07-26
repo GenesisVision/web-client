@@ -24,7 +24,7 @@ const _Footer: React.FC = () => {
     <Center wrap>
       <RowItem size={"xlarge"}>
         <Text weight={"bold"} muted>
-          Copyright © 2018 - {new Date().getFullYear()} genesis.vision
+          {t("footer.copyright", { dateNow: new Date().getFullYear() })}
         </Text>
       </RowItem>
       {links.map(({ label, href }) => (

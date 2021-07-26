@@ -1,5 +1,6 @@
 {
   "footer": {
+    "copyright": "Copyright © 2018 - {{dateNow}} genesis.vision",
     "faq": "FAQ",
     "partners": "Referral program",
     "fees": "Fees",
