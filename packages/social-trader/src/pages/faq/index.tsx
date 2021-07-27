@@ -6,6 +6,7 @@ import FaqSection from "pages/landing-page/components/faq-section/faq-section";
 import { InternalMainWrapper } from "pages/landing-page/components/internal/internal.blocks";
 import Layout from "pages/landing-page/layouts/_layout";
 import React from "react";
+import { FAQ_SCHEMA } from "utils/seo";
 
 interface Props {
   cookieAccept?: string;
@@ -17,6 +18,7 @@ export const Faq: NextPage<Props> = ({ cookieAccept }) => {
     <Layout
       cookieAccept={cookieAccept}
       title={t("landing-page:page-titles.faq")}
+      schemas={[FAQ_SCHEMA]}
     >
       <InternalMainWrapper>
         <FaqSection />

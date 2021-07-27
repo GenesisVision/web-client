@@ -8,6 +8,7 @@ import {
   faqPrograms
 } from "pages/landing-page/static-data/faq";
 import * as React from "react";
+import ReactDOMServer from "react-dom/server";
 
 export const schema = (() => {
   return (schema?: Array<SchemaType>) => {
@@ -101,6 +102,27 @@ export const WEBSITE_SCHEMA = {
   url: "https://genesis.vision/"
 };
 
+const faqs: TAccordion[] = [
+  ...faqGeneral,
+  ...faqPrograms,
+  ...faqFunds,
+  ...faqFollow,
+  ...faqGVT,
+  ...faqICO
+];
+
+export const FAQ_SCHEMA: SchemaType = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map(faq => ({
+    "@type": "Question",
+    name: faq.title,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: ReactDOMServer.renderToStaticMarkup(faq.content)
+    }
+  }))
+};
 export type SchemaType = {
   [key: string]: string | string[] | number | Object[];
 };
