@@ -21,7 +21,11 @@ const links = [
 const _Footer: React.FC = () => {
   const [t] = useTranslation();
   return (
-    <Center wrap>
+    <Center
+      wrap
+      itemScope
+      itemType="http://www.schema.org/SiteNavigationElement"
+    >
       <RowItem size={"xlarge"}>
         <Text weight={"bold"} muted>
           {t("footer.copyright", { dateNow: new Date().getFullYear() })}
@@ -29,8 +33,8 @@ const _Footer: React.FC = () => {
       </RowItem>
       {links.map(({ label, href }) => (
         <RowItem size={"xlarge"}>
-          <Link to={href}>
-            <Text weight={"bold"} muted>
+          <Link to={href} itemProp="url">
+            <Text weight={"bold"} muted itemProp={"name"}>
               {t(label)}
             </Text>
           </Link>
