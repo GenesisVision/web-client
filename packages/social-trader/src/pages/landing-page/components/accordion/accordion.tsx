@@ -13,16 +13,17 @@ import {
 } from "utils/style/media";
 import { transition } from "utils/style/mixins";
 
-const AccordionContentWithAnimation = dynamic(() =>
-  import(
-    "pages/landing-page/components/accordion-content/accordion-content-with-animation"
-  )
+const AccordionContentWithAnimation = dynamic(
+  () =>
+    import(
+      "pages/landing-page/components/accordion-content/accordion-content-with-animation"
+    )
 );
 
 export type TAccordion = {
   id: string | number;
   title: string;
-  content?: JSX.Element;
+  content: React.ReactElement;
 };
 
 interface Props {
