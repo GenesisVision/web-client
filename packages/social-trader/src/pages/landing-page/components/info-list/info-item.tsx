@@ -18,7 +18,7 @@ const _InfoItem: React.FC<TInfoItem> = ({ texts, image, button }) => {
       {image && (
         <ImageBaseElement
           src={image}
-          alt={t("landing-page:links.trade")}
+          alt={t("navigation.trade")}
           className={styles["info-list__item-image"]}
         />
       )}

@@ -6,7 +6,7 @@ import {
   INVEST_ROUTE
 } from "routes/invest.routes";
 import { MEDIA_ROUTE, SOCIAL_ROUTE, USERS_ROUTE } from "routes/social.routes";
-import { TRADE_ROUTE } from "routes/trade.routes";
+import { TERMINAL_SPOT_ROUTE, TRADE_ROUTE } from "routes/trade.routes";
 
 export type TNavFooter = {
   state?: string;
@@ -35,72 +35,78 @@ export const TERMS_ROUTE = "/terms";
 
 export const navHeader: TNavHeader[] = [
   {
-    name: "landing-page:links.social",
+    name: "navigation.social",
     href: SOCIAL_ROUTE,
     subNav: [
       {
-        name: "landing-page:links.users",
+        name: "navigation.users",
         href: USERS_ROUTE
       },
       {
-        name: "landing-page:links.media",
+        name: "navigation.media",
         href: MEDIA_ROUTE
       }
     ]
   },
   {
-    name: "landing-page:links.invest",
+    name: "navigation.invest",
     href: INVEST_ROUTE,
     subNav: [
       {
-        name: "landing-page:links.funds",
+        name: "navigation.gv-funds",
         href: GV_FUNDS_ROUTE
       },
       {
-        name: "landing-page:links.programs",
+        name: "navigation.gv-programs",
         href: GV_PROGRAMS_ROUTE
       },
       {
-        name: "landing-page:links.follow",
+        name: "navigation.gv-follow",
         href: GV_FOLLOW_ROUTE
       }
     ]
   },
   {
-    name: "landing-page:links.trade",
-    href: TRADE_ROUTE
+    name: "navigation.trade",
+    href: TRADE_ROUTE,
+    subNav: [
+      {
+        name: "navigation.terminal.spot",
+        href: TERMINAL_SPOT_ROUTE
+      }
+    ]
   },
   {
-    name: "landing-page:links.info",
+    name: "navigation.info",
     href: "#info",
     subNav: [
       {
-        name: "landing-page:links.blog",
+        name: "navigation.blog",
         hideMobile: true,
         href: "https://blog.genesis.vision"
       },
       {
-        name: "landing-page:links.fees",
+        name: "navigation.fees",
         hideMobile: true,
         href: FEES_ROUTE
       },
       {
-        name: "landing-page:links.referral-program",
+        name: "navigation.referral-program",
         hideMobile: true,
         href: REFERRAL_PROGRAM_ROUTE
       },
       {
-        name: "landing-page:links.faq",
+        name: "navigation.faq",
         hideMobile: true,
         href: FAQ_ROUTE
       },
       {
-        name: "landing-page:links.guides",
+        name: "navigation.guides",
         hideMobile: true,
         href: GUIDES_TOTAL_PAGE_ROUTE
       },
       {
-        name: "landing-page:links.feedback",
+        name: "navigation.blog",
         hideMobile: true,
         href: "https://feedback.genesis.vision/"
       }
@@ -110,27 +116,27 @@ export const navHeader: TNavHeader[] = [
 
 export const navFooter: TNavHeader[] = [
   {
-    name: "landing-page:links.referral-program",
+    name: "navigation.referral-program",
     href: REFERRAL_PROGRAM_ROUTE
   },
   {
-    name: "landing-page:links.fees",
+    name: "navigation.fees",
     href: FEES_ROUTE
   },
   {
-    name: "landing-page:links.faq",
+    name: "navigation.faq",
     href: FAQ_ROUTE
   },
   {
-    name: "landing-page:links.guides",
+    name: "navigation.guides",
     href: GUIDES_TOTAL_PAGE_ROUTE
   },
   {
-    name: "landing-page:links.blog",
+    name: "navigation.blog",
     href: "https://blog.genesis.vision/"
   },
   {
-    name: "landing-page:links.feedback",
+    name: "navigation.blog",
     href: "https://feedback.genesis.vision/"
   },
   {
