@@ -1,3 +1,4 @@
+import { Text } from "components/text/text";
 import { useTranslation } from "i18n";
 import IconList from "pages/landing-page/components/icon-list/icon-list";
 import LPButton from "pages/landing-page/components/lp-button/lp-button";
@@ -46,6 +47,11 @@ const LPFooter: React.FC = () => {
             seoItems={navFooter}
             className={styles["lp-footer__seo-links"]}
           />
+          <div className={styles["lp-footer__copyright"]}>
+            <Text weight={"bold"}>
+              {t("footer.copyright", { dateNow: new Date().getFullYear() })}
+            </Text>
+          </div>
         </div>
       </div>
     </footer>
