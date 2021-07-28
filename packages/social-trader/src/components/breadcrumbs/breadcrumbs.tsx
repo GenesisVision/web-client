@@ -34,10 +34,6 @@ const StyledRowItem = styled(RowItem)`
   }
 `;
 
-const StyledLink = styled(Link)<{ isCurrent: boolean; itemProp?: string }>`
-  color: ${({ isCurrent }) => (isCurrent ? "white" : $labelColor)};
-`;
-
 const _BreadCrumbs: React.FC<Props> = ({ items }) => {
   const { linkCreator } = useToLink();
   const { asPath } = useRouter();
@@ -54,17 +50,17 @@ const _BreadCrumbs: React.FC<Props> = ({ items }) => {
             itemType="https://schema.org/ListItem"
           >
             {isCurrent ? (
-              <Text itemProp="name" size={"large"}>
-                {label}
-              </Text>
+              <Text itemProp="name">{label}</Text>
             ) : (
-              <StyledLink
+              <Link
                 itemProp={"item"}
                 to={linkCreator(href)}
                 isCurrent={isCurrent}
               >
-                <span itemProp="name">{label}</span>
-              </StyledLink>
+                <Text itemProp="name" muted>
+                  {label}
+                </Text>
+              </Link>
             )}
             <meta itemProp="position" content={`${index + 1}`} />
           </StyledRowItem>
