@@ -220,8 +220,8 @@
     "trade": "Trade",
     "terminal": {
       "main": "Trading terminal",
-      "spot": "Trading terminal Spot",
-      "futures": "Trading terminal Futures"
+      "spot": "Spot Market",
+      "futures": "Futures Market"
     },
     "mt4": "MetaTrader 4 Terminal",
     "mt5": "MetaTrader 5 Terminal",
