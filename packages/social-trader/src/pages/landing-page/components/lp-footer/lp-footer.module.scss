@@ -126,4 +126,18 @@
   &__social-list {
     margin-bottom: 30px;
   }
+
+  &__copyright {
+    text-align: center;
+
+    @include media-breakpoint-tablet() {
+      grid-column: 1/13;
+      justify-self: center;
+    }
+
+    @include media-breakpoint-landscape-tablet() {
+      grid-column: 2/6;
+      justify-self: start;
+    }
+  }
 }
