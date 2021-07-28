@@ -52,11 +52,7 @@ const _BreadCrumbs: React.FC<Props> = ({ items }) => {
             {isCurrent ? (
               <Text itemProp="name">{label}</Text>
             ) : (
-              <Link
-                itemProp={"item"}
-                to={linkCreator(href)}
-                isCurrent={isCurrent}
-              >
+              <Link itemProp={"item"} to={linkCreator(href)}>
                 <Text itemProp="name" muted>
                   {label}
                 </Text>
