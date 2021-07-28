@@ -9,16 +9,23 @@ import {
   headerSelector,
   isTerminalBetaTester
 } from "reducers/header-reducer";
-import { filterMenuForBeta, mobileMenuItems, topMenuItems } from "routes/menu";
+import {
+  filterMenuForBeta,
+  getMobileMenuItems,
+  getTopMenuItems
+} from "routes/menu";
 
 import { ProfileHeaderInfoAction } from "./actions/header-actions";
 
 export const useMenuItems = () => {
   const betaTester = useSelector(betaTesterSelector);
+  const isAuthenticated = useSelector(isAuthenticatedSelector);
   const isBetaTester = isTerminalBetaTester(betaTester);
+  const mobileMenuItems = getMobileMenuItems(isAuthenticated);
   const showedMobileMenuItems = isBetaTester
     ? mobileMenuItems
     : filterMenuForBeta(mobileMenuItems);
+  const topMenuItems = getTopMenuItems(isAuthenticated);
   const showedTopMenuItems = isBetaTester
     ? topMenuItems
     : filterMenuForBeta(topMenuItems);

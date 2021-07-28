@@ -28,7 +28,16 @@ import {
   USERS_ROUTE
 } from "routes/social.routes";
 
-import { HOME_ROUTE } from "./app.routes";
+import {
+  BLOG_ROUTE,
+  FAQ_ROUTE,
+  FEEDBACK_ROUTE,
+  FEES_ROUTE,
+  GUIDES_ROUTE,
+  HOME_ROUTE,
+  INFO_ROUTE,
+  REFERRAL_PROGRAM_ROUTE
+} from "./app.routes";
 import {
   EVENTS_ROUTE,
   INVESTMENTS_ROUTE,
@@ -57,6 +66,47 @@ export type TMenuItem = {
 
 export const rootMenuItem = { Icon: GVLogo, route: HOME_ROUTE };
 
+const investMenuItems = {
+  Icon: InvestIcon,
+  label: "navigation.invest",
+  route: INVEST_ROUTE,
+  children: [
+    {
+      Icon: ProgramsIcon,
+      route: GV_FUNDS_ROUTE,
+      label: "navigation.gv-funds"
+    },
+    {
+      Icon: FundsIcon,
+      route: GV_PROGRAMS_ROUTE,
+      label: "navigation.gv-programs"
+    },
+    {
+      Icon: FollowIcon,
+      route: GV_FOLLOW_ROUTE,
+      label: "navigation.gv-follow"
+    }
+  ]
+};
+
+const tradeMenuItems = {
+  Icon: TradeIcon,
+  label: "navigation.trade",
+  route: TRADE_ROUTE,
+  children: [
+    {
+      Icon: TerminalIcon,
+      route: TERMINAL_SPOT_ROUTE,
+      label: "navigation.terminal.spot"
+    }
+    // {
+    //   Icon: TerminalIcon,
+    //   route: TERMINAL_FUTURES_ROUTE,
+    //   label: "navigation.terminal.futures"
+    // }
+  ]
+};
+
 export const filterBeta = ({ isBeta }: TMenuItem): boolean => !isBeta;
 
 export const filterMenuForBeta = (menu: TMenuItem[]) => {
@@ -84,7 +134,7 @@ const advancedMobileMenuItems: TMenuItem[] = [
   { Icon: SettingsIcon, route: SETTINGS_ROUTE, label: "navigation.settings" }
 ];
 
-const mainMenuItemsUnion = [
+const privateMainMenuItemsUnion = [
   {
     Icon: DashboardIcon,
     label: "navigation.dashboard",
@@ -136,49 +186,79 @@ const mainMenuItemsUnion = [
       }
     ]
   },
+  investMenuItems,
+  tradeMenuItems
+];
+
+const publicMainMenuItemsUnion = [
   {
-    Icon: InvestIcon,
-    label: "navigation.invest",
-    route: INVEST_ROUTE,
+    Icon: SocialIcon,
+    label: "navigation.social",
+    route: SOCIAL_ROUTE,
     children: [
       {
-        Icon: ProgramsIcon,
-        route: GV_FUNDS_ROUTE,
-        label: "navigation.gv-funds"
+        Icon: UsersIcon,
+        route: USERS_ROUTE,
+        label: "navigation.users"
       },
       {
-        Icon: FundsIcon,
-        route: GV_PROGRAMS_ROUTE,
-        label: "navigation.gv-programs"
-      },
-      {
-        Icon: FollowIcon,
-        route: GV_FOLLOW_ROUTE,
-        label: "navigation.gv-follow"
+        Icon: NewsIcon,
+        route: MEDIA_ROUTE,
+        label: "navigation.media"
       }
     ]
   },
+  investMenuItems,
+  tradeMenuItems,
   {
-    Icon: TradeIcon,
-    label: "navigation.trade",
-    route: TRADE_ROUTE,
+    Icon: SocialIcon,
+    label: "navigation.info",
+    route: INFO_ROUTE,
     children: [
       {
-        Icon: TerminalIcon,
-        route: TERMINAL_SPOT_ROUTE,
-        label: "navigation.terminal.spot"
+        Icon: UsersIcon,
+        route: BLOG_ROUTE,
+        label: "navigation.blog"
+      },
+      {
+        Icon: UsersIcon,
+        route: FEES_ROUTE,
+        label: "navigation.fees"
+      },
+      {
+        Icon: UsersIcon,
+        route: REFERRAL_PROGRAM_ROUTE,
+        label: "navigation.referral-program"
+      },
+      {
+        Icon: UsersIcon,
+        route: FAQ_ROUTE,
+        label: "navigation.faq"
+      },
+      {
+        Icon: UsersIcon,
+        route: GUIDES_ROUTE,
+        label: "navigation.guides"
+      },
+      {
+        Icon: UsersIcon,
+        route: FEEDBACK_ROUTE,
+        label: "navigation.feedback"
       }
-      // {
-      //   Icon: TerminalIcon,
-      //   route: TERMINAL_FUTURES_ROUTE,
-      //   label: "navigation.terminal.futures"
-      // }
     ]
   }
 ];
-export const topMenuItems: TMenuItem[] = mainMenuItemsUnion;
 
-export const mobileMenuItems: TMenuItem[] = [
-  ...mainMenuItemsUnion,
-  ...advancedMobileMenuItems
-];
+export const getTopMenuItems = (isAuthenticated: boolean): TMenuItem[] => {
+  if (isAuthenticated) {
+    return privateMainMenuItemsUnion;
+  }
+  return publicMainMenuItemsUnion;
+};
+
+export const getMobileMenuItems = (isAuthenticated: boolean): TMenuItem[] => {
+  if (isAuthenticated) {
+    return [...privateMainMenuItemsUnion, ...advancedMobileMenuItems];
+  }
+  return publicMainMenuItemsUnion;
+};

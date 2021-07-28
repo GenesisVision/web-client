@@ -194,6 +194,13 @@
     "last": "Last"
   },
   "navigation": {
+    "blog": "Blog",
+    "fees": "Fees",
+    "referral-program": "Referral program",
+    "faq": "FAQ",
+    "guides": "Guides",
+    "feedback": "Feedback",
+    "info": "Info",
     "feed": "Feed",
     "media": "Media",
     "users": "Users",
