@@ -1,5 +1,5 @@
-import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { RowItem } from "components/row-item/row-item";
 import { Text } from "components/text/text";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import { withBlurLoader } from "decorators/with-blur-loader";
@@ -18,9 +18,10 @@ import { SymbolSummaryData } from "pages/trade/binance-trade-page/trading/termin
 import React, { useContext } from "react";
 import NumberFormat from "react-number-format";
 import { diffDate } from "utils/dates";
-
-import styles from "./symbol-summary.module.scss";
 import { formatCurrencyValue } from "utils/formatter";
+
+import TerminalTitle from "../components/terminal-title/terminal-title";
+import styles from "./symbol-summary.module.scss";
 
 interface Props {
   data: SymbolSummaryData;
@@ -72,136 +73,141 @@ const _SymbolSummaryView: React.FC<Props> = ({
     TerminalInfoContext
   );
   return (
-    <TerminalDefaultBlock>
-      <Row>
-        <AccountSelectorContainer currentAccount={exchangeAccountId} />
-      </Row>
-      <Row center={false}>
-        <RowItem>
-          <Row>
-            <MarketWatchTooltipButton>
-              <h3>
-                {baseAsset}/{quoteAsset}
-              </h3>
-            </MarketWatchTooltipButton>
-          </Row>
-          <Row>
-            <h4>
+    <TerminalTitle amount={lastPrice} trigger={eventTime!}>
+      <TerminalDefaultBlock>
+        <Row>
+          <AccountSelectorContainer currentAccount={exchangeAccountId} />
+        </Row>
+        <Row center={false}>
+          <RowItem>
+            <Row>
+              <MarketWatchTooltipButton>
+                <h3>
+                  {baseAsset}/{quoteAsset}
+                </h3>
+              </MarketWatchTooltipButton>
+            </Row>
+            <Row>
+              <h4>
+                <MonoText>
+                  <TradeStatefulValue
+                    value={terminalMoneyFormat({ amount: lastPrice, tickSize })}
+                    trigger={eventTime}
+                  />
+                </MonoText>
+              </h4>
+            </Row>
+            {usdRate && (
+              <Row>
+                <Text muted>
+                  <MonoText>${formatCurrencyValue(usdRate, "USD")}</MonoText>
+                </Text>
+              </Row>
+            )}
+          </RowItem>
+          <RowItem wide>
+            {markPrice && (
+              <>
+                <SymbolSummaryLine
+                  label={
+                    <TooltipLabel
+                      labelText={"Mark Price"}
+                      tooltipContent={
+                        "The latest mark price for this contract. This is the price used for PNL and margin calculations, and may differ from the last price for the purposes of avoiding price manipulation."
+                      }
+                    />
+                  }
+                >
+                  <MonoText>
+                    {terminalMoneyFormat({
+                      amount: markPrice.markPrice,
+                      tickSize
+                    })}
+                  </MonoText>
+                </SymbolSummaryLine>
+                <SymbolSummaryLine
+                  label={
+                    <TooltipLabel
+                      labelText={"Funding/8h"}
+                      tooltipContent={
+                        "The payment rate exchanged between the buyer and seller for the next funding."
+                      }
+                    />
+                  }
+                >
+                  {serverTime && (
+                    <MonoText>
+                      {+markPrice.fundingRate * 100} %{" "}
+                      {diffDate(
+                        new Date(serverTime.date),
+                        markPrice.nextFundingTime
+                      )
+                        .utc()
+                        .format("HH:mm:ss")}
+                    </MonoText>
+                  )}
+                </SymbolSummaryLine>
+              </>
+            )}
+            <SymbolSummaryLine label={"24h Change"}>
               <MonoText>
-                <TradeStatefulValue
-                  value={terminalMoneyFormat({ amount: lastPrice, tickSize })}
-                  trigger={eventTime}
+                <Text
+                  size={"xlarge"}
+                  color={+priceChangePercent > 0 ? "green" : "red"}
+                >
+                  {terminalMoneyFormat({ amount: priceChange, tickSize })}{" "}
+                  {terminalMoneyFormat({
+                    amount: priceChangePercent,
+                    digits: 2
+                  })}{" "}
+                  %
+                </Text>
+              </MonoText>
+            </SymbolSummaryLine>
+            <SymbolSummaryLine label={"24h High"}>
+              <MonoText>
+                {highPrice
+                  ? terminalMoneyFormat({ amount: highPrice, tickSize })
+                  : 0}
+              </MonoText>
+            </SymbolSummaryLine>
+            <SymbolSummaryLine label={"24h Low"}>
+              <MonoText>
+                {lowPrice
+                  ? terminalMoneyFormat({ amount: lowPrice, tickSize })
+                  : 0}
+              </MonoText>
+            </SymbolSummaryLine>
+            <SymbolSummaryLine label={`24h Volume (${baseAsset})`}>
+              <MonoText>
+                <NumberFormat
+                  value={terminalMoneyFormat({
+                    amount: baseVolume,
+                    tickSize: stepSize
+                  })}
+                  thousandSeparator={","}
+                  displayType="text"
+                  suffix={` ${baseAsset}`}
                 />
               </MonoText>
-            </h4>
-          </Row>
-          {usdRate && (
-            <Row>
-              <Text muted>
-                <MonoText>${formatCurrencyValue(usdRate, "USD")}</MonoText>
-              </Text>
-            </Row>
-          )}
-        </RowItem>
-        <RowItem wide>
-          {markPrice && (
-            <>
-              <SymbolSummaryLine
-                label={
-                  <TooltipLabel
-                    labelText={"Mark Price"}
-                    tooltipContent={
-                      "The latest mark price for this contract. This is the price used for PNL and margin calculations, and may differ from the last price for the purposes of avoiding price manipulation."
-                    }
-                  />
-                }
-              >
-                <MonoText>
-                  {terminalMoneyFormat({
-                    amount: markPrice.markPrice,
-                    tickSize
+            </SymbolSummaryLine>
+            <SymbolSummaryLine label={`24h Volume (${quoteAsset})`}>
+              <MonoText>
+                <NumberFormat
+                  value={terminalMoneyFormat({
+                    amount: quoteVolume,
+                    tickSize: tickSize
                   })}
-                </MonoText>
-              </SymbolSummaryLine>
-              <SymbolSummaryLine
-                label={
-                  <TooltipLabel
-                    labelText={"Funding/8h"}
-                    tooltipContent={
-                      "The payment rate exchanged between the buyer and seller for the next funding."
-                    }
-                  />
-                }
-              >
-                {serverTime && (
-                  <MonoText>
-                    {+markPrice.fundingRate * 100} %{" "}
-                    {diffDate(
-                      new Date(serverTime.date),
-                      markPrice.nextFundingTime
-                    )
-                      .utc()
-                      .format("HH:mm:ss")}
-                  </MonoText>
-                )}
-              </SymbolSummaryLine>
-            </>
-          )}
-          <SymbolSummaryLine label={"24h Change"}>
-            <MonoText>
-              <Text
-                size={"xlarge"}
-                color={+priceChangePercent > 0 ? "green" : "red"}
-              >
-                {terminalMoneyFormat({ amount: priceChange, tickSize })}{" "}
-                {terminalMoneyFormat({ amount: priceChangePercent, digits: 2 })}{" "}
-                %
-              </Text>
-            </MonoText>
-          </SymbolSummaryLine>
-          <SymbolSummaryLine label={"24h High"}>
-            <MonoText>
-              {highPrice
-                ? terminalMoneyFormat({ amount: highPrice, tickSize })
-                : 0}
-            </MonoText>
-          </SymbolSummaryLine>
-          <SymbolSummaryLine label={"24h Low"}>
-            <MonoText>
-              {lowPrice
-                ? terminalMoneyFormat({ amount: lowPrice, tickSize })
-                : 0}
-            </MonoText>
-          </SymbolSummaryLine>
-          <SymbolSummaryLine label={`24h Volume (${baseAsset})`}>
-            <MonoText>
-              <NumberFormat
-                value={terminalMoneyFormat({
-                  amount: baseVolume,
-                  tickSize: stepSize
-                })}
-                thousandSeparator={","}
-                displayType="text"
-                suffix={` ${baseAsset}`}
-              />
-            </MonoText>
-          </SymbolSummaryLine>
-          <SymbolSummaryLine label={`24h Volume (${quoteAsset})`}>
-            <MonoText>
-              <NumberFormat
-                value={terminalMoneyFormat({
-                  amount: quoteVolume,
-                  tickSize: tickSize
-                })}
-                thousandSeparator={","}
-                displayType="text"
-                suffix={` ${quoteAsset}`}
-              />
-            </MonoText>
-          </SymbolSummaryLine>
-        </RowItem>
-      </Row>
-    </TerminalDefaultBlock>
+                  thousandSeparator={","}
+                  displayType="text"
+                  suffix={` ${quoteAsset}`}
+                />
+              </MonoText>
+            </SymbolSummaryLine>
+          </RowItem>
+        </Row>
+      </TerminalDefaultBlock>
+    </TerminalTitle>
   );
 };
 export const SymbolSummaryView = withBlurLoader(React.memo(_SymbolSummaryView));
