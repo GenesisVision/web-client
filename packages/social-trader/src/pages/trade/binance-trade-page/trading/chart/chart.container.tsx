@@ -36,7 +36,10 @@ export const ChartContainer: React.FC = () => {
       const widget = new TradingView.widget({
         custom_css_url: "/static/charting_library/style.css",
         symbol: `${symbol.baseAsset}${symbol.quoteAsset}`,
-        interval: "1D",
+        interval:
+          window.localStorage.getItem(
+            "tradingview.chart.lastUsedTimeBasedResolution"
+          ) || "1D",
         autosize: true,
         container_id: "tv_chart_container",
         theme: "Dark",
