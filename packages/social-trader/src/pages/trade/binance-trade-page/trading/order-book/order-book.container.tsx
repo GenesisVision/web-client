@@ -52,7 +52,7 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
   const dividerParts = getDividerParts(tickValue?.value);
 
   useEffect(() => {
-    if (ref.current) {
+    if (ref.current && !document.fullscreenElement) {
       const count = Math.floor(
         (ref.current.clientHeight / ORDER_BOOK_ROW_HEIGHT - 2) / 2
       );
