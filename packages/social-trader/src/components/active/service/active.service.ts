@@ -1,3 +1,4 @@
+import { mockDate } from "components/details/details.loader-data";
 import { AssetInfo } from "gv-api-web";
 import { api } from "services/api-client/swagger-custom-client";
 import {
@@ -11,6 +12,7 @@ const getTag = () => ({ label: getRandomWord() });
 export const getActiveLoaderData = (active?: string): AssetInfo => ({
   socialLinks: [],
   logoUrl: "",
+  lastModified: mockDate,
   symbol: "",
   chartSymbol: "",
   name: active || getRandomWord(3),
