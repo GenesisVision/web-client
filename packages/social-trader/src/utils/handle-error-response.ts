@@ -27,7 +27,6 @@ const handleErrorResponse: IHandleErrorResponseFunc = response => {
   if (response && !isServerError(response)) {
     if (response.statusCode === 401) {
       authService.removeToken();
-      window.location.reload();
     }
     if (response.body !== null && response.body.errors) {
       const { errors, code, ...payload } = response.body;
