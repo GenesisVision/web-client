@@ -1,3 +1,4 @@
+import { setLastModifiedHeader } from "components/assets/asset.helpers";
 import withDefaultLayout from "decorators/with-default-layout";
 import { statisticCurrencyAction } from "pages/invest/funds/fund-details/actions/fund-details.actions";
 import FundDetailsPage from "pages/invest/funds/fund-details/fund-details.page";
@@ -13,12 +14,15 @@ const Page: NextPageWithRedux<{}> = () => {
 
 Page.getInitialProps = async ctx => {
   const currency = getAccountCurrency(ctx);
-  await Promise.all([
+  const [_, res] = await Promise.all([
     ctx.reduxStore.dispatch(dispatch =>
       dispatch(statisticCurrencyAction(currency))
     ),
     ctx.reduxStore.dispatch(dispatchFundDescription(ctx, currency))
   ]);
+
+  setLastModifiedHeader(ctx, res.value.publicInfo.lastModified);
+
   return {
     namespacesRequired: [
       "portfolio-events",
