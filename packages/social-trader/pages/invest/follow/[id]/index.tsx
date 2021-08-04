@@ -1,3 +1,4 @@
+import { setLastModifiedHeader } from "components/assets/asset.helpers";
 import { ASSET } from "constants/constants";
 import withDefaultLayout from "decorators/with-default-layout";
 import { LevelsParamsInfo, ProgramFollowDetailsFull } from "gv-api-web";
@@ -30,8 +31,10 @@ Page.getInitialProps = async ctx => {
     ctx.reduxStore.dispatch(dispatchProgramDescription(ctx, ASSET.FOLLOW))
   ]).then(([res]) => {
     const {
-      tradingAccountInfo: { currency }
+      tradingAccountInfo: { currency },
+      publicInfo
     } = res.value as ProgramFollowDetailsFull;
+    setLastModifiedHeader(ctx, publicInfo.lastModified);
     programCurrency = currency;
   });
   const levelsParameters = await fetchLevelParameters(

@@ -4,6 +4,7 @@ import {
   BrokersProgramInfo,
   ExchangeAccountType
 } from "gv-api-web";
+import { NextPageContext } from "next";
 import { getRandomInteger, getRandomWord, getRandomWords } from "utils/helpers";
 import { CurrencyEnum } from "utils/types";
 
@@ -107,3 +108,10 @@ export const getBrokerLoaderDataFunc: () => any = getBrokerLoaderData;
 export const BrokerSelectLoaderData: Broker[] = new Array(7)
   .fill("")
   .map(getBrokerLoaderDataFunc);
+
+export const setLastModifiedHeader = (
+  ctx: NextPageContext,
+  lastModified: Date
+): void => {
+  ctx.res?.setHeader("Last-Modified", new Date(lastModified).toString());
+};
