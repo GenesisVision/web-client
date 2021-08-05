@@ -119,7 +119,7 @@ export const setLastModifiedHeader = (
 
   if (
     modifiedSince &&
-    +new Date(lastModified) - +new Date(modifiedSince) >= 0
+    +new Date(lastModified) - +new Date(modifiedSince) === 0
   ) {
     ctx.res!.statusCode = 304;
   }
