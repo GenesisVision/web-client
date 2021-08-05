@@ -50,21 +50,22 @@ const _InvestmentLimitField: React.FC<Props> = ({
         name={inputName}
         label={t("asset-settings:fields.enter-correct-amount")}
         currency={currency}
-        rules={
-          hasInvestmentLimit
-            ? {
-                required: t("validations.investment-limit-required"),
-                min: {
-                  value: 0,
-                  message: t("validations.investment-limit-min")
-                },
-                max: {
-                  value: 10000000000,
-                  message: "Investment Limit must be less than 10000000000"
-                }
-              }
-            : undefined
-        }
+        // TODO: rules object won't change after the component has been rendered
+        // rules={
+        //   hasInvestmentLimit
+        //     ? {
+        //         required: t("validations.investment-limit-required"),
+        //         min: {
+        //           value: 0,
+        //           message: t("validations.investment-limit-min")
+        //         },
+        //         max: {
+        //           value: 10000000000,
+        //           message: "Investment Limit must be less than 10000000000"
+        //         }
+        //       }
+        //     : undefined
+        // }
       />
       <Row wide size={"large"}>
         <FormTextField>
