@@ -113,5 +113,14 @@ export const setLastModifiedHeader = (
   ctx: NextPageContext,
   lastModified: Date
 ): void => {
+  const modifiedSince = ctx.req?.headers["if-modified-since"];
+
   ctx.res?.setHeader("Last-Modified", new Date(lastModified).toString());
+
+  if (
+    modifiedSince &&
+    +new Date(lastModified) - +new Date(modifiedSince) >= 0
+  ) {
+    ctx.res!.statusCode = 304;
+  }
 };
