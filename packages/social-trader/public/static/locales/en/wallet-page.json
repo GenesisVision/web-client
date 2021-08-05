@@ -164,7 +164,7 @@
     "label": "Your Genesis Markets Discount is {{percent}}%"
   },
   "bnb-popup-text": {
-    "withdrawal": "⚠️ Please ensure that the withdrawal address supports the Binance Smart Chain network (BSC). You will loose your assets if your chosen platform does not support BSC.",
-    "deposit": "⚠️ Please ensure that you are using Binance Smart Chain network (BSC) when depositing BNB to this address. You will loose your assets if you do not chose the correct network."
+    "withdrawal": "⚠️ Please ensure that the withdrawal address supports the Binance Smart Chain network (BSC). You will lose your assets if your chosen platform does not support BSC.",
+    "deposit": "⚠️ Please ensure that you are using Binance Smart Chain network (BSC) when depositing BNB to this address. You will lose your assets if you do not choose the correct network."
   }
 }
