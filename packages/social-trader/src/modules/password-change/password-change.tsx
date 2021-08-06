@@ -4,12 +4,15 @@ import { ProfileHeaderInfoAction } from "components/header/actions/header-action
 import { Push } from "components/link/link";
 import { SECURITY_ROUTE } from "components/profile/profile.constants";
 import { ChangePasswordViewModel } from "gv-api-web";
+import { useAlerts } from "hooks/alert.hook";
 import useApiRequest from "hooks/api-request.hook";
 import useIsOpen from "hooks/is-open.hook";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
+import { LOGIN_ROUTE } from "routes/app.routes";
 import authService from "services/auth-service";
+import { ResponseError } from "utils/handle-error-response";
 import { MiddlewareDispatch } from "utils/types";
 
 import PasswordChangeForm from "./password-change-form";
@@ -17,6 +20,7 @@ import { changePassword } from "./service/password-change.service";
 
 const _PasswordChange: React.FC = () => {
   const dispatch = useDispatch<MiddlewareDispatch>();
+  const { successAlert } = useAlerts();
   const successMiddleware = (response: string) => {
     authService.storeToken(response);
     dispatch(authActions.updateTokenAction(true));
@@ -25,6 +29,13 @@ const _PasswordChange: React.FC = () => {
   };
   const { errorMessage, sendRequest } = useApiRequest({
     middleware: [successMiddleware],
+    catchCallback: ({ code }: ResponseError) => {
+      if (code === "RequiresTwoFactor") {
+        Push(LOGIN_ROUTE).then(() =>
+          successAlert("auth:password-restore.success-alert-message")
+        );
+      }
+    },
     successMessage: "auth:password-change.success-alert",
     request: changePassword
   });
