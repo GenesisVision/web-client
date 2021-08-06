@@ -1,5 +1,6 @@
 import ActivePage from "components/active/active.page";
 import { fetchActive } from "components/active/service/active.service";
+import { setLastModifiedHeader } from "components/assets/asset.helpers";
 import withDefaultLayout from "decorators/with-default-layout";
 import { AssetInfo } from "gv-api-web";
 import { NextPage } from "next";
@@ -12,6 +13,9 @@ const Page: NextPage<Props> = ({ data }) => {
 Page.getInitialProps = async ctx => {
   const { id } = ctx.query;
   const data = await fetchActive({ active: id as string });
+
+  setLastModifiedHeader(ctx, data.lastModified);
+
   return {
     data
   };
