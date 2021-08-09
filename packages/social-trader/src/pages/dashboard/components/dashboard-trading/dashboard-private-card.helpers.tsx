@@ -7,7 +7,7 @@ import { PopoverContentListItem } from "components/popover/popover-content";
 import { TableCardActionsItem } from "components/table/components/table-card/table-card-actions";
 import { Text } from "components/text/text";
 import {
-  AmountWithCurrency,
+  AmountWithLogoCurrency,
   BrokerTradeServerType,
   ProgramMinInvestAmount
 } from "gv-api-web";
@@ -24,10 +24,12 @@ import { CurrencyEnum } from "utils/types";
 
 export const transformAmountWithCurrencyToTransferItem = ({
   amount,
-  currency
-}: AmountWithCurrency): TransferItemType => ({
+  currency,
+  logoUrl
+}: AmountWithLogoCurrency): TransferItemType => ({
   id: currency,
   currency,
+  logoUrl,
   available: amount
 });
 
@@ -63,19 +65,19 @@ export const MakeProgramButton: React.FC<{
         {label}
       </TableCardActionsItem>
     ) : (
-        <PopoverContentListItem>
-          <Button disabled={true} variant="text" noPadding color={"secondary"}>
-            <Hint
-              content={label}
-              vertical={VERTICAL_POPOVER_POS.BOTTOM}
-              tooltipContent={t(
-                "dashboard-page:trading.tooltips.is-not-enough-money",
-                { value: necessaryMoney }
-              )}
-            />
-          </Button>
-        </PopoverContentListItem>
-      );
+      <PopoverContentListItem>
+        <Button disabled={true} variant="text" noPadding color={"secondary"}>
+          <Hint
+            content={label}
+            vertical={VERTICAL_POPOVER_POS.BOTTOM}
+            tooltipContent={t(
+              "dashboard-page:trading.tooltips.is-not-enough-money",
+              { value: necessaryMoney }
+            )}
+          />
+        </Button>
+      </PopoverContentListItem>
+    );
   }
 );
 
