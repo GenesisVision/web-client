@@ -3,7 +3,7 @@ import { DetailsBlockRowItem } from "components/details/details-block-row-item.b
 import { Row } from "components/row/row";
 import { WalletItemType } from "components/wallet-select/wallet-select";
 import {
-  AmountWithCurrency,
+  AmountWithLogoCurrency,
   AssetTypeExt,
   PrivateTradingAccountType
 } from "gv-api-web";
@@ -14,7 +14,7 @@ import * as React from "react";
 
 interface Props {
   id?: string;
-  balances?: AmountWithCurrency[];
+  balances?: AmountWithLogoCurrency[];
   transferableItem: WalletItemType;
   accountType?: PrivateTradingAccountType | AssetTypeExt;
   onApply: VoidFunction;
