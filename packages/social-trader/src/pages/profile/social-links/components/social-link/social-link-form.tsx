@@ -93,7 +93,7 @@ const _SocialLinkForm: React.FC<Props> = ({
               }}
               autoComplete="off"
               rules={{
-                max: {
+                maxLength: {
                   value: 100,
                   message: t("validations.link-max-length")
                 }
