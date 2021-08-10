@@ -3,15 +3,13 @@ import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/cont
 import { TerminalOpenOrdersContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-open-orders.context";
 import { TradingPriceContext } from "pages/trade/binance-trade-page/trading/contexts/trading-price.context";
 import { isOrderInLine } from "pages/trade/binance-trade-page/trading/order-book/order-book.helpers";
-import {
-  LevelsSum,
-  OrderBookRow
-} from "pages/trade/binance-trade-page/trading/order-book/order-book.row";
+import { OrderBookRow } from "pages/trade/binance-trade-page/trading/order-book/order-book.row";
 import { StringBidDepth } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useContext, useEffect, useState } from "react";
 import { getPercentageValue } from "utils/helpers";
 
 import styles from "./order-book.module.scss";
+import { LevelsSum, OrderBookTooltip } from "./order-book-tooltip";
 
 interface Props {
   fullAmount: number;
@@ -89,8 +87,6 @@ const _OrderBookTable: React.FC<Props> = ({
               setPrice={setPrice}
               stepSize={stepSize}
               tickSize={tickSize}
-              baseAsset={baseAsset}
-              quoteAsset={quoteAsset}
               key={price}
               hasOrder={hasOrder}
               barPercent={100 - getPercentageValue(total, fullAmount)}
@@ -99,7 +95,6 @@ const _OrderBookTable: React.FC<Props> = ({
                 hoveredRow !== undefined &&
                 (reverse ? i >= hoveredRow : i <= hoveredRow)
               }
-              levelSum={hoveredRow === i ? levelSum : undefined}
               index={i}
               setHoveredRow={setHoveredRow}
               color={color}
@@ -110,6 +105,15 @@ const _OrderBookTable: React.FC<Props> = ({
           );
         })}
       </tbody>
+      <OrderBookTooltip
+        baseAsset={baseAsset}
+        quoteAsset={quoteAsset}
+        stepSize={stepSize}
+        tickSize={tickSize}
+        levelSum={levelSum}
+        tableTickSize={tableTickSize}
+        hoveredRow={hoveredRow}
+      />
     </table>
   );
 };
