@@ -42,6 +42,13 @@
 
   &__table {
     @include terminal-table(small);
+    position: relative;
+
+    &:hover {
+      .order-book__tooltip {
+        display: block;
+      }
+    }
 
     & td,
     th {
@@ -59,11 +66,16 @@
     &--hovered {
       background: rgba(255, 255, 255, 0.1) !important;
     }
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.2) !important;
+    }
   }
 
   &__first-cell {
     position: relative;
   }
+
   &__has-order-bubble {
     position: absolute;
     width: 4px;
@@ -72,5 +84,17 @@
     background: $yellow;
     top: 7px;
     left: -7px;
+  }
+
+  &__tooltip {
+    display: none;
+    @include adaptive-full-padding($padding-xsmall);
+    background: $secondary-background-color;
+    position: absolute;
+    border-radius: $border-radius-middle;
+    width: 200px;
+    left: -200px;
+    top: 0;
+    z-index: 1;
   }
 }

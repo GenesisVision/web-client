@@ -4,6 +4,7 @@ import * as React from "react";
 import styled from "styled-components";
 import { fontSize } from "utils/style/mixins";
 import { $fontSizeParagraph } from "utils/style/sizes";
+import { Sizeable } from "utils/types";
 
 const StyledRow = styled(Row)`
   ${fontSize($fontSizeParagraph)};
@@ -11,15 +12,16 @@ const StyledRow = styled(Row)`
   justify-content: space-between;
 `;
 
-export const _DialogListItem: React.FC<React.HTMLAttributes<HTMLDivElement> &
-  Props> = ({ label, children }) => (
-  <StyledRow>
+export const _DialogListItem: React.FC<
+  React.HTMLAttributes<HTMLDivElement> & Props
+> = ({ label, children, size }) => (
+  <StyledRow size={size}>
     <Text muted>{label}</Text>
     <span>{children}</span>
   </StyledRow>
 );
 
-interface Props {
+interface Props extends Sizeable {
   label: string;
 }
 
