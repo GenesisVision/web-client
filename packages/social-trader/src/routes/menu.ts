@@ -1,13 +1,20 @@
 import GVLogo from "components/gv-logo/gv-logo";
+import { BlogIcon } from "components/icon/blog-icon";
 import { DashboardIcon } from "components/icon/dashboard-icon";
 import { DetailsIcon } from "components/icon/details-icon";
+import { FAQIcon } from "components/icon/faq-icon";
+import { FeedbackIcon } from "components/icon/feedback-icon";
+import { FeesIcon } from "components/icon/fees-icon";
 import { FollowIcon } from "components/icon/follow-icon";
 import { FundsIcon } from "components/icon/funds-icon";
+import { GuidesIcon } from "components/icon/guides-icon";
 import { HistoryIcon } from "components/icon/history-icon";
+import { InfoIcon } from "components/icon/info-icon";
 import { InvestIcon } from "components/icon/invest-icon";
 import { MyProfileIcon } from "components/icon/my-profile-icon";
 import { NewsIcon } from "components/icon/news-icon";
 import { ProgramsIcon } from "components/icon/programs-icon";
+import { ReferralIcon } from "components/icon/referral-icon";
 import { SettingsIcon } from "components/icon/settings-icon";
 import { SocialIcon } from "components/icon/social-icon";
 import { TerminalIcon } from "components/icon/terminal-icon";
@@ -211,37 +218,37 @@ const publicMainMenuItemsUnion = [
   investMenuItems,
   tradeMenuItems,
   {
-    Icon: SocialIcon,
+    Icon: InfoIcon,
     label: "navigation.info",
     route: INFO_ROUTE,
     children: [
       {
-        Icon: UsersIcon,
+        Icon: BlogIcon,
         route: BLOG_ROUTE,
         label: "navigation.blog"
       },
       {
-        Icon: UsersIcon,
+        Icon: FeesIcon,
         route: FEES_ROUTE,
         label: "navigation.fees"
       },
       {
-        Icon: UsersIcon,
+        Icon: ReferralIcon,
         route: REFERRAL_PROGRAM_ROUTE,
         label: "navigation.referral-program"
       },
       {
-        Icon: UsersIcon,
+        Icon: FAQIcon,
         route: FAQ_ROUTE,
         label: "navigation.faq"
       },
       {
-        Icon: UsersIcon,
+        Icon: GuidesIcon,
         route: GUIDES_ROUTE,
         label: "navigation.guides"
       },
       {
-        Icon: UsersIcon,
+        Icon: FeedbackIcon,
         route: FEEDBACK_ROUTE,
         label: "navigation.feedback"
       }
