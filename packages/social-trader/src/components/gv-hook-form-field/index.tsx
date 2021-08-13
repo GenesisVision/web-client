@@ -7,6 +7,7 @@ const getErrorMessage = (obj: FieldError) =>
 
 export const GVHookFormField: React.FC<GVHookFormFieldProps> = ({
   rules,
+  triggerRules,
   disabled,
   onChange = () => {},
   component: Component,
@@ -34,7 +35,7 @@ export const GVHookFormField: React.FC<GVHookFormFieldProps> = ({
   useEffect(() => {
     register({ name }, rules);
     return () => unregister(name);
-  }, [register]);
+  }, [register, triggerRules]);
   return (
     <Component
       {...props}

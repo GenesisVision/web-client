@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
 import { isAllow } from "components/deposit/components/deposit.helpers";
-import { TRADE_FORM_FIELDS } from "pages/trade/binance-trade-page/trading/place-order/place-order.types";
-import { minMaxNumberRules } from "utils/validators/validators";
 import HookFormAmountField from "components/input-amount-field/hook-form-amount-field";
-import { useTranslation } from "react-i18next";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
+import { TRADE_FORM_FIELDS } from "pages/trade/binance-trade-page/trading/place-order/place-order.types";
+import React, { useContext } from "react";
+import { useTranslation } from "react-i18next";
+import { minMaxNumberRules } from "utils/validators/validators";
 
 interface Props {
   max: number;
@@ -36,6 +36,7 @@ const _TotalField: React.FC<Props> = ({
       label={isFutures ? t("Cost") : label}
       currency={quoteAsset}
       name={TRADE_FORM_FIELDS.total}
+      triggerRules={max}
       rules={minMaxNumberRules({
         t,
         max,
