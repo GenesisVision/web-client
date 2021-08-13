@@ -1,3 +1,4 @@
+import { useAccountCurrency } from "hooks/account-currency.hook";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import {
   NormalizedFunds,
@@ -8,7 +9,6 @@ import {
 import React, { useContext, useEffect, useMemo, useState } from "react";
 
 import { Funds } from "./funds";
-import { useAccountCurrency } from "hooks/account-currency.hook";
 
 export const FundsContainer: React.FC = () => {
   const currency = useAccountCurrency();
@@ -28,7 +28,7 @@ export const FundsContainer: React.FC = () => {
     () =>
       Object.values(list)
         .sort(sortFundsFunc)
-        .filter(({ free, locked }) => free - locked > 0),
+        .filter(({ free, locked }) => free - locked !== 0),
     [list]
   );
 
