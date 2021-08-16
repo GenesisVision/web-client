@@ -28,7 +28,7 @@ export const FundsContainer: React.FC = () => {
     () =>
       Object.values(list)
         .sort(sortFundsFunc)
-        .filter(({ free, locked }) => free - locked !== 0),
+        .filter(({ free, locked }) => free > 0 || locked > 0),
     [list]
   );
 
