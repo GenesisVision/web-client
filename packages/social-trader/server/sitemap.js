@@ -5,7 +5,6 @@ const cacheableResponse = require("cacheable-response");
 const programRoute = program => `invest/programs/${program}`;
 const fundRoute = fund => `invest/funds/${fund}`;
 const followRoute = follow => `invest/follow/${follow}`;
-const userRoute = user => `users/${user}`;
 const assetRoute = asset => `asset/${asset}`;
 
 const TTL_OK = 1000 * 60 * 60 * 24;
@@ -50,11 +49,6 @@ const generateSitemap = dev => {
         // Follow details pages
         pages.follow.forEach(follow => {
           map.write({ url: followRoute(follow), changefreq: ALWAYS });
-        });
-
-        // User details pages
-        pages.users.forEach(user => {
-          map.write({ url: userRoute(user), changefreq: ALWAYS });
         });
 
         // Asset details pages
