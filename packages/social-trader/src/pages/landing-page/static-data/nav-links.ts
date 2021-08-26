@@ -6,7 +6,11 @@ import {
   INVEST_ROUTE
 } from "routes/invest.routes";
 import { MEDIA_ROUTE, SOCIAL_ROUTE, USERS_ROUTE } from "routes/social.routes";
-import { TERMINAL_SPOT_ROUTE, TRADE_ROUTE } from "routes/trade.routes";
+import {
+  TERMINAL_FUTURES_ROUTE,
+  TERMINAL_SPOT_ROUTE,
+  TRADE_ROUTE
+} from "routes/trade.routes";
 
 export type TNavFooter = {
   state?: string;
@@ -73,6 +77,10 @@ export const navHeader: TNavHeader[] = [
       {
         name: "navigation.terminal.spot",
         href: TERMINAL_SPOT_ROUTE
+      },
+      {
+        href: TERMINAL_FUTURES_ROUTE,
+        name: "navigation.terminal.futures"
       }
     ]
   },
