@@ -111,7 +111,7 @@ const _SymbolSummaryView: React.FC<Props> = ({
                 <SymbolSummaryLine
                   label={
                     <TooltipLabel
-                      labelText={"Mark Price"}
+                      labelText={"Mark"}
                       tooltipContent={
                         "The latest mark price for this contract. This is the price used for PNL and margin calculations, and may differ from the last price for the purposes of avoiding price manipulation."
                       }
@@ -125,19 +125,33 @@ const _SymbolSummaryView: React.FC<Props> = ({
                     })}
                   </MonoText>
                 </SymbolSummaryLine>
+                <SymbolSummaryLine label={"Index"}>
+                  <MonoText>
+                    {terminalMoneyFormat({
+                      amount: markPrice.indexPrice,
+                      tickSize
+                    })}
+                  </MonoText>
+                </SymbolSummaryLine>
                 <SymbolSummaryLine
                   label={
                     <TooltipLabel
-                      labelText={"Funding/8h"}
+                      labelText={"Funding / Countdown"}
                       tooltipContent={
-                        "The payment rate exchanged between the buyer and seller for the next funding."
+                        "The payment rate exchanged between the buyer and seller for the next funding. During the funding rate cycle (every 8 hours), the premium index will be calculated every minute and the time-weighted average value will be used to calculate the funding rate."
                       }
                     />
                   }
                 >
                   {serverTime && (
                     <MonoText>
-                      {+markPrice.fundingRate * 100} %{" "}
+                      <NumberFormat
+                        value={+markPrice.fundingRate * 100}
+                        fixedDecimalScale
+                        decimalScale={4}
+                        suffix={"%"}
+                        displayType="text"
+                      />{" "}
                       {diffDate(
                         new Date(serverTime.date),
                         markPrice.nextFundingTime
