@@ -1,4 +1,7 @@
-import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
+import {
+  HORIZONTAL_POPOVER_POS,
+  VERTICAL_POPOVER_POS
+} from "components/popover/popover";
 import Tooltip from "components/tooltip/tooltip";
 import { TooltipContent } from "components/tooltip/tooltip-content";
 import * as React from "react";
@@ -7,9 +10,10 @@ import styled from "styled-components";
 import { $textColor } from "utils/style/colors";
 
 interface Props {
-  pointer?: boolean;
   tooltipContent: string | JSX.Element;
+  pointer?: boolean;
   labelText?: string;
+  vertical?: VERTICAL_POPOVER_POS;
 }
 
 const StyledSpan = styled.span<{ pointer?: boolean; labelText?: string }>`
@@ -31,13 +35,22 @@ const StyledSpan = styled.span<{ pointer?: boolean; labelText?: string }>`
 `;
 
 const _TooltipLabel: React.FC<Props> = React.memo(
-  ({ pointer, tooltipContent, labelText }) => {
+  ({
+    pointer,
+    tooltipContent,
+    labelText,
+    vertical = VERTICAL_POPOVER_POS.TOP
+  }) => {
     const tooltipRender = useCallback(
       () => <TooltipContent>{tooltipContent}</TooltipContent>,
       [tooltipContent]
     );
     return (
-      <Tooltip horizontal={HORIZONTAL_POPOVER_POS.LEFT} render={tooltipRender}>
+      <Tooltip
+        horizontal={HORIZONTAL_POPOVER_POS.LEFT}
+        vertical={vertical}
+        render={tooltipRender}
+      >
         <StyledSpan pointer={pointer} labelText={labelText}>
           {labelText ? labelText : "?"}
         </StyledSpan>
