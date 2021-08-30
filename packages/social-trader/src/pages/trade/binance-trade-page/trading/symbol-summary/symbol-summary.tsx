@@ -28,11 +28,12 @@ interface Props {
 }
 
 export const SymbolSummaryContainer: React.FC = () => {
+  const { terminalType } = useContext(TerminalInfoContext);
   const symbolData = useSymbolData();
   return (
     <SymbolSummaryView
       data={symbolData!}
-      loaderData={getTickerSymbolLoaderData()}
+      loaderData={getTickerSymbolLoaderData(terminalType)}
     />
   );
 };

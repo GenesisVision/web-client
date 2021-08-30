@@ -41,10 +41,11 @@ export const SymbolSummarySmallBlock: React.FC = () => {
 
 export const SymbolSummarySmallContainer: React.FC = () => {
   const symbolData = useSymbolData();
+  const { terminalType } = useContext(TerminalInfoContext);
   return (
     <SymbolSummarySmallView
       data={symbolData!}
-      loaderData={getTickerSymbolLoaderData()}
+      loaderData={getTickerSymbolLoaderData(terminalType)}
     />
   );
 };
