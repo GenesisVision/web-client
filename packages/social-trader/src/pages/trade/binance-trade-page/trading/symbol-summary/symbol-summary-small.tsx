@@ -188,6 +188,7 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
         <RowItem>
           <BlurableLabeledValue
             size={"xsmall"}
+            tag={"span"}
             isPending={!highPrice}
             label={"24h High"}
           >
@@ -208,6 +209,7 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
         <RowItem>
           <BlurableLabeledValue
             size={"xsmall"}
+            tag={"span"}
             isPending={!lowPrice}
             label={"24h Low"}
           >
