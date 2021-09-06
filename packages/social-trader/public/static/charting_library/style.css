@@ -4,3 +4,7 @@
 .pane-legend-item-value__main {
     margin-left: 3px;
 }
+
+.price-axis {
+    cursor: ns-resize;
+}
