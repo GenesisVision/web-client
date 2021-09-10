@@ -1,0 +1,13 @@
+{
+  "description": "",
+  "title": "Assets",
+  "tooltips": {
+    "asset": "asset",
+    "symbol": "symbol",
+    "price": "price",
+    "change-24h": "change-24h",
+    "market-cap": "market-cap",
+    "volume-24h": "volume-24h",
+    "chart": "chart"
+  }
+}
