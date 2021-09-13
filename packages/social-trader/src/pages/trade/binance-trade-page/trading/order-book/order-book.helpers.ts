@@ -11,6 +11,8 @@ import { AnyObjectType } from "utils/types";
 
 export type DividerPartsType = { intLength?: number; fracLength?: number };
 
+export const DEFAULT_DEPTH_TICK_SIZE = "0.00000001";
+
 export const ORDER_BOOK_ROW_HEIGHT = 16;
 
 export const isOrderInLine = ({

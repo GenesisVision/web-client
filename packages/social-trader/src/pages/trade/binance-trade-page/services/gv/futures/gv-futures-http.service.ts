@@ -13,8 +13,16 @@ import {
   BinanceRawRecentTrade,
   TradingPlatformBinanceOrdersMode
 } from "gv-api-web";
+import {
+  mapBinanceRawFuturesAccountInfoToAccount,
+  mapBinanceRawFuturesPositionToFuturesPositionInformation,
+  mapBinanceRawFuturesSymbolBracketToSymbolLeverageBrackets
+} from "pages/trade/binance-trade-page/services/gv/futures/gv-futures-helpers";
 import { Bar } from "pages/trade/binance-trade-page/trading/chart/charting_library/datafeed-api";
-import { getDividerParts } from "pages/trade/binance-trade-page/trading/order-book/order-book.helpers";
+import {
+  DEFAULT_DEPTH_TICK_SIZE,
+  getDividerParts
+} from "pages/trade/binance-trade-page/trading/order-book/order-book.helpers";
 import {
   ChangeLeverageResponse,
   CorrectedRestDepth,
@@ -41,11 +49,6 @@ import {
   transformKlineBar,
   transformToUnitedOrder
 } from "../../api.helpers";
-import {
-  mapBinanceRawFuturesAccountInfoToAccount,
-  mapBinanceRawFuturesPositionToFuturesPositionInformation,
-  mapBinanceRawFuturesSymbolBracketToSymbolLeverageBrackets
-} from "pages/trade/binance-trade-page/services/gv/futures/gv-futures-helpers";
 
 export const getExchangeInfo = (): Promise<ExchangeInfo> =>
   (api.terminal().getFuturesExchangeInfo() as unknown) as Promise<ExchangeInfo>;
@@ -170,7 +173,7 @@ export const getTickers = (symbol: string = ""): Observable<Ticker[]> =>
 
 export const getDepth = (
   symbol: string,
-  tickSize: string = "0.00000001",
+  tickSize: string = DEFAULT_DEPTH_TICK_SIZE,
   limit: number = 100
 ): Observable<CorrectedRestDepth> => {
   const dividerParts = getDividerParts(tickSize);

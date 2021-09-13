@@ -7,6 +7,7 @@ import {
   filterOutboundAccountInfoStream,
   getSymbolFilters,
   getSymbolFromState,
+  getTickSizeFromPrecision,
   stringifySymbolFromToParam,
   updateAccountInfo,
   useUpdateTerminalUrlParams
@@ -29,6 +30,8 @@ import { LOGIN_ROUTE } from "routes/app.routes";
 import { Observable } from "rxjs";
 import { useSockets } from "services/websocket.service";
 
+import { DEFAULT_DEPTH_TICK_SIZE } from "../order-book/order-book.helpers";
+
 interface Props {
   exchangeAccountId?: string;
   exchangeInfo: ExchangeInfo;
@@ -44,6 +47,7 @@ type TerminalAccountInfoState = {
   userStream?: Observable<any>;
   setSymbol: (symbol: SymbolState) => void;
   symbol: SymbolState;
+  depthTickSize?: string;
   accountInfo?: Account;
   exchangeInfo?: ExchangeInfo;
 };
@@ -89,6 +93,9 @@ export const TerminalInfoContextProvider: React.FC<Props> = ({
   const [symbol, setSymbol] = useState<SymbolState>(outerSymbol);
   const [tickSize, setTickSize] = useState<string>("0.01");
   const [stepSize, setStepSize] = useState<string>("0.01");
+  const [depthTickSize, setDepthTickSize] = useState<string>(
+    DEFAULT_DEPTH_TICK_SIZE
+  );
   const [userStreamKey, setUserStreamKey] = useState<string | undefined>();
   const [userStream, setUserStream] = useState<Observable<any> | undefined>();
   const [socketData, setSocketData] = useState<Account | undefined>(undefined);
@@ -141,6 +148,11 @@ export const TerminalInfoContextProvider: React.FC<Props> = ({
       const { stepSize } = symbolFilters.lotSizeFilter;
       setTickSize(String(tickSize));
       setStepSize(String(stepSize));
+      if (symbolFilters.pricePrecision) {
+        setDepthTickSize(
+          getTickSizeFromPrecision(symbolFilters.pricePrecision)
+        );
+      }
     }
   }, [exchangeInfo, symbol]);
 
@@ -157,6 +169,7 @@ export const TerminalInfoContextProvider: React.FC<Props> = ({
       exchangeAccountId,
       tickSize,
       stepSize,
+      depthTickSize,
       terminalType,
       userStream,
       setSymbol: handleSetSymbol,
@@ -168,6 +181,7 @@ export const TerminalInfoContextProvider: React.FC<Props> = ({
       exchangeAccountId,
       tickSize,
       stepSize,
+      depthTickSize,
       terminalType,
       userStream,
       handleSetSymbol,
