@@ -19,7 +19,11 @@ import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { ConnectSocketMethodType } from "services/websocket.service";
 
-import { depthTransform, tradeTransform, transformKlineWs } from "../spot/binance-spot-ws.helpers";
+import {
+  depthTransform,
+  tradeTransform,
+  transformKlineWs
+} from "../spot/binance-spot-ws.helpers";
 
 export const BINANCE_FUTURES_WS_API_URL = "wss://fstream.binance.com";
 
@@ -64,7 +68,7 @@ export const depthSocket = (
 ): Observable<Depth> => {
   const socketType = "depth";
   const socketName = `${symbol.toLowerCase()}@${socketType}`;
-  const url = `${BINANCE_FUTURES_WS_API_URL}/${BINANCE_WS_API_TYPE.WS}/${socketName}`;
+  const url = `${BINANCE_FUTURES_WS_API_URL}/${BINANCE_WS_API_TYPE.WS}/${socketName}@500ms`;
   return connectSocketMethod(socketType, url, openCallback).pipe(
     map(depthTransform)
   );
