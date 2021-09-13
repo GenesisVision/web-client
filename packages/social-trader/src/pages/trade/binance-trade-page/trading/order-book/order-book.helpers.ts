@@ -4,7 +4,8 @@ import {
   NormalizedDepth,
   NormalizedDepthList,
   StringBidDepth,
-  TerminalType
+  TerminalType,
+  UnitedOrder
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { formatValue } from "utils/formatter";
 import { AnyObjectType } from "utils/types";
@@ -208,3 +209,33 @@ export const ORDER_BOOK_COLUMNS: SortingColumn[] = [
   { name: "amount" },
   { name: "total" }
 ];
+
+export const countOrderBookFuturesSum = (
+  items: StringBidDepth[],
+  index: number,
+  reverse?: boolean
+): number => {
+  const slicedItems = reverse ? items.slice(index) : items.slice(0, index + 1);
+
+  return slicedItems.reduce((acc, [_, quantity]) => +acc + +quantity, 0);
+};
+
+export const getOrderBookLimitOrders = (
+  openOrders?: UnitedOrder[],
+  reverse?: boolean
+): number[] => {
+  return openOrders
+    ? openOrders
+        .filter(({ type }) => type.toUpperCase() === "LIMIT")
+        .filter(
+          ({ orderStatus }) =>
+            orderStatus && orderStatus.toUpperCase() === "NEW"
+        )
+        .filter(
+          ({ side }) =>
+            (reverse && side === "Sell") ||
+            (!reverse && side.toUpperCase() === "BUY")
+        )
+        .map(({ price }) => +price)
+    : [];
+};

@@ -12,22 +12,24 @@ interface Props {
   stepSize: string;
   tickSize: string;
   setPrice: (price: string) => void;
-  hasOrder?: boolean;
   barPercent: number;
-  tableTickSize?: string;
-  hovered: boolean;
-  index: number;
-  setHoveredRow: (index: number | undefined) => void;
   color: ColoredTextColor;
   price: string;
   amount: string;
-  total: number;
+  tableTickSize?: string;
+  total?: number;
+  sum?: number;
+  hasOrder?: boolean;
+  hovered?: boolean;
+  index?: number;
+  setHoveredRow?: (index: number | undefined) => void;
 }
 
 const _OrderBookRow: React.FC<Props> = ({
   stepSize,
   tickSize,
   setPrice,
+  sum,
   hasOrder,
   barPercent,
   tableTickSize,
@@ -47,10 +49,15 @@ const _OrderBookRow: React.FC<Props> = ({
     amount: amount,
     tickSize: stepSize
   });
-  const formattedTotal = terminalMoneyFormat({
-    amount: total,
-    tickSize: tableTickSize || tickSize
-  });
+  const formattedLastColumn = total
+    ? terminalMoneyFormat({
+        amount: total,
+        tickSize: tableTickSize || tickSize
+      })
+    : terminalMoneyFormat({
+        amount: sum!,
+        tickSize: stepSize
+      });
 
   return (
     <tr
@@ -58,8 +65,8 @@ const _OrderBookRow: React.FC<Props> = ({
         height: `${ORDER_BOOK_ROW_HEIGHT}px`,
         background: `linear-gradient(90deg, transparent ${barPercent}%, ${color}30 ${barPercent}%)`
       }}
-      onMouseEnter={() => setHoveredRow(index)}
-      onMouseLeave={() => setHoveredRow(undefined)}
+      onMouseEnter={() => setHoveredRow && setHoveredRow(index)}
+      onMouseLeave={() => setHoveredRow && setHoveredRow(undefined)}
       onClick={() => setPrice(String(price))}
       className={clsx(styles["order-book__table-row"], {
         [styles["order-book__table-row--hovered"]]: hovered
@@ -76,7 +83,7 @@ const _OrderBookRow: React.FC<Props> = ({
         </Center>
       </td>
       <td>{formattedAmount}</td>
-      <td>{formattedTotal}</td>
+      <td>{formattedLastColumn}</td>
     </tr>
   );
 };

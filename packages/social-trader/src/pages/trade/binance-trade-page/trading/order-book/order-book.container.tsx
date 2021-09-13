@@ -24,18 +24,20 @@ interface Props {}
 const ASKS_FULL_AMOUNT_DIVIDER = 300;
 const BIDS_FULL_AMOUNT_DIVIDER = 25;
 
-const _OrderBookContainer: React.FC<Props> = ({}) => {
+const _OrderBookContainer: React.FC<Props> = () => {
   const [asksDivider, setAsksDivider] = useState(ASKS_FULL_AMOUNT_DIVIDER);
   const [bidsDivider, setBidsDivider] = useState(BIDS_FULL_AMOUNT_DIVIDER);
 
   const { depthSocket, getDepth } = useContext(TerminalMethodsContext);
   const ref = useRef<HTMLDivElement>(null);
   const [count, setCount] = useState<number>(0);
+  const [depthMaxSum, setDepthMaxSum] = useState<number>(0);
 
   const { connectSocket } = useSockets();
 
   const {
     terminalType,
+    depthTickSize,
     symbol: { baseAsset, quoteAsset }
   } = useContext(TerminalInfoContext);
 
@@ -52,9 +54,9 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
   const dividerParts = getDividerParts(tickValue?.value);
 
   useEffect(() => {
-    if (ref.current && !document.fullscreenElement) {
+    if (ref.current) {
       const count = Math.floor(
-        (ref.current.clientHeight / ORDER_BOOK_ROW_HEIGHT - 2) / 2
+        (ref.current.clientHeight / ORDER_BOOK_ROW_HEIGHT - 3) / 2
       );
       setCount(count > 1 ? count : 1);
     }
@@ -78,13 +80,15 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
   useEffect(() => {
     if (!socketOpened) return;
     console.log("get snapshot");
-    getDepth(getSymbol(baseAsset, quoteAsset)).subscribe(data => {
-      setList({
-        ...data,
-        asks: normalizeDepthList(data.asks),
-        bids: normalizeDepthList(data.bids)
-      });
-    });
+    getDepth(getSymbol(baseAsset, quoteAsset), depthTickSize).subscribe(
+      data => {
+        setList({
+          ...data,
+          asks: normalizeDepthList(data.asks),
+          bids: normalizeDepthList(data.bids)
+        });
+      }
+    );
   }, [socketOpened]);
 
   useEffect(() => {
@@ -157,16 +161,23 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
         asks: 0,
         bids: 0
       };
-    return {
-      asks:
-        Object.values(list.asks).reduce((prev, [price, amount]) => {
-          return prev + +price * +amount;
-        }, 0) / asksDivider,
-      bids:
-        Object.values(list.bids).reduce((prev, [price, amount]) => {
-          return prev + +price * +amount;
-        }, 0) / bidsDivider
-    };
+
+    if (terminalType === "futures") {
+      const asksMaxValue = asks.reduce((acc, [_, amount]) => acc + +amount, 0);
+      const bidsMaxValue = bids.reduce((acc, [_, amount]) => acc + +amount, 0);
+      setDepthMaxSum(Math.max(asksMaxValue, bidsMaxValue));
+    } else {
+      return {
+        asks:
+          Object.values(list.asks).reduce((prev, [price, amount]) => {
+            return prev + +price * +amount;
+          }, 0) / asksDivider,
+        bids:
+          Object.values(list.bids).reduce((prev, [price, amount]) => {
+            return prev + +price * +amount;
+          }, 0) / bidsDivider
+      };
+    }
   }, [list, asksDivider, bidsDivider]);
 
   return (
@@ -179,6 +190,8 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
       tablesBlockRef={ref}
       asks={asks}
       bids={bids}
+      terminalType={terminalType}
+      depthMaxSum={depthMaxSum}
     />
   );
 };

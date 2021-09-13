@@ -2,10 +2,13 @@ import { ColoredTextColor } from "components/colored-text/colored-text";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import { TerminalOpenOrdersContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-open-orders.context";
 import { TradingPriceContext } from "pages/trade/binance-trade-page/trading/contexts/trading-price.context";
-import { isOrderInLine } from "pages/trade/binance-trade-page/trading/order-book/order-book.helpers";
+import {
+  getOrderBookLimitOrders,
+  isOrderInLine
+} from "pages/trade/binance-trade-page/trading/order-book/order-book.helpers";
 import { OrderBookRow } from "pages/trade/binance-trade-page/trading/order-book/order-book.row";
 import { StringBidDepth } from "pages/trade/binance-trade-page/trading/terminal.types";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import { getPercentageValue } from "utils/helpers";
 
 import styles from "./order-book.module.scss";
@@ -13,13 +16,13 @@ import { LevelsSum, OrderBookTooltip } from "./order-book-tooltip";
 
 interface Props {
   fullAmount: number;
+  color: ColoredTextColor;
   tableTickSize?: string;
   reverse?: boolean;
   items?: StringBidDepth[];
-  color: ColoredTextColor;
 }
 
-const _OrderBookTable: React.FC<Props> = ({
+const _OrderBookSpotTable: React.FC<Props> = ({
   fullAmount,
   tableTickSize,
   reverse,
@@ -61,20 +64,10 @@ const _OrderBookTable: React.FC<Props> = ({
     }
   }, [hoveredRow, items]);
 
-  const limitOrders = openOrders
-    ? openOrders
-        .filter(({ type }) => type.toUpperCase() === "LIMIT")
-        .filter(
-          ({ orderStatus }) =>
-            orderStatus && orderStatus.toUpperCase() === "NEW"
-        )
-        .filter(
-          ({ side }) =>
-            (reverse && side === "Sell") ||
-            (!reverse && side.toUpperCase() === "BUY")
-        )
-        .map(({ price }) => +price)
-    : [];
+  const limitOrders = useMemo(
+    () => getOrderBookLimitOrders(openOrders, reverse),
+    [openOrders]
+  );
 
   return (
     <table className={styles["order-book__table"]}>
@@ -118,4 +111,4 @@ const _OrderBookTable: React.FC<Props> = ({
   );
 };
 
-export const OrderBookTable = React.memo(_OrderBookTable);
+export const OrderBookSpotTable = React.memo(_OrderBookSpotTable);
