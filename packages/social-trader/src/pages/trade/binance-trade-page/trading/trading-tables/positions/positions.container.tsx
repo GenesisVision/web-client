@@ -9,9 +9,7 @@ export const PositionsContainer: React.FC = () => {
   const list = useMemo(
     () =>
       accountInfo?.positions
-        ? accountInfo.positions.filter(
-            ({ positionAmount }) => positionAmount !== 0
-          )
+        ? accountInfo.positions.filter(({ quantity }) => quantity !== 0)
         : [],
     [accountInfo?.positions]
   );
