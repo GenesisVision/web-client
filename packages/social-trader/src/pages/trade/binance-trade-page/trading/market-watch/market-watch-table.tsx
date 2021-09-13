@@ -2,14 +2,14 @@ import { Row } from "components/row/row";
 import { SORTING_DIRECTION } from "components/table/helpers/sorting.helpers";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import { TerminalTickerContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-ticker.context";
-import { MarketWatchHeaderCell } from "pages/trade/binance-trade-page/trading/market-watch/market-watch-header-cell";
-import { MarketWatchRow } from "pages/trade/binance-trade-page/trading/market-watch/market-watch-row";
 import {
   CHANGE_COLUMN,
   filterForSearch,
   SortingType,
   sortMarketWatchItems
 } from "pages/trade/binance-trade-page/trading/market-watch/market-watch.helpers";
+import { MarketWatchHeaderCell } from "pages/trade/binance-trade-page/trading/market-watch/market-watch-header-cell";
+import { MarketWatchRow } from "pages/trade/binance-trade-page/trading/market-watch/market-watch-row";
 import { MergedTickerSymbolType } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useContext, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
@@ -32,7 +32,9 @@ const _MarketWatchTable: React.FC<Props> = ({
 }) => {
   const { getFavorites: getFavoritesFunc } = useContext(TerminalTickerContext);
   const isAuthenticated = useSelector(isAuthenticatedSelector);
-  const { exchangeAccountId, setSymbol } = useContext(TerminalInfoContext);
+  const { exchangeAccountId, setSymbol, terminalType } = useContext(
+    TerminalInfoContext
+  );
 
   const [sorting, setSorting] = useState<SortingType>({
     dataType: "string",
@@ -71,7 +73,7 @@ const _MarketWatchTable: React.FC<Props> = ({
                 setSorting={setSorting}
                 field={"priceChangePercent"}
               >
-                Change
+                {terminalType === "futures" ? "24h %" : "Change"}
               </MarketWatchHeaderCell>
             ) : (
               <MarketWatchHeaderCell
@@ -81,7 +83,7 @@ const _MarketWatchTable: React.FC<Props> = ({
                 setSorting={setSorting}
                 field={"quoteVolume"}
               >
-                Volume
+                {terminalType === "futures" ? "Volume" : "24h Volume"}
               </MarketWatchHeaderCell>
             )}
           </thead>
