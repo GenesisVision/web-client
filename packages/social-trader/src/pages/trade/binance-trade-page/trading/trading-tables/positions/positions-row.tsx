@@ -1,11 +1,11 @@
 import TableRow from "components/table/components/table-row";
 import { Position } from "pages/trade/binance-trade-page/trading/terminal.types";
-import React from "react";
 import { ClosePositionContainer } from "pages/trade/binance-trade-page/trading/trading-tables/positions/close-position/close-position.container";
 import {
   CloseTableCell,
   StyledTableCell
 } from "pages/trade/binance-trade-page/trading/trading-tables/positions/positions.styles";
+import React from "react";
 
 interface Props {
   marginRatio: number;
@@ -18,9 +18,9 @@ const _PositionsRow: React.FC<Props> = ({
     positionSide,
     entryPrice,
     leverage,
-    positionAmount,
+    quantity,
     symbol,
-    unrealizedProfit
+    unrealizedPnL
   }
 }) => {
   return (
@@ -28,7 +28,7 @@ const _PositionsRow: React.FC<Props> = ({
       <StyledTableCell firstOffset={false}>
         {symbol} {leverage}x
       </StyledTableCell>
-      <StyledTableCell>{positionAmount}</StyledTableCell>
+      {/* <StyledTableCell>{positionAmount}</StyledTableCell> */}
       <StyledTableCell>{entryPrice}</StyledTableCell>
       {/*<TableCell>{markPrice}</TableCell>*/}
       <StyledTableCell>{0}</StyledTableCell>
@@ -37,15 +37,15 @@ const _PositionsRow: React.FC<Props> = ({
       <StyledTableCell>{marginRatio}</StyledTableCell>
       <StyledTableCell>
         {/*{(+positionAmount * +markPrice) / +leverage} ({marginType})*/}
-        {(+positionAmount * +0) / +leverage} ({"Cross"})
+        {(+quantity * +0) / +leverage} ({"Cross"})
       </StyledTableCell>
-      <StyledTableCell>{unrealizedProfit}</StyledTableCell>
+      <StyledTableCell>{unrealizedPnL}</StyledTableCell>
       <CloseTableCell>
         <ClosePositionContainer
           symbol={symbol}
           positionSide={positionSide}
           price={entryPrice}
-          amount={positionAmount}
+          amount={quantity}
         />
       </CloseTableCell>
     </TableRow>

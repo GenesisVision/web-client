@@ -1,3 +1,4 @@
+import { BinancePositionSide } from "gv-api-web";
 import {
   FuturesAccount,
   FuturesAccountEventBalance,
@@ -23,7 +24,6 @@ import {
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { Observable } from "rxjs";
 import { filter } from "rxjs/operators";
-import { BinancePositionSide } from "gv-api-web";
 
 export const transformAccountToBalanceForTransfer = ({
   balances
@@ -35,6 +35,7 @@ export const transformAccountToBalanceForTransfer = ({
 export const transformMarkPriceWS = (m: any): MarkPrice => ({
   symbol: m.s,
   markPrice: m.p,
+  indexPrice: m.i,
   fundingRate: m.r,
   nextFundingTime: m.T,
   time: m.E
@@ -130,16 +131,28 @@ export const transformFuturesAccount = (
   };
 };
 
-export const futuresAccountEventPositionTransform = (
-  socketData: any
-): Position => {
+export const futuresAccountEventPositionTransform = (socketData: any) => {
   return {
     symbol: socketData.s,
-    unrealizedProfit: socketData.up,
+    unrealizedPnL: socketData.up,
     positionSide: setUpperFirstLetter(socketData.ps) as BinancePositionSide,
     positionAmount: socketData.pa,
     entryPrice: socketData.ep
-  } as Position;
+
+    // entryPrice: number;
+    // marginType: BinanceFuturesMarginType;
+    // isAutoAddMargin: boolean;
+    // isolatedMargin: number;
+    // leverage: number;
+    // liquidationPrice: number;
+    // markPrice: number;
+    // symbol: string;
+    // positionSide: BinancePositionSide;
+    // quantity: number;
+    // unrealizedPnL: number;
+    // maxNotional: number;
+  } as any;
+  // TODO: fix type
 };
 
 export const futuresMarginCallEventPositionTransform = (
