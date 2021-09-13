@@ -2,7 +2,7 @@ import { SortingColumn } from "components/table/components/filtering/filter.type
 
 export const ASSETS_TABLE_COLUMNS: SortingColumn[] = [
   {
-    name: "asset"
+    name: "assets"
   },
   {
     name: "symbol"
