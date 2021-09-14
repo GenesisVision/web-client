@@ -2,12 +2,11 @@
   "description": "",
   "title": "Assets",
   "tooltips": {
-    "asset": "asset",
-    "symbol": "symbol",
-    "price": "price",
-    "change-24h": "change-24h",
-    "market-cap": "market-cap",
-    "volume-24h": "volume-24h",
-    "chart": "chart"
+    "assets": "Asset name",
+    "symbol": "Ticker code",
+    "price-$": "Current price",
+    "change-24h": "Price change over the last 24 hours",
+    "market-cap": "The total market value of a cryptocurrency's circulating supply. It is analogous to the free-float capitalization in the stock market.",
+    "volume-24h": "A measure of how much of a cryptocurrency was traded in the last 24 hours."
   }
 }
