@@ -143,7 +143,20 @@
     "resend-email": "Resend email",
     "reset": "Reset",
     "invest-bsc": "Invest via BSC",
-    "invest-xDai": "Invest via xDai"
+    "invest-xDai": "Invest via xDai",
+    "tooltips": {
+      "create-account": "Create a trading account and get access to a variety of instruments (depending on your desired broker.) Trade Forex, Crypto, CFD, Stocks, Metals, Indices and Commodities.",
+      "create-fund-1": "Diversify your capital across hundreds of cryptocurrencies.",
+      "create-fund-2": "1. Create a fund by percentage allocating capital to crypto assets that meet your strategy.",
+      "create-fund-3": "2. Attract investors to your fund and earn commissions",
+      "create-fund-4": "3. Track and manage your fund by re-allocating assets.",
+      "create-program-1": "Programs are similar to PAMM accounts.",
+      "create-program-2": "1. Create a program and raise capital for ongoing trading by attracting investors.",
+      "create-program-3": "2. Trade using the assets under management (AUM) and earn profit. Any profits generated will be divided among all participants who have joined your program.",
+      "create-program-4": "3. Set your own commissions and receive a percentage of the investors' profit.",
+      "attach-external-account": "Add your Binance account to the platform to copy trades opened and managed by another trader, while having complete control over your capital. You can also make your account a signal provider at any time.",
+      "create-self-managed-fund": "Create your own portfolio with crypto assets that match your strategy. You can change its entire structure at any time. Self managed Funds are private so you cannot attract investor capital. All re-allocation history, profits and losses are kept private. You can always change your fund to Public to attract investment."
+    }
   },
   "filters": {
     "level": {
