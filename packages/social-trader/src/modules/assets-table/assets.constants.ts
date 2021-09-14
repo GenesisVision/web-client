@@ -2,22 +2,30 @@ import { SortingColumn } from "components/table/components/filtering/filter.type
 
 export const ASSETS_TABLE_COLUMNS: SortingColumn[] = [
   {
-    name: "assets"
+    name: "assets",
+    sortingName: "ByAssets",
+    tooltip: true
   },
   {
-    name: "symbol"
+    name: "symbol",
+    sortingName: "BySymbol",
+    tooltip: true
   },
   {
-    name: "price"
+    name: "price-$",
+    tooltip: true
   },
   {
-    name: "change-24h"
+    name: "change-24h",
+    tooltip: true
   },
   {
-    name: "market-cap"
+    name: "market-cap",
+    tooltip: true
   },
   {
-    name: "volume-24h"
+    name: "volume-24h",
+    tooltip: true
   },
   {
     name: "chart"

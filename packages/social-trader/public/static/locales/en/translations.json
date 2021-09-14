@@ -277,7 +277,8 @@
     "strategy": "Strategy",
     "symbol": "Symbol",
     "price": "Price",
-    "change-24h": "Change 24h",
+    "price-$": "Price ($)",
+    "change-24h": "Change 24h (%)",
     "market-cap": "Market Cap",
     "volume-24h": "Volume 24h"
   },
