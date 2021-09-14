@@ -136,7 +136,7 @@ export const navFooter: TNavHeader[] = [
     href: "https://blog.genesis.vision/"
   },
   {
-    name: "navigation.blog",
+    name: "navigation.feedback",
     href: "https://feedback.genesis.vision/"
   },
   {
