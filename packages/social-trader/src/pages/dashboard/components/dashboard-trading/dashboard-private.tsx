@@ -70,10 +70,12 @@ const _DashboardPrivate: React.FC = () => {
             <Row>
               <ToolbarButton
                 text={t("buttons.create-account")}
+                tooltipContent={t("buttons.tooltips.create-account")}
                 route={CREATE_ACCOUNT_PAGE_ROUTE}
               />
               <ToolbarButton
                 text={t("buttons.attach-external-account")}
+                tooltipContent={t("buttons.tooltips.attach-external-account")}
                 route={ATTACH_ACCOUNT_PAGE_ROUTE}
               />
             </Row>
@@ -100,6 +102,7 @@ const _DashboardPrivate: React.FC = () => {
           createButtonToolbar={
             <ToolbarButton
               text={t("buttons.create-self-managed-fund")}
+              tooltipContent={t("buttons.tooltips.create-self-managed-fund")}
               route={CREATE_SELF_MANAGED_FUND_PAGE_ROUTE}
             />
           }

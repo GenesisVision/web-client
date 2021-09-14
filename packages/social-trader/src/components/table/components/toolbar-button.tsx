@@ -5,20 +5,35 @@ import React from "react";
 import styled from "styled-components";
 import { fontSize } from "utils/style/mixins";
 import { $fontSizeParagraph } from "utils/style/sizes";
+import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
+import { TooltipContent } from "components/tooltip/tooltip-content";
+import Tooltip from "components/tooltip/tooltip";
 
 const StyledLink = styled(Link)`
   ${fontSize($fontSizeParagraph)};
   font-weight: 600;
 `;
 
-export const ToolbarButton: React.FC<{
+interface Props {
   text: string;
+  tooltipContent: string | JSX.Element;
   route: string;
-}> = React.memo(({ text, route }) => {
+}
+
+export const ToolbarButton: React.FC<Props> = React.memo(({ text, tooltipContent, route }) => {
   const { linkCreator } = useToLink();
   return (
     <RowItem>
-      <StyledLink to={linkCreator(route, route)}>{text}</StyledLink>
+      <Tooltip
+        horizontal={HORIZONTAL_POPOVER_POS.LEFT}
+        render={() => (
+          <TooltipContent>
+            {tooltipContent}
+          </TooltipContent>
+        )}
+      >
+        <StyledLink to={linkCreator(route, route)}>{text}</StyledLink>
+      </Tooltip>
     </RowItem>
   );
 });

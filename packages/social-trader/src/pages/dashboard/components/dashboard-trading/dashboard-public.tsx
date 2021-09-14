@@ -42,12 +42,28 @@ const _DashboardPublic: React.FC<Props> = () => {
           <RowItem>
             <ToolbarButton
               text={t("buttons.create-fund")}
+              tooltipContent={
+                <>
+                  {t("buttons.tooltips.create-fund-1")}<br />
+                  {t("buttons.tooltips.create-fund-2")}<br />
+                  {t("buttons.tooltips.create-fund-3")}<br />
+                  {t("buttons.tooltips.create-fund-4")}<br />
+                </>
+              }
               route={CREATE_FUND_PAGE_ROUTE}
             />
           </RowItem>
           <RowItem>
             <ToolbarButton
               text={t("buttons.create-program")}
+              tooltipContent={
+                <>
+                  {t("buttons.tooltips.create-program-1")}<br />
+                  {t("buttons.tooltips.create-program-2")}<br />
+                  {t("buttons.tooltips.create-program-3")}<br />
+                  {t("buttons.tooltips.create-program-4")}<br />
+                </>
+              }
               route={CREATE_PROGRAM_PAGE_ROUTE}
             />
           </RowItem>
