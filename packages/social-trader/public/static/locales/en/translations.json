@@ -275,7 +275,7 @@
     "profit": "Profit",
     "chart": "Chart",
     "strategy": "Strategy",
-    "symbol": "Symbol",
+    "asset": "Asset",
     "price": "Price",
     "price-$": "Price ($)",
     "change-24h": "Change 24h (%)",

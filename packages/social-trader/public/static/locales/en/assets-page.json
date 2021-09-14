@@ -2,8 +2,8 @@
   "description": "",
   "title": "Assets",
   "tooltips": {
-    "assets": "Asset name",
-    "symbol": "Ticker code",
+    "name": "Asset name",
+    "asset": "Ticker code",
     "price-$": "Current price",
     "change-24h": "Price change over the last 24 hours",
     "market-cap": "The total market value of a cryptocurrency's circulating supply. It is analogous to the free-float capitalization in the stock market.",
