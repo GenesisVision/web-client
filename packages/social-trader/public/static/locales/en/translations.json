@@ -217,6 +217,7 @@
     "gv-follow": "Follow",
     "gv-funds": "Funds",
     "gv-programs": "Programs",
+    "assets": "Assets",
     "trade": "Trade",
     "terminal": {
       "main": "Trading terminal",
@@ -273,7 +274,12 @@
     "drawdown": "D.down",
     "profit": "Profit",
     "chart": "Chart",
-    "strategy": "Strategy"
+    "strategy": "Strategy",
+    "symbol": "Symbol",
+    "price": "Price",
+    "change-24h": "Change 24h",
+    "market-cap": "Market Cap",
+    "volume-24h": "Volume 24h"
   },
   "global-search-page": {
     "managers-table": {

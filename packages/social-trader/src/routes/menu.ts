@@ -52,16 +52,17 @@ import {
   TRADING_ROUTE
 } from "./dashboard.routes";
 import {
+  GV_ASSETS_ROUTE,
   GV_FOLLOW_ROUTE,
   GV_FUNDS_ROUTE,
   GV_PROGRAMS_ROUTE,
   INVEST_ROUTE
 } from "./invest.routes";
 import {
-  TERMINAL_FUTURES_ROUTE,
   TERMINAL_SPOT_ROUTE,
   TRADE_ROUTE
 } from "./trade.routes";
+import { CoinsIcon } from "components/icon/coins-icon";
 
 export type TMenuItem = {
   isBeta?: boolean;
@@ -92,6 +93,11 @@ const investMenuItems = {
       Icon: FollowIcon,
       route: GV_FOLLOW_ROUTE,
       label: "navigation.gv-follow"
+    },
+    {
+      Icon: CoinsIcon,
+      route: GV_ASSETS_ROUTE,
+      label: "navigation.assets"
     }
   ]
 };

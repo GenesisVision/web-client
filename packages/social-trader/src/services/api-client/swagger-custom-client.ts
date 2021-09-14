@@ -3,6 +3,7 @@ import {
   AssetsApi,
   AuthApi,
   BrokersApi,
+  CoinsApi,
   DashboardApi,
   EventsApi,
   ExchangesApi,
@@ -135,6 +136,9 @@ export class Api {
 
   search = (token?: Token): SearchApi =>
     withApiProxy(new SearchApi(Client.create(token)));
+
+  coins = (token?: Token): CoinsApi =>
+    withApiProxy(new CoinsApi(Client.create(token)));
 }
 
 export const api = new Api();

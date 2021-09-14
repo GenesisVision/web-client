@@ -37,3 +37,7 @@ export const PROGRAM_SETTINGS_FOLDER_ROUTE = `${GV_PROGRAMS_ROUTE}/[id]/${SETTIN
 export const PROGRAMS_FACET_ROUTE = `${GV_PROGRAMS_ROUTE}/${FACETS}/:${SLUG_URL_PARAM_NAME}`;
 export const PROGRAMS_FACET_FOLDER_ROUTE = `${GV_PROGRAMS_ROUTE}/${FACETS}/[id]`;
 export const PROGRAMS_TAB_ROUTE = `${GV_PROGRAMS_ROUTE}/:tab`;
+
+export const ASSET = "asset";
+export const ASSETS = `${ASSET}s`;
+export const GV_ASSETS_ROUTE = `${INVEST_ROUTE}/${ASSETS}`;
