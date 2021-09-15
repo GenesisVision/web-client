@@ -26,15 +26,15 @@ const _AssetTableRow: React.FC<Props> = ({ asset }) => {
   return (
     <TableRow>
       <TableCell>
-        {asset.name}
-      </TableCell>
-      <TableCell>
         <CurrencyItem
           url={asset.url}
           logo={asset.logoUrl}
           name={asset.asset}
           small
         />
+      </TableCell>
+      <TableCell>
+        {asset.name}
       </TableCell>
       <TableCell>
         <Text wrap={false}>

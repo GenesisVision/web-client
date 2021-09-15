@@ -24,6 +24,8 @@ const _AssetsTableSSR: React.FC<Props> = ({
   return (
     <AssetsTable
       data={data.items}
+      sorting={sorting}
+      updateSorting={updateSorting}
       paging={composePaging(data.total, page, DEFAULT_ITEMS_ON_PAGE)}
       updatePaging={updatePaging}
       asLinkPagination={true}
