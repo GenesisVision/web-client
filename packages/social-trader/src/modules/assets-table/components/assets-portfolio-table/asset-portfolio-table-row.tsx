@@ -9,6 +9,9 @@ import * as React from "react";
 import NumberFormat from "react-number-format";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
 import { Row } from "components/row/row";
+import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
+import Tooltip from "components/tooltip/tooltip";
+import { TooltipContent } from "components/tooltip/tooltip-content";
 
 interface Props {
   asset: CoinsAssetResponse;
@@ -50,10 +53,20 @@ const _AssetPortfolioTableRow: React.FC<Props> = ({ asset }) => {
       </TableCell>
       <TableCell>
         <Text wrap={false}>
-          <NumberFormat
-            value={asset.amount}
-            displayType="text"
-          />
+          <Tooltip horizontal={HORIZONTAL_POPOVER_POS.LEFT} render={() => (
+            <TooltipContent>
+              <NumberFormat
+                value={formatCurrencyValue(asset.amount * asset.price, "USD")}
+                suffix={` $`}
+                displayType="text"
+              />
+            </TooltipContent>
+          )}>
+            <NumberFormat
+              value={asset.amount}
+              displayType="text"
+            />
+          </Tooltip>
         </Text>
       </TableCell>
       <TableCell>

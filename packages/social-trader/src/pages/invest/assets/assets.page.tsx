@@ -8,6 +8,7 @@ import { ORGANIZATION_SCHEMA } from "utils/seo";
 import { CoinsAssetResponseItemsViewModel } from "gv-api-web";
 import AssetsTableSSR from "modules/assets-table/components/assets-table/assets-table-ssr";
 import AssetsTabs, { ASSETS_TABS } from "pages/invest/assets/portfolio/components/assets-tabs";
+import { useAuth } from "hooks/auth.hook";
 
 interface Props {
   data: CoinsAssetResponseItemsViewModel;
@@ -17,6 +18,7 @@ const AssetsPage: React.FC<Props> = ({ data }) => {
   const { t } = useTranslation();
   const title = t("assets-page:title");
   const description = t("assets-page:description");
+  const { isAuthenticated } = useAuth();
   return (
     <Page
       description={description}
@@ -37,7 +39,7 @@ const AssetsPage: React.FC<Props> = ({ data }) => {
           { href: GV_ASSETS_ROUTE, label: t("navigation.assets") }
         ]}
       />
-      <AssetsTabs initialTab={ASSETS_TABS.ASSETS} />
+      {isAuthenticated && <AssetsTabs initialTab={ASSETS_TABS.ASSETS} />}
       <DefaultTableBlock>
         <AssetsTableSSR data={data} />
       </DefaultTableBlock>
