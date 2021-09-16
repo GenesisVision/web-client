@@ -11,5 +11,5 @@ export const fetchCoins = (
 export const fetchPortfolioCoins = (
   filters: ComposeFiltersAllType
 ): Promise<CoinsAssetResponseItemsViewModel> => {
-  return api.coins().getCoins(filters);
+  return api.coins().getUserCoins(filters);
 };

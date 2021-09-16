@@ -1,6 +1,5 @@
 import { Table } from "components/table/components";
 import { ITableProps } from "components/table/components/table";
-import FundCard from "modules/funds-table/components/funds-table/fund-card";
 import * as React from "react";
 import { useCallback } from "react";
 import AssetsTableHeaderCell from "modules/assets-table/components/assets-table/assets-table-header-cell";
@@ -53,12 +52,6 @@ const _AssetsTable: React.FC<Props> = ({
     renderBodyRow={useCallback(
       asset => (
         <AssetTableRow asset={asset} />
-      ),
-      []
-    )}
-    renderBodyCard={useCallback(
-      fund => (
-        <FundCard fund={fund} />
       ),
       []
     )}

@@ -11,7 +11,7 @@ interface Props {
 
 const _AssetsTableHeaderCell: React.FC<Props> = ({ column }) => {
   const { t } = useTranslation();
-  const renderCell = () => <span>{t(`header-fields.${column.name}`)}</span>;
+  const renderCell = () => <span>{t(`assets-page:header-fields.${column.name}`)}</span>;
   return column.tooltip ? (
     <Tooltip
       horizontal={HORIZONTAL_POPOVER_POS.LEFT}

@@ -1,26 +1,18 @@
 import { CurrencyItem } from "components/currency-item/currency-item";
 import Profitability from "components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "components/profitability/profitability.helper";
-import ProgramSimpleChart from "components/program-simple-chart/program-simple-chart";
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import { Text } from "components/text/text";
 import { CoinsAssetResponse } from "gv-api-web";
 import * as React from "react";
 import NumberFormat from "react-number-format";
-import styled from "styled-components";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
-import { mediaBreakpointLandscapePhone } from "utils/style/media";
+import { Row } from "components/row/row";
 
 interface Props {
   asset: CoinsAssetResponse;
 }
-
-const ChartCell = styled(TableCell)`
-  min-width: 50px;
-  max-width: 100px;
-  ${mediaBreakpointLandscapePhone(`min-width: 100px;max-width: 200px;`)};
-`;
 
 const _AssetPortfolioTableRow: React.FC<Props> = ({ asset }) => {
   return (
@@ -59,7 +51,15 @@ const _AssetPortfolioTableRow: React.FC<Props> = ({ asset }) => {
       <TableCell>
         <Text wrap={false}>
           <NumberFormat
-            value={formatCurrencyValue(asset.marketCap, "USD")}
+            value={asset.amount}
+            displayType="text"
+          />
+        </Text>
+      </TableCell>
+      <TableCell>
+        <Text wrap={false}>
+          <NumberFormat
+            value={formatCurrencyValue(asset.averagePrice, "USD")}
             suffix={` $`}
             displayType="text"
           />
@@ -68,15 +68,16 @@ const _AssetPortfolioTableRow: React.FC<Props> = ({ asset }) => {
       <TableCell>
         <Text wrap={false}>
           <NumberFormat
-            value={formatCurrencyValue(asset.change24Volume, "USD")}
+            value={formatCurrencyValue(asset.profitCurrent, "USD")}
             suffix={` $`}
             displayType="text"
           />
         </Text>
       </TableCell>
-      <ChartCell height={"small"}>
-        <ProgramSimpleChart data={asset?.chart?.chart} />
-      </ChartCell>
+      <TableCell>
+        <Row>
+        </Row>
+      </TableCell>
     </TableRow>
   );
 };
