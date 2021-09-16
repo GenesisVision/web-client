@@ -7,6 +7,7 @@ import { GV_ASSETS_ROUTE, INVEST_ROUTE } from "routes/invest.routes";
 import { ORGANIZATION_SCHEMA } from "utils/seo";
 import { CoinsAssetResponseItemsViewModel } from "gv-api-web";
 import AssetsTableSSR from "modules/assets-table/components/assets-table/assets-table-ssr";
+import AssetsTabs, { ASSETS_TABS } from "pages/invest/assets/portfolio/components/assets-tabs";
 
 interface Props {
   data: CoinsAssetResponseItemsViewModel;
@@ -36,6 +37,7 @@ const AssetsPage: React.FC<Props> = ({ data }) => {
           { href: GV_ASSETS_ROUTE, label: t("navigation.assets") }
         ]}
       />
+      <AssetsTabs initialTab={ASSETS_TABS.ASSETS} />
       <DefaultTableBlock>
         <AssetsTableSSR data={data} />
       </DefaultTableBlock>
