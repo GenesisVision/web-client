@@ -1,20 +1,17 @@
-import WalletDeposit, {
-  WALLET_DEPOSIT_BUTTON_TYPE
-} from "modules/wallet-deposit/wallet-deposit";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import { CurrencyEnum } from "utils/types";
 import LineWalletButton from "pages/wallet/components/wallet-tables/buttons/line-wallet-button";
+import AssetBuy from "modules/assets-table/components/buttons/asset-buy.button";
+import { CoinsAsset } from "gv-api-web";
 
-export const _LineBuyButton: React.FC<Props> = ({ disabled, currency }) => {
+export const _LineBuyButton: React.FC<Props> = ({ disabled, asset }) => {
   const [t] = useTranslation();
   return (
     <>
-      <LineWalletButton title={t("wallet-page:buttons.deposit")}>
-        <WalletDeposit
+      <LineWalletButton title={t("assets-page:buttons.buy")}>
+        <AssetBuy
+          asset={asset}
           disabled={disabled}
-          currency={currency}
-          type={WALLET_DEPOSIT_BUTTON_TYPE.SMALL}
         />
       </LineWalletButton>
     </>
@@ -22,7 +19,7 @@ export const _LineBuyButton: React.FC<Props> = ({ disabled, currency }) => {
 };
 
 interface Props {
-  currency: CurrencyEnum;
+  asset: CoinsAsset;
   disabled?: boolean;
 }
 
