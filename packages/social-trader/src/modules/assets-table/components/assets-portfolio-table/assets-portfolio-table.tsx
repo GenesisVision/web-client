@@ -1,6 +1,6 @@
 import { Table } from "components/table/components";
 import { ITableProps } from "components/table/components/table";
-import { CoinsAssetResponse } from "gv-api-web";
+import { CoinsAsset } from "gv-api-web";
 import { ASSETS_PORTFOLIO_TABLE_COLUMNS } from "modules/assets-table/assets.constants";
 import AssetPortfolioTableRow from "modules/assets-table/components/assets-portfolio-table/asset-portfolio-table-row";
 import { assetsPortfolioListLoaderDataWithCount } from "modules/assets-table/components/assets-portfolio-table/assets-portfolio-table.loader-data";
@@ -10,7 +10,7 @@ import { useCallback } from "react";
 
 interface Props extends ITableProps {
   loaderCount?: number;
-  data?: CoinsAssetResponse[];
+  data?: CoinsAsset[];
 }
 
 const _AssetsPortfolioTable: React.FC<Props> = ({

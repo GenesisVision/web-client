@@ -4,13 +4,13 @@ import * as React from "react";
 import { useCallback } from "react";
 import AssetsTableHeaderCell from "modules/assets-table/components/assets-table/assets-table-header-cell";
 import AssetTableRow from "modules/assets-table/components/assets-table/asset-table-row";
-import { CoinsAssetResponse } from "gv-api-web";
+import { CoinsAsset } from "gv-api-web";
 import { assetsListLoaderDataWithCount } from "modules/assets-table/components/assets-table/assets-table.loader-data";
 import { ASSETS_TABLE_COLUMNS } from "modules/assets-table/assets.constants";
 
 interface Props extends ITableProps {
   loaderCount?: number;
-  data?: CoinsAssetResponse[];
+  data?: CoinsAsset[];
 }
 
 const _AssetsTable: React.FC<Props> = ({

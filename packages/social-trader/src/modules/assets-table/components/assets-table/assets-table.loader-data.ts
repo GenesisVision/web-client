@@ -3,9 +3,9 @@ import {
   getRandomInteger,
   tableLoaderCreator
 } from "utils/helpers";
-import { CoinsAssetResponse } from "gv-api-web";
+import { CoinsAsset } from "gv-api-web";
 
-export const assetLoaderDataCreator = (): CoinsAssetResponse => ({
+export const assetLoaderDataCreator = (): CoinsAsset => ({
   price: 0,
   change24Volume: 0,
   marketCap: 0,
@@ -50,4 +50,4 @@ export const assetLoaderDataCreator = (): CoinsAssetResponse => ({
 
 export const assetsListLoaderDataWithCount = (
   count?: number
-): CoinsAssetResponse[] => tableLoaderCreator(assetLoaderDataCreator, count);
+): CoinsAsset[] => tableLoaderCreator(assetLoaderDataCreator, count);
