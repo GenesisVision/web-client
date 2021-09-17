@@ -11,7 +11,7 @@
   },
   "header-fields": {
     "name": "Name",
-    "chart": "Chart",
+    "chart": "Chart 24h",
     "asset": "Asset",
     "price-$": "Price ($)",
     "change-24h": "Change 24h (%)",
@@ -25,5 +25,18 @@
     "assets": "Assets",
     "portfolio": "Portfolio",
     "history": "History"
+  },
+  "buttons": {
+    "buy": "Buy",
+    "sell": "Sell"
+  },
+  "popup": {
+    "buy-title": "Buy assets",
+    "sell-title": "Sell assets",
+    "from": "Select a wallet currency",
+    "asset": "Asset",
+    "amount": "Enter correct amount",
+    "success-buy": "Buy request is confirmed",
+    "success-sell": "Sell request is confirmed"
   }
 }
