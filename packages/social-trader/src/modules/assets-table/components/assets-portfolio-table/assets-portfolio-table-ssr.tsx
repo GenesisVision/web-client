@@ -1,5 +1,5 @@
 import { composePaging } from "components/table/helpers/paging.helpers";
-import { CoinsAssetResponseItemsViewModel } from "gv-api-web";
+import { CoinsAssetItemsViewModel } from "gv-api-web";
 import useRouteFilters from "hooks/route-filters.hook";
 import { useTranslation } from "i18n";
 import AssetsPortfolioTable from "modules/assets-table/components/assets-portfolio-table/assets-portfolio-table";
@@ -32,7 +32,7 @@ const _AssetPortfolioTableSSR: React.FC<Props> = ({ data }) => {
 };
 
 interface Props {
-  data: CoinsAssetResponseItemsViewModel;
+  data: CoinsAssetItemsViewModel;
 }
 
 const AssetsPortfolioTableSsr = React.memo(_AssetPortfolioTableSSR);

@@ -1,7 +1,7 @@
 import { composePaging } from "components/table/helpers/paging.helpers";
 import useRouteFilters from "hooks/route-filters.hook";
 import * as React from "react";
-import { CoinsAssetResponseItemsViewModel } from "gv-api-web";
+import { CoinsAssetItemsViewModel } from "gv-api-web";
 import AssetsTable from "modules/assets-table/components/assets-table/assets-table";
 
 const DEFAULT_ITEMS_ON_PAGE = 12;
@@ -32,7 +32,7 @@ const _AssetsTableSSR: React.FC<Props> = ({
 };
 
 interface Props {
-  data: CoinsAssetResponseItemsViewModel;
+  data: CoinsAssetItemsViewModel;
 }
 
 const AssetsTableSSR = React.memo(_AssetsTableSSR);

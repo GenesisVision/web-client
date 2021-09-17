@@ -3,11 +3,11 @@ import { getFiltersFromContext } from "modules/programs-table/services/programs-
 import React from "react";
 import { NextPageWithRedux } from "utils/types";
 import { fetchCoins } from "modules/assets-table/services/assets-table.service";
-import { CoinsAssetResponseItemsViewModel } from "gv-api-web";
+import { CoinsAssetItemsViewModel } from "gv-api-web";
 import AssetsPage from "pages/invest/assets/assets.page";
 
 interface Props {
-  data: CoinsAssetResponseItemsViewModel;
+  data: CoinsAssetItemsViewModel;
 }
 
 const Page: NextPageWithRedux<Props> = ({ data }) => {

@@ -5,13 +5,13 @@ import { useTranslation } from "i18n";
 import * as React from "react";
 import { GV_ASSETS_ROUTE, INVEST_ROUTE } from "routes/invest.routes";
 import { ORGANIZATION_SCHEMA } from "utils/seo";
-import { CoinsAssetResponseItemsViewModel } from "gv-api-web";
+import { CoinsAssetItemsViewModel } from "gv-api-web";
 import AssetsTableSSR from "modules/assets-table/components/assets-table/assets-table-ssr";
 import AssetsTabs, { ASSETS_TABS } from "pages/invest/assets/portfolio/components/assets-tabs";
 import { useAuth } from "hooks/auth.hook";
 
 interface Props {
-  data: CoinsAssetResponseItemsViewModel;
+  data: CoinsAssetItemsViewModel;
 }
 
 const AssetsPage: React.FC<Props> = ({ data }) => {

@@ -5,11 +5,11 @@ import { getFiltersFromContext } from "modules/programs-table/services/programs-
 import React from "react";
 import { compose } from "redux";
 import { NextPageWithRedux } from "utils/types";
-import { CoinsAssetResponseItemsViewModel } from "gv-api-web";
+import { CoinsAssetItemsViewModel } from "gv-api-web";
 import AssetsPortfolioPage from "pages/invest/assets/portfolio/assets-portfolio.page";
 
 interface Props {
-  data: CoinsAssetResponseItemsViewModel;
+  data: CoinsAssetItemsViewModel;
 }
 
 const Page: NextPageWithRedux<Props> = ({ data }) => {

@@ -1,7 +1,7 @@
 import BreadCrumbs from "components/breadcrumbs/breadcrumbs";
 import { DefaultTableBlock } from "components/default.block/default-table.block";
 import Page from "components/page/page";
-import { CoinsAssetResponseItemsViewModel } from "gv-api-web";
+import { CoinsAssetItemsViewModel } from "gv-api-web";
 import { useTranslation } from "i18n";
 import AssetsPortfolioTableSsr from "modules/assets-table/components/assets-portfolio-table/assets-portfolio-table-ssr";
 import React from "react";
@@ -10,7 +10,7 @@ import { ORGANIZATION_SCHEMA } from "utils/seo";
 import AssetsTabs, { ASSETS_TABS } from "pages/invest/assets/portfolio/components/assets-tabs";
 
 interface Props {
-  data: CoinsAssetResponseItemsViewModel;
+  data: CoinsAssetItemsViewModel;
 }
 
 const AssetsPortfolioPage: React.FC<Props> = ({ data }) => {
