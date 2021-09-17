@@ -4,7 +4,7 @@ import { PROFITABILITY_PREFIX } from "components/profitability/profitability.hel
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import { Text } from "components/text/text";
-import { CoinsAssetResponse } from "gv-api-web";
+import { CoinsAsset } from "gv-api-web";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
@@ -12,9 +12,11 @@ import { Row } from "components/row/row";
 import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import Tooltip from "components/tooltip/tooltip";
 import { TooltipContent } from "components/tooltip/tooltip-content";
+import LineSellButton from "modules/assets-table/components/buttons/line-sell-button";
+import LineBuyButton from "modules/assets-table/components/buttons/line-buy-button";
 
 interface Props {
-  asset: CoinsAssetResponse;
+  asset: CoinsAsset;
 }
 
 const _AssetPortfolioTableRow: React.FC<Props> = ({ asset }) => {
@@ -89,6 +91,8 @@ const _AssetPortfolioTableRow: React.FC<Props> = ({ asset }) => {
       </TableCell>
       <TableCell>
         <Row>
+          <LineBuyButton asset={asset} />
+          <LineSellButton asset={asset} />
         </Row>
       </TableCell>
     </TableRow>

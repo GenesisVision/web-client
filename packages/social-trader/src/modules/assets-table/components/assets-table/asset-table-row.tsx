@@ -9,11 +9,15 @@ import NumberFormat from "react-number-format";
 import styled from "styled-components";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
 import { mediaBreakpointLandscapePhone } from "utils/style/media";
-import { CoinsAssetResponse } from "gv-api-web";
+import { CoinsAsset } from "gv-api-web";
 import { CurrencyItem } from "components/currency-item/currency-item";
+import { Row } from "components/row/row";
+import LineBuyButton from "modules/assets-table/components/buttons/line-buy-button";
+import LineSellButton from "modules/assets-table/components/buttons/line-sell-button";
+import { useAuth } from "hooks/auth.hook";
 
 interface Props {
-  asset: CoinsAssetResponse;
+  asset: CoinsAsset;
 }
 
 const ChartCell = styled(TableCell)`
@@ -23,6 +27,7 @@ const ChartCell = styled(TableCell)`
 `;
 
 const _AssetTableRow: React.FC<Props> = ({ asset }) => {
+  const { isAuthenticated } = useAuth();
   return (
     <TableRow>
       <TableCell>
@@ -88,6 +93,12 @@ const _AssetTableRow: React.FC<Props> = ({ asset }) => {
       <ChartCell height={"small"}>
         <ProgramSimpleChart data={asset?.chart?.chart} />
       </ChartCell>
+      {isAuthenticated && (<TableCell>
+        <Row>
+          <LineBuyButton asset={asset} />
+          <LineSellButton asset={asset} />
+        </Row>
+      </TableCell>)}
     </TableRow>
   );
 };
