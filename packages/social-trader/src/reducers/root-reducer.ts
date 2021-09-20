@@ -20,6 +20,7 @@ import {
 import authReducer, { AuthState } from "reducers/auth-reducer";
 import headerReducer, { HeaderState } from "reducers/header-reducer";
 import platformReducer, { PlatformState } from "reducers/platform-reducer";
+import assetsReducer, { AssetsState } from "pages/invest/assets/reducers/assets.reducer";
 
 export const sharedRootReducers = {
   accountDetails: accountDetailsReducer,
@@ -30,7 +31,8 @@ export const sharedRootReducers = {
   authData: authReducer,
   alertMessages: alertMessagesReducer,
   profileHeader: headerReducer,
-  wallet: walletReducer
+  wallet: walletReducer,
+  assets: assetsReducer
 };
 
 export type RootState = Readonly<{
@@ -43,4 +45,5 @@ export type RootState = Readonly<{
   authData: AuthState;
   alertMessages: AlertMessagesState;
   wallet: WalletState;
+  assets: AssetsState;
 }>;
