@@ -37,7 +37,7 @@ const _OrderBookContainer: React.FC<Props> = () => {
 
   const {
     terminalType,
-    depthTickSize,
+    tickSize,
     symbol: { baseAsset, quoteAsset }
   } = useContext(TerminalInfoContext);
 
@@ -80,15 +80,13 @@ const _OrderBookContainer: React.FC<Props> = () => {
   useEffect(() => {
     if (!socketOpened) return;
     console.log("get snapshot");
-    getDepth(getSymbol(baseAsset, quoteAsset), depthTickSize).subscribe(
-      data => {
-        setList({
-          ...data,
-          asks: normalizeDepthList(data.asks),
-          bids: normalizeDepthList(data.bids)
-        });
-      }
-    );
+    getDepth(getSymbol(baseAsset, quoteAsset), tickSize).subscribe(data => {
+      setList({
+        ...data,
+        asks: normalizeDepthList(data.asks),
+        bids: normalizeDepthList(data.bids)
+      });
+    });
   }, [socketOpened]);
 
   useEffect(() => {
@@ -156,28 +154,25 @@ const _OrderBookContainer: React.FC<Props> = () => {
   const { asks, bids } = listForRender;
 
   const listAmount = useMemo(() => {
-    if (!list)
+    if (!list || terminalType === "futures") {
+      const asksMaxValue = asks.reduce((acc, [_, amount]) => acc + +amount, 0);
+      const bidsMaxValue = bids.reduce((acc, [_, amount]) => acc + +amount, 0);
+      setDepthMaxSum(Math.max(asksMaxValue, bidsMaxValue));
       return {
         asks: 0,
         bids: 0
       };
-
-    if (terminalType === "futures") {
-      const asksMaxValue = asks.reduce((acc, [_, amount]) => acc + +amount, 0);
-      const bidsMaxValue = bids.reduce((acc, [_, amount]) => acc + +amount, 0);
-      setDepthMaxSum(Math.max(asksMaxValue, bidsMaxValue));
-    } else {
-      return {
-        asks:
-          Object.values(list.asks).reduce((prev, [price, amount]) => {
-            return prev + +price * +amount;
-          }, 0) / asksDivider,
-        bids:
-          Object.values(list.bids).reduce((prev, [price, amount]) => {
-            return prev + +price * +amount;
-          }, 0) / bidsDivider
-      };
     }
+    return {
+      asks:
+        Object.values(list.asks).reduce((prev, [price, amount]) => {
+          return prev + +price * +amount;
+        }, 0) / asksDivider,
+      bids:
+        Object.values(list.bids).reduce((prev, [price, amount]) => {
+          return prev + +price * +amount;
+        }, 0) / bidsDivider
+    };
   }, [list, asksDivider, bidsDivider]);
 
   return (
@@ -187,7 +182,7 @@ const _OrderBookContainer: React.FC<Props> = () => {
       listAmount={listAmount}
       tickValue={tickValue}
       setTickValue={setTickValue}
-      tablesBlockRef={ref}
+      ref={ref}
       asks={asks}
       bids={bids}
       terminalType={terminalType}

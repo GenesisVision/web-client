@@ -141,14 +141,9 @@ export const getSymbolFilters = (
     maxOrdersFilter,
     minNotionalFilter,
     priceFilter,
-    pricePercentFilter,
-    pricePrecision
-  } = safeGetElemFromArray<any>(
-    exchangeInfo.symbols,
-    item => item.name === symbol
-  );
+    pricePercentFilter
+  } = safeGetElemFromArray(exchangeInfo.symbols, item => item.name === symbol);
   return {
-    pricePrecision,
     iceBergPartsFilter,
     lotSizeFilter,
     marketLotSizeFilter,
@@ -294,11 +289,4 @@ export const getDecimalScale = (tick: string): number =>
 export const formatValueWithTick = (value: any, tick: string): string => {
   const decimalScale = getDecimalScale(formatValue(tick));
   return formatValue(value, decimalScale);
-};
-
-export const getTickSizeFromPrecision = (precision: number): string => {
-  if (precision < 1) {
-    return "1";
-  }
-  return "0." + "0".repeat(precision - 1) + "1";
 };

@@ -906,7 +906,7 @@ export type CorrectedRestDepth = {
 
 export type Depth = CorrectedRestDepth & DepthMain;
 
-export type StringBidDepth = Array<string>;
+export type StringBidDepth = [string, string];
 
 export interface BidDepth {
   price: string;

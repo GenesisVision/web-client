@@ -9,10 +9,7 @@ import {
   TradingPlatformBinanceOrdersMode
 } from "gv-api-web";
 import { Bar } from "pages/trade/binance-trade-page/trading/chart/charting_library/datafeed-api";
-import {
-  DEFAULT_DEPTH_TICK_SIZE,
-  getDividerParts
-} from "pages/trade/binance-trade-page/trading/order-book/order-book.helpers";
+import { getDividerParts } from "pages/trade/binance-trade-page/trading/order-book/order-book.helpers";
 import {
   CorrectedRestDepth,
   ExchangeInfo,
@@ -157,7 +154,7 @@ export const getTickers = (symbol: string = ""): Observable<Ticker[]> =>
 
 export const getDepth = (
   symbol: string,
-  tickSize: string = DEFAULT_DEPTH_TICK_SIZE,
+  tickSize: string = "0.00000001",
   limit: number = 100
 ): Observable<CorrectedRestDepth> => {
   const dividerParts = getDividerParts(tickSize);
