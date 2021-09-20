@@ -8,9 +8,9 @@ import { UnitedOrder } from "pages/trade/binance-trade-page/trading/terminal.typ
 import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
 
-import { OpenOrdersRow } from "./open-orders-row";
 import { OPEN_ORDERS_TABLE_COLUMNS } from "./open-orders.helpers";
 import styles from "./open-orders.module.scss";
+import { OpenOrdersRow } from "./open-orders-row";
 
 interface Props {
   items?: UnitedOrder[];
@@ -76,6 +76,7 @@ export const OpenOrders: React.FC<Props> = ({ items }) => {
       }: UnitedOrder) => {
         return (
           <OpenOrdersRow
+            key={id}
             orderId={id}
             time={time}
             symbol={symbol}

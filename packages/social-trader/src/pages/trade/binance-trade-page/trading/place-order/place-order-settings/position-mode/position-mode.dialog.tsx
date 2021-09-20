@@ -15,8 +15,9 @@ interface Props {
   mode: PositionModeType;
 }
 
-export const PositionModeDialog: React.FC<Props &
-  IDialogOuterProps> = props => {
+export const PositionModeDialog: React.FC<
+  Props & IDialogOuterProps
+> = props => {
   const { open, onClose } = props;
   return (
     <Dialog open={open} onClose={onClose}>

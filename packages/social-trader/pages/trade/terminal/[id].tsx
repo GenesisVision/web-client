@@ -5,7 +5,10 @@ import { BrokerTradeServerType, TradingAccountPermission } from "gv-api-web";
 import { getTerminalApiMethods } from "pages/trade/binance-trade-page/binance-trade.helpers";
 import { TerminalMethodsContextProvider } from "pages/trade/binance-trade-page/trading/contexts/terminal-methods.context";
 import { parseSymbolFromUrlParam } from "pages/trade/binance-trade-page/trading/terminal.helpers";
-import { SymbolState, TerminalType } from "pages/trade/binance-trade-page/trading/terminal.types";
+import {
+  SymbolState,
+  TerminalType
+} from "pages/trade/binance-trade-page/trading/terminal.types";
 import { TerminalPage } from "pages/trade/terminal.page";
 import React from "react";
 import { compose } from "redux";

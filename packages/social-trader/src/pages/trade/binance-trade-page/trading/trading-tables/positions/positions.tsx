@@ -6,12 +6,12 @@ import {
   MARGIN_INFO_ASSET
 } from "pages/trade/binance-trade-page/trading/margin-ratio/margin-ratio.helpers";
 import { Position } from "pages/trade/binance-trade-page/trading/terminal.types";
+import { StyledTh } from "pages/trade/binance-trade-page/trading/trading-tables/positions/positions.styles";
 import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 
-import { PositionsRow } from "./positions-row";
 import { POSITIONS_TABLE_COLUMNS } from "./positions.helpers";
-import { StyledTh } from "pages/trade/binance-trade-page/trading/trading-tables/positions/positions.styles";
+import { PositionsRow } from "./positions-row";
 
 interface Props {
   items?: Position[];

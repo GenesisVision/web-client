@@ -1,8 +1,8 @@
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
-import { OrderSide } from "pages/trade/binance-trade-page/trading/terminal.types";
-import { useContext, useMemo } from "react";
 import { TerminalPlaceOrderContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-place-order.context";
 import { FilterValues } from "pages/trade/binance-trade-page/trading/place-order/place-order.types";
+import { OrderSide } from "pages/trade/binance-trade-page/trading/terminal.types";
+import { useContext, useMemo } from "react";
 
 export interface UsePlaceOrderInfoReturn {
   minPrice: number;

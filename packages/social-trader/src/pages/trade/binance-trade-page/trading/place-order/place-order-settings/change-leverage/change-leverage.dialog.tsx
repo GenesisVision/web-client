@@ -39,8 +39,9 @@ const generateLeverageMarks = (max: number): { [keys: number]: string } => {
   };
 };
 
-export const ChangeLeverageDialog: React.FC<Props &
-  IDialogOuterProps> = props => {
+export const ChangeLeverageDialog: React.FC<
+  Props & IDialogOuterProps
+> = props => {
   const { open, onClose } = props;
   return (
     <Dialog open={open} onClose={onClose}>
@@ -117,8 +118,9 @@ const ChangeLeverageDialogContent: React.FC<Props> = ({
         <Row>
           <Text muted>
             {t(
-              `Maximum position at current leverage ${bracket?.notionalCap ||
-                0} USDT`
+              `Maximum position at current leverage ${
+                bracket?.notionalCap || 0
+              } USDT`
             )}
           </Text>
         </Row>

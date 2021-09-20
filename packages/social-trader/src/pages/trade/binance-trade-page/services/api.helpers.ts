@@ -12,7 +12,11 @@ import {
 } from "gv-api-web";
 import { Bar } from "pages/trade/binance-trade-page/trading/chart/charting_library/datafeed-api";
 import { DividerPartsType } from "pages/trade/binance-trade-page/trading/order-book/order-book.helpers";
-import { StringBidDepth, TradeRequest, UnitedOrder } from "pages/trade/binance-trade-page/trading/terminal.types";
+import {
+  StringBidDepth,
+  TradeRequest,
+  UnitedOrder
+} from "pages/trade/binance-trade-page/trading/terminal.types";
 import { OrderRequest } from "services/request.service";
 import { formatValue } from "utils/formatter";
 
