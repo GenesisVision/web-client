@@ -2,30 +2,28 @@ import withDefaultLayout from "decorators/with-default-layout";
 import { getFiltersFromContext } from "modules/programs-table/services/programs-table.service";
 import React from "react";
 import { NextPageWithRedux } from "utils/types";
-import { fetchCoins } from "modules/assets-table/services/assets-table.service";
-import { CoinsAssetItemsViewModel } from "gv-api-web";
 import AssetsPage from "pages/invest/assets/assets.page";
+import { fetchAssetsCoinsAction } from "pages/invest/assets/actions/assets.actions";
 
-interface Props {
-  data: CoinsAssetItemsViewModel;
-}
-
-const Page: NextPageWithRedux<Props> = ({ data }) => {
-  return <AssetsPage data={data} />;
+const Page: NextPageWithRedux<{}> = () => {
+  return <AssetsPage />;
 };
+
+Page.getInitialProps = async () => ({
+  namespacesRequired: [
+    "assets-page"
+  ]
+});
 
 Page.getInitialProps = async ctx => {
   const filtering = getFiltersFromContext(ctx);
-  let data;
-  try {
-    data = await fetchCoins(filtering);
-  } catch (e) {
-    data = { items: [], total: 0 };
-    console.error(e);
-  }
+  await Promise.all([
+    ctx.reduxStore.dispatch(dispatch =>
+      dispatch(fetchAssetsCoinsAction(filtering))
+    )
+  ]);
   return {
-    namespacesRequired: ["assets-page"],
-    data
+    namespacesRequired: ["assets-page"]
   };
 };
 
