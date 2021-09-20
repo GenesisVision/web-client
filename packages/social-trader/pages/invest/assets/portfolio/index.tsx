@@ -1,24 +1,26 @@
 import withDefaultLayout from "decorators/with-default-layout";
+import withPrivateRoute from "decorators/with-private-route";
+import { fetchPortfolioCoins } from "modules/assets-table/services/assets-table.service";
 import { getFiltersFromContext } from "modules/programs-table/services/programs-table.service";
 import React from "react";
+import { compose } from "redux";
 import { NextPageWithRedux } from "utils/types";
-import { fetchCoins } from "modules/assets-table/services/assets-table.service";
 import { CoinsAssetItemsViewModel } from "gv-api-web";
-import AssetsPage from "pages/invest/assets/assets.page";
+import AssetsPortfolioPage from "pages/invest/assets/portfolio/assets-portfolio.page";
 
 interface Props {
   data: CoinsAssetItemsViewModel;
 }
 
 const Page: NextPageWithRedux<Props> = ({ data }) => {
-  return <AssetsPage data={data} />;
+  return <AssetsPortfolioPage data={data} />;
 };
 
 Page.getInitialProps = async ctx => {
   const filtering = getFiltersFromContext(ctx);
   let data;
   try {
-    data = await fetchCoins(filtering);
+    data = await fetchPortfolioCoins(filtering);
   } catch (e) {
     data = { items: [], total: 0 };
     console.error(e);
@@ -29,4 +31,4 @@ Page.getInitialProps = async ctx => {
   };
 };
 
-export default withDefaultLayout(Page);
+export default compose(withPrivateRoute, withDefaultLayout)(Page);

@@ -8,5 +8,35 @@
     "change-24h": "Price change over the last 24 hours",
     "market-cap": "The total market value of a cryptocurrency's circulating supply. It is analogous to the free-float capitalization in the stock market.",
     "volume-24h": "A measure of how much of a cryptocurrency was traded in the last 24 hours."
+  },
+  "header-fields": {
+    "name": "Name",
+    "chart": "Chart 24h",
+    "asset": "Asset",
+    "price-$": "Price ($)",
+    "change-24h": "Change 24h (%)",
+    "market-cap": "Market Cap",
+    "volume-24h": "Volume 24h",
+    "amount": "Amount",
+    "average-price": "Average price",
+    "profit": "Profit current ($)"
+  },
+  "tabs": {
+    "assets": "Assets",
+    "portfolio": "Portfolio",
+    "history": "History"
+  },
+  "buttons": {
+    "buy": "Buy",
+    "sell": "Sell"
+  },
+  "popup": {
+    "buy-title": "Buy assets",
+    "sell-title": "Sell assets",
+    "from": "Select a wallet currency",
+    "asset": "Asset",
+    "amount": "Enter correct amount",
+    "success-buy": "Buy request is confirmed",
+    "success-sell": "Sell request is confirmed"
   }
 }

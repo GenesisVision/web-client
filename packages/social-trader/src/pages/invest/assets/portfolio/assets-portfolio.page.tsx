@@ -1,24 +1,23 @@
 import BreadCrumbs from "components/breadcrumbs/breadcrumbs";
 import { DefaultTableBlock } from "components/default.block/default-table.block";
 import Page from "components/page/page";
+import { CoinsAssetItemsViewModel } from "gv-api-web";
 import { useTranslation } from "i18n";
-import * as React from "react";
+import AssetsPortfolioTableSsr from "modules/assets-table/components/assets-portfolio-table/assets-portfolio-table-ssr";
+import React from "react";
 import { GV_ASSETS_ROUTE, INVEST_ROUTE } from "routes/invest.routes";
 import { ORGANIZATION_SCHEMA } from "utils/seo";
-import { CoinsAssetItemsViewModel } from "gv-api-web";
-import AssetsTableSSR from "modules/assets-table/components/assets-table/assets-table-ssr";
 import AssetsTabs, { ASSETS_TABS } from "pages/invest/assets/portfolio/components/assets-tabs";
-import { useAuth } from "hooks/auth.hook";
 
 interface Props {
   data: CoinsAssetItemsViewModel;
 }
 
-const AssetsPage: React.FC<Props> = ({ data }) => {
+const AssetsPortfolioPage: React.FC<Props> = ({ data }) => {
   const { t } = useTranslation();
   const title = t("assets-page:title");
   const description = t("assets-page:description");
-  const { isAuthenticated } = useAuth();
+
   return (
     <Page
       description={description}
@@ -39,12 +38,12 @@ const AssetsPage: React.FC<Props> = ({ data }) => {
           { href: GV_ASSETS_ROUTE, label: t("navigation.assets") }
         ]}
       />
-      {isAuthenticated && <AssetsTabs initialTab={ASSETS_TABS.ASSETS} />}
+      <AssetsTabs initialTab={ASSETS_TABS.PORTFOLIO} />
       <DefaultTableBlock>
-        <AssetsTableSSR data={data} />
+        <AssetsPortfolioTableSsr data={data} />
       </DefaultTableBlock>
     </Page>
   );
 };
 
-export default AssetsPage;
+export default AssetsPortfolioPage;

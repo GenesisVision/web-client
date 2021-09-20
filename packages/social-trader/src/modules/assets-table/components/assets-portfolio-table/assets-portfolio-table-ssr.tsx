@@ -1,14 +1,14 @@
 import { composePaging } from "components/table/helpers/paging.helpers";
-import useRouteFilters from "hooks/route-filters.hook";
-import * as React from "react";
 import { CoinsAssetItemsViewModel } from "gv-api-web";
-import AssetsTable from "modules/assets-table/components/assets-table/assets-table";
+import useRouteFilters from "hooks/route-filters.hook";
+import { useTranslation } from "i18n";
+import AssetsPortfolioTable from "modules/assets-table/components/assets-portfolio-table/assets-portfolio-table";
+import * as React from "react";
 
 const DEFAULT_ITEMS_ON_PAGE = 12;
 
-const _AssetsTableSSR: React.FC<Props> = ({
-  data
-}) => {
+const _AssetPortfolioTableSSR: React.FC<Props> = ({ data }) => {
+  const { t } = useTranslation();
   const [
     filtering,
     sorting,
@@ -20,7 +20,7 @@ const _AssetsTableSSR: React.FC<Props> = ({
 
   if (!data) return null;
   return (
-    <AssetsTable
+    <AssetsPortfolioTable
       data={data.items}
       sorting={sorting}
       updateSorting={updateSorting}
@@ -35,5 +35,5 @@ interface Props {
   data: CoinsAssetItemsViewModel;
 }
 
-const AssetsTableSSR = React.memo(_AssetsTableSSR);
-export default AssetsTableSSR;
+const AssetsPortfolioTableSsr = React.memo(_AssetPortfolioTableSSR);
+export default AssetsPortfolioTableSsr;

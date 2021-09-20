@@ -1,11 +1,11 @@
+import { CoinsAsset } from "gv-api-web";
 import {
   getRandomColor,
   getRandomInteger,
   tableLoaderCreator
 } from "utils/helpers";
-import { CoinsAsset } from "gv-api-web";
 
-export const assetLoaderDataCreator = (): CoinsAsset => ({
+const assetLoaderDataCreator = (): CoinsAsset => ({
   price: 0,
   change24Volume: 0,
   marketCap: 0,
@@ -48,6 +48,6 @@ export const assetLoaderDataCreator = (): CoinsAsset => ({
   amount: 0
 });
 
-export const assetsListLoaderDataWithCount = (
+export const assetsPortfolioListLoaderDataWithCount = (
   count?: number
 ): CoinsAsset[] => tableLoaderCreator(assetLoaderDataCreator, count);

@@ -1,19 +1,19 @@
 import { Table } from "components/table/components";
 import { ITableProps } from "components/table/components/table";
+import { CoinsAsset } from "gv-api-web";
+import { ASSETS_PORTFOLIO_TABLE_COLUMNS } from "modules/assets-table/assets.constants";
+import AssetPortfolioTableRow from "modules/assets-table/components/assets-portfolio-table/asset-portfolio-table-row";
+import { assetsPortfolioListLoaderDataWithCount } from "modules/assets-table/components/assets-portfolio-table/assets-portfolio-table.loader-data";
+import AssetsPortfolioTableHeaderCell from "modules/assets-table/components/assets-portfolio-table/assets-portfolio-table-header-cell";
 import * as React from "react";
 import { useCallback } from "react";
-import AssetsTableHeaderCell from "modules/assets-table/components/assets-table/assets-table-header-cell";
-import AssetTableRow from "modules/assets-table/components/assets-table/asset-table-row";
-import { CoinsAsset } from "gv-api-web";
-import { assetsListLoaderDataWithCount } from "modules/assets-table/components/assets-table/assets-table.loader-data";
-import { ASSETS_TABLE_COLUMNS } from "modules/assets-table/assets.constants";
 
 interface Props extends ITableProps {
   loaderCount?: number;
   data?: CoinsAsset[];
 }
 
-const _AssetsTable: React.FC<Props> = ({
+const _AssetsPortfolioTable: React.FC<Props> = ({
   loaderCount,
   showSwitchView = false,
   data,
@@ -29,7 +29,7 @@ const _AssetsTable: React.FC<Props> = ({
   asLinkPagination
 }) => (
   <Table
-    loaderData={assetsListLoaderDataWithCount(loaderCount)}
+    loaderData={assetsPortfolioListLoaderDataWithCount(loaderCount)}
     filtering={filtering}
     updateFilter={updateFilter}
     title={title}
@@ -37,7 +37,7 @@ const _AssetsTable: React.FC<Props> = ({
     updateSorting={updateSorting}
     paging={paging}
     updatePaging={updatePaging}
-    columns={ASSETS_TABLE_COLUMNS}
+    columns={ASSETS_PORTFOLIO_TABLE_COLUMNS}
     items={data}
     asLinkPagination={asLinkPagination}
     showSwitchView={showSwitchView}
@@ -45,18 +45,18 @@ const _AssetsTable: React.FC<Props> = ({
     renderMappings={renderMappings}
     renderHeader={useCallback(
       column => (
-        <AssetsTableHeaderCell column={column} />
+        <AssetsPortfolioTableHeaderCell column={column} />
       ),
       []
     )}
     renderBodyRow={useCallback(
       asset => (
-        <AssetTableRow asset={asset} />
+        <AssetPortfolioTableRow asset={asset} />
       ),
       []
     )}
   />
 );
 
-const AssetsTable = React.memo(_AssetsTable);
-export default AssetsTable;
+const AssetsPortfolioTable = React.memo(_AssetsPortfolioTable);
+export default AssetsPortfolioTable;

@@ -9,7 +9,7 @@ interface Props {
   column: SortingColumn;
 }
 
-const _AssetsTableHeaderCell: React.FC<Props> = ({ column }) => {
+const _AssetsPortfolioTableHeaderCell: React.FC<Props> = ({ column }) => {
   const { t } = useTranslation();
   const renderCell = () => <span>{t(`assets-page:header-fields.${column.name}`)}</span>;
   return column.tooltip ? (
@@ -28,5 +28,7 @@ const _AssetsTableHeaderCell: React.FC<Props> = ({ column }) => {
   );
 };
 
-const AssetsTableHeaderCell = React.memo(_AssetsTableHeaderCell);
-export default AssetsTableHeaderCell;
+const AssetsPortfolioTableHeaderCell = React.memo(
+  _AssetsPortfolioTableHeaderCell
+);
+export default AssetsPortfolioTableHeaderCell;

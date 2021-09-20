@@ -287,13 +287,7 @@
     "drawdown": "D.down",
     "profit": "Profit",
     "chart": "Chart",
-    "strategy": "Strategy",
-    "asset": "Asset",
-    "price": "Price",
-    "price-$": "Price ($)",
-    "change-24h": "Change 24h (%)",
-    "market-cap": "Market Cap",
-    "volume-24h": "Volume 24h"
+    "strategy": "Strategy"
   },
   "global-search-page": {
     "managers-table": {
