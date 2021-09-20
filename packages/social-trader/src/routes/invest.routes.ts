@@ -41,4 +41,3 @@ export const PROGRAMS_TAB_ROUTE = `${GV_PROGRAMS_ROUTE}/:tab`;
 export const ASSET = "asset";
 export const ASSETS = `${ASSET}s`;
 export const GV_ASSETS_ROUTE = `${INVEST_ROUTE}/${ASSETS}`;
-export const ASSETS_TAB_ROUTE = `${GV_ASSETS_ROUTE}/:tab`;

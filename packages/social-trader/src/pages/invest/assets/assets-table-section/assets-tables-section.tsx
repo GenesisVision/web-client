@@ -5,13 +5,15 @@ import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import { RootState } from "reducers/root-reducer";
-import useTab from "hooks/tab.hook";
 import DetailsBlockTabs from "components/details/details-block-tabs";
 import {
   GetItemsFuncActionType,
   TableSelectorType
 } from "components/table/components/table.types";
 import { DefaultTableBlock } from "components/default.block/default-table.block";
+import useHashTab from "pages/wallet/services/hashTab.hook";
+import Link from "components/link/link";
+import { GV_ASSETS_ROUTE } from "routes/invest.routes";
 
 const AssetsCoins = dynamic(
   () => import("modules/assets-table/components/assets-table/assets-coins")
@@ -27,8 +29,8 @@ const AssetsHistory = dynamic(
 
 export enum ASSETS_TABS {
   ASSETS = "",
-  PORTFOLIO = "portfolio",
-  HISTORY = "history"
+  PORTFOLIO = "#portfolio",
+  HISTORY = "#history"
 }
 
 interface Props {
@@ -52,24 +54,45 @@ const _AssetsTradesSection: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   const isAuthenticated = useSelector(isAuthenticatedSelector);
-  const { tab, setTab } = useTab<ASSETS_TABS>(ASSETS_TABS.ASSETS);
+  const { tab } = useHashTab<ASSETS_TABS>(ASSETS_TABS.ASSETS);
 
   return (
     <DefaultTableBlock>
-      <DetailsBlockTabs value={tab} onChange={setTab}>
+      <DetailsBlockTabs value={tab}>
         <GVTab
           value={ASSETS_TABS.ASSETS}
-          label={t("assets-page:tabs.assets")}
+          label={
+            <Link
+              noColor
+              to={`${GV_ASSETS_ROUTE}${ASSETS_TABS.ASSETS}`}
+            >
+              {t("assets-page:tabs.assets")}
+            </Link>
+          }
           visible={isAuthenticated}
         />
         <GVTab
           value={ASSETS_TABS.PORTFOLIO}
-          label={t("assets-page:tabs.portfolio")}
+          label={
+            <Link
+              noColor
+              to={`${GV_ASSETS_ROUTE}${ASSETS_TABS.PORTFOLIO}`}
+            >
+              {t("assets-page:tabs.portfolio")}
+            </Link>
+          }
           visible={isAuthenticated}
         />
         <GVTab
           value={ASSETS_TABS.HISTORY}
-          label={t("assets-page:tabs.history")}
+          label={
+            <Link
+              noColor
+              to={`${GV_ASSETS_ROUTE}${ASSETS_TABS.HISTORY}`}
+            >
+              {t("assets-page:tabs.history")}
+            </Link>
+          }
           visible={isAuthenticated}
         />
       </DetailsBlockTabs>

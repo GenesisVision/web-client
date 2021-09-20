@@ -27,7 +27,6 @@ const _AssetsHistory: React.FC<Props> = ({
   const {
     itemsData: { data }
   } = useSelector(itemSelector);
-  console.log('data', data);
   const renderHeader = useCallback(
     column => <AssetsHistoryTableHeaderCell column={column} />,
     []
@@ -39,7 +38,6 @@ const _AssetsHistory: React.FC<Props> = ({
 
   const renderFilters = useCallback(
     (updateFilter, filtering) => {
-      console.log('filtering', filtering);
       return (
       <>
         <DateRangeFilter
