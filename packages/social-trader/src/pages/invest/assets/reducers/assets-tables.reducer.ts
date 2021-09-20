@@ -5,7 +5,12 @@ import {
 import tableReducerFactory from "components/table/reducers/table.reducer";
 import { RootState } from "reducers/root-reducer";
 
-import { ASSETS_COINS, ASSETS_HISTORY, ASSETS_PORTFOLIO } from "pages/invest/assets/assets.constants";
+import {
+  ASSETS_COINS,
+  ASSETS_HISTORY, ASSETS_HISTORY_DEFAULT_FILTERS,
+  ASSETS_HISTORY_FILTERS,
+  ASSETS_PORTFOLIO
+} from "pages/invest/assets/assets.constants";
 import { CoinsAssetItemsViewModel, CoinsHistoryEventItemsViewModel } from "gv-api-web";
 
 export const assetsCoinsSelector = (state: RootState) =>
@@ -33,7 +38,7 @@ export const assetsPortfolioTableSelector = tableSelectorCreator<
 
 export const assetsPortfolioReducer = tableReducerFactory<CoinsAssetItemsViewModel>({
   type: ASSETS_PORTFOLIO,
-  paging: { ...DEFAULT_PAGING, itemsOnPage: Number.MAX_VALUE }
+  paging: { ...DEFAULT_PAGING, itemsOnPage: 12 }
 });
 
 export const assetsHistorySelector = (state: RootState) =>
@@ -47,5 +52,7 @@ export const assetsHistoryTableSelector = tableSelectorCreator<
 
 export const assetsHistoryReducer = tableReducerFactory<CoinsHistoryEventItemsViewModel>({
   type: ASSETS_HISTORY,
-  paging: { ...DEFAULT_PAGING, itemsOnPage: Number.MAX_VALUE }
+  paging: { ...DEFAULT_PAGING, itemsOnPage: 12 },
+  filtering: ASSETS_HISTORY_FILTERS,
+  defaultFilters: ASSETS_HISTORY_DEFAULT_FILTERS
 });

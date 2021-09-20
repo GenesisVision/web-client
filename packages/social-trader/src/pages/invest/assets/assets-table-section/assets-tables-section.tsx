@@ -21,6 +21,10 @@ const AssetsPortfolio = dynamic(
   () => import("modules/assets-table/components/assets-portfolio-table/assets-portfolio")
 );
 
+const AssetsHistory = dynamic(
+  () => import("modules/assets-table/components/assets-history-table/assets-history")
+);
+
 export enum ASSETS_TABS {
   ASSETS = "",
   PORTFOLIO = "portfolio",
@@ -81,6 +85,13 @@ const _AssetsTradesSection: React.FC<Props> = ({
           itemSelector={portfolio.itemSelector!}
           getItems={portfolio.getItems()}
           dataSelector={portfolio.dataSelector}
+        />
+      )}
+      {tab === ASSETS_TABS.HISTORY && (
+        <AssetsHistory
+          itemSelector={history.itemSelector!}
+          getItems={history.getItems()}
+          dataSelector={history.dataSelector}
         />
       )}
     </DefaultTableBlock>

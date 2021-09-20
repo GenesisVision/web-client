@@ -7,7 +7,14 @@
     "price-$": "Current price",
     "change-24h": "Price change over the last 24 hours",
     "market-cap": "The total market value of a cryptocurrency's circulating supply. It is analogous to the free-float capitalization in the stock market.",
-    "volume-24h": "A measure of how much of a cryptocurrency was traded in the last 24 hours."
+    "volume-24h": "A measure of how much of a cryptocurrency was traded in the last 24 hours.",
+    "amount": "Amount",
+    "average-price": "Average price",
+    "profit": "Profit current ($)",
+    "date": "Date",
+    "trades": "Trades",
+    "price": "Price",
+    "commission": "Commission"
   },
   "header-fields": {
     "name": "Name",
@@ -19,7 +26,11 @@
     "volume-24h": "Volume 24h",
     "amount": "Amount",
     "average-price": "Average price",
-    "profit": "Profit current ($)"
+    "profit": "Profit current ($)",
+    "date": "Date",
+    "trades": "Trades",
+    "price": "Price",
+    "commission": "Commission"
   },
   "tabs": {
     "assets": "Assets",

@@ -9,7 +9,6 @@ import { RootState } from "reducers/root-reducer";
 import { ASSETS_TABLE_COLUMNS } from "modules/assets-table/assets.constants";
 import AssetsTableHeaderCell from "modules/assets-table/components/assets-table/assets-table-header-cell";
 import AssetTableRow from "modules/assets-table/components/assets-table/asset-table-row";
-import { assetsListLoaderDataWithCount } from "modules/assets-table/components/assets-table/assets-table.loader-data";
 
 const _AssetsCoins: React.FC<Props> = ({
   itemSelector,
@@ -31,7 +30,6 @@ const _AssetsCoins: React.FC<Props> = ({
 
   return (
     <TableContainer
-      loaderData={assetsListLoaderDataWithCount()}
       getItems={getItems}
       dataSelector={dataSelector}
       isFetchOnMount={true}
