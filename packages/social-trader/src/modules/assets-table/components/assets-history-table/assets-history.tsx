@@ -16,6 +16,7 @@ import DateRangeFilter from "components/table/components/filtering/date-range-fi
 import { DATE_RANGE_FILTER_NAME } from "components/table/components/filtering/date-range-filter/date-range-filter.constants";
 import { FUND_ASSET_FILTER_NAME } from "components/table/components/filtering/fund-asset-filter/fund-asset-filter.constants";
 import { CoinsAssetFilterContainer } from "components/table/components/filtering/fund-asset-filter/coins-asset-filter.container";
+import { assetsHistoryLoaderDataWithCount } from "modules/assets-table/components/assets-history-table/assets-history-table.loader-data";
 
 const _AssetsHistory: React.FC<Props> = ({
   itemSelector,
@@ -54,6 +55,7 @@ const _AssetsHistory: React.FC<Props> = ({
 
   return (
     <TableContainer
+      loaderData={assetsHistoryLoaderDataWithCount()}
       getItems={getItems}
       dataSelector={dataSelector}
       isFetchOnMount={true}

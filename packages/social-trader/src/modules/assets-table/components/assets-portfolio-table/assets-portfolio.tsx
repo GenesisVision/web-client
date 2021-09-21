@@ -10,6 +10,7 @@ import { ASSETS_PORTFOLIO_TABLE_COLUMNS } from "modules/assets-table/assets.cons
 import AssetsPortfolioTableHeaderCell
   from "modules/assets-table/components/assets-portfolio-table/assets-portfolio-table-header-cell";
 import AssetPortfolioTableRow from "modules/assets-table/components/assets-portfolio-table/asset-portfolio-table-row";
+import { assetsPortfolioListLoaderDataWithCount } from "modules/assets-table/components/assets-portfolio-table/assets-portfolio-table.loader-data";
 
 const _AssetsPortfolio: React.FC<Props> = ({
   itemSelector,
@@ -31,6 +32,7 @@ const _AssetsPortfolio: React.FC<Props> = ({
 
   return (
     <TableContainer
+      loaderData={assetsPortfolioListLoaderDataWithCount()}
       getItems={getItems}
       dataSelector={dataSelector}
       isFetchOnMount={true}

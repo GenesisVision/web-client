@@ -2,9 +2,9 @@ import { CurrencyItem } from "components/currency-item/currency-item";
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import { Text } from "components/text/text";
+import NumberFormat from "react-number-format";
 import { CoinsHistoryEvent } from "gv-api-web";
 import * as React from "react";
-import NumberFormat from "react-number-format";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
 import { formatDate } from "utils/dates";
 import { Center } from "components/center/center";
@@ -57,12 +57,12 @@ const _AssetHistoryTableRow: React.FC<Props> = ({ event }) => {
         {/*</Text>*/}
       </TableCell>
       <TableCell>
-        {/*<NumberFormat*/}
-        {/*  value={formatValue(commission, 8)}*/}
-        {/*  suffix={` ${commissionCurrency}`}*/}
-        {/*  thousandSeparator=" "*/}
-        {/*  displayType="text"*/}
-        {/*/>*/}
+        <NumberFormat
+          value={formatValue(trade.commission, 8)}
+          suffix={` ${trade.commissionCurrency ? trade.commissionCurrency : ""}`}
+          thousandSeparator=" "
+          displayType="text"
+        />
       </TableCell>
     </TableRow>
   );

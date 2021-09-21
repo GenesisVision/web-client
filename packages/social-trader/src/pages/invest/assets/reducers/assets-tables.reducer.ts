@@ -12,6 +12,9 @@ import {
   ASSETS_PORTFOLIO
 } from "pages/invest/assets/assets.constants";
 import { CoinsAssetItemsViewModel, CoinsHistoryEventItemsViewModel } from "gv-api-web";
+import { IDataModel } from "constants/constants";
+
+const defaultData: IDataModel = { items: null, total: 0 };
 
 export const assetsCoinsSelector = (state: RootState) =>
   state.assets.coins;
@@ -20,7 +23,7 @@ export const assetsCoinsTableSelector = tableSelectorCreator<
   RootState,
   CoinsAssetItemsViewModel,
   CoinsAssetItemsViewModel
-  >(assetsCoinsSelector);
+  >(assetsCoinsSelector, "items", defaultData);
 
 export const assetsCoinsReducer = tableReducerFactory<CoinsAssetItemsViewModel>({
   type: ASSETS_COINS,
@@ -34,7 +37,7 @@ export const assetsPortfolioTableSelector = tableSelectorCreator<
   RootState,
   CoinsAssetItemsViewModel,
   CoinsAssetItemsViewModel
-  >(assetsPortfolioSelector);
+  >(assetsPortfolioSelector, "items", defaultData);
 
 export const assetsPortfolioReducer = tableReducerFactory<CoinsAssetItemsViewModel>({
   type: ASSETS_PORTFOLIO,
@@ -48,7 +51,7 @@ export const assetsHistoryTableSelector = tableSelectorCreator<
   RootState,
   CoinsHistoryEventItemsViewModel,
   CoinsHistoryEventItemsViewModel
-  >(assetsHistorySelector);
+  >(assetsHistorySelector, "items", defaultData);
 
 export const assetsHistoryReducer = tableReducerFactory<CoinsHistoryEventItemsViewModel>({
   type: ASSETS_HISTORY,

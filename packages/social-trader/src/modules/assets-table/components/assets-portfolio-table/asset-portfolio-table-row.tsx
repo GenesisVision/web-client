@@ -20,7 +20,6 @@ interface Props {
 }
 
 const _AssetPortfolioTableRow: React.FC<Props> = ({ asset }) => {
-  console.log(asset.id, asset.asset);
   return (
     <TableRow>
       <TableCell>
