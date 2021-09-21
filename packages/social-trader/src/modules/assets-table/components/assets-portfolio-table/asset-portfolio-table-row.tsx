@@ -36,6 +36,7 @@ const _AssetPortfolioTableRow: React.FC<Props> = ({ asset }) => {
           <NumberFormat
             value={formatCurrencyValue(asset.price, "USD")}
             suffix={` $`}
+            thousandSeparator=" "
             displayType="text"
           />
         </Text>
@@ -60,12 +61,14 @@ const _AssetPortfolioTableRow: React.FC<Props> = ({ asset }) => {
               <NumberFormat
                 value={formatCurrencyValue(asset.amount * asset.price, "USD")}
                 suffix={` $`}
+                thousandSeparator=" "
                 displayType="text"
               />
             </TooltipContent>
           )}>
             <NumberFormat
               value={asset.amount}
+              thousandSeparator=" "
               displayType="text"
             />
           </Tooltip>
@@ -76,6 +79,7 @@ const _AssetPortfolioTableRow: React.FC<Props> = ({ asset }) => {
           <NumberFormat
             value={formatCurrencyValue(asset.averagePrice, "USD")}
             suffix={` $`}
+            thousandSeparator=" "
             displayType="text"
           />
         </Text>
@@ -85,6 +89,7 @@ const _AssetPortfolioTableRow: React.FC<Props> = ({ asset }) => {
           <NumberFormat
             value={formatCurrencyValue(asset.profitCurrent, "USD")}
             suffix={` $`}
+            thousandSeparator=" "
             displayType="text"
           />
         </Text>

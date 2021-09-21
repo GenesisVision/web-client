@@ -1,9 +1,4 @@
 import { SortingColumn } from "components/table/components/filtering/filter.type";
-import {
-  composeDefaultDateRangeFilter,
-  composeRequestValueFunc
-} from "components/table/components/filtering/date-range-filter/date-range-filter.helpers";
-import { DEFAULT_DATE_RANGE_FILTER_VALUE } from "components/table/components/filtering/date-range-filter/date-range-filter.constants";
 
 export const ASSETS_TABLE_COLUMNS: SortingColumn[] = [
   {

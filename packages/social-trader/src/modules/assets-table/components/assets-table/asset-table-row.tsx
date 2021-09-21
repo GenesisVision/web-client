@@ -48,6 +48,7 @@ const _AssetTableRow: React.FC<Props> = ({ asset }) => {
               asset.price,
               "USD"
             )}
+            thousandSeparator=" "
             suffix={` $`}
             displayType="text"
           />
@@ -73,6 +74,7 @@ const _AssetTableRow: React.FC<Props> = ({ asset }) => {
               asset.marketCap,
               "USD"
             )}
+            thousandSeparator=" "
             suffix={` $`}
             displayType="text"
           />
@@ -85,6 +87,7 @@ const _AssetTableRow: React.FC<Props> = ({ asset }) => {
               asset.change24Volume,
               "USD"
             )}
+            thousandSeparator=" "
             suffix={` $`}
             displayType="text"
           />
