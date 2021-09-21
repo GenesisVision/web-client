@@ -1,7 +1,6 @@
 import Dialog from "components/dialog/dialog";
 import dynamic from "next/dynamic";
 import * as React from "react";
-import { useTranslation } from "i18n";
 
 import {
   AssetsTransferProps
@@ -12,7 +11,6 @@ const AssetsTransferContainer = dynamic(
 );
 
 const _AssetTransferPopup: React.FC<Props> = ({ currentAsset, onClose, open, title, sourceType, destinationType }) => {
-  const [t] = useTranslation();
   return (
     <Dialog open={open} onClose={onClose!}>
       <AssetsTransferContainer
