@@ -8,7 +8,7 @@ export const fetchAssetsCoinsAction = (
   filters: ComposeFiltersAllType
 ): ApiAction<CoinsAssetItemsViewModel> => ({
   type: ASSETS_COINS,
-  payload:api.coins().getCoins(filters)
+  payload: api.coins().getCoins(filters)
 });
 
 export const fetchAssetsPortfolioAction = (

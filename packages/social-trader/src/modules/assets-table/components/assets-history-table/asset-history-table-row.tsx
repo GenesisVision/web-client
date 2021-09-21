@@ -15,7 +15,7 @@ interface Props {
 }
 
 const _AssetHistoryTableRow: React.FC<Props> = ({ event }) => {
-  const { date, trade, price, commission, commissionCurrency } = event;
+  const { date, trade } = event;
   return (
     <TableRow>
       <TableCell>
@@ -47,16 +47,22 @@ const _AssetHistoryTableRow: React.FC<Props> = ({ event }) => {
         </Center>
       </TableCell>
       <TableCell>
-        <Text wrap={false}>
-          <NumberFormat
-            value={formatCurrencyValue(price, "USD")}
-            suffix={` $`}
-            displayType="text"
-          />
-        </Text>
+        {/*<Text wrap={false}>*/}
+        {/*  <NumberFormat*/}
+        {/*    value={formatCurrencyValue(price, "USD")}*/}
+        {/*    suffix={` $`}*/}
+        {/*    thousandSeparator=" "*/}
+        {/*    displayType="text"*/}
+        {/*  />*/}
+        {/*</Text>*/}
       </TableCell>
       <TableCell>
-        {formatValue(commission, 8)} {commissionCurrency}
+        {/*<NumberFormat*/}
+        {/*  value={formatValue(commission, 8)}*/}
+        {/*  suffix={` ${commissionCurrency}`}*/}
+        {/*  thousandSeparator=" "*/}
+        {/*  displayType="text"*/}
+        {/*/>*/}
       </TableCell>
     </TableRow>
   );
