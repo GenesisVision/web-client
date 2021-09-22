@@ -7,10 +7,7 @@ import { useTranslation } from "react-i18next";
 import { CoinsAsset } from "gv-api-web";
 import AssetTransferPopup from "modules/assets-table/components/asset-transfer/asset-transfer-popup";
 
-const _AssetSell: React.FC<Props> = ({
-  disabled,
-                                       asset
-}) => {
+const _AssetSell: React.FC<Props> = ({ disabled, asset, id, onApply }) => {
   const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
   const [t] = useTranslation();
   const label = t("assets-page:buttons.sell");
@@ -26,11 +23,13 @@ const _AssetSell: React.FC<Props> = ({
       />
       <AssetTransferPopup
         currentAsset={asset}
+        idCoins={id}
         onClose={setClosePopup}
         open={isOpenPopup}
         title={t("assets-page:popup.sell-title")}
         sourceType={"CoinsMarket"}
         destinationType={"Wallet"}
+        onApply={onApply}
       />
     </>
   );
@@ -39,6 +38,8 @@ const _AssetSell: React.FC<Props> = ({
 interface Props {
   asset: CoinsAsset;
   disabled?: boolean;
+  id: string;
+  onApply?: VoidFunction;
 }
 
 const AssetSell = React.memo(_AssetSell);
