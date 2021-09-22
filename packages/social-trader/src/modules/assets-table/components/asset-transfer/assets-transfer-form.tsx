@@ -88,16 +88,16 @@ const _AssetsTransferForm: React.FC<IAssetsTransferFormProps> = ({
     values => {
       const { amount, sourceId } = values;
       const transferAll = getTransferAll({ amount, sourceId }, sourceItems);
-      return onSubmit({ ...values, [ASSETS_FORM_FIELDS.transferAll]: transferAll });
+      return onSubmit({
+        ...values,
+        [ASSETS_FORM_FIELDS.transferAll]: transferAll
+      });
     },
     [sourceItems, onSubmit]
   );
 
   return (
-    <HookForm
-      form={form}
-      onSubmit={setValuesFromPropsAndSubmit}
-    >
+    <HookForm form={form} onSubmit={setValuesFromPropsAndSubmit}>
       <DialogTop title={title}>
         <Row size={"large"}>
           {sourceItems && (
@@ -113,14 +113,15 @@ const _AssetsTransferForm: React.FC<IAssetsTransferFormProps> = ({
       </DialogTop>
       <DialogBottom>
         <Row>
-            <LabeledValue label="Amount">
-              <CurrencyItem
+          <LabeledValue label={t("assets-page:popup.asset")}>
+            <CurrencyItem
               url={asset.url}
               logo={asset.logoUrl}
               name={asset.asset}
               clickable={false}
               small
-            /></LabeledValue>
+            />
+          </LabeledValue>
         </Row>
         <InputAmountField
           name={ASSETS_FORM_FIELDS.amount}

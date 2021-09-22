@@ -58,13 +58,37 @@ export const ASSETS_PORTFOLIO_TABLE_COLUMNS: SortingColumn[] = [
     tooltip: true
   },
   {
-    name: "amount"
+    name: "amount",
+    sortingName: "ByAmount",
+    tooltip: true
   },
   {
-    name: "average-price"
+    name: "average-price",
+    sortingName: "ByAveragePrice",
+    tooltip: true
   },
   {
-    name: "profit"
+    name: "profit",
+    sortingName: "ByProfit",
+    tooltip: true
   }
 ];
 
+export const ASSETS_HISTORY_TABLE_COLUMNS: SortingColumn[] = [
+  {
+    name: "date",
+    tooltip: true
+  },
+  {
+    name: "trades",
+    tooltip: true
+  },
+  {
+    name: "price",
+    tooltip: true
+  },
+  {
+    name: "commission",
+    tooltip: true
+  }
+];

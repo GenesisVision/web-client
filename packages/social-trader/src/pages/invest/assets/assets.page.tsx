@@ -1,24 +1,48 @@
 import BreadCrumbs from "components/breadcrumbs/breadcrumbs";
-import { DefaultTableBlock } from "components/default.block/default-table.block";
 import Page from "components/page/page";
 import { useTranslation } from "i18n";
-import * as React from "react";
+import React, { useMemo } from "react";
 import { GV_ASSETS_ROUTE, INVEST_ROUTE } from "routes/invest.routes";
 import { ORGANIZATION_SCHEMA } from "utils/seo";
-import { CoinsAssetItemsViewModel } from "gv-api-web";
-import AssetsTableSSR from "modules/assets-table/components/assets-table/assets-table-ssr";
-import AssetsTabs, { ASSETS_TABS } from "pages/invest/assets/portfolio/components/assets-tabs";
-import { useAuth } from "hooks/auth.hook";
+import {
+  assetsCoinsSelector,
+  assetsCoinsTableSelector,
+  assetsHistorySelector,
+  assetsHistoryTableSelector,
+  assetsPortfolioSelector,
+  assetsPortfolioTableSelector
+} from "pages/invest/assets/reducers/assets-tables.reducer";
+import {
+  getAssetsCoins,
+  getAssetsHistory,
+  getAssetsPortfolio
+} from "pages/invest/assets/service/assets.service";
+import AssetsTradesSection from "pages/invest/assets/assets-table-section/assets-tables-section";
 
-interface Props {
-  data: CoinsAssetItemsViewModel;
-}
-
-const AssetsPage: React.FC<Props> = ({ data }) => {
+const AssetsPage = () => {
   const { t } = useTranslation();
   const title = t("assets-page:title");
   const description = t("assets-page:description");
-  const { isAuthenticated } = useAuth();
+  const tablesData = useMemo(
+    () => ({
+      assetsCoins: {
+        itemSelector: assetsCoinsSelector,
+        dataSelector: assetsCoinsTableSelector,
+        getItems: getAssetsCoins
+      },
+      portfolio: {
+        itemSelector: assetsPortfolioSelector,
+        dataSelector: assetsPortfolioTableSelector,
+        getItems: getAssetsPortfolio
+      },
+      history: {
+        itemSelector: assetsHistorySelector,
+        dataSelector: assetsHistoryTableSelector,
+        getItems: getAssetsHistory
+      }
+    }),
+    []
+  );
   return (
     <Page
       description={description}
@@ -39,10 +63,7 @@ const AssetsPage: React.FC<Props> = ({ data }) => {
           { href: GV_ASSETS_ROUTE, label: t("navigation.assets") }
         ]}
       />
-      {isAuthenticated && <AssetsTabs initialTab={ASSETS_TABS.ASSETS} />}
-      <DefaultTableBlock>
-        <AssetsTableSSR data={data} />
-      </DefaultTableBlock>
+      <AssetsTradesSection tablesData={tablesData} />
     </Page>
   );
 };
