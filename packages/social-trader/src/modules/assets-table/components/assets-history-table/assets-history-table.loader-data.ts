@@ -30,6 +30,7 @@ export const assetLoaderDataCreator = (): CoinsHistoryEvent => ({
       provider: "Undefined",
       description: ""
     },
+    price: 0,
     commission: 0,
     commissionCurrency: "GVT"
   }
