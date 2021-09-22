@@ -47,14 +47,14 @@ const _AssetHistoryTableRow: React.FC<Props> = ({ event }) => {
         </Center>
       </TableCell>
       <TableCell>
-        {/*<Text wrap={false}>*/}
-        {/*  <NumberFormat*/}
-        {/*    value={formatCurrencyValue(price, "USD")}*/}
-        {/*    suffix={` $`}*/}
-        {/*    thousandSeparator=" "*/}
-        {/*    displayType="text"*/}
-        {/*  />*/}
-        {/*</Text>*/}
+        <Text wrap={false}>
+          <NumberFormat
+            value={formatCurrencyValue(trade.price, "USD")}
+            suffix={` $`}
+            thousandSeparator=" "
+            displayType="text"
+          />
+        </Text>
       </TableCell>
       <TableCell>
         <NumberFormat
