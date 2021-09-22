@@ -24,8 +24,8 @@ const _AssetsPortfolio: React.FC<Props> = ({
     []
   );
   const renderBodyRow = useCallback(
-    asset => (
-      <AssetPortfolioTableRow asset={asset} />
+    (asset, updateRow) => (
+      <AssetPortfolioTableRow asset={asset} onApply={updateRow} />
     ),
     []
   );

@@ -97,7 +97,7 @@ const _AssetTableRow: React.FC<Props> = ({ asset }) => {
       </ChartCell>
       {isAuthenticated && (<TableCell>
         <Row>
-          <LineBuyButton asset={asset} />
+          <LineBuyButton asset={asset} id={asset.id} />
         </Row>
       </TableCell>)}
     </TableRow>

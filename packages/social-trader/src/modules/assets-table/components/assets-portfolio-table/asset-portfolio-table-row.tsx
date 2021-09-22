@@ -17,9 +17,10 @@ import LineBuyButton from "modules/assets-table/components/buttons/line-buy-butt
 
 interface Props {
   asset: CoinsAsset;
+  onApply?: VoidFunction;
 }
 
-const _AssetPortfolioTableRow: React.FC<Props> = ({ asset }) => {
+const _AssetPortfolioTableRow: React.FC<Props> = ({ asset, onApply }) => {
   return (
     <TableRow>
       <TableCell>
@@ -96,8 +97,8 @@ const _AssetPortfolioTableRow: React.FC<Props> = ({ asset }) => {
       </TableCell>
       <TableCell>
         <Row>
-          <LineBuyButton asset={asset} />
-          <LineSellButton asset={asset} />
+          <LineBuyButton asset={asset} id={asset.oefAssetId} onApply={onApply} />
+          <LineSellButton asset={asset} id={asset.oefAssetId} onApply={onApply} />
         </Row>
       </TableCell>
     </TableRow>

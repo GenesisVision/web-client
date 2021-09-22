@@ -21,12 +21,14 @@ export interface AssetsTransferProps {
   sourceType: InternalTransferRequestType;
   destinationType: InternalTransferRequestType;
   title?: string;
+  idCoins: string;
   successMessage?: string;
   currentAsset: CoinsAsset;
 }
 
 const _AssetsTransferContainer: React.FC<AssetsTransferProps> = ({
   currentAsset,
+  idCoins,
   onApply,
   title,
   sourceType,
@@ -50,12 +52,12 @@ const _AssetsTransferContainer: React.FC<AssetsTransferProps> = ({
   });
   const handleSubmit = useCallback(
     (values: InternalTransferRequest) => {
-      const sourceId = sourceType === 'CoinsMarket' ? currentAsset.id : values.sourceId;
-      const destinationId = destinationType === 'Wallet' ? values.sourceId : currentAsset.id;
+      const sourceId = sourceType === 'CoinsMarket' ? idCoins : values.sourceId;
+      const destinationId = destinationType === 'Wallet' ? values.sourceId : idCoins;
 
       return sendTransferRequest({ ...values, destinationType, sourceType, sourceId, destinationId})
     },
-    [destinationType, sourceType, currentAsset.id]
+    [destinationType, sourceType, idCoins]
   );
   const currentItem = wallets[0];
 

@@ -26,6 +26,7 @@ export const assetLoaderDataCreator = (): CoinsAsset => ({
   },
   color: getRandomColor(),
   id: "",
+  oefAssetId: "",
   description: "",
   provider: "Undefined",
   details: {
