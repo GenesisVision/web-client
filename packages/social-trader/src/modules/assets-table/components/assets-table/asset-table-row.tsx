@@ -13,7 +13,6 @@ import { CoinsAsset } from "gv-api-web";
 import { CurrencyItem } from "components/currency-item/currency-item";
 import { Row } from "components/row/row";
 import LineBuyButton from "modules/assets-table/components/buttons/line-buy-button";
-import LineSellButton from "modules/assets-table/components/buttons/line-sell-button";
 import { useAuth } from "hooks/auth.hook";
 
 interface Props {
@@ -99,7 +98,6 @@ const _AssetTableRow: React.FC<Props> = ({ asset }) => {
       {isAuthenticated && (<TableCell>
         <Row>
           <LineBuyButton asset={asset} />
-          <LineSellButton asset={asset} />
         </Row>
       </TableCell>)}
     </TableRow>
