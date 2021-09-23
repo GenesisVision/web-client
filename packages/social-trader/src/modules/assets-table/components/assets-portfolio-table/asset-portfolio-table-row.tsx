@@ -12,8 +12,9 @@ import { Row } from "components/row/row";
 import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import Tooltip from "components/tooltip/tooltip";
 import { TooltipContent } from "components/tooltip/tooltip-content";
-import LineSellButton from "modules/assets-table/components/buttons/line-sell-button";
-import LineBuyButton from "modules/assets-table/components/buttons/line-buy-button";
+import AssetBuy from "modules/assets-table/components/buttons/asset-buy.button";
+import AssetSell from "modules/assets-table/components/buttons/asset-sell.button";
+import { RowItem } from "components/row-item/row-item";
 
 interface Props {
   asset: CoinsAsset;
@@ -97,8 +98,16 @@ const _AssetPortfolioTableRow: React.FC<Props> = ({ asset, onApply }) => {
       </TableCell>
       <TableCell>
         <Row>
-          <LineBuyButton asset={asset} id={asset.oefAssetId} onApply={onApply} />
-          <LineSellButton asset={asset} id={asset.oefAssetId} onApply={onApply} />
+          <RowItem>
+            <AssetBuy
+              asset={asset}
+              id={asset.oefAssetId}
+              onApply={onApply}
+            />
+          </RowItem>
+          <RowItem>
+            <AssetSell asset={asset} id={asset.oefAssetId} onApply={onApply} />
+          </RowItem>
         </Row>
       </TableCell>
     </TableRow>

@@ -1,24 +1,18 @@
-import { CHIP_TYPE } from "components/chip/chip";
-import ChipButton from "components/chip/chip-button";
 import useIsOpen from "hooks/is-open.hook";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { CoinsAsset } from "gv-api-web";
 import AssetTransferPopup from "modules/assets-table/components/asset-transfer/asset-transfer-popup";
+import { Button } from "components/button/button";
 
 const _AssetBuy: React.FC<Props> = ({ asset, disabled, id, onApply }) => {
   const [isOpenPopup, setOpenPopup, setClosePopup] = useIsOpen();
   const [t] = useTranslation();
   return (
     <>
-      <ChipButton
-        disabled={disabled}
-        className={t("assets-page:buttons.buy")}
-        onClick={setOpenPopup}
-        size={"small"}
-        chipLabel={"+"}
-        type={CHIP_TYPE.POSITIVE}
-      />
+      <Button disabled={disabled} color="primary" onClick={setOpenPopup}>
+        {t("assets-page:buttons.buy")}
+      </Button>
       <AssetTransferPopup
         currentAsset={asset}
         idCoins={id}

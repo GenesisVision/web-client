@@ -12,8 +12,8 @@ import { mediaBreakpointLandscapePhone } from "utils/style/media";
 import { CoinsAsset } from "gv-api-web";
 import { CurrencyItem } from "components/currency-item/currency-item";
 import { Row } from "components/row/row";
-import LineBuyButton from "modules/assets-table/components/buttons/line-buy-button";
 import { useAuth } from "hooks/auth.hook";
+import AssetBuy from "modules/assets-table/components/buttons/asset-buy.button";
 
 interface Props {
   asset: CoinsAsset;
@@ -83,7 +83,7 @@ const _AssetTableRow: React.FC<Props> = ({ asset }) => {
         <Text wrap={false}>
           <NumberFormat
             value={formatCurrencyValue(
-              asset.change24Volume,
+              asset.totalVolume,
               "USD"
             )}
             thousandSeparator=" "
@@ -97,7 +97,10 @@ const _AssetTableRow: React.FC<Props> = ({ asset }) => {
       </ChartCell>
       {isAuthenticated && (<TableCell>
         <Row>
-          <LineBuyButton asset={asset} id={asset.id} />
+          <AssetBuy
+            asset={asset}
+            id={asset.id}
+          />
         </Row>
       </TableCell>)}
     </TableRow>
