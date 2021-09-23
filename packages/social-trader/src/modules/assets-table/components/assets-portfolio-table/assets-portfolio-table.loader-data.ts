@@ -7,7 +7,7 @@ import {
 
 const assetLoaderDataCreator = (): CoinsAsset => ({
   price: 0,
-  change24Volume: 0,
+  totalVolume: 0,
   marketCap: 0,
   asset: "GVT",
   name: "Genesis Vision",
