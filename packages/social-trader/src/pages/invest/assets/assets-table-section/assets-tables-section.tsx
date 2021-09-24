@@ -1,30 +1,37 @@
+import { DefaultTableBlock } from "components/default.block/default-table.block";
+import DetailsBlockTabs from "components/details/details-block-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
+import Link from "components/link/link";
+import {
+  GetItemsFuncActionType,
+  TableSelectorType
+} from "components/table/components/table.types";
 import dynamic from "next/dynamic";
+import useHashTab from "pages/wallet/services/hashTab.hook";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import { RootState } from "reducers/root-reducer";
-import DetailsBlockTabs from "components/details/details-block-tabs";
-import {
-  GetItemsFuncActionType,
-  TableSelectorType
-} from "components/table/components/table.types";
-import { DefaultTableBlock } from "components/default.block/default-table.block";
-import useHashTab from "pages/wallet/services/hashTab.hook";
-import Link from "components/link/link";
 import { GV_ASSETS_ROUTE } from "routes/invest.routes";
+import useDevelopmentFeature from "hooks/development-feature.hook";
 
 const AssetsCoins = dynamic(
   () => import("modules/assets-table/components/assets-table/assets-coins")
 );
 
 const AssetsPortfolio = dynamic(
-  () => import("modules/assets-table/components/assets-portfolio-table/assets-portfolio")
+  () =>
+    import(
+      "modules/assets-table/components/assets-portfolio-table/assets-portfolio"
+    )
 );
 
 const AssetsHistory = dynamic(
-  () => import("modules/assets-table/components/assets-history-table/assets-history")
+  () =>
+    import(
+      "modules/assets-table/components/assets-history-table/assets-history"
+    )
 );
 
 export enum ASSETS_TABS {
@@ -55,6 +62,7 @@ const _AssetsTradesSection: React.FC<Props> = ({
   const [t] = useTranslation();
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   const { tab } = useHashTab<ASSETS_TABS>(ASSETS_TABS.ASSETS);
+  const { isAvailableFeature } = useDevelopmentFeature();
 
   return (
     <DefaultTableBlock>
@@ -62,38 +70,29 @@ const _AssetsTradesSection: React.FC<Props> = ({
         <GVTab
           value={ASSETS_TABS.ASSETS}
           label={
-            <Link
-              noColor
-              to={`${GV_ASSETS_ROUTE}${ASSETS_TABS.ASSETS}`}
-            >
+            <Link noColor to={`${GV_ASSETS_ROUTE}${ASSETS_TABS.ASSETS}`}>
               {t("assets-page:tabs.assets")}
             </Link>
           }
-          visible={isAuthenticated}
+          visible={isAuthenticated && isAvailableFeature}
         />
         <GVTab
           value={ASSETS_TABS.PORTFOLIO}
           label={
-            <Link
-              noColor
-              to={`${GV_ASSETS_ROUTE}${ASSETS_TABS.PORTFOLIO}`}
-            >
+            <Link noColor to={`${GV_ASSETS_ROUTE}${ASSETS_TABS.PORTFOLIO}`}>
               {t("assets-page:tabs.portfolio")}
             </Link>
           }
-          visible={isAuthenticated}
+          visible={isAuthenticated && isAvailableFeature}
         />
         <GVTab
           value={ASSETS_TABS.HISTORY}
           label={
-            <Link
-              noColor
-              to={`${GV_ASSETS_ROUTE}${ASSETS_TABS.HISTORY}`}
-            >
+            <Link noColor to={`${GV_ASSETS_ROUTE}${ASSETS_TABS.HISTORY}`}>
               {t("assets-page:tabs.history")}
             </Link>
           }
-          visible={isAuthenticated}
+          visible={isAuthenticated && isAvailableFeature}
         />
       </DetailsBlockTabs>
       {(tab === ASSETS_TABS.ASSETS || !isAuthenticated) && (
