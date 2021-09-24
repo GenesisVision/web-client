@@ -44,6 +44,10 @@ export const InputImageImageContainer = styled.div`
   display: flex;
   align-content: center;
   justify-content: center;
+
+  img {
+    max-height: 160px;
+  }
 `;
 
 export const InputImageStyledText = styled(Text)<{
