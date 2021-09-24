@@ -10,7 +10,7 @@ import { mediaBreakpointTablet } from "utils/style/media";
 
 export const InputImageContainer = styled.div<{ error?: boolean }>`
   width: 200px;
-  height: 200px;
+  min-height: 200px;
   position: relative;
   border: 2px solid ${$separatorColor};
 
@@ -28,7 +28,7 @@ export const InputImageContainer = styled.div<{ error?: boolean }>`
     opacity: 0;
   }
 
-  ${mediaBreakpointTablet(`height: 210px;`)}
+  ${mediaBreakpointTablet(`min-height: 210px;`)}
   ${({ error }) => error && `border-color: ${$negativeColor};`}
 `;
 
@@ -39,7 +39,7 @@ export const InputImageDropZoneContent = styled.div`
 export const InputImageImageContainer = styled.div`
   padding: 20px;
   width: 100%;
-  height: 160px;
+  min-height: 160px;
   box-sizing: border-box;
   display: flex;
   align-content: center;
