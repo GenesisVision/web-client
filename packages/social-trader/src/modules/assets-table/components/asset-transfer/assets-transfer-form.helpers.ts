@@ -54,6 +54,7 @@ export interface IAssetsTransferFormProps {
   errorMessage?: string;
   title?: string;
   asset: CoinsAsset;
+  isRevert?: boolean;
 }
 
 export interface AssetsTransferFormValues {

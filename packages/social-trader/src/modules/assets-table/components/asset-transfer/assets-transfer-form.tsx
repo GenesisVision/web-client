@@ -1,12 +1,22 @@
+import { CurrencyItem } from "components/currency-item/currency-item";
+import { HookFormWalletField as WalletSelect } from "components/deposit/components/form-fields/wallet-field";
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogTop } from "components/dialog/dialog-top";
 import FormError from "components/form/form-error/form-error";
 import InputAmountField from "components/input-amount-field/hook-form-amount-field";
+import { LabeledValue } from "components/labeled-value/labeled-value";
 import { Row } from "components/row/row";
 import { SubmitButton } from "components/submit-button/submit-button";
 import { WalletItemType } from "components/wallet-select/wallet-select";
 import { useGetRate } from "hooks/get-rate.hook";
+import {
+  amountRules,
+  ASSETS_FORM_FIELDS,
+  AssetsTransferFormValues,
+  IAssetsTransferFormProps,
+  isAmountAllow
+} from "modules/assets-table/components/asset-transfer/assets-transfer-form.helpers";
 import {
   getItem,
   getTransferAll
@@ -17,19 +27,6 @@ import { useTranslation } from "react-i18next";
 import { formatCurrencyValue } from "utils/formatter";
 import { HookForm } from "utils/hook-form.helpers";
 
-import { HookFormWalletField as WalletSelect } from "components/deposit/components/form-fields/wallet-field";
-import { CurrencyItem } from "components/currency-item/currency-item";
-import {
-  amountRules,
-  AssetsTransferFormValues,
-  ASSETS_FORM_FIELDS,
-  IAssetsTransferFormProps,
-  isAmountAllow
-} from "modules/assets-table/components/asset-transfer/assets-transfer-form.helpers";
-import { Text } from "components/text/text";
-import { GvInputLabel } from "components/gv-input/gv-input-label";
-import { LabeledValue } from "components/labeled-value/labeled-value";
-
 const _AssetsTransferForm: React.FC<IAssetsTransferFormProps> = ({
   updateWallets,
   currentItemId,
@@ -37,7 +34,8 @@ const _AssetsTransferForm: React.FC<IAssetsTransferFormProps> = ({
   title,
   sourceItems,
   asset,
-  errorMessage
+  errorMessage,
+  isRevert = false
 }) => {
   const [t] = useTranslation();
 
@@ -96,33 +94,43 @@ const _AssetsTransferForm: React.FC<IAssetsTransferFormProps> = ({
     [sourceItems, onSubmit]
   );
 
+  const renderWalletSelect = useCallback(
+    () => (
+      <WalletSelect
+        onClickUpdate={updateWallets}
+        name={ASSETS_FORM_FIELDS.sourceId}
+        label={t("assets-page:popup.from")}
+        onChange={onChangeSourceId}
+        wallets={sourceItems}
+      />
+    ),
+    [sourceItems, updateWallets, onChangeSourceId]
+  );
+
+  const renderAsset = useCallback(
+    () => (
+      <LabeledValue label={t("assets-page:popup.asset")}>
+        <CurrencyItem
+          url={asset.url}
+          logo={asset.logoUrl}
+          name={asset.asset}
+          clickable={false}
+          small
+        />
+      </LabeledValue>
+    ),
+    [asset]
+  );
+
   return (
     <HookForm form={form} onSubmit={setValuesFromPropsAndSubmit}>
       <DialogTop title={title}>
         <Row size={"large"}>
-          {sourceItems && (
-            <WalletSelect
-              onClickUpdate={updateWallets}
-              name={ASSETS_FORM_FIELDS.sourceId}
-              label={t("assets-page:popup.from")}
-              onChange={onChangeSourceId}
-              wallets={sourceItems}
-            />
-          )}
+          {isRevert ? renderAsset() : renderWalletSelect()}
         </Row>
       </DialogTop>
       <DialogBottom>
-        <Row>
-          <LabeledValue label={t("assets-page:popup.asset")}>
-            <CurrencyItem
-              url={asset.url}
-              logo={asset.logoUrl}
-              name={asset.asset}
-              clickable={false}
-              small
-            />
-          </LabeledValue>
-        </Row>
+        <Row>{isRevert ? renderWalletSelect() : renderAsset()}</Row>
         <InputAmountField
           name={ASSETS_FORM_FIELDS.amount}
           label={t("assets-page:popup.amount")}

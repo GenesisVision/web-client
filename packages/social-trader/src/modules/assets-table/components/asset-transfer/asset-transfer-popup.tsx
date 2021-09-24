@@ -1,8 +1,7 @@
 import Dialog from "components/dialog/dialog";
+import { AssetsTransferProps } from "modules/assets-table/components/asset-transfer/assets-transfer-container";
 import dynamic from "next/dynamic";
 import * as React from "react";
-
-import { AssetsTransferProps } from "modules/assets-table/components/asset-transfer/assets-transfer-container";
 
 const AssetsTransferContainer = dynamic(
   () => import("./assets-transfer-container")
@@ -16,7 +15,8 @@ const _AssetTransferPopup: React.FC<Props> = ({
   title,
   sourceType,
   destinationType,
-  onApply
+  onApply,
+  isRevert
 }) => {
   return (
     <Dialog open={open} onClose={onClose!}>
@@ -28,6 +28,7 @@ const _AssetTransferPopup: React.FC<Props> = ({
         currentAsset={currentAsset}
         idCoins={idCoins}
         onApply={onApply}
+        isRevert={isRevert}
       />
     </Dialog>
   );

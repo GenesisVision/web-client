@@ -1,19 +1,18 @@
 import {
+  CoinsAsset,
   InternalTransferRequest,
-  InternalTransferRequestType,
-  CoinsAsset
+  InternalTransferRequestType
 } from "gv-api-web";
 import { useAccountCurrency } from "hooks/account-currency.hook";
 import useApiRequest from "hooks/api-request.hook";
+import AssetsTransferForm from "modules/assets-table/components/asset-transfer/assets-transfer-form";
+import { transferCoins } from "modules/assets-table/services/assets-table.service";
 import { updateWalletTimestampAction } from "pages/wallet/actions/wallet.actions";
 import { walletsSelector } from "pages/wallet/reducers/wallet.reducers";
 import { fetchWallets } from "pages/wallet/services/wallet.services";
 import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { postponeCallback } from "utils/hook-form.helpers";
-
-import AssetsTransferForm from "modules/assets-table/components/asset-transfer/assets-transfer-form";
-import { transferCoins } from "modules/assets-table/services/assets-table.service";
 
 export interface AssetsTransferProps {
   onApply?: VoidFunction;
@@ -24,6 +23,7 @@ export interface AssetsTransferProps {
   idCoins: string;
   successMessage?: string;
   currentAsset: CoinsAsset;
+  isRevert?: boolean;
 }
 
 const _AssetsTransferContainer: React.FC<AssetsTransferProps> = ({
@@ -34,7 +34,8 @@ const _AssetsTransferContainer: React.FC<AssetsTransferProps> = ({
   sourceType,
   destinationType,
   successMessage,
-  onClose
+  onClose,
+  isRevert
 }) => {
   const dispatch = useDispatch();
   const wallets = useSelector(walletsSelector);
@@ -52,10 +53,17 @@ const _AssetsTransferContainer: React.FC<AssetsTransferProps> = ({
   });
   const handleSubmit = useCallback(
     (values: InternalTransferRequest) => {
-      const sourceId = sourceType === 'CoinsMarket' ? idCoins : values.sourceId;
-      const destinationId = destinationType === 'Wallet' ? values.sourceId : idCoins;
+      const sourceId = sourceType === "CoinsMarket" ? idCoins : values.sourceId;
+      const destinationId =
+        destinationType === "Wallet" ? values.sourceId : idCoins;
 
-      return sendTransferRequest({ ...values, destinationType, sourceType, sourceId, destinationId})
+      return sendTransferRequest({
+        ...values,
+        destinationType,
+        sourceType,
+        sourceId,
+        destinationId
+      });
     },
     [destinationType, sourceType, idCoins]
   );
@@ -70,6 +78,7 @@ const _AssetsTransferContainer: React.FC<AssetsTransferProps> = ({
       errorMessage={errorMessage}
       onSubmit={handleSubmit}
       asset={currentAsset}
+      isRevert={isRevert}
     />
   );
 };

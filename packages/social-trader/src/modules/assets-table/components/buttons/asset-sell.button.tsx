@@ -23,6 +23,7 @@ const _AssetSell: React.FC<Props> = ({ disabled, asset, id, onApply }) => {
         sourceType={"CoinsMarket"}
         destinationType={"Wallet"}
         onApply={onApply}
+        isRevert
       />
     </>
   );
