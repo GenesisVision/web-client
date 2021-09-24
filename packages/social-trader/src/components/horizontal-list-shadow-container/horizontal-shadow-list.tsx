@@ -2,6 +2,8 @@ import { HorizontalListShadowContainer } from "components/horizontal-list-shadow
 import { useShadow } from "components/horizontal-list-shadow-container/shadow.hook";
 import React from "react";
 import styled from "styled-components";
+import { adaptivePadding } from "utils/style/mixins";
+import { $paddingXsmall } from "utils/style/sizes";
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   withScroll?: boolean;
@@ -13,6 +15,7 @@ const ListContainer = styled.div<{ withScroll?: boolean }>`
   overflow-x: scroll;
   width: 100%;
   scrollbar-width: 0;
+  ${adaptivePadding("bottom", $paddingXsmall)};
   &::-webkit-scrollbar {
     width: ${({ withScroll = true }) => (withScroll ? "6px" : 0)};
     height: ${({ withScroll = true }) => (withScroll ? "6px" : 0)};
