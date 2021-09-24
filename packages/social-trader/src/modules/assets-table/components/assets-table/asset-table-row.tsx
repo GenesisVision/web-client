@@ -1,19 +1,19 @@
+import { CurrencyItem } from "components/currency-item/currency-item";
 import Profitability from "components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "components/profitability/profitability.helper";
 import ProgramSimpleChart from "components/program-simple-chart/program-simple-chart";
+import { Row } from "components/row/row";
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import { Text } from "components/text/text";
+import { CoinsAsset } from "gv-api-web";
+import { useAuth } from "hooks/auth.hook";
+import AssetBuy from "modules/assets-table/components/buttons/asset-buy.button";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import styled from "styled-components";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
 import { mediaBreakpointLandscapePhone } from "utils/style/media";
-import { CoinsAsset } from "gv-api-web";
-import { CurrencyItem } from "components/currency-item/currency-item";
-import { Row } from "components/row/row";
-import { useAuth } from "hooks/auth.hook";
-import AssetBuy from "modules/assets-table/components/buttons/asset-buy.button";
 
 interface Props {
   asset: CoinsAsset;
@@ -37,18 +37,13 @@ const _AssetTableRow: React.FC<Props> = ({ asset }) => {
           small
         />
       </TableCell>
-      <TableCell>
-        {asset.name}
-      </TableCell>
+      <TableCell>{asset.name}</TableCell>
       <TableCell>
         <Text wrap={false}>
           <NumberFormat
-            value={formatCurrencyValue(
-              asset.price,
-              "USD"
-            )}
+            value={formatCurrencyValue(asset.price, "USD")}
             thousandSeparator=" "
-            suffix={` $`}
+            prefix={`$ `}
             displayType="text"
           />
         </Text>
@@ -69,12 +64,9 @@ const _AssetTableRow: React.FC<Props> = ({ asset }) => {
       <TableCell>
         <Text wrap={false}>
           <NumberFormat
-            value={formatCurrencyValue(
-              asset.marketCap,
-              "USD"
-            )}
+            value={formatCurrencyValue(asset.marketCap, "USD")}
             thousandSeparator=" "
-            suffix={` $`}
+            prefix={`$ `}
             displayType="text"
           />
         </Text>
@@ -82,12 +74,9 @@ const _AssetTableRow: React.FC<Props> = ({ asset }) => {
       <TableCell>
         <Text wrap={false}>
           <NumberFormat
-            value={formatCurrencyValue(
-              asset.totalVolume,
-              "USD"
-            )}
+            value={formatCurrencyValue(asset.totalVolume, "USD")}
             thousandSeparator=" "
-            suffix={` $`}
+            prefix={`$ `}
             displayType="text"
           />
         </Text>
@@ -95,14 +84,13 @@ const _AssetTableRow: React.FC<Props> = ({ asset }) => {
       <ChartCell height={"small"}>
         <ProgramSimpleChart data={asset?.chart?.chart} />
       </ChartCell>
-      {isAuthenticated && (<TableCell>
-        <Row>
-          <AssetBuy
-            asset={asset}
-            id={asset.id}
-          />
-        </Row>
-      </TableCell>)}
+      {isAuthenticated && (
+        <TableCell>
+          <Row>
+            <AssetBuy asset={asset} id={asset.id} />
+          </Row>
+        </TableCell>
+      )}
     </TableRow>
   );
 };

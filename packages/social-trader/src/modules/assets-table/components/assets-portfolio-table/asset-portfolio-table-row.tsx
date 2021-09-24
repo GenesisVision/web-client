@@ -1,20 +1,20 @@
 import { CurrencyItem } from "components/currency-item/currency-item";
+import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import Profitability from "components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "components/profitability/profitability.helper";
+import { Row } from "components/row/row";
+import { RowItem } from "components/row-item/row-item";
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import { Text } from "components/text/text";
+import Tooltip from "components/tooltip/tooltip";
+import { TooltipContent } from "components/tooltip/tooltip-content";
 import { CoinsAsset } from "gv-api-web";
+import AssetBuy from "modules/assets-table/components/buttons/asset-buy.button";
+import AssetSell from "modules/assets-table/components/buttons/asset-sell.button";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
-import { Row } from "components/row/row";
-import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
-import Tooltip from "components/tooltip/tooltip";
-import { TooltipContent } from "components/tooltip/tooltip-content";
-import AssetBuy from "modules/assets-table/components/buttons/asset-buy.button";
-import AssetSell from "modules/assets-table/components/buttons/asset-sell.button";
-import { RowItem } from "components/row-item/row-item";
 
 interface Props {
   asset: CoinsAsset;
@@ -37,7 +37,7 @@ const _AssetPortfolioTableRow: React.FC<Props> = ({ asset, onApply }) => {
         <Text wrap={false}>
           <NumberFormat
             value={formatCurrencyValue(asset.price, "USD")}
-            suffix={` $`}
+            prefix={`$ `}
             thousandSeparator=" "
             displayType="text"
           />
@@ -58,16 +58,19 @@ const _AssetPortfolioTableRow: React.FC<Props> = ({ asset, onApply }) => {
       </TableCell>
       <TableCell>
         <Text wrap={false}>
-          <Tooltip horizontal={HORIZONTAL_POPOVER_POS.LEFT} render={() => (
-            <TooltipContent>
-              <NumberFormat
-                value={formatCurrencyValue(asset.amount * asset.price, "USD")}
-                suffix={` $`}
-                thousandSeparator=" "
-                displayType="text"
-              />
-            </TooltipContent>
-          )}>
+          <Tooltip
+            horizontal={HORIZONTAL_POPOVER_POS.LEFT}
+            render={() => (
+              <TooltipContent>
+                <NumberFormat
+                  value={formatCurrencyValue(asset.amount * asset.price, "USD")}
+                  prefix={`$ `}
+                  thousandSeparator=" "
+                  displayType="text"
+                />
+              </TooltipContent>
+            )}
+          >
             <NumberFormat
               value={asset.amount}
               thousandSeparator=" "
@@ -80,7 +83,7 @@ const _AssetPortfolioTableRow: React.FC<Props> = ({ asset, onApply }) => {
         <Text wrap={false}>
           <NumberFormat
             value={formatCurrencyValue(asset.averagePrice, "USD")}
-            suffix={` $`}
+            prefix={`$ `}
             thousandSeparator=" "
             displayType="text"
           />
@@ -90,7 +93,7 @@ const _AssetPortfolioTableRow: React.FC<Props> = ({ asset, onApply }) => {
         <Text wrap={false}>
           <NumberFormat
             value={formatCurrencyValue(asset.profitCurrent, "USD")}
-            suffix={` $`}
+            prefix={`$ `}
             thousandSeparator=" "
             displayType="text"
           />
@@ -99,11 +102,7 @@ const _AssetPortfolioTableRow: React.FC<Props> = ({ asset, onApply }) => {
       <TableCell>
         <Row>
           <RowItem>
-            <AssetBuy
-              asset={asset}
-              id={asset.oefAssetId}
-              onApply={onApply}
-            />
+            <AssetBuy asset={asset} id={asset.oefAssetId} onApply={onApply} />
           </RowItem>
           <RowItem>
             <AssetSell asset={asset} id={asset.oefAssetId} onApply={onApply} />
