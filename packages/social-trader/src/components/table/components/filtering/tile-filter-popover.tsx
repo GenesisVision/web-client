@@ -34,6 +34,10 @@ const Header = styled(Center)`
   min-width: 200px;
 `;
 
+const GVTextFieldStyled = styled(GVTextField)`
+  min-width: 170px;
+`;
+
 const _TileFilterPopover: React.FC<Props<any>> = ({
   tabCountField,
   tabs,
@@ -83,8 +87,8 @@ const _TileFilterPopover: React.FC<Props<any>> = ({
                   count={
                     tabCountField
                       ? filteredItems.filter(
-                        item => item[tabCountField] === tab
-                      ).length
+                          item => item[tabCountField] === tab
+                        ).length
                       : undefined
                   }
                   value={tab}
@@ -95,7 +99,7 @@ const _TileFilterPopover: React.FC<Props<any>> = ({
           </RowItem>
         )}
         <RowItem>
-          <GVTextField
+          <GVTextFieldStyled
             name="queryValue"
             placeholder={placeholder}
             autoComplete="off"
