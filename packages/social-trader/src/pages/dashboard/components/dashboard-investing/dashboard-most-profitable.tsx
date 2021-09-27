@@ -4,6 +4,18 @@ import { DashboardTradingAsset } from "gv-api-web";
 import DashboardHorizontalList from "pages/dashboard/components/dashboard-block/dashboard-horizontal-list";
 import DashboardPublicCard from "pages/dashboard/components/dashboard-trading/dashboard-public-card";
 import React from "react";
+import { mediaBreakpointLandscapePhone } from "utils/style/media";
+import styled from "styled-components";
+
+const RowItemStyled = styled(RowItem)`
+  min-width: 256px;
+  width: calc(100vw - 64px);
+  flex: 0 0 auto;
+  ${mediaBreakpointLandscapePhone(`
+    min-width: 312px;
+    width: auto;
+  `)};
+`;
 
 const _DashboardInvestingMostProfitable: React.FC<Props> = ({
   onApply,
@@ -12,7 +24,7 @@ const _DashboardInvestingMostProfitable: React.FC<Props> = ({
   return (
     <DashboardHorizontalList>
       {data.map((asset: DashboardTradingAsset) => (
-        <RowItem>
+        <RowItemStyled>
           <DashboardPublicCard
             withOffset={false}
             showWithdraw={false}
@@ -20,7 +32,7 @@ const _DashboardInvestingMostProfitable: React.FC<Props> = ({
             updateItems={onApply}
             asset={asset}
           />
-        </RowItem>
+        </RowItemStyled>
       ))}
     </DashboardHorizontalList>
   );

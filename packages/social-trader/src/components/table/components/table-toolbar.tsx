@@ -16,6 +16,7 @@ import {
   UpdateFilterFunc,
   UpdateSortingFuncType
 } from "./table.types";
+import { mediaBreakpointLandscapePhone } from "utils/style/media";
 
 const $viewSvgSize = 15;
 
@@ -28,7 +29,11 @@ const TableTitle = styled.h3`
 const TableToolbarContainer = styled(Row)`
   width: 100%;
   justify-content: space-between;
+  flex-wrap: wrap;
   ${horizontalPaddings($paddingSmall)};
+  ${mediaBreakpointLandscapePhone(`
+    flex-wrap: nowrap;
+  `)};
 `;
 const TableToggle = styled(Row)`
   justify-content: space-between;
@@ -43,8 +48,9 @@ const TableToggleIcon = styled.div`
   }
 `;
 
-const _TableToolbar: React.FC<ITableToolbarExternalProps &
-  ITableToolbarInnerProps> = ({
+const _TableToolbar: React.FC<
+  ITableToolbarExternalProps & ITableToolbarInnerProps
+> = ({
   onChange,
   disableTitle,
   createButtonToolbar,
