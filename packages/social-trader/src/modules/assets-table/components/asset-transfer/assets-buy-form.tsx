@@ -27,22 +27,23 @@ import { useTranslation } from "react-i18next";
 import { formatCurrencyValue } from "utils/formatter";
 import { HookForm } from "utils/hook-form.helpers";
 
-const _AssetsTransferForm: React.FC<IAssetsTransferFormProps> = ({
+const _AssetsBuyForm: React.FC<IAssetsTransferFormProps> = ({
   updateWallets,
-  currentItemId,
   onSubmit,
-  title,
-  sourceItems,
+  walletId,
+  coinsId,
+  sourceType,
+  destinationType,
+  wallets,
   asset,
-  errorMessage,
-  isRevert = false
+  errorMessage
 }) => {
   const [t] = useTranslation();
 
   const form = useForm<AssetsTransferFormValues>({
     defaultValues: {
       [ASSETS_FORM_FIELDS.amount]: "",
-      [ASSETS_FORM_FIELDS.sourceId]: currentItemId
+      [ASSETS_FORM_FIELDS.sourceId]: walletId
     },
     mode: "onChange"
   });
@@ -50,8 +51,8 @@ const _AssetsTransferForm: React.FC<IAssetsTransferFormProps> = ({
   const { sourceId, amount } = watch();
 
   const selectedItem = useMemo(
-    (): WalletItemType => getItem(sourceItems, sourceId),
-    [sourceItems, sourceId]
+    (): WalletItemType => getItem(wallets, sourceId),
+    [wallets, sourceId]
   );
 
   const formattedAvailableSourceItem = formatCurrencyValue(
@@ -79,58 +80,49 @@ const _AssetsTransferForm: React.FC<IAssetsTransferFormProps> = ({
         [ASSETS_FORM_FIELDS.sourceId]: id
       });
     },
-    [sourceItems, reset]
+    [wallets, reset]
   );
 
   const setValuesFromPropsAndSubmit = useCallback(
     values => {
       const { amount, sourceId } = values;
-      const transferAll = getTransferAll({ amount, sourceId }, sourceItems);
+      const transferAll = getTransferAll({ amount, sourceId }, wallets);
       return onSubmit({
         ...values,
-        [ASSETS_FORM_FIELDS.transferAll]: transferAll
+        [ASSETS_FORM_FIELDS.transferAll]: transferAll,
+        [ASSETS_FORM_FIELDS.destinationId]: coinsId,
+        [ASSETS_FORM_FIELDS.destinationType]: destinationType,
+        [ASSETS_FORM_FIELDS.sourceType]: sourceType
       });
     },
-    [sourceItems, onSubmit]
-  );
-
-  const renderWalletSelect = useCallback(
-    () => (
-      <WalletSelect
-        onClickUpdate={updateWallets}
-        name={ASSETS_FORM_FIELDS.sourceId}
-        label={t("assets-page:popup.from")}
-        onChange={onChangeSourceId}
-        wallets={sourceItems}
-      />
-    ),
-    [sourceItems, updateWallets, onChangeSourceId]
-  );
-
-  const renderAsset = useCallback(
-    () => (
-      <LabeledValue label={t("assets-page:popup.asset")}>
-        <CurrencyItem
-          url={asset.url}
-          logo={asset.logoUrl}
-          name={asset.asset}
-          clickable={false}
-          small
-        />
-      </LabeledValue>
-    ),
-    [asset]
+    [wallets, onSubmit]
   );
 
   return (
     <HookForm form={form} onSubmit={setValuesFromPropsAndSubmit}>
-      <DialogTop title={title}>
+      <DialogTop title={t("assets-page:popup.buy-title")}>
         <Row size={"large"}>
-          {isRevert ? renderAsset() : renderWalletSelect()}
+          <WalletSelect
+            onClickUpdate={updateWallets}
+            name={ASSETS_FORM_FIELDS.sourceId}
+            label={t("assets-page:popup.from")}
+            onChange={onChangeSourceId}
+            wallets={wallets}
+          />
         </Row>
       </DialogTop>
       <DialogBottom>
-        <Row>{isRevert ? renderWalletSelect() : renderAsset()}</Row>
+        <Row>
+          <LabeledValue label={t("assets-page:popup.asset")}>
+            <CurrencyItem
+              url={asset.url}
+              logo={asset.logoUrl}
+              name={asset.asset}
+              clickable={false}
+              small
+            />
+          </LabeledValue>
+        </Row>
         <InputAmountField
           name={ASSETS_FORM_FIELDS.amount}
           label={t("assets-page:popup.amount")}
@@ -164,5 +156,5 @@ const _AssetsTransferForm: React.FC<IAssetsTransferFormProps> = ({
   );
 };
 
-const AssetsTransferForm = React.memo(_AssetsTransferForm);
-export default AssetsTransferForm;
+const AssetsBuyForm = React.memo(_AssetsBuyForm);
+export default AssetsBuyForm;
