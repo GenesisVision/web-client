@@ -16,14 +16,11 @@ const _AssetSell: React.FC<Props> = ({ disabled, asset, id, onApply }) => {
       </Button>
       <AssetTransferPopup
         currentAsset={asset}
-        idCoins={id}
+        coinsId={id}
         onClose={setClosePopup}
         open={isOpenPopup}
-        title={t("assets-page:popup.sell-title")}
-        sourceType={"CoinsMarket"}
-        destinationType={"Wallet"}
         onApply={onApply}
-        isRevert
+        isSell
       />
     </>
   );

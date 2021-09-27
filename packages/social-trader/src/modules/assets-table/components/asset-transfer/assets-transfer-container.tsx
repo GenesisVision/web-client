@@ -1,11 +1,8 @@
-import {
-  CoinsAsset,
-  InternalTransferRequest,
-  InternalTransferRequestType
-} from "gv-api-web";
+import { CoinsAsset, InternalTransferRequest } from "gv-api-web";
 import { useAccountCurrency } from "hooks/account-currency.hook";
 import useApiRequest from "hooks/api-request.hook";
-import AssetsTransferForm from "modules/assets-table/components/asset-transfer/assets-transfer-form";
+import AssetsBuyForm from "modules/assets-table/components/asset-transfer/assets-buy-form";
+import AssetsSellForm from "modules/assets-table/components/asset-transfer/assets-sell-form";
 import { transferCoins } from "modules/assets-table/services/assets-table.service";
 import { updateWalletTimestampAction } from "pages/wallet/actions/wallet.actions";
 import { walletsSelector } from "pages/wallet/reducers/wallet.reducers";
@@ -17,25 +14,19 @@ import { postponeCallback } from "utils/hook-form.helpers";
 export interface AssetsTransferProps {
   onApply?: VoidFunction;
   onClose?: VoidFunction;
-  sourceType: InternalTransferRequestType;
-  destinationType: InternalTransferRequestType;
-  title?: string;
-  idCoins: string;
+  coinsId: string;
   successMessage?: string;
   currentAsset: CoinsAsset;
-  isRevert?: boolean;
+  isSell?: boolean;
 }
 
 const _AssetsTransferContainer: React.FC<AssetsTransferProps> = ({
   currentAsset,
-  idCoins,
+  coinsId,
   onApply,
-  title,
-  sourceType,
-  destinationType,
   successMessage,
   onClose,
-  isRevert
+  isSell
 }) => {
   const dispatch = useDispatch();
   const wallets = useSelector(walletsSelector);
@@ -52,33 +43,34 @@ const _AssetsTransferContainer: React.FC<AssetsTransferProps> = ({
     request: transferCoins
   });
   const handleSubmit = useCallback(
-    (values: InternalTransferRequest) => {
-      const sourceId = sourceType === "CoinsMarket" ? idCoins : values.sourceId;
-      const destinationId =
-        destinationType === "Wallet" ? values.sourceId : idCoins;
-
-      return sendTransferRequest({
-        ...values,
-        destinationType,
-        sourceType,
-        sourceId,
-        destinationId
-      });
-    },
-    [destinationType, sourceType, idCoins]
+    (values: InternalTransferRequest) => sendTransferRequest(values),
+    []
   );
   const currentItem = wallets[0];
 
-  return (
-    <AssetsTransferForm
+  return isSell ? (
+    <AssetsSellForm
       updateWallets={updateWalletMiddleware}
-      sourceItems={wallets}
-      title={title}
-      currentItemId={currentItem.id}
+      wallets={wallets}
+      coinsId={coinsId}
+      sourceType={"CoinsMarket"}
+      destinationType={"Wallet"}
+      walletId={currentItem.id}
       errorMessage={errorMessage}
       onSubmit={handleSubmit}
       asset={currentAsset}
-      isRevert={isRevert}
+    />
+  ) : (
+    <AssetsBuyForm
+      updateWallets={updateWalletMiddleware}
+      wallets={wallets}
+      walletId={currentItem.id}
+      sourceType={"Wallet"}
+      destinationType={"CoinsMarket"}
+      coinsId={coinsId}
+      errorMessage={errorMessage}
+      onSubmit={handleSubmit}
+      asset={currentAsset}
     />
   );
 };

@@ -9,26 +9,20 @@ const AssetsTransferContainer = dynamic(
 
 const _AssetTransferPopup: React.FC<Props> = ({
   currentAsset,
-  idCoins,
+  coinsId,
   onClose,
   open,
-  title,
-  sourceType,
-  destinationType,
   onApply,
-  isRevert
+  isSell
 }) => {
   return (
     <Dialog open={open} onClose={onClose!}>
       <AssetsTransferContainer
-        title={title}
         onClose={onClose}
-        sourceType={sourceType}
-        destinationType={destinationType}
         currentAsset={currentAsset}
-        idCoins={idCoins}
+        coinsId={coinsId}
         onApply={onApply}
-        isRevert={isRevert}
+        isSell={isSell}
       />
     </Dialog>
   );
