@@ -14,6 +14,7 @@ import NumberFormat from "react-number-format";
 import styled from "styled-components";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
 import { mediaBreakpointLandscapePhone } from "utils/style/media";
+import useDevelopmentFeature from "hooks/development-feature.hook";
 
 interface Props {
   asset: CoinsAsset;
@@ -27,6 +28,7 @@ const ChartCell = styled(TableCell)`
 
 const _AssetTableRow: React.FC<Props> = ({ asset }) => {
   const { isAuthenticated } = useAuth();
+  const { isAvailableFeature } = useDevelopmentFeature();
   return (
     <TableRow>
       <TableCell>
@@ -84,7 +86,7 @@ const _AssetTableRow: React.FC<Props> = ({ asset }) => {
       <ChartCell height={"small"}>
         <ProgramSimpleChart data={asset?.chart?.chart} />
       </ChartCell>
-      {isAuthenticated && (
+      {isAuthenticated && isAvailableFeature && (
         <TableCell>
           <Row>
             <AssetBuy asset={asset} id={asset.id} />

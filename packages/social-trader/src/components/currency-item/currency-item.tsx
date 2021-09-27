@@ -30,6 +30,7 @@ export interface ICurrencyItemProps extends ThemePropsType {
   small?: boolean;
   logo?: string;
   name?: string | CurrencyEnum;
+  amount?: number;
 }
 
 const Icon = styled(RowItem)<{ small?: boolean }>`
@@ -85,6 +86,11 @@ const Rate = styled.div<ThemePropsType>`
   ${themeStyle};
 `;
 
+const Amount = styled.span<ThemePropsType>`
+  ${themeStyle};
+  opacity: 0.6;
+`;
+
 const _CurrencyItem: React.FC<ICurrencyItemProps> = ({
   url,
   symbol,
@@ -93,6 +99,7 @@ const _CurrencyItem: React.FC<ICurrencyItemProps> = ({
   logo,
   name,
   small,
+  amount,
   theme = Themes.DARK,
   clickable = true,
   showTitle = true
@@ -117,9 +124,15 @@ const _CurrencyItem: React.FC<ICurrencyItemProps> = ({
         {name && (
           <RowItem>
             {big ? (
-              <BigName theme={theme}>{name}</BigName>
+              <BigName theme={theme}>
+                {name}
+                {amount && <Amount> {amount}</Amount>}
+              </BigName>
             ) : (
-              <Name theme={theme}>{name}</Name>
+              <Name theme={theme}>
+                {name}
+                {amount && <Amount> {amount}</Amount>}
+              </Name>
             )}
             {rate && <Rate theme={theme}>{rateString}</Rate>}
           </RowItem>

@@ -1,9 +1,8 @@
+import { ItemsType } from "components/wallet-select/wallet-select";
 import {
-  ItemsType,
-} from "components/wallet-select/wallet-select";
-import {
+  CoinsAsset,
   InternalTransferRequest,
-  CoinsAsset
+  InternalTransferRequestType
 } from "gv-api-web";
 import { TFunction } from "i18next";
 import { NumberFormatValues } from "react-number-format";
@@ -14,6 +13,7 @@ export enum ASSETS_FORM_FIELDS {
   sourceId = "sourceId",
   sourceType = "sourceType",
   destinationType = "destinationType",
+  destinationId = "destinationId",
   amount = "amount",
   transferAll = "transferAll"
 }
@@ -36,7 +36,7 @@ export const amountRules = ({
 }: {
   t: TFunction;
   available: number;
-  currency: CurrencyEnum;
+  currency: string | CurrencyEnum;
 }) => ({
   validate: (value: number) =>
     value === 0 ? t("validations.greater-zero") : true,
@@ -48,15 +48,18 @@ export const amountRules = ({
 
 export interface IAssetsTransferFormProps {
   updateWallets?: VoidFunction;
-  sourceItems: ItemsType;
+  wallets: ItemsType;
   onSubmit: (values: InternalTransferRequest) => void;
-  currentItemId?: string;
   errorMessage?: string;
-  title?: string;
   asset: CoinsAsset;
+  coinsId: string;
+  walletId: string;
+  sourceType: InternalTransferRequestType;
+  destinationType: InternalTransferRequestType;
 }
 
 export interface AssetsTransferFormValues {
   sourceId: string;
+  destinationId: string;
   amount: string | number;
 }

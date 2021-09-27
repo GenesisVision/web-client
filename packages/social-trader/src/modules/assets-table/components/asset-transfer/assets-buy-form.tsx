@@ -1,12 +1,22 @@
+import { CurrencyItem } from "components/currency-item/currency-item";
+import { HookFormWalletField as WalletSelect } from "components/deposit/components/form-fields/wallet-field";
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
 import { DialogTop } from "components/dialog/dialog-top";
 import FormError from "components/form/form-error/form-error";
 import InputAmountField from "components/input-amount-field/hook-form-amount-field";
+import { LabeledValue } from "components/labeled-value/labeled-value";
 import { Row } from "components/row/row";
 import { SubmitButton } from "components/submit-button/submit-button";
 import { WalletItemType } from "components/wallet-select/wallet-select";
 import { useGetRate } from "hooks/get-rate.hook";
+import {
+  amountRules,
+  ASSETS_FORM_FIELDS,
+  AssetsTransferFormValues,
+  IAssetsTransferFormProps,
+  isAmountAllow
+} from "modules/assets-table/components/asset-transfer/assets-transfer-form.helpers";
 import {
   getItem,
   getTransferAll
@@ -17,25 +27,14 @@ import { useTranslation } from "react-i18next";
 import { formatCurrencyValue } from "utils/formatter";
 import { HookForm } from "utils/hook-form.helpers";
 
-import { HookFormWalletField as WalletSelect } from "components/deposit/components/form-fields/wallet-field";
-import { CurrencyItem } from "components/currency-item/currency-item";
-import {
-  amountRules,
-  AssetsTransferFormValues,
-  ASSETS_FORM_FIELDS,
-  IAssetsTransferFormProps,
-  isAmountAllow
-} from "modules/assets-table/components/asset-transfer/assets-transfer-form.helpers";
-import { Text } from "components/text/text";
-import { GvInputLabel } from "components/gv-input/gv-input-label";
-import { LabeledValue } from "components/labeled-value/labeled-value";
-
-const _AssetsTransferForm: React.FC<IAssetsTransferFormProps> = ({
+const _AssetsBuyForm: React.FC<IAssetsTransferFormProps> = ({
   updateWallets,
-  currentItemId,
   onSubmit,
-  title,
-  sourceItems,
+  walletId,
+  coinsId,
+  sourceType,
+  destinationType,
+  wallets,
   asset,
   errorMessage
 }) => {
@@ -44,7 +43,7 @@ const _AssetsTransferForm: React.FC<IAssetsTransferFormProps> = ({
   const form = useForm<AssetsTransferFormValues>({
     defaultValues: {
       [ASSETS_FORM_FIELDS.amount]: "",
-      [ASSETS_FORM_FIELDS.sourceId]: currentItemId
+      [ASSETS_FORM_FIELDS.sourceId]: walletId
     },
     mode: "onChange"
   });
@@ -52,8 +51,8 @@ const _AssetsTransferForm: React.FC<IAssetsTransferFormProps> = ({
   const { sourceId, amount } = watch();
 
   const selectedItem = useMemo(
-    (): WalletItemType => getItem(sourceItems, sourceId),
-    [sourceItems, sourceId]
+    (): WalletItemType => getItem(wallets, sourceId),
+    [wallets, sourceId]
   );
 
   const formattedAvailableSourceItem = formatCurrencyValue(
@@ -81,34 +80,35 @@ const _AssetsTransferForm: React.FC<IAssetsTransferFormProps> = ({
         [ASSETS_FORM_FIELDS.sourceId]: id
       });
     },
-    [sourceItems, reset]
+    [wallets, reset]
   );
 
   const setValuesFromPropsAndSubmit = useCallback(
     values => {
       const { amount, sourceId } = values;
-      const transferAll = getTransferAll({ amount, sourceId }, sourceItems);
+      const transferAll = getTransferAll({ amount, sourceId }, wallets);
       return onSubmit({
         ...values,
-        [ASSETS_FORM_FIELDS.transferAll]: transferAll
+        [ASSETS_FORM_FIELDS.transferAll]: transferAll,
+        [ASSETS_FORM_FIELDS.destinationId]: coinsId,
+        [ASSETS_FORM_FIELDS.destinationType]: destinationType,
+        [ASSETS_FORM_FIELDS.sourceType]: sourceType
       });
     },
-    [sourceItems, onSubmit]
+    [wallets, onSubmit]
   );
 
   return (
     <HookForm form={form} onSubmit={setValuesFromPropsAndSubmit}>
-      <DialogTop title={title}>
+      <DialogTop title={t("assets-page:popup.buy-title")}>
         <Row size={"large"}>
-          {sourceItems && (
-            <WalletSelect
-              onClickUpdate={updateWallets}
-              name={ASSETS_FORM_FIELDS.sourceId}
-              label={t("assets-page:popup.from")}
-              onChange={onChangeSourceId}
-              wallets={sourceItems}
-            />
-          )}
+          <WalletSelect
+            onClickUpdate={updateWallets}
+            name={ASSETS_FORM_FIELDS.sourceId}
+            label={t("assets-page:popup.from")}
+            onChange={onChangeSourceId}
+            wallets={wallets}
+          />
         </Row>
       </DialogTop>
       <DialogBottom>
@@ -156,5 +156,5 @@ const _AssetsTransferForm: React.FC<IAssetsTransferFormProps> = ({
   );
 };
 
-const AssetsTransferForm = React.memo(_AssetsTransferForm);
-export default AssetsTransferForm;
+const AssetsBuyForm = React.memo(_AssetsBuyForm);
+export default AssetsBuyForm;
