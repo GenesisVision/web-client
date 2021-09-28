@@ -47,6 +47,7 @@ export const tableCellFirstOffsetStyle = css`
 
 const TableCell = styled.td<Props>`
   ${tableCellStyle};
+  white-space: normal;
 
   ${({ firstOffset = true }) => {
     if (firstOffset) return tableCellFirstOffsetStyle;
