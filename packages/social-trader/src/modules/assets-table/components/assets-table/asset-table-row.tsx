@@ -28,7 +28,7 @@ const ChartCell = styled(TableCell)`
 
 const _AssetTableRow: React.FC<Props> = ({ asset }) => {
   const { isAuthenticated } = useAuth();
-  const { isAvailableFeature } = useDevelopmentFeature();
+  const { isAvailableFeature } = useDevelopmentFeature(true);
   return (
     <TableRow>
       <TableCell>

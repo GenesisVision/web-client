@@ -62,7 +62,7 @@ const _AssetsTradesSection: React.FC<Props> = ({
   const [t] = useTranslation();
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   const { tab } = useHashTab<ASSETS_TABS>(ASSETS_TABS.ASSETS);
-  const { isAvailableFeature } = useDevelopmentFeature();
+  const { isAvailableFeature } = useDevelopmentFeature(true);
 
   return (
     <DefaultTableBlock>
