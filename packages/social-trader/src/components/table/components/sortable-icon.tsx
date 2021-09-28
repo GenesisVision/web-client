@@ -2,6 +2,7 @@ import { SORTING_DIRECTION } from "components/table/helpers/sorting.helpers";
 import React from "react";
 import styled, { css } from "styled-components";
 import { transition } from "utils/style/mixins";
+import { mediaBreakpointLandscapePhone } from "utils/style/media";
 
 interface Props {
   className?: string;
@@ -10,7 +11,7 @@ interface Props {
 
 const sortableBorderIcon = css`
   position: absolute;
-  right: -15px;
+  right: 0;
   bottom: 3px;
   content: "";
   border-top: 1px solid white;
@@ -18,7 +19,10 @@ const sortableBorderIcon = css`
 
 export const SortableIcon = styled.span<Props>`
   cursor: pointer;
-  padding-right: 10px;
+  padding-right: 15px;
+  ${mediaBreakpointLandscapePhone(`
+     padding-right: 25px;
+  `)}
   span {
     opacity: 1;
   }

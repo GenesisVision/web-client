@@ -2,11 +2,11 @@ import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import { Row } from "components/row/row";
 import DateRangeFilter from "components/table/components/filtering/date-range-filter/date-range-filter";
 import { DATE_RANGE_FILTER_NAME } from "components/table/components/filtering/date-range-filter/date-range-filter.constants";
-import TableContainer from "components/table/components/table-container";
 import {
   GetItemsFuncActionType,
   TableSelectorType
 } from "components/table/components/table.types";
+import TableContainer from "components/table/components/table-container";
 import { DEFAULT_PAGING } from "components/table/reducers/table-paging.reducer";
 import { Text } from "components/text/text";
 import Tooltip from "components/tooltip/tooltip";
@@ -47,7 +47,9 @@ const _ProgramTrades: React.FC<Props> = ({
   const delay = data && data.tradesDelay ? data.tradesDelay : "None";
   const renderCell = useCallback(
     (name: string) => (
-      <Text>{t(`program-details-page:history.trades.${name}`)}</Text>
+      <Text wrap={false}>
+        {t(`program-details-page:history.trades.${name}`)}
+      </Text>
     ),
     []
   );
