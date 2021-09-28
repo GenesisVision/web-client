@@ -30,8 +30,8 @@ const _InvestmentFundControls: React.FC<Props> = ({
     <DefaultBlock size={"large"} bordered>
       <InvestmentFundInfo fundDescription={fundDescription} />
       <Row>
-        <DetailsStatisticContainer>
-          <RowItem>
+        <DetailsStatisticContainer isMobileWrap>
+          <RowItem bottomOffset>
             <DepositButton
               renderAssetPopup={renderAssetPopup}
               infoMessage={hasTradingSchedule ? infoMessage : undefined}
@@ -46,7 +46,7 @@ const _InvestmentFundControls: React.FC<Props> = ({
             />
           </RowItem>
           {platformData?.assetInfo.anonymousInfo.isInvestingBscEnabled && (
-            <RowItem>
+            <RowItem bottomOffset>
               <BSCInvestingButton
                 currency={"BNB"}
                 assetIndex={fundDescription.publicInfo.index}
@@ -54,7 +54,7 @@ const _InvestmentFundControls: React.FC<Props> = ({
             </RowItem>
           )}
           {platformData?.assetInfo.anonymousInfo.isInvestingXDaiEnabled && (
-            <RowItem>
+            <RowItem bottomOffset>
               <BSCInvestingButton
                 currency={"DAI"}
                 assetIndex={fundDescription.publicInfo.index}

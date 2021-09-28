@@ -8,17 +8,35 @@ import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import {
   mediaBreakpointDesktop,
+  mediaBreakpointLandscapePhone,
   mediaBreakpointTablet
 } from "utils/style/media";
-import { fontSize } from "utils/style/mixins";
-import { $fontSizeParagraph, $paddingSmall } from "utils/style/sizes";
+import { adaptiveMargin, fontSize } from "utils/style/mixins";
+import {
+  $fontSizeParagraph,
+  $paddingSmall,
+  $paddingXsmall
+} from "utils/style/sizes";
 
-export const DetailsStatisticContainer = styled.div`
+interface IDetailsStatisticContainerProps {
+  isMobileWrap?: boolean;
+}
+
+export const DetailsStatisticContainer = styled.div<IDetailsStatisticContainerProps>`
   display: inline-flex;
   box-sizing: border-box;
   flex-grow: 1;
   min-width: 100%;
   ${mediaBreakpointDesktop(`min-width: auto;`)}
+  ${({ isMobileWrap }: IDetailsStatisticContainerProps) =>
+    isMobileWrap &&
+    `
+     flex-wrap: wrap;
+    ${adaptiveMargin("bottom", -$paddingXsmall)};
+     ${mediaBreakpointLandscapePhone(`
+      flex-wrap: nowrap;
+    `)};
+   `};
 `;
 export const DetailsPerformanceDataContainer = styled.div`
   padding-left: 0;
