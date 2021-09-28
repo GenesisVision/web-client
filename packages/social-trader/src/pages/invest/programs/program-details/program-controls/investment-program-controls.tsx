@@ -68,8 +68,8 @@ const _InvestmentProgramControls: React.FC<Props> = ({
         levelsParameters={levelsParameters}
       />
       <Row>
-        <DetailsStatisticContainer>
-          <RowItem>
+        <DetailsStatisticContainer isMobileWrap>
+          <RowItem bottomOffset>
             {programDetails.availableInvestmentBase === 0 &&
             isAuthenticated &&
             !isOwnProgram ? (
@@ -103,12 +103,12 @@ const _InvestmentProgramControls: React.FC<Props> = ({
             )}
           </RowItem>
           {platformData?.assetInfo.anonymousInfo.isInvestingBscEnabled && (
-            <RowItem>
+            <RowItem bottomOffset>
               <BSCInvestingButton currency={"BNB"} assetIndex={index} />
             </RowItem>
           )}
           {platformData?.assetInfo.anonymousInfo.isInvestingXDaiEnabled && (
-            <RowItem>
+            <RowItem bottomOffset>
               <BSCInvestingButton currency={"DAI"} assetIndex={index} />
             </RowItem>
           )}
