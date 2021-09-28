@@ -1,6 +1,6 @@
 const useDevelopmentFeature = (isAvailableProd?: boolean) => {
   const isAvailableFeature = !!(
-    process.env.NODE_ENV === "development" || isAvailableProd
+    process.env.NODE_ENV !== "production" || isAvailableProd
   );
 
   return { isAvailableFeature };
