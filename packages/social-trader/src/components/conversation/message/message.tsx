@@ -1,18 +1,18 @@
-import { getImageSize } from "components/conversation/conversation-image/conversation-image.helpers";
-import { ConversationImages } from "components/conversation/conversation-image/conversation-images";
-import { ConversationUser } from "components/conversation/conversation-user/conversation-user";
+import Carousel from "components/carousels/carousel";
 import {
   IConversationImage,
   IConversationUser
 } from "components/conversation/conversation.types";
-import { MessageText } from "components/conversation/message/message-text";
+import { getImageSize } from "components/conversation/conversation-image/conversation-image.helpers";
+import { ConversationImages } from "components/conversation/conversation-image/conversation-images";
+import { ConversationUser } from "components/conversation/conversation-user/conversation-user";
 import {
   ExcludedTagsUnderText,
   generateTagsComponents
 } from "components/conversation/message/message.helpers";
-import { HorizontalShadowList } from "components/horizontal-list-shadow-container/horizontal-shadow-list";
-import { RowItem } from "components/row-item/row-item";
+import { MessageText } from "components/conversation/message/message-text";
 import { Row } from "components/row/row";
+import { RowItem } from "components/row-item/row-item";
 import { PostTag, SocialPostTagType } from "gv-api-web";
 import React from "react";
 import styled, { css } from "styled-components";
@@ -120,10 +120,11 @@ const _Message: React.FC<IMessageProps> = ({
         </MessageItem>
       </MessageContainer>
       {!!tagsUnderText?.length && (
-        <Row>
-          <HorizontalShadowList withScroll={false}>
-            {generateTagsComponents(tagsUnderText)}
-          </HorizontalShadowList>
+        <Row onlyOffset>
+          <Carousel
+            items={generateTagsComponents(tagsUnderText, true)}
+            autoWidth
+          />
         </Row>
       )}
       {!!repostTag?.length && <Row>{generateTagsComponents(repostTag)}</Row>}
