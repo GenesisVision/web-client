@@ -31,6 +31,7 @@ interface Props extends IWalletSelectProps, IUpdatableGvTextFieldProps {
   onChange?: (event: ISelectChangeEvent, child: JSX.Element) => void;
   label: string;
   items: CommonWalletType[];
+  withUpdateButton?: boolean;
 }
 
 const _HookFormWalletSelect: React.FC<Props> = ({
@@ -39,9 +40,11 @@ const _HookFormWalletSelect: React.FC<Props> = ({
   onChange,
   label,
   name,
-  disabled
+  disabled,
+  withUpdateButton
 }) => (
   <HookFormCurrencySourceSelect
+    withUpdateButton={withUpdateButton}
     onClickUpdate={onClickUpdate}
     disabled={disabled}
     label={label}

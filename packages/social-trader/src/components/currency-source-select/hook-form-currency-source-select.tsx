@@ -17,6 +17,7 @@ interface Props extends IUpdatableGvTextFieldProps {
   name: string;
   onChange?: (event: ISelectChangeEvent, child: JSX.Element) => void;
   disabled?: boolean;
+  withUpdateButton?: boolean;
 }
 
 const _CurrencySourceSelect: React.FC<Props> = ({
@@ -25,7 +26,8 @@ const _CurrencySourceSelect: React.FC<Props> = ({
   items,
   onChange,
   label,
-  name
+  name,
+  withUpdateButton
 }) => {
   return (
     <GVHookFormField
@@ -34,7 +36,7 @@ const _CurrencySourceSelect: React.FC<Props> = ({
       wide
       disabled={disabled}
       name={name}
-      component={GVTextField}
+      component={withUpdateButton ? UpdatableGvTextField : GVTextField}
       label={label}
       InputComponent={Select}
       onChange={onChange}

@@ -25,7 +25,7 @@ interface OwnProps {
   assetSection: TUseAssetSectionOutput;
 }
 
-interface Props extends IDepositDetailsDefaultBlockProps, OwnProps { }
+interface Props extends IDepositDetailsDefaultBlockProps, OwnProps {}
 
 const _DepositDetailsDefaultBlock: React.FC<Props> = ({
   assetSection,
@@ -75,6 +75,7 @@ const _DepositDetailsDefaultBlock: React.FC<Props> = ({
           name={walletFieldName}
           label={t("transfer:from")}
           onChange={handleWalletChange}
+          withUpdateButton
         />
         <InputDepositAmount
           disabled={isRatePending}
