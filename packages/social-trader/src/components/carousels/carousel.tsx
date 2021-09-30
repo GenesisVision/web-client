@@ -69,6 +69,7 @@ const _Carousel: React.FC<Props> = ({
 
   useEffect(() => {
     if (carouselRef.current && isFlexibleItems) {
+      //@ts-ignore
       const { rootComponentDimensions } = carouselRef.current;
       if (!rootComponentDimensions.width) return;
 
@@ -90,7 +91,8 @@ const _Carousel: React.FC<Props> = ({
   }, [items.length, carouselRef, countItemsInSlide]);
 
   useEffect(() => {
-    if (carouselRef.current && containerRef.current) {
+    if (carouselRef.current && containerRef && containerRef.current) {
+      // @ts-ignore
       const slices = containerRef.current.querySelectorAll(
         ".alice-carousel__stage-item"
       );
@@ -99,9 +101,11 @@ const _Carousel: React.FC<Props> = ({
   }, [carouselRef.current, containerRef.current]);
 
   const checkNextSlideDisabled = useCallback(() => {
-    if (containerRef.current && lasSlide) {
+    if (containerRef && containerRef.current && lasSlide) {
+      // @ts-ignore
       const containerRightPos = containerRef.current.getBoundingClientRect()
         .right;
+      // @ts-ignore
       const lasSlideRightPos = lasSlide.getBoundingClientRect().right;
       return containerRightPos >= lasSlideRightPos;
     }
