@@ -4,7 +4,7 @@ import {
   CarouselButton,
   POSITION_ARROW
 } from "components/carousels/carousel.controls";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import AliceCarousel, { EventObject, Responsive } from "react-alice-carousel";
 import styled from "styled-components";
 
@@ -13,8 +13,6 @@ const StyledCarousel = styled.div<{
   offsetItem?: number;
 }>`
   position: relative;
-  //margin-right: 15px;
-  //margin-left: 30px;
 
   .alice-carousel__stage-item {
     display: inline-flex;
@@ -47,10 +45,12 @@ const _Carousel: React.FC<Props> = ({
   const [activeIndex, setActiveIndex] = useState(0);
   const [maxWidthItem, setMaxWidthItem] = useState<number | undefined>();
   const [isShowControls, setIsShowControls] = useState(true);
+  const [lasSlide, setLasSlide] = useState(null);
   const [countItemsInSlide, setCountItemsInSlide] = useState(1);
   const [isPrevSlideDisabled, setIsPrevSlideDisabled] = useState(false);
   const [isNextSlideDisabled, setIsNextSlideDisabled] = useState(false);
   const carouselRef = useRef(null);
+  const containerRef = useRef(null);
 
   useEffect(() => {
     if (!responsive) return;
@@ -69,7 +69,7 @@ const _Carousel: React.FC<Props> = ({
 
   useEffect(() => {
     if (carouselRef.current && isFlexibleItems) {
-      // @ts-ignore
+      //@ts-ignore
       const { rootComponentDimensions } = carouselRef.current;
       if (!rootComponentDimensions.width) return;
 
@@ -90,6 +90,28 @@ const _Carousel: React.FC<Props> = ({
     }
   }, [items.length, carouselRef, countItemsInSlide]);
 
+  useEffect(() => {
+    if (carouselRef.current && containerRef && containerRef.current) {
+      // @ts-ignore
+      const slices = containerRef.current.querySelectorAll(
+        ".alice-carousel__stage-item"
+      );
+      if (slices) setLasSlide(slices[slices.length - 1]);
+    }
+  }, [carouselRef.current, containerRef.current]);
+
+  const checkNextSlideDisabled = useCallback(() => {
+    if (containerRef && containerRef.current && lasSlide) {
+      // @ts-ignore
+      const containerRightPos = containerRef.current.getBoundingClientRect()
+        .right;
+      // @ts-ignore
+      const lasSlideRightPos = lasSlide.getBoundingClientRect().right;
+      return containerRightPos >= lasSlideRightPos;
+    }
+    return false;
+  }, [lasSlide, containerRef]);
+
   const slidePrev = () => {
     setActiveIndex(activeIndex - 1);
   };
@@ -99,7 +121,9 @@ const _Carousel: React.FC<Props> = ({
   const syncActiveIndex = (e: EventObject) => {
     setActiveIndex(e.item);
     setIsPrevSlideDisabled(e.isPrevSlideDisabled);
-    setIsNextSlideDisabled(e.isNextSlideDisabled);
+    setTimeout(() => {
+      setIsNextSlideDisabled(checkNextSlideDisabled());
+    }, 0);
   };
 
   const setStateControls = (e: EventObject) => {
@@ -109,7 +133,11 @@ const _Carousel: React.FC<Props> = ({
   };
 
   return (
-    <StyledCarousel maxWidthItem={maxWidthItem} offsetItem={offsetItem}>
+    <StyledCarousel
+      maxWidthItem={maxWidthItem}
+      offsetItem={offsetItem}
+      ref={containerRef}
+    >
       <AliceCarousel
         autoHeight={autoHeight}
         autoWidth={autoWidth}
