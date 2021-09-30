@@ -5,7 +5,9 @@ import {
 import { RowItem } from "components/row-item/row-item";
 import { PostTag, SocialPostTagType } from "gv-api-web";
 import React from "react";
+import styled from "styled-components";
 import { getSymbolIndexByTurn } from "utils/helpers";
+import { $paddingXsmall, $paddingXxxsmall } from "utils/style/sizes";
 
 const MAX_TEXT_BREAKS_COUNT = 5;
 const MAX_TEXT_SYMBOLS_COUNT = 400;
@@ -41,10 +43,28 @@ export const reduceByBreaks = (text: string): string => {
   return text;
 };
 
-export const generateTagsComponents = (tags: PostTag[]): JSX.Element[] => {
-  return tags.map(tag => (
-    <RowItem wide={tag.type === "Post"}>
-      {convertTagToComponent(tag, underTextComponentsMap)}
-    </RowItem>
-  ));
+interface ITagContainerProps {
+  isLast: boolean;
+}
+
+const TagContainer = styled.div<ITagContainerProps>`
+  padding-right: ${({ isLast }: ITagContainerProps) =>
+    isLast ? `${$paddingXxxsmall}px` : `${$paddingXsmall}px`};
+`;
+
+export const generateTagsComponents = (
+  tags: PostTag[],
+  isCarousel?: boolean
+): JSX.Element[] => {
+  return tags.map((tag, index) =>
+    isCarousel ? (
+      <TagContainer isLast={index === tags.length - 1}>
+        {convertTagToComponent(tag, underTextComponentsMap)}
+      </TagContainer>
+    ) : (
+      <RowItem wide={tag.type === "Post"} key={index}>
+        {convertTagToComponent(tag, underTextComponentsMap)}
+      </RowItem>
+    )
+  );
 };
