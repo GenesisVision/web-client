@@ -59,7 +59,6 @@ const Popover: React.FC<Props> = props => {
     children
   } = props;
   const [windowHeight, setWindowHeight] = useState<number>(0);
-  const [windowWidth, setWindowWidth] = useState<number>(0);
   const [scrollTop, setScrollTop] = useState<number>(0);
   const popover = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -68,6 +67,7 @@ const Popover: React.FC<Props> = props => {
       popover.current.style.left = getLeft();
       popover.current.style.top = `${getTop() + scrollTop}px`;
       popover.current.style.minWidth = `${width}px`;
+      popover.current.style.transform = "none";
       popover.current.style.transform = getTransformPosition();
       popover.current.style.opacity = "1";
     }
@@ -75,7 +75,6 @@ const Popover: React.FC<Props> = props => {
 
   useEffect(() => {
     setWindowHeight(window.innerHeight);
-    setWindowWidth(window.innerWidth);
     setScrollTop(window.scrollY);
   }, [anchorEl]);
 
@@ -91,8 +90,7 @@ const Popover: React.FC<Props> = props => {
     let translateX = `0`;
     let translateY = `0`;
     let orientationValue = 0;
-    const orientationL = getOrientation();
-    switch (orientationL) {
+    switch (getOrientation()) {
       case ORIENTATION_POPOVER.RIGHT:
         orientationValue = 50;
         break;
@@ -171,9 +169,7 @@ const Popover: React.FC<Props> = props => {
     }
     if (
       !fixedHorizontal &&
-      (popoverBounds.left < 0 ||
-        (popoverBounds.left - popoverBounds.width * transform < 0 &&
-          popoverBounds.right + popoverBounds.width * transform < windowWidth))
+      popoverBounds.left - popoverBounds.width * transform < 0
     ) {
       return ORIENTATION_POPOVER.RIGHT;
     }

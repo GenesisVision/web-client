@@ -13,7 +13,7 @@ const _ReferralRewardsBlock: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   return (
-    <Row>
+    <Row wrap>
       <RowItem size={"large"}>
         <LabeledValue
           label={t("profile-page:referral-program.referral-friends-1lvl")}
