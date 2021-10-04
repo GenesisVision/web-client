@@ -67,6 +67,7 @@ const Popover: React.FC<Props> = props => {
       popover.current.style.left = getLeft();
       popover.current.style.top = `${getTop() + scrollTop}px`;
       popover.current.style.minWidth = `${width}px`;
+      popover.current.style.transform = "none";
       popover.current.style.transform = getTransformPosition();
       popover.current.style.opacity = "1";
     }
