@@ -3,6 +3,7 @@ import Calendar from "dayjs/plugin/calendar";
 import LocalizedFormat from "dayjs/plugin/localizedFormat";
 import RelativeTime from "dayjs/plugin/relativeTime";
 import Utc from "dayjs/plugin/utc";
+import { withPlural } from "utils/helpers";
 
 const DEFAULT_DATE_RANGE = "month";
 
@@ -53,16 +54,28 @@ export const diffStringDate = (
       return `${minutes} minutes`;
     case hours > 0 && days < 1:
       const restMinutes = minutes % 60;
-      return `${hours} hours ${restMinutes && `${restMinutes} minutes`}`;
+      const restMinutesText = restMinutes
+        ? `${restMinutes} ${withPlural("minute", restMinutes)}`
+        : "";
+      return `${hours} ${withPlural("hour", hours)} ${restMinutesText}`;
     case days > 0 && months < 1:
       const restHours = hours % 24;
-      return `${days} days ${restHours && `${restHours} hours`}`;
+      const restHoursText = restHours
+        ? `${restHours} ${withPlural("hour", restHours)}`
+        : "";
+      return `${days} ${withPlural("day", days)} ${restHoursText}`;
     case months > 0 && years < 1:
       const restDays = days % 30;
-      return `${months} months ${restDays && `${restDays} days`}`;
+      const restDaysText = restDays
+        ? `${restDays} ${withPlural("day", restDays)}`
+        : "";
+      return `${months} ${withPlural("month", months)} ${restDaysText}`;
     default:
       const restMonths = months % 12;
-      return `${years} years ${restMonths && `${restMonths} months`}`;
+      const restMonthsText = restMonths
+        ? `${restMonths} ${withPlural("month", restMonths)}`
+        : "";
+      return `${years} ${withPlural("year", years)} ${restMonthsText}`;
   }
 };
 
