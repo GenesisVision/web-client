@@ -2,8 +2,8 @@ import ProfileAvatar from "components/avatar/profile-avatar/profile-avatar";
 import Link from "components/link/link";
 import { useToLink } from "components/link/link.helper";
 import { FollowUserButton } from "components/manager/components/follow-user-buttom";
-import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { RowItem } from "components/row-item/row-item";
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import { Text } from "components/text/text";
@@ -14,7 +14,7 @@ import { useTranslation } from "react-i18next";
 import NumberFormat from "react-number-format";
 import { managerToPathCreator } from "routes/manager.routes";
 import styled from "styled-components";
-import { distanceDate } from "utils/dates";
+import { diffStringDate } from "utils/dates";
 import { formatCurrencyValue } from "utils/formatter";
 import { $labelColor } from "utils/style/colors";
 import { transition } from "utils/style/mixins";
@@ -58,10 +58,7 @@ export const UsersTableRow: React.FC<{ user: UserDetailsList }> = ({
   const profileUrl = managerToPathCreator(url, contextTitle);
   const slicedAbout =
     about && about.split(" ").length > 13
-      ? about
-          .split(" ")
-          .slice(0, 13)
-          .join(" ") + " ..."
+      ? about.split(" ").slice(0, 13).join(" ") + " ..."
       : about;
 
   const renderHidden = () => <Text muted>{t("Hidden")}</Text>;
@@ -91,7 +88,7 @@ export const UsersTableRow: React.FC<{ user: UserDetailsList }> = ({
           "0"
         )}
       </TableCell>
-      <TableCell>{distanceDate(regDate)}</TableCell>
+      <TableCell>{diffStringDate(regDate)}</TableCell>
       <TableCell>
         {assetsUnderManagement === null ? (
           renderHidden()

@@ -39,6 +39,33 @@ export const diffDateRaw = (
   return dayjs(dateEnd).diff(dayjs(dateStart), unit);
 };
 
+export const diffStringDate = (
+  dateStart: Date | number | string,
+  dateEnd: Date | number | string = new Date()
+) => {
+  const minutes = diffDateRaw(dateStart, dateEnd, "minute");
+  const hours = diffDateRaw(dateStart, dateEnd, "hour");
+  const days = diffDateRaw(dateStart, dateEnd, "day");
+  const months = diffDateRaw(dateStart, dateEnd, "month");
+  const years = diffDateRaw(dateStart, dateEnd, "year");
+  switch (true) {
+    case minutes < 60:
+      return `${minutes} minutes`;
+    case hours > 0 && days < 1:
+      const restMinutes = minutes % 60;
+      return `${hours} hours ${restMinutes && `${restMinutes} minutes`}`;
+    case days > 0 && months < 1:
+      const restHours = hours % 24;
+      return `${days} days ${restHours && `${restHours} hours`}`;
+    case months > 0 && years < 1:
+      const restDays = days % 30;
+      return `${months} months ${restDays && `${restDays} days`}`;
+    default:
+      const restMonths = months % 12;
+      return `${years} years ${restMonths && `${restMonths} months`}`;
+  }
+};
+
 export const distanceDate = (
   dateStart: Date | number | string,
   dateEnd: Date | number | string = new Date(),
@@ -62,9 +89,7 @@ export const subtractDate = (
       .subtract(3 * amount, "month")
       .toDate();
   }
-  return dayjs(date)
-    .subtract(amount, type)
-    .toDate();
+  return dayjs(date).subtract(amount, type).toDate();
 };
 
 export type TTimeUnitName =
@@ -131,10 +156,7 @@ export const dateFrom = (
     .toISOString();
 
 export const dateTo = (): string =>
-  dayjs()
-    .add(1, "minute")
-    .startOf("minute")
-    .toISOString();
+  dayjs().add(1, "minute").startOf("minute").toISOString();
 
 export const getDefaultDateRange = () => ({
   dateFrom: subtractDate(new Date(), 1, DEFAULT_DATE_RANGE)
