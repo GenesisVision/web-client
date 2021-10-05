@@ -37,6 +37,7 @@ import {
   createProgramNotificationsToUrl,
   createProgramSettingsToUrl
 } from "utils/compose-url";
+import { mediaBreakpointLandscapePhone } from "utils/style/media";
 import { $paddingMedium } from "utils/style/sizes";
 
 import ProgramDetailsHistorySection, {
@@ -77,7 +78,9 @@ const FollowControls = dynamic(
 );
 
 const ControlsRow = styled(Row)`
-  margin-bottom: ${-$paddingMedium}px;
+  ${mediaBreakpointLandscapePhone(`
+    margin-bottom: ${-$paddingMedium}px;
+  `)};
 `;
 
 const _ProgramDetailsContainer: React.FC<Props> = ({
