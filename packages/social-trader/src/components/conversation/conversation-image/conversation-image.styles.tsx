@@ -2,6 +2,7 @@ import ImageBase from "components/avatar/image-base";
 import ImageBaseElement from "components/avatar/image-base.element";
 import styled, { css } from "styled-components";
 import { $panelBackgroundColor } from "utils/style/colors";
+import { mediaBreakpointLandscapePhone } from "utils/style/media";
 import {
   adaptiveBorderRadius,
   adaptiveFullPadding,
@@ -33,15 +34,21 @@ const imageStyles = css<IImageStylesProps>`
   display: block;
   ${adaptiveBorderRadius($borderRadius)};
   cursor: pointer;
+  height: auto;
+  max-width: 100%;
   ${({ size, height, width }) => {
     switch (size) {
       case "small":
-        return `height: ${$imageHeightSmall}px;`;
+        return mediaBreakpointLandscapePhone(`height: ${$imageHeightSmall}px;`);
       case "middle":
-        return `height: ${$imageHeightMiddle}px;`;
+        return mediaBreakpointLandscapePhone(
+          `height: ${$imageHeightMiddle}px;`
+        );
       case "large":
         if (height && width && height >= width)
-          return `height: ${Math.min($imageHeightLarge, height)}px;`;
+          return mediaBreakpointLandscapePhone(
+            `height: ${Math.min($imageHeightLarge, height)}px;`
+          );
         return `
         max-width: 100%;
         min-height: ${$imageHeightSmall}px;
@@ -51,15 +58,13 @@ const imageStyles = css<IImageStylesProps>`
   }};
 `;
 
-export const ConversationImageImageBaseElement = styled(ImageBaseElement)<
-  IImageStylesProps
->`
+export const ConversationImageImageBaseElement = styled(
+  ImageBaseElement
+)<IImageStylesProps>`
   ${imageStyles};
 `;
 
-export const ConversationImageEmptyImageContainer = styled.div<
-  IImageStylesProps
->`
+export const ConversationImageEmptyImageContainer = styled.div<IImageStylesProps>`
   ${imageStyles};
   ${unselectable};
   cursor: default;
