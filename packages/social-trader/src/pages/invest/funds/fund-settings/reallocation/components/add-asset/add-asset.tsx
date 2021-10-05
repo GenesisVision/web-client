@@ -64,8 +64,7 @@ const _AddAsset: React.FC<Props> = ({
         : true
     );
     setFilteredAssets(newList);
-    // if (!!searchValue) setTab(null, "");
-  }, [tab, assets, searchValue]);
+  }, [tab, assets, searchValue, anchor]);
 
   const renderList = filteredAssets.filter(({ provider }) => provider === tab);
 
