@@ -198,6 +198,9 @@ export const rawUrlEncode = (str: string): string =>
     .replace(/\)/g, "%29")
     .replace(/\*/g, "%2A");
 
+export const withPlural = (str: string, count: number) =>
+  +count === 1 ? str : `${str}s`;
+
 export {
   getRandomInteger,
   getType,
