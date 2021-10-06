@@ -6,6 +6,9 @@ import {
   GetItemsFuncActionType,
   TableSelectorType
 } from "components/table/components/table.types";
+import useDevelopmentFeature from "hooks/development-feature.hook";
+import AssetsHistory from "modules/assets-table/components/assets-history-table/assets-history";
+import AssetsPortfolio from "modules/assets-table/components/assets-portfolio-table/assets-portfolio";
 import dynamic from "next/dynamic";
 import useHashTab from "pages/wallet/services/hashTab.hook";
 import React from "react";
@@ -14,24 +17,9 @@ import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import { RootState } from "reducers/root-reducer";
 import { GV_ASSETS_ROUTE } from "routes/invest.routes";
-import useDevelopmentFeature from "hooks/development-feature.hook";
 
 const AssetsCoins = dynamic(
   () => import("modules/assets-table/components/assets-table/assets-coins")
-);
-
-const AssetsPortfolio = dynamic(
-  () =>
-    import(
-      "modules/assets-table/components/assets-portfolio-table/assets-portfolio"
-    )
-);
-
-const AssetsHistory = dynamic(
-  () =>
-    import(
-      "modules/assets-table/components/assets-history-table/assets-history"
-    )
 );
 
 export enum ASSETS_TABS {
@@ -56,7 +44,7 @@ export type TAssetsTablesData = {
   history: TAssetsTableReduxData;
 };
 
-const _AssetsTradesSection: React.FC<Props> = ({
+const _AssetsTablesSection: React.FC<Props> = ({
   tablesData: { assetsCoins, portfolio, history }
 }) => {
   const [t] = useTranslation();
@@ -120,5 +108,5 @@ const _AssetsTradesSection: React.FC<Props> = ({
   );
 };
 
-const AssetsTradesSection = React.memo(_AssetsTradesSection);
-export default AssetsTradesSection;
+const AssetsTablesSection = React.memo(_AssetsTablesSection);
+export default AssetsTablesSection;

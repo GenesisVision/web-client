@@ -1,9 +1,7 @@
 import BreadCrumbs from "components/breadcrumbs/breadcrumbs";
 import Page from "components/page/page";
 import { useTranslation } from "i18n";
-import React, { useMemo } from "react";
-import { GV_ASSETS_ROUTE, INVEST_ROUTE } from "routes/invest.routes";
-import { ORGANIZATION_SCHEMA } from "utils/seo";
+import AssetsTablesSection from "pages/invest/assets/assets-table-section/assets-tables-section";
 import {
   assetsCoinsSelector,
   assetsCoinsTableSelector,
@@ -17,7 +15,9 @@ import {
   getAssetsHistory,
   getAssetsPortfolio
 } from "pages/invest/assets/service/assets.service";
-import AssetsTradesSection from "pages/invest/assets/assets-table-section/assets-tables-section";
+import React, { useMemo } from "react";
+import { GV_ASSETS_ROUTE, INVEST_ROUTE } from "routes/invest.routes";
+import { ORGANIZATION_SCHEMA } from "utils/seo";
 
 const AssetsPage = () => {
   const { t } = useTranslation();
@@ -63,7 +63,7 @@ const AssetsPage = () => {
           { href: GV_ASSETS_ROUTE, label: t("navigation.assets") }
         ]}
       />
-      <AssetsTradesSection tablesData={tablesData} />
+      <AssetsTablesSection tablesData={tablesData} />
     </Page>
   );
 };
