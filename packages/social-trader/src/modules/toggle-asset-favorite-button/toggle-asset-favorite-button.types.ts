@@ -1,5 +1,6 @@
 import { UpdateRowFuncType } from "components/table/components/table.types";
 import {
+  CoinsAsset,
   FollowDetailsListItem,
   FollowDetailsListItemItemsViewModel,
   FundDetailsListItem,
@@ -31,7 +32,8 @@ export type ToggleableAssetType =
   | ProgramDetailsListItem
   | FundDetailsListItem
   | ProgramInvestingDetailsList
-  | FundInvestingDetailsList;
+  | FundInvestingDetailsList
+  | CoinsAsset;
 
 export type FavoriteActionProps = { id: string };
 
