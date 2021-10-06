@@ -9,6 +9,7 @@ import {
 import useDevelopmentFeature from "hooks/development-feature.hook";
 import AssetsHistory from "modules/assets-table/components/assets-history-table/assets-history";
 import AssetsPortfolio from "modules/assets-table/components/assets-portfolio-table/assets-portfolio";
+import AssetsCoins from "modules/assets-table/components/assets-table/assets-coins";
 import dynamic from "next/dynamic";
 import useHashTab from "pages/wallet/services/hashTab.hook";
 import React from "react";
@@ -18,12 +19,9 @@ import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import { RootState } from "reducers/root-reducer";
 import { GV_ASSETS_ROUTE } from "routes/invest.routes";
 
-const AssetsCoins = dynamic(
-  () => import("modules/assets-table/components/assets-table/assets-coins")
-);
-
 export enum ASSETS_TABS {
   ASSETS = "",
+  FAVOURITES = "#favourites",
   PORTFOLIO = "#portfolio",
   HISTORY = "#history"
 }
@@ -65,6 +63,15 @@ const _AssetsTablesSection: React.FC<Props> = ({
           visible={isAuthenticated && isAvailableFeature}
         />
         <GVTab
+          value={ASSETS_TABS.FAVOURITES}
+          label={
+            <Link noColor to={`${GV_ASSETS_ROUTE}${ASSETS_TABS.FAVOURITES}`}>
+              {t("assets-page:tabs.favourites")}
+            </Link>
+          }
+          visible={isAuthenticated && isAvailableFeature}
+        />
+        <GVTab
           value={ASSETS_TABS.PORTFOLIO}
           label={
             <Link noColor to={`${GV_ASSETS_ROUTE}${ASSETS_TABS.PORTFOLIO}`}>
@@ -84,6 +91,13 @@ const _AssetsTablesSection: React.FC<Props> = ({
         />
       </DetailsBlockTabs>
       {(tab === ASSETS_TABS.ASSETS || !isAuthenticated) && (
+        <AssetsCoins
+          itemSelector={assetsCoins.itemSelector!}
+          getItems={assetsCoins.getItems()}
+          dataSelector={assetsCoins.dataSelector}
+        />
+      )}
+      {tab === ASSETS_TABS.FAVOURITES && (
         <AssetsCoins
           itemSelector={assetsCoins.itemSelector!}
           getItems={assetsCoins.getItems()}
