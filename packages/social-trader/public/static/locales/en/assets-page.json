@@ -7,7 +7,7 @@
     "price-$": "Current price",
     "change-24h": "Price change over the last 24 hours",
     "market-cap": "The total market value of a cryptocurrency's circulating supply. It is analogous to the free-float capitalization in the stock market.",
-    "volume-24h": "A measure of how much of a cryptocurrency was traded in the last 24 hours.",
+    "volume-24h": "A measure of a cryptocurrency trading volume across all tracked platforms in the last 24 hours. This is tracked on a rolling 24-hour basis with no open/closing times.",
     "amount": "Amount",
     "average-price": "Average price",
     "profit": "Profit current ($)",
