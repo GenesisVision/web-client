@@ -5,6 +5,8 @@ import AssetsTablesSection from "pages/invest/assets/assets-table-section/assets
 import {
   assetsCoinsSelector,
   assetsCoinsTableSelector,
+  assetsFavouritesSelector,
+  assetsFavouritesTableSelector,
   assetsHistorySelector,
   assetsHistoryTableSelector,
   assetsPortfolioSelector,
@@ -12,6 +14,7 @@ import {
 } from "pages/invest/assets/reducers/assets-tables.reducer";
 import {
   getAssetsCoins,
+  getAssetsFavourites,
   getAssetsHistory,
   getAssetsPortfolio
 } from "pages/invest/assets/service/assets.service";
@@ -29,6 +32,11 @@ const AssetsPage = () => {
         itemSelector: assetsCoinsSelector,
         dataSelector: assetsCoinsTableSelector,
         getItems: getAssetsCoins
+      },
+      favourites: {
+        itemSelector: assetsFavouritesSelector,
+        dataSelector: assetsFavouritesTableSelector,
+        getItems: getAssetsFavourites
       },
       portfolio: {
         itemSelector: assetsPortfolioSelector,

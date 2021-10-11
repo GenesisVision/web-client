@@ -1,20 +1,21 @@
 import { tableSelectorCreator } from "components/table/helpers/table.selector";
-import { DEFAULT_PAGING } from "components/table/reducers/table-paging.reducer";
 import tableReducerFactory from "components/table/reducers/table.reducer";
-import { RootState } from "reducers/root-reducer";
-
-import {
-  ASSETS_COINS,
-  ASSETS_HISTORY,
-  ASSETS_HISTORY_DEFAULT_FILTERS,
-  ASSETS_HISTORY_FILTERS,
-  ASSETS_PORTFOLIO, ASSETS_SORTING_DEFAULT
-} from "pages/invest/assets/assets.constants";
+import { DEFAULT_PAGING } from "components/table/reducers/table-paging.reducer";
+import { IDataModel } from "constants/constants";
 import {
   CoinsAssetItemsViewModel,
   CoinsHistoryEventItemsViewModel
 } from "gv-api-web";
-import { IDataModel } from "constants/constants";
+import {
+  ASSETS_COINS,
+  ASSETS_FAVOURITES,
+  ASSETS_HISTORY,
+  ASSETS_HISTORY_DEFAULT_FILTERS,
+  ASSETS_HISTORY_FILTERS,
+  ASSETS_PORTFOLIO,
+  ASSETS_SORTING_DEFAULT
+} from "pages/invest/assets/assets.constants";
+import { RootState } from "reducers/root-reducer";
 
 const defaultData: IDataModel = { items: null, total: 0 };
 
@@ -29,6 +30,23 @@ export const assetsCoinsTableSelector = tableSelectorCreator<
 export const assetsCoinsReducer = tableReducerFactory<CoinsAssetItemsViewModel>(
   {
     type: ASSETS_COINS,
+    sorting: ASSETS_SORTING_DEFAULT,
+    paging: { ...DEFAULT_PAGING, itemsOnPage: 12 }
+  }
+);
+
+export const assetsFavouritesSelector = (state: RootState) =>
+  state.assets.favourites;
+
+export const assetsFavouritesTableSelector = tableSelectorCreator<
+  RootState,
+  CoinsAssetItemsViewModel,
+  CoinsAssetItemsViewModel
+>(assetsFavouritesSelector, "items", defaultData);
+
+export const assetsFavouritesReducer = tableReducerFactory<CoinsAssetItemsViewModel>(
+  {
+    type: ASSETS_FAVOURITES,
     sorting: ASSETS_SORTING_DEFAULT,
     paging: { ...DEFAULT_PAGING, itemsOnPage: 12 }
   }

@@ -38,12 +38,13 @@ export type TAssetsTableReduxData = {
 
 export type TAssetsTablesData = {
   assetsCoins: TAssetsTableReduxData;
+  favourites: TAssetsTableReduxData;
   portfolio: TAssetsTableReduxData;
   history: TAssetsTableReduxData;
 };
 
 const _AssetsTablesSection: React.FC<Props> = ({
-  tablesData: { assetsCoins, portfolio, history }
+  tablesData: { assetsCoins, favourites, portfolio, history }
 }) => {
   const [t] = useTranslation();
   const isAuthenticated = useSelector(isAuthenticatedSelector);
@@ -99,9 +100,9 @@ const _AssetsTablesSection: React.FC<Props> = ({
       )}
       {tab === ASSETS_TABS.FAVOURITES && (
         <AssetsCoins
-          itemSelector={assetsCoins.itemSelector!}
-          getItems={assetsCoins.getItems()}
-          dataSelector={assetsCoins.dataSelector}
+          itemSelector={favourites.itemSelector!}
+          getItems={favourites.getItems()}
+          dataSelector={favourites.dataSelector}
         />
       )}
       {tab === ASSETS_TABS.PORTFOLIO && (
