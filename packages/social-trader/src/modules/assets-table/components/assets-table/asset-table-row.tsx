@@ -118,9 +118,9 @@ const _AssetTableRow: React.FC<Props> = ({ asset }) => {
               updateRow={handleUpdateRow}
               assetType={ASSET.COIN}
               id={asset.id}
-              isFavorite={false}
+              isFavorite={fundState.isFavorite}
             >
-              <FavoriteIcon selected={false} />
+              <FavoriteIcon selected={fundState.isFavorite} />
             </ToggleAssetFavoriteButton>
           </FavoriteIconContainer>
         </TableCell>
