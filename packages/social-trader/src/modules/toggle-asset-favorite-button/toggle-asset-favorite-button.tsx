@@ -1,6 +1,6 @@
 import { Button } from "components/button/button";
 import { UpdateRowFuncType } from "components/table/components/table.types";
-import { ASSET } from "constants/constants";
+import { ASSET, ASSET_INVEST } from "constants/constants";
 import useApiRequest from "hooks/api-request.hook";
 import { ToggleableAssetType } from "modules/toggle-asset-favorite-button/toggle-asset-favorite-button.types";
 import React, { useCallback } from "react";
@@ -31,7 +31,7 @@ const _ToggleAssetFavoriteButton: React.FC<IToggleAssetFavoriteButtonProps> = ({
       dispatchMiddleware({
         id,
         isFavorite,
-        assetType
+        assetType: assetType as ASSET
       });
     onApply && onApply();
   }, [id, isFavorite, assetType, asset, updateRow]);
@@ -64,7 +64,7 @@ export interface IToggleAssetFavoriteButtonProps {
   onApply?: VoidFunction;
   id: string;
   isFavorite: boolean;
-  assetType?: ASSET;
+  assetType?: ASSET_INVEST | ASSET;
 }
 
 export const ToggleAssetFavoriteButton = React.memo(_ToggleAssetFavoriteButton);

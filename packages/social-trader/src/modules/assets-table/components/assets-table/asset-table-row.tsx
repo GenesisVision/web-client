@@ -7,7 +7,7 @@ import { Row } from "components/row/row";
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import { Text } from "components/text/text";
-import { ASSET } from "constants/constants";
+import { ASSET_INVEST } from "constants/constants";
 import { CoinsAsset } from "gv-api-web";
 import { useAuth } from "hooks/auth.hook";
 import useDevelopmentFeature from "hooks/development-feature.hook";
@@ -116,7 +116,7 @@ const _AssetTableRow: React.FC<Props> = ({ asset }) => {
             <ToggleAssetFavoriteButton
               asset={fundState}
               updateRow={handleUpdateRow}
-              assetType={ASSET.COIN}
+              assetType={ASSET_INVEST.COIN}
               id={asset.id}
               isFavorite={fundState.isFavorite}
             >

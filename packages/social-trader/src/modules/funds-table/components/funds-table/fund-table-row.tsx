@@ -9,7 +9,7 @@ import ProgramSimpleChart from "components/program-simple-chart/program-simple-c
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import { Text } from "components/text/text";
-import { ASSET } from "constants/constants";
+import { ASSET_INVEST } from "constants/constants";
 import { FundDetailsListItem } from "gv-api-web";
 import { ToggleAssetFavoriteButton } from "modules/toggle-asset-favorite-button/toggle-asset-favorite-button";
 import * as React from "react";
@@ -118,7 +118,7 @@ const _FundsTableRow: React.FC<Props> = ({ fund }) => {
             <ToggleAssetFavoriteButton
               asset={fundState}
               updateRow={handleUpdateRow}
-              assetType={ASSET.FUND}
+              assetType={ASSET_INVEST.FUND}
               id={fund.id}
               isFavorite={fundState.personalDetails.isFavorite}
             >
