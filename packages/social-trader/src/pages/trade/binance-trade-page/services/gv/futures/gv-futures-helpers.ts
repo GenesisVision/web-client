@@ -34,6 +34,7 @@ export const mapBinanceRawFuturesAccountInfoToAccount = ({
   balances: assets.map(
     mapBinanceRawFuturesAccountAssetToBinanceRawBinanceBalance
   ),
+  //@ts-ignore @todo fix binance
   positions
 });
 
