@@ -9,7 +9,7 @@ import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import TagProgramContainer from "components/tags/tag-program-container/tag-program-container";
 import { Text } from "components/text/text";
-import { ASSET } from "constants/constants";
+import { ASSET_INVEST } from "constants/constants";
 import { FollowDetailsListItem } from "gv-api-web";
 import { ToggleAssetFavoriteButton } from "modules/toggle-asset-favorite-button/toggle-asset-favorite-button";
 import * as React from "react";
@@ -140,7 +140,7 @@ const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
             <ToggleAssetFavoriteButton
               asset={followState}
               updateRow={handleUpdateRow}
-              assetType={ASSET.FOLLOW}
+              assetType={ASSET_INVEST.FOLLOW}
               id={id}
               isFavorite={followState.personalDetails.isFavorite}
             >

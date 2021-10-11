@@ -1,4 +1,4 @@
-import { ASSET } from "constants/constants";
+import { ASSET, ASSET_INVEST } from "constants/constants";
 import { IApiState } from "reducers/reducer-creators/api-reducer";
 import { api } from "services/api-client/swagger-custom-client";
 
@@ -77,16 +77,16 @@ export const toggleFavoriteAsset = ({
 }: {
   id: string;
   isFavorite: boolean;
-  assetType: ASSET;
+  assetType: ASSET_INVEST;
 }) => {
   switch (assetType) {
-    case ASSET.FOLLOW:
+    case ASSET_INVEST.FOLLOW:
       return toggleFavoriteFollow(id, isFavorite);
-    case ASSET.FUND:
+    case ASSET_INVEST.FUND:
       return toggleFavoriteFund(id, isFavorite);
-    case ASSET.PROGRAM:
+    case ASSET_INVEST.PROGRAM:
       return toggleFavoriteProgram(id, isFavorite);
-    case ASSET.COIN:
+    case ASSET_INVEST.COIN:
       return toggleFavoriteCoins(id, isFavorite);
   }
 };

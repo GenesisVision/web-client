@@ -53,6 +53,12 @@ export enum TRADE_ASSET_TYPE {
 export enum ASSET {
   FOLLOW = "Follow",
   PROGRAM = "Program",
+  FUND = "Fund"
+}
+
+export enum ASSET_INVEST {
+  FOLLOW = "Follow",
+  PROGRAM = "Program",
   FUND = "Fund",
   COIN = "Coin"
 }

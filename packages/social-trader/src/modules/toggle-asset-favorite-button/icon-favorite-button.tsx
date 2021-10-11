@@ -14,15 +14,19 @@ const _IconFavoriteButton: React.FC<Props> = ({ asset, assetType }) => {
   const handleUpdateRow = useCallback(program => {
     setProgramState(program);
   }, []);
+  const isFavourite =
+    "personalDetails" in programState
+      ? programState.personalDetails.isFavorite
+      : programState.isFavorite;
   return (
     <ToggleAssetFavoriteButton
       asset={programState}
       updateRow={handleUpdateRow}
       assetType={assetType}
       id={asset.id}
-      isFavorite={programState.personalDetails.isFavorite}
+      isFavorite={isFavourite}
     >
-      <FavoriteIcon selected={programState.personalDetails.isFavorite} />
+      <FavoriteIcon selected={isFavourite} />
     </ToggleAssetFavoriteButton>
   );
 };

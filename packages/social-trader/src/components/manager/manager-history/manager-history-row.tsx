@@ -5,8 +5,8 @@ import {
   ManagerHistoryRowContainer,
   ManagerHistoryRowData
 } from "components/manager/manager-history/manager-history-styles";
-import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { RowItem } from "components/row-item/row-item";
 import { ASSET } from "constants/constants";
 import { IconFavoriteButton } from "modules/toggle-asset-favorite-button/icon-favorite-button";
 import { ToggleableAssetType } from "modules/toggle-asset-favorite-button/toggle-asset-favorite-button.types";
@@ -39,7 +39,7 @@ export const ManagerHistoryRow: React.FC<IManagerHistoryRowProps> = ({
                 <RowItem>{tileBlock}</RowItem>
               </Center>
             </RowItem>
-            {asset.personalDetails && (
+            {"personalDetails" in asset && (
               <ManagerHistoryFavoriteIcon>
                 <IconFavoriteButton asset={asset} assetType={assetType} />
               </ManagerHistoryFavoriteIcon>
