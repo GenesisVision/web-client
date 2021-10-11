@@ -1,12 +1,12 @@
 import BreadCrumbs from "components/breadcrumbs/breadcrumbs";
 import Page from "components/page/page";
 import { useTranslation } from "i18n";
-import React, { useMemo } from "react";
-import { GV_ASSETS_ROUTE, INVEST_ROUTE } from "routes/invest.routes";
-import { ORGANIZATION_SCHEMA } from "utils/seo";
+import AssetsTablesSection from "pages/invest/assets/assets-table-section/assets-tables-section";
 import {
   assetsCoinsSelector,
   assetsCoinsTableSelector,
+  assetsFavouritesSelector,
+  assetsFavouritesTableSelector,
   assetsHistorySelector,
   assetsHistoryTableSelector,
   assetsPortfolioSelector,
@@ -14,10 +14,13 @@ import {
 } from "pages/invest/assets/reducers/assets-tables.reducer";
 import {
   getAssetsCoins,
+  getAssetsFavourites,
   getAssetsHistory,
   getAssetsPortfolio
 } from "pages/invest/assets/service/assets.service";
-import AssetsTradesSection from "pages/invest/assets/assets-table-section/assets-tables-section";
+import React, { useMemo } from "react";
+import { GV_ASSETS_ROUTE, INVEST_ROUTE } from "routes/invest.routes";
+import { ORGANIZATION_SCHEMA } from "utils/seo";
 
 const AssetsPage = () => {
   const { t } = useTranslation();
@@ -29,6 +32,11 @@ const AssetsPage = () => {
         itemSelector: assetsCoinsSelector,
         dataSelector: assetsCoinsTableSelector,
         getItems: getAssetsCoins
+      },
+      favourites: {
+        itemSelector: assetsFavouritesSelector,
+        dataSelector: assetsFavouritesTableSelector,
+        getItems: getAssetsFavourites
       },
       portfolio: {
         itemSelector: assetsPortfolioSelector,
@@ -63,7 +71,7 @@ const AssetsPage = () => {
           { href: GV_ASSETS_ROUTE, label: t("navigation.assets") }
         ]}
       />
-      <AssetsTradesSection tablesData={tablesData} />
+      <AssetsTablesSection tablesData={tablesData} />
     </Page>
   );
 };

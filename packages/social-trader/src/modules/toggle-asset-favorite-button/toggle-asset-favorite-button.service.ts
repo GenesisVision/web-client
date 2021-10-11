@@ -60,6 +60,16 @@ export const toggleFavoriteFollow = (id: string, isFavorite: boolean) => {
   );
 };
 
+export const toggleFavoriteCoins = (id: string, isFavorite: boolean) => {
+  const coinsApi = api.coins();
+  return toggleFavorite(
+    id,
+    isFavorite,
+    coinsApi.addToFavorites,
+    coinsApi.removeFromFavorites
+  );
+};
+
 export const toggleFavoriteAsset = ({
   id,
   isFavorite,
@@ -76,6 +86,8 @@ export const toggleFavoriteAsset = ({
       return toggleFavoriteFund(id, isFavorite);
     case ASSET.PROGRAM:
       return toggleFavoriteProgram(id, isFavorite);
+    case ASSET.COIN:
+      return toggleFavoriteCoins(id, isFavorite);
   }
 };
 
@@ -147,14 +159,23 @@ export const toggleFavoriteUpdateRow: TableToggleFavoriteType = (
   asset,
   updateRow
 ) => {
-  const { isFavorite } = asset.personalDetails;
-  const newAsset = {
-    ...asset,
-    personalDetails: {
-      ...asset.personalDetails,
-      isFavorite: !isFavorite
-    }
-  };
+  const isFavorite =
+    "personalDetails" in asset
+      ? asset.personalDetails.isFavorite
+      : asset.isFavorite;
+  const newAsset =
+    "personalDetails" in asset
+      ? {
+          ...asset,
+          personalDetails: {
+            ...asset.personalDetails,
+            isFavorite: !isFavorite
+          }
+        }
+      : {
+          ...asset,
+          isFavorite: !isFavorite
+        };
   updateRow(newAsset);
 };
 

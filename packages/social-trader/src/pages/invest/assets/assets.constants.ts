@@ -1,11 +1,11 @@
 import {
-  composeDefaultDateRangeFilter,
-  composeRequestValueFunc
-} from "components/table/components/filtering/date-range-filter/date-range-filter.helpers";
-import {
   DATE_RANGE_FILTER_NAME,
   DEFAULT_DATE_RANGE_FILTER_VALUE
 } from "components/table/components/filtering/date-range-filter/date-range-filter.constants";
+import {
+  composeDefaultDateRangeFilter,
+  composeRequestValueFunc
+} from "components/table/components/filtering/date-range-filter/date-range-filter.helpers";
 import {
   FUND_ASSET_DEFAULT_VALUE,
   FUND_ASSET_FILTER_NAME
@@ -13,6 +13,7 @@ import {
 import { fundAssetFilter } from "components/table/components/filtering/fund-asset-filter/fund-asset-filter.helpers";
 
 export const ASSETS_COINS = "ASSETS_COINS";
+export const ASSETS_FAVOURITES = "ASSETS_FAVOURITES";
 export const ASSETS_PORTFOLIO = "ASSETS_PORTFOLIO";
 export const ASSETS_HISTORY = "ASSETS_HISTORY";
 

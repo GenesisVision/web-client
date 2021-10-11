@@ -1,14 +1,29 @@
 import { ComposeFiltersAllType } from "components/table/components/filtering/filter.type";
+import {
+  CoinsAssetItemsViewModel,
+  CoinsHistoryEventItemsViewModel
+} from "gv-api-web";
+import {
+  ASSETS_COINS,
+  ASSETS_FAVOURITES,
+  ASSETS_HISTORY,
+  ASSETS_PORTFOLIO
+} from "pages/invest/assets/assets.constants";
 import { api } from "services/api-client/swagger-custom-client";
 import { ApiAction } from "utils/types";
-import { CoinsAssetItemsViewModel, CoinsHistoryEventItemsViewModel } from "gv-api-web";
-import { ASSETS_COINS, ASSETS_HISTORY, ASSETS_PORTFOLIO } from "pages/invest/assets/assets.constants";
 
 export const fetchAssetsCoinsAction = (
   filters: ComposeFiltersAllType
 ): ApiAction<CoinsAssetItemsViewModel> => ({
   type: ASSETS_COINS,
   payload: api.coins().getCoins(filters)
+});
+
+export const fetchAssetsFavouritesAction = (
+  filters: ComposeFiltersAllType
+): ApiAction<CoinsAssetItemsViewModel> => ({
+  type: ASSETS_FAVOURITES,
+  payload: api.coins().getFavoriteCoins(filters)
 });
 
 export const fetchAssetsPortfolioAction = (

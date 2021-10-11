@@ -6,6 +6,10 @@ import {
   GetItemsFuncActionType,
   TableSelectorType
 } from "components/table/components/table.types";
+import useDevelopmentFeature from "hooks/development-feature.hook";
+import AssetsHistory from "modules/assets-table/components/assets-history-table/assets-history";
+import AssetsPortfolio from "modules/assets-table/components/assets-portfolio-table/assets-portfolio";
+import AssetsCoins from "modules/assets-table/components/assets-table/assets-coins";
 import dynamic from "next/dynamic";
 import useHashTab from "pages/wallet/services/hashTab.hook";
 import React from "react";
@@ -14,28 +18,10 @@ import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import { RootState } from "reducers/root-reducer";
 import { GV_ASSETS_ROUTE } from "routes/invest.routes";
-import useDevelopmentFeature from "hooks/development-feature.hook";
-
-const AssetsCoins = dynamic(
-  () => import("modules/assets-table/components/assets-table/assets-coins")
-);
-
-const AssetsPortfolio = dynamic(
-  () =>
-    import(
-      "modules/assets-table/components/assets-portfolio-table/assets-portfolio"
-    )
-);
-
-const AssetsHistory = dynamic(
-  () =>
-    import(
-      "modules/assets-table/components/assets-history-table/assets-history"
-    )
-);
 
 export enum ASSETS_TABS {
   ASSETS = "",
+  FAVOURITES = "#favourites",
   PORTFOLIO = "#portfolio",
   HISTORY = "#history"
 }
@@ -52,12 +38,13 @@ export type TAssetsTableReduxData = {
 
 export type TAssetsTablesData = {
   assetsCoins: TAssetsTableReduxData;
+  favourites: TAssetsTableReduxData;
   portfolio: TAssetsTableReduxData;
   history: TAssetsTableReduxData;
 };
 
-const _AssetsTradesSection: React.FC<Props> = ({
-  tablesData: { assetsCoins, portfolio, history }
+const _AssetsTablesSection: React.FC<Props> = ({
+  tablesData: { assetsCoins, favourites, portfolio, history }
 }) => {
   const [t] = useTranslation();
   const isAuthenticated = useSelector(isAuthenticatedSelector);
@@ -72,6 +59,15 @@ const _AssetsTradesSection: React.FC<Props> = ({
           label={
             <Link noColor to={`${GV_ASSETS_ROUTE}${ASSETS_TABS.ASSETS}`}>
               {t("assets-page:tabs.assets")}
+            </Link>
+          }
+          visible={isAuthenticated && isAvailableFeature}
+        />
+        <GVTab
+          value={ASSETS_TABS.FAVOURITES}
+          label={
+            <Link noColor to={`${GV_ASSETS_ROUTE}${ASSETS_TABS.FAVOURITES}`}>
+              {t("assets-page:tabs.favourites")}
             </Link>
           }
           visible={isAuthenticated && isAvailableFeature}
@@ -102,6 +98,13 @@ const _AssetsTradesSection: React.FC<Props> = ({
           dataSelector={assetsCoins.dataSelector}
         />
       )}
+      {tab === ASSETS_TABS.FAVOURITES && (
+        <AssetsCoins
+          itemSelector={favourites.itemSelector!}
+          getItems={favourites.getItems()}
+          dataSelector={favourites.dataSelector}
+        />
+      )}
       {tab === ASSETS_TABS.PORTFOLIO && (
         <AssetsPortfolio
           itemSelector={portfolio.itemSelector!}
@@ -120,5 +123,5 @@ const _AssetsTradesSection: React.FC<Props> = ({
   );
 };
 
-const AssetsTradesSection = React.memo(_AssetsTradesSection);
-export default AssetsTradesSection;
+const AssetsTablesSection = React.memo(_AssetsTablesSection);
+export default AssetsTablesSection;
