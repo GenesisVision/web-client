@@ -1,5 +1,6 @@
 import { GUIDES_TOTAL_PAGE_ROUTE } from "pages/guides/guides.paths";
 import {
+  GV_ASSETS_ROUTE,
   GV_FOLLOW_ROUTE,
   GV_FUNDS_ROUTE,
   GV_PROGRAMS_ROUTE,
@@ -63,6 +64,10 @@ export const navHeader: TNavHeader[] = [
       {
         name: "navigation.gv-follow",
         href: GV_FOLLOW_ROUTE
+      },
+      {
+        name: "navigation.gv-assets",
+        href: GV_ASSETS_ROUTE
       }
     ]
   },
