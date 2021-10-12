@@ -93,7 +93,7 @@ const _AssetPortfolioTableRow: React.FC<Props> = ({ asset, onApply }) => {
         <Text wrap={false}>
           <NumberFormat
             value={formatCurrencyValue(asset.profitCurrent, "USD")}
-            prefix={`$ `}
+            prefix={` $ `}
             thousandSeparator=" "
             displayType="text"
           />
