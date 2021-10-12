@@ -57,7 +57,7 @@ const _AssetsBuyForm: React.FC<IAssetsTransferFormProps> = ({
 
   const formattedAvailableSourceItem = formatCurrencyValue(
     selectedItem.available,
-    selectedItem.currency
+    "Any"
   );
 
   const { rate, getRate } = useGetRate();
@@ -128,14 +128,11 @@ const _AssetsBuyForm: React.FC<IAssetsTransferFormProps> = ({
           label={t("assets-page:popup.amount")}
           currency={selectedItem.currency}
           setMax={setMax}
-          isAllowed={isAmountAllow(
-            selectedItem.currency,
-            selectedItem.available
-          )}
+          isAllowed={isAmountAllow("Any", selectedItem.available)}
           rules={amountRules({
             t,
             available: selectedItem.available,
-            currency: selectedItem.currency
+            currency: "Any"
           })}
         />
         {!!amount && (
