@@ -17,6 +17,7 @@ export const CURRENCY_FRACTIONS = (currency: string): number => {
   switch (currency) {
     case "BTC":
     case "ETH":
+    case "Any":
       return 8;
     case "USD":
     case "EUR":
