@@ -20,9 +20,7 @@ const assetLoaderDataCreator = (): CoinsAsset => ({
         date: 0,
         value: 0
       }
-    ],
-    lastPrice: 0,
-    changePercent: 0
+    ]
   },
   color: getRandomColor(),
   id: "",
@@ -46,7 +44,8 @@ const assetLoaderDataCreator = (): CoinsAsset => ({
   },
   averagePrice: 0,
   profitCurrent: 0,
-  amount: 0
+  amount: 0,
+  isFavorite: false
 });
 
 export const assetsPortfolioListLoaderDataWithCount = (

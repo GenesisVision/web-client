@@ -13,6 +13,7 @@ import {
   SymbolLeverageBrackets
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 
+//@todo fix any type (it should be Account)
 export const mapBinanceRawFuturesAccountInfoToAccount = ({
   canDeposit,
   canTrade,
@@ -20,7 +21,7 @@ export const mapBinanceRawFuturesAccountInfoToAccount = ({
   updateTime,
   assets,
   positions
-}: BinanceRawFuturesAccountInfo): Account => ({
+}: BinanceRawFuturesAccountInfo): any => ({
   makerCommission: 0,
   takerCommission: 0,
   buyerCommission: 0,
