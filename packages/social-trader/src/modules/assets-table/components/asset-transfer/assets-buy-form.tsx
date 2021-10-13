@@ -2,6 +2,8 @@ import { CurrencyItem } from "components/currency-item/currency-item";
 import { HookFormWalletField as WalletSelect } from "components/deposit/components/form-fields/wallet-field";
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogButtons } from "components/dialog/dialog-buttons";
+import { DialogList } from "components/dialog/dialog-list";
+import { DialogListItem } from "components/dialog/dialog-list-item";
 import { DialogTop } from "components/dialog/dialog-top";
 import FormError from "components/form/form-error/form-error";
 import InputAmountField from "components/input-amount-field/hook-form-amount-field";
@@ -24,6 +26,7 @@ import {
 import React, { useCallback, useEffect, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import NumberFormat from "react-number-format";
 import { formatCurrencyValue } from "utils/formatter";
 import { HookForm } from "utils/hook-form.helpers";
 
@@ -98,6 +101,12 @@ const _AssetsBuyForm: React.FC<IAssetsTransferFormProps> = ({
     [wallets, onSubmit]
   );
 
+  const amountInAssetCurrency = +amount * rate;
+
+  const commission = useMemo(() => amountInAssetCurrency * 0.001, [
+    amountInAssetCurrency
+  ]);
+
   return (
     <HookForm form={form} onSubmit={setValuesFromPropsAndSubmit}>
       <DialogTop title={t("assets-page:popup.buy-title")}>
@@ -135,14 +144,25 @@ const _AssetsBuyForm: React.FC<IAssetsTransferFormProps> = ({
             currency: "Any"
           })}
         />
-        {!!amount && (
-          <Row>
-            <span>{`≈ ${formatCurrencyValue(+amount * rate, asset.asset)} ${
-              asset.asset
-            }`}</span>
-          </Row>
-        )}
         {errorMessage && <FormError error={errorMessage} />}
+        {!!amount && (
+          <DialogList>
+            <NumberFormat
+              value={formatCurrencyValue(amountInAssetCurrency, asset.asset)}
+              prefix={"≈ "}
+              suffix={` ${asset.asset}`}
+              displayType="text"
+            />
+            <DialogListItem label={t("assets-page:popup.fee")}>
+              <NumberFormat
+                value={formatCurrencyValue(commission, "Any")}
+                prefix={"≈ "}
+                suffix={` ${asset.asset}`}
+                displayType="text"
+              />
+            </DialogListItem>
+          </DialogList>
+        )}
         <DialogButtons>
           <SubmitButton wide isSuccessful={!errorMessage}>
             {t("buttons.confirm")}
