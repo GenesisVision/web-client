@@ -48,6 +48,7 @@
     "from": "Select a wallet currency",
     "asset": "Asset",
     "amount": "Enter correct amount",
+    "fee": "Fee",
     "success-buy": "Buy request is confirmed",
     "success-sell": "Sell request is confirmed"
   }
