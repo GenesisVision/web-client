@@ -63,6 +63,11 @@ export const ASSETS_PORTFOLIO_TABLE_COLUMNS: SortingColumn[] = [
     tooltip: true
   },
   {
+    name: "total",
+    sortingName: "ByTotal",
+    tooltip: true
+  },
+  {
     name: "average-price",
     sortingName: "ByAveragePrice",
     tooltip: true

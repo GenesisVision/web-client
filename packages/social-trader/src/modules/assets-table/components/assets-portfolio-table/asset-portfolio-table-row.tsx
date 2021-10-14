@@ -58,25 +58,21 @@ const _AssetPortfolioTableRow: React.FC<Props> = ({ asset, onApply }) => {
       </TableCell>
       <TableCell>
         <Text wrap={false}>
-          <Tooltip
-            horizontal={HORIZONTAL_POPOVER_POS.LEFT}
-            render={() => (
-              <TooltipContent>
-                <NumberFormat
-                  value={formatCurrencyValue(asset.amount * asset.price, "USD")}
-                  prefix={`$ `}
-                  thousandSeparator=" "
-                  displayType="text"
-                />
-              </TooltipContent>
-            )}
-          >
-            <NumberFormat
-              value={asset.amount}
-              thousandSeparator=" "
-              displayType="text"
-            />
-          </Tooltip>
+          <NumberFormat
+            value={asset.amount}
+            thousandSeparator=" "
+            displayType="text"
+          />
+        </Text>
+      </TableCell>
+      <TableCell>
+        <Text wrap={false}>
+          <NumberFormat
+            value={formatCurrencyValue(asset.amount * asset.price, "USD")}
+            prefix={`$ `}
+            thousandSeparator=" "
+            displayType="text"
+          />
         </Text>
       </TableCell>
       <TableCell>
