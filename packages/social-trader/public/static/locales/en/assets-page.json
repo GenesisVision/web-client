@@ -14,7 +14,8 @@
     "date": "Date",
     "trades": "Trades",
     "price": "Price",
-    "commission": "Commission"
+    "commission": "Commission",
+    "total": "Total = Amount * Current Price"
   },
   "header-fields": {
     "name": "Name",
@@ -30,7 +31,8 @@
     "date": "Date",
     "trades": "Trades",
     "price": "Price",
-    "commission": "Commission"
+    "commission": "Commission",
+    "total": "Total"
   },
   "tabs": {
     "assets": "Assets",
