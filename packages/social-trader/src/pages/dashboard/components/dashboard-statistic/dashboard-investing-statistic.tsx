@@ -31,13 +31,15 @@ const _DashboardInvestingStatistic: React.FC<Props> = ({ orientation }) => {
       renderValues={({
         fundsCount,
         programsCount,
-        equity
+        equity,
+        coinsCount
       }: TDashboardInvestingStatistic) => (
         <DashboardInvestingCounts
           balance={equity}
           currency={currency}
           programs={programsCount}
           funds={fundsCount}
+          assets={coinsCount}
         />
       )}
     />

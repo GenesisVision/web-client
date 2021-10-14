@@ -9,7 +9,7 @@ import { TDashboardInvestingStatistic } from "../../dashboard.types";
 import styles from "./dashboard-investing.module.scss";
 
 const _DashboardInvestingTotal: React.FC<Props> = ({
-  data: { profits, equity, fundsCount, programsCount }
+  data: { profits, equity, fundsCount, programsCount, coinsCount }
 }) => {
   const currency = useAccountCurrency();
   return (
@@ -19,6 +19,7 @@ const _DashboardInvestingTotal: React.FC<Props> = ({
         currency={currency}
         programs={programsCount}
         funds={fundsCount}
+        assets={coinsCount}
       />
       {hasProfits(profits) && (
         <DashboardStatisticPeriods
