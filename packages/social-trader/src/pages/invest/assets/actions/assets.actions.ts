@@ -16,14 +16,14 @@ export const fetchAssetsCoinsAction = (
   filters: ComposeFiltersAllType
 ): ApiAction<CoinsAssetItemsViewModel> => ({
   type: ASSETS_COINS,
-  payload: api.coins().getCoins(filters)
+  payload: api.coins().getCoins({ ...filters, isFavorite: false })
 });
 
 export const fetchAssetsFavouritesAction = (
   filters: ComposeFiltersAllType
 ): ApiAction<CoinsAssetItemsViewModel> => ({
   type: ASSETS_FAVOURITES,
-  payload: api.coins().getFavoriteCoins(filters)
+  payload: api.coins().getCoins({ ...filters, isFavorite: true })
 });
 
 export const fetchAssetsPortfolioAction = (
