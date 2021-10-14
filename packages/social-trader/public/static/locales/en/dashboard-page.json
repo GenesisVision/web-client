@@ -70,7 +70,8 @@
       "value": "Current market value of your investment in the program, taking into account the profit/loss of open positions.",
       "equity": "Current market value of investments in the program, taking into account the profit/loss of open positions.",
       "age-program": "Age of the program",
-      "broker": "Current broker of the program"
+      "broker": "Current broker of the program",
+      "assets": "Number of assets to have invested in."
     },
     "private-card": {
       "equity": "Current amount of funds in the trading account, taking into account the profit/loss of open positions.",
@@ -176,6 +177,7 @@
     "AUM": "AUM",
     "programs": "Programs",
     "funds": "Funds",
+    "assets": "Assets",
     "trading": "Trading",
     "investing": "Investing",
     "equity": "Your Equity",

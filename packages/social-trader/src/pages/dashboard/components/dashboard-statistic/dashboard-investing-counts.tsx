@@ -10,7 +10,8 @@ export const DashboardInvestingCounts: React.FC<{
   currency: CurrencyEnum;
   programs: number;
   funds: number;
-}> = React.memo(({ balance, currency, programs, funds }) => {
+  assets: number;
+}> = React.memo(({ balance, currency, programs, funds, assets }) => {
   const [t] = useTranslation();
   return (
     <Row>
@@ -41,6 +42,15 @@ export const DashboardInvestingCounts: React.FC<{
           />
         }
         value={funds}
+      />
+      <DashboardValueItem
+        label={
+          <TooltipLabel
+            tooltipContent={t("dashboard-page:tooltips.investing.assets")}
+            labelText={t("dashboard-page:statistic.assets")}
+          />
+        }
+        value={assets}
       />
     </Row>
   );
