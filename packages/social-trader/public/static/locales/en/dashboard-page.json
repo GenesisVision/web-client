@@ -71,7 +71,7 @@
       "equity": "Current market value of investments in the program, taking into account the profit/loss of open positions.",
       "age-program": "Age of the program",
       "broker": "Current broker of the program",
-      "assets": "Assets"
+      "assets": "Number of assets to have invested in."
     },
     "private-card": {
       "equity": "Current amount of funds in the trading account, taking into account the profit/loss of open positions.",
