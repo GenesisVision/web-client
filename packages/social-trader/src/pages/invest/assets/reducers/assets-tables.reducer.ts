@@ -1,6 +1,9 @@
 import { tableSelectorCreator } from "components/table/helpers/table.selector";
 import tableReducerFactory from "components/table/reducers/table.reducer";
-import { DEFAULT_PAGING } from "components/table/reducers/table-paging.reducer";
+import {
+  DEFAULT_CARD_PAGING,
+  DEFAULT_PAGING
+} from "components/table/reducers/table-paging.reducer";
 import { IDataModel } from "constants/constants";
 import {
   CoinsAssetItemsViewModel,
@@ -27,12 +30,14 @@ export const assetsCoinsTableSelector = tableSelectorCreator<
   CoinsAssetItemsViewModel
 >(assetsCoinsSelector, "items", defaultData);
 
+const assetsCoinsReducerOptions = {
+  type: ASSETS_COINS,
+  sorting: ASSETS_SORTING_DEFAULT,
+  paging: DEFAULT_CARD_PAGING
+};
+
 export const assetsCoinsReducer = tableReducerFactory<CoinsAssetItemsViewModel>(
-  {
-    type: ASSETS_COINS,
-    sorting: ASSETS_SORTING_DEFAULT,
-    paging: { ...DEFAULT_PAGING, itemsOnPage: 12 }
-  }
+  assetsCoinsReducerOptions
 );
 
 export const assetsFavouritesSelector = (state: RootState) =>
@@ -46,9 +51,8 @@ export const assetsFavouritesTableSelector = tableSelectorCreator<
 
 export const assetsFavouritesReducer = tableReducerFactory<CoinsAssetItemsViewModel>(
   {
-    type: ASSETS_FAVOURITES,
-    sorting: ASSETS_SORTING_DEFAULT,
-    paging: { ...DEFAULT_PAGING, itemsOnPage: 12 }
+    ...assetsCoinsReducerOptions,
+    type: ASSETS_FAVOURITES
   }
 );
 
@@ -61,11 +65,13 @@ export const assetsPortfolioTableSelector = tableSelectorCreator<
   CoinsAssetItemsViewModel
 >(assetsPortfolioSelector, "items", defaultData);
 
+const assetsPortfolioReducerOptions = {
+  type: ASSETS_PORTFOLIO,
+  paging: DEFAULT_CARD_PAGING
+};
+
 export const assetsPortfolioReducer = tableReducerFactory<CoinsAssetItemsViewModel>(
-  {
-    type: ASSETS_PORTFOLIO,
-    paging: { ...DEFAULT_PAGING, itemsOnPage: 12 }
-  }
+  assetsPortfolioReducerOptions
 );
 
 export const assetsPortfolioSelectorShort = (state: RootState) =>
@@ -79,7 +85,7 @@ export const assetsPortfolioTableSelectorShort = tableSelectorCreator<
 
 export const assetsPortfolioReducerShort = tableReducerFactory<CoinsAssetItemsViewModel>(
   {
-    type: ASSETS_PORTFOLIO,
+    ...assetsPortfolioReducerOptions,
     paging: { ...DEFAULT_PAGING, itemsOnPage: 5 }
   }
 );
@@ -92,13 +98,15 @@ export const assetsHistoryTableSelector = tableSelectorCreator<
   CoinsHistoryEventItemsViewModel
 >(assetsHistorySelector, "items", defaultData);
 
+const assetsHistoryReducerOptions = {
+  type: ASSETS_HISTORY,
+  paging: DEFAULT_CARD_PAGING,
+  filtering: ASSETS_HISTORY_FILTERS,
+  defaultFilters: ASSETS_HISTORY_DEFAULT_FILTERS
+};
+
 export const assetsHistoryReducer = tableReducerFactory<CoinsHistoryEventItemsViewModel>(
-  {
-    type: ASSETS_HISTORY,
-    paging: { ...DEFAULT_PAGING, itemsOnPage: 12 },
-    filtering: ASSETS_HISTORY_FILTERS,
-    defaultFilters: ASSETS_HISTORY_DEFAULT_FILTERS
-  }
+  assetsHistoryReducerOptions
 );
 
 export const assetsHistorySelectorShort = (state: RootState) =>
@@ -112,9 +120,7 @@ export const assetsHistoryTableSelectorShort = tableSelectorCreator<
 
 export const assetsHistoryReducerShort = tableReducerFactory<CoinsHistoryEventItemsViewModel>(
   {
-    type: ASSETS_HISTORY,
-    paging: { ...DEFAULT_PAGING, itemsOnPage: 5 },
-    filtering: ASSETS_HISTORY_FILTERS,
-    defaultFilters: ASSETS_HISTORY_DEFAULT_FILTERS
+    ...assetsHistoryReducerOptions,
+    paging: { ...DEFAULT_PAGING, itemsOnPage: 5 }
   }
 );
