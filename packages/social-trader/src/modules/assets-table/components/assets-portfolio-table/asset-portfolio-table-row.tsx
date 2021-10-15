@@ -65,7 +65,7 @@ const _AssetPortfolioTableRow: React.FC<Props> = ({ asset, onApply }) => {
       <TableCell>
         <Text wrap={false}>
           <NumberFormat
-            value={formatCurrencyValue(asset.amount * asset.price, "USD")}
+            value={formatCurrencyValue(asset.total, "USD")}
             prefix={`$ `}
             thousandSeparator=" "
             displayType="text"
