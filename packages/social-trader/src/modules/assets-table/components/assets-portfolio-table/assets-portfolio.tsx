@@ -1,26 +1,22 @@
-import TableContainer from "components/table/components/table-container";
 import {
   GetItemsFuncActionType,
   TableSelectorType
 } from "components/table/components/table.types";
-import { DEFAULT_PAGING } from "components/table/reducers/table-paging.reducer";
-import React, { useCallback } from "react";
-import { RootState } from "reducers/root-reducer";
+import TableContainer from "components/table/components/table-container";
 import { ASSETS_PORTFOLIO_TABLE_COLUMNS } from "modules/assets-table/assets.constants";
-import AssetsPortfolioTableHeaderCell
-  from "modules/assets-table/components/assets-portfolio-table/assets-portfolio-table-header-cell";
 import AssetPortfolioTableRow from "modules/assets-table/components/assets-portfolio-table/asset-portfolio-table-row";
 import { assetsPortfolioListLoaderDataWithCount } from "modules/assets-table/components/assets-portfolio-table/assets-portfolio-table.loader-data";
+import AssetsPortfolioTableHeaderCell from "modules/assets-table/components/assets-portfolio-table/assets-portfolio-table-header-cell";
+import React, { useCallback } from "react";
+import { RootState } from "reducers/root-reducer";
 
 const _AssetsPortfolio: React.FC<Props> = ({
   itemSelector,
   getItems,
-  dataSelector,
+  dataSelector
 }) => {
   const renderHeader = useCallback(
-    column => (
-      <AssetsPortfolioTableHeaderCell column={column} />
-    ),
+    column => <AssetsPortfolioTableHeaderCell column={column} />,
     []
   );
   const renderBodyRow = useCallback(
@@ -36,7 +32,6 @@ const _AssetsPortfolio: React.FC<Props> = ({
       getItems={getItems}
       dataSelector={dataSelector}
       isFetchOnMount={true}
-      paging={DEFAULT_PAGING}
       columns={ASSETS_PORTFOLIO_TABLE_COLUMNS}
       renderHeader={renderHeader}
       renderBodyRow={renderBodyRow}
