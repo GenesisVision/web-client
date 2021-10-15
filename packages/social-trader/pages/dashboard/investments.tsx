@@ -15,7 +15,8 @@ Page.getInitialProps = async () => ({
     "asset-details",
     "dashboard-page",
     "program-details-page",
-    "fund-details-page"
+    "fund-details-page",
+    "assets-page"
   ]
 });
 

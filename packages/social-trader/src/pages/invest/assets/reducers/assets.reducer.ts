@@ -7,7 +7,9 @@ import {
   assetsCoinsReducer,
   assetsFavouritesReducer,
   assetsHistoryReducer,
-  assetsPortfolioReducer
+  assetsHistoryReducerShort,
+  assetsPortfolioReducer,
+  assetsPortfolioReducerShort
 } from "pages/invest/assets/reducers/assets-tables.reducer";
 import clearableReducer from "reducers/clearable.reducer";
 import { combineReducers } from "redux";
@@ -16,7 +18,9 @@ type AssetsDataType = Readonly<{
   coins: ITableState<CoinsAssetItemsViewModel>;
   favourites: ITableState<CoinsAssetItemsViewModel>;
   portfolio: ITableState<CoinsAssetItemsViewModel>;
+  portfolioShort: ITableState<CoinsAssetItemsViewModel>;
   history: ITableState<CoinsHistoryEventItemsViewModel>;
+  historyShort: ITableState<CoinsHistoryEventItemsViewModel>;
 }>;
 
 export type AssetsState = AssetsDataType;
@@ -26,7 +30,9 @@ const assetsReducer = clearableReducer(
     coins: assetsCoinsReducer,
     favourites: assetsFavouritesReducer,
     portfolio: assetsPortfolioReducer,
-    history: assetsHistoryReducer
+    portfolioShort: assetsPortfolioReducerShort,
+    history: assetsHistoryReducer,
+    historyShort: assetsHistoryReducerShort
   })
 );
 

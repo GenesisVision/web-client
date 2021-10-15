@@ -1,16 +1,14 @@
 import withDefaultLayout from "decorators/with-default-layout";
+import AssetsPage from "pages/invest/assets/assets.page";
 import React from "react";
 import { NextPageWithRedux } from "utils/types";
-import AssetsPage from "pages/invest/assets/assets.page";
 
 const Page: NextPageWithRedux<{}> = () => {
   return <AssetsPage />;
 };
 
 Page.getInitialProps = async () => ({
-  namespacesRequired: [
-    "assets-page"
-  ]
+  namespacesRequired: ["assets-page"]
 });
 
 Page.getInitialProps = () => {

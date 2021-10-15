@@ -1,5 +1,4 @@
 import { CurrencyItem } from "components/currency-item/currency-item";
-import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
 import Profitability from "components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "components/profitability/profitability.helper";
 import { Row } from "components/row/row";
@@ -7,8 +6,6 @@ import { RowItem } from "components/row-item/row-item";
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import { Text } from "components/text/text";
-import Tooltip from "components/tooltip/tooltip";
-import { TooltipContent } from "components/tooltip/tooltip-content";
 import { CoinsAsset } from "gv-api-web";
 import AssetBuy from "modules/assets-table/components/buttons/asset-buy.button";
 import AssetSell from "modules/assets-table/components/buttons/asset-sell.button";
