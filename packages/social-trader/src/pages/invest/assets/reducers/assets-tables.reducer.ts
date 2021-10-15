@@ -68,6 +68,22 @@ export const assetsPortfolioReducer = tableReducerFactory<CoinsAssetItemsViewMod
   }
 );
 
+export const assetsPortfolioSelectorShort = (state: RootState) =>
+  state.assets.portfolioShort;
+
+export const assetsPortfolioTableSelectorShort = tableSelectorCreator<
+  RootState,
+  CoinsAssetItemsViewModel,
+  CoinsAssetItemsViewModel
+>(assetsPortfolioSelectorShort, "items", defaultData);
+
+export const assetsPortfolioReducerShort = tableReducerFactory<CoinsAssetItemsViewModel>(
+  {
+    type: ASSETS_PORTFOLIO,
+    paging: { ...DEFAULT_PAGING, itemsOnPage: 5 }
+  }
+);
+
 export const assetsHistorySelector = (state: RootState) => state.assets.history;
 
 export const assetsHistoryTableSelector = tableSelectorCreator<
@@ -80,6 +96,24 @@ export const assetsHistoryReducer = tableReducerFactory<CoinsHistoryEventItemsVi
   {
     type: ASSETS_HISTORY,
     paging: { ...DEFAULT_PAGING, itemsOnPage: 12 },
+    filtering: ASSETS_HISTORY_FILTERS,
+    defaultFilters: ASSETS_HISTORY_DEFAULT_FILTERS
+  }
+);
+
+export const assetsHistorySelectorShort = (state: RootState) =>
+  state.assets.historyShort;
+
+export const assetsHistoryTableSelectorShort = tableSelectorCreator<
+  RootState,
+  CoinsHistoryEventItemsViewModel,
+  CoinsHistoryEventItemsViewModel
+>(assetsHistorySelectorShort, "items", defaultData);
+
+export const assetsHistoryReducerShort = tableReducerFactory<CoinsHistoryEventItemsViewModel>(
+  {
+    type: ASSETS_HISTORY,
+    paging: { ...DEFAULT_PAGING, itemsOnPage: 5 },
     filtering: ASSETS_HISTORY_FILTERS,
     defaultFilters: ASSETS_HISTORY_DEFAULT_FILTERS
   }
