@@ -1,5 +1,6 @@
 import Page from "components/page/page";
 import DashboardInvestingFunds from "pages/dashboard/components/dashboard-investing/dashboard-funds";
+import DashboardInvestingCoins from "pages/dashboard/components/dashboard-investing/dashboard-investing-coins";
 import { DashboardInvestingContext } from "pages/dashboard/components/dashboard-investing/dashboard-investing-context";
 import DashboardInvestingTotalContainer from "pages/dashboard/components/dashboard-investing/dashboard-investing-total.container";
 import DashboardInvestingMostProfitableContainer from "pages/dashboard/components/dashboard-investing/dashboard-most-profitable.container";
@@ -21,6 +22,9 @@ const _InvestmentsPage: React.FC = () => {
         </div>
         <div>
           <DashboardInvestingPrograms />
+        </div>
+        <div>
+          <DashboardInvestingCoins />
         </div>
         <div>
           <DashboardInvestingMostProfitableContainer />

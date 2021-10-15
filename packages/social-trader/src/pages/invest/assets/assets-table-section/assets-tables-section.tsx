@@ -49,7 +49,6 @@ const _AssetsTablesSection: React.FC<Props> = ({
   const [t] = useTranslation();
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   const { tab } = useHashTab<ASSETS_TABS>(ASSETS_TABS.ASSETS);
-  const { isAvailableFeature } = useDevelopmentFeature();
 
   return (
     <DefaultTableBlock>
@@ -61,7 +60,7 @@ const _AssetsTablesSection: React.FC<Props> = ({
               {t("assets-page:tabs.assets")}
             </Link>
           }
-          visible={isAuthenticated && isAvailableFeature}
+          visible={isAuthenticated}
         />
         <GVTab
           value={ASSETS_TABS.FAVOURITES}
@@ -70,7 +69,7 @@ const _AssetsTablesSection: React.FC<Props> = ({
               {t("assets-page:tabs.favourites")}
             </Link>
           }
-          visible={isAuthenticated && isAvailableFeature}
+          visible={isAuthenticated}
         />
         <GVTab
           value={ASSETS_TABS.PORTFOLIO}
@@ -79,7 +78,7 @@ const _AssetsTablesSection: React.FC<Props> = ({
               {t("assets-page:tabs.portfolio")}
             </Link>
           }
-          visible={isAuthenticated && isAvailableFeature}
+          visible={isAuthenticated}
         />
         <GVTab
           value={ASSETS_TABS.HISTORY}
@@ -88,7 +87,7 @@ const _AssetsTablesSection: React.FC<Props> = ({
               {t("assets-page:tabs.history")}
             </Link>
           }
-          visible={isAuthenticated && isAvailableFeature}
+          visible={isAuthenticated}
         />
       </DetailsBlockTabs>
       {(tab === ASSETS_TABS.ASSETS || !isAuthenticated) && (
