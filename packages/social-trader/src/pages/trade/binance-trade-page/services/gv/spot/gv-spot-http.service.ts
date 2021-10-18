@@ -25,7 +25,7 @@ import { api } from "services/api-client/swagger-custom-client";
 import { CurrencyEnum } from "utils/types";
 
 import {
-  createPlaceBuySellOrderRequest,
+  createSpotPlaceBuySellOrderRequest,
   PlaceOrderRequest,
   transformDepthToString,
   transformKlineBar,
@@ -185,7 +185,7 @@ export const cancelOrder = (
 ): Promise<BinanceRawCancelOrder> =>
   api.terminal().cancelOrder({ orderId, symbol, accountId });
 
-const { postSell, postBuy } = createPlaceBuySellOrderRequest(
+const { postSell, postBuy } = createSpotPlaceBuySellOrderRequest(
   (api.terminal().placeOrder as unknown) as PlaceOrderRequest
 );
 

@@ -65,7 +65,7 @@ export const getServerTime = (): Promise<{ serverTime: number }> => {
   );
 };
 
-export const getMarkPrice = (params: {
+export const getMarkPrices = (params: {
   symbol: string;
 }): Observable<MarkPrice> =>
   requestService.get({

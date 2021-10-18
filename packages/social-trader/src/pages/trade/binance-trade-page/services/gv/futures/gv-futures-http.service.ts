@@ -5,6 +5,7 @@ import {
   BinanceRawCancelOrder,
   BinanceRawCancelOrderId,
   BinanceRawFuturesChangeMarginTypeResult,
+  BinanceRawFuturesIncomeHistory,
   BinanceRawFuturesOrderItemsViewModel,
   BinanceRawFuturesPositionMode,
   BinanceRawKlineItemsViewModel,
@@ -24,6 +25,7 @@ import {
   ChangeLeverageResponse,
   CorrectedRestDepth,
   ExchangeInfo,
+  FuturesOrder,
   FuturesPositionInformation,
   KlineParams,
   MarkPrice,
@@ -32,6 +34,7 @@ import {
   SymbolLeverageBrackets,
   Ticker,
   TradeRequest,
+  TransactionHistory,
   UnitedOrder,
   UnitedTrade
 } from "pages/trade/binance-trade-page/trading/terminal.types";
@@ -39,10 +42,10 @@ import { from, Observable } from "rxjs";
 import { api } from "services/api-client/swagger-custom-client";
 
 import {
-  createPlaceBuySellOrderRequest,
+  createFuturesPlaceBuySellOrderRequest,
   PlaceOrderRequest,
   transformDepthToString,
-  transformFuturesToUnitedOrder,
+  transformFuturesOrder,
   transformKlineBar,
   transformToUnitedOrder
 } from "../../api.helpers";
@@ -85,14 +88,14 @@ export const getServerTime = () => {
 export const getOpenOrders = (
   symbol: string,
   accountId?: string
-): Observable<UnitedOrder[]> =>
+): Observable<FuturesOrder[]> =>
   from(
     api
       .terminal()
       .getFuturesOpenOrders({ accountId })
       .then(({ items }: BinanceRawFuturesOrderItemsViewModel) =>
-        items.map(transformFuturesToUnitedOrder)
-      ) as Promise<UnitedOrder[]>
+        items.map(transformFuturesOrder)
+      ) as Promise<FuturesOrder[]>
   );
 
 export const getAllTrades = (filters: {
@@ -212,7 +215,7 @@ export const cancelOrder = (
 const postFuturesOrder = (options: any) =>
   api.terminal().futuresPlaceOrder(options);
 
-const { postSell, postBuy } = createPlaceBuySellOrderRequest(
+const { postSell, postBuy } = createFuturesPlaceBuySellOrderRequest(
   (postFuturesOrder as unknown) as PlaceOrderRequest
 );
 
@@ -227,15 +230,8 @@ export const tradeRequest = ({
   return method(options);
 };
 
-export const getMarkPrice = ({
-  symbol
-}: {
-  symbol: string;
-}): Promise<MarkPrice> =>
-  api
-    .terminal()
-    .getFuturesMarkPrices({ symbol })
-    .then(([price]: MarkPrice[]) => price);
+export const getMarkPrices = (): Observable<MarkPrice[]> =>
+  from(api.terminal().getFuturesMarkPrices());
 
 export const getPositionMode = (accountId: string): Promise<PositionModeType> =>
   api
@@ -263,7 +259,7 @@ export const changeMarginMode = (options: {
   api.terminal().changeFuturesMarginType(options);
 
 export const getPositionInformation = (options: {
-  symbol: string;
+  symbol?: string;
   accountId?: string;
 }): Promise<FuturesPositionInformation[]> =>
   api
@@ -272,6 +268,16 @@ export const getPositionInformation = (options: {
     .then(data =>
       data.map(mapBinanceRawFuturesPositionToFuturesPositionInformation)
     );
+
+export const getTransactionHistory = (options: {
+  accountId?: string;
+  symbol?: string;
+  incomeType?: string;
+  startTime?: Date;
+  endTime?: Date;
+  limit?: number;
+}): Promise<TransactionHistory[]> =>
+  api.terminal().getFuturesIncomeHistory(options);
 
 export const getLeverageBrackets = (options: {
   symbol: string;

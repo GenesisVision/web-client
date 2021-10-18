@@ -6,7 +6,7 @@ import {
   getUserStreamSocket,
   klineSocket,
   marketTicketsSocket,
-  markPriceSocket,
+  markPricesSocket,
   tradeSocket
 } from "../../futures/binance-futures-ws.service";
 import {
@@ -22,13 +22,14 @@ import {
   getExchangeInfo,
   getKlines,
   getLeverageBrackets,
-  getMarkPrice,
+  getMarkPrices,
   getOpenOrders,
   getPositionInformation,
   getPositionMode,
   getServerTime,
   getTickers,
   getTrades,
+  getTransactionHistory,
   getUserStreamKey,
   tradeRequest
 } from "./gv-futures-http.service";
@@ -51,14 +52,15 @@ export const GVFuturesTerminalMethods: ITerminalMethods = {
   tradeRequest,
 
   getPositionInformation,
+  getTransactionHistory,
   getLeverageBrackets,
-  getMarkPrice,
+  getMarkPrices,
   getPositionMode,
   changePositionMode,
   changeLeverage,
   changeMarginMode,
 
-  markPriceSocket,
+  markPricesSocket,
   klineSocket,
   tradeSocket,
   depthSocket,
