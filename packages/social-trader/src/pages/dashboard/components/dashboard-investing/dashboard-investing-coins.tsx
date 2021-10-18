@@ -84,24 +84,26 @@ const _DashboardInvestingCoins: React.FC = () => {
           )}
         />
       </TableTab>
-      <TableTab selected={tab === TABS.HISTORY}>
-        <DashboardInvestingCoinsTable
-          getItems={tablesData.history.getItems()}
-          dataSelector={tablesData.history.dataSelector}
-          columns={ASSETS_HISTORY_TABLE_COLUMNS}
-          title={tabs}
-          renderHeader={column => (
-            <AssetsHistoryTableHeaderCell column={column} />
-          )}
-          renderBodyRow={event => <AssetHistoryTableRow event={event} />}
-          renderFilters={(updateFilter, filtering) => (
-            <AssetHistoryTableFilters
-              updateFilter={updateFilter}
-              filtering={filtering}
-            />
-          )}
-        />
-      </TableTab>
+      {tab === TABS.HISTORY && (
+        <TableTab selected={tab === TABS.HISTORY}>
+          <DashboardInvestingCoinsTable
+            getItems={tablesData.history.getItems()}
+            dataSelector={tablesData.history.dataSelector}
+            columns={ASSETS_HISTORY_TABLE_COLUMNS}
+            title={tabs}
+            renderHeader={column => (
+              <AssetsHistoryTableHeaderCell column={column} />
+            )}
+            renderBodyRow={event => <AssetHistoryTableRow event={event} />}
+            renderFilters={(updateFilter, filtering) => (
+              <AssetHistoryTableFilters
+                updateFilter={updateFilter}
+                filtering={filtering}
+              />
+            )}
+          />
+        </TableTab>
+      )}
     </DashboardBlock>
   );
 };
