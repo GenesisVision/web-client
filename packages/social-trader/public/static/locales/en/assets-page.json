@@ -1,5 +1,5 @@
 {
-  "description": "",
+  "description": "Diversify your capital across hundreds of cryptocurrencies in one click and create your unique portfolio. Experience the ease of managing your own capital with our powerful tool and buy/sell assets without the hurdles of going to the exchanges directly.",
   "title": "Assets",
   "tooltips": {
     "name": "Asset name",
@@ -21,13 +21,13 @@
     "name": "Name",
     "chart": "Chart 24h",
     "asset": "Asset",
-    "price-$": "Price ($)",
-    "change-24h": "Change 24h (%)",
+    "price-$": "Price",
+    "change-24h": "Change 24h",
     "market-cap": "Market Cap",
     "volume-24h": "Volume 24h",
     "amount": "Amount",
     "average-price": "Average price",
-    "profit": "Profit current ($)",
+    "profit": "Profit",
     "date": "Date",
     "trades": "Trades",
     "price": "Price",
@@ -52,6 +52,7 @@
     "amount": "Enter correct amount",
     "fee": "Fee",
     "success-buy": "Buy request is confirmed",
-    "success-sell": "Sell request is confirmed"
+    "success-sell": "Sell request is confirmed",
+    "tooltip": "The funds will be converted according to the current market price (via market order on Binance)."
   }
 }
