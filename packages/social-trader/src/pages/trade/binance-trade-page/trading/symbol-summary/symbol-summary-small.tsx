@@ -248,7 +248,6 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
                   })}
                   thousandSeparator={","}
                   displayType="text"
-                  suffix={` ${baseAsset}`}
                 />
               </MonoText>
             </Text>
@@ -265,7 +264,6 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
                   })}
                   thousandSeparator={","}
                   displayType="text"
-                  suffix={` ${quoteAsset}`}
                 />
               </MonoText>
             </Text>

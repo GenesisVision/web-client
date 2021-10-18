@@ -202,7 +202,6 @@ const _SymbolSummaryView: React.FC<Props> = ({
                   })}
                   thousandSeparator={","}
                   displayType="text"
-                  suffix={` ${baseAsset}`}
                 />
               </MonoText>
             </SymbolSummaryLine>
@@ -215,7 +214,6 @@ const _SymbolSummaryView: React.FC<Props> = ({
                   })}
                   thousandSeparator={","}
                   displayType="text"
-                  suffix={` ${quoteAsset}`}
                 />
               </MonoText>
             </SymbolSummaryLine>
