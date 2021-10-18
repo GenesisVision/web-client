@@ -1,5 +1,6 @@
 import {
   futuresAccountUpdateEventTransform,
+  futuresEventTradeOrderTransform,
   futuresMarginCallEventTransform,
   futuresTradeOrderUpdateEventTransform,
   transformFuturesTickerSymbolWS,
@@ -41,14 +42,15 @@ export enum ORDER_STATUSES {
   REJECTED = "REJECTED"
 }
 
-export const markPriceSocket = (
-  connectSocketMethod: ConnectSocketMethodType,
-  symbol: TerminalCurrency
-): Observable<MarkPrice> => {
-  const socketType = "markPrice";
-  const socketName = `${symbol.toLowerCase()}@${socketType}`;
+export const markPricesSocket = (
+  connectSocketMethod: ConnectSocketMethodType
+): Observable<MarkPrice[]> => {
+  const socketType = "arr";
+  const socketName = `!markPrice@${socketType}`;
   const url = `${BINANCE_FUTURES_WS_API_URL}/${BINANCE_WS_API_TYPE.WS}/${socketName}`;
-  return connectSocketMethod(socketType, url).pipe(map(transformMarkPriceWS));
+  return connectSocketMethod(socketType, url).pipe(
+    map(items => items.map(transformMarkPriceWS))
+  );
 };
 
 export const tradeSocket = (
@@ -98,7 +100,7 @@ export const getUserStreamSocket = (
       if (item.e === "ACCOUNT_UPDATE")
         return futuresAccountUpdateEventTransform(item);
       if (item.e === "ORDER_TRADE_UPDATE")
-        return futuresTradeOrderUpdateEventTransform(item);
+        return futuresEventTradeOrderTransform(item.o);
       return item;
     })
   );
