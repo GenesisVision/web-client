@@ -13,7 +13,7 @@ import { useAuth } from "hooks/auth.hook";
 import useDevelopmentFeature from "hooks/development-feature.hook";
 import AssetBuy from "modules/assets-table/components/buttons/asset-buy.button";
 import { ToggleAssetFavoriteButton } from "modules/toggle-asset-favorite-button/toggle-asset-favorite-button";
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import NumberFormat from "react-number-format";
 import styled from "styled-components";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
@@ -21,6 +21,7 @@ import { mediaBreakpointLandscapePhone } from "utils/style/media";
 
 interface Props {
   asset: CoinsAsset;
+  updateRow: () => void;
 }
 
 const ChartCell = styled(TableCell)`
@@ -38,13 +39,12 @@ const FavoriteIconContainer = styled.div`
   `)}
 `;
 
-const _AssetTableRow: React.FC<Props> = ({ asset }) => {
-  const [fundState, setFundState] = useState(asset);
+const _AssetTableRow: React.FC<Props> = ({ asset, updateRow }) => {
   const { isAuthenticated } = useAuth();
   const { isAvailableFeature } = useDevelopmentFeature();
 
   const handleUpdateRow = useCallback(asset => {
-    setFundState(asset);
+    updateRow();
   }, []);
   return (
     <TableRow>
@@ -114,13 +114,13 @@ const _AssetTableRow: React.FC<Props> = ({ asset }) => {
         <TableCell>
           <FavoriteIconContainer>
             <ToggleAssetFavoriteButton
-              asset={fundState}
+              asset={asset}
               updateRow={handleUpdateRow}
               assetType={ASSET_INVEST.COIN}
               id={asset.id}
-              isFavorite={fundState.isFavorite}
+              isFavorite={asset.isFavorite}
             >
-              <FavoriteIcon selected={fundState.isFavorite} />
+              <FavoriteIcon selected={asset.isFavorite} />
             </ToggleAssetFavoriteButton>
           </FavoriteIconContainer>
         </TableCell>

@@ -20,7 +20,7 @@ const _AssetsCoins: React.FC<Props> = ({
     []
   );
   const renderBodyRow = useCallback(
-    asset => <AssetTableRow asset={asset} />,
+    (asset, updateRow) => <AssetTableRow asset={asset} updateRow={updateRow} />,
     []
   );
 
