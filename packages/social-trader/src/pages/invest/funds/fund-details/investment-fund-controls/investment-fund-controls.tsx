@@ -10,7 +10,10 @@ import InvestmentFundInfo from "pages/invest/funds/fund-details/fund-details-des
 import * as React from "react";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
-import { platformDataSelector } from "reducers/platform-reducer";
+import {
+  isInvestingBscEnabledSelector,
+  isInvestingXDaiEnabledSelector
+} from "reducers/platform-reducer";
 
 const _InvestmentFundControls: React.FC<Props> = ({
   hasTradingSchedule,
@@ -21,7 +24,8 @@ const _InvestmentFundControls: React.FC<Props> = ({
 }) => {
   const isOwnProgram = fundDescription.publicInfo.isOwnAsset;
   const isAuthenticated = useSelector(isAuthenticatedSelector);
-  const platformData = useSelector(platformDataSelector);
+  const isInvestingBscEnabled = useSelector(isInvestingBscEnabledSelector);
+  const isInvestingXDaiEnabled = useSelector(isInvestingXDaiEnabledSelector);
   const canInvest = isAuthenticated
     ? !!fundDescription.personalDetails &&
       fundDescription.personalDetails.canInvest
@@ -45,7 +49,7 @@ const _InvestmentFundControls: React.FC<Props> = ({
               id={fundDescription.id}
             />
           </RowItem>
-          {platformData?.assetInfo.anonymousInfo.isInvestingBscEnabled && (
+          {isInvestingBscEnabled && canInvest && (
             <RowItem bottomOffset>
               <BSCInvestingButton
                 currency={"BNB"}
@@ -53,7 +57,7 @@ const _InvestmentFundControls: React.FC<Props> = ({
               />
             </RowItem>
           )}
-          {platformData?.assetInfo.anonymousInfo.isInvestingXDaiEnabled && (
+          {isInvestingXDaiEnabled && canInvest && (
             <RowItem bottomOffset>
               <BSCInvestingButton
                 currency={"DAI"}
