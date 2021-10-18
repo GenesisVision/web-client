@@ -2,15 +2,18 @@ import FundAssetFilter, {
   IFundAssetFilterProps
 } from "components/table/components/filtering/fund-asset-filter/fund-asset-filter";
 import useApiRequest from "hooks/api-request.hook";
-import React from "react";
-import { api } from "services/api-client/swagger-custom-client";
+import { fetchAssetsCoins } from "pages/invest/assets/actions/assets.actions";
 import { getTradingAssets } from "pages/invest/funds/fund-settings/reallocation/services/reallocate.services";
+import React from "react";
 
-export interface ICoinsAssetFilterContainerProps extends Omit<IFundAssetFilterProps, 'values'> {}
+export interface ICoinsAssetFilterContainerProps
+  extends Omit<IFundAssetFilterProps, "values"> {}
 
 const _CoinsAssetFilterContainer: React.FC<ICoinsAssetFilterContainerProps> = props => {
   const { data: coins } = useApiRequest({
-    request: () => api.coins().getCoins(),
+    name: "CoinsAssetFilterContainer",
+    cache: true,
+    request: fetchAssetsCoins,
     fetchOnMount: true
   });
 
@@ -24,7 +27,9 @@ const _CoinsAssetFilterContainer: React.FC<ICoinsAssetFilterContainerProps> = pr
   if (!platformAssets || !coins) return null;
   const { assets, providers } = platformAssets;
 
-  const values = assets.filter(asset => coins.items.find(coin => coin.id === asset.id));
+  const values = assets.filter(asset =>
+    coins.items.find(coin => coin.id === asset.id)
+  );
 
   return <FundAssetFilter {...props} values={values} providers={providers} />;
 };

@@ -12,11 +12,16 @@ import {
 import { api } from "services/api-client/swagger-custom-client";
 import { ApiAction } from "utils/types";
 
+export const fetchAssetsCoins = (
+  filters?: ComposeFiltersAllType
+): Promise<CoinsAssetItemsViewModel> =>
+  api.coins().getCoins({ ...filters, isFavorite: false });
+
 export const fetchAssetsCoinsAction = (
   filters: ComposeFiltersAllType
 ): ApiAction<CoinsAssetItemsViewModel> => ({
   type: ASSETS_COINS,
-  payload: api.coins().getCoins({ ...filters, isFavorite: false })
+  payload: fetchAssetsCoins(filters)
 });
 
 export const fetchAssetsFavourites = (
@@ -28,7 +33,7 @@ export const fetchAssetsFavouritesAction = (
   filters: ComposeFiltersAllType
 ): ApiAction<CoinsAssetItemsViewModel> => ({
   type: ASSETS_FAVOURITES,
-  payload: api.coins().getCoins({ ...filters, isFavorite: true })
+  payload: fetchAssetsFavourites(filters)
 });
 
 export const fetchAssetsPortfolioAction = (
