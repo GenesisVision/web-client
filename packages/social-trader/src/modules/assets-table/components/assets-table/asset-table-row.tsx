@@ -13,16 +13,11 @@ import { useAuth } from "hooks/auth.hook";
 import useDevelopmentFeature from "hooks/development-feature.hook";
 import AssetBuy from "modules/assets-table/components/buttons/asset-buy.button";
 import { ToggleAssetFavoriteButton } from "modules/toggle-asset-favorite-button/toggle-asset-favorite-button";
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import NumberFormat from "react-number-format";
 import styled from "styled-components";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
 import { mediaBreakpointLandscapePhone } from "utils/style/media";
-
-interface Props {
-  asset: CoinsAsset;
-  updateRow: () => void;
-}
 
 const ChartCell = styled(TableCell)`
   min-width: 50px;
@@ -39,13 +34,27 @@ const FavoriteIconContainer = styled.div`
   `)}
 `;
 
-const _AssetTableRow: React.FC<Props> = ({ asset, updateRow }) => {
+interface Props {
+  asset: CoinsAsset;
+  updateFavorites?: (isFavorite: boolean) => void;
+}
+
+const _AssetTableRow: React.FC<Props> = ({ asset, updateFavorites }) => {
+  const [fundState, setFundState] = useState(asset);
   const { isAuthenticated } = useAuth();
   const { isAvailableFeature } = useDevelopmentFeature();
 
-  const handleUpdateRow = useCallback(asset => {
-    updateRow();
-  }, []);
+  useEffect(() => {
+    setFundState(asset);
+  }, [asset.isFavorite]);
+
+  const handleUpdateRow = useCallback(
+    asset => {
+      setFundState(asset);
+      updateFavorites && updateFavorites(asset.isFavorite);
+    },
+    [updateFavorites]
+  );
   return (
     <TableRow>
       <TableCell>
@@ -114,13 +123,13 @@ const _AssetTableRow: React.FC<Props> = ({ asset, updateRow }) => {
         <TableCell>
           <FavoriteIconContainer>
             <ToggleAssetFavoriteButton
-              asset={asset}
+              asset={fundState}
               updateRow={handleUpdateRow}
               assetType={ASSET_INVEST.COIN}
               id={asset.id}
-              isFavorite={asset.isFavorite}
+              isFavorite={fundState.isFavorite}
             >
-              <FavoriteIcon selected={asset.isFavorite} />
+              <FavoriteIcon selected={fundState.isFavorite} />
             </ToggleAssetFavoriteButton>
           </FavoriteIconContainer>
         </TableCell>

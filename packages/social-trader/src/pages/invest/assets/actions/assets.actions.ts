@@ -19,6 +19,11 @@ export const fetchAssetsCoinsAction = (
   payload: api.coins().getCoins({ ...filters, isFavorite: false })
 });
 
+export const fetchAssetsFavourites = (
+  filters?: ComposeFiltersAllType
+): Promise<CoinsAssetItemsViewModel> =>
+  api.coins().getCoins({ ...filters, isFavorite: true });
+
 export const fetchAssetsFavouritesAction = (
   filters: ComposeFiltersAllType
 ): ApiAction<CoinsAssetItemsViewModel> => ({
