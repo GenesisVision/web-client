@@ -158,6 +158,18 @@ export const programsInfoSelector = apiFieldSelector<
   fieldSelector(state => state.assetInfo.programInfo)
 );
 
+export const isInvestingBscEnabledSelector = apiFieldSelector(
+  platformDataSelector,
+  fieldSelector(state => state.assetInfo.anonymousInfo.isInvestingBscEnabled),
+  undefined
+);
+
+export const isInvestingXDaiEnabledSelector = apiFieldSelector(
+  platformDataSelector,
+  fieldSelector(state => state.assetInfo.anonymousInfo.isInvestingXDaiEnabled),
+  undefined
+);
+
 export const createProgramInfoSelector = apiFieldSelector<
   PlatformInfo,
   ProgramCreateAssetPlatformInfo
