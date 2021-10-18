@@ -91,6 +91,7 @@ const _SymbolSummaryView: React.FC<Props> = ({
               <h4>
                 <MonoText>
                   <TradeStatefulValue
+                    thousandSeparator={","}
                     value={terminalMoneyFormat({ amount: lastPrice, tickSize })}
                     trigger={eventTime}
                   />
@@ -100,7 +101,14 @@ const _SymbolSummaryView: React.FC<Props> = ({
             {usdRate && (
               <Row>
                 <Text muted>
-                  <MonoText>${formatCurrencyValue(usdRate, "USD")}</MonoText>
+                  <MonoText>
+                    <NumberFormat
+                      value={formatCurrencyValue(usdRate, "USD")}
+                      thousandSeparator={","}
+                      displayType="text"
+                      prefix={"$"}
+                    />
+                  </MonoText>
                 </Text>
               </Row>
             )}
@@ -155,7 +163,14 @@ const _SymbolSummaryView: React.FC<Props> = ({
                   size={"xlarge"}
                   color={+priceChangePercent > 0 ? "green" : "red"}
                 >
-                  {terminalMoneyFormat({ amount: priceChange, tickSize })}{" "}
+                  <NumberFormat
+                    value={terminalMoneyFormat({
+                      amount: priceChange,
+                      tickSize
+                    })}
+                    thousandSeparator={","}
+                    displayType="text"
+                  />{" "}
                   {terminalMoneyFormat({
                     amount: priceChangePercent,
                     digits: 2
