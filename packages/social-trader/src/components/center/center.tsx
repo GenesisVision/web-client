@@ -11,6 +11,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
   small?: boolean;
   middle?: boolean;
   large?: boolean;
+  spaceBetween?: boolean;
 }
 
 export const Center = styled.div<Props>`
@@ -20,6 +21,8 @@ export const Center = styled.div<Props>`
     return "flex";
   }};
   ${({ center = true }: Props) => center && "align-items: center"};
+  ${({ spaceBetween = false }: Props) =>
+    spaceBetween && "justify-content: space-between"};
   flex-wrap: ${({ wrap }: Props) => (wrap ? "wrap" : "nowrap")};
   ${cursorPointer}
 `;
