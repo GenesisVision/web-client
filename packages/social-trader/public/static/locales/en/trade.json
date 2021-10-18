@@ -1,4 +1,69 @@
 {
   "title": "Trade",
-  "description": "Information about trade brokers"
+  "description": "Information about trade brokers",
+  "open-orders": {
+    "table": {
+      "time": "Time",
+      "symbol": "Symbol",
+      "type": "Type",
+      "side": "Side",
+      "price": "Price",
+      "amount": "Amount",
+      "filled": "Filled",
+      "trigger-conditions": "Trigger Conditions",
+      "reduce-only": "Reduce Only",
+      "cancel-all": "Cancel All"
+    }
+  },
+  "positions": {
+    "table": {
+      "symbol": "Symbol",
+      "size": "Size",
+      "entry-price": "Entry price",
+      "mark-price": "Mark Price",
+      "liq-price": "Liq.Price",
+      "margin-ratio": "Margin Ratio",
+      "margin": "Margin",
+      "pnl": "PNL(ROE %)",
+      "tp-sl": "TP/SL for position",
+      "notional-size": "Notional Size",
+      "adl": "ADL",
+      "action": "Action",
+      "tooltip": {
+        "size": "Trading units using stable coins in USDⓈ-M Futures such as USDT, open position amounts shown are calculated based on the actual coin quantity. Values change with the last price of the symbol.",
+        "entry-price": "Average executed buy/sell price for your current long/short position.",
+        "mark-price": "The latest mark price for this contract. This is the price used for PNL and margin calculations, and may differ from the last price for the purposes of avoiding price manipulation.",
+        "liq-price": "If the mark price of the contract reaches below the liquidation price (when long) or above (when short), your position will be liquidated.",
+        "margin-ratio": "The lower the Margin Ratio, the lower your liquidation level will be relative to your position size. Your positions will be liquidated once Margin Ratio reaches 100%.",
+        "margin": "The margin allocated to the current position.",
+        "pnl": "Unrealized profit & loss and Return on Equity (%) are calculated based on {{ price }} Price.",
+        "tp-sl": "This setting applies to the entire position. Take-profit and stop-loss automatically cancel after closing the position. A market order is triggered when the stop price is reached. The order will be rejected if the position size exceeds the Max Market Order Qty limit.",
+        "adl": "This indicator shows your position in the auto-deleverage queue. If all lights are lit, in the event of a liquidation, your position may be reduced."
+      }
+    }
+  },
+  "order-history": {
+    "table": {
+      "time": "Time",
+      "symbol": "Symbol",
+      "type": "Type",
+      "side": "Side",
+      "average": "Average",
+      "price": "Price",
+      "executed": "Executed",
+      "amount": "Amount",
+      "reduce-only": "Reduce Only",
+      "trigger-conditions": "Trigger Conditions",
+      "status": "Status"
+    }
+  },
+  "transaction-history": {
+    "table": {
+      "time": "Time",
+      "type": "Type",
+      "amount": "Amount",
+      "asset": "Asset",
+      "symbol": "Symbol"
+    }
+  }
 }

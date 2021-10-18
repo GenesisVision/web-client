@@ -22,10 +22,10 @@ import {
 import { SymbolSummaryData } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useContext } from "react";
 import NumberFormat from "react-number-format";
-import { diffDate } from "utils/dates";
 import { formatCurrencyValue } from "utils/formatter";
 
 import TerminalTitle from "../components/terminal-title/terminal-title";
+import { SymbolSummaryCountdown } from "./symbol-summary-countdown";
 
 interface Props {
   data: SymbolSummaryData;
@@ -57,6 +57,7 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
     markPrice,
     tickerData: {
       eventTime,
+      closeTime,
       lastPrice,
       baseAsset,
       quoteAsset,
@@ -79,7 +80,7 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
     </h5>
   );
   return (
-    <TerminalTitle amount={lastPrice} trigger={eventTime!}>
+    <TerminalTitle amount={lastPrice} trigger={+closeTime}>
       <Center style={{ overflowX: "auto" }}>
         <RowItem size={"large"}>
           <ResponsiveContainer
@@ -179,12 +180,10 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
                       </MonoText>
                     </Text>
                     <MonoText>
-                      {diffDate(
-                        new Date(serverTime.date),
-                        markPrice.nextFundingTime
-                      )
-                        .utc()
-                        .format("HH:mm:ss")}
+                      <SymbolSummaryCountdown
+                        nextFundingTime={markPrice.nextFundingTime}
+                        serverTime={serverTime.date}
+                      />
                     </MonoText>
                   </Text>
                 )}
@@ -196,6 +195,7 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
           <LabeledValue size={"xsmall"} label={"24h Change"}>
             <MonoText>
               <Text
+                wrap={false}
                 size={"xsmall"}
                 color={+priceChangePercent > 0 ? "green" : "red"}
               >

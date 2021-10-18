@@ -4,15 +4,28 @@ import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/c
 import { TerminalTickerContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-ticker.context";
 import {
   filterOrderEventsStream,
-  generateOrderMessage,
+  generateFuturesOrderMessage,
+  generateSpotOrderMessage,
   getSymbol
 } from "pages/trade/binance-trade-page/trading/terminal.helpers";
-import { UnitedOrder } from "pages/trade/binance-trade-page/trading/terminal.types";
+import {
+  FuturesOrder,
+  UnitedOrder
+} from "pages/trade/binance-trade-page/trading/terminal.types";
 import { normalizeOpenOrdersList } from "pages/trade/binance-trade-page/trading/trading-tables/open-orders/open-orders.helpers";
-import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useState
+} from "react";
+import { useTranslation } from "react-i18next";
 import { map } from "rxjs/operators";
 
-type TerminalOpenOrdersContextState = { openOrders?: UnitedOrder[] };
+type TerminalOpenOrdersContextState = {
+  openOrders?: UnitedOrder[] | FuturesOrder[];
+};
 
 export const TerminalOpenOrdersInitialState = {} as TerminalOpenOrdersContextState;
 
@@ -24,6 +37,7 @@ export const TerminalOpenOrdersContextProvider: React.FC = ({ children }) => {
   const { successAlert } = useAlerts();
   const { items: symbols } = useContext(TerminalTickerContext);
   const { getOpenOrders } = useContext(TerminalMethodsContext);
+  const [t] = useTranslation();
 
   const {
     exchangeAccountId,
@@ -33,9 +47,11 @@ export const TerminalOpenOrdersContextProvider: React.FC = ({ children }) => {
   } = useContext(TerminalInfoContext);
 
   const [list, setList] = useState<{
-    [key: string]: UnitedOrder;
+    [key: string]: UnitedOrder | FuturesOrder;
   }>({});
-  const [socketData, setSocketData] = useState<UnitedOrder | undefined>();
+  const [socketData, setSocketData] = useState<
+    UnitedOrder | FuturesOrder | undefined
+  >();
 
   useEffect(() => {
     if (!exchangeAccountId || !userStream) return;
@@ -68,12 +84,23 @@ export const TerminalOpenOrdersContextProvider: React.FC = ({ children }) => {
         ...updatedList[socketData.id],
         ...socketData
       };
-    if (socketData.eventType === "executionReport" && symbols) {
+    if (
+      (socketData.eventType === "executionReport" ||
+        socketData.eventType === "ORDER_TRADE_UPDATE") &&
+      symbols
+    ) {
       const symbolData = symbols.find(
         data => data.symbol === socketData.symbol
       );
       if (symbolData) {
-        const message = generateOrderMessage(socketData, symbolData);
+        const message =
+          terminalType === "futures"
+            ? generateFuturesOrderMessage(
+                socketData as FuturesOrder,
+                symbolData,
+                t
+              )
+            : generateSpotOrderMessage(socketData as UnitedOrder, symbolData);
         successAlert(message);
       }
     }
@@ -88,8 +115,10 @@ export const TerminalOpenOrdersContextProvider: React.FC = ({ children }) => {
     }),
     [list]
   );
+
   return (
-    <TerminalOpenOrdersContext.Provider value={items}>
+    // Fix type
+    <TerminalOpenOrdersContext.Provider value={items as any}>
       {children}
     </TerminalOpenOrdersContext.Provider>
   );

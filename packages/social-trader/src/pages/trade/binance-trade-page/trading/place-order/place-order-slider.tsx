@@ -8,21 +8,31 @@ import React, { useCallback } from "react";
 import { RANGE_MARKS } from "./place-order.helpers";
 
 export interface IPlaceOrderSliderProps {
+  setValue: SetSliderValueFunc | ((value: number) => void);
   value?: number;
-  setValue: SetSliderValueFunc;
+  setPercentMode?: (flag: boolean) => void;
 }
 
 const _PlaceOrderSlider: React.FC<IPlaceOrderSliderProps> = ({
+  setPercentMode,
   value,
   setValue
 }) => {
+  const handleChange = useCallback(
+    (value: number) => {
+      setPercentMode && setPercentMode(true);
+      setValue(value);
+    },
+    [setValue]
+  );
+
   return (
     <Slider
       min={0}
       max={MAX_TRADE_SLIDER_VALUE}
       marks={RANGE_MARKS}
       value={value}
-      onChange={useCallback((value: number) => setValue(value), [setValue])}
+      onChange={handleChange}
     />
   );
 };

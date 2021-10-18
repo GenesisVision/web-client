@@ -5,23 +5,23 @@ import { Text } from "components/text/text";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-methods.context";
 import { UnitedOrder } from "pages/trade/binance-trade-page/trading/terminal.types";
-import { OrderHistoryRow } from "pages/trade/binance-trade-page/trading/trading-tables/order-history/order-history-row";
 import {
   ORDER_HISTORY_TABLE_COLUMNS,
   updateOrderHistoryData
 } from "pages/trade/binance-trade-page/trading/trading-tables/order-history/order-history.helpers";
+import { OrderHistoryRow } from "pages/trade/binance-trade-page/trading/trading-tables/order-history/order-history-row";
 import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
-
-import styles from "./order-history.module.scss";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
+
+import styles from "./order-history.module.scss";
 
 interface Props {
   updates?: UnitedOrder[];
 }
 
-export const OrderHistory: React.FC<Props> = ({ updates }) => {
+export const OrderHistorySpot: React.FC<Props> = ({ updates }) => {
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   const { getAllOrders } = useContext(TerminalMethodsContext);
   const { exchangeAccountId } = useContext(TerminalInfoContext);

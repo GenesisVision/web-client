@@ -3,10 +3,13 @@ import { filterOrderEventsStream } from "pages/trade/binance-trade-page/trading/
 import { UnitedOrder } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useContext, useEffect, useState } from "react";
 
-import { OrderHistory } from "./order-history";
+import { OrderHistoryFutures } from "./order-history-futures";
+import { OrderHistorySpot } from "./order-history-spot";
 
 export const OrderHistoryContainer: React.FC = () => {
-  const { exchangeAccountId, userStream } = useContext(TerminalInfoContext);
+  const { exchangeAccountId, userStream, terminalType } = useContext(
+    TerminalInfoContext
+  );
 
   const [socketData, setSocketData] = useState<UnitedOrder[] | undefined>();
 
@@ -18,5 +21,9 @@ export const OrderHistoryContainer: React.FC = () => {
     });
   }, [exchangeAccountId, userStream]);
 
-  return <OrderHistory updates={socketData} />;
+  return terminalType === "futures" ? (
+    <OrderHistoryFutures />
+  ) : (
+    <OrderHistorySpot updates={socketData} />
+  );
 };

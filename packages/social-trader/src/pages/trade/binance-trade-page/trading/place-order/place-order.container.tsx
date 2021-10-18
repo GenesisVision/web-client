@@ -1,15 +1,18 @@
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import { TradingPriceContext } from "pages/trade/binance-trade-page/trading/contexts/trading-price.context";
-import { PlaceOrder } from "pages/trade/binance-trade-page/trading/place-order/place-order";
 import { getFilterValues } from "pages/trade/binance-trade-page/trading/place-order/place-order.helpers";
+import { PlaceOrderSpot } from "pages/trade/binance-trade-page/trading/place-order/place-order-spot";
 import { getSymbol } from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import React, { useContext, useMemo } from "react";
+
+import { PlaceOrderFutures } from "./place-order-futures";
 
 const _PlaceOrderContainer: React.FC = () => {
   const { price, trades } = useContext(TradingPriceContext);
   const {
     symbol: { baseAsset, quoteAsset },
-    exchangeInfo
+    exchangeInfo,
+    terminalType
   } = useContext(TerminalInfoContext);
 
   const filterValues = useMemo(
@@ -21,9 +24,15 @@ const _PlaceOrderContainer: React.FC = () => {
   );
 
   if (!+price || !trades || !trades[0] || !filterValues) return null;
-
-  return (
-    <PlaceOrder
+  // memo problem
+  return terminalType === "futures" ? (
+    <PlaceOrderFutures
+      filterValues={filterValues}
+      price={price}
+      lastTrade={trades[0].price}
+    />
+  ) : (
+    <PlaceOrderSpot
       filterValues={filterValues}
       price={price}
       lastTrade={trades[0].price}

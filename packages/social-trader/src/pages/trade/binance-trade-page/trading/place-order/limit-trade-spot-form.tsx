@@ -2,39 +2,41 @@ import { Row } from "components/row/row";
 import { RowItem } from "components/row-item/row-item";
 import { API_REQUEST_STATUS } from "hooks/api-request.hook";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
-import { TerminalPlaceOrderContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-place-order.context";
-import { ReduceOnlyField } from "pages/trade/binance-trade-page/trading/place-order/place-order-settings/reduce-only-field/reduce-only-field";
+import { PriceField } from "pages/trade/binance-trade-page/trading/place-order/forms/fields/price-field";
+import { QuantityField } from "pages/trade/binance-trade-page/trading/place-order/forms/fields/quantity-field";
+import { TotalField } from "pages/trade/binance-trade-page/trading/place-order/forms/fields/total-field";
 import {
   TIME_IN_FORCE_VALUES,
   TimeInForceField
 } from "pages/trade/binance-trade-page/trading/place-order/place-order-settings/time-in-force-field/time-in-force-field";
 import { PlaceOrderSlider } from "pages/trade/binance-trade-page/trading/place-order/place-order-slider";
 import { PlaceOrderSubmitButton } from "pages/trade/binance-trade-page/trading/place-order/place-order-submit-button";
-import { OrderSide } from "pages/trade/binance-trade-page/trading/terminal.types";
+import {
+  OrderSide,
+  OrderType
+} from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { allowPositiveValuesNumberFormat } from "utils/helpers";
 import { HookForm } from "utils/hook-form.helpers";
 
 import { usePlaceOrderAutoFill } from "./hooks/place-order-auto-fill.hook";
-import { usePlaceOrderFormReset } from "./hooks/place-order-form-reset.hook";
-import { usePlaceOrderInfo } from "./hooks/place-order-info-hook";
+import { useSpotPlaceOrderFormReset } from "./hooks/place-order-form-reset.hook";
+import { useSpotPlaceOrderInfo } from "./hooks/place-order-info-hook";
 import {
   FilterValues,
-  IPlaceOrderFormValues,
-  IPlaceOrderHandleSubmitValues,
-  TRADE_FORM_FIELDS
+  ISpotPlaceOrderDefaultFormValues,
+  SPOT_TRADE_FORM_FIELDS
 } from "./place-order.types";
-import { TotalField } from "pages/trade/binance-trade-page/trading/place-order/forms/fields/total-field";
-import { QuantityField } from "pages/trade/binance-trade-page/trading/place-order/forms/fields/quantity-field";
-import { PriceField } from "pages/trade/binance-trade-page/trading/place-order/forms/fields/price-field";
 
 export interface ILimitTradeFormProps {
   filterValues: FilterValues;
   status: API_REQUEST_STATUS;
   outerPrice: string;
   side: OrderSide;
-  onSubmit: (values: IPlaceOrderHandleSubmitValues) => any;
+  onSubmit: (
+    values: ISpotPlaceOrderDefaultFormValues & { type: OrderType }
+  ) => any;
 }
 
 interface Props extends ILimitTradeFormProps {
@@ -42,7 +44,7 @@ interface Props extends ILimitTradeFormProps {
   balanceQuote: number;
 }
 
-const _LimitTradeForm: React.FC<Props> = ({
+const _LimitTradeSpotForm: React.FC<Props> = ({
   filterValues,
   status,
   balanceQuote,
@@ -52,12 +54,8 @@ const _LimitTradeForm: React.FC<Props> = ({
   side
 }) => {
   const {
-    symbol: { baseAsset },
-    terminalType
+    symbol: { baseAsset }
   } = useContext(TerminalInfoContext);
-  const { currentPositionMode } = useContext(TerminalPlaceOrderContext);
-
-  const isFutures = terminalType === "futures";
 
   const {
     minPrice,
@@ -66,24 +64,24 @@ const _LimitTradeForm: React.FC<Props> = ({
     minNotional,
     maxQuantityWithWallet,
     maxTotalWithWallet
-  } = usePlaceOrderInfo({
+  } = useSpotPlaceOrderInfo({
     balanceBase,
     balanceQuote,
     side,
     filterValues
   });
 
-  const form = useForm<IPlaceOrderFormValues>({
+  const form = useForm<ISpotPlaceOrderDefaultFormValues>({
     defaultValues: {
-      [TRADE_FORM_FIELDS.timeInForce]: TIME_IN_FORCE_VALUES[0].value,
-      [TRADE_FORM_FIELDS.price]: outerPrice
+      [SPOT_TRADE_FORM_FIELDS.timeInForce]: TIME_IN_FORCE_VALUES[0].value,
+      [SPOT_TRADE_FORM_FIELDS.price]: outerPrice
     },
     mode: "onChange"
   });
   const { triggerValidation, watch, setValue, reset } = form;
   const { quantity, total, price } = watch();
 
-  const { sliderValue, setSliderValue } = usePlaceOrderFormReset({
+  const { sliderValue, setSliderValue } = useSpotPlaceOrderFormReset({
     status,
     triggerValidation,
     outerPrice,
@@ -93,7 +91,7 @@ const _LimitTradeForm: React.FC<Props> = ({
     setValue,
     balanceBase,
     balanceQuote,
-    quantityName: TRADE_FORM_FIELDS.quantity
+    quantityName: SPOT_TRADE_FORM_FIELDS.quantity
   });
 
   usePlaceOrderAutoFill({
@@ -101,8 +99,8 @@ const _LimitTradeForm: React.FC<Props> = ({
     sellWalletAvailable: balanceBase,
     setSliderValue,
     side,
-    totalName: TRADE_FORM_FIELDS.total,
-    quantityName: TRADE_FORM_FIELDS.quantity,
+    totalName: SPOT_TRADE_FORM_FIELDS.total,
+    quantityName: SPOT_TRADE_FORM_FIELDS.quantity,
     setValue,
     price,
     quantity,
@@ -139,16 +137,11 @@ const _LimitTradeForm: React.FC<Props> = ({
       </Row>
       <Row size={"small"}>
         <RowItem wide>
-          <TimeInForceField orderType={"Limit"} />
+          <TimeInForceField />
         </RowItem>
-        {isFutures && currentPositionMode === "OneWay" && (
-          <RowItem wide>
-            <ReduceOnlyField />
-          </RowItem>
-        )}
       </Row>
     </HookForm>
   );
 };
 
-export const LimitTradeForm = React.memo(_LimitTradeForm);
+export const LimitTradeSpotForm = React.memo(_LimitTradeSpotForm);

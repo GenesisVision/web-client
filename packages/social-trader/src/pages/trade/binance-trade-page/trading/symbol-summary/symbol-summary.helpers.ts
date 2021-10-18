@@ -5,28 +5,27 @@ import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/c
 import { TerminalTickerContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-ticker.context";
 import { getSymbolFromState } from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import {
-  MarkPrice,
   SymbolSummaryData,
   TerminalType
 } from "pages/trade/binance-trade-page/trading/terminal.types";
-import { useContext, useEffect, useState } from "react";
-import { useSockets } from "services/websocket.service";
+import { useContext, useEffect } from "react";
 import { safeGetElemFromArray } from "utils/helpers";
 
 export const useSymbolData = (): SymbolSummaryData | undefined => {
   const { rate, getRate } = useGetRate();
-  const { connectSocket } = useSockets();
 
-  const [markPrice, setMarkPrice] = useState<MarkPrice | undefined>();
+  const { getServerTime } = useContext(TerminalMethodsContext);
+  const { items, markPrices } = useContext(TerminalTickerContext);
 
-  const { getServerTime, markPriceSocket, getMarkPrice } = useContext(
-    TerminalMethodsContext
-  );
-  const { items } = useContext(TerminalTickerContext);
   const { symbol, terminalType } = useContext(TerminalInfoContext);
+  const isFutures = terminalType === "futures";
   const textSymbol = getSymbolFromState(symbol);
   const tickerData = items
     ? safeGetElemFromArray(items, item => item.symbol === textSymbol)
+    : undefined;
+
+  const markPrice = markPrices
+    ? safeGetElemFromArray(markPrices, item => item.symbol === textSymbol)
     : undefined;
 
   const { data: serverTime } = useApiRequest({
@@ -35,32 +34,23 @@ export const useSymbolData = (): SymbolSummaryData | undefined => {
   });
 
   useEffect(() => {
-    getRate({ from: symbol.baseAsset, to: "USDT" });
-  }, [symbol]);
-
-  useEffect(() => {
-    getRate({ from: symbol.baseAsset, to: "USDT" });
-  }, [symbol]);
-
-  useEffect(() => {
-    if (!getMarkPrice) {
-      setMarkPrice(undefined);
-      return;
+    if (!isFutures) {
+      getRate({ from: symbol.baseAsset, to: "USDT" });
     }
-    getMarkPrice({ symbol: textSymbol }).then(data => {
-      setMarkPrice(data);
-      markPriceSocket!(connectSocket, textSymbol).subscribe(data => {
-        setMarkPrice({ ...markPrice, ...data });
-      });
-    });
-  }, [getMarkPrice, symbol, terminalType]);
+  }, [symbol]);
+
+  useEffect(() => {
+    if (!isFutures) {
+      getRate({ from: symbol.baseAsset, to: "USDT" });
+    }
+  }, [symbol]);
 
   return tickerData
     ? {
         serverTime,
         tickerData,
         markPrice,
-        usdRate: rate
+        usdRate: isFutures ? undefined : rate
       }
     : undefined;
 };

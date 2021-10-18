@@ -1,12 +1,12 @@
-import React, { useContext, useMemo } from "react";
+import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import { TerminalTickerContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-ticker.context";
-import { safeGetElemFromArray } from "utils/helpers";
+import { getSymbolFilters } from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import {
   ClosePosition,
   IClosePositionProps
 } from "pages/trade/binance-trade-page/trading/trading-tables/positions/close-position/close-position";
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
-import { getSymbolFilters } from "pages/trade/binance-trade-page/trading/terminal.helpers";
+import React, { useContext, useMemo } from "react";
+import { safeGetElemFromArray } from "utils/helpers";
 
 interface Props extends IClosePositionProps {}
 

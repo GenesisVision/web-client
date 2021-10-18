@@ -4,9 +4,11 @@ import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/c
 import {
   filterTrading,
   normalizeMarketList,
+  normalizeMarkPricesList,
   normalizeSymbolsList
 } from "pages/trade/binance-trade-page/trading/market-watch/market-watch.helpers";
 import {
+  MarkPrice,
   MergedTickerSymbolType,
   Symbol,
   Ticker
@@ -24,6 +26,7 @@ import { useSockets } from "services/websocket.service";
 type TerminalTickerContextState = {
   getFavorites: VoidFunction;
   items?: MergedTickerSymbolType[];
+  markPrices?: MarkPrice[];
 };
 
 export const TerminalTickerInitialState: TerminalTickerContextState = {
@@ -35,11 +38,18 @@ export const TerminalTickerContext = createContext<TerminalTickerContextState>(
 );
 
 export const TerminalTickerContextProvider: React.FC = ({ children }) => {
-  const { getTickers, marketTicketsSocket, getFavorites } = useContext(
-    TerminalMethodsContext
-  );
+  const {
+    getTickers,
+    marketTicketsSocket,
+    getFavorites,
+    getMarkPrices,
+    markPricesSocket
+  } = useContext(TerminalMethodsContext);
   const [requestData, setRequestData] = useState<{
     [key: string]: Ticker;
+  }>({});
+  const [markPricesRequestData, setMarkPricesRequestData] = useState<{
+    [key: string]: MarkPrice;
   }>({});
   const [normalizedSymbols, setNormalizedSymbols] = useState<{
     [key: string]: Symbol;
@@ -47,12 +57,23 @@ export const TerminalTickerContextProvider: React.FC = ({ children }) => {
   const [list, setList] = useState<{
     [key: string]: MergedTickerSymbolType;
   }>({});
+  const [markPricesList, setMarkPricesList] = useState<{
+    [key: string]: MarkPrice;
+  }>({});
   const [socketData, setSocketData] = useState<{
     [key: string]: Ticker;
   }>({});
+  const [markPricesSocketData, setMarkPricesSocketData] = useState<{
+    [key: string]: MarkPrice;
+  }>({});
+
   const { connectSocket } = useSockets();
 
-  const { exchangeAccountId, exchangeInfo } = useContext(TerminalInfoContext);
+  const { exchangeAccountId, exchangeInfo, terminalType } = useContext(
+    TerminalInfoContext
+  );
+
+  const isFutures = terminalType === "futures";
 
   const {
     data: accountFavorites,
@@ -87,7 +108,9 @@ export const TerminalTickerContextProvider: React.FC = ({ children }) => {
           [key: string]: MergedTickerSymbolType;
         }
       );
+      setMarkPricesList(normalizedSymbols);
       setRequestData({});
+      setMarkPricesRequestData({});
     }
   }, [exchangeInfo]);
 
@@ -99,6 +122,18 @@ export const TerminalTickerContextProvider: React.FC = ({ children }) => {
       map(normalizeMarketList)
     );
     ticketsSocket.subscribe(setSocketData);
+
+    if (!getMarkPrices) {
+      return;
+    }
+    const markPricesRequestData = getMarkPrices().pipe(
+      map(normalizeMarkPricesList)
+    );
+    markPricesRequestData.subscribe(setMarkPricesRequestData);
+    const markSocket = markPricesSocket!(connectSocket).pipe(
+      map(normalizeMarkPricesList)
+    );
+    markSocket.subscribe(setMarkPricesSocketData);
   }, [normalizedSymbols]);
 
   useEffect(() => {
@@ -114,6 +149,18 @@ export const TerminalTickerContextProvider: React.FC = ({ children }) => {
   }, [socketData]);
 
   useEffect(() => {
+    if (!Object.values(markPricesSocketData).length) return;
+    const updatedList = { ...markPricesList };
+    Object.keys(markPricesSocketData).forEach(name => {
+      Object.keys(markPricesSocketData[name]).forEach(field => {
+        // @ts-ignore
+        updatedList[name][field] = markPricesSocketData[name][field];
+      });
+    });
+    setMarkPricesList(updatedList);
+  }, [markPricesSocketData]);
+
+  useEffect(() => {
     if (!Object.values(requestData).length) return;
     const updatedList = { ...list };
     Object.keys(requestData).forEach(name => {
@@ -122,16 +169,35 @@ export const TerminalTickerContextProvider: React.FC = ({ children }) => {
     setList(updatedList);
   }, [requestData]);
 
+  useEffect(() => {
+    if (!Object.values(markPricesRequestData).length && !isFutures) return;
+    const updatedList = { ...markPricesList };
+    Object.keys(markPricesRequestData).forEach(name => {
+      updatedList[name] = {
+        ...updatedList[name],
+        ...markPricesRequestData[name]
+      };
+    });
+    setMarkPricesList(updatedList);
+  }, [markPricesRequestData]);
+
   const items = useMemo(() => Object.values(list).filter(filterTrading), [
     list
+  ]);
+
+  const markPrices = useMemo(() => Object.values(markPricesList), [
+    markPricesList
   ]);
 
   const value = useMemo(
     () => ({
       items: Object.values(requestData).length ? items : undefined,
-      getFavorites: getFavoritesList
+      getFavorites: getFavoritesList,
+      markPrices: Object.values(markPricesRequestData).length
+        ? markPrices
+        : undefined
     }),
-    [requestData, items]
+    [requestData, items, markPrices]
   );
 
   return (

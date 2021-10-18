@@ -29,7 +29,7 @@ interface Props {
   total: number;
 }
 
-const _OpenOrdersRow: React.FC<Props> = ({
+const _OpenOrdersSpotRow: React.FC<Props> = ({
   orderId,
   time,
   symbol,
@@ -118,4 +118,4 @@ const _OpenOrdersRow: React.FC<Props> = ({
   );
 };
 
-export const OpenOrdersRow = React.memo(_OpenOrdersRow);
+export const OpenOrdersSpotRow = React.memo(_OpenOrdersSpotRow);

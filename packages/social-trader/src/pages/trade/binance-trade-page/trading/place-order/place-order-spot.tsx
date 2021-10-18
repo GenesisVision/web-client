@@ -3,8 +3,8 @@ import { DoubleButton } from "components/double-button/double-button";
 import GVTabs from "components/gv-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
 import { WalletIcon } from "components/icon/wallet-icon";
-import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { RowItem } from "components/row-item/row-item";
 import { Text } from "components/text/text";
 import { DEFAULT_DECIMAL_SCALE } from "constants/constants";
 import useApiRequest from "hooks/api-request.hook";
@@ -13,22 +13,33 @@ import { TerminalDefaultBlock } from "pages/trade/binance-trade-page/trading/com
 import { truncated } from "pages/trade/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-methods.context";
-import { StopLimitTradeForm } from "pages/trade/binance-trade-page/trading/place-order/stop-limit-trade-form";
 import {
   formatValueWithTick,
   getDecimalScale,
   getSymbol
 } from "pages/trade/binance-trade-page/trading/terminal.helpers";
-import { OrderSide, OrderType } from "pages/trade/binance-trade-page/trading/terminal.types";
+import {
+  OrderSide,
+  OrderType
+} from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useCallback, useContext, useState } from "react";
 import { formatValue } from "utils/formatter";
 
-import { LimitTradeForm } from "./limit-trade-form";
-import { MarketTradeForm } from "./market-trade-form";
-import { getBalance, getPositionSide, getTradeType, mapPlaceOrderErrors } from "./place-order.helpers";
+import { LimitTradeSpotForm } from "./limit-trade-spot-form";
+import { MarketTradeSpotForm } from "./market-trade-spot-form";
+import {
+  getBalance,
+  getSpotTradeType,
+  mapPlaceOrderErrors
+} from "./place-order.helpers";
 import styles from "./place-order.module.scss";
-import { FilterValues, IPlaceOrderFormValues, IStopLimitFormValues, TRADE_FORM_FIELDS } from "./place-order.types";
-import { TerminalPlaceOrderContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-place-order.context";
+import {
+  FilterValues,
+  ISpotPlaceOrderDefaultFormValues,
+  ISpotStopLimitFormValues,
+  SPOT_TRADE_FORM_FIELDS
+} from "./place-order.types";
+import { StopLimitTradeSpotForm } from "./stop-limit-trade-spot-form";
 
 interface Props {
   price: string;
@@ -36,18 +47,20 @@ interface Props {
   filterValues: FilterValues;
 }
 
-const _PlaceOrder: React.FC<Props> = ({ filterValues, lastTrade, price }) => {
+const _PlaceOrderSpot: React.FC<Props> = ({
+  filterValues,
+  lastTrade,
+  price
+}) => {
   const { tradeRequest } = useContext(TerminalMethodsContext);
 
   const {
     tickSize,
     stepSize,
-    terminalType,
     exchangeAccountId,
     accountInfo,
     symbol: { baseAsset, quoteAsset }
   } = useContext(TerminalInfoContext);
-  const { currentPositionMode } = useContext(TerminalPlaceOrderContext);
 
   const [side, setSide] = useState<OrderSide>("Buy");
   const { tab, setTab } = useTab<OrderType>("Limit");
@@ -59,28 +72,22 @@ const _PlaceOrder: React.FC<Props> = ({ filterValues, lastTrade, price }) => {
   });
 
   const handleSubmit = useCallback(
-    (values: IStopLimitFormValues | IPlaceOrderFormValues) => {
-      const type = getTradeType({
+    (values: ISpotStopLimitFormValues | ISpotPlaceOrderDefaultFormValues) => {
+      const type = getSpotTradeType({
         stopPrice: "stopPrice" in values ? values.stopPrice : undefined,
         side,
         type: tab,
         currentPrice: lastTrade,
-        price: values[TRADE_FORM_FIELDS.price]
+        price: values[SPOT_TRADE_FORM_FIELDS.price]
       });
       const quantity = formatValueWithTick(
-        values[TRADE_FORM_FIELDS.quantity],
+        values[SPOT_TRADE_FORM_FIELDS.quantity],
         stepSize
       );
-      const positionSide = getPositionSide({
-        side,
-        positionMode: currentPositionMode,
-        terminalType
-      });
       return sendRequest({
         ...values,
-        positionSide,
         price: truncated(
-          +values[TRADE_FORM_FIELDS.price],
+          +values[SPOT_TRADE_FORM_FIELDS.price],
           getDecimalScale(formatValue(tickSize))
         ),
         quantity,
@@ -93,8 +100,7 @@ const _PlaceOrder: React.FC<Props> = ({ filterValues, lastTrade, price }) => {
     [tickSize, stepSize, exchangeAccountId, baseAsset, quoteAsset, side, tab]
   );
 
-  const walletAsset =
-    side === "Buy" || terminalType === "futures" ? quoteAsset : baseAsset;
+  const walletAsset = side === "Buy" ? quoteAsset : baseAsset;
   const balance = accountInfo
     ? getBalance(accountInfo.balances, walletAsset)
     : 0;
@@ -146,7 +152,7 @@ const _PlaceOrder: React.FC<Props> = ({ filterValues, lastTrade, price }) => {
       </Row>
       <Row>
         {tab === "Limit" && (
-          <LimitTradeForm
+          <LimitTradeSpotForm
             filterValues={filterValues}
             status={status}
             balanceBase={balanceBase}
@@ -157,7 +163,7 @@ const _PlaceOrder: React.FC<Props> = ({ filterValues, lastTrade, price }) => {
           />
         )}
         {tab === "Market" && (
-          <MarketTradeForm
+          <MarketTradeSpotForm
             filterValues={filterValues}
             status={status}
             balanceBase={balanceBase}
@@ -168,7 +174,7 @@ const _PlaceOrder: React.FC<Props> = ({ filterValues, lastTrade, price }) => {
           />
         )}
         {tab === "TakeProfitLimit" && (
-          <StopLimitTradeForm
+          <StopLimitTradeSpotForm
             filterValues={filterValues}
             status={status}
             balanceBase={balanceBase}
@@ -183,4 +189,4 @@ const _PlaceOrder: React.FC<Props> = ({ filterValues, lastTrade, price }) => {
   );
 };
 
-export const PlaceOrder = React.memo(_PlaceOrder);
+export const PlaceOrderSpot = React.memo(_PlaceOrderSpot);

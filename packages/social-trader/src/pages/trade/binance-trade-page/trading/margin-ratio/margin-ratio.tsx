@@ -1,13 +1,13 @@
 import { LabeledValue } from "components/labeled-value/labeled-value";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
+import withLoader from "decorators/with-loader";
 import {
   getMarginRatioColor,
   MARGIN_INFO_ASSET
 } from "pages/trade/binance-trade-page/trading/margin-ratio/margin-ratio.helpers";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import withLoader from "decorators/with-loader";
 
 interface Props {
   maintMargin: number;

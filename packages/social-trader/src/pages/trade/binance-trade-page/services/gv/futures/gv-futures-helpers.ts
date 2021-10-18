@@ -31,9 +31,10 @@ export const mapBinanceRawFuturesAccountInfoToAccount = ({
   updateTime,
   accountType: "Futures",
   permissions: ["Futures"],
-  balances: assets.map(
-    mapBinanceRawFuturesAccountAssetToBinanceRawBinanceBalance
-  ),
+  balances: assets,
+  // balances: assets.map(
+  //   mapBinanceRawFuturesAccountAssetToBinanceRawBinanceBalance
+  // ),
   positions
 });
 
@@ -53,10 +54,10 @@ export const mapBinanceRawFuturesAccountAssetToBinanceRawBinanceBalance = ({
 });
 
 export const mapBinanceRawFuturesSymbolBracketToSymbolLeverageBrackets = ({
-  symbolOrPair,
+  symbol,
   brackets
 }: BinanceRawFuturesSymbolBracket): SymbolLeverageBrackets => ({
-  symbol: symbolOrPair,
+  symbol,
   brackets: brackets.map(mapBinanceRawFuturesBracketToLeverageBracket)
 });
 
@@ -82,10 +83,10 @@ export const mapBinanceRawFuturesPositionToFuturesPositionInformation = ({
   leverage,
   liquidationPrice,
   markPrice,
-  maxNotionalValue,
-  positionAmount,
   symbol,
-  unrealizedProfit,
+  unrealizedPnL,
+  maxNotional,
+  quantity,
   positionSide
 }: BinanceRawFuturesPosition): FuturesPositionInformation => ({
   entryPrice,
@@ -95,9 +96,9 @@ export const mapBinanceRawFuturesPositionToFuturesPositionInformation = ({
   leverage,
   liquidationPrice,
   markPrice,
-  maxNotionalValue: +maxNotionalValue,
-  positionAmt: positionAmount,
+  maxNotionalValue: +maxNotional,
+  positionAmt: quantity,
   symbol,
-  unRealizedProfit: unrealizedProfit,
+  unRealizedProfit: unrealizedPnL,
   positionSide
 });

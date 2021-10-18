@@ -6,12 +6,15 @@ import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/c
 import { UnitedOrder } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
-
-import { TradeHistoryRow } from "./trade-history-row";
-import { TRADE_HISTORY_TABLE_COLUMNS, updateTradeHistoryData } from "./trade-history.helpers";
-import styles from "./trade-history.module.scss";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
+
+import {
+  TRADE_HISTORY_TABLE_COLUMNS,
+  updateTradeHistoryData
+} from "./trade-history.helpers";
+import styles from "./trade-history.module.scss";
+import { TradeHistoryRow } from "./trade-history-row";
 
 interface Props {
   updates?: UnitedOrder[];

@@ -1,5 +1,6 @@
 import { SORTING_DIRECTION } from "components/table/helpers/sorting.helpers";
 import {
+  MarkPrice,
   MergedTickerSymbolType,
   Symbol,
   TerminalCurrency,
@@ -72,6 +73,12 @@ export const normalizeSymbolsList = (list: Symbol[]) => {
 };
 
 export const normalizeMarketList = (list: Ticker[]) => {
+  const initObject: AnyObjectType = {};
+  list.forEach(item => (initObject[item.symbol] = item));
+  return initObject;
+};
+
+export const normalizeMarkPricesList = (list: MarkPrice[]) => {
   const initObject: AnyObjectType = {};
   list.forEach(item => (initObject[item.symbol] = item));
   return initObject;

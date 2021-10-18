@@ -1,4 +1,10 @@
-import { BinancePositionSide } from "gv-api-web";
+import {
+  BinanceExecutionType,
+  BinanceFuturesMarginType,
+  BinanceOrderSide,
+  BinancePositionSide,
+  BinanceWorkingType
+} from "gv-api-web";
 import {
   FuturesAccount,
   FuturesAccountEventBalance,
@@ -18,12 +24,17 @@ import {
   Account,
   AssetBalance,
   BalanceForTransfer,
+  FuturesOrder,
+  FuturesOrderStatus,
+  FuturesOrderType,
   MarkPrice,
-  Position,
+  PositionMini,
   Ticker
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { Observable } from "rxjs";
 import { filter } from "rxjs/operators";
+
+import { convertBinanceTypeIntoGV, getWorkingTypeType } from "../api.helpers";
 
 export const transformAccountToBalanceForTransfer = ({
   balances
@@ -37,6 +48,7 @@ export const transformMarkPriceWS = (m: any): MarkPrice => ({
   markPrice: m.p,
   indexPrice: m.i,
   fundingRate: m.r,
+  // nextFundingTime is number, not Date
   nextFundingTime: m.T,
   time: m.E
 });
@@ -133,14 +145,17 @@ export const transformFuturesAccount = (
 
 export const futuresAccountEventPositionTransform = (
   socketData: any
-): Position => {
+): PositionMini => {
   return {
     symbol: socketData.s,
-    unrealizedProfit: socketData.up,
-    positionSide: setUpperFirstLetter(socketData.ps) as BinancePositionSide,
-    positionAmount: socketData.pa,
-    entryPrice: socketData.ep
-  } as Position;
+    positionAmt: socketData.pa,
+    entryPrice: socketData.ep,
+    accumulatedRealized: socketData.cr,
+    unrealizedPnl: socketData.up,
+    marginType: setUpperFirstLetter(socketData.mt) as BinanceFuturesMarginType,
+    isolatedWallet: socketData.iw,
+    positionSide: setUpperFirstLetter(socketData.ps) as BinancePositionSide
+  } as PositionMini;
 };
 
 export const futuresMarginCallEventPositionTransform = (
@@ -171,35 +186,34 @@ export const futuresEventBalanceTransform = (
 
 export const futuresEventTradeOrderTransform = (
   socketData: any
-): FuturesTradeOrder => {
+): FuturesOrder => {
   return {
+    executionType: convertBinanceTypeIntoGV(
+      socketData.x
+    ) as BinanceExecutionType,
     symbol: socketData.s,
-    clientOrderId: socketData.c,
-    side: socketData.S,
-    orderType: socketData.o,
-    timeInForce: socketData.f,
-    originalQuantity: socketData.q,
-    originalPrice: socketData.p,
+    side: convertBinanceTypeIntoGV(socketData.S) as BinanceOrderSide,
+    activatePrice: socketData.AP,
+    id: socketData.i,
+    closePosition: socketData.cp,
+    positionSide: convertBinanceTypeIntoGV(
+      socketData.ps
+    ) as BinancePositionSide,
+    price: socketData.p,
+    quantity: socketData.q,
+    // or socketData.z or socketData.l
+    quantityFilled: socketData.L,
+    reduceOnly: socketData.R,
+    time: socketData.T,
+    originalType: convertBinanceTypeIntoGV(socketData.ot) as FuturesOrderType,
+    type: convertBinanceTypeIntoGV(socketData.o) as FuturesOrderType,
+    workingType: getWorkingTypeType(socketData.wt),
+    eventType: "ORDER_TRADE_UPDATE",
     averagePrice: socketData.ap,
+    callbackRate: socketData.cr,
+    orderStatus: getWorkingTypeType(socketData.X) as FuturesOrderStatus,
     stopPrice: socketData.sp,
-    executionType: socketData.x,
-    orderStatus: socketData.X,
-    orderId: socketData.i,
-    orderLastFilledQuantity: socketData.l,
-    orderFilledAccumulatedQuantity: socketData.z,
-    lastFilledPrice: socketData.L,
-    commissionAsset: socketData.N,
-    commission: socketData.n,
-    orderTradeTime: socketData.T,
-    tradeId: socketData.t,
-    bidsNotional: socketData.b,
-    askNotional: socketData.a,
-    isMakerSide: socketData.m,
-    isReduceOnly: socketData.R,
-    stopPriceWorkingType: socketData.wt,
-    ifCloseAll: socketData.cp,
-    activationPrice: socketData.AP,
-    callbackRate: socketData.cr
+    timeInForce: socketData.f
   };
 };
 

@@ -17,11 +17,11 @@ import {
 import { SymbolSummaryData } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useContext } from "react";
 import NumberFormat from "react-number-format";
-import { diffDate } from "utils/dates";
 import { formatCurrencyValue } from "utils/formatter";
 
 import TerminalTitle from "../components/terminal-title/terminal-title";
 import styles from "./symbol-summary.module.scss";
+import { SymbolSummaryCountdown } from "./symbol-summary-countdown";
 
 interface Props {
   data: SymbolSummaryData;
@@ -58,6 +58,7 @@ const _SymbolSummaryView: React.FC<Props> = ({
     markPrice,
     tickerData: {
       eventTime,
+      closeTime,
       lastPrice,
       baseAsset,
       quoteAsset,
@@ -74,7 +75,7 @@ const _SymbolSummaryView: React.FC<Props> = ({
     TerminalInfoContext
   );
   return (
-    <TerminalTitle amount={lastPrice} trigger={eventTime!}>
+    <TerminalTitle amount={lastPrice} trigger={+closeTime}>
       <TerminalDefaultBlock>
         <Row>
           <AccountSelectorContainer currentAccount={exchangeAccountId} />
@@ -153,12 +154,10 @@ const _SymbolSummaryView: React.FC<Props> = ({
                         suffix={"%"}
                         displayType="text"
                       />{" "}
-                      {diffDate(
-                        new Date(serverTime.date),
-                        markPrice.nextFundingTime
-                      )
-                        .utc()
-                        .format("HH:mm:ss")}
+                      <SymbolSummaryCountdown
+                        nextFundingTime={markPrice.nextFundingTime}
+                        serverTime={serverTime.date}
+                      />
                     </MonoText>
                   )}
                 </SymbolSummaryLine>
@@ -167,6 +166,7 @@ const _SymbolSummaryView: React.FC<Props> = ({
             <SymbolSummaryLine label={"24h Change"}>
               <MonoText>
                 <Text
+                  wrap={false}
                   size={"xlarge"}
                   color={+priceChangePercent > 0 ? "green" : "red"}
                 >

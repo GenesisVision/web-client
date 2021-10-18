@@ -2,15 +2,18 @@ import { Center } from "components/center/center";
 import { RowItem } from "components/row-item/row-item";
 import { Text } from "components/text/text";
 import { TradeStatefulValue } from "pages/trade/binance-trade-page/trading/components/trade-stateful-value/trade-stateful-value";
-import { MarketWatchFavoriteButton } from "pages/trade/binance-trade-page/trading/market-watch/market-watch-favorite-button";
 import { CHANGE_COLUMN } from "pages/trade/binance-trade-page/trading/market-watch/market-watch.helpers";
+import { MarketWatchFavoriteButton } from "pages/trade/binance-trade-page/trading/market-watch/market-watch-favorite-button";
 import { getTextColor } from "pages/trade/binance-trade-page/trading/terminal.helpers";
-import { SymbolState, TerminalCurrency } from "pages/trade/binance-trade-page/trading/terminal.types";
+import {
+  SymbolState,
+  TerminalCurrency
+} from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useCallback } from "react";
+import NumberFormat from "react-number-format";
 import { formatCurrencyValue } from "utils/formatter";
 
 import styles from "./market-watch.module.scss";
-import NumberFormat from "react-number-format";
 
 interface Props {
   getFavorites: VoidFunction;

@@ -1,5 +1,7 @@
+import { BinancePositionSide } from "gv-api-web";
 import {
   EventType,
+  FuturesOrder,
   FuturesPosition,
   MarginModeType,
   OrderSide,
@@ -12,7 +14,8 @@ import {
 export type FuturesAccountEventType =
   | "ACCOUNT_UPDATE"
   | "MARGIN_CALL"
-  | "ORDER_TRADE_UPDATE";
+  | "ORDER_TRADE_UPDATE"
+  | "ACCOUNT_CONFIG_UPDATE";
 
 export type MarginType = MarginModeType;
 
@@ -82,10 +85,10 @@ export interface FuturesAccountEventPosition {
   positionAmt: string; // Position Amount
   entryPrice: string; // Entry Price
   accumulatedRealized: string; // (Pre-fee) Accumulated Realized
-  unrealizedProfit: string; // Unrealized PnL
+  unrealizedPnl: string; // Unrealized PnL
   marginType: MarginType; // Margin Type
   isolatedWallet: string; // Isolated Wallet (if isolated position)
-  positionSide: PositionSideType; // Position Side
+  positionSide: BinancePositionSide; // Position Side
 }
 
 export interface FuturesAccountEventBalance {
@@ -147,5 +150,5 @@ export interface FuturesTradeOrderUpdateEvent {
   eventType: FuturesAccountEventType; // Event Type
   eventTime: number; // Event Time               // Event Time
   transactionTime: number; // Tran        //  Transaction Time
-  order: FuturesTradeOrder;
+  order: FuturesOrder;
 }

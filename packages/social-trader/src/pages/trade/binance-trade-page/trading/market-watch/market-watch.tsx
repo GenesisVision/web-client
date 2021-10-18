@@ -14,7 +14,8 @@ import { MergedTickerSymbolType } from "pages/trade/binance-trade-page/trading/t
 import React, { useContext, useMemo, useState } from "react";
 
 interface Props {
-  items: MergedTickerSymbolType[];
+  // items: MergedTickerSymbolType[];
+  items: any[];
 }
 
 const _MarketWatch: React.FC<Props> = ({ items }) => {

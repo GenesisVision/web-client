@@ -1,0 +1,23 @@
+.truncated {
+  text-overflow: ellipsis;
+  white-space: nowrap !important;
+  overflow: hidden;
+}
+
+.content {
+  margin-left: 2px;
+}
+
+.row-block {
+  width: 48%;
+  display: flex;
+  flex-wrap: wrap;
+
+  &__left {
+    justify-content: flex-start;
+  }
+
+  &__right {
+    justify-content: flex-end;
+  }
+}

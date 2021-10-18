@@ -1,0 +1,12 @@
+@import "styles/_colors";
+
+.select-block {
+  width: 50%;
+  padding: 5px 0;
+  text-align: center;
+  cursor: pointer;
+
+  &--active {
+    border-top: 1px solid $primary-color;
+  }
+}

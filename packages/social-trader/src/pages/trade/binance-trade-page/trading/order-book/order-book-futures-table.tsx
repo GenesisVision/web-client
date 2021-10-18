@@ -34,10 +34,7 @@ const _OrderBookFuturesTable: React.FC<Props> = ({
 
   const { stepSize, tickSize } = useContext(TerminalInfoContext);
 
-  const limitOrders = useMemo(
-    () => getOrderBookLimitOrders(openOrders, reverse),
-    [openOrders]
-  );
+  const limitOrders = getOrderBookLimitOrders(openOrders, reverse);
 
   return (
     <table className={styles["order-book__table"]}>

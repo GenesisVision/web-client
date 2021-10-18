@@ -3,6 +3,7 @@ import { MarketWatch } from "pages/trade/binance-trade-page/trading/market-watch
 import React, { useContext } from "react";
 
 import { TerminalInfoContext } from "../contexts/terminal-info.context";
+import { MergedTickerFuturesSymbolType } from "../terminal.types";
 
 const _MarketWatchContainer: React.FC = () => {
   const { items } = useContext(TerminalTickerContext);
@@ -15,12 +16,22 @@ const _MarketWatchContainer: React.FC = () => {
   }
 
   return isFutures ? (
+    // fix types
     <MarketWatch
-      items={items.filter(({ quoteAsset }) => quoteAsset === "USDT")}
+      items={items.filter(
+        ({ quoteAsset, contractType }) =>
+          quoteAsset === "USDT" && contractType === "Perpetual"
+      )}
     />
   ) : (
     <MarketWatch
-      items={items.filter(({ permissions }) => permissions.includes("Spot"))}
+      items={items.filter(({ permissions }) => {
+        // fix it. App crashes when you change terminalType from futures to spot, bc futures doesn't have permissions
+        if (!permissions) {
+          return false;
+        }
+        return permissions.includes("Spot");
+      })}
     />
   );
 };

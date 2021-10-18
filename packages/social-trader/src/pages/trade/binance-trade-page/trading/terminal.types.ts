@@ -14,19 +14,27 @@ import {
   BinanceRawCancelOrder,
   BinanceRawCancelOrderId,
   BinanceRawExchangeInfo,
+  BinanceRawFutures24HPrice,
   BinanceRawFuturesChangeMarginTypeResult,
+  BinanceRawFuturesIncomeHistory,
   BinanceRawFuturesInitialLeverageChangeResult,
   BinanceRawFuturesMarkPrice,
   BinanceRawFuturesPosition,
+  BinanceRawFuturesPositionInfo,
+  BinanceRawFuturesUsdtExchangeInfo,
+  BinanceRawFuturesUsdtSymbol,
   BinanceRawOrder,
   BinanceRawOrderBook,
   BinanceRawRecentTrade,
   BinanceRawSymbol,
   BinanceTimeInForce as BinanceRawTimeInForce,
+  BinanceTimeInForce,
+  BinanceWorkingType,
   TradingPlatformBinanceOrdersMode
 } from "gv-api-web";
 import { PlacedOrderType } from "pages/trade/binance-trade-page/services/api.helpers";
 import {
+  FuturesAccountEventPosition,
   FuturesAccountEventType,
   FuturesAsset
 } from "pages/trade/binance-trade-page/services/futures/binance-futures.types";
@@ -40,7 +48,29 @@ export type SymbolState = {
   baseAsset: TerminalCurrency;
 };
 
-export type Position = BinanceRawFuturesPosition;
+export type FullPosition = BinanceRawFuturesPositionInfo &
+  BinanceRawFuturesPosition;
+
+// maxNotional: number;
+// initialMargin: number;
+// maintMargin: number;
+// positionInitialMargin: number;
+// openOrderInitialMargin: number;
+// isolated: boolean;
+// updateTime: Date;
+// unrealizedPnl: number;
+
+// marginType: BinanceFuturesMarginType;
+// isAutoAddMargin: boolean;
+// isolatedMargin: number;
+// liquidationPrice: number;
+// markPrice: number;
+// unrealizedPnL: number;
+// maxNotional: number;
+
+export type Position = BinanceRawFuturesPositionInfo;
+
+export type PositionMini = FuturesAccountEventPosition;
 
 export type MarginModeType = BinanceFuturesMarginType;
 
@@ -51,6 +81,8 @@ export type PositionSideType = "BOTH" | "LONG" | "SHORT";
 export type PositionModeType = BinancePositionMode;
 
 export type BalancesItemName = "spot" | "futures";
+
+export type TransactionHistory = BinanceRawFuturesIncomeHistory;
 
 export interface DepthFullAmount {
   bids: number;
@@ -182,7 +214,7 @@ export interface ITerminalMethods extends IGVTerminalMethods {
   getOpenOrders: (
     symbol: string,
     accountId?: string
-  ) => Observable<UnitedOrder[]>;
+  ) => Observable<UnitedOrder[] | FuturesOrder[]>;
   getAllTrades: (filters: {
     accountId?: string;
     mode?: TradingPlatformBinanceOrdersMode;
@@ -231,9 +263,17 @@ export interface ITerminalMethods extends IGVTerminalMethods {
 
   // Futures
 
-  getMarkPrice?: (options: { symbol: string }) => Promise<MarkPrice>;
+  getMarkPrices?: () => Observable<MarkPrice[]>;
+  getTransactionHistory?: (options: {
+    accountId?: string;
+    symbol?: string;
+    incomeType?: string;
+    startTime?: Date;
+    endTime?: Date;
+    limit?: number;
+  }) => Promise<BinanceRawFuturesIncomeHistory[]>;
   getPositionInformation?: (options: {
-    symbol: string;
+    symbol?: string;
     accountId?: string;
   }) => Promise<FuturesPositionInformation[]>;
   getBalancesForTransfer?: (options: {
@@ -267,10 +307,9 @@ export interface ITerminalMethods extends IGVTerminalMethods {
 
   // Sockets
 
-  markPriceSocket?: (
-    connectSocketMethod: ConnectSocketMethodType,
-    symbol: TerminalCurrency
-  ) => Observable<MarkPrice>;
+  markPricesSocket?: (
+    connectSocketMethod: ConnectSocketMethodType
+  ) => Observable<MarkPrice[]>;
   tradeSocket: (
     connectSocketMethod: ConnectSocketMethodType,
     symbol: TerminalCurrency
@@ -492,6 +531,11 @@ export type TerminalCurrency = string;
 
 export type MergedTickerSymbolType = StreamTicker &
   Symbol & { isFavorite?: boolean };
+
+// to do
+export type MergedTickerFuturesSymbolType = BinanceRawFutures24HPrice & {
+  eventTime?: number;
+} & BinanceRawFuturesUsdtSymbol & { isFavorite?: boolean };
 
 export enum ErrorCodes {
   UNKNOWN = -1000,
@@ -757,6 +801,7 @@ export type SymbolFilter =
 
 export type Symbol = BinanceRawSymbol;
 
+// BinanceRawFuturesUsdtExchangeInfo
 export type ExchangeInfo = BinanceRawExchangeInfo;
 
 export interface KlineParams {
@@ -855,7 +900,22 @@ export type OrderStatus =
   | "PENDING_CANCEL"
   | "REJECTED";
 
+export type FuturesOrderStatus = Exclude<
+  BinanceOrderStatus,
+  "PendingCancel" | "Insurance" | "Adl"
+>;
+
 export type OrderType = BinanceRawOrderType;
+
+// or Extract ???
+export type FuturesOrderType = Exclude<
+  BinanceRawOrderType,
+  | "StopLoss"
+  | "StopLossLimit"
+  | "TakeProfitLimit"
+  | "LimitMaker"
+  | "Liquidation"
+>;
 
 export type ListOrderStatus = "EXECUTING" | "ALL_DONE" | "REJECT";
 
@@ -1041,6 +1101,30 @@ export interface MyTrade {
 }
 
 export type QueryOrderResult = BinanceRawOrder;
+
+export type FuturesOrder = {
+  eventType?: FuturesAccountEventType;
+  executionType?: BinanceExecutionType;
+  closePosition: boolean;
+  positionSide: BinancePositionSide;
+  callbackRate: number;
+  quantityFilled: number;
+  workingType: BinanceWorkingType;
+  reduceOnly: boolean;
+  orderStatus: FuturesOrderStatus;
+  time: number | Date;
+  symbol: string;
+  type: FuturesOrderType;
+  originalType: FuturesOrderType;
+  side: OrderSide;
+  quantity: number;
+  averagePrice: number;
+  activatePrice: number;
+  timeInForce: BinanceTimeInForce;
+  stopPrice: number;
+  price: number;
+  id: number;
+};
 
 export type UnitedOrder = {
   commissionAsset?: string;

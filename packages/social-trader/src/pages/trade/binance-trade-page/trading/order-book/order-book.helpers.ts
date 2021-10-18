@@ -1,6 +1,7 @@
 import { SortingColumn } from "components/table/components/filtering/filter.type";
 import {
   Depth,
+  FuturesOrder,
   NormalizedDepth,
   NormalizedDepthList,
   StringBidDepth,
@@ -219,7 +220,8 @@ export const countOrderBookFuturesSum = (
 };
 
 export const getOrderBookLimitOrders = (
-  openOrders?: UnitedOrder[],
+  // openOrders?: UnitedOrder[] | FuturesOrder[],
+  openOrders?: any[],
   reverse?: boolean
 ): number[] => {
   return openOrders

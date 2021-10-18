@@ -7,7 +7,7 @@ import { useContext, useEffect, useState } from "react";
 import { postponeFunc } from "utils/hook-form.helpers";
 import { AnyObjectType } from "utils/types";
 
-export const usePlaceOrderFormReset = ({
+export const useSpotPlaceOrderFormReset = ({
   status,
   triggerValidation,
   outerPrice,
@@ -30,7 +30,7 @@ export const usePlaceOrderFormReset = ({
   balanceQuote: number;
   quantityName: string;
 }) => {
-  const { terminalType, symbol } = useContext(TerminalInfoContext);
+  const { symbol } = useContext(TerminalInfoContext);
   const { quantity, total, price } = watch();
   const { sliderValue, setSliderValue } = useTradeSlider({
     watch,
@@ -74,7 +74,7 @@ export const usePlaceOrderFormReset = ({
       stopPrice: outerPrice,
       price: outerPrice
     });
-  }, [symbol, terminalType]);
+  }, [symbol]);
 
   useEffect(() => {
     setPrevFormState({ ...watch(), sliderValue });
@@ -84,4 +84,58 @@ export const usePlaceOrderFormReset = ({
     }
   }, [side]);
   return { sliderValue, setSliderValue };
+};
+
+// --------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------------------
+
+export const useFuturesPlaceOrderFormReset = ({
+  status,
+  triggerValidation,
+  outerPrice,
+  reset,
+  watch
+}: {
+  status: API_REQUEST_STATUS;
+  triggerValidation: VoidFunction;
+  watch: () => AnyObjectType;
+  reset: (values: any) => void;
+  outerPrice?: PriceType;
+}) => {
+  const { quantity } = watch();
+  const [isReset, setReset] = useState<boolean | undefined>();
+
+  useEffect(() => {
+    if (status === "SUCCESS") postponeFunc(() => setReset(true));
+  }, [status]);
+
+  useEffect(() => {
+    if (isReset) {
+      reset(watch());
+      setReset(false);
+    }
+    if (isReset === false) triggerValidation();
+  }, [isReset]);
+
+  useEffect(() => {
+    reset({
+      timeInForce: watch().timeInForce,
+      stopPrice: outerPrice,
+      price: outerPrice,
+      quantity
+    });
+  }, [outerPrice]);
 };

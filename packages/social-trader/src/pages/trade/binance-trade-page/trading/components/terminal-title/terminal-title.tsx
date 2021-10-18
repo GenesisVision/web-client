@@ -6,14 +6,18 @@ import { TerminalInfoContext } from "../../contexts/terminal-info.context";
 import { SymbolState } from "../../terminal.types";
 import { terminalMoneyFormat } from "../terminal-money-format/terminal-money-format";
 
-const useTerminalTitle = (data: {
+const useTerminalTitle = ({
+  amount,
+  symbol,
+  tickSize,
+  trigger
+}: {
   symbol: SymbolState;
   amount: number;
   tickSize: string;
   trigger?: number;
 }): string => {
   const [t] = useTranslation();
-  const { symbol, amount, tickSize, trigger } = data;
 
   const appTitle = t("app.title");
   const defaultTitle = t("Trading terminal") + " | " + appTitle;

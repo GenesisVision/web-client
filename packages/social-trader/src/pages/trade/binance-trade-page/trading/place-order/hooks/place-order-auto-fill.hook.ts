@@ -1,7 +1,6 @@
 import { DEFAULT_DECIMAL_SCALE } from "constants/constants";
 import { terminalMoneyFormat } from "pages/trade/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
-import { TerminalPlaceOrderContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-place-order.context";
 import { OrderSide } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { useContext, useEffect, useState } from "react";
 import { formatValue } from "utils/formatter";
@@ -37,8 +36,7 @@ export const usePlaceOrderAutoFill = ({
   totalName: string;
   quantityName: string;
 }) => {
-  const { stepSize, tickSize } = useContext(TerminalInfoContext);
-  const { leverage } = useContext(TerminalPlaceOrderContext);
+  const { stepSize } = useContext(TerminalInfoContext);
   const [autoFill, setAutoFill] = useState<boolean>(false);
   useEffect(() => {
     if (!autoFill) {
@@ -67,7 +65,7 @@ export const usePlaceOrderAutoFill = ({
   useEffect(() => {
     if (!autoFill) {
       const value = +terminalMoneyFormat({
-        amount: (+quantity * +price) / leverage,
+        amount: +quantity * +price,
         tickSize: "0.00000001"
       });
       if (isNaN(value)) return;
@@ -92,7 +90,7 @@ export const usePlaceOrderAutoFill = ({
     if (!autoFill) {
       if (quantity && price) {
         const value = +terminalMoneyFormat({
-          amount: leverage * +quantity * +price,
+          amount: +quantity * +price,
           tickSize: "0.00000001"
         });
         if (isNaN(value)) return;

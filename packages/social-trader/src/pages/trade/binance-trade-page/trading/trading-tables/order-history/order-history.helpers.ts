@@ -71,3 +71,39 @@ export const ORDER_HISTORY_TABLE_COLUMNS: SortingColumn[] = [
     name: "status"
   }
 ];
+
+export const ORDER_HISTORY_FUTURES_TABLE_COLUMNS: SortingColumn[] = [
+  {
+    name: "time"
+  },
+  {
+    name: "symbol"
+  },
+  {
+    name: "type"
+  },
+  {
+    name: "side"
+  },
+  {
+    name: "average"
+  },
+  {
+    name: "price"
+  },
+  {
+    name: "executed"
+  },
+  {
+    name: "amount"
+  },
+  {
+    name: "reduce-only"
+  },
+  {
+    name: "trigger-conditions"
+  },
+  {
+    name: "status"
+  }
+];

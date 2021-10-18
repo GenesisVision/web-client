@@ -18,6 +18,10 @@ type TradingPriceState = {
   trades: UnitedTrade[];
   setPrice: (price: string) => void;
   price: string;
+  bestAskPrice?: number;
+  bestBidPrice?: number;
+  setBestAskPrice?: (value: number) => void;
+  setBestBidPrice?: (value: number) => void;
 };
 
 const PriceInitialState: string = "0";
@@ -43,6 +47,8 @@ export const TradingPriceContextProvider: React.FC = ({ children }) => {
 
   const { connectSocket } = useSockets();
   const [price, setPrice] = useState<string>(PriceInitialState);
+  const [bestAskPrice, setBestAskPrice] = useState<number | undefined>();
+  const [bestBidPrice, setBestBidPrice] = useState<number | undefined>();
   const [list, setList] = useState<UnitedTrade[]>([]);
   const [socketData, setSocketData] = useState<UnitedTrade | undefined>();
   const [socketDataBuffer, setSocketDataBuffer] = useState<UnitedTrade[]>([]);
@@ -83,9 +89,13 @@ export const TradingPriceContextProvider: React.FC = ({ children }) => {
     () => ({
       trades: list,
       setPrice,
-      price: formatValueWithTick(price, tickSize)
+      price: formatValueWithTick(price, tickSize),
+      bestBidPrice,
+      bestAskPrice,
+      setBestBidPrice,
+      setBestAskPrice
     }),
-    [setPrice, price, list, tickSize]
+    [setPrice, price, list, tickSize, bestBidPrice, bestAskPrice]
   );
 
   return (

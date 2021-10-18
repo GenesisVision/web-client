@@ -64,10 +64,7 @@ const _OrderBookSpotTable: React.FC<Props> = ({
     }
   }, [hoveredRow, items]);
 
-  const limitOrders = useMemo(
-    () => getOrderBookLimitOrders(openOrders, reverse),
-    [openOrders]
-  );
+  const limitOrders = getOrderBookLimitOrders(openOrders, reverse);
 
   return (
     <table className={styles["order-book__table"]}>

@@ -1,20 +1,18 @@
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import React, { useContext, useMemo } from "react";
 
+import { TerminalFuturesContext } from "../../contexts/terminal-futures.context";
 import { Positions } from "./positions";
 
 export const PositionsContainer: React.FC = () => {
-  const { accountInfo } = useContext(TerminalInfoContext);
+  const { openPositions } = useContext(TerminalFuturesContext);
 
-  const list = useMemo(
-    () =>
-      accountInfo?.positions
-        ? accountInfo.positions.filter(
-            ({ positionAmount }) => positionAmount !== 0
-          )
-        : [],
-    [accountInfo?.positions]
-  );
+  // const list = useMemo(
+  //   () =>
+  //     openPositions
+  //       ? openPositions.filter(({ quantity }) => quantity !== 0)
+  //       : [],
+  //   [openPositions]
+  // );
 
-  return <Positions items={list} />;
+  return <Positions items={openPositions} />;
 };

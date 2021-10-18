@@ -19,6 +19,8 @@ import {
 import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { useSockets } from "services/websocket.service";
 
+import { TradingPriceContext } from "../contexts/trading-price.context";
+
 interface Props {}
 
 const ASKS_FULL_AMOUNT_DIVIDER = 300;
@@ -29,6 +31,7 @@ const _OrderBookContainer: React.FC<Props> = () => {
   const [bidsDivider, setBidsDivider] = useState(BIDS_FULL_AMOUNT_DIVIDER);
 
   const { depthSocket, getDepth } = useContext(TerminalMethodsContext);
+  const { setBestAskPrice, setBestBidPrice } = useContext(TradingPriceContext);
   const ref = useRef<HTMLDivElement>(null);
   const [count, setCount] = useState<number>(0);
   const [depthMaxSum, setDepthMaxSum] = useState<number>(0);
@@ -158,6 +161,12 @@ const _OrderBookContainer: React.FC<Props> = () => {
       const asksMaxValue = asks.reduce((acc, [_, amount]) => acc + +amount, 0);
       const bidsMaxValue = bids.reduce((acc, [_, amount]) => acc + +amount, 0);
       setDepthMaxSum(Math.max(asksMaxValue, bidsMaxValue));
+
+      //@ts-ignore
+      setBestAskPrice(asks[asks.length - 1] && +asks[asks.length - 1][0]);
+      //@ts-ignore
+      setBestBidPrice(bids[0] && +bids[0][0]);
+
       return {
         asks: 0,
         bids: 0
