@@ -9,7 +9,9 @@ import FormError from "components/form/form-error/form-error";
 import InputAmountField from "components/input-amount-field/hook-form-amount-field";
 import { LabeledValue } from "components/labeled-value/labeled-value";
 import { Row } from "components/row/row";
+import { RowItem } from "components/row-item/row-item";
 import { SubmitButton } from "components/submit-button/submit-button";
+import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import { WalletItemType } from "components/wallet-select/wallet-select";
 import { useGetRate } from "hooks/get-rate.hook";
 import {
@@ -145,15 +147,20 @@ const _AssetsSellForm: React.FC<IAssetsTransferFormProps> = ({
         {errorMessage && <FormError error={errorMessage} />}
         {!!amount && (
           <DialogList>
-            <NumberFormat
-              value={formatCurrencyValue(
-                amountInAssetCurrency,
-                selectedItem.currency
-              )}
-              prefix={"≈ "}
-              suffix={` ${selectedItem.currency}`}
-              displayType="text"
-            />
+            <Row>
+              <RowItem size="xsmall">
+                <NumberFormat
+                  value={formatCurrencyValue(
+                    amountInAssetCurrency,
+                    selectedItem.currency
+                  )}
+                  prefix={"≈ "}
+                  suffix={` ${selectedItem.currency}`}
+                  displayType="text"
+                />
+              </RowItem>
+              <TooltipLabel tooltipContent={t("assets-page:popup.tooltip")} />
+            </Row>
             <DialogListItem label={t("assets-page:popup.fee")}>
               <NumberFormat
                 value={formatCurrencyValue(commission, "Any")}

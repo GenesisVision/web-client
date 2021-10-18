@@ -6,13 +6,12 @@ import {
   GetItemsFuncActionType,
   TableSelectorType
 } from "components/table/components/table.types";
-import useDevelopmentFeature from "hooks/development-feature.hook";
+import { CoinsAsset } from "gv-api-web";
 import AssetsHistory from "modules/assets-table/components/assets-history-table/assets-history";
 import AssetsPortfolio from "modules/assets-table/components/assets-portfolio-table/assets-portfolio";
 import AssetsCoins from "modules/assets-table/components/assets-table/assets-coins";
-import dynamic from "next/dynamic";
 import useHashTab from "pages/wallet/services/hashTab.hook";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
@@ -46,9 +45,20 @@ export type TAssetsTablesData = {
 const _AssetsTablesSection: React.FC<Props> = ({
   tablesData: { assetsCoins, favourites, portfolio, history }
 }) => {
+  const [favouritesCounts, setFavouritesCounts] = useState(0);
   const [t] = useTranslation();
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   const { tab } = useHashTab<ASSETS_TABS>(ASSETS_TABS.ASSETS);
+  const { itemsData } = useSelector(state => assetsCoins.dataSelector(state));
+
+  useEffect(() => {
+    if (itemsData.data.items) {
+      setFavouritesCounts(
+        itemsData.data.items.filter((asset: CoinsAsset) => !!asset.isFavorite)
+          .length
+      );
+    }
+  }, [itemsData.data]);
 
   return (
     <DefaultTableBlock>
@@ -69,7 +79,7 @@ const _AssetsTablesSection: React.FC<Props> = ({
               {t("assets-page:tabs.favourites")}
             </Link>
           }
-          visible={isAuthenticated}
+          visible={isAuthenticated && !!favouritesCounts}
         />
         <GVTab
           value={ASSETS_TABS.PORTFOLIO}
