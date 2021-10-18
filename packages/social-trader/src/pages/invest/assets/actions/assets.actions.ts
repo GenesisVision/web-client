@@ -21,7 +21,7 @@ export const fetchAssetsCoinsAction = (
   filters: ComposeFiltersAllType
 ): ApiAction<CoinsAssetItemsViewModel> => ({
   type: ASSETS_COINS,
-  payload: fetchAssetsCoins()
+  payload: fetchAssetsCoins(filters)
 });
 
 export const fetchAssetsFavourites = (
