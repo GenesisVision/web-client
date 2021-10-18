@@ -74,7 +74,7 @@ Page.getInitialProps = async ctx => {
   let brokerType: BrokerTradeServerType | undefined;
 
   return {
-    namespacesRequired: ["auth"],
+    namespacesRequired: ["auth", "trade"],
     exchangeAccountId,
     brokerType,
     symbol,
