@@ -13,14 +13,15 @@ import { RootState } from "reducers/root-reducer";
 const _AssetsCoins: React.FC<Props> = ({
   itemSelector,
   getItems,
-  dataSelector
+  dataSelector,
+  updateFavorites
 }) => {
   const renderHeader = useCallback(
     column => <AssetsTableHeaderCell column={column} />,
     []
   );
   const renderBodyRow = useCallback(
-    (asset, updateRow) => <AssetTableRow asset={asset} updateRow={updateRow} />,
+    asset => <AssetTableRow asset={asset} updateFavorites={updateFavorites} />,
     []
   );
 
@@ -41,6 +42,7 @@ interface Props {
   itemSelector: (state: RootState) => { [keys: string]: any };
   getItems: GetItemsFuncActionType;
   dataSelector: TableSelectorType;
+  updateFavorites?: (isFavorite: boolean) => void;
 }
 
 const AssetsCoins = React.memo(_AssetsCoins);
