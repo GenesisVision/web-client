@@ -1,5 +1,6 @@
 import GVLogo from "components/gv-logo/gv-logo";
 import { BlogIcon } from "components/icon/blog-icon";
+import { CoinsIcon } from "components/icon/coins-icon";
 import { DashboardIcon } from "components/icon/dashboard-icon";
 import { DetailsIcon } from "components/icon/details-icon";
 import { FAQIcon } from "components/icon/faq-icon";
@@ -58,11 +59,7 @@ import {
   GV_PROGRAMS_ROUTE,
   INVEST_ROUTE
 } from "./invest.routes";
-import {
-  TERMINAL_SPOT_ROUTE,
-  TRADE_ROUTE
-} from "./trade.routes";
-import { CoinsIcon } from "components/icon/coins-icon";
+import { TERMINAL_SPOT_ROUTE, TRADE_ROUTE } from "./trade.routes";
 
 export type TMenuItem = {
   isBeta?: boolean;
@@ -80,6 +77,11 @@ const investMenuItems = {
   route: INVEST_ROUTE,
   children: [
     {
+      Icon: CoinsIcon,
+      route: GV_ASSETS_ROUTE,
+      label: "navigation.assets"
+    },
+    {
       Icon: ProgramsIcon,
       route: GV_FUNDS_ROUTE,
       label: "navigation.gv-funds"
@@ -93,11 +95,6 @@ const investMenuItems = {
       Icon: FollowIcon,
       route: GV_FOLLOW_ROUTE,
       label: "navigation.gv-follow"
-    },
-    {
-      Icon: CoinsIcon,
-      route: GV_ASSETS_ROUTE,
-      label: "navigation.assets"
     }
   ]
 };

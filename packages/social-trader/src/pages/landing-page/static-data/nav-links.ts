@@ -54,6 +54,10 @@ export const navHeader: TNavHeader[] = [
     href: INVEST_ROUTE,
     subNav: [
       {
+        name: "navigation.gv-assets",
+        href: GV_ASSETS_ROUTE
+      },
+      {
         name: "navigation.gv-funds",
         href: GV_FUNDS_ROUTE
       },
@@ -64,10 +68,6 @@ export const navHeader: TNavHeader[] = [
       {
         name: "navigation.gv-follow",
         href: GV_FOLLOW_ROUTE
-      },
-      {
-        name: "navigation.gv-assets",
-        href: GV_ASSETS_ROUTE
       }
     ]
   },
