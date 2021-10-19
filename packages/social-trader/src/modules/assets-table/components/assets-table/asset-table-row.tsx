@@ -46,11 +46,12 @@ const _AssetTableRow: React.FC<Props> = ({ asset, updateFavorites }) => {
 
   useEffect(() => {
     setFundState(asset);
-  }, [asset]);
+  }, [asset.isFavorite]);
 
   const handleUpdateRow = useCallback(
     asset => {
       setFundState(asset);
+      updateFavorites && updateFavorites(asset.isFavorite);
     },
     [updateFavorites]
   );
@@ -68,7 +69,7 @@ const _AssetTableRow: React.FC<Props> = ({ asset, updateFavorites }) => {
       <TableCell>
         <Text wrap={false}>
           <NumberFormat
-            value={formatCurrencyValue(asset.price, "USD")}
+            value={asset.price}
             thousandSeparator=" "
             prefix={`$ `}
             displayType="text"

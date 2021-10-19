@@ -6,11 +6,13 @@ import {
   GetItemsFuncActionType,
   TableSelectorType
 } from "components/table/components/table.types";
+import useApiRequest from "hooks/api-request.hook";
 import AssetsHistory from "modules/assets-table/components/assets-history-table/assets-history";
 import AssetsPortfolio from "modules/assets-table/components/assets-portfolio-table/assets-portfolio";
 import AssetsCoins from "modules/assets-table/components/assets-table/assets-coins";
+import { fetchAssetsFavourites } from "pages/invest/assets/actions/assets.actions";
 import useHashTab from "pages/wallet/services/hashTab.hook";
-import React from "react";
+import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
@@ -44,9 +46,20 @@ export type TAssetsTablesData = {
 const _AssetsTablesSection: React.FC<Props> = ({
   tablesData: { assetsCoins, favourites, portfolio, history }
 }) => {
+  const [favouritesCounts, setFavouritesCounts] = useState(0);
   const [t] = useTranslation();
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   const { tab } = useHashTab<ASSETS_TABS>(ASSETS_TABS.ASSETS);
+
+  useApiRequest({
+    middleware: [data => setFavouritesCounts(data.total)],
+    request: fetchAssetsFavourites,
+    fetchOnMount: true
+  });
+
+  const handleUpdateFavorites = useCallback(isFavorite => {
+    setFavouritesCounts(state => (isFavorite ? state + 1 : state - 1));
+  }, []);
 
   return (
     <DefaultTableBlock>
@@ -59,6 +72,18 @@ const _AssetsTablesSection: React.FC<Props> = ({
             </Link>
           }
           visible={isAuthenticated}
+        />
+        <GVTab
+          value={ASSETS_TABS.FAVOURITES}
+          label={
+            <Link noColor to={`${GV_ASSETS_ROUTE}${ASSETS_TABS.FAVOURITES}`}>
+              {t("assets-page:tabs.favourites")}
+            </Link>
+          }
+          visible={
+            isAuthenticated &&
+            (tab === ASSETS_TABS.FAVOURITES || !!favouritesCounts)
+          }
         />
         <GVTab
           value={ASSETS_TABS.PORTFOLIO}
@@ -78,21 +103,21 @@ const _AssetsTablesSection: React.FC<Props> = ({
           }
           visible={isAuthenticated}
         />
-        <GVTab
-          value={ASSETS_TABS.FAVOURITES}
-          label={
-            <Link noColor to={`${GV_ASSETS_ROUTE}${ASSETS_TABS.FAVOURITES}`}>
-              {t("assets-page:tabs.favourites")}
-            </Link>
-          }
-          visible={isAuthenticated}
-        />
       </DetailsBlockTabs>
       {(tab === ASSETS_TABS.ASSETS || !isAuthenticated) && (
         <AssetsCoins
           itemSelector={assetsCoins.itemSelector!}
           getItems={assetsCoins.getItems()}
           dataSelector={assetsCoins.dataSelector}
+          updateFavorites={handleUpdateFavorites}
+        />
+      )}
+      {tab === ASSETS_TABS.FAVOURITES && (
+        <AssetsCoins
+          itemSelector={favourites.itemSelector!}
+          getItems={favourites.getItems()}
+          dataSelector={favourites.dataSelector}
+          updateFavorites={handleUpdateFavorites}
         />
       )}
       {tab === ASSETS_TABS.PORTFOLIO && (
@@ -107,13 +132,6 @@ const _AssetsTablesSection: React.FC<Props> = ({
           itemSelector={history.itemSelector!}
           getItems={history.getItems()}
           dataSelector={history.dataSelector}
-        />
-      )}
-      {tab === ASSETS_TABS.FAVOURITES && (
-        <AssetsCoins
-          itemSelector={favourites.itemSelector!}
-          getItems={favourites.getItems()}
-          dataSelector={favourites.dataSelector}
         />
       )}
     </DefaultTableBlock>
