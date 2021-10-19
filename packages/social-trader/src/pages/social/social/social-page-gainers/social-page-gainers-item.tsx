@@ -1,14 +1,15 @@
 import { CurrencyItem } from "components/currency-item/currency-item";
 import Profitability from "components/profitability/profitability";
 import { PROFITABILITY_PREFIX } from "components/profitability/profitability.helper";
-import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { RowItem } from "components/row-item/row-item";
 import { Text } from "components/text/text";
 import {
   FeedContext,
   SocialSearchInitialState
 } from "pages/social/social/feed.context";
 import React, { useCallback, useContext } from "react";
+import NumberFormat from "react-number-format";
 import { formatCurrencyValue } from "utils/formatter";
 
 interface Props {
@@ -48,7 +49,14 @@ const _SocialPageGainersItem: React.FC<Props> = ({
       </Row>
       <Row>
         <RowItem>
-          <Text size={"small"}>$ {formatCurrencyValue(price, title)}</Text>
+          <Text size={"small"}>
+            <NumberFormat
+              value={formatCurrencyValue(price, title)}
+              thousandSeparator={" "}
+              displayType="text"
+              prefix={"$ "}
+            />
+          </Text>
         </RowItem>
         {change !== null && change !== undefined && (
           <RowItem>
