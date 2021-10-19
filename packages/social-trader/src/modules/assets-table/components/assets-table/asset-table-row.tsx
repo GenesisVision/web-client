@@ -69,7 +69,7 @@ const _AssetTableRow: React.FC<Props> = ({ asset, updateFavorites }) => {
       <TableCell>
         <Text wrap={false}>
           <NumberFormat
-            value={formatCurrencyValue(asset.price, "USD")}
+            value={asset.price}
             thousandSeparator=" "
             prefix={`$ `}
             displayType="text"
