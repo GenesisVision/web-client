@@ -47,7 +47,7 @@ const _AssetHistoryTableRow: React.FC<Props> = ({ event }) => {
       <TableCell>
         <Text wrap={false}>
           <NumberFormat
-            value={formatCurrencyValue(trade.price, "USD")}
+            value={trade.price}
             prefix={`$ `}
             thousandSeparator=" "
             displayType="text"
