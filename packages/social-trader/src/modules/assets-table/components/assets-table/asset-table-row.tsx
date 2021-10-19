@@ -44,9 +44,9 @@ const _AssetTableRow: React.FC<Props> = ({ asset, updateFavorites }) => {
   const { isAuthenticated } = useAuth();
   const { isAvailableFeature } = useDevelopmentFeature();
 
-  // useEffect(() => {
-  //   setFundState(asset);
-  // }, [asset]);
+  useEffect(() => {
+    setFundState(asset);
+  }, [asset]);
 
   const handleUpdateRow = useCallback(
     asset => {
