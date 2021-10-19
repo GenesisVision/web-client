@@ -167,7 +167,7 @@ const _AssetsBuyForm: React.FC<IAssetsTransferFormProps> = ({
             <DialogListItem label={t("assets-page:popup.fee")}>
               <NumberFormat
                 value={formatCurrencyValue(commission, "Any")}
-                prefix={"≈ "}
+                prefix={commission === 0 ? "" : "≈ "}
                 suffix={` ${asset.asset}`}
                 displayType="text"
               />
