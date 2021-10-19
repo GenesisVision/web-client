@@ -31,6 +31,7 @@ export const MenuNavigationItem: React.FC<Props> = ({
     return (
       <RowTag>
         <NavigationItem
+          isSecondLevel
           mobile={mobile}
           small={!!popover}
           icon={<Icon primary />}
