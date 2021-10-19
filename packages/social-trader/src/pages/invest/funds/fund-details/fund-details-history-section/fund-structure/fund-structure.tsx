@@ -36,6 +36,7 @@ const _FundStructure: React.FC = () => {
           <TableCell>
             <NumberFormat
               value={formatValue(item.currentAmount)}
+              thousandSeparator=" "
               displayType="text"
             />
           </TableCell>

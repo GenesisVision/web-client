@@ -116,6 +116,7 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
         <NumberFormat
           value={formatCurrencyValue(amount, currency)}
           suffix={` ${currency}`}
+          thousandSeparator=" "
           displayType="text"
         />
       </TableCell>
@@ -124,6 +125,7 @@ const _ProgramTableRowShort: React.FC<IProgramTableRowShortProps> = ({
         <NumberFormat
           value={formatCurrencyValue(availableToInvest, currency)}
           suffix={` ${currency}`}
+          thousandSeparator=" "
           displayType="text"
         />
       </TableCell>

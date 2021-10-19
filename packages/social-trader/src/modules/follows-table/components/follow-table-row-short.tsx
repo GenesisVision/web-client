@@ -104,6 +104,7 @@ const _FollowTableRowShort: React.FC<IProgramTableRowShortProps> = ({
           <NumberFormat
             value={formatCurrencyValue(balance.amount, balance.currency)}
             suffix={` ${balance.currency}`}
+            thousandSeparator=" "
             displayType="text"
           />
         )}
