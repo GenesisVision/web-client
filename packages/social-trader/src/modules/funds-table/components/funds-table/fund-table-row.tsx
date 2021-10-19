@@ -73,6 +73,7 @@ const _FundsTableRow: React.FC<Props> = ({ fund }) => {
               fund.balance.amount,
               fund.balance.currency
             )}
+            thousandSeparator=" "
             suffix={` ${fund.balance.currency}`}
             displayType="text"
           />
