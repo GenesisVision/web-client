@@ -102,9 +102,10 @@ const _AssetsSellForm: React.FC<IAssetsTransferFormProps> = ({
 
   const amountInAssetCurrency = +amount / rate;
 
-  const commission = useMemo(() => amountInAssetCurrency * 0.001, [
-    amountInAssetCurrency
-  ]);
+  const commission = useMemo(() => {
+    const ratio = selectedItem.currency === asset.asset ? 0 : 0.001;
+    return amountInAssetCurrency * ratio;
+  }, [amountInAssetCurrency, selectedItem.currency, asset.asset]);
 
   return (
     <HookForm form={form} onSubmit={setValuesFromPropsAndSubmit}>
@@ -164,7 +165,7 @@ const _AssetsSellForm: React.FC<IAssetsTransferFormProps> = ({
             <DialogListItem label={t("assets-page:popup.fee")}>
               <NumberFormat
                 value={formatCurrencyValue(commission, "Any")}
-                prefix={"≈ "}
+                prefix={commission === 0 ? "" : "≈ "}
                 suffix={` ${selectedItem.currency}`}
                 displayType="text"
               />
