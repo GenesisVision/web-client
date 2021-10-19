@@ -21,6 +21,7 @@ interface INavigationItemProps
   href?: string | ToType;
   icon: JSX.Element;
   exact?: boolean;
+  isSecondLevel?: boolean;
   onClick?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 }
 
@@ -78,7 +79,8 @@ const _NavigationItem: React.FC<INavigationItemProps> = ({
   onClick,
   href,
   icon,
-  children
+  children,
+  isSecondLevel
 }) => {
   const renderIconWithName = () => (
     <NavigationIconWithName small={small} icon={icon}>
@@ -86,7 +88,9 @@ const _NavigationItem: React.FC<INavigationItemProps> = ({
     </NavigationIconWithName>
   );
 
-  const isCurrent = !!href && router.route.startsWith(normalizeLinkFrom(href));
+  const isCurrent = isSecondLevel
+    ? !!href && router.pathname === normalizeLinkFrom(href)
+    : !!href && router.route.startsWith(normalizeLinkFrom(href));
 
   return !!href ? (
     <StyledLink mobile={mobile} isCurrent={isCurrent} to={href} itemProp="url">
