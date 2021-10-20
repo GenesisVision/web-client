@@ -1,3 +1,5 @@
+import { CoinsAssetFilterContainer } from "components/table/components/filtering/fund-asset-filter/coins-asset-filter.container";
+import { FUND_ASSET_FILTER_NAME } from "components/table/components/filtering/fund-asset-filter/fund-asset-filter.constants";
 import {
   GetItemsFuncActionType,
   TableSelectorType
@@ -26,6 +28,17 @@ const _AssetsPortfolio: React.FC<Props> = ({
     []
   );
 
+  const renderFilters = useCallback(
+    (updateFilter, filtering) => (
+      <CoinsAssetFilterContainer
+        name={FUND_ASSET_FILTER_NAME}
+        value={filtering[FUND_ASSET_FILTER_NAME] as string[]}
+        onChange={updateFilter}
+      />
+    ),
+    []
+  );
+
   return (
     <TableContainer
       loaderData={assetsListLoaderDataWithCount()}
@@ -35,6 +48,7 @@ const _AssetsPortfolio: React.FC<Props> = ({
       columns={ASSETS_PORTFOLIO_TABLE_COLUMNS}
       renderHeader={renderHeader}
       renderBodyRow={renderBodyRow}
+      renderFilters={renderFilters}
     />
   );
 };
