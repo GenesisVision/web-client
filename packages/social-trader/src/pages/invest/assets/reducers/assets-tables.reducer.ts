@@ -6,18 +6,25 @@ import {
 } from "components/table/reducers/table-paging.reducer";
 import { IDataModel } from "constants/constants";
 import {
+  BasePlatformAssetItemsViewModel,
   CoinsAssetItemsViewModel,
   CoinsHistoryEventItemsViewModel
 } from "gv-api-web";
 import {
+  ALL_ASSETS_COINS,
   ASSETS_COINS,
+  ASSETS_DEFAULT_FILTERS,
   ASSETS_FAVOURITES,
+  ASSETS_FILTERS,
   ASSETS_HISTORY,
   ASSETS_HISTORY_DEFAULT_FILTERS,
   ASSETS_HISTORY_FILTERS,
   ASSETS_PORTFOLIO,
   ASSETS_SORTING_DEFAULT
 } from "pages/invest/assets/assets.constants";
+import apiReducerFactory, {
+  IApiState
+} from "reducers/reducer-creators/api-reducer";
 import { RootState } from "reducers/root-reducer";
 
 const defaultData: IDataModel = { items: null, total: 0 };
@@ -30,10 +37,16 @@ export const assetsCoinsTableSelector = tableSelectorCreator<
   CoinsAssetItemsViewModel
 >(assetsCoinsSelector, "items", defaultData);
 
+const assetsCoinsOptions = {
+  paging: DEFAULT_CARD_PAGING,
+  filtering: ASSETS_FILTERS,
+  defaultFilters: ASSETS_DEFAULT_FILTERS
+};
+
 const assetsCoinsReducerOptions = {
   type: ASSETS_COINS,
   sorting: ASSETS_SORTING_DEFAULT,
-  paging: DEFAULT_CARD_PAGING
+  ...assetsCoinsOptions
 };
 
 export const assetsCoinsReducer = tableReducerFactory<CoinsAssetItemsViewModel>(
@@ -67,7 +80,7 @@ export const assetsPortfolioTableSelector = tableSelectorCreator<
 
 const assetsPortfolioReducerOptions = {
   type: ASSETS_PORTFOLIO,
-  paging: DEFAULT_CARD_PAGING
+  ...assetsCoinsOptions
 };
 
 export const assetsPortfolioReducer = tableReducerFactory<CoinsAssetItemsViewModel>(
@@ -124,3 +137,14 @@ export const assetsHistoryReducerShort = tableReducerFactory<CoinsHistoryEventIt
     paging: { ...DEFAULT_PAGING, itemsOnPage: 5 }
   }
 );
+
+export type AllAssetsCoinsType = BasePlatformAssetItemsViewModel;
+
+export type AllAssetsCoinsState = IApiState<AllAssetsCoinsType>;
+
+export const allAssetsCoinsSelector = (state: RootState) =>
+  state.assets.allCoins;
+
+export const allAssetsCoinsReducer = apiReducerFactory<AllAssetsCoinsType>({
+  apiType: ALL_ASSETS_COINS
+});
