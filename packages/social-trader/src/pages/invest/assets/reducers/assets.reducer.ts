@@ -4,6 +4,8 @@ import {
   CoinsHistoryEventItemsViewModel
 } from "gv-api-web";
 import {
+  allAssetsCoinsReducer,
+  AllAssetsCoinsState,
   assetsCoinsReducer,
   assetsFavouritesReducer,
   assetsHistoryReducer,
@@ -15,6 +17,7 @@ import clearableReducer from "reducers/clearable.reducer";
 import { combineReducers } from "redux";
 
 type AssetsDataType = Readonly<{
+  allCoins: AllAssetsCoinsState;
   coins: ITableState<CoinsAssetItemsViewModel>;
   favourites: ITableState<CoinsAssetItemsViewModel>;
   portfolio: ITableState<CoinsAssetItemsViewModel>;
@@ -27,6 +30,7 @@ export type AssetsState = AssetsDataType;
 
 const assetsReducer = clearableReducer(
   combineReducers<AssetsState>({
+    allCoins: allAssetsCoinsReducer,
     coins: assetsCoinsReducer,
     favourites: assetsFavouritesReducer,
     portfolio: assetsPortfolioReducer,

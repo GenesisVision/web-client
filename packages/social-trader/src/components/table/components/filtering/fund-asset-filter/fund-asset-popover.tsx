@@ -1,8 +1,12 @@
 import { CurrencyItem } from "components/currency-item/currency-item";
-import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { RowItem } from "components/row-item/row-item";
 import { Text } from "components/text/text";
-import { PlatformAsset, ProviderPlatformAssets } from "gv-api-web";
+import {
+  BasePlatformAsset,
+  PlatformAsset,
+  ProviderPlatformAssets
+} from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
@@ -12,8 +16,8 @@ import { $paddingXxsmall } from "utils/style/sizes";
 import TileFilterPopover from "../tile-filter-popover";
 
 interface Props {
-  providers: Array<ProviderPlatformAssets>;
-  values: PlatformAsset[];
+  providers: Partial<ProviderPlatformAssets>[];
+  values: Array<PlatformAsset | BasePlatformAsset>;
   changeFilter?(value: string): void;
 }
 
@@ -33,15 +37,17 @@ const _FundAssetPopover: React.FC<Props> = ({
   changeFilter
 }) => {
   const [t] = useTranslation();
-  const filterableValues = values.map(x => ({
-    ...x,
-    searchValue: x.name + x.asset
-  }));
+  const filterableValues = values.map(
+    (x: PlatformAsset | BasePlatformAsset) => ({
+      ...x,
+      searchValue: x.name + x.asset
+    })
+  );
   const tabs = providers.map(({ type }) => type);
   return (
     <TileFilterPopover
       tabCountField={"provider"}
-      tabs={tabs}
+      tabs={tabs as string[]}
       header={t("filters.fund-asset.popover-header")}
       placeholder={t("filters.fund-asset.popover-search-placeholder")}
       values={filterableValues}

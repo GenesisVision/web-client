@@ -10,7 +10,6 @@ import { Text } from "components/text/text";
 import { ASSET_INVEST } from "constants/constants";
 import { CoinsAsset } from "gv-api-web";
 import { useAuth } from "hooks/auth.hook";
-import useDevelopmentFeature from "hooks/development-feature.hook";
 import AssetBuy from "modules/assets-table/components/buttons/asset-buy.button";
 import { ToggleAssetFavoriteButton } from "modules/toggle-asset-favorite-button/toggle-asset-favorite-button";
 import React, { useCallback, useEffect, useState } from "react";
@@ -42,7 +41,6 @@ interface Props {
 const _AssetTableRow: React.FC<Props> = ({ asset, updateFavorites }) => {
   const [fundState, setFundState] = useState(asset);
   const { isAuthenticated } = useAuth();
-  const { isAvailableFeature } = useDevelopmentFeature();
 
   useEffect(() => {
     setFundState(asset);
@@ -112,7 +110,7 @@ const _AssetTableRow: React.FC<Props> = ({ asset, updateFavorites }) => {
       <ChartCell height={"small"}>
         <ProgramSimpleChart data={asset?.chart?.chart} />
       </ChartCell>
-      {isAuthenticated && isAvailableFeature && (
+      {isAuthenticated && (
         <TableCell>
           <Row>
             <AssetBuy asset={asset} id={asset.id} />

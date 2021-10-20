@@ -1,6 +1,8 @@
 import { DataStorageContext } from "components/data-storage/data-storage";
 import GVTabs from "components/gv-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
+import { CoinsAssetFilterContainer } from "components/table/components/filtering/fund-asset-filter/coins-asset-filter.container";
+import { FUND_ASSET_FILTER_NAME } from "components/table/components/filtering/fund-asset-filter/fund-asset-filter.constants";
 import useTab from "hooks/tab.hook";
 import {
   ASSETS_HISTORY_TABLE_COLUMNS,
@@ -80,6 +82,13 @@ const _DashboardInvestingCoins: React.FC = () => {
             <AssetPortfolioTableRow
               asset={asset}
               onApply={handleUpdateItems(updateRow)}
+            />
+          )}
+          renderFilters={(updateFilter, filtering) => (
+            <CoinsAssetFilterContainer
+              name={FUND_ASSET_FILTER_NAME}
+              value={filtering[FUND_ASSET_FILTER_NAME] as string[]}
+              onChange={updateFilter}
             />
           )}
         />
