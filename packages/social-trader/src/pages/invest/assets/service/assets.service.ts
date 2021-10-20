@@ -1,15 +1,10 @@
 import { ComposeFiltersAllType } from "components/table/components/filtering/filter.type";
 import {
-  fetchAllAssetsCoinsAction,
   fetchAssetsCoinsAction,
   fetchAssetsFavouritesAction,
   fetchAssetsHistoryAction,
   fetchAssetsPortfolioAction
 } from "pages/invest/assets/actions/assets.actions";
-import { Dispatch } from "redux";
-
-export const getAllAssetsCoins = () => (dispatch: Dispatch) =>
-  dispatch(fetchAllAssetsCoinsAction());
 
 export const getAssetsCoins = () => (filters: ComposeFiltersAllType) => {
   return fetchAssetsCoinsAction(filters);
