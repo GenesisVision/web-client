@@ -54,7 +54,8 @@ const _AssetsTablesSection: React.FC<Props> = ({
   useApiRequest({
     middleware: [data => setFavouritesCounts(data.total)],
     request: fetchAssetsFavourites,
-    fetchOnMount: true
+    fetchOnMount: true,
+    fetchOnMountData: { take: 0 }
   });
 
   const handleUpdateFavorites = useCallback(isFavorite => {
