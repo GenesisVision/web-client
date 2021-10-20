@@ -1,5 +1,9 @@
 import { CurrencyItem } from "components/currency-item/currency-item";
-import { PlatformAsset, ProviderPlatformAssets } from "gv-api-web";
+import {
+  BasePlatformAsset,
+  PlatformAsset,
+  ProviderPlatformAssets
+} from "gv-api-web";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
@@ -14,12 +18,12 @@ import FundAssetPopover from "./fund-asset-popover";
 export interface IFundAssetFilterProps {
   name: string;
   value: string[];
-  values: PlatformAsset[];
+  values: Array<PlatformAsset | BasePlatformAsset>;
   onChange: UpdateFilterFunc;
 }
 
 interface OwnProps {
-  providers: Array<ProviderPlatformAssets>;
+  providers: Partial<ProviderPlatformAssets>[];
 }
 
 interface Props extends IFundAssetFilterProps, OwnProps {}

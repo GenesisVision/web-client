@@ -1,37 +1,35 @@
 import FundAssetFilter, {
   IFundAssetFilterProps
 } from "components/table/components/filtering/fund-asset-filter/fund-asset-filter";
-import useApiRequest from "hooks/api-request.hook";
-import { fetchAssetsCoins } from "pages/invest/assets/actions/assets.actions";
-import { getTradingAssets } from "pages/invest/funds/fund-settings/reallocation/services/reallocate.services";
-import React from "react";
+import { AssetProvider } from "gv-api-web";
+import { fetchAllAssetsCoinsAction } from "pages/invest/assets/actions/assets.actions";
+import { allAssetsCoinsSelector } from "pages/invest/assets/reducers/assets-tables.reducer";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 export interface ICoinsAssetFilterContainerProps
   extends Omit<IFundAssetFilterProps, "values"> {}
 
+const providerBinance = [{ type: "Binance" as AssetProvider }];
+
 const _CoinsAssetFilterContainer: React.FC<ICoinsAssetFilterContainerProps> = props => {
-  const { data: coins } = useApiRequest({
-    name: "CoinsAssetFilterContainer",
-    cache: true,
-    request: fetchAssetsCoins,
-    fetchOnMount: true
-  });
+  const allAssetsCoins = useSelector(allAssetsCoinsSelector);
+  const dispatch = useDispatch();
 
-  const { data: platformAssets } = useApiRequest({
-    name: "FundAssetFilterContainer",
-    cache: true,
-    request: getTradingAssets,
-    fetchOnMount: true
-  });
+  useEffect(() => {
+    if (!allAssetsCoins.isPending && !allAssetsCoins.data)
+      dispatch(fetchAllAssetsCoinsAction());
+  }, [allAssetsCoins]);
 
-  if (!platformAssets || !coins) return null;
-  const { assets, providers } = platformAssets;
+  if (!allAssetsCoins.data) return null;
 
-  const values = assets.filter(asset =>
-    coins.items.find(coin => coin.id === asset.id)
+  return (
+    <FundAssetFilter
+      {...props}
+      values={allAssetsCoins.data.items}
+      providers={providerBinance}
+    />
   );
-
-  return <FundAssetFilter {...props} values={values} providers={providers} />;
 };
 
 export const CoinsAssetFilterContainer = React.memo(_CoinsAssetFilterContainer);
