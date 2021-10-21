@@ -86,6 +86,7 @@ const _FundsTableRow: React.FC<Props> = ({ fund }) => {
           type={"short"}
           size={3}
           length={fund.totalAssetsCount}
+          canExpand={false}
         />
       </TableCell>
       <TableCell>{fund.investorsCount}</TableCell>
