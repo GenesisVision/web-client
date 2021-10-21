@@ -99,6 +99,7 @@ export const FundCardTable: React.FC<IFundCardTableProps> = ({
           type={"short"}
           size={3}
           length={totalAssetsCount}
+          canExpand={false}
         />
       )}
     </>
