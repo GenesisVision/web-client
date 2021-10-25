@@ -76,11 +76,11 @@ const investMenuItems = {
   label: "navigation.invest",
   route: INVEST_ROUTE,
   children: [
-    // {
-    //   Icon: CoinsIcon,
-    //   route: GV_ASSETS_ROUTE,
-    //   label: "navigation.assets"
-    // },
+    {
+      Icon: CoinsIcon,
+      route: GV_ASSETS_ROUTE,
+      label: "navigation.assets"
+    },
     {
       Icon: ProgramsIcon,
       route: GV_FUNDS_ROUTE,
