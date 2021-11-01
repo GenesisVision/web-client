@@ -32,15 +32,15 @@ import {
   generateScheduleText
 } from "./services/fund-details.service";
 
+const origin =
+  process.env.NODE_ENV === "production"
+    ? "https://genesis.vision"
+    : "https://blue.genesis.vision";
+
 const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
   const [t] = useTranslation();
   const dispatch = useDispatch();
   const currency = useAccountCurrency();
-  const [origin, setOrigin] = useState<string | undefined>(undefined);
-
-  useEffect(() => {
-    setOrigin(window.location.origin);
-  }, []);
 
   const handleDispatchDescription = useCallback(() => {
     dispatch(
@@ -151,7 +151,9 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
       description={`${t("funds-page:title")} ${
         description.publicInfo.title
       } - ${description.publicInfo.description}`}
-      previewImage={composeFundBannerUrl(description.publicInfo.url)}
+      previewImage={`${origin}${composeFundBannerUrl(
+        description.publicInfo.url
+      )}`}
     >
       <BreadCrumbs
         items={[
