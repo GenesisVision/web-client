@@ -46,7 +46,8 @@ export const assetLoaderDataCreator = (): CoinsAsset => ({
   profitCurrent: 0,
   amount: 0,
   isFavorite: true,
-  total: 0
+  total: 0,
+  isTransferred: true
 });
 
 export const assetsListLoaderDataWithCount = (count?: number): CoinsAsset[] =>
