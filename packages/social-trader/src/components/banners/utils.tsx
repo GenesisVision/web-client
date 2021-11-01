@@ -1,8 +1,10 @@
 import { PostPreview } from "components/banners/post-preview";
-import { getImageByQuality } from "components/conversation/conversation-image/conversation-image.helpers";
+import { DEFAULT_PERIOD } from "components/chart/chart-period/chart-period.helpers";
 import { getPost } from "components/conversation/conversation.service";
+import { getImageByQuality } from "components/conversation/conversation-image/conversation-image.helpers";
 import { ASSET } from "constants/constants";
 import {
+  AbsoluteProfitChart,
   FundDetailsFull,
   FundProfitPercentCharts,
   ProgramFollowDetailsFull,
@@ -37,12 +39,17 @@ export interface BannerApiContext extends NextApiRequest {
 const CURRENCY = "USD";
 
 export const formatEquity = (balance: number) => {
-  return `$${Math.round(balance)}`;
+  return `$ ${Math.round(balance)}`;
+};
+
+export const formatProfit = (profit: number) => {
+  return `$${profit.toFixed(2)}`;
 };
 
 export type BannerProps = {
   chart: ProgramProfitPercentCharts | FundProfitPercentCharts;
   details: ProgramFollowDetailsFull | FundDetailsFull;
+  absoluteChart: AbsoluteProfitChart;
   logo?: string;
 };
 
@@ -177,30 +184,65 @@ async function createBanner(
 }
 
 export async function fetchFundData(id: string) {
+  const { start, end } = DEFAULT_PERIOD;
   const details = await api.funds().getFundDetails(id as string);
-  const chart = await api.funds().getFundProfitPercentCharts(details.id, {
-    currencies: [CURRENCY]
-  });
+  const percentChart = await api
+    .funds()
+    .getFundProfitPercentCharts(details.id, {
+      dateFrom: start,
+      dateTo: end,
+      currencies: [CURRENCY]
+    });
 
-  return { details, chart };
+  const absoluteChart = await api
+    .funds()
+    .getFundAbsoluteProfitChart(details.id, {
+      dateFrom: start,
+      dateTo: end,
+      currency: CURRENCY
+    });
+
+  return { details, chart: percentChart, absoluteChart };
 }
 
 export async function fetchFollowData(id: string) {
+  const { start, end } = DEFAULT_PERIOD;
   const details = await api.follows().getFollowAssetDetails(id as string);
-  const chart = await api.follows().getProfitPercentCharts(details.id, {
+  const percentChart = await api.follows().getProfitPercentCharts(details.id, {
+    dateFrom: start,
+    dateTo: end,
     currency: CURRENCY
   });
 
-  return { details, chart };
+  const absoluteChart = await api.follows().getAbsoluteProfitChart(details.id, {
+    dateFrom: start,
+    dateTo: end,
+    currency: CURRENCY
+  });
+
+  return { details, chart: percentChart, absoluteChart };
 }
 
 export async function fetchProgramData(id: string) {
+  const { start, end } = DEFAULT_PERIOD;
   const details = await api.programs().getProgramDetails(id as string);
-  const chart = await api.programs().getProgramProfitPercentCharts(details.id, {
-    currency: CURRENCY
-  });
+  const percentChart = await api
+    .programs()
+    .getProgramProfitPercentCharts(details.id, {
+      dateFrom: start,
+      dateTo: end,
+      currency: CURRENCY
+    });
 
-  return { details, chart };
+  const absoluteChart = await api
+    .programs()
+    .getProgramAbsoluteProfitChart(details.id, {
+      dateFrom: start,
+      dateTo: end,
+      currency: CURRENCY
+    });
+
+  return { details, chart: percentChart, absoluteChart };
 }
 
 export const createPostPreviewApi = () => {
@@ -253,10 +295,14 @@ export function createBannerApi(
 
     try {
       const method = getFetchMethod(asset);
-      const { chart, details } = await method(id as string);
+      const { chart, details, absoluteChart } = await method(id as string);
 
       const banner = await createBanner(
-        <Banner chart={chart} details={details} />,
+        <Banner
+          chart={chart}
+          details={details}
+          absoluteChart={absoluteChart}
+        />,
         logoOptions
           ? {
               href: filesService.getFileUrl(details.publicInfo.logo),
