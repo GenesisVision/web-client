@@ -44,7 +44,7 @@ export const LOGO_OPTIONS: LogoOptions = {
     x: 48,
     y: 38
   },
-  size: { width: 50, height: 50 }
+  size: { width: 55, height: 55 }
 };
 
 export const Banner: BannerComponent = (props: BannerProps) => {
