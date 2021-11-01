@@ -60,7 +60,10 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
   }`;
 
   const banner = useMemo(
-    () => composeFundBannerUrl(description.publicInfo.url, origin),
+    () =>
+      origin
+        ? composeFundBannerUrl(description.publicInfo.url, origin)
+        : undefined,
     [description, origin]
   );
 
