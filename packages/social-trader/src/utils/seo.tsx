@@ -68,15 +68,16 @@ export const commonMeta = (type: "website" | "article" = "website") => {
   );
 };
 
-export const imageMeta = (image?: string, imageTwitter?: string) => {
+export const imageMeta = (image?: string, isSecureUrl?: boolean) => {
   return image ? (
     <>
       <meta property="og:image" key="og-image" content={image} />
-      <meta
-        name="twitter:image"
-        key="twitter:image"
-        content={imageTwitter || image}
-      />
+      <meta name="twitter:image" key="twitter:image" content={image} />
+      <meta property="og:image:secure_url" content={image} />
+      ​<meta property="og:image:width" content="800" />
+      <meta property="og:image:height" content="418" />
+      <meta property="og:image:type" content="image/png" />
+      {/*{isSecureUrl && <meta property="og:image:secure_url" content={image} />}*/}
     </>
   ) : null;
 };
