@@ -60,7 +60,7 @@ export const descriptionMeta = (description?: string) => {
 export const commonMeta = (type: "website" | "article" = "website") => {
   return (
     <>
-      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:card" content="summary" />
       <meta key={"og-type"} property="og:type" content={type} />
       <meta key={"og-sn"} property="og:site_name" content="Genesis Vision" />
       <meta key={"tw-site"} property="twitter:site" content="@genesis_vision" />
@@ -68,11 +68,15 @@ export const commonMeta = (type: "website" | "article" = "website") => {
   );
 };
 
-export const imageMeta = (image?: string) => {
+export const imageMeta = (image?: string, imageTwitter?: string) => {
   return image ? (
     <>
       <meta property="og:image" key="og-image" content={image} />
-      <meta name="twitter:image" key="twitter:image" content={image} />
+      <meta
+        name="twitter:image"
+        key="twitter:image"
+        content={imageTwitter || image}
+      />
     </>
   ) : null;
 };
