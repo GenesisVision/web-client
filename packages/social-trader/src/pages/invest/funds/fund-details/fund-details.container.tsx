@@ -13,6 +13,7 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { GV_FUNDS_ROUTE, INVEST_ROUTE } from "routes/invest.routes";
 import {
+  composeFundBannerUrl,
   composeFundsDetailsUrl,
   createFundNotificationsToUrl,
   createFundSettingsToUrl
@@ -53,8 +54,8 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
   }`;
 
   const banner = useMemo(
-    // () => composeFundBannerUrl(description.publicInfo.url),
-    () => description.publicInfo.logoUrl,
+    () => composeFundBannerUrl(description.publicInfo.url),
+    // () => description.publicInfo.logoUrl,
     [description]
   );
   const schemas = useMemo(() => [getFundSchema(description)], [description]);
