@@ -1,8 +1,8 @@
 import React from "react";
-import { roundPercents } from "utils/formatter";
+import { formatCurrencyValue, formatPercent } from "utils/formatter";
 
 import Chart from "./components/banner-chart";
-import { GvLogoSmall } from "./components/gv-logo";
+import { GvLogoBig } from "./components/gv-logo";
 import LogoPlaceholder from "./components/logo-placeholder";
 import Text from "./components/text";
 import {
@@ -16,7 +16,7 @@ type Position = { y: number };
 
 const Label: React.FC<Position> = ({ children, y }) => {
   return (
-    <Text fontSize={12} color={"rgba(255,255,255,0.5)"} x={20} y={y}>
+    <Text fontSize={24} color={"rgba(255,255,255,0.5)"} x={50} y={y}>
       {children}
     </Text>
   );
@@ -24,7 +24,7 @@ const Label: React.FC<Position> = ({ children, y }) => {
 
 const Value: React.FC<Position> = ({ children, y }) => {
   return (
-    <Text fontSize={16} x={230} y={y} color="#fff" position="end" bold>
+    <Text fontSize={32} x={550} y={y} color="#fff" position="end" bold>
       {children}
     </Text>
   );
@@ -32,7 +32,7 @@ const Value: React.FC<Position> = ({ children, y }) => {
 
 const Title: React.FC = ({ children }) => {
   return (
-    <Text fontSize={12} color="#fff" x={51} y={31}>
+    <Text fontSize={24} color="#fff" x={122} y={75} bold>
       {children}
     </Text>
   );
@@ -41,37 +41,40 @@ const Title: React.FC = ({ children }) => {
 export const LOGO_OPTIONS: LogoOptions = {
   useMask: true,
   position: {
-    x: 20,
-    y: 16
+    x: 48,
+    y: 38
   },
-  size: { width: 21, height: 21 }
+  size: { width: 50, height: 50 }
 };
 
 export const Banner: BannerComponent = (props: BannerProps) => {
   const points = props.chart.charts[0];
   const statistic = props.chart.statistic;
+  const profit = props.absoluteChart.profit;
 
   return (
     <svg
-      width="250"
-      height="250"
+      width="600"
+      height="600"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
     >
-      <rect width={250} height={205} fill="#1F2B35" />
-      <rect y={205} width={250} height={45} fill="#131E26" />
+      <rect width={600} height={500} fill="#1F2B35" />
+      <rect y={500} width={600} height={100} fill="#131E26" />
       <LogoPlaceholder
         {...LOGO_OPTIONS}
         href={props.details.publicInfo.logo}
         color={props.details.publicInfo.color}
       />
-      <GvLogoSmall x={77} y={219} />
+      <GvLogoBig x={216} y={531} />
       <Title>{props.details.publicInfo.title}</Title>
-      <Label y={62}>Monthly Profit</Label>
-      <Value y={62}>{roundPercents(statistic.profitPercent)}</Value>
-      <Label y={87}>Equity</Label>
-      <Value y={87}>{formatEquity(statistic.balance)}</Value>
-      <Chart data={points.chart} width={210} height={82} x={20} y={108} />
+      <Label y={130}>Monthly Profit</Label>
+      <Value y={130}>{`$ ${formatCurrencyValue(profit, "USD")}`}</Value>
+      <Label y={180}>Monthly Profit, %</Label>
+      <Value y={180}>{`${formatPercent(statistic.profitPercent)}%`}</Value>
+      <Label y={230}>Equity</Label>
+      <Value y={230}>{formatEquity(statistic.balance)}</Value>
+      <Chart data={points.chart} width={500} height={200} x={50} y={260} />
     </svg>
   );
 };
