@@ -7,6 +7,7 @@ type TextProps = {
   bold?: boolean;
   position?: "start" | "middle" | "end";
   color: string;
+  letterSpacing?: number;
 };
 
 export default function Text({
@@ -16,7 +17,8 @@ export default function Text({
   fontSize,
   bold = false,
   color,
-  position
+  position,
+  letterSpacing
 }: React.PropsWithChildren<TextProps>) {
   return (
     <text
@@ -25,6 +27,7 @@ export default function Text({
       textAnchor={position}
       fontWeight={bold ? "bold" : undefined}
       fontFamily={"Montserrat"}
+      letterSpacing={letterSpacing || "1.5"}
     >
       <defs>
         <style

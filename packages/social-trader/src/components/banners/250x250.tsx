@@ -2,7 +2,7 @@ import React from "react";
 import { roundPercents } from "utils/formatter";
 
 import Chart from "./components/banner-chart";
-import GvLogo from "./components/gv-logo";
+import { GvLogoSmall } from "./components/gv-logo";
 import LogoPlaceholder from "./components/logo-placeholder";
 import Text from "./components/text";
 import {
@@ -65,7 +65,7 @@ export const Banner: BannerComponent = (props: BannerProps) => {
         href={props.details.publicInfo.logo}
         color={props.details.publicInfo.color}
       />
-      <GvLogo x={77} y={219} />
+      <GvLogoSmall x={77} y={219} />
       <Title>{props.details.publicInfo.title}</Title>
       <Label y={62}>Monthly Profit</Label>
       <Value y={62}>{roundPercents(statistic.profitPercent)}</Value>
