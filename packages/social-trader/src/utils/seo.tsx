@@ -60,7 +60,7 @@ export const descriptionMeta = (description?: string) => {
 export const commonMeta = (type: "website" | "article" = "website") => {
   return (
     <>
-      <meta name="twitter:card" content="summary" />
+      <meta name="twitter:card" content="summary_large_image" />
       <meta key={"og-type"} property="og:type" content={type} />
       <meta key={"og-sn"} property="og:site_name" content="Genesis Vision" />
       <meta key={"tw-site"} property="twitter:site" content="@genesis_vision" />
