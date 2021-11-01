@@ -59,14 +59,6 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
     description.publicInfo.title
   }`;
 
-  const banner = useMemo(
-    () =>
-      origin
-        ? composeFundBannerUrl(description.publicInfo.url, origin)
-        : undefined,
-    [description, origin]
-  );
-
   const schemas = useMemo(() => [getFundSchema(description)], [description]);
 
   const notificationsUrl = useMemo(
@@ -159,7 +151,7 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
       description={`${t("funds-page:title")} ${
         description.publicInfo.title
       } - ${description.publicInfo.description}`}
-      previewImage={banner}
+      previewImage={composeFundBannerUrl(description.publicInfo.url)}
     >
       <BreadCrumbs
         items={[

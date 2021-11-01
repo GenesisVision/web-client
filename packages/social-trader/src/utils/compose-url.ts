@@ -105,11 +105,8 @@ export const composeProgramBannerUrl = (
     }
   );
 
-export const composeFundBannerUrl = (
-  slugUrl: string,
-  origin?: string
-): string =>
-  replaceParams(origin ? `${origin}${FUND_BANNER_ROUTE}` : FUND_BANNER_ROUTE, {
+export const composeFundBannerUrl = (slugUrl: string): string =>
+  replaceParams(FUND_BANNER_ROUTE, {
     [`:${FUNDS_SLUG_URL_PARAM_NAME}`]: slugUrl
   });
 
