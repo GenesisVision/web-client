@@ -8,7 +8,7 @@ import { ASSET } from "constants/constants";
 import { FundDetailsFull } from "gv-api-web";
 import { useAccountCurrency } from "hooks/account-currency.hook";
 import InvestDefaultPopup from "modules/invest-popup/invest-default-popup";
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { GV_FUNDS_ROUTE, INVEST_ROUTE } from "routes/invest.routes";
@@ -36,6 +36,12 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
   const [t] = useTranslation();
   const dispatch = useDispatch();
   const currency = useAccountCurrency();
+  const [origin, setOrigin] = useState<string | undefined>(undefined);
+
+  useEffect(() => {
+    setOrigin(window.location.origin);
+  }, []);
+
   const handleDispatchDescription = useCallback(() => {
     dispatch(
       dispatchFundDescriptionWithId(description.id, undefined, currency)
@@ -54,10 +60,10 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
   }`;
 
   const banner = useMemo(
-    () => composeFundBannerUrl(description.publicInfo.url),
-    // () => description.publicInfo.logoUrl,
-    [description]
+    () => composeFundBannerUrl(description.publicInfo.url, origin),
+    [description, origin]
   );
+
   const schemas = useMemo(() => [getFundSchema(description)], [description]);
 
   const notificationsUrl = useMemo(
