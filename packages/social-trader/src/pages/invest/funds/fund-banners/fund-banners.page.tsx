@@ -18,6 +18,8 @@ const _Page: NextPage<{ fund: FundDetailsFull }> = ({ fund }) => {
   if (!origin) return null;
 
   const title = `Banners for fund: ${fund.publicInfo.title}`;
+  const banner800png = `${origin}/banners/funds/${fund.publicInfo.url}/800x418.png`;
+  const banner800svg = `${origin}/banners/funds/${fund.publicInfo.url}/800x418.svg`;
   const banner600png = `${origin}/banners/funds/${fund.publicInfo.url}/600x600.png`;
   const banner600svg = `${origin}/banners/funds/${fund.publicInfo.url}/600x600.svg`;
   const banner250png = `${origin}/banners/funds/${fund.publicInfo.url}/250x250.png`;
@@ -31,6 +33,7 @@ const _Page: NextPage<{ fund: FundDetailsFull }> = ({ fund }) => {
     <Page description={title} title={title}>
       <DefaultBlock solid>
         <h3>PNG banners</h3>
+        <BannerPreview url={banner800png} title={fund.publicInfo.title} />
         <BannerPreview url={banner600png} title={fund.publicInfo.title} />
         <BannerPreview url={banner250png} title={fund.publicInfo.title} />
         <BannerPreview url={banner728png} title={fund.publicInfo.title} />
@@ -38,6 +41,11 @@ const _Page: NextPage<{ fund: FundDetailsFull }> = ({ fund }) => {
       </DefaultBlock>
       <DefaultBlock solid>
         <h3>SVG banners</h3>
+        <BannerPreview
+          url={banner800svg}
+          title={fund.publicInfo.title}
+          type={"svg"}
+        />
         <BannerPreview
           url={banner600svg}
           title={fund.publicInfo.title}

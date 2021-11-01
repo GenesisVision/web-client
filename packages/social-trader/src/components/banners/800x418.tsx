@@ -16,7 +16,7 @@ type Position = { y: number };
 
 const Label: React.FC<Position> = ({ children, y }) => {
   return (
-    <Text fontSize={24} color={"rgba(255,255,255,0.5)"} x={50} y={y}>
+    <Text fontSize={20} color={"rgba(255,255,255,0.5)"} x={67} y={y}>
       {children}
     </Text>
   );
@@ -24,7 +24,7 @@ const Label: React.FC<Position> = ({ children, y }) => {
 
 const Value: React.FC<Position> = ({ children, y }) => {
   return (
-    <Text fontSize={32} x={550} y={y} color="#fff" position="end" bold>
+    <Text fontSize={26} x={733} y={y} color="#fff" position="end" bold>
       {children}
     </Text>
   );
@@ -32,7 +32,7 @@ const Value: React.FC<Position> = ({ children, y }) => {
 
 const Title: React.FC = ({ children }) => {
   return (
-    <Text fontSize={24} color="#fff" x={122} y={75} bold>
+    <Text fontSize={20} color="#fff" x={150} y={60} bold>
       {children}
     </Text>
   );
@@ -41,8 +41,8 @@ const Title: React.FC = ({ children }) => {
 export const LOGO_OPTIONS: LogoOptions = {
   useMask: true,
   position: {
-    x: 48,
-    y: 38
+    x: 67,
+    y: 25
   },
   size: { width: 55, height: 55 }
 };
@@ -54,27 +54,27 @@ export const Banner: BannerComponent = (props: BannerProps) => {
 
   return (
     <svg
-      width="600"
-      height="600"
+      width="800"
+      height="418"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
     >
-      <rect width={600} height={500} fill="#1F2B35" />
-      <rect y={500} width={600} height={100} fill="#131E26" />
+      <rect width={800} height={348} fill="#1F2B35" />
+      <rect y={348} width={800} height={70} fill="#131E26" />
       <LogoPlaceholder
         {...LOGO_OPTIONS}
         href={props.details.publicInfo.logo}
         color={props.details.publicInfo.color}
       />
-      <GvLogoBig x={216} y={531} />
+      <GvLogoBig x={316} y={364} />
       <Title>{props.details.publicInfo.title}</Title>
-      <Label y={130}>Monthly Profit</Label>
-      <Value y={130}>{`$ ${formatCurrencyValue(profit, "USD")}`}</Value>
-      <Label y={180}>Monthly Profit, %</Label>
-      <Value y={180}>{`${formatPercent(statistic.profitPercent)}%`}</Value>
-      <Label y={230}>Equity</Label>
-      <Value y={230}>{formatEquity(statistic.balance)}</Value>
-      <Chart data={points.chart} width={500} height={200} x={50} y={260} />
+      <Label y={115}>Monthly Profit</Label>
+      <Value y={115}>{`$ ${formatCurrencyValue(profit, "USD")}`}</Value>
+      <Label y={147}>Monthly Profit, %</Label>
+      <Value y={147}>{`${formatPercent(statistic.profitPercent)}%`}</Value>
+      <Label y={180}>Equity</Label>
+      <Value y={180}>{formatEquity(statistic.balance)}</Value>
+      <Chart data={points.chart} width={666} height={140} x={67} y={198} />
     </svg>
   );
 };
