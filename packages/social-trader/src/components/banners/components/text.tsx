@@ -27,7 +27,7 @@ export default function Text({
       textAnchor={position}
       fontWeight={bold ? "bold" : undefined}
       fontFamily={"Montserrat"}
-      letterSpacing={letterSpacing || "1.5"}
+      letterSpacing={letterSpacing || "1"}
     >
       <defs>
         <style
