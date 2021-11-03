@@ -100,5 +100,8 @@ $pink-color-hover: lighten(#cf2877, 10%);
     padding: 0;
     border-radius: 0;
     text-transform: none;
+    letter-spacing: 0;
+    font-size: inherit;
+    font-weight: inherit;
   }
 }

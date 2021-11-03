@@ -24,6 +24,8 @@ interface Props {
 const ButtonContainer = styled.div`
   display: block;
   padding-top: 20px;
+  font-size: 14px;
+  font-weight: 500;
   ${mediaBreakpointTablet("display: none;")}
 `;
 
