@@ -68,7 +68,7 @@ $pink-color-hover: lighten(#cf2877, 10%);
     padding-left: 20px;
     padding-right: 20px;
     border-radius: 100px;
-    min-width: 120px;
+    min-width: 100px;
 
     &:hover {
       background-color: rgba($main-color, 0.15);
@@ -92,5 +92,13 @@ $pink-color-hover: lighten(#cf2877, 10%);
     border-radius: 100%;
     padding: 0;
     line-height: 100px;
+  }
+
+  &--text {
+    background-color: transparent;
+    min-width: auto;
+    padding: 0;
+    border-radius: 0;
+    text-transform: none;
   }
 }
