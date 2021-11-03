@@ -39,7 +39,7 @@ export interface BannerApiContext extends NextApiRequest {
 const CURRENCY = "USD";
 
 export const formatEquity = (balance: number) => {
-  return `$ ${Math.round(balance)}`;
+  return Math.round(balance);
 };
 
 export const formatProfit = (profit: number) => {
