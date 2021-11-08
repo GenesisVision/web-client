@@ -66,10 +66,6 @@ export const Banner: BannerComponent = (props: BannerProps) => {
   const profit = props.absoluteChart.profit;
   const balance = props.balanceChart.balance;
 
-  // console.log("balance", balance);
-  // console.log("profit", profit);
-  // console.log("profitPercent", profitPercent);
-
   return (
     <svg
       width="800"
@@ -103,7 +99,7 @@ export const Banner: BannerComponent = (props: BannerProps) => {
       <Label y={180}>Equity</Label>
       <Value y={180}>
         <NumberFormat
-          value={formatEquity(props.balanceChart.balance)}
+          value={formatEquity(balance)}
           thousandSeparator=" "
           displayType="text"
           prefix={`$ `}
