@@ -1,6 +1,6 @@
 import React from "react";
 import NumberFormat from "react-number-format";
-import { formatCurrencyValue, formatPercent } from "utils/formatter";
+import { formatCurrencyValue, formatValue } from "utils/formatter";
 import { $negativeColor, $positiveColor } from "utils/style/colors";
 
 import Chart from "./components/banner-chart";
@@ -62,11 +62,14 @@ export const LOGO_OPTIONS: LogoOptions = {
 
 export const Banner: BannerComponent = (props: BannerProps) => {
   const points = props.chart.charts[0];
-  const statistic = props.chart.statistic;
+  const profitPercent = props.chart.statistic.profitPercent;
   const profit = props.absoluteChart.profit;
+  const balance = props.balanceChart.balance;
 
-  // @ts-ignore
-  // @ts-ignore
+  // console.log("balance", balance);
+  // console.log("profit", profit);
+  // console.log("profitPercent", profitPercent);
+
   return (
     <svg
       width="800"
@@ -94,13 +97,13 @@ export const Banner: BannerComponent = (props: BannerProps) => {
         />
       </Value>
       <Label y={147}>Monthly Profit, %</Label>
-      <PercentValue value={+formatPercent(statistic.profitPercent)}>
-        {formatPercent(statistic.profitPercent)}%
+      <PercentValue value={profitPercent}>
+        {formatValue(profitPercent, 2)}%
       </PercentValue>
       <Label y={180}>Equity</Label>
       <Value y={180}>
         <NumberFormat
-          value={formatEquity(statistic.balance)}
+          value={formatEquity(props.balanceChart.balance)}
           thousandSeparator=" "
           displayType="text"
           prefix={`$ `}

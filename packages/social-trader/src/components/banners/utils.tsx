@@ -5,8 +5,11 @@ import { getImageByQuality } from "components/conversation/conversation-image/co
 import { ASSET } from "constants/constants";
 import {
   AbsoluteProfitChart,
+  AccountBalanceChart,
+  FundBalanceChart,
   FundDetailsFull,
   FundProfitPercentCharts,
+  ProgramBalanceChart,
   ProgramFollowDetailsFull,
   ProgramProfitPercentCharts
 } from "gv-api-web";
@@ -50,6 +53,7 @@ export type BannerProps = {
   chart: ProgramProfitPercentCharts | FundProfitPercentCharts;
   details: ProgramFollowDetailsFull | FundDetailsFull;
   absoluteChart: AbsoluteProfitChart;
+  balanceChart: ProgramBalanceChart | AccountBalanceChart | FundBalanceChart;
   logo?: string;
 };
 
@@ -202,7 +206,14 @@ export async function fetchFundData(id: string) {
       currency: CURRENCY
     });
 
-  return { details, chart: percentChart, absoluteChart };
+  const balanceChart = await api.funds().getFundBalanceChart(details.id, {
+    dateFrom: start,
+    dateTo: end,
+    maxPointCount: 100,
+    currency: CURRENCY
+  });
+
+  return { details, chart: percentChart, absoluteChart, balanceChart };
 }
 
 export async function fetchFollowData(id: string) {
@@ -211,7 +222,7 @@ export async function fetchFollowData(id: string) {
   const percentChart = await api.follows().getProfitPercentCharts(details.id, {
     dateFrom: start,
     dateTo: end,
-    currency: CURRENCY
+    currencies: [CURRENCY]
   });
 
   const absoluteChart = await api.follows().getAbsoluteProfitChart(details.id, {
@@ -220,7 +231,14 @@ export async function fetchFollowData(id: string) {
     currency: CURRENCY
   });
 
-  return { details, chart: percentChart, absoluteChart };
+  const balanceChart = await api.follows().getBalanceChart(details.id, {
+    dateFrom: start,
+    dateTo: end,
+    maxPointCount: 100,
+    currency: CURRENCY
+  });
+
+  return { details, chart: percentChart, absoluteChart, balanceChart };
 }
 
 export async function fetchProgramData(id: string) {
@@ -231,7 +249,7 @@ export async function fetchProgramData(id: string) {
     .getProgramProfitPercentCharts(details.id, {
       dateFrom: start,
       dateTo: end,
-      currency: CURRENCY
+      currencies: [CURRENCY]
     });
 
   const absoluteChart = await api
@@ -242,7 +260,14 @@ export async function fetchProgramData(id: string) {
       currency: CURRENCY
     });
 
-  return { details, chart: percentChart, absoluteChart };
+  const balanceChart = await api.programs().getProgramBalanceChart(details.id, {
+    dateFrom: start,
+    dateTo: end,
+    maxPointCount: 100,
+    currency: CURRENCY
+  });
+
+  return { details, chart: percentChart, absoluteChart, balanceChart };
 }
 
 export const createPostPreviewApi = () => {
@@ -295,13 +320,16 @@ export function createBannerApi(
 
     try {
       const method = getFetchMethod(asset);
-      const { chart, details, absoluteChart } = await method(id as string);
+      const { chart, details, absoluteChart, balanceChart } = await method(
+        id as string
+      );
 
       const banner = await createBanner(
         <Banner
           chart={chart}
           details={details}
           absoluteChart={absoluteChart}
+          balanceChart={balanceChart}
         />,
         logoOptions
           ? {
