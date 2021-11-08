@@ -10,6 +10,7 @@ export const JoinButton: React.FC<Props> = ({
   href,
   eventLabel,
   color,
+  isText,
   circle,
   className
 }) => {
@@ -29,6 +30,7 @@ export const JoinButton: React.FC<Props> = ({
       href={href}
       onClick={clickHandle}
       circle={circle}
+      isText={isText}
     >
       {children}
     </LPButton>
@@ -42,4 +44,5 @@ interface Props extends OptionalClickable {
   href?: string | ToType;
   className?: string;
   circle?: boolean;
+  isText?: boolean;
 }
