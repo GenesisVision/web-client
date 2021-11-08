@@ -89,7 +89,7 @@ export const Banner: BannerComponent = (props: BannerProps) => {
           value={formatCurrencyValue(profit, "USD")}
           thousandSeparator=" "
           displayType="text"
-          prefix={`$ `}
+          prefix={` $ `}
           renderText={(value: string) => <tspan>{value}</tspan>}
         />
       </Value>
