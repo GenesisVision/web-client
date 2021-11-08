@@ -344,7 +344,8 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
       } - ${title}`}
       description={`${assetType} ${description.publicInfo.title} - ${description.publicInfo.description}`}
       previewImage={`${ORIGIN_URL}${composeProgramBannerUrl(
-        description.publicInfo.url
+        description.publicInfo.url,
+        assetType
       )}`}
       schemas={schemas}
     >
