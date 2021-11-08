@@ -20,6 +20,8 @@ const _Page: NextPage<{ program: ProgramFollowDetailsFull }> = ({
   if (!origin) return null;
 
   const title = `Banners for program: ${program.publicInfo.title}`;
+  const banner800png = `${origin}/banners/programs/${program.publicInfo.url}/800x418.png`;
+  const banner800svg = `${origin}/banners/programs/${program.publicInfo.url}/800x418.svg`;
   const banner600png = `${origin}/banners/programs/${program.publicInfo.url}/600x600.png`;
   const banner600svg = `${origin}/banners/programs/${program.publicInfo.url}/600x600.svg`;
   const banner250png = `${origin}/banners/programs/${program.publicInfo.url}/250x250.png`;
@@ -33,6 +35,7 @@ const _Page: NextPage<{ program: ProgramFollowDetailsFull }> = ({
     <Page description={title} title={title}>
       <DefaultBlock solid>
         <h3>PNG banners</h3>
+        <BannerPreview url={banner800png} title={program.publicInfo.title} />
         <BannerPreview url={banner600png} title={program.publicInfo.title} />
         <BannerPreview url={banner250png} title={program.publicInfo.title} />
         <BannerPreview url={banner728png} title={program.publicInfo.title} />
@@ -40,6 +43,11 @@ const _Page: NextPage<{ program: ProgramFollowDetailsFull }> = ({
       </DefaultBlock>
       <DefaultBlock solid>
         <h3>SVG banners</h3>
+        <BannerPreview
+          url={banner800svg}
+          title={program.publicInfo.title}
+          type={"svg"}
+        />
         <BannerPreview
           url={banner600svg}
           title={program.publicInfo.title}

@@ -1,5 +1,7 @@
 import React from "react";
+import NumberFormat from "react-number-format";
 import { formatCurrencyValue, formatPercent } from "utils/formatter";
+import { $negativeColor, $positiveColor } from "utils/style/colors";
 
 import Chart from "./components/banner-chart";
 import { GvLogoBig } from "./components/gv-logo";
@@ -13,6 +15,7 @@ import {
 } from "./utils";
 
 type Position = { y: number };
+type PercentValueType = { value: number };
 
 const Label: React.FC<Position> = ({ children, y }) => {
   return (
@@ -25,6 +28,16 @@ const Label: React.FC<Position> = ({ children, y }) => {
 const Value: React.FC<Position> = ({ children, y }) => {
   return (
     <Text fontSize={26} x={733} y={y} color="#fff" position="end" bold>
+      {children}
+    </Text>
+  );
+};
+
+const PercentValue: React.FC<PercentValueType> = ({ children, value }) => {
+  const color =
+    value > 0 ? $positiveColor : value < 0 ? $negativeColor : "#fff";
+  return (
+    <Text fontSize={26} x={733} y={147} color={color} position="end" bold>
       {children}
     </Text>
   );
@@ -52,6 +65,8 @@ export const Banner: BannerComponent = (props: BannerProps) => {
   const statistic = props.chart.statistic;
   const profit = props.absoluteChart.profit;
 
+  // @ts-ignore
+  // @ts-ignore
   return (
     <svg
       width="800"
@@ -69,11 +84,29 @@ export const Banner: BannerComponent = (props: BannerProps) => {
       <GvLogoBig x={316} y={364} />
       <Title>{props.details.publicInfo.title}</Title>
       <Label y={115}>Monthly Profit</Label>
-      <Value y={115}>{`$ ${formatCurrencyValue(profit, "USD")}`}</Value>
+      <Value y={115}>
+        <NumberFormat
+          value={formatCurrencyValue(profit, "USD")}
+          thousandSeparator=" "
+          displayType="text"
+          prefix={` $ `}
+          renderText={(value: string) => <tspan>{value}</tspan>}
+        />
+      </Value>
       <Label y={147}>Monthly Profit, %</Label>
-      <Value y={147}>{`${formatPercent(statistic.profitPercent)}%`}</Value>
+      <PercentValue value={+formatPercent(statistic.profitPercent)}>
+        {formatPercent(statistic.profitPercent)}%
+      </PercentValue>
       <Label y={180}>Equity</Label>
-      <Value y={180}>{formatEquity(statistic.balance)}</Value>
+      <Value y={180}>
+        <NumberFormat
+          value={formatEquity(statistic.balance)}
+          thousandSeparator=" "
+          displayType="text"
+          prefix={`$ `}
+          renderText={(value: string) => <tspan>{value}</tspan>}
+        />
+      </Value>
       <Chart data={points.chart} width={666} height={140} x={67} y={198} />
     </svg>
   );

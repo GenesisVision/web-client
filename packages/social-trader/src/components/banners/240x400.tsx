@@ -71,7 +71,7 @@ export const Banner: BannerComponent = props => {
       <Title y={92}>Monthly Profit</Title>
       <Value y={92}>{roundPercents(statistic.profitPercent)}</Value>
       <Title y={122}>Equity</Title>
-      <Value y={122}>{formatEquity(statistic.balance)}</Value>
+      <Value y={122}>{`$ ${formatEquity(statistic.balance)}`}</Value>
       <BannerChart {...chartProps} />
     </svg>
   );
