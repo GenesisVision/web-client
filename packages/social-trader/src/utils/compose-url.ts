@@ -94,16 +94,10 @@ export const composeProgramDetailsUrl = (slugUrl: string): string =>
     [`:${SLUG_URL_PARAM_NAME}`]: slugUrl
   });
 
-export const composeProgramBannerUrl = (
-  slugUrl: string,
-  origin?: string
-): string =>
-  replaceParams(
-    origin ? `${origin}${PROGRAM_BANNER_ROUTE}` : PROGRAM_BANNER_ROUTE,
-    {
-      [`:${SLUG_URL_PARAM_NAME}`]: slugUrl
-    }
-  );
+export const composeProgramBannerUrl = (slugUrl: string): string =>
+  replaceParams(PROGRAM_BANNER_ROUTE, {
+    [`:${SLUG_URL_PARAM_NAME}`]: slugUrl
+  });
 
 export const composeFundBannerUrl = (slugUrl: string): string =>
   replaceParams(FUND_BANNER_ROUTE, {

@@ -4,11 +4,11 @@ import DetailsInvestment from "components/details/details-description-section/de
 import { DetailsDivider } from "components/details/details-divider.block";
 import Page from "components/page/page";
 import { Row } from "components/row/row";
-import { ASSET } from "constants/constants";
+import { ASSET, ORIGIN_URL } from "constants/constants";
 import { FundDetailsFull } from "gv-api-web";
 import { useAccountCurrency } from "hooks/account-currency.hook";
 import InvestDefaultPopup from "modules/invest-popup/invest-default-popup";
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { GV_FUNDS_ROUTE, INVEST_ROUTE } from "routes/invest.routes";
@@ -31,8 +31,6 @@ import {
   dispatchFundDescriptionWithId,
   generateScheduleText
 } from "./services/fund-details.service";
-
-const origin = "https://blue.genesis.vision";
 
 const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
   const [t] = useTranslation();
@@ -148,7 +146,7 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
       description={`${t("funds-page:title")} ${
         description.publicInfo.title
       } - ${description.publicInfo.description}`}
-      previewImage={`${origin}${composeFundBannerUrl(
+      previewImage={`${ORIGIN_URL}${composeFundBannerUrl(
         description.publicInfo.url
       )}`}
     >

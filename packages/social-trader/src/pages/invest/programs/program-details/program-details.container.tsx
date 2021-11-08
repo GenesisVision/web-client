@@ -6,7 +6,7 @@ import { DetailsDivider } from "components/details/details-divider.block";
 import Page from "components/page/page";
 import { Row } from "components/row/row";
 import { RowItem } from "components/row-item/row-item";
-import { ASSET, TRADE_ASSET_TYPE } from "constants/constants";
+import { ASSET, ORIGIN_URL, TRADE_ASSET_TYPE } from "constants/constants";
 import { LevelsParamsInfo } from "gv-api-web";
 import InvestDefaultPopup from "modules/invest-popup/invest-default-popup";
 import dynamic from "next/dynamic";
@@ -31,6 +31,7 @@ import {
 import styled from "styled-components";
 import {
   composeFollowDetailsUrl,
+  composeProgramBannerUrl,
   composeProgramDetailsUrl,
   createFollowNotificationsToUrl,
   createProgramApiKeysToUrl,
@@ -150,11 +151,6 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
     }),
     []
   );
-
-  const banner = useMemo(() => {
-    // return composeProgramBannerUrl(url);
-    return description.publicInfo.logoUrl;
-  }, [url]);
   const schemas = useMemo(() => [getSchema(description)], [description]);
 
   const renderAssetDetailsExtraBlock = useCallback(
@@ -347,7 +343,9 @@ const _ProgramDetailsContainer: React.FC<Props> = ({
           : t("program-details-page:title")
       } - ${title}`}
       description={`${assetType} ${description.publicInfo.title} - ${description.publicInfo.description}`}
-      previewImage={banner}
+      previewImage={`${ORIGIN_URL}${composeProgramBannerUrl(
+        description.publicInfo.url
+      )}`}
       schemas={schemas}
     >
       <BreadCrumbs
