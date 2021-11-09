@@ -32,6 +32,10 @@ const ChartContainer = styled(Row)`
   height: 300px;
 `;
 
+const StyledRow = styled(Row)`
+  justify-content: center;
+`;
+
 const Description = styled(Row)`
   font-size: ${$fontSizeParagraph}px;
   line-height: 1.8;
@@ -67,7 +71,7 @@ const _Active: React.FC<Props> = ({
             />
           )}
         </ChartContainer>
-        <Row>
+        <StyledRow center>
           <Text>
             <a
               rel="noopener"
@@ -79,7 +83,7 @@ const _Active: React.FC<Props> = ({
             </a>{" "}
             by TradingView
           </Text>
-        </Row>
+        </StyledRow>
       </Row>
       <Row size={"large"} onlyOffset>
         <Row>
