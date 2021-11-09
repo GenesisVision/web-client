@@ -117,7 +117,6 @@ const ButtonsContainer = styled.div`
 
 const MobileButtonsContainer = styled.div`
   display: block;
-  //justify-self: end;
   ${mediaBreakpointTablet("display: none;")}
 `;
 
