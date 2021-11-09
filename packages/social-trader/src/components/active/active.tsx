@@ -1,5 +1,6 @@
 import { CurrencyItem } from "components/currency-item/currency-item";
 import { Row } from "components/row/row";
+import { Text } from "components/text/text";
 import TradingViewWidget, {
   Themes
 } from "components/trading-view/trading-view";
@@ -37,7 +38,7 @@ const Description = styled(Row)`
 `;
 
 const _Active: React.FC<Props> = ({
-  data: { name, description, tags, chartSymbol, logoUrl, socialLinks }
+  data: { name, description, tags, chartSymbol, logoUrl, socialLinks, symbol }
 }) => {
   const { effectiveConnectionType } = useNetworkStatusInWindow();
   const [isServer, setIsServer] = useState(true);
@@ -46,6 +47,7 @@ const _Active: React.FC<Props> = ({
     setIsServer(false);
   }, []);
   const isGoodNetwork = effectiveConnectionType === "4g";
+
   return (
     <div>
       <Row size={"large"}>
@@ -65,6 +67,19 @@ const _Active: React.FC<Props> = ({
             />
           )}
         </ChartContainer>
+        <Row>
+          <Text>
+            <a
+              rel="noopener"
+              target="_blank"
+              title={"TradingView"}
+              href={`https://www.tradingview.com/symbols/${chartSymbol}/`}
+            >
+              {name} Chart
+            </a>{" "}
+            by TradingView
+          </Text>
+        </Row>
       </Row>
       <Row size={"large"} onlyOffset>
         <Row>
