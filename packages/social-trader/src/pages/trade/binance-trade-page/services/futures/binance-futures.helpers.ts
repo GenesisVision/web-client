@@ -6,6 +6,7 @@ import {
   BinanceWorkingType
 } from "gv-api-web";
 import {
+  FUTURES_ACCOUNT_EVENT,
   FuturesAccount,
   FuturesAccountEventBalance,
   FuturesAccountUpdateEvent,
@@ -148,13 +149,13 @@ export const futuresAccountEventPositionTransform = (
 ): PositionMini => {
   return {
     symbol: socketData.s,
-    positionAmt: socketData.pa,
-    entryPrice: socketData.ep,
-    accumulatedRealized: socketData.cr,
-    unrealizedPnl: socketData.up,
-    marginType: setUpperFirstLetter(socketData.mt) as BinanceFuturesMarginType,
-    isolatedWallet: socketData.iw,
-    positionSide: setUpperFirstLetter(socketData.ps) as BinancePositionSide
+    quantity: +socketData.pa,
+    entryPrice: +socketData.ep,
+    // accumulatedRealized: socketData.cr,
+    marginType: setUpperFirstLetter(socketData.mt),
+    unrealizedPnL: +socketData.up,
+    isolatedMargin: +socketData.iw + +socketData.up, // not sure
+    positionSide: setUpperFirstLetter(socketData.ps)
   } as PositionMini;
 };
 
@@ -178,9 +179,8 @@ export const futuresEventBalanceTransform = (
 ): FuturesAccountEventBalance => {
   return {
     asset: socketData.a,
-    free: socketData.wb,
-    walletBalance: socketData.wb,
-    crossWalletBalance: socketData.cw
+    walletBalance: +socketData.wb,
+    crossWalletBalance: +socketData.cw
   };
 };
 
@@ -208,7 +208,7 @@ export const futuresEventTradeOrderTransform = (
     originalType: convertBinanceTypeIntoGV(socketData.ot) as FuturesOrderType,
     type: convertBinanceTypeIntoGV(socketData.o) as FuturesOrderType,
     workingType: getWorkingTypeType(socketData.wt),
-    eventType: "ORDER_TRADE_UPDATE",
+    eventType: FUTURES_ACCOUNT_EVENT.orderTradeUpdate,
     averagePrice: socketData.ap,
     callbackRate: socketData.cr,
     orderStatus: getWorkingTypeType(socketData.X) as FuturesOrderStatus,
@@ -232,7 +232,7 @@ export const futuresAccountUpdateEventTransform = (
   socketData: any
 ): FuturesAccountUpdateEvent => {
   return {
-    eventType: USER_STREAM_ACCOUNT_UPDATE_EVENT_TYPE,
+    eventType: socketData.e,
     eventTime: socketData.E,
     transactionTime: socketData.T,
     balances: (socketData.a?.B || []).map(futuresEventBalanceTransform),
@@ -252,8 +252,8 @@ export const futuresTradeOrderUpdateEventTransform = (
 };
 
 export const filterPositionEventsStream = (
-  userStream: Observable<any>
+  $userStream: Observable<any>
 ): Observable<FuturesAccountUpdateEvent> =>
-  userStream.pipe(
+  $userStream.pipe(
     filter(info => info.eventType === USER_STREAM_ACCOUNT_UPDATE_EVENT_TYPE)
   );

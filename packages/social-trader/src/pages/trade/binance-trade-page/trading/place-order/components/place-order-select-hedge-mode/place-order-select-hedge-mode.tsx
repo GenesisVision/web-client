@@ -8,8 +8,8 @@ import { FuturesPlaceOrderMode } from "../../place-order.types";
 import styles from "./place-order-select-hedge-mode.module.scss";
 
 interface Props {
-  placeOrderMode?: FuturesPlaceOrderMode;
-  setPlaceOrderMode?: (mode: FuturesPlaceOrderMode) => void;
+  placeOrderMode: FuturesPlaceOrderMode;
+  setPlaceOrderMode: (mode: FuturesPlaceOrderMode) => void;
 }
 
 const _PlaceOrderSelectHedgeMode: React.FC<Props> = ({
@@ -23,7 +23,7 @@ const _PlaceOrderSelectHedgeMode: React.FC<Props> = ({
         className={clsx(styles["select-block"], {
           [styles["select-block--active"]]: placeOrderMode === "HedgeOpen"
         })}
-        onClick={() => setPlaceOrderMode!("HedgeOpen")}
+        onClick={() => setPlaceOrderMode("HedgeOpen")}
       >
         <Text size={"small"} weight={"bold"}>
           {t("Open")}
@@ -33,7 +33,7 @@ const _PlaceOrderSelectHedgeMode: React.FC<Props> = ({
         className={clsx(styles["select-block"], {
           [styles["select-block--active"]]: placeOrderMode === "HedgeClose"
         })}
-        onClick={() => setPlaceOrderMode!("HedgeClose")}
+        onClick={() => setPlaceOrderMode("HedgeClose")}
       >
         <Text size={"small"} weight={"bold"}>
           {t("Close")}

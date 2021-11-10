@@ -3,15 +3,22 @@ import { Button } from "components/button/button";
 import Dialog, { IDialogOuterProps } from "components/dialog/dialog";
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogTop } from "components/dialog/dialog-top";
+import FormError from "components/form/form-error/form-error";
 import { GvButtonWithMark } from "components/gv-button/gv-button-with-mark/gv-button-with-mark";
 import { Row } from "components/row/row";
 import { RowItem } from "components/row-item/row-item";
 import { Text } from "components/text/text";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import { getSymbolFromState } from "pages/trade/binance-trade-page/trading/terminal.helpers";
-import { MarginModeType } from "pages/trade/binance-trade-page/trading/terminal.types";
+import {
+  FuturesOrder,
+  MarginModeType
+} from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useCallback, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
+
+import { TerminalFuturesPositionsContext } from "../../../contexts/terminal-futures-positions.context";
+import { TerminalOpenOrdersContext } from "../../../contexts/terminal-open-orders.context";
 
 interface Props {
   onClose?: VoidFunction;
@@ -34,6 +41,8 @@ const MarginModeDialogContent: React.FC<Props> = ({
   onChange
 }) => {
   const [mode, setMode] = useState<MarginModeType>(modeProp);
+  const { openPositions } = useContext(TerminalFuturesPositionsContext);
+  const { openOrders } = useContext(TerminalOpenOrdersContext);
   const { symbol } = useContext(TerminalInfoContext);
   const [t] = useTranslation();
   const handleClickButton = useCallback(
@@ -48,6 +57,12 @@ const MarginModeDialogContent: React.FC<Props> = ({
   }, [mode, onChange]);
 
   const symbolName = getSymbolFromState(symbol);
+  const hasPosition = openPositions.find(pos => pos.symbol === symbolName);
+  const hasOrder = openOrders
+    ? //@ts-ignore
+      openOrders.find((order: FuturesOrder) => order.symbol === symbolName)
+    : undefined;
+
   return (
     <>
       <DialogTop title={t(`${symbolName} Margin mode`)} />
@@ -81,8 +96,22 @@ const MarginModeDialogContent: React.FC<Props> = ({
             )}
           </Text>
         </Row>
+        {(hasPosition || hasOrder) && (
+          <Row>
+            <FormError
+              small
+              error={t(
+                "The margin mode cannot be changed while you have an open order/position"
+              )}
+            />
+          </Row>
+        )}
         <Row>
-          <Button disabled={mode === modeProp} wide onClick={handleChange}>
+          <Button
+            disabled={mode === modeProp || hasPosition || hasOrder}
+            wide
+            onClick={handleChange}
+          >
             {t("Confirm")}
           </Button>
         </Row>

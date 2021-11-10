@@ -17,10 +17,9 @@ export const SymbolSummaryCountdown: React.FC<Props> = ({
   useEffect(() => {
     const timerId = setInterval(() => {
       setCountdown(prevTime => {
-        // if (prevTime.valueOf() < 1000) {
-        //   // fix it
-        //   return prevTime.utc().hour(8).minute(0).second(0).millisecond(0);
-        // }
+        if (prevTime.valueOf() < 1000) {
+          return prevTime.utc().hour(8).minute(0).second(0).millisecond(0);
+        }
         return prevTime.subtract(1, "second");
       });
     }, 1000);

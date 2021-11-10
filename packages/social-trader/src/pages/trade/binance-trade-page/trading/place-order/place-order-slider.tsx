@@ -23,7 +23,7 @@ const _PlaceOrderSlider: React.FC<IPlaceOrderSliderProps> = ({
       setPercentMode && setPercentMode(true);
       setValue(value);
     },
-    [setValue]
+    [setValue, setPercentMode]
   );
 
   return (

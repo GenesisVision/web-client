@@ -22,7 +22,7 @@ export const updateTradeHistoryData = (
   );
 };
 
-export const TRADE_HISTORY_TABLE_COLUMNS: SortingColumn[] = [
+export const TRADE_HISTORY_SPOT_TABLE_COLUMNS: SortingColumn[] = [
   {
     name: "date"
   },
@@ -43,5 +43,29 @@ export const TRADE_HISTORY_TABLE_COLUMNS: SortingColumn[] = [
   },
   {
     name: "total"
+  }
+];
+
+export const TRADE_HISTORY_FUTURES_TABLE_COLUMNS: SortingColumn[] = [
+  {
+    name: "time"
+  },
+  {
+    name: "symbol"
+  },
+  {
+    name: "side"
+  },
+  {
+    name: "price"
+  },
+  {
+    name: "quantity"
+  },
+  {
+    name: "fee"
+  },
+  {
+    name: "realized-profit"
   }
 ];

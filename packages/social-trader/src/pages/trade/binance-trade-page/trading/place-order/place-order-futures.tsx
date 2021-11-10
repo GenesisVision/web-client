@@ -14,14 +14,14 @@ import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/c
 import { TerminalPlaceOrderContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-place-order.context";
 import { getSymbol } from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import { OrderType } from "pages/trade/binance-trade-page/trading/terminal.types";
-import React, { useCallback, useContext } from "react";
+import React, { useContext } from "react";
 import { formatValue } from "utils/formatter";
 
+import { TerminalFuturesBalanceContext } from "../contexts/terminal-futures-balance.context";
 import { PlaceOrderSelectHedgeMode } from "./components/place-order-select-hedge-mode/place-order-select-hedge-mode";
 import { LimitTradeFuturesForm } from "./limit-trade-futures-form";
 import { MarketTradeFuturesForm } from "./market-trade-futures-form";
 import {
-  getBalance,
   getFuturesQuantityValue,
   getFuturesTradeType,
   getPositionSide,
@@ -48,12 +48,11 @@ const _PlaceOrderFutures: React.FC<Props> = ({
   price
 }) => {
   const { tradeRequest } = useContext(TerminalMethodsContext);
+  const { availableBalance } = useContext(TerminalFuturesBalanceContext);
 
   const {
-    tickSize,
     stepSize,
     exchangeAccountId,
-    accountInfo,
     symbol: { baseAsset, quoteAsset }
   } = useContext(TerminalInfoContext);
   const { currentPositionMode, setPlaceOrderMode, placeOrderMode } = useContext(
@@ -68,89 +67,52 @@ const _PlaceOrderFutures: React.FC<Props> = ({
     request: tradeRequest
   });
 
-  const handleSubmit = useCallback(
-    (
-      values:
-        | IFuturesPlaceOrderHandleSubmitValues
-        | IFuturesStopLimitPlaceOrderHandleSubmitValues
-    ) => {
-      const {
-        percentMode,
-        sliderBuy,
-        sliderSell,
-        side,
-        ...restValues
-      } = values;
+  const handleSubmit = (
+    values:
+      | IFuturesPlaceOrderHandleSubmitValues
+      | IFuturesStopLimitPlaceOrderHandleSubmitValues
+  ) => {
+    const { percentMode, sliderBuy, sliderSell, side, ...restValues } = values;
 
-      const type = getFuturesTradeType({
-        stopPrice: "stopPrice" in values ? values.stopPrice : undefined,
-        side,
-        type: tab,
-        currentPrice: lastTrade
-      });
+    // TODO working type
+    const type = getFuturesTradeType({
+      stopPrice: "stopPrice" in values ? values.stopPrice : undefined,
+      side,
+      type: tab,
+      currentPrice: lastTrade
+    });
 
-      const quantity = getFuturesQuantityValue({
-        percentMode,
-        quantity: values[FUTURES_TRADE_FORM_FIELDS.quantity],
-        side,
-        sliderBuy,
-        sliderSell,
-        stepSize
-      });
+    const quantity = getFuturesQuantityValue({
+      percentMode,
+      quantity: values[FUTURES_TRADE_FORM_FIELDS.quantity],
+      side,
+      sliderBuy,
+      sliderSell,
+      stepSize
+    });
 
-      const positionSide = getPositionSide({
-        side: values.side,
-        placeOrderMode: placeOrderMode!
-      });
-      // POST ONLY TIF !!!
-      // side : "buy" | "sell"
-      // time in force
-      // quantity Transform percent!!!	Cannot be sent with closePosition=true(Close-All)
-      // reduceOnly "true" or "false". default "false". Cannot be sent in Hedge Mode; cannot be sent with closePosition=true
-      // price (Limit price)
-      // stopPrice only for stop limit
-      // closePosition true, false；Close-All，used with STOP_MARKET or TAKE_PROFIT_MARKET.
-      // priceProtect ??? "TRUE" or "FALSE", default "FALSE". Used with STOP/STOP_MARKET or TAKE_PROFIT/TAKE_PROFIT_MARKET orders.
+    // добавить truncated
 
-      // console.log({
-      //   ...restValues,
-      //   side: values.side,
-      //   positionSide,
-      //   price: values[FUTURES_TRADE_FORM_FIELDS.price],
-      //   quantity,
-      //   accountId: exchangeAccountId,
-      //   type,
-      //   symbol: getSymbol(baseAsset, quoteAsset)
-      // });
-
-      return sendRequest({
-        ...restValues,
-        side: values.side,
-        positionSide,
-        price: values[FUTURES_TRADE_FORM_FIELDS.price],
-        quantity,
-        accountId: exchangeAccountId,
-        type,
-        symbol: getSymbol(baseAsset, quoteAsset)
-      });
-    },
-    [
-      tickSize,
-      stepSize,
-      exchangeAccountId,
-      baseAsset,
-      quoteAsset,
-      tab,
-      currentPositionMode,
+    const positionSide = getPositionSide({
+      side: values.side,
       placeOrderMode
-    ]
-  );
+    });
 
-  // const balance = accountInfo
-  //   ? getBalance(accountInfo.balances, quoteAsset)
-  //   : 0;
-
-  const balance = 1000;
+    return sendRequest({
+      ...restValues,
+      reduceOnly:
+        currentPositionMode === "OneWay"
+          ? values[FUTURES_TRADE_FORM_FIELDS.reduceOnly]
+          : undefined,
+      side: values.side,
+      positionSide,
+      price: values[FUTURES_TRADE_FORM_FIELDS.price],
+      quantity,
+      accountId: exchangeAccountId,
+      type,
+      symbol: getSymbol(baseAsset, quoteAsset)
+    });
+  };
 
   return (
     <TerminalDefaultBlock>
@@ -177,16 +139,16 @@ const _PlaceOrderFutures: React.FC<Props> = ({
         </RowItem>
         <RowItem>
           <Text muted>
-            {formatValue(balance, DEFAULT_DECIMAL_SCALE)} {quoteAsset}
+            {formatValue(availableBalance, DEFAULT_DECIMAL_SCALE)} {quoteAsset}
           </Text>
         </RowItem>
       </Row>
       <Row>
         {tab === "Limit" && (
           <LimitTradeFuturesForm
-            placeOrderMode={placeOrderMode!}
+            placeOrderMode={placeOrderMode}
             filterValues={filterValues}
-            balance={balance}
+            balance={availableBalance}
             outerPrice={price}
             onSubmit={handleSubmit}
             status={status}
@@ -194,18 +156,18 @@ const _PlaceOrderFutures: React.FC<Props> = ({
         )}
         {tab === "Market" && (
           <MarketTradeFuturesForm
-            placeOrderMode={placeOrderMode!}
+            placeOrderMode={placeOrderMode}
             filterValues={filterValues}
-            balance={balance}
+            balance={availableBalance}
             onSubmit={handleSubmit}
             status={status}
           />
         )}
         {tab === "TakeProfit" && (
           <StopLimitTradeFuturesForm
-            placeOrderMode={placeOrderMode!}
+            placeOrderMode={placeOrderMode}
             filterValues={filterValues}
-            balance={balance}
+            balance={availableBalance}
             outerPrice={price}
             onSubmit={handleSubmit}
             status={status}

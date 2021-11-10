@@ -1,6 +1,6 @@
 import HookFormAmountField from "components/input-amount-field/hook-form-amount-field";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
-import { SPOT_TRADE_FORM_FIELDS } from "pages/trade/binance-trade-page/trading/place-order/place-order.types";
+import { FUTURES_TRADE_FORM_FIELDS } from "pages/trade/binance-trade-page/trading/place-order/place-order.types";
 import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { NumberFormatValues } from "react-number-format";
@@ -11,14 +11,14 @@ import { getDecimalScale } from "../../../terminal.helpers";
 interface Props {
   max: number;
   min: number;
-  stepSize?: string;
+  stepSize: string;
+  percentMode: boolean;
+  setPercentMode: (flag: boolean) => void;
+  setSliderValue: (value: number) => void;
   isAllowed?: (values: NumberFormatValues) => boolean;
-  percentMode?: boolean;
-  setPercentMode?: (flag: boolean) => void;
-  setSliderValue?: (value: number) => void;
 }
 
-const _QuantityField: React.FC<Props> = ({
+const _FuturesQuantityField: React.FC<Props> = ({
   isAllowed,
   max,
   min,
@@ -29,30 +29,23 @@ const _QuantityField: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   const {
-    symbol: { baseAsset },
-    terminalType
+    symbol: { baseAsset }
   } = useContext(TerminalInfoContext);
-
-  const isFutures = terminalType === "futures";
 
   return (
     <HookFormAmountField
-      decimalScale={stepSize ? getDecimalScale(stepSize) : undefined}
+      decimalScale={getDecimalScale(stepSize)}
       isAllowed={isAllowed}
-      onChangeEffect={
-        setPercentMode && setSliderValue
-          ? () => {
-              setPercentMode(false);
-              setSliderValue(0);
-            }
-          : undefined
-      }
+      onChangeEffect={() => {
+        setPercentMode(false);
+        setSliderValue(0);
+      }}
       autoFocus={false}
       suffix={percentMode ? "%" : ""}
-      label={isFutures ? t("Size") : t("Amount")}
+      label={t("Size")}
       currency={baseAsset}
-      name={SPOT_TRADE_FORM_FIELDS.quantity}
-      key={percentMode}
+      name={FUTURES_TRADE_FORM_FIELDS.quantity}
+      key={percentMode as any}
       rules={
         percentMode
           ? minMaxNumberRules({
@@ -70,4 +63,4 @@ const _QuantityField: React.FC<Props> = ({
   );
 };
 
-export const QuantityField = React.memo(_QuantityField);
+export const FuturesQuantityField = React.memo(_FuturesQuantityField);

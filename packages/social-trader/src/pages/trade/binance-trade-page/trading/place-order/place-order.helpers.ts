@@ -28,6 +28,10 @@ export const mapPlaceOrderErrors = (error: string) => {
       return "Order failed: insufficient balance";
     case "Failed (-2019 Margin is insufficient.)":
       return "Order failed: margin is insufficient";
+    case "Failed (-2021 Order would immediately trigger.)":
+      return "Order would immediately trigger.";
+    case "Failed (-2022 ReduceOnly Order is rejected.)":
+      return "ReduceOnly Order is rejected.";
     default:
       return error;
   }
@@ -86,12 +90,15 @@ export const getFuturesTradeType = ({
   side: OrderSide;
   currentPrice: number | string;
 }): OrderType => {
-  // In binance test terminal MarkPrice does not consider
-  // BUT SELL If stopPrice === currentPrice (binance sends Stop in both cases) ===> display error
-  // BUY if stop price less than currentPrice or MarkPrice ===> TakeProfit
-  // BUY if stop price larger than currentPrice or MarkPrice ===> Stop
-  // SELL if stop price less than currentPrice or MarkPrice ===> Stop
-  // SELL if stop price larger than currentPrice or MarkPrice ===> TakeProfit
+  // BUT SELL If stopPrice === currentPrice or currentMarkPrice (binance sends Stop in both cases) ===> display error
+  // BUY CONTRACT if stop price less than currentPrice or MarkPrice ===> TakeProfit
+  // BUY CONTRACT if stop price larger than currentPrice or MarkPrice ===> Stop
+  // SELL CONTRACT if stop price less than currentPrice or MarkPrice ===> Stop
+  // SELL CONTRACT if stop price larger than currentPrice or MarkPrice ===> TakeProfit
+  // BUY MARK if stop price less than currentMarkPrice ===> TakeProfit
+  // BUY MARK if stop price larger than currentMarkPrice ===> Stop
+  // SELL MARK if stop price less than currentMarkPrice ===> Stop
+  // SELL MARK if stop price larger than currentMarkPrice ===> TakeProfit
   switch (type) {
     case "TakeProfit":
       switch (side) {

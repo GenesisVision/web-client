@@ -18,7 +18,8 @@ export const TransactionHistory: React.FC<Props> = ({ items }) => {
     <TradeTable
       className={styles["transaction-history__table"]}
       columns={TRANSACTION_HISTORY_TABLE_COLUMNS}
-      items={items ? items : []}
+      loaderData={[]}
+      items={items}
       renderHeaderCell={({ name }) => (
         <th>
           <Text muted>{t(`trade:transaction-history.table.${name}`)}</Text>

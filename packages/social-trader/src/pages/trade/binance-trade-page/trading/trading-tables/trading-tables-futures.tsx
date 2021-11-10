@@ -6,9 +6,11 @@ import { OpenOrdersContainer } from "pages/trade/binance-trade-page/trading/trad
 import { OrderHistoryContainer } from "pages/trade/binance-trade-page/trading/trading-tables/order-history/order-history.container";
 import { PositionsContainer } from "pages/trade/binance-trade-page/trading/trading-tables/positions/positions.container";
 import { TradeHistoryContainer } from "pages/trade/binance-trade-page/trading/trading-tables/trade-history/trade-history.container";
-import React from "react";
+import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 
+import { TerminalFuturesPositionsContext } from "../contexts/terminal-futures-positions.context";
+import { TerminalOpenOrdersContext } from "../contexts/terminal-open-orders.context";
 import styles from "./trading-tables.module.scss";
 import { TransactionHistoryContainer } from "./transaction-history/transaction-history.container";
 
@@ -24,13 +26,21 @@ enum TABS {
 const _TradingTablesFutures: React.FC = () => {
   const [t] = useTranslation();
   const { tab, setTab } = useTab<TABS>(TABS.POSITIONS);
+  const { openPositions } = useContext(TerminalFuturesPositionsContext);
+  const { openOrders } = useContext(TerminalOpenOrdersContext);
 
   return (
     <>
       <DefaultBlock verticalOffsets={false} size={"small"}>
         <GVTabs value={tab} onChange={setTab}>
-          <GVTab value={TABS.POSITIONS} label={t("Positions")} />
-          <GVTab value={TABS.OPEN_ORDERS} label={t("Open orders")} />
+          <GVTab
+            value={TABS.POSITIONS}
+            label={t(`Positions(${openPositions.length})`)}
+          />
+          <GVTab
+            value={TABS.OPEN_ORDERS}
+            label={t(`Open orders(${openOrders.length})`)}
+          />
           <GVTab value={TABS.ORDER_HISTORY} label={t("Order history")} />
           <GVTab value={TABS.TRADE_HISTORY} label={t("Trade history")} />
           <GVTab

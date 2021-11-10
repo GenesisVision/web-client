@@ -1,6 +1,7 @@
 import { TableDataType } from "constants/constants";
 import {
   BinanceExecutionType,
+  BinanceFuturesMarginChangeDirectionType,
   BinanceFuturesMarginType,
   BinanceKlineInterval,
   BinanceOrderSide as BinanceRawOrderSide,
@@ -15,12 +16,14 @@ import {
   BinanceRawCancelOrderId,
   BinanceRawExchangeInfo,
   BinanceRawFutures24HPrice,
+  BinanceRawFuturesAccountAsset,
   BinanceRawFuturesChangeMarginTypeResult,
   BinanceRawFuturesIncomeHistory,
   BinanceRawFuturesInitialLeverageChangeResult,
   BinanceRawFuturesMarkPrice,
   BinanceRawFuturesPosition,
   BinanceRawFuturesPositionInfo,
+  BinanceRawFuturesPositionMarginResult,
   BinanceRawFuturesUsdtExchangeInfo,
   BinanceRawFuturesUsdtSymbol,
   BinanceRawOrder,
@@ -34,8 +37,8 @@ import {
 } from "gv-api-web";
 import { PlacedOrderType } from "pages/trade/binance-trade-page/services/api.helpers";
 import {
+  FUTURES_ACCOUNT_EVENT,
   FuturesAccountEventPosition,
-  FuturesAccountEventType,
   FuturesAsset
 } from "pages/trade/binance-trade-page/services/futures/binance-futures.types";
 import { Bar } from "pages/trade/binance-trade-page/trading/chart/charting_library/datafeed-api";
@@ -50,6 +53,16 @@ export type SymbolState = {
 
 export type FullPosition = BinanceRawFuturesPositionInfo &
   BinanceRawFuturesPosition;
+
+export type Position = BinanceRawFuturesPosition;
+
+export type CrossPositionInfo = {
+  crossPnl: number;
+  crossMarginBalance: number;
+  crossMaintMargin: number;
+  crossMarginRatio: number;
+  crossPositionsSum: number;
+};
 
 // maxNotional: number;
 // initialMargin: number;
@@ -68,7 +81,7 @@ export type FullPosition = BinanceRawFuturesPositionInfo &
 // unrealizedPnL: number;
 // maxNotional: number;
 
-export type Position = BinanceRawFuturesPositionInfo;
+// export type Position = BinanceRawFuturesPositionInfo;
 
 export type PositionMini = FuturesAccountEventPosition;
 
@@ -112,21 +125,6 @@ export interface PositionModeResponse {
   dualSidePosition: PositionModeType;
 }
 
-export interface FuturesPositionInformation {
-  entryPrice: number;
-  marginType: MarginModeType;
-  isAutoAddMargin: boolean;
-  isolatedMargin: number;
-  leverage: number;
-  liquidationPrice: number;
-  markPrice: number;
-  maxNotionalValue: number;
-  positionAmt: number;
-  symbol: string;
-  unRealizedProfit: number;
-  positionSide: BinancePositionSide;
-}
-
 export interface FuturesPosition {
   isolated: boolean;
   leverage: string;
@@ -145,21 +143,24 @@ export interface LeverageBracket {
   notionalCap: number; // Cap notional of this bracket
   notionalFloor: number; // Notionl threshold of this bracket
   maintMarginRatio: number; // Maintenance ratio for this bracket
+  maintAmount: number;
 }
 
 export interface SymbolLeverageBrackets {
   symbol: string;
   brackets: LeverageBracket[];
 }
-
 export interface TradeRequest {
   reduceOnly?: boolean;
   timeInForce?: TimeInForce;
   stopPrice?: number;
   symbol: TerminalCurrency;
   price: number;
-  quantity: number;
+  quantity?: number;
   type: OrderType;
+  workingType?: BinanceWorkingType;
+  closePosition?: boolean;
+  positionSide?: BinancePositionSide;
 }
 
 export type TerminalAuthDataType = { publicKey: string; privateKey: string };
@@ -275,7 +276,7 @@ export interface ITerminalMethods extends IGVTerminalMethods {
   getPositionInformation?: (options: {
     symbol?: string;
     accountId?: string;
-  }) => Promise<FuturesPositionInformation[]>;
+  }) => Promise<Position[]>;
   getBalancesForTransfer?: (options: {
     authData: TerminalAuthDataType;
   }) => Promise<BalancesForTransfer>;
@@ -304,6 +305,13 @@ export interface ITerminalMethods extends IGVTerminalMethods {
     symbol?: string;
     marginType?: BinanceFuturesMarginType;
   }) => Promise<BinanceRawFuturesChangeMarginTypeResult>;
+  adjustMargin?: (options: {
+    accountId: string;
+    symbol: string;
+    amount: number;
+    type: BinanceFuturesMarginChangeDirectionType;
+    positionSide: BinancePositionSide;
+  }) => Promise<BinanceRawFuturesPositionMarginResult>;
 
   // Sockets
 
@@ -589,6 +597,8 @@ export interface ExtentedBinanceRawBinanceBalance {
   maintMargin?: number;
   marginBalance?: number;
 }
+
+export type FutureBalance = BinanceRawFuturesAccountAsset;
 
 export type Account = BinanceRawAccountInfo & {
   positions?: Array<Position>;
@@ -937,7 +947,7 @@ export type ExecutionType =
 
 export type EventType =
   | ("executionReport" | "account" | "outboundAccountPosition")
-  | FuturesAccountEventType;
+  | FUTURES_ACCOUNT_EVENT;
 
 export interface DepthMain {
   eventType?: string;
@@ -1103,7 +1113,7 @@ export interface MyTrade {
 export type QueryOrderResult = BinanceRawOrder;
 
 export type FuturesOrder = {
-  eventType?: FuturesAccountEventType;
+  eventType?: FUTURES_ACCOUNT_EVENT;
   executionType?: BinanceExecutionType;
   closePosition: boolean;
   positionSide: BinancePositionSide;

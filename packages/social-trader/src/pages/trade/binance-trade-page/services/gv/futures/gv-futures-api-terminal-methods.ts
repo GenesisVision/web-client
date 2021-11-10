@@ -10,6 +10,7 @@ import {
   tradeSocket
 } from "../../futures/binance-futures-ws.service";
 import {
+  adjustMargin,
   cancelAllOrders,
   cancelOrder,
   changeLeverage,
@@ -59,6 +60,7 @@ export const GVFuturesTerminalMethods: ITerminalMethods = {
   changePositionMode,
   changeLeverage,
   changeMarginMode,
+  adjustMargin,
 
   markPricesSocket,
   klineSocket,

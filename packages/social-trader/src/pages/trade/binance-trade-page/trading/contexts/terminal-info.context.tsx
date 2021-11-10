@@ -41,7 +41,7 @@ type TerminalAccountInfoState = {
   stepSize: string;
   tickSize: string;
   terminalType: TerminalType;
-  userStream?: Observable<any>;
+  $userStream?: Observable<any>;
   setSymbol: (symbol: SymbolState) => void;
   symbol: SymbolState;
   accountInfo?: Account;
@@ -77,6 +77,8 @@ export const TerminalInfoContextProvider: React.FC<Props> = ({
   const currency = useAccountCurrency();
   const { updateUrl } = useUpdateTerminalUrlParams();
 
+  const isFutures = terminalType === "futures";
+
   const {
     getAccountInformation: getAccountInformationRequest,
     getUserStreamKey,
@@ -90,7 +92,7 @@ export const TerminalInfoContextProvider: React.FC<Props> = ({
   const [tickSize, setTickSize] = useState<string>("0.01");
   const [stepSize, setStepSize] = useState<string>("0.01");
   const [userStreamKey, setUserStreamKey] = useState<string | undefined>();
-  const [userStream, setUserStream] = useState<Observable<any> | undefined>();
+  const [$userStream, setUserStream] = useState<Observable<any> | undefined>();
   const [socketData, setSocketData] = useState<Account | undefined>(undefined);
 
   const {
@@ -117,9 +119,9 @@ export const TerminalInfoContextProvider: React.FC<Props> = ({
 
   useEffect(() => {
     if (!userStreamKey) return;
-    const userStream = getUserStreamSocket(connectSocket, userStreamKey);
-    setUserStream(userStream);
-    const accountInfoStream = filterOutboundAccountInfoStream(userStream);
+    const $userStream = getUserStreamSocket(connectSocket, userStreamKey);
+    setUserStream($userStream);
+    const accountInfoStream = filterOutboundAccountInfoStream($userStream);
     accountInfoStream.subscribe(data => {
       setSocketData(data);
     });
@@ -127,7 +129,11 @@ export const TerminalInfoContextProvider: React.FC<Props> = ({
 
   useEffect(() => {
     if (!socketData || !accountInfo) return;
-    const updatedData = updateAccountInfo(accountInfo, socketData);
+    const updatedData = updateAccountInfo(
+      accountInfo,
+      socketData,
+      terminalType
+    );
     setAccountInfo(updatedData);
   }, [socketData]);
 
@@ -158,7 +164,7 @@ export const TerminalInfoContextProvider: React.FC<Props> = ({
       tickSize,
       stepSize,
       terminalType,
-      userStream,
+      $userStream,
       setSymbol: handleSetSymbol,
       symbol,
       accountInfo,
@@ -169,7 +175,7 @@ export const TerminalInfoContextProvider: React.FC<Props> = ({
       tickSize,
       stepSize,
       terminalType,
-      userStream,
+      $userStream,
       handleSetSymbol,
       symbol,
       accountInfo,

@@ -4,47 +4,29 @@ import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/c
 import { TerminalPlaceOrderContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-place-order.context";
 import { ChangeLeverage } from "pages/trade/binance-trade-page/trading/place-order/place-order-settings/change-leverage/change-leverage";
 import { getSymbolFromState } from "pages/trade/binance-trade-page/trading/terminal.helpers";
-import {
-  ChangeLeverageResponse,
-  SymbolLeverageBrackets
-} from "pages/trade/binance-trade-page/trading/terminal.types";
-import React, { useCallback, useContext, useEffect } from "react";
+import { ChangeLeverageResponse } from "pages/trade/binance-trade-page/trading/terminal.types";
+import React, { useCallback, useContext } from "react";
 import { safeGetElemFromArray } from "utils/helpers";
 
-import { TerminalFuturesContext } from "../../../contexts/terminal-futures.context";
+import { TerminalFuturesPositionsContext } from "../../../contexts/terminal-futures-positions.context";
 
 const _ChangeLeverageContainer: React.FC = () => {
-  const {
-    changeLeverage: changeLeverageMethod,
-    getLeverageBrackets: getLeverageBracketsMethod
-  } = useContext(TerminalMethodsContext);
+  const { changeLeverage: changeLeverageMethod } = useContext(
+    TerminalMethodsContext
+  );
   const { exchangeAccountId, symbol } = useContext(TerminalInfoContext);
   const { leverage, setLeverage } = useContext(TerminalPlaceOrderContext);
-  const { leverageBrackets } = useContext(TerminalFuturesContext);
+  const { leverageBrackets, updateSymbolPosition } = useContext(
+    TerminalFuturesPositionsContext
+  );
 
-  // const {
-  //   sendRequest: getLeverageBrackets,
-  //   data: leverageBrackets
-  // } = useApiRequest<SymbolLeverageBrackets[]>({
-  //   request: getLeverageBracketsMethod
-  //     ? getLeverageBracketsMethod
-  //     : // fix it
-  //       ((() => {}) as any)
-  // });
   const { sendRequest: changeLeverage } = useApiRequest({
     middleware: [
-      ({ leverage }: ChangeLeverageResponse) => setLeverage(leverage)
+      ({ leverage }: ChangeLeverageResponse) => setLeverage(leverage),
+      updateSymbolPosition
     ],
-    request: changeLeverageMethod ? changeLeverageMethod : ((() => {}) as any)
+    request: changeLeverageMethod!
   });
-
-  // useEffect(() => {
-  //   if (exchangeAccountId)
-  //     getLeverageBrackets({
-  //       accountId: exchangeAccountId,
-  //       symbol: getSymbolFromState(symbol)
-  //     });
-  // }, [exchangeAccountId, symbol]);
 
   const handleOnChange = useCallback(
     (leverage: number) => {

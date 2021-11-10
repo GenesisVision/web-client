@@ -2,15 +2,23 @@ import { Button } from "components/button/button";
 import Dialog, { IDialogOuterProps } from "components/dialog/dialog";
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogTop } from "components/dialog/dialog-top";
+import FormError from "components/form/form-error/form-error";
 import { Slider } from "components/range/range";
 import Regulator from "components/regulator/regulator";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
 import { TerminalPlaceOrderContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-place-order.context";
 import { LeverageBracket } from "pages/trade/binance-trade-page/trading/terminal.types";
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState
+} from "react";
 import { useTranslation } from "react-i18next";
 
+import { TerminalFuturesPositionsContext } from "../../../contexts/terminal-futures-positions.context";
 import styles from "./change-leverage.module.scss";
 
 interface Props {
@@ -58,10 +66,18 @@ const ChangeLeverageDialogContent: React.FC<Props> = ({
   onChange
 }) => {
   const [t] = useTranslation();
-  const RANGE_MARKS = generateLeverageMarks(maxLeverage);
-  const [leverage, setLeverage] = useState<number>(leverageProp);
+  const { openPositions } = useContext(TerminalFuturesPositionsContext);
+  const hasPositions = !!openPositions.length;
 
-  const { bracket, setBracket } = useContext(TerminalPlaceOrderContext);
+  const RANGE_MARKS = useMemo(() => generateLeverageMarks(maxLeverage), [
+    maxLeverage
+  ]);
+  const [leverage, setLeverage] = useState<number>(leverageProp);
+  const [reductionError, setReductionError] = useState(false);
+
+  const { marginMode, setBracket, bracket } = useContext(
+    TerminalPlaceOrderContext
+  );
 
   useEffect(() => {
     const bracket = [...leverageBrackets]
@@ -70,6 +86,14 @@ const ChangeLeverageDialogContent: React.FC<Props> = ({
         return leverage <= initialLeverage;
       });
     setBracket(bracket);
+  }, [leverage]);
+
+  useEffect(() => {
+    if (hasPositions && leverage < leverageProp && marginMode === "Isolated") {
+      setReductionError(true);
+    } else {
+      setReductionError(false);
+    }
   }, [leverage]);
 
   const handleClickRegulator = useCallback(
@@ -124,9 +148,19 @@ const ChangeLeverageDialogContent: React.FC<Props> = ({
             )}
           </Text>
         </Row>
+        {reductionError && (
+          <Row>
+            <FormError
+              small
+              error={t(
+                "Leverage reduction is not supported in Isolated Margin Mode with open positions"
+              )}
+            />
+          </Row>
+        )}
         <Row>
           <Button
-            disabled={leverage === leverageProp}
+            disabled={leverage === leverageProp || reductionError}
             wide
             onClick={handleChange}
           >

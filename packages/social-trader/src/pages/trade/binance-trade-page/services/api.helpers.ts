@@ -154,8 +154,8 @@ export const newOrderRequestCreator = (request: PlaceOrderRequest) => (
   request({
     body: {
       ...options,
-      price: +options.price!,
-      quantity: +options.quantity!
+      price: options.price ? +options.price : undefined,
+      quantity: options.quantity ? +options.quantity : undefined
     } as PlaceOrderType,
     accountId
   });
@@ -274,14 +274,15 @@ export const createFuturesPlaceBuySellOrderRequest = (
         symbol,
         type,
         price:
-          type === "Limit" ||
-          type === "TakeProfit" ||
-          type === "Stop" ||
-          type === "StopMarket" ||
-          type === "TakeProfitMarket"
+          (type === "Limit" ||
+            type === "TakeProfit" ||
+            type === "Stop" ||
+            type === "StopMarket" ||
+            type === "TakeProfitMarket") &&
+          price
             ? String(price)
             : undefined,
-        quantity: String(quantity),
+        quantity: quantity ? String(quantity) : undefined,
         timeInForce,
         side: "Buy"
       },
@@ -316,14 +317,15 @@ export const createFuturesPlaceBuySellOrderRequest = (
         symbol,
         type,
         price:
-          type === "Limit" ||
-          type === "TakeProfit" ||
-          type === "Stop" ||
-          type === "StopMarket" ||
-          type === "TakeProfitMarket"
+          (type === "Limit" ||
+            type === "TakeProfit" ||
+            type === "Stop" ||
+            type === "StopMarket" ||
+            type === "TakeProfitMarket") &&
+          price
             ? String(price)
             : undefined,
-        quantity: String(quantity),
+        quantity: quantity ? String(quantity) : undefined,
         timeInForce,
         side: "Sell"
       },

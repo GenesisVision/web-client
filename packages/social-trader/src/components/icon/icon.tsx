@@ -5,7 +5,7 @@ import {
   $primaryColor,
   $textAccentColor
 } from "utils/style/colors";
-import { transition } from "utils/style/mixins";
+import { cursorPointer, transition } from "utils/style/mixins";
 
 export interface IIconProps {
   onClick?: (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void;
@@ -62,4 +62,6 @@ export const Icon = styled.div<IIconProps>`
       }
     }
     `}
+
+  ${cursorPointer}
 `;

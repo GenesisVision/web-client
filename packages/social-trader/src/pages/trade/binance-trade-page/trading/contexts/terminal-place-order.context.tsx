@@ -1,11 +1,10 @@
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-methods.context";
 import {
-  FuturesPositionInformation,
   LeverageBracket,
   MarginModeType,
-  PositionModeType,
-  PositionSideType
+  Position,
+  PositionModeType
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, {
   createContext,
@@ -16,74 +15,52 @@ import React, {
   useState
 } from "react";
 
-import { getPositionInfo } from "../place-order/place-order.helpers";
 import { FuturesPlaceOrderMode } from "../place-order/place-order.types";
-import { getSymbolFromState } from "../terminal.helpers";
+import {
+  flatNormalizedPositions,
+  getSymbolFromState
+} from "../terminal.helpers";
+import { TerminalFuturesPositionsContext } from "./terminal-futures-positions.context";
 
-const InitialSpotTerminalLeverageState = 1;
-const InitialFuturesTerminalLeverageState = 20;
+const InitialFuturesTerminalLeverageState = 1;
 
 type TradingAccountInfoState = {
   setBracket: (bracket?: LeverageBracket) => void;
   leverage: number;
   setLeverage: (leverage: number) => void;
-  currentPositionMode?: PositionModeType;
   updatePositionMode: VoidFunction;
+  setMarginMode: (mode: MarginModeType) => void;
+  placeOrderMode: FuturesPlaceOrderMode;
+  setPlaceOrderMode: (mode: FuturesPlaceOrderMode) => void;
+  currentPositionMode?: PositionModeType;
   bracket?: LeverageBracket;
-  positionInfo?: FuturesPositionInformation;
   marginMode?: MarginModeType;
-  setMarginMode?: (mode: MarginModeType) => void;
-  setPositionSide?: (position: PositionSideType) => void;
-  placeOrderMode?: FuturesPlaceOrderMode;
-  setPlaceOrderMode?: (mode: FuturesPlaceOrderMode) => void;
+  positionInfo?: Position;
 };
 
-export const TerminalPlaceOrderInitialState: TradingAccountInfoState = {
-  leverage: InitialSpotTerminalLeverageState,
-  setBracket: () => {},
-  setLeverage: () => {},
-  updatePositionMode: () => {}
-};
+export const TerminalPlaceOrderInitialState = {} as TradingAccountInfoState;
 
 export const TerminalPlaceOrderContext = createContext<TradingAccountInfoState>(
   TerminalPlaceOrderInitialState
 );
 
-export const TerminalPlaceOrderContextProvider: React.FC = ({ children }) => {
-  const { terminalType, exchangeAccountId, symbol } = useContext(
-    TerminalInfoContext
-  );
-  const { getPositionMode, getPositionInformation } = useContext(
-    TerminalMethodsContext
-  );
+const ContextProvider: React.FC = ({ children }) => {
+  const { exchangeAccountId, symbol } = useContext(TerminalInfoContext);
+  const { getPositionMode } = useContext(TerminalMethodsContext);
+  const { positionsList } = useContext(TerminalFuturesPositionsContext);
 
   const [marginMode, setMarginMode] = useState<MarginModeType | undefined>();
-
   const [bracket, setBracket] = useState<LeverageBracket | undefined>();
-  const [leverage, setLeverage] = useState(
-    terminalType === "futures"
-      ? InitialFuturesTerminalLeverageState
-      : InitialSpotTerminalLeverageState
-  );
+  const [leverage, setLeverage] = useState(InitialFuturesTerminalLeverageState);
   const [currentPositionMode, setCurrentPositionMode] = useState<
     PositionModeType | undefined
   >();
 
-  const [positionInfoArray, setPositionInfoArray] = useState<
-    FuturesPositionInformation[] | undefined
-  >();
-
-  const [positionInfo, setPositionInfo] = useState<
-    FuturesPositionInformation | undefined
-  >();
-  // setPositionSide добавить в попап изменения режима позиции
-  const [positionSide, setPositionSide] = useState<
-    PositionSideType | undefined
-  >(undefined);
-
   const [placeOrderMode, setPlaceOrderMode] = useState<FuturesPlaceOrderMode>(
-    currentPositionMode === "Hedge" ? "HedgeOpen" : "OneWay"
+    "OneWay"
   );
+
+  const [positionInfo, setPositionInfo] = useState<Position | undefined>();
 
   useEffect(() => {
     if (currentPositionMode === "Hedge") {
@@ -96,40 +73,29 @@ export const TerminalPlaceOrderContextProvider: React.FC = ({ children }) => {
   useEffect(() => {
     if (positionInfo) {
       setLeverage(positionInfo.leverage);
-      return;
     }
-    setLeverage(
-      terminalType === "futures"
-        ? InitialFuturesTerminalLeverageState
-        : InitialSpotTerminalLeverageState
-    );
-  }, [terminalType, positionInfo]);
-
-  useEffect(() => {
-    if (getPositionMode && exchangeAccountId)
-      getPositionMode(exchangeAccountId).then(setCurrentPositionMode);
-  }, [getPositionMode]);
-
-  useEffect(() => {
-    // THIS IS ENDPOINT FOR ALL POSITIONS FIX IT !!!
-    if (getPositionInformation && exchangeAccountId && currentPositionMode)
-      getPositionInformation({
-        symbol: getSymbolFromState(symbol),
-        accountId: exchangeAccountId
-      }).then(setPositionInfoArray);
-  }, [getPositionInformation, currentPositionMode, symbol]);
-
-  useEffect(() => {
-    if (positionInfoArray) {
-      setPositionInfo(getPositionInfo(positionInfoArray, positionSide));
-    }
-  }, [positionInfoArray, positionSide, currentPositionMode]);
+  }, [positionInfo]);
 
   useEffect(() => {
     if (positionInfo) {
       setMarginMode(positionInfo.marginType);
     }
   }, [positionInfo]);
+
+  useEffect(() => {
+    if (positionsList) {
+      const flatPositions = flatNormalizedPositions(positionsList).filter(
+        pos => pos.symbol === getSymbolFromState(symbol)
+      );
+      // if currentMode is hedge, then you have two position for symbol, and you can choose any position, because leverage and marginType will be the same
+      setPositionInfo(flatPositions[0]);
+    }
+  }, [positionsList]);
+
+  useEffect(() => {
+    if (getPositionMode && exchangeAccountId)
+      getPositionMode(exchangeAccountId).then(setCurrentPositionMode);
+  }, [getPositionMode]);
 
   const updatePositionMode = useCallback(() => {
     if (getPositionMode && exchangeAccountId)
@@ -138,8 +104,6 @@ export const TerminalPlaceOrderContextProvider: React.FC = ({ children }) => {
 
   const value = useMemo(
     () => ({
-      positionInfo,
-      setPositionSide,
       bracket,
       setBracket,
       leverage,
@@ -149,11 +113,10 @@ export const TerminalPlaceOrderContextProvider: React.FC = ({ children }) => {
       updatePositionMode,
       currentPositionMode,
       placeOrderMode,
-      setPlaceOrderMode
+      setPlaceOrderMode,
+      positionInfo
     }),
     [
-      positionInfo,
-      setPositionSide,
       bracket,
       setBracket,
       marginMode,
@@ -163,7 +126,8 @@ export const TerminalPlaceOrderContextProvider: React.FC = ({ children }) => {
       updatePositionMode,
       currentPositionMode,
       placeOrderMode,
-      setPlaceOrderMode
+      setPlaceOrderMode,
+      positionInfo
     ]
   );
 
@@ -171,5 +135,15 @@ export const TerminalPlaceOrderContextProvider: React.FC = ({ children }) => {
     <TerminalPlaceOrderContext.Provider value={value}>
       {children}
     </TerminalPlaceOrderContext.Provider>
+  );
+};
+
+export const TerminalPlaceOrderContextProvider: React.FC = ({ children }) => {
+  const { terminalType } = useContext(TerminalInfoContext);
+
+  return terminalType === "futures" ? (
+    <ContextProvider>{children}</ContextProvider>
+  ) : (
+    <>{children}</>
   );
 };

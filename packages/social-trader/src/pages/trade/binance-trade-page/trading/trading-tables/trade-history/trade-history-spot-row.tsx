@@ -1,6 +1,7 @@
 import TableCellComponent from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import { Text } from "components/text/text";
+import { DEFAULT_DECIMAL_SCALE } from "constants/constants";
 import { terminalMoneyFormat } from "pages/trade/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import { TerminalTickerContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-ticker.context";
@@ -14,7 +15,6 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import { formatDate } from "utils/dates";
 import { formatValue } from "utils/formatter";
-import { DEFAULT_DECIMAL_SCALE } from "constants/constants";
 
 interface Props {
   time: number | Date;
@@ -32,7 +32,7 @@ const TableCell = styled(TableCellComponent)`
   box-sizing: border-box;
 `;
 
-const _TradeHistoryRow: React.FC<Props> = ({
+const _TradeHistorySpotRow: React.FC<Props> = ({
   commissionAsset,
   commission,
   quantity,
@@ -85,4 +85,4 @@ const _TradeHistoryRow: React.FC<Props> = ({
   );
 };
 
-export const TradeHistoryRow = React.memo(_TradeHistoryRow);
+export const TradeHistorySpotRow = React.memo(_TradeHistorySpotRow);

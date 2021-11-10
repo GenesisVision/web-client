@@ -1,8 +1,16 @@
 import { ChartDefaultPeriod } from "components/chart/chart-period/chart-period.helpers";
-import { Currency, FundAssetPart, PlatformAsset, ProgramNotificationSettingList } from "gv-api-web";
+import {
+  Currency,
+  FundAssetPart,
+  PlatformAsset,
+  ProgramNotificationSettingList
+} from "gv-api-web";
 import { NextPageContext } from "next";
-import { AppContextType, NextComponentType } from "next/dist/next-server/lib/utils";
-import React, { ReactNode } from "react";
+import {
+  AppContextType,
+  NextComponentType
+} from "next/dist/next-server/lib/utils";
+import React, { ReactNode, SetStateAction } from "react";
 import { AuthRootState as SocialTraderAuthRootState } from "reducers";
 import { RootState } from "reducers/root-reducer";
 import { Action, AnyAction, Dispatch, Store } from "redux";
@@ -157,3 +165,5 @@ export type TagType =
   | string;
 
 export type VoidFuncType = () => void;
+
+export type SetStateType<T> = React.Dispatch<SetStateAction<T>>;

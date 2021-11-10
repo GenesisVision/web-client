@@ -2,8 +2,6 @@ import { LabeledValue } from "components/labeled-value/labeled-value";
 import { Row } from "components/row/row";
 import { API_REQUEST_STATUS } from "hooks/api-request.hook";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
-import { PriceField } from "pages/trade/binance-trade-page/trading/place-order/forms/fields/price-field";
-import { QuantityField } from "pages/trade/binance-trade-page/trading/place-order/forms/fields/quantity-field";
 import { TotalField } from "pages/trade/binance-trade-page/trading/place-order/forms/fields/total-field";
 import { MarketTotalLabel } from "pages/trade/binance-trade-page/trading/place-order/market-total-label";
 import { PlaceOrderSlider } from "pages/trade/binance-trade-page/trading/place-order/place-order-slider";
@@ -17,6 +15,8 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
 
+import { SpotQuantityField } from "./forms/fields/spot-quantity-field";
+import { SpotPriceField } from "./forms/spot-price-field";
 import { usePlaceOrderAutoFill } from "./hooks/place-order-auto-fill.hook";
 import { useSpotPlaceOrderFormReset } from "./hooks/place-order-form-reset.hook";
 import { useSpotPlaceOrderInfo } from "./hooks/place-order-info-hook";
@@ -108,11 +108,11 @@ const _MarketTradeSpotForm: React.FC<
       onSubmit={values => onSubmit({ ...values, type: "Market" })}
     >
       <Row hide>
-        <PriceField min={minPrice} max={maxPrice} />
+        <SpotPriceField min={minPrice} max={maxPrice} />
       </Row>
       <LabeledValue label={t("Price")}>{t("Market price")}</LabeledValue>
       <Row>
-        <QuantityField min={minQuantity} max={maxQuantityWithWallet} />
+        <SpotQuantityField min={minQuantity} max={maxQuantityWithWallet} />
       </Row>
       <Row>
         <TotalField

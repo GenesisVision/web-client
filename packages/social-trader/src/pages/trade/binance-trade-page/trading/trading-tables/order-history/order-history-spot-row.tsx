@@ -4,7 +4,10 @@ import { Text } from "components/text/text";
 import { BinanceOrderStatus } from "gv-api-web";
 import { terminalMoneyFormat } from "pages/trade/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
-import { getSymbolFilters, setUpperFirstLetter } from "pages/trade/binance-trade-page/trading/terminal.helpers";
+import {
+  getSymbolFilters,
+  setUpperFirstLetter
+} from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import { OrderSide } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useContext } from "react";
 import styled from "styled-components";
@@ -30,7 +33,7 @@ const TableCell = styled(TableCellComponent)`
   box-sizing: border-box;
 `;
 
-const _OrderHistoryRow: React.FC<Props> = ({
+const _OrderHistorySpotRow: React.FC<Props> = ({
   executed,
   amount,
   orderStatus,
@@ -90,4 +93,4 @@ const _OrderHistoryRow: React.FC<Props> = ({
   );
 };
 
-export const OrderHistoryRow = React.memo(_OrderHistoryRow);
+export const OrderHistorySpotRow = React.memo(_OrderHistorySpotRow);

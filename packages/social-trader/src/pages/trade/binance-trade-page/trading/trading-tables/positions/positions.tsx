@@ -4,38 +4,29 @@ import { TooltipContent } from "components/tooltip/tooltip-content";
 import { BinanceWorkingType } from "gv-api-web";
 import { TradeTable } from "pages/trade/binance-trade-page/trading/components/trade-table/trade-table";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
-import {
-  getMarginInfo,
-  MARGIN_INFO_ASSET
-} from "pages/trade/binance-trade-page/trading/margin-ratio/margin-ratio.helpers";
-import { FullPosition } from "pages/trade/binance-trade-page/trading/terminal.types";
+import { Position } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { StyledTh } from "pages/trade/binance-trade-page/trading/trading-tables/positions/positions.styles";
 import React, { useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { PositionPNLPopover } from "./position-pnl-popover";
 import { POSITIONS_TABLE_COLUMNS } from "./positions.helpers";
-import { PositionsRow } from "./positions-row";
+import { PositionsRowContainer } from "./positions-row.container";
 
 interface Props {
-  items?: FullPosition[];
+  items: Position[];
 }
 
 export const Positions: React.FC<Props> = ({ items }) => {
   const [t] = useTranslation();
-  const { accountInfo, exchangeInfo } = useContext(TerminalInfoContext);
 
+  const { exchangeInfo } = useContext(TerminalInfoContext);
   const [workingType, setWorkingType] = useState<BinanceWorkingType>("Mark");
 
-  if (!accountInfo?.balances && !exchangeInfo) return null;
+  if (!exchangeInfo) {
+    return null;
+  }
 
-  // const { maintMargin, marginBalance } = getMarginInfo(
-  //   accountInfo.balances,
-  //   MARGIN_INFO_ASSET
-  // );
-
-  // const marginRatio =
-  //   +marginBalance > 0 ? (+maintMargin / +marginBalance) * 100 : 0;
   return (
     <TradeTable
       columns={POSITIONS_TABLE_COLUMNS}
@@ -66,9 +57,12 @@ export const Positions: React.FC<Props> = ({ items }) => {
           </StyledTh>
         )
       }
-      renderRow={(position: FullPosition) => (
-        <PositionsRow position={position} workingType={workingType} />
-        // <PositionsRow marginRatio={marginRatio} position={position} />
+      renderRow={(position: Position) => (
+        <PositionsRowContainer
+          key={position.symbol + position.positionSide}
+          position={position}
+          workingType={workingType}
+        />
       )}
     />
   );

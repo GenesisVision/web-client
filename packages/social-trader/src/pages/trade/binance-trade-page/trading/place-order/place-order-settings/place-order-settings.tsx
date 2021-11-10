@@ -8,10 +8,10 @@ import React, { useContext } from "react";
 import { TerminalPlaceOrderContext } from "../../contexts/terminal-place-order.context";
 
 const _PlaceOrderSettings: React.FC = () => {
-  const { marginMode, positionInfo } = useContext(TerminalPlaceOrderContext);
+  const { positionInfo } = useContext(TerminalPlaceOrderContext);
   return (
     <Center>
-      {marginMode && (
+      {positionInfo && (
         <RowItem size={"small"}>
           <MarginModeContainer />
         </RowItem>

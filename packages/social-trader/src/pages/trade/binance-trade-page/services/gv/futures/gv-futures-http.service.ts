@@ -1,12 +1,15 @@
 import { TableDataType } from "constants/constants";
 import {
+  BinanceFuturesMarginChangeDirectionType,
   BinanceFuturesMarginType,
   BinancePositionMode,
+  BinancePositionSide,
   BinanceRawCancelOrder,
   BinanceRawCancelOrderId,
   BinanceRawFuturesChangeMarginTypeResult,
   BinanceRawFuturesIncomeHistory,
   BinanceRawFuturesOrderItemsViewModel,
+  BinanceRawFuturesPositionMarginResult,
   BinanceRawFuturesPositionMode,
   BinanceRawKlineItemsViewModel,
   BinanceRawOrderBook,
@@ -16,7 +19,6 @@ import {
 } from "gv-api-web";
 import {
   mapBinanceRawFuturesAccountInfoToAccount,
-  mapBinanceRawFuturesPositionToFuturesPositionInformation,
   mapBinanceRawFuturesSymbolBracketToSymbolLeverageBrackets
 } from "pages/trade/binance-trade-page/services/gv/futures/gv-futures-helpers";
 import { Bar } from "pages/trade/binance-trade-page/trading/chart/charting_library/datafeed-api";
@@ -26,10 +28,10 @@ import {
   CorrectedRestDepth,
   ExchangeInfo,
   FuturesOrder,
-  FuturesPositionInformation,
   KlineParams,
   MarkPrice,
   OrderSide,
+  Position,
   PositionModeType,
   SymbolLeverageBrackets,
   Ticker,
@@ -106,13 +108,13 @@ export const getAllTrades = (filters: {
   symbol?: string;
   skip?: number;
   take?: number;
-}): Promise<TableDataType<UnitedOrder>> =>
+}): Promise<TableDataType<FuturesOrder>> =>
   api
     .terminal()
-    .getTradesHistory({ ...filters, mode: "TradeHistory" })
-    .then(({ total, items }: BinanceRawOrderItemsViewModel) => ({
+    .getFuturesTradesHistory({ ...filters, mode: "TradeHistory" })
+    .then(({ total, items }: BinanceRawFuturesOrderItemsViewModel) => ({
       total,
-      items: items.map(transformToUnitedOrder)
+      items: items.map(transformFuturesOrder)
     }));
 
 export const getAllOrders = (filters: {
@@ -123,13 +125,13 @@ export const getAllOrders = (filters: {
   symbol?: string;
   skip?: number;
   take?: number;
-}): Promise<TableDataType<UnitedOrder>> =>
+}): Promise<TableDataType<FuturesOrder>> =>
   api
     .terminal()
-    .getTradesHistory({ ...filters, mode: "OrderHistory" })
-    .then(({ total, items }: BinanceRawOrderItemsViewModel) => ({
+    .getFuturesTradesHistory({ ...filters, mode: "OrderHistory" })
+    .then(({ total, items }: BinanceRawFuturesOrderItemsViewModel) => ({
       total,
-      items: items.map(transformToUnitedOrder)
+      items: items.map(transformFuturesOrder)
     }));
 
 export const getUserStreamKey = (
@@ -261,13 +263,8 @@ export const changeMarginMode = (options: {
 export const getPositionInformation = (options: {
   symbol?: string;
   accountId?: string;
-}): Promise<FuturesPositionInformation[]> =>
-  api
-    .terminal()
-    .getFuturesPositionInformation(options)
-    .then(data =>
-      data.map(mapBinanceRawFuturesPositionToFuturesPositionInformation)
-    );
+}): Promise<Position[]> =>
+  api.terminal().getFuturesPositionInformation(options);
 
 export const getTransactionHistory = (options: {
   accountId?: string;
@@ -289,3 +286,12 @@ export const getLeverageBrackets = (options: {
     .then(data =>
       data.map(mapBinanceRawFuturesSymbolBracketToSymbolLeverageBrackets)
     );
+
+export const adjustMargin = (options: {
+  accountId: string;
+  symbol: string;
+  amount: number;
+  type: BinanceFuturesMarginChangeDirectionType;
+  positionSide: BinancePositionSide;
+}): Promise<BinanceRawFuturesPositionMarginResult> =>
+  api.terminal().changeFuturesPositionMargin(options);

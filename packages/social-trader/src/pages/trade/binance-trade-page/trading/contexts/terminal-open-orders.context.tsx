@@ -24,7 +24,7 @@ import { useTranslation } from "react-i18next";
 import { map } from "rxjs/operators";
 
 type TerminalOpenOrdersContextState = {
-  openOrders?: UnitedOrder[] | FuturesOrder[];
+  openOrders: UnitedOrder[] | FuturesOrder[];
 };
 
 export const TerminalOpenOrdersInitialState = {} as TerminalOpenOrdersContextState;
@@ -42,7 +42,7 @@ export const TerminalOpenOrdersContextProvider: React.FC = ({ children }) => {
   const {
     exchangeAccountId,
     terminalType,
-    userStream,
+    $userStream,
     symbol: { baseAsset, quoteAsset }
   } = useContext(TerminalInfoContext);
 
@@ -54,7 +54,7 @@ export const TerminalOpenOrdersContextProvider: React.FC = ({ children }) => {
   >();
 
   useEffect(() => {
-    if (!exchangeAccountId || !userStream) return;
+    if (!exchangeAccountId || !$userStream) return;
     const openOrders = getOpenOrders(
       getSymbol(baseAsset, quoteAsset),
       exchangeAccountId
@@ -62,11 +62,11 @@ export const TerminalOpenOrdersContextProvider: React.FC = ({ children }) => {
     openOrders.pipe(map(normalizeOpenOrdersList)).subscribe(data => {
       setList(data);
     });
-    const openOrdersStream = filterOrderEventsStream(userStream);
+    const openOrdersStream = filterOrderEventsStream($userStream);
     openOrdersStream.subscribe(data => {
       setSocketData(data);
     });
-  }, [exchangeAccountId, terminalType, userStream]);
+  }, [exchangeAccountId, $userStream]);
 
   useEffect(() => {
     if (!socketData) return;

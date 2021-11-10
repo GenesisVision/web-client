@@ -8,17 +8,17 @@ import { TerminalMethodsContext } from "../../contexts/terminal-methods.context"
 import { TransactionHistory } from "./transaction-history";
 
 export const TransactionHistoryContainer: React.FC = () => {
-  // const { exchangeAccountId, userStream } = useContext(TerminalInfoContext);
+  // const { exchangeAccountId, $userStream } = useContext(TerminalInfoContext);
 
   // const [socketData, setSocketData] = useState<UnitedOrder[] | undefined>();
 
   // useEffect(() => {
-  //   if (!exchangeAccountId || !userStream) return;
-  //   const openOrdersStream = filterOrderEventsStream(userStream);
+  //   if (!exchangeAccountId || !$userStream) return;
+  //   const openOrdersStream = filterOrderEventsStream($userStream);
   //   openOrdersStream.subscribe(data => {
   //     setSocketData([data]);
   //   });
-  // }, [exchangeAccountId, userStream]);
+  // }, [exchangeAccountId, $userStream]);
   const { getTransactionHistory } = useContext(TerminalMethodsContext);
 
   const { exchangeAccountId } = useContext(TerminalInfoContext);

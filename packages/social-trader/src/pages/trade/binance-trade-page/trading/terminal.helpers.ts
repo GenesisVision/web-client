@@ -14,8 +14,10 @@ import {
   FuturesOrderType,
   MergedTickerSymbolType,
   Position,
+  PositionMini,
   SymbolState,
   TerminalCurrency,
+  TerminalType,
   UnitedOrder
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import qs from "qs";
@@ -27,6 +29,11 @@ import { formatValue } from "utils/formatter";
 import { changeLocation, safeGetElemFromArray } from "utils/helpers";
 import { getLocation } from "utils/location";
 import { AnyObjectType } from "utils/types";
+
+import {
+  FUTURES_ACCOUNT_EVENT,
+  FuturesAccountUpdateEvent
+} from "../services/futures/binance-futures.types";
 
 export const TERMINAL_ROUTE_SYMBOL_SEPARATOR = "_";
 
@@ -72,7 +79,6 @@ export const generateFuturesOrderMessage = (
   t: TFunction
 ): string => {
   const { stepSize } = symbol.lotSizeFilter;
-  console.log(order, "order");
   const orderType = getFuturesTypeLabel(t, order.type);
   const orderSide = getFuturesOpenOrderSideLabel(
     t,
@@ -197,21 +203,32 @@ export const getSymbolFilters = (
 export const USER_STREAM_ACCOUNT_UPDATE_EVENT_TYPE = "outboundAccountPosition";
 
 export const filterOutboundAccountInfoStream = (
-  userStream: Observable<any>
+  $userStream: Observable<any>
 ): Observable<Account> =>
-  userStream.pipe(
-    filter(info => info.eventType === USER_STREAM_ACCOUNT_UPDATE_EVENT_TYPE)
+  $userStream.pipe(
+    filter(
+      info =>
+        info.eventType === USER_STREAM_ACCOUNT_UPDATE_EVENT_TYPE ||
+        info.eventType === FUTURES_ACCOUNT_EVENT.accountUpdate
+    )
   );
 
 export const filterOrderEventsStream = (
-  userStream: Observable<any>
+  $userStream: Observable<any>
 ): Observable<UnitedOrder | FuturesOrder> =>
-  userStream.pipe(
+  $userStream.pipe(
     filter(
       info =>
         info.eventType === "executionReport" ||
-        info.eventType === "ORDER_TRADE_UPDATE"
+        info.eventType === FUTURES_ACCOUNT_EVENT.orderTradeUpdate
     )
+  );
+
+export const filterAccountUpdateStream = (
+  $userStream: Observable<any>
+): Observable<FuturesAccountUpdateEvent> =>
+  $userStream.pipe(
+    filter(info => info.eventType === FUTURES_ACCOUNT_EVENT.accountUpdate)
   );
 
 const normalizeBalanceList = (
@@ -222,8 +239,8 @@ const normalizeBalanceList = (
   return initObject;
 };
 
-const normalizePositionsList = (
-  list: Position[]
+export const normalizePositionsList = (
+  list: Position[] | PositionMini[]
 ): { [keys: string]: Position } => {
   const initObject: AnyObjectType = {};
   list.forEach(item => {
@@ -233,7 +250,7 @@ const normalizePositionsList = (
   return initObject;
 };
 
-const flatNormalizedPositions = (positions: {
+export const flatNormalizedPositions = (positions: {
   [keys: string]: Position;
 }): Position[] => {
   return Object.values(positions)
@@ -241,18 +258,21 @@ const flatNormalizedPositions = (positions: {
     .flat();
 };
 
-export const mergePositions = (initialPosition, newPositions) => {
+export const mergePositions = (
+  initialPosition: Position[],
+  newPositions: Position[]
+) => {
   const normalizedCurrentPositions = normalizePositionsList(initialPosition);
   const normalizedUpdatesPositions = normalizePositionsList(newPositions);
-
-  const positions = flatNormalizedPositions(
-    updatePositionList(normalizedCurrentPositions, normalizedUpdatesPositions)
+  const positionsList = updatePositionList(
+    normalizedCurrentPositions,
+    normalizedUpdatesPositions
   );
 
-  return positions;
+  return positionsList;
 };
 
-const updatePositionList = (
+export const updatePositionList = (
   list: AnyObjectType,
   updates: AnyObjectType
 ): AnyObjectType => {
@@ -271,38 +291,43 @@ const updatePositionList = (
 
 const updateBalancesList = (
   list: AnyObjectType,
-  updates: AnyObjectType
+  updates: AnyObjectType,
+  terminalType: TerminalType
 ): AnyObjectType => {
   const updatedList = { ...list };
   Object.entries(updates).forEach(([symbol, data]) => {
-    updatedList[symbol] = {
-      ...updatedList[symbol],
-      ...data,
-      newAmountInCurrency: updatedList[symbol]?.newAmountInCurrency
-    };
+    if (terminalType === "futures") {
+      updatedList[symbol] = {
+        ...updatedList[symbol],
+        ...data
+      };
+    } else {
+      updatedList[symbol] = {
+        ...updatedList[symbol],
+        ...data,
+        newAmountInCurrency: updatedList[symbol]?.newAmountInCurrency
+      };
+    }
   });
   return updatedList;
 };
 
-export const updateAccountInfo = (currentData: Account, updates: Account) => {
+export const updateAccountInfo = (
+  currentData: Account,
+  updates: Account,
+  terminalType: TerminalType
+) => {
   const normalizedCurrentBalances = normalizeBalanceList(currentData.balances);
   const normalizedUpdatesBalances = normalizeBalanceList(
     updates.balances || []
   );
   const balances = Object.values(
-    updateBalancesList(normalizedCurrentBalances, normalizedUpdatesBalances)
+    updateBalancesList(
+      normalizedCurrentBalances,
+      normalizedUpdatesBalances,
+      terminalType
+    )
   );
-
-  // const normalizedCurrentPositions = normalizePositionsList(
-  //   currentData.positions || []
-  // );
-  // const normalizedUpdatesPositions = normalizePositionsList(
-  //   updates.positions || []
-  // );
-
-  // const positions = flatNormalizedPositions(
-  //   updatePositionList(normalizedCurrentPositions, normalizedUpdatesPositions)
-  // );
 
   return { ...currentData, ...updates, balances };
 };
@@ -387,7 +412,7 @@ export const getFuturesTypeLabel = (
     case "TrailingStopMarket":
       return t("Trailing Stop");
     default:
-      return "";
+      return type;
   }
 };
 

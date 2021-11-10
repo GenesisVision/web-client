@@ -39,7 +39,7 @@ export const PositionPNLPopover: React.FC<Props> = ({
             })}
           </Row>
           <Row size={"small"}>
-            <Text muted>Select Price Basis</Text>
+            <Text muted>{t("Select Price Basis")}</Text>
           </Row>
           <Row size={"small"}>
             <RowItem>

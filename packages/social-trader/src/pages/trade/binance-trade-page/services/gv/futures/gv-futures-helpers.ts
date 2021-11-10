@@ -2,13 +2,11 @@ import {
   BinanceRawFuturesAccountAsset,
   BinanceRawFuturesAccountInfo,
   BinanceRawFuturesBracket,
-  BinanceRawFuturesPosition,
   BinanceRawFuturesSymbolBracket
 } from "gv-api-web";
 import {
   Account,
   ExtentedBinanceRawBinanceBalance,
-  FuturesPositionInformation,
   LeverageBracket,
   SymbolLeverageBrackets
 } from "pages/trade/binance-trade-page/trading/terminal.types";
@@ -66,39 +64,13 @@ export const mapBinanceRawFuturesBracketToLeverageBracket = ({
   initialLeverage,
   cap,
   floor,
-  maintenanceMarginRatio
+  maintenanceMarginRatio,
+  maintAmount
 }: BinanceRawFuturesBracket): LeverageBracket => ({
   bracket,
   initialLeverage,
   notionalCap: cap,
   notionalFloor: floor,
-  maintMarginRatio: maintenanceMarginRatio
-});
-
-export const mapBinanceRawFuturesPositionToFuturesPositionInformation = ({
-  entryPrice,
-  marginType,
-  isAutoAddMargin,
-  isolatedMargin,
-  leverage,
-  liquidationPrice,
-  markPrice,
-  symbol,
-  unrealizedPnL,
-  maxNotional,
-  quantity,
-  positionSide
-}: BinanceRawFuturesPosition): FuturesPositionInformation => ({
-  entryPrice,
-  marginType,
-  isAutoAddMargin,
-  isolatedMargin,
-  leverage,
-  liquidationPrice,
-  markPrice,
-  maxNotionalValue: +maxNotional,
-  positionAmt: quantity,
-  symbol,
-  unRealizedProfit: unrealizedPnL,
-  positionSide
+  maintMarginRatio: maintenanceMarginRatio,
+  maintAmount
 });

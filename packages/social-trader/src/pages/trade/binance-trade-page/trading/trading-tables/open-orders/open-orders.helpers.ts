@@ -124,7 +124,7 @@ export const getFuturesTriggerConditionsLabel = ({
   t: TFunction;
   workingType: BinanceWorkingType;
   stopPrice: number;
-  tickSize: number;
+  tickSize: number | string;
   type: FuturesOrderType;
   side: BinanceOrderSide;
 }): string => {

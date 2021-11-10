@@ -57,6 +57,17 @@
       "status": "Status"
     }
   },
+  "trade-history": {
+    "table": {
+      "time": "Time",
+      "symbol": "Symbol",
+      "side": "Side",
+      "price": "Price",
+      "quantity": "Quantity",
+      "fee": "Fee",
+      "realized-profit": "Realized profit"
+    }
+  },
   "transaction-history": {
     "table": {
       "time": "Time",

@@ -2,8 +2,6 @@ import { Row } from "components/row/row";
 import { RowItem } from "components/row-item/row-item";
 import { API_REQUEST_STATUS } from "hooks/api-request.hook";
 import { TerminalPlaceOrderContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-place-order.context";
-import { PriceField } from "pages/trade/binance-trade-page/trading/place-order/forms/fields/price-field";
-import { QuantityField } from "pages/trade/binance-trade-page/trading/place-order/forms/fields/quantity-field";
 import { ReduceOnlyField } from "pages/trade/binance-trade-page/trading/place-order/place-order-settings/reduce-only-field/reduce-only-field";
 import {
   TIME_IN_FORCE_VALUES,
@@ -16,6 +14,8 @@ import { useForm } from "react-hook-form";
 import { allowPositiveValuesNumberFormat } from "utils/helpers";
 import { HookForm } from "utils/hook-form.helpers";
 
+import { FuturesPriceField } from "./forms/fields/futures-price-field";
+import { FuturesQuantityField } from "./forms/fields/futures-quantity-field";
 import { useFuturesPlaceOrderFormReset } from "./hooks/place-order-form-reset.hook";
 import { useFuturesPlaceOrderSlider } from "./hooks/place-order-futures-slider.hook";
 import { useFuturesPlaceOrderInfo } from "./hooks/place-order-info-hook";
@@ -68,7 +68,7 @@ const _LimitTradeFuturesForm: React.FC<ILimitTradeFormProps> = ({
     mode: "onChange"
   });
   const { triggerValidation, watch, setValue, reset } = form;
-  const { quantity, price } = watch();
+  const { quantity, price, reduceOnly } = watch();
 
   useFuturesPlaceOrderFormReset({
     status,
@@ -99,27 +99,25 @@ const _LimitTradeFuturesForm: React.FC<ILimitTradeFormProps> = ({
     balance,
     orderPrice: price,
     quantity,
-    percentMode
+    percentMode,
+    reduceOnly
   });
 
-  const handleSubmit = useCallback(
-    values => {
-      return onSubmit({ ...values, percentMode, sliderBuy, sliderSell });
-    },
-    [percentMode, sliderBuy, sliderSell]
-  );
+  const handleSubmit = values => {
+    return onSubmit({ ...values, percentMode, sliderBuy, sliderSell });
+  };
 
   return (
     <HookForm form={form}>
       <Row>
-        <PriceField
+        <FuturesPriceField
           min={minPrice}
           max={maxPrice}
           tickSize={filterValues.tickSize}
         />
       </Row>
       <Row>
-        <QuantityField
+        <FuturesQuantityField
           percentMode={percentMode}
           stepSize={filterValues.stepSize}
           isAllowed={allowPositiveValuesNumberFormat(Number.MAX_SAFE_INTEGER)}

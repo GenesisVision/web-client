@@ -92,6 +92,31 @@ export const minMaxNumberRules = ({
   });
 };
 
+export const noRequiredMinMaxNumberRules = ({
+  t,
+  min = 0,
+  max
+}: {
+  t: TFunction;
+  min?: number;
+  max: number;
+}) => {
+  return generateRules({
+    min: {
+      message: t("validations.min", {
+        min
+      }),
+      value: min
+    },
+    max: {
+      message: t("validations.max", {
+        max
+      }),
+      value: max
+    }
+  });
+};
+
 export const emailRules = {
   required: "Email is required.",
   pattern: {

@@ -22,7 +22,8 @@ import {
 import { TradesBlock } from "pages/trade/binance-trade-page/trading/trades/trades.block";
 import React from "react";
 
-import { TerminalFuturesContextProvider } from "./contexts/terminal-futures.context";
+import { TerminalFuturesBalanceContextProvider } from "./contexts/terminal-futures-balance.context";
+import { TerminalFuturesPositionsContextProvider } from "./contexts/terminal-futures-positions.context";
 import styles from "./terminal.module.scss";
 import { TerminalMobileChartBlock } from "./terminal-mobile-chart-block/terminal-mobile-chart-block";
 import { TradingTablesContainer } from "./trading-tables/trading-tables.container";
@@ -85,46 +86,50 @@ const _Terminal: React.FC<Props> = ({
                 {/* <ChartBlock /> */}
               </ResponsiveContainer>
             </div>
-            <TerminalFuturesContextProvider>
-              <TerminalOpenOrdersContextProvider>
-                <div className={styles["tables-grid-elem"]}>
-                  <TradingTablesContainer />
-                </div>
-                <div className={styles["order-book-grid-elem"]}>
-                  <ResponsiveContainer
-                    enabledScreens={[
-                      "tablet",
-                      "landscape-tablet",
-                      "desktop",
-                      "large-desktop"
-                    ]}
-                  >
-                    {/* <OrderBookBlock /> */}
-                  </ResponsiveContainer>
-                </div>
-              </TerminalOpenOrdersContextProvider>
-              <div className={styles["trades-grid-elem"]}>
-                <ResponsiveContainer
-                  enabledScreens={[
-                    "tablet",
-                    "landscape-tablet",
-                    "desktop",
-                    "large-desktop"
-                  ]}
-                >
-                  {/* <TradesBlock /> */}
-                </ResponsiveContainer>
-              </div>
-              <div className={styles["place-orders-grid-elem"]}>
-                <TerminalPlaceOrderContextProvider>
-                  {terminalType === "futures" && (
-                    <PlaceOrderSettingsContainer />
-                  )}
-                  <PlaceOrderContainer />
-                  {terminalType === "futures" && <MarginRatioBlock />}
-                </TerminalPlaceOrderContextProvider>
-              </div>
-            </TerminalFuturesContextProvider>
+            <div className={styles["trades-grid-elem"]}>
+              <ResponsiveContainer
+                enabledScreens={[
+                  "tablet",
+                  "landscape-tablet",
+                  "desktop",
+                  "large-desktop"
+                ]}
+              >
+                {/* <TradesBlock /> */}
+              </ResponsiveContainer>
+            </div>
+            <div className={styles["order-book-grid-elem"]}>
+              <ResponsiveContainer
+                enabledScreens={[
+                  "tablet",
+                  "landscape-tablet",
+                  "desktop",
+                  "large-desktop"
+                ]}
+              >
+                {/* <OrderBookBlock /> */}
+              </ResponsiveContainer>
+            </div>
+            <TerminalOpenOrdersContextProvider>
+              <TerminalFuturesPositionsContextProvider>
+                <TerminalFuturesBalanceContextProvider>
+                  <>
+                    <div className={styles["tables-grid-elem"]}>
+                      <TradingTablesContainer />
+                    </div>
+                    <div className={styles["place-orders-grid-elem"]}>
+                      <TerminalPlaceOrderContextProvider>
+                        {terminalType === "futures" && (
+                          <PlaceOrderSettingsContainer />
+                        )}
+                        <PlaceOrderContainer />
+                      </TerminalPlaceOrderContextProvider>
+                      {terminalType === "futures" && <MarginRatioBlock />}
+                    </div>
+                  </>
+                </TerminalFuturesBalanceContextProvider>
+              </TerminalFuturesPositionsContextProvider>
+            </TerminalOpenOrdersContextProvider>
           </TradingPriceContextProvider>
         </TerminalTickerContextProvider>
       </div>

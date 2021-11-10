@@ -25,6 +25,7 @@ import {
   tradeTransform,
   transformKlineWs
 } from "../spot/binance-spot-ws.helpers";
+import { FUTURES_ACCOUNT_EVENT } from "./binance-futures.types";
 
 export const BINANCE_FUTURES_WS_API_URL = "wss://fstream.binance.com";
 
@@ -95,11 +96,11 @@ export const getUserStreamSocket = (
   const url = `${BINANCE_FUTURES_WS_API_URL}/${BINANCE_WS_API_TYPE.WS}/${listenKey}`;
   return connectSocketMethod(socketName, url).pipe(
     map(item => {
-      if (item.e === "MARGIN_CALL")
+      if (item.e === FUTURES_ACCOUNT_EVENT.marginCall)
         return futuresMarginCallEventTransform(item);
-      if (item.e === "ACCOUNT_UPDATE")
+      if (item.e === FUTURES_ACCOUNT_EVENT.accountUpdate)
         return futuresAccountUpdateEventTransform(item);
-      if (item.e === "ORDER_TRADE_UPDATE")
+      if (item.e === FUTURES_ACCOUNT_EVENT.orderTradeUpdate)
         return futuresEventTradeOrderTransform(item.o);
       return item;
     })

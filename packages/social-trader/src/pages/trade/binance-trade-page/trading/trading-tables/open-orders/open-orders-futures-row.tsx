@@ -74,8 +74,8 @@ const _OpenOrdersFuturesRow: React.FC<FuturesOrder> = ({
         style={{ cursor: "pointer" }}
         onClick={() =>
           setSymbol({
-            baseAsset: symbolData?.baseAsset!,
-            quoteAsset: symbolData?.quoteAsset!
+            baseAsset: symbolData!.baseAsset!,
+            quoteAsset: symbolData!.quoteAsset!
           })
         }
       >
@@ -89,10 +89,10 @@ const _OpenOrdersFuturesRow: React.FC<FuturesOrder> = ({
       </TableCell>
       <TableCell>
         {!!price
-          ? `${terminalMoneyFormat({
+          ? terminalMoneyFormat({
               amount: price,
               tickSize: String(tickSize)
-            })} ${symbolData?.baseAsset}`
+            })
           : "–"}
       </TableCell>
       <TableCell>

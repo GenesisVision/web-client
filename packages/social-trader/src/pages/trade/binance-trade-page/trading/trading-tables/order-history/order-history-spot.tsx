@@ -9,7 +9,7 @@ import {
   ORDER_HISTORY_TABLE_COLUMNS,
   updateOrderHistoryData
 } from "pages/trade/binance-trade-page/trading/trading-tables/order-history/order-history.helpers";
-import { OrderHistoryRow } from "pages/trade/binance-trade-page/trading/trading-tables/order-history/order-history-row";
+import { OrderHistorySpotRow } from "pages/trade/binance-trade-page/trading/trading-tables/order-history/order-history-spot-row";
 import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
@@ -57,9 +57,11 @@ export const OrderHistorySpot: React.FC<Props> = ({ updates }) => {
         type,
         side,
         stopPrice,
-        price
+        price,
+        id
       }: UnitedOrder) => (
-        <OrderHistoryRow
+        <OrderHistorySpotRow
+          key={id}
           executed={quantityFilled}
           amount={quantity}
           orderStatus={orderStatus}

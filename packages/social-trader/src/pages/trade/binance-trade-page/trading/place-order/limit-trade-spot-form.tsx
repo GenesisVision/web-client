@@ -2,8 +2,6 @@ import { Row } from "components/row/row";
 import { RowItem } from "components/row-item/row-item";
 import { API_REQUEST_STATUS } from "hooks/api-request.hook";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
-import { PriceField } from "pages/trade/binance-trade-page/trading/place-order/forms/fields/price-field";
-import { QuantityField } from "pages/trade/binance-trade-page/trading/place-order/forms/fields/quantity-field";
 import { TotalField } from "pages/trade/binance-trade-page/trading/place-order/forms/fields/total-field";
 import {
   TIME_IN_FORCE_VALUES,
@@ -20,6 +18,8 @@ import { useForm } from "react-hook-form";
 import { allowPositiveValuesNumberFormat } from "utils/helpers";
 import { HookForm } from "utils/hook-form.helpers";
 
+import { SpotQuantityField } from "./forms/fields/spot-quantity-field";
+import { SpotPriceField } from "./forms/spot-price-field";
 import { usePlaceOrderAutoFill } from "./hooks/place-order-auto-fill.hook";
 import { useSpotPlaceOrderFormReset } from "./hooks/place-order-form-reset.hook";
 import { useSpotPlaceOrderInfo } from "./hooks/place-order-info-hook";
@@ -113,10 +113,10 @@ const _LimitTradeSpotForm: React.FC<Props> = ({
       onSubmit={values => onSubmit({ ...values, type: "Limit" })}
     >
       <Row>
-        <PriceField min={minPrice} max={maxPrice} />
+        <SpotPriceField min={minPrice} max={maxPrice} />
       </Row>
       <Row>
-        <QuantityField
+        <SpotQuantityField
           isAllowed={allowPositiveValuesNumberFormat(Number.MAX_SAFE_INTEGER)}
           min={minQuantity}
           max={maxQuantityWithWallet}

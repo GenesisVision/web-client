@@ -1,18 +1,10 @@
-import React, { useContext, useMemo } from "react";
+import React, { useContext } from "react";
 
-import { TerminalFuturesContext } from "../../contexts/terminal-futures.context";
+import { TerminalFuturesPositionsContext } from "../../contexts/terminal-futures-positions.context";
 import { Positions } from "./positions";
 
 export const PositionsContainer: React.FC = () => {
-  const { openPositions } = useContext(TerminalFuturesContext);
-
-  // const list = useMemo(
-  //   () =>
-  //     openPositions
-  //       ? openPositions.filter(({ quantity }) => quantity !== 0)
-  //       : [],
-  //   [openPositions]
-  // );
+  const { openPositions } = useContext(TerminalFuturesPositionsContext);
 
   return <Positions items={openPositions} />;
 };
