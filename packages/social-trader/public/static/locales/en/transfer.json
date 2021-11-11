@@ -13,7 +13,7 @@
   "to": "To",
   "from": "From",
   "amount": "Enter correct amount",
-  "info": "The funds will be converted according to the current market price (via market order on Binance).",
+  "info": "The funds will be converted according to the current market price (via market order).",
   "two-factor-code-label": "Two factor code",
   "confirmation": {
     "page-title": "Wallet withdraw confirm",
