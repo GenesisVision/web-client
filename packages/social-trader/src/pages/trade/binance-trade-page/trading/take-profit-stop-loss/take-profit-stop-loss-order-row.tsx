@@ -9,7 +9,7 @@ import styled from "styled-components";
 import { TerminalInfoContext } from "../contexts/terminal-info.context";
 import { TerminalMethodsContext } from "../contexts/terminal-methods.context";
 import { FuturesOrder } from "../terminal.types";
-import { getFuturesTriggerConditionsLabel } from "../trading-tables/open-orders/open-orders.helpers";
+import { getFuturesTriggerConditionsLabel } from "../terminal-futures.helpers";
 
 const LastRowItem = styled(RowItem)`
   margin-left: auto;

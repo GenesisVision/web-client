@@ -95,7 +95,16 @@ export const TradingPriceContextProvider: React.FC = ({ children }) => {
       setBestBidPrice,
       setBestAskPrice
     }),
-    [setPrice, price, list, tickSize, bestBidPrice, bestAskPrice]
+    [
+      setPrice,
+      price,
+      list,
+      tickSize,
+      bestBidPrice,
+      bestAskPrice,
+      setBestBidPrice,
+      setBestAskPrice
+    ]
   );
 
   return (

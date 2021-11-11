@@ -6,7 +6,7 @@ import React, { useContext } from "react";
 import { formatValue } from "utils/formatter";
 import { safeGetElemFromArray } from "utils/helpers";
 
-export const OrderBookCurrentPriceContainer: React.FC = () => {
+export const OrderBookSpotCurrentPriceContainer: React.FC = () => {
   const { trades } = useContext(TradingPriceContext);
   const {
     symbol: { quoteAsset }

@@ -51,7 +51,7 @@ const ContextProvider: React.FC = ({ children }) => {
       balance => balance.asset === "USDT"
     ) as unknown) as BinanceRawFuturesAccountAsset;
     setFutureBalance(usdtBalance);
-    setAvailableBalance(usdtBalance.availableBalance);
+    setAvailableBalance(usdtBalance ? usdtBalance.availableBalance : 0);
   }, [accountInfo?.balances]);
 
   useEffect(() => {

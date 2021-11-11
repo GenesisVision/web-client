@@ -41,7 +41,7 @@ const PositionModeDialogContent: React.FC<Props> = ({
   const { openOrders } = useContext(TerminalOpenOrdersContext);
 
   const hasPositions = !!openPositions.length;
-  const hasOrders = !!openOrders?.length;
+  const hasOrders = !!openOrders.length;
 
   const handleClickButton = useCallback(
     (mode: PositionModeType) => () => {

@@ -14,7 +14,7 @@ interface Props {
   marginBalance: number;
 }
 
-const _MarginRatioView: React.FC<Props> = ({
+export const MarginRatioView: React.FC<Props> = ({
   maintMargin,
   marginBalance,
   marginRatio
@@ -46,5 +46,3 @@ const _MarginRatioView: React.FC<Props> = ({
     </>
   );
 };
-
-export const MarginRatioView = React.memo(_MarginRatioView);

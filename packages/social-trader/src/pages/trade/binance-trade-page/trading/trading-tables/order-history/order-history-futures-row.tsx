@@ -4,8 +4,6 @@ import { Text } from "components/text/text";
 import { terminalMoneyFormat } from "pages/trade/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import {
-  getFuturesOpenOrderSideLabel,
-  getFuturesTypeLabel,
   getSymbolData,
   getSymbolFilters
 } from "pages/trade/binance-trade-page/trading/terminal.helpers";
@@ -16,7 +14,11 @@ import styled from "styled-components";
 import { formatDate } from "utils/dates";
 
 import { TerminalTickerContext } from "../../contexts/terminal-ticker.context";
-import { getFuturesTriggerConditionsLabel } from "../open-orders/open-orders.helpers";
+import {
+  getFuturesOpenOrderSideLabel,
+  getFuturesTriggerConditionsLabel,
+  getFuturesTypeLabel
+} from "../../terminal-futures.helpers";
 
 const TableCell = styled(TableCellComponent)`
   padding: 10px;

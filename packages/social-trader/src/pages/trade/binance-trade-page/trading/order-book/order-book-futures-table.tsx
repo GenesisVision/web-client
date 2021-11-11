@@ -12,6 +12,7 @@ import { StringBidDepth } from "pages/trade/binance-trade-page/trading/terminal.
 import React, { useContext, useMemo } from "react";
 import { getPercentageValue } from "utils/helpers";
 
+import { getSymbolFromState } from "../terminal.helpers";
 import styles from "./order-book.module.scss";
 
 interface Props {
@@ -32,9 +33,13 @@ const _OrderBookFuturesTable: React.FC<Props> = ({
   const { openOrders } = useContext(TerminalOpenOrdersContext);
   const { setPrice } = useContext(TradingPriceContext);
 
-  const { stepSize, tickSize } = useContext(TerminalInfoContext);
+  const { stepSize, tickSize, symbol } = useContext(TerminalInfoContext);
 
-  const limitOrders = getOrderBookLimitOrders(openOrders, reverse);
+  const limitOrders = useMemo(
+    () =>
+      getOrderBookLimitOrders(getSymbolFromState(symbol), openOrders, reverse),
+    [openOrders, symbol, reverse]
+  );
 
   return (
     <table className={styles["order-book__table"]}>

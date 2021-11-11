@@ -4,7 +4,6 @@ import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/c
 import { TerminalTickerContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-ticker.context";
 import {
   filterOrderEventsStream,
-  generateFuturesOrderMessage,
   generateSpotOrderMessage,
   getSymbol
 } from "pages/trade/binance-trade-page/trading/terminal.helpers";
@@ -22,6 +21,9 @@ import React, {
 } from "react";
 import { useTranslation } from "react-i18next";
 import { map } from "rxjs/operators";
+
+import { FUTURES_ACCOUNT_EVENT } from "../../services/futures/binance-futures.types";
+import { generateFuturesOrderMessage } from "../terminal-futures.helpers";
 
 type TerminalOpenOrdersContextState = {
   openOrders: UnitedOrder[] | FuturesOrder[];
@@ -86,7 +88,7 @@ export const TerminalOpenOrdersContextProvider: React.FC = ({ children }) => {
       };
     if (
       (socketData.eventType === "executionReport" ||
-        socketData.eventType === "ORDER_TRADE_UPDATE") &&
+        socketData.eventType === FUTURES_ACCOUNT_EVENT.orderTradeUpdate) &&
       symbols
     ) {
       const symbolData = symbols.find(

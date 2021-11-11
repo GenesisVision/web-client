@@ -17,6 +17,6 @@ export const getMarginRatioLoaderData = (): FuturesAsset => ({
 
 export const getMarginRatioColor = (ratio: number): ColoredTextColor => {
   if (ratio <= 50) return "green";
-  if (ratio <= 70) return "yellow";
+  if (ratio <= 80) return "yellow";
   return "red";
 };

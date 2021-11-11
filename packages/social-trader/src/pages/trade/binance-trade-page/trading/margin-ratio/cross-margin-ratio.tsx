@@ -12,7 +12,7 @@ const _CrossMarginRatio: React.FC = () => {
       marginBalance={
         crossPositionInfo ? crossPositionInfo.crossMarginBalance : 0
       }
-      marginRatio={crossPositionInfo ? crossPositionInfo?.crossMarginRatio : 0}
+      marginRatio={crossPositionInfo ? crossPositionInfo.crossMarginRatio : 0}
     />
   );
 };

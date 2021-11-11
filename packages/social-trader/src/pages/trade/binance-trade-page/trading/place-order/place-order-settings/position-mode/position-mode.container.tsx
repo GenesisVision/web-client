@@ -34,7 +34,7 @@ const _PositionModeContainer: React.FC = () => {
         mode: dualSidePosition
       });
     },
-    [exchangeAccountId, symbol, exchangeAccountId]
+    [exchangeAccountId, symbol]
   );
 
   return (

@@ -1,5 +1,6 @@
 import { Center } from "components/center/center";
 import { RowItem } from "components/row-item/row-item";
+import { Text } from "components/text/text";
 import { terminalMoneyFormat } from "pages/trade/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
 import { TradeStatefulValue } from "pages/trade/binance-trade-page/trading/components/trade-stateful-value/trade-stateful-value";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
@@ -8,18 +9,19 @@ import React, { useContext } from "react";
 import NumberFormat from "react-number-format";
 
 import styles from "./order-book.module.scss";
-import { Text } from "components/text/text";
 
 interface Props {
-  tradeId?: number;
   price: number;
+  markPrice?: number;
+  equivalentCurrency?: TerminalCurrency;
   equivalent?: string;
-  equivalentCurrency: TerminalCurrency;
+  tradeId?: number;
 }
 
 const _OrderBookCurrentPrice: React.FC<Props> = ({
   tradeId,
   price,
+  markPrice,
   equivalent,
   equivalentCurrency
 }) => {
@@ -46,6 +48,13 @@ const _OrderBookCurrentPrice: React.FC<Props> = ({
               value={equivalent}
               suffix={` ${equivalentCurrency}`}
             />
+          </Text>
+        </RowItem>
+      )}
+      {markPrice && (
+        <RowItem>
+          <Text wrap={false}>
+            {terminalMoneyFormat({ amount: markPrice, tickSize })}
           </Text>
         </RowItem>
       )}

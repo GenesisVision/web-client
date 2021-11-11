@@ -23,6 +23,7 @@ import { TradingPriceContext } from "../contexts/trading-price.context";
 
 interface Props {}
 
+// fix it. it does not work properly
 const ASKS_FULL_AMOUNT_DIVIDER = 300;
 const BIDS_FULL_AMOUNT_DIVIDER = 25;
 
@@ -157,15 +158,24 @@ const _OrderBookContainer: React.FC<Props> = () => {
   const { asks, bids } = listForRender;
 
   const listAmount = useMemo(() => {
-    if (!list || terminalType === "futures") {
+    if (!list) {
+      return {
+        asks: 0,
+        bids: 0
+      };
+    }
+    if (terminalType === "futures") {
       const asksMaxValue = asks.reduce((acc, [_, amount]) => acc + +amount, 0);
       const bidsMaxValue = bids.reduce((acc, [_, amount]) => acc + +amount, 0);
       setDepthMaxSum(Math.max(asksMaxValue, bidsMaxValue));
 
       //@ts-ignore
-      setBestAskPrice(asks[asks.length - 1] && +asks[asks.length - 1][0]);
+      setBestAskPrice(
+        //@ts-ignore
+        asks[asks.length - 1] ? +asks[asks.length - 1][0] : undefined
+      );
       //@ts-ignore
-      setBestBidPrice(bids[0] && +bids[0][0]);
+      setBestBidPrice(bids[0] ? +bids[0][0] : undefined);
 
       return {
         asks: 0,

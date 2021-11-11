@@ -69,64 +69,62 @@ const _Terminal: React.FC<Props> = ({
             </ResponsiveContainer>
           </div>
           <TradingPriceContextProvider>
-            <div className={styles["chart-grid-elem"]}>
-              <ResponsiveContainer
-                enabledScreens={["phone", "landscape-phone"]}
-              >
-                {/* <TerminalMobileChartBlock /> */}
-              </ResponsiveContainer>
-              <ResponsiveContainer
-                enabledScreens={[
-                  "tablet",
-                  "landscape-tablet",
-                  "desktop",
-                  "large-desktop"
-                ]}
-              >
-                {/* <ChartBlock /> */}
-              </ResponsiveContainer>
-            </div>
-            <div className={styles["trades-grid-elem"]}>
-              <ResponsiveContainer
-                enabledScreens={[
-                  "tablet",
-                  "landscape-tablet",
-                  "desktop",
-                  "large-desktop"
-                ]}
-              >
-                {/* <TradesBlock /> */}
-              </ResponsiveContainer>
-            </div>
-            <div className={styles["order-book-grid-elem"]}>
-              <ResponsiveContainer
-                enabledScreens={[
-                  "tablet",
-                  "landscape-tablet",
-                  "desktop",
-                  "large-desktop"
-                ]}
-              >
-                {/* <OrderBookBlock /> */}
-              </ResponsiveContainer>
-            </div>
             <TerminalOpenOrdersContextProvider>
+              <div className={styles["chart-grid-elem"]}>
+                <ResponsiveContainer
+                  enabledScreens={["phone", "landscape-phone"]}
+                >
+                  {/* <TerminalMobileChartBlock /> */}
+                </ResponsiveContainer>
+                <ResponsiveContainer
+                  enabledScreens={[
+                    "tablet",
+                    "landscape-tablet",
+                    "desktop",
+                    "large-desktop"
+                  ]}
+                >
+                  {/* <ChartBlock /> */}
+                </ResponsiveContainer>
+              </div>
+              <div className={styles["trades-grid-elem"]}>
+                <ResponsiveContainer
+                  enabledScreens={[
+                    "tablet",
+                    "landscape-tablet",
+                    "desktop",
+                    "large-desktop"
+                  ]}
+                >
+                  {/* <TradesBlock /> */}
+                </ResponsiveContainer>
+              </div>
+              <div className={styles["order-book-grid-elem"]}>
+                <ResponsiveContainer
+                  enabledScreens={[
+                    "tablet",
+                    "landscape-tablet",
+                    "desktop",
+                    "large-desktop"
+                  ]}
+                >
+                  {/* <OrderBookBlock /> */}
+                </ResponsiveContainer>
+              </div>
               <TerminalFuturesPositionsContextProvider>
                 <TerminalFuturesBalanceContextProvider>
-                  <>
-                    <div className={styles["tables-grid-elem"]}>
-                      <TradingTablesContainer />
-                    </div>
-                    <div className={styles["place-orders-grid-elem"]}>
-                      <TerminalPlaceOrderContextProvider>
-                        {terminalType === "futures" && (
-                          <PlaceOrderSettingsContainer />
-                        )}
-                        <PlaceOrderContainer />
-                      </TerminalPlaceOrderContextProvider>
-                      {terminalType === "futures" && <MarginRatioBlock />}
-                    </div>
-                  </>
+                  <div className={styles["tables-grid-elem"]}>
+                    <TradingTablesContainer />
+                  </div>
+                  <div className={styles["place-orders-grid-elem"]}>
+                    <TerminalPlaceOrderContextProvider>
+                      {terminalType === "futures" && (
+                        <PlaceOrderSettingsContainer />
+                      )}
+                      <PlaceOrderContainer />
+                    </TerminalPlaceOrderContextProvider>
+                    {terminalType === "futures" && <MarginRatioBlock />}
+                  </div>
                 </TerminalFuturesBalanceContextProvider>
               </TerminalFuturesPositionsContextProvider>
             </TerminalOpenOrdersContextProvider>

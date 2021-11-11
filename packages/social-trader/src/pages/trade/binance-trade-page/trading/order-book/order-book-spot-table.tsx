@@ -11,6 +11,7 @@ import { StringBidDepth } from "pages/trade/binance-trade-page/trading/terminal.
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { getPercentageValue } from "utils/helpers";
 
+import { getSymbol } from "../terminal.helpers";
 import styles from "./order-book.module.scss";
 import { LevelsSum, OrderBookTooltip } from "./order-book-tooltip";
 
@@ -64,7 +65,15 @@ const _OrderBookSpotTable: React.FC<Props> = ({
     }
   }, [hoveredRow, items]);
 
-  const limitOrders = getOrderBookLimitOrders(openOrders, reverse);
+  const limitOrders = useMemo(
+    () =>
+      getOrderBookLimitOrders(
+        getSymbol(baseAsset, quoteAsset),
+        openOrders,
+        reverse
+      ),
+    [openOrders, baseAsset, quoteAsset, reverse]
+  );
 
   return (
     <table className={styles["order-book__table"]}>

@@ -6,7 +6,6 @@ import { terminalMoneyFormat } from "pages/trade/binance-trade-page/trading/comp
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import { TerminalTickerContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-ticker.context";
 import {
-  getFuturesOpenOrderSideLabel,
   getSymbolData,
   getSymbolFilters,
   setUpperFirstLetter
@@ -20,6 +19,8 @@ import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { formatDate } from "utils/dates";
 import { formatValue } from "utils/formatter";
+
+import { getFuturesOpenOrderSideLabel } from "../../terminal-futures.helpers";
 
 const TableCell = styled(TableCellComponent)`
   padding: 10px;

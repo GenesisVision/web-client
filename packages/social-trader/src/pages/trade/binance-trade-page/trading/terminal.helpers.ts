@@ -1,8 +1,6 @@
 import { ColoredTextColor } from "components/colored-text/colored-text";
 import { Push } from "components/link/link";
-import { BinanceOrderSide, BinancePositionSide } from "gv-api-web";
 import { useParams } from "hooks/location";
-import { TFunction } from "i18next";
 import { Bar } from "pages/trade/binance-trade-page/trading/chart/charting_library/datafeed-api";
 import { terminalMoneyFormat } from "pages/trade/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
 import { getDividerParts } from "pages/trade/binance-trade-page/trading/order-book/order-book.helpers";
@@ -11,10 +9,7 @@ import {
   AssetBalance,
   ExchangeInfo,
   FuturesOrder,
-  FuturesOrderType,
   MergedTickerSymbolType,
-  Position,
-  PositionMini,
   SymbolState,
   TerminalCurrency,
   TerminalType,
@@ -30,10 +25,7 @@ import { changeLocation, safeGetElemFromArray } from "utils/helpers";
 import { getLocation } from "utils/location";
 import { AnyObjectType } from "utils/types";
 
-import {
-  FUTURES_ACCOUNT_EVENT,
-  FuturesAccountUpdateEvent
-} from "../services/futures/binance-futures.types";
+import { FUTURES_ACCOUNT_EVENT } from "../services/futures/binance-futures.types";
 
 export const TERMINAL_ROUTE_SYMBOL_SEPARATOR = "_";
 
@@ -66,40 +58,6 @@ export const generateSpotOrderMessage = (
   return `${orderType} ${order.side.toLowerCase()} order ${executionTypeTitle?.toLowerCase()}\n\n${setUpperFirstLetter(
     executionTypeDescription
   )} exchange ${orderType.toLowerCase()} ${order.side.toLowerCase()} order for ${terminalMoneyFormat(
-    {
-      amount: order.quantity,
-      tickSize: String(stepSize)
-    }
-  )} ${symbol.baseAsset} by using ${symbol.quoteAsset}`;
-};
-
-export const generateFuturesOrderMessage = (
-  order: FuturesOrder,
-  symbol: MergedTickerSymbolType,
-  t: TFunction
-): string => {
-  const { stepSize } = symbol.lotSizeFilter;
-  const orderType = getFuturesTypeLabel(t, order.type);
-  const orderSide = getFuturesOpenOrderSideLabel(
-    t,
-    order.positionSide,
-    order.side
-  );
-  const executionTypeTitle =
-    order.executionType?.toLowerCase() === "new"
-      ? "Created"
-      : order.executionType?.toLowerCase() === "trade"
-      ? "filled"
-      : order.executionType;
-  const executionTypeDescription =
-    order.executionType?.toLowerCase() === "new"
-      ? "Submitted"
-      : order.executionType?.toLowerCase() === "trade"
-      ? "filled"
-      : order.executionType;
-  return `${orderType} ${orderSide} order ${executionTypeTitle?.toLowerCase()}\n\n${setUpperFirstLetter(
-    executionTypeDescription
-  )} exchange ${orderType.toLowerCase()} ${orderSide.toLowerCase()} order for ${terminalMoneyFormat(
     {
       amount: order.quantity,
       tickSize: String(stepSize)
@@ -224,69 +182,12 @@ export const filterOrderEventsStream = (
     )
   );
 
-export const filterAccountUpdateStream = (
-  $userStream: Observable<any>
-): Observable<FuturesAccountUpdateEvent> =>
-  $userStream.pipe(
-    filter(info => info.eventType === FUTURES_ACCOUNT_EVENT.accountUpdate)
-  );
-
 const normalizeBalanceList = (
   list: AssetBalance[]
 ): { [keys: string]: AssetBalance } => {
   const initObject: AnyObjectType = {};
   list.forEach(item => (initObject[item.asset] = item));
   return initObject;
-};
-
-export const normalizePositionsList = (
-  list: Position[] | PositionMini[]
-): { [keys: string]: Position } => {
-  const initObject: AnyObjectType = {};
-  list.forEach(item => {
-    if (!initObject[item.symbol]) initObject[item.symbol] = {};
-    initObject[item.symbol][item.positionSide] = item;
-  });
-  return initObject;
-};
-
-export const flatNormalizedPositions = (positions: {
-  [keys: string]: Position;
-}): Position[] => {
-  return Object.values(positions)
-    .map(item => Object.values(item))
-    .flat();
-};
-
-export const mergePositions = (
-  initialPosition: Position[],
-  newPositions: Position[]
-) => {
-  const normalizedCurrentPositions = normalizePositionsList(initialPosition);
-  const normalizedUpdatesPositions = normalizePositionsList(newPositions);
-  const positionsList = updatePositionList(
-    normalizedCurrentPositions,
-    normalizedUpdatesPositions
-  );
-
-  return positionsList;
-};
-
-export const updatePositionList = (
-  list: AnyObjectType,
-  updates: AnyObjectType
-): AnyObjectType => {
-  const updatedList = JSON.parse(JSON.stringify(list));
-  Object.entries(updates).forEach(([symbol, data]) => {
-    Object.keys(data).forEach(side => {
-      if (!updatedList[symbol]?.[side]) return;
-      updatedList[symbol][side] = {
-        ...updatedList[symbol][side],
-        ...updates[symbol][side]
-      };
-    });
-  });
-  return updatedList;
 };
 
 const updateBalancesList = (
@@ -370,72 +271,4 @@ export const getDecimalScale = (tick: string): number =>
 export const formatValueWithTick = (value: any, tick: string): string => {
   const decimalScale = getDecimalScale(formatValue(tick));
   return formatValue(value, decimalScale);
-};
-
-export const extractFuturesSymbolStateFromString = (
-  symbol: string
-): SymbolState => {
-  try {
-    // FIX IT. It only works if quoteAsset is equal to USDT
-    const baseCurrencies = /(.*)(USDT)/;
-    const [baseAsset, quoteAsset]: any = baseCurrencies.exec(symbol)?.slice(1);
-    return {
-      baseAsset,
-      quoteAsset
-    };
-  } catch (e) {
-    console.log(e, "cannot extract symbolState from string");
-    return {
-      baseAsset: "",
-      quoteAsset: ""
-    };
-  }
-};
-
-export const getFuturesTypeLabel = (
-  t: TFunction,
-  type: FuturesOrderType
-): string => {
-  switch (type) {
-    case "Limit":
-      return t("Limit");
-    case "Stop":
-      return t("Stop Limit");
-    case "Market":
-      return t("Market");
-    case "StopMarket":
-      return t("Stop Market");
-    case "TakeProfit":
-      return t("Take Profit");
-    case "TakeProfitMarket":
-      return t("Take Profit Market");
-    case "TrailingStopMarket":
-      return t("Trailing Stop");
-    default:
-      return type;
-  }
-};
-
-export const getFuturesOpenOrderSideLabel = (
-  t: TFunction,
-  positionSide: BinancePositionSide,
-  side: BinanceOrderSide
-): string => {
-  if (side === "Buy") {
-    if (positionSide === "Long") {
-      return t("Open Long");
-    } else if (positionSide === "Short") {
-      return t("Close Short");
-    } else {
-      return t("Buy");
-    }
-  } else {
-    if (positionSide === "Short") {
-      return t("Open Short");
-    } else if (positionSide === "Long") {
-      return t("Close Long");
-    } else {
-      return t("Sell");
-    }
-  }
 };

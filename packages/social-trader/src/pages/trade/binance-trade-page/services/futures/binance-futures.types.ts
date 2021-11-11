@@ -72,8 +72,8 @@ export interface FuturesAccount {
 
 export interface FuturesMarginCallEventPosition {
   symbol: TerminalCurrency; // Symbol
-  positionSide: PositionSideType; // Position Side
-  positionAmount: string; // Position Amount
+  positionSide: BinancePositionSide; // Position Side
+  quantity: string; // Position Amount
   marginType: MarginType; // Margin Type
   isolatedWallet: string; // Isolated Wallet (if isolated position)
   markPrice: string; // Mark Price
@@ -133,9 +133,9 @@ export interface FuturesTradeOrder {
 }
 
 export interface FuturesMarginCallEvent {
-  eventType: FUTURES_ACCOUNT_EVENT; // Event Type
+  eventType: FUTURES_ACCOUNT_EVENT.marginCall; // Event Type
   eventTime: number; // Event Time
-  crossWalletBalance: string; // Cross Wallet Balance. Only pushed with crossed position margin call
+  crossWalletBalance?: string; // Cross Wallet Balance. Only pushed with crossed position margin call
   positions: FuturesMarginCallEventPosition[];
 }
 

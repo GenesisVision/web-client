@@ -164,14 +164,14 @@ export const futuresMarginCallEventPositionTransform = (
 ): FuturesMarginCallEventPosition => {
   return {
     symbol: socketData.s,
-    positionSide: socketData.ps,
-    positionAmount: socketData.pa,
-    marginType: socketData.mt,
+    positionSide: setUpperFirstLetter(socketData.ps),
+    quantity: socketData.pa,
+    marginType: socketData.mt === "ISOLATED" ? "Isolated" : "Cross",
     isolatedWallet: socketData.iw,
     markPrice: socketData.mp,
     unrealizedPnL: socketData.up,
     maintenanceMarginRequired: socketData.mm
-  };
+  } as FuturesMarginCallEventPosition;
 };
 
 export const futuresEventBalanceTransform = (
@@ -223,7 +223,7 @@ export const futuresMarginCallEventTransform = (
   return {
     eventType: socketData.e,
     eventTime: socketData.E,
-    crossWalletBalance: socketData.cw,
+    crossWalletBalance: socketData?.cw,
     positions: (socketData.p || []).map(futuresMarginCallEventPositionTransform)
   };
 };

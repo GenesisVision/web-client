@@ -19,7 +19,8 @@ import {
 } from "gv-api-web";
 import {
   mapBinanceRawFuturesAccountInfoToAccount,
-  mapBinanceRawFuturesSymbolBracketToSymbolLeverageBrackets
+  mapBinanceRawFuturesSymbolBracketToSymbolLeverageBrackets,
+  transformFuturesOrder
 } from "pages/trade/binance-trade-page/services/gv/futures/gv-futures-helpers";
 import { Bar } from "pages/trade/binance-trade-page/trading/chart/charting_library/datafeed-api";
 import { getDividerParts } from "pages/trade/binance-trade-page/trading/order-book/order-book.helpers";
@@ -37,7 +38,6 @@ import {
   Ticker,
   TradeRequest,
   TransactionHistory,
-  UnitedOrder,
   UnitedTrade
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { from, Observable } from "rxjs";
@@ -47,9 +47,7 @@ import {
   createFuturesPlaceBuySellOrderRequest,
   PlaceOrderRequest,
   transformDepthToString,
-  transformFuturesOrder,
-  transformKlineBar,
-  transformToUnitedOrder
+  transformKlineBar
 } from "../../api.helpers";
 
 export const getExchangeInfo = (): Promise<ExchangeInfo> =>

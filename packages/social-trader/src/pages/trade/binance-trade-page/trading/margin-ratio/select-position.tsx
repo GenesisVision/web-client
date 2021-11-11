@@ -59,8 +59,8 @@ const _SelectPosition: React.FC<Props> = ({
             }
             return (
               <PopoverContentListItem
-                style={{ cursor: "pointer" }}
                 key={pos.positionSide + pos.symbol}
+                style={{ cursor: "pointer" }}
                 onClick={() => {
                   setSelectionPosition(pos);
                   clearAnchor();

@@ -58,10 +58,10 @@ const MarginModeDialogContent: React.FC<Props> = ({
 
   const symbolName = getSymbolFromState(symbol);
   const hasPosition = openPositions.find(pos => pos.symbol === symbolName);
-  const hasOrder = openOrders
-    ? //@ts-ignore
-      openOrders.find((order: FuturesOrder) => order.symbol === symbolName)
-    : undefined;
+  // @ts-ignore
+  const hasOrder = openOrders.find(
+    (order: FuturesOrder) => order.symbol === symbolName
+  );
 
   return (
     <>

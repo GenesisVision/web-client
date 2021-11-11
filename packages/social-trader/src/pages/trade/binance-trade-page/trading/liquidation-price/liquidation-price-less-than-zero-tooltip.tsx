@@ -12,6 +12,6 @@ export const LiquadationPriceLessThanZeroTooltip = () => (
       </TooltipContent>
     )}
   >
-    <>--</>
+    <span style={{ cursor: "help" }}>--</span>
   </Tooltip>
 );

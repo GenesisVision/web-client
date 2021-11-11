@@ -11,7 +11,6 @@ import SelectPosition from "./select-position";
 
 export const MarginRatioContainer: React.FC = () => {
   const { symbol: currentSymbol } = useContext(TerminalInfoContext);
-
   const { openPositions } = useContext(TerminalFuturesPositionsContext);
 
   const [selectedPosition, setSelectionPosition] = useState<
@@ -30,7 +29,7 @@ export const MarginRatioContainer: React.FC = () => {
       }
       setSelectionPosition(openPositions[0]);
     }
-  }, [openPositions.length]);
+  }, [openPositions.length, currentSymbol]);
 
   if (!selectedPosition) {
     return (

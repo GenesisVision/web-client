@@ -37,13 +37,13 @@ export const useSymbolData = (): SymbolSummaryData | undefined => {
     if (!isFutures) {
       getRate({ from: symbol.baseAsset, to: "USDT" });
     }
-  }, [symbol]);
+  }, [symbol, terminalType]);
 
   useEffect(() => {
     if (!isFutures) {
       getRate({ from: symbol.baseAsset, to: "USDT" });
     }
-  }, [symbol]);
+  }, [symbol, terminalType]);
 
   return tickerData
     ? {

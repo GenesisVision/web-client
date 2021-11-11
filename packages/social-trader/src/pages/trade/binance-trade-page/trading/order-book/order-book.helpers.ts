@@ -215,27 +215,25 @@ export const countOrderBookFuturesSum = (
   reverse?: boolean
 ): number => {
   const slicedItems = reverse ? items.slice(index) : items.slice(0, index + 1);
-
   return slicedItems.reduce((acc, [_, quantity]) => +acc + +quantity, 0);
 };
 
 export const getOrderBookLimitOrders = (
   // openOrders?: UnitedOrder[] | FuturesOrder[],
-  openOrders?: any[],
+  symbol: string,
+  openOrders: any[],
   reverse?: boolean
 ): number[] => {
   return openOrders
-    ? openOrders
-        .filter(({ type }) => type.toUpperCase() === "LIMIT")
-        .filter(
-          ({ orderStatus }) =>
-            orderStatus && orderStatus.toUpperCase() === "NEW"
-        )
-        .filter(
-          ({ side }) =>
-            (reverse && side === "Sell") ||
-            (!reverse && side.toUpperCase() === "BUY")
-        )
-        .map(({ price }) => +price)
-    : [];
+    .filter(order => order.symbol === symbol)
+    .filter(({ type }) => type.toUpperCase() === "LIMIT")
+    .filter(
+      ({ orderStatus }) => orderStatus && orderStatus.toUpperCase() === "NEW"
+    )
+    .filter(
+      ({ side }) =>
+        (reverse && side.toUpperCase() === "SELL") ||
+        (!reverse && side.toUpperCase() === "BUY")
+    )
+    .map(({ price }) => +price);
 };

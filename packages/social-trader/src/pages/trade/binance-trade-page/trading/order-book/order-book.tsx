@@ -1,7 +1,6 @@
 import clsx from "clsx";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
-import { OrderBookCurrentPriceContainer } from "pages/trade/binance-trade-page/trading/order-book/order-book-current-price.container";
 import { OrderBookTickSizeSelect } from "pages/trade/binance-trade-page/trading/order-book/order-book-tick-size-select";
 import {
   DepthFullAmount,
@@ -12,7 +11,9 @@ import {
 import React, { forwardRef } from "react";
 
 import styles from "./order-book.module.scss";
+import { OrderBookFuturesCurrentPriceContainer } from "./order-book-futures-current-price.container";
 import { OrderBookFuturesTable } from "./order-book-futures-table";
+import { OrderBookSpotCurrentPriceContainer } from "./order-book-spot-current-price.container";
 import { OrderBookSpotTable } from "./order-book-spot-table";
 
 interface Props {
@@ -100,7 +101,11 @@ const _OrderBook = forwardRef<HTMLDivElement, Props>(
               )}
             </Row>
             <Row size={"small"} wide>
-              <OrderBookCurrentPriceContainer />
+              {isFutures ? (
+                <OrderBookFuturesCurrentPriceContainer />
+              ) : (
+                <OrderBookSpotCurrentPriceContainer />
+              )}
             </Row>
             <Row
               wide

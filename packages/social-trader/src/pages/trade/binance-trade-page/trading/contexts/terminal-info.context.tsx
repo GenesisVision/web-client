@@ -77,8 +77,6 @@ export const TerminalInfoContextProvider: React.FC<Props> = ({
   const currency = useAccountCurrency();
   const { updateUrl } = useUpdateTerminalUrlParams();
 
-  const isFutures = terminalType === "futures";
-
   const {
     getAccountInformation: getAccountInformationRequest,
     getUserStreamKey,

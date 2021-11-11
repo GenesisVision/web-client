@@ -22,9 +22,7 @@ import {
   BinanceRawFuturesInitialLeverageChangeResult,
   BinanceRawFuturesMarkPrice,
   BinanceRawFuturesPosition,
-  BinanceRawFuturesPositionInfo,
   BinanceRawFuturesPositionMarginResult,
-  BinanceRawFuturesUsdtExchangeInfo,
   BinanceRawFuturesUsdtSymbol,
   BinanceRawOrder,
   BinanceRawOrderBook,
@@ -46,13 +44,12 @@ import { Observable } from "rxjs";
 import { ConnectSocketMethodType } from "services/websocket.service";
 import { AnyObjectType, CurrencyEnum } from "utils/types";
 
+import { BinanceRawFuturesOrder } from "./../../../../../../gv-api-web/src/model/BinanceRawFuturesOrder";
+
 export type SymbolState = {
   quoteAsset: TerminalCurrency;
   baseAsset: TerminalCurrency;
 };
-
-export type FullPosition = BinanceRawFuturesPositionInfo &
-  BinanceRawFuturesPosition;
 
 export type Position = BinanceRawFuturesPosition;
 
@@ -63,25 +60,6 @@ export type CrossPositionInfo = {
   crossMarginRatio: number;
   crossPositionsSum: number;
 };
-
-// maxNotional: number;
-// initialMargin: number;
-// maintMargin: number;
-// positionInitialMargin: number;
-// openOrderInitialMargin: number;
-// isolated: boolean;
-// updateTime: Date;
-// unrealizedPnl: number;
-
-// marginType: BinanceFuturesMarginType;
-// isAutoAddMargin: boolean;
-// isolatedMargin: number;
-// liquidationPrice: number;
-// markPrice: number;
-// unrealizedPnL: number;
-// maxNotional: number;
-
-// export type Position = BinanceRawFuturesPositionInfo;
 
 export type PositionMini = FuturesAccountEventPosition;
 
@@ -224,7 +202,7 @@ export interface ITerminalMethods extends IGVTerminalMethods {
     symbol?: string;
     skip?: number;
     take?: number;
-  }) => Promise<TableDataType<UnitedOrder>>;
+  }) => Promise<TableDataType<UnitedOrder | FuturesOrder>>;
   getAllOrders: (filters: {
     accountId?: string;
     mode?: TradingPlatformBinanceOrdersMode;
@@ -233,7 +211,7 @@ export interface ITerminalMethods extends IGVTerminalMethods {
     symbol?: string;
     skip?: number;
     take?: number;
-  }) => Promise<TableDataType<UnitedOrder>>;
+  }) => Promise<TableDataType<UnitedOrder | FuturesOrder>>;
   getUserStreamKey: (accountId?: string) => Observable<{ listenKey: string }>;
   getAccountInformation: (
     accountId?: string,
@@ -920,11 +898,7 @@ export type OrderType = BinanceRawOrderType;
 // or Extract ???
 export type FuturesOrderType = Exclude<
   BinanceRawOrderType,
-  | "StopLoss"
-  | "StopLossLimit"
-  | "TakeProfitLimit"
-  | "LimitMaker"
-  | "Liquidation"
+  "StopLoss" | "StopLossLimit" | "TakeProfitLimit" | "LimitMaker"
 >;
 
 export type ListOrderStatus = "EXECUTING" | "ALL_DONE" | "REJECT";

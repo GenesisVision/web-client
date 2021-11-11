@@ -8,8 +8,6 @@ import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/cont
 import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-methods.context";
 import { TerminalTickerContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-ticker.context";
 import {
-  getFuturesOpenOrderSideLabel,
-  getFuturesTypeLabel,
   getSymbolData,
   getSymbolFilters
 } from "pages/trade/binance-trade-page/trading/terminal.helpers";
@@ -18,7 +16,11 @@ import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { formatDate } from "utils/dates";
 
-import { getFuturesTriggerConditionsLabel } from "./open-orders.helpers";
+import {
+  getFuturesOpenOrderSideLabel,
+  getFuturesTriggerConditionsLabel,
+  getFuturesTypeLabel
+} from "../../terminal-futures.helpers";
 
 const _OpenOrdersFuturesRow: React.FC<FuturesOrder> = ({
   id,

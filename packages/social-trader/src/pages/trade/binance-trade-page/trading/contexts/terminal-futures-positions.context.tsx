@@ -1,3 +1,4 @@
+import { useAlerts } from "hooks/alert.hook";
 import useApiRequest from "hooks/api-request.hook";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-methods.context";
@@ -13,14 +14,19 @@ import React, {
   useState
 } from "react";
 
-import { FuturesAccountUpdateEvent } from "../../services/futures/binance-futures.types";
 import {
-  filterAccountUpdateStream,
+  FuturesAccountUpdateEvent,
+  FuturesMarginCallEvent
+} from "../../services/futures/binance-futures.types";
+import { getSymbolFromState } from "../terminal.helpers";
+import {
+  filterFuturesAccountUpdateStream,
+  filterMarginCallStream,
   flatNormalizedPositions,
-  getSymbolFromState,
+  generateMarginCallMessage,
   normalizePositionsList,
-  updatePositionList
-} from "../terminal.helpers";
+  updatePositionsList
+} from "../terminal-futures.helpers";
 
 type TerminalFuturesPositionsContextState = {
   openPositions: Position[];
@@ -44,12 +50,16 @@ const ContextProvider: React.FC = ({ children }) => {
   const { exchangeAccountId, $userStream, symbol } = useContext(
     TerminalInfoContext
   );
+  const { warningAlert } = useAlerts();
   const [positionsList, setPositionsList] = useState<{
     [key: string]: Position;
   }>({});
   const [openPositions, setOpenPositions] = useState<Position[]>([]);
-  const [socketData, setSocketData] = useState<
+  const [socketAccountData, setAccountSocketData] = useState<
     FuturesAccountUpdateEvent | undefined
+  >(undefined);
+  const [socketMarginCallData, setMarginCallSocketData] = useState<
+    FuturesMarginCallEvent | undefined
   >(undefined);
 
   const {
@@ -63,48 +73,57 @@ const ContextProvider: React.FC = ({ children }) => {
     sendRequest: getPositionInformation,
     data: positionInfoData
   } = useApiRequest({
-    request: getPositionInformationRequest
-      ? getPositionInformationRequest
-      : () => {}
+    request: getPositionInformationRequest!
   });
 
   const {
     sendRequest: getLeverageBrackets,
     data: leverageBrackets
   } = useApiRequest({
-    request: getLeverageBracketsRequest ? getLeverageBracketsRequest : () => {}
+    request: getLeverageBracketsRequest!
   });
 
   useEffect(() => {
     if (!exchangeAccountId || !$userStream) return;
-    const accountStream = filterAccountUpdateStream($userStream);
-    accountStream.subscribe(setSocketData);
+    const accountStream = filterFuturesAccountUpdateStream($userStream);
+    accountStream.subscribe(setAccountSocketData);
+    const marginCallStream = filterMarginCallStream($userStream);
+    marginCallStream.subscribe(setMarginCallSocketData);
   }, [exchangeAccountId, $userStream]);
 
   useEffect(() => {
-    if (!socketData) return;
-    const normalizedUpdatedPositions = normalizePositionsList(
-      socketData.positions
+    if (!socketMarginCallData) return;
+    socketMarginCallData.positions.forEach(pos =>
+      warningAlert(
+        generateMarginCallMessage(pos, socketMarginCallData.crossWalletBalance)
+      )
     );
-    const updatedPositionList = updatePositionList(
+  }, [socketMarginCallData]);
+
+  useEffect(() => {
+    if (!socketAccountData) return;
+    const normalizedUpdatedPositions = normalizePositionsList(
+      socketAccountData.positions
+    );
+    const updatedPositionList = updatePositionsList(
       positionsList,
       normalizedUpdatedPositions
     );
     setPositionsList(updatedPositionList);
-  }, [socketData]);
+  }, [socketAccountData]);
 
   useEffect(() => {
-    if (getPositionInformation && exchangeAccountId) {
+    if (getPositionInformationRequest && exchangeAccountId) {
       getPositionInformation({ accountId: exchangeAccountId });
     }
-  }, [exchangeAccountId]);
+  }, [getPositionInformationRequest]);
 
   useEffect(() => {
-    if (getLeverageBrackets && exchangeAccountId)
+    if (getLeverageBracketsRequest && exchangeAccountId)
       getLeverageBrackets({
         accountId: exchangeAccountId
       });
-  }, [exchangeAccountId]);
+  }, [getLeverageBracketsRequest]);
 
   useEffect(() => {
     if (positionInfoData) {
@@ -116,7 +135,7 @@ const ContextProvider: React.FC = ({ children }) => {
   useEffect(() => {
     if (positionSymbolInfoData) {
       const positionsSymbol = normalizePositionsList(positionSymbolInfoData);
-      const updatedPositionList = updatePositionList(
+      const updatedPositionList = updatePositionsList(
         positionsList,
         positionsSymbol
       );
@@ -148,6 +167,7 @@ const ContextProvider: React.FC = ({ children }) => {
       openPositions,
       leverageBrackets,
       getPositionInformation,
+      getPositionSymbolInformation,
       exchangeAccountId,
       symbol
     ]

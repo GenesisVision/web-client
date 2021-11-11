@@ -13,6 +13,7 @@ import React from "react";
 import MarginTableCell from "../../adjust-margin/margin-table-cell";
 import { terminalMoneyFormat } from "../../components/terminal-money-format/terminal-money-format";
 import LiquidationPriceCell from "../../liquidation-price/liquidation-price-cell";
+import { getMarginRatioColor } from "../../margin-ratio/margin-ratio.helpers";
 import TakeProfitStopLossTableCell from "../../take-profit-stop-loss/take-profit-stop-loss-table-cell";
 import { getTextColor } from "../../terminal.helpers";
 import { ClosePosition } from "./close-position/close-position";
@@ -109,7 +110,9 @@ const _PositionsRow: React.FC<Props> = ({
         />
       </StyledTableCell>
       <StyledTableCell>
-        <Text>{marginRatio.toFixed(2)} %</Text>
+        <Text color={getMarginRatioColor(marginRatio)}>
+          {marginRatio.toFixed(2)} %
+        </Text>
       </StyledTableCell>
       <StyledTableCell>
         <MarginTableCell

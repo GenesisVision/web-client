@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { diffDate } from "utils/dates";
 
+const COUNTDOWN_TIME = 8; // hours
+
 interface Props {
   serverTime: number;
   nextFundingTime: Date;
@@ -18,7 +20,12 @@ export const SymbolSummaryCountdown: React.FC<Props> = ({
     const timerId = setInterval(() => {
       setCountdown(prevTime => {
         if (prevTime.valueOf() < 1000) {
-          return prevTime.utc().hour(8).minute(0).second(0).millisecond(0);
+          return prevTime
+            .utc()
+            .hour(COUNTDOWN_TIME)
+            .minute(0)
+            .second(0)
+            .millisecond(0);
         }
         return prevTime.subtract(1, "second");
       });

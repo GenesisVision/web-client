@@ -157,7 +157,7 @@ export const getDepth = (
   tickSize: string = "0.00000001",
   limit: number = 100
 ): Observable<CorrectedRestDepth> => {
-  const dividerParts = getDividerParts(tickSize);
+  const dividerParts = getDividerParts("0.00000001");
   return from(
     api
       .terminal()

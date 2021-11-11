@@ -45,23 +45,23 @@ export const TerminalTickerContextProvider: React.FC = ({ children }) => {
     getMarkPrices,
     markPricesSocket
   } = useContext(TerminalMethodsContext);
-  const [requestData, setRequestData] = useState<{
-    [key: string]: Ticker;
-  }>({});
-  const [markPricesRequestData, setMarkPricesRequestData] = useState<{
-    [key: string]: MarkPrice;
-  }>({});
   const [normalizedSymbols, setNormalizedSymbols] = useState<{
     [key: string]: Symbol;
+  }>({});
+  const [requestData, setRequestData] = useState<{
+    [key: string]: Ticker;
   }>({});
   const [list, setList] = useState<{
     [key: string]: MergedTickerSymbolType;
   }>({});
+  const [socketData, setSocketData] = useState<{
+    [key: string]: Ticker;
+  }>({});
   const [markPricesList, setMarkPricesList] = useState<{
     [key: string]: MarkPrice;
   }>({});
-  const [socketData, setSocketData] = useState<{
-    [key: string]: Ticker;
+  const [markPricesRequestData, setMarkPricesRequestData] = useState<{
+    [key: string]: MarkPrice;
   }>({});
   const [markPricesSocketData, setMarkPricesSocketData] = useState<{
     [key: string]: MarkPrice;
@@ -108,7 +108,6 @@ export const TerminalTickerContextProvider: React.FC = ({ children }) => {
           [key: string]: MergedTickerSymbolType;
         }
       );
-      setMarkPricesList(normalizedSymbols);
       setRequestData({});
       setMarkPricesRequestData({});
     }
@@ -123,14 +122,14 @@ export const TerminalTickerContextProvider: React.FC = ({ children }) => {
     );
     ticketsSocket.subscribe(setSocketData);
 
-    if (!getMarkPrices) {
+    if (!getMarkPrices || !markPricesSocket) {
       return;
     }
     const markPricesRequestData = getMarkPrices().pipe(
       map(normalizeMarkPricesList)
     );
     markPricesRequestData.subscribe(setMarkPricesRequestData);
-    const markSocket = markPricesSocket!(connectSocket).pipe(
+    const markSocket = markPricesSocket(connectSocket).pipe(
       map(normalizeMarkPricesList)
     );
     markSocket.subscribe(setMarkPricesSocketData);
@@ -197,7 +196,7 @@ export const TerminalTickerContextProvider: React.FC = ({ children }) => {
         ? markPrices
         : undefined
     }),
-    [requestData, items, markPrices]
+    [requestData, markPricesRequestData, items, markPrices]
   );
 
   return (

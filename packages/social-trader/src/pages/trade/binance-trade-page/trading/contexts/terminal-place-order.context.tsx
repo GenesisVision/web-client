@@ -16,10 +16,8 @@ import React, {
 } from "react";
 
 import { FuturesPlaceOrderMode } from "../place-order/place-order.types";
-import {
-  flatNormalizedPositions,
-  getSymbolFromState
-} from "../terminal.helpers";
+import { getSymbolFromState } from "../terminal.helpers";
+import { flatNormalizedPositions } from "../terminal-futures.helpers";
 import { TerminalFuturesPositionsContext } from "./terminal-futures-positions.context";
 
 const InitialFuturesTerminalLeverageState = 1;
@@ -55,11 +53,9 @@ const ContextProvider: React.FC = ({ children }) => {
   const [currentPositionMode, setCurrentPositionMode] = useState<
     PositionModeType | undefined
   >();
-
   const [placeOrderMode, setPlaceOrderMode] = useState<FuturesPlaceOrderMode>(
     "OneWay"
   );
-
   const [positionInfo, setPositionInfo] = useState<Position | undefined>();
 
   useEffect(() => {
@@ -74,23 +70,23 @@ const ContextProvider: React.FC = ({ children }) => {
     if (positionInfo) {
       setLeverage(positionInfo.leverage);
     }
-  }, [positionInfo]);
+  }, [positionInfo, symbol]);
 
   useEffect(() => {
     if (positionInfo) {
       setMarginMode(positionInfo.marginType);
     }
-  }, [positionInfo]);
+  }, [positionInfo, symbol]);
 
   useEffect(() => {
     if (positionsList) {
       const flatPositions = flatNormalizedPositions(positionsList).filter(
         pos => pos.symbol === getSymbolFromState(symbol)
       );
-      // if currentMode is hedge, then you have two position for symbol, and you can choose any position, because leverage and marginType will be the same
+      // if currentMode is hedge, then you have two position for symbol. You can choose any position, because leverage and marginType will be the same
       setPositionInfo(flatPositions[0]);
     }
-  }, [positionsList]);
+  }, [positionsList, symbol]);
 
   useEffect(() => {
     if (getPositionMode && exchangeAccountId)

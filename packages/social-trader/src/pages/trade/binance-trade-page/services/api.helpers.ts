@@ -74,48 +74,6 @@ export const transformToUnitedOrder = ({
   quantity
 });
 
-export const transformFuturesOrder = ({
-  status,
-  orderId,
-  createdTime,
-  symbol,
-  type,
-  side,
-  stopPrice,
-  price,
-  positionSide,
-  quantity,
-  quantityFilled,
-  reduceOnly,
-  workingType,
-  closePosition,
-  activatePrice,
-  avgPrice,
-  callbackRate,
-  originalType,
-  timeInForce
-}: BinanceRawFuturesOrder): FuturesOrder => ({
-  activatePrice,
-  averagePrice: avgPrice,
-  callbackRate,
-  originalType: originalType as FuturesOrderType,
-  timeInForce,
-  positionSide,
-  closePosition,
-  quantityFilled,
-  workingType,
-  reduceOnly,
-  orderStatus: status as FuturesOrderStatus,
-  time: createdTime,
-  symbol,
-  type: type as FuturesOrderType,
-  side,
-  quantity,
-  stopPrice,
-  price,
-  id: orderId
-});
-
 export const getPriceWithCorrectFrac = (
   price: string,
   correctFracLength: number = 8
