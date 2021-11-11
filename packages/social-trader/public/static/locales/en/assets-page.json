@@ -53,6 +53,6 @@
     "fee": "Fee",
     "success-buy": "Buy request is confirmed",
     "success-sell": "Sell request is confirmed",
-    "tooltip": "The funds will be converted according to the current market price (via market order on Binance)."
+    "tooltip": "The funds will be converted according to the current market price (via market order)."
   }
 }
