@@ -114,7 +114,7 @@ const _StopLimitTradeFuturesForm: React.FC<IStopLimitTradeFormProps> = ({
     reduceOnly
   });
 
-  const handleSubmit = values => {
+  const handleSubmit = (values: any) => {
     return onSubmit({ ...values, percentMode, sliderBuy, sliderSell });
   };
 
