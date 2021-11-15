@@ -7,7 +7,7 @@ import { AnyObjectType } from "utils/types";
 
 export const normalizeOpenOrdersList = (list: SpotOrder[] | FuturesOrder[]) => {
   const initObject: AnyObjectType = {};
-  list.forEach(item => (initObject[item.id] = item));
+  list.forEach((item: any) => (initObject[item.id] = item));
   return initObject;
 };
 

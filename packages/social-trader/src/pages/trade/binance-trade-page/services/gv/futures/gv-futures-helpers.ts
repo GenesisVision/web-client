@@ -1,5 +1,4 @@
 import {
-  BinanceRawFuturesAccountAsset,
   BinanceRawFuturesAccountInfo,
   BinanceRawFuturesBracket,
   BinanceRawFuturesOrder,
@@ -7,7 +6,6 @@ import {
 } from "gv-api-web";
 import {
   Account,
-  ExtentedBinanceRawBinanceBalance,
   FuturesOrder,
   FuturesOrderStatus,
   FuturesOrderType,
