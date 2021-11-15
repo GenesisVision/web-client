@@ -1,16 +1,17 @@
 import useApiRequest from "hooks/api-request.hook";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import { filterOrderEventsStream } from "pages/trade/binance-trade-page/trading/terminal.helpers";
-import { UnitedOrder } from "pages/trade/binance-trade-page/trading/terminal.types";
+import { SpotOrder } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 
 import { TerminalMethodsContext } from "../../contexts/terminal-methods.context";
+import { withTradingTable } from "../with-trading-table";
 import { TransactionHistory } from "./transaction-history";
 
-export const TransactionHistoryContainer: React.FC = () => {
+const TransactionHistoryContainer: React.FC = () => {
   // const { exchangeAccountId, $userStream } = useContext(TerminalInfoContext);
 
-  // const [socketData, setSocketData] = useState<UnitedOrder[] | undefined>();
+  // const [socketData, setSocketData] = useState<SpotOrder[] | undefined>();
 
   // useEffect(() => {
   //   if (!exchangeAccountId || !$userStream) return;
@@ -40,3 +41,5 @@ export const TransactionHistoryContainer: React.FC = () => {
 
   return <TransactionHistory items={transactions} />;
 };
+
+export default withTradingTable(TransactionHistoryContainer);

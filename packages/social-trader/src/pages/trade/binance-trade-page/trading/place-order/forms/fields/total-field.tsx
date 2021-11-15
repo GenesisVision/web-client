@@ -21,11 +21,8 @@ const _TotalField: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   const {
-    symbol: { quoteAsset },
-    terminalType
+    symbol: { quoteAsset }
   } = useContext(TerminalInfoContext);
-
-  const isFutures = terminalType === "futures";
 
   return (
     <HookFormAmountField
@@ -33,14 +30,14 @@ const _TotalField: React.FC<Props> = ({
       externalDirty={true}
       autoFocus={false}
       isAllowed={isAllow("BTC")}
-      label={isFutures ? t("Cost") : label}
+      label={label}
       currency={quoteAsset}
       name={SPOT_TRADE_FORM_FIELDS.total}
       triggerRules={max}
       rules={minMaxNumberRules({
         t,
         max,
-        min: isFutures ? undefined : min
+        min
       })}
     />
   );

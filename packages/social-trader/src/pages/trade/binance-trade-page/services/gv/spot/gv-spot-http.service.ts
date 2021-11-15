@@ -10,14 +10,15 @@ import {
 } from "gv-api-web";
 import { Bar } from "pages/trade/binance-trade-page/trading/chart/charting_library/datafeed-api";
 import { getDividerParts } from "pages/trade/binance-trade-page/trading/order-book/order-book.helpers";
+import { DEFAULT_TICKSIZE } from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import {
   CorrectedRestDepth,
   ExchangeInfo,
   KlineParams,
   OrderSide,
+  SpotOrder,
   Ticker,
   TradeRequest,
-  UnitedOrder,
   UnitedTrade
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { from, Observable } from "rxjs";
@@ -67,17 +68,14 @@ export const getServerTime = () => {
   return api.terminal().getExchangeTime();
 };
 
-export const getOpenOrders = (
-  symbol: string,
-  accountId?: string
-): Observable<UnitedOrder[]> =>
+export const getOpenOrders = (accountId: string): Observable<SpotOrder[]> =>
   from(
     api
       .terminal()
       .getOpenOrders({ accountId })
       .then(({ items }: BinanceRawOrderItemsViewModel) =>
         items.map(transformToUnitedOrder)
-      ) as Promise<UnitedOrder[]>
+      ) as Promise<SpotOrder[]>
   );
 
 export const getAllTrades = (filters: {
@@ -88,7 +86,7 @@ export const getAllTrades = (filters: {
   symbol?: string;
   skip?: number;
   take?: number;
-}): Promise<TableDataType<UnitedOrder>> =>
+}): Promise<TableDataType<SpotOrder>> =>
   api
     .terminal()
     .getTradesHistory({ ...filters, mode: "TradeHistory" })
@@ -105,7 +103,7 @@ export const getAllOrders = (filters: {
   symbol?: string;
   skip?: number;
   take?: number;
-}): Promise<TableDataType<UnitedOrder>> =>
+}): Promise<TableDataType<SpotOrder>> =>
   api
     .terminal()
     .getTradesHistory({ ...filters, mode: "OrderHistory" })
@@ -140,12 +138,15 @@ export const getTrades = (
       .terminal()
       .getSymbolRecentTrades(symbol, { limit })
       .then((items: Array<BinanceRawRecentTrade>) =>
-        items.map(({ orderId, price, baseQuantity, tradeTime }) => ({
-          quantity: baseQuantity,
-          price,
-          orderId,
-          tradeTime
-        }))
+        items.map(
+          ({ orderId, price, baseQuantity, tradeTime, buyerIsMaker }) => ({
+            quantity: baseQuantity,
+            price,
+            orderId,
+            tradeTime,
+            buyerIsMaker
+          })
+        )
       ) as Promise<UnitedTrade[]>
   );
 
@@ -157,7 +158,8 @@ export const getDepth = (
   tickSize: string = "0.00000001",
   limit: number = 100
 ): Observable<CorrectedRestDepth> => {
-  const dividerParts = getDividerParts("0.00000001");
+  const dividerParts = getDividerParts(DEFAULT_TICKSIZE);
+
   return from(
     api
       .terminal()
@@ -172,7 +174,7 @@ export const getDepth = (
 
 export const cancelAllOrders = (
   { symbol }: { symbol?: string; useServerTime?: boolean },
-  accountId?: string
+  accountId: string
 ): Promise<BinanceRawCancelOrderId[]> =>
   api.terminal().cancelAllOrders({ symbol, accountId });
 
@@ -181,7 +183,7 @@ export const cancelOrder = (
     symbol,
     orderId
   }: { orderId: string; symbol: string; useServerTime?: boolean },
-  accountId?: string
+  accountId: string
 ): Promise<BinanceRawCancelOrder> =>
   api.terminal().cancelOrder({ orderId, symbol, accountId });
 

@@ -10,12 +10,12 @@ import {
 } from "pages/trade/binance-trade-page/trading/trading-tables/positions/positions.styles";
 import React from "react";
 
-import MarginTableCell from "../../adjust-margin/margin-table-cell";
+import LiquidationPriceCell from "../../components/liquidation-price/liquidation-price-cell";
 import { terminalMoneyFormat } from "../../components/terminal-money-format/terminal-money-format";
-import LiquidationPriceCell from "../../liquidation-price/liquidation-price-cell";
 import { getMarginRatioColor } from "../../margin-ratio/margin-ratio.helpers";
-import TakeProfitStopLossTableCell from "../../take-profit-stop-loss/take-profit-stop-loss-table-cell";
 import { getTextColor } from "../../terminal.helpers";
+import MarginTableCell from "../adjust-margin/margin-table-cell";
+import TakeProfitStopLossTableCell from "../take-profit-stop-loss/take-profit-stop-loss-table-cell";
 import { ClosePosition } from "./close-position/close-position";
 import { USDTtickSize } from "./positions.helpers";
 

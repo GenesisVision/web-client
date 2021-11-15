@@ -11,9 +11,9 @@ import useTab from "hooks/tab.hook";
 import React, { useContext } from "react";
 import { postponeCallback } from "utils/hook-form.helpers";
 
-import { TerminalFuturesBalanceContext } from "../contexts/terminal-futures-balance.context";
-import { TerminalInfoContext } from "../contexts/terminal-info.context";
-import { TerminalMethodsContext } from "../contexts/terminal-methods.context";
+import { TerminalFuturesBalanceContext } from "../../contexts/terminal-futures-balance.context";
+import { TerminalInfoContext } from "../../contexts/terminal-info.context";
+import { TerminalMethodsContext } from "../../contexts/terminal-methods.context";
 import AddMarginForm from "./add-margin-form";
 import {
   ADJUST_MARGIN_FORM_FIELDS,

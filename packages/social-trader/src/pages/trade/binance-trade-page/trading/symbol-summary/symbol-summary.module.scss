@@ -1,4 +1,7 @@
 .symbol-summary {
+  &__wrapper {
+    overflow-x: auto;
+  }
   &__type-switcher {
     width: 100%;
     min-width: 130px;

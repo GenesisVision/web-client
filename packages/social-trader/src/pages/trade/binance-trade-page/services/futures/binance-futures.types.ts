@@ -1,12 +1,10 @@
 import { BinanceFuturesMarginType, BinancePositionSide } from "gv-api-web";
 import {
-  EventType,
   FuturesOrder,
   FuturesPosition,
   MarginModeType,
   OrderSide,
   OrderType,
-  PositionSideType,
   TerminalCurrency,
   TimeInForce
 } from "pages/trade/binance-trade-page/trading/terminal.types";
@@ -94,7 +92,7 @@ export interface FuturesAccountEventPosition {
 
 export interface FuturesAccountEventBalance {
   asset: TerminalCurrency; // Asset
-  //field: Balance Change except PnL and Commission
+  // balanceChange: Balance Change except PnL and Commission
   walletBalance: number; // Wallet Balance
   crossWalletBalance: number; // Cross Wallet Balance
 }

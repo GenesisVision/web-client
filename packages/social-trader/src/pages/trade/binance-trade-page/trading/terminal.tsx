@@ -57,10 +57,10 @@ const _Terminal: React.FC<Props> = ({
             <ResponsiveContainer
               enabledScreens={["tablet", "landscape-tablet"]}
             >
-              {/* <SymbolSummarySmallBlock /> */}
+              <SymbolSummarySmallBlock />
             </ResponsiveContainer>
             <ResponsiveContainer enabledScreens={["phone", "landscape-phone"]}>
-              {/* <SymbolSummaryContainer /> */}
+              <SymbolSummaryContainer />
             </ResponsiveContainer>
           </div>
           <div className={styles["market-watch-grid-elem"]}>
@@ -74,7 +74,7 @@ const _Terminal: React.FC<Props> = ({
                 <ResponsiveContainer
                   enabledScreens={["phone", "landscape-phone"]}
                 >
-                  {/* <TerminalMobileChartBlock /> */}
+                  <TerminalMobileChartBlock />
                 </ResponsiveContainer>
                 <ResponsiveContainer
                   enabledScreens={[
@@ -84,7 +84,7 @@ const _Terminal: React.FC<Props> = ({
                     "large-desktop"
                   ]}
                 >
-                  {/* <ChartBlock /> */}
+                  <ChartBlock />
                 </ResponsiveContainer>
               </div>
               <div className={styles["trades-grid-elem"]}>
@@ -96,7 +96,7 @@ const _Terminal: React.FC<Props> = ({
                     "large-desktop"
                   ]}
                 >
-                  {/* <TradesBlock /> */}
+                  <TradesBlock />
                 </ResponsiveContainer>
               </div>
               <div className={styles["order-book-grid-elem"]}>
@@ -108,7 +108,7 @@ const _Terminal: React.FC<Props> = ({
                     "large-desktop"
                   ]}
                 >
-                  {/* <OrderBookBlock /> */}
+                  <OrderBookBlock />
                 </ResponsiveContainer>
               </div>
               <TerminalFuturesPositionsContextProvider>

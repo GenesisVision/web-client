@@ -1,12 +1,10 @@
 import { SortingColumn } from "components/table/components/filtering/filter.type";
 import {
   Depth,
-  FuturesOrder,
   NormalizedDepth,
   NormalizedDepthList,
   StringBidDepth,
-  TerminalType,
-  UnitedOrder
+  TerminalType
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { formatValue } from "utils/formatter";
 import { AnyObjectType } from "utils/types";
@@ -219,7 +217,7 @@ export const countOrderBookFuturesSum = (
 };
 
 export const getOrderBookLimitOrders = (
-  // openOrders?: UnitedOrder[] | FuturesOrder[],
+  // openOrders?: SpotOrder[] | FuturesOrder[],
   symbol: string,
   openOrders: any[],
   reverse?: boolean

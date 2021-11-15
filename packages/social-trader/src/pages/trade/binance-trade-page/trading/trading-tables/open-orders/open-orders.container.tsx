@@ -2,17 +2,20 @@ import { TerminalOpenOrdersContext } from "pages/trade/binance-trade-page/tradin
 import React, { useContext } from "react";
 
 import { TerminalInfoContext } from "../../contexts/terminal-info.context";
-import { FuturesOrder, UnitedOrder } from "../../terminal.types";
+import { FuturesOrder, SpotOrder } from "../../terminal.types";
+import { withTradingTable } from "../with-trading-table";
 import { OpenOrdersFutures } from "./open-orders-futures";
 import { OpenOrdersSpot } from "./open-orders-spot";
 
-export const OpenOrdersContainer: React.FC = () => {
+const OpenOrdersContainer: React.FC = () => {
   const { openOrders } = useContext(TerminalOpenOrdersContext);
   const { terminalType } = useContext(TerminalInfoContext);
 
   return terminalType === "futures" ? (
     <OpenOrdersFutures items={openOrders as FuturesOrder[]} />
   ) : (
-    <OpenOrdersSpot items={openOrders as UnitedOrder[]} />
+    <OpenOrdersSpot items={openOrders as SpotOrder[]} />
   );
 };
+
+export default withTradingTable(OpenOrdersContainer);

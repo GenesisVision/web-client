@@ -4,8 +4,8 @@ import { RowItem } from "components/row-item/row-item";
 import { BinanceFuturesMarginType, BinancePositionSide } from "gv-api-web";
 import React from "react";
 
-import { terminalMoneyFormat } from "../components/terminal-money-format/terminal-money-format";
-import { USDTtickSize } from "../trading-tables/positions/positions.helpers";
+import { terminalMoneyFormat } from "../../components/terminal-money-format/terminal-money-format";
+import { USDTtickSize } from "../positions/positions.helpers";
 import AdjustMargin from "./adjust-margin";
 
 interface Props {

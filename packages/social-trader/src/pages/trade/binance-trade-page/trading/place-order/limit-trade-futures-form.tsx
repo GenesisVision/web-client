@@ -103,7 +103,7 @@ const _LimitTradeFuturesForm: React.FC<ILimitTradeFormProps> = ({
     reduceOnly
   });
 
-  const handleSubmit = values => {
+  const handleSubmit = (values: any) => {
     return onSubmit({ ...values, percentMode, sliderBuy, sliderSell });
   };
 

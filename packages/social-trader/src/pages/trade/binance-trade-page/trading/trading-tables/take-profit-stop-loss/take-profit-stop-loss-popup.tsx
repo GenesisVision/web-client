@@ -3,13 +3,13 @@ import useApiRequest from "hooks/api-request.hook";
 import React, { useContext } from "react";
 import { postponeCallback } from "utils/hook-form.helpers";
 
-import { TerminalInfoContext } from "../contexts/terminal-info.context";
-import { TerminalMethodsContext } from "../contexts/terminal-methods.context";
+import { TerminalInfoContext } from "../../contexts/terminal-info.context";
+import { TerminalMethodsContext } from "../../contexts/terminal-methods.context";
 import {
   getFilterValues,
   mapPlaceOrderErrors
-} from "../place-order/place-order.helpers";
-import { FuturesOrder } from "../terminal.types";
+} from "../../place-order/place-order.helpers";
+import { FuturesOrder } from "../../terminal.types";
 import TakeProfitStopLossForm, {
   ITakeProfitStopLossFormValues,
   TAKE_PROFIT_STOP_LOSS_FORM_FIELDS

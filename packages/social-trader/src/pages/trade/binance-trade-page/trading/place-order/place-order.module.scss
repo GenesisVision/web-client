@@ -8,5 +8,9 @@
       background: white;
       color: black;
     }
+
+    &:disabled {
+      pointer-events: none;
+    }
   }
 }

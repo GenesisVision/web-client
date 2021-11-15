@@ -2,17 +2,17 @@ import { DefaultBlock } from "components/default.block/default.block";
 import GVTabs from "components/gv-tabs";
 import GVTab from "components/gv-tabs/gv-tab";
 import useTab from "hooks/tab.hook";
-import { OpenOrdersContainer } from "pages/trade/binance-trade-page/trading/trading-tables/open-orders/open-orders.container";
-import { OrderHistoryContainer } from "pages/trade/binance-trade-page/trading/trading-tables/order-history/order-history.container";
-import { PositionsContainer } from "pages/trade/binance-trade-page/trading/trading-tables/positions/positions.container";
-import { TradeHistoryContainer } from "pages/trade/binance-trade-page/trading/trading-tables/trade-history/trade-history.container";
+import OpenOrdersContainer from "pages/trade/binance-trade-page/trading/trading-tables/open-orders/open-orders.container";
+import OrderHistoryContainer from "pages/trade/binance-trade-page/trading/trading-tables/order-history/order-history.container";
+import PositionsContainer from "pages/trade/binance-trade-page/trading/trading-tables/positions/positions.container";
+import TradeHistoryContainer from "pages/trade/binance-trade-page/trading/trading-tables/trade-history/trade-history.container";
 import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 
 import { TerminalFuturesPositionsContext } from "../contexts/terminal-futures-positions.context";
 import { TerminalOpenOrdersContext } from "../contexts/terminal-open-orders.context";
 import styles from "./trading-tables.module.scss";
-import { TransactionHistoryContainer } from "./transaction-history/transaction-history.container";
+import TransactionHistoryContainer from "./transaction-history/transaction-history.container";
 
 enum TABS {
   POSITIONS = "POSITIONS",

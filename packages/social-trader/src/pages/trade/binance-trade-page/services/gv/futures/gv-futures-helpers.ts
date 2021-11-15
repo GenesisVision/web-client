@@ -34,8 +34,14 @@ export const transformFuturesOrder = ({
   avgPrice,
   callbackRate,
   originalType,
-  timeInForce
+  timeInForce,
+  commission,
+  commissionAsset,
+  realizedProfit
 }: BinanceRawFuturesOrder): FuturesOrder => ({
+  commission,
+  commissionAsset,
+  realizedProfit,
   activatePrice,
   averagePrice: avgPrice,
   callbackRate,
@@ -62,8 +68,7 @@ export const mapBinanceRawFuturesAccountInfoToAccount = ({
   canTrade,
   canWithdraw,
   updateTime,
-  assets,
-  positions
+  assets
 }: BinanceRawFuturesAccountInfo): Account => ({
   makerCommission: 0,
   takerCommission: 0,
@@ -75,27 +80,27 @@ export const mapBinanceRawFuturesAccountInfoToAccount = ({
   updateTime,
   accountType: "Futures",
   permissions: ["Futures"],
-  balances: assets,
+  balances: assets as any
   // balances: assets.map(
   //   mapBinanceRawFuturesAccountAssetToBinanceRawBinanceBalance
   // ),
-  positions
 });
 
-export const mapBinanceRawFuturesAccountAssetToBinanceRawBinanceBalance = ({
-  asset,
-  availableBalance,
-  maintMargin,
-  marginBalance
-}: BinanceRawFuturesAccountAsset): ExtentedBinanceRawBinanceBalance => ({
-  asset,
-  free: availableBalance,
-  locked: 0,
-  total: 0,
-  amountInCurrency: 0,
-  maintMargin,
-  marginBalance
-});
+// unusable
+// export const mapBinanceRawFuturesAccountAssetToBinanceRawBinanceBalance = ({
+//   asset,
+//   availableBalance,
+//   maintMargin,
+//   marginBalance
+// }: BinanceRawFuturesAccountAsset): ExtentedBinanceRawBinanceBalance => ({
+//   asset,
+//   free: availableBalance,
+//   locked: 0,
+//   total: 0,
+//   amountInCurrency: 0,
+//   maintMargin,
+//   marginBalance
+// });
 
 export const mapBinanceRawFuturesSymbolBracketToSymbolLeverageBrackets = ({
   symbol,

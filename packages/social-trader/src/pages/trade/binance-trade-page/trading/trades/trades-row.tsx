@@ -1,6 +1,5 @@
 import { Text } from "components/text/text";
 import { terminalMoneyFormat } from "pages/trade/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
-import { getTextColor } from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import React from "react";
 import NumberFormat from "react-number-format";
 import { formatTime } from "utils/dates";
@@ -8,7 +7,7 @@ import { formatTime } from "utils/dates";
 interface Props {
   stepSize?: string;
   tickSize?: string;
-  prevPrice?: number;
+  buyerIsMaker: boolean;
   price: number;
   amount: number;
   time: number | Date;
@@ -17,10 +16,10 @@ interface Props {
 const _TradesRow: React.FC<Props> = ({
   stepSize,
   tickSize,
-  prevPrice,
   price,
   amount,
-  time
+  time,
+  buyerIsMaker
 }) => {
   const formattedPrice = terminalMoneyFormat({
     amount: price,
@@ -33,10 +32,7 @@ const _TradesRow: React.FC<Props> = ({
   return (
     <tr>
       <td>
-        <Text
-          size={"xsmall"}
-          color={getTextColor(+price - +(prevPrice ? prevPrice : price))}
-        >
+        <Text size={"xsmall"} color={buyerIsMaker ? "red" : "green"}>
           <NumberFormat
             displayType="text"
             thousandSeparator={","}

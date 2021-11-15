@@ -12,12 +12,12 @@ import {
   CancelOrderResult,
   ChangeLeverageResponse,
   ExchangeInfo,
-  FuturesPositionInformation,
   HttpResponse,
   KlineParams,
   MarginModeType,
   MarkPrice,
   OrderSide,
+  Position,
   PositionModeResponse,
   PositionModeType,
   QueryOrderResult,
@@ -167,7 +167,7 @@ export const getPositionInformation = ({
   authData
 }: {
   authData: TerminalAuthDataType;
-}): Observable<FuturesPositionInformation[]> =>
+}): Observable<Position[]> =>
   requestService.get({
     ...authData,
     url: `${API_ROUTE}/positionRisk`,

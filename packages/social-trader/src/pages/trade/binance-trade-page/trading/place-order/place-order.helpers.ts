@@ -11,14 +11,11 @@ import {
   ExchangeInfo,
   OrderSide,
   OrderType,
-  PositionModeType,
   PositionSideType,
   TerminalCurrency,
   TerminalType
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { safeGetElemFromArray, tableLoaderCreator } from "utils/helpers";
-
-import { FuturesPositionInformation } from "./../terminal.types";
 
 export const mapPlaceOrderErrors = (error: string) => {
   switch (error) {
@@ -200,16 +197,6 @@ export const getPositionSide = ({
       return "Short";
     }
   }
-};
-
-export const getPositionInfo = (
-  data: FuturesPositionInformation[],
-  positionSide?: PositionSideType
-): FuturesPositionInformation => {
-  return safeGetElemFromArray(
-    data,
-    item => item.positionSide.toUpperCase() === positionSide
-  );
 };
 
 export const getFuturesQuantityValue = ({

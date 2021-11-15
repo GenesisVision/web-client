@@ -17,11 +17,11 @@ import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
 import { noRequiredMinMaxNumberRules } from "utils/validators/validators";
 
-import { terminalMoneyFormat } from "../components/terminal-money-format/terminal-money-format";
-import { FilterValues } from "../place-order/place-order.types";
-import { getDecimalScale, getTextColor } from "../terminal.helpers";
-import { FuturesOrder } from "../terminal.types";
-import { calculateRealizedPNL } from "../trading-tables/positions/positions.helpers";
+import { terminalMoneyFormat } from "../../components/terminal-money-format/terminal-money-format";
+import { FilterValues } from "../../place-order/place-order.types";
+import { getDecimalScale, getTextColor } from "../../terminal.helpers";
+import { FuturesOrder } from "../../terminal.types";
+import { calculateRealizedPNL } from "../positions/positions.helpers";
 import TakeProfitStopLossOrderRow from "./take-profit-stop-loss-order-row";
 import { WORKING_MARK_VALUE, WorkingTypeSelect } from "./working-type-select";
 

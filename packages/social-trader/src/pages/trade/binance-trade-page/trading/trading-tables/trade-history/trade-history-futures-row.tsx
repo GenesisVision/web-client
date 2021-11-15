@@ -33,7 +33,10 @@ const _TradeHistoryFuturesRow: React.FC<FuturesOrder> = ({
   symbol,
   time,
   price,
-  quantity
+  quantity,
+  commission,
+  commissionAsset,
+  realizedProfit
 }) => {
   const { items } = useContext(TerminalTickerContext);
   const [t] = useTranslation();
@@ -64,18 +67,13 @@ const _TradeHistoryFuturesRow: React.FC<FuturesOrder> = ({
         })} ${symbolData!.baseAsset}`}
       </TableCell>
       <TableCell>
-        {/* {commission &&
-          commissionAsset &&
-          formatValue(commission, DEFAULT_DECIMAL_SCALE)}{" "}
-        {commissionAsset} */}
-        TODO!
+        {formatValue(commission, DEFAULT_DECIMAL_SCALE)} {commissionAsset}
       </TableCell>
       <TableCell>
-        {/* {`${terminalMoneyFormat({
-          amount: total,
+        {`${terminalMoneyFormat({
+          amount: realizedProfit!,
           tickSize: String(tickSize)
-        })} ${symbolData?.quoteAsset}`} */}
-        TODO!
+        })} ${symbolData?.quoteAsset}`}
       </TableCell>
     </TableRow>
   );

@@ -15,12 +15,12 @@ import { minMaxNumberRules } from "utils/validators/validators";
 import {
   terminalMoneyFormat,
   truncated
-} from "../components/terminal-money-format/terminal-money-format";
-import { getDecimalScale } from "../terminal.helpers";
+} from "../../components/terminal-money-format/terminal-money-format";
+import { getDecimalScale } from "../../terminal.helpers";
 import {
   calculateIsolatedLiqPrice,
   USDTtickSize
-} from "../trading-tables/positions/positions.helpers";
+} from "../positions/positions.helpers";
 import {
   ADJUST_MARGIN_FORM_FIELDS,
   IAdjustMarginDefaultFormValues

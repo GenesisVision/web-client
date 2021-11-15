@@ -14,6 +14,8 @@ import React, {
 } from "react";
 import { useSockets } from "services/websocket.service";
 
+const TRADE_LIST_SIZE = 50;
+
 type TradingPriceState = {
   trades: UnitedTrade[];
   setPrice: (price: string) => void;
@@ -37,7 +39,6 @@ export const TradingPriceContext = createContext<TradingPriceState>(
 );
 
 export const TradingPriceContextProvider: React.FC = ({ children }) => {
-  const TRADE_LIST_SIZE = 50;
   const { tradeSocket, getTrades } = useContext(TerminalMethodsContext);
   const {
     tickSize,

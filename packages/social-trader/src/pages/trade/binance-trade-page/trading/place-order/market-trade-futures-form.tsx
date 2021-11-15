@@ -88,7 +88,7 @@ const _MarketTradeFuturesForm: React.FC<IMarketTradeFormProps> = ({
     percentMode
   });
 
-  const handleSubmit = values => {
+  const handleSubmit = (values: any) => {
     return onSubmit({ ...values, percentMode, sliderBuy, sliderSell });
   };
 

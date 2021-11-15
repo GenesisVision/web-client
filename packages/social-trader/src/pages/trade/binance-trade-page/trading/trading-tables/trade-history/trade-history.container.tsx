@@ -2,33 +2,36 @@ import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/cont
 import { filterOrderEventsStream } from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import {
   FuturesOrder,
-  UnitedOrder
+  SpotOrder
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useContext, useEffect, useState } from "react";
 
+import { withTradingTable } from "../with-trading-table";
 import { TradeHistoryFutures } from "./trade-history-futures";
 import { TradeHistorySpot } from "./trade-history-spot";
 
-export const TradeHistoryContainer: React.FC = () => {
+const TradeHistoryContainer: React.FC = () => {
   const { exchangeAccountId, $userStream, terminalType } = useContext(
     TerminalInfoContext
   );
 
   const [socketData, setSocketData] = useState<
-    UnitedOrder[] | FuturesOrder[] | undefined
+    SpotOrder[] | FuturesOrder[] | undefined
   >();
 
   useEffect(() => {
     if (!exchangeAccountId || !$userStream) return;
     const openOrdersStream = filterOrderEventsStream($userStream);
     openOrdersStream.subscribe(data => {
-      setSocketData([data]);
+      setSocketData([data as any]);
     });
   }, [exchangeAccountId, $userStream]);
 
   return terminalType === "futures" ? (
-    <TradeHistoryFutures updates={socketData} />
+    <TradeHistoryFutures updates={socketData as FuturesOrder[]} />
   ) : (
-    <TradeHistorySpot updates={socketData} />
+    <TradeHistorySpot updates={socketData as SpotOrder[]} />
   );
 };
+
+export default withTradingTable(TradeHistoryContainer);

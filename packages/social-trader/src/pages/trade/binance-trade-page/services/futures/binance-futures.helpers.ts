@@ -1,9 +1,7 @@
 import {
   BinanceExecutionType,
-  BinanceFuturesMarginType,
   BinanceOrderSide,
-  BinancePositionSide,
-  BinanceWorkingType
+  BinancePositionSide
 } from "gv-api-web";
 import {
   FUTURES_ACCOUNT_EVENT,
@@ -14,7 +12,6 @@ import {
   FuturesMarginCallEvent,
   FuturesMarginCallEventPosition,
   FuturesTickerSymbol,
-  FuturesTradeOrder,
   FuturesTradeOrderUpdateEvent
 } from "pages/trade/binance-trade-page/services/futures/binance-futures.types";
 import {
@@ -188,6 +185,9 @@ export const futuresEventTradeOrderTransform = (
   socketData: any
 ): FuturesOrder => {
   return {
+    commission: +socketData.n,
+    commissionAsset: socketData.N,
+    realizedProfit: +socketData.rp,
     executionType: convertBinanceTypeIntoGV(
       socketData.x
     ) as BinanceExecutionType,
@@ -223,7 +223,7 @@ export const futuresMarginCallEventTransform = (
   return {
     eventType: socketData.e,
     eventTime: socketData.E,
-    crossWalletBalance: socketData?.cw,
+    crossWalletBalance: socketData.cw,
     positions: (socketData.p || []).map(futuresMarginCallEventPositionTransform)
   };
 };

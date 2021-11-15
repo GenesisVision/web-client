@@ -10,10 +10,9 @@ import {
   ExchangeInfo,
   FuturesOrder,
   MergedTickerSymbolType,
+  SpotOrder,
   SymbolState,
-  TerminalCurrency,
-  TerminalType,
-  UnitedOrder
+  TerminalCurrency
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import qs from "qs";
 import { useCallback } from "react";
@@ -29,6 +28,8 @@ import { FUTURES_ACCOUNT_EVENT } from "../services/futures/binance-futures.types
 
 export const TERMINAL_ROUTE_SYMBOL_SEPARATOR = "_";
 
+export const DEFAULT_TICKSIZE = "0.00000001";
+
 export const DEFAULT_SYMBOL: SymbolState = {
   baseAsset: "BTC",
   quoteAsset: "USDT"
@@ -38,7 +39,7 @@ export const setUpperFirstLetter = ([firstLetter, ...rest]: string = "") =>
   firstLetter.toUpperCase() + rest.join("").toLowerCase();
 
 export const generateSpotOrderMessage = (
-  order: UnitedOrder,
+  order: SpotOrder,
   symbol: MergedTickerSymbolType
 ): string => {
   const { stepSize } = symbol.lotSizeFilter;
@@ -173,7 +174,7 @@ export const filterOutboundAccountInfoStream = (
 
 export const filterOrderEventsStream = (
   $userStream: Observable<any>
-): Observable<UnitedOrder | FuturesOrder> =>
+): Observable<SpotOrder | FuturesOrder> =>
   $userStream.pipe(
     filter(
       info =>
@@ -192,42 +193,26 @@ const normalizeBalanceList = (
 
 const updateBalancesList = (
   list: AnyObjectType,
-  updates: AnyObjectType,
-  terminalType: TerminalType
+  updates: AnyObjectType
 ): AnyObjectType => {
   const updatedList = { ...list };
   Object.entries(updates).forEach(([symbol, data]) => {
-    if (terminalType === "futures") {
-      updatedList[symbol] = {
-        ...updatedList[symbol],
-        ...data
-      };
-    } else {
-      updatedList[symbol] = {
-        ...updatedList[symbol],
-        ...data,
-        newAmountInCurrency: updatedList[symbol]?.newAmountInCurrency
-      };
-    }
+    updatedList[symbol] = {
+      ...updatedList[symbol],
+      ...data,
+      newAmountInCurrency: updatedList[symbol]?.newAmountInCurrency
+    };
   });
   return updatedList;
 };
 
-export const updateAccountInfo = (
-  currentData: Account,
-  updates: Account,
-  terminalType: TerminalType
-) => {
+export const updateAccountInfo = (currentData: Account, updates: Account) => {
   const normalizedCurrentBalances = normalizeBalanceList(currentData.balances);
   const normalizedUpdatesBalances = normalizeBalanceList(
     updates.balances || []
   );
   const balances = Object.values(
-    updateBalancesList(
-      normalizedCurrentBalances,
-      normalizedUpdatesBalances,
-      terminalType
-    )
+    updateBalancesList(normalizedCurrentBalances, normalizedUpdatesBalances)
   );
 
   return { ...currentData, ...updates, balances };

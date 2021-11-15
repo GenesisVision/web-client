@@ -6,10 +6,10 @@ import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 
-import { TerminalInfoContext } from "../contexts/terminal-info.context";
-import { TerminalMethodsContext } from "../contexts/terminal-methods.context";
-import { FuturesOrder } from "../terminal.types";
-import { getFuturesTriggerConditionsLabel } from "../terminal-futures.helpers";
+import { TerminalInfoContext } from "../../contexts/terminal-info.context";
+import { TerminalMethodsContext } from "../../contexts/terminal-methods.context";
+import { FuturesOrder } from "../../terminal.types";
+import { getFuturesTriggerConditionsLabel } from "../../terminal-futures.helpers";
 
 const LastRowItem = styled(RowItem)`
   margin-left: auto;

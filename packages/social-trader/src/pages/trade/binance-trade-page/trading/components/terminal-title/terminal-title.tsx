@@ -24,7 +24,7 @@ const useTerminalTitle = ({
   const [title, setTitle] = useState(defaultTitle);
 
   useEffect(() => {
-    if (trigger) {
+    if (trigger && amount > 0) {
       setTitle(
         `${terminalMoneyFormat({
           amount,
@@ -32,7 +32,7 @@ const useTerminalTitle = ({
         })} | ${symbol.baseAsset}${symbol.quoteAsset} | ${appTitle}`
       );
     }
-  }, [symbol, trigger]);
+  }, [symbol, trigger, amount]);
 
   return title;
 };

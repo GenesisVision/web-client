@@ -4,7 +4,7 @@ import { DEFAULT_PAGING } from "components/table/reducers/table-paging.reducer";
 import { Text } from "components/text/text";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-methods.context";
-import { UnitedOrder } from "pages/trade/binance-trade-page/trading/terminal.types";
+import { SpotOrder } from "pages/trade/binance-trade-page/trading/terminal.types";
 import {
   ORDER_HISTORY_TABLE_COLUMNS,
   updateOrderHistoryData
@@ -18,7 +18,7 @@ import { isAuthenticatedSelector } from "reducers/auth-reducer";
 import styles from "./order-history.module.scss";
 
 interface Props {
-  updates?: UnitedOrder[];
+  updates?: SpotOrder[];
 }
 
 export const OrderHistorySpot: React.FC<Props> = ({ updates }) => {
@@ -59,7 +59,7 @@ export const OrderHistorySpot: React.FC<Props> = ({ updates }) => {
         stopPrice,
         price,
         id
-      }: UnitedOrder) => (
+      }: SpotOrder) => (
         <OrderHistorySpotRow
           key={id}
           executed={quantityFilled}

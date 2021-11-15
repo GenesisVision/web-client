@@ -25,6 +25,7 @@ import NumberFormat from "react-number-format";
 import { formatCurrencyValue } from "utils/formatter";
 
 import TerminalTitle from "../components/terminal-title/terminal-title";
+import styles from "./symbol-summary.module.scss";
 import { SymbolSummaryCountdown } from "./symbol-summary-countdown";
 
 interface Props {
@@ -81,7 +82,7 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
   );
   return (
     <TerminalTitle amount={lastPrice} trigger={+closeTime}>
-      <Center style={{ overflowX: "auto" }}>
+      <Center className={styles["symbol-summary__wrapper"]}>
         <RowItem size={"large"}>
           <ResponsiveContainer
             enabledScreens={["tablet", "landscape-tablet", "desktop"]}

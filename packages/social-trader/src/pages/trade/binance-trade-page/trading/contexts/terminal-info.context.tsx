@@ -126,12 +126,8 @@ export const TerminalInfoContextProvider: React.FC<Props> = ({
   }, [userStreamKey, getUserStreamSocket]);
 
   useEffect(() => {
-    if (!socketData || !accountInfo) return;
-    const updatedData = updateAccountInfo(
-      accountInfo,
-      socketData,
-      terminalType
-    );
+    if (!socketData || !accountInfo || terminalType === "futures") return;
+    const updatedData = updateAccountInfo(accountInfo, socketData);
     setAccountInfo(updatedData);
   }, [socketData]);
 

@@ -2,7 +2,7 @@ import Dialog, { IDialogProps } from "components/dialog/dialog";
 import { BinancePositionSide } from "gv-api-web";
 import React from "react";
 
-import { FuturesOrder } from "../terminal.types";
+import { FuturesOrder } from "../../terminal.types";
 import TakeProfitStopLossPopup from "./take-profit-stop-loss-popup";
 
 interface Props extends IDialogProps {

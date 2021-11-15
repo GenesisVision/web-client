@@ -47,7 +47,7 @@ const _PositionsRowContainer: React.FC<Props> = ({ workingType, position }) => {
   const lastPrice = item ? item.lastPrice : entryPrice;
   const notionalSize = Math.abs(markPrice * quantity);
 
-  const { pnl } = calculateUnrealizedPNL({
+  const { pnl, markPnl } = calculateUnrealizedPNL({
     quantity,
     entryPrice,
     workingType,
@@ -65,7 +65,7 @@ const _PositionsRowContainer: React.FC<Props> = ({ workingType, position }) => {
   const isolatedMarginInfo =
     marginType === "Isolated"
       ? calculateIsolatedMarginRatioInfo({
-          pnl,
+          pnl: markPnl,
           margin,
           symbol,
           notionalSize,
@@ -106,7 +106,7 @@ const _PositionsRowContainer: React.FC<Props> = ({ workingType, position }) => {
       quantity={quantity}
       quoteAsset={quoteAsset}
       setSymbol={setSymbol}
-      staleMarkPrice={staleMarkPrice}
+      staleMarkPrice={staleMarkPrice ? staleMarkPrice : entryPrice}
       stepSize={stepSize}
       symbol={symbol}
       tickSize={tickSize}

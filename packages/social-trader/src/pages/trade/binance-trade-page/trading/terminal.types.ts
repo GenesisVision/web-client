@@ -44,8 +44,6 @@ import { Observable } from "rxjs";
 import { ConnectSocketMethodType } from "services/websocket.service";
 import { AnyObjectType, CurrencyEnum } from "utils/types";
 
-import { BinanceRawFuturesOrder } from "./../../../../../../gv-api-web/src/model/BinanceRawFuturesOrder";
-
 export type SymbolState = {
   quoteAsset: TerminalCurrency;
   baseAsset: TerminalCurrency;
@@ -191,9 +189,8 @@ export interface ITerminalMethods extends IGVTerminalMethods {
   getKlines: (params: KlineParams) => Promise<Bar[]>;
   getExchangeInfo: () => Promise<ExchangeInfo>;
   getOpenOrders: (
-    symbol: string,
-    accountId?: string
-  ) => Observable<UnitedOrder[] | FuturesOrder[]>;
+    accountId: string
+  ) => Observable<SpotOrder[] | FuturesOrder[]>;
   getAllTrades: (filters: {
     accountId?: string;
     mode?: TradingPlatformBinanceOrdersMode;
@@ -202,7 +199,7 @@ export interface ITerminalMethods extends IGVTerminalMethods {
     symbol?: string;
     skip?: number;
     take?: number;
-  }) => Promise<TableDataType<UnitedOrder | FuturesOrder>>;
+  }) => Promise<TableDataType<SpotOrder | FuturesOrder>>;
   getAllOrders: (filters: {
     accountId?: string;
     mode?: TradingPlatformBinanceOrdersMode;
@@ -211,7 +208,7 @@ export interface ITerminalMethods extends IGVTerminalMethods {
     symbol?: string;
     skip?: number;
     take?: number;
-  }) => Promise<TableDataType<UnitedOrder | FuturesOrder>>;
+  }) => Promise<TableDataType<SpotOrder | FuturesOrder>>;
   getUserStreamKey: (accountId?: string) => Observable<{ listenKey: string }>;
   getAccountInformation: (
     accountId?: string,
@@ -226,11 +223,11 @@ export interface ITerminalMethods extends IGVTerminalMethods {
   ) => Observable<CorrectedRestDepth>;
   cancelAllOrders: (
     options: { symbol?: string; useServerTime?: boolean },
-    accountId?: string
+    accountId: string
   ) => Promise<BinanceRawCancelOrderId[]>;
   cancelOrder: (
     options: { symbol: string; orderId: string; useServerTime?: boolean },
-    accountId?: string
+    accountId: string
   ) => Promise<BinanceRawCancelOrder>;
   tradeRequest: ({
     side,
@@ -253,7 +250,7 @@ export interface ITerminalMethods extends IGVTerminalMethods {
   }) => Promise<BinanceRawFuturesIncomeHistory[]>;
   getPositionInformation?: (options: {
     symbol?: string;
-    accountId?: string;
+    accountId: string;
   }) => Promise<Position[]>;
   getBalancesForTransfer?: (options: {
     authData: TerminalAuthDataType;
@@ -266,22 +263,22 @@ export interface ITerminalMethods extends IGVTerminalMethods {
   }) => Promise<HttpResponse>;
   getPositionMode?: (accountId: string) => Promise<PositionModeType>;
   changePositionMode?: (options: {
-    accountId?: string;
-    mode?: BinancePositionMode;
+    accountId: string;
+    mode: BinancePositionMode;
   }) => Promise<void>;
   getLeverageBrackets?: (options: {
     symbol: string;
-    accountId?: string;
+    accountId: string;
   }) => Promise<SymbolLeverageBrackets[]>;
   changeLeverage?: (options: {
-    accountId?: string;
-    symbol?: string;
-    leverage?: number;
+    accountId: string;
+    symbol: string;
+    leverage: number;
   }) => Promise<ChangeLeverageResponse>;
   changeMarginMode?: (options: {
-    accountId?: string;
-    symbol?: string;
-    marginType?: BinanceFuturesMarginType;
+    accountId: string;
+    symbol: string;
+    marginType: BinanceFuturesMarginType;
   }) => Promise<BinanceRawFuturesChangeMarginTypeResult>;
   adjustMargin?: (options: {
     accountId: string;
@@ -579,7 +576,7 @@ export interface ExtentedBinanceRawBinanceBalance {
 export type FutureBalance = BinanceRawFuturesAccountAsset;
 
 export type Account = BinanceRawAccountInfo & {
-  positions?: Array<Position>;
+  // positions?: Array<Position>; unused info
   balances: Array<ExtentedBinanceRawBinanceBalance>;
 };
 
@@ -1067,6 +1064,7 @@ export type UnitedTrade = {
   price: number;
   orderId: number;
   tradeTime: Date;
+  buyerIsMaker: boolean;
 };
 
 export interface MyTrade {
@@ -1089,6 +1087,9 @@ export type QueryOrderResult = BinanceRawOrder;
 export type FuturesOrder = {
   eventType?: FUTURES_ACCOUNT_EVENT;
   executionType?: BinanceExecutionType;
+  realizedProfit?: number;
+  commission?: number;
+  commissionAsset?: string;
   closePosition: boolean;
   positionSide: BinancePositionSide;
   callbackRate: number;
@@ -1110,7 +1111,7 @@ export type FuturesOrder = {
   id: number;
 };
 
-export type UnitedOrder = {
+export type SpotOrder = {
   commissionAsset?: string;
   commission?: number;
   quoteQuantityFilled?: number;

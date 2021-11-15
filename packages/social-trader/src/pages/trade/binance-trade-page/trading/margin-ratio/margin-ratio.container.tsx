@@ -18,17 +18,19 @@ export const MarginRatioContainer: React.FC = () => {
   >();
 
   useEffect(() => {
-    if (openPositions.length) {
-      const currentSymbolPosition = openPositions.find(
-        ({ symbol, marginType }) =>
-          symbol === getSymbolFromState(currentSymbol) || marginType === "Cross"
-      );
-      if (currentSymbolPosition) {
-        setSelectionPosition(currentSymbolPosition);
-        return;
-      }
-      setSelectionPosition(openPositions[0]);
+    if (!openPositions.length) {
+      setSelectionPosition(undefined);
+      return;
     }
+    const currentSymbolPosition = openPositions.find(
+      ({ symbol, marginType }) =>
+        symbol === getSymbolFromState(currentSymbol) || marginType === "Cross"
+    );
+    if (currentSymbolPosition) {
+      setSelectionPosition(currentSymbolPosition);
+      return;
+    }
+    setSelectionPosition(openPositions[0]);
   }, [openPositions.length, currentSymbol]);
 
   if (!selectedPosition) {

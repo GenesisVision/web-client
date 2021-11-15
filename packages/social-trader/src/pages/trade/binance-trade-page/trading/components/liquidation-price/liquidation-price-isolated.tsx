@@ -1,8 +1,8 @@
 import { BinancePositionSide } from "gv-api-web";
 import React, { useMemo } from "react";
 
-import { terminalMoneyFormat } from "../components/terminal-money-format/terminal-money-format";
-import { calculateIsolatedLiqPrice } from "../trading-tables/positions/positions.helpers";
+import { calculateIsolatedLiqPrice } from "../../trading-tables/positions/positions.helpers";
+import { terminalMoneyFormat } from "../terminal-money-format/terminal-money-format";
 import { LiquadationPriceLessThanZeroTooltip } from "./liquidation-price-less-than-zero-tooltip";
 
 interface Props {

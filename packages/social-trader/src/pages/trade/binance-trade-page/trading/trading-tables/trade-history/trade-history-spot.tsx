@@ -3,7 +3,7 @@ import TableModule from "components/table/components/table-module";
 import { DEFAULT_PAGING } from "components/table/reducers/table-paging.reducer";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-methods.context";
-import { UnitedOrder } from "pages/trade/binance-trade-page/trading/terminal.types";
+import { SpotOrder } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
@@ -17,7 +17,7 @@ import styles from "./trade-history.module.scss";
 import { TradeHistorySpotRow } from "./trade-history-spot-row";
 
 interface Props {
-  updates?: UnitedOrder[];
+  updates?: SpotOrder[];
 }
 
 export const TradeHistorySpot: React.FC<Props> = ({ updates }) => {
@@ -55,7 +55,7 @@ export const TradeHistorySpot: React.FC<Props> = ({ updates }) => {
         symbol,
         side,
         price
-      }: UnitedOrder) => (
+      }: SpotOrder) => (
         <TradeHistorySpotRow
           commissionAsset={commissionAsset}
           commission={commission}

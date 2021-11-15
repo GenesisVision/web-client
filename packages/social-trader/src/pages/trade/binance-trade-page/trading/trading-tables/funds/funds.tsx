@@ -2,8 +2,8 @@ import { Text } from "components/text/text";
 import { useAccountCurrency } from "hooks/account-currency.hook";
 import { TradeTable } from "pages/trade/binance-trade-page/trading/components/trade-table/trade-table";
 import { AssetBalance } from "pages/trade/binance-trade-page/trading/terminal.types";
-import { FundsRow } from "pages/trade/binance-trade-page/trading/trading-tables/funds/funds-row";
 import { FUNDS_TABLE_COLUMNS } from "pages/trade/binance-trade-page/trading/trading-tables/funds/funds.helpers";
+import { FundsRow } from "pages/trade/binance-trade-page/trading/trading-tables/funds/funds-row";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -31,6 +31,7 @@ const _Funds: React.FC<Props> = ({ items }) => {
       )}
       renderRow={({ asset, free, locked, amountInCurrency }: AssetBalance) => (
         <FundsRow
+          key={asset}
           amountInCurrency={amountInCurrency}
           asset={asset}
           available={free}

@@ -85,11 +85,9 @@ export const usePlaceOrderMaxCostValues = ({
   // Step 2: Calculate Open Loss
   const longOpenLoss =
     quantity *
-    (markPrice - orderPrice > 0 ? imr + 1 : 1) *
     Math.abs(Math.min(0, LONG_ORDER_DIRECTION * (markPrice - orderPrice)));
   const shortOpenLoss =
     quantity *
-    (markPrice - orderPrice > 0 ? imr + 1 : 1) *
     Math.abs(Math.min(0, SHORT_ORDER_DIRECTION * (markPrice - orderPrice)));
 
   // Step 3: Calculate the cost required to open a position

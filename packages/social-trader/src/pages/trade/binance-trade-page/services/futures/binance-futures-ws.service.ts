@@ -2,7 +2,6 @@ import {
   futuresAccountUpdateEventTransform,
   futuresEventTradeOrderTransform,
   futuresMarginCallEventTransform,
-  futuresTradeOrderUpdateEventTransform,
   transformFuturesTickerSymbolWS,
   transformMarkPriceWS
 } from "pages/trade/binance-trade-page/services/futures/binance-futures.helpers";
@@ -46,9 +45,11 @@ export enum ORDER_STATUSES {
 export const markPricesSocket = (
   connectSocketMethod: ConnectSocketMethodType
 ): Observable<MarkPrice[]> => {
+  // Update Speed: 3000ms or 1000ms
+  const updateSpeed = "@3s";
   const socketType = "arr";
   const socketName = `!markPrice@${socketType}`;
-  const url = `${BINANCE_FUTURES_WS_API_URL}/${BINANCE_WS_API_TYPE.WS}/${socketName}`;
+  const url = `${BINANCE_FUTURES_WS_API_URL}/${BINANCE_WS_API_TYPE.WS}/${socketName}${updateSpeed}`;
   return connectSocketMethod(socketType, url).pipe(
     map(items => items.map(transformMarkPriceWS))
   );
@@ -58,7 +59,8 @@ export const tradeSocket = (
   connectSocketMethod: ConnectSocketMethodType,
   symbol: TerminalCurrency
 ): Observable<UnitedTrade> => {
-  const socketType = "trade";
+  // Update Speed: 100ms
+  const socketType = "aggTrade";
   const socketName = `${symbol.toLowerCase()}@${socketType}`;
   const url = `${BINANCE_FUTURES_WS_API_URL}/${BINANCE_WS_API_TYPE.WS}/${socketName}`;
   return connectSocketMethod(socketType, url).pipe(map(tradeTransform));
@@ -69,9 +71,11 @@ export const depthSocket = (
   symbol: TerminalCurrency,
   openCallback?: VoidFunction
 ): Observable<Depth> => {
+  // Update Speed: 250ms, 500ms, 100ms
+  const updateSpeed = "@500ms";
   const socketType = "depth";
   const socketName = `${symbol.toLowerCase()}@${socketType}`;
-  const url = `${BINANCE_FUTURES_WS_API_URL}/${BINANCE_WS_API_TYPE.WS}/${socketName}@500ms`;
+  const url = `${BINANCE_FUTURES_WS_API_URL}/${BINANCE_WS_API_TYPE.WS}/${socketName}${updateSpeed}`;
   return connectSocketMethod(socketType, url, openCallback).pipe(
     map(depthTransform)
   );
@@ -80,6 +84,7 @@ export const depthSocket = (
 export const marketTicketsSocket = (
   connectSocketMethod: ConnectSocketMethodType
 ): Observable<Ticker[]> => {
+  // Update Speed: 1000ms
   const socketType = "arr";
   const socketName = `!ticker@${socketType}`;
   const url = `${BINANCE_FUTURES_WS_API_URL}/${BINANCE_WS_API_TYPE.WS}/${socketName}`;
@@ -110,6 +115,7 @@ export const getUserStreamSocket = (
 export const klineSocket = (
   connectSocketMethod: ConnectSocketMethodType
 ): KlineSocketType => (symbol: string, interval: string) => {
+  // Update Speed: 250ms
   const socketName = `${symbol}@kline_${interval}`;
   const url = `${BINANCE_FUTURES_WS_API_URL}/${BINANCE_WS_API_TYPE.WS}/${socketName}`;
   return connectSocketMethod(socketName, url).pipe(

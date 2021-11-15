@@ -51,7 +51,8 @@ const FuturesRealSubmit: React.FC<FuturesButtonProps> = ({
     formState: { isSubmitting, isValid, touched }
   } = useFormContext();
 
-  const disabled = isSubmitting || (!isValid && touched);
+  // const disabled = isSubmitting || (!isValid && touched);
+  const disabled = isSubmitting;
 
   const handleButtonClick = handleSubmit(values => {
     return onSubmit({ ...values, side });

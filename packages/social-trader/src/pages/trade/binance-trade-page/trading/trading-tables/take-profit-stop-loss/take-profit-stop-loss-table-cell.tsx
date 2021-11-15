@@ -6,9 +6,9 @@ import { BinancePositionSide } from "gv-api-web";
 import useFlag from "hooks/flag.hook";
 import React, { useContext, useEffect, useState } from "react";
 
-import { terminalMoneyFormat } from "../components/terminal-money-format/terminal-money-format";
-import { TerminalOpenOrdersContext } from "../contexts/terminal-open-orders.context";
-import { FuturesOrder } from "../terminal.types";
+import { terminalMoneyFormat } from "../../components/terminal-money-format/terminal-money-format";
+import { TerminalOpenOrdersContext } from "../../contexts/terminal-open-orders.context";
+import { FuturesOrder } from "../../terminal.types";
 import TakeProfitStopLossPopupContainer from "./take-profit-stop-loss-popup-container";
 
 interface Props {

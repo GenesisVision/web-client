@@ -8,9 +8,10 @@ import {
 } from "pages/trade/binance-trade-page/trading/trading-tables/funds/funds.helpers";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 
+import { withTradingTable } from "../with-trading-table";
 import { Funds } from "./funds";
 
-export const FundsContainer: React.FC = () => {
+const FundsContainer: React.FC = () => {
   const currency = useAccountCurrency();
   const { accountInfo } = useContext(TerminalInfoContext);
 
@@ -34,3 +35,5 @@ export const FundsContainer: React.FC = () => {
 
   return <Funds items={items} />;
 };
+
+export default withTradingTable(FundsContainer);

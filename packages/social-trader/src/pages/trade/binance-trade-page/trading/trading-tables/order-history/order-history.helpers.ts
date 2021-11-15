@@ -1,12 +1,12 @@
 import { SortingColumn } from "components/table/components/filtering/filter.type";
 import { BinanceExecutionType, BinanceOrderStatus } from "gv-api-web";
-import { UnitedOrder } from "pages/trade/binance-trade-page/trading/terminal.types";
+import { SpotOrder } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { normalizeOpenOrdersList } from "pages/trade/binance-trade-page/trading/trading-tables/open-orders/open-orders.helpers";
 
 export const updateOrderHistoryData = (
-  data: UnitedOrder[],
-  updates: UnitedOrder[]
-): UnitedOrder[] => {
+  data: SpotOrder[],
+  updates: SpotOrder[]
+): SpotOrder[] => {
   const normalizedData = normalizeOpenOrdersList(data);
   updates.forEach(update => {
     if (isOrderDeleted(update.orderStatus, update.executionType))

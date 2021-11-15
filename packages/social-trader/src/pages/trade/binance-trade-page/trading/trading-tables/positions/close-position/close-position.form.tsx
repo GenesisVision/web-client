@@ -49,6 +49,7 @@ const _ClosePosition: React.FC<Props> = ({
 }) => {
   const form = useForm<IClosePositionFormValues>({
     defaultValues: {
+      // maybe zero with socket updates
       [CLOSE_POSITION_FIELDS.price]: +formatValueWithTick(
         outerPrice,
         filterValues.tickSize

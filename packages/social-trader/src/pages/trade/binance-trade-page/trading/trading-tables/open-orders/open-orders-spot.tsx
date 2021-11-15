@@ -4,7 +4,7 @@ import useApiRequest from "hooks/api-request.hook";
 import { TradeTable } from "pages/trade/binance-trade-page/trading/components/trade-table/trade-table";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-methods.context";
-import { UnitedOrder } from "pages/trade/binance-trade-page/trading/terminal.types";
+import { SpotOrder } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -13,7 +13,7 @@ import styles from "./open-orders.module.scss";
 import { OpenOrdersSpotRow } from "./open-orders-spot-row";
 
 interface Props {
-  items?: UnitedOrder[];
+  items?: SpotOrder[];
 }
 
 export const OpenOrdersSpot: React.FC<Props> = ({ items }) => {
@@ -73,7 +73,7 @@ export const OpenOrdersSpot: React.FC<Props> = ({ items }) => {
         side,
         stopPrice,
         price
-      }: UnitedOrder) => {
+      }: SpotOrder) => {
         return (
           <OpenOrdersSpotRow
             key={id}

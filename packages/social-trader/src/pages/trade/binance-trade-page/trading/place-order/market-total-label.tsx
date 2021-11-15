@@ -1,11 +1,11 @@
-import React from "react";
-import { HelpContainer } from "components/text-with-question/text-with-question";
-import { RowItem } from "components/row-item/row-item";
-import HelpButton from "components/help-button/help-button";
 import { Center } from "components/center/center";
-import { Text } from "components/text/text";
 import { DefaultBlock } from "components/default.block/default.block";
+import HelpButton from "components/help-button/help-button";
 import { HORIZONTAL_POPOVER_POS } from "components/popover/popover";
+import { RowItem } from "components/row-item/row-item";
+import { Text } from "components/text/text";
+import { HelpContainer } from "components/text-with-question/text-with-question";
+import React from "react";
 
 export const MarketTotalLabel: React.FC = () => {
   return (

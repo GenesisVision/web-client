@@ -1,7 +1,6 @@
 import { DEFAULT_DECIMAL_SCALE } from "constants/constants";
 import dayjs from "dayjs";
 import {
-  BinanceRawFuturesOrder,
   BinanceRawFuturesPlacedOrder,
   BinanceRawFuturesPlaceOrder,
   BinanceRawKline,
@@ -14,12 +13,9 @@ import {
 import { Bar } from "pages/trade/binance-trade-page/trading/chart/charting_library/datafeed-api";
 import { DividerPartsType } from "pages/trade/binance-trade-page/trading/order-book/order-book.helpers";
 import {
-  FuturesOrder,
-  FuturesOrderStatus,
-  FuturesOrderType,
+  SpotOrder,
   StringBidDepth,
-  TradeRequest,
-  UnitedOrder
+  TradeRequest
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { OrderRequest } from "services/request.service";
 import { formatValue } from "utils/formatter";
@@ -57,7 +53,7 @@ export const transformToUnitedOrder = ({
   quantity,
   quoteQuantity,
   quantityFilled
-}: BinanceRawOrder): UnitedOrder => ({
+}: BinanceRawOrder): SpotOrder => ({
   commissionAsset,
   orderStatus: status,
   commission,
@@ -124,7 +120,6 @@ export const createSpotPlaceBuySellOrderRequest = (
   const newOrder = newOrderRequestCreator(request);
 
   const postBuy = ({
-    reduceOnly,
     timeInForce,
     stopPrice,
     accountId,
@@ -139,7 +134,6 @@ export const createSpotPlaceBuySellOrderRequest = (
     return newOrder(
       {
         ...rest,
-        reduceOnly,
         stopPrice:
           type === "TakeProfitLimit" || type === "StopLossLimit"
             ? stopPrice
@@ -161,7 +155,6 @@ export const createSpotPlaceBuySellOrderRequest = (
   };
 
   const postSell = ({
-    reduceOnly,
     timeInForce,
     stopPrice,
     accountId,
@@ -176,7 +169,6 @@ export const createSpotPlaceBuySellOrderRequest = (
     return newOrder(
       {
         ...rest,
-        reduceOnly,
         stopPrice:
           type === "TakeProfitLimit" || type === "StopLossLimit"
             ? stopPrice
@@ -204,6 +196,7 @@ export const createFuturesPlaceBuySellOrderRequest = (
   request: PlaceOrderRequest
 ) => {
   const newOrder = newOrderRequestCreator(request);
+  // to do Trailing stop
 
   const postBuy = ({
     reduceOnly,
@@ -213,6 +206,7 @@ export const createFuturesPlaceBuySellOrderRequest = (
     symbol,
     price,
     quantity,
+    positionSide,
     type,
     ...rest
   }: TradeRequest & {
@@ -221,7 +215,7 @@ export const createFuturesPlaceBuySellOrderRequest = (
     return newOrder(
       {
         ...rest,
-        reduceOnly,
+        reduceOnly: positionSide === "Both" ? reduceOnly : undefined,
         stopPrice:
           type === "TakeProfit" ||
           type === "Stop" ||
@@ -256,6 +250,7 @@ export const createFuturesPlaceBuySellOrderRequest = (
     symbol,
     price,
     quantity,
+    positionSide,
     type,
     ...rest
   }: TradeRequest & {
@@ -264,7 +259,7 @@ export const createFuturesPlaceBuySellOrderRequest = (
     return newOrder(
       {
         ...rest,
-        reduceOnly,
+        reduceOnly: positionSide === "Both" ? reduceOnly : undefined,
         stopPrice:
           type === "TakeProfit" ||
           type === "Stop" ||

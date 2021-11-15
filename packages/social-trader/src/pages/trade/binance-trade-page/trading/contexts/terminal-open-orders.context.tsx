@@ -4,12 +4,11 @@ import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/c
 import { TerminalTickerContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-ticker.context";
 import {
   filterOrderEventsStream,
-  generateSpotOrderMessage,
-  getSymbol
+  generateSpotOrderMessage
 } from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import {
   FuturesOrder,
-  UnitedOrder
+  SpotOrder
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { normalizeOpenOrdersList } from "pages/trade/binance-trade-page/trading/trading-tables/open-orders/open-orders.helpers";
 import React, {
@@ -26,7 +25,7 @@ import { FUTURES_ACCOUNT_EVENT } from "../../services/futures/binance-futures.ty
 import { generateFuturesOrderMessage } from "../terminal-futures.helpers";
 
 type TerminalOpenOrdersContextState = {
-  openOrders: UnitedOrder[] | FuturesOrder[];
+  openOrders: SpotOrder[] | FuturesOrder[];
 };
 
 export const TerminalOpenOrdersInitialState = {} as TerminalOpenOrdersContextState;
@@ -41,26 +40,20 @@ export const TerminalOpenOrdersContextProvider: React.FC = ({ children }) => {
   const { getOpenOrders } = useContext(TerminalMethodsContext);
   const [t] = useTranslation();
 
-  const {
-    exchangeAccountId,
-    terminalType,
-    $userStream,
-    symbol: { baseAsset, quoteAsset }
-  } = useContext(TerminalInfoContext);
+  const { exchangeAccountId, terminalType, $userStream } = useContext(
+    TerminalInfoContext
+  );
 
   const [list, setList] = useState<{
-    [key: string]: UnitedOrder | FuturesOrder;
+    [key: string]: SpotOrder | FuturesOrder;
   }>({});
   const [socketData, setSocketData] = useState<
-    UnitedOrder | FuturesOrder | undefined
+    SpotOrder | FuturesOrder | undefined
   >();
 
   useEffect(() => {
     if (!exchangeAccountId || !$userStream) return;
-    const openOrders = getOpenOrders(
-      getSymbol(baseAsset, quoteAsset),
-      exchangeAccountId
-    );
+    const openOrders = getOpenOrders(exchangeAccountId);
     openOrders.pipe(map(normalizeOpenOrdersList)).subscribe(data => {
       setList(data);
     });
@@ -102,7 +95,7 @@ export const TerminalOpenOrdersContextProvider: React.FC = ({ children }) => {
                 symbolData,
                 t
               )
-            : generateSpotOrderMessage(socketData as UnitedOrder, symbolData);
+            : generateSpotOrderMessage(socketData as SpotOrder, symbolData);
         successAlert(message);
       }
     }
