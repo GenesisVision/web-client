@@ -4,6 +4,9 @@
   "open-orders": {
     "table": {
       "time": "Time",
+      "date": "Date",
+      "pair": "Pair",
+      "total": "Total",
       "symbol": "Symbol",
       "type": "Type",
       "side": "Side",
@@ -44,7 +47,10 @@
   },
   "order-history": {
     "table": {
+      "date": "Date",
+      "pair": "Pair",
       "time": "Time",
+      "total": "Total",
       "symbol": "Symbol",
       "type": "Type",
       "side": "Side",
@@ -59,7 +65,11 @@
   },
   "trade-history": {
     "table": {
+      "date": "Date",
+      "pair": "Pair",
+      "executed": "Executed",
       "time": "Time",
+      "total": "Total",
       "symbol": "Symbol",
       "side": "Side",
       "price": "Price",

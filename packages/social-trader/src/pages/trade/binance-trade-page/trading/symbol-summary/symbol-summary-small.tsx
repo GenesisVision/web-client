@@ -58,7 +58,6 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
     markPrice,
     tickerData: {
       eventTime,
-      closeTime,
       lastPrice,
       baseAsset,
       quoteAsset,
@@ -81,7 +80,7 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
     </h5>
   );
   return (
-    <TerminalTitle amount={lastPrice} trigger={+closeTime}>
+    <TerminalTitle amount={lastPrice}>
       <Center className={styles["symbol-summary__wrapper"]}>
         <RowItem size={"large"}>
           <ResponsiveContainer

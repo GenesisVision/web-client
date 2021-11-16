@@ -46,10 +46,9 @@ export const markPricesSocket = (
   connectSocketMethod: ConnectSocketMethodType
 ): Observable<MarkPrice[]> => {
   // Update Speed: 3000ms or 1000ms
-  const updateSpeed = "@3s";
   const socketType = "arr";
   const socketName = `!markPrice@${socketType}`;
-  const url = `${BINANCE_FUTURES_WS_API_URL}/${BINANCE_WS_API_TYPE.WS}/${socketName}${updateSpeed}`;
+  const url = `${BINANCE_FUTURES_WS_API_URL}/${BINANCE_WS_API_TYPE.WS}/${socketName}`;
   return connectSocketMethod(socketType, url).pipe(
     map(items => items.map(transformMarkPriceWS))
   );

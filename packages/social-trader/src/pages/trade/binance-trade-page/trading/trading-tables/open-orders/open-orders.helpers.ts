@@ -11,7 +11,7 @@ export const normalizeOpenOrdersList = (list: SpotOrder[] | FuturesOrder[]) => {
   return initObject;
 };
 
-export const OPEN_ORDERS_TABLE_COLUMNS: SortingColumn[] = [
+export const OPEN_ORDERS_SPOT_TABLE_COLUMNS: SortingColumn[] = [
   {
     name: "date"
   },
@@ -37,7 +37,7 @@ export const OPEN_ORDERS_TABLE_COLUMNS: SortingColumn[] = [
     name: "total"
   },
   {
-    name: "trigger conditions"
+    name: "trigger-conditions"
   },
   {
     name: "cancel-all"

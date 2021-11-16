@@ -14,6 +14,7 @@ import {
 } from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import { OrderSide } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useCallback, useContext } from "react";
+import { useTranslation } from "react-i18next";
 import { formatDate } from "utils/dates";
 
 interface Props {
@@ -41,6 +42,7 @@ const _OpenOrdersSpotRow: React.FC<Props> = ({
   filled,
   total
 }) => {
+  const [t] = useTranslation();
   const { items } = useContext(TerminalTickerContext);
   const { cancelOrder } = useContext(TerminalMethodsContext);
   const { exchangeAccountId, exchangeInfo } = useContext(TerminalInfoContext);
@@ -111,7 +113,7 @@ const _OpenOrdersSpotRow: React.FC<Props> = ({
           color={"danger"}
           onClick={handleCancel}
         >
-          Cancel
+          {t("Cancel")}
         </Button>
       </TableCell>
     </TableRow>

@@ -41,7 +41,7 @@ const _OrderBookContainer: React.FC<Props> = () => {
 
   const {
     terminalType,
-    tickSize,
+    depthTickSize,
     symbol: { baseAsset, quoteAsset }
   } = useContext(TerminalInfoContext);
 
@@ -84,13 +84,15 @@ const _OrderBookContainer: React.FC<Props> = () => {
   useEffect(() => {
     if (!socketOpened) return;
     console.log("get snapshot");
-    getDepth(getSymbol(baseAsset, quoteAsset), tickSize).subscribe(data => {
-      setList({
-        ...data,
-        asks: normalizeDepthList(data.asks),
-        bids: normalizeDepthList(data.bids)
-      });
-    });
+    getDepth(getSymbol(baseAsset, quoteAsset), depthTickSize).subscribe(
+      data => {
+        setList({
+          ...data,
+          asks: normalizeDepthList(data.asks),
+          bids: normalizeDepthList(data.bids)
+        });
+      }
+    );
   }, [socketOpened]);
 
   useEffect(() => {

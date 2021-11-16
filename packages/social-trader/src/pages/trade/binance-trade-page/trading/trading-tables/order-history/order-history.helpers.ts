@@ -1,14 +1,17 @@
 import { SortingColumn } from "components/table/components/filtering/filter.type";
 import { BinanceExecutionType, BinanceOrderStatus } from "gv-api-web";
-import { SpotOrder } from "pages/trade/binance-trade-page/trading/terminal.types";
+import {
+  FuturesOrder,
+  SpotOrder
+} from "pages/trade/binance-trade-page/trading/terminal.types";
 import { normalizeOpenOrdersList } from "pages/trade/binance-trade-page/trading/trading-tables/open-orders/open-orders.helpers";
 
-export const updateOrderHistoryData = (
+export const updateSpotOrderHistoryData = (
   data: SpotOrder[],
   updates: SpotOrder[]
 ): SpotOrder[] => {
   const normalizedData = normalizeOpenOrdersList(data);
-  updates.forEach(update => {
+  updates.forEach((update: any) => {
     if (isOrderDeleted(update.orderStatus, update.executionType))
       delete normalizedData[update!.id];
     else
@@ -22,6 +25,22 @@ export const updateOrderHistoryData = (
   );
 };
 
+export const updateFuturesOrderHistoryData = (
+  data: FuturesOrder[],
+  updates: FuturesOrder[]
+): FuturesOrder[] => {
+  const normalizedData = normalizeOpenOrdersList(data);
+  updates.forEach((update: any) => {
+    normalizedData[update.id] = {
+      ...normalizedData[update.id],
+      ...update
+    };
+  });
+  return Object.values(normalizedData).sort(
+    (a, b) => +new Date(b.time) - +new Date(a.time)
+  );
+};
+
 export const isOrderDeleted = (
   orderStatus?: BinanceOrderStatus,
   executionType?: BinanceExecutionType
@@ -29,17 +48,19 @@ export const isOrderDeleted = (
   switch (orderStatus?.toLowerCase()) {
     case "expired":
     case "canceled":
+    case "rejected":
       return true;
   }
   switch (executionType?.toLowerCase()) {
     case "canceled":
     case "expired":
+    case "rejected":
       return true;
   }
   return false;
 };
 
-export const ORDER_HISTORY_TABLE_COLUMNS: SortingColumn[] = [
+export const ORDER_HISTORY_SPOT_TABLE_COLUMNS: SortingColumn[] = [
   {
     name: "date"
   },
@@ -65,7 +86,7 @@ export const ORDER_HISTORY_TABLE_COLUMNS: SortingColumn[] = [
     name: "total"
   },
   {
-    name: "trigger conditions"
+    name: "trigger-conditions"
   },
   {
     name: "status"

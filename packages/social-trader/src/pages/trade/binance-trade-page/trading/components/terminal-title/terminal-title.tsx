@@ -9,13 +9,11 @@ import { terminalMoneyFormat } from "../terminal-money-format/terminal-money-for
 const useTerminalTitle = ({
   amount,
   symbol,
-  tickSize,
-  trigger
+  tickSize
 }: {
   symbol: SymbolState;
   amount: number;
   tickSize: string;
-  trigger?: number;
 }): string => {
   const [t] = useTranslation();
 
@@ -24,7 +22,7 @@ const useTerminalTitle = ({
   const [title, setTitle] = useState(defaultTitle);
 
   useEffect(() => {
-    if (trigger && amount > 0) {
+    if (amount > 0) {
       setTitle(
         `${terminalMoneyFormat({
           amount,
@@ -32,24 +30,22 @@ const useTerminalTitle = ({
         })} | ${symbol.baseAsset}${symbol.quoteAsset} | ${appTitle}`
       );
     }
-  }, [symbol, trigger, amount]);
+  }, [symbol, amount]);
 
   return title;
 };
 
 interface Props {
   amount: number;
-  trigger: number;
 }
 
-const TerminalTitle: React.FC<Props> = ({ amount, trigger, children }) => {
+const TerminalTitle: React.FC<Props> = ({ amount, children }) => {
   const { tickSize, symbol } = useContext(TerminalInfoContext);
 
   const title = useTerminalTitle({
     symbol,
     amount,
-    tickSize,
-    trigger
+    tickSize
   });
   return (
     <>

@@ -43,6 +43,7 @@ export const generateMarginCallMessage = (
   position: FuturesMarginCallEventPosition,
   crossWalletBalance?: string
 ): string => {
+  // todo
   return "";
 };
 
@@ -101,6 +102,8 @@ export const getFuturesTypeLabel = (
       return t("Take Profit Market");
     case "TrailingStopMarket":
       return t("Trailing Stop");
+    case "Liquidation":
+      return t("Liquidation");
     default:
       return type;
   }

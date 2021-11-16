@@ -5,6 +5,8 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { formatDate } from "utils/dates";
 
+import { terminalMoneyFormat } from "../../components/terminal-money-format/terminal-money-format";
+import { DEFAULT_TICKSIZE } from "../../terminal.helpers";
 import { getIncomeTypeLabel } from "./transaction-history.helpers";
 
 interface Props {
@@ -27,7 +29,12 @@ export const TransactionHistoryRow: React.FC<Props> = ({
     <TableRow>
       <TableCell firstOffset={false}>{formatDate(new Date(time))}</TableCell>
       <TableCell>{getIncomeTypeLabel(t, incomeType)}</TableCell>
-      <TableCell>{income}</TableCell>
+      <TableCell>
+        {terminalMoneyFormat({
+          amount: income,
+          tickSize: DEFAULT_TICKSIZE
+        })}
+      </TableCell>
       <TableCell>{asset}</TableCell>
       <TableCell>{symbol}</TableCell>
     </TableRow>

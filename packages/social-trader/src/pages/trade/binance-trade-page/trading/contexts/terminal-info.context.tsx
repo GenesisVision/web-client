@@ -7,6 +7,7 @@ import {
   filterOutboundAccountInfoStream,
   getSymbolFilters,
   getSymbolFromState,
+  getTickSizeFromPrecision,
   stringifySymbolFromToParam,
   updateAccountInfo,
   useUpdateTerminalUrlParams
@@ -40,6 +41,7 @@ type TerminalAccountInfoState = {
   exchangeAccountId?: string;
   stepSize: string;
   tickSize: string;
+  depthTickSize: string;
   terminalType: TerminalType;
   $userStream?: Observable<any>;
   setSymbol: (symbol: SymbolState) => void;
@@ -57,6 +59,7 @@ export const SymbolInitialState: SymbolState = {
 
 export const TerminalAccountInfoInitialState: TerminalAccountInfoState = {
   stepSize: "0.01",
+  depthTickSize: "0.01",
   tickSize: "0.01",
   terminalType: TerminalTypeInitialState,
   setSymbol: () => {},
@@ -88,6 +91,7 @@ export const TerminalInfoContextProvider: React.FC<Props> = ({
 
   const [symbol, setSymbol] = useState<SymbolState>(outerSymbol);
   const [tickSize, setTickSize] = useState<string>("0.01");
+  const [depthTickSize, setDepthTickSize] = useState<string>("0.01");
   const [stepSize, setStepSize] = useState<string>("0.01");
   const [userStreamKey, setUserStreamKey] = useState<string | undefined>();
   const [$userStream, setUserStream] = useState<Observable<any> | undefined>();
@@ -141,6 +145,11 @@ export const TerminalInfoContextProvider: React.FC<Props> = ({
       const { stepSize } = symbolFilters.lotSizeFilter;
       setTickSize(String(tickSize));
       setStepSize(String(stepSize));
+      if (symbolFilters.pricePrecision) {
+        setDepthTickSize(
+          getTickSizeFromPrecision(symbolFilters.pricePrecision)
+        );
+      }
     }
   }, [exchangeInfo, symbol]);
 
@@ -162,6 +171,7 @@ export const TerminalInfoContextProvider: React.FC<Props> = ({
       setSymbol: handleSetSymbol,
       symbol,
       accountInfo,
+      depthTickSize,
       exchangeInfo
     }),
     [
@@ -169,6 +179,7 @@ export const TerminalInfoContextProvider: React.FC<Props> = ({
       tickSize,
       stepSize,
       terminalType,
+      depthTickSize,
       $userStream,
       handleSetSymbol,
       symbol,

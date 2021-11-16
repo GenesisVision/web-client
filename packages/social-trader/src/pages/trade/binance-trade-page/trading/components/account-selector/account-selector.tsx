@@ -50,7 +50,7 @@ const _AccountSelector: React.FC<IAccountSelectorProps> = ({
         updates: { id }
       });
     },
-    [setAccount, symbol]
+    [setAccount]
   );
 
   return (

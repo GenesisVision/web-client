@@ -33,7 +33,7 @@ const WithoutAccountLink: React.FC = () => {
   return (
     <Text>
       <Link to={composeCreateAccountRouteWithBroker("Binance")}>Create</Link> or
-      select account to start trading
+      select an account to start trading
     </Text>
   );
 };

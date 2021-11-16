@@ -185,9 +185,9 @@ export const futuresEventTradeOrderTransform = (
   socketData: any
 ): FuturesOrder => {
   return {
-    commission: +socketData.n,
+    commission: socketData.n,
     commissionAsset: socketData.N,
-    realizedProfit: +socketData.rp,
+    realizedProfit: socketData.rp,
     executionType: convertBinanceTypeIntoGV(
       socketData.x
     ) as BinanceExecutionType,

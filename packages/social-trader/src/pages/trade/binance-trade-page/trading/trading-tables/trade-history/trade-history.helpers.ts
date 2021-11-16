@@ -1,14 +1,17 @@
 import { SortingColumn } from "components/table/components/filtering/filter.type";
-import { SpotOrder } from "pages/trade/binance-trade-page/trading/terminal.types";
+import {
+  FuturesOrder,
+  SpotOrder
+} from "pages/trade/binance-trade-page/trading/terminal.types";
 import { normalizeOpenOrdersList } from "pages/trade/binance-trade-page/trading/trading-tables/open-orders/open-orders.helpers";
 import { isOrderDeleted } from "pages/trade/binance-trade-page/trading/trading-tables/order-history/order-history.helpers";
 
 export const updateTradeHistoryData = (
-  data: SpotOrder[],
-  updates: SpotOrder[]
-): SpotOrder[] => {
+  data: SpotOrder[] | FuturesOrder[],
+  updates: SpotOrder[] | FuturesOrder[]
+): SpotOrder[] | FuturesOrder[] => {
   const normalizedData = normalizeOpenOrdersList(data);
-  updates.forEach(update => {
+  updates.forEach((update: any) => {
     if (isOrderDeleted(update.orderStatus, update.executionType))
       delete normalizedData[update!.id];
     else

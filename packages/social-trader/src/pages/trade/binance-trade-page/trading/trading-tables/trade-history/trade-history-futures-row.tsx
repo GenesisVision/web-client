@@ -1,24 +1,19 @@
 import TableCellComponent from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import { Text } from "components/text/text";
-import { DEFAULT_DECIMAL_SCALE } from "constants/constants";
 import { terminalMoneyFormat } from "pages/trade/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import { TerminalTickerContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-ticker.context";
 import {
+  DEFAULT_TICKSIZE,
   getSymbolData,
-  getSymbolFilters,
-  setUpperFirstLetter
+  getSymbolFilters
 } from "pages/trade/binance-trade-page/trading/terminal.helpers";
-import {
-  FuturesOrder,
-  OrderSide
-} from "pages/trade/binance-trade-page/trading/terminal.types";
+import { FuturesOrder } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { formatDate } from "utils/dates";
-import { formatValue } from "utils/formatter";
 
 import { getFuturesOpenOrderSideLabel } from "../../terminal-futures.helpers";
 
@@ -67,13 +62,17 @@ const _TradeHistoryFuturesRow: React.FC<FuturesOrder> = ({
         })} ${symbolData!.baseAsset}`}
       </TableCell>
       <TableCell>
-        {formatValue(commission, DEFAULT_DECIMAL_SCALE)} {commissionAsset}
+        {terminalMoneyFormat({
+          amount: commission!,
+          tickSize: DEFAULT_TICKSIZE
+        })}{" "}
+        {commissionAsset}
       </TableCell>
       <TableCell>
         {`${terminalMoneyFormat({
           amount: realizedProfit!,
-          tickSize: String(tickSize)
-        })} ${symbolData?.quoteAsset}`}
+          tickSize: DEFAULT_TICKSIZE
+        })} ${symbolData!.quoteAsset}`}
       </TableCell>
     </TableRow>
   );

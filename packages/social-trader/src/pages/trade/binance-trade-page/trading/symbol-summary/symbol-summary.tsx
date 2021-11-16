@@ -58,7 +58,6 @@ const _SymbolSummaryView: React.FC<Props> = ({
     markPrice,
     tickerData: {
       eventTime,
-      closeTime,
       lastPrice,
       baseAsset,
       quoteAsset,
@@ -75,7 +74,7 @@ const _SymbolSummaryView: React.FC<Props> = ({
     TerminalInfoContext
   );
   return (
-    <TerminalTitle amount={lastPrice} trigger={+closeTime}>
+    <TerminalTitle amount={lastPrice}>
       <TerminalDefaultBlock>
         <Row>
           <AccountSelectorContainer currentAccount={exchangeAccountId} />

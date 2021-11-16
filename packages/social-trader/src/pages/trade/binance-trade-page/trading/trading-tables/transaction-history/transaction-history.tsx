@@ -9,7 +9,7 @@ import styles from "./transaction-history.module.scss";
 import { TransactionHistoryRow } from "./transaction-history-row";
 
 interface Props {
-  items: TransactionHistoryType[];
+  items?: TransactionHistoryType[];
 }
 
 export const TransactionHistory: React.FC<Props> = ({ items }) => {

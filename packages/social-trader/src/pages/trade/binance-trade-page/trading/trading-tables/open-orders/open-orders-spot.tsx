@@ -8,12 +8,12 @@ import { SpotOrder } from "pages/trade/binance-trade-page/trading/terminal.types
 import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
 
-import { OPEN_ORDERS_TABLE_COLUMNS } from "./open-orders.helpers";
+import { OPEN_ORDERS_SPOT_TABLE_COLUMNS } from "./open-orders.helpers";
 import styles from "./open-orders.module.scss";
 import { OpenOrdersSpotRow } from "./open-orders-spot-row";
 
 interface Props {
-  items?: SpotOrder[];
+  items: SpotOrder[];
 }
 
 export const OpenOrdersSpot: React.FC<Props> = ({ items }) => {
@@ -38,12 +38,12 @@ export const OpenOrdersSpot: React.FC<Props> = ({ items }) => {
   return (
     <TradeTable
       className={styles["open-orders__table"]}
-      columns={OPEN_ORDERS_TABLE_COLUMNS}
+      columns={OPEN_ORDERS_SPOT_TABLE_COLUMNS}
       items={items}
       renderHeaderCell={({ name }) => (
         <th>
           {name === "cancel-all" ? (
-            items?.length ? (
+            items.length ? (
               <Button
                 noPadding
                 variant={"text"}
@@ -53,13 +53,13 @@ export const OpenOrdersSpot: React.FC<Props> = ({ items }) => {
                 color={"danger"}
                 onClick={handleCancel}
               >
-                {t("Cancel all")}
+                {t(`trade:open-orders.table.cancel-all`)}
               </Button>
             ) : (
               ""
             )
           ) : (
-            <Text muted>{t(`${name}`)}</Text>
+            <Text muted>{t(`trade:open-orders.table.${name}`)}</Text>
           )}
         </th>
       )}

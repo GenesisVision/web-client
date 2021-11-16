@@ -6,14 +6,12 @@ import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/cont
 import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-methods.context";
 import { SpotOrder } from "pages/trade/binance-trade-page/trading/terminal.types";
 import {
-  ORDER_HISTORY_TABLE_COLUMNS,
-  updateOrderHistoryData
+  ORDER_HISTORY_SPOT_TABLE_COLUMNS,
+  updateSpotOrderHistoryData
 } from "pages/trade/binance-trade-page/trading/trading-tables/order-history/order-history.helpers";
 import { OrderHistorySpotRow } from "pages/trade/binance-trade-page/trading/trading-tables/order-history/order-history-spot-row";
 import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
-import { isAuthenticatedSelector } from "reducers/auth-reducer";
 
 import styles from "./order-history.module.scss";
 
@@ -22,14 +20,12 @@ interface Props {
 }
 
 export const OrderHistorySpot: React.FC<Props> = ({ updates }) => {
-  const isAuthenticated = useSelector(isAuthenticatedSelector);
   const { getAllOrders } = useContext(TerminalMethodsContext);
   const { exchangeAccountId } = useContext(TerminalInfoContext);
   const [t] = useTranslation();
 
   const getItems = useCallback(
     (filters?: ComposeFiltersAllType) => {
-      if (!isAuthenticated) return Promise.resolve({ items: [], total: 0 });
       return getAllOrders({
         ...filters,
         accountId: exchangeAccountId
@@ -43,11 +39,15 @@ export const OrderHistorySpot: React.FC<Props> = ({ updates }) => {
       headerCellClassName={styles["order-history__header-cell"]}
       paging={DEFAULT_PAGING}
       updates={updates}
-      updateItemsFunc={updateOrderHistoryData}
+      updateItemsFunc={updateSpotOrderHistoryData}
       loaderData={[]}
       getItems={getItems}
-      columns={ORDER_HISTORY_TABLE_COLUMNS}
-      renderHeader={column => <Text wrap={false}>{t(`${column.name}`)}</Text>}
+      columns={ORDER_HISTORY_SPOT_TABLE_COLUMNS}
+      renderHeader={column => (
+        <Text wrap={false}>
+          {t(`trade:order-history.table.${column.name}`)}
+        </Text>
+      )}
       renderBodyRow={({
         orderStatus,
         quantityFilled,

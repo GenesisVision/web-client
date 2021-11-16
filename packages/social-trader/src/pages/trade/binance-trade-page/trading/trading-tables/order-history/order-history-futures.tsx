@@ -8,12 +8,10 @@ import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/c
 import { FuturesOrder } from "pages/trade/binance-trade-page/trading/terminal.types";
 import {
   ORDER_HISTORY_FUTURES_TABLE_COLUMNS,
-  updateOrderHistoryData
+  updateFuturesOrderHistoryData
 } from "pages/trade/binance-trade-page/trading/trading-tables/order-history/order-history.helpers";
 import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
-import { isAuthenticatedSelector } from "reducers/auth-reducer";
 
 import styles from "./order-history.module.scss";
 import { OrderHistoryFuturesRow } from "./order-history-futures-row";
@@ -23,14 +21,12 @@ interface Props {
 }
 
 export const OrderHistoryFutures: React.FC<Props> = ({ updates }) => {
-  const isAuthenticated = useSelector(isAuthenticatedSelector);
   const { getAllOrders } = useContext(TerminalMethodsContext);
   const { exchangeAccountId } = useContext(TerminalInfoContext);
   const [t] = useTranslation();
 
   const getItems = useCallback(
     (filters?: ComposeFiltersAllType) => {
-      if (!isAuthenticated) return Promise.resolve({ items: [], total: 0 });
       return getAllOrders({
         ...filters,
         accountId: exchangeAccountId
@@ -47,7 +43,7 @@ export const OrderHistoryFutures: React.FC<Props> = ({ updates }) => {
       )}
       paging={DEFAULT_PAGING}
       updates={updates}
-      updateItemsFunc={updateOrderHistoryData}
+      updateItemsFunc={updateFuturesOrderHistoryData}
       loaderData={[]}
       getItems={getItems}
       columns={ORDER_HISTORY_FUTURES_TABLE_COLUMNS}

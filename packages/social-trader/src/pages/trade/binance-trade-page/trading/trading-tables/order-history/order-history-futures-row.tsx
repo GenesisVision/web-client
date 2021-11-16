@@ -59,7 +59,7 @@ const _OrderHistoryFuturesRow: React.FC<FuturesOrder> = ({
         </Text>
       </TableCell>
       <TableCell>
-        {!!averagePrice
+        {!!+averagePrice
           ? terminalMoneyFormat({
               amount: averagePrice,
               tickSize: String(tickSize)
@@ -67,12 +67,13 @@ const _OrderHistoryFuturesRow: React.FC<FuturesOrder> = ({
           : "–"}
       </TableCell>
       <TableCell>
-        {!!price
-          ? terminalMoneyFormat({
+        {type === "Market"
+          ? "–"
+          : terminalMoneyFormat({
               amount: price,
               tickSize: String(tickSize)
-            })
-          : "–"}
+            })}
+        {type === "Liquidation" && null}
       </TableCell>
       <TableCell>
         {`${terminalMoneyFormat({

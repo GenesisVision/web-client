@@ -14,7 +14,7 @@ import styles from "./open-orders.module.scss";
 import { OpenOrdersFuturesRow } from "./open-orders-futures-row";
 
 interface Props {
-  items?: FuturesOrder[];
+  items: FuturesOrder[];
 }
 
 export const OpenOrdersFutures: React.FC<Props> = ({ items }) => {
@@ -47,7 +47,7 @@ export const OpenOrdersFutures: React.FC<Props> = ({ items }) => {
       renderHeaderCell={({ name }) => (
         <th>
           {name === "cancel-all" ? (
-            items?.length ? (
+            items.length ? (
               <Button
                 noPadding
                 variant={"text"}

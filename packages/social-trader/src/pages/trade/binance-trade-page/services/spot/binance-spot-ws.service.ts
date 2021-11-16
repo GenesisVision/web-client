@@ -54,10 +54,9 @@ export const depthSocket = (
   openCallback?: VoidFunction
 ): Observable<Depth> => {
   // Update Speed: 1000ms or 100ms
-  const updateSpeed = "@1000ms";
   const socketType = "depth";
   const socketName = `${symbol.toLowerCase()}@${socketType}`;
-  const url = `${BINANCE_WS_API_URL}/${BINANCE_WS_API_TYPE.WS}/${socketName}${updateSpeed}`;
+  const url = `${BINANCE_WS_API_URL}/${BINANCE_WS_API_TYPE.WS}/${socketName}`;
   return connectSocketMethod(socketType, url, openCallback).pipe(
     map(depthTransform)
   );

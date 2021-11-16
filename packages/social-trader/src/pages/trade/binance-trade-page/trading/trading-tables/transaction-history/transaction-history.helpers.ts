@@ -37,5 +37,7 @@ export const getIncomeTypeLabel = (
       return t("Transfer");
     case "WelcomeBonus":
       return t("Welcome Bonus");
+    default:
+      return incomeType;
   }
 };

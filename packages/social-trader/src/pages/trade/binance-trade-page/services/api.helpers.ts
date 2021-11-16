@@ -215,6 +215,7 @@ export const createFuturesPlaceBuySellOrderRequest = (
     return newOrder(
       {
         ...rest,
+        positionSide,
         reduceOnly: positionSide === "Both" ? reduceOnly : undefined,
         stopPrice:
           type === "TakeProfit" ||
@@ -259,6 +260,7 @@ export const createFuturesPlaceBuySellOrderRequest = (
     return newOrder(
       {
         ...rest,
+        positionSide,
         reduceOnly: positionSide === "Both" ? reduceOnly : undefined,
         stopPrice:
           type === "TakeProfit" ||

@@ -37,9 +37,9 @@ const _OpenOrdersFuturesRow: React.FC<FuturesOrder> = ({
   type,
   workingType
 }) => {
+  const [t] = useTranslation();
   const { items } = useContext(TerminalTickerContext);
   const { cancelOrder } = useContext(TerminalMethodsContext);
-  const [t] = useTranslation();
   const { exchangeAccountId, exchangeInfo, setSymbol } = useContext(
     TerminalInfoContext
   );
@@ -76,8 +76,8 @@ const _OpenOrdersFuturesRow: React.FC<FuturesOrder> = ({
         style={{ cursor: "pointer" }}
         onClick={() =>
           setSymbol({
-            baseAsset: symbolData!.baseAsset!,
-            quoteAsset: symbolData!.quoteAsset!
+            baseAsset: symbolData!.baseAsset,
+            quoteAsset: symbolData!.quoteAsset
           })
         }
       >
@@ -90,7 +90,7 @@ const _OpenOrdersFuturesRow: React.FC<FuturesOrder> = ({
         </Text>
       </TableCell>
       <TableCell>
-        {!!price
+        {!!String(price)
           ? terminalMoneyFormat({
               amount: price,
               tickSize: String(tickSize)
@@ -99,17 +99,17 @@ const _OpenOrdersFuturesRow: React.FC<FuturesOrder> = ({
       </TableCell>
       <TableCell>
         {closePosition
-          ? "Close Position"
+          ? t("Close Position")
           : `${terminalMoneyFormat({
               amount: quantity,
               tickSize: String(stepSize)
-            })} ${symbolData?.baseAsset}`}
+            })} ${symbolData!.baseAsset}`}
       </TableCell>
       <TableCell>
         {`${terminalMoneyFormat({
           amount: quantityFilled,
           tickSize: String(stepSize)
-        })} ${symbolData?.baseAsset}`}
+        })} ${symbolData!.baseAsset}`}
       </TableCell>
       <TableCell>{reduceOnly ? t("Yes") : t("No")}</TableCell>
       <TableCell>
@@ -132,7 +132,7 @@ const _OpenOrdersFuturesRow: React.FC<FuturesOrder> = ({
           color={"danger"}
           onClick={handleCancel}
         >
-          Cancel
+          {t("Cancel")}
         </Button>
       </TableCell>
     </TableRow>
