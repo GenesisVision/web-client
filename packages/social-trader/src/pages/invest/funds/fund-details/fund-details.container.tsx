@@ -4,7 +4,7 @@ import DetailsInvestment from "components/details/details-description-section/de
 import { DetailsDivider } from "components/details/details-divider.block";
 import Page from "components/page/page";
 import { Row } from "components/row/row";
-import { ASSET } from "constants/constants";
+import { ASSET, ORIGIN_URL } from "constants/constants";
 import { FundDetailsFull } from "gv-api-web";
 import { useAccountCurrency } from "hooks/account-currency.hook";
 import InvestDefaultPopup from "modules/invest-popup/invest-default-popup";
@@ -13,6 +13,7 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { GV_FUNDS_ROUTE, INVEST_ROUTE } from "routes/invest.routes";
 import {
+  composeFundBannerUrl,
   composeFundsDetailsUrl,
   createFundNotificationsToUrl,
   createFundSettingsToUrl
@@ -35,6 +36,7 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
   const [t] = useTranslation();
   const dispatch = useDispatch();
   const currency = useAccountCurrency();
+
   const handleDispatchDescription = useCallback(() => {
     dispatch(
       dispatchFundDescriptionWithId(description.id, undefined, currency)
@@ -52,11 +54,6 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
     description.publicInfo.title
   }`;
 
-  const banner = useMemo(
-    // () => composeFundBannerUrl(description.publicInfo.url),
-    () => description.publicInfo.logoUrl,
-    [description]
-  );
   const schemas = useMemo(() => [getFundSchema(description)], [description]);
 
   const notificationsUrl = useMemo(
@@ -149,7 +146,9 @@ const _FundDetailsContainer: React.FC<Props> = ({ data: description }) => {
       description={`${t("funds-page:title")} ${
         description.publicInfo.title
       } - ${description.publicInfo.description}`}
-      previewImage={banner}
+      previewImage={`${ORIGIN_URL}${composeFundBannerUrl(
+        description.publicInfo.url
+      )}`}
     >
       <BreadCrumbs
         items={[

@@ -33,8 +33,12 @@ import {
   PROGRAM_SETTINGS_FOLDER_ROUTE,
   SETTINGS
 } from "routes/invest.routes";
-import { MANAGER_DETAILS_ROUTE, MANAGER_SLUG_URL_PARAM_NAME } from "routes/manager.routes";
 import {
+  MANAGER_DETAILS_ROUTE,
+  MANAGER_SLUG_URL_PARAM_NAME
+} from "routes/manager.routes";
+import {
+  FOLLOW_BANNER_ROUTE,
   PROGRAM_API_KEYS,
   PROGRAM_API_KEYS_FOLDER_ROUTE,
   PROGRAM_BANNER_ROUTE,
@@ -91,10 +95,16 @@ export const composeProgramDetailsUrl = (slugUrl: string): string =>
     [`:${SLUG_URL_PARAM_NAME}`]: slugUrl
   });
 
-export const composeProgramBannerUrl = (slugUrl: string): string =>
-  replaceParams(PROGRAM_BANNER_ROUTE, {
+export const composeProgramBannerUrl = (
+  slugUrl: string,
+  assetType: ASSET
+): string => {
+  const route =
+    assetType === ASSET.FOLLOW ? FOLLOW_BANNER_ROUTE : PROGRAM_BANNER_ROUTE;
+  return replaceParams(route, {
     [`:${SLUG_URL_PARAM_NAME}`]: slugUrl
   });
+};
 
 export const composeFundBannerUrl = (slugUrl: string): string =>
   replaceParams(FUND_BANNER_ROUTE, {

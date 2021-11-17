@@ -53,12 +53,16 @@ const TransactionDetailsListItem: React.FC<{
           className={clsx({
             [styles[
               "transaction-details__details-list-statistic-item-value--long"
-            ]]: details.length > 30
+            ]]: details.length > 35
           })}
         >
           {url ? <Link to={linkCreator(url)}>{details}</Link> : details}
         </RowItem>
-        <RowItem>{canCopy && <CopyButton value={details} text />}</RowItem>
+        {canCopy && (
+          <RowItem>
+            <CopyButton value={details} text />
+          </RowItem>
+        )}
       </Row>
     </LabeledValue>
   );
@@ -114,12 +118,12 @@ const _TransactionWalletBlock: React.FC<{
       {walletSecond ? (
         <WalletConvert wallets={wallets} />
       ) : (
-          <CurrencyItem
-            logo={walletFirst.logoUrl}
-            name={walletFirst.currency}
-            clickable={false}
-          />
-        )}
+        <CurrencyItem
+          logo={walletFirst.logoUrl}
+          name={walletFirst.currency}
+          clickable={false}
+        />
+      )}
     </TransactionDetailsItem>
   );
 };
