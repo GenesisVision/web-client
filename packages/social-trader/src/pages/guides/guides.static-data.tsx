@@ -8,6 +8,12 @@ import Deposit2 from "media/guides/guides-1/Deposit2.png";
 import Deposit3 from "media/guides/guides-1/Deposit3.png";
 import Withdrawal1 from "media/guides/guides-1/Withdrawal1.png";
 import Withdrawal2 from "media/guides/guides-1/Withdrawal2.png";
+import Assets1 from "media/guides/guides-2/Assets1.png";
+import Assets2 from "media/guides/guides-2/Assets2.png";
+import Assets3 from "media/guides/guides-2/Assets3.png";
+import Assets4 from "media/guides/guides-2/Assets4.png";
+import Assets5 from "media/guides/guides-2/Assets5.png";
+import Assets6 from "media/guides/guides-2/Assets6.png";
 import CopyTrades1 from "media/guides/guides-2/CopyTrades1.png";
 import CopyTrades2 from "media/guides/guides-2/CopyTrades2.png";
 import CopyTrades3 from "media/guides/guides-2/CopyTrades3.png";
@@ -67,7 +73,7 @@ import { WALLET_TOTAL_PAGE_ROUTE } from "pages/wallet/wallet.paths";
 import React from "react";
 import { DASHBOARD_ROUTE, TRADING_ROUTE } from "routes/dashboard.routes";
 import { FUNDS_ROUTE } from "routes/funds.routes";
-import { GV_FOLLOW_ROUTE } from "routes/invest.routes";
+import { GV_ASSETS_ROUTE, GV_FOLLOW_ROUTE } from "routes/invest.routes";
 import { PROGRAMS_ROUTE } from "routes/programs.routes";
 import { SOCIAL_ROUTE } from "routes/social.routes";
 import { TERMINAL_ROUTE } from "routes/trade.routes";
@@ -363,6 +369,216 @@ export const navGuides: INavGuide[] = [
     id: "guides-2",
     name: "Investing",
     guides: [
+      {
+        id: "investing-0",
+        canonicalName: "investing-assets",
+        name: "Assets",
+        content: (
+          <>
+            <section>
+              <p>
+                Expand your trading and investment opportunities with our tool -{" "}
+                <strong>Genesis Vision Assets</strong>.
+              </p>
+              <p>
+                Assets can be used both additionally and alternatively to
+                existing GV Programs and GV Fund.
+              </p>
+              <p>
+                Diversify your capital across hundreds of cryptocurrencies in
+                one click and create your unique portfolio. Experience the ease
+                of managing your own capital with our powerful tool and buy/sell
+                assets without the hurdles of going to the exchanges directly.
+              </p>
+              <p>Start using Assets by switching to a tab “Invest”.</p>
+              <ConversationImages
+                bottomOffset={false}
+                size={"large"}
+                images={[
+                  {
+                    id: Assets1,
+                    resizes: [
+                      {
+                        height: 0,
+                        width: 0,
+                        logoUrl: Assets1,
+                        quality: "Original"
+                      },
+                      {
+                        height: 0,
+                        width: 0,
+                        logoUrl: Assets1,
+                        quality: "Low"
+                      }
+                    ]
+                  }
+                ]}
+              />
+              <p>
+                Get access to detailed information about more than 200 tokens,
+                available in the crypto market:
+              </p>
+              <ul>
+                <li>ticket code and asset name,</li>
+
+                <li>current price,</li>
+
+                <li>price change over last 24 hours,</li>
+
+                <li>
+                  the total market value of cryptocurrency’s circulating supply,
+                </li>
+
+                <li>
+                  cryptocurrency trading volume across all tracked platforms in
+                  the last 24 hours.
+                </li>
+              </ul>
+              <ConversationImages
+                bottomOffset={false}
+                size={"large"}
+                images={[
+                  {
+                    id: Assets2,
+                    resizes: [
+                      {
+                        height: 0,
+                        width: 0,
+                        logoUrl: Assets2,
+                        quality: "Original"
+                      },
+                      {
+                        height: 0,
+                        width: 0,
+                        logoUrl: Assets2,
+                        quality: "Low"
+                      }
+                    ]
+                  }
+                ]}
+              />
+              <p>
+                Log In to buy and sell coins, add tokens to favourites and check
+                portfolio.
+              </p>
+              <p>
+                Use the “Buy” button to make a purchase, select wallet currency
+                and confirm the deal.
+              </p>
+              <ConversationImages
+                bottomOffset={false}
+                size={"large"}
+                images={[
+                  {
+                    id: Assets3,
+                    resizes: [
+                      {
+                        height: 0,
+                        width: 0,
+                        logoUrl: Assets3,
+                        quality: "Original"
+                      },
+                      {
+                        height: 0,
+                        width: 0,
+                        logoUrl: Assets3,
+                        quality: "Low"
+                      }
+                    ]
+                  }
+                ]}
+              />
+              <p>
+                Get a clear overview of your total portfolio balance, profit &
+                loss during various time periods. Keep on top of your current
+                positions, market value, percentage change, (un)realized gains.
+              </p>
+              <ConversationImages
+                bottomOffset={false}
+                size={"large"}
+                images={[
+                  {
+                    id: Assets4,
+                    resizes: [
+                      {
+                        height: 0,
+                        width: 0,
+                        logoUrl: Assets4,
+                        quality: "Original"
+                      },
+                      {
+                        height: 0,
+                        width: 0,
+                        logoUrl: Assets4,
+                        quality: "Low"
+                      }
+                    ]
+                  }
+                ]}
+              />
+              <p>
+                Put a bookmark to your favourite coins, saving them to the
+                appropriate tab and make it easier to manage your crypto
+                positions and track their performance.
+              </p>
+              <ConversationImages
+                bottomOffset={false}
+                size={"large"}
+                images={[
+                  {
+                    id: Assets5,
+                    resizes: [
+                      {
+                        height: 0,
+                        width: 0,
+                        logoUrl: Assets5,
+                        quality: "Original"
+                      },
+                      {
+                        height: 0,
+                        width: 0,
+                        logoUrl: Assets5,
+                        quality: "Low"
+                      }
+                    ]
+                  }
+                ]}
+              />
+              <p>
+                You can check transaction history either in Assets-History or
+                switching to Wallet-Transactions.
+              </p>
+              <ConversationImages
+                bottomOffset={false}
+                size={"large"}
+                images={[
+                  {
+                    id: Assets6,
+                    resizes: [
+                      {
+                        height: 0,
+                        width: 0,
+                        logoUrl: Assets6,
+                        quality: "Original"
+                      },
+                      {
+                        height: 0,
+                        width: 0,
+                        logoUrl: Assets6,
+                        quality: "Low"
+                      }
+                    ]
+                  }
+                ]}
+              />
+            </section>
+          </>
+        ),
+        linkInfo: {
+          link: GV_ASSETS_ROUTE,
+          label: "Assets"
+        }
+      },
       {
         id: "investing-1",
         canonicalName: "investing-funds",

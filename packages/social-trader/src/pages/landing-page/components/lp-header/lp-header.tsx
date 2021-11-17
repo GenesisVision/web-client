@@ -115,6 +115,11 @@ const ButtonsContainer = styled.div`
   ${mediaBreakpointTablet("display: block; justify-self: end;")}
 `;
 
+const MobileButtonsContainer = styled.div`
+  display: block;
+  ${mediaBreakpointTablet("display: none;")}
+`;
+
 const LPHeader: React.FC = () => {
   const { t } = useTranslation();
   const isAuthenticated = authService.isAuthenticated();
@@ -158,6 +163,17 @@ const LPHeader: React.FC = () => {
           </SignupButton>
         )}
       </ButtonsContainer>
+      <MobileButtonsContainer>
+        {!isAuthenticated && (
+          <SignupButton
+            isSignup
+            color="secondary"
+            eventLabel={t("landing-page:buttons.join")}
+          >
+            {t("landing-page:buttons.join")}
+          </SignupButton>
+        )}
+      </MobileButtonsContainer>
     </Container>
   );
 };

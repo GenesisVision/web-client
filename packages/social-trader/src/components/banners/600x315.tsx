@@ -2,7 +2,7 @@ import React from "react";
 import { roundPercents } from "utils/formatter";
 
 import Chart from "./components/banner-chart";
-import GvLogo from "./components/gv-logo";
+import { GvLogoSmall } from "./components/gv-logo";
 import LogoPlaceholder from "./components/logo-placeholder";
 import Text from "./components/text";
 import { BannerComponent, formatEquity, LogoOptions } from "./utils";
@@ -65,7 +65,7 @@ export const Banner: BannerComponent = props => {
         href={props.details.publicInfo.logo}
         color={props.details.publicInfo.color}
       />
-      <GvLogo y={147} x={481} />
+      <GvLogoSmall y={147} x={481} />
       <Title>{title}</Title>
       <Label y={66} x={95}>
         Monthly Profit
@@ -77,7 +77,7 @@ export const Banner: BannerComponent = props => {
         Equity
       </Label>
       <Value y={66} x={440}>
-        {formatEquity(statistic.balance)}
+        {`$ ${formatEquity(statistic.balance)}`}
       </Value>
       <Chart data={points.chart} width={420} height={200} x={20} y={95} />
     </svg>
