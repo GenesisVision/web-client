@@ -26,7 +26,7 @@ const _MarketWatchContainer: React.FC = () => {
   ) : (
     <MarketWatch
       items={items.filter(({ permissions }) => {
-        // todo fix it. App crashes when you change terminalType from futures to spot, bc futures doesn't have permissions
+        // todo fix it. App crashes when you change terminalType
         if (!permissions) {
           return false;
         }
