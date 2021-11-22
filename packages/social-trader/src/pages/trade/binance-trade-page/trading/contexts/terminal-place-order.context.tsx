@@ -23,7 +23,6 @@ import { TerminalFuturesPositionsContext } from "./terminal-futures-positions.co
 const InitialFuturesTerminalLeverageState = 1;
 
 type TradingAccountInfoState = {
-  setBracket: (bracket?: LeverageBracket) => void;
   leverage: number;
   setLeverage: (leverage: number) => void;
   updatePositionMode: VoidFunction;
@@ -31,7 +30,7 @@ type TradingAccountInfoState = {
   placeOrderMode: FuturesPlaceOrderMode;
   setPlaceOrderMode: (mode: FuturesPlaceOrderMode) => void;
   currentPositionMode?: PositionModeType;
-  bracket?: LeverageBracket;
+  maxNotional: number;
   marginMode?: MarginModeType;
   positionInfo?: Position;
 };
@@ -48,8 +47,8 @@ const ContextProvider: React.FC = ({ children }) => {
   const { positionsList } = useContext(TerminalFuturesPositionsContext);
 
   const [marginMode, setMarginMode] = useState<MarginModeType | undefined>();
-  const [bracket, setBracket] = useState<LeverageBracket | undefined>();
   const [leverage, setLeverage] = useState(InitialFuturesTerminalLeverageState);
+  const [maxNotional, setMaxNotional] = useState<number>(0);
   const [currentPositionMode, setCurrentPositionMode] = useState<
     PositionModeType | undefined
   >();
@@ -65,6 +64,12 @@ const ContextProvider: React.FC = ({ children }) => {
       setPlaceOrderMode("OneWay");
     }
   }, [currentPositionMode]);
+
+  useEffect(() => {
+    if (positionInfo) {
+      setMaxNotional(positionInfo.maxNotional);
+    }
+  }, [positionInfo, symbol]);
 
   useEffect(() => {
     if (positionInfo) {
@@ -100,8 +105,6 @@ const ContextProvider: React.FC = ({ children }) => {
 
   const value = useMemo(
     () => ({
-      bracket,
-      setBracket,
       leverage,
       marginMode,
       setMarginMode,
@@ -110,11 +113,10 @@ const ContextProvider: React.FC = ({ children }) => {
       currentPositionMode,
       placeOrderMode,
       setPlaceOrderMode,
-      positionInfo
+      positionInfo,
+      maxNotional
     }),
     [
-      bracket,
-      setBracket,
       marginMode,
       leverage,
       setMarginMode,
@@ -123,7 +125,8 @@ const ContextProvider: React.FC = ({ children }) => {
       currentPositionMode,
       placeOrderMode,
       setPlaceOrderMode,
-      positionInfo
+      positionInfo,
+      maxNotional
     ]
   );
 

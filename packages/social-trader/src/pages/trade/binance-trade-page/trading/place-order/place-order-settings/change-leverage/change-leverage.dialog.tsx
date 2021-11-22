@@ -19,6 +19,8 @@ import React, {
 import { useTranslation } from "react-i18next";
 
 import { TerminalFuturesPositionsContext } from "../../../contexts/terminal-futures-positions.context";
+import { TerminalInfoContext } from "../../../contexts/terminal-info.context";
+import { getSymbolFromState } from "../../../terminal.helpers";
 import styles from "./change-leverage.module.scss";
 
 interface Props {
@@ -68,16 +70,14 @@ const ChangeLeverageDialogContent: React.FC<Props> = ({
   const [t] = useTranslation();
   const { openPositions } = useContext(TerminalFuturesPositionsContext);
   const hasPositions = !!openPositions.length;
+  const { marginMode } = useContext(TerminalPlaceOrderContext);
 
   const RANGE_MARKS = useMemo(() => generateLeverageMarks(maxLeverage), [
     maxLeverage
   ]);
   const [leverage, setLeverage] = useState<number>(leverageProp);
+  const [bracket, setBracket] = useState<LeverageBracket | undefined>();
   const [reductionError, setReductionError] = useState(false);
-
-  const { marginMode, setBracket, bracket } = useContext(
-    TerminalPlaceOrderContext
-  );
 
   useEffect(() => {
     const bracket = [...leverageBrackets]
