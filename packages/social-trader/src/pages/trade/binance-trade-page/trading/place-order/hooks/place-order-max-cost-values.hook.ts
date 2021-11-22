@@ -34,7 +34,7 @@ export const usePlaceOrderMaxCostValues = ({
   balance,
   quantity: quan,
   orderPrice: price,
-  reduceOnly: redOnly
+  reduceOnly: reduceOnlyProp
 }: PlaceOrderMaxCostInputValues & {
   orderPrice: number | string;
 }): PlaceOrderMaxCostOutputValues => {
@@ -43,10 +43,21 @@ export const usePlaceOrderMaxCostValues = ({
   // Просчитать hedge и oneway mode, reduceOnly, хватает ли денег или нет
   const { markPrices } = useContext(TerminalTickerContext);
   const { openPositions } = useContext(TerminalFuturesPositionsContext);
-  const { symbol } = useContext(TerminalInfoContext);
+  const { symbol, exchangeAccountId } = useContext(TerminalInfoContext);
   const { leverage, placeOrderMode } = useContext(TerminalPlaceOrderContext);
 
-  const reduceOnly = redOnly || placeOrderMode === "HedgeClose";
+  if (!exchangeAccountId) {
+    return {
+      longCost: 0,
+      shortCost: 0,
+      maxLong: 0,
+      maxShort: 0,
+      sliderBuy: 0,
+      sliderSell: 0
+    };
+  }
+
+  const reduceOnly = reduceOnlyProp || placeOrderMode === "HedgeClose";
 
   const orderPrice = +price;
 
@@ -79,8 +90,6 @@ export const usePlaceOrderMaxCostValues = ({
   // Step 1: Calculate the Initial Margin
   const longInitialMargin = (orderPrice * quantity) / leverage;
   const shortInitialMargin = (orderPrice * quantity) / leverage;
-
-  const imr = 1 / leverage;
 
   // Step 2: Calculate Open Loss
   const longOpenLoss =
@@ -144,11 +153,22 @@ export const useMarketPlaceOrderMaxCostValues = ({
   // TODO reduceOnly
   const { markPrices } = useContext(TerminalTickerContext);
   const { openPositions } = useContext(TerminalFuturesPositionsContext);
-  const { symbol } = useContext(TerminalInfoContext);
+  const { symbol, exchangeAccountId } = useContext(TerminalInfoContext);
   const { leverage, placeOrderMode } = useContext(TerminalPlaceOrderContext);
   const { bestAskPrice: bestAsk, bestBidPrice: bestBid } = useContext(
     TradingPriceContext
   );
+
+  if (!exchangeAccountId) {
+    return {
+      longCost: 0,
+      shortCost: 0,
+      maxLong: 0,
+      maxShort: 0,
+      sliderBuy: 0,
+      sliderSell: 0
+    };
+  }
 
   const reduceOnly = redOnly || placeOrderMode === "HedgeClose";
   const bestAskPrice = bestAsk ? bestAsk : 0;
