@@ -19,8 +19,8 @@ enum TABS {
   OPEN_ORDERS = "OPEN_ORDERS",
   ORDER_HISTORY = "ORDER_HISTORY",
   TRADE_HISTORY = "TRADE_HISTORY",
-  TRANSACTION_HISTORY = "TRANSACTION_HISTORY",
-  ASSETS = "ASSETS"
+  TRANSACTION_HISTORY = "TRANSACTION_HISTORY"
+  // ASSETS = "ASSETS"
 }
 
 const _TradingTablesFutures: React.FC = () => {
@@ -47,7 +47,7 @@ const _TradingTablesFutures: React.FC = () => {
             value={TABS.TRANSACTION_HISTORY}
             label={t("Transaction history")}
           />
-          <GVTab value={TABS.ASSETS} label={t("Assets")} />
+          {/* <GVTab value={TABS.ASSETS} label={t("Assets")} /> */}
         </GVTabs>
       </DefaultBlock>
       <div className={styles["trading-tables__tables-container"]}>
@@ -56,7 +56,7 @@ const _TradingTablesFutures: React.FC = () => {
         {tab === TABS.ORDER_HISTORY && <OrderHistoryContainer />}
         {tab === TABS.TRADE_HISTORY && <TradeHistoryContainer />}
         {tab === TABS.TRANSACTION_HISTORY && <TransactionHistoryContainer />}
-        {tab === TABS.ASSETS && null}
+        {/* {tab === TABS.ASSETS && null} */}
       </div>
     </>
   );
