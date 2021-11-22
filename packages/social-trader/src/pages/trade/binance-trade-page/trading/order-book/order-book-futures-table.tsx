@@ -45,7 +45,13 @@ const _OrderBookFuturesTable: React.FC<Props> = ({
     <table className={styles["order-book__table"]}>
       <tbody>
         {items.map(([price, amount], i) => {
-          const hasOrder = isOrderInLine({ items, i, limitOrders, price });
+          const hasOrder = isOrderInLine({
+            items,
+            i,
+            limitOrders,
+            price,
+            reverse
+          });
           const sum = countOrderBookFuturesSum(items, i, reverse);
           return (
             <OrderBookRow

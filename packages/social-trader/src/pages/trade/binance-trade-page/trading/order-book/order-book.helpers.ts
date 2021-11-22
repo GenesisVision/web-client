@@ -17,13 +17,26 @@ export const isOrderInLine = ({
   i,
   items,
   limitOrders,
-  price
+  price,
+  reverse
 }: {
   i: number;
   items: StringBidDepth[];
   limitOrders: number[];
   price: string;
+  reverse?: boolean;
 }) => {
+  if (reverse) {
+    return i === items.length - 1
+      ? !!limitOrders.find(limitOrderPrice => {
+          return limitOrderPrice <= +price;
+        })
+      : !!limitOrders.find(limitOrderPrice => {
+          return (
+            limitOrderPrice > +items[i + 1][0] && limitOrderPrice <= +price
+          );
+        });
+  }
   return i === 0
     ? !!limitOrders.find(limitOrderPrice => {
         return limitOrderPrice >= +price;

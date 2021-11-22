@@ -79,7 +79,13 @@ const _OrderBookSpotTable: React.FC<Props> = ({
     <table className={styles["order-book__table"]}>
       <tbody>
         {items.map(([price, amount], i) => {
-          const hasOrder = isOrderInLine({ items, i, limitOrders, price });
+          const hasOrder = isOrderInLine({
+            items,
+            i,
+            limitOrders,
+            price,
+            reverse
+          });
           const total = +price * +amount;
           return (
             <OrderBookRow
