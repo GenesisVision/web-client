@@ -4,6 +4,7 @@ import {
   BinanceFuturesMarginType,
   BinancePositionMode,
   BinancePositionSide,
+  BinanceRawAggregatedTrade,
   BinanceRawCancelOrder,
   BinanceRawCancelOrderId,
   BinanceRawFuturesChangeMarginTypeResult,
@@ -152,13 +153,13 @@ export const getTrades = (
   from(
     api
       .terminal()
-      .getFuturesSymbolRecentTrades({ symbol, limit })
-      .then((items: Array<BinanceRawRecentTrade>) =>
+      .getFuturesSymbolAggregatedTrades({ symbol, limit })
+      .then((items: Array<BinanceRawAggregatedTrade>) =>
         items.map(
-          ({ orderId, price, baseQuantity, tradeTime, buyerIsMaker }) => ({
-            quantity: baseQuantity,
+          ({ price, quantity, tradeTime, buyerIsMaker, aggregateTradeId }) => ({
+            quantity,
             price,
-            orderId,
+            orderId: aggregateTradeId,
             tradeTime,
             buyerIsMaker
           })
