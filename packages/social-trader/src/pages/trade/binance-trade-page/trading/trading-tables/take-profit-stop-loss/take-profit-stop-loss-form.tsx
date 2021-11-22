@@ -21,7 +21,10 @@ import { terminalMoneyFormat } from "../../components/terminal-money-format/term
 import { FilterValues } from "../../place-order/place-order.types";
 import { getDecimalScale, getTextColor } from "../../terminal.helpers";
 import { FuturesOrder } from "../../terminal.types";
-import { calculateRealizedPNL } from "../positions/positions.helpers";
+import {
+  calculateRealizedPNL,
+  USDTtickSize
+} from "../positions/positions.helpers";
 import TakeProfitStopLossOrderRow from "./take-profit-stop-loss-order-row";
 import { WORKING_MARK_VALUE, WorkingTypeSelect } from "./working-type-select";
 
@@ -37,7 +40,7 @@ interface ITakeProfitStopLossDefaultFormValues {
 
 export interface ITakeProfitStopLossFormValues
   extends ITakeProfitStopLossDefaultFormValues {
-  tkWorkingType: BinanceWorkingType;
+  tpWorkingType: BinanceWorkingType;
   slWorkingType: BinanceWorkingType;
   dirtyFields: Set<TAKE_PROFIT_STOP_LOSS_FORM_FIELDS>;
 }
@@ -73,7 +76,7 @@ const _TakeProfitStopLossForm: React.FC<Props> = ({
 
   const { maxPrice, minPrice, tickSize } = filterValues;
 
-  const [tkWorkingType, setTKWorkingType] = useState<string>(
+  const [tpWorkingType, setTPWorkingType] = useState<string>(
     takeProfitOrder ? takeProfitOrder.workingType : WORKING_MARK_VALUE
   );
   const [slWorkingType, setSLWorkingType] = useState<string>(
@@ -126,7 +129,7 @@ const _TakeProfitStopLossForm: React.FC<Props> = ({
     <HookForm
       form={form}
       onSubmit={values =>
-        onSubmit({ ...values, tkWorkingType, slWorkingType, dirtyFields })
+        onSubmit({ ...values, tpWorkingType, slWorkingType, dirtyFields })
       }
     >
       <DialogTop title={"TP/SL for entire position"} />
@@ -179,8 +182,8 @@ const _TakeProfitStopLossForm: React.FC<Props> = ({
           </RowItem>
           <RowItem>
             <WorkingTypeSelect
-              workingType={tkWorkingType}
-              setWorkingType={setTKWorkingType}
+              workingType={tpWorkingType}
+              setWorkingType={setTPWorkingType}
             />
           </RowItem>
         </Row>
@@ -188,7 +191,7 @@ const _TakeProfitStopLossForm: React.FC<Props> = ({
           <Text muted>
             When{" "}
             <Text color={"white"}>
-              {tkWorkingType === "Mark" ? "Mark Price" : "Last Price"}
+              {tpWorkingType === "Mark" ? "Mark Price" : "Last Price"}
             </Text>{" "}
             reaches{" "}
             <Text color={"white"}>
@@ -206,7 +209,8 @@ const _TakeProfitStopLossForm: React.FC<Props> = ({
                 ? "--"
                 : terminalMoneyFormat({
                     amount: tpPNL,
-                    tickSize: "0.01"
+                    // fix hardcoded tickSize
+                    tickSize: USDTtickSize
                   })}
             </Text>{" "}
             USDT
@@ -270,7 +274,8 @@ const _TakeProfitStopLossForm: React.FC<Props> = ({
                 ? "--"
                 : terminalMoneyFormat({
                     amount: slPNL,
-                    tickSize: "0.01"
+                    // fix hardcoded tickSize
+                    tickSize: USDTtickSize
                   })}
             </Text>{" "}
             USDT

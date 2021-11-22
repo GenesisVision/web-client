@@ -56,7 +56,7 @@ const _TakeProfitStopLossPopup: React.FC<Props> = ({
       stopLoss,
       takeProfit,
       slWorkingType,
-      tkWorkingType,
+      tpWorkingType,
       dirtyFields
     } = values;
 
@@ -82,7 +82,7 @@ const _TakeProfitStopLossPopup: React.FC<Props> = ({
       type: "TakeProfitMarket",
       positionSide,
       stopPrice: takeProfit,
-      workingType: tkWorkingType
+      workingType: tpWorkingType
     };
 
     const stopLossValues = {
