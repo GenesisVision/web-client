@@ -1,3 +1,4 @@
+import { Center } from "components/center/center";
 import TableCellComponent from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import { Text } from "components/text/text";
@@ -13,6 +14,7 @@ import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { formatDate } from "utils/dates";
 
+import { LiquidationPriceInfoBadge } from "../../components/liquidation-price/liquidation-price-info-badge";
 import { TerminalTickerContext } from "../../contexts/terminal-ticker.context";
 import {
   getFuturesOpenOrderSideLabel,
@@ -67,13 +69,15 @@ const _OrderHistoryFuturesRow: React.FC<FuturesOrder> = ({
           : "–"}
       </TableCell>
       <TableCell>
-        {type === "Market"
-          ? "–"
-          : terminalMoneyFormat({
-              amount: price,
-              tickSize: String(tickSize)
-            })}
-        {type === "Liquidation" && null}
+        <Center>
+          {type === "Market"
+            ? "–"
+            : terminalMoneyFormat({
+                amount: price,
+                tickSize: String(tickSize)
+              })}
+          {type === "Liquidation" && <LiquidationPriceInfoBadge />}
+        </Center>
       </TableCell>
       <TableCell>
         {`${terminalMoneyFormat({
