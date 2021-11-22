@@ -11,7 +11,6 @@ import useTab from "hooks/tab.hook";
 import React, { useCallback, useContext } from "react";
 import { postponeCallback } from "utils/hook-form.helpers";
 
-import { TerminalFuturesBalanceContext } from "../../contexts/terminal-futures-balance.context";
 import { TerminalInfoContext } from "../../contexts/terminal-info.context";
 import { TerminalMethodsContext } from "../../contexts/terminal-methods.context";
 import AddMarginForm from "./add-margin-form";
@@ -54,7 +53,6 @@ const _AdjustMarginPopup: React.FC<Props> = ({
 }) => {
   const { adjustMargin } = useContext(TerminalMethodsContext);
   const { exchangeAccountId } = useContext(TerminalInfoContext);
-  const { availableBalance } = useContext(TerminalFuturesBalanceContext);
 
   const { tab, setTab } = useTab<BinanceFuturesMarginChangeDirectionType>(
     "Add"
@@ -99,7 +97,6 @@ const _AdjustMarginPopup: React.FC<Props> = ({
             margin={margin}
             onSubmit={handleSubmit}
             status={status}
-            availableBalance={availableBalance}
           />
         )}
         {tab === "Reduce" && (
