@@ -3,7 +3,7 @@ import React, { useMemo } from "react";
 
 import { calculateIsolatedLiqPrice } from "../../trading-tables/positions/positions.helpers";
 import { terminalMoneyFormat } from "../terminal-money-format/terminal-money-format";
-import { LiquadationPriceLessThanZeroTooltip } from "./liquidation-price-less-than-zero-tooltip";
+import { LiquidationPriceLessThanZeroTooltip } from "./liquidation-price-less-than-zero-tooltip";
 
 interface Props {
   tickSize: string;
@@ -46,7 +46,7 @@ const _LiquidationPriceIsolated: React.FC<Props> = ({
   return (
     <>
       {liquidationPrice <= 0 ? (
-        <LiquadationPriceLessThanZeroTooltip />
+        <LiquidationPriceLessThanZeroTooltip />
       ) : (
         terminalMoneyFormat({
           amount: liquidationPrice,

@@ -2,7 +2,7 @@ import Tooltip from "components/tooltip/tooltip";
 import { TooltipContent } from "components/tooltip/tooltip-content";
 import React from "react";
 
-export const LiquadationPriceLessThanZeroTooltip = () => (
+export const LiquidationPriceLessThanZeroTooltip = () => (
   <Tooltip
     render={() => (
       <TooltipContent>
