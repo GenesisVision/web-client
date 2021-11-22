@@ -85,11 +85,15 @@ const ContextProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     if (positionsList) {
-      const flatPositions = flatNormalizedPositions(positionsList).filter(
-        pos => pos.symbol === getSymbolFromState(symbol)
-      );
       // if currentMode is hedge, then you have two position for symbol. You can choose any position, because leverage and marginType will be the same
-      setPositionInfo(flatPositions[0]);
+
+      // Sometimes in sockets you can get extra positions (for example in funding fee messages).
+      // It means that you have three positions and one or two of them does not have enough data, because it wasn't loaded from restApi
+      // It might lacks of leverage that's why i check in array whether it has leverage or not
+      const flatPosition = flatNormalizedPositions(positionsList).find(
+        pos => pos.symbol === getSymbolFromState(symbol) && pos.leverage
+      );
+      setPositionInfo(flatPosition);
     }
   }, [positionsList, symbol]);
 
