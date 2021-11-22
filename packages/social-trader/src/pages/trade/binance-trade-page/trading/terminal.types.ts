@@ -56,7 +56,7 @@ export type CrossPositionInfo = {
   crossMarginBalance: number;
   crossMaintMargin: number;
   crossMarginRatio: number;
-  crossPositionsSum: number;
+  crossMargin: number;
 };
 
 export type PositionMini = FuturesAccountEventPosition;
