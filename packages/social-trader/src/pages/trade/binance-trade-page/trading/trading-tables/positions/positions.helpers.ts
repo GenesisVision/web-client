@@ -169,9 +169,9 @@ export const calculateRealizedPNL = ({
   direction: "Short" | "Long";
 }): number => {
   if (direction === "Long") {
-    return (exitPrice - entryPrice) * quantity;
+    return (exitPrice - entryPrice) * Math.abs(quantity);
   }
-  return (entryPrice - exitPrice) * quantity;
+  return (entryPrice - exitPrice) * Math.abs(quantity);
 };
 
 // https://www.binance.com/en/support/faq/b3c689c1f50a44cabb3a84e663b81d93
