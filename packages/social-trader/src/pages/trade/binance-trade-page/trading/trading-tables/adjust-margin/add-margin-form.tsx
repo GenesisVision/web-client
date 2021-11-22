@@ -6,7 +6,7 @@ import { Row } from "components/row/row";
 import { SubmitButton } from "components/submit-button/submit-button";
 import { BinancePositionSide } from "gv-api-web";
 import { API_REQUEST_STATUS } from "hooks/api-request.hook";
-import React, { useCallback } from "react";
+import React, { useCallback, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { HookForm } from "utils/hook-form.helpers";
@@ -16,6 +16,7 @@ import {
   terminalMoneyFormat,
   truncated
 } from "../../components/terminal-money-format/terminal-money-format";
+import { TerminalFuturesBalanceContext } from "../../contexts/terminal-futures-balance.context";
 import { getDecimalScale } from "../../terminal.helpers";
 import {
   calculateIsolatedLiqPrice,
@@ -34,7 +35,6 @@ interface Props {
   margin: number;
   maintAmount: number;
   maintMarginRate: number;
-  availableBalance: number;
   quantity: number;
   onSubmit: (values: IAdjustMarginDefaultFormValues) => any;
   status: API_REQUEST_STATUS;
@@ -47,7 +47,6 @@ const _AddMarginForm: React.FC<Props> = ({
   entryPrice,
   symbol,
   margin,
-  availableBalance,
   maintAmount,
   maintMarginRate,
   positionSide,
@@ -56,6 +55,7 @@ const _AddMarginForm: React.FC<Props> = ({
   onSubmit
 }) => {
   const [t] = useTranslation();
+  const { availableBalance } = useContext(TerminalFuturesBalanceContext);
 
   // fix hardcoded tickSize
   const truncatedBalance = truncated(

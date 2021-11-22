@@ -8,7 +8,7 @@ import {
 } from "gv-api-web";
 import useApiRequest from "hooks/api-request.hook";
 import useTab from "hooks/tab.hook";
-import React, { useContext } from "react";
+import React, { useCallback, useContext } from "react";
 import { postponeCallback } from "utils/hook-form.helpers";
 
 import { TerminalFuturesBalanceContext } from "../../contexts/terminal-futures-balance.context";
@@ -64,15 +64,18 @@ const _AdjustMarginPopup: React.FC<Props> = ({
     middleware: [postponeCallback(onClose)]
   });
 
-  const handleSubmit = (values: IAdjustMarginDefaultFormValues) => {
-    return sendRequest({
-      positionSide,
-      accountId: exchangeAccountId,
-      symbol,
-      type: tab,
-      amount: +values[ADJUST_MARGIN_FORM_FIELDS.amount]
-    });
-  };
+  const handleSubmit = useCallback(
+    (values: IAdjustMarginDefaultFormValues) => {
+      return sendRequest({
+        positionSide,
+        accountId: exchangeAccountId,
+        symbol,
+        type: tab,
+        amount: +values[ADJUST_MARGIN_FORM_FIELDS.amount]
+      });
+    },
+    [positionSide, exchangeAccountId, tab, symbol]
+  );
 
   return (
     <>
