@@ -69,9 +69,11 @@ const ChangeLeverageDialogContent: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   const { openPositions } = useContext(TerminalFuturesPositionsContext);
-  const hasPositions = !!openPositions.length;
+  const { symbol } = useContext(TerminalInfoContext);
   const { marginMode } = useContext(TerminalPlaceOrderContext);
 
+  const symbolName = getSymbolFromState(symbol);
+  const hasPosition = openPositions.find(pos => pos.symbol === symbolName);
   const RANGE_MARKS = useMemo(() => generateLeverageMarks(maxLeverage), [
     maxLeverage
   ]);
@@ -89,7 +91,7 @@ const ChangeLeverageDialogContent: React.FC<Props> = ({
   }, [leverage]);
 
   useEffect(() => {
-    if (hasPositions && leverage < leverageProp && marginMode === "Isolated") {
+    if (hasPosition && leverage < leverageProp && marginMode === "Isolated") {
       setReductionError(true);
     } else {
       setReductionError(false);
