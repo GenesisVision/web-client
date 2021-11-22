@@ -1,0 +1,63 @@
+$column-width: 100px;
+
+.positions {
+  &__table {
+    & th,
+    & td {
+      width: $column-width;
+      min-width: $column-width;
+      max-width: $column-width;
+      box-sizing: border-box;
+    }
+
+    // Fix it
+    & th,
+    & td {
+      &:nth-child(1) {
+        width: 130px;
+        min-width: 130px;
+        max-width: 130px;
+      }
+      &:nth-child(2) {
+        width: 130px;
+        min-width: 130px;
+        max-width: 130px;
+      }
+      &:nth-child(5) {
+        width: 110px;
+        min-width: 110px;
+        max-width: 110px;
+      }
+      &:nth-child(7) {
+        width: 115px;
+        min-width: 115px;
+        max-width: 115px;
+      }
+      &:nth-child(8) {
+        width: 110px;
+        min-width: 110px;
+        max-width: 110px;
+      }
+      &:nth-child(9) {
+        width: 115px;
+        min-width: 115px;
+        max-width: 115px;
+      }
+      &:nth-child(10) {
+        width: 115px;
+        min-width: 115px;
+        max-width: 115px;
+      }
+      &:nth-child(10) {
+        width: 115px;
+        min-width: 115px;
+        max-width: 115px;
+      }
+      &:nth-child(11) {
+        width: 330px;
+        min-width: 330px;
+        max-width: 330px;
+      }
+    }
+  }
+}

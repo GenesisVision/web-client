@@ -43,7 +43,7 @@ interface Props {
   maintAmount?: number;
 }
 
-const _PositionsRow: React.FC<Props> = ({
+export const PositionsRow: React.FC<Props> = ({
   marginRatio,
   maintMargin,
   maintMarginRate,
@@ -179,5 +179,3 @@ const _PositionsRow: React.FC<Props> = ({
     </TableRow>
   );
 };
-
-export const PositionsRow = React.memo(_PositionsRow);

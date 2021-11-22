@@ -11,6 +11,7 @@ import { useTranslation } from "react-i18next";
 
 import { PositionPNLPopover } from "./position-pnl-popover";
 import { POSITIONS_TABLE_COLUMNS } from "./positions.helpers";
+import styles from "./positions.module.scss";
 import { PositionsRowContainer } from "./positions-row.container";
 
 interface Props {
@@ -29,6 +30,7 @@ export const Positions: React.FC<Props> = ({ items }) => {
 
   return (
     <TradeTable
+      className={styles["positions__table"]}
       columns={POSITIONS_TABLE_COLUMNS}
       items={items}
       renderHeaderCell={({ name, tooltip }) => {
