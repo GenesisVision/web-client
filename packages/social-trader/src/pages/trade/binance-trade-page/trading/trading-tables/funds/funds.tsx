@@ -23,7 +23,7 @@ const _Funds: React.FC<Props> = ({ items }) => {
       items={items}
       columns={FUNDS_TABLE_COLUMNS}
       renderHeaderCell={({ name }) => (
-        <th>
+        <th key={name}>
           <Text muted>
             {name === "-value" ? `${currency}${name}` : t(name)}
           </Text>

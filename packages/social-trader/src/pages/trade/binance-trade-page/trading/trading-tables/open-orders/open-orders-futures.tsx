@@ -45,7 +45,7 @@ export const OpenOrdersFutures: React.FC<Props> = ({ items }) => {
       columns={OPEN_ORDERS_FUTURES_TABLE_COLUMNS}
       items={items}
       renderHeaderCell={({ name }) => (
-        <th>
+        <th key={name}>
           {name === "cancel-all" ? (
             items.length ? (
               <Button

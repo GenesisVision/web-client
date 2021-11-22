@@ -41,7 +41,7 @@ export const OpenOrdersSpot: React.FC<Props> = ({ items }) => {
       columns={OPEN_ORDERS_SPOT_TABLE_COLUMNS}
       items={items}
       renderHeaderCell={({ name }) => (
-        <th>
+        <th key={name}>
           {name === "cancel-all" ? (
             items.length ? (
               <Button

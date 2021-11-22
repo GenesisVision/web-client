@@ -6,7 +6,7 @@ import { TradeTable } from "pages/trade/binance-trade-page/trading/components/tr
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import { Position } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { StyledTh } from "pages/trade/binance-trade-page/trading/trading-tables/positions/positions.styles";
-import React, { useContext, useState } from "react";
+import React, { Fragment, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { PositionPNLPopover } from "./position-pnl-popover";
@@ -31,32 +31,36 @@ export const Positions: React.FC<Props> = ({ items }) => {
     <TradeTable
       columns={POSITIONS_TABLE_COLUMNS}
       items={items}
-      renderHeaderCell={({ name, tooltip }) =>
-        name === "pnl" ? (
-          <PositionPNLPopover
-            workingType={workingType}
-            setWorkingType={setWorkingType}
-          />
-        ) : tooltip ? (
-          <StyledTh>
-            <Tooltip
-              render={() => (
-                <TooltipContent>
-                  {t(`trade:positions.table.tooltip.${name}`)}
-                </TooltipContent>
-              )}
-            >
-              <Text muted style={{ cursor: "help" }}>
-                {t(`trade:positions.table.${name}`)}
-              </Text>
-            </Tooltip>
-          </StyledTh>
-        ) : (
-          <StyledTh>
-            <Text muted>{t(`trade:positions.table.${name}`)}</Text>
-          </StyledTh>
-        )
-      }
+      renderHeaderCell={({ name, tooltip }) => {
+        return (
+          <Fragment key={name}>
+            {name === "pnl" ? (
+              <PositionPNLPopover
+                workingType={workingType}
+                setWorkingType={setWorkingType}
+              />
+            ) : tooltip ? (
+              <StyledTh>
+                <Tooltip
+                  render={() => (
+                    <TooltipContent>
+                      {t(`trade:positions.table.tooltip.${name}`)}
+                    </TooltipContent>
+                  )}
+                >
+                  <Text muted style={{ cursor: "help" }}>
+                    {t(`trade:positions.table.${name}`)}
+                  </Text>
+                </Tooltip>
+              </StyledTh>
+            ) : (
+              <StyledTh>
+                <Text muted>{t(`trade:positions.table.${name}`)}</Text>
+              </StyledTh>
+            )}
+          </Fragment>
+        );
+      }}
       renderRow={(position: Position) => (
         <PositionsRowContainer
           key={position.symbol + position.positionSide}

@@ -21,7 +21,7 @@ export const TransactionHistory: React.FC<Props> = ({ items }) => {
       loaderData={[]}
       items={items}
       renderHeaderCell={({ name }) => (
-        <th>
+        <th key={name}>
           <Text muted>{t(`trade:transaction-history.table.${name}`)}</Text>
         </th>
       )}
