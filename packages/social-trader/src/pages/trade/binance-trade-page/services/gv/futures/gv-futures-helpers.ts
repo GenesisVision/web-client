@@ -58,7 +58,9 @@ export const transformFuturesOrder = ({
   quantity,
   stopPrice,
   price,
-  id: orderId
+  id: orderId,
+  // todo
+  lastFilledPrice: 0
 });
 
 export const mapBinanceRawFuturesAccountInfoToAccount = ({

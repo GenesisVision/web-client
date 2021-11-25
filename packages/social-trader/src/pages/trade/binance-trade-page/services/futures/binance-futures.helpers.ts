@@ -213,7 +213,8 @@ export const futuresEventTradeOrderTransform = (
     callbackRate: socketData.cr,
     orderStatus: getWorkingTypeType(socketData.X) as FuturesOrderStatus,
     stopPrice: socketData.sp,
-    timeInForce: socketData.f
+    timeInForce: socketData.f,
+    lastFilledPrice: socketData.L
   };
 };
 

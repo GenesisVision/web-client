@@ -13,7 +13,6 @@ import {
   BinanceRawFuturesPositionMode,
   BinanceRawKlineItemsViewModel,
   BinanceRawOrderBook,
-  BinanceRawRecentTrade,
   TradingPlatformBinanceOrdersMode
 } from "gv-api-web";
 import {
