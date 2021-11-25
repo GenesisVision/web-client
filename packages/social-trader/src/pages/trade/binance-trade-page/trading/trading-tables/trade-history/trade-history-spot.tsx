@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 
 import {
   TRADE_HISTORY_SPOT_TABLE_COLUMNS,
-  updateTradeHistoryData
+  updateSpotTradeHistoryData
 } from "./trade-history.helpers";
 import styles from "./trade-history.module.scss";
 import { TradeHistorySpotRow } from "./trade-history-spot-row";
@@ -39,7 +39,7 @@ export const TradeHistorySpot: React.FC<Props> = ({ updates }) => {
       columns={TRADE_HISTORY_SPOT_TABLE_COLUMNS}
       paging={DEFAULT_PAGING}
       updates={updates}
-      updateItemsFunc={updateTradeHistoryData}
+      updateItemsFunc={updateSpotTradeHistoryData}
       loaderData={[]}
       getItems={getItems}
       renderHeader={column => t(`trade:trade-history.table.${column.name}`)}

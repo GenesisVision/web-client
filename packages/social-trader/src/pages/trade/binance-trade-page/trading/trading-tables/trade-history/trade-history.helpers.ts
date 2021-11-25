@@ -1,4 +1,5 @@
 import { SortingColumn } from "components/table/components/filtering/filter.type";
+import { BinanceExecutionType, BinanceOrderStatus } from "gv-api-web";
 import {
   FuturesOrder,
   SpotOrder
@@ -6,12 +7,12 @@ import {
 import { normalizeOpenOrdersList } from "pages/trade/binance-trade-page/trading/trading-tables/open-orders/open-orders.helpers";
 import { isOrderDeleted } from "pages/trade/binance-trade-page/trading/trading-tables/order-history/order-history.helpers";
 
-export const updateTradeHistoryData = (
-  data: SpotOrder[] | FuturesOrder[],
-  updates: SpotOrder[] | FuturesOrder[]
-): SpotOrder[] | FuturesOrder[] => {
+export const updateSpotTradeHistoryData = (
+  data: SpotOrder[],
+  updates: SpotOrder[]
+): SpotOrder[] => {
   const normalizedData = normalizeOpenOrdersList(data);
-  updates.forEach((update: any) => {
+  updates.forEach(update => {
     if (isOrderDeleted(update.orderStatus, update.executionType))
       delete normalizedData[update!.id];
     else
@@ -23,6 +24,45 @@ export const updateTradeHistoryData = (
   return Object.values(normalizedData).sort(
     (a, b) => +new Date(b.time) - +new Date(a.time)
   );
+};
+
+export const updateFuturesTradeHistoryData = (
+  data: FuturesOrder[],
+  updates: FuturesOrder[]
+): FuturesOrder[] => {
+  const normalizedData = normalizeOpenOrdersList(data);
+  updates.forEach(update => {
+    if (isFuturesTradeOrder(update.orderStatus, update.executionType)) {
+      normalizedData[update.id] = {
+        ...normalizedData[update.id],
+        ...update
+      };
+    } else {
+      delete normalizedData[update!.id];
+    }
+  });
+  return Object.values(normalizedData).sort(
+    (a, b) => +new Date(b.time) - +new Date(a.time)
+  );
+};
+
+const isFuturesTradeOrder = (
+  orderStatus?: BinanceOrderStatus,
+  executionType?: BinanceExecutionType
+): boolean => {
+  switch (orderStatus?.toLowerCase()) {
+    case "new":
+    case "expired":
+    case "canceled":
+      return false;
+  }
+  switch (executionType?.toLowerCase()) {
+    case "new":
+    case "canceled":
+    case "expired":
+      return false;
+  }
+  return true;
 };
 
 export const TRADE_HISTORY_SPOT_TABLE_COLUMNS: SortingColumn[] = [

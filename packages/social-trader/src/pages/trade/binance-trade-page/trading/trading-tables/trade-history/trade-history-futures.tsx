@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 
 import {
   TRADE_HISTORY_FUTURES_TABLE_COLUMNS,
-  updateTradeHistoryData
+  updateFuturesTradeHistoryData
 } from "./trade-history.helpers";
 import styles from "./trade-history.module.scss";
 import { TradeHistoryFuturesRow } from "./trade-history-futures-row";
@@ -39,7 +39,7 @@ export const TradeHistoryFutures: React.FC<Props> = ({ updates }) => {
       columns={TRADE_HISTORY_FUTURES_TABLE_COLUMNS}
       paging={DEFAULT_PAGING}
       updates={updates}
-      updateItemsFunc={updateTradeHistoryData}
+      updateItemsFunc={updateFuturesTradeHistoryData}
       loaderData={[]}
       getItems={getItems}
       renderHeader={column => t(`trade:trade-history.table.${column.name}`)}

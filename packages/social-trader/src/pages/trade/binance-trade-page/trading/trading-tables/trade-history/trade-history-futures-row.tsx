@@ -27,11 +27,11 @@ const _TradeHistoryFuturesRow: React.FC<FuturesOrder> = ({
   side,
   symbol,
   time,
-  price,
   quantity,
   commission,
   commissionAsset,
-  realizedProfit
+  realizedProfit,
+  lastFilledPrice
 }) => {
   const { items } = useContext(TerminalTickerContext);
   const [t] = useTranslation();
@@ -43,6 +43,10 @@ const _TradeHistoryFuturesRow: React.FC<FuturesOrder> = ({
 
   const symbolData = getSymbolData(items, symbol);
 
+  if (!symbolData) {
+    return null;
+  }
+
   return (
     <TableRow>
       <TableCell firstOffset={false}>{formatDate(new Date(time))}</TableCell>
@@ -53,13 +57,16 @@ const _TradeHistoryFuturesRow: React.FC<FuturesOrder> = ({
         </Text>
       </TableCell>
       <TableCell>
-        {terminalMoneyFormat({ amount: price, tickSize: String(tickSize) })}
+        {terminalMoneyFormat({
+          amount: lastFilledPrice!,
+          tickSize: String(tickSize)
+        })}
       </TableCell>
       <TableCell>
         {`${terminalMoneyFormat({
           amount: quantity,
           tickSize: String(stepSize)
-        })} ${symbolData!.baseAsset}`}
+        })} ${symbolData.baseAsset}`}
       </TableCell>
       <TableCell>
         {terminalMoneyFormat({
@@ -72,7 +79,7 @@ const _TradeHistoryFuturesRow: React.FC<FuturesOrder> = ({
         {`${terminalMoneyFormat({
           amount: realizedProfit!,
           tickSize: DEFAULT_TICKSIZE
-        })} ${symbolData!.quoteAsset}`}
+        })} ${symbolData.quoteAsset}`}
       </TableCell>
     </TableRow>
   );
