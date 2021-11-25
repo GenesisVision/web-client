@@ -75,7 +75,7 @@
       "day_plural": "Days"
     },
     "upload-logo": "Upload logo",
-    "upload-logo-rules": "At least 300 x 300px PNG or JPG file. The maximum file size is 2MB.",
+    "upload-logo-rules": "At least 300 x 300px PNG or JPG file. The maximum file size is 3.5MB.",
     "entry-fee": "Entry fee",
     "management-fee": "Management fee",
     "success-fee": "Success fee",

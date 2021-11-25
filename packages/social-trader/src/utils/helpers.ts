@@ -201,6 +201,8 @@ export const rawUrlEncode = (str: string): string =>
 export const withPlural = (str: string, count: number) =>
   +count === 1 ? str : `${str}s`;
 
+export const bytesToMegaBytes = (bytes: number) => bytes / (1024 * 1024);
+
 export {
   getRandomInteger,
   getType,
