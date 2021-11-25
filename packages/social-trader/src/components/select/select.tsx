@@ -38,6 +38,7 @@ interface Props extends Sizeable {
   fullWidthPopover?: boolean;
   disabled?: boolean;
   disableIfSingle?: boolean;
+  horizontal?: HORIZONTAL_POPOVER_POS;
   children: SelectChild[];
   onChange: (event: ISelectChangeEvent, child: JSX.Element) => void;
   onFocus?: (event: React.FocusEvent<HTMLButtonElement>) => void;
@@ -46,6 +47,7 @@ interface Props extends Sizeable {
 
 const Select: React.FC<Props> = ({
   fixedWidth = true,
+  horizontal = HORIZONTAL_POPOVER_POS.LEFT,
   bottomLine,
   size = "middle",
   fixedVertical,
@@ -175,7 +177,7 @@ const Select: React.FC<Props> = ({
       <input type="hidden" value={value} name={name} />
       <Popover
         fixedVertical={fixedVertical}
-        horizontal={HORIZONTAL_POPOVER_POS.LEFT}
+        horizontal={horizontal}
         noPadding
         anchorEl={anchor}
         onClose={clearAnchor}
