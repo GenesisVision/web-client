@@ -1,7 +1,6 @@
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-methods.context";
 import {
-  LeverageBracket,
   MarginModeType,
   Position,
   PositionModeType
@@ -68,17 +67,7 @@ const ContextProvider: React.FC = ({ children }) => {
   useEffect(() => {
     if (positionInfo) {
       setMaxNotional(positionInfo.maxNotional);
-    }
-  }, [positionInfo, symbol]);
-
-  useEffect(() => {
-    if (positionInfo) {
       setLeverage(positionInfo.leverage);
-    }
-  }, [positionInfo, symbol]);
-
-  useEffect(() => {
-    if (positionInfo) {
       setMarginMode(positionInfo.marginType);
     }
   }, [positionInfo, symbol]);
