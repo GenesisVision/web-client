@@ -13,7 +13,7 @@ interface Props {
   time: number | Date;
 }
 
-const _TradesRow: React.FC<Props> = ({
+export const TradesRow: React.FC<Props> = ({
   stepSize,
   tickSize,
   price,
@@ -45,5 +45,3 @@ const _TradesRow: React.FC<Props> = ({
     </tr>
   );
 };
-
-export const TradesRow = React.memo(_TradesRow);

@@ -10,7 +10,7 @@ interface Props {
   items: UnitedTrade[];
 }
 
-const _Trades: React.FC<Props> = ({ items }) => {
+export const Trades: React.FC<Props> = ({ items }) => {
   const {
     stepSize,
     tickSize,
@@ -61,5 +61,3 @@ const _Trades: React.FC<Props> = ({ items }) => {
     </div>
   );
 };
-
-export const Trades = React.memo(_Trades);
