@@ -36,6 +36,10 @@ import {
   PlaceOrderMaxCostInfo,
   PlaceOrderSliderBuySellInfo
 } from "./place-order-max-cost-info";
+import {
+  WORKING_TYPE_VALUES,
+  WorkingTypeField
+} from "./place-order-settings/working-type-field/working-type-field";
 
 export interface IStopLimitTradeFormProps {
   balance: number;
@@ -73,6 +77,7 @@ const _StopLimitTradeFuturesForm: React.FC<IStopLimitTradeFormProps> = ({
   const form = useForm<IFuturesStopLimitFormValues>({
     defaultValues: {
       [FUTURES_TRADE_FORM_FIELDS.timeInForce]: TIME_IN_FORCE_VALUES[0].value,
+      [FUTURES_TRADE_FORM_FIELDS.workingType]: WORKING_TYPE_VALUES[0].value,
       [FUTURES_TRADE_FORM_FIELDS.stopPrice]: outerPrice,
       [FUTURES_TRADE_FORM_FIELDS.price]: outerPrice
     },
@@ -80,14 +85,6 @@ const _StopLimitTradeFuturesForm: React.FC<IStopLimitTradeFormProps> = ({
   });
   const { triggerValidation, watch, setValue, reset } = form;
   const { quantity, price, reduceOnly } = watch();
-
-  useFuturesPlaceOrderFormReset({
-    status,
-    triggerValidation,
-    outerPrice,
-    watch,
-    reset
-  });
 
   const {
     sliderValue,
@@ -97,6 +94,14 @@ const _StopLimitTradeFuturesForm: React.FC<IStopLimitTradeFormProps> = ({
   } = useFuturesPlaceOrderSlider({
     setValue,
     quantityName: FUTURES_TRADE_FORM_FIELDS.quantity
+  });
+
+  useFuturesPlaceOrderFormReset({
+    status,
+    triggerValidation,
+    outerPrice,
+    watch,
+    reset
   });
 
   const {
@@ -121,18 +126,23 @@ const _StopLimitTradeFuturesForm: React.FC<IStopLimitTradeFormProps> = ({
   return (
     <HookForm form={form}>
       <Row>
-        <HookFormAmountField
-          autoFocus={false}
-          label={t("Stop Price")}
-          currency={quoteAsset}
-          name={FUTURES_TRADE_FORM_FIELDS.stopPrice}
-          tickSize={getDecimalScale(filterValues.tickSize)}
-          rules={minMaxNumberRules({
-            t,
-            min: minPrice,
-            max: maxPrice
-          })}
-        />
+        <RowItem>
+          <HookFormAmountField
+            autoFocus={false}
+            label={t("Stop Price")}
+            currency={quoteAsset}
+            name={FUTURES_TRADE_FORM_FIELDS.stopPrice}
+            tickSize={getDecimalScale(filterValues.tickSize)}
+            rules={minMaxNumberRules({
+              t,
+              min: minPrice,
+              max: maxPrice
+            })}
+          />
+        </RowItem>
+        <RowItem style={{ marginTop: "auto" }}>
+          <WorkingTypeField />
+        </RowItem>
       </Row>
       <Row>
         <FuturesPriceField

@@ -56,14 +56,7 @@ const _MarketTradeFuturesForm: React.FC<IMarketTradeFormProps> = ({
     mode: "onChange"
   });
   const { triggerValidation, watch, setValue, reset } = form;
-  const { quantity } = watch();
-
-  useFuturesPlaceOrderFormReset({
-    status,
-    triggerValidation,
-    watch,
-    reset
-  });
+  const { quantity, reduceOnly } = watch();
 
   const {
     sliderValue,
@@ -73,6 +66,13 @@ const _MarketTradeFuturesForm: React.FC<IMarketTradeFormProps> = ({
   } = useFuturesPlaceOrderSlider({
     setValue,
     quantityName: FUTURES_TRADE_FORM_FIELDS.quantity
+  });
+
+  useFuturesPlaceOrderFormReset({
+    status,
+    triggerValidation,
+    watch,
+    reset
   });
 
   const {
@@ -85,7 +85,8 @@ const _MarketTradeFuturesForm: React.FC<IMarketTradeFormProps> = ({
   } = useMarketPlaceOrderMaxCostValues({
     balance,
     quantity,
-    percentMode
+    percentMode,
+    reduceOnly
   });
 
   const handleSubmit = (values: any) => {

@@ -45,7 +45,7 @@ const _FuturesQuantityField: React.FC<Props> = ({
       label={t("Size")}
       currency={baseAsset}
       name={FUTURES_TRADE_FORM_FIELDS.quantity}
-      key={percentMode as any}
+      triggerRules={percentMode}
       rules={
         percentMode
           ? minMaxNumberRules({

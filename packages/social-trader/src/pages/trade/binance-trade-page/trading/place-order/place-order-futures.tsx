@@ -39,13 +39,15 @@ import { StopLimitTradeFuturesForm } from "./stop-limit-trade-futures-form";
 interface Props {
   price: string;
   lastTrade: number;
+  markPrice: number;
   filterValues: FilterValues;
 }
 
 const _PlaceOrderFutures: React.FC<Props> = ({
   filterValues,
   lastTrade,
-  price
+  price,
+  markPrice
 }) => {
   const { tradeRequest } = useContext(TerminalMethodsContext);
   const { availableBalance } = useContext(TerminalFuturesBalanceContext);
@@ -74,12 +76,13 @@ const _PlaceOrderFutures: React.FC<Props> = ({
   ) => {
     const { percentMode, sliderBuy, sliderSell, side, ...restValues } = values;
 
-    // TODO working type
     const type = getFuturesTradeType({
       stopPrice: "stopPrice" in values ? values.stopPrice : undefined,
       side,
       type: tab,
-      currentPrice: lastTrade
+      lastPrice: lastTrade,
+      markPrice,
+      workingType: "workingType" in values ? values.workingType : undefined
     });
 
     const quantity = getFuturesQuantityValue({
@@ -90,8 +93,6 @@ const _PlaceOrderFutures: React.FC<Props> = ({
       sliderSell,
       stepSize
     });
-
-    // добавить truncated
 
     const positionSide = getPositionSide({
       side: values.side,

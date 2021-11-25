@@ -117,6 +117,7 @@ export const useFuturesPlaceOrderFormReset = ({
   useEffect(() => {
     reset({
       timeInForce: watch().timeInForce,
+      workingType: watch().workingType,
       stopPrice: outerPrice,
       price: outerPrice,
       quantity

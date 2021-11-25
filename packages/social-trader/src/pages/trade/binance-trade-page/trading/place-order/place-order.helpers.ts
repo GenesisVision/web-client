@@ -1,3 +1,4 @@
+import { BinanceWorkingType } from "gv-api-web";
 import {
   FuturesPlaceOrderMode,
   PriceType
@@ -80,33 +81,34 @@ export const getFuturesTradeType = ({
   stopPrice,
   type,
   side,
-  currentPrice
+  lastPrice,
+  workingType,
+  markPrice
 }: {
   stopPrice?: PriceType;
+  workingType?: BinanceWorkingType;
   type: OrderType;
   side: OrderSide;
-  currentPrice: number | string;
+  lastPrice: number;
+  markPrice: number;
 }): OrderType => {
+  // BUY if stop price less than currentPrice or MarkPrice ===> TakeProfit
+  // BUY if stop price larger than currentPrice or MarkPrice ===> Stop
+  // SELL if stop price less than currentPrice or MarkPrice ===> Stop
+  // SELL if stop price larger than currentPrice or MarkPrice ===> TakeProfit
   // BUT SELL If stopPrice === currentPrice or currentMarkPrice (binance sends Stop in both cases) ===> display error
-  // BUY CONTRACT if stop price less than currentPrice or MarkPrice ===> TakeProfit
-  // BUY CONTRACT if stop price larger than currentPrice or MarkPrice ===> Stop
-  // SELL CONTRACT if stop price less than currentPrice or MarkPrice ===> Stop
-  // SELL CONTRACT if stop price larger than currentPrice or MarkPrice ===> TakeProfit
-  // BUY MARK if stop price less than currentMarkPrice ===> TakeProfit
-  // BUY MARK if stop price larger than currentMarkPrice ===> Stop
-  // SELL MARK if stop price less than currentMarkPrice ===> Stop
-  // SELL MARK if stop price larger than currentMarkPrice ===> TakeProfit
+  const determingPrice = workingType === "Mark" ? markPrice : lastPrice;
   switch (type) {
     case "TakeProfit":
       switch (side) {
         case "Buy":
-          if (+stopPrice! < +currentPrice) {
+          if (+stopPrice! < determingPrice) {
             return "TakeProfit";
           } else {
             return "Stop";
           }
         case "Sell":
-          if (+stopPrice! > +currentPrice) {
+          if (+stopPrice! > determingPrice) {
             return "TakeProfit";
           } else {
             return "Stop";

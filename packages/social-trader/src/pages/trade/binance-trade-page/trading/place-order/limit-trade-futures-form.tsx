@@ -70,14 +70,6 @@ const _LimitTradeFuturesForm: React.FC<ILimitTradeFormProps> = ({
   const { triggerValidation, watch, setValue, reset } = form;
   const { quantity, price, reduceOnly } = watch();
 
-  useFuturesPlaceOrderFormReset({
-    status,
-    triggerValidation,
-    outerPrice,
-    watch,
-    reset
-  });
-
   const {
     sliderValue,
     setSliderValue,
@@ -86,6 +78,14 @@ const _LimitTradeFuturesForm: React.FC<ILimitTradeFormProps> = ({
   } = useFuturesPlaceOrderSlider({
     setValue,
     quantityName: FUTURES_TRADE_FORM_FIELDS.quantity
+  });
+
+  useFuturesPlaceOrderFormReset({
+    status,
+    triggerValidation,
+    outerPrice,
+    watch,
+    reset
   });
 
   const {

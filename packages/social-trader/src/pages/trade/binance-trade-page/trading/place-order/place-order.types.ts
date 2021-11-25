@@ -1,3 +1,4 @@
+import { BinanceWorkingType } from "gv-api-web";
 import {
   OrderSide,
   OrderType,
@@ -77,7 +78,8 @@ export enum FUTURES_TRADE_FORM_FIELDS {
   timeInForce = "timeInForce",
   stopPrice = "stopPrice",
   price = "price",
-  quantity = "quantity"
+  quantity = "quantity",
+  workingType = "workingType"
 }
 
 export interface IFuturesPlaceOrderFormValues {
@@ -90,4 +92,5 @@ export interface IFuturesPlaceOrderFormValues {
 export interface IFuturesStopLimitFormValues
   extends IFuturesPlaceOrderFormValues {
   [FUTURES_TRADE_FORM_FIELDS.stopPrice]: PriceType;
+  [FUTURES_TRADE_FORM_FIELDS.workingType]: BinanceWorkingType;
 }
