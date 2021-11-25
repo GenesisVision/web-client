@@ -11,7 +11,7 @@ export const updateSpotOrderHistoryData = (
   updates: SpotOrder[]
 ): SpotOrder[] => {
   const normalizedData = normalizeOpenOrdersList(data);
-  updates.forEach((update: any) => {
+  updates.forEach(update => {
     if (isOrderDeleted(update.orderStatus, update.executionType))
       delete normalizedData[update!.id];
     else
@@ -30,15 +30,34 @@ export const updateFuturesOrderHistoryData = (
   updates: FuturesOrder[]
 ): FuturesOrder[] => {
   const normalizedData = normalizeOpenOrdersList(data);
-  updates.forEach((update: any) => {
-    normalizedData[update.id] = {
-      ...normalizedData[update.id],
-      ...update
-    };
+  updates.forEach(update => {
+    if (shouldPickFuturesOrder(update.orderStatus, update.executionType)) {
+      normalizedData[update.id] = {
+        ...normalizedData[update.id],
+        ...update
+      };
+    } else {
+      delete normalizedData[update!.id];
+    }
   });
   return Object.values(normalizedData).sort(
     (a, b) => +new Date(b.time) - +new Date(a.time)
   );
+};
+
+const shouldPickFuturesOrder = (
+  orderStatus?: BinanceOrderStatus,
+  executionType?: BinanceExecutionType
+): boolean => {
+  switch (orderStatus?.toLowerCase()) {
+    case "new":
+      return false;
+  }
+  switch (executionType?.toLowerCase()) {
+    case "new":
+      return false;
+  }
+  return true;
 };
 
 export const isOrderDeleted = (

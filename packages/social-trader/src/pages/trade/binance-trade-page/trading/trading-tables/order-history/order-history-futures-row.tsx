@@ -50,6 +50,11 @@ const _OrderHistoryFuturesRow: React.FC<FuturesOrder> = ({
   const { tickSize } = symbolFilters.priceFilter;
   const { stepSize } = symbolFilters.lotSizeFilter;
   const symbolData = getSymbolData(items, symbol);
+
+  if (!symbolData) {
+    return null;
+  }
+
   return (
     <TableRow translucent={orderStatus === "Canceled"}>
       <TableCell firstOffset={false}>{formatDate(new Date(time))}</TableCell>
@@ -83,13 +88,13 @@ const _OrderHistoryFuturesRow: React.FC<FuturesOrder> = ({
         {`${terminalMoneyFormat({
           amount: quantityFilled,
           tickSize: String(stepSize)
-        })} ${symbolData!.baseAsset}`}
+        })} ${symbolData.baseAsset}`}
       </TableCell>
       <TableCell>
         {`${terminalMoneyFormat({
           amount: quantity,
           tickSize: String(stepSize)
-        })} ${symbolData!.baseAsset}`}
+        })} ${symbolData.baseAsset}`}
       </TableCell>
       <TableCell>{reduceOnly ? t("Yes") : t("No")}</TableCell>
       <TableCell>

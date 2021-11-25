@@ -1089,6 +1089,7 @@ export type FuturesOrder = {
   executionType?: BinanceExecutionType;
   realizedProfit?: number;
   commission?: number;
+  lastFilledPrice?: number;
   commissionAsset?: string;
   closePosition: boolean;
   positionSide: BinancePositionSide;
