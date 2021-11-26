@@ -15,17 +15,13 @@ export const useSymbolData = (): SymbolSummaryData | undefined => {
   const { rate, getRate } = useGetRate();
 
   const { getServerTime } = useContext(TerminalMethodsContext);
-  const { items, markPrices } = useContext(TerminalTickerContext);
+  const { items, markPrice } = useContext(TerminalTickerContext);
 
   const { symbol, terminalType } = useContext(TerminalInfoContext);
   const isFutures = terminalType === "futures";
   const textSymbol = getSymbolFromState(symbol);
   const tickerData = items
     ? safeGetElemFromArray(items, item => item.symbol === textSymbol)
-    : undefined;
-
-  const markPrice = markPrices
-    ? safeGetElemFromArray(markPrices, item => item.symbol === textSymbol)
     : undefined;
 
   const { data: serverTime } = useApiRequest({
@@ -37,13 +33,13 @@ export const useSymbolData = (): SymbolSummaryData | undefined => {
     if (!isFutures) {
       getRate({ from: symbol.baseAsset, to: "USDT" });
     }
-  }, [symbol, terminalType]);
+  }, [symbol]);
 
   useEffect(() => {
     if (!isFutures) {
       getRate({ from: symbol.baseAsset, to: "USDT" });
     }
-  }, [symbol, terminalType]);
+  }, [symbol]);
 
   return tickerData
     ? {

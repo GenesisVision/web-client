@@ -70,7 +70,7 @@ import { FUNDS_ROUTE } from "routes/funds.routes";
 import { GV_FOLLOW_ROUTE } from "routes/invest.routes";
 import { PROGRAMS_ROUTE } from "routes/programs.routes";
 import { SOCIAL_ROUTE } from "routes/social.routes";
-import { TERMINAL_ROUTE } from "routes/trade.routes";
+import { TERMINAL_SPOT_ROUTE } from "routes/trade.routes";
 import styled from "styled-components";
 
 export interface IGuide {
@@ -1878,7 +1878,7 @@ export const navGuides: INavGuide[] = [
           </>
         ),
         linkInfo: {
-          link: TERMINAL_ROUTE,
+          link: TERMINAL_SPOT_ROUTE,
           label: "Trading Terminal "
         }
       },

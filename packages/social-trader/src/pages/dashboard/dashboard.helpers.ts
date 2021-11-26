@@ -11,7 +11,7 @@ export const getTerminalLink = (
 ): string => {
   switch (brokerType) {
     case "Binance":
-      return `${TERMINAL_ROUTE}?id=${id}`;
+      return `${TERMINAL_ROUTE}?id=${id}&type=spot`;
     case "BinanceFollow":
       return "https://www.binance.com/en/login";
     case "Huobi":

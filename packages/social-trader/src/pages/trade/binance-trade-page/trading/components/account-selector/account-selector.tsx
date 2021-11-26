@@ -51,7 +51,7 @@ const _AccountSelector: React.FC<IAccountSelectorProps> = ({
       updateUrl({
         url: stringifySymbolFromToParam(symbol),
         reloadPage: true,
-        updates: { id }
+        updates: { id, type: terminalType }
       });
     },
     [setAccount]

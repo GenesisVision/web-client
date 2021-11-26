@@ -3,6 +3,11 @@ import NavigationIconWithName from "components/navigation/navigation-icon-with-n
 import { WithRouterProps } from "next/dist/client/with-router";
 import { withRouter } from "next/router";
 import React from "react";
+import {
+  TERMINAL,
+  TERMINAL_FUTURES_NAME,
+  TERMINAL_SPOT_NAME
+} from "routes/trade.routes";
 import styled, { css } from "styled-components";
 import {
   mediaBreakpointDesktop,
@@ -86,10 +91,36 @@ const _NavigationItem: React.FC<INavigationItemProps> = ({
     </NavigationIconWithName>
   );
 
-  const isCurrent = !!href && router.route.startsWith(normalizeLinkFrom(href));
+  const isOnSpot = router.asPath.includes(TERMINAL_SPOT_NAME);
+  const isOnFutures = router.asPath.includes(TERMINAL_FUTURES_NAME);
+
+  const normalizedHref = !!href && normalizeLinkFrom(href);
+
+  const isSpotCurrent =
+    !!normalizedHref && normalizedHref.includes(TERMINAL_SPOT_NAME) && isOnSpot;
+
+  const isFuturesCurrent =
+    !!normalizedHref &&
+    normalizedHref.includes(TERMINAL_FUTURES_NAME) &&
+    isOnFutures;
+
+  const isCurrent =
+    (!!normalizedHref && router.route.startsWith(normalizedHref)) ||
+    isFuturesCurrent ||
+    isSpotCurrent;
+  const isUseVanillaLink =
+    (isOnSpot || isOnFutures) &&
+    !!normalizedHref &&
+    normalizedHref.includes(TERMINAL);
 
   return !!href ? (
-    <StyledLink mobile={mobile} isCurrent={isCurrent} to={href} itemProp="url">
+    <StyledLink
+      mobile={mobile}
+      isCurrent={isCurrent}
+      to={href}
+      itemProp="url"
+      isVanillaLink={isUseVanillaLink}
+    >
       {renderIconWithName()}
     </StyledLink>
   ) : (

@@ -79,7 +79,7 @@ const _OrderBookContainer: React.FC<Props> = () => {
     depthStream.subscribe(data => {
       setDepthSocketData(data);
     });
-  }, [baseAsset, quoteAsset, terminalType]);
+  }, [baseAsset, quoteAsset]);
 
   useEffect(() => {
     if (!socketOpened) return;

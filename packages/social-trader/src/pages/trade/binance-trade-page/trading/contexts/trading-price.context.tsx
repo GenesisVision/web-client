@@ -42,7 +42,6 @@ export const TradingPriceContextProvider: React.FC = ({ children }) => {
   const { tradeSocket, getTrades } = useContext(TerminalMethodsContext);
   const {
     tickSize,
-    terminalType,
     symbol: { baseAsset, quoteAsset }
   } = useContext(TerminalInfoContext);
 
@@ -69,7 +68,7 @@ export const TradingPriceContextProvider: React.FC = ({ children }) => {
       setList(updatedData);
       setSocketDataBuffer([]);
     });
-  }, [terminalType, baseAsset, quoteAsset]);
+  }, [baseAsset, quoteAsset]);
 
   useEffect(() => {
     if (!socketData && !list) return;
