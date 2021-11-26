@@ -37,7 +37,7 @@ const _ClosePosition: React.FC<Props> = ({
 
   const filterValues = getFilterValues(exchangeInfo!, symbol);
 
-  const { sendRequest } = useApiRequest({
+  const { sendRequest, isPending } = useApiRequest({
     isUseLocalizationOnError: false,
     errorAlertHandler: mapPlaceOrderErrors,
     request: tradeRequest
@@ -61,6 +61,7 @@ const _ClosePosition: React.FC<Props> = ({
   return (
     <ClosePositionForm
       {...rest}
+      isPending={isPending}
       quantity={quantity}
       onSubmit={handleSubmit}
       price={price}

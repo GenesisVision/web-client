@@ -38,11 +38,13 @@ export interface ClosePositionSubmitValues extends IClosePositionFormValues {
 
 interface Props extends IClosePositionFormProps {
   filterValues: FilterValues;
+  isPending: boolean;
   onSubmit: (values: ClosePositionSubmitValues) => Promise<any>;
 }
 
 const _ClosePosition: React.FC<Props> = ({
   onSubmit,
+  isPending,
   price: outerPrice,
   quantity: outerQuantity,
   filterValues
@@ -74,7 +76,7 @@ const _ClosePosition: React.FC<Props> = ({
           <Button
             onClick={handleButtonClick("Market")}
             variant={"outlined"}
-            disabled={!+quantity}
+            disabled={!+quantity || isPending}
             size={"xsmall"}
             className={styles["place-order__mini-button"]}
           >
@@ -84,7 +86,7 @@ const _ClosePosition: React.FC<Props> = ({
         <RowItem size={"xsmall"}>
           <Button
             onClick={handleButtonClick("Limit")}
-            disabled={!+quantity || !+price}
+            disabled={!+quantity || !+price || isPending}
             variant={"outlined"}
             size={"xsmall"}
             className={styles["place-order__mini-button"]}
