@@ -14,10 +14,11 @@ import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/c
 import { TerminalPlaceOrderContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-place-order.context";
 import { getSymbol } from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import { OrderType } from "pages/trade/binance-trade-page/trading/terminal.types";
-import React, { useContext } from "react";
+import React, { useCallback, useContext } from "react";
 import { formatValue } from "utils/formatter";
 
 import { TerminalFuturesBalanceContext } from "../contexts/terminal-futures-balance.context";
+import { TradingPriceContext } from "../contexts/trading-price.context";
 import { PlaceOrderSelectHedgeMode } from "./components/place-order-select-hedge-mode/place-order-select-hedge-mode";
 import { LimitTradeFuturesForm } from "./limit-trade-futures-form";
 import { MarketTradeFuturesForm } from "./market-trade-futures-form";
@@ -37,7 +38,6 @@ import {
 import { StopLimitTradeFuturesForm } from "./stop-limit-trade-futures-form";
 
 interface Props {
-  price: string;
   lastTrade: number;
   markPrice: number;
   filterValues: FilterValues;
@@ -46,9 +46,9 @@ interface Props {
 const _PlaceOrderFutures: React.FC<Props> = ({
   filterValues,
   lastTrade,
-  price,
   markPrice
 }) => {
+  const { price } = useContext(TradingPriceContext);
   const { tradeRequest } = useContext(TerminalMethodsContext);
   const { availableBalance } = useContext(TerminalFuturesBalanceContext);
 
@@ -69,51 +69,70 @@ const _PlaceOrderFutures: React.FC<Props> = ({
     request: tradeRequest
   });
 
-  const handleSubmit = (
-    values:
-      | IFuturesPlaceOrderHandleSubmitValues
-      | IFuturesStopLimitPlaceOrderHandleSubmitValues
-  ) => {
-    const { percentMode, sliderBuy, sliderSell, side, ...restValues } = values;
+  const handleSubmit = useCallback(
+    (
+      values:
+        | IFuturesPlaceOrderHandleSubmitValues
+        | IFuturesStopLimitPlaceOrderHandleSubmitValues
+    ) => {
+      const {
+        percentMode,
+        sliderBuy,
+        sliderSell,
+        side,
+        ...restValues
+      } = values;
 
-    const type = getFuturesTradeType({
-      stopPrice: "stopPrice" in values ? values.stopPrice : undefined,
-      side,
-      type: tab,
-      lastPrice: lastTrade,
+      const type = getFuturesTradeType({
+        stopPrice: "stopPrice" in values ? values.stopPrice : undefined,
+        side,
+        type: tab,
+        lastPrice: lastTrade,
+        markPrice,
+        workingType: "workingType" in values ? values.workingType : undefined
+      });
+
+      const quantity = getFuturesQuantityValue({
+        percentMode,
+        quantity: values[FUTURES_TRADE_FORM_FIELDS.quantity],
+        side,
+        sliderBuy,
+        sliderSell,
+        stepSize
+      });
+
+      const positionSide = getPositionSide({
+        side: values.side,
+        placeOrderMode
+      });
+
+      return sendRequest({
+        ...restValues,
+        reduceOnly:
+          currentPositionMode === "OneWay"
+            ? values[FUTURES_TRADE_FORM_FIELDS.reduceOnly]
+            : undefined,
+        side: values.side,
+        positionSide,
+        price: values[FUTURES_TRADE_FORM_FIELDS.price],
+        quantity,
+        accountId: exchangeAccountId,
+        type,
+        symbol: getSymbol(baseAsset, quoteAsset)
+      });
+    },
+    [
+      currentPositionMode,
+      placeOrderMode,
+      stepSize,
+      exchangeAccountId,
+      baseAsset,
+      quoteAsset,
+      tab,
       markPrice,
-      workingType: "workingType" in values ? values.workingType : undefined
-    });
-
-    const quantity = getFuturesQuantityValue({
-      percentMode,
-      quantity: values[FUTURES_TRADE_FORM_FIELDS.quantity],
-      side,
-      sliderBuy,
-      sliderSell,
-      stepSize
-    });
-
-    const positionSide = getPositionSide({
-      side: values.side,
-      placeOrderMode
-    });
-
-    return sendRequest({
-      ...restValues,
-      reduceOnly:
-        currentPositionMode === "OneWay"
-          ? values[FUTURES_TRADE_FORM_FIELDS.reduceOnly]
-          : undefined,
-      side: values.side,
-      positionSide,
-      price: values[FUTURES_TRADE_FORM_FIELDS.price],
-      quantity,
-      accountId: exchangeAccountId,
-      type,
-      symbol: getSymbol(baseAsset, quoteAsset)
-    });
-  };
+      lastTrade
+    ]
+  );
 
   return (
     <TerminalDefaultBlock>

@@ -22,11 +22,15 @@ import React, {
 } from "react";
 import { map } from "rxjs/operators";
 import { useSockets } from "services/websocket.service";
+import { safeGetElemFromArray } from "utils/helpers";
+
+import { getSymbolFromState } from "../terminal.helpers";
 
 type TerminalTickerContextState = {
   getFavorites: VoidFunction;
   items?: MergedTickerSymbolType[];
   markPrices?: MarkPrice[];
+  markPrice?: MarkPrice;
 };
 
 export const TerminalTickerInitialState: TerminalTickerContextState = {
@@ -69,7 +73,7 @@ export const TerminalTickerContextProvider: React.FC = ({ children }) => {
 
   const { connectSocket } = useSockets();
 
-  const { exchangeAccountId, exchangeInfo, terminalType } = useContext(
+  const { exchangeAccountId, exchangeInfo, terminalType, symbol } = useContext(
     TerminalInfoContext
   );
 
@@ -188,15 +192,27 @@ export const TerminalTickerContextProvider: React.FC = ({ children }) => {
     markPricesList
   ]);
 
+  const markPrice = useMemo(
+    () =>
+      markPrices
+        ? safeGetElemFromArray(
+            markPrices,
+            item => item.symbol === getSymbolFromState(symbol)
+          )
+        : undefined,
+    [markPrices, symbol]
+  );
+
   const value = useMemo(
     () => ({
       items: Object.values(requestData).length ? items : undefined,
       getFavorites: getFavoritesList,
+      markPrice,
       markPrices: Object.values(markPricesRequestData).length
         ? markPrices
         : undefined
     }),
-    [requestData, markPricesRequestData, items, markPrices]
+    [requestData, markPricesRequestData, items, markPrices, markPrice]
   );
 
   return (

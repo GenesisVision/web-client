@@ -25,6 +25,7 @@ import {
 import React, { useCallback, useContext, useState } from "react";
 import { formatValue } from "utils/formatter";
 
+import { TradingPriceContext } from "../contexts/trading-price.context";
 import { LimitTradeSpotForm } from "./limit-trade-spot-form";
 import { MarketTradeSpotForm } from "./market-trade-spot-form";
 import {
@@ -42,16 +43,12 @@ import {
 import { StopLimitTradeSpotForm } from "./stop-limit-trade-spot-form";
 
 interface Props {
-  price: string;
   lastTrade: number;
   filterValues: FilterValues;
 }
 
-const _PlaceOrderSpot: React.FC<Props> = ({
-  filterValues,
-  lastTrade,
-  price
-}) => {
+const _PlaceOrderSpot: React.FC<Props> = ({ filterValues, lastTrade }) => {
+  const { price } = useContext(TradingPriceContext);
   const { tradeRequest } = useContext(TerminalMethodsContext);
 
   const {
@@ -97,7 +94,16 @@ const _PlaceOrderSpot: React.FC<Props> = ({
         symbol: getSymbol(baseAsset, quoteAsset)
       });
     },
-    [tickSize, stepSize, exchangeAccountId, baseAsset, quoteAsset, side, tab]
+    [
+      tickSize,
+      stepSize,
+      exchangeAccountId,
+      baseAsset,
+      quoteAsset,
+      side,
+      tab,
+      lastTrade
+    ]
   );
 
   const walletAsset = side === "Buy" ? quoteAsset : baseAsset;

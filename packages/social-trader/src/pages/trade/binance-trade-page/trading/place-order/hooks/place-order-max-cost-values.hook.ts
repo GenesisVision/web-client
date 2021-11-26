@@ -41,7 +41,7 @@ export const usePlaceOrderMaxCostValues = ({
   // TODO positions values! maybe from context
   // TODO reduceOnly
   // Просчитать hedge и oneway mode, reduceOnly, хватает ли денег или нет
-  const { markPrices } = useContext(TerminalTickerContext);
+  const { markPrice: mark } = useContext(TerminalTickerContext);
   const { openPositions } = useContext(TerminalFuturesPositionsContext);
   const { symbol, exchangeAccountId } = useContext(TerminalInfoContext);
   const { leverage, placeOrderMode } = useContext(TerminalPlaceOrderContext);
@@ -67,10 +67,6 @@ export const usePlaceOrderMaxCostValues = ({
 
   const longPosition = symbolPositions.find(pos => pos.quantity > 0);
   const shortPosition = symbolPositions.find(pos => pos.quantity < 0);
-
-  const mark = markPrices?.find(
-    item => item.symbol === getSymbolFromState(symbol)
-  );
 
   // поменять. Если нет orderPrice - price = 0 и дальше считать
   if (!orderPrice) {
