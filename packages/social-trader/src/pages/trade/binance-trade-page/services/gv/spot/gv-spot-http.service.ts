@@ -1,5 +1,6 @@
 import { TableDataType } from "constants/constants";
 import {
+  BinanceRawAggregatedTrade,
   BinanceRawCancelOrder,
   BinanceRawCancelOrderId,
   BinanceRawKlineItemsViewModel,
@@ -136,13 +137,13 @@ export const getTrades = (
   from(
     api
       .terminal()
-      .getSymbolRecentTrades(symbol, { limit })
-      .then((items: Array<BinanceRawRecentTrade>) =>
+      .getSymbolAggregatedTrades(symbol, { limit })
+      .then((items: Array<BinanceRawAggregatedTrade>) =>
         items.map(
-          ({ orderId, price, baseQuantity, tradeTime, buyerIsMaker }) => ({
-            quantity: baseQuantity,
+          ({ price, tradeTime, buyerIsMaker, aggregateTradeId, quantity }) => ({
+            quantity,
             price,
-            orderId,
+            orderId: aggregateTradeId,
             tradeTime,
             buyerIsMaker
           })
