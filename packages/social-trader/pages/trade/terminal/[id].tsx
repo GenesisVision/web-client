@@ -1,6 +1,7 @@
 import withReduxStore from "decorators/with-redux-store";
 import withToken from "decorators/with-token";
 import withTradeLayout from "decorators/with-trade-layout";
+import { withTradeRedirect } from "decorators/with-trade-redirect";
 import { BrokerTradeServerType, TradingAccountPermission } from "gv-api-web";
 import { getTerminalApiMethods } from "pages/trade/binance-trade-page/binance-trade.helpers";
 import { TerminalMethodsContextProvider } from "pages/trade/binance-trade-page/trading/contexts/terminal-methods.context";
@@ -83,6 +84,7 @@ Page.getInitialProps = async ctx => {
 };
 
 export default compose(
+  withTradeRedirect,
   withReduxStore(initializeStore),
   withToken,
   withTradeLayout
