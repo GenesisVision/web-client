@@ -35,7 +35,8 @@ const _OpenOrdersFuturesRow: React.FC<FuturesOrder> = ({
   closePosition,
   time,
   type,
-  workingType
+  workingType,
+  originalType
 }) => {
   const [t] = useTranslation();
   const { items } = useContext(TerminalTickerContext);
@@ -118,7 +119,7 @@ const _OpenOrdersFuturesRow: React.FC<FuturesOrder> = ({
           tickSize,
           stopPrice,
           workingType,
-          type,
+          type: originalType,
           side
         })}
       </TableCell>

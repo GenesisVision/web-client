@@ -36,6 +36,7 @@ const _OrderHistoryFuturesRow: React.FC<FuturesOrder> = ({
   averagePrice,
   price,
   quantityFilled,
+  originalType,
   quantity,
   reduceOnly,
   workingType,
@@ -103,7 +104,7 @@ const _OrderHistoryFuturesRow: React.FC<FuturesOrder> = ({
           tickSize,
           stopPrice,
           workingType,
-          type,
+          type: originalType,
           side
         })}
       </TableCell>
