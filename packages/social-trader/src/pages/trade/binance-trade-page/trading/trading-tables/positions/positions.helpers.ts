@@ -4,10 +4,7 @@ import { TerminalTickerContext } from "pages/trade/binance-trade-page/trading/co
 import { useContext } from "react";
 
 import { TerminalFuturesPositionsContext } from "../../contexts/terminal-futures-positions.context";
-import {
-  LeverageBracket as LeverageBracketType,
-  SymbolLeverageBrackets
-} from "./../../terminal.types";
+import { SymbolLeverageBrackets } from "./../../terminal.types";
 
 export const POSITIONS_TABLE_COLUMNS: SortingColumn[] = [
   {
@@ -134,7 +131,7 @@ export const calculateIsolatedMarginRatioInfo = ({
 
   const leverageBracket = leverageBrackets.find(
     item => item.symbol === symbol
-  ) as SymbolLeverageBrackets;
+  )!;
 
   const marginBalance = pnl + margin;
 
@@ -142,7 +139,7 @@ export const calculateIsolatedMarginRatioInfo = ({
     bracket =>
       notionalSize >= bracket.notionalFloor &&
       notionalSize < bracket.notionalCap
-  ) as LeverageBracketType;
+  )!;
 
   const maintMargin = maintMarginRatio * notionalSize - maintAmount;
   const marginRatio = (maintMargin / marginBalance) * 100;
@@ -205,7 +202,7 @@ export const useCalculateCrossLiqPrice = ({
 
   const leverageBracket = leverageBrackets.find(
     item => item.symbol === symbol
-  ) as SymbolLeverageBrackets;
+  )!;
 
   const longPosition = symbolPositions.find(
     ({ positionSide }) => positionSide === "Long"
@@ -234,7 +231,7 @@ export const useCalculateCrossLiqPrice = ({
       bracket =>
         notionalSize >= bracket.notionalFloor &&
         notionalSize < bracket.notionalCap
-    ) as LeverageBracketType;
+    )!;
 
     return (
       acc + (notionalSize * bracket.maintMarginRatio - bracket.maintAmount)
