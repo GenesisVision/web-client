@@ -112,11 +112,7 @@ export const usePlaceOrderMaxCostValues = ({
         )
       : 0;
 
-  // Step 1: Calculate the Initial Margin
-  const longInitialMargin = (orderPrice * quantity) / leverage;
-  const shortInitialMargin = (orderPrice * quantity) / leverage;
-
-  // Step 2: Calculate Open Loss
+  // Step 1: Calculate Open Loss
   const longDiff = Math.abs(
     Math.min(0, LONG_ORDER_DIRECTION * (markPrice - orderPrice))
   );
@@ -125,17 +121,6 @@ export const usePlaceOrderMaxCostValues = ({
   // It seems like binance article is wrong
   const shortDiff = Math.abs(
     (1 + imr) * Math.min(0, SHORT_ORDER_DIRECTION * (markPrice - orderPrice))
-  );
-
-  const longOpenLoss = quantity * longDiff;
-  const shortOpenLoss = quantity * shortDiff;
-
-  // Step 3: Calculate the cost required to open a position
-  // in one-way mode you have to consider opposite "side" to calculate margin
-  const longCost = Math.max(0, longInitialMargin + longOpenLoss - longMargin);
-  const shortCost = Math.max(
-    0,
-    shortInitialMargin + shortOpenLoss - shortMargin
   );
 
   let maxLong = (balance + longMargin) / (orderPrice / leverage + longDiff);
@@ -171,9 +156,27 @@ export const usePlaceOrderMaxCostValues = ({
   const sliderBuy = percentMode ? calculatePercentage(maxLong, quantity) : 0;
   const sliderSell = percentMode ? calculatePercentage(maxShort, quantity) : 0;
 
+  const quantityLong = percentMode ? sliderBuy : quantity;
+  const quantityShort = percentMode ? sliderSell : quantity;
+
+  // Step 2: Calculate the Initial Margin
+  const longInitialMargin = (orderPrice * quantityLong) / leverage;
+  const shortInitialMargin = (orderPrice * quantityShort) / leverage;
+
+  const longOpenLoss = quantityLong * longDiff;
+  const shortOpenLoss = quantityShort * shortDiff;
+
+  // Step 3: Calculate the cost required to open a position
+  // in one-way mode you have to consider opposite "side" to calculate margin
+  const longCost = Math.max(0, longInitialMargin + longOpenLoss - longMargin);
+  const shortCost = Math.max(
+    0,
+    shortInitialMargin + shortOpenLoss - shortMargin
+  );
+
   return {
-    longCost: percentMode ? calculatePercentage(balance, quantity) : longCost,
-    shortCost: percentMode ? calculatePercentage(balance, quantity) : shortCost,
+    longCost,
+    shortCost,
     maxLong,
     maxShort,
     sliderBuy,
