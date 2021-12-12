@@ -42,3 +42,22 @@ export const calculateMaxRemovableAmount = ({
     )
   );
 };
+
+// i guess crossPosition MM = crossPositionMaintMargin
+// i'm not sure that first part of formula is correct, because it always exceeds the second one
+export const calculateMaxAddableAmount = ({
+  crossWalletBalance,
+  crossPositionMaintMargin,
+  openOrderInitialMargin,
+  availableBalance
+}: {
+  crossWalletBalance: number;
+  crossPositionMaintMargin: number;
+  openOrderInitialMargin: number;
+  availableBalance: number;
+}): number => {
+  return Math.min(
+    crossWalletBalance - openOrderInitialMargin - crossPositionMaintMargin,
+    availableBalance
+  );
+};
