@@ -30,8 +30,18 @@ type SymbolMarginInfoType = {
   shortInitialMargin: number;
   longInitialMargin: number;
 };
+
+type FlattenOrderType = {
+  id: string;
+  symbol: string;
+  notionalShort: number;
+  notionalLong: number;
+  positionSide: BinancePositionSide;
+};
+
 type TerminalFuturesBalanceContextState = {
   availableBalance: number;
+  currentSymbolMarginInfo: SymbolMarginInfoType;
   futuresBalance?: FuturesBalance;
   crossPositionInfo?: CrossPositionInfo;
 };
@@ -67,9 +77,20 @@ const ContextProvider: React.FC = ({ children }) => {
     FuturesBalance | undefined
   >(undefined);
   const [availableBalance, setAvailableBalance] = useState<number>(0);
-  const [openOrdersInitialMargin, setOpenOrdersInitalMargin] = useState<number>(
-    0
-  );
+  const [flattenOpenOrders, setFlattenOpenOrders] = useState<
+    FlattenOrderType[]
+  >([]);
+  const [
+    openOrdersInitialMargin,
+    setOpenOrdersInitialMargin
+  ] = useState<number>(0);
+  const [
+    currentSymbolMarginInfo,
+    setCurrentSymbolMarginInfo
+  ] = useState<SymbolMarginInfoType>({
+    shortInitialMargin: 0,
+    longInitialMargin: 0
+  });
   const [crossPositionInfo, setCrossPositionInfo] = useState<
     CrossPositionInfo | undefined
   >(undefined);
@@ -116,45 +137,116 @@ const ContextProvider: React.FC = ({ children }) => {
   }, [socketData]);
 
   useEffect(() => {
-    const openOrdersMargin = openOrders.reduce(
-      (acc, { price, quantity, symbol }) => {
-        const position = allPositions.find(
-          pos => pos.symbol === symbol
-        ) as Position;
-        const totalCost = (price * Math.abs(quantity)) / position.leverage;
-        if (position.quantity === 0) {
-          return acc + totalCost;
+    // this array is used to calculate open orders margin
+    // fox example: you can have two elements in open orders array
+    // {price: 1000, quantity: 5, quantityFilled: 0, positionSide: "both", symbol: "BTCUSDT"}
+    // {price: 1500, quantity: 4, quantityFilled: 0, positionSide: "both", symbol: "BTCUSDT"}
+    // in fact you have TWO orders, but for proper calculations you have to make this orders as ONE, because they relate to ONE position
+    const newFlattenOpenOrders: FlattenOrderType[] = [];
+    openOrders.forEach(
+      ({
+        type,
+        price,
+        quantity,
+        quantityFilled,
+        symbol,
+        positionSide,
+        side
+      }) => {
+        if (type !== "Limit") {
+          return;
         }
+
+        const notionalShort =
+          side === "Sell" ? price * (quantity - quantityFilled) : 0;
+        const notionalLong =
+          side === "Buy" ? price * (quantity - quantityFilled) : 0;
+
+        const existingOrderIndex = newFlattenOpenOrders.findIndex(
+          order => order.id === symbol + positionSide
+        );
+
+        if (existingOrderIndex !== -1) {
+          const existingOrder = newFlattenOpenOrders[existingOrderIndex];
+          const updatedOrder = {
+            ...existingOrder,
+            notionalShort: existingOrder.notionalShort + notionalShort,
+            notionalLong: existingOrder.notionalLong + notionalLong
+          };
+          newFlattenOpenOrders[existingOrderIndex] = updatedOrder;
+          return;
+        }
+
+        const newOrder = {
+          id: symbol + positionSide,
+          positionSide,
+          symbol,
+          notionalShort,
+          notionalLong
+        };
+        newFlattenOpenOrders.push(newOrder);
+      }
+    );
+    setFlattenOpenOrders(newFlattenOpenOrders);
+  }, [openOrders]);
+
+  useEffect(() => {
+    // it is used to clear calculations for short(long)margin
+    setCurrentSymbolMarginInfo({
+      longInitialMargin: 0,
+      shortInitialMargin: 0
+    });
+  }, [positionsList, openOrders]);
+
+  useEffect(() => {
+    const openOrdersMargin = flattenOpenOrders.reduce(
+      (acc, { symbol, notionalLong, notionalShort, positionSide }) => {
+        const position = allPositions.find(
+          pos => pos.symbol === symbol && pos.positionSide === positionSide
+        )!;
+        const shortCost = notionalShort / position.leverage;
+        const longCost = notionalLong / position.leverage;
         const mark = markPrices?.find(item => item.symbol === symbol);
         const markPrice = mark ? mark.markPrice : position.entryPrice;
-        const margin =
-          (markPrice * Math.abs(position.quantity)) / position.leverage;
-        const increment = Math.max(0, totalCost - margin * 2);
-        return acc + increment;
+        const notionalSize = markPrice * Math.abs(position.quantity);
+        const margin = notionalSize / position.leverage;
+
+        if (
+          symbol === getSymbolFromState(currentSymbol) &&
+          positionSide === "Both"
+        ) {
+          // it is used only for one-way mode, because in hedge mode you don't need to consider opposite positions or orders
+          setCurrentSymbolMarginInfo({
+            longInitialMargin: shortCost - longCost,
+            shortInitialMargin: longCost - shortCost
+          });
+        }
+        // if there is no position margin = 0, cause position.quantity = 0
+        const openOrderMargin =
+          position.quantity > 0
+            ? Math.max(longCost, shortCost - margin * 2)
+            : Math.max(shortCost, longCost - margin * 2);
+        return acc + openOrderMargin;
       },
       0
     );
-    setOpenOrdersInitalMargin(openOrdersMargin);
-  }, [openOrders, positionsList, markPrices]);
+    setOpenOrdersInitialMargin(openOrdersMargin);
+  }, [positionsList, flattenOpenOrders, markPrices]);
 
   useEffect(() => {
-    if (crossPositionInfo || !futureBalance) return;
+    if (!futuresBalance) return;
+    const crossPnl = crossPositionInfo ? crossPositionInfo.crossPnl : 0;
+    const crossMargin = crossPositionInfo ? crossPositionInfo.crossMargin : 0;
     const avlBalance =
-      futureBalance.crossWalletBalance - openOrdersInitialMargin;
+      futuresBalance.crossWalletBalance +
+      crossPnl -
+      crossMargin -
+      openOrdersInitialMargin;
     setAvailableBalance(avlBalance);
-  }, [futureBalance, crossPositionInfo, openOrdersInitialMargin]);
+  }, [futuresBalance, crossPositionInfo, openOrdersInitialMargin]);
 
   useEffect(() => {
-    if (!accountInfo) return;
-    // fix types
-    const usdtBalance = (accountInfo.balances.find(
-      balance => balance.asset === "USDT"
-    ) as unknown) as BinanceRawFuturesAccountAsset;
-    setFutureBalance(usdtBalance);
-  }, [accountInfo?.balances]);
-
-  useEffect(() => {
-    if (!futureBalance || !leverageBrackets || !openPositions.length) {
+    if (!futuresBalance || !leverageBrackets || !openPositions.length) {
       setCrossPositionInfo(undefined);
       return;
     }
@@ -210,14 +302,6 @@ const ContextProvider: React.FC = ({ children }) => {
     const crossMarginBalance = futuresBalance.crossWalletBalance + crossPnl;
     const crossMarginRatio = (crossMaintMargin / crossMarginBalance) * 100;
 
-    const avlBalance =
-      futureBalance.crossWalletBalance +
-      crossPnl -
-      crossMargin -
-      openOrdersInitialMargin;
-
-    setAvailableBalance(avlBalance);
-
     setCrossPositionInfo({
       crossMaintMargin,
       crossMarginBalance,
@@ -225,21 +309,22 @@ const ContextProvider: React.FC = ({ children }) => {
       crossPnl,
       crossMargin
     });
-  }, [
-    futureBalance,
-    leverageBrackets,
-    openPositions,
-    markPrices,
-    openOrdersInitialMargin
-  ]);
+  }, [futuresBalance, leverageBrackets, openPositions, markPrices]);
 
   const value = useMemo(
     () => ({
       futuresBalance,
       crossPositionInfo,
-      availableBalance: Math.max(0, availableBalance)
+      availableBalance: Math.max(0, availableBalance),
+      currentSymbolMarginInfo
     }),
-    [futureBalance, crossPositionInfo, availableBalance]
+    [
+      futuresBalance,
+      crossPositionInfo,
+      availableBalance,
+      currentSymbolMarginInfo.longInitialMargin,
+      currentSymbolMarginInfo.shortInitialMargin
+    ]
   );
 
   return (
