@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { calculatePercentage } from "utils/currency-converter";
 
+import { TerminalFuturesBalanceContext } from "../../contexts/terminal-futures-balance.context";
 import { TerminalFuturesPositionsContext } from "../../contexts/terminal-futures-positions.context";
 import { TerminalInfoContext } from "../../contexts/terminal-info.context";
 import { TerminalPlaceOrderContext } from "../../contexts/terminal-place-order.context";
@@ -32,20 +33,21 @@ interface PlaceOrderMaxCostOutputValues {
 export const usePlaceOrderMaxCostValues = ({
   percentMode,
   balance,
-  quantity: quan,
+  quantity: quantityProp,
   orderPrice: price,
-  reduceOnly: reduceOnlyProp
+  reduceOnly
 }: PlaceOrderMaxCostInputValues & {
   orderPrice: number | string;
 }): PlaceOrderMaxCostOutputValues => {
-  // TODO positions values! maybe from context
-  // TODO reduceOnly
-  // Просчитать hedge и oneway mode, reduceOnly, хватает ли денег или нет
   const { markPrice: mark } = useContext(TerminalTickerContext);
   const { openPositions } = useContext(TerminalFuturesPositionsContext);
-  const { symbol, exchangeAccountId } = useContext(TerminalInfoContext);
-  const { leverage, placeOrderMode } = useContext(TerminalPlaceOrderContext);
+  const { currentSymbolMarginInfo } = useContext(TerminalFuturesBalanceContext);
+  const { exchangeAccountId, symbol } = useContext(TerminalInfoContext);
+  const { leverage, placeOrderMode, maxNotional } = useContext(
+    TerminalPlaceOrderContext
+  );
 
+  // if user has not chosen an account, it just doesn't make sense to calculate values
   if (!exchangeAccountId) {
     return {
       longCost: 0,
@@ -57,9 +59,7 @@ export const usePlaceOrderMaxCostValues = ({
     };
   }
 
-  const reduceOnly = reduceOnlyProp || placeOrderMode === "HedgeClose";
-
-  const orderPrice = +price;
+  const quantity = isNaN(+quantityProp) ? 0 : +quantityProp;
 
   const symbolPositions = openPositions.filter(
     pos => pos.symbol === getSymbolFromState(symbol)
@@ -68,70 +68,112 @@ export const usePlaceOrderMaxCostValues = ({
   const longPosition = symbolPositions.find(pos => pos.quantity > 0);
   const shortPosition = symbolPositions.find(pos => pos.quantity < 0);
 
-  // поменять. Если нет orderPrice - price = 0 и дальше считать
-  if (!orderPrice) {
+  const longPositionQuantity = longPosition
+    ? Math.abs(longPosition.quantity)
+    : 0;
+  const shortPositionQuantity = shortPosition
+    ? Math.abs(shortPosition.quantity)
+    : 0;
+
+  if (placeOrderMode === "HedgeClose") {
+    const maxLong = shortPositionQuantity;
+    const maxShort = longPositionQuantity;
     return {
       longCost: 0,
       shortCost: 0,
-      maxLong: 0,
-      maxShort: 0,
-      sliderBuy: 0,
-      sliderSell: 0
+      maxLong,
+      maxShort,
+      sliderBuy: percentMode ? calculatePercentage(maxLong, quantity) : 0,
+      sliderSell: percentMode ? calculatePercentage(maxShort, quantity) : 0
     };
   }
 
-  const quantity = isNaN(+quan) ? 0 : +quan;
+  const orderPrice = isNaN(+price) ? 0 : +price;
   const markPrice = mark ? mark.markPrice : 0;
+  const longNotionalSize = markPrice * longPositionQuantity;
+  const shortNotionalSize = markPrice * shortPositionQuantity;
+  const imr = 1 / leverage;
+
+  // in one-way mode you have to consider opposite "side" to calculate margin
+  const longMargin =
+    placeOrderMode === "OneWay"
+      ? Math.max(
+          0,
+          currentSymbolMarginInfo.longInitialMargin -
+            (longNotionalSize / leverage) * 2
+        )
+      : 0;
+  const shortMargin =
+    placeOrderMode === "OneWay"
+      ? Math.max(
+          0,
+          currentSymbolMarginInfo.shortInitialMargin -
+            (shortNotionalSize / leverage) * 2
+        )
+      : 0;
 
   // Step 1: Calculate the Initial Margin
   const longInitialMargin = (orderPrice * quantity) / leverage;
   const shortInitialMargin = (orderPrice * quantity) / leverage;
 
   // Step 2: Calculate Open Loss
-  const longOpenLoss =
-    quantity *
-    Math.abs(Math.min(0, LONG_ORDER_DIRECTION * (markPrice - orderPrice)));
-  const shortOpenLoss =
-    quantity *
-    Math.abs(Math.min(0, SHORT_ORDER_DIRECTION * (markPrice - orderPrice)));
+  const longDiff = Math.abs(
+    Math.min(0, LONG_ORDER_DIRECTION * (markPrice - orderPrice))
+  );
+
+  // There is no "1 + imr" in article's formula, but i've added it during my own calculations
+  // It seems like binance article is wrong
+  const shortDiff = Math.abs(
+    (1 + imr) * Math.min(0, SHORT_ORDER_DIRECTION * (markPrice - orderPrice))
+  );
+
+  const longOpenLoss = quantity * longDiff;
+  const shortOpenLoss = quantity * shortDiff;
 
   // Step 3: Calculate the cost required to open a position
-  const longCost = percentMode
-    ? calculatePercentage(balance, quantity)
-    : longInitialMargin + longOpenLoss;
-  const shortCost = percentMode
-    ? calculatePercentage(balance, quantity)
-    : shortInitialMargin + shortOpenLoss;
+  // in one-way mode you have to consider opposite "side" to calculate margin
+  const longCost = Math.max(0, longInitialMargin + longOpenLoss - longMargin);
+  const shortCost = Math.max(
+    0,
+    shortInitialMargin + shortOpenLoss - shortMargin
+  );
 
-  // other calculations
-  const maxQuantity = balance / orderPrice;
+  let maxLong = (balance + longMargin) / (orderPrice / leverage + longDiff);
 
-  const maxLongOpenLoss =
-    maxQuantity *
-    Math.abs(Math.min(0, LONG_ORDER_DIRECTION * (markPrice - orderPrice)));
+  // calculate maxNotional restrictions
+  // note: in hedge mode you can have two different positions, but max notional value is used for SYMBOL, NOT UNIQUE POSITION
+  maxLong = Math.min(
+    maxLong,
+    Math.max(0, maxNotional + shortNotionalSize - longNotionalSize) / orderPrice
+  );
 
-  const maxShortOpenLoss =
-    maxQuantity *
-    Math.abs(Math.min(0, SHORT_ORDER_DIRECTION * (markPrice - orderPrice)));
+  // fix ui display
+  maxLong = isFinite(maxLong) ? maxLong : 0;
 
-  const maxLong = reduceOnly
-    ? shortPosition
-      ? Math.abs(shortPosition.quantity)
-      : 0
-    : (balance * leverage) / (maxLongOpenLoss + orderPrice);
+  // apply reduceOnly
+  maxLong = reduceOnly ? shortPositionQuantity : maxLong;
 
-  const maxShort = reduceOnly
-    ? longPosition
-      ? longPosition.quantity
-      : 0
-    : (balance * leverage) / (maxShortOpenLoss + orderPrice);
+  let maxShort = (balance + shortMargin) / (orderPrice / leverage + shortDiff);
+
+  // calculate maxNotional restrictions
+  // note: in hedge mode you can have two different positions, but max notional value is used for SYMBOL, NOT UNIQUE POSITION
+  maxShort = Math.min(
+    maxShort,
+    Math.max(0, maxNotional + longNotionalSize - shortNotionalSize) / orderPrice
+  );
+
+  // fix ui display
+  maxShort = isFinite(maxShort) ? maxShort : 0;
+
+  // apply reduceOnly
+  maxShort = reduceOnly ? longPositionQuantity : maxShort;
 
   const sliderBuy = percentMode ? calculatePercentage(maxLong, quantity) : 0;
   const sliderSell = percentMode ? calculatePercentage(maxShort, quantity) : 0;
 
   return {
-    longCost,
-    shortCost,
+    longCost: percentMode ? calculatePercentage(balance, quantity) : longCost,
+    shortCost: percentMode ? calculatePercentage(balance, quantity) : shortCost,
     maxLong,
     maxShort,
     sliderBuy,
