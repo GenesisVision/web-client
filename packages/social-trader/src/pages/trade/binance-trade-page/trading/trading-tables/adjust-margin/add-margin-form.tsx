@@ -58,10 +58,8 @@ const _AddMarginForm: React.FC<Props> = ({
   const { availableBalance } = useContext(TerminalFuturesBalanceContext);
 
   // fix hardcoded tickSize
-  const truncatedBalance = truncated(
-    availableBalance,
-    getDecimalScale(USDTtickSize)
-  );
+  const maxAddable = truncated(availableBalance, getDecimalScale(USDTtickSize));
+
   const truncatedMargin = truncated(margin, getDecimalScale(USDTtickSize));
 
   const form = useForm<IAdjustMarginDefaultFormValues>({
@@ -86,8 +84,8 @@ const _AddMarginForm: React.FC<Props> = ({
   });
 
   const setMax = useCallback(() => {
-    setValue(ADJUST_MARGIN_FORM_FIELDS.amount, truncatedBalance, true);
-  }, [truncatedBalance]);
+    setValue(ADJUST_MARGIN_FORM_FIELDS.amount, maxAddable, true);
+  }, [maxAddable]);
 
   return (
     <HookForm form={form} onSubmit={onSubmit} resetOnSuccess>
@@ -117,7 +115,7 @@ const _AddMarginForm: React.FC<Props> = ({
         </DialogListItem>
         <DialogListItem label={"Max addable"} size={"small"}>
           {terminalMoneyFormat({
-            amount: truncatedBalance,
+            amount: maxAddable,
             // fix hardcoded tickSize
             tickSize: USDTtickSize
           })}{" "}
