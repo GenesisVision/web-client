@@ -16,7 +16,6 @@ import {
   TradingPlatformBinanceOrdersMode
 } from "gv-api-web";
 import {
-  mapBinanceRawFuturesAccountInfoToAccount,
   mapBinanceRawFuturesSymbolBracketToSymbolLeverageBrackets,
   transformFuturesOrder
 } from "pages/trade/binance-trade-page/services/gv/futures/gv-futures-helpers";
@@ -26,6 +25,7 @@ import {
   ChangeLeverageResponse,
   CorrectedRestDepth,
   ExchangeInfo,
+  FuturesBalance,
   FuturesOrder,
   KlineParams,
   MarkPrice,
@@ -139,11 +139,12 @@ export const getUserStreamKey = (
     }>
   );
 
-export const getAccountInformation = (accountId?: string) =>
-  api
-    .terminal()
-    .getFuturesAccountInfo({ accountId })
-    .then(mapBinanceRawFuturesAccountInfoToAccount);
+// not used
+// export const getAccountInformation = (accountId?: string) =>
+//   api
+//     .terminal()
+//     .getFuturesAccountInfo({ accountId })
+//     .then(mapBinanceRawFuturesAccountInfoToAccount);
 
 export const getTrades = (
   symbol: string,
@@ -288,3 +289,8 @@ export const adjustMargin = (options: {
   positionSide: BinancePositionSide;
 }): Promise<BinanceRawFuturesPositionMarginResult> =>
   api.terminal().changeFuturesPositionMargin(options);
+
+export const getFuturesBalances = (
+  accountId: string
+): Promise<FuturesBalance[]> =>
+  api.terminal().getFuturesAccountBalance({ accountId });

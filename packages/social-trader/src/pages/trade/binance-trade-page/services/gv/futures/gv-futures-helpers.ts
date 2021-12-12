@@ -1,11 +1,9 @@
 import {
-  BinanceRawFuturesAccountInfo,
   BinanceRawFuturesBracket,
   BinanceRawFuturesOrder,
   BinanceRawFuturesSymbolBracket
 } from "gv-api-web";
 import {
-  Account,
   FuturesOrder,
   FuturesOrderStatus,
   FuturesOrderType,
@@ -63,30 +61,31 @@ export const transformFuturesOrder = ({
   lastFilledPrice: 0
 });
 
-export const mapBinanceRawFuturesAccountInfoToAccount = ({
-  canDeposit,
-  canTrade,
-  canWithdraw,
-  updateTime,
-  assets
-}: BinanceRawFuturesAccountInfo): Account => ({
-  makerCommission: 0,
-  takerCommission: 0,
-  buyerCommission: 0,
-  sellerCommission: 0,
-  canTrade,
-  canWithdraw,
-  canDeposit,
-  updateTime,
-  accountType: "Futures",
-  permissions: ["Futures"],
-  balances: assets as any
-  // balances: assets.map(
-  //   mapBinanceRawFuturesAccountAssetToBinanceRawBinanceBalance
-  // ),
-});
+// not used
+// export const mapBinanceRawFuturesAccountInfoToAccount = ({
+//   canDeposit,
+//   canTrade,
+//   canWithdraw,
+//   updateTime,
+//   assets
+// }: BinanceRawFuturesAccountInfo): Account => ({
+//   makerCommission: 0,
+//   takerCommission: 0,
+//   buyerCommission: 0,
+//   sellerCommission: 0,
+//   canTrade,
+//   canWithdraw,
+//   canDeposit,
+//   updateTime,
+//   accountType: "Futures",
+//   permissions: ["Futures"],
+//   balances: assets as any
+//   balances: assets.map(
+//     mapBinanceRawFuturesAccountAssetToBinanceRawBinanceBalance
+//   ),
+// });
 
-// unusable
+// not used
 // export const mapBinanceRawFuturesAccountAssetToBinanceRawBinanceBalance = ({
 //   asset,
 //   availableBalance,

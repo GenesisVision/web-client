@@ -16,7 +16,7 @@ import {
   BinanceRawCancelOrderId,
   BinanceRawExchangeInfo,
   BinanceRawFutures24HPrice,
-  BinanceRawFuturesAccountAsset,
+  BinanceRawFuturesAccountBalance,
   BinanceRawFuturesChangeMarginTypeResult,
   BinanceRawFuturesIncomeHistory,
   BinanceRawFuturesInitialLeverageChangeResult,
@@ -210,7 +210,7 @@ export interface ITerminalMethods extends IGVTerminalMethods {
     take?: number;
   }) => Promise<TableDataType<SpotOrder | FuturesOrder>>;
   getUserStreamKey: (accountId?: string) => Observable<{ listenKey: string }>;
-  getAccountInformation: (
+  getAccountInformation?: (
     accountId?: string,
     currency?: CurrencyEnum
   ) => Promise<Account>;
@@ -287,6 +287,9 @@ export interface ITerminalMethods extends IGVTerminalMethods {
     type: BinanceFuturesMarginChangeDirectionType;
     positionSide: BinancePositionSide;
   }) => Promise<BinanceRawFuturesPositionMarginResult>;
+  getFuturesBalances?: (
+    accountId: string
+  ) => Promise<BinanceRawFuturesAccountBalance[]>;
 
   // Sockets
 
@@ -573,7 +576,7 @@ export interface ExtentedBinanceRawBinanceBalance {
   marginBalance?: number;
 }
 
-export type FutureBalance = BinanceRawFuturesAccountAsset;
+export type FuturesBalance = BinanceRawFuturesAccountBalance;
 
 export type Account = BinanceRawAccountInfo & {
   // positions?: Array<Position>; unused info

@@ -11,7 +11,7 @@ interface Props {
 }
 
 const _LiquidationPriceCross: React.FC<Props> = ({ tickSize, symbol }) => {
-  const { crossPositionInfo, futureBalance } = useContext(
+  const { crossPositionInfo, futuresBalance } = useContext(
     TerminalFuturesBalanceContext
   );
   const liquidationPrice = useCalculateCrossLiqPrice({
@@ -20,7 +20,7 @@ const _LiquidationPriceCross: React.FC<Props> = ({ tickSize, symbol }) => {
       ? crossPositionInfo.crossMaintMargin
       : 0,
     crossPnl: crossPositionInfo ? crossPositionInfo.crossPnl : 0,
-    crossWalletBalance: futureBalance ? futureBalance.crossWalletBalance : 0
+    crossWalletBalance: futuresBalance ? futuresBalance.crossWalletBalance : 0
   });
   return (
     <>

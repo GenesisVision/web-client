@@ -1,7 +1,5 @@
-import { Push } from "components/link/link";
 import { useAccountCurrency } from "hooks/account-currency.hook";
 import useApiRequest from "hooks/api-request.hook";
-import { useAuth } from "hooks/auth.hook";
 import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-methods.context";
 import {
   filterOutboundAccountInfoStream,
@@ -26,7 +24,6 @@ import React, {
   useMemo,
   useState
 } from "react";
-import { LOGIN_ROUTE } from "routes/app.routes";
 import { Observable } from "rxjs";
 import { useSockets } from "services/websocket.service";
 
@@ -87,8 +84,6 @@ export const TerminalInfoContextProvider: React.FC<Props> = ({
   } = useContext(TerminalMethodsContext);
   const { connectSocket } = useSockets();
 
-  const { isAuthenticated } = useAuth();
-
   const [symbol, setSymbol] = useState<SymbolState>(outerSymbol);
   const [tickSize, setTickSize] = useState<string>("0.01");
   const [depthTickSize, setDepthTickSize] = useState<string>("0.01");
@@ -104,16 +99,14 @@ export const TerminalInfoContextProvider: React.FC<Props> = ({
   } = useApiRequest({
     name: "getAccountInformation",
     cache: true,
-    catchCallback: () => {
-      if (!isAuthenticated) Push(LOGIN_ROUTE);
-    },
     request: ({ exchangeAccountId, currency }) =>
-      getAccountInformationRequest(exchangeAccountId, currency)
+      getAccountInformationRequest!(exchangeAccountId, currency)
   });
 
   useEffect(() => {
     if (!exchangeAccountId) return;
-    getAccountInformation({ exchangeAccountId, currency });
+    getAccountInformationRequest &&
+      getAccountInformation({ exchangeAccountId, currency });
     getUserStreamKey(exchangeAccountId).subscribe(({ listenKey }) =>
       setUserStreamKey(listenKey)
     );
@@ -123,14 +116,16 @@ export const TerminalInfoContextProvider: React.FC<Props> = ({
     if (!userStreamKey) return;
     const $userStream = getUserStreamSocket(connectSocket, userStreamKey);
     setUserStream($userStream);
-    const accountInfoStream = filterOutboundAccountInfoStream($userStream);
-    accountInfoStream.subscribe(data => {
-      setSocketData(data);
-    });
+    if (terminalType === "spot") {
+      const accountInfoStream = filterOutboundAccountInfoStream($userStream);
+      accountInfoStream.subscribe(data => {
+        setSocketData(data);
+      });
+    }
   }, [userStreamKey, getUserStreamSocket]);
 
   useEffect(() => {
-    if (!socketData || !accountInfo || terminalType === "futures") return;
+    if (!socketData || !accountInfo) return;
     const updatedData = updateAccountInfo(accountInfo, socketData);
     setAccountInfo(updatedData);
   }, [socketData]);
