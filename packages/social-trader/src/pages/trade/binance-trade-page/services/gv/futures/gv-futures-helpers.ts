@@ -33,7 +33,8 @@ export const transformFuturesOrder = ({
   timeInForce,
   commission,
   commissionAsset,
-  realizedProfit
+  realizedProfit,
+  priceLastFilledTrade
 }: BinanceRawFuturesOrder): FuturesOrder => ({
   commission,
   commissionAsset,
@@ -57,8 +58,7 @@ export const transformFuturesOrder = ({
   stopPrice,
   price,
   id: orderId,
-  // todo
-  lastFilledPrice: 0
+  lastFilledPrice: priceLastFilledTrade
 });
 
 // not used
