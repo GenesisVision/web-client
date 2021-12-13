@@ -73,6 +73,6 @@ export const OPEN_ORDERS_FUTURES_TABLE_COLUMNS: SortingColumn[] = [
     name: "trigger-conditions"
   },
   {
-    name: "cancel-all"
+    name: "action"
   }
 ];
