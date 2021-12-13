@@ -30,7 +30,6 @@ const TableCell = styled(TableCellComponent)`
 const _OrderHistoryFuturesRow: React.FC<FuturesOrder> = ({
   symbol,
   time,
-  type,
   side,
   positionSide,
   averagePrice,
@@ -60,7 +59,7 @@ const _OrderHistoryFuturesRow: React.FC<FuturesOrder> = ({
     <TableRow translucent={orderStatus === "Canceled"}>
       <TableCell firstOffset={false}>{formatDate(new Date(time))}</TableCell>
       <TableCell>{symbol}</TableCell>
-      <TableCell>{getFuturesTypeLabel(t, type)}</TableCell>
+      <TableCell>{getFuturesTypeLabel(t, originalType)}</TableCell>
       <TableCell>
         <Text color={side === "Buy" ? "green" : "red"}>
           {getFuturesOpenOrderSideLabel(t, positionSide, side)}
@@ -76,13 +75,13 @@ const _OrderHistoryFuturesRow: React.FC<FuturesOrder> = ({
       </TableCell>
       <TableCell>
         <Center>
-          {type === "Market"
+          {originalType === "Market"
             ? "–"
             : terminalMoneyFormat({
                 amount: price,
                 tickSize: String(tickSize)
               })}
-          {type === "Liquidation" && <LiquidationPriceInfoBadge />}
+          {originalType === "Liquidation" && <LiquidationPriceInfoBadge />}
         </Center>
       </TableCell>
       <TableCell>
