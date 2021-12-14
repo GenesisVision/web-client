@@ -141,10 +141,14 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
               >
                 <Text size={"xsmall"}>
                   <MonoText>
-                    {terminalMoneyFormat({
-                      amount: markPrice.markPrice,
-                      tickSize
-                    })}
+                    <NumberFormat
+                      value={terminalMoneyFormat({
+                        amount: markPrice.markPrice,
+                        tickSize
+                      })}
+                      thousandSeparator={","}
+                      displayType="text"
+                    />
                   </MonoText>
                 </Text>
               </LabeledValue>
@@ -153,10 +157,14 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
               <LabeledValue size={"xsmall"} label={"Index"}>
                 <Text size={"xsmall"}>
                   <MonoText>
-                    {terminalMoneyFormat({
-                      amount: markPrice.indexPrice,
-                      tickSize
-                    })}
+                    <NumberFormat
+                      value={terminalMoneyFormat({
+                        amount: markPrice.indexPrice,
+                        tickSize
+                      })}
+                      thousandSeparator={","}
+                      displayType="text"
+                    />
                   </MonoText>
                 </Text>
               </LabeledValue>

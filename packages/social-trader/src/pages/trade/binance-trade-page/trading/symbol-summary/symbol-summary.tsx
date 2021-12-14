@@ -128,18 +128,26 @@ const _SymbolSummaryView: React.FC<Props> = ({
                   }
                 >
                   <MonoText>
-                    {terminalMoneyFormat({
-                      amount: markPrice.markPrice,
-                      tickSize
-                    })}
+                    <NumberFormat
+                      value={terminalMoneyFormat({
+                        amount: markPrice.markPrice,
+                        tickSize
+                      })}
+                      thousandSeparator={","}
+                      displayType="text"
+                    />
                   </MonoText>
                 </SymbolSummaryLine>
                 <SymbolSummaryLine label={"Index"}>
                   <MonoText>
-                    {terminalMoneyFormat({
-                      amount: markPrice.indexPrice,
-                      tickSize
-                    })}
+                    <NumberFormat
+                      value={terminalMoneyFormat({
+                        amount: markPrice.indexPrice,
+                        tickSize
+                      })}
+                      thousandSeparator={","}
+                      displayType="text"
+                    />
                   </MonoText>
                 </SymbolSummaryLine>
                 <SymbolSummaryLine
