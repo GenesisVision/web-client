@@ -95,21 +95,13 @@ export const usePlaceOrderMaxCostValues = ({
   const imr = 1 / leverage;
 
   // in one-way mode you have to consider opposite "side" to calculate margin
-  const longMargin =
+  const longAdditionalMargin =
     placeOrderMode === "OneWay"
-      ? Math.max(
-          0,
-          currentSymbolMarginInfo.longInitialMargin -
-            (longNotionalSize / leverage) * 2
-        )
+      ? currentSymbolMarginInfo.longAdditionalMargin
       : 0;
-  const shortMargin =
+  const shortAdditionalMargin =
     placeOrderMode === "OneWay"
-      ? Math.max(
-          0,
-          currentSymbolMarginInfo.shortInitialMargin -
-            (shortNotionalSize / leverage) * 2
-        )
+      ? currentSymbolMarginInfo.shortAdditionalMargin
       : 0;
 
   // Step 1: Calculate Open Loss
@@ -123,14 +115,16 @@ export const usePlaceOrderMaxCostValues = ({
     (1 + imr) * Math.min(0, SHORT_ORDER_DIRECTION * (markPrice - orderPrice))
   );
 
-  let maxLong = (balance + longMargin) / (orderPrice / leverage + longDiff);
+  let maxLong =
+    (balance + longAdditionalMargin) / (orderPrice / leverage + longDiff);
 
   // calculate maxNotional restrictions
   // note: in hedge mode you can have two different positions, but max notional value is used for SYMBOL, NOT UNIQUE POSITION
-  maxLong = Math.min(
-    maxLong,
-    Math.max(0, maxNotional + shortNotionalSize - longNotionalSize) / orderPrice
-  );
+  const maxNotionalForLong =
+    placeOrderMode === "OneWay"
+      ? maxNotional + shortNotionalSize - longNotionalSize
+      : maxNotional - shortNotionalSize - longNotionalSize;
+  maxLong = Math.min(maxLong, Math.max(0, maxNotionalForLong) / orderPrice);
 
   // fix ui display
   maxLong = isFinite(maxLong) ? maxLong : 0;
@@ -138,13 +132,20 @@ export const usePlaceOrderMaxCostValues = ({
   // apply reduceOnly
   maxLong = reduceOnly ? shortPositionQuantity : maxLong;
 
-  let maxShort = (balance + shortMargin) / (orderPrice / leverage + shortDiff);
+  let maxShort =
+    (balance + shortAdditionalMargin) / (orderPrice / leverage + shortDiff);
 
   // calculate maxNotional restrictions
   // note: in hedge mode you can have two different positions, but max notional value is used for SYMBOL, NOT UNIQUE POSITION
+  const maxNotionalForShort =
+    placeOrderMode === "OneWay"
+      ? maxNotional + longNotionalSize - shortNotionalSize
+      : maxNotional - shortNotionalSize - longNotionalSize;
   maxShort = Math.min(
     maxShort,
-    Math.max(0, maxNotional + longNotionalSize - shortNotionalSize) / orderPrice
+    // there is Math.max(orderPrice, markPrice) because orders execute at the best price
+    // if orderPrice < markPrice then short order executes at markPrice
+    Math.max(0, maxNotionalForShort) / Math.max(orderPrice, markPrice)
   );
 
   // fix ui display
@@ -167,11 +168,14 @@ export const usePlaceOrderMaxCostValues = ({
   const shortOpenLoss = quantityShort * shortDiff;
 
   // Step 3: Calculate the cost required to open a position
-  // in one-way mode you have to consider opposite "side" to calculate margin
-  const longCost = Math.max(0, longInitialMargin + longOpenLoss - longMargin);
+  // in one-way mode you have to consider opposite "side" to calculate cost
+  const longCost = Math.max(
+    0,
+    longInitialMargin + longOpenLoss - longAdditionalMargin
+  );
   const shortCost = Math.max(
     0,
-    shortInitialMargin + shortOpenLoss - shortMargin
+    shortInitialMargin + shortOpenLoss - shortAdditionalMargin
   );
 
   return {

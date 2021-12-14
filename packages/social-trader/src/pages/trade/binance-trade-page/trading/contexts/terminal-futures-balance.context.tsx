@@ -27,8 +27,8 @@ import { TerminalOpenOrdersContext } from "./terminal-open-orders.context";
 import { TerminalTickerContext } from "./terminal-ticker.context";
 
 type SymbolMarginInfoType = {
-  shortInitialMargin: number;
-  longInitialMargin: number;
+  shortAdditionalMargin: number;
+  longAdditionalMargin: number;
 };
 
 type FlattenOrderType = {
@@ -88,8 +88,8 @@ const ContextProvider: React.FC = ({ children }) => {
     currentSymbolMarginInfo,
     setCurrentSymbolMarginInfo
   ] = useState<SymbolMarginInfoType>({
-    shortInitialMargin: 0,
-    longInitialMargin: 0
+    shortAdditionalMargin: 0,
+    longAdditionalMargin: 0
   });
   const [crossPositionInfo, setCrossPositionInfo] = useState<
     CrossPositionInfo | undefined
@@ -193,8 +193,8 @@ const ContextProvider: React.FC = ({ children }) => {
   useEffect(() => {
     // it is used to clear calculations for short(long)margin
     setCurrentSymbolMarginInfo({
-      longInitialMargin: 0,
-      shortInitialMargin: 0
+      longAdditionalMargin: 0,
+      shortAdditionalMargin: 0
     });
   }, [positionsList, openOrders]);
 
@@ -208,24 +208,29 @@ const ContextProvider: React.FC = ({ children }) => {
         const longCost = notionalLong / position.leverage;
         const mark = markPrices?.find(item => item.symbol === symbol);
         const markPrice = mark ? mark.markPrice : position.entryPrice;
-        const notionalSize = markPrice * Math.abs(position.quantity);
-        const margin = notionalSize / position.leverage;
+        const margin = (markPrice * position.quantity) / position.leverage;
 
         if (
-          symbol === getSymbolFromState(currentSymbol) &&
-          positionSide === "Both"
+          positionSide === "Both" &&
+          symbol === getSymbolFromState(currentSymbol)
         ) {
           // it is used only for one-way mode, because in hedge mode you don't need to consider opposite positions or orders
           setCurrentSymbolMarginInfo({
-            longInitialMargin: shortCost - longCost,
-            shortInitialMargin: longCost - shortCost
+            longAdditionalMargin: Math.max(
+              0,
+              shortCost - longCost - margin * 2
+            ),
+            shortAdditionalMargin: Math.max(
+              0,
+              longCost - shortCost + margin * 2
+            )
           });
         }
         // if there is no position margin = 0, cause position.quantity = 0
         const openOrderMargin =
           position.quantity > 0
-            ? Math.max(longCost, shortCost - margin * 2)
-            : Math.max(shortCost, longCost - margin * 2);
+            ? Math.max(longCost, shortCost - Math.abs(margin) * 2)
+            : Math.max(shortCost, longCost - Math.abs(margin) * 2);
         return acc + openOrderMargin;
       },
       0
@@ -322,8 +327,8 @@ const ContextProvider: React.FC = ({ children }) => {
       futuresBalance,
       crossPositionInfo,
       availableBalance,
-      currentSymbolMarginInfo.longInitialMargin,
-      currentSymbolMarginInfo.shortInitialMargin
+      currentSymbolMarginInfo.longAdditionalMargin,
+      currentSymbolMarginInfo.shortAdditionalMargin
     ]
   );
 
