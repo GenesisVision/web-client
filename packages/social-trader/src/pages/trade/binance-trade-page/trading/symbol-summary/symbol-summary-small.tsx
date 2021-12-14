@@ -184,18 +184,15 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
               >
                 {serverTime && (
                   <Text size={"xsmall"}>
-                    <Text wrap={false}>
-                      <MonoText>
-                        <NumberFormat
-                          value={+markPrice.fundingRate * 100}
-                          fixedDecimalScale
-                          decimalScale={4}
-                          suffix={"%"}
-                          displayType="text"
-                        />{" "}
-                      </MonoText>
-                    </Text>
                     <MonoText>
+                      <NumberFormat
+                        value={+markPrice.fundingRate * 100}
+                        fixedDecimalScale
+                        decimalScale={4}
+                        suffix={"%"}
+                        displayType="text"
+                      />
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                       <SymbolSummaryCountdown
                         nextFundingTime={markPrice.nextFundingTime}
                         serverTime={serverTime.date}
