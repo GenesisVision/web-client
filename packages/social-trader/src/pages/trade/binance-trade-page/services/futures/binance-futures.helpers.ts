@@ -202,7 +202,7 @@ export const futuresEventTradeOrderTransform = (
     price: socketData.p,
     quantity: socketData.q,
     // or socketData.z or socketData.l
-    quantityFilled: socketData.L,
+    quantityFilled: socketData.l,
     reduceOnly: socketData.R,
     time: socketData.T,
     originalType: convertBinanceTypeIntoGV(socketData.ot) as FuturesOrderType,
