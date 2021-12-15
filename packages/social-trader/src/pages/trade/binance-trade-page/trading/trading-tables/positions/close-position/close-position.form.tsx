@@ -5,7 +5,7 @@ import { RowItem } from "components/row-item/row-item";
 import { SimpleNumberField } from "components/simple-fields/simple-number-field";
 import styles from "pages/trade/binance-trade-page/trading/place-order/place-order.module.scss";
 import { OrderType } from "pages/trade/binance-trade-page/trading/terminal.types";
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import NumberFormat from "react-number-format";
 import { allowValuesNumberFormat } from "utils/helpers";
@@ -60,7 +60,12 @@ const _ClosePosition: React.FC<Props> = ({
     mode: "onChange"
   });
 
-  const { watch } = form;
+  const { watch, setValue } = form;
+
+  useEffect(() => {
+    setValue(CLOSE_POSITION_FIELDS.quantity, Math.abs(outerQuantity));
+  }, [outerQuantity]);
+
   const { price, quantity } = watch();
 
   const handleButtonClick = (type: OrderType) => {
