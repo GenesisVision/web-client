@@ -2,10 +2,13 @@ import withReduxStore from "decorators/with-redux-store";
 import withToken from "decorators/with-token";
 import withTradeLayout from "decorators/with-trade-layout";
 import { withTradeRedirect } from "decorators/with-trade-redirect";
-import { BrokerTradeServerType, TradingAccountPermission } from "gv-api-web";
+import { BrokerTradeServerType } from "gv-api-web";
 import { getTerminalApiMethods } from "pages/trade/binance-trade-page/binance-trade.helpers";
 import { TerminalMethodsContextProvider } from "pages/trade/binance-trade-page/trading/contexts/terminal-methods.context";
-import { parseSymbolFromUrlParam } from "pages/trade/binance-trade-page/trading/terminal.helpers";
+import {
+  getTerminalType,
+  parseSymbolFromUrlParam
+} from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import {
   SymbolState,
   TerminalType
@@ -26,7 +29,7 @@ interface Props {
   symbol?: SymbolState;
 }
 
-const getTerminalType = async (
+const getTerminalTypeWithAccount = async (
   params: AnyObjectType,
   token?: Token
 ): Promise<TerminalType> => {
@@ -35,10 +38,7 @@ const getTerminalType = async (
       const {
         tradingAccountInfo: { permissions }
       } = await api.accounts(token).getTradingAccountDetails(params?.["id"]);
-      const isFutures = permissions.find(
-        (permission: TradingAccountPermission) => permission === "Futures"
-      );
-      return isFutures ? "futures" : "spot";
+      return getTerminalType(permissions);
     } catch (e) {
       console.error(e);
     }
@@ -69,7 +69,7 @@ Page.getInitialProps = async ctx => {
   const { id } = ctx.query;
   const params = getParamsFromCtxWithSplit(ctx);
   const exchangeAccountId = params["id"];
-  const terminalType = await getTerminalType(params, ctx.token);
+  const terminalType = await getTerminalTypeWithAccount(params, ctx.token);
   const symbol = id ? parseSymbolFromUrlParam(String(id)) : undefined;
 
   let brokerType: BrokerTradeServerType | undefined;

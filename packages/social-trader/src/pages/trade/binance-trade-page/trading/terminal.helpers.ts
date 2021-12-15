@@ -1,5 +1,6 @@
 import { ColoredTextColor } from "components/colored-text/colored-text";
 import { Push } from "components/link/link";
+import { TradingAccountPermission } from "gv-api-web";
 import { useParams } from "hooks/location";
 import { Bar } from "pages/trade/binance-trade-page/trading/chart/charting_library/datafeed-api";
 import { terminalMoneyFormat } from "pages/trade/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
@@ -12,7 +13,8 @@ import {
   MergedTickerSymbolType,
   SpotOrder,
   SymbolState,
-  TerminalCurrency
+  TerminalCurrency,
+  TerminalType
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import qs from "qs";
 import { useCallback } from "react";
@@ -268,4 +270,13 @@ export const getTickSizeFromPrecision = (precision: number): string => {
     return "1";
   }
   return "0." + "0".repeat(precision - 1) + "1";
+};
+
+export const getTerminalType = (
+  permissions: TradingAccountPermission[]
+): TerminalType => {
+  const isFutures = permissions.find(
+    (permission: TradingAccountPermission) => permission === "Futures"
+  );
+  return isFutures ? "futures" : "spot";
 };
