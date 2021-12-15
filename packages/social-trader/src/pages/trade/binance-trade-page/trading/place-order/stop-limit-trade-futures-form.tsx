@@ -132,7 +132,7 @@ const _StopLimitTradeFuturesForm: React.FC<IStopLimitTradeFormProps> = ({
             label={t("Stop Price")}
             currency={quoteAsset}
             name={FUTURES_TRADE_FORM_FIELDS.stopPrice}
-            tickSize={getDecimalScale(filterValues.tickSize)}
+            decimalScale={getDecimalScale(filterValues.tickSize)}
             rules={minMaxNumberRules({
               t,
               min: minPrice,
