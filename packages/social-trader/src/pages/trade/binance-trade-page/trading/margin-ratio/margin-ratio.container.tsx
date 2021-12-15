@@ -31,7 +31,7 @@ export const MarginRatioContainer: React.FC = () => {
       return;
     }
     setSelectionPosition(openPositions[0]);
-  }, [openPositions.length, currentSymbol]);
+  }, [openPositions, currentSymbol]);
 
   if (!selectedPosition) {
     return (
