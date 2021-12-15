@@ -275,8 +275,10 @@ export const getTickSizeFromPrecision = (precision: number): string => {
 export const getTerminalType = (
   permissions: TradingAccountPermission[]
 ): TerminalType => {
-  const isFutures = permissions.find(
-    (permission: TradingAccountPermission) => permission === "Futures"
-  );
+  const isFutures =
+    !!permissions &&
+    permissions.find(
+      (permission: TradingAccountPermission) => permission === "Futures"
+    );
   return isFutures ? "futures" : "spot";
 };
