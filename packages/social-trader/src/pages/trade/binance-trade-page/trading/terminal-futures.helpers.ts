@@ -15,7 +15,6 @@ import {
   FuturesMarginCallEventPosition
 } from "../services/futures/binance-futures.types";
 import { terminalMoneyFormat } from "./components/terminal-money-format/terminal-money-format";
-import { setUpperFirstLetter } from "./terminal.helpers";
 import {
   FuturesOrder,
   FuturesOrderType,
@@ -82,9 +81,14 @@ export const generateFuturesOrderMessage = (
       : order.executionType?.toLowerCase() === "trade"
       ? "Filled"
       : order.executionType;
+
+  const orderQuantity =
+    order.orderStatus?.toLocaleLowerCase() === "partiallyfilled"
+      ? order.quantityFilled
+      : order.quantity;
   return `${positionReduce}${orderType} ${orderSide} order ${executionTypeTitle?.toLowerCase()}\n\n${executionTypeDescription} exchange ${positionReduce.toLowerCase()}${orderType.toLowerCase()} ${orderSide.toLowerCase()} order for ${terminalMoneyFormat(
     {
-      amount: order.quantity,
+      amount: orderQuantity,
       tickSize: String(stepSize)
     }
   )} ${symbol.baseAsset} by using ${symbol.quoteAsset}`;
