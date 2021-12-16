@@ -16,10 +16,7 @@ import React, {
 
 import { FuturesAccountUpdateEvent } from "../../services/futures/binance-futures.types";
 import { getSymbolFromState } from "../terminal.helpers";
-import {
-  filterFuturesAccountUpdateStream,
-  flatNormalizedPositions
-} from "../terminal-futures.helpers";
+import { filterFuturesAccountUpdateStream } from "../terminal-futures.helpers";
 import { calculateUnrealizedPNL } from "../trading-tables/positions/positions.helpers";
 import { TerminalFuturesPositionsContext } from "./terminal-futures-positions.context";
 import { TerminalMethodsContext } from "./terminal-methods.context";
@@ -59,7 +56,7 @@ const ContextProvider: React.FC = ({ children }) => {
   const { getFuturesBalances: getFuturesBalancesRequest } = useContext(
     TerminalMethodsContext
   );
-  const { openPositions, leverageBrackets, positionsList } = useContext(
+  const { openPositions, leverageBrackets, allPositions } = useContext(
     TerminalFuturesPositionsContext
   );
   const { markPrices } = useContext(TerminalTickerContext);
@@ -97,10 +94,6 @@ const ContextProvider: React.FC = ({ children }) => {
   const [socketData, setSocketData] = useState<
     FuturesAccountUpdateEvent | undefined
   >(undefined);
-
-  const allPositions = useMemo(() => flatNormalizedPositions(positionsList), [
-    positionsList
-  ]);
 
   useEffect(() => {
     if (!exchangeAccountId) return;
@@ -196,9 +189,10 @@ const ContextProvider: React.FC = ({ children }) => {
       longAdditionalMargin: 0,
       shortAdditionalMargin: 0
     });
-  }, [positionsList, openOrders]);
+  }, [allPositions, openOrders]);
 
   useEffect(() => {
+    if (!allPositions.length) return;
     const openOrdersMargin = flattenOpenOrders.reduce(
       (acc, { symbol, notionalLong, notionalShort, positionSide }) => {
         const position = allPositions.find(
@@ -236,7 +230,7 @@ const ContextProvider: React.FC = ({ children }) => {
       0
     );
     setOpenOrdersInitialMargin(openOrdersMargin);
-  }, [positionsList, flattenOpenOrders, markPrices]);
+  }, [allPositions, flattenOpenOrders, markPrices]);
 
   useEffect(() => {
     if (!futuresBalance) return;

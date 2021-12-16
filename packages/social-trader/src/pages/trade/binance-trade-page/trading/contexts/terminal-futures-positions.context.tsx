@@ -30,7 +30,7 @@ import {
 
 type TerminalFuturesPositionsContextState = {
   openPositions: Position[];
-  positionsList: { [key: string]: Position };
+  allPositions: Position[];
   updatePositions: () => Promise<any>;
   updateSymbolPosition: () => Promise<any>;
   leverageBrackets?: SymbolLeverageBrackets[];
@@ -82,6 +82,10 @@ const ContextProvider: React.FC = ({ children }) => {
   } = useApiRequest({
     request: getLeverageBracketsRequest!
   });
+
+  const allPositions = useMemo(() => flatNormalizedPositions(positionsList), [
+    positionsList
+  ]);
 
   useEffect(() => {
     if (!exchangeAccountId || !$userStream) return;
@@ -144,15 +148,14 @@ const ContextProvider: React.FC = ({ children }) => {
   }, [positionSymbolInfoData]);
 
   useEffect(() => {
-    if (!positionsList) return;
-    const flatPositions = flatNormalizedPositions(positionsList);
-    setOpenPositions(flatPositions.filter(({ quantity }) => quantity !== 0));
-  }, [positionsList]);
+    if (!allPositions.length) return;
+    setOpenPositions(allPositions.filter(({ quantity }) => quantity !== 0));
+  }, [allPositions]);
 
   const value = useMemo(
     () => ({
       openPositions,
-      positionsList,
+      allPositions,
       leverageBrackets,
       updatePositions: () =>
         getPositionInformation({ accountId: exchangeAccountId }),
@@ -163,7 +166,7 @@ const ContextProvider: React.FC = ({ children }) => {
         })
     }),
     [
-      positionsList,
+      allPositions,
       openPositions,
       leverageBrackets,
       getPositionInformation,

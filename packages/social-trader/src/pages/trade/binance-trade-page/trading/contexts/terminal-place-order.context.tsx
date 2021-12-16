@@ -16,7 +16,6 @@ import React, {
 
 import { FuturesPlaceOrderMode } from "../place-order/place-order.types";
 import { getSymbolFromState } from "../terminal.helpers";
-import { flatNormalizedPositions } from "../terminal-futures.helpers";
 import { TerminalFuturesPositionsContext } from "./terminal-futures-positions.context";
 
 const InitialFuturesTerminalLeverageState = 1;
@@ -43,7 +42,7 @@ export const TerminalPlaceOrderContext = createContext<TradingAccountInfoState>(
 const ContextProvider: React.FC = ({ children }) => {
   const { exchangeAccountId, symbol } = useContext(TerminalInfoContext);
   const { getPositionMode } = useContext(TerminalMethodsContext);
-  const { positionsList } = useContext(TerminalFuturesPositionsContext);
+  const { allPositions } = useContext(TerminalFuturesPositionsContext);
 
   const [marginMode, setMarginMode] = useState<MarginModeType | undefined>();
   const [leverage, setLeverage] = useState(InitialFuturesTerminalLeverageState);
@@ -73,18 +72,17 @@ const ContextProvider: React.FC = ({ children }) => {
   }, [positionInfo, symbol]);
 
   useEffect(() => {
-    if (positionsList) {
-      // if currentMode is hedge, then you have two position for symbol. You can choose any position, because leverage and marginType will be the same
+    if (!allPositions.length) return;
+    // if currentMode is hedge, then you have two position for symbol. You can choose any position, because leverage and marginType will be the same
 
-      // Sometimes in sockets you can get extra positions (for example in funding fee messages).
-      // It means that you have three positions and one or two of them does not have enough data, because it wasn't loaded from restApi
-      // It might lacks of leverage that's why i check in array whether it has leverage or not
-      const flatPosition = flatNormalizedPositions(positionsList).find(
-        pos => pos.symbol === getSymbolFromState(symbol) && pos.leverage
-      );
-      setPositionInfo(flatPosition);
-    }
-  }, [positionsList, symbol]);
+    // Sometimes in sockets you can get extra positions (for example in funding fee messages).
+    // It means that you have three positions and one or two of them does not have enough data, because it wasn't loaded from restApi
+    // It might lacks of leverage that's why i check in array whether it has leverage or not
+    const currentPosition = allPositions.find(
+      pos => pos.symbol === getSymbolFromState(symbol) && pos.leverage
+    );
+    setPositionInfo(currentPosition);
+  }, [allPositions, symbol]);
 
   useEffect(() => {
     if (getPositionMode && exchangeAccountId)
