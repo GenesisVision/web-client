@@ -213,7 +213,7 @@ export const futuresEventTradeOrderTransform = (
     eventType: FUTURES_ACCOUNT_EVENT.orderTradeUpdate,
     averagePrice: socketData.ap,
     callbackRate: socketData.cr,
-    orderStatus: getWorkingTypeType(socketData.X) as FuturesOrderStatus,
+    orderStatus: convertBinanceTypeIntoGV(socketData.X) as FuturesOrderStatus,
     stopPrice: socketData.sp,
     timeInForce: socketData.f,
     lastFilledPrice: socketData.L
