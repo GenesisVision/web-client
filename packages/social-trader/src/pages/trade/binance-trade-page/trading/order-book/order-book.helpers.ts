@@ -239,7 +239,10 @@ export const getOrderBookLimitOrders = (
     .filter(order => order.symbol === symbol)
     .filter(({ type }) => type.toUpperCase() === "LIMIT")
     .filter(
-      ({ orderStatus }) => orderStatus && orderStatus.toUpperCase() === "NEW"
+      ({ orderStatus }) =>
+        orderStatus &&
+        (orderStatus.toUpperCase() === "NEW" ||
+          orderStatus.toUpperCase() === "PARTIALLYFILLED")
     )
     .filter(
       ({ side }) =>

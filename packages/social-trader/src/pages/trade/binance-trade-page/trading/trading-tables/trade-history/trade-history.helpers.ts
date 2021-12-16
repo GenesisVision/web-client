@@ -30,12 +30,12 @@ export const updateFuturesTradeHistoryData = (
   data: FuturesOrder[],
   updates: FuturesOrder[]
 ): FuturesOrder[] => {
-  const normalizedData = normalizeOpenOrdersList(data);
+  let normalizedData = normalizeOpenOrdersList(data);
   updates.forEach(update => {
     if (isFuturesTradeOrder(update.orderStatus, update.executionType)) {
-      normalizedData[update.id] = {
-        ...normalizedData[update.id],
-        ...update
+      normalizedData = {
+        ...normalizedData,
+        update
       };
     } else {
       delete normalizedData[update!.id];

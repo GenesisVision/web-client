@@ -27,7 +27,7 @@ const _TradeHistoryFuturesRow: React.FC<FuturesOrder> = ({
   side,
   symbol,
   time,
-  quantity,
+  lastFilledQuantity,
   commission,
   commissionAsset,
   realizedProfit,
@@ -64,7 +64,7 @@ const _TradeHistoryFuturesRow: React.FC<FuturesOrder> = ({
       </TableCell>
       <TableCell>
         {`${terminalMoneyFormat({
-          amount: quantity,
+          amount: lastFilledQuantity!,
           tickSize: String(stepSize)
         })} ${symbolData.baseAsset}`}
       </TableCell>

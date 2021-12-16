@@ -201,8 +201,10 @@ export const futuresEventTradeOrderTransform = (
     ) as BinancePositionSide,
     price: socketData.p,
     quantity: socketData.q,
-    // or socketData.z or socketData.l
-    quantityFilled: socketData.l,
+    quantityFilled: socketData.z,
+    // quoteQuantityFilled is the same as quantityFilled for order history tab
+    quoteQuantityFilled: socketData.z,
+    lastFilledQuantity: socketData.l,
     reduceOnly: socketData.R,
     time: socketData.T,
     originalType: convertBinanceTypeIntoGV(socketData.ot) as FuturesOrderType,

@@ -34,7 +34,7 @@ const _OrderHistoryFuturesRow: React.FC<FuturesOrder> = ({
   positionSide,
   averagePrice,
   price,
-  quantityFilled,
+  quoteQuantityFilled,
   originalType,
   quantity,
   reduceOnly,
@@ -86,7 +86,7 @@ const _OrderHistoryFuturesRow: React.FC<FuturesOrder> = ({
       </TableCell>
       <TableCell>
         {`${terminalMoneyFormat({
-          amount: quantityFilled,
+          amount: quoteQuantityFilled!,
           tickSize: String(stepSize)
         })} ${symbolData.baseAsset}`}
       </TableCell>

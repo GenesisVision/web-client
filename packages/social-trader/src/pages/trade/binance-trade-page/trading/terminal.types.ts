@@ -1093,6 +1093,9 @@ export type FuturesOrder = {
   realizedProfit?: number;
   commission?: number;
   lastFilledPrice?: number;
+  lastFilledQuantity?: number;
+  // in fact quoteQuantityFilled is equal to quantityFilled. guess it's backend problem
+  quoteQuantityFilled?: number;
   commissionAsset?: string;
   closePosition: boolean;
   positionSide: BinancePositionSide;
