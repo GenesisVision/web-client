@@ -4,6 +4,8 @@ import React from "react";
 import NumberFormat from "react-number-format";
 import { formatTime } from "utils/dates";
 
+import styles from "./trades.module.scss";
+
 interface Props {
   stepSize?: string;
   tickSize?: string;
@@ -30,8 +32,8 @@ export const TradesRow: React.FC<Props> = ({
     tickSize: stepSize
   });
   return (
-    <tr>
-      <td>
+    <div className={styles["trades__row-container"]}>
+      <span className={styles["trades__cell"]}>
         <Text size={"xsmall"} color={buyerIsMaker ? "red" : "green"}>
           <NumberFormat
             displayType="text"
@@ -39,9 +41,9 @@ export const TradesRow: React.FC<Props> = ({
             value={formattedPrice}
           />
         </Text>
-      </td>
-      <td>{formattedAmount}</td>
-      <td>{formatTime(time)}</td>
-    </tr>
+      </span>
+      <span className={styles["trades__cell"]}>{formattedAmount}</span>
+      <span className={styles["trades__cell"]}>{formatTime(time)}</span>
+    </div>
   );
 };

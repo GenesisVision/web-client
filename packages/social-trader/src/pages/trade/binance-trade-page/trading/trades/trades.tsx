@@ -3,6 +3,8 @@ import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/cont
 import { UnitedTrade } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { TradesRow } from "pages/trade/binance-trade-page/trading/trades/trades-row";
 import React, { useContext } from "react";
+import AutoSizer from "react-virtualized-auto-sizer";
+import { FixedSizeList as List } from "react-window";
 
 import styles from "./trades.module.scss";
 
@@ -19,44 +21,47 @@ export const Trades: React.FC<Props> = ({ items }) => {
   return (
     <div className={styles["trades__container"]}>
       <div className={styles["trades__header-container"]}>
-        <table className={styles["trades__table"]}>
-          <thead>
-            <th>
-              <Text muted size={"small"}>
-                Price ({quoteAsset})
-              </Text>
-            </th>
-            <th>
-              <Text muted size={"small"}>
-                Amount ({baseAsset})
-              </Text>
-            </th>
-            <th>
-              <Text muted size={"small"}>
-                Time
-              </Text>
-            </th>
-          </thead>
-        </table>
+        <span className={styles["trades__cell"]}>
+          <Text muted size={"xsmall"}>
+            Price ({quoteAsset})
+          </Text>
+        </span>
+        <span className={styles["trades__cell"]}>
+          <Text muted size={"xsmall"} wrap={false}>
+            Amount ({baseAsset})
+          </Text>
+        </span>
+        <span className={styles["trades__cell"]}>
+          <Text muted size={"xsmall"}>
+            Time
+          </Text>
+        </span>
       </div>
       <div className={styles["trades__items-container"]}>
-        <table className={styles["trades__table"]}>
-          <tbody>
-            {items.map(
-              ({ orderId, price, quantity, tradeTime, buyerIsMaker }) => (
-                <TradesRow
-                  key={orderId}
-                  buyerIsMaker={buyerIsMaker}
-                  stepSize={stepSize}
-                  tickSize={tickSize}
-                  price={price}
-                  amount={quantity}
-                  time={tradeTime}
-                />
-              )
-            )}
-          </tbody>
-        </table>
+        <AutoSizer>
+          {({ height, width }) => (
+            <List
+              height={height}
+              width={width}
+              itemData={items}
+              itemCount={items.length}
+              itemSize={15}
+            >
+              {({ style, data, index }) => (
+                <div style={style}>
+                  <TradesRow
+                    buyerIsMaker={data[index].buyerIsMaker}
+                    price={data[index].price}
+                    amount={data[index].quantity}
+                    time={data[index].tradeTime}
+                    stepSize={stepSize}
+                    tickSize={tickSize}
+                  />
+                </div>
+              )}
+            </List>
+          )}
+        </AutoSizer>
       </div>
     </div>
   );

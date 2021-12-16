@@ -11,22 +11,37 @@
     flex-direction: column;
   }
   &__header-container {
+    display: flex;
+    justify-content: space-between;
     width: calc(100% - 5px);
     margin-bottom: $padding-xxxsmall;
   }
   &__items-container {
     height: 100%;
-    overflow-y: auto;
   }
-  &__table {
-    @include terminal-table(small);
-    & th,
-    & td {
-      width: 33.3%;
+
+  &__cell {
+    font-weight: normal;
+    font-size: 11px;
+    font-family: "DIN Pro Regular", sans-serif;
+
+    &:nth-child(1) {
+      min-width: 70px;
+      text-align: left;
     }
-    & th:not(:first-child),
-    & td:not(:first-child) {
+    &:nth-child(2) {
+      min-width: 75px;
       text-align: right;
     }
+    &:nth-child(3) {
+      min-width: 60px;
+      text-align: right;
+    }
+  }
+
+  &__row-container {
+    display: flex;
+    flex: 1 1 0%;
+    justify-content: space-between;
   }
 }
