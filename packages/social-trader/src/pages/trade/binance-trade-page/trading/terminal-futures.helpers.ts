@@ -67,18 +67,22 @@ export const generateFuturesOrderMessage = (
   const executionTypeTitle =
     order.executionType?.toLowerCase() === "new"
       ? "Created"
+      : order.executionType?.toLowerCase() === "trade" &&
+        order.orderStatus?.toLocaleLowerCase() === "partiallyfilled"
+      ? "partially filled"
       : order.executionType?.toLowerCase() === "trade"
       ? "filled"
       : order.executionType;
   const executionTypeDescription =
     order.executionType?.toLowerCase() === "new"
       ? "Submitted"
+      : order.executionType?.toLowerCase() === "trade" &&
+        order.orderStatus?.toLocaleLowerCase() === "partiallyfilled"
+      ? "Partially filled"
       : order.executionType?.toLowerCase() === "trade"
-      ? "filled"
+      ? "Filled"
       : order.executionType;
-  return `${positionReduce}${orderType} ${orderSide} order ${executionTypeTitle?.toLowerCase()}\n\n${setUpperFirstLetter(
-    executionTypeDescription
-  )} exchange ${positionReduce.toLowerCase()}${orderType.toLowerCase()} ${orderSide.toLowerCase()} order for ${terminalMoneyFormat(
+  return `${positionReduce}${orderType} ${orderSide} order ${executionTypeTitle?.toLowerCase()}\n\n${executionTypeDescription} exchange ${positionReduce.toLowerCase()}${orderType.toLowerCase()} ${orderSide.toLowerCase()} order for ${terminalMoneyFormat(
     {
       amount: order.quantity,
       tickSize: String(stepSize)
