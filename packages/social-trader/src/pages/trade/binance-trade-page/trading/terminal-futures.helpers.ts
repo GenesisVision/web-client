@@ -43,8 +43,11 @@ export const generateMarginCallMessage = (
   position: FuturesMarginCallEventPosition,
   crossWalletBalance?: string
 ): string => {
-  // todo
-  return "";
+  const { symbol, marginType, quantity } = position;
+  const direction = quantity > 0 ? "Long" : "Short";
+  return `Attention! Your ${symbol} ${direction} ${marginType} Position (amount ${Math.abs(
+    quantity
+  )}) is close to liquidation.`;
 };
 
 export const generateFuturesOrderMessage = (

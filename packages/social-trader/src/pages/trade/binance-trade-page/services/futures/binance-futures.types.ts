@@ -71,7 +71,7 @@ export interface FuturesAccount {
 export interface FuturesMarginCallEventPosition {
   symbol: TerminalCurrency; // Symbol
   positionSide: BinancePositionSide; // Position Side
-  quantity: string; // Position Amount
+  quantity: number; // Position Amount
   marginType: MarginType; // Margin Type
   isolatedWallet: string; // Isolated Wallet (if isolated position)
   markPrice: string; // Mark Price

@@ -162,7 +162,7 @@ export const futuresMarginCallEventPositionTransform = (
   return {
     symbol: socketData.s,
     positionSide: setUpperFirstLetter(socketData.ps),
-    quantity: socketData.pa,
+    quantity: +socketData.pa,
     marginType: socketData.mt === "ISOLATED" ? "Isolated" : "Cross",
     isolatedWallet: socketData.iw,
     markPrice: socketData.mp,
