@@ -63,7 +63,8 @@ const _TakeProfitStopLossPopup: React.FC<Props> = ({
     const commonValues = {
       closePosition: true,
       symbol,
-      accountId: exchangeAccountId
+      accountId: exchangeAccountId,
+      timeInForce: "GoodTillExpiredOrCanceled"
     };
 
     const isTKDirty = dirtyFields.has(
