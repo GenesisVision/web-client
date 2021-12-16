@@ -12,7 +12,7 @@ import { Sizeable } from "utils/types";
 
 export interface GVTextFieldProps extends IPropsGvInput, Sizeable {
   align?: "left" | "center" | "right";
-  maxlength?: number;
+  maxLength?: number;
   fixedVertical?: boolean;
   children?: ReactNode;
   name: string;
