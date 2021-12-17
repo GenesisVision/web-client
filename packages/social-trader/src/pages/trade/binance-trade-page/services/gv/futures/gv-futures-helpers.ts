@@ -36,10 +36,10 @@ export const transformFuturesOrder = ({
   realizedProfit,
   priceLastFilledTrade,
   lastFilledQuantity,
-  quoteQuantityFilled
+  quoteQuantityFilled,
+  tradeId
 }: BinanceRawFuturesOrder): FuturesOrder => ({
-  // to do
-  tradeId: orderId,
+  tradeId,
   quoteQuantityFilled,
   lastFilledQuantity,
   commission,
