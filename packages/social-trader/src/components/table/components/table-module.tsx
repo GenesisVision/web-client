@@ -46,6 +46,7 @@ const _TableModule: React.FC<ITableModuleProps> = props => {
     getItems,
     timestamp
   } = props;
+  const [items, setItems] = useState<any[]>([]);
   const [paging, setPaging] = useState<IPaging | undefined>(pagingProp);
   const [sorting, setSorting] = useState<string | undefined>(sortingProp);
   const [filtering, setFiltering] = useState<FilteringType | undefined>(
@@ -84,6 +85,14 @@ const _TableModule: React.FC<ITableModuleProps> = props => {
       setPaging({ ...pagingProp, totalPages });
     }
   }, []);
+
+  useEffect(() => {
+    if (updateItemsFunc && updates && items.length) {
+      setItems(updateItemsFunc(items, updates));
+    } else if (data.items) {
+      setItems(data.items);
+    }
+  }, [updates, updateItemsFunc, data.items]);
 
   const handleUpdateSorting = useCallback(
     (sorting: string) => {
@@ -140,12 +149,6 @@ const _TableModule: React.FC<ITableModuleProps> = props => {
       data.total
     ]
   );
-
-  const items = useMemo(() => {
-    return updateItemsFunc && updates
-      ? updateItemsFunc(data.items, updates)
-      : data.items;
-  }, [data.items, updateItemsFunc, updates]);
 
   return (
     <Table
