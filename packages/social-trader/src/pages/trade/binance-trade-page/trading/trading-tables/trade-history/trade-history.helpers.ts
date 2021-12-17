@@ -6,6 +6,7 @@ import {
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { normalizeOpenOrdersList } from "pages/trade/binance-trade-page/trading/trading-tables/open-orders/open-orders.helpers";
 import { isOrderDeleted } from "pages/trade/binance-trade-page/trading/trading-tables/order-history/order-history.helpers";
+import { AnyObjectType } from "utils/types";
 
 export const updateSpotTradeHistoryData = (
   data: SpotOrder[],
@@ -30,15 +31,13 @@ export const updateFuturesTradeHistoryData = (
   data: FuturesOrder[],
   updates: FuturesOrder[]
 ): FuturesOrder[] => {
-  let normalizedData = normalizeOpenOrdersList(data);
+  let normalizedData = normalizeFuturesTradesList(data);
   updates.forEach(update => {
     if (isFuturesTradeOrder(update.orderStatus, update.executionType)) {
-      normalizedData = {
-        ...normalizedData,
-        update
+      normalizedData[update.tradeId] = {
+        ...normalizedData[update.tradeId],
+        ...update
       };
-    } else {
-      delete normalizedData[update!.id];
     }
   });
   return Object.values(normalizedData).sort(
@@ -63,6 +62,12 @@ const isFuturesTradeOrder = (
       return false;
   }
   return true;
+};
+
+const normalizeFuturesTradesList = (list: SpotOrder[] | FuturesOrder[]) => {
+  const initObject: AnyObjectType = {};
+  list.forEach((item: any) => (initObject[item.tradeId] = item));
+  return initObject;
 };
 
 export const TRADE_HISTORY_SPOT_TABLE_COLUMNS: SortingColumn[] = [

@@ -1116,6 +1116,7 @@ export type FuturesOrder = {
   stopPrice: number;
   price: number;
   id: number;
+  tradeId: number;
 };
 
 export type SpotOrder = {

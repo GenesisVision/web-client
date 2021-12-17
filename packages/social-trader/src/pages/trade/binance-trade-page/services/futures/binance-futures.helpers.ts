@@ -185,6 +185,7 @@ export const futuresEventTradeOrderTransform = (
   socketData: any
 ): FuturesOrder => {
   return {
+    tradeId: socketData.t,
     commission: socketData.n,
     commissionAsset: socketData.N,
     realizedProfit: socketData.rp,
