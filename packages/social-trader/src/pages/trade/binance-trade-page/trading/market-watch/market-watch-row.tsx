@@ -54,8 +54,8 @@ export const MarketWatchRow: React.FC<Props> = React.memo(
     }, [quoteAsset, baseAsset]);
 
     return (
-      <tr className={styles["market-watch__row"]} onClick={handleClick}>
-        <td className={styles["market-watch__cell"]}>
+      <div className={styles["market-watch__row"]} onClick={handleClick}>
+        <span className={styles["market-watch__cell"]}>
           <Center>
             {isAuthenticated && exchangeAccountId && (
               <RowItem size={"xsmall"}>
@@ -73,15 +73,15 @@ export const MarketWatchRow: React.FC<Props> = React.memo(
               </Text>
             </RowItem>
           </Center>
-        </td>
-        <td className={styles["market-watch__cell"]}>
+        </span>
+        <span className={styles["market-watch__cell"]}>
           <TradeStatefulValue
             thousandSeparator={","}
             value={formatCurrencyValue(+lastPrice, quoteAsset)}
             trigger={eventTime}
           />
-        </td>
-        <td className={styles["market-watch__table-value"]}>
+        </span>
+        <span className={styles["market-watch__cell"]}>
           {column === CHANGE_COLUMN ? (
             <Text color={getTextColor(+priceChangePercent)}>
               {priceChangePercent} %
@@ -95,8 +95,8 @@ export const MarketWatchRow: React.FC<Props> = React.memo(
               />
             </Text>
           )}
-        </td>
-      </tr>
+        </span>
+      </div>
     );
   }
 );

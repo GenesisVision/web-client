@@ -13,6 +13,8 @@ import { MarketWatchRow } from "pages/trade/binance-trade-page/trading/market-wa
 import { MergedTickerSymbolType } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useContext, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
+import AutoSizer from "react-virtualized-auto-sizer";
+import { FixedSizeList as List } from "react-window";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
 
 import styles from "./market-watch.module.scss";
@@ -43,6 +45,11 @@ const _MarketWatchTable: React.FC<Props> = ({
   });
 
   const getFavorites = useMemo(() => getFavoritesFunc, []);
+
+  const visibleItems = items
+    .filter(search ? () => true : filteringFunction)
+    .filter(filterForSearch(search))
+    .sort(sortMarketWatchItems(sorting));
 
   return (
     <>
@@ -90,45 +97,38 @@ const _MarketWatchTable: React.FC<Props> = ({
         </table>
       </Row>
       <div className={styles["market-watch__items-container"]}>
-        <table className={styles["market-watch__table"]}>
-          <tbody>
-            {items
-              .filter(search ? () => true : filteringFunction)
-              .filter(filterForSearch(search))
-              .sort(sortMarketWatchItems(sorting))
-              .map(
-                ({
-                  isFavorite,
-                  eventTime,
-                  quoteAsset,
-                  baseAsset,
-                  quoteVolume,
-                  name,
-                  lastPrice,
-                  priceChange,
-                  priceChangePercent
-                }) => (
+        <AutoSizer>
+          {({ height, width }) => (
+            <List
+              height={height}
+              width={width}
+              itemData={visibleItems}
+              itemCount={visibleItems.length}
+              itemSize={19}
+            >
+              {({ style, data, index }) => (
+                <div style={style}>
                   <MarketWatchRow
                     getFavorites={getFavorites}
                     isAuthenticated={isAuthenticated}
                     exchangeAccountId={exchangeAccountId}
                     setSymbol={setSymbol}
-                    key={name}
-                    isFavorite={isFavorite}
-                    eventTime={eventTime}
-                    quoteAsset={quoteAsset}
-                    baseAsset={baseAsset}
                     column={column}
-                    volume={quoteVolume}
-                    symbol={name}
-                    lastPrice={lastPrice}
-                    priceChange={priceChange}
-                    priceChangePercent={priceChangePercent}
+                    isFavorite={data[index].isFavorite}
+                    eventTime={data[index].eventTime}
+                    quoteAsset={data[index].quoteAsset}
+                    baseAsset={data[index].baseAsset}
+                    volume={data[index].quoteVolume}
+                    symbol={data[index].name}
+                    lastPrice={data[index].lastPrice}
+                    priceChange={data[index].priceChange}
+                    priceChangePercent={data[index].priceChangePercent}
                   />
-                )
+                </div>
               )}
-          </tbody>
-        </table>
+            </List>
+          )}
+        </AutoSizer>
       </div>
     </>
   );
