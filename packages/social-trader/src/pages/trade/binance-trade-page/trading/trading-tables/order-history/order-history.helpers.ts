@@ -36,8 +36,6 @@ export const updateFuturesOrderHistoryData = (
         ...normalizedData[update.id],
         ...update
       };
-    } else {
-      delete normalizedData[update!.id];
     }
   });
   return Object.values(normalizedData).sort(
