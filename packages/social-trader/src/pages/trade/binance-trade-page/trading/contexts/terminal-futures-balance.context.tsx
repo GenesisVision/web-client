@@ -118,7 +118,8 @@ const ContextProvider: React.FC = ({ children }) => {
     if (!socketData || !futuresBalance) return;
     const socketBalance = socketData.balances.find(
       balance => balance.asset === "USDT"
-    )!;
+    );
+    if (!socketBalance) return;
     setFuturesBalance(
       prevBalance =>
         ({
