@@ -38,7 +38,7 @@ const getTerminalTypeWithAccount = async (
       const {
         tradingAccountInfo: { permissions }
       } = await api.accounts(token).getTradingAccountDetails(params?.["id"]);
-      return getTerminalType(permissions);
+      return getTerminalType(permissions)!;
     } catch (e) {
       console.error(e);
     }
