@@ -21,17 +21,17 @@ export const Trades: React.FC<Props> = ({ items }) => {
   return (
     <div className={styles["trades__container"]}>
       <div className={styles["trades__header-container"]}>
-        <span className={styles["trades__cell"]}>
+        <span className={styles["trades__head-cell"]}>
           <Text muted size={"xsmall"}>
             Price ({quoteAsset})
           </Text>
         </span>
-        <span className={styles["trades__cell"]}>
+        <span className={styles["trades__head-cell"]}>
           <Text muted size={"xsmall"} wrap={false}>
             Amount ({baseAsset})
           </Text>
         </span>
-        <span className={styles["trades__cell"]}>
+        <span className={styles["trades__head-cell"]}>
           <Text muted size={"xsmall"}>
             Time
           </Text>

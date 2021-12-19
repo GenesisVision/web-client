@@ -20,6 +20,13 @@
     height: 100%;
   }
 
+  &__head-cell {
+    display: flex;
+    span {
+      font-size: 9px;
+    }
+  }
+
   &__cell {
     font-weight: normal;
     font-size: 11px;
