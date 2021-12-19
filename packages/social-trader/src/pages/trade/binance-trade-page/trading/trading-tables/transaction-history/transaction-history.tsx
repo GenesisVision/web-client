@@ -25,16 +25,14 @@ export const TransactionHistory: React.FC<Props> = ({ items }) => {
           <Text muted>{t(`trade:transaction-history.table.${name}`)}</Text>
         </th>
       )}
-      renderRow={({
-        time,
-        asset,
-        symbol,
-        incomeType,
-        income
-      }: TransactionHistoryType) => {
+      renderRow={(
+        { time, asset, symbol, incomeType, income }: TransactionHistoryType,
+        i
+      ) => {
         return (
           <TransactionHistoryRow
-            key={+time}
+            // it uses index as a key, cause tradeId, time and transactionId could be the same
+            key={i}
             asset={asset}
             income={income}
             incomeType={incomeType}
