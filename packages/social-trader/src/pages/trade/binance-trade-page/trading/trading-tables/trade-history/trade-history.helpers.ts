@@ -41,7 +41,7 @@ export const updateFuturesTradeHistoryData = (
     }
   });
   return Object.values(normalizedData).sort(
-    (a, b) => +new Date(b.time) - +new Date(a.time)
+    (a, b) => +new Date(b.updateTime) - +new Date(a.updateTime)
   );
 };
 

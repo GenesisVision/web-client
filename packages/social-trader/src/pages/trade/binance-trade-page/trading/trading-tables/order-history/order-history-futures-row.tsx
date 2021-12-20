@@ -29,7 +29,7 @@ const TableCell = styled(TableCellComponent)`
 
 const _OrderHistoryFuturesRow: React.FC<FuturesOrder> = ({
   symbol,
-  time,
+  updateTime,
   side,
   positionSide,
   averagePrice,
@@ -57,7 +57,9 @@ const _OrderHistoryFuturesRow: React.FC<FuturesOrder> = ({
 
   return (
     <TableRow translucent={orderStatus === "Canceled"}>
-      <TableCell firstOffset={false}>{formatDate(new Date(time))}</TableCell>
+      <TableCell firstOffset={false}>
+        {formatDate(new Date(updateTime))}
+      </TableCell>
       <TableCell>{symbol}</TableCell>
       <TableCell>{getFuturesTypeLabel(t, originalType)}</TableCell>
       <TableCell>

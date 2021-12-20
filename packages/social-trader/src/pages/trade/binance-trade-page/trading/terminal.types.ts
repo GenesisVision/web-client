@@ -1104,7 +1104,8 @@ export type FuturesOrder = {
   workingType: BinanceWorkingType;
   reduceOnly: boolean;
   orderStatus: FuturesOrderStatus;
-  time: number | Date;
+  // time: number | Date;
+  updateTime: number | Date;
   symbol: string;
   type: FuturesOrderType;
   originalType: FuturesOrderType;

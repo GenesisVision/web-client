@@ -26,7 +26,7 @@ const _TradeHistoryFuturesRow: React.FC<FuturesOrder> = ({
   positionSide,
   side,
   symbol,
-  time,
+  updateTime,
   lastFilledQuantity,
   commission,
   commissionAsset,
@@ -49,7 +49,9 @@ const _TradeHistoryFuturesRow: React.FC<FuturesOrder> = ({
 
   return (
     <TableRow>
-      <TableCell firstOffset={false}>{formatDate(new Date(time))}</TableCell>
+      <TableCell firstOffset={false}>
+        {formatDate(new Date(updateTime))}
+      </TableCell>
       <TableCell>{symbol}</TableCell>
       <TableCell>
         <Text color={side === "Buy" ? "green" : "red"}>

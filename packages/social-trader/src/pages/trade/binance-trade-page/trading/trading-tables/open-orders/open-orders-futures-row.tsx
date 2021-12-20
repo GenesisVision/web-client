@@ -33,7 +33,7 @@ const _OpenOrdersFuturesRow: React.FC<FuturesOrder> = ({
   stopPrice,
   symbol,
   closePosition,
-  time,
+  updateTime,
   type,
   workingType,
   originalType
@@ -72,7 +72,9 @@ const _OpenOrdersFuturesRow: React.FC<FuturesOrder> = ({
 
   return (
     <TableRow>
-      <TableCell firstOffset={false}>{formatDate(new Date(time))}</TableCell>
+      <TableCell firstOffset={false}>
+        {formatDate(new Date(updateTime))}
+      </TableCell>
       <TableCell
         style={{ cursor: "pointer" }}
         onClick={() =>

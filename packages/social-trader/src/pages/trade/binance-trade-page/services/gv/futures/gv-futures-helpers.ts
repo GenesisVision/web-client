@@ -37,7 +37,8 @@ export const transformFuturesOrder = ({
   priceLastFilledTrade,
   lastFilledQuantity,
   quoteQuantityFilled,
-  tradeId
+  tradeId,
+  updateTime
 }: BinanceRawFuturesOrder): FuturesOrder => ({
   id: tradeId + orderId,
   tradeId,
@@ -57,7 +58,8 @@ export const transformFuturesOrder = ({
   workingType,
   reduceOnly,
   orderStatus: status as FuturesOrderStatus,
-  time: createdTime,
+  // time: createdTime,
+  updateTime,
   symbol,
   type: type as FuturesOrderType,
   side,
