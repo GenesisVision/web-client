@@ -53,7 +53,7 @@ export const OrderHistoryFutures: React.FC<Props> = ({ updates }) => {
         </Text>
       )}
       renderBodyRow={(order: FuturesOrder) => (
-        <OrderHistoryFuturesRow key={order.id} {...order} />
+        <OrderHistoryFuturesRow {...order} />
       )}
     />
   );

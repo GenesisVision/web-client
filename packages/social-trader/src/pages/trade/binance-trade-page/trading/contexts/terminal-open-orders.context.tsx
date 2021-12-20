@@ -73,10 +73,10 @@ export const TerminalOpenOrdersContextProvider: React.FC = ({ children }) => {
       socketData.executionType?.toLowerCase() === "canceled" ||
       socketData.executionType?.toLowerCase() === "expired"
     )
-      delete updatedList[socketData.id];
+      delete updatedList[socketData.orderId];
     else
-      updatedList[socketData.id] = {
-        ...updatedList[socketData.id],
+      updatedList[socketData.orderId] = {
+        ...updatedList[socketData.orderId],
         ...socketData
       };
     if (

@@ -66,6 +66,7 @@ export const OpenOrdersSpot: React.FC<Props> = ({ items }) => {
       renderRow={({
         quantityFilled,
         quantity,
+        orderId,
         id,
         time,
         symbol,
@@ -77,7 +78,7 @@ export const OpenOrdersSpot: React.FC<Props> = ({ items }) => {
         return (
           <OpenOrdersSpotRow
             key={id}
-            orderId={id}
+            orderId={orderId}
             time={time}
             symbol={symbol}
             type={type}

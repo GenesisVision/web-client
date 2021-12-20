@@ -29,7 +29,7 @@ export const OpenOrdersFutures: React.FC<Props> = ({ items }) => {
         </th>
       )}
       renderRow={(order: FuturesOrder) => {
-        return <OpenOrdersFuturesRow key={order.id} {...order} />;
+        return <OpenOrdersFuturesRow key={order.orderId} {...order} />;
       }}
     />
   );

@@ -44,7 +44,7 @@ export const TradeHistoryFutures: React.FC<Props> = ({ updates }) => {
       getItems={getItems}
       renderHeader={column => t(`trade:trade-history.table.${column.name}`)}
       renderBodyRow={(order: FuturesOrder) => (
-        <TradeHistoryFuturesRow key={order.tradeId} {...order} />
+        <TradeHistoryFuturesRow {...order} />
       )}
     />
   );

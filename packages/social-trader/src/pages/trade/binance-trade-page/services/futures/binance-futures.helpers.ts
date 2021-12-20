@@ -185,6 +185,8 @@ export const futuresEventTradeOrderTransform = (
   socketData: any
 ): FuturesOrder => {
   return {
+    id: socketData.t + socketData.i,
+    orderId: socketData.i,
     tradeId: socketData.t,
     commission: socketData.n,
     commissionAsset: socketData.N,
@@ -195,7 +197,6 @@ export const futuresEventTradeOrderTransform = (
     symbol: socketData.s,
     side: convertBinanceTypeIntoGV(socketData.S) as BinanceOrderSide,
     activatePrice: socketData.AP,
-    id: socketData.i,
     closePosition: socketData.cp,
     positionSide: convertBinanceTypeIntoGV(
       socketData.ps

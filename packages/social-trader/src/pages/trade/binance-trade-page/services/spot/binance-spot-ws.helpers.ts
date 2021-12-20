@@ -63,6 +63,7 @@ export const transformExecutionReport = (m: any): SpotOrder => ({
   eventType: "executionReport",
   executedQuantity: m.l,
   id: m.i,
+  orderId: m.i,
   time: m.O,
   symbol: m.s,
   type: m.o,

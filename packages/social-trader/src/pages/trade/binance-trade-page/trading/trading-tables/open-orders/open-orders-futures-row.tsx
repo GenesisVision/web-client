@@ -23,7 +23,7 @@ import {
 } from "../../terminal-futures.helpers";
 
 const _OpenOrdersFuturesRow: React.FC<FuturesOrder> = ({
-  id,
+  orderId,
   positionSide,
   price,
   quantity,
@@ -57,10 +57,10 @@ const _OpenOrdersFuturesRow: React.FC<FuturesOrder> = ({
 
   const handleCancel = useCallback(() => {
     sendRequest({
-      options: { symbol, orderId: String(id) },
+      options: { symbol, orderId: String(orderId) },
       exchangeAccountId
     });
-  }, [symbol, id, exchangeAccountId]);
+  }, [symbol, orderId, exchangeAccountId]);
 
   if (!exchangeInfo || !items) return null;
 

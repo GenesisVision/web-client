@@ -15,10 +15,10 @@ export const updateSpotTradeHistoryData = (
   const normalizedData = normalizeOpenOrdersList(data);
   updates.forEach(update => {
     if (isOrderDeleted(update.orderStatus, update.executionType))
-      delete normalizedData[update!.id];
+      delete normalizedData[update!.orderId];
     else
-      normalizedData[update.id] = {
-        ...normalizedData[update.id],
+      normalizedData[update.orderId] = {
+        ...normalizedData[update.orderId],
         ...update
       };
   });

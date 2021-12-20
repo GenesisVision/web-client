@@ -57,11 +57,9 @@ export const OrderHistorySpot: React.FC<Props> = ({ updates }) => {
         type,
         side,
         stopPrice,
-        price,
-        id
+        price
       }: SpotOrder) => (
         <OrderHistorySpotRow
-          key={id}
           executed={quantityFilled}
           amount={quantity}
           orderStatus={orderStatus}

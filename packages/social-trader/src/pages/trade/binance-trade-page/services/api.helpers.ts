@@ -60,6 +60,7 @@ export const transformToUnitedOrder = ({
   quoteQuantityFilled,
   executedQuantity: quoteQuantity,
   id: orderId,
+  orderId,
   time: createTime,
   symbol,
   type,

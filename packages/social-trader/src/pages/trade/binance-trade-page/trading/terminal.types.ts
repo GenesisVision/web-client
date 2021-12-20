@@ -1117,6 +1117,7 @@ export type FuturesOrder = {
   price: number;
   id: number;
   tradeId: number;
+  orderId: number;
 };
 
 export type SpotOrder = {
@@ -1128,6 +1129,7 @@ export type SpotOrder = {
   eventType?: EventType;
   executedQuantity: number;
   id: number;
+  orderId: number;
   time: number | Date;
   symbol: string;
   type: OrderType;

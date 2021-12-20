@@ -39,6 +39,7 @@ export const transformFuturesOrder = ({
   quoteQuantityFilled,
   tradeId
 }: BinanceRawFuturesOrder): FuturesOrder => ({
+  id: tradeId + orderId,
   tradeId,
   quoteQuantityFilled,
   lastFilledQuantity,
@@ -63,7 +64,7 @@ export const transformFuturesOrder = ({
   quantity,
   stopPrice,
   price,
-  id: orderId,
+  orderId,
   lastFilledPrice: priceLastFilledTrade
 });
 
