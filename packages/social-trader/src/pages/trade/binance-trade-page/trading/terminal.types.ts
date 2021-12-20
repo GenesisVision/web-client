@@ -1132,6 +1132,7 @@ export type SpotOrder = {
   id: number;
   orderId: number;
   time: number | Date;
+  updateTime: number | Date;
   symbol: string;
   type: OrderType;
   side: OrderSide;

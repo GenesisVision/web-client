@@ -65,6 +65,8 @@ export const transformExecutionReport = (m: any): SpotOrder => ({
   id: m.i,
   orderId: m.i,
   time: m.O,
+  // updateTime is wrong. TODO
+  updateTime: m.O,
   symbol: m.s,
   type: m.o,
   side: m.S,

@@ -52,8 +52,10 @@ export const transformToUnitedOrder = ({
   price,
   quantity,
   quoteQuantity,
-  quantityFilled
+  quantityFilled,
+  updateTime
 }: BinanceRawOrder): SpotOrder => ({
+  updateTime,
   commissionAsset,
   orderStatus: status,
   commission,
