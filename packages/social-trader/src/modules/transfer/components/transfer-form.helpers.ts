@@ -3,6 +3,8 @@ import {
   WalletItemType
 } from "components/wallet-select/wallet-select";
 import {
+  Currency,
+  InternalMultiTransferRequest,
   InternalTransferRequest,
   InternalTransferRequestType
 } from "gv-api-web";
@@ -131,7 +133,7 @@ export interface ITransferFormProps {
   updateWallets?: VoidFunction;
   fixedSelects?: boolean;
   data: TransferFormItemsType;
-  onSubmit: (values: InternalTransferRequest) => void;
+  onSubmit: (values: InternalMultiTransferRequest) => void;
   currentItem: WalletItemType;
   sourceType: InternalTransferRequestType;
   destinationType: InternalTransferRequestType;
@@ -144,4 +146,6 @@ export interface TransferFormValues {
   sourceId: string;
   destinationId: string;
   amount: string | number;
+  sourceCurrency?: Currency;
+  destinationCurrency?: Currency;
 }

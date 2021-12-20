@@ -2,12 +2,22 @@ import {
   ItemsType,
   WalletItemType
 } from "components/wallet-select/wallet-select";
-import { InternalTransferRequest } from "gv-api-web";
+import {
+  InternalMultiTransferRequest,
+  InternalTransferRequest
+} from "gv-api-web";
 import { api } from "services/api-client/swagger-custom-client";
 import { formatCurrencyValue } from "utils/formatter";
 
 export const transferRequest = (body: InternalTransferRequest): Promise<any> =>
   api.wallet().transfer({
+    body
+  });
+
+export const transferMultiCurrencyRequest = (
+  body: InternalMultiTransferRequest
+): Promise<any> =>
+  api.wallet().transferMultiCurrency({
     body
   });
 

@@ -147,9 +147,23 @@ const _TransferForm: React.FC<ITransferFormProps> = ({
     values => {
       const { amount, sourceId } = values;
       const transferAll = getTransferAll({ amount, sourceId }, sourceItems);
-      return onSubmit({ ...values, transferAll, sourceType, destinationType });
+      return onSubmit({
+        ...values,
+        transferAll,
+        sourceType,
+        destinationType,
+        destinationCurrency: selectedDestinationItem.currency,
+        sourceCurrency: selectedSourceItem.currency
+      });
     },
-    [sourceItems, onSubmit, sourceType, destinationType]
+    [
+      sourceItems,
+      onSubmit,
+      sourceType,
+      destinationType,
+      selectedSourceItem,
+      selectedDestinationItem
+    ]
   );
 
   const { available, currency } = getItem(sourceItems, sourceId);

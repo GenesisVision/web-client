@@ -1,6 +1,6 @@
 import { WalletItemType } from "components/wallet-select/wallet-select";
 import {
-  InternalTransferRequest,
+  InternalMultiTransferRequest,
   InternalTransferRequestType
 } from "gv-api-web";
 import { useAccountCurrency } from "hooks/account-currency.hook";
@@ -12,7 +12,10 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { postponeCallback } from "utils/hook-form.helpers";
 
-import { transferRequest } from "../services/transfer.services";
+import {
+  transferMultiCurrencyRequest,
+  transferRequest
+} from "../services/transfer.services";
 import {
   TRANSFER_CONTAINER,
   TransferFormItemsType,
@@ -65,17 +68,36 @@ const _TransferContainer: React.FC<TransferContainerProps> = ({
   const { errorMessage, sendRequest: sendTransferRequest } = useApiRequest({
     successMessage,
     middleware: [updateWalletMiddleware, onCloseMiddleware],
-    request: transferRequest
+    request:
+      sourceType === "ExchangeAccount" || destinationType === "ExchangeAccount"
+        ? transferMultiCurrencyRequest
+        : transferRequest
   });
   const handleSubmit = useCallback(
-    (values: InternalTransferRequest) => {
+    (values: InternalMultiTransferRequest) => {
       const destinationId =
         destinationType === "ExchangeAccount"
           ? accountId
           : values.destinationId;
       const sourceId =
         sourceType === "ExchangeAccount" ? accountId : values.sourceId;
-      return sendTransferRequest({ ...values, destinationId, sourceId });
+      const sourceCurrency =
+        sourceType === "ExchangeAccount" ||
+        destinationType === "ExchangeAccount"
+          ? values.sourceCurrency
+          : undefined;
+      const destinationCurrency =
+        sourceType === "ExchangeAccount" ||
+        destinationType === "ExchangeAccount"
+          ? values.destinationCurrency
+          : undefined;
+      return sendTransferRequest({
+        ...values,
+        destinationId,
+        sourceId,
+        sourceCurrency,
+        destinationCurrency
+      });
     },
     [destinationType, sourceType, destinationType, accountId]
   );
