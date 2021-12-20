@@ -46,7 +46,7 @@ const _TableModule: React.FC<ITableModuleProps> = props => {
     getItems,
     timestamp
   } = props;
-  const [items, setItems] = useState<any[]>([]);
+  const [items, setItems] = useState<any[] | undefined>(undefined);
   const [paging, setPaging] = useState<IPaging | undefined>(pagingProp);
   const [sorting, setSorting] = useState<string | undefined>(sortingProp);
   const [filtering, setFiltering] = useState<FilteringType | undefined>(
@@ -87,7 +87,7 @@ const _TableModule: React.FC<ITableModuleProps> = props => {
   }, []);
 
   useEffect(() => {
-    if (updateItemsFunc && updates && items.length) {
+    if (updateItemsFunc && updates && items && items.length) {
       setItems(updateItemsFunc(items, updates));
     } else if (data.items) {
       setItems(data.items);
