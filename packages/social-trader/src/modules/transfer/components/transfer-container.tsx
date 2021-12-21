@@ -1,5 +1,6 @@
 import { WalletItemType } from "components/wallet-select/wallet-select";
 import {
+  Currency,
   InternalMultiTransferRequest,
   InternalTransferRequestType
 } from "gv-api-web";
@@ -13,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { postponeCallback } from "utils/hook-form.helpers";
 
 import {
+  filterSupportedCurrenciesItems,
   transferMultiCurrencyRequest,
   transferRequest
 } from "../services/transfer.services";
@@ -24,11 +26,12 @@ import {
 import TransferForm from "./transfer-form";
 
 export interface TransferContainerProps {
-  fixedSelects?: boolean;
   accountId?: string;
+  isExchangeAccount?: boolean;
   outerCurrentItemContainerItems?: WalletItemType[];
   successMessage?: string;
   singleCurrentItemContainer?: boolean;
+  supportedCurrencies?: Currency[];
   onApply?: VoidFunction;
   currentItem: WalletItemType;
   onClose?: VoidFunction;
@@ -39,7 +42,6 @@ export interface TransferContainerProps {
 }
 
 const _TransferContainer: React.FC<TransferContainerProps> = ({
-  fixedSelects,
   accountId,
   outerCurrentItemContainerItems,
   successMessage,
@@ -50,7 +52,9 @@ const _TransferContainer: React.FC<TransferContainerProps> = ({
   sourceType,
   destinationType,
   currentItemContainer,
-  onClose
+  onClose,
+  isExchangeAccount,
+  supportedCurrencies
 }) => {
   const [items, setItems] = useState<TransferFormItemsType | undefined>(
     undefined
@@ -68,10 +72,7 @@ const _TransferContainer: React.FC<TransferContainerProps> = ({
   const { errorMessage, sendRequest: sendTransferRequest } = useApiRequest({
     successMessage,
     middleware: [updateWalletMiddleware, onCloseMiddleware],
-    request:
-      sourceType === "ExchangeAccount" || destinationType === "ExchangeAccount"
-        ? transferMultiCurrencyRequest
-        : transferRequest
+    request: isExchangeAccount ? transferMultiCurrencyRequest : transferRequest
   });
   const handleSubmit = useCallback(
     (values: InternalMultiTransferRequest) => {
@@ -81,16 +82,12 @@ const _TransferContainer: React.FC<TransferContainerProps> = ({
           : values.destinationId;
       const sourceId =
         sourceType === "ExchangeAccount" ? accountId : values.sourceId;
-      const sourceCurrency =
-        sourceType === "ExchangeAccount" ||
-        destinationType === "ExchangeAccount"
-          ? values.sourceCurrency
-          : undefined;
-      const destinationCurrency =
-        sourceType === "ExchangeAccount" ||
-        destinationType === "ExchangeAccount"
-          ? values.destinationCurrency
-          : undefined;
+      const sourceCurrency = isExchangeAccount
+        ? values.sourceCurrency
+        : undefined;
+      const destinationCurrency = isExchangeAccount
+        ? values.destinationCurrency
+        : undefined;
       return sendTransferRequest({
         ...values,
         destinationId,
@@ -121,7 +118,18 @@ const _TransferContainer: React.FC<TransferContainerProps> = ({
       : tradingAccounts;
   useEffect(() => {
     if (!!sourceItems && !!destinationItems) {
-      setItems({ sourceItems, destinationItems });
+      setItems({
+        sourceItems: filterSupportedCurrenciesItems(
+          sourceItems,
+          supportedCurrencies,
+          isExchangeAccount
+        ),
+        destinationItems: filterSupportedCurrenciesItems(
+          destinationItems,
+          supportedCurrencies,
+          isExchangeAccount
+        )
+      });
     }
   }, [sourceItems, destinationItems]);
 
@@ -129,7 +137,6 @@ const _TransferContainer: React.FC<TransferContainerProps> = ({
   return (
     <TransferForm
       updateWallets={updateWalletMiddleware}
-      fixedSelects={fixedSelects}
       data={items}
       sourceType={sourceType}
       destinationType={destinationType}

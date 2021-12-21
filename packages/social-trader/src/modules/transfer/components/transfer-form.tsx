@@ -11,8 +11,6 @@ import { useGetRate } from "hooks/get-rate.hook";
 import {
   amountRules,
   formatWalletItemValue,
-  getCurrencyByIdInWalletItem,
-  getIdByCurrencyInWalletItem,
   isAmountAllow,
   ITransferFormProps,
   TRANSFER_FORM_FIELDS,
@@ -35,7 +33,6 @@ import styles from "./transfer-form.module.scss";
 
 const _TransferForm: React.FC<ITransferFormProps> = ({
   updateWallets,
-  fixedSelects,
   currentItem,
   currentItemContainer,
   onSubmit,
@@ -49,7 +46,6 @@ const _TransferForm: React.FC<ITransferFormProps> = ({
 
   const form = useForm<TransferFormValues>({
     defaultValues: transferFormMapPropsToValues({
-      fixedSelects,
       sourceItems,
       destinationItems,
       currentItem,
@@ -91,19 +87,6 @@ const _TransferForm: React.FC<ITransferFormProps> = ({
 
   const onChangeSourceId = useCallback(
     ({ id }: WalletItemType) => {
-      if (fixedSelects) {
-        const sourceCurrency = getCurrencyByIdInWalletItem(sourceItems, id);
-        const destinationId = getIdByCurrencyInWalletItem(
-          destinationItems,
-          sourceCurrency
-        );
-        reset({
-          [TRANSFER_FORM_FIELDS.destinationId]: destinationId,
-          [TRANSFER_FORM_FIELDS.amount]: "",
-          [TRANSFER_FORM_FIELDS.sourceId]: id
-        });
-        return;
-      }
       reset({
         [TRANSFER_FORM_FIELDS.destinationId]:
           id === destinationId ? sourceId : destinationId,
@@ -111,36 +94,13 @@ const _TransferForm: React.FC<ITransferFormProps> = ({
         [TRANSFER_FORM_FIELDS.sourceId]: id
       });
     },
-    [
-      sourceItems,
-      destinationItems,
-      fixedSelects,
-      reset,
-      destinationId,
-      sourceId
-    ]
+    [sourceItems, destinationItems, reset, destinationId, sourceId]
   );
   const onChangeDestinationId = useCallback(
     ({ id }: WalletItemType) => {
-      if (fixedSelects) {
-        const destinationCurrency = getCurrencyByIdInWalletItem(
-          destinationItems,
-          id
-        );
-        const sourceId = getIdByCurrencyInWalletItem(
-          sourceItems,
-          destinationCurrency
-        );
-        reset({
-          [TRANSFER_FORM_FIELDS.destinationId]: id,
-          [TRANSFER_FORM_FIELDS.amount]: "",
-          [TRANSFER_FORM_FIELDS.sourceId]: sourceId
-        });
-        return;
-      }
       setValue(TRANSFER_FORM_FIELDS.destinationId, id, true);
     },
-    [sourceItems, destinationItems, fixedSelects, fixedSelects, setValue]
+    [sourceItems, destinationItems, setValue]
   );
 
   const setValuesFromPropsAndSubmit = useCallback(
@@ -161,8 +121,8 @@ const _TransferForm: React.FC<ITransferFormProps> = ({
       onSubmit,
       sourceType,
       destinationType,
-      selectedSourceItem,
-      selectedDestinationItem
+      selectedSourceItem.currency,
+      selectedDestinationItem.currency
     ]
   );
 

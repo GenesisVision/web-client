@@ -41,7 +41,6 @@ const FullButtonIcon = styled(ImageBaseElement)`
 `;
 
 const _TransferButton: React.FC<Props> = ({
-  fixedSelects,
   accountId,
   outerCurrentItemContainerItems,
   successMessage,
@@ -58,7 +57,9 @@ const _TransferButton: React.FC<Props> = ({
   currentItemContainer,
   label,
   onApply,
-  disabled
+  disabled,
+  supportedCurrencies,
+  isExchangeAccount
 }) => {
   const [t] = useTranslation();
   const [isOpenPopup, setIsOpenPopup, setIsClosePopup] = useIsOpen();
@@ -75,7 +76,8 @@ const _TransferButton: React.FC<Props> = ({
         onClick={setIsOpenPopup}
       />
       <TransferPopup
-        fixedSelects={fixedSelects}
+        isExchangeAccount={isExchangeAccount}
+        supportedCurrencies={supportedCurrencies}
         accountId={accountId}
         outerCurrentItemContainerItems={outerCurrentItemContainerItems}
         successMessage={successMessage}

@@ -3,6 +3,7 @@ import {
   WalletItemType
 } from "components/wallet-select/wallet-select";
 import {
+  Currency,
   InternalMultiTransferRequest,
   InternalTransferRequest
 } from "gv-api-web";
@@ -41,3 +42,20 @@ export const getOtherItems: getItemsType<WalletItemType> = (items, sourceId) =>
 export type getItemType<T> = (items: T[], sourceId: string) => T;
 export const getItem: getItemType<WalletItemType> = (items, currentItemId) =>
   items.find(({ id }) => id === currentItemId) || items[0];
+
+export const filterSupportedCurrenciesItems = (
+  items: WalletItemType[],
+  supportedCurrencies?: Currency[],
+  isExchangeAccount?: boolean
+) => {
+  if (!isExchangeAccount) {
+    return items;
+  }
+  return items.filter(
+    ({ currency }) =>
+      isExchangeAccount &&
+      supportedCurrencies!.find(
+        supportedCurrency => supportedCurrency === currency
+      )
+  );
+};

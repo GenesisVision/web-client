@@ -5,6 +5,7 @@ import { WalletItemType } from "components/wallet-select/wallet-select";
 import {
   AmountWithLogoCurrency,
   AssetTypeExt,
+  Currency,
   PrivateTradingAccountType
 } from "gv-api-web";
 import { DepositTransferButton } from "modules/transfer/deposit-transfer-button";
@@ -15,6 +16,7 @@ import * as React from "react";
 interface Props {
   id?: string;
   balances?: AmountWithLogoCurrency[];
+  supportedCurrencies?: Currency[];
   transferableItem: WalletItemType;
   accountType?: PrivateTradingAccountType | AssetTypeExt;
   onApply: VoidFunction;
@@ -25,7 +27,8 @@ const _InvestmentAccountControls: React.FC<Props> = ({
   balances,
   onApply,
   accountType,
-  transferableItem
+  transferableItem,
+  supportedCurrencies
 }) => {
   const isExchangeAccount = accountType === "ExchangeAccount";
   const currentItemContainerItems =
@@ -41,7 +44,8 @@ const _InvestmentAccountControls: React.FC<Props> = ({
       <Row>
         <DetailsBlockRowItem>
           <DepositTransferButton
-            fixedSelects={isExchangeAccount}
+            isExchangeAccount={isExchangeAccount}
+            supportedCurrencies={supportedCurrencies}
             accountId={id}
             outerCurrentItemContainerItems={currentItemContainerItems}
             size={"xlarge"}
@@ -52,7 +56,8 @@ const _InvestmentAccountControls: React.FC<Props> = ({
         </DetailsBlockRowItem>
         <DetailsBlockRowItem>
           <WithdrawTransferButton
-            fixedSelects={isExchangeAccount}
+            isExchangeAccount={isExchangeAccount}
+            supportedCurrencies={supportedCurrencies}
             accountId={id}
             outerCurrentItemContainerItems={currentItemContainerItems}
             size={"xlarge"}
