@@ -59,7 +59,11 @@ import {
   GV_PROGRAMS_ROUTE,
   INVEST_ROUTE
 } from "./invest.routes";
-import { TERMINAL_SPOT_ROUTE, TRADE_ROUTE } from "./trade.routes";
+import {
+  TERMINAL_FUTURES_ROUTE,
+  TERMINAL_SPOT_ROUTE,
+  TRADE_ROUTE
+} from "./trade.routes";
 
 export type TMenuItem = {
   isBeta?: boolean;
