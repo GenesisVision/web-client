@@ -40,6 +40,7 @@ type TerminalFuturesBalanceContextState = {
   availableBalance: number;
   currentSymbolMarginInfo: SymbolMarginInfoType;
   futuresBalance?: FuturesBalance;
+  bnbFuturesBalance?: FuturesBalance;
   crossPositionInfo?: CrossPositionInfo;
 };
 
@@ -71,6 +72,9 @@ const ContextProvider: React.FC = ({ children }) => {
   });
 
   const [futuresBalance, setFuturesBalance] = useState<
+    FuturesBalance | undefined
+  >(undefined);
+  const [bnbFuturesBalance, setBnbFuturesBalance] = useState<
     FuturesBalance | undefined
   >(undefined);
   const [availableBalance, setAvailableBalance] = useState<number>(0);
@@ -105,7 +109,11 @@ const ContextProvider: React.FC = ({ children }) => {
     const usdtFuturesBalance = futuresBalanceInfo.find(
       balance => balance.asset === "USDT"
     );
+    const bnbFuturesBalance = futuresBalanceInfo.find(
+      balance => balance.asset === "BNB"
+    );
     setFuturesBalance(usdtFuturesBalance);
+    setBnbFuturesBalance(bnbFuturesBalance);
   }, [futuresBalanceInfo]);
 
   useEffect(() => {
@@ -116,18 +124,32 @@ const ContextProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     if (!socketData || !futuresBalance) return;
-    const socketBalance = socketData.balances.find(
+    const usdtSocketBalance = socketData.balances.find(
       balance => balance.asset === "USDT"
     );
-    if (!socketBalance) return;
-    setFuturesBalance(
-      prevBalance =>
-        ({
-          ...prevBalance,
-          crossWalletBalance: socketBalance.crossWalletBalance,
-          walletBalance: socketBalance.walletBalance
-        } as FuturesBalance)
+    const bnbSocketBalance = socketData.balances.find(
+      balance => balance.asset === "BNB"
     );
+    if (usdtSocketBalance) {
+      setFuturesBalance(
+        prevBalance =>
+          ({
+            ...prevBalance,
+            crossWalletBalance: usdtSocketBalance.crossWalletBalance,
+            walletBalance: usdtSocketBalance.walletBalance
+          } as FuturesBalance)
+      );
+    }
+    if (bnbSocketBalance) {
+      setBnbFuturesBalance(
+        prevBalance =>
+          ({
+            ...prevBalance,
+            crossWalletBalance: bnbSocketBalance.crossWalletBalance,
+            walletBalance: bnbSocketBalance.walletBalance
+          } as FuturesBalance)
+      );
+    }
   }, [socketData]);
 
   useEffect(() => {
@@ -316,10 +338,12 @@ const ContextProvider: React.FC = ({ children }) => {
       futuresBalance,
       crossPositionInfo,
       availableBalance: Math.max(0, availableBalance),
-      currentSymbolMarginInfo
+      currentSymbolMarginInfo,
+      bnbFuturesBalance
     }),
     [
       futuresBalance,
+      bnbFuturesBalance,
       crossPositionInfo,
       availableBalance,
       currentSymbolMarginInfo.longAdditionalMargin,

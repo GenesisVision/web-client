@@ -86,5 +86,14 @@
       "asset": "Asset",
       "symbol": "Symbol"
     }
+  },
+  "assets": {
+    "table": {
+      "asset": "Asset",
+      "wallet-balance": "Wallet Balance",
+      "unrealized-pnl": "Unrealized PNL",
+      "available": "Available for Order",
+      "margin-balance": "Margin Balance"
+    }
   }
 }
