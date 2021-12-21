@@ -23,11 +23,13 @@ import {
   TransferFormItemsType,
   TransferItemType
 } from "../transfer.types";
+import { TRANSFER_TYPE } from "../transfer-button";
 import TransferForm from "./transfer-form";
 
 export interface TransferContainerProps {
   accountId?: string;
   isExchangeAccount?: boolean;
+  transferType?: TRANSFER_TYPE;
   outerCurrentItemContainerItems?: WalletItemType[];
   successMessage?: string;
   singleCurrentItemContainer?: boolean;
@@ -54,7 +56,8 @@ const _TransferContainer: React.FC<TransferContainerProps> = ({
   currentItemContainer,
   onClose,
   isExchangeAccount,
-  supportedCurrencies
+  supportedCurrencies,
+  transferType
 }) => {
   const [items, setItems] = useState<TransferFormItemsType | undefined>(
     undefined
@@ -119,16 +122,18 @@ const _TransferContainer: React.FC<TransferContainerProps> = ({
   useEffect(() => {
     if (!!sourceItems && !!destinationItems) {
       setItems({
-        sourceItems: filterSupportedCurrenciesItems(
-          sourceItems,
+        sourceItems: filterSupportedCurrenciesItems({
+          items: sourceItems,
           supportedCurrencies,
-          isExchangeAccount
-        ),
-        destinationItems: filterSupportedCurrenciesItems(
-          destinationItems,
+          isExchangeAccount,
+          shouldFilter: transferType === TRANSFER_TYPE.WITHDRAW
+        }),
+        destinationItems: filterSupportedCurrenciesItems({
+          items: destinationItems,
           supportedCurrencies,
-          isExchangeAccount
-        )
+          isExchangeAccount,
+          shouldFilter: transferType === TRANSFER_TYPE.DEPOSIT
+        })
       });
     }
   }, [sourceItems, destinationItems]);

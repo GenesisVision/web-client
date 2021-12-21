@@ -13,6 +13,7 @@ const TransferContainer = dynamic(
 const _TransferPopup: React.FC<Props> = ({
   supportedCurrencies,
   isExchangeAccount,
+  transferType,
   accountId,
   outerCurrentItemContainerItems,
   successMessage = "",
@@ -28,6 +29,7 @@ const _TransferPopup: React.FC<Props> = ({
 }) => (
   <Dialog open={open} onClose={onClose!}>
     <TransferContainer
+      transferType={transferType}
       isExchangeAccount={isExchangeAccount}
       supportedCurrencies={supportedCurrencies}
       accountId={accountId}

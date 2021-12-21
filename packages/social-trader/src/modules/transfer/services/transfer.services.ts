@@ -5,7 +5,8 @@ import {
 import {
   Currency,
   InternalMultiTransferRequest,
-  InternalTransferRequest
+  InternalTransferRequest,
+  InternalTransferRequestType
 } from "gv-api-web";
 import { api } from "services/api-client/swagger-custom-client";
 import { formatCurrencyValue } from "utils/formatter";
@@ -43,14 +44,21 @@ export type getItemType<T> = (items: T[], sourceId: string) => T;
 export const getItem: getItemType<WalletItemType> = (items, currentItemId) =>
   items.find(({ id }) => id === currentItemId) || items[0];
 
-export const filterSupportedCurrenciesItems = (
-  items: WalletItemType[],
-  supportedCurrencies?: Currency[],
-  isExchangeAccount?: boolean
-) => {
-  if (!isExchangeAccount) {
+export const filterSupportedCurrenciesItems = ({
+  items,
+  isExchangeAccount,
+  supportedCurrencies,
+  shouldFilter
+}: {
+  items: WalletItemType[];
+  shouldFilter: boolean;
+  supportedCurrencies?: Currency[];
+  isExchangeAccount?: boolean;
+}) => {
+  if (!isExchangeAccount || !shouldFilter) {
     return items;
   }
+
   return items.filter(
     ({ currency }) =>
       isExchangeAccount &&

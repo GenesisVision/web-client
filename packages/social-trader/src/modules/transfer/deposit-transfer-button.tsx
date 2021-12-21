@@ -6,7 +6,9 @@ import {
   PrivateTradingAccountType
 } from "gv-api-web";
 import { TRANSFER_CONTAINER } from "modules/transfer/transfer.types";
-import TransferButton from "modules/transfer/transfer-button";
+import TransferButton, {
+  TRANSFER_TYPE
+} from "modules/transfer/transfer-button";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Sizeable } from "utils/types";
@@ -21,6 +23,7 @@ const _DepositTransferButton: React.FC<Props> = props => {
   return (
     <TransferButton
       {...props}
+      transferType={TRANSFER_TYPE.DEPOSIT}
       successMessage={"transfer:confirmation.deposit-success"}
       singleCurrentItemContainer={!outerCurrentItemContainerItems}
       size={size}

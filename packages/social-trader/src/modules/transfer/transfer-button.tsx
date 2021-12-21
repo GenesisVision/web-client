@@ -18,9 +18,15 @@ export enum WALLET_BUTTON_TYPE {
   FULL = "FULL"
 }
 
+export enum TRANSFER_TYPE {
+  WITHDRAW = "withdraw",
+  DEPOSIT = "deposit"
+}
+
 interface Props extends TransferContainerProps, Sizeable {
   withIcon?: boolean;
   type?: WALLET_BUTTON_TYPE;
+  transferType?: TRANSFER_TYPE;
   color?: "primary" | "secondary" | "primary-dark" | "danger";
   variant?: "text" | "outlined" | "contained";
   label?: string;
@@ -59,7 +65,8 @@ const _TransferButton: React.FC<Props> = ({
   onApply,
   disabled,
   supportedCurrencies,
-  isExchangeAccount
+  isExchangeAccount,
+  transferType
 }) => {
   const [t] = useTranslation();
   const [isOpenPopup, setIsOpenPopup, setIsClosePopup] = useIsOpen();
@@ -76,6 +83,7 @@ const _TransferButton: React.FC<Props> = ({
         onClick={setIsOpenPopup}
       />
       <TransferPopup
+        transferType={transferType}
         isExchangeAccount={isExchangeAccount}
         supportedCurrencies={supportedCurrencies}
         accountId={accountId}
