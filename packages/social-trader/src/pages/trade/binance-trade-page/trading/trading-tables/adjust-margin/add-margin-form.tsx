@@ -72,7 +72,7 @@ const _AddMarginForm: React.FC<Props> = ({
   const { watch, setValue } = form;
   let { amount } = watch();
 
-  amount ??= 0;
+  amount = amount ? amount : 0;
 
   const liquidationPrice = calculateIsolatedLiqPrice({
     entryPrice,
