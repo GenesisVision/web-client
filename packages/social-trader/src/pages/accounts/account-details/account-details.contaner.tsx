@@ -1,13 +1,11 @@
-import DetailsDescriptionSection
-  from "components/details/details-description-section/details-description/details-description-section";
+import DetailsDescriptionSection from "components/details/details-description-section/details-description/details-description-section";
 import { DetailsDivider } from "components/details/details-divider.block";
 import Page from "components/page/page";
 import { Row } from "components/row/row";
 import { ASSET, TRADE_ASSET_TYPE } from "constants/constants";
 import Crashable from "decorators/crashable";
 import dynamic from "next/dynamic";
-import AccountDetailsSubscriptions
-  from "pages/accounts/account-details/account-details-subscriptions/account-details-subscriptions";
+import AccountDetailsSubscriptions from "pages/accounts/account-details/account-details-subscriptions/account-details-subscriptions";
 import {
   dispatchAccountDescription,
   getAccountHistoryCounts,
@@ -16,15 +14,17 @@ import {
   getTradingLog
 } from "pages/accounts/account-details/services/account-details.service";
 import { mapProgramFollowToTransferItemType } from "pages/dashboard/services/dashboard.service";
-import ProgramDetailsHistorySection, { TProgramTablesData } from "pages/invest/programs/program-details/program-history-section/program-details-history-section";
+import ProgramDetailsHistorySection, {
+  TProgramTablesData
+} from "pages/invest/programs/program-details/program-history-section/program-details-history-section";
 import * as React from "react";
 import { useCallback, useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { createAccountApiKeysToUrl } from "utils/compose-url";
 
+import { AccountDetailsDataType } from "./account-details.types";
 import PerformanceData from "./account-details-description/performance-data";
 import AccountDetailsStatisticSection from "./account-details-statistic-section/account-details-statistic-section";
-import { AccountDetailsDataType } from "./account-details.types";
 import {
   openPositionsSelector,
   openPositionsTableSelector,
@@ -83,6 +83,9 @@ const _AccountDetailsContainer: React.FC<Props> = ({ data: description }) => {
           id={description.id}
           balances={description.tradingAccountInfo.balances}
           transferableItem={mapProgramFollowToTransferItemType(description)}
+          supportedCurrencies={
+            description.tradingAccountInfo.supportedCurrencies
+          }
           accountType={description.tradingAccountInfo.type}
           onApply={handleDispatchDescription}
         />

@@ -16,6 +16,7 @@ import { DashboardTradingAsset } from "gv-api-web";
 import { useTranslation } from "i18n";
 import { DashboardPrivateCardActions } from "pages/dashboard/components/dashboard-trading/dashboard-private-card/dashboard-private-card-actions";
 import { DashboardPrivateCardTransfer } from "pages/dashboard/components/dashboard-trading/dashboard-private-card/dashboard-private-card-transfer";
+import { getTerminalTitle } from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import { ACCOUNT_DETAILS_ROUTE } from "routes/accounts.routes";
@@ -37,11 +38,15 @@ const _DashboardPrivateCard: React.FC<Props> = ({ asset, updateItems }) => {
     composeAccountDetailsUrl(asset.id),
     ACCOUNT_DETAILS_ROUTE
   );
+  const terminalTitle = getTerminalTitle(asset.accountInfo.permissions);
+  const subTitle = terminalTitle
+    ? `${t(
+        `dashboard-page:trading.asset-types.${asset.accountInfo.type}`
+      )} (${terminalTitle})`
+    : t(`dashboard-page:trading.asset-types.${asset.accountInfo.type}`);
   return (
     <TableCard
-      subTitle={t(
-        `dashboard-page:trading.asset-types.${asset.accountInfo.type}`
-      )}
+      subTitle={subTitle}
       detailsUrl={detailsLink}
       assetId={asset.id}
       profit={asset.statistic.profit}

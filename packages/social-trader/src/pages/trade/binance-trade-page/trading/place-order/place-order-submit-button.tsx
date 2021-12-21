@@ -5,21 +5,74 @@ import useIsOpen from "hooks/is-open.hook";
 import SignupDialog from "pages/auth/signup/signup-popup/signup-dialog";
 import { composeCreateAccountRouteWithBroker } from "pages/create-account/create-account.constants";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
-import {
-  OrderSide,
-  TerminalCurrency
-} from "pages/trade/binance-trade-page/trading/terminal.types";
+import { OrderSide } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useContext } from "react";
+import { useFormContext } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
 
+import { getPlaceOrderButtonLabel } from "./place-order.helpers";
+import { FuturesPlaceOrderMode } from "./place-order.types";
+
 interface Props {
-  isSuccessful?: boolean;
   side: OrderSide;
-  asset: TerminalCurrency;
+  isSuccessful?: boolean;
+  asset?: string;
+
+  // futures
+  placeOrderMode?: FuturesPlaceOrderMode;
+  onSubmit?: (values: any) => any;
 }
 
-const RealSubmit: React.FC<Props> = ({ isSuccessful, side, asset }) => {
+interface SimpleButtonProps {
+  label: string;
+  side: OrderSide;
+}
+
+interface SpotButtonProps {
+  isSuccessful: boolean;
+  label: string;
+  side: OrderSide;
+}
+
+interface FuturesButtonProps {
+  label: string;
+  side: OrderSide;
+  onSubmit: (values: any) => any;
+}
+
+const FuturesRealSubmit: React.FC<FuturesButtonProps> = ({
+  side,
+  label,
+  onSubmit
+}) => {
+  const {
+    handleSubmit,
+    formState: { isSubmitting, isValid }
+  } = useFormContext();
+
+  const disabled = isSubmitting || !isValid;
+
+  const handleButtonClick = handleSubmit(values => {
+    return onSubmit({ ...values, side });
+  });
+  return (
+    <Button
+      color={side === "Sell" ? "danger" : "primary"}
+      wide
+      onClick={handleButtonClick}
+      disabled={disabled}
+    >
+      <>{label}</>
+    </Button>
+  );
+};
+
+const SpotRealSubmit: React.FC<SpotButtonProps> = ({
+  isSuccessful,
+  side,
+  label
+}) => {
   return (
     <SubmitButton
       checkDirty={false}
@@ -27,14 +80,12 @@ const RealSubmit: React.FC<Props> = ({ isSuccessful, side, asset }) => {
       color={side === "Sell" ? "danger" : "primary"}
       wide
     >
-      <>
-        {side} {asset}
-      </>
+      <>{label}</>
     </SubmitButton>
   );
 };
 
-const UnAuthButton: React.FC<Props> = ({ side, asset }) => {
+const UnAuthButton: React.FC<SimpleButtonProps> = ({ side, label }) => {
   const [isOpen, setOpen, setClose] = useIsOpen();
   return (
     <>
@@ -43,36 +94,50 @@ const UnAuthButton: React.FC<Props> = ({ side, asset }) => {
         wide
         onClick={setOpen}
       >
-        <>
-          {side} {asset}
-        </>
+        <>{label}</>
       </Button>
       <SignupDialog open={isOpen} onClose={setClose} />
     </>
   );
 };
 
-const WithoutAccountButton: React.FC<Props> = ({ side, asset }) => {
+const WithoutAccountButton: React.FC<SimpleButtonProps> = ({ side, label }) => {
   return (
     <Button
       color={side === "Sell" ? "danger" : "primary"}
       wide
       onClick={() => Push(composeCreateAccountRouteWithBroker("Binance"))}
     >
-      <>
-        {side} {asset}
-      </>
+      <>{label}</>
     </Button>
   );
 };
 
-const _PlaceOrderSubmitButton: React.FC<Props> = props => {
+const _PlaceOrderSubmitButton: React.FC<Props> = ({
+  side,
+  asset,
+  isSuccessful,
+  onSubmit,
+  placeOrderMode
+}) => {
   const isAuthenticated = useSelector(isAuthenticatedSelector);
-  const { exchangeAccountId } = useContext(TerminalInfoContext);
+  const { exchangeAccountId, terminalType } = useContext(TerminalInfoContext);
 
-  if (!isAuthenticated) return <UnAuthButton {...props} />;
-  if (!exchangeAccountId) return <WithoutAccountButton {...props} />;
-  return <RealSubmit {...props} />;
+  const label = getPlaceOrderButtonLabel({
+    side,
+    terminalType,
+    asset,
+    placeOrderMode
+  });
+
+  if (!isAuthenticated) return <UnAuthButton side={side} label={label} />;
+  if (!exchangeAccountId)
+    return <WithoutAccountButton side={side} label={label} />;
+  return terminalType === "futures" ? (
+    <FuturesRealSubmit label={label} side={side} onSubmit={onSubmit!} />
+  ) : (
+    <SpotRealSubmit isSuccessful={isSuccessful!} label={label} side={side} />
+  );
 };
 
 export const PlaceOrderSubmitButton = React.memo(_PlaceOrderSubmitButton);

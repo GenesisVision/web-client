@@ -4,28 +4,18 @@ import {
   IBinanceKline,
   IKline,
   OutboundAccountInfo,
+  SpotOrder,
   StreamTicker,
-  UnitedOrder,
   UnitedTrade
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 
-export const tradeTransform = ({
-  e,
-  E,
-  T,
-  s,
-  p,
-  q,
-  m,
-  t,
-  a,
-  b
-}: any): UnitedTrade => {
+export const tradeTransform = ({ T, p, q, a, m }: any): UnitedTrade => {
   return {
     tradeTime: T,
     price: p,
     quantity: q,
-    orderId: t
+    orderId: a,
+    buyerIsMaker: m
   };
 };
 
@@ -65,7 +55,7 @@ export const transformOutboundAccountInfo = (m: any): OutboundAccountInfo => ({
   balances: m.B.map(({ f, l, a }: any) => ({ free: f, locked: l, asset: a }))
 });
 
-export const transformExecutionReport = (m: any): UnitedOrder => ({
+export const transformExecutionReport = (m: any): SpotOrder => ({
   commissionAsset: m.N,
   commission: m.n,
   quoteQuantityFilled: m.Z,
@@ -73,7 +63,10 @@ export const transformExecutionReport = (m: any): UnitedOrder => ({
   eventType: "executionReport",
   executedQuantity: m.l,
   id: m.i,
+  orderId: m.i,
   time: m.O,
+  // updateTime is wrong. TODO
+  updateTime: m.O,
   symbol: m.s,
   type: m.o,
   side: m.S,

@@ -10,8 +10,8 @@ import { TradingPriceContextProvider } from "pages/trade/binance-trade-page/trad
 import { MarginRatioBlock } from "pages/trade/binance-trade-page/trading/margin-ratio/margin-ratio.block";
 import { MarketWatchBlock } from "pages/trade/binance-trade-page/trading/market-watch/market-watch.block";
 import { OrderBookBlock } from "pages/trade/binance-trade-page/trading/order-book/order-book.block";
-import { PlaceOrderSettingsContainer } from "pages/trade/binance-trade-page/trading/place-order/place-order-settings/place-order-settings.container";
 import { PlaceOrderContainer } from "pages/trade/binance-trade-page/trading/place-order/place-order.container";
+import { PlaceOrderSettingsContainer } from "pages/trade/binance-trade-page/trading/place-order/place-order-settings/place-order-settings.container";
 import { SymbolSummaryContainer } from "pages/trade/binance-trade-page/trading/symbol-summary/symbol-summary";
 import { SymbolSummarySmallBlock } from "pages/trade/binance-trade-page/trading/symbol-summary/symbol-summary-small";
 import {
@@ -20,11 +20,13 @@ import {
   TerminalType
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { TradesBlock } from "pages/trade/binance-trade-page/trading/trades/trades.block";
-import { TradingTables } from "pages/trade/binance-trade-page/trading/trading-tables/trading-tables";
 import React from "react";
 
-import { TerminalMobileChartBlock } from "./terminal-mobile-chart-block/terminal-mobile-chart-block";
+import { TerminalFuturesBalanceContextProvider } from "./contexts/terminal-futures-balance.context";
+import { TerminalFuturesPositionsContextProvider } from "./contexts/terminal-futures-positions.context";
 import styles from "./terminal.module.scss";
+import { TerminalMobileChartBlock } from "./terminal-mobile-chart-block/terminal-mobile-chart-block";
+import { TradingTablesContainer } from "./trading-tables/trading-tables.container";
 
 interface Props {
   exchangeAccountId?: string;
@@ -67,26 +69,35 @@ const _Terminal: React.FC<Props> = ({
             </ResponsiveContainer>
           </div>
           <TradingPriceContextProvider>
-            <div className={styles["chart-grid-elem"]}>
-              <ResponsiveContainer
-                enabledScreens={["phone", "landscape-phone"]}
-              >
-                <TerminalMobileChartBlock />
-              </ResponsiveContainer>
-              <ResponsiveContainer
-                enabledScreens={[
-                  "tablet",
-                  "landscape-tablet",
-                  "desktop",
-                  "large-desktop"
-                ]}
-              >
-                <ChartBlock />
-              </ResponsiveContainer>
-            </div>
             <TerminalOpenOrdersContextProvider>
-              <div className={styles["tables-grid-elem"]}>
-                <TradingTables />
+              <div className={styles["chart-grid-elem"]}>
+                <ResponsiveContainer
+                  enabledScreens={["phone", "landscape-phone"]}
+                >
+                  <TerminalMobileChartBlock />
+                </ResponsiveContainer>
+                <ResponsiveContainer
+                  enabledScreens={[
+                    "tablet",
+                    "landscape-tablet",
+                    "desktop",
+                    "large-desktop"
+                  ]}
+                >
+                  <ChartBlock />
+                </ResponsiveContainer>
+              </div>
+              <div className={styles["trades-grid-elem"]}>
+                <ResponsiveContainer
+                  enabledScreens={[
+                    "tablet",
+                    "landscape-tablet",
+                    "desktop",
+                    "large-desktop"
+                  ]}
+                >
+                  <TradesBlock />
+                </ResponsiveContainer>
               </div>
               <div className={styles["order-book-grid-elem"]}>
                 <ResponsiveContainer
@@ -100,26 +111,23 @@ const _Terminal: React.FC<Props> = ({
                   <OrderBookBlock />
                 </ResponsiveContainer>
               </div>
+              <TerminalFuturesPositionsContextProvider>
+                <TerminalFuturesBalanceContextProvider>
+                  <div className={styles["tables-grid-elem"]}>
+                    <TradingTablesContainer />
+                  </div>
+                  <div className={styles["place-orders-grid-elem"]}>
+                    <TerminalPlaceOrderContextProvider>
+                      {terminalType === "futures" && (
+                        <PlaceOrderSettingsContainer />
+                      )}
+                      <PlaceOrderContainer />
+                    </TerminalPlaceOrderContextProvider>
+                    {terminalType === "futures" && <MarginRatioBlock />}
+                  </div>
+                </TerminalFuturesBalanceContextProvider>
+              </TerminalFuturesPositionsContextProvider>
             </TerminalOpenOrdersContextProvider>
-            <div className={styles["trades-grid-elem"]}>
-              <ResponsiveContainer
-                enabledScreens={[
-                  "tablet",
-                  "landscape-tablet",
-                  "desktop",
-                  "large-desktop"
-                ]}
-              >
-                <TradesBlock />
-              </ResponsiveContainer>
-            </div>
-            <div className={styles["place-orders-grid-elem"]}>
-              <TerminalPlaceOrderContextProvider>
-                {terminalType === "futures" && <PlaceOrderSettingsContainer />}
-                <PlaceOrderContainer />
-                {terminalType === "futures" && <MarginRatioBlock />}
-              </TerminalPlaceOrderContextProvider>
-            </div>
           </TradingPriceContextProvider>
         </TerminalTickerContextProvider>
       </div>

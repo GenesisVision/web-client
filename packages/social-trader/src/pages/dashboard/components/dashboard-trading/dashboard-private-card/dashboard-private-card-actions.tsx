@@ -15,8 +15,8 @@ import {
   MakeProgramButton
 } from "pages/dashboard/components/dashboard-trading/dashboard-private-card.helpers";
 import { getTerminalLink } from "pages/dashboard/dashboard.helpers";
-import ChangeAccountPasswordButton
-  from "pages/invest/programs/programs-settings/change-password/change-password-trading-account.button";
+import ChangeAccountPasswordButton from "pages/invest/programs/programs-settings/change-password/change-password-trading-account.button";
+import { getTerminalType } from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
@@ -43,7 +43,11 @@ const _DashboardPrivateCardActions: React.FC<Props> = ({
 
   const apiKeysLink = createAccountApiKeysToUrl(asset.id, contextTitle);
   const terminalLink = linkCreator(
-    getTerminalLink(asset.broker.type, asset.id)
+    getTerminalLink({
+      brokerType: asset.broker.type,
+      id: asset.id,
+      terminalType: getTerminalType(asset.accountInfo.permissions)
+    })
   );
   const makeSignalAccountLink = linkCreator(makeSignalLinkMethod(asset.id));
   const makeProgramExternalLinkMethod = makeProgramLinkCreator({

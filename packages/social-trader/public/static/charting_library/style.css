@@ -1,6 +1,15 @@
 .theme-dark .group-wWM3zP_M- {
     background-color: #131f27!important;
 }
+
 .pane-legend-item-value__main {
     margin-left: 3px;
+}
+
+.price-axis {
+    cursor: ns-resize;
+}
+
+.time-axis {
+    cursor: ew-resize;
 }

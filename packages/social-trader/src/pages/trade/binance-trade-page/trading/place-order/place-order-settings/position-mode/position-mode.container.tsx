@@ -6,20 +6,19 @@ import { PositionMode } from "pages/trade/binance-trade-page/trading/place-order
 import { PositionModeType } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useCallback, useContext, useEffect, useState } from "react";
 
+import { TerminalFuturesPositionsContext } from "../../../contexts/terminal-futures-positions.context";
+
 const _PositionModeContainer: React.FC = () => {
   const { currentPositionMode, updatePositionMode } = useContext(
     TerminalPlaceOrderContext
   );
   const { changePositionMode } = useContext(TerminalMethodsContext);
+  const { updatePositions } = useContext(TerminalFuturesPositionsContext);
   const { symbol, exchangeAccountId } = useContext(TerminalInfoContext);
-
-  const middleware = () => {
-    updatePositionMode();
-  };
 
   const { sendRequest: changePosition } = useApiRequest({
     request: changePositionMode!,
-    middleware: [middleware]
+    middleware: [updatePositionMode, updatePositions]
   });
 
   const [mode, setMode] = useState<PositionModeType | undefined>(undefined);
@@ -35,7 +34,7 @@ const _PositionModeContainer: React.FC = () => {
         mode: dualSidePosition
       });
     },
-    [exchangeAccountId, symbol, exchangeAccountId]
+    [exchangeAccountId, symbol]
   );
 
   return (

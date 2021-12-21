@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { DialogListItem } from "components/dialog/dialog-list-item";
 import { terminalMoneyFormat } from "pages/trade/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
-import React from "react";
+import React, { useMemo } from "react";
 
 import { TerminalCurrency } from "../terminal.types";
 import { ORDER_BOOK_ROW_HEIGHT } from "./order-book.helpers";
@@ -49,8 +49,10 @@ const _OrderBookTooltip: React.FC<Props> = ({
     tickSize: tableTickSize || tickSize
   });
 
-  const offset =
-    ORDER_BOOK_ROW_HEIGHT * (hoveredRow || 0) + ORDER_BOOK_ROW_HEIGHT / 2;
+  const offset = useMemo(
+    () => ORDER_BOOK_ROW_HEIGHT * (hoveredRow || 0) + ORDER_BOOK_ROW_HEIGHT / 2,
+    [hoveredRow]
+  );
 
   return (
     <div

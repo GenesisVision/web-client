@@ -14,9 +14,7 @@ import TradingView, { Timezone } from "./charting_library/charting_library.min";
 import { Datafeed } from "./datafeed";
 
 export const ChartContainer: React.FC = () => {
-  const { symbol, exchangeInfo, terminalType } = useContext(
-    TerminalInfoContext
-  );
+  const { symbol, exchangeInfo } = useContext(TerminalInfoContext);
   const [widget, setWidget] = useState<TradingView.IChartingLibraryWidget>();
   const { connectSocket } = useSockets();
   const { getServerTime, getKlines, klineSocket } = useContext(
@@ -94,7 +92,7 @@ export const ChartContainer: React.FC = () => {
       });
       setWidget(widget);
     });
-  }, [exchangeInfo?.symbols, terminalType]);
+  }, [exchangeInfo?.symbols]);
 
   useEffect(() => {
     if (!widget) return;

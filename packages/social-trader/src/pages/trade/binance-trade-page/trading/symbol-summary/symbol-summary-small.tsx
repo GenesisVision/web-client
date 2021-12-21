@@ -2,6 +2,7 @@ import { Center } from "components/center/center";
 import { DefaultBlock } from "components/default.block/default.block";
 import { BlurableLabeledValue } from "components/labeled-value/blurable-labeled-value";
 import { LabeledValue } from "components/labeled-value/labeled-value";
+import { VERTICAL_POPOVER_POS } from "components/popover/popover";
 import { ResponsiveContainer } from "components/responsive-container/responsive-container";
 import { Row } from "components/row/row";
 import { RowItem } from "components/row-item/row-item";
@@ -21,10 +22,11 @@ import {
 import { SymbolSummaryData } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useContext } from "react";
 import NumberFormat from "react-number-format";
-import { diffDate } from "utils/dates";
 import { formatCurrencyValue } from "utils/formatter";
 
 import TerminalTitle from "../components/terminal-title/terminal-title";
+import styles from "./symbol-summary.module.scss";
+import { SymbolSummaryCountdown } from "./symbol-summary-countdown";
 
 interface Props {
   data: SymbolSummaryData;
@@ -40,10 +42,11 @@ export const SymbolSummarySmallBlock: React.FC = () => {
 
 export const SymbolSummarySmallContainer: React.FC = () => {
   const symbolData = useSymbolData();
+  const { terminalType } = useContext(TerminalInfoContext);
   return (
     <SymbolSummarySmallView
       data={symbolData!}
-      loaderData={getTickerSymbolLoaderData()}
+      loaderData={getTickerSymbolLoaderData(terminalType)}
     />
   );
 };
@@ -77,8 +80,8 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
     </h5>
   );
   return (
-    <TerminalTitle amount={lastPrice} trigger={eventTime!}>
-      <Center>
+    <TerminalTitle amount={lastPrice}>
+      <Center className={styles["symbol-summary__wrapper"]}>
         <RowItem size={"large"}>
           <ResponsiveContainer
             enabledScreens={["tablet", "landscape-tablet", "desktop"]}
@@ -128,7 +131,8 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
                 size={"xsmall"}
                 label={
                   <TooltipLabel
-                    labelText={"Mark Price"}
+                    labelText={"Mark"}
+                    vertical={VERTICAL_POPOVER_POS.BOTTOM}
                     tooltipContent={
                       "The latest mark price for this contract. This is the price used for PNL and margin calculations, and may differ from the last price for the purposes of avoiding price manipulation."
                     }
@@ -137,10 +141,30 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
               >
                 <Text size={"xsmall"}>
                   <MonoText>
-                    {terminalMoneyFormat({
-                      amount: markPrice.markPrice,
-                      tickSize
-                    })}
+                    <NumberFormat
+                      value={terminalMoneyFormat({
+                        amount: markPrice.markPrice,
+                        tickSize
+                      })}
+                      thousandSeparator={","}
+                      displayType="text"
+                    />
+                  </MonoText>
+                </Text>
+              </LabeledValue>
+            </RowItem>
+            <RowItem>
+              <LabeledValue size={"xsmall"} label={"Index"}>
+                <Text size={"xsmall"}>
+                  <MonoText>
+                    <NumberFormat
+                      value={terminalMoneyFormat({
+                        amount: markPrice.indexPrice,
+                        tickSize
+                      })}
+                      thousandSeparator={","}
+                      displayType="text"
+                    />
                   </MonoText>
                 </Text>
               </LabeledValue>
@@ -150,25 +174,29 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
                 size={"xsmall"}
                 label={
                   <TooltipLabel
-                    labelText={"Funding/8h"}
+                    labelText={"Funding / Countdown"}
+                    vertical={VERTICAL_POPOVER_POS.BOTTOM}
                     tooltipContent={
-                      "The payment rate exchanged between the buyer and seller for the next funding."
+                      "The payment rate exchanged between the buyer and seller for the next funding. During the funding rate cycle (every 8 hours), the premium index will be calculated every minute and the time-weighted average value will be used to calculate the funding rate."
                     }
                   />
                 }
               >
                 {serverTime && (
                   <Text size={"xsmall"}>
-                    <Text wrap={false}>
-                      <MonoText>{+markPrice.fundingRate * 100} % </MonoText>
-                    </Text>
                     <MonoText>
-                      {diffDate(
-                        new Date(serverTime.date),
-                        markPrice.nextFundingTime
-                      )
-                        .utc()
-                        .format("HH:mm:ss")}
+                      <NumberFormat
+                        value={+markPrice.fundingRate * 100}
+                        fixedDecimalScale
+                        decimalScale={4}
+                        suffix={"%"}
+                        displayType="text"
+                      />
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <SymbolSummaryCountdown
+                        nextFundingTime={markPrice.nextFundingTime}
+                        serverTime={serverTime.date}
+                      />
                     </MonoText>
                   </Text>
                 )}
@@ -180,6 +208,7 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
           <LabeledValue size={"xsmall"} label={"24h Change"}>
             <MonoText>
               <Text
+                wrap={false}
                 size={"xsmall"}
                 color={+priceChangePercent > 0 ? "green" : "red"}
               >
@@ -200,6 +229,7 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
         <RowItem>
           <BlurableLabeledValue
             size={"xsmall"}
+            tag={"span"}
             isPending={!highPrice}
             label={"24h High"}
           >
@@ -220,6 +250,7 @@ const _SymbolSummarySmallView: React.FC<Props> = ({
         <RowItem>
           <BlurableLabeledValue
             size={"xsmall"}
+            tag={"span"}
             isPending={!lowPrice}
             label={"24h Low"}
           >

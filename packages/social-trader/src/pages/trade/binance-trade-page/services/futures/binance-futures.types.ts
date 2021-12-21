@@ -1,18 +1,20 @@
+import { BinanceFuturesMarginType, BinancePositionSide } from "gv-api-web";
 import {
-  EventType,
+  FuturesOrder,
   FuturesPosition,
   MarginModeType,
   OrderSide,
   OrderType,
-  PositionSideType,
   TerminalCurrency,
   TimeInForce
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 
-export type FuturesAccountEventType =
-  | "ACCOUNT_UPDATE"
-  | "MARGIN_CALL"
-  | "ORDER_TRADE_UPDATE";
+export enum FUTURES_ACCOUNT_EVENT {
+  accountUpdate = "ACCOUNT_UPDATE",
+  marginCall = "MARGIN_CALL",
+  orderTradeUpdate = "ORDER_TRADE_UPDATE",
+  accountConfigUpdate = "ACCOUNT_CONFIG_UPDATE"
+}
 
 export type MarginType = MarginModeType;
 
@@ -68,8 +70,8 @@ export interface FuturesAccount {
 
 export interface FuturesMarginCallEventPosition {
   symbol: TerminalCurrency; // Symbol
-  positionSide: PositionSideType; // Position Side
-  positionAmount: string; // Position Amount
+  positionSide: BinancePositionSide; // Position Side
+  quantity: number; // Position Amount
   marginType: MarginType; // Margin Type
   isolatedWallet: string; // Isolated Wallet (if isolated position)
   markPrice: string; // Mark Price
@@ -79,20 +81,20 @@ export interface FuturesMarginCallEventPosition {
 
 export interface FuturesAccountEventPosition {
   symbol: string; // Symbol
-  positionAmt: string; // Position Amount
-  entryPrice: string; // Entry Price
-  accumulatedRealized: string; // (Pre-fee) Accumulated Realized
-  unrealizedProfit: string; // Unrealized PnL
-  marginType: MarginType; // Margin Type
-  isolatedWallet: string; // Isolated Wallet (if isolated position)
-  positionSide: PositionSideType; // Position Side
+  quantity: number; // Position Amount
+  entryPrice: number; // Entry Price
+  // accumulatedRealized: string; // (Pre-fee) Accumulated Realized
+  unrealizedPnL: number; // Unrealized PnL
+  marginType: BinanceFuturesMarginType; // Margin Type
+  isolatedMargin: number; // Isolated Wallet (if isolated position)
+  positionSide: BinancePositionSide; // Position Side
 }
 
 export interface FuturesAccountEventBalance {
   asset: TerminalCurrency; // Asset
-  free: string; // Wallet Balance
-  walletBalance: string; // Wallet Balance
-  crossWalletBalance: string; // Cross Wallet Balance
+  // balanceChange: Balance Change except PnL and Commission
+  walletBalance: number; // Wallet Balance
+  crossWalletBalance: number; // Cross Wallet Balance
 }
 
 export interface FuturesTradeOrder {
@@ -129,14 +131,14 @@ export interface FuturesTradeOrder {
 }
 
 export interface FuturesMarginCallEvent {
-  eventType: FuturesAccountEventType; // Event Type
+  eventType: FUTURES_ACCOUNT_EVENT.marginCall; // Event Type
   eventTime: number; // Event Time
-  crossWalletBalance: string; // Cross Wallet Balance. Only pushed with crossed position margin call
+  crossWalletBalance?: string; // Cross Wallet Balance. Only pushed with crossed position margin call
   positions: FuturesMarginCallEventPosition[];
 }
 
 export interface FuturesAccountUpdateEvent {
-  eventType: EventType; // Event Type
+  eventType: FUTURES_ACCOUNT_EVENT; // Event Type
   eventTime: number; // Event Time               // Event Time
   transactionTime: number; // Transaction
   balances: FuturesAccountEventBalance[];
@@ -144,8 +146,8 @@ export interface FuturesAccountUpdateEvent {
 }
 
 export interface FuturesTradeOrderUpdateEvent {
-  eventType: FuturesAccountEventType; // Event Type
+  eventType: FUTURES_ACCOUNT_EVENT; // Event Type
   eventTime: number; // Event Time               // Event Time
   transactionTime: number; // Tran        //  Transaction Time
-  order: FuturesTradeOrder;
+  order: FuturesOrder;
 }

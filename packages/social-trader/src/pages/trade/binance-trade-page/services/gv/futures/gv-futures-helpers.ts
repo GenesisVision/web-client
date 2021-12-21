@@ -1,57 +1,114 @@
 import {
-  BinanceRawFuturesAccountAsset,
-  BinanceRawFuturesAccountInfo,
   BinanceRawFuturesBracket,
-  BinanceRawFuturesPosition,
+  BinanceRawFuturesOrder,
   BinanceRawFuturesSymbolBracket
 } from "gv-api-web";
 import {
-  Account,
-  ExtentedBinanceRawBinanceBalance,
-  FuturesPositionInformation,
+  FuturesOrder,
+  FuturesOrderStatus,
+  FuturesOrderType,
   LeverageBracket,
   SymbolLeverageBrackets
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 
-//@todo fix any type (it should be Account)
-export const mapBinanceRawFuturesAccountInfoToAccount = ({
-  canDeposit,
-  canTrade,
-  canWithdraw,
+export const transformFuturesOrder = ({
+  status,
+  orderId,
+  createdTime,
+  symbol,
+  type,
+  side,
+  stopPrice,
+  price,
+  positionSide,
+  quantity,
+  quantityFilled,
+  reduceOnly,
+  workingType,
+  closePosition,
+  activatePrice,
+  avgPrice,
+  callbackRate,
+  originalType,
+  timeInForce,
+  commission,
+  commissionAsset,
+  realizedProfit,
+  priceLastFilledTrade,
+  lastFilledQuantity,
+  quoteQuantityFilled,
+  tradeId,
+  updateTime
+}: BinanceRawFuturesOrder): FuturesOrder => ({
+  id: tradeId + orderId,
+  tradeId,
+  quoteQuantityFilled,
+  lastFilledQuantity,
+  commission,
+  commissionAsset,
+  realizedProfit,
+  activatePrice,
+  averagePrice: avgPrice,
+  callbackRate,
+  originalType: originalType as FuturesOrderType,
+  timeInForce,
+  positionSide,
+  closePosition,
+  quantityFilled,
+  workingType,
+  reduceOnly,
+  orderStatus: status as FuturesOrderStatus,
+  // time: createdTime,
   updateTime,
-  assets,
-  positions
-}: BinanceRawFuturesAccountInfo): any => ({
-  makerCommission: 0,
-  takerCommission: 0,
-  buyerCommission: 0,
-  sellerCommission: 0,
-  canTrade,
-  canWithdraw,
-  canDeposit,
-  updateTime,
-  accountType: "Futures",
-  permissions: ["Futures"],
-  balances: assets.map(
-    mapBinanceRawFuturesAccountAssetToBinanceRawBinanceBalance
-  ),
-  positions
+  symbol,
+  type: type as FuturesOrderType,
+  side,
+  quantity,
+  stopPrice,
+  price,
+  orderId,
+  lastFilledPrice: priceLastFilledTrade
 });
 
-export const mapBinanceRawFuturesAccountAssetToBinanceRawBinanceBalance = ({
-  asset,
-  availableBalance,
-  maintMargin,
-  marginBalance
-}: BinanceRawFuturesAccountAsset): ExtentedBinanceRawBinanceBalance => ({
-  asset,
-  free: availableBalance,
-  locked: 0,
-  total: 0,
-  amountInCurrency: 0,
-  maintMargin,
-  marginBalance
-});
+// not used
+// export const mapBinanceRawFuturesAccountInfoToAccount = ({
+//   canDeposit,
+//   canTrade,
+//   canWithdraw,
+//   updateTime,
+//   assets
+// }: BinanceRawFuturesAccountInfo): Account => ({
+//   makerCommission: 0,
+//   takerCommission: 0,
+//   buyerCommission: 0,
+//   sellerCommission: 0,
+//   canTrade,
+//   canWithdraw,
+//   canDeposit,
+//   updateTime,
+//   accountType: "Futures",
+//   permissions: ["Futures"],
+//   balances: assets as any
+//   balances: assets.map(
+//     mapBinanceRawFuturesAccountAssetToBinanceRawBinanceBalance
+//   ),
+// });
+
+// not used
+// export const mapBinanceRawFuturesAccountAssetToBinanceRawBinanceBalance = ({
+//   asset,
+//   availableBalance,
+//   maintMargin,
+//   marginBalance
+// }: BinanceRawFuturesAccountAsset): ExtentedBinanceRawBinanceBalance => ({
+//   asset,
+//   free: availableBalance,
+//   locked: 0,
+//   total: 0,
+//   amountInCurrency: 0,
+//   maintMargin,
+//   marginBalance
+// });
 
 export const mapBinanceRawFuturesSymbolBracketToSymbolLeverageBrackets = ({
   symbol,
@@ -66,39 +123,13 @@ export const mapBinanceRawFuturesBracketToLeverageBracket = ({
   initialLeverage,
   cap,
   floor,
-  maintenanceMarginRatio
+  maintenanceMarginRatio,
+  maintAmount
 }: BinanceRawFuturesBracket): LeverageBracket => ({
   bracket,
   initialLeverage,
   notionalCap: cap,
   notionalFloor: floor,
-  maintMarginRatio: maintenanceMarginRatio
-});
-
-export const mapBinanceRawFuturesPositionToFuturesPositionInformation = ({
-  entryPrice,
-  marginType,
-  isAutoAddMargin,
-  isolatedMargin,
-  leverage,
-  liquidationPrice,
-  markPrice,
-  maxNotional,
-  quantity,
-  symbol,
-  unrealizedPnL,
-  positionSide
-}: BinanceRawFuturesPosition): FuturesPositionInformation => ({
-  entryPrice,
-  marginType,
-  isAutoAddMargin,
-  isolatedMargin,
-  leverage,
-  liquidationPrice,
-  markPrice,
-  maxNotionalValue: +maxNotional,
-  positionAmt: quantity,
-  symbol,
-  unRealizedProfit: unrealizedPnL,
-  positionSide
+  maintMarginRatio: maintenanceMarginRatio,
+  maintAmount
 });

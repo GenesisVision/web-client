@@ -1,5 +1,6 @@
 import { ColoredTextColor } from "components/colored-text/colored-text";
 import { Push } from "components/link/link";
+import { TradingAccountPermission } from "gv-api-web";
 import { useParams } from "hooks/location";
 import { Bar } from "pages/trade/binance-trade-page/trading/chart/charting_library/datafeed-api";
 import { terminalMoneyFormat } from "pages/trade/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
@@ -8,11 +9,12 @@ import {
   Account,
   AssetBalance,
   ExchangeInfo,
+  FuturesOrder,
   MergedTickerSymbolType,
-  Position,
+  SpotOrder,
   SymbolState,
   TerminalCurrency,
-  UnitedOrder
+  TerminalType
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import qs from "qs";
 import { useCallback } from "react";
@@ -24,7 +26,11 @@ import { changeLocation, safeGetElemFromArray } from "utils/helpers";
 import { getLocation } from "utils/location";
 import { AnyObjectType } from "utils/types";
 
+import { FUTURES_ACCOUNT_EVENT } from "../services/futures/binance-futures.types";
+
 export const TERMINAL_ROUTE_SYMBOL_SEPARATOR = "_";
+
+export const DEFAULT_TICKSIZE = "0.00000001";
 
 export const DEFAULT_SYMBOL: SymbolState = {
   baseAsset: "BTC",
@@ -34,8 +40,8 @@ export const DEFAULT_SYMBOL: SymbolState = {
 export const setUpperFirstLetter = ([firstLetter, ...rest]: string = "") =>
   firstLetter.toUpperCase() + rest.join("").toLowerCase();
 
-export const generateOrderMessage = (
-  order: UnitedOrder,
+export const generateSpotOrderMessage = (
+  order: SpotOrder,
   symbol: MergedTickerSymbolType
 ): string => {
   const { stepSize } = symbol.lotSizeFilter;
@@ -141,9 +147,14 @@ export const getSymbolFilters = (
     maxOrdersFilter,
     minNotionalFilter,
     priceFilter,
-    pricePercentFilter
-  } = safeGetElemFromArray(exchangeInfo.symbols, item => item.name === symbol);
+    pricePercentFilter,
+    pricePrecision
+  } = safeGetElemFromArray<any>(
+    exchangeInfo.symbols,
+    item => item.name === symbol
+  );
   return {
+    pricePrecision,
     iceBergPartsFilter,
     lotSizeFilter,
     marketLotSizeFilter,
@@ -158,16 +169,26 @@ export const getSymbolFilters = (
 export const USER_STREAM_ACCOUNT_UPDATE_EVENT_TYPE = "outboundAccountPosition";
 
 export const filterOutboundAccountInfoStream = (
-  userStream: Observable<any>
+  $userStream: Observable<any>
 ): Observable<Account> =>
-  userStream.pipe(
-    filter(info => info.eventType === USER_STREAM_ACCOUNT_UPDATE_EVENT_TYPE)
+  $userStream.pipe(
+    filter(
+      info =>
+        info.eventType === USER_STREAM_ACCOUNT_UPDATE_EVENT_TYPE ||
+        info.eventType === FUTURES_ACCOUNT_EVENT.accountUpdate
+    )
   );
 
 export const filterOrderEventsStream = (
-  userStream: Observable<any>
-): Observable<UnitedOrder> =>
-  userStream.pipe(filter(info => info.eventType === "executionReport"));
+  $userStream: Observable<any>
+): Observable<SpotOrder | FuturesOrder> =>
+  $userStream.pipe(
+    filter(
+      info =>
+        info.eventType === "executionReport" ||
+        info.eventType === FUTURES_ACCOUNT_EVENT.orderTradeUpdate
+    )
+  );
 
 const normalizeBalanceList = (
   list: AssetBalance[]
@@ -175,42 +196,6 @@ const normalizeBalanceList = (
   const initObject: AnyObjectType = {};
   list.forEach(item => (initObject[item.asset] = item));
   return initObject;
-};
-
-const normalizePositionsList = (
-  list: Position[]
-): { [keys: string]: Position } => {
-  const initObject: AnyObjectType = {};
-  list.forEach(item => {
-    if (!initObject[item.symbol]) initObject[item.symbol] = {};
-    initObject[item.symbol][item.positionSide] = item;
-  });
-  return initObject;
-};
-
-const flatNormalizedPositions = (positions: {
-  [keys: string]: Position;
-}): Position[] => {
-  return Object.values(positions)
-    .map(item => Object.values(item))
-    .flat();
-};
-
-export const updatePositionList = (
-  list: AnyObjectType,
-  updates: AnyObjectType
-): AnyObjectType => {
-  const updatedList = JSON.parse(JSON.stringify(list));
-  Object.entries(updates).forEach(([symbol, data]) => {
-    Object.keys(data).forEach(side => {
-      if (!updatedList[symbol]?.[side]) return;
-      updatedList[symbol][side] = {
-        ...updatedList[symbol][side],
-        ...updates[symbol][side]
-      };
-    });
-  });
-  return updatedList;
 };
 
 const updateBalancesList = (
@@ -237,18 +222,7 @@ export const updateAccountInfo = (currentData: Account, updates: Account) => {
     updateBalancesList(normalizedCurrentBalances, normalizedUpdatesBalances)
   );
 
-  const normalizedCurrentPositions = normalizePositionsList(
-    currentData.positions || []
-  );
-  const normalizedUpdatesPositions = normalizePositionsList(
-    updates.positions || []
-  );
-
-  const positions = flatNormalizedPositions(
-    updatePositionList(normalizedCurrentPositions, normalizedUpdatesPositions)
-  );
-
-  return { ...currentData, ...updates, balances, positions };
+  return { ...currentData, ...updates, balances };
 };
 
 export const stringifySymbolFromToParam = (symbol: SymbolState): string => {
@@ -289,4 +263,40 @@ export const getDecimalScale = (tick: string): number =>
 export const formatValueWithTick = (value: any, tick: string): string => {
   const decimalScale = getDecimalScale(formatValue(tick));
   return formatValue(value, decimalScale);
+};
+
+export const getTickSizeFromPrecision = (precision: number): string => {
+  if (precision < 1) {
+    return "1";
+  }
+  return "0." + "0".repeat(precision - 1) + "1";
+};
+
+export const getTerminalType = (
+  permissions: TradingAccountPermission[]
+): TerminalType | undefined => {
+  const isFutures =
+    !!permissions &&
+    permissions.find(
+      (permission: TradingAccountPermission) => permission === "Futures"
+    );
+  const isSpot =
+    !!permissions &&
+    permissions.find(
+      (permission: TradingAccountPermission) => permission === "Spot"
+    );
+
+  if (isFutures) {
+    return "futures";
+  }
+  if (isSpot) {
+    return "spot";
+  }
+};
+
+export const getTerminalTitle = (
+  permissions: TradingAccountPermission[]
+): string | undefined => {
+  const terminalType = getTerminalType(permissions);
+  return terminalType ? setUpperFirstLetter(terminalType) : undefined;
 };

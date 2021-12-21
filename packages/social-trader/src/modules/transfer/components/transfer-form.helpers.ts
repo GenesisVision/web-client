@@ -3,7 +3,8 @@ import {
   WalletItemType
 } from "components/wallet-select/wallet-select";
 import {
-  InternalTransferRequest,
+  Currency,
+  InternalMultiTransferRequest,
   InternalTransferRequestType
 } from "gv-api-web";
 import { TFunction } from "i18next";
@@ -72,13 +73,11 @@ export const amountRules = ({
 });
 
 export const transferFormMapPropsToValues = ({
-  fixedSelects,
   sourceItems,
   destinationItems,
   currentItem,
   currentItemContainer
 }: {
-  fixedSelects?: boolean;
   sourceItems: ItemsType;
   destinationItems: ItemsType;
   currentItem: WalletItemType;
@@ -96,13 +95,6 @@ export const transferFormMapPropsToValues = ({
       sourceId
     );
     destinationId = destinationItemWithoutCurrent[0].id;
-  }
-  if (fixedSelects) {
-    const sourceCurrency = getCurrencyByIdInWalletItem(sourceItems, sourceId);
-    destinationId = getIdByCurrencyInWalletItem(
-      destinationItems,
-      sourceCurrency
-    );
   }
   return {
     [TRANSFER_FORM_FIELDS.amount]: "",
@@ -129,9 +121,8 @@ export const getTransferFormLoaderData = (
 
 export interface ITransferFormProps {
   updateWallets?: VoidFunction;
-  fixedSelects?: boolean;
   data: TransferFormItemsType;
-  onSubmit: (values: InternalTransferRequest) => void;
+  onSubmit: (values: InternalMultiTransferRequest) => void;
   currentItem: WalletItemType;
   sourceType: InternalTransferRequestType;
   destinationType: InternalTransferRequestType;
@@ -144,4 +135,6 @@ export interface TransferFormValues {
   sourceId: string;
   destinationId: string;
   amount: string | number;
+  sourceCurrency?: Currency;
+  destinationCurrency?: Currency;
 }

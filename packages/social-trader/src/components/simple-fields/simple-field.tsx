@@ -15,6 +15,7 @@ const _SimpleField: React.FC<Props> = props => {
     emptyInit,
     value,
     InputComponent,
+    onChangeEffect,
     valueCallback
   } = props;
   const [correct, setCorrect, setNotCorrect] = useIsOpen();
@@ -56,7 +57,7 @@ const _SimpleField: React.FC<Props> = props => {
       correct={correct}
       value={setEmpty || value === undefined ? "" : value}
       onBlur={handleOnBlur}
-      onChange={number ? undefined : handleOnChange}
+      onChange={number ? onChangeEffect : handleOnChange}
       onValueChange={handleOnChange}
       InputComponent={InputComponent}
     />

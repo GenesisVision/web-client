@@ -10,4 +10,13 @@
     flex-direction: column;
     overflow-x: scroll;
   }
+  &__wrapper {
+    display: grid;
+    place-items: center;
+    height: 100%;
+  }
+  &__auth-button {
+    display: inline !important;
+    padding: 5px !important;
+  }
 }

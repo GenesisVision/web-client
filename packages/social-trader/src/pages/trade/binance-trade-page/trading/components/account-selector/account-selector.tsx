@@ -1,5 +1,5 @@
-import { CurrencySourceSelectItemType } from "components/currency-source-select/currency-source-select-items";
 import { CurrencySourceSelectElement } from "components/currency-source-select/currency-source-select.element";
+import { CurrencySourceSelectItemType } from "components/currency-source-select/currency-source-select-items";
 import GVProgramDefaultAvatar from "components/gv-program-avatar/gv-program-default-avatar.svg";
 import { ISelectChangeEvent } from "components/select/select";
 import { ExchangeAsset } from "gv-api-web";
@@ -35,10 +35,14 @@ const _AccountSelector: React.FC<IAccountSelectorProps> = ({
   currentAccount,
   items
 }) => {
-  const { symbol } = useContext(TerminalInfoContext);
+  const { symbol, terminalType } = useContext(TerminalInfoContext);
   const { updateUrl } = useUpdateTerminalUrlParams();
   const [t] = useTranslation();
   const [account, setAccount] = useState(currentAccount);
+
+  const accounts = items.filter(item =>
+    item.permissions.map(per => per.toLowerCase()).includes(terminalType)
+  );
 
   const onChange = useCallback(
     (event: ISelectChangeEvent) => {
@@ -47,7 +51,7 @@ const _AccountSelector: React.FC<IAccountSelectorProps> = ({
       updateUrl({
         url: stringifySymbolFromToParam(symbol),
         reloadPage: true,
-        updates: { id }
+        updates: { id, type: terminalType }
       });
     },
     [setAccount]
@@ -60,7 +64,7 @@ const _AccountSelector: React.FC<IAccountSelectorProps> = ({
       value={account}
       name={""}
       label={t("Account")}
-      items={items.map(mapExchangeAssetToCurrencySourceSelectItem)}
+      items={accounts.map(mapExchangeAssetToCurrencySourceSelectItem)}
       onChange={onChange}
     />
   );

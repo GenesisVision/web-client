@@ -2,8 +2,8 @@ import { Button } from "components/button/button";
 import GVTextField from "components/gv-text-field";
 import { CloseIcon } from "components/icon/close-icon";
 import SearchIcon from "components/icon/search-icon/search-icon";
-import { RowItem } from "components/row-item/row-item";
 import { Row } from "components/row/row";
+import { RowItem } from "components/row-item/row-item";
 import React, { useCallback } from "react";
 import { Sizeable } from "utils/types";
 
@@ -31,7 +31,7 @@ export const SearchInputField: React.FC<ISearchInputFieldProps> = ({
     <Row wide>
       <RowItem wide>
         <GVTextField
-          maxlength={1400}
+          maxLength={1400}
           size={size}
           onBlur={onBlur}
           wide

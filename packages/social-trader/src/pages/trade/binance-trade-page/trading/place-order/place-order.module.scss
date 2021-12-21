@@ -2,4 +2,15 @@
   &__wallet-icon {
     width: 20px;
   }
+
+  &__mini-button {
+    &:hover {
+      background: white;
+      color: black;
+    }
+
+    &:disabled {
+      pointer-events: none;
+    }
+  }
 }

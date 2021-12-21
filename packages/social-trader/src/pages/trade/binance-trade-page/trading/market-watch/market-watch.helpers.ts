@@ -1,5 +1,6 @@
 import { SORTING_DIRECTION } from "components/table/helpers/sorting.helpers";
 import {
+  MarkPrice,
   MergedTickerSymbolType,
   Symbol,
   TerminalCurrency,
@@ -47,8 +48,14 @@ export const FILTERING_CURRENCIES = ["BTC", "BNB"];
 
 export const CHANGE_COLUMN = "CHANGE_COLUMN";
 export const VOLUME_COLUMN = "VOLUME_COLUMN";
-export const COLUMN_VALUES = [
+
+export const SPOT_COLUMN_VALUES = [
   { label: "Change", value: CHANGE_COLUMN },
+  { label: "24h Volume", value: VOLUME_COLUMN }
+];
+
+export const FUTURES_COLUMN_VALUES = [
+  { label: "24h %", value: CHANGE_COLUMN },
   { label: "Volume", value: VOLUME_COLUMN }
 ];
 
@@ -66,6 +73,12 @@ export const normalizeSymbolsList = (list: Symbol[]) => {
 };
 
 export const normalizeMarketList = (list: Ticker[]) => {
+  const initObject: AnyObjectType = {};
+  list.forEach(item => (initObject[item.symbol] = item));
+  return initObject;
+};
+
+export const normalizeMarkPricesList = (list: MarkPrice[]) => {
   const initObject: AnyObjectType = {};
   list.forEach(item => (initObject[item.symbol] = item));
   return initObject;
@@ -158,7 +171,5 @@ export const filterForSearch = (
   field: keyof MergedTickerSymbolType = "symbol"
 ) => (item: MergedTickerSymbolType): boolean => {
   if (!query) return true;
-  return String(item[field])
-    .toLowerCase()
-    .includes(query.toLowerCase());
+  return String(item[field]).toLowerCase().includes(query.toLowerCase());
 };

@@ -1,13 +1,25 @@
 import Select, { ISelectChangeEvent } from "components/select/select";
-import { COLUMN_VALUES } from "pages/trade/binance-trade-page/trading/market-watch/market-watch.helpers";
+import {
+  FUTURES_COLUMN_VALUES,
+  SPOT_COLUMN_VALUES
+} from "pages/trade/binance-trade-page/trading/market-watch/market-watch.helpers";
 import React from "react";
+
+import { TerminalType } from "../terminal.types";
 
 interface Props {
   column: string;
   setColumn: (value: string) => void;
+  terminalType: TerminalType;
 }
 
-const _MarketWatchColumn: React.FC<Props> = ({ column, setColumn }) => {
+const _MarketWatchColumn: React.FC<Props> = ({
+  column,
+  setColumn,
+  terminalType
+}) => {
+  const columns =
+    terminalType === "futures" ? FUTURES_COLUMN_VALUES : SPOT_COLUMN_VALUES;
   return (
     <Select
       fixedWidth={false}
@@ -16,7 +28,7 @@ const _MarketWatchColumn: React.FC<Props> = ({ column, setColumn }) => {
       value={column}
       onChange={(e: ISelectChangeEvent) => setColumn(e.target.value)}
     >
-      {COLUMN_VALUES.map(({ value, label }) => (
+      {columns.map(({ value, label }) => (
         <option value={value} key={value}>
           {label}
         </option>

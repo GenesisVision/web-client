@@ -1,22 +1,37 @@
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
 import { filterOrderEventsStream } from "pages/trade/binance-trade-page/trading/terminal.helpers";
-import { UnitedOrder } from "pages/trade/binance-trade-page/trading/terminal.types";
+import {
+  FuturesOrder,
+  SpotOrder
+} from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useContext, useEffect, useState } from "react";
 
-import { OrderHistory } from "./order-history";
+import { withTradingTable } from "../with-trading-table";
+import { OrderHistoryFutures } from "./order-history-futures";
+import { OrderHistorySpot } from "./order-history-spot";
 
-export const OrderHistoryContainer: React.FC = () => {
-  const { exchangeAccountId, userStream } = useContext(TerminalInfoContext);
+const OrderHistoryContainer: React.FC = () => {
+  const { exchangeAccountId, $userStream, terminalType } = useContext(
+    TerminalInfoContext
+  );
 
-  const [socketData, setSocketData] = useState<UnitedOrder[] | undefined>();
+  const [socketData, setSocketData] = useState<
+    SpotOrder[] | FuturesOrder[] | undefined
+  >();
 
   useEffect(() => {
-    if (!exchangeAccountId || !userStream) return;
-    const openOrdersStream = filterOrderEventsStream(userStream);
+    if (!exchangeAccountId || !$userStream) return;
+    const openOrdersStream = filterOrderEventsStream($userStream);
     openOrdersStream.subscribe(data => {
-      setSocketData([data]);
+      setSocketData([data as any]);
     });
-  }, [exchangeAccountId, userStream]);
+  }, [exchangeAccountId, $userStream]);
 
-  return <OrderHistory updates={socketData} />;
+  return terminalType === "futures" ? (
+    <OrderHistoryFutures updates={socketData as FuturesOrder[]} />
+  ) : (
+    <OrderHistorySpot updates={socketData as SpotOrder[]} />
+  );
 };
+
+export default withTradingTable(OrderHistoryContainer);

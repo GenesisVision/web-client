@@ -1,7 +1,7 @@
 import { isAllow } from "components/deposit/components/deposit.helpers";
 import HookFormAmountField from "components/input-amount-field/hook-form-amount-field";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
-import { TRADE_FORM_FIELDS } from "pages/trade/binance-trade-page/trading/place-order/place-order.types";
+import { SPOT_TRADE_FORM_FIELDS } from "pages/trade/binance-trade-page/trading/place-order/place-order.types";
 import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { minMaxNumberRules } from "utils/validators/validators";
@@ -21,11 +21,8 @@ const _TotalField: React.FC<Props> = ({
 }) => {
   const [t] = useTranslation();
   const {
-    symbol: { quoteAsset },
-    terminalType
+    symbol: { quoteAsset }
   } = useContext(TerminalInfoContext);
-
-  const isFutures = terminalType === "futures";
 
   return (
     <HookFormAmountField
@@ -33,14 +30,14 @@ const _TotalField: React.FC<Props> = ({
       externalDirty={true}
       autoFocus={false}
       isAllowed={isAllow("BTC")}
-      label={isFutures ? t("Cost") : label}
+      label={label}
       currency={quoteAsset}
-      name={TRADE_FORM_FIELDS.total}
+      name={SPOT_TRADE_FORM_FIELDS.total}
       triggerRules={max}
       rules={minMaxNumberRules({
         t,
         max,
-        min: isFutures ? undefined : min
+        min
       })}
     />
   );

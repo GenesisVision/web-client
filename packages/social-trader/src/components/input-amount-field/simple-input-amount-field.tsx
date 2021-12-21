@@ -20,6 +20,7 @@ const _SimpleInputAmountField: React.FC<ISimpleInputAmountFieldProps> = ({
   label,
   currency,
   setMax,
+  suffix,
   ...props
 }) => {
   const [externalDirty, setExternalDirty] = useIsOpen(externalDirtyProp);
@@ -41,7 +42,7 @@ const _SimpleInputAmountField: React.FC<ISimpleInputAmountFieldProps> = ({
         autoFocus={autoFocus}
         label={label || t("input-amount-field.label")}
         autoComplete="off"
-        suffix={` ${currency}`}
+        suffix={`${suffix ? suffix : ""} ${currency}`}
         allowNegative={false}
         adornment={
           <>
@@ -77,6 +78,7 @@ const _SimpleInputAmountField: React.FC<ISimpleInputAmountFieldProps> = ({
 
 export interface ISimpleInputAmountFieldProps extends ISimpleNumberFieldProps {
   hide?: boolean;
+  suffix?: string;
   wide?: boolean;
   name: string;
   label?: React.ReactNode;

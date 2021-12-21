@@ -2,12 +2,16 @@ import { Button } from "components/button/button";
 import Dialog, { IDialogOuterProps } from "components/dialog/dialog";
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogTop } from "components/dialog/dialog-top";
+import FormError from "components/form/form-error/form-error";
 import { RadioButton } from "components/radio-button/radio-button";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
 import { PositionModeType } from "pages/trade/binance-trade-page/trading/terminal.types";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
+
+import { TerminalFuturesPositionsContext } from "../../../contexts/terminal-futures-positions.context";
+import { TerminalOpenOrdersContext } from "../../../contexts/terminal-open-orders.context";
 
 interface Props {
   onClose?: VoidFunction;
@@ -15,8 +19,9 @@ interface Props {
   mode: PositionModeType;
 }
 
-export const PositionModeDialog: React.FC<Props &
-  IDialogOuterProps> = props => {
+export const PositionModeDialog: React.FC<
+  Props & IDialogOuterProps
+> = props => {
   const { open, onClose } = props;
   return (
     <Dialog open={open} onClose={onClose}>
@@ -30,8 +35,14 @@ const PositionModeDialogContent: React.FC<Props> = ({
   mode: modeProp,
   onChange
 }) => {
-  const [mode, setMode] = useState<PositionModeType>(modeProp);
   const [t] = useTranslation();
+  const [mode, setMode] = useState<PositionModeType>(modeProp);
+  const { openPositions } = useContext(TerminalFuturesPositionsContext);
+  const { openOrders } = useContext(TerminalOpenOrdersContext);
+
+  const hasPositions = !!openPositions.length;
+  const hasOrders = !!openOrders.length;
+
   const handleClickButton = useCallback(
     (mode: PositionModeType) => () => {
       setMode(mode);
@@ -55,7 +66,7 @@ const PositionModeDialogContent: React.FC<Props> = ({
           </Text>
         </Row>
         <Row>
-          <Text>{t("This setting is only apply for Perpetual Futures.")}</Text>
+          <Text>{t("This setting only applies to USDⓈ-M Futures.")}</Text>
         </Row>
         <Row>
           <RadioButton
@@ -85,8 +96,22 @@ const PositionModeDialogContent: React.FC<Props> = ({
             )}
           </Text>
         </Row>
+        {(hasPositions || hasOrders) && (
+          <Row>
+            <FormError
+              small
+              error={t(
+                "Position mode cannot be adjusted if there are open orders or positions"
+              )}
+            />
+          </Row>
+        )}
         <Row>
-          <Button disabled={mode === modeProp} wide onClick={handleChange}>
+          <Button
+            disabled={mode === modeProp || hasPositions || hasOrders}
+            wide
+            onClick={handleChange}
+          >
             {t("Confirm")}
           </Button>
         </Row>

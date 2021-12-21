@@ -9,9 +9,9 @@ type TerminalMethodsContextState = ITerminalMethods;
 
 export const TerminalMethodsInitialState = {} as TerminalMethodsContextState;
 
-export const TerminalMethodsContext = createContext<
-  TerminalMethodsContextState
->(TerminalMethodsInitialState);
+export const TerminalMethodsContext = createContext<TerminalMethodsContextState>(
+  TerminalMethodsInitialState
+);
 
 export const TerminalMethodsContextProvider: React.FC<Props> = ({
   children,

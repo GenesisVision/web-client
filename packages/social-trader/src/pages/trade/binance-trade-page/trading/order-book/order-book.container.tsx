@@ -19,23 +19,29 @@ import {
 import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { useSockets } from "services/websocket.service";
 
+import { TradingPriceContext } from "../contexts/trading-price.context";
+
 interface Props {}
 
+// fix it. it does not work properly
 const ASKS_FULL_AMOUNT_DIVIDER = 300;
 const BIDS_FULL_AMOUNT_DIVIDER = 25;
 
-const _OrderBookContainer: React.FC<Props> = ({}) => {
+const _OrderBookContainer: React.FC<Props> = () => {
   const [asksDivider, setAsksDivider] = useState(ASKS_FULL_AMOUNT_DIVIDER);
   const [bidsDivider, setBidsDivider] = useState(BIDS_FULL_AMOUNT_DIVIDER);
 
   const { depthSocket, getDepth } = useContext(TerminalMethodsContext);
+  const { setBestAskPrice, setBestBidPrice } = useContext(TradingPriceContext);
   const ref = useRef<HTMLDivElement>(null);
   const [count, setCount] = useState<number>(0);
+  const [depthMaxSum, setDepthMaxSum] = useState<number>(0);
 
   const { connectSocket } = useSockets();
 
   const {
     terminalType,
+    depthTickSize,
     symbol: { baseAsset, quoteAsset }
   } = useContext(TerminalInfoContext);
 
@@ -52,9 +58,9 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
   const dividerParts = getDividerParts(tickValue?.value);
 
   useEffect(() => {
-    if (ref.current && !document.fullscreenElement) {
+    if (ref.current) {
       const count = Math.floor(
-        (ref.current.clientHeight / ORDER_BOOK_ROW_HEIGHT - 2) / 2
+        (ref.current.clientHeight / ORDER_BOOK_ROW_HEIGHT - 3) / 2
       );
       setCount(count > 1 ? count : 1);
     }
@@ -73,18 +79,20 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
     depthStream.subscribe(data => {
       setDepthSocketData(data);
     });
-  }, [baseAsset, quoteAsset, terminalType]);
+  }, [baseAsset, quoteAsset]);
 
   useEffect(() => {
     if (!socketOpened) return;
     console.log("get snapshot");
-    getDepth(getSymbol(baseAsset, quoteAsset)).subscribe(data => {
-      setList({
-        ...data,
-        asks: normalizeDepthList(data.asks),
-        bids: normalizeDepthList(data.bids)
-      });
-    });
+    getDepth(getSymbol(baseAsset, quoteAsset), depthTickSize).subscribe(
+      data => {
+        setList({
+          ...data,
+          asks: normalizeDepthList(data.asks),
+          bids: normalizeDepthList(data.bids)
+        });
+      }
+    );
   }, [socketOpened]);
 
   useEffect(() => {
@@ -152,11 +160,30 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
   const { asks, bids } = listForRender;
 
   const listAmount = useMemo(() => {
-    if (!list)
+    if (!list) {
       return {
         asks: 0,
         bids: 0
       };
+    }
+    if (terminalType === "futures") {
+      const asksMaxValue = asks.reduce((acc, [_, amount]) => acc + +amount, 0);
+      const bidsMaxValue = bids.reduce((acc, [_, amount]) => acc + +amount, 0);
+      setDepthMaxSum(Math.max(asksMaxValue, bidsMaxValue));
+
+      //@ts-ignore
+      setBestAskPrice(
+        //@ts-ignore
+        asks[asks.length - 1] ? +asks[asks.length - 1][0] : undefined
+      );
+      //@ts-ignore
+      setBestBidPrice(bids[0] ? +bids[0][0] : undefined);
+
+      return {
+        asks: 0,
+        bids: 0
+      };
+    }
     return {
       asks:
         Object.values(list.asks).reduce((prev, [price, amount]) => {
@@ -176,9 +203,11 @@ const _OrderBookContainer: React.FC<Props> = ({}) => {
       listAmount={listAmount}
       tickValue={tickValue}
       setTickValue={setTickValue}
-      tablesBlockRef={ref}
+      ref={ref}
       asks={asks}
       bids={bids}
+      terminalType={terminalType}
+      depthMaxSum={depthMaxSum}
     />
   );
 };

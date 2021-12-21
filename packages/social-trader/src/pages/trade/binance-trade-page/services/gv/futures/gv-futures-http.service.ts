@@ -1,51 +1,52 @@
 import { TableDataType } from "constants/constants";
 import {
+  BinanceFuturesMarginChangeDirectionType,
   BinanceFuturesMarginType,
   BinancePositionMode,
+  BinancePositionSide,
+  BinanceRawAggregatedTrade,
   BinanceRawCancelOrder,
   BinanceRawCancelOrderId,
   BinanceRawFuturesChangeMarginTypeResult,
   BinanceRawFuturesOrderItemsViewModel,
+  BinanceRawFuturesPositionMarginResult,
   BinanceRawFuturesPositionMode,
   BinanceRawKlineItemsViewModel,
   BinanceRawOrderBook,
-  BinanceRawOrderItemsViewModel,
-  BinanceRawRecentTrade,
   TradingPlatformBinanceOrdersMode
 } from "gv-api-web";
+import {
+  mapBinanceRawFuturesSymbolBracketToSymbolLeverageBrackets,
+  transformFuturesOrder
+} from "pages/trade/binance-trade-page/services/gv/futures/gv-futures-helpers";
 import { Bar } from "pages/trade/binance-trade-page/trading/chart/charting_library/datafeed-api";
 import { getDividerParts } from "pages/trade/binance-trade-page/trading/order-book/order-book.helpers";
 import {
   ChangeLeverageResponse,
   CorrectedRestDepth,
   ExchangeInfo,
-  FuturesPositionInformation,
+  FuturesBalance,
+  FuturesOrder,
   KlineParams,
   MarkPrice,
   OrderSide,
+  Position,
   PositionModeType,
   SymbolLeverageBrackets,
   Ticker,
   TradeRequest,
-  UnitedOrder,
+  TransactionHistory,
   UnitedTrade
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { from, Observable } from "rxjs";
 import { api } from "services/api-client/swagger-custom-client";
 
 import {
-  createPlaceBuySellOrderRequest,
+  createFuturesPlaceBuySellOrderRequest,
   PlaceOrderRequest,
   transformDepthToString,
-  transformFuturesToUnitedOrder,
-  transformKlineBar,
-  transformToUnitedOrder
+  transformKlineBar
 } from "../../api.helpers";
-import {
-  mapBinanceRawFuturesAccountInfoToAccount,
-  mapBinanceRawFuturesPositionToFuturesPositionInformation,
-  mapBinanceRawFuturesSymbolBracketToSymbolLeverageBrackets
-} from "pages/trade/binance-trade-page/services/gv/futures/gv-futures-helpers";
 
 export const getExchangeInfo = (): Promise<ExchangeInfo> =>
   (api.terminal().getFuturesExchangeInfo() as unknown) as Promise<ExchangeInfo>;
@@ -82,17 +83,14 @@ export const getServerTime = () => {
   return api.terminal().getExchangeTime();
 };
 
-export const getOpenOrders = (
-  symbol: string,
-  accountId?: string
-): Observable<UnitedOrder[]> =>
+export const getOpenOrders = (accountId: string): Observable<FuturesOrder[]> =>
   from(
     api
       .terminal()
       .getFuturesOpenOrders({ accountId })
       .then(({ items }: BinanceRawFuturesOrderItemsViewModel) =>
-        items.map(transformFuturesToUnitedOrder)
-      ) as Promise<UnitedOrder[]>
+        items.map(transformFuturesOrder)
+      ) as Promise<FuturesOrder[]>
   );
 
 export const getAllTrades = (filters: {
@@ -103,13 +101,13 @@ export const getAllTrades = (filters: {
   symbol?: string;
   skip?: number;
   take?: number;
-}): Promise<TableDataType<UnitedOrder>> =>
+}): Promise<TableDataType<FuturesOrder>> =>
   api
     .terminal()
-    .getTradesHistory({ ...filters, mode: "TradeHistory" })
-    .then(({ total, items }: BinanceRawOrderItemsViewModel) => ({
+    .getFuturesTradesHistory({ ...filters, mode: "TradeHistory" })
+    .then(({ total, items }: BinanceRawFuturesOrderItemsViewModel) => ({
       total,
-      items: items.map(transformToUnitedOrder)
+      items: items.map(transformFuturesOrder)
     }));
 
 export const getAllOrders = (filters: {
@@ -120,13 +118,13 @@ export const getAllOrders = (filters: {
   symbol?: string;
   skip?: number;
   take?: number;
-}): Promise<TableDataType<UnitedOrder>> =>
+}): Promise<TableDataType<FuturesOrder>> =>
   api
     .terminal()
-    .getTradesHistory({ ...filters, mode: "OrderHistory" })
-    .then(({ total, items }: BinanceRawOrderItemsViewModel) => ({
+    .getFuturesTradesHistory({ ...filters, mode: "OrderHistory" })
+    .then(({ total, items }: BinanceRawFuturesOrderItemsViewModel) => ({
       total,
-      items: items.map(transformToUnitedOrder)
+      items: items.map(transformFuturesOrder)
     }));
 
 export const getUserStreamKey = (
@@ -141,11 +139,12 @@ export const getUserStreamKey = (
     }>
   );
 
-export const getAccountInformation = (accountId?: string) =>
-  api
-    .terminal()
-    .getFuturesAccountInfo({ accountId })
-    .then(mapBinanceRawFuturesAccountInfoToAccount);
+// not used
+// export const getAccountInformation = (accountId?: string) =>
+//   api
+//     .terminal()
+//     .getFuturesAccountInfo({ accountId })
+//     .then(mapBinanceRawFuturesAccountInfoToAccount);
 
 export const getTrades = (
   symbol: string,
@@ -154,14 +153,17 @@ export const getTrades = (
   from(
     api
       .terminal()
-      .getFuturesSymbolRecentTrades({ symbol, limit })
-      .then((items: Array<BinanceRawRecentTrade>) =>
-        items.map(({ orderId, price, baseQuantity, tradeTime }) => ({
-          quantity: baseQuantity,
-          price,
-          orderId,
-          tradeTime
-        }))
+      .getFuturesSymbolAggregatedTrades({ symbol, limit })
+      .then((items: Array<BinanceRawAggregatedTrade>) =>
+        items.map(
+          ({ price, quantity, tradeTime, buyerIsMaker, aggregateTradeId }) => ({
+            quantity,
+            price,
+            orderId: aggregateTradeId,
+            tradeTime,
+            buyerIsMaker
+          })
+        )
       ) as Promise<UnitedTrade[]>
   );
 
@@ -170,7 +172,7 @@ export const getTickers = (symbol: string = ""): Observable<Ticker[]> =>
 
 export const getDepth = (
   symbol: string,
-  tickSize: string = "0.00000001",
+  tickSize?: string,
   limit: number = 100
 ): Observable<CorrectedRestDepth> => {
   const dividerParts = getDividerParts(tickSize);
@@ -188,7 +190,7 @@ export const getDepth = (
 
 export const cancelAllOrders = (
   { symbol }: { symbol?: string; useServerTime?: boolean },
-  accountId?: string
+  accountId: string
 ): Promise<BinanceRawCancelOrderId[]> =>
   (api
     .terminal()
@@ -201,7 +203,7 @@ export const cancelOrder = (
     symbol,
     orderId
   }: { orderId: string; symbol: string; useServerTime?: boolean },
-  accountId?: string
+  accountId: string
 ): Promise<BinanceRawCancelOrder> =>
   (api.terminal().futuresCancelOrder({
     orderId: +orderId,
@@ -209,11 +211,8 @@ export const cancelOrder = (
     accountId
   }) as unknown) as Promise<BinanceRawCancelOrder>;
 
-const postFuturesOrder = (options: any) =>
-  api.terminal().futuresPlaceOrder(options);
-
-const { postSell, postBuy } = createPlaceBuySellOrderRequest(
-  (postFuturesOrder as unknown) as PlaceOrderRequest
+const { postSell, postBuy } = createFuturesPlaceBuySellOrderRequest(
+  (api.terminal().futuresPlaceOrder as unknown) as PlaceOrderRequest
 );
 
 export const getTradeMethod = (side: OrderSide) =>
@@ -227,15 +226,8 @@ export const tradeRequest = ({
   return method(options);
 };
 
-export const getMarkPrice = ({
-  symbol
-}: {
-  symbol: string;
-}): Promise<MarkPrice> =>
-  api
-    .terminal()
-    .getFuturesMarkPrices({ symbol })
-    .then(([price]: MarkPrice[]) => price);
+export const getMarkPrices = (): Observable<MarkPrice[]> =>
+  from(api.terminal().getFuturesMarkPrices());
 
 export const getPositionMode = (accountId: string): Promise<PositionModeType> =>
   api
@@ -244,38 +236,43 @@ export const getPositionMode = (accountId: string): Promise<PositionModeType> =>
     .then(({ positionMode }: BinanceRawFuturesPositionMode) => positionMode);
 
 export const changePositionMode = (options: {
-  accountId?: string;
-  mode?: BinancePositionMode;
+  accountId: string;
+  mode: BinancePositionMode;
 }): Promise<any> => api.terminal().setFuturesPositionMode(options);
 
 export const changeLeverage = (options: {
-  accountId?: string;
-  symbol?: string;
-  leverage?: number;
+  accountId: string;
+  symbol: string;
+  leverage: number;
 }): Promise<ChangeLeverageResponse> =>
   api.terminal().changeFuturesInitialLeverageAsync(options);
 
 export const changeMarginMode = (options: {
-  accountId?: string;
-  symbol?: string;
-  marginType?: BinanceFuturesMarginType;
+  accountId: string;
+  symbol: string;
+  marginType: BinanceFuturesMarginType;
 }): Promise<BinanceRawFuturesChangeMarginTypeResult> =>
   api.terminal().changeFuturesMarginType(options);
 
 export const getPositionInformation = (options: {
-  symbol: string;
+  symbol?: string;
+  accountId: string;
+}): Promise<Position[]> =>
+  api.terminal().getFuturesPositionInformation(options);
+
+export const getTransactionHistory = (options: {
   accountId?: string;
-}): Promise<FuturesPositionInformation[]> =>
-  api
-    .terminal()
-    .getFuturesPositionInformation(options)
-    .then(data =>
-      data.map(mapBinanceRawFuturesPositionToFuturesPositionInformation)
-    );
+  symbol?: string;
+  incomeType?: string;
+  startTime?: Date;
+  endTime?: Date;
+  limit?: number;
+}): Promise<TransactionHistory[]> =>
+  api.terminal().getFuturesIncomeHistory(options);
 
 export const getLeverageBrackets = (options: {
   symbol: string;
-  accountId?: string;
+  accountId: string;
 }): Promise<SymbolLeverageBrackets[]> =>
   api
     .terminal()
@@ -283,3 +280,17 @@ export const getLeverageBrackets = (options: {
     .then(data =>
       data.map(mapBinanceRawFuturesSymbolBracketToSymbolLeverageBrackets)
     );
+
+export const adjustMargin = (options: {
+  accountId: string;
+  symbol: string;
+  amount: number;
+  type: BinanceFuturesMarginChangeDirectionType;
+  positionSide: BinancePositionSide;
+}): Promise<BinanceRawFuturesPositionMarginResult> =>
+  api.terminal().changeFuturesPositionMargin(options);
+
+export const getFuturesBalances = (
+  accountId: string
+): Promise<FuturesBalance[]> =>
+  api.terminal().getFuturesAccountBalance({ accountId });

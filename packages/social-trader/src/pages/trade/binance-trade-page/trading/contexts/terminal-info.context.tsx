@@ -1,12 +1,11 @@
-import { Push } from "components/link/link";
 import { useAccountCurrency } from "hooks/account-currency.hook";
 import useApiRequest from "hooks/api-request.hook";
-import { useAuth } from "hooks/auth.hook";
 import { TerminalMethodsContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-methods.context";
 import {
   filterOutboundAccountInfoStream,
   getSymbolFilters,
   getSymbolFromState,
+  getTickSizeFromPrecision,
   stringifySymbolFromToParam,
   updateAccountInfo,
   useUpdateTerminalUrlParams
@@ -25,7 +24,6 @@ import React, {
   useMemo,
   useState
 } from "react";
-import { LOGIN_ROUTE } from "routes/app.routes";
 import { Observable } from "rxjs";
 import { useSockets } from "services/websocket.service";
 
@@ -40,8 +38,9 @@ type TerminalAccountInfoState = {
   exchangeAccountId?: string;
   stepSize: string;
   tickSize: string;
+  depthTickSize: string;
   terminalType: TerminalType;
-  userStream?: Observable<any>;
+  $userStream?: Observable<any>;
   setSymbol: (symbol: SymbolState) => void;
   symbol: SymbolState;
   accountInfo?: Account;
@@ -57,6 +56,7 @@ export const SymbolInitialState: SymbolState = {
 
 export const TerminalAccountInfoInitialState: TerminalAccountInfoState = {
   stepSize: "0.01",
+  depthTickSize: "0.01",
   tickSize: "0.01",
   terminalType: TerminalTypeInitialState,
   setSymbol: () => {},
@@ -84,13 +84,12 @@ export const TerminalInfoContextProvider: React.FC<Props> = ({
   } = useContext(TerminalMethodsContext);
   const { connectSocket } = useSockets();
 
-  const { isAuthenticated } = useAuth();
-
   const [symbol, setSymbol] = useState<SymbolState>(outerSymbol);
   const [tickSize, setTickSize] = useState<string>("0.01");
+  const [depthTickSize, setDepthTickSize] = useState<string>("0.01");
   const [stepSize, setStepSize] = useState<string>("0.01");
   const [userStreamKey, setUserStreamKey] = useState<string | undefined>();
-  const [userStream, setUserStream] = useState<Observable<any> | undefined>();
+  const [$userStream, setUserStream] = useState<Observable<any> | undefined>();
   const [socketData, setSocketData] = useState<Account | undefined>(undefined);
 
   const {
@@ -100,16 +99,14 @@ export const TerminalInfoContextProvider: React.FC<Props> = ({
   } = useApiRequest({
     name: "getAccountInformation",
     cache: true,
-    catchCallback: () => {
-      if (!isAuthenticated) Push(LOGIN_ROUTE);
-    },
     request: ({ exchangeAccountId, currency }) =>
-      getAccountInformationRequest(exchangeAccountId, currency)
+      getAccountInformationRequest!(exchangeAccountId, currency)
   });
 
   useEffect(() => {
     if (!exchangeAccountId) return;
-    getAccountInformation({ exchangeAccountId, currency });
+    getAccountInformationRequest &&
+      getAccountInformation({ exchangeAccountId, currency });
     getUserStreamKey(exchangeAccountId).subscribe(({ listenKey }) =>
       setUserStreamKey(listenKey)
     );
@@ -117,12 +114,14 @@ export const TerminalInfoContextProvider: React.FC<Props> = ({
 
   useEffect(() => {
     if (!userStreamKey) return;
-    const userStream = getUserStreamSocket(connectSocket, userStreamKey);
-    setUserStream(userStream);
-    const accountInfoStream = filterOutboundAccountInfoStream(userStream);
-    accountInfoStream.subscribe(data => {
-      setSocketData(data);
-    });
+    const $userStream = getUserStreamSocket(connectSocket, userStreamKey);
+    setUserStream($userStream);
+    if (terminalType === "spot") {
+      const accountInfoStream = filterOutboundAccountInfoStream($userStream);
+      accountInfoStream.subscribe(data => {
+        setSocketData(data);
+      });
+    }
   }, [userStreamKey, getUserStreamSocket]);
 
   useEffect(() => {
@@ -141,6 +140,11 @@ export const TerminalInfoContextProvider: React.FC<Props> = ({
       const { stepSize } = symbolFilters.lotSizeFilter;
       setTickSize(String(tickSize));
       setStepSize(String(stepSize));
+      if (symbolFilters.pricePrecision) {
+        setDepthTickSize(
+          getTickSizeFromPrecision(symbolFilters.pricePrecision)
+        );
+      }
     }
   }, [exchangeInfo, symbol]);
 
@@ -158,10 +162,11 @@ export const TerminalInfoContextProvider: React.FC<Props> = ({
       tickSize,
       stepSize,
       terminalType,
-      userStream,
+      $userStream,
       setSymbol: handleSetSymbol,
       symbol,
       accountInfo,
+      depthTickSize,
       exchangeInfo
     }),
     [
@@ -169,7 +174,8 @@ export const TerminalInfoContextProvider: React.FC<Props> = ({
       tickSize,
       stepSize,
       terminalType,
-      userStream,
+      depthTickSize,
+      $userStream,
       handleSetSymbol,
       symbol,
       accountInfo,

@@ -17,13 +17,26 @@ export const isOrderInLine = ({
   i,
   items,
   limitOrders,
-  price
+  price,
+  reverse
 }: {
   i: number;
   items: StringBidDepth[];
   limitOrders: number[];
   price: string;
+  reverse?: boolean;
 }) => {
+  if (reverse) {
+    return i === items.length - 1
+      ? !!limitOrders.find(limitOrderPrice => {
+          return limitOrderPrice <= +price;
+        })
+      : !!limitOrders.find(limitOrderPrice => {
+          return (
+            limitOrderPrice > +items[i + 1][0] && limitOrderPrice <= +price
+          );
+        });
+  }
   return i === 0
     ? !!limitOrders.find(limitOrderPrice => {
         return limitOrderPrice >= +price;
@@ -206,3 +219,35 @@ export const ORDER_BOOK_COLUMNS: SortingColumn[] = [
   { name: "amount" },
   { name: "total" }
 ];
+
+export const countOrderBookFuturesSum = (
+  items: StringBidDepth[],
+  index: number,
+  reverse?: boolean
+): number => {
+  const slicedItems = reverse ? items.slice(index) : items.slice(0, index + 1);
+  return slicedItems.reduce((acc, [_, quantity]) => +acc + +quantity, 0);
+};
+
+export const getOrderBookLimitOrders = (
+  // openOrders?: SpotOrder[] | FuturesOrder[],
+  symbol: string,
+  openOrders: any[],
+  reverse?: boolean
+): number[] => {
+  return openOrders
+    .filter(order => order.symbol === symbol)
+    .filter(({ type }) => type.toUpperCase() === "LIMIT")
+    .filter(
+      ({ orderStatus }) =>
+        orderStatus &&
+        (orderStatus.toUpperCase() === "NEW" ||
+          orderStatus.toUpperCase() === "PARTIALLYFILLED")
+    )
+    .filter(
+      ({ side }) =>
+        (reverse && side.toUpperCase() === "SELL") ||
+        (!reverse && side.toUpperCase() === "BUY")
+    )
+    .map(({ price }) => +price);
+};

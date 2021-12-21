@@ -12,12 +12,12 @@ import {
   CancelOrderResult,
   ChangeLeverageResponse,
   ExchangeInfo,
-  FuturesPositionInformation,
   HttpResponse,
   KlineParams,
   MarginModeType,
   MarkPrice,
   OrderSide,
+  Position,
   PositionModeResponse,
   PositionModeType,
   QueryOrderResult,
@@ -65,7 +65,7 @@ export const getServerTime = (): Promise<{ serverTime: number }> => {
   );
 };
 
-export const getMarkPrice = (params: {
+export const getMarkPrices = (params: {
   symbol: string;
 }): Observable<MarkPrice> =>
   requestService.get({
@@ -167,7 +167,7 @@ export const getPositionInformation = ({
   authData
 }: {
   authData: TerminalAuthDataType;
-}): Observable<FuturesPositionInformation[]> =>
+}): Observable<Position[]> =>
   requestService.get({
     ...authData,
     url: `${API_ROUTE}/positionRisk`,

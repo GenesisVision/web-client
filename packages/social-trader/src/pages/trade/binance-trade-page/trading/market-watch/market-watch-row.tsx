@@ -2,15 +2,18 @@ import { Center } from "components/center/center";
 import { RowItem } from "components/row-item/row-item";
 import { Text } from "components/text/text";
 import { TradeStatefulValue } from "pages/trade/binance-trade-page/trading/components/trade-stateful-value/trade-stateful-value";
-import { MarketWatchFavoriteButton } from "pages/trade/binance-trade-page/trading/market-watch/market-watch-favorite-button";
 import { CHANGE_COLUMN } from "pages/trade/binance-trade-page/trading/market-watch/market-watch.helpers";
+import { MarketWatchFavoriteButton } from "pages/trade/binance-trade-page/trading/market-watch/market-watch-favorite-button";
 import { getTextColor } from "pages/trade/binance-trade-page/trading/terminal.helpers";
-import { SymbolState, TerminalCurrency } from "pages/trade/binance-trade-page/trading/terminal.types";
+import {
+  SymbolState,
+  TerminalCurrency
+} from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useCallback } from "react";
+import NumberFormat from "react-number-format";
 import { formatCurrencyValue } from "utils/formatter";
 
 import styles from "./market-watch.module.scss";
-import NumberFormat from "react-number-format";
 
 interface Props {
   getFavorites: VoidFunction;
@@ -51,8 +54,8 @@ export const MarketWatchRow: React.FC<Props> = React.memo(
     }, [quoteAsset, baseAsset]);
 
     return (
-      <tr className={styles["market-watch__row"]} onClick={handleClick}>
-        <td className={styles["market-watch__cell"]}>
+      <div className={styles["market-watch__row"]} onClick={handleClick}>
+        <span className={styles["market-watch__cell"]}>
           <Center>
             {isAuthenticated && exchangeAccountId && (
               <RowItem size={"xsmall"}>
@@ -70,15 +73,15 @@ export const MarketWatchRow: React.FC<Props> = React.memo(
               </Text>
             </RowItem>
           </Center>
-        </td>
-        <td className={styles["market-watch__cell"]}>
+        </span>
+        <span className={styles["market-watch__cell"]}>
           <TradeStatefulValue
             thousandSeparator={","}
             value={formatCurrencyValue(+lastPrice, quoteAsset)}
             trigger={eventTime}
           />
-        </td>
-        <td className={styles["market-watch__table-value"]}>
+        </span>
+        <span className={styles["market-watch__cell"]}>
           {column === CHANGE_COLUMN ? (
             <Text color={getTextColor(+priceChangePercent)}>
               {priceChangePercent} %
@@ -92,8 +95,8 @@ export const MarketWatchRow: React.FC<Props> = React.memo(
               />
             </Text>
           )}
-        </td>
-      </tr>
+        </span>
+      </div>
     );
   }
 );

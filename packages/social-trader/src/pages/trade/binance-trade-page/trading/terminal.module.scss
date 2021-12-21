@@ -34,7 +34,7 @@ $place-order-width: 250px;
       "header header header"
       "symbol-summary symbol-summary symbol-summary"
       "chart chart place-orders"
-      "order-book trades place-orders"
+      "trades order-book place-orders"
       "tables tables place-orders";
     grid-template-rows: auto auto $chart-tablet-height $order-book-tablet-height 1fr;
     grid-template-columns: 1fr 1fr $place-order-width;

@@ -21,6 +21,7 @@ export interface LinkProps extends React.HTMLAttributes<HTMLAnchorElement> {
   to?: ToType | string;
   className?: string;
   onClick?: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
+  isVanillaLink?: boolean;
 }
 
 export const Push = (
@@ -78,6 +79,11 @@ const Link: React.FC<LinkProps> = props => {
   );
   const linkTitle = title || (typeof children === "string" && children) || "";
   const href = normalizedTo.as || normalizedTo.pathname;
+  if (props.isVanillaLink) {
+    return (
+      <StyledA {...props} href={href} title={linkTitle} onClick={handleClick} />
+    );
+  }
   return (
     <NextLink href={href}>
       <StyledA {...props} href={href} title={linkTitle} onClick={handleClick} />

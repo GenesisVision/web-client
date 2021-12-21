@@ -17,22 +17,23 @@ import {
 import { SymbolSummaryData } from "pages/trade/binance-trade-page/trading/terminal.types";
 import React, { useContext } from "react";
 import NumberFormat from "react-number-format";
-import { diffDate } from "utils/dates";
 import { formatCurrencyValue } from "utils/formatter";
 
 import TerminalTitle from "../components/terminal-title/terminal-title";
 import styles from "./symbol-summary.module.scss";
+import { SymbolSummaryCountdown } from "./symbol-summary-countdown";
 
 interface Props {
   data: SymbolSummaryData;
 }
 
 export const SymbolSummaryContainer: React.FC = () => {
+  const { terminalType } = useContext(TerminalInfoContext);
   const symbolData = useSymbolData();
   return (
     <SymbolSummaryView
       data={symbolData!}
-      loaderData={getTickerSymbolLoaderData()}
+      loaderData={getTickerSymbolLoaderData(terminalType)}
     />
   );
 };
@@ -73,7 +74,7 @@ const _SymbolSummaryView: React.FC<Props> = ({
     TerminalInfoContext
   );
   return (
-    <TerminalTitle amount={lastPrice} trigger={eventTime!}>
+    <TerminalTitle amount={lastPrice}>
       <TerminalDefaultBlock>
         <Row>
           <AccountSelectorContainer currentAccount={exchangeAccountId} />
@@ -119,7 +120,7 @@ const _SymbolSummaryView: React.FC<Props> = ({
                 <SymbolSummaryLine
                   label={
                     <TooltipLabel
-                      labelText={"Mark Price"}
+                      labelText={"Mark"}
                       tooltipContent={
                         "The latest mark price for this contract. This is the price used for PNL and margin calculations, and may differ from the last price for the purposes of avoiding price manipulation."
                       }
@@ -127,31 +128,51 @@ const _SymbolSummaryView: React.FC<Props> = ({
                   }
                 >
                   <MonoText>
-                    {terminalMoneyFormat({
-                      amount: markPrice.markPrice,
-                      tickSize
-                    })}
+                    <NumberFormat
+                      value={terminalMoneyFormat({
+                        amount: markPrice.markPrice,
+                        tickSize
+                      })}
+                      thousandSeparator={","}
+                      displayType="text"
+                    />
+                  </MonoText>
+                </SymbolSummaryLine>
+                <SymbolSummaryLine label={"Index"}>
+                  <MonoText>
+                    <NumberFormat
+                      value={terminalMoneyFormat({
+                        amount: markPrice.indexPrice,
+                        tickSize
+                      })}
+                      thousandSeparator={","}
+                      displayType="text"
+                    />
                   </MonoText>
                 </SymbolSummaryLine>
                 <SymbolSummaryLine
                   label={
                     <TooltipLabel
-                      labelText={"Funding/8h"}
+                      labelText={"Funding / Countdown"}
                       tooltipContent={
-                        "The payment rate exchanged between the buyer and seller for the next funding."
+                        "The payment rate exchanged between the buyer and seller for the next funding. During the funding rate cycle (every 8 hours), the premium index will be calculated every minute and the time-weighted average value will be used to calculate the funding rate."
                       }
                     />
                   }
                 >
                   {serverTime && (
                     <MonoText>
-                      {+markPrice.fundingRate * 100} %{" "}
-                      {diffDate(
-                        new Date(serverTime.date),
-                        markPrice.nextFundingTime
-                      )
-                        .utc()
-                        .format("HH:mm:ss")}
+                      <NumberFormat
+                        value={+markPrice.fundingRate * 100}
+                        fixedDecimalScale
+                        decimalScale={4}
+                        suffix={"%"}
+                        displayType="text"
+                      />{" "}
+                      <SymbolSummaryCountdown
+                        nextFundingTime={markPrice.nextFundingTime}
+                        serverTime={serverTime.date}
+                      />
                     </MonoText>
                   )}
                 </SymbolSummaryLine>
@@ -160,6 +181,7 @@ const _SymbolSummaryView: React.FC<Props> = ({
             <SymbolSummaryLine label={"24h Change"}>
               <MonoText>
                 <Text
+                  wrap={false}
                   size={"xlarge"}
                   color={+priceChangePercent > 0 ? "green" : "red"}
                 >

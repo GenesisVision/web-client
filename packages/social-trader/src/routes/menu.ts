@@ -108,12 +108,12 @@ const tradeMenuItems = {
       Icon: TerminalIcon,
       route: TERMINAL_SPOT_ROUTE,
       label: "navigation.terminal.spot"
+    },
+    {
+      Icon: TerminalIcon,
+      route: TERMINAL_FUTURES_ROUTE,
+      label: "navigation.terminal.futures"
     }
-    // {
-    //   Icon: TerminalIcon,
-    //   route: TERMINAL_FUTURES_ROUTE,
-    //   label: "navigation.terminal.futures"
-    // }
   ]
 };
 

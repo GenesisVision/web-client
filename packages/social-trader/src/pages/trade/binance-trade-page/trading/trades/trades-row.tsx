@@ -1,26 +1,27 @@
 import { Text } from "components/text/text";
 import { terminalMoneyFormat } from "pages/trade/binance-trade-page/trading/components/terminal-money-format/terminal-money-format";
-import { getTextColor } from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import React from "react";
 import NumberFormat from "react-number-format";
 import { formatTime } from "utils/dates";
 
+import styles from "./trades.module.scss";
+
 interface Props {
   stepSize?: string;
   tickSize?: string;
-  prevPrice?: number;
+  buyerIsMaker: boolean;
   price: number;
   amount: number;
   time: number | Date;
 }
 
-const _TradesRow: React.FC<Props> = ({
+export const TradesRow: React.FC<Props> = ({
   stepSize,
   tickSize,
-  prevPrice,
   price,
   amount,
-  time
+  time,
+  buyerIsMaker
 }) => {
   const formattedPrice = terminalMoneyFormat({
     amount: price,
@@ -31,23 +32,18 @@ const _TradesRow: React.FC<Props> = ({
     tickSize: stepSize
   });
   return (
-    <tr>
-      <td>
-        <Text
-          size={"xsmall"}
-          color={getTextColor(+price - +(prevPrice ? prevPrice : price))}
-        >
+    <div className={styles["trades__row-container"]}>
+      <span className={styles["trades__cell"]}>
+        <Text size={"xsmall"} color={buyerIsMaker ? "red" : "green"}>
           <NumberFormat
             displayType="text"
             thousandSeparator={","}
             value={formattedPrice}
           />
         </Text>
-      </td>
-      <td>{formattedAmount}</td>
-      <td>{formatTime(time)}</td>
-    </tr>
+      </span>
+      <span className={styles["trades__cell"]}>{formattedAmount}</span>
+      <span className={styles["trades__cell"]}>{formatTime(time)}</span>
+    </div>
   );
 };
-
-export const TradesRow = React.memo(_TradesRow);

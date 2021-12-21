@@ -1,15 +1,18 @@
-import { TradingPriceContext } from "pages/trade/binance-trade-page/trading/contexts/trading-price.context";
-import { PlaceOrder } from "pages/trade/binance-trade-page/trading/place-order/place-order";
-import React, { useContext, useMemo } from "react";
-import { getFilterValues } from "pages/trade/binance-trade-page/trading/place-order/place-order.helpers";
-import { getSymbol } from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
+import { getFilterValues } from "pages/trade/binance-trade-page/trading/place-order/place-order.helpers";
+import { PlaceOrderSpot } from "pages/trade/binance-trade-page/trading/place-order/place-order-spot";
+import { getSymbol } from "pages/trade/binance-trade-page/trading/terminal.helpers";
+import React, { useContext, useMemo } from "react";
+
+import { TerminalTickerContext } from "../contexts/terminal-ticker.context";
+import { PlaceOrderFutures } from "./place-order-futures";
 
 const _PlaceOrderContainer: React.FC = () => {
-  const { price, trades } = useContext(TradingPriceContext);
+  const { items, markPrice } = useContext(TerminalTickerContext);
   const {
     symbol: { baseAsset, quoteAsset },
-    exchangeInfo
+    exchangeInfo,
+    terminalType
   } = useContext(TerminalInfoContext);
 
   const filterValues = useMemo(
@@ -20,13 +23,28 @@ const _PlaceOrderContainer: React.FC = () => {
     [baseAsset, quoteAsset]
   );
 
-  if (!+price || !trades || !trades[0] || !filterValues) return null;
+  const currentSymbol = items?.find(
+    item => item.symbol === getSymbol(baseAsset, quoteAsset)
+  );
 
-  return (
-    <PlaceOrder
+  if (
+    !filterValues ||
+    (!markPrice && terminalType === "futures") ||
+    !currentSymbol
+  ) {
+    return null;
+  }
+
+  return terminalType === "futures" ? (
+    <PlaceOrderFutures
+      markPrice={markPrice!.markPrice}
       filterValues={filterValues}
-      price={price}
-      lastTrade={trades[0].price}
+      lastTrade={currentSymbol.lastPrice}
+    />
+  ) : (
+    <PlaceOrderSpot
+      filterValues={filterValues}
+      lastTrade={currentSymbol.lastPrice}
     />
   );
 };

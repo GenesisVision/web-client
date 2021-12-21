@@ -1,10 +1,10 @@
+import { BinanceOrderType } from "gv-api-web";
 import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
+import { FilterValues } from "pages/trade/binance-trade-page/trading/place-order/place-order.types";
 import { OrderSide } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { useContext, useMemo } from "react";
-import { TerminalPlaceOrderContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-place-order.context";
-import { FilterValues } from "pages/trade/binance-trade-page/trading/place-order/place-order.types";
 
-export interface UsePlaceOrderInfoReturn {
+interface UsePlaceOrderInfoSpotReturn {
   minPrice: number;
   maxPrice: number;
   minQuantity: number;
@@ -13,7 +13,7 @@ export interface UsePlaceOrderInfoReturn {
   maxTotalWithWallet: number;
 }
 
-export const usePlaceOrderInfo = ({
+export const useSpotPlaceOrderInfo = ({
   filterValues,
   balanceBase,
   balanceQuote,
@@ -23,10 +23,8 @@ export const usePlaceOrderInfo = ({
   side: OrderSide;
   balanceBase: number;
   balanceQuote: number;
-}): UsePlaceOrderInfoReturn => {
-  const { leverage } = useContext(TerminalPlaceOrderContext);
+}): UsePlaceOrderInfoSpotReturn => {
   const {
-    terminalType,
     symbol: { baseAsset, quoteAsset }
   } = useContext(TerminalInfoContext);
 
@@ -39,17 +37,12 @@ export const usePlaceOrderInfo = ({
   } = filterValues;
 
   const maxQuantityWithWallet = useMemo(() => {
-    return side === "Buy"
-      ? +maxQuantity
-      : Math.min(
-          +maxQuantity,
-          terminalType === "futures" ? balanceQuote : balanceBase
-        );
-  }, [side, maxQuantity, terminalType, balanceQuote, balanceBase, baseAsset]);
+    return side === "Buy" ? +maxQuantity : Math.min(+maxQuantity, balanceBase);
+  }, [side, maxQuantity, balanceQuote, balanceBase, baseAsset]);
 
   const maxTotalWithWallet = useMemo(() => {
-    return side === "Buy" ? balanceQuote * leverage : Number.MAX_SAFE_INTEGER;
-  }, [side, balanceQuote, quoteAsset, leverage]);
+    return side === "Buy" ? balanceQuote : Number.MAX_SAFE_INTEGER;
+  }, [side, balanceQuote, quoteAsset]);
 
   return useMemo(
     () => ({
@@ -68,5 +61,39 @@ export const usePlaceOrderInfo = ({
       maxQuantityWithWallet,
       maxTotalWithWallet
     ]
+  );
+};
+
+interface UsePlaceOrderInfoFuturesReturn {
+  minPrice: number;
+  maxPrice: number;
+  minQuantity: number;
+  maxQuantity: number;
+}
+
+export const useFuturesPlaceOrderInfo = ({
+  filterValues,
+  type
+}: {
+  filterValues: FilterValues;
+  type?: BinanceOrderType;
+}): UsePlaceOrderInfoFuturesReturn => {
+  const {
+    minPrice,
+    maxPrice,
+    minQuantity,
+    maxQuantity,
+    marketMaxQuantity,
+    marketMinQuantity
+  } = filterValues;
+
+  return useMemo(
+    () => ({
+      minPrice,
+      maxPrice,
+      minQuantity: type === "Market" ? marketMinQuantity : minQuantity,
+      maxQuantity: type === "Market" ? marketMaxQuantity : maxQuantity
+    }),
+    [minPrice, maxPrice, minQuantity, maxQuantity, type]
   );
 };

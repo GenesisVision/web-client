@@ -1,6 +1,7 @@
 import { WalletItemType } from "components/wallet-select/wallet-select";
 import {
-  InternalTransferRequest,
+  Currency,
+  InternalMultiTransferRequest,
   InternalTransferRequestType
 } from "gv-api-web";
 import { useAccountCurrency } from "hooks/account-currency.hook";
@@ -12,20 +13,27 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { postponeCallback } from "utils/hook-form.helpers";
 
-import { transferRequest } from "../services/transfer.services";
+import {
+  filterSupportedCurrenciesItems,
+  transferMultiCurrencyRequest,
+  transferRequest
+} from "../services/transfer.services";
 import {
   TRANSFER_CONTAINER,
   TransferFormItemsType,
   TransferItemType
 } from "../transfer.types";
+import { TRANSFER_TYPE } from "../transfer-button";
 import TransferForm from "./transfer-form";
 
 export interface TransferContainerProps {
-  fixedSelects?: boolean;
   accountId?: string;
+  isExchangeAccount?: boolean;
+  transferType?: TRANSFER_TYPE;
   outerCurrentItemContainerItems?: WalletItemType[];
   successMessage?: string;
   singleCurrentItemContainer?: boolean;
+  supportedCurrencies?: Currency[];
   onApply?: VoidFunction;
   currentItem: WalletItemType;
   onClose?: VoidFunction;
@@ -36,7 +44,6 @@ export interface TransferContainerProps {
 }
 
 const _TransferContainer: React.FC<TransferContainerProps> = ({
-  fixedSelects,
   accountId,
   outerCurrentItemContainerItems,
   successMessage,
@@ -47,7 +54,10 @@ const _TransferContainer: React.FC<TransferContainerProps> = ({
   sourceType,
   destinationType,
   currentItemContainer,
-  onClose
+  onClose,
+  isExchangeAccount,
+  supportedCurrencies,
+  transferType
 }) => {
   const [items, setItems] = useState<TransferFormItemsType | undefined>(
     undefined
@@ -65,17 +75,29 @@ const _TransferContainer: React.FC<TransferContainerProps> = ({
   const { errorMessage, sendRequest: sendTransferRequest } = useApiRequest({
     successMessage,
     middleware: [updateWalletMiddleware, onCloseMiddleware],
-    request: transferRequest
+    request: isExchangeAccount ? transferMultiCurrencyRequest : transferRequest
   });
   const handleSubmit = useCallback(
-    (values: InternalTransferRequest) => {
+    (values: InternalMultiTransferRequest) => {
       const destinationId =
         destinationType === "ExchangeAccount"
           ? accountId
           : values.destinationId;
       const sourceId =
         sourceType === "ExchangeAccount" ? accountId : values.sourceId;
-      return sendTransferRequest({ ...values, destinationId, sourceId });
+      const sourceCurrency = isExchangeAccount
+        ? values.sourceCurrency
+        : undefined;
+      const destinationCurrency = isExchangeAccount
+        ? values.destinationCurrency
+        : undefined;
+      return sendTransferRequest({
+        ...values,
+        destinationId,
+        sourceId,
+        sourceCurrency,
+        destinationCurrency
+      });
     },
     [destinationType, sourceType, destinationType, accountId]
   );
@@ -99,7 +121,20 @@ const _TransferContainer: React.FC<TransferContainerProps> = ({
       : tradingAccounts;
   useEffect(() => {
     if (!!sourceItems && !!destinationItems) {
-      setItems({ sourceItems, destinationItems });
+      setItems({
+        sourceItems: filterSupportedCurrenciesItems({
+          items: sourceItems,
+          supportedCurrencies,
+          isExchangeAccount,
+          shouldFilter: transferType === TRANSFER_TYPE.WITHDRAW
+        }),
+        destinationItems: filterSupportedCurrenciesItems({
+          items: destinationItems,
+          supportedCurrencies,
+          isExchangeAccount,
+          shouldFilter: transferType === TRANSFER_TYPE.DEPOSIT
+        })
+      });
     }
   }, [sourceItems, destinationItems]);
 
@@ -107,7 +142,6 @@ const _TransferContainer: React.FC<TransferContainerProps> = ({
   return (
     <TransferForm
       updateWallets={updateWalletMiddleware}
-      fixedSelects={fixedSelects}
       data={items}
       sourceType={sourceType}
       destinationType={destinationType}

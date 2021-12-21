@@ -1,24 +1,26 @@
 import { DEFAULT_DECIMAL_SCALE } from "constants/constants";
 import dayjs from "dayjs";
 import {
-  BinanceRawFuturesOrder,
   BinanceRawFuturesPlacedOrder,
   BinanceRawFuturesPlaceOrder,
   BinanceRawKline,
   BinanceRawOrder,
   BinanceRawOrderBookEntry,
   BinanceRawPlacedOrder,
-  BinanceRawPlaceOrder
+  BinanceRawPlaceOrder,
+  BinanceWorkingType
 } from "gv-api-web";
 import { Bar } from "pages/trade/binance-trade-page/trading/chart/charting_library/datafeed-api";
 import { DividerPartsType } from "pages/trade/binance-trade-page/trading/order-book/order-book.helpers";
 import {
+  SpotOrder,
   StringBidDepth,
-  TradeRequest,
-  UnitedOrder
+  TradeRequest
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { OrderRequest } from "services/request.service";
 import { formatValue } from "utils/formatter";
+
+import { setUpperFirstLetter } from "../trading/terminal.helpers";
 
 export const transformKlineBar = ({
   close,
@@ -50,14 +52,17 @@ export const transformToUnitedOrder = ({
   price,
   quantity,
   quoteQuantity,
-  quantityFilled
-}: BinanceRawOrder): UnitedOrder => ({
+  quantityFilled,
+  updateTime
+}: BinanceRawOrder): SpotOrder => ({
+  updateTime,
   commissionAsset,
   orderStatus: status,
   commission,
   quoteQuantityFilled,
   executedQuantity: quoteQuantity,
   id: orderId,
+  orderId,
   time: createTime,
   symbol,
   type,
@@ -65,30 +70,6 @@ export const transformToUnitedOrder = ({
   stopPrice,
   price,
   quantityFilled,
-  quantity
-});
-
-export const transformFuturesToUnitedOrder = ({
-  status,
-  orderId,
-  createdTime,
-  symbol,
-  type,
-  side,
-  stopPrice,
-  price,
-  quantity,
-  quantityFilled
-}: BinanceRawFuturesOrder): UnitedOrder => ({
-  orderStatus: status,
-  executedQuantity: quantityFilled,
-  id: orderId,
-  time: createdTime,
-  symbol,
-  type,
-  side,
-  stopPrice,
-  price,
   quantity
 });
 
@@ -130,17 +111,18 @@ export const newOrderRequestCreator = (request: PlaceOrderRequest) => (
   request({
     body: {
       ...options,
-      price: +options.price!,
-      quantity: +options.quantity!
+      price: options.price ? +options.price : undefined,
+      quantity: options.quantity ? +options.quantity : undefined
     } as PlaceOrderType,
     accountId
   });
 
-export const createPlaceBuySellOrderRequest = (request: PlaceOrderRequest) => {
+export const createSpotPlaceBuySellOrderRequest = (
+  request: PlaceOrderRequest
+) => {
   const newOrder = newOrderRequestCreator(request);
 
   const postBuy = ({
-    reduceOnly,
     timeInForce,
     stopPrice,
     accountId,
@@ -155,7 +137,6 @@ export const createPlaceBuySellOrderRequest = (request: PlaceOrderRequest) => {
     return newOrder(
       {
         ...rest,
-        reduceOnly,
         stopPrice:
           type === "TakeProfitLimit" || type === "StopLossLimit"
             ? stopPrice
@@ -177,7 +158,6 @@ export const createPlaceBuySellOrderRequest = (request: PlaceOrderRequest) => {
   };
 
   const postSell = ({
-    reduceOnly,
     timeInForce,
     stopPrice,
     accountId,
@@ -192,7 +172,6 @@ export const createPlaceBuySellOrderRequest = (request: PlaceOrderRequest) => {
     return newOrder(
       {
         ...rest,
-        reduceOnly,
         stopPrice:
           type === "TakeProfitLimit" || type === "StopLossLimit"
             ? stopPrice
@@ -214,4 +193,113 @@ export const createPlaceBuySellOrderRequest = (request: PlaceOrderRequest) => {
   };
 
   return { postBuy, postSell };
+};
+
+export const createFuturesPlaceBuySellOrderRequest = (
+  request: PlaceOrderRequest
+) => {
+  const newOrder = newOrderRequestCreator(request);
+  // to do Trailing stop
+
+  const postBuy = ({
+    reduceOnly,
+    timeInForce,
+    stopPrice,
+    accountId,
+    symbol,
+    price,
+    quantity,
+    positionSide,
+    type,
+    ...rest
+  }: TradeRequest & {
+    accountId?: string;
+  }): Promise<PlacedOrderType> => {
+    return newOrder(
+      {
+        ...rest,
+        positionSide,
+        reduceOnly: positionSide === "Both" ? reduceOnly : undefined,
+        stopPrice:
+          type === "TakeProfit" ||
+          type === "Stop" ||
+          type === "StopMarket" ||
+          type === "TakeProfitMarket"
+            ? stopPrice
+            : undefined,
+        symbol,
+        type,
+        price:
+          (type === "Limit" ||
+            type === "TakeProfit" ||
+            type === "Stop" ||
+            type === "StopMarket" ||
+            type === "TakeProfitMarket") &&
+          price
+            ? String(price)
+            : undefined,
+        quantity: quantity ? String(quantity) : undefined,
+        timeInForce,
+        side: "Buy"
+      },
+      accountId
+    );
+  };
+
+  const postSell = ({
+    reduceOnly,
+    timeInForce,
+    stopPrice,
+    accountId,
+    symbol,
+    price,
+    quantity,
+    positionSide,
+    type,
+    ...rest
+  }: TradeRequest & {
+    accountId?: string;
+  }): Promise<PlacedOrderType> => {
+    return newOrder(
+      {
+        ...rest,
+        positionSide,
+        reduceOnly: positionSide === "Both" ? reduceOnly : undefined,
+        stopPrice:
+          type === "TakeProfit" ||
+          type === "Stop" ||
+          type === "StopMarket" ||
+          type === "TakeProfitMarket"
+            ? stopPrice
+            : undefined,
+        symbol,
+        type,
+        price:
+          (type === "Limit" ||
+            type === "TakeProfit" ||
+            type === "Stop" ||
+            type === "StopMarket" ||
+            type === "TakeProfitMarket") &&
+          price
+            ? String(price)
+            : undefined,
+        quantity: quantity ? String(quantity) : undefined,
+        timeInForce,
+        side: "Sell"
+      },
+      accountId
+    );
+  };
+
+  return { postBuy, postSell };
+};
+
+export const convertBinanceTypeIntoGV = (str: string) => {
+  return str.split("_").map(setUpperFirstLetter).join("");
+};
+
+// fix naming
+export const getWorkingTypeType = (str: string): BinanceWorkingType => {
+  const [type] = str.split("_");
+  return setUpperFirstLetter(type) as BinanceWorkingType;
 };

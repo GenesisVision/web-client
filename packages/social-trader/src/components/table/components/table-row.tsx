@@ -8,6 +8,7 @@ interface Props {
   head?: boolean;
   onClick?: (e: React.MouseEvent<HTMLTableRowElement>) => void;
   className?: string;
+  translucent?: boolean;
   hoverable?: boolean;
   stripy?: boolean;
   children: ReactNode;
@@ -16,20 +17,21 @@ interface Props {
 const TableRow = styled.tr<Props>`
   ${transition("background-color")}
   ${cursorPointer}
+  ${({ translucent }) => translucent && "opacity: 0.5;"}
    ${({ hoverable = true, stripy, head }) => {
-     if (stripy)
-       return `
+    if (stripy)
+      return `
         &:nth-child(2n + 1) {
           background: ${$tableBackgroundSubColor};
         }
      `;
-     if (hoverable && !head)
-       return `
+    if (hoverable && !head)
+      return `
         &:hover {
           background:${$rowColor};
         }
      `;
-   }}
+  }}
 `;
 
 export default React.memo(TableRow);

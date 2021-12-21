@@ -1,27 +1,56 @@
-import { TerminalInfoContext } from "pages/trade/binance-trade-page/trading/contexts/terminal-info.context";
-import {
-  getMarginInfo,
-  MARGIN_INFO_ASSET
-} from "pages/trade/binance-trade-page/trading/margin-ratio/margin-ratio.helpers";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
-import { MarginRatio } from "./margin-ratio";
+import { TerminalFuturesPositionsContext } from "../contexts/terminal-futures-positions.context";
+import { TerminalInfoContext } from "../contexts/terminal-info.context";
+import { getSymbolFromState } from "../terminal.helpers";
+import { Position } from "../terminal.types";
+import { CrossMarginRatio } from "./cross-margin-ratio";
+import { IsolatedMarginRatio } from "./isolated-margin-ratio";
+import { MarginRatioView } from "./margin-ratio-view";
+import SelectPosition from "./select-position";
 
 export const MarginRatioContainer: React.FC = () => {
-  const { accountInfo } = useContext(TerminalInfoContext);
-  if (!accountInfo?.balances) return null;
+  const { symbol: currentSymbol } = useContext(TerminalInfoContext);
+  const { openPositions } = useContext(TerminalFuturesPositionsContext);
 
-  const marginInfo = getMarginInfo(accountInfo.balances, MARGIN_INFO_ASSET);
+  const [selectedPosition, setSelectionPosition] = useState<
+    Position | undefined
+  >();
 
-  if (
-    marginInfo?.maintMargin === undefined ||
-    marginInfo?.marginBalance === undefined
-  )
-    return null;
+  useEffect(() => {
+    if (!openPositions.length) {
+      setSelectionPosition(undefined);
+      return;
+    }
+    const currentSymbolPosition = openPositions.find(
+      ({ symbol, marginType }) =>
+        symbol === getSymbolFromState(currentSymbol) || marginType === "Cross"
+    );
+    if (currentSymbolPosition) {
+      setSelectionPosition(currentSymbolPosition);
+      return;
+    }
+    setSelectionPosition(openPositions[0]);
+  }, [openPositions, currentSymbol]);
+
+  if (!selectedPosition) {
+    return (
+      <MarginRatioView maintMargin={0} marginBalance={0} marginRatio={0} />
+    );
+  }
+
   return (
-    <MarginRatio
-      maintMargin={marginInfo.maintMargin}
-      marginBalance={marginInfo.marginBalance}
-    />
+    <>
+      <SelectPosition
+        positions={openPositions}
+        selectedPositon={selectedPosition}
+        setSelectionPosition={setSelectionPosition}
+      />
+      {selectedPosition.marginType === "Cross" ? (
+        <CrossMarginRatio />
+      ) : (
+        <IsolatedMarginRatio position={selectedPosition} />
+      )}
+    </>
   );
 };

@@ -33,14 +33,22 @@
   &__items-container {
     margin-top: $padding-xxxsmall;
     height: 100%;
-    overflow-y: auto;
+  }
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
   }
 
   &__table {
     @include terminal-table(small);
     & th,
     & td {
-      width: 33.3%;
+      width: 30%;
+    }
+    & th:first-child,
+    & td:first-child {
+      width: 40%;
     }
     & th:last-child,
     & td:last-child {
@@ -103,12 +111,23 @@
     }
   }
 
-  &__table-value {
-    text-align: right;
-  }
-
   &__cell {
     cursor: pointer;
+    font-weight: normal;
+    font-size: 11px;
+    font-family: "DIN Pro Regular", sans-serif;
+
+    &:nth-child(1) {
+      min-width: 105px;
+      text-align: left;
+    }
+    &:nth-child(2) {
+      flex-grow: 1;
+      text-align: left;
+    }
+    &:nth-child(3) {
+      text-align: right;
+    }
   }
 }
 

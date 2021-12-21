@@ -1,5 +1,10 @@
-import { BinancePositionSide } from "gv-api-web";
 import {
+  BinanceExecutionType,
+  BinanceOrderSide,
+  BinancePositionSide
+} from "gv-api-web";
+import {
+  FUTURES_ACCOUNT_EVENT,
   FuturesAccount,
   FuturesAccountEventBalance,
   FuturesAccountUpdateEvent,
@@ -7,7 +12,6 @@ import {
   FuturesMarginCallEvent,
   FuturesMarginCallEventPosition,
   FuturesTickerSymbol,
-  FuturesTradeOrder,
   FuturesTradeOrderUpdateEvent
 } from "pages/trade/binance-trade-page/services/futures/binance-futures.types";
 import {
@@ -18,12 +22,17 @@ import {
   Account,
   AssetBalance,
   BalanceForTransfer,
+  FuturesOrder,
+  FuturesOrderStatus,
+  FuturesOrderType,
   MarkPrice,
-  Position,
+  PositionMini,
   Ticker
 } from "pages/trade/binance-trade-page/trading/terminal.types";
 import { Observable } from "rxjs";
 import { filter } from "rxjs/operators";
+
+import { convertBinanceTypeIntoGV, getWorkingTypeType } from "../api.helpers";
 
 export const transformAccountToBalanceForTransfer = ({
   balances
@@ -37,6 +46,7 @@ export const transformMarkPriceWS = (m: any): MarkPrice => ({
   markPrice: m.p,
   indexPrice: m.i,
   fundingRate: m.r,
+  // nextFundingTime is number, not Date
   nextFundingTime: m.T,
   time: m.E
 });
@@ -131,28 +141,19 @@ export const transformFuturesAccount = (
   };
 };
 
-export const futuresAccountEventPositionTransform = (socketData: any) => {
+export const futuresAccountEventPositionTransform = (
+  socketData: any
+): PositionMini => {
   return {
     symbol: socketData.s,
-    unrealizedPnL: socketData.up,
-    positionSide: setUpperFirstLetter(socketData.ps) as BinancePositionSide,
-    positionAmount: socketData.pa,
-    entryPrice: socketData.ep
-
-    // entryPrice: number;
-    // marginType: BinanceFuturesMarginType;
-    // isAutoAddMargin: boolean;
-    // isolatedMargin: number;
-    // leverage: number;
-    // liquidationPrice: number;
-    // markPrice: number;
-    // symbol: string;
-    // positionSide: BinancePositionSide;
-    // quantity: number;
-    // unrealizedPnL: number;
-    // maxNotional: number;
-  } as any;
-  // TODO: fix type
+    quantity: +socketData.pa,
+    entryPrice: +socketData.ep,
+    // accumulatedRealized: socketData.cr,
+    marginType: setUpperFirstLetter(socketData.mt),
+    unrealizedPnL: +socketData.up,
+    isolatedMargin: +socketData.iw + +socketData.up, // not sure
+    positionSide: setUpperFirstLetter(socketData.ps)
+  } as PositionMini;
 };
 
 export const futuresMarginCallEventPositionTransform = (
@@ -160,14 +161,14 @@ export const futuresMarginCallEventPositionTransform = (
 ): FuturesMarginCallEventPosition => {
   return {
     symbol: socketData.s,
-    positionSide: socketData.ps,
-    positionAmount: socketData.pa,
-    marginType: socketData.mt,
+    positionSide: setUpperFirstLetter(socketData.ps),
+    quantity: +socketData.pa,
+    marginType: socketData.mt === "ISOLATED" ? "Isolated" : "Cross",
     isolatedWallet: socketData.iw,
     markPrice: socketData.mp,
     unrealizedPnL: socketData.up,
     maintenanceMarginRequired: socketData.mm
-  };
+  } as FuturesMarginCallEventPosition;
 };
 
 export const futuresEventBalanceTransform = (
@@ -175,43 +176,49 @@ export const futuresEventBalanceTransform = (
 ): FuturesAccountEventBalance => {
   return {
     asset: socketData.a,
-    free: socketData.wb,
-    walletBalance: socketData.wb,
-    crossWalletBalance: socketData.cw
+    walletBalance: +socketData.wb,
+    crossWalletBalance: +socketData.cw
   };
 };
 
 export const futuresEventTradeOrderTransform = (
   socketData: any
-): FuturesTradeOrder => {
+): FuturesOrder => {
   return {
-    symbol: socketData.s,
-    clientOrderId: socketData.c,
-    side: socketData.S,
-    orderType: socketData.o,
-    timeInForce: socketData.f,
-    originalQuantity: socketData.q,
-    originalPrice: socketData.p,
-    averagePrice: socketData.ap,
-    stopPrice: socketData.sp,
-    executionType: socketData.x,
-    orderStatus: socketData.X,
+    id: socketData.t + socketData.i,
     orderId: socketData.i,
-    orderLastFilledQuantity: socketData.l,
-    orderFilledAccumulatedQuantity: socketData.z,
-    lastFilledPrice: socketData.L,
-    commissionAsset: socketData.N,
-    commission: socketData.n,
-    orderTradeTime: socketData.T,
     tradeId: socketData.t,
-    bidsNotional: socketData.b,
-    askNotional: socketData.a,
-    isMakerSide: socketData.m,
-    isReduceOnly: socketData.R,
-    stopPriceWorkingType: socketData.wt,
-    ifCloseAll: socketData.cp,
-    activationPrice: socketData.AP,
-    callbackRate: socketData.cr
+    commission: socketData.n,
+    commissionAsset: socketData.N,
+    realizedProfit: socketData.rp,
+    executionType: convertBinanceTypeIntoGV(
+      socketData.x
+    ) as BinanceExecutionType,
+    symbol: socketData.s,
+    side: convertBinanceTypeIntoGV(socketData.S) as BinanceOrderSide,
+    activatePrice: socketData.AP,
+    closePosition: socketData.cp,
+    positionSide: convertBinanceTypeIntoGV(
+      socketData.ps
+    ) as BinancePositionSide,
+    price: socketData.p,
+    quantity: socketData.q,
+    quantityFilled: socketData.z,
+    // quoteQuantityFilled is the same as quantityFilled for order history tab
+    quoteQuantityFilled: socketData.z,
+    lastFilledQuantity: socketData.l,
+    reduceOnly: socketData.R,
+    updateTime: socketData.T,
+    originalType: convertBinanceTypeIntoGV(socketData.ot) as FuturesOrderType,
+    type: convertBinanceTypeIntoGV(socketData.o) as FuturesOrderType,
+    workingType: getWorkingTypeType(socketData.wt),
+    eventType: FUTURES_ACCOUNT_EVENT.orderTradeUpdate,
+    averagePrice: socketData.ap,
+    callbackRate: socketData.cr,
+    orderStatus: convertBinanceTypeIntoGV(socketData.X) as FuturesOrderStatus,
+    stopPrice: socketData.sp,
+    timeInForce: socketData.f,
+    lastFilledPrice: socketData.L
   };
 };
 
@@ -230,7 +237,7 @@ export const futuresAccountUpdateEventTransform = (
   socketData: any
 ): FuturesAccountUpdateEvent => {
   return {
-    eventType: USER_STREAM_ACCOUNT_UPDATE_EVENT_TYPE,
+    eventType: socketData.e,
     eventTime: socketData.E,
     transactionTime: socketData.T,
     balances: (socketData.a?.B || []).map(futuresEventBalanceTransform),
@@ -250,8 +257,8 @@ export const futuresTradeOrderUpdateEventTransform = (
 };
 
 export const filterPositionEventsStream = (
-  userStream: Observable<any>
+  $userStream: Observable<any>
 ): Observable<FuturesAccountUpdateEvent> =>
-  userStream.pipe(
+  $userStream.pipe(
     filter(info => info.eventType === USER_STREAM_ACCOUNT_UPDATE_EVENT_TYPE)
   );

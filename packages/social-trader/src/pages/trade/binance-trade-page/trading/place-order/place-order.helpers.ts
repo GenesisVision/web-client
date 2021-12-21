@@ -1,15 +1,22 @@
+import { BinanceWorkingType } from "gv-api-web";
+import {
+  FuturesPlaceOrderMode,
+  PriceType
+} from "pages/trade/binance-trade-page/trading/place-order/place-order.types";
+import {
+  formatValueWithTick,
+  getSymbolFilters
+} from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import {
   AssetBalance,
   ExchangeInfo,
   OrderSide,
   OrderType,
-  PositionModeType,
+  PositionSideType,
   TerminalCurrency,
   TerminalType
 } from "pages/trade/binance-trade-page/trading/terminal.types";
-import { tableLoaderCreator } from "utils/helpers";
-import { getSymbolFilters } from "pages/trade/binance-trade-page/trading/terminal.helpers";
-import { PriceType } from "pages/trade/binance-trade-page/trading/place-order/place-order.types";
+import { safeGetElemFromArray, tableLoaderCreator } from "utils/helpers";
 
 export const mapPlaceOrderErrors = (error: string) => {
   switch (error) {
@@ -17,12 +24,18 @@ export const mapPlaceOrderErrors = (error: string) => {
       return "Trading is currently unavailable";
     case "Failed (-2010 Account has insufficient balance for requested action.)":
       return "Order failed: insufficient balance";
+    case "Failed (-2019 Margin is insufficient.)":
+      return "Order failed: margin is insufficient";
+    case "Failed (-2021 Order would immediately trigger.)":
+      return "Order would immediately trigger.";
+    case "Failed (-2022 ReduceOnly Order is rejected.)":
+      return "ReduceOnly Order is rejected.";
     default:
       return error;
   }
 };
 
-export const getTradeType = ({
+export const getSpotTradeType = ({
   stopPrice,
   type,
   side,
@@ -64,6 +77,49 @@ export const getTradeType = ({
   }
 };
 
+export const getFuturesTradeType = ({
+  stopPrice,
+  type,
+  side,
+  lastPrice,
+  workingType,
+  markPrice
+}: {
+  stopPrice?: PriceType;
+  workingType?: BinanceWorkingType;
+  type: OrderType;
+  side: OrderSide;
+  lastPrice: number;
+  markPrice: number;
+}): OrderType => {
+  // BUY if stop price less than currentPrice or MarkPrice ===> TakeProfit
+  // BUY if stop price larger than currentPrice or MarkPrice ===> Stop
+  // SELL if stop price less than currentPrice or MarkPrice ===> Stop
+  // SELL if stop price larger than currentPrice or MarkPrice ===> TakeProfit
+  // BUT SELL If stopPrice === currentPrice or currentMarkPrice (binance sends Stop in both cases) ===> display error
+  const determingPrice = workingType === "Mark" ? markPrice : lastPrice;
+  switch (type) {
+    case "TakeProfit":
+      switch (side) {
+        case "Buy":
+          if (+stopPrice! < determingPrice) {
+            return "TakeProfit";
+          } else {
+            return "Stop";
+          }
+        case "Sell":
+          if (+stopPrice! > determingPrice) {
+            return "TakeProfit";
+          } else {
+            return "Stop";
+          }
+      }
+      break;
+    default:
+      return type;
+  }
+};
+
 export const RANGE_MARKS = {
   0: "0%",
   25: "25%",
@@ -94,30 +150,115 @@ export const getBalance = (
 };
 
 export const getFilterValues = (exchangeInfo: ExchangeInfo, symbol: string) => {
-  const { priceFilter, lotSizeFilter, minNotionalFilter } = getSymbolFilters(
-    exchangeInfo,
-    symbol
-  );
+  const {
+    priceFilter,
+    lotSizeFilter,
+    minNotionalFilter,
+    marketLotSizeFilter
+  } = getSymbolFilters(exchangeInfo, symbol);
   return {
     minPrice: priceFilter ? priceFilter.minPrice : 0,
     maxPrice: priceFilter ? priceFilter.maxPrice : 0,
+    tickSize: priceFilter ? String(priceFilter.tickSize) : "0",
     minQuantity: lotSizeFilter ? lotSizeFilter.minQuantity : 0,
     maxQuantity: lotSizeFilter ? lotSizeFilter.maxQuantity : 0,
-    minNotional: minNotionalFilter ? minNotionalFilter.minNotional : 0
+    stepSize: lotSizeFilter ? String(lotSizeFilter.stepSize) : "0",
+    minNotional: minNotionalFilter ? minNotionalFilter.minNotional : 0,
+    marketMinQuantity: marketLotSizeFilter
+      ? marketLotSizeFilter.minQuantity
+      : 0,
+    marketMaxQuantity: marketLotSizeFilter
+      ? marketLotSizeFilter.maxQuantity
+      : 0,
+    marketStepSize: marketLotSizeFilter
+      ? String(marketLotSizeFilter.stepSize)
+      : "0"
   };
 };
 
 export const getPositionSide = ({
-  positionMode,
+  placeOrderMode,
+  side
+}: {
+  side: OrderSide;
+  placeOrderMode: FuturesPlaceOrderMode;
+}) => {
+  if (placeOrderMode === "OneWay") {
+    return "Both";
+  }
+  if (side === "Buy") {
+    if (placeOrderMode === "HedgeClose") {
+      return "Short";
+    } else {
+      return "Long";
+    }
+  } else {
+    if (placeOrderMode === "HedgeClose") {
+      return "Long";
+    } else {
+      return "Short";
+    }
+  }
+};
+
+export const getFuturesQuantityValue = ({
+  sliderBuy,
+  sliderSell,
+  percentMode,
+  quantity,
   side,
-  terminalType
+  stepSize
+}: {
+  sliderBuy: number;
+  sliderSell: number;
+  quantity: string;
+  percentMode: boolean;
+  side: OrderSide;
+  stepSize: string;
+}) => {
+  if (!percentMode) {
+    return quantity;
+  }
+
+  if (side === "Buy") {
+    return formatValueWithTick(sliderBuy, stepSize);
+  }
+
+  return formatValueWithTick(sliderSell, stepSize);
+};
+
+export const getPlaceOrderButtonLabel = ({
+  asset,
+  side,
+  terminalType,
+  placeOrderMode
 }: {
   side: OrderSide;
   terminalType: TerminalType;
-  positionMode: PositionModeType | undefined;
-}) => {
-  if (terminalType === "futures") return undefined;
-  if (positionMode === "OneWay") return "Both";
-  if (side === "Buy") return "Long";
-  else return "Short";
+  asset?: string;
+  placeOrderMode?: FuturesPlaceOrderMode;
+}): string => {
+  if (terminalType === "spot") {
+    return `${side} ${asset}`;
+  }
+
+  switch (placeOrderMode) {
+    case "OneWay":
+      if (side === "Buy") {
+        return "Buy/Long";
+      }
+      return "Sell/Short";
+    case "HedgeOpen":
+      if (side === "Buy") {
+        return "Open long";
+      }
+      return "Open short";
+    case "HedgeClose":
+      if (side === "Buy") {
+        return "Close short";
+      }
+      return "Close long";
+    default:
+      return "";
+  }
 };
