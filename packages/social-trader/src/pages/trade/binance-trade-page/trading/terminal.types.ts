@@ -1,6 +1,7 @@
 import { TableDataType } from "constants/constants";
 import {
   BinanceExecutionType,
+  BinanceFuturesAccountBalance,
   BinanceFuturesMarginChangeDirectionType,
   BinanceFuturesMarginType,
   BinanceKlineInterval,
@@ -16,7 +17,6 @@ import {
   BinanceRawCancelOrderId,
   BinanceRawExchangeInfo,
   BinanceRawFutures24HPrice,
-  BinanceRawFuturesAccountBalance,
   BinanceRawFuturesChangeMarginTypeResult,
   BinanceRawFuturesIncomeHistory,
   BinanceRawFuturesInitialLeverageChangeResult,
@@ -287,9 +287,7 @@ export interface ITerminalMethods extends IGVTerminalMethods {
     type: BinanceFuturesMarginChangeDirectionType;
     positionSide: BinancePositionSide;
   }) => Promise<BinanceRawFuturesPositionMarginResult>;
-  getFuturesBalances?: (
-    accountId: string
-  ) => Promise<BinanceRawFuturesAccountBalance[]>;
+  getFuturesBalances?: (accountId: string) => Promise<FuturesBalance[]>;
 
   // Sockets
 
@@ -576,7 +574,7 @@ export interface ExtentedBinanceRawBinanceBalance {
   marginBalance?: number;
 }
 
-export type FuturesBalance = BinanceRawFuturesAccountBalance;
+export type FuturesBalance = BinanceFuturesAccountBalance;
 
 export type Account = BinanceRawAccountInfo & {
   // positions?: Array<Position>; unused info

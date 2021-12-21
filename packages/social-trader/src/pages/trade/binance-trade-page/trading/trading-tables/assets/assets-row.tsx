@@ -1,3 +1,4 @@
+import { CurrencyItem } from "components/currency-item/currency-item";
 import TableCell from "components/table/components/table-cell";
 import TableRow from "components/table/components/table-row";
 import { DEFAULT_TICKSIZE } from "pages/trade/binance-trade-page/trading/terminal.helpers";
@@ -11,6 +12,7 @@ interface Props {
   unrealizedPnl: number;
   available: number;
   marginBalance: number;
+  logoUrl?: string;
 }
 
 const _AssetsRow: React.FC<Props> = ({
@@ -18,11 +20,14 @@ const _AssetsRow: React.FC<Props> = ({
   walletBalance,
   unrealizedPnl,
   available,
-  marginBalance
+  marginBalance,
+  logoUrl
 }) => {
   return (
     <TableRow>
-      <TableCell firstOffset={false}>{asset}</TableCell>
+      <TableCell firstOffset={false}>
+        <CurrencyItem logo={logoUrl} name={asset} small />
+      </TableCell>
       <TableCell>
         {terminalMoneyFormat({
           amount: walletBalance,

@@ -32,10 +32,12 @@ const _Assets: React.FC<Props> = ({
         walletBalance,
         available,
         marginBalance,
-        unrealizedPnl
+        unrealizedPnl,
+        logoUrl
       }: FuturesTableAsset) => (
         <AssetsRow
           key={asset}
+          logoUrl={logoUrl}
           asset={asset}
           walletBalance={walletBalance}
           available={available}
