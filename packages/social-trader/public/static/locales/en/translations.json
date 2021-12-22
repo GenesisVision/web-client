@@ -29,7 +29,7 @@
     "link-max-length": "The maximum link length is 100 characters.",
     "recovery-is-required": "Recovery code is required.",
     "resolution": "The resolution of the uploaded image is too low.",
-    "file-is-large": "The uploaded image file is too large.",
+    "file-is-large": "The uploaded image file is too large. Please crop the image",
     "min-value": "Must be greater than or equal to {{minAmount}}",
     "amount-more-than-wallet-balance": "Amount is greater than the account balance",
     "address-is-required": "An address is required.",
