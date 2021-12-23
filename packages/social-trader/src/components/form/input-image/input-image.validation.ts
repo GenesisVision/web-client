@@ -11,7 +11,7 @@ export const inputImageRules = (t: TFunction) => ({
       isNaN(data.image.size)
     )
       return;
-    if (bytesToMegaBytes(data.image.size) > 3.5)
+    if (bytesToMegaBytes(data.image.size) > 2)
       return t("validations.file-is-large");
     if (data.image.height < 300 || data.image.width < 300)
       return t("validations.resolution");
