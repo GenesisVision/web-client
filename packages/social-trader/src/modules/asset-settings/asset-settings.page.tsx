@@ -42,7 +42,9 @@ const _AssetsEditPage: React.FC<Props> = ({
   const editAssetCallback: TUpdateAssetFunc = useCallback(
     (values, resetForm) => {
       const investmentLimit =
-        values.investmentLimit !== undefined ? values.investmentLimit : null;
+        values.investmentLimit !== undefined
+          ? values.investmentLimit
+          : description.programDetails?.availableInvestmentLimit;
       const logo = getLogoValue(values, description);
       const currentValues = {
         hourProcessing:
