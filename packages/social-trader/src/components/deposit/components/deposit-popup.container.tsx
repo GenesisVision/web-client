@@ -12,7 +12,7 @@ import {
 import React, { useEffect, useMemo } from "react";
 import { useSelector } from "react-redux";
 
-export interface IDepositPopupContainerProps extends IDepositContainerProps { }
+export interface IDepositPopupContainerProps extends IDepositContainerProps {}
 
 const _DepositPopupContainer: React.FC<IDepositPopupContainerProps> = props => {
   const stateWallets: WalletData[] = useSelector(walletsSelector);

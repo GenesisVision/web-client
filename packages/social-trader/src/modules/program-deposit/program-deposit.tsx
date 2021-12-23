@@ -28,7 +28,7 @@ interface OwnProps {
   onApply?: () => void;
 }
 
-interface Props extends OwnProps, IDialogProps { }
+interface Props extends OwnProps, IDialogProps {}
 
 const _ProgramDeposit: React.FC<Props> = ({
   renderAssetPopup,
@@ -39,7 +39,7 @@ const _ProgramDeposit: React.FC<Props> = ({
   broker,
   id,
   currency,
-  onApply = () => { },
+  onApply = () => {},
   open,
   onClose,
   ownAsset
@@ -66,8 +66,8 @@ const _ProgramDeposit: React.FC<Props> = ({
   const infoMessage =
     withdrawInfo && !isProcessingRealTime
       ? `Your request will be processed at ${new Date(
-        withdrawInfo?.periodEnds
-      ).toUTCString()}`
+          withdrawInfo?.periodEnds
+        ).toUTCString()}`
       : undefined;
 
   return (

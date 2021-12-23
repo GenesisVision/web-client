@@ -69,21 +69,21 @@ const _DepositButton: React.FC<Props> = ({
         onClose={setIsDepositClosePopup}
       />
     ) : (
-        <ProgramDeposit
-          renderAssetPopup={renderAssetPopup}
-          isProcessingRealTime={isProcessingRealTime}
-          title={title}
-          onApply={onApply}
-          ownAsset={ownAsset}
-          entryFee={entryFee}
-          availableToInvest={availableToInvest}
-          broker={broker!}
-          currency={currency!}
-          open={isOpenDepositPopup}
-          id={id}
-          onClose={setIsDepositClosePopup}
-        />
-      );
+      <ProgramDeposit
+        renderAssetPopup={renderAssetPopup}
+        isProcessingRealTime={isProcessingRealTime}
+        title={title}
+        onApply={onApply}
+        ownAsset={ownAsset}
+        entryFee={entryFee}
+        availableToInvest={availableToInvest}
+        broker={broker!}
+        currency={currency!}
+        open={isOpenDepositPopup}
+        id={id}
+        onClose={setIsDepositClosePopup}
+      />
+    );
   const label = ownAsset ? t("buttons.deposit") : t("buttons.invest");
   const openPopupMethod = isAuthenticated
     ? setIsOpenDepositPopup

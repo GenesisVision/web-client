@@ -147,7 +147,10 @@ const _DepositForm: React.FC<Props> = ({
           rules={depositAmountRules({
             t,
             currency: wallet.currency,
-            availableToInvestInAsset,
+            availableToInvestInAsset: convertToCurrency(
+              availableToInvestInAsset,
+              rate
+            ),
             min,
             availableToInvest,
             availableInWallet

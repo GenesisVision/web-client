@@ -13,7 +13,7 @@ const _FundDeposit: React.FC<OwnProps & IDialogProps> = ({
   entryFee,
   availableToInvest,
   id,
-  onApply = () => { },
+  onApply = () => {},
   open,
   onClose,
   ownAsset
