@@ -1,10 +1,10 @@
 import ChartPeriod from "components/chart/chart-period/chart-period";
 import { ChartDefaultPeriod } from "components/chart/chart-period/chart-period.helpers";
-import { DetailsChartContainer } from "components/details/details-statistic-section/details-chart-section/details-chart-container";
 import {
   BalanceChartElementType,
   BalanceChartType
 } from "components/details/details-statistic-section/details.chart.types";
+import { DetailsChartContainer } from "components/details/details-statistic-section/details-chart-section/details-chart-container";
 import { LabeledValue } from "components/labeled-value/labeled-value";
 import { Row } from "components/row/row";
 import { Text } from "components/text/text";
@@ -89,7 +89,7 @@ const _BalanceChartElements: React.FC<Props> = ({
         onChange={changeCurrency}
       />
       <DetailsChartContainer data-test-id={BALANCE_CHART_TEST_ID}>
-        {chart.length &&
+        {!!chart.length &&
           renderBalanceChart({
             balanceChart: chart,
             currency: name,
