@@ -15,7 +15,8 @@
       "filled": "Filled",
       "trigger-conditions": "Trigger Conditions",
       "reduce-only": "Reduce Only",
-      "action": "Action"
+      "action": "Action",
+      "cancel-all": "Cancel All"
     }
   },
   "positions": {
