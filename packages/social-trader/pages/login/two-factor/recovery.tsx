@@ -5,7 +5,8 @@ import LoginFooter from "pages/auth/components/login-footer/login-footer";
 import RecoveryPage from "pages/auth/signin/recovery/recovery.page";
 import React from "react";
 import { compose } from "redux";
-import { HOME_ROUTE, SIGNUP_ROUTE } from "routes/app.routes";
+import { SIGNUP_ROUTE } from "routes/app.routes";
+import { OVERVIEW_ROUTE } from "routes/dashboard.routes";
 import { initializeStore } from "store";
 
 const Page: NextPage<Props> = ({ redirectFrom }) => {
@@ -15,7 +16,7 @@ const Page: NextPage<Props> = ({ redirectFrom }) => {
 Page.getInitialProps = async () => {
   return {
     namespacesRequired: ["auth"],
-    redirectFrom: HOME_ROUTE
+    redirectFrom: OVERVIEW_ROUTE
   };
 };
 
