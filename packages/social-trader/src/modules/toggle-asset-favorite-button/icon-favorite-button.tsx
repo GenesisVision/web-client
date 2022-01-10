@@ -16,7 +16,7 @@ const _IconFavoriteButton: React.FC<Props> = ({ asset, assetType }) => {
   }, []);
   const isFavourite =
     "personalDetails" in programState
-      ? programState.personalDetails.isFavorite
+      ? programState.personalDetails?.isFavorite
       : programState.isFavorite;
   return (
     <ToggleAssetFavoriteButton
