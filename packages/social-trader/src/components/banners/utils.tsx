@@ -1,5 +1,8 @@
 import { PostPreview } from "components/banners/post-preview";
-import { DEFAULT_PERIOD } from "components/chart/chart-period/chart-period.helpers";
+import {
+  DEFAULT_PERIOD,
+  getWeekPeriod
+} from "components/chart/chart-period/chart-period.helpers";
 import { getPost } from "components/conversation/conversation.service";
 import { getImageByQuality } from "components/conversation/conversation-image/conversation-image.helpers";
 import { ASSET } from "constants/constants";
@@ -188,7 +191,7 @@ async function createBanner(
 }
 
 export async function fetchFundData(id: string) {
-  const { start, end } = DEFAULT_PERIOD;
+  const { start, end } = getWeekPeriod();
   const details = await api.funds().getFundDetails(id as string);
   const percentChart = await api
     .funds()

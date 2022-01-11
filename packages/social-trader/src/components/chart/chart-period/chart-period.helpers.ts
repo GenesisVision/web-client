@@ -40,6 +40,13 @@ export const getDefaultPeriod = (): ChartDefaultPeriod => {
   };
 };
 
+export const getWeekPeriod = (): ChartDefaultPeriod => {
+  return {
+    type: ChartPeriodType.week,
+    start: getPeriodStartDate(ChartPeriodType.week)
+  };
+};
+
 export const DEFAULT_PERIOD = getDefaultPeriod();
 
 export type ChartDefaultPeriod = {
