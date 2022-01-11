@@ -60,7 +60,7 @@ const _FundsWeeklyContainer: React.FC = () => {
         <DefaultTableBlock wide>
           <FacetContainer
             initCurrency={MAPPING_INIT_CURRENCY}
-            title={t("asset-list:facets.texts.all-funds")}
+            title={t("asset-list:facets.texts.top-12")}
             id={FUNDS_WEEKLY_FACET_NAME}
             asset={FACET_ASSET.FUNDS}
             TableContainer={FundsFacetTable}
