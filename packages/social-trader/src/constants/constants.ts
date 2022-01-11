@@ -88,4 +88,4 @@ export const DECIMAL_SCALE_BIG_VALUE = 2;
 
 export const SHOW_SUCCESS_TIME = 1000;
 
-export const ORIGIN_URL = "https://genesis.vision";
+export const ORIGIN_URL = "https://blue.genesis.vision";
