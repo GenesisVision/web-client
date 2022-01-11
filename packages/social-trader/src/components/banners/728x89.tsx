@@ -1,3 +1,4 @@
+import { getLabelPeriod } from "components/chart/chart-period/chart-period.helpers";
 import React from "react";
 import { roundPercents } from "utils/formatter";
 
@@ -67,7 +68,7 @@ export const Banner: BannerComponent = props => {
       />
       <GvLogoSmall y={35} x={611} />
       <Title>{title}</Title>
-      <Label y={39}>Monthly Profit</Label>
+      <Label y={39}>{getLabelPeriod(props.period)} Profit</Label>
       <Value y={39}>{roundPercents(statistic.profitPercent)}</Value>
       <Label y={66}>Equity</Label>
       <Value y={66}>{`$ ${formatEquity(statistic.balance)}`}</Value>

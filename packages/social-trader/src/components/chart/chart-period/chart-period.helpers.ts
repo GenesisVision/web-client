@@ -40,10 +40,36 @@ export const getDefaultPeriod = (): ChartDefaultPeriod => {
   };
 };
 
+export const getWeekPeriod = (): ChartDefaultPeriod => {
+  return {
+    type: ChartPeriodType.week,
+    start: getPeriodStartDate(ChartPeriodType.week)
+  };
+};
+
 export const DEFAULT_PERIOD = getDefaultPeriod();
 
 export type ChartDefaultPeriod = {
   type: TChartPeriod;
   start?: Date;
   end?: Date;
+};
+
+export const getLabelPeriod = (period: TChartPeriod) => {
+  switch (period) {
+    case ChartPeriodType.month:
+      return "Monthly";
+    case ChartPeriodType.day:
+      return "Daily";
+    case ChartPeriodType.week:
+      return "Weekly";
+    case ChartPeriodType.quarter:
+      return "Quarterly";
+    case ChartPeriodType.year:
+      return "Yearly";
+    case ChartPeriodType.all:
+      return "All";
+    default:
+      return "";
+  }
 };
