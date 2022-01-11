@@ -1,7 +1,9 @@
 import { PostPreview } from "components/banners/post-preview";
 import {
+  ChartPeriodType,
   DEFAULT_PERIOD,
-  getWeekPeriod
+  getWeekPeriod,
+  TChartPeriod
 } from "components/chart/chart-period/chart-period.helpers";
 import { getPost } from "components/conversation/conversation.service";
 import { getImageByQuality } from "components/conversation/conversation-image/conversation-image.helpers";
@@ -58,6 +60,7 @@ export type BannerProps = {
   absoluteChart: AbsoluteProfitChart;
   balanceChart: ProgramBalanceChart | AccountBalanceChart | FundBalanceChart;
   logo?: string;
+  period: TChartPeriod;
 };
 
 export type BannerComponent = React.ComponentType<BannerProps>;
@@ -311,6 +314,15 @@ const getFetchMethod = (asset: ASSET) => {
   }
 };
 
+const getAssetPeriod = (asset: ASSET) => {
+  switch (asset) {
+    case ASSET.FUND:
+      return ChartPeriodType.week;
+    default:
+      return ChartPeriodType.month;
+  }
+};
+
 export function createBannerApi(
   Banner: BannerComponent,
   asset: ASSET,
@@ -333,6 +345,7 @@ export function createBannerApi(
           details={details}
           absoluteChart={absoluteChart}
           balanceChart={balanceChart}
+          period={getAssetPeriod(asset)}
         />,
         logoOptions
           ? {

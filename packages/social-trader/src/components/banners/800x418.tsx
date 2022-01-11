@@ -1,3 +1,4 @@
+import { getLabelPeriod } from "components/chart/chart-period/chart-period.helpers";
 import React from "react";
 import NumberFormat from "react-number-format";
 import { formatCurrencyValue, formatValue } from "utils/formatter";
@@ -82,7 +83,7 @@ export const Banner: BannerComponent = (props: BannerProps) => {
       />
       <GvLogoBig x={316} y={364} />
       <Title>{props.details.publicInfo.title}</Title>
-      <Label y={115}>Monthly Profit</Label>
+      <Label y={115}>{getLabelPeriod(props.period)} Profit</Label>
       <Value y={115}>
         <NumberFormat
           value={formatCurrencyValue(profit, "USD")}
@@ -92,7 +93,7 @@ export const Banner: BannerComponent = (props: BannerProps) => {
           renderText={(value: string) => <tspan>{value}</tspan>}
         />
       </Value>
-      <Label y={147}>Monthly Profit, %</Label>
+      <Label y={147}>{getLabelPeriod(props.period)} Profit, %</Label>
       <PercentValue value={profitPercent}>
         {formatValue(profitPercent, 2)}%
       </PercentValue>
