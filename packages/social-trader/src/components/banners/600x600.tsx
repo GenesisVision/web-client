@@ -1,3 +1,4 @@
+import { getLabelPeriod } from "components/chart/chart-period/chart-period.helpers";
 import React from "react";
 import { formatCurrencyValue, formatPercent } from "utils/formatter";
 
@@ -68,9 +69,9 @@ export const Banner: BannerComponent = (props: BannerProps) => {
       />
       <GvLogoBig x={216} y={531} />
       <Title>{props.details.publicInfo.title}</Title>
-      <Label y={130}>Monthly Profit</Label>
+      <Label y={130}>{getLabelPeriod(props.period)} Profit</Label>
       <Value y={130}>{`$ ${formatCurrencyValue(profit, "USD")}`}</Value>
-      <Label y={180}>Monthly Profit, %</Label>
+      <Label y={180}>{getLabelPeriod(props.period)} Profit, %</Label>
       <Value y={180}>{`${formatPercent(statistic.profitPercent)}%`}</Value>
       <Label y={230}>Equity</Label>
       <Value y={230}>{`$ ${formatEquity(statistic.balance)}`}</Value>
