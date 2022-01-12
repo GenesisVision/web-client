@@ -1,5 +1,3 @@
-import authActions from "actions/auth-actions";
-import { getHeader } from "components/header/services/header.service";
 import { Push } from "components/link/link";
 import useApiRequest from "hooks/api-request.hook";
 import useErrorMessage from "hooks/error-message.hook";
@@ -12,14 +10,12 @@ import {
 } from "pages/auth/signin/signin.constants";
 import * as React from "react";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 import { LOGIN_ROUTE } from "routes/app.routes";
 import authService from "services/auth-service";
-import { setAccountCurrency } from "utils/account-currency";
 import { ResponseError } from "utils/handle-error-response";
-import { ReduxDispatch } from "utils/types";
 
 import CaptchaContainer, { ValuesType } from "../captcha-container";
+import { useAuthMiddleware } from "./hooks/auth-middleware.hook";
 import {
   CODE_TYPE,
   login,
@@ -46,23 +42,12 @@ const _SignInContainer: React.FC<Props> = ({
   const { storeThreeFactorState } = useThreeFactorState();
   const [disable, setDisable] = useIsOpen();
   const { errorMessage, setErrorMessage } = useErrorMessage();
-  const dispatch = useDispatch<ReduxDispatch>();
-  const storeTokenMiddleware = (value: string) => {
-    if (!value) return;
-    authService.storeToken(value);
-    dispatch(authActions.updateTokenAction(true));
-    Push(redirectFrom);
-  };
-  const saveAccountCurrencyMiddleware = (res: any) => {
-    if (res)
-      getHeader().then(({ platformCurrency }) => {
-        setAccountCurrency(platformCurrency);
-      });
-  };
-  const clearStorageMiddleware = () => {
-    if (typeof window !== "undefined" && typeof localStorage !== "undefined")
-      localStorage.clear();
-  };
+
+  const {
+    clearStorageMiddleware,
+    saveAccountCurrencyMiddleware,
+    storeTokenMiddleware
+  } = useAuthMiddleware();
 
   const { email, password = "" } = getTwoFactorState();
 

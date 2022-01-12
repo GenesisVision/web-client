@@ -1,76 +1,71 @@
-import authActions from "actions/auth-actions";
+import { Web3Provider } from "@ethersproject/providers";
+import { useWeb3React } from "@web3-react/core";
 import { Button } from "components/button/button";
-import { getHeader } from "components/header/services/header.service";
-import { Push } from "components/link/link";
+import { SignMessage } from "gv-api-web";
+import { useAlerts } from "hooks/alert.hook";
 import useApiRequest from "hooks/api-request.hook";
 import { useTranslation } from "i18n";
-import { metamaskSign } from "modules/bsc-investing/bsc-investing.service";
+import { useMetamaskConnect } from "modules/web3/hooks/metamask-connect";
+import { withWeb3 } from "modules/web3/with-web3";
 import React from "react";
-import { useDispatch } from "react-redux";
-import { DASHBOARD_ROUTE } from "routes/dashboard.routes";
-import authService from "services/auth-service";
-import { setAccountCurrency } from "utils/account-currency";
 
+import { useAuthMiddleware } from "../hooks/auth-middleware.hook";
 import {
   getMetamaskMessageForLogin,
-  loginWithMetamask
+  loginWithMetamask as loginWithMetamaskRequest
 } from "../signin.service";
 
-interface Props {}
-
-const _MetamaskLoginButton: React.FC<Props> = () => {
+const _MetamaskLoginButton: React.FC = () => {
   const [t] = useTranslation();
+  const { active, library, account } = useWeb3React<Web3Provider>();
+  const { isPending, connectMetamask } = useMetamaskConnect();
+  const { errorAlert } = useAlerts();
 
-  const dispatch = useDispatch();
-
-  const clearStorageMiddleware = () => {
-    if (typeof window !== "undefined" && typeof localStorage !== "undefined")
-      localStorage.clear();
-  };
-  const saveAccountCurrencyMiddleware = (res: any) => {
-    if (res)
-      getHeader().then(({ platformCurrency }) => {
-        setAccountCurrency(platformCurrency);
-      });
-  };
-  const storeTokenMiddleware = (value: string) => {
-    if (!value) return;
-    authService.storeToken(value);
-    dispatch(authActions.updateTokenAction(true));
-    Push(DASHBOARD_ROUTE);
+  const metamaskSign = ({ message, id }: SignMessage) => {
+    library!
+      .getSigner(account!)
+      .signMessage(message)
+      .then(signature => {
+        loginWithMetamask({
+          signature,
+          messageId: id,
+          address: account
+        });
+      })
+      .catch(error => errorAlert(error.message));
   };
 
-  const { sendRequest: fetchMetamaskMessage } = useApiRequest({
-    middleware: [
-      data =>
-        metamaskSign(data.message).then(res => {
-          sendRequest({
-            signature: res.signature,
-            messageId: data.id,
-            address: res.accountAddress
-          }).catch(err => console.log(err));
-        })
-    ],
+  const {
+    clearStorageMiddleware,
+    saveAccountCurrencyMiddleware,
+    storeTokenMiddleware
+  } = useAuthMiddleware();
+
+  const { sendRequest: getMetamaskMessage } = useApiRequest({
+    middleware: [metamaskSign],
     request: getMetamaskMessageForLogin
   });
 
-  const { sendRequest } = useApiRequest({
+  const { sendRequest: loginWithMetamask } = useApiRequest({
     middleware: [
       clearStorageMiddleware,
       storeTokenMiddleware,
       saveAccountCurrencyMiddleware
     ],
-    request: loginWithMetamask
+    request: loginWithMetamaskRequest
   });
 
   return (
-    <>
-      <Button noPadding variant="text" onClick={fetchMetamaskMessage}>
-        {t("auth:login.metamask.button")}
-      </Button>
-    </>
+    <Button
+      noPadding
+      variant="text"
+      onClick={active ? getMetamaskMessage : connectMetamask}
+      disabled={isPending}
+    >
+      {t("auth:login.metamask.button")}
+    </Button>
   );
 };
 
-const MetamaskLoginButton = React.memo(_MetamaskLoginButton);
+const MetamaskLoginButton = withWeb3(React.memo(_MetamaskLoginButton));
 export default MetamaskLoginButton;

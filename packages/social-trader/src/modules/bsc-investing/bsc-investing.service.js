@@ -1,5 +1,5 @@
 // import Web3 from "web3";
-import * as contractAbi from "./GenesisVisionGateway.json";
+import * as contractAbi from "modules/web3/GenesisVisionGateway.json";
 
 // for BNB
 export const smartContractAddress =
@@ -8,13 +8,6 @@ export const smartContractAddress =
 // for xDai
 export const smartContractAddressDai =
   "0x3b914f1EEb3b468839632De7fa5313632bb0fab1";
-
-// class BSC {
-//   constructor(smartContractAddress, gatewayContract) {
-//     this.address = smartContractAddress;
-//     this.contract = gatewayContract;
-//   }
-// }
 
 const initWeb3 = async address => {
   const { ethereum } = window;
@@ -52,16 +45,4 @@ export const investBSC = async ({ assetIndex, amount, contractAddress }) => {
   const selectedAccount = accounts[0];
 
   return { assetIndex, newAmount, selectedAccount, contract };
-};
-
-export const metamaskSign = async nonce => {
-  await initWeb3(smartContractAddress);
-  // const publicAddress = window.web3.eth.coinbase.toLowerCase();
-  const accountAddresses = await window.web3.eth.getAccounts();
-
-  const accountAddress = accountAddresses[0];
-
-  const signature = await window.web3.eth.personal.sign(nonce, accountAddress);
-
-  return { signature, accountAddress };
 };
