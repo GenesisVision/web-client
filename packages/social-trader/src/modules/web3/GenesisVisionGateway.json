@@ -7230,12 +7230,8 @@
   "ast": {
     "absolutePath": "/C/projects/genesis-vision-core/contracts/gateway/GenesisVisionGateway.sol",
     "exportedSymbols": {
-      "AdminOperatorAccess": [
-        2842
-      ],
-      "GenesisVisionGateway": [
-        2706
-      ]
+      "AdminOperatorAccess": [2842],
+      "GenesisVisionGateway": [2706]
     },
     "id": 2707,
     "license": "Apache-2.0",
@@ -7243,12 +7239,7 @@
     "nodes": [
       {
         "id": 2272,
-        "literals": [
-          "solidity",
-          "^",
-          "0.8",
-          ".0"
-        ],
+        "literals": ["solidity", "^", "0.8", ".0"],
         "nodeType": "PragmaDirective",
         "src": "661:23:20"
       },
@@ -7279,16 +7270,11 @@
             "src": "765:19:20"
           }
         ],
-        "contractDependencies": [
-          2842
-        ],
+        "contractDependencies": [2842],
         "contractKind": "contract",
         "fullyImplemented": true,
         "id": 2706,
-        "linearizedBaseContracts": [
-          2706,
-          2842
-        ],
+        "linearizedBaseContracts": [2706, 2842],
         "name": "GenesisVisionGateway",
         "nodeType": "ContractDefinition",
         "nodes": [
@@ -8382,9 +8368,7 @@
               "src": "2037:182:20",
               "statements": [
                 {
-                  "assignments": [
-                    2383
-                  ],
+                  "assignments": [2383],
                   "declarations": [
                     {
                       "constant": false,
@@ -8936,9 +8920,7 @@
               "src": "2428:324:20",
               "statements": [
                 {
-                  "assignments": [
-                    2430
-                  ],
+                  "assignments": [2430],
                   "declarations": [
                     {
                       "constant": false,
@@ -9104,12 +9086,7 @@
                     "isPure": false,
                     "kind": "structConstructorCall",
                     "lValueRequested": false,
-                    "names": [
-                      "assetId",
-                      "addr",
-                      "amount",
-                      "status"
-                    ],
+                    "names": ["assetId", "addr", "amount", "status"],
                     "nodeType": "FunctionCall",
                     "src": "2470:104:20",
                     "tryCall": false,
@@ -9411,9 +9388,7 @@
               "src": "2824:347:20",
               "statements": [
                 {
-                  "assignments": [
-                    2469
-                  ],
+                  "assignments": [2469],
                   "declarations": [
                     {
                       "constant": false,
@@ -9565,12 +9540,7 @@
                     "isPure": false,
                     "kind": "structConstructorCall",
                     "lValueRequested": false,
-                    "names": [
-                      "assetId",
-                      "addr",
-                      "percent",
-                      "status"
-                    ],
+                    "names": ["assetId", "addr", "percent", "status"],
                     "nodeType": "FunctionCall",
                     "src": "2870:106:20",
                     "tryCall": false,
@@ -10159,10 +10129,7 @@
                       "id": 2521,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "3392:7:20",
                       "typeDescriptions": {
@@ -10515,10 +10482,7 @@
                       "id": 2547,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "3566:7:20",
                       "typeDescriptions": {
@@ -10649,10 +10613,7 @@
                       "id": 2557,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "3617:7:20",
                       "typeDescriptions": {
@@ -10929,10 +10890,7 @@
                       "id": 2580,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "3804:7:20",
                       "typeDescriptions": {
@@ -11322,10 +11280,7 @@
                       "id": 2612,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "4103:7:20",
                       "typeDescriptions": {
@@ -11715,10 +11670,7 @@
                       "id": 2646,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "4421:7:20",
                       "typeDescriptions": {
@@ -12144,10 +12096,7 @@
                       "id": 2679,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "4700:7:20",
                       "typeDescriptions": {
@@ -12446,12 +12395,8 @@
   "legacyAST": {
     "absolutePath": "/C/projects/genesis-vision-core/contracts/gateway/GenesisVisionGateway.sol",
     "exportedSymbols": {
-      "AdminOperatorAccess": [
-        2842
-      ],
-      "GenesisVisionGateway": [
-        2706
-      ]
+      "AdminOperatorAccess": [2842],
+      "GenesisVisionGateway": [2706]
     },
     "id": 2707,
     "license": "Apache-2.0",
@@ -12459,12 +12404,7 @@
     "nodes": [
       {
         "id": 2272,
-        "literals": [
-          "solidity",
-          "^",
-          "0.8",
-          ".0"
-        ],
+        "literals": ["solidity", "^", "0.8", ".0"],
         "nodeType": "PragmaDirective",
         "src": "661:23:20"
       },
@@ -12495,16 +12435,11 @@
             "src": "765:19:20"
           }
         ],
-        "contractDependencies": [
-          2842
-        ],
+        "contractDependencies": [2842],
         "contractKind": "contract",
         "fullyImplemented": true,
         "id": 2706,
-        "linearizedBaseContracts": [
-          2706,
-          2842
-        ],
+        "linearizedBaseContracts": [2706, 2842],
         "name": "GenesisVisionGateway",
         "nodeType": "ContractDefinition",
         "nodes": [
@@ -13598,9 +13533,7 @@
               "src": "2037:182:20",
               "statements": [
                 {
-                  "assignments": [
-                    2383
-                  ],
+                  "assignments": [2383],
                   "declarations": [
                     {
                       "constant": false,
@@ -14152,9 +14085,7 @@
               "src": "2428:324:20",
               "statements": [
                 {
-                  "assignments": [
-                    2430
-                  ],
+                  "assignments": [2430],
                   "declarations": [
                     {
                       "constant": false,
@@ -14320,12 +14251,7 @@
                     "isPure": false,
                     "kind": "structConstructorCall",
                     "lValueRequested": false,
-                    "names": [
-                      "assetId",
-                      "addr",
-                      "amount",
-                      "status"
-                    ],
+                    "names": ["assetId", "addr", "amount", "status"],
                     "nodeType": "FunctionCall",
                     "src": "2470:104:20",
                     "tryCall": false,
@@ -14627,9 +14553,7 @@
               "src": "2824:347:20",
               "statements": [
                 {
-                  "assignments": [
-                    2469
-                  ],
+                  "assignments": [2469],
                   "declarations": [
                     {
                       "constant": false,
@@ -14781,12 +14705,7 @@
                     "isPure": false,
                     "kind": "structConstructorCall",
                     "lValueRequested": false,
-                    "names": [
-                      "assetId",
-                      "addr",
-                      "percent",
-                      "status"
-                    ],
+                    "names": ["assetId", "addr", "percent", "status"],
                     "nodeType": "FunctionCall",
                     "src": "2870:106:20",
                     "tryCall": false,
@@ -15375,10 +15294,7 @@
                       "id": 2521,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "3392:7:20",
                       "typeDescriptions": {
@@ -15731,10 +15647,7 @@
                       "id": 2547,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "3566:7:20",
                       "typeDescriptions": {
@@ -15865,10 +15778,7 @@
                       "id": 2557,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "3617:7:20",
                       "typeDescriptions": {
@@ -16145,10 +16055,7 @@
                       "id": 2580,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "3804:7:20",
                       "typeDescriptions": {
@@ -16538,10 +16445,7 @@
                       "id": 2612,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "4103:7:20",
                       "typeDescriptions": {
@@ -16931,10 +16835,7 @@
                       "id": 2646,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "4421:7:20",
                       "typeDescriptions": {
@@ -17360,10 +17261,7 @@
                       "id": 2679,
                       "name": "require",
                       "nodeType": "Identifier",
-                      "overloadedDeclarations": [
-                        4294967278,
-                        4294967278
-                      ],
+                      "overloadedDeclarations": [4294967278, 4294967278],
                       "referencedDeclaration": 4294967278,
                       "src": "4700:7:20",
                       "typeDescriptions": {
