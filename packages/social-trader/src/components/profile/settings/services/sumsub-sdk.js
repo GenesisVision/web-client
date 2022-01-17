@@ -14,16 +14,13 @@ import { api } from "services/api-client/swagger-custom-client";
 export const launchWebSdk = params => {
   const {
     userId,
-    apiUrl,
-    flowName,
     accessToken,
     applicantEmail,
     applicantPhone,
     customI18nMessages
   } = params;
   let snsWebSdkInstance = snsWebSdk
-    .Builder(apiUrl, flowName)
-    .withAccessToken(accessToken, async newAccessTokenCallback => {
+    .init(accessToken, async newAccessTokenCallback => {
       // Access token expired
       // get a new one and pass it to the callback to re-initiate the WebSDK
       let newAccessToken = await api
