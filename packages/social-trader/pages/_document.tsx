@@ -58,7 +58,6 @@ class MyDocument extends Document<{ pathname: string }> {
           <link rel="icon" sizes="192x192" href="/icon.png" />
           <link rel="apple-touch-icon" href="/icon.png" />
           <link rel="shortcut icon" href="/favicon.ico" />
-          <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
           <meta name="theme-color" content="#131e26" />
           <script
             dangerouslySetInnerHTML={{

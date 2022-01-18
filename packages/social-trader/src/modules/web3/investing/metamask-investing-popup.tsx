@@ -1,18 +1,21 @@
 import Dialog, { IDialogProps } from "components/dialog/dialog";
 import { DialogBottom } from "components/dialog/dialog-bottom";
 import { DialogTop } from "components/dialog/dialog-top";
+import dynamic from "next/dynamic";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { CurrencyEnum } from "utils/types";
 
-import BSCInvestingForm from "./bsc-investing-form";
+const MetamaskInvestingForm = dynamic(
+  () => import("./metamask-investing-form")
+);
 
 interface Props extends IDialogProps {
   index: number;
   currency: CurrencyEnum;
 }
 
-const _BSCInvestingPopup: React.FC<Props> = ({
+const _MetamaskInvestingPopup: React.FC<Props> = ({
   open,
   onClose,
   index,
@@ -25,16 +28,20 @@ const _BSCInvestingPopup: React.FC<Props> = ({
       <DialogTop
         title={
           currency === "BNB"
-            ? t("asset-details:bsc-integration.bnb.popup-title")
-            : t("asset-details:bsc-integration.xDai.popup-title")
+            ? t("asset-details:metamask-integration.bnb.popup-title")
+            : t("asset-details:metamask-integration.xDai.popup-title")
         }
       />
       <DialogBottom>
-        <BSCInvestingForm currency={currency} index={index} onClose={onClose} />
+        <MetamaskInvestingForm
+          currency={currency}
+          index={index}
+          onClose={onClose}
+        />
       </DialogBottom>
     </Dialog>
   );
 };
 
-const BSCInvestingPopup = React.memo(_BSCInvestingPopup);
-export default BSCInvestingPopup;
+const MetamaskInvestingPopup = React.memo(_MetamaskInvestingPopup);
+export default MetamaskInvestingPopup;

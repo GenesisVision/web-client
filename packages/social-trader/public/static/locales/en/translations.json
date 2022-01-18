@@ -144,6 +144,7 @@
     "reset": "Reset",
     "invest-bsc": "Invest via BSC",
     "invest-xDai": "Invest via xDai",
+    "connect": "Connect",
     "tooltips": {
       "create-account": "Create a trading account and get access to a variety of instruments (depending on your desired broker.) Trade Forex, Crypto, CFD, Stocks, Metals, Indices and Commodities.",
       "create-fund-1": "Diversify your capital across hundreds of cryptocurrencies.",
@@ -371,7 +372,7 @@
     "investment-amount": "Investment amount",
     "disclaimer": "After clicking the \"Confirm\" button, the invested GVT will be immediately converted to {{currency}}. The transfer of {{currency}} over to the account manager will only occur at the end of the current reporting period.",
     "confirm": "Confirm",
-    "successful-transaction": "Transaction sent successfully",
+    "successful-transaction": "Transaction sent successfully.",
     "program": {
       "available-to-invest": "Available to invest in program",
       "success-alert-message": "Successful request for investment in the program."
@@ -507,5 +508,8 @@
     "withdrawing": "Withdrawing",
     "wallet": "Wallet",
     "success-alert-message": "Withdrawal request sent successfully."
+  },
+  "metamask": {
+    "no-provider-error": "Please install metamask extension to start using this feature."
   }
 }
