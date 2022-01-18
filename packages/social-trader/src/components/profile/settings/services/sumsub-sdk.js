@@ -19,8 +19,12 @@ export const launchWebSdk = params => {
     applicantPhone,
     customI18nMessages
   } = params;
-  let snsWebSdkInstance = snsWebSdk
-    .init(accessToken, async newAccessTokenCallback => {
+  const env = process.env.NODE_ENV;
+  const hostname = process.env.HOSTNAME;
+  let snsWebSdkInstanceInitTest;
+  let snsWebSdkInstanceInit = snsWebSdk.init(
+    accessToken,
+    async newAccessTokenCallback => {
       // Access token expired
       // get a new one and pass it to the callback to re-initiate the WebSDK
       let newAccessToken = await api
@@ -28,8 +32,14 @@ export const launchWebSdk = params => {
         .getWebVerificationToken()
         .then(({ accessToken }) => accessToken); // get a new token from your backend
       newAccessTokenCallback(newAccessToken);
-    })
-    .onTestEnv()
+    }
+  );
+  if (env === "production" && hostname === "https://genesis.vision") {
+    snsWebSdkInstanceInitTest = snsWebSdkInstanceInit;
+  } else {
+    snsWebSdkInstanceInitTest = snsWebSdkInstanceInit.onTestEnv();
+  }
+  let snsWebSdkInstance = snsWebSdkInstanceInitTest
     .withConf({
       userId,
       lang: "en",
