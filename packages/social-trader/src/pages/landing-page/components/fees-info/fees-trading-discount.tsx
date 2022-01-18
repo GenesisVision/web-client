@@ -16,7 +16,23 @@ const _FeesTradingDiscountInfo: React.FC<{
         [styles["fees-info__notes--withoutOffset"]]: withoutOffset
       })}
     >
-      <p>{t("fees:text-3")}</p>
+      <p>{t("fees:text-3.text")}</p>
+      <ul
+        className={clsx(styles["fees-info__list-notes"], {
+          [styles["fees-info__list-notes--dark"]]: dark
+        })}
+      >
+        <li className={styles["fees-info__note-item"]}>
+          {t("fees:text-3.list-1")}
+        </li>
+        <li className={styles["fees-info__note-item"]}>
+          {t("fees:text-3.list-2")}
+        </li>
+        <li className={styles["fees-info__note-item"]}>
+          {t("fees:text-3.list-3")}
+        </li>
+      </ul>
+      <br />
       <h3>{t("fees:trading-discount")}</h3>
       <ul
         className={clsx(styles["fees-info__list-notes"], {

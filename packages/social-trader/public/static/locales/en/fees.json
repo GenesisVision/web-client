@@ -87,7 +87,12 @@
   "list-3-item-1": "Regular: Trading fee rate depends on Binance. All information you can find",
   "list-3-link": "here.",
   "list-3-item-2": "GVT holders: 5 - 25% discount depending on the amount of GVT stored in the wallet.",
-  "text-3": "Genesis Vision Token holders who select Genesis Markets for the trading will receive discounted transaction fees.",
+  "text-3": {
+    "text": "Genesis Vision Token holders will receive discounts on transaction fees for:",
+    "list-1": "using Genesis Markets for trading.",
+    "list-2": "wallet conversions.",
+    "list-3": "buying and selling of Assets."
+  },
   "trading-discount": "To be eligible for a trading discount",
   "list-4": "There must be more than 1 GVT stored in the wallet",
   "conditions": "Conditions for obtaining discounts",
