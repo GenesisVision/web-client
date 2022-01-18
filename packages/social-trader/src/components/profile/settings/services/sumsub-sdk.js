@@ -29,16 +29,13 @@ export const launchWebSdk = params => {
         .then(({ accessToken }) => accessToken); // get a new token from your backend
       newAccessTokenCallback(newAccessToken);
     })
+    .onTestEnv()
     .withConf({
       userId,
       lang: "en",
       email: applicantEmail,
       phone: applicantPhone,
       i18n: customI18nMessages,
-      onMessage: (type, payload) => {
-        // see below what kind of messages the WebSDK generates
-        console.log("WebSDK onMessage", type, payload);
-      },
       clientId: "Genesis",
       excludedCountries: ["USA"],
       applicantDataPage: {
@@ -72,10 +69,14 @@ export const launchWebSdk = params => {
         // URL to css file in case you need change it dynamically from the code
         // the similar setting at Applicant flow will rewrite customCss
         // you may also use to pass string with plain styles `customCssStr:`
-      },
-      onError: error => {
-        console.error("WebSDK onError", error);
       }
+    })
+    .on("onError", error => {
+      console.error("WebSDK onError", error);
+    })
+    .onMessage((type, payload) => {
+      // see below what kind of messages the WebSDK generates
+      console.log("WebSDK onMessage", type, payload);
     })
     .build();
 
