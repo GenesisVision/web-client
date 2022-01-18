@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 import { metamaskConnector } from "../web3.helpers";
 
-// hook from documentation
+// hook from documentation example
 export function useEagerConnect() {
   const { activate, active } = useWeb3React();
 

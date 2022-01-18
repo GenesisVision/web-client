@@ -11,13 +11,16 @@ import {
   ProgramDetailsFull,
   ProgramFollowDetailsFullTradingAccountDetails
 } from "gv-api-web";
-import BSCInvestingButton from "modules/bsc-investing/bsc-investing.button";
 import DepositButton from "modules/deposit/deposit.button";
 import NotifyButton from "modules/notity-button/notify-button";
+import MetamaskInvestingButton from "modules/web3/investing/metamask-investing.button";
 import * as React from "react";
 import { useSelector } from "react-redux";
 import { isAuthenticatedSelector } from "reducers/auth-reducer";
-import { platformDataSelector } from "reducers/platform-reducer";
+import {
+  isInvestingBscEnabledSelector,
+  isInvestingXDaiEnabledSelector
+} from "reducers/platform-reducer";
 import { CurrencyEnum } from "utils/types";
 
 interface Props {
@@ -50,7 +53,8 @@ const _InvestmentProgramControls: React.FC<Props> = ({
   levelsParameters
 }) => {
   const isAuthenticated = useSelector(isAuthenticatedSelector);
-  const platformData = useSelector(platformDataSelector);
+  const isInvestingBscEnabled = useSelector(isInvestingBscEnabledSelector);
+  const isInvestingXDaiEnabled = useSelector(isInvestingXDaiEnabledSelector);
   const canInvest = isAuthenticated
     ? !!programDetails.personalDetails &&
       programDetails.personalDetails.canInvest
@@ -102,14 +106,14 @@ const _InvestmentProgramControls: React.FC<Props> = ({
               />
             )}
           </RowItem>
-          {platformData?.assetInfo.anonymousInfo.isInvestingBscEnabled && (
+          {isInvestingBscEnabled && canInvest && (
             <RowItem bottomOffset>
-              <BSCInvestingButton currency={"BNB"} assetIndex={index} />
+              <MetamaskInvestingButton currency={"BNB"} assetIndex={index} />
             </RowItem>
           )}
-          {platformData?.assetInfo.anonymousInfo.isInvestingXDaiEnabled && (
+          {isInvestingXDaiEnabled && canInvest && (
             <RowItem bottomOffset>
-              <BSCInvestingButton currency={"DAI"} assetIndex={index} />
+              <MetamaskInvestingButton currency={"DAI"} assetIndex={index} />
             </RowItem>
           )}
         </DetailsStatisticContainer>

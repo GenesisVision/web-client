@@ -4,8 +4,8 @@ import { Row } from "components/row/row";
 import { RowItem } from "components/row-item/row-item";
 import { ASSET } from "constants/constants";
 import { FundDetailsFull } from "gv-api-web";
-import BSCInvestingButton from "modules/bsc-investing/bsc-investing.button";
 import DepositButton from "modules/deposit/deposit.button";
+import MetamaskInvestingButton from "modules/web3/investing/metamask-investing.button";
 import InvestmentFundInfo from "pages/invest/funds/fund-details/fund-details-description/investment-fund-info";
 import * as React from "react";
 import { useSelector } from "react-redux";
@@ -51,7 +51,7 @@ const _InvestmentFundControls: React.FC<Props> = ({
           </RowItem>
           {isInvestingBscEnabled && canInvest && (
             <RowItem bottomOffset>
-              <BSCInvestingButton
+              <MetamaskInvestingButton
                 currency={"BNB"}
                 assetIndex={fundDescription.publicInfo.index}
               />
@@ -59,7 +59,7 @@ const _InvestmentFundControls: React.FC<Props> = ({
           )}
           {isInvestingXDaiEnabled && canInvest && (
             <RowItem bottomOffset>
-              <BSCInvestingButton
+              <MetamaskInvestingButton
                 currency={"DAI"}
                 assetIndex={fundDescription.publicInfo.index}
               />
