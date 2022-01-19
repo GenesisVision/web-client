@@ -26,10 +26,12 @@ export const metamaskInvest = async ({
     const signer = provider.getSigner(account);
     const formattedAmount = parseEther(amount).toString();
     const contract = new Contract(contractAddress, contractJson.abi, signer);
-    await contract.investRequest(assetIndex, {
+    const tx = await contract.investRequest(assetIndex, {
       value: formattedAmount
     });
+    console.log(tx);
   } catch (e) {
+    console.log(e);
     if (e.data) {
       await Promise.reject({ errorMessage: e.data.message, code: e.data.code });
     }
