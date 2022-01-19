@@ -56,6 +56,7 @@ export interface IAssetsTransferFormProps {
   walletId: string;
   sourceType: InternalTransferRequestType;
   destinationType: InternalTransferRequestType;
+  genesisMarketsDiscountPercent: number;
 }
 
 export interface AssetsTransferFormValues {
