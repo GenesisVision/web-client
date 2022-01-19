@@ -92,3 +92,12 @@ button.back:active {
     border-color: #2ebd85;
     background: #2ebd85;
 }
+
+.document-status,
+.document-status h1,
+.document-status h2,
+.document-status h3,
+.document-status h4,
+.document-status p {
+    color: #131e26;
+}
