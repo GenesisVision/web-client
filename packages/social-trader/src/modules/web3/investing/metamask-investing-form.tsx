@@ -70,6 +70,7 @@ const _MetamaskInvestingForm: React.FC<Props> = ({
         label={t("deposit-asset.amount")}
         name={METAMASK_INVESTING_FORM_FIELDS.AMOUNT}
         triggerRules={active}
+        showError={false}
         rules={
           active
             ? minMaxNumberRules({
