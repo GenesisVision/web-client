@@ -13,6 +13,7 @@ import { RowItem } from "components/row-item/row-item";
 import { SubmitButton } from "components/submit-button/submit-button";
 import { TooltipLabel } from "components/tooltip-label/tooltip-label";
 import { WalletItemType } from "components/wallet-select/wallet-select";
+import { ASSET_COMMISSION } from "constants/constants";
 import { useGetRate } from "hooks/get-rate.hook";
 import {
   amountRules,
@@ -41,7 +42,8 @@ const _AssetsBuyForm: React.FC<IAssetsTransferFormProps> = ({
   destinationType,
   wallets,
   asset,
-  errorMessage
+  errorMessage,
+  genesisMarketsDiscountPercent
 }) => {
   const [t] = useTranslation();
 
@@ -106,9 +108,17 @@ const _AssetsBuyForm: React.FC<IAssetsTransferFormProps> = ({
   const amountInAssetCurrency = +amount * rate;
 
   const commission = useMemo(() => {
-    const ratio = selectedItem.currency === asset.asset ? 0 : 0.001;
+    const ratio =
+      selectedItem.currency === asset.asset
+        ? 0
+        : ASSET_COMMISSION * (1 - genesisMarketsDiscountPercent / 100);
     return amountInAssetCurrency * ratio;
-  }, [amountInAssetCurrency, selectedItem.currency, asset.asset]);
+  }, [
+    amountInAssetCurrency,
+    selectedItem.currency,
+    asset.asset,
+    genesisMarketsDiscountPercent
+  ]);
 
   return (
     <HookForm form={form} onSubmit={setValuesFromPropsAndSubmit}>

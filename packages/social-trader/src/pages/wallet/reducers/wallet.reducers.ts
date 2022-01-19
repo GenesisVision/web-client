@@ -34,6 +34,11 @@ export const grandTotalSelector = apiFieldSelector(
   fieldSelector(state => state.grandTotal)
 );
 
+export const discountPercentSelector = apiFieldSelector(
+  walletSelector,
+  fieldSelector(state => state.genesisMarketsDiscountPercent)
+);
+
 export type WalletsAvailableStateType = Array<WalletBaseData>;
 
 export const walletsAvailableStateSelector = apiSelector<

@@ -5,7 +5,7 @@ import AssetsBuyForm from "modules/assets-table/components/asset-transfer/assets
 import AssetsSellForm from "modules/assets-table/components/asset-transfer/assets-sell-form";
 import { transferCoins } from "modules/assets-table/services/assets-table.service";
 import { updateWalletTimestampAction } from "pages/wallet/actions/wallet.actions";
-import { walletsSelector } from "pages/wallet/reducers/wallet.reducers";
+import { discountPercentSelector, walletsSelector } from "pages/wallet/reducers/wallet.reducers";
 import { fetchWallets } from "pages/wallet/services/wallet.services";
 import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -30,6 +30,7 @@ const _AssetsTransferContainer: React.FC<AssetsTransferProps> = ({
 }) => {
   const dispatch = useDispatch();
   const wallets = useSelector(walletsSelector);
+  const GMDiscountPercent = useSelector(discountPercentSelector);
   const currency = useAccountCurrency();
   const updateWalletMiddleware = () => {
     onApply && onApply();
@@ -59,6 +60,7 @@ const _AssetsTransferContainer: React.FC<AssetsTransferProps> = ({
       errorMessage={errorMessage}
       onSubmit={handleSubmit}
       asset={currentAsset}
+      genesisMarketsDiscountPercent={GMDiscountPercent}
     />
   ) : (
     <AssetsBuyForm
@@ -71,6 +73,7 @@ const _AssetsTransferContainer: React.FC<AssetsTransferProps> = ({
       errorMessage={errorMessage}
       onSubmit={handleSubmit}
       asset={currentAsset}
+      genesisMarketsDiscountPercent={GMDiscountPercent}
     />
   );
 };
