@@ -14,16 +14,17 @@ import { api } from "services/api-client/swagger-custom-client";
 export const launchWebSdk = params => {
   const {
     userId,
-    apiUrl,
-    flowName,
     accessToken,
     applicantEmail,
     applicantPhone,
     customI18nMessages
   } = params;
-  let snsWebSdkInstance = snsWebSdk
-    .Builder(apiUrl, flowName)
-    .withAccessToken(accessToken, async newAccessTokenCallback => {
+  const env = process.env.NODE_ENV;
+  const hostname = process.env.HOSTNAME;
+  let snsWebSdkInstanceInitEnv;
+  let snsWebSdkInstanceInit = snsWebSdk.init(
+    accessToken,
+    async newAccessTokenCallback => {
       // Access token expired
       // get a new one and pass it to the callback to re-initiate the WebSDK
       let newAccessToken = await api
@@ -31,17 +32,20 @@ export const launchWebSdk = params => {
         .getWebVerificationToken()
         .then(({ accessToken }) => accessToken); // get a new token from your backend
       newAccessTokenCallback(newAccessToken);
-    })
+    }
+  );
+  if (env === "production" && hostname === "https://genesis.vision") {
+    snsWebSdkInstanceInitEnv = snsWebSdkInstanceInit;
+  } else {
+    snsWebSdkInstanceInitEnv = snsWebSdkInstanceInit.onTestEnv();
+  }
+  let snsWebSdkInstance = snsWebSdkInstanceInitEnv
     .withConf({
       userId,
       lang: "en",
       email: applicantEmail,
       phone: applicantPhone,
       i18n: customI18nMessages,
-      onMessage: (type, payload) => {
-        // see below what kind of messages the WebSDK generates
-        console.log("WebSDK onMessage", type, payload);
-      },
       clientId: "Genesis",
       excludedCountries: ["USA"],
       applicantDataPage: {
@@ -75,10 +79,14 @@ export const launchWebSdk = params => {
         // URL to css file in case you need change it dynamically from the code
         // the similar setting at Applicant flow will rewrite customCss
         // you may also use to pass string with plain styles `customCssStr:`
-      },
-      onError: error => {
-        console.error("WebSDK onError", error);
       }
+    })
+    .on("onError", error => {
+      console.error("WebSDK onError", error);
+    })
+    .onMessage((type, payload) => {
+      // see below what kind of messages the WebSDK generates
+      console.log("WebSDK onMessage", type, payload);
     })
     .build();
 
