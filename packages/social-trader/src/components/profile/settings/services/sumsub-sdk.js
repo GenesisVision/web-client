@@ -75,7 +75,8 @@ export const launchWebSdk = params => {
       },
       requiredDocuments: "IDENTITY:PASSPORT,ID_CARD,DRIVERS;SELFIE:SELFIE",
       uiConf: {
-        customCss: "https://genesis.vision/assets/kyc/style.css?v=2"
+        customCss: "https://genesis.vision/assets/kyc/style.css?v=20012022"
+        // This file is updated manually from the file `packages/social-trader/public/kyc.css`
         // URL to css file in case you need change it dynamically from the code
         // the similar setting at Applicant flow will rewrite customCss
         // you may also use to pass string with plain styles `customCssStr:`
