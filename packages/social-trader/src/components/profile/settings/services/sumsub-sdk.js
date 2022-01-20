@@ -21,6 +21,7 @@ export const launchWebSdk = params => {
   } = params;
   const env = process.env.NODE_ENV;
   const hostname = process.env.HOSTNAME;
+  console.log(env, hostname);
   let snsWebSdkInstanceInitEnv;
   let snsWebSdkInstanceInit = snsWebSdk.init(
     accessToken,
@@ -34,12 +35,12 @@ export const launchWebSdk = params => {
       newAccessTokenCallback(newAccessToken);
     }
   );
-  if (env === "production" && hostname === "https://genesis.vision") {
-    snsWebSdkInstanceInitEnv = snsWebSdkInstanceInit;
-  } else {
-    snsWebSdkInstanceInitEnv = snsWebSdkInstanceInit.onTestEnv();
-  }
-  let snsWebSdkInstance = snsWebSdkInstanceInitEnv
+  // if (env === "production" && (hostname === "https://genesis.vision")) {
+  //   snsWebSdkInstanceInitEnv = snsWebSdkInstanceInit;
+  // } else {
+  //   snsWebSdkInstanceInitEnv = snsWebSdkInstanceInit.onTestEnv();
+  // }
+  let snsWebSdkInstance = snsWebSdkInstanceInit
     .withConf({
       userId,
       lang: "en",
