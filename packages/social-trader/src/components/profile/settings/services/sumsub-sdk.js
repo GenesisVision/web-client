@@ -17,11 +17,10 @@ export const launchWebSdk = params => {
     accessToken,
     applicantEmail,
     applicantPhone,
-    customI18nMessages
+    customI18nMessages,
+    apiUrl
   } = params;
-  const env = process.env.NODE_ENV;
-  const hostname = process.env.HOSTNAME;
-  console.log(env, hostname);
+  const isTestEnv = apiUrl.includes(`test-api`);
   let snsWebSdkInstanceInitEnv;
   let snsWebSdkInstanceInit = snsWebSdk.init(
     accessToken,
@@ -35,12 +34,12 @@ export const launchWebSdk = params => {
       newAccessTokenCallback(newAccessToken);
     }
   );
-  // if (env === "production" && (hostname === "https://genesis.vision")) {
-  //   snsWebSdkInstanceInitEnv = snsWebSdkInstanceInit;
-  // } else {
-  //   snsWebSdkInstanceInitEnv = snsWebSdkInstanceInit.onTestEnv();
-  // }
-  let snsWebSdkInstance = snsWebSdkInstanceInit
+  if (isTestEnv) {
+    snsWebSdkInstanceInitEnv = snsWebSdkInstanceInit.onTestEnv();
+  } else {
+    snsWebSdkInstanceInitEnv = snsWebSdkInstanceInit;
+  }
+  let snsWebSdkInstance = snsWebSdkInstanceInitEnv
     .withConf({
       userId,
       lang: "en",
@@ -76,7 +75,7 @@ export const launchWebSdk = params => {
       },
       requiredDocuments: "IDENTITY:PASSPORT,ID_CARD,DRIVERS;SELFIE:SELFIE",
       uiConf: {
-        customCss: "https://genesis.vision/assets/kyc/style.css?v=1"
+        customCss: "https://genesis.vision/assets/kyc/style.css?v=2"
         // URL to css file in case you need change it dynamically from the code
         // the similar setting at Applicant flow will rewrite customCss
         // you may also use to pass string with plain styles `customCssStr:`
