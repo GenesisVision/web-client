@@ -23,7 +23,6 @@ import {
 } from "../../terminal-futures.helpers";
 
 const _OpenOrdersFuturesRow: React.FC<FuturesOrder> = ({
-  orderId,
   positionSide,
   price,
   quantity,
@@ -36,7 +35,8 @@ const _OpenOrdersFuturesRow: React.FC<FuturesOrder> = ({
   updateTime,
   type,
   workingType,
-  originalType
+  originalType,
+  origClientOrderId
 }) => {
   const [t] = useTranslation();
   const { items } = useContext(TerminalTickerContext);
@@ -50,17 +50,21 @@ const _OpenOrdersFuturesRow: React.FC<FuturesOrder> = ({
       options,
       exchangeAccountId
     }: {
-      options: { symbol: string; orderId: string; useServerTime?: boolean };
+      options: {
+        symbol: string;
+        origClientOrderId: string;
+        useServerTime?: boolean;
+      };
       exchangeAccountId: string;
     }) => cancelOrder(options, exchangeAccountId)
   });
 
   const handleCancel = useCallback(() => {
     sendRequest({
-      options: { symbol, orderId: String(orderId) },
+      options: { symbol, origClientOrderId },
       exchangeAccountId
     });
-  }, [symbol, orderId, exchangeAccountId]);
+  }, [symbol, origClientOrderId, exchangeAccountId]);
 
   if (!exchangeInfo || !items) return null;
 

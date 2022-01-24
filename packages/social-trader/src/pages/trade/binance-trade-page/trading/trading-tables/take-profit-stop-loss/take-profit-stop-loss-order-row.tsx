@@ -37,14 +37,14 @@ const _TakeProfitStopLossOrderRow: React.FC<Props> = ({
       options,
       exchangeAccountId
     }: {
-      options: { symbol: string; orderId: string };
+      options: { symbol: string; origClientOrderId: string };
       exchangeAccountId: string;
     }) => cancelOrder(options, exchangeAccountId)
   });
 
   const handleCancel = () =>
     sendRequest({
-      options: { symbol, orderId: String(order.orderId) },
+      options: { symbol, origClientOrderId: order.origClientOrderId },
       exchangeAccountId
     });
 

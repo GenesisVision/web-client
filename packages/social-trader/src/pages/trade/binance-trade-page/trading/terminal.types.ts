@@ -226,7 +226,12 @@ export interface ITerminalMethods extends IGVTerminalMethods {
     accountId: string
   ) => Promise<BinanceRawCancelOrderId[]>;
   cancelOrder: (
-    options: { symbol: string; orderId: string; useServerTime?: boolean },
+    options: {
+      symbol: string;
+      orderId?: string;
+      useServerTime?: boolean;
+      origClientOrderId?: string;
+    },
     accountId: string
   ) => Promise<BinanceRawCancelOrder>;
   tradeRequest: ({
@@ -1117,6 +1122,7 @@ export type FuturesOrder = {
   id: number;
   tradeId: number;
   orderId: number;
+  origClientOrderId: string;
 };
 
 export type SpotOrder = {
