@@ -201,12 +201,19 @@ export const cancelAllOrders = (
 export const cancelOrder = (
   {
     symbol,
+    origClientOrderId,
     orderId
-  }: { orderId: string; symbol: string; useServerTime?: boolean },
+  }: {
+    orderId?: string;
+    origClientOrderId?: string;
+    symbol: string;
+    useServerTime?: boolean;
+  },
   accountId: string
 ): Promise<BinanceRawCancelOrder> =>
   (api.terminal().futuresCancelOrder({
-    orderId: +orderId,
+    origClientOrderId,
+    orderId: orderId ? +orderId : undefined,
     symbol,
     accountId
   }) as unknown) as Promise<BinanceRawCancelOrder>;

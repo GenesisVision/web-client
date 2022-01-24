@@ -40,26 +40,24 @@ const _TakeProfitStopLossTableCell: React.FC<Props> = ({
   );
 
   useEffect(() => {
-    if (openOrders.length) {
-      // @ts-ignore
-      const tpOrder = openOrders.find(
-        (order: FuturesOrder) =>
-          order.symbol === symbol &&
-          order.positionSide === positionSide &&
-          order.type === "TakeProfitMarket" &&
-          order.closePosition
-      );
-      // @ts-ignore
-      const slOrder = openOrders.find(
-        (order: FuturesOrder) =>
-          order.symbol === symbol &&
-          order.positionSide === positionSide &&
-          order.type === "StopMarket" &&
-          order.closePosition
-      );
-      setTakeProfitOrder(tpOrder);
-      setStopLossOrder(slOrder);
-    }
+    // @ts-ignore
+    const tpOrder = openOrders.find(
+      (order: FuturesOrder) =>
+        order.symbol === symbol &&
+        order.positionSide === positionSide &&
+        order.type === "TakeProfitMarket" &&
+        order.closePosition
+    );
+    // @ts-ignore
+    const slOrder = openOrders.find(
+      (order: FuturesOrder) =>
+        order.symbol === symbol &&
+        order.positionSide === positionSide &&
+        order.type === "StopMarket" &&
+        order.closePosition
+    );
+    setTakeProfitOrder(tpOrder);
+    setStopLossOrder(slOrder);
   }, [openOrders]);
 
   return (
