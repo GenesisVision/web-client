@@ -169,7 +169,7 @@
       "trading-volume": "The total Trading volume for the selected period, divided by the leverage."
     }
   },
-  "bsc-integration": {
+  "metamask-integration": {
     "bnb": {
       "popup-title": "Invest via Binance Smart Chain",
       "tooltip-text": "Investing through the Binance Smart Chain smart contract."

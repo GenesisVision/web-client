@@ -6,14 +6,17 @@ import { useTranslation } from "i18n";
 import React from "react";
 import { CurrencyEnum } from "utils/types";
 
-import BSCInvestingPopup from "./bsc-investing-popup";
+import MetamaskInvestingPopup from "./metamask-investing-popup";
 
 interface Props {
   assetIndex: number;
   currency: CurrencyEnum;
 }
 
-const _BSCInvestingButton: React.FC<Props> = ({ assetIndex, currency }) => {
+const _MetamaskInvestingButton: React.FC<Props> = ({
+  assetIndex,
+  currency
+}) => {
   const [t] = useTranslation();
   const [isOpen, setIsOpen, setIsClose] = useIsOpen();
 
@@ -30,11 +33,11 @@ const _BSCInvestingButton: React.FC<Props> = ({ assetIndex, currency }) => {
         vertical={VERTICAL_POPOVER_POS.TOP}
         tooltipContent={
           currency === "BNB"
-            ? t("asset-details:bsc-integration.bnb.tooltip-text")
-            : t("asset-details:bsc-integration.xDai.tooltip-text")
+            ? t("asset-details:metamask-integration.bnb.tooltip-text")
+            : t("asset-details:metamask-integration.xDai.tooltip-text")
         }
       />
-      <BSCInvestingPopup
+      <MetamaskInvestingPopup
         currency={currency}
         index={assetIndex}
         open={isOpen}
@@ -44,5 +47,5 @@ const _BSCInvestingButton: React.FC<Props> = ({ assetIndex, currency }) => {
   );
 };
 
-const BSCInvestingButton = React.memo(_BSCInvestingButton);
-export default BSCInvestingButton;
+const MetamaskInvestingButton = React.memo(_MetamaskInvestingButton);
+export default MetamaskInvestingButton;

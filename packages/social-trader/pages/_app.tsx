@@ -1,7 +1,8 @@
+import "pages/landing-page/styles/index.scss";
+
 import withHistoryProvider from "decorators/history-provider/with-history-provider";
 import { appWithTranslation } from "i18n";
 import App from "next/app";
-import "pages/landing-page/styles/index.scss";
 import React from "react";
 import { compose, Store } from "redux";
 import { createGlobalStyle } from "styled-components";
