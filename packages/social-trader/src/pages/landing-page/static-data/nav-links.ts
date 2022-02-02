@@ -119,7 +119,7 @@ export const navHeader: TNavHeader[] = [
         href: GUIDES_TOTAL_PAGE_ROUTE
       },
       {
-        name: "navigation.blog",
+        name: "navigation.feedback",
         hideMobile: true,
         href: "https://feedback.genesis.vision/"
       }
