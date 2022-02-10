@@ -22,7 +22,7 @@ const _FundsRow: React.FC<Props> = ({
       <td>{total}</td>
       <td>{formatValueWithTick(available, "0.00000001")}</td>
       <td>{locked}</td>
-      <td>{amountInCurrency}</td>
+      <td>{amountInCurrency < 0 ? "—" : amountInCurrency}</td>
     </tr>
   );
 };
