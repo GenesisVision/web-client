@@ -1,9 +1,9 @@
 import { SortingColumn } from "components/table/components/filtering/filter.type";
+import { formatValueWithTick } from "pages/trade/binance-trade-page/trading/terminal.helpers";
 import { AssetBalance } from "pages/trade/binance-trade-page/trading/terminal.types";
-import { AnyObjectType, CurrencyEnum } from "utils/types";
 import { fetchRate } from "services/rate-service";
 import { formatCurrencyValue } from "utils/formatter";
-import { formatValueWithTick } from "pages/trade/binance-trade-page/trading/terminal.helpers";
+import { AnyObjectType, CurrencyEnum } from "utils/types";
 
 export type NormalizedFunds = {
   [key: string]: AssetBalance;
@@ -19,17 +19,20 @@ export const updateUsdValues = async (
 ): Promise<NormalizedFunds> => {
   const newList = { ...funds };
   const fundsList = Object.values(funds);
-  const rates = await Promise.all(
+  const rates = await Promise.allSettled(
     fundsList
       .map(({ asset }) => asset)
       .map(asset => fetchRate(asset as CurrencyEnum, currency))
+  ).then(results =>
+    results.map(res => (res.status === "fulfilled" ? res.value : -1))
   );
 
   for (let i = 0; i < fundsList.length; i++) {
     const { asset, free, locked } = fundsList[i];
     const rate = rates[i];
     const total = formatValueWithTick(+free + +locked, "0.00000001");
-    const newAmountInCurrency = +formatCurrencyValue(+total * rate, currency);
+    const newAmountInCurrency =
+      rate < 0 ? -1 : +formatCurrencyValue(+total * rate, currency);
     newList[asset] = {
       ...newList[asset],
       amountInCurrency: newAmountInCurrency || newList[asset].amountInCurrency
