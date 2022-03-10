@@ -152,6 +152,7 @@ const _WalletWithdrawForm: React.FC<Props> = ({
             label={t("wallet-withdraw:address")}
             component={SimpleTextField}
             autoComplete="off"
+            triggerRules={blockchain}
             rules={getWalletWithdrawValidationSchema({
               t,
               watch
