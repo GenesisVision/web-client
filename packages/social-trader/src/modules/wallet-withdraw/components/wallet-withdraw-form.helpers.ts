@@ -2,7 +2,8 @@ import { TFunction } from "i18next";
 import { IWalletWithdrawFormValues } from "modules/wallet-withdraw/components/wallet-withdraw-form";
 import {
   btcGvtWalletRules,
-  ethGvtWalletRules
+  ethGvtWalletRules,
+  tronBlockchainWalletRules
 } from "utils/validators/validators";
 
 export enum WALLET_WITHDRAW_FIELDS {
@@ -21,7 +22,11 @@ export const getWalletWithdrawValidationSchema = ({
   t: TFunction;
   watch: () => IWalletWithdrawFormValues;
 }) => {
-  const { currency } = watch();
+  const { currency, blockchain } = watch();
+
+  if (blockchain === "Tron") {
+    return tronBlockchainWalletRules(t);
+  }
 
   switch (currency) {
     case "GVT":

@@ -135,6 +135,15 @@ export const passwordRules = (t: TFunction) => ({
   }
 });
 
+export const tronBlockchainWalletRules = (t: TFunction) =>
+  generateRules({
+    required: t("validations.address-is-required"),
+    pattern: {
+      value: /T[A-Za-z1-9]{33}/,
+      message: "Invalid wallet address"
+    }
+  });
+
 export const ethGvtWalletRules = (t: TFunction) =>
   generateRules({
     required: t("validations.address-is-required"),
