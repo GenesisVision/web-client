@@ -14,7 +14,7 @@
     "cacheable-response": "^1.10.0",
     "clsx": "^1.1.1",
     "copy-to-clipboard": "^3.0.8",
-    "crypto-js": "^4.0.0",
+    "crypto-js": "^4.2.0",
     "d3": "^5.15.0",
     "dayjs": "^1.8.16",
     "dotenv": "^8.0.0",
